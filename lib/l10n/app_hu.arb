@@ -1,0 +1,34 @@
+{
+  "minute": "Perc",
+  "okay": "Rendben",
+
+  "inputWarmupLabel": "Felkészülés",
+  "inputStartingSoundLabel": "Kezdőhang",
+  "inputDurationLabel": "Időtartam",
+  "inputEndingSoundLabel": "Végehang",
+
+  "startTimerButtonText": "Start",
+
+  "noSound": "Nincs hang",
+  "inputSoundChukpi": "Chukpi",
+  "inputSoundSmallBell": "Csengettyű",
+
+  "errorHeadline": "Hoppá!",
+  "errorText": "Váratlan probléma támadt.",
+  "errorButtonText": "Rendben",
+
+  "timerFinishSessionButtonText": "Ülés befejezése",
+  "timerDiscardSessionButtonText": "Ülés elvetése",
+
+  "loginHeadline1": "Ki",
+  "loginHeadline2": "vagy",
+  "loginHeadline3": "te?",
+  "loginSigninGoogle": "Bejelentkezés Google-lal",
+  "loginSigninApple": "Bejelentkezés Apple-lel",
+  "loginLegalPart1": "A bejelentkezéssel elfogadod az\n",
+  "loginLegalPart2": "ÁSZF-et",
+  "loginLegalPart3": " és az ",
+  "loginLegalPart4": "Adatvédelmi nyilatkozatot",
+
+  "testPlural": "{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}"
+}

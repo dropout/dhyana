@@ -1,0 +1,34 @@
+{
+  "minute": "Minute",
+  "okay": "Okay",
+
+  "inputWarmupLabel": "Warmup",
+  "inputStartingSoundLabel": "Starting sound",
+  "inputDurationLabel": "Duration",
+  "inputEndingSoundLabel": "Ending sound",
+
+  "startTimerButtonText": "Start",
+
+  "noSound": "No sound",
+  "inputSoundChukpi": "Chukpi",
+  "inputSoundSmallBell": "Small Bell",
+
+  "errorHeadline": "Ooops!",
+  "errorText": "An unexpected error has occured.",
+  "errorButtonText": "Okay",
+
+  "timerFinishSessionButtonText": "Finish session",
+  "timerDiscardSessionButtonText": "Discard session",
+
+  "loginHeadline1": "Who",
+  "loginHeadline2": "are",
+  "loginHeadline3": "you?",
+  "loginSigninGoogle": "Login with Google",
+  "loginSigninApple": "Login with Apple",
+  "loginLegalPart1": "By logging in you accept the\n",
+  "loginLegalPart2": "Terms of Use",
+  "loginLegalPart3": " and the ",
+  "loginLegalPart4": "Privacy statement",
+
+  "testPlural": "{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}"
+}
