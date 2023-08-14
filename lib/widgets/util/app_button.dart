@@ -18,16 +18,16 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return ElevatedButton(
       onPressed: () => onTap?.call(),
-      style: TextButton.styleFrom(
+      style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 48.0),
         foregroundColor: fColor,
         backgroundColor: bColor,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-                Radius.circular(AppThemeData.borderRadiusMd)
-            )
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppThemeData.borderRadiusMd)
+          )
         ),
       ),
       child: Text(text,

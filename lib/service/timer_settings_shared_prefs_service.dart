@@ -24,7 +24,7 @@ class TimerSettingsSharedPrefsService {
 
     // Fallback to default if no entry found
     if (timerSettingsJson == null) {
-      return const TimerSettings(duration: Duration(minutes: 10));
+      return TimerSettings.initial();
     }
 
     // Fallback to default if unable to convert
@@ -38,7 +38,7 @@ class TimerSettingsSharedPrefsService {
         stackTrace: stack,
         reason: 'Unable to get TimerSettings from shared preferences',
       );
-      return const TimerSettings(duration: Duration(minutes: 10));
+      return TimerSettings.initial();
     }
 
   }
@@ -53,7 +53,7 @@ class TimerSettingsSharedPrefsService {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to set TimerSettings from shared preferences',
+        reason: 'Unable to save TimerSettings to shared preferences',
       );
     }
   }

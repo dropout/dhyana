@@ -6,6 +6,8 @@ class AppCircularProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator(color: Colors.white);
+    return const CircularProgressIndicator(
+      color: Colors.black
+    );
   }
 }

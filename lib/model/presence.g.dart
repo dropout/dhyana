@@ -18,7 +18,7 @@ _$_Presence _$$_PresenceFromJson(Map<String, dynamic> json) => _$_Presence(
 Map<String, dynamic> _$$_PresenceToJson(_$_Presence instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'who': instance.who,
+      'who': instance.who.toJson(),
       'startedAt': instance.startedAt.toIso8601String(),
       'finishedAt': instance.finishedAt?.toIso8601String(),
     };

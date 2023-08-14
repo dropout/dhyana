@@ -1,37 +1,53 @@
 part of 'timer_settings_bloc.dart';
 
-abstract class TimerSettingsState extends Equatable {
-  const TimerSettingsState();
-}
+@freezed
+sealed class TimerSettingsState with _$TimerSettingsState {
 
-class TimerSettingsInitial extends TimerSettingsState {
-  const TimerSettingsInitial();
-  @override
-  List<Object> get props => [];
-}
+  const TimerSettingsState._();
 
-class TimerSettingsDataLoadingState extends TimerSettingsState {
-  const TimerSettingsDataLoadingState();
-  @override
-  List<Object> get props => [];
-}
+  const factory TimerSettingsState.initial() = TimerSettingsInitial;
+  const factory TimerSettingsState.loading() = TimerSettingsDataLoadingState;
+  const factory TimerSettingsState.loaded({
+    required TimerSettings timerSettings,
+  }) = TimerSettingsDataLoadedState;
 
-class TimerSettingsDataLoadedState extends TimerSettingsState {
-
-  final TimerSettings timerSettings;
-
-  const TimerSettingsDataLoadedState({
-    required this.timerSettings,
-  });
-
-  @override
-  List<Object> get props => [timerSettings];
+  const factory TimerSettingsState.error() = TimerSettingsDataErrorState;
 
 }
 
-class TimerSettingsDataErrorState extends TimerSettingsState {
-  const TimerSettingsDataErrorState();
-
-  @override
-  List<Object> get props => [];
-}
+//
+// abstract class TimerSettingsState extends Equatable {
+//   const TimerSettingsState();
+// }
+//
+// class TimerSettingsInitial extends TimerSettingsState {
+//   const TimerSettingsInitial();
+//   @override
+//   List<Object> get props => [];
+// }
+//
+// class TimerSettingsDataLoadingState extends TimerSettingsState {
+//   const TimerSettingsDataLoadingState();
+//   @override
+//   List<Object> get props => [];
+// }
+//
+// class TimerSettingsDataLoadedState extends TimerSettingsState {
+//
+//   final TimerSettings timerSettings;
+//
+//   const TimerSettingsDataLoadedState({
+//     required this.timerSettings,
+//   });
+//
+//   @override
+//   List<Object> get props => [timerSettings];
+//
+// }
+//
+// class TimerSettingsDataErrorState extends TimerSettingsState {
+//   const TimerSettingsDataErrorState();
+//
+//   @override
+//   List<Object> get props => [];
+// }

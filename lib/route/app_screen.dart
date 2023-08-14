@@ -2,6 +2,7 @@ enum AppScreen {
   home,
   login,
   profile,
+  profileWizard,
   editProfile,
   settings,
   timerRunning,
@@ -16,7 +17,9 @@ extension AppScreenExtension on AppScreen {
       case AppScreen.login:
         return '/login';
       case AppScreen.profile:
-        return '/profile/';
+        return '/profile';
+      case AppScreen.profileWizard:
+        return '/profileWizard';
       case AppScreen.editProfile:
         return '/editProfile';
       case AppScreen.settings:
@@ -34,6 +37,8 @@ extension AppScreenExtension on AppScreen {
         return 'LOGIN';
       case AppScreen.profile:
         return 'PROFILE';
+      case AppScreen.profileWizard:
+        return 'PROFILE_WIZARD';
       case AppScreen.editProfile:
         return 'EDIT_PROFILE';
       case AppScreen.settings:

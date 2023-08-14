@@ -1,3 +1,5 @@
+import 'package:dhyana/model/profile_stats.dart';
+import 'package:dhyana/util/default_profile_data.dart';
 import 'package:logger/logger.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
@@ -69,10 +71,14 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<void> _createProfile(SigninResult signinResult) async {
     Profile profile = Profile(
       id: signinResult.user.uid,
-      displayName: signinResult.user.displayName ?? '',
+      firstName: '',
+      lastName: signinResult.user.displayName ?? '',
       email: signinResult.user.email ?? '',
-      photoURL: signinResult.user.photoUrl ?? '',
+      photoUrl: DefaultProfileData.photoUrl,
+      photoBlurhash: DefaultProfileData.photoBlurhash,
       signupDate: DateTime.now(),
+      stats: ProfileStats.empty(),
+      completed: false,
     );
     await profileDataProvider.setItem(profile);
   }

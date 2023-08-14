@@ -10,8 +10,8 @@ import 'package:dhyana/widgets/app_colors.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
 import 'package:dhyana/widgets/bloc_provider/timer_settings_bloc_provider.dart';
 import 'package:dhyana/widgets/duration_time_indicator.dart';
-import 'package:dhyana/widgets/profile/profile_avatar.dart';
-import 'package:dhyana/widgets/settings/settings_icon.dart';
+import 'package:dhyana/widgets/profile/profile_button.dart';
+import 'package:dhyana/widgets/settings/settings_button.dart';
 import 'package:dhyana/widgets/timer/input/duration_input.dart';
 import 'package:dhyana/widgets/timer/input/sound_input.dart';
 import 'package:dhyana/widgets/timer/input/warmup_input.dart';
@@ -127,12 +127,11 @@ class HomeScreenBody extends StatelessWidget {
             const Positioned(
               top: AppThemeData.spacingMd,
               right: AppThemeData.spacingMd,
-              // child: ProfileAvatar()
               child: Wrap(
                 children: [
                   SettingsIcon(),
-                  SizedBox(width: AppThemeData.spacingXs),
-                  ProfileAvatar()
+                  SizedBox(width: AppThemeData.spacingSm),
+                  ProfileButton()
                 ],
               )
             ),

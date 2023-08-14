@@ -83,12 +83,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSigninWithGoogle(SigninWithGoogle event, emit) async {
     try {
-      logger.v('Signing in with Google...');
+      logger.v('Signing in with Google');
       emit(const AuthState.signingIn());
       User user = await _signin(SigninMethodType.google);
       emit(AuthState.signedIn(user: user));
       event.onComplete?.call(user);
       _logAnalyticsSuccessfulSignin();
+      logger.v('Successfully signed in with Google');
     } on SignInCancelled {
       logger.v('Sign in cancelled');
       emit(const AuthState.signedOut());
@@ -105,12 +106,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSigninWithApple(SigninWithApple event, emit) async {
     try {
-      logger.v('Signing in with Google...');
+      logger.v('Signing in with Apple');
       emit(const AuthState.signingIn());
       User user = await _signin(SigninMethodType.apple);
       emit(AuthState.signedIn(user: user));
       event.onComplete?.call(user);
       _logAnalyticsSuccessfulSignin();
+      logger.v('Successfully signed in with Apple');
     } on SignInCancelled {
       logger.v('Sign in cancelled');
       emit(const AuthState.signedOut());
@@ -139,6 +141,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthState.signedIn(user: user));
       event.onComplete?.call(user);
       _logAnalyticsSuccessfulSignin();
+      logger.v('Successfully signed in with Email and Password');
     } on SignInCancelled {
       logger.v('Sign in cancelled');
       emit(const AuthState.signedOut());

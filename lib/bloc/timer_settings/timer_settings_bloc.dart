@@ -1,5 +1,6 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:logger/logger.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/all.dart';
@@ -7,6 +8,7 @@ import 'package:dhyana/util/all.dart';
 
 part 'timer_settings_event.dart';
 part 'timer_settings_state.dart';
+part 'timer_settings_bloc.freezed.dart';
 
 class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
 
@@ -18,7 +20,7 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
   TimerSettingsBloc({
     required this.crashlyticsService,
     required this.timerSettingsSharedPrefsService,
-  }) : super(const TimerSettingsInitial()) {
+  }) : super(const TimerSettingsState.initial()) {
     on<LoadTimerSettingsData>(_onLoadTimerSettingsData);
     on<TimerSettingsChanged>(_onTimerSettingsChanged);
   }
@@ -27,22 +29,22 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
     try {
       if (event.timerSettings != null) {
         logger.v('Using timer settings from event...');
-        emit(TimerSettingsDataLoadedState(
+        emit(TimerSettingsState.loaded(
           timerSettings: event.timerSettings!,
         ));
       } else {
-        emit(const TimerSettingsDataLoadingState());
+        emit(const TimerSettingsState.loading());
         logger.v('Loading timer settings data...');
         TimerSettings timerSettings =
         await timerSettingsSharedPrefsService.getTimerSettings();
         logger.v('Loaded timer setting from shared prefs...');
-        emit(TimerSettingsDataLoadedState(
+        emit(TimerSettingsState.loaded(
           timerSettings: timerSettings,
         ));
       }
       logger.v('Loaded timer settings data!');
     } catch (e, stack) {
-      emit(const TimerSettingsDataErrorState());
+      emit(const TimerSettingsState.error());
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
@@ -55,11 +57,7 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
   void _onTimerSettingsChanged(TimerSettingsChanged event, emit) async {
     try {
       await timerSettingsSharedPrefsService.setTimerSettings(event.timerSettings);
-      emit(
-        TimerSettingsDataLoadedState(
-          timerSettings: event.timerSettings,
-        )
-      );
+      emit(TimerSettingsState.loaded(timerSettings: event.timerSettings));
       logger.v('Timer settings changed...');
     } catch (e, stack) {
       crashlyticsService.recordError(

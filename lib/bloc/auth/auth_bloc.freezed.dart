@@ -1864,29 +1864,29 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthState value) initial,
-    required TResult Function(_AuthStateSignedOut value) signedOut,
-    required TResult Function(_AuthStateSigningIn value) signingIn,
-    required TResult Function(_AuthStateSignedIn value) signedIn,
-    required TResult Function(_AuthStateErrorOccured value) error,
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthState value)? initial,
-    TResult? Function(_AuthStateSignedOut value)? signedOut,
-    TResult? Function(_AuthStateSigningIn value)? signingIn,
-    TResult? Function(_AuthStateSignedIn value)? signedIn,
-    TResult? Function(_AuthStateErrorOccured value)? error,
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthState value)? initial,
-    TResult Function(_AuthStateSignedOut value)? signedOut,
-    TResult Function(_AuthStateSigningIn value)? signingIn,
-    TResult Function(_AuthStateSignedIn value)? signedIn,
-    TResult Function(_AuthStateErrorOccured value)? error,
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1910,25 +1910,25 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 }
 
 /// @nodoc
-abstract class _$$_AuthStateCopyWith<$Res> {
-  factory _$$_AuthStateCopyWith(
-          _$_AuthState value, $Res Function(_$_AuthState) then) =
-      __$$_AuthStateCopyWithImpl<$Res>;
+abstract class _$$AuthStateInitialCopyWith<$Res> {
+  factory _$$AuthStateInitialCopyWith(
+          _$AuthStateInitial value, $Res Function(_$AuthStateInitial) then) =
+      __$$AuthStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthState>
-    implements _$$_AuthStateCopyWith<$Res> {
-  __$$_AuthStateCopyWithImpl(
-      _$_AuthState _value, $Res Function(_$_AuthState) _then)
+class __$$AuthStateInitialCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateInitial>
+    implements _$$AuthStateInitialCopyWith<$Res> {
+  __$$AuthStateInitialCopyWithImpl(
+      _$AuthStateInitial _value, $Res Function(_$AuthStateInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
-  const _$_AuthState() : super._();
+class _$AuthStateInitial extends AuthStateInitial with DiagnosticableTreeMixin {
+  const _$AuthStateInitial() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1944,7 +1944,7 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AuthState);
+        (other.runtimeType == runtimeType && other is _$AuthStateInitial);
   }
 
   @override
@@ -1993,11 +1993,11 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthState value) initial,
-    required TResult Function(_AuthStateSignedOut value) signedOut,
-    required TResult Function(_AuthStateSigningIn value) signingIn,
-    required TResult Function(_AuthStateSignedIn value) signedIn,
-    required TResult Function(_AuthStateErrorOccured value) error,
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
   }) {
     return initial(this);
   }
@@ -2005,11 +2005,11 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthState value)? initial,
-    TResult? Function(_AuthStateSignedOut value)? signedOut,
-    TResult? Function(_AuthStateSigningIn value)? signingIn,
-    TResult? Function(_AuthStateSignedIn value)? signedIn,
-    TResult? Function(_AuthStateErrorOccured value)? error,
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
   }) {
     return initial?.call(this);
   }
@@ -2017,11 +2017,11 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthState value)? initial,
-    TResult Function(_AuthStateSignedOut value)? signedOut,
-    TResult Function(_AuthStateSigningIn value)? signingIn,
-    TResult Function(_AuthStateSignedIn value)? signedIn,
-    TResult Function(_AuthStateErrorOccured value)? error,
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -2031,32 +2031,32 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   }
 }
 
-abstract class _AuthState extends AuthState {
-  const factory _AuthState() = _$_AuthState;
-  const _AuthState._() : super._();
+abstract class AuthStateInitial extends AuthState {
+  const factory AuthStateInitial() = _$AuthStateInitial;
+  const AuthStateInitial._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_AuthStateSignedOutCopyWith<$Res> {
-  factory _$$_AuthStateSignedOutCopyWith(_$_AuthStateSignedOut value,
-          $Res Function(_$_AuthStateSignedOut) then) =
-      __$$_AuthStateSignedOutCopyWithImpl<$Res>;
+abstract class _$$AuthStateSignedOutCopyWith<$Res> {
+  factory _$$AuthStateSignedOutCopyWith(_$AuthStateSignedOut value,
+          $Res Function(_$AuthStateSignedOut) then) =
+      __$$AuthStateSignedOutCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AuthStateSignedOutCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateSignedOut>
-    implements _$$_AuthStateSignedOutCopyWith<$Res> {
-  __$$_AuthStateSignedOutCopyWithImpl(
-      _$_AuthStateSignedOut _value, $Res Function(_$_AuthStateSignedOut) _then)
+class __$$AuthStateSignedOutCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSignedOut>
+    implements _$$AuthStateSignedOutCopyWith<$Res> {
+  __$$AuthStateSignedOutCopyWithImpl(
+      _$AuthStateSignedOut _value, $Res Function(_$AuthStateSignedOut) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AuthStateSignedOut extends _AuthStateSignedOut
+class _$AuthStateSignedOut extends AuthStateSignedOut
     with DiagnosticableTreeMixin {
-  const _$_AuthStateSignedOut() : super._();
+  const _$AuthStateSignedOut() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2072,7 +2072,7 @@ class _$_AuthStateSignedOut extends _AuthStateSignedOut
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AuthStateSignedOut);
+        (other.runtimeType == runtimeType && other is _$AuthStateSignedOut);
   }
 
   @override
@@ -2121,11 +2121,11 @@ class _$_AuthStateSignedOut extends _AuthStateSignedOut
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthState value) initial,
-    required TResult Function(_AuthStateSignedOut value) signedOut,
-    required TResult Function(_AuthStateSigningIn value) signingIn,
-    required TResult Function(_AuthStateSignedIn value) signedIn,
-    required TResult Function(_AuthStateErrorOccured value) error,
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
   }) {
     return signedOut(this);
   }
@@ -2133,11 +2133,11 @@ class _$_AuthStateSignedOut extends _AuthStateSignedOut
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthState value)? initial,
-    TResult? Function(_AuthStateSignedOut value)? signedOut,
-    TResult? Function(_AuthStateSigningIn value)? signingIn,
-    TResult? Function(_AuthStateSignedIn value)? signedIn,
-    TResult? Function(_AuthStateErrorOccured value)? error,
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
   }) {
     return signedOut?.call(this);
   }
@@ -2145,11 +2145,11 @@ class _$_AuthStateSignedOut extends _AuthStateSignedOut
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthState value)? initial,
-    TResult Function(_AuthStateSignedOut value)? signedOut,
-    TResult Function(_AuthStateSigningIn value)? signingIn,
-    TResult Function(_AuthStateSignedIn value)? signedIn,
-    TResult Function(_AuthStateErrorOccured value)? error,
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
     required TResult orElse(),
   }) {
     if (signedOut != null) {
@@ -2159,32 +2159,32 @@ class _$_AuthStateSignedOut extends _AuthStateSignedOut
   }
 }
 
-abstract class _AuthStateSignedOut extends AuthState {
-  const factory _AuthStateSignedOut() = _$_AuthStateSignedOut;
-  const _AuthStateSignedOut._() : super._();
+abstract class AuthStateSignedOut extends AuthState {
+  const factory AuthStateSignedOut() = _$AuthStateSignedOut;
+  const AuthStateSignedOut._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_AuthStateSigningInCopyWith<$Res> {
-  factory _$$_AuthStateSigningInCopyWith(_$_AuthStateSigningIn value,
-          $Res Function(_$_AuthStateSigningIn) then) =
-      __$$_AuthStateSigningInCopyWithImpl<$Res>;
+abstract class _$$AuthStateSigningInCopyWith<$Res> {
+  factory _$$AuthStateSigningInCopyWith(_$AuthStateSigningIn value,
+          $Res Function(_$AuthStateSigningIn) then) =
+      __$$AuthStateSigningInCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AuthStateSigningInCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateSigningIn>
-    implements _$$_AuthStateSigningInCopyWith<$Res> {
-  __$$_AuthStateSigningInCopyWithImpl(
-      _$_AuthStateSigningIn _value, $Res Function(_$_AuthStateSigningIn) _then)
+class __$$AuthStateSigningInCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSigningIn>
+    implements _$$AuthStateSigningInCopyWith<$Res> {
+  __$$AuthStateSigningInCopyWithImpl(
+      _$AuthStateSigningIn _value, $Res Function(_$AuthStateSigningIn) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AuthStateSigningIn extends _AuthStateSigningIn
+class _$AuthStateSigningIn extends AuthStateSigningIn
     with DiagnosticableTreeMixin {
-  const _$_AuthStateSigningIn() : super._();
+  const _$AuthStateSigningIn() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2200,7 +2200,7 @@ class _$_AuthStateSigningIn extends _AuthStateSigningIn
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AuthStateSigningIn);
+        (other.runtimeType == runtimeType && other is _$AuthStateSigningIn);
   }
 
   @override
@@ -2249,11 +2249,11 @@ class _$_AuthStateSigningIn extends _AuthStateSigningIn
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthState value) initial,
-    required TResult Function(_AuthStateSignedOut value) signedOut,
-    required TResult Function(_AuthStateSigningIn value) signingIn,
-    required TResult Function(_AuthStateSignedIn value) signedIn,
-    required TResult Function(_AuthStateErrorOccured value) error,
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
   }) {
     return signingIn(this);
   }
@@ -2261,11 +2261,11 @@ class _$_AuthStateSigningIn extends _AuthStateSigningIn
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthState value)? initial,
-    TResult? Function(_AuthStateSignedOut value)? signedOut,
-    TResult? Function(_AuthStateSigningIn value)? signingIn,
-    TResult? Function(_AuthStateSignedIn value)? signedIn,
-    TResult? Function(_AuthStateErrorOccured value)? error,
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
   }) {
     return signingIn?.call(this);
   }
@@ -2273,11 +2273,11 @@ class _$_AuthStateSigningIn extends _AuthStateSigningIn
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthState value)? initial,
-    TResult Function(_AuthStateSignedOut value)? signedOut,
-    TResult Function(_AuthStateSigningIn value)? signingIn,
-    TResult Function(_AuthStateSignedIn value)? signedIn,
-    TResult Function(_AuthStateErrorOccured value)? error,
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
     required TResult orElse(),
   }) {
     if (signingIn != null) {
@@ -2287,26 +2287,26 @@ class _$_AuthStateSigningIn extends _AuthStateSigningIn
   }
 }
 
-abstract class _AuthStateSigningIn extends AuthState {
-  const factory _AuthStateSigningIn() = _$_AuthStateSigningIn;
-  const _AuthStateSigningIn._() : super._();
+abstract class AuthStateSigningIn extends AuthState {
+  const factory AuthStateSigningIn() = _$AuthStateSigningIn;
+  const AuthStateSigningIn._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_AuthStateSignedInCopyWith<$Res> {
-  factory _$$_AuthStateSignedInCopyWith(_$_AuthStateSignedIn value,
-          $Res Function(_$_AuthStateSignedIn) then) =
-      __$$_AuthStateSignedInCopyWithImpl<$Res>;
+abstract class _$$AuthStateSignedInCopyWith<$Res> {
+  factory _$$AuthStateSignedInCopyWith(
+          _$AuthStateSignedIn value, $Res Function(_$AuthStateSignedIn) then) =
+      __$$AuthStateSignedInCopyWithImpl<$Res>;
   @useResult
   $Res call({User user});
 }
 
 /// @nodoc
-class __$$_AuthStateSignedInCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateSignedIn>
-    implements _$$_AuthStateSignedInCopyWith<$Res> {
-  __$$_AuthStateSignedInCopyWithImpl(
-      _$_AuthStateSignedIn _value, $Res Function(_$_AuthStateSignedIn) _then)
+class __$$AuthStateSignedInCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSignedIn>
+    implements _$$AuthStateSignedInCopyWith<$Res> {
+  __$$AuthStateSignedInCopyWithImpl(
+      _$AuthStateSignedIn _value, $Res Function(_$AuthStateSignedIn) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2314,7 +2314,7 @@ class __$$_AuthStateSignedInCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_AuthStateSignedIn(
+    return _then(_$AuthStateSignedIn(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -2325,9 +2325,9 @@ class __$$_AuthStateSignedInCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AuthStateSignedIn extends _AuthStateSignedIn
+class _$AuthStateSignedIn extends AuthStateSignedIn
     with DiagnosticableTreeMixin {
-  const _$_AuthStateSignedIn({required this.user}) : super._();
+  const _$AuthStateSignedIn({required this.user}) : super._();
 
   @override
   final User user;
@@ -2349,7 +2349,7 @@ class _$_AuthStateSignedIn extends _AuthStateSignedIn
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthStateSignedIn &&
+            other is _$AuthStateSignedIn &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -2359,9 +2359,8 @@ class _$_AuthStateSignedIn extends _AuthStateSignedIn
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthStateSignedInCopyWith<_$_AuthStateSignedIn> get copyWith =>
-      __$$_AuthStateSignedInCopyWithImpl<_$_AuthStateSignedIn>(
-          this, _$identity);
+  _$$AuthStateSignedInCopyWith<_$AuthStateSignedIn> get copyWith =>
+      __$$AuthStateSignedInCopyWithImpl<_$AuthStateSignedIn>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2406,11 +2405,11 @@ class _$_AuthStateSignedIn extends _AuthStateSignedIn
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthState value) initial,
-    required TResult Function(_AuthStateSignedOut value) signedOut,
-    required TResult Function(_AuthStateSigningIn value) signingIn,
-    required TResult Function(_AuthStateSignedIn value) signedIn,
-    required TResult Function(_AuthStateErrorOccured value) error,
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
   }) {
     return signedIn(this);
   }
@@ -2418,11 +2417,11 @@ class _$_AuthStateSignedIn extends _AuthStateSignedIn
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthState value)? initial,
-    TResult? Function(_AuthStateSignedOut value)? signedOut,
-    TResult? Function(_AuthStateSigningIn value)? signingIn,
-    TResult? Function(_AuthStateSignedIn value)? signedIn,
-    TResult? Function(_AuthStateErrorOccured value)? error,
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
   }) {
     return signedIn?.call(this);
   }
@@ -2430,11 +2429,11 @@ class _$_AuthStateSignedIn extends _AuthStateSignedIn
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthState value)? initial,
-    TResult Function(_AuthStateSignedOut value)? signedOut,
-    TResult Function(_AuthStateSigningIn value)? signingIn,
-    TResult Function(_AuthStateSignedIn value)? signedIn,
-    TResult Function(_AuthStateErrorOccured value)? error,
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
     required TResult orElse(),
   }) {
     if (signedIn != null) {
@@ -2444,38 +2443,38 @@ class _$_AuthStateSignedIn extends _AuthStateSignedIn
   }
 }
 
-abstract class _AuthStateSignedIn extends AuthState {
-  const factory _AuthStateSignedIn({required final User user}) =
-      _$_AuthStateSignedIn;
-  const _AuthStateSignedIn._() : super._();
+abstract class AuthStateSignedIn extends AuthState {
+  const factory AuthStateSignedIn({required final User user}) =
+      _$AuthStateSignedIn;
+  const AuthStateSignedIn._() : super._();
 
   User get user;
   @JsonKey(ignore: true)
-  _$$_AuthStateSignedInCopyWith<_$_AuthStateSignedIn> get copyWith =>
+  _$$AuthStateSignedInCopyWith<_$AuthStateSignedIn> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AuthStateErrorOccuredCopyWith<$Res> {
-  factory _$$_AuthStateErrorOccuredCopyWith(_$_AuthStateErrorOccured value,
-          $Res Function(_$_AuthStateErrorOccured) then) =
-      __$$_AuthStateErrorOccuredCopyWithImpl<$Res>;
+abstract class _$$AuthStateErrorOccuredCopyWith<$Res> {
+  factory _$$AuthStateErrorOccuredCopyWith(_$AuthStateErrorOccured value,
+          $Res Function(_$AuthStateErrorOccured) then) =
+      __$$AuthStateErrorOccuredCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AuthStateErrorOccuredCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateErrorOccured>
-    implements _$$_AuthStateErrorOccuredCopyWith<$Res> {
-  __$$_AuthStateErrorOccuredCopyWithImpl(_$_AuthStateErrorOccured _value,
-      $Res Function(_$_AuthStateErrorOccured) _then)
+class __$$AuthStateErrorOccuredCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateErrorOccured>
+    implements _$$AuthStateErrorOccuredCopyWith<$Res> {
+  __$$AuthStateErrorOccuredCopyWithImpl(_$AuthStateErrorOccured _value,
+      $Res Function(_$AuthStateErrorOccured) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AuthStateErrorOccured extends _AuthStateErrorOccured
+class _$AuthStateErrorOccured extends AuthStateErrorOccured
     with DiagnosticableTreeMixin {
-  const _$_AuthStateErrorOccured() : super._();
+  const _$AuthStateErrorOccured() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2491,7 +2490,7 @@ class _$_AuthStateErrorOccured extends _AuthStateErrorOccured
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AuthStateErrorOccured);
+        (other.runtimeType == runtimeType && other is _$AuthStateErrorOccured);
   }
 
   @override
@@ -2540,11 +2539,11 @@ class _$_AuthStateErrorOccured extends _AuthStateErrorOccured
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthState value) initial,
-    required TResult Function(_AuthStateSignedOut value) signedOut,
-    required TResult Function(_AuthStateSigningIn value) signingIn,
-    required TResult Function(_AuthStateSignedIn value) signedIn,
-    required TResult Function(_AuthStateErrorOccured value) error,
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
   }) {
     return error(this);
   }
@@ -2552,11 +2551,11 @@ class _$_AuthStateErrorOccured extends _AuthStateErrorOccured
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthState value)? initial,
-    TResult? Function(_AuthStateSignedOut value)? signedOut,
-    TResult? Function(_AuthStateSigningIn value)? signingIn,
-    TResult? Function(_AuthStateSignedIn value)? signedIn,
-    TResult? Function(_AuthStateErrorOccured value)? error,
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
   }) {
     return error?.call(this);
   }
@@ -2564,11 +2563,11 @@ class _$_AuthStateErrorOccured extends _AuthStateErrorOccured
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthState value)? initial,
-    TResult Function(_AuthStateSignedOut value)? signedOut,
-    TResult Function(_AuthStateSigningIn value)? signingIn,
-    TResult Function(_AuthStateSignedIn value)? signedIn,
-    TResult Function(_AuthStateErrorOccured value)? error,
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -2578,7 +2577,7 @@ class _$_AuthStateErrorOccured extends _AuthStateErrorOccured
   }
 }
 
-abstract class _AuthStateErrorOccured extends AuthState {
-  const factory _AuthStateErrorOccured() = _$_AuthStateErrorOccured;
-  const _AuthStateErrorOccured._() : super._();
+abstract class AuthStateErrorOccured extends AuthState {
+  const factory AuthStateErrorOccured() = _$AuthStateErrorOccured;
+  const AuthStateErrorOccured._() : super._();
 }

@@ -139,26 +139,22 @@ class __$$_TimerSettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
   const _$_TimerSettings(
-      {this.warmup = const Duration(minutes: 1),
-      this.duration = const Duration(minutes: 10),
-      this.startingSound = Sound.none,
-      this.endingSound = Sound.none})
+      {required this.warmup,
+      required this.duration,
+      required this.startingSound,
+      required this.endingSound})
       : super._();
 
   factory _$_TimerSettings.fromJson(Map<String, dynamic> json) =>
       _$$_TimerSettingsFromJson(json);
 
   @override
-  @JsonKey()
   final Duration warmup;
   @override
-  @JsonKey()
   final Duration duration;
   @override
-  @JsonKey()
   final Sound startingSound;
   @override
-  @JsonKey()
   final Sound endingSound;
 
   @override
@@ -212,10 +208,10 @@ class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
 
 abstract class _TimerSettings extends TimerSettings {
   const factory _TimerSettings(
-      {final Duration warmup,
-      final Duration duration,
-      final Sound startingSound,
-      final Sound endingSound}) = _$_TimerSettings;
+      {required final Duration warmup,
+      required final Duration duration,
+      required final Sound startingSound,
+      required final Sound endingSound}) = _$_TimerSettings;
   const _TimerSettings._() : super._();
 
   factory _TimerSettings.fromJson(Map<String, dynamic> json) =

@@ -90,6 +90,12 @@ class AppThemeData {
           displayColor: Colors.black,
         ),
         colorScheme: colorScheme,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.black,
+          )
+        )
       );
 
   //     );.copyWith(

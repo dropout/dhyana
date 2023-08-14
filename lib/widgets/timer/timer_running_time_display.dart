@@ -70,6 +70,7 @@ class TimerRunningTimeDisplay extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.w100,
                 fontSize: 80.0,
               )
             )

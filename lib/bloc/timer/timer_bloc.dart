@@ -1,16 +1,17 @@
 import 'dart:async';
 
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/util/logger_factory.dart';
 
 part 'timer_event.dart';
 part 'timer_state.dart';
+part 'timer_bloc.freezed.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
@@ -34,7 +35,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     required this.timerServiceFactory,
     required this.audioService,
     required this.crashlyticsService,
-  }) : super(TimerState(timerSettings: timerSettings)) {
+  }) : super(TimerState.initial(timerSettings: timerSettings)) {
 
     if (hasWarmupTime) {
       warmupTimer = timerServiceFactory.getTimerService(
@@ -82,6 +83,14 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     }
   }
 
+  Duration get elapsedWarmupTime {
+    if (warmupTimer != null) {
+      return warmupTimer!.elapsedTime;
+    } else {
+      return Duration.zero;
+    }
+  }
+
   void _onTimerStarted(TimerStarted start, emit) async {
     try {
       logger.v('Starting timer');
@@ -122,7 +131,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       activeTimer.stop();
       emit(state.copyWith(
         timerStatus: TimerStatus.paused,
-        elapsedWarmupTime: (hasWarmupTime) ? warmupTimer!.elapsedTime : null,
+        elapsedWarmupTime: elapsedWarmupTime,
         elapsedTime: durationTimer.elapsedTime
       ));
     } else {
@@ -207,7 +216,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     durationTimer.stop();
     emit(state.copyWith(
       timerStatus: TimerStatus.completed,
-      elapsedWarmupTime: (hasWarmupTime) ? warmupTimer!.elapsedTime : null,
+      elapsedWarmupTime: elapsedWarmupTime,
       elapsedTime: durationTimer.elapsedTime,
     ));
   }

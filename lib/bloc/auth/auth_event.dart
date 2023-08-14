@@ -6,10 +6,12 @@ sealed class AuthEvent with _$AuthEvent {
   const AuthEvent._();
 
   const factory AuthEvent.initializeAuth() = InitializeAuth;
+
   const factory AuthEvent.signinWithGoogle({
     void Function(User user)? onComplete,
     void Function(Object? error, StackTrace stackTrace)? onError,
   }) = SigninWithGoogle;
+
   const factory AuthEvent.signinWithApple({
     void Function(User user)? onComplete,
     void Function(Object? error, StackTrace stackTrace)? onError,
@@ -27,10 +29,13 @@ sealed class AuthEvent with _$AuthEvent {
   }) = SignOut;
 
   const factory AuthEvent.dismissSigninError() = DismissSigninError;
+
   const factory AuthEvent.receiveAuthStateChange({
     User? user
   }) = ReceiveAuthStateChange;
+
   const factory AuthEvent.receiveUserChange({
     User? user,
   }) = ReceiveUserChange;
+
 }

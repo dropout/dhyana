@@ -21,6 +21,25 @@ class Session with _$Session implements Model {
     required TimerSettings timerSettings,
   }) = _Session;
 
+  factory Session.generateId({
+    required String profileId,
+    required DateTime startTime,
+    required DateTime endTime,
+    required Duration duration,
+    required TimerSettings timerSettings,
+  }) {
+    String id = FirebaseFirestore.instance
+      .collection('profiles').doc(profileId)
+      .collection('sessions').doc().id;
+    return Session(
+      id: id,
+      startTime: startTime,
+      endTime: endTime,
+      duration: duration,
+      timerSettings: timerSettings,
+    );
+  }
+
   factory Session.fromJson(Map<String, Object?> json) =>
       _$SessionFromJson(json);
 

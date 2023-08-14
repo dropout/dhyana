@@ -39,6 +39,20 @@ class TimerRunningScreen extends StatelessWidget {
 class TimerRunningScreenBody extends StatelessWidget {
   const TimerRunningScreenBody({super.key});
 
+  void Function() _onBackground(BuildContext context) {
+    TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
+    return () {
+      timerBloc.add(TimerEvent.paused());
+    };
+  }
+
+  void Function() _onResume(BuildContext context) {
+    TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
+    return () {
+      timerBloc.add(TimerEvent.resumed());
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +67,13 @@ class TimerRunningScreenBody extends StatelessWidget {
           } else {
             crossFadeState = CrossFadeState.showFirst;
           }
-
           return AnimatedCrossFade(
             duration: const Duration(milliseconds: 256),
-            firstChild: TimerRunningView(timerState: timerState),
+            firstChild: TimerRunningView(
+              timerState: timerState,
+              onBackground: _onBackground(context),
+              onResume: _onResume(context),
+            ),
             secondChild: TimerCompletedView(timerState: timerState),
             layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
               return Stack(

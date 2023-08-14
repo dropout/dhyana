@@ -17,8 +17,8 @@
   "errorText": "Váratlan probléma támadt.",
   "errorButtonText": "Rendben",
 
-  "timerFinishSessionButtonText": "Ülés befejezése",
-  "timerDiscardSessionButtonText": "Ülés elvetése",
+  "timerFinishSessionButtonText": "Befejezés",
+  "timerDiscardSessionButtonText": "Megszakítás",
 
   "loginHeadline1": "Ki",
   "loginHeadline2": "vagy",

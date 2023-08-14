@@ -1,31 +1,48 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:dhyana/initalizer.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/all.dart';
-import 'package:dhyana/route/app_route.dart';
-import 'package:dhyana/service/all.dart';
+import 'package:dhyana/route/app_router.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
 
 class App extends StatelessWidget {
 
   final InitResult initResult;
-  final AppRouter appRouter = AppRouter();
+  late final AuthBloc authBloc;
+  late final AppRouter appRouter;
 
   App({
     required this.initResult,
     super.key
-  });
+  }) {
+    authBloc = AuthBloc(
+      initialAuthState: (initResult.user != null) ? AuthState.signedIn(user: initResult.user!) : const AuthState.initial(),
+      authenticationRepository: initResult.repositories.authRepository,
+      analyticsService: initResult.services.analyticsService,
+      crashlyticsService: initResult.services.crashlyticsService,
+    );
+    appRouter = AppRouter(
+      authBloc: authBloc
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         Provider<InitResult>(create: (_) => initResult),
-        Provider<CrashlyticsService>(create: (_) => LoggingCrashlyticsService()),
+        ...initResult.providers
       ],
-      child: buildApp(context),
+      child: MultiBlocProvider(
+        providers: <BlocProvider>[
+          BlocProvider<AuthBloc>(create: (_) => authBloc)
+        ],
+        child: buildApp(context),
+      ),
     );
   }
 
@@ -51,11 +68,6 @@ class App extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       theme: AppThemeData(isDark: false).themeData,
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      //   fontFamily: 'RobotoSlab',
-      // ),
     );
   }
 

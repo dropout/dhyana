@@ -21,5 +21,5 @@ Map<String, dynamic> _$$_SessionToJson(_$_Session instance) =>
       'startTime': instance.startTime.toIso8601String(),
       'endTime': instance.endTime.toIso8601String(),
       'duration': instance.duration.inMicroseconds,
-      'timerSettings': instance.timerSettings,
+      'timerSettings': instance.timerSettings.toJson(),
     };

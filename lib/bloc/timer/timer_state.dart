@@ -13,56 +13,27 @@ enum TimerStage {
   timer
 }
 
-class TimerState extends Equatable {
+@freezed
+sealed class TimerState with _$TimerState {
 
-  final TimerSettings timerSettings;
-  final TimerStatus timerStatus;
-  final TimerStage timerStage;
-  final Duration elapsedWarmupTime;
-  final Duration elapsedTime;
+  const TimerState._();
 
-  const TimerState({
-    this.timerSettings = const TimerSettings(duration: Duration.zero),
-    this.timerStatus = TimerStatus.idle,
-    this.timerStage = TimerStage.warmup,
-    this.elapsedWarmupTime = Duration.zero,
-    this.elapsedTime = Duration.zero,
-  });
+  const factory TimerState({
+    required TimerSettings timerSettings,
+    required TimerStatus timerStatus,
+    required TimerStage timerStage,
+    required Duration elapsedWarmupTime,
+    required Duration elapsedTime,
+  }) = _TimerState;
 
-  TimerState copyWith({
-    TimerSettings? timerSettings,
-    TimerStatus? timerStatus,
-    TimerStage? timerStage,
-    Duration? elapsedWarmupTime,
-    Duration? elapsedTime,
-  }) {
+  factory TimerState.initial({required TimerSettings timerSettings}) {
     return TimerState(
-      timerSettings: timerSettings ?? this.timerSettings,
-      timerStatus: timerStatus ?? this.timerStatus,
-      timerStage: timerStage ?? this.timerStage,
-      elapsedWarmupTime: elapsedWarmupTime ?? this.elapsedWarmupTime,
-      elapsedTime: elapsedTime ?? this.elapsedTime,
+      timerSettings: timerSettings,
+      timerStatus: TimerStatus.idle,
+      timerStage: TimerStage.warmup,
+      elapsedWarmupTime: Duration.zero,
+      elapsedTime: Duration.zero,
     );
-  }
-
-  @override
-  List<Object> get props => [
-    timerSettings,
-    timerStatus,
-    timerStage,
-    elapsedWarmupTime,
-    elapsedTime,
-  ];
-
-  @override
-  String toString() {
-    return 'TimerState { '
-      'timerSettings: $timerSettings '
-      'timerStatus: $timerStatus '
-      'timerStage: $timerStage '
-      'elapsedTime: $elapsedTime '
-      'elapsedWarmupTime: $elapsedWarmupTime'
-    ' }';
   }
 
 }
