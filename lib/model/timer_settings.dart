@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dhyana/enum/sound.dart';
 
+import 'converter/duration_converter.dart';
+
 part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';
 
@@ -12,7 +14,7 @@ class TimerSettings with _$TimerSettings {
 
   const factory TimerSettings({
     required Duration warmup,
-    required Duration duration,
+    @DurationConverter() required Duration duration,
     required Sound startingSound,
     required Sound endingSound,
   }) = _TimerSettings;

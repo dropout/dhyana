@@ -9,7 +9,7 @@ part of 'timer_settings.dart';
 _$_TimerSettings _$$_TimerSettingsFromJson(Map<String, dynamic> json) =>
     _$_TimerSettings(
       warmup: Duration(microseconds: json['warmup'] as int),
-      duration: Duration(microseconds: json['duration'] as int),
+      duration: const DurationConverter().fromJson(json['duration'] as int),
       startingSound: $enumDecode(_$SoundEnumMap, json['startingSound']),
       endingSound: $enumDecode(_$SoundEnumMap, json['endingSound']),
     );
@@ -17,7 +17,7 @@ _$_TimerSettings _$$_TimerSettingsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_TimerSettingsToJson(_$_TimerSettings instance) =>
     <String, dynamic>{
       'warmup': instance.warmup.inMicroseconds,
-      'duration': instance.duration.inMicroseconds,
+      'duration': const DurationConverter().toJson(instance.duration),
       'startingSound': _$SoundEnumMap[instance.startingSound]!,
       'endingSound': _$SoundEnumMap[instance.endingSound]!,
     };

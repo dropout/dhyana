@@ -24,7 +24,6 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
   SessionsBloc({
     required this.sessionRepository,
     required this.authRepository,
-
     required this.crashlyticsService,
   }) : super(const SessionsState.initial()) {
     on<AddSessionEvent>(_onAddSession);

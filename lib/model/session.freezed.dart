@@ -23,6 +23,7 @@ mixin _$Session {
   String get id => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
   DateTime get endTime => throw _privateConstructorUsedError;
+  @DurationConverter()
   Duration get duration => throw _privateConstructorUsedError;
   TimerSettings get timerSettings => throw _privateConstructorUsedError;
 
@@ -40,7 +41,7 @@ abstract class $SessionCopyWith<$Res> {
       {String id,
       DateTime startTime,
       DateTime endTime,
-      Duration duration,
+      @DurationConverter() Duration duration,
       TimerSettings timerSettings});
 
   $TimerSettingsCopyWith<$Res> get timerSettings;
@@ -109,7 +110,7 @@ abstract class _$$_SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
       {String id,
       DateTime startTime,
       DateTime endTime,
-      Duration duration,
+      @DurationConverter() Duration duration,
       TimerSettings timerSettings});
 
   @override
@@ -164,7 +165,7 @@ class _$_Session extends _Session with DiagnosticableTreeMixin {
       {required this.id,
       required this.startTime,
       required this.endTime,
-      required this.duration,
+      @DurationConverter() required this.duration,
       required this.timerSettings})
       : super._();
 
@@ -178,6 +179,7 @@ class _$_Session extends _Session with DiagnosticableTreeMixin {
   @override
   final DateTime endTime;
   @override
+  @DurationConverter()
   final Duration duration;
   @override
   final TimerSettings timerSettings;
@@ -238,7 +240,7 @@ abstract class _Session extends Session {
       {required final String id,
       required final DateTime startTime,
       required final DateTime endTime,
-      required final Duration duration,
+      @DurationConverter() required final Duration duration,
       required final TimerSettings timerSettings}) = _$_Session;
   const _Session._() : super._();
 
@@ -251,6 +253,7 @@ abstract class _Session extends Session {
   @override
   DateTime get endTime;
   @override
+  @DurationConverter()
   Duration get duration;
   @override
   TimerSettings get timerSettings;

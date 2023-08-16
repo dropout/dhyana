@@ -52,6 +52,7 @@ class TimerRunningScreenBody extends StatelessWidget {
           return (prev.timerStatus != TimerStatus.completed && next.timerStatus == TimerStatus.completed);
         },
         listener: (BuildContext context, TimerState state) {
+
           DateTime endTime = state.endTime ?? DateTime.now();
           DateTime startTime = state.startTime ?? endTime.subtract(state.timerSettings.duration);
           BlocProvider.of<SessionsBloc>(context).add(
@@ -61,6 +62,7 @@ class TimerRunningScreenBody extends StatelessWidget {
               timerSettings: state.timerSettings,
             )
           );
+
         },
         builder: (BuildContext context, TimerState timerState) {
           final bool isCompleted =

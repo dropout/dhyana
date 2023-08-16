@@ -21,6 +21,7 @@ TimerSettings _$TimerSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TimerSettings {
   Duration get warmup => throw _privateConstructorUsedError;
+  @DurationConverter()
   Duration get duration => throw _privateConstructorUsedError;
   Sound get startingSound => throw _privateConstructorUsedError;
   Sound get endingSound => throw _privateConstructorUsedError;
@@ -39,7 +40,7 @@ abstract class $TimerSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {Duration warmup,
-      Duration duration,
+      @DurationConverter() Duration duration,
       Sound startingSound,
       Sound endingSound});
 }
@@ -93,7 +94,7 @@ abstract class _$$_TimerSettingsCopyWith<$Res>
   @useResult
   $Res call(
       {Duration warmup,
-      Duration duration,
+      @DurationConverter() Duration duration,
       Sound startingSound,
       Sound endingSound});
 }
@@ -140,7 +141,7 @@ class __$$_TimerSettingsCopyWithImpl<$Res>
 class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
   const _$_TimerSettings(
       {required this.warmup,
-      required this.duration,
+      @DurationConverter() required this.duration,
       required this.startingSound,
       required this.endingSound})
       : super._();
@@ -151,6 +152,7 @@ class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
   @override
   final Duration warmup;
   @override
+  @DurationConverter()
   final Duration duration;
   @override
   final Sound startingSound;
@@ -209,7 +211,7 @@ class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
 abstract class _TimerSettings extends TimerSettings {
   const factory _TimerSettings(
       {required final Duration warmup,
-      required final Duration duration,
+      @DurationConverter() required final Duration duration,
       required final Sound startingSound,
       required final Sound endingSound}) = _$_TimerSettings;
   const _TimerSettings._() : super._();
@@ -220,6 +222,7 @@ abstract class _TimerSettings extends TimerSettings {
   @override
   Duration get warmup;
   @override
+  @DurationConverter()
   Duration get duration;
   @override
   Sound get startingSound;
