@@ -88,7 +88,7 @@ class ProfileButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => _signedInTap(context, profile),
       child: HomeScreenMenuButton(
-        child: ProfileImage(profile: profile),
+        child: ProfileImage.fromProfile(profile),
       ),
     );
   }

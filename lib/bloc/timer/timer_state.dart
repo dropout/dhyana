@@ -24,6 +24,8 @@ sealed class TimerState with _$TimerState {
     required TimerStage timerStage,
     required Duration elapsedWarmupTime,
     required Duration elapsedTime,
+    DateTime? startTime,
+    DateTime? endTime,
   }) = _TimerState;
 
   factory TimerState.initial({required TimerSettings timerSettings}) {
@@ -33,6 +35,8 @@ sealed class TimerState with _$TimerState {
       timerStage: TimerStage.warmup,
       elapsedWarmupTime: Duration.zero,
       elapsedTime: Duration.zero,
+      startTime: null,
+      endTime: null,
     );
   }
 

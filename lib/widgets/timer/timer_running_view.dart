@@ -44,36 +44,40 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
         },
       );
     } else {
-      return Container(
-        padding: const EdgeInsets.all(AppThemeData.spacingMd),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return Stack(
-              fit: StackFit.expand,
-              children: [
-                Positioned.fill(
-                  top: constraints.constrainHeight() / 2 - 75,
-                  child: TimerStageDisplay(
-                    timerState: widget.timerState,
-                  )
-                ),
-                Center(
-                  child: TimerRunningTimeDisplay(
-                    timerState: widget.timerState
-                  )
-                ),
-                Container(
-                  alignment: const Alignment(0.0, 0.85),
-                  child: TimerRunningControls(
-                    timerState: widget.timerState
-                  ),
-                ),
-              ],
-            );
-          }
-        ),
-      );
+      return buildLayout(context);
     }
+  }
+
+  Widget buildLayout(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppThemeData.spacingMd),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Stack(
+            fit: StackFit.expand,
+            children: [
+              Positioned.fill(
+                top: constraints.constrainHeight() / 2 - 75,
+                child: TimerStageDisplay(
+                  timerState: widget.timerState,
+                )
+              ),
+              Center(
+                child: TimerRunningTimeDisplay(
+                  timerState: widget.timerState
+                )
+              ),
+              Container(
+                alignment: const Alignment(0.0, 0.85),
+                child: TimerRunningControls(
+                  timerState: widget.timerState
+                ),
+              ),
+            ],
+          );
+        }
+      ),
+    );
   }
 
   @override
@@ -85,7 +89,6 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
         widget.onResume?.call();
       default:
     }
-
     super.didChangeAppLifecycleState(state);
   }
 

@@ -13,6 +13,7 @@ import 'model/all.dart';
 class FirebaseAuthProvider implements AuthProvider {
 
   final firebase_auth.FirebaseAuth _auth;
+  User? _user;
 
   FirebaseAuthProvider(
     this._auth,
@@ -22,11 +23,8 @@ class FirebaseAuthProvider implements AuthProvider {
   Stream<User?> get authStateChange {
     return _auth.authStateChanges()
       .asyncMap<User?>((firebase_auth.User? firebaseUser) async {
-        if (firebaseUser == null) {
-          return null;
-        } else {
-          return convertFirebaseUser(firebaseUser);
-        }
+        _user = await convertFirebaseUser(firebaseUser);
+        return _user;
     });
   }
 
@@ -34,16 +32,13 @@ class FirebaseAuthProvider implements AuthProvider {
   Stream<User?> get userChange {
     return _auth.userChanges()
       .asyncMap<User?>((firebase_auth.User? firebaseUser) async {
-        if (firebaseUser == null) {
-          return null;
-        } else {
-          return convertFirebaseUser(firebaseUser);
-        }
+        _user = await convertFirebaseUser(firebaseUser);
+        return _user;
     });
   }
 
   @override
-  Future<User?> get user => authStateChange.last;
+  Future<User?> get user => Future.value(_user);
 
   @override
   Future<SigninResult> signIn(SigninMethodType authProviderType, {
@@ -61,7 +56,9 @@ class FirebaseAuthProvider implements AuthProvider {
     } else {
       authTemplate = AuthTemplate(_auth, authProviderType);
     }
-    return authTemplate.signIn();
+    SigninResult signinResult = await authTemplate.signIn();
+    _user = signinResult.user;
+    return signinResult;
   }
 
 
@@ -92,13 +89,17 @@ class FirebaseAuthProvider implements AuthProvider {
         );
       }
     }
-
-    return _auth.signOut();
+    await _auth.signOut();
+    _user = null;
   }
 
   @override
   Future<void> deleteUser() {
-    return _auth.currentUser!.delete();
+    if (_auth.currentUser == null) {
+      throw Exception('Unable to delete user, because it look like its not signed in...');
+    } else {
+      return _auth.currentUser!.delete();
+    }
   }
 
 }

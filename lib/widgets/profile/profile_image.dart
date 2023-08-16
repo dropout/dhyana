@@ -1,29 +1,33 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/util/default_profile_data.dart';
-import 'package:dhyana/widgets/util/app_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
 class ProfileImage extends StatelessWidget {
 
-  final Profile profile;
+  final String photoUrl;
+  final String photoBlurhash;
 
   const ProfileImage({
-    required this.profile,
+    required this.photoUrl,
+    required this.photoBlurhash,
     super.key
   });
+
+  ProfileImage.fromProfile(Profile profile, {super.key}) :
+    photoUrl = profile.photoUrl,
+    photoBlurhash = profile.photoBlurhash;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: profile.photoUrl,
+      imageUrl: photoUrl,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover
+            image: imageProvider,
+            fit: BoxFit.cover
           ),
         ),
       ),
@@ -32,8 +36,8 @@ class ProfileImage extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
-                image: BlurHashImage(profile.photoBlurhash),
-                fit: BoxFit.cover
+              image: BlurHashImage(photoBlurhash),
+              fit: BoxFit.cover
             ),
           ),
         );

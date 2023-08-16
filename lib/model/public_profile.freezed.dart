@@ -24,6 +24,7 @@ mixin _$PublicProfile {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
   String get photoUrl => throw _privateConstructorUsedError;
+  String get photoBlurhash => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,12 @@ abstract class $PublicProfileCopyWith<$Res> {
           PublicProfile value, $Res Function(PublicProfile) then) =
       _$PublicProfileCopyWithImpl<$Res, PublicProfile>;
   @useResult
-  $Res call({String id, String firstName, String lastName, String photoUrl});
+  $Res call(
+      {String id,
+      String firstName,
+      String lastName,
+      String photoUrl,
+      String photoBlurhash});
 }
 
 /// @nodoc
@@ -57,6 +63,7 @@ class _$PublicProfileCopyWithImpl<$Res, $Val extends PublicProfile>
     Object? firstName = null,
     Object? lastName = null,
     Object? photoUrl = null,
+    Object? photoBlurhash = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,6 +82,10 @@ class _$PublicProfileCopyWithImpl<$Res, $Val extends PublicProfile>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      photoBlurhash: null == photoBlurhash
+          ? _value.photoBlurhash
+          : photoBlurhash // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -87,7 +98,12 @@ abstract class _$$_PublicProfileCopyWith<$Res>
       __$$_PublicProfileCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String firstName, String lastName, String photoUrl});
+  $Res call(
+      {String id,
+      String firstName,
+      String lastName,
+      String photoUrl,
+      String photoBlurhash});
 }
 
 /// @nodoc
@@ -105,6 +121,7 @@ class __$$_PublicProfileCopyWithImpl<$Res>
     Object? firstName = null,
     Object? lastName = null,
     Object? photoUrl = null,
+    Object? photoBlurhash = null,
   }) {
     return _then(_$_PublicProfile(
       id: null == id
@@ -123,6 +140,10 @@ class __$$_PublicProfileCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      photoBlurhash: null == photoBlurhash
+          ? _value.photoBlurhash
+          : photoBlurhash // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -134,7 +155,8 @@ class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
       {required this.id,
       required this.firstName,
       required this.lastName,
-      required this.photoUrl});
+      required this.photoUrl,
+      required this.photoBlurhash});
 
   factory _$_PublicProfile.fromJson(Map<String, dynamic> json) =>
       _$$_PublicProfileFromJson(json);
@@ -147,10 +169,12 @@ class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
   final String lastName;
   @override
   final String photoUrl;
+  @override
+  final String photoBlurhash;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PublicProfile(id: $id, firstName: $firstName, lastName: $lastName, photoUrl: $photoUrl)';
+    return 'PublicProfile(id: $id, firstName: $firstName, lastName: $lastName, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash)';
   }
 
   @override
@@ -161,7 +185,8 @@ class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
-      ..add(DiagnosticsProperty('photoUrl', photoUrl));
+      ..add(DiagnosticsProperty('photoUrl', photoUrl))
+      ..add(DiagnosticsProperty('photoBlurhash', photoBlurhash));
   }
 
   @override
@@ -175,13 +200,15 @@ class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl));
+                other.photoUrl == photoUrl) &&
+            (identical(other.photoBlurhash, photoBlurhash) ||
+                other.photoBlurhash == photoBlurhash));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, firstName, lastName, photoUrl);
+  int get hashCode => Object.hash(
+      runtimeType, id, firstName, lastName, photoUrl, photoBlurhash);
 
   @JsonKey(ignore: true)
   @override
@@ -202,7 +229,8 @@ abstract class _PublicProfile implements PublicProfile {
       {required final String id,
       required final String firstName,
       required final String lastName,
-      required final String photoUrl}) = _$_PublicProfile;
+      required final String photoUrl,
+      required final String photoBlurhash}) = _$_PublicProfile;
 
   factory _PublicProfile.fromJson(Map<String, dynamic> json) =
       _$_PublicProfile.fromJson;
@@ -215,6 +243,8 @@ abstract class _PublicProfile implements PublicProfile {
   String get lastName;
   @override
   String get photoUrl;
+  @override
+  String get photoBlurhash;
   @override
   @JsonKey(ignore: true)
   _$$_PublicProfileCopyWith<_$_PublicProfile> get copyWith =>

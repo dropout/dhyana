@@ -1,9 +1,9 @@
+import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/widgets/bloc_provider/timer_running_bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/widgets/timer/timer_completed_view.dart';
 import 'package:dhyana/widgets/timer/timer_running_view.dart';
 
@@ -18,18 +18,8 @@ class TimerRunningScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        return TimerBloc(
-          timerSettings: timerSettings,
-          timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
-            DefaultTimerService.new
-          ),
-          audioService: DefaultAudioService(),
-          crashlyticsService: LoggingCrashlyticsService(),
-        )..add(TimerStarted());
-      },
-      lazy: false,
+    return TimerRunningBlocProvider(
+      timerSettings: timerSettings,
       child: const TimerRunningScreenBody(),
     );
   }
@@ -57,7 +47,21 @@ class TimerRunningScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: BlocBuilder<TimerBloc, TimerState>(
+      body: BlocConsumer<TimerBloc, TimerState>(
+        listenWhen: (TimerState prev, TimerState next) {
+          return (prev.timerStatus != TimerStatus.completed && next.timerStatus == TimerStatus.completed);
+        },
+        listener: (BuildContext context, TimerState state) {
+          DateTime endTime = state.endTime ?? DateTime.now();
+          DateTime startTime = state.startTime ?? endTime.subtract(state.timerSettings.duration);
+          BlocProvider.of<SessionsBloc>(context).add(
+            SessionsEvent.addSession(
+              startTime: startTime,
+              endTime: endTime,
+              timerSettings: state.timerSettings,
+            )
+          );
+        },
         builder: (BuildContext context, TimerState timerState) {
           final bool isCompleted =
             (timerState.timerStatus == TimerStatus.completed);

@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/widgets/screen/profile_edit_screen.dart';
-import 'package:dhyana/widgets/screen/profile_wizard_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

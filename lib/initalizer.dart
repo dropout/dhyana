@@ -1,12 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
+import 'package:dhyana/data_provider/firebase_presence_data_provider.dart';
+import 'package:dhyana/data_provider/firebase_session_data_provider.dart';
 import 'package:dhyana/data_provider/firebase_storage_data_provider.dart';
 import 'package:dhyana/repositories.dart';
 import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/repository/firebase_auth_repository.dart';
+import 'package:dhyana/repository/firebase_presence_repository.dart';
 import 'package:dhyana/repository/firebase_profile_repository.dart';
+import 'package:dhyana/repository/firebase_session_repository.dart';
+import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/repository/profile_repository.dart';
+import 'package:dhyana/repository/session_repository.dart';
 import 'package:dhyana/service/default_resource_resolver.dart';
 import 'package:dhyana/service/resource_resolver.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -66,10 +72,23 @@ class Initializer {
       profileDataProvider: fbProfileDataProvider,
       storageDataProvider: fbStorageDataProvider,
     );
+    PresenceRepository presenceRepository = FirebasePresenceRepository(
+      presenceDataProvider: FirebasePresenceDataProvider(
+        FirebaseFirestore.instance
+      )
+    );
+
+    SessionRepository sessionRepository = FirebaseSessionRepository(
+      sessionDataProvider: FirebaseSessionDataProvider(
+        fireStore: FirebaseFirestore.instance,
+      )
+    );
 
     Repositories repos = Repositories(
       authRepository: authRepository,
       profileRepository: profileRepository,
+      presenceRepository: presenceRepository,
+      sessionRepository: sessionRepository,
     );
 
     logger.v('Initialize providers');
@@ -105,8 +124,11 @@ class Initializer {
       Provider<AnalyticsService>(create: (_) => srvcs.analyticsService),
       Provider<CrashlyticsService>(create: (_) => srvcs.crashlyticsService),
       Provider<ResourceResolver>(create: (_) => srvcs.resourceResolver),
+
       Provider<AuthRepository>(create: (_) => repos.authRepository),
       Provider<ProfileRepository>(create: (_) => repos.profileRepository),
+      Provider<PresenceRepository>(create: (_) => repos.presenceRepository),
+      Provider<SessionRepository>(create: (_) => repos.sessionRepository),
     ];
   }
 

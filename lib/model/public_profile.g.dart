@@ -12,6 +12,7 @@ _$_PublicProfile _$$_PublicProfileFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       photoUrl: json['photoUrl'] as String,
+      photoBlurhash: json['photoBlurhash'] as String,
     );
 
 Map<String, dynamic> _$$_PublicProfileToJson(_$_PublicProfile instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_PublicProfileToJson(_$_PublicProfile instance) =>
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'photoUrl': instance.photoUrl,
+      'photoBlurhash': instance.photoBlurhash,
     };

@@ -46,10 +46,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get errorButtonText => 'Rendben';
 
   @override
-  String get timerFinishSessionButtonText => 'Ülés befejezése';
+  String get timerFinishSessionButtonText => 'Befejezés';
 
   @override
-  String get timerDiscardSessionButtonText => 'Ülés elvetése';
+  String get timerDiscardSessionButtonText => 'Megszakítás';
 
   @override
   String get loginHeadline1 => 'Ki';

@@ -60,7 +60,6 @@ class FirebaseProfileRepository implements ProfileRepository {
     Profile profile,
     Uint8List imageData
   ) async {
-
     // Upload image
     UploadTask uploadTask = storageDataProvider.uploadFile(
       fileName: 'photo.jpg',
@@ -72,16 +71,9 @@ class FirebaseProfileRepository implements ProfileRepository {
     // Get image url
     String photoUrl = await uploadTask.snapshot.ref.getDownloadURL();
 
-    print(photoUrl);
-
     // Update profile with new photoUrl
-    Profile newProfile = profile.copyWith(
-      photoUrl: photoUrl,
-    );
-
+    Profile newProfile = profile.copyWith(photoUrl: photoUrl);
     await profileDataProvider.updateItem(profile);
-
-    print(newProfile);
 
     return newProfile;
   }

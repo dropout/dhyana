@@ -21,7 +21,7 @@ Presence _$PresenceFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Presence {
   String get id => throw _privateConstructorUsedError;
-  PublicProfile get who => throw _privateConstructorUsedError;
+  PublicProfile get profile => throw _privateConstructorUsedError;
   DateTime get startedAt => throw _privateConstructorUsedError;
   DateTime? get finishedAt => throw _privateConstructorUsedError;
 
@@ -37,9 +37,12 @@ abstract class $PresenceCopyWith<$Res> {
       _$PresenceCopyWithImpl<$Res, Presence>;
   @useResult
   $Res call(
-      {String id, PublicProfile who, DateTime startedAt, DateTime? finishedAt});
+      {String id,
+      PublicProfile profile,
+      DateTime startedAt,
+      DateTime? finishedAt});
 
-  $PublicProfileCopyWith<$Res> get who;
+  $PublicProfileCopyWith<$Res> get profile;
 }
 
 /// @nodoc
@@ -56,7 +59,7 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
   @override
   $Res call({
     Object? id = null,
-    Object? who = null,
+    Object? profile = null,
     Object? startedAt = null,
     Object? finishedAt = freezed,
   }) {
@@ -65,9 +68,9 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      who: null == who
-          ? _value.who
-          : who // ignore: cast_nullable_to_non_nullable
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
               as PublicProfile,
       startedAt: null == startedAt
           ? _value.startedAt
@@ -82,9 +85,9 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
 
   @override
   @pragma('vm:prefer-inline')
-  $PublicProfileCopyWith<$Res> get who {
-    return $PublicProfileCopyWith<$Res>(_value.who, (value) {
-      return _then(_value.copyWith(who: value) as $Val);
+  $PublicProfileCopyWith<$Res> get profile {
+    return $PublicProfileCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value) as $Val);
     });
   }
 }
@@ -97,10 +100,13 @@ abstract class _$$_PresenceCopyWith<$Res> implements $PresenceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id, PublicProfile who, DateTime startedAt, DateTime? finishedAt});
+      {String id,
+      PublicProfile profile,
+      DateTime startedAt,
+      DateTime? finishedAt});
 
   @override
-  $PublicProfileCopyWith<$Res> get who;
+  $PublicProfileCopyWith<$Res> get profile;
 }
 
 /// @nodoc
@@ -115,7 +121,7 @@ class __$$_PresenceCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? who = null,
+    Object? profile = null,
     Object? startedAt = null,
     Object? finishedAt = freezed,
   }) {
@@ -124,9 +130,9 @@ class __$$_PresenceCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      who: null == who
-          ? _value.who
-          : who // ignore: cast_nullable_to_non_nullable
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
               as PublicProfile,
       startedAt: null == startedAt
           ? _value.startedAt
@@ -145,7 +151,7 @@ class __$$_PresenceCopyWithImpl<$Res>
 class _$_Presence extends _Presence with DiagnosticableTreeMixin {
   const _$_Presence(
       {required this.id,
-      required this.who,
+      required this.profile,
       required this.startedAt,
       this.finishedAt})
       : super._();
@@ -156,7 +162,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
   @override
   final String id;
   @override
-  final PublicProfile who;
+  final PublicProfile profile;
   @override
   final DateTime startedAt;
   @override
@@ -164,7 +170,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Presence(id: $id, who: $who, startedAt: $startedAt, finishedAt: $finishedAt)';
+    return 'Presence(id: $id, profile: $profile, startedAt: $startedAt, finishedAt: $finishedAt)';
   }
 
   @override
@@ -173,7 +179,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'Presence'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('who', who))
+      ..add(DiagnosticsProperty('profile', profile))
       ..add(DiagnosticsProperty('startedAt', startedAt))
       ..add(DiagnosticsProperty('finishedAt', finishedAt));
   }
@@ -184,7 +190,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
         (other.runtimeType == runtimeType &&
             other is _$_Presence &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.who, who) || other.who == who) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.startedAt, startedAt) ||
                 other.startedAt == startedAt) &&
             (identical(other.finishedAt, finishedAt) ||
@@ -193,7 +199,8 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, who, startedAt, finishedAt);
+  int get hashCode =>
+      Object.hash(runtimeType, id, profile, startedAt, finishedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -212,7 +219,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
 abstract class _Presence extends Presence {
   const factory _Presence(
       {required final String id,
-      required final PublicProfile who,
+      required final PublicProfile profile,
       required final DateTime startedAt,
       final DateTime? finishedAt}) = _$_Presence;
   const _Presence._() : super._();
@@ -222,7 +229,7 @@ abstract class _Presence extends Presence {
   @override
   String get id;
   @override
-  PublicProfile get who;
+  PublicProfile get profile;
   @override
   DateTime get startedAt;
   @override

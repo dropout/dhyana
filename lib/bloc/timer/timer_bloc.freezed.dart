@@ -1811,6 +1811,8 @@ mixin _$TimerState {
   TimerStage get timerStage => throw _privateConstructorUsedError;
   Duration get elapsedWarmupTime => throw _privateConstructorUsedError;
   Duration get elapsedTime => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TimerStateCopyWith<TimerState> get copyWith =>
@@ -1828,7 +1830,9 @@ abstract class $TimerStateCopyWith<$Res> {
       TimerStatus timerStatus,
       TimerStage timerStage,
       Duration elapsedWarmupTime,
-      Duration elapsedTime});
+      Duration elapsedTime,
+      DateTime? startTime,
+      DateTime? endTime});
 
   $TimerSettingsCopyWith<$Res> get timerSettings;
 }
@@ -1851,6 +1855,8 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
     Object? timerStage = null,
     Object? elapsedWarmupTime = null,
     Object? elapsedTime = null,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
   }) {
     return _then(_value.copyWith(
       timerSettings: null == timerSettings
@@ -1873,6 +1879,14 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
           ? _value.elapsedTime
           : elapsedTime // ignore: cast_nullable_to_non_nullable
               as Duration,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -1898,7 +1912,9 @@ abstract class _$$_TimerStateCopyWith<$Res>
       TimerStatus timerStatus,
       TimerStage timerStage,
       Duration elapsedWarmupTime,
-      Duration elapsedTime});
+      Duration elapsedTime,
+      DateTime? startTime,
+      DateTime? endTime});
 
   @override
   $TimerSettingsCopyWith<$Res> get timerSettings;
@@ -1920,6 +1936,8 @@ class __$$_TimerStateCopyWithImpl<$Res>
     Object? timerStage = null,
     Object? elapsedWarmupTime = null,
     Object? elapsedTime = null,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
   }) {
     return _then(_$_TimerState(
       timerSettings: null == timerSettings
@@ -1942,6 +1960,14 @@ class __$$_TimerStateCopyWithImpl<$Res>
           ? _value.elapsedTime
           : elapsedTime // ignore: cast_nullable_to_non_nullable
               as Duration,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -1954,7 +1980,9 @@ class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
       required this.timerStatus,
       required this.timerStage,
       required this.elapsedWarmupTime,
-      required this.elapsedTime})
+      required this.elapsedTime,
+      this.startTime,
+      this.endTime})
       : super._();
 
   @override
@@ -1967,10 +1995,14 @@ class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
   final Duration elapsedWarmupTime;
   @override
   final Duration elapsedTime;
+  @override
+  final DateTime? startTime;
+  @override
+  final DateTime? endTime;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerState(timerSettings: $timerSettings, timerStatus: $timerStatus, timerStage: $timerStage, elapsedWarmupTime: $elapsedWarmupTime, elapsedTime: $elapsedTime)';
+    return 'TimerState(timerSettings: $timerSettings, timerStatus: $timerStatus, timerStage: $timerStage, elapsedWarmupTime: $elapsedWarmupTime, elapsedTime: $elapsedTime, startTime: $startTime, endTime: $endTime)';
   }
 
   @override
@@ -1982,7 +2014,9 @@ class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('timerStatus', timerStatus))
       ..add(DiagnosticsProperty('timerStage', timerStage))
       ..add(DiagnosticsProperty('elapsedWarmupTime', elapsedWarmupTime))
-      ..add(DiagnosticsProperty('elapsedTime', elapsedTime));
+      ..add(DiagnosticsProperty('elapsedTime', elapsedTime))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('endTime', endTime));
   }
 
   @override
@@ -1999,12 +2033,15 @@ class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
             (identical(other.elapsedWarmupTime, elapsedWarmupTime) ||
                 other.elapsedWarmupTime == elapsedWarmupTime) &&
             (identical(other.elapsedTime, elapsedTime) ||
-                other.elapsedTime == elapsedTime));
+                other.elapsedTime == elapsedTime) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, timerSettings, timerStatus,
-      timerStage, elapsedWarmupTime, elapsedTime);
+      timerStage, elapsedWarmupTime, elapsedTime, startTime, endTime);
 
   @JsonKey(ignore: true)
   @override
@@ -2019,7 +2056,9 @@ abstract class _TimerState extends TimerState {
       required final TimerStatus timerStatus,
       required final TimerStage timerStage,
       required final Duration elapsedWarmupTime,
-      required final Duration elapsedTime}) = _$_TimerState;
+      required final Duration elapsedTime,
+      final DateTime? startTime,
+      final DateTime? endTime}) = _$_TimerState;
   const _TimerState._() : super._();
 
   @override
@@ -2032,6 +2071,10 @@ abstract class _TimerState extends TimerState {
   Duration get elapsedWarmupTime;
   @override
   Duration get elapsedTime;
+  @override
+  DateTime? get startTime;
+  @override
+  DateTime? get endTime;
   @override
   @JsonKey(ignore: true)
   _$$_TimerStateCopyWith<_$_TimerState> get copyWith =>

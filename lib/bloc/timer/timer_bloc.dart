@@ -18,9 +18,9 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final Logger logger = getLogger('TimerBloc');
 
   final TimerSettings timerSettings;
+  final TimerServiceFactory timerServiceFactory;
   final AudioService audioService;
   final CrashlyticsService crashlyticsService;
-  final TimerServiceFactory timerServiceFactory;
 
   TimerService? warmupTimer;
   StreamSubscription? _warmupTickerSub;
@@ -37,10 +37,10 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     required this.crashlyticsService,
   }) : super(TimerState.initial(timerSettings: timerSettings)) {
 
+    // Prepare warmup time
     if (hasWarmupTime) {
-      warmupTimer = timerServiceFactory.getTimerService(
-        timerSettings.warmup
-      );
+      warmupTimer = timerServiceFactory
+        .getTimerService(timerSettings.warmup);
       _warmupTickerSub = warmupTimer!.tickStream.listen(
         (t) => add(WarmupTicked(ticks: t))
       );
@@ -48,14 +48,15 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         (t) => add(WarmupCompleted())
       );
     }
-    durationTimer = timerServiceFactory.getTimerService(
-      timerSettings.duration
-    );
+
+    // Prepare the timer for the session
+    durationTimer = timerServiceFactory
+      .getTimerService(timerSettings.duration);
     _durationTickerSub = durationTimer.tickStream.listen(
       (t) => add(TimerTicked(ticks: t))
     );
     _durationFinishedSub = durationTimer.finishedStream.listen(
-      (_) => add(TimerCompleted())
+      (t) => add(TimerCompleted())
     );
 
     on<TimerStarted>(_onTimerStarted);
@@ -68,7 +69,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     on<TimerCompleted>(_onTimerCompleted);
     on<FinishTimer>(_onFinishTimer);
     on<TimerErrorOccurred>(_onTimerErrorOccurred);
-
   }
 
   bool get hasWarmupTime {
@@ -94,7 +94,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   void _onTimerStarted(TimerStarted start, emit) async {
     try {
       logger.v('Starting timer');
-
       if (hasWarmupTime) {
         logger.v('Warming up');
         warmupTimer!.start();
@@ -104,6 +103,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         ));
       } else {
         logger.v('No Warmup');
+        durationTimer.start();
         if (timerSettings.startingSound != Sound.none) {
           audioService.play(timerSettings.startingSound);
         }
@@ -112,7 +112,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
           timerStage: TimerStage.timer,
         ));
       }
-
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

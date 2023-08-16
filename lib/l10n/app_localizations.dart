@@ -174,13 +174,13 @@ abstract class AppLocalizations {
   /// No description provided for @timerFinishSessionButtonText.
   ///
   /// In hu, this message translates to:
-  /// **'Ülés befejezése'**
+  /// **'Befejezés'**
   String get timerFinishSessionButtonText;
 
   /// No description provided for @timerDiscardSessionButtonText.
   ///
   /// In hu, this message translates to:
-  /// **'Ülés elvetése'**
+  /// **'Megszakítás'**
   String get timerDiscardSessionButtonText;
 
   /// No description provided for @loginHeadline1.

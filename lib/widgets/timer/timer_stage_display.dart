@@ -25,6 +25,7 @@ class _TimerStageDisplayState extends State<TimerStageDisplay> {
   }
 
   Widget buildText(BuildContext context, TimerState timerState) {
+
     TextStyle style = Theme.of(context).textTheme.titleLarge!.copyWith(
       fontFamily: 'RobotoCondensed',
       fontWeight: FontWeight.bold,
