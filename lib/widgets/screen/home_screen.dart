@@ -40,23 +40,27 @@ class HomeScreen extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            const Positioned(
-                top: AppThemeData.spacingMd,
-                right: AppThemeData.spacingMd,
-                child: Wrap(
-                  children: [
-                    SettingsIcon(),
-                    SizedBox(width: AppThemeData.spacingSm),
-                    ProfileButton()
-                  ],
-                )
-            ),
             TimerSettingsView(
               timerSettings: timerSettings,
             ),
+            buildMenu(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildMenu(BuildContext context) {
+    return const Positioned(
+      top: AppThemeData.spacingMd,
+      right: AppThemeData.spacingMd,
+      child: Wrap(
+        children: [
+          SettingsIcon(),
+          SizedBox(width: AppThemeData.spacingSm),
+          ProfileButton()
+        ],
+      )
     );
   }
 

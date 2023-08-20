@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
-import 'package:dhyana/widgets/timer/timer_running_controls.dart';
-import 'package:dhyana/widgets/timer/timer_running_time_display.dart';
+import 'package:dhyana/widgets/timer/running/timer_running_controls.dart';
+import 'package:dhyana/widgets/timer/running/all.dart';
 import 'package:dhyana/widgets/util/app_error_display.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'timer_stage_display.dart';
+import 'running/timer_running_stage_display.dart';
 
 class TimerRunningView extends StatefulWidget {
 
   final TimerState timerState;
+  final void Function()? onInit;
   final void Function()? onBackground;
   final void Function()? onResume;
 
   const TimerRunningView({
     required this.timerState,
+    this.onInit,
     this.onBackground,
     this.onResume,
     super.key,
@@ -32,6 +34,7 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
   initState() {
     WakelockPlus.enable();
     WidgetsBinding.instance.addObserver(this);
+    widget.onInit?.call();
     super.initState();
   }
 

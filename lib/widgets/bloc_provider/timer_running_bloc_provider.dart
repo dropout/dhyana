@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
@@ -54,7 +55,7 @@ class TimerRunningBlocProvider extends StatelessWidget {
               ),
               audioService: DefaultAudioService(),
               crashlyticsService: crashlyticsService,
-            )..add(TimerEvent.started());
+            );
           },
           lazy: false,
         ),
@@ -65,7 +66,7 @@ class TimerRunningBlocProvider extends StatelessWidget {
               authRepository: authRepository,
               profileRepository: profileRepository,
               crashlyticsService: crashlyticsService,
-            )..add(const PresenceEvent.showPresence());
+            );
           },
           lazy: false,
         ),
@@ -77,7 +78,15 @@ class TimerRunningBlocProvider extends StatelessWidget {
               crashlyticsService: crashlyticsService,
             );
           },
-        )
+        ),
+        // BlocProvider<ProfileBloc>(
+        //   create: (BuildContext context) {
+        //     return ProfileBloc(
+        //       profileRepository: profileRepository,
+        //       crashlyticsService: crashlyticsService,
+        //     );
+        //   }
+        // )
       ],
       child: child
     );

@@ -20,6 +20,7 @@ ProfileStats _$ProfileStatsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProfileStats {
+  int get consecutiveDays => throw _privateConstructorUsedError;
   int get completedMinutesCount => throw _privateConstructorUsedError;
   int get completedSessionsCount => throw _privateConstructorUsedError;
   int get completedDaysCount => throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ abstract class $ProfileStatsCopyWith<$Res> {
       _$ProfileStatsCopyWithImpl<$Res, ProfileStats>;
   @useResult
   $Res call(
-      {int completedMinutesCount,
+      {int consecutiveDays,
+      int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
       DateTime? lastSessionDate});
@@ -57,12 +59,17 @@ class _$ProfileStatsCopyWithImpl<$Res, $Val extends ProfileStats>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? consecutiveDays = null,
     Object? completedMinutesCount = null,
     Object? completedSessionsCount = null,
     Object? completedDaysCount = null,
     Object? lastSessionDate = freezed,
   }) {
     return _then(_value.copyWith(
+      consecutiveDays: null == consecutiveDays
+          ? _value.consecutiveDays
+          : consecutiveDays // ignore: cast_nullable_to_non_nullable
+              as int,
       completedMinutesCount: null == completedMinutesCount
           ? _value.completedMinutesCount
           : completedMinutesCount // ignore: cast_nullable_to_non_nullable
@@ -92,7 +99,8 @@ abstract class _$$_ProfileStatsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int completedMinutesCount,
+      {int consecutiveDays,
+      int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
       DateTime? lastSessionDate});
@@ -109,12 +117,17 @@ class __$$_ProfileStatsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? consecutiveDays = null,
     Object? completedMinutesCount = null,
     Object? completedSessionsCount = null,
     Object? completedDaysCount = null,
     Object? lastSessionDate = freezed,
   }) {
     return _then(_$_ProfileStats(
+      consecutiveDays: null == consecutiveDays
+          ? _value.consecutiveDays
+          : consecutiveDays // ignore: cast_nullable_to_non_nullable
+              as int,
       completedMinutesCount: null == completedMinutesCount
           ? _value.completedMinutesCount
           : completedMinutesCount // ignore: cast_nullable_to_non_nullable
@@ -139,7 +152,8 @@ class __$$_ProfileStatsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
   const _$_ProfileStats(
-      {required this.completedMinutesCount,
+      {required this.consecutiveDays,
+      required this.completedMinutesCount,
       required this.completedSessionsCount,
       required this.completedDaysCount,
       this.lastSessionDate});
@@ -147,6 +161,8 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
   factory _$_ProfileStats.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileStatsFromJson(json);
 
+  @override
+  final int consecutiveDays;
   @override
   final int completedMinutesCount;
   @override
@@ -158,7 +174,7 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileStats(completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, lastSessionDate: $lastSessionDate)';
+    return 'ProfileStats(consecutiveDays: $consecutiveDays, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, lastSessionDate: $lastSessionDate)';
   }
 
   @override
@@ -166,6 +182,7 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ProfileStats'))
+      ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays))
       ..add(DiagnosticsProperty('completedMinutesCount', completedMinutesCount))
       ..add(
           DiagnosticsProperty('completedSessionsCount', completedSessionsCount))
@@ -178,6 +195,8 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProfileStats &&
+            (identical(other.consecutiveDays, consecutiveDays) ||
+                other.consecutiveDays == consecutiveDays) &&
             (identical(other.completedMinutesCount, completedMinutesCount) ||
                 other.completedMinutesCount == completedMinutesCount) &&
             (identical(other.completedSessionsCount, completedSessionsCount) ||
@@ -190,8 +209,13 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, completedMinutesCount,
-      completedSessionsCount, completedDaysCount, lastSessionDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      consecutiveDays,
+      completedMinutesCount,
+      completedSessionsCount,
+      completedDaysCount,
+      lastSessionDate);
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +233,8 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
 
 abstract class _ProfileStats implements ProfileStats {
   const factory _ProfileStats(
-      {required final int completedMinutesCount,
+      {required final int consecutiveDays,
+      required final int completedMinutesCount,
       required final int completedSessionsCount,
       required final int completedDaysCount,
       final DateTime? lastSessionDate}) = _$_ProfileStats;
@@ -217,6 +242,8 @@ abstract class _ProfileStats implements ProfileStats {
   factory _ProfileStats.fromJson(Map<String, dynamic> json) =
       _$_ProfileStats.fromJson;
 
+  @override
+  int get consecutiveDays;
   @override
   int get completedMinutesCount;
   @override

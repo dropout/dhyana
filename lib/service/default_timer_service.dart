@@ -32,7 +32,7 @@ class DefaultTimerService implements TimerService {
 
   @override
   void start() {
-    logger.v('Starting timer');
+    logger.v('Start');
 
     // If already running nothing to do
     if (_stopwatch.isRunning) {
@@ -59,7 +59,7 @@ class DefaultTimerService implements TimerService {
 
   @override
   void stop() {
-    logger.v('Stop timer');
+    logger.v('Stop');
     _stopwatch.stop();
     _timer?.cancel();
     _ticker?.cancel();
@@ -67,7 +67,7 @@ class DefaultTimerService implements TimerService {
 
   @override
   void reset() {
-    logger.v('Reset timer');
+    logger.v('Reset');
 
     // stop the timer
     _timer?.cancel();
@@ -89,7 +89,7 @@ class DefaultTimerService implements TimerService {
   }
 
   void _handleTimerFinished() {
-    logger.v('Timer finished');
+    logger.v('Finish');
 
     _timer?.cancel();
     _timer = null;

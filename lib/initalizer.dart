@@ -42,7 +42,7 @@ class Initializer {
 
     // Data providers
     logger.v('Initialize data providers');
-    FirebaseProfileDataProvider fbProfileDataProvider =
+    FirebaseProfileDataProvider profileDataProvider =
       FirebaseProfileDataProvider(FirebaseFirestore.instance);
     FirebaseStorageDataProvider fbStorageDataProvider =
       FirebaseStorageDataProvider(FirebaseStorage.instance);
@@ -66,10 +66,10 @@ class Initializer {
     logger.v('Initialize repositories');
     AuthRepository authRepository = FirebaseAuthRepository(
       authDataProvider: FirebaseAuthProvider(fb_auth.FirebaseAuth.instance),
-      profileDataProvider: fbProfileDataProvider,
+      profileDataProvider: profileDataProvider,
     );
     ProfileRepository profileRepository = FirebaseProfileRepository(
-      profileDataProvider: fbProfileDataProvider,
+      profileDataProvider: profileDataProvider,
       storageDataProvider: fbStorageDataProvider,
     );
     PresenceRepository presenceRepository = FirebasePresenceRepository(
@@ -81,7 +81,8 @@ class Initializer {
     SessionRepository sessionRepository = FirebaseSessionRepository(
       sessionDataProvider: FirebaseSessionDataProvider(
         fireStore: FirebaseFirestore.instance,
-      )
+      ),
+      profileDataProvider: profileDataProvider,
     );
 
     Repositories repos = Repositories(

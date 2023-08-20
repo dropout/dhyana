@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/widgets/app_colors.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
-import 'package:dhyana/widgets/timer/input/duration_input_view.dart';
+
+import 'duration_input_view.dart';
 
 class DurationInput extends StatefulWidget {
   

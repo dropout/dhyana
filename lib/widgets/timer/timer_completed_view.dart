@@ -1,18 +1,40 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widgets/presence/all.dart';
+import 'package:dhyana/widgets/profile/profile_avatar.dart';
+import 'package:dhyana/widgets/timer/completed/signed_in_view.dart';
+import 'package:dhyana/widgets/timer/completed/signed_out_view.dart';
+import 'package:dhyana/widgets/util/app_button.dart';
+import 'package:dhyana/widgets/util/signed_in.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
 
-class TimerCompletedView extends StatelessWidget {
+class TimerCompletedView extends StatefulWidget {
 
   final TimerState timerState;
 
   const TimerCompletedView({
     required this.timerState,
-    super.key
+    super.key,
   });
+
+  @override
+  State<TimerCompletedView> createState() => _TimerCompletedViewState();
+}
+
+class _TimerCompletedViewState extends State<TimerCompletedView> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void _onOkayButtonPressed(BuildContext context) {
     context.goNamed(AppScreen.home.name);
@@ -20,63 +42,59 @@ class TimerCompletedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Stack(
+      fit: StackFit.expand,
       children: [
-        Expanded(
-          child: Container(
-            color: Colors.red,
-            child: Column(
-              children: [
-                Text('Completed!',
-                  style: Theme.of(context).textTheme.displayMedium
-                ),
-                const SizedBox(height: AppThemeData.spacingMd),
-                buildStats(context, timerState),
-              ],
+        SingleChildScrollView(
+          child: SignedIn(
+            yes: (User user) {
+              return SignedInView(
+                timerState: widget.timerState,
+                user: user,
+              );
+            },
+            no: SignedOutView(
+              timerState: widget.timerState,
             )
-          )
-        ),
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: TextButton(
-            onPressed: () => _onOkayButtonPressed(context),
-            style: TextButton.styleFrom(
-              minimumSize: const Size(double.infinity, 48.0),
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.red,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(AppThemeData.borderRadiusMd)
-                )
-              ),
-            ),
-            child: Text(
-              AppLocalizations.of(context).okay.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-              )
-            ),
           ),
         ),
+        _buildBuyButton(context),
       ],
     );
   }
 
-  Widget buildStats(BuildContext context, TimerState timerState) {
-
-    DateTime startedAt = DateTime.now().subtract(timerState.elapsedTime);
-    DateTime finishedAt = DateTime.now();
-
-    return Column(
-      children: [
-        Text('Started at: ${startedAt.toLocal()}'),
-        Text('Finished at: ${finishedAt.toLocal()}'),
-        Text('Duration: ${timerState.elapsedTime}'),
-      ],
+  Widget _buildBuyButton(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          Container(
+            height: 96,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.0, 0.8],
+                colors: [
+                  Colors.transparent,
+                  Colors.black,
+                ]
+              )
+            )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(AppThemeData.spacingMd),
+            child: AppButton(
+              text: AppLocalizations.of(context).okay.toUpperCase(),
+              bColor: Colors.white,
+              fColor: Colors.black,
+              onTap: () => _onOkayButtonPressed(context),
+            ),
+          ),
+        ],
+      ),
     );
-
   }
 
 }

@@ -8,10 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'duration_time_indicator.dart';
-import 'input/duration_input.dart';
-import 'input/sound_input.dart';
-import 'input/warmup_input.dart';
+import 'settings/duration_indicator.dart';
+import 'settings/all.dart';
 
 class TimerSettingsView extends StatefulWidget {
   
@@ -102,7 +100,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             ],
           ),
         ),
-        DurationTimeIndicator(
+        DurationIndicator(
           timerSettings: widget.timerSettings,
           key: ValueKey<TimerSettings>(widget.timerSettings),
         ),

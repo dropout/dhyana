@@ -6,7 +6,8 @@ class DurationConverter implements JsonConverter<Duration, int>  {
 
   @override
   Duration fromJson(int json) {
-    return Duration(seconds: json);
+    // return Duration(seconds: json);
+    return const Duration(seconds: 10);
   }
 
   @override

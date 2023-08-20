@@ -22,8 +22,9 @@ class FirebaseSessionDataProvider implements SessionDataProvider {
 
   @override
   Future<Session> addSession(String profileId, Session session) async {
-    CollectionReference<Session> collectionReference = getCollection(profileId);
-    await collectionReference.add(session);
+    await getCollection(profileId)
+      .doc(session.id)
+      .set(session);
     return session;
   }
 

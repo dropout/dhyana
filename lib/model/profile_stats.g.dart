@@ -8,6 +8,7 @@ part of 'profile_stats.dart';
 
 _$_ProfileStats _$$_ProfileStatsFromJson(Map<String, dynamic> json) =>
     _$_ProfileStats(
+      consecutiveDays: json['consecutiveDays'] as int,
       completedMinutesCount: json['completedMinutesCount'] as int,
       completedSessionsCount: json['completedSessionsCount'] as int,
       completedDaysCount: json['completedDaysCount'] as int,
@@ -18,6 +19,7 @@ _$_ProfileStats _$$_ProfileStatsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ProfileStatsToJson(_$_ProfileStats instance) =>
     <String, dynamic>{
+      'consecutiveDays': instance.consecutiveDays,
       'completedMinutesCount': instance.completedMinutesCount,
       'completedSessionsCount': instance.completedSessionsCount,
       'completedDaysCount': instance.completedDaysCount,

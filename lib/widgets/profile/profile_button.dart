@@ -36,7 +36,7 @@ class ProfileButton extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case AuthStateSignedIn():
-            return buildSignedIn(context);
+            return buildSignedIn(context, state);
           default:
             return buildSignedOut(context);
         }
@@ -57,8 +57,9 @@ class ProfileButton extends StatelessWidget {
     );
   }
 
-  Widget buildSignedIn(context) {
+  Widget buildSignedIn(BuildContext context, AuthStateSignedIn authState) {
     return ProfileBlocProvider(
+      initialEvent: ProfileEvent.loadProfile(profileId: authState.user.uid),
       child: buildProfileStateDisplay(context),
     );
   }
@@ -68,15 +69,15 @@ class ProfileButton extends StatelessWidget {
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
           case ProfileLoadedState():
-            return buildLoaded(context, state.profile);
+            return buildProfileLoaded(context, state.profile);
           default:
-            return buildLoading(context);
+            return buildProfileLoading(context);
         }
       }
     );
   }
 
-  Widget buildLoading(BuildContext context) {
+  Widget buildProfileLoading(BuildContext context) {
     return const HomeScreenMenuButton(
       child: Center(
         child: AppCircularProgressIndicator(),
@@ -84,7 +85,7 @@ class ProfileButton extends StatelessWidget {
     );
   }
 
-  Widget buildLoaded(BuildContext context, Profile profile) {
+  Widget buildProfileLoaded(BuildContext context, Profile profile) {
     return GestureDetector(
       onTap: () => _signedInTap(context, profile),
       child: HomeScreenMenuButton(

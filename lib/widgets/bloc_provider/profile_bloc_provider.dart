@@ -7,40 +7,31 @@ import 'package:provider/provider.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 
 class ProfileBlocProvider extends StatelessWidget {
-
   final Widget child;
-
+  final ProfileEvent? initialEvent;
   const ProfileBlocProvider({
     required this.child,
+    this.initialEvent,
     super.key
   });
-
   @override
   Widget build(BuildContext context) {
     CrashlyticsService crashlyticsService =
       Provider.of<CrashlyticsService>(context);
-
     ProfileRepository profileRepository =
       Provider.of<ProfileRepository>(context);
-
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (BuildContext context, AuthState authState) {
-        switch(authState) {
-          case AuthStateSignedIn():
-            return BlocProvider<ProfileBloc>(
-              create: (context) => ProfileBloc(
-                profileRepository: profileRepository,
-                crashlyticsService: crashlyticsService,
-              )..add(ProfileEvent.loadProfile(profileId: authState.user.uid)),
-              child: child,
-            );
-          default:
-            return const Text('User not signed in');
+    return BlocProvider<ProfileBloc>(
+      create: (context) {
+        ProfileBloc profileBloc = ProfileBloc(
+          profileRepository: profileRepository,
+          crashlyticsService: crashlyticsService,
+        );
+        if (initialEvent != null) {
+          profileBloc.add(initialEvent!);
         }
-
-      }
+        return profileBloc;
+      },
+      child: child,
     );
-
   }
-
 }

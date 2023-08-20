@@ -9,6 +9,7 @@ part 'profile_stats.g.dart';
 class ProfileStats with _$ProfileStats {
 
   const factory ProfileStats({
+    required int consecutiveDays,
     required int completedMinutesCount,
     required int completedSessionsCount,
     required int completedDaysCount,
@@ -16,6 +17,7 @@ class ProfileStats with _$ProfileStats {
   }) = _ProfileStats;
 
   factory ProfileStats.empty() => const ProfileStats(
+    consecutiveDays: 0,
     completedMinutesCount: 0,
     completedSessionsCount: 0,
     completedDaysCount: 0,

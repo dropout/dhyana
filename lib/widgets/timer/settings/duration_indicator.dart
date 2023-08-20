@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dhyana/model/timer_settings.dart';
 
-class DurationTimeIndicator extends StatefulWidget {
+class DurationIndicator extends StatefulWidget {
 
   final TimerSettings timerSettings;
 
-  const DurationTimeIndicator({
+  const DurationIndicator({
     required this.timerSettings,
     super.key
   });
 
   @override
-  State<DurationTimeIndicator> createState() => _DurationTimeIndicatorState();
+  State<DurationIndicator> createState() => _DurationIndicatorState();
 }
 
-class _DurationTimeIndicatorState extends State<DurationTimeIndicator> {
+class _DurationIndicatorState extends State<DurationIndicator> {
 
   late final Timer _timer;
 

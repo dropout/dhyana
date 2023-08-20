@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/profile_stats.dart';
+import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -47,6 +48,21 @@ class Profile with _$Profile implements Model {
       completed: completed,
     );
   }
+
+  factory Profile.anonymous() {
+    return Profile(
+      id: FirebaseFirestore.instance.collection('profiles').doc().id,
+      firstName: DefaultProfileData.firstName,
+      lastName: DefaultProfileData.lastName,
+      email: '',
+      photoUrl: DefaultProfileData.photoUrl,
+      photoBlurhash: DefaultProfileData.photoBlurhash,
+      signupDate: DateTime.now(),
+      stats: ProfileStats.empty(),
+      completed: false,
+    );
+  }
+
 
   factory Profile.fromJson(Map<String, Object?> json) =>
     _$ProfileFromJson(json);

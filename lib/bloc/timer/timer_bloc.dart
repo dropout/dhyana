@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dhyana/repository/presence_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final TimerSettings timerSettings;
   final TimerServiceFactory timerServiceFactory;
   final AudioService audioService;
+
   final CrashlyticsService crashlyticsService;
 
   TimerService? warmupTimer;
@@ -34,6 +36,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     required this.timerSettings,
     required this.timerServiceFactory,
     required this.audioService,
+
     required this.crashlyticsService,
   }) : super(TimerState.initial(timerSettings: timerSettings)) {
 
@@ -50,6 +53,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     }
 
     // Prepare the timer for the session
+
+
     durationTimer = timerServiceFactory
       .getTimerService(timerSettings.duration);
     _durationTickerSub = durationTimer.tickStream.listen(

@@ -1,4 +1,5 @@
 import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/repository/auth_repository.dart';
@@ -40,14 +41,14 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
         return;
       }
       await sessionRepository.addSession(
-        user.uid,
         Session.generateId(
           profileId: user.uid,
           startTime: event.startTime,
           endTime: event.endTime,
           duration: event.startTime.difference(event.endTime),
           timerSettings: event.timerSettings,
-        )
+        ),
+        event.profile,
       );
       logger.v('Session successfully added!');
     } catch(e, stack) {
@@ -64,7 +65,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     try {
       logger.v('Loading sessions');
       emit(const SessionsState.loading());
-      List<Session> sessions = await sessionRepository.getSessions(event.profileId);
+      List<Session> sessions = await sessionRepository.getSessions(event.profile);
       logger.v('Sessions successfully loaded');
       emit(SessionsState.loaded(sessions: sessions));
     } catch(e, stack) {
@@ -74,7 +75,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
         stackTrace: stack,
         reason: 'Unable to add session'
       );
-      logger.v('Failed to load sessions for: ${event.profileId}');
+      logger.v('Failed to load sessions for: ${event.profile.displayName}');
     }
   }
 

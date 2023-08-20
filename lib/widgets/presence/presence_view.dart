@@ -15,13 +15,13 @@ class PresenceView extends StatelessWidget {
       builder: (BuildContext context, PresenceState state) {
         switch (state) {
           case PresenceLoadingState():
-            return const AppLoadingDisplay();
+            return const Text('loading');
           case PresenceLoadedState():
             return buildLoaded(context, state.presenceList);
           case PresenceErrorState():
-            return const AppErrorDisplay();
+            return const Text('error');
           default:
-            return const AppLoadingDisplay();
+            return buildLoaded(context, []);
         }
       },
     );

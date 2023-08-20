@@ -4,8 +4,8 @@ import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widgets/app_colors.dart';
-import 'package:dhyana/widgets/timer/input/input_value_display.dart';
 
+import 'input_value_display.dart';
 import 'sound_input_view.dart';
 
 class SoundInput extends StatefulWidget {
