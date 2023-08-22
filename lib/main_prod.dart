@@ -25,6 +25,8 @@ void main() async {
     overlays: [SystemUiOverlay.bottom]
   );
 
+  // Bloc.observer = DebugPrintBlocObserver();
+
   Initializer initializer = Initializer();
   InitResult initResult = await initializer.init();
   runApp(App(

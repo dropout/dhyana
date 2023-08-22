@@ -13,18 +13,17 @@ class PresenceQueryOptions with _$PresenceQueryOptions implements QueryOptions<P
   const PresenceQueryOptions._();
 
   const factory PresenceQueryOptions({
-    String? ownProfileId,
+    @Default(Duration(hours: 3)) Duration windowSize,
   }) = _PresenceQueryOptions;
 
   @override
   Query<Presence> prepareQuery(CollectionReference<Presence> collectionReference) {
-    if (ownProfileId != null) {
-      return collectionReference
-        .where(FieldPath(const ['profile', 'id']), isNotEqualTo: ownProfileId)
-        .limit(20);
-    } else {
-      return collectionReference.limit(20);
-    }
+    Query<Presence> query = collectionReference;
+    query = query
+      .where('startedAt', isGreaterThan: Timestamp.fromDate(DateTime.now().subtract(windowSize)))
+      .where('startedAt', isLessThan: Timestamp.fromDate(DateTime.now()));
+
+    return query.limit(20);
   }
 
 }

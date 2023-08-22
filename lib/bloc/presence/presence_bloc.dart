@@ -57,23 +57,21 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
       logger.v('Checking if the user is signed in');
       User? user = await authRepository.user;
       if (user == null) {
-        logger.v('User is not signed in, showing anonymous presence.');
-        await presenceRepository.showPresence(Presence.generateId(
-          profile: PublicProfile.anonymous(),
-          startedAt: DateTime.now(),
-        ));
+        logger.v('User is not signed in, not showing presence.');
         return;
       }
       Profile profile = await profileRepository.getProfileById(user.uid);
       if (profile.completed) {
-        logger.v('User signed in and profile is complete, showing real presence.');
-        await presenceRepository.showPresence(Presence.generateId(
+        logger.v('User signed in and profile is complete, showing presence.');
+        await presenceRepository.showPresence(Presence(
+          id: profile.id,
           profile: PublicProfile.fromProfile(profile: profile),
           startedAt: DateTime.now(),
         ));
       } else {
         logger.v('User is signed in but profile is incomplete, showing anonymous presence.');
-        await presenceRepository.showPresence(Presence.generateId(
+        await presenceRepository.showPresence(Presence(
+          id: profile.id,
           profile: PublicProfile.anonymous(),
           startedAt: DateTime.now(),
         ));

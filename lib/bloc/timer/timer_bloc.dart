@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dhyana/repository/presence_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +35,10 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     required this.timerSettings,
     required this.timerServiceFactory,
     required this.audioService,
-
     required this.crashlyticsService,
   }) : super(TimerState.initial(timerSettings: timerSettings)) {
 
-    // Prepare warmup time
+    // Prepare warmup timer
     if (hasWarmupTime) {
       warmupTimer = timerServiceFactory
         .getTimerService(timerSettings.warmup);
@@ -53,8 +51,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     }
 
     // Prepare the timer for the session
-
-
     durationTimer = timerServiceFactory
       .getTimerService(timerSettings.duration);
     _durationTickerSub = durationTimer.tickStream.listen(
@@ -99,24 +95,24 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   void _onTimerStarted(TimerStarted start, emit) async {
     try {
       logger.v('Starting timer');
+      TimerStage stage;
       if (hasWarmupTime) {
-        logger.v('Warming up');
+        logger.v('Has warmup time');
         warmupTimer!.start();
-        emit(state.copyWith(
-          timerStatus: TimerStatus.running,
-          timerStage: TimerStage.warmup,
-        ));
+        stage = TimerStage.warmup;
       } else {
-        logger.v('No Warmup');
+        logger.v('No Warmup time');
         durationTimer.start();
         if (timerSettings.startingSound != Sound.none) {
           audioService.play(timerSettings.startingSound);
         }
-        emit(state.copyWith(
-          timerStatus: TimerStatus.running,
-          timerStage: TimerStage.timer,
-        ));
+        stage = TimerStage.timer;
       }
+      emit(state.copyWith(
+        startTime: DateTime.now(),
+        timerStatus: TimerStatus.running,
+        timerStage: stage,
+      ));
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -161,11 +157,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       warmupTimer!.reset();
     }
     durationTimer.reset();
-    emit(state.copyWith(
-      elapsedWarmupTime: Duration.zero,
-      elapsedTime: Duration.zero,
-      timerStatus: TimerStatus.idle
-    ));
+    emit(TimerState.initial(timerSettings: timerSettings));
   }
 
   void _onWarmupTicked(WarmupTicked event, emit) {
@@ -206,10 +198,11 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     if (timerSettings.endingSound != Sound.none) {
       audioService.play(timerSettings.endingSound);
     }
-
     emit(state.copyWith(
       timerStatus: TimerStatus.completed,
+      elapsedWarmupTime: elapsedWarmupTime,
       elapsedTime: durationTimer.elapsedTime,
+      endTime: DateTime.now(),
     ));
   }
 
@@ -222,6 +215,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       timerStatus: TimerStatus.completed,
       elapsedWarmupTime: elapsedWarmupTime,
       elapsedTime: durationTimer.elapsedTime,
+      endTime: DateTime.now(),
     ));
   }
 

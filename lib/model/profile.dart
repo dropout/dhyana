@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/profile_stats.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,7 +22,7 @@ class Profile with _$Profile implements Model {
     required String email,
     required String photoUrl,
     required String photoBlurhash,
-    required DateTime signupDate,
+    @DateTimeConverter() required DateTime signupDate,
     required ProfileStats stats,
     required bool completed,
   }) = _Profile;

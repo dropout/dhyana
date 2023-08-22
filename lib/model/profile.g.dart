@@ -13,7 +13,8 @@ _$_Profile _$$_ProfileFromJson(Map<String, dynamic> json) => _$_Profile(
       email: json['email'] as String,
       photoUrl: json['photoUrl'] as String,
       photoBlurhash: json['photoBlurhash'] as String,
-      signupDate: DateTime.parse(json['signupDate'] as String),
+      signupDate:
+          const DateTimeConverter().fromJson(json['signupDate'] as Timestamp),
       stats: ProfileStats.fromJson(json['stats'] as Map<String, dynamic>),
       completed: json['completed'] as bool,
     );
@@ -26,7 +27,7 @@ Map<String, dynamic> _$$_ProfileToJson(_$_Profile instance) =>
       'email': instance.email,
       'photoUrl': instance.photoUrl,
       'photoBlurhash': instance.photoBlurhash,
-      'signupDate': instance.signupDate.toIso8601String(),
+      'signupDate': const DateTimeConverter().toJson(instance.signupDate),
       'stats': instance.stats.toJson(),
       'completed': instance.completed,
     };

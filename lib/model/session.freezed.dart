@@ -21,7 +21,9 @@ Session _$SessionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Session {
   String get id => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get startTime => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get endTime => throw _privateConstructorUsedError;
   @DurationConverter()
   Duration get duration => throw _privateConstructorUsedError;
@@ -39,8 +41,8 @@ abstract class $SessionCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      DateTime startTime,
-      DateTime endTime,
+      @DateTimeConverter() DateTime startTime,
+      @DateTimeConverter() DateTime endTime,
       @DurationConverter() Duration duration,
       TimerSettings timerSettings});
 
@@ -108,8 +110,8 @@ abstract class _$$_SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      DateTime startTime,
-      DateTime endTime,
+      @DateTimeConverter() DateTime startTime,
+      @DateTimeConverter() DateTime endTime,
       @DurationConverter() Duration duration,
       TimerSettings timerSettings});
 
@@ -163,8 +165,8 @@ class __$$_SessionCopyWithImpl<$Res>
 class _$_Session extends _Session with DiagnosticableTreeMixin {
   const _$_Session(
       {required this.id,
-      required this.startTime,
-      required this.endTime,
+      @DateTimeConverter() required this.startTime,
+      @DateTimeConverter() required this.endTime,
       @DurationConverter() required this.duration,
       required this.timerSettings})
       : super._();
@@ -175,8 +177,10 @@ class _$_Session extends _Session with DiagnosticableTreeMixin {
   @override
   final String id;
   @override
+  @DateTimeConverter()
   final DateTime startTime;
   @override
+  @DateTimeConverter()
   final DateTime endTime;
   @override
   @DurationConverter()
@@ -238,8 +242,8 @@ class _$_Session extends _Session with DiagnosticableTreeMixin {
 abstract class _Session extends Session {
   const factory _Session(
       {required final String id,
-      required final DateTime startTime,
-      required final DateTime endTime,
+      @DateTimeConverter() required final DateTime startTime,
+      @DateTimeConverter() required final DateTime endTime,
       @DurationConverter() required final Duration duration,
       required final TimerSettings timerSettings}) = _$_Session;
   const _Session._() : super._();
@@ -249,8 +253,10 @@ abstract class _Session extends Session {
   @override
   String get id;
   @override
+  @DateTimeConverter()
   DateTime get startTime;
   @override
+  @DateTimeConverter()
   DateTime get endTime;
   @override
   @DurationConverter()

@@ -12,9 +12,8 @@ _$_ProfileStats _$$_ProfileStatsFromJson(Map<String, dynamic> json) =>
       completedMinutesCount: json['completedMinutesCount'] as int,
       completedSessionsCount: json['completedSessionsCount'] as int,
       completedDaysCount: json['completedDaysCount'] as int,
-      lastSessionDate: json['lastSessionDate'] == null
-          ? null
-          : DateTime.parse(json['lastSessionDate'] as String),
+      lastSessionDate: _$JsonConverterFromJson<Timestamp, DateTime>(
+          json['lastSessionDate'], const DateTimeConverter().fromJson),
     );
 
 Map<String, dynamic> _$$_ProfileStatsToJson(_$_ProfileStats instance) =>
@@ -23,5 +22,18 @@ Map<String, dynamic> _$$_ProfileStatsToJson(_$_ProfileStats instance) =>
       'completedMinutesCount': instance.completedMinutesCount,
       'completedSessionsCount': instance.completedSessionsCount,
       'completedDaysCount': instance.completedDaysCount,
-      'lastSessionDate': instance.lastSessionDate?.toIso8601String(),
+      'lastSessionDate': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.lastSessionDate, const DateTimeConverter().toJson),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

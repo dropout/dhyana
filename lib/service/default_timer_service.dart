@@ -32,7 +32,7 @@ class DefaultTimerService implements TimerService {
 
   @override
   void start() {
-    logger.v('Start');
+    logger.v('Start - ${DateTime.now()}');
 
     // If already running nothing to do
     if (_stopwatch.isRunning) {
@@ -52,7 +52,7 @@ class DefaultTimerService implements TimerService {
       }
     );
 
-    _timer = Timer(_getRemainingTime(), _handleTimerFinished);
+    _timer = Timer(_getRemainingTime(), _handleTimerCompleted);
 
     _stopwatch.start();
   }
@@ -88,8 +88,8 @@ class DefaultTimerService implements TimerService {
     _ticks = 0;
   }
 
-  void _handleTimerFinished() {
-    logger.v('Finish');
+  void _handleTimerCompleted() {
+    logger.v('Complete - ${DateTime.now()}');
 
     _timer?.cancel();
     _timer = null;

@@ -35,8 +35,6 @@ sealed class TimerState with _$TimerState {
       timerStage: TimerStage.warmup,
       elapsedWarmupTime: Duration.zero,
       elapsedTime: Duration.zero,
-      startTime: null,
-      endTime: null,
     );
   }
 

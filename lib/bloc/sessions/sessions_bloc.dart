@@ -41,6 +41,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
         return;
       }
       await sessionRepository.addSession(
+        event.profileId,
         Session.generateId(
           profileId: user.uid,
           startTime: event.startTime,
@@ -48,7 +49,6 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
           duration: event.startTime.difference(event.endTime),
           timerSettings: event.timerSettings,
         ),
-        event.profile,
       );
       logger.v('Session successfully added!');
     } catch(e, stack) {
@@ -65,7 +65,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     try {
       logger.v('Loading sessions');
       emit(const SessionsState.loading());
-      List<Session> sessions = await sessionRepository.getSessions(event.profile);
+      List<Session> sessions = await sessionRepository.getSessions(event.profile.id);
       logger.v('Sessions successfully loaded');
       emit(SessionsState.loaded(sessions: sessions));
     } catch(e, stack) {

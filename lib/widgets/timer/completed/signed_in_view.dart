@@ -1,5 +1,5 @@
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
@@ -30,6 +30,11 @@ class SignedInView extends StatefulWidget {
 class _SignedInViewState extends State<SignedInView> {
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ProfileBlocProvider(
       initialEvent: ProfileEvent.loadProfile(profileId: widget.user.uid),
@@ -38,15 +43,31 @@ class _SignedInViewState extends State<SignedInView> {
   }
 
   Widget buildColumn(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (context, state) {
-        switch (state) {
-          case ProfileLoadedState():
-            return buildLoaded(context, state.profile);
-          default:
-            return buildLoading(context);
-        }
+    return BlocListener<TimerBloc, TimerState>(
+      listenWhen: (TimerState prev, TimerState current) {
+        return (prev.timerStatus != TimerStatus.completed && current.timerStatus == TimerStatus.completed);
       },
+      listener: (BuildContext context, TimerState state) {
+        SessionsBloc sessionsBloc = BlocProvider.of<SessionsBloc>(context);
+        sessionsBloc.add(
+          SessionsEvent.addSession(
+            profileId: widget.user.uid,
+            startTime: state.startTime!,
+            endTime: state.endTime!,
+            timerSettings: state.timerSettings,
+          )
+        );
+      },
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          switch (state) {
+            case ProfileLoadedState():
+              return buildLoaded(context, state.profile);
+            default:
+              return buildLoading(context);
+          }
+        },
+      ),
     );
   }
 
@@ -93,6 +114,9 @@ class _SignedInViewState extends State<SignedInView> {
           padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
           child: PresenceArea(
             profile: profile,
+            onInit: () => BlocProvider.of<PresenceBloc>(context).add(
+              PresenceEvent.load(ownProfileId: widget.user.uid)
+            ),
           ),
         ),
         const SizedBox(height: AppThemeData.spacing4xl),

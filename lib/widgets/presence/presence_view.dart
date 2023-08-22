@@ -1,8 +1,6 @@
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widgets/presence/all.dart';
-import 'package:dhyana/widgets/util/app_error_display.dart';
-import 'package:dhyana/widgets/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

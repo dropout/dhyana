@@ -1,15 +1,9 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
-import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widgets/presence/all.dart';
-import 'package:dhyana/widgets/profile/profile_avatar.dart';
 import 'package:dhyana/widgets/timer/completed/signed_in_view.dart';
 import 'package:dhyana/widgets/timer/completed/signed_out_view.dart';
 import 'package:dhyana/widgets/util/app_button.dart';
 import 'package:dhyana/widgets/util/signed_in.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';

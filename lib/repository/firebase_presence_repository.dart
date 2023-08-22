@@ -13,12 +13,18 @@ class FirebasePresenceRepository implements PresenceRepository {
   });
 
   @override
-  Future<List<Presence>> getPresence(String? ownProfileId) {
-    return presenceDataProvider.getItems(
-      PresenceQueryOptions(
-        ownProfileId: ownProfileId
+  Future<List<Presence>> getPresence(String? ownProfileId) async {
+    List<Presence> items = await presenceDataProvider.getItems(
+      const PresenceQueryOptions(
+        windowSize: Duration(hours: 3),
       )
     );
+
+    if (ownProfileId != null) {
+      items = items.where((p) => p.profile.id != ownProfileId).toList();
+    }
+
+    return items;
   }
 
   @override

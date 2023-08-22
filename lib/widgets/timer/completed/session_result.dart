@@ -61,10 +61,6 @@ class _SessionResultState extends State<SessionResult> {
         ]
       )
     );
-    return Text(
-      'You completed ${timeElapsed.inMinutes} minutes',
-      style: Theme.of(context).textTheme.titleMedium,
-    );
   }
 
 }

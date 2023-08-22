@@ -24,6 +24,7 @@ mixin _$ProfileStats {
   int get completedMinutesCount => throw _privateConstructorUsedError;
   int get completedSessionsCount => throw _privateConstructorUsedError;
   int get completedDaysCount => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime? get lastSessionDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $ProfileStatsCopyWith<$Res> {
       int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
-      DateTime? lastSessionDate});
+      @DateTimeConverter() DateTime? lastSessionDate});
 }
 
 /// @nodoc
@@ -103,7 +104,7 @@ abstract class _$$_ProfileStatsCopyWith<$Res>
       int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
-      DateTime? lastSessionDate});
+      @DateTimeConverter() DateTime? lastSessionDate});
 }
 
 /// @nodoc
@@ -156,7 +157,7 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
       required this.completedMinutesCount,
       required this.completedSessionsCount,
       required this.completedDaysCount,
-      this.lastSessionDate});
+      @DateTimeConverter() this.lastSessionDate});
 
   factory _$_ProfileStats.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileStatsFromJson(json);
@@ -170,6 +171,7 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
   @override
   final int completedDaysCount;
   @override
+  @DateTimeConverter()
   final DateTime? lastSessionDate;
 
   @override
@@ -237,7 +239,7 @@ abstract class _ProfileStats implements ProfileStats {
       required final int completedMinutesCount,
       required final int completedSessionsCount,
       required final int completedDaysCount,
-      final DateTime? lastSessionDate}) = _$_ProfileStats;
+      @DateTimeConverter() final DateTime? lastSessionDate}) = _$_ProfileStats;
 
   factory _ProfileStats.fromJson(Map<String, dynamic> json) =
       _$_ProfileStats.fromJson;
@@ -251,6 +253,7 @@ abstract class _ProfileStats implements ProfileStats {
   @override
   int get completedDaysCount;
   @override
+  @DateTimeConverter()
   DateTime? get lastSessionDate;
   @override
   @JsonKey(ignore: true)

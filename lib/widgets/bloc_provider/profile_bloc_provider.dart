@@ -1,4 +1,3 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:flutter/material.dart';

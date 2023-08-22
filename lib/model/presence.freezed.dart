@@ -22,8 +22,8 @@ Presence _$PresenceFromJson(Map<String, dynamic> json) {
 mixin _$Presence {
   String get id => throw _privateConstructorUsedError;
   PublicProfile get profile => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get startedAt => throw _privateConstructorUsedError;
-  DateTime? get finishedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,8 +39,7 @@ abstract class $PresenceCopyWith<$Res> {
   $Res call(
       {String id,
       PublicProfile profile,
-      DateTime startedAt,
-      DateTime? finishedAt});
+      @DateTimeConverter() DateTime startedAt});
 
   $PublicProfileCopyWith<$Res> get profile;
 }
@@ -61,7 +60,6 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
     Object? id = null,
     Object? profile = null,
     Object? startedAt = null,
-    Object? finishedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -76,10 +74,6 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      finishedAt: freezed == finishedAt
-          ? _value.finishedAt
-          : finishedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 
@@ -102,8 +96,7 @@ abstract class _$$_PresenceCopyWith<$Res> implements $PresenceCopyWith<$Res> {
   $Res call(
       {String id,
       PublicProfile profile,
-      DateTime startedAt,
-      DateTime? finishedAt});
+      @DateTimeConverter() DateTime startedAt});
 
   @override
   $PublicProfileCopyWith<$Res> get profile;
@@ -123,7 +116,6 @@ class __$$_PresenceCopyWithImpl<$Res>
     Object? id = null,
     Object? profile = null,
     Object? startedAt = null,
-    Object? finishedAt = freezed,
   }) {
     return _then(_$_Presence(
       id: null == id
@@ -138,10 +130,6 @@ class __$$_PresenceCopyWithImpl<$Res>
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      finishedAt: freezed == finishedAt
-          ? _value.finishedAt
-          : finishedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -152,8 +140,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
   const _$_Presence(
       {required this.id,
       required this.profile,
-      required this.startedAt,
-      this.finishedAt})
+      @DateTimeConverter() required this.startedAt})
       : super._();
 
   factory _$_Presence.fromJson(Map<String, dynamic> json) =>
@@ -164,13 +151,12 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
   @override
   final PublicProfile profile;
   @override
+  @DateTimeConverter()
   final DateTime startedAt;
-  @override
-  final DateTime? finishedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Presence(id: $id, profile: $profile, startedAt: $startedAt, finishedAt: $finishedAt)';
+    return 'Presence(id: $id, profile: $profile, startedAt: $startedAt)';
   }
 
   @override
@@ -180,8 +166,7 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'Presence'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('profile', profile))
-      ..add(DiagnosticsProperty('startedAt', startedAt))
-      ..add(DiagnosticsProperty('finishedAt', finishedAt));
+      ..add(DiagnosticsProperty('startedAt', startedAt));
   }
 
   @override
@@ -192,15 +177,12 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.startedAt, startedAt) ||
-                other.startedAt == startedAt) &&
-            (identical(other.finishedAt, finishedAt) ||
-                other.finishedAt == finishedAt));
+                other.startedAt == startedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, profile, startedAt, finishedAt);
+  int get hashCode => Object.hash(runtimeType, id, profile, startedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -220,8 +202,7 @@ abstract class _Presence extends Presence {
   const factory _Presence(
       {required final String id,
       required final PublicProfile profile,
-      required final DateTime startedAt,
-      final DateTime? finishedAt}) = _$_Presence;
+      @DateTimeConverter() required final DateTime startedAt}) = _$_Presence;
   const _Presence._() : super._();
 
   factory _Presence.fromJson(Map<String, dynamic> json) = _$_Presence.fromJson;
@@ -231,9 +212,8 @@ abstract class _Presence extends Presence {
   @override
   PublicProfile get profile;
   @override
+  @DateTimeConverter()
   DateTime get startedAt;
-  @override
-  DateTime? get finishedAt;
   @override
   @JsonKey(ignore: true)
   _$$_PresenceCopyWith<_$_Presence> get copyWith =>

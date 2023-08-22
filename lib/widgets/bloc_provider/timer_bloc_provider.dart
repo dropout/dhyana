@@ -32,7 +32,7 @@ class TimerBlocProvider extends StatelessWidget {
           ),
           audioService: DefaultAudioService(),
           crashlyticsService: crashlyticsService,
-        )..add(TimerStarted());
+        );
       },
       lazy: false,
       child: child,

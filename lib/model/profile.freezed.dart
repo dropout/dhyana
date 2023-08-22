@@ -26,6 +26,7 @@ mixin _$Profile {
   String get email => throw _privateConstructorUsedError;
   String get photoUrl => throw _privateConstructorUsedError;
   String get photoBlurhash => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get signupDate => throw _privateConstructorUsedError;
   ProfileStats get stats => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
@@ -47,7 +48,7 @@ abstract class $ProfileCopyWith<$Res> {
       String email,
       String photoUrl,
       String photoBlurhash,
-      DateTime signupDate,
+      @DateTimeConverter() DateTime signupDate,
       ProfileStats stats,
       bool completed});
 
@@ -140,7 +141,7 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       String email,
       String photoUrl,
       String photoBlurhash,
-      DateTime signupDate,
+      @DateTimeConverter() DateTime signupDate,
       ProfileStats stats,
       bool completed});
 
@@ -219,7 +220,7 @@ class _$_Profile extends _Profile with DiagnosticableTreeMixin {
       required this.email,
       required this.photoUrl,
       required this.photoBlurhash,
-      required this.signupDate,
+      @DateTimeConverter() required this.signupDate,
       required this.stats,
       required this.completed})
       : super._();
@@ -240,6 +241,7 @@ class _$_Profile extends _Profile with DiagnosticableTreeMixin {
   @override
   final String photoBlurhash;
   @override
+  @DateTimeConverter()
   final DateTime signupDate;
   @override
   final ProfileStats stats;
@@ -316,7 +318,7 @@ abstract class _Profile extends Profile {
       required final String email,
       required final String photoUrl,
       required final String photoBlurhash,
-      required final DateTime signupDate,
+      @DateTimeConverter() required final DateTime signupDate,
       required final ProfileStats stats,
       required final bool completed}) = _$_Profile;
   const _Profile._() : super._();
@@ -336,6 +338,7 @@ abstract class _Profile extends Profile {
   @override
   String get photoBlurhash;
   @override
+  @DateTimeConverter()
   DateTime get signupDate;
   @override
   ProfileStats get stats;

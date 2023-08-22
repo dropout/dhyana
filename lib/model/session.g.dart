@@ -8,8 +8,9 @@ part of 'session.dart';
 
 _$_Session _$$_SessionFromJson(Map<String, dynamic> json) => _$_Session(
       id: json['id'] as String,
-      startTime: DateTime.parse(json['startTime'] as String),
-      endTime: DateTime.parse(json['endTime'] as String),
+      startTime:
+          const DateTimeConverter().fromJson(json['startTime'] as Timestamp),
+      endTime: const DateTimeConverter().fromJson(json['endTime'] as Timestamp),
       duration: const DurationConverter().fromJson(json['duration'] as int),
       timerSettings:
           TimerSettings.fromJson(json['timerSettings'] as Map<String, dynamic>),
@@ -18,8 +19,8 @@ _$_Session _$$_SessionFromJson(Map<String, dynamic> json) => _$_Session(
 Map<String, dynamic> _$$_SessionToJson(_$_Session instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'startTime': instance.startTime.toIso8601String(),
-      'endTime': instance.endTime.toIso8601String(),
+      'startTime': const DateTimeConverter().toJson(instance.startTime),
+      'endTime': const DateTimeConverter().toJson(instance.endTime),
       'duration': const DurationConverter().toJson(instance.duration),
       'timerSettings': instance.timerSettings.toJson(),
     };

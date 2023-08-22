@@ -55,10 +55,10 @@ class TimerRunningScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     ThemeData themeData = Theme.of(context).copyWith(
-        textTheme: textTheme.apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
-        )
+      textTheme: textTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+      )
     );
     return Scaffold(
       backgroundColor: Colors.black,
@@ -82,7 +82,9 @@ class TimerRunningScreenBody extends StatelessWidget {
                 onBackground: _onBackground(context),
                 onResume: _onResume(context),
               ),
-              secondChild: TimerCompletedView(timerState: timerState),
+              secondChild: TimerCompletedView(
+                timerState: timerState,
+              ),
               layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
                 return Stack(
                   // Align the non-positioned child to center.

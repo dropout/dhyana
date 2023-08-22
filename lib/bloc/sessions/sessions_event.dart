@@ -6,7 +6,7 @@ class SessionsEvent with _$SessionsEvent {
   const factory SessionsEvent.started() = _Started;
 
   const factory SessionsEvent.addSession({
-    required Profile profile,
+    required String profileId,
     required DateTime startTime,
     required DateTime endTime,
     required TimerSettings timerSettings,

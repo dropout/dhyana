@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -13,7 +14,7 @@ class ProfileStats with _$ProfileStats {
     required int completedMinutesCount,
     required int completedSessionsCount,
     required int completedDaysCount,
-    DateTime? lastSessionDate,
+    @DateTimeConverter() DateTime? lastSessionDate,
   }) = _ProfileStats;
 
   factory ProfileStats.empty() => const ProfileStats(

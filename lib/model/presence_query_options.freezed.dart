@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PresenceQueryOptions {
-  String? get ownProfileId => throw _privateConstructorUsedError;
+  Duration get windowSize => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PresenceQueryOptionsCopyWith<PresenceQueryOptions> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $PresenceQueryOptionsCopyWith<$Res> {
           $Res Function(PresenceQueryOptions) then) =
       _$PresenceQueryOptionsCopyWithImpl<$Res, PresenceQueryOptions>;
   @useResult
-  $Res call({String? ownProfileId});
+  $Res call({Duration windowSize});
 }
 
 /// @nodoc
@@ -46,13 +46,13 @@ class _$PresenceQueryOptionsCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ownProfileId = freezed,
+    Object? windowSize = null,
   }) {
     return _then(_value.copyWith(
-      ownProfileId: freezed == ownProfileId
-          ? _value.ownProfileId
-          : ownProfileId // ignore: cast_nullable_to_non_nullable
-              as String?,
+      windowSize: null == windowSize
+          ? _value.windowSize
+          : windowSize // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ) as $Val);
   }
 }
@@ -65,7 +65,7 @@ abstract class _$$_PresenceQueryOptionsCopyWith<$Res>
       __$$_PresenceQueryOptionsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? ownProfileId});
+  $Res call({Duration windowSize});
 }
 
 /// @nodoc
@@ -79,13 +79,13 @@ class __$$_PresenceQueryOptionsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ownProfileId = freezed,
+    Object? windowSize = null,
   }) {
     return _then(_$_PresenceQueryOptions(
-      ownProfileId: freezed == ownProfileId
-          ? _value.ownProfileId
-          : ownProfileId // ignore: cast_nullable_to_non_nullable
-              as String?,
+      windowSize: null == windowSize
+          ? _value.windowSize
+          : windowSize // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
@@ -94,14 +94,16 @@ class __$$_PresenceQueryOptionsCopyWithImpl<$Res>
 
 class _$_PresenceQueryOptions extends _PresenceQueryOptions
     with DiagnosticableTreeMixin {
-  const _$_PresenceQueryOptions({this.ownProfileId}) : super._();
+  const _$_PresenceQueryOptions({this.windowSize = const Duration(hours: 3)})
+      : super._();
 
   @override
-  final String? ownProfileId;
+  @JsonKey()
+  final Duration windowSize;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PresenceQueryOptions(ownProfileId: $ownProfileId)';
+    return 'PresenceQueryOptions(windowSize: $windowSize)';
   }
 
   @override
@@ -109,7 +111,7 @@ class _$_PresenceQueryOptions extends _PresenceQueryOptions
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PresenceQueryOptions'))
-      ..add(DiagnosticsProperty('ownProfileId', ownProfileId));
+      ..add(DiagnosticsProperty('windowSize', windowSize));
   }
 
   @override
@@ -117,12 +119,12 @@ class _$_PresenceQueryOptions extends _PresenceQueryOptions
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PresenceQueryOptions &&
-            (identical(other.ownProfileId, ownProfileId) ||
-                other.ownProfileId == ownProfileId));
+            (identical(other.windowSize, windowSize) ||
+                other.windowSize == windowSize));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, ownProfileId);
+  int get hashCode => Object.hash(runtimeType, windowSize);
 
   @JsonKey(ignore: true)
   @override
@@ -133,12 +135,12 @@ class _$_PresenceQueryOptions extends _PresenceQueryOptions
 }
 
 abstract class _PresenceQueryOptions extends PresenceQueryOptions {
-  const factory _PresenceQueryOptions({final String? ownProfileId}) =
+  const factory _PresenceQueryOptions({final Duration windowSize}) =
       _$_PresenceQueryOptions;
   const _PresenceQueryOptions._() : super._();
 
   @override
-  String? get ownProfileId;
+  Duration get windowSize;
   @override
   @JsonKey(ignore: true)
   _$$_PresenceQueryOptionsCopyWith<_$_PresenceQueryOptions> get copyWith =>

@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
-import 'package:dhyana/widgets/timer/running/timer_running_controls.dart';
 import 'package:dhyana/widgets/timer/running/all.dart';
 import 'package:dhyana/widgets/util/app_error_display.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-
-import 'running/timer_running_stage_display.dart';
 
 class TimerRunningView extends StatefulWidget {
 
