@@ -40,39 +40,24 @@ class _SignedInViewState extends State<SignedInView> {
   @override
   Widget build(BuildContext context) {
     return ProfileBlocProvider(
-      initialEvent: ProfileEvent.loadProfile(profileId: widget.user.uid),
+      initialEvent: ProfileEvent.loadProfile(
+        profileId: widget.user.uid,
+        useStream: true,
+      ),
       child: buildColumn(context),
     );
   }
 
   Widget buildColumn(BuildContext context) {
-    return BlocListener<TimerBloc, TimerState>(
-      listenWhen: (TimerState prev, TimerState current) {
-        print(current.timerStatus);
-        return (prev.timerStatus != TimerStatus.completed && current.timerStatus == TimerStatus.completed);
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        switch (state) {
+          case ProfileLoadedState():
+            return buildLoaded(context, state.profile);
+          default:
+            return buildLoading(context);
+        }
       },
-      listener: (BuildContext context, TimerState state) {
-        print('adding session');
-        SessionsBloc sessionsBloc = BlocProvider.of<SessionsBloc>(context);
-        sessionsBloc.add(
-          SessionsEvent.addSession(
-            profileId: widget.user.uid,
-            startTime: state.startTime!,
-            endTime: state.endTime!,
-            timerSettings: state.timerSettings,
-          )
-        );
-      },
-      child: BlocBuilder<ProfileBloc, ProfileState>(
-        builder: (context, state) {
-          switch (state) {
-            case ProfileLoadedState():
-              return buildLoaded(context, state.profile);
-            default:
-              return buildLoading(context);
-          }
-        },
-      ),
     );
   }
 
@@ -113,19 +98,10 @@ class _SignedInViewState extends State<SignedInView> {
         ConsecutiveDays(
           profile: profile,
         ),
-        // const SizedBox(height: AppThemeData.spacingLg),
-        buildSeparator(context),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
-          child: PresenceArea(
-            profile: profile,
-            onInit: () => BlocProvider.of<PresenceBloc>(context).add(
-              PresenceEvent.load(ownProfileId: widget.user.uid)
-            ),
-          ),
-        ),
+        PresenceArea(profile: profile),
         const SizedBox(height: AppThemeData.spacing4xl),
       ]
     );
   }
+
 }

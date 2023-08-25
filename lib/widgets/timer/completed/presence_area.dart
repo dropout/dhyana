@@ -4,6 +4,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
 import 'package:dhyana/widgets/presence/presence_list.dart';
 import 'package:dhyana/widgets/profile/profile_image.dart';
+import 'package:dhyana/widgets/timer/completed/completed_view_separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,20 +46,33 @@ class _PresenceAreaState extends State<PresenceArea> {
   }
 
   Widget buildView(BuildContext context, PresenceLoadedState state) {
+
+    if (state.presenceList.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return Column(
       children: [
-        Text('Practiced with you',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Colors.white,
-            // fontWeight: FontWeight.bold
-          ),
+        const CompletedViewSeparatorGem(padding: EdgeInsets.all(AppThemeData.spacingMd)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
+          child: Column(
+            children: [
+              Text('Practiced with you',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Colors.white,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              const SizedBox(height: AppThemeData.spacingLg),
+              PresenceList(
+                presenceList: state.presenceList,
+              ),
+              const SizedBox(height: AppThemeData.spacingLg),
+              buildTotalCountDisplay(context),
+            ],
+          )
         ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        PresenceList(
-          presenceList: state.presenceList,
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        buildTotalCountDisplay(context),
       ],
     );
   }

@@ -51,7 +51,7 @@ class _SessionResultState extends State<SessionResult> {
         children: [
           TextSpan(text: 'Completed '),
           TextSpan(
-            text: '54',
+            text: widget.timerState.elapsedTime.inMinutes.toString(),
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,

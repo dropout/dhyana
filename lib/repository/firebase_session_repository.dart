@@ -63,14 +63,16 @@ class FirebaseSessionRepository implements SessionRepository {
       );
     }
 
-    Profile newProfile = profile.copyWith(
-      stats: stats.copyWith(
-        lastSessionDate: session.startTime,
-        completedMinutesCount: stats.completedMinutesCount + session.duration.inMinutes,
-        completedSessionsCount: stats.completedSessionsCount + 1,
-      )
+    // Add session results to generic statistics data
+    stats = stats.copyWith(
+      lastSessionDate: session.startTime,
+      completedMinutesCount: stats.completedMinutesCount + session.duration.inMinutes,
+      completedSessionsCount: stats.completedSessionsCount + 1,
     );
 
+    Profile newProfile = profile.copyWith(
+      stats: stats
+    );
     await profileDataProvider.setItem(newProfile);
     logger.v('Profile saved with new stats: $stats');
 
@@ -87,7 +89,6 @@ class FirebaseSessionRepository implements SessionRepository {
     DateTime lastSessionTime,
     DateTime currentSessionTime,
   ) {
-
     bool shouldIncrement =
       lastSessionTime.year == currentSessionTime.year &&
       lastSessionTime.month == currentSessionTime.month &&
@@ -116,11 +117,11 @@ class FirebaseSessionRepository implements SessionRepository {
       lastSessionTime.day == currentSessionTime.day;
 
     if (sameDay) {
-      logger.v('Not incrementing completed days, it\'s the same day');
+      logger.v('Not incrementing completed days, it\'s the same day. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
       return stats;
     }
 
-    logger.v('Incrementing completed days');
+    logger.v('Incrementing completed days Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
     return stats.copyWith(
       completedDaysCount: stats.completedDaysCount + 1,
     );

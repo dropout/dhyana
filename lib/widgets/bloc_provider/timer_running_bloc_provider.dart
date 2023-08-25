@@ -45,7 +45,7 @@ class TimerRunningBlocProvider extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<TimerBloc>(
           create: (_) {
             return TimerBloc(
               timerSettings: timerSettings,
@@ -59,7 +59,7 @@ class TimerRunningBlocProvider extends StatelessWidget {
           lazy: false,
         ),
         BlocProvider<PresenceBloc>(
-          create: (BuildContext context) {
+          create: (_) {
             return PresenceBloc(
               presenceRepository: presenceRepository,
               authRepository: authRepository,
@@ -70,7 +70,7 @@ class TimerRunningBlocProvider extends StatelessWidget {
           lazy: false,
         ),
         BlocProvider<SessionsBloc>(
-          create: (BuildContext context) {
+          create: (_) {
             return SessionsBloc(
               authRepository: authRepository,
               sessionRepository: sessionRepository,
