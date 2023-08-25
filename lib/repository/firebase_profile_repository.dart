@@ -50,7 +50,6 @@ class FirebaseProfileRepository implements ProfileRepository {
 
   @override
   Future<Profile> updateProfileData(Profile profile) async {
-    print(profile);
     await profileDataProvider.updateItem(profile);
     return profile;
   }

@@ -46,7 +46,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
           profileId: user.uid,
           startTime: event.startTime,
           endTime: event.endTime,
-          duration: event.startTime.difference(event.endTime),
+          duration: event.startTime.difference(event.endTime).abs(),
           timerSettings: event.timerSettings,
         ),
       );

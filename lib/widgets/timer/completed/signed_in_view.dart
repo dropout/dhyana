@@ -14,12 +14,14 @@ import 'presence_area.dart';
 
 class SignedInView extends StatefulWidget {
 
+  final void Function()? onInit;
   final TimerState timerState;
   final User user;
 
   const SignedInView({
     required this.timerState,
     required this.user,
+    this.onInit,
     super.key
   });
 
@@ -31,6 +33,7 @@ class _SignedInViewState extends State<SignedInView> {
 
   @override
   void initState() {
+    widget.onInit?.call();
     super.initState();
   }
 
@@ -45,9 +48,11 @@ class _SignedInViewState extends State<SignedInView> {
   Widget buildColumn(BuildContext context) {
     return BlocListener<TimerBloc, TimerState>(
       listenWhen: (TimerState prev, TimerState current) {
+        print(current.timerStatus);
         return (prev.timerStatus != TimerStatus.completed && current.timerStatus == TimerStatus.completed);
       },
       listener: (BuildContext context, TimerState state) {
+        print('adding session');
         SessionsBloc sessionsBloc = BlocProvider.of<SessionsBloc>(context);
         sessionsBloc.add(
           SessionsEvent.addSession(

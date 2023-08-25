@@ -15,7 +15,7 @@ class ProfileEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SignedIn(yes: (User user) {
+    return SignedIn(yes: (BuildContext context, User user) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: ProfileBlocProvider(
@@ -26,7 +26,7 @@ class ProfileEditScreen extends StatelessWidget {
     });
   }
 
-  Widget buildBody(BuildContext context, ) {
+  Widget buildBody(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {

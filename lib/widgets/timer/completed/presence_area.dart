@@ -40,30 +40,8 @@ class _PresenceAreaState extends State<PresenceArea> {
           default:
             return Container();
         }
-
       },
     );
-
-    // return Column(
-    //   children: [
-    //     Text('Practiced with you',
-    //       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-    //         color: Colors.white,
-    //         // fontWeight: FontWeight.bold
-    //       ),
-    //     ),
-    //     const SizedBox(height: AppThemeData.spacingLg),
-    //     Wrap(
-    //       runSpacing: AppThemeData.spacingLg,
-    //       spacing: AppThemeData.spacingLg,
-    //       children: List.generate(12, (index) {
-    //         return buildItem(context, index);
-    //       }),
-    //     ),
-    //     const SizedBox(height: AppThemeData.spacingLg),
-    //     buildTotalCountDisplay(context),
-    //   ],
-    // );
   }
 
   Widget buildView(BuildContext context, PresenceLoadedState state) {

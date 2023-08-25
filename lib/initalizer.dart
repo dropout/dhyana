@@ -1,18 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
-import 'package:dhyana/data_provider/firebase_presence_data_provider.dart';
-import 'package:dhyana/data_provider/firebase_session_data_provider.dart';
-import 'package:dhyana/data_provider/firebase_storage_data_provider.dart';
 import 'package:dhyana/repositories.dart';
-import 'package:dhyana/repository/auth_repository.dart';
-import 'package:dhyana/repository/firebase_auth_repository.dart';
-import 'package:dhyana/repository/firebase_presence_repository.dart';
-import 'package:dhyana/repository/firebase_profile_repository.dart';
-import 'package:dhyana/repository/firebase_session_repository.dart';
-import 'package:dhyana/repository/presence_repository.dart';
-import 'package:dhyana/repository/profile_repository.dart';
-import 'package:dhyana/repository/session_repository.dart';
+import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/default_resource_resolver.dart';
 import 'package:dhyana/service/resource_resolver.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -44,23 +34,27 @@ class Initializer {
     logger.v('Initialize data providers');
     FirebaseProfileDataProvider profileDataProvider =
       FirebaseProfileDataProvider(FirebaseFirestore.instance);
-    FirebaseStorageDataProvider fbStorageDataProvider =
+    FirebaseStorageDataProvider storageDataProvider =
       FirebaseStorageDataProvider(FirebaseStorage.instance);
+    FirebaseDayDataProvider dayDataProvider =
+      FirebaseDayDataProvider(FirebaseFirestore.instance);
 
     logger.v('Initialize services');
     AnalyticsService analyticsService = FirebaseAnalyticsService(FirebaseAnalytics.instance);
     CrashlyticsService crashlyticsService = FirebaseCrashlyticsService(FirebaseCrashlytics.instance);
     ResourceResolver resourceResolver = DefaultResourceResolver(
-        storageDataProvider: fbStorageDataProvider
+        storageDataProvider: storageDataProvider
     );
+    TimerSettingsSharedPrefsService timerSettingsSharedPrefsService =
+      TimerSettingsSharedPrefsService(
+        crashlyticsService: crashlyticsService,
+        sharedPrefs: SharedPreferences.getInstance()
+      );
     Services services = Services(
       analyticsService: analyticsService,
       crashlyticsService: crashlyticsService,
       resourceResolver: resourceResolver,
-      timerSettingsSharedPrefsService: TimerSettingsSharedPrefsService(
-        crashlyticsService: crashlyticsService,
-        sharedPrefs: SharedPreferences.getInstance()
-      ),
+      timerSettingsSharedPrefsService: timerSettingsSharedPrefsService,
     );
 
     logger.v('Initialize repositories');
@@ -70,12 +64,15 @@ class Initializer {
     );
     ProfileRepository profileRepository = FirebaseProfileRepository(
       profileDataProvider: profileDataProvider,
-      storageDataProvider: fbStorageDataProvider,
+      storageDataProvider: storageDataProvider,
     );
     PresenceRepository presenceRepository = FirebasePresenceRepository(
       presenceDataProvider: FirebasePresenceDataProvider(
         FirebaseFirestore.instance
       )
+    );
+    DayRepository dayRepository = FirebaseDayRepository(
+      dayDataProvider: dayDataProvider
     );
 
     SessionRepository sessionRepository = FirebaseSessionRepository(
@@ -83,6 +80,7 @@ class Initializer {
         fireStore: FirebaseFirestore.instance,
       ),
       profileDataProvider: profileDataProvider,
+      dayDataProvider: dayDataProvider
     );
 
     Repositories repos = Repositories(
@@ -90,6 +88,7 @@ class Initializer {
       profileRepository: profileRepository,
       presenceRepository: presenceRepository,
       sessionRepository: sessionRepository,
+      dayRepository: dayRepository,
     );
 
     logger.v('Initialize providers');
@@ -99,7 +98,9 @@ class Initializer {
     );
 
     logger.v('Parsing timer settings from shared prefs');
-    TimerSettings timerSettings = await services.timerSettingsSharedPrefsService.getTimerSettings();
+    TimerSettings timerSettings = await services
+      .timerSettingsSharedPrefsService
+      .getTimerSettings();
 
     logger.v('Checking if the user has already signed in');
     User? user = await repos.authRepository.authStateChange.first;
@@ -130,6 +131,7 @@ class Initializer {
       Provider<ProfileRepository>(create: (_) => repos.profileRepository),
       Provider<PresenceRepository>(create: (_) => repos.presenceRepository),
       Provider<SessionRepository>(create: (_) => repos.sessionRepository),
+      Provider<DayRepository>(create: (_) => repos.dayRepository),
     ];
   }
 

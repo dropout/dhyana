@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -120,18 +119,18 @@ class AppRouter {
     );
   }
 
-  FutureOr<String?> _redirectHook(BuildContext context, GoRouterState state) {
-    return null;
-
-    // final bool isAuthenticated = (_authBloc.state is AuthStateSignedIn);
-    // final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
-    //
-    // if (!isAuthenticated && !isLoginScreenShown) {
-    //   return AppScreen.login.path;
-    // } else {
-    //   return null;
-    // }
-  }
+  // FutureOr<String?> _redirectHook(BuildContext context, GoRouterState state) {
+  //   return null;
+  //
+  //   // final bool isAuthenticated = (_authBloc.state is AuthStateSignedIn);
+  //   // final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
+  //   //
+  //   // if (!isAuthenticated && !isLoginScreenShown) {
+  //   //   return AppScreen.login.path;
+  //   // } else {
+  //   //   return null;
+  //   // }
+  // }
 
   GoRouter get router => _goRouter;
 

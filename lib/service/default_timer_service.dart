@@ -52,7 +52,10 @@ class DefaultTimerService implements TimerService {
       }
     );
 
-    _timer = Timer(_getRemainingTime(), _handleTimerCompleted);
+    _timer = Timer(
+      remainingTime,
+      _handleTimerCompleted
+    );
 
     _stopwatch.start();
   }
@@ -105,7 +108,7 @@ class DefaultTimerService implements TimerService {
     _finishedStreamController.add(null);
   }
 
-  Duration _getRemainingTime() {
+  Duration get remainingTime {
     int diff = duration.inMilliseconds - _stopwatch.elapsedMilliseconds;
     return Duration(milliseconds: diff);
   }
@@ -154,7 +157,6 @@ class DefaultTimerService implements TimerService {
 
     _tickStreamController.close();
     _finishedStreamController.close();
-
   }
 
 }

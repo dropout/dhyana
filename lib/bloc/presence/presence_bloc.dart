@@ -54,7 +54,6 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
   void _onShowPresence(ShowPresence event, emit) async {
     try {
       logger.v('Showing presence');
-      logger.v('Checking if the user is signed in');
       User? user = await authRepository.user;
       if (user == null) {
         logger.v('User is not signed in, not showing presence.');
