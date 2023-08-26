@@ -20,6 +20,7 @@ class FirebaseDayRepository implements DayRepository {
     required String profileId,
     required DateTime from,
     required DateTime to,
+    bool useStream = false,
   }) async {
 
     Duration diff = to.difference(from);
@@ -45,6 +46,38 @@ class FirebaseDayRepository implements DayRepository {
     }
 
     return result;
+  }
+
+  @override
+  Stream<List<Day>> getDaysStream({
+    required String profileId,
+    required DateTime from,
+    required DateTime to,
+    bool useStream = false,
+  }) {
+
+    Duration diff = to.difference(from);
+    int daysCount = diff.inDays.abs();
+
+    logger.v('Streaming $daysCount window');
+
+    Stream<List<Day>> daysStream = dayDataProvider.getDaysStream(
+      profileId,
+      from,
+      to
+    );
+
+    return daysStream.map((daysList) {
+      List<Day> result = [];
+      for (var i = 0; i < daysCount; ++i) {
+        String dayId = DateTime(from.year, from.month, from.day + i).toDayId();
+        Day d = daysList.firstWhere((d) => d.id == dayId, orElse: () => Day.empty(
+          day: DateTime(from.year, from.month, from.day + i),
+        ));
+        result.add(d);
+      }
+      return result;
+    });
   }
 
 }

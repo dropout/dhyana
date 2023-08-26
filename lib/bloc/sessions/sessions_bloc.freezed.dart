@@ -22,7 +22,7 @@ mixin _$SessionsEvent {
     required TResult Function(String profileId, DateTime startTime,
             DateTime endTime, TimerSettings timerSettings)
         addSession,
-    required TResult Function(Profile profile) loadSessions,
+    required TResult Function(String profileId) loadSessions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$SessionsEvent {
     TResult? Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult? Function(Profile profile)? loadSessions,
+    TResult? Function(String profileId)? loadSessions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$SessionsEvent {
     TResult Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult Function(Profile profile)? loadSessions,
+    TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +127,7 @@ class _$_Started implements _Started {
     required TResult Function(String profileId, DateTime startTime,
             DateTime endTime, TimerSettings timerSettings)
         addSession,
-    required TResult Function(Profile profile) loadSessions,
+    required TResult Function(String profileId) loadSessions,
   }) {
     return started();
   }
@@ -139,7 +139,7 @@ class _$_Started implements _Started {
     TResult? Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult? Function(Profile profile)? loadSessions,
+    TResult? Function(String profileId)? loadSessions,
   }) {
     return started?.call();
   }
@@ -151,7 +151,7 @@ class _$_Started implements _Started {
     TResult Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult Function(Profile profile)? loadSessions,
+    TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -313,7 +313,7 @@ class _$AddSessionEvent implements AddSessionEvent {
     required TResult Function(String profileId, DateTime startTime,
             DateTime endTime, TimerSettings timerSettings)
         addSession,
-    required TResult Function(Profile profile) loadSessions,
+    required TResult Function(String profileId) loadSessions,
   }) {
     return addSession(profileId, startTime, endTime, timerSettings);
   }
@@ -325,7 +325,7 @@ class _$AddSessionEvent implements AddSessionEvent {
     TResult? Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult? Function(Profile profile)? loadSessions,
+    TResult? Function(String profileId)? loadSessions,
   }) {
     return addSession?.call(profileId, startTime, endTime, timerSettings);
   }
@@ -337,7 +337,7 @@ class _$AddSessionEvent implements AddSessionEvent {
     TResult Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult Function(Profile profile)? loadSessions,
+    TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) {
     if (addSession != null) {
@@ -403,9 +403,7 @@ abstract class _$$LoadSessionsEventCopyWith<$Res> {
           _$LoadSessionsEvent value, $Res Function(_$LoadSessionsEvent) then) =
       __$$LoadSessionsEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({Profile profile});
-
-  $ProfileCopyWith<$Res> get profile;
+  $Res call({String profileId});
 }
 
 /// @nodoc
@@ -419,36 +417,28 @@ class __$$LoadSessionsEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? profile = null,
+    Object? profileId = null,
   }) {
     return _then(_$LoadSessionsEvent(
-      profile: null == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as Profile,
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ProfileCopyWith<$Res> get profile {
-    return $ProfileCopyWith<$Res>(_value.profile, (value) {
-      return _then(_value.copyWith(profile: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$LoadSessionsEvent implements LoadSessionsEvent {
-  const _$LoadSessionsEvent({required this.profile});
+  const _$LoadSessionsEvent({required this.profileId});
 
   @override
-  final Profile profile;
+  final String profileId;
 
   @override
   String toString() {
-    return 'SessionsEvent.loadSessions(profile: $profile)';
+    return 'SessionsEvent.loadSessions(profileId: $profileId)';
   }
 
   @override
@@ -456,11 +446,12 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadSessionsEvent &&
-            (identical(other.profile, profile) || other.profile == profile));
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, profile);
+  int get hashCode => Object.hash(runtimeType, profileId);
 
   @JsonKey(ignore: true)
   @override
@@ -475,9 +466,9 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
     required TResult Function(String profileId, DateTime startTime,
             DateTime endTime, TimerSettings timerSettings)
         addSession,
-    required TResult Function(Profile profile) loadSessions,
+    required TResult Function(String profileId) loadSessions,
   }) {
-    return loadSessions(profile);
+    return loadSessions(profileId);
   }
 
   @override
@@ -487,9 +478,9 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
     TResult? Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult? Function(Profile profile)? loadSessions,
+    TResult? Function(String profileId)? loadSessions,
   }) {
-    return loadSessions?.call(profile);
+    return loadSessions?.call(profileId);
   }
 
   @override
@@ -499,11 +490,11 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
     TResult Function(String profileId, DateTime startTime, DateTime endTime,
             TimerSettings timerSettings)?
         addSession,
-    TResult Function(Profile profile)? loadSessions,
+    TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) {
     if (loadSessions != null) {
-      return loadSessions(profile);
+      return loadSessions(profileId);
     }
     return orElse();
   }
@@ -544,10 +535,10 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
 }
 
 abstract class LoadSessionsEvent implements SessionsEvent {
-  const factory LoadSessionsEvent({required final Profile profile}) =
+  const factory LoadSessionsEvent({required final String profileId}) =
       _$LoadSessionsEvent;
 
-  Profile get profile;
+  String get profileId;
   @JsonKey(ignore: true)
   _$$LoadSessionsEventCopyWith<_$LoadSessionsEvent> get copyWith =>
       throw _privateConstructorUsedError;

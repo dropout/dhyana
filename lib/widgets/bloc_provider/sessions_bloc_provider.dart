@@ -21,13 +21,13 @@ class SessionsBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
 
     AuthRepository authRepository =
-    Provider.of<AuthRepository>(context);
+      Provider.of<AuthRepository>(context);
 
     SessionRepository sessionRepository =
-    Provider.of<SessionRepository>(context);
+      Provider.of<SessionRepository>(context);
 
     CrashlyticsService crashlyticsService =
-    Provider.of<CrashlyticsService>(context);
+      Provider.of<CrashlyticsService>(context);
 
     return BlocProvider<SessionsBloc>(
       create: (BuildContext context) {

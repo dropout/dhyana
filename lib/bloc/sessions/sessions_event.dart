@@ -13,7 +13,7 @@ class SessionsEvent with _$SessionsEvent {
   }) = AddSessionEvent;
 
   const factory SessionsEvent.loadSessions({
-    required Profile profile,
+    required String profileId,
   }) = LoadSessionsEvent;
 
 }

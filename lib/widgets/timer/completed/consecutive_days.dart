@@ -19,7 +19,7 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('132',
+        Text(widget.profile.stats.consecutiveDays.toString(),
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Colors.white,
           ),

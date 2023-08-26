@@ -36,7 +36,6 @@ class _ProfileViewState extends State<ProfileView> {
   Widget buildLoaded(BuildContext context, Profile profile) {
     return Column(
       children: [
-        const SizedBox(height: AppThemeData.spacing3xl),
         SizedBox(
           width: 96,
           height: 96,

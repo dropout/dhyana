@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/session_data_provider.dart';
 import 'package:dhyana/model/session.dart';
+import 'package:dhyana/model/session_query_options.dart';
 
 class FirebaseSessionDataProvider implements SessionDataProvider {
 
@@ -29,9 +30,11 @@ class FirebaseSessionDataProvider implements SessionDataProvider {
   }
 
   @override
-  Future<List<Session>> getSessions(String profileId) async {
-    CollectionReference<Session> collectionReference = getCollection(profileId);
-    QuerySnapshot<Session> querySnapshot = await collectionReference.get();
+  Future<List<Session>> getSessions(String profileId, {SessionQueryOptions queryOptions = const SessionQueryOptions()}) async {
+    CollectionReference<Session> collectionRef = getCollection(profileId);
+    QuerySnapshot<Session> querySnapshot = await queryOptions
+        .prepareQuery(collectionRef)
+        .get();
     return querySnapshot.docs.map((snapshot) => snapshot.data()).toList();
   }
 

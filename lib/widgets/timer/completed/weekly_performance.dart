@@ -30,7 +30,9 @@ class WeeklyPerformance extends StatelessWidget {
       initialEvent: DaysEvent.getDays(
         profileId: profile.id,
         from: mostRecentFirstDayOfTheWeek,
-        to: mostRecentFirstDayOfTheWeek.add(const Duration(days: 7))),
+        to: mostRecentFirstDayOfTheWeek.add(const Duration(days: 7)),
+        useStream: true,
+      ),
       child: buildChild(context),
     );
   }
@@ -48,9 +50,6 @@ class WeeklyPerformance extends StatelessWidget {
         }
       }
     );
-
-
-
   }
 
   Widget buildDays(BuildContext context, List<Day> days) {
@@ -75,7 +74,8 @@ class WeeklyPerformance extends StatelessWidget {
 
     return Stack(
       children: [
-        Container(
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 512),
           width: _size,
           height: _size,
           decoration: BoxDecoration(

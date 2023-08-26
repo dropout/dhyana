@@ -64,8 +64,27 @@ class FirebaseDayDataProvider implements DayDataProvider {
     Query<Day> query = collection.where(fieldPath, isGreaterThanOrEqualTo: from);
     query = collection.where(fieldPath, isLessThanOrEqualTo: to);
     query.orderBy(fieldPath);
+
     final QuerySnapshot<Day> querySnapshot = await query.get();
     return querySnapshot.docs.map((snapshot) => snapshot.data()).toList();
+  }
+
+  @override
+  Stream<List<Day>> getDaysStream(
+    String profileId,
+    DateTime from,
+    DateTime to
+  ) {
+    final CollectionReference<Day> collection = getCollection(profileId);
+    final FieldPath fieldPath = FieldPath(const ['date']);
+    Query<Day> query = collection.where(fieldPath, isGreaterThanOrEqualTo: from);
+    query = collection.where(fieldPath, isLessThanOrEqualTo: to);
+    query.orderBy(fieldPath);
+
+    return query.snapshots().map((querySnapshot) {
+      return querySnapshot.docs.map((e) => e.data()).toList();
+    });
+
   }
 
 }

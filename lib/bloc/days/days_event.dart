@@ -9,6 +9,13 @@ class DaysEvent with _$DaysEvent {
     required String profileId,
     required DateTime from,
     DateTime? to,
+    @Default(false) bool useStream,
   }) = GetDaysEvent;
+
+  const factory DaysEvent.receiveUpdate({
+    required List<Day> days,
+  }) = ReceiveUpdateDaysEvent;
+
+  const factory DaysEvent.error() = DaysErrorEvent;
 
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -48,15 +49,7 @@ class AppRouter {
           path: AppScreen.profile.path,
           name: AppScreen.profile.name,
           builder: (context, state) => const ProfileScreen(),
-          redirect: (BuildContext context, GoRouterState state) {
-            final bool isAuthenticated = (authBloc.state is AuthStateSignedIn);
-            final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
-            if (!isAuthenticated && !isLoginScreenShown) {
-              return AppScreen.login.path;
-            } else {
-              return null;
-            }
-          }
+          redirect: _signedInRedirectHook
         ),
 
         // Profile Wizard
@@ -64,15 +57,7 @@ class AppRouter {
           path: AppScreen.profileWizard.path,
           name: AppScreen.profileWizard.name,
           builder: (context, state) => const ProfileWizardScreen(),
-          redirect: (BuildContext context, GoRouterState state) {
-            final bool isAuthenticated = (authBloc.state is AuthStateSignedIn);
-            final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
-            if (!isAuthenticated && !isLoginScreenShown) {
-              return AppScreen.login.path;
-            } else {
-              return null;
-            }
-          }
+          redirect: _signedInRedirectHook
         ),
 
         // Edit Profile
@@ -80,15 +65,15 @@ class AppRouter {
           path: AppScreen.editProfile.path,
           name: AppScreen.editProfile.name,
           builder: (context, state) => const ProfileEditScreen(),
-          redirect: (BuildContext context, GoRouterState state) {
-            final bool isAuthenticated = (authBloc.state is AuthStateSignedIn);
-            final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
-            if (!isAuthenticated && !isLoginScreenShown) {
-              return AppScreen.login.path;
-            } else {
-              return null;
-            }
-          }
+          redirect: _signedInRedirectHook
+        ),
+
+        // Activity
+        GoRoute(
+            path: AppScreen.activity.path,
+            name: AppScreen.activity.name,
+            builder: (context, state) => const ActivityScreen(),
+            redirect: _signedInRedirectHook,
         ),
 
         // Login
@@ -119,18 +104,15 @@ class AppRouter {
     );
   }
 
-  // FutureOr<String?> _redirectHook(BuildContext context, GoRouterState state) {
-  //   return null;
-  //
-  //   // final bool isAuthenticated = (_authBloc.state is AuthStateSignedIn);
-  //   // final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
-  //   //
-  //   // if (!isAuthenticated && !isLoginScreenShown) {
-  //   //   return AppScreen.login.path;
-  //   // } else {
-  //   //   return null;
-  //   // }
-  // }
+  FutureOr<String?> _signedInRedirectHook(BuildContext context, GoRouterState state) {
+    final bool isAuthenticated = (authBloc.state is AuthStateSignedIn);
+    final bool isLoginScreenShown = state.matchedLocation == AppScreen.login.name;
+    if (!isAuthenticated && !isLoginScreenShown) {
+      return AppScreen.login.path;
+    } else {
+      return null;
+    }
+  }
 
   GoRouter get router => _goRouter;
 

@@ -12,7 +12,7 @@ class AppThemeData {
   static const double spacingXl = 32.0;
   static const double spacing2xl = 48.0;
   static const double spacing3xl = 64.0;
-  static const double spacing4xl = 96.0;
+  static const double spacing4xl = 90.0;
 
   static const double borderRadiusSm = 4.0;
   static const double borderRadiusMd = 8.0;
@@ -23,35 +23,7 @@ class AppThemeData {
   AppThemeData({required this.isDark});
   //
   ThemeData get themeData {
-  //
-  //   // TextTheme ---------------------------------------------------------------
-  //   TextTheme txtTheme = (isDark ? ThemeData.dark() : ThemeData.light()).textTheme.copyWith(
 
-  //
-  //
-  //     bodySmall: const TextStyle(
-  //       fontFamily: 'SourceSansPro',
-  //       fontSize: 14.0,
-  //       color: Colors.white,
-  //       height: 1.25,
-  //     ),
-  //     bodyMedium: const TextStyle(
-  //       fontFamily: 'SourceSansPro',
-  //       fontSize: 16.0,
-  //       color: Colors.white,
-  //       height: 1.25,
-  //     ),
-  //     bodyLarge: const TextStyle(
-  //       fontFamily: 'SourceSansPro',
-  //       fontSize: 18.0,
-  //       color: Colors.white,
-  //       height: 1.25,
-  //     )
-  //   );
-  //
-  //   // Color? textColor = txtTheme.bodyMedium!.color;
-  //   Color? textColor = AppColors.textColor;
-  //
   //   // ColorScheme -------------------------------------------------------------
     ColorScheme colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.red,

@@ -20,7 +20,7 @@ class ProfileMenu extends StatelessWidget {
         ListTile(
           title: Text('Aktivitás'),
           enabled: true,
-          onTap: () => context.pushNamed(AppScreen.editProfile.name),
+          onTap: () => context.pushNamed(AppScreen.activity.name),
         ),
         const Divider(height: 0),
         ListTile(

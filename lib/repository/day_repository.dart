@@ -8,4 +8,10 @@ abstract interface class DayRepository {
     required DateTime to,
   });
 
+  Stream<List<Day>> getDaysStream({
+    required String profileId,
+    required DateTime from,
+    required DateTime to,
+  });
+
 }
