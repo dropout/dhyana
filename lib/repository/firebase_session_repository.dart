@@ -89,21 +89,39 @@ class FirebaseSessionRepository implements SessionRepository {
     DateTime lastSessionTime,
     DateTime currentSessionTime,
   ) {
+
+    // Case 1:
+    // When the last session was on the day before yesterday or earlier
+    // value should be set to 0 since the user missed a day and consecutive
+    // days are broken
+    bool shouldReset =
+      lastSessionTime.year == currentSessionTime.year &&
+      lastSessionTime.month == currentSessionTime.month &&
+      lastSessionTime.day + 1 < currentSessionTime.day;
+
+    if (shouldReset) {
+      logger.v('Reset consecutive days counting. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
+      return stats.copyWith(
+        consecutiveDays: 0,
+      );
+    }
+
+    // Case 2:
+    // When the last session was on yesterday, value should be incremented by 1
     bool shouldIncrement =
       lastSessionTime.year == currentSessionTime.year &&
       lastSessionTime.month == currentSessionTime.month &&
       lastSessionTime.day + 1 == currentSessionTime.day;
 
-    if (shouldIncrement == false) {
+    if (shouldIncrement) {
+      logger.v('Incrementing consecutive days. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
+      return stats.copyWith(
+        consecutiveDays: stats.consecutiveDays + 1,
+      );
+    } else {
       logger.v('Not incrementing consecutive days. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
       return stats;
     }
-
-    logger.v('Incrementing consecutive days. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
-
-    return stats.copyWith(
-      consecutiveDays: stats.consecutiveDays + 1,
-    );
   }
 
   ProfileStats _calculateCompletedDay(
