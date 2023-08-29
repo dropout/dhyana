@@ -10,8 +10,8 @@ class AppButton extends StatelessWidget {
   
   const AppButton({
     required this.text,
-    this.fColor,
-    this.bColor,
+    this.fColor = Colors.white,
+    this.bColor = Colors.black,
     this.onTap,
     super.key
   });

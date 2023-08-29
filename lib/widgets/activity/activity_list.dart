@@ -1,4 +1,5 @@
 import 'package:dhyana/model/session.dart';
+import 'package:dhyana/widgets/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,12 +21,12 @@ class _ActivityListState extends State<ActivityList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
+      children: intersperseWidgets(const Divider(height: 0), [
         ...widget.sessions.map((s) => ListTile(
           title: buildSessionTitle(context, s),
           subtitle: buildSessionSubTitle(context, s),
         ),)
-      ],
+      ]).toList(),
     );
   }
 

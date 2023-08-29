@@ -118,7 +118,6 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         );
     }
   }
-  
 }
 
 //

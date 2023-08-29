@@ -6,6 +6,7 @@ import 'package:dhyana/widgets/profile/profile_edit_view.dart';
 import 'package:dhyana/widgets/util/app_back_button.dart';
 import 'package:dhyana/widgets/util/app_error_display.dart';
 import 'package:dhyana/widgets/util/app_loading_display.dart';
+import 'package:dhyana/widgets/util/custom_app_bar.dart';
 import 'package:dhyana/widgets/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,6 @@ class ProfileEditScreen extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        const AppBackButton(),
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -62,6 +62,7 @@ class ProfileEditScreen extends StatelessWidget {
             )
           ],
         ),
+        const CustomAppBar(title: 'Edit Profile'),
       ],
     );
   }
