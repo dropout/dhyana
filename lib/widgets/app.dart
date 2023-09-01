@@ -26,7 +26,8 @@ class App extends StatelessWidget {
       crashlyticsService: initResult.services.crashlyticsService,
     );
     appRouter = AppRouter(
-      authBloc: authBloc
+      authBloc: authBloc,
+      initResult: initResult,
     );
   }
 

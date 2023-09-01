@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/initalizer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,23 +14,35 @@ import 'app_screen.dart';
 class AppRouter {
 
   final AuthBloc authBloc;
+  final InitResult initResult;
 
   late final GoRouter _goRouter;
 
   AppRouter({
     required this.authBloc,
+    required this.initResult,
   }) {
     _goRouter = GoRouter(
       debugLogDiagnostics: kDebugMode,
       navigatorKey: AppKeys.rootNavigatorKey,
       initialLocation: AppScreen.home.path,
+      initialExtra: initResult.timerSettings,
       routes: <GoRoute>[
 
         // Home
         GoRoute(
           path: AppScreen.home.path,
           name: AppScreen.home.name,
-          builder: (context, state) => const HomeScreen(),
+          builder: (context, state) {
+            try {
+              TimerSettings ts = state.extra! as TimerSettings;
+              return HomeScreen(
+                timerSettings: ts,
+              );
+            } catch (_) {
+              return HomeScreen();
+            }
+          }
         ),
 
         // Timer Running

@@ -11,11 +11,19 @@ import 'package:dhyana/widgets/settings/settings_button.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  const HomeScreen({super.key});
+  // As an initialRoute it will receive timerSettings from initResult
+  // Any other case, it will the bloc below load timer settings from shared prefs
+  final TimerSettings? timerSettings;
+
+  const HomeScreen({
+    this.timerSettings,
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
     return TimerSettingsBlocProvider(
+      initialEvent: LoadTimerSettingsData(timerSettings: timerSettings),
       child: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
         builder: (BuildContext context, TimerSettingsState state) {
           switch (state) {
@@ -25,8 +33,6 @@ class HomeScreen extends StatelessWidget {
               return const Text('Loading');
             case TimerSettingsDataLoadedState():
               return buildLoaded(context, state.timerSettings);
-            default:
-              return Container();
           }
         }
       )

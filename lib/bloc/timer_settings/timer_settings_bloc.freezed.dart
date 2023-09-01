@@ -426,7 +426,6 @@ abstract class TimerSettingsChanged extends TimerSettingsEvent {
 mixin _$TimerSettingsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TimerSettings timerSettings) loaded,
     required TResult Function() error,
@@ -434,7 +433,6 @@ mixin _$TimerSettingsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(TimerSettings timerSettings)? loaded,
     TResult? Function()? error,
@@ -442,7 +440,6 @@ mixin _$TimerSettingsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TimerSettings timerSettings)? loaded,
     TResult Function()? error,
@@ -451,7 +448,6 @@ mixin _$TimerSettingsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsInitial value) initial,
     required TResult Function(TimerSettingsDataLoadingState value) loading,
     required TResult Function(TimerSettingsDataLoadedState value) loaded,
     required TResult Function(TimerSettingsDataErrorState value) error,
@@ -459,7 +455,6 @@ mixin _$TimerSettingsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsInitial value)? initial,
     TResult? Function(TimerSettingsDataLoadingState value)? loading,
     TResult? Function(TimerSettingsDataLoadedState value)? loaded,
     TResult? Function(TimerSettingsDataErrorState value)? error,
@@ -467,7 +462,6 @@ mixin _$TimerSettingsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsInitial value)? initial,
     TResult Function(TimerSettingsDataLoadingState value)? loading,
     TResult Function(TimerSettingsDataLoadedState value)? loaded,
     TResult Function(TimerSettingsDataErrorState value)? error,
@@ -492,128 +486,6 @@ class _$TimerSettingsStateCopyWithImpl<$Res, $Val extends TimerSettingsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$TimerSettingsInitialCopyWith<$Res> {
-  factory _$$TimerSettingsInitialCopyWith(_$TimerSettingsInitial value,
-          $Res Function(_$TimerSettingsInitial) then) =
-      __$$TimerSettingsInitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TimerSettingsInitialCopyWithImpl<$Res>
-    extends _$TimerSettingsStateCopyWithImpl<$Res, _$TimerSettingsInitial>
-    implements _$$TimerSettingsInitialCopyWith<$Res> {
-  __$$TimerSettingsInitialCopyWithImpl(_$TimerSettingsInitial _value,
-      $Res Function(_$TimerSettingsInitial) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$TimerSettingsInitial extends TimerSettingsInitial
-    with DiagnosticableTreeMixin {
-  const _$TimerSettingsInitial() : super._();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsState.initial()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TimerSettingsState.initial'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerSettingsInitial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(TimerSettings timerSettings) loaded,
-    required TResult Function() error,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(TimerSettings timerSettings)? loaded,
-    TResult? Function()? error,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(TimerSettings timerSettings)? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsInitial value) initial,
-    required TResult Function(TimerSettingsDataLoadingState value) loading,
-    required TResult Function(TimerSettingsDataLoadedState value) loaded,
-    required TResult Function(TimerSettingsDataErrorState value) error,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsInitial value)? initial,
-    TResult? Function(TimerSettingsDataLoadingState value)? loading,
-    TResult? Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult? Function(TimerSettingsDataErrorState value)? error,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsInitial value)? initial,
-    TResult Function(TimerSettingsDataLoadingState value)? loading,
-    TResult Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult Function(TimerSettingsDataErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TimerSettingsInitial extends TimerSettingsState {
-  const factory TimerSettingsInitial() = _$TimerSettingsInitial;
-  const TimerSettingsInitial._() : super._();
 }
 
 /// @nodoc
@@ -665,7 +537,6 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TimerSettings timerSettings) loaded,
     required TResult Function() error,
@@ -676,7 +547,6 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(TimerSettings timerSettings)? loaded,
     TResult? Function()? error,
@@ -687,7 +557,6 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TimerSettings timerSettings)? loaded,
     TResult Function()? error,
@@ -702,7 +571,6 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsInitial value) initial,
     required TResult Function(TimerSettingsDataLoadingState value) loading,
     required TResult Function(TimerSettingsDataLoadedState value) loaded,
     required TResult Function(TimerSettingsDataErrorState value) error,
@@ -713,7 +581,6 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsInitial value)? initial,
     TResult? Function(TimerSettingsDataLoadingState value)? loading,
     TResult? Function(TimerSettingsDataLoadedState value)? loaded,
     TResult? Function(TimerSettingsDataErrorState value)? error,
@@ -724,7 +591,6 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsInitial value)? initial,
     TResult Function(TimerSettingsDataLoadingState value)? loading,
     TResult Function(TimerSettingsDataLoadedState value)? loaded,
     TResult Function(TimerSettingsDataErrorState value)? error,
@@ -832,7 +698,6 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TimerSettings timerSettings) loaded,
     required TResult Function() error,
@@ -843,7 +708,6 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(TimerSettings timerSettings)? loaded,
     TResult? Function()? error,
@@ -854,7 +718,6 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TimerSettings timerSettings)? loaded,
     TResult Function()? error,
@@ -869,7 +732,6 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsInitial value) initial,
     required TResult Function(TimerSettingsDataLoadingState value) loading,
     required TResult Function(TimerSettingsDataLoadedState value) loaded,
     required TResult Function(TimerSettingsDataErrorState value) error,
@@ -880,7 +742,6 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsInitial value)? initial,
     TResult? Function(TimerSettingsDataLoadingState value)? loading,
     TResult? Function(TimerSettingsDataLoadedState value)? loaded,
     TResult? Function(TimerSettingsDataErrorState value)? error,
@@ -891,7 +752,6 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsInitial value)? initial,
     TResult Function(TimerSettingsDataLoadingState value)? loading,
     TResult Function(TimerSettingsDataLoadedState value)? loaded,
     TResult Function(TimerSettingsDataErrorState value)? error,
@@ -965,7 +825,6 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(TimerSettings timerSettings) loaded,
     required TResult Function() error,
@@ -976,7 +835,6 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(TimerSettings timerSettings)? loaded,
     TResult? Function()? error,
@@ -987,7 +845,6 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(TimerSettings timerSettings)? loaded,
     TResult Function()? error,
@@ -1002,7 +859,6 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsInitial value) initial,
     required TResult Function(TimerSettingsDataLoadingState value) loading,
     required TResult Function(TimerSettingsDataLoadedState value) loaded,
     required TResult Function(TimerSettingsDataErrorState value) error,
@@ -1013,7 +869,6 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsInitial value)? initial,
     TResult? Function(TimerSettingsDataLoadingState value)? loading,
     TResult? Function(TimerSettingsDataLoadedState value)? loaded,
     TResult? Function(TimerSettingsDataErrorState value)? error,
@@ -1024,7 +879,6 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsInitial value)? initial,
     TResult Function(TimerSettingsDataLoadingState value)? loading,
     TResult Function(TimerSettingsDataLoadedState value)? loaded,
     TResult Function(TimerSettingsDataErrorState value)? error,

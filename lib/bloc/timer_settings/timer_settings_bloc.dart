@@ -20,7 +20,7 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
   TimerSettingsBloc({
     required this.crashlyticsService,
     required this.timerSettingsSharedPrefsService,
-  }) : super(const TimerSettingsState.initial()) {
+  }) : super(const TimerSettingsState.loading()) {
     on<LoadTimerSettingsData>(_onLoadTimerSettingsData);
     on<TimerSettingsChanged>(_onTimerSettingsChanged);
   }
@@ -36,7 +36,7 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
         emit(const TimerSettingsState.loading());
         logger.v('Loading timer settings data...');
         TimerSettings timerSettings =
-        await timerSettingsSharedPrefsService.getTimerSettings();
+          await timerSettingsSharedPrefsService.getTimerSettings();
         logger.v('Loaded timer setting from shared prefs...');
         emit(TimerSettingsState.loaded(
           timerSettings: timerSettings,
