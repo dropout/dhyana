@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
@@ -49,25 +50,27 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
   }
 
   Widget buildLayout(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.all(AppThemeData.spacingMd),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Stack(
             fit: StackFit.expand,
             children: [
-              Positioned.fill(
+              Positioned(
                 top: constraints.constrainHeight() / 2 - 75,
-                child: TimerStageDisplay(
+                width: constraints.maxWidth,
+                child: TimerRunningTitle(
                   timerState: widget.timerState,
+                  positionOffset: Offset(0.0,constraints.constrainHeight() / 2 - 75),
                 )
               ),
               Center(
-                child: TimerRunningTimeDisplay(
+                child: TimerRunningTime(
                   timerState: widget.timerState
                 )
               ),
-              Container(
+              Align(
                 alignment: const Alignment(0.0, 0.85),
                 child: TimerRunningControls(
                   timerState: widget.timerState
@@ -77,6 +80,9 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
           );
         }
       ),
+    ).animate().fadeIn(
+      duration: const Duration(milliseconds: 512),
+      curve: Curves.easeOut,
     );
   }
 

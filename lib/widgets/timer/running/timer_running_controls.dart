@@ -1,3 +1,4 @@
+import 'package:dhyana/service/analytics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +6,7 @@ import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
+import 'package:provider/provider.dart';
 
 class TimerRunningControls extends StatefulWidget {
 
@@ -49,6 +51,10 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
     }
   }
 
+  bool get shouldShowFinishButton  {
+    return widget.timerState.timerStage == TimerStage.timer && widget.timerState.elapsedTime > const Duration(minutes: 1);
+  }
+
   @override
   void initState() {
     _createAnimationIntervals();
@@ -72,30 +78,30 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
 
   void _onPause(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(TimerPaused());
-    // Provider.of<AnalyticsService>(context, listen: false).logEvent(
-    //   name: 'timer_pause',
-    // );
+    Provider.of<AnalyticsService>(context, listen: false).logEvent(
+      name: 'timer_pause',
+    );
   }
 
   void _onPlay(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(TimerResumed());
-    // Provider.of<AnalyticsService>(context, listen: false).logEvent(
-    //   name: 'timer_resume',
-    // );
+    Provider.of<AnalyticsService>(context, listen: false).logEvent(
+      name: 'timer_resume',
+    );
   }
 
   void _onDiscard(BuildContext context) {
     GoRouter.of(context).goNamed(AppScreen.home.name);
-    // Provider.of<AnalyticsService>(context, listen: false).logEvent(
-    //   name: 'timer_discard',
-    // );
+    Provider.of<AnalyticsService>(context, listen: false).logEvent(
+      name: 'timer_discard',
+    );
   }
 
   void _onFinish(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(FinishTimer());
-    // Provider.of<AnalyticsService>(context, listen: false).logEvent(
-    //   name: 'timer_finish',
-    // );
+    Provider.of<AnalyticsService>(context, listen: false).logEvent(
+      name: 'timer_finish',
+    );
   }
 
   @override
@@ -145,10 +151,10 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
           context,
           AppLocalizations.of(context).timerDiscardSessionButtonText.toUpperCase(),
           Colors.white,
-          Colors.black12,
+          Colors.grey.shade800,
           _onDiscard
       ),
-      _buildMenuItem(
+      if (shouldShowFinishButton) _buildMenuItem(
         context,
         AppLocalizations.of(context).timerFinishSessionButtonText.toUpperCase(),
         Colors.black,
@@ -167,12 +173,13 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
               _itemSlideIntervals[i].transform(_animationController.value),
             );
             final opacity = animationPercent;
-            return IgnorePointer(
-              ignoring: animationPercent == 0,
-              ignoringSemantics: true,
-              child: Opacity(
-                opacity: opacity,
-                child: child,
+            return ExcludeSemantics(
+              child: IgnorePointer(
+                ignoring: animationPercent == 0,
+                child: Opacity(
+                  opacity: opacity,
+                  child: child,
+                ),
               ),
             );
           },

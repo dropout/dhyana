@@ -41,7 +41,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     // Prepare warmup timer
     if (hasWarmupTime) {
       warmupTimer = timerServiceFactory
-        .getTimerService(timerSettings.warmup);
+        // .getTimerService(timerSettings.warmup);
+        .getTimerService(Duration(seconds: 5));
       _warmupTickerSub = warmupTimer!.tickStream.listen(
         (t) => add(WarmupTicked(ticks: t))
       );

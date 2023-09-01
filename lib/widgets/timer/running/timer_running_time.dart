@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 
-class TimerRunningTimeDisplay extends StatelessWidget {
+class TimerRunningTime extends StatelessWidget {
 
   final TimerState timerState;
 
-  const TimerRunningTimeDisplay({
+  const TimerRunningTime({
     required this.timerState,
     Key? key,
   }) : super(key: key);

@@ -3,7 +3,6 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/widgets/app_theme_data.dart';
 import 'package:dhyana/widgets/bloc_provider/profile_bloc_provider.dart';
 import 'package:dhyana/widgets/profile/profile_edit_view.dart';
-import 'package:dhyana/widgets/util/app_back_button.dart';
 import 'package:dhyana/widgets/util/app_error_display.dart';
 import 'package:dhyana/widgets/util/app_loading_display.dart';
 import 'package:dhyana/widgets/util/custom_app_bar.dart';

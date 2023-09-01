@@ -80,4 +80,10 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
     emit(DaysState.loaded(days: event.days));
   }
 
+  @override
+  Future<void> close() async {
+    _streamSubscription?.cancel();
+    return super.close();
+  }
+
 }
