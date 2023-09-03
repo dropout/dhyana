@@ -30,10 +30,6 @@ class DefaultProfileUpdateStrategy extends ProfileUpdateStrategy {
       completed: (completeProfile) ? true : profile.completed,
     );
 
-
-    print(getFirstName(formData));
-    print(getLastName(formData));
-
     Uint8List? imageData = getImageData(formData);
     if (imageData == null) {
       logger.v('Updating profile with data only');

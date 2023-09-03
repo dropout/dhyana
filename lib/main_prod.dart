@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dhyana/initalizer.dart';
 
-import 'widgets/app.dart';
+import 'widget/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

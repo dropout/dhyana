@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/day_data_provider.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/util/date_time.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseDayDataProvider implements DayDataProvider {
 

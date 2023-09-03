@@ -1,6 +1,6 @@
 import 'package:dhyana/data_provider/day_data_provider.dart';
 import 'package:dhyana/model/day.dart';
-import 'package:dhyana/util/date_time.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:logger/logger.dart';
 

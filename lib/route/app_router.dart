@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/initalizer.dart';
+import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/widget/app_keys.dart';
+import 'package:dhyana/widget/screen/all.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widgets/app_keys.dart';
-import 'package:dhyana/widgets/screen/all.dart';
 
 import 'app_screen.dart';
 
@@ -40,7 +40,7 @@ class AppRouter {
                 timerSettings: ts,
               );
             } catch (_) {
-              return HomeScreen();
+              return const HomeScreen();
             }
           }
         ),

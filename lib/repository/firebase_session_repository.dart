@@ -2,8 +2,8 @@ import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_stats.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/util/date_time.dart';
 import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/profile_stats_calculator.dart' as profile_stats_calculator;
 import 'package:logger/logger.dart';
 
 import 'session_repository.dart';
@@ -40,9 +40,8 @@ class FirebaseSessionRepository implements SessionRepository {
 
     // Calculate consecutive days
     if (stats.lastSessionDate != null) {
-      stats = _calculateConsecutiveDays(
+      stats = profile_stats_calculator.calculateConsecutiveDays(
         stats,
-        stats.lastSessionDate!,
         session.startTime,
       );
     } else {
@@ -56,9 +55,8 @@ class FirebaseSessionRepository implements SessionRepository {
       );
       logger.v('Incrementing completed days (first day case)');
     } else {
-      stats = _calculateCompletedDay(
+      stats = profile_stats_calculator.calculateCompletedDay(
         stats,
-        stats.lastSessionDate!,
         session.startTime,
       );
     }
@@ -82,67 +80,6 @@ class FirebaseSessionRepository implements SessionRepository {
   @override
   Future<List<Session>> getSessions(String profileId) {
     return sessionDataProvider.getSessions(profileId);
-  }
-
-  ProfileStats _calculateConsecutiveDays(
-    ProfileStats stats,
-    DateTime lastSessionTime,
-    DateTime currentSessionTime,
-  ) {
-
-    // Case 1:
-    // When the last session was on the day before yesterday or earlier
-    // value should be set to 0 since the user missed a day and consecutive
-    // days are broken
-    bool shouldReset =
-      lastSessionTime.year == currentSessionTime.year &&
-      lastSessionTime.month == currentSessionTime.month &&
-      lastSessionTime.day + 1 < currentSessionTime.day;
-
-    if (shouldReset) {
-      logger.v('Reset consecutive days counting. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
-      return stats.copyWith(
-        consecutiveDays: 0,
-      );
-    }
-
-    // Case 2:
-    // When the last session was on yesterday, value should be incremented by 1
-    bool shouldIncrement =
-      lastSessionTime.year == currentSessionTime.year &&
-      lastSessionTime.month == currentSessionTime.month &&
-      lastSessionTime.day + 1 == currentSessionTime.day;
-
-    if (shouldIncrement) {
-      logger.v('Incrementing consecutive days. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
-      return stats.copyWith(
-        consecutiveDays: stats.consecutiveDays + 1,
-      );
-    } else {
-      logger.v('Not incrementing consecutive days. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
-      return stats;
-    }
-  }
-
-  ProfileStats _calculateCompletedDay(
-    ProfileStats stats,
-    DateTime lastSessionTime,
-    DateTime currentSessionTime,
-  ) {
-    bool sameDay =
-      lastSessionTime.year == currentSessionTime.year &&
-      lastSessionTime.month == currentSessionTime.month &&
-      lastSessionTime.day == currentSessionTime.day;
-
-    if (sameDay) {
-      logger.v('Not incrementing completed days, it\'s the same day. Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
-      return stats;
-    }
-
-    logger.v('Incrementing completed days Last: ${lastSessionTime.toDayId()} | Current: ${currentSessionTime.toDayId()}');
-    return stats.copyWith(
-      completedDaysCount: stats.completedDaysCount + 1,
-    );
   }
 
 }
