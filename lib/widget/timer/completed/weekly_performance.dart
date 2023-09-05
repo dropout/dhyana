@@ -54,9 +54,9 @@ class WeeklyPerformance extends StatelessWidget {
 
   Widget buildDays(BuildContext context, List<Day> days) {
     return Wrap(
-      children: intersperseWidgets(const SizedBox(width: AppThemeData.spacingSm), [
-        ...days.map((d) => buildDay(context, d)),
-      ]).toList(),
+      children: days.map((d) => buildDay(context, d))
+        .toList()
+        .intersperse(const SizedBox(width: AppThemeData.spacingSm)),
     );
   }
 

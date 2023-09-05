@@ -76,12 +76,12 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
             )
           ),
         ),
-        _buildBuyButton(context),
+        _buildMainButton(context),
       ],
     );
   }
 
-  Widget _buildBuyButton(BuildContext context) {
+  Widget _buildMainButton(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Stack(

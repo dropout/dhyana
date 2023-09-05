@@ -15,20 +15,17 @@ class ConsecutiveDays extends StatefulWidget {
 }
 
 class _ConsecutiveDaysState extends State<ConsecutiveDays> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(widget.profile.stats.consecutiveDays.toString(),
-          style: Theme.of(context).textTheme.displaySmall!.copyWith(
-            color: Colors.white,
-          ),
+          style: Theme.of(context).textTheme.displaySmall
         ),
         Text('consecutive days',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Colors.white,
-            // fontWeight: FontWeight.bold,
-          ),),
+          style: Theme.of(context).textTheme.bodyLarge
+        ),
       ],
     );
   }

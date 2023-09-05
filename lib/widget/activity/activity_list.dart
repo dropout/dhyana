@@ -21,12 +21,10 @@ class _ActivityListState extends State<ActivityList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: intersperseWidgets(const Divider(height: 0), [
-        ...widget.sessions.map((s) => ListTile(
-          title: buildSessionTitle(context, s),
-          subtitle: buildSessionSubTitle(context, s),
-        ),)
-      ]).toList(),
+      children: widget.sessions.map((s) => ListTile(
+        title: buildSessionTitle(context, s),
+        subtitle: buildSessionSubTitle(context, s),
+      )).toList().intersperse(const Divider(height: 0)),
     );
   }
 

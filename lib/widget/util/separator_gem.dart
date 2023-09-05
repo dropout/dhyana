@@ -11,7 +11,7 @@ class SeparatorGem extends StatelessWidget {
   const SeparatorGem({
     required this.count,
     this.color = Colors.black,
-    this.gemSize = 16,
+    this.gemSize = 12,
     this.padding = const EdgeInsets.symmetric(vertical: 24),
     super.key
   });
@@ -22,10 +22,7 @@ class SeparatorGem extends StatelessWidget {
       padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: intersperseWidgets(
-          SizedBox(width: gemSize),
-          List.generate(count, (index) => buildGem(context))
-        ).toList(),
+        children: List.generate(count, (index) => buildGem(context)).intersperse(SizedBox(width: gemSize))
       ),
     );
   }

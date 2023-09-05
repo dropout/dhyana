@@ -24,7 +24,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
   DaysBloc({
     required this.dayRepository,
     required this.crashlyticsService,
-  }) : super(const DaysState.initial()) {
+  }) : super(const DaysState.loading()) {
     on<GetDaysEvent>(_onGetDaysEvent);
     on<ReceiveUpdateDaysEvent>(_onReceiveUpdate);
   }
