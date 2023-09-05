@@ -49,11 +49,6 @@ class ProfileEditScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: AppThemeData.spacing3xl),
-            Text(
-              'Edit Profile',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.displaySmall
-            ),
             Expanded(
               child: ProfileEditView(
                 profile: state.profile

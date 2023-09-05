@@ -80,15 +80,15 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-              child: Column(
-                children: [
-                  ProfileEditForm(
-                    profile: widget.profile,
-                    formStateKey: widget.formStateKey,
-                    onChanged: () => onFormChanged(context),
-                  ),
-                ],
-              )
+            child: Column(
+              children: [
+                ProfileEditForm(
+                  profile: widget.profile,
+                  formStateKey: widget.formStateKey,
+                  onChanged: () => onFormChanged(context),
+                ),
+              ],
+            )
           ),
           Column(
             children: [
@@ -119,90 +119,3 @@ class _ProfileEditViewState extends State<ProfileEditView> {
     }
   }
 }
-
-//
-// class ProfileEditView extends StatelessWidget {
-//
-//   final Profile profile;
-//   final GlobalKey<FormBuilderState> formStateKey =
-//     GlobalKey<FormBuilderState>();
-//
-//   ProfileEditView({
-//     required this.profile,
-//     super.key
-//   });
-//
-//   void onSave(BuildContext context) {
-//     FormBuilderState? formState = formStateKey.currentState;
-//     if (formState != null && formState.saveAndValidate()) {
-//       Map<String, dynamic>? values = formState.value;
-//       BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
-//         profile: profile,
-//         formData: values,
-//         onComplete: (article) {
-//           ScaffoldMessenger.of(context).clearSnackBars();
-//           ScaffoldMessenger.of(context).showSnackBar(
-//               getSuccessSnackBar(context, 'Profile updated: ${profile.id} - ${profile.displayName}')
-//           );
-//           BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.loadProfile(profileId: profile.id));
-//         },
-//         onError: (e, stack) {
-//           ScaffoldMessenger.of(context).clearSnackBars();
-//           getErrorSnackBar(context, 'Unable to update Profile!');
-//         },
-//       ));
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('Updating profile...')),
-//       );
-//     }
-//   }
-//
-//   void onSignOut(BuildContext context) {
-//     BlocProvider.of<AuthBloc>(context).add(const AuthEvent.signOut());
-//     context.pop();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(AppThemeData.spacingMd),
-//       child: Column(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           Expanded(
-//             child: Column(
-//               children: [
-//                 ProfileEditForm(
-//                   profile: profile,
-//                   formStateKey: formStateKey,
-//                 ),
-//                 SizedBox(
-//                   height: AppThemeData.spacing2xl,
-//                   child: Center(
-//                     child: TextButton(
-//                       onPressed: () => onSignOut(context),
-//                       child: Text(
-//                         'SIGN OUT',
-//                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             )
-//           ),
-//           Column(
-//             children: [
-//               AppButton(
-//                 text: 'SAVE',
-//                 onTap: () => onSave(context),
-//               ),
-//             ],
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }

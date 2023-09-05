@@ -1,4 +1,5 @@
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/form_builder_image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -24,15 +25,25 @@ class ProfileEditForm extends StatefulWidget {
 class _ProfileEditFormState extends State<ProfileEditForm> {
 
   late final GlobalKey<FormBuilderState> _formKey;
+  late final TextEditingController firstNameTextController =
+    TextEditingController();
+  late final TextEditingController lastNameTextController =
+    TextEditingController();
 
   @override
   void initState() {
     _formKey = widget.formStateKey ?? GlobalKey<FormBuilderState>();
+    firstNameTextController.text = widget.profile.firstName;
+    lastNameTextController.text = widget.profile.lastName;
     super.initState();
   }
 
   void onFormChanged(BuildContext context) {
     widget.onChanged?.call();
+  }
+
+  String _getLiveDisplayName(BuildContext context) {
+    return '${firstNameTextController.text} ${lastNameTextController.text}';
   }
 
   @override
@@ -44,6 +55,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       skipDisabled: true,
       onChanged: () => onFormChanged(context),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           FutureBuilder(
             future: Future.value(profile.photoUrl),
@@ -62,10 +74,12 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               }
             }
           ),
+          buildNameDisplay(context),
           FormBuilderTextField(
             name: 'firstName',
+            controller: firstNameTextController,
             decoration: const InputDecoration(labelText: 'Firstname'),
-            initialValue: profile.firstName,
+            // initialValue: profile.firstName,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),
@@ -74,8 +88,9 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           ),
           FormBuilderTextField(
             name: 'lastName',
+            controller: lastNameTextController,
             decoration: const InputDecoration(labelText: 'Lastname'),
-            initialValue: profile.lastName,
+            // initialValue: profile.lastName,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),
@@ -84,6 +99,19 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           const SizedBox(height: 16),
         ],
       )
+    );
+  }
+
+  Widget buildNameDisplay(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppThemeData.spacingMd),
+      child: Text(
+        _getLiveDisplayName(context),
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+          fontWeight: FontWeight.bold,
+        )
+      ),
     );
   }
 
