@@ -4,6 +4,7 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
 import 'package:dhyana/widget/profile/stats/daily_chart.dart';
+import 'package:dhyana/widget/profile/stats/metrics.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
@@ -37,30 +38,36 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   Widget buildLoaded(BuildContext context, Profile profile) {
-    return Column(
-      children: [
-        SizedBox(
-          width: 96,
-          height: 96,
-          child: ProfileImage.fromProfile(profile),
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        Text(
-          profile.displayName,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        ConsecutiveDays(profile: profile),
-        const SeparatorGem(count: 1),
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: DailyChart(
-            profile: profile,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 96,
+            height: 96,
+            child: ProfileImage.fromProfile(profile),
           ),
-        ),
-        const Expanded(
-          child: ProfileMenu(),
-        )
-      ],
+          const SizedBox(height: AppThemeData.spacingLg),
+          Text(
+            profile.displayName,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          ConsecutiveDays(profile: profile),
+          const SeparatorGem(count: 1),
+          Padding(
+            padding: const EdgeInsets.all(AppThemeData.spacingMd),
+            child: DailyChart(
+              profile: profile,
+            ),
+          ),
+          const SeparatorGem(count: 1),
+          ProfileMetricsView(profile: profile),
+          ProfileMenu(),
+          // const Expanded(
+          //   child: ProfileMenu(),
+          // )
+        ],
+      ),
     );
   }
 }

@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget buildBody(BuildContext context) {
     return const Stack(
-      fit: StackFit.expand,
+      // fit: StackFit.expand,
       children: [
         Padding(
           padding: EdgeInsets.only(top: CustomAppBar.height),
