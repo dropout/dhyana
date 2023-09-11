@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:dhyana/data_provider/all.dart';
-import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_query_options.dart';
@@ -17,11 +16,6 @@ class FirebaseProfileRepository implements ProfileRepository {
     required this.profileDataProvider,
     required this.storageDataProvider,
   });
-
-  @override
-  Future<void> deleteProfile(String id) {
-    return profileDataProvider.deleteItem(id);
-  }
 
   @override
   Future<Profile> getProfileById(String id) {
@@ -52,6 +46,11 @@ class FirebaseProfileRepository implements ProfileRepository {
   Future<Profile> updateProfileData(Profile profile) async {
     await profileDataProvider.updateItem(profile);
     return profile;
+  }
+
+  @override
+  Future<void> deleteProfile(String id) {
+    return profileDataProvider.deleteItem(id);
   }
 
   @override

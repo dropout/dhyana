@@ -30,22 +30,18 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
   @override
   void initState() {
     widget.profileBloc.add(ProfileEvent.calculateConsecutiveDays(
-      profile: widget.profile,
-      onComplete: (Profile profile) {
-        if (mounted) {
+        profile: widget.profile,
+        onComplete: (Profile profile) {
           setState(() {
             state = _State.completed;
             profile = profile;
           });
-        }
-      },
-      onError: (_, __) {
-        if (mounted) {
+        },
+        onError: (_, __) {
           setState(() {
             state = _State.error;
           });
         }
-      }
     ));
     super.initState();
   }
@@ -71,7 +67,7 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
     return Column(
       children: [
         Text(consecutiveDays.toString(),
-          style: Theme.of(context).textTheme.displaySmall
+            style: Theme.of(context).textTheme.displaySmall
         ),
         Text('consecutive days',
             style: Theme.of(context).textTheme.bodyLarge

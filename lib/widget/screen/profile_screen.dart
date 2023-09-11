@@ -18,7 +18,8 @@ class ProfileScreen extends StatelessWidget {
         yes: (context, user) {
           return ProfileBlocProvider(
             initialEvent: ProfileEvent.loadProfile(
-              profileId: user.uid
+              profileId: user.uid,
+              useStream: true,
             ),
             child: buildBody(context),
           );
@@ -30,7 +31,6 @@ class ProfileScreen extends StatelessWidget {
 
   Widget buildBody(BuildContext context) {
     return const Stack(
-      // fit: StackFit.expand,
       children: [
         Padding(
           padding: EdgeInsets.only(top: CustomAppBar.height),

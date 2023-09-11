@@ -19,7 +19,6 @@ class CustomAppBar extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: Container(
         height: AppThemeData.spacing3xl,
-        // padding: const EdgeInsets.all(AppThemeData.spacingMd),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           boxShadow: [

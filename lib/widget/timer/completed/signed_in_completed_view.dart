@@ -11,13 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'presence_area.dart';
 
-class SignedInView extends StatefulWidget {
+class SignedInCompletedView extends StatefulWidget {
 
   final void Function()? onInit;
   final TimerState timerState;
   final User user;
 
-  const SignedInView({
+  const SignedInCompletedView({
     required this.timerState,
     required this.user,
     this.onInit,
@@ -25,10 +25,10 @@ class SignedInView extends StatefulWidget {
   });
 
   @override
-  State<SignedInView> createState() => _SignedInViewState();
+  State<SignedInCompletedView> createState() => _SignedInCompletedViewState();
 }
 
-class _SignedInViewState extends State<SignedInView> {
+class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   void initState() {
@@ -78,6 +78,7 @@ class _SignedInViewState extends State<SignedInView> {
   }
 
   Widget buildLoaded(BuildContext context, Profile profile) {
+    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -96,6 +97,7 @@ class _SignedInViewState extends State<SignedInView> {
         )),
         ConsecutiveDays(
           profile: profile,
+          profileBloc: profileBloc,
         ),
         PresenceArea(profile: profile),
         const SizedBox(height: AppThemeData.spacing4xl),

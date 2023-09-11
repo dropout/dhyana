@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 
 import 'session_result.dart';
 
-class SignedOutView extends StatefulWidget {
+class SignedOutCompletedView extends StatefulWidget {
 
   final TimerState timerState;
 
-  const SignedOutView({
+  const SignedOutCompletedView({
     required this.timerState,
     super.key
   });
 
   @override
-  State<SignedOutView> createState() => _SignedOutViewState();
+  State<SignedOutCompletedView> createState() => _SignedOutCompletedViewState();
 }
 
-class _SignedOutViewState extends State<SignedOutView> {
+class _SignedOutCompletedViewState extends State<SignedOutCompletedView> {
   @override
   Widget build(BuildContext context) {
     return Column(
