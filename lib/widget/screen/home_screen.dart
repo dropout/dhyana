@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
       right: AppThemeData.spacingMd,
       child: Wrap(
         children: [
-          SettingsIcon(),
+          SettingsButton(),
           SizedBox(width: AppThemeData.spacingSm),
           ProfileButton()
         ],

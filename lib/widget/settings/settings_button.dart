@@ -3,28 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/route/app_screen.dart';
 
-class SettingsIcon extends StatelessWidget {
-  const SettingsIcon({super.key});
+class SettingsButton extends StatelessWidget {
+  const SettingsButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        GoRouter.of(context).pushNamed(AppScreen.settings.name);
-      },
-      child: const HomeScreenMenuButton(
-        child: SizedBox(
-          width: 36,
-          height: 36,
-          child: Icon(
-            Icons.settings,
-            color: Colors.white,
-            size: 28,
-          ),
+    return HomeScreenMenuButton(
+      onTap: () => GoRouter.of(context).pushNamed(AppScreen.settings.name),
+      child: const SizedBox(
+        width: 36,
+        height: 36,
+        child: Icon(
+          Icons.settings,
+          color: Colors.white,
+          size: 28,
         ),
       ),
     );
   }
-
 
 }

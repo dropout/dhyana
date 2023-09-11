@@ -1,6 +1,5 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/profile_bloc_provider.dart';
 import 'package:dhyana/widget/profile/profile_edit_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';

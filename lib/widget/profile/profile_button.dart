@@ -46,15 +46,13 @@ class ProfileButton extends StatelessWidget {
   }
   
   Widget buildSignedOut(context) {
-    return GestureDetector(
+    return HomeScreenMenuButton(
       onTap: () => _signedOutTap(context),
-      child: const HomeScreenMenuButton(
-        child: Icon(
-          Icons.account_circle_rounded,
-          size: 30,
-          color: Colors.white,
-        )
-      ),
+      child: const Icon(
+        Icons.account_circle_rounded,
+        size: 30,
+        color: Colors.white,
+      )
     );
   }
 
