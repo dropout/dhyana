@@ -18,15 +18,34 @@ class ProfileEditScreen extends StatelessWidget {
     return SignedIn(yes: (BuildContext context, User user) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: ProfileBlocProvider(
-          initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
-          child: buildBody(context),
+        body: SafeArea(
+          child: ProfileBlocProvider(
+            initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
+            child: buildBody(context),
+          ),
         )
       );
     });
   }
 
   Widget buildBody(BuildContext context) {
+    return Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: CustomAppBar.height),
+            Expanded(
+              child: buildState(context),
+            )
+          ],
+        ),
+        const CustomAppBar(title: 'Edit Profile'),
+      ],
+    );
+  }
+
+  Widget buildState(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
@@ -42,22 +61,6 @@ class ProfileEditScreen extends StatelessWidget {
   }
 
   Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: AppThemeData.spacing3xl),
-            Expanded(
-              child: ProfileEditView(
-                profile: state.profile
-              )
-            )
-          ],
-        ),
-        const CustomAppBar(title: 'Edit Profile'),
-      ],
-    );
+    return ProfileEditView(profile: state.profile);
   }
 }

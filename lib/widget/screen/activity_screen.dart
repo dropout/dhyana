@@ -20,7 +20,7 @@ class ActivityScreen extends StatelessWidget {
           yes: (context, user) {
             return SessionsBlocProvider(
               initialEvent: SessionsEvent.loadSessions(profileId: user.uid),
-              child: buildView(context),
+              child: buildBody(context),
             );
           }
         ),
@@ -28,7 +28,19 @@ class ActivityScreen extends StatelessWidget {
     );
   }
   
-  Widget buildView(BuildContext context) {
+  Widget buildBody(BuildContext context) {
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: CustomAppBar.height),
+          child: buildState(context),
+        ),
+        const CustomAppBar(title: 'Aktivitás'),
+      ],
+    );
+  }
+
+  Widget buildState(BuildContext context) {
     return BlocBuilder<SessionsBloc, SessionsState>(
       builder: (context, state) {
         switch (state) {
@@ -41,22 +53,12 @@ class ActivityScreen extends StatelessWidget {
           default:
             return const AppErrorDisplay();
         }
-      }       
+      }
     );
   }
 
   Widget buildLoaded(BuildContext context, SessionsLoaded state) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: CustomAppBar.height),
-          child: ActivityList(sessions: state.sessions),
-        ),
-        const CustomAppBar(
-          title: 'Aktivitás',
-        ),
-      ],
-    );
+    return ActivityList(sessions: state.sessions);
   }
 
 }

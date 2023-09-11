@@ -1,13 +1,11 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/profile/profile_error_view.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
 import 'package:dhyana/widget/profile/stats/daily_chart.dart';
 import 'package:dhyana/widget/profile/stats/metrics.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +18,6 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-
 
   Widget buildProfileArea(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
