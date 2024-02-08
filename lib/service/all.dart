@@ -5,7 +5,6 @@ export 'default_audio_service.dart';
 export 'default_timer_service.dart';
 export 'firebase_analytics_service.dart';
 export 'firebase_crashlytics_service.dart';
-export 'health_service.dart';
 export 'logging_analytics_service.dart';
 export 'logging_crashlytics_service.dart';
 export 'permissions_service.dart';

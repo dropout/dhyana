@@ -27,16 +27,16 @@ class FirebaseSessionRepository implements SessionRepository {
 
     // Add session
     await sessionDataProvider.addSession(profileId, session);
-    logger.v('Session saved');
+    logger.t('Session saved');
 
     // Add Day
     await dayDataProvider.addSessionToDay(profileId, session);
-    logger.v('Day saved');
+    logger.t('Day saved');
 
     // Make profile stat changes
     Profile profile = await profileDataProvider.getItemById(profileId);
     ProfileStats stats = profile.stats;
-    logger.v('Profile loaded');
+    logger.t('Profile loaded');
 
     // Calculate consecutive days
     if (stats.lastSessionDate != null) {
@@ -45,7 +45,7 @@ class FirebaseSessionRepository implements SessionRepository {
         session.startTime,
       );
     } else {
-      logger.v('There were no last session, skipping consecutive days calculation.');
+      logger.t('There were no last session, skipping consecutive days calculation.');
     }
 
     // Calculate completed days
@@ -53,7 +53,7 @@ class FirebaseSessionRepository implements SessionRepository {
       stats = stats.copyWith(
         completedDaysCount: stats.completedDaysCount + 1,
       );
-      logger.v('Incrementing completed days (first day case)');
+      logger.t('Incrementing completed days (first day case)');
     } else {
       stats = profile_stats_calculator.calculateCompletedDay(
         stats,
@@ -72,7 +72,7 @@ class FirebaseSessionRepository implements SessionRepository {
       stats: stats
     );
     await profileDataProvider.setItem(newProfile);
-    logger.v('Profile saved with new stats: $stats');
+    logger.t('Profile saved with new stats: $stats');
 
     return session;
   }

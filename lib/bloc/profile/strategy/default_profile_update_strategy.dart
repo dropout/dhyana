@@ -32,10 +32,10 @@ class DefaultProfileUpdateStrategy extends ProfileUpdateStrategy {
 
     Uint8List? imageData = getImageData(formData);
     if (imageData == null) {
-      logger.v('Updating profile with data only');
+      logger.t('Updating profile with data only');
       return profileRepository.updateProfileData(newProfile);
     } else {
-      logger.v('Updating profile with data and image');
+      logger.t('Updating profile with data and image');
       return profileRepository.updateProfileDataWithImage(newProfile, imageData);
     }
   }

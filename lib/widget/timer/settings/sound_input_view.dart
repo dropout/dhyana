@@ -64,51 +64,53 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        AppBar(
-          title: Text(widget.title),
-          automaticallyImplyLeading: false,
-        ),
-        SizedBox(
-          height: 300,
-          child: PageView(
-            onPageChanged: (int index) => _onPageChanged(context, index),
-            controller: pageController,
-            physics: const SoundInputPageViewScrollPhysics(),
-            children: Sound.values.map((Sound s) => buildPage(
-              context, s
-            )).toList(),
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AppBar(
+            title: Text(widget.title),
+            automaticallyImplyLeading: false,
           ),
-        ),
-        SizedBox(
-          height: 48,
-          child: Center(
-            child: TabPageSelector(
-              controller: tabController,
-              color: Colors.black.withOpacity(0.2),
-              selectedColor: Colors.black,
-              borderStyle: BorderStyle.none,
+          SizedBox(
+            height: 300,
+            child: PageView(
+              onPageChanged: (int index) => _onPageChanged(context, index),
+              controller: pageController,
+              physics: const SoundInputPageViewScrollPhysics(),
+              children: Sound.values.map((Sound s) => buildPage(
+                context, s
+              )).toList(),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(
-            AppThemeData.spacingMd,
-            0.0,
-            AppThemeData.spacingMd,
-            AppThemeData.spacingMd,
+          SizedBox(
+            height: 48,
+            child: Center(
+              child: TabPageSelector(
+                controller: tabController,
+                color: Colors.black.withOpacity(0.2),
+                selectedColor: Colors.black,
+                borderStyle: BorderStyle.none,
+              ),
+            ),
           ),
-          child: AppButton(
-            text: AppLocalizations.of(context).okay.toUpperCase(),
-            fColor: Colors.white,
-            bColor: Colors.black,
-            onTap: () => _onSelectButtonPress(context),
-          ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              AppThemeData.spacingMd,
+              0.0,
+              AppThemeData.spacingMd,
+              AppThemeData.spacingMd,
+            ),
+            child: AppButton(
+              text: AppLocalizations.of(context).okay.toUpperCase(),
+              fColor: Colors.white,
+              bColor: Colors.black,
+              onTap: () => _onSelectButtonPress(context),
+            ),
+          )
+        ],
+      ),
     );
   }
 

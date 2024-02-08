@@ -20,18 +20,13 @@ class HomeScreenMenuButton extends StatelessWidget {
       child: Container(
         width: size,
         height: size,
-        padding: const EdgeInsets.all(3.0),
+        // padding: const EdgeInsets.all(2.0),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.black,
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF000000).withAlpha(90),
-              blurRadius: 2.0,
-              spreadRadius: 1.0,
-              offset: const Offset(0.0, 0.0),
-            ),
-          ]
+          border: Border.all(
+            color: Colors.black,
+            width: 2.0,
+          ),
         ),
         child: child,
       ),

@@ -63,7 +63,7 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
   }
 
   Widget buildCalculating(BuildContext context) {
-    return Text('calculating');
+    return const Text('calculating');
   }
 
   Widget buildCompleted(BuildContext context) {
@@ -81,7 +81,7 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
   }
 
   Widget buildError(BuildContext context) {
-    return Text('error occured');
+    return const Text('error occured');
   }
 
 }

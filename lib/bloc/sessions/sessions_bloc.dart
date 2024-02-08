@@ -32,11 +32,11 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
 
   void _onAddSession(AddSessionEvent event, emit) async {
     try {
-      logger.v('Adding a session');
-      logger.v('Checking if the user logged in');
+      logger.t('Adding a session');
+      logger.t('Checking if the user logged in');
       User? user = await authRepository.user;
       if (user == null) {
-        logger.v('User is not signed in, session not added.');
+        logger.t('User is not signed in, session not added.');
         return;
       }
       await sessionRepository.addSession(
@@ -49,9 +49,9 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
           timerSettings: event.timerSettings,
         ),
       );
-      logger.v('Session successfully added!');
+      logger.t('Session successfully added!');
     } catch(e, stack) {
-      logger.v('Failed to add session');
+      logger.t('Failed to add session');
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
@@ -62,11 +62,11 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
 
   void _onLoadSessions(LoadSessionsEvent event, emit) async {
     try {
-      logger.v('Loading sessions');
+      logger.t('Loading sessions');
       emit(const SessionsState.loading());
       List<Session> sessions = await sessionRepository.getSessions(event.profileId);
       emit(SessionsState.loaded(sessions: sessions));
-      logger.v('Sessions successfully loaded');
+      logger.t('Sessions successfully loaded');
     } catch(e, stack) {
       emit(const SessionsState.error());
       crashlyticsService.recordError(
@@ -74,7 +74,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
         stackTrace: stack,
         reason: 'Unable to add session'
       );
-      logger.v('Failed to load sessions for: ${event.profileId}');
+      logger.t('Failed to load sessions for: ${event.profileId}');
     }
   }
 

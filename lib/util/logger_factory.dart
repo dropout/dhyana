@@ -7,10 +7,10 @@ Logger getLogger(String className) {
         colors: false,
         methodCount: 0,
         excludeBox: {
-          Level.verbose: true,
+          Level.trace: true,
         }
       ),
-      verbose: '[$className]',
+      trace: '[$className]',
     )
   );
 }

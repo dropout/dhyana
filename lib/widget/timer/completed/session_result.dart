@@ -49,7 +49,7 @@ class _SessionResultState extends State<SessionResult> {
           // fontWeight: FontWeight.bold,
         ),
         children: [
-          TextSpan(text: 'Completed '),
+          const TextSpan(text: 'Completed '),
           TextSpan(
             text: widget.timerState.elapsedTime.inMinutes.toString(),
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -57,7 +57,7 @@ class _SessionResultState extends State<SessionResult> {
               fontWeight: FontWeight.bold,
             )
           ),
-          TextSpan(text: ' minutes'),
+          const TextSpan(text: ' minutes'),
         ]
       )
     );

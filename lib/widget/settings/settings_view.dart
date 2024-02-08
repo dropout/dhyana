@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dhyana/model/all.dart';
-import 'package:dhyana/service/health_service.dart';
 
 class AppSettingsView extends StatefulWidget {
   const AppSettingsView({super.key});
@@ -11,38 +9,12 @@ class AppSettingsView extends StatefulWidget {
 
 class _AppSettingsViewState extends State<AppSettingsView> {
 
-  final HealthService healthService = HealthService();
-  AppSettings appSettings = const AppSettings(appleHealthSync: false);
+  late bool value;
 
-  void _onAppleHealthSwitch(bool value) async {
-    if (value == false) {
-      setState(() {
-        appSettings = appSettings.copyWith(
-          appleHealthSync: value,
-        );
-      });
-      return;
-    }
-
-    bool hasPermission = await healthService.hasHealthPermission();
-    if (!hasPermission) {
-      bool requestSuccessful = await healthService.requestHealthPermission();
-
-      if (requestSuccessful) {
-        print('had no permission, but requiesting succeeded');
-      } else {
-        print('has no permission and requesting permission failed');
-      }
-
-    } else {
-      print('has permission');
-      setState(() {
-        appSettings = appSettings.copyWith(
-          appleHealthSync: value,
-        );
-      });
-    }
-
+  @override
+  void initState() {
+    value = false;
+    super.initState();
   }
 
   @override
@@ -50,11 +22,11 @@ class _AppSettingsViewState extends State<AppSettingsView> {
     return ListView(
       children: [
         ListTile(
-          title: Text('Apple Health'),
-          subtitle: Text('Ülések szinkronizációja'),
+          title: const Text('Apple Health'),
+          subtitle: const Text('Ülések szinkronizációja'),
           trailing: Switch(
-            onChanged: (bool value) => _onAppleHealthSwitch(value),
-            value: appSettings.appleHealthSync,
+            onChanged: (bool value) => setState(() => !this.value),
+            value: value,
           ),
         ),
         const Divider(height: 0),

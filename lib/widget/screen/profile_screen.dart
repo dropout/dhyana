@@ -14,17 +14,19 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: SignedIn(
-        yes: (context, user) {
-          return ProfileBlocProvider(
-            initialEvent: ProfileEvent.loadProfile(
-              profileId: user.uid,
-              useStream: true,
-            ),
-            child: buildBody(context),
-          );
-        },
-        no: const AppErrorDisplay(),
+      body: SafeArea(
+        child: SignedIn(
+          yes: (context, user) {
+            return ProfileBlocProvider(
+              initialEvent: ProfileEvent.loadProfile(
+                profileId: user.uid,
+                useStream: true,
+              ),
+              child: buildBody(context),
+            );
+          },
+          no: const AppErrorDisplay(),
+        ),
       )
     );
   }

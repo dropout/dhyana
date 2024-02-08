@@ -94,14 +94,14 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   void _onTimerStarted(TimerStarted start, emit) async {
     try {
-      logger.v('Starting timer');
+      logger.t('Starting timer');
       TimerStage stage;
       if (hasWarmupTime) {
-        logger.v('Has warmup time');
+        logger.t('Has warmup time');
         warmupTimer!.start();
         stage = TimerStage.warmup;
       } else {
-        logger.v('No Warmup time');
+        logger.t('No Warmup time');
         durationTimer.start();
         if (timerSettings.startingSound != Sound.none) {
           audioService.play(timerSettings.startingSound);
@@ -127,7 +127,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   void _onTimerPaused(TimerPaused pause, emit) {
     if (state.timerStatus == TimerStatus.running) {
-      logger.v('Pause timer');
+      logger.t('Pause timer');
       activeTimer.stop();
       emit(state.copyWith(
         timerStatus: TimerStatus.paused,
@@ -135,24 +135,24 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         elapsedTime: durationTimer.elapsedTime
       ));
     } else {
-      logger.v('Timer is not running, nothing to pause');
+      logger.t('Timer is not running, nothing to pause');
     }
   }
 
   void _onTimerResumed(TimerResumed resume, emit) {
     if (state.timerStatus == TimerStatus.paused) {
-      logger.v('Resume timer');
+      logger.t('Resume timer');
       activeTimer.start();
       emit(state.copyWith(
         timerStatus: TimerStatus.running
       ));
     } else {
-      logger.v('Timer is running, nothing to resume');
+      logger.t('Timer is running, nothing to resume');
     }
   }
 
   void _onTimerReset(TimerReset reset, emit) {
-    logger.v('Reset timer');
+    logger.t('Reset timer');
     if (hasWarmupTime) {
       warmupTimer!.reset();
     }
@@ -168,7 +168,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   }
 
   void _onWarmupCompleted(WarmupCompleted event, emit) {
-    logger.v('Warmup completed');
+    logger.t('Warmup completed');
     final Duration elapsedWarmupTime = warmupTimer!.elapsedTime;
 
     if (timerSettings.startingSound != Sound.none) {
@@ -194,7 +194,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   // The timer has reached it's end
   void _onTimerCompleted(TimerCompleted completed, emit) async {
-    logger.v('Timer completed');
+    logger.t('Timer completed');
     if (timerSettings.endingSound != Sound.none) {
       audioService.play(timerSettings.endingSound);
     }
@@ -208,7 +208,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   // User wants to finish before timer ends
   void _onFinishTimer(FinishTimer event, emit) async {
-    logger.v('Timer finished');
+    logger.t('Timer finished');
     warmupTimer?.stop();
     durationTimer.stop();
     emit(state.copyWith(
@@ -233,7 +233,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   @override
   Future<void> close() {
-    logger.v('Closing resources');
+    logger.t('Closing resources');
 
     _warmupFinishedSub?.cancel();
     _warmupTickerSub?.cancel();

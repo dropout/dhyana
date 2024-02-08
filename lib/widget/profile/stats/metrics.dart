@@ -8,8 +8,8 @@ class ProfileMetricsView extends StatelessWidget {
 
   const ProfileMetricsView({
     this.profile,
-    Key? key
-  }) : super(key: key);
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class ProfileMetricsView extends StatelessWidget {
 
 class ProfileMetricsDisplayLoading extends StatelessWidget {
 
-  const ProfileMetricsDisplayLoading({Key? key}) : super(key: key);
+  const ProfileMetricsDisplayLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -79,16 +79,16 @@ class ProfileMetricBox extends StatelessWidget {
   const ProfileMetricBox(
       this.value,
       this.label,
-      {Key? key}
-      ) : super(key: key);
+      {super.key}
+      );
 
   @override
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.black,
-          borderRadius: const BorderRadius.all(Radius.circular(AppThemeData.borderRadiusSm))
+          borderRadius: BorderRadius.all(Radius.circular(AppThemeData.borderRadiusSm))
         ),
         // height: 50,
         child: Column(
@@ -121,7 +121,7 @@ class ProfileMetricBox extends StatelessWidget {
 
 class ProfileMetricBoxLoading extends StatelessWidget {
 
-  const ProfileMetricBoxLoading({Key? key}) : super(key: key);
+  const ProfileMetricBoxLoading({super.key});
 
   @override
   Widget build(BuildContext context) {

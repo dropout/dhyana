@@ -20,39 +20,41 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Container(
-                  // color: Colors.purpleAccent,
-                  child: buildHeadline(context)),
-              ),
-              buildActions(context),
-              buildLegalText(context),
-            ]
-          ),
-          Positioned(
-            top: AppThemeData.spacingMd,
-            left: AppThemeData.spacingMd,
-            child: GestureDetector(
-              onTap: () => GoRouter.of(context).goNamed(AppScreen.home.name),
-              child: Container(
-                padding: const EdgeInsets.all(AppThemeData.spacingSm),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Container(
+                    // color: Colors.purpleAccent,
+                    child: buildHeadline(context)),
                 ),
-                child: const Icon(Icons.arrow_back, color: Colors.white),
-              )
+                buildActions(context),
+                buildLegalText(context),
+              ]
             ),
-          ),
-        ],
+            Positioned(
+              top: AppThemeData.spacingMd,
+              left: AppThemeData.spacingMd,
+              child: GestureDetector(
+                onTap: () => GoRouter.of(context).goNamed(AppScreen.home.name),
+                child: Container(
+                  padding: const EdgeInsets.all(AppThemeData.spacingSm),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                  ),
+                  child: const Icon(Icons.arrow_back, color: Colors.white),
+                )
+              ),
+            ),
+          ],
+        ),
       )
     );
   }

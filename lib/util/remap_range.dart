@@ -20,7 +20,11 @@ extension Remap on num {
   /// ```
   /// is also valid and works well.
   double remap(num fromLow, num fromHigh, num toLow, num toHigh) {
-    return (this - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+    // cannot divide with zero
+    if (fromLow == fromHigh) {
+      throw Exception('Invalid "from range": $fromLow -> $fromHigh');
+    }
+    return ((this - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)) + toLow;
   }
 
   /// Same as [remap], however the result is being constrained to the range

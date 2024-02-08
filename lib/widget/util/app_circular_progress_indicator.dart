@@ -6,8 +6,8 @@ class AppCircularProgressIndicator extends StatelessWidget {
 
   const AppCircularProgressIndicator({
     this.color = Colors.black,
-    Key? key
-  }) : super(key: key);
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {

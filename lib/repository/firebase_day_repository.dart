@@ -26,7 +26,7 @@ class FirebaseDayRepository implements DayRepository {
     Duration diff = to.difference(from);
     int daysCount = diff.inDays.abs();
 
-    logger.v('Querying $daysCount window');
+    logger.t('Querying $daysCount window');
 
     List<Day> qDays = await dayDataProvider.getDays(
       profileId,
@@ -34,7 +34,7 @@ class FirebaseDayRepository implements DayRepository {
       to,
     );
 
-    logger.v('Got ${qDays.length} from database');
+    logger.t('Got ${qDays.length} from database');
 
     List<Day> result = [];
     for (var i = 0; i < daysCount; ++i) {
@@ -59,7 +59,7 @@ class FirebaseDayRepository implements DayRepository {
     Duration diff = to.difference(from);
     int daysCount = diff.inDays.abs();
 
-    logger.v('Streaming $daysCount window');
+    logger.t('Streaming $daysCount window');
 
     Stream<List<Day>> daysStream = dayDataProvider.getDaysStream(
       profileId,

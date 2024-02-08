@@ -42,7 +42,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(const ProfileState.loading());
       if (event.useStream) {
         bool isOnCompleteCallbackFired = false;
-        logger.v('Streaming profile: ${event.profileId}');
+        logger.t('Streaming profile: ${event.profileId}');
         _profileStreamSubscription?.cancel();
         _profileStreamSubscription = profileRepository
           .getProfileStreamById(event.profileId)
@@ -64,12 +64,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           add(const ProfileEvent.error());
         });
       } else {
-        logger.v('Loading profile: ${event.profileId}');
+        logger.t('Loading profile: ${event.profileId}');
         _profileStreamSubscription?.cancel();
         Profile profile = await profileRepository.getProfileById(event.profileId);
         emit(ProfileState.loaded(profile: profile));
         event.onComplete?.call(profile);
-        logger.v('Loaded profile: ${profile.displayName}');
+        logger.t('Loaded profile: ${profile.displayName}');
       }
     } catch (exception, stackTrace) {
       emit(const ProfileErrorState());
@@ -84,12 +84,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onReceiveProfileUpdate(ReceiveProfileUpdate event, emit) {
     emit(ProfileState.loaded(profile: event.profile));
-    logger.v('Receiving profile update: ${event.profile.displayName}');
+    logger.t('Receiving profile update: ${event.profile.displayName}');
   }
 
   void _onUpdateProfile(UpdateProfile event, emit) async {
     try {
-      logger.v('Updating profile');
+      logger.t('Updating profile');
       ProfileUpdateStrategy profileUpdateStrategy = DefaultProfileUpdateStrategy(
         profile: event.profile,
         formData: event.formData,
@@ -115,20 +115,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onCalculateConsecutiveDays(CalculateConsecutiveDays event, emit) async {
     try {
-      logger.v('Calculating consecutive days for profile: ${event.profile.displayName}');
+      logger.t('Calculating consecutive days for profile: ${event.profile.displayName}');
       DateTime now = DateTime.now();
 
       // no last session, no consecutive days
       if (event.profile.stats.lastSessionDate == null) {
         event.onComplete?.call(event.profile);
-        logger.v('No last session, nothing to calculate');
+        logger.t('No last session, nothing to calculate');
         return;
       }
 
       // last session was on yesterday, nothing to calculate yet
       if (now.isBeforePreviousDay(event.profile.stats.lastSessionDate!) == false) {
         event.onComplete?.call(event.profile);
-        logger.v('Last session was on yesterday, nothing to calculate yet');
+        logger.t('Last session was on yesterday, nothing to calculate yet');
         return;
       }
 
@@ -143,7 +143,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       await profileRepository.updateProfileData(calculatedProfile);
       emit(ProfileState.loaded(profile: calculatedProfile));
       event.onComplete?.call(calculatedProfile);
-      logger.v('Last consecutive days: ${event.profile.stats.consecutiveDays} - New consecutive days: ${calculatedStats.consecutiveDays}');
+      logger.t('Last consecutive days: ${event.profile.stats.consecutiveDays} - New consecutive days: ${calculatedStats.consecutiveDays}');
     } catch(e, stack) {
       crashlyticsService.recordError(
         exception: e,

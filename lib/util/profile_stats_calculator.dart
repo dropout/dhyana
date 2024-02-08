@@ -13,7 +13,7 @@ ProfileStats calculateConsecutiveDays(
   // Case 0:
   // Last session is null, so this is the first day, nothing to calculate
   if (stats.lastSessionDate == null) {
-    _logger.v('There were no last session, skipping consecutive days calculation.');
+    _logger.t('There were no last session, skipping consecutive days calculation.');
     return stats;
   }
 
@@ -25,7 +25,7 @@ ProfileStats calculateConsecutiveDays(
   // days are broken
   bool shouldReset = currentSessionDate.isBeforePreviousDay(lastSessionDate);
   if (shouldReset) {
-    _logger.v('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+    _logger.t('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
     return stats.copyWith(
       consecutiveDays: 0,
     );
@@ -36,14 +36,14 @@ ProfileStats calculateConsecutiveDays(
   bool isPreviousDay = currentSessionDate.isPreviousDay(lastSessionDate);
 
   if (isPreviousDay) {
-    _logger.v('Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+    _logger.t('Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
     return stats.copyWith(
       consecutiveDays: stats.consecutiveDays + 1,
     );
   } else {
     // Case 3:
     // The session is on the same day, so no need to increment or reset
-    _logger.v('Not incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+    _logger.t('Not incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
     return stats;
   }
 }
@@ -65,14 +65,14 @@ ProfileStats calculateCompletedDay(
   DateTime lastSessionDate = stats.lastSessionDate!;
   bool sameDay = currentSessionTime.isSameDay(lastSessionDate);
   if (sameDay) {
-    _logger.v('Not incrementing completed days, it\'s the same day. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionTime.toDayId()}');
+    _logger.t('Not incrementing completed days, it\'s the same day. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionTime.toDayId()}');
     return stats;
   }
 
   // Case 2:
   // If its not the the same day as the last session completed days
   // should increment
-  _logger.v('Incrementing completed days Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionTime.toDayId()}');
+  _logger.t('Incrementing completed days Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionTime.toDayId()}');
   return stats.copyWith(
     completedDaysCount: stats.completedDaysCount + 1,
   );

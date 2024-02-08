@@ -62,53 +62,55 @@ class TimerRunningScreenBody extends StatelessWidget {
     );
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Theme(
-        data: themeData,
-        child: BlocBuilder<TimerBloc, TimerState>(
-          builder: (BuildContext context, TimerState timerState) {
-            final bool isCompleted =
-              (timerState.timerStatus == TimerStatus.completed);
-            CrossFadeState crossFadeState;
-            if (isCompleted) {
-              crossFadeState = CrossFadeState.showSecond;
-            } else {
-              crossFadeState = CrossFadeState.showFirst;
-            }
-            return AnimatedCrossFade(
-              duration: const Duration(milliseconds: 256),
-              firstChild: TimerRunningView(
-                timerState: timerState,
-                onInit: () => _onInit(context),
-                onBackground: _onBackground(context),
-                onResume: _onResume(context),
-              ),
-              secondChild: TimerCompletedView(
-                timerState: timerState,
-              ),
-              layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
-                return Stack(
-                  // Align the non-positioned child to center.
-                  alignment: Alignment.center,
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    Positioned.fill(
-                      key: secondKey,
-                      // Instead of forcing the positioned child to a width
-                      // with left / right, just stick it to the top.
-                      top: 0,
-                      child: secondChild,
-                    ),
-                    Positioned.fill(
-                      key: firstKey,
-                      top: 0,
-                      child: firstChild,
-                    ),
-                  ],
-                );
-              },
-              crossFadeState: crossFadeState,
-            );
-          },
+      body: SafeArea(
+        child: Theme(
+          data: themeData,
+          child: BlocBuilder<TimerBloc, TimerState>(
+            builder: (BuildContext context, TimerState timerState) {
+              final bool isCompleted =
+                (timerState.timerStatus == TimerStatus.completed);
+              CrossFadeState crossFadeState;
+              if (isCompleted) {
+                crossFadeState = CrossFadeState.showSecond;
+              } else {
+                crossFadeState = CrossFadeState.showFirst;
+              }
+              return AnimatedCrossFade(
+                duration: const Duration(milliseconds: 256),
+                firstChild: TimerRunningView(
+                  timerState: timerState,
+                  onInit: () => _onInit(context),
+                  onBackground: _onBackground(context),
+                  onResume: _onResume(context),
+                ),
+                secondChild: TimerCompletedView(
+                  timerState: timerState,
+                ),
+                layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
+                  return Stack(
+                    // Align the non-positioned child to center.
+                    alignment: Alignment.center,
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      Positioned.fill(
+                        key: secondKey,
+                        // Instead of forcing the positioned child to a width
+                        // with left / right, just stick it to the top.
+                        top: 0,
+                        child: secondChild,
+                      ),
+                      Positioned.fill(
+                        key: firstKey,
+                        top: 0,
+                        child: firstChild,
+                      ),
+                    ],
+                  );
+                },
+                crossFadeState: crossFadeState,
+              );
+            },
+          ),
         ),
       )
     );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SoundInputPageViewScrollPhysics extends ScrollPhysics {
-  const SoundInputPageViewScrollPhysics({ScrollPhysics? parent})
-      : super(parent: parent);
+  const SoundInputPageViewScrollPhysics({super.parent});
 
   @override
   SoundInputPageViewScrollPhysics applyTo(ScrollPhysics? ancestor) {

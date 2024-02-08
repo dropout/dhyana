@@ -19,19 +19,19 @@ class ProfileMenu extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          title: Text('Aktivitás'),
+          title: const Text('Aktivitás'),
           enabled: true,
           onTap: () => context.pushNamed(AppScreen.activity.name),
         ),
         const Divider(height: 0),
         ListTile(
-          title: Text('Profile szerkesztése'),
+          title: const Text('Profile szerkesztése'),
           enabled: true,
           onTap: () => context.pushNamed(AppScreen.editProfile.name),
         ),
         const Divider(height: 0),
         ListTile(
-          title: Text('Kijelentkezés'),
+          title: const Text('Kijelentkezés'),
           enabled: true,
           onTap: () => _onSignOutPressed(context),
         ),

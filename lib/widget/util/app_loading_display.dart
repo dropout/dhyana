@@ -9,8 +9,8 @@ class AppLoadingDisplay extends StatelessWidget {
 
   const AppLoadingDisplay({
     this.text,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

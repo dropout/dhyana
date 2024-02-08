@@ -31,11 +31,11 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
 
   void _onGetDaysEvent(GetDaysEvent event, emit) async {
     try {
-      logger.v('Loading days: ${event.from} ... ${event.to}');
+      logger.t('Loading days: ${event.from} ... ${event.to}');
       emit(const DaysState.loading());
 
       if (event.useStream) {
-        logger.v('Streaming days');
+        logger.t('Streaming days');
         _streamSubscription?.cancel();
 
         _streamSubscription = dayRepository.getDaysStream(
@@ -63,10 +63,10 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
           to: event.to ?? DateTime.now(),
         );
         emit(DaysState.loaded(days: days));
-        logger.v('Successfully loaded days ${days.length}');
+        logger.t('Successfully loaded days ${days.length}');
       }
     } catch (e, stack) {
-      logger.v('Failed to get days');
+      logger.t('Failed to get days');
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
@@ -76,7 +76,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
   }
 
   void _onReceiveUpdate(ReceiveUpdateDaysEvent event, emit) {
-    logger.v('Receiving days update');
+    logger.t('Receiving days update');
     emit(DaysState.loaded(days: event.days));
   }
 

@@ -41,8 +41,8 @@ class HomeScreen extends StatelessWidget {
 
   Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
     return Scaffold(
-      body: Container(
-        color: AppColors.backgroundPaper,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -62,8 +62,6 @@ class HomeScreen extends StatelessWidget {
       right: AppThemeData.spacingMd,
       child: Wrap(
         children: [
-          SettingsButton(),
-          SizedBox(width: AppThemeData.spacingSm),
           ProfileButton()
         ],
       )

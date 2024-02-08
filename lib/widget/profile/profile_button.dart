@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_circular_progress_indicator.dart';
@@ -13,7 +14,7 @@ import 'package:go_router/go_router.dart';
 
 class ProfileButton extends StatelessWidget {
 
-  static const double size = 36.0;
+  static const double size = 40.0;
 
   const ProfileButton({
     super.key
@@ -46,13 +47,9 @@ class ProfileButton extends StatelessWidget {
   }
   
   Widget buildSignedOut(context) {
-    return HomeScreenMenuButton(
+    return GestureDetector(
       onTap: () => _signedOutTap(context),
-      child: const Icon(
-        Icons.account_circle_rounded,
-        size: 30,
-        color: Colors.white,
-      )
+      child: const ProfileButtonSignedOut(),
     );
   }
 
@@ -99,9 +96,11 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
-    return HomeScreenMenuButton(
+    return GestureDetector(
       onTap: () => _signedInTap(context, profile),
-      child: ProfileImage.fromProfile(profile),
+      child: ProfileButtonSignedIn(
+        profile: profile
+      )
     );
   }
 
@@ -117,4 +116,52 @@ class ProfileButton extends StatelessWidget {
     );
   }
 
+}
+
+class ProfileButtonSignedOut extends StatelessWidget {
+  const ProfileButtonSignedOut({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.account_circle_outlined,
+      size: ProfileButton.size,
+      color: Colors.black,
+    );
+  }
+}
+
+class ProfileButtonSignedIn extends StatelessWidget {
+
+  final Profile profile;
+
+  const ProfileButtonSignedIn({
+    required this.profile,
+    super.key
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: ProfileButton.size,
+      height: ProfileButton.size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Colors.black,
+          width: 3.0,
+        ),
+      ),
+      child: ProfileImage.fromProfile(profile),
+    );
+  }
+}
+
+class ProfileButtonLoading extends StatelessWidget {
+  const ProfileButtonLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
 }

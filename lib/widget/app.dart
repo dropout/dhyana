@@ -51,8 +51,8 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       builder: (BuildContext context, Widget? child) {
         child ??= const Placeholder();
-        return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        return MediaQuery.withClampedTextScaling(
+            maxScaleFactor: 1.0,
             child: child
         );
       },

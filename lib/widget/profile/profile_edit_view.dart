@@ -108,7 +108,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
           onTap: () => onSave(context),
         );
       case _State.loading:
-        return AppButton(
+        return const AppButton(
           text: 'SAVING...',
         );
       case _State.updated:

@@ -39,11 +39,11 @@ class _DailyChartState extends State<DailyChart> {
       builder: (context, state) {
         switch (state) {
           case DaysLoading():
-            return Text('loading');
+            return const Text('loading');
           case DaysLoaded():
             return buildLoaded(context, state);
           case DaysLoadingError():
-            return Text('error');
+            return const Text('error');
         }
       },
     );
@@ -55,8 +55,19 @@ class _DailyChartState extends State<DailyChart> {
       .map((e) => e.minutes)
       .reduce(max);
 
+    debugPrint(state.days.toString());
+    debugPrint(maxValue.toString());
+
     List<double> remappedValues = state.days
-      .map((e) => e.minutes.toDouble().remap(0, maxValue, 1, 20)).toList();
+      .map((e) {
+        try {
+          return e.minutes.toDouble().remap(0, maxValue, 1, 20).toDouble();
+        } catch (err) {
+          return 1.0;
+        }
+      }).toList();
+
+    debugPrint(remappedValues.toString());
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,

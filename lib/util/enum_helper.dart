@@ -1,16 +1,15 @@
-import 'package:flutter/foundation.dart';
 
 T? getEnumFromString<T extends Enum>(String enumString, List<T> values) {
   for (T enumEntry in values) {
-    if (describeEnum(enumEntry) == enumString) {
+    if (enumEntry.name == enumString) {
       return enumEntry;
     }
   }
   return null;
 }
 
-String enumToString(Object enumEntry) {
-  return describeEnum(enumEntry);
+String enumToString(Enum enumEntry) {
+  return enumEntry.name;
 }
 
 int getEnumIndex<T>(T enumEntry, List<T> values) {

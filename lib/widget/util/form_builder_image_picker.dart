@@ -13,35 +13,24 @@ class FormBuilderImagePicker extends FormBuilderField<Uint8List> {
   final String buttonText;
 
   FormBuilderImagePicker({
-    Key? key,
+    super.key,
 
     this.initialImageUrl,
     this.labelText = 'Photo',
     this.buttonText = 'Select Photo',
     // From Super
-    AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
-    bool enabled = true,
-    Uint8List? initialValue,
-    FocusNode? focusNode,
-    FormFieldSetter<Uint8List>? onSaved,
-    FormFieldValidator<Uint8List>? validator,
+    AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
+    super.enabled,
+    super.initialValue,
+    super.focusNode,
+    super.onSaved,
+    super.validator,
     InputDecoration decoration = const InputDecoration(),
-    required String name,
-    ValueChanged<Uint8List?>? onChanged,
-    ValueTransformer<Uint8List?>? valueTransformer,
-    VoidCallback? onReset,
+    required super.name,
+    super.onChanged,
+    super.valueTransformer,
+    super.onReset,
   }) : super(
-    key: key,
-    initialValue: initialValue,
-    name: name,
-    validator: validator,
-    valueTransformer: valueTransformer,
-    onChanged: onChanged,
-    autovalidateMode: autovalidateMode,
-    onSaved: onSaved,
-    enabled: enabled,
-    onReset: onReset,
-    focusNode: focusNode,
     builder: (FormFieldState<Uint8List?> field) {
       final state = field as FormBuilderImagePickerState;
       final widget = state.widget;
@@ -92,13 +81,13 @@ class ImagePickerWidget extends StatefulWidget {
   final void Function(Uint8List)? onImageSelected;
 
   const ImagePickerWidget({
-    Key? key,
+    super.key,
     this.validator,
     this.initialImageUrl,
     this.onImageSelected,
     this.labelText = 'Photo',
     this.buttonText = 'Select Photo'
-  }) : super(key: key);
+  });
 
   @override
   State<ImagePickerWidget> createState() => _ImagePickerWidgetState();

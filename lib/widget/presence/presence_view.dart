@@ -29,7 +29,7 @@ class PresenceView extends StatelessWidget {
   Widget buildLoaded(BuildContext context, List<Presence> presenceList) {
     return Wrap(
       children: [
-        ...presenceList.map((p) => PresenceListItem(presence: p)).toList()
+        ...presenceList.map((p) => PresenceListItem(presence: p))
       ],
     );
   }

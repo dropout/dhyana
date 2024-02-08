@@ -28,10 +28,10 @@ class Initializer {
   Logger logger = getLogger('Initializer');
 
   Future<InitResult> init() async {
-    logger.v('Starting initialization sequence');
+    logger.t('Starting initialization sequence');
 
     // Data providers
-    logger.v('Initialize data providers');
+    logger.t('Initialize data providers');
     FirebaseProfileDataProvider profileDataProvider =
       FirebaseProfileDataProvider(FirebaseFirestore.instance);
     FirebaseStorageDataProvider storageDataProvider =
@@ -39,7 +39,7 @@ class Initializer {
     FirebaseDayDataProvider dayDataProvider =
       FirebaseDayDataProvider(FirebaseFirestore.instance);
 
-    logger.v('Initialize services');
+    logger.t('Initialize services');
     AnalyticsService analyticsService = FirebaseAnalyticsService(FirebaseAnalytics.instance);
     CrashlyticsService crashlyticsService = FirebaseCrashlyticsService(FirebaseCrashlytics.instance);
     ResourceResolver resourceResolver = DefaultResourceResolver(
@@ -57,7 +57,7 @@ class Initializer {
       timerSettingsSharedPrefsService: timerSettingsSharedPrefsService,
     );
 
-    logger.v('Initialize repositories');
+    logger.t('Initialize repositories');
     AuthRepository authRepository = FirebaseAuthRepository(
       authDataProvider: FirebaseAuthProvider(fb_auth.FirebaseAuth.instance),
       profileDataProvider: profileDataProvider,
@@ -91,18 +91,18 @@ class Initializer {
       dayRepository: dayRepository,
     );
 
-    logger.v('Initialize providers');
+    logger.t('Initialize providers');
     List<Provider> providers = createProviders(
       services,
       repos,
     );
 
-    logger.v('Parsing timer settings from shared prefs');
+    logger.t('Parsing timer settings from shared prefs');
     TimerSettings timerSettings = await services
       .timerSettingsSharedPrefsService
       .getTimerSettings();
 
-    logger.v('Checking if the user has already signed in');
+    logger.t('Checking if the user has already signed in');
     User? user = await repos.authRepository.authStateChange.first;
 
     return InitResult(

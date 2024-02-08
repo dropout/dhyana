@@ -83,15 +83,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSigninWithGoogle(SigninWithGoogle event, emit) async {
     try {
-      logger.v('Signing in with Google');
+      logger.t('Signing in with Google');
       emit(const AuthState.signingIn());
       User user = await _signin(SigninMethodType.google);
       emit(AuthState.signedIn(user: user));
       event.onComplete?.call(user);
       _logAnalyticsSuccessfulSignin();
-      logger.v('Successfully signed in with Google');
+      logger.t('Successfully signed in with Google');
     } on SignInCancelled {
-      logger.v('Sign in cancelled');
+      logger.t('Sign in cancelled');
       emit(const AuthState.signedOut());
     } catch (e, stack) {
       _crashlyticsService.recordError(
@@ -106,15 +106,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSigninWithApple(SigninWithApple event, emit) async {
     try {
-      logger.v('Signing in with Apple');
+      logger.t('Signing in with Apple');
       emit(const AuthState.signingIn());
       User user = await _signin(SigninMethodType.apple);
       emit(AuthState.signedIn(user: user));
       event.onComplete?.call(user);
       _logAnalyticsSuccessfulSignin();
-      logger.v('Successfully signed in with Apple');
+      logger.t('Successfully signed in with Apple');
     } on SignInCancelled {
-      logger.v('Sign in cancelled');
+      logger.t('Sign in cancelled');
       emit(const AuthState.signedOut());
     } catch (e, stack) {
       _crashlyticsService.recordError(
@@ -132,7 +132,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     SigninWithEmailAndPassword event, emit
   ) async {
     try {
-      logger.v('Signing in with Email and Password...');
+      logger.t('Signing in with Email and Password...');
       emit(const AuthState.signingIn());
       User user = await _signin(SigninMethodType.emailAndPassword,
         email: event.email,
@@ -141,9 +141,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthState.signedIn(user: user));
       event.onComplete?.call(user);
       _logAnalyticsSuccessfulSignin();
-      logger.v('Successfully signed in with Email and Password');
+      logger.t('Successfully signed in with Email and Password');
     } on SignInCancelled {
-      logger.v('Sign in cancelled');
+      logger.t('Sign in cancelled');
       emit(const AuthState.signedOut());
     } catch (e, stack) {
       _crashlyticsService.recordError(
@@ -159,10 +159,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onAuthStateChange(ReceiveAuthStateChange event, emit) async {
     User? user = event.user;
     if (user != null) {
-      logger.v('AuthState change received, user signed in...');
+      logger.t('AuthState change received, user signed in...');
       emit(AuthState.signedIn(user: user));
     } else {
-      logger.v('AuthState change received, user signed out...');
+      logger.t('AuthState change received, user signed out...');
       emit(const AuthState.signedOut());
     }
   }
@@ -172,23 +172,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     User? user = event.user;
 
     if (user == null) {
-      logger.v('User change received signed out...');
+      logger.t('User change received signed out...');
       emit(const AuthState.signedOut());
     } else {
-      logger.v('User change received signed in...');
+      logger.t('User change received signed in...');
       emit(AuthState.signedIn(user: user));
     }
   }
 
   void _onSignout(SignOut event, emit) async {
     try {
-      logger.v('Signing out...');
+      logger.t('Signing out...');
       await _authRepository.signOut();
       _authStateChangeSub.cancel();
       _userChangeSub.cancel();
       event.onSignedOut?.call();
       emit(const AuthState.signedOut());
-      logger.v('Successfully signed out');
+      logger.t('Successfully signed out');
       _logAnalyticsSuccessfulSignout();
     } catch (error, stackTrace) {
       _crashlyticsService.recordError(

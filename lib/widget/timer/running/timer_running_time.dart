@@ -7,8 +7,8 @@ class TimerRunningTime extends StatelessWidget {
 
   const TimerRunningTime({
     required this.timerState,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   String _getRemainingFormattedTime() {
 

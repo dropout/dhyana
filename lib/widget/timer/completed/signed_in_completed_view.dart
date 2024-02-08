@@ -61,7 +61,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   }
 
   Widget buildLoading(BuildContext context) {
-    return Text('profile loading');
+    return const Text('profile loading');
   }
 
   Widget buildSeparator(BuildContext context, {

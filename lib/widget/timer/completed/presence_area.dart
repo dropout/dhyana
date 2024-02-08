@@ -94,7 +94,7 @@ class _PresenceAreaState extends State<PresenceArea> {
   }
 
   Widget buildTotalCountDisplay(BuildContext context) {
-    return Text(
+    return const Text(
       'and 32 more...',
       style: TextStyle(
         color: Colors.white,

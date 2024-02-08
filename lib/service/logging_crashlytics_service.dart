@@ -9,7 +9,7 @@ class LoggingCrashlyticsService implements CrashlyticsService {
 
   @override
   void recordError({required dynamic exception, required StackTrace stackTrace, required String reason}) {
-    logger.e(reason, exception, stackTrace);
+    logger.e(reason, error: exception, stackTrace: stackTrace);
   }
 
   @override
@@ -19,7 +19,7 @@ class LoggingCrashlyticsService implements CrashlyticsService {
 
   @override
   void setUserId(String userId) {
-    logger.v('Setting crashlytics userid: $userId');
+    logger.t('Setting crashlytics userid: $userId');
   }
 
 }

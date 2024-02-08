@@ -18,7 +18,11 @@ class AppBackButton extends StatelessWidget {
             shape: BoxShape.circle,
             color: Colors.black,
           ),
-          child: const Icon(Icons.arrow_back, color: Colors.white),
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppThemeData.spacingLg,
+          ),
         )
       ),
     );

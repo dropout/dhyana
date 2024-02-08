@@ -122,7 +122,7 @@ class _ProfileWizardViewState extends State<ProfileWizardView> {
           onTap: () => onSave(context),
         );
       case _State.loading:
-        return AppButton(
+        return const AppButton(
           text: 'SAVING...',
         );
       case _State.updated:

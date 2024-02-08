@@ -22,8 +22,8 @@ class AppCircularIconButton extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.highlightColor = Colors.red,
     this.iconSize = -20,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

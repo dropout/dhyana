@@ -36,7 +36,7 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   Widget buildProfileLoading(BuildContext context) {
-    return Text('its loading');
+    return const Text('its loading');
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
@@ -78,14 +78,14 @@ class _ProfileViewState extends State<ProfileView> {
       padding: const EdgeInsets.all(AppThemeData.spacingMd),
       child: Container(
         padding: const EdgeInsets.all(AppThemeData.spacingSm),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(AppThemeData.borderRadiusMd)),
         ),
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Icon(
                 Icons.warning_amber_rounded,
                 size: 64,

@@ -10,14 +10,10 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return HomeScreenMenuButton(
       onTap: () => GoRouter.of(context).pushNamed(AppScreen.settings.name),
-      child: const SizedBox(
-        width: 36,
-        height: 36,
-        child: Icon(
-          Icons.settings,
-          color: Colors.white,
-          size: 28,
-        ),
+      child: const Icon(
+        Icons.settings_outlined,
+        color: Colors.black,
+        size: 36,
       ),
     );
   }

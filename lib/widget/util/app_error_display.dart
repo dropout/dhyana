@@ -14,8 +14,8 @@ class AppErrorDisplay extends StatelessWidget {
     this.text,
     this.buttonText,
     this.onButtonTap,
-    Key? key
-  }) : super(key: key);
+    super.key
+  });
 
   void _handleButtonTap(BuildContext context) {
     final void Function()? onTap = onButtonTap;

@@ -1,8 +1,6 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileErrorView extends StatelessWidget {
@@ -15,10 +13,10 @@ class ProfileErrorView extends StatelessWidget {
     context.pop();
   }
 
-  void _handleLogoutButtonTap(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(const AuthEvent.signOut());
-    context.pop();
-  }
+  // void _handleLogoutButtonTap(BuildContext context) {
+  //   BlocProvider.of<AuthBloc>(context).add(const AuthEvent.signOut());
+  //   context.pop();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -134,25 +132,25 @@ class ProfileErrorView extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(BuildContext context, String buttonText) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: TextButton(
-        onPressed: () => _handleOkButtonTap(context),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                buttonText,
-                style: const TextStyle(
-                    fontSize: 21.0,
-                    fontWeight: FontWeight.w600
-                )
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildButton(BuildContext context, String buttonText) {
+  //   return Align(
+  //     alignment: Alignment.bottomCenter,
+  //     child: TextButton(
+  //       onPressed: () => _handleOkButtonTap(context),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Text(
+  //               buttonText,
+  //               style: const TextStyle(
+  //                   fontSize: 21.0,
+  //                   fontWeight: FontWeight.w600
+  //               )
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
 }

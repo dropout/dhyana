@@ -10,8 +10,8 @@ class AppCachedNetworkImage extends StatelessWidget {
   const AppCachedNetworkImage({
     required this.imageUrl,
     required this.blurHash,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

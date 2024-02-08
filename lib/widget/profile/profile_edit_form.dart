@@ -61,7 +61,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             future: Future.value(profile.photoUrl),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return Text('error');
+                return const Text('error');
               }
               if (snapshot.hasData) {
                 return FormBuilderImagePicker(

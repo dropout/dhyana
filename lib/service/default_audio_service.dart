@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/util/all.dart';
@@ -19,7 +18,7 @@ class DefaultAudioService implements AudioService {
 
   @override
   Future<void> play(Sound sound) {
-    logger.v('Playing sound: ${describeEnum(sound)} ${sound.audioResourcePath}');
+    logger.t('Playing sound: ${sound.name} ${sound.audioResourcePath}');
     return audioPlayer.play(AssetSource(sound.audioResourcePath));
   }
 

@@ -44,9 +44,9 @@ class WeeklyPerformance extends StatelessWidget {
           case DaysLoaded():
             return buildDays(context, state.days);
           case DaysLoading():
-            return Text('Loading');
+            return const Text('Loading');
           default:
-            return Text('Idle');
+            return const Text('Idle');
         }
       }
     );

@@ -50,7 +50,7 @@ class FirebaseAuthRepository implements AuthRepository {
     SigninResult signinResult =
       await authDataProvider.signIn(signinMethodType);
     if (isFirstSignin(signinResult)) {
-      logger.v('First time signing in, creating profile...');
+      logger.t('First time signing in, creating profile...');
       await _createProfile(signinResult);
     }
     isSigningIn = false;

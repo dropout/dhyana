@@ -35,11 +35,11 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
   }
 
   void _onLoadPresenceData(LoadPresenceData event, emit) async {
-    logger.v('Loading presence data');
+    logger.t('Loading presence data');
     try {
       List<Presence> presenceList = await presenceRepository
         .getPresence(event.ownProfileId);
-      logger.v('Loaded ${presenceList.length} presence items');
+      logger.t('Loaded ${presenceList.length} presence items');
       emit(PresenceState.loaded(presenceList: presenceList));
     } catch (e, stack) {
       emit(const PresenceState.error());
@@ -53,29 +53,29 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
 
   void _onShowPresence(ShowPresence event, emit) async {
     try {
-      logger.v('Showing presence');
+      logger.t('Showing presence');
       User? user = await authRepository.user;
       if (user == null) {
-        logger.v('User is not signed in, not showing presence.');
+        logger.t('User is not signed in, not showing presence.');
         return;
       }
       Profile profile = await profileRepository.getProfileById(user.uid);
       if (profile.completed) {
-        logger.v('User signed in and profile is complete, showing presence.');
+        logger.t('User signed in and profile is complete, showing presence.');
         await presenceRepository.showPresence(Presence(
           id: profile.id,
           profile: PublicProfile.fromProfile(profile: profile),
           startedAt: DateTime.now(),
         ));
       } else {
-        logger.v('User is signed in but profile is incomplete, showing anonymous presence.');
+        logger.t('User is signed in but profile is incomplete, showing anonymous presence.');
         await presenceRepository.showPresence(Presence(
           id: profile.id,
           profile: PublicProfile.anonymous(),
           startedAt: DateTime.now(),
         ));
       }
-      logger.v('Successfully showed presence.');
+      logger.t('Successfully showed presence.');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
