@@ -79,6 +79,15 @@ class AppLocalizationsHu extends AppLocalizations {
   String get loginLegalPart4 => 'Adatvédelmi nyilatkozatot';
 
   @override
+  String get activity => 'Aktivitás';
+
+  @override
+  String get editProfile => 'Profile szerkesztése';
+
+  @override
+  String get signOut => 'Kijelentkezés';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

@@ -237,6 +237,24 @@ abstract class AppLocalizations {
   /// **'Adatvédelmi nyilatkozatot'**
   String get loginLegalPart4;
 
+  /// No description provided for @activity.
+  ///
+  /// In hu, this message translates to:
+  /// **'Aktivitás'**
+  String get activity;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profile szerkesztése'**
+  String get editProfile;
+
+  /// No description provided for @signOut.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kijelentkezés'**
+  String get signOut;
+
   /// No description provided for @testPlural.
   ///
   /// In hu, this message translates to:

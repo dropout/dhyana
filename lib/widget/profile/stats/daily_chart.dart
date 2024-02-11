@@ -39,7 +39,7 @@ class _DailyChartState extends State<DailyChart> {
       builder: (context, state) {
         switch (state) {
           case DaysLoading():
-            return const Text('loading');
+            return buildLoading(context);
           case DaysLoaded():
             return buildLoaded(context, state);
           case DaysLoadingError():
@@ -49,14 +49,28 @@ class _DailyChartState extends State<DailyChart> {
     );
   }
 
+  Widget buildLoading(BuildContext context) {
+    return SizedBox(
+      height: 20,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: List<double>.filled(20, 1.0).map((e) {
+          return Expanded(
+            child: Container(
+              color: Colors.black,
+              height: e,
+            ),
+          );
+        }).toList()
+      ),
+    );
+  }
+
   Widget buildLoaded(BuildContext context, DaysLoaded state) {
 
     int maxValue = state.days
       .map((e) => e.minutes)
       .reduce(max);
-
-    debugPrint(state.days.toString());
-    debugPrint(maxValue.toString());
 
     List<double> remappedValues = state.days
       .map((e) {
@@ -67,18 +81,19 @@ class _DailyChartState extends State<DailyChart> {
         }
       }).toList();
 
-    debugPrint(remappedValues.toString());
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: remappedValues.map((e) {
-        return Expanded(
-          child: Container(
-            color: Colors.black,
-            height: e,
-          ),
-        );
-      }).toList().intersperse(const SizedBox(width: 2))
+    return SizedBox(
+      height: 20,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: remappedValues.map((e) {
+          return Expanded(
+            child: Container(
+              color: Colors.black,
+              height: e,
+            ),
+          );
+        }).toList().intersperse(const SizedBox(width: 2))
+      ),
     );
   }
 

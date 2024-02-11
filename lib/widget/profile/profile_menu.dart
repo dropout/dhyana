@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,19 +20,19 @@ class ProfileMenu extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          title: const Text('Aktivitás'),
+          title: Text(AppLocalizations.of(context).activity),
           enabled: true,
           onTap: () => context.pushNamed(AppScreen.activity.name),
         ),
         const Divider(height: 0),
         ListTile(
-          title: const Text('Profile szerkesztése'),
+          title: Text(AppLocalizations.of(context).editProfile),
           enabled: true,
           onTap: () => context.pushNamed(AppScreen.editProfile.name),
         ),
         const Divider(height: 0),
         ListTile(
-          title: const Text('Kijelentkezés'),
+          title: Text(AppLocalizations.of(context).signOut),
           enabled: true,
           onTap: () => _onSignOutPressed(context),
         ),

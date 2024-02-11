@@ -1,7 +1,9 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_circular_progress_indicator.dart';
@@ -77,21 +79,17 @@ class ProfileButton extends StatelessWidget {
             return buildProfileError(context);
           case ProfileLoadedState():
             return buildProfileLoaded(context, state.profile);
+            // return buildProfileError(context);
         }
       }
     );
   }
 
   Widget buildProfileLoading(BuildContext context) {
-    return const HomeScreenMenuButton(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Center(
-          child: AppCircularProgressIndicator(
-            color: Colors.white,
-          ),
-        ),
-      ),
+    return const SizedBox(
+      width: ProfileButton.size,
+      height: ProfileButton.size,
+      child: ProfileButtonLoading(),
     );
   }
 
@@ -105,18 +103,76 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildProfileError(BuildContext context) {
-    return HomeScreenMenuButton(
-      onTap: () => _profileLoadErrorTap(context),
-      child: const Center(
-        child: Icon(
-          Icons.warning_amber_rounded,
-          color: Colors.white,
+    return const SizedBox(
+      width: ProfileButton.size,
+      height: ProfileButton.size,
+      child: Center(child: ProfileButtonError()),
+    );
+  }
+
+}
+
+class ProfileButtonLoading extends StatefulWidget {
+
+  final Duration duration;
+  final Curve curve;
+
+  const ProfileButtonLoading({
+    this.duration = const Duration(milliseconds: 1024),
+    this.curve = Curves.easeInOutCirc,
+    super.key
+  });
+
+  @override
+  State<ProfileButtonLoading> createState() => _ProfileButtonLoadingState();
+}
+
+class _ProfileButtonLoadingState extends State<ProfileButtonLoading>
+    with SingleTickerProviderStateMixin {
+
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: widget.duration,
+      vsync: this,
+    )
+      ..forward()
+      ..addListener(() {
+        if (controller.isCompleted) {
+          controller.repeat(reverse: true);
+        }
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) => Transform.scale(
+        scale: widget.curve.transform(controller.value).remapAndClamp(0.0, 1.0, 0.25, 0.55).toDouble(),
+        child: child,
+      ),
+      child: Container(
+        width: ProfileButton.size,
+        height: ProfileButton.size,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.black,
         ),
       ),
     );
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }
+
 
 class ProfileButtonSignedOut extends StatelessWidget {
   const ProfileButtonSignedOut({super.key});
@@ -157,11 +213,47 @@ class ProfileButtonSignedIn extends StatelessWidget {
   }
 }
 
-class ProfileButtonLoading extends StatelessWidget {
-  const ProfileButtonLoading({super.key});
+class ProfileButtonError extends StatefulWidget {
+  const ProfileButtonError({super.key});
+
+  @override
+  State<ProfileButtonError> createState() => _ProfileButtonErrorState();
+}
+
+class _ProfileButtonErrorState extends State<ProfileButtonError> {
+
+  late bool isPopupVisible;
+
+  @override
+  void initState() {
+    isPopupVisible = false;
+    super.initState();
+  }
+
+  void _onSignOutPressed(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(const SignOut());
+    context.goNamed(AppScreen.home.name);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return PopupMenuButton(
+      icon: const Icon(
+        Icons.warning_amber_rounded,
+        size: ProfileButton.size,
+        color: Colors.black,
+      ),
+      elevation: 1,
+      itemBuilder: (BuildContext context) {
+        return <PopupMenuEntry<int>>[
+          PopupMenuItem<int>(
+            value: 0,
+            child: Text(AppLocalizations.of(context).signOut),
+            onTap: () => { _onSignOutPressed(context) },
+          ),
+        ];
+      }
+    );
   }
 }
+

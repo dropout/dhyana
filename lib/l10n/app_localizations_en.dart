@@ -79,6 +79,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginLegalPart4 => 'Privacy statement';
 
   @override
+  String get activity => 'Activity';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get signOut => 'Signout';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

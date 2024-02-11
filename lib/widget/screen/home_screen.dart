@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/timer_settings_bloc_provider.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
-import 'package:dhyana/widget/settings/settings_button.dart';
 
 class HomeScreen extends StatelessWidget {
 
