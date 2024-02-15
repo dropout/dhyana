@@ -16,23 +16,35 @@ class ProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          title: Text(AppLocalizations.of(context).activity),
+          title: Text(
+            AppLocalizations.of(context).activity,
+            style: textStyle,
+          ),
           enabled: true,
           onTap: () => context.pushNamed(AppScreen.activity.name),
         ),
         const Divider(height: 0),
         ListTile(
-          title: Text(AppLocalizations.of(context).editProfile),
+          title: Text(
+            AppLocalizations.of(context).editProfile,
+            style: textStyle,
+          ),
           enabled: true,
           onTap: () => context.pushNamed(AppScreen.editProfile.name),
         ),
         const Divider(height: 0),
         ListTile(
-          title: Text(AppLocalizations.of(context).signOut),
+          title: Text(
+            AppLocalizations.of(context).signOut,
+            style: textStyle,
+          ),
           enabled: true,
           onTap: () => _onSignOutPressed(context),
         ),

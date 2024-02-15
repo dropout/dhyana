@@ -12,7 +12,7 @@ part of 'presence_query_options.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PresenceQueryOptions {
@@ -58,22 +58,22 @@ class _$PresenceQueryOptionsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PresenceQueryOptionsCopyWith<$Res>
+abstract class _$$PresenceQueryOptionsImplCopyWith<$Res>
     implements $PresenceQueryOptionsCopyWith<$Res> {
-  factory _$$_PresenceQueryOptionsCopyWith(_$_PresenceQueryOptions value,
-          $Res Function(_$_PresenceQueryOptions) then) =
-      __$$_PresenceQueryOptionsCopyWithImpl<$Res>;
+  factory _$$PresenceQueryOptionsImplCopyWith(_$PresenceQueryOptionsImpl value,
+          $Res Function(_$PresenceQueryOptionsImpl) then) =
+      __$$PresenceQueryOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Duration windowSize});
 }
 
 /// @nodoc
-class __$$_PresenceQueryOptionsCopyWithImpl<$Res>
-    extends _$PresenceQueryOptionsCopyWithImpl<$Res, _$_PresenceQueryOptions>
-    implements _$$_PresenceQueryOptionsCopyWith<$Res> {
-  __$$_PresenceQueryOptionsCopyWithImpl(_$_PresenceQueryOptions _value,
-      $Res Function(_$_PresenceQueryOptions) _then)
+class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
+    extends _$PresenceQueryOptionsCopyWithImpl<$Res, _$PresenceQueryOptionsImpl>
+    implements _$$PresenceQueryOptionsImplCopyWith<$Res> {
+  __$$PresenceQueryOptionsImplCopyWithImpl(_$PresenceQueryOptionsImpl _value,
+      $Res Function(_$PresenceQueryOptionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +81,7 @@ class __$$_PresenceQueryOptionsCopyWithImpl<$Res>
   $Res call({
     Object? windowSize = null,
   }) {
-    return _then(_$_PresenceQueryOptions(
+    return _then(_$PresenceQueryOptionsImpl(
       windowSize: null == windowSize
           ? _value.windowSize
           : windowSize // ignore: cast_nullable_to_non_nullable
@@ -92,9 +92,9 @@ class __$$_PresenceQueryOptionsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PresenceQueryOptions extends _PresenceQueryOptions
+class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
     with DiagnosticableTreeMixin {
-  const _$_PresenceQueryOptions({this.windowSize = const Duration(hours: 3)})
+  const _$PresenceQueryOptionsImpl({this.windowSize = const Duration(hours: 3)})
       : super._();
 
   @override
@@ -115,10 +115,10 @@ class _$_PresenceQueryOptions extends _PresenceQueryOptions
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PresenceQueryOptions &&
+            other is _$PresenceQueryOptionsImpl &&
             (identical(other.windowSize, windowSize) ||
                 other.windowSize == windowSize));
   }
@@ -129,20 +129,21 @@ class _$_PresenceQueryOptions extends _PresenceQueryOptions
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PresenceQueryOptionsCopyWith<_$_PresenceQueryOptions> get copyWith =>
-      __$$_PresenceQueryOptionsCopyWithImpl<_$_PresenceQueryOptions>(
-          this, _$identity);
+  _$$PresenceQueryOptionsImplCopyWith<_$PresenceQueryOptionsImpl>
+      get copyWith =>
+          __$$PresenceQueryOptionsImplCopyWithImpl<_$PresenceQueryOptionsImpl>(
+              this, _$identity);
 }
 
 abstract class _PresenceQueryOptions extends PresenceQueryOptions {
   const factory _PresenceQueryOptions({final Duration windowSize}) =
-      _$_PresenceQueryOptions;
+      _$PresenceQueryOptionsImpl;
   const _PresenceQueryOptions._() : super._();
 
   @override
   Duration get windowSize;
   @override
   @JsonKey(ignore: true)
-  _$$_PresenceQueryOptionsCopyWith<_$_PresenceQueryOptions> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PresenceQueryOptionsImplCopyWith<_$PresenceQueryOptionsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

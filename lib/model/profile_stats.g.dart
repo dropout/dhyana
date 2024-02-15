@@ -6,8 +6,8 @@ part of 'profile_stats.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProfileStats _$$_ProfileStatsFromJson(Map<String, dynamic> json) =>
-    _$_ProfileStats(
+_$ProfileStatsImpl _$$ProfileStatsImplFromJson(Map<String, dynamic> json) =>
+    _$ProfileStatsImpl(
       consecutiveDays: json['consecutiveDays'] as int,
       completedMinutesCount: json['completedMinutesCount'] as int,
       completedSessionsCount: json['completedSessionsCount'] as int,
@@ -16,7 +16,7 @@ _$_ProfileStats _$$_ProfileStatsFromJson(Map<String, dynamic> json) =>
           json['lastSessionDate'], const DateTimeConverter().fromJson),
     );
 
-Map<String, dynamic> _$$_ProfileStatsToJson(_$_ProfileStats instance) =>
+Map<String, dynamic> _$$ProfileStatsImplToJson(_$ProfileStatsImpl instance) =>
     <String, dynamic>{
       'consecutiveDays': instance.consecutiveDays,
       'completedMinutesCount': instance.completedMinutesCount,

@@ -64,7 +64,6 @@ class Profile with _$Profile implements Model {
     );
   }
 
-
   factory Profile.fromJson(Map<String, Object?> json) =>
     _$ProfileFromJson(json);
 

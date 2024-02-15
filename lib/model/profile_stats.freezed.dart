@@ -12,7 +12,7 @@ part of 'profile_stats.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProfileStats _$ProfileStatsFromJson(Map<String, dynamic> json) {
   return _ProfileStats.fromJson(json);
@@ -92,11 +92,11 @@ class _$ProfileStatsCopyWithImpl<$Res, $Val extends ProfileStats>
 }
 
 /// @nodoc
-abstract class _$$_ProfileStatsCopyWith<$Res>
+abstract class _$$ProfileStatsImplCopyWith<$Res>
     implements $ProfileStatsCopyWith<$Res> {
-  factory _$$_ProfileStatsCopyWith(
-          _$_ProfileStats value, $Res Function(_$_ProfileStats) then) =
-      __$$_ProfileStatsCopyWithImpl<$Res>;
+  factory _$$ProfileStatsImplCopyWith(
+          _$ProfileStatsImpl value, $Res Function(_$ProfileStatsImpl) then) =
+      __$$ProfileStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,11 +108,11 @@ abstract class _$$_ProfileStatsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProfileStatsCopyWithImpl<$Res>
-    extends _$ProfileStatsCopyWithImpl<$Res, _$_ProfileStats>
-    implements _$$_ProfileStatsCopyWith<$Res> {
-  __$$_ProfileStatsCopyWithImpl(
-      _$_ProfileStats _value, $Res Function(_$_ProfileStats) _then)
+class __$$ProfileStatsImplCopyWithImpl<$Res>
+    extends _$ProfileStatsCopyWithImpl<$Res, _$ProfileStatsImpl>
+    implements _$$ProfileStatsImplCopyWith<$Res> {
+  __$$ProfileStatsImplCopyWithImpl(
+      _$ProfileStatsImpl _value, $Res Function(_$ProfileStatsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +124,7 @@ class __$$_ProfileStatsCopyWithImpl<$Res>
     Object? completedDaysCount = null,
     Object? lastSessionDate = freezed,
   }) {
-    return _then(_$_ProfileStats(
+    return _then(_$ProfileStatsImpl(
       consecutiveDays: null == consecutiveDays
           ? _value.consecutiveDays
           : consecutiveDays // ignore: cast_nullable_to_non_nullable
@@ -151,16 +151,16 @@ class __$$_ProfileStatsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
-  const _$_ProfileStats(
+class _$ProfileStatsImpl with DiagnosticableTreeMixin implements _ProfileStats {
+  const _$ProfileStatsImpl(
       {required this.consecutiveDays,
       required this.completedMinutesCount,
       required this.completedSessionsCount,
       required this.completedDaysCount,
       @DateTimeConverter() this.lastSessionDate});
 
-  factory _$_ProfileStats.fromJson(Map<String, dynamic> json) =>
-      _$$_ProfileStatsFromJson(json);
+  factory _$ProfileStatsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProfileStatsImplFromJson(json);
 
   @override
   final int consecutiveDays;
@@ -193,10 +193,10 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProfileStats &&
+            other is _$ProfileStatsImpl &&
             (identical(other.consecutiveDays, consecutiveDays) ||
                 other.consecutiveDays == consecutiveDays) &&
             (identical(other.completedMinutesCount, completedMinutesCount) ||
@@ -222,12 +222,12 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProfileStatsCopyWith<_$_ProfileStats> get copyWith =>
-      __$$_ProfileStatsCopyWithImpl<_$_ProfileStats>(this, _$identity);
+  _$$ProfileStatsImplCopyWith<_$ProfileStatsImpl> get copyWith =>
+      __$$ProfileStatsImplCopyWithImpl<_$ProfileStatsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProfileStatsToJson(
+    return _$$ProfileStatsImplToJson(
       this,
     );
   }
@@ -235,14 +235,15 @@ class _$_ProfileStats with DiagnosticableTreeMixin implements _ProfileStats {
 
 abstract class _ProfileStats implements ProfileStats {
   const factory _ProfileStats(
-      {required final int consecutiveDays,
-      required final int completedMinutesCount,
-      required final int completedSessionsCount,
-      required final int completedDaysCount,
-      @DateTimeConverter() final DateTime? lastSessionDate}) = _$_ProfileStats;
+          {required final int consecutiveDays,
+          required final int completedMinutesCount,
+          required final int completedSessionsCount,
+          required final int completedDaysCount,
+          @DateTimeConverter() final DateTime? lastSessionDate}) =
+      _$ProfileStatsImpl;
 
   factory _ProfileStats.fromJson(Map<String, dynamic> json) =
-      _$_ProfileStats.fromJson;
+      _$ProfileStatsImpl.fromJson;
 
   @override
   int get consecutiveDays;
@@ -257,6 +258,6 @@ abstract class _ProfileStats implements ProfileStats {
   DateTime? get lastSessionDate;
   @override
   @JsonKey(ignore: true)
-  _$$_ProfileStatsCopyWith<_$_ProfileStats> get copyWith =>
+  _$$ProfileStatsImplCopyWith<_$ProfileStatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

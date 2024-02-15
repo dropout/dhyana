@@ -12,7 +12,7 @@ part of 'presence.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Presence _$PresenceFromJson(Map<String, dynamic> json) {
   return _Presence.fromJson(json);
@@ -87,10 +87,11 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
 }
 
 /// @nodoc
-abstract class _$$_PresenceCopyWith<$Res> implements $PresenceCopyWith<$Res> {
-  factory _$$_PresenceCopyWith(
-          _$_Presence value, $Res Function(_$_Presence) then) =
-      __$$_PresenceCopyWithImpl<$Res>;
+abstract class _$$PresenceImplCopyWith<$Res>
+    implements $PresenceCopyWith<$Res> {
+  factory _$$PresenceImplCopyWith(
+          _$PresenceImpl value, $Res Function(_$PresenceImpl) then) =
+      __$$PresenceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +104,11 @@ abstract class _$$_PresenceCopyWith<$Res> implements $PresenceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PresenceCopyWithImpl<$Res>
-    extends _$PresenceCopyWithImpl<$Res, _$_Presence>
-    implements _$$_PresenceCopyWith<$Res> {
-  __$$_PresenceCopyWithImpl(
-      _$_Presence _value, $Res Function(_$_Presence) _then)
+class __$$PresenceImplCopyWithImpl<$Res>
+    extends _$PresenceCopyWithImpl<$Res, _$PresenceImpl>
+    implements _$$PresenceImplCopyWith<$Res> {
+  __$$PresenceImplCopyWithImpl(
+      _$PresenceImpl _value, $Res Function(_$PresenceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +118,7 @@ class __$$_PresenceCopyWithImpl<$Res>
     Object? profile = null,
     Object? startedAt = null,
   }) {
-    return _then(_$_Presence(
+    return _then(_$PresenceImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -136,15 +137,15 @@ class __$$_PresenceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Presence extends _Presence with DiagnosticableTreeMixin {
-  const _$_Presence(
+class _$PresenceImpl extends _Presence with DiagnosticableTreeMixin {
+  const _$PresenceImpl(
       {required this.id,
       required this.profile,
       @DateTimeConverter() required this.startedAt})
       : super._();
 
-  factory _$_Presence.fromJson(Map<String, dynamic> json) =>
-      _$$_PresenceFromJson(json);
+  factory _$PresenceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PresenceImplFromJson(json);
 
   @override
   final String id;
@@ -170,10 +171,10 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Presence &&
+            other is _$PresenceImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.startedAt, startedAt) ||
@@ -187,12 +188,12 @@ class _$_Presence extends _Presence with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PresenceCopyWith<_$_Presence> get copyWith =>
-      __$$_PresenceCopyWithImpl<_$_Presence>(this, _$identity);
+  _$$PresenceImplCopyWith<_$PresenceImpl> get copyWith =>
+      __$$PresenceImplCopyWithImpl<_$PresenceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PresenceToJson(
+    return _$$PresenceImplToJson(
       this,
     );
   }
@@ -202,10 +203,11 @@ abstract class _Presence extends Presence {
   const factory _Presence(
       {required final String id,
       required final PublicProfile profile,
-      @DateTimeConverter() required final DateTime startedAt}) = _$_Presence;
+      @DateTimeConverter() required final DateTime startedAt}) = _$PresenceImpl;
   const _Presence._() : super._();
 
-  factory _Presence.fromJson(Map<String, dynamic> json) = _$_Presence.fromJson;
+  factory _Presence.fromJson(Map<String, dynamic> json) =
+      _$PresenceImpl.fromJson;
 
   @override
   String get id;
@@ -216,6 +218,6 @@ abstract class _Presence extends Presence {
   DateTime get startedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_PresenceCopyWith<_$_Presence> get copyWith =>
+  _$$PresenceImplCopyWith<_$PresenceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

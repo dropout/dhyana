@@ -12,7 +12,7 @@ part of 'presence_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PresenceEvent {
@@ -75,20 +75,20 @@ class _$PresenceEventCopyWithImpl<$Res, $Val extends PresenceEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadPresenceDataCopyWith<$Res> {
-  factory _$$LoadPresenceDataCopyWith(
-          _$LoadPresenceData value, $Res Function(_$LoadPresenceData) then) =
-      __$$LoadPresenceDataCopyWithImpl<$Res>;
+abstract class _$$LoadPresenceDataImplCopyWith<$Res> {
+  factory _$$LoadPresenceDataImplCopyWith(_$LoadPresenceDataImpl value,
+          $Res Function(_$LoadPresenceDataImpl) then) =
+      __$$LoadPresenceDataImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? ownProfileId});
 }
 
 /// @nodoc
-class __$$LoadPresenceDataCopyWithImpl<$Res>
-    extends _$PresenceEventCopyWithImpl<$Res, _$LoadPresenceData>
-    implements _$$LoadPresenceDataCopyWith<$Res> {
-  __$$LoadPresenceDataCopyWithImpl(
-      _$LoadPresenceData _value, $Res Function(_$LoadPresenceData) _then)
+class __$$LoadPresenceDataImplCopyWithImpl<$Res>
+    extends _$PresenceEventCopyWithImpl<$Res, _$LoadPresenceDataImpl>
+    implements _$$LoadPresenceDataImplCopyWith<$Res> {
+  __$$LoadPresenceDataImplCopyWithImpl(_$LoadPresenceDataImpl _value,
+      $Res Function(_$LoadPresenceDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +96,7 @@ class __$$LoadPresenceDataCopyWithImpl<$Res>
   $Res call({
     Object? ownProfileId = freezed,
   }) {
-    return _then(_$LoadPresenceData(
+    return _then(_$LoadPresenceDataImpl(
       ownProfileId: freezed == ownProfileId
           ? _value.ownProfileId
           : ownProfileId // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$LoadPresenceDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadPresenceData extends LoadPresenceData {
-  const _$LoadPresenceData({this.ownProfileId}) : super._();
+class _$LoadPresenceDataImpl extends LoadPresenceData {
+  const _$LoadPresenceDataImpl({this.ownProfileId}) : super._();
 
   @override
   final String? ownProfileId;
@@ -119,10 +119,10 @@ class _$LoadPresenceData extends LoadPresenceData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadPresenceData &&
+            other is _$LoadPresenceDataImpl &&
             (identical(other.ownProfileId, ownProfileId) ||
                 other.ownProfileId == ownProfileId));
   }
@@ -133,8 +133,9 @@ class _$LoadPresenceData extends LoadPresenceData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadPresenceDataCopyWith<_$LoadPresenceData> get copyWith =>
-      __$$LoadPresenceDataCopyWithImpl<_$LoadPresenceData>(this, _$identity);
+  _$$LoadPresenceDataImplCopyWith<_$LoadPresenceDataImpl> get copyWith =>
+      __$$LoadPresenceDataImplCopyWithImpl<_$LoadPresenceDataImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -201,35 +202,35 @@ class _$LoadPresenceData extends LoadPresenceData {
 
 abstract class LoadPresenceData extends PresenceEvent {
   const factory LoadPresenceData({final String? ownProfileId}) =
-      _$LoadPresenceData;
+      _$LoadPresenceDataImpl;
   const LoadPresenceData._() : super._();
 
   String? get ownProfileId;
   @JsonKey(ignore: true)
-  _$$LoadPresenceDataCopyWith<_$LoadPresenceData> get copyWith =>
+  _$$LoadPresenceDataImplCopyWith<_$LoadPresenceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ShowPresenceCopyWith<$Res> {
-  factory _$$ShowPresenceCopyWith(
-          _$ShowPresence value, $Res Function(_$ShowPresence) then) =
-      __$$ShowPresenceCopyWithImpl<$Res>;
+abstract class _$$ShowPresenceImplCopyWith<$Res> {
+  factory _$$ShowPresenceImplCopyWith(
+          _$ShowPresenceImpl value, $Res Function(_$ShowPresenceImpl) then) =
+      __$$ShowPresenceImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ShowPresenceCopyWithImpl<$Res>
-    extends _$PresenceEventCopyWithImpl<$Res, _$ShowPresence>
-    implements _$$ShowPresenceCopyWith<$Res> {
-  __$$ShowPresenceCopyWithImpl(
-      _$ShowPresence _value, $Res Function(_$ShowPresence) _then)
+class __$$ShowPresenceImplCopyWithImpl<$Res>
+    extends _$PresenceEventCopyWithImpl<$Res, _$ShowPresenceImpl>
+    implements _$$ShowPresenceImplCopyWith<$Res> {
+  __$$ShowPresenceImplCopyWithImpl(
+      _$ShowPresenceImpl _value, $Res Function(_$ShowPresenceImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ShowPresence extends ShowPresence {
-  const _$ShowPresence() : super._();
+class _$ShowPresenceImpl extends ShowPresence {
+  const _$ShowPresenceImpl() : super._();
 
   @override
   String toString() {
@@ -237,9 +238,9 @@ class _$ShowPresence extends ShowPresence {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ShowPresence);
+        (other.runtimeType == runtimeType && other is _$ShowPresenceImpl);
   }
 
   @override
@@ -309,7 +310,7 @@ class _$ShowPresence extends ShowPresence {
 }
 
 abstract class ShowPresence extends PresenceEvent {
-  const factory ShowPresence() = _$ShowPresence;
+  const factory ShowPresence() = _$ShowPresenceImpl;
   const ShowPresence._() : super._();
 }
 
@@ -386,24 +387,25 @@ class _$PresenceStateCopyWithImpl<$Res, $Val extends PresenceState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$PresenceStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$PresenceStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial extends _Initial {
-  const _$_Initial() : super._();
+class _$InitialImpl extends _Initial {
+  const _$InitialImpl() : super._();
 
   @override
   String toString() {
@@ -411,9 +413,9 @@ class _$_Initial extends _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -495,30 +497,30 @@ class _$_Initial extends _Initial {
 }
 
 abstract class _Initial extends PresenceState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial() = _$InitialImpl;
   const _Initial._() : super._();
 }
 
 /// @nodoc
-abstract class _$$PresenceLoadingStateCopyWith<$Res> {
-  factory _$$PresenceLoadingStateCopyWith(_$PresenceLoadingState value,
-          $Res Function(_$PresenceLoadingState) then) =
-      __$$PresenceLoadingStateCopyWithImpl<$Res>;
+abstract class _$$PresenceLoadingStateImplCopyWith<$Res> {
+  factory _$$PresenceLoadingStateImplCopyWith(_$PresenceLoadingStateImpl value,
+          $Res Function(_$PresenceLoadingStateImpl) then) =
+      __$$PresenceLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PresenceLoadingStateCopyWithImpl<$Res>
-    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceLoadingState>
-    implements _$$PresenceLoadingStateCopyWith<$Res> {
-  __$$PresenceLoadingStateCopyWithImpl(_$PresenceLoadingState _value,
-      $Res Function(_$PresenceLoadingState) _then)
+class __$$PresenceLoadingStateImplCopyWithImpl<$Res>
+    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceLoadingStateImpl>
+    implements _$$PresenceLoadingStateImplCopyWith<$Res> {
+  __$$PresenceLoadingStateImplCopyWithImpl(_$PresenceLoadingStateImpl _value,
+      $Res Function(_$PresenceLoadingStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PresenceLoadingState extends PresenceLoadingState {
-  const _$PresenceLoadingState() : super._();
+class _$PresenceLoadingStateImpl extends PresenceLoadingState {
+  const _$PresenceLoadingStateImpl() : super._();
 
   @override
   String toString() {
@@ -526,9 +528,10 @@ class _$PresenceLoadingState extends PresenceLoadingState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PresenceLoadingState);
+        (other.runtimeType == runtimeType &&
+            other is _$PresenceLoadingStateImpl);
   }
 
   @override
@@ -610,25 +613,25 @@ class _$PresenceLoadingState extends PresenceLoadingState {
 }
 
 abstract class PresenceLoadingState extends PresenceState {
-  const factory PresenceLoadingState() = _$PresenceLoadingState;
+  const factory PresenceLoadingState() = _$PresenceLoadingStateImpl;
   const PresenceLoadingState._() : super._();
 }
 
 /// @nodoc
-abstract class _$$PresenceLoadedStateCopyWith<$Res> {
-  factory _$$PresenceLoadedStateCopyWith(_$PresenceLoadedState value,
-          $Res Function(_$PresenceLoadedState) then) =
-      __$$PresenceLoadedStateCopyWithImpl<$Res>;
+abstract class _$$PresenceLoadedStateImplCopyWith<$Res> {
+  factory _$$PresenceLoadedStateImplCopyWith(_$PresenceLoadedStateImpl value,
+          $Res Function(_$PresenceLoadedStateImpl) then) =
+      __$$PresenceLoadedStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Presence> presenceList});
 }
 
 /// @nodoc
-class __$$PresenceLoadedStateCopyWithImpl<$Res>
-    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceLoadedState>
-    implements _$$PresenceLoadedStateCopyWith<$Res> {
-  __$$PresenceLoadedStateCopyWithImpl(
-      _$PresenceLoadedState _value, $Res Function(_$PresenceLoadedState) _then)
+class __$$PresenceLoadedStateImplCopyWithImpl<$Res>
+    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceLoadedStateImpl>
+    implements _$$PresenceLoadedStateImplCopyWith<$Res> {
+  __$$PresenceLoadedStateImplCopyWithImpl(_$PresenceLoadedStateImpl _value,
+      $Res Function(_$PresenceLoadedStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -636,7 +639,7 @@ class __$$PresenceLoadedStateCopyWithImpl<$Res>
   $Res call({
     Object? presenceList = null,
   }) {
-    return _then(_$PresenceLoadedState(
+    return _then(_$PresenceLoadedStateImpl(
       presenceList: null == presenceList
           ? _value._presenceList
           : presenceList // ignore: cast_nullable_to_non_nullable
@@ -647,8 +650,8 @@ class __$$PresenceLoadedStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PresenceLoadedState extends PresenceLoadedState {
-  const _$PresenceLoadedState({required final List<Presence> presenceList})
+class _$PresenceLoadedStateImpl extends PresenceLoadedState {
+  const _$PresenceLoadedStateImpl({required final List<Presence> presenceList})
       : _presenceList = presenceList,
         super._();
 
@@ -666,10 +669,10 @@ class _$PresenceLoadedState extends PresenceLoadedState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PresenceLoadedState &&
+            other is _$PresenceLoadedStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._presenceList, _presenceList));
   }
@@ -681,8 +684,8 @@ class _$PresenceLoadedState extends PresenceLoadedState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PresenceLoadedStateCopyWith<_$PresenceLoadedState> get copyWith =>
-      __$$PresenceLoadedStateCopyWithImpl<_$PresenceLoadedState>(
+  _$$PresenceLoadedStateImplCopyWith<_$PresenceLoadedStateImpl> get copyWith =>
+      __$$PresenceLoadedStateImplCopyWithImpl<_$PresenceLoadedStateImpl>(
           this, _$identity);
 
   @override
@@ -762,35 +765,35 @@ class _$PresenceLoadedState extends PresenceLoadedState {
 
 abstract class PresenceLoadedState extends PresenceState {
   const factory PresenceLoadedState(
-      {required final List<Presence> presenceList}) = _$PresenceLoadedState;
+      {required final List<Presence> presenceList}) = _$PresenceLoadedStateImpl;
   const PresenceLoadedState._() : super._();
 
   List<Presence> get presenceList;
   @JsonKey(ignore: true)
-  _$$PresenceLoadedStateCopyWith<_$PresenceLoadedState> get copyWith =>
+  _$$PresenceLoadedStateImplCopyWith<_$PresenceLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PresenceErrorStateCopyWith<$Res> {
-  factory _$$PresenceErrorStateCopyWith(_$PresenceErrorState value,
-          $Res Function(_$PresenceErrorState) then) =
-      __$$PresenceErrorStateCopyWithImpl<$Res>;
+abstract class _$$PresenceErrorStateImplCopyWith<$Res> {
+  factory _$$PresenceErrorStateImplCopyWith(_$PresenceErrorStateImpl value,
+          $Res Function(_$PresenceErrorStateImpl) then) =
+      __$$PresenceErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PresenceErrorStateCopyWithImpl<$Res>
-    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceErrorState>
-    implements _$$PresenceErrorStateCopyWith<$Res> {
-  __$$PresenceErrorStateCopyWithImpl(
-      _$PresenceErrorState _value, $Res Function(_$PresenceErrorState) _then)
+class __$$PresenceErrorStateImplCopyWithImpl<$Res>
+    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceErrorStateImpl>
+    implements _$$PresenceErrorStateImplCopyWith<$Res> {
+  __$$PresenceErrorStateImplCopyWithImpl(_$PresenceErrorStateImpl _value,
+      $Res Function(_$PresenceErrorStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PresenceErrorState extends PresenceErrorState {
-  const _$PresenceErrorState() : super._();
+class _$PresenceErrorStateImpl extends PresenceErrorState {
+  const _$PresenceErrorStateImpl() : super._();
 
   @override
   String toString() {
@@ -798,9 +801,9 @@ class _$PresenceErrorState extends PresenceErrorState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PresenceErrorState);
+        (other.runtimeType == runtimeType && other is _$PresenceErrorStateImpl);
   }
 
   @override
@@ -882,6 +885,6 @@ class _$PresenceErrorState extends PresenceErrorState {
 }
 
 abstract class PresenceErrorState extends PresenceState {
-  const factory PresenceErrorState() = _$PresenceErrorState;
+  const factory PresenceErrorState() = _$PresenceErrorStateImpl;
   const PresenceErrorState._() : super._();
 }

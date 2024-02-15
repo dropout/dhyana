@@ -18,7 +18,7 @@ extension AppScreenExtension on AppScreen {
       case AppScreen.login:
         return '/login';
       case AppScreen.profile:
-        return '/profile';
+        return '/profile/:profileId';
       case AppScreen.profileWizard:
         return '/profileWizard';
       case AppScreen.editProfile:

@@ -12,7 +12,7 @@ part of 'timer_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TimerSettings _$TimerSettingsFromJson(Map<String, dynamic> json) {
   return _TimerSettings.fromJson(json);
@@ -85,11 +85,11 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
 }
 
 /// @nodoc
-abstract class _$$_TimerSettingsCopyWith<$Res>
+abstract class _$$TimerSettingsImplCopyWith<$Res>
     implements $TimerSettingsCopyWith<$Res> {
-  factory _$$_TimerSettingsCopyWith(
-          _$_TimerSettings value, $Res Function(_$_TimerSettings) then) =
-      __$$_TimerSettingsCopyWithImpl<$Res>;
+  factory _$$TimerSettingsImplCopyWith(
+          _$TimerSettingsImpl value, $Res Function(_$TimerSettingsImpl) then) =
+      __$$TimerSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -100,11 +100,11 @@ abstract class _$$_TimerSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TimerSettingsCopyWithImpl<$Res>
-    extends _$TimerSettingsCopyWithImpl<$Res, _$_TimerSettings>
-    implements _$$_TimerSettingsCopyWith<$Res> {
-  __$$_TimerSettingsCopyWithImpl(
-      _$_TimerSettings _value, $Res Function(_$_TimerSettings) _then)
+class __$$TimerSettingsImplCopyWithImpl<$Res>
+    extends _$TimerSettingsCopyWithImpl<$Res, _$TimerSettingsImpl>
+    implements _$$TimerSettingsImplCopyWith<$Res> {
+  __$$TimerSettingsImplCopyWithImpl(
+      _$TimerSettingsImpl _value, $Res Function(_$TimerSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_TimerSettingsCopyWithImpl<$Res>
     Object? startingSound = null,
     Object? endingSound = null,
   }) {
-    return _then(_$_TimerSettings(
+    return _then(_$TimerSettingsImpl(
       warmup: null == warmup
           ? _value.warmup
           : warmup // ignore: cast_nullable_to_non_nullable
@@ -138,16 +138,16 @@ class __$$_TimerSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
-  const _$_TimerSettings(
+class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
+  const _$TimerSettingsImpl(
       {required this.warmup,
       @DurationConverter() required this.duration,
       required this.startingSound,
       required this.endingSound})
       : super._();
 
-  factory _$_TimerSettings.fromJson(Map<String, dynamic> json) =>
-      _$$_TimerSettingsFromJson(json);
+  factory _$TimerSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TimerSettingsImplFromJson(json);
 
   @override
   final Duration warmup;
@@ -176,10 +176,10 @@ class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TimerSettings &&
+            other is _$TimerSettingsImpl &&
             (identical(other.warmup, warmup) || other.warmup == warmup) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
@@ -197,12 +197,12 @@ class _$_TimerSettings extends _TimerSettings with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TimerSettingsCopyWith<_$_TimerSettings> get copyWith =>
-      __$$_TimerSettingsCopyWithImpl<_$_TimerSettings>(this, _$identity);
+  _$$TimerSettingsImplCopyWith<_$TimerSettingsImpl> get copyWith =>
+      __$$TimerSettingsImplCopyWithImpl<_$TimerSettingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TimerSettingsToJson(
+    return _$$TimerSettingsImplToJson(
       this,
     );
   }
@@ -213,11 +213,11 @@ abstract class _TimerSettings extends TimerSettings {
       {required final Duration warmup,
       @DurationConverter() required final Duration duration,
       required final Sound startingSound,
-      required final Sound endingSound}) = _$_TimerSettings;
+      required final Sound endingSound}) = _$TimerSettingsImpl;
   const _TimerSettings._() : super._();
 
   factory _TimerSettings.fromJson(Map<String, dynamic> json) =
-      _$_TimerSettings.fromJson;
+      _$TimerSettingsImpl.fromJson;
 
   @override
   Duration get warmup;
@@ -230,6 +230,6 @@ abstract class _TimerSettings extends TimerSettings {
   Sound get endingSound;
   @override
   @JsonKey(ignore: true)
-  _$$_TimerSettingsCopyWith<_$_TimerSettings> get copyWith =>
+  _$$TimerSettingsImplCopyWith<_$TimerSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

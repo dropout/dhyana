@@ -12,7 +12,7 @@ part of 'profile_query_options.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProfileQueryOptions {}
@@ -36,26 +36,26 @@ class _$ProfileQueryOptionsCopyWithImpl<$Res, $Val extends ProfileQueryOptions>
 }
 
 /// @nodoc
-abstract class _$$_ProfileQueryOptionsCopyWith<$Res> {
-  factory _$$_ProfileQueryOptionsCopyWith(_$_ProfileQueryOptions value,
-          $Res Function(_$_ProfileQueryOptions) then) =
-      __$$_ProfileQueryOptionsCopyWithImpl<$Res>;
+abstract class _$$ProfileQueryOptionsImplCopyWith<$Res> {
+  factory _$$ProfileQueryOptionsImplCopyWith(_$ProfileQueryOptionsImpl value,
+          $Res Function(_$ProfileQueryOptionsImpl) then) =
+      __$$ProfileQueryOptionsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ProfileQueryOptionsCopyWithImpl<$Res>
-    extends _$ProfileQueryOptionsCopyWithImpl<$Res, _$_ProfileQueryOptions>
-    implements _$$_ProfileQueryOptionsCopyWith<$Res> {
-  __$$_ProfileQueryOptionsCopyWithImpl(_$_ProfileQueryOptions _value,
-      $Res Function(_$_ProfileQueryOptions) _then)
+class __$$ProfileQueryOptionsImplCopyWithImpl<$Res>
+    extends _$ProfileQueryOptionsCopyWithImpl<$Res, _$ProfileQueryOptionsImpl>
+    implements _$$ProfileQueryOptionsImplCopyWith<$Res> {
+  __$$ProfileQueryOptionsImplCopyWithImpl(_$ProfileQueryOptionsImpl _value,
+      $Res Function(_$ProfileQueryOptionsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ProfileQueryOptions extends _ProfileQueryOptions
+class _$ProfileQueryOptionsImpl extends _ProfileQueryOptions
     with DiagnosticableTreeMixin {
-  const _$_ProfileQueryOptions() : super._();
+  const _$ProfileQueryOptionsImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -69,9 +69,10 @@ class _$_ProfileQueryOptions extends _ProfileQueryOptions
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ProfileQueryOptions);
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileQueryOptionsImpl);
   }
 
   @override
@@ -79,6 +80,6 @@ class _$_ProfileQueryOptions extends _ProfileQueryOptions
 }
 
 abstract class _ProfileQueryOptions extends ProfileQueryOptions {
-  const factory _ProfileQueryOptions() = _$_ProfileQueryOptions;
+  const factory _ProfileQueryOptions() = _$ProfileQueryOptionsImpl;
   const _ProfileQueryOptions._() : super._();
 }

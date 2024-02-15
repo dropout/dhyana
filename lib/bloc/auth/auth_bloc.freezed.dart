@@ -12,7 +12,7 @@ part of 'auth_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthEvent {
@@ -141,25 +141,25 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
 }
 
 /// @nodoc
-abstract class _$$InitializeAuthCopyWith<$Res> {
-  factory _$$InitializeAuthCopyWith(
-          _$InitializeAuth value, $Res Function(_$InitializeAuth) then) =
-      __$$InitializeAuthCopyWithImpl<$Res>;
+abstract class _$$InitializeAuthImplCopyWith<$Res> {
+  factory _$$InitializeAuthImplCopyWith(_$InitializeAuthImpl value,
+          $Res Function(_$InitializeAuthImpl) then) =
+      __$$InitializeAuthImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitializeAuthCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$InitializeAuth>
-    implements _$$InitializeAuthCopyWith<$Res> {
-  __$$InitializeAuthCopyWithImpl(
-      _$InitializeAuth _value, $Res Function(_$InitializeAuth) _then)
+class __$$InitializeAuthImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$InitializeAuthImpl>
+    implements _$$InitializeAuthImplCopyWith<$Res> {
+  __$$InitializeAuthImplCopyWithImpl(
+      _$InitializeAuthImpl _value, $Res Function(_$InitializeAuthImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$InitializeAuth extends InitializeAuth with DiagnosticableTreeMixin {
-  const _$InitializeAuth() : super._();
+class _$InitializeAuthImpl extends InitializeAuth with DiagnosticableTreeMixin {
+  const _$InitializeAuthImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -173,9 +173,9 @@ class _$InitializeAuth extends InitializeAuth with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializeAuth);
+        (other.runtimeType == runtimeType && other is _$InitializeAuthImpl);
   }
 
   @override
@@ -312,15 +312,15 @@ class _$InitializeAuth extends InitializeAuth with DiagnosticableTreeMixin {
 }
 
 abstract class InitializeAuth extends AuthEvent {
-  const factory InitializeAuth() = _$InitializeAuth;
+  const factory InitializeAuth() = _$InitializeAuthImpl;
   const InitializeAuth._() : super._();
 }
 
 /// @nodoc
-abstract class _$$SigninWithGoogleCopyWith<$Res> {
-  factory _$$SigninWithGoogleCopyWith(
-          _$SigninWithGoogle value, $Res Function(_$SigninWithGoogle) then) =
-      __$$SigninWithGoogleCopyWithImpl<$Res>;
+abstract class _$$SigninWithGoogleImplCopyWith<$Res> {
+  factory _$$SigninWithGoogleImplCopyWith(_$SigninWithGoogleImpl value,
+          $Res Function(_$SigninWithGoogleImpl) then) =
+      __$$SigninWithGoogleImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {void Function(User)? onComplete,
@@ -328,11 +328,11 @@ abstract class _$$SigninWithGoogleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SigninWithGoogleCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$SigninWithGoogle>
-    implements _$$SigninWithGoogleCopyWith<$Res> {
-  __$$SigninWithGoogleCopyWithImpl(
-      _$SigninWithGoogle _value, $Res Function(_$SigninWithGoogle) _then)
+class __$$SigninWithGoogleImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SigninWithGoogleImpl>
+    implements _$$SigninWithGoogleImplCopyWith<$Res> {
+  __$$SigninWithGoogleImplCopyWithImpl(_$SigninWithGoogleImpl _value,
+      $Res Function(_$SigninWithGoogleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -341,7 +341,7 @@ class __$$SigninWithGoogleCopyWithImpl<$Res>
     Object? onComplete = freezed,
     Object? onError = freezed,
   }) {
-    return _then(_$SigninWithGoogle(
+    return _then(_$SigninWithGoogleImpl(
       onComplete: freezed == onComplete
           ? _value.onComplete
           : onComplete // ignore: cast_nullable_to_non_nullable
@@ -356,8 +356,9 @@ class __$$SigninWithGoogleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SigninWithGoogle extends SigninWithGoogle with DiagnosticableTreeMixin {
-  const _$SigninWithGoogle({this.onComplete, this.onError}) : super._();
+class _$SigninWithGoogleImpl extends SigninWithGoogle
+    with DiagnosticableTreeMixin {
+  const _$SigninWithGoogleImpl({this.onComplete, this.onError}) : super._();
 
   @override
   final void Function(User)? onComplete;
@@ -379,10 +380,10 @@ class _$SigninWithGoogle extends SigninWithGoogle with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SigninWithGoogle &&
+            other is _$SigninWithGoogleImpl &&
             (identical(other.onComplete, onComplete) ||
                 other.onComplete == onComplete) &&
             (identical(other.onError, onError) || other.onError == onError));
@@ -394,8 +395,9 @@ class _$SigninWithGoogle extends SigninWithGoogle with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SigninWithGoogleCopyWith<_$SigninWithGoogle> get copyWith =>
-      __$$SigninWithGoogleCopyWithImpl<_$SigninWithGoogle>(this, _$identity);
+  _$$SigninWithGoogleImplCopyWith<_$SigninWithGoogleImpl> get copyWith =>
+      __$$SigninWithGoogleImplCopyWithImpl<_$SigninWithGoogleImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -529,22 +531,23 @@ class _$SigninWithGoogle extends SigninWithGoogle with DiagnosticableTreeMixin {
 
 abstract class SigninWithGoogle extends AuthEvent {
   const factory SigninWithGoogle(
-      {final void Function(User)? onComplete,
-      final void Function(Object?, StackTrace)? onError}) = _$SigninWithGoogle;
+          {final void Function(User)? onComplete,
+          final void Function(Object?, StackTrace)? onError}) =
+      _$SigninWithGoogleImpl;
   const SigninWithGoogle._() : super._();
 
   void Function(User)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
   @JsonKey(ignore: true)
-  _$$SigninWithGoogleCopyWith<_$SigninWithGoogle> get copyWith =>
+  _$$SigninWithGoogleImplCopyWith<_$SigninWithGoogleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SigninWithAppleCopyWith<$Res> {
-  factory _$$SigninWithAppleCopyWith(
-          _$SigninWithApple value, $Res Function(_$SigninWithApple) then) =
-      __$$SigninWithAppleCopyWithImpl<$Res>;
+abstract class _$$SigninWithAppleImplCopyWith<$Res> {
+  factory _$$SigninWithAppleImplCopyWith(_$SigninWithAppleImpl value,
+          $Res Function(_$SigninWithAppleImpl) then) =
+      __$$SigninWithAppleImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {void Function(User)? onComplete,
@@ -552,11 +555,11 @@ abstract class _$$SigninWithAppleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SigninWithAppleCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$SigninWithApple>
-    implements _$$SigninWithAppleCopyWith<$Res> {
-  __$$SigninWithAppleCopyWithImpl(
-      _$SigninWithApple _value, $Res Function(_$SigninWithApple) _then)
+class __$$SigninWithAppleImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SigninWithAppleImpl>
+    implements _$$SigninWithAppleImplCopyWith<$Res> {
+  __$$SigninWithAppleImplCopyWithImpl(
+      _$SigninWithAppleImpl _value, $Res Function(_$SigninWithAppleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -565,7 +568,7 @@ class __$$SigninWithAppleCopyWithImpl<$Res>
     Object? onComplete = freezed,
     Object? onError = freezed,
   }) {
-    return _then(_$SigninWithApple(
+    return _then(_$SigninWithAppleImpl(
       onComplete: freezed == onComplete
           ? _value.onComplete
           : onComplete // ignore: cast_nullable_to_non_nullable
@@ -580,8 +583,9 @@ class __$$SigninWithAppleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SigninWithApple extends SigninWithApple with DiagnosticableTreeMixin {
-  const _$SigninWithApple({this.onComplete, this.onError}) : super._();
+class _$SigninWithAppleImpl extends SigninWithApple
+    with DiagnosticableTreeMixin {
+  const _$SigninWithAppleImpl({this.onComplete, this.onError}) : super._();
 
   @override
   final void Function(User)? onComplete;
@@ -603,10 +607,10 @@ class _$SigninWithApple extends SigninWithApple with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SigninWithApple &&
+            other is _$SigninWithAppleImpl &&
             (identical(other.onComplete, onComplete) ||
                 other.onComplete == onComplete) &&
             (identical(other.onError, onError) || other.onError == onError));
@@ -618,8 +622,9 @@ class _$SigninWithApple extends SigninWithApple with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SigninWithAppleCopyWith<_$SigninWithApple> get copyWith =>
-      __$$SigninWithAppleCopyWithImpl<_$SigninWithApple>(this, _$identity);
+  _$$SigninWithAppleImplCopyWith<_$SigninWithAppleImpl> get copyWith =>
+      __$$SigninWithAppleImplCopyWithImpl<_$SigninWithAppleImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -753,23 +758,24 @@ class _$SigninWithApple extends SigninWithApple with DiagnosticableTreeMixin {
 
 abstract class SigninWithApple extends AuthEvent {
   const factory SigninWithApple(
-      {final void Function(User)? onComplete,
-      final void Function(Object?, StackTrace)? onError}) = _$SigninWithApple;
+          {final void Function(User)? onComplete,
+          final void Function(Object?, StackTrace)? onError}) =
+      _$SigninWithAppleImpl;
   const SigninWithApple._() : super._();
 
   void Function(User)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
   @JsonKey(ignore: true)
-  _$$SigninWithAppleCopyWith<_$SigninWithApple> get copyWith =>
+  _$$SigninWithAppleImplCopyWith<_$SigninWithAppleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SigninWithEmailAndPasswordCopyWith<$Res> {
-  factory _$$SigninWithEmailAndPasswordCopyWith(
-          _$SigninWithEmailAndPassword value,
-          $Res Function(_$SigninWithEmailAndPassword) then) =
-      __$$SigninWithEmailAndPasswordCopyWithImpl<$Res>;
+abstract class _$$SigninWithEmailAndPasswordImplCopyWith<$Res> {
+  factory _$$SigninWithEmailAndPasswordImplCopyWith(
+          _$SigninWithEmailAndPasswordImpl value,
+          $Res Function(_$SigninWithEmailAndPasswordImpl) then) =
+      __$$SigninWithEmailAndPasswordImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {String email,
@@ -779,12 +785,12 @@ abstract class _$$SigninWithEmailAndPasswordCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SigninWithEmailAndPasswordCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$SigninWithEmailAndPassword>
-    implements _$$SigninWithEmailAndPasswordCopyWith<$Res> {
-  __$$SigninWithEmailAndPasswordCopyWithImpl(
-      _$SigninWithEmailAndPassword _value,
-      $Res Function(_$SigninWithEmailAndPassword) _then)
+class __$$SigninWithEmailAndPasswordImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SigninWithEmailAndPasswordImpl>
+    implements _$$SigninWithEmailAndPasswordImplCopyWith<$Res> {
+  __$$SigninWithEmailAndPasswordImplCopyWithImpl(
+      _$SigninWithEmailAndPasswordImpl _value,
+      $Res Function(_$SigninWithEmailAndPasswordImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -795,7 +801,7 @@ class __$$SigninWithEmailAndPasswordCopyWithImpl<$Res>
     Object? onComplete = freezed,
     Object? onError = freezed,
   }) {
-    return _then(_$SigninWithEmailAndPassword(
+    return _then(_$SigninWithEmailAndPasswordImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -818,9 +824,9 @@ class __$$SigninWithEmailAndPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SigninWithEmailAndPassword extends SigninWithEmailAndPassword
+class _$SigninWithEmailAndPasswordImpl extends SigninWithEmailAndPassword
     with DiagnosticableTreeMixin {
-  const _$SigninWithEmailAndPassword(
+  const _$SigninWithEmailAndPasswordImpl(
       {required this.email,
       required this.password,
       this.onComplete,
@@ -853,10 +859,10 @@ class _$SigninWithEmailAndPassword extends SigninWithEmailAndPassword
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SigninWithEmailAndPassword &&
+            other is _$SigninWithEmailAndPasswordImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -872,9 +878,9 @@ class _$SigninWithEmailAndPassword extends SigninWithEmailAndPassword
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SigninWithEmailAndPasswordCopyWith<_$SigninWithEmailAndPassword>
-      get copyWith => __$$SigninWithEmailAndPasswordCopyWithImpl<
-          _$SigninWithEmailAndPassword>(this, _$identity);
+  _$$SigninWithEmailAndPasswordImplCopyWith<_$SigninWithEmailAndPasswordImpl>
+      get copyWith => __$$SigninWithEmailAndPasswordImplCopyWithImpl<
+          _$SigninWithEmailAndPasswordImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1013,7 +1019,7 @@ abstract class SigninWithEmailAndPassword extends AuthEvent {
           required final String password,
           final void Function(User)? onComplete,
           final void Function(Object?, StackTrace)? onError}) =
-      _$SigninWithEmailAndPassword;
+      _$SigninWithEmailAndPasswordImpl;
   const SigninWithEmailAndPassword._() : super._();
 
   String get email;
@@ -1021,23 +1027,25 @@ abstract class SigninWithEmailAndPassword extends AuthEvent {
   void Function(User)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
   @JsonKey(ignore: true)
-  _$$SigninWithEmailAndPasswordCopyWith<_$SigninWithEmailAndPassword>
+  _$$SigninWithEmailAndPasswordImplCopyWith<_$SigninWithEmailAndPasswordImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SignOutCopyWith<$Res> {
-  factory _$$SignOutCopyWith(_$SignOut value, $Res Function(_$SignOut) then) =
-      __$$SignOutCopyWithImpl<$Res>;
+abstract class _$$SignOutImplCopyWith<$Res> {
+  factory _$$SignOutImplCopyWith(
+          _$SignOutImpl value, $Res Function(_$SignOutImpl) then) =
+      __$$SignOutImplCopyWithImpl<$Res>;
   @useResult
   $Res call({dynamic Function()? onSignedOut});
 }
 
 /// @nodoc
-class __$$SignOutCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$SignOut>
-    implements _$$SignOutCopyWith<$Res> {
-  __$$SignOutCopyWithImpl(_$SignOut _value, $Res Function(_$SignOut) _then)
+class __$$SignOutImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SignOutImpl>
+    implements _$$SignOutImplCopyWith<$Res> {
+  __$$SignOutImplCopyWithImpl(
+      _$SignOutImpl _value, $Res Function(_$SignOutImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1045,7 +1053,7 @@ class __$$SignOutCopyWithImpl<$Res>
   $Res call({
     Object? onSignedOut = freezed,
   }) {
-    return _then(_$SignOut(
+    return _then(_$SignOutImpl(
       onSignedOut: freezed == onSignedOut
           ? _value.onSignedOut
           : onSignedOut // ignore: cast_nullable_to_non_nullable
@@ -1056,8 +1064,8 @@ class __$$SignOutCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignOut extends SignOut with DiagnosticableTreeMixin {
-  const _$SignOut({this.onSignedOut}) : super._();
+class _$SignOutImpl extends SignOut with DiagnosticableTreeMixin {
+  const _$SignOutImpl({this.onSignedOut}) : super._();
 
   @override
   final dynamic Function()? onSignedOut;
@@ -1076,10 +1084,10 @@ class _$SignOut extends SignOut with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignOut &&
+            other is _$SignOutImpl &&
             (identical(other.onSignedOut, onSignedOut) ||
                 other.onSignedOut == onSignedOut));
   }
@@ -1090,8 +1098,8 @@ class _$SignOut extends SignOut with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignOutCopyWith<_$SignOut> get copyWith =>
-      __$$SignOutCopyWithImpl<_$SignOut>(this, _$identity);
+  _$$SignOutImplCopyWith<_$SignOutImpl> get copyWith =>
+      __$$SignOutImplCopyWithImpl<_$SignOutImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1224,36 +1232,37 @@ class _$SignOut extends SignOut with DiagnosticableTreeMixin {
 }
 
 abstract class SignOut extends AuthEvent {
-  const factory SignOut({final dynamic Function()? onSignedOut}) = _$SignOut;
+  const factory SignOut({final dynamic Function()? onSignedOut}) =
+      _$SignOutImpl;
   const SignOut._() : super._();
 
   dynamic Function()? get onSignedOut;
   @JsonKey(ignore: true)
-  _$$SignOutCopyWith<_$SignOut> get copyWith =>
+  _$$SignOutImplCopyWith<_$SignOutImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DismissSigninErrorCopyWith<$Res> {
-  factory _$$DismissSigninErrorCopyWith(_$DismissSigninError value,
-          $Res Function(_$DismissSigninError) then) =
-      __$$DismissSigninErrorCopyWithImpl<$Res>;
+abstract class _$$DismissSigninErrorImplCopyWith<$Res> {
+  factory _$$DismissSigninErrorImplCopyWith(_$DismissSigninErrorImpl value,
+          $Res Function(_$DismissSigninErrorImpl) then) =
+      __$$DismissSigninErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DismissSigninErrorCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$DismissSigninError>
-    implements _$$DismissSigninErrorCopyWith<$Res> {
-  __$$DismissSigninErrorCopyWithImpl(
-      _$DismissSigninError _value, $Res Function(_$DismissSigninError) _then)
+class __$$DismissSigninErrorImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$DismissSigninErrorImpl>
+    implements _$$DismissSigninErrorImplCopyWith<$Res> {
+  __$$DismissSigninErrorImplCopyWithImpl(_$DismissSigninErrorImpl _value,
+      $Res Function(_$DismissSigninErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DismissSigninError extends DismissSigninError
+class _$DismissSigninErrorImpl extends DismissSigninError
     with DiagnosticableTreeMixin {
-  const _$DismissSigninError() : super._();
+  const _$DismissSigninErrorImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1267,9 +1276,9 @@ class _$DismissSigninError extends DismissSigninError
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DismissSigninError);
+        (other.runtimeType == runtimeType && other is _$DismissSigninErrorImpl);
   }
 
   @override
@@ -1406,25 +1415,27 @@ class _$DismissSigninError extends DismissSigninError
 }
 
 abstract class DismissSigninError extends AuthEvent {
-  const factory DismissSigninError() = _$DismissSigninError;
+  const factory DismissSigninError() = _$DismissSigninErrorImpl;
   const DismissSigninError._() : super._();
 }
 
 /// @nodoc
-abstract class _$$ReceiveAuthStateChangeCopyWith<$Res> {
-  factory _$$ReceiveAuthStateChangeCopyWith(_$ReceiveAuthStateChange value,
-          $Res Function(_$ReceiveAuthStateChange) then) =
-      __$$ReceiveAuthStateChangeCopyWithImpl<$Res>;
+abstract class _$$ReceiveAuthStateChangeImplCopyWith<$Res> {
+  factory _$$ReceiveAuthStateChangeImplCopyWith(
+          _$ReceiveAuthStateChangeImpl value,
+          $Res Function(_$ReceiveAuthStateChangeImpl) then) =
+      __$$ReceiveAuthStateChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User? user});
 }
 
 /// @nodoc
-class __$$ReceiveAuthStateChangeCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$ReceiveAuthStateChange>
-    implements _$$ReceiveAuthStateChangeCopyWith<$Res> {
-  __$$ReceiveAuthStateChangeCopyWithImpl(_$ReceiveAuthStateChange _value,
-      $Res Function(_$ReceiveAuthStateChange) _then)
+class __$$ReceiveAuthStateChangeImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ReceiveAuthStateChangeImpl>
+    implements _$$ReceiveAuthStateChangeImplCopyWith<$Res> {
+  __$$ReceiveAuthStateChangeImplCopyWithImpl(
+      _$ReceiveAuthStateChangeImpl _value,
+      $Res Function(_$ReceiveAuthStateChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1432,7 +1443,7 @@ class __$$ReceiveAuthStateChangeCopyWithImpl<$Res>
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_$ReceiveAuthStateChange(
+    return _then(_$ReceiveAuthStateChangeImpl(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1443,9 +1454,9 @@ class __$$ReceiveAuthStateChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReceiveAuthStateChange extends ReceiveAuthStateChange
+class _$ReceiveAuthStateChangeImpl extends ReceiveAuthStateChange
     with DiagnosticableTreeMixin {
-  const _$ReceiveAuthStateChange({this.user}) : super._();
+  const _$ReceiveAuthStateChangeImpl({this.user}) : super._();
 
   @override
   final User? user;
@@ -1464,10 +1475,10 @@ class _$ReceiveAuthStateChange extends ReceiveAuthStateChange
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReceiveAuthStateChange &&
+            other is _$ReceiveAuthStateChangeImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -1477,9 +1488,9 @@ class _$ReceiveAuthStateChange extends ReceiveAuthStateChange
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReceiveAuthStateChangeCopyWith<_$ReceiveAuthStateChange> get copyWith =>
-      __$$ReceiveAuthStateChangeCopyWithImpl<_$ReceiveAuthStateChange>(
-          this, _$identity);
+  _$$ReceiveAuthStateChangeImplCopyWith<_$ReceiveAuthStateChangeImpl>
+      get copyWith => __$$ReceiveAuthStateChangeImplCopyWithImpl<
+          _$ReceiveAuthStateChangeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1613,30 +1624,30 @@ class _$ReceiveAuthStateChange extends ReceiveAuthStateChange
 
 abstract class ReceiveAuthStateChange extends AuthEvent {
   const factory ReceiveAuthStateChange({final User? user}) =
-      _$ReceiveAuthStateChange;
+      _$ReceiveAuthStateChangeImpl;
   const ReceiveAuthStateChange._() : super._();
 
   User? get user;
   @JsonKey(ignore: true)
-  _$$ReceiveAuthStateChangeCopyWith<_$ReceiveAuthStateChange> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReceiveAuthStateChangeImplCopyWith<_$ReceiveAuthStateChangeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReceiveUserChangeCopyWith<$Res> {
-  factory _$$ReceiveUserChangeCopyWith(
-          _$ReceiveUserChange value, $Res Function(_$ReceiveUserChange) then) =
-      __$$ReceiveUserChangeCopyWithImpl<$Res>;
+abstract class _$$ReceiveUserChangeImplCopyWith<$Res> {
+  factory _$$ReceiveUserChangeImplCopyWith(_$ReceiveUserChangeImpl value,
+          $Res Function(_$ReceiveUserChangeImpl) then) =
+      __$$ReceiveUserChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User? user});
 }
 
 /// @nodoc
-class __$$ReceiveUserChangeCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$ReceiveUserChange>
-    implements _$$ReceiveUserChangeCopyWith<$Res> {
-  __$$ReceiveUserChangeCopyWithImpl(
-      _$ReceiveUserChange _value, $Res Function(_$ReceiveUserChange) _then)
+class __$$ReceiveUserChangeImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ReceiveUserChangeImpl>
+    implements _$$ReceiveUserChangeImplCopyWith<$Res> {
+  __$$ReceiveUserChangeImplCopyWithImpl(_$ReceiveUserChangeImpl _value,
+      $Res Function(_$ReceiveUserChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1644,7 +1655,7 @@ class __$$ReceiveUserChangeCopyWithImpl<$Res>
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_$ReceiveUserChange(
+    return _then(_$ReceiveUserChangeImpl(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1655,9 +1666,9 @@ class __$$ReceiveUserChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReceiveUserChange extends ReceiveUserChange
+class _$ReceiveUserChangeImpl extends ReceiveUserChange
     with DiagnosticableTreeMixin {
-  const _$ReceiveUserChange({this.user}) : super._();
+  const _$ReceiveUserChangeImpl({this.user}) : super._();
 
   @override
   final User? user;
@@ -1676,10 +1687,10 @@ class _$ReceiveUserChange extends ReceiveUserChange
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReceiveUserChange &&
+            other is _$ReceiveUserChangeImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -1689,8 +1700,9 @@ class _$ReceiveUserChange extends ReceiveUserChange
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReceiveUserChangeCopyWith<_$ReceiveUserChange> get copyWith =>
-      __$$ReceiveUserChangeCopyWithImpl<_$ReceiveUserChange>(this, _$identity);
+  _$$ReceiveUserChangeImplCopyWith<_$ReceiveUserChangeImpl> get copyWith =>
+      __$$ReceiveUserChangeImplCopyWithImpl<_$ReceiveUserChangeImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1823,12 +1835,12 @@ class _$ReceiveUserChange extends ReceiveUserChange
 }
 
 abstract class ReceiveUserChange extends AuthEvent {
-  const factory ReceiveUserChange({final User? user}) = _$ReceiveUserChange;
+  const factory ReceiveUserChange({final User? user}) = _$ReceiveUserChangeImpl;
   const ReceiveUserChange._() : super._();
 
   User? get user;
   @JsonKey(ignore: true)
-  _$$ReceiveUserChangeCopyWith<_$ReceiveUserChange> get copyWith =>
+  _$$ReceiveUserChangeImplCopyWith<_$ReceiveUserChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1910,25 +1922,26 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 }
 
 /// @nodoc
-abstract class _$$AuthStateInitialCopyWith<$Res> {
-  factory _$$AuthStateInitialCopyWith(
-          _$AuthStateInitial value, $Res Function(_$AuthStateInitial) then) =
-      __$$AuthStateInitialCopyWithImpl<$Res>;
+abstract class _$$AuthStateInitialImplCopyWith<$Res> {
+  factory _$$AuthStateInitialImplCopyWith(_$AuthStateInitialImpl value,
+          $Res Function(_$AuthStateInitialImpl) then) =
+      __$$AuthStateInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthStateInitialCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateInitial>
-    implements _$$AuthStateInitialCopyWith<$Res> {
-  __$$AuthStateInitialCopyWithImpl(
-      _$AuthStateInitial _value, $Res Function(_$AuthStateInitial) _then)
+class __$$AuthStateInitialImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateInitialImpl>
+    implements _$$AuthStateInitialImplCopyWith<$Res> {
+  __$$AuthStateInitialImplCopyWithImpl(_$AuthStateInitialImpl _value,
+      $Res Function(_$AuthStateInitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthStateInitial extends AuthStateInitial with DiagnosticableTreeMixin {
-  const _$AuthStateInitial() : super._();
+class _$AuthStateInitialImpl extends AuthStateInitial
+    with DiagnosticableTreeMixin {
+  const _$AuthStateInitialImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1942,9 +1955,9 @@ class _$AuthStateInitial extends AuthStateInitial with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthStateInitial);
+        (other.runtimeType == runtimeType && other is _$AuthStateInitialImpl);
   }
 
   @override
@@ -2032,31 +2045,31 @@ class _$AuthStateInitial extends AuthStateInitial with DiagnosticableTreeMixin {
 }
 
 abstract class AuthStateInitial extends AuthState {
-  const factory AuthStateInitial() = _$AuthStateInitial;
+  const factory AuthStateInitial() = _$AuthStateInitialImpl;
   const AuthStateInitial._() : super._();
 }
 
 /// @nodoc
-abstract class _$$AuthStateSignedOutCopyWith<$Res> {
-  factory _$$AuthStateSignedOutCopyWith(_$AuthStateSignedOut value,
-          $Res Function(_$AuthStateSignedOut) then) =
-      __$$AuthStateSignedOutCopyWithImpl<$Res>;
+abstract class _$$AuthStateSignedOutImplCopyWith<$Res> {
+  factory _$$AuthStateSignedOutImplCopyWith(_$AuthStateSignedOutImpl value,
+          $Res Function(_$AuthStateSignedOutImpl) then) =
+      __$$AuthStateSignedOutImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthStateSignedOutCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSignedOut>
-    implements _$$AuthStateSignedOutCopyWith<$Res> {
-  __$$AuthStateSignedOutCopyWithImpl(
-      _$AuthStateSignedOut _value, $Res Function(_$AuthStateSignedOut) _then)
+class __$$AuthStateSignedOutImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSignedOutImpl>
+    implements _$$AuthStateSignedOutImplCopyWith<$Res> {
+  __$$AuthStateSignedOutImplCopyWithImpl(_$AuthStateSignedOutImpl _value,
+      $Res Function(_$AuthStateSignedOutImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthStateSignedOut extends AuthStateSignedOut
+class _$AuthStateSignedOutImpl extends AuthStateSignedOut
     with DiagnosticableTreeMixin {
-  const _$AuthStateSignedOut() : super._();
+  const _$AuthStateSignedOutImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2070,9 +2083,9 @@ class _$AuthStateSignedOut extends AuthStateSignedOut
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthStateSignedOut);
+        (other.runtimeType == runtimeType && other is _$AuthStateSignedOutImpl);
   }
 
   @override
@@ -2160,31 +2173,31 @@ class _$AuthStateSignedOut extends AuthStateSignedOut
 }
 
 abstract class AuthStateSignedOut extends AuthState {
-  const factory AuthStateSignedOut() = _$AuthStateSignedOut;
+  const factory AuthStateSignedOut() = _$AuthStateSignedOutImpl;
   const AuthStateSignedOut._() : super._();
 }
 
 /// @nodoc
-abstract class _$$AuthStateSigningInCopyWith<$Res> {
-  factory _$$AuthStateSigningInCopyWith(_$AuthStateSigningIn value,
-          $Res Function(_$AuthStateSigningIn) then) =
-      __$$AuthStateSigningInCopyWithImpl<$Res>;
+abstract class _$$AuthStateSigningInImplCopyWith<$Res> {
+  factory _$$AuthStateSigningInImplCopyWith(_$AuthStateSigningInImpl value,
+          $Res Function(_$AuthStateSigningInImpl) then) =
+      __$$AuthStateSigningInImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthStateSigningInCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSigningIn>
-    implements _$$AuthStateSigningInCopyWith<$Res> {
-  __$$AuthStateSigningInCopyWithImpl(
-      _$AuthStateSigningIn _value, $Res Function(_$AuthStateSigningIn) _then)
+class __$$AuthStateSigningInImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSigningInImpl>
+    implements _$$AuthStateSigningInImplCopyWith<$Res> {
+  __$$AuthStateSigningInImplCopyWithImpl(_$AuthStateSigningInImpl _value,
+      $Res Function(_$AuthStateSigningInImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthStateSigningIn extends AuthStateSigningIn
+class _$AuthStateSigningInImpl extends AuthStateSigningIn
     with DiagnosticableTreeMixin {
-  const _$AuthStateSigningIn() : super._();
+  const _$AuthStateSigningInImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2198,9 +2211,9 @@ class _$AuthStateSigningIn extends AuthStateSigningIn
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthStateSigningIn);
+        (other.runtimeType == runtimeType && other is _$AuthStateSigningInImpl);
   }
 
   @override
@@ -2288,25 +2301,25 @@ class _$AuthStateSigningIn extends AuthStateSigningIn
 }
 
 abstract class AuthStateSigningIn extends AuthState {
-  const factory AuthStateSigningIn() = _$AuthStateSigningIn;
+  const factory AuthStateSigningIn() = _$AuthStateSigningInImpl;
   const AuthStateSigningIn._() : super._();
 }
 
 /// @nodoc
-abstract class _$$AuthStateSignedInCopyWith<$Res> {
-  factory _$$AuthStateSignedInCopyWith(
-          _$AuthStateSignedIn value, $Res Function(_$AuthStateSignedIn) then) =
-      __$$AuthStateSignedInCopyWithImpl<$Res>;
+abstract class _$$AuthStateSignedInImplCopyWith<$Res> {
+  factory _$$AuthStateSignedInImplCopyWith(_$AuthStateSignedInImpl value,
+          $Res Function(_$AuthStateSignedInImpl) then) =
+      __$$AuthStateSignedInImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user});
 }
 
 /// @nodoc
-class __$$AuthStateSignedInCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSignedIn>
-    implements _$$AuthStateSignedInCopyWith<$Res> {
-  __$$AuthStateSignedInCopyWithImpl(
-      _$AuthStateSignedIn _value, $Res Function(_$AuthStateSignedIn) _then)
+class __$$AuthStateSignedInImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateSignedInImpl>
+    implements _$$AuthStateSignedInImplCopyWith<$Res> {
+  __$$AuthStateSignedInImplCopyWithImpl(_$AuthStateSignedInImpl _value,
+      $Res Function(_$AuthStateSignedInImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2314,7 +2327,7 @@ class __$$AuthStateSignedInCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$AuthStateSignedIn(
+    return _then(_$AuthStateSignedInImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -2325,9 +2338,9 @@ class __$$AuthStateSignedInCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthStateSignedIn extends AuthStateSignedIn
+class _$AuthStateSignedInImpl extends AuthStateSignedIn
     with DiagnosticableTreeMixin {
-  const _$AuthStateSignedIn({required this.user}) : super._();
+  const _$AuthStateSignedInImpl({required this.user}) : super._();
 
   @override
   final User user;
@@ -2346,10 +2359,10 @@ class _$AuthStateSignedIn extends AuthStateSignedIn
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthStateSignedIn &&
+            other is _$AuthStateSignedInImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -2359,8 +2372,9 @@ class _$AuthStateSignedIn extends AuthStateSignedIn
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthStateSignedInCopyWith<_$AuthStateSignedIn> get copyWith =>
-      __$$AuthStateSignedInCopyWithImpl<_$AuthStateSignedIn>(this, _$identity);
+  _$$AuthStateSignedInImplCopyWith<_$AuthStateSignedInImpl> get copyWith =>
+      __$$AuthStateSignedInImplCopyWithImpl<_$AuthStateSignedInImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2445,36 +2459,37 @@ class _$AuthStateSignedIn extends AuthStateSignedIn
 
 abstract class AuthStateSignedIn extends AuthState {
   const factory AuthStateSignedIn({required final User user}) =
-      _$AuthStateSignedIn;
+      _$AuthStateSignedInImpl;
   const AuthStateSignedIn._() : super._();
 
   User get user;
   @JsonKey(ignore: true)
-  _$$AuthStateSignedInCopyWith<_$AuthStateSignedIn> get copyWith =>
+  _$$AuthStateSignedInImplCopyWith<_$AuthStateSignedInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AuthStateErrorOccuredCopyWith<$Res> {
-  factory _$$AuthStateErrorOccuredCopyWith(_$AuthStateErrorOccured value,
-          $Res Function(_$AuthStateErrorOccured) then) =
-      __$$AuthStateErrorOccuredCopyWithImpl<$Res>;
+abstract class _$$AuthStateErrorOccuredImplCopyWith<$Res> {
+  factory _$$AuthStateErrorOccuredImplCopyWith(
+          _$AuthStateErrorOccuredImpl value,
+          $Res Function(_$AuthStateErrorOccuredImpl) then) =
+      __$$AuthStateErrorOccuredImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthStateErrorOccuredCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateErrorOccured>
-    implements _$$AuthStateErrorOccuredCopyWith<$Res> {
-  __$$AuthStateErrorOccuredCopyWithImpl(_$AuthStateErrorOccured _value,
-      $Res Function(_$AuthStateErrorOccured) _then)
+class __$$AuthStateErrorOccuredImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateErrorOccuredImpl>
+    implements _$$AuthStateErrorOccuredImplCopyWith<$Res> {
+  __$$AuthStateErrorOccuredImplCopyWithImpl(_$AuthStateErrorOccuredImpl _value,
+      $Res Function(_$AuthStateErrorOccuredImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthStateErrorOccured extends AuthStateErrorOccured
+class _$AuthStateErrorOccuredImpl extends AuthStateErrorOccured
     with DiagnosticableTreeMixin {
-  const _$AuthStateErrorOccured() : super._();
+  const _$AuthStateErrorOccuredImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2488,9 +2503,10 @@ class _$AuthStateErrorOccured extends AuthStateErrorOccured
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthStateErrorOccured);
+        (other.runtimeType == runtimeType &&
+            other is _$AuthStateErrorOccuredImpl);
   }
 
   @override
@@ -2578,6 +2594,6 @@ class _$AuthStateErrorOccured extends AuthStateErrorOccured
 }
 
 abstract class AuthStateErrorOccured extends AuthState {
-  const factory AuthStateErrorOccured() = _$AuthStateErrorOccured;
+  const factory AuthStateErrorOccured() = _$AuthStateErrorOccuredImpl;
   const AuthStateErrorOccured._() : super._();
 }

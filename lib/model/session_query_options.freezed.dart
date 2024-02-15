@@ -12,7 +12,7 @@ part of 'session_query_options.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SessionQueryOptions {}
@@ -36,26 +36,26 @@ class _$SessionQueryOptionsCopyWithImpl<$Res, $Val extends SessionQueryOptions>
 }
 
 /// @nodoc
-abstract class _$$_SessionQueryOptionsCopyWith<$Res> {
-  factory _$$_SessionQueryOptionsCopyWith(_$_SessionQueryOptions value,
-          $Res Function(_$_SessionQueryOptions) then) =
-      __$$_SessionQueryOptionsCopyWithImpl<$Res>;
+abstract class _$$SessionQueryOptionsImplCopyWith<$Res> {
+  factory _$$SessionQueryOptionsImplCopyWith(_$SessionQueryOptionsImpl value,
+          $Res Function(_$SessionQueryOptionsImpl) then) =
+      __$$SessionQueryOptionsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SessionQueryOptionsCopyWithImpl<$Res>
-    extends _$SessionQueryOptionsCopyWithImpl<$Res, _$_SessionQueryOptions>
-    implements _$$_SessionQueryOptionsCopyWith<$Res> {
-  __$$_SessionQueryOptionsCopyWithImpl(_$_SessionQueryOptions _value,
-      $Res Function(_$_SessionQueryOptions) _then)
+class __$$SessionQueryOptionsImplCopyWithImpl<$Res>
+    extends _$SessionQueryOptionsCopyWithImpl<$Res, _$SessionQueryOptionsImpl>
+    implements _$$SessionQueryOptionsImplCopyWith<$Res> {
+  __$$SessionQueryOptionsImplCopyWithImpl(_$SessionQueryOptionsImpl _value,
+      $Res Function(_$SessionQueryOptionsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SessionQueryOptions extends _SessionQueryOptions
+class _$SessionQueryOptionsImpl extends _SessionQueryOptions
     with DiagnosticableTreeMixin {
-  const _$_SessionQueryOptions() : super._();
+  const _$SessionQueryOptionsImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -69,9 +69,10 @@ class _$_SessionQueryOptions extends _SessionQueryOptions
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SessionQueryOptions);
+        (other.runtimeType == runtimeType &&
+            other is _$SessionQueryOptionsImpl);
   }
 
   @override
@@ -79,6 +80,6 @@ class _$_SessionQueryOptions extends _SessionQueryOptions
 }
 
 abstract class _SessionQueryOptions extends SessionQueryOptions {
-  const factory _SessionQueryOptions() = _$_SessionQueryOptions;
+  const factory _SessionQueryOptions() = _$SessionQueryOptionsImpl;
   const _SessionQueryOptions._() : super._();
 }

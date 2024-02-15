@@ -12,7 +12,7 @@ part of 'sessions_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SessionsEvent {
@@ -87,24 +87,25 @@ class _$SessionsEventCopyWithImpl<$Res, $Val extends SessionsEvent>
 }
 
 /// @nodoc
-abstract class _$$_StartedCopyWith<$Res> {
-  factory _$$_StartedCopyWith(
-          _$_Started value, $Res Function(_$_Started) then) =
-      __$$_StartedCopyWithImpl<$Res>;
+abstract class _$$StartedImplCopyWith<$Res> {
+  factory _$$StartedImplCopyWith(
+          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
+      __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StartedCopyWithImpl<$Res>
-    extends _$SessionsEventCopyWithImpl<$Res, _$_Started>
-    implements _$$_StartedCopyWith<$Res> {
-  __$$_StartedCopyWithImpl(_$_Started _value, $Res Function(_$_Started) _then)
+class __$$StartedImplCopyWithImpl<$Res>
+    extends _$SessionsEventCopyWithImpl<$Res, _$StartedImpl>
+    implements _$$StartedImplCopyWith<$Res> {
+  __$$StartedImplCopyWithImpl(
+      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Started implements _Started {
-  const _$_Started();
+class _$StartedImpl implements _Started {
+  const _$StartedImpl();
 
   @override
   String toString() {
@@ -112,9 +113,9 @@ class _$_Started implements _Started {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Started);
+        (other.runtimeType == runtimeType && other is _$StartedImpl);
   }
 
   @override
@@ -196,14 +197,14 @@ class _$_Started implements _Started {
 }
 
 abstract class _Started implements SessionsEvent {
-  const factory _Started() = _$_Started;
+  const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$AddSessionEventCopyWith<$Res> {
-  factory _$$AddSessionEventCopyWith(
-          _$AddSessionEvent value, $Res Function(_$AddSessionEvent) then) =
-      __$$AddSessionEventCopyWithImpl<$Res>;
+abstract class _$$AddSessionEventImplCopyWith<$Res> {
+  factory _$$AddSessionEventImplCopyWith(_$AddSessionEventImpl value,
+          $Res Function(_$AddSessionEventImpl) then) =
+      __$$AddSessionEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {String profileId,
@@ -215,11 +216,11 @@ abstract class _$$AddSessionEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$AddSessionEventCopyWithImpl<$Res>
-    extends _$SessionsEventCopyWithImpl<$Res, _$AddSessionEvent>
-    implements _$$AddSessionEventCopyWith<$Res> {
-  __$$AddSessionEventCopyWithImpl(
-      _$AddSessionEvent _value, $Res Function(_$AddSessionEvent) _then)
+class __$$AddSessionEventImplCopyWithImpl<$Res>
+    extends _$SessionsEventCopyWithImpl<$Res, _$AddSessionEventImpl>
+    implements _$$AddSessionEventImplCopyWith<$Res> {
+  __$$AddSessionEventImplCopyWithImpl(
+      _$AddSessionEventImpl _value, $Res Function(_$AddSessionEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -230,7 +231,7 @@ class __$$AddSessionEventCopyWithImpl<$Res>
     Object? endTime = null,
     Object? timerSettings = null,
   }) {
-    return _then(_$AddSessionEvent(
+    return _then(_$AddSessionEventImpl(
       profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
@@ -261,8 +262,8 @@ class __$$AddSessionEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddSessionEvent implements AddSessionEvent {
-  const _$AddSessionEvent(
+class _$AddSessionEventImpl implements AddSessionEvent {
+  const _$AddSessionEventImpl(
       {required this.profileId,
       required this.startTime,
       required this.endTime,
@@ -283,10 +284,10 @@ class _$AddSessionEvent implements AddSessionEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddSessionEvent &&
+            other is _$AddSessionEventImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
             (identical(other.startTime, startTime) ||
@@ -303,8 +304,9 @@ class _$AddSessionEvent implements AddSessionEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddSessionEventCopyWith<_$AddSessionEvent> get copyWith =>
-      __$$AddSessionEventCopyWithImpl<_$AddSessionEvent>(this, _$identity);
+  _$$AddSessionEventImplCopyWith<_$AddSessionEventImpl> get copyWith =>
+      __$$AddSessionEventImplCopyWithImpl<_$AddSessionEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -386,32 +388,32 @@ abstract class AddSessionEvent implements SessionsEvent {
       {required final String profileId,
       required final DateTime startTime,
       required final DateTime endTime,
-      required final TimerSettings timerSettings}) = _$AddSessionEvent;
+      required final TimerSettings timerSettings}) = _$AddSessionEventImpl;
 
   String get profileId;
   DateTime get startTime;
   DateTime get endTime;
   TimerSettings get timerSettings;
   @JsonKey(ignore: true)
-  _$$AddSessionEventCopyWith<_$AddSessionEvent> get copyWith =>
+  _$$AddSessionEventImplCopyWith<_$AddSessionEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadSessionsEventCopyWith<$Res> {
-  factory _$$LoadSessionsEventCopyWith(
-          _$LoadSessionsEvent value, $Res Function(_$LoadSessionsEvent) then) =
-      __$$LoadSessionsEventCopyWithImpl<$Res>;
+abstract class _$$LoadSessionsEventImplCopyWith<$Res> {
+  factory _$$LoadSessionsEventImplCopyWith(_$LoadSessionsEventImpl value,
+          $Res Function(_$LoadSessionsEventImpl) then) =
+      __$$LoadSessionsEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String profileId});
 }
 
 /// @nodoc
-class __$$LoadSessionsEventCopyWithImpl<$Res>
-    extends _$SessionsEventCopyWithImpl<$Res, _$LoadSessionsEvent>
-    implements _$$LoadSessionsEventCopyWith<$Res> {
-  __$$LoadSessionsEventCopyWithImpl(
-      _$LoadSessionsEvent _value, $Res Function(_$LoadSessionsEvent) _then)
+class __$$LoadSessionsEventImplCopyWithImpl<$Res>
+    extends _$SessionsEventCopyWithImpl<$Res, _$LoadSessionsEventImpl>
+    implements _$$LoadSessionsEventImplCopyWith<$Res> {
+  __$$LoadSessionsEventImplCopyWithImpl(_$LoadSessionsEventImpl _value,
+      $Res Function(_$LoadSessionsEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -419,7 +421,7 @@ class __$$LoadSessionsEventCopyWithImpl<$Res>
   $Res call({
     Object? profileId = null,
   }) {
-    return _then(_$LoadSessionsEvent(
+    return _then(_$LoadSessionsEventImpl(
       profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
@@ -430,8 +432,8 @@ class __$$LoadSessionsEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadSessionsEvent implements LoadSessionsEvent {
-  const _$LoadSessionsEvent({required this.profileId});
+class _$LoadSessionsEventImpl implements LoadSessionsEvent {
+  const _$LoadSessionsEventImpl({required this.profileId});
 
   @override
   final String profileId;
@@ -442,10 +444,10 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadSessionsEvent &&
+            other is _$LoadSessionsEventImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId));
   }
@@ -456,8 +458,9 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadSessionsEventCopyWith<_$LoadSessionsEvent> get copyWith =>
-      __$$LoadSessionsEventCopyWithImpl<_$LoadSessionsEvent>(this, _$identity);
+  _$$LoadSessionsEventImplCopyWith<_$LoadSessionsEventImpl> get copyWith =>
+      __$$LoadSessionsEventImplCopyWithImpl<_$LoadSessionsEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -536,11 +539,11 @@ class _$LoadSessionsEvent implements LoadSessionsEvent {
 
 abstract class LoadSessionsEvent implements SessionsEvent {
   const factory LoadSessionsEvent({required final String profileId}) =
-      _$LoadSessionsEvent;
+      _$LoadSessionsEventImpl;
 
   String get profileId;
   @JsonKey(ignore: true)
-  _$$LoadSessionsEventCopyWith<_$LoadSessionsEvent> get copyWith =>
+  _$$LoadSessionsEventImplCopyWith<_$LoadSessionsEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -617,24 +620,25 @@ class _$SessionsStateCopyWithImpl<$Res, $Val extends SessionsState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$SessionsStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$SessionsStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -642,9 +646,9 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -726,29 +730,29 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements SessionsState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$SessionsLoadingCopyWith<$Res> {
-  factory _$$SessionsLoadingCopyWith(
-          _$SessionsLoading value, $Res Function(_$SessionsLoading) then) =
-      __$$SessionsLoadingCopyWithImpl<$Res>;
+abstract class _$$SessionsLoadingImplCopyWith<$Res> {
+  factory _$$SessionsLoadingImplCopyWith(_$SessionsLoadingImpl value,
+          $Res Function(_$SessionsLoadingImpl) then) =
+      __$$SessionsLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SessionsLoadingCopyWithImpl<$Res>
-    extends _$SessionsStateCopyWithImpl<$Res, _$SessionsLoading>
-    implements _$$SessionsLoadingCopyWith<$Res> {
-  __$$SessionsLoadingCopyWithImpl(
-      _$SessionsLoading _value, $Res Function(_$SessionsLoading) _then)
+class __$$SessionsLoadingImplCopyWithImpl<$Res>
+    extends _$SessionsStateCopyWithImpl<$Res, _$SessionsLoadingImpl>
+    implements _$$SessionsLoadingImplCopyWith<$Res> {
+  __$$SessionsLoadingImplCopyWithImpl(
+      _$SessionsLoadingImpl _value, $Res Function(_$SessionsLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SessionsLoading implements SessionsLoading {
-  const _$SessionsLoading();
+class _$SessionsLoadingImpl implements SessionsLoading {
+  const _$SessionsLoadingImpl();
 
   @override
   String toString() {
@@ -756,9 +760,9 @@ class _$SessionsLoading implements SessionsLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SessionsLoading);
+        (other.runtimeType == runtimeType && other is _$SessionsLoadingImpl);
   }
 
   @override
@@ -840,24 +844,24 @@ class _$SessionsLoading implements SessionsLoading {
 }
 
 abstract class SessionsLoading implements SessionsState {
-  const factory SessionsLoading() = _$SessionsLoading;
+  const factory SessionsLoading() = _$SessionsLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$SessionsLoadedCopyWith<$Res> {
-  factory _$$SessionsLoadedCopyWith(
-          _$SessionsLoaded value, $Res Function(_$SessionsLoaded) then) =
-      __$$SessionsLoadedCopyWithImpl<$Res>;
+abstract class _$$SessionsLoadedImplCopyWith<$Res> {
+  factory _$$SessionsLoadedImplCopyWith(_$SessionsLoadedImpl value,
+          $Res Function(_$SessionsLoadedImpl) then) =
+      __$$SessionsLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Session> sessions});
 }
 
 /// @nodoc
-class __$$SessionsLoadedCopyWithImpl<$Res>
-    extends _$SessionsStateCopyWithImpl<$Res, _$SessionsLoaded>
-    implements _$$SessionsLoadedCopyWith<$Res> {
-  __$$SessionsLoadedCopyWithImpl(
-      _$SessionsLoaded _value, $Res Function(_$SessionsLoaded) _then)
+class __$$SessionsLoadedImplCopyWithImpl<$Res>
+    extends _$SessionsStateCopyWithImpl<$Res, _$SessionsLoadedImpl>
+    implements _$$SessionsLoadedImplCopyWith<$Res> {
+  __$$SessionsLoadedImplCopyWithImpl(
+      _$SessionsLoadedImpl _value, $Res Function(_$SessionsLoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -865,7 +869,7 @@ class __$$SessionsLoadedCopyWithImpl<$Res>
   $Res call({
     Object? sessions = null,
   }) {
-    return _then(_$SessionsLoaded(
+    return _then(_$SessionsLoadedImpl(
       sessions: null == sessions
           ? _value._sessions
           : sessions // ignore: cast_nullable_to_non_nullable
@@ -876,8 +880,8 @@ class __$$SessionsLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SessionsLoaded implements SessionsLoaded {
-  const _$SessionsLoaded({required final List<Session> sessions})
+class _$SessionsLoadedImpl implements SessionsLoaded {
+  const _$SessionsLoadedImpl({required final List<Session> sessions})
       : _sessions = sessions;
 
   final List<Session> _sessions;
@@ -894,10 +898,10 @@ class _$SessionsLoaded implements SessionsLoaded {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SessionsLoaded &&
+            other is _$SessionsLoadedImpl &&
             const DeepCollectionEquality().equals(other._sessions, _sessions));
   }
 
@@ -908,8 +912,9 @@ class _$SessionsLoaded implements SessionsLoaded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SessionsLoadedCopyWith<_$SessionsLoaded> get copyWith =>
-      __$$SessionsLoadedCopyWithImpl<_$SessionsLoaded>(this, _$identity);
+  _$$SessionsLoadedImplCopyWith<_$SessionsLoadedImpl> get copyWith =>
+      __$$SessionsLoadedImplCopyWithImpl<_$SessionsLoadedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -988,34 +993,34 @@ class _$SessionsLoaded implements SessionsLoaded {
 
 abstract class SessionsLoaded implements SessionsState {
   const factory SessionsLoaded({required final List<Session> sessions}) =
-      _$SessionsLoaded;
+      _$SessionsLoadedImpl;
 
   List<Session> get sessions;
   @JsonKey(ignore: true)
-  _$$SessionsLoadedCopyWith<_$SessionsLoaded> get copyWith =>
+  _$$SessionsLoadedImplCopyWith<_$SessionsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SessionsLoadingErrorCopyWith<$Res> {
-  factory _$$SessionsLoadingErrorCopyWith(_$SessionsLoadingError value,
-          $Res Function(_$SessionsLoadingError) then) =
-      __$$SessionsLoadingErrorCopyWithImpl<$Res>;
+abstract class _$$SessionsLoadingErrorImplCopyWith<$Res> {
+  factory _$$SessionsLoadingErrorImplCopyWith(_$SessionsLoadingErrorImpl value,
+          $Res Function(_$SessionsLoadingErrorImpl) then) =
+      __$$SessionsLoadingErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SessionsLoadingErrorCopyWithImpl<$Res>
-    extends _$SessionsStateCopyWithImpl<$Res, _$SessionsLoadingError>
-    implements _$$SessionsLoadingErrorCopyWith<$Res> {
-  __$$SessionsLoadingErrorCopyWithImpl(_$SessionsLoadingError _value,
-      $Res Function(_$SessionsLoadingError) _then)
+class __$$SessionsLoadingErrorImplCopyWithImpl<$Res>
+    extends _$SessionsStateCopyWithImpl<$Res, _$SessionsLoadingErrorImpl>
+    implements _$$SessionsLoadingErrorImplCopyWith<$Res> {
+  __$$SessionsLoadingErrorImplCopyWithImpl(_$SessionsLoadingErrorImpl _value,
+      $Res Function(_$SessionsLoadingErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SessionsLoadingError implements SessionsLoadingError {
-  const _$SessionsLoadingError();
+class _$SessionsLoadingErrorImpl implements SessionsLoadingError {
+  const _$SessionsLoadingErrorImpl();
 
   @override
   String toString() {
@@ -1023,9 +1028,10 @@ class _$SessionsLoadingError implements SessionsLoadingError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SessionsLoadingError);
+        (other.runtimeType == runtimeType &&
+            other is _$SessionsLoadingErrorImpl);
   }
 
   @override
@@ -1107,5 +1113,5 @@ class _$SessionsLoadingError implements SessionsLoadingError {
 }
 
 abstract class SessionsLoadingError implements SessionsState {
-  const factory SessionsLoadingError() = _$SessionsLoadingError;
+  const factory SessionsLoadingError() = _$SessionsLoadingErrorImpl;
 }

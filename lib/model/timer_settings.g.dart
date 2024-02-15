@@ -6,15 +6,15 @@ part of 'timer_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TimerSettings _$$_TimerSettingsFromJson(Map<String, dynamic> json) =>
-    _$_TimerSettings(
+_$TimerSettingsImpl _$$TimerSettingsImplFromJson(Map<String, dynamic> json) =>
+    _$TimerSettingsImpl(
       warmup: Duration(microseconds: json['warmup'] as int),
       duration: const DurationConverter().fromJson(json['duration'] as int),
       startingSound: $enumDecode(_$SoundEnumMap, json['startingSound']),
       endingSound: $enumDecode(_$SoundEnumMap, json['endingSound']),
     );
 
-Map<String, dynamic> _$$_TimerSettingsToJson(_$_TimerSettings instance) =>
+Map<String, dynamic> _$$TimerSettingsImplToJson(_$TimerSettingsImpl instance) =>
     <String, dynamic>{
       'warmup': instance.warmup.inMicroseconds,
       'duration': const DurationConverter().toJson(instance.duration),

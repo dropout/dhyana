@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/initalizer.dart';
 import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:flutter/foundation.dart';
@@ -61,7 +62,12 @@ class AppRouter {
         GoRoute(
           path: AppScreen.profile.path,
           name: AppScreen.profile.name,
-          builder: (context, state) => const ProfileScreen(),
+          builder: (context, state) {
+            if (state.pathParameters.containsKey('profileId')) {
+              return ProfileScreen(profileId: state.pathParameters['profileId']!);
+            }
+            throw Exception('Unable to load profile page because no profile id was given.');
+          },
           redirect: _signedInRedirectHook
         ),
 
@@ -70,7 +76,7 @@ class AppRouter {
           path: AppScreen.profileWizard.path,
           name: AppScreen.profileWizard.name,
           builder: (context, state) => const ProfileWizardScreen(),
-          redirect: _signedInRedirectHook
+          redirect: _signedInRedirectHook,
         ),
 
         // Edit Profile

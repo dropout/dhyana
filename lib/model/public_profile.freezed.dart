@@ -12,7 +12,7 @@ part of 'public_profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PublicProfile _$PublicProfileFromJson(Map<String, dynamic> json) {
   return _PublicProfile.fromJson(json);
@@ -91,11 +91,11 @@ class _$PublicProfileCopyWithImpl<$Res, $Val extends PublicProfile>
 }
 
 /// @nodoc
-abstract class _$$_PublicProfileCopyWith<$Res>
+abstract class _$$PublicProfileImplCopyWith<$Res>
     implements $PublicProfileCopyWith<$Res> {
-  factory _$$_PublicProfileCopyWith(
-          _$_PublicProfile value, $Res Function(_$_PublicProfile) then) =
-      __$$_PublicProfileCopyWithImpl<$Res>;
+  factory _$$PublicProfileImplCopyWith(
+          _$PublicProfileImpl value, $Res Function(_$PublicProfileImpl) then) =
+      __$$PublicProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_PublicProfileCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PublicProfileCopyWithImpl<$Res>
-    extends _$PublicProfileCopyWithImpl<$Res, _$_PublicProfile>
-    implements _$$_PublicProfileCopyWith<$Res> {
-  __$$_PublicProfileCopyWithImpl(
-      _$_PublicProfile _value, $Res Function(_$_PublicProfile) _then)
+class __$$PublicProfileImplCopyWithImpl<$Res>
+    extends _$PublicProfileCopyWithImpl<$Res, _$PublicProfileImpl>
+    implements _$$PublicProfileImplCopyWith<$Res> {
+  __$$PublicProfileImplCopyWithImpl(
+      _$PublicProfileImpl _value, $Res Function(_$PublicProfileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_PublicProfileCopyWithImpl<$Res>
     Object? photoUrl = null,
     Object? photoBlurhash = null,
   }) {
-    return _then(_$_PublicProfile(
+    return _then(_$PublicProfileImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -150,16 +150,18 @@ class __$$_PublicProfileCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
-  const _$_PublicProfile(
+class _$PublicProfileImpl
+    with DiagnosticableTreeMixin
+    implements _PublicProfile {
+  const _$PublicProfileImpl(
       {required this.id,
       required this.firstName,
       required this.lastName,
       required this.photoUrl,
       required this.photoBlurhash});
 
-  factory _$_PublicProfile.fromJson(Map<String, dynamic> json) =>
-      _$$_PublicProfileFromJson(json);
+  factory _$PublicProfileImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicProfileImplFromJson(json);
 
   @override
   final String id;
@@ -190,10 +192,10 @@ class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublicProfile &&
+            other is _$PublicProfileImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
@@ -213,12 +215,12 @@ class _$_PublicProfile with DiagnosticableTreeMixin implements _PublicProfile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublicProfileCopyWith<_$_PublicProfile> get copyWith =>
-      __$$_PublicProfileCopyWithImpl<_$_PublicProfile>(this, _$identity);
+  _$$PublicProfileImplCopyWith<_$PublicProfileImpl> get copyWith =>
+      __$$PublicProfileImplCopyWithImpl<_$PublicProfileImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublicProfileToJson(
+    return _$$PublicProfileImplToJson(
       this,
     );
   }
@@ -230,10 +232,10 @@ abstract class _PublicProfile implements PublicProfile {
       required final String firstName,
       required final String lastName,
       required final String photoUrl,
-      required final String photoBlurhash}) = _$_PublicProfile;
+      required final String photoBlurhash}) = _$PublicProfileImpl;
 
   factory _PublicProfile.fromJson(Map<String, dynamic> json) =
-      _$_PublicProfile.fromJson;
+      _$PublicProfileImpl.fromJson;
 
   @override
   String get id;
@@ -247,6 +249,6 @@ abstract class _PublicProfile implements PublicProfile {
   String get photoBlurhash;
   @override
   @JsonKey(ignore: true)
-  _$$_PublicProfileCopyWith<_$_PublicProfile> get copyWith =>
+  _$$PublicProfileImplCopyWith<_$PublicProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

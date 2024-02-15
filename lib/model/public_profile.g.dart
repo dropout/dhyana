@@ -6,8 +6,8 @@ part of 'public_profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PublicProfile _$$_PublicProfileFromJson(Map<String, dynamic> json) =>
-    _$_PublicProfile(
+_$PublicProfileImpl _$$PublicProfileImplFromJson(Map<String, dynamic> json) =>
+    _$PublicProfileImpl(
       id: json['id'] as String,
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
@@ -15,7 +15,7 @@ _$_PublicProfile _$$_PublicProfileFromJson(Map<String, dynamic> json) =>
       photoBlurhash: json['photoBlurhash'] as String,
     );
 
-Map<String, dynamic> _$$_PublicProfileToJson(_$_PublicProfile instance) =>
+Map<String, dynamic> _$$PublicProfileImplToJson(_$PublicProfileImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'firstName': instance.firstName,

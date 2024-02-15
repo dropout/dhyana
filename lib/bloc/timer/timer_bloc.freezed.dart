@@ -12,7 +12,7 @@ part of 'timer_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TimerEvent {
@@ -123,20 +123,20 @@ class _$TimerEventCopyWithImpl<$Res, $Val extends TimerEvent>
 }
 
 /// @nodoc
-abstract class _$$WarmupTickedCopyWith<$Res> {
-  factory _$$WarmupTickedCopyWith(
-          _$WarmupTicked value, $Res Function(_$WarmupTicked) then) =
-      __$$WarmupTickedCopyWithImpl<$Res>;
+abstract class _$$WarmupTickedImplCopyWith<$Res> {
+  factory _$$WarmupTickedImplCopyWith(
+          _$WarmupTickedImpl value, $Res Function(_$WarmupTickedImpl) then) =
+      __$$WarmupTickedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int ticks});
 }
 
 /// @nodoc
-class __$$WarmupTickedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$WarmupTicked>
-    implements _$$WarmupTickedCopyWith<$Res> {
-  __$$WarmupTickedCopyWithImpl(
-      _$WarmupTicked _value, $Res Function(_$WarmupTicked) _then)
+class __$$WarmupTickedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$WarmupTickedImpl>
+    implements _$$WarmupTickedImplCopyWith<$Res> {
+  __$$WarmupTickedImplCopyWithImpl(
+      _$WarmupTickedImpl _value, $Res Function(_$WarmupTickedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,7 +144,7 @@ class __$$WarmupTickedCopyWithImpl<$Res>
   $Res call({
     Object? ticks = null,
   }) {
-    return _then(_$WarmupTicked(
+    return _then(_$WarmupTickedImpl(
       ticks: null == ticks
           ? _value.ticks
           : ticks // ignore: cast_nullable_to_non_nullable
@@ -155,8 +155,8 @@ class __$$WarmupTickedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WarmupTicked extends WarmupTicked with DiagnosticableTreeMixin {
-  _$WarmupTicked({required this.ticks}) : super._();
+class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
+  _$WarmupTickedImpl({required this.ticks}) : super._();
 
   @override
   final int ticks;
@@ -175,10 +175,10 @@ class _$WarmupTicked extends WarmupTicked with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WarmupTicked &&
+            other is _$WarmupTickedImpl &&
             (identical(other.ticks, ticks) || other.ticks == ticks));
   }
 
@@ -188,8 +188,8 @@ class _$WarmupTicked extends WarmupTicked with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WarmupTickedCopyWith<_$WarmupTicked> get copyWith =>
-      __$$WarmupTickedCopyWithImpl<_$WarmupTicked>(this, _$identity);
+  _$$WarmupTickedImplCopyWith<_$WarmupTickedImpl> get copyWith =>
+      __$$WarmupTickedImplCopyWithImpl<_$WarmupTickedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -303,35 +303,36 @@ class _$WarmupTicked extends WarmupTicked with DiagnosticableTreeMixin {
 }
 
 abstract class WarmupTicked extends TimerEvent {
-  factory WarmupTicked({required final int ticks}) = _$WarmupTicked;
+  factory WarmupTicked({required final int ticks}) = _$WarmupTickedImpl;
   WarmupTicked._() : super._();
 
   int get ticks;
   @JsonKey(ignore: true)
-  _$$WarmupTickedCopyWith<_$WarmupTicked> get copyWith =>
+  _$$WarmupTickedImplCopyWith<_$WarmupTickedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$WarmupCompletedCopyWith<$Res> {
-  factory _$$WarmupCompletedCopyWith(
-          _$WarmupCompleted value, $Res Function(_$WarmupCompleted) then) =
-      __$$WarmupCompletedCopyWithImpl<$Res>;
+abstract class _$$WarmupCompletedImplCopyWith<$Res> {
+  factory _$$WarmupCompletedImplCopyWith(_$WarmupCompletedImpl value,
+          $Res Function(_$WarmupCompletedImpl) then) =
+      __$$WarmupCompletedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$WarmupCompletedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$WarmupCompleted>
-    implements _$$WarmupCompletedCopyWith<$Res> {
-  __$$WarmupCompletedCopyWithImpl(
-      _$WarmupCompleted _value, $Res Function(_$WarmupCompleted) _then)
+class __$$WarmupCompletedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$WarmupCompletedImpl>
+    implements _$$WarmupCompletedImplCopyWith<$Res> {
+  __$$WarmupCompletedImplCopyWithImpl(
+      _$WarmupCompletedImpl _value, $Res Function(_$WarmupCompletedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$WarmupCompleted extends WarmupCompleted with DiagnosticableTreeMixin {
-  _$WarmupCompleted() : super._();
+class _$WarmupCompletedImpl extends WarmupCompleted
+    with DiagnosticableTreeMixin {
+  _$WarmupCompletedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -345,9 +346,9 @@ class _$WarmupCompleted extends WarmupCompleted with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WarmupCompleted);
+        (other.runtimeType == runtimeType && other is _$WarmupCompletedImpl);
   }
 
   @override
@@ -465,30 +466,30 @@ class _$WarmupCompleted extends WarmupCompleted with DiagnosticableTreeMixin {
 }
 
 abstract class WarmupCompleted extends TimerEvent {
-  factory WarmupCompleted() = _$WarmupCompleted;
+  factory WarmupCompleted() = _$WarmupCompletedImpl;
   WarmupCompleted._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerStartedCopyWith<$Res> {
-  factory _$$TimerStartedCopyWith(
-          _$TimerStarted value, $Res Function(_$TimerStarted) then) =
-      __$$TimerStartedCopyWithImpl<$Res>;
+abstract class _$$TimerStartedImplCopyWith<$Res> {
+  factory _$$TimerStartedImplCopyWith(
+          _$TimerStartedImpl value, $Res Function(_$TimerStartedImpl) then) =
+      __$$TimerStartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerStartedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerStarted>
-    implements _$$TimerStartedCopyWith<$Res> {
-  __$$TimerStartedCopyWithImpl(
-      _$TimerStarted _value, $Res Function(_$TimerStarted) _then)
+class __$$TimerStartedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerStartedImpl>
+    implements _$$TimerStartedImplCopyWith<$Res> {
+  __$$TimerStartedImplCopyWithImpl(
+      _$TimerStartedImpl _value, $Res Function(_$TimerStartedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerStarted extends TimerStarted with DiagnosticableTreeMixin {
-  _$TimerStarted() : super._();
+class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
+  _$TimerStartedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -502,9 +503,9 @@ class _$TimerStarted extends TimerStarted with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerStarted);
+        (other.runtimeType == runtimeType && other is _$TimerStartedImpl);
   }
 
   @override
@@ -622,30 +623,30 @@ class _$TimerStarted extends TimerStarted with DiagnosticableTreeMixin {
 }
 
 abstract class TimerStarted extends TimerEvent {
-  factory TimerStarted() = _$TimerStarted;
+  factory TimerStarted() = _$TimerStartedImpl;
   TimerStarted._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerPausedCopyWith<$Res> {
-  factory _$$TimerPausedCopyWith(
-          _$TimerPaused value, $Res Function(_$TimerPaused) then) =
-      __$$TimerPausedCopyWithImpl<$Res>;
+abstract class _$$TimerPausedImplCopyWith<$Res> {
+  factory _$$TimerPausedImplCopyWith(
+          _$TimerPausedImpl value, $Res Function(_$TimerPausedImpl) then) =
+      __$$TimerPausedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerPausedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerPaused>
-    implements _$$TimerPausedCopyWith<$Res> {
-  __$$TimerPausedCopyWithImpl(
-      _$TimerPaused _value, $Res Function(_$TimerPaused) _then)
+class __$$TimerPausedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerPausedImpl>
+    implements _$$TimerPausedImplCopyWith<$Res> {
+  __$$TimerPausedImplCopyWithImpl(
+      _$TimerPausedImpl _value, $Res Function(_$TimerPausedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerPaused extends TimerPaused with DiagnosticableTreeMixin {
-  _$TimerPaused() : super._();
+class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
+  _$TimerPausedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -659,9 +660,9 @@ class _$TimerPaused extends TimerPaused with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerPaused);
+        (other.runtimeType == runtimeType && other is _$TimerPausedImpl);
   }
 
   @override
@@ -779,30 +780,30 @@ class _$TimerPaused extends TimerPaused with DiagnosticableTreeMixin {
 }
 
 abstract class TimerPaused extends TimerEvent {
-  factory TimerPaused() = _$TimerPaused;
+  factory TimerPaused() = _$TimerPausedImpl;
   TimerPaused._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerResumedCopyWith<$Res> {
-  factory _$$TimerResumedCopyWith(
-          _$TimerResumed value, $Res Function(_$TimerResumed) then) =
-      __$$TimerResumedCopyWithImpl<$Res>;
+abstract class _$$TimerResumedImplCopyWith<$Res> {
+  factory _$$TimerResumedImplCopyWith(
+          _$TimerResumedImpl value, $Res Function(_$TimerResumedImpl) then) =
+      __$$TimerResumedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerResumedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerResumed>
-    implements _$$TimerResumedCopyWith<$Res> {
-  __$$TimerResumedCopyWithImpl(
-      _$TimerResumed _value, $Res Function(_$TimerResumed) _then)
+class __$$TimerResumedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerResumedImpl>
+    implements _$$TimerResumedImplCopyWith<$Res> {
+  __$$TimerResumedImplCopyWithImpl(
+      _$TimerResumedImpl _value, $Res Function(_$TimerResumedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerResumed extends TimerResumed with DiagnosticableTreeMixin {
-  _$TimerResumed() : super._();
+class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
+  _$TimerResumedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -816,9 +817,9 @@ class _$TimerResumed extends TimerResumed with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerResumed);
+        (other.runtimeType == runtimeType && other is _$TimerResumedImpl);
   }
 
   @override
@@ -936,30 +937,30 @@ class _$TimerResumed extends TimerResumed with DiagnosticableTreeMixin {
 }
 
 abstract class TimerResumed extends TimerEvent {
-  factory TimerResumed() = _$TimerResumed;
+  factory TimerResumed() = _$TimerResumedImpl;
   TimerResumed._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerCompletedCopyWith<$Res> {
-  factory _$$TimerCompletedCopyWith(
-          _$TimerCompleted value, $Res Function(_$TimerCompleted) then) =
-      __$$TimerCompletedCopyWithImpl<$Res>;
+abstract class _$$TimerCompletedImplCopyWith<$Res> {
+  factory _$$TimerCompletedImplCopyWith(_$TimerCompletedImpl value,
+          $Res Function(_$TimerCompletedImpl) then) =
+      __$$TimerCompletedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerCompletedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerCompleted>
-    implements _$$TimerCompletedCopyWith<$Res> {
-  __$$TimerCompletedCopyWithImpl(
-      _$TimerCompleted _value, $Res Function(_$TimerCompleted) _then)
+class __$$TimerCompletedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerCompletedImpl>
+    implements _$$TimerCompletedImplCopyWith<$Res> {
+  __$$TimerCompletedImplCopyWithImpl(
+      _$TimerCompletedImpl _value, $Res Function(_$TimerCompletedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerCompleted extends TimerCompleted with DiagnosticableTreeMixin {
-  _$TimerCompleted() : super._();
+class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
+  _$TimerCompletedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -973,9 +974,9 @@ class _$TimerCompleted extends TimerCompleted with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerCompleted);
+        (other.runtimeType == runtimeType && other is _$TimerCompletedImpl);
   }
 
   @override
@@ -1093,25 +1094,25 @@ class _$TimerCompleted extends TimerCompleted with DiagnosticableTreeMixin {
 }
 
 abstract class TimerCompleted extends TimerEvent {
-  factory TimerCompleted() = _$TimerCompleted;
+  factory TimerCompleted() = _$TimerCompletedImpl;
   TimerCompleted._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerTickedCopyWith<$Res> {
-  factory _$$TimerTickedCopyWith(
-          _$TimerTicked value, $Res Function(_$TimerTicked) then) =
-      __$$TimerTickedCopyWithImpl<$Res>;
+abstract class _$$TimerTickedImplCopyWith<$Res> {
+  factory _$$TimerTickedImplCopyWith(
+          _$TimerTickedImpl value, $Res Function(_$TimerTickedImpl) then) =
+      __$$TimerTickedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int ticks});
 }
 
 /// @nodoc
-class __$$TimerTickedCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerTicked>
-    implements _$$TimerTickedCopyWith<$Res> {
-  __$$TimerTickedCopyWithImpl(
-      _$TimerTicked _value, $Res Function(_$TimerTicked) _then)
+class __$$TimerTickedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerTickedImpl>
+    implements _$$TimerTickedImplCopyWith<$Res> {
+  __$$TimerTickedImplCopyWithImpl(
+      _$TimerTickedImpl _value, $Res Function(_$TimerTickedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1119,7 +1120,7 @@ class __$$TimerTickedCopyWithImpl<$Res>
   $Res call({
     Object? ticks = null,
   }) {
-    return _then(_$TimerTicked(
+    return _then(_$TimerTickedImpl(
       ticks: null == ticks
           ? _value.ticks
           : ticks // ignore: cast_nullable_to_non_nullable
@@ -1130,8 +1131,8 @@ class __$$TimerTickedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimerTicked extends TimerTicked with DiagnosticableTreeMixin {
-  _$TimerTicked({required this.ticks}) : super._();
+class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
+  _$TimerTickedImpl({required this.ticks}) : super._();
 
   @override
   final int ticks;
@@ -1150,10 +1151,10 @@ class _$TimerTicked extends TimerTicked with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerTicked &&
+            other is _$TimerTickedImpl &&
             (identical(other.ticks, ticks) || other.ticks == ticks));
   }
 
@@ -1163,8 +1164,8 @@ class _$TimerTicked extends TimerTicked with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TimerTickedCopyWith<_$TimerTicked> get copyWith =>
-      __$$TimerTickedCopyWithImpl<_$TimerTicked>(this, _$identity);
+  _$$TimerTickedImplCopyWith<_$TimerTickedImpl> get copyWith =>
+      __$$TimerTickedImplCopyWithImpl<_$TimerTickedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1278,35 +1279,35 @@ class _$TimerTicked extends TimerTicked with DiagnosticableTreeMixin {
 }
 
 abstract class TimerTicked extends TimerEvent {
-  factory TimerTicked({required final int ticks}) = _$TimerTicked;
+  factory TimerTicked({required final int ticks}) = _$TimerTickedImpl;
   TimerTicked._() : super._();
 
   int get ticks;
   @JsonKey(ignore: true)
-  _$$TimerTickedCopyWith<_$TimerTicked> get copyWith =>
+  _$$TimerTickedImplCopyWith<_$TimerTickedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TimerResetCopyWith<$Res> {
-  factory _$$TimerResetCopyWith(
-          _$TimerReset value, $Res Function(_$TimerReset) then) =
-      __$$TimerResetCopyWithImpl<$Res>;
+abstract class _$$TimerResetImplCopyWith<$Res> {
+  factory _$$TimerResetImplCopyWith(
+          _$TimerResetImpl value, $Res Function(_$TimerResetImpl) then) =
+      __$$TimerResetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerResetCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerReset>
-    implements _$$TimerResetCopyWith<$Res> {
-  __$$TimerResetCopyWithImpl(
-      _$TimerReset _value, $Res Function(_$TimerReset) _then)
+class __$$TimerResetImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerResetImpl>
+    implements _$$TimerResetImplCopyWith<$Res> {
+  __$$TimerResetImplCopyWithImpl(
+      _$TimerResetImpl _value, $Res Function(_$TimerResetImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerReset extends TimerReset with DiagnosticableTreeMixin {
-  _$TimerReset() : super._();
+class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
+  _$TimerResetImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1320,9 +1321,9 @@ class _$TimerReset extends TimerReset with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerReset);
+        (other.runtimeType == runtimeType && other is _$TimerResetImpl);
   }
 
   @override
@@ -1440,25 +1441,25 @@ class _$TimerReset extends TimerReset with DiagnosticableTreeMixin {
 }
 
 abstract class TimerReset extends TimerEvent {
-  factory TimerReset() = _$TimerReset;
+  factory TimerReset() = _$TimerResetImpl;
   TimerReset._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerErrorOccurredCopyWith<$Res> {
-  factory _$$TimerErrorOccurredCopyWith(_$TimerErrorOccurred value,
-          $Res Function(_$TimerErrorOccurred) then) =
-      __$$TimerErrorOccurredCopyWithImpl<$Res>;
+abstract class _$$TimerErrorOccurredImplCopyWith<$Res> {
+  factory _$$TimerErrorOccurredImplCopyWith(_$TimerErrorOccurredImpl value,
+          $Res Function(_$TimerErrorOccurredImpl) then) =
+      __$$TimerErrorOccurredImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Object? error, StackTrace stackTrace});
 }
 
 /// @nodoc
-class __$$TimerErrorOccurredCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$TimerErrorOccurred>
-    implements _$$TimerErrorOccurredCopyWith<$Res> {
-  __$$TimerErrorOccurredCopyWithImpl(
-      _$TimerErrorOccurred _value, $Res Function(_$TimerErrorOccurred) _then)
+class __$$TimerErrorOccurredImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerErrorOccurredImpl>
+    implements _$$TimerErrorOccurredImplCopyWith<$Res> {
+  __$$TimerErrorOccurredImplCopyWithImpl(_$TimerErrorOccurredImpl _value,
+      $Res Function(_$TimerErrorOccurredImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1467,7 +1468,7 @@ class __$$TimerErrorOccurredCopyWithImpl<$Res>
     Object? error = freezed,
     Object? stackTrace = null,
   }) {
-    return _then(_$TimerErrorOccurred(
+    return _then(_$TimerErrorOccurredImpl(
       error: freezed == error ? _value.error : error,
       stackTrace: null == stackTrace
           ? _value.stackTrace
@@ -1479,9 +1480,9 @@ class __$$TimerErrorOccurredCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimerErrorOccurred extends TimerErrorOccurred
+class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     with DiagnosticableTreeMixin {
-  _$TimerErrorOccurred({this.error, required this.stackTrace}) : super._();
+  _$TimerErrorOccurredImpl({this.error, required this.stackTrace}) : super._();
 
   @override
   final Object? error;
@@ -1503,10 +1504,10 @@ class _$TimerErrorOccurred extends TimerErrorOccurred
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerErrorOccurred &&
+            other is _$TimerErrorOccurredImpl &&
             const DeepCollectionEquality().equals(other.error, error) &&
             (identical(other.stackTrace, stackTrace) ||
                 other.stackTrace == stackTrace));
@@ -1519,8 +1520,8 @@ class _$TimerErrorOccurred extends TimerErrorOccurred
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TimerErrorOccurredCopyWith<_$TimerErrorOccurred> get copyWith =>
-      __$$TimerErrorOccurredCopyWithImpl<_$TimerErrorOccurred>(
+  _$$TimerErrorOccurredImplCopyWith<_$TimerErrorOccurredImpl> get copyWith =>
+      __$$TimerErrorOccurredImplCopyWithImpl<_$TimerErrorOccurredImpl>(
           this, _$identity);
 
   @override
@@ -1637,36 +1638,36 @@ class _$TimerErrorOccurred extends TimerErrorOccurred
 abstract class TimerErrorOccurred extends TimerEvent {
   factory TimerErrorOccurred(
       {final Object? error,
-      required final StackTrace stackTrace}) = _$TimerErrorOccurred;
+      required final StackTrace stackTrace}) = _$TimerErrorOccurredImpl;
   TimerErrorOccurred._() : super._();
 
   Object? get error;
   StackTrace get stackTrace;
   @JsonKey(ignore: true)
-  _$$TimerErrorOccurredCopyWith<_$TimerErrorOccurred> get copyWith =>
+  _$$TimerErrorOccurredImplCopyWith<_$TimerErrorOccurredImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FinishTimerCopyWith<$Res> {
-  factory _$$FinishTimerCopyWith(
-          _$FinishTimer value, $Res Function(_$FinishTimer) then) =
-      __$$FinishTimerCopyWithImpl<$Res>;
+abstract class _$$FinishTimerImplCopyWith<$Res> {
+  factory _$$FinishTimerImplCopyWith(
+          _$FinishTimerImpl value, $Res Function(_$FinishTimerImpl) then) =
+      __$$FinishTimerImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FinishTimerCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$FinishTimer>
-    implements _$$FinishTimerCopyWith<$Res> {
-  __$$FinishTimerCopyWithImpl(
-      _$FinishTimer _value, $Res Function(_$FinishTimer) _then)
+class __$$FinishTimerImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$FinishTimerImpl>
+    implements _$$FinishTimerImplCopyWith<$Res> {
+  __$$FinishTimerImplCopyWithImpl(
+      _$FinishTimerImpl _value, $Res Function(_$FinishTimerImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FinishTimer extends FinishTimer with DiagnosticableTreeMixin {
-  _$FinishTimer() : super._();
+class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
+  _$FinishTimerImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1680,9 +1681,9 @@ class _$FinishTimer extends FinishTimer with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FinishTimer);
+        (other.runtimeType == runtimeType && other is _$FinishTimerImpl);
   }
 
   @override
@@ -1800,7 +1801,7 @@ class _$FinishTimer extends FinishTimer with DiagnosticableTreeMixin {
 }
 
 abstract class FinishTimer extends TimerEvent {
-  factory FinishTimer() = _$FinishTimer;
+  factory FinishTimer() = _$FinishTimerImpl;
   FinishTimer._() : super._();
 }
 
@@ -1900,11 +1901,11 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
 }
 
 /// @nodoc
-abstract class _$$_TimerStateCopyWith<$Res>
+abstract class _$$TimerStateImplCopyWith<$Res>
     implements $TimerStateCopyWith<$Res> {
-  factory _$$_TimerStateCopyWith(
-          _$_TimerState value, $Res Function(_$_TimerState) then) =
-      __$$_TimerStateCopyWithImpl<$Res>;
+  factory _$$TimerStateImplCopyWith(
+          _$TimerStateImpl value, $Res Function(_$TimerStateImpl) then) =
+      __$$TimerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1921,11 +1922,11 @@ abstract class _$$_TimerStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TimerStateCopyWithImpl<$Res>
-    extends _$TimerStateCopyWithImpl<$Res, _$_TimerState>
-    implements _$$_TimerStateCopyWith<$Res> {
-  __$$_TimerStateCopyWithImpl(
-      _$_TimerState _value, $Res Function(_$_TimerState) _then)
+class __$$TimerStateImplCopyWithImpl<$Res>
+    extends _$TimerStateCopyWithImpl<$Res, _$TimerStateImpl>
+    implements _$$TimerStateImplCopyWith<$Res> {
+  __$$TimerStateImplCopyWithImpl(
+      _$TimerStateImpl _value, $Res Function(_$TimerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1939,7 +1940,7 @@ class __$$_TimerStateCopyWithImpl<$Res>
     Object? startTime = freezed,
     Object? endTime = freezed,
   }) {
-    return _then(_$_TimerState(
+    return _then(_$TimerStateImpl(
       timerSettings: null == timerSettings
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
@@ -1974,8 +1975,8 @@ class __$$_TimerStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
-  const _$_TimerState(
+class _$TimerStateImpl extends _TimerState with DiagnosticableTreeMixin {
+  const _$TimerStateImpl(
       {required this.timerSettings,
       required this.timerStatus,
       required this.timerStage,
@@ -2020,10 +2021,10 @@ class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TimerState &&
+            other is _$TimerStateImpl &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings) &&
             (identical(other.timerStatus, timerStatus) ||
@@ -2046,8 +2047,8 @@ class _$_TimerState extends _TimerState with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TimerStateCopyWith<_$_TimerState> get copyWith =>
-      __$$_TimerStateCopyWithImpl<_$_TimerState>(this, _$identity);
+  _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
+      __$$TimerStateImplCopyWithImpl<_$TimerStateImpl>(this, _$identity);
 }
 
 abstract class _TimerState extends TimerState {
@@ -2058,7 +2059,7 @@ abstract class _TimerState extends TimerState {
       required final Duration elapsedWarmupTime,
       required final Duration elapsedTime,
       final DateTime? startTime,
-      final DateTime? endTime}) = _$_TimerState;
+      final DateTime? endTime}) = _$TimerStateImpl;
   const _TimerState._() : super._();
 
   @override
@@ -2077,6 +2078,6 @@ abstract class _TimerState extends TimerState {
   DateTime? get endTime;
   @override
   @JsonKey(ignore: true)
-  _$$_TimerStateCopyWith<_$_TimerState> get copyWith =>
+  _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

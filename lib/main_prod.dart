@@ -22,7 +22,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
-    overlays: [SystemUiOverlay.bottom]
+    overlays: []
   );
 
   // Bloc.observer = DebugPrintBlocObserver();

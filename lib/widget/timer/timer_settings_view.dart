@@ -100,23 +100,25 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             ],
           ),
         ),
-        DurationIndicator(
-          timerSettings: widget.timerSettings,
-          key: ValueKey<TimerSettings>(widget.timerSettings),
-        ),
+
         Padding(
           padding: const EdgeInsets.all(AppThemeData.spacingMd),
           child: TextButton(
             onPressed: () => _onStartButtonTap(context),
             style: TextButton.styleFrom(
-              minimumSize: const Size(double.infinity, 48.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppThemeData.spacingXl,
+                vertical: AppThemeData.spacingMd
+              ),
+              minimumSize: const Size(0, 48.0),
               foregroundColor: Colors.white,
               backgroundColor: Colors.red,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(AppThemeData.borderRadiusMd)
-                )
-              ),
+              shape: const StadiumBorder()
+              // shape: const RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.all(
+              //     Radius.circular(AppThemeData.borderRadiusMd)
+              //   )
+              // ),
             ),
             child: Text(
               AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
@@ -127,6 +129,12 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             ),
           ),
         ),
+
+        DurationIndicator(
+          timerSettings: widget.timerSettings,
+          key: ValueKey<TimerSettings>(widget.timerSettings),
+        ),
+
       ],
     );
   }

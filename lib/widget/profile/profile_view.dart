@@ -28,8 +28,8 @@ class _ProfileViewState extends State<ProfileView> {
           case ProfileErrorState():
             return buildProfileError(context);
           case ProfileLoadedState():
+            // return buildProfileLoading(context);
             return buildProfileLoaded(context, state.profile);
-            // return buildLoaded(context, state.profile);
         }
       }
     );
@@ -43,16 +43,26 @@ class _ProfileViewState extends State<ProfileView> {
     ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Column(
       children: [
-        SizedBox(
+        Container(
           width: 96,
           height: 96,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.black,
+              width: 3.0,
+            ),
+          ),
           child: ProfileImage.fromProfile(profile),
         ),
         const SizedBox(height: AppThemeData.spacingLg),
         Text(
           profile.displayName,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
         ),
+        const SizedBox(height: AppThemeData.spacingLg),
         ConsecutiveDays(
           profile: profile,
           profileBloc: profileBloc,

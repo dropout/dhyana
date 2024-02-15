@@ -12,7 +12,7 @@ part of 'timer_settings_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TimerSettingsEvent {
@@ -109,11 +109,12 @@ class _$TimerSettingsEventCopyWithImpl<$Res, $Val extends TimerSettingsEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadTimerSettingsDataCopyWith<$Res>
+abstract class _$$LoadTimerSettingsDataImplCopyWith<$Res>
     implements $TimerSettingsEventCopyWith<$Res> {
-  factory _$$LoadTimerSettingsDataCopyWith(_$LoadTimerSettingsData value,
-          $Res Function(_$LoadTimerSettingsData) then) =
-      __$$LoadTimerSettingsDataCopyWithImpl<$Res>;
+  factory _$$LoadTimerSettingsDataImplCopyWith(
+          _$LoadTimerSettingsDataImpl value,
+          $Res Function(_$LoadTimerSettingsDataImpl) then) =
+      __$$LoadTimerSettingsDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TimerSettings? timerSettings});
@@ -123,11 +124,11 @@ abstract class _$$LoadTimerSettingsDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LoadTimerSettingsDataCopyWithImpl<$Res>
-    extends _$TimerSettingsEventCopyWithImpl<$Res, _$LoadTimerSettingsData>
-    implements _$$LoadTimerSettingsDataCopyWith<$Res> {
-  __$$LoadTimerSettingsDataCopyWithImpl(_$LoadTimerSettingsData _value,
-      $Res Function(_$LoadTimerSettingsData) _then)
+class __$$LoadTimerSettingsDataImplCopyWithImpl<$Res>
+    extends _$TimerSettingsEventCopyWithImpl<$Res, _$LoadTimerSettingsDataImpl>
+    implements _$$LoadTimerSettingsDataImplCopyWith<$Res> {
+  __$$LoadTimerSettingsDataImplCopyWithImpl(_$LoadTimerSettingsDataImpl _value,
+      $Res Function(_$LoadTimerSettingsDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -135,7 +136,7 @@ class __$$LoadTimerSettingsDataCopyWithImpl<$Res>
   $Res call({
     Object? timerSettings = freezed,
   }) {
-    return _then(_$LoadTimerSettingsData(
+    return _then(_$LoadTimerSettingsDataImpl(
       timerSettings: freezed == timerSettings
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
@@ -146,9 +147,9 @@ class __$$LoadTimerSettingsDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadTimerSettingsData extends LoadTimerSettingsData
+class _$LoadTimerSettingsDataImpl extends LoadTimerSettingsData
     with DiagnosticableTreeMixin {
-  const _$LoadTimerSettingsData({this.timerSettings}) : super._();
+  const _$LoadTimerSettingsDataImpl({this.timerSettings}) : super._();
 
   @override
   final TimerSettings? timerSettings;
@@ -167,10 +168,10 @@ class _$LoadTimerSettingsData extends LoadTimerSettingsData
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadTimerSettingsData &&
+            other is _$LoadTimerSettingsDataImpl &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
@@ -181,9 +182,9 @@ class _$LoadTimerSettingsData extends LoadTimerSettingsData
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadTimerSettingsDataCopyWith<_$LoadTimerSettingsData> get copyWith =>
-      __$$LoadTimerSettingsDataCopyWithImpl<_$LoadTimerSettingsData>(
-          this, _$identity);
+  _$$LoadTimerSettingsDataImplCopyWith<_$LoadTimerSettingsDataImpl>
+      get copyWith => __$$LoadTimerSettingsDataImplCopyWithImpl<
+          _$LoadTimerSettingsDataImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,23 +251,23 @@ class _$LoadTimerSettingsData extends LoadTimerSettingsData
 
 abstract class LoadTimerSettingsData extends TimerSettingsEvent {
   const factory LoadTimerSettingsData({final TimerSettings? timerSettings}) =
-      _$LoadTimerSettingsData;
+      _$LoadTimerSettingsDataImpl;
   const LoadTimerSettingsData._() : super._();
 
   @override
   TimerSettings? get timerSettings;
   @override
   @JsonKey(ignore: true)
-  _$$LoadTimerSettingsDataCopyWith<_$LoadTimerSettingsData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LoadTimerSettingsDataImplCopyWith<_$LoadTimerSettingsDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsChangedCopyWith<$Res>
+abstract class _$$TimerSettingsChangedImplCopyWith<$Res>
     implements $TimerSettingsEventCopyWith<$Res> {
-  factory _$$TimerSettingsChangedCopyWith(_$TimerSettingsChanged value,
-          $Res Function(_$TimerSettingsChanged) then) =
-      __$$TimerSettingsChangedCopyWithImpl<$Res>;
+  factory _$$TimerSettingsChangedImplCopyWith(_$TimerSettingsChangedImpl value,
+          $Res Function(_$TimerSettingsChangedImpl) then) =
+      __$$TimerSettingsChangedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TimerSettings timerSettings});
@@ -276,11 +277,11 @@ abstract class _$$TimerSettingsChangedCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TimerSettingsChangedCopyWithImpl<$Res>
-    extends _$TimerSettingsEventCopyWithImpl<$Res, _$TimerSettingsChanged>
-    implements _$$TimerSettingsChangedCopyWith<$Res> {
-  __$$TimerSettingsChangedCopyWithImpl(_$TimerSettingsChanged _value,
-      $Res Function(_$TimerSettingsChanged) _then)
+class __$$TimerSettingsChangedImplCopyWithImpl<$Res>
+    extends _$TimerSettingsEventCopyWithImpl<$Res, _$TimerSettingsChangedImpl>
+    implements _$$TimerSettingsChangedImplCopyWith<$Res> {
+  __$$TimerSettingsChangedImplCopyWithImpl(_$TimerSettingsChangedImpl _value,
+      $Res Function(_$TimerSettingsChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -288,7 +289,7 @@ class __$$TimerSettingsChangedCopyWithImpl<$Res>
   $Res call({
     Object? timerSettings = null,
   }) {
-    return _then(_$TimerSettingsChanged(
+    return _then(_$TimerSettingsChangedImpl(
       timerSettings: null == timerSettings
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
@@ -307,9 +308,9 @@ class __$$TimerSettingsChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimerSettingsChanged extends TimerSettingsChanged
+class _$TimerSettingsChangedImpl extends TimerSettingsChanged
     with DiagnosticableTreeMixin {
-  const _$TimerSettingsChanged({required this.timerSettings}) : super._();
+  const _$TimerSettingsChangedImpl({required this.timerSettings}) : super._();
 
   @override
   final TimerSettings timerSettings;
@@ -328,10 +329,10 @@ class _$TimerSettingsChanged extends TimerSettingsChanged
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsChanged &&
+            other is _$TimerSettingsChangedImpl &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
@@ -342,9 +343,10 @@ class _$TimerSettingsChanged extends TimerSettingsChanged
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TimerSettingsChangedCopyWith<_$TimerSettingsChanged> get copyWith =>
-      __$$TimerSettingsChangedCopyWithImpl<_$TimerSettingsChanged>(
-          this, _$identity);
+  _$$TimerSettingsChangedImplCopyWith<_$TimerSettingsChangedImpl>
+      get copyWith =>
+          __$$TimerSettingsChangedImplCopyWithImpl<_$TimerSettingsChangedImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -411,15 +413,16 @@ class _$TimerSettingsChanged extends TimerSettingsChanged
 
 abstract class TimerSettingsChanged extends TimerSettingsEvent {
   const factory TimerSettingsChanged(
-      {required final TimerSettings timerSettings}) = _$TimerSettingsChanged;
+          {required final TimerSettings timerSettings}) =
+      _$TimerSettingsChangedImpl;
   const TimerSettingsChanged._() : super._();
 
   @override
   TimerSettings get timerSettings;
   @override
   @JsonKey(ignore: true)
-  _$$TimerSettingsChangedCopyWith<_$TimerSettingsChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TimerSettingsChangedImplCopyWith<_$TimerSettingsChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -489,29 +492,29 @@ class _$TimerSettingsStateCopyWithImpl<$Res, $Val extends TimerSettingsState>
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsDataLoadingStateCopyWith<$Res> {
-  factory _$$TimerSettingsDataLoadingStateCopyWith(
-          _$TimerSettingsDataLoadingState value,
-          $Res Function(_$TimerSettingsDataLoadingState) then) =
-      __$$TimerSettingsDataLoadingStateCopyWithImpl<$Res>;
+abstract class _$$TimerSettingsDataLoadingStateImplCopyWith<$Res> {
+  factory _$$TimerSettingsDataLoadingStateImplCopyWith(
+          _$TimerSettingsDataLoadingStateImpl value,
+          $Res Function(_$TimerSettingsDataLoadingStateImpl) then) =
+      __$$TimerSettingsDataLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerSettingsDataLoadingStateCopyWithImpl<$Res>
+class __$$TimerSettingsDataLoadingStateImplCopyWithImpl<$Res>
     extends _$TimerSettingsStateCopyWithImpl<$Res,
-        _$TimerSettingsDataLoadingState>
-    implements _$$TimerSettingsDataLoadingStateCopyWith<$Res> {
-  __$$TimerSettingsDataLoadingStateCopyWithImpl(
-      _$TimerSettingsDataLoadingState _value,
-      $Res Function(_$TimerSettingsDataLoadingState) _then)
+        _$TimerSettingsDataLoadingStateImpl>
+    implements _$$TimerSettingsDataLoadingStateImplCopyWith<$Res> {
+  __$$TimerSettingsDataLoadingStateImplCopyWithImpl(
+      _$TimerSettingsDataLoadingStateImpl _value,
+      $Res Function(_$TimerSettingsDataLoadingStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
+class _$TimerSettingsDataLoadingStateImpl extends TimerSettingsDataLoadingState
     with DiagnosticableTreeMixin {
-  const _$TimerSettingsDataLoadingState() : super._();
+  const _$TimerSettingsDataLoadingStateImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -525,10 +528,10 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsDataLoadingState);
+            other is _$TimerSettingsDataLoadingStateImpl);
   }
 
   @override
@@ -605,16 +608,16 @@ class _$TimerSettingsDataLoadingState extends TimerSettingsDataLoadingState
 
 abstract class TimerSettingsDataLoadingState extends TimerSettingsState {
   const factory TimerSettingsDataLoadingState() =
-      _$TimerSettingsDataLoadingState;
+      _$TimerSettingsDataLoadingStateImpl;
   const TimerSettingsDataLoadingState._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsDataLoadedStateCopyWith<$Res> {
-  factory _$$TimerSettingsDataLoadedStateCopyWith(
-          _$TimerSettingsDataLoadedState value,
-          $Res Function(_$TimerSettingsDataLoadedState) then) =
-      __$$TimerSettingsDataLoadedStateCopyWithImpl<$Res>;
+abstract class _$$TimerSettingsDataLoadedStateImplCopyWith<$Res> {
+  factory _$$TimerSettingsDataLoadedStateImplCopyWith(
+          _$TimerSettingsDataLoadedStateImpl value,
+          $Res Function(_$TimerSettingsDataLoadedStateImpl) then) =
+      __$$TimerSettingsDataLoadedStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({TimerSettings timerSettings});
 
@@ -622,13 +625,13 @@ abstract class _$$TimerSettingsDataLoadedStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TimerSettingsDataLoadedStateCopyWithImpl<$Res>
+class __$$TimerSettingsDataLoadedStateImplCopyWithImpl<$Res>
     extends _$TimerSettingsStateCopyWithImpl<$Res,
-        _$TimerSettingsDataLoadedState>
-    implements _$$TimerSettingsDataLoadedStateCopyWith<$Res> {
-  __$$TimerSettingsDataLoadedStateCopyWithImpl(
-      _$TimerSettingsDataLoadedState _value,
-      $Res Function(_$TimerSettingsDataLoadedState) _then)
+        _$TimerSettingsDataLoadedStateImpl>
+    implements _$$TimerSettingsDataLoadedStateImplCopyWith<$Res> {
+  __$$TimerSettingsDataLoadedStateImplCopyWithImpl(
+      _$TimerSettingsDataLoadedStateImpl _value,
+      $Res Function(_$TimerSettingsDataLoadedStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -636,7 +639,7 @@ class __$$TimerSettingsDataLoadedStateCopyWithImpl<$Res>
   $Res call({
     Object? timerSettings = null,
   }) {
-    return _then(_$TimerSettingsDataLoadedState(
+    return _then(_$TimerSettingsDataLoadedStateImpl(
       timerSettings: null == timerSettings
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
@@ -655,9 +658,9 @@ class __$$TimerSettingsDataLoadedStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
+class _$TimerSettingsDataLoadedStateImpl extends TimerSettingsDataLoadedState
     with DiagnosticableTreeMixin {
-  const _$TimerSettingsDataLoadedState({required this.timerSettings})
+  const _$TimerSettingsDataLoadedStateImpl({required this.timerSettings})
       : super._();
 
   @override
@@ -677,10 +680,10 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsDataLoadedState &&
+            other is _$TimerSettingsDataLoadedStateImpl &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
@@ -691,9 +694,10 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TimerSettingsDataLoadedStateCopyWith<_$TimerSettingsDataLoadedState>
-      get copyWith => __$$TimerSettingsDataLoadedStateCopyWithImpl<
-          _$TimerSettingsDataLoadedState>(this, _$identity);
+  _$$TimerSettingsDataLoadedStateImplCopyWith<
+          _$TimerSettingsDataLoadedStateImpl>
+      get copyWith => __$$TimerSettingsDataLoadedStateImplCopyWithImpl<
+          _$TimerSettingsDataLoadedStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -767,39 +771,40 @@ class _$TimerSettingsDataLoadedState extends TimerSettingsDataLoadedState
 abstract class TimerSettingsDataLoadedState extends TimerSettingsState {
   const factory TimerSettingsDataLoadedState(
           {required final TimerSettings timerSettings}) =
-      _$TimerSettingsDataLoadedState;
+      _$TimerSettingsDataLoadedStateImpl;
   const TimerSettingsDataLoadedState._() : super._();
 
   TimerSettings get timerSettings;
   @JsonKey(ignore: true)
-  _$$TimerSettingsDataLoadedStateCopyWith<_$TimerSettingsDataLoadedState>
+  _$$TimerSettingsDataLoadedStateImplCopyWith<
+          _$TimerSettingsDataLoadedStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsDataErrorStateCopyWith<$Res> {
-  factory _$$TimerSettingsDataErrorStateCopyWith(
-          _$TimerSettingsDataErrorState value,
-          $Res Function(_$TimerSettingsDataErrorState) then) =
-      __$$TimerSettingsDataErrorStateCopyWithImpl<$Res>;
+abstract class _$$TimerSettingsDataErrorStateImplCopyWith<$Res> {
+  factory _$$TimerSettingsDataErrorStateImplCopyWith(
+          _$TimerSettingsDataErrorStateImpl value,
+          $Res Function(_$TimerSettingsDataErrorStateImpl) then) =
+      __$$TimerSettingsDataErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TimerSettingsDataErrorStateCopyWithImpl<$Res>
+class __$$TimerSettingsDataErrorStateImplCopyWithImpl<$Res>
     extends _$TimerSettingsStateCopyWithImpl<$Res,
-        _$TimerSettingsDataErrorState>
-    implements _$$TimerSettingsDataErrorStateCopyWith<$Res> {
-  __$$TimerSettingsDataErrorStateCopyWithImpl(
-      _$TimerSettingsDataErrorState _value,
-      $Res Function(_$TimerSettingsDataErrorState) _then)
+        _$TimerSettingsDataErrorStateImpl>
+    implements _$$TimerSettingsDataErrorStateImplCopyWith<$Res> {
+  __$$TimerSettingsDataErrorStateImplCopyWithImpl(
+      _$TimerSettingsDataErrorStateImpl _value,
+      $Res Function(_$TimerSettingsDataErrorStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
+class _$TimerSettingsDataErrorStateImpl extends TimerSettingsDataErrorState
     with DiagnosticableTreeMixin {
-  const _$TimerSettingsDataErrorState() : super._();
+  const _$TimerSettingsDataErrorStateImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -813,10 +818,10 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsDataErrorState);
+            other is _$TimerSettingsDataErrorStateImpl);
   }
 
   @override
@@ -892,6 +897,7 @@ class _$TimerSettingsDataErrorState extends TimerSettingsDataErrorState
 }
 
 abstract class TimerSettingsDataErrorState extends TimerSettingsState {
-  const factory TimerSettingsDataErrorState() = _$TimerSettingsDataErrorState;
+  const factory TimerSettingsDataErrorState() =
+      _$TimerSettingsDataErrorStateImpl;
   const TimerSettingsDataErrorState._() : super._();
 }

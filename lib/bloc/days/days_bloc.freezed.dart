@@ -12,7 +12,7 @@ part of 'days_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DaysEvent {
@@ -92,24 +92,25 @@ class _$DaysEventCopyWithImpl<$Res, $Val extends DaysEvent>
 }
 
 /// @nodoc
-abstract class _$$_StartedCopyWith<$Res> {
-  factory _$$_StartedCopyWith(
-          _$_Started value, $Res Function(_$_Started) then) =
-      __$$_StartedCopyWithImpl<$Res>;
+abstract class _$$StartedImplCopyWith<$Res> {
+  factory _$$StartedImplCopyWith(
+          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
+      __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StartedCopyWithImpl<$Res>
-    extends _$DaysEventCopyWithImpl<$Res, _$_Started>
-    implements _$$_StartedCopyWith<$Res> {
-  __$$_StartedCopyWithImpl(_$_Started _value, $Res Function(_$_Started) _then)
+class __$$StartedImplCopyWithImpl<$Res>
+    extends _$DaysEventCopyWithImpl<$Res, _$StartedImpl>
+    implements _$$StartedImplCopyWith<$Res> {
+  __$$StartedImplCopyWithImpl(
+      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Started implements _Started {
-  const _$_Started();
+class _$StartedImpl implements _Started {
+  const _$StartedImpl();
 
   @override
   String toString() {
@@ -117,9 +118,9 @@ class _$_Started implements _Started {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Started);
+        (other.runtimeType == runtimeType && other is _$StartedImpl);
   }
 
   @override
@@ -207,24 +208,24 @@ class _$_Started implements _Started {
 }
 
 abstract class _Started implements DaysEvent {
-  const factory _Started() = _$_Started;
+  const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$GetDaysEventCopyWith<$Res> {
-  factory _$$GetDaysEventCopyWith(
-          _$GetDaysEvent value, $Res Function(_$GetDaysEvent) then) =
-      __$$GetDaysEventCopyWithImpl<$Res>;
+abstract class _$$GetDaysEventImplCopyWith<$Res> {
+  factory _$$GetDaysEventImplCopyWith(
+          _$GetDaysEventImpl value, $Res Function(_$GetDaysEventImpl) then) =
+      __$$GetDaysEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String profileId, DateTime from, DateTime? to, bool useStream});
 }
 
 /// @nodoc
-class __$$GetDaysEventCopyWithImpl<$Res>
-    extends _$DaysEventCopyWithImpl<$Res, _$GetDaysEvent>
-    implements _$$GetDaysEventCopyWith<$Res> {
-  __$$GetDaysEventCopyWithImpl(
-      _$GetDaysEvent _value, $Res Function(_$GetDaysEvent) _then)
+class __$$GetDaysEventImplCopyWithImpl<$Res>
+    extends _$DaysEventCopyWithImpl<$Res, _$GetDaysEventImpl>
+    implements _$$GetDaysEventImplCopyWith<$Res> {
+  __$$GetDaysEventImplCopyWithImpl(
+      _$GetDaysEventImpl _value, $Res Function(_$GetDaysEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -235,7 +236,7 @@ class __$$GetDaysEventCopyWithImpl<$Res>
     Object? to = freezed,
     Object? useStream = null,
   }) {
-    return _then(_$GetDaysEvent(
+    return _then(_$GetDaysEventImpl(
       profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
@@ -258,8 +259,8 @@ class __$$GetDaysEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetDaysEvent implements GetDaysEvent {
-  const _$GetDaysEvent(
+class _$GetDaysEventImpl implements GetDaysEvent {
+  const _$GetDaysEventImpl(
       {required this.profileId,
       required this.from,
       this.to,
@@ -281,10 +282,10 @@ class _$GetDaysEvent implements GetDaysEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetDaysEvent &&
+            other is _$GetDaysEventImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
             (identical(other.from, from) || other.from == from) &&
@@ -299,8 +300,8 @@ class _$GetDaysEvent implements GetDaysEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetDaysEventCopyWith<_$GetDaysEvent> get copyWith =>
-      __$$GetDaysEventCopyWithImpl<_$GetDaysEvent>(this, _$identity);
+  _$$GetDaysEventImplCopyWith<_$GetDaysEventImpl> get copyWith =>
+      __$$GetDaysEventImplCopyWithImpl<_$GetDaysEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -388,32 +389,34 @@ abstract class GetDaysEvent implements DaysEvent {
       {required final String profileId,
       required final DateTime from,
       final DateTime? to,
-      final bool useStream}) = _$GetDaysEvent;
+      final bool useStream}) = _$GetDaysEventImpl;
 
   String get profileId;
   DateTime get from;
   DateTime? get to;
   bool get useStream;
   @JsonKey(ignore: true)
-  _$$GetDaysEventCopyWith<_$GetDaysEvent> get copyWith =>
+  _$$GetDaysEventImplCopyWith<_$GetDaysEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReceiveUpdateDaysEventCopyWith<$Res> {
-  factory _$$ReceiveUpdateDaysEventCopyWith(_$ReceiveUpdateDaysEvent value,
-          $Res Function(_$ReceiveUpdateDaysEvent) then) =
-      __$$ReceiveUpdateDaysEventCopyWithImpl<$Res>;
+abstract class _$$ReceiveUpdateDaysEventImplCopyWith<$Res> {
+  factory _$$ReceiveUpdateDaysEventImplCopyWith(
+          _$ReceiveUpdateDaysEventImpl value,
+          $Res Function(_$ReceiveUpdateDaysEventImpl) then) =
+      __$$ReceiveUpdateDaysEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Day> days});
 }
 
 /// @nodoc
-class __$$ReceiveUpdateDaysEventCopyWithImpl<$Res>
-    extends _$DaysEventCopyWithImpl<$Res, _$ReceiveUpdateDaysEvent>
-    implements _$$ReceiveUpdateDaysEventCopyWith<$Res> {
-  __$$ReceiveUpdateDaysEventCopyWithImpl(_$ReceiveUpdateDaysEvent _value,
-      $Res Function(_$ReceiveUpdateDaysEvent) _then)
+class __$$ReceiveUpdateDaysEventImplCopyWithImpl<$Res>
+    extends _$DaysEventCopyWithImpl<$Res, _$ReceiveUpdateDaysEventImpl>
+    implements _$$ReceiveUpdateDaysEventImplCopyWith<$Res> {
+  __$$ReceiveUpdateDaysEventImplCopyWithImpl(
+      _$ReceiveUpdateDaysEventImpl _value,
+      $Res Function(_$ReceiveUpdateDaysEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -421,7 +424,7 @@ class __$$ReceiveUpdateDaysEventCopyWithImpl<$Res>
   $Res call({
     Object? days = null,
   }) {
-    return _then(_$ReceiveUpdateDaysEvent(
+    return _then(_$ReceiveUpdateDaysEventImpl(
       days: null == days
           ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
@@ -432,8 +435,8 @@ class __$$ReceiveUpdateDaysEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReceiveUpdateDaysEvent implements ReceiveUpdateDaysEvent {
-  const _$ReceiveUpdateDaysEvent({required final List<Day> days})
+class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
+  const _$ReceiveUpdateDaysEventImpl({required final List<Day> days})
       : _days = days;
 
   final List<Day> _days;
@@ -450,10 +453,10 @@ class _$ReceiveUpdateDaysEvent implements ReceiveUpdateDaysEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReceiveUpdateDaysEvent &&
+            other is _$ReceiveUpdateDaysEventImpl &&
             const DeepCollectionEquality().equals(other._days, _days));
   }
 
@@ -464,9 +467,9 @@ class _$ReceiveUpdateDaysEvent implements ReceiveUpdateDaysEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReceiveUpdateDaysEventCopyWith<_$ReceiveUpdateDaysEvent> get copyWith =>
-      __$$ReceiveUpdateDaysEventCopyWithImpl<_$ReceiveUpdateDaysEvent>(
-          this, _$identity);
+  _$$ReceiveUpdateDaysEventImplCopyWith<_$ReceiveUpdateDaysEventImpl>
+      get copyWith => __$$ReceiveUpdateDaysEventImplCopyWithImpl<
+          _$ReceiveUpdateDaysEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -551,34 +554,34 @@ class _$ReceiveUpdateDaysEvent implements ReceiveUpdateDaysEvent {
 
 abstract class ReceiveUpdateDaysEvent implements DaysEvent {
   const factory ReceiveUpdateDaysEvent({required final List<Day> days}) =
-      _$ReceiveUpdateDaysEvent;
+      _$ReceiveUpdateDaysEventImpl;
 
   List<Day> get days;
   @JsonKey(ignore: true)
-  _$$ReceiveUpdateDaysEventCopyWith<_$ReceiveUpdateDaysEvent> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReceiveUpdateDaysEventImplCopyWith<_$ReceiveUpdateDaysEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DaysErrorEventCopyWith<$Res> {
-  factory _$$DaysErrorEventCopyWith(
-          _$DaysErrorEvent value, $Res Function(_$DaysErrorEvent) then) =
-      __$$DaysErrorEventCopyWithImpl<$Res>;
+abstract class _$$DaysErrorEventImplCopyWith<$Res> {
+  factory _$$DaysErrorEventImplCopyWith(_$DaysErrorEventImpl value,
+          $Res Function(_$DaysErrorEventImpl) then) =
+      __$$DaysErrorEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DaysErrorEventCopyWithImpl<$Res>
-    extends _$DaysEventCopyWithImpl<$Res, _$DaysErrorEvent>
-    implements _$$DaysErrorEventCopyWith<$Res> {
-  __$$DaysErrorEventCopyWithImpl(
-      _$DaysErrorEvent _value, $Res Function(_$DaysErrorEvent) _then)
+class __$$DaysErrorEventImplCopyWithImpl<$Res>
+    extends _$DaysEventCopyWithImpl<$Res, _$DaysErrorEventImpl>
+    implements _$$DaysErrorEventImplCopyWith<$Res> {
+  __$$DaysErrorEventImplCopyWithImpl(
+      _$DaysErrorEventImpl _value, $Res Function(_$DaysErrorEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DaysErrorEvent implements DaysErrorEvent {
-  const _$DaysErrorEvent();
+class _$DaysErrorEventImpl implements DaysErrorEvent {
+  const _$DaysErrorEventImpl();
 
   @override
   String toString() {
@@ -586,9 +589,9 @@ class _$DaysErrorEvent implements DaysErrorEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DaysErrorEvent);
+        (other.runtimeType == runtimeType && other is _$DaysErrorEventImpl);
   }
 
   @override
@@ -676,7 +679,7 @@ class _$DaysErrorEvent implements DaysErrorEvent {
 }
 
 abstract class DaysErrorEvent implements DaysEvent {
-  const factory DaysErrorEvent() = _$DaysErrorEvent;
+  const factory DaysErrorEvent() = _$DaysErrorEventImpl;
 }
 
 /// @nodoc
@@ -745,25 +748,25 @@ class _$DaysStateCopyWithImpl<$Res, $Val extends DaysState>
 }
 
 /// @nodoc
-abstract class _$$DaysLoadingCopyWith<$Res> {
-  factory _$$DaysLoadingCopyWith(
-          _$DaysLoading value, $Res Function(_$DaysLoading) then) =
-      __$$DaysLoadingCopyWithImpl<$Res>;
+abstract class _$$DaysLoadingImplCopyWith<$Res> {
+  factory _$$DaysLoadingImplCopyWith(
+          _$DaysLoadingImpl value, $Res Function(_$DaysLoadingImpl) then) =
+      __$$DaysLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DaysLoadingCopyWithImpl<$Res>
-    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoading>
-    implements _$$DaysLoadingCopyWith<$Res> {
-  __$$DaysLoadingCopyWithImpl(
-      _$DaysLoading _value, $Res Function(_$DaysLoading) _then)
+class __$$DaysLoadingImplCopyWithImpl<$Res>
+    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingImpl>
+    implements _$$DaysLoadingImplCopyWith<$Res> {
+  __$$DaysLoadingImplCopyWithImpl(
+      _$DaysLoadingImpl _value, $Res Function(_$DaysLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DaysLoading implements DaysLoading {
-  const _$DaysLoading();
+class _$DaysLoadingImpl implements DaysLoading {
+  const _$DaysLoadingImpl();
 
   @override
   String toString() {
@@ -771,9 +774,9 @@ class _$DaysLoading implements DaysLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DaysLoading);
+        (other.runtimeType == runtimeType && other is _$DaysLoadingImpl);
   }
 
   @override
@@ -849,24 +852,24 @@ class _$DaysLoading implements DaysLoading {
 }
 
 abstract class DaysLoading implements DaysState {
-  const factory DaysLoading() = _$DaysLoading;
+  const factory DaysLoading() = _$DaysLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$DaysLoadedCopyWith<$Res> {
-  factory _$$DaysLoadedCopyWith(
-          _$DaysLoaded value, $Res Function(_$DaysLoaded) then) =
-      __$$DaysLoadedCopyWithImpl<$Res>;
+abstract class _$$DaysLoadedImplCopyWith<$Res> {
+  factory _$$DaysLoadedImplCopyWith(
+          _$DaysLoadedImpl value, $Res Function(_$DaysLoadedImpl) then) =
+      __$$DaysLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Day> days});
 }
 
 /// @nodoc
-class __$$DaysLoadedCopyWithImpl<$Res>
-    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoaded>
-    implements _$$DaysLoadedCopyWith<$Res> {
-  __$$DaysLoadedCopyWithImpl(
-      _$DaysLoaded _value, $Res Function(_$DaysLoaded) _then)
+class __$$DaysLoadedImplCopyWithImpl<$Res>
+    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadedImpl>
+    implements _$$DaysLoadedImplCopyWith<$Res> {
+  __$$DaysLoadedImplCopyWithImpl(
+      _$DaysLoadedImpl _value, $Res Function(_$DaysLoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -874,7 +877,7 @@ class __$$DaysLoadedCopyWithImpl<$Res>
   $Res call({
     Object? days = null,
   }) {
-    return _then(_$DaysLoaded(
+    return _then(_$DaysLoadedImpl(
       days: null == days
           ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
@@ -885,8 +888,8 @@ class __$$DaysLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DaysLoaded implements DaysLoaded {
-  const _$DaysLoaded({required final List<Day> days}) : _days = days;
+class _$DaysLoadedImpl implements DaysLoaded {
+  const _$DaysLoadedImpl({required final List<Day> days}) : _days = days;
 
   final List<Day> _days;
   @override
@@ -902,10 +905,10 @@ class _$DaysLoaded implements DaysLoaded {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DaysLoaded &&
+            other is _$DaysLoadedImpl &&
             const DeepCollectionEquality().equals(other._days, _days));
   }
 
@@ -916,8 +919,8 @@ class _$DaysLoaded implements DaysLoaded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DaysLoadedCopyWith<_$DaysLoaded> get copyWith =>
-      __$$DaysLoadedCopyWithImpl<_$DaysLoaded>(this, _$identity);
+  _$$DaysLoadedImplCopyWith<_$DaysLoadedImpl> get copyWith =>
+      __$$DaysLoadedImplCopyWithImpl<_$DaysLoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -989,34 +992,34 @@ class _$DaysLoaded implements DaysLoaded {
 }
 
 abstract class DaysLoaded implements DaysState {
-  const factory DaysLoaded({required final List<Day> days}) = _$DaysLoaded;
+  const factory DaysLoaded({required final List<Day> days}) = _$DaysLoadedImpl;
 
   List<Day> get days;
   @JsonKey(ignore: true)
-  _$$DaysLoadedCopyWith<_$DaysLoaded> get copyWith =>
+  _$$DaysLoadedImplCopyWith<_$DaysLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DaysLoadingErrorCopyWith<$Res> {
-  factory _$$DaysLoadingErrorCopyWith(
-          _$DaysLoadingError value, $Res Function(_$DaysLoadingError) then) =
-      __$$DaysLoadingErrorCopyWithImpl<$Res>;
+abstract class _$$DaysLoadingErrorImplCopyWith<$Res> {
+  factory _$$DaysLoadingErrorImplCopyWith(_$DaysLoadingErrorImpl value,
+          $Res Function(_$DaysLoadingErrorImpl) then) =
+      __$$DaysLoadingErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DaysLoadingErrorCopyWithImpl<$Res>
-    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingError>
-    implements _$$DaysLoadingErrorCopyWith<$Res> {
-  __$$DaysLoadingErrorCopyWithImpl(
-      _$DaysLoadingError _value, $Res Function(_$DaysLoadingError) _then)
+class __$$DaysLoadingErrorImplCopyWithImpl<$Res>
+    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingErrorImpl>
+    implements _$$DaysLoadingErrorImplCopyWith<$Res> {
+  __$$DaysLoadingErrorImplCopyWithImpl(_$DaysLoadingErrorImpl _value,
+      $Res Function(_$DaysLoadingErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DaysLoadingError implements DaysLoadingError {
-  const _$DaysLoadingError();
+class _$DaysLoadingErrorImpl implements DaysLoadingError {
+  const _$DaysLoadingErrorImpl();
 
   @override
   String toString() {
@@ -1024,9 +1027,9 @@ class _$DaysLoadingError implements DaysLoadingError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DaysLoadingError);
+        (other.runtimeType == runtimeType && other is _$DaysLoadingErrorImpl);
   }
 
   @override
@@ -1102,5 +1105,5 @@ class _$DaysLoadingError implements DaysLoadingError {
 }
 
 abstract class DaysLoadingError implements DaysState {
-  const factory DaysLoadingError() = _$DaysLoadingError;
+  const factory DaysLoadingError() = _$DaysLoadingErrorImpl;
 }

@@ -6,14 +6,15 @@ part of 'presence.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Presence _$$_PresenceFromJson(Map<String, dynamic> json) => _$_Presence(
+_$PresenceImpl _$$PresenceImplFromJson(Map<String, dynamic> json) =>
+    _$PresenceImpl(
       id: json['id'] as String,
       profile: PublicProfile.fromJson(json['profile'] as Map<String, dynamic>),
       startedAt:
           const DateTimeConverter().fromJson(json['startedAt'] as Timestamp),
     );
 
-Map<String, dynamic> _$$_PresenceToJson(_$_Presence instance) =>
+Map<String, dynamic> _$$PresenceImplToJson(_$PresenceImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'profile': instance.profile.toJson(),
