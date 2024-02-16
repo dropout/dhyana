@@ -88,6 +88,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get signOut => 'Kijelentkezés';
 
   @override
+  String get profileFirstnameLabel => 'Keresztnév';
+
+  @override
+  String get profileLastnameLabel => 'Vezetéknév';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

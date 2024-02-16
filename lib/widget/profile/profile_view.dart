@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
 import 'package:dhyana/widget/profile/stats/daily_chart.dart';
@@ -44,8 +45,8 @@ class _ProfileViewState extends State<ProfileView> {
     return Column(
       children: [
         Container(
-          width: 96,
-          height: 96,
+          width: AppThemeData.circleLg,
+          height: AppThemeData.circleLg,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
@@ -67,18 +68,20 @@ class _ProfileViewState extends State<ProfileView> {
           profile: profile,
           profileBloc: profileBloc,
         ),
-        const SeparatorGem(count: 1),
+        const SizedBox(height: AppThemeData.spacingLg),
+        Padding(
+          padding: const EdgeInsets.all(AppThemeData.spacingMd),
+          child: ProfileMetricsView(profile: profile),
+        ),
+        const SizedBox(height: AppThemeData.spacingLg),
         Padding(
           padding: const EdgeInsets.all(AppThemeData.spacingMd),
           child: DailyChart(
             profile: profile,
           ),
         ),
+        const SizedBox(height: AppThemeData.spacingLg),
         const SeparatorGem(count: 1),
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: ProfileMetricsView(profile: profile),
-        ),
       ],
     );
   }
@@ -138,6 +141,8 @@ class _ProfileViewState extends State<ProfileView> {
         children: [
           buildProfileArea(context),
           const ProfileMenu(),
+          const SizedBox(height: AppThemeData.spacingLg),
+          const ProfileFooter()
         ],
       ),
     );

@@ -88,6 +88,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signOut => 'Signout';
 
   @override
+  String get profileFirstnameLabel => 'Firstname';
+
+  @override
+  String get profileLastnameLabel => 'Lastname';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

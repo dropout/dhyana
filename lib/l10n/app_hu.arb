@@ -34,5 +34,8 @@
   "editProfile": "Profile szerkesztése",
   "signOut": "Kijelentkezés",
 
+  "profileFirstnameLabel": "Keresztnév",
+  "profileLastnameLabel": "Vezetéknév",
+
   "testPlural": "{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}"
 }

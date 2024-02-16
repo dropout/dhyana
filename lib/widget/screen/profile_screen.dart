@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
+        bottom: false,
         child: ProfileBlocProvider(
           initialEvent: ProfileEvent.loadProfile(profileId: profileId),
           child: buildBody(context),

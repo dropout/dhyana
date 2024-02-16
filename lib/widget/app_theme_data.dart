@@ -18,6 +18,10 @@ class AppThemeData {
   static const double borderRadiusMd = 8.0;
   static const double borderRadiusLg = 16.0;
 
+  static const double circleSm = 40.0;
+  static const double circleMd = 96.0;
+  static const double circleLg = 160.0;
+
   final bool isDark;
   AppThemeData({required this.isDark});
 

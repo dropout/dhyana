@@ -62,7 +62,7 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
         ),
         child: Center(
           child: Text(widget.value.inMinutes.toString(),
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w900,
             )

@@ -23,6 +23,7 @@ dependencies:
   json_annotation: ^4.8.1
   blurhash_dart: ^1.1.0
   uuid: ^4.1.0
+  package_info_plus: ^5.0.1
 
   # Ui
   flutter_animate: ^4.2.0

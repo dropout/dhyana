@@ -255,6 +255,18 @@ abstract class AppLocalizations {
   /// **'Kijelentkezés'**
   String get signOut;
 
+  /// No description provided for @profileFirstnameLabel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Keresztnév'**
+  String get profileFirstnameLabel;
+
+  /// No description provided for @profileLastnameLabel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Vezetéknév'**
+  String get profileLastnameLabel;
+
   /// No description provided for @testPlural.
   ///
   /// In hu, this message translates to:

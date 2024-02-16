@@ -3,6 +3,7 @@ import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/app_screen.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,13 +113,8 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
               ),
               minimumSize: const Size(0, 48.0),
               foregroundColor: Colors.white,
-              backgroundColor: Colors.red,
+              backgroundColor: AppColors.bloodRed,
               shape: const StadiumBorder()
-              // shape: const RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.all(
-              //     Radius.circular(AppThemeData.borderRadiusMd)
-              //   )
-              // ),
             ),
             child: Text(
               AppLocalizations.of(context).startTimerButtonText.toUpperCase(),

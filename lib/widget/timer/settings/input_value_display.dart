@@ -12,14 +12,18 @@ class InputValueDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingMd, vertical: AppThemeData.spacingSm),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppThemeData.spacingMd,
+        vertical: AppThemeData.spacingSm
+      ),
       decoration: const ShapeDecoration(
           shape: StadiumBorder(),
           color: Colors.black
       ),
       child: Text(
         value,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+          fontSize: 18,
           color: Colors.white,
           fontWeight: FontWeight.w900,
         ),

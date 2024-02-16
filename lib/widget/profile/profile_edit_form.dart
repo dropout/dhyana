@@ -79,7 +79,6 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             name: 'firstName',
             controller: firstNameTextController,
             decoration: const InputDecoration(labelText: 'Firstname'),
-            // initialValue: profile.firstName,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),
@@ -90,7 +89,6 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             name: 'lastName',
             controller: lastNameTextController,
             decoration: const InputDecoration(labelText: 'Lastname'),
-            // initialValue: profile.lastName,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),
