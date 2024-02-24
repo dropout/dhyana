@@ -35,11 +35,6 @@ class TimerRunningTime extends StatelessWidget {
     return '$twoDigitMinutes:$twoDigitSeconds';
   }
 
-  // double _getProgressPercentage() {
-  //   double progress = timerState.elapsedTime.inSeconds / timerState.timerSettings.duration.inSeconds;
-  //   return progress;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,20 +44,6 @@ class TimerRunningTime extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Center(
-          //   child: SizedBox(
-          //     // alignment: Alignment.center,
-          //     width: 288,
-          //     height: 288,
-          //     child: CircularProgressIndicator(
-          //       backgroundColor: Colors.pinkAccent,
-          //       valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-          //       value: _getProgressPercentage(),
-          //       strokeWidth: 2.0,
-          //     ),
-          //   ),
-          // ),
-
           Center(
             child: Text(
               _getRemainingFormattedTime(),
@@ -71,11 +52,10 @@ class TimerRunningTime extends StatelessWidget {
                 color: Colors.white,
                 fontFamily: 'RobotoCondensed',
                 fontWeight: FontWeight.w100,
-                fontSize: 80.0,
+                fontSize: 96.0,
               )
             )
           ),
-
         ],
       ),
     );

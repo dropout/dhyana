@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class TimerRunningControls extends StatefulWidget {
 
-  final double iconSize = 80;
+  final double iconSize = 96;
   final TimerState timerState;
 
   const TimerRunningControls({
@@ -134,10 +134,14 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
         minimumSize: const Size(160, 0),
         backgroundColor: bgColor,
         foregroundColor: textColor,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppThemeData.spacingLg,
+          vertical: AppThemeData.spacingMd,
+        )
       ),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: textColor,
           fontWeight: FontWeight.bold,
         )
