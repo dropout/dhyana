@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 enum _State {
@@ -71,10 +72,13 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
     return Column(
       children: [
         Text(consecutiveDays.toString(),
-          style: Theme.of(context).textTheme.displaySmall
+          style: Theme.of(context).textTheme.displayLarge!.copyWith(
+            // fontWeight: FontWeight.bold,
+          ),
         ),
+        const SizedBox(height: AppThemeData.spacingSm),
         Text('consecutive days',
-            style: Theme.of(context).textTheme.bodyLarge
+            style: Theme.of(context).textTheme.headlineSmall
         ),
       ],
     );

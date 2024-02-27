@@ -28,8 +28,8 @@ class _SessionResultState extends State<SessionResult> {
       children: [
         ProfileAvatar(
           profile: widget.profile ?? Profile.anonymous(),
-          imageSize: 96,
-          textStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+          imageSize: AppThemeData.circleLg,
+          textStyle: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -44,20 +44,20 @@ class _SessionResultState extends State<SessionResult> {
   Widget buildCompletedText(BuildContext context, Duration timeElapsed) {
     return RichText(
       text: TextSpan(
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
           color: Colors.white,
           // fontWeight: FontWeight.bold,
         ),
         children: [
-          const TextSpan(text: 'Completed '),
+          const TextSpan(text: 'Completed  '),
           TextSpan(
             text: widget.timerState.elapsedTime.inMinutes.toString(),
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             )
           ),
-          const TextSpan(text: ' minutes'),
+          const TextSpan(text: '  minutes'),
         ]
       )
     );

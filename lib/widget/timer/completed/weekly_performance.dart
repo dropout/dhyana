@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-const double _size = 36.0;
+const double _size = 40.0;
 
 class WeeklyPerformance extends StatelessWidget {
 
@@ -56,7 +56,7 @@ class WeeklyPerformance extends StatelessWidget {
     return Wrap(
       children: days.map((d) => buildDay(context, d))
         .toList()
-        .intersperse(const SizedBox(width: AppThemeData.spacingSm)),
+        .intersperse(const SizedBox(width: AppThemeData.spacingXs)),
     );
   }
 
@@ -78,6 +78,7 @@ class WeeklyPerformance extends StatelessWidget {
           duration: const Duration(milliseconds: 512),
           width: _size,
           height: _size,
+          padding: const EdgeInsets.all(AppThemeData.paddingXs),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: bColor,
@@ -85,7 +86,7 @@ class WeeklyPerformance extends StatelessWidget {
           child: Center(
             child: Text(
               _getDayShortName(day).toUpperCase(),
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: fColor,
                 fontWeight: FontWeight.bold,
               )

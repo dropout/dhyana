@@ -35,7 +35,7 @@ class _AppVersionNumber extends State<AppVersionNumber> {
   Widget build(BuildContext context) {
     return Text('v${_packageInfo.version}'
           '+${_packageInfo.buildNumber} ',
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.black54
       ),
     );

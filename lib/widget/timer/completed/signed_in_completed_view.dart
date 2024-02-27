@@ -91,10 +91,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
         WeeklyPerformance(
           profile: profile,
         ),
-        buildSeparator(context, padding: const EdgeInsets.only(
-          top: AppThemeData.spacingLg + 12,
-          bottom: AppThemeData.spacingLg,
-        )),
+        const SizedBox(height: AppThemeData.spacing2xl),
         ConsecutiveDays(
           profile: profile,
           profileBloc: profileBloc,

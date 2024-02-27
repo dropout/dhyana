@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/timer/settings/all.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/widget/app_colors.dart';
@@ -54,17 +55,19 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
       onTap: () => _onInputTap(context),
       child: Container(
         padding: const EdgeInsets.all(
-          AppThemeData.spacingSm
+          AppThemeData.paddingMd,
         ),
-        decoration: const ShapeDecoration(
-          shape: CircleBorder(),
+        decoration: ShapeDecoration(
+          shape: CustomDurationCircleBorder(),
           color: Colors.black
         ),
-        child: Center(
+        child: FittedBox(
+          fit: BoxFit.fill,
           child: Text(widget.value.inMinutes.toString(),
-            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w900,
+              height: 1.0,
             )
           ),
         )

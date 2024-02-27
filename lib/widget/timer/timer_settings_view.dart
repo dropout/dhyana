@@ -5,6 +5,7 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_stadium_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -70,10 +71,11 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: AppThemeData.spacing4xl),
         Expanded(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               WarmupTimeInput(
                   label: AppLocalizations.of(context).inputWarmupLabel,
@@ -101,36 +103,20 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             ],
           ),
         ),
-
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: TextButton(
-            onPressed: () => _onStartButtonTap(context),
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppThemeData.spacingXl,
-                vertical: AppThemeData.spacingMd
-              ),
-              minimumSize: const Size(0, 48.0),
-              foregroundColor: Colors.white,
-              backgroundColor: AppColors.bloodRed,
-              shape: const StadiumBorder()
-            ),
-            child: Text(
-              AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-              )
-            ),
-          ),
-        ),
-
+        const SizedBox(height: AppThemeData.circleMd),
         DurationIndicator(
           timerSettings: widget.timerSettings,
           key: ValueKey<TimerSettings>(widget.timerSettings),
         ),
-
+        Padding(
+          padding: const EdgeInsets.all(AppThemeData.spacingMd),
+          child: AppStadiumButton(
+            onTap: () => _onStartButtonTap(context),
+            text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
+            fColor: Colors.white,
+            bColor: AppColors.bloodRed,
+          ),
+        ),
       ],
     );
   }
@@ -144,12 +130,9 @@ class _ItemGap extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: AppThemeData.spacing3xl,
-      child: Icon(
-        Icons.arrow_downward_rounded,
-        size: 21,
-      ),
+    return const Icon(
+      Icons.arrow_downward_rounded,
+      size: 21,
     );
   }
 }

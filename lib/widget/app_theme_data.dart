@@ -14,13 +14,24 @@ class AppThemeData {
   static const double spacing3xl = 64.0;
   static const double spacing4xl = 90.0;
 
+  static const double paddingXxs = 2.0;
+  static const double paddingXs = 4.0;
+  static const double paddingSm = 8.0;
+  static const double paddingMd = 12.0;
+  static const double paddingLg = 16.0;
+  static const double paddingXl = 21.0;
+  static const double padding2Xl = 32.0;
+  static const double padding3Xl = 48.0;
+  static const double padding4Xl = 64.0;
+
   static const double borderRadiusSm = 4.0;
   static const double borderRadiusMd = 8.0;
   static const double borderRadiusLg = 16.0;
 
-  static const double circleSm = 40.0;
-  static const double circleMd = 96.0;
-  static const double circleLg = 160.0;
+  static const double circleSm = 48.0;
+  static const double circleMd = 64.0;
+  static const double circleLg = 96.0;
+  static const double circleXl = 128.0;
 
   final bool isDark;
   AppThemeData({required this.isDark});

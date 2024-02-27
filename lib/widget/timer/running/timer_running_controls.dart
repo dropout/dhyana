@@ -1,4 +1,5 @@
 import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 
 class TimerRunningControls extends StatefulWidget {
 
-  final double iconSize = 96;
+  final double iconSize = 64;
   final TimerState timerState;
 
   const TimerRunningControls({
@@ -114,7 +115,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildPauseMenu(context, widget.timerState),
-          const SizedBox(height: AppThemeData.spacingMd),
+          const SizedBox(height: AppThemeData.spacingXl),
           _buildMainButton(context, widget.timerState),
         ],
       ),
@@ -191,7 +192,10 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
         )
       );
     }
-    return listItems;
+
+    return listItems.intersperse(
+      const SizedBox(height: AppThemeData.spacingMd)
+    );
   }
 
   Widget _buildPauseMenu(BuildContext context, TimerState timerState) {
@@ -204,51 +208,55 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   }
 
   Widget _buildMainButton(BuildContext context, TimerState timerState) {
+    EdgeInsets padding = const EdgeInsets.all(
+      AppThemeData.paddingLg,
+    );
     switch (timerState.timerStatus) {
       case TimerStatus.idle:
         return IconButton(
           iconSize: widget.iconSize,
-          padding: EdgeInsets.zero,
+          padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onPlay(context),
-          icon: const Icon(Icons.play_circle_fill_rounded,
+          icon: const Icon(Icons.play_arrow_rounded,
             color: Colors.white,
           )
         );
       case TimerStatus.running:
         return IconButton(
           iconSize: widget.iconSize,
-          padding: EdgeInsets.zero,
+          padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onPause(context),
-          icon: const Icon(Icons.pause_circle_rounded,
+          // icon: const Icon(Icons.pause_circle_rounded,
+          icon: const Icon(Icons.pause_rounded,
             color: Colors.white,
           )
         );
       case TimerStatus.paused:
         return IconButton(
           iconSize: widget.iconSize,
-          padding: EdgeInsets.zero,
+          padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onPlay(context),
-          icon: const Icon(Icons.play_circle_fill_rounded,
+          icon: const Icon(Icons.play_arrow_rounded,
             color: Colors.white,
           )
         );
       case TimerStatus.completed:
         return IconButton(
           iconSize: widget.iconSize,
-          padding: EdgeInsets.zero,
+          padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onPlay(context),
-          icon: const Icon(Icons.play_circle_fill_rounded,
+          icon: const Icon(Icons.play_arrow_rounded,
             color: Colors.white,
           )
         );
       case TimerStatus.error:
         return IconButton(
           iconSize: widget.iconSize,
-          padding: EdgeInsets.zero,
+          padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onDiscard(context),
           icon: const Icon(Icons.close,

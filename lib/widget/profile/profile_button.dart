@@ -12,10 +12,11 @@ import 'package:go_router/go_router.dart';
 
 class ProfileButton extends StatelessWidget {
 
-  static const double size = 40.0;
+  final double size;
 
   const ProfileButton({
-    super.key
+    super.key,
+    this.size = 40.0,
   });
   
   void _signedOutTap(BuildContext context) {
@@ -43,9 +44,9 @@ class ProfileButton extends StatelessWidget {
   Widget buildSignedOut(context) {
     return GestureDetector(
       onTap: () => _signedOutTap(context),
-      child: const Icon(
+      child: Icon(
         Icons.account_circle_outlined,
-        size: ProfileButton.size,
+        size: size,
         color: Colors.black,
       ),
     );
@@ -81,11 +82,11 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildProfileLoading(BuildContext context) {
-    return const SizedBox(
-      width: ProfileButton.size,
-      height: ProfileButton.size,
+    return SizedBox(
+      width: size,
+      height: size,
       child: Center(
-        child: AppLoadingIndicator(size: ProfileButton.size),
+        child: AppLoadingIndicator(size: size),
       )
     );
   }
@@ -94,8 +95,8 @@ class ProfileButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => _signedInTap(context, profile),
       child: Container(
-        width: ProfileButton.size,
-        height: ProfileButton.size,
+        width: size,
+        height: size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
@@ -115,9 +116,9 @@ class ProfileButton extends StatelessWidget {
           'profileId': userId
         });
       },
-      child: const Icon(
+      child: Icon(
         Icons.warning_amber_rounded,
-        size: ProfileButton.size,
+        size: size,
         color: Colors.black,
       )
     );

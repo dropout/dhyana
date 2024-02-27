@@ -51,7 +51,7 @@ class _DurationIndicatorState extends State<DurationIndicator> {
   @override
   Widget build(BuildContext context) {
     return RichText(text: TextSpan(
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
         fontWeight: FontWeight.bold,
       ),
       children: [

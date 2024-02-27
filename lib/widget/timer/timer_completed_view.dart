@@ -2,6 +2,7 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/widget/timer/completed/signed_in_completed_view.dart';
 import 'package:dhyana/widget/timer/completed/signed_out_completed_view.dart';
 import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/util/app_stadium_button.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,12 +104,18 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
           ),
           Padding(
             padding: const EdgeInsets.all(AppThemeData.spacingMd),
-            child: AppButton(
+            child: AppStadiumButton(
+              onTap: () => _onOkayButtonPressed(context),
               text: AppLocalizations.of(context).okay.toUpperCase(),
               bColor: Colors.white,
               fColor: Colors.black,
-              onTap: () => _onOkayButtonPressed(context),
-            ),
+            )
+            // child: AppButton(
+            //   text: AppLocalizations.of(context).okay.toUpperCase(),
+            //   bColor: Colors.white,
+            //   fColor: Colors.black,
+            //   onTap: () => _onOkayButtonPressed(context),
+            // ),
           ),
         ],
       ),

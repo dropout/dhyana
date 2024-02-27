@@ -102,7 +102,12 @@ class LoginScreen extends StatelessWidget {
 
   void _onLoginWithGoogleTap(BuildContext context) {
     BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithGoogle(
-      onComplete: (_) => context.replaceNamed(AppScreen.profile.name),
+      onComplete: (user) => context.replaceNamed(
+        AppScreen.profile.name,
+        pathParameters: {
+          'profileId': user.uid,
+        }
+      ),
     ));
     Provider.of<AnalyticsService>(context, listen: false)
       .logEvent(name: 'login_with_google_button_pressed');
@@ -110,7 +115,12 @@ class LoginScreen extends StatelessWidget {
 
   void _onLoginWithAppleTap(BuildContext context) {
     BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithApple(
-      onComplete: (_) => context.replaceNamed(AppScreen.profile.name),
+      onComplete: (user) => context.replaceNamed(
+        AppScreen.profile.name,
+        pathParameters: {
+          'profileId': user.uid,
+        }
+      ),
     ));
     Provider.of<AnalyticsService>(context, listen: false)
       .logEvent(name: 'login_with_apple_button_pressed');

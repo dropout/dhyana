@@ -13,8 +13,8 @@ class InputValueDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppThemeData.spacingMd,
-        vertical: AppThemeData.spacingSm
+        vertical: AppThemeData.paddingMd,
+        horizontal: AppThemeData.paddingLg,
       ),
       decoration: const ShapeDecoration(
           shape: StadiumBorder(),

@@ -52,7 +52,6 @@ class _ProfileEditViewState extends State<ProfileEditView> {
           });
         },
         onError: (e, stack) {
-
           setState(() {
             state = _State.idle;
           });

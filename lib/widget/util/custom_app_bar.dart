@@ -58,6 +58,7 @@ class CustomAppBar extends StatelessWidget {
         title!,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
           fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
       );
     } else {

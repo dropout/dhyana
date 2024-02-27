@@ -58,7 +58,12 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppBar(
-            title: Text(widget.title),
+            title: Text(
+              widget.title,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              )
+            ),
             automaticallyImplyLeading: false,
           ),
           SizedBox(

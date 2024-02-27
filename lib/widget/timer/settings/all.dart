@@ -1,3 +1,5 @@
+export 'custom_duration_circle_border.dart';
+export 'duration_indicator.dart';
 export 'duration_input.dart';
 export 'duration_input_view.dart';
 export 'input_value_display.dart';

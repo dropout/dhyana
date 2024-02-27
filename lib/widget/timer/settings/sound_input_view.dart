@@ -70,7 +70,12 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppBar(
-            title: Text(widget.title),
+            title: Text(
+              widget.title,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              )
+            ),
             automaticallyImplyLeading: false,
           ),
           SizedBox(

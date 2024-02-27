@@ -21,7 +21,19 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfileImage.fromProfile(profile, size: imageSize),
+        // ProfileImage.fromProfile(profile, size: imageSize),
+        Container(
+          width: imageSize,
+          height: imageSize,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.grey,
+              width: 4.0,
+            ),
+          ),
+          child: ProfileImage.fromProfile(profile),
+        ),
         const SizedBox(height: AppThemeData.spacingMd),
         buildName(context, profile.firstName, textStyle),
       ],
@@ -33,7 +45,7 @@ class ProfileAvatar extends StatelessWidget {
     String text,
     TextStyle? style
   ) {
-    TextStyle s = style ?? Theme.of(context).textTheme.bodyLarge!.copyWith(
+    TextStyle s = style ?? Theme.of(context).textTheme.titleMedium!.copyWith(
       fontWeight: FontWeight.bold,
     );
     return Text(text, style: s);

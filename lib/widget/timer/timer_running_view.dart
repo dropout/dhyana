@@ -58,11 +58,11 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
             fit: StackFit.expand,
             children: [
               Positioned(
-                top: constraints.constrainHeight() / 2 - 75,
+                top: constraints.constrainHeight() / 2 - 88,
                 width: constraints.maxWidth,
                 child: TimerRunningTitle(
                   timerState: widget.timerState,
-                  positionOffset: Offset(0.0,constraints.constrainHeight() / 2 - 75),
+                  positionOffset: Offset(0.0,constraints.constrainHeight() / 2 - 88),
                 )
               ),
               Center(
