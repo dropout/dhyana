@@ -237,6 +237,12 @@ abstract class AppLocalizations {
   /// **'Adatvédelmi nyilatkozatot'**
   String get loginLegalPart4;
 
+  /// No description provided for @profile.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profil'**
+  String get profile;
+
   /// No description provided for @activity.
   ///
   /// In hu, this message translates to:
@@ -246,7 +252,7 @@ abstract class AppLocalizations {
   /// No description provided for @editProfile.
   ///
   /// In hu, this message translates to:
-  /// **'Profile szerkesztése'**
+  /// **'Profil szerkesztése'**
   String get editProfile;
 
   /// No description provided for @signOut.

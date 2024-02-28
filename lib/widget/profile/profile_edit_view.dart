@@ -73,29 +73,26 @@ class _ProfileEditViewState extends State<ProfileEditView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppThemeData.spacingMd),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                ProfileEditForm(
-                  profile: widget.profile,
-                  formStateKey: widget.formStateKey,
-                  onChanged: () => onFormChanged(context),
-                ),
-              ],
-            )
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
+            child: ProfileEditForm(
+              profile: widget.profile,
+              formStateKey: widget.formStateKey,
+              onChanged: () => onFormChanged(context),
+            ),
           ),
-          Column(
-            children: [
-              buildActionButton(context),
-            ],
-          )
-        ],
-      ),
+        ),
+        Align(
+          alignment: const Alignment(0.0, 1.0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
+            child: buildActionButton(context),
+          ),
+        ),
+      ],
     );
   }
   

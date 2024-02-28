@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/activity/activity_list.dart';
 import 'package:dhyana/widget/bloc_provider/sessions_bloc_provider.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
@@ -15,28 +16,18 @@ class ActivityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: CustomAppBar(titleText: AppLocalizations.of(context).activity),
+      extendBodyBehindAppBar: true,
       body: SafeArea(
         child: SignedIn(
           yes: (context, user) {
             return SessionsBlocProvider(
               initialEvent: SessionsEvent.loadSessions(profileId: user.uid),
-              child: buildBody(context),
+              child: buildState(context),
             );
           }
         ),
       )
-    );
-  }
-  
-  Widget buildBody(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: CustomAppBar.height),
-          child: buildState(context),
-        ),
-        const CustomAppBar(title: 'Aktivitás'),
-      ],
     );
   }
 
@@ -45,7 +36,7 @@ class ActivityScreen extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case SessionsLoaded():
-            return buildLoaded(context, state);
+            return ActivityList(sessions: state.sessions);
           case SessionsLoading():
             return const AppLoadingDisplay();
           case SessionsLoadingError():
@@ -55,10 +46,6 @@ class ActivityScreen extends StatelessWidget {
         }
       }
     );
-  }
-
-  Widget buildLoaded(BuildContext context, SessionsLoaded state) {
-    return ActivityList(sessions: state.sessions);
   }
 
 }

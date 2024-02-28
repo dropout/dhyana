@@ -106,7 +106,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       child: Text(
         _getLiveDisplayName(context),
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
           fontWeight: FontWeight.bold,
         )
       ),

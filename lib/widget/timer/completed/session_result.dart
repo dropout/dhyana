@@ -29,7 +29,7 @@ class _SessionResultState extends State<SessionResult> {
         ProfileAvatar(
           profile: widget.profile ?? Profile.anonymous(),
           imageSize: AppThemeData.circleLg,
-          textStyle: Theme.of(context).textTheme.displaySmall!.copyWith(
+          textStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),

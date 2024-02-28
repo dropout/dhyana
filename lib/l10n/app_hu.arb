@@ -30,8 +30,9 @@
   "loginLegalPart3": " és az ",
   "loginLegalPart4": "Adatvédelmi nyilatkozatot",
 
+  "profile": "Profil",
   "activity": "Aktivitás",
-  "editProfile": "Profile szerkesztése",
+  "editProfile": "Profil szerkesztése",
   "signOut": "Kijelentkezés",
 
   "profileFirstnameLabel": "Keresztnév",

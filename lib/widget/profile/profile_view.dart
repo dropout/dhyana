@@ -44,6 +44,7 @@ class _ProfileViewState extends State<ProfileView> {
     ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Column(
       children: [
+        const SizedBox(height: AppThemeData.spacingLg),
         Container(
           width: AppThemeData.circleLg,
           height: AppThemeData.circleLg,
@@ -59,7 +60,7 @@ class _ProfileViewState extends State<ProfileView> {
         const SizedBox(height: AppThemeData.spacingLg),
         Text(
           profile.displayName,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
             fontWeight: FontWeight.w500,
           ),
         ),

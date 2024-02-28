@@ -21,7 +21,6 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ProfileImage.fromProfile(profile, size: imageSize),
         Container(
           width: imageSize,
           height: imageSize,
@@ -45,7 +44,7 @@ class ProfileAvatar extends StatelessWidget {
     String text,
     TextStyle? style
   ) {
-    TextStyle s = style ?? Theme.of(context).textTheme.titleMedium!.copyWith(
+    TextStyle s = style ?? Theme.of(context).textTheme.displaySmall!.copyWith(
       fontWeight: FontWeight.bold,
     );
     return Text(text, style: s);

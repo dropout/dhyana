@@ -33,16 +33,29 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<InitResult>(create: (_) => initResult),
-        ...initResult.providers
-      ],
-      child: MultiBlocProvider(
-        providers: <BlocProvider>[
-          BlocProvider<AuthBloc>(create: (_) => authBloc)
+    return GestureDetector(
+      onTap: () {
+        // unfocus user input if clicks anywhere on screen
+        // FocusScopeNode currentFocus = FocusScope.of(context);
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+          currentFocus.focusedChild!.unfocus();
+        }
+        // if (!currentFocus.hasPrimaryFocus) {
+        //   currentFocus.unfocus();
+        // }
+      },
+      child: MultiProvider(
+        providers: [
+          Provider<InitResult>(create: (_) => initResult),
+          ...initResult.providers
         ],
-        child: buildApp(context),
+        child: MultiBlocProvider(
+          providers: <BlocProvider>[
+            BlocProvider<AuthBloc>(create: (_) => authBloc)
+          ],
+          child: buildApp(context),
+        ),
       ),
     );
   }

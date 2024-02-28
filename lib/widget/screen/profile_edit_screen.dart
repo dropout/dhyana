@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/bloc_provider/profile_bloc_provider.dart';
 import 'package:dhyana/widget/profile/profile_edit_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
@@ -17,10 +18,13 @@ class ProfileEditScreen extends StatelessWidget {
     return SignedIn(yes: (BuildContext context, User user) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: CustomAppBar(titleText: AppLocalizations.of(context).editProfile),
+        extendBodyBehindAppBar: true,
         body: SafeArea(
           child: ProfileBlocProvider(
             initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
-            child: buildBody(context),
+            // child: buildBody(context),
+            child: buildState(context),
           ),
         )
       );
@@ -30,16 +34,10 @@ class ProfileEditScreen extends StatelessWidget {
   Widget buildBody(BuildContext context) {
     return Stack(
       children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: CustomAppBar.height),
-            Expanded(
-              child: buildState(context),
-            )
-          ],
+        Padding(
+          padding: const EdgeInsets.only(top: CustomAppBar.height),
+          child: buildState(context),
         ),
-        const CustomAppBar(title: 'Edit Profile'),
       ],
     );
   }

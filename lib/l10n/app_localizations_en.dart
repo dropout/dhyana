@@ -79,6 +79,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginLegalPart4 => 'Privacy statement';
 
   @override
+  String get profile => 'Profile';
+
+  @override
   String get activity => 'Activity';
 
   @override
