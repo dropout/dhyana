@@ -22,7 +22,10 @@ class ProfileScreen extends StatelessWidget {
       appBar: CustomAppBar(titleText: AppLocalizations.of(context).profile),
       extendBodyBehindAppBar: true,
       body: ProfileBlocProvider(
-        initialEvent: ProfileEvent.loadProfile(profileId: profileId),
+        initialEvent: ProfileEvent.loadProfile(
+          profileId: profileId,
+          useStream: true,
+        ),
         child: const SafeArea(
           bottom: false,
           child: ProfileView(),

@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
@@ -19,10 +20,8 @@ enum _State {
 class ProfileEditView extends StatefulWidget {
 
   final Profile profile;
-  final GlobalKey<FormBuilderState> formStateKey =
-    GlobalKey<FormBuilderState>();
 
-  ProfileEditView({
+  const ProfileEditView({
     required this.profile,
     super.key
   });
@@ -34,13 +33,15 @@ class ProfileEditView extends StatefulWidget {
 class _ProfileEditViewState extends State<ProfileEditView> {
 
   _State state = _State.idle;
+  final GlobalKey<FormBuilderState> formStateKey =
+    GlobalKey<FormBuilderState>();
 
-  void onSave(BuildContext context) {
+  void _onSave(BuildContext context) {
     setState(() {
       state = _State.loading;
     });
     Profile profile = widget.profile;
-    FormBuilderState? formState = widget.formStateKey.currentState;
+    FormBuilderState? formState = formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
       Map<String, dynamic>? values = formState.value;
       BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
@@ -77,10 +78,14 @@ class _ProfileEditViewState extends State<ProfileEditView> {
       children: [
         SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
+            padding: const EdgeInsets.only(
+              left: AppThemeData.paddingXl,
+              right: AppThemeData.paddingXl,
+              top: AppThemeData.spacingLg,
+            ),
             child: ProfileEditForm(
               profile: widget.profile,
-              formStateKey: widget.formStateKey,
+              formStateKey: formStateKey,
               onChanged: () => onFormChanged(context),
             ),
           ),
@@ -100,16 +105,16 @@ class _ProfileEditViewState extends State<ProfileEditView> {
     switch (state) {
       case _State.idle:
         return AppButton(
-          text: 'SAVE',
-          onTap: () => onSave(context),
+          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          onTap: () => _onSave(context),
         );
       case _State.loading:
-        return const AppButton(
-          text: 'SAVING...',
+        return AppButton(
+          text: AppLocalizations.of(context).profileSaveButtonSaving.toUpperCase(),
         );
       case _State.updated:
         return AppButton(
-          text: 'SAVED!',
+          text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
     }

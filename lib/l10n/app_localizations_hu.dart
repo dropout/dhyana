@@ -97,6 +97,24 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileLastnameLabel => 'Vezetéknév';
 
   @override
+  String get profileSaveButtonIdle => 'Ment';
+
+  @override
+  String get profileSaveButtonSaving => 'Mentés...';
+
+  @override
+  String get profileSaveButtonSaved => 'Elmentve!';
+
+  @override
+  String get photoAccessDialogTitle => 'Fotók nem elérhetőek';
+
+  @override
+  String get photoAccessDialogText => 'Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon \'Beállítások\' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.';
+
+  @override
+  String get photoAccessDialogButtonText => 'Rendben';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

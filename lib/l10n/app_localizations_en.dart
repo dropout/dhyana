@@ -97,6 +97,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileLastnameLabel => 'Lastname';
 
   @override
+  String get profileSaveButtonIdle => 'Save';
+
+  @override
+  String get profileSaveButtonSaving => 'Saving...';
+
+  @override
+  String get profileSaveButtonSaved => 'Saved!';
+
+  @override
+  String get photoAccessDialogTitle => 'Cannot access photos';
+
+  @override
+  String get photoAccessDialogText => 'The application doesn\'t have a permission to access you photos. Please go into \'Settings\' and give access to the photos in order to change you profile photo.';
+
+  @override
+  String get photoAccessDialogButtonText => 'Okay';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

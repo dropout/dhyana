@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileEditScreen extends StatelessWidget {
+
   const ProfileEditScreen({super.key});
 
   @override
@@ -23,23 +24,11 @@ class ProfileEditScreen extends StatelessWidget {
         body: SafeArea(
           child: ProfileBlocProvider(
             initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
-            // child: buildBody(context),
             child: buildState(context),
           ),
         )
       );
     });
-  }
-
-  Widget buildBody(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: CustomAppBar.height),
-          child: buildState(context),
-        ),
-      ],
-    );
   }
 
   Widget buildState(BuildContext context) {
@@ -51,13 +40,10 @@ class ProfileEditScreen extends StatelessWidget {
           case ProfileErrorState():
             return const AppErrorDisplay();
           case ProfileLoadedState():
-            return buildLoaded(context, state);
+            return ProfileEditView(profile: state.profile);
         }
       },
     );
   }
 
-  Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
-    return ProfileEditView(profile: state.profile);
-  }
 }

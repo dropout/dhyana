@@ -273,6 +273,42 @@ abstract class AppLocalizations {
   /// **'Vezetéknév'**
   String get profileLastnameLabel;
 
+  /// No description provided for @profileSaveButtonIdle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ment'**
+  String get profileSaveButtonIdle;
+
+  /// No description provided for @profileSaveButtonSaving.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mentés...'**
+  String get profileSaveButtonSaving;
+
+  /// No description provided for @profileSaveButtonSaved.
+  ///
+  /// In hu, this message translates to:
+  /// **'Elmentve!'**
+  String get profileSaveButtonSaved;
+
+  /// No description provided for @photoAccessDialogTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Fotók nem elérhetőek'**
+  String get photoAccessDialogTitle;
+
+  /// No description provided for @photoAccessDialogText.
+  ///
+  /// In hu, this message translates to:
+  /// **'Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon \'Beállítások\' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.'**
+  String get photoAccessDialogText;
+
+  /// No description provided for @photoAccessDialogButtonText.
+  ///
+  /// In hu, this message translates to:
+  /// **'Rendben'**
+  String get photoAccessDialogButtonText;
+
   /// No description provided for @testPlural.
   ///
   /// In hu, this message translates to:

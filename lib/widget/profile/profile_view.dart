@@ -52,7 +52,7 @@ class _ProfileViewState extends State<ProfileView> {
             shape: BoxShape.circle,
             border: Border.all(
               color: Colors.black,
-              width: 3.0,
+              width: 4.0,
             ),
           ),
           child: ProfileImage.fromProfile(profile),
@@ -60,8 +60,8 @@ class _ProfileViewState extends State<ProfileView> {
         const SizedBox(height: AppThemeData.spacingLg),
         Text(
           profile.displayName,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            fontWeight: FontWeight.w500,
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+            fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: AppThemeData.spacingLg),

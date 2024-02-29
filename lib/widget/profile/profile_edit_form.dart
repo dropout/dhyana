@@ -1,3 +1,4 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/form_builder_image_picker.dart';
@@ -78,7 +79,9 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           FormBuilderTextField(
             name: 'firstName',
             controller: firstNameTextController,
-            decoration: const InputDecoration(labelText: 'Firstname'),
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context).profileFirstnameLabel
+            ),
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),
@@ -88,7 +91,9 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           FormBuilderTextField(
             name: 'lastName',
             controller: lastNameTextController,
-            decoration: const InputDecoration(labelText: 'Lastname'),
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context).profileLastnameLabel,
+            ),
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),

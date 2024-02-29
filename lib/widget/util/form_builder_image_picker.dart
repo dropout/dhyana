@@ -1,8 +1,10 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
@@ -118,7 +120,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     super.initState();
   }
 
-  void _selectFile() async {
+  void _selectFile(BuildContext context) async {
     try {
       XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile == null) return;
@@ -143,6 +145,11 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       widget.onImageSelected?.call(selectedImageData!);
 
     } on PlatformException catch (e) {
+      if (e.code == 'photo_access_denied') {
+        showDialog(context: context, builder: (BuildContext ctx) {
+          return buildPhotoAccessDialog(ctx);
+        });
+      }
       _logException('Unsupported operation: $e');
     } catch (e) {
       _logException(e.toString());
@@ -159,6 +166,25 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     );
   }
 
+  Widget buildPhotoAccessDialog(BuildContext context) {
+    return AlertDialog(
+      title: Text(AppLocalizations.of(context).photoAccessDialogTitle),
+      content: Text(AppLocalizations.of(context).photoAccessDialogText
+      ),
+      actions: <Widget>[
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          child: Text(AppLocalizations.of(context).photoAccessDialogButtonText.toUpperCase()),
+          onPressed: () {
+            GoRouter.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
   Widget buildCurrentImageDisplay() {
     ImageProvider imageProvider;
     if (hasInitialValue && hasSelectedImage == false) {
@@ -171,34 +197,40 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     }
 
     return GestureDetector(
-      onTap: () => _selectFile(),
+      onTap: () => _selectFile(context),
       child: Container(
-        width: 160,
-        height: 160,
-        constraints: const BoxConstraints.tightFor(width: 200),
+        width: AppThemeData.circleLg,
+        height: AppThemeData.circleLg,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
           border: Border.all(
             color: Colors.black,
-            width: AppThemeData.spacingSm
+            width: 4.0,
           ),
           color: Colors.grey.shade400,
         ),
         child: Stack(
           children: [
             Positioned(
-              right: AppThemeData.spacingSm,
-              bottom: AppThemeData.spacingSm,
+              right: 0,
+              bottom: 0,
               child: Container(
-                width: 42,
-                height: 42,
+                width: 32,
+                height: 32,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: AppThemeData.spacingXs),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 3,
+                  ),
                   shape: BoxShape.circle,
                   color: Colors.white,
                 ),
-                child: const Icon(Icons.edit, color: Colors.black),
+                child: const Icon(
+                  Icons.edit,
+                  color: Colors.black,
+                  size: 16,
+                ),
               ),
             )
           ],
