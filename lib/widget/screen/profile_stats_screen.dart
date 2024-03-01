@@ -1,15 +1,15 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/bloc_provider/profile_bloc_provider.dart';
-import 'package:dhyana/widget/profile/profile_view.dart';
+import 'package:dhyana/widget/profile/profile_stats_view.dart';
 import 'package:dhyana/widget/util/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileStatsScreen extends StatelessWidget {
 
   final String profileId;
 
-  const ProfileScreen({
+  const ProfileStatsScreen({
     required this.profileId,
     super.key
   });
@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: CustomAppBar(titleText: AppLocalizations.of(context).profile),
+      appBar: CustomAppBar(titleText: AppLocalizations.of(context).profileStats),
       extendBodyBehindAppBar: true,
       body: ProfileBlocProvider(
         initialEvent: ProfileEvent.loadProfile(
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         child: const SafeArea(
           bottom: false,
-          child: ProfileView(),
+          child: ProfileStatsView(),
         ),
       ),
     );

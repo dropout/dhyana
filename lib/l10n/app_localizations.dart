@@ -309,6 +309,12 @@ abstract class AppLocalizations {
   /// **'Rendben'**
   String get photoAccessDialogButtonText;
 
+  /// No description provided for @profileStats.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profil statisztika'**
+  String get profileStats;
+
   /// No description provided for @testPlural.
   ///
   /// In hu, this message translates to:

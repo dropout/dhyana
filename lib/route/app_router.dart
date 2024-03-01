@@ -79,6 +79,18 @@ class AppRouter {
           redirect: _signedInRedirectHook,
         ),
 
+        GoRoute(
+          path: AppScreen.profileStats.path,
+          name: AppScreen.profileStats.name,
+          builder: (context, state) {
+            if (state.pathParameters.containsKey('profileId')) {
+              return ProfileStatsScreen(profileId: state.pathParameters['profileId']!);
+            }
+            throw Exception('Unable to load profile statistics page because no profile id was given.');
+          },
+          redirect: _signedInRedirectHook,
+        ),
+
         // Edit Profile
         GoRoute(
           path: AppScreen.editProfile.path,

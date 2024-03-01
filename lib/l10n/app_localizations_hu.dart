@@ -115,6 +115,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Rendben';
 
   @override
+  String get profileStats => 'Profil statisztika';
+
+  @override
   String testPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

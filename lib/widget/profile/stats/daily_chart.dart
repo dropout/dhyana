@@ -11,9 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DailyChart extends StatefulWidget {
 
   final Profile profile;
+  final double height;
 
   const DailyChart({
     required this.profile,
+    this.height = 96,
     super.key
   });
 
@@ -51,10 +53,10 @@ class _DailyChartState extends State<DailyChart> {
 
   Widget buildLoading(BuildContext context) {
     return SizedBox(
-      height: 20,
+      height: widget.height,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: List<double>.filled(20, 1.0).map((e) {
+        children: List<double>.filled(widget.height.toInt(), 1.0).map((e) {
           return Expanded(
             child: Container(
               color: Colors.black,
@@ -75,14 +77,14 @@ class _DailyChartState extends State<DailyChart> {
     List<double> remappedValues = state.days
       .map((e) {
         try {
-          return e.minutes.toDouble().remap(0, maxValue, 1, 20).toDouble();
+          return e.minutes.toDouble().remap(0, maxValue, 1, widget.height).toDouble();
         } catch (err) {
           return 1.0;
         }
       }).toList();
 
     return SizedBox(
-      height: 20,
+      height: widget.height,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: remappedValues.map((e) {

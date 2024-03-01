@@ -4,10 +4,7 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
-import 'package:dhyana/widget/profile/stats/daily_chart.dart';
-import 'package:dhyana/widget/profile/stats/metrics.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
-import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,24 +62,18 @@ class _ProfileViewState extends State<ProfileView> {
           ),
         ),
         const SizedBox(height: AppThemeData.spacingLg),
+        WeeklyPerformance(
+          profile: profile,
+        ),
+        const SizedBox(height: AppThemeData.spacingLg),
         ConsecutiveDays(
           profile: profile,
           profileBloc: profileBloc,
         ),
         const SizedBox(height: AppThemeData.spacingLg),
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: ProfileMetricsView(profile: profile),
-        ),
+        ProfileMenu(profile: profile),
         const SizedBox(height: AppThemeData.spacingLg),
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: DailyChart(
-            profile: profile,
-          ),
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        const SeparatorGem(count: 1),
+        const ProfileFooter()
       ],
     );
   }
@@ -141,9 +132,7 @@ class _ProfileViewState extends State<ProfileView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           buildProfileArea(context),
-          const ProfileMenu(),
-          const SizedBox(height: AppThemeData.spacingLg),
-          const ProfileFooter()
+
         ],
       ),
     );

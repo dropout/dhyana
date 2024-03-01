@@ -46,6 +46,8 @@
   "photoAccessDialogText": "The application doesn't have a permission to access you photos. Please go into 'Settings' and give access to the photos in order to change you profile photo.",
   "photoAccessDialogButtonText": "Okay",
 
+  "profileStats": "Profile statistics",
+
   "testPlural": "{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}"
 
 }
