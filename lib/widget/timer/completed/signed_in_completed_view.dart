@@ -3,8 +3,8 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/profile/stats/consecutive_days.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
-import 'package:dhyana/widget/timer/completed/session_result.dart';
 import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +78,6 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   }
 
   Widget buildLoaded(BuildContext context, Profile profile) {
-    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -94,7 +93,6 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
         const SizedBox(height: AppThemeData.spacing2xl),
         ConsecutiveDays(
           profile: profile,
-          profileBloc: profileBloc,
         ),
         PresenceArea(profile: profile),
         const SizedBox(height: AppThemeData.spacing4xl),

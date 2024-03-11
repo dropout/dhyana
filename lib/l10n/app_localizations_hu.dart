@@ -106,7 +106,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileSaveButtonSaved => 'Elmentve!';
 
   @override
-  String get photoAccessDialogTitle => 'Fotók nem elérhetőek';
+  String get photoAccessDialogTitle => 'Fotók nem érhetőek el';
 
   @override
   String get photoAccessDialogText => 'Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon \'Beállítások\' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.';
@@ -115,7 +115,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Rendben';
 
   @override
-  String get profileStats => 'Profil statisztika';
+  String get profileStats => 'Statisztika';
 
   @override
   String testPlural(num count) {

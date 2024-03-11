@@ -294,7 +294,7 @@ abstract class AppLocalizations {
   /// No description provided for @photoAccessDialogTitle.
   ///
   /// In hu, this message translates to:
-  /// **'Fotók nem elérhetőek'**
+  /// **'Fotók nem érhetőek el'**
   String get photoAccessDialogTitle;
 
   /// No description provided for @photoAccessDialogText.
@@ -312,7 +312,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileStats.
   ///
   /// In hu, this message translates to:
-  /// **'Profil statisztika'**
+  /// **'Statisztika'**
   String get profileStats;
 
   /// No description provided for @testPlural.

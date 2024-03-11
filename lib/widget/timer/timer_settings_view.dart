@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'settings/duration_indicator.dart';
 import 'settings/all.dart';
 
 class TimerSettingsView extends StatefulWidget {
@@ -78,15 +77,15 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               WarmupTimeInput(
-                  label: AppLocalizations.of(context).inputWarmupLabel,
-                  value: widget.timerSettings.warmup,
-                  onChange: (Duration duration) => _onWarmupChange(context, duration)
+                label: AppLocalizations.of(context).inputWarmupLabel,
+                value: widget.timerSettings.warmup,
+                onChange: (Duration duration) => _onWarmupChange(context, duration)
               ),
               const _ItemGap(),
               SoundInput(
-                  label: AppLocalizations.of(context).inputStartingSoundLabel,
-                  value: widget.timerSettings.startingSound,
-                  onChange: (Sound startingSound) => _onStartingSoundChange(context, startingSound)
+                label: AppLocalizations.of(context).inputStartingSoundLabel,
+                value: widget.timerSettings.startingSound,
+                onChange: (Sound startingSound) => _onStartingSoundChange(context, startingSound)
               ),
               const _ItemGap(),
               DurationInput(

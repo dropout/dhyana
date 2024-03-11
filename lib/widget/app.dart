@@ -41,9 +41,6 @@ class App extends StatelessWidget {
         if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
           currentFocus.focusedChild!.unfocus();
         }
-        // if (!currentFocus.hasPrimaryFocus) {
-        //   currentFocus.unfocus();
-        // }
       },
       child: MultiProvider(
         providers: [

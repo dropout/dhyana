@@ -4,7 +4,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/presence/presence_list.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/timer/completed/completed_view_separator_gem.dart';
+import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,7 +53,7 @@ class _PresenceAreaState extends State<PresenceArea> {
 
     return Column(
       children: [
-        const CompletedViewSeparatorGem(padding: EdgeInsets.all(AppThemeData.spacingMd)),
+        const SeparatorGem(count: 0, padding: EdgeInsets.all(AppThemeData.spacingMd),),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
           child: Column(

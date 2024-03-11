@@ -1,12 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:dhyana/bloc/profile/strategy/profile_update_strategy.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:logger/logger.dart';
 
-class DefaultProfileUpdateStrategy extends ProfileUpdateStrategy {
+import 'profile_data_updater.dart';
+
+class DefaultProfileDataUpdater extends ProfileDataUpdater {
 
   Logger logger = getLogger('DefaultProfileUpdateStrategy');
 
@@ -15,7 +16,7 @@ class DefaultProfileUpdateStrategy extends ProfileUpdateStrategy {
   final ProfileRepository profileRepository;
   final bool completeProfile;
 
-  DefaultProfileUpdateStrategy({
+  DefaultProfileDataUpdater({
     required this.profile,
     required this.formData,
     required this.profileRepository,
@@ -23,7 +24,7 @@ class DefaultProfileUpdateStrategy extends ProfileUpdateStrategy {
   });
 
   @override
-  Future<Profile> execute() async {
+  Future<Profile> update() async {
     Profile newProfile = profile.copyWith(
       firstName: getFirstName(formData) ?? profile.firstName,
       lastName:  getLastName(formData) ?? profile.lastName,

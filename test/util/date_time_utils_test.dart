@@ -18,7 +18,7 @@ void main() {
       final today = DateTime(2023, 9, 1, 12, 0);
       final yesterday = DateTime(2023, 8, 31, 0, 0);
       expect(
-        today.isPreviousDay(yesterday),
+        today.isYesterday(yesterday),
         true,
       );
     });
@@ -27,7 +27,7 @@ void main() {
       final today = DateTime(2024, 1, 1);
       final yesterday = DateTime(2023, 12, 31);
       expect(
-        today.isPreviousDay(yesterday),
+        today.isYesterday(yesterday),
         true,
       );
     });
@@ -36,19 +36,38 @@ void main() {
       final today = DateTime(2023, 9, 1, 12, 0);
       final yesterday = DateTime(2023, 8, 30, 0, 0);
       expect(
-        today.isBeforePreviousDay(yesterday),
+        today.isBeforeYesterday(yesterday),
         true,
       );
     });
 
     test('can tell if its _NOT_ earlier than the previous day', () {
-      final today = DateTime(2023, 9, 1, 12, 0);
-      final yesterday = DateTime(2023, 8, 31, 0, 0);
+      final today = DateTime(2023, 9, 1, 9, 0);
+      final targetDay = DateTime(2023, 8, 31, 0, 0);
       expect(
-        today.isBeforePreviousDay(yesterday),
+        today.isBeforeYesterday(targetDay),
         false,
       );
     });
+
+    test('can tell if its the previous day', () {
+      final today = DateTime(2023, 9, 1, 1, 0);
+      final targetDay = DateTime(2023, 8, 31, 0, 0);
+      final earlier = DateTime(2023, 8, 20, 0, 0);
+
+      expect(
+        today.isYesterday(targetDay),
+        true,
+      );
+
+      expect(
+        today.isYesterday(earlier),
+        false,
+      );
+
+    });
+
+
 
   });
 

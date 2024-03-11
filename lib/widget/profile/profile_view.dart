@@ -4,6 +4,7 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
+import 'package:dhyana/widget/profile/stats/consecutive_days.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,6 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
-    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Column(
       children: [
         const SizedBox(height: AppThemeData.spacingLg),
@@ -68,7 +68,6 @@ class _ProfileViewState extends State<ProfileView> {
         const SizedBox(height: AppThemeData.spacingLg),
         ConsecutiveDays(
           profile: profile,
-          profileBloc: profileBloc,
         ),
         const SizedBox(height: AppThemeData.spacingLg),
         ProfileMenu(profile: profile),

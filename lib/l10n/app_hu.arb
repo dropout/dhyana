@@ -42,11 +42,11 @@
   "profileSaveButtonSaving": "Mentés...",
   "profileSaveButtonSaved": "Elmentve!",
 
-  "photoAccessDialogTitle": "Fotók nem elérhetőek",
+  "photoAccessDialogTitle": "Fotók nem érhetőek el",
   "photoAccessDialogText": "Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon 'Beállítások' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.",
   "photoAccessDialogButtonText": "Rendben",
 
-  "profileStats": "Profil statisztika",
+  "profileStats": "Statisztika",
 
   "testPlural": "{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}"
 }

@@ -1,10 +1,42 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/util/profile_stats_calculator.dart' as pf_stats_calc;
+import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
 
-  group('profile_stats_calculator.calculateConsecutiveDays', () {
+  group('ProfileStatsCalculator.hasValidConsecutiveDays', () {
+
+    test('can tell if the consecutive days are valid when last session was before yesterday', () {
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      expect(profileStatsCalculator.isValidConsecutiveDays(
+        DateTime(2023, 8, 30, 0, 0),
+        DateTime(2023, 9, 1, 12, 0),
+      ), false);
+      expect(profileStatsCalculator.isValidConsecutiveDays(
+        DateTime(2023, 12, 10, 0, 0),
+        DateTime(2024, 1, 1, 0, 0),
+      ), false);
+    });
+
+    test('can tell if the consecutive days are valid when last session was yesterday', () {
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      expect(profileStatsCalculator.isValidConsecutiveDays(
+        DateTime(2023, 8, 31, 0, 0),
+        DateTime(2023, 9, 1, 12, 0),
+      ), true);
+    });
+
+    test('can tell if the consecutive days are valid when last session was today', () {
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      expect(profileStatsCalculator.isValidConsecutiveDays(
+        DateTime(2023, 9, 1, 3, 0),
+        DateTime(2023, 9, 1, 12, 0),
+      ), true);
+    });
+
+  });
+
+  group('ProfileStatsCalculator.calculateConsecutiveDays', () {
 
     test('can calculate consecutive days when its the first day', () {
       ProfileStats stats = const ProfileStats(
@@ -14,11 +46,13 @@ void main() {
         completedDaysCount: 0,
       );
 
-      final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
 
-      ProfileStats newStats = pf_stats_calc.calculateConsecutiveDays(
+      final currentSessionDate = DateTime(2023, 8, 31, 12, 0);
+
+      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
         stats,
-        currentSessionTime,
+        currentSessionDate: currentSessionDate
       );
 
       expect(newStats.consecutiveDays, 0);
@@ -36,11 +70,12 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      final currentSessionDate = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStats newStats = pf_stats_calc.calculateConsecutiveDays(
+      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
         stats,
-        currentSessionTime
+        currentSessionDate: currentSessionDate
       );
 
       expect(newStats.consecutiveDays, 1);
@@ -58,11 +93,13 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStats newStats = pf_stats_calc.calculateConsecutiveDays(
+      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
         stats,
-        currentSessionTime
+        currentSessionDate: currentSessionTime
       );
 
       expect(newStats.consecutiveDays, 1);
@@ -80,11 +117,13 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+
       final currentSessionTime = DateTime(2023, 9, 3, 12, 0);
 
-      ProfileStats newStats = pf_stats_calc.calculateConsecutiveDays(
+      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
           stats,
-          currentSessionTime
+          currentSessionDate: currentSessionTime
       );
 
       expect(newStats.consecutiveDays, 0);
@@ -94,10 +133,6 @@ void main() {
     });
 
   });
-
-
-
-
 
   group('profile_stats_calculator.calculateCompletedDay', () {
 
@@ -109,11 +144,13 @@ void main() {
         completedDaysCount: 0,
       );
 
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStats newStats = pf_stats_calc.calculateCompletedDay(
+      ProfileStats newStats = profileStatsCalculator.calculateCompletedDay(
         stats,
-        currentSessionTime,
+        currentSessionDate: currentSessionTime,
       );
 
       expect(newStats.consecutiveDays, 0);
@@ -131,11 +168,13 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStats newStats = pf_stats_calc.calculateCompletedDay(
+      ProfileStats newStats = profileStatsCalculator.calculateCompletedDay(
         stats,
-        currentSessionTime
+        currentSessionDate: currentSessionTime
       );
 
       expect(newStats.consecutiveDays, 0);
@@ -155,9 +194,11 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStats newStats = pf_stats_calc.calculateCompletedDay(
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+
+      ProfileStats newStats = profileStatsCalculator.calculateCompletedDay(
         stats,
-        currentSessionTime
+        currentSessionDate: currentSessionTime
       );
 
       expect(newStats.consecutiveDays, 0);

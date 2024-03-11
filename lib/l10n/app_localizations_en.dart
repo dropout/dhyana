@@ -115,7 +115,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Okay';
 
   @override
-  String get profileStats => 'Profile statistics';
+  String get profileStats => 'Statistics';
 
   @override
   String testPlural(num count) {

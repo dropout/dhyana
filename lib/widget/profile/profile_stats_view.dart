@@ -1,9 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/profile/stats/daily_chart.dart';
-import 'package:dhyana/widget/profile/stats/metrics.dart';
-import 'package:dhyana/widget/timer/completed/all.dart';
+import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,13 +34,11 @@ class _ProfileStatsViewState extends State<ProfileStatsView> {
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
-    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Column(
       children: [
         const SizedBox(height: AppThemeData.spacingLg),
         ConsecutiveDays(
           profile: profile,
-          profileBloc: profileBloc,
         ),
         const SizedBox(height: AppThemeData.spacingLg),
         Padding(
@@ -122,6 +118,5 @@ class _ProfileStatsViewState extends State<ProfileStatsView> {
       ),
     );
   }
-
 
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:dhyana/bloc/profile/data_update/all.dart';
 import 'package:dhyana/model/profile_stats.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/profile.dart';
@@ -10,8 +10,6 @@ import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
-
-import 'strategy/all.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -23,7 +21,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   final ProfileRepository profileRepository;
   final CrashlyticsService crashlyticsService;
+  final ProfileStatsCalculator _profileStatsCalculator = ProfileStatsCalculator();
   StreamSubscription<Profile>? _profileStreamSubscription;
+
 
   ProfileBloc({
     required this.profileRepository,
@@ -35,6 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdateProfile>(_onUpdateProfile);
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
     on<CalculateConsecutiveDays>(_onCalculateConsecutiveDays);
+    on<ValidateConsecutiveDays>(_onValidateConsecutiveDays);
   }
 
   void _onLoadProfile(LoadProfile event, emit) async {
@@ -90,13 +91,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onUpdateProfile(UpdateProfile event, emit) async {
     try {
       logger.t('Updating profile');
-      ProfileUpdateStrategy profileUpdateStrategy = DefaultProfileUpdateStrategy(
+      ProfileDataUpdater profileUpdater = DefaultProfileDataUpdater(
         profile: event.profile,
         formData: event.formData,
         profileRepository: profileRepository,
         completeProfile: event.completeProfile,
       );
-      Profile profile = await profileUpdateStrategy.execute();
+      Profile profile = await profileUpdater.update();
       emit(ProfileState.loaded(profile: profile));
       event.onComplete?.call(profile);
     } catch (e, stack) {
@@ -115,35 +116,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onCalculateConsecutiveDays(CalculateConsecutiveDays event, emit) async {
     try {
-      logger.t('Calculating consecutive days for profile: ${event.profile.displayName}');
-      DateTime now = DateTime.now();
+      logger.t('Calculating consecutive days for profile: ${event.profile.id}');
 
-      // no last session, no consecutive days
-      if (event.profile.stats.lastSessionDate == null) {
-        event.onComplete?.call(event.profile);
-        logger.t('No last session, nothing to calculate');
-        return;
-      }
-
-      // last session was on yesterday, nothing to calculate yet
-      if (now.isBeforePreviousDay(event.profile.stats.lastSessionDate!) == false) {
-        event.onComplete?.call(event.profile);
-        logger.t('Last session was on yesterday, nothing to calculate yet');
-        return;
-      }
-
-      // should calculate consecutive days and save the new value in db
-      ProfileStats calculatedStats = calculateConsecutiveDays(
-        event.profile.stats,
-        now,
-      );
       Profile calculatedProfile = event.profile.copyWith(
-        stats: calculatedStats,
+        stats: _profileStatsCalculator.calculateConsecutiveDays(event.profile.stats),
       );
+
+      if (calculatedProfile.stats.consecutiveDays == event.profile.stats.consecutiveDays) {
+        logger.t('Consecutive days have not changed, not saving profile data');
+        event.onComplete?.call(event.profile);
+        return;
+      }
+
+      logger.t('Consecutive days changed: ${event.profile.stats.consecutiveDays} -> ${calculatedProfile.stats.consecutiveDays}');
+
       await profileRepository.updateProfileData(calculatedProfile);
       emit(ProfileState.loaded(profile: calculatedProfile));
       event.onComplete?.call(calculatedProfile);
-      logger.t('Last consecutive days: ${event.profile.stats.consecutiveDays} - New consecutive days: ${calculatedStats.consecutiveDays}');
+      logger.t('Profile saved');
     } catch(e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -152,6 +142,39 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
       event.onError?.call(e, stack);
     }
+  }
+
+  void _onValidateConsecutiveDays(ValidateConsecutiveDays event, emit) async {
+    try {
+      logger.t('Validating consecutive days');
+      ProfileStats validatedStats = _profileStatsCalculator
+        .calculateConsecutiveDays(event.profile.stats);
+
+      if (event.profile.stats.consecutiveDays == validatedStats.consecutiveDays) {
+        logger.t('Concsecutive days are OK - no change');
+        return;
+      }
+
+      Profile updatedProfile = event.profile.copyWith(
+          stats: validatedStats
+      );
+      emit(ProfileState.loaded(profile: updatedProfile));
+      logger.t('Validated consecutive days: ${event.profile.stats.consecutiveDays} -> ${updatedProfile.stats.consecutiveDays}');
+      event.onComplete?.call(updatedProfile);
+
+      // save the validated data, no need to wait for completing that
+      logger.t('Saving validated consecutive days...');
+      await profileRepository.updateProfileData(updatedProfile);
+      logger.t('Validated consecutive days saved in profile');
+    } catch(e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Unable to validate consecutive days: ${event.profile.id}'
+      );
+      event.onError?.call(e, stack);
+    }
+
   }
 
   @override

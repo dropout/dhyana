@@ -10,18 +10,22 @@ extension DateTimeUtils on DateTime {
       day == other.day;
   }
 
-  bool isPreviousDay(DateTime other) {
+  bool isYesterday(DateTime other) {
     DateTime prevDay = subtract(const Duration(hours: 24));
     return prevDay.year == other.year &&
       prevDay.month == other.month &&
       prevDay.day == other.day;
   }
 
-  bool isBeforePreviousDay(DateTime other) {
+  bool isBeforeYesterday(DateTime other) {
     DateTime prevDay = subtract(const Duration(hours: 24));
-    return prevDay.year == other.year &&
-      prevDay.month == other.month &&
-      prevDay.day > other.day;
+
+    // check same day
+    if (prevDay.isSameDay(other)) {
+      return false;
+    }
+
+    return other.isBefore(prevDay);
   }
 
 }

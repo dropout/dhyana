@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:dhyana/model/profile.dart';
 
-abstract class ProfileUpdateStrategy {
+abstract class ProfileDataUpdater {
 
-  Future<Profile> execute();
+  Future<Profile> update();
 
   String? getFirstName(Map<String,dynamic> formData) {
     if (!formData.containsKey('firstName')) {

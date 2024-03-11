@@ -24,6 +24,21 @@ class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.error() = ProfileErrorOccured;
 
+  /*
+      Used when consecutive days displayed in profile.
+      It either resets the number or leaves it as it is.
+   */
+  const factory ProfileEvent.validateConsecutiveDays({
+    required Profile profile,
+    void Function(Profile profile)? onComplete,
+    void Function(Object? error, StackTrace stackTrace)? onError,
+  }) = ValidateConsecutiveDays;
+
+  /*
+      Used when finishing a session.
+      Updated the consecutive days number according to the
+      result of a session.
+   */
   const factory ProfileEvent.calculateConsecutiveDays({
     required Profile profile,
     void Function(Profile profile)? onComplete,
