@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-Widget getLocalizationsProvider(Locale locale, Widget child) {
+Widget getTestLocalizationsProvider(Widget child, {
+  Locale locale = const Locale('hu', 'HU')
+}) {
   return Localizations(
     delegates: const [
       AppLocalizations.delegate,
@@ -12,12 +14,12 @@ Widget getLocalizationsProvider(Locale locale, Widget child) {
       GlobalMaterialLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
     ],
-    locale: const Locale('hu', 'HU'),
+    locale: locale,
     child: child,
   );
 }
 
-Widget getAppProviders(Widget child) {
+Widget getAppTestProviders(Widget child) {
   return MultiProvider(
     providers: [
       Provider<AnalyticsService>(create: (_) => LoggingAnalyticsService()),
@@ -25,4 +27,10 @@ Widget getAppProviders(Widget child) {
     ],
     child: child,
   );
+}
+
+Widget getAllTestContextProviders(Widget child, {
+  Locale locale = const Locale('hu', 'HU')
+}) {
+  return getTestLocalizationsProvider(getAppTestProviders(child), locale: locale);
 }

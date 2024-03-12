@@ -17,5 +17,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Commands
 
+### Code generation
+
 - build localizations: `flutter gen-l10n`
 - build freezed models: `dart run build_runner build`
+- build mocks: `dart run build_runner build --delete-conflicting-outputs`

@@ -2,22 +2,22 @@ import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
+// import 'package:mockito/annotations.dart';
 
-import 'timer_settings_bloc_test.mocks.dart';
+// import 'timer_settings_bloc_test.mocks.dart';
 
-@GenerateNiceMocks([
-  MockSpec<TimerSettingsSharedPrefsService>(),
-  MockSpec<CrashlyticsService>(),
-])
+// @GenerateNiceMocks([
+//   MockSpec<TimerSettingsSharedPrefsService>(),
+//   MockSpec<CrashlyticsService>(),
+// ])
 
 void main() async {
 
   group('TimerBloc', () {
 
     late TimerSettingsBloc timerSettingsBloc;
-    late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
-    late MockCrashlyticsService mockCrashlyticsService;
+    // late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
+    // late MockCrashlyticsService mockCrashlyticsService;
 
     setUp(() {
       // tickerStreamController = StreamController();
@@ -25,8 +25,8 @@ void main() async {
       //
       // mockTimerService = MockTimerService();
       // mockTimerAudioService = MockTimerAudioService();
-      mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
-      mockCrashlyticsService = MockCrashlyticsService();
+      // mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
+      // mockCrashlyticsService = MockCrashlyticsService();
       //
       // when(mockTimerService.tickStream)
       //     .thenAnswer((_) => tickerStreamController.stream);
@@ -34,16 +34,16 @@ void main() async {
       // when(mockTimerService.finishedStream)
       //     .thenAnswer((_) => finishedStreamController.stream);
 
-      timerSettingsBloc = TimerSettingsBloc(
-        crashlyticsService: mockCrashlyticsService,
-        timerSettingsSharedPrefsService: mockTimerSettingsSharedPrefsService
-      );
+      // timerSettingsBloc = TimerSettingsBloc(
+      //   crashlyticsService: mockCrashlyticsService,
+      //   timerSettingsSharedPrefsService: mockTimerSettingsSharedPrefsService
+      // );
     });
 
     tearDown(() {
       // tickerStreamController.close();
       // finishedStreamController.close();
-      timerSettingsBloc.close();
+      // timerSettingsBloc.close();
     });
 
     test('can be created with its default values', () async {
