@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/util/launch_url.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -10,11 +11,15 @@ import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
 
-  const LoginScreen({super.key});
+  final UrlLauncher urlLauncher;
+
+  const LoginScreen({
+    this.urlLauncher = const UrlLauncher(),
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -170,17 +175,11 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _onTermsTap(BuildContext context) {
-    launchUrl(
-      Uri.parse('https://lazits.app/aszf'),
-      mode: LaunchMode.inAppWebView,
-    );
+    urlLauncher.launchInAppWebView('https://google.com');
   }
 
   void _onPrivacyTap(BuildContext context) {
-    launchUrl(
-      Uri.parse('https://lazits.app/aszf'),
-      mode: LaunchMode.inAppWebView,
-    );
+    urlLauncher.launchInAppWebView('https://google.com');
   }
 
 }

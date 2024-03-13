@@ -5,7 +5,6 @@ import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
 import 'package:dhyana/widget/timer/settings/sound_input.dart';
 import 'package:dhyana/widget/timer/settings/warmup_input.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 

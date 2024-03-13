@@ -1,20 +1,20 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
-import 'package:dhyana/widget/timer/all.dart';
-import 'package:dhyana/widget/timer/settings/duration_input.dart';
-import 'package:dhyana/widget/timer/settings/sound_input.dart';
-import 'package:dhyana/widget/timer/settings/warmup_input.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../test_context_providers.dart';
 
-class MockTimerSettingsBloc
-    extends MockBloc<TimerSettingsEvent, TimerSettingsState>
-    implements TimerSettingsBloc {}
+class MockAuthBloc
+  extends MockBloc<AuthEvent, AuthState>
+  implements AuthBloc {}
+
+class MockUrlLauncher
+  extends Mock
+  implements UrlLauncher {}
 
 void main() {
 
@@ -24,16 +24,23 @@ void main() {
 
       await tester.pumpWidget(
         getAllTestContextProviders(
-          BlocProvider<TimerSettingsBloc>(
-            create: (context) => MockTimerSettingsBloc(),
+          BlocProvider<AuthBloc>(
+            create: (context) => MockAuthBloc(),
             child: const LoginScreen()
           )
         )
       );
 
-      await tester.pumpAndSettle();
+      // wait for the "Who are you?" animation to finish
+      // 256 * 2 + 512 * 3
+      // as defined in LoginScreen animation
+      await tester.pumpAndSettle(const Duration(milliseconds: 256 * 2 + 512 * 3));
 
+      expect(find.text('Bejelentkezés Google-lal'), findsOneWidget);
+      expect(find.text('Bejelentkezés Apple-lel'), findsOneWidget);
 
+      expect(find.textContaining('ÁSZF-et', findRichText: true), findsOneWidget);
+      expect(find.textContaining('Adatvédelmi nyilatkozatot', findRichText: true), findsOneWidget);
     });
 
   });
