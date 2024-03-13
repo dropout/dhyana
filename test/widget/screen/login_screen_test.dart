@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../context_providers.dart';
+import '../../test_context_providers.dart';
 
 class MockTimerSettingsBloc
     extends MockBloc<TimerSettingsEvent, TimerSettingsState>

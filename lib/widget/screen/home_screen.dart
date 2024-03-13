@@ -32,38 +32,38 @@ class HomeScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
-        builder: (BuildContext context, TimerSettingsState state) {
-          switch (state) {
-            case TimerSettingsDataErrorState():
-              return const Text('Error occured');
-            case TimerSettingsDataLoadingState():
-              return const Text('Loading');
-            case TimerSettingsDataLoadedState():
-              return buildLoaded(context, state.timerSettings);
-          }
-        }
-    );
-  }
-
-  Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            TimerSettingsView(
-              timerSettings: timerSettings,
-            ),
-            buildMenu(context),
-          ],
+        child: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
+          builder: (BuildContext context, TimerSettingsState state) {
+            switch (state) {
+              case TimerSettingsDataErrorState():
+                return const Text('Error occured');
+              case TimerSettingsDataLoadingState():
+                return const Text('Loading');
+              case TimerSettingsDataLoadedState():
+                return buildLoaded(context, state.timerSettings);
+            }
+          }
         ),
       ),
     );
   }
 
-  Widget buildMenu(BuildContext context) {
+  Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        TimerSettingsView(
+          timerSettings: timerSettings,
+        ),
+        buildProfileMenu(context),
+      ],
+    );
+  }
+
+  Widget buildProfileMenu(BuildContext context) {
     return const Positioned(
       top: AppThemeData.spacingMd,
       right: AppThemeData.spacingMd,

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/widget/profile/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../context_providers.dart';
+import '../../test_context_providers.dart';
 
 class MockTimerSettingsBloc
     extends MockBloc<TimerSettingsEvent, TimerSettingsState>
@@ -24,7 +25,7 @@ class MockAuthBloc
 
 void main() {
 
-  group('HomeScreen', () {
+  group('HomeScreenContent signed out', () {
     late MockAuthBloc authBloc;
     late MockTimerSettingsBloc timerSettingsBloc;
 
@@ -33,11 +34,14 @@ void main() {
       timerSettingsBloc = MockTimerSettingsBloc();
 
       when(() => authBloc.state).thenReturn(const AuthState.signedOut());
-      when(() => timerSettingsBloc.state).thenReturn(const TimerSettingsState.loading());
     });
 
 
-    testWidgets('HomeScreen can display a loading state', (WidgetTester tester) async {
+    testWidgets('HomeScreenContent can display a loading state', (WidgetTester tester) async {
+
+      when(() => timerSettingsBloc.state)
+        .thenReturn(const TimerSettingsState.loading());
+
       await tester.pumpWidget(
         getAllTestContextProviders(
           MultiBlocProvider(
@@ -49,54 +53,67 @@ void main() {
                 create: (context) => timerSettingsBloc,
               ),
             ],
-            child: const HomeScreen(),
+            child: const HomeScreenContent(),
           )
         )
       );
       await tester.pumpAndSettle();
-      expect(find.text('Loading'), findsOneWidget);
+      expect(find.text('Loading'), findsOne);
     });
 
-    /*
-    testWidgets('HomeScreen can display an error state', (WidgetTester tester) async {
 
-      TimerSettings timerSettings = TimerSettings.initial();
+    testWidgets('HomeScreenContent can display an error state', (WidgetTester tester) async {
+
+      when(() => timerSettingsBloc.state)
+        .thenReturn(const TimerSettingsState.error());
 
       await tester.pumpWidget(
-        getAppProviders(
-          getLocalizationsProvider(
-              const Locale('hu', 'HU'),
+        getAllTestContextProviders(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthBloc>(
+                create: (context) => authBloc,
+              ),
               BlocProvider<TimerSettingsBloc>(
-                  create: (context) => _MockTimerSettingsBloc(),
-                  child: TimerSettingsView(timerSettings: timerSettings)
-              )
+                create: (context) => timerSettingsBloc,
+              ),
+            ],
+            child: const HomeScreenContent(),
           )
         )
       );
 
       await tester.pumpAndSettle();
-
+      expect(find.text('Error occured'), findsOne);
     });
+
 
     testWidgets('HomeScreen can a loaded state', (WidgetTester tester) async {
 
-      TimerSettings timerSettings = TimerSettings.initial();
+      when(() => timerSettingsBloc.state).thenReturn(
+        TimerSettingsState.loaded(timerSettings: TimerSettings.initial())
+      );
 
       await tester.pumpWidget(
-          getLocalizationsProvider(
-              const Locale('hu', 'HU'),
-              BlocProvider<TimerSettingsBloc>(
-                  create: (context) => _MockTimerSettingsBloc(),
-                  child: TimerSettingsView(timerSettings: timerSettings)
+          getAllTestContextProviders(
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider<AuthBloc>(
+                    create: (context) => authBloc,
+                  ),
+                  BlocProvider<TimerSettingsBloc>(
+                    create: (context) => timerSettingsBloc,
+                  ),
+                ],
+                child: const HomeScreenContent(),
               )
           )
       );
 
       await tester.pumpAndSettle();
-
+      expect(find.byType(TimerSettingsView), findsOneWidget);
+      expect(find.byType(ProfileButton), findsOneWidget);
     });
-
-     */
 
   });
 
