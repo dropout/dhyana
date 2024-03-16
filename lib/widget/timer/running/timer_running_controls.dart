@@ -92,7 +92,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   }
 
   void _onDiscard(BuildContext context) {
-    GoRouter.of(context).goNamed(AppScreen.home.name);
+    GoRouter.of(context).pop(AppScreen.home.name);
     Provider.of<AnalyticsService>(context, listen: false).logEvent(
       name: 'timer_discard',
     );

@@ -60,7 +60,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onStartButtonTap(BuildContext context) {
-    context.goNamed(
+    context.pushNamed(
       AppScreen.timerRunning.name,
       extra: widget.timerSettings,
     );

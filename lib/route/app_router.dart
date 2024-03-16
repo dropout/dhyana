@@ -4,6 +4,7 @@ import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/initalizer.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/all.dart';
+import 'package:dhyana/transition/masked_gradient_transition.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:flutter/foundation.dart';
@@ -50,10 +51,23 @@ class AppRouter {
         GoRoute(
           path: AppScreen.timerRunning.path,
           name: AppScreen.timerRunning.name,
-          builder: (context, state) {
+          pageBuilder: (context, state) {
             TimerSettings timerSettings = state.extra! as TimerSettings;
-            return TimerRunningScreen(
+            return CustomTransitionPage(
+              child: TimerRunningScreen(
                 timerSettings: timerSettings
+              ),
+              transitionsBuilder: (
+                BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child
+              ) {
+                return MaskedGradientTransition(
+                  progress: animation,
+                  child: child,
+                );
+              }
             );
           },
         ),
