@@ -22,20 +22,20 @@ class TimerRunningScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return TimerRunningBlocProvider(
       timerSettings: timerSettings,
-      child: const TimerRunningScreenBody(),
+      child: const TimerRunningScreenContent(),
     );
   }
 
 }
 
-class TimerRunningScreenBody extends StatefulWidget {
-  const TimerRunningScreenBody({super.key});
+class TimerRunningScreenContent extends StatefulWidget {
+  const TimerRunningScreenContent({super.key});
 
   @override
-  State<TimerRunningScreenBody> createState() => _TimerRunningScreenBodyState();
+  State<TimerRunningScreenContent> createState() => _TimerRunningScreenContentState();
 }
 
-class _TimerRunningScreenBodyState extends State<TimerRunningScreenBody> {
+class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
 
   bool isOverlayEnabled = false;
 
@@ -64,26 +64,39 @@ class _TimerRunningScreenBodyState extends State<TimerRunningScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          buildBody(context),
-          buildOverlay(context),
-        ],
-      ),
+    return BlocBuilder<TimerBloc, TimerState>(
+      builder: (BuildContext context, TimerState state) {
+        return Scaffold(
+          backgroundColor: Colors.black,
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              buildBody(context, state),
+              buildOverlay(context, state),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody(BuildContext context, TimerState timerState) {
     TextTheme textTheme = Theme.of(context).textTheme;
     ThemeData themeData = Theme.of(context).copyWith(
-        textTheme: textTheme.apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
-        )
+      textTheme: textTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+      )
     );
+
+    final bool isCompleted = (timerState.timerStatus == TimerStatus.completed);
+    CrossFadeState crossFadeState;
+    if (isCompleted) {
+      crossFadeState = CrossFadeState.showSecond;
+    } else {
+      crossFadeState = CrossFadeState.showFirst;
+    }
+
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
@@ -92,52 +105,37 @@ class _TimerRunningScreenBodyState extends State<TimerRunningScreenBody> {
             SafeArea(
               child: Theme(
                 data: themeData,
-                child: BlocBuilder<TimerBloc, TimerState>(
-                  builder: (BuildContext context, TimerState timerState) {
-                    final bool isCompleted =
-                    (timerState.timerStatus == TimerStatus.completed);
-                    CrossFadeState crossFadeState;
-                    if (isCompleted) {
-                      crossFadeState = CrossFadeState.showSecond;
-                    } else {
-                      crossFadeState = CrossFadeState.showFirst;
-                    }
-                    return AnimatedCrossFade(
-                      duration: const Duration(milliseconds: 256),
-                      firstChild: TimerRunningView(
-                        timerState: timerState,
-                        onInit: () => _onInit(context),
-                        onBackground: _onBackground(context),
-                        onResume: _onResume(context),
-                      ),
-                      secondChild: TimerCompletedView(
-                        timerState: timerState,
-                      ),
-                      layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
-                        return Stack(
-                          // Align the non-positioned child to center.
-                          alignment: Alignment.center,
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Positioned.fill(
-                              key: secondKey,
-                              // Instead of forcing the positioned child to a width
-                              // with left / right, just stick it to the top.
-                              top: 0,
-                              child: secondChild,
-                            ),
-                            Positioned.fill(
-                              key: firstKey,
-                              top: 0,
-                              child: firstChild,
-                            ),
-                          ],
-                        );
-                      },
-                      crossFadeState: crossFadeState,
+                child: AnimatedCrossFade(
+                  duration: const Duration(milliseconds: 256),
+                  firstChild: TimerRunningView(
+                    timerState: timerState,
+                    onInit: () => _onInit(context),
+                    onBackground: _onBackground(context),
+                    onResume: _onResume(context),
+                  ),
+                  secondChild: TimerCompletedView(
+                    timerState: timerState,
+                  ),
+                  layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
+                    return Stack(
+                      alignment: Alignment.center,
+                      fit: StackFit.expand,
+                      children: <Widget>[
+                        Positioned.fill(
+                          key: secondKey,
+                          top: 0,
+                          child: secondChild,
+                        ),
+                        Positioned.fill(
+                          key: firstKey,
+                          top: 0,
+                          child: firstChild,
+                        ),
+                      ],
                     );
                   },
-                ),
+                  crossFadeState: crossFadeState,
+                )
               ),
             ),
           ],
@@ -160,7 +158,11 @@ class _TimerRunningScreenBodyState extends State<TimerRunningScreenBody> {
     );
   }
 
-  Widget buildOverlay(BuildContext context) {
+  Widget buildOverlay(BuildContext context, TimerState timerState) {
+    // If the timer is completed, this should be false anyway
+    final bool shouldShowOverlay =
+      isOverlayEnabled && timerState.timerStatus != TimerStatus.completed;
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -168,7 +170,7 @@ class _TimerRunningScreenBodyState extends State<TimerRunningScreenBody> {
         });
       },
       child: TimerRunningOverlay(
-        isEnabled: isOverlayEnabled
+        isEnabled: shouldShowOverlay
       ),
     );
   }

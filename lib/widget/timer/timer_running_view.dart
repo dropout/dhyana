@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -80,9 +79,6 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
           );
         }
       ),
-    ).animate().fadeIn(
-      duration: const Duration(milliseconds: 512),
-      curve: Curves.easeOut,
     );
   }
 
