@@ -124,37 +124,35 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     try {
       XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile == null) return;
-      Uint8List data = await pickedFile.readAsBytes();
-      if (!mounted) return;
 
-      img.Command cmd = img.Command();
-      cmd.decodeImage(data);
-      cmd.copyResizeCropSquare(
+      Uint8List data = await pickedFile.readAsBytes();
+      img.Command imageCommand = img.Command();
+      imageCommand.decodeImage(data);
+      imageCommand.copyResizeCropSquare(
         size: 128,
       );
-      cmd.encodeJpg(quality: 90);
+      imageCommand.encodeJpg(quality: 90);
 
-      Uint8List? imageData = await cmd.getBytes();
-
+      Uint8List? imageData = await imageCommand.getBytes();
       setState(() {
         hasSelectedImage = true;
         selectedImageData = imageData;
         textEditingController.text = pickedFile.name;
       });
-
       widget.onImageSelected?.call(selectedImageData!);
-
     } on PlatformException catch (e) {
-      if (e.code == 'photo_access_denied') {
-        showDialog(context: context, builder: (BuildContext ctx) {
-          return buildPhotoAccessDialog(ctx);
-        });
+      if (context.mounted) {
+        context.push('location');
+        if (e.code == 'photo_access_denied') {
+          showDialog(context: context, builder: (BuildContext ctx) {
+            return buildPhotoAccessDialog(ctx);
+          });
+        }
       }
       _logException('Unsupported operation: $e');
     } catch (e) {
       _logException(e.toString());
     }
-
   }
 
   @override
@@ -241,11 +239,5 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
 
   void _logException(String message) {
     debugPrint(message);
-    // _scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
-    // _scaffoldMessengerKey.currentState?.showSnackBar(
-    //   SnackBar(
-    //     content: Text(message),
-    //   ),
-    // );
   }
 }

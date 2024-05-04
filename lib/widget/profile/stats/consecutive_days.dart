@@ -28,6 +28,7 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     final int consecutiveDays = widget.profile.stats.consecutiveDays;
     return Column(

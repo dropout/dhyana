@@ -9,7 +9,6 @@ import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'presence_area.dart';
 
 class SignedInCompletedView extends StatefulWidget {
 
