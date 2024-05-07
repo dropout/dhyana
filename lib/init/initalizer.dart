@@ -1,22 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
-import 'package:dhyana/repositories.dart';
+import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/default_resource_resolver.dart';
 import 'package:dhyana/service/resource_resolver.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/services.dart';
+import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/logger_factory.dart';
-
-import 'model/timer_settings.dart';
 
 /*
   Manages the initialization process.
@@ -27,21 +23,21 @@ class Initializer {
 
   Logger logger = getLogger('Initializer');
 
-  Future<InitResult> init() async {
+  Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization sequence');
 
     // Data providers
     logger.t('Initialize data providers');
     FirebaseProfileDataProvider profileDataProvider =
-      FirebaseProfileDataProvider(FirebaseFirestore.instance);
+      FirebaseProfileDataProvider(firebaseProvider.firestore);
     FirebaseStorageDataProvider storageDataProvider =
-      FirebaseStorageDataProvider(FirebaseStorage.instance);
+      FirebaseStorageDataProvider(firebaseProvider.storage);
     FirebaseDayDataProvider dayDataProvider =
-      FirebaseDayDataProvider(FirebaseFirestore.instance);
+      FirebaseDayDataProvider(firebaseProvider.firestore);
 
     logger.t('Initialize services');
-    AnalyticsService analyticsService = FirebaseAnalyticsService(FirebaseAnalytics.instance);
-    CrashlyticsService crashlyticsService = FirebaseCrashlyticsService(FirebaseCrashlytics.instance);
+    AnalyticsService analyticsService = FirebaseAnalyticsService(firebaseProvider.analytics);
+    CrashlyticsService crashlyticsService = FirebaseCrashlyticsService(firebaseProvider.crashlytics);
     ResourceResolver resourceResolver = DefaultResourceResolver(
         storageDataProvider: storageDataProvider
     );
@@ -59,7 +55,7 @@ class Initializer {
 
     logger.t('Initialize repositories');
     AuthRepository authRepository = FirebaseAuthRepository(
-      authDataProvider: FirebaseAuthProvider(fb_auth.FirebaseAuth.instance),
+      authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
       profileDataProvider: profileDataProvider,
     );
     ProfileRepository profileRepository = FirebaseProfileRepository(

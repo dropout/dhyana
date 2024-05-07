@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/initalizer.dart';
+import 'package:dhyana/init/initalizer.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/transition/masked_gradient_transition.dart';

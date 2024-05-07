@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:dhyana/initalizer.dart';
+import 'package:dhyana/init/initalizer.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/route/app_router.dart';
