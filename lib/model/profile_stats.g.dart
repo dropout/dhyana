@@ -8,10 +8,10 @@ part of 'profile_stats.dart';
 
 _$ProfileStatsImpl _$$ProfileStatsImplFromJson(Map<String, dynamic> json) =>
     _$ProfileStatsImpl(
-      consecutiveDays: json['consecutiveDays'] as int,
-      completedMinutesCount: json['completedMinutesCount'] as int,
-      completedSessionsCount: json['completedSessionsCount'] as int,
-      completedDaysCount: json['completedDaysCount'] as int,
+      consecutiveDays: (json['consecutiveDays'] as num).toInt(),
+      completedMinutesCount: (json['completedMinutesCount'] as num).toInt(),
+      completedSessionsCount: (json['completedSessionsCount'] as num).toInt(),
+      completedDaysCount: (json['completedDaysCount'] as num).toInt(),
       lastSessionDate: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['lastSessionDate'], const DateTimeConverter().fromJson),
     );

@@ -5,7 +5,10 @@ abstract class TimerService  {
   void reset();
   void close();
 
+  Duration get duration;
   int get ticks;
+  DateTime? get startTime;
+  DateTime? get endTime;
   Duration get elapsedTime;
   bool get running;
   bool get finished;

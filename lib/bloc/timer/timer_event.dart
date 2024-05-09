@@ -22,6 +22,6 @@ sealed class TimerEvent with _$TimerEvent {
     Object? error,
     required StackTrace stackTrace,
   }) = TimerErrorOccurred;
-  factory TimerEvent.timerStarted() = FinishTimer;
+  factory TimerEvent.finished() = TimerFinished;
 
 }

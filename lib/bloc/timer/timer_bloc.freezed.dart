@@ -27,7 +27,7 @@ mixin _$TimerEvent {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +41,7 @@ mixin _$TimerEvent {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,7 +55,7 @@ mixin _$TimerEvent {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,7 +70,7 @@ mixin _$TimerEvent {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,7 +84,7 @@ mixin _$TimerEvent {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,7 +98,7 @@ mixin _$TimerEvent {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -203,7 +203,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return warmupTicked(ticks);
   }
@@ -220,7 +220,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return warmupTicked?.call(ticks);
   }
@@ -237,7 +237,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (warmupTicked != null) {
@@ -258,7 +258,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return warmupTicked(this);
   }
@@ -275,7 +275,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return warmupTicked?.call(this);
   }
@@ -292,7 +292,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (warmupTicked != null) {
@@ -366,7 +366,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return warmupCompleted();
   }
@@ -383,7 +383,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return warmupCompleted?.call();
   }
@@ -400,7 +400,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (warmupCompleted != null) {
@@ -421,7 +421,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return warmupCompleted(this);
   }
@@ -438,7 +438,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return warmupCompleted?.call(this);
   }
@@ -455,7 +455,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (warmupCompleted != null) {
@@ -523,7 +523,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return started();
   }
@@ -540,7 +540,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return started?.call();
   }
@@ -557,7 +557,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -578,7 +578,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return started(this);
   }
@@ -595,7 +595,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return started?.call(this);
   }
@@ -612,7 +612,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -680,7 +680,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return paused();
   }
@@ -697,7 +697,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return paused?.call();
   }
@@ -714,7 +714,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (paused != null) {
@@ -735,7 +735,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return paused(this);
   }
@@ -752,7 +752,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return paused?.call(this);
   }
@@ -769,7 +769,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (paused != null) {
@@ -837,7 +837,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return resumed();
   }
@@ -854,7 +854,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return resumed?.call();
   }
@@ -871,7 +871,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (resumed != null) {
@@ -892,7 +892,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return resumed(this);
   }
@@ -909,7 +909,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return resumed?.call(this);
   }
@@ -926,7 +926,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (resumed != null) {
@@ -994,7 +994,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return completed();
   }
@@ -1011,7 +1011,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return completed?.call();
   }
@@ -1028,7 +1028,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (completed != null) {
@@ -1049,7 +1049,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return completed(this);
   }
@@ -1066,7 +1066,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return completed?.call(this);
   }
@@ -1083,7 +1083,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (completed != null) {
@@ -1179,7 +1179,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return timerTicked(ticks);
   }
@@ -1196,7 +1196,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return timerTicked?.call(ticks);
   }
@@ -1213,7 +1213,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (timerTicked != null) {
@@ -1234,7 +1234,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return timerTicked(this);
   }
@@ -1251,7 +1251,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return timerTicked?.call(this);
   }
@@ -1268,7 +1268,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (timerTicked != null) {
@@ -1341,7 +1341,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return reset();
   }
@@ -1358,7 +1358,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return reset?.call();
   }
@@ -1375,7 +1375,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -1396,7 +1396,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return reset(this);
   }
@@ -1413,7 +1413,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return reset?.call(this);
   }
@@ -1430,7 +1430,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -1536,7 +1536,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
     return error(this.error, stackTrace);
   }
@@ -1553,7 +1553,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
     return error?.call(this.error, stackTrace);
   }
@@ -1570,7 +1570,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1591,7 +1591,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
     return error(this);
   }
@@ -1608,7 +1608,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
     return error?.call(this);
   }
@@ -1625,7 +1625,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1649,41 +1649,41 @@ abstract class TimerErrorOccurred extends TimerEvent {
 }
 
 /// @nodoc
-abstract class _$$FinishTimerImplCopyWith<$Res> {
-  factory _$$FinishTimerImplCopyWith(
-          _$FinishTimerImpl value, $Res Function(_$FinishTimerImpl) then) =
-      __$$FinishTimerImplCopyWithImpl<$Res>;
+abstract class _$$TimerFinishedImplCopyWith<$Res> {
+  factory _$$TimerFinishedImplCopyWith(
+          _$TimerFinishedImpl value, $Res Function(_$TimerFinishedImpl) then) =
+      __$$TimerFinishedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FinishTimerImplCopyWithImpl<$Res>
-    extends _$TimerEventCopyWithImpl<$Res, _$FinishTimerImpl>
-    implements _$$FinishTimerImplCopyWith<$Res> {
-  __$$FinishTimerImplCopyWithImpl(
-      _$FinishTimerImpl _value, $Res Function(_$FinishTimerImpl) _then)
+class __$$TimerFinishedImplCopyWithImpl<$Res>
+    extends _$TimerEventCopyWithImpl<$Res, _$TimerFinishedImpl>
+    implements _$$TimerFinishedImplCopyWith<$Res> {
+  __$$TimerFinishedImplCopyWithImpl(
+      _$TimerFinishedImpl _value, $Res Function(_$TimerFinishedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
-  _$FinishTimerImpl() : super._();
+class _$TimerFinishedImpl extends TimerFinished with DiagnosticableTreeMixin {
+  _$TimerFinishedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerEvent.timerStarted()';
+    return 'TimerEvent.timerFinished()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TimerEvent.timerStarted'));
+    properties.add(DiagnosticsProperty('type', 'TimerEvent.timerFinished'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FinishTimerImpl);
+        (other.runtimeType == runtimeType && other is _$TimerFinishedImpl);
   }
 
   @override
@@ -1701,9 +1701,9 @@ class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
     required TResult Function(int ticks) timerTicked,
     required TResult Function() reset,
     required TResult Function(Object? error, StackTrace stackTrace) error,
-    required TResult Function() timerStarted,
+    required TResult Function() timerFinished,
   }) {
-    return timerStarted();
+    return timerFinished();
   }
 
   @override
@@ -1718,9 +1718,9 @@ class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
     TResult? Function(int ticks)? timerTicked,
     TResult? Function()? reset,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
-    TResult? Function()? timerStarted,
+    TResult? Function()? timerFinished,
   }) {
-    return timerStarted?.call();
+    return timerFinished?.call();
   }
 
   @override
@@ -1735,11 +1735,11 @@ class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
     TResult Function(int ticks)? timerTicked,
     TResult Function()? reset,
     TResult Function(Object? error, StackTrace stackTrace)? error,
-    TResult Function()? timerStarted,
+    TResult Function()? timerFinished,
     required TResult orElse(),
   }) {
-    if (timerStarted != null) {
-      return timerStarted();
+    if (timerFinished != null) {
+      return timerFinished();
     }
     return orElse();
   }
@@ -1756,9 +1756,9 @@ class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
     required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(TimerReset value) reset,
     required TResult Function(TimerErrorOccurred value) error,
-    required TResult Function(FinishTimer value) timerStarted,
+    required TResult Function(TimerFinished value) timerFinished,
   }) {
-    return timerStarted(this);
+    return timerFinished(this);
   }
 
   @override
@@ -1773,9 +1773,9 @@ class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
     TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(TimerReset value)? reset,
     TResult? Function(TimerErrorOccurred value)? error,
-    TResult? Function(FinishTimer value)? timerStarted,
+    TResult? Function(TimerFinished value)? timerFinished,
   }) {
-    return timerStarted?.call(this);
+    return timerFinished?.call(this);
   }
 
   @override
@@ -1790,19 +1790,19 @@ class _$FinishTimerImpl extends FinishTimer with DiagnosticableTreeMixin {
     TResult Function(TimerTicked value)? timerTicked,
     TResult Function(TimerReset value)? reset,
     TResult Function(TimerErrorOccurred value)? error,
-    TResult Function(FinishTimer value)? timerStarted,
+    TResult Function(TimerFinished value)? timerFinished,
     required TResult orElse(),
   }) {
-    if (timerStarted != null) {
-      return timerStarted(this);
+    if (timerFinished != null) {
+      return timerFinished(this);
     }
     return orElse();
   }
 }
 
-abstract class FinishTimer extends TimerEvent {
-  factory FinishTimer() = _$FinishTimerImpl;
-  FinishTimer._() : super._();
+abstract class TimerFinished extends TimerEvent {
+  factory TimerFinished() = _$TimerFinishedImpl;
+  TimerFinished._() : super._();
 }
 
 /// @nodoc

@@ -12,7 +12,8 @@ _$SessionImpl _$$SessionImplFromJson(Map<String, dynamic> json) =>
       startTime:
           const DateTimeConverter().fromJson(json['startTime'] as Timestamp),
       endTime: const DateTimeConverter().fromJson(json['endTime'] as Timestamp),
-      duration: const DurationConverter().fromJson(json['duration'] as int),
+      duration:
+          const DurationConverter().fromJson((json['duration'] as num).toInt()),
       timerSettings:
           TimerSettings.fromJson(json['timerSettings'] as Map<String, dynamic>),
     );

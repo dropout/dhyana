@@ -12,7 +12,7 @@ _$DayImpl _$$DayImplFromJson(Map<String, dynamic> json) => _$DayImpl(
       sessions: (json['sessions'] as List<dynamic>)
           .map((e) => Session.fromJson(e as Map<String, dynamic>))
           .toList(),
-      minutes: json['minutes'] as int,
+      minutes: (json['minutes'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$DayImplToJson(_$DayImpl instance) => <String, dynamic>{

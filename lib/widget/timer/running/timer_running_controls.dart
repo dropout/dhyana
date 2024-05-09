@@ -78,14 +78,14 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   }
 
   void _onPause(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(TimerPaused());
+    BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
     Provider.of<AnalyticsService>(context, listen: false).logEvent(
       name: 'timer_pause',
     );
   }
 
   void _onPlay(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(TimerResumed());
+    BlocProvider.of<TimerBloc>(context).add(TimerEvent.resumed());
     Provider.of<AnalyticsService>(context, listen: false).logEvent(
       name: 'timer_resume',
     );
@@ -99,7 +99,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   }
 
   void _onFinish(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(FinishTimer());
+    BlocProvider.of<TimerBloc>(context).add(TimerEvent.finished());
     Provider.of<AnalyticsService>(context, listen: false).logEvent(
       name: 'timer_finish',
     );

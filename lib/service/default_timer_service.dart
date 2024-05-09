@@ -7,7 +7,7 @@ import 'package:dhyana/util/logger_factory.dart';
 class DefaultTimerService implements TimerService {
 
   final Logger logger = getLogger('DefaultTimerService');
-  final Duration duration;
+  final Duration _duration;
   final int tickIntervalInMilliSeconds;
 
   bool _finished = false;
@@ -16,8 +16,8 @@ class DefaultTimerService implements TimerService {
   int _ticks = 0;
   final Stopwatch _stopwatch = Stopwatch();
 
-  DateTime? startTime;
-  DateTime? endTime;
+  DateTime? _startTime;
+  DateTime? _endTime;
 
   final StreamController<int> _tickStreamController =
     StreamController<int>.broadcast();
@@ -26,9 +26,9 @@ class DefaultTimerService implements TimerService {
     StreamController<void>.broadcast();
 
   DefaultTimerService({
-    required this.duration,
+    required Duration duration,
     this.tickIntervalInMilliSeconds = 500,
-  });
+  }) : _duration = duration;
 
   @override
   void start() {
@@ -40,7 +40,7 @@ class DefaultTimerService implements TimerService {
     }
 
     // Is this the first time start was called and timer not running?
-    startTime ??= DateTime.now();
+    _startTime ??= DateTime.now();
 
     _ticker = Timer.periodic(
       Duration(milliseconds: tickIntervalInMilliSeconds),
@@ -85,7 +85,7 @@ class DefaultTimerService implements TimerService {
     _stopwatch.reset();
 
     // clear startTime
-    startTime = null;
+    _startTime = null;
 
     // set ticks to 0 again
     _ticks = 0;
@@ -102,14 +102,14 @@ class DefaultTimerService implements TimerService {
 
     _stopwatch.stop();
 
-    endTime = DateTime.now();
+    _endTime = DateTime.now();
 
     _finished = true;
     _finishedStreamController.add(null);
   }
 
   Duration get remainingTime {
-    int diff = duration.inMilliseconds - _stopwatch.elapsedMilliseconds;
+    int diff = _duration.inMilliseconds - _stopwatch.elapsedMilliseconds;
     return Duration(milliseconds: diff);
   }
 
@@ -119,9 +119,18 @@ class DefaultTimerService implements TimerService {
   }
 
   @override
+  Duration get duration => _duration;
+
+  @override
   int get ticks {
     return _ticks;
   }
+
+  @override
+  DateTime? get startTime  => _startTime;
+
+  @override
+  DateTime? get endTime  => _endTime;
 
   @override
   Duration get elapsedTime {

@@ -13,6 +13,19 @@ part 'timer_event.dart';
 part 'timer_state.dart';
 part 'timer_bloc.freezed.dart';
 
+/*
+
+    Manages business logic of a session.
+
+    Details:
+    1. phase (optional): warmup timer
+    2. phase: actual session timer
+
+    Functionality:
+    - Timer: start, pause, resume, finish, reset
+    - Audio: play starting sound, play ending sound
+
+ */
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   final Logger logger = getLogger('TimerBloc');
@@ -68,7 +81,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     on<TimerResumed>(_onTimerResumed);
     on<TimerReset>(_onTimerReset);
     on<TimerCompleted>(_onTimerCompleted);
-    on<FinishTimer>(_onFinishTimer);
+    on<TimerFinished>(_onFinishTimer);
     on<TimerErrorOccurred>(_onTimerErrorOccurred);
   }
 
@@ -109,7 +122,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         stage = TimerStage.timer;
       }
       emit(state.copyWith(
-        startTime: DateTime.now(),
+        startTime: durationTimer.startTime,
         timerStatus: TimerStatus.running,
         timerStage: stage,
       ));
@@ -207,7 +220,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   }
 
   // User wants to finish before timer ends
-  void _onFinishTimer(FinishTimer event, emit) async {
+  void _onFinishTimer(TimerFinished event, emit) async {
     logger.t('Timer finished');
     warmupTimer?.stop();
     durationTimer.stop();
