@@ -215,7 +215,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       timerStatus: TimerStatus.completed,
       elapsedWarmupTime: elapsedWarmupTime,
       elapsedTime: durationTimer.elapsedTime,
-      endTime: DateTime.now(),
+      endTime: durationTimer.endTime,
     ));
   }
 
@@ -228,7 +228,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       timerStatus: TimerStatus.completed,
       elapsedWarmupTime: elapsedWarmupTime,
       elapsedTime: durationTimer.elapsedTime,
-      endTime: DateTime.now(),
+      endTime: activeTimer.endTime,
     ));
   }
 

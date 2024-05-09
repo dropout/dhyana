@@ -44,6 +44,7 @@ void main() async {
 
     setUpAll(() {
       registerFallbackValue(Duration.zero);
+      registerFallbackValue(Sound.none);
     });
 
     setUp(() {
@@ -60,6 +61,9 @@ void main() async {
       mockTimerService = MockTimerService();
       mockAudioService = MockAudioService();
       mockCrashlyticsService = MockCrashlyticsService();
+
+      when(() => mockAudioService.play(any()))
+          .thenAnswer((_) => Future.value(null));
 
       when(() => mockWarmupTimerService.tickStream)
           .thenAnswer((_) => warmupTickerStreamController.stream);
@@ -196,9 +200,6 @@ void main() async {
             () => mockWarmupTimerService.start(),
           ]);
         },
-        tearDown: () {
-          timerBloc.close();
-        }
     );
 
     blocTest<TimerBloc, TimerState>('can finish warmup time',
@@ -253,10 +254,8 @@ void main() async {
             () => mockTimerService.start(),
           ]);
           expect(timerBloc.activeTimer.duration, timerBloc.timerSettings.duration);
+          verifyNever(() => mockAudioService.play(any()));
         },
-        tearDown: () {
-          timerBloc.close();
-        }
     );
 
 
@@ -328,9 +327,231 @@ void main() async {
             () => mockTimerService.start(),
           ]);
         },
-        tearDown: () {
-          timerBloc.close();
-        }
+    );
+
+    blocTest<TimerBloc, TimerState>('can finish session time',
+        build: () {
+          TimerSettings timerSettings = defaultTimerSettings.copyWith(
+            warmup: Duration.zero,
+          );
+          _stubTimerServiceFactory(
+              timerSettings,
+              mockTimerServiceFactory,
+              mockWarmupTimerService,
+              mockTimerService
+          );
+          timerBloc = TimerBloc(
+            timerSettings: timerSettings,
+            timerServiceFactory: mockTimerServiceFactory,
+            audioService: mockAudioService,
+            crashlyticsService: mockCrashlyticsService,
+          );
+          return timerBloc;
+        },
+        act: (bloc) {
+          // start
+          when(() => mockTimerService.startTime)
+              .thenReturn(DateTime(2024,1,1,0,0,0));
+          when(() => mockTimerService.elapsedTime)
+              .thenReturn(const Duration(seconds: 0));
+          bloc.add(TimerStarted());
+
+          when(() => mockTimerService.elapsedTime)
+              .thenReturn(timerBloc.timerSettings.duration);
+          when(() => mockTimerService.finished)
+              .thenReturn(true);
+          timerFinishedStreamController.add(null);
+        },
+        expect: ()  => [
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.running,
+            timerStage: TimerStage.timer,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: Duration.zero,
+            startTime: DateTime(2024,1,1,0,0,0),
+          ),
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.completed,
+            timerStage: TimerStage.timer,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: timerBloc.timerSettings.duration,
+            startTime: DateTime(2024,1,1,0,0,0),
+          ),
+        ],
+        verify: (timerBloc) {
+          verifyInOrder([
+            () => mockTimerService.start(),
+            () => mockTimerService.elapsedTime,
+          ]);
+          verifyNever(() => mockAudioService.play(any()));
+        },
+    );
+
+    blocTest<TimerBloc, TimerState>('can play starting sound with warmup',
+        build: () {
+          TimerSettings timerSettings = defaultTimerSettings.copyWith(
+            startingSound: Sound.smallBell
+          );
+          _stubTimerServiceFactory(
+              timerSettings,
+              mockTimerServiceFactory,
+              mockWarmupTimerService,
+              mockTimerService
+          );
+          timerBloc = TimerBloc(
+            timerSettings: timerSettings,
+            timerServiceFactory: mockTimerServiceFactory,
+            audioService: mockAudioService,
+            crashlyticsService: mockCrashlyticsService,
+          );
+          return timerBloc;
+        },
+        act: (bloc) {
+          // start
+          when(() => mockWarmupTimerService.startTime)
+              .thenReturn(DateTime(2024,1,1,0,0,0));
+          when(() => mockWarmupTimerService.elapsedTime)
+              .thenReturn(const Duration(seconds: 0));
+          bloc.add(TimerStarted());
+
+          when(() => mockWarmupTimerService.elapsedTime)
+              .thenReturn(timerBloc.timerSettings.warmup);
+          when(() => mockWarmupTimerService.finished)
+              .thenReturn(true);
+          warmupFinishedStreamController.add(null);
+        },
+        expect: ()  => [
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.running,
+            timerStage: TimerStage.warmup,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: Duration.zero,
+          ),
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.running,
+            timerStage: TimerStage.timer,
+            elapsedWarmupTime: timerBloc.timerSettings.warmup,
+            elapsedTime: Duration.zero,
+          ),
+        ],
+        verify: (timerBloc) {
+          verifyInOrder([
+            () => mockWarmupTimerService.start(),
+            () => mockWarmupTimerService.elapsedTime,
+            () => mockAudioService.play(Sound.smallBell),
+          ]);
+        },
+    );
+
+    blocTest<TimerBloc, TimerState>('can play starting sound without warmup',
+        build: () {
+          TimerSettings timerSettings = defaultTimerSettings.copyWith(
+            warmup: Duration.zero,
+            startingSound: Sound.smallBell,
+          );
+          _stubTimerServiceFactory(
+            timerSettings,
+            mockTimerServiceFactory,
+            mockWarmupTimerService,
+            mockTimerService
+          );
+          timerBloc = TimerBloc(
+            timerSettings: timerSettings,
+            timerServiceFactory: mockTimerServiceFactory,
+            audioService: mockAudioService,
+            crashlyticsService: mockCrashlyticsService,
+          );
+          return timerBloc;
+        },
+        act: (bloc) {
+          // start
+          when(() => mockTimerService.startTime)
+              .thenReturn(DateTime(2024,1,1,0,0,0));
+          when(() => mockTimerService.elapsedTime)
+              .thenReturn(const Duration(seconds: 0));
+          bloc.add(TimerStarted());
+        },
+        expect: ()  => [
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.running,
+            timerStage: TimerStage.timer,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: Duration.zero,
+            startTime: DateTime(2024,1,1,0,0,0),
+          ),
+        ],
+        verify: (timerBloc) {
+          verifyInOrder([
+            () => mockTimerService.start(),
+            () => mockAudioService.play(timerBloc.timerSettings.startingSound),
+          ]);
+        },
+    );
+
+    blocTest<TimerBloc, TimerState>('can play ending sound',
+        build: () {
+          TimerSettings timerSettings = defaultTimerSettings.copyWith(
+            warmup: Duration.zero,
+            startingSound: Sound.smallBell,
+            endingSound: Sound.smallBell,
+          );
+          _stubTimerServiceFactory(
+              timerSettings,
+              mockTimerServiceFactory,
+              mockWarmupTimerService,
+              mockTimerService
+          );
+          timerBloc = TimerBloc(
+            timerSettings: timerSettings,
+            timerServiceFactory: mockTimerServiceFactory,
+            audioService: mockAudioService,
+            crashlyticsService: mockCrashlyticsService,
+          );
+          return timerBloc;
+        },
+        act: (bloc) {
+          // start
+          when(() => mockTimerService.startTime)
+              .thenReturn(DateTime(2024,1,1,0,0,0));
+          when(() => mockTimerService.elapsedTime)
+              .thenReturn(const Duration(seconds: 0));
+          bloc.add(TimerStarted());
+
+          when(() => mockTimerService.elapsedTime)
+              .thenReturn(timerBloc.timerSettings.duration);
+          when(() => mockTimerService.finished)
+              .thenReturn(true);
+          timerFinishedStreamController.add(null);
+        },
+        expect: ()  => [
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.running,
+            timerStage: TimerStage.timer,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: Duration.zero,
+            startTime: DateTime(2024,1,1,0,0,0),
+          ),
+          TimerState(
+            timerSettings: timerBloc.timerSettings,
+            timerStatus: TimerStatus.completed,
+            timerStage: TimerStage.timer,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: timerBloc.timerSettings.duration,
+            startTime: DateTime(2024,1,1,0,0,0),
+          ),
+        ],
+        verify: (timerBloc) {
+          verifyInOrder([
+            () => mockTimerService.start(),
+            () => mockAudioService.play(timerBloc.timerSettings.endingSound),
+          ]);
+        },
     );
 
   }); // eof group

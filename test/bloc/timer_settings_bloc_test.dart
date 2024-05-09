@@ -31,10 +31,6 @@ void main() async {
       );
     });
 
-    tearDown(() {
-      timerSettingsBloc.close();
-    });
-
     test('can be created with its default values', () async {
       expect(timerSettingsBloc.state, isA<TimerSettingsDataLoadingState>());
     });
