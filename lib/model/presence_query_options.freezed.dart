@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PresenceQueryOptions {
   Duration get windowSize => throw _privateConstructorUsedError;
+  int get limit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PresenceQueryOptionsCopyWith<PresenceQueryOptions> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $PresenceQueryOptionsCopyWith<$Res> {
           $Res Function(PresenceQueryOptions) then) =
       _$PresenceQueryOptionsCopyWithImpl<$Res, PresenceQueryOptions>;
   @useResult
-  $Res call({Duration windowSize});
+  $Res call({Duration windowSize, int limit});
 }
 
 /// @nodoc
@@ -47,12 +48,17 @@ class _$PresenceQueryOptionsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? windowSize = null,
+    Object? limit = null,
   }) {
     return _then(_value.copyWith(
       windowSize: null == windowSize
           ? _value.windowSize
           : windowSize // ignore: cast_nullable_to_non_nullable
               as Duration,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -65,7 +71,7 @@ abstract class _$$PresenceQueryOptionsImplCopyWith<$Res>
       __$$PresenceQueryOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Duration windowSize});
+  $Res call({Duration windowSize, int limit});
 }
 
 /// @nodoc
@@ -80,12 +86,17 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? windowSize = null,
+    Object? limit = null,
   }) {
     return _then(_$PresenceQueryOptionsImpl(
       windowSize: null == windowSize
           ? _value.windowSize
           : windowSize // ignore: cast_nullable_to_non_nullable
               as Duration,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -94,16 +105,20 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
 
 class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
     with DiagnosticableTreeMixin {
-  const _$PresenceQueryOptionsImpl({this.windowSize = const Duration(hours: 3)})
+  const _$PresenceQueryOptionsImpl(
+      {this.windowSize = const Duration(hours: 3), this.limit = 20})
       : super._();
 
   @override
   @JsonKey()
   final Duration windowSize;
+  @override
+  @JsonKey()
+  final int limit;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PresenceQueryOptions(windowSize: $windowSize)';
+    return 'PresenceQueryOptions(windowSize: $windowSize, limit: $limit)';
   }
 
   @override
@@ -111,7 +126,8 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PresenceQueryOptions'))
-      ..add(DiagnosticsProperty('windowSize', windowSize));
+      ..add(DiagnosticsProperty('windowSize', windowSize))
+      ..add(DiagnosticsProperty('limit', limit));
   }
 
   @override
@@ -120,11 +136,12 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
         (other.runtimeType == runtimeType &&
             other is _$PresenceQueryOptionsImpl &&
             (identical(other.windowSize, windowSize) ||
-                other.windowSize == windowSize));
+                other.windowSize == windowSize) &&
+            (identical(other.limit, limit) || other.limit == limit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, windowSize);
+  int get hashCode => Object.hash(runtimeType, windowSize, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -136,12 +153,15 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
 }
 
 abstract class _PresenceQueryOptions extends PresenceQueryOptions {
-  const factory _PresenceQueryOptions({final Duration windowSize}) =
-      _$PresenceQueryOptionsImpl;
+  const factory _PresenceQueryOptions(
+      {final Duration windowSize,
+      final int limit}) = _$PresenceQueryOptionsImpl;
   const _PresenceQueryOptions._() : super._();
 
   @override
   Duration get windowSize;
+  @override
+  int get limit;
   @override
   @JsonKey(ignore: true)
   _$$PresenceQueryOptionsImplCopyWith<_$PresenceQueryOptionsImpl>

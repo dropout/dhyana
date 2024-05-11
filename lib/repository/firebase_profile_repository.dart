@@ -19,38 +19,38 @@ class FirebaseProfileRepository implements ProfileRepository {
 
   @override
   Future<Profile> getProfileById(String id) {
-    return profileDataProvider.getItemById(id);
+    return profileDataProvider.read(id);
   }
 
   @override
   Stream<Profile> getProfileStreamById(String id) {
-    return profileDataProvider.getItemStreamById(id);
+    return profileDataProvider.readStream(id);
   }
 
   @override
   Future<List<Profile>> getProfiles() {
-    return profileDataProvider.getItems(const ProfileQueryOptions());
+    return profileDataProvider.query(const ProfileQueryOptions());
   }
 
   @override
   Stream<List<Profile>> getProfilesStream() {
-    return profileDataProvider.getItemsStream(const ProfileQueryOptions());
+    return profileDataProvider.queryStream(const ProfileQueryOptions());
   }
 
   @override
   Future<void> createProfile(Profile profile) {
-    return profileDataProvider.setItem(profile);
+    return profileDataProvider.create(profile);
   }
 
   @override
   Future<Profile> updateProfileData(Profile profile) async {
-    await profileDataProvider.updateItem(profile);
+    await profileDataProvider.update(profile);
     return profile;
   }
 
   @override
   Future<void> deleteProfile(String id) {
-    return profileDataProvider.deleteItem(id);
+    return profileDataProvider.delete(id);
   }
 
   @override
@@ -71,7 +71,7 @@ class FirebaseProfileRepository implements ProfileRepository {
 
     // Update profile with new photoUrl
     Profile newProfile = profile.copyWith(photoUrl: photoUrl);
-    await profileDataProvider.updateItem(profile);
+    await profileDataProvider.update(profile);
 
     return newProfile;
   }

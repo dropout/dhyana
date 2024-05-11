@@ -14,16 +14,16 @@ class PresenceQueryOptions with _$PresenceQueryOptions implements QueryOptions<P
 
   const factory PresenceQueryOptions({
     @Default(Duration(hours: 3)) Duration windowSize,
+    @Default(20) int limit,
   }) = _PresenceQueryOptions;
 
   @override
-  Query<Presence> prepareQuery(CollectionReference<Presence> collectionReference) {
-    Query<Presence> query = collectionReference;
+  Query<Presence> toFirebaseQuery(CollectionReference<Presence> collectionRef) {
+    Query<Presence> query = collectionRef;
     query = query
       .where('startedAt', isGreaterThan: Timestamp.fromDate(DateTime.now().subtract(windowSize)))
       .where('startedAt', isLessThan: Timestamp.fromDate(DateTime.now()));
-
-    return query.limit(20);
+    return query.limit(limit);
   }
 
 }

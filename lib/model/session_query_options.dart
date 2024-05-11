@@ -12,12 +12,14 @@ class SessionQueryOptions with _$SessionQueryOptions implements QueryOptions<Ses
 
   const SessionQueryOptions._();
 
-  const factory SessionQueryOptions() = _SessionQueryOptions;
+  const factory SessionQueryOptions({
+    @Default(20) int limit,
+  }) = _SessionQueryOptions;
 
   @override
-  Query<Session> prepareQuery(CollectionReference<Session> collectionReference) {
-    Query<Session> query = collectionReference.orderBy(FieldPath(const ['startTime']), descending: true);
-    return query.limit(20);
+  Query<Session> toFirebaseQuery(CollectionReference<Session> collectionRef) {
+    Query<Session> query = collectionRef.orderBy(FieldPath(const ['startTime']), descending: true);
+    return query.limit(limit);
   }
 
 }

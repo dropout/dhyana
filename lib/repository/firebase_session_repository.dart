@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_stats.dart';
 import 'package:dhyana/model/session.dart';
+import 'package:dhyana/model/session_query_options.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:logger/logger.dart';
@@ -12,13 +14,13 @@ class FirebaseSessionRepository implements SessionRepository {
 
   Logger logger = getLogger('FirebaseSessionRepository');
 
-  final SessionDataProvider sessionDataProvider;
+  final FirebaseFirestore fireStore;
   final ProfileDataProvider profileDataProvider;
   final DayDataProvider dayDataProvider;
   final ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
 
   FirebaseSessionRepository({
-    required this.sessionDataProvider,
+    required this.fireStore,
     required this.profileDataProvider,
     required this.dayDataProvider,
   });
@@ -27,7 +29,9 @@ class FirebaseSessionRepository implements SessionRepository {
   Future<Session> addSession(String profileId, Session session) async {
 
     // Add session
-    await sessionDataProvider.addSession(profileId, session);
+    SessionDataProvider sessionDataProvider =
+      FirebaseSessionDataProvider(fireStore, profileId);
+    await sessionDataProvider.create(session);
     logger.t('Session saved');
 
     // Add Day
@@ -35,7 +39,7 @@ class FirebaseSessionRepository implements SessionRepository {
     logger.t('Day saved');
 
     // Make profile stat changes
-    Profile profile = await profileDataProvider.getItemById(profileId);
+    Profile profile = await profileDataProvider.read(profileId);
     ProfileStats updatedStats = profile.stats;
     logger.t('Profile loaded');
 
@@ -77,7 +81,7 @@ class FirebaseSessionRepository implements SessionRepository {
     Profile newProfile = profile.copyWith(
       stats: updatedStats
     );
-    await profileDataProvider.setItem(newProfile);
+    await profileDataProvider.create(newProfile);
     logger.t('Profile saved with new stats: $updatedStats');
 
     return session;
@@ -85,7 +89,9 @@ class FirebaseSessionRepository implements SessionRepository {
 
   @override
   Future<List<Session>> getSessions(String profileId) {
-    return sessionDataProvider.getSessions(profileId);
+    SessionDataProvider sessionDataProvider =
+        FirebaseSessionDataProvider(fireStore, profileId);
+    return sessionDataProvider.query(const SessionQueryOptions());
   }
 
 }

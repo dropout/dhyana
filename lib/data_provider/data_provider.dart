@@ -1,15 +1,14 @@
 import 'package:dhyana/model/query_options.dart';
 
-abstract class DataProvider<T> {
+abstract class DataProvider<M> {
 
-  Future<T> getItemById(String id);
-  Stream<T> getItemStreamById(String id);
+  Future<void> create(M item);
+  Future<M> read(String id);
+  Stream<M> readStream(String id);
+  Future<void> update(M item);
+  Future<void> delete(String id);
 
-  Future<List<T>> getItems(QueryOptions<T> queryOptions);
-  Stream<List<T>> getItemsStream(QueryOptions<T> queryOptions);
-
-  Future<void> setItem(T item);
-  Future<void> updateItem(T item);
-  Future<void> deleteItem(String id);
+  Future<List<M>> query(QueryOptions<M> queryOptions);
+  Stream<List<M>> queryStream(QueryOptions<M> queryOptions);
 
 }

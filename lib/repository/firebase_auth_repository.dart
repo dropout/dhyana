@@ -80,7 +80,7 @@ class FirebaseAuthRepository implements AuthRepository {
       stats: ProfileStats.empty(),
       completed: false,
     );
-    await profileDataProvider.setItem(profile);
+    await profileDataProvider.create(profile);
   }
 
 }

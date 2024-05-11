@@ -72,9 +72,7 @@ class Initializer {
     );
 
     SessionRepository sessionRepository = FirebaseSessionRepository(
-      sessionDataProvider: FirebaseSessionDataProvider(
-        fireStore: FirebaseFirestore.instance,
-      ),
+      fireStore: firebaseProvider.firestore,
       profileDataProvider: profileDataProvider,
       dayDataProvider: dayDataProvider
     );

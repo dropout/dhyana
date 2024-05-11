@@ -14,7 +14,7 @@ class FirebasePresenceRepository implements PresenceRepository {
 
   @override
   Future<List<Presence>> getPresence(String? ownProfileId) async {
-    List<Presence> items = await presenceDataProvider.getItems(
+    List<Presence> items = await presenceDataProvider.query(
       const PresenceQueryOptions(
         windowSize: Duration(hours: 3),
       )
@@ -29,7 +29,7 @@ class FirebasePresenceRepository implements PresenceRepository {
 
   @override
   Future<void> showPresence(Presence presence) {
-    return presenceDataProvider.setItem(presence);
+    return presenceDataProvider.create(presence);
   }
 
 }

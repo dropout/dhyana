@@ -12,11 +12,14 @@ class ProfileQueryOptions with _$ProfileQueryOptions implements QueryOptions<Pro
 
   const ProfileQueryOptions._();
 
-  const factory ProfileQueryOptions() = _ProfileQueryOptions;
+  const factory ProfileQueryOptions({
+    @Default(20) int limit,
+  }) = _ProfileQueryOptions;
 
   @override
-  Query<Profile> prepareQuery(CollectionReference<Profile> collectionReference) {
-    return collectionReference.limit(20);
+  Query<Profile> toFirebaseQuery(CollectionReference<Profile> collectionRef) {
+    Query<Profile> query = collectionRef.orderBy(FieldPath(const ['startTime']), descending: true);
+    return query.limit(limit);
   }
 
 }
