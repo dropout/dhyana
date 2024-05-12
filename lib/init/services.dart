@@ -1,5 +1,4 @@
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/resource_resolver.dart';
 
 class Services {
 

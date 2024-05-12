@@ -3,8 +3,6 @@ import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
-import 'package:dhyana/service/default_resource_resolver.dart';
-import 'package:dhyana/service/resource_resolver.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +15,7 @@ import 'package:dhyana/util/logger_factory.dart';
 /*
   Manages the initialization process.
   Creates and configures providers, services and all the necessary objects used
-  in the application.
+  at the start of the application.
  */
 class Initializer {
 

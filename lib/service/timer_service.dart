@@ -1,4 +1,4 @@
-abstract class TimerService  {
+abstract interface class TimerService  {
 
   void start();
   void stop();
