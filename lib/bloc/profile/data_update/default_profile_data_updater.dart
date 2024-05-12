@@ -34,10 +34,11 @@ class DefaultProfileDataUpdater extends ProfileDataUpdater {
     Uint8List? imageData = getImageData(formData);
     if (imageData == null) {
       logger.t('Updating profile with data only');
-      return profileRepository.updateProfileData(newProfile);
+      await profileRepository.updateProfile(newProfile);
+      return newProfile;
     } else {
       logger.t('Updating profile with data and image');
-      return profileRepository.updateProfileDataWithImage(newProfile, imageData);
+      return profileRepository.updateProfileWithImage(newProfile, imageData);
     }
   }
 

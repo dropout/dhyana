@@ -4,18 +4,16 @@ import 'package:dhyana/model/profile.dart';
 
 abstract interface class ProfileRepository {
 
-  Future<Profile> getProfileById(String id);
-  Stream<Profile> getProfileStreamById(String id);
-
-  Future<List<Profile>> getProfiles();
-  Stream<List<Profile>> getProfilesStream();
-
   Future<void> createProfile(Profile profile);
-  Future<Profile> updateProfileData(Profile profile);
-  Future<Profile> updateProfileDataWithImage(
+  Future<Profile> readProfileById(String id);
+  Stream<Profile> readProfileStreamById(String id);
+  Future<void> updateProfile(Profile profile);
+  Future<Profile> updateProfileWithImage(
     Profile profile,
     Uint8List imageData,
   );
   Future<void> deleteProfile(String id);
+  Future<List<Profile>> queryProfiles();
+  Stream<List<Profile>> queryProfilesStream();
 
 }

@@ -59,7 +59,7 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
         logger.t('User is not signed in, not showing presence.');
         return;
       }
-      Profile profile = await profileRepository.getProfileById(user.uid);
+      Profile profile = await profileRepository.readProfileById(user.uid);
       if (profile.completed) {
         logger.t('User signed in and profile is complete, showing presence.');
         await presenceRepository.showPresence(Presence(

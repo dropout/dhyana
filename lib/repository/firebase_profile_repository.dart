@@ -18,43 +18,25 @@ class FirebaseProfileRepository implements ProfileRepository {
   });
 
   @override
-  Future<Profile> getProfileById(String id) {
-    return profileDataProvider.read(id);
-  }
+  Future<void> createProfile(Profile profile) =>
+      profileDataProvider.create(profile);
 
   @override
-  Stream<Profile> getProfileStreamById(String id) {
-    return profileDataProvider.readStream(id);
-  }
+  Future<Profile> readProfileById(String id) => profileDataProvider.read(id);
 
   @override
-  Future<List<Profile>> getProfiles() {
-    return profileDataProvider.query(const ProfileQueryOptions());
-  }
+  Stream<Profile> readProfileStreamById(String id) =>
+      profileDataProvider.readStream(id);
 
   @override
-  Stream<List<Profile>> getProfilesStream() {
-    return profileDataProvider.queryStream(const ProfileQueryOptions());
-  }
+  Future<void> updateProfile(Profile profile) =>
+      profileDataProvider.update(profile);
 
   @override
-  Future<void> createProfile(Profile profile) {
-    return profileDataProvider.create(profile);
-  }
+  Future<void> deleteProfile(String id) => profileDataProvider.delete(id);
 
   @override
-  Future<Profile> updateProfileData(Profile profile) async {
-    await profileDataProvider.update(profile);
-    return profile;
-  }
-
-  @override
-  Future<void> deleteProfile(String id) {
-    return profileDataProvider.delete(id);
-  }
-
-  @override
-  Future<Profile> updateProfileDataWithImage(
+  Future<Profile> updateProfileWithImage(
     Profile profile,
     Uint8List imageData
   ) async {
@@ -75,5 +57,13 @@ class FirebaseProfileRepository implements ProfileRepository {
 
     return newProfile;
   }
+
+  @override
+  Future<List<Profile>> queryProfiles() =>
+      profileDataProvider.query(const ProfileQueryOptions());
+
+  @override
+  Stream<List<Profile>> queryProfilesStream() =>
+      profileDataProvider.queryStream(const ProfileQueryOptions());
 
 }
