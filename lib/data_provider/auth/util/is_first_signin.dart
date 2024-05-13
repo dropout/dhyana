@@ -8,6 +8,6 @@ bool isFirstSignin(SigninResult signinResult) {
   if (additionalUserInfo != null) {
     return additionalUserInfo.isNewUser;
   } else {
-    return (user.metadata.lastSignInTime == user.metadata.creationTime);
+    return (user.metaData.lastSignInTime == user.metaData.creationTime);
   }
 }

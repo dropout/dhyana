@@ -12,7 +12,7 @@ Future<User?> convertFirebaseUser(firebase_auth.User? firebaseUser) async {
 
   return User(
     uid: firebaseUser.uid,
-    metadata: UserMetaData(
+    metaData: UserMetaData(
       creationTime: firebaseUser.metadata.creationTime,
       lastSignInTime: firebaseUser.metadata.lastSignInTime,
     ),

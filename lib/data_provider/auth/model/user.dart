@@ -5,7 +5,7 @@ import 'user_meta_data.dart';
 class User extends Equatable {
 
   final String uid;
-  final UserMetaData metadata;
+  final UserMetaData metaData;
   final String? displayName;
   final String? email;
   final String? photoUrl;
@@ -15,7 +15,7 @@ class User extends Equatable {
 
   const User({
     required this.uid,
-    required this.metadata,
+    required this.metaData,
     this.displayName,
     this.email,
     this.photoUrl,
@@ -26,7 +26,7 @@ class User extends Equatable {
   @override
   List<Object?> get props => [
     uid,
-    metadata,
+    metaData,
     displayName,
     email,
     photoUrl,
