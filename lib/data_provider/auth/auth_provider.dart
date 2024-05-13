@@ -1,7 +1,7 @@
 import 'package:dhyana/data_provider/auth/enum/signin_method_type.dart';
 import 'package:dhyana/data_provider/auth/model/all.dart';
 
-abstract class AuthProvider {
+abstract interface class AuthProvider {
 
   Stream<User?> get authStateChange;
   Stream<User?> get userChange;

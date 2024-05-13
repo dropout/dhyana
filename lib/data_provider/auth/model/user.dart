@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+
+import 'user_meta_data.dart';
 
 class User extends Equatable {
 
   final String uid;
-  final firebase_auth.UserMetadata metadata;
+  final UserMetaData metadata;
   final String? displayName;
   final String? email;
   final String? photoUrl;
