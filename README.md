@@ -1,19 +1,34 @@
-# Dhyana
+# Dhyana - Meditation Timer
 
-Simple meditation timer.
+A simple meditation timer for everyday meditators.
+
+## Features
+
+### Timer 
+- Preparation time
+- Starting sound
+- Duration
+- Ending sound
+
+### Profile
+- Name, profile image
+- Track sessions
+- Count consecutive days
+
+### Community
+- Show who you have meditated with
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Currently developing on iOS platform.  
+The application won't run without `GoogleService-Info.plist`.  
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Flavors configured (iOS only for now):
+- local
+- staging
+- production
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 ## Commands
 
@@ -21,4 +36,4 @@ samples, guidance on mobile development, and a full API reference.
 
 - build localizations: `flutter gen-l10n`
 - build freezed models: `dart run build_runner build`
-- build mocks: `dart run build_runner build --delete-conflicting-outputs`
+- start firebase emulator: `./start_firebase_emulator.sh -d empty_with_admin_user`
