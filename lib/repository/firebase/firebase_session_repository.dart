@@ -7,8 +7,7 @@ import 'package:dhyana/model/session_query_options.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:logger/logger.dart';
-
-import 'session_repository.dart';
+import 'package:dhyana/repository/session_repository.dart';
 
 class FirebaseSessionRepository implements SessionRepository {
 

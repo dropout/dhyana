@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';

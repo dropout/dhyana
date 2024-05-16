@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/model.dart';
 import 'package:dhyana/model/query_options.dart';
-
-import 'data_provider.dart';
+import 'package:dhyana/data_provider/data_provider.dart';
 
 class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
 

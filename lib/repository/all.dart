@@ -1,10 +1,7 @@
 export 'auth_repository.dart';
 export 'day_repository.dart';
-export 'firebase_auth_repository.dart';
-export 'firebase_day_repository.dart';
-export 'firebase_presence_repository.dart';
-export 'firebase_profile_repository.dart';
-export 'firebase_session_repository.dart';
 export 'presence_repository.dart';
 export 'profile_repository.dart';
 export 'session_repository.dart';
+
+export 'firebase/all.dart';

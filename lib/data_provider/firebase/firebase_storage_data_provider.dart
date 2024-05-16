@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 
-import 'storage_data_provider.dart';
+import '../storage_data_provider.dart';
 
 class FirebaseStorageDataProvider implements StorageDataProvider {
 

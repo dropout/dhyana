@@ -4,7 +4,7 @@ import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:logger/logger.dart';
 
-import 'day_repository.dart';
+import '../day_repository.dart';
 
 class FirebaseDayRepository implements DayRepository {
 

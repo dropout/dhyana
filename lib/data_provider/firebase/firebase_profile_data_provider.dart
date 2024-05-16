@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/profile.dart';
-
-import 'firebase_data_provider.dart';
-import 'profile_data_provider.dart';
+import 'package:dhyana/data_provider/profile_data_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 
 class FirebaseProfileDataProvider
     extends FirebaseDataProvider<Profile>

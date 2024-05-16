@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/model/model.dart';
 import 'package:dhyana/model/query_options.dart';
 import 'package:flutter_test/flutter_test.dart';

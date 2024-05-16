@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_query_options.dart';
-import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/repository/firebase/all.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

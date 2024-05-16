@@ -16,7 +16,7 @@ class FirebaseDayDataProvider implements DayDataProvider {
         .collection('days')
         .withConverter<Day>(
       fromFirestore: (snapshot, _) => Day.fromFireStore(snapshot),
-      toFirestore: (session, _) => session.toFireStore(),
+      toFirestore: (day, _) => day.toFireStore(),
     );
   }
 
