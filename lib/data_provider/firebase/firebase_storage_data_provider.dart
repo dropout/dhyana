@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../storage_data_provider.dart';
 
 class FirebaseStorageDataProvider implements StorageDataProvider {
 
@@ -12,16 +12,13 @@ class FirebaseStorageDataProvider implements StorageDataProvider {
 
   @override
   UploadTask uploadFile({
-    required String fileName,
     required String path,
-    required Uint8List data
+    required String fileName,
+    required Uint8List data,
+    SettableMetadata? metaData,
   }) {
     Reference ref = storage.ref().child(path).child(fileName);
-    UploadTask uploadTask = _uploadData(
-      ref: ref,
-      data: data,
-    );
-    return uploadTask;
+    return ref.putData(data, metaData);
   }
 
   @override
@@ -30,12 +27,18 @@ class FirebaseStorageDataProvider implements StorageDataProvider {
     return ref.getDownloadURL();
   }
 
-  UploadTask _uploadData({
-    required Reference ref,
-    required Uint8List data,
-    SettableMetadata? metadata,
-  }) {
-    return ref.putData(data, metadata);
+  @override
+  Future<List<Reference>> deleteFolder(String path) async {
+    ListResult result = await storage.ref(path).listAll();
+    for(var item in result.items) {
+      await item.delete();
+    }
+    return result.items;
+  }
+
+  @override
+  Future<void> deleteFile(String path) {
+    return storage.ref('path').delete();
   }
 
 }

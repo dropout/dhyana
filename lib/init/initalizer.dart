@@ -30,8 +30,6 @@ class Initializer {
       FirebaseProfileDataProvider(firebaseProvider.firestore);
     FirebaseStorageDataProvider storageDataProvider =
       FirebaseStorageDataProvider(firebaseProvider.storage);
-    FirebaseDayDataProvider dayDataProvider =
-      FirebaseDayDataProvider(firebaseProvider.firestore);
 
     logger.t('Initialize services');
     AnalyticsService analyticsService = FirebaseAnalyticsService(firebaseProvider.analytics);
@@ -56,6 +54,8 @@ class Initializer {
       authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
       profileDataProvider: profileDataProvider,
     );
+
+
     ProfileRepository profileRepository = FirebaseProfileRepository(
       profileDataProvider: profileDataProvider,
       storageDataProvider: storageDataProvider,
@@ -66,13 +66,12 @@ class Initializer {
       )
     );
     DayRepository dayRepository = FirebaseDayRepository(
-      dayDataProvider: dayDataProvider
+      fireStore: firebaseProvider.firestore,
     );
 
     SessionRepository sessionRepository = FirebaseSessionRepository(
       fireStore: firebaseProvider.firestore,
       profileDataProvider: profileDataProvider,
-      dayDataProvider: dayDataProvider
     );
 
     Repositories repos = Repositories(

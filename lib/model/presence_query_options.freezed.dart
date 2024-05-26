@@ -14,11 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+PresenceQueryOptions _$PresenceQueryOptionsFromJson(Map<String, dynamic> json) {
+  return _PresenceQueryOptions.fromJson(json);
+}
+
 /// @nodoc
 mixin _$PresenceQueryOptions {
   Duration get windowSize => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PresenceQueryOptionsCopyWith<PresenceQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -102,12 +107,15 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
     with DiagnosticableTreeMixin {
   const _$PresenceQueryOptionsImpl(
       {this.windowSize = const Duration(hours: 3), this.limit = 20})
       : super._();
+
+  factory _$PresenceQueryOptionsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PresenceQueryOptionsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -140,6 +148,7 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
             (identical(other.limit, limit) || other.limit == limit));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, windowSize, limit);
 
@@ -150,6 +159,13 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
       get copyWith =>
           __$$PresenceQueryOptionsImplCopyWithImpl<_$PresenceQueryOptionsImpl>(
               this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PresenceQueryOptionsImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _PresenceQueryOptions extends PresenceQueryOptions {
@@ -157,6 +173,9 @@ abstract class _PresenceQueryOptions extends PresenceQueryOptions {
       {final Duration windowSize,
       final int limit}) = _$PresenceQueryOptionsImpl;
   const _PresenceQueryOptions._() : super._();
+
+  factory _PresenceQueryOptions.fromJson(Map<String, dynamic> json) =
+      _$PresenceQueryOptionsImpl.fromJson;
 
   @override
   Duration get windowSize;

@@ -45,10 +45,4 @@ class Session with _$Session implements Model {
   factory Session.fromJson(Map<String, Object?> json) =>
     _$SessionFromJson(json);
 
-  factory Session.fromFireStore(DocumentSnapshot snapshot) =>
-    Session.fromJson(snapshot.data() as Map<String, dynamic>);
-
-  @override
-  Map<String, Object?> toFireStore() => toJson();
-
 }

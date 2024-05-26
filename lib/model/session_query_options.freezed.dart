@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+SessionQueryOptions _$SessionQueryOptionsFromJson(Map<String, dynamic> json) {
+  return _SessionQueryOptions.fromJson(json);
+}
+
 /// @nodoc
 mixin _$SessionQueryOptions {
   int get limit => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SessionQueryOptionsCopyWith<SessionQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -90,10 +95,13 @@ class __$$SessionQueryOptionsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$SessionQueryOptionsImpl extends _SessionQueryOptions
     with DiagnosticableTreeMixin {
   const _$SessionQueryOptionsImpl({this.limit = 20}) : super._();
+
+  factory _$SessionQueryOptionsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SessionQueryOptionsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -120,6 +128,7 @@ class _$SessionQueryOptionsImpl extends _SessionQueryOptions
             (identical(other.limit, limit) || other.limit == limit));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
@@ -129,12 +138,22 @@ class _$SessionQueryOptionsImpl extends _SessionQueryOptions
   _$$SessionQueryOptionsImplCopyWith<_$SessionQueryOptionsImpl> get copyWith =>
       __$$SessionQueryOptionsImplCopyWithImpl<_$SessionQueryOptionsImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SessionQueryOptionsImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _SessionQueryOptions extends SessionQueryOptions {
   const factory _SessionQueryOptions({final int limit}) =
       _$SessionQueryOptionsImpl;
   const _SessionQueryOptions._() : super._();
+
+  factory _SessionQueryOptions.fromJson(Map<String, dynamic> json) =
+      _$SessionQueryOptionsImpl.fromJson;
 
   @override
   int get limit;

@@ -1,9 +1,12 @@
 export 'app_settings.dart';
+export 'day.dart';
+export 'day_query_options.dart';
 export 'model.dart';
 export 'presence.dart';
 export 'profile.dart';
+export 'profile_query_options.dart';
 export 'profile_stats.dart';
 export 'public_profile.dart';
-export 'query_options.dart';
 export 'session.dart';
+export 'session_query_options.dart';
 export 'timer_settings.dart';

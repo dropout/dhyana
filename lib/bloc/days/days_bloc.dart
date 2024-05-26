@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:dhyana/model/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/model/day.dart';
 import 'package:dhyana/repository/day_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
@@ -38,10 +38,12 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         logger.t('Streaming days');
         _streamSubscription?.cancel();
 
-        _streamSubscription = dayRepository.getDaysStream(
+        _streamSubscription = dayRepository.queryDaysStream(
           profileId: event.profileId,
-          from: event.from,
-          to: event.to ?? DateTime.now()
+          queryOptions: DayQueryOptions(
+            from: event.from,
+            to: event.to ?? DateTime.now()
+          ),
         ).listen((daysList) {
           add(DaysEvent.receiveUpdate(days: daysList));
         });
@@ -57,10 +59,12 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
           add(const DaysEvent.error());
         });
       } else {
-        List<Day> days = await dayRepository.getDays(
+        List<Day> days = await dayRepository.queryDays(
           profileId: event.profileId,
-          from: event.from,
-          to: event.to ?? DateTime.now(),
+          queryOptions: DayQueryOptions(
+            from: event.from,
+            to: event.to ?? DateTime.now()
+          ),
         );
         emit(DaysState.loaded(days: days));
         logger.t('Successfully loaded days ${days.length}');

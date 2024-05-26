@@ -40,7 +40,7 @@ class AppThemeData {
 
     ColorScheme colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.red,
-      background: AppColors.backgroundPaper,
+      surface: AppColors.backgroundPaper,
     );
 
     ThemeData themeData = ThemeData(

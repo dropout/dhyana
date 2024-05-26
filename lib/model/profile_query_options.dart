@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-
-import 'profile.dart';
-import 'query_options.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_query_options.freezed.dart';
+part 'profile_query_options.g.dart';
 
 @freezed
-class ProfileQueryOptions with _$ProfileQueryOptions implements QueryOptions<Profile> {
+class ProfileQueryOptions with _$ProfileQueryOptions {
 
   const ProfileQueryOptions._();
 
@@ -16,10 +13,7 @@ class ProfileQueryOptions with _$ProfileQueryOptions implements QueryOptions<Pro
     @Default(20) int limit,
   }) = _ProfileQueryOptions;
 
-  @override
-  Query<Profile> toFirebaseQuery(CollectionReference<Profile> collectionRef) {
-    Query<Profile> query = collectionRef.orderBy(FieldPath(const ['startTime']), descending: true);
-    return query.limit(limit);
-  }
+  factory ProfileQueryOptions.fromJson(Map<String, Object?> json) =>
+      _$ProfileQueryOptionsFromJson(json);
 
 }

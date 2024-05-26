@@ -8,8 +8,10 @@ abstract interface class StorageDataProvider {
     required String fileName,
     required String path,
     required Uint8List data,
+    SettableMetadata? metaData,
   });
-
   Future<String> getDownloadURL(String path);
+  Future<void> deleteFile(String path);
+  Future<List<Reference>> deleteFolder(String path);
 
 }

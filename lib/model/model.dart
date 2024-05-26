@@ -1,4 +1,4 @@
-abstract class Model {
+abstract interface class Model {
   String get id;
-  Map<String, Object?> toFireStore();
+  Map<String, Object?> toJson();
 }

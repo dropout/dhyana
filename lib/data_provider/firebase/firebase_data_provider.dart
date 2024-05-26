@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/model/model.dart';
-import 'package:dhyana/model/query_options.dart';
 import 'package:dhyana/data_provider/data_provider.dart';
 
 class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
@@ -42,20 +42,16 @@ class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
       .delete();
   }
 
-  @override
-  Future<List<M>> query(QueryOptions<M> queryOptions) async {
-    QuerySnapshot<M> querySnapshot = await queryOptions
-        .toFirebaseQuery(collectionRef)
-        .get();
+  Future<List<M>> buildListFromQuery(Query<M> query) async {
+    final QuerySnapshot<M> querySnapshot = await query.get();
     return querySnapshot.docs.map((snapshot) => snapshot.data()).toList();
   }
 
-  @override
-  Stream<List<M>> queryStream(QueryOptions<M> queryOptions) {
-    return queryOptions.toFirebaseQuery(collectionRef).snapshots()
-        .map((querySnapshot) {
+  Stream<List<M>> buildStreamFromQuery(Query<M> query) {
+    return query.snapshots().map((querySnapshot) {
       return querySnapshot.docs.map((e) => e.data()).toList();
     });
   }
+
 
 }

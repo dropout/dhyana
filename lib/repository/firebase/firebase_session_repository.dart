@@ -15,26 +15,28 @@ class FirebaseSessionRepository implements SessionRepository {
 
   final FirebaseFirestore fireStore;
   final ProfileDataProvider profileDataProvider;
-  final DayDataProvider dayDataProvider;
   final ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
 
   FirebaseSessionRepository({
     required this.fireStore,
     required this.profileDataProvider,
-    required this.dayDataProvider,
   });
 
   @override
   Future<Session> addSession(String profileId, Session session) async {
 
-    // Add session
+    // Create data providers
     SessionDataProvider sessionDataProvider =
       FirebaseSessionDataProvider(fireStore, profileId);
+    DayDataProvider dayDataProvider =
+      FirebaseDayDataProvider(fireStore, profileId);
+
+    // Add session
     await sessionDataProvider.create(session);
     logger.t('Session saved');
 
     // Add Day
-    await dayDataProvider.addSessionToDay(profileId, session);
+    await dayDataProvider.addSession(session);
     logger.t('Day saved');
 
     // Make profile stat changes

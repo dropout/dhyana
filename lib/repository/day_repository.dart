@@ -1,17 +1,16 @@
 import 'package:dhyana/model/day.dart';
+import 'package:dhyana/model/day_query_options.dart';
 
 abstract interface class DayRepository {
 
-  Future<List<Day>> getDays({
+  Future<List<Day>> queryDays({
     required String profileId,
-    required DateTime from,
-    required DateTime to,
+    required DayQueryOptions queryOptions,
   });
 
-  Stream<List<Day>> getDaysStream({
+  Stream<List<Day>> queryDaysStream({
     required String profileId,
-    required DateTime from,
-    required DateTime to,
+    required DayQueryOptions queryOptions,
   });
 
 }

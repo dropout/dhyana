@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'session.dart';
-import 'query_options.dart';
 
 part 'session_query_options.freezed.dart';
+part 'session_query_options.g.dart';
 
 @freezed
-class SessionQueryOptions with _$SessionQueryOptions implements QueryOptions<Session> {
+class SessionQueryOptions with _$SessionQueryOptions {
 
   const SessionQueryOptions._();
 
@@ -16,10 +14,7 @@ class SessionQueryOptions with _$SessionQueryOptions implements QueryOptions<Ses
     @Default(20) int limit,
   }) = _SessionQueryOptions;
 
-  @override
-  Query<Session> toFirebaseQuery(CollectionReference<Session> collectionRef) {
-    Query<Session> query = collectionRef.orderBy(FieldPath(const ['startTime']), descending: true);
-    return query.limit(limit);
-  }
+  factory SessionQueryOptions.fromJson(Map<String, Object?> json) =>
+      _$SessionQueryOptionsFromJson(json);
 
 }

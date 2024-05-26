@@ -26,7 +26,4 @@ class Presence with _$Presence implements Model {
   factory Presence.fromFireStore(DocumentSnapshot snapshot) =>
       Presence.fromJson(snapshot.data() as Map<String, dynamic>);
 
-  @override
-  Map<String, Object?> toFireStore() => toJson();
-
 }

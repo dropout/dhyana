@@ -16,7 +16,7 @@ class AppLoadingDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool hasText = (text != null);
     return Container(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       child: SizedBox.expand(
         child: Padding(
           padding: const EdgeInsets.all(AppThemeData.spacingMd),

@@ -18,7 +18,7 @@ class ProfileEditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SignedIn(yes: (BuildContext context, User user) {
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: CustomAppBar(titleText: AppLocalizations.of(context).editProfile),
         extendBodyBehindAppBar: true,
         body: SafeArea(

@@ -39,7 +39,4 @@ class Day with _$Day implements Model {
   factory Day.fromFireStore(DocumentSnapshot snapshot) =>
     Day.fromJson(snapshot.data() as Map<String, dynamic>);
 
-  @override
-  Map<String, Object?> toFireStore() => toJson();
-
 }

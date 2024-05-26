@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+ProfileQueryOptions _$ProfileQueryOptionsFromJson(Map<String, dynamic> json) {
+  return _ProfileQueryOptions.fromJson(json);
+}
+
 /// @nodoc
 mixin _$ProfileQueryOptions {
   int get limit => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ProfileQueryOptionsCopyWith<ProfileQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -90,10 +95,13 @@ class __$$ProfileQueryOptionsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ProfileQueryOptionsImpl extends _ProfileQueryOptions
     with DiagnosticableTreeMixin {
   const _$ProfileQueryOptionsImpl({this.limit = 20}) : super._();
+
+  factory _$ProfileQueryOptionsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProfileQueryOptionsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -120,6 +128,7 @@ class _$ProfileQueryOptionsImpl extends _ProfileQueryOptions
             (identical(other.limit, limit) || other.limit == limit));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
@@ -129,12 +138,22 @@ class _$ProfileQueryOptionsImpl extends _ProfileQueryOptions
   _$$ProfileQueryOptionsImplCopyWith<_$ProfileQueryOptionsImpl> get copyWith =>
       __$$ProfileQueryOptionsImplCopyWithImpl<_$ProfileQueryOptionsImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProfileQueryOptionsImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ProfileQueryOptions extends ProfileQueryOptions {
   const factory _ProfileQueryOptions({final int limit}) =
       _$ProfileQueryOptionsImpl;
   const _ProfileQueryOptions._() : super._();
+
+  factory _ProfileQueryOptions.fromJson(Map<String, dynamic> json) =
+      _$ProfileQueryOptionsImpl.fromJson;
 
   @override
   int get limit;
