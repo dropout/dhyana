@@ -32,7 +32,7 @@ sealed class TimerState with _$TimerState {
     return TimerState(
       timerSettings: timerSettings,
       timerStatus: TimerStatus.idle,
-      timerStage: TimerStage.warmup,
+      timerStage: (timerSettings.warmup != Duration.zero) ? TimerStage.warmup : TimerStage.timer,
       elapsedWarmupTime: Duration.zero,
       elapsedTime: Duration.zero,
     );

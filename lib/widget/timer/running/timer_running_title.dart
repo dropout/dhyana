@@ -1,3 +1,4 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 
@@ -53,7 +54,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
         return null;
       case TimerStage.warmup:
         return Text(
-        'Warmup',
+        AppLocalizations.of(context).inputWarmupLabel,
         style: style,
         key: const ValueKey<String>('Warmup'),
       );
