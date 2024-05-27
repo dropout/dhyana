@@ -46,7 +46,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         logger.t('Streaming profile: ${event.profileId}');
         _profileStreamSubscription?.cancel();
         _profileStreamSubscription = profileRepository
-          .readProfileStreamById(event.profileId)
+          .readStream(event.profileId)
           .listen((profile) {
             add(ProfileEvent.receiveUpdate(profile: profile));
             if (isOnCompleteCallbackFired == false) {
@@ -67,7 +67,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       } else {
         logger.t('Loading profile: ${event.profileId}');
         _profileStreamSubscription?.cancel();
-        Profile profile = await profileRepository.readProfileById(event.profileId);
+        Profile profile = await profileRepository.read(event.profileId);
         emit(ProfileState.loaded(profile: profile));
         event.onComplete?.call(profile);
         logger.t('Loaded profile: ${profile.displayName}');
@@ -130,7 +130,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       logger.t('Consecutive days changed: ${event.profile.stats.consecutiveDays} -> ${calculatedProfile.stats.consecutiveDays}');
 
-      await profileRepository.updateProfile(calculatedProfile);
+      await profileRepository.update(calculatedProfile);
       emit(ProfileState.loaded(profile: calculatedProfile));
       event.onComplete?.call(calculatedProfile);
       logger.t('Profile saved');
@@ -164,7 +164,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       // save the validated data, no need to wait for completing that
       logger.t('Saving validated consecutive days...');
-      await profileRepository.updateProfile(updatedProfile);
+      await profileRepository.update(updatedProfile);
       logger.t('Validated consecutive days saved in profile');
     } catch(e, stack) {
       crashlyticsService.recordError(

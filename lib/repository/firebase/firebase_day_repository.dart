@@ -17,7 +17,7 @@ class FirebaseDayRepository implements DayRepository {
   });
 
   @override
-  Future<List<Day>> queryDays({
+  Future<List<Day>> query({
     required String profileId,
     required DayQueryOptions queryOptions,
   }) async {
@@ -49,7 +49,7 @@ class FirebaseDayRepository implements DayRepository {
   }
 
   @override
-  Stream<List<Day>> queryDaysStream({
+  Stream<List<Day>> queryStream({
     required String profileId,
     required DayQueryOptions queryOptions,
   }) {

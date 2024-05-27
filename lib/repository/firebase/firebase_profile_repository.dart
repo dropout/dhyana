@@ -2,10 +2,13 @@ import 'dart:typed_data';
 
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/all.dart';
+import 'package:dhyana/repository/crud_repository_operations.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class FirebaseProfileRepository implements ProfileRepository {
+class FirebaseProfileRepository
+    extends CrudRepositoryOps<Profile>
+    implements ProfileRepository {
 
   final ProfileDataProvider profileDataProvider;
   final StorageDataProvider storageDataProvider;
@@ -13,25 +16,7 @@ class FirebaseProfileRepository implements ProfileRepository {
   const FirebaseProfileRepository({
     required this.profileDataProvider,
     required this.storageDataProvider,
-  });
-
-  @override
-  Future<void> createProfile(Profile profile) =>
-      profileDataProvider.create(profile);
-
-  @override
-  Future<Profile> readProfileById(String id) => profileDataProvider.read(id);
-
-  @override
-  Stream<Profile> readProfileStreamById(String id) =>
-      profileDataProvider.readStream(id);
-
-  @override
-  Future<void> updateProfile(Profile profile) =>
-      profileDataProvider.update(profile);
-
-  @override
-  Future<void> deleteProfile(String id) => profileDataProvider.delete(id);
+  }) : super(profileDataProvider);
 
   @override
   Future<Profile> updateProfileWithImage(
@@ -57,11 +42,11 @@ class FirebaseProfileRepository implements ProfileRepository {
   }
 
   @override
-  Future<List<Profile>> queryProfiles() =>
-      profileDataProvider.query(const ProfileQueryOptions());
+  Future<List<Profile>> query(ProfileQueryOptions queryOptions) =>
+      profileDataProvider.query(queryOptions);
 
   @override
-  Stream<List<Profile>> queryProfilesStream() =>
-      profileDataProvider.queryStream(const ProfileQueryOptions());
+  Stream<List<Profile>> queryStream(ProfileQueryOptions queryOptions) =>
+      profileDataProvider.queryStream(queryOptions);
 
 }

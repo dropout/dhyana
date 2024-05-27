@@ -7,7 +7,7 @@ abstract class CrudRepositoryOps<M> {
 
   final DataProvider<M> dataProvider;
 
-  CrudRepositoryOps(this.dataProvider);
+  const CrudRepositoryOps(this.dataProvider);
 
   Future<void> create(M model) => dataProvider.create(model);
   Future<M> read(String id) => dataProvider.read(id);

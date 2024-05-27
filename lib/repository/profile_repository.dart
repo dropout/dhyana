@@ -1,19 +1,18 @@
 import 'dart:typed_data';
 
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/profile_query_options.dart';
+import 'package:dhyana/repository/crud_repository.dart';
 
-abstract interface class ProfileRepository {
+abstract interface class ProfileRepository
+    implements CrudRepository<Profile> {
 
-  Future<void> createProfile(Profile profile);
-  Future<Profile> readProfileById(String id);
-  Stream<Profile> readProfileStreamById(String id);
-  Future<void> updateProfile(Profile profile);
   Future<Profile> updateProfileWithImage(
     Profile profile,
     Uint8List imageData,
   );
-  Future<void> deleteProfile(String id);
-  Future<List<Profile>> queryProfiles();
-  Stream<List<Profile>> queryProfilesStream();
+
+  Future<List<Profile>> query(ProfileQueryOptions queryOptions);
+  Stream<List<Profile>> queryStream(ProfileQueryOptions queryOptions);
 
 }

@@ -53,5 +53,4 @@ class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
     });
   }
 
-
 }

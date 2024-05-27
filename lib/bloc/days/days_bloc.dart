@@ -38,7 +38,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         logger.t('Streaming days');
         _streamSubscription?.cancel();
 
-        _streamSubscription = dayRepository.queryDaysStream(
+        _streamSubscription = dayRepository.queryStream(
           profileId: event.profileId,
           queryOptions: DayQueryOptions(
             from: event.from,
@@ -59,7 +59,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
           add(const DaysEvent.error());
         });
       } else {
-        List<Day> days = await dayRepository.queryDays(
+        List<Day> days = await dayRepository.query(
           profileId: event.profileId,
           queryOptions: DayQueryOptions(
             from: event.from,

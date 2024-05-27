@@ -50,28 +50,28 @@ void main() {
     test('can read profile by id', () {
       when(() => mockProfileDataProvider.read('test_id'))
           .thenAnswer((_) => Future.value(mockProfile));
-      firebaseProfileRepository.readProfileById('test_id');
+      firebaseProfileRepository.read('test_id');
       verify(() => mockProfileDataProvider.read('test_id')).called(1);
     });
 
     test('can read profile stream by id', () {
       when(() => mockProfileDataProvider.readStream('test_id'))
           .thenAnswer((_) => profileStreamController.stream);
-      firebaseProfileRepository.readProfileStreamById('test_id');
+      firebaseProfileRepository.readStream('test_id');
       verify(() => mockProfileDataProvider.readStream('test_id')).called(1);
     });
 
     test('can update profile', () {
       when(() => mockProfileDataProvider.update(mockProfile))
           .thenAnswer((_) => Future.value(null));
-      firebaseProfileRepository.updateProfile(mockProfile);
+      firebaseProfileRepository.update(mockProfile);
       verify(() => mockProfileDataProvider.update(mockProfile)).called(1);
     });
 
     test('can delete profile', () {
       when(() => mockProfileDataProvider.delete('test_id'))
           .thenAnswer((_) => Future.value(null));
-      firebaseProfileRepository.deleteProfile('test_id');
+      firebaseProfileRepository.delete('test_id');
       verify(() => mockProfileDataProvider.delete('test_id')).called(1);
     });
 
@@ -79,7 +79,7 @@ void main() {
       ProfileQueryOptions profileQueryOptions = const ProfileQueryOptions();
       when(() => mockProfileDataProvider.query(profileQueryOptions))
           .thenAnswer((_) => Future.value([mockProfile]));
-      firebaseProfileRepository.queryProfiles();
+      firebaseProfileRepository.query(const ProfileQueryOptions());
       verify(() => mockProfileDataProvider.query(profileQueryOptions)).called(1);
     });
 
@@ -87,7 +87,7 @@ void main() {
       ProfileQueryOptions profileQueryOptions = const ProfileQueryOptions();
       when(() => mockProfileDataProvider.queryStream(profileQueryOptions))
           .thenAnswer((_) => profileQueryStreamController.stream);
-      firebaseProfileRepository.queryProfilesStream();
+      firebaseProfileRepository.queryStream(const ProfileQueryOptions());
       verify(() => mockProfileDataProvider.queryStream(profileQueryOptions))
           .called(1);
     });
