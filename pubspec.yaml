@@ -22,8 +22,9 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   blurhash_dart: ^1.1.0
-  uuid: ^4.1.0
+  uuid: ^4.4.0
   package_info_plus: ^8.0.0
+
 
   # Ui
   flutter_animate: ^4.2.0

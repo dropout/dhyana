@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/model/factory/timer_settings_factory.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,7 +49,7 @@ void main() async {
     });
 
     setUp(() {
-      defaultTimerSettings = TimerSettings.initial();
+      defaultTimerSettings = TimerSettingsFactory.withUuid();
 
       warmupTickerStreamController = StreamController();
       warmupFinishedStreamController = StreamController(sync: true);
@@ -186,7 +187,7 @@ void main() async {
             elapsedTime: Duration.zero,
           ),
           TimerState(
-            timerSettings: TimerSettings.initial(),
+            timerSettings: defaultTimerSettings,
             timerStatus: TimerStatus.running,
             timerStage: TimerStage.warmup,
             elapsedWarmupTime: const Duration(seconds: 2),

@@ -20,6 +20,7 @@ TimerSettings _$TimerSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TimerSettings {
+  String get id => throw _privateConstructorUsedError;
   Duration get warmup => throw _privateConstructorUsedError;
   @DurationConverter()
   Duration get duration => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $TimerSettingsCopyWith<$Res> {
       _$TimerSettingsCopyWithImpl<$Res, TimerSettings>;
   @useResult
   $Res call(
-      {Duration warmup,
+      {String id,
+      Duration warmup,
       @DurationConverter() Duration duration,
       Sound startingSound,
       Sound endingSound});
@@ -58,12 +60,17 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? warmup = null,
     Object? duration = null,
     Object? startingSound = null,
     Object? endingSound = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       warmup: null == warmup
           ? _value.warmup
           : warmup // ignore: cast_nullable_to_non_nullable
@@ -93,7 +100,8 @@ abstract class _$$TimerSettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Duration warmup,
+      {String id,
+      Duration warmup,
       @DurationConverter() Duration duration,
       Sound startingSound,
       Sound endingSound});
@@ -110,12 +118,17 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? warmup = null,
     Object? duration = null,
     Object? startingSound = null,
     Object? endingSound = null,
   }) {
     return _then(_$TimerSettingsImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       warmup: null == warmup
           ? _value.warmup
           : warmup // ignore: cast_nullable_to_non_nullable
@@ -140,7 +153,8 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
   const _$TimerSettingsImpl(
-      {required this.warmup,
+      {required this.id,
+      required this.warmup,
       @DurationConverter() required this.duration,
       required this.startingSound,
       required this.endingSound})
@@ -149,6 +163,8 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
   factory _$TimerSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$TimerSettingsImplFromJson(json);
 
+  @override
+  final String id;
   @override
   final Duration warmup;
   @override
@@ -161,7 +177,7 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettings(warmup: $warmup, duration: $duration, startingSound: $startingSound, endingSound: $endingSound)';
+    return 'TimerSettings(id: $id, warmup: $warmup, duration: $duration, startingSound: $startingSound, endingSound: $endingSound)';
   }
 
   @override
@@ -169,6 +185,7 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TimerSettings'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('warmup', warmup))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(DiagnosticsProperty('startingSound', startingSound))
@@ -180,6 +197,7 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimerSettingsImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.warmup, warmup) || other.warmup == warmup) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
@@ -191,8 +209,8 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, warmup, duration, startingSound, endingSound);
+  int get hashCode => Object.hash(
+      runtimeType, id, warmup, duration, startingSound, endingSound);
 
   @JsonKey(ignore: true)
   @override
@@ -210,7 +228,8 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
 
 abstract class _TimerSettings extends TimerSettings {
   const factory _TimerSettings(
-      {required final Duration warmup,
+      {required final String id,
+      required final Duration warmup,
       @DurationConverter() required final Duration duration,
       required final Sound startingSound,
       required final Sound endingSound}) = _$TimerSettingsImpl;
@@ -219,6 +238,8 @@ abstract class _TimerSettings extends TimerSettings {
   factory _TimerSettings.fromJson(Map<String, dynamic> json) =
       _$TimerSettingsImpl.fromJson;
 
+  @override
+  String get id;
   @override
   Duration get warmup;
   @override

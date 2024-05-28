@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/model/factory/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
@@ -20,7 +21,7 @@ void main() {
 
     testWidgets('TimerSettingsView has all the necessary interface elements', (WidgetTester tester) async {
 
-      TimerSettings timerSettings = TimerSettings.initial();
+      TimerSettings timerSettings = TimerSettingsFactory.withUuid();
 
       await tester.pumpWidget(
         getAllTestContextProviders(

@@ -49,16 +49,6 @@ class FirebaseDayDataProvider extends FirebaseDataProvider<Day> implements DayDa
     return session;
   }
 
-  @override
-  Future<List<Day>> query(DayQueryOptions queryOptions) {
-    return buildListFromQuery(_buildQuery(queryOptions));
-  }
-
-  @override
-  Stream<List<Day>> queryStream(DayQueryOptions queryOptions) {
-    return buildStreamFromQuery(_buildQuery(queryOptions));
-  }
-
   Query<Day> _buildQuery(DayQueryOptions queryOptions) {
     final FieldPath fieldPath = FieldPath(const ['date']);
     Query<Day> query = collectionRef
@@ -67,5 +57,14 @@ class FirebaseDayDataProvider extends FirebaseDataProvider<Day> implements DayDa
         .orderBy(fieldPath);
     return query;
   }
+
+  @override
+  Future<List<Day>> query(DayQueryOptions queryOptions) =>
+    buildListFromQuery(_buildQuery(queryOptions));
+
+
+  @override
+  Stream<List<Day>> queryStream(DayQueryOptions queryOptions) =>
+    buildStreamFromQuery(_buildQuery(queryOptions));
 
 }

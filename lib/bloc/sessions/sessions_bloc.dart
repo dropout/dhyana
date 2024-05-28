@@ -1,4 +1,5 @@
 import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/model/factory/all.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/repository/auth_repository.dart';
@@ -41,13 +42,13 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
       }
       await sessionRepository.addSession(
         event.profileId,
-        Session.generateId(
+        SessionFactory.withFirebaseId(
           profileId: user.uid,
           startTime: event.startTime,
           endTime: event.endTime,
           duration: event.startTime.difference(event.endTime).abs(),
           timerSettings: event.timerSettings,
-        ),
+        )
       );
       logger.t('Session successfully added!');
     } catch(e, stack) {

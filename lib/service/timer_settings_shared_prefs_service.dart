@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dhyana/model/factory/all.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/model/timer_settings.dart';
 
@@ -24,7 +25,7 @@ class TimerSettingsSharedPrefsService {
 
     // Fallback to default if no entry found
     if (timerSettingsJson == null) {
-      return TimerSettings.initial();
+      return TimerSettingsFactory.withUuid();
     }
 
     // Fallback to default if unable to convert
@@ -38,7 +39,7 @@ class TimerSettingsSharedPrefsService {
         stackTrace: stack,
         reason: 'Unable to get TimerSettings from shared preferences',
       );
-      return TimerSettings.initial();
+      return TimerSettingsFactory.withUuid();
     }
 
   }

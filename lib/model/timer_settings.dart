@@ -3,30 +3,23 @@ import 'package:flutter/foundation.dart';
 import 'package:dhyana/enum/sound.dart';
 
 import 'converter/duration_converter.dart';
+import 'model.dart';
 
 part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';
 
 @freezed
-class TimerSettings with _$TimerSettings {
+class TimerSettings with _$TimerSettings implements Model {
 
   const TimerSettings._();
 
   const factory TimerSettings({
+    required String id,
     required Duration warmup,
     @DurationConverter() required Duration duration,
     required Sound startingSound,
     required Sound endingSound,
   }) = _TimerSettings;
-
-  factory TimerSettings.initial() {
-    return const TimerSettings(
-      warmup: Duration(minutes: 1),
-      duration: Duration(minutes: 10),
-      startingSound: Sound.none,
-      endingSound: Sound.none,
-    );
-  }
 
   factory TimerSettings.fromJson(Map<String, Object?> json) =>
     _$TimerSettingsFromJson(json);

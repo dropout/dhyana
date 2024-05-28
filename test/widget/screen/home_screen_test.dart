@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/model/factory/timer_settings_factory.dart';
 import 'package:dhyana/widget/profile/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
@@ -86,7 +86,9 @@ void main() {
     testWidgets('HomeScreen can a loaded state', (WidgetTester tester) async {
 
       when(() => timerSettingsBloc.state).thenReturn(
-        TimerSettingsState.loaded(timerSettings: TimerSettings.initial())
+        TimerSettingsState.loaded(
+          timerSettings: TimerSettingsFactory.withUuid()
+        )
       );
 
       await tester.pumpWidget(

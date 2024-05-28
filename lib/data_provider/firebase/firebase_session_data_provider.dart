@@ -13,7 +13,8 @@ class FirebaseSessionDataProvider
     String profileId
   ) : super(
     fireStore
-        .collection('profiles').doc(profileId)
+        .collection('profiles')
+        .doc(profileId)
         .collection('sessions')
         .withConverter<Session>(
       fromFirestore: (snapshot, _) => fromFireStore(snapshot, Session.fromJson),
@@ -33,6 +34,15 @@ class FirebaseSessionDataProvider
 
   Query<Session> _buildQuery(SessionQueryOptions queryOptions) {
     return collectionRef.limit(queryOptions.limit);
+  }
+
+  static String generateId(String profileId) {
+    return FirebaseFirestore.instance
+      .collection('profiles')
+      .doc(profileId)
+      .collection('sessions')
+      .doc()
+      .id;
   }
 
 }
