@@ -3,6 +3,8 @@ import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/repository/firebase/firebase_timer_settings_history_repository.dart';
+import 'package:dhyana/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -68,11 +70,12 @@ class Initializer {
     DayRepository dayRepository = FirebaseDayRepository(
       fireStore: firebaseProvider.firestore,
     );
-
     SessionRepository sessionRepository = FirebaseSessionRepository(
       fireStore: firebaseProvider.firestore,
       profileDataProvider: profileDataProvider,
     );
+    TimerSettingsHistoryRepository timerSettingsHistoryRepository =
+      FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);
 
     Repositories repos = Repositories(
       authRepository: authRepository,
@@ -80,6 +83,7 @@ class Initializer {
       presenceRepository: presenceRepository,
       sessionRepository: sessionRepository,
       dayRepository: dayRepository,
+      timerSettingsHistoryRepository: timerSettingsHistoryRepository,
     );
 
     logger.t('Initialize providers');

@@ -8,6 +8,7 @@ enum AppScreen {
   activity,
   settings,
   timerRunning,
+  recentTimerSettings,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -32,6 +33,8 @@ extension AppScreenExtension on AppScreen {
         return '/settings';
       case AppScreen.timerRunning:
         return '/timerRunning';
+      case AppScreen.recentTimerSettings:
+        return '/recentTimerSettings';
     }
   }
 
@@ -55,6 +58,8 @@ extension AppScreenExtension on AppScreen {
         return 'SETTINGS';
       case AppScreen.timerRunning:
         return 'TIMER_RUNNING';
+      case AppScreen.recentTimerSettings:
+        return 'RECENT_TIMER_SETTINGS';
     }
   }
 

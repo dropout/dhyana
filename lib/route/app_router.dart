@@ -115,10 +115,17 @@ class AppRouter {
 
         // Activity
         GoRoute(
-            path: AppScreen.activity.path,
-            name: AppScreen.activity.name,
-            builder: (context, state) => const ActivityScreen(),
-            redirect: _signedInRedirectHook,
+          path: AppScreen.activity.path,
+          name: AppScreen.activity.name,
+          builder: (context, state) => const ActivityScreen(),
+          redirect: _signedInRedirectHook,
+        ),
+
+        GoRoute(
+          path: AppScreen.recentTimerSettings.path,
+          name: AppScreen.recentTimerSettings.name,
+          builder: (context, state) => const TimerSettingsHistoryScreen(),
+          redirect: _signedInRedirectHook,
         ),
 
         // Login

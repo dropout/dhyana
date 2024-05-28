@@ -5,15 +5,15 @@ part 'timer_settings_query_options.freezed.dart';
 part 'timer_settings_query_options.g.dart';
 
 @freezed
-class TimerSettingsQueryOptions with _$TimerSettingsQueryOptions {
+class TimerSettingsHistoryQueryOptions with _$TimerSettingsHistoryQueryOptions {
 
-  const TimerSettingsQueryOptions._();
+  const TimerSettingsHistoryQueryOptions._();
 
-  const factory TimerSettingsQueryOptions({
+  const factory TimerSettingsHistoryQueryOptions({
     @Default(20) int limit,
-  }) = _TimerSettingsQueryOptions;
+  }) = _TimerSettingsHistoryQueryOptions;
 
-  factory TimerSettingsQueryOptions.fromJson(Map<String, Object?> json) =>
-      _$TimerSettingsQueryOptionsFromJson(json);
+  factory TimerSettingsHistoryQueryOptions.fromJson(Map<String, Object?> json) =>
+      _$TimerSettingsHistoryQueryOptionsFromJson(json);
 
 }

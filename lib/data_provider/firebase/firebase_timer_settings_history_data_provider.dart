@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/all.dart';
-import 'package:dhyana/data_provider/timer_settings_data_provider.dart';
+import 'package:dhyana/data_provider/timer_settings_history_data_provider.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/model/timer_settings_query_options.dart';
 
+import 'firebase_data_provider.dart';
 import 'firebase_model_extension.dart';
 
-class FirebaseTimerSettingsDataProvider
+class FirebaseTimerSettingsHistoryDataProvider
   extends FirebaseDataProvider<TimerSettings>
-  implements TimerSettingsDataProvider {
+  implements TimerSettingsHistoryDataProvider {
 
-  FirebaseTimerSettingsDataProvider(
+  FirebaseTimerSettingsHistoryDataProvider(
     FirebaseFirestore fireStore,
     String profileId,
   ) : super(
@@ -25,13 +25,13 @@ class FirebaseTimerSettingsDataProvider
   );
 
   @override
-  Future<List<TimerSettings>> query(TimerSettingsQueryOptions queryOptions) {
+  Future<List<TimerSettings>> query(TimerSettingsHistoryQueryOptions queryOptions) {
     // TODO: implement query
     throw UnimplementedError();
   }
 
   @override
-  Stream<List<TimerSettings>> queryStream(TimerSettingsQueryOptions queryOptions) {
+  Stream<List<TimerSettings>> queryStream(TimerSettingsHistoryQueryOptions queryOptions) {
     // TODO: implement queryStream
     throw UnimplementedError();
   }

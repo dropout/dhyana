@@ -1,4 +1,4 @@
-import 'package:dhyana/data_provider/firebase/firebase_timer_settings_data_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_timer_settings_history_data_provider.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:uuid/uuid.dart';
@@ -11,7 +11,6 @@ class TimerSettingsFactory {
     startingSound = Sound.none,
     endingSound = Sound.none,
   }) {
-
     return TimerSettings(
       id: const Uuid().v4(),
       warmup: warmup,
@@ -28,9 +27,8 @@ class TimerSettingsFactory {
     startingSound = Sound.none,
     endingSound = Sound.none,
   }) {
-
     return TimerSettings(
-      id: FirebaseTimerSettingsDataProvider.generateId(profileId),
+      id: FirebaseTimerSettingsHistoryDataProvider.generateId(profileId),
       warmup: warmup,
       duration: duration,
       startingSound: startingSound,

@@ -14,35 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-TimerSettingsQueryOptions _$TimerSettingsQueryOptionsFromJson(
+TimerSettingsHistoryQueryOptions _$TimerSettingsHistoryQueryOptionsFromJson(
     Map<String, dynamic> json) {
-  return _TimerSettingsQueryOptions.fromJson(json);
+  return _TimerSettingsHistoryQueryOptions.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TimerSettingsQueryOptions {
+mixin _$TimerSettingsHistoryQueryOptions {
   int get limit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TimerSettingsQueryOptionsCopyWith<TimerSettingsQueryOptions> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TimerSettingsHistoryQueryOptionsCopyWith<TimerSettingsHistoryQueryOptions>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TimerSettingsQueryOptionsCopyWith<$Res> {
-  factory $TimerSettingsQueryOptionsCopyWith(TimerSettingsQueryOptions value,
-          $Res Function(TimerSettingsQueryOptions) then) =
-      _$TimerSettingsQueryOptionsCopyWithImpl<$Res, TimerSettingsQueryOptions>;
+abstract class $TimerSettingsHistoryQueryOptionsCopyWith<$Res> {
+  factory $TimerSettingsHistoryQueryOptionsCopyWith(
+          TimerSettingsHistoryQueryOptions value,
+          $Res Function(TimerSettingsHistoryQueryOptions) then) =
+      _$TimerSettingsHistoryQueryOptionsCopyWithImpl<$Res,
+          TimerSettingsHistoryQueryOptions>;
   @useResult
   $Res call({int limit});
 }
 
 /// @nodoc
-class _$TimerSettingsQueryOptionsCopyWithImpl<$Res,
-        $Val extends TimerSettingsQueryOptions>
-    implements $TimerSettingsQueryOptionsCopyWith<$Res> {
-  _$TimerSettingsQueryOptionsCopyWithImpl(this._value, this._then);
+class _$TimerSettingsHistoryQueryOptionsCopyWithImpl<$Res,
+        $Val extends TimerSettingsHistoryQueryOptions>
+    implements $TimerSettingsHistoryQueryOptionsCopyWith<$Res> {
+  _$TimerSettingsHistoryQueryOptionsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,25 +66,25 @@ class _$TimerSettingsQueryOptionsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsQueryOptionsImplCopyWith<$Res>
-    implements $TimerSettingsQueryOptionsCopyWith<$Res> {
-  factory _$$TimerSettingsQueryOptionsImplCopyWith(
-          _$TimerSettingsQueryOptionsImpl value,
-          $Res Function(_$TimerSettingsQueryOptionsImpl) then) =
-      __$$TimerSettingsQueryOptionsImplCopyWithImpl<$Res>;
+abstract class _$$TimerSettingsHistoryQueryOptionsImplCopyWith<$Res>
+    implements $TimerSettingsHistoryQueryOptionsCopyWith<$Res> {
+  factory _$$TimerSettingsHistoryQueryOptionsImplCopyWith(
+          _$TimerSettingsHistoryQueryOptionsImpl value,
+          $Res Function(_$TimerSettingsHistoryQueryOptionsImpl) then) =
+      __$$TimerSettingsHistoryQueryOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int limit});
 }
 
 /// @nodoc
-class __$$TimerSettingsQueryOptionsImplCopyWithImpl<$Res>
-    extends _$TimerSettingsQueryOptionsCopyWithImpl<$Res,
-        _$TimerSettingsQueryOptionsImpl>
-    implements _$$TimerSettingsQueryOptionsImplCopyWith<$Res> {
-  __$$TimerSettingsQueryOptionsImplCopyWithImpl(
-      _$TimerSettingsQueryOptionsImpl _value,
-      $Res Function(_$TimerSettingsQueryOptionsImpl) _then)
+class __$$TimerSettingsHistoryQueryOptionsImplCopyWithImpl<$Res>
+    extends _$TimerSettingsHistoryQueryOptionsCopyWithImpl<$Res,
+        _$TimerSettingsHistoryQueryOptionsImpl>
+    implements _$$TimerSettingsHistoryQueryOptionsImplCopyWith<$Res> {
+  __$$TimerSettingsHistoryQueryOptionsImplCopyWithImpl(
+      _$TimerSettingsHistoryQueryOptionsImpl _value,
+      $Res Function(_$TimerSettingsHistoryQueryOptionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +92,7 @@ class __$$TimerSettingsQueryOptionsImplCopyWithImpl<$Res>
   $Res call({
     Object? limit = null,
   }) {
-    return _then(_$TimerSettingsQueryOptionsImpl(
+    return _then(_$TimerSettingsHistoryQueryOptionsImpl(
       limit: null == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -101,12 +103,13 @@ class __$$TimerSettingsQueryOptionsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TimerSettingsQueryOptionsImpl extends _TimerSettingsQueryOptions
-    with DiagnosticableTreeMixin {
-  const _$TimerSettingsQueryOptionsImpl({this.limit = 20}) : super._();
+class _$TimerSettingsHistoryQueryOptionsImpl
+    extends _TimerSettingsHistoryQueryOptions with DiagnosticableTreeMixin {
+  const _$TimerSettingsHistoryQueryOptionsImpl({this.limit = 20}) : super._();
 
-  factory _$TimerSettingsQueryOptionsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TimerSettingsQueryOptionsImplFromJson(json);
+  factory _$TimerSettingsHistoryQueryOptionsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$TimerSettingsHistoryQueryOptionsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -114,14 +117,14 @@ class _$TimerSettingsQueryOptionsImpl extends _TimerSettingsQueryOptions
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsQueryOptions(limit: $limit)';
+    return 'TimerSettingsHistoryQueryOptions(limit: $limit)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'TimerSettingsQueryOptions'))
+      ..add(DiagnosticsProperty('type', 'TimerSettingsHistoryQueryOptions'))
       ..add(DiagnosticsProperty('limit', limit));
   }
 
@@ -129,7 +132,7 @@ class _$TimerSettingsQueryOptionsImpl extends _TimerSettingsQueryOptions
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsQueryOptionsImpl &&
+            other is _$TimerSettingsHistoryQueryOptionsImpl &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
@@ -140,30 +143,34 @@ class _$TimerSettingsQueryOptionsImpl extends _TimerSettingsQueryOptions
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TimerSettingsQueryOptionsImplCopyWith<_$TimerSettingsQueryOptionsImpl>
-      get copyWith => __$$TimerSettingsQueryOptionsImplCopyWithImpl<
-          _$TimerSettingsQueryOptionsImpl>(this, _$identity);
+  _$$TimerSettingsHistoryQueryOptionsImplCopyWith<
+          _$TimerSettingsHistoryQueryOptionsImpl>
+      get copyWith => __$$TimerSettingsHistoryQueryOptionsImplCopyWithImpl<
+          _$TimerSettingsHistoryQueryOptionsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TimerSettingsQueryOptionsImplToJson(
+    return _$$TimerSettingsHistoryQueryOptionsImplToJson(
       this,
     );
   }
 }
 
-abstract class _TimerSettingsQueryOptions extends TimerSettingsQueryOptions {
-  const factory _TimerSettingsQueryOptions({final int limit}) =
-      _$TimerSettingsQueryOptionsImpl;
-  const _TimerSettingsQueryOptions._() : super._();
+abstract class _TimerSettingsHistoryQueryOptions
+    extends TimerSettingsHistoryQueryOptions {
+  const factory _TimerSettingsHistoryQueryOptions({final int limit}) =
+      _$TimerSettingsHistoryQueryOptionsImpl;
+  const _TimerSettingsHistoryQueryOptions._() : super._();
 
-  factory _TimerSettingsQueryOptions.fromJson(Map<String, dynamic> json) =
-      _$TimerSettingsQueryOptionsImpl.fromJson;
+  factory _TimerSettingsHistoryQueryOptions.fromJson(
+          Map<String, dynamic> json) =
+      _$TimerSettingsHistoryQueryOptionsImpl.fromJson;
 
   @override
   int get limit;
   @override
   @JsonKey(ignore: true)
-  _$$TimerSettingsQueryOptionsImplCopyWith<_$TimerSettingsQueryOptionsImpl>
+  _$$TimerSettingsHistoryQueryOptionsImplCopyWith<
+          _$TimerSettingsHistoryQueryOptionsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

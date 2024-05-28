@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -49,7 +50,13 @@ class App extends StatelessWidget {
         ],
         child: MultiBlocProvider(
           providers: <BlocProvider>[
-            BlocProvider<AuthBloc>(create: (_) => authBloc)
+            BlocProvider<AuthBloc>(create: (_) => authBloc),
+            BlocProvider<TimerSettingsHistoryBloc>(create: (_) {
+              return TimerSettingsHistoryBloc(
+                timerSettingsHistoryRepository: initResult.repositories.timerSettingsHistoryRepository,
+                crashlyticsService: initResult.services.crashlyticsService
+              );
+            }),
           ],
           child: buildApp(context),
         ),

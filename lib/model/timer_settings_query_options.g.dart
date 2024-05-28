@@ -6,14 +6,15 @@ part of 'timer_settings_query_options.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TimerSettingsQueryOptionsImpl _$$TimerSettingsQueryOptionsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$TimerSettingsQueryOptionsImpl(
-      limit: (json['limit'] as num?)?.toInt() ?? 20,
-    );
+_$TimerSettingsHistoryQueryOptionsImpl
+    _$$TimerSettingsHistoryQueryOptionsImplFromJson(
+            Map<String, dynamic> json) =>
+        _$TimerSettingsHistoryQueryOptionsImpl(
+          limit: (json['limit'] as num?)?.toInt() ?? 20,
+        );
 
-Map<String, dynamic> _$$TimerSettingsQueryOptionsImplToJson(
-        _$TimerSettingsQueryOptionsImpl instance) =>
+Map<String, dynamic> _$$TimerSettingsHistoryQueryOptionsImplToJson(
+        _$TimerSettingsHistoryQueryOptionsImpl instance) =>
     <String, dynamic>{
       'limit': instance.limit,
     };
