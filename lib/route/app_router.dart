@@ -133,7 +133,12 @@ class AppRouter {
         GoRoute(
           path: AppScreen.timerSettingsHistory.path,
           name: AppScreen.timerSettingsHistory.name,
-          builder: (context, state) => const TimerSettingsHistoryScreen(),
+          builder: (context, state) {
+            if (state.pathParameters.containsKey('profileId')) {
+              return TimerSettingsHistoryScreen(profileId: state.pathParameters['profileId']!);
+            }
+            throw Exception('Unable to load timer settings history page because no profile id was given.');
+          },
           redirect: _signedInRedirectHook,
         ),
 

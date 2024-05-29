@@ -7,14 +7,34 @@ import 'package:dhyana/widget/util/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TimerSettingsHistoryScreen extends StatelessWidget {
-  const TimerSettingsHistoryScreen({super.key});
+class TimerSettingsHistoryScreen extends StatefulWidget {
+
+  final String profileId;
+
+  const TimerSettingsHistoryScreen({
+    required this.profileId,
+    super.key
+  });
+
+  @override
+  State<TimerSettingsHistoryScreen> createState() => _TimerSettingsHistoryScreenState();
+}
+
+class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen> {
+
+
+  @override
+  void initState() {
+    BlocProvider.of<TimerSettingsHistoryBloc>(context)
+      .add(TimerSettingsHistoryEvent.loadSettingsList(profileId: widget.profileId));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: CustomAppBar(titleText: AppLocalizations.of(context).activity),
+        appBar: CustomAppBar(titleText: AppLocalizations.of(context).timerSettingsHistory),
         extendBodyBehindAppBar: true,
         body: SafeArea(
           child: buildState(context)
@@ -24,21 +44,20 @@ class TimerSettingsHistoryScreen extends StatelessWidget {
 
   Widget buildState(BuildContext context) {
     return BlocBuilder<TimerSettingsHistoryBloc, TimerSettingsHistoryState>(
-        builder: (context, state) {
-          switch (state) {
-            case TimerSettingsHistoryLoaded():
-              return TimerSettingsHistoryList(
-                settingsList: state.timerSettingsList
-              );
-            case TimerSettingsHistoryLoading():
-              return const AppLoadingDisplay();
-            case TimerSettingsHistoryError():
-              return const AppErrorDisplay();
-            default:
-              return const AppErrorDisplay();
-          }
+      builder: (context, state) {
+        switch (state) {
+          case TimerSettingsHistoryLoaded():
+            return TimerSettingsHistoryList(
+              settingsList: state.timerSettingsList
+            );
+          case TimerSettingsHistoryLoading():
+            return const AppLoadingDisplay();
+          case TimerSettingsHistoryError():
+            return const AppErrorDisplay();
+          default:
+            return const AppErrorDisplay();
         }
+      }
     );
   }
-
 }

@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TimerSettingsBlocProvider(
-      initialEvent: LoadTimerSettingsData(timerSettings: timerSettings),
+      initialEvent: TimerSettingsEvent.load(timerSettings: timerSettings),
       child: const HomeScreenContent()
     );
   }
@@ -60,6 +60,7 @@ class HomeScreenContent extends StatelessWidget {
           timerSettings: timerSettings,
         ),
         buildProfileMenu(context),
+        buildTimerSettingsHistoryMenu(context),
       ],
     );
   }
@@ -81,7 +82,7 @@ class HomeScreenContent extends StatelessWidget {
   Widget buildTimerSettingsHistoryMenu(BuildContext context) {
     return const Positioned(
       top: AppThemeData.spacingMd,
-      right: AppThemeData.spacingMd * 3,
+      right: AppThemeData.spacingMd * 6,
       child: TimerSettingsHistoryButton(),
     );
   }

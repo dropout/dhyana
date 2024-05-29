@@ -7,11 +7,10 @@ class TimerSettingsHistoryEvent with _$TimerSettingsHistoryEvent {
 
   const factory TimerSettingsHistoryEvent.saveSettings({
     required TimerSettings timerSettings,
-  }) = SaveTimerSettingsEvent;
+  }) = SaveTimerSettingsHistoryEvent;
 
-  const factory TimerSettingsHistoryEvent.loadSettingsList() =
-    LoadTimerSettingsListEvent;
-
-
+  const factory TimerSettingsHistoryEvent.loadSettingsList({
+    required String profileId,
+  }) = LoadTimerSettingsHistoryEvent;
 
 }

@@ -33,6 +33,7 @@
   "profile": "Profile",
   "activity": "Activity",
   "editProfile": "Edit Profile",
+  "timerSettingsHistory": "Settings history",
   "signOut": "Signout",
 
   "profileFirstnameLabel": "Firstname",

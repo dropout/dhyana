@@ -34,7 +34,7 @@ extension AppScreenExtension on AppScreen {
       case AppScreen.timerRunning:
         return '/timerRunning';
       case AppScreen.timerSettingsHistory:
-        return '/timerSettingsHistory';
+        return '/timerSettingsHistory/:profileId';
     }
   }
 

@@ -20,44 +20,44 @@ mixin _$TimerSettingsHistoryEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(TimerSettings timerSettings) saveSettings,
-    required TResult Function() loadSettingsList,
+    required TResult Function(String profileId) loadSettingsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(TimerSettings timerSettings)? saveSettings,
-    TResult? Function()? loadSettingsList,
+    TResult? Function(String profileId)? loadSettingsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(TimerSettings timerSettings)? saveSettings,
-    TResult Function()? loadSettingsList,
+    TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SaveTimerSettingsEvent value) saveSettings,
-    required TResult Function(LoadTimerSettingsListEvent value)
+    required TResult Function(SaveTimerSettingsHistoryEvent value) saveSettings,
+    required TResult Function(LoadTimerSettingsHistoryEvent value)
         loadSettingsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult? Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult? Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult? Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,7 +122,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(TimerSettings timerSettings) saveSettings,
-    required TResult Function() loadSettingsList,
+    required TResult Function(String profileId) loadSettingsList,
   }) {
     return started();
   }
@@ -132,7 +132,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(TimerSettings timerSettings)? saveSettings,
-    TResult? Function()? loadSettingsList,
+    TResult? Function(String profileId)? loadSettingsList,
   }) {
     return started?.call();
   }
@@ -142,7 +142,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(TimerSettings timerSettings)? saveSettings,
-    TResult Function()? loadSettingsList,
+    TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -155,8 +155,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SaveTimerSettingsEvent value) saveSettings,
-    required TResult Function(LoadTimerSettingsListEvent value)
+    required TResult Function(SaveTimerSettingsHistoryEvent value) saveSettings,
+    required TResult Function(LoadTimerSettingsHistoryEvent value)
         loadSettingsList,
   }) {
     return started(this);
@@ -166,8 +166,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult? Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult? Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult? Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
   }) {
     return started?.call(this);
   }
@@ -176,8 +176,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -192,11 +192,11 @@ abstract class _Started implements TimerSettingsHistoryEvent {
 }
 
 /// @nodoc
-abstract class _$$SaveTimerSettingsEventImplCopyWith<$Res> {
-  factory _$$SaveTimerSettingsEventImplCopyWith(
-          _$SaveTimerSettingsEventImpl value,
-          $Res Function(_$SaveTimerSettingsEventImpl) then) =
-      __$$SaveTimerSettingsEventImplCopyWithImpl<$Res>;
+abstract class _$$SaveTimerSettingsHistoryEventImplCopyWith<$Res> {
+  factory _$$SaveTimerSettingsHistoryEventImplCopyWith(
+          _$SaveTimerSettingsHistoryEventImpl value,
+          $Res Function(_$SaveTimerSettingsHistoryEventImpl) then) =
+      __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({TimerSettings timerSettings});
 
@@ -204,13 +204,13 @@ abstract class _$$SaveTimerSettingsEventImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SaveTimerSettingsEventImplCopyWithImpl<$Res>
+class __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>
     extends _$TimerSettingsHistoryEventCopyWithImpl<$Res,
-        _$SaveTimerSettingsEventImpl>
-    implements _$$SaveTimerSettingsEventImplCopyWith<$Res> {
-  __$$SaveTimerSettingsEventImplCopyWithImpl(
-      _$SaveTimerSettingsEventImpl _value,
-      $Res Function(_$SaveTimerSettingsEventImpl) _then)
+        _$SaveTimerSettingsHistoryEventImpl>
+    implements _$$SaveTimerSettingsHistoryEventImplCopyWith<$Res> {
+  __$$SaveTimerSettingsHistoryEventImplCopyWithImpl(
+      _$SaveTimerSettingsHistoryEventImpl _value,
+      $Res Function(_$SaveTimerSettingsHistoryEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -218,7 +218,7 @@ class __$$SaveTimerSettingsEventImplCopyWithImpl<$Res>
   $Res call({
     Object? timerSettings = null,
   }) {
-    return _then(_$SaveTimerSettingsEventImpl(
+    return _then(_$SaveTimerSettingsHistoryEventImpl(
       timerSettings: null == timerSettings
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
@@ -237,8 +237,9 @@ class __$$SaveTimerSettingsEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
-  const _$SaveTimerSettingsEventImpl({required this.timerSettings});
+class _$SaveTimerSettingsHistoryEventImpl
+    implements SaveTimerSettingsHistoryEvent {
+  const _$SaveTimerSettingsHistoryEventImpl({required this.timerSettings});
 
   @override
   final TimerSettings timerSettings;
@@ -252,7 +253,7 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SaveTimerSettingsEventImpl &&
+            other is _$SaveTimerSettingsHistoryEventImpl &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
@@ -263,16 +264,17 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SaveTimerSettingsEventImplCopyWith<_$SaveTimerSettingsEventImpl>
-      get copyWith => __$$SaveTimerSettingsEventImplCopyWithImpl<
-          _$SaveTimerSettingsEventImpl>(this, _$identity);
+  _$$SaveTimerSettingsHistoryEventImplCopyWith<
+          _$SaveTimerSettingsHistoryEventImpl>
+      get copyWith => __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<
+          _$SaveTimerSettingsHistoryEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(TimerSettings timerSettings) saveSettings,
-    required TResult Function() loadSettingsList,
+    required TResult Function(String profileId) loadSettingsList,
   }) {
     return saveSettings(timerSettings);
   }
@@ -282,7 +284,7 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(TimerSettings timerSettings)? saveSettings,
-    TResult? Function()? loadSettingsList,
+    TResult? Function(String profileId)? loadSettingsList,
   }) {
     return saveSettings?.call(timerSettings);
   }
@@ -292,7 +294,7 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(TimerSettings timerSettings)? saveSettings,
-    TResult Function()? loadSettingsList,
+    TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (saveSettings != null) {
@@ -305,8 +307,8 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SaveTimerSettingsEvent value) saveSettings,
-    required TResult Function(LoadTimerSettingsListEvent value)
+    required TResult Function(SaveTimerSettingsHistoryEvent value) saveSettings,
+    required TResult Function(LoadTimerSettingsHistoryEvent value)
         loadSettingsList,
   }) {
     return saveSettings(this);
@@ -316,8 +318,8 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult? Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult? Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult? Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
   }) {
     return saveSettings?.call(this);
   }
@@ -326,8 +328,8 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (saveSettings != null) {
@@ -337,64 +339,95 @@ class _$SaveTimerSettingsEventImpl implements SaveTimerSettingsEvent {
   }
 }
 
-abstract class SaveTimerSettingsEvent implements TimerSettingsHistoryEvent {
-  const factory SaveTimerSettingsEvent(
+abstract class SaveTimerSettingsHistoryEvent
+    implements TimerSettingsHistoryEvent {
+  const factory SaveTimerSettingsHistoryEvent(
           {required final TimerSettings timerSettings}) =
-      _$SaveTimerSettingsEventImpl;
+      _$SaveTimerSettingsHistoryEventImpl;
 
   TimerSettings get timerSettings;
   @JsonKey(ignore: true)
-  _$$SaveTimerSettingsEventImplCopyWith<_$SaveTimerSettingsEventImpl>
+  _$$SaveTimerSettingsHistoryEventImplCopyWith<
+          _$SaveTimerSettingsHistoryEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadTimerSettingsListEventImplCopyWith<$Res> {
-  factory _$$LoadTimerSettingsListEventImplCopyWith(
-          _$LoadTimerSettingsListEventImpl value,
-          $Res Function(_$LoadTimerSettingsListEventImpl) then) =
-      __$$LoadTimerSettingsListEventImplCopyWithImpl<$Res>;
+abstract class _$$LoadTimerSettingsHistoryEventImplCopyWith<$Res> {
+  factory _$$LoadTimerSettingsHistoryEventImplCopyWith(
+          _$LoadTimerSettingsHistoryEventImpl value,
+          $Res Function(_$LoadTimerSettingsHistoryEventImpl) then) =
+      __$$LoadTimerSettingsHistoryEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String profileId});
 }
 
 /// @nodoc
-class __$$LoadTimerSettingsListEventImplCopyWithImpl<$Res>
+class __$$LoadTimerSettingsHistoryEventImplCopyWithImpl<$Res>
     extends _$TimerSettingsHistoryEventCopyWithImpl<$Res,
-        _$LoadTimerSettingsListEventImpl>
-    implements _$$LoadTimerSettingsListEventImplCopyWith<$Res> {
-  __$$LoadTimerSettingsListEventImplCopyWithImpl(
-      _$LoadTimerSettingsListEventImpl _value,
-      $Res Function(_$LoadTimerSettingsListEventImpl) _then)
+        _$LoadTimerSettingsHistoryEventImpl>
+    implements _$$LoadTimerSettingsHistoryEventImplCopyWith<$Res> {
+  __$$LoadTimerSettingsHistoryEventImplCopyWithImpl(
+      _$LoadTimerSettingsHistoryEventImpl _value,
+      $Res Function(_$LoadTimerSettingsHistoryEventImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? profileId = null,
+  }) {
+    return _then(_$LoadTimerSettingsHistoryEventImpl(
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
-  const _$LoadTimerSettingsListEventImpl();
+class _$LoadTimerSettingsHistoryEventImpl
+    implements LoadTimerSettingsHistoryEvent {
+  const _$LoadTimerSettingsHistoryEventImpl({required this.profileId});
+
+  @override
+  final String profileId;
 
   @override
   String toString() {
-    return 'TimerSettingsHistoryEvent.loadSettingsList()';
+    return 'TimerSettingsHistoryEvent.loadSettingsList(profileId: $profileId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadTimerSettingsListEventImpl);
+            other is _$LoadTimerSettingsHistoryEventImpl &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, profileId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadTimerSettingsHistoryEventImplCopyWith<
+          _$LoadTimerSettingsHistoryEventImpl>
+      get copyWith => __$$LoadTimerSettingsHistoryEventImplCopyWithImpl<
+          _$LoadTimerSettingsHistoryEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(TimerSettings timerSettings) saveSettings,
-    required TResult Function() loadSettingsList,
+    required TResult Function(String profileId) loadSettingsList,
   }) {
-    return loadSettingsList();
+    return loadSettingsList(profileId);
   }
 
   @override
@@ -402,9 +435,9 @@ class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(TimerSettings timerSettings)? saveSettings,
-    TResult? Function()? loadSettingsList,
+    TResult? Function(String profileId)? loadSettingsList,
   }) {
-    return loadSettingsList?.call();
+    return loadSettingsList?.call(profileId);
   }
 
   @override
@@ -412,11 +445,11 @@ class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(TimerSettings timerSettings)? saveSettings,
-    TResult Function()? loadSettingsList,
+    TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (loadSettingsList != null) {
-      return loadSettingsList();
+      return loadSettingsList(profileId);
     }
     return orElse();
   }
@@ -425,8 +458,8 @@ class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SaveTimerSettingsEvent value) saveSettings,
-    required TResult Function(LoadTimerSettingsListEvent value)
+    required TResult Function(SaveTimerSettingsHistoryEvent value) saveSettings,
+    required TResult Function(LoadTimerSettingsHistoryEvent value)
         loadSettingsList,
   }) {
     return loadSettingsList(this);
@@ -436,8 +469,8 @@ class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult? Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult? Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult? Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
   }) {
     return loadSettingsList?.call(this);
   }
@@ -446,8 +479,8 @@ class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SaveTimerSettingsEvent value)? saveSettings,
-    TResult Function(LoadTimerSettingsListEvent value)? loadSettingsList,
+    TResult Function(SaveTimerSettingsHistoryEvent value)? saveSettings,
+    TResult Function(LoadTimerSettingsHistoryEvent value)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (loadSettingsList != null) {
@@ -457,8 +490,16 @@ class _$LoadTimerSettingsListEventImpl implements LoadTimerSettingsListEvent {
   }
 }
 
-abstract class LoadTimerSettingsListEvent implements TimerSettingsHistoryEvent {
-  const factory LoadTimerSettingsListEvent() = _$LoadTimerSettingsListEventImpl;
+abstract class LoadTimerSettingsHistoryEvent
+    implements TimerSettingsHistoryEvent {
+  const factory LoadTimerSettingsHistoryEvent(
+      {required final String profileId}) = _$LoadTimerSettingsHistoryEventImpl;
+
+  String get profileId;
+  @JsonKey(ignore: true)
+  _$$LoadTimerSettingsHistoryEventImplCopyWith<
+          _$LoadTimerSettingsHistoryEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

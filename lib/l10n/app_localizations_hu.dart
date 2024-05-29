@@ -88,6 +88,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get editProfile => 'Profil szerkesztése';
 
   @override
+  String get timerSettingsHistory => 'Legutóbbi beállítások';
+
+  @override
   String get signOut => 'Kijelentkezés';
 
   @override

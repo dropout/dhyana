@@ -1,6 +1,6 @@
 import 'package:logger/logger.dart';
 
-Logger getLogger(String className) {
+Logger getLogger(final String className) {
   return Logger(
     printer: PrefixPrinter(
       PrettyPrinter(

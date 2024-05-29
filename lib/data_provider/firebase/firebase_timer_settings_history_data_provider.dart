@@ -24,17 +24,17 @@ class FirebaseTimerSettingsHistoryDataProvider
       )
   );
 
-  @override
-  Future<List<TimerSettings>> query(TimerSettingsHistoryQueryOptions queryOptions) {
-    // TODO: implement query
-    throw UnimplementedError();
+  Query<TimerSettings> _buildQuery(TimerSettingsHistoryQueryOptions queryOptions) {
+    return collectionRef.limit(queryOptions.limit);
   }
 
   @override
-  Stream<List<TimerSettings>> queryStream(TimerSettingsHistoryQueryOptions queryOptions) {
-    // TODO: implement queryStream
-    throw UnimplementedError();
-  }
+  Future<List<TimerSettings>> query(TimerSettingsHistoryQueryOptions queryOptions) =>
+      buildListFromQuery(_buildQuery(queryOptions));
+
+  @override
+  Stream<List<TimerSettings>> queryStream(TimerSettingsHistoryQueryOptions queryOptions) =>
+    buildStreamFromQuery(_buildQuery(queryOptions));
 
   static String generateId(String profileId) {
     return FirebaseFirestore.instance

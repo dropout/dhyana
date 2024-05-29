@@ -88,6 +88,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editProfile => 'Edit Profile';
 
   @override
+  String get timerSettingsHistory => 'Settings history';
+
+  @override
   String get signOut => 'Signout';
 
   @override
