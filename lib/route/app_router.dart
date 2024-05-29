@@ -78,7 +78,9 @@ class AppRouter {
           name: AppScreen.profile.name,
           builder: (context, state) {
             if (state.pathParameters.containsKey('profileId')) {
-              return ProfileScreen(profileId: state.pathParameters['profileId']!);
+              return ProfileScreen(
+                profileId: state.pathParameters['profileId']!
+              );
             }
             throw Exception('Unable to load profile page because no profile id was given.');
           },
@@ -89,7 +91,14 @@ class AppRouter {
         GoRoute(
           path: AppScreen.profileWizard.path,
           name: AppScreen.profileWizard.name,
-          builder: (context, state) => const ProfileWizardScreen(),
+          builder: (context, state) {
+            if (state.pathParameters.containsKey('profileId')) {
+              return ProfileWizardScreen(
+                profileId: state.pathParameters['profileId']!
+              );
+            }
+            throw Exception('Unable to load profile wizard page because no profile id was given.');
+          },
           redirect: _signedInRedirectHook,
         ),
 
@@ -122,8 +131,8 @@ class AppRouter {
         ),
 
         GoRoute(
-          path: AppScreen.recentTimerSettings.path,
-          name: AppScreen.recentTimerSettings.name,
+          path: AppScreen.timerSettingsHistory.path,
+          name: AppScreen.timerSettingsHistory.name,
           builder: (context, state) => const TimerSettingsHistoryScreen(),
           redirect: _signedInRedirectHook,
         ),

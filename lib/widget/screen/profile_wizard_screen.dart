@@ -9,14 +9,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileWizardScreen extends StatelessWidget {
-  const ProfileWizardScreen({super.key});
+
+  final String profileId;
+
+  const ProfileWizardScreen({
+    required this.profileId,
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ProfileBlocProvider(
-        child: buildBody(context),
+      body: SafeArea(
+        child: ProfileBlocProvider(
+          initialEvent: LoadProfile(profileId: profileId),
+          child: buildBody(context),
+        ),
       )
     );
   }

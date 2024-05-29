@@ -55,6 +55,7 @@ class ProfileButton extends StatelessWidget {
   Widget buildSignedIn(BuildContext context, String userId) {
     return ProfileBlocProvider(
       initialEvent: ProfileEvent.loadProfile(
+        useStream: true,
         profileId: userId,
         onError: (_, __) {
           ScaffoldMessenger.of(context).showSnackBar(

@@ -1,4 +1,5 @@
 import 'package:dhyana/widget/timer/all.dart';
+import 'package:dhyana/widget/timer_settings_history/timer_settings_history_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
@@ -74,6 +75,14 @@ class HomeScreenContent extends StatelessWidget {
           )
         ],
       )
+    );
+  }
+
+  Widget buildTimerSettingsHistoryMenu(BuildContext context) {
+    return const Positioned(
+      top: AppThemeData.spacingMd,
+      right: AppThemeData.spacingMd * 3,
+      child: TimerSettingsHistoryButton(),
     );
   }
 

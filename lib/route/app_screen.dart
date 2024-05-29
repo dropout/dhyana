@@ -8,7 +8,7 @@ enum AppScreen {
   activity,
   settings,
   timerRunning,
-  recentTimerSettings,
+  timerSettingsHistory,
 }
 
 extension AppScreenExtension on AppScreen {
@@ -22,7 +22,7 @@ extension AppScreenExtension on AppScreen {
       case AppScreen.profile:
         return '/profile/:profileId';
       case AppScreen.profileWizard:
-        return '/profileWizard';
+        return '/profileWizard/:profileId';
       case AppScreen.profileStats:
         return '/profileStats/:profileId';
       case AppScreen.editProfile:
@@ -33,8 +33,8 @@ extension AppScreenExtension on AppScreen {
         return '/settings';
       case AppScreen.timerRunning:
         return '/timerRunning';
-      case AppScreen.recentTimerSettings:
-        return '/recentTimerSettings';
+      case AppScreen.timerSettingsHistory:
+        return '/timerSettingsHistory';
     }
   }
 
@@ -58,8 +58,8 @@ extension AppScreenExtension on AppScreen {
         return 'SETTINGS';
       case AppScreen.timerRunning:
         return 'TIMER_RUNNING';
-      case AppScreen.recentTimerSettings:
-        return 'RECENT_TIMER_SETTINGS';
+      case AppScreen.timerSettingsHistory:
+        return 'TIMER_SETTINGS_HISTORY';
     }
   }
 
