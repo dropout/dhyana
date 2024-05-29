@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
@@ -93,7 +94,7 @@ class _ProfileWizardViewState extends State<ProfileWizardView> {
                       child: TextButton(
                         onPressed: () => onSignOut(context),
                         child: Text(
-                          'SIGN OUT',
+                          AppLocalizations.of(context).signOut,
                           style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -118,16 +119,16 @@ class _ProfileWizardViewState extends State<ProfileWizardView> {
     switch (buttonState) {
       case _State.idle:
         return AppButton(
-          text: 'SAVE',
+          text: AppLocalizations.of(context).profileSaveButtonIdle,
           onTap: () => onSave(context),
         );
       case _State.loading:
-        return const AppButton(
-          text: 'SAVING...',
+        return AppButton(
+          text: AppLocalizations.of(context).profileSaveButtonSaving,
         );
       case _State.updated:
         return AppButton(
-          text: 'SAVED!',
+          text: AppLocalizations.of(context).profileSaveButtonSaved,
           bColor: Colors.green.shade600,
         );
     }
