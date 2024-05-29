@@ -26,6 +26,8 @@ mixin _$TimerSettings {
   Duration get duration => throw _privateConstructorUsedError;
   Sound get startingSound => throw _privateConstructorUsedError;
   Sound get endingSound => throw _privateConstructorUsedError;
+  @DateTimeConverter()
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +46,8 @@ abstract class $TimerSettingsCopyWith<$Res> {
       Duration warmup,
       @DurationConverter() Duration duration,
       Sound startingSound,
-      Sound endingSound});
+      Sound endingSound,
+      @DateTimeConverter() DateTime createdAt});
 }
 
 /// @nodoc
@@ -65,6 +68,7 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
     Object? duration = null,
     Object? startingSound = null,
     Object? endingSound = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -87,6 +91,10 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
           ? _value.endingSound
           : endingSound // ignore: cast_nullable_to_non_nullable
               as Sound,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -104,7 +112,8 @@ abstract class _$$TimerSettingsImplCopyWith<$Res>
       Duration warmup,
       @DurationConverter() Duration duration,
       Sound startingSound,
-      Sound endingSound});
+      Sound endingSound,
+      @DateTimeConverter() DateTime createdAt});
 }
 
 /// @nodoc
@@ -123,6 +132,7 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
     Object? duration = null,
     Object? startingSound = null,
     Object? endingSound = null,
+    Object? createdAt = null,
   }) {
     return _then(_$TimerSettingsImpl(
       id: null == id
@@ -145,6 +155,10 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
           ? _value.endingSound
           : endingSound // ignore: cast_nullable_to_non_nullable
               as Sound,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -157,7 +171,8 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
       required this.warmup,
       @DurationConverter() required this.duration,
       required this.startingSound,
-      required this.endingSound})
+      required this.endingSound,
+      @DateTimeConverter() required this.createdAt})
       : super._();
 
   factory _$TimerSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -174,10 +189,13 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
   final Sound startingSound;
   @override
   final Sound endingSound;
+  @override
+  @DateTimeConverter()
+  final DateTime createdAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettings(id: $id, warmup: $warmup, duration: $duration, startingSound: $startingSound, endingSound: $endingSound)';
+    return 'TimerSettings(id: $id, warmup: $warmup, duration: $duration, startingSound: $startingSound, endingSound: $endingSound, createdAt: $createdAt)';
   }
 
   @override
@@ -189,7 +207,8 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('warmup', warmup))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(DiagnosticsProperty('startingSound', startingSound))
-      ..add(DiagnosticsProperty('endingSound', endingSound));
+      ..add(DiagnosticsProperty('endingSound', endingSound))
+      ..add(DiagnosticsProperty('createdAt', createdAt));
   }
 
   @override
@@ -204,13 +223,15 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
             (identical(other.startingSound, startingSound) ||
                 other.startingSound == startingSound) &&
             (identical(other.endingSound, endingSound) ||
-                other.endingSound == endingSound));
+                other.endingSound == endingSound) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, warmup, duration, startingSound, endingSound);
+      runtimeType, id, warmup, duration, startingSound, endingSound, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -228,11 +249,13 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
 
 abstract class _TimerSettings extends TimerSettings {
   const factory _TimerSettings(
-      {required final String id,
-      required final Duration warmup,
-      @DurationConverter() required final Duration duration,
-      required final Sound startingSound,
-      required final Sound endingSound}) = _$TimerSettingsImpl;
+          {required final String id,
+          required final Duration warmup,
+          @DurationConverter() required final Duration duration,
+          required final Sound startingSound,
+          required final Sound endingSound,
+          @DateTimeConverter() required final DateTime createdAt}) =
+      _$TimerSettingsImpl;
   const _TimerSettings._() : super._();
 
   factory _TimerSettings.fromJson(Map<String, dynamic> json) =
@@ -249,6 +272,9 @@ abstract class _TimerSettings extends TimerSettings {
   Sound get startingSound;
   @override
   Sound get endingSound;
+  @override
+  @DateTimeConverter()
+  DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$TimerSettingsImplCopyWith<_$TimerSettingsImpl> get copyWith =>

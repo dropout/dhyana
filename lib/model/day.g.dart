@@ -8,7 +8,7 @@ part of 'day.dart';
 
 _$DayImpl _$$DayImplFromJson(Map<String, dynamic> json) => _$DayImpl(
       id: json['id'] as String,
-      date: const DateTimeConverter().fromJson(json['date'] as Timestamp),
+      date: const DateTimeConverter().fromJson((json['date'] as num).toInt()),
       sessions: (json['sessions'] as List<dynamic>)
           .map((e) => Session.fromJson(e as Map<String, dynamic>))
           .toList(),

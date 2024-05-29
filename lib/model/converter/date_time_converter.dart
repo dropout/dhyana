@@ -1,18 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-class DateTimeConverter implements JsonConverter<DateTime, Timestamp>  {
+class DateTimeConverter implements JsonConverter<DateTime, int>  {
 
   const DateTimeConverter();
 
   @override
-  DateTime fromJson(Timestamp json) {
-    return DateTime.fromMillisecondsSinceEpoch(json.millisecondsSinceEpoch);
+  DateTime fromJson(int millisecondsSinceEpoch) {
+    return DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
   }
 
   @override
-  Timestamp toJson(DateTime object) {
-    return Timestamp.fromDate(object);
+  int toJson(DateTime dateTime) {
+    return dateTime.millisecondsSinceEpoch;
   }
 
 }

@@ -37,12 +37,13 @@ void main() async {
 
     blocTest<TimerSettingsBloc, TimerSettingsState>('can load timersettings from shared preferences',
       build: () {
-        TimerSettings timerSettings = const TimerSettings(
+        TimerSettings timerSettings = TimerSettings(
           id: 'test-id',
-          warmup: Duration(minutes: 1),
-          duration: Duration(minutes: 5),
+          warmup: const Duration(minutes: 1),
+          duration: const Duration(minutes: 5),
           startingSound: Sound.smallBell,
           endingSound: Sound.smallBell,
+          createdAt: DateTime.now(),
         );
         when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
             .thenAnswer((_) => Future.value(timerSettings));
@@ -51,15 +52,16 @@ void main() async {
       act: (bloc) {
         bloc.add(const TimerSettingsEvent.load());
       },
-      expect: ()  => const [
-        TimerSettingsState.loading(),
+      expect: ()  => [
+        const TimerSettingsState.loading(),
         TimerSettingsState.loaded(
           timerSettings: TimerSettings(
             id: 'test-id',
-            warmup: Duration(minutes: 1),
-            duration: Duration(minutes: 5),
+            warmup: const Duration(minutes: 1),
+            duration: const Duration(minutes: 5),
             startingSound: Sound.smallBell,
             endingSound: Sound.smallBell,
+            createdAt: DateTime.now(),
           )
         )
       ],
@@ -73,24 +75,26 @@ void main() async {
           return timerSettingsBloc;
         },
         act: (bloc) {
-          bloc.add(const TimerSettingsEvent.load(
+          bloc.add(TimerSettingsEvent.load(
             timerSettings: TimerSettings(
               id: 'test-id',
-              warmup: Duration(minutes: 5),
-              duration: Duration(minutes: 20),
+              warmup: const Duration(minutes: 5),
+              duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
+              createdAt: DateTime.now(),
             )
           ));
         },
-        expect: ()  => const [
+        expect: ()  => [
           TimerSettingsState.loaded(
             timerSettings: TimerSettings(
               id: 'test-id',
-              warmup: Duration(minutes: 5),
-              duration: Duration(minutes: 20),
+              warmup: const Duration(minutes: 5),
+              duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
+              createdAt: DateTime.now(),
             )
           )
         ],
@@ -102,47 +106,51 @@ void main() async {
     blocTest<TimerSettingsBloc, TimerSettingsState>('can save timersettings to shared preferences',
         build: () {
           when(() => mockTimerSettingsSharedPrefsService.setTimerSettings(
-            const TimerSettings(
+            TimerSettings(
               id: 'test-id',
-              warmup: Duration(minutes: 5),
-              duration: Duration(minutes: 20),
+              warmup: const Duration(minutes: 5),
+              duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
+              createdAt: DateTime.now(),
             )
           )).thenAnswer((_) => Future.value(null));
           return timerSettingsBloc;
         },
         act: (bloc) {
-          bloc.add(const TimerSettingsEvent.changed(
+          bloc.add(TimerSettingsEvent.changed(
             timerSettings: TimerSettings(
               id: 'test-id',
-              warmup: Duration(minutes: 5),
-              duration: Duration(minutes: 20),
+              warmup: const Duration(minutes: 5),
+              duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
+              createdAt: DateTime.now(),
             )
           ));
         },
-        expect: ()  => const [
+        expect: ()  => [
           TimerSettingsState.loaded(
             timerSettings: TimerSettings(
               id: 'test-id',
-              warmup: Duration(minutes: 5),
-              duration: Duration(minutes: 20),
+              warmup: const Duration(minutes: 5),
+              duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
+              createdAt: DateTime.now(),
             )
           )
         ],
         verify: (timerBloc) {
           verifyNever(() => mockTimerSettingsSharedPrefsService.getTimerSettings());
           verify(() => mockTimerSettingsSharedPrefsService.setTimerSettings(
-            const TimerSettings(
+             TimerSettings(
               id: 'test-id',
-              warmup: Duration(minutes: 5),
-              duration: Duration(minutes: 20),
+              warmup: const Duration(minutes: 5),
+              duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
+              createdAt: DateTime.now(),
             )
           ));
         }

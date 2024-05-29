@@ -9,9 +9,10 @@ part of 'session.dart';
 _$SessionImpl _$$SessionImplFromJson(Map<String, dynamic> json) =>
     _$SessionImpl(
       id: json['id'] as String,
-      startTime:
-          const DateTimeConverter().fromJson(json['startTime'] as Timestamp),
-      endTime: const DateTimeConverter().fromJson(json['endTime'] as Timestamp),
+      startTime: const DateTimeConverter()
+          .fromJson((json['startTime'] as num).toInt()),
+      endTime:
+          const DateTimeConverter().fromJson((json['endTime'] as num).toInt()),
       duration:
           const DurationConverter().fromJson((json['duration'] as num).toInt()),
       timerSettings:

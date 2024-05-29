@@ -14,6 +14,8 @@ _$TimerSettingsImpl _$$TimerSettingsImplFromJson(Map<String, dynamic> json) =>
           const DurationConverter().fromJson((json['duration'] as num).toInt()),
       startingSound: $enumDecode(_$SoundEnumMap, json['startingSound']),
       endingSound: $enumDecode(_$SoundEnumMap, json['endingSound']),
+      createdAt: const DateTimeConverter()
+          .fromJson((json['createdAt'] as num).toInt()),
     );
 
 Map<String, dynamic> _$$TimerSettingsImplToJson(_$TimerSettingsImpl instance) =>
@@ -23,6 +25,7 @@ Map<String, dynamic> _$$TimerSettingsImplToJson(_$TimerSettingsImpl instance) =>
       'duration': const DurationConverter().toJson(instance.duration),
       'startingSound': _$SoundEnumMap[instance.startingSound]!,
       'endingSound': _$SoundEnumMap[instance.endingSound]!,
+      'createdAt': const DateTimeConverter().toJson(instance.createdAt),
     };
 
 const _$SoundEnumMap = {

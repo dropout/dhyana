@@ -1,3 +1,4 @@
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dhyana/enum/sound.dart';
@@ -19,6 +20,7 @@ class TimerSettings with _$TimerSettings implements Model {
     @DurationConverter() required Duration duration,
     required Sound startingSound,
     required Sound endingSound,
+    @DateTimeConverter() required DateTime createdAt,
   }) = _TimerSettings;
 
   factory TimerSettings.fromJson(Map<String, Object?> json) =>

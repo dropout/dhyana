@@ -14,8 +14,8 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       photoUrl: json['photoUrl'] as String,
       photoBlurhash: json['photoBlurhash'] as String,
-      signupDate:
-          const DateTimeConverter().fromJson(json['signupDate'] as Timestamp),
+      signupDate: const DateTimeConverter()
+          .fromJson((json['signupDate'] as num).toInt()),
       stats: ProfileStats.fromJson(json['stats'] as Map<String, dynamic>),
       completed: json['completed'] as bool,
     );

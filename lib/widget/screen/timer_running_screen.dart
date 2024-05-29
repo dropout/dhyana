@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
 import 'package:dhyana/widget/bloc_provider/timer_running_bloc_provider.dart';
 import 'package:dhyana/widget/timer/running/timer_running_overlay.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +23,22 @@ class TimerRunningScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return TimerRunningBlocProvider(
       timerSettings: timerSettings,
-      child: const TimerRunningScreenContent(),
+      child: TimerRunningScreenContent(
+        timerSettings: timerSettings,
+      ),
     );
   }
 
 }
 
 class TimerRunningScreenContent extends StatefulWidget {
-  const TimerRunningScreenContent({super.key});
+
+  final TimerSettings timerSettings;
+
+  const TimerRunningScreenContent({
+    required this.timerSettings,
+    super.key,
+  });
 
   @override
   State<TimerRunningScreenContent> createState() => _TimerRunningScreenContentState();
@@ -40,10 +49,24 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
   bool isOverlayEnabled = false;
 
   void _onInit(BuildContext context) {
+
+    // Start the timer
     TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
     timerBloc.add(TimerEvent.started());
+
+    // Show presence
     PresenceBloc presenceBloc = BlocProvider.of<PresenceBloc>(context);
     presenceBloc.add(const PresenceEvent.showPresence());
+
+    // Save the timer settings to timer settings history
+    TimerSettingsHistoryBloc timerSettingsHistoryBloc =
+        BlocProvider.of<TimerSettingsHistoryBloc>(context);
+    timerSettingsHistoryBloc.add(
+        TimerSettingsHistoryEvent.saveSettings(
+          timerSettings: widget.timerSettings
+        )
+    );
+
   }
 
   void Function() _onBackground(BuildContext context) {

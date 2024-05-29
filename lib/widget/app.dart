@@ -54,6 +54,7 @@ class App extends StatelessWidget {
             BlocProvider<TimerSettingsHistoryBloc>(create: (_) {
               return TimerSettingsHistoryBloc(
                 timerSettingsHistoryRepository: initResult.repositories.timerSettingsHistoryRepository,
+                authRepository: initResult.repositories.authRepository,
                 crashlyticsService: initResult.services.crashlyticsService
               );
             }),

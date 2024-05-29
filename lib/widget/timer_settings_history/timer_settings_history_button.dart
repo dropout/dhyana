@@ -22,7 +22,7 @@ class TimerSettingsHistoryButton extends StatelessWidget {
       yes: (context, user) {
         return GestureDetector(
           onTap: () => _onButtonTap(context, user.uid),
-          child: Icon(
+          child: const Icon(
             Icons.history,
             size: 40.0,
             color: Colors.black,

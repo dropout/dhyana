@@ -10,8 +10,8 @@ _$PresenceImpl _$$PresenceImplFromJson(Map<String, dynamic> json) =>
     _$PresenceImpl(
       id: json['id'] as String,
       profile: PublicProfile.fromJson(json['profile'] as Map<String, dynamic>),
-      startedAt:
-          const DateTimeConverter().fromJson(json['startedAt'] as Timestamp),
+      startedAt: const DateTimeConverter()
+          .fromJson((json['startedAt'] as num).toInt()),
     );
 
 Map<String, dynamic> _$$PresenceImplToJson(_$PresenceImpl instance) =>

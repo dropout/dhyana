@@ -17,6 +17,7 @@ class TimerSettingsFactory {
       duration: duration,
       startingSound: startingSound,
       endingSound: endingSound,
+      createdAt: DateTime.now(),
     );
   }
 
@@ -33,6 +34,7 @@ class TimerSettingsFactory {
       duration: duration,
       startingSound: startingSound,
       endingSound: endingSound,
+      createdAt: DateTime.now(),
     );
   }
 
