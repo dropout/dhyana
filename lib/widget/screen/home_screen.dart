@@ -1,17 +1,16 @@
+import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer_settings_history/timer_settings_history_button.dart';
+import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/bloc_provider/timer_settings_bloc_provider.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  // As an initialRoute it will receive timerSettings from initResult
-  // In any other case, the bloc below will load timer settings from shared prefs
   final TimerSettings? timerSettings;
 
   const HomeScreen({
@@ -22,14 +21,37 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TimerSettingsBlocProvider(
-      initialEvent: TimerSettingsEvent.load(timerSettings: timerSettings),
-      child: const HomeScreenContent()
+      onCreateEvent: TimerSettingsEvent.load(timerSettings: timerSettings),
+      child: HomeScreenContent(timerSettings: timerSettings),
     );
   }
+
 }
 
-class HomeScreenContent extends StatelessWidget {
-  const HomeScreenContent({super.key});
+class HomeScreenContent extends StatefulWidget {
+
+  final TimerSettings? timerSettings;
+
+  const HomeScreenContent({
+    this.timerSettings,
+    super.key,
+  });
+
+  @override
+  State<HomeScreenContent> createState() => _HomeScreenContentState();
+}
+
+class _HomeScreenContentState extends State<HomeScreenContent> {
+
+  @override
+  void didUpdateWidget(HomeScreenContent oldWidget) {
+    if (widget.timerSettings != oldWidget.timerSettings) {
+      BlocProvider.of<TimerSettingsBloc>(context).add(
+        TimerSettingsEvent.load(timerSettings: widget.timerSettings)
+      );
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +59,16 @@ class HomeScreenContent extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
-          builder: (BuildContext context, TimerSettingsState state) {
-            switch (state) {
-              case TimerSettingsDataErrorState():
-                return const Text('Error occured');
-              case TimerSettingsDataLoadingState():
-                return const Text('Loading');
-              case TimerSettingsDataLoadedState():
-                return buildLoaded(context, state.timerSettings);
+            builder: (BuildContext context, TimerSettingsState state) {
+              switch (state) {
+                case TimerSettingsDataErrorState():
+                  return const Text('Error occured');
+                case TimerSettingsDataLoadingState():
+                  return const AppLoadingDisplay();
+                case TimerSettingsDataLoadedState():
+                  return buildLoaded(context, state.timerSettings);
+              }
             }
-          }
         ),
       ),
     );
@@ -67,15 +89,15 @@ class HomeScreenContent extends StatelessWidget {
 
   Widget buildProfileMenu(BuildContext context) {
     return const Positioned(
-      top: AppThemeData.spacingMd,
-      right: AppThemeData.spacingMd,
-      child: Wrap(
-        children: [
-          ProfileButton(
-            size: AppThemeData.circleSm,
-          )
-        ],
-      )
+        top: AppThemeData.spacingMd,
+        right: AppThemeData.spacingMd,
+        child: Wrap(
+          children: [
+            ProfileButton(
+              size: AppThemeData.circleSm,
+            )
+          ],
+        )
     );
   }
 

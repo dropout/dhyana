@@ -1,8 +1,8 @@
-import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dhyana/enum/sound.dart';
 
+import 'converter/date_time_or_null_converter.dart';
 import 'converter/duration_converter.dart';
 import 'model.dart';
 
@@ -15,15 +15,38 @@ class TimerSettings with _$TimerSettings implements Model {
   const TimerSettings._();
 
   const factory TimerSettings({
-    required String id,
-    required Duration warmup,
-    @DurationConverter() required Duration duration,
-    required Sound startingSound,
-    required Sound endingSound,
-    @DateTimeConverter() required DateTime createdAt,
+    @DurationConverter() @Default(Duration(minutes: 1)) Duration warmup,
+    @DurationConverter() @Default(Duration(minutes: 10)) Duration duration,
+    @Default(Sound.smallBell) Sound startingSound,
+    @Default(Sound.smallBell) Sound endingSound,
+    @DateTimeOrNullConverter() DateTime? lastUsed,
   }) = _TimerSettings;
 
   factory TimerSettings.fromJson(Map<String, Object?> json) =>
     _$TimerSettingsFromJson(json);
+  
+  factory TimerSettings.fromIdString(String idString) {
+    try {
+      List<String> parts = idString.split('-');
+      Duration warmup = Duration(seconds: int.parse(parts[0], radix: 10));
+      Duration duration = Duration(seconds: int.parse(parts[1], radix: 10));
+      Sound startingSound = Sound.values[int.parse(parts[2], radix: 10)];
+      Sound endingSound = Sound.values[int.parse(parts[3], radix: 10)];
+      return TimerSettings(
+        warmup: warmup,
+        duration: duration,
+        startingSound: startingSound,
+        endingSound: endingSound,
+      );
+    } catch(e, _) {
+      throw Exception('Unable to convert idString: $idString to TimerSettings');
+    }
+  }
+  
+
+  @override
+  String get id {
+    return '${warmup.inSeconds}-${duration.inSeconds}-${startingSound.index}-${endingSound.index}';
+  }
 
 }

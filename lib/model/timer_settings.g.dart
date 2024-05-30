@@ -8,24 +8,29 @@ part of 'timer_settings.dart';
 
 _$TimerSettingsImpl _$$TimerSettingsImplFromJson(Map<String, dynamic> json) =>
     _$TimerSettingsImpl(
-      id: json['id'] as String,
-      warmup: Duration(microseconds: (json['warmup'] as num).toInt()),
-      duration:
-          const DurationConverter().fromJson((json['duration'] as num).toInt()),
-      startingSound: $enumDecode(_$SoundEnumMap, json['startingSound']),
-      endingSound: $enumDecode(_$SoundEnumMap, json['endingSound']),
-      createdAt: const DateTimeConverter()
-          .fromJson((json['createdAt'] as num).toInt()),
+      warmup: json['warmup'] == null
+          ? const Duration(minutes: 1)
+          : const DurationConverter().fromJson((json['warmup'] as num).toInt()),
+      duration: json['duration'] == null
+          ? const Duration(minutes: 10)
+          : const DurationConverter()
+              .fromJson((json['duration'] as num).toInt()),
+      startingSound:
+          $enumDecodeNullable(_$SoundEnumMap, json['startingSound']) ??
+              Sound.smallBell,
+      endingSound: $enumDecodeNullable(_$SoundEnumMap, json['endingSound']) ??
+          Sound.smallBell,
+      lastUsed: const DateTimeOrNullConverter()
+          .fromJson((json['lastUsed'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$$TimerSettingsImplToJson(_$TimerSettingsImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'warmup': instance.warmup.inMicroseconds,
+      'warmup': const DurationConverter().toJson(instance.warmup),
       'duration': const DurationConverter().toJson(instance.duration),
       'startingSound': _$SoundEnumMap[instance.startingSound]!,
       'endingSound': _$SoundEnumMap[instance.endingSound]!,
-      'createdAt': const DateTimeConverter().toJson(instance.createdAt),
+      'lastUsed': const DateTimeOrNullConverter().toJson(instance.lastUsed),
     };
 
 const _$SoundEnumMap = {

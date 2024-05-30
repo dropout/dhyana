@@ -20,14 +20,14 @@ TimerSettings _$TimerSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TimerSettings {
-  String get id => throw _privateConstructorUsedError;
+  @DurationConverter()
   Duration get warmup => throw _privateConstructorUsedError;
   @DurationConverter()
   Duration get duration => throw _privateConstructorUsedError;
   Sound get startingSound => throw _privateConstructorUsedError;
   Sound get endingSound => throw _privateConstructorUsedError;
-  @DateTimeConverter()
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  @DateTimeOrNullConverter()
+  DateTime? get lastUsed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,12 +42,11 @@ abstract class $TimerSettingsCopyWith<$Res> {
       _$TimerSettingsCopyWithImpl<$Res, TimerSettings>;
   @useResult
   $Res call(
-      {String id,
-      Duration warmup,
+      {@DurationConverter() Duration warmup,
       @DurationConverter() Duration duration,
       Sound startingSound,
       Sound endingSound,
-      @DateTimeConverter() DateTime createdAt});
+      @DateTimeOrNullConverter() DateTime? lastUsed});
 }
 
 /// @nodoc
@@ -63,18 +62,13 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? warmup = null,
     Object? duration = null,
     Object? startingSound = null,
     Object? endingSound = null,
-    Object? createdAt = null,
+    Object? lastUsed = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       warmup: null == warmup
           ? _value.warmup
           : warmup // ignore: cast_nullable_to_non_nullable
@@ -91,10 +85,10 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
           ? _value.endingSound
           : endingSound // ignore: cast_nullable_to_non_nullable
               as Sound,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      lastUsed: freezed == lastUsed
+          ? _value.lastUsed
+          : lastUsed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -108,12 +102,11 @@ abstract class _$$TimerSettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      Duration warmup,
+      {@DurationConverter() Duration warmup,
       @DurationConverter() Duration duration,
       Sound startingSound,
       Sound endingSound,
-      @DateTimeConverter() DateTime createdAt});
+      @DateTimeOrNullConverter() DateTime? lastUsed});
 }
 
 /// @nodoc
@@ -127,18 +120,13 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? warmup = null,
     Object? duration = null,
     Object? startingSound = null,
     Object? endingSound = null,
-    Object? createdAt = null,
+    Object? lastUsed = freezed,
   }) {
     return _then(_$TimerSettingsImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       warmup: null == warmup
           ? _value.warmup
           : warmup // ignore: cast_nullable_to_non_nullable
@@ -155,10 +143,10 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
           ? _value.endingSound
           : endingSound // ignore: cast_nullable_to_non_nullable
               as Sound,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      lastUsed: freezed == lastUsed
+          ? _value.lastUsed
+          : lastUsed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -167,35 +155,37 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
   const _$TimerSettingsImpl(
-      {required this.id,
-      required this.warmup,
-      @DurationConverter() required this.duration,
-      required this.startingSound,
-      required this.endingSound,
-      @DateTimeConverter() required this.createdAt})
+      {@DurationConverter() this.warmup = const Duration(minutes: 1),
+      @DurationConverter() this.duration = const Duration(minutes: 10),
+      this.startingSound = Sound.smallBell,
+      this.endingSound = Sound.smallBell,
+      @DateTimeOrNullConverter() this.lastUsed})
       : super._();
 
   factory _$TimerSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$TimerSettingsImplFromJson(json);
 
   @override
-  final String id;
-  @override
+  @JsonKey()
+  @DurationConverter()
   final Duration warmup;
   @override
+  @JsonKey()
   @DurationConverter()
   final Duration duration;
   @override
+  @JsonKey()
   final Sound startingSound;
   @override
+  @JsonKey()
   final Sound endingSound;
   @override
-  @DateTimeConverter()
-  final DateTime createdAt;
+  @DateTimeOrNullConverter()
+  final DateTime? lastUsed;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettings(id: $id, warmup: $warmup, duration: $duration, startingSound: $startingSound, endingSound: $endingSound, createdAt: $createdAt)';
+    return 'TimerSettings(warmup: $warmup, duration: $duration, startingSound: $startingSound, endingSound: $endingSound, lastUsed: $lastUsed)';
   }
 
   @override
@@ -203,12 +193,11 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TimerSettings'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('warmup', warmup))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(DiagnosticsProperty('startingSound', startingSound))
       ..add(DiagnosticsProperty('endingSound', endingSound))
-      ..add(DiagnosticsProperty('createdAt', createdAt));
+      ..add(DiagnosticsProperty('lastUsed', lastUsed));
   }
 
   @override
@@ -216,7 +205,6 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimerSettingsImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.warmup, warmup) || other.warmup == warmup) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
@@ -224,14 +212,14 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
                 other.startingSound == startingSound) &&
             (identical(other.endingSound, endingSound) ||
                 other.endingSound == endingSound) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.lastUsed, lastUsed) ||
+                other.lastUsed == lastUsed));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, warmup, duration, startingSound, endingSound, createdAt);
+      runtimeType, warmup, duration, startingSound, endingSound, lastUsed);
 
   @JsonKey(ignore: true)
   @override
@@ -249,12 +237,11 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
 
 abstract class _TimerSettings extends TimerSettings {
   const factory _TimerSettings(
-          {required final String id,
-          required final Duration warmup,
-          @DurationConverter() required final Duration duration,
-          required final Sound startingSound,
-          required final Sound endingSound,
-          @DateTimeConverter() required final DateTime createdAt}) =
+          {@DurationConverter() final Duration warmup,
+          @DurationConverter() final Duration duration,
+          final Sound startingSound,
+          final Sound endingSound,
+          @DateTimeOrNullConverter() final DateTime? lastUsed}) =
       _$TimerSettingsImpl;
   const _TimerSettings._() : super._();
 
@@ -262,8 +249,7 @@ abstract class _TimerSettings extends TimerSettings {
       _$TimerSettingsImpl.fromJson;
 
   @override
-  String get id;
-  @override
+  @DurationConverter()
   Duration get warmup;
   @override
   @DurationConverter()
@@ -273,8 +259,8 @@ abstract class _TimerSettings extends TimerSettings {
   @override
   Sound get endingSound;
   @override
-  @DateTimeConverter()
-  DateTime get createdAt;
+  @DateTimeOrNullConverter()
+  DateTime? get lastUsed;
   @override
   @JsonKey(ignore: true)
   _$$TimerSettingsImplCopyWith<_$TimerSettingsImpl> get copyWith =>

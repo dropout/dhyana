@@ -9,11 +9,11 @@ import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 class TimerSettingsBlocProvider extends StatelessWidget {
 
   final Widget child;
-  final TimerSettingsEvent? initialEvent;
+  final TimerSettingsEvent? onCreateEvent;
 
   const TimerSettingsBlocProvider({
     required this.child,
-    this.initialEvent,
+    this.onCreateEvent,
     super.key
   });
 
@@ -30,8 +30,8 @@ class TimerSettingsBlocProvider extends StatelessWidget {
             crashlyticsService: crashlyticsService,
           )
         );
-        if (initialEvent != null) {
-          timerSettingsBloc.add(initialEvent!);
+        if (onCreateEvent != null) {
+          timerSettingsBloc.add(onCreateEvent!);
         }
         return timerSettingsBloc;
       },

@@ -18,7 +18,13 @@ class FirebaseTimerSettingsHistoryRepository
         fireStore,
         profileId,
       );
-    await timerSettingsHistoryDataProvider.create(timerSettings);
+
+    bool exists = await timerSettingsHistoryDataProvider.exists(timerSettings.id);
+    if (exists) {
+      await timerSettingsHistoryDataProvider.update(timerSettings);
+    } else {
+      await timerSettingsHistoryDataProvider.create(timerSettings);
+    }
   }
 
   @override
@@ -33,7 +39,6 @@ class FirebaseTimerSettingsHistoryRepository
       );
     return timerSettingsHistoryDataProvider.query(queryOptions);
   }
-
 
   @override
   Stream<List<TimerSettings>> queryStream(

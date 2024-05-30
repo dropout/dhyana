@@ -22,6 +22,12 @@ class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
     return snapshot.data()!;
   }
 
+  Future<bool> exists(String id) async {
+    DocumentReference<M> docRef = collectionRef.doc(id);
+    DocumentSnapshot<M> docSnapshot = await docRef.get();
+    return docSnapshot.exists;
+  }
+
   @override
   Stream<M> readStream(String id) {
     return collectionRef.doc(id).snapshots()

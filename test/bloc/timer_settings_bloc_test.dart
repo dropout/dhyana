@@ -38,12 +38,11 @@ void main() async {
     blocTest<TimerSettingsBloc, TimerSettingsState>('can load timersettings from shared preferences',
       build: () {
         TimerSettings timerSettings = TimerSettings(
-          id: 'test-id',
           warmup: const Duration(minutes: 1),
           duration: const Duration(minutes: 5),
           startingSound: Sound.smallBell,
           endingSound: Sound.smallBell,
-          createdAt: DateTime.now(),
+          lastUsed: DateTime.now(),
         );
         when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
             .thenAnswer((_) => Future.value(timerSettings));
@@ -56,12 +55,11 @@ void main() async {
         const TimerSettingsState.loading(),
         TimerSettingsState.loaded(
           timerSettings: TimerSettings(
-            id: 'test-id',
             warmup: const Duration(minutes: 1),
             duration: const Duration(minutes: 5),
             startingSound: Sound.smallBell,
             endingSound: Sound.smallBell,
-            createdAt: DateTime.now(),
+            lastUsed: DateTime.now(),
           )
         )
       ],
@@ -77,24 +75,22 @@ void main() async {
         act: (bloc) {
           bloc.add(TimerSettingsEvent.load(
             timerSettings: TimerSettings(
-              id: 'test-id',
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              createdAt: DateTime.now(),
+              lastUsed: DateTime.now(),
             )
           ));
         },
         expect: ()  => [
           TimerSettingsState.loaded(
             timerSettings: TimerSettings(
-              id: 'test-id',
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              createdAt: DateTime.now(),
+              lastUsed: DateTime.now(),
             )
           )
         ],
@@ -107,12 +103,11 @@ void main() async {
         build: () {
           when(() => mockTimerSettingsSharedPrefsService.setTimerSettings(
             TimerSettings(
-              id: 'test-id',
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              createdAt: DateTime.now(),
+              lastUsed: DateTime.now(),
             )
           )).thenAnswer((_) => Future.value(null));
           return timerSettingsBloc;
@@ -120,24 +115,21 @@ void main() async {
         act: (bloc) {
           bloc.add(TimerSettingsEvent.changed(
             timerSettings: TimerSettings(
-              id: 'test-id',
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              createdAt: DateTime.now(),
+              lastUsed: DateTime.now(),
             )
           ));
         },
         expect: ()  => [
           TimerSettingsState.loaded(
-            timerSettings: TimerSettings(
-              id: 'test-id',
-              warmup: const Duration(minutes: 5),
+            timerSettings: TimerSettings(warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              createdAt: DateTime.now(),
+              lastUsed: DateTime.now(),
             )
           )
         ],
@@ -145,12 +137,11 @@ void main() async {
           verifyNever(() => mockTimerSettingsSharedPrefsService.getTimerSettings());
           verify(() => mockTimerSettingsSharedPrefsService.setTimerSettings(
              TimerSettings(
-              id: 'test-id',
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              createdAt: DateTime.now(),
+              lastUsed: DateTime.now(),
             )
           ));
         }

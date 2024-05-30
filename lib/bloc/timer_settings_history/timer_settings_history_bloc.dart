@@ -63,7 +63,10 @@ class TimerSettingsHistoryBloc
         return;
       }
       await timerSettingsHistoryRepository.saveSettings(
-        user.uid, event.timerSettings
+        user.uid,
+        event.timerSettings.copyWith(
+          lastUsed: DateTime.now(),
+        )
       );
       logger.t('Timer settings successfully saved');
     } catch (e, stack) {
