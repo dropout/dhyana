@@ -105,6 +105,12 @@ abstract class AppLocalizations {
   /// **'Rendben'**
   String get okay;
 
+  /// No description provided for @warmup.
+  ///
+  /// In hu, this message translates to:
+  /// **'Felkészülés'**
+  String get warmup;
+
   /// No description provided for @inputWarmupLabel.
   ///
   /// In hu, this message translates to:
@@ -321,11 +327,23 @@ abstract class AppLocalizations {
   /// **'Statisztika'**
   String get profileStats;
 
-  /// No description provided for @testPlural.
+  /// No description provided for @minutesPlural.
   ///
   /// In hu, this message translates to:
-  /// **'{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}'**
-  String testPlural(num count);
+  /// **'{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}'**
+  String minutesPlural(num count);
+
+  /// No description provided for @daysPlural.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}'**
+  String daysPlural(num count);
+
+  /// No description provided for @consecutiveDaysPlural.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
+  String consecutiveDaysPlural(num count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

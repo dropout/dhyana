@@ -77,9 +77,9 @@ class App extends StatelessWidget {
       routerConfig: appRouter.router,
       supportedLocales: const [
         Locale('hu', 'HU'),
-        // Locale('en', 'EN')
+        Locale('en', 'EN')
       ],
-      locale: const Locale('hu', 'HU'),
+      // locale: const Locale('hu', 'HU'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

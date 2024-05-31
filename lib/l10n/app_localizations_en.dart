@@ -13,6 +13,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get okay => 'Okay';
 
   @override
+  String get warmup => 'Warmup';
+
+  @override
   String get inputWarmupLabel => 'Warmup';
 
   @override
@@ -121,16 +124,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileStats => 'Statistics';
 
   @override
-  String testPlural(num count) {
+  String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count sampleOther',
-      many: '$count sampleMany',
-      few: '$count sampleFew',
-      two: '$count sample2',
-      one: '$count sample1',
-      zero: '$count sample0',
+      other: '$count minutes',
+      many: '$count minutes',
+      few: '$count minutes',
+      two: '$count minutes',
+      one: '$count minute',
+      zero: '$count minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String daysPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      many: '$count days',
+      few: '$count days',
+      two: '$count days',
+      one: '$count day',
+      zero: '$count day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String consecutiveDaysPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count consecutive days',
+      many: '$count consecutive days',
+      few: '$count consecutive days',
+      two: '$count consecutive days',
+      one: '$count day',
+      zero: '$count day',
     );
     return '$_temp0';
   }

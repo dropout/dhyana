@@ -39,8 +39,6 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
         Text('consecutive days',
             style: Theme.of(context).textTheme.bodyLarge
         ),
-        Text(AppLocalizations.of(context).testPlural(1)),
-        Text(AppLocalizations.of(context).testPlural(2)),
       ],
     );
   }

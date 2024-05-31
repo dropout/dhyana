@@ -1,6 +1,7 @@
 {
   "minute": "Minute",
   "okay": "Okay",
+  "warmup": "Warmup",
 
   "inputWarmupLabel": "Warmup",
   "inputStartingSoundLabel": "Starting sound",
@@ -49,6 +50,9 @@
 
   "profileStats": "Statistics",
 
-  "testPlural": "{count,plural, =0{{count} sample0} =1{{count} sample1} =2{{count} sample2} few{{count} sampleFew} many{{count} sampleMany} other{{count} sampleOther}}"
+
+  "minutesPlural": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
+  "daysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} days} few{{count} days} many{{count} days} other{{count} days}}",
+  "consecutiveDaysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}"
 
 }

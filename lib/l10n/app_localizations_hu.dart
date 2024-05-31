@@ -13,6 +13,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get okay => 'Rendben';
 
   @override
+  String get warmup => 'Felkészülés';
+
+  @override
   String get inputWarmupLabel => 'Felkészülés';
 
   @override
@@ -121,16 +124,46 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileStats => 'Statisztika';
 
   @override
-  String testPlural(num count) {
+  String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count sampleOther',
-      many: '$count sampleMany',
-      few: '$count sampleFew',
-      two: '$count sample2',
-      one: '$count sample1',
-      zero: '$count sample0',
+      other: '$count perc',
+      many: '$count perc',
+      few: '$count perc',
+      two: '$count perc',
+      one: '$count perc',
+      zero: '$count perc',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String daysPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count nap',
+      many: '$count nap',
+      few: '$count nap',
+      two: '$count nap',
+      one: '$count nap',
+      zero: '$count nap',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String consecutiveDaysPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count egymás utáni nap',
+      many: '$count egymás utáni nap',
+      few: '$count egymás utáni nap',
+      two: '$count egymás utáni nap',
+      one: '$count nap',
+      zero: '$count nap',
     );
     return '$_temp0';
   }
