@@ -2,7 +2,7 @@ abstract class AnalyticsService {
 
   void logEvent({
     required String name,
-    Map<String, dynamic>? parameters,
+    Map<String, Object>? parameters,
   });
 
   void logAppOpen();

@@ -9,7 +9,7 @@ class FirebaseAnalyticsService extends AnalyticsService {
   FirebaseAnalyticsService(this.analytics);
 
   @override
-  void logEvent({required String name, Map<String, dynamic>? parameters}) {
+  void logEvent({required String name, Map<String, Object>? parameters}) {
     analytics.logEvent(
       name: name,
       parameters: parameters,

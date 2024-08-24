@@ -56,6 +56,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
           );
 
           // Maybe we don't need to display this error?
+          // TODO: error when called Unhandled Exception: Bad state: add(_$DaysErrorEventImpl) was called without a registered event handler.
           add(const DaysEvent.error());
         });
       } else {

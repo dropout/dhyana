@@ -1,13 +1,12 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
+import 'package:dhyana/init/init_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:dhyana/init/initalizer.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/all.dart';
-import 'package:dhyana/route/app_router.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
 class App extends StatelessWidget {

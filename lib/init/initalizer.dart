@@ -14,6 +14,8 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/logger_factory.dart';
 
+import 'init_result.dart';
+
 /*
   Manages the initialization process.
   Creates and configures providers, services and all the necessary objects used
@@ -132,20 +134,3 @@ class Initializer {
 
 }
 
-class InitResult {
-
-  final TimerSettings timerSettings;
-  final Services services;
-  final Repositories repositories;
-  final List<Provider> providers;
-  final User? user;
-
-  InitResult({
-    required this.timerSettings,
-    required this.services,
-    required this.repositories,
-    required this.providers,
-    this.user
-  });
-
-}

@@ -1,4 +1,3 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:flutter/material.dart';
