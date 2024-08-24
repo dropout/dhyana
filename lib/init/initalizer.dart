@@ -5,6 +5,7 @@ import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/repository/firebase/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
+import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,11 @@ class Initializer {
       crashlyticsService: crashlyticsService,
       resourceResolver: resourceResolver,
       timerSettingsSharedPrefsService: timerSettingsSharedPrefsService,
+      shaderService: ShaderService(),
     );
+
+    logger.t('Preload shaders');
+    await services.shaderService.loadShader('shaders/linear_gradient_mask.frag');
 
     logger.t('Initialize repositories');
     AuthRepository authRepository = FirebaseAuthRepository(

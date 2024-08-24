@@ -4,7 +4,7 @@ import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/init/init_result.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/all.dart';
-import 'package:dhyana/transition/masked_gradient_transition.dart';
+import 'package:dhyana/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:flutter/foundation.dart';
@@ -53,22 +53,29 @@ class AppRouter {
           name: AppScreen.timerRunning.name,
           pageBuilder: (context, state) {
             TimerSettings timerSettings = state.extra! as TimerSettings;
+
+            Duration duration = const Duration(milliseconds: 512);
             return CustomTransitionPage(
-              child: TimerRunningScreen(
-                timerSettings: timerSettings
-              ),
-              transitionsBuilder: (
-                BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child
-              ) {
-                return MaskedGradientTransition(
-                  progress: animation,
-                  child: child,
-                );
-              }
+                transitionDuration: duration,
+                reverseTransitionDuration: duration,
+                child: TimerRunningScreen(
+                    key: state.pageKey,
+                    timerSettings: timerSettings
+                ),
+                transitionsBuilder: (
+                    BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child,
+                    ) {
+                  return LinearGradientMaskTransition(
+                    progress: animation,
+                    shader: initResult.services.shaderService.get('shaders/linear_gradient_mask.frag'),
+                    child: child,
+                  );
+                }
             );
+
           },
         ),
 
