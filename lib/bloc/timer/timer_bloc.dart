@@ -122,7 +122,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         stage = TimerStage.timer;
       }
       emit(state.copyWith(
-        startTime: durationTimer.startTime,
+        startTime: DateTime.now(),
         timerStatus: TimerStatus.running,
         timerStage: stage,
       ));
