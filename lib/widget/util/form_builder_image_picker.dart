@@ -209,6 +209,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           color: Colors.grey.shade400,
         ),
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
             Positioned(
               right: 0,

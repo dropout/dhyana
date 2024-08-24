@@ -19,18 +19,16 @@ class LinearGradientMaskTransition extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRect(
-      child: ShaderMask(
-        blendMode: BlendMode.xor,
-        shaderCallback: (rect) {
-          shader.setFloatUniforms((setter) {
-            setter.setVector(vm.Vector2(rect.width, rect.height));
-            setter.setFloat(progress.value);
-          });
-          return shader;
-        },
-        child: child,
-      ),
+    return ShaderMask(
+      blendMode: BlendMode.xor,
+      shaderCallback: (rect) {
+        shader.setFloatUniforms((setter) {
+          setter.setVector(vm.Vector2(rect.width, rect.height));
+          setter.setFloat(progress.value);
+        });
+        return shader;
+      },
+      child: child,
     );
   }
 

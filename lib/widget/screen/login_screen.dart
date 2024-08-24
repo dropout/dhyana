@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
+          clipBehavior: Clip.none,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.start,

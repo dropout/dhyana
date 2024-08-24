@@ -73,6 +73,7 @@ class WeeklyPerformance extends StatelessWidget {
     }
 
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         AnimatedContainer(
           duration: const Duration(milliseconds: 512),

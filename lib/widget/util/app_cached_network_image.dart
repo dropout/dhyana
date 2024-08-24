@@ -61,6 +61,7 @@ class AppCachedNetworkImage extends StatelessWidget {
   Widget buildError(BuildContext context, String blurHash) {
     return Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         Image(
           fit: BoxFit.cover,

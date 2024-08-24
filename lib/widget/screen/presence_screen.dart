@@ -19,6 +19,7 @@ class PresenceScreen extends StatelessWidget {
   Widget buildBody(BuildContext context) {
     return const Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         Column(
           children: [

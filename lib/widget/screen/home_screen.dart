@@ -77,6 +77,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
     return Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         TimerSettingsView(
           timerSettings: timerSettings,

@@ -43,6 +43,7 @@ class TimerRunningTime extends StatelessWidget {
       height: 288,
       child: Stack(
         alignment: Alignment.center,
+        clipBehavior: Clip.none,
         children: [
           Center(
             child: Text(

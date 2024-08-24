@@ -36,6 +36,7 @@ class AppErrorDisplay extends StatelessWidget {
       color: Theme.of(context).colorScheme.error,
       child: Stack(
           fit: StackFit.expand,
+          clipBehavior: Clip.none,
           children: [
             Column(
                 mainAxisSize: MainAxisSize.max,

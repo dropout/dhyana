@@ -55,6 +55,7 @@ class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBinding
         builder: (BuildContext context, BoxConstraints constraints) {
           return Stack(
             fit: StackFit.expand,
+            clipBehavior: Clip.none,
             children: [
               Positioned(
                 top: constraints.constrainHeight() / 2 - 88,

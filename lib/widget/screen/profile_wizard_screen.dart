@@ -48,6 +48,7 @@ class ProfileWizardScreen extends StatelessWidget {
   Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
     return Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         const AppBackButton(),
         Column(

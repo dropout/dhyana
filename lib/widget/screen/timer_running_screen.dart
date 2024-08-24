@@ -93,6 +93,7 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
           backgroundColor: Colors.black,
           body: Stack(
             fit: StackFit.expand,
+            clipBehavior: Clip.none,
             children: [
               buildBody(context, state),
               buildOverlay(context, state),
@@ -123,6 +124,7 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
+          clipBehavior: Clip.none,
           children: [
             buildOverlayClickTarget(context),
             SafeArea(
@@ -143,6 +145,7 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
                     return Stack(
                       alignment: Alignment.center,
                       fit: StackFit.expand,
+                      clipBehavior: Clip.none,
                       children: <Widget>[
                         Positioned.fill(
                           key: secondKey,

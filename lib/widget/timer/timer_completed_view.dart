@@ -61,6 +61,7 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
 
     return Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         SingleChildScrollView(
           child: SignedIn(
@@ -86,6 +87,7 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
       alignment: Alignment.bottomCenter,
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
+        clipBehavior: Clip.none,
         children: [
           Container(
             height: 96,
