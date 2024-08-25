@@ -3,7 +3,9 @@ import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -59,6 +61,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         },
       ));
     }
+    context.hapticsTap();
   }
 
   void onSignOut(BuildContext context) {

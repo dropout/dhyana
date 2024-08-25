@@ -1,4 +1,5 @@
 import 'package:dhyana/route/app_screen.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,7 @@ class TimerSettingsHistoryButton extends StatelessWidget {
         'profileId': profileId,
       }
     );
+    context.hapticsTap();
   }
 
   @override

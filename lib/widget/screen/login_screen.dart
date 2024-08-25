@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/service/analytics_service.dart';
 import 'package:dhyana/util/launch_url.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -10,7 +10,6 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -115,8 +114,8 @@ class LoginScreen extends StatelessWidget {
         }
       ),
     ));
-    Provider.of<AnalyticsService>(context, listen: false)
-      .logEvent(name: 'login_with_google_button_pressed');
+    context.logEvent(name: 'login_with_google_button_pressed');
+    context.hapticsTap();
   }
 
   void _onLoginWithAppleTap(BuildContext context) {
@@ -128,8 +127,8 @@ class LoginScreen extends StatelessWidget {
         }
       ),
     ));
-    Provider.of<AnalyticsService>(context, listen: false)
-      .logEvent(name: 'login_with_apple_button_pressed');
+    context.logEvent(name: 'login_with_apple_button_pressed');
+    context.hapticsTap();
   }
 
   Widget buildLegalText(BuildContext context) {
@@ -177,10 +176,14 @@ class LoginScreen extends StatelessWidget {
 
   void _onTermsTap(BuildContext context) {
     urlLauncher.launchInAppWebView('https://google.com');
+    context.logEvent(name: 'view_tou_pressed');
+    context.hapticsTap();
   }
 
   void _onPrivacyTap(BuildContext context) {
     urlLauncher.launchInAppWebView('https://google.com');
+    context.logEvent(name: 'view_privacy_policy_pressed');
+    context.hapticsTap();
   }
 
 }

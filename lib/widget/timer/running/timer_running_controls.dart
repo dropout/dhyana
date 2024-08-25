@@ -1,4 +1,6 @@
 import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/widget/profile/profile_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,25 +86,22 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
     );
   }
 
-  void _onPlay(BuildContext context) {
+  void _onResume(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(TimerEvent.resumed());
-    Provider.of<AnalyticsService>(context, listen: false).logEvent(
-      name: 'timer_resume',
-    );
+    context.logEvent(name: 'timer_resume');
+    context.hapticsTap();
   }
 
   void _onDiscard(BuildContext context) {
     GoRouter.of(context).pop(AppScreen.home.name);
-    Provider.of<AnalyticsService>(context, listen: false).logEvent(
-      name: 'timer_discard',
-    );
+    context.logEvent(name: 'timer_discard');
+    context.hapticsTap();
   }
 
   void _onFinish(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(TimerEvent.finished());
-    Provider.of<AnalyticsService>(context, listen: false).logEvent(
-      name: 'timer_finish',
-    );
+    context.logEvent(name: 'timer_finish');
+    context.hapticsTap();
   }
 
   @override
@@ -217,7 +216,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
-          onPressed: () => _onPlay(context),
+          onPressed: () => _onResume(context),
           icon: const Icon(Icons.play_arrow_rounded,
             color: Colors.white,
           )
@@ -238,7 +237,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
-          onPressed: () => _onPlay(context),
+          onPressed: () => _onResume(context),
           icon: const Icon(Icons.play_arrow_rounded,
             color: Colors.white,
           )
@@ -248,7 +247,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
-          onPressed: () => _onPlay(context),
+          onPressed: () => _onResume(context),
           icon: const Icon(Icons.play_arrow_rounded,
             color: Colors.white,
           )

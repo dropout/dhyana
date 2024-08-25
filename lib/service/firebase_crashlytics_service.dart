@@ -12,13 +12,13 @@ class FirebaseCrashlyticsService extends CrashlyticsService {
   @override
   void recordError({
     required dynamic exception,
-    required StackTrace stackTrace,
-    required String reason
+    required StackTrace? stackTrace,
+    required String? reason
   }) {
     _crashlytics.recordError(
-        exception,
-        stackTrace,
-        reason: reason
+      exception,
+      stackTrace,
+      reason: reason
     );
   }
 

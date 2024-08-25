@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/widget/app_colors.dart';
@@ -47,6 +48,7 @@ class _DurationInputState extends State<DurationInput> {
         );
       }
     );
+    context.hapticsTap();
   }
   
   @override

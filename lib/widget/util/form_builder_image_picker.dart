@@ -1,6 +1,8 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/profile/profile_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -120,6 +122,11 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     super.initState();
   }
 
+  void _onWidgetTapped(BuildContext context) {
+    _selectFile(context);
+    context.hapticsTap();
+  }
+
   void _selectFile(BuildContext context) async {
     try {
       XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -195,7 +202,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     }
 
     return GestureDetector(
-      onTap: () => _selectFile(context),
+      onTap: () => _onWidgetTapped(context),
       child: Container(
         width: AppThemeData.circleLg,
         height: AppThemeData.circleLg,

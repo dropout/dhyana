@@ -3,6 +3,8 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
+import 'package:dhyana/widget/screen/login_screen.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_indicator.dart';
 import 'package:dhyana/widget/util/app_snack_bar.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
@@ -21,6 +23,7 @@ class ProfileButton extends StatelessWidget {
   
   void _signedOutTap(BuildContext context) {
     context.pushNamed(AppScreen.login.name);
+    context.hapticsTap();
   }
 
   void _signedInTap(BuildContext context, Profile profile) {
@@ -29,6 +32,7 @@ class ProfileButton extends StatelessWidget {
     context.pushNamed(screenName, pathParameters: {
       'profileId': profile.id,
     });
+    context.hapticsTap();
   }
 
   @override

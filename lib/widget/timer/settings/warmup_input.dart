@@ -1,9 +1,9 @@
 import 'package:dhyana/widget/timer/settings/all.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-
 
 class WarmupTimeInput extends StatefulWidget {
 
@@ -46,6 +46,7 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
         );
       }
     );
+    context.hapticsTap();
   }
 
   @override

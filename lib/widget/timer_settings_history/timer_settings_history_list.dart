@@ -1,6 +1,8 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/all.dart';
+import 'package:dhyana/widget/profile/profile_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,6 +20,7 @@ class TimerSettingsHistoryList extends StatelessWidget {
       AppScreen.home.name,
       extra: timerSettings,
     );
+    context.hapticsTap();
   }
 
   @override

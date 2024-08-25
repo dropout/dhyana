@@ -5,6 +5,7 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_stadium_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,33 +30,33 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
   void _onWarmupChange(BuildContext context, Duration warmupDuration) {
     BlocProvider.of<TimerSettingsBloc>(context).add(
-        TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
-          warmup: warmupDuration,
-        ))
+      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+        warmup: warmupDuration,
+      ))
     );
   }
 
   void _onStartingSoundChange(BuildContext context, Sound startingSound) {
     BlocProvider.of<TimerSettingsBloc>(context).add(
-        TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
-          startingSound: startingSound,
-        ))
+      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+        startingSound: startingSound,
+      ))
     );
   }
 
   void _onDurationChange(BuildContext context, Duration duration) {
     BlocProvider.of<TimerSettingsBloc>(context).add(
-        TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
-          duration: duration,
-        ))
+      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+        duration: duration,
+      ))
     );
   }
 
   void _onEndingSoundChange(BuildContext context, Sound endingSound) {
     BlocProvider.of<TimerSettingsBloc>(context).add(
-        TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
-          endingSound: endingSound,
-        ))
+      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+        endingSound: endingSound,
+      ))
     );
   }
 
@@ -64,6 +65,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
       AppScreen.timerRunning.name,
       extra: widget.timerSettings,
     );
+    context.hapticsTap();
   }
 
   @override

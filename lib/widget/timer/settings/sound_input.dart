@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/enum/sound.dart';
@@ -47,6 +48,7 @@ class _SoundInputState extends State<SoundInput> {
         );
       }
     );
+    context.hapticsTap();
   }
   
   @override
