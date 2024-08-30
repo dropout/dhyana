@@ -1,4 +1,5 @@
 import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 
 class Services {
@@ -7,6 +8,7 @@ class Services {
   final CrashlyticsService crashlyticsService;
   final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
   final ShaderService shaderService;
+  final HapticsService hapticsService;
   final ResourceResolver resourceResolver;
 
   const Services({
@@ -15,6 +17,7 @@ class Services {
     required this.timerSettingsSharedPrefsService,
     required this.resourceResolver,
     required this.shaderService,
+    required this.hapticsService,
   });
 
 }

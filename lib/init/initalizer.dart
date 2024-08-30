@@ -5,6 +5,7 @@ import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/repository/firebase/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
+import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
@@ -47,11 +48,14 @@ class Initializer {
         crashlyticsService: crashlyticsService,
         sharedPrefs: SharedPreferences.getInstance()
       );
+
+    HapticsService hapticsService = await HapticsService.create();
     Services services = Services(
       analyticsService: analyticsService,
       crashlyticsService: crashlyticsService,
       resourceResolver: resourceResolver,
       timerSettingsSharedPrefsService: timerSettingsSharedPrefsService,
+      hapticsService: hapticsService,
       shaderService: ShaderService(),
     );
 
@@ -128,6 +132,7 @@ class Initializer {
       Provider<AnalyticsService>(create: (_) => srvcs.analyticsService),
       Provider<CrashlyticsService>(create: (_) => srvcs.crashlyticsService),
       Provider<ResourceResolver>(create: (_) => srvcs.resourceResolver),
+      Provider<HapticsService>(create: (_) => srvcs.hapticsService),
 
       Provider<AuthRepository>(create: (_) => repos.authRepository),
       Provider<ProfileRepository>(create: (_) => repos.profileRepository),
