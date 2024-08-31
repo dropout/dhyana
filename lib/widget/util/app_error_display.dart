@@ -1,3 +1,7 @@
+import 'package:dhyana/widget/profile/profile_button.dart';
+import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/app_stadium_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -21,6 +25,7 @@ class AppErrorDisplay extends StatelessWidget {
     final void Function()? onTap = onButtonTap;
     if (onTap != null) {
       onTap();
+      context.hapticsTap();
     }
   }
 
@@ -39,26 +44,20 @@ class AppErrorDisplay extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.error_rounded,
-                    size: 96,
-                  ),
-                  const SizedBox(height: AppThemeData.spacingMd),
-                  Text(
-                    headlineFinal,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600
-                    )
-                  ),
-                  const SizedBox(height: AppThemeData.spacingSm),
-                  _buildText(context, textFinal),
-                ]
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_rounded,
+                  color: Theme.of(context).colorScheme.onError,
+                  size: 96,
+                ),
+                const SizedBox(height: AppThemeData.spacingMd),
+                _buildHeadLine(context, headlineFinal),
+                const SizedBox(height: AppThemeData.spacingSm),
+                _buildText(context, textFinal),
+              ]
             ),
             if (onButtonTap != null) _buildButton(context, buttonTextFinal),
           ]
@@ -67,33 +66,33 @@ class AppErrorDisplay extends StatelessWidget {
 
   }
 
+  Widget _buildHeadLine(BuildContext context, String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+        color: Theme.of(context).colorScheme.onError,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
   Widget _buildText(BuildContext context, String text) {
     return Text(
       text,
       textAlign: TextAlign.center,
-      style: const TextStyle(
-        fontSize: 18,
-      )
+      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+        color: Theme.of(context).colorScheme.onError,
+      ),
     );
   }
 
   Widget _buildButton(BuildContext context, String buttonText) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: TextButton(
-        onPressed: () => _handleButtonTap(context),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              buttonText,
-              style: const TextStyle(
-                fontSize: 21.0,
-                fontWeight: FontWeight.w600
-              )
-            )
-          ],
-        ),
+      child: AppStadiumButton(
+        onTap: () => _handleButtonTap(context),
+        text: buttonText,
       ),
     );
   }

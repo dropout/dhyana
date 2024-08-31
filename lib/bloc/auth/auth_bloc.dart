@@ -118,9 +118,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(const AuthState.signedOut());
     } catch (e, stack) {
       _crashlyticsService.recordError(
-          exception: e,
-          stackTrace: stack,
-          reason: 'Unable to sign in with Apple'
+        exception: e,
+        stackTrace: stack,
+        reason: 'Unable to sign in with Apple'
       );
       emit(const AuthState.error());
       event.onError?.call(e, stack);

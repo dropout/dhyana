@@ -1,6 +1,9 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -20,11 +23,73 @@ class LoginScreen extends StatelessWidget {
     super.key,
   });
 
+  void _onLoginWithGoogleTap(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithGoogle(
+      onComplete: (user) => context.replaceNamed(
+          AppScreen.profile.name,
+          pathParameters: {
+            'profileId': user.uid,
+          }
+      ),
+    ));
+    context.logEvent(name: 'login_with_google_button_pressed');
+    context.hapticsTap();
+  }
+
+  void _onLoginWithAppleTap(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithApple(
+      onComplete: (user) => context.replaceNamed(
+          AppScreen.profile.name,
+          pathParameters: {
+            'profileId': user.uid,
+          }
+      ),
+    ));
+    context.logEvent(name: 'login_with_apple_button_pressed');
+    context.hapticsTap();
+  }
+
+  void _onTermsTap(BuildContext context) {
+    urlLauncher.launchInAppWebView('https://google.com');
+    context.logEvent(name: 'view_tou_pressed');
+    context.hapticsTap();
+  }
+
+  void _onDismissErrorTap(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(const AuthEvent.dismissSigninError());
+  }
+
+  void _onPrivacyTap(BuildContext context) {
+    urlLauncher.launchInAppWebView('https://google.com');
+    context.logEvent(name: 'view_privacy_policy_pressed');
+    context.hapticsTap();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: SafeArea(
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        late final Widget body;
+        Color backgroundColor = Theme.of(context).colorScheme.surface; 
+        switch (state) {
+          case AuthStateErrorOccured():
+            backgroundColor = Theme.of(context).colorScheme.error;
+            body = buildErrorState(context);
+          case AuthStateSigningIn():
+            body = buildLoadingState(context);
+          default:
+            body = buildSignedOutState(context);
+        }
+        return Scaffold(
+          backgroundColor: backgroundColor,
+          body: body,
+        );
+      }
+    );
+  }
+
+  Widget buildSignedOutState(BuildContext context) {
+    return SafeArea(
         child: Stack(
           fit: StackFit.expand,
           clipBehavior: Clip.none,
@@ -60,8 +125,21 @@ class LoginScreen extends StatelessWidget {
             ),
           ],
         ),
-      )
+      );
+  }
+
+  Widget buildErrorState(BuildContext context) {
+    return SafeArea(
+      child: AppErrorDisplay(
+        onButtonTap: () {
+          _onDismissErrorTap(context);
+        },
+      ),
     );
+  }
+
+  Widget buildLoadingState(BuildContext context) {
+    return const AppLoadingDisplay();
   }
 
   Widget buildHeadline(BuildContext context) {
@@ -105,31 +183,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void _onLoginWithGoogleTap(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithGoogle(
-      onComplete: (user) => context.replaceNamed(
-        AppScreen.profile.name,
-        pathParameters: {
-          'profileId': user.uid,
-        }
-      ),
-    ));
-    context.logEvent(name: 'login_with_google_button_pressed');
-    context.hapticsTap();
-  }
 
-  void _onLoginWithAppleTap(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithApple(
-      onComplete: (user) => context.replaceNamed(
-        AppScreen.profile.name,
-        pathParameters: {
-          'profileId': user.uid,
-        }
-      ),
-    ));
-    context.logEvent(name: 'login_with_apple_button_pressed');
-    context.hapticsTap();
-  }
 
   Widget buildLegalText(BuildContext context) {
     return Padding(
@@ -172,18 +226,6 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _onTermsTap(BuildContext context) {
-    urlLauncher.launchInAppWebView('https://google.com');
-    context.logEvent(name: 'view_tou_pressed');
-    context.hapticsTap();
-  }
-
-  void _onPrivacyTap(BuildContext context) {
-    urlLauncher.launchInAppWebView('https://google.com');
-    context.logEvent(name: 'view_privacy_policy_pressed');
-    context.hapticsTap();
   }
 
 }
