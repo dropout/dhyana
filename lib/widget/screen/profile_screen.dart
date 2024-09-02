@@ -25,10 +25,7 @@ class ProfileScreen extends StatelessWidget {
           profileId: profileId,
           useStream: true,
         ),
-        child: const SafeArea(
-          bottom: false,
-          child: ProfileView(),
-        ),
+        child: const ProfileView(),
       ),
     );
   }

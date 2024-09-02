@@ -24,7 +24,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileStatsCalculator _profileStatsCalculator = ProfileStatsCalculator();
   StreamSubscription<Profile>? _profileStreamSubscription;
 
-
   ProfileBloc({
     required this.profileRepository,
     required this.crashlyticsService,
@@ -42,27 +41,41 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       emit(const ProfileState.loading());
       if (event.useStream) {
+        // only call load completed callback
+        // once on every LoadProfile event
+        // in case of using streams
         bool isOnCompleteCallbackFired = false;
-        logger.t('Streaming profile: ${event.profileId}');
         _profileStreamSubscription?.cancel();
         _profileStreamSubscription = profileRepository
           .readStream(event.profileId)
           .listen((profile) {
+
+            // user tapped back button while loading
+            // it is cancelled before in close()
+            // but still its called ??
+            if (isClosed) return;
+
             add(ProfileEvent.receiveUpdate(profile: profile));
             if (isOnCompleteCallbackFired == false) {
               isOnCompleteCallbackFired = true;
               event.onComplete?.call(profile);
             }
           });
+
         _profileStreamSubscription?.onError((exception, stackTrace) {
           crashlyticsService.recordError(
             exception: exception,
             stackTrace: stackTrace,
             reason: 'Error occured when receiving profile info: ${event.profileId}'
           );
+
+          // user tapped back button while loading
+          if (isClosed) return;
+
           // It happens during an update received
           // Maybe we don't need to display this error?
           add(const ProfileEvent.error());
+
         });
       } else {
         logger.t('Loading profile: ${event.profileId}');
