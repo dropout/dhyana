@@ -41,7 +41,7 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<User?> get user => authDataProvider.user;
 
   @override
-  Future<User> signIn(SigninMethodType signinMethodType, {
+  Future<(User, bool)> signIn(SigninMethodType signinMethodType, {
     String? email,
     String? password
   }) async {
@@ -49,13 +49,14 @@ class FirebaseAuthRepository implements AuthRepository {
     isSigningIn = true;
     SigninResult signinResult =
       await authDataProvider.signIn(signinMethodType);
-    if (isFirstSignin(signinResult)) {
+    bool isFirst = isFirstSignin(signinResult);
+    if (isFirst) {
       logger.t('First time signing in, creating profile...');
       await _createProfile(signinResult);
     }
     isSigningIn = false;
     // End of guarding operations
-    return signinResult.user;
+    return (signinResult.user, isFirst);
   }
 
   @override

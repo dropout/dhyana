@@ -33,12 +33,12 @@ class _ProfileEditViewState extends State<ProfileEditView> {
     GlobalKey<FormBuilderState>();
 
   void _onSave(BuildContext context) {
-    setState(() {
-      state = LoadingState.loading;
-    });
     Profile profile = widget.profile;
     FormBuilderState? formState = formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
+      setState(() {
+        state = LoadingState.loading;
+      });
       Map<String, dynamic>? values = formState.value;
       BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
         profile: profile,

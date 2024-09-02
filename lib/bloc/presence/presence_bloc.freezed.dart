@@ -72,6 +72,9 @@ class _$PresenceEventCopyWithImpl<$Res, $Val extends PresenceEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -91,6 +94,8 @@ class __$$LoadPresenceDataImplCopyWithImpl<$Res>
       $Res Function(_$LoadPresenceDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,7 +135,9 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @override
   int get hashCode => Object.hash(runtimeType, ownProfileId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadPresenceDataImplCopyWith<_$LoadPresenceDataImpl> get copyWith =>
@@ -206,7 +213,10 @@ abstract class LoadPresenceData extends PresenceEvent {
   const LoadPresenceData._() : super._();
 
   String? get ownProfileId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadPresenceDataImplCopyWith<_$LoadPresenceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -225,6 +235,9 @@ class __$$ShowPresenceImplCopyWithImpl<$Res>
   __$$ShowPresenceImplCopyWithImpl(
       _$ShowPresenceImpl _value, $Res Function(_$ShowPresenceImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -384,6 +397,9 @@ class _$PresenceStateCopyWithImpl<$Res, $Val extends PresenceState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -400,6 +416,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -515,6 +534,9 @@ class __$$PresenceLoadingStateImplCopyWithImpl<$Res>
   __$$PresenceLoadingStateImplCopyWithImpl(_$PresenceLoadingStateImpl _value,
       $Res Function(_$PresenceLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -634,6 +656,8 @@ class __$$PresenceLoadedStateImplCopyWithImpl<$Res>
       $Res Function(_$PresenceLoadedStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -681,7 +705,9 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_presenceList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PresenceLoadedStateImplCopyWith<_$PresenceLoadedStateImpl> get copyWith =>
@@ -769,7 +795,10 @@ abstract class PresenceLoadedState extends PresenceState {
   const PresenceLoadedState._() : super._();
 
   List<Presence> get presenceList;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PresenceLoadedStateImplCopyWith<_$PresenceLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -788,6 +817,9 @@ class __$$PresenceErrorStateImplCopyWithImpl<$Res>
   __$$PresenceErrorStateImplCopyWithImpl(_$PresenceErrorStateImpl _value,
       $Res Function(_$PresenceErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

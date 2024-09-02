@@ -6,7 +6,7 @@ abstract class AuthRepository {
   Stream<User?> get userChange;
   Future<User?> get user;
 
-  Future<User> signIn(SigninMethodType signinMethodType, {
+  Future<(User, bool)> signIn(SigninMethodType signinMethodType, {
     String? email,
     String? password
   });

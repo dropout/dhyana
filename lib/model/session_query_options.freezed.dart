@@ -22,8 +22,12 @@ SessionQueryOptions _$SessionQueryOptionsFromJson(Map<String, dynamic> json) {
 mixin _$SessionQueryOptions {
   int get limit => throw _privateConstructorUsedError;
 
+  /// Serializes this SessionQueryOptions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SessionQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SessionQueryOptionsCopyWith<SessionQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$SessionQueryOptionsCopyWithImpl<$Res, $Val extends SessionQueryOptions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SessionQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$SessionQueryOptionsImplCopyWithImpl<$Res>
       $Res Function(_$SessionQueryOptionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SessionQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,11 +136,13 @@ class _$SessionQueryOptionsImpl extends _SessionQueryOptions
             (identical(other.limit, limit) || other.limit == limit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SessionQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SessionQueryOptionsImplCopyWith<_$SessionQueryOptionsImpl> get copyWith =>
@@ -157,8 +167,11 @@ abstract class _SessionQueryOptions extends SessionQueryOptions {
 
   @override
   int get limit;
+
+  /// Create a copy of SessionQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SessionQueryOptionsImplCopyWith<_$SessionQueryOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

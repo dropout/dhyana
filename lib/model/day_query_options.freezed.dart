@@ -20,7 +20,9 @@ mixin _$DayQueryOptions {
   DateTime get to => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DayQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DayQueryOptionsCopyWith<DayQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$DayQueryOptionsCopyWithImpl<$Res, $Val extends DayQueryOptions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DayQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$DayQueryOptionsImplCopyWithImpl<$Res>
       _$DayQueryOptionsImpl _value, $Res Function(_$DayQueryOptionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DayQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,7 +161,9 @@ class _$DayQueryOptionsImpl extends _DayQueryOptions
   @override
   int get hashCode => Object.hash(runtimeType, from, to, limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DayQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DayQueryOptionsImplCopyWith<_$DayQueryOptionsImpl> get copyWith =>
@@ -176,8 +184,11 @@ abstract class _DayQueryOptions extends DayQueryOptions {
   DateTime get to;
   @override
   int get limit;
+
+  /// Create a copy of DayQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DayQueryOptionsImplCopyWith<_$DayQueryOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

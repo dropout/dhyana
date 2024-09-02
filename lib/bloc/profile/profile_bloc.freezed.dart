@@ -141,6 +141,9 @@ class _$ProfileEventCopyWithImpl<$Res, $Val extends ProfileEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -164,6 +167,8 @@ class __$$LoadProfileImplCopyWithImpl<$Res>
       _$LoadProfileImpl _value, $Res Function(_$LoadProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -235,7 +240,9 @@ class _$LoadProfileImpl implements LoadProfile {
   int get hashCode =>
       Object.hash(runtimeType, profileId, onComplete, onError, useStream);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadProfileImplCopyWith<_$LoadProfileImpl> get copyWith =>
@@ -384,7 +391,10 @@ abstract class LoadProfile implements ProfileEvent {
   void Function(Profile)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
   bool get useStream;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadProfileImplCopyWith<_$LoadProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -408,6 +418,8 @@ class __$$ReceiveProfileUpdateImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveProfileUpdateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -421,6 +433,8 @@ class __$$ReceiveProfileUpdateImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileCopyWith<$Res> get profile {
@@ -454,7 +468,9 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
   @override
   int get hashCode => Object.hash(runtimeType, profile);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveProfileUpdateImplCopyWith<_$ReceiveProfileUpdateImpl>
@@ -599,7 +615,10 @@ abstract class ReceiveProfileUpdate implements ProfileEvent {
       _$ReceiveProfileUpdateImpl;
 
   Profile get profile;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiveProfileUpdateImplCopyWith<_$ReceiveProfileUpdateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -628,6 +647,8 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
       _$UpdateProfileImpl _value, $Res Function(_$UpdateProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -661,6 +682,8 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileCopyWith<$Res> get profile {
@@ -727,7 +750,9 @@ class _$UpdateProfileImpl implements UpdateProfile {
       onError,
       completeProfile);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
@@ -881,7 +906,10 @@ abstract class UpdateProfile implements ProfileEvent {
   void Function(Profile)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
   bool get completeProfile;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -900,6 +928,9 @@ class __$$ProfileErrorOccuredImplCopyWithImpl<$Res>
   __$$ProfileErrorOccuredImplCopyWithImpl(_$ProfileErrorOccuredImpl _value,
       $Res Function(_$ProfileErrorOccuredImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1082,6 +1113,8 @@ class __$$ValidateConsecutiveDaysImplCopyWithImpl<$Res>
       $Res Function(_$ValidateConsecutiveDaysImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1105,6 +1138,8 @@ class __$$ValidateConsecutiveDaysImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileCopyWith<$Res> get profile {
@@ -1146,7 +1181,9 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
   @override
   int get hashCode => Object.hash(runtimeType, profile, onComplete, onError);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ValidateConsecutiveDaysImplCopyWith<_$ValidateConsecutiveDaysImpl>
@@ -1295,7 +1332,10 @@ abstract class ValidateConsecutiveDays implements ProfileEvent {
   Profile get profile;
   void Function(Profile)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ValidateConsecutiveDaysImplCopyWith<_$ValidateConsecutiveDaysImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1324,6 +1364,8 @@ class __$$CalculateConsecutiveDaysImplCopyWithImpl<$Res>
       $Res Function(_$CalculateConsecutiveDaysImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1347,6 +1389,8 @@ class __$$CalculateConsecutiveDaysImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileCopyWith<$Res> get profile {
@@ -1388,7 +1432,9 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
   @override
   int get hashCode => Object.hash(runtimeType, profile, onComplete, onError);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CalculateConsecutiveDaysImplCopyWith<_$CalculateConsecutiveDaysImpl>
@@ -1537,7 +1583,10 @@ abstract class CalculateConsecutiveDays implements ProfileEvent {
   Profile get profile;
   void Function(Profile)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CalculateConsecutiveDaysImplCopyWith<_$CalculateConsecutiveDaysImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1606,6 +1655,9 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1622,6 +1674,9 @@ class __$$ProfileLoadingStateImplCopyWithImpl<$Res>
   __$$ProfileLoadingStateImplCopyWithImpl(_$ProfileLoadingStateImpl _value,
       $Res Function(_$ProfileLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1737,6 +1792,8 @@ class __$$ProfileLoadedStateImplCopyWithImpl<$Res>
       $Res Function(_$ProfileLoadedStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1750,6 +1807,8 @@ class __$$ProfileLoadedStateImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileCopyWith<$Res> get profile {
@@ -1783,7 +1842,9 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   int get hashCode => Object.hash(runtimeType, profile);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileLoadedStateImplCopyWith<_$ProfileLoadedStateImpl> get copyWith =>
@@ -1865,7 +1926,10 @@ abstract class ProfileLoadedState extends ProfileState {
   const ProfileLoadedState._() : super._();
 
   Profile get profile;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileLoadedStateImplCopyWith<_$ProfileLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1884,6 +1948,9 @@ class __$$ProfileErrorStateImplCopyWithImpl<$Res>
   __$$ProfileErrorStateImplCopyWithImpl(_$ProfileErrorStateImpl _value,
       $Res Function(_$ProfileErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

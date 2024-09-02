@@ -22,8 +22,12 @@ ProfileQueryOptions _$ProfileQueryOptionsFromJson(Map<String, dynamic> json) {
 mixin _$ProfileQueryOptions {
   int get limit => throw _privateConstructorUsedError;
 
+  /// Serializes this ProfileQueryOptions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileQueryOptionsCopyWith<ProfileQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$ProfileQueryOptionsCopyWithImpl<$Res, $Val extends ProfileQueryOptions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProfileQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$ProfileQueryOptionsImplCopyWithImpl<$Res>
       $Res Function(_$ProfileQueryOptionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,11 +136,13 @@ class _$ProfileQueryOptionsImpl extends _ProfileQueryOptions
             (identical(other.limit, limit) || other.limit == limit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileQueryOptionsImplCopyWith<_$ProfileQueryOptionsImpl> get copyWith =>
@@ -157,8 +167,11 @@ abstract class _ProfileQueryOptions extends ProfileQueryOptions {
 
   @override
   int get limit;
+
+  /// Create a copy of ProfileQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileQueryOptionsImplCopyWith<_$ProfileQueryOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -84,6 +84,9 @@ class _$SessionsEventCopyWithImpl<$Res, $Val extends SessionsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,9 @@ class __$$StartedImplCopyWithImpl<$Res>
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -223,6 +229,8 @@ class __$$AddSessionEventImplCopyWithImpl<$Res>
       _$AddSessionEventImpl _value, $Res Function(_$AddSessionEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -251,6 +259,8 @@ class __$$AddSessionEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingsCopyWith<$Res> get timerSettings {
@@ -301,7 +311,9 @@ class _$AddSessionEventImpl implements AddSessionEvent {
   int get hashCode =>
       Object.hash(runtimeType, profileId, startTime, endTime, timerSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddSessionEventImplCopyWith<_$AddSessionEventImpl> get copyWith =>
@@ -394,7 +406,10 @@ abstract class AddSessionEvent implements SessionsEvent {
   DateTime get startTime;
   DateTime get endTime;
   TimerSettings get timerSettings;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddSessionEventImplCopyWith<_$AddSessionEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -416,6 +431,8 @@ class __$$LoadSessionsEventImplCopyWithImpl<$Res>
       $Res Function(_$LoadSessionsEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -455,7 +472,9 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @override
   int get hashCode => Object.hash(runtimeType, profileId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadSessionsEventImplCopyWith<_$LoadSessionsEventImpl> get copyWith =>
@@ -542,7 +561,10 @@ abstract class LoadSessionsEvent implements SessionsEvent {
       _$LoadSessionsEventImpl;
 
   String get profileId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SessionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadSessionsEventImplCopyWith<_$LoadSessionsEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -617,6 +639,9 @@ class _$SessionsStateCopyWithImpl<$Res, $Val extends SessionsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -633,6 +658,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -747,6 +775,9 @@ class __$$SessionsLoadingImplCopyWithImpl<$Res>
   __$$SessionsLoadingImplCopyWithImpl(
       _$SessionsLoadingImpl _value, $Res Function(_$SessionsLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -864,6 +895,8 @@ class __$$SessionsLoadedImplCopyWithImpl<$Res>
       _$SessionsLoadedImpl _value, $Res Function(_$SessionsLoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -909,7 +942,9 @@ class _$SessionsLoadedImpl implements SessionsLoaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_sessions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SessionsLoadedImplCopyWith<_$SessionsLoadedImpl> get copyWith =>
@@ -996,7 +1031,10 @@ abstract class SessionsLoaded implements SessionsState {
       _$SessionsLoadedImpl;
 
   List<Session> get sessions;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SessionsLoadedImplCopyWith<_$SessionsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1015,6 +1053,9 @@ class __$$SessionsLoadingErrorImplCopyWithImpl<$Res>
   __$$SessionsLoadingErrorImplCopyWithImpl(_$SessionsLoadingErrorImpl _value,
       $Res Function(_$SessionsLoadingErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SessionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

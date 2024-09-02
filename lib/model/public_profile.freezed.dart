@@ -26,8 +26,12 @@ mixin _$PublicProfile {
   String get photoUrl => throw _privateConstructorUsedError;
   String get photoBlurhash => throw _privateConstructorUsedError;
 
+  /// Serializes this PublicProfile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PublicProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PublicProfileCopyWith<PublicProfile> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$PublicProfileCopyWithImpl<$Res, $Val extends PublicProfile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PublicProfile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$PublicProfileImplCopyWithImpl<$Res>
       _$PublicProfileImpl _value, $Res Function(_$PublicProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PublicProfile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -207,12 +215,14 @@ class _$PublicProfileImpl
                 other.photoBlurhash == photoBlurhash));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, firstName, lastName, photoUrl, photoBlurhash);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PublicProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PublicProfileImplCopyWith<_$PublicProfileImpl> get copyWith =>
@@ -247,8 +257,11 @@ abstract class _PublicProfile implements PublicProfile {
   String get photoUrl;
   @override
   String get photoBlurhash;
+
+  /// Create a copy of PublicProfile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PublicProfileImplCopyWith<_$PublicProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

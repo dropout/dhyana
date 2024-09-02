@@ -85,9 +85,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       logger.t('Signing in with Google');
       emit(const AuthState.signingIn());
-      User user = await _signin(SigninMethodType.google);
+      var (user, isFirstSignin) = await _authRepository
+        .signIn(SigninMethodType.google);
       emit(AuthState.signedIn(user: user));
-      event.onComplete?.call(user);
+      event.onComplete?.call(user, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Google');
     } on SignInCancelled {
@@ -108,9 +109,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       logger.t('Signing in with Apple');
       emit(const AuthState.signingIn());
-      User user = await _signin(SigninMethodType.apple);
+      var (user, isFirstSignin) = await _authRepository
+        .signIn(SigninMethodType.apple);
       emit(AuthState.signedIn(user: user));
-      event.onComplete?.call(user);
+      event.onComplete?.call(user, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Apple');
     } on SignInCancelled {
@@ -134,12 +136,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       logger.t('Signing in with Email and Password...');
       emit(const AuthState.signingIn());
-      User user = await _signin(SigninMethodType.emailAndPassword,
+      var (user, isFirstSignin) = await _authRepository.signIn(
+        SigninMethodType.emailAndPassword,
         email: event.email,
         password: event.password,
       );
       emit(AuthState.signedIn(user: user));
-      event.onComplete?.call(user);
+      event.onComplete?.call(user, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Email and Password');
     } on SignInCancelled {
@@ -208,22 +211,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _authStateChangeSub.cancel();
     _userChangeSub.cancel();
     return super.close();
-  }
-
-  Future<User> _signin(SigninMethodType signinMethodType, {
-    String? email,
-    String? password
-  }) async {
-    User user;
-    if (signinMethodType == SigninMethodType.emailAndPassword) {
-      user = await _authRepository.signIn(signinMethodType,
-        email: email,
-        password: password,
-      );
-    } else {
-      user = await _authRepository.signIn(signinMethodType);
-    }
-    return user;
   }
 
   void _logAnalyticsSuccessfulSignin() {

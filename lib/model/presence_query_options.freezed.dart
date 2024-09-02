@@ -23,8 +23,12 @@ mixin _$PresenceQueryOptions {
   Duration get windowSize => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
 
+  /// Serializes this PresenceQueryOptions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PresenceQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PresenceQueryOptionsCopyWith<PresenceQueryOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$PresenceQueryOptionsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PresenceQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +93,8 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
       $Res Function(_$PresenceQueryOptionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PresenceQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,11 +156,13 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
             (identical(other.limit, limit) || other.limit == limit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, windowSize, limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PresenceQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PresenceQueryOptionsImplCopyWith<_$PresenceQueryOptionsImpl>
@@ -181,8 +191,11 @@ abstract class _PresenceQueryOptions extends PresenceQueryOptions {
   Duration get windowSize;
   @override
   int get limit;
+
+  /// Create a copy of PresenceQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PresenceQueryOptionsImplCopyWith<_$PresenceQueryOptionsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

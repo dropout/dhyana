@@ -120,6 +120,9 @@ class _$TimerEventCopyWithImpl<$Res, $Val extends TimerEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -139,6 +142,8 @@ class __$$WarmupTickedImplCopyWithImpl<$Res>
       _$WarmupTickedImpl _value, $Res Function(_$WarmupTickedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -185,7 +190,9 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
   @override
   int get hashCode => Object.hash(runtimeType, ticks);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WarmupTickedImplCopyWith<_$WarmupTickedImpl> get copyWith =>
@@ -307,7 +314,10 @@ abstract class WarmupTicked extends TimerEvent {
   WarmupTicked._() : super._();
 
   int get ticks;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WarmupTickedImplCopyWith<_$WarmupTickedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -326,6 +336,9 @@ class __$$WarmupCompletedImplCopyWithImpl<$Res>
   __$$WarmupCompletedImplCopyWithImpl(
       _$WarmupCompletedImpl _value, $Res Function(_$WarmupCompletedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -484,6 +497,9 @@ class __$$TimerStartedImplCopyWithImpl<$Res>
   __$$TimerStartedImplCopyWithImpl(
       _$TimerStartedImpl _value, $Res Function(_$TimerStartedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -641,6 +657,9 @@ class __$$TimerPausedImplCopyWithImpl<$Res>
   __$$TimerPausedImplCopyWithImpl(
       _$TimerPausedImpl _value, $Res Function(_$TimerPausedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -798,6 +817,9 @@ class __$$TimerResumedImplCopyWithImpl<$Res>
   __$$TimerResumedImplCopyWithImpl(
       _$TimerResumedImpl _value, $Res Function(_$TimerResumedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -955,6 +977,9 @@ class __$$TimerCompletedImplCopyWithImpl<$Res>
   __$$TimerCompletedImplCopyWithImpl(
       _$TimerCompletedImpl _value, $Res Function(_$TimerCompletedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1115,6 +1140,8 @@ class __$$TimerTickedImplCopyWithImpl<$Res>
       _$TimerTickedImpl _value, $Res Function(_$TimerTickedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1161,7 +1188,9 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
   @override
   int get hashCode => Object.hash(runtimeType, ticks);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerTickedImplCopyWith<_$TimerTickedImpl> get copyWith =>
@@ -1283,7 +1312,10 @@ abstract class TimerTicked extends TimerEvent {
   TimerTicked._() : super._();
 
   int get ticks;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerTickedImplCopyWith<_$TimerTickedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1302,6 +1334,9 @@ class __$$TimerResetImplCopyWithImpl<$Res>
   __$$TimerResetImplCopyWithImpl(
       _$TimerResetImpl _value, $Res Function(_$TimerResetImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1462,6 +1497,8 @@ class __$$TimerErrorOccurredImplCopyWithImpl<$Res>
       $Res Function(_$TimerErrorOccurredImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1517,7 +1554,9 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(error), stackTrace);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerErrorOccurredImplCopyWith<_$TimerErrorOccurredImpl> get copyWith =>
@@ -1643,7 +1682,10 @@ abstract class TimerErrorOccurred extends TimerEvent {
 
   Object? get error;
   StackTrace get stackTrace;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerErrorOccurredImplCopyWith<_$TimerErrorOccurredImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1662,6 +1704,9 @@ class __$$TimerFinishedImplCopyWithImpl<$Res>
   __$$TimerFinishedImplCopyWithImpl(
       _$TimerFinishedImpl _value, $Res Function(_$TimerFinishedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1815,7 +1860,9 @@ mixin _$TimerState {
   DateTime? get startTime => throw _privateConstructorUsedError;
   DateTime? get endTime => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TimerStateCopyWith<TimerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1848,6 +1895,8 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1891,6 +1940,8 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
     ) as $Val);
   }
 
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingsCopyWith<$Res> get timerSettings {
@@ -1929,6 +1980,8 @@ class __$$TimerStateImplCopyWithImpl<$Res>
       _$TimerStateImpl _value, $Res Function(_$TimerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2044,7 +2097,9 @@ class _$TimerStateImpl extends _TimerState with DiagnosticableTreeMixin {
   int get hashCode => Object.hash(runtimeType, timerSettings, timerStatus,
       timerStage, elapsedWarmupTime, elapsedTime, startTime, endTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
@@ -2076,8 +2131,11 @@ abstract class _TimerState extends TimerState {
   DateTime? get startTime;
   @override
   DateTime? get endTime;
+
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

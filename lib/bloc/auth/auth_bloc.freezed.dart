@@ -19,16 +19,16 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -40,16 +40,16 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -61,16 +61,16 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -138,6 +138,9 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -154,6 +157,9 @@ class __$$InitializeAuthImplCopyWithImpl<$Res>
   __$$InitializeAuthImplCopyWithImpl(
       _$InitializeAuthImpl _value, $Res Function(_$InitializeAuthImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -185,16 +191,16 @@ class _$InitializeAuthImpl extends InitializeAuth with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -209,16 +215,16 @@ class _$InitializeAuthImpl extends InitializeAuth with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -233,16 +239,16 @@ class _$InitializeAuthImpl extends InitializeAuth with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -323,7 +329,7 @@ abstract class _$$SigninWithGoogleImplCopyWith<$Res> {
       __$$SigninWithGoogleImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {void Function(User)? onComplete,
+      {void Function(User, bool)? onComplete,
       void Function(Object?, StackTrace)? onError});
 }
 
@@ -335,6 +341,8 @@ class __$$SigninWithGoogleImplCopyWithImpl<$Res>
       $Res Function(_$SigninWithGoogleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -345,7 +353,7 @@ class __$$SigninWithGoogleImplCopyWithImpl<$Res>
       onComplete: freezed == onComplete
           ? _value.onComplete
           : onComplete // ignore: cast_nullable_to_non_nullable
-              as void Function(User)?,
+              as void Function(User, bool)?,
       onError: freezed == onError
           ? _value.onError
           : onError // ignore: cast_nullable_to_non_nullable
@@ -361,7 +369,7 @@ class _$SigninWithGoogleImpl extends SigninWithGoogle
   const _$SigninWithGoogleImpl({this.onComplete, this.onError}) : super._();
 
   @override
-  final void Function(User)? onComplete;
+  final void Function(User, bool)? onComplete;
   @override
   final void Function(Object?, StackTrace)? onError;
 
@@ -392,7 +400,9 @@ class _$SigninWithGoogleImpl extends SigninWithGoogle
   @override
   int get hashCode => Object.hash(runtimeType, onComplete, onError);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SigninWithGoogleImplCopyWith<_$SigninWithGoogleImpl> get copyWith =>
@@ -403,16 +413,16 @@ class _$SigninWithGoogleImpl extends SigninWithGoogle
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -427,16 +437,16 @@ class _$SigninWithGoogleImpl extends SigninWithGoogle
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -451,16 +461,16 @@ class _$SigninWithGoogleImpl extends SigninWithGoogle
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -531,14 +541,17 @@ class _$SigninWithGoogleImpl extends SigninWithGoogle
 
 abstract class SigninWithGoogle extends AuthEvent {
   const factory SigninWithGoogle(
-          {final void Function(User)? onComplete,
+          {final void Function(User, bool)? onComplete,
           final void Function(Object?, StackTrace)? onError}) =
       _$SigninWithGoogleImpl;
   const SigninWithGoogle._() : super._();
 
-  void Function(User)? get onComplete;
+  void Function(User, bool)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SigninWithGoogleImplCopyWith<_$SigninWithGoogleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -550,7 +563,7 @@ abstract class _$$SigninWithAppleImplCopyWith<$Res> {
       __$$SigninWithAppleImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {void Function(User)? onComplete,
+      {void Function(User, bool)? onComplete,
       void Function(Object?, StackTrace)? onError});
 }
 
@@ -562,6 +575,8 @@ class __$$SigninWithAppleImplCopyWithImpl<$Res>
       _$SigninWithAppleImpl _value, $Res Function(_$SigninWithAppleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -572,7 +587,7 @@ class __$$SigninWithAppleImplCopyWithImpl<$Res>
       onComplete: freezed == onComplete
           ? _value.onComplete
           : onComplete // ignore: cast_nullable_to_non_nullable
-              as void Function(User)?,
+              as void Function(User, bool)?,
       onError: freezed == onError
           ? _value.onError
           : onError // ignore: cast_nullable_to_non_nullable
@@ -588,7 +603,7 @@ class _$SigninWithAppleImpl extends SigninWithApple
   const _$SigninWithAppleImpl({this.onComplete, this.onError}) : super._();
 
   @override
-  final void Function(User)? onComplete;
+  final void Function(User, bool)? onComplete;
   @override
   final void Function(Object?, StackTrace)? onError;
 
@@ -619,7 +634,9 @@ class _$SigninWithAppleImpl extends SigninWithApple
   @override
   int get hashCode => Object.hash(runtimeType, onComplete, onError);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SigninWithAppleImplCopyWith<_$SigninWithAppleImpl> get copyWith =>
@@ -630,16 +647,16 @@ class _$SigninWithAppleImpl extends SigninWithApple
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -654,16 +671,16 @@ class _$SigninWithAppleImpl extends SigninWithApple
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -678,16 +695,16 @@ class _$SigninWithAppleImpl extends SigninWithApple
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -758,14 +775,17 @@ class _$SigninWithAppleImpl extends SigninWithApple
 
 abstract class SigninWithApple extends AuthEvent {
   const factory SigninWithApple(
-          {final void Function(User)? onComplete,
+          {final void Function(User, bool)? onComplete,
           final void Function(Object?, StackTrace)? onError}) =
       _$SigninWithAppleImpl;
   const SigninWithApple._() : super._();
 
-  void Function(User)? get onComplete;
+  void Function(User, bool)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SigninWithAppleImplCopyWith<_$SigninWithAppleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -780,7 +800,7 @@ abstract class _$$SigninWithEmailAndPasswordImplCopyWith<$Res> {
   $Res call(
       {String email,
       String password,
-      void Function(User)? onComplete,
+      void Function(User, bool)? onComplete,
       void Function(Object?, StackTrace)? onError});
 }
 
@@ -793,6 +813,8 @@ class __$$SigninWithEmailAndPasswordImplCopyWithImpl<$Res>
       $Res Function(_$SigninWithEmailAndPasswordImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -813,7 +835,7 @@ class __$$SigninWithEmailAndPasswordImplCopyWithImpl<$Res>
       onComplete: freezed == onComplete
           ? _value.onComplete
           : onComplete // ignore: cast_nullable_to_non_nullable
-              as void Function(User)?,
+              as void Function(User, bool)?,
       onError: freezed == onError
           ? _value.onError
           : onError // ignore: cast_nullable_to_non_nullable
@@ -838,7 +860,7 @@ class _$SigninWithEmailAndPasswordImpl extends SigninWithEmailAndPassword
   @override
   final String password;
   @override
-  final void Function(User)? onComplete;
+  final void Function(User, bool)? onComplete;
   @override
   final void Function(Object?, StackTrace)? onError;
 
@@ -875,7 +897,9 @@ class _$SigninWithEmailAndPasswordImpl extends SigninWithEmailAndPassword
   int get hashCode =>
       Object.hash(runtimeType, email, password, onComplete, onError);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SigninWithEmailAndPasswordImplCopyWith<_$SigninWithEmailAndPasswordImpl>
@@ -886,16 +910,16 @@ class _$SigninWithEmailAndPasswordImpl extends SigninWithEmailAndPassword
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -910,16 +934,16 @@ class _$SigninWithEmailAndPasswordImpl extends SigninWithEmailAndPassword
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -935,16 +959,16 @@ class _$SigninWithEmailAndPasswordImpl extends SigninWithEmailAndPassword
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -1017,16 +1041,19 @@ abstract class SigninWithEmailAndPassword extends AuthEvent {
   const factory SigninWithEmailAndPassword(
           {required final String email,
           required final String password,
-          final void Function(User)? onComplete,
+          final void Function(User, bool)? onComplete,
           final void Function(Object?, StackTrace)? onError}) =
       _$SigninWithEmailAndPasswordImpl;
   const SigninWithEmailAndPassword._() : super._();
 
   String get email;
   String get password;
-  void Function(User)? get onComplete;
+  void Function(User, bool)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SigninWithEmailAndPasswordImplCopyWith<_$SigninWithEmailAndPasswordImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1048,6 +1075,8 @@ class __$$SignOutImplCopyWithImpl<$Res>
       _$SignOutImpl _value, $Res Function(_$SignOutImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1095,7 +1124,9 @@ class _$SignOutImpl extends SignOut with DiagnosticableTreeMixin {
   @override
   int get hashCode => Object.hash(runtimeType, onSignedOut);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SignOutImplCopyWith<_$SignOutImpl> get copyWith =>
@@ -1105,16 +1136,16 @@ class _$SignOutImpl extends SignOut with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -1129,16 +1160,16 @@ class _$SignOutImpl extends SignOut with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -1153,16 +1184,16 @@ class _$SignOutImpl extends SignOut with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -1237,7 +1268,10 @@ abstract class SignOut extends AuthEvent {
   const SignOut._() : super._();
 
   dynamic Function()? get onSignedOut;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignOutImplCopyWith<_$SignOutImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1256,6 +1290,9 @@ class __$$DismissSigninErrorImplCopyWithImpl<$Res>
   __$$DismissSigninErrorImplCopyWithImpl(_$DismissSigninErrorImpl _value,
       $Res Function(_$DismissSigninErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1288,16 +1325,16 @@ class _$DismissSigninErrorImpl extends DismissSigninError
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -1312,16 +1349,16 @@ class _$DismissSigninErrorImpl extends DismissSigninError
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -1336,16 +1373,16 @@ class _$DismissSigninErrorImpl extends DismissSigninError
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -1438,6 +1475,8 @@ class __$$ReceiveAuthStateChangeImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveAuthStateChangeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1485,7 +1524,9 @@ class _$ReceiveAuthStateChangeImpl extends ReceiveAuthStateChange
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveAuthStateChangeImplCopyWith<_$ReceiveAuthStateChangeImpl>
@@ -1496,16 +1537,16 @@ class _$ReceiveAuthStateChangeImpl extends ReceiveAuthStateChange
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -1520,16 +1561,16 @@ class _$ReceiveAuthStateChangeImpl extends ReceiveAuthStateChange
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -1544,16 +1585,16 @@ class _$ReceiveAuthStateChangeImpl extends ReceiveAuthStateChange
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -1628,7 +1669,10 @@ abstract class ReceiveAuthStateChange extends AuthEvent {
   const ReceiveAuthStateChange._() : super._();
 
   User? get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiveAuthStateChangeImplCopyWith<_$ReceiveAuthStateChangeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1650,6 +1694,8 @@ class __$$ReceiveUserChangeImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveUserChangeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1697,7 +1743,9 @@ class _$ReceiveUserChangeImpl extends ReceiveUserChange
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveUserChangeImplCopyWith<_$ReceiveUserChangeImpl> get copyWith =>
@@ -1708,16 +1756,16 @@ class _$ReceiveUserChangeImpl extends ReceiveUserChange
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeAuth,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithGoogle,
-    required TResult Function(void Function(User)? onComplete,
+    required TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithApple,
     required TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)
         signinWithEmailAndPassword,
     required TResult Function(dynamic Function()? onSignedOut) signOut,
@@ -1732,16 +1780,16 @@ class _$ReceiveUserChangeImpl extends ReceiveUserChange
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeAuth,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult? Function(void Function(User)? onComplete,
+    TResult? Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult? Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult? Function(dynamic Function()? onSignedOut)? signOut,
@@ -1756,16 +1804,16 @@ class _$ReceiveUserChangeImpl extends ReceiveUserChange
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeAuth,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithGoogle,
-    TResult Function(void Function(User)? onComplete,
+    TResult Function(void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithApple,
     TResult Function(
             String email,
             String password,
-            void Function(User)? onComplete,
+            void Function(User, bool)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         signinWithEmailAndPassword,
     TResult Function(dynamic Function()? onSignedOut)? signOut,
@@ -1839,7 +1887,10 @@ abstract class ReceiveUserChange extends AuthEvent {
   const ReceiveUserChange._() : super._();
 
   User? get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiveUserChangeImplCopyWith<_$ReceiveUserChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1919,6 +1970,9 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1935,6 +1989,9 @@ class __$$AuthStateInitialImplCopyWithImpl<$Res>
   __$$AuthStateInitialImplCopyWithImpl(_$AuthStateInitialImpl _value,
       $Res Function(_$AuthStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2063,6 +2120,9 @@ class __$$AuthStateSignedOutImplCopyWithImpl<$Res>
   __$$AuthStateSignedOutImplCopyWithImpl(_$AuthStateSignedOutImpl _value,
       $Res Function(_$AuthStateSignedOutImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2191,6 +2251,9 @@ class __$$AuthStateSigningInImplCopyWithImpl<$Res>
   __$$AuthStateSigningInImplCopyWithImpl(_$AuthStateSigningInImpl _value,
       $Res Function(_$AuthStateSigningInImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2322,6 +2385,8 @@ class __$$AuthStateSignedInImplCopyWithImpl<$Res>
       $Res Function(_$AuthStateSignedInImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2369,7 +2434,9 @@ class _$AuthStateSignedInImpl extends AuthStateSignedIn
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthStateSignedInImplCopyWith<_$AuthStateSignedInImpl> get copyWith =>
@@ -2463,7 +2530,10 @@ abstract class AuthStateSignedIn extends AuthState {
   const AuthStateSignedIn._() : super._();
 
   User get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthStateSignedInImplCopyWith<_$AuthStateSignedInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2483,6 +2553,9 @@ class __$$AuthStateErrorOccuredImplCopyWithImpl<$Res>
   __$$AuthStateErrorOccuredImplCopyWithImpl(_$AuthStateErrorOccuredImpl _value,
       $Res Function(_$AuthStateErrorOccuredImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

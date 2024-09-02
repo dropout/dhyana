@@ -27,8 +27,12 @@ mixin _$ProfileStats {
   @DateTimeOrNullConverter()
   DateTime? get lastSessionDate => throw _privateConstructorUsedError;
 
+  /// Serializes this ProfileStats to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileStats
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileStatsCopyWith<ProfileStats> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +61,8 @@ class _$ProfileStatsCopyWithImpl<$Res, $Val extends ProfileStats>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProfileStats
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,6 +121,8 @@ class __$$ProfileStatsImplCopyWithImpl<$Res>
       _$ProfileStatsImpl _value, $Res Function(_$ProfileStatsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileStats
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -209,7 +217,7 @@ class _$ProfileStatsImpl with DiagnosticableTreeMixin implements _ProfileStats {
                 other.lastSessionDate == lastSessionDate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -219,7 +227,9 @@ class _$ProfileStatsImpl with DiagnosticableTreeMixin implements _ProfileStats {
       completedDaysCount,
       lastSessionDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileStats
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileStatsImplCopyWith<_$ProfileStatsImpl> get copyWith =>
@@ -256,8 +266,11 @@ abstract class _ProfileStats implements ProfileStats {
   @override
   @DateTimeOrNullConverter()
   DateTime? get lastSessionDate;
+
+  /// Create a copy of ProfileStats
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileStatsImplCopyWith<_$ProfileStatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

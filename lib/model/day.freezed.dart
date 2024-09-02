@@ -26,8 +26,12 @@ mixin _$Day {
   List<Session> get sessions => throw _privateConstructorUsedError;
   int get minutes => throw _privateConstructorUsedError;
 
+  /// Serializes this Day to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Day
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DayCopyWith<Day> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -52,6 +56,8 @@ class _$DayCopyWithImpl<$Res, $Val extends Day> implements $DayCopyWith<$Res> {
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Day
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$DayImplCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$DayImpl>
   __$$DayImplCopyWithImpl(_$DayImpl _value, $Res Function(_$DayImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Day
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -186,12 +194,14 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
             (identical(other.minutes, minutes) || other.minutes == minutes));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, date,
       const DeepCollectionEquality().hash(_sessions), minutes);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Day
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DayImplCopyWith<_$DayImpl> get copyWith =>
@@ -224,8 +234,11 @@ abstract class _Day extends Day {
   List<Session> get sessions;
   @override
   int get minutes;
+
+  /// Create a copy of Day
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DayImplCopyWith<_$DayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

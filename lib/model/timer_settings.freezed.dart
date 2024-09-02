@@ -29,8 +29,12 @@ mixin _$TimerSettings {
   @DateTimeOrNullConverter()
   DateTime? get lastUsed => throw _privateConstructorUsedError;
 
+  /// Serializes this TimerSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TimerSettingsCopyWith<TimerSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$TimerSettingsCopyWithImpl<$Res, $Val extends TimerSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TimerSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,6 +123,8 @@ class __$$TimerSettingsImplCopyWithImpl<$Res>
       _$TimerSettingsImpl _value, $Res Function(_$TimerSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -216,12 +224,14 @@ class _$TimerSettingsImpl extends _TimerSettings with DiagnosticableTreeMixin {
                 other.lastUsed == lastUsed));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, warmup, duration, startingSound, endingSound, lastUsed);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerSettingsImplCopyWith<_$TimerSettingsImpl> get copyWith =>
@@ -261,8 +271,11 @@ abstract class _TimerSettings extends TimerSettings {
   @override
   @DateTimeOrNullConverter()
   DateTime? get lastUsed;
+
+  /// Create a copy of TimerSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerSettingsImplCopyWith<_$TimerSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

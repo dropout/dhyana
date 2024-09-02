@@ -89,6 +89,9 @@ class _$DaysEventCopyWithImpl<$Res, $Val extends DaysEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -105,6 +108,9 @@ class __$$StartedImplCopyWithImpl<$Res>
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -228,6 +234,8 @@ class __$$GetDaysEventImplCopyWithImpl<$Res>
       _$GetDaysEventImpl _value, $Res Function(_$GetDaysEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -297,7 +305,9 @@ class _$GetDaysEventImpl implements GetDaysEvent {
   @override
   int get hashCode => Object.hash(runtimeType, profileId, from, to, useStream);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GetDaysEventImplCopyWith<_$GetDaysEventImpl> get copyWith =>
@@ -395,7 +405,10 @@ abstract class GetDaysEvent implements DaysEvent {
   DateTime get from;
   DateTime? get to;
   bool get useStream;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetDaysEventImplCopyWith<_$GetDaysEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -419,6 +432,8 @@ class __$$ReceiveUpdateDaysEventImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveUpdateDaysEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -464,7 +479,9 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_days));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveUpdateDaysEventImplCopyWith<_$ReceiveUpdateDaysEventImpl>
@@ -557,7 +574,10 @@ abstract class ReceiveUpdateDaysEvent implements DaysEvent {
       _$ReceiveUpdateDaysEventImpl;
 
   List<Day> get days;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiveUpdateDaysEventImplCopyWith<_$ReceiveUpdateDaysEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -576,6 +596,9 @@ class __$$DaysErrorEventImplCopyWithImpl<$Res>
   __$$DaysErrorEventImplCopyWithImpl(
       _$DaysErrorEventImpl _value, $Res Function(_$DaysErrorEventImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DaysEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -745,6 +768,9 @@ class _$DaysStateCopyWithImpl<$Res, $Val extends DaysState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -761,6 +787,9 @@ class __$$DaysLoadingImplCopyWithImpl<$Res>
   __$$DaysLoadingImplCopyWithImpl(
       _$DaysLoadingImpl _value, $Res Function(_$DaysLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -872,6 +901,8 @@ class __$$DaysLoadedImplCopyWithImpl<$Res>
       _$DaysLoadedImpl _value, $Res Function(_$DaysLoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -916,7 +947,9 @@ class _$DaysLoadedImpl implements DaysLoaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_days));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DaysLoadedImplCopyWith<_$DaysLoadedImpl> get copyWith =>
@@ -995,7 +1028,10 @@ abstract class DaysLoaded implements DaysState {
   const factory DaysLoaded({required final List<Day> days}) = _$DaysLoadedImpl;
 
   List<Day> get days;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DaysLoadedImplCopyWith<_$DaysLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1014,6 +1050,9 @@ class __$$DaysLoadingErrorImplCopyWithImpl<$Res>
   __$$DaysLoadingErrorImplCopyWithImpl(_$DaysLoadingErrorImpl _value,
       $Res Function(_$DaysLoadingErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

@@ -80,6 +80,9 @@ class _$TimerSettingsHistoryEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -96,6 +99,9 @@ class __$$StartedImplCopyWithImpl<$Res>
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -213,6 +219,8 @@ class __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>
       $Res Function(_$SaveTimerSettingsHistoryEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,6 +234,8 @@ class __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingsCopyWith<$Res> get timerSettings {
@@ -261,7 +271,9 @@ class _$SaveTimerSettingsHistoryEventImpl
   @override
   int get hashCode => Object.hash(runtimeType, timerSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveTimerSettingsHistoryEventImplCopyWith<
@@ -346,7 +358,10 @@ abstract class SaveTimerSettingsHistoryEvent
       _$SaveTimerSettingsHistoryEventImpl;
 
   TimerSettings get timerSettings;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveTimerSettingsHistoryEventImplCopyWith<
           _$SaveTimerSettingsHistoryEventImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -372,6 +387,8 @@ class __$$LoadTimerSettingsHistoryEventImplCopyWithImpl<$Res>
       $Res Function(_$LoadTimerSettingsHistoryEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -412,7 +429,9 @@ class _$LoadTimerSettingsHistoryEventImpl
   @override
   int get hashCode => Object.hash(runtimeType, profileId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadTimerSettingsHistoryEventImplCopyWith<
@@ -496,7 +515,10 @@ abstract class LoadTimerSettingsHistoryEvent
       {required final String profileId}) = _$LoadTimerSettingsHistoryEventImpl;
 
   String get profileId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerSettingsHistoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadTimerSettingsHistoryEventImplCopyWith<
           _$LoadTimerSettingsHistoryEventImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -573,6 +595,9 @@ class _$TimerSettingsHistoryStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -589,6 +614,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -706,6 +734,9 @@ class __$$TimerSettingsHistoryLoadingImplCopyWithImpl<$Res>
       _$TimerSettingsHistoryLoadingImpl _value,
       $Res Function(_$TimerSettingsHistoryLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -829,6 +860,8 @@ class __$$TimerSettingsHistoryLoadedImplCopyWithImpl<$Res>
       $Res Function(_$TimerSettingsHistoryLoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -877,7 +910,9 @@ class _$TimerSettingsHistoryLoadedImpl implements TimerSettingsHistoryLoaded {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_timerSettingsList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerSettingsHistoryLoadedImplCopyWith<_$TimerSettingsHistoryLoadedImpl>
@@ -965,7 +1000,10 @@ abstract class TimerSettingsHistoryLoaded implements TimerSettingsHistoryState {
       _$TimerSettingsHistoryLoadedImpl;
 
   List<TimerSettings> get timerSettingsList;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerSettingsHistoryLoadedImplCopyWith<_$TimerSettingsHistoryLoadedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -987,6 +1025,9 @@ class __$$TimerSettingsHistoryErrorImplCopyWithImpl<$Res>
       _$TimerSettingsHistoryErrorImpl _value,
       $Res Function(_$TimerSettingsHistoryErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TimerSettingsHistoryState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

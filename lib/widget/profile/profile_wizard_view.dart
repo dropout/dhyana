@@ -37,12 +37,12 @@ class _ProfileWizardViewState extends State<ProfileWizardView> {
   _State buttonState = _State.idle;
 
   void onSave(BuildContext context) {
-    setState(() {
-      buttonState = _State.loading;
-    });
     Profile profile = widget.profile;
     FormBuilderState? formState = widget.formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
+      setState(() {
+        buttonState = _State.loading;
+      });
       Map<String, dynamic>? values = formState.value;
       BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
         profile: profile,

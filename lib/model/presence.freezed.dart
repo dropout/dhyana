@@ -25,8 +25,12 @@ mixin _$Presence {
   @DateTimeConverter()
   DateTime get startedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this Presence to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Presence
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PresenceCopyWith<Presence> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Presence
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,6 +83,8 @@ class _$PresenceCopyWithImpl<$Res, $Val extends Presence>
     ) as $Val);
   }
 
+  /// Create a copy of Presence
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PublicProfileCopyWith<$Res> get profile {
@@ -111,6 +119,8 @@ class __$$PresenceImplCopyWithImpl<$Res>
       _$PresenceImpl _value, $Res Function(_$PresenceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Presence
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,11 +191,13 @@ class _$PresenceImpl extends _Presence with DiagnosticableTreeMixin {
                 other.startedAt == startedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, profile, startedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Presence
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PresenceImplCopyWith<_$PresenceImpl> get copyWith =>
@@ -216,8 +228,11 @@ abstract class _Presence extends Presence {
   @override
   @DateTimeConverter()
   DateTime get startedAt;
+
+  /// Create a copy of Presence
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PresenceImplCopyWith<_$PresenceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

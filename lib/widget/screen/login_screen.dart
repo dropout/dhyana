@@ -1,17 +1,17 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -24,12 +24,9 @@ class LoginScreen extends StatelessWidget {
 
   void _onLoginWithGoogleTap(BuildContext context) {
     BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithGoogle(
-      onComplete: (user) => context.replaceNamed(
-          AppScreen.profile.name,
-          pathParameters: {
-            'profileId': user.uid,
-          }
-      ),
+      onComplete: (user, isFirstSignin) => _handleSigninComplete(
+        context, user, isFirstSignin
+      )
     ));
     context.logEvent(name: 'login_with_google_button_pressed');
     context.hapticsTap();
@@ -37,12 +34,9 @@ class LoginScreen extends StatelessWidget {
 
   void _onLoginWithAppleTap(BuildContext context) {
     BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithApple(
-      onComplete: (user) => context.replaceNamed(
-          AppScreen.profile.name,
-          pathParameters: {
-            'profileId': user.uid,
-          }
-      ),
+      onComplete: (user, isFirstSignin) => _handleSigninComplete(
+        context, user, isFirstSignin
+      )
     ));
     context.logEvent(name: 'login_with_apple_button_pressed');
     context.hapticsTap();
@@ -62,6 +56,15 @@ class LoginScreen extends StatelessWidget {
     urlLauncher.launchInAppWebView('https://google.com');
     context.logEvent(name: 'view_privacy_policy_pressed');
     context.hapticsTap();
+  }
+
+  void _handleSigninComplete(BuildContext context ,user, isFirstSignin) {
+    context.replaceNamed(
+      isFirstSignin ? AppScreen.profileWizard.name : AppScreen.profile.name,
+      pathParameters: {
+        'profileId': user.uid,
+      }
+    );
   }
 
   @override
@@ -100,7 +103,6 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    // color: Colors.purpleAccent,
                     child: buildHeadline(context)),
                 ),
                 buildActions(context),
@@ -181,8 +183,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
-
 
   Widget buildLegalText(BuildContext context) {
     return Padding(
