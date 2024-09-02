@@ -1,5 +1,4 @@
 import 'package:dhyana/service/analytics_service.dart';
-import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';

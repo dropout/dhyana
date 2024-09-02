@@ -40,6 +40,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onLoadProfile(LoadProfile event, emit) async {
     try {
       emit(const ProfileState.loading());
+      // await Future.delayed(Duration(seconds: 3));
+      // throw Exception('stupid');
       if (event.useStream) {
         // only call load completed callback
         // once on every LoadProfile event

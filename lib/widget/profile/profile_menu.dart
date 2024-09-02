@@ -2,7 +2,6 @@ import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
-import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

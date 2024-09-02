@@ -1,5 +1,4 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
