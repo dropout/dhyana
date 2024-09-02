@@ -1,9 +1,9 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +12,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 
 import 'profile_edit_form.dart';
-
-enum _State {
-  idle,
-  loading,
-  updated,
-}
 
 class ProfileEditView extends StatefulWidget {
 
@@ -34,13 +28,13 @@ class ProfileEditView extends StatefulWidget {
 
 class _ProfileEditViewState extends State<ProfileEditView> {
 
-  _State state = _State.idle;
+  LoadingState state = LoadingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
     GlobalKey<FormBuilderState>();
 
   void _onSave(BuildContext context) {
     setState(() {
-      state = _State.loading;
+      state = LoadingState.loading;
     });
     Profile profile = widget.profile;
     FormBuilderState? formState = formStateKey.currentState;
@@ -51,12 +45,12 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         formData: values,
         onComplete: (profile) {
           setState(() {
-            state = _State.updated;
+            state = LoadingState.updated;
           });
         },
         onError: (e, stack) {
           setState(() {
-            state = _State.idle;
+            state = LoadingState.idle;
           });
         },
       ));
@@ -71,7 +65,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
 
   void onFormChanged(BuildContext context) {
     setState(() {
-      state = _State.idle;
+      state = LoadingState.idle;
     });
   }
 
@@ -107,16 +101,16 @@ class _ProfileEditViewState extends State<ProfileEditView> {
   
   Widget buildActionButton(BuildContext context) {
     switch (state) {
-      case _State.idle:
+      case LoadingState.idle:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context),
         );
-      case _State.loading:
+      case LoadingState.loading:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonSaving.toUpperCase(),
         );
-      case _State.updated:
+      case LoadingState.updated:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,

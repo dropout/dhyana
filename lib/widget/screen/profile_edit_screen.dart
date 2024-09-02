@@ -21,17 +21,16 @@ class ProfileEditScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: CustomAppBar(titleText: AppLocalizations.of(context).editProfile),
         extendBodyBehindAppBar: true,
-        body: SafeArea(
-          child: ProfileBlocProvider(
-            initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
-            child: buildState(context),
-          ),
-        )
+        body: ProfileBlocProvider(
+          initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
+          child: buildState(context),
+        ),
       );
     });
   }
 
   Widget buildState(BuildContext context) {
+
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
@@ -40,10 +39,13 @@ class ProfileEditScreen extends StatelessWidget {
           case ProfileErrorState():
             return const AppErrorDisplay();
           case ProfileLoadedState():
-            return ProfileEditView(profile: state.profile);
+            return SafeArea(
+              child: ProfileEditView(profile: state.profile)
+            );
         }
       },
     );
+
   }
 
 }
