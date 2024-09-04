@@ -28,7 +28,7 @@ class AppRouter {
       debugLogDiagnostics: kDebugMode,
       navigatorKey: AppKeys.rootNavigatorKey,
       initialLocation: AppScreen.home.path,
-      initialExtra: initResult.timerSettings,
+      // initialExtra: initResult.timerSettings,
       routes: <GoRoute>[
 
         // Home

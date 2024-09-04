@@ -29,7 +29,6 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
     try {
       if (event.timerSettings != null) {
         logger.t('Using timer settings from event...');
-
         emit(TimerSettingsState.loaded(
           timerSettings: event.timerSettings!,
         ));
@@ -37,7 +36,7 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
         emit(const TimerSettingsState.loading());
         logger.t('Loading timer settings data...');
         TimerSettings timerSettings =
-          await timerSettingsSharedPrefsService.getTimerSettings();
+          timerSettingsSharedPrefsService.getTimerSettings();
         logger.t('Loaded timer setting from shared prefs...');
         emit(TimerSettingsState.loaded(
           timerSettings: timerSettings,

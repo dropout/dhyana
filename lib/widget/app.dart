@@ -36,7 +36,6 @@ class App extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // unfocus user input if clicks anywhere on screen
-        // FocusScopeNode currentFocus = FocusScope.of(context);
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
           currentFocus.focusedChild!.unfocus();
@@ -69,8 +68,8 @@ class App extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         child ??= const Placeholder();
         return MediaQuery.withClampedTextScaling(
-            maxScaleFactor: 1.0,
-            child: child
+          maxScaleFactor: 1.0,
+          child: child
         );
       },
       routerConfig: appRouter.router,
@@ -78,7 +77,6 @@ class App extends StatelessWidget {
         Locale('hu', 'HU'),
         Locale('en', 'EN')
       ],
-      // locale: const Locale('hu', 'HU'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -6,8 +6,9 @@ import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/repository/firebase/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/service/haptics_service.dart';
-import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,25 +39,17 @@ class Initializer {
       FirebaseStorageDataProvider(firebaseProvider.storage);
 
     logger.t('Initialize services');
-    AnalyticsService analyticsService = FirebaseAnalyticsService(firebaseProvider.analytics);
-    CrashlyticsService crashlyticsService = FirebaseCrashlyticsService(firebaseProvider.crashlytics);
     ResourceResolver resourceResolver = DefaultResourceResolver(
-        storageDataProvider: storageDataProvider
+      storageDataProvider: storageDataProvider
     );
-    TimerSettingsSharedPrefsService timerSettingsSharedPrefsService =
-      TimerSettingsSharedPrefsService(
-        crashlyticsService: crashlyticsService,
-        sharedPrefs: SharedPreferences.getInstance()
-      );
-
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     HapticsService hapticsService = await HapticsService.create();
     Services services = Services(
-      analyticsService: analyticsService,
-      crashlyticsService: crashlyticsService,
-      resourceResolver: resourceResolver,
-      timerSettingsSharedPrefsService: timerSettingsSharedPrefsService,
+      sharedPreferences: sharedPreferences,
       hapticsService: hapticsService,
-      shaderService: ShaderService(),
+      firebaseAnalytics: FirebaseAnalytics.instance,
+      firebaseCrashlytics: FirebaseCrashlytics.instance,
+      resourceResolver: resourceResolver,
     );
 
     logger.t('Preload shaders');
@@ -67,7 +60,6 @@ class Initializer {
       authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
       profileDataProvider: profileDataProvider,
     );
-
 
     ProfileRepository profileRepository = FirebaseProfileRepository(
       profileDataProvider: profileDataProvider,
@@ -104,7 +96,7 @@ class Initializer {
     );
 
     logger.t('Parsing timer settings from shared prefs');
-    TimerSettings timerSettings = await services
+    TimerSettings timerSettings = services
       .timerSettingsSharedPrefsService
       .getTimerSettings();
 
@@ -129,18 +121,9 @@ class Initializer {
     Repositories repos,
   ) {
     return [
-      Provider<AnalyticsService>(create: (_) => srvcs.analyticsService),
-      Provider<CrashlyticsService>(create: (_) => srvcs.crashlyticsService),
-      Provider<ResourceResolver>(create: (_) => srvcs.resourceResolver),
-      Provider<HapticsService>(create: (_) => srvcs.hapticsService),
-
-      Provider<AuthRepository>(create: (_) => repos.authRepository),
-      Provider<ProfileRepository>(create: (_) => repos.profileRepository),
-      Provider<PresenceRepository>(create: (_) => repos.presenceRepository),
-      Provider<SessionRepository>(create: (_) => repos.sessionRepository),
-      Provider<DayRepository>(create: (_) => repos.dayRepository),
+      Provider<Services>(create: (_) => srvcs),
+      Provider<Repositories>(create: (_) => repos),
     ];
   }
 
 }
-

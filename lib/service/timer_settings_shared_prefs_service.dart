@@ -11,17 +11,16 @@ class TimerSettingsSharedPrefsService {
   static const String sharedPreferencesKey = 'timerSettings';
 
   final CrashlyticsService crashlyticsService;
-  final Future<SharedPreferences> sharedPrefs;
+  final SharedPreferences sharedPrefs;
 
   TimerSettingsSharedPrefsService({
     required this.crashlyticsService,
     required this.sharedPrefs,
   });
 
-  Future<TimerSettings> getTimerSettings() async {
-    SharedPreferences prefs = await sharedPrefs;
+  TimerSettings getTimerSettings() {
 
-    String? timerSettingsJson = prefs.getString(sharedPreferencesKey);
+    String? timerSettingsJson = sharedPrefs.getString(sharedPreferencesKey);
 
     // Fallback to default if no entry found
     if (timerSettingsJson == null) {
@@ -46,10 +45,9 @@ class TimerSettingsSharedPrefsService {
 
   Future<void> setTimerSettings(TimerSettings timerSettings) async {
     try {
-      SharedPreferences prefs = await sharedPrefs;
       Map<String, dynamic> dataMap = timerSettings.toJson();
       String jsonString = const JsonEncoder().convert(dataMap);
-      prefs.setString(sharedPreferencesKey, jsonString);
+      sharedPrefs.setString(sharedPreferencesKey, jsonString);
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

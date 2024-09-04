@@ -1,6 +1,7 @@
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer_settings_history/timer_settings_history_button.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,34 +58,34 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: SafeArea(
-        child: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
-            builder: (BuildContext context, TimerSettingsState state) {
-              switch (state) {
-                case TimerSettingsDataErrorState():
-                  return const Text('Error occured');
-                case TimerSettingsDataLoadingState():
-                  return const AppLoadingDisplay();
-                case TimerSettingsDataLoadedState():
-                  return buildLoaded(context, state.timerSettings);
-              }
+      body: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
+          builder: (BuildContext context, TimerSettingsState state) {
+            switch (state) {
+              case TimerSettingsDataErrorState():
+                return const AppErrorDisplay();
+              case TimerSettingsDataLoadingState():
+                return const AppLoadingDisplay();
+              case TimerSettingsDataLoadedState():
+                return buildLoaded(context, state.timerSettings);
             }
-        ),
+          }
       ),
     );
   }
 
   Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
-    return Stack(
-      fit: StackFit.expand,
-      clipBehavior: Clip.none,
-      children: [
-        TimerSettingsView(
-          timerSettings: timerSettings,
-        ),
-        buildProfileMenu(context),
-        buildTimerSettingsHistoryMenu(context),
-      ],
+    return SafeArea(
+      child: Stack(
+        fit: StackFit.expand,
+        clipBehavior: Clip.none,
+        children: [
+          TimerSettingsView(
+            timerSettings: timerSettings,
+          ),
+          buildProfileMenu(context),
+          buildTimerSettingsHistoryMenu(context),
+        ],
+      ),
     );
   }
 

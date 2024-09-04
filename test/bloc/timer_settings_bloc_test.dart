@@ -45,7 +45,7 @@ void main() async {
           lastUsed: DateTime.now(),
         );
         when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
-            .thenAnswer((_) => Future.value(timerSettings));
+            .thenAnswer((_) => timerSettings);
         return timerSettingsBloc;
       },
       act: (bloc) {

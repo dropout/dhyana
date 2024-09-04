@@ -1,10 +1,8 @@
+import 'package:dhyana/init/services.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 
 class TimerSettingsBlocProvider extends StatelessWidget {
 
@@ -19,16 +17,12 @@ class TimerSettingsBlocProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CrashlyticsService crashlyticsService =
-      Provider.of<CrashlyticsService>(context);
+    Services services = context.services;
     return BlocProvider<TimerSettingsBloc>(
       create: (context) {
         TimerSettingsBloc timerSettingsBloc = TimerSettingsBloc(
-          crashlyticsService: crashlyticsService,
-          timerSettingsSharedPrefsService: TimerSettingsSharedPrefsService(
-            sharedPrefs: SharedPreferences.getInstance(),
-            crashlyticsService: crashlyticsService,
-          )
+          crashlyticsService: services.crashlyticsService,
+          timerSettingsSharedPrefsService: services.timerSettingsSharedPrefsService
         );
         if (onCreateEvent != null) {
           timerSettingsBloc.add(onCreateEvent!);

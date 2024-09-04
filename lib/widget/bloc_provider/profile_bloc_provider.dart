@@ -1,9 +1,9 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
-import 'package:dhyana/repository/profile_repository.dart';
+import 'package:dhyana/init/repositories.dart';
+import 'package:dhyana/init/services.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
 
 class ProfileBlocProvider extends StatelessWidget {
   final Widget child;
@@ -15,15 +15,13 @@ class ProfileBlocProvider extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    CrashlyticsService crashlyticsService =
-      Provider.of<CrashlyticsService>(context);
-    ProfileRepository profileRepository =
-      Provider.of<ProfileRepository>(context);
+    Services services = context.services;
+    Repositories repos = context.repos;
     return BlocProvider<ProfileBloc>(
       create: (context) {
         ProfileBloc profileBloc = ProfileBloc(
-          profileRepository: profileRepository,
-          crashlyticsService: crashlyticsService,
+          profileRepository: repos.profileRepository,
+          crashlyticsService: services.crashlyticsService,
         );
         if (initialEvent != null) {
           profileBloc.add(initialEvent!);

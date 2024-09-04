@@ -1,10 +1,9 @@
 import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
-import 'package:dhyana/repository/auth_repository.dart';
-import 'package:dhyana/repository/session_repository.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/init/repositories.dart';
+import 'package:dhyana/init/services.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class SessionsBlocProvider extends StatelessWidget {
 
@@ -19,22 +18,14 @@ class SessionsBlocProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    AuthRepository authRepository =
-      Provider.of<AuthRepository>(context);
-
-    SessionRepository sessionRepository =
-      Provider.of<SessionRepository>(context);
-
-    CrashlyticsService crashlyticsService =
-      Provider.of<CrashlyticsService>(context);
-
+    Services services = context.services;
+    Repositories repos = context.repos;
     return BlocProvider<SessionsBloc>(
       create: (BuildContext context) {
         SessionsBloc sessionsBloc = SessionsBloc(
-          authRepository: authRepository,
-          sessionRepository: sessionRepository,
-          crashlyticsService: crashlyticsService,
+          authRepository: repos.authRepository,
+          sessionRepository: repos.sessionRepository,
+          crashlyticsService: services.crashlyticsService,
         );
         if (initialEvent != null) {
           sessionsBloc.add(initialEvent!);

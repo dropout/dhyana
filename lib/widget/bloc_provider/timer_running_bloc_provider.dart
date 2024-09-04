@@ -1,18 +1,15 @@
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/init/repositories.dart';
+import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/repository/auth_repository.dart';
-import 'package:dhyana/repository/presence_repository.dart';
-import 'package:dhyana/repository/profile_repository.dart';
-import 'package:dhyana/repository/session_repository.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/default_audio_service.dart';
 import 'package:dhyana/service/default_timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class TimerRunningBlocProvider extends StatelessWidget {
 
@@ -27,22 +24,8 @@ class TimerRunningBlocProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    AuthRepository authRepository =
-      Provider.of<AuthRepository>(context);
-
-    ProfileRepository profileRepository =
-      Provider.of<ProfileRepository>(context);
-
-    PresenceRepository presenceRepository =
-      Provider.of<PresenceRepository>(context);
-
-    SessionRepository sessionRepository =
-      Provider.of<SessionRepository>(context);
-
-    CrashlyticsService crashlyticsService =
-      Provider.of<CrashlyticsService>(context);
-
+    Services services = context.services;
+    Repositories repos = context.repos;
     return MultiBlocProvider(
       providers: [
         BlocProvider<TimerBloc>(
@@ -53,7 +36,7 @@ class TimerRunningBlocProvider extends StatelessWidget {
                 DefaultTimerService.new
               ),
               audioService: DefaultAudioService(),
-              crashlyticsService: crashlyticsService,
+              crashlyticsService: services.crashlyticsService,
             );
           },
           lazy: false,
@@ -61,10 +44,10 @@ class TimerRunningBlocProvider extends StatelessWidget {
         BlocProvider<PresenceBloc>(
           create: (_) {
             return PresenceBloc(
-              presenceRepository: presenceRepository,
-              authRepository: authRepository,
-              profileRepository: profileRepository,
-              crashlyticsService: crashlyticsService,
+              presenceRepository: repos.presenceRepository,
+              authRepository: repos.authRepository,
+              profileRepository: repos.profileRepository,
+              crashlyticsService: services.crashlyticsService,
             );
           },
           lazy: false,
@@ -72,9 +55,9 @@ class TimerRunningBlocProvider extends StatelessWidget {
         BlocProvider<SessionsBloc>(
           create: (_) {
             return SessionsBloc(
-              authRepository: authRepository,
-              sessionRepository: sessionRepository,
-              crashlyticsService: crashlyticsService,
+              authRepository: repos.authRepository,
+              sessionRepository: repos.sessionRepository,
+              crashlyticsService: services.crashlyticsService,
             );
           },
         ),
