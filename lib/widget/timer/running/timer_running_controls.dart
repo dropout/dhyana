@@ -1,4 +1,3 @@
-import 'package:dhyana/service/analytics_service.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:provider/provider.dart';
 
 class TimerRunningControls extends StatefulWidget {
 
@@ -80,9 +78,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
 
   void _onPause(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
-    Provider.of<AnalyticsService>(context, listen: false).logEvent(
-      name: 'timer_pause',
-    );
+    context.logEvent(name: 'timer_pause',);
   }
 
   void _onResume(BuildContext context) {

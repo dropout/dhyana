@@ -23,7 +23,6 @@ class InputValueDisplay extends StatelessWidget {
       child: Text(
         value,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          fontSize: 18,
           color: Colors.white,
           fontWeight: FontWeight.w900,
         ),

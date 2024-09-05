@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,6 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widget/app_colors.dart';
 
-import 'input_value_display.dart';
 import 'sound_input_view.dart';
 
 class SoundInput extends StatefulWidget {
@@ -53,18 +53,28 @@ class _SoundInputState extends State<SoundInput> {
   
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () => _onInputTap(context),
-          child: InputValueDisplay(
-            value: getLocalizedSoundName(
-              widget.value,
-              AppLocalizations.of(context)
-            ),
-          )
+    return TextButton(
+      onPressed: () => _onInputTap(context),
+      style: TextButton.styleFrom(
+        // minimumSize: const Size(160, 0),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppThemeData.spacingLg,
+          vertical: AppThemeData.spacingMd,
+        )
+      ),
+      child: Text(
+        getLocalizedSoundName(
+          widget.value,
+          AppLocalizations.of(context)
         ),
-      ],
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w800,
+        )
+      ),
     );
   }
+
 }

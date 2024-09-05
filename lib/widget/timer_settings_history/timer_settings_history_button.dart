@@ -32,7 +32,6 @@ class TimerSettingsHistoryButton extends StatelessWidget {
         );
       },
     );
-
   }
 
 }

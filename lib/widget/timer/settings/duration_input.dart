@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
-import 'custom_duration_circle_border.dart';
 import 'duration_input_view.dart';
+import 'circular_input_inkwell.dart';
 
 class DurationInput extends StatefulWidget {
   
@@ -53,25 +53,16 @@ class _DurationInputState extends State<DurationInput> {
   
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return CircularInputInkwell(
       onTap: () => _onInputTap(context),
-      child: Container(
-        padding: const EdgeInsets.all(AppThemeData.paddingXl),
-        decoration: ShapeDecoration(
-          color: Colors.black,
-          shape: CustomDurationCircleBorder()
-        ),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Text(
-            widget.value.inMinutes.toString(),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayLarge!.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              height: 1.0,
-            ),
-          ),
+      padding: const EdgeInsets.all(AppThemeData.padding2Xl),
+      child: Text(
+        widget.value.inMinutes.toString(),
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.displayLarge!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          height: 1.0,
         ),
       ),
     );

@@ -51,25 +51,16 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return CircularInputInkwell(
       onTap: () => _onInputTap(context),
-      child: Container(
-        padding: const EdgeInsets.all(
-          AppThemeData.paddingMd,
-        ),
-        decoration: ShapeDecoration(
-          shape: CustomDurationCircleBorder(),
-          color: Colors.black
-        ),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Text(widget.value.inMinutes.toString(),
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w900,
-              height: 1.0,
-            )
-          ),
+      padding: const EdgeInsets.all(
+        AppThemeData.paddingXl,
+      ),
+      child: Text(widget.value.inMinutes.toString(),
+        style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w900,
+          height: 1.0,
         )
       ),
     );
