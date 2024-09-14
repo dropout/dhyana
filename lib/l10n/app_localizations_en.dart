@@ -96,9 +96,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get timerSettingsHistory => 'Settings history';
 
   @override
-  String get signOut => 'Signout';
-
-  @override
   String get profileFirstnameLabel => 'Firstname';
 
   @override
@@ -124,6 +121,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileStats => 'Statistics';
+
+  @override
+  String get signOut => 'Signout';
+
+  @override
+  String get profileSignoutTitle => 'Signout';
+
+  @override
+  String get profileSignoutQuestion => 'Are you sure you want to sign out?';
+
+  @override
+  String get profileSignoutYes => 'Yes';
+
+  @override
+  String get profileSignoutCancel => 'No';
 
   @override
   String minutesPlural(num count) {

@@ -35,6 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
     on<CalculateConsecutiveDays>(_onCalculateConsecutiveDays);
     on<ValidateConsecutiveDays>(_onValidateConsecutiveDays);
+    on<ResetProfileContent>(_onResetProfile);
   }
 
   void _onLoadProfile(LoadProfile event, emit) async {
@@ -189,7 +190,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
       event.onError?.call(e, stack);
     }
+  }
 
+  void _onResetProfile(ResetProfileContent event, emit) {
+    logger.t('Reset profile...');
+    _profileStreamSubscription?.cancel();
+    emit(const ProfileState.initial());
   }
 
   @override

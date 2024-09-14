@@ -110,8 +110,6 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
             padding: const EdgeInsets.all(AppThemeData.spacingMd),
             child: AppButton(
               text: AppLocalizations.of(context).okay.toUpperCase(),
-              fColor: Colors.white,
-              bColor: Colors.black,
               onTap: () => _onSelectButtonPress(context),
             ),
           )

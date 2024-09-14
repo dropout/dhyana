@@ -1,4 +1,5 @@
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/timer/settings/sound_input_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -53,17 +54,12 @@ class _SoundInputState extends State<SoundInput> {
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => _onInputTap(context),
-      style: TextButton.styleFrom(
-        // minimumSize: const Size(160, 0),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppThemeData.spacingLg,
-          vertical: AppThemeData.spacingMd,
-        )
+    return SoundInputButton(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppThemeData.spacingLg,
+        vertical: AppThemeData.spacingMd,
       ),
+      onTap: () => _onInputTap(context),
       child: Text(
         getLocalizedSoundName(
           widget.value,

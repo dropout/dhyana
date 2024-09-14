@@ -31,6 +31,8 @@ class _ProfileViewState extends State<ProfileView> {
               return buildProfileError(context);
             case ProfileLoadedState():
               return buildProfileLoaded(context, state.profile);
+            default:
+              return const SizedBox.shrink();
           }
         }
     );

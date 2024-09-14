@@ -35,7 +35,7 @@
   "activity": "Activity",
   "editProfile": "Edit Profile",
   "timerSettingsHistory": "Settings history",
-  "signOut": "Signout",
+
 
   "profileFirstnameLabel": "Firstname",
   "profileLastnameLabel": "Lastname",
@@ -50,6 +50,11 @@
 
   "profileStats": "Statistics",
 
+  "signOut": "Signout",
+  "profileSignoutTitle": "Signout",
+  "profileSignoutQuestion": "Are you sure you want to sign out?",
+  "profileSignoutYes": "Yes",
+  "profileSignoutCancel": "No",
 
   "minutesPlural": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
   "daysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} days} few{{count} days} many{{count} days} other{{count} days}}",

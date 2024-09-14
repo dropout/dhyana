@@ -51,17 +51,16 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
 
   @override
   Widget build(BuildContext context) {
-    return CircularInputInkwell(
+    return DurationInputButton(
       onTap: () => _onInputTap(context),
-      padding: const EdgeInsets.all(
-        AppThemeData.paddingXl,
-      ),
+      padding: const EdgeInsets.all(AppThemeData.paddingMd),
       child: Text(widget.value.inMinutes.toString(),
-        style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-          color: Colors.white,
-          fontWeight: FontWeight.w900,
-          height: 1.0,
-        )
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            height: 1.0,
+          )
       ),
     );
   }

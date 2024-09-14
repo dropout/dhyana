@@ -42,6 +42,8 @@ class ProfileEditScreen extends StatelessWidget {
             return SafeArea(
               child: ProfileEditView(profile: state.profile)
             );
+          default:
+            return const SizedBox.shrink();
         }
       },
     );

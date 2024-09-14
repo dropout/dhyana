@@ -45,4 +45,6 @@ class ProfileEvent with _$ProfileEvent {
     void Function(Object? error, StackTrace stackTrace)? onError,
   }) = CalculateConsecutiveDays;
 
+  const factory ProfileEvent.reset() = ResetProfileContent;
+
 }

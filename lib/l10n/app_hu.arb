@@ -35,7 +35,7 @@
   "activity": "Aktivitás",
   "editProfile": "Profil szerkesztése",
   "timerSettingsHistory": "Legutóbbi beállítások",
-  "signOut": "Kijelentkezés",
+
 
   "profileFirstnameLabel": "Keresztnév",
   "profileLastnameLabel": "Vezetéknév",
@@ -49,6 +49,12 @@
   "photoAccessDialogButtonText": "Rendben",
 
   "profileStats": "Statisztika",
+
+  "signOut": "Kijelentkezés",
+  "profileSignoutTitle": "Kijelentkezés",
+  "profileSignoutQuestion": "Biztos, hogy ki akarsz jelentkezni?",
+  "profileSignoutYes": "Igen",
+  "profileSignoutCancel": "Mégsem",
 
   "minutesPlural": "{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}",
   "daysPlural": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}",

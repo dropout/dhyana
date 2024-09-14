@@ -43,6 +43,7 @@ mixin _$ProfileEvent {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +66,7 @@ mixin _$ProfileEvent {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +89,7 @@ mixin _$ProfileEvent {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -100,6 +103,7 @@ mixin _$ProfileEvent {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +114,7 @@ mixin _$ProfileEvent {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -120,6 +125,7 @@ mixin _$ProfileEvent {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -276,6 +282,7 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) {
     return loadProfile(profileId, onComplete, onError, useStream);
   }
@@ -301,6 +308,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) {
     return loadProfile?.call(profileId, onComplete, onError, useStream);
   }
@@ -326,6 +334,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -345,6 +354,7 @@ class _$LoadProfileImpl implements LoadProfile {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) {
     return loadProfile(this);
   }
@@ -358,6 +368,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) {
     return loadProfile?.call(this);
   }
@@ -371,6 +382,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -506,6 +518,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) {
     return receiveUpdate(profile);
   }
@@ -531,6 +544,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) {
     return receiveUpdate?.call(profile);
   }
@@ -556,6 +570,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (receiveUpdate != null) {
@@ -575,6 +590,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) {
     return receiveUpdate(this);
   }
@@ -588,6 +604,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) {
     return receiveUpdate?.call(this);
   }
@@ -601,6 +618,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) {
     if (receiveUpdate != null) {
@@ -786,6 +804,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) {
     return updateProfile(
         profile, formData, onComplete, onError, completeProfile);
@@ -812,6 +831,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) {
     return updateProfile?.call(
         profile, formData, onComplete, onError, completeProfile);
@@ -838,6 +858,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -858,6 +879,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) {
     return updateProfile(this);
   }
@@ -871,6 +893,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) {
     return updateProfile?.call(this);
   }
@@ -884,6 +907,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -981,6 +1005,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) {
     return error();
   }
@@ -1006,6 +1031,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) {
     return error?.call();
   }
@@ -1031,6 +1057,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1050,6 +1077,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) {
     return error(this);
   }
@@ -1063,6 +1091,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) {
     return error?.call(this);
   }
@@ -1076,6 +1105,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1218,6 +1248,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) {
     return validateConsecutiveDays(profile, onComplete, onError);
   }
@@ -1243,6 +1274,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) {
     return validateConsecutiveDays?.call(profile, onComplete, onError);
   }
@@ -1268,6 +1300,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (validateConsecutiveDays != null) {
@@ -1287,6 +1320,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) {
     return validateConsecutiveDays(this);
   }
@@ -1300,6 +1334,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) {
     return validateConsecutiveDays?.call(this);
   }
@@ -1313,6 +1348,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) {
     if (validateConsecutiveDays != null) {
@@ -1469,6 +1505,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
+    required TResult Function() reset,
   }) {
     return calculateConsecutiveDays(profile, onComplete, onError);
   }
@@ -1494,6 +1531,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     TResult? Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult? Function()? reset,
   }) {
     return calculateConsecutiveDays?.call(profile, onComplete, onError);
   }
@@ -1519,6 +1557,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     TResult Function(Profile profile, void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (calculateConsecutiveDays != null) {
@@ -1538,6 +1577,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
         validateConsecutiveDays,
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
   }) {
     return calculateConsecutiveDays(this);
   }
@@ -1551,6 +1591,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
   }) {
     return calculateConsecutiveDays?.call(this);
   }
@@ -1564,6 +1605,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
     required TResult orElse(),
   }) {
     if (calculateConsecutiveDays != null) {
@@ -1592,9 +1634,191 @@ abstract class CalculateConsecutiveDays implements ProfileEvent {
 }
 
 /// @nodoc
+abstract class _$$ResetProfileContentImplCopyWith<$Res> {
+  factory _$$ResetProfileContentImplCopyWith(_$ResetProfileContentImpl value,
+          $Res Function(_$ResetProfileContentImpl) then) =
+      __$$ResetProfileContentImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetProfileContentImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ResetProfileContentImpl>
+    implements _$$ResetProfileContentImplCopyWith<$Res> {
+  __$$ResetProfileContentImplCopyWithImpl(_$ResetProfileContentImpl _value,
+      $Res Function(_$ResetProfileContentImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ResetProfileContentImpl implements ResetProfileContent {
+  const _$ResetProfileContentImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.reset()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResetProfileContentImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String profileId,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool useStream)
+        loadProfile,
+    required TResult Function(Profile profile) receiveUpdate,
+    required TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)
+        updateProfile,
+    required TResult Function() error,
+    required TResult Function(
+            Profile profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)
+        validateConsecutiveDays,
+    required TResult Function(
+            Profile profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)
+        calculateConsecutiveDays,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String profileId, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError, bool useStream)?
+        loadProfile,
+    TResult? Function(Profile profile)? receiveUpdate,
+    TResult? Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult? Function()? error,
+    TResult? Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        validateConsecutiveDays,
+    TResult? Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        calculateConsecutiveDays,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String profileId, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError, bool useStream)?
+        loadProfile,
+    TResult Function(Profile profile)? receiveUpdate,
+    TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult Function()? error,
+    TResult Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        validateConsecutiveDays,
+    TResult Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        calculateConsecutiveDays,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadProfile value) loadProfile,
+    required TResult Function(ReceiveProfileUpdate value) receiveUpdate,
+    required TResult Function(UpdateProfile value) updateProfile,
+    required TResult Function(ProfileErrorOccured value) error,
+    required TResult Function(ValidateConsecutiveDays value)
+        validateConsecutiveDays,
+    required TResult Function(CalculateConsecutiveDays value)
+        calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadProfile value)? loadProfile,
+    TResult? Function(ReceiveProfileUpdate value)? receiveUpdate,
+    TResult? Function(UpdateProfile value)? updateProfile,
+    TResult? Function(ProfileErrorOccured value)? error,
+    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
+    TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProfile value)? loadProfile,
+    TResult Function(ReceiveProfileUpdate value)? receiveUpdate,
+    TResult Function(UpdateProfile value)? updateProfile,
+    TResult Function(ProfileErrorOccured value)? error,
+    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
+    TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResetProfileContent implements ProfileEvent {
+  const factory ResetProfileContent() = _$ResetProfileContentImpl;
+}
+
+/// @nodoc
 mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Profile profile) loaded,
     required TResult Function() error,
@@ -1602,6 +1826,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Profile profile)? loaded,
     TResult? Function()? error,
@@ -1609,6 +1834,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Profile profile)? loaded,
     TResult Function()? error,
@@ -1617,6 +1843,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ProfileStateInitial value) initial,
     required TResult Function(ProfileLoadingState value) loading,
     required TResult Function(ProfileLoadedState value) loaded,
     required TResult Function(ProfileErrorState value) error,
@@ -1624,6 +1851,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateInitial value)? initial,
     TResult? Function(ProfileLoadingState value)? loading,
     TResult? Function(ProfileLoadedState value)? loaded,
     TResult? Function(ProfileErrorState value)? error,
@@ -1631,6 +1859,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileStateInitial value)? initial,
     TResult Function(ProfileLoadingState value)? loading,
     TResult Function(ProfileLoadedState value)? loaded,
     TResult Function(ProfileErrorState value)? error,
@@ -1658,6 +1887,125 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$ProfileStateInitialImplCopyWith<$Res> {
+  factory _$$ProfileStateInitialImplCopyWith(_$ProfileStateInitialImpl value,
+          $Res Function(_$ProfileStateInitialImpl) then) =
+      __$$ProfileStateInitialImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProfileStateInitialImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileStateInitialImpl>
+    implements _$$ProfileStateInitialImplCopyWith<$Res> {
+  __$$ProfileStateInitialImplCopyWithImpl(_$ProfileStateInitialImpl _value,
+      $Res Function(_$ProfileStateInitialImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ProfileStateInitialImpl extends ProfileStateInitial {
+  const _$ProfileStateInitialImpl() : super._();
+
+  @override
+  String toString() {
+    return 'ProfileState.initial()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileStateInitialImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Profile profile) loaded,
+    required TResult Function() error,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Profile profile)? loaded,
+    TResult? Function()? error,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Profile profile)? loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileStateInitial value) initial,
+    required TResult Function(ProfileLoadingState value) loading,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileErrorState value) error,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateInitial value)? initial,
+    TResult? Function(ProfileLoadingState value)? loading,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileErrorState value)? error,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileStateInitial value)? initial,
+    TResult Function(ProfileLoadingState value)? loading,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileStateInitial extends ProfileState {
+  const factory ProfileStateInitial() = _$ProfileStateInitialImpl;
+  const ProfileStateInitial._() : super._();
 }
 
 /// @nodoc
@@ -1702,6 +2050,7 @@ class _$ProfileLoadingStateImpl extends ProfileLoadingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Profile profile) loaded,
     required TResult Function() error,
@@ -1712,6 +2061,7 @@ class _$ProfileLoadingStateImpl extends ProfileLoadingState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Profile profile)? loaded,
     TResult? Function()? error,
@@ -1722,6 +2072,7 @@ class _$ProfileLoadingStateImpl extends ProfileLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Profile profile)? loaded,
     TResult Function()? error,
@@ -1736,6 +2087,7 @@ class _$ProfileLoadingStateImpl extends ProfileLoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ProfileStateInitial value) initial,
     required TResult Function(ProfileLoadingState value) loading,
     required TResult Function(ProfileLoadedState value) loaded,
     required TResult Function(ProfileErrorState value) error,
@@ -1746,6 +2098,7 @@ class _$ProfileLoadingStateImpl extends ProfileLoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateInitial value)? initial,
     TResult? Function(ProfileLoadingState value)? loading,
     TResult? Function(ProfileLoadedState value)? loaded,
     TResult? Function(ProfileErrorState value)? error,
@@ -1756,6 +2109,7 @@ class _$ProfileLoadingStateImpl extends ProfileLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileStateInitial value)? initial,
     TResult Function(ProfileLoadingState value)? loading,
     TResult Function(ProfileLoadedState value)? loaded,
     TResult Function(ProfileErrorState value)? error,
@@ -1854,6 +2208,7 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Profile profile) loaded,
     required TResult Function() error,
@@ -1864,6 +2219,7 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Profile profile)? loaded,
     TResult? Function()? error,
@@ -1874,6 +2230,7 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Profile profile)? loaded,
     TResult Function()? error,
@@ -1888,6 +2245,7 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ProfileStateInitial value) initial,
     required TResult Function(ProfileLoadingState value) loading,
     required TResult Function(ProfileLoadedState value) loaded,
     required TResult Function(ProfileErrorState value) error,
@@ -1898,6 +2256,7 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateInitial value)? initial,
     TResult? Function(ProfileLoadingState value)? loading,
     TResult? Function(ProfileLoadedState value)? loaded,
     TResult? Function(ProfileErrorState value)? error,
@@ -1908,6 +2267,7 @@ class _$ProfileLoadedStateImpl extends ProfileLoadedState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileStateInitial value)? initial,
     TResult Function(ProfileLoadingState value)? loading,
     TResult Function(ProfileLoadedState value)? loaded,
     TResult Function(ProfileErrorState value)? error,
@@ -1975,6 +2335,7 @@ class _$ProfileErrorStateImpl extends ProfileErrorState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Profile profile) loaded,
     required TResult Function() error,
@@ -1985,6 +2346,7 @@ class _$ProfileErrorStateImpl extends ProfileErrorState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Profile profile)? loaded,
     TResult? Function()? error,
@@ -1995,6 +2357,7 @@ class _$ProfileErrorStateImpl extends ProfileErrorState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Profile profile)? loaded,
     TResult Function()? error,
@@ -2009,6 +2372,7 @@ class _$ProfileErrorStateImpl extends ProfileErrorState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ProfileStateInitial value) initial,
     required TResult Function(ProfileLoadingState value) loading,
     required TResult Function(ProfileLoadedState value) loaded,
     required TResult Function(ProfileErrorState value) error,
@@ -2019,6 +2383,7 @@ class _$ProfileErrorStateImpl extends ProfileErrorState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateInitial value)? initial,
     TResult? Function(ProfileLoadingState value)? loading,
     TResult? Function(ProfileLoadedState value)? loaded,
     TResult? Function(ProfileErrorState value)? error,
@@ -2029,6 +2394,7 @@ class _$ProfileErrorStateImpl extends ProfileErrorState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileStateInitial value)? initial,
     TResult Function(ProfileLoadingState value)? loading,
     TResult Function(ProfileLoadedState value)? loaded,
     TResult Function(ProfileErrorState value)? error,

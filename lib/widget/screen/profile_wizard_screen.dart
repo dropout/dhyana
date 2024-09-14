@@ -40,6 +40,8 @@ class ProfileWizardScreen extends StatelessWidget {
             return const AppErrorDisplay();
           case ProfileLoadedState():
             return buildLoaded(context, state);
+          default:
+            return const SizedBox.shrink();
         }
       },
     );

@@ -70,55 +70,61 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: AppThemeData.spacing4xl),
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              WarmupTimeInput(
-                label: AppLocalizations.of(context).inputWarmupLabel,
-                value: widget.timerSettings.warmup,
-                onChange: (Duration duration) => _onWarmupChange(context, duration)
-              ),
-              const _ItemGap(),
-              SoundInput(
-                label: AppLocalizations.of(context).inputStartingSoundLabel,
-                value: widget.timerSettings.startingSound,
-                onChange: (Sound startingSound) => _onStartingSoundChange(context, startingSound)
-              ),
-              const _ItemGap(),
-              DurationInput(
-                label: AppLocalizations.of(context).inputDurationLabel,
-                value: widget.timerSettings.duration,
-                onChange: (Duration duration) => _onDurationChange(context, duration),
-              ),
-              const _ItemGap(),
-              SoundInput(
-                  label: AppLocalizations.of(context).inputEndingSoundLabel,
-                  value: widget.timerSettings.endingSound,
-                  onChange: (Sound endingSound) => _onEndingSoundChange(context, endingSound)
-              ),
-            ],
+
+    return SizedBox.expand(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+
+          WarmupTimeInput(
+            label: AppLocalizations.of(context).inputWarmupLabel,
+            value: widget.timerSettings.warmup,
+            onChange: (Duration duration) => _onWarmupChange(context, duration)
           ),
-        ),
-        const SizedBox(height: AppThemeData.circleMd),
-        DurationIndicator(
-          timerSettings: widget.timerSettings,
-          key: ValueKey<TimerSettings>(widget.timerSettings),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          child: AppStadiumButton(
-            onTap: () => _onStartButtonTap(context),
-            text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
-            fColor: Colors.white,
-            bColor: AppColors.bloodRed,
+
+          const _ItemGap(),
+
+          SoundInput(
+            label: AppLocalizations.of(context).inputStartingSoundLabel,
+            value: widget.timerSettings.startingSound,
+            onChange: (Sound startingSound) => _onStartingSoundChange(context, startingSound)
           ),
-        ),
-      ],
+
+          const _ItemGap(),
+
+          DurationInput(
+            label: AppLocalizations.of(context).inputDurationLabel,
+            value: widget.timerSettings.duration,
+            onChange: (Duration duration) => _onDurationChange(context, duration),
+          ),
+
+          const _ItemGap(),
+
+          SoundInput(
+              label: AppLocalizations.of(context).inputEndingSoundLabel,
+              value: widget.timerSettings.endingSound,
+              onChange: (Sound endingSound) => _onEndingSoundChange(context, endingSound)
+          ),
+
+          DurationIndicator(
+            timerSettings: widget.timerSettings,
+            key: ValueKey<TimerSettings>(widget.timerSettings),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(AppThemeData.spacingMd),
+            child: AppStadiumButton(
+              onTap: () => _onStartButtonTap(context),
+              text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
+              fColor: Colors.white,
+              bColor: AppColors.bloodRed,
+            ),
+          ),
+
+        ],
+      ),
     );
   }
 

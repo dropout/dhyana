@@ -96,9 +96,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get timerSettingsHistory => 'Legutóbbi beállítások';
 
   @override
-  String get signOut => 'Kijelentkezés';
-
-  @override
   String get profileFirstnameLabel => 'Keresztnév';
 
   @override
@@ -124,6 +121,21 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get profileStats => 'Statisztika';
+
+  @override
+  String get signOut => 'Kijelentkezés';
+
+  @override
+  String get profileSignoutTitle => 'Kijelentkezés';
+
+  @override
+  String get profileSignoutQuestion => 'Biztos, hogy ki akarsz jelentkezni?';
+
+  @override
+  String get profileSignoutYes => 'Igen';
+
+  @override
+  String get profileSignoutCancel => 'Mégsem';
 
   @override
   String minutesPlural(num count) {

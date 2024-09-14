@@ -269,12 +269,6 @@ abstract class AppLocalizations {
   /// **'Legutóbbi beállítások'**
   String get timerSettingsHistory;
 
-  /// No description provided for @signOut.
-  ///
-  /// In hu, this message translates to:
-  /// **'Kijelentkezés'**
-  String get signOut;
-
   /// No description provided for @profileFirstnameLabel.
   ///
   /// In hu, this message translates to:
@@ -328,6 +322,36 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Statisztika'**
   String get profileStats;
+
+  /// No description provided for @signOut.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kijelentkezés'**
+  String get signOut;
+
+  /// No description provided for @profileSignoutTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kijelentkezés'**
+  String get profileSignoutTitle;
+
+  /// No description provided for @profileSignoutQuestion.
+  ///
+  /// In hu, this message translates to:
+  /// **'Biztos, hogy ki akarsz jelentkezni?'**
+  String get profileSignoutQuestion;
+
+  /// No description provided for @profileSignoutYes.
+  ///
+  /// In hu, this message translates to:
+  /// **'Igen'**
+  String get profileSignoutYes;
+
+  /// No description provided for @profileSignoutCancel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mégsem'**
+  String get profileSignoutCancel;
 
   /// No description provided for @minutesPlural.
   ///

@@ -1,5 +1,6 @@
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
+import 'package:dhyana/widget/timer/settings/all.dart';
 import 'package:dhyana/widget/timer_settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
@@ -58,6 +59,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: const SettingsAppBar(),
       body: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
           builder: (BuildContext context, TimerSettingsState state) {
             switch (state) {
@@ -75,39 +77,9 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
   Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
     return SafeArea(
-      child: Stack(
-        fit: StackFit.expand,
-        clipBehavior: Clip.none,
-        children: [
-          TimerSettingsView(
-            timerSettings: timerSettings,
-          ),
-          buildProfileMenu(context),
-          buildTimerSettingsHistoryMenu(context),
-        ],
+      child: TimerSettingsView(
+        timerSettings: timerSettings,
       ),
-    );
-  }
-
-  Widget buildProfileMenu(BuildContext context) {
-    return const Positioned(
-        top: AppThemeData.spacingMd,
-        right: AppThemeData.spacingMd,
-        child: Wrap(
-          children: [
-            ProfileButton(
-              size: AppThemeData.circleSm,
-            )
-          ],
-        )
-    );
-  }
-
-  Widget buildTimerSettingsHistoryMenu(BuildContext context) {
-    return const Positioned(
-      top: AppThemeData.spacingMd,
-      right: AppThemeData.spacingMd * 6,
-      child: TimerSettingsHistoryButton(),
     );
   }
 

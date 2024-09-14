@@ -80,6 +80,8 @@ class ProfileButton extends StatelessWidget {
             return buildProfileError(context, userId);
           case ProfileLoadedState():
             return buildProfileLoaded(context, state.profile);
+          default:
+            return const SizedBox.shrink();
         }
       }
     );
