@@ -56,8 +56,8 @@ class _SoundInputState extends State<SoundInput> {
   Widget build(BuildContext context) {
     return SoundInputButton(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppThemeData.spacingLg,
-        vertical: AppThemeData.spacingMd,
+        horizontal: AppThemeData.spacingMd,
+        vertical: AppThemeData.spacingSm,
       ),
       onTap: () => _onInputTap(context),
       child: Text(

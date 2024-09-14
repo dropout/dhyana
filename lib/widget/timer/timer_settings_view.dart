@@ -71,42 +71,64 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   @override
   Widget build(BuildContext context) {
 
-    return SizedBox.expand(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: buildInputs(context)
+        ),
+        buildStartButton(context),
+      ],
+    );
 
-          WarmupTimeInput(
+  }
+
+  Widget buildInputs(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+
+        WarmupTimeInput(
             label: AppLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
             onChange: (Duration duration) => _onWarmupChange(context, duration)
-          ),
+        ),
 
-          const _ItemGap(),
+        const _ItemGap(),
 
-          SoundInput(
+        SoundInput(
             label: AppLocalizations.of(context).inputStartingSoundLabel,
             value: widget.timerSettings.startingSound,
             onChange: (Sound startingSound) => _onStartingSoundChange(context, startingSound)
-          ),
+        ),
 
-          const _ItemGap(),
+        const _ItemGap(),
 
-          DurationInput(
-            label: AppLocalizations.of(context).inputDurationLabel,
-            value: widget.timerSettings.duration,
-            onChange: (Duration duration) => _onDurationChange(context, duration),
-          ),
+        DurationInput(
+          label: AppLocalizations.of(context).inputDurationLabel,
+          value: widget.timerSettings.duration,
+          onChange: (Duration duration) => _onDurationChange(context, duration),
+        ),
 
-          const _ItemGap(),
+        const _ItemGap(),
 
-          SoundInput(
-              label: AppLocalizations.of(context).inputEndingSoundLabel,
-              value: widget.timerSettings.endingSound,
-              onChange: (Sound endingSound) => _onEndingSoundChange(context, endingSound)
-          ),
+        SoundInput(
+            label: AppLocalizations.of(context).inputEndingSoundLabel,
+            value: widget.timerSettings.endingSound,
+            onChange: (Sound endingSound) => _onEndingSoundChange(context, endingSound)
+        ),
+
+      ],
+    );
+  }
+
+  Widget buildStartButton(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
 
           DurationIndicator(
             timerSettings: widget.timerSettings,
@@ -137,9 +159,16 @@ class _ItemGap extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return const Icon(
-      Icons.arrow_downward_rounded,
-      size: 21,
+    return const Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: AppThemeData.paddingMd,
+        horizontal: 0,
+      ),
+      child: Icon(
+        Icons.arrow_downward_rounded,
+        size: 21,
+      ),
     );
   }
+
 }

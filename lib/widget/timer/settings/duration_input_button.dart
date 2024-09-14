@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DurationInputButton extends StatelessWidget {
@@ -23,13 +24,11 @@ class DurationInputButton extends StatelessWidget {
       hoverElevation: 0,
       focusElevation: 0,
       highlightElevation: 0,
-      shape: const CircleBorder(side: BorderSide.none), //circular button
-      fillColor: Colors.black, //background color
-      splashColor: Colors.red,
-      // highlightColor: Colors.amber,
+      shape: const CircleBorder(side: BorderSide.none),
+      fillColor: Colors.black,
+      splashColor: AppColors.bloodRed,
       clipBehavior: Clip.none,
       child: child,
-      // child: getStupidWrapper(context),
     );
   }
 
