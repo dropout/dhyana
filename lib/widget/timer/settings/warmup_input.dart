@@ -1,9 +1,11 @@
-import 'package:dhyana/widget/timer/settings/all.dart';
-import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:go_router/go_router.dart';
+
+import 'duration_input_view.dart';
+import 'duration_input_button.dart';
 
 class WarmupTimeInput extends StatefulWidget {
 
@@ -25,7 +27,7 @@ class WarmupTimeInput extends StatefulWidget {
 
 class _WarmupTimeInputState extends State<WarmupTimeInput> {
 
-  void _onDurationSelected(BuildContext context, Duration duration) {
+  void _onSelected(BuildContext context, Duration duration) {
     widget.onChange?.call(duration);
     context.pop();
   }
@@ -34,7 +36,7 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.backgroundPaper,
+      backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       useRootNavigator: true,
       builder: (context) {
@@ -42,7 +44,7 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
           title: widget.label,
           initialValue: widget.value,
           values: const [0,1,2,3,5],
-          onSelect: (Duration duration) => _onDurationSelected(context, duration),
+          onSelect: (Duration duration) => _onSelected(context, duration),
         );
       }
     );
@@ -55,12 +57,12 @@ class _WarmupTimeInputState extends State<WarmupTimeInput> {
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(AppThemeData.paddingMd),
       child: Text(widget.value.inMinutes.toString(),
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displaySmall!.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w900,
-            height: 1.0,
-          )
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.displaySmall!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w900,
+          height: 1.0,
+        )
       ),
     );
   }

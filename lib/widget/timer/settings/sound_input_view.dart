@@ -4,8 +4,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
-import 'package:dhyana/widget/util/app_button.dart';
-
+import 'input_view.dart';
 import 'sound_input_page_view_scroll_physics.dart';
 
 class SoundInputView extends StatefulWidget {
@@ -63,58 +62,39 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AppBar(
-            title: Text(
-              widget.title,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              )
-            ),
-            automaticallyImplyLeading: false,
+    return InputView(
+      title: widget.title,
+      onSave: () => _onSelectButtonPress(context),
+      child: buildContent(context),
+    );
+  }
+
+  Widget buildContent(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 300,
+          child: PageView(
+            onPageChanged: (int index) => _onPageChanged(context, index),
+            controller: pageController,
+            physics: const SoundInputPageViewScrollPhysics(),
+            children: Sound.values.map((Sound s) => buildPage(
+              context, s
+            )).toList(),
           ),
-          SizedBox(
-            height: 300,
-            child: PageView(
-              onPageChanged: (int index) => _onPageChanged(context, index),
-              controller: pageController,
-              physics: const SoundInputPageViewScrollPhysics(),
-              children: Sound.values.map((Sound s) => buildPage(
-                context, s
-              )).toList(),
-            ),
-          ),
-          SizedBox(
-            height: 48,
-            child: Center(
-              child: TabPageSelector(
-                controller: tabController,
-                color: Colors.black.withOpacity(0.2),
-                selectedColor: Colors.black,
-                borderStyle: BorderStyle.none,
-              ),
+        ),
+        SizedBox(
+          height: 48,
+          child: Center(
+            child: TabPageSelector(
+              controller: tabController,
+              color: Colors.black.withOpacity(0.2),
+              selectedColor: Colors.black,
+              borderStyle: BorderStyle.none,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppThemeData.spacingMd,
-              0.0,
-              AppThemeData.spacingMd,
-              AppThemeData.spacingMd,
-            ),
-            child: AppButton(
-              text: AppLocalizations.of(context).okay.toUpperCase(),
-              fColor: Colors.white,
-              bColor: Colors.black,
-              onTap: () => _onSelectButtonPress(context),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 

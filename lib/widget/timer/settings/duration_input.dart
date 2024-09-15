@@ -1,8 +1,7 @@
-import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:dhyana/widget/app_colors.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:go_router/go_router.dart';
 
 import 'duration_input_view.dart';
 import 'duration_input_button.dart';
@@ -36,7 +35,7 @@ class _DurationInputState extends State<DurationInput> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.backgroundPaper,
+      backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       useRootNavigator: true,
       builder: (context) {
@@ -57,12 +56,12 @@ class _DurationInputState extends State<DurationInput> {
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(AppThemeData.paddingXl),
       child: Text(widget.value.inMinutes.toString(),
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displayLarge!.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w900,
-            height: 1.0,
-          )
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.displayLarge!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w900,
+          height: 1.0,
+        )
       ),
     );
   }

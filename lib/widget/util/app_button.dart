@@ -18,18 +18,21 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => onTap?.call(),
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 48.0),
-        foregroundColor: fColor,
-        backgroundColor: bColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(AppThemeData.borderRadiusMd)
-          )
-        ),
+    return RawMaterialButton(
+      padding: const EdgeInsets.symmetric(
+        vertical: AppThemeData.paddingMd,
+        horizontal: AppThemeData.paddingXl,
       ),
+      onPressed: () => onTap?.call(),
+      elevation: 0,
+      hoverElevation: 0,
+      focusElevation: 0,
+      highlightElevation: 0,
+      constraints: const BoxConstraints(), // removes unnecessary padding
+      shape: const StadiumBorder(),
+      fillColor: Colors.black, //background color
+      splashColor: Colors.red,
+      clipBehavior: Clip.none,
       child: Text(text,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
           color: fColor,

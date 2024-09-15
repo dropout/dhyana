@@ -38,7 +38,7 @@ class _SoundInputState extends State<SoundInput> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.backgroundPaper,
+      backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       useRootNavigator: true,
       builder: (context) {

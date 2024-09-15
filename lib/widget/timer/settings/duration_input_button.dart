@@ -1,5 +1,5 @@
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:dhyana/widget/app_colors.dart';
 
 class DurationInputButton extends StatelessWidget {
 
@@ -10,7 +10,6 @@ class DurationInputButton extends StatelessWidget {
   const DurationInputButton({
     required this.child,
     required this.onTap,
-    // this.padding = const EdgeInsets.all(AppThemeData.paddingMd),
     this.padding = EdgeInsets.zero,
     super.key
   });
