@@ -5,8 +5,8 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/app_stadium_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -70,7 +70,6 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,13 +136,27 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
           Padding(
             padding: const EdgeInsets.all(AppThemeData.spacingMd),
-            child: AppStadiumButton(
+            child: AppButton(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppThemeData.spacingXl,
+                vertical: AppThemeData.spacingMd
+              ),
               onTap: () => _onStartButtonTap(context),
               text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
               fColor: Colors.white,
               bColor: AppColors.bloodRed,
-            ),
-          ),
+            )
+          )
+
+          // Padding(
+          //   padding: const EdgeInsets.all(AppThemeData.spacingMd),
+          //   child: AppStadiumButton(
+          //     onTap: () => _onStartButtonTap(context),
+          //     text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
+          //     fColor: Colors.white,
+          //     bColor: AppColors.bloodRed,
+          //   ),
+          // ),
 
         ],
       ),

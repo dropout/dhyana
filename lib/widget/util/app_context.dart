@@ -1,6 +1,4 @@
 import 'package:dhyana/init/all.dart';
-import 'package:dhyana/service/analytics_service.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

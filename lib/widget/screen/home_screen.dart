@@ -1,15 +1,12 @@
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer/settings/all.dart';
-import 'package:dhyana/widget/timer_settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/profile/profile_button.dart';
 
 class HomeScreen extends StatelessWidget {
 

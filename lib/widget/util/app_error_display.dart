@@ -1,8 +1,9 @@
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/app_stadium_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+
+import 'app_button.dart';
 
 class AppErrorDisplay extends StatelessWidget {
 
@@ -88,7 +89,7 @@ class AppErrorDisplay extends StatelessWidget {
   Widget _buildButton(BuildContext context, String buttonText) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: AppStadiumButton(
+      child: AppButton(
         onTap: () => _handleButtonTap(context),
         text: buttonText,
       ),
