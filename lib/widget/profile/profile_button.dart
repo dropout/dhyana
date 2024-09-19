@@ -17,7 +17,7 @@ class ProfileButton extends StatelessWidget {
 
   const ProfileButton({
     super.key,
-    this.size = 40.0,
+    this.size = 24.0,
   });
   
   void _signedOutTap(BuildContext context) {
@@ -98,20 +98,30 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
-    return GestureDetector(
-      onTap: () => _signedInTap(context, profile),
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.black,
-            width: 3.0,
+    return Stack(
+      children: <Widget>[
+        DecoratedBox(
+          position: DecorationPosition.foreground,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.black,
+              width: 3.0,
+            ),
+          ),
+          child: ProfileImage.fromProfile(profile, size: 40)
+        ),
+        Positioned.fill(
+          child: Material(
+            shape: const CircleBorder(),
+            color: Colors.transparent,
+            child: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: () => _signedInTap(context, profile),
+            ),
           ),
         ),
-        child: ProfileImage.fromProfile(profile),
-      )
+      ],
     );
   }
 

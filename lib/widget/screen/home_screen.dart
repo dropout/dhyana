@@ -1,8 +1,11 @@
+import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/timer/all.dart';
-import 'package:dhyana/widget/timer/settings/all.dart';
+import 'package:dhyana/widget/timer/settings_history/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
+import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
@@ -56,7 +59,16 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: const SettingsAppBar(),
+      appBar: CustomAppBar(
+        trailing: [
+          SignedIn(
+            yes: (context, user) {
+              return TimerSettingsHistoryButton(profileId: user.uid);
+            }
+          ),
+          const ProfileButton(),
+        ],
+      ),
       body: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
           builder: (BuildContext context, TimerSettingsState state) {
             switch (state) {
