@@ -40,6 +40,7 @@ class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen>
         ),
         extendBodyBehindAppBar: true,
         body: SafeArea(
+          bottom: false,
           child: buildState(context)
         )
     );

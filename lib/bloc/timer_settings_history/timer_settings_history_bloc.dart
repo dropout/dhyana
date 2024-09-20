@@ -39,7 +39,7 @@ class TimerSettingsHistoryBloc
       List<TimerSettings> timerSettingsList =
       await timerSettingsHistoryRepository.query(
         event.profileId,
-        const TimerSettingsHistoryQueryOptions(),
+        const TimerSettingsHistoryQueryOptions(limit: 5),
       );
       emit(TimerSettingsHistoryState.loaded(timerSettingsList: timerSettingsList));
       logger.t('Loaded ${timerSettingsList.length} timer settings from history');
