@@ -54,7 +54,7 @@ class _DurationInputState extends State<DurationInput> {
   Widget build(BuildContext context) {
     return DurationInputButton(
       onTap: () => _onInputTap(context),
-      padding: const EdgeInsets.all(AppThemeData.paddingXl),
+      padding: const EdgeInsets.all(AppThemeData.padding2Xl),
       child: Text(widget.value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayLarge!.copyWith(

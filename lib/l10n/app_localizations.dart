@@ -356,8 +356,14 @@ abstract class AppLocalizations {
   /// No description provided for @minutesPlural.
   ///
   /// In hu, this message translates to:
-  /// **'{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}'**
+  /// **'{count, plural, =0{perc} =1{perc} =2{perc} few{perc} many{perc} other{perc}}'**
   String minutesPlural(num count);
+
+  /// No description provided for @minutesPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}'**
+  String minutesPluralWithNumber(num count);
 
   /// No description provided for @daysPlural.
   ///

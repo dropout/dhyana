@@ -142,6 +142,21 @@ class AppLocalizationsHu extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
+      other: 'perc',
+      many: 'perc',
+      few: 'perc',
+      two: 'perc',
+      one: 'perc',
+      zero: 'perc',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String minutesPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
       other: '$count perc',
       many: '$count perc',
       few: '$count perc',

@@ -70,7 +70,7 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
           String text;
           TextStyle textStyle;
           if (value == widget.values[selectedIndex]) {
-            text = AppLocalizations.of(context).minutesPlural(value);
+            text = AppLocalizations.of(context).minutesPluralWithNumber(value);
             textStyle = Theme.of(context).textTheme.headlineMedium!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.black,
