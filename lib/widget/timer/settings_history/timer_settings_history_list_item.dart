@@ -1,6 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/localization.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -17,25 +18,47 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      surfaceTintColor: Colors.amber,
-      child: Padding(
-        // padding: const EdgeInsets.all(AppThemeData.paddingLg),
-        padding: EdgeInsets.zero,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            buildDurationColumn(context, timerSettings.duration),
-            // const SizedBox(width: AppThemeData.spacingXl),
-            buildDetailsColumn(context),
-            const Spacer(),
-            const Icon(
-              Icons.chevron_right_rounded,
-              size: 48,
-            )
-          ],
-        )
-      )
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.backgroundPaperLight,
+        borderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black38,
+            offset: Offset(1,2),
+            // spreadRadius: .0,
+            blurRadius: 1.0,
+          )
+        ]
+      ),
+      // surfaceTintColor: Colors.amber,
+      child: Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              buildDurationColumn(context, timerSettings.duration),
+              buildDetailsColumn(context),
+              const Spacer(),
+              const Icon(
+                Icons.chevron_right_rounded,
+                size: 48,
+              )
+            ],
+          ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+                highlightColor: Colors.white.withOpacity(0.25),
+                splashColor: Colors.white.withOpacity(0.25),
+                onTap: onTap,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -63,7 +86,6 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
           const SizedBox(height: AppThemeData.spacingSm),
           Text(AppLocalizations.of(context).minutesPlural(duration.inMinutes),
             style: Theme.of(context).textTheme.titleLarge,
-
           ),
         ],
       ),
@@ -76,19 +98,19 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildLabelValue(
+          buildDetail(
             context,
             'Warmup'.toUpperCase(),
             AppLocalizations.of(context).minutesPluralWithNumber(timerSettings.warmup.inMinutes)
           ),
           const SizedBox(height: AppThemeData.spacingSm),
-          buildLabelValue(
+          buildDetail(
             context,
             'Starting sound'.toUpperCase(),
             getLocalizedSoundName(timerSettings.startingSound, AppLocalizations.of(context)),
           ),
           const SizedBox(height: AppThemeData.spacingSm),
-          buildLabelValue(
+          buildDetail(
             context,
             'Ending sound'.toUpperCase(),
             getLocalizedSoundName(timerSettings.endingSound, AppLocalizations.of(context)),
@@ -98,7 +120,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
     );
   }
 
-  Widget buildLabelValue(BuildContext context, String label, String value) {
+  Widget buildDetail(BuildContext context, String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

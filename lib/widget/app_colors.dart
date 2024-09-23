@@ -5,6 +5,7 @@ class AppColors {
 
   // static const Color backgroundPaper = Color(0xFFF0E7D7);
   static const Color backgroundPaper = Color(0xFFDDCCB2);
+  static const Color backgroundPaperLight = Color(0xFFEFE7DC);
   static const Color bloodRed = Color(0xFFE4002B);
 
   // static const Color originalBlueSky = Color(0xFFACE0F4);

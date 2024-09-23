@@ -33,16 +33,16 @@ class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: CustomAppBar(
-          leading: const CustomBackButton(),
-          titleText: AppLocalizations.of(context).timerSettingsHistory,
-        ),
-        extendBodyBehindAppBar: true,
-        body: SafeArea(
-          bottom: false,
-          child: buildState(context)
-        )
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: CustomAppBar(
+        leading: const CustomBackButton(),
+        titleText: AppLocalizations.of(context).timerSettingsHistory,
+      ),
+      extendBodyBehindAppBar: true,
+      body: SafeArea(
+        bottom: false,
+        child: buildState(context)
+      )
     );
   }
 
