@@ -1,4 +1,5 @@
 import 'package:dhyana/route/app_screen.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -40,7 +41,7 @@ class TimerSettingsHistoryButton extends StatelessWidget {
             right: 2.0, // it's hard to center an icon in circle
           ),
           child: Icon(Icons.history,
-            color: Colors.white,
+            color: AppColors.backgroundPaperLight,
             size: 24,
           ),
         ),

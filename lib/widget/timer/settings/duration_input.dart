@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -58,7 +59,7 @@ class _DurationInputState extends State<DurationInput> {
       child: Text(widget.value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayLarge!.copyWith(
-          color: Colors.white,
+          color: AppColors.backgroundPaperLight,
           fontWeight: FontWeight.w900,
           height: 1.0,
         )

@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -80,7 +81,7 @@ class _CustomBackButtonState extends State<CustomBackButton>
                       alignment: Alignment(alignmentAnimation.value, 0.0),
                       child: const Icon(
                         Icons.arrow_back,
-                        color: Colors.white,
+                        color: AppColors.backgroundPaperLight,
                         size: AppThemeData.spacingLg,
                       )
                     ),

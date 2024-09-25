@@ -1,10 +1,9 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/profile_bloc_provider.dart';
 import 'package:dhyana/widget/profile/profile_wizard_view.dart';
-import 'package:dhyana/widget/util/app_back_button.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,7 +51,7 @@ class ProfileWizardScreen extends StatelessWidget {
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
-        const AppBackButton(),
+        const CustomBackButton(),
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -78,7 +78,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
               child: Text(duration.inMinutes.toString().toUpperCase(),
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: AppColors.backgroundPaperLight,
                 ),
               ),
             ),

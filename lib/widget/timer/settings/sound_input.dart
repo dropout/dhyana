@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -65,7 +66,7 @@ class _SoundInputState extends State<SoundInput> {
           AppLocalizations.of(context)
         ),
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          color: Colors.white,
+          color: AppColors.backgroundPaperLight,
           fontWeight: FontWeight.w800,
         )
       ),

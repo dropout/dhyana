@@ -1,6 +1,6 @@
+import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/bloc_provider/presence_bloc_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
-import 'package:dhyana/widget/util/app_back_button.dart';
 import 'package:flutter/material.dart';
 
 class PresenceScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class PresenceScreen extends StatelessWidget {
             PresenceView(),
           ],
         ),
-        AppBackButton(),
+        CustomBackButton(),
       ],
     );
   }
