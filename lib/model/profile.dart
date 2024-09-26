@@ -67,12 +67,6 @@ class Profile with _$Profile implements Model {
   factory Profile.fromJson(Map<String, Object?> json) =>
     _$ProfileFromJson(json);
 
-  factory Profile.fromFireStore(DocumentSnapshot snapshot) =>
-    Profile.fromJson(snapshot.data() as Map<String, dynamic>);
-
-  // @override
-  // Map<String, Object?> toFireStore() => toJson();
-
   String get displayName {
     return '$firstName $lastName';
   }

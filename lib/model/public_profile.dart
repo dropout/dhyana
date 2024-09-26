@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -44,8 +43,5 @@ class PublicProfile with _$PublicProfile {
 
   factory PublicProfile.fromJson(Map<String, Object?> json) =>
     _$PublicProfileFromJson(json);
-
-  factory PublicProfile.fromFirstore(DocumentSnapshot snapshot) =>
-    PublicProfile.fromJson(snapshot.data() as Map<String, dynamic>);
 
 }

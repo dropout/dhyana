@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -22,8 +21,5 @@ class Presence with _$Presence implements Model {
 
   factory Presence.fromJson(Map<String, Object?> json) =>
       _$PresenceFromJson(json);
-
-  factory Presence.fromFireStore(DocumentSnapshot snapshot) =>
-      Presence.fromJson(snapshot.data() as Map<String, dynamic>);
 
 }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -35,8 +34,5 @@ class Day with _$Day implements Model {
 
   factory Day.fromJson(Map<String, Object?> json) =>
     _$DayFromJson(json);
-
-  factory Day.fromFireStore(DocumentSnapshot snapshot) =>
-    Day.fromJson(snapshot.data() as Map<String, dynamic>);
 
 }
