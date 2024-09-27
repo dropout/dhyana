@@ -22,7 +22,7 @@ class FirebaseAuthRepository implements AuthRepository {
     in pressed and to rely on the signin method direct result not the change
     might be coming from the streams.
    */
-  bool isSigningIn = false;
+  bool _isSigningIn = false;
 
   FirebaseAuthRepository({
     required this.authDataProvider,
@@ -31,11 +31,11 @@ class FirebaseAuthRepository implements AuthRepository {
 
   @override
   Stream<User?> get authStateChange => authDataProvider.authStateChange
-    .takeWhile((_) => (isSigningIn == false));
+    .takeWhile((_) => (_isSigningIn == false));
 
   @override
   Stream<User?> get userChange => authDataProvider.userChange
-    .takeWhile((_) => (isSigningIn == false));
+    .takeWhile((_) => (_isSigningIn == false));
 
   @override
   Future<User?> get user => authDataProvider.user;
@@ -46,7 +46,7 @@ class FirebaseAuthRepository implements AuthRepository {
     String? password
   }) async {
     // Guard these operations with a flag
-    isSigningIn = true;
+    _isSigningIn = true;
     SigninResult signinResult =
       await authDataProvider.signIn(signinMethodType);
     bool isFirst = isFirstSignin(signinResult);
@@ -54,7 +54,7 @@ class FirebaseAuthRepository implements AuthRepository {
       logger.t('First time signing in, creating profile...');
       await _createProfile(signinResult);
     }
-    isSigningIn = false;
+    _isSigningIn = false;
     // End of guarding operations
     return (signinResult.user, isFirst);
   }

@@ -80,6 +80,7 @@ class _ProfileViewState extends State<ProfileView> {
             const SizedBox(height: AppThemeData.spacingLg),
             ConsecutiveDays(
               profile: profile,
+              overrideProfileValue: true,
             ),
             const SizedBox(height: AppThemeData.spacingLg),
             ProfileMenu(profile: profile),

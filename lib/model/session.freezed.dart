@@ -28,6 +28,7 @@ mixin _$Session {
   @DurationConverter()
   Duration get duration => throw _privateConstructorUsedError;
   TimerSettings get timerSettings => throw _privateConstructorUsedError;
+  int get consecutiveDays => throw _privateConstructorUsedError;
 
   /// Serializes this Session to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +49,8 @@ abstract class $SessionCopyWith<$Res> {
       @DateTimeConverter() DateTime startTime,
       @DateTimeConverter() DateTime endTime,
       @DurationConverter() Duration duration,
-      TimerSettings timerSettings});
+      TimerSettings timerSettings,
+      int consecutiveDays});
 
   $TimerSettingsCopyWith<$Res> get timerSettings;
 }
@@ -73,6 +75,7 @@ class _$SessionCopyWithImpl<$Res, $Val extends Session>
     Object? endTime = null,
     Object? duration = null,
     Object? timerSettings = null,
+    Object? consecutiveDays = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -95,6 +98,10 @@ class _$SessionCopyWithImpl<$Res, $Val extends Session>
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
               as TimerSettings,
+      consecutiveDays: null == consecutiveDays
+          ? _value.consecutiveDays
+          : consecutiveDays // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -121,7 +128,8 @@ abstract class _$$SessionImplCopyWith<$Res> implements $SessionCopyWith<$Res> {
       @DateTimeConverter() DateTime startTime,
       @DateTimeConverter() DateTime endTime,
       @DurationConverter() Duration duration,
-      TimerSettings timerSettings});
+      TimerSettings timerSettings,
+      int consecutiveDays});
 
   @override
   $TimerSettingsCopyWith<$Res> get timerSettings;
@@ -145,6 +153,7 @@ class __$$SessionImplCopyWithImpl<$Res>
     Object? endTime = null,
     Object? duration = null,
     Object? timerSettings = null,
+    Object? consecutiveDays = null,
   }) {
     return _then(_$SessionImpl(
       id: null == id
@@ -167,6 +176,10 @@ class __$$SessionImplCopyWithImpl<$Res>
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
               as TimerSettings,
+      consecutiveDays: null == consecutiveDays
+          ? _value.consecutiveDays
+          : consecutiveDays // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
       @DateTimeConverter() required this.startTime,
       @DateTimeConverter() required this.endTime,
       @DurationConverter() required this.duration,
-      required this.timerSettings})
+      required this.timerSettings,
+      this.consecutiveDays = 0})
       : super._();
 
   factory _$SessionImpl.fromJson(Map<String, dynamic> json) =>
@@ -198,10 +212,13 @@ class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
   final Duration duration;
   @override
   final TimerSettings timerSettings;
+  @override
+  @JsonKey()
+  final int consecutiveDays;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Session(id: $id, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings)';
+    return 'Session(id: $id, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings, consecutiveDays: $consecutiveDays)';
   }
 
   @override
@@ -213,7 +230,8 @@ class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('startTime', startTime))
       ..add(DiagnosticsProperty('endTime', endTime))
       ..add(DiagnosticsProperty('duration', duration))
-      ..add(DiagnosticsProperty('timerSettings', timerSettings));
+      ..add(DiagnosticsProperty('timerSettings', timerSettings))
+      ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays));
   }
 
   @override
@@ -228,13 +246,15 @@ class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.timerSettings, timerSettings) ||
-                other.timerSettings == timerSettings));
+                other.timerSettings == timerSettings) &&
+            (identical(other.consecutiveDays, consecutiveDays) ||
+                other.consecutiveDays == consecutiveDays));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, startTime, endTime, duration, timerSettings);
+  int get hashCode => Object.hash(runtimeType, id, startTime, endTime, duration,
+      timerSettings, consecutiveDays);
 
   /// Create a copy of Session
   /// with the given fields replaced by the non-null parameter values.
@@ -258,7 +278,8 @@ abstract class _Session extends Session {
       @DateTimeConverter() required final DateTime startTime,
       @DateTimeConverter() required final DateTime endTime,
       @DurationConverter() required final Duration duration,
-      required final TimerSettings timerSettings}) = _$SessionImpl;
+      required final TimerSettings timerSettings,
+      final int consecutiveDays}) = _$SessionImpl;
   const _Session._() : super._();
 
   factory _Session.fromJson(Map<String, dynamic> json) = _$SessionImpl.fromJson;
@@ -276,6 +297,8 @@ abstract class _Session extends Session {
   Duration get duration;
   @override
   TimerSettings get timerSettings;
+  @override
+  int get consecutiveDays;
 
   /// Create a copy of Session
   /// with the given fields replaced by the non-null parameter values.

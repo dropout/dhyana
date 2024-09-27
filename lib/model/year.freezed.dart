@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'day.dart';
+part of 'year.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,60 +14,58 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Day _$DayFromJson(Map<String, dynamic> json) {
-  return _Day.fromJson(json);
+Year _$YearFromJson(Map<String, dynamic> json) {
+  return _Year.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Day {
+mixin _$Year {
   String get id => throw _privateConstructorUsedError;
   @DateTimeConverter()
   DateTime get date => throw _privateConstructorUsedError;
-  List<Session> get sessions => throw _privateConstructorUsedError;
+  int get sessionCount => throw _privateConstructorUsedError;
   int get minutes => throw _privateConstructorUsedError;
-  int get consecutiveDays => throw _privateConstructorUsedError;
 
-  /// Serializes this Day to a JSON map.
+  /// Serializes this Year to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Day
+  /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DayCopyWith<Day> get copyWith => throw _privateConstructorUsedError;
+  $YearCopyWith<Year> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DayCopyWith<$Res> {
-  factory $DayCopyWith(Day value, $Res Function(Day) then) =
-      _$DayCopyWithImpl<$Res, Day>;
+abstract class $YearCopyWith<$Res> {
+  factory $YearCopyWith(Year value, $Res Function(Year) then) =
+      _$YearCopyWithImpl<$Res, Year>;
   @useResult
   $Res call(
       {String id,
       @DateTimeConverter() DateTime date,
-      List<Session> sessions,
-      int minutes,
-      int consecutiveDays});
+      int sessionCount,
+      int minutes});
 }
 
 /// @nodoc
-class _$DayCopyWithImpl<$Res, $Val extends Day> implements $DayCopyWith<$Res> {
-  _$DayCopyWithImpl(this._value, this._then);
+class _$YearCopyWithImpl<$Res, $Val extends Year>
+    implements $YearCopyWith<$Res> {
+  _$YearCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Day
+  /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? date = null,
-    Object? sessions = null,
+    Object? sessionCount = null,
     Object? minutes = null,
-    Object? consecutiveDays = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -78,54 +76,50 @@ class _$DayCopyWithImpl<$Res, $Val extends Day> implements $DayCopyWith<$Res> {
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      sessions: null == sessions
-          ? _value.sessions
-          : sessions // ignore: cast_nullable_to_non_nullable
-              as List<Session>,
+      sessionCount: null == sessionCount
+          ? _value.sessionCount
+          : sessionCount // ignore: cast_nullable_to_non_nullable
+              as int,
       minutes: null == minutes
           ? _value.minutes
           : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      consecutiveDays: null == consecutiveDays
-          ? _value.consecutiveDays
-          : consecutiveDays // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$DayImplCopyWith<$Res> implements $DayCopyWith<$Res> {
-  factory _$$DayImplCopyWith(_$DayImpl value, $Res Function(_$DayImpl) then) =
-      __$$DayImplCopyWithImpl<$Res>;
+abstract class _$$YearImplCopyWith<$Res> implements $YearCopyWith<$Res> {
+  factory _$$YearImplCopyWith(
+          _$YearImpl value, $Res Function(_$YearImpl) then) =
+      __$$YearImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       @DateTimeConverter() DateTime date,
-      List<Session> sessions,
-      int minutes,
-      int consecutiveDays});
+      int sessionCount,
+      int minutes});
 }
 
 /// @nodoc
-class __$$DayImplCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$DayImpl>
-    implements _$$DayImplCopyWith<$Res> {
-  __$$DayImplCopyWithImpl(_$DayImpl _value, $Res Function(_$DayImpl) _then)
+class __$$YearImplCopyWithImpl<$Res>
+    extends _$YearCopyWithImpl<$Res, _$YearImpl>
+    implements _$$YearImplCopyWith<$Res> {
+  __$$YearImplCopyWithImpl(_$YearImpl _value, $Res Function(_$YearImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Day
+  /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? date = null,
-    Object? sessions = null,
+    Object? sessionCount = null,
     Object? minutes = null,
-    Object? consecutiveDays = null,
   }) {
-    return _then(_$DayImpl(
+    return _then(_$YearImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -134,17 +128,13 @@ class __$$DayImplCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$DayImpl>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      sessions: null == sessions
-          ? _value._sessions
-          : sessions // ignore: cast_nullable_to_non_nullable
-              as List<Session>,
+      sessionCount: null == sessionCount
+          ? _value.sessionCount
+          : sessionCount // ignore: cast_nullable_to_non_nullable
+              as int,
       minutes: null == minutes
           ? _value.minutes
           : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      consecutiveDays: null == consecutiveDays
-          ? _value.consecutiveDays
-          : consecutiveDays // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -152,99 +142,84 @@ class __$$DayImplCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$DayImpl>
 
 /// @nodoc
 @JsonSerializable()
-class _$DayImpl extends _Day with DiagnosticableTreeMixin {
-  const _$DayImpl(
+class _$YearImpl extends _Year with DiagnosticableTreeMixin {
+  const _$YearImpl(
       {required this.id,
       @DateTimeConverter() required this.date,
-      required final List<Session> sessions,
-      required this.minutes,
-      this.consecutiveDays = 0})
-      : _sessions = sessions,
-        super._();
+      required this.sessionCount,
+      required this.minutes})
+      : super._();
 
-  factory _$DayImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DayImplFromJson(json);
+  factory _$YearImpl.fromJson(Map<String, dynamic> json) =>
+      _$$YearImplFromJson(json);
 
   @override
   final String id;
   @override
   @DateTimeConverter()
   final DateTime date;
-  final List<Session> _sessions;
   @override
-  List<Session> get sessions {
-    if (_sessions is EqualUnmodifiableListView) return _sessions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sessions);
-  }
-
+  final int sessionCount;
   @override
   final int minutes;
-  @override
-  @JsonKey()
-  final int consecutiveDays;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Day(id: $id, date: $date, sessions: $sessions, minutes: $minutes, consecutiveDays: $consecutiveDays)';
+    return 'Year(id: $id, date: $date, sessionCount: $sessionCount, minutes: $minutes)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Day'))
+      ..add(DiagnosticsProperty('type', 'Year'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('sessions', sessions))
-      ..add(DiagnosticsProperty('minutes', minutes))
-      ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays));
+      ..add(DiagnosticsProperty('sessionCount', sessionCount))
+      ..add(DiagnosticsProperty('minutes', minutes));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DayImpl &&
+            other is _$YearImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other._sessions, _sessions) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes) &&
-            (identical(other.consecutiveDays, consecutiveDays) ||
-                other.consecutiveDays == consecutiveDays));
+            (identical(other.sessionCount, sessionCount) ||
+                other.sessionCount == sessionCount) &&
+            (identical(other.minutes, minutes) || other.minutes == minutes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, date,
-      const DeepCollectionEquality().hash(_sessions), minutes, consecutiveDays);
+  int get hashCode => Object.hash(runtimeType, id, date, sessionCount, minutes);
 
-  /// Create a copy of Day
+  /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DayImplCopyWith<_$DayImpl> get copyWith =>
-      __$$DayImplCopyWithImpl<_$DayImpl>(this, _$identity);
+  _$$YearImplCopyWith<_$YearImpl> get copyWith =>
+      __$$YearImplCopyWithImpl<_$YearImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DayImplToJson(
+    return _$$YearImplToJson(
       this,
     );
   }
 }
 
-abstract class _Day extends Day {
-  const factory _Day(
+abstract class _Year extends Year {
+  const factory _Year(
       {required final String id,
       @DateTimeConverter() required final DateTime date,
-      required final List<Session> sessions,
-      required final int minutes,
-      final int consecutiveDays}) = _$DayImpl;
-  const _Day._() : super._();
+      required final int sessionCount,
+      required final int minutes}) = _$YearImpl;
+  const _Year._() : super._();
 
-  factory _Day.fromJson(Map<String, dynamic> json) = _$DayImpl.fromJson;
+  factory _Year.fromJson(Map<String, dynamic> json) = _$YearImpl.fromJson;
 
   @override
   String get id;
@@ -252,16 +227,14 @@ abstract class _Day extends Day {
   @DateTimeConverter()
   DateTime get date;
   @override
-  List<Session> get sessions;
+  int get sessionCount;
   @override
   int get minutes;
-  @override
-  int get consecutiveDays;
 
-  /// Create a copy of Day
+  /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DayImplCopyWith<_$DayImpl> get copyWith =>
+  _$$YearImplCopyWith<_$YearImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

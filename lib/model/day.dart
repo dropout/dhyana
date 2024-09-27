@@ -19,6 +19,7 @@ class Day with _$Day implements Model {
     @DateTimeConverter() required DateTime date,
     required List<Session> sessions,
     required int minutes,
+    @Default(0) int consecutiveDays,
   }) = _Day;
 
   factory Day.empty({

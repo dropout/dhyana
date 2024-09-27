@@ -1,5 +1,13 @@
 extension DateTimeUtils on DateTime {
 
+  String toYearId() {
+    return year.toString();
+  }
+
+  String toMonthId() {
+    return '$year${_twoDigits(month)}';
+  }
+
   String toDayId() {
     return '$year${_twoDigits(month)}${_twoDigits(day)}';
   }
