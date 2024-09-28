@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/util/all.dart';
+import 'package:dhyana/util/remap_range.dart';
 import 'package:dhyana/widget/bloc_provider/days_bloc_provider.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,5 @@
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/model/presence.dart';
-import 'package:dhyana/model/presence_query_options.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 
 class FirebasePresenceRepository implements PresenceRepository {
