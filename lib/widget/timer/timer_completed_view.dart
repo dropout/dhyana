@@ -39,17 +39,17 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
     context.hapticsTap();
   }
 
-  void _addSession(BuildContext context, User user, TimerState state) {
-    SessionsBloc sessionsBloc = BlocProvider.of<SessionsBloc>(context);
-    sessionsBloc.add(
-      SessionsEvent.addSession(
-        profileId: user.uid,
-        startTime: state.startTime!,
-        endTime: state.endTime!,
-        timerSettings: state.timerSettings,
-      )
-    );
-  }
+  // void _addSession(BuildContext context, User user, TimerState state) {
+  //   SessionsBloc sessionsBloc = BlocProvider.of<SessionsBloc>(context);
+  //   sessionsBloc.add(
+  //     SessionsEvent.addSession(
+  //       profileId: user.uid,
+  //       startTime: state.startTime!,
+  //       endTime: state.endTime!,
+  //       timerSettings: state.timerSettings,
+  //     )
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,6 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
           child: SignedIn(
             yes: (BuildContext context, User user) {
               return SignedInCompletedView(
-                onInit: () => _addSession(context, user, widget.timerState),
                 timerState: widget.timerState,
                 user: user,
               );

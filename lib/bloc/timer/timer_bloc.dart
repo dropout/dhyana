@@ -15,7 +15,7 @@ part 'timer_bloc.freezed.dart';
 
 /*
 
-    Manages business logic of a session.
+    Manages business logic of a timed session.
 
     Details:
     1. phase (optional): warmup timer
@@ -44,11 +44,14 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   late final StreamSubscription _durationTickerSub;
   late final StreamSubscription _durationFinishedSub;
 
+  final void Function(TimerState)? onComplete;
+
   TimerBloc({
     required this.timerSettings,
     required this.timerServiceFactory,
     required this.audioService,
     required this.crashlyticsService,
+    this.onComplete,
   }) : super(TimerState.initial(timerSettings: timerSettings)) {
 
     // Prepare warmup timer
@@ -211,12 +214,14 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     if (timerSettings.endingSound != Sound.none) {
       audioService.play(timerSettings.endingSound);
     }
-    emit(state.copyWith(
+    TimerState timerState = state.copyWith(
       timerStatus: TimerStatus.completed,
       elapsedWarmupTime: elapsedWarmupTime,
       elapsedTime: durationTimer.elapsedTime,
       endTime: durationTimer.endTime,
-    ));
+    );
+    emit(timerState);
+    onComplete?.call(timerState);
   }
 
   // User wants to finish before timer ends

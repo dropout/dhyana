@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
-import 'package:dhyana/model/profile_stats.dart';
+import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +23,7 @@ class Profile with _$Profile implements Model {
     required String photoUrl,
     required String photoBlurhash,
     @DateTimeConverter() required DateTime signupDate,
-    required ProfileStats stats,
+    required ProfileStatisticsReport statsReport,
     required bool completed,
   }) = _Profile;
 
@@ -34,7 +34,7 @@ class Profile with _$Profile implements Model {
     required String photoUrl,
     required String photoBlurhash,
     required DateTime signupDate,
-    required ProfileStats stats,
+    required ProfileStatisticsReport statsReport,
     required bool completed,
   }) {
     return Profile(
@@ -45,7 +45,7 @@ class Profile with _$Profile implements Model {
       photoUrl: photoUrl,
       photoBlurhash: photoBlurhash,
       signupDate: signupDate,
-      stats: stats,
+      statsReport: statsReport,
       completed: completed,
     );
   }
@@ -59,7 +59,7 @@ class Profile with _$Profile implements Model {
       photoUrl: DefaultProfileData.photoUrl,
       photoBlurhash: DefaultProfileData.photoBlurhash,
       signupDate: DateTime.now(),
-      stats: ProfileStats.empty(),
+      statsReport: ProfileStatisticsReport.empty(),
       completed: false,
     );
   }

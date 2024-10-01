@@ -1,4 +1,4 @@
-import 'package:dhyana/model/profile_stats.dart';
+import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:logger/logger.dart';
 
@@ -6,7 +6,7 @@ class ProfileStatsCalculator {
 
   final Logger logger = getLogger('ProfileStatsCalculator');
 
-  bool hasLastSession(ProfileStats stats) {
+  bool hasLastSession(ProfileStatisticsReport stats) {
     return stats.lastSessionDate != null;
   }
 
@@ -18,7 +18,7 @@ class ProfileStatsCalculator {
     return now.isYesterday(lastSessionDate);
   }
 
-  int getCalculatedConsecutiveDays(ProfileStats stats, { DateTime? currentSessionDate }) {
+  int getCalculatedConsecutiveDays(ProfileStatisticsReport stats, { DateTime? currentSessionDate }) {
     DateTime now = currentSessionDate ?? DateTime.now();
 
     // Case 0:
@@ -53,8 +53,8 @@ class ProfileStatsCalculator {
     return stats.consecutiveDays;
   }
 
-  ProfileStats calculateConsecutiveDays(
-    ProfileStats stats, { DateTime? currentSessionDate }
+  ProfileStatisticsReport calculateConsecutiveDays(
+      ProfileStatisticsReport stats, { DateTime? currentSessionDate }
   ) {
     DateTime now = currentSessionDate ?? DateTime.now();
     int calculatedConsecutiveDays = getCalculatedConsecutiveDays(stats, currentSessionDate: now);
@@ -63,8 +63,8 @@ class ProfileStatsCalculator {
     );
   }
 
-  ProfileStats calculateCompletedDay(
-    ProfileStats stats, { DateTime? currentSessionDate }
+  ProfileStatisticsReport calculateCompletedDay(
+      ProfileStatisticsReport stats, { DateTime? currentSessionDate }
   ) {
 
     DateTime now = currentSessionDate ?? DateTime.now();

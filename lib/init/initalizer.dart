@@ -3,8 +3,6 @@ import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
-import 'package:dhyana/repository/firebase/firebase_timer_settings_history_repository.dart';
-import 'package:dhyana/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -70,13 +68,12 @@ class Initializer {
         FirebaseFirestore.instance
       )
     );
-    DayRepository dayRepository = FirebaseDayRepository(
-      fireStore: firebaseProvider.firestore,
+
+    StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
+      fireStore: FirebaseFirestore.instance,
     );
-    SessionRepository sessionRepository = FirebaseSessionRepository(
-      fireStore: firebaseProvider.firestore,
-      profileDataProvider: profileDataProvider,
-    );
+
+
     TimerSettingsHistoryRepository timerSettingsHistoryRepository =
       FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);
 
@@ -84,8 +81,7 @@ class Initializer {
       authRepository: authRepository,
       profileRepository: profileRepository,
       presenceRepository: presenceRepository,
-      sessionRepository: sessionRepository,
-      dayRepository: dayRepository,
+      statisticsRepository: statisticsRepository,
       timerSettingsHistoryRepository: timerSettingsHistoryRepository,
     );
 

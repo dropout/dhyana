@@ -28,7 +28,7 @@ mixin _$Profile {
   String get photoBlurhash => throw _privateConstructorUsedError;
   @DateTimeConverter()
   DateTime get signupDate => throw _privateConstructorUsedError;
-  ProfileStats get stats => throw _privateConstructorUsedError;
+  ProfileStatisticsReport get statsReport => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
 
   /// Serializes this Profile to a JSON map.
@@ -53,10 +53,10 @@ abstract class $ProfileCopyWith<$Res> {
       String photoUrl,
       String photoBlurhash,
       @DateTimeConverter() DateTime signupDate,
-      ProfileStats stats,
+      ProfileStatisticsReport statsReport,
       bool completed});
 
-  $ProfileStatsCopyWith<$Res> get stats;
+  $ProfileStatisticsReportCopyWith<$Res> get statsReport;
 }
 
 /// @nodoc
@@ -81,7 +81,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? photoUrl = null,
     Object? photoBlurhash = null,
     Object? signupDate = null,
-    Object? stats = null,
+    Object? statsReport = null,
     Object? completed = null,
   }) {
     return _then(_value.copyWith(
@@ -113,10 +113,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.signupDate
           : signupDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      stats: null == stats
-          ? _value.stats
-          : stats // ignore: cast_nullable_to_non_nullable
-              as ProfileStats,
+      statsReport: null == statsReport
+          ? _value.statsReport
+          : statsReport // ignore: cast_nullable_to_non_nullable
+              as ProfileStatisticsReport,
       completed: null == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
@@ -128,9 +128,9 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ProfileStatsCopyWith<$Res> get stats {
-    return $ProfileStatsCopyWith<$Res>(_value.stats, (value) {
-      return _then(_value.copyWith(stats: value) as $Val);
+  $ProfileStatisticsReportCopyWith<$Res> get statsReport {
+    return $ProfileStatisticsReportCopyWith<$Res>(_value.statsReport, (value) {
+      return _then(_value.copyWith(statsReport: value) as $Val);
     });
   }
 }
@@ -150,11 +150,11 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       String photoUrl,
       String photoBlurhash,
       @DateTimeConverter() DateTime signupDate,
-      ProfileStats stats,
+      ProfileStatisticsReport statsReport,
       bool completed});
 
   @override
-  $ProfileStatsCopyWith<$Res> get stats;
+  $ProfileStatisticsReportCopyWith<$Res> get statsReport;
 }
 
 /// @nodoc
@@ -177,7 +177,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? photoUrl = null,
     Object? photoBlurhash = null,
     Object? signupDate = null,
-    Object? stats = null,
+    Object? statsReport = null,
     Object? completed = null,
   }) {
     return _then(_$ProfileImpl(
@@ -209,10 +209,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.signupDate
           : signupDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      stats: null == stats
-          ? _value.stats
-          : stats // ignore: cast_nullable_to_non_nullable
-              as ProfileStats,
+      statsReport: null == statsReport
+          ? _value.statsReport
+          : statsReport // ignore: cast_nullable_to_non_nullable
+              as ProfileStatisticsReport,
       completed: null == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
       required this.photoUrl,
       required this.photoBlurhash,
       @DateTimeConverter() required this.signupDate,
-      required this.stats,
+      required this.statsReport,
       required this.completed})
       : super._();
 
@@ -255,13 +255,13 @@ class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
   @DateTimeConverter()
   final DateTime signupDate;
   @override
-  final ProfileStats stats;
+  final ProfileStatisticsReport statsReport;
   @override
   final bool completed;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Profile(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, signupDate: $signupDate, stats: $stats, completed: $completed)';
+    return 'Profile(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, signupDate: $signupDate, statsReport: $statsReport, completed: $completed)';
   }
 
   @override
@@ -276,7 +276,7 @@ class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('photoUrl', photoUrl))
       ..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))
       ..add(DiagnosticsProperty('signupDate', signupDate))
-      ..add(DiagnosticsProperty('stats', stats))
+      ..add(DiagnosticsProperty('statsReport', statsReport))
       ..add(DiagnosticsProperty('completed', completed));
   }
 
@@ -297,7 +297,8 @@ class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
                 other.photoBlurhash == photoBlurhash) &&
             (identical(other.signupDate, signupDate) ||
                 other.signupDate == signupDate) &&
-            (identical(other.stats, stats) || other.stats == stats) &&
+            (identical(other.statsReport, statsReport) ||
+                other.statsReport == statsReport) &&
             (identical(other.completed, completed) ||
                 other.completed == completed));
   }
@@ -305,7 +306,7 @@ class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, firstName, lastName, email,
-      photoUrl, photoBlurhash, signupDate, stats, completed);
+      photoUrl, photoBlurhash, signupDate, statsReport, completed);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -332,7 +333,7 @@ abstract class _Profile extends Profile {
       required final String photoUrl,
       required final String photoBlurhash,
       @DateTimeConverter() required final DateTime signupDate,
-      required final ProfileStats stats,
+      required final ProfileStatisticsReport statsReport,
       required final bool completed}) = _$ProfileImpl;
   const _Profile._() : super._();
 
@@ -354,7 +355,7 @@ abstract class _Profile extends Profile {
   @DateTimeConverter()
   DateTime get signupDate;
   @override
-  ProfileStats get stats;
+  ProfileStatisticsReport get statsReport;
   @override
   bool get completed;
 

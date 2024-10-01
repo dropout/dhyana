@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
 
-  group('ProfileStatsCalculator.hasValidConsecutiveDays', () {
+  group('ProfileStatisticsReportCalculator.hasValidConsecutiveDays', () {
 
     test('can tell if the consecutive days are valid when last session was before yesterday', () {
       ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
@@ -36,10 +36,10 @@ void main() {
 
   });
 
-  group('ProfileStatsCalculator.calculateConsecutiveDays', () {
+  group('ProfileStatisticsReportCalculator.calculateConsecutiveDays', () {
 
     test('can calculate consecutive days when its the first day', () {
-      ProfileStats stats = const ProfileStats(
+      ProfileStatisticsReport stats = const ProfileStatisticsReport(
         consecutiveDays: 0,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -50,7 +50,7 @@ void main() {
 
       final currentSessionDate = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
         stats,
         currentSessionDate: currentSessionDate
       );
@@ -62,7 +62,7 @@ void main() {
     });
 
     test('can calculate consecutive days when last session was yesterday', () {
-      ProfileStats stats = ProfileStats(
+      ProfileStatisticsReport stats = ProfileStatisticsReport(
         consecutiveDays: 0,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -73,7 +73,7 @@ void main() {
       ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
       final currentSessionDate = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
         stats,
         currentSessionDate: currentSessionDate
       );
@@ -85,7 +85,7 @@ void main() {
     });
 
     test('can calculate consecutive days when last session was on the same day', () {
-      ProfileStats stats = ProfileStats(
+      ProfileStatisticsReport stats = ProfileStatisticsReport(
         consecutiveDays: 1,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -97,7 +97,7 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
         stats,
         currentSessionDate: currentSessionTime
       );
@@ -109,7 +109,7 @@ void main() {
     });
 
     test('can calculate consecutive days when last session was before yesterday', () {
-      ProfileStats stats = ProfileStats(
+      ProfileStatisticsReport stats = ProfileStatisticsReport(
         consecutiveDays: 3,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -121,7 +121,7 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 9, 3, 12, 0);
 
-      ProfileStats newStats = profileStatsCalculator.calculateConsecutiveDays(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
           stats,
           currentSessionDate: currentSessionTime
       );
@@ -137,7 +137,7 @@ void main() {
   group('profile_stats_calculator.calculateCompletedDay', () {
 
     test('can calculate completed days when its the first day', () {
-      ProfileStats stats = const ProfileStats(
+      ProfileStatisticsReport stats = const ProfileStatisticsReport(
         consecutiveDays: 0,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -148,7 +148,7 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStats newStats = profileStatsCalculator.calculateCompletedDay(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateCompletedDay(
         stats,
         currentSessionDate: currentSessionTime,
       );
@@ -160,7 +160,7 @@ void main() {
     });
 
     test('can calculate completed days when the last session was on the same day', () {
-      ProfileStats stats = ProfileStats(
+      ProfileStatisticsReport stats = ProfileStatisticsReport(
         consecutiveDays: 0,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -172,7 +172,7 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStats newStats = profileStatsCalculator.calculateCompletedDay(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateCompletedDay(
         stats,
         currentSessionDate: currentSessionTime
       );
@@ -184,7 +184,7 @@ void main() {
     });
 
     test('can calculate completed days when last session was on an another day', () {
-      ProfileStats stats = ProfileStats(
+      ProfileStatisticsReport stats = ProfileStatisticsReport(
         consecutiveDays: 0,
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -196,7 +196,7 @@ void main() {
 
       ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
 
-      ProfileStats newStats = profileStatsCalculator.calculateCompletedDay(
+      ProfileStatisticsReport newStats = profileStatsCalculator.calculateCompletedDay(
         stats,
         currentSessionDate: currentSessionTime
       );

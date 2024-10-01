@@ -1,4 +1,4 @@
-import 'package:dhyana/model/profile_stats.dart';
+import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:logger/logger.dart';
 import 'package:dhyana/model/profile.dart';
@@ -78,7 +78,7 @@ class FirebaseAuthRepository implements AuthRepository {
       photoUrl: DefaultProfileData.photoUrl,
       photoBlurhash: DefaultProfileData.photoBlurhash,
       signupDate: DateTime.now(),
-      stats: ProfileStats.empty(),
+      statsReport: ProfileStatisticsReport.empty(),
       completed: false,
     );
     await profileDataProvider.create(profile);

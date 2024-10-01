@@ -7,7 +7,9 @@ import 'package:dhyana/model/day_query_options.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 
-class FirebaseDayDataProvider extends FirebaseDataProvider<Day> implements DayDataProvider {
+class FirebaseDayDataProvider
+    extends FirebaseDataProvider<Day>
+    implements DayDataProvider {
 
   FirebaseDayDataProvider(
     FirebaseFirestore fireStore,
@@ -23,7 +25,7 @@ class FirebaseDayDataProvider extends FirebaseDataProvider<Day> implements DayDa
   );
 
   @override
-  Future<Session> addSession(Session session) async {
+  Future<Session> logSession(Session session) async {
     String dayId = session.startTime.toDayId();
 
     DocumentReference<Day> dayRef = collectionRef.doc(dayId);

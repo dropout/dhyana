@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/profile/data_update/all.dart';
-import 'package:dhyana/model/profile_stats.dart';
+import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/profile.dart';
@@ -135,16 +135,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       logger.t('Calculating consecutive days for profile: ${event.profile.id}');
 
       Profile calculatedProfile = event.profile.copyWith(
-        stats: _profileStatsCalculator.calculateConsecutiveDays(event.profile.stats),
+        statsReport: _profileStatsCalculator.calculateConsecutiveDays(event.profile.statsReport),
       );
 
-      if (calculatedProfile.stats.consecutiveDays == event.profile.stats.consecutiveDays) {
+      if (calculatedProfile.statsReport.consecutiveDays == event.profile.statsReport.consecutiveDays) {
         logger.t('Consecutive days have not changed, not saving profile data');
         event.onComplete?.call(event.profile);
         return;
       }
 
-      logger.t('Consecutive days changed: ${event.profile.stats.consecutiveDays} -> ${calculatedProfile.stats.consecutiveDays}');
+      logger.t('Consecutive days changed: ${event.profile.statsReport.consecutiveDays} -> ${calculatedProfile.statsReport.consecutiveDays}');
 
       await profileRepository.update(calculatedProfile);
       emit(ProfileState.loaded(profile: calculatedProfile));
@@ -163,19 +163,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onValidateConsecutiveDays(ValidateConsecutiveDays event, emit) async {
     try {
       logger.t('Validating consecutive days');
-      ProfileStats validatedStats = _profileStatsCalculator
-        .calculateConsecutiveDays(event.profile.stats);
+      ProfileStatisticsReport validatedStats = _profileStatsCalculator
+        .calculateConsecutiveDays(event.profile.statsReport);
 
-      if (event.profile.stats.consecutiveDays == validatedStats.consecutiveDays) {
+      if (event.profile.statsReport.consecutiveDays == validatedStats.consecutiveDays) {
         logger.t('Concsecutive days are OK - no change');
         return;
       }
 
       Profile updatedProfile = event.profile.copyWith(
-          stats: validatedStats
+        statsReport: validatedStats
       );
       emit(ProfileState.loaded(profile: updatedProfile));
-      logger.t('Validated consecutive days: ${event.profile.stats.consecutiveDays} -> ${updatedProfile.stats.consecutiveDays}');
+      logger.t('Validated consecutive days: ${event.profile.statsReport.consecutiveDays} -> ${updatedProfile.statsReport.consecutiveDays}');
       event.onComplete?.call(updatedProfile);
 
       // save the validated data, no need to wait for completing that

@@ -14,9 +14,9 @@ class ProfileMetricsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int sessionCount = (profile != null) ?  profile!.stats.completedSessionsCount : 0;
-    int minutesCount = (profile != null) ?  profile!.stats.completedMinutesCount : 0;
-    int daysCount = (profile != null) ?  profile!.stats.completedDaysCount : 0;
+    int sessionCount = (profile != null) ?  profile!.statsReport.completedSessionsCount : 0;
+    int minutesCount = (profile != null) ?  profile!.statsReport.completedMinutesCount : 0;
+    int daysCount = (profile != null) ?  profile!.statsReport.completedDaysCount : 0;
 
     return Row(
       children: [
