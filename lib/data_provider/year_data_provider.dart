@@ -1,7 +1,10 @@
 import 'package:dhyana/model/all.dart';
 
-abstract interface class YearDataProvider {
+import 'data_provider.dart';
 
+abstract interface class YearDataProvider implements DataProvider<Year> {
+
+  Future<Session> logSession(Session session);
   Future<List<Year>> query(YearQueryOptions queryOptions);
   Stream<List<Year>> queryStream(YearQueryOptions queryOptions);
 

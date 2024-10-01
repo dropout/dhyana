@@ -24,7 +24,7 @@ class SessionsBlocProvider extends StatelessWidget {
       create: (BuildContext context) {
         SessionsBloc sessionsBloc = SessionsBloc(
           authRepository: repos.authRepository,
-          sessionRepository: repos.sessionRepository,
+          statisticsRepository: repos.statisticsRepository,
           crashlyticsService: services.crashlyticsService,
         );
         if (initialEvent != null) {

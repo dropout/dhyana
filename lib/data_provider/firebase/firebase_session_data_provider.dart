@@ -10,16 +10,16 @@ class FirebaseSessionDataProvider
 
   FirebaseSessionDataProvider(
     FirebaseFirestore fireStore,
-    String profileId
+    String profileId,
   ) : super(
     fireStore
-        .collection('profiles')
-        .doc(profileId)
-        .collection('sessions')
-        .withConverter<Session>(
-      fromFirestore: (snapshot, _) => fromFireStore(snapshot, Session.fromJson),
-      toFirestore: (session, _) => session.toFireStore(),
-    )
+      .collection('profiles')
+      .doc(profileId)
+      .collection('sessions')
+      .withConverter<Session>(
+        fromFirestore: (snapshot, _) => fromFireStore(snapshot, Session.fromJson),
+        toFirestore: (session, _) => session.toFireStore(),
+      )
   );
 
   @override

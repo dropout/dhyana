@@ -16,7 +16,8 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       photoBlurhash: json['photoBlurhash'] as String,
       signupDate: const DateTimeConverter()
           .fromJson((json['signupDate'] as num).toInt()),
-      stats: ProfileStats.fromJson(json['stats'] as Map<String, dynamic>),
+      statsReport: ProfileStatisticsReport.fromJson(
+          json['statsReport'] as Map<String, dynamic>),
       completed: json['completed'] as bool,
     );
 
@@ -29,6 +30,6 @@ Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
       'photoUrl': instance.photoUrl,
       'photoBlurhash': instance.photoBlurhash,
       'signupDate': const DateTimeConverter().toJson(instance.signupDate),
-      'stats': instance.stats.toJson(),
+      'statsReport': instance.statsReport.toJson(),
       'completed': instance.completed,
     };

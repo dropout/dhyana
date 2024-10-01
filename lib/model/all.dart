@@ -8,7 +8,7 @@ export 'presence.dart';
 export 'presence_query_options.dart';
 export 'profile.dart';
 export 'profile_query_options.dart';
-export 'profile_stats.dart';
+export 'profile_statistics_report.dart';
 export 'public_profile.dart';
 export 'session.dart';
 export 'session_query_options.dart';

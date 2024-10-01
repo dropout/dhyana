@@ -23,7 +23,7 @@ class DaysBlocProvider extends StatelessWidget {
     return BlocProvider<DaysBloc>(
       create: (BuildContext context) {
         DaysBloc daysBloc = DaysBloc(
-          dayRepository: repos.dayRepository,
+          statisticsRepository: repos.statisticsRepository,
           crashlyticsService: services.crashlyticsService,
         );
         if (initialEvent != null) {

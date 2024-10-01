@@ -52,15 +52,6 @@ class TimerRunningBlocProvider extends StatelessWidget {
           },
           lazy: false,
         ),
-        BlocProvider<SessionsBloc>(
-          create: (_) {
-            return SessionsBloc(
-              authRepository: repos.authRepository,
-              sessionRepository: repos.sessionRepository,
-              crashlyticsService: services.crashlyticsService,
-            );
-          },
-        ),
       ],
       child: child
     );

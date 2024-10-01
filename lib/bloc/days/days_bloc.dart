@@ -1,8 +1,6 @@
-import 'dart:async';
-
 import 'package:dhyana/model/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/repository/day_repository.dart';
+import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,60 +14,30 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
 
   Logger logger = getLogger('DaysBloc');
 
-  final DayRepository dayRepository;
+  final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
 
-  StreamSubscription<List<Day>>? _streamSubscription;
-
   DaysBloc({
-    required this.dayRepository,
+    required this.statisticsRepository,
     required this.crashlyticsService,
   }) : super(const DaysState.loading()) {
     on<GetDaysEvent>(_onGetDaysEvent);
-    on<ReceiveUpdateDaysEvent>(_onReceiveUpdate);
   }
 
   void _onGetDaysEvent(GetDaysEvent event, emit) async {
     try {
       logger.t('Loading days: ${event.from} ... ${event.to}');
       emit(const DaysState.loading());
+      List<Day> days = await statisticsRepository.queryDays(
+        event.profileId,
+        DayQueryOptions(
+          from: event.from,
+          to: event.to ?? DateTime.now()
+        ),
+      );
+      emit(DaysState.loaded(days: days));
+      logger.t('Successfully loaded days ${days.length}');
 
-      if (event.useStream) {
-        logger.t('Streaming days');
-        _streamSubscription?.cancel();
-
-        _streamSubscription = dayRepository.queryStream(
-          profileId: event.profileId,
-          queryOptions: DayQueryOptions(
-            from: event.from,
-            to: event.to ?? DateTime.now()
-          ),
-        ).listen((daysList) {
-          add(DaysEvent.receiveUpdate(days: daysList));
-        });
-
-        _streamSubscription?.onError((exception, stackTrace) {
-          crashlyticsService.recordError(
-            exception: exception,
-            stackTrace: stackTrace,
-            reason: 'Error occured when receiving profile info: ${event.profileId}'
-          );
-
-          // Maybe we don't need to display this error?
-          // TODO: error when called Unhandled Exception: Bad state: add(_$DaysErrorEventImpl) was called without a registered event handler.
-          add(const DaysEvent.error());
-        });
-      } else {
-        List<Day> days = await dayRepository.query(
-          profileId: event.profileId,
-          queryOptions: DayQueryOptions(
-            from: event.from,
-            to: event.to ?? DateTime.now()
-          ),
-        );
-        emit(DaysState.loaded(days: days));
-        logger.t('Successfully loaded days ${days.length}');
-      }
     } catch (e, stack) {
       logger.t('Failed to get days');
       crashlyticsService.recordError(
@@ -78,17 +46,6 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         reason: 'Unable to add session'
       );
     }
-  }
-
-  void _onReceiveUpdate(ReceiveUpdateDaysEvent event, emit) {
-    logger.t('Receiving days update');
-    emit(DaysState.loaded(days: event.days));
-  }
-
-  @override
-  Future<void> close() async {
-    _streamSubscription?.cancel();
-    return super.close();
   }
 
 }

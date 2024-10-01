@@ -4,6 +4,8 @@ import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/data_provider/month_data_provider.dart';
 import 'package:dhyana/model/month.dart';
 import 'package:dhyana/model/month_query_options.dart';
+import 'package:dhyana/model/session.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements MonthDataProvider {
 
@@ -37,5 +39,33 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
   @override
   Stream<List<Month>> queryStream(MonthQueryOptions queryOptions) =>
       buildStreamFromQuery(_buildQuery(queryOptions));
+
+  @override
+  Future<Session> logSession(Session session) async {
+    String dayId = session.startTime.toMonthId();
+
+    DocumentReference<Month> monthRef = collectionRef.doc(dayId);
+    DocumentSnapshot<Month> month = await monthRef.get();
+
+    Month m;
+    if (month.exists == false) {
+      m = Month(
+        id: dayId,
+        date: session.startTime,
+        minutes: session.duration.inMinutes,
+        sessionCount: 1,
+      );
+      await collectionRef.doc(m.id).set(m);
+    } else {
+      m = month.data()!;
+      m = m.copyWith(
+        minutes: m.minutes + session.duration.inMinutes,
+      );
+      Map<String, Object?> data = m.toJson();
+      data['sessionCount'] = FieldValue.increment(1);
+      await collectionRef.doc(m.id).update(data);
+    }
+    return session;
+  }
 
 }
