@@ -20,7 +20,6 @@ class Session with _$Session implements Model {
     @DateTimeConverter() required DateTime endTime,
     @DurationConverter() required Duration duration,
     required TimerSettings timerSettings,
-    @Default(0) int consecutiveDays,
   }) = _Session;
 
   factory Session.fromJson(Map<String, Object?> json) =>

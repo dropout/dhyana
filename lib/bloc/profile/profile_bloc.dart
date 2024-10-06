@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/profile/data_update/all.dart';
+import 'package:dhyana/model/factory/session_factory.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/model/session.dart';
+import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,12 +23,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Logger logger = getLogger('ProfileBloc');
 
   final ProfileRepository profileRepository;
+  final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
   final ProfileStatsCalculator _profileStatsCalculator = ProfileStatsCalculator();
   StreamSubscription<Profile>? _profileStreamSubscription;
 
   ProfileBloc({
     required this.profileRepository,
+    required this.statisticsRepository,
     required this.crashlyticsService,
   }) : super(const ProfileState.loading()) {
 
@@ -35,6 +40,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
     on<CalculateConsecutiveDays>(_onCalculateConsecutiveDays);
     on<ValidateConsecutiveDays>(_onValidateConsecutiveDays);
+    on<LogSession>(_onLogSession);
     on<ResetProfileContent>(_onResetProfile);
   }
 
@@ -190,6 +196,56 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
       event.onError?.call(e, stack);
     }
+  }
+
+  void _onLogSession(LogSession event, emit) async {
+    try {
+      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+
+      // Get a profile
+      Profile profile = await profileRepository.read(event.profileId);
+      logger.t('Logging session for profile: ${profile.id}');
+
+      // Create Session
+      Session session = SessionFactory.withFirebaseId(
+        profileId: event.profileId,
+        startTime: event.startTime,
+        endTime: event.endTime,
+        duration: event.duration,
+        timerSettings: event.timerSettings
+      );
+      logger.t('Session created: ${session.id}');
+
+      // Calculate statistics report
+      ProfileStatisticsReport updatedStatsReport =
+        profileStatsCalculator.updateProfileStatsReportWithNewSession(
+          profile.statsReport,
+          session
+        );
+      logger.t('Updated statistics report: ${session.id}');
+
+      // Store statistics data
+      Profile updatedProfile = profile.copyWith(
+        statsReport: updatedStatsReport,
+      );
+      await statisticsRepository.logSession(
+        updatedProfile,
+        session,
+      );
+      logger.t('Stored session in profile statistics: ${session.id}');
+
+      // Update profile with new report
+      await profileRepository.update(updatedProfile);
+      logger.t('Updated profile with new statistics report: ${profile.id}');
+
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Unable to log session: ${event.profileId}'
+      );
+    }
+
   }
 
   void _onResetProfile(ResetProfileContent event, emit) {

@@ -17,7 +17,6 @@ _$SessionImpl _$$SessionImplFromJson(Map<String, dynamic> json) =>
           const DurationConverter().fromJson((json['duration'] as num).toInt()),
       timerSettings:
           TimerSettings.fromJson(json['timerSettings'] as Map<String, dynamic>),
-      consecutiveDays: (json['consecutiveDays'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$SessionImplToJson(_$SessionImpl instance) =>
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$SessionImplToJson(_$SessionImpl instance) =>
       'endTime': const DateTimeConverter().toJson(instance.endTime),
       'duration': const DurationConverter().toJson(instance.duration),
       'timerSettings': instance.timerSettings.toJson(),
-      'consecutiveDays': instance.consecutiveDays,
     };

@@ -1,18 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/all.dart';
-import 'package:dhyana/data_provider/day_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_month_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_year_data_provider.dart';
-import 'package:dhyana/data_provider/month_data_provider.dart';
-import 'package:dhyana/data_provider/year_data_provider.dart';
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/model/day.dart';
-import 'package:dhyana/model/day_query_options.dart';
-import 'package:dhyana/model/month.dart';
-import 'package:dhyana/model/month_query_options.dart';
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/year.dart';
-import 'package:dhyana/model/year_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 
@@ -73,11 +61,12 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<void> logSession(String profileId, Session session) {
-    // TODO: implement logSession
-    throw UnimplementedError();
+  Future<void> logSession(Profile profile, Session session) async {
+    await FirebaseSessionDataProvider(fireStore, profile.id).create(session);
+
+    await FirebaseDayDataProvider(fireStore, profile.id).logSession(session);
+    await FirebaseMonthDataProvider(fireStore, profile.id).logSession(session);
+    await FirebaseYearDataProvider(fireStore, profile.id).logSession(session);
   }
-
-
 
 }

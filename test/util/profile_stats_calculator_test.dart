@@ -1,4 +1,5 @@
 import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/consecutive_days.dart';
 import 'package:dhyana/util/profile_stats_calculator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -40,7 +41,7 @@ void main() {
 
     test('can calculate consecutive days when its the first day', () {
       ProfileStatisticsReport stats = const ProfileStatisticsReport(
-        consecutiveDays: 0,
+        consecutiveDays: ConsecutiveDays(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -55,7 +56,7 @@ void main() {
         currentSessionDate: currentSessionDate
       );
 
-      expect(newStats.consecutiveDays, 0);
+      expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -63,7 +64,7 @@ void main() {
 
     test('can calculate consecutive days when last session was yesterday', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: 0,
+        consecutiveDays: const ConsecutiveDays(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -78,7 +79,7 @@ void main() {
         currentSessionDate: currentSessionDate
       );
 
-      expect(newStats.consecutiveDays, 1);
+      expect(newStats.consecutiveDays.count, 1);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -86,7 +87,7 @@ void main() {
 
     test('can calculate consecutive days when last session was on the same day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: 1,
+        consecutiveDays: const ConsecutiveDays(count: 1),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -102,7 +103,7 @@ void main() {
         currentSessionDate: currentSessionTime
       );
 
-      expect(newStats.consecutiveDays, 1);
+      expect(newStats.consecutiveDays.count, 1);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -110,7 +111,7 @@ void main() {
 
     test('can calculate consecutive days when last session was before yesterday', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: 3,
+        consecutiveDays: const ConsecutiveDays(count: 3),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -126,7 +127,7 @@ void main() {
           currentSessionDate: currentSessionTime
       );
 
-      expect(newStats.consecutiveDays, 0);
+      expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -138,7 +139,7 @@ void main() {
 
     test('can calculate completed days when its the first day', () {
       ProfileStatisticsReport stats = const ProfileStatisticsReport(
-        consecutiveDays: 0,
+        consecutiveDays: ConsecutiveDays(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -153,7 +154,7 @@ void main() {
         currentSessionDate: currentSessionTime,
       );
 
-      expect(newStats.consecutiveDays, 0);
+      expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 1);
@@ -161,7 +162,7 @@ void main() {
 
     test('can calculate completed days when the last session was on the same day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: 0,
+        consecutiveDays: const ConsecutiveDays(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 1,
@@ -177,7 +178,7 @@ void main() {
         currentSessionDate: currentSessionTime
       );
 
-      expect(newStats.consecutiveDays, 0);
+      expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 1);
@@ -185,7 +186,7 @@ void main() {
 
     test('can calculate completed days when last session was on an another day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: 0,
+        consecutiveDays: const ConsecutiveDays(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -201,7 +202,7 @@ void main() {
         currentSessionDate: currentSessionTime
       );
 
-      expect(newStats.consecutiveDays, 0);
+      expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 1);

@@ -45,6 +45,33 @@ class ProfileButton extends StatelessWidget {
   }
   
   Widget buildSignedOut(context) {
+    return Stack(
+      children: <Widget>[
+        DecoratedBox(
+            position: DecorationPosition.foreground,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.black38
+            ),
+            child: Icon(
+              Icons.account_circle_outlined,
+              size: 40.0,
+              color: Colors.black,
+            ),
+        ),
+        Positioned.fill(
+          child: Material(
+            shape: const CircleBorder(),
+            color: Colors.transparent,
+            child: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: () => _signedOutTap(context),
+            ),
+          ),
+        ),
+      ],
+    );
+
     return GestureDetector(
       onTap: () => _signedOutTap(context),
       child: Icon(

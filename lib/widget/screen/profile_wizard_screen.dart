@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/profile_bloc_provider.dart';
@@ -20,6 +21,10 @@ class ProfileWizardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      extendBodyBehindAppBar: true,
+      appBar: const CustomAppBar(
+        leading: CustomBackButton(),
+      ),
       body: SafeArea(
         child: ProfileBlocProvider(
           initialEvent: LoadProfile(profileId: profileId),
@@ -51,11 +56,10 @@ class ProfileWizardScreen extends StatelessWidget {
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
-        const CustomBackButton(),
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: AppThemeData.spacing3xl),
+            // const SizedBox(height: AppThemeData.spacing3xl),
             Text(
               'Complete your profile!',
               textAlign: TextAlign.center,

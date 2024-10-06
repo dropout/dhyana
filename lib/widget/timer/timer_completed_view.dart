@@ -5,14 +5,11 @@ import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-
-import '../../bloc/sessions/sessions_bloc.dart';
 
 class TimerCompletedView extends StatefulWidget {
 

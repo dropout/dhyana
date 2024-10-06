@@ -1,4 +1,5 @@
 import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/model/session.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:logger/logger.dart';
 
@@ -44,13 +45,13 @@ class ProfileStatsCalculator {
     bool isPreviousDay = now.isYesterday(lastSessionDate);
     if (isPreviousDay) {
       logger.t('Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${now.toDayId()}');
-      return stats.consecutiveDays + 1;
+      return stats.consecutiveDays.count + 1;
     }
 
     // Case 3:
     // The session is on the same day, so no need to increment or reset
     logger.t('Not incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${now.toDayId()}');
-    return stats.consecutiveDays;
+    return stats.consecutiveDays.count;
   }
 
   ProfileStatisticsReport calculateConsecutiveDays(
@@ -59,7 +60,9 @@ class ProfileStatsCalculator {
     DateTime now = currentSessionDate ?? DateTime.now();
     int calculatedConsecutiveDays = getCalculatedConsecutiveDays(stats, currentSessionDate: now);
     return stats.copyWith(
-      consecutiveDays: calculatedConsecutiveDays,
+      consecutiveDays: stats.consecutiveDays.copyWith(
+        count: calculatedConsecutiveDays
+      ),
     );
   }
 
@@ -94,5 +97,60 @@ class ProfileStatsCalculator {
       completedDaysCount: stats.completedDaysCount + 1,
     );
   }
+
+  ProfileStatisticsReport updateProfileStatsReportWithNewSession(
+    ProfileStatisticsReport profileStatsReport,
+    Session session,
+  ) {
+    ProfileStatisticsReport oldStatsReport = profileStatsReport;
+    ProfileStatisticsReport updatedStatsReport = oldStatsReport.copyWith();
+
+    // Calculate consecutive days
+    if (updatedStatsReport.lastSessionDate != null) {
+      updatedStatsReport = calculateConsecutiveDays(updatedStatsReport);
+      logger.t('Calculating consecutive days: ${oldStatsReport.consecutiveDays} -> ${updatedStatsReport.consecutiveDays}');
+    } else {
+      logger.t('There were no last session, skipping consecutive days calculation.');
+    }
+
+    // Override calculation when adding a session:
+    // Minimum value for consecutive days when adding a session is 1
+    if (updatedStatsReport.consecutiveDays == 0) {
+      updatedStatsReport = updatedStatsReport.copyWith(
+        consecutiveDays: updatedStatsReport.consecutiveDays.copyWith(
+          count: 1,
+        )
+      );
+      logger.t('Setting consecutive days count to "1": ${oldStatsReport.consecutiveDays} -> ${updatedStatsReport.consecutiveDays}');
+    }
+
+    // Calculate completed days
+    if (updatedStatsReport.lastSessionDate == null) {
+      updatedStatsReport = updatedStatsReport.copyWith(
+        completedDaysCount: updatedStatsReport.completedDaysCount + 1,
+      );
+      logger.t('Incrementing completed days (first day case): ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}');
+    } else {
+      updatedStatsReport = calculateCompletedDay(
+        updatedStatsReport,
+        currentSessionDate: session.startTime,
+      );
+      logger.t('Calculating completed days: ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}');
+    }
+
+    // Add session results to stats
+    updatedStatsReport = updatedStatsReport.copyWith(
+      lastSessionDate: session.startTime,
+      completedMinutesCount: updatedStatsReport.completedMinutesCount + session.duration.inMinutes,
+      completedSessionsCount: updatedStatsReport.completedSessionsCount + 1,
+    );
+    logger.t('Last session date: ${oldStatsReport.lastSessionDate} -> ${updatedStatsReport.lastSessionDate}');
+    logger.t('Completed minutes count: ${oldStatsReport.completedMinutesCount} -> ${updatedStatsReport.completedMinutesCount}');
+    logger.t('Completed session count: ${oldStatsReport.completedSessionsCount} -> ${updatedStatsReport.completedSessionsCount}');
+
+    return updatedStatsReport;
+  }
+
+
 
 }

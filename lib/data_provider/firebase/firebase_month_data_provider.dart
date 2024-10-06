@@ -25,9 +25,9 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
   Query<Month> _buildQuery(MonthQueryOptions queryOptions) {
     final FieldPath fieldPath = FieldPath(const ['date']);
     Query<Month> query = collectionRef
-        .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-        .where(fieldPath, isLessThanOrEqualTo: queryOptions.to)
-        .orderBy(fieldPath);
+      .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
+      .where(fieldPath, isLessThanOrEqualTo: queryOptions.to)
+      .orderBy(fieldPath);
     return query;
   }
 
@@ -41,31 +41,34 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
       buildStreamFromQuery(_buildQuery(queryOptions));
 
   @override
-  Future<Session> logSession(Session session) async {
-    String dayId = session.startTime.toMonthId();
+  Future<void> logSession(Session session) async {
+    final String monthId = session.startTime.toMonthId();
 
-    DocumentReference<Month> monthRef = collectionRef.doc(dayId);
-    DocumentSnapshot<Month> month = await monthRef.get();
-
-    Month m;
-    if (month.exists == false) {
-      m = Month(
-        id: dayId,
-        date: session.startTime,
-        minutes: session.duration.inMinutes,
+    late Month updatedMonth;
+    try {
+      // Month exists
+      Month thisMonth = await read(monthId);
+      updatedMonth = thisMonth.copyWith(
+        sessionCount: thisMonth.sessionCount + 1,
+        minutes: thisMonth.minutes + session.duration.inMinutes,
+      );
+    } catch(_, __) {
+      // Month doesn't exists in database yet
+      updatedMonth = Month(
+        id: monthId,
+        date: DateTime(
+          session.startTime.year,
+          session.startTime.month,
+        ),
         sessionCount: 1,
+        minutes: session.duration.inMinutes,
       );
-      await collectionRef.doc(m.id).set(m);
-    } else {
-      m = month.data()!;
-      m = m.copyWith(
-        minutes: m.minutes + session.duration.inMinutes,
-      );
-      Map<String, Object?> data = m.toJson();
-      data['sessionCount'] = FieldValue.increment(1);
-      await collectionRef.doc(m.id).update(data);
     }
-    return session;
+
+    DocumentReference<Month> monthRef = collectionRef.doc(updatedMonth.id);
+    await monthRef.set(updatedMonth, SetOptions(merge: true));
+
+
   }
 
 }

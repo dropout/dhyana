@@ -21,10 +21,12 @@ ProfileStatisticsReport _$ProfileStatisticsReportFromJson(
 
 /// @nodoc
 mixin _$ProfileStatisticsReport {
-  int get consecutiveDays => throw _privateConstructorUsedError;
+  ConsecutiveDays get consecutiveDays => throw _privateConstructorUsedError;
   int get completedMinutesCount => throw _privateConstructorUsedError;
   int get completedSessionsCount => throw _privateConstructorUsedError;
   int get completedDaysCount => throw _privateConstructorUsedError;
+  @DateTimeOrNullConverter()
+  DateTime? get firstSessionDate => throw _privateConstructorUsedError;
   @DateTimeOrNullConverter()
   DateTime? get lastSessionDate => throw _privateConstructorUsedError;
 
@@ -45,11 +47,14 @@ abstract class $ProfileStatisticsReportCopyWith<$Res> {
       _$ProfileStatisticsReportCopyWithImpl<$Res, ProfileStatisticsReport>;
   @useResult
   $Res call(
-      {int consecutiveDays,
+      {ConsecutiveDays consecutiveDays,
       int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
+      @DateTimeOrNullConverter() DateTime? firstSessionDate,
       @DateTimeOrNullConverter() DateTime? lastSessionDate});
+
+  $ConsecutiveDaysCopyWith<$Res> get consecutiveDays;
 }
 
 /// @nodoc
@@ -72,13 +77,14 @@ class _$ProfileStatisticsReportCopyWithImpl<$Res,
     Object? completedMinutesCount = null,
     Object? completedSessionsCount = null,
     Object? completedDaysCount = null,
+    Object? firstSessionDate = freezed,
     Object? lastSessionDate = freezed,
   }) {
     return _then(_value.copyWith(
       consecutiveDays: null == consecutiveDays
           ? _value.consecutiveDays
           : consecutiveDays // ignore: cast_nullable_to_non_nullable
-              as int,
+              as ConsecutiveDays,
       completedMinutesCount: null == completedMinutesCount
           ? _value.completedMinutesCount
           : completedMinutesCount // ignore: cast_nullable_to_non_nullable
@@ -91,11 +97,25 @@ class _$ProfileStatisticsReportCopyWithImpl<$Res,
           ? _value.completedDaysCount
           : completedDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
+      firstSessionDate: freezed == firstSessionDate
+          ? _value.firstSessionDate
+          : firstSessionDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       lastSessionDate: freezed == lastSessionDate
           ? _value.lastSessionDate
           : lastSessionDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
+  }
+
+  /// Create a copy of ProfileStatisticsReport
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConsecutiveDaysCopyWith<$Res> get consecutiveDays {
+    return $ConsecutiveDaysCopyWith<$Res>(_value.consecutiveDays, (value) {
+      return _then(_value.copyWith(consecutiveDays: value) as $Val);
+    });
   }
 }
 
@@ -109,11 +129,15 @@ abstract class _$$ProfileStatisticsReportImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int consecutiveDays,
+      {ConsecutiveDays consecutiveDays,
       int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
+      @DateTimeOrNullConverter() DateTime? firstSessionDate,
       @DateTimeOrNullConverter() DateTime? lastSessionDate});
+
+  @override
+  $ConsecutiveDaysCopyWith<$Res> get consecutiveDays;
 }
 
 /// @nodoc
@@ -135,13 +159,14 @@ class __$$ProfileStatisticsReportImplCopyWithImpl<$Res>
     Object? completedMinutesCount = null,
     Object? completedSessionsCount = null,
     Object? completedDaysCount = null,
+    Object? firstSessionDate = freezed,
     Object? lastSessionDate = freezed,
   }) {
     return _then(_$ProfileStatisticsReportImpl(
       consecutiveDays: null == consecutiveDays
           ? _value.consecutiveDays
           : consecutiveDays // ignore: cast_nullable_to_non_nullable
-              as int,
+              as ConsecutiveDays,
       completedMinutesCount: null == completedMinutesCount
           ? _value.completedMinutesCount
           : completedMinutesCount // ignore: cast_nullable_to_non_nullable
@@ -154,6 +179,10 @@ class __$$ProfileStatisticsReportImplCopyWithImpl<$Res>
           ? _value.completedDaysCount
           : completedDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
+      firstSessionDate: freezed == firstSessionDate
+          ? _value.firstSessionDate
+          : firstSessionDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       lastSessionDate: freezed == lastSessionDate
           ? _value.lastSessionDate
           : lastSessionDate // ignore: cast_nullable_to_non_nullable
@@ -168,30 +197,38 @@ class _$ProfileStatisticsReportImpl
     with DiagnosticableTreeMixin
     implements _ProfileStatisticsReport {
   const _$ProfileStatisticsReportImpl(
-      {required this.consecutiveDays,
-      required this.completedMinutesCount,
-      required this.completedSessionsCount,
-      required this.completedDaysCount,
+      {this.consecutiveDays = const ConsecutiveDays(),
+      this.completedMinutesCount = 0,
+      this.completedSessionsCount = 0,
+      this.completedDaysCount = 0,
+      @DateTimeOrNullConverter() this.firstSessionDate,
       @DateTimeOrNullConverter() this.lastSessionDate});
 
   factory _$ProfileStatisticsReportImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileStatisticsReportImplFromJson(json);
 
   @override
-  final int consecutiveDays;
+  @JsonKey()
+  final ConsecutiveDays consecutiveDays;
   @override
+  @JsonKey()
   final int completedMinutesCount;
   @override
+  @JsonKey()
   final int completedSessionsCount;
   @override
+  @JsonKey()
   final int completedDaysCount;
+  @override
+  @DateTimeOrNullConverter()
+  final DateTime? firstSessionDate;
   @override
   @DateTimeOrNullConverter()
   final DateTime? lastSessionDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileStatisticsReport(consecutiveDays: $consecutiveDays, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, lastSessionDate: $lastSessionDate)';
+    return 'ProfileStatisticsReport(consecutiveDays: $consecutiveDays, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
   }
 
   @override
@@ -204,6 +241,7 @@ class _$ProfileStatisticsReportImpl
       ..add(
           DiagnosticsProperty('completedSessionsCount', completedSessionsCount))
       ..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))
+      ..add(DiagnosticsProperty('firstSessionDate', firstSessionDate))
       ..add(DiagnosticsProperty('lastSessionDate', lastSessionDate));
   }
 
@@ -220,6 +258,8 @@ class _$ProfileStatisticsReportImpl
                 other.completedSessionsCount == completedSessionsCount) &&
             (identical(other.completedDaysCount, completedDaysCount) ||
                 other.completedDaysCount == completedDaysCount) &&
+            (identical(other.firstSessionDate, firstSessionDate) ||
+                other.firstSessionDate == firstSessionDate) &&
             (identical(other.lastSessionDate, lastSessionDate) ||
                 other.lastSessionDate == lastSessionDate));
   }
@@ -232,6 +272,7 @@ class _$ProfileStatisticsReportImpl
       completedMinutesCount,
       completedSessionsCount,
       completedDaysCount,
+      firstSessionDate,
       lastSessionDate);
 
   /// Create a copy of ProfileStatisticsReport
@@ -253,10 +294,11 @@ class _$ProfileStatisticsReportImpl
 
 abstract class _ProfileStatisticsReport implements ProfileStatisticsReport {
   const factory _ProfileStatisticsReport(
-          {required final int consecutiveDays,
-          required final int completedMinutesCount,
-          required final int completedSessionsCount,
-          required final int completedDaysCount,
+          {final ConsecutiveDays consecutiveDays,
+          final int completedMinutesCount,
+          final int completedSessionsCount,
+          final int completedDaysCount,
+          @DateTimeOrNullConverter() final DateTime? firstSessionDate,
           @DateTimeOrNullConverter() final DateTime? lastSessionDate}) =
       _$ProfileStatisticsReportImpl;
 
@@ -264,13 +306,16 @@ abstract class _ProfileStatisticsReport implements ProfileStatisticsReport {
       _$ProfileStatisticsReportImpl.fromJson;
 
   @override
-  int get consecutiveDays;
+  ConsecutiveDays get consecutiveDays;
   @override
   int get completedMinutesCount;
   @override
   int get completedSessionsCount;
   @override
   int get completedDaysCount;
+  @override
+  @DateTimeOrNullConverter()
+  DateTime? get firstSessionDate;
   @override
   @DateTimeOrNullConverter()
   DateTime? get lastSessionDate;

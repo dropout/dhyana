@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
+import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/bloc_provider/timer_running_bloc_provider.dart';
 import 'package:dhyana/widget/timer/running/timer_running_overlay.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,12 @@ class TimerRunningScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TimerRunningBlocProvider(
-      timerSettings: timerSettings,
-      child: TimerRunningScreenContent(
+    return ProfileBlocProvider(
+      child: TimerRunningBlocProvider(
         timerSettings: timerSettings,
+        child: TimerRunningScreenContent(
+          timerSettings: timerSettings,
+        ),
       ),
     );
   }

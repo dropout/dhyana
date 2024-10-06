@@ -47,4 +47,12 @@ class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.reset() = ResetProfileContent;
 
+  const factory ProfileEvent.logSession({
+    required String profileId,
+    required DateTime startTime,
+    required DateTime endTime,
+    required Duration duration,
+    required TimerSettings timerSettings,
+  }) = LogSession;
+
 }

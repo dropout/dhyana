@@ -44,6 +44,9 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +70,9 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,6 +96,9 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -104,6 +113,7 @@ mixin _$ProfileEvent {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -115,6 +125,7 @@ mixin _$ProfileEvent {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -126,6 +137,7 @@ mixin _$ProfileEvent {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -283,6 +295,9 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return loadProfile(profileId, onComplete, onError, useStream);
   }
@@ -309,6 +324,9 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return loadProfile?.call(profileId, onComplete, onError, useStream);
   }
@@ -335,6 +353,9 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -355,6 +376,7 @@ class _$LoadProfileImpl implements LoadProfile {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return loadProfile(this);
   }
@@ -369,6 +391,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return loadProfile?.call(this);
   }
@@ -383,6 +406,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -519,6 +543,9 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return receiveUpdate(profile);
   }
@@ -545,6 +572,9 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return receiveUpdate?.call(profile);
   }
@@ -571,6 +601,9 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (receiveUpdate != null) {
@@ -591,6 +624,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return receiveUpdate(this);
   }
@@ -605,6 +639,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return receiveUpdate?.call(this);
   }
@@ -619,6 +654,7 @@ class _$ReceiveProfileUpdateImpl implements ReceiveProfileUpdate {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (receiveUpdate != null) {
@@ -805,6 +841,9 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return updateProfile(
         profile, formData, onComplete, onError, completeProfile);
@@ -832,6 +871,9 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return updateProfile?.call(
         profile, formData, onComplete, onError, completeProfile);
@@ -859,6 +901,9 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -880,6 +925,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return updateProfile(this);
   }
@@ -894,6 +940,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return updateProfile?.call(this);
   }
@@ -908,6 +955,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -1006,6 +1054,9 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return error();
   }
@@ -1032,6 +1083,9 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return error?.call();
   }
@@ -1058,6 +1112,9 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1078,6 +1135,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return error(this);
   }
@@ -1092,6 +1150,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return error?.call(this);
   }
@@ -1106,6 +1165,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1249,6 +1309,9 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return validateConsecutiveDays(profile, onComplete, onError);
   }
@@ -1275,6 +1338,9 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return validateConsecutiveDays?.call(profile, onComplete, onError);
   }
@@ -1301,6 +1367,9 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (validateConsecutiveDays != null) {
@@ -1321,6 +1390,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return validateConsecutiveDays(this);
   }
@@ -1335,6 +1405,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return validateConsecutiveDays?.call(this);
   }
@@ -1349,6 +1420,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (validateConsecutiveDays != null) {
@@ -1506,6 +1578,9 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return calculateConsecutiveDays(profile, onComplete, onError);
   }
@@ -1532,6 +1607,9 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return calculateConsecutiveDays?.call(profile, onComplete, onError);
   }
@@ -1558,6 +1636,9 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (calculateConsecutiveDays != null) {
@@ -1578,6 +1659,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return calculateConsecutiveDays(this);
   }
@@ -1592,6 +1674,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return calculateConsecutiveDays?.call(this);
   }
@@ -1606,6 +1689,7 @@ class _$CalculateConsecutiveDaysImpl implements CalculateConsecutiveDays {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (calculateConsecutiveDays != null) {
@@ -1701,6 +1785,9 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError)
         calculateConsecutiveDays,
     required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
   }) {
     return reset();
   }
@@ -1727,6 +1814,9 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
   }) {
     return reset?.call();
   }
@@ -1753,6 +1843,9 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError)?
         calculateConsecutiveDays,
     TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -1773,6 +1866,7 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
     required TResult Function(CalculateConsecutiveDays value)
         calculateConsecutiveDays,
     required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
   }) {
     return reset(this);
   }
@@ -1787,6 +1881,7 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
   }) {
     return reset?.call(this);
   }
@@ -1801,6 +1896,7 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
     TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -1812,6 +1908,302 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
 
 abstract class ResetProfileContent implements ProfileEvent {
   const factory ResetProfileContent() = _$ResetProfileContentImpl;
+}
+
+/// @nodoc
+abstract class _$$LogSessionImplCopyWith<$Res> {
+  factory _$$LogSessionImplCopyWith(
+          _$LogSessionImpl value, $Res Function(_$LogSessionImpl) then) =
+      __$$LogSessionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String profileId,
+      DateTime startTime,
+      DateTime endTime,
+      Duration duration,
+      TimerSettings timerSettings});
+
+  $TimerSettingsCopyWith<$Res> get timerSettings;
+}
+
+/// @nodoc
+class __$$LogSessionImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$LogSessionImpl>
+    implements _$$LogSessionImplCopyWith<$Res> {
+  __$$LogSessionImplCopyWithImpl(
+      _$LogSessionImpl _value, $Res Function(_$LogSessionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? profileId = null,
+    Object? startTime = null,
+    Object? endTime = null,
+    Object? duration = null,
+    Object? timerSettings = null,
+  }) {
+    return _then(_$LogSessionImpl(
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      timerSettings: null == timerSettings
+          ? _value.timerSettings
+          : timerSettings // ignore: cast_nullable_to_non_nullable
+              as TimerSettings,
+    ));
+  }
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TimerSettingsCopyWith<$Res> get timerSettings {
+    return $TimerSettingsCopyWith<$Res>(_value.timerSettings, (value) {
+      return _then(_value.copyWith(timerSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LogSessionImpl implements LogSession {
+  const _$LogSessionImpl(
+      {required this.profileId,
+      required this.startTime,
+      required this.endTime,
+      required this.duration,
+      required this.timerSettings});
+
+  @override
+  final String profileId;
+  @override
+  final DateTime startTime;
+  @override
+  final DateTime endTime;
+  @override
+  final Duration duration;
+  @override
+  final TimerSettings timerSettings;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.logSession(profileId: $profileId, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LogSessionImpl &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.timerSettings, timerSettings) ||
+                other.timerSettings == timerSettings));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, profileId, startTime, endTime, duration, timerSettings);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LogSessionImplCopyWith<_$LogSessionImpl> get copyWith =>
+      __$$LogSessionImplCopyWithImpl<_$LogSessionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String profileId,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool useStream)
+        loadProfile,
+    required TResult Function(Profile profile) receiveUpdate,
+    required TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)
+        updateProfile,
+    required TResult Function() error,
+    required TResult Function(
+            Profile profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)
+        validateConsecutiveDays,
+    required TResult Function(
+            Profile profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)
+        calculateConsecutiveDays,
+    required TResult Function() reset,
+    required TResult Function(String profileId, DateTime startTime,
+            DateTime endTime, Duration duration, TimerSettings timerSettings)
+        logSession,
+  }) {
+    return logSession(profileId, startTime, endTime, duration, timerSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String profileId, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError, bool useStream)?
+        loadProfile,
+    TResult? Function(Profile profile)? receiveUpdate,
+    TResult? Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult? Function()? error,
+    TResult? Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        validateConsecutiveDays,
+    TResult? Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        calculateConsecutiveDays,
+    TResult? Function()? reset,
+    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
+  }) {
+    return logSession?.call(
+        profileId, startTime, endTime, duration, timerSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String profileId, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError, bool useStream)?
+        loadProfile,
+    TResult Function(Profile profile)? receiveUpdate,
+    TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult Function()? error,
+    TResult Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        validateConsecutiveDays,
+    TResult Function(Profile profile, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        calculateConsecutiveDays,
+    TResult Function()? reset,
+    TResult Function(String profileId, DateTime startTime, DateTime endTime,
+            Duration duration, TimerSettings timerSettings)?
+        logSession,
+    required TResult orElse(),
+  }) {
+    if (logSession != null) {
+      return logSession(profileId, startTime, endTime, duration, timerSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadProfile value) loadProfile,
+    required TResult Function(ReceiveProfileUpdate value) receiveUpdate,
+    required TResult Function(UpdateProfile value) updateProfile,
+    required TResult Function(ProfileErrorOccured value) error,
+    required TResult Function(ValidateConsecutiveDays value)
+        validateConsecutiveDays,
+    required TResult Function(CalculateConsecutiveDays value)
+        calculateConsecutiveDays,
+    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(LogSession value) logSession,
+  }) {
+    return logSession(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadProfile value)? loadProfile,
+    TResult? Function(ReceiveProfileUpdate value)? receiveUpdate,
+    TResult? Function(UpdateProfile value)? updateProfile,
+    TResult? Function(ProfileErrorOccured value)? error,
+    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
+    TResult? Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(LogSession value)? logSession,
+  }) {
+    return logSession?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProfile value)? loadProfile,
+    TResult Function(ReceiveProfileUpdate value)? receiveUpdate,
+    TResult Function(UpdateProfile value)? updateProfile,
+    TResult Function(ProfileErrorOccured value)? error,
+    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
+    TResult Function(CalculateConsecutiveDays value)? calculateConsecutiveDays,
+    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(LogSession value)? logSession,
+    required TResult orElse(),
+  }) {
+    if (logSession != null) {
+      return logSession(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LogSession implements ProfileEvent {
+  const factory LogSession(
+      {required final String profileId,
+      required final DateTime startTime,
+      required final DateTime endTime,
+      required final Duration duration,
+      required final TimerSettings timerSettings}) = _$LogSessionImpl;
+
+  String get profileId;
+  DateTime get startTime;
+  DateTime get endTime;
+  Duration get duration;
+  TimerSettings get timerSettings;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LogSessionImplCopyWith<_$LogSessionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

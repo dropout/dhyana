@@ -63,7 +63,7 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
     if (widget.overrideProfileValue) {
       return profileStatsCalculator.getCalculatedConsecutiveDays(widget.profile.statsReport);
     } else {
-      return widget.profile.statsReport.consecutiveDays;
+      return widget.profile.statsReport.consecutiveDays.count;
     }
   }
 

@@ -1,6 +1,6 @@
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/model/timer_settings_query_options.dart';
-import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';

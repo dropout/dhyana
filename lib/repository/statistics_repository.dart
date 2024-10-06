@@ -1,5 +1,4 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/repository/crud_repository.dart';
 
 abstract class StatisticsRepository {
 
@@ -13,6 +12,6 @@ abstract class StatisticsRepository {
   Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions);
   Future<List<Session>> querySessions(String profileId, SessionQueryOptions queryOptions);
 
-  Future<void> logSession(String profileId, Session session);
+  Future<void> logSession(Profile profile, Session session);
 
 }

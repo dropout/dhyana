@@ -21,6 +21,7 @@ class ProfileBlocProvider extends StatelessWidget {
       create: (context) {
         ProfileBloc profileBloc = ProfileBloc(
           profileRepository: repos.profileRepository,
+          statisticsRepository: repos.statisticsRepository,
           crashlyticsService: services.crashlyticsService,
         );
         if (initialEvent != null) {

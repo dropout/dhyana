@@ -3,7 +3,7 @@ import 'package:dhyana/model/all.dart';
 
 abstract interface class DayDataProvider implements DataProvider<Day> {
 
-  Future<Session> logSession(Session session);
+  Future<void> logSession(Session session);
   Future<List<Day>> query(DayQueryOptions queryOptions);
   Stream<List<Day>> queryStream(DayQueryOptions queryOptions);
 

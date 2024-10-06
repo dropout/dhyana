@@ -1,6 +1,5 @@
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/session_query_options.dart';
-import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';

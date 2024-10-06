@@ -19,27 +19,18 @@ mixin _$SessionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, TimerSettings timerSettings)
-        addSession,
     required TResult Function(String profileId) loadSessions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
     TResult? Function(String profileId)? loadSessions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
     TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) =>
@@ -47,21 +38,18 @@ mixin _$SessionsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(AddSessionEvent value) addSession,
     required TResult Function(LoadSessionsEvent value) loadSessions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(AddSessionEvent value)? addSession,
     TResult? Function(LoadSessionsEvent value)? loadSessions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(AddSessionEvent value)? addSession,
     TResult Function(LoadSessionsEvent value)? loadSessions,
     required TResult orElse(),
   }) =>
@@ -131,9 +119,6 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, TimerSettings timerSettings)
-        addSession,
     required TResult Function(String profileId) loadSessions,
   }) {
     return started();
@@ -143,9 +128,6 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
     TResult? Function(String profileId)? loadSessions,
   }) {
     return started?.call();
@@ -155,9 +137,6 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
     TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) {
@@ -171,7 +150,6 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(AddSessionEvent value) addSession,
     required TResult Function(LoadSessionsEvent value) loadSessions,
   }) {
     return started(this);
@@ -181,7 +159,6 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(AddSessionEvent value)? addSession,
     TResult? Function(LoadSessionsEvent value)? loadSessions,
   }) {
     return started?.call(this);
@@ -191,7 +168,6 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(AddSessionEvent value)? addSession,
     TResult Function(LoadSessionsEvent value)? loadSessions,
     required TResult orElse(),
   }) {
@@ -204,214 +180,6 @@ class _$StartedImpl implements _Started {
 
 abstract class _Started implements SessionsEvent {
   const factory _Started() = _$StartedImpl;
-}
-
-/// @nodoc
-abstract class _$$AddSessionEventImplCopyWith<$Res> {
-  factory _$$AddSessionEventImplCopyWith(_$AddSessionEventImpl value,
-          $Res Function(_$AddSessionEventImpl) then) =
-      __$$AddSessionEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String profileId,
-      DateTime startTime,
-      DateTime endTime,
-      TimerSettings timerSettings});
-
-  $TimerSettingsCopyWith<$Res> get timerSettings;
-}
-
-/// @nodoc
-class __$$AddSessionEventImplCopyWithImpl<$Res>
-    extends _$SessionsEventCopyWithImpl<$Res, _$AddSessionEventImpl>
-    implements _$$AddSessionEventImplCopyWith<$Res> {
-  __$$AddSessionEventImplCopyWithImpl(
-      _$AddSessionEventImpl _value, $Res Function(_$AddSessionEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SessionsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? profileId = null,
-    Object? startTime = null,
-    Object? endTime = null,
-    Object? timerSettings = null,
-  }) {
-    return _then(_$AddSessionEventImpl(
-      profileId: null == profileId
-          ? _value.profileId
-          : profileId // ignore: cast_nullable_to_non_nullable
-              as String,
-      startTime: null == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      endTime: null == endTime
-          ? _value.endTime
-          : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      timerSettings: null == timerSettings
-          ? _value.timerSettings
-          : timerSettings // ignore: cast_nullable_to_non_nullable
-              as TimerSettings,
-    ));
-  }
-
-  /// Create a copy of SessionsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingsCopyWith<$Res> get timerSettings {
-    return $TimerSettingsCopyWith<$Res>(_value.timerSettings, (value) {
-      return _then(_value.copyWith(timerSettings: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$AddSessionEventImpl implements AddSessionEvent {
-  const _$AddSessionEventImpl(
-      {required this.profileId,
-      required this.startTime,
-      required this.endTime,
-      required this.timerSettings});
-
-  @override
-  final String profileId;
-  @override
-  final DateTime startTime;
-  @override
-  final DateTime endTime;
-  @override
-  final TimerSettings timerSettings;
-
-  @override
-  String toString() {
-    return 'SessionsEvent.addSession(profileId: $profileId, startTime: $startTime, endTime: $endTime, timerSettings: $timerSettings)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddSessionEventImpl &&
-            (identical(other.profileId, profileId) ||
-                other.profileId == profileId) &&
-            (identical(other.startTime, startTime) ||
-                other.startTime == startTime) &&
-            (identical(other.endTime, endTime) || other.endTime == endTime) &&
-            (identical(other.timerSettings, timerSettings) ||
-                other.timerSettings == timerSettings));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, profileId, startTime, endTime, timerSettings);
-
-  /// Create a copy of SessionsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddSessionEventImplCopyWith<_$AddSessionEventImpl> get copyWith =>
-      __$$AddSessionEventImplCopyWithImpl<_$AddSessionEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, TimerSettings timerSettings)
-        addSession,
-    required TResult Function(String profileId) loadSessions,
-  }) {
-    return addSession(profileId, startTime, endTime, timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
-    TResult? Function(String profileId)? loadSessions,
-  }) {
-    return addSession?.call(profileId, startTime, endTime, timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
-    TResult Function(String profileId)? loadSessions,
-    required TResult orElse(),
-  }) {
-    if (addSession != null) {
-      return addSession(profileId, startTime, endTime, timerSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(AddSessionEvent value) addSession,
-    required TResult Function(LoadSessionsEvent value) loadSessions,
-  }) {
-    return addSession(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(AddSessionEvent value)? addSession,
-    TResult? Function(LoadSessionsEvent value)? loadSessions,
-  }) {
-    return addSession?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(AddSessionEvent value)? addSession,
-    TResult Function(LoadSessionsEvent value)? loadSessions,
-    required TResult orElse(),
-  }) {
-    if (addSession != null) {
-      return addSession(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AddSessionEvent implements SessionsEvent {
-  const factory AddSessionEvent(
-      {required final String profileId,
-      required final DateTime startTime,
-      required final DateTime endTime,
-      required final TimerSettings timerSettings}) = _$AddSessionEventImpl;
-
-  String get profileId;
-  DateTime get startTime;
-  DateTime get endTime;
-  TimerSettings get timerSettings;
-
-  /// Create a copy of SessionsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddSessionEventImplCopyWith<_$AddSessionEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -485,9 +253,6 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, TimerSettings timerSettings)
-        addSession,
     required TResult Function(String profileId) loadSessions,
   }) {
     return loadSessions(profileId);
@@ -497,9 +262,6 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
     TResult? Function(String profileId)? loadSessions,
   }) {
     return loadSessions?.call(profileId);
@@ -509,9 +271,6 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            TimerSettings timerSettings)?
-        addSession,
     TResult Function(String profileId)? loadSessions,
     required TResult orElse(),
   }) {
@@ -525,7 +284,6 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(AddSessionEvent value) addSession,
     required TResult Function(LoadSessionsEvent value) loadSessions,
   }) {
     return loadSessions(this);
@@ -535,7 +293,6 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(AddSessionEvent value)? addSession,
     TResult? Function(LoadSessionsEvent value)? loadSessions,
   }) {
     return loadSessions?.call(this);
@@ -545,7 +302,6 @@ class _$LoadSessionsEventImpl implements LoadSessionsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(AddSessionEvent value)? addSession,
     TResult Function(LoadSessionsEvent value)? loadSessions,
     required TResult orElse(),
   }) {

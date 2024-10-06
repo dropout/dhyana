@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -85,6 +86,10 @@ class LoginScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: backgroundColor,
           body: body,
+          extendBodyBehindAppBar: true,
+          appBar: const CustomAppBar(
+            leading: CustomBackButton(),
+          ),
         );
       }
     );
@@ -109,21 +114,15 @@ class LoginScreen extends StatelessWidget {
                 buildLegalText(context),
               ]
             ),
-            Positioned(
-              top: AppThemeData.spacingMd,
-              left: AppThemeData.spacingMd,
-              child: GestureDetector(
-                onTap: () => GoRouter.of(context).goNamed(AppScreen.home.name),
-                child: Container(
-                  padding: const EdgeInsets.all(AppThemeData.spacingSm),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  child: const Icon(Icons.arrow_back, color: Colors.white),
-                )
-              ),
-            ),
+            // const Positioned(
+            //   top: AppThemeData.spacingMd,
+            //   left: AppThemeData.spacingMd,
+            //   child: SizedBox(
+            //     width: 40,
+            //     height: 40,
+            //     child: CustomBackButton()
+            //   ),
+            // ),
           ],
         ),
       );

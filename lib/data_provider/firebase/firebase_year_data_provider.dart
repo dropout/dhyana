@@ -17,7 +17,7 @@ class FirebaseYearDataProvider
   ) : super(fireStore
     .collection('profiles')
     .doc(profileId)
-    .collection('months')
+    .collection('years')
     .withConverter<Year>(
       fromFirestore: (snapshot, _) => fromFireStore(snapshot, Year.fromJson),
       toFirestore: (year, _) => year.toFireStore(),
@@ -37,37 +37,36 @@ class FirebaseYearDataProvider
   Future<List<Year>> query(YearQueryOptions queryOptions) =>
       buildListFromQuery(_buildQuery(queryOptions));
 
-
   @override
   Stream<List<Year>> queryStream(YearQueryOptions queryOptions) =>
       buildStreamFromQuery(_buildQuery(queryOptions));
 
   @override
-  Future<Session> logSession(Session session) async {
-    String dayId = session.startTime.toYearId();
+  Future<void> logSession(Session session) async {
+    final String yearId = session.startTime.toYearId();
 
-    DocumentReference<Year> monthRef = collectionRef.doc(dayId);
-    DocumentSnapshot<Year> month = await monthRef.get();
-
-    Year y;
-    if (month.exists == false) {
-      y = Year(
-        id: dayId,
-        date: session.startTime,
-        minutes: session.duration.inMinutes,
+    late Year updatedYear;
+    try {
+      // Year exists
+      Year thisMonth = await read(yearId);
+      updatedYear = thisMonth.copyWith(
+        sessionCount: thisMonth.sessionCount + 1,
+        minutes: thisMonth.minutes + session.duration.inMinutes,
+      );
+    } catch(_, __) {
+      // Year doesn't exists in database yet
+      updatedYear = Year(
+        id: yearId,
+        date: DateTime(
+          session.startTime.year,
+        ),
         sessionCount: 1,
+        minutes: session.duration.inMinutes,
       );
-      await collectionRef.doc(y.id).set(y);
-    } else {
-      y = month.data()!;
-      y = y.copyWith(
-        minutes: y.minutes + session.duration.inMinutes,
-      );
-      Map<String, Object?> data = y.toJson();
-      data['sessionCount'] = FieldValue.increment(1);
-      await collectionRef.doc(y.id).update(data);
     }
-    return session;
+
+    DocumentReference<Year> yearRef = collectionRef.doc(updatedYear.id);
+    await yearRef.set(updatedYear, SetOptions(merge: true));
   }
 
 }

@@ -4,7 +4,7 @@ import 'data_provider.dart';
 
 abstract interface class YearDataProvider implements DataProvider<Year> {
 
-  Future<Session> logSession(Session session);
+  Future<void> logSession(Session session);
   Future<List<Year>> query(YearQueryOptions queryOptions);
   Stream<List<Year>> queryStream(YearQueryOptions queryOptions);
 

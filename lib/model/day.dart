@@ -1,5 +1,4 @@
 import 'package:dhyana/model/converter/date_time_converter.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -17,21 +16,11 @@ class Day with _$Day implements Model {
   const factory Day({
     required String id,
     @DateTimeConverter() required DateTime date,
-    required List<Session> sessions,
-    required int minutes,
+    @Default([]) List<Session> sessions,
+    @Default(0) int minutes,
+    @Default(0) int sessionCount,
     @Default(0) int consecutiveDays,
   }) = _Day;
-
-  factory Day.empty({
-    required DateTime day,
-  }) {
-    return Day(
-      id: day.toDayId(),
-      date: day,
-      sessions: [],
-      minutes: 0,
-    );
-  }
 
   factory Day.fromJson(Map<String, Object?> json) =>
     _$DayFromJson(json);

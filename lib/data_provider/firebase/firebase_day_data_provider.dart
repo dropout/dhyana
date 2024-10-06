@@ -25,45 +25,52 @@ class FirebaseDayDataProvider
   );
 
   @override
-  Future<Session> logSession(Session session) async {
-    String dayId = session.startTime.toDayId();
+  Future<void> logSession(Session session) async {
+    final String todayId = session.startTime.toDayId();
 
-    DocumentReference<Day> dayRef = collectionRef.doc(dayId);
-    DocumentSnapshot<Day> day = await dayRef.get();
-
-    Day d;
-    if (day.exists == false) {
-      d = Day(
-        id: dayId,
-        date: session.startTime,
-        sessions: [session],
+    late Day updatedToday;
+    try {
+      // Day exists
+      Day today = await read(todayId);
+      updatedToday = today.copyWith(
+        sessionCount: today.sessionCount + 1,
+        minutes: today.minutes + session.duration.inMinutes,
+        sessions: today.sessions.toList()..add(session)
+      );
+    } catch(_, __) {
+      // Day doesn't exists in database yet
+      updatedToday = Day(
+        id: todayId,
+        date: DateTime(
+          session.startTime.year,
+          session.startTime.month,
+          session.startTime.day,
+        ),
+        consecutiveDays: 1,
+        sessionCount: 1,
+        sessions: [
+          session
+        ],
         minutes: session.duration.inMinutes,
       );
-      await collectionRef.doc(d.id).set(d);
-    } else {
-      d = day.data()!;
-      d = d.copyWith(
-        sessions: d.sessions.toList()..add(session),
-        minutes: d.minutes + session.duration.inMinutes,
-      );
-      await collectionRef.doc(d.id).update(d.toFireStore());
     }
-    return session;
+
+    DocumentReference<Day> dayRef = collectionRef.doc(updatedToday.id);
+    await dayRef.set(updatedToday, SetOptions(merge: true));
   }
 
   Query<Day> _buildQuery(DayQueryOptions queryOptions) {
     final FieldPath fieldPath = FieldPath(const ['date']);
     Query<Day> query = collectionRef
-        .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-        .where(fieldPath, isLessThanOrEqualTo: queryOptions.to)
-        .orderBy(fieldPath);
+      .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
+      .where(fieldPath, isLessThanOrEqualTo: queryOptions.to)
+      .orderBy(fieldPath);
     return query;
   }
 
   @override
   Future<List<Day>> query(DayQueryOptions queryOptions) =>
     buildListFromQuery(_buildQuery(queryOptions));
-
 
   @override
   Stream<List<Day>> queryStream(DayQueryOptions queryOptions) =>
