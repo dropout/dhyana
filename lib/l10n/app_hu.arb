@@ -44,6 +44,8 @@
   "profileSaveButtonSaving": "Mentés...",
   "profileSaveButtonSaved": "Elmentve!",
 
+  "profileWizardTitle": "Véglegesítsd a profilodat!",
+
   "photoAccessDialogTitle": "Fotók nem érhetőek el",
   "photoAccessDialogText": "Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon 'Beállítások' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.",
   "photoAccessDialogButtonText": "Rendben",

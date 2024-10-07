@@ -111,6 +111,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileSaveButtonSaved => 'Elmentve!';
 
   @override
+  String get profileWizardTitle => 'Véglegesítsd a profilodat!';
+
+  @override
   String get photoAccessDialogTitle => 'Fotók nem érhetőek el';
 
   @override

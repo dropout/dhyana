@@ -299,6 +299,12 @@ abstract class AppLocalizations {
   /// **'Elmentve!'**
   String get profileSaveButtonSaved;
 
+  /// No description provided for @profileWizardTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Véglegesítsd a profilodat!'**
+  String get profileWizardTitle;
+
   /// No description provided for @photoAccessDialogTitle.
   ///
   /// In hu, this message translates to:

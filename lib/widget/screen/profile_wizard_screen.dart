@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -25,11 +26,9 @@ class ProfileWizardScreen extends StatelessWidget {
       appBar: const CustomAppBar(
         leading: CustomBackButton(),
       ),
-      body: SafeArea(
-        child: ProfileBlocProvider(
-          initialEvent: LoadProfile(profileId: profileId),
-          child: buildBody(context),
-        ),
+      body: ProfileBlocProvider(
+        initialEvent: LoadProfile(profileId: profileId),
+        child: buildBody(context),
       )
     );
   }
@@ -43,6 +42,7 @@ class ProfileWizardScreen extends StatelessWidget {
           case ProfileErrorState():
             return const AppErrorDisplay();
           case ProfileLoadedState():
+            // return const AppErrorDisplay();
             return buildLoaded(context, state);
           default:
             return const SizedBox.shrink();
@@ -52,27 +52,31 @@ class ProfileWizardScreen extends StatelessWidget {
   }
 
   Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
-    return Stack(
-      fit: StackFit.expand,
-      clipBehavior: Clip.none,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // const SizedBox(height: AppThemeData.spacing3xl),
-            Text(
-              'Complete your profile!',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge
-            ),
-            Expanded(
-              child: ProfileWizardView(
-                profile: state.profile,
+    return SafeArea(
+      child: Stack(
+        fit: StackFit.expand,
+        clipBehavior: Clip.none,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: AppThemeData.spacingXl),
+              Text(
+                AppLocalizations.of(context).profileWizardTitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                )
+              ),
+              Expanded(
+                child: ProfileWizardView(
+                  profile: state.profile,
+                )
               )
-            )
-          ],
-        )
-      ],
+            ],
+          )
+        ],
+      ),
     );
   }
 

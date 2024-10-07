@@ -111,6 +111,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSaveButtonSaved => 'Saved!';
 
   @override
+  String get profileWizardTitle => 'Complete your profile!';
+
+  @override
   String get photoAccessDialogTitle => 'Cannot access photos';
 
   @override

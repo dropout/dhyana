@@ -44,6 +44,9 @@
   "profileSaveButtonSaving": "Saving...",
   "profileSaveButtonSaved": "Saved!",
 
+  "profileWizardTitle": "Complete your profile!",
+
+
   "photoAccessDialogTitle": "Cannot access photos",
   "photoAccessDialogText": "The application doesn't have a permission to access you photos. Please go into 'Settings' and give access to the photos in order to change you profile photo.",
   "photoAccessDialogButtonText": "Okay",
