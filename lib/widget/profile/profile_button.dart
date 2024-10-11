@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -47,16 +48,16 @@ class ProfileButton extends StatelessWidget {
   Widget buildSignedOut(context) {
     return Stack(
       children: <Widget>[
-        DecoratedBox(
-            position: DecorationPosition.foreground,
+        const DecoratedBox(
+            position: DecorationPosition.background,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.black38
+              color: Colors.black
             ),
             child: Icon(
               Icons.account_circle_outlined,
               size: 40.0,
-              color: Colors.black,
+              color: AppColors.backgroundPaper,
             ),
         ),
         Positioned.fill(
@@ -70,15 +71,6 @@ class ProfileButton extends StatelessWidget {
           ),
         ),
       ],
-    );
-
-    return GestureDetector(
-      onTap: () => _signedOutTap(context),
-      child: Icon(
-        Icons.account_circle_outlined,
-        size: size,
-        color: Colors.black,
-      ),
     );
   }
 
@@ -159,9 +151,9 @@ class ProfileButton extends StatelessWidget {
           'profileId': userId
         });
       },
-      child: Icon(
+      child: const Icon(
         Icons.warning_amber_rounded,
-        size: size,
+        size: 40.0,
         color: Colors.black,
       )
     );

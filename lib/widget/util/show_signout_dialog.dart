@@ -25,7 +25,7 @@ void showSignoutDialog(BuildContext context) {
               ),
               child: Text(AppLocalizations.of(context).profileSignoutCancel),
               onPressed: () {
-                GoRouter.of(context).pop();
+                context.pop();
                 context.hapticsTap();
               },
             ),
@@ -37,10 +37,13 @@ void showSignoutDialog(BuildContext context) {
               ),
               child: Text(AppLocalizations.of(context).profileSignoutYes),
               onPressed: () {
-                GoRouter.of(context).pop();
+                // close are you sure dialog
+                context.pop();
+
+                // do the signout
                 authBloc.add(const SignOut());
                 profileBloc.add((const ResetProfileContent()));
-                GoRouter.of(context).goNamed(AppScreen.login.name);
+                context.goNamed(AppScreen.home.name);
                 context.hapticsTap();
                 context.logEvent(name: 'profile_signout_pressed');
               },

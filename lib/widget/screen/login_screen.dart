@@ -144,7 +144,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget buildHeadline(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.displayMedium!.copyWith(
+    TextStyle textStyle = Theme.of(context).textTheme.displayLarge!.copyWith(
       fontWeight: FontWeight.bold,
       color: Colors.black,
     );
@@ -155,9 +155,17 @@ class LoginScreen extends StatelessWidget {
           Text(AppLocalizations.of(context).loginHeadline2, style: textStyle),
           Text(AppLocalizations.of(context).loginHeadline3, style: textStyle),
         ].animate(
-          delay: 256.ms,
-          interval: 512.ms,
-        ).fadeIn(curve: Curves.easeOutExpo, duration: 750.ms).moveY(begin: -24, end: 0, curve: Curves.easeOutExpo, duration: 750.ms),
+          delay: 128.ms,
+          interval: 256.ms,
+        ).fadeIn(
+          curve: Curves.easeOutExpo,
+          duration: 768.ms
+        ).moveY(
+          begin: -24,
+          end: 0,
+          curve: Curves.easeOutExpo,
+          duration: 768.ms,
+        ),
     );
   }
 
