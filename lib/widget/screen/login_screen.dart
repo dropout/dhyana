@@ -83,6 +83,7 @@ class LoginScreen extends StatelessWidget {
           default:
             body = buildSignedOutState(context);
         }
+
         return Scaffold(
           backgroundColor: backgroundColor,
           body: body,

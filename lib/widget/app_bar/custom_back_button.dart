@@ -1,10 +1,14 @@
+import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomBackButton extends StatefulWidget {
-  const CustomBackButton({super.key});
+
+  const CustomBackButton({
+    super.key
+  });
 
   @override
   State<CustomBackButton> createState() => _CustomBackButtonState();
@@ -52,7 +56,11 @@ class _CustomBackButtonState extends State<CustomBackButton>
   }
 
   void _onTap(BuildContext context) {
-    context.pop();
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.goNamed(AppScreen.home.name);
+    }
   }
 
   void _onTapDown(BuildContext context) {
