@@ -97,7 +97,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final bool isSameDay = DateTime.now()
         .isSameDay(profile.statsReport.consecutiveDays.lastChecked);
       if (isSameDay == true && event.forceValidation == false) {
-        logger.t('Skipping validating days, forceValidation: ${event.forceValidation.toString()}');
+        logger.t('Skipping validating consecutive days: it\' the same day, forceValidation: ${event.forceValidation.toString()}');
         return;
       }
 
@@ -105,10 +105,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ProfileStatisticsReport validatedStats = _profileStatsCalculator
         .calculateConsecutiveDays(event.profile.statsReport);
 
-      // If it's the same no need to continue
-      if (event.profile.statsReport.consecutiveDays == validatedStats.consecutiveDays) {
-        return;
-      }
+      // Mark last checked
+      final DateTime now = DateTime.now();
+      validatedStats = validatedStats.copyWith(
+        consecutiveDays: validatedStats.consecutiveDays.copyWith(
+          lastChecked: now,
+        ),
+      );
 
       // Update the profile with newly calculated report
       Profile updatedProfile = event.profile.copyWith(
@@ -116,12 +119,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
 
       emit(ProfileState.loaded(profile: updatedProfile));
-      logger.t('Validated consecutive days: ${event.profile.statsReport.consecutiveDays.count} -> ${updatedProfile.statsReport.consecutiveDays.count}');
+      logger.t('Consecutive days change: ${event.profile.statsReport.consecutiveDays.count} -> ${updatedProfile.statsReport.consecutiveDays.count}');
       event.onComplete?.call(updatedProfile);
 
       // save the validated profile data
       await profileRepository.update(updatedProfile);
-      logger.t('Validated consecutive days saved in profile');
+      logger.t('Consecutive days checked at: ${now.toString()}');
     } catch(e, stack) {
       crashlyticsService.recordError(
         exception: e,
