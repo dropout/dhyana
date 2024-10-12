@@ -78,7 +78,7 @@ class FirebaseAuthRepository implements AuthRepository {
       photoUrl: DefaultProfileData.photoUrl,
       photoBlurhash: DefaultProfileData.photoBlurhash,
       signupDate: DateTime.now(),
-      statsReport: ProfileStatisticsReport(),
+      statsReport: const ProfileStatisticsReport(),
       completed: false,
     );
     await profileDataProvider.create(profile);

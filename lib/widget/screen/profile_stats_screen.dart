@@ -26,7 +26,6 @@ class ProfileStatsScreen extends StatelessWidget {
       body: ProfileBlocProvider(
         initialEvent: ProfileEvent.loadProfile(
           profileId: profileId,
-          useStream: true,
         ),
         child: const SafeArea(
           bottom: false,

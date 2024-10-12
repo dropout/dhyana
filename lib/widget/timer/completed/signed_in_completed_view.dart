@@ -40,7 +40,6 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
     return ProfileBlocProvider(
       initialEvent: ProfileEvent.loadProfile(
         profileId: widget.user.uid,
-        useStream: true,
       ),
       child: buildColumn(context),
     );

@@ -12,10 +12,14 @@ extension DateTimeUtils on DateTime {
     return '$year${_twoDigits(month)}${_twoDigits(day)}';
   }
 
-  bool isSameDay(DateTime other) {
-    return year == other.year &&
-      month == other.month &&
-      day == other.day;
+  bool isSameDay(DateTime? other) {
+    if (other == null) {
+      return false;
+    } else {
+      return year == other.year &&
+        month == other.month &&
+        day == other.day;
+    }
   }
 
   bool isYesterday(DateTime other) {

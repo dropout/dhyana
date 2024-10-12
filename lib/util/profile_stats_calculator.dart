@@ -115,7 +115,7 @@ class ProfileStatsCalculator {
 
     // Override calculation when adding a session:
     // Minimum value for consecutive days when adding a session is 1
-    if (updatedStatsReport.consecutiveDays == 0) {
+    if (updatedStatsReport.consecutiveDays.count == 0) {
       updatedStatsReport = updatedStatsReport.copyWith(
         consecutiveDays: updatedStatsReport.consecutiveDays.copyWith(
           count: 1,

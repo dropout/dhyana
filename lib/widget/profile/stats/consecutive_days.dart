@@ -7,11 +7,9 @@ import 'package:flutter/material.dart';
 class ConsecutiveDays extends StatefulWidget {
 
   final Profile profile;
-  final bool overrideProfileValue;
 
   const ConsecutiveDays({
     required this.profile,
-    this.overrideProfileValue = true,
     super.key
   });
 
@@ -31,12 +29,12 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
 
   @override
   Widget build(BuildContext context) {
-    final int consecutiveDays = getCalculatedConsecutiveDays();
+    final int consecutiveDays = widget.profile.statsReport.consecutiveDays.count;
     return Column(
       children: [
         buildNumber(context, consecutiveDays.toString()),
         Text('consecutive days',
-            style: Theme.of(context).textTheme.bodyLarge
+          style: Theme.of(context).textTheme.bodyLarge
         ),
       ],
     );
@@ -57,14 +55,6 @@ class _ConsecutiveDaysState extends State<ConsecutiveDays> {
         ),
       )
     );
-  }
-
-  int getCalculatedConsecutiveDays() {
-    if (widget.overrideProfileValue) {
-      return profileStatsCalculator.getCalculatedConsecutiveDays(widget.profile.statsReport);
-    } else {
-      return widget.profile.statsReport.consecutiveDays.count;
-    }
   }
 
 }
