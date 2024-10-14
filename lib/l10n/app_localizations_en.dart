@@ -87,7 +87,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
-  String get activity => 'Activity';
+  String get activity => 'Sessions';
 
   @override
   String get editProfile => 'Edit Profile';

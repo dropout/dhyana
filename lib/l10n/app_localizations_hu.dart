@@ -87,7 +87,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get activity => 'Aktivitás';
+  String get activity => 'Ülések';
 
   @override
   String get editProfile => 'Profil szerkesztése';

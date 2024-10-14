@@ -254,7 +254,7 @@ abstract class AppLocalizations {
   /// No description provided for @activity.
   ///
   /// In hu, this message translates to:
-  /// **'Aktivitás'**
+  /// **'Ülések'**
   String get activity;
 
   /// No description provided for @editProfile.
