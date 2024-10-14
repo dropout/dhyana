@@ -36,6 +36,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         event.profileId,
         queryOptions,
       );
+
       emit(DaysState.loaded(days: _fillEmptyDays(days, queryOptions)));
       logger.t('Successfully loaded days ${days.length}');
 

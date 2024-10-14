@@ -45,7 +45,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(const ProfileState.loading());
       Profile profile = await profileRepository.read(event.profileId);
 
-      // On every profile load we attempt to validate consecutive days
+      // Try to check if consecutive days are still valid
       add(ProfileEvent.validateConsecutiveDays(profile: profile));
 
       emit(ProfileState.loaded(profile: profile));

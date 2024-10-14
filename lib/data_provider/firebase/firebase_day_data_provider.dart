@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/day_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/day_query_options.dart';
 import 'package:dhyana/model/session.dart';
@@ -62,8 +63,8 @@ class FirebaseDayDataProvider
   Query<Day> _buildQuery(DayQueryOptions queryOptions) {
     final FieldPath fieldPath = FieldPath(const ['date']);
     Query<Day> query = collectionRef
-      .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-      .where(fieldPath, isLessThanOrEqualTo: queryOptions.to)
+      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
+      .where(fieldPath, isLessThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.to))
       .orderBy(fieldPath);
     return query;
   }
