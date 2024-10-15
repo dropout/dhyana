@@ -70,9 +70,8 @@ class Initializer {
     );
 
     StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
-      fireStore: FirebaseFirestore.instance,
+      dataProviderFactory: FirebaseDataProviderFactory(fireStore: FirebaseFirestore.instance)
     );
-
 
     TimerSettingsHistoryRepository timerSettingsHistoryRepository =
       FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);

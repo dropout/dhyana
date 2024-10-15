@@ -1,4 +1,5 @@
 export 'firebase_data_provider.dart';
+export 'firebase_data_provider_factory.dart';
 export 'firebase_day_data_provider.dart';
 export 'firebase_model_extension.dart';
 export 'firebase_month_data_provider.dart';
