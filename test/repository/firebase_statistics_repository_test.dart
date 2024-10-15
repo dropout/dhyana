@@ -102,17 +102,17 @@ void main() {
         when(() => dataProviderFactory.createMonthDataProvider(any())).thenReturn(mockMonthDataProvider);
         when(() => dataProviderFactory.createYearDataProvider(any())).thenReturn(mockYearDataProvider);
 
-        when(() => mockSessionDataProvider.create(any())).thenAnswer((_) async => Future<void>.value());
-        when(() => mockDayDataProvider.logSession(any())).thenAnswer((_) async => Future<void>.value());
-        when(() => mockMonthDataProvider.logSession(any())).thenAnswer((_) async => Future<void>.value());
-        when(() => mockYearDataProvider.logSession(any())).thenAnswer((_) async => Future<void>.value());
+        when(() => mockSessionDataProvider.create(session)).thenAnswer((_) async => Future<void>.value());
+        when(() => mockDayDataProvider.logSession(session, profile)).thenAnswer((_) async => Future<void>.value());
+        when(() => mockMonthDataProvider.logSession(session)).thenAnswer((_) async => Future<void>.value());
+        when(() => mockYearDataProvider.logSession(session)).thenAnswer((_) async => Future<void>.value());
 
         await repository.logSession(profile, session);
 
-        verify(() => mockSessionDataProvider.create(any())).called(1);
-        verify(() => mockDayDataProvider.logSession(any())).called(1);
-        verify(() => mockMonthDataProvider.logSession(any())).called(1);
-        verify(() => mockYearDataProvider.logSession(any())).called(1);
+        verify(() => mockSessionDataProvider.create(session)).called(1);
+        verify(() => mockDayDataProvider.logSession(session, profile)).called(1);
+        verify(() => mockMonthDataProvider.logSession(session)).called(1);
+        verify(() => mockYearDataProvider.logSession(session)).called(1);
       });
 
     });

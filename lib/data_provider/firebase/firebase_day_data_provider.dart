@@ -5,6 +5,7 @@ import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/day_query_options.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 
@@ -26,7 +27,7 @@ class FirebaseDayDataProvider
   );
 
   @override
-  Future<void> logSession(Session session) async {
+  Future<void> logSession(Session session, Profile profile) async {
     final String todayId = session.startTime.toDayId();
 
     late Day updatedToday;
@@ -36,7 +37,7 @@ class FirebaseDayDataProvider
       updatedToday = today.copyWith(
         sessionCount: today.sessionCount + 1,
         minutes: today.minutes + session.duration.inMinutes,
-        sessions: today.sessions.toList()..add(session)
+        sessions: today.sessions.toList()..add(session),
       );
     } catch(_, __) {
       // Day doesn't exists in database yet
@@ -47,7 +48,7 @@ class FirebaseDayDataProvider
           session.startTime.month,
           session.startTime.day,
         ),
-        consecutiveDays: 1,
+        consecutiveDays: profile.statsReport.consecutiveDays.count,
         sessionCount: 1,
         sessions: [
           session
