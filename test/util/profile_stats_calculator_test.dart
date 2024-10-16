@@ -8,7 +8,7 @@ void main() {
   group('ProfileStatisticsReportCalculator.hasValidConsecutiveDays', () {
 
     test('can tell if the consecutive days are valid when last session was before yesterday', () {
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
       expect(profileStatsCalculator.isValidConsecutiveDays(
         DateTime(2023, 8, 30, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -20,7 +20,7 @@ void main() {
     });
 
     test('can tell if the consecutive days are valid when last session was yesterday', () {
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
       expect(profileStatsCalculator.isValidConsecutiveDays(
         DateTime(2023, 8, 31, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -28,7 +28,7 @@ void main() {
     });
 
     test('can tell if the consecutive days are valid when last session was today', () {
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
       expect(profileStatsCalculator.isValidConsecutiveDays(
         DateTime(2023, 9, 1, 3, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -47,14 +47,12 @@ void main() {
         completedDaysCount: 0,
       );
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
       final currentSessionDate = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
-        stats,
-        currentSessionDate: currentSessionDate
-      );
+      ProfileStatisticsReport newStats =
+        profileStatsCalculator.updateConsecutiveDays(stats, currentSessionDate);
 
       expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
@@ -71,13 +69,11 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
       final currentSessionDate = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
-        stats,
-        currentSessionDate: currentSessionDate
-      );
+      ProfileStatisticsReport newStats =
+        profileStatsCalculator.updateConsecutiveDays(stats, currentSessionDate);
 
       expect(newStats.consecutiveDays.count, 1);
       expect(newStats.completedMinutesCount, 0);
@@ -94,14 +90,12 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
-        stats,
-        currentSessionDate: currentSessionTime
-      );
+      ProfileStatisticsReport newStats =
+        profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
       expect(newStats.consecutiveDays.count, 1);
       expect(newStats.completedMinutesCount, 0);
@@ -118,14 +112,12 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
       final currentSessionTime = DateTime(2023, 9, 3, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateConsecutiveDays(
-          stats,
-          currentSessionDate: currentSessionTime
-      );
+      ProfileStatisticsReport newStats =
+        profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
       expect(newStats.consecutiveDays.count, 0);
       expect(newStats.completedMinutesCount, 0);
@@ -145,11 +137,11 @@ void main() {
         completedDaysCount: 0,
       );
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateCompletedDay(
+      ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,
         currentSessionDate: currentSessionTime,
       );
@@ -169,11 +161,11 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateCompletedDay(
+      ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,
         currentSessionDate: currentSessionTime
       );
@@ -195,9 +187,9 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.calculateCompletedDay(
+      ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,
         currentSessionDate: currentSessionTime
       );

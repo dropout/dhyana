@@ -3,7 +3,8 @@ import 'package:dhyana/model/session.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:logger/logger.dart';
 
-class ProfileStatsCalculator {
+/// Updates profile statistics report
+class ProfileStatsReportUpdater {
 
   final Logger logger = getLogger('ProfileStatsCalculator');
 
@@ -11,16 +12,19 @@ class ProfileStatsCalculator {
     return stats.lastSessionDate != null;
   }
 
-  bool isValidConsecutiveDays(DateTime lastSessionDate, DateTime now) {
-    return (now.isBeforeYesterday(lastSessionDate) == false);
+  bool isValidConsecutiveDays(
+    DateTime lastSessionDate,
+    DateTime currentSessionDate
+  ) {
+    return (currentSessionDate.isBeforeYesterday(lastSessionDate) == false);
   }
 
-  bool shouldIncrementConsecutiveDays(DateTime lastSessionDate, DateTime now) {
-    return now.isYesterday(lastSessionDate);
-  }
-
-  int getCalculatedConsecutiveDays(ProfileStatisticsReport stats, { DateTime? currentSessionDate }) {
-    DateTime now = currentSessionDate ?? DateTime.now();
+  /// Calculate the number of consecutive days when a new session has been
+  /// completed.
+  int calculateConsecutiveDaysCount(
+    ProfileStatisticsReport stats,
+    DateTime currentSessionDate,
+  ) {
 
     // Case 0:
     // Last session is null, so this is the first day, nothing to calculate
@@ -35,30 +39,31 @@ class ProfileStatsCalculator {
     // When the last session was on the day before yesterday or earlier
     // value should be set to 0 since the user missed a day and consecutive
     // days are broken
-    if (isValidConsecutiveDays(lastSessionDate, now) == false) {
-      logger.t('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${now.toDayId()}');
+    if (isValidConsecutiveDays(lastSessionDate, currentSessionDate) == false) {
+      logger.t('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
       return 0;
     }
 
     // Case 2:
     // When the last session was on yesterday, value should be incremented by 1
-    bool isPreviousDay = now.isYesterday(lastSessionDate);
+    bool isPreviousDay = currentSessionDate.isYesterday(lastSessionDate);
     if (isPreviousDay) {
-      logger.t('Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${now.toDayId()}');
+      logger.t('Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
       return stats.consecutiveDays.count + 1;
     }
 
     // Case 3:
     // The session is on the same day, so no need to increment or reset
-    logger.t('Not incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${now.toDayId()}');
+    logger.t('Not incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
     return stats.consecutiveDays.count;
   }
 
-  ProfileStatisticsReport calculateConsecutiveDays(
-      ProfileStatisticsReport stats, { DateTime? currentSessionDate }
+  /// Update statistics report with new consecutive days count
+  ProfileStatisticsReport updateConsecutiveDays(
+    ProfileStatisticsReport stats,
+    DateTime currentSessionDate,
   ) {
-    DateTime now = currentSessionDate ?? DateTime.now();
-    int calculatedConsecutiveDays = getCalculatedConsecutiveDays(stats, currentSessionDate: now);
+    int calculatedConsecutiveDays = calculateConsecutiveDaysCount(stats, currentSessionDate);
     return stats.copyWith(
       consecutiveDays: stats.consecutiveDays.copyWith(
         count: calculatedConsecutiveDays
@@ -66,7 +71,8 @@ class ProfileStatsCalculator {
     );
   }
 
-  ProfileStatisticsReport calculateCompletedDay(
+  /// Update statistics report with new completed days count
+  ProfileStatisticsReport updateCompletedDays(
       ProfileStatisticsReport stats, { DateTime? currentSessionDate }
   ) {
 
@@ -98,6 +104,10 @@ class ProfileStatsCalculator {
     );
   }
 
+  /// Update profile statistics report with new session data
+  /// In this method we calculate consecutive days, completed days,
+  /// completed minutes and completed sessions and return an updated
+  /// profile statistics report.
   ProfileStatisticsReport updateProfileStatsReportWithNewSession(
     ProfileStatisticsReport profileStatsReport,
     Session session,
@@ -107,7 +117,7 @@ class ProfileStatsCalculator {
 
     // Calculate consecutive days
     if (updatedStatsReport.lastSessionDate != null) {
-      updatedStatsReport = calculateConsecutiveDays(updatedStatsReport);
+      updatedStatsReport = updateConsecutiveDays(updatedStatsReport, session.startTime);
       logger.t('Calculating consecutive days: ${oldStatsReport.consecutiveDays} -> ${updatedStatsReport.consecutiveDays}');
     } else {
       logger.t('There were no last session, skipping consecutive days calculation.');
@@ -131,7 +141,7 @@ class ProfileStatsCalculator {
       );
       logger.t('Incrementing completed days (first day case): ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}');
     } else {
-      updatedStatsReport = calculateCompletedDay(
+      updatedStatsReport = updateCompletedDays(
         updatedStatsReport,
         currentSessionDate: session.startTime,
       );
@@ -151,6 +161,41 @@ class ProfileStatsCalculator {
     return updatedStatsReport;
   }
 
+  /// Validates consecutive days count in the profile statistics report
+  /// If the consecutive days are valid, does nothing, if not, resets the count
+  ProfileStatisticsReport validateConsecutiveDays(ProfileStatisticsReport statsReport) {
 
+    final DateTime? lastSessionDate = statsReport.lastSessionDate;
+
+    // Check if the user has a last session, if not, no need to validate
+    if (lastSessionDate == null) {
+      logger.t('Skipping validating consecutive days: no last session');
+      return statsReport;
+    }
+
+    final DateTime now = DateTime.now();
+
+    // If consecutive days are valid, no need to update
+    final bool isConsecutiveDaysValid =
+      isValidConsecutiveDays(lastSessionDate, now);
+    if (isConsecutiveDaysValid) {
+      logger.t('Consecutive days are valid: ${statsReport.consecutiveDays.count}');
+      return statsReport.copyWith(
+        consecutiveDays: statsReport.consecutiveDays.copyWith(
+          lastChecked: now,
+        ),
+      );
+    }
+
+    // If consecutive days are not valid, reset the count
+    logger.t('Consecutive days are not valid, resetting count');
+    return statsReport.copyWith(
+      consecutiveDays: statsReport.consecutiveDays.copyWith(
+        count: 0,
+        lastChecked: now,
+      ),
+    );
+
+  }
 
 }

@@ -31,7 +31,6 @@ class WeeklyPerformance extends StatelessWidget {
         profileId: profile.id,
         from: mostRecentFirstDayOfTheWeek,
         to: mostRecentFirstDayOfTheWeek.add(const Duration(days: 7)),
-        useStream: true,
       ),
       child: buildChild(context),
     );
@@ -99,12 +98,6 @@ class WeeklyPerformance extends StatelessWidget {
   }
 
   String _getDayShortName(Day day) {
-    // DateTime firstDayOfWeek = mostRecentWeekday(DateTime.now(), 1);
-    // DateTime actualDay = DateTime(
-    //   firstDayOfWeek.year,
-    //   firstDayOfWeek.month,
-    //   firstDayOfWeek.day + index,
-    // );
     DateFormat dateFormat = DateFormat.E('HU');
     return dateFormat.format(day.date);
   }

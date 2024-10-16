@@ -24,7 +24,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository profileRepository;
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
-  final ProfileStatsCalculator _profileStatsCalculator = ProfileStatsCalculator();
+  final ProfileStatsReportUpdater _profileStatsCalculator = ProfileStatsReportUpdater();
 
   ProfileBloc({
     required this.profileRepository,
@@ -91,45 +91,37 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onValidateConsecutiveDays(ValidateConsecutiveDays event, emit) async {
     try {
 
-      // Check if it has been validated already today
+      final DateTime now = DateTime.now();
+
+      // Check if it has been already validated today
       // In that case no need to continue
       Profile profile = event.profile;
-      final bool isSameDay = DateTime.now()
-        .isSameDay(profile.statsReport.consecutiveDays.lastChecked);
+      final bool isSameDay = now.isSameDay(profile.statsReport.consecutiveDays.lastChecked);
       if (isSameDay == true && event.forceValidation == false) {
         logger.t('Skipping validating consecutive days: it\' the same day, forceValidation: ${event.forceValidation.toString()}');
         return;
       }
 
-      // Make a calculation
-      ProfileStatisticsReport validatedStats = _profileStatsCalculator
-        .calculateConsecutiveDays(event.profile.statsReport);
-
-      // Mark last checked
-      final DateTime now = DateTime.now();
-      validatedStats = validatedStats.copyWith(
-        consecutiveDays: validatedStats.consecutiveDays.copyWith(
-          lastChecked: now,
-        ),
-      );
+      ProfileStatisticsReport updatedStatsReport =
+        _profileStatsCalculator.validateConsecutiveDays(event.profile.statsReport);
 
       // Update the profile with newly calculated report
       Profile updatedProfile = event.profile.copyWith(
-        statsReport: validatedStats
+        statsReport: updatedStatsReport
       );
 
       emit(ProfileState.loaded(profile: updatedProfile));
       logger.t('Consecutive days change: ${event.profile.statsReport.consecutiveDays.count} -> ${updatedProfile.statsReport.consecutiveDays.count}');
       event.onComplete?.call(updatedProfile);
 
-      // save the validated profile data
+      // Save the validated profile data
       await profileRepository.update(updatedProfile);
-      logger.t('Consecutive days checked at: ${now.toString()}');
+      logger.t('Consecutive days checked at: ${updatedStatsReport.consecutiveDays.lastChecked.toString()}');
     } catch(e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to validate consecutive days: ${event.profile.id}'
+        reason: 'Unable to validate consecutive days: ${event.profile.statsReport.consecutiveDays.toString()}'
       );
       event.onError?.call(e, stack);
     }
@@ -137,7 +129,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onLogSession(LogSession event, emit) async {
     try {
-      ProfileStatsCalculator profileStatsCalculator = ProfileStatsCalculator();
+      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
 
       // Get a profile
       Profile profile = await profileRepository.read(event.profileId);
