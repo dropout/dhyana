@@ -11,7 +11,8 @@ class ConsecutiveDays with _$ConsecutiveDays {
   const ConsecutiveDays._();
 
   const factory ConsecutiveDays({
-    @Default(0) int count,
+    @Default(0) int current,
+    @Default(0) int longest,
     @DateTimeOrNullConverter() DateTime? startedAt,
     @DateTimeOrNullConverter() DateTime? lastChecked,
   }) = _ConsecutiveDays;

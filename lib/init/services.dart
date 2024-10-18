@@ -1,9 +1,13 @@
-import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/haptics_service.dart';
-import 'package:dhyana/service/shader_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
+import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/haptics_service.dart';
+import 'package:dhyana/service/id_generator_service.dart';
+import 'package:dhyana/service/shader_service.dart';
 
 class Services {
 
@@ -13,11 +17,13 @@ class Services {
   final ShaderService shaderService;
   final HapticsService hapticsService;
   final ResourceResolver resourceResolver;
+  final IdGeneratorService idGeneratorService;
 
   Services({
     required this.hapticsService,
     required this.resourceResolver,
     required SharedPreferences sharedPreferences,
+    required FirebaseFirestore firebaseFirestore,
     required FirebaseAnalytics firebaseAnalytics,
     required FirebaseCrashlytics firebaseCrashlytics,
   }) :
@@ -27,6 +33,7 @@ class Services {
       crashlyticsService: FirebaseCrashlyticsService(firebaseCrashlytics),
       sharedPrefs: sharedPreferences,
     ),
-    shaderService = ShaderService();
+    shaderService = ShaderService(),
+    idGeneratorService = IdGeneratorService(FirebaseIdGenerator(firebaseFirestore));
 
 }

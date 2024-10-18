@@ -48,7 +48,7 @@ class FirebaseDayDataProvider
           session.startTime.month,
           session.startTime.day,
         ),
-        consecutiveDays: profile.statsReport.consecutiveDays.count,
+        consecutiveDays: profile.statsReport.consecutiveDays.current,
         sessionCount: 1,
         sessions: [
           session

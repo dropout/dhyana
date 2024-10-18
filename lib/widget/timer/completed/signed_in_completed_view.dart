@@ -89,7 +89,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
           profile: profile,
         ),
         const SizedBox(height: AppThemeData.spacing2xl),
-        ConsecutiveDays(
+        ConsecutiveDaysDisplay(
           profile: profile,
         ),
         PresenceArea(profile: profile),

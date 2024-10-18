@@ -9,7 +9,7 @@ import 'profile_data_updater.dart';
 
 class DefaultProfileDataUpdater extends ProfileDataUpdater {
 
-  Logger logger = getLogger('DefaultProfileUpdateStrategy');
+  final Logger logger = getLogger('DefaultProfileUpdateStrategy');
 
   final Profile profile;
   final Map<String, dynamic> formData;

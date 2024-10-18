@@ -11,4 +11,5 @@ sealed class ProfileState with _$ProfileState {
     required Profile profile
   }) = ProfileLoadedState;
   const factory ProfileState.error() = ProfileErrorState;
+
 }

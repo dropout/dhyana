@@ -7,5 +7,5 @@ export 'format_duration.dart';
 export 'launch_url.dart';
 export 'localization.dart';
 export 'logger_factory.dart';
-export 'profile_stats_calculator.dart';
+export 'profile_stats_report_updater.dart';
 export 'remap_range.dart';

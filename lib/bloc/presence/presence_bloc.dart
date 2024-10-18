@@ -17,7 +17,7 @@ part 'presence_bloc.freezed.dart';
 
 class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
 
-  Logger logger = getLogger('PresenceBloc');
+  final Logger logger = getLogger('PresenceBloc');
 
   final PresenceRepository presenceRepository;
   final AuthRepository authRepository;

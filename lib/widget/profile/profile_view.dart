@@ -78,7 +78,7 @@ class _ProfileViewState extends State<ProfileView> {
               profile: profile,
             ),
             const SizedBox(height: AppThemeData.spacingLg),
-            ConsecutiveDays(
+            ConsecutiveDaysDisplay(
               profile: profile,
             ),
             const SizedBox(height: AppThemeData.spacingLg),

@@ -1,6 +1,6 @@
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/consecutive_days.dart';
-import 'package:dhyana/util/profile_stats_calculator.dart';
+import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -54,7 +54,7 @@ void main() {
       ProfileStatisticsReport newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionDate);
 
-      expect(newStats.consecutiveDays.count, 0);
+      expect(newStats.consecutiveDays.current, 1);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -75,7 +75,7 @@ void main() {
       ProfileStatisticsReport newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionDate);
 
-      expect(newStats.consecutiveDays.count, 1);
+      expect(newStats.consecutiveDays.current, 1);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -83,7 +83,7 @@ void main() {
 
     test('can calculate consecutive days when last session was on the same day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(count: 1),
+        consecutiveDays: const ConsecutiveDays(current: 1),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -97,7 +97,7 @@ void main() {
       ProfileStatisticsReport newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
-      expect(newStats.consecutiveDays.count, 1);
+      expect(newStats.consecutiveDays.current, 1);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -105,7 +105,7 @@ void main() {
 
     test('can calculate consecutive days when last session was before yesterday', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(count: 3),
+        consecutiveDays: const ConsecutiveDays(current: 3),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -119,7 +119,7 @@ void main() {
       ProfileStatisticsReport newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
-      expect(newStats.consecutiveDays.count, 0);
+      expect(newStats.consecutiveDays.current, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);
@@ -143,10 +143,10 @@ void main() {
 
       ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,
-        currentSessionDate: currentSessionTime,
+        currentSessionTime,
       );
 
-      expect(newStats.consecutiveDays.count, 0);
+      expect(newStats.consecutiveDays.current, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 1);
@@ -167,10 +167,10 @@ void main() {
 
       ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,
-        currentSessionDate: currentSessionTime
+        currentSessionTime
       );
 
-      expect(newStats.consecutiveDays.count, 0);
+      expect(newStats.consecutiveDays.current, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 1);
@@ -191,10 +191,10 @@ void main() {
 
       ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,
-        currentSessionDate: currentSessionTime
+        currentSessionTime
       );
 
-      expect(newStats.consecutiveDays.count, 0);
+      expect(newStats.consecutiveDays.current, 0);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 1);

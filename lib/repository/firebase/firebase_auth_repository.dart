@@ -9,7 +9,7 @@ import 'package:dhyana/util/logger_factory.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
 
-  Logger logger = getLogger('FirebaseAuthRepository');
+  final Logger logger = getLogger('FirebaseAuthRepository');
 
   final AuthProvider authDataProvider;
   final ProfileDataProvider profileDataProvider;

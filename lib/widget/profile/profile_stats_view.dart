@@ -39,7 +39,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView> {
     return Column(
       children: [
         const SizedBox(height: AppThemeData.spacingLg),
-        ConsecutiveDays(
+        ConsecutiveDaysDisplay(
           profile: profile,
         ),
         const SizedBox(height: AppThemeData.spacingLg),

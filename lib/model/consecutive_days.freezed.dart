@@ -20,7 +20,8 @@ ConsecutiveDays _$ConsecutiveDaysFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ConsecutiveDays {
-  int get count => throw _privateConstructorUsedError;
+  int get current => throw _privateConstructorUsedError;
+  int get longest => throw _privateConstructorUsedError;
   @DateTimeOrNullConverter()
   DateTime? get startedAt => throw _privateConstructorUsedError;
   @DateTimeOrNullConverter()
@@ -43,7 +44,8 @@ abstract class $ConsecutiveDaysCopyWith<$Res> {
       _$ConsecutiveDaysCopyWithImpl<$Res, ConsecutiveDays>;
   @useResult
   $Res call(
-      {int count,
+      {int current,
+      int longest,
       @DateTimeOrNullConverter() DateTime? startedAt,
       @DateTimeOrNullConverter() DateTime? lastChecked});
 }
@@ -63,14 +65,19 @@ class _$ConsecutiveDaysCopyWithImpl<$Res, $Val extends ConsecutiveDays>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = null,
+    Object? current = null,
+    Object? longest = null,
     Object? startedAt = freezed,
     Object? lastChecked = freezed,
   }) {
     return _then(_value.copyWith(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      current: null == current
+          ? _value.current
+          : current // ignore: cast_nullable_to_non_nullable
+              as int,
+      longest: null == longest
+          ? _value.longest
+          : longest // ignore: cast_nullable_to_non_nullable
               as int,
       startedAt: freezed == startedAt
           ? _value.startedAt
@@ -93,7 +100,8 @@ abstract class _$$ConsecutiveDaysImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int count,
+      {int current,
+      int longest,
       @DateTimeOrNullConverter() DateTime? startedAt,
       @DateTimeOrNullConverter() DateTime? lastChecked});
 }
@@ -111,14 +119,19 @@ class __$$ConsecutiveDaysImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = null,
+    Object? current = null,
+    Object? longest = null,
     Object? startedAt = freezed,
     Object? lastChecked = freezed,
   }) {
     return _then(_$ConsecutiveDaysImpl(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      current: null == current
+          ? _value.current
+          : current // ignore: cast_nullable_to_non_nullable
+              as int,
+      longest: null == longest
+          ? _value.longest
+          : longest // ignore: cast_nullable_to_non_nullable
               as int,
       startedAt: freezed == startedAt
           ? _value.startedAt
@@ -137,7 +150,8 @@ class __$$ConsecutiveDaysImplCopyWithImpl<$Res>
 class _$ConsecutiveDaysImpl extends _ConsecutiveDays
     with DiagnosticableTreeMixin {
   const _$ConsecutiveDaysImpl(
-      {this.count = 0,
+      {this.current = 0,
+      this.longest = 0,
       @DateTimeOrNullConverter() this.startedAt,
       @DateTimeOrNullConverter() this.lastChecked})
       : super._();
@@ -147,7 +161,10 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
 
   @override
   @JsonKey()
-  final int count;
+  final int current;
+  @override
+  @JsonKey()
+  final int longest;
   @override
   @DateTimeOrNullConverter()
   final DateTime? startedAt;
@@ -157,7 +174,7 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ConsecutiveDays(count: $count, startedAt: $startedAt, lastChecked: $lastChecked)';
+    return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
   }
 
   @override
@@ -165,7 +182,8 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ConsecutiveDays'))
-      ..add(DiagnosticsProperty('count', count))
+      ..add(DiagnosticsProperty('current', current))
+      ..add(DiagnosticsProperty('longest', longest))
       ..add(DiagnosticsProperty('startedAt', startedAt))
       ..add(DiagnosticsProperty('lastChecked', lastChecked));
   }
@@ -175,7 +193,8 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConsecutiveDaysImpl &&
-            (identical(other.count, count) || other.count == count) &&
+            (identical(other.current, current) || other.current == current) &&
+            (identical(other.longest, longest) || other.longest == longest) &&
             (identical(other.startedAt, startedAt) ||
                 other.startedAt == startedAt) &&
             (identical(other.lastChecked, lastChecked) ||
@@ -184,7 +203,8 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, count, startedAt, lastChecked);
+  int get hashCode =>
+      Object.hash(runtimeType, current, longest, startedAt, lastChecked);
 
   /// Create a copy of ConsecutiveDays
   /// with the given fields replaced by the non-null parameter values.
@@ -205,7 +225,8 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
 
 abstract class _ConsecutiveDays extends ConsecutiveDays {
   const factory _ConsecutiveDays(
-          {final int count,
+          {final int current,
+          final int longest,
           @DateTimeOrNullConverter() final DateTime? startedAt,
           @DateTimeOrNullConverter() final DateTime? lastChecked}) =
       _$ConsecutiveDaysImpl;
@@ -215,7 +236,9 @@ abstract class _ConsecutiveDays extends ConsecutiveDays {
       _$ConsecutiveDaysImpl.fromJson;
 
   @override
-  int get count;
+  int get current;
+  @override
+  int get longest;
   @override
   @DateTimeOrNullConverter()
   DateTime? get startedAt;

@@ -24,7 +24,7 @@ import 'init_result.dart';
  */
 class Initializer {
 
-  Logger logger = getLogger('Initializer');
+  final Logger logger = getLogger('Initializer');
 
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization sequence');
@@ -47,6 +47,7 @@ class Initializer {
       hapticsService: hapticsService,
       firebaseAnalytics: FirebaseAnalytics.instance,
       firebaseCrashlytics: FirebaseCrashlytics.instance,
+      firebaseFirestore: firebaseProvider.firestore,
       resourceResolver: resourceResolver,
     );
 

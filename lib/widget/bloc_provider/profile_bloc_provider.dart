@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
+import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +24,8 @@ class ProfileBlocProvider extends StatelessWidget {
           profileRepository: repos.profileRepository,
           statisticsRepository: repos.statisticsRepository,
           crashlyticsService: services.crashlyticsService,
+          idGeneratorService: services.idGeneratorService,
+          profileStatsUpdater: ProfileStatsReportUpdater(),
         );
         if (initialEvent != null) {
           profileBloc.add(initialEvent!);

@@ -9,7 +9,7 @@ import 'audio_service.dart';
 
 class DefaultAudioService implements AudioService {
 
-  Logger logger = getLogger('DefaultAudioService');
+  final Logger logger = getLogger('DefaultAudioService');
   AudioPlayer audioPlayer = AudioPlayer();
 
   DefaultAudioService() {

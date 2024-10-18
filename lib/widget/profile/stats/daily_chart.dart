@@ -71,8 +71,12 @@ class _DailyChartState extends State<DailyChart> {
   Widget buildLoaded(BuildContext context, DaysLoaded state) {
 
     int maxValue = state.days
-      .map((e) => e.minutes)
+      .map((day) {
+        return day.minutes;
+      })
       .reduce(max);
+
+
 
     List<double> remappedValues = state.days
       .map((e) {

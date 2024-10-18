@@ -12,7 +12,7 @@ part 'timer_settings_bloc.freezed.dart';
 
 class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
 
-  Logger logger = getLogger('TimerSettingsBloc');
+  final Logger logger = getLogger('TimerSettingsBloc');
 
   TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
   CrashlyticsService crashlyticsService;

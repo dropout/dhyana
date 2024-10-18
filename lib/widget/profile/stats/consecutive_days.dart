@@ -1,35 +1,35 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/util/profile_stats_calculator.dart';
+import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
-class ConsecutiveDays extends StatefulWidget {
+class ConsecutiveDaysDisplay extends StatefulWidget {
 
   final Profile profile;
 
-  const ConsecutiveDays({
+  const ConsecutiveDaysDisplay({
     required this.profile,
     super.key
   });
 
   @override
-  State<ConsecutiveDays> createState() => _ConsecutiveDaysState();
+  State<ConsecutiveDaysDisplay> createState() => _ConsecutiveDaysDisplayState();
 }
 
-class _ConsecutiveDaysState extends State<ConsecutiveDays> {
+class _ConsecutiveDaysDisplayState extends State<ConsecutiveDaysDisplay> {
 
-  late final ProfileStatsCalculator profileStatsCalculator;
+  late final ProfileStatsReportUpdater profileStatsCalculator;
 
   @override
   void initState() {
-    profileStatsCalculator = ProfileStatsCalculator();
+    profileStatsCalculator = ProfileStatsReportUpdater();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final int consecutiveDays = widget.profile.statsReport.consecutiveDays.count;
+    final int consecutiveDays = widget.profile.statsReport.consecutiveDays.current;
     return Column(
       children: [
         buildNumber(context, consecutiveDays.toString()),

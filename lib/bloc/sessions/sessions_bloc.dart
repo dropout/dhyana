@@ -14,7 +14,7 @@ part 'sessions_bloc.freezed.dart';
 
 class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
 
-  Logger logger = getLogger('SessionsBloc');
+  final Logger logger = getLogger('SessionsBloc');
 
   final StatisticsRepository statisticsRepository;
   final AuthRepository authRepository;

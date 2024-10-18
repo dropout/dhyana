@@ -12,7 +12,7 @@ part 'days_bloc.freezed.dart';
 
 class DaysBloc extends Bloc<DaysEvent, DaysState> {
 
-  Logger logger = getLogger('DaysBloc');
+  final Logger logger = getLogger('DaysBloc');
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
