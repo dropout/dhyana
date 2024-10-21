@@ -12,6 +12,39 @@ class AppLocalizationsHu extends AppLocalizations {
   String get minute => 'Perc';
 
   @override
+  String get minutes => 'Perc';
+
+  @override
+  String get day => 'Nap';
+
+  @override
+  String get days => 'Napok';
+
+  @override
+  String get week => 'Hét';
+
+  @override
+  String get weeks => 'Hetek';
+
+  @override
+  String get month => 'Hónap';
+
+  @override
+  String get months => 'Hónapok';
+
+  @override
+  String get year => 'Év';
+
+  @override
+  String get years => 'Évek';
+
+  @override
+  String get milestone => 'Mérföldkő';
+
+  @override
+  String get milestones => 'Mérföldkövek';
+
+  @override
   String get okay => 'Rendben';
 
   @override

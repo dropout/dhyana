@@ -12,6 +12,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get minute => 'Minute';
 
   @override
+  String get minutes => 'Minutes';
+
+  @override
+  String get day => 'Day';
+
+  @override
+  String get days => 'Days';
+
+  @override
+  String get week => 'Week';
+
+  @override
+  String get weeks => 'Weeks';
+
+  @override
+  String get month => 'Month';
+
+  @override
+  String get months => 'Months';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get years => 'Years';
+
+  @override
+  String get milestone => 'Milestone';
+
+  @override
+  String get milestones => 'Milestones';
+
+  @override
   String get okay => 'Okay';
 
   @override

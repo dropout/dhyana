@@ -1,5 +1,17 @@
 {
   "minute": "Perc",
+  "minutes": "Perc",
+  "day": "Nap",
+  "days": "Napok",
+  "week": "Hét",
+  "weeks": "Hetek",
+  "month": "Hónap",
+  "months": "Hónapok",
+  "year": "Év",
+  "years": "Évek",
+  "milestone": "Mérföldkő",
+  "milestones": "Mérföldkövek",
+
   "okay": "Rendben",
   "warmup": "Felkészülés",
 

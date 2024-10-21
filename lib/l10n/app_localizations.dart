@@ -101,6 +101,72 @@ abstract class AppLocalizations {
   /// **'Perc'**
   String get minute;
 
+  /// No description provided for @minutes.
+  ///
+  /// In hu, this message translates to:
+  /// **'Perc'**
+  String get minutes;
+
+  /// No description provided for @day.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nap'**
+  String get day;
+
+  /// No description provided for @days.
+  ///
+  /// In hu, this message translates to:
+  /// **'Napok'**
+  String get days;
+
+  /// No description provided for @week.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hét'**
+  String get week;
+
+  /// No description provided for @weeks.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hetek'**
+  String get weeks;
+
+  /// No description provided for @month.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hónap'**
+  String get month;
+
+  /// No description provided for @months.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hónapok'**
+  String get months;
+
+  /// No description provided for @year.
+  ///
+  /// In hu, this message translates to:
+  /// **'Év'**
+  String get year;
+
+  /// No description provided for @years.
+  ///
+  /// In hu, this message translates to:
+  /// **'Évek'**
+  String get years;
+
+  /// No description provided for @milestone.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mérföldkő'**
+  String get milestone;
+
+  /// No description provided for @milestones.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mérföldkövek'**
+  String get milestones;
+
   /// No description provided for @okay.
   ///
   /// In hu, this message translates to:

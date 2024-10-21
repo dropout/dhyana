@@ -1,5 +1,17 @@
 {
   "minute": "Minute",
+  "minutes": "Minutes",
+  "day": "Day",
+  "days": "Days",
+  "week": "Week",
+  "weeks": "Weeks",
+  "month": "Month",
+  "months": "Months",
+  "year": "Year",
+  "years": "Years",
+  "milestone": "Milestone",
+  "milestones": "Milestones",
+
   "okay": "Okay",
   "warmup": "Warmup",
 
@@ -36,7 +48,6 @@
   "editProfile": "Edit Profile",
   "timerSettingsHistory": "Settings history",
 
-
   "profileFirstnameLabel": "Firstname",
   "profileLastnameLabel": "Lastname",
 
@@ -45,7 +56,6 @@
   "profileSaveButtonSaved": "Saved!",
 
   "profileWizardTitle": "Complete your profile!",
-
 
   "photoAccessDialogTitle": "Cannot access photos",
   "photoAccessDialogText": "The application doesn't have a permission to access you photos. Please go into 'Settings' and give access to the photos in order to change you profile photo.",
