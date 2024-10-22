@@ -38,7 +38,7 @@ class FakeModelFactory {
   Month createMonth() {
     return Month(
       id: _faker.guid.guid(),
-      date: DateTime.now(),
+      startDate: DateTime.now(),
       minutes: _faker.randomGenerator.integer(100),
       sessionCount: _faker.randomGenerator.integer(10),
     );
@@ -51,7 +51,7 @@ class FakeModelFactory {
   Year createYear() {
     return Year(
       id: _faker.guid.guid(),
-      date: DateTime.now(),
+      startDate: DateTime.now(),
       minutes: _faker.randomGenerator.integer(100),
       sessionCount: _faker.randomGenerator.integer(10),
     );

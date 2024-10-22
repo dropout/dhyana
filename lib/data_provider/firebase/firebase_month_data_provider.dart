@@ -56,7 +56,7 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
       // Month doesn't exists in database yet
       updatedMonth = Month(
         id: monthId,
-        date: DateTime(
+        startDate: DateTime(
           session.startTime.year,
           session.startTime.month,
         ),

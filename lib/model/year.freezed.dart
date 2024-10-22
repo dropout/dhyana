@@ -22,7 +22,7 @@ Year _$YearFromJson(Map<String, dynamic> json) {
 mixin _$Year {
   String get id => throw _privateConstructorUsedError;
   @DateTimeConverter()
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime get startDate => throw _privateConstructorUsedError;
   int get sessionCount => throw _privateConstructorUsedError;
   int get minutes => throw _privateConstructorUsedError;
 
@@ -42,7 +42,7 @@ abstract class $YearCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @DateTimeConverter() DateTime date,
+      @DateTimeConverter() DateTime startDate,
       int sessionCount,
       int minutes});
 }
@@ -63,7 +63,7 @@ class _$YearCopyWithImpl<$Res, $Val extends Year>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
+    Object? startDate = null,
     Object? sessionCount = null,
     Object? minutes = null,
   }) {
@@ -72,9 +72,9 @@ class _$YearCopyWithImpl<$Res, $Val extends Year>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       sessionCount: null == sessionCount
           ? _value.sessionCount
@@ -97,7 +97,7 @@ abstract class _$$YearImplCopyWith<$Res> implements $YearCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @DateTimeConverter() DateTime date,
+      @DateTimeConverter() DateTime startDate,
       int sessionCount,
       int minutes});
 }
@@ -115,7 +115,7 @@ class __$$YearImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
+    Object? startDate = null,
     Object? sessionCount = null,
     Object? minutes = null,
   }) {
@@ -124,9 +124,9 @@ class __$$YearImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       sessionCount: null == sessionCount
           ? _value.sessionCount
@@ -145,9 +145,9 @@ class __$$YearImplCopyWithImpl<$Res>
 class _$YearImpl extends _Year with DiagnosticableTreeMixin {
   const _$YearImpl(
       {required this.id,
-      @DateTimeConverter() required this.date,
-      required this.sessionCount,
-      required this.minutes})
+      @DateTimeConverter() required this.startDate,
+      this.sessionCount = 0,
+      this.minutes = 0})
       : super._();
 
   factory _$YearImpl.fromJson(Map<String, dynamic> json) =>
@@ -157,15 +157,17 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
   final String id;
   @override
   @DateTimeConverter()
-  final DateTime date;
+  final DateTime startDate;
   @override
+  @JsonKey()
   final int sessionCount;
   @override
+  @JsonKey()
   final int minutes;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Year(id: $id, date: $date, sessionCount: $sessionCount, minutes: $minutes)';
+    return 'Year(id: $id, startDate: $startDate, sessionCount: $sessionCount, minutes: $minutes)';
   }
 
   @override
@@ -174,7 +176,7 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'Year'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('date', date))
+      ..add(DiagnosticsProperty('startDate', startDate))
       ..add(DiagnosticsProperty('sessionCount', sessionCount))
       ..add(DiagnosticsProperty('minutes', minutes));
   }
@@ -185,7 +187,8 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
         (other.runtimeType == runtimeType &&
             other is _$YearImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
             (identical(other.sessionCount, sessionCount) ||
                 other.sessionCount == sessionCount) &&
             (identical(other.minutes, minutes) || other.minutes == minutes));
@@ -193,7 +196,8 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, date, sessionCount, minutes);
+  int get hashCode =>
+      Object.hash(runtimeType, id, startDate, sessionCount, minutes);
 
   /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
@@ -214,9 +218,9 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
 abstract class _Year extends Year {
   const factory _Year(
       {required final String id,
-      @DateTimeConverter() required final DateTime date,
-      required final int sessionCount,
-      required final int minutes}) = _$YearImpl;
+      @DateTimeConverter() required final DateTime startDate,
+      final int sessionCount,
+      final int minutes}) = _$YearImpl;
   const _Year._() : super._();
 
   factory _Year.fromJson(Map<String, dynamic> json) = _$YearImpl.fromJson;
@@ -225,7 +229,7 @@ abstract class _Year extends Year {
   String get id;
   @override
   @DateTimeConverter()
-  DateTime get date;
+  DateTime get startDate;
   @override
   int get sessionCount;
   @override

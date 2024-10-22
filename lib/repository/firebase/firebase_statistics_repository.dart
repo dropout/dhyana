@@ -18,6 +18,12 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
+  Future<Week> getWeek(String profileId, DateTime dateTime) {
+    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
+    return dataProvider.read(dateTime.toWeekId());
+  }
+
+  @override
   Future<Month> getMonth(String profileId, DateTime dateTime) {
     final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
     return dataProvider.read(dateTime.toMonthId());
@@ -38,6 +44,12 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   @override
   Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) {
     final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
+    return dataProvider.query(queryOptions);
+  }
+
+  @override
+  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) {
+    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
     return dataProvider.query(queryOptions);
   }
 

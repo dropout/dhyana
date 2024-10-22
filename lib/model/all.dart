@@ -14,5 +14,7 @@ export 'session.dart';
 export 'session_query_options.dart';
 export 'timer_settings.dart';
 export 'timer_settings_query_options.dart';
+export 'week.dart';
+export 'week_query_options.dart';
 export 'year.dart';
 export 'year_query_options.dart';

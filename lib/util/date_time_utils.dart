@@ -8,6 +8,11 @@ extension DateTimeUtils on DateTime {
     return '$year${_twoDigits(month)}';
   }
 
+  String toWeekId() {
+    DateTime monday = subtract(Duration(days: weekday - 1));
+    return '${monday.toYearId()}${monday.toMonthId()}${_twoDigits(monday.day)}';
+  }
+
   String toDayId() {
     return '$year${_twoDigits(month)}${_twoDigits(day)}';
   }

@@ -57,7 +57,7 @@ class FirebaseYearDataProvider
       // Year doesn't exists in database yet
       updatedYear = Year(
         id: yearId,
-        date: DateTime(
+        startDate: DateTime(
           session.startTime.year,
         ),
         sessionCount: 1,

@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/firebase/firebase_day_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_month_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_year_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_session_data_provider.dart';
+
+import 'firebase_day_data_provider.dart';
+import 'firebase_month_data_provider.dart';
+import 'firebase_year_data_provider.dart';
+import 'firebase_session_data_provider.dart';
+import 'firebase_week_data_provider.dart';
 
 class FirebaseDataProviderFactory {
   final FirebaseFirestore fireStore;
@@ -11,6 +13,10 @@ class FirebaseDataProviderFactory {
 
   FirebaseDayDataProvider createDayDataProvider(String profileId) {
     return FirebaseDayDataProvider(fireStore, profileId);
+  }
+
+  FirebaseWeekDataProvider createWeekDataProvider(String profileId) {
+    return FirebaseWeekDataProvider(fireStore, profileId);
   }
 
   FirebaseMonthDataProvider createMonthDataProvider(String profileId) {
@@ -24,5 +30,7 @@ class FirebaseDataProviderFactory {
   FirebaseSessionDataProvider createSessionDataProvider(String profileId) {
     return FirebaseSessionDataProvider(fireStore, profileId);
   }
+
+
 
 }

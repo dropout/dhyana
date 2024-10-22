@@ -8,4 +8,5 @@ export 'firebase_profile_data_provider.dart';
 export 'firebase_session_data_provider.dart';
 export 'firebase_storage_data_provider.dart';
 export 'firebase_timer_settings_history_data_provider.dart';
+export 'firebase_week_data_provider.dart';
 export 'firebase_year_data_provider.dart';

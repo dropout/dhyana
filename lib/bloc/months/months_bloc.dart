@@ -65,7 +65,7 @@ class MonthBloc extends Bloc<MonthEvent, MonthState> {
       String monthId = DateTime(from.year, from.month + i).toMonthId();
       Month m = months.firstWhere((m) => m.id == monthId, orElse: () => Month(
         id: DateTime(from.year, from.month + i).toMonthId(),
-        date: DateTime(from.year, from.month + i),
+        startDate: DateTime(from.year, from.month + i),
         sessionCount: 0,
         minutes: 0,
       ));

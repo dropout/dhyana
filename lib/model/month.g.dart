@@ -8,15 +8,16 @@ part of 'month.dart';
 
 _$MonthImpl _$$MonthImplFromJson(Map<String, dynamic> json) => _$MonthImpl(
       id: json['id'] as String,
-      date: const DateTimeConverter().fromJson((json['date'] as num).toInt()),
-      sessionCount: (json['sessionCount'] as num).toInt(),
-      minutes: (json['minutes'] as num).toInt(),
+      startDate: const DateTimeConverter()
+          .fromJson((json['startDate'] as num).toInt()),
+      sessionCount: (json['sessionCount'] as num?)?.toInt() ?? 0,
+      minutes: (json['minutes'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$MonthImplToJson(_$MonthImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'date': const DateTimeConverter().toJson(instance.date),
+      'startDate': const DateTimeConverter().toJson(instance.startDate),
       'sessionCount': instance.sessionCount,
       'minutes': instance.minutes,
     };
