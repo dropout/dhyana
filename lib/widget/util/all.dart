@@ -9,6 +9,7 @@ export 'app_loading_display.dart';
 export 'app_loading_indicator.dart';
 export 'app_snack_bar.dart';
 export 'app_version_number.dart';
+export 'gap.dart';
 export 'form_builder_image_picker.dart';
 export 'intersperse.dart';
 export 'separator_gem.dart';
