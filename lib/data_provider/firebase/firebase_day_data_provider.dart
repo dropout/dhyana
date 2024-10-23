@@ -36,24 +36,24 @@ class FirebaseDayDataProvider
       Day today = await read(todayId);
       updatedToday = today.copyWith(
         sessionCount: today.sessionCount + 1,
-        minutes: today.minutes + session.duration.inMinutes,
+        minutesCount: today.minutesCount + session.duration.inMinutes,
         sessions: today.sessions.toList()..add(session),
       );
     } catch(_, __) {
       // Day doesn't exists in database yet
       updatedToday = Day(
         id: todayId,
-        date: DateTime(
+        startDate: DateTime(
           session.startTime.year,
           session.startTime.month,
           session.startTime.day,
         ),
-        consecutiveDays: profile.statsReport.consecutiveDays.current,
+        consecutiveDaysCount: profile.statsReport.consecutiveDays.current,
         sessionCount: 1,
         sessions: [
           session
         ],
-        minutes: session.duration.inMinutes,
+        minutesCount: session.duration.inMinutes,
       );
     }
 

@@ -23,7 +23,7 @@ mixin _$Week {
   String get id => throw _privateConstructorUsedError;
   @DateTimeConverter()
   DateTime get startDate => throw _privateConstructorUsedError;
-  int get minutes => throw _privateConstructorUsedError;
+  int get minutesCount => throw _privateConstructorUsedError;
   int get sessionCount => throw _privateConstructorUsedError;
 
   /// Serializes this Week to a JSON map.
@@ -43,7 +43,7 @@ abstract class $WeekCopyWith<$Res> {
   $Res call(
       {String id,
       @DateTimeConverter() DateTime startDate,
-      int minutes,
+      int minutesCount,
       int sessionCount});
 }
 
@@ -64,7 +64,7 @@ class _$WeekCopyWithImpl<$Res, $Val extends Week>
   $Res call({
     Object? id = null,
     Object? startDate = null,
-    Object? minutes = null,
+    Object? minutesCount = null,
     Object? sessionCount = null,
   }) {
     return _then(_value.copyWith(
@@ -76,9 +76,9 @@ class _$WeekCopyWithImpl<$Res, $Val extends Week>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
+      minutesCount: null == minutesCount
+          ? _value.minutesCount
+          : minutesCount // ignore: cast_nullable_to_non_nullable
               as int,
       sessionCount: null == sessionCount
           ? _value.sessionCount
@@ -98,7 +98,7 @@ abstract class _$$WeekImplCopyWith<$Res> implements $WeekCopyWith<$Res> {
   $Res call(
       {String id,
       @DateTimeConverter() DateTime startDate,
-      int minutes,
+      int minutesCount,
       int sessionCount});
 }
 
@@ -116,7 +116,7 @@ class __$$WeekImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? startDate = null,
-    Object? minutes = null,
+    Object? minutesCount = null,
     Object? sessionCount = null,
   }) {
     return _then(_$WeekImpl(
@@ -128,9 +128,9 @@ class __$$WeekImplCopyWithImpl<$Res>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
+      minutesCount: null == minutesCount
+          ? _value.minutesCount
+          : minutesCount // ignore: cast_nullable_to_non_nullable
               as int,
       sessionCount: null == sessionCount
           ? _value.sessionCount
@@ -146,7 +146,7 @@ class _$WeekImpl extends _Week with DiagnosticableTreeMixin {
   const _$WeekImpl(
       {required this.id,
       @DateTimeConverter() required this.startDate,
-      this.minutes = 0,
+      this.minutesCount = 0,
       this.sessionCount = 0})
       : super._();
 
@@ -160,14 +160,14 @@ class _$WeekImpl extends _Week with DiagnosticableTreeMixin {
   final DateTime startDate;
   @override
   @JsonKey()
-  final int minutes;
+  final int minutesCount;
   @override
   @JsonKey()
   final int sessionCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Week(id: $id, startDate: $startDate, minutes: $minutes, sessionCount: $sessionCount)';
+    return 'Week(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
   }
 
   @override
@@ -177,7 +177,7 @@ class _$WeekImpl extends _Week with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'Week'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('startDate', startDate))
-      ..add(DiagnosticsProperty('minutes', minutes))
+      ..add(DiagnosticsProperty('minutesCount', minutesCount))
       ..add(DiagnosticsProperty('sessionCount', sessionCount));
   }
 
@@ -189,7 +189,8 @@ class _$WeekImpl extends _Week with DiagnosticableTreeMixin {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes) &&
+            (identical(other.minutesCount, minutesCount) ||
+                other.minutesCount == minutesCount) &&
             (identical(other.sessionCount, sessionCount) ||
                 other.sessionCount == sessionCount));
   }
@@ -197,7 +198,7 @@ class _$WeekImpl extends _Week with DiagnosticableTreeMixin {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, startDate, minutes, sessionCount);
+      Object.hash(runtimeType, id, startDate, minutesCount, sessionCount);
 
   /// Create a copy of Week
   /// with the given fields replaced by the non-null parameter values.
@@ -219,7 +220,7 @@ abstract class _Week extends Week {
   const factory _Week(
       {required final String id,
       @DateTimeConverter() required final DateTime startDate,
-      final int minutes,
+      final int minutesCount,
       final int sessionCount}) = _$WeekImpl;
   const _Week._() : super._();
 
@@ -231,7 +232,7 @@ abstract class _Week extends Week {
   @DateTimeConverter()
   DateTime get startDate;
   @override
-  int get minutes;
+  int get minutesCount;
   @override
   int get sessionCount;
 

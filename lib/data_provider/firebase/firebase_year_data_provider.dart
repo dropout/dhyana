@@ -50,8 +50,8 @@ class FirebaseYearDataProvider
       // Year exists
       Year thisMonth = await read(yearId);
       updatedYear = thisMonth.copyWith(
+        minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
         sessionCount: thisMonth.sessionCount + 1,
-        minutes: thisMonth.minutes + session.duration.inMinutes,
       );
     } catch(_, __) {
       // Year doesn't exists in database yet
@@ -61,7 +61,7 @@ class FirebaseYearDataProvider
           session.startTime.year,
         ),
         sessionCount: 1,
-        minutes: session.duration.inMinutes,
+        minutesCount: session.duration.inMinutes,
       );
     }
 

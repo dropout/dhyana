@@ -50,7 +50,7 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
       Month thisMonth = await read(monthId);
       updatedMonth = thisMonth.copyWith(
         sessionCount: thisMonth.sessionCount + 1,
-        minutes: thisMonth.minutes + session.duration.inMinutes,
+        minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
       );
     } catch(_, __) {
       // Month doesn't exists in database yet
@@ -60,8 +60,8 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
           session.startTime.year,
           session.startTime.month,
         ),
+        minutesCount: session.duration.inMinutes,
         sessionCount: 1,
-        minutes: session.duration.inMinutes,
       );
     }
 

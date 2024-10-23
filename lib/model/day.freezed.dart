@@ -22,11 +22,11 @@ Day _$DayFromJson(Map<String, dynamic> json) {
 mixin _$Day {
   String get id => throw _privateConstructorUsedError;
   @DateTimeConverter()
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime get startDate => throw _privateConstructorUsedError;
   List<Session> get sessions => throw _privateConstructorUsedError;
-  int get minutes => throw _privateConstructorUsedError;
+  int get minutesCount => throw _privateConstructorUsedError;
   int get sessionCount => throw _privateConstructorUsedError;
-  int get consecutiveDays => throw _privateConstructorUsedError;
+  int get consecutiveDaysCount => throw _privateConstructorUsedError;
 
   /// Serializes this Day to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +44,11 @@ abstract class $DayCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @DateTimeConverter() DateTime date,
+      @DateTimeConverter() DateTime startDate,
       List<Session> sessions,
-      int minutes,
+      int minutesCount,
       int sessionCount,
-      int consecutiveDays});
+      int consecutiveDaysCount});
 }
 
 /// @nodoc
@@ -66,36 +66,36 @@ class _$DayCopyWithImpl<$Res, $Val extends Day> implements $DayCopyWith<$Res> {
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
+    Object? startDate = null,
     Object? sessions = null,
-    Object? minutes = null,
+    Object? minutesCount = null,
     Object? sessionCount = null,
-    Object? consecutiveDays = null,
+    Object? consecutiveDaysCount = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       sessions: null == sessions
           ? _value.sessions
           : sessions // ignore: cast_nullable_to_non_nullable
               as List<Session>,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
+      minutesCount: null == minutesCount
+          ? _value.minutesCount
+          : minutesCount // ignore: cast_nullable_to_non_nullable
               as int,
       sessionCount: null == sessionCount
           ? _value.sessionCount
           : sessionCount // ignore: cast_nullable_to_non_nullable
               as int,
-      consecutiveDays: null == consecutiveDays
-          ? _value.consecutiveDays
-          : consecutiveDays // ignore: cast_nullable_to_non_nullable
+      consecutiveDaysCount: null == consecutiveDaysCount
+          ? _value.consecutiveDaysCount
+          : consecutiveDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -109,11 +109,11 @@ abstract class _$$DayImplCopyWith<$Res> implements $DayCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @DateTimeConverter() DateTime date,
+      @DateTimeConverter() DateTime startDate,
       List<Session> sessions,
-      int minutes,
+      int minutesCount,
       int sessionCount,
-      int consecutiveDays});
+      int consecutiveDaysCount});
 }
 
 /// @nodoc
@@ -128,36 +128,36 @@ class __$$DayImplCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$DayImpl>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
+    Object? startDate = null,
     Object? sessions = null,
-    Object? minutes = null,
+    Object? minutesCount = null,
     Object? sessionCount = null,
-    Object? consecutiveDays = null,
+    Object? consecutiveDaysCount = null,
   }) {
     return _then(_$DayImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       sessions: null == sessions
           ? _value._sessions
           : sessions // ignore: cast_nullable_to_non_nullable
               as List<Session>,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
+      minutesCount: null == minutesCount
+          ? _value.minutesCount
+          : minutesCount // ignore: cast_nullable_to_non_nullable
               as int,
       sessionCount: null == sessionCount
           ? _value.sessionCount
           : sessionCount // ignore: cast_nullable_to_non_nullable
               as int,
-      consecutiveDays: null == consecutiveDays
-          ? _value.consecutiveDays
-          : consecutiveDays // ignore: cast_nullable_to_non_nullable
+      consecutiveDaysCount: null == consecutiveDaysCount
+          ? _value.consecutiveDaysCount
+          : consecutiveDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -168,11 +168,11 @@ class __$$DayImplCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$DayImpl>
 class _$DayImpl extends _Day with DiagnosticableTreeMixin {
   const _$DayImpl(
       {required this.id,
-      @DateTimeConverter() required this.date,
+      @DateTimeConverter() required this.startDate,
       final List<Session> sessions = const [],
-      this.minutes = 0,
+      this.minutesCount = 0,
       this.sessionCount = 0,
-      this.consecutiveDays = 0})
+      this.consecutiveDaysCount = 0})
       : _sessions = sessions,
         super._();
 
@@ -183,7 +183,7 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
   final String id;
   @override
   @DateTimeConverter()
-  final DateTime date;
+  final DateTime startDate;
   final List<Session> _sessions;
   @override
   @JsonKey()
@@ -195,17 +195,17 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
 
   @override
   @JsonKey()
-  final int minutes;
+  final int minutesCount;
   @override
   @JsonKey()
   final int sessionCount;
   @override
   @JsonKey()
-  final int consecutiveDays;
+  final int consecutiveDaysCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Day(id: $id, date: $date, sessions: $sessions, minutes: $minutes, sessionCount: $sessionCount, consecutiveDays: $consecutiveDays)';
+    return 'Day(id: $id, startDate: $startDate, sessions: $sessions, minutesCount: $minutesCount, sessionCount: $sessionCount, consecutiveDaysCount: $consecutiveDaysCount)';
   }
 
   @override
@@ -214,11 +214,11 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'Day'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('date', date))
+      ..add(DiagnosticsProperty('startDate', startDate))
       ..add(DiagnosticsProperty('sessions', sessions))
-      ..add(DiagnosticsProperty('minutes', minutes))
+      ..add(DiagnosticsProperty('minutesCount', minutesCount))
       ..add(DiagnosticsProperty('sessionCount', sessionCount))
-      ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays));
+      ..add(DiagnosticsProperty('consecutiveDaysCount', consecutiveDaysCount));
   }
 
   @override
@@ -227,13 +227,15 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
         (other.runtimeType == runtimeType &&
             other is _$DayImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
             const DeepCollectionEquality().equals(other._sessions, _sessions) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes) &&
+            (identical(other.minutesCount, minutesCount) ||
+                other.minutesCount == minutesCount) &&
             (identical(other.sessionCount, sessionCount) ||
                 other.sessionCount == sessionCount) &&
-            (identical(other.consecutiveDays, consecutiveDays) ||
-                other.consecutiveDays == consecutiveDays));
+            (identical(other.consecutiveDaysCount, consecutiveDaysCount) ||
+                other.consecutiveDaysCount == consecutiveDaysCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -241,11 +243,11 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      date,
+      startDate,
       const DeepCollectionEquality().hash(_sessions),
-      minutes,
+      minutesCount,
       sessionCount,
-      consecutiveDays);
+      consecutiveDaysCount);
 
   /// Create a copy of Day
   /// with the given fields replaced by the non-null parameter values.
@@ -266,11 +268,11 @@ class _$DayImpl extends _Day with DiagnosticableTreeMixin {
 abstract class _Day extends Day {
   const factory _Day(
       {required final String id,
-      @DateTimeConverter() required final DateTime date,
+      @DateTimeConverter() required final DateTime startDate,
       final List<Session> sessions,
-      final int minutes,
+      final int minutesCount,
       final int sessionCount,
-      final int consecutiveDays}) = _$DayImpl;
+      final int consecutiveDaysCount}) = _$DayImpl;
   const _Day._() : super._();
 
   factory _Day.fromJson(Map<String, dynamic> json) = _$DayImpl.fromJson;
@@ -279,15 +281,15 @@ abstract class _Day extends Day {
   String get id;
   @override
   @DateTimeConverter()
-  DateTime get date;
+  DateTime get startDate;
   @override
   List<Session> get sessions;
   @override
-  int get minutes;
+  int get minutesCount;
   @override
   int get sessionCount;
   @override
-  int get consecutiveDays;
+  int get consecutiveDaysCount;
 
   /// Create a copy of Day
   /// with the given fields replaced by the non-null parameter values.

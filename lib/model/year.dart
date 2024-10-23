@@ -15,8 +15,8 @@ class Year with _$Year implements Model {
   const factory Year({
     required String id,
     @DateTimeConverter() required DateTime startDate,
+    @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-    @Default(0) int minutes,
   }) = _Year;
 
   factory Year.fromJson(Map<String, Object?> json) =>

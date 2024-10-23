@@ -72,7 +72,7 @@ class _DailyChartState extends State<DailyChart> {
 
     int maxValue = state.days
       .map((day) {
-        return day.minutes;
+        return day.minutesCount;
       })
       .reduce(max);
 
@@ -81,7 +81,7 @@ class _DailyChartState extends State<DailyChart> {
     List<double> remappedValues = state.days
       .map((e) {
         try {
-          return e.minutes.toDouble().remap(0, maxValue, 1, widget.height).toDouble();
+          return e.minutesCount.toDouble().remap(0, maxValue, 1, widget.height).toDouble();
         } catch (err) {
           return 1.0;
         }

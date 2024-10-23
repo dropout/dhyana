@@ -99,7 +99,7 @@ class WeeklyPerformance extends StatelessWidget {
 
   String _getDayShortName(Day day) {
     DateFormat dateFormat = DateFormat.E('HU');
-    return dateFormat.format(day.date);
+    return dateFormat.format(day.startDate);
   }
 
 }

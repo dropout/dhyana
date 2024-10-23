@@ -15,8 +15,8 @@ class Month with _$Month implements Model {
   const factory Month({
     required String id,
     @DateTimeConverter() required DateTime startDate,
+    @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-    @Default(0) int minutes,
   }) = _Month;
 
   factory Month.fromJson(Map<String, Object?> json) =>

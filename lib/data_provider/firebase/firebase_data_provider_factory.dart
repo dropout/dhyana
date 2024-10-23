@@ -7,6 +7,7 @@ import 'firebase_session_data_provider.dart';
 import 'firebase_week_data_provider.dart';
 
 class FirebaseDataProviderFactory {
+
   final FirebaseFirestore fireStore;
 
   FirebaseDataProviderFactory({required this.fireStore});
@@ -30,7 +31,5 @@ class FirebaseDataProviderFactory {
   FirebaseSessionDataProvider createSessionDataProvider(String profileId) {
     return FirebaseSessionDataProvider(fireStore, profileId);
   }
-
-
 
 }

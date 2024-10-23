@@ -51,7 +51,7 @@ class FirebaseWeekDataProvider
       Week thisWeek = await read(weekId);
       updatedWeek = thisWeek.copyWith(
         sessionCount: thisWeek.sessionCount + 1,
-        minutes: thisWeek.minutes + session.duration.inMinutes,
+        minutesCount: thisWeek.minutesCount + session.duration.inMinutes,
       );
     } catch(_, __) {
       // Week doesn't exist in database yet
@@ -63,7 +63,7 @@ class FirebaseWeekDataProvider
           session.startTime.day - session.startTime.weekday + 1,
         ),
         sessionCount: 1,
-        minutes: session.duration.inMinutes,
+        minutesCount: session.duration.inMinutes,
       );
     }
 

@@ -15,7 +15,7 @@ class Week with _$Week implements Model {
   const factory Week({
     required String id,
     @DateTimeConverter() required DateTime startDate,
-    @Default(0) int minutes,
+    @Default(0) int minutesCount,
     @Default(0) int sessionCount,
   }) = _Week;
 

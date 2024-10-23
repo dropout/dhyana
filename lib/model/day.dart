@@ -15,11 +15,11 @@ class Day with _$Day implements Model {
 
   const factory Day({
     required String id,
-    @DateTimeConverter() required DateTime date,
+    @DateTimeConverter() required DateTime startDate,
     @Default([]) List<Session> sessions,
-    @Default(0) int minutes,
+    @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-    @Default(0) int consecutiveDays,
+    @Default(0) int consecutiveDaysCount,
   }) = _Day;
 
   factory Day.fromJson(Map<String, Object?> json) =>

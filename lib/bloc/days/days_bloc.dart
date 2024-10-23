@@ -67,7 +67,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
       String dayId = DateTime(from.year, from.month, from.day + i).toDayId();
       Day d = days.firstWhere((d) => d.id == dayId, orElse: () => Day(
         id: DateTime(from.year, from.month, from.day + i).toDayId(),
-        date: DateTime(from.year, from.month, from.day + i),
+        startDate: DateTime(from.year, from.month, from.day + i),
       ));
       result.add(d);
     }

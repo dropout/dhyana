@@ -23,8 +23,8 @@ mixin _$Year {
   String get id => throw _privateConstructorUsedError;
   @DateTimeConverter()
   DateTime get startDate => throw _privateConstructorUsedError;
+  int get minutesCount => throw _privateConstructorUsedError;
   int get sessionCount => throw _privateConstructorUsedError;
-  int get minutes => throw _privateConstructorUsedError;
 
   /// Serializes this Year to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,8 +43,8 @@ abstract class $YearCopyWith<$Res> {
   $Res call(
       {String id,
       @DateTimeConverter() DateTime startDate,
-      int sessionCount,
-      int minutes});
+      int minutesCount,
+      int sessionCount});
 }
 
 /// @nodoc
@@ -64,8 +64,8 @@ class _$YearCopyWithImpl<$Res, $Val extends Year>
   $Res call({
     Object? id = null,
     Object? startDate = null,
+    Object? minutesCount = null,
     Object? sessionCount = null,
-    Object? minutes = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -76,13 +76,13 @@ class _$YearCopyWithImpl<$Res, $Val extends Year>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      minutesCount: null == minutesCount
+          ? _value.minutesCount
+          : minutesCount // ignore: cast_nullable_to_non_nullable
+              as int,
       sessionCount: null == sessionCount
           ? _value.sessionCount
           : sessionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -98,8 +98,8 @@ abstract class _$$YearImplCopyWith<$Res> implements $YearCopyWith<$Res> {
   $Res call(
       {String id,
       @DateTimeConverter() DateTime startDate,
-      int sessionCount,
-      int minutes});
+      int minutesCount,
+      int sessionCount});
 }
 
 /// @nodoc
@@ -116,8 +116,8 @@ class __$$YearImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? startDate = null,
+    Object? minutesCount = null,
     Object? sessionCount = null,
-    Object? minutes = null,
   }) {
     return _then(_$YearImpl(
       id: null == id
@@ -128,13 +128,13 @@ class __$$YearImplCopyWithImpl<$Res>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      minutesCount: null == minutesCount
+          ? _value.minutesCount
+          : minutesCount // ignore: cast_nullable_to_non_nullable
+              as int,
       sessionCount: null == sessionCount
           ? _value.sessionCount
           : sessionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -146,8 +146,8 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
   const _$YearImpl(
       {required this.id,
       @DateTimeConverter() required this.startDate,
-      this.sessionCount = 0,
-      this.minutes = 0})
+      this.minutesCount = 0,
+      this.sessionCount = 0})
       : super._();
 
   factory _$YearImpl.fromJson(Map<String, dynamic> json) =>
@@ -160,14 +160,14 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
   final DateTime startDate;
   @override
   @JsonKey()
-  final int sessionCount;
+  final int minutesCount;
   @override
   @JsonKey()
-  final int minutes;
+  final int sessionCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Year(id: $id, startDate: $startDate, sessionCount: $sessionCount, minutes: $minutes)';
+    return 'Year(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
   }
 
   @override
@@ -177,8 +177,8 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'Year'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('startDate', startDate))
-      ..add(DiagnosticsProperty('sessionCount', sessionCount))
-      ..add(DiagnosticsProperty('minutes', minutes));
+      ..add(DiagnosticsProperty('minutesCount', minutesCount))
+      ..add(DiagnosticsProperty('sessionCount', sessionCount));
   }
 
   @override
@@ -189,15 +189,16 @@ class _$YearImpl extends _Year with DiagnosticableTreeMixin {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
+            (identical(other.minutesCount, minutesCount) ||
+                other.minutesCount == minutesCount) &&
             (identical(other.sessionCount, sessionCount) ||
-                other.sessionCount == sessionCount) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes));
+                other.sessionCount == sessionCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, startDate, sessionCount, minutes);
+      Object.hash(runtimeType, id, startDate, minutesCount, sessionCount);
 
   /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
@@ -219,8 +220,8 @@ abstract class _Year extends Year {
   const factory _Year(
       {required final String id,
       @DateTimeConverter() required final DateTime startDate,
-      final int sessionCount,
-      final int minutes}) = _$YearImpl;
+      final int minutesCount,
+      final int sessionCount}) = _$YearImpl;
   const _Year._() : super._();
 
   factory _Year.fromJson(Map<String, dynamic> json) = _$YearImpl.fromJson;
@@ -231,9 +232,9 @@ abstract class _Year extends Year {
   @DateTimeConverter()
   DateTime get startDate;
   @override
-  int get sessionCount;
+  int get minutesCount;
   @override
-  int get minutes;
+  int get sessionCount;
 
   /// Create a copy of Year
   /// with the given fields replaced by the non-null parameter values.
