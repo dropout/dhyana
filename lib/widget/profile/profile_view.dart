@@ -23,18 +23,18 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
-        builder: (BuildContext context, ProfileState state) {
-          switch (state) {
-            case ProfileLoadingState():
-              return buildProfileLoading(context);
-            case ProfileErrorState():
-              return buildProfileError(context);
-            case ProfileLoadedState():
-              return buildProfileLoaded(context, state.profile);
-            default:
-              return const SizedBox.shrink();
-          }
+      builder: (BuildContext context, ProfileState state) {
+        switch (state) {
+          case ProfileLoadingState():
+            return buildProfileLoading(context);
+          case ProfileErrorState():
+            return buildProfileError(context);
+          case ProfileLoadedState():
+            return buildProfileLoaded(context, state.profile);
+          default:
+            return const SizedBox.shrink();
         }
+      }
     );
   }
 

@@ -2,11 +2,9 @@ import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_indicator.dart';
-import 'package:dhyana/widget/util/app_snack_bar.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,16 +47,16 @@ class ProfileButton extends StatelessWidget {
     return Stack(
       children: <Widget>[
         const DecoratedBox(
-            position: DecorationPosition.background,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.black
-            ),
-            child: Icon(
-              Icons.account_circle_outlined,
-              size: 40.0,
-              color: AppColors.backgroundPaper,
-            ),
+          position: DecorationPosition.background,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black
+          ),
+          child: Icon(
+            Icons.account_circle_outlined,
+            size: 40.0,
+            color: AppColors.backgroundPaper,
+          ),
         ),
         Positioned.fill(
           child: Material(
@@ -75,17 +73,18 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildSignedIn(BuildContext context, String userId) {
-    return ProfileBlocProvider(
-      initialEvent: ProfileEvent.loadProfile(
-        profileId: userId,
-        onError: (_, __) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            getErrorSnackBar(context, 'An error occured while trying to load your profile!'),
-          );
-        }
-      ),
-      child: buildProfileStateDisplay(context, userId),
-    );
+    return buildProfileStateDisplay(context, userId);
+    // return ProfileBlocProvider(
+    //   initialEvent: ProfileEvent.loadProfile(
+    //     profileId: userId,
+    //     onError: (_, __) {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         getErrorSnackBar(context, 'An error occured while trying to load your profile!'),
+    //       );
+    //     }
+    //   ),
+    //   child: buildProfileStateDisplay(context, userId),
+    // );
   }
 
   Widget buildProfileStateDisplay(BuildContext context, String userId) {

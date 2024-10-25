@@ -134,11 +134,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onLogSession(LogSession event, emit) async {
     try {
 
-      // Get a profile
+      // Get the profile
       Profile profile = await profileRepository.read(event.profileId);
-      logger.t('Logging session for profile: ${profile.id}');
 
-      // Create Session
+      // Update profile statistics report with new session
       Session session = Session(
         id: idGeneratorService.sessionId(event.profileId),
         startTime: event.startTime,
@@ -147,30 +146,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         timerSettings: event.timerSettings,
       );
 
-      // Calculate profile statistics report
       ProfileStatisticsReport updatedStatsReport =
         profileStatsUpdater.updateProfileStatsReportWithNewSession(
           profile.statsReport,
           session,
         );
-      logger.t('Updated statistics report: ${session.id}');
 
-      // Store statistics data
       Profile updatedProfile = profile.copyWith(
         statsReport: updatedStatsReport,
       );
 
+      // Save session data
       await statisticsRepository.logSession(
         updatedProfile,
         session,
       );
-      logger.t('Logged session in profile: ${session.id}');
-
-      emit(ProfileState.loaded(profile: updatedProfile));
 
       // Update profile with new report
       await profileRepository.update(updatedProfile);
-      logger.t('Updated profile with new statistics report: ${profile.id}');
+      logger.t('Updated statistics report: ${updatedProfile.statsReport.toString()}');
+
+      emit(ProfileState.loaded(profile: updatedProfile));
+      logger.t('Session successfully logged: ${session.toString()}');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

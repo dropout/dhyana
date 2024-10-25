@@ -34,7 +34,6 @@ class TimerSettingsHistoryBloc
 
   void _onLoadTimerSettingsHistory(LoadTimerSettingsHistoryEvent event, emit) async {
     try {
-      logger.t('Loading timer settings history...');
       emit(const TimerSettingsHistoryState.loading());
       List<TimerSettings> timerSettingsList =
       await timerSettingsHistoryRepository.query(
@@ -55,11 +54,9 @@ class TimerSettingsHistoryBloc
 
   void _onSaveTimerSettingsHistory(SaveTimerSettingsHistoryEvent event, emit) async {
     try {
-      logger.t('Loading timer settings history...');
-      logger.t('Checking if the user logged in');
       User? user = await authRepository.user;
       if (user == null) {
-        logger.t('User is not signed in, not saving timer settings to history');
+        logger.t('User is not signed in, not saving timer settings to history.');
         return;
       }
       await timerSettingsHistoryRepository.saveSettings(
@@ -68,12 +65,12 @@ class TimerSettingsHistoryBloc
           lastUsed: DateTime.now(),
         )
       );
-      logger.t('Timer settings successfully saved');
+      logger.t('Timer settings successfully saved.');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to timer save timer settings to history'
+        reason: 'Unable to timer save timer settings to history!'
       );
     }
   }

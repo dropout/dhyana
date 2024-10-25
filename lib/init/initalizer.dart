@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart';
@@ -99,12 +101,26 @@ class Initializer {
     logger.t('Checking if the user has already signed in');
     User? user = await repos.authRepository.authStateChange.first;
 
+    ProfileBloc profileBloc = ProfileBloc(
+      profileRepository: repos.profileRepository,
+      statisticsRepository: repos.statisticsRepository,
+      idGeneratorService: services.idGeneratorService,
+      crashlyticsService: services.crashlyticsService,
+      profileStatsUpdater: ProfileStatsReportUpdater(),
+    );
+
+    if (user != null) {
+      logger.t('User is already signed in, loading profile: ${user.uid}');
+      profileBloc.add(ProfileEvent.loadProfile(profileId: user.uid));
+    }
+
     return InitResult(
       user: user,
       timerSettings: timerSettings,
       services: services,
       repositories: repos,
       providers: providers,
+      profileBloc: profileBloc,
     );
   }
 

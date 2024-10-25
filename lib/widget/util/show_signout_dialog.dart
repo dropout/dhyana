@@ -42,7 +42,7 @@ void showSignoutDialog(BuildContext context) {
 
                 // do the signout
                 authBloc.add(const SignOut());
-                profileBloc.add((const ResetProfileContent()));
+                profileBloc.add(const ProfileEvent.reset());
                 context.goNamed(AppScreen.home.name);
                 context.hapticsTap();
                 context.logEvent(name: 'profile_signout_pressed');

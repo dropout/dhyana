@@ -21,12 +21,10 @@ class TimerRunningScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileBlocProvider(
-      child: TimerRunningBlocProvider(
+    return TimerRunningBlocProvider(
+      timerSettings: timerSettings,
+      child: TimerRunningScreenContent(
         timerSettings: timerSettings,
-        child: TimerRunningScreenContent(
-          timerSettings: timerSettings,
-        ),
       ),
     );
   }
@@ -64,9 +62,9 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
     TimerSettingsHistoryBloc timerSettingsHistoryBloc =
         BlocProvider.of<TimerSettingsHistoryBloc>(context);
     timerSettingsHistoryBloc.add(
-        TimerSettingsHistoryEvent.saveSettings(
-          timerSettings: widget.timerSettings
-        )
+      TimerSettingsHistoryEvent.saveSettings(
+        timerSettings: widget.timerSettings
+      )
     );
 
   }

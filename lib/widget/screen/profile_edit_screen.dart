@@ -1,7 +1,6 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/bloc_provider/profile_bloc_provider.dart';
 import 'package:dhyana/widget/profile/profile_edit_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
@@ -24,10 +23,11 @@ class ProfileEditScreen extends StatelessWidget {
           titleText: AppLocalizations.of(context).editProfile,
         ),
         extendBodyBehindAppBar: true,
-        body: ProfileBlocProvider(
-          initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
-          child: buildState(context),
-        ),
+        body: buildState(context),
+        // body: ProfileBlocProvider(
+        //   initialEvent: ProfileEvent.loadProfile(profileId: user.uid),
+        //   child: buildState(context),
+        // ),
       );
     });
   }

@@ -53,7 +53,6 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
 
   void _onShowPresence(ShowPresence event, emit) async {
     try {
-      logger.t('Showing presence');
       User? user = await authRepository.user;
       if (user == null) {
         logger.t('User is not signed in, not showing presence.');
@@ -61,26 +60,26 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
       }
       Profile profile = await profileRepository.read(user.uid);
       if (profile.completed) {
-        logger.t('User signed in and profile is complete, showing presence.');
         await presenceRepository.showPresence(Presence(
           id: profile.id,
           profile: PublicProfile.fromProfile(profile: profile),
           startedAt: DateTime.now(),
         ));
+        logger.t('User signed in and profile is complete, showing presence.');
       } else {
-        logger.t('User is signed in but profile is incomplete, showing anonymous presence.');
         await presenceRepository.showPresence(Presence(
           id: profile.id,
           profile: PublicProfile.anonymous(),
           startedAt: DateTime.now(),
         ));
+        logger.t('User is signed in but profile is incomplete, showing anonymous presence.');
       }
       logger.t('Successfully showed presence.');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to show presence'
+        reason: 'Unable to show presence!'
       );
     }
 

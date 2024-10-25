@@ -29,8 +29,8 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
       logger.t('Loading days: ${event.from} ... ${event.to}');
       emit(const DaysState.loading());
       DayQueryOptions queryOptions = DayQueryOptions(
-          from: event.from,
-          to: event.to ?? DateTime.now()
+        from: event.from,
+        to: event.to ?? DateTime.now()
       );
       List<Day> days = await statisticsRepository.queryDays(
         event.profileId,

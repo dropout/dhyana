@@ -1,3 +1,4 @@
+import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
@@ -10,6 +11,7 @@ class InitResult {
   final Services services;
   final Repositories repositories;
   final List<Provider> providers;
+  final ProfileBloc profileBloc;
   final User? user;
 
   InitResult({
@@ -17,6 +19,7 @@ class InitResult {
     required this.services,
     required this.repositories,
     required this.providers,
+    required this.profileBloc,
     this.user
   });
 

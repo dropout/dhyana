@@ -7,7 +7,6 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default_audio_service.dart';
 import 'package:dhyana/service/default_timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
-import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
@@ -24,28 +23,29 @@ class TimerRunningBlocProvider extends StatelessWidget {
     super.key
   });
 
+  void _onSignedTimerCompleted(
+    BuildContext context,
+    TimerState timerState,
+    String profileId
+  ) {
+    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
+    profileBloc.add(ProfileEvent.logSession(
+      profileId: profileId,
+      startTime: timerState.startTime ?? DateTime.now().subtract(timerState.timerSettings.duration),
+      endTime: timerState.endTime ?? DateTime.now(),
+      duration: timerState.timerSettings.duration,
+      timerSettings: timerSettings
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    Services services = context.services;
-    Repositories repos = context.repos;
     return SignedIn(
       yes: (context, user) {
-        return buildBlocProviders(context, onTimerCompleted: (timerState) {
-          ProfileBloc profileBloc = ProfileBloc(
-            profileRepository: repos.profileRepository,
-            statisticsRepository: repos.statisticsRepository,
-            crashlyticsService: services.crashlyticsService,
-            idGeneratorService: services.idGeneratorService,
-            profileStatsUpdater: ProfileStatsReportUpdater(),
-          );
-          profileBloc.add(ProfileEvent.logSession(
-            profileId: user.uid,
-            startTime: timerState.startTime ?? DateTime.now().subtract(timerState.timerSettings.duration),
-            endTime: timerState.endTime ?? DateTime.now(),
-            duration: timerState.timerSettings.duration,
-            timerSettings: timerSettings
-          ));
-        });
+        return buildBlocProviders(context,
+          onTimerCompleted: (timerState) =>
+            _onSignedTimerCompleted(context, timerState, user.uid),
+        );
       },
       no: buildBlocProviders(context),
     );

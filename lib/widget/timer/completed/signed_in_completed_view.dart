@@ -2,9 +2,9 @@ import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
+import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,15 +37,6 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileBlocProvider(
-      initialEvent: ProfileEvent.loadProfile(
-        profileId: widget.user.uid,
-      ),
-      child: buildColumn(context),
-    );
-  }
-
-  Widget buildColumn(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         switch (state) {
@@ -59,7 +50,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   }
 
   Widget buildLoading(BuildContext context) {
-    return const Text('profile loading');
+    return const AppLoadingDisplay();
   }
 
   Widget buildSeparator(BuildContext context, {
