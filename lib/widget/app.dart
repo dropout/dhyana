@@ -37,6 +37,7 @@ class App extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // unfocus user input if clicks anywhere on screen
+        // useful for hiding keyboard after user input
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
           currentFocus.focusedChild!.unfocus();

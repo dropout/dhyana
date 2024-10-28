@@ -2,7 +2,9 @@ import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
@@ -144,22 +146,12 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
             controller: _tabController,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,
-            indicatorColor: Colors.white,
-
-            // labelPadding: EdgeInsets.symmetric(horizontal: AppThemeData.spacingXs),
-            // indicator: const BoxDecoration(
-            //   border: Border(
-            //     bottom: BorderSide(
-            //       color: Colors.white,
-            //       width: 2.0,
-            //     ),
-            //   ),
-            // ),
+            indicatorColor: AppColors.backgroundPaper,
             tabs: [
               Tab(text: AppLocalizations.of(context).days),
+              Tab(text: AppLocalizations.of(context).weeks),
               Tab(text: AppLocalizations.of(context).months),
               Tab(text: AppLocalizations.of(context).years),
-              Tab(text: AppLocalizations.of(context).milestones),
             ],
           ),
         ),
@@ -178,7 +170,24 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
-                    DailyChart(profile: profile)
+                    Gap.medium(),
+                    SizedBox(
+                      height: 350,
+                      child: BarChart(
+                        data: BarChartData(
+                          <BarChartDataItem>[
+                            BarChartDataItem(value: 100, label: 'Mon'),
+                            BarChartDataItem(value: 200, label: 'Tue'),
+                            BarChartDataItem(value: 300, label: 'Wed'),
+                            BarChartDataItem(value: 400, label: 'Thu'),
+                            BarChartDataItem(value: 500, label: 'Fri'),
+                            BarChartDataItem(value: 600, label: 'Sat'),
+                            BarChartDataItem(value: 700, label: 'Sun'),
+                          ]
+                        )
+                      )
+                    ),
+
                   ],
                 ),
               ),

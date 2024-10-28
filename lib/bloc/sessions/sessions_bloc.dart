@@ -28,53 +28,15 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     on<LoadSessionsEvent>(_onLoadSessions);
   }
 
-  // void _onAddSession(AddSessionEvent event, emit) async {
-  //   try {
-  //     logger.t('Adding a session');
-  //     logger.t('Checking if the user logged in');
-  //     User? user = await authRepository.user;
-  //     if (user == null) {
-  //       logger.t('User is not signed in, session not added.');
-  //       return;
-  //     }
-  //
-  //     // add to sessions
-  //     await sessionRepository.
-  //
-  //     // log statistics
-  //
-  //     await sessionRepository.addSession(
-  //       event.profileId,
-  //       SessionFactory.withFirebaseId(
-  //         profileId: user.uid,
-  //         startTime: event.startTime,
-  //         endTime: event.endTime,
-  //         duration: event.startTime.difference(event.endTime).abs(),
-  //         timerSettings: event.timerSettings,
-  //       )
-  //     );
-  //
-  //     logger.t('Session successfully added!');
-  //   } catch(e, stack) {
-  //     logger.t('Failed to add session');
-  //     crashlyticsService.recordError(
-  //       exception: e,
-  //       stackTrace: stack,
-  //       reason: 'Unable to add session'
-  //     );
-  //   }
-  // }
-
   void _onLoadSessions(LoadSessionsEvent event, emit) async {
     try {
-      logger.t('Loading sessions');
       emit(const SessionsState.loading());
       List<Session> sessions = await statisticsRepository.querySessions(
         event.profileId,
         const SessionQueryOptions()
       );
       emit(SessionsState.loaded(sessions: sessions));
-      logger.t('Sessions successfully loaded');
+      logger.t('Sessions successfully loaded: ${sessions.length}');
     } catch(e, stack) {
       emit(const SessionsState.error());
       crashlyticsService.recordError(

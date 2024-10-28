@@ -31,7 +31,8 @@ class FirebaseSessionDataProvider
   }
 
   Query<Session> _buildQuery(SessionQueryOptions queryOptions) {
-    return collectionRef.limit(queryOptions.limit);
+    Query<Session> q = collectionRef.orderBy('startTime', descending: true);
+    return q.limit(queryOptions.limit);
   }
 
   static String generateId(String profileId) {
