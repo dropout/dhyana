@@ -2,7 +2,7 @@ class BarChartData {
 
   final List<BarChartDataItem> data;
 
-  BarChartData(this.data);
+  const BarChartData(this.data);
 
 }
 

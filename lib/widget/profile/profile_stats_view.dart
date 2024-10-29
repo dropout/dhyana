@@ -4,7 +4,6 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
@@ -139,99 +138,55 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         ),
       ),
 
-      SliverPersistentHeader(
-        pinned: true,
-        delegate: _SliverAppBarDelegate(
-          TabBar(
-            controller: _tabController,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.white70,
-            indicatorColor: AppColors.backgroundPaper,
-            tabs: [
-              Tab(text: AppLocalizations.of(context).days),
-              Tab(text: AppLocalizations.of(context).weeks),
-              Tab(text: AppLocalizations.of(context).months),
-              Tab(text: AppLocalizations.of(context).years),
-            ],
-          ),
-        ),
+      // SliverPersistentHeader(
+      //   pinned: true,
+      //   delegate: _SliverAppBarDelegate(
+      //     TabBar(
+      //       controller: _tabController,
+      //       labelColor: Colors.white,
+      //       unselectedLabelColor: Colors.white70,
+      //       indicatorColor: AppColors.backgroundPaper,
+      //       tabs: [
+      //         Tab(text: AppLocalizations.of(context).days),
+      //         Tab(text: AppLocalizations.of(context).weeks),
+      //         Tab(text: AppLocalizations.of(context).months),
+      //         Tab(text: AppLocalizations.of(context).years),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+
+      NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          children: const [
+            DaysStatsView(),
+            WeeksStatsView(),
+            MonthsStatsView(),
+            YearsStatsView(),
+          ]
+        )
       ),
 
-      SliverFillRemaining(
-        child: SizedBox.expand(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-
-              Padding(
-                padding: const EdgeInsets.all(AppThemeData.spacingMd),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
-                    Gap.medium(),
-                    SizedBox(
-                      height: 350,
-                      child: BarChart(
-                        data: BarChartData(
-                          <BarChartDataItem>[
-                            BarChartDataItem(value: 100, label: 'Mon'),
-                            BarChartDataItem(value: 200, label: 'Tue'),
-                            BarChartDataItem(value: 300, label: 'Wed'),
-                            BarChartDataItem(value: 400, label: 'Thu'),
-                            BarChartDataItem(value: 500, label: 'Fri'),
-                            BarChartDataItem(value: 600, label: 'Sat'),
-                            BarChartDataItem(value: 700, label: 'Sun'),
-                          ]
-                        )
-                      )
-                    ),
-
-                  ],
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(AppThemeData.spacingMd),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(AppLocalizations.of(context).months, style: Theme.of(context).textTheme.titleLarge),
-                    DailyChart(profile: profile)
-                  ],
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(AppThemeData.spacingMd),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(AppLocalizations.of(context).years, style: Theme.of(context).textTheme.titleLarge),
-                    DailyChart(profile: profile)
-                  ],
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(AppThemeData.spacingMd),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(AppLocalizations.of(context).milestones, style: Theme.of(context).textTheme.titleLarge),
-                    DailyChart(profile: profile)
-                  ],
-                ),
-              ),
-
-            ]
-          ),
-        ),
-      ),
+      // SliverSafeArea(
+      //   top: false,
+      //   sliver: SliverFillRemaining(
+      //     child: TabBarView(
+      //       controller: _tabController,
+      //       children: const [
+      //         DaysStatsView(),
+      //         WeeksStatsView(),
+      //         MonthsStatsView(),
+      //         YearsStatsView(),
+      //       ]
+      //     ),
+      //   ),
+      // ),
 
     ];
   }

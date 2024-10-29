@@ -4,7 +4,7 @@ abstract class BarChartBarDelegate {
 
   const BarChartBarDelegate();
 
-  Widget build(BuildContext context, double value);
+  Widget build(BuildContext context, double sizeFactor);
 
 }
 

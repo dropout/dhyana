@@ -1,7 +1,6 @@
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/chart/bar_chart_bar_delegate.dart';
 import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 
 import 'data/bar_chart_data.dart';
