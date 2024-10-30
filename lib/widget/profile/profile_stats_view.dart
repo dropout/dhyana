@@ -5,9 +5,12 @@ import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/profile/stats/custom_tab_bar_view.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 
 class ProfileStatsView extends StatefulWidget {
   const ProfileStatsView({super.key});
@@ -138,40 +141,38 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         ),
       ),
 
-      // SliverPersistentHeader(
-      //   pinned: true,
-      //   delegate: _SliverAppBarDelegate(
-      //     TabBar(
-      //       controller: _tabController,
-      //       labelColor: Colors.white,
-      //       unselectedLabelColor: Colors.white70,
-      //       indicatorColor: AppColors.backgroundPaper,
-      //       tabs: [
-      //         Tab(text: AppLocalizations.of(context).days),
-      //         Tab(text: AppLocalizations.of(context).weeks),
-      //         Tab(text: AppLocalizations.of(context).months),
-      //         Tab(text: AppLocalizations.of(context).years),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-
-      NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-
-          ];
-        },
-        body: TabBarView(
-          controller: _tabController,
-          children: const [
-            DaysStatsView(),
-            WeeksStatsView(),
-            MonthsStatsView(),
-            YearsStatsView(),
-          ]
-        )
+      SliverPersistentHeader(
+        pinned: true,
+        delegate: _SliverAppBarDelegate(
+          TabBar(
+            controller: _tabController,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white70,
+            indicatorColor: AppColors.backgroundPaper,
+            tabs: [
+              Tab(text: AppLocalizations.of(context).days),
+              Tab(text: AppLocalizations.of(context).weeks),
+              Tab(text: AppLocalizations.of(context).months),
+              Tab(text: AppLocalizations.of(context).years),
+            ],
+          ),
+        ),
       ),
+
+      SliverSafeArea(
+        top: false,
+        sliver: SliverToBoxAdapter(
+          child: CustomTabBarView(
+            tabController: _tabController,
+            children: const [
+              DaysStatsView(),
+              WeeksStatsView(),
+              MonthsStatsView(),
+              YearsStatsView(),
+            ],
+          ),
+        ),
+      )
 
       // SliverSafeArea(
       //   top: false,

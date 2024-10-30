@@ -36,7 +36,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
       padding: const EdgeInsets.all(AppThemeData.spacingMd),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
           Gap.medium(),
