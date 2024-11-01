@@ -8,3 +8,4 @@ export 'statistics_repository.dart';
 export 'timer_settings_history_repository.dart';
 
 export 'firebase/all.dart';
+export 'stub/all.dart';

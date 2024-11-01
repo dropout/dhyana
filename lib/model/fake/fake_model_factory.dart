@@ -28,11 +28,22 @@ class FakeModelFactory {
       id: _faker.guid.guid(),
       startDate: DateTime.now(),
       sessions: [],
+      minutesCount: _faker.randomGenerator.integer(100),
+      sessionCount: _faker.randomGenerator.integer(10),
     );
   }
 
   List<Day> createDays(int count) {
     return List.generate(count, (_) => createDay());
+  }
+
+  Week createWeek() {
+    return Week(
+      id: _faker.guid.guid(),
+      startDate: DateTime.now(),
+      minutesCount: _faker.randomGenerator.integer(100),
+      sessionCount: _faker.randomGenerator.integer(10),
+    );
   }
 
   Month createMonth() {
