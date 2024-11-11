@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CustomTabBarView extends StatefulWidget {
@@ -21,21 +20,31 @@ class CustomTabBarView extends StatefulWidget {
   _CustomTabBarViewState createState() => _CustomTabBarViewState();
 }
 
+enum _AnimationDirection {
+  left,
+  right,
+}
+
 class _CustomTabBarViewState extends State<CustomTabBarView> {
+
+  int lastIndex = 0;
+  _AnimationDirection animationDirection = _AnimationDirection.right;
+
   @override
   void initState() {
     super.initState();
     widget.tabController.addListener(_onTabChanged);
   }
 
-  @override
-  void dispose() {
-    widget.tabController.removeListener(_onTabChanged);
-    super.dispose();
-  }
-
   void _onTabChanged() {
-    setState(() {});
+    setState(() {
+      if (widget.tabController.index > lastIndex) {
+        animationDirection = _AnimationDirection.right;
+      } else {
+        animationDirection = _AnimationDirection.left;
+      }
+      lastIndex = widget.tabController.index;
+    });
   }
 
   @override
@@ -48,6 +57,10 @@ class _CustomTabBarViewState extends State<CustomTabBarView> {
           switchInCurve: widget.switchInCurve,
           switchOutCurve: widget.switchOutCurve,
           transitionBuilder: (Widget child, Animation<double> animation) {
+            // print('$currentIndex ${widget.tabController.index}');
+
+            print('animation value: ${animation.value}');
+
             return SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(1.0, 0.0),
@@ -61,4 +74,11 @@ class _CustomTabBarViewState extends State<CustomTabBarView> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    widget.tabController.removeListener(_onTabChanged);
+    super.dispose();
+  }
+
 }

@@ -11,7 +11,7 @@ class BarChartDataItem {
   final double value;
   final String label;
 
-  BarChartDataItem({
+  const BarChartDataItem({
     required this.value,
     required this.label,
   });

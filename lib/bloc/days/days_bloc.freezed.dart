@@ -21,7 +21,7 @@ mixin _$DaysEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getDays,
+        queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
   }) =>
@@ -31,7 +31,7 @@ mixin _$DaysEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
   }) =>
@@ -41,7 +41,7 @@ mixin _$DaysEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -50,7 +50,7 @@ mixin _$DaysEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetDaysEvent value) getDays,
+    required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
   }) =>
@@ -58,7 +58,7 @@ mixin _$DaysEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetDaysEvent value)? getDays,
+    TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
   }) =>
@@ -66,7 +66,7 @@ mixin _$DaysEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetDaysEvent value)? getDays,
+    TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
     required TResult orElse(),
@@ -138,7 +138,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getDays,
+        queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
   }) {
@@ -151,7 +151,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
   }) {
@@ -164,7 +164,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -179,7 +179,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetDaysEvent value) getDays,
+    required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
   }) {
@@ -190,7 +190,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetDaysEvent value)? getDays,
+    TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
   }) {
@@ -201,7 +201,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetDaysEvent value)? getDays,
+    TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
     required TResult orElse(),
@@ -218,20 +218,20 @@ abstract class _Started implements DaysEvent {
 }
 
 /// @nodoc
-abstract class _$$GetDaysEventImplCopyWith<$Res> {
-  factory _$$GetDaysEventImplCopyWith(
-          _$GetDaysEventImpl value, $Res Function(_$GetDaysEventImpl) then) =
-      __$$GetDaysEventImplCopyWithImpl<$Res>;
+abstract class _$$QueryDaysEventImplCopyWith<$Res> {
+  factory _$$QueryDaysEventImplCopyWith(_$QueryDaysEventImpl value,
+          $Res Function(_$QueryDaysEventImpl) then) =
+      __$$QueryDaysEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String profileId, DateTime from, DateTime? to, bool useStream});
 }
 
 /// @nodoc
-class __$$GetDaysEventImplCopyWithImpl<$Res>
-    extends _$DaysEventCopyWithImpl<$Res, _$GetDaysEventImpl>
-    implements _$$GetDaysEventImplCopyWith<$Res> {
-  __$$GetDaysEventImplCopyWithImpl(
-      _$GetDaysEventImpl _value, $Res Function(_$GetDaysEventImpl) _then)
+class __$$QueryDaysEventImplCopyWithImpl<$Res>
+    extends _$DaysEventCopyWithImpl<$Res, _$QueryDaysEventImpl>
+    implements _$$QueryDaysEventImplCopyWith<$Res> {
+  __$$QueryDaysEventImplCopyWithImpl(
+      _$QueryDaysEventImpl _value, $Res Function(_$QueryDaysEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DaysEvent
@@ -244,7 +244,7 @@ class __$$GetDaysEventImplCopyWithImpl<$Res>
     Object? to = freezed,
     Object? useStream = null,
   }) {
-    return _then(_$GetDaysEventImpl(
+    return _then(_$QueryDaysEventImpl(
       profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
@@ -267,8 +267,8 @@ class __$$GetDaysEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetDaysEventImpl implements GetDaysEvent {
-  const _$GetDaysEventImpl(
+class _$QueryDaysEventImpl implements QueryDaysEvent {
+  const _$QueryDaysEventImpl(
       {required this.profileId,
       required this.from,
       this.to,
@@ -286,14 +286,14 @@ class _$GetDaysEventImpl implements GetDaysEvent {
 
   @override
   String toString() {
-    return 'DaysEvent.getDays(profileId: $profileId, from: $from, to: $to, useStream: $useStream)';
+    return 'DaysEvent.queryDays(profileId: $profileId, from: $from, to: $to, useStream: $useStream)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetDaysEventImpl &&
+            other is _$QueryDaysEventImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
             (identical(other.from, from) || other.from == from) &&
@@ -310,8 +310,9 @@ class _$GetDaysEventImpl implements GetDaysEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetDaysEventImplCopyWith<_$GetDaysEventImpl> get copyWith =>
-      __$$GetDaysEventImplCopyWithImpl<_$GetDaysEventImpl>(this, _$identity);
+  _$$QueryDaysEventImplCopyWith<_$QueryDaysEventImpl> get copyWith =>
+      __$$QueryDaysEventImplCopyWithImpl<_$QueryDaysEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -319,11 +320,11 @@ class _$GetDaysEventImpl implements GetDaysEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getDays,
+        queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
   }) {
-    return getDays(profileId, from, to, useStream);
+    return queryDays(profileId, from, to, useStream);
   }
 
   @override
@@ -332,11 +333,11 @@ class _$GetDaysEventImpl implements GetDaysEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
   }) {
-    return getDays?.call(profileId, from, to, useStream);
+    return queryDays?.call(profileId, from, to, useStream);
   }
 
   @override
@@ -345,13 +346,13 @@ class _$GetDaysEventImpl implements GetDaysEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
   }) {
-    if (getDays != null) {
-      return getDays(profileId, from, to, useStream);
+    if (queryDays != null) {
+      return queryDays(profileId, from, to, useStream);
     }
     return orElse();
   }
@@ -360,46 +361,46 @@ class _$GetDaysEventImpl implements GetDaysEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetDaysEvent value) getDays,
+    required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
   }) {
-    return getDays(this);
+    return queryDays(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetDaysEvent value)? getDays,
+    TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
   }) {
-    return getDays?.call(this);
+    return queryDays?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetDaysEvent value)? getDays,
+    TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
     required TResult orElse(),
   }) {
-    if (getDays != null) {
-      return getDays(this);
+    if (queryDays != null) {
+      return queryDays(this);
     }
     return orElse();
   }
 }
 
-abstract class GetDaysEvent implements DaysEvent {
-  const factory GetDaysEvent(
+abstract class QueryDaysEvent implements DaysEvent {
+  const factory QueryDaysEvent(
       {required final String profileId,
       required final DateTime from,
       final DateTime? to,
-      final bool useStream}) = _$GetDaysEventImpl;
+      final bool useStream}) = _$QueryDaysEventImpl;
 
   String get profileId;
   DateTime get from;
@@ -409,7 +410,7 @@ abstract class GetDaysEvent implements DaysEvent {
   /// Create a copy of DaysEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetDaysEventImplCopyWith<_$GetDaysEventImpl> get copyWith =>
+  _$$QueryDaysEventImplCopyWith<_$QueryDaysEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -494,7 +495,7 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getDays,
+        queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
   }) {
@@ -507,7 +508,7 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
   }) {
@@ -520,7 +521,7 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -535,7 +536,7 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetDaysEvent value) getDays,
+    required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
   }) {
@@ -546,7 +547,7 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetDaysEvent value)? getDays,
+    TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
   }) {
@@ -557,7 +558,7 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetDaysEvent value)? getDays,
+    TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
     required TResult orElse(),
@@ -626,7 +627,7 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getDays,
+        queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
   }) {
@@ -639,7 +640,7 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
   }) {
@@ -652,7 +653,7 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getDays,
+        queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -667,7 +668,7 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetDaysEvent value) getDays,
+    required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
   }) {
@@ -678,7 +679,7 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetDaysEvent value)? getDays,
+    TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
   }) {
@@ -689,7 +690,7 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetDaysEvent value)? getDays,
+    TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
     required TResult orElse(),

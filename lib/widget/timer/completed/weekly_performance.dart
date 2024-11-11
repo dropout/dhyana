@@ -27,7 +27,7 @@ class WeeklyPerformance extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateTime mostRecentFirstDayOfTheWeek = mostRecentWeekday(DateTime.now(), 1);
     return DaysBlocProvider(
-      initialEvent: DaysEvent.getDays(
+      initialEvent: DaysEvent.queryDays(
         profileId: profile.id,
         from: mostRecentFirstDayOfTheWeek,
         to: mostRecentFirstDayOfTheWeek.add(const Duration(days: 7)),

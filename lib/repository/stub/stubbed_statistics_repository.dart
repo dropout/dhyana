@@ -35,10 +35,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   @override
   Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) {
     Duration difference = queryOptions.from.difference(queryOptions.to);
-
     List<Day> days = [];
-
-    print(difference.inDays);
     for (var i = 0; i < difference.inDays.abs(); ++i) {
       DateTime date = queryOptions.from.add(Duration(days: i));
       Day day = _fakeModelFactory.createDay();
@@ -46,11 +43,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
         id: date.toDayId(),
       );
       days.add(day);
-      print(day);
     }
-
-    print(days);
-
     return Future.value(days);
   }
 

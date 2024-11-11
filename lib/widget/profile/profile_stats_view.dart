@@ -1,3 +1,4 @@
+import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
@@ -9,8 +10,6 @@ import 'package:dhyana/widget/profile/stats/custom_tab_bar_view.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
 
 class ProfileStatsView extends StatefulWidget {
   const ProfileStatsView({super.key});
@@ -116,6 +115,9 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   }
 
   List<Widget> buildProfileLoaded(BuildContext context, Profile profile) {
+    final repos = context.repos;
+    final services = context.services;
+
     return [
 
       SliverToBoxAdapter(
@@ -164,30 +166,17 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         sliver: SliverToBoxAdapter(
           child: CustomTabBarView(
             tabController: _tabController,
-            children: const [
-              DaysStatsView(),
-              WeeksStatsView(),
-              MonthsStatsView(),
-              YearsStatsView(),
+            children: [
+              DaysStatsView(
+                profile: profile,
+              ),
+              const WeeksStatsView(),
+              const MonthsStatsView(),
+              const YearsStatsView(),
             ],
           ),
         ),
-      )
-
-      // SliverSafeArea(
-      //   top: false,
-      //   sliver: SliverFillRemaining(
-      //     child: TabBarView(
-      //       controller: _tabController,
-      //       children: const [
-      //         DaysStatsView(),
-      //         WeeksStatsView(),
-      //         MonthsStatsView(),
-      //         YearsStatsView(),
-      //       ]
-      //     ),
-      //   ),
-      // ),
+      ),
 
     ];
   }

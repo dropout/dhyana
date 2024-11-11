@@ -72,9 +72,11 @@ class Initializer {
       )
     );
 
-    StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
-      dataProviderFactory: FirebaseDataProviderFactory(fireStore: FirebaseFirestore.instance)
-    );
+    // StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
+    //   dataProviderFactory: FirebaseDataProviderFactory(fireStore: FirebaseFirestore.instance)
+    // );
+
+    StatisticsRepository statisticsRepository = StubbedStatisticsRepository();
 
     TimerSettingsHistoryRepository timerSettingsHistoryRepository =
       FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);
@@ -88,7 +90,7 @@ class Initializer {
     );
 
     logger.t('Initialize providers');
-    List<Provider> providers = createProviders(
+    List<Provider> providers = _createProviders(
       services,
       repos,
     );
@@ -128,7 +130,7 @@ class Initializer {
     Create a list of providers that will be used
     throughout the application.
    */
-  List<Provider> createProviders(
+  List<Provider> _createProviders(
     Services srvcs,
     Repositories repos,
   ) {

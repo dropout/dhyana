@@ -30,7 +30,8 @@ class DefaultBarChartBarDelegate extends BarChartBarDelegate {
             ),
           ),
         ),
-        FractionallySizedBox(
+
+        if (sizeFactor > 0.0) FractionallySizedBox(
           alignment: Alignment.bottomCenter,
           widthFactor: 0.25,
           heightFactor: sizeFactor,
@@ -41,6 +42,7 @@ class DefaultBarChartBarDelegate extends BarChartBarDelegate {
             ),
           ),
         )
+
       ],
     );
   }

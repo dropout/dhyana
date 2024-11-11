@@ -21,10 +21,10 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
     required this.statisticsRepository,
     required this.crashlyticsService,
   }) : super(const DaysState.loading()) {
-    on<GetDaysEvent>(_onGetDaysEvent);
+    on<QueryDaysEvent>(_onGetDaysEvent);
   }
 
-  void _onGetDaysEvent(GetDaysEvent event, emit) async {
+  void _onGetDaysEvent(QueryDaysEvent event, emit) async {
     try {
       logger.t('Loading days: ${event.from} ... ${event.to}');
       emit(const DaysState.loading());
@@ -36,6 +36,8 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         event.profileId,
         queryOptions,
       );
+
+      print(days);
 
       emit(DaysState.loaded(days: _fillEmptyDays(days, queryOptions)));
       logger.t('Successfully loaded days ${days.length}');
@@ -59,8 +61,6 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
     logger.t('Got ${days.length} from database');
 
     final DateTime from = queryOptions.from;
-
-
 
     List<Day> result = [];
     for (var i = 0; i < daysCount; ++i) {
