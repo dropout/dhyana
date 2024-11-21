@@ -23,10 +23,11 @@ class FakeModelFactory {
     return List.generate(count, (_) => createProfile());
   }
 
-  Day createDay() {
+  Day createDay({DateTime? startDate}) {
+    startDate ??= DateTime.now();
     return Day(
-      id: _faker.guid.guid(),
-      startDate: DateTime.now(),
+      id: '${startDate.year}${startDate.month}${startDate.day}',
+      startDate: startDate,
       sessions: [],
       minutesCount: _faker.randomGenerator.integer(100),
       sessionCount: _faker.randomGenerator.integer(10),

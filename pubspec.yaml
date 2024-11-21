@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.2.0
   flutter_blurhash: ^0.8.2
   flutter_shaders: ^0.1.2
+  extended_nested_scroll_view: ^6.2.1
 
   # Additional functionalities
   audioplayers: ^6.0.0

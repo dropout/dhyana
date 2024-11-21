@@ -3,13 +3,17 @@ import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:faker/faker.dart';
 
 class StubbedStatisticsRepository implements StatisticsRepository {
   final FakeModelFactory _fakeModelFactory = FakeModelFactory();
+  final Faker _faker = Faker();
 
   @override
   Future<Day> getDay(String profileId, DateTime dateTime) {
-    return Future.value(_fakeModelFactory.createDay());
+    return Future.value(_fakeModelFactory.createDay(
+      startDate: dateTime,
+    ));
   }
 
   @override
@@ -37,8 +41,11 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     Duration difference = queryOptions.from.difference(queryOptions.to);
     List<Day> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {
-      DateTime date = queryOptions.from.add(Duration(days: i));
-      Day day = _fakeModelFactory.createDay();
+      // DateTime date = queryOptions.from.add(Duration(days: i));
+      DateTime date = DateTime.now().subtract(Duration(days: _faker.randomGenerator.integer(8)));
+      Day day = _fakeModelFactory.createDay(
+        startDate: date,
+      );
       day = day.copyWith(
         id: date.toDayId(),
       );

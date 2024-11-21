@@ -6,12 +6,10 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/bloc_provider/days_bloc_provider.dart';
 import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 

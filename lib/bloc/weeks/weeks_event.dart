@@ -5,7 +5,7 @@ class WeeksEvent with _$WeeksEvent {
 
   const factory WeeksEvent.started() = _Started;
 
-  const factory WeeksEvent.getWeeks({
+  const factory WeeksEvent.queryWeeks({
     required String profileId,
     required DateTime from,
     DateTime? to,

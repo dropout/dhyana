@@ -21,7 +21,7 @@ mixin _$WeeksEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getWeeks,
+        queryWeeks,
     required TResult Function(List<Week> weeks) receiveUpdate,
     required TResult Function() error,
   }) =>
@@ -31,7 +31,7 @@ mixin _$WeeksEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult? Function(List<Week> weeks)? receiveUpdate,
     TResult? Function()? error,
   }) =>
@@ -41,7 +41,7 @@ mixin _$WeeksEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult Function(List<Week> weeks)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -50,7 +50,7 @@ mixin _$WeeksEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetWeeksEvent value) getWeeks,
+    required TResult Function(GetWeeksEvent value) queryWeeks,
     required TResult Function(ReceiveUpdateWeeksEvent value) receiveUpdate,
     required TResult Function(WeeksErrorEvent value) error,
   }) =>
@@ -58,7 +58,7 @@ mixin _$WeeksEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetWeeksEvent value)? getWeeks,
+    TResult? Function(GetWeeksEvent value)? queryWeeks,
     TResult? Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult? Function(WeeksErrorEvent value)? error,
   }) =>
@@ -66,7 +66,7 @@ mixin _$WeeksEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetWeeksEvent value)? getWeeks,
+    TResult Function(GetWeeksEvent value)? queryWeeks,
     TResult Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult Function(WeeksErrorEvent value)? error,
     required TResult orElse(),
@@ -139,7 +139,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getWeeks,
+        queryWeeks,
     required TResult Function(List<Week> weeks) receiveUpdate,
     required TResult Function() error,
   }) {
@@ -152,7 +152,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult? Function(List<Week> weeks)? receiveUpdate,
     TResult? Function()? error,
   }) {
@@ -165,7 +165,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult Function(List<Week> weeks)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -180,7 +180,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetWeeksEvent value) getWeeks,
+    required TResult Function(GetWeeksEvent value) queryWeeks,
     required TResult Function(ReceiveUpdateWeeksEvent value) receiveUpdate,
     required TResult Function(WeeksErrorEvent value) error,
   }) {
@@ -191,7 +191,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetWeeksEvent value)? getWeeks,
+    TResult? Function(GetWeeksEvent value)? queryWeeks,
     TResult? Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult? Function(WeeksErrorEvent value)? error,
   }) {
@@ -202,7 +202,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetWeeksEvent value)? getWeeks,
+    TResult Function(GetWeeksEvent value)? queryWeeks,
     TResult Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult Function(WeeksErrorEvent value)? error,
     required TResult orElse(),
@@ -287,7 +287,7 @@ class _$GetWeeksEventImpl implements GetWeeksEvent {
 
   @override
   String toString() {
-    return 'WeeksEvent.getWeeks(profileId: $profileId, from: $from, to: $to, useStream: $useStream)';
+    return 'WeeksEvent.queryWeeks(profileId: $profileId, from: $from, to: $to, useStream: $useStream)';
   }
 
   @override
@@ -320,11 +320,11 @@ class _$GetWeeksEventImpl implements GetWeeksEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getWeeks,
+        queryWeeks,
     required TResult Function(List<Week> weeks) receiveUpdate,
     required TResult Function() error,
   }) {
-    return getWeeks(profileId, from, to, useStream);
+    return queryWeeks(profileId, from, to, useStream);
   }
 
   @override
@@ -333,11 +333,11 @@ class _$GetWeeksEventImpl implements GetWeeksEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult? Function(List<Week> weeks)? receiveUpdate,
     TResult? Function()? error,
   }) {
-    return getWeeks?.call(profileId, from, to, useStream);
+    return queryWeeks?.call(profileId, from, to, useStream);
   }
 
   @override
@@ -346,13 +346,13 @@ class _$GetWeeksEventImpl implements GetWeeksEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult Function(List<Week> weeks)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
   }) {
-    if (getWeeks != null) {
-      return getWeeks(profileId, from, to, useStream);
+    if (queryWeeks != null) {
+      return queryWeeks(profileId, from, to, useStream);
     }
     return orElse();
   }
@@ -361,35 +361,35 @@ class _$GetWeeksEventImpl implements GetWeeksEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetWeeksEvent value) getWeeks,
+    required TResult Function(GetWeeksEvent value) queryWeeks,
     required TResult Function(ReceiveUpdateWeeksEvent value) receiveUpdate,
     required TResult Function(WeeksErrorEvent value) error,
   }) {
-    return getWeeks(this);
+    return queryWeeks(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetWeeksEvent value)? getWeeks,
+    TResult? Function(GetWeeksEvent value)? queryWeeks,
     TResult? Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult? Function(WeeksErrorEvent value)? error,
   }) {
-    return getWeeks?.call(this);
+    return queryWeeks?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetWeeksEvent value)? getWeeks,
+    TResult Function(GetWeeksEvent value)? queryWeeks,
     TResult Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult Function(WeeksErrorEvent value)? error,
     required TResult orElse(),
   }) {
-    if (getWeeks != null) {
-      return getWeeks(this);
+    if (queryWeeks != null) {
+      return queryWeeks(this);
     }
     return orElse();
   }
@@ -495,7 +495,7 @@ class _$ReceiveUpdateWeeksEventImpl implements ReceiveUpdateWeeksEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getWeeks,
+        queryWeeks,
     required TResult Function(List<Week> weeks) receiveUpdate,
     required TResult Function() error,
   }) {
@@ -508,7 +508,7 @@ class _$ReceiveUpdateWeeksEventImpl implements ReceiveUpdateWeeksEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult? Function(List<Week> weeks)? receiveUpdate,
     TResult? Function()? error,
   }) {
@@ -521,7 +521,7 @@ class _$ReceiveUpdateWeeksEventImpl implements ReceiveUpdateWeeksEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult Function(List<Week> weeks)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -536,7 +536,7 @@ class _$ReceiveUpdateWeeksEventImpl implements ReceiveUpdateWeeksEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetWeeksEvent value) getWeeks,
+    required TResult Function(GetWeeksEvent value) queryWeeks,
     required TResult Function(ReceiveUpdateWeeksEvent value) receiveUpdate,
     required TResult Function(WeeksErrorEvent value) error,
   }) {
@@ -547,7 +547,7 @@ class _$ReceiveUpdateWeeksEventImpl implements ReceiveUpdateWeeksEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetWeeksEvent value)? getWeeks,
+    TResult? Function(GetWeeksEvent value)? queryWeeks,
     TResult? Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult? Function(WeeksErrorEvent value)? error,
   }) {
@@ -558,7 +558,7 @@ class _$ReceiveUpdateWeeksEventImpl implements ReceiveUpdateWeeksEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetWeeksEvent value)? getWeeks,
+    TResult Function(GetWeeksEvent value)? queryWeeks,
     TResult Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult Function(WeeksErrorEvent value)? error,
     required TResult orElse(),
@@ -627,7 +627,7 @@ class _$WeeksErrorEventImpl implements WeeksErrorEvent {
     required TResult Function() started,
     required TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)
-        getWeeks,
+        queryWeeks,
     required TResult Function(List<Week> weeks) receiveUpdate,
     required TResult Function() error,
   }) {
@@ -640,7 +640,7 @@ class _$WeeksErrorEventImpl implements WeeksErrorEvent {
     TResult? Function()? started,
     TResult? Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult? Function(List<Week> weeks)? receiveUpdate,
     TResult? Function()? error,
   }) {
@@ -653,7 +653,7 @@ class _$WeeksErrorEventImpl implements WeeksErrorEvent {
     TResult Function()? started,
     TResult Function(
             String profileId, DateTime from, DateTime? to, bool useStream)?
-        getWeeks,
+        queryWeeks,
     TResult Function(List<Week> weeks)? receiveUpdate,
     TResult Function()? error,
     required TResult orElse(),
@@ -668,7 +668,7 @@ class _$WeeksErrorEventImpl implements WeeksErrorEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetWeeksEvent value) getWeeks,
+    required TResult Function(GetWeeksEvent value) queryWeeks,
     required TResult Function(ReceiveUpdateWeeksEvent value) receiveUpdate,
     required TResult Function(WeeksErrorEvent value) error,
   }) {
@@ -679,7 +679,7 @@ class _$WeeksErrorEventImpl implements WeeksErrorEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetWeeksEvent value)? getWeeks,
+    TResult? Function(GetWeeksEvent value)? queryWeeks,
     TResult? Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult? Function(WeeksErrorEvent value)? error,
   }) {
@@ -690,7 +690,7 @@ class _$WeeksErrorEventImpl implements WeeksErrorEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetWeeksEvent value)? getWeeks,
+    TResult Function(GetWeeksEvent value)? queryWeeks,
     TResult Function(ReceiveUpdateWeeksEvent value)? receiveUpdate,
     TResult Function(WeeksErrorEvent value)? error,
     required TResult orElse(),
