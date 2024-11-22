@@ -1,3 +1,4 @@
+export 'app_animation.dart';
 export 'app_button.dart';
 export 'app_cached_network_image.dart';
 export 'app_circular_icon.dart';
