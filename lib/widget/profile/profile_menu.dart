@@ -2,7 +2,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/show_signout_dialog.dart';
+import 'package:dhyana/widget/util/dialog_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

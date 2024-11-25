@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
@@ -21,12 +22,10 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     with TickerProviderStateMixin {
 
   late final TabController primaryTC;
-  late final TabController secondaryTC;
 
   @override
   void initState() {
     primaryTC = TabController(length: 4, vsync: this);
-    secondaryTC = TabController(length: 5, vsync: this);
     super.initState();
   }
 
@@ -39,19 +38,19 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
             return buildScaffolding(
               context,
               buildHeaderSlivers(context),
-              buildProfileLoading(context),
+              buildProfileLoadingContent(context),
             );
           case ProfileErrorState():
             return buildScaffolding(
               context,
               buildHeaderSlivers(context),
-              buildProfileError(context),
+              buildProfileErrorContent(context),
             );
           case ProfileLoadedState():
             return buildScaffolding(
               context,
-              buildHeaderSliversLoaded(context, state.profile),
-              buildProfileLoaded(context, state.profile)
+              buildProfileLoadedHeaderSlivers(context, state.profile),
+              buildProfileLoadedContent(context, state.profile)
             );
           default:
             return const SizedBox.shrink();
@@ -60,7 +59,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  List<Widget> buildProfileLoading(BuildContext context) {
+  List<Widget> buildProfileLoadingContent(BuildContext context) {
     return [
       const Expanded(
         child: Center(
@@ -70,7 +69,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     ];
   }
 
-  List<Widget> buildProfileError(BuildContext context) {
+  List<Widget> buildProfileErrorContent(BuildContext context) {
     return [
       Expanded(
         child: Center(
@@ -126,25 +125,36 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     ];
   }
 
-  List<Widget> buildProfileLoaded(BuildContext context, Profile profile) {
+  List<Widget> buildProfileLoadedContent(BuildContext context, Profile profile) {
     return [
       TabBar(
-        // controller: primaryTC,
-        // labelColor: Colors.white,
-        // unselectedLabelColor: Colors.white70,
-        // indicatorColor: AppColors.backgroundPaper,
+        padding: const EdgeInsets.symmetric(
+          vertical: AppThemeData.spacingSm,
+          horizontal: AppThemeData.spacingMd,
+        ),
         controller: primaryTC,
-        labelColor: Colors.black,
+        indicator: const ShapeDecoration(
+          color: Colors.black,
+          shape: StadiumBorder()
+        ),
+        labelColor: Colors.white,
+        labelPadding: const EdgeInsets.symmetric(
+          horizontal: AppThemeData.spacingSm
+        ),
         indicatorColor: Colors.black,
-        indicatorSize: TabBarIndicatorSize.label,
-        indicatorWeight: 2.0,
-        isScrollable: false,
-        unselectedLabelColor: Colors.grey,
+        indicatorSize: TabBarIndicatorSize.tab,
+        tabAlignment: TabAlignment.start,
+        isScrollable: true,
+        unselectedLabelColor: Colors.black,
+        splashFactory: NoSplash.splashFactory,
+        // long tap splash still visible
+        // make it look better with border radius
+        splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
         tabs: [
-          Tab(text: AppLocalizations.of(context).days),
-          Tab(text: AppLocalizations.of(context).weeks),
-          Tab(text: AppLocalizations.of(context).months),
-          Tab(text: AppLocalizations.of(context).years),
+          buildTabBarItem(context, AppLocalizations.of(context).days),
+          buildTabBarItem(context, AppLocalizations.of(context).weeks),
+          buildTabBarItem(context, AppLocalizations.of(context).months),
+          buildTabBarItem(context, AppLocalizations.of(context).years),
         ],
       ),
       Expanded(
@@ -158,7 +168,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                 profile: profile,
               ),
             ),
-
             buildTabBarViewItem(
               context,
               'weeks',
@@ -166,7 +175,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                 profile: profile,
               ),
             ),
-
             buildTabBarViewItem(
               context,
               'months',
@@ -174,7 +182,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                 // profile: profile,
               ),
             ),
-
             buildTabBarViewItem(
               context,
               'years',
@@ -182,8 +189,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                 // profile: profile,
               ),
             ),
-
-
           ],
         ),
       ),
@@ -215,7 +220,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     ];
   }
 
-  List<Widget> buildHeaderSliversLoaded(BuildContext context, Profile profile) {
+  List<Widget> buildProfileLoadedHeaderSlivers(BuildContext context, Profile profile) {
     return [
       buildAppBar(context),
       buildProfileDetails(context, profile),
@@ -224,11 +229,13 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   Widget buildAppBar(BuildContext context) {
     return SliverAppBar(
-      centerTitle: true,
+      centerTitle: false,
       elevation: 0,
-      stretch: true,
+      // stretch: true, // Not working?
       floating: false,
       pinned: true,
+      scrolledUnderElevation: 0.0, // Material design wierd transparency effect
+      backgroundColor: AppColors.backgroundPaper,
       leading: const Padding(
           padding: EdgeInsets.all(8.0),
           child: CustomBackButton()
@@ -236,11 +243,9 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       title: Text(
         AppLocalizations.of(context).profileStats,
         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-          color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       ),
-      backgroundColor: Colors.black,
     );
   }
 
@@ -269,14 +274,30 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
+  Widget buildTabBarItem(BuildContext context, String label) {
+    return Tab(
+      height: 32,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Text(label),
+      ),
+    );
+  }
+
   Widget buildTabBarViewItem(BuildContext context, String id, Widget child) {
     return ExtendedVisibilityDetector(
       uniqueKey: Key(id),
       child: SingleChildScrollView(
         key: PageStorageKey<String>(id),
-        physics: const ClampingScrollPhysics(),
         child: child,
       ),
     );
   }
+
+  @override
+  void dispose() {
+    primaryTC.dispose();
+    super.dispose();
+  }
+
 }

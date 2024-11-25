@@ -4,7 +4,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/show_signout_dialog.dart';
+import 'package:dhyana/widget/util/dialog_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
