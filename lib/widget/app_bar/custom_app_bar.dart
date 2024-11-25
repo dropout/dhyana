@@ -1,5 +1,6 @@
 
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 
@@ -24,11 +25,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingMd),
         child: NavigationToolbar(
-          leading: (leading != null) ? ConstrainedBox(
-            constraints: const BoxConstraints.tightFor(width: widgetHeight),
-            child: leading,
-          ) : null,
-          middle: buildTitle(context, titleText),
+          // leading: (leading != null) ? ConstrainedBox(
+          //   constraints: const BoxConstraints.tightFor(width: widgetHeight),
+          //   child: leading,
+          // ) : null,
+          // middle: buildTitle(context, titleText),
+
+          leading: Row(
+            children: [
+              (leading != null) ? ConstrainedBox(
+                constraints: const BoxConstraints.tightFor(width: widgetHeight),
+                child: leading,
+              ) : const SizedBox.shrink(),
+              Gap.large(),
+              buildTitle(context, titleText),
+            ],
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -42,9 +54,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget? buildTitle(BuildContext context, String? text) {
+  Widget buildTitle(BuildContext context, String? text) {
     if (text == null) {
-      return null;
+      return const SizedBox.shrink();
     }
 
     return Text(text,
