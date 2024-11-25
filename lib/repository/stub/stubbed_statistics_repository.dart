@@ -41,8 +41,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     Duration difference = queryOptions.from.difference(queryOptions.to);
     List<Day> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {
-      // DateTime date = queryOptions.from.add(Duration(days: i));
-      DateTime date = DateTime.now().subtract(Duration(days: _faker.randomGenerator.integer(8)));
+      DateTime date = queryOptions.from.add(Duration(days: i));
       Day day = _fakeModelFactory.createDay(
         startDate: date,
       );
