@@ -40,9 +40,9 @@ class WeeklyPerformance extends StatelessWidget {
     return BlocBuilder<DaysBloc, DaysState>(
       builder: (BuildContext context, DaysState state) {
         switch (state) {
-          case DaysLoaded():
+          case DaysLoadedState():
             return buildDays(context, state.days);
-          case DaysLoading():
+          case DaysLoadingState():
             return const Text('Loading');
           default:
             return const Text('Idle');

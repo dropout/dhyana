@@ -134,11 +134,11 @@ class _WeeksStatsViewContentState extends State<WeeksStatsViewContent> {
     });
 
     widget.weeksBloc.add(
-        WeeksEvent.queryWeeks(
-          profileId: widget.profile.id,
-          from: from,
-          to: to,
-        )
+      WeeksEvent.queryWeeks(
+        profileId: widget.profile.id,
+        from: from,
+        to: to,
+      )
     );
 
     super.initState();

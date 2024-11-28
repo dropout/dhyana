@@ -18,9 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DaysEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)
+            String profileId, DateTime from, DateTime to, bool useStream)
         queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
@@ -28,9 +27,8 @@ mixin _$DaysEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
     TResult? Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
@@ -38,9 +36,8 @@ mixin _$DaysEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
@@ -49,7 +46,6 @@ mixin _$DaysEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
@@ -57,7 +53,6 @@ mixin _$DaysEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
     TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
@@ -65,7 +60,6 @@ mixin _$DaysEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
@@ -95,135 +89,12 @@ class _$DaysEventCopyWithImpl<$Res, $Val extends DaysEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$DaysEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DaysEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
-
-  @override
-  String toString() {
-    return 'DaysEvent.started()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)
-        queryDays,
-    required TResult Function(List<Day> days) receiveUpdate,
-    required TResult Function() error,
-  }) {
-    return started();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
-        queryDays,
-    TResult? Function(List<Day> days)? receiveUpdate,
-    TResult? Function()? error,
-  }) {
-    return started?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
-        queryDays,
-    TResult Function(List<Day> days)? receiveUpdate,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(QueryDaysEvent value) queryDays,
-    required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
-    required TResult Function(DaysErrorEvent value) error,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(QueryDaysEvent value)? queryDays,
-    TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
-    TResult? Function(DaysErrorEvent value)? error,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(QueryDaysEvent value)? queryDays,
-    TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
-    TResult Function(DaysErrorEvent value)? error,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Started implements DaysEvent {
-  const factory _Started() = _$StartedImpl;
-}
-
-/// @nodoc
 abstract class _$$QueryDaysEventImplCopyWith<$Res> {
   factory _$$QueryDaysEventImplCopyWith(_$QueryDaysEventImpl value,
           $Res Function(_$QueryDaysEventImpl) then) =
       __$$QueryDaysEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String profileId, DateTime from, DateTime? to, bool useStream});
+  $Res call({String profileId, DateTime from, DateTime to, bool useStream});
 }
 
 /// @nodoc
@@ -241,7 +112,7 @@ class __$$QueryDaysEventImplCopyWithImpl<$Res>
   $Res call({
     Object? profileId = null,
     Object? from = null,
-    Object? to = freezed,
+    Object? to = null,
     Object? useStream = null,
   }) {
     return _then(_$QueryDaysEventImpl(
@@ -253,10 +124,10 @@ class __$$QueryDaysEventImplCopyWithImpl<$Res>
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      to: freezed == to
+      to: null == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       useStream: null == useStream
           ? _value.useStream
           : useStream // ignore: cast_nullable_to_non_nullable
@@ -267,19 +138,20 @@ class __$$QueryDaysEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$QueryDaysEventImpl implements QueryDaysEvent {
+class _$QueryDaysEventImpl extends QueryDaysEvent {
   const _$QueryDaysEventImpl(
       {required this.profileId,
       required this.from,
-      this.to,
-      this.useStream = false});
+      required this.to,
+      this.useStream = false})
+      : super._();
 
   @override
   final String profileId;
   @override
   final DateTime from;
   @override
-  final DateTime? to;
+  final DateTime to;
   @override
   @JsonKey()
   final bool useStream;
@@ -317,9 +189,8 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)
+            String profileId, DateTime from, DateTime to, bool useStream)
         queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
@@ -330,9 +201,8 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
     TResult? Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
@@ -343,9 +213,8 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
@@ -360,7 +229,6 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
@@ -371,7 +239,6 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
     TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
@@ -382,7 +249,6 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
@@ -395,16 +261,17 @@ class _$QueryDaysEventImpl implements QueryDaysEvent {
   }
 }
 
-abstract class QueryDaysEvent implements DaysEvent {
+abstract class QueryDaysEvent extends DaysEvent {
   const factory QueryDaysEvent(
       {required final String profileId,
       required final DateTime from,
-      final DateTime? to,
+      required final DateTime to,
       final bool useStream}) = _$QueryDaysEventImpl;
+  const QueryDaysEvent._() : super._();
 
   String get profileId;
   DateTime get from;
-  DateTime? get to;
+  DateTime get to;
   bool get useStream;
 
   /// Create a copy of DaysEvent
@@ -451,9 +318,10 @@ class __$$ReceiveUpdateDaysEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
+class _$ReceiveUpdateDaysEventImpl extends ReceiveUpdateDaysEvent {
   const _$ReceiveUpdateDaysEventImpl({required final List<Day> days})
-      : _days = days;
+      : _days = days,
+        super._();
 
   final List<Day> _days;
   @override
@@ -492,9 +360,8 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)
+            String profileId, DateTime from, DateTime to, bool useStream)
         queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
@@ -505,9 +372,8 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
     TResult? Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
@@ -518,9 +384,8 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
@@ -535,7 +400,6 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
@@ -546,7 +410,6 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
     TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
@@ -557,7 +420,6 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
@@ -570,9 +432,10 @@ class _$ReceiveUpdateDaysEventImpl implements ReceiveUpdateDaysEvent {
   }
 }
 
-abstract class ReceiveUpdateDaysEvent implements DaysEvent {
+abstract class ReceiveUpdateDaysEvent extends DaysEvent {
   const factory ReceiveUpdateDaysEvent({required final List<Day> days}) =
       _$ReceiveUpdateDaysEventImpl;
+  const ReceiveUpdateDaysEvent._() : super._();
 
   List<Day> get days;
 
@@ -604,8 +467,8 @@ class __$$DaysErrorEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DaysErrorEventImpl implements DaysErrorEvent {
-  const _$DaysErrorEventImpl();
+class _$DaysErrorEventImpl extends DaysErrorEvent {
+  const _$DaysErrorEventImpl() : super._();
 
   @override
   String toString() {
@@ -624,9 +487,8 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)
+            String profileId, DateTime from, DateTime to, bool useStream)
         queryDays,
     required TResult Function(List<Day> days) receiveUpdate,
     required TResult Function() error,
@@ -637,9 +499,8 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
     TResult? Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult? Function(List<Day> days)? receiveUpdate,
     TResult? Function()? error,
@@ -650,9 +511,8 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function(
-            String profileId, DateTime from, DateTime? to, bool useStream)?
+            String profileId, DateTime from, DateTime to, bool useStream)?
         queryDays,
     TResult Function(List<Day> days)? receiveUpdate,
     TResult Function()? error,
@@ -667,7 +527,6 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(QueryDaysEvent value) queryDays,
     required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
     required TResult Function(DaysErrorEvent value) error,
@@ -678,7 +537,6 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
     TResult? Function(QueryDaysEvent value)? queryDays,
     TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult? Function(DaysErrorEvent value)? error,
@@ -689,7 +547,6 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(QueryDaysEvent value)? queryDays,
     TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
     TResult Function(DaysErrorEvent value)? error,
@@ -702,8 +559,9 @@ class _$DaysErrorEventImpl implements DaysErrorEvent {
   }
 }
 
-abstract class DaysErrorEvent implements DaysEvent {
+abstract class DaysErrorEvent extends DaysEvent {
   const factory DaysErrorEvent() = _$DaysErrorEventImpl;
+  const DaysErrorEvent._() : super._();
 }
 
 /// @nodoc
@@ -711,44 +569,50 @@ mixin _$DaysState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Day> days) loaded,
+    required TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)
+        loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Day> days)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Day> days)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DaysLoading value) loading,
-    required TResult Function(DaysLoaded value) loaded,
-    required TResult Function(DaysLoadingError value) error,
+    required TResult Function(DaysLoadingState value) loading,
+    required TResult Function(DaysLoadedState value) loaded,
+    required TResult Function(DaysLoadingErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DaysLoading value)? loading,
-    TResult? Function(DaysLoaded value)? loaded,
-    TResult? Function(DaysLoadingError value)? error,
+    TResult? Function(DaysLoadingState value)? loading,
+    TResult? Function(DaysLoadedState value)? loaded,
+    TResult? Function(DaysLoadingErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DaysLoading value)? loading,
-    TResult Function(DaysLoaded value)? loaded,
-    TResult Function(DaysLoadingError value)? error,
+    TResult Function(DaysLoadingState value)? loading,
+    TResult Function(DaysLoadedState value)? loaded,
+    TResult Function(DaysLoadingErrorState value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -775,18 +639,18 @@ class _$DaysStateCopyWithImpl<$Res, $Val extends DaysState>
 }
 
 /// @nodoc
-abstract class _$$DaysLoadingImplCopyWith<$Res> {
-  factory _$$DaysLoadingImplCopyWith(
-          _$DaysLoadingImpl value, $Res Function(_$DaysLoadingImpl) then) =
-      __$$DaysLoadingImplCopyWithImpl<$Res>;
+abstract class _$$DaysLoadingStateImplCopyWith<$Res> {
+  factory _$$DaysLoadingStateImplCopyWith(_$DaysLoadingStateImpl value,
+          $Res Function(_$DaysLoadingStateImpl) then) =
+      __$$DaysLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DaysLoadingImplCopyWithImpl<$Res>
-    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingImpl>
-    implements _$$DaysLoadingImplCopyWith<$Res> {
-  __$$DaysLoadingImplCopyWithImpl(
-      _$DaysLoadingImpl _value, $Res Function(_$DaysLoadingImpl) _then)
+class __$$DaysLoadingStateImplCopyWithImpl<$Res>
+    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingStateImpl>
+    implements _$$DaysLoadingStateImplCopyWith<$Res> {
+  __$$DaysLoadingStateImplCopyWithImpl(_$DaysLoadingStateImpl _value,
+      $Res Function(_$DaysLoadingStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DaysState
@@ -795,8 +659,8 @@ class __$$DaysLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DaysLoadingImpl implements DaysLoading {
-  const _$DaysLoadingImpl();
+class _$DaysLoadingStateImpl implements DaysLoadingState {
+  const _$DaysLoadingStateImpl();
 
   @override
   String toString() {
@@ -806,7 +670,7 @@ class _$DaysLoadingImpl implements DaysLoading {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DaysLoadingImpl);
+        (other.runtimeType == runtimeType && other is _$DaysLoadingStateImpl);
   }
 
   @override
@@ -816,7 +680,9 @@ class _$DaysLoadingImpl implements DaysLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Day> days) loaded,
+    required TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)
+        loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -826,7 +692,9 @@ class _$DaysLoadingImpl implements DaysLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Day> days)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -836,7 +704,9 @@ class _$DaysLoadingImpl implements DaysLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Day> days)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -849,9 +719,9 @@ class _$DaysLoadingImpl implements DaysLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DaysLoading value) loading,
-    required TResult Function(DaysLoaded value) loaded,
-    required TResult Function(DaysLoadingError value) error,
+    required TResult Function(DaysLoadingState value) loading,
+    required TResult Function(DaysLoadedState value) loaded,
+    required TResult Function(DaysLoadingErrorState value) error,
   }) {
     return loading(this);
   }
@@ -859,9 +729,9 @@ class _$DaysLoadingImpl implements DaysLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DaysLoading value)? loading,
-    TResult? Function(DaysLoaded value)? loaded,
-    TResult? Function(DaysLoadingError value)? error,
+    TResult? Function(DaysLoadingState value)? loading,
+    TResult? Function(DaysLoadedState value)? loaded,
+    TResult? Function(DaysLoadingErrorState value)? error,
   }) {
     return loading?.call(this);
   }
@@ -869,9 +739,9 @@ class _$DaysLoadingImpl implements DaysLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DaysLoading value)? loading,
-    TResult Function(DaysLoaded value)? loaded,
-    TResult Function(DaysLoadingError value)? error,
+    TResult Function(DaysLoadingState value)? loading,
+    TResult Function(DaysLoadedState value)? loaded,
+    TResult Function(DaysLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -881,25 +751,31 @@ class _$DaysLoadingImpl implements DaysLoading {
   }
 }
 
-abstract class DaysLoading implements DaysState {
-  const factory DaysLoading() = _$DaysLoadingImpl;
+abstract class DaysLoadingState implements DaysState {
+  const factory DaysLoadingState() = _$DaysLoadingStateImpl;
 }
 
 /// @nodoc
-abstract class _$$DaysLoadedImplCopyWith<$Res> {
-  factory _$$DaysLoadedImplCopyWith(
-          _$DaysLoadedImpl value, $Res Function(_$DaysLoadedImpl) then) =
-      __$$DaysLoadedImplCopyWithImpl<$Res>;
+abstract class _$$DaysLoadedStateImplCopyWith<$Res> {
+  factory _$$DaysLoadedStateImplCopyWith(_$DaysLoadedStateImpl value,
+          $Res Function(_$DaysLoadedStateImpl) then) =
+      __$$DaysLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Day> days});
+  $Res call(
+      {DateTime from,
+      DateTime to,
+      List<Day> days,
+      StatisticsDetails statisticsDetails});
+
+  $StatisticsDetailsCopyWith<$Res> get statisticsDetails;
 }
 
 /// @nodoc
-class __$$DaysLoadedImplCopyWithImpl<$Res>
-    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadedImpl>
-    implements _$$DaysLoadedImplCopyWith<$Res> {
-  __$$DaysLoadedImplCopyWithImpl(
-      _$DaysLoadedImpl _value, $Res Function(_$DaysLoadedImpl) _then)
+class __$$DaysLoadedStateImplCopyWithImpl<$Res>
+    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadedStateImpl>
+    implements _$$DaysLoadedStateImplCopyWith<$Res> {
+  __$$DaysLoadedStateImplCopyWithImpl(
+      _$DaysLoadedStateImpl _value, $Res Function(_$DaysLoadedStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DaysState
@@ -907,22 +783,56 @@ class __$$DaysLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? from = null,
+    Object? to = null,
     Object? days = null,
+    Object? statisticsDetails = null,
   }) {
-    return _then(_$DaysLoadedImpl(
+    return _then(_$DaysLoadedStateImpl(
+      from: null == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      to: null == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       days: null == days
           ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
               as List<Day>,
+      statisticsDetails: null == statisticsDetails
+          ? _value.statisticsDetails
+          : statisticsDetails // ignore: cast_nullable_to_non_nullable
+              as StatisticsDetails,
     ));
+  }
+
+  /// Create a copy of DaysState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StatisticsDetailsCopyWith<$Res> get statisticsDetails {
+    return $StatisticsDetailsCopyWith<$Res>(_value.statisticsDetails, (value) {
+      return _then(_value.copyWith(statisticsDetails: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$DaysLoadedImpl implements DaysLoaded {
-  const _$DaysLoadedImpl({required final List<Day> days}) : _days = days;
+class _$DaysLoadedStateImpl implements DaysLoadedState {
+  const _$DaysLoadedStateImpl(
+      {required this.from,
+      required this.to,
+      required final List<Day> days,
+      required this.statisticsDetails})
+      : _days = days;
 
+  @override
+  final DateTime from;
+  @override
+  final DateTime to;
   final List<Day> _days;
   @override
   List<Day> get days {
@@ -932,60 +842,74 @@ class _$DaysLoadedImpl implements DaysLoaded {
   }
 
   @override
+  final StatisticsDetails statisticsDetails;
+
+  @override
   String toString() {
-    return 'DaysState.loaded(days: $days)';
+    return 'DaysState.loaded(from: $from, to: $to, days: $days, statisticsDetails: $statisticsDetails)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DaysLoadedImpl &&
-            const DeepCollectionEquality().equals(other._days, _days));
+            other is _$DaysLoadedStateImpl &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to) &&
+            const DeepCollectionEquality().equals(other._days, _days) &&
+            (identical(other.statisticsDetails, statisticsDetails) ||
+                other.statisticsDetails == statisticsDetails));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_days));
+  int get hashCode => Object.hash(runtimeType, from, to,
+      const DeepCollectionEquality().hash(_days), statisticsDetails);
 
   /// Create a copy of DaysState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DaysLoadedImplCopyWith<_$DaysLoadedImpl> get copyWith =>
-      __$$DaysLoadedImplCopyWithImpl<_$DaysLoadedImpl>(this, _$identity);
+  _$$DaysLoadedStateImplCopyWith<_$DaysLoadedStateImpl> get copyWith =>
+      __$$DaysLoadedStateImplCopyWithImpl<_$DaysLoadedStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Day> days) loaded,
+    required TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)
+        loaded,
     required TResult Function() error,
   }) {
-    return loaded(days);
+    return loaded(from, to, days, statisticsDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Day> days)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(days);
+    return loaded?.call(from, to, days, statisticsDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Day> days)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(days);
+      return loaded(from, to, days, statisticsDetails);
     }
     return orElse();
   }
@@ -993,9 +917,9 @@ class _$DaysLoadedImpl implements DaysLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DaysLoading value) loading,
-    required TResult Function(DaysLoaded value) loaded,
-    required TResult Function(DaysLoadingError value) error,
+    required TResult Function(DaysLoadingState value) loading,
+    required TResult Function(DaysLoadedState value) loaded,
+    required TResult Function(DaysLoadingErrorState value) error,
   }) {
     return loaded(this);
   }
@@ -1003,9 +927,9 @@ class _$DaysLoadedImpl implements DaysLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DaysLoading value)? loading,
-    TResult? Function(DaysLoaded value)? loaded,
-    TResult? Function(DaysLoadingError value)? error,
+    TResult? Function(DaysLoadingState value)? loading,
+    TResult? Function(DaysLoadedState value)? loaded,
+    TResult? Function(DaysLoadingErrorState value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -1013,9 +937,9 @@ class _$DaysLoadedImpl implements DaysLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DaysLoading value)? loading,
-    TResult Function(DaysLoaded value)? loaded,
-    TResult Function(DaysLoadingError value)? error,
+    TResult Function(DaysLoadingState value)? loading,
+    TResult Function(DaysLoadedState value)? loaded,
+    TResult Function(DaysLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1025,31 +949,40 @@ class _$DaysLoadedImpl implements DaysLoaded {
   }
 }
 
-abstract class DaysLoaded implements DaysState {
-  const factory DaysLoaded({required final List<Day> days}) = _$DaysLoadedImpl;
+abstract class DaysLoadedState implements DaysState {
+  const factory DaysLoadedState(
+          {required final DateTime from,
+          required final DateTime to,
+          required final List<Day> days,
+          required final StatisticsDetails statisticsDetails}) =
+      _$DaysLoadedStateImpl;
 
+  DateTime get from;
+  DateTime get to;
   List<Day> get days;
+  StatisticsDetails get statisticsDetails;
 
   /// Create a copy of DaysState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DaysLoadedImplCopyWith<_$DaysLoadedImpl> get copyWith =>
+  _$$DaysLoadedStateImplCopyWith<_$DaysLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DaysLoadingErrorImplCopyWith<$Res> {
-  factory _$$DaysLoadingErrorImplCopyWith(_$DaysLoadingErrorImpl value,
-          $Res Function(_$DaysLoadingErrorImpl) then) =
-      __$$DaysLoadingErrorImplCopyWithImpl<$Res>;
+abstract class _$$DaysLoadingErrorStateImplCopyWith<$Res> {
+  factory _$$DaysLoadingErrorStateImplCopyWith(
+          _$DaysLoadingErrorStateImpl value,
+          $Res Function(_$DaysLoadingErrorStateImpl) then) =
+      __$$DaysLoadingErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DaysLoadingErrorImplCopyWithImpl<$Res>
-    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingErrorImpl>
-    implements _$$DaysLoadingErrorImplCopyWith<$Res> {
-  __$$DaysLoadingErrorImplCopyWithImpl(_$DaysLoadingErrorImpl _value,
-      $Res Function(_$DaysLoadingErrorImpl) _then)
+class __$$DaysLoadingErrorStateImplCopyWithImpl<$Res>
+    extends _$DaysStateCopyWithImpl<$Res, _$DaysLoadingErrorStateImpl>
+    implements _$$DaysLoadingErrorStateImplCopyWith<$Res> {
+  __$$DaysLoadingErrorStateImplCopyWithImpl(_$DaysLoadingErrorStateImpl _value,
+      $Res Function(_$DaysLoadingErrorStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DaysState
@@ -1058,8 +991,8 @@ class __$$DaysLoadingErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DaysLoadingErrorImpl implements DaysLoadingError {
-  const _$DaysLoadingErrorImpl();
+class _$DaysLoadingErrorStateImpl implements DaysLoadingErrorState {
+  const _$DaysLoadingErrorStateImpl();
 
   @override
   String toString() {
@@ -1069,7 +1002,8 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DaysLoadingErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DaysLoadingErrorStateImpl);
   }
 
   @override
@@ -1079,7 +1013,9 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Day> days) loaded,
+    required TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)
+        loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -1089,7 +1025,9 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Day> days)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -1099,7 +1037,9 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Day> days)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Day> days,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -1112,9 +1052,9 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DaysLoading value) loading,
-    required TResult Function(DaysLoaded value) loaded,
-    required TResult Function(DaysLoadingError value) error,
+    required TResult Function(DaysLoadingState value) loading,
+    required TResult Function(DaysLoadedState value) loaded,
+    required TResult Function(DaysLoadingErrorState value) error,
   }) {
     return error(this);
   }
@@ -1122,9 +1062,9 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DaysLoading value)? loading,
-    TResult? Function(DaysLoaded value)? loaded,
-    TResult? Function(DaysLoadingError value)? error,
+    TResult? Function(DaysLoadingState value)? loading,
+    TResult? Function(DaysLoadedState value)? loaded,
+    TResult? Function(DaysLoadingErrorState value)? error,
   }) {
     return error?.call(this);
   }
@@ -1132,9 +1072,9 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DaysLoading value)? loading,
-    TResult Function(DaysLoaded value)? loaded,
-    TResult Function(DaysLoadingError value)? error,
+    TResult Function(DaysLoadingState value)? loading,
+    TResult Function(DaysLoadedState value)? loaded,
+    TResult Function(DaysLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1144,6 +1084,6 @@ class _$DaysLoadingErrorImpl implements DaysLoadingError {
   }
 }
 
-abstract class DaysLoadingError implements DaysState {
-  const factory DaysLoadingError() = _$DaysLoadingErrorImpl;
+abstract class DaysLoadingErrorState implements DaysState {
+  const factory DaysLoadingErrorState() = _$DaysLoadingErrorStateImpl;
 }

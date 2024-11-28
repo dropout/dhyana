@@ -1,4 +1,5 @@
 import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/statistics_details.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
@@ -30,24 +31,27 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
       emit(const DaysState.loading());
       DayQueryOptions queryOptions = DayQueryOptions(
         from: event.from,
-        to: event.to ?? DateTime.now()
+        to: event.to,
       );
       List<Day> days = await statisticsRepository.queryDays(
         event.profileId,
         queryOptions,
       );
+      days = _fillEmptyDays(days, queryOptions);
 
-      print(days);
-
-      emit(DaysState.loaded(days: _fillEmptyDays(days, queryOptions)));
+      emit(DaysState.loaded(
+        from: event.from,
+        to: event.to,
+        days: days,
+        statisticsDetails: StatisticsDetails.fromDays(days),
+      ));
       logger.t('Successfully loaded days ${days.length}');
 
     } catch (e, stack) {
-      logger.t('Failed to get days');
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to add session'
+        reason: 'Failed to load days statistics data'
       );
     }
   }
@@ -73,5 +77,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
     }
     return result;
   }
+
+
 
 }

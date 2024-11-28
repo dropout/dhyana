@@ -30,14 +30,18 @@ class WeeksBloc extends Bloc<WeeksEvent, WeeksState> {
       emit(const WeeksState.loading());
       WeekQueryOptions queryOptions = WeekQueryOptions(
         from: event.from,
-        to: event.to ?? DateTime.now()
+        to: event.to,
       );
       List<Week> weeks = await statisticsRepository.queryWeeks(
         event.profileId,
         queryOptions,
       );
 
-      emit(WeeksState.loaded(weeks: _fillEmptyWeeks(weeks, queryOptions)));
+      emit(WeeksState.loaded(
+        from: event.from,
+        to: event.to,
+        weeks: _fillEmptyWeeks(weeks, queryOptions)
+      ));
       logger.t('Successfully loaded weeks ${weeks.length}');
 
     } catch (e, stack) {

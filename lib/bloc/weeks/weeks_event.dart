@@ -3,12 +3,12 @@ part of 'weeks_bloc.dart';
 @freezed
 class WeeksEvent with _$WeeksEvent {
 
-  const factory WeeksEvent.started() = _Started;
+  const WeeksEvent._();
 
   const factory WeeksEvent.queryWeeks({
     required String profileId,
     required DateTime from,
-    DateTime? to,
+    required DateTime to,
     @Default(false) bool useStream,
   }) = GetWeeksEvent;
 

@@ -6,6 +6,7 @@ import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:faker/faker.dart';
 
 class StubbedStatisticsRepository implements StatisticsRepository {
+
   final FakeModelFactory _fakeModelFactory = FakeModelFactory();
   final Faker _faker = Faker();
 
