@@ -1,4 +1,3 @@
-
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
@@ -25,12 +24,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingMd),
         child: NavigationToolbar(
-          // leading: (leading != null) ? ConstrainedBox(
-          //   constraints: const BoxConstraints.tightFor(width: widgetHeight),
-          //   child: leading,
-          // ) : null,
-          // middle: buildTitle(context, titleText),
-
           leading: Row(
             children: [
               (leading != null) ? ConstrainedBox(

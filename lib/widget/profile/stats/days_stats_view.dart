@@ -191,42 +191,110 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   }
 
   Widget _buildContent(BuildContext context, BarChartData barChartData) {
-    return Padding(
-      padding: const EdgeInsets.all(AppThemeData.spacingMd),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
-          Gap.medium(),
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.all(AppThemeData.spacingMd),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
+            Gap.medium(),
 
-          SizedBox(
-            height: 350,
-            child: BarChart(data: barChartData)
-          ),
+            SizedBox(
+              height: 350,
+              child: BarChart(data: barChartData)
+            ),
 
-          Gap.medium(),
+            Gap.medium(),
 
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: onLeftArrowPressed,
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: onRightAwayPressed,
-              ),
-            ]
-          ),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: onLeftArrowPressed,
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: onRightAwayPressed,
+                ),
+              ]
+            ),
 
-          Text('Total time spent'),
-          Text('Average time spent'),
-          Text('Total sessions'),
-          Text('Average sessions'),
+            buildRow(context),
 
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget buildRow(BuildContext context) {
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      children: [
+        buildRowItem(context, 'Total time spent', '51'),
+        buildRowItem(context, 'Total sessions', '51'),
+        buildRowItem(context, 'Average time spent', '51'),
+        buildRowItem(context, 'Average sessions', '51'),
+      ],
+    );
+  }
+
+  Widget buildRowItem(BuildContext context, String label, String value) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.all(Radius.circular(AppThemeData.borderRadiusLg))
+          ),
+          width: constraints.maxWidth / 2 - 4,
+          height: 120,
+          padding: const EdgeInsets.all(AppThemeData.paddingMd),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  label,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Colors.white,
+                    shadows: [
+                      const Shadow(
+                        blurRadius: 48.0,
+                        color: Colors.black87,
+                      ),
+                    ],
+                    fontWeight: FontWeight.bold,
+                    height: 1.0,
+                  )
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Text(
+                  value,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Colors.white,
+                    shadows: [
+                      const Shadow(
+                        blurRadius: 48.0,
+                        color: Colors.black87,
+                      ),
+                    ],
+                    fontWeight: FontWeight.bold,
+                    height: 1.0,
+                  )
+                ),
+              ),
+            ],
+          )
+        );
+      },
     );
   }
 

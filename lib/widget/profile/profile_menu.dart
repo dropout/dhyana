@@ -50,20 +50,20 @@ class ProfileMenu extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            AppLocalizations.of(context).activity,
-            style: textStyle,
-          ),
-          enabled: true,
-          onTap: () => _onActivityTapped(context),
-        ),
-        const Divider(height: 0),
-        ListTile(
-          title: Text(
             AppLocalizations.of(context).editProfile,
             style: textStyle,
           ),
           enabled: true,
           onTap: () => _onEditProfileTapped(context),
+        ),
+        const Divider(height: 0),
+        ListTile(
+          title: Text(
+            AppLocalizations.of(context).activity,
+            style: textStyle,
+          ),
+          enabled: true,
+          onTap: () => _onActivityTapped(context),
         ),
         const Divider(height: 0),
         ListTile(

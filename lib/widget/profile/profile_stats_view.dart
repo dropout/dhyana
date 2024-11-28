@@ -1,9 +1,13 @@
+import 'dart:ui' as ui;
+
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,13 +23,19 @@ class ProfileStatsView extends StatefulWidget {
 }
 
 class _ProfileStatsViewState extends State<ProfileStatsView>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, TitleEffectMixin {
 
   late final TabController primaryTC;
+  late final ScrollController scrollController;
+
+  late final void Function() _listener;
 
   @override
   void initState() {
     primaryTC = TabController(length: 4, vsync: this);
+    scrollController = ScrollController();
+    _listener = createListener(scrollController, setState);
+    scrollController.addListener(_listener);
     super.initState();
   }
 
@@ -161,28 +171,28 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         child: TabBarView(
           controller: primaryTC,
           children: [
-            buildTabBarViewItem(
+            buildTabBarView(
               context,
               'days',
               DaysStatsView(
                 profile: profile,
               ),
             ),
-            buildTabBarViewItem(
+            buildTabBarView(
               context,
               'weeks',
               WeeksStatsView(
                 profile: profile,
               ),
             ),
-            buildTabBarViewItem(
+            buildTabBarView(
               context,
               'months',
               MonthsStatsView(
                 // profile: profile,
               ),
             ),
-            buildTabBarViewItem(
+            buildTabBarView(
               context,
               'years',
               YearsStatsView(
@@ -203,6 +213,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     final double pinnedHeaderHeight = statusBarHeight + kToolbarHeight;
     return ExtendedNestedScrollView(
+      controller: scrollController,
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return headerSlivers;
       },
@@ -237,14 +248,30 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       scrolledUnderElevation: 0.0, // Material design wierd transparency effect
       backgroundColor: AppColors.backgroundPaper,
       leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CustomBackButton()
+        padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0,),
+        child: CustomBackButton()
       ),
-      title: Text(
-        AppLocalizations.of(context).profileStats,
-        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-          fontWeight: FontWeight.bold,
+      leadingWidth: 64,
+      title: Transform.translate(
+        offset: Offset(0, AppThemeData.spacingSm * (1.0 - titleEffectRatio)),
+        child: Opacity(
+          opacity: titleEffectRatio,
+          child: Text(
+            AppLocalizations.of(context).profileStats,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget buildTitle(BuildContext context, String title) {
+    return Text(
+      title,
+      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+        fontWeight: FontWeight.bold,
       ),
     );
   }
@@ -254,13 +281,17 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       child: Padding(
         padding: const EdgeInsets.all(AppThemeData.spacingMd),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            buildTitle(context, AppLocalizations.of(context).profileStats),
             const SizedBox(height: AppThemeData.spacingLg),
             Gap.large(),
-            ConsecutiveDaysDisplay(
-              profile: profile,
+            SizedBox(
+              width: double.infinity,
+              child: ConsecutiveDaysDisplay(
+                profile: profile,
+              ),
             ),
             Gap.large(),
             Padding(
@@ -284,7 +315,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  Widget buildTabBarViewItem(BuildContext context, String id, Widget child) {
+  Widget buildTabBarView(BuildContext context, String id, Widget child) {
     return ExtendedVisibilityDetector(
       uniqueKey: Key(id),
       child: SingleChildScrollView(
@@ -297,6 +328,8 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   @override
   void dispose() {
     primaryTC.dispose();
+    scrollController.removeListener(_listener);
+    scrollController.dispose();
     super.dispose();
   }
 
