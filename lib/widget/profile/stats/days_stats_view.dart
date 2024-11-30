@@ -203,13 +203,23 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisSize: MainAxisSize.min,
           children: [
-            Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
-            Gap.medium(),
+            Text(
+              AppLocalizations.of(context).statsTimePerDay,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Gap.small(),
             Row(
                 children: [
                   IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: onLeftArrowPressed,
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: buildTimerangeText(context, from, to),
+                    )
                   ),
                   IconButton(
                     icon: Icon(Icons.arrow_forward),
@@ -217,7 +227,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
                   ),
                 ]
             ),
-            Gap.medium(),
+            Gap.small(),
             SizedBox(
               height: 350,
               child: BarChart(data: barChartData)
@@ -252,10 +262,26 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
         spacing: 8.0,
         runSpacing: 8.0,
         children: [
-          buildRowItem(context, 'Total time spent', '${statisticsDetails.totalMinutes} minutes'),
-          buildRowItem(context, 'Total sessions', '${statisticsDetails.totalSessions} sessions'),
-          buildRowItem(context, 'Average time spent', '${statisticsDetails.averageMinutes.toInt()} minutes'),
-          buildRowItem(context, 'Average sessions', '${statisticsDetails.averageSessions.toInt()} sessions'),
+          buildRowItem(
+            context,
+            AppLocalizations.of(context).statsTotalTimeSpent,
+            '${statisticsDetails.totalMinutes} minutes'
+          ),
+          buildRowItem(
+            context,
+            AppLocalizations.of(context).statsTotalSessions,
+            '${statisticsDetails.totalSessions} sessions'
+          ),
+          buildRowItem(
+            context,
+            AppLocalizations.of(context).statsAverageTimeSpent,
+            '${statisticsDetails.averageMinutes.toInt()} minutes'
+          ),
+          buildRowItem(
+            context,
+            AppLocalizations.of(context).statsAverageSessions,
+            '${statisticsDetails.averageSessions.toInt()} sessions'
+          ),
         ],
       );
     }
@@ -320,6 +346,15 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   void dispose() {
     _daysBlocSubscription?.cancel();
     super.dispose();
+  }
+
+  buildTimerangeText(BuildContext context, DateTime from, DateTime to) {
+    return Text(
+      '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to)}',
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
 }

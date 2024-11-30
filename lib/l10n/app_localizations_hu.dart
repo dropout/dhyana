@@ -159,6 +159,30 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileStats => 'Statisztika';
 
   @override
+  String get statsTimePerDay => 'Idő naponta';
+
+  @override
+  String get statsTimePerWeek => 'Idő hetente';
+
+  @override
+  String get statsTimePerMonth => 'Idő havonta';
+
+  @override
+  String get statsTimePerYear => 'Idő évente';
+
+  @override
+  String get statsTotalTimeSpent => 'Összes idő';
+
+  @override
+  String get statsTotalSessions => 'Összes alkalom';
+
+  @override
+  String get statsAverageTimeSpent => 'Átlagos idő';
+
+  @override
+  String get statsAverageSessions => 'Átlagos alkalom';
+
+  @override
   String get signOut => 'Kijelentkezés';
 
   @override

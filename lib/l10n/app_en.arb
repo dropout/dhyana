@@ -62,6 +62,14 @@
   "photoAccessDialogButtonText": "Okay",
 
   "profileStats": "Statistics",
+  "statsTimePerDay": "Time per day",
+  "statsTimePerWeek": "Time per week",
+  "statsTimePerMonth": "Time per month",
+  "statsTimePerYear": "Time per years",
+  "statsTotalTimeSpent": "Total time spent",
+  "statsTotalSessions": "Total sessions",
+  "statsAverageTimeSpent": "Average time spent",
+  "statsAverageSessions": "Average sessions",
 
   "signOut": "Signout",
   "profileSignoutTitle": "Signout",

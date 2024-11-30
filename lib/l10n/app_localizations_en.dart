@@ -159,6 +159,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileStats => 'Statistics';
 
   @override
+  String get statsTimePerDay => 'Time per day';
+
+  @override
+  String get statsTimePerWeek => 'Time per week';
+
+  @override
+  String get statsTimePerMonth => 'Time per month';
+
+  @override
+  String get statsTimePerYear => 'Time per years';
+
+  @override
+  String get statsTotalTimeSpent => 'Total time spent';
+
+  @override
+  String get statsTotalSessions => 'Total sessions';
+
+  @override
+  String get statsAverageTimeSpent => 'Average time spent';
+
+  @override
+  String get statsAverageSessions => 'Average sessions';
+
+  @override
   String get signOut => 'Signout';
 
   @override

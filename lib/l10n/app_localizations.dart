@@ -395,6 +395,54 @@ abstract class AppLocalizations {
   /// **'Statisztika'**
   String get profileStats;
 
+  /// No description provided for @statsTimePerDay.
+  ///
+  /// In hu, this message translates to:
+  /// **'Idő naponta'**
+  String get statsTimePerDay;
+
+  /// No description provided for @statsTimePerWeek.
+  ///
+  /// In hu, this message translates to:
+  /// **'Idő hetente'**
+  String get statsTimePerWeek;
+
+  /// No description provided for @statsTimePerMonth.
+  ///
+  /// In hu, this message translates to:
+  /// **'Idő havonta'**
+  String get statsTimePerMonth;
+
+  /// No description provided for @statsTimePerYear.
+  ///
+  /// In hu, this message translates to:
+  /// **'Idő évente'**
+  String get statsTimePerYear;
+
+  /// No description provided for @statsTotalTimeSpent.
+  ///
+  /// In hu, this message translates to:
+  /// **'Összes idő'**
+  String get statsTotalTimeSpent;
+
+  /// No description provided for @statsTotalSessions.
+  ///
+  /// In hu, this message translates to:
+  /// **'Összes alkalom'**
+  String get statsTotalSessions;
+
+  /// No description provided for @statsAverageTimeSpent.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlagos idő'**
+  String get statsAverageTimeSpent;
+
+  /// No description provided for @statsAverageSessions.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlagos alkalom'**
+  String get statsAverageSessions;
+
   /// No description provided for @signOut.
   ///
   /// In hu, this message translates to:

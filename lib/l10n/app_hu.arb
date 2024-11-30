@@ -63,6 +63,15 @@
   "photoAccessDialogButtonText": "Rendben",
 
   "profileStats": "Statisztika",
+  "statsTimePerDay": "Idő naponta",
+  "statsTimePerWeek": "Idő hetente",
+  "statsTimePerMonth": "Idő havonta",
+  "statsTimePerYear": "Idő évente",
+  "statsTotalTimeSpent": "Összes idő",
+  "statsTotalSessions": "Összes alkalom",
+  "statsAverageTimeSpent": "Átlagos idő",
+  "statsAverageSessions": "Átlagos alkalom",
+
 
   "signOut": "Kijelentkezés",
   "profileSignoutTitle": "Kijelentkezés",
