@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/statistics_details.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -110,6 +111,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   late DateTime from;
   late DateTime to;
   late BarChartData barChartData;
+  bool isLoading = true;
 
   StreamSubscription<DaysState>? _daysBlocSubscription;
 
@@ -129,6 +131,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
             );
           }).toList();
           barChartData = BarChartData(items);
+          isLoading = false;
         });
       }
     });
@@ -158,6 +161,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     setState(() {
       from = from.subtract(const Duration(days: 7));
       to = to.subtract(const Duration(days: 7));
+      isLoading = true;
     });
     _queryDays();
   }
@@ -166,6 +170,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     setState(() {
       from = from.add(const Duration(days: 7));
       to = to.add(const Duration(days: 7));
+      isLoading = true;
     });
     _queryDays();
   }
@@ -200,26 +205,25 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
           children: [
             Text(AppLocalizations.of(context).days, style: Theme.of(context).textTheme.titleLarge),
             Gap.medium(),
-
+            Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: onLeftArrowPressed,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward),
+                    onPressed: onRightAwayPressed,
+                  ),
+                ]
+            ),
+            Gap.medium(),
             SizedBox(
               height: 350,
               child: BarChart(data: barChartData)
             ),
 
             Gap.medium(),
-
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: onLeftArrowPressed,
-                ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  onPressed: onRightAwayPressed,
-                ),
-              ]
-            ),
 
             buildRow(context),
 
@@ -230,19 +234,31 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   }
 
   Widget buildRow(BuildContext context) {
-    final int totalMinutes = barChartData.data.fold(0, (int sum, BarChartDataItem item) => sum + item.value.toInt());
-    final averageMinutes = totalMinutes ~/ barChartData.data.length;
-
-    return Wrap(
-      spacing: 8.0,
-      runSpacing: 8.0,
-      children: [
-        buildRowItem(context, 'Total time spent', '${totalMinutes} minutes'),
-        buildRowItem(context, 'Total sessions', '51'),
-        buildRowItem(context, 'Average time spent', '${averageMinutes} minutes'),
-        buildRowItem(context, 'Average sessions', '51'),
-      ],
-    );
+    if (isLoading) {
+      return Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: [
+          buildRowItem(context, 'Total time spent', '-'),
+          buildRowItem(context, 'Total sessions', '-'),
+          buildRowItem(context, 'Average time spent', '-'),
+          buildRowItem(context, 'Average sessions', '-'),
+        ],
+      );
+    } else {
+      DaysLoadedState daysLoadedState = widget.daysBloc.state as DaysLoadedState;
+      StatisticsDetails statisticsDetails = daysLoadedState.statisticsDetails;
+      return Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: [
+          buildRowItem(context, 'Total time spent', '${statisticsDetails.totalMinutes} minutes'),
+          buildRowItem(context, 'Total sessions', '${statisticsDetails.totalSessions} sessions'),
+          buildRowItem(context, 'Average time spent', '${statisticsDetails.averageMinutes.toInt()} minutes'),
+          buildRowItem(context, 'Average sessions', '${statisticsDetails.averageSessions.toInt()} sessions'),
+        ],
+      );
+    }
   }
 
   Widget buildRowItem(BuildContext context, String label, String value) {
@@ -262,8 +278,8 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  label,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  label.toUpperCase(),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Colors.white,
                     shadows: [
                       const Shadow(
