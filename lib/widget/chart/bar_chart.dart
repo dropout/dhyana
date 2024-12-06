@@ -7,6 +7,7 @@ import 'data/bar_chart_data.dart';
 
 class BarChart extends StatefulWidget {
 
+  final String? title;
   final BarChartData data;
   final BarChartBarDelegate barDelegate;
   final double barGap;
@@ -15,6 +16,7 @@ class BarChart extends StatefulWidget {
     required this.data,
     this.barDelegate = const DefaultBarChartBarDelegate(),
     this.barGap = 2.0,
+    this.title,
     super.key,
   });
 
@@ -58,26 +60,67 @@ class _BarChartState extends State<BarChart> {
             horizontal: AppThemeData.spacingMd,
             vertical: AppThemeData.spacingXl,
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: widget.data.data.map((e) {
-              return Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              widget.title == null ? const SizedBox.shrink() :
+              Text(
+                widget.title ?? '',
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Gap.medium(),
+
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Expanded(
-                      child: widget.barDelegate.build(context, e.value/maxValue)
+                    SizedBox(
+                      width: 20,
+                      height: double.infinity,
                     ),
-                    Gap.small(),
-                    Text(e.label.toUpperCase(),
-                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
+                    ...widget.data.data.map((e) {
+                      return Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                  child: widget.barDelegate.build(context, e.value/maxValue)
+                              ),
+                              Gap.small(),
+                              Text(e.label.toUpperCase(),
+                                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+                      );
+                    }).toList().intersperse(SizedBox(width: widget.barGap))
                   ],
-                )
-              );
-            }).toList().intersperse(SizedBox(width: widget.barGap)),
+              //     children: widget.data.data.map((e) {
+              //       return Expanded(
+              //         child: Column(
+              //           mainAxisSize: MainAxisSize.max,
+              //           children: [
+              //             Expanded(
+              //               child: widget.barDelegate.build(context, e.value/maxValue)
+              //             ),
+              //             Gap.small(),
+              //             Text(e.label.toUpperCase(),
+              //               style: Theme.of(context).textTheme.labelSmall!.copyWith(
+              //                 color: Colors.white,
+              //               ),
+              //             ),
+              //           ],
+              //         )
+              //       );
+              //     }).toList().intersperse(SizedBox(width: widget.barGap)),
+                ),
+              ),
+            ],
           ),
         ),
       )

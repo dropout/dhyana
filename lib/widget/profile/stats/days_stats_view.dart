@@ -4,15 +4,13 @@ import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/statistics_details.dart';
-import 'package:dhyana/repository/all.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
 
 class DaysStatsView extends StatelessWidget {
 
@@ -25,58 +23,35 @@ class DaysStatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _DaysStatsViewBlocProvider(
-      profile: profile,
-      statisticsRepository: context.repos.statisticsRepository,
-      crashlyticsService: context.services.crashlyticsService,
+    return BlocProvider<DaysBloc>(
+      create: (BuildContext context) {
+        return DaysBloc(
+          statisticsRepository: context.repos.statisticsRepository,
+          crashlyticsService: context.services.crashlyticsService
+        );
+      },
+      child: DaysStatsViewContentBuilder(
+        profile: profile,
+      ),
     );
   }
+
 }
 
-class _DaysStatsViewBlocProvider extends StatefulWidget {
+class DaysStatsViewContentBuilder extends StatelessWidget {
 
   final Profile profile;
-  final StatisticsRepository statisticsRepository;
-  final CrashlyticsService crashlyticsService;
 
-  const _DaysStatsViewBlocProvider({
-    required this.profile,
-    required this.statisticsRepository,
-    required this.crashlyticsService,
+  const DaysStatsViewContentBuilder({
     super.key,
+    required this.profile,
   });
 
   @override
-  State<_DaysStatsViewBlocProvider> createState() => _DaysStatsViewBlocProviderState();
-}
-
-class _DaysStatsViewBlocProviderState extends State<_DaysStatsViewBlocProvider> {
-
-  late final DaysBloc daysBloc;
-
-  @override
-  void initState() {
-    daysBloc = DaysBloc(
-      statisticsRepository: widget.statisticsRepository,
-      crashlyticsService: widget.crashlyticsService
-    );
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return DaysStatsViewContent(
-      profile: widget.profile,
-      daysBloc: daysBloc,
-    );
+    DaysBloc daysBloc = BlocProvider.of<DaysBloc>(context);
+    return DaysStatsViewContent(profile: profile, daysBloc: daysBloc);
   }
-
-  @override
-  void dispose() {
-    daysBloc.close();
-    super.dispose();
-  }
-
 }
 
 class DaysStatsViewContent extends StatefulWidget {
@@ -177,20 +152,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   @override
   Widget build(BuildContext context) {
-    // return BlocBuilder<DaysBloc, DaysState>(
-    //   builder: (BuildContext context, DaysState state) {
-    //     switch (state) {
-    //       case DaysLoading():
-    //         return Center(child: CircularProgressIndicator());
-    //       case DaysLoadingError():
-    //         return Center(child: Text('Error'));
-    //       case DaysLoaded():
-    //         return _buildContent(context, barChartData);
-    //       default:
-    //         return const SizedBox.shrink();
-    //     }
-    //   }
-    // );
     return _buildContent(context, barChartData);
   }
 
@@ -203,13 +164,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              AppLocalizations.of(context).statsTimePerDay,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Gap.small(),
             Row(
                 children: [
                   IconButton(
@@ -230,7 +184,10 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
             Gap.small(),
             SizedBox(
               height: 350,
-              child: BarChart(data: barChartData)
+              child: BarChart(
+                title: AppLocalizations.of(context).statsTimePerDay,
+                data: barChartData
+              )
             ),
 
             Gap.medium(),

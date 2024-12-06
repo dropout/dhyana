@@ -315,11 +315,11 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  Widget buildTabBarView(BuildContext context, String id, Widget child) {
+  Widget buildTabBarView(BuildContext context, String pageStorageKeyId, Widget child) {
     return ExtendedVisibilityDetector(
-      uniqueKey: Key(id),
+      uniqueKey: Key(pageStorageKeyId),
       child: SingleChildScrollView(
-        key: PageStorageKey<String>(id),
+        key: PageStorageKey<String>(pageStorageKeyId),
         child: child,
       ),
     );
