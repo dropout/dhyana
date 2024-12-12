@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/days/days_bloc.dart';
+import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/statistics_details.dart';
@@ -15,9 +16,11 @@ import 'package:intl/intl.dart';
 class DaysStatsView extends StatelessWidget {
 
   final Profile profile;
+  final StatsIntervalBloc statsIntervalBloc;
 
   const DaysStatsView({
     required this.profile,
+    required this.statsIntervalBloc,
     super.key,
   });
 
@@ -50,7 +53,12 @@ class DaysStatsViewContentBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DaysBloc daysBloc = BlocProvider.of<DaysBloc>(context);
-    return DaysStatsViewContent(profile: profile, daysBloc: daysBloc);
+    StatsIntervalBloc statsIntervalBloc = BlocProvider.of<StatsIntervalBloc>(context);
+    return DaysStatsViewContent(
+      profile: profile,
+      daysBloc: daysBloc,
+      statsIntervalBloc: statsIntervalBloc,
+    );
   }
 }
 
@@ -58,10 +66,12 @@ class DaysStatsViewContent extends StatefulWidget {
 
   final Profile profile;
   final DaysBloc daysBloc;
+  final StatsIntervalBloc statsIntervalBloc;
 
   const DaysStatsViewContent({
     required this.profile,
     required this.daysBloc,
+    required this.statsIntervalBloc,
     super.key,
   });
 
@@ -89,6 +99,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   bool isLoading = true;
 
   StreamSubscription<DaysState>? _daysBlocSubscription;
+  StreamSubscription<StatsIntervalState>? _statsIntervalBlocSubscription;
 
   @override
   void initState() {
@@ -119,35 +130,18 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
       )
     );
 
+
+    _statsIntervalBlocSubscription = widget.statsIntervalBloc.stream.listen((StatsIntervalState state) {
+      widget.daysBloc.add(
+        DaysEvent.queryDays(
+          profileId: widget.profile.id,
+          from: from,
+          to: to,
+        )
+      );
+    });
+
     super.initState();
-  }
-
-  void _queryDays() {
-    widget.daysBloc.add(
-      QueryDaysEvent(
-        profileId: widget.profile.id,
-        from: from,
-        to: to,
-      )
-    );
-  }
-
-  void onLeftArrowPressed() {
-    setState(() {
-      from = from.subtract(const Duration(days: 7));
-      to = to.subtract(const Duration(days: 7));
-      isLoading = true;
-    });
-    _queryDays();
-  }
-
-  void onRightAwayPressed() {
-    setState(() {
-      from = from.add(const Duration(days: 7));
-      to = to.add(const Duration(days: 7));
-      isLoading = true;
-    });
-    _queryDays();
   }
 
   @override
@@ -164,24 +158,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: onLeftArrowPressed,
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: buildTimerangeText(context, from, to),
-                    )
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.arrow_forward),
-                    onPressed: onRightAwayPressed,
-                  ),
-                ]
-            ),
-            Gap.small(),
             SizedBox(
               height: 350,
               child: BarChart(
@@ -189,11 +165,8 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
                 data: barChartData
               )
             ),
-
             Gap.medium(),
-
             buildRow(context),
-
           ],
         ),
       ),

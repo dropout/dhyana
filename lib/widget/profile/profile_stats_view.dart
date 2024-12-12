@@ -1,12 +1,15 @@
 import 'dart:ui' as ui;
 
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/profile/stats/stats_interval_selector.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
@@ -41,31 +44,36 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (BuildContext context, ProfileState state) {
-        switch (state) {
-          case ProfileLoadingState():
-            return buildScaffolding(
-              context,
-              buildHeaderSlivers(context),
-              buildProfileLoadingContent(context),
-            );
-          case ProfileErrorState():
-            return buildScaffolding(
-              context,
-              buildHeaderSlivers(context),
-              buildProfileErrorContent(context),
-            );
-          case ProfileLoadedState():
-            return buildScaffolding(
-              context,
-              buildProfileLoadedHeaderSlivers(context, state.profile),
-              buildProfileLoadedContent(context, state.profile)
-            );
-          default:
-            return const SizedBox.shrink();
-        }
-      }
+    return BlocProvider<StatsIntervalBloc>(
+      create: (BuildContext context) {
+        return StatsIntervalBloc();
+      },
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (BuildContext context, ProfileState state) {
+            switch (state) {
+              case ProfileLoadingState():
+                return buildScaffolding(
+                  context,
+                  buildDefaultHeaderSlivers(context),
+                  buildProfileLoadingContent(context),
+                );
+              case ProfileErrorState():
+                return buildScaffolding(
+                  context,
+                  buildDefaultHeaderSlivers(context),
+                  buildProfileErrorContent(context),
+                );
+              case ProfileLoadedState():
+                return buildScaffolding(
+                  context,
+                  buildProfileLoadedHeaderSlivers(context, state.profile),
+                  buildProfileLoadedContent(context, state.profile)
+                );
+              default:
+                return const SizedBox.shrink();
+            }
+          }
+      ),
     );
   }
 
@@ -137,6 +145,37 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   List<Widget> buildProfileLoadedContent(BuildContext context, Profile profile) {
     return [
+      // TabBar(
+      //   padding: const EdgeInsets.symmetric(
+      //     vertical: AppThemeData.spacingSm,
+      //     horizontal: AppThemeData.spacingMd,
+      //   ),
+      //   controller: primaryTC,
+      //   indicator: const ShapeDecoration(
+      //     color: Colors.black,
+      //     shape: StadiumBorder()
+      //   ),
+      //   labelColor: Colors.white,
+      //   labelPadding: const EdgeInsets.symmetric(
+      //     horizontal: AppThemeData.spacingSm
+      //   ),
+      //   indicatorColor: Colors.black,
+      //   indicatorSize: TabBarIndicatorSize.tab,
+      //   tabAlignment: TabAlignment.start,
+      //   isScrollable: true,
+      //   unselectedLabelColor: Colors.black,
+      //   splashFactory: NoSplash.splashFactory,
+      //   // long tap splash still visible
+      //   // make it look better with border radius
+      //   splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+      //   tabs: [
+      //     buildTabBarItem(context, AppLocalizations.of(context).days),
+      //     buildTabBarItem(context, AppLocalizations.of(context).weeks),
+      //     buildTabBarItem(context, AppLocalizations.of(context).months),
+      //     buildTabBarItem(context, AppLocalizations.of(context).years),
+      //   ],
+      // ),
+
       TabBar(
         padding: const EdgeInsets.symmetric(
           vertical: AppThemeData.spacingSm,
@@ -144,12 +183,12 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         ),
         controller: primaryTC,
         indicator: const ShapeDecoration(
-          color: Colors.black,
-          shape: StadiumBorder()
+            color: Colors.black,
+            shape: StadiumBorder()
         ),
         labelColor: Colors.white,
         labelPadding: const EdgeInsets.symmetric(
-          horizontal: AppThemeData.spacingSm
+            horizontal: AppThemeData.spacingSm
         ),
         indicatorColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
@@ -167,6 +206,10 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           buildTabBarItem(context, AppLocalizations.of(context).years),
         ],
       ),
+
+      buildIntervalSelector(context),
+
+
       Expanded(
         child: TabBarView(
           controller: primaryTC,
@@ -176,6 +219,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
               'days',
               DaysStatsView(
                 profile: profile,
+                statsIntervalBloc: BlocProvider.of<StatsIntervalBloc>(context),
               ),
             ),
             buildTabBarView(
@@ -214,6 +258,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     final double pinnedHeaderHeight = statusBarHeight + kToolbarHeight;
     return ExtendedNestedScrollView(
       controller: scrollController,
+      physics: const ClampingScrollPhysics(),
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return headerSlivers;
       },
@@ -225,7 +270,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  List<Widget> buildHeaderSlivers(BuildContext context) {
+  List<Widget> buildDefaultHeaderSlivers(BuildContext context) {
     return [
       buildAppBar(context),
     ];
@@ -235,6 +280,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     return [
       buildAppBar(context),
       buildProfileDetails(context, profile),
+
     ];
   }
 
@@ -298,11 +344,17 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
               padding: const EdgeInsets.all(AppThemeData.spacingMd),
               child: ProfileMetricsView(profile: profile),
             ),
-            Gap.large(),
+            // Gap.large(),
           ],
         ),
       ),
     );
+  }
+
+  Widget buildIntervalSelector(BuildContext context) {
+    return BlocBuilder<StatsIntervalBloc, StatsIntervalState>(builder: (context, state) {
+      return StatsIntervalSelector(statsInterval: state.statsInterval);
+    });
   }
 
   Widget buildTabBarItem(BuildContext context, String label) {
@@ -315,10 +367,15 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  Widget buildTabBarView(BuildContext context, String pageStorageKeyId, Widget child) {
+  Widget buildTabBarView(
+    BuildContext context,
+    String pageStorageKeyId,
+    Widget child
+  ) {
     return ExtendedVisibilityDetector(
       uniqueKey: Key(pageStorageKeyId),
       child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         key: PageStorageKey<String>(pageStorageKeyId),
         child: child,
       ),

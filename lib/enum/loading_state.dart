@@ -1,5 +1,5 @@
 enum LoadingState {
   idle,
   loading,
-  updated,
+  loaded,
 }

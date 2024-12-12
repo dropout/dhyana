@@ -45,7 +45,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         formData: values,
         onComplete: (profile) {
           setState(() {
-            state = LoadingState.updated;
+            state = LoadingState.loaded;
           });
         },
         onError: (e, stack) {
@@ -110,7 +110,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonSaving.toUpperCase(),
         );
-      case LoadingState.updated:
+      case LoadingState.loaded:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
