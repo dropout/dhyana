@@ -93,8 +93,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     ]
   );
 
-  late DateTime from;
-  late DateTime to;
   late BarChartData barChartData;
   bool isLoading = true;
 
@@ -103,8 +101,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   @override
   void initState() {
-    from = DateTime.now().subtract(const Duration(days: 7));
-    to = DateTime.now();
+
     barChartData = _defaultBarChartData;
 
     _daysBlocSubscription = widget.daysBloc.stream.listen((DaysState state) {
@@ -125,8 +122,8 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     widget.daysBloc.add(
       DaysEvent.queryDays(
         profileId: widget.profile.id,
-        from: from,
-        to: to,
+        from: widget.statsIntervalBloc.state.statsInterval.from,
+        to: widget.statsIntervalBloc.state.statsInterval.to,
       )
     );
 
@@ -135,8 +132,8 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
       widget.daysBloc.add(
         DaysEvent.queryDays(
           profileId: widget.profile.id,
-          from: from,
-          to: to,
+          from: widget.statsIntervalBloc.state.statsInterval.from,
+          to: widget.statsIntervalBloc.state.statsInterval.to,
         )
       );
     });
@@ -162,7 +159,9 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
               height: 350,
               child: BarChart(
                 title: AppLocalizations.of(context).statsTimePerDay,
-                data: barChartData
+                data: barChartData,
+                // yZoom: 359 * 60,
+                // yZoom: 359 * 60,
               )
             ),
             Gap.medium(),
