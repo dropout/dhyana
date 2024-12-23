@@ -1,3 +1,4 @@
+import 'package:dhyana/util/all.dart';
 import 'package:dhyana/util/faker.dart';
 import 'package:faker/faker.dart';
 import 'package:dhyana/model/all.dart';
@@ -26,7 +27,7 @@ class FakeModelFactory {
   Day createDay({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return Day(
-      id: '${startDate.year}${startDate.month}${startDate.day}',
+      id: startDate.toDayId(),
       startDate: startDate,
       sessions: [],
       minutesCount: _faker.randomGenerator.integer(100),
@@ -38,12 +39,13 @@ class FakeModelFactory {
     return List.generate(count, (_) => createDay());
   }
 
-  Week createWeek() {
+  Week createWeek({DateTime? startDate}) {
+    startDate ??= DateTime.now();
     return Week(
-      id: _faker.guid.guid(),
-      startDate: DateTime.now(),
-      minutesCount: _faker.randomGenerator.integer(100),
-      sessionCount: _faker.randomGenerator.integer(10),
+      id: startDate.toWeekId(),
+      startDate: startDate,
+      minutesCount: 80 + _faker.randomGenerator.integer(100 * 7 - 80),
+      sessionCount: 3 + _faker.randomGenerator.integer(4 * 7),
     );
   }
 

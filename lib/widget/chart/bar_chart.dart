@@ -237,9 +237,10 @@ class BarChartPainter extends CustomPainter {
       var x = xPositions[i];
       var y = size.height - xAxisSpace;
       canvas.drawLine(Offset(x, y), Offset(x, y + 5), paint);
-      var textPainter = createTextPainter(data.data[i].label.substring(0,1), TextAlign.center);
-      textPainter.paint(canvas, Offset(x - textPainter.width / 2, y + 8));
-
+      if (data.data[i].label.isNotEmpty) {
+        var textPainter = createTextPainter(data.data[i].label, TextAlign.center);
+        textPainter.paint(canvas, Offset(x - textPainter.width / 2, y + 8));
+      }
     }
   }
 

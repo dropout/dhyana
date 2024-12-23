@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/statistics_details.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -10,71 +12,55 @@ import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 
 class WeeksStatsView extends StatelessWidget {
 
   final Profile profile;
+  final StatsIntervalBloc statsIntervalBloc;
 
   const WeeksStatsView({
     required this.profile,
+    required this.statsIntervalBloc,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return _WeekStatsViewBlocProvider(
-      profile: profile,
-      statisticsRepository: context.repos.statisticsRepository,
-      crashlyticsService: context.services.crashlyticsService,
+    return BlocProvider<WeeksBloc>(
+      create: (BuildContext context) {
+        return WeeksBloc(
+          statisticsRepository: context.repos.statisticsRepository,
+          crashlyticsService: context.services.crashlyticsService,
+        );
+      },
+      child: WeeksStatsViewContentBuilder(
+        profile: profile,
+      )
     );
   }
 }
 
-class _WeekStatsViewBlocProvider extends StatefulWidget {
+class WeeksStatsViewContentBuilder extends StatelessWidget {
 
   final Profile profile;
-  final StatisticsRepository statisticsRepository;
-  final CrashlyticsService crashlyticsService;
 
-  const _WeekStatsViewBlocProvider({
-    required this.profile,
-    required this.statisticsRepository,
-    required this.crashlyticsService,
+  const WeeksStatsViewContentBuilder({
     super.key,
+    required this.profile,
   });
 
   @override
-  State<_WeekStatsViewBlocProvider> createState() => _WeekStatsViewBlocProviderState();
-}
-
-class _WeekStatsViewBlocProviderState extends State<_WeekStatsViewBlocProvider> {
-
-  late final WeeksBloc weeksBloc;
-
-  @override
-  void initState() {
-    weeksBloc = WeeksBloc(
-      statisticsRepository: widget.statisticsRepository,
-      crashlyticsService: widget.crashlyticsService,
-    );
-    super.initState();
-  }
-
-
-  @override
   Widget build(BuildContext context) {
+    WeeksBloc weeksBloc = BlocProvider.of<WeeksBloc>(context);
+    StatsIntervalBloc statsIntervalBloc = BlocProvider.of<StatsIntervalBloc>(context);
     return WeeksStatsViewContent(
-      profile: widget.profile,
+      profile: profile,
       weeksBloc: weeksBloc,
+      statsIntervalBloc: statsIntervalBloc,
     );
-  }
-
-  @override
-  void dispose() {
-    weeksBloc.close();
-    super.dispose();
   }
 }
 
@@ -82,10 +68,12 @@ class WeeksStatsViewContent extends StatefulWidget {
 
   final Profile profile;
   final WeeksBloc weeksBloc;
+  final StatsIntervalBloc statsIntervalBloc;
 
   const WeeksStatsViewContent({
     required this.profile,
     required this.weeksBloc,
+    required this.statsIntervalBloc,
     super.key
   });
 
@@ -97,38 +85,45 @@ class _WeeksStatsViewContentState extends State<WeeksStatsViewContent> {
 
   static const _defaultBarChartData = BarChartData(
       [
-        BarChartDataItem(value: 0, label: 'Mon'),
-        BarChartDataItem(value: 0, label: 'Tue'),
-        BarChartDataItem(value: 0, label: 'Wed'),
-        BarChartDataItem(value: 0, label: 'Thu'),
-        BarChartDataItem(value: 0, label: 'Fri'),
-        BarChartDataItem(value: 0, label: 'Sat'),
-        BarChartDataItem(value: 0, label: 'Sun'),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
+        BarChartDataItem(value: 0, label: ''),
       ]
   );
 
-  late DateTime from;
-  late DateTime to;
+
   late BarChartData barChartData;
+  bool isLoading = true;
 
   StreamSubscription<WeeksState>? _weeksBlocSubscription;
+  StreamSubscription<StatsIntervalState>? _statsIntervalBlocSubscription;
 
   @override
   void initState() {
-    from = DateTime.now().subtract(const Duration(days: 7));
-    to = DateTime.now();
     barChartData = _defaultBarChartData;
 
     _weeksBlocSubscription = widget.weeksBloc.stream.listen((WeeksState state) {
-      if (state is WeeksLoaded) {
+      if (state is WeeksLoadedState) {
         setState(() {
           List<BarChartDataItem> items = state.weeks.map((day) {
             return BarChartDataItem(
-                value: day.minutesCount.toDouble(),
-                label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate)
+              value: day.minutesCount.toDouble(),
+              label: day.startDate.day.toString(),
             );
           }).toList();
           barChartData = BarChartData(items);
+          isLoading = false;
         });
       }
     });
@@ -136,41 +131,23 @@ class _WeeksStatsViewContentState extends State<WeeksStatsViewContent> {
     widget.weeksBloc.add(
       WeeksEvent.queryWeeks(
         profileId: widget.profile.id,
-        from: from,
-        to: to,
+        from: widget.statsIntervalBloc.state.statsInterval.from,
+        to: widget.statsIntervalBloc.state.statsInterval.to,
       )
     );
 
-    super.initState();
-    super.initState();
-  }
-
-  void onLeftArrowPressed() {
-    setState(() {
-      from = from.subtract(const Duration(days: 7));
-      to = to.subtract(const Duration(days: 7));
+    _statsIntervalBlocSubscription = widget.statsIntervalBloc.stream.listen((StatsIntervalState state) {
+      widget.weeksBloc.add(
+        WeeksEvent.queryWeeks(
+          profileId: widget.profile.id,
+          from: widget.statsIntervalBloc.state.statsInterval.from,
+          to: widget.statsIntervalBloc.state.statsInterval.to,
+        )
+      );
     });
-    _queryWeeks();
-  }
 
-  void onRightAwayPressed() {
-    setState(() {
-      from = from.add(const Duration(days: 7));
-      to = to.add(const Duration(days: 7));
-    });
-    _queryWeeks();
+    super.initState();
   }
-
-  void _queryWeeks() {
-    widget.weeksBloc.add(
-      WeeksEvent.queryWeeks(
-        profileId: widget.profile.id,
-        from: from,
-        to: to,
-      )
-    );
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -178,53 +155,130 @@ class _WeeksStatsViewContentState extends State<WeeksStatsViewContent> {
   }
 
   Widget _buildContent(BuildContext context, BarChartData barChartData) {
-    return Padding(
-      padding: const EdgeInsets.all(AppThemeData.spacingMd),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(AppLocalizations.of(context).weeks, style: Theme.of(context).textTheme.titleLarge),
-          Gap.medium(),
-
-          SizedBox(
-              height: 350,
-              child: BarChart(data: barChartData)
-          ),
-
-          Gap.medium(),
-
-          Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: onLeftArrowPressed,
-                ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  onPressed: onRightAwayPressed,
-                ),
-              ]
-          ),
-
-          Text('Total time spent'),
-          Text('Average time spent'),
-          Text('Total sessions'),
-          Text('Average sessions'),
-
-          Text('Total time spent'),
-          Text('Average time spent'),
-          Text('Total sessions'),
-          Text('Average sessions'),
-
-          Text('Total time spent'),
-          Text('Average time spent'),
-          Text('Total sessions'),
-          Text('Average sessions'),
-
-        ],
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.all(AppThemeData.spacingMd),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+                height: 350,
+                child: BarChart(data: barChartData)
+            ),
+            Gap.medium(),
+            buildRow(context),
+          ],
+        ),
       ),
     );
+  }
+
+  Widget buildRow(BuildContext context) {
+    if (isLoading) {
+      return Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: [
+          buildRowItem(context, 'Total time spent', '-'),
+          buildRowItem(context, 'Total sessions', '-'),
+          buildRowItem(context, 'Average time spent', '-'),
+          buildRowItem(context, 'Average sessions', '-'),
+        ],
+      );
+    } else {
+      WeeksLoadedState daysLoadedState = widget.weeksBloc.state as WeeksLoadedState;
+      StatisticsDetails statisticsDetails = daysLoadedState.statisticsDetails;
+      return Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: [
+          buildRowItem(
+              context,
+              AppLocalizations.of(context).statsTotalTimeSpent,
+              '${statisticsDetails.totalMinutes} minutes'
+          ),
+          buildRowItem(
+              context,
+              AppLocalizations.of(context).statsTotalSessions,
+              '${statisticsDetails.totalSessions} sessions'
+          ),
+          buildRowItem(
+              context,
+              AppLocalizations.of(context).statsAverageTimeSpent,
+              '${statisticsDetails.averageMinutes.toInt()} minutes'
+          ),
+          buildRowItem(
+              context,
+              AppLocalizations.of(context).statsAverageSessions,
+              '${statisticsDetails.averageSessions.toInt()} sessions'
+          ),
+        ],
+      );
+    }
+  }
+
+  Widget buildRowItem(BuildContext context, String label, String value) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+            decoration: const BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.all(Radius.circular(AppThemeData.borderRadiusLg))
+            ),
+            width: constraints.maxWidth / 2 - 4,
+            height: 120,
+            padding: const EdgeInsets.all(AppThemeData.paddingMd),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                      label.toUpperCase(),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.white,
+                        shadows: [
+                          const Shadow(
+                            blurRadius: 48.0,
+                            color: Colors.black87,
+                          ),
+                        ],
+                        fontWeight: FontWeight.bold,
+                        height: 1.0,
+                      )
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                      value,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.white,
+                        shadows: [
+                          const Shadow(
+                            blurRadius: 48.0,
+                            color: Colors.black87,
+                          ),
+                        ],
+                        fontWeight: FontWeight.bold,
+                        height: 1.0,
+                      )
+                  ),
+                ),
+              ],
+            )
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _weeksBlocSubscription?.cancel();
+    _statsIntervalBlocSubscription?.cancel();
+    super.dispose();
   }
 }
 

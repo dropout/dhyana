@@ -83,13 +83,23 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
     static const _defaultBarChartData = BarChartData(
     [
-      BarChartDataItem(value: 0, label: 'Mon'),
-      BarChartDataItem(value: 0, label: 'Tue'),
-      BarChartDataItem(value: 0, label: 'Wed'),
-      BarChartDataItem(value: 0, label: 'Thu'),
-      BarChartDataItem(value: 0, label: 'Fri'),
-      BarChartDataItem(value: 0, label: 'Sat'),
-      BarChartDataItem(value: 0, label: 'Sun'),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
+
+      BarChartDataItem(value: 0, label: ''),
+      BarChartDataItem(value: 0, label: ''),
     ]
   );
 
@@ -101,7 +111,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   @override
   void initState() {
-
     barChartData = _defaultBarChartData;
 
     _daysBlocSubscription = widget.daysBloc.stream.listen((DaysState state) {
@@ -110,7 +119,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
           List<BarChartDataItem> items = state.days.map((day) {
             return BarChartDataItem(
               value: day.minutesCount.toDouble(),
-              label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate)
+              label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate).substring(0,1),
             );
           }).toList();
           barChartData = BarChartData(items);
@@ -274,16 +283,10 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   @override
   void dispose() {
     _daysBlocSubscription?.cancel();
+    _statsIntervalBlocSubscription?.cancel();
     super.dispose();
   }
 
-  buildTimerangeText(BuildContext context, DateTime from, DateTime to) {
-    return Text(
-      '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to)}',
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
+
 
 }

@@ -11,34 +11,40 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   final Faker _faker = Faker();
 
   @override
-  Future<Day> getDay(String profileId, DateTime dateTime) {
+  Future<Day> getDay(String profileId, DateTime dateTime) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createDay(
       startDate: dateTime,
     ));
   }
 
   @override
-  Future<Week> getWeek(String profileId, DateTime dateTime) {
+  Future<Week> getWeek(String profileId, DateTime dateTime) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createWeek());
   }
 
   @override
-  Future<Month> getMonth(String profileId, DateTime dateTime) {
+  Future<Month> getMonth(String profileId, DateTime dateTime) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createMonth());
   }
 
   @override
-  Future<Year> getYear(String profileId, DateTime dateTime) {
+  Future<Year> getYear(String profileId, DateTime dateTime) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createYear());
   }
 
   @override
-  Future<Session> getSession(String profileId, String sessionId) {
+  Future<Session> getSession(String profileId, String sessionId) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createSession());
   }
 
   @override
-  Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) {
+  Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) async {
+    await Future.delayed(Duration(seconds: 1));
     Duration difference = queryOptions.from.difference(queryOptions.to);
     List<Day> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {
@@ -55,24 +61,39 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) {
-    return Future.value(
-      List.generate(queryOptions.limit, (_) => _fakeModelFactory.createWeek())
-    );
+  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) async {
+    await Future.delayed(Duration(seconds: 1));
+    int weekCount = (queryOptions.from.difference(queryOptions.to).inDays ~/ 7).abs();
+    List<Week> weeks = [];
+    for (var i = 0; i < weekCount; ++i) {
+      DateTime date = queryOptions.from.add(Duration(days: i * 7));
+      Week week = _fakeModelFactory.createWeek(
+        startDate: date,
+      );
+      week = week.copyWith(
+        id: date.toWeekId(),
+      );
+      weeks.add(week);
+    }
+
+    return Future.value(weeks);
   }
 
   @override
-  Future<List<Month>> queryMonths(String profileId, MonthQueryOptions queryOptions) {
+  Future<List<Month>> queryMonths(String profileId, MonthQueryOptions queryOptions) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createMonths(queryOptions.limit));
   }
 
   @override
-  Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions) {
+  Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createYears(queryOptions.limit));
   }
 
   @override
-  Future<List<Session>> querySessions(String profileId, SessionQueryOptions queryOptions) {
+  Future<List<Session>> querySessions(String profileId, SessionQueryOptions queryOptions) async {
+    await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createSessions(queryOptions.limit));
   }
 

@@ -1,4 +1,5 @@
 import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/statistics_details.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
@@ -40,7 +41,8 @@ class WeeksBloc extends Bloc<WeeksEvent, WeeksState> {
       emit(WeeksState.loaded(
         from: event.from,
         to: event.to,
-        weeks: _fillEmptyWeeks(weeks, queryOptions)
+        weeks: _fillEmptyWeeks(weeks, queryOptions),
+        statisticsDetails: StatisticsDetails.fromWeeks(weeks),
       ));
       logger.t('Successfully loaded weeks ${weeks.length}');
 

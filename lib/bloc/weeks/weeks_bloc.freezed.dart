@@ -569,7 +569,8 @@ mixin _$WeeksState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(DateTime from, DateTime to, List<Week> weeks)
+    required TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)
         loaded,
     required TResult Function() error,
   }) =>
@@ -577,37 +578,41 @@ mixin _$WeeksState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WeeksLoading value) loading,
-    required TResult Function(WeeksLoaded value) loaded,
-    required TResult Function(WeeksLoadingError value) error,
+    required TResult Function(WeeksLoadingState value) loading,
+    required TResult Function(WeeksLoadedState value) loaded,
+    required TResult Function(WeeksErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WeeksLoading value)? loading,
-    TResult? Function(WeeksLoaded value)? loaded,
-    TResult? Function(WeeksLoadingError value)? error,
+    TResult? Function(WeeksLoadingState value)? loading,
+    TResult? Function(WeeksLoadedState value)? loaded,
+    TResult? Function(WeeksErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WeeksLoading value)? loading,
-    TResult Function(WeeksLoaded value)? loaded,
-    TResult Function(WeeksLoadingError value)? error,
+    TResult Function(WeeksLoadingState value)? loading,
+    TResult Function(WeeksLoadedState value)? loaded,
+    TResult Function(WeeksErrorState value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -635,18 +640,18 @@ class _$WeeksStateCopyWithImpl<$Res, $Val extends WeeksState>
 }
 
 /// @nodoc
-abstract class _$$WeeksLoadingImplCopyWith<$Res> {
-  factory _$$WeeksLoadingImplCopyWith(
-          _$WeeksLoadingImpl value, $Res Function(_$WeeksLoadingImpl) then) =
-      __$$WeeksLoadingImplCopyWithImpl<$Res>;
+abstract class _$$WeeksLoadingStateImplCopyWith<$Res> {
+  factory _$$WeeksLoadingStateImplCopyWith(_$WeeksLoadingStateImpl value,
+          $Res Function(_$WeeksLoadingStateImpl) then) =
+      __$$WeeksLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$WeeksLoadingImplCopyWithImpl<$Res>
-    extends _$WeeksStateCopyWithImpl<$Res, _$WeeksLoadingImpl>
-    implements _$$WeeksLoadingImplCopyWith<$Res> {
-  __$$WeeksLoadingImplCopyWithImpl(
-      _$WeeksLoadingImpl _value, $Res Function(_$WeeksLoadingImpl) _then)
+class __$$WeeksLoadingStateImplCopyWithImpl<$Res>
+    extends _$WeeksStateCopyWithImpl<$Res, _$WeeksLoadingStateImpl>
+    implements _$$WeeksLoadingStateImplCopyWith<$Res> {
+  __$$WeeksLoadingStateImplCopyWithImpl(_$WeeksLoadingStateImpl _value,
+      $Res Function(_$WeeksLoadingStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of WeeksState
@@ -655,8 +660,8 @@ class __$$WeeksLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WeeksLoadingImpl implements WeeksLoading {
-  const _$WeeksLoadingImpl();
+class _$WeeksLoadingStateImpl implements WeeksLoadingState {
+  const _$WeeksLoadingStateImpl();
 
   @override
   String toString() {
@@ -666,7 +671,7 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WeeksLoadingImpl);
+        (other.runtimeType == runtimeType && other is _$WeeksLoadingStateImpl);
   }
 
   @override
@@ -676,7 +681,8 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(DateTime from, DateTime to, List<Week> weeks)
+    required TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)
         loaded,
     required TResult Function() error,
   }) {
@@ -687,7 +693,9 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -697,7 +705,9 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -710,9 +720,9 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WeeksLoading value) loading,
-    required TResult Function(WeeksLoaded value) loaded,
-    required TResult Function(WeeksLoadingError value) error,
+    required TResult Function(WeeksLoadingState value) loading,
+    required TResult Function(WeeksLoadedState value) loaded,
+    required TResult Function(WeeksErrorState value) error,
   }) {
     return loading(this);
   }
@@ -720,9 +730,9 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WeeksLoading value)? loading,
-    TResult? Function(WeeksLoaded value)? loaded,
-    TResult? Function(WeeksLoadingError value)? error,
+    TResult? Function(WeeksLoadingState value)? loading,
+    TResult? Function(WeeksLoadedState value)? loaded,
+    TResult? Function(WeeksErrorState value)? error,
   }) {
     return loading?.call(this);
   }
@@ -730,9 +740,9 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WeeksLoading value)? loading,
-    TResult Function(WeeksLoaded value)? loaded,
-    TResult Function(WeeksLoadingError value)? error,
+    TResult Function(WeeksLoadingState value)? loading,
+    TResult Function(WeeksLoadedState value)? loaded,
+    TResult Function(WeeksErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -742,25 +752,31 @@ class _$WeeksLoadingImpl implements WeeksLoading {
   }
 }
 
-abstract class WeeksLoading implements WeeksState {
-  const factory WeeksLoading() = _$WeeksLoadingImpl;
+abstract class WeeksLoadingState implements WeeksState {
+  const factory WeeksLoadingState() = _$WeeksLoadingStateImpl;
 }
 
 /// @nodoc
-abstract class _$$WeeksLoadedImplCopyWith<$Res> {
-  factory _$$WeeksLoadedImplCopyWith(
-          _$WeeksLoadedImpl value, $Res Function(_$WeeksLoadedImpl) then) =
-      __$$WeeksLoadedImplCopyWithImpl<$Res>;
+abstract class _$$WeeksLoadedStateImplCopyWith<$Res> {
+  factory _$$WeeksLoadedStateImplCopyWith(_$WeeksLoadedStateImpl value,
+          $Res Function(_$WeeksLoadedStateImpl) then) =
+      __$$WeeksLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTime from, DateTime to, List<Week> weeks});
+  $Res call(
+      {DateTime from,
+      DateTime to,
+      List<Week> weeks,
+      StatisticsDetails statisticsDetails});
+
+  $StatisticsDetailsCopyWith<$Res> get statisticsDetails;
 }
 
 /// @nodoc
-class __$$WeeksLoadedImplCopyWithImpl<$Res>
-    extends _$WeeksStateCopyWithImpl<$Res, _$WeeksLoadedImpl>
-    implements _$$WeeksLoadedImplCopyWith<$Res> {
-  __$$WeeksLoadedImplCopyWithImpl(
-      _$WeeksLoadedImpl _value, $Res Function(_$WeeksLoadedImpl) _then)
+class __$$WeeksLoadedStateImplCopyWithImpl<$Res>
+    extends _$WeeksStateCopyWithImpl<$Res, _$WeeksLoadedStateImpl>
+    implements _$$WeeksLoadedStateImplCopyWith<$Res> {
+  __$$WeeksLoadedStateImplCopyWithImpl(_$WeeksLoadedStateImpl _value,
+      $Res Function(_$WeeksLoadedStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of WeeksState
@@ -771,8 +787,9 @@ class __$$WeeksLoadedImplCopyWithImpl<$Res>
     Object? from = null,
     Object? to = null,
     Object? weeks = null,
+    Object? statisticsDetails = null,
   }) {
-    return _then(_$WeeksLoadedImpl(
+    return _then(_$WeeksLoadedStateImpl(
       from: null == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -785,15 +802,32 @@ class __$$WeeksLoadedImplCopyWithImpl<$Res>
           ? _value._weeks
           : weeks // ignore: cast_nullable_to_non_nullable
               as List<Week>,
+      statisticsDetails: null == statisticsDetails
+          ? _value.statisticsDetails
+          : statisticsDetails // ignore: cast_nullable_to_non_nullable
+              as StatisticsDetails,
     ));
+  }
+
+  /// Create a copy of WeeksState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StatisticsDetailsCopyWith<$Res> get statisticsDetails {
+    return $StatisticsDetailsCopyWith<$Res>(_value.statisticsDetails, (value) {
+      return _then(_value.copyWith(statisticsDetails: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$WeeksLoadedImpl implements WeeksLoaded {
-  const _$WeeksLoadedImpl(
-      {required this.from, required this.to, required final List<Week> weeks})
+class _$WeeksLoadedStateImpl implements WeeksLoadedState {
+  const _$WeeksLoadedStateImpl(
+      {required this.from,
+      required this.to,
+      required final List<Week> weeks,
+      required this.statisticsDetails})
       : _weeks = weeks;
 
   @override
@@ -809,63 +843,74 @@ class _$WeeksLoadedImpl implements WeeksLoaded {
   }
 
   @override
+  final StatisticsDetails statisticsDetails;
+
+  @override
   String toString() {
-    return 'WeeksState.loaded(from: $from, to: $to, weeks: $weeks)';
+    return 'WeeksState.loaded(from: $from, to: $to, weeks: $weeks, statisticsDetails: $statisticsDetails)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeeksLoadedImpl &&
+            other is _$WeeksLoadedStateImpl &&
             (identical(other.from, from) || other.from == from) &&
             (identical(other.to, to) || other.to == to) &&
-            const DeepCollectionEquality().equals(other._weeks, _weeks));
+            const DeepCollectionEquality().equals(other._weeks, _weeks) &&
+            (identical(other.statisticsDetails, statisticsDetails) ||
+                other.statisticsDetails == statisticsDetails));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, from, to, const DeepCollectionEquality().hash(_weeks));
+  int get hashCode => Object.hash(runtimeType, from, to,
+      const DeepCollectionEquality().hash(_weeks), statisticsDetails);
 
   /// Create a copy of WeeksState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$WeeksLoadedImplCopyWith<_$WeeksLoadedImpl> get copyWith =>
-      __$$WeeksLoadedImplCopyWithImpl<_$WeeksLoadedImpl>(this, _$identity);
+  _$$WeeksLoadedStateImplCopyWith<_$WeeksLoadedStateImpl> get copyWith =>
+      __$$WeeksLoadedStateImplCopyWithImpl<_$WeeksLoadedStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(DateTime from, DateTime to, List<Week> weeks)
+    required TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)
         loaded,
     required TResult Function() error,
   }) {
-    return loaded(from, to, weeks);
+    return loaded(from, to, weeks, statisticsDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(from, to, weeks);
+    return loaded?.call(from, to, weeks, statisticsDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(from, to, weeks);
+      return loaded(from, to, weeks, statisticsDetails);
     }
     return orElse();
   }
@@ -873,9 +918,9 @@ class _$WeeksLoadedImpl implements WeeksLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WeeksLoading value) loading,
-    required TResult Function(WeeksLoaded value) loaded,
-    required TResult Function(WeeksLoadingError value) error,
+    required TResult Function(WeeksLoadingState value) loading,
+    required TResult Function(WeeksLoadedState value) loaded,
+    required TResult Function(WeeksErrorState value) error,
   }) {
     return loaded(this);
   }
@@ -883,9 +928,9 @@ class _$WeeksLoadedImpl implements WeeksLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WeeksLoading value)? loading,
-    TResult? Function(WeeksLoaded value)? loaded,
-    TResult? Function(WeeksLoadingError value)? error,
+    TResult? Function(WeeksLoadingState value)? loading,
+    TResult? Function(WeeksLoadedState value)? loaded,
+    TResult? Function(WeeksErrorState value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -893,9 +938,9 @@ class _$WeeksLoadedImpl implements WeeksLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WeeksLoading value)? loading,
-    TResult Function(WeeksLoaded value)? loaded,
-    TResult Function(WeeksLoadingError value)? error,
+    TResult Function(WeeksLoadingState value)? loading,
+    TResult Function(WeeksLoadedState value)? loaded,
+    TResult Function(WeeksErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -905,36 +950,39 @@ class _$WeeksLoadedImpl implements WeeksLoaded {
   }
 }
 
-abstract class WeeksLoaded implements WeeksState {
-  const factory WeeksLoaded(
-      {required final DateTime from,
-      required final DateTime to,
-      required final List<Week> weeks}) = _$WeeksLoadedImpl;
+abstract class WeeksLoadedState implements WeeksState {
+  const factory WeeksLoadedState(
+          {required final DateTime from,
+          required final DateTime to,
+          required final List<Week> weeks,
+          required final StatisticsDetails statisticsDetails}) =
+      _$WeeksLoadedStateImpl;
 
   DateTime get from;
   DateTime get to;
   List<Week> get weeks;
+  StatisticsDetails get statisticsDetails;
 
   /// Create a copy of WeeksState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WeeksLoadedImplCopyWith<_$WeeksLoadedImpl> get copyWith =>
+  _$$WeeksLoadedStateImplCopyWith<_$WeeksLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$WeeksLoadingErrorImplCopyWith<$Res> {
-  factory _$$WeeksLoadingErrorImplCopyWith(_$WeeksLoadingErrorImpl value,
-          $Res Function(_$WeeksLoadingErrorImpl) then) =
-      __$$WeeksLoadingErrorImplCopyWithImpl<$Res>;
+abstract class _$$WeeksErrorStateImplCopyWith<$Res> {
+  factory _$$WeeksErrorStateImplCopyWith(_$WeeksErrorStateImpl value,
+          $Res Function(_$WeeksErrorStateImpl) then) =
+      __$$WeeksErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$WeeksLoadingErrorImplCopyWithImpl<$Res>
-    extends _$WeeksStateCopyWithImpl<$Res, _$WeeksLoadingErrorImpl>
-    implements _$$WeeksLoadingErrorImplCopyWith<$Res> {
-  __$$WeeksLoadingErrorImplCopyWithImpl(_$WeeksLoadingErrorImpl _value,
-      $Res Function(_$WeeksLoadingErrorImpl) _then)
+class __$$WeeksErrorStateImplCopyWithImpl<$Res>
+    extends _$WeeksStateCopyWithImpl<$Res, _$WeeksErrorStateImpl>
+    implements _$$WeeksErrorStateImplCopyWith<$Res> {
+  __$$WeeksErrorStateImplCopyWithImpl(
+      _$WeeksErrorStateImpl _value, $Res Function(_$WeeksErrorStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of WeeksState
@@ -943,8 +991,8 @@ class __$$WeeksLoadingErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
-  const _$WeeksLoadingErrorImpl();
+class _$WeeksErrorStateImpl implements WeeksErrorState {
+  const _$WeeksErrorStateImpl();
 
   @override
   String toString() {
@@ -954,7 +1002,7 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WeeksLoadingErrorImpl);
+        (other.runtimeType == runtimeType && other is _$WeeksErrorStateImpl);
   }
 
   @override
@@ -964,7 +1012,8 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(DateTime from, DateTime to, List<Week> weeks)
+    required TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)
         loaded,
     required TResult Function() error,
   }) {
@@ -975,7 +1024,9 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult? Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -985,7 +1036,9 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(DateTime from, DateTime to, List<Week> weeks)? loaded,
+    TResult Function(DateTime from, DateTime to, List<Week> weeks,
+            StatisticsDetails statisticsDetails)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -998,9 +1051,9 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WeeksLoading value) loading,
-    required TResult Function(WeeksLoaded value) loaded,
-    required TResult Function(WeeksLoadingError value) error,
+    required TResult Function(WeeksLoadingState value) loading,
+    required TResult Function(WeeksLoadedState value) loaded,
+    required TResult Function(WeeksErrorState value) error,
   }) {
     return error(this);
   }
@@ -1008,9 +1061,9 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WeeksLoading value)? loading,
-    TResult? Function(WeeksLoaded value)? loaded,
-    TResult? Function(WeeksLoadingError value)? error,
+    TResult? Function(WeeksLoadingState value)? loading,
+    TResult? Function(WeeksLoadedState value)? loaded,
+    TResult? Function(WeeksErrorState value)? error,
   }) {
     return error?.call(this);
   }
@@ -1018,9 +1071,9 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WeeksLoading value)? loading,
-    TResult Function(WeeksLoaded value)? loaded,
-    TResult Function(WeeksLoadingError value)? error,
+    TResult Function(WeeksLoadingState value)? loading,
+    TResult Function(WeeksLoadedState value)? loaded,
+    TResult Function(WeeksErrorState value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1030,6 +1083,6 @@ class _$WeeksLoadingErrorImpl implements WeeksLoadingError {
   }
 }
 
-abstract class WeeksLoadingError implements WeeksState {
-  const factory WeeksLoadingError() = _$WeeksLoadingErrorImpl;
+abstract class WeeksErrorState implements WeeksState {
+  const factory WeeksErrorState() = _$WeeksErrorStateImpl;
 }

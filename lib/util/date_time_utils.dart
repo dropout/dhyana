@@ -10,7 +10,7 @@ extension DateTimeUtils on DateTime {
 
   String toWeekId() {
     DateTime monday = subtract(Duration(days: weekday - 1));
-    return '${monday.toYearId()}${monday.toMonthId()}${_twoDigits(monday.day)}';
+    return '${monday.year}${_twoDigits(monday.month)}${_twoDigits(monday.day)}';
   }
 
   String toDayId() {
