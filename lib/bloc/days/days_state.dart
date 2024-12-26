@@ -8,7 +8,7 @@ sealed class DaysState with _$DaysState {
     required DateTime from,
     required DateTime to,
     required List<Day> days,
-    required StatisticsDetails statisticsDetails,
+    required CalculatedStats calculatedStats,
   }) = DaysLoadedState;
   const factory DaysState.error() = DaysLoadingErrorState;
 

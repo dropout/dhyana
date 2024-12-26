@@ -8,7 +8,7 @@ sealed class WeeksState with _$WeeksState {
     required DateTime from,
     required DateTime to,
     required List<Week> weeks,
-    required StatisticsDetails statisticsDetails,
+    required CalculatedStats calculatedStats,
   }) = WeeksLoadedState;
   const factory WeeksState.error() = WeeksErrorState;
 

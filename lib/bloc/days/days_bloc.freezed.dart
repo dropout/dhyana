@@ -570,7 +570,7 @@ mixin _$DaysState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)
+            CalculatedStats calculatedStats)
         loaded,
     required TResult Function() error,
   }) =>
@@ -579,7 +579,7 @@ mixin _$DaysState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult? Function()? error,
   }) =>
@@ -588,7 +588,7 @@ mixin _$DaysState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -681,7 +681,7 @@ class _$DaysLoadingStateImpl implements DaysLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)
+            CalculatedStats calculatedStats)
         loaded,
     required TResult Function() error,
   }) {
@@ -693,7 +693,7 @@ class _$DaysLoadingStateImpl implements DaysLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult? Function()? error,
   }) {
@@ -705,7 +705,7 @@ class _$DaysLoadingStateImpl implements DaysLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -765,9 +765,9 @@ abstract class _$$DaysLoadedStateImplCopyWith<$Res> {
       {DateTime from,
       DateTime to,
       List<Day> days,
-      StatisticsDetails statisticsDetails});
+      CalculatedStats calculatedStats});
 
-  $StatisticsDetailsCopyWith<$Res> get statisticsDetails;
+  $CalculatedStatsCopyWith<$Res> get calculatedStats;
 }
 
 /// @nodoc
@@ -786,7 +786,7 @@ class __$$DaysLoadedStateImplCopyWithImpl<$Res>
     Object? from = null,
     Object? to = null,
     Object? days = null,
-    Object? statisticsDetails = null,
+    Object? calculatedStats = null,
   }) {
     return _then(_$DaysLoadedStateImpl(
       from: null == from
@@ -801,10 +801,10 @@ class __$$DaysLoadedStateImplCopyWithImpl<$Res>
           ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
               as List<Day>,
-      statisticsDetails: null == statisticsDetails
-          ? _value.statisticsDetails
-          : statisticsDetails // ignore: cast_nullable_to_non_nullable
-              as StatisticsDetails,
+      calculatedStats: null == calculatedStats
+          ? _value.calculatedStats
+          : calculatedStats // ignore: cast_nullable_to_non_nullable
+              as CalculatedStats,
     ));
   }
 
@@ -812,9 +812,9 @@ class __$$DaysLoadedStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $StatisticsDetailsCopyWith<$Res> get statisticsDetails {
-    return $StatisticsDetailsCopyWith<$Res>(_value.statisticsDetails, (value) {
-      return _then(_value.copyWith(statisticsDetails: value));
+  $CalculatedStatsCopyWith<$Res> get calculatedStats {
+    return $CalculatedStatsCopyWith<$Res>(_value.calculatedStats, (value) {
+      return _then(_value.copyWith(calculatedStats: value));
     });
   }
 }
@@ -826,7 +826,7 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
       {required this.from,
       required this.to,
       required final List<Day> days,
-      required this.statisticsDetails})
+      required this.calculatedStats})
       : _days = days;
 
   @override
@@ -842,11 +842,11 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
   }
 
   @override
-  final StatisticsDetails statisticsDetails;
+  final CalculatedStats calculatedStats;
 
   @override
   String toString() {
-    return 'DaysState.loaded(from: $from, to: $to, days: $days, statisticsDetails: $statisticsDetails)';
+    return 'DaysState.loaded(from: $from, to: $to, days: $days, calculatedStats: $calculatedStats)';
   }
 
   @override
@@ -857,13 +857,13 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
             (identical(other.from, from) || other.from == from) &&
             (identical(other.to, to) || other.to == to) &&
             const DeepCollectionEquality().equals(other._days, _days) &&
-            (identical(other.statisticsDetails, statisticsDetails) ||
-                other.statisticsDetails == statisticsDetails));
+            (identical(other.calculatedStats, calculatedStats) ||
+                other.calculatedStats == calculatedStats));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, from, to,
-      const DeepCollectionEquality().hash(_days), statisticsDetails);
+      const DeepCollectionEquality().hash(_days), calculatedStats);
 
   /// Create a copy of DaysState
   /// with the given fields replaced by the non-null parameter values.
@@ -879,11 +879,11 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)
+            CalculatedStats calculatedStats)
         loaded,
     required TResult Function() error,
   }) {
-    return loaded(from, to, days, statisticsDetails);
+    return loaded(from, to, days, calculatedStats);
   }
 
   @override
@@ -891,11 +891,11 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(from, to, days, statisticsDetails);
+    return loaded?.call(from, to, days, calculatedStats);
   }
 
   @override
@@ -903,13 +903,13 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(from, to, days, statisticsDetails);
+      return loaded(from, to, days, calculatedStats);
     }
     return orElse();
   }
@@ -951,16 +951,15 @@ class _$DaysLoadedStateImpl implements DaysLoadedState {
 
 abstract class DaysLoadedState implements DaysState {
   const factory DaysLoadedState(
-          {required final DateTime from,
-          required final DateTime to,
-          required final List<Day> days,
-          required final StatisticsDetails statisticsDetails}) =
-      _$DaysLoadedStateImpl;
+      {required final DateTime from,
+      required final DateTime to,
+      required final List<Day> days,
+      required final CalculatedStats calculatedStats}) = _$DaysLoadedStateImpl;
 
   DateTime get from;
   DateTime get to;
   List<Day> get days;
-  StatisticsDetails get statisticsDetails;
+  CalculatedStats get calculatedStats;
 
   /// Create a copy of DaysState
   /// with the given fields replaced by the non-null parameter values.
@@ -1014,7 +1013,7 @@ class _$DaysLoadingErrorStateImpl implements DaysLoadingErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)
+            CalculatedStats calculatedStats)
         loaded,
     required TResult Function() error,
   }) {
@@ -1026,7 +1025,7 @@ class _$DaysLoadingErrorStateImpl implements DaysLoadingErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult? Function()? error,
   }) {
@@ -1038,7 +1037,7 @@ class _$DaysLoadingErrorStateImpl implements DaysLoadingErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(DateTime from, DateTime to, List<Day> days,
-            StatisticsDetails statisticsDetails)?
+            CalculatedStats calculatedStats)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),

@@ -1,5 +1,5 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/model/statistics_details.dart';
+import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
@@ -43,7 +43,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         from: event.from,
         to: event.to,
         days: days,
-        statisticsDetails: StatisticsDetails.fromDays(days),
+        calculatedStats: CalculatedStats.fromDays(days),
       ));
       logger.t('Successfully loaded days ${days.length}');
 

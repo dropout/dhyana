@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'statistics_details.dart';
+part of 'calculated_stats.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,32 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-StatisticsDetails _$StatisticsDetailsFromJson(Map<String, dynamic> json) {
-  return _StatisticsDetails.fromJson(json);
+CalculatedStats _$CalculatedStatsFromJson(Map<String, dynamic> json) {
+  return _CalculatedStats.fromJson(json);
 }
 
 /// @nodoc
-mixin _$StatisticsDetails {
+mixin _$CalculatedStats {
   int get totalMinutes => throw _privateConstructorUsedError;
   double get averageMinutes => throw _privateConstructorUsedError;
   int get totalSessions => throw _privateConstructorUsedError;
   double get averageSessions => throw _privateConstructorUsedError;
 
-  /// Serializes this StatisticsDetails to a JSON map.
+  /// Serializes this CalculatedStats to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of StatisticsDetails
+  /// Create a copy of CalculatedStats
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $StatisticsDetailsCopyWith<StatisticsDetails> get copyWith =>
+  $CalculatedStatsCopyWith<CalculatedStats> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StatisticsDetailsCopyWith<$Res> {
-  factory $StatisticsDetailsCopyWith(
-          StatisticsDetails value, $Res Function(StatisticsDetails) then) =
-      _$StatisticsDetailsCopyWithImpl<$Res, StatisticsDetails>;
+abstract class $CalculatedStatsCopyWith<$Res> {
+  factory $CalculatedStatsCopyWith(
+          CalculatedStats value, $Res Function(CalculatedStats) then) =
+      _$CalculatedStatsCopyWithImpl<$Res, CalculatedStats>;
   @useResult
   $Res call(
       {int totalMinutes,
@@ -49,16 +49,16 @@ abstract class $StatisticsDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StatisticsDetailsCopyWithImpl<$Res, $Val extends StatisticsDetails>
-    implements $StatisticsDetailsCopyWith<$Res> {
-  _$StatisticsDetailsCopyWithImpl(this._value, this._then);
+class _$CalculatedStatsCopyWithImpl<$Res, $Val extends CalculatedStats>
+    implements $CalculatedStatsCopyWith<$Res> {
+  _$CalculatedStatsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of StatisticsDetails
+  /// Create a copy of CalculatedStats
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -90,11 +90,11 @@ class _$StatisticsDetailsCopyWithImpl<$Res, $Val extends StatisticsDetails>
 }
 
 /// @nodoc
-abstract class _$$StatisticsDetailsImplCopyWith<$Res>
-    implements $StatisticsDetailsCopyWith<$Res> {
-  factory _$$StatisticsDetailsImplCopyWith(_$StatisticsDetailsImpl value,
-          $Res Function(_$StatisticsDetailsImpl) then) =
-      __$$StatisticsDetailsImplCopyWithImpl<$Res>;
+abstract class _$$CalculatedStatsImplCopyWith<$Res>
+    implements $CalculatedStatsCopyWith<$Res> {
+  factory _$$CalculatedStatsImplCopyWith(_$CalculatedStatsImpl value,
+          $Res Function(_$CalculatedStatsImpl) then) =
+      __$$CalculatedStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,14 +105,14 @@ abstract class _$$StatisticsDetailsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$StatisticsDetailsImplCopyWithImpl<$Res>
-    extends _$StatisticsDetailsCopyWithImpl<$Res, _$StatisticsDetailsImpl>
-    implements _$$StatisticsDetailsImplCopyWith<$Res> {
-  __$$StatisticsDetailsImplCopyWithImpl(_$StatisticsDetailsImpl _value,
-      $Res Function(_$StatisticsDetailsImpl) _then)
+class __$$CalculatedStatsImplCopyWithImpl<$Res>
+    extends _$CalculatedStatsCopyWithImpl<$Res, _$CalculatedStatsImpl>
+    implements _$$CalculatedStatsImplCopyWith<$Res> {
+  __$$CalculatedStatsImplCopyWithImpl(
+      _$CalculatedStatsImpl _value, $Res Function(_$CalculatedStatsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of StatisticsDetails
+  /// Create a copy of CalculatedStats
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -122,7 +122,7 @@ class __$$StatisticsDetailsImplCopyWithImpl<$Res>
     Object? totalSessions = null,
     Object? averageSessions = null,
   }) {
-    return _then(_$StatisticsDetailsImpl(
+    return _then(_$CalculatedStatsImpl(
       totalMinutes: null == totalMinutes
           ? _value.totalMinutes
           : totalMinutes // ignore: cast_nullable_to_non_nullable
@@ -145,15 +145,15 @@ class __$$StatisticsDetailsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$StatisticsDetailsImpl implements _StatisticsDetails {
-  const _$StatisticsDetailsImpl(
+class _$CalculatedStatsImpl implements _CalculatedStats {
+  const _$CalculatedStatsImpl(
       {this.totalMinutes = 0,
       this.averageMinutes = 0,
       this.totalSessions = 0,
       this.averageSessions = 0});
 
-  factory _$StatisticsDetailsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StatisticsDetailsImplFromJson(json);
+  factory _$CalculatedStatsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CalculatedStatsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -170,14 +170,14 @@ class _$StatisticsDetailsImpl implements _StatisticsDetails {
 
   @override
   String toString() {
-    return 'StatisticsDetails(totalMinutes: $totalMinutes, averageMinutes: $averageMinutes, totalSessions: $totalSessions, averageSessions: $averageSessions)';
+    return 'CalculatedStats(totalMinutes: $totalMinutes, averageMinutes: $averageMinutes, totalSessions: $totalSessions, averageSessions: $averageSessions)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StatisticsDetailsImpl &&
+            other is _$CalculatedStatsImpl &&
             (identical(other.totalMinutes, totalMinutes) ||
                 other.totalMinutes == totalMinutes) &&
             (identical(other.averageMinutes, averageMinutes) ||
@@ -193,32 +193,32 @@ class _$StatisticsDetailsImpl implements _StatisticsDetails {
   int get hashCode => Object.hash(runtimeType, totalMinutes, averageMinutes,
       totalSessions, averageSessions);
 
-  /// Create a copy of StatisticsDetails
+  /// Create a copy of CalculatedStats
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$StatisticsDetailsImplCopyWith<_$StatisticsDetailsImpl> get copyWith =>
-      __$$StatisticsDetailsImplCopyWithImpl<_$StatisticsDetailsImpl>(
+  _$$CalculatedStatsImplCopyWith<_$CalculatedStatsImpl> get copyWith =>
+      __$$CalculatedStatsImplCopyWithImpl<_$CalculatedStatsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StatisticsDetailsImplToJson(
+    return _$$CalculatedStatsImplToJson(
       this,
     );
   }
 }
 
-abstract class _StatisticsDetails implements StatisticsDetails {
-  const factory _StatisticsDetails(
+abstract class _CalculatedStats implements CalculatedStats {
+  const factory _CalculatedStats(
       {final int totalMinutes,
       final double averageMinutes,
       final int totalSessions,
-      final double averageSessions}) = _$StatisticsDetailsImpl;
+      final double averageSessions}) = _$CalculatedStatsImpl;
 
-  factory _StatisticsDetails.fromJson(Map<String, dynamic> json) =
-      _$StatisticsDetailsImpl.fromJson;
+  factory _CalculatedStats.fromJson(Map<String, dynamic> json) =
+      _$CalculatedStatsImpl.fromJson;
 
   @override
   int get totalMinutes;
@@ -229,10 +229,10 @@ abstract class _StatisticsDetails implements StatisticsDetails {
   @override
   double get averageSessions;
 
-  /// Create a copy of StatisticsDetails
+  /// Create a copy of CalculatedStats
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StatisticsDetailsImplCopyWith<_$StatisticsDetailsImpl> get copyWith =>
+  _$$CalculatedStatsImplCopyWith<_$CalculatedStatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

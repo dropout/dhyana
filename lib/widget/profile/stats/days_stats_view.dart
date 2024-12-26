@@ -4,7 +4,7 @@ import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/statistics_details.dart';
+import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -12,6 +12,8 @@ import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import 'calculated_stats_view.dart';
 
 class DaysStatsView extends StatelessWidget {
 
@@ -169,115 +171,29 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
               child: BarChart(
                 title: AppLocalizations.of(context).statsTimePerDay,
                 data: barChartData,
-                // yZoom: 359 * 60,
-                // yZoom: 359 * 60,
               )
             ),
             Gap.medium(),
-            buildRow(context),
+            buildCalculatedStats(context),
           ],
         ),
       ),
     );
   }
 
-  Widget buildRow(BuildContext context) {
+  Widget buildCalculatedStats(BuildContext context) {
     if (isLoading) {
-      return Wrap(
-        spacing: 8.0,
-        runSpacing: 8.0,
-        children: [
-          buildRowItem(context, 'Total time spent', '-'),
-          buildRowItem(context, 'Total sessions', '-'),
-          buildRowItem(context, 'Average time spent', '-'),
-          buildRowItem(context, 'Average sessions', '-'),
-        ],
-      );
+      return CalculatedStatsView(calculatedStats: const CalculatedStats(
+        totalMinutes: 0,
+        totalSessions: 0,
+        averageMinutes: 0,
+        averageSessions: 0,
+      ));
     } else {
       DaysLoadedState daysLoadedState = widget.daysBloc.state as DaysLoadedState;
-      StatisticsDetails statisticsDetails = daysLoadedState.statisticsDetails;
-      return Wrap(
-        spacing: 8.0,
-        runSpacing: 8.0,
-        children: [
-          buildRowItem(
-            context,
-            AppLocalizations.of(context).statsTotalTimeSpent,
-            '${statisticsDetails.totalMinutes} minutes'
-          ),
-          buildRowItem(
-            context,
-            AppLocalizations.of(context).statsTotalSessions,
-            '${statisticsDetails.totalSessions} sessions'
-          ),
-          buildRowItem(
-            context,
-            AppLocalizations.of(context).statsAverageTimeSpent,
-            '${statisticsDetails.averageMinutes.toInt()} minutes'
-          ),
-          buildRowItem(
-            context,
-            AppLocalizations.of(context).statsAverageSessions,
-            '${statisticsDetails.averageSessions.toInt()} sessions'
-          ),
-        ],
-      );
+      CalculatedStats calculatedStats = daysLoadedState.calculatedStats;
+      return CalculatedStatsView(calculatedStats: calculatedStats);
     }
-  }
-
-  Widget buildRowItem(BuildContext context, String label, String value) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.all(Radius.circular(AppThemeData.borderRadiusLg))
-          ),
-          width: constraints.maxWidth / 2 - 4,
-          height: 120,
-          padding: const EdgeInsets.all(AppThemeData.paddingMd),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  label.toUpperCase(),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Colors.white,
-                    shadows: [
-                      const Shadow(
-                        blurRadius: 48.0,
-                        color: Colors.black87,
-                      ),
-                    ],
-                    fontWeight: FontWeight.bold,
-                    height: 1.0,
-                  )
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  value,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Colors.white,
-                    shadows: [
-                      const Shadow(
-                        blurRadius: 48.0,
-                        color: Colors.black87,
-                      ),
-                    ],
-                    fontWeight: FontWeight.bold,
-                    height: 1.0,
-                  )
-                ),
-              ),
-            ],
-          )
-        );
-      },
-    );
   }
 
   @override
