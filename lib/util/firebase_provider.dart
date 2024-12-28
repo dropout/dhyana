@@ -9,26 +9,26 @@ import 'package:logger/logger.dart';
 
 /*
   Helper class to avoid using global static singletons
-  and improve testablity of the application.
+  and improve the testability of the application.
 
   Don't:
-  SomeServiceOrDataProvder(FirebaseFirestore.instance)
+  SomeServiceOrDataProvider(FirebaseFirestore.instance)
 
   Do:
-  SomeServiceOrDataProvder(firebaseProvider.firestore)
+  SomeServiceOrDataProvider(firebaseProvider.firestore)
  */
 class FirebaseProvider {
 
   bool _useEmulator = false;
   final bool persistenceEnabled;
   Logger logger = Logger(
-      printer: PrettyPrinter(
-        methodCount: 0,
-        colors: false,
-        excludeBox: {
-          Level.trace: true
-        },
-      )
+    printer: PrettyPrinter(
+      methodCount: 0,
+      colors: false,
+      excludeBox: {
+        Level.trace: true
+      },
+    )
   );
 
   FirebaseProvider({this.persistenceEnabled = true});
@@ -38,7 +38,7 @@ class FirebaseProvider {
 
     if (kDebugMode) {
       await FirebaseCrashlytics.instance
-          .setCrashlyticsCollectionEnabled(false);
+        .setCrashlyticsCollectionEnabled(false);
     }
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     return firebaseApp;

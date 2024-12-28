@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class CustomTabBarView extends StatefulWidget {
   final List<Widget> children;
   final Duration duration;
@@ -17,7 +18,7 @@ class CustomTabBarView extends StatefulWidget {
   });
 
   @override
-  _CustomTabBarViewState createState() => _CustomTabBarViewState();
+  State<CustomTabBarView> createState() => _CustomTabBarViewState();
 }
 
 enum _AnimationDirection {
@@ -57,10 +58,6 @@ class _CustomTabBarViewState extends State<CustomTabBarView> {
           switchInCurve: widget.switchInCurve,
           switchOutCurve: widget.switchOutCurve,
           transitionBuilder: (Widget child, Animation<double> animation) {
-            // print('$currentIndex ${widget.tabController.index}');
-
-            print('animation value: ${animation.value}');
-
             return SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(1.0, 0.0),

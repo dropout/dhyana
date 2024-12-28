@@ -1,5 +1,4 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/model/consecutive_days.dart';
 import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -51,8 +51,8 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
-                highlightColor: Colors.white.withOpacity(0.25),
-                splashColor: Colors.white.withOpacity(0.25),
+                highlightColor: Colors.white.withValues(alpha: 0.25),
+                splashColor: Colors.white.withValues(alpha: 0.25),
                 onTap: onTap,
               ),
             ),

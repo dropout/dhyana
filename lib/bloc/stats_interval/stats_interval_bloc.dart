@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/enum/all.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/util/logger_factory.dart';

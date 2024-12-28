@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/enum/stats_interval_type.dart';

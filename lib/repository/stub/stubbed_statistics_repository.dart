@@ -1,14 +1,11 @@
-
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:faker/faker.dart';
 
 class StubbedStatisticsRepository implements StatisticsRepository {
 
   final FakeModelFactory _fakeModelFactory = FakeModelFactory();
-  final Faker _faker = Faker();
 
   @override
   Future<Day> getDay(String profileId, DateTime dateTime) async {

@@ -88,7 +88,7 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
           child: Center(
             child: TabPageSelector(
               controller: tabController,
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               selectedColor: Colors.black,
               borderStyle: BorderStyle.none,
             ),

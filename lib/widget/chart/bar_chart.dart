@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:math';
 
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -236,8 +235,11 @@ class BarChartPainter extends CustomPainter {
     for (var i = 0; i < xPositions.length; ++i) {
       var x = xPositions[i];
       var y = size.height - xAxisSpace;
-      canvas.drawLine(Offset(x, y), Offset(x, y + 5), paint);
+
       if (data.data[i].label.isNotEmpty) {
+        // small vertical marker line
+        canvas.drawLine(Offset(x, y), Offset(x, y + 5), paint);
+        // actual label for the bar
         var textPainter = createTextPainter(data.data[i].label, TextAlign.center);
         textPainter.paint(canvas, Offset(x - textPainter.width / 2, y + 8));
       }

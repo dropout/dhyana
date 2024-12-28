@@ -84,6 +84,7 @@ flutter:
 
   shaders:
     - shaders/linear_gradient_mask.frag
+    - shaders/gradient_flow.frag
 
   fonts:
     - family: RobotoSlab

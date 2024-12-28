@@ -3,9 +3,8 @@ import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/route/app_screen.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,35 +127,13 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
-          DurationIndicator(
-            timerSettings: widget.timerSettings,
-            key: ValueKey<TimerSettings>(widget.timerSettings),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(AppThemeData.spacingMd),
-            child: AppButton(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppThemeData.spacingXl,
-                vertical: AppThemeData.spacingMd
-              ),
+          IntrinsicWidth(
+            child: TimerStartButton(
               onTap: () => _onStartButtonTap(context),
-              text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
-              fColor: Colors.white,
-              bColor: AppColors.bloodRed,
-            )
+              fragmentShader: context.services.shaderService.get('shaders/gradient_flow.frag'),
+              timerSettings: widget.timerSettings,
+            ),
           )
-
-          // Padding(
-          //   padding: const EdgeInsets.all(AppThemeData.spacingMd),
-          //   child: AppStadiumButton(
-          //     onTap: () => _onStartButtonTap(context),
-          //     text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
-          //     fColor: Colors.white,
-          //     bColor: AppColors.bloodRed,
-          //   ),
-          // ),
 
         ],
       ),

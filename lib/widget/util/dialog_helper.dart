@@ -14,7 +14,7 @@ void showSignoutDialog(BuildContext context) {
       return _getSignoutDialog(context);
     },
     barrierDismissible: true,
-    barrierColor: Colors.black.withOpacity(0.4),
+    barrierColor: Colors.black.withValues(alpha: 0.4),
     barrierLabel: '',
     transitionDuration: Durations.medium4,
     transitionBuilder: (context, anim1, anim2, child) {

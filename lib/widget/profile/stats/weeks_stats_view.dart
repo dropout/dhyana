@@ -1,25 +1,16 @@
 import 'dart:async';
 
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/repository/all.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/chart/all.dart';
-import 'package:dhyana/widget/profile/stats/calculated_stats_view.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import 'calculated_stats_view.dart';
-
 
 class WeeksStatsView extends StatelessWidget {
 

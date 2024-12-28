@@ -26,7 +26,7 @@ class DefaultBarChartBarDelegate extends BarChartBarDelegate {
           child: DecoratedBox(
             decoration: ShapeDecoration(
               shape: const StadiumBorder(),
-              color: Colors.white.withOpacity(0.25),
+              color: Colors.white.withValues(alpha: 0.25),
             ),
           ),
         ),

@@ -50,18 +50,28 @@ class _DurationIndicatorState extends State<DurationIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(text: TextSpan(
-      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
-      children: [
-        TextSpan(text: formatter.format(now)),
-        const WidgetSpan(
-          child: Icon(Icons.arrow_right_alt_rounded),
-          alignment: PlaceholderAlignment.middle,
+    return RichText(
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontWeight: FontWeight.w900,
+          color: Colors.white,
         ),
-        TextSpan(text: formatter.format(end)),
-      ]
-    ));
+        children: [
+          TextSpan(
+            text: formatter.format(now),
+          ),
+          const WidgetSpan(
+            child: Icon(
+              Icons.arrow_right_alt_rounded,
+              color: Colors.white,
+            ),
+            alignment: PlaceholderAlignment.middle,
+          ),
+          TextSpan(
+            text: formatter.format(end),
+          ),
+        ]
+      )
+    );
   }
 }

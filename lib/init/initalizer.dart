@@ -55,6 +55,7 @@ class Initializer {
 
     logger.t('Preload shaders');
     await services.shaderService.loadShader('shaders/linear_gradient_mask.frag');
+    await services.shaderService.loadShader('shaders/gradient_flow.frag');
 
     logger.t('Initialize repositories');
     AuthRepository authRepository = FirebaseAuthRepository(

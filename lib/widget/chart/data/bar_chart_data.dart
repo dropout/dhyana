@@ -1,5 +1,3 @@
-import 'dart:math';
-
 class BarChartData {
 
   final List<BarChartDataItem> data;
