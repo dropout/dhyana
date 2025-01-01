@@ -1,4 +1,5 @@
 import 'package:dhyana/widget/app_bar/all.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -9,10 +10,8 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -60,12 +59,11 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _handleSigninComplete(BuildContext context ,user, isFirstSignin) {
-    context.replaceNamed(
-      isFirstSignin ? AppScreen.profileWizard.name : AppScreen.profile.name,
-      pathParameters: {
-        'profileId': user.uid,
-      }
-    );
+    if (isFirstSignin) {
+      ProfileWizardRoute(profileId: user.uid).replace(context);
+    } else {
+      ProfileRoute(profileId: user.uid).replace(context);
+    }
   }
 
   @override

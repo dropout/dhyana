@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
 class TimerRunningControls extends StatefulWidget {
@@ -88,7 +87,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   }
 
   void _onDiscard(BuildContext context) {
-    GoRouter.of(context).pop(AppScreen.home.name);
+    context.pop();
     context.logEvent(name: 'timer_discard');
     context.hapticsTap();
   }

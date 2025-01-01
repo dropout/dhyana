@@ -2,13 +2,12 @@ import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/route/app_screen.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import 'settings/all.dart';
 
@@ -60,10 +59,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onStartButtonTap(BuildContext context) {
-    context.pushNamed(
-      AppScreen.timerRunning.name,
-      extra: widget.timerSettings,
-    );
+    TimerRunningRoute($extra: widget.timerSettings).push(context);
     context.hapticsTap();
   }
 
@@ -124,18 +120,10 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   Widget buildStartButton(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IntrinsicWidth(
-            child: TimerStartButton(
-              onTap: () => _onStartButtonTap(context),
-              fragmentShader: context.services.shaderService.get('shaders/gradient_flow.frag'),
-              timerSettings: widget.timerSettings,
-            ),
-          )
-
-        ],
+      child: TimerStartButton(
+        onTap: () => _onStartButtonTap(context),
+        fragmentShader: context.services.shaderService.get('shaders/gradient_flow.frag'),
+        timerSettings: widget.timerSettings,
       ),
     );
   }

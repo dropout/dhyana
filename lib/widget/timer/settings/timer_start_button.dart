@@ -182,15 +182,15 @@ class ShaderPainter extends CustomPainter {
       ..shader = shader;
 
     _blurPaint = Paint()
-      ..color = Colors.black.withAlpha(96)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(60));
+      // ..color = Colors.black.withAlpha(96)
+      ..color = AppColors.bloodRed.withAlpha(64)
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(32));
   }
 
   @override
   void paint(Canvas canvas, Size size) {
 
     // we will only use 2 colors for now
-
     // primary red color
     Color color = AppColors.bloodRed;
 

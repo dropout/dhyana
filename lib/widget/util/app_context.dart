@@ -1,4 +1,5 @@
 import 'package:dhyana/init/all.dart';
+import 'package:dhyana/init/init_result.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,12 +28,13 @@ extension AppContext on BuildContext {
     );
   }
 
-  Services get services {
-    return Provider.of<Services>(this, listen: false);
-  }
+  Services get services =>
+    Provider.of<Services>(this, listen: false);
 
-  Repositories get repos {
-    return Provider.of<Repositories>(this, listen: false);
-  }
+  Repositories get repos =>
+    Provider.of<Repositories>(this, listen: false);
+
+  InitResult get initResult =>
+    Provider.of<InitResult>(this, listen: false);
 
 }

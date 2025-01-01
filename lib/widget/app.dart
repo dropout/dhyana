@@ -5,16 +5,18 @@ import 'package:dhyana/init/init_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+
+import 'app_routes.dart';
 
 class App extends StatelessWidget {
 
   final InitResult initResult;
   late final AuthBloc authBloc;
-  late final AppRouter appRouter;
+  late final GoRouter router;
 
   App({
     required this.initResult,
@@ -26,10 +28,7 @@ class App extends StatelessWidget {
       analyticsService: initResult.services.analyticsService,
       crashlyticsService: initResult.services.crashlyticsService,
     );
-    appRouter = AppRouter(
-      authBloc: authBloc,
-      initResult: initResult,
-    );
+    router = createAppRouter(initResult: initResult);
   }
 
   @override
@@ -69,13 +68,13 @@ class App extends StatelessWidget {
   Widget buildApp(BuildContext context) {
     return MaterialApp.router(
       builder: (BuildContext context, Widget? child) {
-        child ??= const Placeholder();
+        child ??= const SizedBox.shrink();
         return MediaQuery.withClampedTextScaling(
           maxScaleFactor: 1.0,
           child: child
         );
       },
-      routerConfig: appRouter.router,
+      routerConfig: router,
       supportedLocales: const [
         Locale('hu', 'HU'),
         Locale('en', 'EN')

@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/route/app_screen.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,7 +70,7 @@ Widget _getSignoutDialog(BuildContext context) {
           // do the signout
           authBloc.add(const SignOut());
           profileBloc.add(const ProfileEvent.reset());
-          context.goNamed(AppScreen.home.name);
+          const HomeRoute().go(context);
           context.hapticsTap();
           context.logEvent(name: 'profile_signout_pressed');
         },

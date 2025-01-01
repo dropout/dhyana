@@ -1,8 +1,7 @@
-import 'package:dhyana/route/app_screen.dart';
 import 'package:dhyana/widget/app_colors.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class TimerSettingsHistoryButton extends StatelessWidget {
 
@@ -14,12 +13,7 @@ class TimerSettingsHistoryButton extends StatelessWidget {
   });
 
   void _onButtonTap(BuildContext context) {
-    context.pushNamed(
-      AppScreen.timerSettingsHistory.name,
-      pathParameters: {
-        'profileId': profileId,
-      }
-    );
+    TimerSettingsHistoryRoute(profileId: profileId).push(context);
     context.hapticsTap();
   }
 

@@ -1,14 +1,13 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/route/all.dart';
 import 'package:dhyana/widget/app_colors.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_indicator.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ProfileButton extends StatelessWidget {
 
@@ -20,16 +19,17 @@ class ProfileButton extends StatelessWidget {
   });
   
   void _signedOutTap(BuildContext context) {
-    context.pushNamed(AppScreen.login.name);
+    // context.pushNamed(AppScreen.login.name);
+    const LoginRoute().go(context);
     context.hapticsTap();
   }
 
   void _signedInTap(BuildContext context, Profile profile) {
-    String screenName = profile.completed ? AppScreen.profile.name :
-      AppScreen.profileWizard.name;
-    context.pushNamed(screenName, pathParameters: {
-      'profileId': profile.id,
-    });
+    if (profile.completed) {
+      ProfileRoute(profileId: profile.id).push(context);
+    } else {
+      ProfileWizardRoute(profileId: profile.id).push(context);
+    }
     context.hapticsTap();
   }
 
@@ -142,12 +142,10 @@ class ProfileButton extends StatelessWidget {
     );
   }
 
-  Widget buildProfileError(BuildContext context, String userId) {
+  Widget buildProfileError(BuildContext context, String profileId) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(AppScreen.profile.name, pathParameters: {
-          'profileId': userId
-        });
+        ProfileRoute(profileId: profileId).go(context);
       },
       child: const Icon(
         Icons.warning_amber_rounded,
