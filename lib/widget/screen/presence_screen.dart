@@ -1,9 +1,11 @@
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/presence_bloc_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
 import 'package:dhyana/widget/util/app_animation.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:flutter/material.dart';
 
@@ -49,6 +51,8 @@ class PresenceScreenView extends StatefulWidget {
 
 class _PresenceScreenViewState extends State<PresenceScreenView>
   with SingleTickerProviderStateMixin, TitleEffectMixin {
+  
+  double intervalInMinutes = 60;
 
   @override
   void initState() {
@@ -64,16 +68,34 @@ class _PresenceScreenViewState extends State<PresenceScreenView>
       controller: titleEffectScrollController,
       slivers: [
         buildAppBar(context, titleText: 'Presence'),
-        buildSliverTitle(context, 'Presence'),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.only(
-              left: AppThemeData.spacingMd,
-              right: AppThemeData.spacingMd,
-              bottom: AppThemeData.spacingXl,
+            padding: const EdgeInsets.all(AppThemeData.paddingLg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildTitle(context, 'Presence'),
+                Gap.small(),
+                Text('See who you have practiced with.'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
+                  child: Slider(
+                    divisions: 17,
+                    min: 10,
+                    max: 180,
+                    activeColor: Colors.black,
+                    label: '${intervalInMinutes.round()} minutes',
+                    value: intervalInMinutes,
+                    onChanged: (double sliderValue) {
+                      setState(() {
+                        intervalInMinutes = sliderValue;
+                      });
+                    }
+                  ),
+                )
+              ],
             ),
-            child: Text('See who you have practiced with.'),
-          ),
+          )
         ),
         SliverSafeArea(
           top: false,
