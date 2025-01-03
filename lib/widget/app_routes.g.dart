@@ -14,8 +14,9 @@ List<RouteBase> get $appRoutes => [
       $profileWizardRoute,
       $profileStatsRoute,
       $editProfileRoute,
-      $activityRoute,
+      $sessionHistoryRoute,
       $timerSettingsHistoryRoute,
+      $presenceRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -196,14 +197,15 @@ extension $EditProfileRouteExtension on EditProfileRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $activityRoute => GoRouteData.$route(
+RouteBase get $sessionHistoryRoute => GoRouteData.$route(
       path: '/activity',
       name: 'ACTIVITY',
-      factory: $ActivityRouteExtension._fromState,
+      factory: $SessionHistoryRouteExtension._fromState,
     );
 
-extension $ActivityRouteExtension on ActivityRoute {
-  static ActivityRoute _fromState(GoRouterState state) => const ActivityRoute();
+extension $SessionHistoryRouteExtension on SessionHistoryRoute {
+  static SessionHistoryRoute _fromState(GoRouterState state) =>
+      const SessionHistoryRoute();
 
   String get location => GoRouteData.$location(
         '/activity',
@@ -233,6 +235,29 @@ extension $TimerSettingsHistoryRouteExtension on TimerSettingsHistoryRoute {
 
   String get location => GoRouteData.$location(
         '/timerSettingsHistory/${Uri.encodeComponent(profileId)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $presenceRoute => GoRouteData.$route(
+      path: '/presence',
+      name: 'PRESENCE',
+      factory: $PresenceRouteExtension._fromState,
+    );
+
+extension $PresenceRouteExtension on PresenceRoute {
+  static PresenceRoute _fromState(GoRouterState state) => const PresenceRoute();
+
+  String get location => GoRouteData.$location(
+        '/presence',
       );
 
   void go(BuildContext context) => context.go(location);

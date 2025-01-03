@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
@@ -58,25 +59,29 @@ class FirebaseProvider {
     _useEmulator = true;
   }
 
-  FirebaseFirestore get firestore {
-    return FirebaseFirestore.instance;
-  }
+  FirebaseFirestore get firestore =>
+    FirebaseFirestore.instance;
 
-  FirebaseStorage get storage {
-    return FirebaseStorage.instanceFor();
-  }
 
-  FirebaseAuth get auth {
-    return FirebaseAuth.instance;
-  }
+  FirebaseStorage get storage =>
+    FirebaseStorage.instanceFor();
 
-  FirebaseCrashlytics get crashlytics {
-    return FirebaseCrashlytics.instance;
-  }
 
-  FirebaseAnalytics get analytics {
-    return FirebaseAnalytics.instance;
-  }
+  FirebaseAuth get auth =>
+    FirebaseAuth.instance;
+
+
+  FirebaseCrashlytics get crashlytics =>
+    FirebaseCrashlytics.instance;
+
+
+  FirebaseAnalytics get analytics =>
+    FirebaseAnalytics.instance;
+
+
+  FirebaseRemoteConfig get remoteConfig =>
+    FirebaseRemoteConfig.instance;
+
 
   bool get isEmulatorUsageEnabled => _useEmulator;
 

@@ -1,6 +1,8 @@
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
+import 'package:dhyana/widget/util/app_animation.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
 class PresenceListItem extends StatelessWidget {
@@ -16,19 +18,29 @@ class PresenceListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfileImage(
-          photoUrl: presence.profile.photoUrl,
-          photoBlurhash: presence.profile.photoBlurhash,
-          size: 48,
+        DecoratedBox(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: ProfileImage(
+              photoUrl: presence.profile.photoUrl,
+              photoBlurhash: presence.profile.photoBlurhash,
+              size: 56,
+            ),
+          ),
         ),
-        const SizedBox(height: AppThemeData.spacingSm),
+        Gap.small(),
         Text(
           presence.profile.firstName,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
-            color: Colors.white,
+            color: Colors.black,
             // fontWeight: FontWeight.bold
           ),
-        )
+        ),
+        Gap.medium(),
       ],
     );
   }

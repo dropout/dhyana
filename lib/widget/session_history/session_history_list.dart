@@ -3,20 +3,20 @@ import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ActivityList extends StatefulWidget {
+class SessionHistoryList extends StatefulWidget {
 
   final List<Session> sessions;
 
-  const ActivityList({
+  const SessionHistoryList({
     required this.sessions,
     super.key
   });
 
   @override
-  State<ActivityList> createState() => _ActivityListState();
+  State<SessionHistoryList> createState() => _SessionHistoryListState();
 }
 
-class _ActivityListState extends State<ActivityList> {
+class _SessionHistoryListState extends State<SessionHistoryList> {
 
   @override
   Widget build(BuildContext context) {

@@ -47,8 +47,8 @@ class Initializer {
     Services services = Services(
       sharedPreferences: sharedPreferences,
       hapticsService: hapticsService,
-      firebaseAnalytics: FirebaseAnalytics.instance,
-      firebaseCrashlytics: FirebaseCrashlytics.instance,
+      firebaseAnalytics: firebaseProvider.analytics,
+      firebaseCrashlytics: firebaseProvider.crashlytics,
       firebaseFirestore: firebaseProvider.firestore,
       resourceResolver: resourceResolver,
     );
@@ -67,16 +67,18 @@ class Initializer {
       profileDataProvider: profileDataProvider,
       storageDataProvider: storageDataProvider,
     );
-    PresenceRepository presenceRepository = FirebasePresenceRepository(
-      presenceDataProvider: FirebasePresenceDataProvider(
-        FirebaseFirestore.instance
-      )
-    );
+
+    // PresenceRepository presenceRepository = FirebasePresenceRepository(
+    //   presenceDataProvider: FirebasePresenceDataProvider(
+    //     FirebaseFirestore.instance
+    //   )
+    // );
 
     // StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
     //   dataProviderFactory: FirebaseDataProviderFactory(fireStore: FirebaseFirestore.instance)
     // );
 
+    PresenceRepository presenceRepository = StubbedPresenceRepository();
     StatisticsRepository statisticsRepository = StubbedStatisticsRepository();
 
     TimerSettingsHistoryRepository timerSettingsHistoryRepository =

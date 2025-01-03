@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:dhyana/model/factory/all.dart';
+import 'package:dhyana/widget/app_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/model/timer_settings.dart';
 
 import 'crashlytics_service.dart';
 
 class TimerSettingsSharedPrefsService {
-
-  static const String sharedPreferencesKey = 'timerSettings';
 
   final CrashlyticsService crashlyticsService;
   final SharedPreferences sharedPrefs;
@@ -20,7 +19,9 @@ class TimerSettingsSharedPrefsService {
 
   TimerSettings getTimerSettings() {
 
-    String? timerSettingsJson = sharedPrefs.getString(sharedPreferencesKey);
+    String? timerSettingsJson = sharedPrefs.getString(
+      AppSharedPrefsKeys.timerSettings
+    );
 
     // Fallback to default if no entry found
     if (timerSettingsJson == null) {
@@ -47,7 +48,7 @@ class TimerSettingsSharedPrefsService {
     try {
       Map<String, dynamic> dataMap = timerSettings.toJson();
       String jsonString = const JsonEncoder().convert(dataMap);
-      sharedPrefs.setString(sharedPreferencesKey, jsonString);
+      sharedPrefs.setString(AppSharedPrefsKeys.timerSettings, jsonString);
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

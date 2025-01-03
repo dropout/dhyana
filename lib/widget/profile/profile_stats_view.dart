@@ -270,55 +270,48 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
 
   List<Widget> buildDefaultHeaderSlivers(BuildContext context) {
     return [
-      buildAppBar(context),
+      buildAppBar(context, titleText: AppLocalizations.of(context).profileStats),
     ];
   }
 
-  List<Widget> buildProfileLoadedHeaderSlivers(BuildContext context, Profile profile) {
+  List<Widget> buildProfileLoadedHeaderSlivers(
+    BuildContext context,
+    Profile profile
+  ) {
     return [
-      buildAppBar(context),
+      buildAppBar(context, titleText: AppLocalizations.of(context).profileStats),
       buildProfileDetails(context, profile),
-
     ];
   }
 
-  Widget buildAppBar(BuildContext context) {
-    return SliverAppBar(
-      centerTitle: false,
-      elevation: 0,
-      // stretch: true, // Not working?
-      floating: false,
-      pinned: true,
-      scrolledUnderElevation: 0.0, // Material design wierd transparency effect
-      backgroundColor: AppColors.backgroundPaper,
-      leading: const Padding(
-        padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0,),
-        child: CustomBackButton()
-      ),
-      leadingWidth: 64,
-      title: Transform.translate(
-        offset: Offset(0, AppThemeData.spacingSm * (1.0 - titleEffectRatio)),
-        child: Opacity(
-          opacity: titleEffectRatio,
-          child: Text(
-            AppLocalizations.of(context).profileStats,
-            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildTitle(BuildContext context, String title) {
-    return Text(
-      title,
-      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
+  // Widget buildAppBar(BuildContext context) {
+  //   return SliverAppBar(
+  //     centerTitle: false,
+  //     elevation: 0,
+  //     // stretch: true, // Not working?
+  //     floating: false,
+  //     pinned: true,
+  //     scrolledUnderElevation: 0.0, // Material design wierd transparency effect
+  //     backgroundColor: AppColors.backgroundPaper,
+  //     leading: const Padding(
+  //       padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0,),
+  //       child: CustomBackButton()
+  //     ),
+  //     leadingWidth: 64,
+  //     title: Transform.translate(
+  //       offset: Offset(0, AppThemeData.spacingSm * (1.0 - titleEffectRatio)),
+  //       child: Opacity(
+  //         opacity: titleEffectRatio,
+  //         child: Text(
+  //           AppLocalizations.of(context).profileStats,
+  //           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget buildProfileDetails(BuildContext context, Profile profile) {
     return SliverToBoxAdapter(

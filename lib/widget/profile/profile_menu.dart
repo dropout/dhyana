@@ -15,7 +15,7 @@ class ProfileMenu extends StatelessWidget {
   });
 
   void _onActivityTapped(BuildContext context) {
-    ActivityRoute().push(context);
+    SessionHistoryRoute().push(context);
     context.hapticsTap();
   }
 

@@ -1,5 +1,6 @@
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/presence/presence_button.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer/settings_history/all.dart';
@@ -61,6 +62,8 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: CustomAppBar(
         trailing: [
+          buildPresenceButton(context),
+
           SignedIn(
             yes: (context, user) {
               return TimerSettingsHistoryButton(profileId: user.uid);
@@ -90,6 +93,16 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
         timerSettings: timerSettings,
       ),
     );
+  }
+
+  Widget buildPresenceButton(BuildContext context) {
+    return PresenceButton();
+    // return IconButton(
+    //   icon: const Icon(Icons.person),
+    //   onPressed: () {
+    //     const ProfileRoute().go(context);
+    //   },
+    // );
   }
 
 }

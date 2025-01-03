@@ -9,9 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PresenceBlocProvider extends StatelessWidget {
 
   final Widget child;
+  final PresenceEvent? initialEvent;
 
   const PresenceBlocProvider({
     required this.child,
+    this.initialEvent,
     super.key
   });
 
@@ -21,15 +23,17 @@ class PresenceBlocProvider extends StatelessWidget {
     Repositories repos = context.repos;
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (BuildContext context, AuthState authState) {
+        PresenceBloc presenceBloc = PresenceBloc(
+          presenceRepository: repos.presenceRepository,
+          authRepository: repos.authRepository,
+          profileRepository: repos.profileRepository,
+          crashlyticsService: services.crashlyticsService,
+        );
+        if (initialEvent != null) {
+          presenceBloc.add(initialEvent!);
+        }
         return BlocProvider<PresenceBloc>(
-          create: (BuildContext context) {
-            return PresenceBloc(
-              presenceRepository: repos.presenceRepository,
-              authRepository: repos.authRepository,
-              profileRepository: repos.profileRepository,
-              crashlyticsService: services.crashlyticsService,
-            );
-          },
+          create: (BuildContext context) => presenceBloc,
           child: child,
         );
       }

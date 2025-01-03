@@ -37,6 +37,7 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
   void _onLoadPresenceData(LoadPresenceData event, emit) async {
     logger.t('Loading presence data');
     try {
+      emit(PresenceState.loading());
       List<Presence> presenceList = await presenceRepository
         .getPresence(event.ownProfileId);
       logger.t('Loaded ${presenceList.length} presence items');
@@ -46,7 +47,7 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to presence data'
+        reason: 'Unable to load presence data'
       );
     }
   }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 Curve _curve = Curves.easeOut;
-int _interval = 64;
-int _duration = 512;
+int _interval = 32;
+int _duration = 640;
 
 extension RevealListAnimation on List<Widget> {
 

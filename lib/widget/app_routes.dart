@@ -15,7 +15,7 @@ part 'app_routes.g.dart';
 GoRouter createAppRouter({required InitResult initResult}) {
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
-    navigatorKey: AppKeys.rootNavigatorKey,
+    navigatorKey: AppWidgetKeys.rootNavigatorKey,
     initialLocation: '/',
     initialExtra: initResult.timerSettings,
     routes: $appRoutes,
@@ -164,15 +164,15 @@ class EditProfileRoute extends GoRouteData with AuthRedirectHook {
     authRedirectHook(context, state);
 }
 
-@TypedGoRoute<ActivityRoute>(
+@TypedGoRoute<SessionHistoryRoute>(
   path: '/activity',
   name: 'ACTIVITY',
 )
-class ActivityRoute extends GoRouteData with AuthRedirectHook {
-  const ActivityRoute();
+class SessionHistoryRoute extends GoRouteData with AuthRedirectHook {
+  const SessionHistoryRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ActivityScreen();
+    SessionHistoryScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
@@ -188,6 +188,20 @@ class TimerSettingsHistoryRoute extends GoRouteData with AuthRedirectHook {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
     TimerSettingsHistoryScreen(profileId: profileId);
+  @override
+  String? redirect(BuildContext context, GoRouterState state) =>
+    authRedirectHook(context, state);
+}
+
+@TypedGoRoute<PresenceRoute>(
+  path: '/presence',
+  name: 'PRESENCE',
+)
+class PresenceRoute extends GoRouteData with AuthRedirectHook {
+  const PresenceRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+    PresenceScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
