@@ -6,30 +6,58 @@ import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:faker/faker.dart';
 
-final List<String> firstNames = ['Liam', 'Olivia', 'Noah', 'Emma', 'Oliver', 'Ava', 'Elijah', 'Sophia', 'William', 'Isabella', 'James', 'Mia', 'Benjamin', 'Charlotte', 'Lucas', 'Amelia', 'Henry', 'Harper', 'Alexander', 'Evelyn'];
+final List<String> maleFirstnames = ['James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Charles', 'Christopher', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth'];
+final List<String> femaleFirstnames = ['Olivia', 'Ava', 'Sophia', 'Isabella', 'Mia', 'Amelia', 'Harper', 'Evelyn', 'Abigail', 'Ella', 'Avery', 'Scarlett', 'Grace', 'Madison', 'Lily', 'Chloe', 'Aria', 'Zoey', 'Charlotte'];
+final List<String> lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Martinez', 'Rodriguez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson', 'White', 'Harris'];
 
-String randomFirstName() {
-  return firstNames[Random().nextInt(firstNames.length)];
+String randomName(List<String> names) {
+  return names[Random().nextInt(names.length)];
 }
+
+enum _Gender {
+  male,
+  female,
+}
+
+PublicProfile _randomPublicProfile(_Gender gender) {
+  final Faker faker = Faker();
+  int randomInt = Random().nextInt(100);
+
+  switch (gender) {
+    case _Gender.male:
+      return PublicProfile(
+        id: faker.guid.guid(),
+        firstName: randomName(maleFirstnames),
+        lastName: randomName(lastNames),
+        photoUrl: 'https://randomuser.me/api/portraits/thumb/men/$randomInt.jpg',
+        photoBlurhash: DefaultProfileData.photoBlurhash,
+      );
+    case _Gender.female:
+      return PublicProfile(
+        id: faker.guid.guid(),
+        firstName: randomName(femaleFirstnames),
+        lastName: randomName(lastNames),
+        photoUrl: 'https://randomuser.me/api/portraits/thumb/men/$randomInt.jpg',
+        photoBlurhash: DefaultProfileData.photoBlurhash,
+      );
+      break;
+  }
+}
+
 
 class StubbedPresenceRepository implements PresenceRepository {
 
-  Faker _faker = Faker();
+  final Faker _faker = Faker();
 
   @override
   Future<List<Presence>> getPresence(String? ownProfileId) async {
     await Future.delayed(Duration(seconds: 1));
+    _Gender randomGender = Random().nextInt(2) % 2 == 0 ? _Gender.male : _Gender.female;
     return Future.sync(() {
       return List<Presence>.generate(20, (index) {
         return Presence(
-          id: 'presence-id-$index',
-          profile: PublicProfile(
-            id: _faker.guid.guid(),
-            firstName: randomFirstName(),
-            lastName: 'Lastname',
-            photoUrl: 'https://randomuser.me/api/portraits/thumb/men/${index}.jpg',
-            photoBlurhash: DefaultProfileData.photoBlurhash,
-          ),
+          id: _faker.guid.guid(),
+          profile: _randomPublicProfile(randomGender),
           startedAt: DateTime.now().subtract(Duration(minutes: 1 + index * 3)),
         );
       });
