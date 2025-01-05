@@ -1,8 +1,10 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/timer/running/timer_running_overlay.dart';
+import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
@@ -10,65 +12,24 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/timer_completed_view.dart';
 import 'package:dhyana/widget/timer/timer_running_view.dart';
 
-class TimerRunningScreen extends StatelessWidget {
+class TimerRunningScreen extends StatefulWidget {
 
   final TimerSettings timerSettings;
 
   const TimerRunningScreen({
     required this.timerSettings,
-    super.key
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TimerRunningBlocProvider(
-      timerSettings: timerSettings,
-      child: TimerRunningScreenContent(
-        timerSettings: timerSettings,
-      ),
-    );
-  }
-
-}
-
-class TimerRunningScreenContent extends StatefulWidget {
-
-  final TimerSettings timerSettings;
-
-  const TimerRunningScreenContent({
-    required this.timerSettings,
     super.key,
   });
 
   @override
-  State<TimerRunningScreenContent> createState() => _TimerRunningScreenContentState();
+  State<TimerRunningScreen> createState() => _TimerRunningScreenState();
 }
 
-class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
+class _TimerRunningScreenState extends State<TimerRunningScreen> {
 
-  bool isOverlayEnabled = false;
+  bool showOverlay = false;
 
-  void _onInit(BuildContext context) {
-
-    // Start the timer
-    TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
-    timerBloc.add(TimerEvent.started());
-
-    // Show presence
-    PresenceBloc presenceBloc = BlocProvider.of<PresenceBloc>(context);
-    presenceBloc.add(const PresenceEvent.showPresence());
-
-    // Save the timer settings to timer settings history
-    TimerSettingsHistoryBloc timerSettingsHistoryBloc =
-        BlocProvider.of<TimerSettingsHistoryBloc>(context);
-    timerSettingsHistoryBloc.add(
-      TimerSettingsHistoryEvent.saveSettings(
-        timerSettings: widget.timerSettings
-      )
-    );
-
-  }
-
+  // Handle going into background
   void Function() _onBackground(BuildContext context) {
     TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
     return () {
@@ -76,6 +37,7 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
     };
   }
 
+  // Handle resuming from background
   void Function() _onResume(BuildContext context) {
     TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
     return () {
@@ -83,20 +45,39 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
     };
   }
 
-  // void _onOverlayToggle
+  // Show black overlay
+  void _onOverlayTargetTapped(BuildContext context) {
+    setState(() {
+      showOverlay = false;
+    });
+  }
+
+  // Hide black overlay
+  void _onOverlayClickTargetTapped(BuildContext context) {
+    setState(() {
+      showOverlay = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    return TimerRunningBlocProvider(
+      timerSettings: widget.timerSettings,
+      child: buildScaffolding(context),
+    );
+  }
+
+  Widget buildScaffolding(BuildContext context) {
     return BlocBuilder<TimerBloc, TimerState>(
-      builder: (BuildContext context, TimerState state) {
+      builder: (BuildContext context, TimerState timerState) {
         return Scaffold(
           backgroundColor: Colors.black,
           body: Stack(
             fit: StackFit.expand,
             clipBehavior: Clip.none,
             children: [
-              buildBody(context, state),
-              buildOverlay(context, state),
+              buildContent(context, timerState),
+              buildOverlay(context, timerState),
             ],
           ),
         );
@@ -104,7 +85,7 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
     );
   }
 
-  Widget buildBody(BuildContext context, TimerState timerState) {
+  Widget buildContent(BuildContext context, TimerState timerState) {
     TextTheme textTheme = Theme.of(context).textTheme;
     ThemeData themeData = Theme.of(context).copyWith(
       textTheme: textTheme.apply(
@@ -121,80 +102,76 @@ class _TimerRunningScreenContentState extends State<TimerRunningScreenContent> {
       crossFadeState = CrossFadeState.showFirst;
     }
 
-    return Scaffold(
-        backgroundColor: Colors.black,
-        body: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            buildOverlayClickTarget(context),
-            SafeArea(
-              child: Theme(
-                data: themeData,
-                child: AnimatedCrossFade(
-                  duration: const Duration(milliseconds: 256),
-                  firstChild: TimerRunningView(
-                    timerState: timerState,
-                    onInit: () => _onInit(context),
-                    onBackground: _onBackground(context),
-                    onResume: _onResume(context),
-                  ),
-                  secondChild: TimerCompletedView(
-                    timerState: timerState,
-                  ),
-                  layoutBuilder: (Widget firstChild, Key firstKey, Widget secondChild, Key secondKey) {
-                    return Stack(
-                      alignment: Alignment.center,
-                      fit: StackFit.expand,
-                      clipBehavior: Clip.none,
-                      children: <Widget>[
-                        Positioned.fill(
-                          key: secondKey,
-                          top: 0,
-                          child: secondChild,
-                        ),
-                        Positioned.fill(
-                          key: firstKey,
-                          top: 0,
-                          child: firstChild,
-                        ),
-                      ],
-                    );
-                  },
-                  crossFadeState: crossFadeState,
-                )
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        buildOverlayClickTarget(context),
+        SafeArea(
+          child: Theme(
+            data: themeData,
+            child: AnimatedCrossFade(
+              duration: const Duration(milliseconds: 256),
+              crossFadeState: crossFadeState,
+
+              firstChild: TimerRunningView(
+                timerState: timerState,
+                onBackground: _onBackground(context),
+                onResume: _onResume(context),
               ),
-            ),
-          ],
-        )
+
+              secondChild: TimerCompletedView(
+                timerState: timerState,
+              ),
+
+              layoutBuilder: (
+                Widget firstChild,
+                Key firstKey,
+                Widget secondChild,
+                Key secondKey,
+              ) {
+                return Stack(
+                  alignment: Alignment.center,
+                  fit: StackFit.expand,
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Positioned.fill(
+                      key: secondKey,
+                      top: 0,
+                      child: secondChild,
+                    ),
+                    Positioned.fill(
+                      key: firstKey,
+                      top: 0,
+                      child: firstChild,
+                    ),
+                  ],
+                );
+              },
+
+            )
+          ),
+        ),
+      ],
     );
   }
 
   Widget buildOverlayClickTarget(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          setState(() {
-            isOverlayEnabled = true;
-          });
-        },
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black,
-        )
+      onTap: () => _onOverlayClickTargetTapped(context),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.black,
+      )
     );
   }
 
   Widget buildOverlay(BuildContext context, TimerState timerState) {
     // If the timer is completed, this should be false anyway
     final bool shouldShowOverlay =
-      isOverlayEnabled && timerState.timerStatus != TimerStatus.completed;
-
+      showOverlay && timerState.timerStatus != TimerStatus.completed;
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          isOverlayEnabled = false;
-        });
-      },
+      onTap: () => _onOverlayTargetTapped(context),
       child: TimerRunningOverlay(
         isEnabled: shouldShowOverlay
       ),

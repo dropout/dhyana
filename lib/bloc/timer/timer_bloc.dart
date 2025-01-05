@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dhyana/repository/all.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final TimerSettings timerSettings;
   final TimerServiceFactory timerServiceFactory;
   final AudioService audioService;
-
   final CrashlyticsService crashlyticsService;
 
   TimerService? warmupTimer;
@@ -44,7 +44,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   late final StreamSubscription _durationTickerSub;
   late final StreamSubscription _durationFinishedSub;
 
-  final void Function(TimerState)? onComplete;
+  void Function(TimerState)? onComplete;
 
   TimerBloc({
     required this.timerSettings,

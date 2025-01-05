@@ -1,8 +1,12 @@
+import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default_audio_service.dart';
 import 'package:dhyana/service/default_timer_service.dart';
@@ -14,79 +18,112 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TimerRunningBlocProvider extends StatelessWidget {
 
-  final TimerSettings timerSettings;
   final Widget child;
+  final TimerSettings timerSettings;
 
   const TimerRunningBlocProvider({
-    required this.timerSettings,
     required this.child,
-    super.key
+    required this.timerSettings,
+    super.key,
   });
-
-  void _onSignedTimerCompleted(
-    BuildContext context,
-    TimerState timerState,
-    String profileId
-  ) {
-    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
-    profileBloc.add(ProfileEvent.logSession(
-      profileId: profileId,
-      startTime: timerState.startTime ?? DateTime.now().subtract(timerState.timerSettings.duration),
-      endTime: timerState.endTime ?? DateTime.now(),
-      duration: timerState.timerSettings.duration,
-      timerSettings: timerSettings
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
-    return SignedIn(
-      yes: (context, user) {
-        return buildBlocProviders(context,
-          onTimerCompleted: (timerState) =>
-            _onSignedTimerCompleted(context, timerState, user.uid),
-        );
-      },
-      no: buildBlocProviders(context),
-    );
-  }
-
-  Widget buildBlocProviders(BuildContext context, {
-    Function(TimerState timerState)? onTimerCompleted,
-  }) {
     Services services = context.services;
     Repositories repos = context.repos;
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider<TimerBloc>(
-            create: (_) {
-              return TimerBloc(
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (BuildContext context, AuthState authState) {
+        final bool isSignedIn = (authState is AuthStateSignedIn);
+        final String? profileId = (isSignedIn) ? authState.user.uid : null;
+
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<TimerBloc>(
+              create: (BuildContext context) {
+                final TimerBloc timerBloc = TimerBloc(
                   timerSettings: timerSettings,
                   timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
                       DefaultTimerService.new
                   ),
                   audioService: DefaultAudioService(),
                   crashlyticsService: services.crashlyticsService,
-                  onComplete: (TimerState state) async {
-                    onTimerCompleted?.call(state);
-                  }
+                );
+
+                // Start the timer
+                timerBloc.add(const TimerEvent.started());
+
+                // Save the timer settings to timer settings history,
+                // if the profile is loaded
+                if (isSignedIn) {
+                  BlocProvider.of<TimerSettingsHistoryBloc>(context).add(
+                    TimerSettingsHistoryEvent.saveSettings(
+                      timerSettings: timerSettings.copyWith(
+                        lastUsed: DateTime.now(),
+                      ),
+                      profileId: profileId!,
+                    )
+                  );
+                }
+                return timerBloc;
+              },
+              lazy: false,
+            ),
+            BlocProvider<PresenceBloc>(
+              create: (_) {
+                final PresenceBloc presenceBloc = PresenceBloc(
+                  presenceRepository: repos.presenceRepository,
+                  profileRepository: repos.profileRepository,
+                  crashlyticsService: services.crashlyticsService,
+                );
+
+                // Show the presence if user is signed in
+                if (isSignedIn) {
+                  presenceBloc.add(
+                    PresenceEvent.showPresence(profileId: profileId!)
+                  );
+                }
+
+                return presenceBloc;
+              },
+              lazy: false,
+            ),
+          ],
+          child: _TimerCompletedListener(child: child),
+        );
+      },
+    );
+  }
+
+}
+
+class _TimerCompletedListener extends StatelessWidget {
+
+  final Widget child;
+
+  const _TimerCompletedListener({
+    required this.child,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (_, ProfileState profileState) {
+        return BlocListener<TimerBloc, TimerState>(
+          listener: (BuildContext context, TimerState timerState) {
+            if (profileState is ProfileLoadedState) {
+              BlocProvider.of<PresenceBloc>(context).add(
+                PresenceEvent.load(ownProfileId: profileState.profile.id)
               );
-            },
-            lazy: false,
-          ),
-          BlocProvider<PresenceBloc>(
-            create: (_) {
-              return PresenceBloc(
-                presenceRepository: repos.presenceRepository,
-                authRepository: repos.authRepository,
-                profileRepository: repos.profileRepository,
-                crashlyticsService: services.crashlyticsService,
-              );
-            },
-            lazy: false,
-          ),
-        ],
-        child: child
+            }
+          },
+          listenWhen: (TimerState prevState, TimerState currentState) {
+            return prevState.timerStatus != TimerStatus.completed
+              && currentState.timerStatus == TimerStatus.completed;
+          },
+          child: child,
+        );
+      },
     );
   }
 

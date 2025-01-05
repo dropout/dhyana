@@ -19,19 +19,19 @@ mixin _$PresenceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? ownProfileId) load,
-    required TResult Function() showPresence,
+    required TResult Function(String profileId) showPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? ownProfileId)? load,
-    TResult? Function()? showPresence,
+    TResult? Function(String profileId)? showPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? ownProfileId)? load,
-    TResult Function()? showPresence,
+    TResult Function(String profileId)? showPresence,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,7 +148,7 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? ownProfileId) load,
-    required TResult Function() showPresence,
+    required TResult Function(String profileId) showPresence,
   }) {
     return load(ownProfileId);
   }
@@ -157,7 +157,7 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? ownProfileId)? load,
-    TResult? Function()? showPresence,
+    TResult? Function(String profileId)? showPresence,
   }) {
     return load?.call(ownProfileId);
   }
@@ -166,7 +166,7 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? ownProfileId)? load,
-    TResult Function()? showPresence,
+    TResult Function(String profileId)? showPresence,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -226,6 +226,8 @@ abstract class _$$ShowPresenceImplCopyWith<$Res> {
   factory _$$ShowPresenceImplCopyWith(
           _$ShowPresenceImpl value, $Res Function(_$ShowPresenceImpl) then) =
       __$$ShowPresenceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String profileId});
 }
 
 /// @nodoc
@@ -238,54 +240,80 @@ class __$$ShowPresenceImplCopyWithImpl<$Res>
 
   /// Create a copy of PresenceEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? profileId = null,
+  }) {
+    return _then(_$ShowPresenceImpl(
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ShowPresenceImpl extends ShowPresence {
-  const _$ShowPresenceImpl() : super._();
+  const _$ShowPresenceImpl({required this.profileId}) : super._();
+
+  @override
+  final String profileId;
 
   @override
   String toString() {
-    return 'PresenceEvent.showPresence()';
+    return 'PresenceEvent.showPresence(profileId: $profileId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ShowPresenceImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ShowPresenceImpl &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, profileId);
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowPresenceImplCopyWith<_$ShowPresenceImpl> get copyWith =>
+      __$$ShowPresenceImplCopyWithImpl<_$ShowPresenceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? ownProfileId) load,
-    required TResult Function() showPresence,
+    required TResult Function(String profileId) showPresence,
   }) {
-    return showPresence();
+    return showPresence(profileId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? ownProfileId)? load,
-    TResult? Function()? showPresence,
+    TResult? Function(String profileId)? showPresence,
   }) {
-    return showPresence?.call();
+    return showPresence?.call(profileId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? ownProfileId)? load,
-    TResult Function()? showPresence,
+    TResult Function(String profileId)? showPresence,
     required TResult orElse(),
   }) {
     if (showPresence != null) {
-      return showPresence();
+      return showPresence(profileId);
     }
     return orElse();
   }
@@ -323,8 +351,17 @@ class _$ShowPresenceImpl extends ShowPresence {
 }
 
 abstract class ShowPresence extends PresenceEvent {
-  const factory ShowPresence() = _$ShowPresenceImpl;
+  const factory ShowPresence({required final String profileId}) =
+      _$ShowPresenceImpl;
   const ShowPresence._() : super._();
+
+  String get profileId;
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ShowPresenceImplCopyWith<_$ShowPresenceImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

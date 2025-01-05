@@ -6,6 +6,7 @@ class TimerSettingsHistoryEvent with _$TimerSettingsHistoryEvent {
   const factory TimerSettingsHistoryEvent.started() = _Started;
 
   const factory TimerSettingsHistoryEvent.saveSettings({
+    required String profileId,
     required TimerSettings timerSettings,
   }) = SaveTimerSettingsHistoryEvent;
 

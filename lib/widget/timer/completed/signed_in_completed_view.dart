@@ -9,16 +9,13 @@ import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SignedInCompletedView extends StatefulWidget {
 
   final void Function()? onInit;
   final TimerState timerState;
-  final User user;
 
   const SignedInCompletedView({
     required this.timerState,
-    required this.user,
     this.onInit,
     super.key
   });

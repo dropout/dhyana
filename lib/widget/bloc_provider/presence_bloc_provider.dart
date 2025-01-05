@@ -25,7 +25,6 @@ class PresenceBlocProvider extends StatelessWidget {
       builder: (BuildContext context, AuthState authState) {
         PresenceBloc presenceBloc = PresenceBloc(
           presenceRepository: repos.presenceRepository,
-          authRepository: repos.authRepository,
           profileRepository: repos.profileRepository,
           crashlyticsService: services.crashlyticsService,
         );

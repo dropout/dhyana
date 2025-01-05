@@ -1,5 +1,7 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/init/all.dart';
 import 'package:dhyana/init/init_result.dart';
+import 'package:dhyana/repository/all.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,5 +38,10 @@ extension AppContext on BuildContext {
 
   InitResult get initResult =>
     Provider.of<InitResult>(this, listen: false);
+
+  bool get isSignedIn {
+    AuthBloc authBloc = Provider.of<AuthBloc>(this, listen: false);
+    return (authBloc.state is AuthStateSignedIn);
+  }
 
 }

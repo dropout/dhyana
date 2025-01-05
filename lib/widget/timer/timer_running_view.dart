@@ -25,7 +25,8 @@ class TimerRunningView extends StatefulWidget {
   State<TimerRunningView> createState() => _TimerRunningViewState();
 }
 
-class _TimerRunningViewState extends State<TimerRunningView> with WidgetsBindingObserver {
+class _TimerRunningViewState extends State<TimerRunningView>
+  with WidgetsBindingObserver {
 
   @override
   initState() {

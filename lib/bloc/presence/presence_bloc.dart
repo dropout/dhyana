@@ -20,13 +20,11 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
   final Logger logger = getLogger('PresenceBloc');
 
   final PresenceRepository presenceRepository;
-  final AuthRepository authRepository;
   final ProfileRepository profileRepository;
   final CrashlyticsService crashlyticsService;
 
   PresenceBloc({
     required this.presenceRepository,
-    required this.authRepository,
     required this.profileRepository,
     required this.crashlyticsService,
   }) : super(const PresenceState.initial()) {
@@ -54,12 +52,7 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
 
   void _onShowPresence(ShowPresence event, emit) async {
     try {
-      User? user = await authRepository.user;
-      if (user == null) {
-        logger.t('User is not signed in, not showing presence.');
-        return;
-      }
-      Profile profile = await profileRepository.read(user.uid);
+      Profile profile = await profileRepository.read(event.profileId);
       if (profile.completed) {
         await presenceRepository.showPresence(Presence(
           id: profile.id,

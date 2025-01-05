@@ -27,7 +27,6 @@ class TimerSettingsHistoryBloc
     required this.authRepository,
     required this.crashlyticsService,
   }) : super(const TimerSettingsHistoryState.initial()) {
-    
     on<SaveTimerSettingsHistoryEvent>(_onSaveTimerSettingsHistory);
     on<LoadTimerSettingsHistoryEvent>(_onLoadTimerSettingsHistory);
   }
@@ -54,23 +53,16 @@ class TimerSettingsHistoryBloc
 
   void _onSaveTimerSettingsHistory(SaveTimerSettingsHistoryEvent event, emit) async {
     try {
-      User? user = await authRepository.user;
-      if (user == null) {
-        logger.t('User is not signed in, not saving timer settings to history.');
-        return;
-      }
       await timerSettingsHistoryRepository.saveSettings(
-        user.uid,
-        event.timerSettings.copyWith(
-          lastUsed: DateTime.now(),
-        )
+        event.profileId,
+        event.timerSettings
       );
       logger.t('Timer settings successfully saved.');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to timer save timer settings to history!'
+        reason: 'Unable to timer save timer settings to timer settings history!'
       );
     }
   }

@@ -65,8 +65,8 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           buildPresenceButton(context),
 
           SignedIn(
-            yes: (context, user) {
-              return TimerSettingsHistoryButton(profileId: user.uid);
+            yes: (context, profileId) {
+              return TimerSettingsHistoryButton(profileId: profileId);
             }
           ),
           const ProfileButton(),

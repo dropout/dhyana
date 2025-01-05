@@ -19,21 +19,24 @@ mixin _$TimerSettingsHistoryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(TimerSettings timerSettings) saveSettings,
+    required TResult Function(String profileId, TimerSettings timerSettings)
+        saveSettings,
     required TResult Function(String profileId) loadSettingsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(TimerSettings timerSettings)? saveSettings,
+    TResult? Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult? Function(String profileId)? loadSettingsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(TimerSettings timerSettings)? saveSettings,
+    TResult Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) =>
@@ -127,7 +130,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(TimerSettings timerSettings) saveSettings,
+    required TResult Function(String profileId, TimerSettings timerSettings)
+        saveSettings,
     required TResult Function(String profileId) loadSettingsList,
   }) {
     return started();
@@ -137,7 +141,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(TimerSettings timerSettings)? saveSettings,
+    TResult? Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult? Function(String profileId)? loadSettingsList,
   }) {
     return started?.call();
@@ -147,7 +152,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(TimerSettings timerSettings)? saveSettings,
+    TResult Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) {
@@ -204,7 +210,7 @@ abstract class _$$SaveTimerSettingsHistoryEventImplCopyWith<$Res> {
           $Res Function(_$SaveTimerSettingsHistoryEventImpl) then) =
       __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({TimerSettings timerSettings});
+  $Res call({String profileId, TimerSettings timerSettings});
 
   $TimerSettingsCopyWith<$Res> get timerSettings;
 }
@@ -224,9 +230,14 @@ class __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? profileId = null,
     Object? timerSettings = null,
   }) {
     return _then(_$SaveTimerSettingsHistoryEventImpl(
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
       timerSettings: null == timerSettings
           ? _value.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
@@ -249,14 +260,17 @@ class __$$SaveTimerSettingsHistoryEventImplCopyWithImpl<$Res>
 
 class _$SaveTimerSettingsHistoryEventImpl
     implements SaveTimerSettingsHistoryEvent {
-  const _$SaveTimerSettingsHistoryEventImpl({required this.timerSettings});
+  const _$SaveTimerSettingsHistoryEventImpl(
+      {required this.profileId, required this.timerSettings});
 
+  @override
+  final String profileId;
   @override
   final TimerSettings timerSettings;
 
   @override
   String toString() {
-    return 'TimerSettingsHistoryEvent.saveSettings(timerSettings: $timerSettings)';
+    return 'TimerSettingsHistoryEvent.saveSettings(profileId: $profileId, timerSettings: $timerSettings)';
   }
 
   @override
@@ -264,12 +278,14 @@ class _$SaveTimerSettingsHistoryEventImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SaveTimerSettingsHistoryEventImpl &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, timerSettings);
+  int get hashCode => Object.hash(runtimeType, profileId, timerSettings);
 
   /// Create a copy of TimerSettingsHistoryEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -285,32 +301,35 @@ class _$SaveTimerSettingsHistoryEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(TimerSettings timerSettings) saveSettings,
+    required TResult Function(String profileId, TimerSettings timerSettings)
+        saveSettings,
     required TResult Function(String profileId) loadSettingsList,
   }) {
-    return saveSettings(timerSettings);
+    return saveSettings(profileId, timerSettings);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(TimerSettings timerSettings)? saveSettings,
+    TResult? Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult? Function(String profileId)? loadSettingsList,
   }) {
-    return saveSettings?.call(timerSettings);
+    return saveSettings?.call(profileId, timerSettings);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(TimerSettings timerSettings)? saveSettings,
+    TResult Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) {
     if (saveSettings != null) {
-      return saveSettings(timerSettings);
+      return saveSettings(profileId, timerSettings);
     }
     return orElse();
   }
@@ -354,9 +373,11 @@ class _$SaveTimerSettingsHistoryEventImpl
 abstract class SaveTimerSettingsHistoryEvent
     implements TimerSettingsHistoryEvent {
   const factory SaveTimerSettingsHistoryEvent(
-          {required final TimerSettings timerSettings}) =
+          {required final String profileId,
+          required final TimerSettings timerSettings}) =
       _$SaveTimerSettingsHistoryEventImpl;
 
+  String get profileId;
   TimerSettings get timerSettings;
 
   /// Create a copy of TimerSettingsHistoryEvent
@@ -443,7 +464,8 @@ class _$LoadTimerSettingsHistoryEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(TimerSettings timerSettings) saveSettings,
+    required TResult Function(String profileId, TimerSettings timerSettings)
+        saveSettings,
     required TResult Function(String profileId) loadSettingsList,
   }) {
     return loadSettingsList(profileId);
@@ -453,7 +475,8 @@ class _$LoadTimerSettingsHistoryEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(TimerSettings timerSettings)? saveSettings,
+    TResult? Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult? Function(String profileId)? loadSettingsList,
   }) {
     return loadSettingsList?.call(profileId);
@@ -463,7 +486,8 @@ class _$LoadTimerSettingsHistoryEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(TimerSettings timerSettings)? saveSettings,
+    TResult Function(String profileId, TimerSettings timerSettings)?
+        saveSettings,
     TResult Function(String profileId)? loadSettingsList,
     required TResult orElse(),
   }) {

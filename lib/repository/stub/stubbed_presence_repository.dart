@@ -21,8 +21,7 @@ enum _Gender {
 
 PublicProfile _randomPublicProfile(_Gender gender) {
   final Faker faker = Faker();
-  int randomInt = Random().nextInt(100);
-
+  int randomInt = Random().nextInt(20);
   switch (gender) {
     case _Gender.male:
       return PublicProfile(
@@ -37,10 +36,9 @@ PublicProfile _randomPublicProfile(_Gender gender) {
         id: faker.guid.guid(),
         firstName: randomName(femaleFirstnames),
         lastName: randomName(lastNames),
-        photoUrl: 'https://randomuser.me/api/portraits/thumb/men/$randomInt.jpg',
+        photoUrl: 'https://randomuser.me/api/portraits/thumb/women/$randomInt.jpg',
         photoBlurhash: DefaultProfileData.photoBlurhash,
       );
-      break;
   }
 }
 
@@ -52,9 +50,9 @@ class StubbedPresenceRepository implements PresenceRepository {
   @override
   Future<List<Presence>> getPresence(String? ownProfileId) async {
     await Future.delayed(Duration(seconds: 1));
-    _Gender randomGender = Random().nextInt(2) % 2 == 0 ? _Gender.male : _Gender.female;
     return Future.sync(() {
       return List<Presence>.generate(20, (index) {
+        _Gender randomGender = Random().nextInt(2) % 2 == 0 ? _Gender.male : _Gender.female;
         return Presence(
           id: _faker.guid.guid(),
           profile: _randomPublicProfile(randomGender),

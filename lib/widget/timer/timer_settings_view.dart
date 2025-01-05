@@ -75,44 +75,39 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         buildStartButton(context),
       ],
     );
-
   }
 
   Widget buildInputs(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-
         WarmupTimeInput(
             label: AppLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
-            onChange: (Duration duration) => _onWarmupChange(context, duration)
+            onChange: (Duration duration) =>
+              _onWarmupChange(context, duration)
         ),
-
-        const _ItemGap(),
-
+        const _InputGapWithArrow(),
         SoundInput(
             label: AppLocalizations.of(context).inputStartingSoundLabel,
             value: widget.timerSettings.startingSound,
-            onChange: (Sound startingSound) => _onStartingSoundChange(context, startingSound)
+            onChange: (Sound startingSound) =>
+              _onStartingSoundChange(context, startingSound)
         ),
-
-        const _ItemGap(),
-
+        const _InputGapWithArrow(),
         DurationInput(
           label: AppLocalizations.of(context).inputDurationLabel,
           value: widget.timerSettings.duration,
-          onChange: (Duration duration) => _onDurationChange(context, duration),
+          onChange: (Duration duration) =>
+            _onDurationChange(context, duration),
         ),
-
-        const _ItemGap(),
-
+        const _InputGapWithArrow(),
         SoundInput(
-            label: AppLocalizations.of(context).inputEndingSoundLabel,
-            value: widget.timerSettings.endingSound,
-            onChange: (Sound endingSound) => _onEndingSoundChange(context, endingSound)
+          label: AppLocalizations.of(context).inputEndingSoundLabel,
+          value: widget.timerSettings.endingSound,
+          onChange: (Sound endingSound) =>
+            _onEndingSoundChange(context, endingSound)
         ),
-
       ],
     );
   }
@@ -128,12 +123,11 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
     );
   }
 
-
 }
 
-class _ItemGap extends StatelessWidget {
+class _InputGapWithArrow extends StatelessWidget {
   
-  const _ItemGap();
+  const _InputGapWithArrow();
   
   @override
   Widget build(BuildContext context) {

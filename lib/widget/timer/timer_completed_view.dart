@@ -1,4 +1,5 @@
 import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/timer/completed/signed_in_completed_view.dart';
 import 'package:dhyana/widget/timer/completed/signed_out_completed_view.dart';
@@ -35,18 +36,6 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
     context.hapticsTap();
   }
 
-  // void _addSession(BuildContext context, User user, TimerState state) {
-  //   SessionsBloc sessionsBloc = BlocProvider.of<SessionsBloc>(context);
-  //   sessionsBloc.add(
-  //     SessionsEvent.addSession(
-  //       profileId: user.uid,
-  //       startTime: state.startTime!,
-  //       endTime: state.endTime!,
-  //       timerSettings: state.timerSettings,
-  //     )
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
 
@@ -63,10 +52,9 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
       children: [
         SingleChildScrollView(
           child: SignedIn(
-            yes: (BuildContext context, User user) {
+            yes: (_, __) {
               return SignedInCompletedView(
                 timerState: widget.timerState,
-                user: user,
               );
             },
             no: SignedOutCompletedView(
@@ -74,12 +62,12 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
             )
           ),
         ),
-        _buildMainButton(context),
+        buildBottomArea(context),
       ],
     );
   }
 
-  Widget _buildMainButton(BuildContext context) {
+  Widget buildBottomArea(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Stack(

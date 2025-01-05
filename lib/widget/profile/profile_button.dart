@@ -36,8 +36,8 @@ class ProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SignedIn(
-      yes: (context, user) {
-        return buildSignedIn(context, user.uid);
+      yes: (context, profileId) {
+        return buildSignedIn(context, profileId);
       },
       no: buildSignedOut(context),
     );

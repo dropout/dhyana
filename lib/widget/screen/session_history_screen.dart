@@ -23,9 +23,9 @@ class SessionHistoryScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: SignedIn(
-          yes: (context, user) {
+          yes: (context, profileId) {
             return SessionsBlocProvider(
-              initialEvent: SessionsEvent.loadSessions(profileId: user.uid),
+              initialEvent: SessionsEvent.loadSessions(profileId: profileId),
               child: buildState(context),
             );
           }

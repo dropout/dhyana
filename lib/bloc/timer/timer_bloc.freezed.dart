@@ -161,7 +161,7 @@ class __$$WarmupTickedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
-  _$WarmupTickedImpl({required this.ticks}) : super._();
+  const _$WarmupTickedImpl({required this.ticks}) : super._();
 
   @override
   final int ticks;
@@ -310,8 +310,8 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
 }
 
 abstract class WarmupTicked extends TimerEvent {
-  factory WarmupTicked({required final int ticks}) = _$WarmupTickedImpl;
-  WarmupTicked._() : super._();
+  const factory WarmupTicked({required final int ticks}) = _$WarmupTickedImpl;
+  const WarmupTicked._() : super._();
 
   int get ticks;
 
@@ -345,7 +345,7 @@ class __$$WarmupCompletedImplCopyWithImpl<$Res>
 
 class _$WarmupCompletedImpl extends WarmupCompleted
     with DiagnosticableTreeMixin {
-  _$WarmupCompletedImpl() : super._();
+  const _$WarmupCompletedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -479,8 +479,8 @@ class _$WarmupCompletedImpl extends WarmupCompleted
 }
 
 abstract class WarmupCompleted extends TimerEvent {
-  factory WarmupCompleted() = _$WarmupCompletedImpl;
-  WarmupCompleted._() : super._();
+  const factory WarmupCompleted() = _$WarmupCompletedImpl;
+  const WarmupCompleted._() : super._();
 }
 
 /// @nodoc
@@ -505,7 +505,7 @@ class __$$TimerStartedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
-  _$TimerStartedImpl() : super._();
+  const _$TimerStartedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -639,8 +639,8 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
 }
 
 abstract class TimerStarted extends TimerEvent {
-  factory TimerStarted() = _$TimerStartedImpl;
-  TimerStarted._() : super._();
+  const factory TimerStarted() = _$TimerStartedImpl;
+  const TimerStarted._() : super._();
 }
 
 /// @nodoc
@@ -665,7 +665,7 @@ class __$$TimerPausedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
-  _$TimerPausedImpl() : super._();
+  const _$TimerPausedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -799,8 +799,8 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
 }
 
 abstract class TimerPaused extends TimerEvent {
-  factory TimerPaused() = _$TimerPausedImpl;
-  TimerPaused._() : super._();
+  const factory TimerPaused() = _$TimerPausedImpl;
+  const TimerPaused._() : super._();
 }
 
 /// @nodoc
@@ -825,7 +825,7 @@ class __$$TimerResumedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
-  _$TimerResumedImpl() : super._();
+  const _$TimerResumedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -959,8 +959,8 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
 }
 
 abstract class TimerResumed extends TimerEvent {
-  factory TimerResumed() = _$TimerResumedImpl;
-  TimerResumed._() : super._();
+  const factory TimerResumed() = _$TimerResumedImpl;
+  const TimerResumed._() : super._();
 }
 
 /// @nodoc
@@ -985,7 +985,7 @@ class __$$TimerCompletedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
-  _$TimerCompletedImpl() : super._();
+  const _$TimerCompletedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1119,8 +1119,8 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
 }
 
 abstract class TimerCompleted extends TimerEvent {
-  factory TimerCompleted() = _$TimerCompletedImpl;
-  TimerCompleted._() : super._();
+  const factory TimerCompleted() = _$TimerCompletedImpl;
+  const TimerCompleted._() : super._();
 }
 
 /// @nodoc
@@ -1159,7 +1159,7 @@ class __$$TimerTickedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
-  _$TimerTickedImpl({required this.ticks}) : super._();
+  const _$TimerTickedImpl({required this.ticks}) : super._();
 
   @override
   final int ticks;
@@ -1308,8 +1308,8 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
 }
 
 abstract class TimerTicked extends TimerEvent {
-  factory TimerTicked({required final int ticks}) = _$TimerTickedImpl;
-  TimerTicked._() : super._();
+  const factory TimerTicked({required final int ticks}) = _$TimerTickedImpl;
+  const TimerTicked._() : super._();
 
   int get ticks;
 
@@ -1342,7 +1342,7 @@ class __$$TimerResetImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
-  _$TimerResetImpl() : super._();
+  const _$TimerResetImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1476,8 +1476,8 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
 }
 
 abstract class TimerReset extends TimerEvent {
-  factory TimerReset() = _$TimerResetImpl;
-  TimerReset._() : super._();
+  const factory TimerReset() = _$TimerResetImpl;
+  const TimerReset._() : super._();
 }
 
 /// @nodoc
@@ -1519,7 +1519,8 @@ class __$$TimerErrorOccurredImplCopyWithImpl<$Res>
 
 class _$TimerErrorOccurredImpl extends TimerErrorOccurred
     with DiagnosticableTreeMixin {
-  _$TimerErrorOccurredImpl({this.error, required this.stackTrace}) : super._();
+  const _$TimerErrorOccurredImpl({this.error, required this.stackTrace})
+      : super._();
 
   @override
   final Object? error;
@@ -1675,10 +1676,10 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
 }
 
 abstract class TimerErrorOccurred extends TimerEvent {
-  factory TimerErrorOccurred(
+  const factory TimerErrorOccurred(
       {final Object? error,
       required final StackTrace stackTrace}) = _$TimerErrorOccurredImpl;
-  TimerErrorOccurred._() : super._();
+  const TimerErrorOccurred._() : super._();
 
   Object? get error;
   StackTrace get stackTrace;
@@ -1712,7 +1713,7 @@ class __$$TimerFinishedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerFinishedImpl extends TimerFinished with DiagnosticableTreeMixin {
-  _$TimerFinishedImpl() : super._();
+  const _$TimerFinishedImpl() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1846,8 +1847,8 @@ class _$TimerFinishedImpl extends TimerFinished with DiagnosticableTreeMixin {
 }
 
 abstract class TimerFinished extends TimerEvent {
-  factory TimerFinished() = _$TimerFinishedImpl;
-  TimerFinished._() : super._();
+  const factory TimerFinished() = _$TimerFinishedImpl;
+  const TimerFinished._() : super._();
 }
 
 /// @nodoc

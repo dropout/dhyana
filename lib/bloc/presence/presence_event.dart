@@ -9,6 +9,8 @@ sealed class PresenceEvent with _$PresenceEvent {
     String? ownProfileId,
   }) = LoadPresenceData;
 
-  const factory PresenceEvent.showPresence() = ShowPresence;
+  const factory PresenceEvent.showPresence({
+    required String profileId,
+  }) = ShowPresence;
 
 }

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignedIn extends StatelessWidget {
 
-  final Widget Function(BuildContext context, User user) yes;
+  final Widget Function(BuildContext context, String profileId) yes;
   final Widget no;
 
   const SignedIn({
@@ -20,11 +20,12 @@ class SignedIn extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case AuthStateSignedIn():
-            return yes(context, state.user);
+            return yes(context, state.user.uid);
           default:
             return no;
         }
       },
     );
   }
+
 }

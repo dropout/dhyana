@@ -5,23 +5,23 @@ sealed class TimerEvent with _$TimerEvent {
 
   const TimerEvent._();
 
-  factory TimerEvent.warmupTicked({
+  const factory TimerEvent.warmupTicked({
     required int ticks,
   }) = WarmupTicked;
 
-  factory TimerEvent.warmupCompleted() = WarmupCompleted;
-  factory TimerEvent.started() = TimerStarted;
-  factory TimerEvent.paused() = TimerPaused;
-  factory TimerEvent.resumed() = TimerResumed;
-  factory TimerEvent.completed() = TimerCompleted;
-  factory TimerEvent.timerTicked({
+  const factory TimerEvent.warmupCompleted() = WarmupCompleted;
+  const factory TimerEvent.started() = TimerStarted;
+  const factory TimerEvent.paused() = TimerPaused;
+  const factory TimerEvent.resumed() = TimerResumed;
+  const factory TimerEvent.completed() = TimerCompleted;
+  const factory TimerEvent.timerTicked({
     required int ticks,
   }) = TimerTicked;
-  factory TimerEvent.reset() = TimerReset;
-  factory TimerEvent.error({
+  const factory TimerEvent.reset() = TimerReset;
+  const factory TimerEvent.error({
     Object? error,
     required StackTrace stackTrace,
   }) = TimerErrorOccurred;
-  factory TimerEvent.finished() = TimerFinished;
+  const factory TimerEvent.finished() = TimerFinished;
 
 }

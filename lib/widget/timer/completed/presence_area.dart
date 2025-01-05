@@ -39,14 +39,13 @@ class _PresenceAreaState extends State<PresenceArea> {
           case PresenceLoadedState():
             return buildView(context, state);
           default:
-            return Container();
+            return SizedBox.shrink();
         }
       },
     );
   }
 
   Widget buildView(BuildContext context, PresenceLoadedState state) {
-
     if (state.presenceList.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -58,7 +57,7 @@ class _PresenceAreaState extends State<PresenceArea> {
           padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
           child: Column(
             children: [
-              Text('Practiced with you',
+              Text('Here, now',
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: Colors.white,
                   // fontWeight: FontWeight.bold
