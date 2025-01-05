@@ -198,6 +198,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSignoutCancel => 'No';
 
   @override
+  String get presence => 'Presence';
+
+  @override
+  String get presenceScreenSubTitle => 'Move the slider to adjust presence timerframe.';
+
+  @override
   String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

@@ -473,6 +473,18 @@ abstract class AppLocalizations {
   /// **'Mégsem'**
   String get profileSignoutCancel;
 
+  /// No description provided for @presence.
+  ///
+  /// In hu, this message translates to:
+  /// **'Jelenlét'**
+  String get presence;
+
+  /// No description provided for @presenceScreenSubTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mozgasd a csuszkát a jelenlét időkeretének beállításához.'**
+  String get presenceScreenSubTitle;
+
   /// No description provided for @minutesPlural.
   ///
   /// In hu, this message translates to:

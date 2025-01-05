@@ -198,6 +198,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileSignoutCancel => 'Mégsem';
 
   @override
+  String get presence => 'Jelenlét';
+
+  @override
+  String get presenceScreenSubTitle => 'Mozgasd a csuszkát a jelenlét időkeretének beállításához.';
+
+  @override
   String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

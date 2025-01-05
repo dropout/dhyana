@@ -28,11 +28,13 @@ class PresenceBlocProvider extends StatelessWidget {
           profileRepository: repos.profileRepository,
           crashlyticsService: services.crashlyticsService,
         );
-        if (initialEvent != null) {
-          presenceBloc.add(initialEvent!);
-        }
         return BlocProvider<PresenceBloc>(
-          create: (BuildContext context) => presenceBloc,
+          create: (BuildContext context) {
+            if (initialEvent != null) {
+              presenceBloc.add(initialEvent!);
+            }
+            return presenceBloc;
+          },
           child: child,
         );
       }
