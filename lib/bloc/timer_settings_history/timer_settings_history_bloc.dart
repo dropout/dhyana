@@ -18,13 +18,11 @@ class TimerSettingsHistoryBloc
 
   final Logger logger = getLogger('TimerSettingsHistoryBloc');
 
-  final AuthRepository authRepository;
   final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
   final CrashlyticsService crashlyticsService;
 
   TimerSettingsHistoryBloc({
     required this.timerSettingsHistoryRepository,
-    required this.authRepository,
     required this.crashlyticsService,
   }) : super(const TimerSettingsHistoryState.initial()) {
     on<SaveTimerSettingsHistoryEvent>(_onSaveTimerSettingsHistory);

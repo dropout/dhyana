@@ -51,13 +51,6 @@ class App extends StatelessWidget {
           providers: <BlocProvider>[
             BlocProvider<AuthBloc>(create: (_) => authBloc),
             BlocProvider<ProfileBloc>(create: (_) => initResult.profileBloc),
-            BlocProvider<TimerSettingsHistoryBloc>(create: (_) {
-              return TimerSettingsHistoryBloc(
-                timerSettingsHistoryRepository: initResult.repositories.timerSettingsHistoryRepository,
-                authRepository: initResult.repositories.authRepository,
-                crashlyticsService: initResult.services.crashlyticsService
-              );
-            }),
           ],
           child: buildApp(context),
         ),

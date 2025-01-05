@@ -14,29 +14,13 @@ class PresenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      extendBodyBehindAppBar: true,
-      body: PresenceBlocProvider(
-        initialEvent: PresenceEvent.load(),
-        child: PresenceScreenView(),
-      )
-    );
-  }
-
-  Widget buildBody(BuildContext context) {
-    return const Stack(
-      fit: StackFit.expand,
-      clipBehavior: Clip.none,
-      children: [
-        Column(
-          children: [
-            Text('Presence screen'),
-            PresenceScreenView(),
-          ],
-        ),
-
-      ],
+    return PresenceBlocProvider(
+      initialEvent: PresenceEvent.load(),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        extendBodyBehindAppBar: true,
+        body: PresenceScreenView(),
+      ),
     );
   }
 
@@ -50,31 +34,23 @@ class PresenceScreenView extends StatefulWidget {
 }
 
 class _PresenceScreenViewState extends State<PresenceScreenView>
-  with SingleTickerProviderStateMixin, TitleEffectMixin {
+  with TitleEffectMixin {
   
   double intervalInMinutes = 60;
-
-  @override
-  void initState() {
-    titleEffectScrollController.addListener(
-      createListener(titleEffectScrollController, setState)
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: titleEffectScrollController,
       slivers: [
-        buildAppBar(context, titleText: 'Presence'),
+        buildTitleEffectAppBar(context, 'Presence'),
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.all(AppThemeData.paddingLg),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildTitle(context, 'Presence'),
+                buildTitleEffectTitle(context, 'Presence'),
                 Gap.small(),
                 Text('See who you have practiced with.'),
                 Padding(
@@ -108,12 +84,6 @@ class _PresenceScreenViewState extends State<PresenceScreenView>
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    titleEffectScrollController.dispose();
-    super.dispose();
   }
 
 }

@@ -270,7 +270,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
 
   List<Widget> buildDefaultHeaderSlivers(BuildContext context) {
     return [
-      buildAppBar(context, titleText: AppLocalizations.of(context).profileStats),
+      buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
     ];
   }
 
@@ -279,7 +279,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     Profile profile
   ) {
     return [
-      buildAppBar(context, titleText: AppLocalizations.of(context).profileStats),
+      buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
       buildProfileDetails(context, profile),
     ];
   }
@@ -321,7 +321,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            buildTitle(context, AppLocalizations.of(context).profileStats),
+            buildTitleEffectTitle(context, AppLocalizations.of(context).profileStats),
             const SizedBox(height: AppThemeData.spacingLg),
             Gap.large(),
             SizedBox(

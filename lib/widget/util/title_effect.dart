@@ -1,16 +1,23 @@
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
-import 'package:flutter/material.dart';
-
-mixin TitleEffectMixin {
+mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {
 
   double titleEffectRatio = 0.0;
   final ScrollController titleEffectScrollController = ScrollController();
+
+  @override
+  void initState() {
+    titleEffectScrollController.addListener(
+        createListener(titleEffectScrollController, setState)
+    );
+    super.initState();
+  }
 
   void Function() createListener(ScrollController scrollController, void Function(VoidCallback) setState) {
     return () {
@@ -30,7 +37,7 @@ mixin TitleEffectMixin {
     };
   }
 
-  Widget buildAppBar(BuildContext context, {String? titleText}) {
+  Widget buildTitleEffectAppBar(BuildContext context, String titleText) {
     return SliverAppBar(
       centerTitle: false,
       elevation: 0,
@@ -44,14 +51,11 @@ mixin TitleEffectMixin {
           child: CustomBackButton()
       ),
       leadingWidth: 64,
-      title: buildAppBarTitle(context, titleText),
+      title: buildTitleEffectAppBarTitle(context, titleText),
     );
   }
 
-  Widget? buildAppBarTitle(BuildContext context, String? titleText) {
-    if (titleText == null) {
-      return null;
-    }
+  Widget? buildTitleEffectAppBarTitle(BuildContext context, String titleText) {
     return Transform.translate(
       offset: Offset(0, AppThemeData.spacingSm * (1.0 - titleEffectRatio)),
       child: Opacity(
@@ -66,7 +70,7 @@ mixin TitleEffectMixin {
     );
   }
 
-  Widget buildTitle(BuildContext context, String title) {
+  Widget buildTitleEffectTitle(BuildContext context, String title) {
     return Text(
       title,
       style: Theme.of(context).textTheme.headlineLarge!.copyWith(
@@ -75,14 +79,32 @@ mixin TitleEffectMixin {
     );
   }
 
-  Widget buildSliverTitle(BuildContext context, String title) {
+  Widget buildTitleEffectSliverTitle(BuildContext context, String title) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.all(AppThemeData.spacingMd),
-        child: buildTitle(context, title),
+        child: buildTitleEffectTitle(context, title),
       )
     );
   }
 
+  Widget buildTitleEffectScrollView(BuildContext context, String title, {
+    List<Widget> slivers = const [],
+  }) {
+    return CustomScrollView(
+      controller: titleEffectScrollController,
+      slivers: [
+        buildTitleEffectAppBar(context, title),
+        buildTitleEffectSliverTitle(context, title),
+        ...slivers
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    titleEffectScrollController.dispose();
+    super.dispose();
+  }
 
 }

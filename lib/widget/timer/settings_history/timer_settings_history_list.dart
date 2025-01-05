@@ -25,6 +25,15 @@ class TimerSettingsHistoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        settingsList.map((settings) => TimerSettingsHistoryListItem(
+          timerSettings: settings,
+          onTap: () => _onListItemTap(context, settings),
+        )).toList().intersperse(const SizedBox(height: AppThemeData.spacingMd)).revealListAnimation()
+      ),
+    );
+
     return ListView(
       padding: EdgeInsets.only(
         top: AppThemeData.paddingLg,
