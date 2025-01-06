@@ -23,7 +23,6 @@ class TimerSettingsHistoryBlocProvider extends StatelessWidget {
           crashlyticsService: context.services.crashlyticsService
         );
         if (initialEvent != null) {
-          print('TimerSettingsHistoryBlocProvider: Adding initial event: $initialEvent');
           timerSettingsHistoryBloc.add(initialEvent!);
         }
         return timerSettingsHistoryBloc;

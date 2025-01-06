@@ -52,18 +52,6 @@ class TimerRunningBlocProvider extends StatelessWidget {
                 // Start the timer
                 timerBloc.add(const TimerEvent.started());
 
-                // Save the timer settings to timer settings history,
-                // if the profile is loaded
-                if (isSignedIn) {
-                  BlocProvider.of<TimerSettingsHistoryBloc>(context).add(
-                    TimerSettingsHistoryEvent.saveSettings(
-                      timerSettings: timerSettings.copyWith(
-                        lastUsed: DateTime.now(),
-                      ),
-                      profileId: profileId!,
-                    )
-                  );
-                }
                 return timerBloc;
               },
               lazy: false,
@@ -87,6 +75,26 @@ class TimerRunningBlocProvider extends StatelessWidget {
               },
               lazy: false,
             ),
+
+            BlocProvider<TimerSettingsHistoryBloc>(
+              create: (_) {
+                final TimerSettingsHistoryBloc timerSettingsHistoryBloc =
+                  TimerSettingsHistoryBloc(
+                    timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
+                    crashlyticsService: services.crashlyticsService
+                  );
+
+                if (isSignedIn) {
+                  timerSettingsHistoryBloc.add(TimerSettingsHistoryEvent.saveSettings(
+                    profileId: profileId!,
+                    timerSettings: timerSettings
+                  ));
+                }
+                return timerSettingsHistoryBloc;
+              },
+              lazy: false,
+            ),
+
           ],
           child: _TimerCompletedListener(child: child),
         );

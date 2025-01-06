@@ -59,13 +59,15 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
           profile: PublicProfile.fromProfile(profile: profile),
           startedAt: DateTime.now(),
         ));
-        logger.t('User signed in and profile is complete, showing presence.');
+        logger.t('Showing presence.');
       } else {
-        await presenceRepository.showPresence(Presence(
-          id: profile.id,
-          profile: PublicProfile.anonymous(),
-          startedAt: DateTime.now(),
-        ));
+        await presenceRepository.showPresence(
+          Presence(
+            id: profile.id,
+            profile: PublicProfile.anonymous(),
+            startedAt: DateTime.now(),
+          )
+        );
         logger.t('User is signed in but profile is incomplete, showing anonymous presence.');
       }
       logger.t('Successfully showed presence.');
