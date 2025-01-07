@@ -62,13 +62,12 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: CustomAppBar(
         trailing: [
-          buildPresenceButton(context),
-
-          SignedIn(
-            yes: (context, profileId) {
-              return TimerSettingsHistoryButton(profileId: profileId);
-            }
-          ),
+          SignedIn(yes: (context, profileId) {
+            return PresenceButton();
+          }),
+          SignedIn(yes: (context, profileId) {
+            return TimerSettingsHistoryButton(profileId: profileId);
+          }),
           const ProfileButton(),
         ],
       ),
@@ -97,12 +96,6 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
   Widget buildPresenceButton(BuildContext context) {
     return PresenceButton();
-    // return IconButton(
-    //   icon: const Icon(Icons.person),
-    //   onPressed: () {
-    //     const ProfileRoute().go(context);
-    //   },
-    // );
   }
 
 }

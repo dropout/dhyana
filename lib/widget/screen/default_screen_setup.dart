@@ -143,10 +143,14 @@ mixin DefaultScreenSetupHelpersMixin {
       scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect
       backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
       leading: Padding(
-        padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0,),
+        padding: EdgeInsets.only(
+          left: AppThemeData.paddingLg,
+          top: AppThemeData.paddingSm,
+          bottom: AppThemeData.paddingSm
+        ),
         child: backButton ?? CustomBackButton()
       ),
-      leadingWidth: 64,
+      leadingWidth: 56.0,
       title: titleWidget,
     );
   }

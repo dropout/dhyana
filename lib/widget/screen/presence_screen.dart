@@ -101,7 +101,9 @@ class _PresenceScreenState extends State<PresenceScreen>
   }) {
     return SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppThemeData.paddingLg
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -87,35 +87,37 @@ class _CustomBackButtonState extends State<CustomBackButton>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _onTap(context),
-      onTapDown: (_) => _onTapDown(context),
-      child: SizedBox.square(
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: widget.backgroundColor ?? Colors.black,
-          ),
-          child: ClipOval(
-            child: AnimatedBuilder(
-              animation: animController,
-              builder: (BuildContext context, Widget? child) {
-                return Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment(alignmentAnimation.value, 0.0),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: widget.foregroundColor ?? AppColors.backgroundPaperLight,
-                        size: AppThemeData.spacingLg,
-                      )
-                    ),
-                  ]
-                );
-              },
+    return RepaintBoundary(
+      child: GestureDetector(
+        onTap: () => _onTap(context),
+        onTapDown: (_) => _onTapDown(context),
+        child: SizedBox.square(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: widget.backgroundColor ?? Colors.black,
             ),
-          ),
-        )
+            child: ClipOval(
+              child: AnimatedBuilder(
+                animation: animController,
+                builder: (BuildContext context, Widget? child) {
+                  return Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment(alignmentAnimation.value, 0.0),
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: widget.foregroundColor ?? AppColors.backgroundPaperLight,
+                          size: AppThemeData.spacingLg,
+                        )
+                      ),
+                    ]
+                  );
+                },
+              ),
+            ),
+          )
+        ),
       ),
     );
   }
