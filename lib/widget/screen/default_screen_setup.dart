@@ -1,12 +1,9 @@
 import 'dart:ui' as ui;
 
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
 class DefaultScreenSetup extends StatefulWidget {

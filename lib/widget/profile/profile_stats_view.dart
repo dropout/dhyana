@@ -4,18 +4,14 @@ import 'package:dhyana/enum/stats_interval_type.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/widget/app_bar/all.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/stats_interval_selector.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../app_bar/custom_back_button.dart';
-import '../util/all.dart';
 
 class ProfileStatsView extends StatelessWidget {
   const ProfileStatsView({super.key});

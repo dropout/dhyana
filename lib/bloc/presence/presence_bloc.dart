@@ -1,7 +1,5 @@
-import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/public_profile.dart';
-import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/presence.dart';

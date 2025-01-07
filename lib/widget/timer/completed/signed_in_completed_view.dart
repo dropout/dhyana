@@ -1,5 +1,4 @@
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days.dart';

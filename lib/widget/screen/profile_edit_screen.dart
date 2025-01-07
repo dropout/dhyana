@@ -1,12 +1,9 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/profile/profile_edit_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

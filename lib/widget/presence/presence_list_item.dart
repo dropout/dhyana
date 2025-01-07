@@ -1,7 +1,5 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/util/app_animation.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 

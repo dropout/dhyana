@@ -1,5 +1,3 @@
-import 'package:dhyana/data_provider/auth/model/user.dart';
-import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/timer/completed/signed_in_completed_view.dart';
 import 'package:dhyana/widget/timer/completed/signed_out_completed_view.dart';

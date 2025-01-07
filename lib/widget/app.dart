@@ -1,6 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
-import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
 import 'package:dhyana/init/init_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

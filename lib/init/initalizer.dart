@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
@@ -7,8 +6,6 @@ import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/util/profile_stats_report_updater.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

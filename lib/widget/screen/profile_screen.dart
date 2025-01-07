@@ -2,10 +2,7 @@ import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/profile/profile_view.dart';
-import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
-import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

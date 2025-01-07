@@ -1,16 +1,9 @@
 import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_bar/all.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/presence_bloc_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
-import 'package:dhyana/widget/util/app_animation.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/gap.dart';
-import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

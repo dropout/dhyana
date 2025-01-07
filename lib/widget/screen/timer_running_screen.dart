@@ -1,10 +1,6 @@
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/bloc/presence/presence_bloc.dart';
-import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/timer/running/timer_running_overlay.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';

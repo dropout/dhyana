@@ -33,21 +33,6 @@ class TimerSettingsHistoryList extends StatelessWidget {
         )).toList().intersperse(const SizedBox(height: AppThemeData.spacingMd)).revealListAnimation()
       ),
     );
-
-    return ListView(
-      padding: EdgeInsets.only(
-        top: AppThemeData.paddingLg,
-        left: AppThemeData.paddingMd,
-        right: AppThemeData.paddingMd,
-        bottom: MediaQuery.of(context).padding.bottom,
-      ),
-      children: settingsList.map(
-        (settings) => TimerSettingsHistoryListItem(
-          timerSettings: settings,
-          onTap: () => _onListItemTap(context, settings),
-        )
-      ).toList().intersperse(const SizedBox(height: AppThemeData.spacingMd)).revealListAnimation(),
-    );
   }
 
 }
