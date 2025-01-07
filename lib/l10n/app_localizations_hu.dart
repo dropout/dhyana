@@ -120,7 +120,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get activity => 'Ülések';
+  String get sessionsHistory => 'Ülések';
 
   @override
   String get editProfile => 'Profil szerkesztése';

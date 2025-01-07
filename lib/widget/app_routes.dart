@@ -169,10 +169,11 @@ class EditProfileRoute extends GoRouteData with AuthRedirectHook {
   name: 'ACTIVITY',
 )
 class SessionHistoryRoute extends GoRouteData with AuthRedirectHook {
-  const SessionHistoryRoute();
+  final String profileId;
+  const SessionHistoryRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    SessionHistoryScreen();
+    SessionHistoryScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);

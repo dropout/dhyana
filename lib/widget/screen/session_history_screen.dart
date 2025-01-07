@@ -1,51 +1,68 @@
 import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/session_history/all.dart';
-import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/bloc_provider/sessions_bloc_provider.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SessionHistoryScreen extends StatelessWidget {
-  const SessionHistoryScreen({super.key});
+class SessionHistoryScreen extends StatelessWidget
+  with DefaultScreenSetupHelpersMixin {
+
+  final String profileId;
+
+  const SessionHistoryScreen({
+    required this.profileId,
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: CustomAppBar(
-        leading: const CustomBackButton(),
-        titleText: AppLocalizations.of(context).activity
+    return SessionsBlocProvider(
+      initialEvent: SessionsEvent.loadSessions(
+        profileId: profileId
       ),
-      extendBodyBehindAppBar: true,
-      body: SafeArea(
-        child: SignedIn(
-          yes: (context, profileId) {
-            return SessionsBlocProvider(
-              initialEvent: SessionsEvent.loadSessions(profileId: profileId),
-              child: buildState(context),
-            );
-          }
-        ),
-      )
+      child: buildSessionsState(context),
     );
+
   }
 
-  Widget buildState(BuildContext context) {
+  Widget buildSessionsState(BuildContext context) {
     return BlocBuilder<SessionsBloc, SessionsState>(
       builder: (context, state) {
         switch (state) {
           case SessionsLoaded():
-            return SessionHistoryList(sessions: state.sessions);
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).sessionsHistory,
+              slivers: [
+                SliverSafeArea(
+                  top: false,
+                  sliver: SessionHistoryList(sessions: state.sessions),
+                )
+              ]
+            );
           case SessionsLoading():
-            return const AppLoadingDisplay();
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).sessionsHistory,
+              enableScrolling: false,
+              slivers: [
+                buildLoadingSliver(context),
+              ]
+            );
           case SessionsLoadingError():
-            return const AppErrorDisplay();
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).sessionsHistory,
+              enableScrolling: false,
+              slivers: [
+                buildErrorSliver(context),
+              ]
+            );
           default:
-            return const AppErrorDisplay();
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).sessionsHistory,
+              enableScrolling: false,
+              slivers: []
+            );
         }
       }
     );

@@ -7,7 +7,8 @@ import 'package:dhyana/widget/timer/settings_history/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TimerSettingsHistoryScreen extends StatefulWidget {
+class TimerSettingsHistoryScreen extends StatelessWidget
+  with DefaultScreenSetupHelpersMixin {
 
   final String profileId;
 
@@ -17,19 +18,10 @@ class TimerSettingsHistoryScreen extends StatefulWidget {
   });
 
   @override
-  State<TimerSettingsHistoryScreen> createState() =>
-    _TimerSettingsHistoryScreenState();
-
-}
-
-class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen>
-  with DefaultScreenSetupHelpersMixin {
-
-  @override
   Widget build(BuildContext context) {
     return TimerSettingsHistoryBlocProvider(
       initialEvent: TimerSettingsHistoryEvent.loadSettingsList(
-        profileId: widget.profileId
+        profileId: profileId
       ),
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
@@ -55,7 +47,6 @@ class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen>
                     padding: const EdgeInsets.only(
                       left: AppThemeData.paddingLg,
                       right: AppThemeData.paddingLg,
-                      bottom: AppThemeData.paddingLg,
                     ),
                     sliver: TimerSettingsHistoryList(
                       settingsList: state.timerSettingsList

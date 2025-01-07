@@ -15,7 +15,7 @@ class ProfileMenu extends StatelessWidget {
   });
 
   void _onActivityTapped(BuildContext context) {
-    SessionHistoryRoute().push(context);
+    SessionHistoryRoute(profileId: profile.id).push(context);
     context.hapticsTap();
   }
 
@@ -53,7 +53,7 @@ class ProfileMenu extends StatelessWidget {
         const Divider(height: 0),
         ListTile(
           title: Text(
-            AppLocalizations.of(context).activity,
+            AppLocalizations.of(context).sessionsHistory,
             style: textStyle,
           ),
           enabled: true,

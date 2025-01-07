@@ -317,11 +317,11 @@ abstract class AppLocalizations {
   /// **'Profil'**
   String get profile;
 
-  /// No description provided for @activity.
+  /// No description provided for @sessionsHistory.
   ///
   /// In hu, this message translates to:
   /// **'Ülések'**
-  String get activity;
+  String get sessionsHistory;
 
   /// No description provided for @editProfile.
   ///

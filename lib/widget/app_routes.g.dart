@@ -205,10 +205,15 @@ RouteBase get $sessionHistoryRoute => GoRouteData.$route(
 
 extension $SessionHistoryRouteExtension on SessionHistoryRoute {
   static SessionHistoryRoute _fromState(GoRouterState state) =>
-      const SessionHistoryRoute();
+      SessionHistoryRoute(
+        profileId: state.uri.queryParameters['profile-id']!,
+      );
 
   String get location => GoRouteData.$location(
         '/activity',
+        queryParams: {
+          'profile-id': profileId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
