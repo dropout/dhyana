@@ -47,47 +47,42 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
-    return SafeArea(
-      bottom: false,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: AppThemeData.spacingLg),
-            Container(
-              width: AppThemeData.circleLg,
-              height: AppThemeData.circleLg,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.black,
-                  width: 4.0,
-                ),
-              ),
-              child: ProfileImage.fromProfile(profile),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: AppThemeData.circleLg,
+          height: AppThemeData.circleLg,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.black,
+              width: 4.0,
             ),
-            const SizedBox(height: AppThemeData.spacingLg),
-            Text(
-              profile.displayName,
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: AppThemeData.spacingLg),
-            WeeklyPerformance(
-              profile: profile,
-            ),
-            const SizedBox(height: AppThemeData.spacingLg),
-            ConsecutiveDaysDisplay(
-              profile: profile,
-            ),
-            const SizedBox(height: AppThemeData.spacingLg),
-            ProfileMenu(profile: profile),
-            const SizedBox(height: AppThemeData.spacingLg),
-            const ProfileFooter()
-          ],
+          ),
+          child: ProfileImage.fromProfile(profile),
         ),
-      )
+        const SizedBox(height: AppThemeData.spacingLg),
+        Text(
+          profile.displayName,
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: AppThemeData.spacingLg),
+        WeeklyPerformance(
+          profile: profile,
+        ),
+        const SizedBox(height: AppThemeData.spacingLg),
+        ConsecutiveDaysDisplay(
+          profile: profile,
+        ),
+        const SizedBox(height: AppThemeData.spacingLg),
+        ProfileMenu(profile: profile),
+        const SizedBox(height: AppThemeData.spacingLg),
+        const ProfileFooter(),
+        const SizedBox(height: AppThemeData.spacingLg),
+      ],
     );
   }
 

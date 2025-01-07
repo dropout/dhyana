@@ -6,9 +6,26 @@ import 'package:go_router/go_router.dart';
 
 class CustomBackButton extends StatefulWidget {
 
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+
   const CustomBackButton({
-    super.key
+    this.backgroundColor,
+    this.foregroundColor,
+    super.key,
   });
+
+  factory CustomBackButton.light() =>
+    const CustomBackButton(
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+    );
+
+  factory CustomBackButton.dark() =>
+    const CustomBackButton(
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+    );
 
   @override
   State<CustomBackButton> createState() => _CustomBackButtonState();
@@ -75,9 +92,9 @@ class _CustomBackButtonState extends State<CustomBackButton>
       onTapDown: (_) => _onTapDown(context),
       child: SizedBox.square(
         child: DecoratedBox(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.black,
+            color: widget.backgroundColor ?? Colors.black,
           ),
           child: ClipOval(
             child: AnimatedBuilder(
@@ -87,9 +104,9 @@ class _CustomBackButtonState extends State<CustomBackButton>
                   children: [
                     Align(
                       alignment: Alignment(alignmentAnimation.value, 0.0),
-                      child: const Icon(
+                      child: Icon(
                         Icons.arrow_back,
-                        color: AppColors.backgroundPaperLight,
+                        color: widget.foregroundColor ?? AppColors.backgroundPaperLight,
                         size: AppThemeData.spacingLg,
                       )
                     ),

@@ -5,6 +5,7 @@ import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/presence_bloc_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
+import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:dhyana/widget/util/app_animation.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
@@ -22,7 +23,7 @@ class PresenceScreen extends StatefulWidget {
 }
 
 class _PresenceScreenState extends State<PresenceScreen>
-  with TitleEffectMixin {
+  with DefaultScreenSetupHelpersMixin {
 
   double intervalInMinutes = 60;
 
@@ -47,121 +48,81 @@ class _PresenceScreenState extends State<PresenceScreen>
   Widget buildStates(BuildContext context) {
     return BlocBuilder<PresenceBloc, PresenceState>(
       builder: (BuildContext context, PresenceState state) {
-        List<Widget> slivers = [];
         switch (state) {
           case PresenceLoadingState():
-            slivers = [
-              buildTopSliver(context, isLoading: true),
-              SliverFillRemaining(
-                child: AppLoadingDisplay(),
-              )
-            ];
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).presence,
+              enableScrolling: false,
+              slivers: [
+                buildControlsArea(context, controlsEnabled: false),
+                buildLoadingSliver(context)
+              ],
+            );
           case PresenceLoadedState():
-            slivers = [
-              buildTopSliver(context),
-              buildLoadedSliver(context),
-            ];
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).presence,
+              slivers: [
+                buildControlsArea(context),
+                SliverSafeArea(
+                  top: false,
+                  sliver: SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: AppThemeData.spacingMd),
+                      child: PresenceView(),
+                    ),
+                  ),
+                ),
+              ],
+            );
           case PresenceErrorState():
-            slivers = [
-              buildTopSliver(context),
-              SliverFillRemaining(
-                child: AppErrorDisplay(),
-              )
-            ];
+            return DefaultScreenSetup(
+              enableScrolling: false,
+              title: AppLocalizations.of(context).presence,
+              slivers: [
+                buildControlsArea(context, controlsEnabled: false),
+                buildErrorSliver(context)
+              ],
+            );
           default:
-            slivers = [];
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).presence,
+              enableScrolling: false,
+              slivers: [
+                buildControlsArea(context, controlsEnabled: false),
+              ],
+            );
         }
-
-        return buildTitleEffectScrollView(
-          context,
-          AppLocalizations.of(context).presence,
-          slivers: slivers,
-        );
       },
     );
   }
 
-  Widget buildScaffolding(BuildContext context) {
-    return buildTitleEffectScrollView(
-      context,
-      AppLocalizations.of(context).presence,
-      slivers: [
-        SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context).presenceScreenSubTitle),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
-                    child: Slider(
-                      divisions: 17,
-                      min: 10,
-                      max: 180,
-                      activeColor: Colors.black,
-                      label: AppLocalizations.of(context).minutesPlural(intervalInMinutes.round()),
-                      value: intervalInMinutes,
-                      onChanged: (double sliderValue) {
-                        setState(() {
-                          intervalInMinutes = sliderValue;
-                        });
-                      }
-                    ),
-                  )
-                ],
-              ),
-            )
-        ),
-        buildLoadedSliver(context),
-      ]
-    );
-  }
-
-  Widget buildTopSliver(BuildContext context, {bool isLoading = false}) {
+  Widget buildControlsArea(BuildContext context, {
+    bool controlsEnabled = true,
+  }) {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('See who you have practiced with.'),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
-              child: Slider(
-                divisions: 17,
-                min: 10,
-                max: 180,
-                activeColor: Colors.black,
-                label: '${intervalInMinutes.round()} minutes',
-                value: intervalInMinutes,
-                onChanged: isLoading ? null : (double sliderValue) {
-                  setState(() {
-                    intervalInMinutes = sliderValue;
-                  });
-                },
-                // onChanged: (double sliderValue) {
-                //   setState(() {
-                //     intervalInMinutes = sliderValue;
-                //   });
-                // }
-              ),
-            )
-          ],
-        ),
-      )
-    );
-  }
-
-  Widget buildLoadedSliver(BuildContext context) {
-    return SliverSafeArea(
-      top: false,
-      sliver: SliverToBoxAdapter(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppThemeData.spacingMd),
-          child: PresenceView(),
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(AppLocalizations.of(context).presenceScreenSubTitle),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
+                child: Slider(
+                  divisions: 17,
+                  min: 10,
+                  max: 180,
+                  activeColor: Colors.black,
+                  label: AppLocalizations.of(context)
+                    .minutesPluralWithNumber(intervalInMinutes.round()),
+                  value: intervalInMinutes,
+                  onChanged: controlsEnabled ? (sliderValue) =>
+                    _onIntervalChange(context, sliderValue) : null,
+                ),
+              )
+            ],
+          ),
+        )
     );
   }
 

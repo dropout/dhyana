@@ -2,6 +2,7 @@ import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.d
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:dhyana/widget/timer/settings_history/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
@@ -26,7 +27,7 @@ class TimerSettingsHistoryScreen extends StatefulWidget {
 }
 
 class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen>
-  with TitleEffectMixin {
+  with DefaultScreenSetupHelpersMixin {
 
   @override
   Widget build(BuildContext context) {
@@ -48,42 +49,47 @@ class _TimerSettingsHistoryScreenState extends State<TimerSettingsHistoryScreen>
   Widget buildStates(BuildContext context) {
     return BlocBuilder<TimerSettingsHistoryBloc, TimerSettingsHistoryState>(
       builder: (context, state) {
-        List<Widget> slivers = [];
-
         switch (state) {
           case TimerSettingsHistoryLoaded():
-            slivers = [
-              SliverSafeArea(
-                sliver: SliverPadding(
-                  padding: const EdgeInsets.only(
-                    left: AppThemeData.paddingLg,
-                    right: AppThemeData.paddingLg,
-                  ),
-                  sliver: TimerSettingsHistoryList(
-                    settingsList: state.timerSettingsList
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).timerSettingsHistory,
+              slivers: [
+                SliverSafeArea(
+                  sliver: SliverPadding(
+                    padding: const EdgeInsets.only(
+                      left: AppThemeData.paddingLg,
+                      right: AppThemeData.paddingLg,
+                      bottom: AppThemeData.paddingLg,
+                    ),
+                    sliver: TimerSettingsHistoryList(
+                      settingsList: state.timerSettingsList
+                    ),
                   ),
                 ),
-              ),
-            ];
+              ],
+            );
           case TimerSettingsHistoryLoading():
-            slivers = [
-              SliverFillRemaining(
-                child: const AppLoadingDisplay()
-              )
-            ];
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).timerSettingsHistory,
+              enableScrolling: false,
+              slivers: [
+                buildLoadingSliver(context),
+              ],
+            );
           case TimerSettingsHistoryError():
-            slivers = [
-              SliverFillRemaining(
-                child: const AppErrorDisplay()
-              )
-            ];
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).timerSettingsHistory,
+              enableScrolling: false,
+              slivers: [
+                buildErrorSliver(context),
+              ],
+            );
+          default:
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).timerSettingsHistory,
+              enableScrolling: false,
+            );
         }
-
-        return buildTitleEffectScrollView(
-          context,
-          AppLocalizations.of(context).timerSettingsHistory,
-          slivers: slivers,
-        );
       }
     );
   }

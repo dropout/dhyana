@@ -19,7 +19,6 @@ class ProfileButton extends StatelessWidget {
   });
   
   void _signedOutTap(BuildContext context) {
-    // context.pushNamed(AppScreen.login.name);
     const LoginRoute().go(context);
     context.hapticsTap();
   }
@@ -73,21 +72,6 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildSignedIn(BuildContext context, String userId) {
-    return buildProfileStateDisplay(context, userId);
-    // return ProfileBlocProvider(
-    //   initialEvent: ProfileEvent.loadProfile(
-    //     profileId: userId,
-    //     onError: (_, __) {
-    //       ScaffoldMessenger.of(context).showSnackBar(
-    //         getErrorSnackBar(context, 'An error occured while trying to load your profile!'),
-    //       );
-    //     }
-    //   ),
-    //   child: buildProfileStateDisplay(context, userId),
-    // );
-  }
-
-  Widget buildProfileStateDisplay(BuildContext context, String userId) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {

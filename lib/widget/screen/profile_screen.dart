@@ -1,35 +1,77 @@
+import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/profile/profile_view.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
+import 'package:dhyana/widget/screen/default_screen_setup.dart';
+import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
 
   final String profileId;
 
   const ProfileScreen({
     required this.profileId,
-    super.key
+    super.key,
   });
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>
+  with DefaultScreenSetupHelpersMixin {
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: CustomAppBar(
-        leading: const CustomBackButton(),
-        titleText: AppLocalizations.of(context).profile
-      ),
-      extendBodyBehindAppBar: true,
-      body: const ProfileView(),
-      // body: ProfileBlocProvider(
-      //   initialEvent: ProfileEvent.loadProfile(
-      //     profileId: profileId,
-      //   ),
-      //   child: const ProfileView(),
-      // ),
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (BuildContext context, ProfileState state) {
+        switch (state) {
+          case ProfileLoadingState():
+            return DefaultScreenSetup(
+              enableScrolling: false,
+              title: AppLocalizations.of(context).profile,
+              slivers: [
+                buildLoadingSliver(context)
+              ],
+            );
+          case ProfileLoadedState():
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).profile,
+              slivers: [
+                SliverSafeArea(
+                  top: false,
+                  sliver: SliverToBoxAdapter(
+                    child: ProfileView(),
+                  ),
+                )
+              ],
+            );
+          case ProfileErrorState():
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).profile,
+              titleColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.error,
+              appBarBackgroundColor: Theme.of(context).colorScheme.error,
+              backButton: CustomBackButton.light(),
+              enableScrolling: false,
+              slivers: [
+                buildErrorSliver(context),
+              ],
+            );
+          default:
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).profile,
+              slivers: [],
+              enableScrolling: false,
+            );
+        }
+      },
     );
   }
 
 }
+
