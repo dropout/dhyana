@@ -149,13 +149,12 @@ class ProfileStatsRoute extends GoRouteData with AuthRedirectHook {
     authRedirectHook(context, state);
 }
 
-@TypedGoRoute<EditProfileRoute>(
-  path: '/editProfile/:profileId',
+@TypedGoRoute<ProfileEditRoute>(
+  path: '/editProfile',
   name: 'EDIT_PROFILE'
 )
-class EditProfileRoute extends GoRouteData with AuthRedirectHook {
-  final String profileId;
-  const EditProfileRoute({required this.profileId});
+class ProfileEditRoute extends GoRouteData with AuthRedirectHook {
+  const ProfileEditRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
     const ProfileEditScreen();

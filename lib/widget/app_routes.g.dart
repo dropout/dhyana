@@ -13,7 +13,7 @@ List<RouteBase> get $appRoutes => [
       $profileRoute,
       $profileWizardRoute,
       $profileStatsRoute,
-      $editProfileRoute,
+      $profileEditRoute,
       $sessionHistoryRoute,
       $timerSettingsHistoryRoute,
       $presenceRoute,
@@ -172,19 +172,18 @@ extension $ProfileStatsRouteExtension on ProfileStatsRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $editProfileRoute => GoRouteData.$route(
-      path: '/editProfile/:profileId',
+RouteBase get $profileEditRoute => GoRouteData.$route(
+      path: '/editProfile',
       name: 'EDIT_PROFILE',
-      factory: $EditProfileRouteExtension._fromState,
+      factory: $ProfileEditRouteExtension._fromState,
     );
 
-extension $EditProfileRouteExtension on EditProfileRoute {
-  static EditProfileRoute _fromState(GoRouterState state) => EditProfileRoute(
-        profileId: state.pathParameters['profileId']!,
-      );
+extension $ProfileEditRouteExtension on ProfileEditRoute {
+  static ProfileEditRoute _fromState(GoRouterState state) =>
+      const ProfileEditRoute();
 
   String get location => GoRouteData.$location(
-        '/editProfile/${Uri.encodeComponent(profileId)}',
+        '/editProfile',
       );
 
   void go(BuildContext context) => context.go(location);

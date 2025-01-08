@@ -14,6 +14,7 @@ class DefaultScreenSetup extends StatefulWidget {
   final bool includeAppBarSliver;
   final bool includeTitleSliver;
   final bool enableScrolling;
+  final bool useScaffolding;
   final Color? titleColor;
   final Color? backgroundColor;
   final Color? appBarBackgroundColor;
@@ -25,6 +26,7 @@ class DefaultScreenSetup extends StatefulWidget {
     this.includeAppBarSliver = true,
     this.includeTitleSliver = true,
     this.enableScrolling = true,
+    this.useScaffolding = true,
     this.titleColor,
     this.backgroundColor,
     this.appBarBackgroundColor,
@@ -65,13 +67,13 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: widget.backgroundColor ?? Theme.of(context).colorScheme.surface,
-      body: CustomScrollView(
+    return buildScaffolding(
+      context,
+      CustomScrollView(
         controller: titleEffectScrollController,
         physics: widget.enableScrolling
-          ? null
-          : const NeverScrollableScrollPhysics(),
+            ? null
+            : const NeverScrollableScrollPhysics(),
         slivers: [
           if (widget.includeAppBarSliver) buildTitleEffectAppBar(
             context,
@@ -90,6 +92,17 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
         ],
       ),
     );
+  }
+
+  Widget buildScaffolding(BuildContext context, Widget body) {
+    if (widget.useScaffolding) {
+      return Scaffold(
+        backgroundColor: widget.backgroundColor ?? Theme.of(context).colorScheme.surface,
+        body: body,
+      );
+    } else {
+      return body;
+    }
   }
 
   @override

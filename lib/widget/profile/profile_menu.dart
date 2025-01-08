@@ -20,7 +20,7 @@ class ProfileMenu extends StatelessWidget {
   }
 
   void _onEditProfileTapped(BuildContext context) {
-    EditProfileRoute(profileId: profile.id).push(context);
+    ProfileEditRoute().push(context);
     context.hapticsTap();
   }
 
