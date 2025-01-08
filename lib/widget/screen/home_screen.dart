@@ -1,5 +1,5 @@
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
-import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/bloc_provider/timer_settings_bloc_provider.dart';
 import 'package:dhyana/widget/presence/presence_button.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/timer/all.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
 
   final TimerSettings? timerSettings;
 
@@ -22,34 +22,13 @@ class HomeScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return TimerSettingsBlocProvider(
-      onCreateEvent: TimerSettingsEvent.load(timerSettings: timerSettings),
-      child: HomeScreenContent(timerSettings: timerSettings),
-    );
-  }
-
-
-
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class HomeScreenContent extends StatefulWidget {
-
-  final TimerSettings? timerSettings;
-
-  const HomeScreenContent({
-    this.timerSettings,
-    super.key,
-  });
+class _HomeScreenState extends State<HomeScreen> {
 
   @override
-  State<HomeScreenContent> createState() => _HomeScreenContentState();
-}
-
-class _HomeScreenContentState extends State<HomeScreenContent> {
-
-  @override
-  void didUpdateWidget(HomeScreenContent oldWidget) {
+  void didUpdateWidget(HomeScreen oldWidget) {
     if (widget.timerSettings != oldWidget.timerSettings) {
       BlocProvider.of<TimerSettingsBloc>(context).add(
         TimerSettingsEvent.load(timerSettings: widget.timerSettings)
@@ -60,6 +39,14 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
   @override
   Widget build(BuildContext context) {
+    return TimerSettingsBlocProvider(
+      onCreateEvent: TimerSettingsEvent
+        .load(timerSettings: widget.timerSettings),
+      child: buildScaffolding(context),
+    );
+  }
+
+  Widget buildScaffolding(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: CustomAppBar(

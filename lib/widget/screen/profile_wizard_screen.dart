@@ -114,6 +114,10 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                     SliverSafeArea(
                         top: false,
                         sliver: SliverToBoxAdapter(
+                          // The layout widgets below are needed to
+                          // restrict button size to its content,
+                          // otherwise the button would end up
+                          // using the whole width.
                           child: SizedBox(
                             height: AppThemeData.spacing4xl,
                             child: Center(

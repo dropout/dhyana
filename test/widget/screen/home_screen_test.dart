@@ -48,7 +48,7 @@ void main() {
                 create: (context) => timerSettingsBloc,
               ),
             ],
-            child: const HomeScreenContent(),
+            child: const HomeScreen(),
           )
         )
       );
@@ -73,7 +73,7 @@ void main() {
                 create: (context) => timerSettingsBloc,
               ),
             ],
-            child: const HomeScreenContent(),
+            child: const HomeScreen(),
           )
         )
       );
@@ -102,7 +102,7 @@ void main() {
                     create: (context) => timerSettingsBloc,
                   ),
                 ],
-                child: const HomeScreenContent(),
+                child: const HomeScreen(),
               )
           )
       );
