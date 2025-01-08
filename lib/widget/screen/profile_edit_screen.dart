@@ -138,20 +138,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
-        // clipBehavior: Clip.none,
-        // fit: StackFit.expand,
+        clipBehavior: Clip.none,
         children: [
           contentLayer,
-
-          // actionButtonLayer ?? Positioned(
-          //   bottom: 0,
-          //   left: 10,
-          //   child: Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
-          //     child: actionButtonLayer,
-          //   )
-          // )
-
           actionButtonLayer ?? Align(
             // alignment: const Alignment(1.0, 0.0),
             alignment: Alignment.bottomCenter,

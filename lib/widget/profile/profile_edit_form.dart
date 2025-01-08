@@ -99,7 +99,6 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             ]),
             keyboardType: TextInputType.text,
           ),
-          const SizedBox(height: 16),
         ],
       )
     );

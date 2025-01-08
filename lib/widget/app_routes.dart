@@ -128,7 +128,7 @@ class ProfileWizardRoute extends GoRouteData with AuthRedirectHook {
   const ProfileWizardRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileWizardScreen(profileId: profileId);
+    ProfileWizardScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);

@@ -5,4 +5,4 @@ export 'profile_footer.dart';
 export 'profile_menu.dart';
 export 'profile_stats_view.dart';
 export 'profile_view.dart';
-export 'profile_wizard_view.dart';
+
