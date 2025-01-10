@@ -46,15 +46,20 @@ class _PresenceScreenState extends State<PresenceScreen>
     }
   }
 
+  Future<void> _onRefresh(BuildContext context) async {
+    BlocProvider.of<PresenceBloc>(context).add(
+      PresenceEvent.load(
+        intervalInMinutes: intervalInMinutes.round(),
+        batchSize: widget.batchSize,
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return PresenceBlocProvider(
       initialEvent: PresenceEvent.load(),
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        extendBodyBehindAppBar: true,
-        body: buildStates(context),
-      ),
+      child: buildStates(context),
     );
   }
 
@@ -66,6 +71,8 @@ class _PresenceScreenState extends State<PresenceScreen>
             return DefaultScreenSetup(
               title: AppLocalizations.of(context).presence,
               enableScrolling: false,
+              enablePullToRefresh: true,
+              onRefresh: () => _onRefresh(context),
               slivers: [
                 buildControlsArea(context, controlsEnabled: false),
                 buildLoadingSliver(context)
@@ -74,6 +81,8 @@ class _PresenceScreenState extends State<PresenceScreen>
           case PresenceLoadedState():
             return DefaultScreenSetup(
               title: AppLocalizations.of(context).presence,
+              enablePullToRefresh: true,
+              onRefresh: () => _onRefresh(context),
               slivers: [
                 buildControlsArea(context),
                 SliverSafeArea(

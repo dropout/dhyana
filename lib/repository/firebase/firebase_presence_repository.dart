@@ -1,7 +1,6 @@
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/all.dart';
-import 'package:dhyana/repository/presence_repository.dart';
 
 class FirebasePresenceRepository
   extends CrudRepositoryOps<Presence>

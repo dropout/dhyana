@@ -72,7 +72,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
               DefaultScreenSetup(
                 title: AppLocalizations.of(context).profileWizardTitle,
                 enableScrolling: false,
-                useScaffolding: false,
+                enableScaffolding: false,
                 slivers: [
                   buildLoadingSliver(context),
                 ],
@@ -84,7 +84,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
               DefaultScreenSetup(
                 title: AppLocalizations.of(context).profileWizardTitle,
                 enableScrolling: false,
-                useScaffolding: false,
+                enableScaffolding: false,
                 slivers: [
                   buildErrorSliver(context),
                 ],
@@ -95,7 +95,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 context,
                 DefaultScreenSetup(
                   title: AppLocalizations.of(context).profileWizardTitle,
-                  useScaffolding: false,
+                  enableScaffolding: false,
                   slivers: [
 
                     SliverToBoxAdapter(

@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:dhyana/widget/util/all.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
@@ -11,25 +12,30 @@ class DefaultScreenSetup extends StatefulWidget {
   final String title;
   final List<Widget> slivers;
   final Widget? backButton;
-  final bool includeAppBarSliver;
-  final bool includeTitleSliver;
+  final bool enableAppBarSliver;
+  final bool enableTitleSliver;
   final bool enableScrolling;
-  final bool useScaffolding;
+  final bool enableScaffolding;
   final Color? titleColor;
   final Color? backgroundColor;
   final Color? appBarBackgroundColor;
+
+  final bool enablePullToRefresh;
+  final Future<void> Function()? onRefresh;
 
   const DefaultScreenSetup({
     required this.title,
     this.slivers = const [],
     this.backButton,
-    this.includeAppBarSliver = true,
-    this.includeTitleSliver = true,
+    this.enableScaffolding = true,
+    this.enableAppBarSliver = true,
+    this.enableTitleSliver = true,
     this.enableScrolling = true,
-    this.useScaffolding = true,
+    this.enablePullToRefresh = false,
     this.titleColor,
     this.backgroundColor,
     this.appBarBackgroundColor,
+    this.onRefresh,
     super.key,
   });
 
@@ -65,6 +71,12 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     }
   }
 
+  Future<void> _onRefresh(BuildContext context) async {
+    if (widget.onRefresh != null) {
+      await widget.onRefresh!.call();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return buildScaffolding(
@@ -75,7 +87,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             ? null
             : const NeverScrollableScrollPhysics(),
         slivers: [
-          if (widget.includeAppBarSliver) buildTitleEffectAppBar(
+          if (widget.enableAppBarSliver) buildTitleEffectAppBar(
             context,
             title: widget.title,
             titleOpacity: appBarTitleOpacity,
@@ -83,7 +95,10 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             titleColor: widget.titleColor,
             backButton: widget.backButton,
           ),
-          if (widget.includeTitleSliver) buildTitleEffectSliverTitle(
+          if (widget.enablePullToRefresh) CupertinoSliverRefreshControl(
+            onRefresh: () => _onRefresh(context),
+          ),
+          if (widget.enableTitleSliver) buildTitleEffectSliverTitle(
             context,
             widget.title,
             color: widget.titleColor,
@@ -95,7 +110,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   }
 
   Widget buildScaffolding(BuildContext context, Widget body) {
-    if (widget.useScaffolding) {
+    if (widget.enableScaffolding) {
       return Scaffold(
         backgroundColor: widget.backgroundColor ?? Theme.of(context).colorScheme.surface,
         body: body,

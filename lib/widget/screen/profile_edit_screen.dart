@@ -65,7 +65,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
               DefaultScreenSetup(
                 title: AppLocalizations.of(context).editProfile,
                 enableScrolling: false,
-                useScaffolding: false,
+                enableScaffolding: false,
                 slivers: [
                   buildLoadingSliver(context),
                 ],
@@ -77,7 +77,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                 DefaultScreenSetup(
                   title: AppLocalizations.of(context).editProfile,
                   enableScrolling: false,
-                  useScaffolding: false,
+                  enableScaffolding: false,
                   slivers: [
                     buildErrorSliver(context),
                   ],
@@ -88,7 +88,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
               context,
               DefaultScreenSetup(
                 title: AppLocalizations.of(context).editProfile,
-                useScaffolding: false,
+                enableScaffolding: false,
                 slivers: [
                   SliverSafeArea(
                     top: false,
