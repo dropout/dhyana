@@ -179,6 +179,18 @@ abstract class AppLocalizations {
   /// **'Felkészülés'**
   String get warmup;
 
+  /// No description provided for @loading.
+  ///
+  /// In hu, this message translates to:
+  /// **'Betöltés...'**
+  String get loading;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In hu, this message translates to:
+  /// **'Több betöltése'**
+  String get loadMore;
+
   /// No description provided for @inputWarmupLabel.
   ///
   /// In hu, this message translates to:

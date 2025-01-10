@@ -9,4 +9,4 @@ export 'profile_stats_screen.dart';
 export 'timer_settings_history_screen.dart';
 export 'session_history_screen.dart';
 export 'settings_screen.dart';
-export 'timer_running_screen.dart';
+export 'timer_screen.dart';

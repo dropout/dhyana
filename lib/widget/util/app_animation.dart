@@ -39,4 +39,12 @@ extension RevealWidgetAnimation on Widget {
     );
   }
 
+  Widget gridReveal(int x, int y) {
+    return animate().fadeIn(
+      curve: Curves.easeOutQuad,
+      delay: Duration(milliseconds: (x + y) * 64),
+      duration: Duration(milliseconds: 1024),
+    );
+  }
+
 }

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dhyana/model/presence.dart';
+import 'package:dhyana/model/presence_query_options.dart';
 import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/util/all.dart';
@@ -48,10 +49,10 @@ class StubbedPresenceRepository implements PresenceRepository {
   final Faker _faker = Faker();
 
   @override
-  Future<List<Presence>> getPresence(String? ownProfileId) async {
+  Future<List<Presence>> query(PresenceQueryOptions queryOptions) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.sync(() {
-      return List<Presence>.generate(20, (index) {
+      return List<Presence>.generate(queryOptions.limit, (index) {
         _Gender randomGender = Random().nextInt(2) % 2 == 0 ? _Gender.male : _Gender.female;
         return Presence(
           id: _faker.guid.guid(),
@@ -65,6 +66,42 @@ class StubbedPresenceRepository implements PresenceRepository {
   @override
   Future<void> showPresence(Presence presence) {
     return Future.value();
+  }
+
+  @override
+  Future<void> create(Presence model) {
+    // TODO: implement create
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> delete(String id) {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions) {
+    // TODO: implement queryStream
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Presence> read(String id) {
+    // TODO: implement read
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<Presence> readStream(String id) {
+    // TODO: implement readStream
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> update(Presence model) {
+    // TODO: implement update
+    throw UnimplementedError();
   }
 
 }

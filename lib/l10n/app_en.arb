@@ -15,6 +15,9 @@
   "okay": "Okay",
   "warmup": "Warmup",
 
+  "loading": "Loading...",
+  "loadMore": "Load more",
+
   "inputWarmupLabel": "Warmup",
   "inputStartingSoundLabel": "Starting sound",
   "inputDurationLabel": "Duration",

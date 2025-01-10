@@ -51,6 +51,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get warmup => 'Warmup';
 
   @override
+  String get loading => 'Loading...';
+
+  @override
+  String get loadMore => 'Load more';
+
+  @override
   String get inputWarmupLabel => 'Warmup';
 
   @override

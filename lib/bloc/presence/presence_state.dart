@@ -7,6 +7,9 @@ sealed class PresenceState with _$PresenceState {
 
   const factory PresenceState.initial() = _Initial;
   const factory PresenceState.loading() = PresenceLoadingState;
+  const factory PresenceState.loadingMore({
+    required List<Presence> presenceList,
+  }) = PresenceLoadingMoreState;
   const factory PresenceState.loaded({
     required List<Presence> presenceList,
   }) = PresenceLoadedState;

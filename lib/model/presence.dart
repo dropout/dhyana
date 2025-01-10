@@ -20,6 +20,6 @@ class Presence with _$Presence implements Model {
   }) = _Presence;
 
   factory Presence.fromJson(Map<String, Object?> json) =>
-      _$PresenceFromJson(json);
+    _$PresenceFromJson(json);
 
 }

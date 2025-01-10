@@ -7,9 +7,14 @@ import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class PresenceScreen extends StatefulWidget {
-  const PresenceScreen({super.key});
+
+  final int batchSize;
+
+  const PresenceScreen({
+    this.batchSize = 18,// 3 * 6 profiles per batch
+    super.key,
+  });
 
   @override
   State<PresenceScreen> createState() => _PresenceScreenState();
@@ -18,12 +23,27 @@ class PresenceScreen extends StatefulWidget {
 class _PresenceScreenState extends State<PresenceScreen>
   with DefaultScreenSetupHelpersMixin {
 
+  double sliderPosition = 60;
   double intervalInMinutes = 60;
 
   void _onIntervalChange(BuildContext context, double value) {
     setState(() {
-      intervalInMinutes = value;
+      sliderPosition = value;
     });
+  }
+
+  void _onIntervalChangeEnd(BuildContext context, double value) {
+    if (value.round() != intervalInMinutes.round()) {
+      BlocProvider.of<PresenceBloc>(context).add(
+        PresenceEvent.load(
+          intervalInMinutes: value.round(),
+          batchSize: widget.batchSize,
+        )
+      );
+      setState(() {
+        intervalInMinutes = value;
+      });
+    }
   }
 
   @override
@@ -60,8 +80,32 @@ class _PresenceScreenState extends State<PresenceScreen>
                   top: false,
                   sliver: SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: AppThemeData.spacingMd),
-                      child: PresenceView(),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppThemeData.spacingMd
+                      ),
+                      child: PresenceView(
+                        batchSize: widget.batchSize,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          case PresenceLoadingMoreState():
+            return DefaultScreenSetup(
+              title: AppLocalizations.of(context).presence,
+              slivers: [
+                buildControlsArea(context),
+                SliverSafeArea(
+                  top: false,
+                  sliver: SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppThemeData.spacingMd
+                      ),
+                      child: PresenceView(
+                        batchSize: widget.batchSize,
+                      ),
                     ),
                   ),
                 ),
@@ -109,10 +153,12 @@ class _PresenceScreenState extends State<PresenceScreen>
                   max: 180,
                   activeColor: Colors.black,
                   label: AppLocalizations.of(context)
-                    .minutesPluralWithNumber(intervalInMinutes.round()),
-                  value: intervalInMinutes,
+                    .minutesPluralWithNumber(sliderPosition.round()),
+                  value: sliderPosition,
                   onChanged: controlsEnabled ? (sliderValue) =>
                     _onIntervalChange(context, sliderValue) : null,
+                  onChangeEnd: (sliderValue) =>
+                    _onIntervalChangeEnd(context, sliderValue),
                 ),
               )
             ],

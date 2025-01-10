@@ -8,20 +8,20 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/timer_completed_view.dart';
 import 'package:dhyana/widget/timer/timer_running_view.dart';
 
-class TimerRunningScreen extends StatefulWidget {
+class TimerScreen extends StatefulWidget {
 
   final TimerSettings timerSettings;
 
-  const TimerRunningScreen({
+  const TimerScreen({
     required this.timerSettings,
     super.key,
   });
 
   @override
-  State<TimerRunningScreen> createState() => _TimerRunningScreenState();
+  State<TimerScreen> createState() => _TimerScreenState();
 }
 
-class _TimerRunningScreenState extends State<TimerRunningScreen> {
+class _TimerScreenState extends State<TimerScreen> {
 
   bool showOverlay = false;
 
@@ -57,7 +57,7 @@ class _TimerRunningScreenState extends State<TimerRunningScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return TimerRunningBlocProvider(
+    return TimerBlocProviders(
       timerSettings: widget.timerSettings,
       child: buildScaffolding(context),
     );

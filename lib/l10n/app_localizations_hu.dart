@@ -51,6 +51,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get warmup => 'Felkészülés';
 
   @override
+  String get loading => 'Betöltés...';
+
+  @override
+  String get loadMore => 'Több betöltése';
+
+  @override
   String get inputWarmupLabel => 'Felkészülés';
 
   @override

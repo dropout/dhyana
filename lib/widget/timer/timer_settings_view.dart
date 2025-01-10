@@ -59,7 +59,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onStartButtonTap(BuildContext context) {
-    TimerRunningRoute($extra: widget.timerSettings).push(context);
+    TimerRoute($extra: widget.timerSettings).push(context);
     context.hapticsTap();
   }
 

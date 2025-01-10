@@ -39,20 +39,20 @@ class HomeRoute extends GoRouteData {
     HomeScreen(timerSettings: $extra);
 }
 
-@TypedGoRoute<TimerRunningRoute>(
-  path: '/timerRunning',
-  name: 'TIMER_RUNNING',
+@TypedGoRoute<TimerRoute>(
+  path: '/timer',
+  name: 'TIMER',
 )
-class TimerRunningRoute extends GoRouteData {
+class TimerRoute extends GoRouteData {
   final TimerSettings $extra;
-  const TimerRunningRoute({required this.$extra});
+  const TimerRoute({required this.$extra});
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     Duration transitionDuration = const Duration(milliseconds: 512);
     return CustomTransitionPage(
       transitionDuration: transitionDuration,
       reverseTransitionDuration: transitionDuration,
-      child: TimerRunningScreen(
+      child: TimerScreen(
         key: state.pageKey,
         timerSettings: $extra,
         // timerSettings: $timerSettings,

@@ -1,33 +1,29 @@
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/all.dart';
+import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 
-class FirebasePresenceRepository implements PresenceRepository {
+class FirebasePresenceRepository
+  extends CrudRepositoryOps<Presence>
+  implements PresenceRepository {
 
   final PresenceDataProvider presenceDataProvider;
 
   const FirebasePresenceRepository({
     required this.presenceDataProvider,
-  });
+  }) : super(presenceDataProvider);
 
   @override
-  Future<List<Presence>> getPresence(String? ownProfileId) async {
-    List<Presence> items = await presenceDataProvider.query(
-      const PresenceQueryOptions(
-        windowSize: Duration(hours: 3),
-      )
-    );
+  Future<void> showPresence(Presence presence) =>
+    presenceDataProvider.create(presence);
 
-    if (ownProfileId != null) {
-      items = items.where((p) => p.profile.id != ownProfileId).toList();
-    }
-
-    return items;
-  }
 
   @override
-  Future<void> showPresence(Presence presence) {
-    return presenceDataProvider.create(presence);
-  }
+  Future<List<Presence>> query(PresenceQueryOptions queryOptions) =>
+    presenceDataProvider.query(queryOptions);
+
+  @override
+  Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions) =>
+    presenceDataProvider.queryStream(queryOptions);
 
 }

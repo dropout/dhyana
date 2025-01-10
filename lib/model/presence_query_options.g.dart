@@ -13,6 +13,8 @@ _$PresenceQueryOptionsImpl _$$PresenceQueryOptionsImplFromJson(
           ? const Duration(hours: 3)
           : Duration(microseconds: (json['windowSize'] as num).toInt()),
       limit: (json['limit'] as num?)?.toInt() ?? 20,
+      ownProfileId: json['ownProfileId'] as String?,
+      lastDocumentId: json['lastDocumentId'] as String?,
     );
 
 Map<String, dynamic> _$$PresenceQueryOptionsImplToJson(
@@ -20,4 +22,6 @@ Map<String, dynamic> _$$PresenceQueryOptionsImplToJson(
     <String, dynamic>{
       'windowSize': instance.windowSize.inMicroseconds,
       'limit': instance.limit,
+      'ownProfileId': instance.ownProfileId,
+      'lastDocumentId': instance.lastDocumentId,
     };

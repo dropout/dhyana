@@ -11,12 +11,12 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TimerRunningBlocProvider extends StatelessWidget {
+class TimerBlocProviders extends StatelessWidget {
 
   final Widget child;
   final TimerSettings timerSettings;
 
-  const TimerRunningBlocProvider({
+  const TimerBlocProviders({
     required this.child,
     required this.timerSettings,
     super.key,

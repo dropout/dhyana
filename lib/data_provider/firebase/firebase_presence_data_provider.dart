@@ -29,10 +29,20 @@ class FirebasePresenceDataProvider
   }
 
   Query<Presence> _buildQuery(PresenceQueryOptions queryOptions) {
+    final DateTime now = DateTime.now();
     Query<Presence> query = collectionRef
-        .where('startedAt', isGreaterThan: Timestamp.fromDate(DateTime.now().subtract(queryOptions.windowSize)))
-        .where('startedAt', isLessThan: Timestamp.fromDate(DateTime.now()))
-        .limit(queryOptions.limit);
+      .where('startedAt', isGreaterThan: Timestamp.fromDate(now.subtract(queryOptions.windowSize)))
+      .where('startedAt', isLessThan: Timestamp.fromDate(now))
+      .limit(queryOptions.limit);
+
+    if (queryOptions.ownProfileId != null) {
+      query = query.where(FieldPath.documentId, isNotEqualTo: queryOptions.ownProfileId);
+    }
+
+    if (queryOptions.lastDocumentId != null) {
+      query = query.startAfter([queryOptions.lastDocumentId]);
+    }
+
     return query;
   }
 

@@ -8,7 +8,7 @@ part of 'app_routes.dart';
 
 List<RouteBase> get $appRoutes => [
       $homeRoute,
-      $timerRunningRoute,
+      $timerRoute,
       $loginRoute,
       $profileRoute,
       $profileWizardRoute,
@@ -46,19 +46,19 @@ extension $HomeRouteExtension on HomeRoute {
       context.replace(location, extra: $extra);
 }
 
-RouteBase get $timerRunningRoute => GoRouteData.$route(
-      path: '/timerRunning',
-      name: 'TIMER_RUNNING',
-      factory: $TimerRunningRouteExtension._fromState,
+RouteBase get $timerRoute => GoRouteData.$route(
+      path: '/timer',
+      name: 'TIMER',
+      factory: $TimerRouteExtension._fromState,
     );
 
-extension $TimerRunningRouteExtension on TimerRunningRoute {
-  static TimerRunningRoute _fromState(GoRouterState state) => TimerRunningRoute(
+extension $TimerRouteExtension on TimerRoute {
+  static TimerRoute _fromState(GoRouterState state) => TimerRoute(
         $extra: state.extra as TimerSettings,
       );
 
   String get location => GoRouteData.$location(
-        '/timerRunning',
+        '/timer',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);

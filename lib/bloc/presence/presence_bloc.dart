@@ -1,3 +1,4 @@
+import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/repository/profile_repository.dart';
@@ -27,6 +28,7 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
     required this.crashlyticsService,
   }) : super(const PresenceState.initial()) {
     on<LoadPresenceData>(_onLoadPresenceData);
+    on<LoadMorePresenceData>(_onLoadMorePresenceData);
     on<ShowPresence>(_onShowPresence);
   }
 
@@ -35,7 +37,10 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
     try {
       emit(PresenceState.loading());
       List<Presence> presenceList = await presenceRepository
-        .getPresence(event.ownProfileId);
+        .query(PresenceQueryOptions(
+          limit: 18,
+          ownProfileId: event.ownProfileId,
+        ));
       logger.t('Loaded ${presenceList.length} presence items');
       emit(PresenceState.loaded(presenceList: presenceList));
     } catch (e, stack) {
@@ -46,6 +51,49 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
         reason: 'Unable to load presence data'
       );
     }
+  }
+
+  void _onLoadMorePresenceData(LoadMorePresenceData event, emit) async {
+    try {
+      logger.t('Loading more presence data');
+
+      // Get existing presence list
+      List<Presence> existingPresenceList = [];
+      if (state is PresenceLoadedState) {
+        PresenceLoadedState loadedState = state as PresenceLoadedState;
+        existingPresenceList = loadedState.presenceList;
+      }
+
+      // Get more presence list
+      emit(PresenceState.loadingMore(
+        presenceList: existingPresenceList
+      ));
+      PresenceQueryOptions queryOptions = PresenceQueryOptions(
+        limit: event.batchSize,
+        lastDocumentId: event.lastDocumentId,
+      );
+      List<Presence> morePresenceList = await presenceRepository.query(queryOptions);
+
+      // Combine existing and more presence list
+      final List<Presence> resultList = [
+        existingPresenceList,
+        morePresenceList
+      ].expand((x) => x).toList();
+
+      emit(PresenceState.loaded(
+        presenceList: resultList
+      ));
+      logger.t('Loaded ${morePresenceList.length} more into existing list: ${existingPresenceList.length}. Total: ${resultList.length}');
+    } catch (e, stack) {
+      emit(const PresenceState.error());
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Unable to load MORE presence data'
+      );
+    }
+
+
   }
 
   void _onShowPresence(ShowPresence event, emit) async {

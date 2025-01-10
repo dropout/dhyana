@@ -15,6 +15,9 @@
   "okay": "Rendben",
   "warmup": "Felkészülés",
 
+  "loading": "Betöltés...",
+  "loadMore": "Több betöltése",
+
   "inputWarmupLabel": "Felkészülés",
   "inputStartingSoundLabel": "Kezdőhang",
   "inputDurationLabel": "Időtartam",

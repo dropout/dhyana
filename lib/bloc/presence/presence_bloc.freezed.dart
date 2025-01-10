@@ -18,19 +18,34 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PresenceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? ownProfileId) load,
+    required TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)
+        load,
+    required TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)
+        loadMore,
     required TResult Function(String profileId) showPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? ownProfileId)? load,
+    TResult? Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult? Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
     TResult? Function(String profileId)? showPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? ownProfileId)? load,
+    TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
     TResult Function(String profileId)? showPresence,
     required TResult orElse(),
   }) =>
@@ -38,18 +53,21 @@ mixin _$PresenceEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadPresenceData value) load,
+    required TResult Function(LoadMorePresenceData value) loadMore,
     required TResult Function(ShowPresence value) showPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadPresenceData value)? load,
+    TResult? Function(LoadMorePresenceData value)? loadMore,
     TResult? Function(ShowPresence value)? showPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadPresenceData value)? load,
+    TResult Function(LoadMorePresenceData value)? loadMore,
     TResult Function(ShowPresence value)? showPresence,
     required TResult orElse(),
   }) =>
@@ -83,7 +101,7 @@ abstract class _$$LoadPresenceDataImplCopyWith<$Res> {
           $Res Function(_$LoadPresenceDataImpl) then) =
       __$$LoadPresenceDataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? ownProfileId});
+  $Res call({String? ownProfileId, int intervalInMinutes, int batchSize});
 }
 
 /// @nodoc
@@ -100,12 +118,22 @@ class __$$LoadPresenceDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ownProfileId = freezed,
+    Object? intervalInMinutes = null,
+    Object? batchSize = null,
   }) {
     return _then(_$LoadPresenceDataImpl(
       ownProfileId: freezed == ownProfileId
           ? _value.ownProfileId
           : ownProfileId // ignore: cast_nullable_to_non_nullable
               as String?,
+      intervalInMinutes: null == intervalInMinutes
+          ? _value.intervalInMinutes
+          : intervalInMinutes // ignore: cast_nullable_to_non_nullable
+              as int,
+      batchSize: null == batchSize
+          ? _value.batchSize
+          : batchSize // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -113,14 +141,22 @@ class __$$LoadPresenceDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadPresenceDataImpl extends LoadPresenceData {
-  const _$LoadPresenceDataImpl({this.ownProfileId}) : super._();
+  const _$LoadPresenceDataImpl(
+      {this.ownProfileId, this.intervalInMinutes = 60, this.batchSize = 18})
+      : super._();
 
   @override
   final String? ownProfileId;
+  @override
+  @JsonKey()
+  final int intervalInMinutes;
+  @override
+  @JsonKey()
+  final int batchSize;
 
   @override
   String toString() {
-    return 'PresenceEvent.load(ownProfileId: $ownProfileId)';
+    return 'PresenceEvent.load(ownProfileId: $ownProfileId, intervalInMinutes: $intervalInMinutes, batchSize: $batchSize)';
   }
 
   @override
@@ -129,11 +165,16 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
         (other.runtimeType == runtimeType &&
             other is _$LoadPresenceDataImpl &&
             (identical(other.ownProfileId, ownProfileId) ||
-                other.ownProfileId == ownProfileId));
+                other.ownProfileId == ownProfileId) &&
+            (identical(other.intervalInMinutes, intervalInMinutes) ||
+                other.intervalInMinutes == intervalInMinutes) &&
+            (identical(other.batchSize, batchSize) ||
+                other.batchSize == batchSize));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, ownProfileId);
+  int get hashCode =>
+      Object.hash(runtimeType, ownProfileId, intervalInMinutes, batchSize);
 
   /// Create a copy of PresenceEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -147,30 +188,45 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? ownProfileId) load,
+    required TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)
+        load,
+    required TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)
+        loadMore,
     required TResult Function(String profileId) showPresence,
   }) {
-    return load(ownProfileId);
+    return load(ownProfileId, intervalInMinutes, batchSize);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? ownProfileId)? load,
+    TResult? Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult? Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
     TResult? Function(String profileId)? showPresence,
   }) {
-    return load?.call(ownProfileId);
+    return load?.call(ownProfileId, intervalInMinutes, batchSize);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? ownProfileId)? load,
+    TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
     TResult Function(String profileId)? showPresence,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(ownProfileId);
+      return load(ownProfileId, intervalInMinutes, batchSize);
     }
     return orElse();
   }
@@ -179,6 +235,7 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadPresenceData value) load,
+    required TResult Function(LoadMorePresenceData value) loadMore,
     required TResult Function(ShowPresence value) showPresence,
   }) {
     return load(this);
@@ -188,6 +245,7 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadPresenceData value)? load,
+    TResult? Function(LoadMorePresenceData value)? loadMore,
     TResult? Function(ShowPresence value)? showPresence,
   }) {
     return load?.call(this);
@@ -197,6 +255,7 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadPresenceData value)? load,
+    TResult Function(LoadMorePresenceData value)? loadMore,
     TResult Function(ShowPresence value)? showPresence,
     required TResult orElse(),
   }) {
@@ -208,17 +267,213 @@ class _$LoadPresenceDataImpl extends LoadPresenceData {
 }
 
 abstract class LoadPresenceData extends PresenceEvent {
-  const factory LoadPresenceData({final String? ownProfileId}) =
-      _$LoadPresenceDataImpl;
+  const factory LoadPresenceData(
+      {final String? ownProfileId,
+      final int intervalInMinutes,
+      final int batchSize}) = _$LoadPresenceDataImpl;
   const LoadPresenceData._() : super._();
 
   String? get ownProfileId;
+  int get intervalInMinutes;
+  int get batchSize;
 
   /// Create a copy of PresenceEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadPresenceDataImplCopyWith<_$LoadPresenceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadMorePresenceDataImplCopyWith<$Res> {
+  factory _$$LoadMorePresenceDataImplCopyWith(_$LoadMorePresenceDataImpl value,
+          $Res Function(_$LoadMorePresenceDataImpl) then) =
+      __$$LoadMorePresenceDataImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String lastDocumentId, int intervalInMinutes, int batchSize});
+}
+
+/// @nodoc
+class __$$LoadMorePresenceDataImplCopyWithImpl<$Res>
+    extends _$PresenceEventCopyWithImpl<$Res, _$LoadMorePresenceDataImpl>
+    implements _$$LoadMorePresenceDataImplCopyWith<$Res> {
+  __$$LoadMorePresenceDataImplCopyWithImpl(_$LoadMorePresenceDataImpl _value,
+      $Res Function(_$LoadMorePresenceDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lastDocumentId = null,
+    Object? intervalInMinutes = null,
+    Object? batchSize = null,
+  }) {
+    return _then(_$LoadMorePresenceDataImpl(
+      lastDocumentId: null == lastDocumentId
+          ? _value.lastDocumentId
+          : lastDocumentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      intervalInMinutes: null == intervalInMinutes
+          ? _value.intervalInMinutes
+          : intervalInMinutes // ignore: cast_nullable_to_non_nullable
+              as int,
+      batchSize: null == batchSize
+          ? _value.batchSize
+          : batchSize // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadMorePresenceDataImpl extends LoadMorePresenceData {
+  const _$LoadMorePresenceDataImpl(
+      {required this.lastDocumentId,
+      this.intervalInMinutes = 60,
+      this.batchSize = 18})
+      : super._();
+
+  @override
+  final String lastDocumentId;
+  @override
+  @JsonKey()
+  final int intervalInMinutes;
+  @override
+  @JsonKey()
+  final int batchSize;
+
+  @override
+  String toString() {
+    return 'PresenceEvent.loadMore(lastDocumentId: $lastDocumentId, intervalInMinutes: $intervalInMinutes, batchSize: $batchSize)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadMorePresenceDataImpl &&
+            (identical(other.lastDocumentId, lastDocumentId) ||
+                other.lastDocumentId == lastDocumentId) &&
+            (identical(other.intervalInMinutes, intervalInMinutes) ||
+                other.intervalInMinutes == intervalInMinutes) &&
+            (identical(other.batchSize, batchSize) ||
+                other.batchSize == batchSize));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, lastDocumentId, intervalInMinutes, batchSize);
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadMorePresenceDataImplCopyWith<_$LoadMorePresenceDataImpl>
+      get copyWith =>
+          __$$LoadMorePresenceDataImplCopyWithImpl<_$LoadMorePresenceDataImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)
+        load,
+    required TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)
+        loadMore,
+    required TResult Function(String profileId) showPresence,
+  }) {
+    return loadMore(lastDocumentId, intervalInMinutes, batchSize);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult? Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
+    TResult? Function(String profileId)? showPresence,
+  }) {
+    return loadMore?.call(lastDocumentId, intervalInMinutes, batchSize);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
+    TResult Function(String profileId)? showPresence,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(lastDocumentId, intervalInMinutes, batchSize);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadPresenceData value) load,
+    required TResult Function(LoadMorePresenceData value) loadMore,
+    required TResult Function(ShowPresence value) showPresence,
+  }) {
+    return loadMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadPresenceData value)? load,
+    TResult? Function(LoadMorePresenceData value)? loadMore,
+    TResult? Function(ShowPresence value)? showPresence,
+  }) {
+    return loadMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadPresenceData value)? load,
+    TResult Function(LoadMorePresenceData value)? loadMore,
+    TResult Function(ShowPresence value)? showPresence,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadMorePresenceData extends PresenceEvent {
+  const factory LoadMorePresenceData(
+      {required final String lastDocumentId,
+      final int intervalInMinutes,
+      final int batchSize}) = _$LoadMorePresenceDataImpl;
+  const LoadMorePresenceData._() : super._();
+
+  String get lastDocumentId;
+  int get intervalInMinutes;
+  int get batchSize;
+
+  /// Create a copy of PresenceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadMorePresenceDataImplCopyWith<_$LoadMorePresenceDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -290,7 +545,12 @@ class _$ShowPresenceImpl extends ShowPresence {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? ownProfileId) load,
+    required TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)
+        load,
+    required TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)
+        loadMore,
     required TResult Function(String profileId) showPresence,
   }) {
     return showPresence(profileId);
@@ -299,7 +559,12 @@ class _$ShowPresenceImpl extends ShowPresence {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? ownProfileId)? load,
+    TResult? Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult? Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
     TResult? Function(String profileId)? showPresence,
   }) {
     return showPresence?.call(profileId);
@@ -308,7 +573,12 @@ class _$ShowPresenceImpl extends ShowPresence {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? ownProfileId)? load,
+    TResult Function(
+            String? ownProfileId, int intervalInMinutes, int batchSize)?
+        load,
+    TResult Function(
+            String lastDocumentId, int intervalInMinutes, int batchSize)?
+        loadMore,
     TResult Function(String profileId)? showPresence,
     required TResult orElse(),
   }) {
@@ -322,6 +592,7 @@ class _$ShowPresenceImpl extends ShowPresence {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadPresenceData value) load,
+    required TResult Function(LoadMorePresenceData value) loadMore,
     required TResult Function(ShowPresence value) showPresence,
   }) {
     return showPresence(this);
@@ -331,6 +602,7 @@ class _$ShowPresenceImpl extends ShowPresence {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadPresenceData value)? load,
+    TResult? Function(LoadMorePresenceData value)? loadMore,
     TResult? Function(ShowPresence value)? showPresence,
   }) {
     return showPresence?.call(this);
@@ -340,6 +612,7 @@ class _$ShowPresenceImpl extends ShowPresence {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadPresenceData value)? load,
+    TResult Function(LoadMorePresenceData value)? loadMore,
     TResult Function(ShowPresence value)? showPresence,
     required TResult orElse(),
   }) {
@@ -370,6 +643,7 @@ mixin _$PresenceState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<Presence> presenceList) loadingMore,
     required TResult Function(List<Presence> presenceList) loaded,
     required TResult Function() error,
   }) =>
@@ -378,6 +652,7 @@ mixin _$PresenceState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<Presence> presenceList)? loadingMore,
     TResult? Function(List<Presence> presenceList)? loaded,
     TResult? Function()? error,
   }) =>
@@ -386,6 +661,7 @@ mixin _$PresenceState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<Presence> presenceList)? loadingMore,
     TResult Function(List<Presence> presenceList)? loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -395,6 +671,7 @@ mixin _$PresenceState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PresenceLoadingState value) loading,
+    required TResult Function(PresenceLoadingMoreState value) loadingMore,
     required TResult Function(PresenceLoadedState value) loaded,
     required TResult Function(PresenceErrorState value) error,
   }) =>
@@ -403,6 +680,7 @@ mixin _$PresenceState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PresenceLoadingState value)? loading,
+    TResult? Function(PresenceLoadingMoreState value)? loadingMore,
     TResult? Function(PresenceLoadedState value)? loaded,
     TResult? Function(PresenceErrorState value)? error,
   }) =>
@@ -411,6 +689,7 @@ mixin _$PresenceState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PresenceLoadingState value)? loading,
+    TResult Function(PresenceLoadingMoreState value)? loadingMore,
     TResult Function(PresenceLoadedState value)? loaded,
     TResult Function(PresenceErrorState value)? error,
     required TResult orElse(),
@@ -482,6 +761,7 @@ class _$InitialImpl extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<Presence> presenceList) loadingMore,
     required TResult Function(List<Presence> presenceList) loaded,
     required TResult Function() error,
   }) {
@@ -493,6 +773,7 @@ class _$InitialImpl extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<Presence> presenceList)? loadingMore,
     TResult? Function(List<Presence> presenceList)? loaded,
     TResult? Function()? error,
   }) {
@@ -504,6 +785,7 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<Presence> presenceList)? loadingMore,
     TResult Function(List<Presence> presenceList)? loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -519,6 +801,7 @@ class _$InitialImpl extends _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PresenceLoadingState value) loading,
+    required TResult Function(PresenceLoadingMoreState value) loadingMore,
     required TResult Function(PresenceLoadedState value) loaded,
     required TResult Function(PresenceErrorState value) error,
   }) {
@@ -530,6 +813,7 @@ class _$InitialImpl extends _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PresenceLoadingState value)? loading,
+    TResult? Function(PresenceLoadingMoreState value)? loadingMore,
     TResult? Function(PresenceLoadedState value)? loaded,
     TResult? Function(PresenceErrorState value)? error,
   }) {
@@ -541,6 +825,7 @@ class _$InitialImpl extends _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PresenceLoadingState value)? loading,
+    TResult Function(PresenceLoadingMoreState value)? loadingMore,
     TResult Function(PresenceLoadedState value)? loaded,
     TResult Function(PresenceErrorState value)? error,
     required TResult orElse(),
@@ -601,6 +886,7 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<Presence> presenceList) loadingMore,
     required TResult Function(List<Presence> presenceList) loaded,
     required TResult Function() error,
   }) {
@@ -612,6 +898,7 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<Presence> presenceList)? loadingMore,
     TResult? Function(List<Presence> presenceList)? loaded,
     TResult? Function()? error,
   }) {
@@ -623,6 +910,7 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<Presence> presenceList)? loadingMore,
     TResult Function(List<Presence> presenceList)? loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -638,6 +926,7 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PresenceLoadingState value) loading,
+    required TResult Function(PresenceLoadingMoreState value) loadingMore,
     required TResult Function(PresenceLoadedState value) loaded,
     required TResult Function(PresenceErrorState value) error,
   }) {
@@ -649,6 +938,7 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PresenceLoadingState value)? loading,
+    TResult? Function(PresenceLoadingMoreState value)? loadingMore,
     TResult? Function(PresenceLoadedState value)? loaded,
     TResult? Function(PresenceErrorState value)? error,
   }) {
@@ -660,6 +950,7 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PresenceLoadingState value)? loading,
+    TResult Function(PresenceLoadingMoreState value)? loadingMore,
     TResult Function(PresenceLoadedState value)? loaded,
     TResult Function(PresenceErrorState value)? error,
     required TResult orElse(),
@@ -674,6 +965,180 @@ class _$PresenceLoadingStateImpl extends PresenceLoadingState {
 abstract class PresenceLoadingState extends PresenceState {
   const factory PresenceLoadingState() = _$PresenceLoadingStateImpl;
   const PresenceLoadingState._() : super._();
+}
+
+/// @nodoc
+abstract class _$$PresenceLoadingMoreStateImplCopyWith<$Res> {
+  factory _$$PresenceLoadingMoreStateImplCopyWith(
+          _$PresenceLoadingMoreStateImpl value,
+          $Res Function(_$PresenceLoadingMoreStateImpl) then) =
+      __$$PresenceLoadingMoreStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Presence> presenceList});
+}
+
+/// @nodoc
+class __$$PresenceLoadingMoreStateImplCopyWithImpl<$Res>
+    extends _$PresenceStateCopyWithImpl<$Res, _$PresenceLoadingMoreStateImpl>
+    implements _$$PresenceLoadingMoreStateImplCopyWith<$Res> {
+  __$$PresenceLoadingMoreStateImplCopyWithImpl(
+      _$PresenceLoadingMoreStateImpl _value,
+      $Res Function(_$PresenceLoadingMoreStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? presenceList = null,
+  }) {
+    return _then(_$PresenceLoadingMoreStateImpl(
+      presenceList: null == presenceList
+          ? _value._presenceList
+          : presenceList // ignore: cast_nullable_to_non_nullable
+              as List<Presence>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PresenceLoadingMoreStateImpl extends PresenceLoadingMoreState {
+  const _$PresenceLoadingMoreStateImpl(
+      {required final List<Presence> presenceList})
+      : _presenceList = presenceList,
+        super._();
+
+  final List<Presence> _presenceList;
+  @override
+  List<Presence> get presenceList {
+    if (_presenceList is EqualUnmodifiableListView) return _presenceList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_presenceList);
+  }
+
+  @override
+  String toString() {
+    return 'PresenceState.loadingMore(presenceList: $presenceList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PresenceLoadingMoreStateImpl &&
+            const DeepCollectionEquality()
+                .equals(other._presenceList, _presenceList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_presenceList));
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PresenceLoadingMoreStateImplCopyWith<_$PresenceLoadingMoreStateImpl>
+      get copyWith => __$$PresenceLoadingMoreStateImplCopyWithImpl<
+          _$PresenceLoadingMoreStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Presence> presenceList) loadingMore,
+    required TResult Function(List<Presence> presenceList) loaded,
+    required TResult Function() error,
+  }) {
+    return loadingMore(presenceList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Presence> presenceList)? loadingMore,
+    TResult? Function(List<Presence> presenceList)? loaded,
+    TResult? Function()? error,
+  }) {
+    return loadingMore?.call(presenceList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Presence> presenceList)? loadingMore,
+    TResult Function(List<Presence> presenceList)? loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore(presenceList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(PresenceLoadingState value) loading,
+    required TResult Function(PresenceLoadingMoreState value) loadingMore,
+    required TResult Function(PresenceLoadedState value) loaded,
+    required TResult Function(PresenceErrorState value) error,
+  }) {
+    return loadingMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(PresenceLoadingState value)? loading,
+    TResult? Function(PresenceLoadingMoreState value)? loadingMore,
+    TResult? Function(PresenceLoadedState value)? loaded,
+    TResult? Function(PresenceErrorState value)? error,
+  }) {
+    return loadingMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(PresenceLoadingState value)? loading,
+    TResult Function(PresenceLoadingMoreState value)? loadingMore,
+    TResult Function(PresenceLoadedState value)? loaded,
+    TResult Function(PresenceErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PresenceLoadingMoreState extends PresenceState {
+  const factory PresenceLoadingMoreState(
+          {required final List<Presence> presenceList}) =
+      _$PresenceLoadingMoreStateImpl;
+  const PresenceLoadingMoreState._() : super._();
+
+  List<Presence> get presenceList;
+
+  /// Create a copy of PresenceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PresenceLoadingMoreStateImplCopyWith<_$PresenceLoadingMoreStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -756,6 +1221,7 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<Presence> presenceList) loadingMore,
     required TResult Function(List<Presence> presenceList) loaded,
     required TResult Function() error,
   }) {
@@ -767,6 +1233,7 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<Presence> presenceList)? loadingMore,
     TResult? Function(List<Presence> presenceList)? loaded,
     TResult? Function()? error,
   }) {
@@ -778,6 +1245,7 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<Presence> presenceList)? loadingMore,
     TResult Function(List<Presence> presenceList)? loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -793,6 +1261,7 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PresenceLoadingState value) loading,
+    required TResult Function(PresenceLoadingMoreState value) loadingMore,
     required TResult Function(PresenceLoadedState value) loaded,
     required TResult Function(PresenceErrorState value) error,
   }) {
@@ -804,6 +1273,7 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PresenceLoadingState value)? loading,
+    TResult? Function(PresenceLoadingMoreState value)? loadingMore,
     TResult? Function(PresenceLoadedState value)? loaded,
     TResult? Function(PresenceErrorState value)? error,
   }) {
@@ -815,6 +1285,7 @@ class _$PresenceLoadedStateImpl extends PresenceLoadedState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PresenceLoadingState value)? loading,
+    TResult Function(PresenceLoadingMoreState value)? loadingMore,
     TResult Function(PresenceLoadedState value)? loaded,
     TResult Function(PresenceErrorState value)? error,
     required TResult orElse(),
@@ -883,6 +1354,7 @@ class _$PresenceErrorStateImpl extends PresenceErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<Presence> presenceList) loadingMore,
     required TResult Function(List<Presence> presenceList) loaded,
     required TResult Function() error,
   }) {
@@ -894,6 +1366,7 @@ class _$PresenceErrorStateImpl extends PresenceErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<Presence> presenceList)? loadingMore,
     TResult? Function(List<Presence> presenceList)? loaded,
     TResult? Function()? error,
   }) {
@@ -905,6 +1378,7 @@ class _$PresenceErrorStateImpl extends PresenceErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<Presence> presenceList)? loadingMore,
     TResult Function(List<Presence> presenceList)? loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -920,6 +1394,7 @@ class _$PresenceErrorStateImpl extends PresenceErrorState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PresenceLoadingState value) loading,
+    required TResult Function(PresenceLoadingMoreState value) loadingMore,
     required TResult Function(PresenceLoadedState value) loaded,
     required TResult Function(PresenceErrorState value) error,
   }) {
@@ -931,6 +1406,7 @@ class _$PresenceErrorStateImpl extends PresenceErrorState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PresenceLoadingState value)? loading,
+    TResult? Function(PresenceLoadingMoreState value)? loadingMore,
     TResult? Function(PresenceLoadedState value)? loaded,
     TResult? Function(PresenceErrorState value)? error,
   }) {
@@ -942,6 +1418,7 @@ class _$PresenceErrorStateImpl extends PresenceErrorState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PresenceLoadingState value)? loading,
+    TResult Function(PresenceLoadingMoreState value)? loadingMore,
     TResult Function(PresenceLoadedState value)? loaded,
     TResult Function(PresenceErrorState value)? error,
     required TResult orElse(),

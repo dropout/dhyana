@@ -22,6 +22,8 @@ PresenceQueryOptions _$PresenceQueryOptionsFromJson(Map<String, dynamic> json) {
 mixin _$PresenceQueryOptions {
   Duration get windowSize => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
+  String? get ownProfileId => throw _privateConstructorUsedError;
+  String? get lastDocumentId => throw _privateConstructorUsedError;
 
   /// Serializes this PresenceQueryOptions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +41,11 @@ abstract class $PresenceQueryOptionsCopyWith<$Res> {
           $Res Function(PresenceQueryOptions) then) =
       _$PresenceQueryOptionsCopyWithImpl<$Res, PresenceQueryOptions>;
   @useResult
-  $Res call({Duration windowSize, int limit});
+  $Res call(
+      {Duration windowSize,
+      int limit,
+      String? ownProfileId,
+      String? lastDocumentId});
 }
 
 /// @nodoc
@@ -60,6 +66,8 @@ class _$PresenceQueryOptionsCopyWithImpl<$Res,
   $Res call({
     Object? windowSize = null,
     Object? limit = null,
+    Object? ownProfileId = freezed,
+    Object? lastDocumentId = freezed,
   }) {
     return _then(_value.copyWith(
       windowSize: null == windowSize
@@ -70,6 +78,14 @@ class _$PresenceQueryOptionsCopyWithImpl<$Res,
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
+      ownProfileId: freezed == ownProfileId
+          ? _value.ownProfileId
+          : ownProfileId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastDocumentId: freezed == lastDocumentId
+          ? _value.lastDocumentId
+          : lastDocumentId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -82,7 +98,11 @@ abstract class _$$PresenceQueryOptionsImplCopyWith<$Res>
       __$$PresenceQueryOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Duration windowSize, int limit});
+  $Res call(
+      {Duration windowSize,
+      int limit,
+      String? ownProfileId,
+      String? lastDocumentId});
 }
 
 /// @nodoc
@@ -100,6 +120,8 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
   $Res call({
     Object? windowSize = null,
     Object? limit = null,
+    Object? ownProfileId = freezed,
+    Object? lastDocumentId = freezed,
   }) {
     return _then(_$PresenceQueryOptionsImpl(
       windowSize: null == windowSize
@@ -110,6 +132,14 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
+      ownProfileId: freezed == ownProfileId
+          ? _value.ownProfileId
+          : ownProfileId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastDocumentId: freezed == lastDocumentId
+          ? _value.lastDocumentId
+          : lastDocumentId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -119,7 +149,10 @@ class __$$PresenceQueryOptionsImplCopyWithImpl<$Res>
 class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
     with DiagnosticableTreeMixin {
   const _$PresenceQueryOptionsImpl(
-      {this.windowSize = const Duration(hours: 3), this.limit = 20})
+      {this.windowSize = const Duration(hours: 3),
+      this.limit = 20,
+      this.ownProfileId,
+      this.lastDocumentId})
       : super._();
 
   factory _$PresenceQueryOptionsImpl.fromJson(Map<String, dynamic> json) =>
@@ -131,10 +164,14 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
   @override
   @JsonKey()
   final int limit;
+  @override
+  final String? ownProfileId;
+  @override
+  final String? lastDocumentId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PresenceQueryOptions(windowSize: $windowSize, limit: $limit)';
+    return 'PresenceQueryOptions(windowSize: $windowSize, limit: $limit, ownProfileId: $ownProfileId, lastDocumentId: $lastDocumentId)';
   }
 
   @override
@@ -143,7 +180,9 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
     properties
       ..add(DiagnosticsProperty('type', 'PresenceQueryOptions'))
       ..add(DiagnosticsProperty('windowSize', windowSize))
-      ..add(DiagnosticsProperty('limit', limit));
+      ..add(DiagnosticsProperty('limit', limit))
+      ..add(DiagnosticsProperty('ownProfileId', ownProfileId))
+      ..add(DiagnosticsProperty('lastDocumentId', lastDocumentId));
   }
 
   @override
@@ -153,12 +192,17 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
             other is _$PresenceQueryOptionsImpl &&
             (identical(other.windowSize, windowSize) ||
                 other.windowSize == windowSize) &&
-            (identical(other.limit, limit) || other.limit == limit));
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.ownProfileId, ownProfileId) ||
+                other.ownProfileId == ownProfileId) &&
+            (identical(other.lastDocumentId, lastDocumentId) ||
+                other.lastDocumentId == lastDocumentId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, windowSize, limit);
+  int get hashCode =>
+      Object.hash(runtimeType, windowSize, limit, ownProfileId, lastDocumentId);
 
   /// Create a copy of PresenceQueryOptions
   /// with the given fields replaced by the non-null parameter values.
@@ -181,7 +225,9 @@ class _$PresenceQueryOptionsImpl extends _PresenceQueryOptions
 abstract class _PresenceQueryOptions extends PresenceQueryOptions {
   const factory _PresenceQueryOptions(
       {final Duration windowSize,
-      final int limit}) = _$PresenceQueryOptionsImpl;
+      final int limit,
+      final String? ownProfileId,
+      final String? lastDocumentId}) = _$PresenceQueryOptionsImpl;
   const _PresenceQueryOptions._() : super._();
 
   factory _PresenceQueryOptions.fromJson(Map<String, dynamic> json) =
@@ -191,6 +237,10 @@ abstract class _PresenceQueryOptions extends PresenceQueryOptions {
   Duration get windowSize;
   @override
   int get limit;
+  @override
+  String? get ownProfileId;
+  @override
+  String? get lastDocumentId;
 
   /// Create a copy of PresenceQueryOptions
   /// with the given fields replaced by the non-null parameter values.

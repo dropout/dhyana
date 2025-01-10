@@ -13,6 +13,8 @@ class PresenceQueryOptions with _$PresenceQueryOptions {
   const factory PresenceQueryOptions({
     @Default(Duration(hours: 3)) Duration windowSize,
     @Default(20) int limit,
+    String ? ownProfileId,
+    String? lastDocumentId,
   }) = _PresenceQueryOptions;
 
   factory PresenceQueryOptions.fromJson(Map<String, Object?> json) =>
