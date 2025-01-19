@@ -36,7 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           leading: Row(
             children: [
               (leading != null) ? ConstrainedBox(
-                constraints: const BoxConstraints.tightFor(width: widgetHeight),
+                constraints: const BoxConstraints.tightFor(height: widgetHeight),
                 child: leading,
               ) : const SizedBox.shrink(),
               Gap.large(),
