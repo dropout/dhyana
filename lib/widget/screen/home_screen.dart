@@ -60,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const ProfileButton(),
         ],
       ),
+      extendBodyBehindAppBar: true,
       body: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
           builder: (BuildContext context, TimerSettingsState state) {
             switch (state) {
@@ -68,23 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
               case TimerSettingsDataLoadingState():
                 return const AppLoadingDisplay();
               case TimerSettingsDataLoadedState():
-                return buildLoaded(context, state.timerSettings);
+                return TimerSettingsView(
+                  timerSettings: state.timerSettings,
+                );
             }
           }
       ),
     );
   }
 
-  Widget buildLoaded(BuildContext context, TimerSettings timerSettings) {
-    return SafeArea(
-      child: TimerSettingsView(
-        timerSettings: timerSettings,
-      ),
-    );
-  }
-
-  Widget buildPresenceButton(BuildContext context) {
-    return PresenceButton();
-  }
-
 }
+
