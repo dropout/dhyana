@@ -115,7 +115,6 @@ class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerPr
                   height: 1.0,
                 )
               ),
-              durationText: buildDurationTextSpan(context),
             )
           ),
 
@@ -134,26 +133,6 @@ class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerPr
 
         ],
       ),
-    );
-  }
-
-  TextSpan buildDurationTextSpan(BuildContext context) {
-    return TextSpan(
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-        fontWeight: FontWeight.w900,
-        color: Colors.white,
-      ),
-      children: [
-        TextSpan(
-          text: formatter.format(now),
-        ),
-        TextSpan(
-          text: ' — ',
-        ),
-        TextSpan(
-          text: formatter.format(end),
-        ),
-      ]
     );
   }
 
@@ -206,8 +185,8 @@ class ShaderPainter extends CustomPainter {
       // colors: 0.0 - 1.0
       setter.setVectors([
         vm.Vector3(color.r, color.g, color.b),
-        vm.Vector3(colorAccent.r, colorAccent.g, colorAccent.b),
         vm.Vector3(color.r, color.g, color.b),
+        vm.Vector3(colorAccent.r, colorAccent.g, colorAccent.b),
         vm.Vector3(colorAccent.r, colorAccent.g, colorAccent.b),
       ]);
     });
@@ -229,11 +208,9 @@ class ShaderPainter extends CustomPainter {
 class StartButtonText extends LeafRenderObjectWidget {
 
   final TextSpan buttonText;
-  final TextSpan durationText;
 
   const StartButtonText({
     required this.buttonText,
-    required this.durationText,
     super.key,
   }) : super();
 
@@ -241,15 +218,12 @@ class StartButtonText extends LeafRenderObjectWidget {
   RenderObject createRenderObject(BuildContext context) {
     return RenderStartButtonText(
       buttonText: buttonText,
-      durationText: durationText,
     );
   }
 
   @override
   void updateRenderObject(BuildContext context, RenderStartButtonText renderObject) {
-    renderObject
-      ..buttonText = buttonText
-      ..durationText = durationText;
+    renderObject.buttonText = buttonText;
   }
 }
 
@@ -257,33 +231,15 @@ class StartButtonText extends LeafRenderObjectWidget {
 class RenderStartButtonText extends RenderBox {
 
   TextSpan _buttonText;
-  TextSpan _durationText;
-
   late final TextPainter _buttonTextPainter;
-  late final TextPainter _durationTextPainter;
 
   RenderStartButtonText({
     required TextSpan buttonText,
-    required TextSpan durationText,
-  }) : _buttonText = buttonText, _durationText = durationText {
+  }) : _buttonText = buttonText {
     _buttonTextPainter = TextPainter(
       text: buttonText,
       textDirection: TextDirection.ltr,
     )..layout();
-    _durationTextPainter = TextPainter(
-      text: durationText,
-      textDirection: TextDirection.ltr,
-    )..layout();
-  }
-
-  TextSpan get durationText => _durationText;
-  set durationText(TextSpan text) {
-    if (_durationTextPainter.text != text) {
-      _durationTextPainter.text = text;
-      _durationTextPainter.layout();
-      _durationText = text;
-      markNeedsLayout();
-    }
   }
 
   TextSpan get buttonText => _buttonText;
@@ -299,27 +255,16 @@ class RenderStartButtonText extends RenderBox {
   @override
   void performLayout() {
     _buttonTextPainter.layout();
-    _durationTextPainter.layout();
+
     size = Size(
-      max(_buttonTextPainter.width, _durationTextPainter.width),
-      _buttonTextPainter.height + _durationTextPainter.height - 4,
+      _buttonTextPainter.width,
+      _buttonTextPainter.height,
     );
-  }
-
-  @override
-  double computeMinIntrinsicWidth(double height) {
-    return max(_buttonTextPainter.minIntrinsicWidth, _durationTextPainter.minIntrinsicWidth);
-  }
-
-  @override
-  double computeMaxIntrinsicWidth(double height) {
-    return max(_buttonTextPainter.maxIntrinsicWidth, _durationTextPainter.maxIntrinsicWidth);
   }
 
   @override
   void paint(PaintingContext context, Offset offset) {
     _buttonTextPainter.paint(context.canvas, offset.translate((size.width - _buttonTextPainter.width) / 2, .0));
-    _durationTextPainter.paint(context.canvas, offset.translate((size.width - _durationTextPainter.width) / 2, _buttonTextPainter.height - 2));
   }
 
 }
