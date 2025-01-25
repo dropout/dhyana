@@ -1,6 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
 
-import 'package:bar_chart/bar_chart.dart';
 
 void main() {
   // test('adds one to input values', () {
