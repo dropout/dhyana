@@ -41,7 +41,7 @@ class _BarChartState extends State<BarChart> {
 
   late BarChartContext barChartContext;
   final List<BarChartData> barChartData = [];
-  final key = GlobalKey();
+  final barContainerKey = GlobalKey();
 
   @override
   void initState() {
@@ -108,6 +108,7 @@ class _BarChartState extends State<BarChart> {
   Widget buildBars(BuildContext context) {
 
     return Row(
+      key: barContainerKey,
       children: [
         for (final data in barChartData)
           Expanded(
@@ -137,7 +138,7 @@ class _BarChartState extends State<BarChart> {
   }
 
   void _barHitTest(PointerEvent event) {
-    final RenderBox box = key.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
+    final RenderBox box = barContainerKey.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
     final result = BoxHitTestResult();
     Offset local = box.globalToLocal(event.position);
     if (box.hitTest(result, position: local)) {
@@ -156,13 +157,15 @@ class _BarChartState extends State<BarChart> {
 class BarChartBar extends LeafRenderObjectWidget {
 
   final double value;
-  final double? width;
+  final double width;
   final BarChartContext barChartContext;
+  final Color color;
 
   const BarChartBar({
     required this.value,
     required this.barChartContext,
-    this.width,
+    this.width = double.infinity,
+    this.color = Colors.white,
     super.key,
   });
 
@@ -172,50 +175,16 @@ class BarChartBar extends LeafRenderObjectWidget {
       barChartContext: barChartContext,
       value: value,
       width: width,
+      color: color,
     );
   }
 
   @override
   void updateRenderObject(BuildContext context, RenderBarChartBar renderObject) {
+    renderObject.barChartContext = barChartContext;
     renderObject.value = value;
     renderObject.width = width;
+    renderObject.color = color;
   }
 }
 
-class RenderBarChartBar extends RenderBox {
-
-  double value;
-  double? width;
-  BarChartContext barChartContext;
-
-  // double get valueToPixelRatio => value / barChartContext.barChartDataSource.max;
-
-  RenderBarChartBar({
-    required this.value,
-    required this.barChartContext,
-    this.width,
-  });
-
-  @override
-  void performLayout() {
-    size = constraints.constrain(Size(double.infinity, double.infinity));
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    final Paint paint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-
-    final valueToPixelRatio = size.height / barChartContext.yAxisMaxValue;
-
-    final renderOffset = offset.translate(0, size.height - value * valueToPixelRatio);
-    final Size renderSize = Size(size.width, value * valueToPixelRatio);
-
-    context.canvas.drawRect(renderOffset & renderSize, paint);
-  }
-
-  @override
-  bool hitTestSelf(Offset position) => size.contains(position);
-
-}

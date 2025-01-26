@@ -98,7 +98,6 @@ class YAxisPainter extends CustomPainter {
 class XAxisPainter extends CustomPainter {
 
   final BarChartContext barChartContext;
-
   final Color color = Colors.white;
 
   XAxisPainter({
@@ -168,4 +167,65 @@ TextPainter createTextPainter(String text, TextAlign textAlign) {
   );
 
   return textPainter;
+}
+
+class RenderBarChartBar extends RenderBox {
+
+  final Paint _paint;
+
+  double _value;
+  double _width;
+  BarChartContext _barChartContext;
+
+  RenderBarChartBar({
+    required double value,
+    required BarChartContext barChartContext,
+    Color color = Colors.white,
+    double width = double.infinity,
+  }) :
+    _barChartContext = barChartContext,
+    _value = value,
+    _width = width,
+    _paint = Paint()..color = color;
+
+  set value(double value) {
+    _value = value;
+    markNeedsPaint();
+  }
+
+  double get value => _value;
+
+  set barChartContext(BarChartContext barChartContext) {
+    _barChartContext = barChartContext;
+    markNeedsPaint();
+  }
+
+  set color(Color color) {
+    _paint.color = color;
+    markNeedsPaint();
+  }
+
+  set width(double width) {
+    _width = width;
+    markNeedsLayout();
+  }
+
+  @override
+  void performLayout() {
+    size = constraints.constrain(Size(double.infinity, double.infinity));
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+
+    final valueToPixelRatio = size.height / _barChartContext.yAxisMaxValue;
+    final renderOffset = offset.translate(0, size.height - _value * valueToPixelRatio);
+    final Size renderSize = Size(size.width, _value * valueToPixelRatio);
+
+    context.canvas.drawRect(renderOffset & renderSize, _paint);
+  }
+
+  @override
+  bool hitTestSelf(Offset position) => size.contains(position);
+
 }
