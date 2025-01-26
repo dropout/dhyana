@@ -10,26 +10,33 @@ import 'painting.dart';
 class BarChart extends StatefulWidget {
 
   final BarChartDataSource dataSource;
+
   final XAxisLayout xAxisLayout;
+  final XAxisBuilder xAxisBuilder;
   final double xAxisHeight;
+
   final YAxisLayout yAxisLayout;
+  final YAxisBuilder yAxisBuilder;
   final double yAxisWidth;
 
-  final void Function(int index)? onTapBar;
-  final void Function(int index)? onLongPressBar;
-  final void Function(int index)? onBarHover;
-  final void Function()? onLongPressBarEnd;
+  final BarBuilder barBuilder;
+
+  final void Function(BarData data)? onInfoTriggered;
+  final void Function(BarData data)? onInfoChanged;
+  final void Function(BarData data)? onInfoDismissed;
 
   const BarChart({
     required this.dataSource,
     this.xAxisLayout = XAxisLayout.bottom,
+    this.xAxisBuilder = _defaultXAxisBuilder,
     this.xAxisHeight = 20,
     this.yAxisLayout = YAxisLayout.left,
+    this.yAxisBuilder = _defaultYAxisBuilder,
     this.yAxisWidth = 20,
-    this.onTapBar,
-    this.onLongPressBar,
-    this.onLongPressBarEnd,
-    this.onBarHover,
+    this.barBuilder = _defaultBarBuilder,
+    this.onInfoTriggered,
+    this.onInfoChanged,
+    this.onInfoDismissed,
     super.key,
   });
 
@@ -40,8 +47,12 @@ class BarChart extends StatefulWidget {
 class _BarChartState extends State<BarChart> {
 
   late BarChartContext barChartContext;
-  final List<BarChartData> barChartData = [];
+  final List<BarData> barChartData = [];
   final barContainerKey = GlobalKey();
+
+  bool _isInfoTriggered = false;
+  BarData? _selectedBarData;
+  int selectedIndex = -1;
 
   @override
   void initState() {
@@ -75,69 +86,72 @@ class _BarChartState extends State<BarChart> {
         Expanded(
           child: Row(
             children: [
-              buildYAxis(context),
+              widget.yAxisBuilder(context, barChartContext),
               Expanded(
                 child: buildBars(context),
               ),
               if (buildMirroredYAxis)
-                buildYAxis(context),
+                widget.yAxisBuilder(context, barChartContext),
             ],
           ),
         ),
         Padding(
           padding: EdgeInsets.only(left: widget.yAxisWidth),
-          child: buildXAxis(context),
+          child: widget.xAxisBuilder(context, barChartContext),
         )
       ],
     );
 
   }
 
-  Widget buildYAxis(BuildContext context) {
-    return SizedBox(
-      width: 20,
-      height: double.infinity,
-      child: CustomPaint(
-        painter: YAxisPainter(
-          barChartContext: barChartContext,
-        ),
-      )
-    );
-  }
-
   Widget buildBars(BuildContext context) {
-
     return Row(
       key: barContainerKey,
       children: [
-        for (final data in barChartData)
+        for (var i = 0; i < barChartData.length; i++)
           Expanded(
-            child: Listener(
-              onPointerDown: _barHitTest,
-              child: BarChartBar(
-                barChartContext: barChartContext,
-                value: data.value,
-              ),
+            child: GestureDetector(
+              onLongPress: () {
+                setState(() {
+                  _isInfoTriggered = true;
+                  _selectedBarData = barChartData[i];
+                  widget.onInfoTriggered?.call(barChartData[i]);
+                });
+              },
+              onLongPressEnd: (details) {
+                if (_isInfoTriggered) {
+                  setState(() {
+                    _isInfoTriggered = false;
+                    widget.onInfoDismissed?.call(_selectedBarData!);
+                    _selectedBarData = null;
+                  });
+                }
+              },
+              child: Listener(
+                behavior: HitTestBehavior.opaque,
+                onPointerMove: (PointerMoveEvent event) {
+                  BarData? targetBarData = _barHitTest(event);
+                  if (targetBarData != null && targetBarData != _selectedBarData) {
+                    setState(() {
+                      _selectedBarData = targetBarData;
+                      widget.onInfoChanged?.call(targetBarData);
+                    });
+                  }
+                },
+                child: widget.barBuilder(
+                  context,
+                  barChartContext,
+                  barChartData[i],
+                  i,
+                ),
+              )
             ),
-          ),
+          )
       ],
     );
-
   }
 
-  Widget buildXAxis(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 20,
-      child: CustomPaint(
-        painter: XAxisPainter(
-          barChartContext: barChartContext,
-        ),
-      )
-    );
-  }
-
-  void _barHitTest(PointerEvent event) {
+  BarData? _barHitTest(PointerEvent event) {
     final RenderBox box = barContainerKey.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
     final result = BoxHitTestResult();
     Offset local = box.globalToLocal(event.position);
@@ -146,23 +160,26 @@ class _BarChartState extends State<BarChart> {
         /// temporary variable so that the [is] allows access of [index]
         final target = hit.target;
         if (target is RenderBarChartBar) {
-          print(target.value);
+          return target.barChartData;
         }
       }
     }
+    return null;
   }
 
 }
 
 class BarChartBar extends LeafRenderObjectWidget {
 
-  final double value;
+  final int index;
+  final BarData barChartData;
   final double width;
   final BarChartContext barChartContext;
   final Color color;
 
   const BarChartBar({
-    required this.value,
+    required this.index,
+    required this.barChartData,
     required this.barChartContext,
     this.width = double.infinity,
     this.color = Colors.white,
@@ -172,8 +189,9 @@ class BarChartBar extends LeafRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderBarChartBar(
+      index: index,
       barChartContext: barChartContext,
-      value: value,
+      barChartData: barChartData,
       width: width,
       color: color,
     );
@@ -182,9 +200,45 @@ class BarChartBar extends LeafRenderObjectWidget {
   @override
   void updateRenderObject(BuildContext context, RenderBarChartBar renderObject) {
     renderObject.barChartContext = barChartContext;
-    renderObject.value = value;
+    renderObject.barChartData = barChartData;
     renderObject.width = width;
     renderObject.color = color;
   }
 }
 
+Widget _defaultXAxisBuilder(BuildContext context, BarChartContext barChartContext) {
+  return SizedBox(
+    width: double.infinity,
+    height: 20,
+    child: CustomPaint(
+      painter: XAxisPainter(
+        barChartContext: barChartContext,
+      ),
+    )
+  );
+}
+
+Widget _defaultYAxisBuilder(BuildContext context, BarChartContext barChartContext) {
+  return SizedBox(
+    width: 20,
+    height: double.infinity,
+    child: CustomPaint(
+      painter: YAxisPainter(
+        barChartContext: barChartContext,
+      ),
+    )
+  );
+}
+
+Widget _defaultBarBuilder(
+  BuildContext context,
+  BarChartContext barChartContext,
+  BarData data,
+  int index,
+) {
+  return BarChartBar(
+    index: index,
+    barChartContext: barChartContext,
+    barChartData: data,
+  );
+}

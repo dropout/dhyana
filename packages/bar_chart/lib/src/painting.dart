@@ -173,27 +173,32 @@ class RenderBarChartBar extends RenderBox {
 
   final Paint _paint;
 
-  double _value;
+  int _index;
   double _width;
+  BarData _barChartData;
   BarChartContext _barChartContext;
 
   RenderBarChartBar({
-    required double value,
+    required int index,
     required BarChartContext barChartContext,
+    required BarData barChartData,
     Color color = Colors.white,
     double width = double.infinity,
   }) :
+    _index = index,
+    _barChartData = barChartData,
     _barChartContext = barChartContext,
-    _value = value,
     _width = width,
     _paint = Paint()..color = color;
 
-  set value(double value) {
-    _value = value;
+  BarData get barChartData => _barChartData;
+  double get value => _barChartData.value;
+  int get index => _index;
+
+  set barChartData(BarData barChartData) {
+    _barChartData = barChartData;
     markNeedsPaint();
   }
-
-  double get value => _value;
 
   set barChartContext(BarChartContext barChartContext) {
     _barChartContext = barChartContext;
@@ -217,10 +222,11 @@ class RenderBarChartBar extends RenderBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
+    final double value = _barChartData.value;
 
     final valueToPixelRatio = size.height / _barChartContext.yAxisMaxValue;
-    final renderOffset = offset.translate(0, size.height - _value * valueToPixelRatio);
-    final Size renderSize = Size(size.width, _value * valueToPixelRatio);
+    final renderOffset = offset.translate(0, size.height - value * valueToPixelRatio);
+    final Size renderSize = Size(size.width, value * valueToPixelRatio);
 
     context.canvas.drawRect(renderOffset & renderSize, _paint);
   }

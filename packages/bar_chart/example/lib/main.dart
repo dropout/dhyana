@@ -45,8 +45,31 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
     MyData(name: 'D', value: 200),
   ];
 
-  bool isOverlayVisible = false;
   OverlayEntry? overlayEntry;
+  MyData? selectedData;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Widget overlayEntryBuilder(BuildContext context, MyData data) {
+    if (selectedData == null) {
+      return SizedBox.shrink();
+    }
+
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Material(
+          child: Container(
+            color: Colors.blue,
+            child: Text('Details of: $selectedData'),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +80,28 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
           height: 100,
           color: Colors.black,
           child: BarChart(
-            dataSource: BarChartDataSource(
+            dataSource: BarChartDataSource<MyData>(
               source: testData,
-              dataMapper: (data) =>
-                BarChartData(
+              dataMapper: (MyData data) =>
+                BarData<MyData>(
                   value: data.value,
                   label: data.name,
+                  source: data,
                 ),
             ),
 
-            onTapBar: (index) => print('tap: ${testData[index]}'),
-            onLongPressBar: (index) => showOverlay(context, testData[index]),
-            onLongPressBarEnd: () => hideOverlay(context),
-            onBarHover: (index) => print('hover: ${testData[index]}'),
+            onInfoTriggered: (data) {
+              showOverlay(context, data.source);
+              print('onInfoTriggered: $data');
+            },
+            onInfoChanged: (data) {
+              updateOverlay(context, data.source);
+              print('onInfoChanged: $data');
+            },
+            onInfoDismissed: (data) {
+              hideOverlay(context);
+              print('onInfoDismissed $data');
+            },
 
           ),
         )
@@ -78,32 +110,26 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
   }
 
   void showOverlay(BuildContext context, MyData data) {
-    isOverlayVisible = true;
+    setState(() {
+      selectedData = data;
+      overlayEntry = OverlayEntry(
+        builder: (context) => overlayEntryBuilder(context, data),
+      );
+      Overlay.of(context).insert(overlayEntry!);
+    });
+  }
 
-    overlayEntry = OverlayEntry(
-      builder: (context) {
-        return SafeArea(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Material(
-              child: Container(
-                color: Colors.blue,
-                child: Text('Details of: $data'),
-              ),
-            ),
-          ),
-        );
-      }
-    );
-
-    Overlay.of(context).insert(overlayEntry!);
+  void updateOverlay(BuildContext context, MyData data) {
+    setState(() {
+      selectedData = data;
+    });
+    overlayEntry?.markNeedsBuild();
   }
 
   void hideOverlay(BuildContext context) {
-    if (overlayEntry != null) {
-      overlayEntry!.remove();
+    if (overlayEntry != null && overlayEntry!.mounted) {
+      overlayEntry?.remove();
       overlayEntry = null;
-      isOverlayVisible = false;
     }
   }
 

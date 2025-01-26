@@ -1,8 +1,26 @@
 import 'dart:math' as math;
 
 import 'package:bar_chart/bar_chart.dart';
+import 'package:flutter/material.dart';
 
 import 'enums.dart';
+
+typedef BarBuilder = Widget Function(
+  BuildContext context,
+  BarChartContext barChartContext,
+  BarData barChartData,
+  int index,
+);
+
+typedef YAxisBuilder = Widget Function(
+  BuildContext context,
+  BarChartContext barChartContext
+);
+
+typedef XAxisBuilder = Widget Function(
+  BuildContext context,
+  BarChartContext barChartContext
+);
 
 class BarChartContext {
 
@@ -28,22 +46,34 @@ class BarChartContext {
 
 }
 
-class BarChartData {
+class BarData<T> {
 
   final double value;
   final String label;
+  final T source;
 
-  const BarChartData({
+  const BarData({
     required this.value,
     required this.label,
+    required this.source,
   });
+
+  @override
+  String toString() => 'BarData(value: $value, label: $label, source: $source)';
+
+  @override
+  bool operator == (Object other) =>
+      other is BarData && value == other.value && label == other.label ;
+
+  @override
+  int get hashCode => Object.hash(value, label);
 
 }
 
 class BarChartDataSource<T> {
 
   final List<T> source;
-  final BarChartData Function(T) dataMapper;
+  final BarData Function(T) dataMapper;
 
   const BarChartDataSource({
     required this.source,
@@ -54,6 +84,6 @@ class BarChartDataSource<T> {
   double get min => source.map(dataMapper).map((data) => data.value).reduce(math.min);
   int get length => source.length;
 
-  List<BarChartData> get barChartData => source.map(dataMapper).toList();
+  List<BarData> get barChartData => source.map(dataMapper).toList();
 
 }
