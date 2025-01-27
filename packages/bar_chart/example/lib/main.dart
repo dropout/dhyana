@@ -68,9 +68,23 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
       child: Align(
         alignment: Alignment.topCenter,
         child: Material(
-          child: Container(
-            color: Colors.blue,
-            child: Text('Details of: $selectedData'),
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.red,
+              ),
+              padding: EdgeInsets.all(16),
+              child: Text(
+                selectedData.toString(),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
         ),
       ),
