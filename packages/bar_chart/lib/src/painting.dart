@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -197,17 +198,17 @@ class RenderBarChartBar extends RenderBox {
 
   set barChartData(BarData barChartData) {
     _barChartData = barChartData;
-    markNeedsPaint();
+    markNeedsLayout();
   }
 
   set barChartContext(BarChartContext barChartContext) {
     _barChartContext = barChartContext;
-    markNeedsPaint();
+    markNeedsLayout();
   }
 
   set color(Color color) {
     _paint.color = color;
-    markNeedsPaint();
+    markNeedsLayout();
   }
 
   set width(double width) {
@@ -223,10 +224,17 @@ class RenderBarChartBar extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     final double value = _barChartData.value;
-
     final valueToPixelRatio = size.height / _barChartContext.yAxisMaxValue;
-    final renderOffset = offset.translate(0, size.height - value * valueToPixelRatio);
-    final Size renderSize = Size(size.width, value * valueToPixelRatio);
+
+    final renderOffset = offset.translate(
+      0,
+      math.max(size.height - (value * valueToPixelRatio).abs(), 0)
+    );
+
+    final Size renderSize = Size(
+      size.width,
+      math.min(value * valueToPixelRatio, size.height)
+    );
 
     context.canvas.drawRect(renderOffset & renderSize, _paint);
   }

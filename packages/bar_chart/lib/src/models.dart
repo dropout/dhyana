@@ -29,10 +29,10 @@ class BarChartContext {
   final double xAxisHeight;
   final YAxisLayout yAxisLayout;
   final double yAxisWidth;
-  final double? maxValueToDisplay;
+  final double? displayRange;
 
   double get yAxisMaxValue {
-    return maxValueToDisplay ?? barChartDataSource.max + 10.0;
+    return displayRange ?? barChartDataSource.max + 10.0;
   }
 
   const BarChartContext({
@@ -41,7 +41,7 @@ class BarChartContext {
     required this.xAxisHeight,
     required this.yAxisLayout,
     required this.yAxisWidth,
-    this.maxValueToDisplay,
+    this.displayRange,
   });
 
 }

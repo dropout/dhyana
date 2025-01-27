@@ -21,6 +21,8 @@ class BarChart extends StatefulWidget {
 
   final BarBuilder barBuilder;
 
+  final double? displayRange;
+
   final void Function(BarData data)? onInfoTriggered;
   final void Function(BarData data)? onInfoChanged;
   final void Function(BarData data)? onInfoDismissed;
@@ -34,6 +36,7 @@ class BarChart extends StatefulWidget {
     this.yAxisBuilder = _defaultYAxisBuilder,
     this.yAxisWidth = 20,
     this.barBuilder = _defaultBarBuilder,
+    this.displayRange,
     this.onInfoTriggered,
     this.onInfoChanged,
     this.onInfoDismissed,
@@ -70,7 +73,19 @@ class _BarChartState extends State<BarChart> {
 
   @override
   void didUpdateWidget(covariant BarChart oldWidget) {
-    // TODO: implement didUpdateWidget
+    setState(() {
+      barChartData.clear();
+      barChartData.addAll(widget.dataSource.barChartData);
+      barChartContext = BarChartContext(
+        barChartDataSource: widget.dataSource,
+        xAxisLayout: widget.xAxisLayout,
+        xAxisHeight: widget.xAxisHeight,
+        yAxisLayout: widget.yAxisLayout,
+        yAxisWidth: widget.yAxisWidth,
+        displayRange: widget.displayRange,
+      );
+    });
+
     super.didUpdateWidget(oldWidget);
   }
 

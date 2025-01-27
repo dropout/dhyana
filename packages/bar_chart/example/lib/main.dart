@@ -38,6 +38,7 @@ class BarChartExamplePage extends StatefulWidget {
 
 class _BarChartExamplePageState extends State<BarChartExamplePage> {
 
+  // Example data source
   final List<MyData> testData = const <MyData>[
     MyData(name: 'A', value: 100),
     MyData(name: 'B', value: 50),
@@ -45,8 +46,13 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
     MyData(name: 'D', value: 200),
   ];
 
+  // Overlay
   OverlayEntry? overlayEntry;
   MyData? selectedData;
+
+  // Settings
+  bool disableYMaxValue = false;
+  double yMaxValue = 200;
 
   @override
   void initState() {
@@ -74,38 +80,84 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 200,
-          height: 100,
-          color: Colors.black,
-          child: BarChart(
-            dataSource: BarChartDataSource<MyData>(
-              source: testData,
-              dataMapper: (MyData data) =>
-                BarData<MyData>(
-                  value: data.value,
-                  label: data.name,
-                  source: data,
+      backgroundColor: Colors.amberAccent.shade100,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+
+              SizedBox(
+                height: 200,
+                child: Center(
+                  child: Text(
+                    'BarChart Example',
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ),
+
+              Container(
+                padding: const EdgeInsets.all(16),
+                height: 200,
+                color: Colors.black,
+                child: BarChart(
+                  dataSource: BarChartDataSource<MyData>(
+                    source: testData,
+                    dataMapper: (MyData data) =>
+                      BarData<MyData>(
+                        value: data.value,
+                        label: data.name,
+                        source: data,
+                      ),
+                  ),
+
+                  displayRange: disableYMaxValue ? null : yMaxValue,
+
+                  onInfoTriggered: (data) {
+                    showOverlay(context, data.source);
+                    print('onInfoTriggered: $data');
+                  },
+                  onInfoChanged: (data) {
+                    updateOverlay(context, data.source);
+                    print('onInfoChanged: $data');
+                  },
+                  onInfoDismissed: (data) {
+                    hideOverlay(context);
+                    print('onInfoDismissed $data');
+                  },
                 ),
-            ),
 
-            onInfoTriggered: (data) {
-              showOverlay(context, data.source);
-              print('onInfoTriggered: $data');
-            },
-            onInfoChanged: (data) {
-              updateOverlay(context, data.source);
-              print('onInfoChanged: $data');
-            },
-            onInfoDismissed: (data) {
-              hideOverlay(context);
-              print('onInfoDismissed $data');
-            },
+              ),
 
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Checkbox(
+                    value: disableYMaxValue,
+                    onChanged: (value) {
+                      setState(() {
+                        disableYMaxValue = value ?? false;
+                      });
+                    }
+                  ),
+                  Slider(
+                    value: yMaxValue,
+                    min: 10,
+                    max: 1000,
+                    onChanged: (value) {
+                      setState(() {
+                        yMaxValue = value;
+                      });
+                    }
+                  ),
+                ]
+              )
+            ],
           ),
         )
-      )
+      ),
     );
   }
 
