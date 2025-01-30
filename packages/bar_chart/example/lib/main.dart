@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:bar_chart/bar_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -39,11 +41,41 @@ class BarChartExamplePage extends StatefulWidget {
 class _BarChartExamplePageState extends State<BarChartExamplePage> {
 
   // Example data source
-  final List<MyData> testData = const <MyData>[
-    MyData(name: 'A', value: 100),
-    MyData(name: 'B', value: 50),
-    MyData(name: 'C', value: 150),
-    MyData(name: 'D', value: 200),
+  final List<MyData> testWeekData = <MyData>[
+    MyData(name: 'M', value: math.Random().nextDouble() * 20),
+    MyData(name: 'T', value: math.Random().nextDouble() * 50),
+    MyData(name: 'W', value: math.Random().nextDouble() * 50),
+    MyData(name: 'T', value: math.Random().nextDouble() * 10),
+    MyData(name: 'F', value: math.Random().nextDouble() * 30),
+    MyData(name: 'S', value: math.Random().nextDouble() * 50),
+    MyData(name: 'S', value: math.Random().nextDouble() * 30),
+  ];
+
+  final List<MyData> testDayData = <MyData>[
+    MyData(name: '0', value: math.Random().nextDouble() * 20),
+    MyData(name: '1', value: math.Random().nextDouble() * 50),
+    MyData(name: '2', value: math.Random().nextDouble() * 50),
+    MyData(name: '3', value: math.Random().nextDouble() * 10),
+    MyData(name: '4', value: math.Random().nextDouble() * 30),
+    MyData(name: '5', value: math.Random().nextDouble() * 50),
+    MyData(name: '6', value: math.Random().nextDouble() * 30),
+    MyData(name: '7', value: math.Random().nextDouble() * 50),
+    MyData(name: '8', value: math.Random().nextDouble() * 50),
+    MyData(name: '9', value: math.Random().nextDouble() * 10),
+    MyData(name: '10', value: math.Random().nextDouble() * 30),
+    MyData(name: '11', value: math.Random().nextDouble() * 50),
+    MyData(name: '12', value: math.Random().nextDouble() * 30),
+    MyData(name: '13', value: math.Random().nextDouble() * 50),
+    MyData(name: '14', value: math.Random().nextDouble() * 50),
+    MyData(name: '15', value: math.Random().nextDouble() * 10),
+    MyData(name: '16', value: math.Random().nextDouble() * 30),
+    MyData(name: '17', value: math.Random().nextDouble() * 50),
+    MyData(name: '18', value: math.Random().nextDouble() * 30),
+    MyData(name: '19', value: math.Random().nextDouble() * 30),
+    MyData(name: '20', value: math.Random().nextDouble() * 30),
+    MyData(name: '21', value: math.Random().nextDouble() * 30),
+    MyData(name: '22', value: math.Random().nextDouble() * 30),
+    MyData(name: '23', value: math.Random().nextDouble() * 30),
   ];
 
   // Overlay
@@ -51,8 +83,8 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
   MyData? selectedData;
 
   // Settings
-  bool disableYMaxValue = false;
-  double yMaxValue = 200;
+  bool autoDisplayRange = false;
+  double displayRange = 200;
 
   @override
   void initState() {
@@ -99,7 +131,6 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
         child: SafeArea(
           child: Column(
             children: [
-
               SizedBox(
                 height: 200,
                 child: Center(
@@ -111,61 +142,101 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                   ),
                 )
               ),
-
-              Container(
-                padding: const EdgeInsets.all(16),
-                height: 200,
-                color: Colors.black,
-                child: BarChart(
-                  dataSource: BarChartDataSource<MyData>(
-                    source: testData,
-                    dataMapper: (MyData data) =>
-                      BarData<MyData>(
-                        value: data.value,
-                        label: data.name,
-                        source: data,
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    width: double.infinity,
+                    height: 200,
+                    color: Colors.black,
+                    child: BarChart(
+                      dataSource: BarChartDataSource<MyData>(
+                        source: testWeekData,
+                        dataMapper: (MyData data) =>
+                          BarData<MyData>(
+                            value: data.value,
+                            label: data.name,
+                            source: data,
+                          ),
                       ),
+                      displayRange: autoDisplayRange ? null : displayRange,
+                      xAxisPadding: 32,
+                      yAxisPadding: 21,
+                      onInfoTriggered: (data) {
+                        showOverlay(context, data.source);
+                        print('onInfoTriggered: $data');
+                      },
+                      onInfoChanged: (data) {
+                        updateOverlay(context, data.source);
+                        print('onInfoChanged: $data');
+                      },
+                      onInfoDismissed: (data) {
+                        hideOverlay(context);
+                        print('onInfoDismissed $data');
+                      },
+                    ),
                   ),
 
-                  displayRange: disableYMaxValue ? null : yMaxValue,
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    width: double.infinity,
+                    height: 200,
+                    color: Colors.black,
+                    child: BarChart(
+                      dataSource: BarChartDataSource<MyData>(
+                        source: testDayData,
+                        dataMapper: (MyData data) =>
+                          BarData<MyData>(
+                            value: data.value,
+                            label: data.name,
+                            source: data,
+                          ),
+                      ),
+                      displayRange: autoDisplayRange ? null : displayRange,
+                      xAxisPadding: 32,
+                      yAxisPadding: 21,
+                      yAxisFactor: 6,
+                      onInfoTriggered: (data) {
+                        showOverlay(context, data.source);
+                        print('onInfoTriggered: $data');
+                      },
+                      onInfoChanged: (data) {
+                        updateOverlay(context, data.source);
+                        print('onInfoChanged: $data');
+                      },
+                      onInfoDismissed: (data) {
+                        hideOverlay(context);
+                        print('onInfoDismissed $data');
+                      },
+                    ),
+                  ),
 
-                  onInfoTriggered: (data) {
-                    showOverlay(context, data.source);
-                    print('onInfoTriggered: $data');
-                  },
-                  onInfoChanged: (data) {
-                    updateOverlay(context, data.source);
-                    print('onInfoChanged: $data');
-                  },
-                  onInfoDismissed: (data) {
-                    hideOverlay(context);
-                    print('onInfoDismissed $data');
-                  },
-                ),
-
+                ]
               ),
 
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Checkbox(
-                    value: disableYMaxValue,
+                    value: autoDisplayRange,
                     onChanged: (value) {
                       setState(() {
-                        disableYMaxValue = value ?? false;
+                        autoDisplayRange = value ?? false;
                       });
                     }
                   ),
                   Slider(
-                    value: yMaxValue,
+                    value: displayRange,
                     min: 10,
                     max: 1000,
                     onChanged: (value) {
                       setState(() {
-                        yMaxValue = value;
+                        displayRange = value;
+                        autoDisplayRange = false;
                       });
                     }
                   ),
+
                 ]
               )
             ],

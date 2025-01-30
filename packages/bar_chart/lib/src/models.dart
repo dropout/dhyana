@@ -24,25 +24,43 @@ typedef XAxisBuilder = Widget Function(
 
 class BarChartContext {
 
-  final BarChartDataSource barChartDataSource;
-  final XAxisLayout xAxisLayout;
-  final double xAxisHeight;
-  final YAxisLayout yAxisLayout;
-  final double yAxisWidth;
+  final BarChartDataSource dataSource;
   final double? displayRange;
+  final double xAxisPadding;
+  final int xAxisFactor;
+  final double yAxisPadding;
+  final int yAxisFactor;
 
   double get yAxisMaxValue {
-    return displayRange ?? barChartDataSource.max + 10.0;
+    return displayRange ?? dataSource.max + 10.0;
   }
 
   const BarChartContext({
-    required this.barChartDataSource,
-    required this.xAxisLayout,
-    required this.xAxisHeight,
-    required this.yAxisLayout,
-    required this.yAxisWidth,
+    required this.dataSource,
+    required this.xAxisPadding,
+    required this.xAxisFactor,
+    required this.yAxisPadding,
+    required this.yAxisFactor,
     this.displayRange,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is BarChartContext &&
+      other.dataSource == dataSource &&
+      other.xAxisPadding == xAxisPadding &&
+      other.yAxisPadding == yAxisPadding &&
+      other.displayRange == displayRange;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    dataSource,
+    xAxisPadding,
+    yAxisPadding,
+    displayRange,
+  );
 
 }
 
@@ -63,7 +81,7 @@ class BarData<T> {
 
   @override
   bool operator == (Object other) =>
-      other is BarData && value == other.value && label == other.label ;
+    other is BarData && value == other.value && label == other.label ;
 
   @override
   int get hashCode => Object.hash(value, label);

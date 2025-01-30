@@ -10,18 +10,15 @@ import 'painting.dart';
 class BarChart extends StatefulWidget {
 
   final BarChartDataSource dataSource;
-
-  final XAxisLayout xAxisLayout;
-  final XAxisBuilder xAxisBuilder;
-  final double xAxisHeight;
-
-  final YAxisLayout yAxisLayout;
-  final YAxisBuilder yAxisBuilder;
-  final double yAxisWidth;
-
-  final BarBuilder barBuilder;
-
   final double? displayRange;
+
+  final double xAxisPadding;
+  final int xAxisFactor;
+  final double yAxisPadding;
+  final int yAxisFactor;
+
+  final double barPadding;
+  final BarBuilder barBuilder;
 
   final void Function(BarData data)? onInfoTriggered;
   final void Function(BarData data)? onInfoChanged;
@@ -29,14 +26,13 @@ class BarChart extends StatefulWidget {
 
   const BarChart({
     required this.dataSource,
-    this.xAxisLayout = XAxisLayout.bottom,
-    this.xAxisBuilder = _defaultXAxisBuilder,
-    this.xAxisHeight = 20,
-    this.yAxisLayout = YAxisLayout.left,
-    this.yAxisBuilder = _defaultYAxisBuilder,
-    this.yAxisWidth = 20,
-    this.barBuilder = _defaultBarBuilder,
     this.displayRange,
+    this.barPadding = 0,
+    this.xAxisPadding = 20,
+    this.xAxisFactor = 60,
+    this.yAxisPadding = 20,
+    this.yAxisFactor = 1,
+    this.barBuilder = _defaultBarBuilder,
     this.onInfoTriggered,
     this.onInfoChanged,
     this.onInfoDismissed,
@@ -61,11 +57,12 @@ class _BarChartState extends State<BarChart> {
   void initState() {
     barChartData.addAll(widget.dataSource.barChartData);
     barChartContext = BarChartContext(
-      barChartDataSource: widget.dataSource,
-      xAxisLayout: widget.xAxisLayout,
-      xAxisHeight: widget.xAxisHeight,
-      yAxisLayout: widget.yAxisLayout,
-      yAxisWidth: widget.yAxisWidth,
+      dataSource: widget.dataSource,
+      xAxisPadding: widget.xAxisPadding,
+      xAxisFactor: widget.xAxisFactor,
+      yAxisPadding: widget.yAxisPadding,
+      yAxisFactor: widget.yAxisFactor,
+      displayRange: widget.displayRange,
     );
 
     super.initState();
@@ -77,11 +74,11 @@ class _BarChartState extends State<BarChart> {
       barChartData.clear();
       barChartData.addAll(widget.dataSource.barChartData);
       barChartContext = BarChartContext(
-        barChartDataSource: widget.dataSource,
-        xAxisLayout: widget.xAxisLayout,
-        xAxisHeight: widget.xAxisHeight,
-        yAxisLayout: widget.yAxisLayout,
-        yAxisWidth: widget.yAxisWidth,
+        dataSource: widget.dataSource,
+        xAxisPadding: widget.xAxisPadding,
+        xAxisFactor: widget.xAxisFactor,
+        yAxisPadding: widget.yAxisPadding,
+        yAxisFactor: widget.yAxisFactor,
         displayRange: widget.displayRange,
       );
     });
@@ -91,32 +88,21 @@ class _BarChartState extends State<BarChart> {
 
   @override
   Widget build(BuildContext context) {
-    final bool buildMirroredYAxis = (
-      widget.yAxisLayout == YAxisLayout.right ||
-      widget.yAxisLayout == YAxisLayout.both
-    );
-
-    return Column(
-      children: [
-        Expanded(
-          child: Row(
-            children: [
-              widget.yAxisBuilder(context, barChartContext),
-              Expanded(
-                child: buildBars(context),
-              ),
-              if (buildMirroredYAxis)
-                widget.yAxisBuilder(context, barChartContext),
-            ],
-          ),
+    return SizedBox.expand(
+      child: CustomPaint(
+        painter: AxisPainter(
+          color: Colors.grey.shade600,
+          barChartContext: barChartContext,
         ),
-        Padding(
-          padding: EdgeInsets.only(left: widget.yAxisWidth),
-          child: widget.xAxisBuilder(context, barChartContext),
-        )
-      ],
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: barChartContext.yAxisPadding,
+            right: barChartContext.xAxisPadding,
+          ),
+          child: buildBars(context),
+        ),
+      ),
     );
-
   }
 
   Widget buildBars(BuildContext context) {
@@ -126,6 +112,9 @@ class _BarChartState extends State<BarChart> {
         for (var i = 0; i < barChartData.length; i++)
           Expanded(
             child: GestureDetector(
+              onTap: () {
+                // widget.onBarTap?.call(barChartData[i]);
+              },
               onLongPress: () {
                 setState(() {
                   _isInfoTriggered = true;
@@ -188,7 +177,7 @@ class BarChartBar extends LeafRenderObjectWidget {
 
   final int index;
   final BarData barChartData;
-  final double width;
+  final double barPadding;
   final BarChartContext barChartContext;
   final Color color;
 
@@ -196,7 +185,7 @@ class BarChartBar extends LeafRenderObjectWidget {
     required this.index,
     required this.barChartData,
     required this.barChartContext,
-    this.width = double.infinity,
+    this.barPadding = double.infinity,
     this.color = Colors.white,
     super.key,
   });
@@ -207,7 +196,7 @@ class BarChartBar extends LeafRenderObjectWidget {
       index: index,
       barChartContext: barChartContext,
       barChartData: barChartData,
-      width: width,
+      barPadding: barPadding,
       color: color,
     );
   }
@@ -216,33 +205,9 @@ class BarChartBar extends LeafRenderObjectWidget {
   void updateRenderObject(BuildContext context, RenderBarChartBar renderObject) {
     renderObject.barChartContext = barChartContext;
     renderObject.barChartData = barChartData;
-    renderObject.width = width;
+    renderObject.width = barPadding;
     renderObject.color = color;
   }
-}
-
-Widget _defaultXAxisBuilder(BuildContext context, BarChartContext barChartContext) {
-  return SizedBox(
-    width: double.infinity,
-    height: 20,
-    child: CustomPaint(
-      painter: XAxisPainter(
-        barChartContext: barChartContext,
-      ),
-    )
-  );
-}
-
-Widget _defaultYAxisBuilder(BuildContext context, BarChartContext barChartContext) {
-  return SizedBox(
-    width: 20,
-    height: double.infinity,
-    child: CustomPaint(
-      painter: YAxisPainter(
-        barChartContext: barChartContext,
-      ),
-    )
-  );
 }
 
 Widget _defaultBarBuilder(
@@ -255,5 +220,6 @@ Widget _defaultBarBuilder(
     index: index,
     barChartContext: barChartContext,
     barChartData: data,
+    barPadding: 1,
   );
 }
