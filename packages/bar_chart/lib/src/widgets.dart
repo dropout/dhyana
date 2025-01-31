@@ -58,11 +58,12 @@ class _BarChartState extends State<BarChart> {
     barChartData.addAll(widget.dataSource.barChartData);
     barChartContext = BarChartContext(
       dataSource: widget.dataSource,
-      xAxisPadding: widget.xAxisPadding,
-      xAxisFactor: widget.xAxisFactor,
-      yAxisPadding: widget.yAxisPadding,
-      yAxisFactor: widget.yAxisFactor,
-      displayRange: widget.displayRange,
+      padding: EdgeInsets.only(
+        right: widget.yAxisPadding,
+        bottom: widget.xAxisPadding,
+      ),
+      xAxisIntervalFactor: widget.xAxisFactor,
+      yAxisIntervalFactor: widget.yAxisFactor,
     );
 
     super.initState();
@@ -75,11 +76,12 @@ class _BarChartState extends State<BarChart> {
       barChartData.addAll(widget.dataSource.barChartData);
       barChartContext = BarChartContext(
         dataSource: widget.dataSource,
-        xAxisPadding: widget.xAxisPadding,
-        xAxisFactor: widget.xAxisFactor,
-        yAxisPadding: widget.yAxisPadding,
-        yAxisFactor: widget.yAxisFactor,
-        displayRange: widget.displayRange,
+        padding: EdgeInsets.only(
+          right: widget.yAxisPadding,
+          bottom: widget.xAxisPadding,
+        ),
+        xAxisIntervalFactor: widget.xAxisFactor,
+        yAxisIntervalFactor: widget.yAxisFactor,
       );
     });
 
@@ -96,8 +98,8 @@ class _BarChartState extends State<BarChart> {
         ),
         child: Padding(
           padding: EdgeInsets.only(
-            bottom: barChartContext.yAxisPadding,
-            right: barChartContext.xAxisPadding,
+            bottom: widget.xAxisPadding,
+            right: widget.yAxisPadding,
           ),
           child: buildBars(context),
         ),

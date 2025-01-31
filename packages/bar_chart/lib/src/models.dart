@@ -25,41 +25,46 @@ typedef XAxisBuilder = Widget Function(
 class BarChartContext {
 
   final BarChartDataSource dataSource;
-  final double? displayRange;
-  final double xAxisPadding;
-  final int xAxisFactor;
-  final double yAxisPadding;
-  final int yAxisFactor;
+  final EdgeInsets padding;
 
-  double get yAxisMaxValue {
-    return displayRange ?? dataSource.max + 10.0;
-  }
+  final int xAxisIntervalFactor;
+  final int yAxisIntervalFactor;
+
+  final double Function(BarChartDataSource dataSource) displayRangeSetter;
+  final String Function(double value)? yAxisLabelFormatter;
+  final String Function(BarData barChartData)? xAxisLabelFormatter;
 
   const BarChartContext({
     required this.dataSource,
-    required this.xAxisPadding,
-    required this.xAxisFactor,
-    required this.yAxisPadding,
-    required this.yAxisFactor,
-    this.displayRange,
+    required this.xAxisIntervalFactor,
+    required this.yAxisIntervalFactor,
+    this.padding = EdgeInsets.zero,
+    this.displayRangeSetter = _defaultDisplayRangeSetter,
+    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
+    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
   });
+
+  double get displayRange => displayRangeSetter(dataSource);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is BarChartContext &&
       other.dataSource == dataSource &&
-      other.xAxisPadding == xAxisPadding &&
-      other.yAxisPadding == yAxisPadding &&
-      other.displayRange == displayRange;
+      other.padding == padding &&
+      other.xAxisIntervalFactor == xAxisIntervalFactor &&
+      other.yAxisIntervalFactor == yAxisIntervalFactor &&
+      other.displayRangeSetter == displayRangeSetter &&
+      other.xAxisLabelFormatter == xAxisLabelFormatter &&
+      other.yAxisLabelFormatter == yAxisLabelFormatter;
   }
 
   @override
   int get hashCode => Object.hash(
     dataSource,
-    xAxisPadding,
-    yAxisPadding,
-    displayRange,
+    xAxisIntervalFactor,
+    yAxisIntervalFactor,
+    padding,
   );
 
 }
@@ -104,4 +109,16 @@ class BarChartDataSource<T> {
 
   List<BarData> get barChartData => source.map(dataMapper).toList();
 
+}
+
+double _defaultDisplayRangeSetter(BarChartDataSource dataSource) {
+  return dataSource.max;
+}
+
+String _defaultYAxisLabelFormatter(double value) {
+  return value.toStringAsFixed(0);
+}
+
+String _defaultXAxisLabelFormatter(BarData barChartData) {
+  return barChartData.label;
 }

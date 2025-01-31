@@ -87,7 +87,7 @@ class RenderBarChartBar extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     final double value = _barChartData.value;
-    final valueToPixelRatio = size.height / _barChartContext.yAxisMaxValue;
+    final valueToPixelRatio = size.height / _barChartContext.displayRange;
 
     final renderOffset = offset.translate(
       _barPadding,
@@ -128,8 +128,8 @@ class AxisPainter extends CustomPainter {
       canvas,
       Offset.zero,
       Size(
-        size.width - barChartContext.xAxisPadding,
-        size.height - barChartContext.yAxisPadding,
+        size.width - barChartContext.padding.horizontal,
+        size.height - barChartContext.padding.vertical,
       )
     );
 
@@ -137,7 +137,7 @@ class AxisPainter extends CustomPainter {
       canvas,
       Offset.zero,
       Size(
-        size.width - barChartContext.xAxisPadding,
+        size.width - barChartContext.padding.horizontal,
         size.height
       )
     );
@@ -148,7 +148,7 @@ class AxisPainter extends CustomPainter {
     Offset offset,
     Size s
   ) {
-    final lineCount = barChartContext.yAxisMaxValue / barChartContext.xAxisFactor;
+    final lineCount = barChartContext.displayRange / barChartContext.xAxisIntervalFactor;
     int i = 0;
     while (i <= lineCount) {
       final y = s.height - (s.height / lineCount) * i;
@@ -162,7 +162,7 @@ class AxisPainter extends CustomPainter {
       );
 
       final textPainter = createTextPainter(
-        '${(barChartContext.xAxisFactor * i).toString()}m',
+        '${(barChartContext.xAxisIntervalFactor * i).toString()}m',
         TextAlign.right,
         color: color,
       );
@@ -187,7 +187,7 @@ class AxisPainter extends CustomPainter {
     // <= because we want to draw the last line
     int i = 0;
     while(i <= barChartContext.dataSource.length) {
-      int remainder = i % barChartContext.yAxisFactor;
+      int remainder = i % barChartContext.yAxisIntervalFactor;
       double x = size.width / barChartContext.dataSource.length * i;
 
       if (remainder == 0) {
@@ -214,7 +214,7 @@ class AxisPainter extends CustomPainter {
           canvas,
           Offset(
             x + textPainter.width / 2,
-            size.height - barChartContext.yAxisPadding + 4
+            size.height - barChartContext.padding.horizontal + 4
           )
         );
       }
@@ -254,7 +254,7 @@ void paintDashedLine(
     t += normalizedPattern[i++];  // dashWidth
     points.add(Offset.lerp(p1, p2, t.clamp(0, 1))!);
     t += normalizedPattern[i++];  // dashSpace
-    i %= normalizedPattern.length;
+    i %= normalizedPattern.length; // cap to pattern length
   }
   canvas.drawPoints(
     ui.PointMode.lines,
