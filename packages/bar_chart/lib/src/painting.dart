@@ -148,11 +148,11 @@ class AxisPainter extends CustomPainter {
     Offset offset,
     Size s
   ) {
-    final lineCount = barChartContext.displayRange / barChartContext.xAxisIntervalFactor;
+    final double valueToPixelRatio = s.height / barChartContext.displayRange;
+    final int lineCount = barChartContext.displayRange ~/ barChartContext.yAxisInterval;
     int i = 0;
     while (i <= lineCount) {
-      final y = s.height - (s.height / lineCount) * i;
-
+      final double y = s.height - (i * barChartContext.yAxisInterval) * valueToPixelRatio;
       canvas.drawLine(
         Offset(0.0, y),
         Offset(s.width, y),
@@ -162,7 +162,7 @@ class AxisPainter extends CustomPainter {
       );
 
       final textPainter = createTextPainter(
-        '${(barChartContext.xAxisIntervalFactor * i).toString()}m',
+        barChartContext.yAxisLabelFormatter(barChartContext.yAxisInterval * i),
         TextAlign.right,
         color: color,
       );
@@ -187,7 +187,7 @@ class AxisPainter extends CustomPainter {
     // <= because we want to draw the last line
     int i = 0;
     while(i <= barChartContext.dataSource.length) {
-      int remainder = i % barChartContext.yAxisIntervalFactor;
+      int remainder = i % barChartContext.xAxisInterval;
       double x = size.width / barChartContext.dataSource.length * i;
 
       if (remainder == 0) {

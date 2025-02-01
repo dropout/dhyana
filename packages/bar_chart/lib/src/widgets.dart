@@ -3,22 +3,22 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'enums.dart';
 import 'models.dart';
 import 'painting.dart';
 
 class BarChart extends StatefulWidget {
 
   final BarChartDataSource dataSource;
-  final double? displayRange;
 
-  final double xAxisPadding;
-  final int xAxisFactor;
-  final double yAxisPadding;
-  final int yAxisFactor;
-
-  final double barPadding;
+  final EdgeInsets barPadding;
   final BarBuilder barBuilder;
+
+  final double Function(BarChartDataSource dataSource) displayRangeSetter;
+  final double Function(double displayRange) yAxisIntervalSetter;
+  final int Function(int barCount) xAxisIntervalSetter;
+
+  final String Function(double value) yAxisLabelFormatter;
+  final String Function(BarData barChartData) xAxisLabelFormatter;
 
   final void Function(BarData data)? onInfoTriggered;
   final void Function(BarData data)? onInfoChanged;
@@ -26,16 +26,18 @@ class BarChart extends StatefulWidget {
 
   const BarChart({
     required this.dataSource,
-    this.displayRange,
-    this.barPadding = 0,
-    this.xAxisPadding = 20,
-    this.xAxisFactor = 60,
-    this.yAxisPadding = 20,
-    this.yAxisFactor = 1,
+    this.barPadding = EdgeInsets.zero,
     this.barBuilder = _defaultBarBuilder,
+    this.displayRangeSetter = _defaultDisplayRangeSetter,
+    this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
+    this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
+    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
+    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
+
     this.onInfoTriggered,
     this.onInfoChanged,
     this.onInfoDismissed,
+
     super.key,
   });
 
@@ -58,12 +60,12 @@ class _BarChartState extends State<BarChart> {
     barChartData.addAll(widget.dataSource.barChartData);
     barChartContext = BarChartContext(
       dataSource: widget.dataSource,
-      padding: EdgeInsets.only(
-        right: widget.yAxisPadding,
-        bottom: widget.xAxisPadding,
-      ),
-      xAxisIntervalFactor: widget.xAxisFactor,
-      yAxisIntervalFactor: widget.yAxisFactor,
+      padding: widget.barPadding,
+      displayRangeSetter: widget.displayRangeSetter,
+      xAxisLabelFormatter: widget.xAxisLabelFormatter,
+      yAxisLabelFormatter: widget.yAxisLabelFormatter,
+      xAxisIntervalSetter: widget.xAxisIntervalSetter,
+      yAxisIntervalSetter: widget.yAxisIntervalSetter,
     );
 
     super.initState();
@@ -76,12 +78,12 @@ class _BarChartState extends State<BarChart> {
       barChartData.addAll(widget.dataSource.barChartData);
       barChartContext = BarChartContext(
         dataSource: widget.dataSource,
-        padding: EdgeInsets.only(
-          right: widget.yAxisPadding,
-          bottom: widget.xAxisPadding,
-        ),
-        xAxisIntervalFactor: widget.xAxisFactor,
-        yAxisIntervalFactor: widget.yAxisFactor,
+        padding: widget.barPadding,
+        xAxisIntervalSetter: widget.xAxisIntervalSetter,
+        yAxisIntervalSetter: widget.yAxisIntervalSetter,
+        displayRangeSetter: widget.displayRangeSetter,
+        xAxisLabelFormatter: widget.xAxisLabelFormatter,
+        yAxisLabelFormatter: widget.yAxisLabelFormatter,
       );
     });
 
@@ -97,10 +99,7 @@ class _BarChartState extends State<BarChart> {
           barChartContext: barChartContext,
         ),
         child: Padding(
-          padding: EdgeInsets.only(
-            bottom: widget.xAxisPadding,
-            right: widget.yAxisPadding,
-          ),
+          padding: widget.barPadding,
           child: buildBars(context),
         ),
       ),
@@ -224,4 +223,24 @@ Widget _defaultBarBuilder(
     barChartData: data,
     barPadding: 1,
   );
+}
+
+double _defaultDisplayRangeSetter(BarChartDataSource dataSource) {
+  return dataSource.max;
+}
+
+String _defaultYAxisLabelFormatter(double value) {
+  return value.toStringAsFixed(0);
+}
+
+String _defaultXAxisLabelFormatter(BarData barChartData) {
+  return barChartData.label;
+}
+
+double _defaultYAxisIntervalSetter(double displayRange) {
+  return displayRange / 4;
+}
+
+int _defaultXAxisIntervalSetter(int barCount) {
+  return 1;
 }

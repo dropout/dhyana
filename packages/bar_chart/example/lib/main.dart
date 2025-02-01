@@ -52,30 +52,30 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
   ];
 
   final List<MyData> testDayData = <MyData>[
-    MyData(name: '0', value: math.Random().nextDouble() * 20),
-    MyData(name: '1', value: math.Random().nextDouble() * 50),
-    MyData(name: '2', value: math.Random().nextDouble() * 50),
-    MyData(name: '3', value: math.Random().nextDouble() * 10),
-    MyData(name: '4', value: math.Random().nextDouble() * 30),
-    MyData(name: '5', value: math.Random().nextDouble() * 50),
-    MyData(name: '6', value: math.Random().nextDouble() * 30),
-    MyData(name: '7', value: math.Random().nextDouble() * 50),
-    MyData(name: '8', value: math.Random().nextDouble() * 50),
-    MyData(name: '9', value: math.Random().nextDouble() * 10),
-    MyData(name: '10', value: math.Random().nextDouble() * 30),
-    MyData(name: '11', value: math.Random().nextDouble() * 50),
-    MyData(name: '12', value: math.Random().nextDouble() * 30),
-    MyData(name: '13', value: math.Random().nextDouble() * 50),
-    MyData(name: '14', value: math.Random().nextDouble() * 50),
-    MyData(name: '15', value: math.Random().nextDouble() * 10),
-    MyData(name: '16', value: math.Random().nextDouble() * 30),
-    MyData(name: '17', value: math.Random().nextDouble() * 50),
-    MyData(name: '18', value: math.Random().nextDouble() * 30),
-    MyData(name: '19', value: math.Random().nextDouble() * 30),
-    MyData(name: '20', value: math.Random().nextDouble() * 30),
-    MyData(name: '21', value: math.Random().nextDouble() * 30),
-    MyData(name: '22', value: math.Random().nextDouble() * 30),
-    MyData(name: '23', value: math.Random().nextDouble() * 30),
+    MyData(name: '0', value: 50 + math.Random().nextDouble() * 20),
+    MyData(name: '1', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '2', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '3', value: 50 + math.Random().nextDouble() * 10),
+    MyData(name: '4', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '5', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '6', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '7', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '8', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '9', value: 50 + math.Random().nextDouble() * 10),
+    MyData(name: '10', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '11', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '12', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '13', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '14', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '15', value: 50 + math.Random().nextDouble() * 10),
+    MyData(name: '16', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '17', value: 50 + math.Random().nextDouble() * 50),
+    MyData(name: '18', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '19', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '20', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '21', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '22', value: 50 + math.Random().nextDouble() * 30),
+    MyData(name: '23', value: 50 + math.Random().nextDouble() * 30),
   ];
 
   // Overlay
@@ -159,9 +159,19 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                             source: data,
                           ),
                       ),
-                      displayRange: autoDisplayRange ? null : displayRange,
-                      xAxisPadding: 32,
-                      yAxisPadding: 21,
+                      barPadding: EdgeInsets.only(
+                        right: 20,
+                        bottom: 20,
+                      ),
+                      displayRangeSetter: (dataSource) {
+                        int hourCount = dataSource.max.toInt() ~/ 60;
+                        hourCount = math.max(1, hourCount + 1);
+                        return hourCount.toDouble() * 60;
+                      },
+                      yAxisIntervalSetter: (dataSource) {
+                        return 30.0;
+                      },
+
                       onInfoTriggered: (data) {
                         showOverlay(context, data.source);
                         print('onInfoTriggered: $data');
@@ -192,10 +202,14 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                             source: data,
                           ),
                       ),
-                      displayRange: autoDisplayRange ? null : displayRange,
-                      xAxisPadding: 32,
-                      yAxisPadding: 21,
-                      yAxisFactor: 6,
+                      barPadding: EdgeInsets.only(
+                        right: 20,
+                        bottom: 20,
+                      ),
+                      xAxisIntervalSetter: (barCount) {
+                        return barCount ~/ 4 ;
+                      },
+
                       onInfoTriggered: (data) {
                         showOverlay(context, data.source);
                         print('onInfoTriggered: $data');

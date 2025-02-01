@@ -1,9 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:bar_chart/bar_chart.dart';
 import 'package:flutter/material.dart';
-
-import 'enums.dart';
 
 typedef BarBuilder = Widget Function(
   BuildContext context,
@@ -27,24 +24,26 @@ class BarChartContext {
   final BarChartDataSource dataSource;
   final EdgeInsets padding;
 
-  final int xAxisIntervalFactor;
-  final int yAxisIntervalFactor;
+  final double Function(double displayRange) yAxisIntervalSetter;
+  final int Function(int barCount) xAxisIntervalSetter;
 
   final double Function(BarChartDataSource dataSource) displayRangeSetter;
-  final String Function(double value)? yAxisLabelFormatter;
-  final String Function(BarData barChartData)? xAxisLabelFormatter;
+  final String Function(double value) yAxisLabelFormatter;
+  final String Function(BarData barChartData) xAxisLabelFormatter;
 
   const BarChartContext({
     required this.dataSource,
-    required this.xAxisIntervalFactor,
-    required this.yAxisIntervalFactor,
-    this.padding = EdgeInsets.zero,
-    this.displayRangeSetter = _defaultDisplayRangeSetter,
-    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
-    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
+    required this.displayRangeSetter,
+    required this.yAxisIntervalSetter,
+    required this.xAxisIntervalSetter,
+    required this.xAxisLabelFormatter,
+    required this.yAxisLabelFormatter,
+    required this.padding,
   });
 
   double get displayRange => displayRangeSetter(dataSource);
+  double get yAxisInterval => yAxisIntervalSetter(displayRange);
+  int get xAxisInterval => xAxisIntervalSetter(dataSource.length);
 
   @override
   bool operator ==(Object other) {
@@ -52,8 +51,8 @@ class BarChartContext {
     return other is BarChartContext &&
       other.dataSource == dataSource &&
       other.padding == padding &&
-      other.xAxisIntervalFactor == xAxisIntervalFactor &&
-      other.yAxisIntervalFactor == yAxisIntervalFactor &&
+      other.xAxisInterval == xAxisInterval &&
+      other.yAxisInterval == yAxisInterval &&
       other.displayRangeSetter == displayRangeSetter &&
       other.xAxisLabelFormatter == xAxisLabelFormatter &&
       other.yAxisLabelFormatter == yAxisLabelFormatter;
@@ -62,8 +61,8 @@ class BarChartContext {
   @override
   int get hashCode => Object.hash(
     dataSource,
-    xAxisIntervalFactor,
-    yAxisIntervalFactor,
+    xAxisInterval,
+    yAxisInterval,
     padding,
   );
 
@@ -111,14 +110,3 @@ class BarChartDataSource<T> {
 
 }
 
-double _defaultDisplayRangeSetter(BarChartDataSource dataSource) {
-  return dataSource.max;
-}
-
-String _defaultYAxisLabelFormatter(double value) {
-  return value.toStringAsFixed(0);
-}
-
-String _defaultXAxisLabelFormatter(BarData barChartData) {
-  return barChartData.label;
-}
