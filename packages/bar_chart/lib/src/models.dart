@@ -57,20 +57,19 @@ class BarChartContext {
 
 }
 
-class BarData<T> {
+class BarData {
 
   final double value;
   final String label;
-  final T source;
 
   const BarData({
     required this.value,
     required this.label,
-    required this.source,
+
   });
 
   @override
-  String toString() => 'BarData(value: $value, label: $label, source: $source)';
+  String toString() => 'BarData(value: $value, label: $label)';
 
   @override
   bool operator == (Object other) =>
@@ -80,22 +79,3 @@ class BarData<T> {
   int get hashCode => Object.hash(value, label);
 
 }
-
-// class BarChartDataSource<T> {
-//
-//   final List<T> source;
-//   final BarData Function(T) dataMapper;
-//
-//   const BarChartDataSource({
-//     required this.source,
-//     required this.dataMapper,
-//   });
-//
-//   double get max => source.map(dataMapper).map((data) => data.value).reduce(math.max);
-//   double get min => source.map(dataMapper).map((data) => data.value).reduce(math.min);
-//   int get length => source.length;
-//
-//   List<BarData> get barChartData => source.map(dataMapper).toList();
-//
-// }
-

@@ -86,7 +86,7 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                     height: 200,
                     child: Center(
                       child: Text(
-                        'BarChart Example',
+                        'Selectable bars example',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -95,17 +95,16 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                 ),
                 Column(
                     children: [
-                      selectedData != null ? Text(selectedData.toString()) : SizedBox.shrink(),
+                      selectedData != null ? Text(selectedData.toString()) : Text('Select a bar on the chart'),
                       Container(
                         padding: const EdgeInsets.all(16),
                         width: double.infinity,
                         height: 200,
                         color: Colors.black,
                         child: BarChart(
-                          dataSource: testDayData.map((d) => BarData<MyData>(
+                          dataSource: testDayData.map((d) => BarData(
                             value: d.value,
                             label: d.name,
-                            source: d,
                           )).toList(),
                           displayRangeSetter: (max) {
                             int hourCount = max.toInt() ~/ 60;

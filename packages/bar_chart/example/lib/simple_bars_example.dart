@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BarChart Example',
+      title: 'Simple bars example',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -40,13 +40,13 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
 
   // Example data source
   final List<MyData> testWeekData = <MyData>[
-    MyData(name: 'M', minutes: math.Random().nextDouble() * 20),
-    MyData(name: 'T', minutes: math.Random().nextDouble() * 50),
-    MyData(name: 'W', minutes: math.Random().nextDouble() * 50),
-    MyData(name: 'T', minutes: math.Random().nextDouble() * 50 + 30),
-    MyData(name: 'F', minutes: math.Random().nextDouble() * 30),
-    MyData(name: 'S', minutes: math.Random().nextDouble() * 50),
-    MyData(name: 'S', minutes: math.Random().nextDouble() * 30),
+    MyData(name: 'M', minutes: 10),
+    MyData(name: 'T', minutes: 20),
+    MyData(name: 'W', minutes: 30),
+    MyData(name: 'T', minutes: 40),
+    MyData(name: 'F', minutes: 50),
+    MyData(name: 'S', minutes: 60),
+    MyData(name: 'S', minutes: 70),
   ];
 
   @override
@@ -81,22 +81,13 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                   height: 300,
                   color: Colors.black,
                   child: BarChart(
-                    dataSource: testWeekData.map((d) => BarData<MyData>(
+                    dataSource: testWeekData.map((d) => BarData(
                       value: d.minutes,
                       label: d.name,
-                      source: d,
                     )).toList(),
-                    axisSpacing: EdgeInsets.only(
-                      right: 20,
-                      bottom: 20,
-                    ),
-                    displayRangeSetter: (max) {
-                      int hourCount = max.toInt() ~/ 60;
-                      hourCount = math.max(1, hourCount + 1);
-                      return hourCount.toDouble() * 60;
-                    },
+                    displayRangeSetter: (max) => 100,
                     yAxisIntervalSetter: (dataSource) {
-                      return 30.0;
+                      return 10.0;
                     },
                   ),
                 ),

@@ -96,53 +96,6 @@ class _BarChartState extends State<BarChart> {
 
 }
 
-class BarChartBar extends LeafRenderObjectWidget {
-
-  final BarData barChartData;
-  final double barPadding;
-  final BarChartContext barChartContext;
-  final Color color;
-
-  const BarChartBar({
-    required this.barChartData,
-    required this.barChartContext,
-    this.barPadding = 1.0,
-    this.color = Colors.white,
-    super.key,
-  });
-
-  @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderBarChartBar(
-      barChartData: barChartData,
-      displayRange: barChartContext.displayRange,
-      barPadding: barPadding,
-      color: color,
-    );
-  }
-
-  @override
-  void updateRenderObject(BuildContext context, RenderBarChartBar renderObject) {
-    renderObject.barChartData = barChartData;
-    renderObject.width = barPadding;
-    renderObject.color = color;
-  }
-}
-
-
-abstract class BarBuilderDelegate {
-
-  const BarBuilderDelegate();
-
-  Widget build(
-    BuildContext context,
-    BarChartContext barChartContext,
-  );
-
-}
-
-
-
 class SelectableBars extends StatefulWidget {
 
   final BarChartContext barChartContext;
@@ -165,30 +118,31 @@ class _SelectableBarsState extends State<SelectableBars> {
 
   @override
   Widget build(BuildContext context) {
+    final barChartData = widget.barChartContext.dataSource;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        for (var i = 0; i < widget.barChartContext.dataSource.length; i++)
+        for (var i = 0; i < barChartData.length; i++)
           Expanded(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedBarIndex = i;
-                  widget.onBarSelected?.call(i, widget.barChartContext.dataSource[i]);
-                });
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: i == selectedBarIndex ? Colors.red : Colors.blue,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: widget.barChartContext.dataSource[i].value,
-                  ),
-                ),
+            child: FractionallySizedBox(
+              heightFactor: math.min(
+                barChartData[i].value / widget.barChartContext.displayRange,
+                1.0,
               ),
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  setState(() {
+                    selectedBarIndex = i;
+                    widget.onBarSelected?.call(i, barChartData[i]);
+                  });
+                },
+                child: AnimatedContainer(
+                  duration: Durations.short4,
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                  color: i == selectedBarIndex ? Colors.red : Colors.white,
+                ),
+              )
             ),
           ),
       ],
@@ -197,48 +151,13 @@ class _SelectableBarsState extends State<SelectableBars> {
 
 }
 
-
-class SelectableBarBuilderDelegate extends BarBuilderDelegate {
-
-  final int selectedIndex;
-  final void Function(BarData barData, int index)? onBarSelected;
-
-  const SelectableBarBuilderDelegate({
-    required this.selectedIndex,
-    this.onBarSelected,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-    BarChartContext barChartContext,
-  ) {
-    final barChartData = barChartContext.dataSource;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        for (var i = 0; i < barChartData.length; i++)
-          Expanded(
-            child: BarChartBar(
-              barChartData: barChartData[i],
-              barChartContext: barChartContext,
-              color: i == selectedIndex ? Colors.red : Colors.white,
-            ),
-          )
-      ],
-    );
-  }
-}
-
-
-
 class InfoTriggerBars extends StatefulWidget {
 
   final BarChartContext barChartContext;
 
-  final void Function(BarData data)? onInfoTriggered;
-  final void Function(BarData data)? onInfoChanged;
-  final void Function(BarData data)? onInfoDismissed;
+  final void Function(int index, BarData data)? onInfoTriggered;
+  final void Function(int index, BarData data)? onInfoChanged;
+  final void Function(int index, BarData data)? onInfoDismissed;
 
   const InfoTriggerBars({
     required this.barChartContext,
@@ -262,6 +181,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
   Widget build(BuildContext context) {
     final barChartData = widget.barChartContext.dataSource;
     return Row(
+      key: barContainerKey,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         for (var i = 0; i < barChartData.length; i++)
@@ -271,15 +191,42 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                 setState(() {
                   _isInfoTriggered = true;
                   selectedIndex = i;
-                  widget.onInfoTriggered?.call(barChartData[i]);
+                  widget.onInfoTriggered?.call(i, barChartData[i]);
                 });
-              }
+              },
+              onLongPressEnd: (details) {
+                if (_isInfoTriggered) {
+                  setState(() {
+                    _isInfoTriggered = false;
+                    selectedIndex = -1;
+                    widget.onInfoDismissed?.call(i, barChartData[i]);
+                  });
+                }
+              },
+              child: Listener(
+                behavior: HitTestBehavior.opaque,
+                onPointerMove: (PointerMoveEvent event) {
+                  int? targetBarIndex = _barHitTest(event);
+                  if (targetBarIndex != null && targetBarIndex != selectedIndex) {
+                    setState(() {
+                      selectedIndex = targetBarIndex;
+                    });
+                    widget.onInfoChanged?.call(targetBarIndex, barChartData[targetBarIndex]);
+                  }
+                },
+                child: BarChartBar(
+                  barIndex: i,
+                  heightFactor: (barChartData[i].value / widget.barChartContext.displayRange),
+                ),
+              )
             )
           )
-
-
       ],
     );
+
+
+
+
 
       // return Row(
       //   key: barContainerKey,
@@ -331,7 +278,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
 
   }
 
-  BarData? _barHitTest(PointerEvent event) {
+  int? _barHitTest(PointerEvent event) {
     final RenderBox box = barContainerKey.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
     final result = BoxHitTestResult();
     Offset local = box.globalToLocal(event.position);
@@ -340,7 +287,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
         /// temporary variable so that the [is] allows access of [index]
         final target = hit.target;
         if (target is RenderBarChartBar) {
-          return target.barChartData;
+          return target.barIndex;
         }
       }
     }
@@ -348,6 +295,48 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
   }
 
 }
+
+class BarChartBar extends LeafRenderObjectWidget {
+
+  final int barIndex;
+  final double heightFactor;
+  final double barPadding;
+  final Color color;
+
+  const BarChartBar({
+    required this.barIndex,
+    required this.heightFactor,
+    this.barPadding = 1.0,
+    this.color = Colors.white,
+    super.key,
+  });
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return RenderBarChartBar(
+      barIndex: barIndex,
+      heightFactor: heightFactor,
+      barPadding: barPadding,
+      color: color,
+    );
+  }
+
+  @override
+  void updateRenderObject(BuildContext context, RenderBarChartBar renderObject) {
+    renderObject.barIndex = barIndex;
+    renderObject.heightFactor = heightFactor;
+    renderObject.width = barPadding;
+    renderObject.color = color;
+  }
+
+}
+
+
+
+
+
+
+
 
 double _defaultDisplayRangeSetter(double max) => max;
 String _defaultYAxisLabelFormatter(double value) => value.toStringAsFixed(0);
@@ -361,13 +350,24 @@ Widget _defaultBarBuilder(
 ) {
   final barChartData = barChartContext.dataSource;
   return Row(
+    crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       for (var i = 0; i < barChartData.length; i++)
         Expanded(
-          child: BarChartBar(
-            barChartData: barChartData[i],
-            barChartContext: barChartContext,
-          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1),
+            child: FractionallySizedBox(
+              heightFactor: math.min(
+                barChartData[i].value / barChartContext.displayRange,
+                1.0,
+              ),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+              ),
+            )
+          )
         )
     ],
   );

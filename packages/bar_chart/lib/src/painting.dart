@@ -6,101 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'models.dart';
 
-TextPainter createTextPainter(
-  String text,
-  TextAlign textAlign,
-  { Color color = Colors.red, }
-) {
-  TextStyle textStyle = TextStyle(
-    color: color,
-    fontSize: 12,
-    fontWeight: FontWeight.bold,
-
-  );
-  final textSpan = TextSpan(
-    text: text,
-    style: textStyle,
-  );
-  final textPainter = TextPainter(
-    text: textSpan,
-    textAlign: textAlign,
-    textDirection: TextDirection.ltr,
-  );
-  textPainter.layout(
-    minWidth: 0,
-  );
-
-  return textPainter;
-}
-
-class RenderBarChartBar extends RenderBox {
-
-  final Paint _paint;
-
-  double _displayRange;
-  double _barPadding;
-  BarData _barChartData;
-
-  RenderBarChartBar({
-    required BarData barChartData,
-    required displayRange,
-    Color color = Colors.white,
-    double barPadding = 1.0,
-  }) :
-    _barChartData = barChartData,
-    _displayRange = displayRange,
-    _barPadding = barPadding,
-    _paint = Paint()..color = color;
-
-  BarData get barChartData => _barChartData;
-  double get value => _barChartData.value;
-  double get displayRange => _displayRange;
-
-  set barChartData(BarData barChartData) {
-    _barChartData = barChartData;
-    markNeedsLayout();
-  }
-
-  set displayRange(double displayRange) {
-    _displayRange = displayRange;
-    markNeedsLayout();
-  }
-
-  set color(Color color) {
-    _paint.color = color;
-    markNeedsPaint();
-  }
-
-  set width(double width) {
-    _barPadding = width;
-    markNeedsLayout();
-  }
-
-  @override
-  void performLayout() {
-    size = constraints.constrain(Size(double.infinity, double.infinity));
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    final double value = math.min(_barChartData.value, _displayRange);
-    final valueToPixelRatio = size.height / displayRange;
-    final renderOffset = offset.translate(
-      _barPadding,
-      math.max(size.height - (value * valueToPixelRatio).abs(), 0)
-    );
-    final Size renderSize = Size(
-      size.width - _barPadding * 2,
-      math.min(value * valueToPixelRatio, size.height)
-    );
-    context.canvas.drawRect(renderOffset & renderSize, _paint);
-  }
-
-  @override
-  bool hitTestSelf(Offset position) => size.contains(position);
-
-}
-
 class AxisPainter extends CustomPainter {
 
   final Color color;
@@ -230,6 +135,72 @@ class AxisPainter extends CustomPainter {
 
 }
 
+class RenderBarChartBar extends RenderBox {
+
+  final Paint _paint;
+
+  int _barIndex;
+  double _heightFactor;
+  double _barPadding;
+
+  RenderBarChartBar({
+    required int barIndex,
+    required double heightFactor,
+    Color color = Colors.white,
+    double barPadding = 1.0,
+  }) :
+    _barIndex = barIndex,
+    _heightFactor = heightFactor,
+    _barPadding = barPadding,
+    _paint = Paint()..color = color;
+
+  int get barIndex => _barIndex;
+  double get heightFactor => _heightFactor;
+
+  set barIndex(int barIndex) {
+    _barIndex = barIndex;
+    markNeedsLayout();
+  }
+
+  set heightFactor(double heightFactor) {
+    _heightFactor = heightFactor;
+    markNeedsLayout();
+  }
+
+  set color(Color color) {
+    _paint.color = color;
+    markNeedsPaint();
+  }
+
+  set width(double width) {
+    _barPadding = width;
+    markNeedsLayout();
+  }
+
+  @override
+  void performLayout() {
+    size = constraints.constrain(Size(double.infinity, double.infinity));
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    final Size renderSize = Size(
+      size.width - _barPadding * 2,
+      size.height * _heightFactor
+    );
+    final renderOffset = Offset(
+      offset.dx + _barPadding,
+      offset.dy + size.height - renderSize.height
+    );
+    context.canvas.drawRect(renderOffset & renderSize, _paint);
+  }
+
+  @override
+  bool hitTestSelf(Offset position) => size.contains(position);
+
+}
+
+
 void paintDashedLine(
   Canvas canvas,
   Offset p1,
@@ -257,4 +228,29 @@ void paintDashedLine(
   );
 }
 
+TextPainter createTextPainter(
+  String text,
+  TextAlign textAlign,
+  { Color color = Colors.red, }
+) {
+  TextStyle textStyle = TextStyle(
+    color: color,
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+  );
+  final textSpan = TextSpan(
+    text: text,
+    style: textStyle,
+  );
+  final textPainter = TextPainter(
+    text: textSpan,
+    textAlign: textAlign,
+    textDirection: TextDirection.ltr,
+  );
+  textPainter.layout(
+    minWidth: 0,
+  );
+
+  return textPainter;
+}
 
