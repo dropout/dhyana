@@ -37,41 +37,38 @@ class RenderBarChartBar extends RenderBox {
 
   final Paint _paint;
 
-  int _index;
+  double _displayRange;
   double _barPadding;
   BarData _barChartData;
-  BarChartContext _barChartContext;
 
   RenderBarChartBar({
-    required int index,
-    required BarChartContext barChartContext,
     required BarData barChartData,
+    required displayRange,
     Color color = Colors.white,
-    double barPadding = 0.0,
+    double barPadding = 1.0,
   }) :
-    _index = index,
     _barChartData = barChartData,
-    _barChartContext = barChartContext,
+    _displayRange = displayRange,
     _barPadding = barPadding,
     _paint = Paint()..color = color;
 
   BarData get barChartData => _barChartData;
   double get value => _barChartData.value;
-  int get index => _index;
+  double get displayRange => _displayRange;
 
   set barChartData(BarData barChartData) {
     _barChartData = barChartData;
     markNeedsLayout();
   }
 
-  set barChartContext(BarChartContext barChartContext) {
-    _barChartContext = barChartContext;
+  set displayRange(double displayRange) {
+    _displayRange = displayRange;
     markNeedsLayout();
   }
 
   set color(Color color) {
     _paint.color = color;
-    markNeedsLayout();
+    markNeedsPaint();
   }
 
   set width(double width) {
@@ -86,19 +83,16 @@ class RenderBarChartBar extends RenderBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    final double value = _barChartData.value;
-    final valueToPixelRatio = size.height / _barChartContext.displayRange;
-
+    final double value = math.min(_barChartData.value, _displayRange);
+    final valueToPixelRatio = size.height / displayRange;
     final renderOffset = offset.translate(
       _barPadding,
       math.max(size.height - (value * valueToPixelRatio).abs(), 0)
     );
-
     final Size renderSize = Size(
       size.width - _barPadding * 2,
       math.min(value * valueToPixelRatio, size.height)
     );
-
     context.canvas.drawRect(renderOffset & renderSize, _paint);
   }
 
@@ -205,7 +199,7 @@ class AxisPainter extends CustomPainter {
 
       if (remainder == 0 && i < barChartContext.dataSource.length) {
         final textPainter = createTextPainter(
-          barChartContext.dataSource.barChartData[i].label,
+          barChartContext.dataSource[i].label,
           TextAlign.left,
           color: color,
         );
