@@ -66,6 +66,9 @@ dependencies:
   firebase_analytics: ^11.2.1
   firebase_crashlytics: ^4.0.4
 
+  bar_chart:
+    path: packages/bar_chart
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -83,7 +83,7 @@ class _BarChartState extends State<BarChart> {
     return SizedBox.expand(
       child: CustomPaint(
         painter: AxisPainter(
-          color: Colors.grey.shade600,
+          color: Colors.black.withValues(alpha: 0.5),
           barChartContext: barChartContext,
         ),
         child: Padding(
@@ -207,7 +207,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                 behavior: HitTestBehavior.opaque,
                 onPointerMove: (PointerMoveEvent event) {
                   int? targetBarIndex = _barHitTest(event);
-                  if (targetBarIndex != null && targetBarIndex != selectedIndex) {
+                  if (_isInfoTriggered && targetBarIndex != null && targetBarIndex != selectedIndex) {
                     setState(() {
                       selectedIndex = targetBarIndex;
                     });
@@ -216,6 +216,8 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                 },
                 child: BarChartBar(
                   barIndex: i,
+                  barPadding: 6.0,
+                  color: (selectedIndex == i) ? Colors.red : Colors.black,
                   heightFactor: (barChartData[i].value / widget.barChartContext.displayRange),
                 ),
               )
@@ -223,59 +225,6 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
           )
       ],
     );
-
-
-
-
-
-      // return Row(
-      //   key: barContainerKey,
-      //   children: [
-      //     for (var i = 0; i < barChartData.length; i++)
-      //       Expanded(
-      //         child: GestureDetector(
-      //           onTap: () {
-      //             // widget.onBarTap?.call(barChartData[i]);
-      //           },
-      //           onLongPress: () {
-      //             setState(() {
-      //               _isInfoTriggered = true;
-      //               _selectedBarData = barChartData[i];
-      //               widget.onInfoTriggered?.call(barChartData[i]);
-      //             });
-      //           },
-      //           onLongPressEnd: (details) {
-      //             if (_isInfoTriggered) {
-      //               setState(() {
-      //                 _isInfoTriggered = false;
-      //                 widget.onInfoDismissed?.call(_selectedBarData!);
-      //                 _selectedBarData = null;
-      //               });
-      //             }
-      //           },
-      //           child: Listener(
-      //             behavior: HitTestBehavior.opaque,
-      //             onPointerMove: (PointerMoveEvent event) {
-      //               BarData? targetBarData = _barHitTest(event);
-      //               if (targetBarData != null && targetBarData != _selectedBarData) {
-      //                 setState(() {
-      //                   _selectedBarData = targetBarData;
-      //                   widget.onInfoChanged?.call(targetBarData);
-      //                 });
-      //               }
-      //             },
-      //             child: widget.barBuilder(
-      //               context,
-      //               widget.barChartContext,
-      //               barChartData[i],
-      //               i,
-      //             ),
-      //           )
-      //         ),
-      //       )
-      //   ],
-      // );
-
   }
 
   int? _barHitTest(PointerEvent event) {
@@ -331,13 +280,6 @@ class BarChartBar extends LeafRenderObjectWidget {
 
 }
 
-
-
-
-
-
-
-
 double _defaultDisplayRangeSetter(double max) => max;
 String _defaultYAxisLabelFormatter(double value) => value.toStringAsFixed(0);
 String _defaultXAxisLabelFormatter(BarData barChartData) => barChartData.label;
@@ -372,3 +314,5 @@ Widget _defaultBarBuilder(
     ],
   );
 }
+
+

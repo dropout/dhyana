@@ -3,15 +3,18 @@ import 'dart:async';
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/chart/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import 'package:bar_chart/bar_chart.dart';
 
 import 'calculated_stats_view.dart';
 
@@ -83,52 +86,17 @@ class DaysStatsViewContent extends StatefulWidget {
 
 class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
-    static const _defaultBarChartData = BarChartData(
-    [
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-
-      BarChartDataItem(value: 0, label: ''),
-      BarChartDataItem(value: 0, label: ''),
-    ]
-  );
-
-  late BarChartData barChartData;
   bool isLoading = true;
+
+  // Overlay
+  OverlayEntry? overlayEntry;
+  Day? selectedData;
 
   StreamSubscription<DaysState>? _daysBlocSubscription;
   StreamSubscription<StatsIntervalState>? _statsIntervalBlocSubscription;
 
   @override
   void initState() {
-    barChartData = _defaultBarChartData;
-
-    _daysBlocSubscription = widget.daysBloc.stream.listen((DaysState state) {
-      if (state is DaysLoadedState) {
-        setState(() {
-          List<BarChartDataItem> items = state.days.map((day) {
-            return BarChartDataItem(
-              value: day.minutesCount.toDouble(),
-              label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate).substring(0,1),
-            );
-          }).toList();
-          barChartData = BarChartData(items);
-          isLoading = false;
-        });
-      }
-    });
 
     widget.daysBloc.add(
       DaysEvent.queryDays(
@@ -137,7 +105,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
         to: widget.statsIntervalBloc.state.statsInterval.to,
       )
     );
-
 
     _statsIntervalBlocSubscription = widget.statsIntervalBloc.stream.listen((StatsIntervalState state) {
       widget.daysBloc.add(
@@ -154,10 +121,10 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildContent(context, barChartData);
+    return _buildContent(context);
   }
 
-  Widget _buildContent(BuildContext context, BarChartData barChartData) {
+  Widget _buildContent(BuildContext context) {
     return SafeArea(
       top: false,
       child: Padding(
@@ -168,10 +135,70 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
           children: [
             SizedBox(
               height: 350,
-              child: BarChart(
-                title: AppLocalizations.of(context).statsTimePerDay,
-                data: barChartData,
-              )
+              child: BlocBuilder<DaysBloc, DaysState>(
+                builder: (context, state) {
+                  if (state is DaysLoadedState) {
+                    List<BarData> barData = state.days.map((day) {
+                      return BarData(
+                        value: day.minutesCount.toDouble(),
+                        label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate).substring(0,1),
+                      );
+                    }).toList();
+                    return BarChart(
+                      dataSource: barData,
+                      displayRangeSetter: (max) => 100,
+                      yAxisIntervalSetter: (dataSource) {
+                        return 10.0;
+                      },
+                      barBuilder: (context, barChartContext) {
+                        return InfoTriggerBars(
+                          barChartContext: barChartContext,
+                          onInfoTriggered: (index, data) {
+                            showOverlay(context, state.days[index]);
+                            print('onInfoTriggered: $data');
+                          },
+                          onInfoChanged: (index, data) {
+                            updateOverlay(context, state.days[index]);
+                            print('onInfoChanged: $data');
+                          },
+                          onInfoDismissed: (index, data) {
+                            hideOverlay(context);
+                            print('onInfoDismissed $data');
+                          },
+
+                        );
+
+                        // return Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.end,
+                        //   children: [
+                        //     for (var i = 0; i < barChartData.length; i++)
+                        //       Expanded(
+                        //           child: Padding(
+                        //               padding: EdgeInsets.symmetric(horizontal: 1),
+                        //               child: FractionallySizedBox(
+                        //                 heightFactor: math.min(
+                        //                   barChartData[i].value / barChartContext.displayRange,
+                        //                   1.0,
+                        //                 ),
+                        //                 child: DecoratedBox(
+                        //                   decoration: BoxDecoration(
+                        //                     color: Colors.white,
+                        //                   ),
+                        //                 ),
+                        //               )
+                        //           )
+                        //       )
+                        //   ],
+                        // );
+
+
+                      },
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
             ),
             Gap.medium(),
             buildCalculatedStats(context),
@@ -194,6 +221,163 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
       CalculatedStats calculatedStats = daysLoadedState.calculatedStats;
       return CalculatedStatsView(calculatedStats: calculatedStats);
     }
+  }
+
+  void showOverlay(BuildContext context, Day data) {
+    setState(() {
+      selectedData = data;
+      overlayEntry = OverlayEntry(
+        builder: (context) => overlayEntryBuilder(context, data),
+      );
+      Overlay.of(context).insert(overlayEntry!);
+    });
+  }
+
+  void updateOverlay(BuildContext context, Day data) {
+    setState(() {
+      selectedData = data;
+    });
+    overlayEntry?.markNeedsBuild();
+  }
+
+  void hideOverlay(BuildContext context) {
+    if (overlayEntry != null && overlayEntry!.mounted) {
+      overlayEntry?.remove();
+      overlayEntry = null;
+    }
+  }
+
+  Widget overlayEntryBuilder(BuildContext context, Day data) {
+    if (selectedData == null) {
+      return SizedBox.shrink();
+    }
+
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Material(
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppThemeData.borderRadiusMd),
+                ),
+                color: AppColors.backgroundPaperLight,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppThemeData.paddingMd),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        DateFormat.yMMMMEEEEd(Localizations.localeOf(context).toString()).format(selectedData!.startDate),
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Gap.small(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                selectedData!.sessionCount.toString(),
+                                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Gap.small(),
+                              Text(
+                                'Sessions'.toUpperCase(),
+                                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                selectedData!.minutesCount.toString(),
+                                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Gap.small(),
+                              Text(
+                                'Minutes'.toUpperCase(),
+                                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                selectedData!.consecutiveDaysCount.toString(),
+                                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Gap.small(),
+                              Text(
+                                'Consecutive days'.toUpperCase(),
+                                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          )
+
+                        ],
+                      ),
+
+                      // Text(
+                      //   'Minutes: ${selectedData!.minutesCount}',
+                      //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
+                      // Gap.small(),
+                      // Text(
+                      //   'Sessions: ${selectedData!.sessionCount}',
+                      //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
+                      // Gap.small(),
+                      // Text(
+                      //   'Consecutive days count: ${selectedData!.minutesCount}',
+                      //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+
+
+          ),
+        ),
+      ),
+    );
   }
 
   @override
