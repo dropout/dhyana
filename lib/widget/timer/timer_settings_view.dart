@@ -1,4 +1,3 @@
-
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -78,7 +77,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                  child: buildInputs(context)
+                child: buildInputs(context)
               ),
               buildStartButton(context),
             ],
@@ -130,14 +129,15 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   Widget buildStartButton(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: TimerStartButton(
-        onTap: () => _onStartButtonTap(context),
-        fragmentShader: context.services.shaderService.get('shaders/gradient_flow.frag'),
-        timerSettings: widget.timerSettings,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: AppThemeData.paddingLg),
+        child: TimerStartButton(
+          onTap: () => _onStartButtonTap(context),
+          fragmentShader: context.services.shaderService.get('shaders/gradient_flow.frag'),
+          timerSettings: widget.timerSettings,
+        ),
       ),
     );
   }
 
 }
-
-

@@ -57,7 +57,7 @@ class _EndTimeTextState extends State<EndTimeText> {
       ),
       child: Text(
         DateFormat.Hm().format(end),
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
           fontWeight: FontWeight.w800,
         ),
       ),
