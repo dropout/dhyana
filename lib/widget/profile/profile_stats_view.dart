@@ -152,6 +152,9 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
   }
 
   void _onTabbarTapped(BuildContext context, int index) {
+    if (primaryTC.index == index) {
+      return;
+    }
     StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
     DateTime now = DateTime.now();
     StatsIntervalType intervalType = StatsIntervalType.values[index];
