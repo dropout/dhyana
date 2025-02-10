@@ -25,7 +25,7 @@ class AxisPainter extends CustomPainter {
 
     paintHorizontalLines(
       canvas,
-      Offset.zero,
+      Offset(barChartContext.padding.left, barChartContext.padding.top),
       Size(
         size.width - barChartContext.padding.horizontal,
         size.height - barChartContext.padding.vertical,
@@ -34,10 +34,12 @@ class AxisPainter extends CustomPainter {
 
     paintVerticalLines(
       canvas,
-      Offset.zero,
+      Offset(barChartContext.padding.left, barChartContext.padding.top),
       Size(
         size.width - barChartContext.padding.horizontal,
-        size.height
+        // this axis painter paints vertical lines to the bottom
+        // regardless of bar chart padding
+        size.height - barChartContext.padding.top,
       )
     );
   }
@@ -53,8 +55,8 @@ class AxisPainter extends CustomPainter {
     while (i <= lineCount) {
       final double y = s.height - (i * barChartContext.yAxisInterval) * valueToPixelRatio;
       canvas.drawLine(
-        Offset(0.0, y),
-        Offset(s.width, y),
+        offset + Offset(0.0, y),
+        offset + Offset(s.width, y),
         Paint()
           ..color = color
           ..strokeWidth = 1.0,
@@ -68,11 +70,12 @@ class AxisPainter extends CustomPainter {
 
       textPainter.paint(
         canvas,
-        Offset(
-          s.width + 4,
+        offset + Offset(
+          s.width + 8,
           y - textPainter.height / 2
         )
       );
+
       i++;
     }
   }
@@ -92,8 +95,8 @@ class AxisPainter extends CustomPainter {
       if (remainder == 0) {
         paintDashedLine(
           canvas,
-          Offset(x, 0.0),
-          Offset(x, size.height),
+          offset + Offset(x, 0.0),
+          offset + Offset(x, size.height),
           [5.0, 5.0],
           Paint()
             ..color = color
@@ -105,16 +108,22 @@ class AxisPainter extends CustomPainter {
       if (remainder == 0 && i < barChartContext.dataSource.length) {
         final textPainter = createTextPainter(
           barChartContext.dataSource[i].label,
-          TextAlign.left,
+          TextAlign.center,
           color: color,
+          maxWidth: size.width / barChartContext.dataSource.length,
         );
+
+        final tx = x + textPainter.width / 2;
+        final ty = size.height - barChartContext.padding.bottom + 4;
+
+        // canvas.drawRect(
+        //   Offset(tx,ty) + offset & Size(textPainter.width, textPainter.height),
+        //   linePaint,
+        // );
 
         textPainter.paint(
           canvas,
-          Offset(
-            x + textPainter.width / 2,
-            size.height - barChartContext.padding.horizontal + 4
-          )
+          offset + Offset(tx, ty),
         );
       }
 
@@ -230,8 +239,10 @@ void paintDashedLine(
 
 TextPainter createTextPainter(
   String text,
-  TextAlign textAlign,
-  { Color color = Colors.red, }
+  TextAlign textAlign, {
+    Color color = Colors.red,
+    double maxWidth = double.infinity,
+  }
 ) {
   TextStyle textStyle = TextStyle(
     color: color,
@@ -247,8 +258,11 @@ TextPainter createTextPainter(
     textAlign: textAlign,
     textDirection: TextDirection.ltr,
   );
+
   textPainter.layout(
+
     minWidth: 0,
+    // maxWidth: maxWidth,
   );
 
   return textPainter;

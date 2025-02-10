@@ -4,9 +4,10 @@ import 'package:dhyana/enum/stats_interval_type.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
-import 'package:dhyana/widget/profile/stats/stats_interval_selector.dart';
+import 'package:dhyana/widget/profile/stats/stats_interval_display.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
@@ -152,29 +153,30 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
   }
 
   void _onTabbarTapped(BuildContext context, int index) {
-    if (primaryTC.index == index) {
-      return;
-    }
-    StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
-    DateTime now = DateTime.now();
-    StatsIntervalType intervalType = StatsIntervalType.values[index];
-    StatsInterval statsInterval = StatsInterval(
-      intervalType: intervalType,
-      from: now.subtract(Duration(days: intervalType.intervalInDays)),
-      to: now,
-    );
-    bloc.add(StatsIntervalEvent.changed(
-      statsInterval: statsInterval
-    ));
+    // if (primaryTC.index == index) {
+    //   return;
+    // }
+    // StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
+    // DateTime now = DateTime.now();
+    // StatsIntervalType intervalType = StatsIntervalType.values[index];
+    // StatsInterval statsInterval = StatsInterval(
+    //   intervalType: intervalType,
+    //   from: now.subtract(Duration(days: intervalType.intervalInDays)),
+    //   to: now,
+    // );
+    // bloc.add(StatsIntervalEvent.changed(
+    //   statsInterval: statsInterval
+    // ));
   }
 
   List<Widget> buildProfileLoadedContent(BuildContext context, Profile profile) {
     return [
-
       TabBar(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppThemeData.spacingSm,
-          horizontal: AppThemeData.spacingMd,
+        padding: const EdgeInsets.only(
+          top: AppThemeData.spacingSm,
+          left: AppThemeData.spacingMd,
+          right: AppThemeData.spacingMd,
+          bottom: AppThemeData.spacingXs,
         ),
         controller: primaryTC,
         onTap: (index) => _onTabbarTapped(context, index),
@@ -195,6 +197,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
         // long tap splash still visible
         // make it look better with border radius
         splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+        dividerColor: Colors.transparent,
         tabs: [
           buildTabBarItem(context, AppLocalizations.of(context).days),
           buildTabBarItem(context, AppLocalizations.of(context).weeks),
@@ -203,7 +206,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
         ],
       ),
 
-      buildIntervalSelector(context),
+      buildIntervalText(context),
 
       Expanded(
         child: TabBarView(
@@ -262,6 +265,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
       pinnedHeaderSliverHeightBuilder: () => pinnedHeaderHeight,
       onlyOneScrollInBody: true,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: children,
       ),
     );
@@ -341,10 +345,21 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     );
   }
 
-  Widget buildIntervalSelector(BuildContext context) {
-    return BlocBuilder<StatsIntervalBloc, StatsIntervalState>(builder: (context, state) {
-      return StatsIntervalSelector(statsInterval: state.statsInterval);
-    });
+  Widget buildIntervalText(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: BlocBuilder<StatsIntervalBloc, StatsIntervalState>(builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppThemeData.paddingLg,
+            vertical: AppThemeData.paddingMd,
+          ),
+          child: StatsIntervalDisplay(
+            statsInterval: state.statsInterval,
+          )
+        );
+      }),
+    );
   }
 
   Widget buildTabBarItem(BuildContext context, String label) {

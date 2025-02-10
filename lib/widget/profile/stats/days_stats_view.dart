@@ -6,6 +6,8 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -15,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import 'package:bar_chart/bar_chart.dart';
+import 'package:loop_page_view/loop_page_view.dart';
 
 import 'calculated_stats_view.dart';
 
@@ -86,7 +89,13 @@ class DaysStatsViewContent extends StatefulWidget {
 
 class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
+
+
   bool isLoading = true;
+
+  late final PageController pageController;
+  int _lastIndex = 0;
+  final int maxPages = 12;
 
   // Overlay
   OverlayEntry? overlayEntry;
@@ -97,6 +106,8 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   @override
   void initState() {
+
+    pageController = PageController(keepPage: true);
 
     widget.daysBloc.add(
       DaysEvent.queryDays(
@@ -119,6 +130,28 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     super.initState();
   }
 
+  void _stepBackWard(BuildContext context) {
+    StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
+    StatsInterval statsInterval = bloc.state.statsInterval;
+    bloc.add(StatsIntervalEvent.changed(
+      statsInterval: statsInterval.copyWith(
+        from: statsInterval.from.subtract(Duration(days: statsInterval.intervalType.intervalInDays)),
+        to: statsInterval.to.subtract(Duration(days: statsInterval.intervalType.intervalInDays)),
+      )
+    ));
+  }
+
+  void _stepForward(BuildContext context) {
+    StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
+    StatsInterval statsInterval = bloc.state.statsInterval;
+    bloc.add(StatsIntervalEvent.changed(
+        statsInterval: statsInterval.copyWith(
+          from: statsInterval.from.add(Duration(days: statsInterval.intervalType.intervalInDays)),
+          to: statsInterval.to.add(Duration(days: statsInterval.intervalType.intervalInDays)),
+        )
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return _buildContent(context);
@@ -128,80 +161,127 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.all(AppThemeData.spacingMd),
+        padding: const EdgeInsets.all(0.0),
+        // padding: const EdgeInsets.all(AppThemeData.spacingMd),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              height: 350,
-              child: BlocBuilder<DaysBloc, DaysState>(
-                builder: (context, state) {
-                  if (state is DaysLoadedState) {
-                    List<BarData> barData = state.days.map((day) {
-                      return BarData(
-                        value: day.minutesCount.toDouble(),
-                        label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate).substring(0,1),
-                      );
-                    }).toList();
-                    return BarChart(
-                      dataSource: barData,
-                      displayRangeSetter: (max) => 100,
-                      yAxisIntervalSetter: (dataSource) {
-                        return 10.0;
-                      },
-                      barBuilder: (context, barChartContext) {
-                        return InfoTriggerBars(
-                          barChartContext: barChartContext,
-                          onInfoTriggered: (index, data) {
-                            showOverlay(context, state.days[index]);
-                            print('onInfoTriggered: $data');
-                          },
-                          onInfoChanged: (index, data) {
-                            updateOverlay(context, state.days[index]);
-                            print('onInfoChanged: $data');
-                          },
-                          onInfoDismissed: (index, data) {
-                            hideOverlay(context);
-                            print('onInfoDismissed $data');
-                          },
-
-                        );
-
-                        // return Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.end,
-                        //   children: [
-                        //     for (var i = 0; i < barChartData.length; i++)
-                        //       Expanded(
-                        //           child: Padding(
-                        //               padding: EdgeInsets.symmetric(horizontal: 1),
-                        //               child: FractionallySizedBox(
-                        //                 heightFactor: math.min(
-                        //                   barChartData[i].value / barChartContext.displayRange,
-                        //                   1.0,
-                        //                 ),
-                        //                 child: DecoratedBox(
-                        //                   decoration: BoxDecoration(
-                        //                     color: Colors.white,
-                        //                   ),
-                        //                 ),
-                        //               )
-                        //           )
-                        //       )
-                        //   ],
-                        // );
-
-
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.black,
+              ),
+              child: SizedBox(
+                height: 296,
+                child: PageView.builder(
+                  reverse: true,
+                  itemCount: 4,
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    print('lastIndex: $_lastIndex, onPageChangedIndex: $index');
+                    if (index > _lastIndex) {
+                      _stepBackWard(context);
+                    } else {
+                      _stepForward(context);
+                    }
+                    setState(() {
+                      _lastIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    return BlocBuilder<DaysBloc, DaysState>(
+                      builder: (context, state) {
+                        if (state is DaysLoadedState) {
+                          List<BarData> barData = state.days.map((day) {
+                            return BarData(
+                              value: day.minutesCount.toDouble(),
+                              label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate).substring(0,1),
+                            );
+                          }).toList();
+                          return Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: BarChart(
+                              dataSource: barData,
+                              displayRangeSetter: (max) => 100,
+                              axisSpacing: EdgeInsets.only(
+                                top: 10,
+                                right: 40,
+                                bottom: 21,
+                                left: 0,
+                              ),
+                              yAxisIntervalSetter: (dataSource) {
+                                return 10.0;
+                              },
+                              axisBuilder: (context, barChartContext) {
+                                return CustomPaint(
+                                  painter: AxisPainter(
+                                    color: Colors.grey.shade600,
+                                    barChartContext: barChartContext,
+                                  ),
+                                );
+                              },
+                              barBuilder: (context, barChartContext) {
+                                return InfoTriggerBars(
+                                  barColor: Colors.grey,
+                                  selectedBarColor: Colors.grey.shade200,
+                                  barChartContext: barChartContext,
+                                  onInfoTriggered: (index, data) {
+                                    showOverlay(context, state.days[index]);
+                                    print('onInfoTriggered: $data');
+                                  },
+                                  onInfoChanged: (index, data) {
+                                    updateOverlay(context, state.days[index]);
+                                    print('onInfoChanged: $data');
+                                  },
+                                  onInfoDismissed: (index, data) {
+                                    hideOverlay(context);
+                                    print('onInfoDismissed $data');
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: BarChart(
+                              dataSource: List.generate(14, (index) {
+                                return BarData(
+                                  value: 0,
+                                  label: '${index + 1}',
+                                );
+                              }),
+                              displayRangeSetter: (max) => 100,
+                              axisSpacing: EdgeInsets.only(
+                                top: 10,
+                                right: 40,
+                                bottom: 21,
+                                left: 0,
+                              ),
+                              yAxisIntervalSetter: (dataSource) {
+                                return 10.0;
+                              },
+                              axisBuilder: (context, barChartContext) {
+                                return CustomPaint(
+                                  painter: AxisPainter(
+                                    color: Colors.grey.shade600,
+                                    barChartContext: barChartContext,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        }
                       },
                     );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
+                  },
+                ),
+              )
             ),
             Gap.medium(),
-            buildCalculatedStats(context),
+            Padding(
+              padding: const EdgeInsets.all(AppThemeData.spacingMd),
+              child: buildCalculatedStats(context),
+            )
           ],
         ),
       ),
@@ -382,6 +462,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   @override
   void dispose() {
+    pageController.dispose();
     _daysBlocSubscription?.cancel();
     _statsIntervalBlocSubscription?.cancel();
     super.dispose();

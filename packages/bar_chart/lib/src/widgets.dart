@@ -11,11 +11,17 @@ typedef BarBuilder = Widget Function(
   BarChartContext barChartContext
 );
 
+typedef AxisBuilder = Widget Function(
+    BuildContext context,
+    BarChartContext barChartContext
+    );
+
 class BarChart extends StatefulWidget {
 
   final List<BarData> dataSource;
 
   final EdgeInsets axisSpacing;
+  final AxisBuilder axisBuilder;
   final BarBuilder barBuilder;
 
   final double Function(double max) displayRangeSetter;
@@ -25,11 +31,10 @@ class BarChart extends StatefulWidget {
   final String Function(double value) yAxisLabelFormatter;
   final String Function(BarData barChartData) xAxisLabelFormatter;
 
-
-
   const BarChart({
     required this.dataSource,
-    this.axisSpacing = const EdgeInsets.only(right: 20, bottom: 20),
+    this.axisSpacing = const EdgeInsets.only(right: 20, bottom: 20,),
+    this.axisBuilder = _defaultAxisBuilder,
     this.barBuilder = _defaultBarBuilder,
     this.displayRangeSetter = _defaultDisplayRangeSetter,
     this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
@@ -80,17 +85,15 @@ class _BarChartState extends State<BarChart> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: CustomPaint(
-        painter: AxisPainter(
-          color: Colors.black.withValues(alpha: 0.5),
-          barChartContext: barChartContext,
-        ),
-        child: Padding(
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        widget.axisBuilder(context, barChartContext),
+        Padding(
           padding: widget.axisSpacing,
           child: widget.barBuilder(context, barChartContext),
         ),
-      ),
+      ],
     );
   }
 
@@ -153,6 +156,8 @@ class _SelectableBarsState extends State<SelectableBars> {
 
 class InfoTriggerBars extends StatefulWidget {
 
+  final Color barColor;
+  final Color selectedBarColor;
   final BarChartContext barChartContext;
 
   final void Function(int index, BarData data)? onInfoTriggered;
@@ -161,6 +166,8 @@ class InfoTriggerBars extends StatefulWidget {
 
   const InfoTriggerBars({
     required this.barChartContext,
+    this.barColor = Colors.grey,
+    this.selectedBarColor = Colors.white,
     this.onInfoTriggered,
     this.onInfoChanged,
     this.onInfoDismissed,
@@ -217,7 +224,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                 child: BarChartBar(
                   barIndex: i,
                   barPadding: 6.0,
-                  color: (selectedIndex == i) ? Colors.red : Colors.black,
+                  color: (selectedIndex == i) ? widget.selectedBarColor : widget.barColor,
                   heightFactor: (barChartData[i].value / widget.barChartContext.displayRange),
                 ),
               )
@@ -228,6 +235,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
   }
 
   int? _barHitTest(PointerEvent event) {
+    if (mounted == false) return null;
     final RenderBox box = barContainerKey.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
     final result = BoxHitTestResult();
     Offset local = box.globalToLocal(event.position);
@@ -315,4 +323,14 @@ Widget _defaultBarBuilder(
   );
 }
 
-
+Widget _defaultAxisBuilder(
+  BuildContext context,
+  BarChartContext barChartContext,
+) {
+  return CustomPaint(
+    painter: AxisPainter(
+      color: Colors.grey.shade600,
+      barChartContext: barChartContext,
+    ),
+  );
+}

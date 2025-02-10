@@ -1,7 +1,10 @@
+export 'calculated_stats_view.dart';
 export 'consecutive_days.dart';
-export 'custom_tab_bar_view.dart';
 export 'days_stats_view.dart';
 export 'metrics.dart';
-export 'weeks_stats_view.dart';
 export 'months_stats_view.dart';
+export 'statistics_detail_tile.dart';
+export 'stats_interval_display.dart';
+export 'stats_view_mixin.dart';
+export 'weeks_stats_view.dart';
 export 'years_stats_view.dart';

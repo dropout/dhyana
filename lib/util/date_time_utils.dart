@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 extension DateTimeUtils on DateTime {
 
   String toYearId() {
@@ -46,6 +49,9 @@ extension DateTimeUtils on DateTime {
   }
 
 }
+
+String buildTimerangeText(BuildContext context, DateTime from, DateTime to) =>
+    '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to)}';
 
 String _twoDigits(int n) {
   return n.toString().padLeft(2, "0");
