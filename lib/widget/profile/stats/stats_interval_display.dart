@@ -44,51 +44,49 @@ class _StatsIntervalDisplayState extends State<StatsIntervalDisplay>
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: Durations.short4,
-      switchInCurve: Curves.easeIn,
-      switchOutCurve: Curves.easeOut,
+      duration: Durations.long2,
       transitionBuilder: (child, animation) {
-        print('animationStatus: ${animation.isForwardOrCompleted}');
-
-        if (animation.isForwardOrCompleted) {
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, 0.25),
-              end: Offset.zero,
-            ).animate(animation),
-            child: FadeTransition(
-              opacity: animation,
-              // opacity: Tween<double>(
-              //   begin: 1.0,
-              //   end: 0.0,
-              // ).animate(animation),
-              child: child,
-            ),
-          );
-        } else {
-          return FadeTransition(
-            opacity: Tween<double>(
-              begin: 0.0,
-              end: 1.0,
-            ).animate(animation),
-            child: child,
-          );
-        }
+        return FadeTransition(
+          opacity: Tween<double>(
+            begin: 0.0,
+            end: 1.0,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Interval(0.5, 1.0),
+            )
+          ),
+          child: child,
+        );
       },
-      child: Text(
+      child: SizedBox(
         key: ValueKey(widget.statsInterval.from),
-        buildTimerangeText(
-          context,
-          widget.statsInterval.from,
-          widget.statsInterval.to,
-        ),
-        textAlign: TextAlign.left,
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-        ),
+        width: double.infinity,
+        child: Text(
+          createIntervalString(
+            context,
+            widget.statsInterval.from,
+            widget.statsInterval.to,
+          ),
+          textAlign: TextAlign.left,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
 
 
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextWidget(BuildContext context, String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.left,
+      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
