@@ -50,7 +50,7 @@ extension DateTimeUtils on DateTime {
 
 }
 
-String buildTimerangeText(BuildContext context, DateTime from, DateTime to) =>
+String createIntervalString(BuildContext context, DateTime from, DateTime to) =>
     '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to)}';
 
 String _twoDigits(int n) {

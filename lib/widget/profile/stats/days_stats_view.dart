@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -12,12 +15,7 @@ import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-
 import 'package:bar_chart/bar_chart.dart';
-import 'package:loop_page_view/loop_page_view.dart';
 
 import 'calculated_stats_view.dart';
 

@@ -287,35 +287,6 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     ];
   }
 
-  // Widget buildAppBar(BuildContext context) {
-  //   return SliverAppBar(
-  //     centerTitle: false,
-  //     elevation: 0,
-  //     // stretch: true, // Not working?
-  //     floating: false,
-  //     pinned: true,
-  //     scrolledUnderElevation: 0.0, // Material design wierd transparency effect
-  //     backgroundColor: AppColors.backgroundPaper,
-  //     leading: const Padding(
-  //       padding: EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0,),
-  //       child: CustomBackButton()
-  //     ),
-  //     leadingWidth: 64,
-  //     title: Transform.translate(
-  //       offset: Offset(0, AppThemeData.spacingSm * (1.0 - titleEffectRatio)),
-  //       child: Opacity(
-  //         opacity: titleEffectRatio,
-  //         child: Text(
-  //           AppLocalizations.of(context).profileStats,
-  //           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget buildProfileDetails(BuildContext context, Profile profile) {
     return SliverToBoxAdapter(
       child: Padding(
