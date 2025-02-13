@@ -221,12 +221,24 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                     widget.onInfoChanged?.call(targetBarIndex, barChartData[targetBarIndex]);
                   }
                 },
-                child: BarChartBar(
+                child: InfoTriggerArea(
                   barIndex: i,
-                  barPadding: 6.0,
-                  color: (selectedIndex == i) ? widget.selectedBarColor : widget.barColor,
-                  heightFactor: (barChartData[i].value / widget.barChartContext.displayRange),
-                ),
+                  child: AnimatedFractionallySizedBox(
+                    duration: Durations.long2,
+                    curve: Curves.easeInOutCubicEmphasized,
+                    heightFactor: math.max((barChartData[i].value / widget.barChartContext.displayRange), 0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                      child: Container(
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: (selectedIndex == i) ? widget.selectedBarColor : widget.barColor,
+                        ),
+                      ),
+                    )
+
+                  )
+                )
               )
             )
           )
@@ -243,7 +255,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
       for (final hit in result.path) {
         /// temporary variable so that the [is] allows access of [index]
         final target = hit.target;
-        if (target is RenderBarChartBar) {
+        if (target is RenderInfoTriggerArea) {
           return target.barIndex;
         }
       }
@@ -253,40 +265,62 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
 
 }
 
-class BarChartBar extends LeafRenderObjectWidget {
+class InfoTriggerArea extends SingleChildRenderObjectWidget {
 
   final int barIndex;
-  final double heightFactor;
-  final double barPadding;
-  final Color color;
 
-  const BarChartBar({
+  const InfoTriggerArea({
     required this.barIndex,
-    required this.heightFactor,
-    this.barPadding = 1.0,
-    this.color = Colors.white,
+    super.child,
     super.key,
   });
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    return RenderBarChartBar(
+    return RenderInfoTriggerArea(
       barIndex: barIndex,
-      heightFactor: heightFactor,
-      barPadding: barPadding,
-      color: color,
     );
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderBarChartBar renderObject) {
+  void updateRenderObject(BuildContext context, RenderInfoTriggerArea renderObject) {
     renderObject.barIndex = barIndex;
-    renderObject.heightFactor = heightFactor;
-    renderObject.width = barPadding;
-    renderObject.color = color;
   }
 
 }
+
+class RenderInfoTriggerArea extends RenderProxyBox {
+
+  int barIndex;
+
+  RenderInfoTriggerArea({
+    required this.barIndex,
+    RenderBox? child,
+  }) : super(child);
+
+  @override
+  void performLayout() {
+    size = constraints.constrain(Size(double.infinity, double.infinity));
+    child?.layout(constraints, parentUsesSize: false);
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    final RenderBox? child = this.child;
+    if (child == null) {
+      return;
+    }
+    context.paintChild(
+      child,
+      Offset(offset.dx, offset.dy + (size.height - child.size.height)),
+    );
+  }
+
+  @override
+  bool hitTestSelf(Offset position) => size.contains(position);
+
+}
+
 
 double _defaultDisplayRangeSetter(double max) => max;
 String _defaultYAxisLabelFormatter(double value) => value.toStringAsFixed(0);

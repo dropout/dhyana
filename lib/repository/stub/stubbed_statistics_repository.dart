@@ -41,7 +41,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
 
   @override
   Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 500));
     Duration difference = queryOptions.from.difference(queryOptions.to);
     List<Day> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {

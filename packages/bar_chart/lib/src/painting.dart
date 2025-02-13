@@ -87,6 +87,11 @@ class AxisPainter extends CustomPainter {
   ) {
 
     // <= because we want to draw the last line
+    // also because of this avoid trying to iterate empty list
+    if (barChartContext.dataSource.isEmpty) {
+      return;
+    }
+
     int i = 0;
     while(i <= barChartContext.dataSource.length) {
       int remainder = i % barChartContext.xAxisInterval;
@@ -143,72 +148,6 @@ class AxisPainter extends CustomPainter {
   bool hitTest(Offset position) => false;
 
 }
-
-class RenderBarChartBar extends RenderBox {
-
-  final Paint _paint;
-
-  int _barIndex;
-  double _heightFactor;
-  double _barPadding;
-
-  RenderBarChartBar({
-    required int barIndex,
-    required double heightFactor,
-    Color color = Colors.white,
-    double barPadding = 1.0,
-  }) :
-    _barIndex = barIndex,
-    _heightFactor = heightFactor,
-    _barPadding = barPadding,
-    _paint = Paint()..color = color;
-
-  int get barIndex => _barIndex;
-  double get heightFactor => _heightFactor;
-
-  set barIndex(int barIndex) {
-    _barIndex = barIndex;
-    markNeedsLayout();
-  }
-
-  set heightFactor(double heightFactor) {
-    _heightFactor = heightFactor;
-    markNeedsLayout();
-  }
-
-  set color(Color color) {
-    _paint.color = color;
-    markNeedsPaint();
-  }
-
-  set width(double width) {
-    _barPadding = width;
-    markNeedsLayout();
-  }
-
-  @override
-  void performLayout() {
-    size = constraints.constrain(Size(double.infinity, double.infinity));
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    final Size renderSize = Size(
-      size.width - _barPadding * 2,
-      size.height * _heightFactor
-    );
-    final renderOffset = Offset(
-      offset.dx + _barPadding,
-      offset.dy + size.height - renderSize.height
-    );
-    context.canvas.drawRect(renderOffset & renderSize, _paint);
-  }
-
-  @override
-  bool hitTestSelf(Offset position) => size.contains(position);
-
-}
-
 
 void paintDashedLine(
   Canvas canvas,

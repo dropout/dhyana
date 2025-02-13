@@ -26,8 +26,8 @@ class BarChartContext {
     required this.yAxisLabelFormatter,
     required this.padding,
   }) :
-    max = dataSource.map((data) => data.value).reduce(math.max),
-    min = dataSource.map((data) => data.value).reduce(math.min);
+    max = dataSource.isEmpty ? 0 : dataSource.map((data) => data.value).reduce(math.max),
+    min = dataSource.isEmpty ? 0 : dataSource.map((data) => data.value).reduce(math.min);
 
 
   double get displayRange => displayRangeSetter(max);
