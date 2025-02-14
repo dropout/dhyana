@@ -215,10 +215,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
             buildTabBarView(
               context,
               'days',
-              DaysStatsView(
-                profile: profile,
-                statsIntervalBloc: BlocProvider.of<StatsIntervalBloc>(context),
-              ),
+              DaysStatsView(profile: profile),
             ),
             buildTabBarView(
               context,
