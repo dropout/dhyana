@@ -66,72 +66,31 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
 
   @override
   Widget build(BuildContext context) {
-
-    // ret
-    //
-    //
-    // // return AnimatedList(
-    // //   shrinkWrap: true,
-    // //   initialItemCount: 4,
-    // //   itemBuilder: (
-    // //     BuildContext context,
-    // //     int index,
-    // //     Animation<double> animation
-    // //   ) {
-    // //     return buildColumnItem(
-    // //       context,
-    // //       label: entries[index].label,
-    // //       value: entries[index].value,
-    // //     );
-    // //   },
-    //   // children: [
-    //   //   buildColumnItem(
-    //   //     context,
-    //   //     label: AppLocalizations.of(context).statsTotalSessions,
-    //   //     value: '$totalSessions ${AppLocalizations.of(context).sessions}',
-    //   //   ),
-    //   //   buildColumnItem(
-    //   //     context,
-    //   //     label: AppLocalizations.of(context).statsTotalTimeSpent,
-    //   //     value: AppLocalizations.of(context).minutesPluralWithNumber(totalMinutes),
-    //   //   ),
-    //   //   buildColumnItem(
-    //   //     context,
-    //   //     label: AppLocalizations.of(context).statsAverageSessions,
-    //   //     value: '$averageSessions ${AppLocalizations.of(context).sessions}',
-    //   //   ),
-    //   //   buildColumnItem(
-    //   //     context,
-    //   //     label: AppLocalizations.of(context).statsAverageTimeSpent,
-    //   //     value: AppLocalizations.of(context).minutesPluralWithNumber(averageMinutes),
-    //   //   ),
-    //   // ],
-    // );
-
+    CalculatedStats calculatedStats = widget.calculatedStats;
     return Column(
       children: [
         buildColumnItem(
           context,
           label: AppLocalizations.of(context).statsTotalSessions,
-          value: '$totalSessions ${AppLocalizations.of(context).sessions}',
+          value: '${calculatedStats.totalSessions} ${AppLocalizations.of(context).sessions}',
           order: 0,
         ),
         buildColumnItem(
           context,
           label: AppLocalizations.of(context).statsTotalTimeSpent,
-          value: AppLocalizations.of(context).minutesPluralWithNumber(widget.calculatedStats.totalMinutes),
+          value: AppLocalizations.of(context).minutesPluralWithNumber(calculatedStats.totalMinutes),
           order: 1,
         ),
         buildColumnItem(
           context,
           label: AppLocalizations.of(context).statsAverageSessions,
-          value: '$averageSessions ${AppLocalizations.of(context).sessions}',
+          value: '${calculatedStats.averageSessions.toStringAsFixed(0)} ${AppLocalizations.of(context).sessions}',
           order: 2,
         ),
         buildColumnItem(
           context,
           label: AppLocalizations.of(context).statsAverageTimeSpent,
-          value: AppLocalizations.of(context).minutesPluralWithNumber(averageMinutes),
+          value: AppLocalizations.of(context).minutesPluralWithNumber(calculatedStats.averageMinutes.toInt()),
           order: 3,
         ),
       ]
@@ -144,37 +103,8 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
     required String value,
     int order = 0,
   }) {
-    // return Card(
-    //     key: ValueKey<String>('$uuid-$label-$value'),
-    //     color: AppColors.backgroundPaperLight,
-    //     child: Padding(
-    //       padding: const EdgeInsets.all(AppThemeData.paddingMd),
-    //       child: Row(
-    //         children: [
-    //           Text(
-    //             label.toUpperCase(),
-    //             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-    //               color: Colors.black,
-    //               fontWeight: FontWeight.bold,
-    //             ),
-    //           ),
-    //           const Spacer(),
-    //           Text(
-    //             value,
-    //             style: Theme.of(context).textTheme.titleLarge!.copyWith(
-    //               color: Colors.black,
-    //               fontWeight: FontWeight.bold,
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     )
-    // );
-
-
     return AnimatedSwitcher(
-      // duration: Durations.extralong3,
-      duration: Duration(seconds: 1),
+      duration: Durations.extralong2,
       transitionBuilder: (child, animation) {
 
         if (animation.isForwardOrCompleted) {
@@ -193,12 +123,10 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
             )),
             child: child,
           );
-
         }
 
-        double interval = 0.1 * order;
-
         // fading in staggered
+        double staggerGap = 0.1 * order;
         return FadeTransition(
           opacity: Tween<double>(
             begin: 0.0,
@@ -207,49 +135,13 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               CurvedAnimation(
                 parent: animation,
                 curve: Interval(
-                  0.5 + interval,
+                  0.5 + staggerGap,
                   1.0,
                 ),
               )
           ),
           child: child,
         );
-
-
-        // return animatedSwitcherTransition(child, animation);
-        // animation.drive(_animationController.value);
-
-        // print(animation.isForwardOrCompleted);
-
-        // return SlideTransition(
-        //   position: Tween<Offset>(
-        //     begin: Offset(0.0, 1.0),
-        //     end: Offset.zero,
-        //   ).animate(
-        //     CurvedAnimation(
-        //       parent: animation,
-        //       curve: Interval(
-        //         interval,
-        //         interval + 0.25,
-        //       ),
-        //     )
-        //   ),
-        //   child: child,
-        // );
-
-        // return FadeTransition(
-        //   opacity: Tween<double>(
-        //     begin: 0.0,
-        //     end: 1.0,
-        //   ).animate(CurvedAnimation(
-        //     parent: animation,
-        //     curve: Interval(
-        //       0.5,
-        //       1.0,
-        //     ),
-        //   )),
-        //   child: child,
-        // );
       },
       child: Card(
         key: ValueKey(widget.calculatedStats),
@@ -279,90 +171,5 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
       )
     );
   }
-
-  // // @override
-  // Widget buildOld(BuildContext context) {
-  //   return Wrap(
-  //     spacing: 8.0,
-  //     runSpacing: 8.0,
-  //     children: [
-  //       buildRowItem(
-  //           context,
-  //           AppLocalizations.of(context).statsTotalTimeSpent,
-  //           '${calculatedStats.totalMinutes} minutes'
-  //       ),
-  //       buildRowItem(
-  //           context,
-  //           AppLocalizations.of(context).statsTotalSessions,
-  //           '${calculatedStats.totalSessions} sessions'
-  //       ),
-  //       buildRowItem(
-  //           context,
-  //           AppLocalizations.of(context).statsAverageTimeSpent,
-  //           '${calculatedStats.averageMinutes.toInt()} minutes'
-  //       ),
-  //       buildRowItem(
-  //           context,
-  //           AppLocalizations.of(context).statsAverageSessions,
-  //           '${calculatedStats.averageSessions.toInt()} sessions'
-  //       ),
-  //     ],
-  //   );
-  // }
-  //
-  // Widget buildRowItem(BuildContext context, String label, String value) {
-  //   return LayoutBuilder(
-  //     builder: (BuildContext context, BoxConstraints constraints) {
-  //       return Container(
-  //           decoration: const BoxDecoration(
-  //               color: Colors.black,
-  //               borderRadius: BorderRadius.all(Radius.circular(AppThemeData.borderRadiusLg))
-  //           ),
-  //           width: constraints.maxWidth / 2 - 4,
-  //           height: 120,
-  //           padding: const EdgeInsets.all(AppThemeData.paddingMd),
-  //           child: Stack(
-  //             fit: StackFit.expand,
-  //             children: [
-  //               Align(
-  //                 alignment: Alignment.topLeft,
-  //                 child: Text(
-  //                     label.toUpperCase(),
-  //                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-  //                       color: Colors.white,
-  //                       shadows: [
-  //                         const Shadow(
-  //                           blurRadius: 48.0,
-  //                           color: Colors.black87,
-  //                         ),
-  //                       ],
-  //                       fontWeight: FontWeight.bold,
-  //                       height: 1.0,
-  //                     )
-  //                 ),
-  //               ),
-  //               Align(
-  //                 alignment: Alignment.bottomRight,
-  //                 child: Text(
-  //                     value,
-  //                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-  //                       color: Colors.white,
-  //                       shadows: [
-  //                         const Shadow(
-  //                           blurRadius: 48.0,
-  //                           color: Colors.black87,
-  //                         ),
-  //                       ],
-  //                       fontWeight: FontWeight.bold,
-  //                       height: 1.0,
-  //                     )
-  //                 ),
-  //               ),
-  //             ],
-  //           )
-  //       );
-  //     },
-  //   );
-  // }
 
 }
