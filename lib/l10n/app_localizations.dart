@@ -257,6 +257,18 @@ abstract class AppLocalizations {
   /// **'Rendben'**
   String get errorButtonText;
 
+  /// No description provided for @session.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ülés'**
+  String get session;
+
+  /// No description provided for @sessions.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ülések'**
+  String get sessions;
+
   /// No description provided for @timerFinishSessionButtonText.
   ///
   /// In hu, this message translates to:

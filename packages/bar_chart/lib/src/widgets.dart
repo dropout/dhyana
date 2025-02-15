@@ -229,7 +229,8 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                     heightFactor: math.max((barChartData[i].value / widget.barChartContext.displayRange), 0),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: Durations.short2,
                         height: double.infinity,
                         decoration: BoxDecoration(
                           color: (selectedIndex == i) ? widget.selectedBarColor : widget.barColor,

@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,18 +47,7 @@ class _StatsIntervalDisplayState extends State<StatsIntervalDisplay>
     return AnimatedSwitcher(
       duration: Durations.long2,
       transitionBuilder: (child, animation) {
-        return FadeTransition(
-          opacity: Tween<double>(
-            begin: 0.0,
-            end: 1.0,
-          ).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Interval(0.5, 1.0),
-            )
-          ),
-          child: child,
-        );
+        return animatedSwitcherTransition(child, animation);
       },
       child: SizedBox(
         key: ValueKey(widget.statsInterval.from),
@@ -73,8 +63,6 @@ class _StatsIntervalDisplayState extends State<StatsIntervalDisplay>
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
-
-
         ),
       ),
     );

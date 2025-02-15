@@ -64,7 +64,7 @@ class AxisPainter extends CustomPainter {
 
       final textPainter = createTextPainter(
         barChartContext.yAxisLabelFormatter(barChartContext.yAxisInterval * i),
-        TextAlign.right,
+        TextAlign.center,
         color: color,
       );
 
@@ -115,20 +115,12 @@ class AxisPainter extends CustomPainter {
           barChartContext.dataSource[i].label,
           TextAlign.center,
           color: color,
-          maxWidth: size.width / barChartContext.dataSource.length,
+          width: size.width / barChartContext.dataSource.length,
         );
-
-        final tx = x + textPainter.width / 2;
-        final ty = size.height - barChartContext.padding.bottom + 4;
-
-        // canvas.drawRect(
-        //   Offset(tx,ty) + offset & Size(textPainter.width, textPainter.height),
-        //   linePaint,
-        // );
 
         textPainter.paint(
           canvas,
-          offset + Offset(tx, ty),
+          offset + Offset(x, size.height - barChartContext.padding.bottom + 4),
         );
       }
 
@@ -180,7 +172,7 @@ TextPainter createTextPainter(
   String text,
   TextAlign textAlign, {
     Color color = Colors.red,
-    double maxWidth = double.infinity,
+    double? width,
   }
 ) {
   TextStyle textStyle = TextStyle(
@@ -199,9 +191,8 @@ TextPainter createTextPainter(
   );
 
   textPainter.layout(
-
-    minWidth: 0,
-    // maxWidth: maxWidth,
+    minWidth: width ?? 0,
+    maxWidth: width ?? double.infinity,
   );
 
   return textPainter;

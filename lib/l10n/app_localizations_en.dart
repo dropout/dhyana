@@ -90,6 +90,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorButtonText => 'Okay';
 
   @override
+  String get session => 'Session';
+
+  @override
+  String get sessions => 'Sessions';
+
+  @override
   String get timerFinishSessionButtonText => 'Finish session';
 
   @override

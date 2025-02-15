@@ -48,3 +48,21 @@ extension RevealWidgetAnimation on Widget {
   }
 
 }
+
+Widget animatedSwitcherTransition(
+  Widget child,
+  Animation<double> animation,
+) {
+  return FadeTransition(
+    opacity: Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(
+        CurvedAnimation(
+          parent: animation,
+          curve: Interval(0.5, 1.0),
+        )
+    ),
+    child: child,
+  );
+}

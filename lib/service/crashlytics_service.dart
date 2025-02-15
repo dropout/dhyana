@@ -2,8 +2,8 @@ abstract class CrashlyticsService {
 
   void recordError({
     required dynamic exception,
-    required StackTrace? stackTrace,
-    required String? reason,
+    StackTrace? stackTrace,
+    String? reason,
   });
 
   void log(String message);

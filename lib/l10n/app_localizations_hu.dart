@@ -90,6 +90,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get errorButtonText => 'Rendben';
 
   @override
+  String get session => 'Ülés';
+
+  @override
+  String get sessions => 'Ülések';
+
+  @override
   String get timerFinishSessionButtonText => 'Befejezés';
 
   @override

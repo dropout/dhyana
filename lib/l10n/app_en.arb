@@ -33,6 +33,9 @@
   "errorText": "An unexpected error has occured.",
   "errorButtonText": "Okay",
 
+  "session": "Session",
+  "sessions": "Sessions",
+
   "timerFinishSessionButtonText": "Finish session",
   "timerDiscardSessionButtonText": "Discard session",
 

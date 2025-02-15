@@ -33,6 +33,9 @@
   "errorText": "Váratlan probléma támadt.",
   "errorButtonText": "Rendben",
 
+  "session": "Ülés",
+  "sessions": "Ülések",
+
   "timerFinishSessionButtonText": "Befejezés",
   "timerDiscardSessionButtonText": "Megszakítás",
 

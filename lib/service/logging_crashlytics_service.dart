@@ -8,7 +8,11 @@ class LoggingCrashlyticsService implements CrashlyticsService {
   final Logger logger = getLogger('LoggingCrashlyticsService');
 
   @override
-  void recordError({required dynamic exception, required StackTrace? stackTrace, required String? reason}) {
+  void recordError({
+    required dynamic exception,
+    StackTrace? stackTrace,
+    String? reason,
+  }) {
     logger.e(reason, error: exception, stackTrace: stackTrace);
   }
 
