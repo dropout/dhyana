@@ -171,13 +171,14 @@ void paintDashedLine(
 TextPainter createTextPainter(
   String text,
   TextAlign textAlign, {
+    double size = 12,
     Color color = Colors.red,
     double? width,
   }
 ) {
   TextStyle textStyle = TextStyle(
     color: color,
-    fontSize: 12,
+    fontSize: size,
     fontWeight: FontWeight.bold,
   );
   final textSpan = TextSpan(
@@ -198,3 +199,51 @@ TextPainter createTextPainter(
   return textPainter;
 }
 
+class AverageOverlayPainter extends CustomPainter {
+
+  final Color color;
+  final BarChartContext barChartContext;
+  late final Paint linePaint;
+
+
+  AverageOverlayPainter({
+    required this.color,
+    required this.barChartContext,
+  }) {
+    linePaint = Paint()
+      ..strokeWidth = 2.0
+      ..color = color;
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    double valueToPixelRatio = barChartContext.valueToPixelRatio(size);
+    double hp = barChartContext.avg * valueToPixelRatio;
+    paintDashedLine(
+      canvas,
+      Offset(0, size.height - hp),
+      Offset(size.width, size.height - hp),
+      [10,5],
+      linePaint
+    );
+
+    final textPainter = createTextPainter(
+      'avg',
+      TextAlign.center,
+      size: 13,
+      color: color,
+    );
+
+    textPainter.paint(
+      canvas,
+      Offset(size.width + 4, size.height - hp - textPainter.height / 2),
+    );
+
+  }
+
+  @override
+  bool shouldRepaint(covariant AverageOverlayPainter oldDelegate) =>
+    oldDelegate.color != color ||
+    oldDelegate.barChartContext != barChartContext;
+
+}

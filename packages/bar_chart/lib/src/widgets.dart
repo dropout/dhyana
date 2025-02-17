@@ -12,9 +12,14 @@ typedef BarBuilder = Widget Function(
 );
 
 typedef AxisBuilder = Widget Function(
-    BuildContext context,
-    BarChartContext barChartContext
-    );
+  BuildContext context,
+  BarChartContext barChartContext
+);
+
+typedef OverlayBuilder = Widget? Function(
+  BuildContext context,
+  BarChartContext barChartContext
+);
 
 class BarChart extends StatefulWidget {
 
@@ -23,6 +28,7 @@ class BarChart extends StatefulWidget {
   final EdgeInsets axisSpacing;
   final AxisBuilder axisBuilder;
   final BarBuilder barBuilder;
+  final OverlayBuilder overlayBuilder;
 
   final double Function(double max) displayRangeSetter;
   final double Function(double displayRange) yAxisIntervalSetter;
@@ -33,9 +39,10 @@ class BarChart extends StatefulWidget {
 
   const BarChart({
     required this.dataSource,
-    this.axisSpacing = const EdgeInsets.only(right: 20, bottom: 20,),
+    this.axisSpacing = const EdgeInsets.only(right: 20, bottom: 20),
     this.axisBuilder = _defaultAxisBuilder,
     this.barBuilder = _defaultBarBuilder,
+    this.overlayBuilder = _defaultOverlayBuilder,
     this.displayRangeSetter = _defaultDisplayRangeSetter,
     this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
     this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
@@ -92,6 +99,12 @@ class _BarChartState extends State<BarChart> {
         Padding(
           padding: widget.axisSpacing,
           child: widget.barBuilder(context, barChartContext),
+        ),
+        IgnorePointer(
+          child: Padding(
+            padding: widget.axisSpacing,
+            child: widget.overlayBuilder(context, barChartContext),
+          ),
         ),
       ],
     );
@@ -369,3 +382,8 @@ Widget _defaultAxisBuilder(
     ),
   );
 }
+
+Widget? _defaultOverlayBuilder(
+  BuildContext context,
+  BarChartContext barChartContext,
+) => null;

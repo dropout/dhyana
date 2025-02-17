@@ -91,7 +91,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
 
   // For calculated stats
   List<Day> days = [];
-  CalculatedStats calculatedStats = const CalculatedStats();
+  CalculatedStats? calculatedStats;
 
   @override
   void initState() {
@@ -113,10 +113,10 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
     StatsInterval statsInterval = bloc.state.statsInterval;
     bloc.add(StatsIntervalEvent.changed(
-        statsInterval: statsInterval.copyWith(
-          from: statsInterval.from.add(Duration(days: statsInterval.intervalType.intervalInDays)),
-          to: statsInterval.to.add(Duration(days: statsInterval.intervalType.intervalInDays)),
-        )
+      statsInterval: statsInterval.copyWith(
+        from: statsInterval.from.add(Duration(days: statsInterval.intervalType.intervalInDays)),
+        to: statsInterval.to.add(Duration(days: statsInterval.intervalType.intervalInDays)),
+      )
     ));
   }
 
@@ -200,6 +200,10 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
   }
 
   Widget buildCalculatedStats(BuildContext context) {
+    if (calculatedStats == null) {
+      return const SizedBox.shrink();
+    }
+
     if (days.isEmpty) {
       return CalculatedStatsView(calculatedStats: const CalculatedStats(
         totalMinutes: 0,
@@ -208,7 +212,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
         averageSessions: 0,
       ));
     } else {
-      return CalculatedStatsView(calculatedStats: calculatedStats);
+      return CalculatedStatsView(calculatedStats: calculatedStats!);
     }
   }
 

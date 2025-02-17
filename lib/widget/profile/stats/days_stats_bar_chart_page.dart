@@ -147,6 +147,19 @@ class _StatsBarChartState extends State<StatsBarChart> {
               widget.onInfoDismissed?.call(index, data),
           );
         },
+        overlayBuilder: (context, barChartContext) {
+          return AnimatedOpacity(
+            opacity: barChartContext.avg == 0 ? 0.0 : 1.0,
+            duration: Durations.long2,
+            curve: Curves.easeInOutCubicEmphasized,
+            child: CustomPaint(
+              painter: AverageOverlayPainter(
+                color: Colors.white,
+                barChartContext: barChartContext,
+              ),
+            )
+          );
+        },
       ),
     );
   }
