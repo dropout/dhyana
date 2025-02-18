@@ -1,10 +1,7 @@
-import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/model/stats_interval.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class StatsIntervalDisplay extends StatefulWidget {
 

@@ -1,10 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
-import 'package:dhyana/enum/stats_interval_type.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/stats_interval_display.dart';

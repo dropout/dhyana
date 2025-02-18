@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 
 import 'package:bar_chart/bar_chart.dart';
 import 'package:flutter/material.dart';

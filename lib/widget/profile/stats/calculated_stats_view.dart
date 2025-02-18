@@ -2,9 +2,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/util/app_animation.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class CalculatedStatsView extends StatefulWidget {
 
@@ -30,38 +28,9 @@ class _Entry {
 class _CalculatedStatsViewState extends State<CalculatedStatsView>
   with SingleTickerProviderStateMixin {
 
-  String uuid = Uuid().v4();
-  int totalSessions = 0;
-  int totalMinutes = 0;
-  int averageSessions = 0;
-  int averageMinutes = 0;
-  List<_Entry> entries = [];
-
-  late final AnimationController _animationController;
-  late final Animation<double> _mainAnimation;
-
   @override
   void initState() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Durations.long4,
-    );
-
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant CalculatedStatsView oldWidget) {
-    if (oldWidget.calculatedStats != widget.calculatedStats) {
-      setState(() {
-        uuid = Uuid().v4();
-      });
-
-      _animationController.reverse(from: 1.0).then((_) {
-        _animationController.forward(from: 0.0);
-      });
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

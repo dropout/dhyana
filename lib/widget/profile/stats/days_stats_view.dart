@@ -1,26 +1,20 @@
-import 'dart:async';
 
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/util/all.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
-import 'package:bar_chart/bar_chart.dart';
 
 import 'calculated_stats_view.dart';
 
-class DaysStatsView extends StatelessWidget {
+class DaysStatsView extends StatefulWidget {
 
   final Profile profile;
 
@@ -30,57 +24,10 @@ class DaysStatsView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<DaysBloc>(
-      create: (BuildContext context) {
-        return DaysBloc(
-          statisticsRepository: context.repos.statisticsRepository,
-          crashlyticsService: context.services.crashlyticsService
-        );
-      },
-      child: DaysStatsViewContentBuilder(
-        profile: profile,
-      ),
-    );
-  }
-
+  State<DaysStatsView> createState() => _DaysStatsViewState();
 }
 
-class DaysStatsViewContentBuilder extends StatelessWidget {
-
-  final Profile profile;
-
-  const DaysStatsViewContentBuilder({
-    super.key,
-    required this.profile,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    StatsIntervalBloc statsIntervalBloc = BlocProvider.of<StatsIntervalBloc>(context);
-    return DaysStatsViewContent(
-      profile: profile,
-      statsIntervalBloc: statsIntervalBloc,
-    );
-  }
-}
-
-class DaysStatsViewContent extends StatefulWidget {
-
-  final Profile profile;
-  final StatsIntervalBloc statsIntervalBloc;
-
-  const DaysStatsViewContent({
-    required this.profile,
-    required this.statsIntervalBloc,
-    super.key,
-  });
-
-  @override
-  State<DaysStatsViewContent> createState() => _DaysStatsViewContentState();
-}
-
-class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
+class _DaysStatsViewState extends State<DaysStatsView> {
 
   // PageView barchart swipe direction helper
   int _lastIndex = 0;
@@ -154,35 +101,39 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
                     });
                   },
                   itemBuilder: (context, index) {
-                    return BlocProvider<DaysBloc>(
-                      create: (BuildContext context) {
-                        return DaysBloc(
-                          statisticsRepository: context.repos.statisticsRepository,
-                          crashlyticsService: context.services.crashlyticsService
-                        )..add(DaysEvent.queryDays(
-                          profileId: widget.profile.id,
-                          from: widget.statsIntervalBloc.state.statsInterval.from,
-                          to: widget.statsIntervalBloc.state.statsInterval.to,
-                        ));
-                      },
-                      child: DaysStatsBarChartPage(
-                        pageIndex: index,
-                        onInfoTriggered: (index, day) {
-                          showOverlay(context, day);
-                        },
-                        onInfoChanged: (index, day) {
-                          updateOverlay(context, day);
-                        },
-                        onInfoDismissed: (index, day) {
-                          hideOverlay(context);
-                        },
-                        onDaysLoaded: (List<Day> loadedDays) {
-                          setState(() {
-                            days = loadedDays;
-                            calculatedStats = CalculatedStats.fromDays(days);
-                          });
-                        },
-                      ),
+                    return BlocBuilder<StatsIntervalBloc, StatsIntervalState>(
+                      builder: (context, statsIntervalState) {
+                        return BlocProvider<DaysBloc>(
+                          create: (BuildContext context) {
+                            return DaysBloc(
+                                statisticsRepository: context.repos.statisticsRepository,
+                                crashlyticsService: context.services.crashlyticsService
+                            )..add(DaysEvent.queryDays(
+                              profileId: widget.profile.id,
+                              from: statsIntervalState.statsInterval.from,
+                              to: statsIntervalState.statsInterval.to,
+                            ));
+                          },
+                          child: DaysStatsBarChartPage(
+                            pageIndex: index,
+                            onInfoTriggered: (index, day) {
+                              showOverlay(context, day);
+                            },
+                            onInfoChanged: (index, day) {
+                              updateOverlay(context, day);
+                            },
+                            onInfoDismissed: (index, day) {
+                              hideOverlay(context);
+                            },
+                            onDaysLoaded: (List<Day> loadedDays) {
+                              setState(() {
+                                days = loadedDays;
+                                calculatedStats = CalculatedStats.fromDays(days);
+                              });
+                            },
+                          ),
+                        );
+                      }
                     );
                   },
                 ),
@@ -205,12 +156,9 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     }
 
     if (days.isEmpty) {
-      return CalculatedStatsView(calculatedStats: const CalculatedStats(
-        totalMinutes: 0,
-        totalSessions: 0,
-        averageMinutes: 0,
-        averageSessions: 0,
-      ));
+      return const CalculatedStatsView(
+        calculatedStats: CalculatedStats() // empty
+      );
     } else {
       return CalculatedStatsView(calculatedStats: calculatedStats!);
     }
@@ -220,7 +168,7 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
     setState(() {
       selectedData = data;
       overlayEntry = OverlayEntry(
-        builder: (context) => overlayEntryBuilder(context, data),
+        builder: (context) => DaysOverlay(day: data),
       );
       Overlay.of(context).insert(overlayEntry!);
     });
@@ -238,13 +186,6 @@ class _DaysStatsViewContentState extends State<DaysStatsViewContent> {
       overlayEntry?.remove();
       overlayEntry = null;
     }
-  }
-
-  Widget overlayEntryBuilder(BuildContext context, Day data) {
-    if (selectedData == null) {
-      return SizedBox.shrink();
-    }
-    return DaysOverlay(day: selectedData!);
   }
 
 }
