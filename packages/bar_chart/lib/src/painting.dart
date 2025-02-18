@@ -129,12 +129,9 @@ class AxisPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(AxisPainter oldPainter) {
-    return true;
-    // return oldPainter.color != color
-    //     || oldPainter.horizontalDivisions != hashCode
-    //     || oldPainter.verticalDivisions != verticalDivisions;
-  }
+  bool shouldRepaint(AxisPainter oldDelegate) =>
+      oldDelegate.color != color ||
+      oldDelegate.barChartContext != barChartContext;
 
   @override
   bool hitTest(Offset position) => false;

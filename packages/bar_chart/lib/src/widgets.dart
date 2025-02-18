@@ -337,8 +337,10 @@ class RenderInfoTriggerArea extends RenderProxyBox {
 
 
 double _defaultDisplayRangeSetter(double max) => max;
+
 String _defaultYAxisLabelFormatter(double value) => value.toStringAsFixed(0);
 String _defaultXAxisLabelFormatter(BarData barChartData) => barChartData.label;
+
 double _defaultYAxisIntervalSetter(double displayRange) => (displayRange / 4);
 int _defaultXAxisIntervalSetter(int barCount) => 1;
 

@@ -56,3 +56,12 @@ String createIntervalString(BuildContext context, DateTime from, DateTime to) =>
 String _twoDigits(int n) {
   return n.toString().padLeft(2, "0");
 }
+
+DateTime mostRecentSunday(DateTime date) =>
+  DateTime(date.year, date.month, date.day - date.weekday % 7);
+
+DateTime mostRecentMonday(DateTime date) =>
+  DateTime(date.year, date.month, date.day - (date.weekday - 1));
+
+DateTime mostRecentWeekday(DateTime date, int weekday) =>
+  DateTime(date.year, date.month, date.day - (date.weekday - weekday) % 7);
