@@ -196,14 +196,20 @@ TextPainter createTextPainter(
 
 class AverageOverlayPainter extends CustomPainter {
 
+  final double average;
   final Color color;
-  final BarChartContext barChartContext;
+  final double lineProgress;
+  final double textOpacity;
+  final double displayRange;
+
   late final Paint linePaint;
 
-
   AverageOverlayPainter({
+    required this.average,
     required this.color,
-    required this.barChartContext,
+    required this.displayRange,
+    this.lineProgress = 0.0,
+    this.textOpacity = 0.0,
   }) {
     linePaint = Paint()
       ..strokeWidth = 2.0
@@ -212,12 +218,12 @@ class AverageOverlayPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double valueToPixelRatio = barChartContext.valueToPixelRatio(size);
-    double hp = barChartContext.avg * valueToPixelRatio;
+    double valueToPixelRatio = size.height / displayRange;
+    double hp = average * valueToPixelRatio;
     paintDashedLine(
       canvas,
       Offset(0, size.height - hp),
-      Offset(size.width, size.height - hp),
+      Offset(size.width * lineProgress, size.height - hp),
       [10,5],
       linePaint
     );
@@ -226,7 +232,7 @@ class AverageOverlayPainter extends CustomPainter {
       'avg',
       TextAlign.center,
       size: 13,
-      color: color,
+      color: color.withValues(alpha: textOpacity),
     );
 
     textPainter.paint(
@@ -239,6 +245,7 @@ class AverageOverlayPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant AverageOverlayPainter oldDelegate) =>
     oldDelegate.color != color ||
-    oldDelegate.barChartContext != barChartContext;
-
+    oldDelegate.average != average ||
+    oldDelegate.lineProgress != lineProgress ||
+    oldDelegate.textOpacity != textOpacity;
 }

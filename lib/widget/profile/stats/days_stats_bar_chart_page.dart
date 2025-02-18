@@ -148,19 +148,79 @@ class _StatsBarChartState extends State<StatsBarChart> {
           );
         },
         overlayBuilder: (context, barChartContext) {
-          return AnimatedOpacity(
-            opacity: barChartContext.avg == 0 ? 0.0 : 1.0,
-            duration: Durations.long2,
-            curve: Curves.easeInOutCubicEmphasized,
-            child: CustomPaint(
-              painter: AverageOverlayPainter(
-                color: Colors.white,
-                barChartContext: barChartContext,
-              ),
-            )
-          );
+          return AverageBarChartOverlay(barChartContext: barChartContext);
         },
       ),
     );
   }
+}
+
+class AverageBarChartOverlay extends StatefulWidget {
+
+  final BarChartContext barChartContext;
+
+  const AverageBarChartOverlay({
+    required this.barChartContext,
+    super.key,
+  });
+
+  @override
+  State<AverageBarChartOverlay> createState() => _AverageBarChartOverlayState();
+}
+
+class _AverageBarChartOverlayState extends State<AverageBarChartOverlay>
+  with SingleTickerProviderStateMixin {
+
+  late final AnimationController animationController;
+  late final Animation<double> lineProgressAnimation;
+  late final Animation<double> textOpacityAnimation;
+
+  @override
+  void initState() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: Durations.long2,
+    );
+    lineProgressAnimation = Tween(begin: 0.0, end: 1.0)
+      .chain(CurveTween(curve: Curves.easeOutExpo))
+      .animate(CurvedAnimation(parent: animationController, curve: Interval(0.0, 0.5)));
+    textOpacityAnimation = Tween(begin: 0.0, end: 1.0)
+      .chain(CurveTween(curve: Curves.easeOutExpo))
+      .animate(CurvedAnimation(parent: animationController, curve: Interval(0.5, 1.0)));
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant AverageBarChartOverlay oldWidget) {
+    if (widget.barChartContext.avg > 0.0 && oldWidget.barChartContext.avg == 0.0) {
+      animationController.reset();
+      animationController.forward();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: animationController,
+      builder: (context, _) {
+        return CustomPaint(
+          painter: AverageOverlayPainter(
+            average: widget.barChartContext.avg,
+            displayRange: widget.barChartContext.displayRange,
+            color: Colors.white,
+            lineProgress: lineProgressAnimation.value,
+            textOpacity: textOpacityAnimation.value,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
 }

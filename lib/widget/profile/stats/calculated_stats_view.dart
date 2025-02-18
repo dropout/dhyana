@@ -17,14 +17,6 @@ class CalculatedStatsView extends StatefulWidget {
   State<CalculatedStatsView> createState() => _CalculatedStatsViewState();
 }
 
-class _Entry {
-  final String label;
-  final String value;
-
-  _Entry(this.label, this.value);
-
-}
-
 class _CalculatedStatsViewState extends State<CalculatedStatsView>
   with SingleTickerProviderStateMixin {
 

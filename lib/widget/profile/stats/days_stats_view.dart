@@ -168,7 +168,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
     setState(() {
       selectedData = data;
       overlayEntry = OverlayEntry(
-        builder: (context) => DaysOverlay(day: data),
+        builder: (context) => DaysOverlay(day: selectedData!),
       );
       Overlay.of(context).insert(overlayEntry!);
     });
