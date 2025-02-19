@@ -124,20 +124,24 @@ class _StatsBarChartState extends State<StatsBarChart> {
           left: 0,
         ),
         yAxisIntervalSetter: (dataSource) {
-          return 10.0;
+          return 30.0;
         },
         axisBuilder: (context, barChartContext) {
-          return CustomPaint(
-            painter: AxisPainter(
-              color: Colors.grey.shade600,
-              barChartContext: barChartContext,
-            ),
+          return DefaultBarChartAxis(
+            color: Colors.grey.shade700,
+            barChartContext: barChartContext,
+            xAxisIntervalSetter: (dataSource) {
+              return 7.0.toInt();
+            },
+            yAxisIntervalSetter: (dataSource) {
+              return 10.0;
+            },
           );
         },
         barBuilder: (context, barChartContext) {
           return InfoTriggerBars(
-            barColor: Colors.grey,
-            selectedBarColor: Colors.grey.shade200,
+            barColor: Colors.grey.shade500,
+            selectedBarColor: Colors.white,
             barChartContext: barChartContext,
             onInfoTriggered: (index, data) =>
               widget.onInfoTriggered?.call(index, data),
@@ -154,6 +158,51 @@ class _StatsBarChartState extends State<StatsBarChart> {
     );
   }
 }
+
+
+String _defaultYAxisLabelFormatter(double value) => value.toStringAsFixed(0);
+String _defaultXAxisLabelFormatter(BarData barChartData) => barChartData.label;
+double _defaultYAxisIntervalSetter(double displayRange) => (displayRange / 4);
+int _defaultXAxisIntervalSetter(int barCount) => 1;
+class DefaultBarChartAxis extends StatefulWidget {
+
+  final Color color;
+  final BarChartContext barChartContext;
+
+  final double Function(double displayRange) yAxisIntervalSetter;
+  final int Function(int barCount) xAxisIntervalSetter;
+
+  final String Function(double value) yAxisLabelFormatter;
+  final String Function(BarData barChartData) xAxisLabelFormatter;
+
+  const DefaultBarChartAxis({
+    required this.barChartContext,
+    required this.color,
+    this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
+    this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
+    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
+    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
+    super.key,
+  });
+
+  @override
+  State<DefaultBarChartAxis> createState() => _DefaultBarChartAxisState();
+}
+
+class _DefaultBarChartAxisState extends State<DefaultBarChartAxis> {
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: AxisPainter(
+        xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
+        yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
+        color: widget.color,
+        barChartContext: widget.barChartContext,
+      ),
+    );
+  }
+}
+
 
 class AverageBarChartOverlay extends StatefulWidget {
 

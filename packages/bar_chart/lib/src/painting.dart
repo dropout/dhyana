@@ -10,12 +10,19 @@ class AxisPainter extends CustomPainter {
   final BarChartContext barChartContext;
   late final Paint linePaint;
 
+  final int xIntervalCount;
+  final double yIntervalCount;
+
+
   AxisPainter({
+    required this.xIntervalCount,
+    required this.yIntervalCount,
     required this.color,
     required this.barChartContext,
   }) {
     linePaint = Paint()
-      ..color = color;
+      ..color = color
+      ..strokeWidth = 2.0;
   }
 
   @override
@@ -48,20 +55,18 @@ class AxisPainter extends CustomPainter {
     Size s
   ) {
     final double valueToPixelRatio = s.height / barChartContext.displayRange;
-    final int lineCount = barChartContext.displayRange ~/ barChartContext.yAxisInterval;
+    final int lineCount = barChartContext.displayRange ~/ yIntervalCount;
     int i = 0;
     while (i <= lineCount) {
-      final double y = s.height - (i * barChartContext.yAxisInterval) * valueToPixelRatio;
+      final double y = s.height - (i * yIntervalCount) * valueToPixelRatio;
       canvas.drawLine(
         offset + Offset(0.0, y),
         offset + Offset(s.width, y),
-        Paint()
-          ..color = color
-          ..strokeWidth = 1.0,
+        linePaint,
       );
 
       final textPainter = createTextPainter(
-        barChartContext.yAxisLabelFormatter(barChartContext.yAxisInterval * i),
+        barChartContext.yAxisLabelFormatter(yIntervalCount * i),
         TextAlign.center,
         color: color,
       );
@@ -100,10 +105,8 @@ class AxisPainter extends CustomPainter {
           canvas,
           offset + Offset(x, 0.0),
           offset + Offset(x, size.height),
-          [5.0, 5.0],
-          Paint()
-            ..color = color
-            ..strokeWidth = 1.0,
+          [4.0, 4.0],
+          linePaint
         );
 
       }

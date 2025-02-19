@@ -377,12 +377,13 @@ Widget _defaultAxisBuilder(
   BuildContext context,
   BarChartContext barChartContext,
 ) {
-  return CustomPaint(
-    painter: AxisPainter(
-      color: Colors.grey.shade600,
-      barChartContext: barChartContext,
-    ),
-  );
+  return SizedBox.shrink();
+  // return CustomPaint(
+  //   painter: AxisPainter(
+  //     color: Colors.grey.shade600,
+  //     barChartContext: barChartContext,
+  //   ),
+  // );
 }
 
 Widget? _defaultOverlayBuilder(
