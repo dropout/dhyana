@@ -153,9 +153,6 @@ class _WeeksStatsViewContentState extends State<WeeksStatsViewContent> {
                       return BarChart(
                         dataSource: barData,
                         displayRangeSetter: (max) => 100,
-                        yAxisIntervalSetter: (dataSource) {
-                          return 10.0;
-                        },
                       );
                     } else {
                       return const SizedBox.shrink();

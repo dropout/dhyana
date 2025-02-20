@@ -66,7 +66,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
       barData: state.days.map((day) {
         return BarData(
           value: day.minutesCount.toDouble(),
-          label: DateFormat.E(Localizations.localeOf(context).toString()).format(day.startDate).substring(0,1),
+          label: DateFormat.EEEE(Localizations.localeOf(context).toString()).format(day.startDate).toUpperCase(),
         );
       }).toList(),
       onInfoTriggered: (index, _) => onInfoTriggered?.call(index, state.days[index]),
@@ -112,47 +112,51 @@ class _StatsBarChartState extends State<StatsBarChart> {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets barPadding = EdgeInsets.only(
+      top: 10,
+      right: 32,
+      bottom: 21,
+      left: 0,
+    );
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: BarChart(
         dataSource: widget.barData,
-        displayRangeSetter: (max) => 100,
-        axisSpacing: EdgeInsets.only(
-          top: 10,
-          right: 40,
-          bottom: 21,
-          left: 0,
-        ),
-        yAxisIntervalSetter: (dataSource) {
-          return 30.0;
-        },
+        displayRangeSetter: (max) => 90,
         axisBuilder: (context, barChartContext) {
           return DefaultBarChartAxis(
+            barPadding: barPadding,
             color: Colors.grey.shade700,
             barChartContext: barChartContext,
             xAxisIntervalSetter: (dataSource) {
-              return 7.0.toInt();
+              return 7;
             },
             yAxisIntervalSetter: (dataSource) {
-              return 10.0;
+              return 30.0;
             },
           );
         },
         barBuilder: (context, barChartContext) {
-          return InfoTriggerBars(
-            barColor: Colors.grey.shade500,
-            selectedBarColor: Colors.white,
-            barChartContext: barChartContext,
-            onInfoTriggered: (index, data) =>
-              widget.onInfoTriggered?.call(index, data),
-            onInfoChanged: (index, data) =>
-              widget.onInfoChanged?.call(index, data),
-            onInfoDismissed: (index, data) =>
-              widget.onInfoDismissed?.call(index, data),
+          return Padding(
+            padding: barPadding,
+            child: InfoTriggerBars(
+              barColor: Colors.grey.shade500,
+              selectedBarColor: Colors.white,
+              barChartContext: barChartContext,
+              onInfoTriggered: (index, data) =>
+                widget.onInfoTriggered?.call(index, data),
+              onInfoChanged: (index, data) =>
+                widget.onInfoChanged?.call(index, data),
+              onInfoDismissed: (index, data) =>
+                widget.onInfoDismissed?.call(index, data),
+            ),
           );
         },
         overlayBuilder: (context, barChartContext) {
-          return AverageBarChartOverlay(barChartContext: barChartContext);
+          return Padding(
+            padding: barPadding,
+            child: AverageBarChartOverlay(barChartContext: barChartContext),
+          );
         },
       ),
     );
@@ -168,6 +172,7 @@ class DefaultBarChartAxis extends StatefulWidget {
 
   final Color color;
   final BarChartContext barChartContext;
+  final EdgeInsets barPadding;
 
   final double Function(double displayRange) yAxisIntervalSetter;
   final int Function(int barCount) xAxisIntervalSetter;
@@ -178,6 +183,7 @@ class DefaultBarChartAxis extends StatefulWidget {
   const DefaultBarChartAxis({
     required this.barChartContext,
     required this.color,
+    required this.barPadding,
     this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
     this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
     this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
@@ -196,8 +202,11 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis> {
       painter: AxisPainter(
         xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
         yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
+        xAxisLabelFormatter: widget.xAxisLabelFormatter,
+        yAxisLabelFormatter: widget.yAxisLabelFormatter,
         color: widget.color,
         barChartContext: widget.barChartContext,
+        barPadding: widget.barPadding,
       ),
     );
   }
@@ -250,19 +259,23 @@ class _AverageBarChartOverlayState extends State<AverageBarChartOverlay>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: animationController,
-      builder: (context, _) {
-        return CustomPaint(
-          painter: AverageOverlayPainter(
-            average: widget.barChartContext.avg,
-            displayRange: widget.barChartContext.displayRange,
-            color: Colors.white,
-            lineProgress: lineProgressAnimation.value,
-            textOpacity: textOpacityAnimation.value,
-          ),
-        );
-      },
+    return IgnorePointer(
+      child: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: animationController,
+          builder: (context, _) {
+            return CustomPaint(
+              painter: AverageOverlayPainter(
+                average: widget.barChartContext.avg,
+                displayRange: widget.barChartContext.displayRange,
+                color: Colors.white,
+                lineProgress: lineProgressAnimation.value,
+                textOpacity: textOpacityAnimation.value,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 

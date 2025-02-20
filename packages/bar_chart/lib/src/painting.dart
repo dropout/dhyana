@@ -8,17 +8,24 @@ class AxisPainter extends CustomPainter {
 
   final Color color;
   final BarChartContext barChartContext;
+  final EdgeInsets barPadding;
   late final Paint linePaint;
 
   final int xIntervalCount;
   final double yIntervalCount;
 
+  final String Function(double value) yAxisLabelFormatter;
+  final String Function(BarData barChartData) xAxisLabelFormatter;
 
   AxisPainter({
+    required this.barPadding,
     required this.xIntervalCount,
     required this.yIntervalCount,
+    required this.xAxisLabelFormatter,
+    required this.yAxisLabelFormatter,
     required this.color,
     required this.barChartContext,
+
   }) {
     linePaint = Paint()
       ..color = color
@@ -30,21 +37,21 @@ class AxisPainter extends CustomPainter {
 
     paintHorizontalLines(
       canvas,
-      Offset(barChartContext.padding.left, barChartContext.padding.top),
+      Offset(barPadding.left, barPadding.top),
       Size(
-        size.width - barChartContext.padding.horizontal,
-        size.height - barChartContext.padding.vertical,
+        size.width - barPadding.horizontal,
+        size.height - barPadding.vertical,
       )
     );
 
     paintVerticalLines(
       canvas,
-      Offset(barChartContext.padding.left, barChartContext.padding.top),
+      Offset(barPadding.left, barPadding.top),
       Size(
-        size.width - barChartContext.padding.horizontal,
+        size.width - barPadding.horizontal,
         // this axis painter paints vertical lines to the bottom
         // regardless of bar chart padding
-        size.height - barChartContext.padding.top,
+        size.height - barPadding.top,
       )
     );
   }
@@ -66,7 +73,7 @@ class AxisPainter extends CustomPainter {
       );
 
       final textPainter = createTextPainter(
-        barChartContext.yAxisLabelFormatter(yIntervalCount * i),
+        yAxisLabelFormatter(yIntervalCount * i),
         TextAlign.center,
         color: color,
       );
@@ -97,31 +104,36 @@ class AxisPainter extends CustomPainter {
 
     int i = 0;
     while(i <= barChartContext.dataSource.length) {
-      int remainder = i % barChartContext.xAxisInterval;
+      int remainder = i % xIntervalCount;
       double x = size.width / barChartContext.dataSource.length * i;
+      // double x = size.width / xIntervalCount * i;
 
       if (remainder == 0) {
-        paintDashedLine(
-          canvas,
+        canvas.drawLine(
           offset + Offset(x, 0.0),
           offset + Offset(x, size.height),
-          [4.0, 4.0],
-          linePaint
+          linePaint,
         );
-
+        // paintDashedLine(
+        //   canvas,
+        //   offset + Offset(x, 0.0),
+        //   offset + Offset(x, size.height),
+        //   [4.0, 4.0],
+        //   linePaint
+        // );
       }
 
       if (remainder == 0 && i < barChartContext.dataSource.length) {
         final textPainter = createTextPainter(
           barChartContext.dataSource[i].label,
-          TextAlign.center,
+          TextAlign.left,
           color: color,
-          width: size.width / barChartContext.dataSource.length,
+          width: size.width / (barChartContext.dataSource.length / xIntervalCount),
         );
 
         textPainter.paint(
           canvas,
-          offset + Offset(x, size.height - barChartContext.padding.bottom + 4),
+          offset + Offset(x + 4, size.height - barPadding.bottom + 4),
         );
       }
 
@@ -131,8 +143,9 @@ class AxisPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(AxisPainter oldDelegate) =>
-      oldDelegate.color != color ||
-      oldDelegate.barChartContext != barChartContext;
+    true;
+      // oldDelegate.color != color ||
+      // oldDelegate.barChartContext != barChartContext;
 
   @override
   bool hitTest(Offset position) => false;
@@ -223,13 +236,18 @@ class AverageOverlayPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double valueToPixelRatio = size.height / displayRange;
     double hp = average * valueToPixelRatio;
-    paintDashedLine(
-      canvas,
+    canvas.drawLine(
       Offset(0, size.height - hp),
       Offset(size.width * lineProgress, size.height - hp),
-      [10,5],
-      linePaint
+      linePaint,
     );
+    // paintDashedLine(
+    //   canvas,
+    //   Offset(0, size.height - hp),
+    //   Offset(size.width * lineProgress, size.height - hp),
+    //   [5,5],
+    //   linePaint
+    // );
 
     final textPainter = createTextPainter(
       'avg',
@@ -250,5 +268,7 @@ class AverageOverlayPainter extends CustomPainter {
     oldDelegate.color != color ||
     oldDelegate.average != average ||
     oldDelegate.lineProgress != lineProgress ||
-    oldDelegate.textOpacity != textOpacity;
+    oldDelegate.textOpacity != textOpacity ||
+    oldDelegate.displayRange != displayRange;
+    // true;
 }

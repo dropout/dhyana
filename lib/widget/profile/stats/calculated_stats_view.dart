@@ -67,7 +67,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
     return AnimatedSwitcher(
       duration: Durations.extralong2,
       transitionBuilder: (child, animation) {
-
+        double staggerGap = 0.1 * order;
         if (animation.isForwardOrCompleted) {
           // fading out in unison
           return FadeTransition(
@@ -79,7 +79,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               curve: Interval(
                 0.5,
                 1.0,
-                curve: Curves.easeInOutCubicEmphasized
+                curve: Curves.easeOutCubic,
               ),
             )),
             child: child,
@@ -87,19 +87,20 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
         }
 
         // fading in staggered
-        double staggerGap = 0.1 * order;
+        // double staggerGap = 0.1 * order;
         return FadeTransition(
           opacity: Tween<double>(
             begin: 0.0,
             end: 1.0,
           ).animate(
-              CurvedAnimation(
-                parent: animation,
-                curve: Interval(
-                  0.5 + staggerGap,
-                  1.0,
-                ),
-              )
+            CurvedAnimation(
+              parent: animation,
+              curve: Interval(
+                0.5 + staggerGap,
+                0.5 + staggerGap + 0.1,
+                curve: Curves.easeOutCubic,
+              ),
+            )
           ),
           child: child,
         );

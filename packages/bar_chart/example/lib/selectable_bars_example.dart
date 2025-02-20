@@ -111,20 +111,19 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                             hourCount = math.max(1, hourCount + 1);
                             return hourCount.toDouble() * 60;
                           },
-                          yAxisIntervalSetter: (dataSource) {
-                            return 30.0;
-                          },
-                          xAxisIntervalSetter: (dataSource) {
-                            return 4;
-                          },
                           barBuilder: (context, barChartContext) {
-                            return SelectableBars(
-                              barChartContext: barChartContext,
-                              onBarSelected: (index, barData) {
-                                setState(() {
-                                  selectedData = testDayData[index];
-                                });
-                              },
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                top: 16
+                              ),
+                              child: SelectableBars(
+                                barChartContext: barChartContext,
+                                onBarSelected: (index, barData) {
+                                  setState(() {
+                                    selectedData = testDayData[index];
+                                  });
+                                },
+                              ),
                             );
                           },
                         ),

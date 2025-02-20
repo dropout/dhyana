@@ -16,7 +16,7 @@ typedef AxisBuilder = Widget Function(
   BarChartContext barChartContext
 );
 
-typedef OverlayBuilder = Widget? Function(
+typedef OverlayBuilder = Widget Function(
   BuildContext context,
   BarChartContext barChartContext
 );
@@ -25,29 +25,18 @@ class BarChart extends StatefulWidget {
 
   final List<BarData> dataSource;
 
-  final EdgeInsets axisSpacing;
-  final AxisBuilder axisBuilder;
+  final AxisBuilder? axisBuilder;
   final BarBuilder barBuilder;
-  final OverlayBuilder overlayBuilder;
+  final OverlayBuilder? overlayBuilder;
 
   final double Function(double max) displayRangeSetter;
-  final double Function(double displayRange) yAxisIntervalSetter;
-  final int Function(int barCount) xAxisIntervalSetter;
-
-  final String Function(double value) yAxisLabelFormatter;
-  final String Function(BarData barChartData) xAxisLabelFormatter;
 
   const BarChart({
     required this.dataSource,
-    this.axisSpacing = const EdgeInsets.only(right: 20, bottom: 20),
     this.axisBuilder = _defaultAxisBuilder,
     this.barBuilder = _defaultBarBuilder,
-    this.overlayBuilder = _defaultOverlayBuilder,
+    this.overlayBuilder,
     this.displayRangeSetter = _defaultDisplayRangeSetter,
-    this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
-    this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
-    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
-    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
     super.key,
   });
 
@@ -63,12 +52,7 @@ class _BarChartState extends State<BarChart> {
   void initState() {
     barChartContext = BarChartContext(
       dataSource: widget.dataSource,
-      padding: widget.axisSpacing,
       displayRangeSetter: widget.displayRangeSetter,
-      xAxisLabelFormatter: widget.xAxisLabelFormatter,
-      yAxisLabelFormatter: widget.yAxisLabelFormatter,
-      xAxisIntervalSetter: widget.xAxisIntervalSetter,
-      yAxisIntervalSetter: widget.yAxisIntervalSetter,
     );
     super.initState();
   }
@@ -78,12 +62,7 @@ class _BarChartState extends State<BarChart> {
     setState(() {
       barChartContext = BarChartContext(
         dataSource: widget.dataSource,
-        padding: widget.axisSpacing,
-        xAxisIntervalSetter: widget.xAxisIntervalSetter,
-        yAxisIntervalSetter: widget.yAxisIntervalSetter,
         displayRangeSetter: widget.displayRangeSetter,
-        xAxisLabelFormatter: widget.xAxisLabelFormatter,
-        yAxisLabelFormatter: widget.yAxisLabelFormatter,
       );
     });
 
@@ -95,17 +74,9 @@ class _BarChartState extends State<BarChart> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        widget.axisBuilder(context, barChartContext),
-        Padding(
-          padding: widget.axisSpacing,
-          child: widget.barBuilder(context, barChartContext),
-        ),
-        IgnorePointer(
-          child: Padding(
-            padding: widget.axisSpacing,
-            child: widget.overlayBuilder(context, barChartContext),
-          ),
-        ),
+        if (widget.axisBuilder != null) widget.axisBuilder!(context, barChartContext),
+        widget.barBuilder(context, barChartContext),
+        if (widget.overlayBuilder != null) widget.overlayBuilder!(context, barChartContext),
       ],
     );
   }
@@ -239,7 +210,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                   child: AnimatedFractionallySizedBox(
                     duration: Durations.long2,
                     curve: Curves.easeInOutCubicEmphasized,
-                    heightFactor: math.max((barChartData[i].value / widget.barChartContext.displayRange), 0),
+                    heightFactor: math.min((barChartData[i].value / widget.barChartContext.displayRange), 1),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6.0),
                       child: AnimatedContainer(
@@ -338,12 +309,6 @@ class RenderInfoTriggerArea extends RenderProxyBox {
 
 double _defaultDisplayRangeSetter(double max) => max;
 
-String _defaultYAxisLabelFormatter(double value) => value.toStringAsFixed(0);
-String _defaultXAxisLabelFormatter(BarData barChartData) => barChartData.label;
-
-double _defaultYAxisIntervalSetter(double displayRange) => (displayRange / 4);
-int _defaultXAxisIntervalSetter(int barCount) => 1;
-
 Widget _defaultBarBuilder(
   BuildContext context,
   BarChartContext barChartContext,
@@ -385,8 +350,3 @@ Widget _defaultAxisBuilder(
   //   ),
   // );
 }
-
-Widget? _defaultOverlayBuilder(
-  BuildContext context,
-  BarChartContext barChartContext,
-) => null;

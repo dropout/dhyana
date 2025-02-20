@@ -8,14 +8,8 @@ final Function _eq = const ListEquality().equals;
 class BarChartContext {
 
   final List<BarData> _dataSource;
-  final EdgeInsets padding;
-
-  final double Function(double displayRange) yAxisIntervalSetter;
-  final int Function(int barCount) xAxisIntervalSetter;
 
   final double Function(double max) displayRangeSetter;
-  final String Function(double value) yAxisLabelFormatter;
-  final String Function(BarData barChartData) xAxisLabelFormatter;
 
   late final double max;
   late final double min;
@@ -24,11 +18,6 @@ class BarChartContext {
   BarChartContext({
     required List<BarData >dataSource,
     required this.displayRangeSetter,
-    required this.yAxisIntervalSetter,
-    required this.xAxisIntervalSetter,
-    required this.xAxisLabelFormatter,
-    required this.yAxisLabelFormatter,
-    required this.padding,
   }) :
     _dataSource = List.unmodifiable(dataSource),
     max = dataSource.isEmpty ? 0 : dataSource.map((data) => data.value).reduce(math.max),
@@ -39,8 +28,6 @@ class BarChartContext {
   List<BarData> get dataSource => _dataSource;
 
   double get displayRange => displayRangeSetter(max);
-  double get yAxisInterval => yAxisIntervalSetter(displayRange);
-  int get xAxisInterval => xAxisIntervalSetter(dataSource.length);
   double valueToPixelRatio(Size size) => size.height / displayRange;
 
   @override
@@ -48,19 +35,13 @@ class BarChartContext {
     if (identical(this, other)) return true;
     return other is BarChartContext &&
       _eq(other.dataSource, dataSource) &&
-      other.padding == padding &&
-      other.displayRange == displayRange &&
-      other.xAxisInterval == xAxisInterval &&
-      other.yAxisInterval == yAxisInterval;
+      other.displayRange == displayRange;
   }
 
   @override
   int get hashCode => Object.hash(
     dataSource,
-    padding,
     displayRange,
-    xAxisInterval,
-    yAxisInterval,
   );
 
 }

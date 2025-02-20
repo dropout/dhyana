@@ -123,9 +123,6 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                             label: d.name,
                           )).toList(),
                           displayRangeSetter: (max) => 100,
-                          yAxisIntervalSetter: (dataSource) {
-                            return 10.0;
-                          },
                           barBuilder: (context, barChartContext) {
                             return InfoTriggerBars(
                               barChartContext: barChartContext,
