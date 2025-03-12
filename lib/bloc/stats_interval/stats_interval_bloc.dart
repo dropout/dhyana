@@ -13,12 +13,10 @@ class StatsIntervalBloc extends Bloc<StatsIntervalEvent, StatsIntervalState> {
 
   final Logger logger = getLogger('StatsIntervalBloc');
 
-  StatsIntervalBloc() : super(StatsIntervalState.loaded(
-    statsInterval: StatsInterval(
-      intervalType: StatsIntervalType.days,
-      from: DateTime.now().subtract(Duration(days: StatsIntervalType.days.intervalInDays)),
-      to: DateTime.now()
-    )
+  StatsIntervalBloc(
+    StatsIntervalState initialState,
+  ) : super(StatsIntervalState.loaded(
+    statsInterval: initialState.statsInterval,
   )) {
     on<StatsIntervalChangedEvent>(_onStatsIntervalChanged);
   }
@@ -29,7 +27,5 @@ class StatsIntervalBloc extends Bloc<StatsIntervalEvent, StatsIntervalState> {
     ));
     logger.t('Stats interval changed: ${event.statsInterval}');
   }
-
-
 
 }

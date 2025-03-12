@@ -1,7 +1,9 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
+import 'package:dhyana/enum/stats_interval_type.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/stats_interval_display.dart';
@@ -18,13 +20,16 @@ class ProfileStatsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<StatsIntervalBloc>(
       create: (BuildContext context) {
-        return StatsIntervalBloc();
+        return StatsIntervalBloc(
+          StatsIntervalState.loaded(
+            statsInterval: StatsInterval.days(now: DateTime.now()),
+          ),
+        );
       },
       child: ProfileStatsViewContent(),
     );
   }
 }
-
 
 class ProfileStatsViewContent extends StatefulWidget {
   const ProfileStatsViewContent({super.key});
@@ -72,9 +77,9 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
               );
             case ProfileLoadedState():
               return buildScaffolding(
-                  context,
-                  buildProfileLoadedHeaderSlivers(context, state.profile),
-                  buildProfileLoadedContent(context, state.profile)
+                context,
+                buildProfileLoadedHeaderSlivers(context, state.profile),
+                buildProfileLoadedContent(context, state.profile)
               );
             default:
               return const SizedBox.shrink();
@@ -149,23 +154,6 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     ];
   }
 
-  void _onTabbarTapped(BuildContext context, int index) {
-    // if (primaryTC.index == index) {
-    //   return;
-    // }
-    // StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
-    // DateTime now = DateTime.now();
-    // StatsIntervalType intervalType = StatsIntervalType.values[index];
-    // StatsInterval statsInterval = StatsInterval(
-    //   intervalType: intervalType,
-    //   from: now.subtract(Duration(days: intervalType.intervalInDays)),
-    //   to: now,
-    // );
-    // bloc.add(StatsIntervalEvent.changed(
-    //   statsInterval: statsInterval
-    // ));
-  }
-
   List<Widget> buildProfileLoadedContent(BuildContext context, Profile profile) {
     return [
       TabBar(
@@ -176,7 +164,6 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
           bottom: AppThemeData.spacingXs,
         ),
         controller: primaryTC,
-        onTap: (index) => _onTabbarTapped(context, index),
         indicator: const ShapeDecoration(
             color: Colors.black,
             shape: StadiumBorder()

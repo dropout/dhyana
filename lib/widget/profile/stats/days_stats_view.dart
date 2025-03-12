@@ -1,4 +1,6 @@
 
+import 'package:dhyana/enum/all.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +31,10 @@ class DaysStatsView extends StatefulWidget {
 
 class _DaysStatsViewState extends State<DaysStatsView> {
 
-  // PageView barchart swipe direction helper
-  int _lastIndex = 0;
+  int _currentPageIndex = 0;
+
+  late final List<StatsInterval> intervals;
+  late StatsInterval selectedInterval;
 
   // Overlay
   OverlayEntry? overlayEntry;
@@ -42,29 +46,31 @@ class _DaysStatsViewState extends State<DaysStatsView> {
 
   @override
   void initState() {
+    intervals = StatsInterval.generateDayIntervals(DateTime.now());
+    selectedInterval = intervals[0];
+    // BlocProvider.of is safe to use in initState
+    // https://github.com/felangel/bloc/issues/210
+    BlocProvider.of<StatsIntervalBloc>(context).add(
+      StatsIntervalEvent.changed(
+        statsInterval: selectedInterval
+      )
+    );
     super.initState();
   }
 
-  void _swipeRight(BuildContext context) {
+  void handlePageChange(BuildContext context, int index) {
     StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
     StatsInterval statsInterval = bloc.state.statsInterval;
-    bloc.add(StatsIntervalEvent.changed(
-      statsInterval: statsInterval.copyWith(
-        from: statsInterval.from.subtract(Duration(days: statsInterval.intervalType.intervalInDays)),
-        to: statsInterval.to.subtract(Duration(days: statsInterval.intervalType.intervalInDays)),
-      )
-    ));
-  }
 
-  void _swipeLeft(BuildContext context) {
-    StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
-    StatsInterval statsInterval = bloc.state.statsInterval;
-    bloc.add(StatsIntervalEvent.changed(
-      statsInterval: statsInterval.copyWith(
-        from: statsInterval.from.add(Duration(days: statsInterval.intervalType.intervalInDays)),
-        to: statsInterval.to.add(Duration(days: statsInterval.intervalType.intervalInDays)),
-      )
-    ));
+    setState(() {
+      _currentPageIndex = index;
+      BlocProvider.of<StatsIntervalBloc>(context).add(StatsIntervalEvent.changed(
+        statsInterval: statsInterval.copyWith(
+          from: intervals[index].from,
+          to: intervals[index].to,
+        )
+      ));
+    });
   }
 
   @override
@@ -90,16 +96,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                 child: PageView.builder(
                   reverse: true,
                   itemCount: 4,
-                  onPageChanged: (index) {
-                    if (index > _lastIndex) {
-                      _swipeRight(context);
-                    } else {
-                      _swipeLeft(context);
-                    }
-                    setState(() {
-                      _lastIndex = index;
-                    });
-                  },
+                  onPageChanged: (index) => handlePageChange(context, index),
                   itemBuilder: (context, index) {
                     return BlocBuilder<StatsIntervalBloc, StatsIntervalState>(
                       builder: (context, statsIntervalState) {
@@ -110,8 +107,8 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                                 crashlyticsService: context.services.crashlyticsService
                             )..add(DaysEvent.queryDays(
                               profileId: widget.profile.id,
-                              from: statsIntervalState.statsInterval.from,
-                              to: statsIntervalState.statsInterval.to,
+                              from: selectedInterval.from,
+                              to: selectedInterval.to,
                             ));
                           },
                           child: DaysStatsBarChartPage(
