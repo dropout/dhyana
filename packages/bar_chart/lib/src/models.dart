@@ -5,6 +5,32 @@ import 'package:flutter/material.dart';
 
 final Function _eq = const ListEquality().equals;
 
+typedef BarBuilder = Widget Function(
+  BuildContext context,
+  BarChartContext barChartContext
+);
+
+typedef AxisBuilder = Widget Function(
+  BuildContext context,
+  BarChartContext barChartContext
+);
+
+typedef OverlayBuilder = Widget Function(
+  BuildContext context,
+  BarChartContext barChartContext
+);
+
+typedef XAxisLabelFormatter = TextPainter Function({
+  required double labelWidth,
+  required BarData barData,
+  required Color color,
+});
+
+typedef YAxisLabelFormatter = TextPainter Function({
+  required double value,
+  required Color color,
+});
+
 class BarChartContext {
 
   final List<BarData> _dataSource;

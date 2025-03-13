@@ -1,12 +1,10 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
-import 'package:dhyana/enum/stats_interval_type.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
-import 'package:dhyana/widget/profile/stats/stats_interval_display.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
@@ -239,7 +237,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     final double pinnedHeaderHeight = statusBarHeight + kToolbarHeight;
     return ExtendedNestedScrollView(
       controller: scrollController,
-      physics: const ClampingScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return headerSlivers;
       },
@@ -332,7 +330,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     return ExtendedVisibilityDetector(
       uniqueKey: Key(pageStorageKeyId),
       child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         key: PageStorageKey<String>(pageStorageKeyId),
         child: child,
       ),

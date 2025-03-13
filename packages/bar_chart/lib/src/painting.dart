@@ -14,8 +14,8 @@ class AxisPainter extends CustomPainter {
   final int xIntervalCount;
   final double yIntervalCount;
 
-  final String Function(double value) yAxisLabelFormatter;
-  final String Function(BarData barChartData) xAxisLabelFormatter;
+  final YAxisLabelFormatter yAxisLabelFormatter;
+  final XAxisLabelFormatter xAxisLabelFormatter;
 
   AxisPainter({
     required this.barPadding,
@@ -72,19 +72,21 @@ class AxisPainter extends CustomPainter {
         linePaint,
       );
 
-      final textPainter = createTextPainter(
-        yAxisLabelFormatter(yIntervalCount * i),
-        TextAlign.center,
-        color: color,
-      );
-
-      textPainter.paint(
-        canvas,
-        offset + Offset(
-          s.width + 8,
-          y - textPainter.height / 2
-        )
-      );
+      // Avoid drawing text on top of avg line
+      final double avgPosition = s.height - (barChartContext.avg) * valueToPixelRatio;
+      if ((y - avgPosition).abs() > 10) {
+        final textPainter = yAxisLabelFormatter(
+          value: yIntervalCount * i,
+          color: color,
+        );
+        textPainter.paint(
+          canvas,
+          offset + Offset(
+            s.width + 8,
+            y - textPainter.height / 2
+          )
+        );
+      }
 
       i++;
     }
@@ -106,34 +108,30 @@ class AxisPainter extends CustomPainter {
     while(i <= barChartContext.dataSource.length) {
       int remainder = i % xIntervalCount;
       double x = size.width / barChartContext.dataSource.length * i;
-      // double x = size.width / xIntervalCount * i;
 
       if (remainder == 0) {
-        canvas.drawLine(
+        paintDashedLine(
+          canvas,
           offset + Offset(x, 0.0),
           offset + Offset(x, size.height),
-          linePaint,
+          [5.0, 5.0],
+          linePaint
         );
-        // paintDashedLine(
-        //   canvas,
-        //   offset + Offset(x, 0.0),
-        //   offset + Offset(x, size.height),
-        //   [4.0, 4.0],
-        //   linePaint
-        // );
       }
 
       if (remainder == 0 && i < barChartContext.dataSource.length) {
-        final textPainter = createTextPainter(
-          barChartContext.dataSource[i].label,
-          TextAlign.left,
+        final textPainter = xAxisLabelFormatter(
+          labelWidth: (size.width - barPadding.horizontal) /
+            (barChartContext.dataSource.length / xIntervalCount) - linePaint.strokeWidth,
+          barData: barChartContext.dataSource[i],
           color: color,
-          width: size.width / (barChartContext.dataSource.length / xIntervalCount),
         );
-
         textPainter.paint(
           canvas,
-          offset + Offset(x + 4, size.height - barPadding.bottom + 4),
+          offset + Offset(
+            x + linePaint.strokeWidth,
+            size.height - barPadding.bottom + 4
+          ),
         );
       }
 
@@ -236,18 +234,12 @@ class AverageOverlayPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double valueToPixelRatio = size.height / displayRange;
     double hp = average * valueToPixelRatio;
+
     canvas.drawLine(
       Offset(0, size.height - hp),
       Offset(size.width * lineProgress, size.height - hp),
       linePaint,
     );
-    // paintDashedLine(
-    //   canvas,
-    //   Offset(0, size.height - hp),
-    //   Offset(size.width * lineProgress, size.height - hp),
-    //   [5,5],
-    //   linePaint
-    // );
 
     final textPainter = createTextPainter(
       'avg',
@@ -270,5 +262,5 @@ class AverageOverlayPainter extends CustomPainter {
     oldDelegate.lineProgress != lineProgress ||
     oldDelegate.textOpacity != textOpacity ||
     oldDelegate.displayRange != displayRange;
-    // true;
+
 }

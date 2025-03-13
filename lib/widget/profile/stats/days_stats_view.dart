@@ -1,6 +1,3 @@
-
-import 'package:dhyana/enum/all.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +11,6 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 
-import 'calculated_stats_view.dart';
 
 class DaysStatsView extends StatefulWidget {
 
@@ -31,8 +27,7 @@ class DaysStatsView extends StatefulWidget {
 
 class _DaysStatsViewState extends State<DaysStatsView> {
 
-  int _currentPageIndex = 0;
-
+  // Intervals
   late final List<StatsInterval> intervals;
   late StatsInterval selectedInterval;
 
@@ -40,7 +35,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
   OverlayEntry? overlayEntry;
   Day? selectedData;
 
-  // For calculated stats
+  // Calculated stats
   List<Day> days = [];
   CalculatedStats? calculatedStats;
 
@@ -61,16 +56,12 @@ class _DaysStatsViewState extends State<DaysStatsView> {
   void handlePageChange(BuildContext context, int index) {
     StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
     StatsInterval statsInterval = bloc.state.statsInterval;
-
-    setState(() {
-      _currentPageIndex = index;
-      BlocProvider.of<StatsIntervalBloc>(context).add(StatsIntervalEvent.changed(
-        statsInterval: statsInterval.copyWith(
-          from: intervals[index].from,
-          to: intervals[index].to,
-        )
-      ));
-    });
+    BlocProvider.of<StatsIntervalBloc>(context).add(StatsIntervalEvent.changed(
+      statsInterval: statsInterval.copyWith(
+        from: intervals[index].from,
+        to: intervals[index].to,
+      )
+    ));
   }
 
   @override
@@ -98,39 +89,35 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                   itemCount: 4,
                   onPageChanged: (index) => handlePageChange(context, index),
                   itemBuilder: (context, index) {
-                    return BlocBuilder<StatsIntervalBloc, StatsIntervalState>(
-                      builder: (context, statsIntervalState) {
-                        return BlocProvider<DaysBloc>(
-                          create: (BuildContext context) {
-                            return DaysBloc(
-                                statisticsRepository: context.repos.statisticsRepository,
-                                crashlyticsService: context.services.crashlyticsService
-                            )..add(DaysEvent.queryDays(
-                              profileId: widget.profile.id,
-                              from: selectedInterval.from,
-                              to: selectedInterval.to,
-                            ));
-                          },
-                          child: DaysStatsBarChartPage(
-                            pageIndex: index,
-                            onInfoTriggered: (index, day) {
-                              showOverlay(context, day);
-                            },
-                            onInfoChanged: (index, day) {
-                              updateOverlay(context, day);
-                            },
-                            onInfoDismissed: (index, day) {
-                              hideOverlay(context);
-                            },
-                            onDaysLoaded: (List<Day> loadedDays) {
-                              setState(() {
-                                days = loadedDays;
-                                calculatedStats = CalculatedStats.fromDays(days);
-                              });
-                            },
-                          ),
-                        );
-                      }
+                    return BlocProvider<DaysBloc>(
+                      create: (BuildContext context) {
+                        return DaysBloc(
+                            statisticsRepository: context.repos.statisticsRepository,
+                            crashlyticsService: context.services.crashlyticsService
+                        )..add(DaysEvent.queryDays(
+                          profileId: widget.profile.id,
+                          from: selectedInterval.from,
+                          to: selectedInterval.to,
+                        ));
+                      },
+                      child: DaysStatsBarChartPage(
+                        pageIndex: index,
+                        onInfoTriggered: (index, day) {
+                          showOverlay(context, day);
+                        },
+                        onInfoChanged: (index, day) {
+                          updateOverlay(context, day);
+                        },
+                        onInfoDismissed: (index, day) {
+                          hideOverlay(context);
+                        },
+                        onDaysLoaded: (List<Day> loadedDays) {
+                          setState(() {
+                            days = loadedDays;
+                            calculatedStats = CalculatedStats.fromDays(days);
+                          });
+                        },
+                      ),
                     );
                   },
                 ),
@@ -154,7 +141,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
 
     if (days.isEmpty) {
       return const CalculatedStatsView(
-        calculatedStats: CalculatedStats() // empty
+        calculatedStats: CalculatedStats()
       );
     } else {
       return CalculatedStatsView(calculatedStats: calculatedStats!);

@@ -6,21 +6,6 @@ import 'package:flutter/rendering.dart';
 import 'models.dart';
 import 'painting.dart';
 
-typedef BarBuilder = Widget Function(
-  BuildContext context,
-  BarChartContext barChartContext
-);
-
-typedef AxisBuilder = Widget Function(
-  BuildContext context,
-  BarChartContext barChartContext
-);
-
-typedef OverlayBuilder = Widget Function(
-  BuildContext context,
-  BarChartContext barChartContext
-);
-
 class BarChart extends StatefulWidget {
 
   final List<BarData> dataSource;
@@ -238,7 +223,7 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
     Offset local = box.globalToLocal(event.position);
     if (box.hitTest(result, position: local)) {
       for (final hit in result.path) {
-        /// temporary variable so that the [is] allows access of [index]
+        // temporary variable so that the [is] allows access of [index]
         final target = hit.target;
         if (target is RenderInfoTriggerArea) {
           return target.barIndex;
@@ -349,4 +334,161 @@ Widget _defaultAxisBuilder(
   //     barChartContext: barChartContext,
   //   ),
   // );
+}
+
+double _defaultYAxisIntervalSetter(double displayRange) => (displayRange / 4);
+TextPainter _defaultYAxisLabelFormatter({
+  required double value,
+  required Color color,
+}) {
+  return createTextPainter(value.toStringAsFixed(0), TextAlign.left, color: color);
+}
+
+int _defaultXAxisIntervalSetter(int barCount) => 1;
+TextPainter _defaultXAxisLabelFormatter({
+  required double labelWidth,
+  required BarData barData,
+  required Color color,
+}) {
+
+  TextStyle textStyle = TextStyle(
+    color: color,
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+  );
+  final textSpan = TextSpan(
+    text: barData.label.substring(0, 1),
+    style: textStyle,
+  );
+  final textPainter = TextPainter(
+    text: textSpan,
+    textAlign: TextAlign.center,
+    textDirection: TextDirection.ltr,
+  );
+
+  textPainter.layout(
+    minWidth: labelWidth,
+    maxWidth: labelWidth,
+  );
+
+  return textPainter;
+}
+
+class DefaultBarChartAxis extends StatefulWidget {
+
+  final Color color;
+  final BarChartContext barChartContext;
+  final EdgeInsets barPadding;
+
+  final double Function(double displayRange) yAxisIntervalSetter;
+  final int Function(int barCount) xAxisIntervalSetter;
+
+  final YAxisLabelFormatter yAxisLabelFormatter;
+  final XAxisLabelFormatter xAxisLabelFormatter;
+
+  const DefaultBarChartAxis({
+    required this.barChartContext,
+    required this.color,
+    required this.barPadding,
+    this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
+    this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
+    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
+    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
+    super.key,
+  });
+
+  @override
+  State<DefaultBarChartAxis> createState() => _DefaultBarChartAxisState();
+}
+
+class _DefaultBarChartAxisState extends State<DefaultBarChartAxis> {
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: AxisPainter(
+        xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
+        yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
+        xAxisLabelFormatter: widget.xAxisLabelFormatter,
+        yAxisLabelFormatter: widget.yAxisLabelFormatter,
+        color: widget.color,
+        barChartContext: widget.barChartContext,
+        barPadding: widget.barPadding,
+      ),
+    );
+  }
+}
+
+
+class AverageBarChartOverlay extends StatefulWidget {
+
+  final BarChartContext barChartContext;
+
+  const AverageBarChartOverlay({
+    required this.barChartContext,
+    super.key,
+  });
+
+  @override
+  State<AverageBarChartOverlay> createState() => _AverageBarChartOverlayState();
+}
+
+class _AverageBarChartOverlayState extends State<AverageBarChartOverlay>
+    with SingleTickerProviderStateMixin {
+
+  late final AnimationController animationController;
+  late final Animation<double> lineProgressAnimation;
+  late final Animation<double> textOpacityAnimation;
+
+  @override
+  void initState() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: Durations.long2,
+    );
+    lineProgressAnimation = Tween(begin: 0.0, end: 1.0)
+        .chain(CurveTween(curve: Curves.easeOutExpo))
+        .animate(CurvedAnimation(parent: animationController, curve: Interval(0.0, 0.5)));
+    textOpacityAnimation = Tween(begin: 0.0, end: 1.0)
+        .chain(CurveTween(curve: Curves.easeOutExpo))
+        .animate(CurvedAnimation(parent: animationController, curve: Interval(0.5, 1.0)));
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant AverageBarChartOverlay oldWidget) {
+    if (widget.barChartContext.avg > 0.0 && oldWidget.barChartContext.avg == 0.0) {
+      animationController.reset();
+      animationController.forward();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: animationController,
+          builder: (context, _) {
+            return CustomPaint(
+              painter: AverageOverlayPainter(
+                average: widget.barChartContext.avg,
+                displayRange: widget.barChartContext.displayRange,
+                color: Colors.white,
+                lineProgress: lineProgressAnimation.value,
+                textOpacity: textOpacityAnimation.value,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
 }
