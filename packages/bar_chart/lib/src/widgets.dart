@@ -202,6 +202,12 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
                         duration: Durations.short2,
                         height: double.infinity,
                         decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: HSLColor.fromColor(widget.barColor).withLightness(0.8).toColor(),
+                              width: 2.0,
+                            ),
+                          ),
                           color: (selectedIndex == i) ? widget.selectedBarColor : widget.barColor,
                         ),
                       ),

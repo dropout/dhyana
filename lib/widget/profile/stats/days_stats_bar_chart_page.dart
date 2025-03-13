@@ -1,6 +1,7 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/model/day.dart';
+import 'package:dhyana/model/stats_interval.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -49,15 +50,24 @@ class DaysStatsBarChartPage extends StatelessWidget {
   }
 
   Widget buildLoadingState(BuildContext context) {
+
+    StatsInterval defaultInterval = StatsInterval.days(
+      now: DateTime.now()
+    );
+
+    Duration difference = defaultInterval.from.difference(defaultInterval.to);
+
     return StatsBarChart(
       key: ValueKey(pageIndex),
-      barData: List.generate(14, (index) {
+      barData: List.generate(difference.inDays.abs(), (index) {
+        DateTime day = defaultInterval.from.add(Duration(days: index));
         return BarData(
           value: 0,
-          label: '${index + 1}',
+          label: DateFormat.EEEE(Localizations.localeOf(context).toString()).format(day).toUpperCase(),
         );
       }),
     );
+
   }
 
   Widget buildLoadedState(BuildContext context, DaysLoadedState state) {

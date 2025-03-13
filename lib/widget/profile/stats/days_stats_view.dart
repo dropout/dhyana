@@ -92,8 +92,8 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                     return BlocProvider<DaysBloc>(
                       create: (BuildContext context) {
                         return DaysBloc(
-                            statisticsRepository: context.repos.statisticsRepository,
-                            crashlyticsService: context.services.crashlyticsService
+                          statisticsRepository: context.repos.statisticsRepository,
+                          crashlyticsService: context.services.crashlyticsService
                         )..add(DaysEvent.queryDays(
                           profileId: widget.profile.id,
                           from: selectedInterval.from,
