@@ -144,6 +144,7 @@ class _StatsBarChartState extends State<StatsBarChart> {
             yAxisIntervalSetter: (dataSource) {
               return 30.0;
             },
+            showLabelOnAverage: false,
           );
         },
         barBuilder: (context, barChartContext) {

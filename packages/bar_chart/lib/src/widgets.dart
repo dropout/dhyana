@@ -352,32 +352,25 @@ TextPainter _defaultYAxisLabelFormatter({
 
 int _defaultXAxisIntervalSetter(int barCount) => 1;
 TextPainter _defaultXAxisLabelFormatter({
-  required double labelWidth,
   required BarData barData,
   required Color color,
 }) {
 
-  TextStyle textStyle = TextStyle(
-    color: color,
-    fontSize: 12,
-    fontWeight: FontWeight.bold,
-  );
   final textSpan = TextSpan(
     text: barData.label.substring(0, 1),
-    style: textStyle,
+    style: TextStyle(
+      color: color,
+      fontSize: 12,
+      fontWeight: FontWeight.bold,
+    ),
   );
-  final textPainter = TextPainter(
+
+  return TextPainter(
     text: textSpan,
     textAlign: TextAlign.center,
     textDirection: TextDirection.ltr,
   );
 
-  textPainter.layout(
-    minWidth: labelWidth,
-    maxWidth: labelWidth,
-  );
-
-  return textPainter;
 }
 
 class DefaultBarChartAxis extends StatefulWidget {
@@ -392,6 +385,8 @@ class DefaultBarChartAxis extends StatefulWidget {
   final YAxisLabelFormatter yAxisLabelFormatter;
   final XAxisLabelFormatter xAxisLabelFormatter;
 
+  final bool showLabelOnAverage;
+
   const DefaultBarChartAxis({
     required this.barChartContext,
     required this.color,
@@ -400,6 +395,7 @@ class DefaultBarChartAxis extends StatefulWidget {
     this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
     this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
     this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
+    this.showLabelOnAverage = true,
     super.key,
   });
 
@@ -419,6 +415,7 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis> {
         color: widget.color,
         barChartContext: widget.barChartContext,
         barPadding: widget.barPadding,
+        showLabelOnAverage: widget.showLabelOnAverage,
       ),
     );
   }

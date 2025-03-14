@@ -17,6 +17,8 @@ class AxisPainter extends CustomPainter {
   final YAxisLabelFormatter yAxisLabelFormatter;
   final XAxisLabelFormatter xAxisLabelFormatter;
 
+  final bool showLabelOnAverage;
+
   AxisPainter({
     required this.barPadding,
     required this.xIntervalCount,
@@ -25,7 +27,7 @@ class AxisPainter extends CustomPainter {
     required this.yAxisLabelFormatter,
     required this.color,
     required this.barChartContext,
-
+    this.showLabelOnAverage = true,
   }) {
     linePaint = Paint()
       ..color = color
@@ -72,13 +74,13 @@ class AxisPainter extends CustomPainter {
         linePaint,
       );
 
-      // Avoid drawing text on top of avg line
-      final double avgPosition = s.height - (barChartContext.avg) * valueToPixelRatio;
-      if ((y - avgPosition).abs() > 10) {
-        final textPainter = yAxisLabelFormatter(
-          value: yIntervalCount * i,
-          color: color,
-        );
+      // Avoid drawing text on top of avg line if it's too close
+      final textPainter = yAxisLabelFormatter(
+        value: yIntervalCount * i,
+        color: color,
+      );
+
+      if (showLabelOnAverage || (y - (s.height - barChartContext.avg * valueToPixelRatio)).abs() > 10) {
         textPainter.paint(
           canvas,
           offset + Offset(
@@ -121,11 +123,17 @@ class AxisPainter extends CustomPainter {
 
       if (remainder == 0 && i < barChartContext.dataSource.length) {
         final textPainter = xAxisLabelFormatter(
-          labelWidth: (size.width - barPadding.horizontal) /
-            (barChartContext.dataSource.length / xIntervalCount) - linePaint.strokeWidth,
           barData: barChartContext.dataSource[i],
           color: color,
         );
+
+        double labelWidth = (size.width - barPadding.horizontal) /
+            (barChartContext.dataSource.length / xIntervalCount) - linePaint.strokeWidth;
+        textPainter.layout(
+          minWidth: labelWidth,
+          maxWidth: labelWidth,
+        );
+
         textPainter.paint(
           canvas,
           offset + Offset(
@@ -250,7 +258,7 @@ class AverageOverlayPainter extends CustomPainter {
 
     textPainter.paint(
       canvas,
-      Offset(size.width + 4, size.height - hp - textPainter.height / 2),
+      Offset(size.width + 8, size.height - hp - textPainter.height / 2),
     );
 
   }

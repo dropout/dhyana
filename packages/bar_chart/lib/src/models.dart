@@ -21,7 +21,6 @@ typedef OverlayBuilder = Widget Function(
 );
 
 typedef XAxisLabelFormatter = TextPainter Function({
-  required double labelWidth,
   required BarData barData,
   required Color color,
 });
@@ -42,7 +41,7 @@ class BarChartContext {
   late final double avg;
 
   BarChartContext({
-    required List<BarData >dataSource,
+    required List<BarData> dataSource,
     required this.displayRangeSetter,
   }) :
     _dataSource = List.unmodifiable(dataSource),
