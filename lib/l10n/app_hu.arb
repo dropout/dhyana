@@ -36,6 +36,9 @@
   "session": "Ülés",
   "sessions": "Ülések",
 
+  "average": "Átlag",
+  "averageAbbr": "Átl.",
+
   "timerFinishSessionButtonText": "Befejezés",
   "timerDiscardSessionButtonText": "Megszakítás",
 

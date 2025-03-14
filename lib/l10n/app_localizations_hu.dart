@@ -96,6 +96,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sessions => 'Ülések';
 
   @override
+  String get average => 'Átlag';
+
+  @override
+  String get averageAbbr => 'Átl.';
+
+  @override
   String get timerFinishSessionButtonText => 'Befejezés';
 
   @override

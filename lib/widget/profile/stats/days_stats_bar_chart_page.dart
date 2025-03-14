@@ -1,5 +1,6 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:dhyana/bloc/days/days_bloc.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +167,10 @@ class _StatsBarChartState extends State<StatsBarChart> {
         overlayBuilder: (context, barChartContext) {
           return Padding(
             padding: barPadding,
-            child: AverageBarChartOverlay(barChartContext: barChartContext),
+            child: AverageBarChartOverlay(
+              barChartContext: barChartContext,
+              labelText: AppLocalizations.of(context).averageAbbr.toLowerCase(),
+            ),
           );
         },
       ),

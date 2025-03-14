@@ -219,6 +219,7 @@ TextPainter createTextPainter(
 class AverageOverlayPainter extends CustomPainter {
 
   final double average;
+  final String averageLabel;
   final Color color;
   final double lineProgress;
   final double textOpacity;
@@ -228,6 +229,7 @@ class AverageOverlayPainter extends CustomPainter {
 
   AverageOverlayPainter({
     required this.average,
+    required this.averageLabel,
     required this.color,
     required this.displayRange,
     this.lineProgress = 0.0,
@@ -250,7 +252,7 @@ class AverageOverlayPainter extends CustomPainter {
     );
 
     final textPainter = createTextPainter(
-      'avg',
+      averageLabel,
       TextAlign.center,
       size: 13,
       color: color.withValues(alpha: textOpacity),

@@ -425,9 +425,11 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis> {
 class AverageBarChartOverlay extends StatefulWidget {
 
   final BarChartContext barChartContext;
+  final String labelText;
 
   const AverageBarChartOverlay({
     required this.barChartContext,
+    this.labelText = 'Avg',
     super.key,
   });
 
@@ -476,6 +478,7 @@ class _AverageBarChartOverlayState extends State<AverageBarChartOverlay>
             return CustomPaint(
               painter: AverageOverlayPainter(
                 average: widget.barChartContext.avg,
+                averageLabel: widget.labelText,
                 displayRange: widget.barChartContext.displayRange,
                 color: Colors.white,
                 lineProgress: lineProgressAnimation.value,

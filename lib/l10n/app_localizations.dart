@@ -269,6 +269,18 @@ abstract class AppLocalizations {
   /// **'Ülések'**
   String get sessions;
 
+  /// No description provided for @average.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlag'**
+  String get average;
+
+  /// No description provided for @averageAbbr.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átl.'**
+  String get averageAbbr;
+
   /// No description provided for @timerFinishSessionButtonText.
   ///
   /// In hu, this message translates to:

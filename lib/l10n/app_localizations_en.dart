@@ -96,6 +96,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sessions => 'Sessions';
 
   @override
+  String get average => 'Average';
+
+  @override
+  String get averageAbbr => 'Avg.';
+
+  @override
   String get timerFinishSessionButtonText => 'Finish session';
 
   @override

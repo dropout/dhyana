@@ -36,6 +36,9 @@
   "session": "Session",
   "sessions": "Sessions",
 
+  "average": "Average",
+  "averageAbbr": "Avg.",
+
   "timerFinishSessionButtonText": "Finish session",
   "timerDiscardSessionButtonText": "Discard session",
 
