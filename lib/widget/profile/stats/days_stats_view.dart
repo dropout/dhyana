@@ -123,7 +123,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                 ),
               )
             ),
-            Gap.medium(),
+            Gap.small(),
             Padding(
               padding: const EdgeInsets.all(AppThemeData.spacingMd),
               child: buildCalculatedStats(context),
@@ -144,7 +144,9 @@ class _DaysStatsViewState extends State<DaysStatsView> {
         calculatedStats: CalculatedStats()
       );
     } else {
-      return CalculatedStatsView(calculatedStats: calculatedStats!);
+      return CalculatedStatsView(
+        calculatedStats: calculatedStats!
+      );
     }
   }
 

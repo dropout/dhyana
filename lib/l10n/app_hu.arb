@@ -36,8 +36,7 @@
   "session": "Ülés",
   "sessions": "Ülések",
 
-  "average": "Átlag",
-  "averageAbbr": "Átl.",
+
 
   "timerFinishSessionButtonText": "Befejezés",
   "timerDiscardSessionButtonText": "Megszakítás",
@@ -72,6 +71,10 @@
   "photoAccessDialogButtonText": "Rendben",
 
   "profileStats": "Statisztika",
+  "consecutiveDays": "Egymás utáni napok",
+  "highlights": "Kiemelt adatok",
+  "average": "Átlag",
+  "averageAbbr": "Átl.",
   "statsTimePerDay": "Idő naponta",
   "statsTimePerWeek": "Idő hetente",
   "statsTimePerMonth": "Idő havonta",
@@ -91,8 +94,17 @@
   "presence": "Jelenlét",
   "presenceScreenSubTitle": "Mozgasd a csuszkát a jelenlét időkeretének beállításához.",
 
+  "minutesAbbr": "p",
   "minutesPlural": "{count, plural, =0{perc} =1{perc} =2{perc} few{perc} many{perc} other{perc}}",
   "minutesPluralWithNumber": "{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}",
+
+  "hoursAbbr": "ó",
+  "hoursPlural": "{count, plural, =0{óra} =1{óra} =2{óra} few{óra} many{óra} other{óra}}",
+  "hoursPluralWithNumber": "{count, plural, =0{{count} óra} =1{{count} óra} =2{{count} óra} few{{count} óra} many{{count} óra} other{{count} óra}}",
+
+  "sessionsPlural": "{count, plural, =0{ülés} =1{ülés} =2{ülés} few{ülés} many{ülés} other{ülés}}",
+  "sessionsPluralWithNumber": "{count, plural, =0{{count} ülés} =1{{count} ülés} =2{{count} ülés} few{{count} ülés} many{{count} ülés} other{{count} ülés}}",
+
   "daysPlural": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}",
   "consecutiveDaysPlural": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}"
 }

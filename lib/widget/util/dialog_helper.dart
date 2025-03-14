@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ Widget _getSignoutDialog(BuildContext context) {
   return AlertDialog(
     title: Text(AppLocalizations.of(context).profileSignoutTitle),
     content: Text(AppLocalizations.of(context).profileSignoutQuestion),
+    backgroundColor: AppColors.backgroundPaperLight,
     actions: [
       TextButton(
         style: TextButton.styleFrom(

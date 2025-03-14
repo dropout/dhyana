@@ -96,12 +96,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sessions => 'Sessions';
 
   @override
-  String get average => 'Average';
-
-  @override
-  String get averageAbbr => 'Avg.';
-
-  @override
   String get timerFinishSessionButtonText => 'Finish session';
 
   @override
@@ -177,6 +171,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileStats => 'Statistics';
 
   @override
+  String get consecutiveDays => 'Consecutive days';
+
+  @override
+  String get highlights => 'Highlights';
+
+  @override
+  String get average => 'Average';
+
+  @override
+  String get averageAbbr => 'Avg.';
+
+  @override
   String get statsTimePerDay => 'Time per day';
 
   @override
@@ -189,13 +195,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsTimePerYear => 'Time per years';
 
   @override
-  String get statsTotalTimeSpent => 'Total time spent';
+  String get statsTotalTimeSpent => 'Total time';
 
   @override
   String get statsTotalSessions => 'Total sessions';
 
   @override
-  String get statsAverageTimeSpent => 'Average time spent';
+  String get statsAverageTimeSpent => 'Average time';
 
   @override
   String get statsAverageSessions => 'Average sessions';
@@ -220,6 +226,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get presenceScreenSubTitle => 'Move the slider to adjust presence timerframe.';
+
+  @override
+  String get minutesAbbr => 'm';
 
   @override
   String minutesPlural(num count) {
@@ -247,6 +256,69 @@ class AppLocalizationsEn extends AppLocalizations {
       two: '$count minutes',
       one: '$count minute',
       zero: '$count minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hoursAbbr => 'h';
+
+  @override
+  String hoursPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'hours',
+      many: 'hours',
+      few: 'hours',
+      two: 'hours',
+      one: 'hour',
+      zero: 'hour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hoursPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hours',
+      many: '$count hours',
+      few: '$count hours',
+      two: '$count hours',
+      one: '$count hour',
+      zero: '$count hour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sessionsPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'sessions',
+      many: 'sessions',
+      few: 'sessions',
+      two: 'sessions',
+      one: 'session',
+      zero: 'session',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sessionsPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sessions',
+      many: '$count sessions',
+      few: '$count sessions',
+      two: '$count sessions',
+      one: '$count session',
+      zero: '$count session',
     );
     return '$_temp0';
   }

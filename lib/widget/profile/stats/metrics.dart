@@ -1,5 +1,7 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMetricsView extends StatelessWidget {
@@ -18,29 +20,35 @@ class ProfileMetricsView extends StatelessWidget {
     int minutesCount = (profile != null) ?  profile!.statsReport.completedMinutesCount : 0;
     int daysCount = (profile != null) ?  profile!.statsReport.completedDaysCount : 0;
 
-    return Row(
+    return AppCard(
+      title: AppLocalizations.of(context).highlights,
       children: [
-        Expanded(
-            child: ProfileMetricBox(
-              sessionCount,
-              'Sessions',
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+                child: ProfileMetricBox(
+                  sessionCount,
+                  'Sessions',
+                )
+            ),
+            const SizedBox(width: AppThemeData.spacingMd),
+            Expanded(
+                child: ProfileMetricBox(
+                  minutesCount,
+                  'Perc',
+                )
+            ),
+            const SizedBox(width: AppThemeData.spacingMd),
+            Expanded(
+                child: ProfileMetricBox(
+                  daysCount,
+                  'Nap',
+                )
             )
+          ],
         ),
-        const SizedBox(width: AppThemeData.spacingMd),
-        Expanded(
-            child: ProfileMetricBox(
-              minutesCount,
-              'Perc',
-            )
-        ),
-        const SizedBox(width: AppThemeData.spacingMd),
-        Expanded(
-            child: ProfileMetricBox(
-              daysCount,
-              'Nap',
-            )
-        )
-      ],
+      ]
     );
   }
 

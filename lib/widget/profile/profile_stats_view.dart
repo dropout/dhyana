@@ -275,7 +275,6 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
           mainAxisSize: MainAxisSize.min,
           children: [
             buildTitleEffectTitle(context, AppLocalizations.of(context).profileStats),
-            const SizedBox(height: AppThemeData.spacingLg),
             Gap.large(),
             SizedBox(
               width: double.infinity,
@@ -284,10 +283,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
               ),
             ),
             Gap.large(),
-            Padding(
-              padding: const EdgeInsets.all(AppThemeData.spacingMd),
-              child: ProfileMetricsView(profile: profile),
-            ),
+            ProfileMetricsView(profile: profile),
             // Gap.large(),
           ],
         ),

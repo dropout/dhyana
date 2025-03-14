@@ -1,6 +1,8 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
 import 'package:flutter/material.dart';
@@ -36,49 +38,53 @@ class ProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).editProfile,
-            style: textStyle,
-          ),
-          enabled: true,
-          onTap: () => _onEditProfileTapped(context),
+    return Padding(
+      padding: EdgeInsets.all(AppThemeData.paddingLg),
+      child: Card(
+        color: AppColors.backgroundPaperLight,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).editProfile,
+                style: textStyle,
+              ),
+              enabled: true,
+              onTap: () => _onEditProfileTapped(context),
+            ),
+            const Divider(height: 0),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).sessionsHistory,
+                style: textStyle,
+              ),
+              enabled: true,
+              onTap: () => _onActivityTapped(context),
+            ),
+            const Divider(height: 0),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).profileStats,
+                style: textStyle,
+              ),
+              enabled: true,
+              onTap: () => _onStatisticsTapped(context),
+            ),
+            const Divider(height: 0),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).signOut,
+                style: textStyle,
+              ),
+              enabled: true,
+              onTap: () => _onSignoutTapped(context),
+            ),
+            const Divider(height: 0),
+          ],
         ),
-        const Divider(height: 0),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).sessionsHistory,
-            style: textStyle,
-          ),
-          enabled: true,
-          onTap: () => _onActivityTapped(context),
-        ),
-        const Divider(height: 0),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).profileStats,
-            style: textStyle,
-          ),
-          enabled: true,
-          onTap: () => _onStatisticsTapped(context),
-        ),
-        const Divider(height: 0),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).signOut,
-            style: textStyle,
-          ),
-          enabled: true,
-          onTap: () => _onSignoutTapped(context),
-        ),
-        const Divider(height: 0),
-      ],
+      ),
     );
   }
 }

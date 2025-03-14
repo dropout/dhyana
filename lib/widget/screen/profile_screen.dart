@@ -32,6 +32,7 @@ class ProfileScreen extends StatelessWidget
           case ProfileLoadedState():
             return DefaultScreenSetup(
               title: AppLocalizations.of(context).profile,
+              enableTitleSliver: false,
               slivers: [
                 SliverSafeArea(
                   top: false,

@@ -1,7 +1,9 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/consecutive_days.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +25,9 @@ class _ConsecutiveDaysDisplayState extends State<ConsecutiveDaysDisplay> {
   @override
   Widget build(BuildContext context) {
     final int consecutiveDays = widget.profile.statsReport.consecutiveDays.current;
-    return Column(
+
+    return AppCard(
+      title: AppLocalizations.of(context).consecutiveDays,
       children: [
         buildConsecutiveDaysCount(context, consecutiveDays.toString()),
         Text('consecutive days',

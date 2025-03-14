@@ -1,8 +1,10 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
+
+import 'stats_text.dart';
 
 class CalculatedStatsView extends StatefulWidget {
 
@@ -30,30 +32,54 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
     CalculatedStats calculatedStats = widget.calculatedStats;
     return Column(
       children: [
-        buildColumnItem(
-          context,
-          label: AppLocalizations.of(context).statsTotalSessions,
-          value: '${calculatedStats.totalSessions} ${AppLocalizations.of(context).sessions}',
-          order: 0,
+        Row(
+          children: [
+            Expanded(
+              child: buildColumnItem(
+                context,
+                label: AppLocalizations.of(context).statsTotalSessions,
+                child: StatsNumValueText(
+                  value: calculatedStats.totalSessions,
+                  postFix: ' ${AppLocalizations.of(context).sessionsPlural(calculatedStats.totalSessions)}'),
+                order: 0,
+              ),
+            ),
+            Gap.medium(),
+            Expanded(
+              child: buildColumnItem(
+                context,
+                label: AppLocalizations.of(context).statsTotalTimeSpent,
+                child: StatsDurationText(duration: Duration(minutes: calculatedStats.totalMinutes)),
+                order: 1,
+              ),
+            ),
+          ],
         ),
-        buildColumnItem(
-          context,
-          label: AppLocalizations.of(context).statsTotalTimeSpent,
-          value: AppLocalizations.of(context).minutesPluralWithNumber(calculatedStats.totalMinutes),
-          order: 1,
+        Gap.medium(),
+        Row(
+          children: [
+            Expanded(
+              child: buildColumnItem(
+                context,
+                label: AppLocalizations.of(context).statsAverageSessions,
+                child: StatsNumValueText(
+                  value: calculatedStats.averageSessions,
+                  postFix: ' ${AppLocalizations.of(context).sessionsPlural(calculatedStats.averageSessions)}'),
+                order: 2,
+              ),
+            ),
+            Gap.medium(),
+            Expanded(
+              child: buildColumnItem(
+                context,
+                label: AppLocalizations.of(context).statsAverageTimeSpent,
+                child: StatsDurationText(duration: Duration(minutes: calculatedStats.averageMinutes.toInt())),
+                order: 3,
+              ),
+            ),
+          ],
         ),
-        buildColumnItem(
-          context,
-          label: AppLocalizations.of(context).statsAverageSessions,
-          value: '${calculatedStats.averageSessions.toStringAsFixed(0)} ${AppLocalizations.of(context).sessions}',
-          order: 2,
-        ),
-        buildColumnItem(
-          context,
-          label: AppLocalizations.of(context).statsAverageTimeSpent,
-          value: AppLocalizations.of(context).minutesPluralWithNumber(calculatedStats.averageMinutes.toInt()),
-          order: 3,
-        ),
+
       ]
     );
   }
@@ -61,7 +87,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
   Widget buildColumnItem(
     BuildContext context, {
     required String label,
-    required String value,
+    required Widget child,
     int order = 0,
   }) {
     return AnimatedSwitcher(
@@ -105,33 +131,21 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
           child: child,
         );
       },
-      child: Card(
+
+      child: AppCard(
         key: ValueKey(widget.calculatedStats),
-        color: AppColors.backgroundPaperLight,
-        child: Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingMd),
-          child: Row(
-            children: [
-              Text(
-                label.toUpperCase(),
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                value,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        )
+        title: label,
+        children: [
+          Gap.medium(),
+          child,
+        ],
       )
+
     );
   }
 
 }
+
+
+
+

@@ -96,12 +96,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sessions => 'Ülések';
 
   @override
-  String get average => 'Átlag';
-
-  @override
-  String get averageAbbr => 'Átl.';
-
-  @override
   String get timerFinishSessionButtonText => 'Befejezés';
 
   @override
@@ -177,6 +171,18 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileStats => 'Statisztika';
 
   @override
+  String get consecutiveDays => 'Egymás utáni napok';
+
+  @override
+  String get highlights => 'Kiemelt adatok';
+
+  @override
+  String get average => 'Átlag';
+
+  @override
+  String get averageAbbr => 'Átl.';
+
+  @override
   String get statsTimePerDay => 'Idő naponta';
 
   @override
@@ -222,6 +228,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get presenceScreenSubTitle => 'Mozgasd a csuszkát a jelenlét időkeretének beállításához.';
 
   @override
+  String get minutesAbbr => 'p';
+
+  @override
   String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -247,6 +256,69 @@ class AppLocalizationsHu extends AppLocalizations {
       two: '$count perc',
       one: '$count perc',
       zero: '$count perc',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hoursAbbr => 'ó';
+
+  @override
+  String hoursPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'óra',
+      many: 'óra',
+      few: 'óra',
+      two: 'óra',
+      one: 'óra',
+      zero: 'óra',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hoursPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count óra',
+      many: '$count óra',
+      few: '$count óra',
+      two: '$count óra',
+      one: '$count óra',
+      zero: '$count óra',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sessionsPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ülés',
+      many: 'ülés',
+      few: 'ülés',
+      two: 'ülés',
+      one: 'ülés',
+      zero: 'ülés',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sessionsPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ülés',
+      many: '$count ülés',
+      few: '$count ülés',
+      two: '$count ülés',
+      one: '$count ülés',
+      zero: '$count ülés',
     );
     return '$_temp0';
   }

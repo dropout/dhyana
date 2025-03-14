@@ -36,8 +36,7 @@
   "session": "Session",
   "sessions": "Sessions",
 
-  "average": "Average",
-  "averageAbbr": "Avg.",
+
 
   "timerFinishSessionButtonText": "Finish session",
   "timerDiscardSessionButtonText": "Discard session",
@@ -71,13 +70,17 @@
   "photoAccessDialogButtonText": "Okay",
 
   "profileStats": "Statistics",
+  "average": "Average",
+  "averageAbbr": "Avg.",
+  "consecutiveDays": "Consecutive days",
+  "highlights": "Highlights",
   "statsTimePerDay": "Time per day",
   "statsTimePerWeek": "Time per week",
   "statsTimePerMonth": "Time per month",
   "statsTimePerYear": "Time per years",
-  "statsTotalTimeSpent": "Total time spent",
+  "statsTotalTimeSpent": "Total time",
   "statsTotalSessions": "Total sessions",
-  "statsAverageTimeSpent": "Average time spent",
+  "statsAverageTimeSpent": "Average time",
   "statsAverageSessions": "Average sessions",
 
   "signOut": "Signout",
@@ -89,8 +92,17 @@
   "presence": "Presence",
   "presenceScreenSubTitle": "Move the slider to adjust presence timerframe.",
 
+  "minutesAbbr": "m",
   "minutesPlural": "{count, plural, =0{minute} =1{minute} =2{minutes} few{minutes} many{minutes} other{minutes}}",
   "minutesPluralWithNumber": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
+
+  "hoursAbbr": "h",
+  "hoursPlural": "{count, plural, =0{hour} =1{hour} =2{hours} few{hours} many{hours} other{hours}}",
+  "hoursPluralWithNumber": "{count, plural, =0{{count} hour} =1{{count} hour} =2{{count} hours} few{{count} hours} many{{count} hours} other{{count} hours}}",
+
+  "sessionsPlural": "{count, plural, =0{session} =1{session} =2{sessions} few{sessions} many{sessions} other{sessions}}",
+  "sessionsPluralWithNumber": "{count, plural, =0{{count} session} =1{{count} session} =2{{count} sessions} few{{count} sessions} many{{count} sessions} other{{count} sessions}}",
+
   "daysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} days} few{{count} days} many{{count} days} other{{count} days}}",
   "consecutiveDaysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}"
 

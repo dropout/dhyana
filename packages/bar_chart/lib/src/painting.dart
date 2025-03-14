@@ -80,7 +80,7 @@ class AxisPainter extends CustomPainter {
         color: color,
       );
 
-      if (showLabelOnAverage || (y - (s.height - barChartContext.avg * valueToPixelRatio)).abs() > 10) {
+      if (showLabelOnAverage || (y - (s.height - barChartContext.avg * valueToPixelRatio)).abs() > 12) {
         textPainter.paint(
           canvas,
           offset + Offset(

@@ -269,18 +269,6 @@ abstract class AppLocalizations {
   /// **'Ülések'**
   String get sessions;
 
-  /// No description provided for @average.
-  ///
-  /// In hu, this message translates to:
-  /// **'Átlag'**
-  String get average;
-
-  /// No description provided for @averageAbbr.
-  ///
-  /// In hu, this message translates to:
-  /// **'Átl.'**
-  String get averageAbbr;
-
   /// No description provided for @timerFinishSessionButtonText.
   ///
   /// In hu, this message translates to:
@@ -431,6 +419,30 @@ abstract class AppLocalizations {
   /// **'Statisztika'**
   String get profileStats;
 
+  /// No description provided for @consecutiveDays.
+  ///
+  /// In hu, this message translates to:
+  /// **'Egymás utáni napok'**
+  String get consecutiveDays;
+
+  /// No description provided for @highlights.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kiemelt adatok'**
+  String get highlights;
+
+  /// No description provided for @average.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlag'**
+  String get average;
+
+  /// No description provided for @averageAbbr.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átl.'**
+  String get averageAbbr;
+
   /// No description provided for @statsTimePerDay.
   ///
   /// In hu, this message translates to:
@@ -521,6 +533,12 @@ abstract class AppLocalizations {
   /// **'Mozgasd a csuszkát a jelenlét időkeretének beállításához.'**
   String get presenceScreenSubTitle;
 
+  /// No description provided for @minutesAbbr.
+  ///
+  /// In hu, this message translates to:
+  /// **'p'**
+  String get minutesAbbr;
+
   /// No description provided for @minutesPlural.
   ///
   /// In hu, this message translates to:
@@ -532,6 +550,36 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}'**
   String minutesPluralWithNumber(num count);
+
+  /// No description provided for @hoursAbbr.
+  ///
+  /// In hu, this message translates to:
+  /// **'ó'**
+  String get hoursAbbr;
+
+  /// No description provided for @hoursPlural.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{óra} =1{óra} =2{óra} few{óra} many{óra} other{óra}}'**
+  String hoursPlural(num count);
+
+  /// No description provided for @hoursPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} óra} =1{{count} óra} =2{{count} óra} few{{count} óra} many{{count} óra} other{{count} óra}}'**
+  String hoursPluralWithNumber(num count);
+
+  /// No description provided for @sessionsPlural.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{ülés} =1{ülés} =2{ülés} few{ülés} many{ülés} other{ülés}}'**
+  String sessionsPlural(num count);
+
+  /// No description provided for @sessionsPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} ülés} =1{{count} ülés} =2{{count} ülés} few{{count} ülés} many{{count} ülés} other{{count} ülés}}'**
+  String sessionsPluralWithNumber(num count);
 
   /// No description provided for @daysPlural.
   ///
