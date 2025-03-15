@@ -201,6 +201,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsTotalSessions => 'Total sessions';
 
   @override
+  String get statsTotalDays => 'Total days';
+
+  @override
   String get statsAverageTimeSpent => 'Average time';
 
   @override
@@ -340,6 +343,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String consecutiveDaysPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'consecutive days',
+      many: 'consecutive days',
+      few: 'consecutive days',
+      two: 'consecutive days',
+      one: 'day',
+      zero: 'day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String consecutiveDaysPluralWithNumber(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,

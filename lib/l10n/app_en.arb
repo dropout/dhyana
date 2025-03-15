@@ -80,6 +80,7 @@
   "statsTimePerYear": "Time per years",
   "statsTotalTimeSpent": "Total time",
   "statsTotalSessions": "Total sessions",
+  "statsTotalDays": "Total days",
   "statsAverageTimeSpent": "Average time",
   "statsAverageSessions": "Average sessions",
 
@@ -104,6 +105,10 @@
   "sessionsPluralWithNumber": "{count, plural, =0{{count} session} =1{{count} session} =2{{count} sessions} few{{count} sessions} many{{count} sessions} other{{count} sessions}}",
 
   "daysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} days} few{{count} days} many{{count} days} other{{count} days}}",
-  "consecutiveDaysPlural": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}"
+
+  "consecutiveDaysPlural": "{count, plural, =0{day} =1{day} =2{consecutive days} few{consecutive days} many{consecutive days} other{consecutive days}}",
+  "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}"
+
+
 
 }

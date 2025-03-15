@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/profile/stats/consecutive_days.dart';
+import 'package:dhyana/widget/profile/stats/consecutive_days_display.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/separator_gem.dart';

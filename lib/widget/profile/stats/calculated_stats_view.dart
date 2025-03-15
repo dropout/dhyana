@@ -135,10 +135,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
       child: AppCard(
         key: ValueKey(widget.calculatedStats),
         title: label,
-        children: [
-          Gap.medium(),
-          child,
-        ],
+        child: child,
       )
 
     );

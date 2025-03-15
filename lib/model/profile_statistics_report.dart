@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 import 'consecutive_days.dart';
+import 'milestone_progress.dart';
 
 part 'profile_statistics_report.freezed.dart';
 part 'profile_statistics_report.g.dart';
@@ -12,6 +13,8 @@ class ProfileStatisticsReport with _$ProfileStatisticsReport {
 
   const factory ProfileStatisticsReport({
     @Default(ConsecutiveDays()) ConsecutiveDays consecutiveDays,
+    @Default(MilestoneProgress()) MilestoneProgress milestoneProgress,
+    @Default(0) int milestoneCount,
     @Default(0) int completedMinutesCount,
     @Default(0) int completedSessionsCount,
     @Default(0) int completedDaysCount,

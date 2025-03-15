@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/days_bloc_provider.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
@@ -12,16 +13,16 @@ const double _size = 40.0;
 
 class WeeklyPerformance extends StatelessWidget {
 
+  static List<Day> emptyDays = [
+
+  ];
+
   final Profile profile;
 
   const WeeklyPerformance({
     required this.profile,
     super.key
   });
-
-  /// The [weekday] may be 0 for Sunday, 1 for Monday, etc. up to 7 for Sunday.
-  DateTime mostRecentWeekday(DateTime date, int weekday) =>
-      DateTime(date.year, date.month, date.day - (date.weekday - weekday) % 7);
 
   @override
   Widget build(BuildContext context) {

@@ -479,6 +479,12 @@ abstract class AppLocalizations {
   /// **'Összes alkalom'**
   String get statsTotalSessions;
 
+  /// No description provided for @statsTotalDays.
+  ///
+  /// In hu, this message translates to:
+  /// **'Összes nap'**
+  String get statsTotalDays;
+
   /// No description provided for @statsAverageTimeSpent.
   ///
   /// In hu, this message translates to:
@@ -592,6 +598,12 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
   String consecutiveDaysPlural(num count);
+
+  /// No description provided for @consecutiveDaysPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
+  String consecutiveDaysPluralWithNumber(num count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

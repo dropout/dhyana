@@ -13,6 +13,11 @@ _$ProfileStatisticsReportImpl _$$ProfileStatisticsReportImplFromJson(
           ? const ConsecutiveDays()
           : ConsecutiveDays.fromJson(
               json['consecutiveDays'] as Map<String, dynamic>),
+      milestoneProgress: json['milestoneProgress'] == null
+          ? const MilestoneProgress()
+          : MilestoneProgress.fromJson(
+              json['milestoneProgress'] as Map<String, dynamic>),
+      milestoneCount: (json['milestoneCount'] as num?)?.toInt() ?? 0,
       completedMinutesCount:
           (json['completedMinutesCount'] as num?)?.toInt() ?? 0,
       completedSessionsCount:
@@ -28,6 +33,8 @@ Map<String, dynamic> _$$ProfileStatisticsReportImplToJson(
         _$ProfileStatisticsReportImpl instance) =>
     <String, dynamic>{
       'consecutiveDays': instance.consecutiveDays.toJson(),
+      'milestoneProgress': instance.milestoneProgress.toJson(),
+      'milestoneCount': instance.milestoneCount,
       'completedMinutesCount': instance.completedMinutesCount,
       'completedSessionsCount': instance.completedSessionsCount,
       'completedDaysCount': instance.completedDaysCount,

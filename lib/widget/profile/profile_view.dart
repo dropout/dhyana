@@ -4,10 +4,12 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
-import 'package:dhyana/widget/profile/stats/consecutive_days.dart';
+import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/profile/stats/consecutive_days_display.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,42 +49,53 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   Widget buildProfileLoaded(BuildContext context, Profile profile) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: AppThemeData.circleLg,
-          height: AppThemeData.circleLg,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.black,
-              width: 4.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+          // Profile avatar + name
+          Container(
+            width: AppThemeData.circleLg,
+            height: AppThemeData.circleLg,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.black,
+                width: 4.0,
+              ),
+            ),
+            child: ProfileImage.fromProfile(profile),
+          ),
+          Gap.large(),
+          Text(
+            profile.displayName,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.bold,
             ),
           ),
-          child: ProfileImage.fromProfile(profile),
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        Text(
-          profile.displayName,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.bold,
+          Gap.large(),
+          Row(
+            children: [
+              Expanded(
+                child: ConsecutiveDaysDisplay(profile: profile,)
+              ),
+              Gap.medium(),
+              Expanded(
+                child: MilestonesDisplay(profile: profile)
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        WeeklyPerformance(
-          profile: profile,
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        ConsecutiveDaysDisplay(
-          profile: profile,
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        ProfileMenu(profile: profile),
-        const SizedBox(height: AppThemeData.spacingLg),
-        const ProfileFooter(),
-        const SizedBox(height: AppThemeData.spacingLg),
-      ],
+          Gap.large(),
+          PerformanceInNumbersDisplay(profile: profile),
+          Gap.large(),
+          ProfileMenu(profile: profile),
+          Gap.large(),
+          const ProfileFooter(),
+          Gap.large(),
+        ],
+      ),
     );
   }
 

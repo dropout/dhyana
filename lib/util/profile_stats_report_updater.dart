@@ -68,7 +68,8 @@ class ProfileStatsReportUpdater {
     ProfileStatisticsReport stats,
     DateTime currentSessionDate,
   ) {
-    final int calculatedConsecutiveDays = calculateConsecutiveDaysCount(stats, currentSessionDate);
+    final int calculatedConsecutiveDays =
+      calculateConsecutiveDaysCount(stats, currentSessionDate);
     return stats.copyWith(
       consecutiveDays: stats.consecutiveDays.copyWith(
         current: calculatedConsecutiveDays,

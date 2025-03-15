@@ -136,7 +136,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       // Get the profile
       Profile profile = await profileRepository.read(event.profileId);
 
-      // Update profile statistics report with new session
+      // Assemble a Session object to work with
       Session session = Session(
         id: idGeneratorService.sessionId(event.profileId),
         startTime: event.startTime,
@@ -145,14 +145,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         timerSettings: event.timerSettings,
       );
 
-      ProfileStatisticsReport updatedStatsReport =
-        profileStatsUpdater.updateProfileStatsReportWithNewSession(
+      // Update profile statistics report with new session
+      Profile updatedProfile = profile.copyWith(
+        statsReport: profileStatsUpdater.updateProfileStatsReportWithNewSession(
           profile.statsReport,
           session,
-        );
-
-      Profile updatedProfile = profile.copyWith(
-        statsReport: updatedStatsReport,
+        ),
       );
 
       // Save session data
@@ -163,10 +161,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       // Update profile with new report
       await profileRepository.update(updatedProfile);
-      logger.t('Updated statistics report: ${updatedProfile.statsReport.toString()}');
-
       emit(ProfileState.loaded(profile: updatedProfile));
-      logger.t('Session successfully logged: ${session.toString()}');
+
+      logger.t(
+        'Session successfully logged! '
+        'old:${profile.statsReport.completedSessionsCount.toString()} -> '
+        'new:${updatedProfile.statsReport.completedSessionsCount.toString()}');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

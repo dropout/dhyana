@@ -22,33 +22,31 @@ class ProfileMetricsView extends StatelessWidget {
 
     return AppCard(
       title: AppLocalizations.of(context).highlights,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-                child: ProfileMetricBox(
-                  sessionCount,
-                  'Sessions',
-                )
-            ),
-            const SizedBox(width: AppThemeData.spacingMd),
-            Expanded(
-                child: ProfileMetricBox(
-                  minutesCount,
-                  'Perc',
-                )
-            ),
-            const SizedBox(width: AppThemeData.spacingMd),
-            Expanded(
-                child: ProfileMetricBox(
-                  daysCount,
-                  'Nap',
-                )
-            )
-          ],
-        ),
-      ]
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+              child: ProfileMetricBox(
+                sessionCount,
+                'Sessions',
+              )
+          ),
+          const SizedBox(width: AppThemeData.spacingMd),
+          Expanded(
+              child: ProfileMetricBox(
+                minutesCount,
+                'Perc',
+              )
+          ),
+          const SizedBox(width: AppThemeData.spacingMd),
+          Expanded(
+              child: ProfileMetricBox(
+                daysCount,
+                'Nap',
+              )
+          )
+        ],
+      ),
     );
   }
 

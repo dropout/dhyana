@@ -21,6 +21,7 @@ Milestone _$MilestoneFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Milestone {
   String get id => throw _privateConstructorUsedError;
+  List<Day> get days => throw _privateConstructorUsedError;
 
   /// Serializes this Milestone to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +38,7 @@ abstract class $MilestoneCopyWith<$Res> {
   factory $MilestoneCopyWith(Milestone value, $Res Function(Milestone) then) =
       _$MilestoneCopyWithImpl<$Res, Milestone>;
   @useResult
-  $Res call({String id});
+  $Res call({String id, List<Day> days});
 }
 
 /// @nodoc
@@ -56,12 +57,17 @@ class _$MilestoneCopyWithImpl<$Res, $Val extends Milestone>
   @override
   $Res call({
     Object? id = null,
+    Object? days = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      days: null == days
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<Day>,
     ) as $Val);
   }
 }
@@ -74,7 +80,7 @@ abstract class _$$MilestoneImplCopyWith<$Res>
       __$$MilestoneImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id});
+  $Res call({String id, List<Day> days});
 }
 
 /// @nodoc
@@ -91,12 +97,17 @@ class __$$MilestoneImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? days = null,
   }) {
     return _then(_$MilestoneImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      days: null == days
+          ? _value._days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<Day>,
     ));
   }
 }
@@ -104,17 +115,27 @@ class __$$MilestoneImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
-  const _$MilestoneImpl({required this.id}) : super._();
+  const _$MilestoneImpl({required this.id, final List<Day> days = const []})
+      : _days = days,
+        super._();
 
   factory _$MilestoneImpl.fromJson(Map<String, dynamic> json) =>
       _$$MilestoneImplFromJson(json);
 
   @override
   final String id;
+  final List<Day> _days;
+  @override
+  @JsonKey()
+  List<Day> get days {
+    if (_days is EqualUnmodifiableListView) return _days;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_days);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Milestone(id: $id)';
+    return 'Milestone(id: $id, days: $days)';
   }
 
   @override
@@ -122,7 +143,8 @@ class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Milestone'))
-      ..add(DiagnosticsProperty('id', id));
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('days', days));
   }
 
   @override
@@ -130,12 +152,14 @@ class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MilestoneImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other._days, _days));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode =>
+      Object.hash(runtimeType, id, const DeepCollectionEquality().hash(_days));
 
   /// Create a copy of Milestone
   /// with the given fields replaced by the non-null parameter values.
@@ -154,7 +178,8 @@ class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
 }
 
 abstract class _Milestone extends Milestone {
-  const factory _Milestone({required final String id}) = _$MilestoneImpl;
+  const factory _Milestone({required final String id, final List<Day> days}) =
+      _$MilestoneImpl;
   const _Milestone._() : super._();
 
   factory _Milestone.fromJson(Map<String, dynamic> json) =
@@ -162,6 +187,8 @@ abstract class _Milestone extends Milestone {
 
   @override
   String get id;
+  @override
+  List<Day> get days;
 
   /// Create a copy of Milestone
   /// with the given fields replaced by the non-null parameter values.

@@ -16,35 +16,35 @@ class StatsDurationText extends StatelessWidget {
     int minutes = duration.inMinutes.remainder(60);
 
     return RichText(
-        text: TextSpan(
+      text: TextSpan(
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          color: Colors.black,
+        ),
+        children: [
+          if (hours > 0) TextSpan(
+            text: hours.toString(),
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
-            children: [
-              if (hours > 0) TextSpan(
-                text: hours.toString(),
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              if (hours > 0) TextSpan(
-                  text: '${AppLocalizations.of(context).hoursAbbr} ',
-                  style: Theme.of(context).textTheme.titleMedium
-              ),
-              TextSpan(
-                text: minutes.toString(),
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              TextSpan(
-                  text: '${AppLocalizations.of(context).minutesAbbr} ',
-                  style: Theme.of(context).textTheme.titleMedium
-              ),
-            ]
-        )
+          ),
+          if (hours > 0) TextSpan(
+              text: '${AppLocalizations.of(context).hoursAbbr} ',
+              style: Theme.of(context).textTheme.titleMedium
+          ),
+          TextSpan(
+            text: minutes.toString(),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          TextSpan(
+              text: '${AppLocalizations.of(context).minutesAbbr}',
+              style: Theme.of(context).textTheme.titleMedium
+          ),
+        ]
+      )
     );
   }
 

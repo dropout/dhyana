@@ -22,6 +22,8 @@ ProfileStatisticsReport _$ProfileStatisticsReportFromJson(
 /// @nodoc
 mixin _$ProfileStatisticsReport {
   ConsecutiveDays get consecutiveDays => throw _privateConstructorUsedError;
+  MilestoneProgress get milestoneProgress => throw _privateConstructorUsedError;
+  int get milestoneCount => throw _privateConstructorUsedError;
   int get completedMinutesCount => throw _privateConstructorUsedError;
   int get completedSessionsCount => throw _privateConstructorUsedError;
   int get completedDaysCount => throw _privateConstructorUsedError;
@@ -48,6 +50,8 @@ abstract class $ProfileStatisticsReportCopyWith<$Res> {
   @useResult
   $Res call(
       {ConsecutiveDays consecutiveDays,
+      MilestoneProgress milestoneProgress,
+      int milestoneCount,
       int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
@@ -55,6 +59,7 @@ abstract class $ProfileStatisticsReportCopyWith<$Res> {
       @DateTimeOrNullConverter() DateTime? lastSessionDate});
 
   $ConsecutiveDaysCopyWith<$Res> get consecutiveDays;
+  $MilestoneProgressCopyWith<$Res> get milestoneProgress;
 }
 
 /// @nodoc
@@ -74,6 +79,8 @@ class _$ProfileStatisticsReportCopyWithImpl<$Res,
   @override
   $Res call({
     Object? consecutiveDays = null,
+    Object? milestoneProgress = null,
+    Object? milestoneCount = null,
     Object? completedMinutesCount = null,
     Object? completedSessionsCount = null,
     Object? completedDaysCount = null,
@@ -85,6 +92,14 @@ class _$ProfileStatisticsReportCopyWithImpl<$Res,
           ? _value.consecutiveDays
           : consecutiveDays // ignore: cast_nullable_to_non_nullable
               as ConsecutiveDays,
+      milestoneProgress: null == milestoneProgress
+          ? _value.milestoneProgress
+          : milestoneProgress // ignore: cast_nullable_to_non_nullable
+              as MilestoneProgress,
+      milestoneCount: null == milestoneCount
+          ? _value.milestoneCount
+          : milestoneCount // ignore: cast_nullable_to_non_nullable
+              as int,
       completedMinutesCount: null == completedMinutesCount
           ? _value.completedMinutesCount
           : completedMinutesCount // ignore: cast_nullable_to_non_nullable
@@ -117,6 +132,16 @@ class _$ProfileStatisticsReportCopyWithImpl<$Res,
       return _then(_value.copyWith(consecutiveDays: value) as $Val);
     });
   }
+
+  /// Create a copy of ProfileStatisticsReport
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MilestoneProgressCopyWith<$Res> get milestoneProgress {
+    return $MilestoneProgressCopyWith<$Res>(_value.milestoneProgress, (value) {
+      return _then(_value.copyWith(milestoneProgress: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -130,6 +155,8 @@ abstract class _$$ProfileStatisticsReportImplCopyWith<$Res>
   @useResult
   $Res call(
       {ConsecutiveDays consecutiveDays,
+      MilestoneProgress milestoneProgress,
+      int milestoneCount,
       int completedMinutesCount,
       int completedSessionsCount,
       int completedDaysCount,
@@ -138,6 +165,8 @@ abstract class _$$ProfileStatisticsReportImplCopyWith<$Res>
 
   @override
   $ConsecutiveDaysCopyWith<$Res> get consecutiveDays;
+  @override
+  $MilestoneProgressCopyWith<$Res> get milestoneProgress;
 }
 
 /// @nodoc
@@ -156,6 +185,8 @@ class __$$ProfileStatisticsReportImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? consecutiveDays = null,
+    Object? milestoneProgress = null,
+    Object? milestoneCount = null,
     Object? completedMinutesCount = null,
     Object? completedSessionsCount = null,
     Object? completedDaysCount = null,
@@ -167,6 +198,14 @@ class __$$ProfileStatisticsReportImplCopyWithImpl<$Res>
           ? _value.consecutiveDays
           : consecutiveDays // ignore: cast_nullable_to_non_nullable
               as ConsecutiveDays,
+      milestoneProgress: null == milestoneProgress
+          ? _value.milestoneProgress
+          : milestoneProgress // ignore: cast_nullable_to_non_nullable
+              as MilestoneProgress,
+      milestoneCount: null == milestoneCount
+          ? _value.milestoneCount
+          : milestoneCount // ignore: cast_nullable_to_non_nullable
+              as int,
       completedMinutesCount: null == completedMinutesCount
           ? _value.completedMinutesCount
           : completedMinutesCount // ignore: cast_nullable_to_non_nullable
@@ -198,6 +237,8 @@ class _$ProfileStatisticsReportImpl
     implements _ProfileStatisticsReport {
   const _$ProfileStatisticsReportImpl(
       {this.consecutiveDays = const ConsecutiveDays(),
+      this.milestoneProgress = const MilestoneProgress(),
+      this.milestoneCount = 0,
       this.completedMinutesCount = 0,
       this.completedSessionsCount = 0,
       this.completedDaysCount = 0,
@@ -210,6 +251,12 @@ class _$ProfileStatisticsReportImpl
   @override
   @JsonKey()
   final ConsecutiveDays consecutiveDays;
+  @override
+  @JsonKey()
+  final MilestoneProgress milestoneProgress;
+  @override
+  @JsonKey()
+  final int milestoneCount;
   @override
   @JsonKey()
   final int completedMinutesCount;
@@ -228,7 +275,7 @@ class _$ProfileStatisticsReportImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileStatisticsReport(consecutiveDays: $consecutiveDays, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
+    return 'ProfileStatisticsReport(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
   }
 
   @override
@@ -237,6 +284,8 @@ class _$ProfileStatisticsReportImpl
     properties
       ..add(DiagnosticsProperty('type', 'ProfileStatisticsReport'))
       ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays))
+      ..add(DiagnosticsProperty('milestoneProgress', milestoneProgress))
+      ..add(DiagnosticsProperty('milestoneCount', milestoneCount))
       ..add(DiagnosticsProperty('completedMinutesCount', completedMinutesCount))
       ..add(
           DiagnosticsProperty('completedSessionsCount', completedSessionsCount))
@@ -252,6 +301,10 @@ class _$ProfileStatisticsReportImpl
             other is _$ProfileStatisticsReportImpl &&
             (identical(other.consecutiveDays, consecutiveDays) ||
                 other.consecutiveDays == consecutiveDays) &&
+            (identical(other.milestoneProgress, milestoneProgress) ||
+                other.milestoneProgress == milestoneProgress) &&
+            (identical(other.milestoneCount, milestoneCount) ||
+                other.milestoneCount == milestoneCount) &&
             (identical(other.completedMinutesCount, completedMinutesCount) ||
                 other.completedMinutesCount == completedMinutesCount) &&
             (identical(other.completedSessionsCount, completedSessionsCount) ||
@@ -269,6 +322,8 @@ class _$ProfileStatisticsReportImpl
   int get hashCode => Object.hash(
       runtimeType,
       consecutiveDays,
+      milestoneProgress,
+      milestoneCount,
       completedMinutesCount,
       completedSessionsCount,
       completedDaysCount,
@@ -295,6 +350,8 @@ class _$ProfileStatisticsReportImpl
 abstract class _ProfileStatisticsReport implements ProfileStatisticsReport {
   const factory _ProfileStatisticsReport(
           {final ConsecutiveDays consecutiveDays,
+          final MilestoneProgress milestoneProgress,
+          final int milestoneCount,
           final int completedMinutesCount,
           final int completedSessionsCount,
           final int completedDaysCount,
@@ -307,6 +364,10 @@ abstract class _ProfileStatisticsReport implements ProfileStatisticsReport {
 
   @override
   ConsecutiveDays get consecutiveDays;
+  @override
+  MilestoneProgress get milestoneProgress;
+  @override
+  int get milestoneCount;
   @override
   int get completedMinutesCount;
   @override

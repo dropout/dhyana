@@ -2,14 +2,30 @@ import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
+import 'gap.dart';
+
 class AppCard extends StatelessWidget {
 
   final String title;
-  final List<Widget> children;
+  final EdgeInsets titlePadding;
+  final bool titleGap;
+  final EdgeInsets padding;
+  final Widget? child;
 
   const AppCard({
     this.title = '',
-    this.children = const [],
+    this.child,
+    this.titleGap = true,
+    this.titlePadding = const EdgeInsets.only(
+      top: AppThemeData.paddingLg,
+      left: AppThemeData.paddingLg,
+      right: AppThemeData.paddingLg,
+    ),
+    this.padding = const EdgeInsets.only(
+      left: AppThemeData.paddingLg,
+      right: AppThemeData.paddingLg,
+      bottom: AppThemeData.paddingLg,
+    ),
     super.key,
   });
 
@@ -29,19 +45,32 @@ class AppCard extends StatelessWidget {
       ),
       child: SizedBox(
         width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingLg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (title.isNotEmpty) Text(title, style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                fontWeight: FontWeight.bold,
-              )),
-              ...children,
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (title.isNotEmpty) buildTitle(context, title),
+            if (titleGap && title.isNotEmpty) Gap.medium(),
+            if (child != null) Padding(
+              padding: padding,
+              child: child!,
+            ),
+          ],
         ),
       )
+    );
+  }
+
+  Widget buildTitle(BuildContext context, String title) {
+    return Padding(
+      padding: titlePadding,
+      child: Text(title,
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
+        softWrap: false,
+      ),
     );
   }
 

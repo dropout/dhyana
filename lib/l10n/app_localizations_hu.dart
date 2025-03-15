@@ -201,6 +201,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get statsTotalSessions => 'Összes alkalom';
 
   @override
+  String get statsTotalDays => 'Összes nap';
+
+  @override
   String get statsAverageTimeSpent => 'Átlagos idő';
 
   @override
@@ -340,6 +343,21 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String consecutiveDaysPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count egymás utáni nap',
+      many: '$count egymás utáni nap',
+      few: '$count egymás utáni nap',
+      two: '$count egymás utáni nap',
+      one: '$count nap',
+      zero: '$count nap',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String consecutiveDaysPluralWithNumber(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
