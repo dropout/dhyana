@@ -25,6 +25,16 @@ class TimerSettingsView extends StatefulWidget {
 
 class _TimerSettingsViewState extends State<TimerSettingsView> {
 
+  @override
+  void didUpdateWidget(TimerSettingsView oldWidget) {
+    if (widget.timerSettings != oldWidget.timerSettings) {
+      BlocProvider.of<TimerSettingsBloc>(context).add(
+          TimerSettingsEvent.load(timerSettings: widget.timerSettings)
+      );
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   void _onWarmupChange(BuildContext context, Duration warmupDuration) {
     BlocProvider.of<TimerSettingsBloc>(context).add(
       TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(

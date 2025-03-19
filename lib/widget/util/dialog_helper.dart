@@ -71,7 +71,7 @@ Widget _getSignoutDialog(BuildContext context) {
 
           // do the signout
           authBloc.add(const SignOut());
-          profileBloc.add(const ProfileEvent.reset());
+          profileBloc.add(const ProfileEvent.clearData());
           const HomeRoute().go(context);
           context.hapticsTap();
           context.logEvent(name: 'profile_signout_pressed');

@@ -31,11 +31,12 @@ class _ConsecutiveDaysDisplayState extends State<ConsecutiveDaysDisplay> {
     return AppCard(
       title: AppLocalizations.of(context).consecutiveDays,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           StatsNumValueText(
             value: consecutiveDays,
           ),
-          buildConsecutiveDaysStartTime(context),
+          // buildConsecutiveDaysStartTime(context),
         ],
       )
     );

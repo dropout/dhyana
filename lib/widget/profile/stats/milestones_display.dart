@@ -1,5 +1,6 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/consecutive_days.dart';
+import 'package:dhyana/model/milestone_progress.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -28,48 +29,61 @@ class _MilestonesDisplayState extends State<MilestonesDisplay> {
   Widget build(BuildContext context) {
     final int milestoneCount = widget.profile.statsReport.milestoneCount;
 
-    return AppCard(
-      title: AppLocalizations.of(context).milestones,
-      child: Column(
-        children: [
-          StatsNumValueText(
+    return Stack(
+      children: [
+        AppCard(
+          title: AppLocalizations.of(context).milestones,
+          child: StatsNumValueText(
             value: milestoneCount,
-          ),
-          buildConsecutiveDaysStartTime(context),
-        ],
-      ),
-    );
-  }
-
-  Widget buildConsecutiveDaysCount(BuildContext context, String value) {
-    return DecoratedBox(
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.black,
+          )
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingXl),
-          child: Text(value.toString(),
-            style: Theme.of(context).textTheme.displaySmall!.copyWith(
-              color: AppColors.backgroundPaperLight,
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: AppThemeData.paddingLg,
+                right: AppThemeData.paddingLg,
+              ),
+              child: buildMilestoneBars(
+                context,
+                widget.profile.statsReport.milestoneProgress,
+              ),
             ),
           ),
         )
+      ],
     );
   }
 
-  Widget buildConsecutiveDaysStartTime(BuildContext context) {
-    final ConsecutiveDays consecutiveDays =
-        widget.profile.statsReport.consecutiveDays;
-    if (consecutiveDays.current > 0 && consecutiveDays.startedAt != null) {
-      Locale locale = Localizations.localeOf(context);
-      String formattedDate = DateFormat.yMMMMd(locale.toString()).format(consecutiveDays.startedAt!);
-      return Text('Since $formattedDate',
-          style: Theme.of(context).textTheme.bodySmall
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+  Widget buildMilestoneBars(
+    BuildContext context,
+    MilestoneProgress milestoneProgress
+  ) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 3.0,
+      children:
+        List.generate(7, (index) {
+          return buildMilestoneBar(context, index < milestoneProgress.completedDaysCount);
+        }).reversed.toList(),
+    );
+  }
+
+  Widget buildMilestoneBar(
+    BuildContext context,
+    bool completed,
+  ) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: completed ? Colors.black : Colors.black.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(2.0),
+      ),
+      child: SizedBox(
+        width: 18,
+        height: 6,
+      )
+    );
   }
 
 }

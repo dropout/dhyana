@@ -29,17 +29,19 @@ class StatsDurationText extends StatelessWidget {
             ),
           ),
           if (hours > 0) TextSpan(
-              text: '${AppLocalizations.of(context).hoursAbbr} ',
-              style: Theme.of(context).textTheme.titleMedium
+            // Whitespace management ternary operator
+            text: (minutes > 0) ? '${AppLocalizations.of(context).hoursAbbr} '
+              : AppLocalizations.of(context).hoursAbbr,
+            style: Theme.of(context).textTheme.titleMedium
           ),
-          TextSpan(
+          if (minutes > 0) TextSpan(
             text: minutes.toString(),
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
-          TextSpan(
+          if (minutes > 0) TextSpan(
               text: '${AppLocalizations.of(context).minutesAbbr}',
               style: Theme.of(context).textTheme.titleMedium
           ),

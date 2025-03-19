@@ -38,4 +38,28 @@ sealed class TimerState with _$TimerState {
     );
   }
 
+  factory TimerState.completed({
+    required TimerSettings timerSettings,
+    required DateTime startTime,
+    required DateTime endTime,
+    required Duration elapsedTime,
+    required Duration elapsedWarmupTime,
+  }) {
+    return TimerState(
+      timerSettings: timerSettings,
+      timerStatus: TimerStatus.completed,
+      timerStage: TimerStage.timer,
+      elapsedWarmupTime: elapsedWarmupTime,
+      elapsedTime: elapsedTime,
+      startTime: startTime,
+      endTime: endTime,
+    );
+  }
+
+
+
+
+
+
+
 }

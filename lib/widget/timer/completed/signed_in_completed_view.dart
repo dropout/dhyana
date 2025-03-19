@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/session_logger/session_logger_bloc.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days_display.dart';
@@ -10,13 +11,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignedInCompletedView extends StatefulWidget {
 
-  final void Function()? onInit;
+  final String profileId;
+  final TimerSettings timerSettings;
   final TimerState timerState;
 
   const SignedInCompletedView({
+    required this.profileId,
+    required this.timerSettings,
     required this.timerState,
-    this.onInit,
-    super.key
+    super.key,
   });
 
   @override
@@ -27,7 +30,15 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   void initState() {
-    widget.onInit?.call();
+    BlocProvider.of<SessionLoggerBloc>(context).add(
+      SessionLoggerEvent.logSession(
+        profileId: widget.profileId,
+        startTime: widget.timerState.startTime ?? DateTime.now().subtract(widget.timerState.elapsedTime),
+        endTime: widget.timerState.endTime ?? DateTime.now(),
+        duration: widget.timerState.elapsedTime,
+        timerSettings: widget.timerSettings,
+      )
+    );
     super.initState();
   }
 

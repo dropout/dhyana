@@ -209,18 +209,22 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   // The timer has reached it's end
   void _onTimerCompleted(TimerCompleted completed, emit) async {
-    logger.t('Timer completed');
+
     if (timerSettings.endingSound != Sound.none) {
       audioService.play(timerSettings.endingSound);
     }
-    TimerState timerState = state.copyWith(
-      timerStatus: TimerStatus.completed,
-      elapsedWarmupTime: elapsedWarmupTime,
+
+    TimerState timerState = TimerState.completed(
+      timerSettings: timerSettings,
+      startTime: state.startTime!,
+      endTime: durationTimer.endTime!,
       elapsedTime: durationTimer.elapsedTime,
-      endTime: durationTimer.endTime,
+      elapsedWarmupTime: elapsedWarmupTime,
     );
+
     emit(timerState);
     onComplete?.call(timerState);
+    logger.t('Timer completed');
   }
 
   // User wants to finish before timer ends

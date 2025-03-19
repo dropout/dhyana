@@ -116,6 +116,7 @@ class _TimerScreenState extends State<TimerScreen> {
               ),
 
               secondChild: TimerCompletedView(
+                timerSettings: widget.timerSettings,
                 timerState: timerState,
               ),
 

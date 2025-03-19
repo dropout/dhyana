@@ -1,7 +1,5 @@
 import 'package:dhyana/bloc/profile/data_update/all.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/util/date_time_utils.dart';
@@ -38,9 +36,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<LoadProfile>(_onLoadProfile);
     on<UpdateProfile>(_onUpdateProfile);
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
-    on<ResetProfileContent>(_onResetProfile);
-    on<LogSession>(_onLogSession);
     on<ValidateConsecutiveDays>(_onValidateConsecutiveDays);
+    on<ClearProfileData>(_onClearProfileData);
   }
 
   void _onLoadProfile(LoadProfile event, emit) async {
@@ -106,7 +103,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
 
       ProfileStatisticsReport updatedStatsReport =
-        profileStatsUpdater.validateConsecutiveDays(event.profile.statsReport);
+        profileStatsUpdater.checkConsecutiveDays(event.profile.statsReport);
 
       // Update the profile with newly calculated report
       Profile updatedProfile = event.profile.copyWith(
@@ -130,57 +127,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  void _onLogSession(LogSession event, emit) async {
-    try {
-
-      // Get the profile
-      Profile profile = await profileRepository.read(event.profileId);
-
-      // Assemble a Session object to work with
-      Session session = Session(
-        id: idGeneratorService.sessionId(event.profileId),
-        startTime: event.startTime,
-        endTime: event.endTime,
-        duration: event.duration,
-        timerSettings: event.timerSettings,
-      );
-
-      // Update profile statistics report with new session
-      Profile updatedProfile = profile.copyWith(
-        statsReport: profileStatsUpdater.updateProfileStatsReportWithNewSession(
-          profile.statsReport,
-          session,
-        ),
-      );
-
-      // Save session data
-      await statisticsRepository.logSession(
-        updatedProfile,
-        session,
-      );
-
-      // Update profile with new report
-      await profileRepository.update(updatedProfile);
-      emit(ProfileState.loaded(profile: updatedProfile));
-
-      logger.t(
-        'Session successfully logged! '
-        'old:${profile.statsReport.completedSessionsCount.toString()} -> '
-        'new:${updatedProfile.statsReport.completedSessionsCount.toString()}');
-    } catch (e, stack) {
-      crashlyticsService.recordError(
-        exception: e,
-        stackTrace: stack,
-        reason: 'Unable to log session: ${event.profileId}'
-      );
-      emit(const ProfileErrorState());
-    }
-
-  }
-
-  void _onResetProfile(ResetProfileContent event, emit) {
-    logger.t('Reset profile...');
+  void _onClearProfileData(ClearProfileData event, emit) async {
     emit(const ProfileState.initial());
+    logger.t('Profile data cleared!');
   }
 
 }

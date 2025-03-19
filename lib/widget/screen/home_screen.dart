@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
 
   final TimerSettings? timerSettings;
 
@@ -22,26 +22,10 @@ class HomeScreen extends StatefulWidget {
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
-  @override
-  void didUpdateWidget(HomeScreen oldWidget) {
-    if (widget.timerSettings != oldWidget.timerSettings) {
-      BlocProvider.of<TimerSettingsBloc>(context).add(
-        TimerSettingsEvent.load(timerSettings: widget.timerSettings)
-      );
-    }
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return TimerSettingsBlocProvider(
       onCreateEvent: TimerSettingsEvent
-        .load(timerSettings: widget.timerSettings),
+        .load(timerSettings: timerSettings),
       child: buildScaffolding(context),
     );
   }

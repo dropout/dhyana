@@ -30,9 +30,6 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
     required TResult Function(
             Profile profile,
             bool forceValidation,
@@ -40,7 +37,7 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError)
         validateConsecutiveDays,
     required TResult Function() error,
-    required TResult Function() reset,
+    required TResult Function() clearData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,9 +52,6 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult? Function(
             Profile profile,
             bool forceValidation,
@@ -65,7 +59,7 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult? Function()? error,
-    TResult? Function()? reset,
+    TResult? Function()? clearData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,9 +74,6 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult Function(
             Profile profile,
             bool forceValidation,
@@ -90,7 +81,7 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult Function()? error,
-    TResult Function()? reset,
+    TResult Function()? clearData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,31 +89,28 @@ mixin _$ProfileEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
     required TResult Function(ValidateConsecutiveDays value)
         validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(ClearProfileData value) clearData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(ClearProfileData value)? clearData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -251,9 +239,6 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
     required TResult Function(
             Profile profile,
             bool forceValidation,
@@ -261,7 +246,7 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError)
         validateConsecutiveDays,
     required TResult Function() error,
-    required TResult Function() reset,
+    required TResult Function() clearData,
   }) {
     return loadProfile(profileId, onComplete, onError);
   }
@@ -279,9 +264,6 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult? Function(
             Profile profile,
             bool forceValidation,
@@ -289,7 +271,7 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult? Function()? error,
-    TResult? Function()? reset,
+    TResult? Function()? clearData,
   }) {
     return loadProfile?.call(profileId, onComplete, onError);
   }
@@ -307,9 +289,6 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult Function(
             Profile profile,
             bool forceValidation,
@@ -317,7 +296,7 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult Function()? error,
-    TResult Function()? reset,
+    TResult Function()? clearData,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -331,11 +310,10 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
     required TResult Function(ValidateConsecutiveDays value)
         validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(ClearProfileData value) clearData,
   }) {
     return loadProfile(this);
   }
@@ -345,10 +323,9 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(ClearProfileData value)? clearData,
   }) {
     return loadProfile?.call(this);
   }
@@ -358,10 +335,9 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -538,9 +514,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
     required TResult Function(
             Profile profile,
             bool forceValidation,
@@ -548,7 +521,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError)
         validateConsecutiveDays,
     required TResult Function() error,
-    required TResult Function() reset,
+    required TResult Function() clearData,
   }) {
     return updateProfile(
         profile, formData, onComplete, onError, completeProfile);
@@ -567,9 +540,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult? Function(
             Profile profile,
             bool forceValidation,
@@ -577,7 +547,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult? Function()? error,
-    TResult? Function()? reset,
+    TResult? Function()? clearData,
   }) {
     return updateProfile?.call(
         profile, formData, onComplete, onError, completeProfile);
@@ -596,9 +566,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult Function(
             Profile profile,
             bool forceValidation,
@@ -606,7 +573,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult Function()? error,
-    TResult Function()? reset,
+    TResult Function()? clearData,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -621,11 +588,10 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
     required TResult Function(ValidateConsecutiveDays value)
         validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(ClearProfileData value) clearData,
   }) {
     return updateProfile(this);
   }
@@ -635,10 +601,9 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(ClearProfileData value)? clearData,
   }) {
     return updateProfile?.call(this);
   }
@@ -648,10 +613,9 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -679,287 +643,6 @@ abstract class UpdateProfile implements ProfileEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LogSessionImplCopyWith<$Res> {
-  factory _$$LogSessionImplCopyWith(
-          _$LogSessionImpl value, $Res Function(_$LogSessionImpl) then) =
-      __$$LogSessionImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String profileId,
-      DateTime startTime,
-      DateTime endTime,
-      Duration duration,
-      TimerSettings timerSettings});
-
-  $TimerSettingsCopyWith<$Res> get timerSettings;
-}
-
-/// @nodoc
-class __$$LogSessionImplCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$LogSessionImpl>
-    implements _$$LogSessionImplCopyWith<$Res> {
-  __$$LogSessionImplCopyWithImpl(
-      _$LogSessionImpl _value, $Res Function(_$LogSessionImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? profileId = null,
-    Object? startTime = null,
-    Object? endTime = null,
-    Object? duration = null,
-    Object? timerSettings = null,
-  }) {
-    return _then(_$LogSessionImpl(
-      profileId: null == profileId
-          ? _value.profileId
-          : profileId // ignore: cast_nullable_to_non_nullable
-              as String,
-      startTime: null == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      endTime: null == endTime
-          ? _value.endTime
-          : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      timerSettings: null == timerSettings
-          ? _value.timerSettings
-          : timerSettings // ignore: cast_nullable_to_non_nullable
-              as TimerSettings,
-    ));
-  }
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingsCopyWith<$Res> get timerSettings {
-    return $TimerSettingsCopyWith<$Res>(_value.timerSettings, (value) {
-      return _then(_value.copyWith(timerSettings: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$LogSessionImpl implements LogSession {
-  const _$LogSessionImpl(
-      {required this.profileId,
-      required this.startTime,
-      required this.endTime,
-      required this.duration,
-      required this.timerSettings});
-
-  @override
-  final String profileId;
-  @override
-  final DateTime startTime;
-  @override
-  final DateTime endTime;
-  @override
-  final Duration duration;
-  @override
-  final TimerSettings timerSettings;
-
-  @override
-  String toString() {
-    return 'ProfileEvent.logSession(profileId: $profileId, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LogSessionImpl &&
-            (identical(other.profileId, profileId) ||
-                other.profileId == profileId) &&
-            (identical(other.startTime, startTime) ||
-                other.startTime == startTime) &&
-            (identical(other.endTime, endTime) || other.endTime == endTime) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
-            (identical(other.timerSettings, timerSettings) ||
-                other.timerSettings == timerSettings));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, profileId, startTime, endTime, duration, timerSettings);
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LogSessionImplCopyWith<_$LogSessionImpl> get copyWith =>
-      __$$LogSessionImplCopyWithImpl<_$LogSessionImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String profileId,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        loadProfile,
-    required TResult Function(
-            Profile profile,
-            Map<String, dynamic> formData,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError,
-            bool completeProfile)
-        updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
-    required TResult Function() error,
-    required TResult Function() reset,
-  }) {
-    return logSession(profileId, startTime, endTime, duration, timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        loadProfile,
-    TResult? Function(
-            Profile profile,
-            Map<String, dynamic> formData,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError,
-            bool completeProfile)?
-        updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
-    TResult? Function()? error,
-    TResult? Function()? reset,
-  }) {
-    return logSession?.call(
-        profileId, startTime, endTime, duration, timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        loadProfile,
-    TResult Function(
-            Profile profile,
-            Map<String, dynamic> formData,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError,
-            bool completeProfile)?
-        updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
-    TResult Function()? error,
-    TResult Function()? reset,
-    required TResult orElse(),
-  }) {
-    if (logSession != null) {
-      return logSession(profileId, startTime, endTime, duration, timerSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadProfile value) loadProfile,
-    required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
-    required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
-  }) {
-    return logSession(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadProfile value)? loadProfile,
-    TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
-    TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
-  }) {
-    return logSession?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadProfile value)? loadProfile,
-    TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
-    TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
-    required TResult orElse(),
-  }) {
-    if (logSession != null) {
-      return logSession(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LogSession implements ProfileEvent {
-  const factory LogSession(
-      {required final String profileId,
-      required final DateTime startTime,
-      required final DateTime endTime,
-      required final Duration duration,
-      required final TimerSettings timerSettings}) = _$LogSessionImpl;
-
-  String get profileId;
-  DateTime get startTime;
-  DateTime get endTime;
-  Duration get duration;
-  TimerSettings get timerSettings;
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LogSessionImplCopyWith<_$LogSessionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1094,9 +777,6 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
     required TResult Function(
             Profile profile,
             bool forceValidation,
@@ -1104,7 +784,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)
         validateConsecutiveDays,
     required TResult Function() error,
-    required TResult Function() reset,
+    required TResult Function() clearData,
   }) {
     return validateConsecutiveDays(
         profile, forceValidation, onComplete, onError);
@@ -1123,9 +803,6 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult? Function(
             Profile profile,
             bool forceValidation,
@@ -1133,7 +810,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult? Function()? error,
-    TResult? Function()? reset,
+    TResult? Function()? clearData,
   }) {
     return validateConsecutiveDays?.call(
         profile, forceValidation, onComplete, onError);
@@ -1152,9 +829,6 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult Function(
             Profile profile,
             bool forceValidation,
@@ -1162,7 +836,7 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult Function()? error,
-    TResult Function()? reset,
+    TResult Function()? clearData,
     required TResult orElse(),
   }) {
     if (validateConsecutiveDays != null) {
@@ -1177,11 +851,10 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
     required TResult Function(ValidateConsecutiveDays value)
         validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(ClearProfileData value) clearData,
   }) {
     return validateConsecutiveDays(this);
   }
@@ -1191,10 +864,9 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(ClearProfileData value)? clearData,
   }) {
     return validateConsecutiveDays?.call(this);
   }
@@ -1204,10 +876,9 @@ class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
   }) {
     if (validateConsecutiveDays != null) {
@@ -1291,9 +962,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
     required TResult Function(
             Profile profile,
             bool forceValidation,
@@ -1301,7 +969,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError)
         validateConsecutiveDays,
     required TResult Function() error,
-    required TResult Function() reset,
+    required TResult Function() clearData,
   }) {
     return error();
   }
@@ -1319,9 +987,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult? Function(
             Profile profile,
             bool forceValidation,
@@ -1329,7 +994,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult? Function()? error,
-    TResult? Function()? reset,
+    TResult? Function()? clearData,
   }) {
     return error?.call();
   }
@@ -1347,9 +1012,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult Function(
             Profile profile,
             bool forceValidation,
@@ -1357,7 +1019,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult Function()? error,
-    TResult Function()? reset,
+    TResult Function()? clearData,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1371,11 +1033,10 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
     required TResult Function(ValidateConsecutiveDays value)
         validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(ClearProfileData value) clearData,
   }) {
     return error(this);
   }
@@ -1385,10 +1046,9 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(ClearProfileData value)? clearData,
   }) {
     return error?.call(this);
   }
@@ -1398,10 +1058,9 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1416,18 +1075,18 @@ abstract class ProfileErrorOccured implements ProfileEvent {
 }
 
 /// @nodoc
-abstract class _$$ResetProfileContentImplCopyWith<$Res> {
-  factory _$$ResetProfileContentImplCopyWith(_$ResetProfileContentImpl value,
-          $Res Function(_$ResetProfileContentImpl) then) =
-      __$$ResetProfileContentImplCopyWithImpl<$Res>;
+abstract class _$$ClearProfileDataImplCopyWith<$Res> {
+  factory _$$ClearProfileDataImplCopyWith(_$ClearProfileDataImpl value,
+          $Res Function(_$ClearProfileDataImpl) then) =
+      __$$ClearProfileDataImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ResetProfileContentImplCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$ResetProfileContentImpl>
-    implements _$$ResetProfileContentImplCopyWith<$Res> {
-  __$$ResetProfileContentImplCopyWithImpl(_$ResetProfileContentImpl _value,
-      $Res Function(_$ResetProfileContentImpl) _then)
+class __$$ClearProfileDataImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ClearProfileDataImpl>
+    implements _$$ClearProfileDataImplCopyWith<$Res> {
+  __$$ClearProfileDataImplCopyWithImpl(_$ClearProfileDataImpl _value,
+      $Res Function(_$ClearProfileDataImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ProfileEvent
@@ -1436,19 +1095,18 @@ class __$$ResetProfileContentImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ResetProfileContentImpl implements ResetProfileContent {
-  const _$ResetProfileContentImpl();
+class _$ClearProfileDataImpl implements ClearProfileData {
+  const _$ClearProfileDataImpl();
 
   @override
   String toString() {
-    return 'ProfileEvent.reset()';
+    return 'ProfileEvent.clearData()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ResetProfileContentImpl);
+        (other.runtimeType == runtimeType && other is _$ClearProfileDataImpl);
   }
 
   @override
@@ -1469,9 +1127,6 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(String profileId, DateTime startTime,
-            DateTime endTime, Duration duration, TimerSettings timerSettings)
-        logSession,
     required TResult Function(
             Profile profile,
             bool forceValidation,
@@ -1479,9 +1134,9 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError)
         validateConsecutiveDays,
     required TResult Function() error,
-    required TResult Function() reset,
+    required TResult Function() clearData,
   }) {
-    return reset();
+    return clearData();
   }
 
   @override
@@ -1497,9 +1152,6 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult? Function(
             Profile profile,
             bool forceValidation,
@@ -1507,9 +1159,9 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult? Function()? error,
-    TResult? Function()? reset,
+    TResult? Function()? clearData,
   }) {
-    return reset?.call();
+    return clearData?.call();
   }
 
   @override
@@ -1525,9 +1177,6 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(String profileId, DateTime startTime, DateTime endTime,
-            Duration duration, TimerSettings timerSettings)?
-        logSession,
     TResult Function(
             Profile profile,
             bool forceValidation,
@@ -1535,11 +1184,11 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
             void Function(Object?, StackTrace)? onError)?
         validateConsecutiveDays,
     TResult Function()? error,
-    TResult Function()? reset,
+    TResult Function()? clearData,
     required TResult orElse(),
   }) {
-    if (reset != null) {
-      return reset();
+    if (clearData != null) {
+      return clearData();
     }
     return orElse();
   }
@@ -1549,13 +1198,12 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(LogSession value) logSession,
     required TResult Function(ValidateConsecutiveDays value)
         validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ResetProfileContent value) reset,
+    required TResult Function(ClearProfileData value) clearData,
   }) {
-    return reset(this);
+    return clearData(this);
   }
 
   @override
@@ -1563,12 +1211,11 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(LogSession value)? logSession,
     TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ResetProfileContent value)? reset,
+    TResult? Function(ClearProfileData value)? clearData,
   }) {
-    return reset?.call(this);
+    return clearData?.call(this);
   }
 
   @override
@@ -1576,21 +1223,20 @@ class _$ResetProfileContentImpl implements ResetProfileContent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(LogSession value)? logSession,
     TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ResetProfileContent value)? reset,
+    TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
   }) {
-    if (reset != null) {
-      return reset(this);
+    if (clearData != null) {
+      return clearData(this);
     }
     return orElse();
   }
 }
 
-abstract class ResetProfileContent implements ProfileEvent {
-  const factory ResetProfileContent() = _$ResetProfileContentImpl;
+abstract class ClearProfileData implements ProfileEvent {
+  const factory ClearProfileData() = _$ClearProfileDataImpl;
 }
 
 /// @nodoc

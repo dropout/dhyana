@@ -1,3 +1,6 @@
+import 'package:dhyana/bloc/session_logger/session_logger_bloc.dart';
+import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/timer/completed/signed_in_completed_view.dart';
 import 'package:dhyana/widget/timer/completed/signed_out_completed_view.dart';
@@ -8,26 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TimerCompletedView extends StatefulWidget {
+class TimerCompletedView extends StatelessWidget {
 
+  final TimerSettings timerSettings;
   final TimerState timerState;
 
   const TimerCompletedView({
+    required this.timerSettings,
     required this.timerState,
     super.key,
   });
-
-  @override
-  State<TimerCompletedView> createState() => _TimerCompletedViewState();
-}
-
-class _TimerCompletedViewState extends State<TimerCompletedView> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   void _onOkayButtonPressed(BuildContext context) {
     const HomeRoute().go(context);
@@ -36,32 +31,51 @@ class _TimerCompletedViewState extends State<TimerCompletedView> {
 
   @override
   Widget build(BuildContext context) {
-
-    // Only create widgets below the tree when
-    // timer is completed, initialization of those widgets
-    // fire important events to record sessions
-    if (widget.timerState.timerStatus != TimerStatus.completed) {
-      return const SizedBox.shrink();
-    }
-
     return Stack(
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
-        SingleChildScrollView(
-          child: SignedIn(
-            yes: (_, __) {
-              return SignedInCompletedView(
-                timerState: widget.timerState,
-              );
-            },
-            no: SignedOutCompletedView(
-              timerState: widget.timerState,
-            )
+        if (timerState.timerStatus == TimerStatus.completed)
+          SingleChildScrollView(
+            child: SignedIn(
+              yes: (_, profileId) => buildSignedInView(
+                context,
+                timerState,
+                profileId,
+              ),
+              no: buildSignedOutView(context, timerState),
+            ),
           ),
-        ),
         buildBottomArea(context),
       ],
+    );
+  }
+
+  Widget buildSignedInView(
+    BuildContext context,
+    TimerState timerState,
+    String profileId,
+  ) {
+    return BlocProvider<SessionLoggerBloc>(
+      create: (context) {
+        return SessionLoggerBloc(
+          profileRepository: context.repos.profileRepository,
+          statisticsRepository: context.repos.statisticsRepository,
+          idGeneratorService: context.services.idGeneratorService,
+          crashlyticsService: context.services.crashlyticsService,
+        );
+      },
+      child: SignedInCompletedView(
+        profileId: profileId,
+        timerSettings: timerSettings,
+        timerState: timerState,
+      ),
+    );
+  }
+
+  Widget buildSignedOutView(BuildContext context, TimerState timerState) {
+    return SignedOutCompletedView(
+      timerState: timerState,
     );
   }
 

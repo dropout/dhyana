@@ -20,8 +20,9 @@ MilestoneProgress _$MilestoneProgressFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MilestoneProgress {
-  int get daysCompleted => throw _privateConstructorUsedError;
-  List<Day> get completedDays => throw _privateConstructorUsedError;
+  int get completedDaysCount => throw _privateConstructorUsedError;
+  int get targetDaysCount => throw _privateConstructorUsedError;
+  List<Session> get sessions => throw _privateConstructorUsedError;
 
   /// Serializes this MilestoneProgress to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $MilestoneProgressCopyWith<$Res> {
           MilestoneProgress value, $Res Function(MilestoneProgress) then) =
       _$MilestoneProgressCopyWithImpl<$Res, MilestoneProgress>;
   @useResult
-  $Res call({int daysCompleted, List<Day> completedDays});
+  $Res call(
+      {int completedDaysCount, int targetDaysCount, List<Session> sessions});
 }
 
 /// @nodoc
@@ -57,18 +59,23 @@ class _$MilestoneProgressCopyWithImpl<$Res, $Val extends MilestoneProgress>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? daysCompleted = null,
-    Object? completedDays = null,
+    Object? completedDaysCount = null,
+    Object? targetDaysCount = null,
+    Object? sessions = null,
   }) {
     return _then(_value.copyWith(
-      daysCompleted: null == daysCompleted
-          ? _value.daysCompleted
-          : daysCompleted // ignore: cast_nullable_to_non_nullable
+      completedDaysCount: null == completedDaysCount
+          ? _value.completedDaysCount
+          : completedDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
-      completedDays: null == completedDays
-          ? _value.completedDays
-          : completedDays // ignore: cast_nullable_to_non_nullable
-              as List<Day>,
+      targetDaysCount: null == targetDaysCount
+          ? _value.targetDaysCount
+          : targetDaysCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessions: null == sessions
+          ? _value.sessions
+          : sessions // ignore: cast_nullable_to_non_nullable
+              as List<Session>,
     ) as $Val);
   }
 }
@@ -81,7 +88,8 @@ abstract class _$$MilestoneProgressImplCopyWith<$Res>
       __$$MilestoneProgressImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int daysCompleted, List<Day> completedDays});
+  $Res call(
+      {int completedDaysCount, int targetDaysCount, List<Session> sessions});
 }
 
 /// @nodoc
@@ -97,18 +105,23 @@ class __$$MilestoneProgressImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? daysCompleted = null,
-    Object? completedDays = null,
+    Object? completedDaysCount = null,
+    Object? targetDaysCount = null,
+    Object? sessions = null,
   }) {
     return _then(_$MilestoneProgressImpl(
-      daysCompleted: null == daysCompleted
-          ? _value.daysCompleted
-          : daysCompleted // ignore: cast_nullable_to_non_nullable
+      completedDaysCount: null == completedDaysCount
+          ? _value.completedDaysCount
+          : completedDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
-      completedDays: null == completedDays
-          ? _value._completedDays
-          : completedDays // ignore: cast_nullable_to_non_nullable
-              as List<Day>,
+      targetDaysCount: null == targetDaysCount
+          ? _value.targetDaysCount
+          : targetDaysCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessions: null == sessions
+          ? _value._sessions
+          : sessions // ignore: cast_nullable_to_non_nullable
+              as List<Session>,
     ));
   }
 }
@@ -118,8 +131,10 @@ class __$$MilestoneProgressImplCopyWithImpl<$Res>
 class _$MilestoneProgressImpl extends _MilestoneProgress
     with DiagnosticableTreeMixin {
   const _$MilestoneProgressImpl(
-      {this.daysCompleted = 0, final List<Day> completedDays = const []})
-      : _completedDays = completedDays,
+      {this.completedDaysCount = 0,
+      this.targetDaysCount = 7,
+      final List<Session> sessions = const []})
+      : _sessions = sessions,
         super._();
 
   factory _$MilestoneProgressImpl.fromJson(Map<String, dynamic> json) =>
@@ -127,19 +142,22 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
 
   @override
   @JsonKey()
-  final int daysCompleted;
-  final List<Day> _completedDays;
+  final int completedDaysCount;
   @override
   @JsonKey()
-  List<Day> get completedDays {
-    if (_completedDays is EqualUnmodifiableListView) return _completedDays;
+  final int targetDaysCount;
+  final List<Session> _sessions;
+  @override
+  @JsonKey()
+  List<Session> get sessions {
+    if (_sessions is EqualUnmodifiableListView) return _sessions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_completedDays);
+    return EqualUnmodifiableListView(_sessions);
   }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MilestoneProgress(daysCompleted: $daysCompleted, completedDays: $completedDays)';
+    return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
   }
 
   @override
@@ -147,8 +165,9 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'MilestoneProgress'))
-      ..add(DiagnosticsProperty('daysCompleted', daysCompleted))
-      ..add(DiagnosticsProperty('completedDays', completedDays));
+      ..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))
+      ..add(DiagnosticsProperty('targetDaysCount', targetDaysCount))
+      ..add(DiagnosticsProperty('sessions', sessions));
   }
 
   @override
@@ -156,16 +175,17 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MilestoneProgressImpl &&
-            (identical(other.daysCompleted, daysCompleted) ||
-                other.daysCompleted == daysCompleted) &&
-            const DeepCollectionEquality()
-                .equals(other._completedDays, _completedDays));
+            (identical(other.completedDaysCount, completedDaysCount) ||
+                other.completedDaysCount == completedDaysCount) &&
+            (identical(other.targetDaysCount, targetDaysCount) ||
+                other.targetDaysCount == targetDaysCount) &&
+            const DeepCollectionEquality().equals(other._sessions, _sessions));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, daysCompleted,
-      const DeepCollectionEquality().hash(_completedDays));
+  int get hashCode => Object.hash(runtimeType, completedDaysCount,
+      targetDaysCount, const DeepCollectionEquality().hash(_sessions));
 
   /// Create a copy of MilestoneProgress
   /// with the given fields replaced by the non-null parameter values.
@@ -186,17 +206,20 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
 
 abstract class _MilestoneProgress extends MilestoneProgress {
   const factory _MilestoneProgress(
-      {final int daysCompleted,
-      final List<Day> completedDays}) = _$MilestoneProgressImpl;
+      {final int completedDaysCount,
+      final int targetDaysCount,
+      final List<Session> sessions}) = _$MilestoneProgressImpl;
   const _MilestoneProgress._() : super._();
 
   factory _MilestoneProgress.fromJson(Map<String, dynamic> json) =
       _$MilestoneProgressImpl.fromJson;
 
   @override
-  int get daysCompleted;
+  int get completedDaysCount;
   @override
-  List<Day> get completedDays;
+  int get targetDaysCount;
+  @override
+  List<Session> get sessions;
 
   /// Create a copy of MilestoneProgress
   /// with the given fields replaced by the non-null parameter values.

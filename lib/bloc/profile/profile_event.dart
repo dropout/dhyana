@@ -17,14 +17,6 @@ class ProfileEvent with _$ProfileEvent {
     @Default(false) bool completeProfile,
   }) = UpdateProfile;
 
-  const factory ProfileEvent.logSession({
-    required String profileId,
-    required DateTime startTime,
-    required DateTime endTime,
-    required Duration duration,
-    required TimerSettings timerSettings,
-  }) = LogSession;
-
   const factory ProfileEvent.validateConsecutiveDays({
     required Profile profile,
     @Default(false) bool forceValidation,
@@ -33,6 +25,6 @@ class ProfileEvent with _$ProfileEvent {
   }) = ValidateConsecutiveDays;
 
   const factory ProfileEvent.error() = ProfileErrorOccured;
-  const factory ProfileEvent.reset() = ResetProfileContent;
+  const factory ProfileEvent.clearData() = ClearProfileData;
 
 }
