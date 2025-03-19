@@ -4,6 +4,7 @@ import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days_display.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/separator_gem.dart';
 import 'package:flutter/material.dart';
@@ -44,13 +45,21 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<SessionLoggerBloc, SessionLoggerState>(
       builder: (context, state) {
         switch (state) {
-          case ProfileLoadedState():
-            return buildLoaded(context, state.profile);
-          default:
+          case SessionLoggerInitialState():
             return buildLoading(context);
+          case SessionLoggerLoadingState():
+            return buildLoading(context);
+          case SessionLoggerErrorState():
+            return buildError(context);
+          case SessionLoggerSavingState():
+            return buildLoaded(context, state.updatedProfile);
+          case SessionLoggerSavedState():
+            return buildLoaded(context, state.updatedProfile);
+          default:
+            return SizedBox.shrink();
         }
       },
     );
@@ -58,6 +67,10 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   Widget buildLoading(BuildContext context) {
     return const AppLoadingDisplay();
+  }
+
+  Widget buildError(BuildContext context) {
+    return const AppErrorDisplay();
   }
 
   Widget buildSeparator(BuildContext context, {
@@ -74,25 +87,24 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   }
 
   Widget buildLoaded(BuildContext context, Profile profile) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: AppThemeData.spacing2xl),
-        SessionResult(
-          timerState: widget.timerState,
-          profile: profile,
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        WeeklyPerformance(
-          profile: profile,
-        ),
-        const SizedBox(height: AppThemeData.spacing2xl),
-        ConsecutiveDaysDisplay(
-          profile: profile,
-        ),
-        PresenceArea(profile: profile),
-        const SizedBox(height: AppThemeData.spacing4xl),
-      ]
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: AppThemeData.spacing2xl),
+          SessionResult(
+            timerState: widget.timerState,
+            profile: profile,
+          ),
+          const SizedBox(height: AppThemeData.spacingLg),
+          WeeklyPerformance(
+            profile: profile,
+          ),
+          const SizedBox(height: AppThemeData.spacing2xl),
+          PresenceArea(profile: profile),
+          const SizedBox(height: AppThemeData.spacing4xl),
+        ]
+      ),
     );
   }
 

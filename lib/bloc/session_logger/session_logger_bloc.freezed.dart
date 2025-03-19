@@ -353,6 +353,7 @@ mixin _$SessionLoggerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)
         updated,
@@ -368,6 +369,7 @@ mixin _$SessionLoggerState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -383,6 +385,7 @@ mixin _$SessionLoggerState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -399,6 +402,7 @@ mixin _$SessionLoggerState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
     required TResult Function(SessionLoggerUpdatedState value) updated,
     required TResult Function(SessionLoggerSavingState value) saving,
     required TResult Function(SessionLoggerSavedState value) saved,
@@ -408,6 +412,7 @@ mixin _$SessionLoggerState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
     TResult? Function(SessionLoggerUpdatedState value)? updated,
     TResult? Function(SessionLoggerSavingState value)? saving,
     TResult? Function(SessionLoggerSavedState value)? saved,
@@ -417,6 +422,7 @@ mixin _$SessionLoggerState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
     TResult Function(SessionLoggerUpdatedState value)? updated,
     TResult Function(SessionLoggerSavingState value)? saving,
     TResult Function(SessionLoggerSavedState value)? saved,
@@ -493,6 +499,7 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)
         updated,
@@ -511,6 +518,7 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -529,6 +537,7 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -551,6 +560,7 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
     required TResult Function(SessionLoggerUpdatedState value) updated,
     required TResult Function(SessionLoggerSavingState value) saving,
     required TResult Function(SessionLoggerSavedState value) saved,
@@ -563,6 +573,7 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
     TResult? Function(SessionLoggerUpdatedState value)? updated,
     TResult? Function(SessionLoggerSavingState value)? saving,
     TResult? Function(SessionLoggerSavedState value)? saved,
@@ -575,6 +586,7 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
     TResult Function(SessionLoggerUpdatedState value)? updated,
     TResult Function(SessionLoggerSavingState value)? saving,
     TResult Function(SessionLoggerSavedState value)? saved,
@@ -591,6 +603,158 @@ class _$SessionLoggerInitialStateImpl extends SessionLoggerInitialState {
 abstract class SessionLoggerInitialState extends SessionLoggerState {
   const factory SessionLoggerInitialState() = _$SessionLoggerInitialStateImpl;
   const SessionLoggerInitialState._() : super._();
+}
+
+/// @nodoc
+abstract class _$$SessionLoggerLoadingStateImplCopyWith<$Res> {
+  factory _$$SessionLoggerLoadingStateImplCopyWith(
+          _$SessionLoggerLoadingStateImpl value,
+          $Res Function(_$SessionLoggerLoadingStateImpl) then) =
+      __$$SessionLoggerLoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SessionLoggerLoadingStateImplCopyWithImpl<$Res>
+    extends _$SessionLoggerStateCopyWithImpl<$Res,
+        _$SessionLoggerLoadingStateImpl>
+    implements _$$SessionLoggerLoadingStateImplCopyWith<$Res> {
+  __$$SessionLoggerLoadingStateImplCopyWithImpl(
+      _$SessionLoggerLoadingStateImpl _value,
+      $Res Function(_$SessionLoggerLoadingStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SessionLoggerState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SessionLoggerLoadingStateImpl extends SessionLoggerLoadingState {
+  const _$SessionLoggerLoadingStateImpl() : super._();
+
+  @override
+  String toString() {
+    return 'SessionLoggerState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SessionLoggerLoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            Profile oldProfile, Session session, Profile updatedProfile)
+        updated,
+    required TResult Function(
+            Profile oldProfile, Session session, Profile updatedProfile)
+        saving,
+    required TResult Function(
+            Profile oldProfile, Session session, Profile updatedProfile)
+        saved,
+    required TResult Function() error,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            Profile oldProfile, Session session, Profile updatedProfile)?
+        updated,
+    TResult? Function(
+            Profile oldProfile, Session session, Profile updatedProfile)?
+        saving,
+    TResult? Function(
+            Profile oldProfile, Session session, Profile updatedProfile)?
+        saved,
+    TResult? Function()? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            Profile oldProfile, Session session, Profile updatedProfile)?
+        updated,
+    TResult Function(
+            Profile oldProfile, Session session, Profile updatedProfile)?
+        saving,
+    TResult Function(
+            Profile oldProfile, Session session, Profile updatedProfile)?
+        saved,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
+    required TResult Function(SessionLoggerUpdatedState value) updated,
+    required TResult Function(SessionLoggerSavingState value) saving,
+    required TResult Function(SessionLoggerSavedState value) saved,
+    required TResult Function(SessionLoggerErrorState value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
+    TResult? Function(SessionLoggerUpdatedState value)? updated,
+    TResult? Function(SessionLoggerSavingState value)? saving,
+    TResult? Function(SessionLoggerSavedState value)? saved,
+    TResult? Function(SessionLoggerErrorState value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
+    TResult Function(SessionLoggerUpdatedState value)? updated,
+    TResult Function(SessionLoggerSavingState value)? saving,
+    TResult Function(SessionLoggerSavedState value)? saved,
+    TResult Function(SessionLoggerErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SessionLoggerLoadingState extends SessionLoggerState {
+  const factory SessionLoggerLoadingState() = _$SessionLoggerLoadingStateImpl;
+  const SessionLoggerLoadingState._() : super._();
 }
 
 /// @nodoc
@@ -676,7 +840,7 @@ class __$$SessionLoggerUpdatedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
-  _$SessionLoggerUpdatedStateImpl(
+  const _$SessionLoggerUpdatedStateImpl(
       {required this.oldProfile,
       required this.session,
       required this.updatedProfile})
@@ -723,6 +887,7 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)
         updated,
@@ -741,6 +906,7 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -759,6 +925,7 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -781,6 +948,7 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
     required TResult Function(SessionLoggerUpdatedState value) updated,
     required TResult Function(SessionLoggerSavingState value) saving,
     required TResult Function(SessionLoggerSavedState value) saved,
@@ -793,6 +961,7 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
     TResult? Function(SessionLoggerUpdatedState value)? updated,
     TResult? Function(SessionLoggerSavingState value)? saving,
     TResult? Function(SessionLoggerSavedState value)? saved,
@@ -805,6 +974,7 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
     TResult Function(SessionLoggerUpdatedState value)? updated,
     TResult Function(SessionLoggerSavingState value)? saving,
     TResult Function(SessionLoggerSavedState value)? saved,
@@ -819,11 +989,11 @@ class _$SessionLoggerUpdatedStateImpl extends SessionLoggerUpdatedState {
 }
 
 abstract class SessionLoggerUpdatedState extends SessionLoggerState {
-  factory SessionLoggerUpdatedState(
+  const factory SessionLoggerUpdatedState(
       {required final Profile oldProfile,
       required final Session session,
       required final Profile updatedProfile}) = _$SessionLoggerUpdatedStateImpl;
-  SessionLoggerUpdatedState._() : super._();
+  const SessionLoggerUpdatedState._() : super._();
 
   Profile get oldProfile;
   Session get session;
@@ -966,6 +1136,7 @@ class _$SessionLoggerSavingStateImpl extends SessionLoggerSavingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)
         updated,
@@ -984,6 +1155,7 @@ class _$SessionLoggerSavingStateImpl extends SessionLoggerSavingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -1002,6 +1174,7 @@ class _$SessionLoggerSavingStateImpl extends SessionLoggerSavingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -1024,6 +1197,7 @@ class _$SessionLoggerSavingStateImpl extends SessionLoggerSavingState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
     required TResult Function(SessionLoggerUpdatedState value) updated,
     required TResult Function(SessionLoggerSavingState value) saving,
     required TResult Function(SessionLoggerSavedState value) saved,
@@ -1036,6 +1210,7 @@ class _$SessionLoggerSavingStateImpl extends SessionLoggerSavingState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
     TResult? Function(SessionLoggerUpdatedState value)? updated,
     TResult? Function(SessionLoggerSavingState value)? saving,
     TResult? Function(SessionLoggerSavedState value)? saved,
@@ -1048,6 +1223,7 @@ class _$SessionLoggerSavingStateImpl extends SessionLoggerSavingState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
     TResult Function(SessionLoggerUpdatedState value)? updated,
     TResult Function(SessionLoggerSavingState value)? saving,
     TResult Function(SessionLoggerSavedState value)? saved,
@@ -1162,7 +1338,7 @@ class __$$SessionLoggerSavedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
-  _$SessionLoggerSavedStateImpl(
+  const _$SessionLoggerSavedStateImpl(
       {required this.oldProfile,
       required this.session,
       required this.updatedProfile})
@@ -1209,6 +1385,7 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)
         updated,
@@ -1227,6 +1404,7 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -1245,6 +1423,7 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -1267,6 +1446,7 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
     required TResult Function(SessionLoggerUpdatedState value) updated,
     required TResult Function(SessionLoggerSavingState value) saving,
     required TResult Function(SessionLoggerSavedState value) saved,
@@ -1279,6 +1459,7 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
     TResult? Function(SessionLoggerUpdatedState value)? updated,
     TResult? Function(SessionLoggerSavingState value)? saving,
     TResult? Function(SessionLoggerSavedState value)? saved,
@@ -1291,6 +1472,7 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
     TResult Function(SessionLoggerUpdatedState value)? updated,
     TResult Function(SessionLoggerSavingState value)? saving,
     TResult Function(SessionLoggerSavedState value)? saved,
@@ -1305,11 +1487,11 @@ class _$SessionLoggerSavedStateImpl extends SessionLoggerSavedState {
 }
 
 abstract class SessionLoggerSavedState extends SessionLoggerState {
-  factory SessionLoggerSavedState(
+  const factory SessionLoggerSavedState(
       {required final Profile oldProfile,
       required final Session session,
       required final Profile updatedProfile}) = _$SessionLoggerSavedStateImpl;
-  SessionLoggerSavedState._() : super._();
+  const SessionLoggerSavedState._() : super._();
 
   Profile get oldProfile;
   Session get session;
@@ -1347,7 +1529,7 @@ class __$$SessionLoggerErrorStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
-  _$SessionLoggerErrorStateImpl() : super._();
+  const _$SessionLoggerErrorStateImpl() : super._();
 
   @override
   String toString() {
@@ -1368,6 +1550,7 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)
         updated,
@@ -1386,6 +1569,7 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -1404,6 +1588,7 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(
             Profile oldProfile, Session session, Profile updatedProfile)?
         updated,
@@ -1426,6 +1611,7 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SessionLoggerInitialState value) initial,
+    required TResult Function(SessionLoggerLoadingState value) loading,
     required TResult Function(SessionLoggerUpdatedState value) updated,
     required TResult Function(SessionLoggerSavingState value) saving,
     required TResult Function(SessionLoggerSavedState value) saved,
@@ -1438,6 +1624,7 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SessionLoggerInitialState value)? initial,
+    TResult? Function(SessionLoggerLoadingState value)? loading,
     TResult? Function(SessionLoggerUpdatedState value)? updated,
     TResult? Function(SessionLoggerSavingState value)? saving,
     TResult? Function(SessionLoggerSavedState value)? saved,
@@ -1450,6 +1637,7 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SessionLoggerInitialState value)? initial,
+    TResult Function(SessionLoggerLoadingState value)? loading,
     TResult Function(SessionLoggerUpdatedState value)? updated,
     TResult Function(SessionLoggerSavingState value)? saving,
     TResult Function(SessionLoggerSavedState value)? saved,
@@ -1464,6 +1652,6 @@ class _$SessionLoggerErrorStateImpl extends SessionLoggerErrorState {
 }
 
 abstract class SessionLoggerErrorState extends SessionLoggerState {
-  factory SessionLoggerErrorState() = _$SessionLoggerErrorStateImpl;
-  SessionLoggerErrorState._() : super._();
+  const factory SessionLoggerErrorState() = _$SessionLoggerErrorStateImpl;
+  const SessionLoggerErrorState._() : super._();
 }

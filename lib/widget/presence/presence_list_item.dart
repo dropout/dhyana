@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 class PresenceListItem extends StatelessWidget {
 
   final Presence presence;
+  final Color textColor;
 
   const PresenceListItem({
     required this.presence,
+    this.textColor = Colors.black,
     super.key
   });
 
@@ -34,8 +36,7 @@ class PresenceListItem extends StatelessWidget {
         Text(
           presence.profile.firstName,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
-            color: Colors.black,
-            // fontWeight: FontWeight.bold
+            color: textColor,
           ),
         ),
         Gap.medium(),

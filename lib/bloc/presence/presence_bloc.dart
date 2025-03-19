@@ -30,7 +30,6 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
   }
 
   void _onLoadPresenceData(LoadPresenceData event, emit) async {
-    logger.t('Loading presence data');
     try {
       emit(PresenceState.loading());
       List<Presence> presenceList = await presenceRepository
@@ -52,7 +51,6 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
 
   void _onLoadMorePresenceData(LoadMorePresenceData event, emit) async {
     try {
-      logger.t('Loading more presence data');
 
       // Get existing presence list
       List<Presence> existingPresenceList = [];
@@ -89,8 +87,6 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
         reason: 'Unable to load MORE presence data'
       );
     }
-
-
   }
 
   void _onShowPresence(ShowPresence event, emit) async {

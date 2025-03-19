@@ -7,9 +7,11 @@ import 'presence_list_item.dart';
 class PresenceList extends StatelessWidget {
 
   final List<Presence> presenceList;
+  final Color textColor;
 
   const PresenceList({
     required this.presenceList,
+    this.textColor = Colors.black,
     super.key
   });
 
@@ -19,7 +21,10 @@ class PresenceList extends StatelessWidget {
       runSpacing: AppThemeData.spacingLg,
       spacing: AppThemeData.spacingLg,
       children: presenceList.map(
-        (p) => PresenceListItem(presence: p)
+        (p) => PresenceListItem(
+          presence: p,
+          textColor: textColor,
+        )
       ).toList(),
     );
   }

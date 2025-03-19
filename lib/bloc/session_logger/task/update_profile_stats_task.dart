@@ -57,6 +57,18 @@ class UpdateProfileStatsTask {
       session,
     );
 
+    // Check if a milestone has been completed
+    int prevMileStoneCount = oldStatsReport.milestoneProgress.completedDaysCount;
+    int newMileStoneCount = updatedStatsReport.milestoneProgress.completedDaysCount;
+    int targetMileStoneCount = updatedStatsReport.milestoneProgress.targetDaysCount;
+    if (prevMileStoneCount == (targetMileStoneCount - 1) &&
+     newMileStoneCount == targetMileStoneCount) {
+      updatedStatsReport = updatedStatsReport.copyWith(
+        milestoneCount: updatedStatsReport.milestoneCount + 1,
+      );
+      logger.t('Milestone completed');
+    }
+
     // Add session results to stats
     updatedStatsReport = updatedStatsReport.copyWith(
       lastSessionDate: session.startTime,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'session_result.dart';
 
-class SignedOutCompletedView extends StatefulWidget {
+class SignedOutCompletedView extends StatelessWidget {
 
   final TimerState timerState;
 
@@ -13,18 +13,15 @@ class SignedOutCompletedView extends StatefulWidget {
   });
 
   @override
-  State<SignedOutCompletedView> createState() => _SignedOutCompletedViewState();
-}
-
-class _SignedOutCompletedViewState extends State<SignedOutCompletedView> {
-  @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SessionResult(
-          timerState: widget.timerState
+          timerState: timerState
         )
       ],
     );
   }
+
 }

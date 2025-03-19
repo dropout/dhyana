@@ -39,6 +39,7 @@ class SessionLoggerBloc extends Bloc<SessionLoggerEvent, SessionLoggerState> {
     Emitter<SessionLoggerState> emit
   ) async {
     try {
+      emit(const SessionLoggerState.loading());
 
       // Load an up-to-date profile
       // Assemble session

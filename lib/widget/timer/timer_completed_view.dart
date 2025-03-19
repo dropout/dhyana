@@ -36,15 +36,13 @@ class TimerCompletedView extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         if (timerState.timerStatus == TimerStatus.completed)
-          SingleChildScrollView(
-            child: SignedIn(
-              yes: (_, profileId) => buildSignedInView(
-                context,
-                timerState,
-                profileId,
-              ),
-              no: buildSignedOutView(context, timerState),
+          SignedIn(
+            yes: (_, profileId) => buildSignedInView(
+              context,
+              timerState,
+              profileId,
             ),
+            no: buildSignedOutView(context, timerState),
           ),
         buildBottomArea(context),
       ],

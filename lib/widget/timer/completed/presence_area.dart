@@ -66,38 +66,13 @@ class _PresenceAreaState extends State<PresenceArea> {
               const SizedBox(height: AppThemeData.spacingLg),
               PresenceList(
                 presenceList: state.presenceList,
+                textColor: Colors.white,
               ),
               const SizedBox(height: AppThemeData.spacingLg),
-              buildTotalCountDisplay(context),
             ],
           )
         ),
       ],
-    );
-  }
-
-  Widget buildItem(BuildContext context) {
-    return Column(
-      children: [
-        ProfileImage.fromProfile(Profile.anonymous(), size: 48),
-        const SizedBox(height: AppThemeData.spacingSm),
-        Text(
-          'Boddhisatva',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-            color: Colors.white,
-            // fontWeight: FontWeight.bold
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget buildTotalCountDisplay(BuildContext context) {
-    return const Text(
-      'and 32 more...',
-      style: TextStyle(
-        color: Colors.white,
-      ),
     );
   }
 
