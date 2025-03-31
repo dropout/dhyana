@@ -1,5 +1,4 @@
 import 'package:dhyana/bloc/session_logger/session_logger_bloc.dart';
-import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/timer/completed/signed_in_completed_view.dart';
@@ -10,7 +9,6 @@ import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TimerCompletedView extends StatelessWidget {
@@ -85,7 +83,7 @@ class TimerCompletedView extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            height: 96,
+            height: 160,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -98,8 +96,9 @@ class TimerCompletedView extends StatelessWidget {
               )
             )
           ),
-          Padding(
-            padding: const EdgeInsets.all(AppThemeData.spacingMd),
+          SafeArea(
+            // padding: const EdgeInsets.all(AppThemeData.spacingMd),
+            top: false,
             child: AppButton(
               onTap: () => _onOkayButtonPressed(context),
               text: AppLocalizations.of(context).okay.toUpperCase(),

@@ -68,6 +68,7 @@ class _TimerScreenState extends State<TimerScreen> {
       builder: (BuildContext context, TimerState timerState) {
         return Scaffold(
           backgroundColor: Colors.black,
+          extendBodyBehindAppBar: true,
           body: Stack(
             fit: StackFit.expand,
             clipBehavior: Clip.none,
@@ -82,13 +83,6 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   Widget buildContent(BuildContext context, TimerState timerState) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-    ThemeData themeData = Theme.of(context).copyWith(
-      textTheme: textTheme.apply(
-        bodyColor: Colors.white,
-        displayColor: Colors.white,
-      )
-    );
 
     final bool isCompleted = (timerState.timerStatus == TimerStatus.completed);
     CrossFadeState crossFadeState;
@@ -102,51 +96,47 @@ class _TimerScreenState extends State<TimerScreen> {
       clipBehavior: Clip.none,
       children: [
         buildOverlayClickTarget(context),
-        SafeArea(
-          child: Theme(
-            data: themeData,
-            child: AnimatedCrossFade(
-              duration: const Duration(milliseconds: 256),
-              crossFadeState: crossFadeState,
+        AnimatedCrossFade(
+          duration: Durations.extralong1,
+          crossFadeState: crossFadeState,
+          firstCurve: Curves.easeOutQuad,
+          secondCurve: Curves.easeInQuad,
 
-              firstChild: TimerRunningView(
-                timerState: timerState,
-                onBackground: _onBackground(context),
-                onResume: _onResume(context),
-              ),
-
-              secondChild: TimerCompletedView(
-                timerSettings: widget.timerSettings,
-                timerState: timerState,
-              ),
-
-              layoutBuilder: (
-                Widget firstChild,
-                Key firstKey,
-                Widget secondChild,
-                Key secondKey,
-              ) {
-                return Stack(
-                  alignment: Alignment.center,
-                  fit: StackFit.expand,
-                  clipBehavior: Clip.none,
-                  children: <Widget>[
-                    Positioned.fill(
-                      key: secondKey,
-                      top: 0,
-                      child: secondChild,
-                    ),
-                    Positioned.fill(
-                      key: firstKey,
-                      top: 0,
-                      child: firstChild,
-                    ),
-                  ],
-                );
-              },
-
-            )
+          firstChild: TimerRunningView(
+            timerState: timerState,
+            onBackground: _onBackground(context),
+            onResume: _onResume(context),
           ),
+
+          secondChild: TimerCompletedView(
+            timerSettings: widget.timerSettings,
+            timerState: timerState,
+          ),
+
+          layoutBuilder: (
+            Widget firstChild,
+            Key firstKey,
+            Widget secondChild,
+            Key secondKey,
+          ) {
+            return Stack(
+              fit: StackFit.expand,
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                Positioned.fill(
+                  key: secondKey,
+                  top: 0,
+                  child: secondChild,
+                ),
+                Positioned.fill(
+                  key: firstKey,
+                  top: 0,
+                  child: firstChild,
+                ),
+              ],
+            );
+          },
+
         ),
       ],
     );
