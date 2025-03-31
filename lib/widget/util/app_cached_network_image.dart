@@ -1,17 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
-import 'package:provider/provider.dart';
 class AppCachedNetworkImage extends StatelessWidget {
 
   final Future<String> imageUrl;
   final String blurHash;
+  final bool circular;
 
   const AppCachedNetworkImage({
     required this.imageUrl,
     required this.blurHash,
+    this.circular = false,
     super.key,
   });
 
@@ -27,12 +29,17 @@ class AppCachedNetworkImage extends StatelessWidget {
   }
 
   Widget buildPlaceHolder(BuildContext context, String blurHash) {
-    return SizedBox.expand(
+    if (circular) {
+      return buildCircularImage(context, BlurHashImage(blurHash));
+    } else {
+      return SizedBox.expand(
         child: Image(
           fit: BoxFit.cover,
           image: BlurHashImage(blurHash),
         )
-    );
+      );
+    }
+
   }
 
   Widget buildCachedNetworkImage(BuildContext context, Future<String> imageUrl) {
@@ -41,11 +48,10 @@ class AppCachedNetworkImage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             String imageUrl = snapshot.data!;
-            CrashlyticsService crashlyticsService =
-            Provider.of<CrashlyticsService>(context, listen: false);
             return _CustomCachedNetworkImage(
               imageUrl: imageUrl,
-              crashlyticsService: crashlyticsService,
+              crashlyticsService: context.services.crashlyticsService,
+              circular: circular,
             );
           } else if (snapshot.hasError) {
             return buildError(context, blurHash);
@@ -77,10 +83,12 @@ class _CustomCachedNetworkImage extends StatefulWidget {
 
   final String imageUrl;
   final CrashlyticsService crashlyticsService;
+  final bool circular;
 
   const _CustomCachedNetworkImage({
     required this.imageUrl,
     required this.crashlyticsService,
+    this.circular = false,
   });
 
   @override
@@ -127,23 +135,35 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
+    if (widget.circular) {
+      return AnimatedOpacity(
         opacity: isLoading ? 0.0 : 1.0,
-        duration: const Duration(milliseconds: 512),
-        child: Image(
-          fit: BoxFit.cover,
-          image: imageProvider,
-          errorBuilder: (context, error, stackTrace) {
-            context.recordError(error, stackTrace, 'Unable to display image');
-            return const Center(
+        duration: Durations.short4,
+        child: buildCircularImage(context, imageProvider),
+      );
+    } else {
+      return AnimatedOpacity(
+          opacity: isLoading ? 0.0 : 1.0,
+          duration: Durations.short4,
+          child: Image(
+            fit: BoxFit.cover,
+            image: imageProvider,
+            errorBuilder: (context, error, stackTrace) {
+              context.recordError(error, stackTrace, 'Unable to display image');
+              return const Center(
                 child: Icon(
                   Icons.broken_image_rounded,
                 )
-            );
-          },
-        )
-    );
+              );
+            },
+          )
+      );
+    }
+
+
   }
+
+
 
   @override
   void dispose() {

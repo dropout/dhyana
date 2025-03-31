@@ -237,7 +237,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     final double pinnedHeaderHeight = statusBarHeight + kToolbarHeight;
     return ExtendedNestedScrollView(
       controller: scrollController,
-      physics: const AlwaysScrollableScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return headerSlivers;
       },
@@ -326,7 +326,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     return ExtendedVisibilityDetector(
       uniqueKey: Key(pageStorageKeyId),
       child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         key: PageStorageKey<String>(pageStorageKeyId),
         child: child,
       ),

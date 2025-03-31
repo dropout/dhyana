@@ -331,6 +331,21 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
+      other: 'days',
+      many: 'days',
+      few: 'days',
+      two: 'days',
+      one: 'day',
+      zero: 'day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String daysPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
       other: '$count days',
       many: '$count days',
       few: '$count days',
@@ -370,4 +385,16 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get thousand => 'thousand';
+
+  @override
+  String get thousandShort => 'k';
+
+  @override
+  String get million => 'million';
+
+  @override
+  String get millionShort => 'm';
 }

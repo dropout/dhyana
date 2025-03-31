@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/default_profile_data.dart';
+import 'package:dhyana/widget/util/app_cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 
 class ProfileImage extends StatelessWidget {
 
@@ -38,13 +37,10 @@ class ProfileImage extends StatelessWidget {
     return SizedBox(
       width: size,
       height: size,
-      child: CachedNetworkImage(
-        imageUrl: photoUrl,
-        imageBuilder: (context, imageProvider) =>
-          buildCircularImage(context, imageProvider),
-        placeholder: (context, _) =>
-          buildCircularImage(context, BlurHashImage(photoBlurhash)),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+      child: AppCachedNetworkImage(
+        imageUrl: Future.value(photoUrl),
+        blurHash: photoBlurhash,
+        circular: true,
       ),
     );
   }

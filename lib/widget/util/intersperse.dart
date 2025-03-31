@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-Iterable<Widget> _intersperseWidgets(Widget widget, Iterable<Widget> iterable) sync* {
+Iterable<Widget> _intersperseWidgets(
+  Widget widget,
+  Iterable<Widget> iterable
+) sync* {
   yield* _intersperse<Widget>(widget, iterable);
 }
 

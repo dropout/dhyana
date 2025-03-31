@@ -590,8 +590,14 @@ abstract class AppLocalizations {
   /// No description provided for @daysPlural.
   ///
   /// In hu, this message translates to:
-  /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}'**
+  /// **'{count, plural, =0{nap} =1{nap} =2{nap} few{nap} many{nap} other{nap}}'**
   String daysPlural(num count);
+
+  /// No description provided for @daysPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}'**
+  String daysPluralWithNumber(num count);
 
   /// No description provided for @consecutiveDaysPlural.
   ///
@@ -604,6 +610,30 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
   String consecutiveDaysPluralWithNumber(num count);
+
+  /// No description provided for @thousand.
+  ///
+  /// In hu, this message translates to:
+  /// **'ezer'**
+  String get thousand;
+
+  /// No description provided for @thousandShort.
+  ///
+  /// In hu, this message translates to:
+  /// **'e'**
+  String get thousandShort;
+
+  /// No description provided for @million.
+  ///
+  /// In hu, this message translates to:
+  /// **'millió'**
+  String get million;
+
+  /// No description provided for @millionShort.
+  ///
+  /// In hu, this message translates to:
+  /// **'m'**
+  String get millionShort;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

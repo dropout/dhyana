@@ -28,6 +28,7 @@ dependencies:
   vector_math: ^2.1.4
   collection: ^1.19.0
   faker: ^2.2.0
+  rnd: 0.2.0
 
   # Ui
   flutter_animate: ^4.2.0
@@ -39,6 +40,7 @@ dependencies:
   flutter_blurhash: ^0.8.2
   flutter_shaders: ^0.1.2
   extended_nested_scroll_view: ^6.2.1
+  flip_board: ^1.0.0
 
   # Additional functionalities
   audioplayers: ^6.0.0
@@ -68,6 +70,8 @@ dependencies:
 
   bar_chart:
     path: packages/bar_chart
+  particle_field:
+    path: packages/particle_field
 
 dev_dependencies:
   flutter_test:

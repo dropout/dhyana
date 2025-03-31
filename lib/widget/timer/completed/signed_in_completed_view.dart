@@ -1,12 +1,12 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/session_logger/session_logger_bloc.dart';
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/profile/stats/consecutive_days_display.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
+import 'package:dhyana/widget/timer/completed/milestone_progress.dart';
+import 'package:dhyana/widget/timer/completed/progress_summary.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/separator_gem.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,9 +55,17 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
           case SessionLoggerErrorState():
             return buildError(context);
           case SessionLoggerSavingState():
-            return buildLoaded(context, state.updatedProfile);
+            return buildLoaded(
+              context,
+              state.oldProfile,
+              state.updatedProfile,
+            );
           case SessionLoggerSavedState():
-            return buildLoaded(context, state.updatedProfile);
+            return buildLoaded(
+              context,
+              state.oldProfile,
+              state.updatedProfile,
+            );
           default:
             return SizedBox.shrink();
         }
@@ -73,36 +81,39 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
     return const AppErrorDisplay();
   }
 
-  Widget buildSeparator(BuildContext context, {
-    EdgeInsets padding = const EdgeInsets.symmetric(
-      vertical: AppThemeData.spacingLg
-    ),
-  }) {
-    return SeparatorGem(
-      count: 1,
-      gemSize: 12,
-      padding: padding,
-      color: Colors.white,
-    );
-  }
-
-  Widget buildLoaded(BuildContext context, Profile profile) {
+  Widget buildLoaded(
+    BuildContext context,
+    Profile oldProfile,
+    Profile updatedProfile,
+  ) {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: AppThemeData.spacing2xl),
+          Gap.xxl(),
           SessionResult(
             timerState: widget.timerState,
-            profile: profile,
+            profile: updatedProfile,
           ),
-          const SizedBox(height: AppThemeData.spacingLg),
-          WeeklyPerformance(
-            profile: profile,
+          Gap.large(),
+          MilestoneProgress(
+            oldProfile: oldProfile,
+            updatedProfile: updatedProfile,
           ),
-          const SizedBox(height: AppThemeData.spacing2xl),
-          PresenceArea(profile: profile),
-          const SizedBox(height: AppThemeData.spacing4xl),
+          Gap.large(),
+          ProgressSummary(
+            oldProfile: oldProfile,
+            updatedProfile: updatedProfile,
+          ),
+          Gap.xxl(),
+          PresenceArea(
+            profile: updatedProfile
+          ),
+          SizedBox(
+            // as per size of bottom area gradient
+            // see timer_screen.dart
+            height: 160,
+          ),
         ]
       ),
     );

@@ -6,7 +6,6 @@ import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days_display.dart';
-import 'package:dhyana/widget/timer/completed/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/gap.dart';

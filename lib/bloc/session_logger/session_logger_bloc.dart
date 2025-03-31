@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:dhyana/bloc/session_logger/task/update_profile_stats_task.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/session.dart';
@@ -8,6 +7,7 @@ import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
@@ -41,8 +41,7 @@ class SessionLoggerBloc extends Bloc<SessionLoggerEvent, SessionLoggerState> {
     try {
       emit(const SessionLoggerState.loading());
 
-      // Load an up-to-date profile
-      // Assemble session
+      // Load an up-to-date profile and assemble a session object
       Profile profile = await profileRepository.read(event.profileId);
       Session session = Session(
         id: idGeneratorService.sessionId(profile.id),

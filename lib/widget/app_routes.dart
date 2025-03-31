@@ -48,7 +48,7 @@ class TimerRoute extends GoRouteData {
   const TimerRoute({required this.$extra});
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    Duration transitionDuration = const Duration(milliseconds: 512);
+    Duration transitionDuration = Durations.long1;
     return CustomTransitionPage(
       transitionDuration: transitionDuration,
       reverseTransitionDuration: transitionDuration,
@@ -64,7 +64,7 @@ class TimerRoute extends GoRouteData {
         Widget child,
       ) {
         return LinearGradientMaskTransition(
-          progress: animation,
+          progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
           shader: context.services.shaderService.get('shaders/linear_gradient_mask.frag'),
           child: child,
         );

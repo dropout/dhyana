@@ -17,13 +17,13 @@ part 'timer_bloc.freezed.dart';
 
     Manages business logic of a timed session.
 
-    Details:
-    1. phase (optional): warmup timer
-    2. phase: actual session timer
-
     Functionality:
     - Timer: start, pause, resume, finish, reset
     - Audio: play starting sound, play ending sound
+
+    Details:
+    1. phase (optional): warmup timer
+    2. phase: actual session timer
 
  */
 class TimerBloc extends Bloc<TimerEvent, TimerState> {

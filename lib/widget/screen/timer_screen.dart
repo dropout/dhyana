@@ -83,60 +83,25 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   Widget buildContent(BuildContext context, TimerState timerState) {
-
     final bool isCompleted = (timerState.timerStatus == TimerStatus.completed);
-    CrossFadeState crossFadeState;
-    if (isCompleted) {
-      crossFadeState = CrossFadeState.showSecond;
-    } else {
-      crossFadeState = CrossFadeState.showFirst;
-    }
-
     return Stack(
       clipBehavior: Clip.none,
       children: [
         buildOverlayClickTarget(context),
-        AnimatedCrossFade(
-          duration: Durations.extralong1,
-          crossFadeState: crossFadeState,
-          firstCurve: Curves.easeOutQuad,
-          secondCurve: Curves.easeInQuad,
-
-          firstChild: TimerRunningView(
-            timerState: timerState,
-            onBackground: _onBackground(context),
-            onResume: _onResume(context),
-          ),
-
-          secondChild: TimerCompletedView(
-            timerSettings: widget.timerSettings,
-            timerState: timerState,
-          ),
-
-          layoutBuilder: (
-            Widget firstChild,
-            Key firstKey,
-            Widget secondChild,
-            Key secondKey,
-          ) {
-            return Stack(
-              fit: StackFit.expand,
-              clipBehavior: Clip.none,
-              children: <Widget>[
-                Positioned.fill(
-                  key: secondKey,
-                  top: 0,
-                  child: secondChild,
-                ),
-                Positioned.fill(
-                  key: firstKey,
-                  top: 0,
-                  child: firstChild,
-                ),
-              ],
-            );
-          },
-
+        AnimatedSwitcher(
+          duration: Durations.extralong4,
+          switchInCurve: Curves.easeOutCubic,
+          switchOutCurve: Curves.easeInCubic,
+          child: isCompleted
+            ? TimerCompletedView(
+                timerSettings: widget.timerSettings,
+                timerState: timerState,
+              )
+            : TimerRunningView(
+                timerState: timerState,
+                onBackground: _onBackground(context),
+                onResume: _onResume(context),
+              ),
         ),
       ],
     );

@@ -605,6 +605,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flip_board:
+    dependency: "direct main"
+    description:
+      name: flip_board
+      sha256: "5b3bb7cebc7daa3b950be773a910cca40ff1516972dfb7dd4c5c5d58c94b4416"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -1089,6 +1097,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  particle_field:
+    dependency: "direct main"
+    description:
+      path: "packages/particle_field"
+      relative: true
+    source: path
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -1257,6 +1272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  rnd:
+    dependency: "direct main"
+    description:
+      name: rnd
+      sha256: "87799a8c447da2e728096264b2cc13679a11af49f0504331f4d588986a371fcf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   rxdart:
     dependency: transitive
     description:
@@ -1767,5 +1790,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.7.0-0 <4.0.0"
+  dart: ">=3.7.0 <4.0.0"
   flutter: ">=3.24.0"

@@ -1,14 +1,10 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/consecutive_days.dart';
 import 'package:dhyana/model/milestone_progress.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
-import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class MilestonesDisplay extends StatefulWidget {
 

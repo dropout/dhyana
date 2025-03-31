@@ -31,12 +31,16 @@ class TimerBlocProviders extends StatelessWidget {
         final bool isSignedIn = (authState is AuthStateSignedIn);
         final String? profileId = (isSignedIn) ? authState.user.uid : null;
 
+        print('szar');
+
         return MultiBlocProvider(
           providers: [
             BlocProvider<TimerBloc>(
               create: (BuildContext context) {
                 final TimerBloc timerBloc = TimerBloc(
-                  timerSettings: timerSettings,
+                  timerSettings: timerSettings.copyWith(
+                    duration: Duration(seconds: 3),
+                  ),
                   timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
                       DefaultTimerService.new
                   ),
@@ -46,7 +50,6 @@ class TimerBlocProviders extends StatelessWidget {
 
                 // Start the timer
                 timerBloc.add(const TimerEvent.started());
-
                 return timerBloc;
               },
               lazy: false,

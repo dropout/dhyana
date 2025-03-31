@@ -7,7 +7,6 @@ export 'metrics.dart';
 export 'milestones_display.dart';
 export 'months_stats_view.dart';
 export 'performance_in_numbers_display.dart';
-export 'statistics_detail_tile.dart';
 export 'stats_interval_display.dart';
 export 'stats_text.dart';
 export 'stats_view_mixin.dart';

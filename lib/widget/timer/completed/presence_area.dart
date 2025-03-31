@@ -3,8 +3,7 @@ import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/presence/presence_list.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/util/separator_gem.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,25 +51,14 @@ class _PresenceAreaState extends State<PresenceArea> {
 
     return Column(
       children: [
-        const SeparatorGem(count: 0, padding: EdgeInsets.all(AppThemeData.spacingMd),),
+        Icon(Icons.public_rounded, color: Colors.grey.shade400),
+        Gap.xxl(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
-          child: Column(
-            children: [
-              Text('Here, now',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
-                  // fontWeight: FontWeight.bold
-                ),
-              ),
-              const SizedBox(height: AppThemeData.spacingLg),
-              PresenceList(
-                presenceList: state.presenceList,
-                textColor: Colors.white,
-              ),
-              const SizedBox(height: AppThemeData.spacingLg),
-            ],
-          )
+          child: PresenceList(
+            presenceList: state.presenceList,
+            textColor: Colors.white,
+          ),
         ),
       ],
     );
