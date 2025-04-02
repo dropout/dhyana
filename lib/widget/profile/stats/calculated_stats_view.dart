@@ -41,7 +41,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
                 child: StatsNumValueText(
                   value: calculatedStats.totalSessions,
                   postFix: ' ${AppLocalizations.of(context).sessionsPlural(calculatedStats.totalSessions)}'),
-                order: 0,
+                  order: 0,
               ),
             ),
             Gap.medium(),

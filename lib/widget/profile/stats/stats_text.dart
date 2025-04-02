@@ -15,6 +15,29 @@ class StatsDurationText extends StatelessWidget {
     int hours = duration.inHours;
     int minutes = duration.inMinutes.remainder(60);
 
+    if (duration.inMinutes < 1) {
+      return RichText(
+        text: TextSpan(
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: Colors.black,
+          ),
+          children: [
+            TextSpan(
+              text: '0 ',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextSpan(
+              text: AppLocalizations.of(context).minute.toLowerCase(),
+              style: Theme.of(context).textTheme.titleMedium
+            ),
+          ]
+        )
+      );
+    }
+
     return RichText(
       text: TextSpan(
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -42,7 +65,7 @@ class StatsDurationText extends StatelessWidget {
             ),
           ),
           if (minutes > 0) TextSpan(
-              text: '${AppLocalizations.of(context).minutesAbbr}',
+              text: AppLocalizations.of(context).minutesAbbr,
               style: Theme.of(context).textTheme.titleMedium
           ),
         ]
