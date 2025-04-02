@@ -29,7 +29,6 @@ class _DaysStatsViewState extends State<DaysStatsView> {
 
   // Intervals
   late final List<StatsInterval> intervals;
-  late StatsInterval selectedInterval;
 
   // Overlay
   OverlayEntry? overlayEntry;
@@ -42,12 +41,11 @@ class _DaysStatsViewState extends State<DaysStatsView> {
   @override
   void initState() {
     intervals = StatsInterval.generateDayIntervals(DateTime.now());
-    selectedInterval = intervals[0];
     // BlocProvider.of is safe to use in initState
     // https://github.com/felangel/bloc/issues/210
     BlocProvider.of<StatsIntervalBloc>(context).add(
       StatsIntervalEvent.changed(
-        statsInterval: selectedInterval
+        statsInterval: intervals[0]
       )
     );
     super.initState();
@@ -96,8 +94,8 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                           crashlyticsService: context.services.crashlyticsService
                         )..add(DaysEvent.queryDays(
                           profileId: widget.profile.id,
-                          from: selectedInterval.from,
-                          to: selectedInterval.to,
+                          from: intervals[index].from,
+                          to: intervals[index].to,
                         ));
                       },
                       child: DaysStatsBarChartPage(

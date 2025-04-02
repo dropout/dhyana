@@ -21,10 +21,10 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
     required this.statisticsRepository,
     required this.crashlyticsService,
   }) : super(const DaysState.loading()) {
-    on<QueryDaysEvent>(_onGetDaysEvent);
+    on<QueryDaysEvent>(_onQueryDaysEvent);
   }
 
-  void _onGetDaysEvent(QueryDaysEvent event, emit) async {
+  void _onQueryDaysEvent(QueryDaysEvent event, emit) async {
     try {
       logger.t('Loading days: ${event.from} ... ${event.to}');
       emit(const DaysState.loading());

@@ -42,6 +42,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
       },
       listener: (context, state) {
         if (state is DaysLoadedState) {
+          print(state);
           onDaysLoaded?.call(state.days);
         }
       },
