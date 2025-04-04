@@ -134,7 +134,7 @@ class _StatsBarChartState extends State<StatsBarChart> {
       padding: const EdgeInsets.all(24.0),
       child: BarChart(
         dataSource: widget.barData,
-        displayRangeSetter: (max) => 90,
+        displayRangeSetter: (max) => 180,
         axisBuilder: (context, barChartContext) {
           return DefaultBarChartAxis(
             barPadding: barPadding,

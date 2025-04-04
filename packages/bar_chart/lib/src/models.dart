@@ -49,7 +49,6 @@ class BarChartContext {
     min = dataSource.isEmpty ? 0 : dataSource.map((data) => data.value).reduce(math.min),
     avg = dataSource.isEmpty ? 0 : dataSource.map((data) => data.value).reduce((a, b) => a + b) / dataSource.length;
 
-
   List<BarData> get dataSource => _dataSource;
 
   double get displayRange => displayRangeSetter(max);
@@ -79,7 +78,6 @@ class BarData {
   const BarData({
     required this.value,
     required this.label,
-
   });
 
   @override

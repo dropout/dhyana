@@ -18,6 +18,7 @@ class AxisPainter extends CustomPainter {
   final XAxisLabelFormatter xAxisLabelFormatter;
 
   final bool showLabelOnAverage;
+  final double displayRange;
 
   AxisPainter({
     required this.barPadding,
@@ -26,6 +27,7 @@ class AxisPainter extends CustomPainter {
     required this.xAxisLabelFormatter,
     required this.yAxisLabelFormatter,
     required this.color,
+    required this.displayRange,
     required this.barChartContext,
     this.showLabelOnAverage = true,
   }) {
@@ -63,8 +65,8 @@ class AxisPainter extends CustomPainter {
     Offset offset,
     Size s
   ) {
-    final double valueToPixelRatio = s.height / barChartContext.displayRange;
-    final int lineCount = barChartContext.displayRange ~/ yIntervalCount;
+    final double valueToPixelRatio = s.height / displayRange;
+    final int lineCount = displayRange ~/ yIntervalCount;
     int i = 0;
     while (i <= lineCount) {
       final double y = s.height - (i * yIntervalCount) * valueToPixelRatio;

@@ -403,24 +403,64 @@ class DefaultBarChartAxis extends StatefulWidget {
   State<DefaultBarChartAxis> createState() => _DefaultBarChartAxisState();
 }
 
-class _DefaultBarChartAxisState extends State<DefaultBarChartAxis> {
+class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
+  with SingleTickerProviderStateMixin {
+
+  late final AnimationController animationController;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    animationController = AnimationController(
+      vsync: this,
+      duration: Durations.long2,
+    );
+
+    animation = Tween(begin: 90.0, end: widget.barChartContext.displayRange)
+      .chain(CurveTween(curve: Curves.easeInOutCubicEmphasized))
+      .animate(animationController);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant DefaultBarChartAxis oldWidget) {
+    if (widget.barChartContext.displayRange != oldWidget.barChartContext.displayRange) {
+      animation = Tween(
+        begin: oldWidget.barChartContext.displayRange,
+        end: widget.barChartContext.displayRange
+      ).chain(CurveTween(curve: Curves.easeInOutCubicEmphasized)).animate(animationController);
+      animationController.reset();
+      animationController.forward();
+    }
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: AxisPainter(
-        xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
-        yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
-        xAxisLabelFormatter: widget.xAxisLabelFormatter,
-        yAxisLabelFormatter: widget.yAxisLabelFormatter,
-        color: widget.color,
-        barChartContext: widget.barChartContext,
-        barPadding: widget.barPadding,
-        showLabelOnAverage: widget.showLabelOnAverage,
-      ),
+    return AnimatedBuilder(
+      animation: animationController,
+      builder: (context, _) {
+        return CustomPaint(
+          painter: AxisPainter(
+            xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
+            yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
+            xAxisLabelFormatter: widget.xAxisLabelFormatter,
+            yAxisLabelFormatter: widget.yAxisLabelFormatter,
+            color: widget.color,
+            displayRange: animation.value,
+            barChartContext: widget.barChartContext,
+            barPadding: widget.barPadding,
+            showLabelOnAverage: widget.showLabelOnAverage,
+          ),
+        );
+      },
     );
   }
-}
 
+}
 
 class AverageBarChartOverlay extends StatefulWidget {
 
@@ -451,11 +491,11 @@ class _AverageBarChartOverlayState extends State<AverageBarChartOverlay>
       duration: Durations.long2,
     );
     lineProgressAnimation = Tween(begin: 0.0, end: 1.0)
-        .chain(CurveTween(curve: Curves.easeOutExpo))
-        .animate(CurvedAnimation(parent: animationController, curve: Interval(0.0, 0.5)));
+      .chain(CurveTween(curve: Curves.easeOutExpo))
+      .animate(CurvedAnimation(parent: animationController, curve: Interval(0.0, 0.5)));
     textOpacityAnimation = Tween(begin: 0.0, end: 1.0)
-        .chain(CurveTween(curve: Curves.easeOutExpo))
-        .animate(CurvedAnimation(parent: animationController, curve: Interval(0.5, 1.0)));
+      .chain(CurveTween(curve: Curves.easeOutExpo))
+      .animate(CurvedAnimation(parent: animationController, curve: Interval(0.5, 1.0)));
     super.initState();
   }
 
