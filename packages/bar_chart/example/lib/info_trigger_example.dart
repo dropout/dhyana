@@ -128,15 +128,12 @@ class _BarChartExamplePageState extends State<BarChartExamplePage> {
                               barChartContext: barChartContext,
                               onInfoTriggered: (index, data) {
                                 showOverlay(context, testWeekData[index]);
-                                print('onInfoTriggered: $data');
                               },
                               onInfoChanged: (index, data) {
                                 updateOverlay(context, testWeekData[index]);
-                                print('onInfoChanged: $data');
                               },
                               onInfoDismissed: (index, data) {
                                 hideOverlay(context);
-                                print('onInfoDismissed $data');
                               },
                             );
                           },

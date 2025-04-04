@@ -31,8 +31,6 @@ class TimerBlocProviders extends StatelessWidget {
         final bool isSignedIn = (authState is AuthStateSignedIn);
         final String? profileId = (isSignedIn) ? authState.user.uid : null;
 
-        print('szar');
-
         return MultiBlocProvider(
           providers: [
             BlocProvider<TimerBloc>(

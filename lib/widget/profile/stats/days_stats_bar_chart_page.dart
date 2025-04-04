@@ -42,7 +42,6 @@ class DaysStatsBarChartPage extends StatelessWidget {
       },
       listener: (context, state) {
         if (state is DaysLoadedState) {
-          print(state);
           onDaysLoaded?.call(state.days);
         }
       },
@@ -134,7 +133,7 @@ class _StatsBarChartState extends State<StatsBarChart> {
       padding: const EdgeInsets.all(24.0),
       child: BarChart(
         dataSource: widget.barData,
-        displayRangeSetter: (max) => 180,
+        displayRangeSetter: setDisplayRange,
         axisBuilder: (context, barChartContext) {
           return DefaultBarChartAxis(
             barPadding: barPadding,
@@ -177,4 +176,13 @@ class _StatsBarChartState extends State<StatsBarChart> {
       ),
     );
   }
+
+  double setDisplayRange(double max) {
+    // if (max < 90) {
+    //   return 1;
+    // }
+
+    return max;
+  }
+
 }

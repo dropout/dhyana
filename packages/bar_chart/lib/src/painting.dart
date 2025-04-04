@@ -154,9 +154,15 @@ class AxisPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(AxisPainter oldDelegate) =>
-    true;
-      // oldDelegate.color != color ||
-      // oldDelegate.barChartContext != barChartContext;
+    oldDelegate.color != color ||
+    oldDelegate.barChartContext != barChartContext ||
+    oldDelegate.barPadding != barPadding ||
+    oldDelegate.xIntervalCount != xIntervalCount ||
+    oldDelegate.yIntervalCount != yIntervalCount ||
+    oldDelegate.xAxisLabelFormatter != xAxisLabelFormatter ||
+    oldDelegate.yAxisLabelFormatter != yAxisLabelFormatter ||
+    oldDelegate.showLabelOnAverage != showLabelOnAverage ||
+    oldDelegate.displayRange != displayRange;
 
   @override
   bool hitTest(Offset position) => false;
