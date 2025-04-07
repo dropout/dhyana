@@ -1,40 +1,48 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:flutter/material.dart';
 
-abstract class LabelFormatter {
 
-  const LabelFormatter();
+class YAxisLabelFormatter {
 
-  TextPainter createTextPainter(BarData barData, double labelWidth);
+  final Color color;
+
+  const YAxisLabelFormatter({
+    this.color = Colors.white,
+  });
+
+  TextPainter format(double value) {
+    return createTextPainter(
+      value.toStringAsFixed(0),
+      TextAlign.left,
+      color: color,
+    );
+  }
 
 }
 
-class DefaultLabelFormatter extends LabelFormatter {
+class XAxisLabelFormatter {
 
-  final TextStyle textStyle;
-  final TextAlign textAlign;
+  final Color color;
 
-  const DefaultLabelFormatter({
-    required this.textStyle,
-    this.textAlign = TextAlign.left,
+  const XAxisLabelFormatter({
+    this.color = Colors.white,
   });
 
-  @override
-  TextPainter createTextPainter(BarData barData, double labelWidth) {
-
+  TextPainter format(BarData barData) {
     final textSpan = TextSpan(
-      text: barData.label,
-      style: textStyle,
+      text: barData.label.substring(0, 1),
+      style: TextStyle(
+        color: color,
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+      ),
     );
 
-    final textPainter = TextPainter(
+    return TextPainter(
       text: textSpan,
-      textAlign: textAlign,
+      textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
     );
-
-    return textPainter;
-
   }
 
 }

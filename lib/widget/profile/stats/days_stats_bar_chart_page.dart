@@ -142,9 +142,14 @@ class _StatsBarChartState extends State<StatsBarChart> {
             xAxisIntervalSetter: (dataSource) {
               return 1;
             },
-            yAxisIntervalSetter: (dataSource) {
-              return 30.0;
-            },
+            xAxisLabelFormatter: XAxisLabelFormatter(
+              color: Colors.grey.shade700,
+            ),
+            yAxisIntervalSetter: setYAxisInterval,
+            yAxisLabelFormatter: CustomYAxisLabelFormatter(
+              context: context,
+              color: Colors.grey.shade700,
+            ),
             showLabelOnAverage: false,
           );
         },
@@ -178,11 +183,72 @@ class _StatsBarChartState extends State<StatsBarChart> {
   }
 
   double setDisplayRange(double max) {
-    // if (max < 90) {
-    //   return 1;
-    // }
+    List<int> intervals = [
+      (10 * 3),
+      (30 * 3),
+      (60 * 3),
+      (4 * 60 * 3),
+      (6 * 60 * 3),
+      (12 * 60 * 3),
+      (24 * 60 * 3),
+      (42 * 60 * 3),
+      (84 * 60 * 3),
+      (168 * 60 * 3),
+      (336 * 60 * 3),
+      (672 * 60 * 3),
+      (1344 * 60 * 3),
+      (2688 * 60 * 3),
+      (5376 * 60 * 3),
+      (10752 * 60 * 3),
+    ];
+    double min = double.infinity;
+    int index = 0;
+    for (var i = 0; i < intervals.length; ++i) {
+      if (intervals[i] < min) {
+        min = intervals[i].toDouble();
+        index = i;
+        break;
+      }
+    }
+    return intervals[index].toDouble();
+  }
 
-    return max;
+  double setYAxisInterval(double displayRange) {
+    return displayRange / 3;
+  }
+
+}
+
+class CustomYAxisLabelFormatter extends YAxisLabelFormatter {
+
+  final BuildContext context;
+
+  const CustomYAxisLabelFormatter({
+    required this.context,
+    super.color = Colors.white,
+  });
+
+  @override
+  TextPainter format(double value) {
+    int intValue = value.toInt();
+    if (intValue < 60) {
+      String postFix = AppLocalizations.of(context).minutesAbbr.toLowerCase();
+      return createTextPainter(
+        '${intValue.toStringAsFixed(0)}$postFix',
+        TextAlign.left,
+        size: 12,
+        color: color,
+      );
+    }
+
+    String postFix = AppLocalizations.of(context).minutesAbbr.toLowerCase();
+    return createTextPainter(
+      '${intValue.toStringAsFixed(0)}$postFix',
+      TextAlign.left,
+      size: 12,
+      color: color,
+    );
+
   }
 
 }

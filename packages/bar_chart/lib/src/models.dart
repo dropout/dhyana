@@ -20,16 +20,6 @@ typedef OverlayBuilder = Widget Function(
   BarChartContext barChartContext
 );
 
-typedef XAxisLabelFormatter = TextPainter Function({
-  required BarData barData,
-  required Color color,
-});
-
-typedef YAxisLabelFormatter = TextPainter Function({
-  required double value,
-  required Color color,
-});
-
 class BarChartContext {
 
   final List<BarData> _dataSource;
@@ -52,7 +42,7 @@ class BarChartContext {
   List<BarData> get dataSource => _dataSource;
 
   double get displayRange => displayRangeSetter(max);
-  double valueToPixelRatio(Size size) => size.height / displayRange;
+  // double valueToPixelRatio(Size size) => size.height / displayRange;
 
   @override
   bool operator == (Object other) {

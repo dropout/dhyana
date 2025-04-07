@@ -1,7 +1,9 @@
 import 'dart:ui' as ui;
 
+
 import 'package:flutter/material.dart';
 
+import 'label_formatter.dart';
 import 'models.dart';
 
 class AxisPainter extends CustomPainter {
@@ -65,6 +67,7 @@ class AxisPainter extends CustomPainter {
     Offset offset,
     Size s
   ) {
+    // print('displayRange: $displayRange');
     final double valueToPixelRatio = s.height / displayRange;
     final int lineCount = displayRange ~/ yIntervalCount;
     int i = 0;
@@ -77,10 +80,13 @@ class AxisPainter extends CustomPainter {
       );
 
       // Avoid drawing text on top of avg line if it's too close
-      final textPainter = yAxisLabelFormatter(
-        value: yIntervalCount * i,
-        color: color,
+      final textPainter = yAxisLabelFormatter.format(
+        (yIntervalCount * i),
       );
+      // final textPainter = yAxisLabelFormatter(
+      //   value: yIntervalCount * i,
+      //   color: color,
+      // );
 
       bool labelCloseToAvg = (y - (s.height - barChartContext.avg * valueToPixelRatio)).abs() > 12;
       bool avgMakesSense = barChartContext.avg > 0.0;
@@ -127,13 +133,12 @@ class AxisPainter extends CustomPainter {
       }
 
       if (remainder == 0 && i < barChartContext.dataSource.length) {
-        final textPainter = xAxisLabelFormatter(
-          barData: barChartContext.dataSource[i],
-          color: color,
+        final textPainter = xAxisLabelFormatter.format(
+          barChartContext.dataSource[i],
         );
 
         double labelWidth = (size.width - barPadding.horizontal) /
-            (barChartContext.dataSource.length / xIntervalCount) - linePaint.strokeWidth;
+          (barChartContext.dataSource.length / xIntervalCount) - linePaint.strokeWidth;
         textPainter.layout(
           minWidth: labelWidth,
           maxWidth: labelWidth,

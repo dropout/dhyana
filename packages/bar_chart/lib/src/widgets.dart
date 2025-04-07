@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:bar_chart/src/label_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -343,35 +344,7 @@ Widget _defaultAxisBuilder(
 }
 
 double _defaultYAxisIntervalSetter(double displayRange) => (displayRange / 4);
-TextPainter _defaultYAxisLabelFormatter({
-  required double value,
-  required Color color,
-}) {
-  return createTextPainter(value.toStringAsFixed(0), TextAlign.left, color: color);
-}
-
 int _defaultXAxisIntervalSetter(int barCount) => 1;
-TextPainter _defaultXAxisLabelFormatter({
-  required BarData barData,
-  required Color color,
-}) {
-
-  final textSpan = TextSpan(
-    text: barData.label.substring(0, 1),
-    style: TextStyle(
-      color: color,
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-
-  return TextPainter(
-    text: textSpan,
-    textAlign: TextAlign.center,
-    textDirection: TextDirection.ltr,
-  );
-
-}
 
 class DefaultBarChartAxis extends StatefulWidget {
 
@@ -393,8 +366,8 @@ class DefaultBarChartAxis extends StatefulWidget {
     required this.barPadding,
     this.yAxisIntervalSetter = _defaultYAxisIntervalSetter,
     this.xAxisIntervalSetter = _defaultXAxisIntervalSetter,
-    this.yAxisLabelFormatter = _defaultYAxisLabelFormatter,
-    this.xAxisLabelFormatter = _defaultXAxisLabelFormatter,
+    this.yAxisLabelFormatter = const YAxisLabelFormatter(),
+    this.xAxisLabelFormatter = const XAxisLabelFormatter(),
     this.showLabelOnAverage = true,
     super.key,
   });
@@ -407,7 +380,7 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
   with SingleTickerProviderStateMixin {
 
   late final AnimationController animationController;
-  late Animation<double> animation;
+  late Animation<double> displayRangeAnimation;
 
   @override
   void initState() {
@@ -417,9 +390,13 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
       duration: Durations.long2,
     );
 
-    animation = Tween(begin: 90.0, end: widget.barChartContext.displayRange)
-      .chain(CurveTween(curve: Curves.easeInOutCubicEmphasized))
+    displayRangeAnimation = Tween(
+      begin: 90.0,
+      end: widget.barChartContext.displayRange
+    ).chain(CurveTween(curve: Curves.easeInOutCubicEmphasized))
       .animate(animationController);
+
+    animationController.forward();
 
     super.initState();
   }
@@ -427,7 +404,7 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
   @override
   void didUpdateWidget(covariant DefaultBarChartAxis oldWidget) {
     if (widget.barChartContext.displayRange != oldWidget.barChartContext.displayRange) {
-      animation = Tween(
+      displayRangeAnimation = Tween(
         begin: oldWidget.barChartContext.displayRange,
         end: widget.barChartContext.displayRange
       ).chain(CurveTween(curve: Curves.easeInOutCubicEmphasized)).animate(animationController);
@@ -441,7 +418,7 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animationController,
+      animation: displayRangeAnimation,
       builder: (context, _) {
         return CustomPaint(
           painter: AxisPainter(
@@ -450,7 +427,7 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
             xAxisLabelFormatter: widget.xAxisLabelFormatter,
             yAxisLabelFormatter: widget.yAxisLabelFormatter,
             color: widget.color,
-            displayRange: animation.value,
+            displayRange: displayRangeAnimation.value,
             barChartContext: widget.barChartContext,
             barPadding: widget.barPadding,
             showLabelOnAverage: widget.showLabelOnAverage,
@@ -458,6 +435,12 @@ class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
         );
       },
     );
+  }
+
+  @override
+  dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
 }
