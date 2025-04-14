@@ -1,3 +1,4 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -39,74 +40,57 @@ class DaysOverlay extends StatelessWidget {
                       children: [
                         Text(
                           DateFormat.yMMMMEEEEd(Localizations.localeOf(context).toString()).format(day.startDate),
-                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Gap.small(),
+                        Text(
+                          AppLocalizations.of(context).minutesPluralWithNumber(day.minutesCount),
+                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+                                Icon(
+                                  Icons.self_improvement_rounded,
+                                  size: 21,
+                                ),
+                                Gap.xs(),
                                 Text(
                                   day.sessionCount.toString(),
-                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Gap.small(),
-                                Text(
-                                  'Sessions'.toUpperCase(),
-                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                                    color: Colors.black,
-                                  ),
-                                ),
                               ],
                             ),
-
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            Gap.medium(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  day.minutesCount.toString(),
-                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Icon(
+                                  Icons.link_rounded,
+                                  size: 21,
                                 ),
-                                Gap.small(),
-                                Text(
-                                  'Minutes'.toUpperCase(),
-                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
+                                Gap.xs(),
                                 Text(
                                   day.consecutiveDaysCount.toString(),
-                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Gap.small(),
-                                Text(
-                                  'Consecutive days'.toUpperCase(),
-                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                                    color: Colors.black,
                                   ),
                                 ),
                               ],
                             )
+
 
                           ],
                         ),
