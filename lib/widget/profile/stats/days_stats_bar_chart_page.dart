@@ -1,15 +1,21 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import 'stats_bar_chart.dart';
+
 class DaysStatsBarChartPage extends StatelessWidget {
 
   final int pageIndex;
+  final StatsInterval statsInterval;
 
   // forward these to the actual barchart infotrigger bars implementation
   final void Function(int index, Day day)? onInfoTriggered;
@@ -20,6 +26,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
 
   const DaysStatsBarChartPage({
     required this.pageIndex,
+    required this.statsInterval,
     this.onInfoTriggered,
     this.onInfoChanged,
     this.onInfoDismissed,
@@ -51,24 +58,18 @@ class DaysStatsBarChartPage extends StatelessWidget {
   }
 
   Widget buildLoadingState(BuildContext context) {
-
-    StatsInterval defaultInterval = StatsInterval.days(
-      now: DateTime.now()
-    );
-
-    Duration difference = defaultInterval.from.difference(defaultInterval.to);
-
+    Duration difference = statsInterval.from.difference(statsInterval.to);
     return StatsBarChart(
       key: ValueKey(pageIndex),
       barData: List.generate(difference.inDays.abs(), (index) {
-        DateTime day = defaultInterval.from.add(Duration(days: index));
+        DateTime day = statsInterval.from.add(Duration(days: index));
         return BarData(
           value: 0,
-          label: DateFormat.EEEE(Localizations.localeOf(context).toString()).format(day).toUpperCase(),
+          label: DateFormat.EEEE(Localizations.localeOf(context).toString())
+            .format(day).toUpperCase(),
         );
       }),
     );
-
   }
 
   Widget buildLoadedState(BuildContext context, DaysLoadedState state) {
@@ -77,178 +78,38 @@ class DaysStatsBarChartPage extends StatelessWidget {
       barData: state.days.map((day) {
         return BarData(
           value: day.minutesCount.toDouble(),
-          label: DateFormat.EEEE(Localizations.localeOf(context).toString()).format(day.startDate).toUpperCase(),
+          label: DateFormat.EEEE(
+            Localizations.localeOf(context).toString()
+          ).format(day.startDate).toUpperCase(),
         );
       }).toList(),
-      onInfoTriggered: (index, _) => onInfoTriggered?.call(index, state.days[index]),
-      onInfoChanged: (index, _) => onInfoChanged?.call(index, state.days[index]),
-      onInfoDismissed: (index, _) => onInfoDismissed?.call(index, state.days[index]),
+      infoBuilderDelegate: (context, index) =>
+        buildBarInfo(context, index, state),
     );
   }
 
-}
-
-
-class StatsBarChart extends StatefulWidget {
-
-  final List<BarData> barData;
-
-  final void Function(int index, BarData data)? onInfoTriggered;
-  final void Function(int index, BarData data)? onInfoChanged;
-  final void Function(int index, BarData data)? onInfoDismissed;
-
-  const StatsBarChart({
-    this.barData = const [],
-    this.onInfoTriggered,
-    this.onInfoChanged,
-    this.onInfoDismissed,
-    super.key,
-  });
-
-  factory StatsBarChart.empty() =>
-    const StatsBarChart(
-      barData: [],
-    );
-
-  @override
-  State<StatsBarChart> createState() => _StatsBarChartState();
-}
-
-class _StatsBarChartState extends State<StatsBarChart> {
-
-  @override
-  initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final EdgeInsets barPadding = EdgeInsets.only(
-      top: 10,
-      right: 32,
-      bottom: 21,
-      left: 0,
-    );
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: BarChart(
-        dataSource: widget.barData,
-        displayRangeSetter: setDisplayRange,
-        axisBuilder: (context, barChartContext) {
-          return DefaultBarChartAxis(
-            barPadding: barPadding,
-            color: Colors.grey.shade700,
-            barChartContext: barChartContext,
-            xAxisIntervalSetter: (dataSource) {
-              return 1;
-            },
-            xAxisLabelFormatter: XAxisLabelFormatter(
-              color: Colors.grey.shade700,
-            ),
-            yAxisIntervalSetter: setYAxisInterval,
-            yAxisLabelFormatter: CustomYAxisLabelFormatter(
-              context: context,
-              color: Colors.grey.shade700,
-            ),
-            showLabelOnAverage: false,
-          );
-        },
-        barBuilder: (context, barChartContext) {
-          return Padding(
-            padding: barPadding,
-            child: InfoTriggerBars(
-              barColor: Colors.grey.shade500,
-              selectedBarColor: Colors.white,
-              barChartContext: barChartContext,
-              onInfoTriggered: (index, data) =>
-                widget.onInfoTriggered?.call(index, data),
-              onInfoChanged: (index, data) =>
-                widget.onInfoChanged?.call(index, data),
-              onInfoDismissed: (index, data) =>
-                widget.onInfoDismissed?.call(index, data),
-            ),
-          );
-        },
-        overlayBuilder: (context, barChartContext) {
-          return Padding(
-            padding: barPadding,
-            child: AverageBarChartOverlay(
-              barChartContext: barChartContext,
-              labelText: AppLocalizations.of(context).averageAbbr.toLowerCase(),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  double setDisplayRange(double max) {
-    List<int> intervals = [
-      (10 * 3),
-      (30 * 3),
-      (60 * 3),
-      (4 * 60 * 3),
-      (6 * 60 * 3),
-      (12 * 60 * 3),
-      (24 * 60 * 3),
-      (42 * 60 * 3),
-      (84 * 60 * 3),
-      (168 * 60 * 3),
-      (336 * 60 * 3),
-      (672 * 60 * 3),
-      (1344 * 60 * 3),
-      (2688 * 60 * 3),
-      (5376 * 60 * 3),
-      (10752 * 60 * 3),
-    ];
-    double min = double.infinity;
-    int index = 0;
-    for (var i = 0; i < intervals.length; ++i) {
-      if (intervals[i] < min) {
-        min = intervals[i].toDouble();
-        index = i;
-        break;
-      }
-    }
-    return intervals[index].toDouble();
-  }
-
-  double setYAxisInterval(double displayRange) {
-    return displayRange / 3;
-  }
-
-}
-
-class CustomYAxisLabelFormatter extends YAxisLabelFormatter {
-
-  final BuildContext context;
-
-  const CustomYAxisLabelFormatter({
-    required this.context,
-    super.color = Colors.white,
-  });
-
-  @override
-  TextPainter format(double value) {
-    int intValue = value.toInt();
-    if (intValue < 60) {
-      String postFix = AppLocalizations.of(context).minutesAbbr.toLowerCase();
-      return createTextPainter(
-        '${intValue.toStringAsFixed(0)}$postFix',
-        TextAlign.left,
-        size: 12,
-        color: color,
+  Widget buildBarInfo(BuildContext context, int index, DaysLoadedState state) {
+    if (index < 0) {
+      final calculatedStats = CalculatedStats.fromDays(state.days);
+      return DaysOverlayIdle(
+        dateRangeText: createIntervalString(
+          context,
+          statsInterval.from,
+          statsInterval.to,
+        ),
+        averageMinutes: calculatedStats.averageMinutes.toInt(),
+        averageSessionCount: calculatedStats.averageSessions.toInt(),
+      );
+    } else {
+      return UnconstrainedBox(
+        child: DaysOverlay(
+          day: state.days[index],
+        ),
       );
     }
-
-    String postFix = AppLocalizations.of(context).minutesAbbr.toLowerCase();
-    return createTextPainter(
-      '${intValue.toStringAsFixed(0)}$postFix',
-      TextAlign.left,
-      size: 12,
-      color: color,
-    );
-
   }
 
 }
+
+
+

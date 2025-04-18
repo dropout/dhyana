@@ -17,92 +17,141 @@ class DaysOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Material(
-          color: Colors.transparent,
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppThemeData.borderRadiusMd),
-                  ),
-                  color: AppColors.backgroundPaperLight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppThemeData.paddingMd),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          DateFormat.yMMMMEEEEd(Localizations.localeOf(context).toString()).format(day.startDate),
-                          style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context).minutesPluralWithNumber(day.minutesCount),
-                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Row(
-
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Icon(
-                                  Icons.self_improvement_rounded,
-                                  size: 21,
-                                ),
-                                Gap.xs(),
-                                Text(
-                                  day.sessionCount.toString(),
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Gap.medium(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.link_rounded,
-                                  size: 21,
-                                ),
-                                Gap.xs(),
-                                Text(
-                                  day.consecutiveDaysCount.toString(),
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            )
-
-
-                          ],
-                        ),
-
-                      ],
+    Color textColor = AppColors.backgroundPaperLight;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey.shade500,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(AppThemeData.borderRadiusSm),
+        color: Colors.grey.shade900,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppThemeData.paddingMd),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              DateFormat.yMMMMEEEEd(Localizations.localeOf(context).toString()).format(day.startDate),
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              AppLocalizations.of(context).minutesPluralWithNumber(day.minutesCount),
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Row(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.self_improvement_rounded,
+                      size: 21,
+                      color: textColor,
                     ),
-                  ),
+                    Gap.xs(),
+                    Text(
+                      day.sessionCount.toString(),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              )
+                Gap.medium(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.link_rounded,
+                      size: 21,
+                      color: textColor,
+                    ),
+                    Gap.xs(),
+                    Text(
+                      day.consecutiveDaysCount.toString(),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                )
 
 
-          ),
+              ],
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DaysOverlayIdle extends StatelessWidget {
+
+  final String dateRangeText;
+  final int averageMinutes;
+  final int averageSessionCount;
+
+  const DaysOverlayIdle({
+    required this.dateRangeText,
+    required this.averageMinutes,
+    required this.averageSessionCount,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Color textColor = AppColors.backgroundPaperLight;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey.shade500,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(AppThemeData.borderRadiusSm),
+        color: Colors.grey.shade900,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppThemeData.paddingMd),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              dateRangeText,
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              AppLocalizations.of(context).minutesPluralWithNumber(averageMinutes),
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              AppLocalizations.of(context).average.toLowerCase(),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+          ],
         ),
       ),
     );

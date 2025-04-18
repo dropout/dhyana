@@ -81,12 +81,8 @@ class AxisPainter extends CustomPainter {
 
       // Avoid drawing text on top of avg line if it's too close
       final textPainter = yAxisLabelFormatter.format(
-        (yIntervalCount * i),
+        (yIntervalCount * i), barChartContext.max
       );
-      // final textPainter = yAxisLabelFormatter(
-      //   value: yIntervalCount * i,
-      //   color: color,
-      // );
 
       bool labelCloseToAvg = (y - (s.height - barChartContext.avg * valueToPixelRatio)).abs() > 12;
       bool avgMakesSense = barChartContext.avg > 0.0;
@@ -127,7 +123,7 @@ class AxisPainter extends CustomPainter {
           canvas,
           offset + Offset(x, 0.0),
           offset + Offset(x, size.height),
-          [5.0, 5.0],
+          [2.0, 2.0],
           linePaint
         );
       }

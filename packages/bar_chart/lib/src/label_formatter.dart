@@ -10,7 +10,7 @@ class YAxisLabelFormatter {
     this.color = Colors.white,
   });
 
-  TextPainter format(double value) {
+  TextPainter format(double value, double max) {
     return createTextPainter(
       value.toStringAsFixed(0),
       TextAlign.left,

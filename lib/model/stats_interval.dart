@@ -17,13 +17,15 @@ class StatsInterval with _$StatsInterval {
   }) = _StatsInterval;
 
   factory StatsInterval.days({
-    required DateTime now,
+    required DateTime lastDay,
+    int days = 7
   }) {
-    final DateTime now = DateTime.now();
+    final DateTime to = DateTime.now();
+
     return StatsInterval(
       intervalType: StatsIntervalType.days,
-      from: mostRecentMonday(now).subtract(Duration(days: 7)),
-      to: mostRecentMonday(now).add(Duration(days: 7)),
+      from: to.subtract(Duration(days: days - 1)),
+      to: to.add(Duration(days: 1)),
     );
   }
 
@@ -32,24 +34,30 @@ class StatsInterval with _$StatsInterval {
   factory StatsInterval.fromJson(Map<String, Object?> json) =>
     _$StatsIntervalFromJson(json);
 
-  static List<StatsInterval> generateDayIntervals(DateTime now) {
-    StatsInterval firstInterval = StatsInterval.days(now: now);
+  static List<StatsInterval> generateDayIntervals(
+    DateTime now,
+    {
+      int days = 8,
+      int intervalCount = 4,
+    }
+  ) {
+    StatsInterval firstInterval = StatsInterval.days(lastDay: now);
     return [
       firstInterval,
       StatsInterval(
         intervalType: StatsIntervalType.days,
-        from: firstInterval.from.subtract(Duration(days: 14)),
-        to: firstInterval.to.subtract(Duration(days: 14)),
+        from: firstInterval.from.subtract(Duration(days: days)),
+        to: firstInterval.to.subtract(Duration(days: days)),
       ),
       StatsInterval(
         intervalType: StatsIntervalType.days,
-        from: firstInterval.from.subtract(Duration(days: 14*2)),
-        to: firstInterval.to.subtract(Duration(days: 14*2)),
+        from: firstInterval.from.subtract(Duration(days: days*2)),
+        to: firstInterval.to.subtract(Duration(days: days*2)),
       ),
       StatsInterval(
         intervalType: StatsIntervalType.days,
-        from: firstInterval.from.subtract(Duration(days: 14*3)),
-        to: firstInterval.to.subtract(Duration(days: 14*3)),
+        from: firstInterval.from.subtract(Duration(days: days*3)),
+        to: firstInterval.to.subtract(Duration(days: days*3)),
       ),
     ];
   }

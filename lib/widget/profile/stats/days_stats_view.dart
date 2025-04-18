@@ -11,7 +11,6 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 
-
 class DaysStatsView extends StatefulWidget {
 
   final Profile profile;
@@ -30,10 +29,6 @@ class _DaysStatsViewState extends State<DaysStatsView> {
   // Intervals
   late final List<StatsInterval> intervals;
 
-  // Overlay
-  OverlayEntry? overlayEntry;
-  Day? selectedData;
-
   // Calculated stats
   List<Day> days = [];
   CalculatedStats? calculatedStats;
@@ -41,25 +36,7 @@ class _DaysStatsViewState extends State<DaysStatsView> {
   @override
   void initState() {
     intervals = StatsInterval.generateDayIntervals(DateTime.now());
-    // BlocProvider.of is safe to use in initState
-    // https://github.com/felangel/bloc/issues/210
-    BlocProvider.of<StatsIntervalBloc>(context).add(
-      StatsIntervalEvent.changed(
-        statsInterval: intervals[0]
-      )
-    );
     super.initState();
-  }
-
-  void handlePageChange(BuildContext context, int index) {
-    StatsIntervalBloc bloc = BlocProvider.of<StatsIntervalBloc>(context);
-    StatsInterval statsInterval = bloc.state.statsInterval;
-    BlocProvider.of<StatsIntervalBloc>(context).add(StatsIntervalEvent.changed(
-      statsInterval: statsInterval.copyWith(
-        from: intervals[index].from,
-        to: intervals[index].to,
-      )
-    ));
   }
 
   @override
@@ -81,11 +58,15 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                 color: Colors.black,
               ),
               child: SizedBox(
-                height: 296,
+                height: 420,
                 child: PageView.builder(
                   reverse: true,
                   itemCount: 4,
-                  onPageChanged: (index) => handlePageChange(context, index),
+                  onPageChanged: (index) {
+                    setState(() {
+                      calculatedStats = CalculatedStats.fromDays(days);
+                    });
+                  },
                   itemBuilder: (context, index) {
                     return BlocProvider<DaysBloc>(
                       create: (BuildContext context) {
@@ -100,19 +81,11 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                       },
                       child: DaysStatsBarChartPage(
                         pageIndex: index,
-                        onInfoTriggered: (index, day) {
-                          showOverlay(context, day);
-                        },
-                        onInfoChanged: (index, day) {
-                          updateOverlay(context, day);
-                        },
-                        onInfoDismissed: (index, day) {
-                          hideOverlay(context);
-                        },
+                        statsInterval: intervals[index],
                         onDaysLoaded: (List<Day> loadedDays) {
                           setState(() {
                             days = loadedDays;
-                            calculatedStats = CalculatedStats.fromDays(days);
+                            calculatedStats ??= CalculatedStats.fromDays(loadedDays);
                           });
                         },
                       ),
@@ -121,11 +94,17 @@ class _DaysStatsViewState extends State<DaysStatsView> {
                 ),
               )
             ),
-            Gap.small(),
-            Padding(
-              padding: const EdgeInsets.all(AppThemeData.spacingMd),
-              child: buildCalculatedStats(context),
-            )
+            // DecoratedBox(
+            //   decoration: BoxDecoration(
+            //     color: Colors.black,
+            //   ),
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(
+            //       AppThemeData.spacingMd
+            //     ),
+            //     child: buildCalculatedStats(context),
+            //   ),
+            // )
           ],
         ),
       ),
@@ -137,38 +116,28 @@ class _DaysStatsViewState extends State<DaysStatsView> {
       return const SizedBox.shrink();
     }
 
+
     if (days.isEmpty) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.black,
+        ),
+        child: CalculatedStatsView(
+            calculatedStats: CalculatedStats()
+        )
+      );
       return const CalculatedStatsView(
         calculatedStats: CalculatedStats()
       );
     } else {
-      return CalculatedStatsView(
-        calculatedStats: calculatedStats!
+      return DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.black,
+          ),
+          child: CalculatedStatsView(
+            calculatedStats: calculatedStats!
+          )
       );
-    }
-  }
-
-  void showOverlay(BuildContext context, Day data) {
-    setState(() {
-      selectedData = data;
-      overlayEntry = OverlayEntry(
-        builder: (context) => DaysOverlay(day: selectedData!),
-      );
-      Overlay.of(context).insert(overlayEntry!);
-    });
-  }
-
-  void updateOverlay(BuildContext context, Day data) {
-    setState(() {
-      selectedData = data;
-    });
-    overlayEntry?.markNeedsBuild();
-  }
-
-  void hideOverlay(BuildContext context) {
-    if (overlayEntry != null && overlayEntry!.mounted) {
-      overlayEntry?.remove();
-      overlayEntry = null;
     }
   }
 

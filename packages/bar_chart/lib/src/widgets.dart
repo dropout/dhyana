@@ -12,8 +12,10 @@ class BarChart extends StatefulWidget {
   final List<BarData> dataSource;
 
   final AxisBuilder? axisBuilder;
+  final BarHeaderBuilder? barHeaderBuilder;
   final BarBuilder barBuilder;
   final OverlayBuilder? overlayBuilder;
+
 
   final double Function(double max) displayRangeSetter;
 
@@ -21,6 +23,7 @@ class BarChart extends StatefulWidget {
     required this.dataSource,
     this.axisBuilder = _defaultAxisBuilder,
     this.barBuilder = _defaultBarBuilder,
+    this.barHeaderBuilder = _defaultBarHeaderBuilder,
     this.overlayBuilder,
     this.displayRangeSetter = _defaultDisplayRangeSetter,
     super.key,
@@ -57,6 +60,22 @@ class _BarChartState extends State<BarChart> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        buildHeaderArea(context),
+        buildBarArea(context),
+      ],
+    );
+  }
+
+  Widget buildHeaderArea(BuildContext context) {
+    return
+      widget.barHeaderBuilder == null
+        ? const SizedBox.shrink()
+        : widget.barHeaderBuilder!(context, barChartContext);
+  }
+
+  Widget buildBarArea(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -124,179 +143,7 @@ class _SelectableBarsState extends State<SelectableBars> {
 
 }
 
-class InfoTriggerBars extends StatefulWidget {
 
-  final Color barColor;
-  final Color selectedBarColor;
-  final BarChartContext barChartContext;
-
-  final void Function(int index, BarData data)? onInfoTriggered;
-  final void Function(int index, BarData data)? onInfoChanged;
-  final void Function(int index, BarData data)? onInfoDismissed;
-
-  const InfoTriggerBars({
-    required this.barChartContext,
-    this.barColor = Colors.grey,
-    this.selectedBarColor = Colors.white,
-    this.onInfoTriggered,
-    this.onInfoChanged,
-    this.onInfoDismissed,
-    super.key,
-  });
-
-  @override
-  State<InfoTriggerBars> createState() => _InfoTriggerBarsState();
-}
-
-class _InfoTriggerBarsState extends State<InfoTriggerBars> {
-
-  final barContainerKey = GlobalKey();
-  bool _isInfoTriggered = false;
-  int selectedIndex = -1;
-
-  @override
-  Widget build(BuildContext context) {
-    final barChartData = widget.barChartContext.dataSource;
-    return Row(
-      key: barContainerKey,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        for (var i = 0; i < barChartData.length; i++)
-          Expanded(
-            child: GestureDetector(
-              onLongPress: () {
-                setState(() {
-                  _isInfoTriggered = true;
-                  selectedIndex = i;
-                  widget.onInfoTriggered?.call(i, barChartData[i]);
-                });
-              },
-              onLongPressEnd: (details) {
-                if (_isInfoTriggered) {
-                  setState(() {
-                    _isInfoTriggered = false;
-                    selectedIndex = -1;
-                    widget.onInfoDismissed?.call(i, barChartData[i]);
-                  });
-                }
-              },
-              child: Listener(
-                behavior: HitTestBehavior.opaque,
-                onPointerMove: (PointerMoveEvent event) {
-                  int? targetBarIndex = _barHitTest(event);
-                  if (_isInfoTriggered && targetBarIndex != null && targetBarIndex != selectedIndex) {
-                    setState(() {
-                      selectedIndex = targetBarIndex;
-                    });
-                    widget.onInfoChanged?.call(targetBarIndex, barChartData[targetBarIndex]);
-                  }
-                },
-                child: InfoTriggerArea(
-                  barIndex: i,
-                  child: AnimatedFractionallySizedBox(
-                    duration: Durations.long2,
-                    curve: Curves.easeInOutCubicEmphasized,
-                    heightFactor: math.min((barChartData[i].value / widget.barChartContext.displayRange), 1),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                      child: AnimatedContainer(
-                        duration: Durations.short2,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: HSLColor.fromColor(widget.barColor).withLightness(0.8).toColor(),
-                              width: 2.0,
-                            ),
-                          ),
-                          color: (selectedIndex == i) ? widget.selectedBarColor : widget.barColor,
-                        ),
-                      ),
-                    )
-
-                  )
-                )
-              )
-            )
-          )
-      ],
-    );
-  }
-
-  int? _barHitTest(PointerEvent event) {
-    if (mounted == false) return null;
-    final RenderBox box = barContainerKey.currentContext!.findAncestorRenderObjectOfType<RenderBox>()!;
-    final result = BoxHitTestResult();
-    Offset local = box.globalToLocal(event.position);
-    if (box.hitTest(result, position: local)) {
-      for (final hit in result.path) {
-        // temporary variable so that the [is] allows access of [index]
-        final target = hit.target;
-        if (target is RenderInfoTriggerArea) {
-          return target.barIndex;
-        }
-      }
-    }
-    return null;
-  }
-
-}
-
-class InfoTriggerArea extends SingleChildRenderObjectWidget {
-
-  final int barIndex;
-
-  const InfoTriggerArea({
-    required this.barIndex,
-    super.child,
-    super.key,
-  });
-
-  @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderInfoTriggerArea(
-      barIndex: barIndex,
-    );
-  }
-
-  @override
-  void updateRenderObject(BuildContext context, RenderInfoTriggerArea renderObject) {
-    renderObject.barIndex = barIndex;
-  }
-
-}
-
-class RenderInfoTriggerArea extends RenderProxyBox {
-
-  int barIndex;
-
-  RenderInfoTriggerArea({
-    required this.barIndex,
-    RenderBox? child,
-  }) : super(child);
-
-  @override
-  void performLayout() {
-    size = constraints.constrain(Size(double.infinity, double.infinity));
-    child?.layout(constraints, parentUsesSize: false);
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    final RenderBox? child = this.child;
-    if (child == null) {
-      return;
-    }
-    context.paintChild(
-      child,
-      Offset(offset.dx, offset.dy + (size.height - child.size.height)),
-    );
-  }
-
-  @override
-  bool hitTestSelf(Offset position) => size.contains(position);
-
-}
 
 
 double _defaultDisplayRangeSetter(double max) => max;
@@ -328,6 +175,13 @@ Widget _defaultBarBuilder(
         )
     ],
   );
+}
+
+Widget _defaultBarHeaderBuilder(
+  BuildContext context,
+  BarChartContext barChartContext,
+) {
+  return SizedBox.shrink();
 }
 
 Widget _defaultAxisBuilder(
@@ -379,68 +233,22 @@ class DefaultBarChartAxis extends StatefulWidget {
 class _DefaultBarChartAxisState extends State<DefaultBarChartAxis>
   with SingleTickerProviderStateMixin {
 
-  late final AnimationController animationController;
-  late Animation<double> displayRangeAnimation;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    animationController = AnimationController(
-      vsync: this,
-      duration: Durations.long2,
-    );
-
-    displayRangeAnimation = Tween(
-      begin: 90.0,
-      end: widget.barChartContext.displayRange
-    ).chain(CurveTween(curve: Curves.easeInOutCubicEmphasized))
-      .animate(animationController);
-
-    animationController.forward();
-
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant DefaultBarChartAxis oldWidget) {
-    if (widget.barChartContext.displayRange != oldWidget.barChartContext.displayRange) {
-      displayRangeAnimation = Tween(
-        begin: oldWidget.barChartContext.displayRange,
-        end: widget.barChartContext.displayRange
-      ).chain(CurveTween(curve: Curves.easeInOutCubicEmphasized)).animate(animationController);
-      animationController.reset();
-      animationController.forward();
-    }
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-  }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: displayRangeAnimation,
-      builder: (context, _) {
-        return CustomPaint(
-          painter: AxisPainter(
-            xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
-            yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
-            xAxisLabelFormatter: widget.xAxisLabelFormatter,
-            yAxisLabelFormatter: widget.yAxisLabelFormatter,
-            color: widget.color,
-            displayRange: displayRangeAnimation.value,
-            barChartContext: widget.barChartContext,
-            barPadding: widget.barPadding,
-            showLabelOnAverage: widget.showLabelOnAverage,
-          ),
-        );
-      },
+    return CustomPaint(
+      painter: AxisPainter(
+        xIntervalCount: widget.xAxisIntervalSetter(widget.barChartContext.dataSource.length),
+        yIntervalCount: widget.yAxisIntervalSetter(widget.barChartContext.displayRange),
+        xAxisLabelFormatter: widget.xAxisLabelFormatter,
+        yAxisLabelFormatter: widget.yAxisLabelFormatter,
+        color: widget.color,
+        displayRange: widget.barChartContext.displayRange,
+        barChartContext: widget.barChartContext,
+        barPadding: widget.barPadding,
+        showLabelOnAverage: widget.showLabelOnAverage,
+      ),
     );
-  }
-
-  @override
-  dispose() {
-    animationController.dispose();
-    super.dispose();
   }
 
 }
@@ -502,7 +310,7 @@ class _AverageBarChartOverlayState extends State<AverageBarChartOverlay>
               painter: AverageOverlayPainter(
                 average: widget.barChartContext.avg,
                 averageLabel: widget.labelText,
-                displayRange: widget.barChartContext.displayRange,
+                displayRange: widget.barChartContext.displayRangeSetter(widget.barChartContext.max),
                 color: Colors.white,
                 lineProgress: lineProgressAnimation.value,
                 textOpacity: textOpacityAnimation.value,

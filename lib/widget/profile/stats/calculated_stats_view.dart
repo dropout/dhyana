@@ -1,5 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/widget/app_colors.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +42,9 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
                 label: AppLocalizations.of(context).statsTotalSessions,
                 child: StatsNumValueText(
                   value: calculatedStats.totalSessions,
-                  postFix: ' ${AppLocalizations.of(context).sessionsPlural(calculatedStats.totalSessions)}'),
-                  order: 0,
+                  color: AppColors.backgroundPaperLight,
+                ),
+                order: 0,
               ),
             ),
             Gap.medium(),
@@ -49,37 +52,15 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               child: buildColumnItem(
                 context,
                 label: AppLocalizations.of(context).statsTotalTimeSpent,
-                child: StatsDurationText(duration: Duration(minutes: calculatedStats.totalMinutes)),
+                child: StatsDurationText(
+                  duration: Duration(minutes: calculatedStats.totalMinutes),
+                  color: AppColors.backgroundPaperLight,
+                ),
                 order: 1,
               ),
             ),
           ],
         ),
-        Gap.medium(),
-        Row(
-          children: [
-            Expanded(
-              child: buildColumnItem(
-                context,
-                label: AppLocalizations.of(context).statsAverageSessions,
-                child: StatsNumValueText(
-                  value: calculatedStats.averageSessions,
-                  postFix: ' ${AppLocalizations.of(context).sessionsPlural(calculatedStats.averageSessions)}'),
-                order: 2,
-              ),
-            ),
-            Gap.medium(),
-            Expanded(
-              child: buildColumnItem(
-                context,
-                label: AppLocalizations.of(context).statsAverageTimeSpent,
-                child: StatsDurationText(duration: Duration(minutes: calculatedStats.averageMinutes.toInt())),
-                order: 3,
-              ),
-            ),
-          ],
-        ),
-
       ]
     );
   }
@@ -90,55 +71,37 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
     required Widget child,
     int order = 0,
   }) {
-    return AnimatedSwitcher(
-      duration: Durations.extralong2,
-      transitionBuilder: (child, animation) {
-        double staggerGap = 0.1 * order;
-        if (animation.isForwardOrCompleted) {
-          // fading out in unison
-          return FadeTransition(
-            opacity: Tween<double>(
-              begin: 0.0,
-              end: 1.0,
-            ).animate(CurvedAnimation(
-              parent: animation,
-              curve: Interval(
-                0.5,
-                1.0,
-                curve: Curves.easeOutCubic,
-              ),
-            )),
-            child: child,
-          );
-        }
 
-        // fading in staggered
-        // double staggerGap = 0.1 * order;
-        return FadeTransition(
-          opacity: Tween<double>(
-            begin: 0.0,
-            end: 1.0,
-          ).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Interval(
-                0.5 + staggerGap,
-                0.5 + staggerGap + 0.1,
-                curve: Curves.easeOutCubic,
+    return SizedBox(
+      width: double.infinity,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade900,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppThemeData.paddingLg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            key: ValueKey(widget.calculatedStats),
+            children: [
+              Text(label,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.backgroundPaperLight,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                softWrap: false,
               ),
-            )
+              Gap.small(),
+              child,
+            ],
           ),
-          child: child,
-        );
-      },
-
-      child: AppCard(
-        key: ValueKey(widget.calculatedStats),
-        title: label,
-        child: child,
-      )
-
+        ),
+      ),
     );
+
   }
 
 }

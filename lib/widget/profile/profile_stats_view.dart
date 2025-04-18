@@ -20,7 +20,7 @@ class ProfileStatsView extends StatelessWidget {
       create: (BuildContext context) {
         return StatsIntervalBloc(
           StatsIntervalState.loaded(
-            statsInterval: StatsInterval.days(now: DateTime.now()),
+            statsInterval: StatsInterval.days(lastDay: DateTime.now()),
           ),
         );
       },
@@ -188,7 +188,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
         ],
       ),
 
-      buildIntervalText(context),
+      Gap.small(),
 
       Expanded(
         child: TabBarView(
@@ -242,7 +242,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
         return headerSlivers;
       },
       pinnedHeaderSliverHeightBuilder: () => pinnedHeaderHeight,
-      onlyOneScrollInBody: true,
+      onlyOneScrollInBody: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: children,
@@ -288,23 +288,6 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildIntervalText(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: BlocBuilder<StatsIntervalBloc, StatsIntervalState>(builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppThemeData.paddingLg,
-            vertical: AppThemeData.paddingMd,
-          ),
-          child: StatsIntervalDisplay(
-            statsInterval: state.statsInterval,
-          )
-        );
-      }),
     );
   }
 

@@ -71,14 +71,14 @@ class Initializer {
     //   )
     // );
 
-    StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
-      dataProviderFactory: FirebaseDataProviderFactory(
-        fireStore: firebaseProvider.firestore
-      )
-    );
+    // StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
+    //   dataProviderFactory: FirebaseDataProviderFactory(
+    //     fireStore: firebaseProvider.firestore
+    //   )
+    // );
 
     PresenceRepository presenceRepository = StubbedPresenceRepository();
-    // StatisticsRepository statisticsRepository = StubbedStatisticsRepository();
+    StatisticsRepository statisticsRepository = StubbedStatisticsRepository();
 
     TimerSettingsHistoryRepository timerSettingsHistoryRepository =
       FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);
