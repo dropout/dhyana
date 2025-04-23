@@ -1,42 +1,34 @@
+import 'dart:math' as math;
+import 'dart:ui';
+
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
-import 'package:dhyana/bloc/stats_interval/stats_interval_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
-class ProfileStatsView extends StatelessWidget {
-  const ProfileStatsView({super.key});
+class ProfileStatsView extends StatefulWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<StatsIntervalBloc>(
-      create: (BuildContext context) {
-        return StatsIntervalBloc(
-          StatsIntervalState.loaded(
-            statsInterval: StatsInterval.days(lastDay: DateTime.now()),
-          ),
-        );
-      },
-      child: ProfileStatsViewContent(),
-    );
-  }
-}
+  final String profileId;
 
-class ProfileStatsViewContent extends StatefulWidget {
-  const ProfileStatsViewContent({super.key});
+  const ProfileStatsView({
+    required this.profileId,
+    super.key,
+  });
 
   @override
-  State<ProfileStatsViewContent> createState() => _ProfileStatsViewContentState();
+  State<ProfileStatsView> createState() => _ProfileStatsViewState();
 }
 
-class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
+class _ProfileStatsViewState extends State<ProfileStatsView>
     with TickerProviderStateMixin, TitleEffectMixin {
 
   late final TabController primaryTC;
@@ -86,173 +78,208 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     );
   }
 
-  List<Widget> buildProfileLoadingContent(BuildContext context) {
-    return [
-      const Expanded(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    ];
+  Widget buildProfileLoadingContent(BuildContext context) {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
   }
 
-  List<Widget> buildProfileErrorContent(BuildContext context) {
-    return [
-      Expanded(
-        child: Center(
-            child: Padding(
+  Widget buildProfileErrorContent(BuildContext context) {
+    return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(8.0)
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.all(
+                    Radius.circular(8.0)
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.warning_amber_rounded,
+                      size: 64,
+                      color: Colors.white,
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.warning_amber_rounded,
-                          size: 64,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                  'Unable to load profile',
-                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: Colors.white,
-                                  )
-                              ),
-                              Text(
-                                  'An unexpected error occured '
-                                      'while trying to load your profile.',
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Colors.white,
-                                  )
-                              ),
-                            ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              'Unable to load profile',
+                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                color: Colors.white,
+                              )
                           ),
-                        ),
-                      )
-                    ],
+                          Text(
+                              'An unexpected error occured '
+                                  'while trying to load your profile.',
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Colors.white,
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
                   )
-              ),
-            )
+                ],
+              )
+          ),
         )
-      ),
-    ];
+    );
   }
 
-  List<Widget> buildProfileLoadedContent(BuildContext context, Profile profile) {
-    return [
-      TabBar(
-        padding: const EdgeInsets.only(
-          top: AppThemeData.spacingSm,
-          left: AppThemeData.spacingMd,
-          right: AppThemeData.spacingMd,
-          bottom: AppThemeData.spacingXs,
-        ),
+  Widget buildProfileLoadedContent(BuildContext context, Profile profile) {
+    return SizedBox(
+      height: 540,
+      child: TabBarView(
         controller: primaryTC,
-        indicator: const ShapeDecoration(
-            color: Colors.black,
-            shape: StadiumBorder()
-        ),
-        labelColor: Colors.white,
-        labelPadding: const EdgeInsets.symmetric(
-            horizontal: AppThemeData.spacingSm
-        ),
-        indicatorColor: Colors.black,
-        indicatorSize: TabBarIndicatorSize.tab,
-        tabAlignment: TabAlignment.start,
-        isScrollable: true,
-        unselectedLabelColor: Colors.black,
-        splashFactory: NoSplash.splashFactory,
-        // long tap splash still visible
-        // make it look better with border radius
-        splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
-        dividerColor: Colors.transparent,
-        tabs: [
-          buildTabBarItem(context, AppLocalizations.of(context).days),
-          buildTabBarItem(context, AppLocalizations.of(context).weeks),
-          buildTabBarItem(context, AppLocalizations.of(context).months),
-          buildTabBarItem(context, AppLocalizations.of(context).years),
+        children: [
+          buildTabBarView(
+            context,
+            'days',
+            DaysStatsView(profile: profile),
+          ),
+          buildTabBarView(
+            context,
+            'weeks',
+            MonthsStatsView(
+              // profile: profile,
+            ),
+          ),
+          buildTabBarView(
+            context,
+            'months',
+            MonthsStatsView(
+              // profile: profile,
+            ),
+          ),
+          buildTabBarView(
+            context,
+            'years',
+            YearsStatsView(
+              // profile: profile,
+            ),
+          ),
         ],
       ),
-
-      Gap.small(),
-
-      Expanded(
-        child: TabBarView(
-          controller: primaryTC,
-          children: [
-            buildTabBarView(
-              context,
-              'days',
-              DaysStatsView(profile: profile),
-            ),
-            buildTabBarView(
-              context,
-              'weeks',
-              WeeksStatsView(
-                profile: profile,
-                statsIntervalBloc: BlocProvider.of<StatsIntervalBloc>(context),
-              ),
-            ),
-            buildTabBarView(
-              context,
-              'months',
-              MonthsStatsView(
-                // profile: profile,
-              ),
-            ),
-            buildTabBarView(
-              context,
-              'years',
-              YearsStatsView(
-                // profile: profile,
-              ),
-            ),
-          ],
-        ),
-      ),
-
-    ];
+    );
   }
 
   Widget buildScaffolding(
     BuildContext context,
     List<Widget> headerSlivers,
-    List<Widget> children,
+    Widget child,
   ) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
-    final double pinnedHeaderHeight = statusBarHeight + kToolbarHeight;
-    return ExtendedNestedScrollView(
+    final SliverOverlapAbsorberHandle handle = SliverOverlapAbsorberHandle();
+    //
+    // return NestedScrollView(
+    //   controller: scrollController,
+    //   headerSliverBuilder: (builderContext, innerBoxIsScrolled) {
+    //     return [
+    //       // buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+    //       SliverOverlapAbsorber(
+    //         handle: handle,
+    //         sliver: buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+    //       ),
+    //       // SliverOverlapAbsorber(handle: handle),
+    //
+    //       ...headerSlivers,
+    //       // SliverOverlapAbsorber(
+    //       //   handle: handle,
+    //       //   sliver: PinnedHeaderSliver(
+    //       //     child: buildTabBar(context),
+    //       //   ),
+    //       // )
+    //     ];
+    //   },
+    //   body: CustomScrollView(
+    //     slivers: [
+    //       SliverOverlapInjector(
+    //         handle: handle,
+    //       ),
+    //       PinnedHeaderSliver(
+    //         child: buildTabBar(context),
+    //       ),
+    //       SliverToBoxAdapter(
+    //         child: child
+    //       ),
+    //     ],
+    //   ),
+    // );
+
+    return CustomScrollView(
       controller: scrollController,
-      physics: const ClampingScrollPhysics(),
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return headerSlivers;
-      },
-      pinnedHeaderSliverHeightBuilder: () => pinnedHeaderHeight,
-      onlyOneScrollInBody: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: children,
+      slivers: [
+
+        buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+        ...headerSlivers,
+        PinnedHeaderSliver(
+          child: buildTabBar(context),
+        ),
+
+        _SliverFillRemainingCustom(
+          child: child,
+        ),
+
+      ],
+    );
+  }
+
+  Widget buildTabBar(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.backgroundPaper,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: AppThemeData.paddingSm),
+        child: TabBar(
+          padding: const EdgeInsets.only(
+            top: AppThemeData.spacingSm,
+            left: AppThemeData.spacingMd,
+            right: AppThemeData.spacingMd,
+            bottom: AppThemeData.spacingXs,
+          ),
+          controller: primaryTC,
+          indicator: const ShapeDecoration(
+              color: Colors.black,
+              shape: StadiumBorder()
+          ),
+          labelColor: Colors.white,
+          labelPadding: const EdgeInsets.symmetric(
+              horizontal: AppThemeData.spacingSm
+          ),
+          indicatorColor: Colors.black,
+          indicatorSize: TabBarIndicatorSize.tab,
+          tabAlignment: TabAlignment.start,
+          isScrollable: true,
+          unselectedLabelColor: Colors.black,
+          splashFactory: NoSplash.splashFactory,
+          // long tap splash still visible
+          // make it look better with border radius
+          splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+          dividerColor: Colors.transparent,
+          tabs: [
+            buildTabBarItem(context, AppLocalizations.of(context).days),
+            buildTabBarItem(context, AppLocalizations.of(context).weeks),
+            buildTabBarItem(context, AppLocalizations.of(context).months),
+            buildTabBarItem(context, AppLocalizations.of(context).years),
+          ],
+        ),
       ),
     );
   }
 
   List<Widget> buildDefaultHeaderSlivers(BuildContext context) {
     return [
-      buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+      // buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
     ];
   }
 
@@ -261,7 +288,7 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     Profile profile
   ) {
     return [
-      buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+      // buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
       buildProfileDetails(context, profile),
     ];
   }
@@ -275,16 +302,14 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
           mainAxisSize: MainAxisSize.min,
           children: [
             buildTitleEffectTitle(context, AppLocalizations.of(context).profileStats),
-            Gap.large(),
-            SizedBox(
-              width: double.infinity,
-              child: ConsecutiveDaysDisplay(
-                profile: profile,
-              ),
-            ),
-            Gap.large(),
-            ProfileMetricsView(profile: profile),
-            // Gap.large(),
+            Gap.medium(),
+            DetailedProfileView(profile: profile),
+            Gap.medium(),
+            DetailedConsecutiveDaysView(profile: profile),
+            Gap.medium(),
+            DetailedMilestonesView(profile: profile),
+            Gap.medium(),
+            DetailedSummaryView(profile: profile),
           ],
         ),
       ),
@@ -306,11 +331,13 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     String pageStorageKeyId,
     Widget child
   ) {
-    return ExtendedVisibilityDetector(
-      uniqueKey: Key(pageStorageKeyId),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        key: PageStorageKey<String>(pageStorageKeyId),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.black,
+      ),
+      child: Padding(
+        // padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
+        padding: const EdgeInsets.all(0),
         child: child,
       ),
     );
@@ -324,4 +351,69 @@ class _ProfileStatsViewContentState extends State<ProfileStatsViewContent>
     super.dispose();
   }
 
+}
+
+
+class _SliverFillRemainingCustom extends SingleChildRenderObjectWidget {
+  const _SliverFillRemainingCustom({super.child});
+
+  @override
+  RenderSliverFillRemainingCustom createRenderObject(BuildContext context) =>
+      RenderSliverFillRemainingCustom();
+}
+
+class RenderSliverFillRemainingCustom extends RenderSliverSingleBoxAdapter {
+  /// Creates a [RenderSliver] that wraps a scrollable [RenderBox] which is
+  /// sized to fit the remaining space in the viewport.
+  RenderSliverFillRemainingCustom({super.child});
+
+  // double get childExtent {
+  //   if (child == null) {
+  //     return 0.0;
+  //   }
+  //   assert(child!.hasSize);
+  //   return switch (constraints.axis) {
+  //     Axis.vertical => child!.size.height,
+  //     Axis.horizontal => child!.size.width,
+  //   };
+  // }
+
+  @override
+  void performLayout() {
+    if (child == null) {
+      geometry = SliverGeometry.zero;
+      return;
+    }
+    final SliverConstraints constraints = this.constraints;
+    child!.layout(constraints.asBoxConstraints(), parentUsesSize: true);
+
+
+    double childExtent = child!.size.height;
+    if (constraints.overlap > 0.0) {
+      childExtent = constraints.remainingPaintExtent - constraints.overlap;
+    } else {
+      childExtent = math.max(
+        child!.size.height,
+        constraints.viewportMainAxisExtent,
+      );
+    }
+
+    final double paintedChildSize = calculatePaintOffset(constraints, from: 0.0, to: childExtent);
+    final double cacheExtent = calculateCacheOffset(constraints, from: 0.0, to: childExtent);
+
+    assert(paintedChildSize.isFinite);
+    assert(paintedChildSize >= 0.0);
+
+    geometry = SliverGeometry(
+      scrollExtent: childExtent,
+      paintExtent: paintedChildSize,
+      cacheExtent: cacheExtent,
+      maxPaintExtent: childExtent,
+      hitTestExtent: paintedChildSize,
+      hasVisualOverflow:
+      childExtent > constraints.remainingPaintExtent || constraints.scrollOffset > 0.0,
+    );
+
+    setChildParentData(child!, constraints, geometry!);
+  }
 }

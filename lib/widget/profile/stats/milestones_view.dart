@@ -6,20 +6,20 @@ import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 
-class MilestonesDisplay extends StatefulWidget {
+class MilestonesView extends StatefulWidget {
 
   final Profile profile;
 
-  const MilestonesDisplay({
+  const MilestonesView({
     required this.profile,
     super.key
   });
 
   @override
-  State<MilestonesDisplay> createState() => _MilestonesDisplayState();
+  State<MilestonesView> createState() => _MilestonesViewState();
 }
 
-class _MilestonesDisplayState extends State<MilestonesDisplay> {
+class _MilestonesViewState extends State<MilestonesView> {
 
   @override
   Widget build(BuildContext context) {

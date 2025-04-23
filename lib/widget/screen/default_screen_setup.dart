@@ -166,7 +166,6 @@ mixin DefaultScreenSetupHelpersMixin {
       floating: false,
       pinned: true,
       scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect
-      backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
       leading: Padding(
         padding: EdgeInsets.only(
           left: AppThemeData.paddingLg,

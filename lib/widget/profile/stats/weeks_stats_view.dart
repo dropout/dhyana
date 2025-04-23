@@ -26,18 +26,20 @@ class WeeksStatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WeeksBloc>(
-        create: (BuildContext context) {
-          return WeeksBloc(
-            statisticsRepository: context.repos.statisticsRepository,
-            crashlyticsService: context.services.crashlyticsService,
-          );
-        },
-        child: WeeksStatsViewContentBuilder(
-          profile: profile,
-        )
-    );
+    return SizedBox.shrink();
   }
+  //   return BlocProvider<WeeksBloc>(
+  //       create: (BuildContext context) {
+  //         return WeeksBloc(
+  //           statisticsRepository: context.repos.statisticsRepository,
+  //           crashlyticsService: context.services.crashlyticsService,
+  //         );
+  //       },
+  //       child: WeeksStatsViewContentBuilder(
+  //         profile: profile,
+  //       )
+  //   );
+  // }
 }
 
 class WeeksStatsViewContentBuilder extends StatelessWidget {
@@ -51,15 +53,17 @@ class WeeksStatsViewContentBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WeeksBloc weeksBloc = BlocProvider.of<WeeksBloc>(context);
-    StatsIntervalBloc statsIntervalBloc = BlocProvider.of<StatsIntervalBloc>(
-        context);
-    return WeeksStatsViewContent(
-      profile: profile,
-      weeksBloc: weeksBloc,
-      statsIntervalBloc: statsIntervalBloc,
-    );
+    return SizedBox.shrink();
   }
+  //   WeeksBloc weeksBloc = BlocProvider.of<WeeksBloc>(context);
+  //   StatsIntervalBloc statsIntervalBloc = BlocProvider.of<StatsIntervalBloc>(
+  //       context);
+  //   return WeeksStatsViewContent(
+  //     profile: profile,
+  //     weeksBloc: weeksBloc,
+  //     statsIntervalBloc: statsIntervalBloc,
+  //   );
+  // }
 }
 
 class WeeksStatsViewContent extends StatefulWidget {

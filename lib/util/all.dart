@@ -2,6 +2,7 @@ export 'assets.dart';
 export 'blurhash.dart';
 export 'date_time_utils.dart';
 export 'default_profile_data.dart';
+export 'duration.dart';
 export 'enum_helper.dart';
 export 'faker.dart';
 export 'firebase_provider.dart';

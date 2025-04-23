@@ -183,6 +183,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get averageAbbr => 'Avg.';
 
   @override
+  String get statsCurrentStreak => 'Current streak';
+
+  @override
+  String get statsStartedAt => 'Started at';
+
+  @override
+  String get statsNotyetStarted => 'Not yet started';
+
+  @override
+  String get statsLastCheckedAt => 'Last checked';
+
+  @override
+  String get statsNotyetChecked => 'Not yet checked';
+
+  @override
+  String get statsLongestStreak => 'Longest streak';
+
+  @override
   String get statsTimePerDay => 'Time per day';
 
   @override
@@ -193,6 +211,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statsTimePerYear => 'Time per years';
+
+  @override
+  String get statsSummary => 'Summary';
 
   @override
   String get statsTotalTimeSpent => 'Total time';
@@ -208,6 +229,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statsAverageSessions => 'Average sessions';
+
+  @override
+  String get statsCount => 'Count';
+
+  @override
+  String get statsNextMilestone => 'Next milestone';
 
   @override
   String get signOut => 'Signout';

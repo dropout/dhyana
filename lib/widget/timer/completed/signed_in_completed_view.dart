@@ -31,6 +31,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   void initState() {
+    ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
     BlocProvider.of<SessionLoggerBloc>(context).add(
       SessionLoggerEvent.logSession(
         profileId: widget.profileId,
@@ -38,6 +39,12 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
         endTime: widget.timerState.endTime ?? DateTime.now(),
         duration: widget.timerState.elapsedTime,
         timerSettings: widget.timerSettings,
+        onComplete: (Profile updatedProfile) {
+          // refresh the profile
+          profileBloc.add(
+            ProfileEvent.loadProfile(profileId: updatedProfile.id)
+          );
+        },
       )
     );
     super.initState();

@@ -443,6 +443,42 @@ abstract class AppLocalizations {
   /// **'Átl.'**
   String get averageAbbr;
 
+  /// No description provided for @statsCurrentStreak.
+  ///
+  /// In hu, this message translates to:
+  /// **'Aktuális sorozat'**
+  String get statsCurrentStreak;
+
+  /// No description provided for @statsStartedAt.
+  ///
+  /// In hu, this message translates to:
+  /// **'Aktuálist sorozat kezdete'**
+  String get statsStartedAt;
+
+  /// No description provided for @statsNotyetStarted.
+  ///
+  /// In hu, this message translates to:
+  /// **'Még nem kezdted el'**
+  String get statsNotyetStarted;
+
+  /// No description provided for @statsLastCheckedAt.
+  ///
+  /// In hu, this message translates to:
+  /// **'Legutolsó ellenőrzés'**
+  String get statsLastCheckedAt;
+
+  /// No description provided for @statsNotyetChecked.
+  ///
+  /// In hu, this message translates to:
+  /// **'Még nincs ellenőrizve'**
+  String get statsNotyetChecked;
+
+  /// No description provided for @statsLongestStreak.
+  ///
+  /// In hu, this message translates to:
+  /// **'Leghosszabb sorozat'**
+  String get statsLongestStreak;
+
   /// No description provided for @statsTimePerDay.
   ///
   /// In hu, this message translates to:
@@ -466,6 +502,12 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Idő évente'**
   String get statsTimePerYear;
+
+  /// No description provided for @statsSummary.
+  ///
+  /// In hu, this message translates to:
+  /// **'Összesítés'**
+  String get statsSummary;
 
   /// No description provided for @statsTotalTimeSpent.
   ///
@@ -496,6 +538,18 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Átlagos alkalom'**
   String get statsAverageSessions;
+
+  /// No description provided for @statsCount.
+  ///
+  /// In hu, this message translates to:
+  /// **'Darab'**
+  String get statsCount;
+
+  /// No description provided for @statsNextMilestone.
+  ///
+  /// In hu, this message translates to:
+  /// **'Következő mérföldkő'**
+  String get statsNextMilestone;
 
   /// No description provided for @signOut.
   ///

@@ -42,7 +42,8 @@ mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {
       centerTitle: false,
       elevation: 0,
       // stretch: true, // Not working?
-      floating: false,
+      floating: true,
+
       pinned: true,
       scrolledUnderElevation: 0.0, // Material design wierd transparency effect
       backgroundColor: AppColors.backgroundPaper,

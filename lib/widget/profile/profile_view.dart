@@ -77,16 +77,17 @@ class _ProfileViewState extends State<ProfileView> {
           Row(
             children: [
               Expanded(
-                child: ConsecutiveDaysDisplay(profile: profile,)
+                child: ConsecutiveDaysView(profile: profile,)
               ),
               Gap.medium(),
               Expanded(
-                child: MilestonesDisplay(profile: profile)
+                child: MilestonesView(profile: profile)
               ),
             ],
           ),
           Gap.large(),
-          PerformanceInNumbersDisplay(profile: profile),
+          ProfileMetricsView(profile: profile),
+
           Gap.large(),
           ProfileMenu(profile: profile),
           Gap.large(),

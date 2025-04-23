@@ -15,7 +15,9 @@ class ProfileStatsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       extendBodyBehindAppBar: true,
-      body: const ProfileStatsView(),
+      body: ProfileStatsView(
+        profileId: profileId
+      ),
     );
   }
 

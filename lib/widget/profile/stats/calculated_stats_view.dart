@@ -1,5 +1,6 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
@@ -40,9 +41,12 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               child: buildColumnItem(
                 context,
                 label: AppLocalizations.of(context).statsTotalSessions,
-                child: StatsNumValueText(
-                  value: calculatedStats.totalSessions,
-                  color: AppColors.backgroundPaperLight,
+                child: Text(
+                  calculatedStats.totalSessions.toString(),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.backgroundPaperLight,
+                  ),
                 ),
                 order: 0,
               ),
@@ -52,9 +56,12 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               child: buildColumnItem(
                 context,
                 label: AppLocalizations.of(context).statsTotalTimeSpent,
-                child: StatsDurationText(
-                  duration: Duration(minutes: calculatedStats.totalMinutes),
-                  color: AppColors.backgroundPaperLight,
+                child: Text(
+                  Duration(minutes:calculatedStats.totalMinutes).toFormattedString(context),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.backgroundPaperLight,
+                  ),
                 ),
                 order: 1,
               ),

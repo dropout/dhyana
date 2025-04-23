@@ -20,7 +20,7 @@ class StatsDurationText extends StatelessWidget {
     if (duration.inMinutes < 1) {
       return RichText(
         text: TextSpan(
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
             color: color,
           ),
           children: [
@@ -45,13 +45,13 @@ class StatsDurationText extends StatelessWidget {
 
     return RichText(
       text: TextSpan(
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: color,
         ),
         children: [
           if (hours > 0) TextSpan(
             text: hours.toString(),
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: color,
               fontWeight: FontWeight.bold,
             ),
@@ -109,7 +109,7 @@ class StatsNumValueText extends StatelessWidget {
             children: [
               TextSpan(
                 text: value.toStringAsFixed(0),
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: color,
                   fontWeight: FontWeight.bold,
                 ),

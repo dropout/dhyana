@@ -75,16 +75,26 @@
   "highlights": "Kiemelt adatok",
   "average": "Átlag",
   "averageAbbr": "Átl.",
+
+  "statsCurrentStreak": "Aktuális sorozat",
+  "statsStartedAt": "Aktuálist sorozat kezdete",
+  "statsNotyetStarted": "Még nem kezdted el",
+  "statsLastCheckedAt": "Legutolsó ellenőrzés",
+  "statsNotyetChecked": "Még nincs ellenőrizve",
+  "statsLongestStreak": "Leghosszabb sorozat",
+
   "statsTimePerDay": "Idő naponta",
   "statsTimePerWeek": "Idő hetente",
   "statsTimePerMonth": "Idő havonta",
   "statsTimePerYear": "Idő évente",
+  "statsSummary": "Összesítés",
   "statsTotalTimeSpent": "Összes idő",
   "statsTotalSessions": "Összes alkalom",
   "statsTotalDays": "Összes nap",
   "statsAverageTimeSpent": "Átlagos idő",
   "statsAverageSessions": "Átlagos alkalom",
-
+  "statsCount": "Darab",
+  "statsNextMilestone": "Következő mérföldkő",
 
   "signOut": "Kijelentkezés",
   "profileSignoutTitle": "Kijelentkezés",

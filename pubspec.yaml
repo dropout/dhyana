@@ -41,7 +41,7 @@ dependencies:
   flutter_shaders: ^0.1.2
   extended_nested_scroll_view: ^6.2.1
   flip_board: ^1.0.0
-  flutter_portal: ^1.1.4
+  sticky_headers: ^0.3.0+2
 
   # Additional functionalities
   audioplayers: ^6.0.0

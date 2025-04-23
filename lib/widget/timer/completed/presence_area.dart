@@ -51,10 +51,12 @@ class _PresenceAreaState extends State<PresenceArea> {
 
     return Column(
       children: [
-        Icon(Icons.public_rounded, color: Colors.grey.shade400),
+        Icon(Icons.public_rounded, color: Colors.grey.shade800),
         Gap.xxl(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppThemeData.spacingLg
+          ),
           child: PresenceList(
             presenceList: state.presenceList,
             textColor: Colors.white,

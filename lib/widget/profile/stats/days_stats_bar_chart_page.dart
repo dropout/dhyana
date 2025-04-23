@@ -5,6 +5,7 @@ import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,32 +60,64 @@ class DaysStatsBarChartPage extends StatelessWidget {
 
   Widget buildLoadingState(BuildContext context) {
     Duration difference = statsInterval.from.difference(statsInterval.to);
-    return StatsBarChart(
-      key: ValueKey(pageIndex),
-      barData: List.generate(difference.inDays.abs(), (index) {
-        DateTime day = statsInterval.from.add(Duration(days: index));
-        return BarData(
-          value: 0,
-          label: DateFormat.EEEE(Localizations.localeOf(context).toString())
-            .format(day).toUpperCase(),
-        );
-      }),
+    return buildScaffolding(context,
+      chart: StatsBarChart(
+        key: ValueKey(pageIndex),
+        barData: List.generate(difference.inDays.abs(), (index) {
+          DateTime day = statsInterval.from.add(Duration(days: index));
+          return BarData(
+            value: 0,
+            label: DateFormat.EEEE(Localizations.localeOf(context).toString())
+                .format(day).toUpperCase(),
+          );
+        }),
+      ),
+      calculatedStats: CalculatedStatsView(calculatedStats: CalculatedStats()),
     );
   }
 
   Widget buildLoadedState(BuildContext context, DaysLoadedState state) {
-    return StatsBarChart(
-      key: ValueKey(pageIndex),
-      barData: state.days.map((day) {
-        return BarData(
-          value: day.minutesCount.toDouble(),
-          label: DateFormat.EEEE(
-            Localizations.localeOf(context).toString()
-          ).format(day.startDate).toUpperCase(),
-        );
-      }).toList(),
-      infoBuilderDelegate: (context, index) =>
-        buildBarInfo(context, index, state),
+    return buildScaffolding(
+      context,
+      chart: StatsBarChart(
+        key: ValueKey(pageIndex),
+        barData: state.days.map((day) {
+          return BarData(
+            value: day.minutesCount.toDouble(),
+            label: DateFormat.EEEE(
+                Localizations.localeOf(context).toString()
+            ).format(day.startDate).toUpperCase(),
+          );
+        }).toList(),
+        infoBuilderDelegate: (context, index) =>
+          buildBarInfo(context, index, state),
+      ),
+      calculatedStats: CalculatedStatsView(
+        calculatedStats: CalculatedStats.fromDays(state.days),
+      ),
+    );
+  }
+
+  Widget buildScaffolding(BuildContext context, {
+    required Widget chart,
+    required Widget calculatedStats,
+  }) {
+    return Column(
+     children: [
+       SizedBox(
+         height: 420,
+         child: chart,
+       ),
+       Expanded(
+         child: Padding(
+           padding: const EdgeInsets.only(
+             left: AppThemeData.paddingLg,
+             right: AppThemeData.paddingXl + 32,
+           ),
+           child: calculatedStats,
+         )
+       ),
+     ],
     );
   }
 

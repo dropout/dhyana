@@ -8,20 +8,20 @@ import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ConsecutiveDaysDisplay extends StatefulWidget {
+class ConsecutiveDaysView extends StatefulWidget {
 
   final Profile profile;
 
-  const ConsecutiveDaysDisplay({
+  const ConsecutiveDaysView({
     required this.profile,
     super.key
   });
 
   @override
-  State<ConsecutiveDaysDisplay> createState() => _ConsecutiveDaysDisplayState();
+  State<ConsecutiveDaysView> createState() => _ConsecutiveDaysViewState();
 }
 
-class _ConsecutiveDaysDisplayState extends State<ConsecutiveDaysDisplay> {
+class _ConsecutiveDaysViewState extends State<ConsecutiveDaysView> {
 
   @override
   Widget build(BuildContext context) {

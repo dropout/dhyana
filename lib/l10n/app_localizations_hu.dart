@@ -183,6 +183,24 @@ class AppLocalizationsHu extends AppLocalizations {
   String get averageAbbr => 'Átl.';
 
   @override
+  String get statsCurrentStreak => 'Aktuális sorozat';
+
+  @override
+  String get statsStartedAt => 'Aktuálist sorozat kezdete';
+
+  @override
+  String get statsNotyetStarted => 'Még nem kezdted el';
+
+  @override
+  String get statsLastCheckedAt => 'Legutolsó ellenőrzés';
+
+  @override
+  String get statsNotyetChecked => 'Még nincs ellenőrizve';
+
+  @override
+  String get statsLongestStreak => 'Leghosszabb sorozat';
+
+  @override
   String get statsTimePerDay => 'Idő naponta';
 
   @override
@@ -193,6 +211,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get statsTimePerYear => 'Idő évente';
+
+  @override
+  String get statsSummary => 'Összesítés';
 
   @override
   String get statsTotalTimeSpent => 'Összes idő';
@@ -208,6 +229,12 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get statsAverageSessions => 'Átlagos alkalom';
+
+  @override
+  String get statsCount => 'Darab';
+
+  @override
+  String get statsNextMilestone => 'Következő mérföldkő';
 
   @override
   String get signOut => 'Kijelentkezés';

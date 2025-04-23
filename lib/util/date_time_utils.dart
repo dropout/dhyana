@@ -48,6 +48,24 @@ extension DateTimeUtils on DateTime {
     return other.isBefore(prevDay);
   }
 
+  String toFormattedDateTimeString(BuildContext context) {
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString()
+    ).add_Hm().format(this);
+  }
+
+  String toFormattedDateString(BuildContext context) {
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString()
+    ).format(this);
+  }
+
+  String toFormattedTimeString(BuildContext context) {
+    return DateFormat.Hm(
+      Localizations.localeOf(context).toString()
+    ).format(this);
+  }
+
 }
 
 String createIntervalString(BuildContext context, DateTime from, DateTime to) =>

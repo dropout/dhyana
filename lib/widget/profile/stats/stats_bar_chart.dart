@@ -1,5 +1,6 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 class StatsBarChart extends StatefulWidget {
@@ -27,7 +28,7 @@ class _StatsBarChartState extends State<StatsBarChart> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(AppThemeData.paddingXl),
       child: InfoHeaderBarChart(
         dataSource: widget.barData,
         displayRangeSetter: DisplayRangeSetters.durationDisplayRangeSetter,

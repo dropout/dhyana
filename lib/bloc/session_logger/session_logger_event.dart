@@ -9,6 +9,8 @@ class SessionLoggerEvent with _$SessionLoggerEvent {
     required DateTime endTime,
     required Duration duration,
     required TimerSettings timerSettings,
+    void Function(Profile updatedProfile)? onComplete,
+    void Function(Object? error, StackTrace stack)? onError,
   }) = LogSessionEvent;
 
 }

@@ -75,6 +75,7 @@ class SessionLoggerBloc extends Bloc<SessionLoggerEvent, SessionLoggerState> {
         updatedProfile: result.updatedProfile,
       ));
 
+      event.onComplete?.call(result.updatedProfile);
       logger.t('Session successfully logged!');
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -83,6 +84,7 @@ class SessionLoggerBloc extends Bloc<SessionLoggerEvent, SessionLoggerState> {
           reason: 'Unable to log session: ${event.profileId}'
       );
       emit(SessionLoggerState.error());
+      event.onError?.call(e, stack);
     }
   }
 
