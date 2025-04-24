@@ -32,8 +32,11 @@ class _ConsecutiveDaysViewState extends State<ConsecutiveDaysView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StatsNumValueText(
-            value: consecutiveDays,
+          Text(
+            consecutiveDays.toStringAsFixed(0),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           // buildConsecutiveDaysStartTime(context),
         ],

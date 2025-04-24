@@ -7,6 +7,10 @@ extension DurationUtils on Duration {
     int hours = inHours;
     int minutes = inMinutes.remainder(60);
 
+    if (inMinutes < 1) {
+      return '0${AppLocalizations.of(context).minutesAbbr.toLowerCase()}';
+    }
+
     String formattedDuration = '';
     if (hours > 0) {
       formattedDuration += '$hours${AppLocalizations.of(context).hoursAbbr} ';

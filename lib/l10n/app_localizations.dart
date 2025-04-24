@@ -437,6 +437,12 @@ abstract class AppLocalizations {
   /// **'Átlag'**
   String get average;
 
+  /// No description provided for @averagePerDay.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlagosan naponta'**
+  String get averagePerDay;
+
   /// No description provided for @averageAbbr.
   ///
   /// In hu, this message translates to:

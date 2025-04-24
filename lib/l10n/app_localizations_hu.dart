@@ -180,6 +180,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get average => 'Átlag';
 
   @override
+  String get averagePerDay => 'Átlagosan naponta';
+
+  @override
   String get averageAbbr => 'Átl.';
 
   @override

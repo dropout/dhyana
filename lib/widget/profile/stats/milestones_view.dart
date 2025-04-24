@@ -29,9 +29,12 @@ class _MilestonesViewState extends State<MilestonesView> {
       children: [
         AppCard(
           title: AppLocalizations.of(context).milestones,
-          child: StatsNumValueText(
-            value: milestoneCount,
-          )
+          child: Text(
+            milestoneCount.toStringAsFixed(0),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         Positioned.fill(
           child: Align(

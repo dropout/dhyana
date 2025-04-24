@@ -73,7 +73,9 @@
   "profileStats": "Statisztika",
   "consecutiveDays": "Egymás utáni napok",
   "highlights": "Kiemelt adatok",
+
   "average": "Átlag",
+  "averagePerDay": "Átlagosan naponta",
   "averageAbbr": "Átl.",
 
   "statsCurrentStreak": "Aktuális sorozat",

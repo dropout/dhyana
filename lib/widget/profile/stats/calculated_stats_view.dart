@@ -7,7 +7,6 @@ import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
-import 'stats_text.dart';
 
 class CalculatedStatsView extends StatefulWidget {
 
@@ -57,7 +56,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
                 context,
                 label: AppLocalizations.of(context).statsTotalTimeSpent,
                 child: Text(
-                  Duration(minutes:calculatedStats.totalMinutes).toFormattedString(context),
+                  Duration(minutes: calculatedStats.totalMinutes).toFormattedString(context),
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.backgroundPaperLight,

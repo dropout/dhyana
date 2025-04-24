@@ -16,11 +16,9 @@ import 'calculated_stats_view.dart';
 class WeeksStatsView extends StatelessWidget {
 
   final Profile profile;
-  final StatsIntervalBloc statsIntervalBloc;
 
   const WeeksStatsView({
     required this.profile,
-    required this.statsIntervalBloc,
     super.key,
   });
 

@@ -202,16 +202,16 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     Widget child
   ) {
     return child;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.black,
-      ),
-      child: Padding(
-        // padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
-        padding: const EdgeInsets.all(0),
-        child: child,
-      ),
-    );
+    // return DecoratedBox(
+    //   decoration: BoxDecoration(
+    //     color: Colors.black,
+    //   ),
+    //   child: Padding(
+    //     // padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
+    //     padding: const EdgeInsets.all(0),
+    //     child: child,
+    //   ),
+    // );
   }
 
   Widget buildTabBarItem(BuildContext context, String label) {
@@ -238,16 +238,12 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           buildTabBarViewItem(
             context,
             'weeks',
-            MonthsStatsView(
-              // profile: profile,
-            ),
+            WeeksStatsView(profile: profile),
           ),
           buildTabBarViewItem(
             context,
             'months',
-            MonthsStatsView(
-              // profile: profile,
-            ),
+            MonthsStatsView(profile: profile),
           ),
           buildTabBarViewItem(
             context,

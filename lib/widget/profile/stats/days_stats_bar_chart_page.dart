@@ -5,8 +5,10 @@ import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -45,6 +47,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
           case DaysLoadingErrorState():
             return const SizedBox.shrink();
           case DaysLoadedState():
+            // return buildLoadingState(context);
             return buildLoadedState(context, state);
         }
       },
@@ -68,9 +71,11 @@ class DaysStatsBarChartPage extends StatelessWidget {
           return BarData(
             value: 0,
             label: DateFormat.EEEE(Localizations.localeOf(context).toString())
-                .format(day).toUpperCase(),
+              .format(day).toUpperCase(),
           );
         }),
+        infoBuilderDelegate: (context, index) =>
+              buildBarInfoLoading(context, index),
       ),
       calculatedStats: CalculatedStatsView(calculatedStats: CalculatedStats()),
     );
@@ -85,12 +90,12 @@ class DaysStatsBarChartPage extends StatelessWidget {
           return BarData(
             value: day.minutesCount.toDouble(),
             label: DateFormat.EEEE(
-                Localizations.localeOf(context).toString()
+              Localizations.localeOf(context).toString()
             ).format(day.startDate).toUpperCase(),
           );
         }).toList(),
         infoBuilderDelegate: (context, index) =>
-          buildBarInfo(context, index, state),
+          buildBarInfoFromDays(context, index, state.days),
       ),
       calculatedStats: CalculatedStatsView(
         calculatedStats: CalculatedStats.fromDays(state.days),
@@ -121,22 +126,88 @@ class DaysStatsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfo(BuildContext context, int index, DaysLoadedState state) {
+  Widget buildBarInfoLoading(BuildContext context, int index) {
+    return BarChartInfoTriggerBox.withText(
+      prefix: createIntervalString(
+        context,
+        statsInterval.from,
+        statsInterval.to,
+      ),
+      mainText: 'Loading data...',
+      postfix: 'Please wait',
+    );
+  }
+
+  Widget buildBarInfoFromDays(
+    BuildContext context,
+    int index,
+    List<Day> days
+  ) {
     if (index < 0) {
-      final calculatedStats = CalculatedStats.fromDays(state.days);
-      return DaysOverlayIdle(
-        dateRangeText: createIntervalString(
+      final calculatedStats = CalculatedStats.fromDays(days);
+      return BarChartInfoTriggerBox(
+        prefix: Text(createIntervalString(
           context,
           statsInterval.from,
           statsInterval.to,
+        )),
+        mainText: Text(
+          AppLocalizations.of(context).minutesPluralWithNumber(
+            calculatedStats.averageMinutes.toInt(),
+          )
         ),
-        averageMinutes: calculatedStats.averageMinutes.toInt(),
-        averageSessionCount: calculatedStats.averageSessions.toInt(),
+        postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
       );
     } else {
+      final day = days[index];
       return UnconstrainedBox(
-        child: DaysOverlay(
-          day: state.days[index],
+        child: BarChartInfoTriggerBox(
+          prefix: Text(DateFormat.yMMMMEEEEd(Localizations.localeOf(context).toString()).format(day.startDate)),
+          mainText: Text(AppLocalizations.of(context).minutesPluralWithNumber(day.minutesCount)),
+          postfix: Padding(
+            padding: const EdgeInsets.only(top: AppThemeData.paddingXs),
+            child: Row(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle, // Circle shape
+                        color: AppColors.backgroundPaperLight,
+                      ),
+                      child: Icon(
+                        Icons.self_improvement_rounded,
+                        size: 18,
+                        // color: textColor,
+                      ),
+                    ),
+                    Gap.xs(),
+                    Text(day.sessionCount.toString()),
+                  ],
+                ),
+                Gap.small(),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle, // Circle shape
+                        color: AppColors.backgroundPaperLight,
+                      ),
+                      child: Icon(
+                        Icons.link_rounded,
+                        size: 18,
+                      ),
+                    ),
+                    Gap.xs(),
+                    Text(day.consecutiveDaysCount.toString()),
+                  ],
+                )
+              ],
+            ),
+          ),
+
         ),
       );
     }

@@ -36,8 +36,6 @@
   "session": "Session",
   "sessions": "Sessions",
 
-
-
   "timerFinishSessionButtonText": "Finish session",
   "timerDiscardSessionButtonText": "Discard session",
 
@@ -71,6 +69,7 @@
 
   "profileStats": "Statistics",
   "average": "Average",
+  "averagePerDay": "Average per day",
   "averageAbbr": "Avg.",
 
   "statsCurrentStreak": "Current streak",

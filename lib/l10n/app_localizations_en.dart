@@ -180,6 +180,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get average => 'Average';
 
   @override
+  String get averagePerDay => 'Average per day';
+
+  @override
   String get averageAbbr => 'Avg.';
 
   @override
