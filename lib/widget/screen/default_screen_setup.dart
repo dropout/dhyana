@@ -132,12 +132,14 @@ mixin DefaultScreenSetupHelpersMixin {
 
   Widget buildLoadingSliver(BuildContext context) {
     return SliverFillRemaining(
+      hasScrollBody: false,
       child: AppLoadingDisplay(),
     );
   }
 
   Widget buildErrorSliver(BuildContext context) {
     return SliverFillRemaining(
+      hasScrollBody: false,
       child: AppErrorDisplay(),
     );
   }
