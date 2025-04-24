@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -8,14 +7,9 @@ import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/gap.dart';
-import 'package:dhyana/widget/util/title_effect.dart';
-import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sticky_headers/sticky_headers.dart';
 
 class ProfileStatsView extends StatefulWidget {
 
@@ -179,14 +173,16 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           labelPadding: const EdgeInsets.symmetric(
               horizontal: AppThemeData.spacingSm
           ),
-          indicatorColor: Colors.black,
+          // indicatorColor: Colors.black,
           indicatorSize: TabBarIndicatorSize.tab,
+          indicatorAnimation: TabIndicatorAnimation.elastic,
+          automaticIndicatorColorAdjustment: false,
           tabAlignment: TabAlignment.start,
           isScrollable: true,
           unselectedLabelColor: Colors.black,
           splashFactory: NoSplash.splashFactory,
           // long tap splash still visible
-          // make it look better with border radius
+          // make it look better with splash border radius
           splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
           dividerColor: Colors.transparent,
           tabs: [
@@ -219,10 +215,10 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   }
 
   Widget buildTabBarItem(BuildContext context, String label) {
-    return Tab(
-      height: 32,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingSm),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingSm),
+      child: Tab(
+        height: 32,
         child: Text(label),
       ),
     );

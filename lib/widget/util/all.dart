@@ -16,3 +16,4 @@ export 'intersperse.dart';
 export 'separator_gem.dart';
 export 'signed_in.dart';
 export 'dialog_helper.dart';
+export 'title_effect.dart';
