@@ -20,19 +20,11 @@ class DaysStatsBarChartPage extends StatelessWidget {
   final int pageIndex;
   final StatsInterval statsInterval;
 
-  // forward these to the actual barchart infotrigger bars implementation
-  final void Function(int index, Day day)? onInfoTriggered;
-  final void Function(int index, Day day)? onInfoChanged;
-  final void Function(int index, Day day)? onInfoDismissed;
-
   final void Function(List<Day> days)? onDaysLoaded;
 
   const DaysStatsBarChartPage({
     required this.pageIndex,
     required this.statsInterval,
-    this.onInfoTriggered,
-    this.onInfoChanged,
-    this.onInfoDismissed,
     this.onDaysLoaded,
     super.key
   });
@@ -43,7 +35,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case DaysLoadingState():
-            return buildLoadingState(context);
+            return buildLoadingState(context, state);
           case DaysLoadingErrorState():
             return const SizedBox.shrink();
           case DaysLoadedState():
@@ -61,7 +53,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildLoadingState(BuildContext context) {
+  Widget buildLoadingState(BuildContext context, DaysLoadingState state) {
     Duration difference = statsInterval.from.difference(statsInterval.to);
     return buildScaffolding(context,
       chart: StatsBarChart(
@@ -75,7 +67,8 @@ class DaysStatsBarChartPage extends StatelessWidget {
           );
         }),
         infoBuilderDelegate: (context, index) =>
-              buildBarInfoLoading(context, index),
+          buildBarInfo(context, index, state),
+
       ),
       calculatedStats: CalculatedStatsView(calculatedStats: CalculatedStats()),
     );
@@ -95,7 +88,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
           );
         }).toList(),
         infoBuilderDelegate: (context, index) =>
-          buildBarInfoFromDays(context, index, state.days),
+          buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(
         calculatedStats: CalculatedStats.fromDays(state.days),
@@ -126,15 +119,52 @@ class DaysStatsBarChartPage extends StatelessWidget {
     );
   }
 
+  Widget buildBarInfo(BuildContext context, int index, DaysState state) {
+    Widget barInfo;
+    switch (state) {
+      case DaysLoadingState():
+        barInfo = buildBarInfoLoading(context, index);
+        break;
+      case DaysLoadedState():
+        barInfo = buildBarInfoFromDays(context, index, state.days);
+        break;
+      default:
+        barInfo = SizedBox.shrink();
+        break;
+    }
+    return AnimatedSwitcher(
+      duration: Durations.short4,
+      child: barInfo,
+    );
+  }
+
   Widget buildBarInfoLoading(BuildContext context, int index) {
     return BarChartInfoTriggerBox.withText(
+      key: ValueKey(index),
       prefix: createIntervalString(
         context,
         statsInterval.from,
         statsInterval.to,
       ),
-      mainText: 'Loading data...',
-      postfix: 'Please wait',
+      mainText: AppLocalizations.of(context).statsLoadingData,
+      postfix: AppLocalizations.of(context).pleaseWait,
+    );
+  }
+
+  Widget buildBarInfoIdle(BuildContext context, List<Day> days) {
+    final calculatedStats = CalculatedStats.fromDays(days);
+    return BarChartInfoTriggerBox(
+      prefix: Text(createIntervalString(
+        context,
+        statsInterval.from,
+        statsInterval.to,
+      )),
+      mainText: Text(
+        AppLocalizations.of(context).minutesPluralWithNumber(
+          calculatedStats.averageMinutes.toInt(),
+        )
+      ),
+      postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
     );
   }
 
@@ -144,20 +174,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
     List<Day> days
   ) {
     if (index < 0) {
-      final calculatedStats = CalculatedStats.fromDays(days);
-      return BarChartInfoTriggerBox(
-        prefix: Text(createIntervalString(
-          context,
-          statsInterval.from,
-          statsInterval.to,
-        )),
-        mainText: Text(
-          AppLocalizations.of(context).minutesPluralWithNumber(
-            calculatedStats.averageMinutes.toInt(),
-          )
-        ),
-        postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
-      );
+      return buildBarInfoIdle(context, days);
     } else {
       final day = days[index];
       return UnconstrainedBox(

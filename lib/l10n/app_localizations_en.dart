@@ -57,6 +57,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadMore => 'Load more';
 
   @override
+  String get pleaseWait => 'Please wait';
+
+  @override
   String get inputWarmupLabel => 'Warmup';
 
   @override
@@ -238,6 +241,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statsNextMilestone => 'Next milestone';
+
+  @override
+  String get statsLoadingData => 'Loading data...';
 
   @override
   String get signOut => 'Signout';

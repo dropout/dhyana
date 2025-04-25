@@ -40,11 +40,16 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               child: buildColumnItem(
                 context,
                 label: AppLocalizations.of(context).statsTotalSessions,
-                child: Text(
-                  calculatedStats.totalSessions.toString(),
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.backgroundPaperLight,
+                child: SizedBox(
+                  width: double.infinity,
+                  key: ValueKey(calculatedStats.totalSessions),
+                  child: Text(
+                    calculatedStats.totalSessions.toString(),
+
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.backgroundPaperLight,
+                    ),
                   ),
                 ),
                 order: 0,
@@ -55,11 +60,15 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
               child: buildColumnItem(
                 context,
                 label: AppLocalizations.of(context).statsTotalTimeSpent,
-                child: Text(
-                  Duration(minutes: calculatedStats.totalMinutes).toFormattedString(context),
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.backgroundPaperLight,
+                child: SizedBox(
+                  width: double.infinity,
+                  key: ValueKey(calculatedStats.totalMinutes),
+                  child: Text(
+                    Duration(minutes: calculatedStats.totalMinutes).toFormattedString(context),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.backgroundPaperLight,
+                    ),
                   ),
                 ),
                 order: 1,
@@ -89,7 +98,6 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
           padding: const EdgeInsets.all(AppThemeData.paddingLg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            key: ValueKey(widget.calculatedStats),
             children: [
               Text(label,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -101,7 +109,12 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
                 softWrap: false,
               ),
               Gap.small(),
-              child,
+              AnimatedSwitcher(
+                duration: Durations.medium4,
+                switchInCurve: Curves.easeIn,
+                switchOutCurve: Curves.easeOut,
+                child: child,
+              ),
             ],
           ),
         ),

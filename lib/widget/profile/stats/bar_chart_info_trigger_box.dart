@@ -2,7 +2,6 @@ import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
-
 class BarChartInfoTriggerBox extends StatelessWidget {
 
   final Widget prefix;
@@ -20,11 +19,13 @@ class BarChartInfoTriggerBox extends StatelessWidget {
     required String prefix,
     required String mainText,
     required String postfix,
+    Key? key,
   }) {
     return BarChartInfoTriggerBox(
       prefix: Text(prefix),
       mainText: Text(mainText),
       postfix: Text(postfix),
+      key: key,
     );
   }
 

@@ -17,6 +17,7 @@
 
   "loading": "Loading...",
   "loadMore": "Load more",
+  "pleaseWait": "Please wait",
 
   "inputWarmupLabel": "Warmup",
   "inputStartingSoundLabel": "Starting sound",
@@ -93,6 +94,7 @@
   "statsAverageSessions": "Average sessions",
   "statsCount": "Count",
   "statsNextMilestone": "Next milestone",
+  "statsLoadingData": "Loading data...",
 
   "signOut": "Signout",
   "profileSignoutTitle": "Signout",

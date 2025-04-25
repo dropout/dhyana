@@ -17,6 +17,7 @@
 
   "loading": "Betöltés...",
   "loadMore": "Több betöltése",
+  "pleaseWait": "Kérlek várj",
 
   "inputWarmupLabel": "Felkészülés",
   "inputStartingSoundLabel": "Kezdőhang",
@@ -97,6 +98,7 @@
   "statsAverageSessions": "Átlagos alkalom",
   "statsCount": "Darab",
   "statsNextMilestone": "Következő mérföldkő",
+  "statsLoadingData": "Adatok betöltése...",
 
   "signOut": "Kijelentkezés",
   "profileSignoutTitle": "Kijelentkezés",

@@ -191,6 +191,12 @@ abstract class AppLocalizations {
   /// **'Több betöltése'**
   String get loadMore;
 
+  /// No description provided for @pleaseWait.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kérlek várj'**
+  String get pleaseWait;
+
   /// No description provided for @inputWarmupLabel.
   ///
   /// In hu, this message translates to:
@@ -556,6 +562,12 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Következő mérföldkő'**
   String get statsNextMilestone;
+
+  /// No description provided for @statsLoadingData.
+  ///
+  /// In hu, this message translates to:
+  /// **'Adatok betöltése...'**
+  String get statsLoadingData;
 
   /// No description provided for @signOut.
   ///

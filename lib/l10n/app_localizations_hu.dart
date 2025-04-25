@@ -57,6 +57,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get loadMore => 'Több betöltése';
 
   @override
+  String get pleaseWait => 'Kérlek várj';
+
+  @override
   String get inputWarmupLabel => 'Felkészülés';
 
   @override
@@ -238,6 +241,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get statsNextMilestone => 'Következő mérföldkő';
+
+  @override
+  String get statsLoadingData => 'Adatok betöltése...';
 
   @override
   String get signOut => 'Kijelentkezés';
