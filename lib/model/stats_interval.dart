@@ -17,18 +17,16 @@ class StatsInterval with _$StatsInterval {
 
   factory StatsInterval.days({
     required DateTime lastDay,
-    int days = 7 // one week
+    int days = 7
   }) {
     DateTime to = lastDay.copyWith(
-      hour: 23,
-      minute: 59,
-      second: 59,
-    );
-    DateTime from = lastDay.subtract(Duration(days: days - 1));
-    from = from.copyWith(
+      day: lastDay.day + 1,
       hour: 0,
       minute: 0,
       second: 0,
+    );
+    DateTime from = to.copyWith(
+      day: to.day - days,
     );
     return StatsInterval(
       from: from,
@@ -38,15 +36,13 @@ class StatsInterval with _$StatsInterval {
 
   factory StatsInterval.weeks({
     required DateTime day,
-    int weeks = 8 // two months
+    int weeks = 8
   }) {
     StatsInterval interval = StatsInterval.thisWeek(day);
     return interval.copyWith(
-      from: interval.from.subtract(
-        Duration(
-          days: (weeks - 1) * 7 // current week included
-        )
-      ),
+      from: interval.from.copyWith(
+        day: interval.from.day - (weeks - 1) * 7,
+      )
     );
   }
 
@@ -74,32 +70,31 @@ class StatsInterval with _$StatsInterval {
     );
   }
 
-  factory StatsInterval.thisWeek(DateTime day) {
+  factory StatsInterval.thisWeek(DateTime today) {
+    DateTime firstDayOfWeek = today.firstDayOfWeek().copyWith(
+      hour: 0,
+      minute: 0,
+      second: 0,
+    );
     return StatsInterval(
-      from: day.firstDayOfWeek(),
-      to: day.lastDayOfWeek().copyWith(
-        hour: 23,
-        minute: 59,
-        second: 59,
+      from: firstDayOfWeek,
+      to: firstDayOfWeek.copyWith(
+        day: firstDayOfWeek.day + 7,
       )
     );
   }
 
-  factory StatsInterval.thisMonth(DateTime day) {
+  factory StatsInterval.thisMonth(DateTime today) {
     return StatsInterval(
-      from: DateTime(day.year, day.month, 1, 0, 0, 0),
-      to: DateTime(day.year, day.month + 1, 0, 23, 59, 59),
+      from: DateTime(today.year, today.month, 1),
+      to: DateTime(today.year, today.month + 1, 1),
     );
   }
 
-  factory StatsInterval.thisYear(DateTime day) {
+  factory StatsInterval.thisYear(DateTime today) {
     return StatsInterval(
-      from: DateTime(day.year, 1, 1),
-      to: DateTime(day.year + 1, 1, 0).copyWith(
-        hour: 23,
-        minute: 59,
-        second: 59,
-      )
+      from: DateTime(today.year, 1, 1),
+      to: DateTime(today.year + 1),
     );
   }
 
@@ -114,21 +109,22 @@ class StatsInterval with _$StatsInterval {
       int intervalCount = 4,
   }) {
     StatsInterval firstInterval = StatsInterval.days(lastDay: now);
-    return [
+    List<StatsInterval> result = [
       firstInterval,
-      StatsInterval(
-        from: firstInterval.from.subtract(Duration(days: daysInInterval)),
-        to: firstInterval.to.subtract(Duration(days: daysInInterval)),
-      ),
-      StatsInterval(
-        from: firstInterval.from.subtract(Duration(days: daysInInterval*2)),
-        to: firstInterval.to.subtract(Duration(days: daysInInterval*2)),
-      ),
-      StatsInterval(
-        from: firstInterval.from.subtract(Duration(days: daysInInterval*3)),
-        to: firstInterval.to.subtract(Duration(days: daysInInterval*3)),
-      ),
     ];
+    for (var i = 0; i < intervalCount - 1; ++i) {
+      result.add(
+        firstInterval.copyWith(
+          from: firstInterval.from.copyWith(
+            day: firstInterval.from.day - (daysInInterval * (i + 1)),
+          ),
+          to: firstInterval.to.copyWith(
+            day: firstInterval.to.day - (daysInInterval * (i + 1)),
+          ),
+        )
+      );
+    }
+    return result;
   }
 
   static List<StatsInterval> generateWeekIntervals(
@@ -150,11 +146,11 @@ class StatsInterval with _$StatsInterval {
     for (var i = 0; i < intervalCount - 1; ++i) {
       result.add(
         firstInterval.copyWith(
-          from: firstInterval.from.subtract(
-            Duration(days: weeksInInterval * (i + 1) * 7),
+          from: firstInterval.from.copyWith(
+            day: firstInterval.from.day - weeksInInterval * (i + 1) * 7,
           ),
-          to: firstInterval.to.subtract(
-            Duration(days: weeksInInterval * (i + 1) * 7),
+          to: firstInterval.to.copyWith(
+            day: firstInterval.to.day - weeksInInterval * (i + 1) * 7,
           ),
         )
       );
@@ -177,29 +173,21 @@ class StatsInterval with _$StatsInterval {
         minute: 0,
       ),
     );
-
     List<StatsInterval> result = [
       firstInterval,
     ];
-
     for (var i = 0; i < intervalCount - 1; ++i) {
       result.add(
         firstInterval.copyWith(
           from: firstInterval.from.copyWith(
             month: firstInterval.from.month - (monthsInInterval * (i + 1)),
-            hour: 0,
-            minute: 0,
           ),
           to: firstInterval.to.copyWith(
-            month: (firstInterval.to.month - (monthsInInterval * (i + 1))) + 1,
-            day: 0,
-            hour: 23,
-            minute: 59,
+            month: (firstInterval.to.month - (monthsInInterval * (i + 1))),
           )
         )
       );
     }
-
     return result;
   }
 
@@ -218,32 +206,21 @@ class StatsInterval with _$StatsInterval {
         minute: 0,
       ),
     );
-
     List<StatsInterval> result = [
       firstInterval,
     ];
-
     for (var i = 0; i < intervalCount - 1; ++i) {
       result.add(
         firstInterval.copyWith(
           from: firstInterval.from.copyWith(
             year: firstInterval.from.year - (yearsInInterval * (i + 1)),
-            month: 1,
-            day: 1,
-            hour: 0,
-            minute: 0,
           ),
           to: firstInterval.to.copyWith(
-            year: firstInterval.to.year - (yearsInInterval * (i + 1)) + 1,
-            month: 1,
-            day: 0,
-            hour: 23,
-            minute: 59,
+            year: firstInterval.to.year - (yearsInInterval * (i + 1)),
           )
         )
       );
     }
-
     return result;
   }
 
