@@ -20,7 +20,6 @@ StatsInterval _$StatsIntervalFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StatsInterval {
-  StatsIntervalType get intervalType => throw _privateConstructorUsedError;
   DateTime get from => throw _privateConstructorUsedError;
   DateTime get to => throw _privateConstructorUsedError;
 
@@ -40,7 +39,7 @@ abstract class $StatsIntervalCopyWith<$Res> {
           StatsInterval value, $Res Function(StatsInterval) then) =
       _$StatsIntervalCopyWithImpl<$Res, StatsInterval>;
   @useResult
-  $Res call({StatsIntervalType intervalType, DateTime from, DateTime to});
+  $Res call({DateTime from, DateTime to});
 }
 
 /// @nodoc
@@ -58,15 +57,10 @@ class _$StatsIntervalCopyWithImpl<$Res, $Val extends StatsInterval>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? intervalType = null,
     Object? from = null,
     Object? to = null,
   }) {
     return _then(_value.copyWith(
-      intervalType: null == intervalType
-          ? _value.intervalType
-          : intervalType // ignore: cast_nullable_to_non_nullable
-              as StatsIntervalType,
       from: null == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -87,7 +81,7 @@ abstract class _$$StatsIntervalImplCopyWith<$Res>
       __$$StatsIntervalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StatsIntervalType intervalType, DateTime from, DateTime to});
+  $Res call({DateTime from, DateTime to});
 }
 
 /// @nodoc
@@ -103,15 +97,10 @@ class __$$StatsIntervalImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? intervalType = null,
     Object? from = null,
     Object? to = null,
   }) {
     return _then(_$StatsIntervalImpl(
-      intervalType: null == intervalType
-          ? _value.intervalType
-          : intervalType // ignore: cast_nullable_to_non_nullable
-              as StatsIntervalType,
       from: null == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -127,15 +116,11 @@ class __$$StatsIntervalImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StatsIntervalImpl extends _StatsInterval {
-  const _$StatsIntervalImpl(
-      {required this.intervalType, required this.from, required this.to})
-      : super._();
+  const _$StatsIntervalImpl({required this.from, required this.to}) : super._();
 
   factory _$StatsIntervalImpl.fromJson(Map<String, dynamic> json) =>
       _$$StatsIntervalImplFromJson(json);
 
-  @override
-  final StatsIntervalType intervalType;
   @override
   final DateTime from;
   @override
@@ -143,7 +128,7 @@ class _$StatsIntervalImpl extends _StatsInterval {
 
   @override
   String toString() {
-    return 'StatsInterval(intervalType: $intervalType, from: $from, to: $to)';
+    return 'StatsInterval(from: $from, to: $to)';
   }
 
   @override
@@ -151,15 +136,13 @@ class _$StatsIntervalImpl extends _StatsInterval {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StatsIntervalImpl &&
-            (identical(other.intervalType, intervalType) ||
-                other.intervalType == intervalType) &&
             (identical(other.from, from) || other.from == from) &&
             (identical(other.to, to) || other.to == to));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, intervalType, from, to);
+  int get hashCode => Object.hash(runtimeType, from, to);
 
   /// Create a copy of StatsInterval
   /// with the given fields replaced by the non-null parameter values.
@@ -179,16 +162,13 @@ class _$StatsIntervalImpl extends _StatsInterval {
 
 abstract class _StatsInterval extends StatsInterval {
   const factory _StatsInterval(
-      {required final StatsIntervalType intervalType,
-      required final DateTime from,
+      {required final DateTime from,
       required final DateTime to}) = _$StatsIntervalImpl;
   const _StatsInterval._() : super._();
 
   factory _StatsInterval.fromJson(Map<String, dynamic> json) =
       _$StatsIntervalImpl.fromJson;
 
-  @override
-  StatsIntervalType get intervalType;
   @override
   DateTime get from;
   @override
