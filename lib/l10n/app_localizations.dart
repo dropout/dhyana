@@ -671,6 +671,24 @@ abstract class AppLocalizations {
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}'**
   String daysPluralWithNumber(num count);
 
+  /// No description provided for @weeksPlural.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{hét} =1{hét} =2{hét} few{hét} many{hét} other{hét}}'**
+  String weeksPlural(num count);
+
+  /// No description provided for @weeksPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} hét} =1{{count} hét} =2{{count} hét} few{{count} hét} many{{count} hét} other{{count} hét}}'**
+  String weeksPluralWithNumber(num count);
+
+  /// A hét számának megjelenítése.
+  ///
+  /// In hu, this message translates to:
+  /// **'{year} {weekNumber}H'**
+  String weekNumber(int year, int weekNumber);
+
   /// No description provided for @consecutiveDaysPlural.
   ///
   /// In hu, this message translates to:

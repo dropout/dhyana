@@ -56,21 +56,20 @@ class WeeksBarChartPage extends StatelessWidget {
   }
 
   Widget buildLoadingState(BuildContext context, WeeksLoadingState state) {
-    Duration difference = statsInterval.from.difference(statsInterval.to);
+    Duration difference = statsInterval.to.difference(statsInterval.from);
+    int weeksCount = (difference.inDays / 7).ceil();
     return buildScaffolding(context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: List.generate((difference.inDays.abs() / 7).toInt(), (index) {
+        barData: List.generate(weeksCount, (index) {
           DateTime day = statsInterval.from.add(Duration(days: index));
           return BarData(
             value: 0,
-            label: DateFormat.EEEE(Localizations.localeOf(context).toString())
-                .format(day).toUpperCase(),
+            label: '',
           );
         }),
         infoBuilderDelegate: (context, index) =>
-            buildBarInfo(context, index, state),
-
+          buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(calculatedStats: CalculatedStats()),
     );
@@ -81,12 +80,13 @@ class WeeksBarChartPage extends StatelessWidget {
       context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: state.weeks.map((day) {
+        barData: state.weeks.map((week) {
           return BarData(
-            value: day.minutesCount.toDouble(),
-            label: DateFormat.EEEE(
-                Localizations.localeOf(context).toString()
-            ).format(day.startDate).toUpperCase(),
+            value: week.minutesCount.toDouble(),
+            label: AppLocalizations.of(context).weekNumber(
+              week.startDate.year,
+              week.startDate.weekNumber,
+            )
           );
         }).toList(),
         infoBuilderDelegate: (context, index) =>

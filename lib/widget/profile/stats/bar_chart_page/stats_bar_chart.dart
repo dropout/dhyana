@@ -8,9 +8,12 @@ class StatsBarChart extends StatefulWidget {
   final List<BarData> barData;
   final InfoBuilderDelegate? infoBuilderDelegate;
 
+  final XAxisLabelFormatter xAxisLabelFormatter;
+
   const StatsBarChart({
     this.barData = const [],
     this.infoBuilderDelegate,
+    this.xAxisLabelFormatter = const XAxisLabelFormatter(),
     super.key,
   });
 
@@ -32,7 +35,6 @@ class _StatsBarChartState extends State<StatsBarChart> {
       child: InfoHeaderBarChart(
         dataSource: widget.barData,
         displayRangeSetter: DisplayRangeSetters.durationDisplayRangeSetter,
-
         xAxisIntervalSetter: (dataSource) => 1,
         xAxisLabelFormatter: XAxisLabelFormatter(
           color: Colors.grey.shade700,

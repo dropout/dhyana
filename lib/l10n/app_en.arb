@@ -119,6 +119,23 @@
   "daysPlural": "{count, plural, =0{day} =1{day} =2{days} few{days} many{days} other{days}}",
   "daysPluralWithNumber": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} days} few{{count} days} many{{count} days} other{{count} days}}",
 
+  "weeksPlural": "{count, plural, =0{week} =1{week} =2{weeks} few{weeks} many{weeks} other{weeks}}",
+  "weeksPluralWithNumber": "{count, plural, =0{{count} week} =1{{count} week} =2{{count} weeks} few{{count} weeks} many{{count} weeks} other{{count} weeks}}",
+
+  "weekNumber": "{year} W{weekNumber}",
+  "@weekNumber": {
+    "description": "Show the number of the week.",
+    "placeholders": {
+      "year": {
+        "type": "int",
+        "example": "2025"
+      },
+      "weekNumber": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
 
   "consecutiveDaysPlural": "{count, plural, =0{day} =1{day} =2{consecutive days} few{consecutive days} many{consecutive days} other{consecutive days}}",
   "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}",

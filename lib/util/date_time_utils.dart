@@ -75,6 +75,8 @@ extension DateTimeUtils on DateTime {
     return mostRecentMonday(this).add(const Duration(days: 6));
   }
 
+  int get weekNumber => getWeekNumber(this);
+
 }
 
 String createIntervalString(BuildContext context, DateTime from, DateTime to) =>
@@ -92,3 +94,22 @@ DateTime mostRecentMonday(DateTime date) =>
 
 DateTime mostRecentWeekday(DateTime date, int weekday) =>
   DateTime(date.year, date.month, date.day - (date.weekday - weekday) % 7);
+
+/// Calculates number of weeks for a given year as per https://en.wikipedia.org/wiki/ISO_week_date#Weeks_per_year
+int getWeekCount(int year) {
+  DateTime dec28 = DateTime(year, 12, 28);
+  int dayOfDec28 = int.parse(DateFormat("D").format(dec28));
+  return ((dayOfDec28 - dec28.weekday + 10) / 7).floor();
+}
+
+/// Calculates week number from a date as per https://en.wikipedia.org/wiki/ISO_week_date#Calculation
+int getWeekNumber(DateTime date) {
+  int dayOfYear = int.parse(DateFormat("D").format(date));
+  int woy =  ((dayOfYear - date.weekday + 10) / 7).floor();
+  if (woy < 1) {
+    woy = getWeekCount(date.year - 1);
+  } else if (woy > getWeekCount(date.year)) {
+    woy = 1;
+  }
+  return woy;
+}

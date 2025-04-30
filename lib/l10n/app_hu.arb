@@ -123,6 +123,24 @@
   "daysPlural": "{count, plural, =0{nap} =1{nap} =2{nap} few{nap} many{nap} other{nap}}",
   "daysPluralWithNumber": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}",
 
+  "weeksPlural": "{count, plural, =0{hét} =1{hét} =2{hét} few{hét} many{hét} other{hét}}",
+  "weeksPluralWithNumber": "{count, plural, =0{{count} hét} =1{{count} hét} =2{{count} hét} few{{count} hét} many{{count} hét} other{{count} hét}}",
+
+  "weekNumber": "{year} {weekNumber}H",
+  "@weekNumber": {
+    "description": "A hét számának megjelenítése.",
+    "placeholders": {
+      "year": {
+        "type": "int",
+        "example": "2025"
+      },
+      "weekNumber": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+
   "consecutiveDaysPlural": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}",
   "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}",
 

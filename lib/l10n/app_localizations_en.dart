@@ -393,6 +393,41 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String weeksPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'weeks',
+      many: 'weeks',
+      few: 'weeks',
+      two: 'weeks',
+      one: 'week',
+      zero: 'week',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String weeksPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count weeks',
+      many: '$count weeks',
+      few: '$count weeks',
+      two: '$count weeks',
+      one: '$count week',
+      zero: '$count week',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String weekNumber(int year, int weekNumber) {
+    return '$year W$weekNumber';
+  }
+
+  @override
   String consecutiveDaysPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

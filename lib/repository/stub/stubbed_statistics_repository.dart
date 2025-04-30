@@ -60,9 +60,11 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   @override
   Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) async {
     await Future.delayed(Duration(seconds: 1));
-    int weekCount = (queryOptions.from.difference(queryOptions.to).inDays ~/ 7).abs();
+    Duration diff = queryOptions.to.difference(queryOptions.from);
+    int weeksCount = (diff.inDays / 7).ceil();
+
     List<Week> weeks = [];
-    for (var i = 0; i < weekCount; ++i) {
+    for (var i = 0; i < weeksCount; ++i) {
       DateTime date = queryOptions.from.add(Duration(days: i * 7));
       Week week = _fakeModelFactory.createWeek(
         startDate: date,
