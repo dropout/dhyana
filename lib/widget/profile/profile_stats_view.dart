@@ -233,22 +233,22 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           buildTabBarViewItem(
             context,
             'days',
-            DaysStatsView(profile: profile),
+            DaysTab(profile: profile),
           ),
           buildTabBarViewItem(
             context,
             'weeks',
-            WeeksStatsView(profile: profile),
+            WeekTab(profile: profile),
           ),
           buildTabBarViewItem(
             context,
             'months',
-            MonthsStatsView(profile: profile),
+            MonthTab(profile: profile),
           ),
           buildTabBarViewItem(
             context,
             'years',
-            YearsStatsView(
+            YearTab(
               // profile: profile,
             ),
           ),

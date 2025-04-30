@@ -144,7 +144,7 @@ class AxisPainter extends CustomPainter {
           canvas,
           offset + Offset(
             x + linePaint.strokeWidth,
-            size.height - barPadding.bottom + 4
+            size.height - barPadding.bottom + 6
           ),
         );
       }

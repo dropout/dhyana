@@ -1,20 +1,20 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:flutter/material.dart';
 
-class MonthsStatsView extends StatefulWidget {
+class MonthTab extends StatefulWidget {
 
   final Profile profile;
 
-  const MonthsStatsView({
+  const MonthTab({
     required this.profile,
     super.key,
   });
 
   @override
-  State<MonthsStatsView> createState() => _MonthsStatsViewState();
+  State<MonthTab> createState() => _MonthTabState();
 }
 
-class _MonthsStatsViewState extends State<MonthsStatsView> {
+class _MonthTabState extends State<MonthTab> {
   @override
 
   Widget build(BuildContext context) {

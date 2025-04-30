@@ -1,8 +1,5 @@
 export 'bar_chart_info_trigger_box.dart';
-export 'calculated_stats_view.dart';
 export 'consecutive_days_view.dart';
-export 'days_stats_bar_chart_page.dart';
-export 'days_stats_view.dart';
 export 'detailed_consecutive_days_view.dart';
 export 'detailed_milestones_view.dart';
 export 'detailed_profile_view.dart';
@@ -10,8 +7,6 @@ export 'detailed_summary_view.dart';
 export 'label_value_detail.dart';
 export 'metrics.dart';
 export 'milestones_view.dart';
-export 'months_stats_view.dart';
-export 'stats_interval_display.dart';
-export 'stats_view_mixin.dart';
-export 'weeks_stats_view.dart';
-export 'years_stats_view.dart';
+
+export 'bar_chart_page/all.dart';
+export 'tab/all.dart';

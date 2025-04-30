@@ -10,6 +10,6 @@ sealed class WeeksState with _$WeeksState {
     required List<Week> weeks,
     required CalculatedStats calculatedStats,
   }) = WeeksLoadedState;
-  const factory WeeksState.error() = WeeksErrorState;
+  const factory WeeksState.error() = WeeksLoadingErrorState;
 
 }

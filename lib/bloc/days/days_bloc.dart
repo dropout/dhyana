@@ -32,6 +32,7 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
         from: event.from,
         to: event.to,
       );
+
       List<Day> days = await statisticsRepository.queryDays(
         event.profileId,
         queryOptions,

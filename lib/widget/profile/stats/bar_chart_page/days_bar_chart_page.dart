@@ -5,6 +5,7 @@ import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
@@ -15,14 +16,14 @@ import 'package:intl/intl.dart';
 
 import 'stats_bar_chart.dart';
 
-class DaysStatsBarChartPage extends StatelessWidget {
+class DaysBarChartPage extends StatelessWidget {
 
   final int pageIndex;
   final StatsInterval statsInterval;
 
   final void Function(List<Day> days)? onDaysLoaded;
 
-  const DaysStatsBarChartPage({
+  const DaysBarChartPage({
     required this.pageIndex,
     required this.statsInterval,
     this.onDaysLoaded,
@@ -39,7 +40,6 @@ class DaysStatsBarChartPage extends StatelessWidget {
           case DaysLoadingErrorState():
             return const SizedBox.shrink();
           case DaysLoadedState():
-            // return buildLoadingState(context);
             return buildLoadedState(context, state);
         }
       },
@@ -62,13 +62,11 @@ class DaysStatsBarChartPage extends StatelessWidget {
           DateTime day = statsInterval.from.add(Duration(days: index));
           return BarData(
             value: 0,
-            label: DateFormat.EEEE(Localizations.localeOf(context).toString())
-              .format(day).toUpperCase(),
+            label: '',
           );
         }),
         infoBuilderDelegate: (context, index) =>
           buildBarInfo(context, index, state),
-
       ),
       calculatedStats: CalculatedStatsView(calculatedStats: CalculatedStats()),
     );
@@ -82,7 +80,7 @@ class DaysStatsBarChartPage extends StatelessWidget {
         barData: state.days.map((day) {
           return BarData(
             value: day.minutesCount.toDouble(),
-            label: DateFormat.EEEE(
+            label: DateFormat.E(
               Localizations.localeOf(context).toString()
             ).format(day.startDate).toUpperCase(),
           );
@@ -160,9 +158,9 @@ class DaysStatsBarChartPage extends StatelessWidget {
         statsInterval.to,
       )),
       mainText: Text(
-        AppLocalizations.of(context).minutesPluralWithNumber(
-          calculatedStats.averageMinutes.toInt(),
-        )
+        Duration(
+          minutes: calculatedStats.averageMinutes.toInt()
+        ).toFormattedString(context),
       ),
       postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
     );
@@ -179,8 +177,14 @@ class DaysStatsBarChartPage extends StatelessWidget {
       final day = days[index];
       return UnconstrainedBox(
         child: BarChartInfoTriggerBox(
-          prefix: Text(DateFormat.yMMMMEEEEd(Localizations.localeOf(context).toString()).format(day.startDate)),
-          mainText: Text(AppLocalizations.of(context).minutesPluralWithNumber(day.minutesCount)),
+          prefix: Text(
+            DateFormat.yMMMMEEEEd(
+              Localizations.localeOf(context).toString()
+            ).format(day.startDate)
+          ),
+          mainText: Text(
+            Duration(minutes: day.minutesCount).toFormattedString(context)
+          ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),
             child: Row(

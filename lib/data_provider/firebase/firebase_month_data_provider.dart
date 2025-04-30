@@ -26,7 +26,7 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
     final FieldPath fieldPath = FieldPath(const ['date']);
     Query<Month> query = collectionRef
       .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-      .where(fieldPath, isLessThanOrEqualTo: queryOptions.to)
+      .where(fieldPath, isLessThan: queryOptions.to)
       .orderBy(fieldPath);
     return query;
   }

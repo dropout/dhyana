@@ -45,7 +45,6 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
                   key: ValueKey(calculatedStats.totalSessions),
                   child: Text(
                     calculatedStats.totalSessions.toString(),
-
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.backgroundPaperLight,

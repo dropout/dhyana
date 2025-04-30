@@ -65,7 +65,7 @@ class FirebaseDayDataProvider
     final FieldPath fieldPath = FieldPath(const ['startDate']);
     Query<Day> query = collectionRef
       .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
-      .where(fieldPath, isLessThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.to))
+      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(queryOptions.to))
       .orderBy(fieldPath);
     return query;
   }

@@ -12,7 +12,7 @@ extension DateTimeUtils on DateTime {
   }
 
   String toWeekId() {
-    DateTime monday = subtract(Duration(days: weekday - 1));
+    DateTime monday = mostRecentMonday(this);
     return '${monday.year}${_twoDigits(monday.month)}${_twoDigits(monday.day)}';
   }
 
@@ -64,6 +64,15 @@ extension DateTimeUtils on DateTime {
     return DateFormat.Hm(
       Localizations.localeOf(context).toString()
     ).format(this);
+  }
+
+  // It's monday not sunday
+  DateTime firstDayOfWeek() {
+    return mostRecentMonday(this);
+  }
+
+  DateTime lastDayOfWeek() {
+    return mostRecentMonday(this).add(const Duration(days: 6));
   }
 
 }

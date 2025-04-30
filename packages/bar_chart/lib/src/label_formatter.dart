@@ -30,7 +30,7 @@ class XAxisLabelFormatter {
 
   TextPainter format(BarData barData) {
     final textSpan = TextSpan(
-      text: barData.label.substring(0, 1),
+      text: barData.label,
       style: TextStyle(
         color: color,
         fontSize: 12,
