@@ -15,71 +15,73 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$MonthEvent {
+mixin _$MonthsEvent {
   String get profileId => throw _privateConstructorUsedError;
   DateTime get from => throw _privateConstructorUsedError;
   DateTime? get to => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String profileId, DateTime from, DateTime? to)
-        getMonths,
+        queryMonths,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, DateTime from, DateTime? to)? getMonths,
+    TResult? Function(String profileId, DateTime from, DateTime? to)?
+        queryMonths,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, DateTime from, DateTime? to)? getMonths,
+    TResult Function(String profileId, DateTime from, DateTime? to)?
+        queryMonths,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GetMonthEvent value) getMonths,
+    required TResult Function(QueryMonthsEvent value) queryMonths,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GetMonthEvent value)? getMonths,
+    TResult? Function(QueryMonthsEvent value)? queryMonths,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetMonthEvent value)? getMonths,
+    TResult Function(QueryMonthsEvent value)? queryMonths,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Create a copy of MonthEvent
+  /// Create a copy of MonthsEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MonthEventCopyWith<MonthEvent> get copyWith =>
+  $MonthsEventCopyWith<MonthsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MonthEventCopyWith<$Res> {
-  factory $MonthEventCopyWith(
-          MonthEvent value, $Res Function(MonthEvent) then) =
-      _$MonthEventCopyWithImpl<$Res, MonthEvent>;
+abstract class $MonthsEventCopyWith<$Res> {
+  factory $MonthsEventCopyWith(
+          MonthsEvent value, $Res Function(MonthsEvent) then) =
+      _$MonthsEventCopyWithImpl<$Res, MonthsEvent>;
   @useResult
   $Res call({String profileId, DateTime from, DateTime? to});
 }
 
 /// @nodoc
-class _$MonthEventCopyWithImpl<$Res, $Val extends MonthEvent>
-    implements $MonthEventCopyWith<$Res> {
-  _$MonthEventCopyWithImpl(this._value, this._then);
+class _$MonthsEventCopyWithImpl<$Res, $Val extends MonthsEvent>
+    implements $MonthsEventCopyWith<$Res> {
+  _$MonthsEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MonthEvent
+  /// Create a copy of MonthsEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -106,25 +108,25 @@ class _$MonthEventCopyWithImpl<$Res, $Val extends MonthEvent>
 }
 
 /// @nodoc
-abstract class _$$GetMonthEventImplCopyWith<$Res>
-    implements $MonthEventCopyWith<$Res> {
-  factory _$$GetMonthEventImplCopyWith(
-          _$GetMonthEventImpl value, $Res Function(_$GetMonthEventImpl) then) =
-      __$$GetMonthEventImplCopyWithImpl<$Res>;
+abstract class _$$QueryMonthsEventImplCopyWith<$Res>
+    implements $MonthsEventCopyWith<$Res> {
+  factory _$$QueryMonthsEventImplCopyWith(_$QueryMonthsEventImpl value,
+          $Res Function(_$QueryMonthsEventImpl) then) =
+      __$$QueryMonthsEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String profileId, DateTime from, DateTime? to});
 }
 
 /// @nodoc
-class __$$GetMonthEventImplCopyWithImpl<$Res>
-    extends _$MonthEventCopyWithImpl<$Res, _$GetMonthEventImpl>
-    implements _$$GetMonthEventImplCopyWith<$Res> {
-  __$$GetMonthEventImplCopyWithImpl(
-      _$GetMonthEventImpl _value, $Res Function(_$GetMonthEventImpl) _then)
+class __$$QueryMonthsEventImplCopyWithImpl<$Res>
+    extends _$MonthsEventCopyWithImpl<$Res, _$QueryMonthsEventImpl>
+    implements _$$QueryMonthsEventImplCopyWith<$Res> {
+  __$$QueryMonthsEventImplCopyWithImpl(_$QueryMonthsEventImpl _value,
+      $Res Function(_$QueryMonthsEventImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MonthEvent
+  /// Create a copy of MonthsEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -133,7 +135,7 @@ class __$$GetMonthEventImplCopyWithImpl<$Res>
     Object? from = null,
     Object? to = freezed,
   }) {
-    return _then(_$GetMonthEventImpl(
+    return _then(_$QueryMonthsEventImpl(
       profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
@@ -152,8 +154,8 @@ class __$$GetMonthEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetMonthEventImpl implements GetMonthEvent {
-  const _$GetMonthEventImpl(
+class _$QueryMonthsEventImpl implements QueryMonthsEvent {
+  const _$QueryMonthsEventImpl(
       {required this.profileId, required this.from, this.to});
 
   @override
@@ -165,14 +167,14 @@ class _$GetMonthEventImpl implements GetMonthEvent {
 
   @override
   String toString() {
-    return 'MonthEvent.getMonths(profileId: $profileId, from: $from, to: $to)';
+    return 'MonthsEvent.queryMonths(profileId: $profileId, from: $from, to: $to)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetMonthEventImpl &&
+            other is _$QueryMonthsEventImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
             (identical(other.from, from) || other.from == from) &&
@@ -182,39 +184,42 @@ class _$GetMonthEventImpl implements GetMonthEvent {
   @override
   int get hashCode => Object.hash(runtimeType, profileId, from, to);
 
-  /// Create a copy of MonthEvent
+  /// Create a copy of MonthsEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetMonthEventImplCopyWith<_$GetMonthEventImpl> get copyWith =>
-      __$$GetMonthEventImplCopyWithImpl<_$GetMonthEventImpl>(this, _$identity);
+  _$$QueryMonthsEventImplCopyWith<_$QueryMonthsEventImpl> get copyWith =>
+      __$$QueryMonthsEventImplCopyWithImpl<_$QueryMonthsEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String profileId, DateTime from, DateTime? to)
-        getMonths,
+        queryMonths,
   }) {
-    return getMonths(profileId, from, to);
+    return queryMonths(profileId, from, to);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, DateTime from, DateTime? to)? getMonths,
+    TResult? Function(String profileId, DateTime from, DateTime? to)?
+        queryMonths,
   }) {
-    return getMonths?.call(profileId, from, to);
+    return queryMonths?.call(profileId, from, to);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, DateTime from, DateTime? to)? getMonths,
+    TResult Function(String profileId, DateTime from, DateTime? to)?
+        queryMonths,
     required TResult orElse(),
   }) {
-    if (getMonths != null) {
-      return getMonths(profileId, from, to);
+    if (queryMonths != null) {
+      return queryMonths(profileId, from, to);
     }
     return orElse();
   }
@@ -222,37 +227,37 @@ class _$GetMonthEventImpl implements GetMonthEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GetMonthEvent value) getMonths,
+    required TResult Function(QueryMonthsEvent value) queryMonths,
   }) {
-    return getMonths(this);
+    return queryMonths(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GetMonthEvent value)? getMonths,
+    TResult? Function(QueryMonthsEvent value)? queryMonths,
   }) {
-    return getMonths?.call(this);
+    return queryMonths?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetMonthEvent value)? getMonths,
+    TResult Function(QueryMonthsEvent value)? queryMonths,
     required TResult orElse(),
   }) {
-    if (getMonths != null) {
-      return getMonths(this);
+    if (queryMonths != null) {
+      return queryMonths(this);
     }
     return orElse();
   }
 }
 
-abstract class GetMonthEvent implements MonthEvent {
-  const factory GetMonthEvent(
+abstract class QueryMonthsEvent implements MonthsEvent {
+  const factory QueryMonthsEvent(
       {required final String profileId,
       required final DateTime from,
-      final DateTime? to}) = _$GetMonthEventImpl;
+      final DateTime? to}) = _$QueryMonthsEventImpl;
 
   @override
   String get profileId;
@@ -261,16 +266,16 @@ abstract class GetMonthEvent implements MonthEvent {
   @override
   DateTime? get to;
 
-  /// Create a copy of MonthEvent
+  /// Create a copy of MonthsEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetMonthEventImplCopyWith<_$GetMonthEventImpl> get copyWith =>
+  _$$QueryMonthsEventImplCopyWith<_$QueryMonthsEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$MonthState {
+mixin _$MonthsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
@@ -295,82 +300,82 @@ mixin _$MonthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MonthLoading value) loading,
-    required TResult Function(MonthLoaded value) loaded,
-    required TResult Function(MonthLoadingError value) error,
+    required TResult Function(MonthsLoadingState value) loading,
+    required TResult Function(MonthsLoadedState value) loaded,
+    required TResult Function(MonthsLoadingErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MonthLoading value)? loading,
-    TResult? Function(MonthLoaded value)? loaded,
-    TResult? Function(MonthLoadingError value)? error,
+    TResult? Function(MonthsLoadingState value)? loading,
+    TResult? Function(MonthsLoadedState value)? loaded,
+    TResult? Function(MonthsLoadingErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MonthLoading value)? loading,
-    TResult Function(MonthLoaded value)? loaded,
-    TResult Function(MonthLoadingError value)? error,
+    TResult Function(MonthsLoadingState value)? loading,
+    TResult Function(MonthsLoadedState value)? loaded,
+    TResult Function(MonthsLoadingErrorState value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MonthStateCopyWith<$Res> {
-  factory $MonthStateCopyWith(
-          MonthState value, $Res Function(MonthState) then) =
-      _$MonthStateCopyWithImpl<$Res, MonthState>;
+abstract class $MonthsStateCopyWith<$Res> {
+  factory $MonthsStateCopyWith(
+          MonthsState value, $Res Function(MonthsState) then) =
+      _$MonthsStateCopyWithImpl<$Res, MonthsState>;
 }
 
 /// @nodoc
-class _$MonthStateCopyWithImpl<$Res, $Val extends MonthState>
-    implements $MonthStateCopyWith<$Res> {
-  _$MonthStateCopyWithImpl(this._value, this._then);
+class _$MonthsStateCopyWithImpl<$Res, $Val extends MonthsState>
+    implements $MonthsStateCopyWith<$Res> {
+  _$MonthsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MonthState
+  /// Create a copy of MonthsState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$MonthLoadingImplCopyWith<$Res> {
-  factory _$$MonthLoadingImplCopyWith(
-          _$MonthLoadingImpl value, $Res Function(_$MonthLoadingImpl) then) =
-      __$$MonthLoadingImplCopyWithImpl<$Res>;
+abstract class _$$MonthsLoadingStateImplCopyWith<$Res> {
+  factory _$$MonthsLoadingStateImplCopyWith(_$MonthsLoadingStateImpl value,
+          $Res Function(_$MonthsLoadingStateImpl) then) =
+      __$$MonthsLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MonthLoadingImplCopyWithImpl<$Res>
-    extends _$MonthStateCopyWithImpl<$Res, _$MonthLoadingImpl>
-    implements _$$MonthLoadingImplCopyWith<$Res> {
-  __$$MonthLoadingImplCopyWithImpl(
-      _$MonthLoadingImpl _value, $Res Function(_$MonthLoadingImpl) _then)
+class __$$MonthsLoadingStateImplCopyWithImpl<$Res>
+    extends _$MonthsStateCopyWithImpl<$Res, _$MonthsLoadingStateImpl>
+    implements _$$MonthsLoadingStateImplCopyWith<$Res> {
+  __$$MonthsLoadingStateImplCopyWithImpl(_$MonthsLoadingStateImpl _value,
+      $Res Function(_$MonthsLoadingStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MonthState
+  /// Create a copy of MonthsState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$MonthLoadingImpl implements MonthLoading {
-  const _$MonthLoadingImpl();
+class _$MonthsLoadingStateImpl implements MonthsLoadingState {
+  const _$MonthsLoadingStateImpl();
 
   @override
   String toString() {
-    return 'MonthState.loading()';
+    return 'MonthsState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MonthLoadingImpl);
+        (other.runtimeType == runtimeType && other is _$MonthsLoadingStateImpl);
   }
 
   @override
@@ -413,9 +418,9 @@ class _$MonthLoadingImpl implements MonthLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MonthLoading value) loading,
-    required TResult Function(MonthLoaded value) loaded,
-    required TResult Function(MonthLoadingError value) error,
+    required TResult Function(MonthsLoadingState value) loading,
+    required TResult Function(MonthsLoadedState value) loaded,
+    required TResult Function(MonthsLoadingErrorState value) error,
   }) {
     return loading(this);
   }
@@ -423,9 +428,9 @@ class _$MonthLoadingImpl implements MonthLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MonthLoading value)? loading,
-    TResult? Function(MonthLoaded value)? loaded,
-    TResult? Function(MonthLoadingError value)? error,
+    TResult? Function(MonthsLoadingState value)? loading,
+    TResult? Function(MonthsLoadedState value)? loaded,
+    TResult? Function(MonthsLoadingErrorState value)? error,
   }) {
     return loading?.call(this);
   }
@@ -433,9 +438,9 @@ class _$MonthLoadingImpl implements MonthLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MonthLoading value)? loading,
-    TResult Function(MonthLoaded value)? loaded,
-    TResult Function(MonthLoadingError value)? error,
+    TResult Function(MonthsLoadingState value)? loading,
+    TResult Function(MonthsLoadedState value)? loaded,
+    TResult Function(MonthsLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -445,35 +450,35 @@ class _$MonthLoadingImpl implements MonthLoading {
   }
 }
 
-abstract class MonthLoading implements MonthState {
-  const factory MonthLoading() = _$MonthLoadingImpl;
+abstract class MonthsLoadingState implements MonthsState {
+  const factory MonthsLoadingState() = _$MonthsLoadingStateImpl;
 }
 
 /// @nodoc
-abstract class _$$MonthLoadedImplCopyWith<$Res> {
-  factory _$$MonthLoadedImplCopyWith(
-          _$MonthLoadedImpl value, $Res Function(_$MonthLoadedImpl) then) =
-      __$$MonthLoadedImplCopyWithImpl<$Res>;
+abstract class _$$MonthsLoadedStateImplCopyWith<$Res> {
+  factory _$$MonthsLoadedStateImplCopyWith(_$MonthsLoadedStateImpl value,
+          $Res Function(_$MonthsLoadedStateImpl) then) =
+      __$$MonthsLoadedStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Month> months});
 }
 
 /// @nodoc
-class __$$MonthLoadedImplCopyWithImpl<$Res>
-    extends _$MonthStateCopyWithImpl<$Res, _$MonthLoadedImpl>
-    implements _$$MonthLoadedImplCopyWith<$Res> {
-  __$$MonthLoadedImplCopyWithImpl(
-      _$MonthLoadedImpl _value, $Res Function(_$MonthLoadedImpl) _then)
+class __$$MonthsLoadedStateImplCopyWithImpl<$Res>
+    extends _$MonthsStateCopyWithImpl<$Res, _$MonthsLoadedStateImpl>
+    implements _$$MonthsLoadedStateImplCopyWith<$Res> {
+  __$$MonthsLoadedStateImplCopyWithImpl(_$MonthsLoadedStateImpl _value,
+      $Res Function(_$MonthsLoadedStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MonthState
+  /// Create a copy of MonthsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? months = null,
   }) {
-    return _then(_$MonthLoadedImpl(
+    return _then(_$MonthsLoadedStateImpl(
       months: null == months
           ? _value._months
           : months // ignore: cast_nullable_to_non_nullable
@@ -484,8 +489,8 @@ class __$$MonthLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MonthLoadedImpl implements MonthLoaded {
-  const _$MonthLoadedImpl({required final List<Month> months})
+class _$MonthsLoadedStateImpl implements MonthsLoadedState {
+  const _$MonthsLoadedStateImpl({required final List<Month> months})
       : _months = months;
 
   final List<Month> _months;
@@ -498,14 +503,14 @@ class _$MonthLoadedImpl implements MonthLoaded {
 
   @override
   String toString() {
-    return 'MonthState.loaded(months: $months)';
+    return 'MonthsState.loaded(months: $months)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MonthLoadedImpl &&
+            other is _$MonthsLoadedStateImpl &&
             const DeepCollectionEquality().equals(other._months, _months));
   }
 
@@ -513,13 +518,14 @@ class _$MonthLoadedImpl implements MonthLoaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_months));
 
-  /// Create a copy of MonthState
+  /// Create a copy of MonthsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MonthLoadedImplCopyWith<_$MonthLoadedImpl> get copyWith =>
-      __$$MonthLoadedImplCopyWithImpl<_$MonthLoadedImpl>(this, _$identity);
+  _$$MonthsLoadedStateImplCopyWith<_$MonthsLoadedStateImpl> get copyWith =>
+      __$$MonthsLoadedStateImplCopyWithImpl<_$MonthsLoadedStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -558,9 +564,9 @@ class _$MonthLoadedImpl implements MonthLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MonthLoading value) loading,
-    required TResult Function(MonthLoaded value) loaded,
-    required TResult Function(MonthLoadingError value) error,
+    required TResult Function(MonthsLoadingState value) loading,
+    required TResult Function(MonthsLoadedState value) loaded,
+    required TResult Function(MonthsLoadingErrorState value) error,
   }) {
     return loaded(this);
   }
@@ -568,9 +574,9 @@ class _$MonthLoadedImpl implements MonthLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MonthLoading value)? loading,
-    TResult? Function(MonthLoaded value)? loaded,
-    TResult? Function(MonthLoadingError value)? error,
+    TResult? Function(MonthsLoadingState value)? loading,
+    TResult? Function(MonthsLoadedState value)? loaded,
+    TResult? Function(MonthsLoadingErrorState value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -578,9 +584,9 @@ class _$MonthLoadedImpl implements MonthLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MonthLoading value)? loading,
-    TResult Function(MonthLoaded value)? loaded,
-    TResult Function(MonthLoadingError value)? error,
+    TResult Function(MonthsLoadingState value)? loading,
+    TResult Function(MonthsLoadedState value)? loaded,
+    TResult Function(MonthsLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -590,52 +596,55 @@ class _$MonthLoadedImpl implements MonthLoaded {
   }
 }
 
-abstract class MonthLoaded implements MonthState {
-  const factory MonthLoaded({required final List<Month> months}) =
-      _$MonthLoadedImpl;
+abstract class MonthsLoadedState implements MonthsState {
+  const factory MonthsLoadedState({required final List<Month> months}) =
+      _$MonthsLoadedStateImpl;
 
   List<Month> get months;
 
-  /// Create a copy of MonthState
+  /// Create a copy of MonthsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MonthLoadedImplCopyWith<_$MonthLoadedImpl> get copyWith =>
+  _$$MonthsLoadedStateImplCopyWith<_$MonthsLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MonthLoadingErrorImplCopyWith<$Res> {
-  factory _$$MonthLoadingErrorImplCopyWith(_$MonthLoadingErrorImpl value,
-          $Res Function(_$MonthLoadingErrorImpl) then) =
-      __$$MonthLoadingErrorImplCopyWithImpl<$Res>;
+abstract class _$$MonthsLoadingErrorStateImplCopyWith<$Res> {
+  factory _$$MonthsLoadingErrorStateImplCopyWith(
+          _$MonthsLoadingErrorStateImpl value,
+          $Res Function(_$MonthsLoadingErrorStateImpl) then) =
+      __$$MonthsLoadingErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MonthLoadingErrorImplCopyWithImpl<$Res>
-    extends _$MonthStateCopyWithImpl<$Res, _$MonthLoadingErrorImpl>
-    implements _$$MonthLoadingErrorImplCopyWith<$Res> {
-  __$$MonthLoadingErrorImplCopyWithImpl(_$MonthLoadingErrorImpl _value,
-      $Res Function(_$MonthLoadingErrorImpl) _then)
+class __$$MonthsLoadingErrorStateImplCopyWithImpl<$Res>
+    extends _$MonthsStateCopyWithImpl<$Res, _$MonthsLoadingErrorStateImpl>
+    implements _$$MonthsLoadingErrorStateImplCopyWith<$Res> {
+  __$$MonthsLoadingErrorStateImplCopyWithImpl(
+      _$MonthsLoadingErrorStateImpl _value,
+      $Res Function(_$MonthsLoadingErrorStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MonthState
+  /// Create a copy of MonthsState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$MonthLoadingErrorImpl implements MonthLoadingError {
-  const _$MonthLoadingErrorImpl();
+class _$MonthsLoadingErrorStateImpl implements MonthsLoadingErrorState {
+  const _$MonthsLoadingErrorStateImpl();
 
   @override
   String toString() {
-    return 'MonthState.error()';
+    return 'MonthsState.error()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MonthLoadingErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$MonthsLoadingErrorStateImpl);
   }
 
   @override
@@ -678,9 +687,9 @@ class _$MonthLoadingErrorImpl implements MonthLoadingError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MonthLoading value) loading,
-    required TResult Function(MonthLoaded value) loaded,
-    required TResult Function(MonthLoadingError value) error,
+    required TResult Function(MonthsLoadingState value) loading,
+    required TResult Function(MonthsLoadedState value) loaded,
+    required TResult Function(MonthsLoadingErrorState value) error,
   }) {
     return error(this);
   }
@@ -688,9 +697,9 @@ class _$MonthLoadingErrorImpl implements MonthLoadingError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MonthLoading value)? loading,
-    TResult? Function(MonthLoaded value)? loaded,
-    TResult? Function(MonthLoadingError value)? error,
+    TResult? Function(MonthsLoadingState value)? loading,
+    TResult? Function(MonthsLoadedState value)? loaded,
+    TResult? Function(MonthsLoadingErrorState value)? error,
   }) {
     return error?.call(this);
   }
@@ -698,9 +707,9 @@ class _$MonthLoadingErrorImpl implements MonthLoadingError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MonthLoading value)? loading,
-    TResult Function(MonthLoaded value)? loaded,
-    TResult Function(MonthLoadingError value)? error,
+    TResult Function(MonthsLoadingState value)? loading,
+    TResult Function(MonthsLoadedState value)? loaded,
+    TResult Function(MonthsLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -710,6 +719,6 @@ class _$MonthLoadingErrorImpl implements MonthLoadingError {
   }
 }
 
-abstract class MonthLoadingError implements MonthState {
-  const factory MonthLoadingError() = _$MonthLoadingErrorImpl;
+abstract class MonthsLoadingErrorState implements MonthsState {
+  const factory MonthsLoadingErrorState() = _$MonthsLoadingErrorStateImpl;
 }

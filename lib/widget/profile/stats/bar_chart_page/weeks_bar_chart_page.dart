@@ -51,7 +51,7 @@ class WeeksBarChartPage extends StatelessWidget {
         }
       },
       listenWhen: (previous, current) =>
-      current is DaysLoadedState && previous is! DaysLoadedState,
+        current is WeeksLoadedState && previous is! WeeksLoadedState,
     );
   }
 

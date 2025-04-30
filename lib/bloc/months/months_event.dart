@@ -1,10 +1,10 @@
 part of 'months_bloc.dart';
 
 @freezed
-class MonthEvent with _$MonthEvent {
-  const factory MonthEvent.getMonths({
+class MonthsEvent with _$MonthsEvent {
+  const factory MonthsEvent.queryMonths({
     required String profileId,
     required DateTime from,
     DateTime? to,
-  }) = GetMonthEvent;
+  }) = QueryMonthsEvent;
 }

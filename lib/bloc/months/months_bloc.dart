@@ -10,34 +10,34 @@ part 'months_event.dart';
 part 'months_state.dart';
 part 'months_bloc.freezed.dart';
 
-class MonthBloc extends Bloc<MonthEvent, MonthState> {
+class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
 
-  final Logger logger = getLogger('MonthBloc');
+  final Logger logger = getLogger('MonthsBloc');
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
 
-  MonthBloc({
+  MonthsBloc({
     required this.statisticsRepository,
     required this.crashlyticsService,
-  }) : super(const MonthState.loading()) {
-    on<GetMonthEvent>(_onGetMonthEvent);
+  }) : super(const MonthsState.loading()) {
+    on<QueryMonthsEvent>(_onQueryMonthsEvent);
   }
 
-  void _onGetMonthEvent(GetMonthEvent event, emit) async {
+  void _onQueryMonthsEvent(QueryMonthsEvent event, emit) async {
     try {
       logger.t('Loading months: ${event.from} ... ${event.to}');
-      emit(const MonthState.loading());
+      emit(const MonthsState.loading());
       MonthQueryOptions queryOptions = MonthQueryOptions(
-          from: event.from,
-          to: event.to ?? DateTime.now()
+        from: event.from,
+        to: event.to ?? DateTime.now()
       );
       List<Month> months = await statisticsRepository.queryMonths(
         event.profileId,
         queryOptions,
       );
 
-      emit(MonthState.loaded(months: _fillEmptyMonths(months, queryOptions)));
+      emit(MonthsState.loaded(months: _fillEmptyMonths(months, queryOptions)));
       logger.t('Successfully loaded months ${months.length}');
 
     } catch (e, stack) {

@@ -1,10 +1,11 @@
 part of 'months_bloc.dart';
 
 @freezed
-class MonthState with _$MonthState {
-  const factory MonthState.loading() = MonthLoading;
-  const factory MonthState.loaded({
+sealed class MonthsState with _$MonthsState {
+
+  const factory MonthsState.loading() = MonthsLoadingState;
+  const factory MonthsState.loaded({
     required List<Month> months,
-  }) = MonthLoaded;
-  const factory MonthState.error() = MonthLoadingError;
+  }) = MonthsLoadedState;
+  const factory MonthsState.error() = MonthsLoadingErrorState;
 }
