@@ -1,5 +1,6 @@
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/util/all.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
@@ -51,9 +52,10 @@ class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
   }
 
   List<Month> _fillEmptyMonths(List<Month> months, MonthQueryOptions queryOptions) {
-
-    Duration diff = queryOptions.to.difference(queryOptions.from);
-    int monthsCount = (diff.inDays / 30).ceil();
+    int monthsCount = DateUtils.monthDelta(
+      queryOptions.from,
+      queryOptions.to,
+    );
 
     logger.t('Querying $monthsCount window');
     logger.t('Got ${months.length} from database');
@@ -63,6 +65,7 @@ class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
     List<Month> result = [];
     for (var i = 0; i < monthsCount; ++i) {
       String monthId = DateTime(from.year, from.month + i).toMonthId();
+      print('MonthId: $monthId');
       Month m = months.firstWhere((m) => m.id == monthId, orElse: () => Month(
         id: DateTime(from.year, from.month + i).toMonthId(),
         startDate: DateTime(from.year, from.month + i),
@@ -70,7 +73,12 @@ class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
         sessionCount: 0,
       ));
       result.add(m);
+      print('Result: $m');
     }
+
+    print(months);
+    print(result);
+
     return result;
   }
 }

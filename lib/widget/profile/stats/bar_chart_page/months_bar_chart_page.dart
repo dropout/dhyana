@@ -58,13 +58,14 @@ class MonthsBarChartPage extends StatelessWidget {
   }
 
   Widget buildLoadingState(BuildContext context, MonthsLoadingState state) {
-    Duration difference = statsInterval.to.difference(statsInterval.from);
-    int weeksCount = (difference.inDays / 7).ceil();
+    int monthsCount = DateUtils.monthDelta(
+      statsInterval.from,
+      statsInterval.to
+    );
     return buildScaffolding(context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: List.generate(weeksCount, (index) {
-          DateTime day = statsInterval.from.add(Duration(days: index));
+        barData: List.generate(monthsCount, (index) {
           return BarData(
             value: 0,
             label: '',
@@ -84,11 +85,10 @@ class MonthsBarChartPage extends StatelessWidget {
         key: ValueKey(pageIndex),
         barData: state.months.map((month) {
           return BarData(
-              value: month.minutesCount.toDouble(),
-              label: AppLocalizations.of(context).weekNumber(
-                month.startDate.year,
-                month.startDate.weekNumber,
-              )
+            value: month.minutesCount.toDouble(),
+            label: DateFormat.yMMM(
+              Localizations.localeOf(context).toString()
+            ).format(month.startDate).toUpperCase(),
           );
         }).toList(),
         infoBuilderDelegate: (context, index) =>

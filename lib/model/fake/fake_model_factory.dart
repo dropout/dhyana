@@ -48,12 +48,13 @@ class FakeModelFactory {
     );
   }
 
-  Month createMonth() {
+  Month createMonth({DateTime? startDate}) {
+    startDate ??= DateTime.now();
     return Month(
       id: _faker.guid.guid(),
-      startDate: DateTime.now(),
-      minutesCount: _faker.randomGenerator.integer(100),
-      sessionCount: _faker.randomGenerator.integer(10),
+      startDate: startDate,
+      minutesCount: 600 + _faker.randomGenerator.integer(1000 * 3 - 600),
+      sessionCount: _faker.randomGenerator.integer(100) * 3,
     );
   }
 

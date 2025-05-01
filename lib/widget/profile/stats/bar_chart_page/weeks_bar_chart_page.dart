@@ -62,7 +62,6 @@ class WeeksBarChartPage extends StatelessWidget {
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
         barData: List.generate(weeksCount, (index) {
-          DateTime day = statsInterval.from.add(Duration(days: index));
           return BarData(
             value: 0,
             label: '',
