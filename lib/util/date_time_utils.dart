@@ -79,8 +79,21 @@ extension DateTimeUtils on DateTime {
 
 }
 
-String createIntervalString(BuildContext context, DateTime from, DateTime to) =>
-  '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to)}';
+String createIntervalString(BuildContext context, DateTime from, DateTime to, {
+  bool subtractOneDay = false,
+}) {
+  // When displaying intervals like a month, queries are running
+  // a less than (<) when the month ends. So we need to subtract one day
+  // to display the correct interval for the user, because the end interval
+  // is actually out of range.
+  if (subtractOneDay) {
+    return '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to.subtract(Duration(days: 1)))}';
+  } else {
+    return '${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(from)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(to)}';
+  }
+
+}
+
 
 String _twoDigits(int n) {
   return n.toString().padLeft(2, "0");

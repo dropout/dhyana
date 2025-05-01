@@ -149,6 +149,7 @@ class MonthsBarChartPage extends StatelessWidget {
         context,
         statsInterval.from,
         statsInterval.to,
+        subtractOneDay: true,
       ),
       mainText: AppLocalizations.of(context).statsLoadingData,
       postfix: AppLocalizations.of(context).pleaseWait,
@@ -162,6 +163,7 @@ class MonthsBarChartPage extends StatelessWidget {
         context,
         statsInterval.from,
         statsInterval.to,
+        subtractOneDay: true,
       )),
       mainText: Text(
         Duration(
@@ -180,16 +182,21 @@ class MonthsBarChartPage extends StatelessWidget {
     if (index < 0) {
       return buildBarInfoIdle(context, months);
     } else {
-      final day = months[index];
+      final month = months[index];
       return UnconstrainedBox(
         child: BarChartInfoTriggerBox(
           prefix: Text(
-              DateFormat.yMMMMEEEEd(
-                  Localizations.localeOf(context).toString()
-              ).format(day.startDate)
+            createIntervalString(
+              context,
+              month.startDate,
+              month.startDate.copyWith(
+                month: month.startDate.month + 1,
+              ),
+              subtractOneDay: true,
+            ),
           ),
           mainText: Text(
-              Duration(minutes: day.minutesCount).toFormattedString(context)
+              Duration(minutes: month.minutesCount).toFormattedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),
@@ -210,7 +217,7 @@ class MonthsBarChartPage extends StatelessWidget {
                       ),
                     ),
                     Gap.xs(),
-                    Text(day.sessionCount.toString()),
+                    Text(month.sessionCount.toString()),
                   ],
                 ),
               ],

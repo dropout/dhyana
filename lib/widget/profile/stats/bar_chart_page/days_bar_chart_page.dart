@@ -143,6 +143,7 @@ class DaysBarChartPage extends StatelessWidget {
         context,
         statsInterval.from,
         statsInterval.to,
+        subtractOneDay: true,
       ),
       mainText: AppLocalizations.of(context).statsLoadingData,
       postfix: AppLocalizations.of(context).pleaseWait,
@@ -156,6 +157,7 @@ class DaysBarChartPage extends StatelessWidget {
         context,
         statsInterval.from,
         statsInterval.to,
+        subtractOneDay: true,
       )),
       mainText: Text(
         Duration(

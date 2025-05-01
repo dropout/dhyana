@@ -65,7 +65,6 @@ class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
     List<Month> result = [];
     for (var i = 0; i < monthsCount; ++i) {
       String monthId = DateTime(from.year, from.month + i).toMonthId();
-      print('MonthId: $monthId');
       Month m = months.firstWhere((m) => m.id == monthId, orElse: () => Month(
         id: DateTime(from.year, from.month + i).toMonthId(),
         startDate: DateTime(from.year, from.month + i),
@@ -73,11 +72,7 @@ class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
         sessionCount: 0,
       ));
       result.add(m);
-      print('Result: $m');
     }
-
-    print(months);
-    print(result);
 
     return result;
   }

@@ -146,6 +146,7 @@ class WeeksBarChartPage extends StatelessWidget {
         context,
         statsInterval.from,
         statsInterval.to,
+        subtractOneDay: true,
       ),
       mainText: AppLocalizations.of(context).statsLoadingData,
       postfix: AppLocalizations.of(context).pleaseWait,
@@ -159,6 +160,7 @@ class WeeksBarChartPage extends StatelessWidget {
         context,
         statsInterval.from,
         statsInterval.to,
+        subtractOneDay: true,
       )),
       mainText: Text(
         Duration(
@@ -177,16 +179,19 @@ class WeeksBarChartPage extends StatelessWidget {
     if (index < 0) {
       return buildBarInfoIdle(context, weeks);
     } else {
-      final day = weeks[index];
+      final week = weeks[index];
       return UnconstrainedBox(
         child: BarChartInfoTriggerBox(
           prefix: Text(
-            DateFormat.yMMMMEEEEd(
-              Localizations.localeOf(context).toString()
-            ).format(day.startDate)
+            createIntervalString(
+              context,
+              week.startDate,
+              week.startDate.add(Duration(days: 7)),
+              subtractOneDay: true,
+            ),
           ),
           mainText: Text(
-            Duration(minutes: day.minutesCount).toFormattedString(context)
+            Duration(minutes: week.minutesCount).toFormattedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),
@@ -207,7 +212,7 @@ class WeeksBarChartPage extends StatelessWidget {
                       ),
                     ),
                     Gap.xs(),
-                    Text(day.sessionCount.toString()),
+                    Text(week.sessionCount.toString()),
                   ],
                 ),
               ],
