@@ -62,12 +62,13 @@ class FakeModelFactory {
     return List.generate(count, (_) => createMonth());
   }
 
-  Year createYear() {
+  Year createYear({DateTime? startDate}) {
+    startDate ??= DateTime.now();
     return Year(
       id: _faker.guid.guid(),
-      startDate: DateTime.now(),
-      minutesCount: _faker.randomGenerator.integer(100),
-      sessionCount: _faker.randomGenerator.integer(10),
+      startDate: startDate,
+      minutesCount: randomMinutesCount(365),
+      sessionCount: randomSessionCount(365),
     );
   }
 
@@ -89,4 +90,35 @@ class FakeModelFactory {
     return List.generate(count, (_) => createSession());
   }
 
+  int randomMinutesCount(int numDays, {
+    int max = 200,
+    int min = 10,
+    int spread = 50,
+  }) {
+    int sum = 0;
+    for (var i = 0; i < numDays; ++i) {
+      sum += _faker.randomGenerator.integer(
+        max + _faker.randomGenerator.integer(spread, min: spread * -1),
+        min: 10
+      );
+    }
+    return sum;
+  }
+
+  int randomSessionCount(int numDays, {
+    int max = 10,
+    int min = 1,
+    int spread = 5,
+  }) {
+    int sum = 0;
+    for (var i = 0; i < numDays; ++i) {
+      sum += _faker.randomGenerator.integer(
+        max + _faker.randomGenerator.integer(spread),
+        min: 1
+      );
+    }
+    return sum;
+  }
+
 }
+

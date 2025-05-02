@@ -197,6 +197,18 @@ abstract class AppLocalizations {
   /// **'Kérlek várj'**
   String get pleaseWait;
 
+  /// No description provided for @notAvailable.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nem elérhető'**
+  String get notAvailable;
+
+  /// No description provided for @notAvailableAbbr.
+  ///
+  /// In hu, this message translates to:
+  /// **'N/A'**
+  String get notAvailableAbbr;
+
   /// No description provided for @inputWarmupLabel.
   ///
   /// In hu, this message translates to:
@@ -449,11 +461,41 @@ abstract class AppLocalizations {
   /// **'Átlagosan naponta'**
   String get averagePerDay;
 
+  /// No description provided for @averagePerWeek.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlagosan hetente'**
+  String get averagePerWeek;
+
+  /// No description provided for @averagePerMonth.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlagosan havonta'**
+  String get averagePerMonth;
+
+  /// No description provided for @averagePerYear.
+  ///
+  /// In hu, this message translates to:
+  /// **'Átlagosan évente'**
+  String get averagePerYear;
+
   /// No description provided for @averageAbbr.
   ///
   /// In hu, this message translates to:
   /// **'Átl.'**
   String get averageAbbr;
+
+  /// No description provided for @statsSignedUp.
+  ///
+  /// In hu, this message translates to:
+  /// **'Csatlakozás'**
+  String get statsSignedUp;
+
+  /// No description provided for @statsFirstSession.
+  ///
+  /// In hu, this message translates to:
+  /// **'Első ülés'**
+  String get statsFirstSession;
 
   /// No description provided for @statsCurrentStreak.
   ///
@@ -562,6 +604,12 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Következő mérföldkő'**
   String get statsNextMilestone;
+
+  /// No description provided for @statsNextMilestoneIn.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} nap múlva} =1{Még {count} nap} =2{{count} nap múlva} few{{count} nap múlva} many{{count} nap múlva} other{{count} nap múlva}}'**
+  String statsNextMilestoneIn(num count);
 
   /// No description provided for @statsLoadingData.
   ///

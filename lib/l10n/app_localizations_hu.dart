@@ -60,6 +60,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get pleaseWait => 'Kérlek várj';
 
   @override
+  String get notAvailable => 'Nem elérhető';
+
+  @override
+  String get notAvailableAbbr => 'N/A';
+
+  @override
   String get inputWarmupLabel => 'Felkészülés';
 
   @override
@@ -186,7 +192,22 @@ class AppLocalizationsHu extends AppLocalizations {
   String get averagePerDay => 'Átlagosan naponta';
 
   @override
+  String get averagePerWeek => 'Átlagosan hetente';
+
+  @override
+  String get averagePerMonth => 'Átlagosan havonta';
+
+  @override
+  String get averagePerYear => 'Átlagosan évente';
+
+  @override
   String get averageAbbr => 'Átl.';
+
+  @override
+  String get statsSignedUp => 'Csatlakozás';
+
+  @override
+  String get statsFirstSession => 'Első ülés';
 
   @override
   String get statsCurrentStreak => 'Aktuális sorozat';
@@ -241,6 +262,21 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get statsNextMilestone => 'Következő mérföldkő';
+
+  @override
+  String statsNextMilestoneIn(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count nap múlva',
+      many: '$count nap múlva',
+      few: '$count nap múlva',
+      two: '$count nap múlva',
+      one: 'Még $count nap',
+      zero: '$count nap múlva',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get statsLoadingData => 'Adatok betöltése...';

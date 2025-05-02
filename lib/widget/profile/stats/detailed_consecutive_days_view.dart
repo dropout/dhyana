@@ -59,7 +59,7 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
     if (consecutiveDays.current > 0 && consecutiveDays.startedAt != null) {
       return consecutiveDays.startedAt!.toFormattedDateTimeString(context);
     } else {
-      return AppLocalizations.of(context).statsNotyetStarted;
+      return AppLocalizations.of(context).notAvailableAbbr;
     }
   }
 

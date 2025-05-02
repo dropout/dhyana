@@ -102,7 +102,19 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   @override
   Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions) async {
     await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createYears(queryOptions.limit));
+    int yearsCount = queryOptions.to.year - queryOptions.from.year;
+    List<Year> years = [];
+    for (var i = 0; i <= yearsCount; ++i) {
+      DateTime date = queryOptions.from.copyWith(
+        year: queryOptions.from.year + i,
+      );
+      Year year = _fakeModelFactory.createYear(startDate: date);
+      year = year.copyWith(
+        id: date.toYearId(),
+      );
+      years.add(year);
+    }
+    return Future.value(years);
   }
 
   @override

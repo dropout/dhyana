@@ -1,19 +1,11 @@
-import 'dart:async';
 
-import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/months/months_bloc.dart';
-import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/months_bar_chart_page.dart';
-import 'package:dhyana/widget/profile/stats/bar_chart_page/weeks_bar_chart_page.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class MonthTab extends StatefulWidget {
 

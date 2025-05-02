@@ -9,6 +9,7 @@ import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetailedProfileView extends StatelessWidget {
 
@@ -58,13 +59,54 @@ class DetailedProfileView extends StatelessWidget {
               Gap.medium(),
               LabelValueDetail(
                 label: 'Signed up',
-                value: profile.signupDate.toFormattedDateString(context),
+                value: getSignedUpDateText(
+                  context,
+                  profile.signupDate,
+                ),
+              ),
+              LabelValueDetail(
+                label: 'First session',
+                value: getFirstSessionDateText(
+                  context,
+                  profile.statsReport.firstSessionDate
+                ),
               ),
             ],
           ),
         )
     );
   }
+
+  String getSignedUpDateText(
+    BuildContext context,
+    DateTime? signedUpDate,
+  ) {
+    if (signedUpDate == null) {
+      return AppLocalizations.of(context).notAvailable;
+    } else {
+      return '${DateFormat.yMMMd(
+        Localizations.localeOf(context).toString()
+      ).format(signedUpDate)} ${DateFormat.Hm(
+        Localizations.localeOf(context).toString()
+      ).format(signedUpDate)}';
+    }
+  }
+
+  String getFirstSessionDateText(
+    BuildContext context,
+    DateTime? firstSessionDate,
+  ) {
+    if (firstSessionDate == null) {
+      return AppLocalizations.of(context).notAvailable;
+    } else {
+      return '${DateFormat.yMMMd(
+        Localizations.localeOf(context).toString()
+      ).format(firstSessionDate)} ${DateFormat.Hm(
+        Localizations.localeOf(context).toString()
+      ).format(firstSessionDate)}';
+    }
+  }
+
 }
 
 

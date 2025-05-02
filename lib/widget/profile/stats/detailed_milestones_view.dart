@@ -39,11 +39,24 @@ class DetailedMilestonesView extends StatelessWidget {
             ),
             LabelValueDetail(
               label: AppLocalizations.of(context).statsNextMilestone,
-              value: '${milestoneProgress.completedDaysCount} / ${milestoneProgress.targetDaysCount}',
+              value: getNextMilestoneText(context, profile.statsReport.milestoneProgress),
             ),
           ],
         )
     );
+  }
+
+  String getNextMilestoneText(BuildContext context, MilestoneProgress milestoneProgress) {
+    return AppLocalizations.of(context).statsNextMilestoneIn(
+      milestoneProgress.targetDaysCount - milestoneProgress.completedDaysCount,
+    );
+    // final MilestoneProgress milestoneProgress =
+    //     profile.statsReport.milestoneProgress;
+    // if (milestoneProgress.completedDaysCount > 0) {
+    //   return '${milestoneProgress.completedDaysCount} / ${milestoneProgress.targetDaysCount}';
+    // } else {
+    //   return 'Not yet started';
+    // }
   }
 
   String getTimeString(BuildContext context, DateTime dateTime) {

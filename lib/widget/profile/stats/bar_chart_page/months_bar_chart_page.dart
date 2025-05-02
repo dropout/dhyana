@@ -1,13 +1,9 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/months/months_bloc.dart';
-import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/month.dart';
 import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/model/week.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/app_colors.dart';
@@ -170,7 +166,7 @@ class MonthsBarChartPage extends StatelessWidget {
           minutes: calculatedStats.averageMinutes.toInt()
         ).toFormattedString(context)
       ),
-      postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
+      postfix: Text(AppLocalizations.of(context).averagePerMonth.toLowerCase()),
     );
   }
 
@@ -186,17 +182,12 @@ class MonthsBarChartPage extends StatelessWidget {
       return UnconstrainedBox(
         child: BarChartInfoTriggerBox(
           prefix: Text(
-            createIntervalString(
-              context,
-              month.startDate,
-              month.startDate.copyWith(
-                month: month.startDate.month + 1,
-              ),
-              subtractOneDay: true,
-            ),
+            DateFormat.yMMMM(
+              Localizations.localeOf(context).toString()
+            ).format(month.startDate),
           ),
           mainText: Text(
-              Duration(minutes: month.minutesCount).toFormattedString(context)
+            Duration(minutes: month.minutesCount).toFormattedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),

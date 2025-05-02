@@ -22,33 +22,34 @@ mixin _$YearsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String profileId, DateTime from, DateTime? to)
-        getYear,
+        queryYears,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, DateTime from, DateTime? to)? getYear,
+    TResult? Function(String profileId, DateTime from, DateTime? to)?
+        queryYears,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, DateTime from, DateTime? to)? getYear,
+    TResult Function(String profileId, DateTime from, DateTime? to)? queryYears,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GetYearsEvent value) getYear,
+    required TResult Function(QueryYearsEvent value) queryYears,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GetYearsEvent value)? getYear,
+    TResult? Function(QueryYearsEvent value)? queryYears,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetYearsEvent value)? getYear,
+    TResult Function(QueryYearsEvent value)? queryYears,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -106,22 +107,22 @@ class _$YearsEventCopyWithImpl<$Res, $Val extends YearsEvent>
 }
 
 /// @nodoc
-abstract class _$$GetYearsEventImplCopyWith<$Res>
+abstract class _$$QueryYearsEventImplCopyWith<$Res>
     implements $YearsEventCopyWith<$Res> {
-  factory _$$GetYearsEventImplCopyWith(
-          _$GetYearsEventImpl value, $Res Function(_$GetYearsEventImpl) then) =
-      __$$GetYearsEventImplCopyWithImpl<$Res>;
+  factory _$$QueryYearsEventImplCopyWith(_$QueryYearsEventImpl value,
+          $Res Function(_$QueryYearsEventImpl) then) =
+      __$$QueryYearsEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String profileId, DateTime from, DateTime? to});
 }
 
 /// @nodoc
-class __$$GetYearsEventImplCopyWithImpl<$Res>
-    extends _$YearsEventCopyWithImpl<$Res, _$GetYearsEventImpl>
-    implements _$$GetYearsEventImplCopyWith<$Res> {
-  __$$GetYearsEventImplCopyWithImpl(
-      _$GetYearsEventImpl _value, $Res Function(_$GetYearsEventImpl) _then)
+class __$$QueryYearsEventImplCopyWithImpl<$Res>
+    extends _$YearsEventCopyWithImpl<$Res, _$QueryYearsEventImpl>
+    implements _$$QueryYearsEventImplCopyWith<$Res> {
+  __$$QueryYearsEventImplCopyWithImpl(
+      _$QueryYearsEventImpl _value, $Res Function(_$QueryYearsEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of YearsEvent
@@ -133,7 +134,7 @@ class __$$GetYearsEventImplCopyWithImpl<$Res>
     Object? from = null,
     Object? to = freezed,
   }) {
-    return _then(_$GetYearsEventImpl(
+    return _then(_$QueryYearsEventImpl(
       profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
@@ -152,8 +153,8 @@ class __$$GetYearsEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetYearsEventImpl implements GetYearsEvent {
-  const _$GetYearsEventImpl(
+class _$QueryYearsEventImpl implements QueryYearsEvent {
+  const _$QueryYearsEventImpl(
       {required this.profileId, required this.from, this.to});
 
   @override
@@ -165,14 +166,14 @@ class _$GetYearsEventImpl implements GetYearsEvent {
 
   @override
   String toString() {
-    return 'YearsEvent.getYear(profileId: $profileId, from: $from, to: $to)';
+    return 'YearsEvent.queryYears(profileId: $profileId, from: $from, to: $to)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetYearsEventImpl &&
+            other is _$QueryYearsEventImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
             (identical(other.from, from) || other.from == from) &&
@@ -187,34 +188,36 @@ class _$GetYearsEventImpl implements GetYearsEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetYearsEventImplCopyWith<_$GetYearsEventImpl> get copyWith =>
-      __$$GetYearsEventImplCopyWithImpl<_$GetYearsEventImpl>(this, _$identity);
+  _$$QueryYearsEventImplCopyWith<_$QueryYearsEventImpl> get copyWith =>
+      __$$QueryYearsEventImplCopyWithImpl<_$QueryYearsEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String profileId, DateTime from, DateTime? to)
-        getYear,
+        queryYears,
   }) {
-    return getYear(profileId, from, to);
+    return queryYears(profileId, from, to);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, DateTime from, DateTime? to)? getYear,
+    TResult? Function(String profileId, DateTime from, DateTime? to)?
+        queryYears,
   }) {
-    return getYear?.call(profileId, from, to);
+    return queryYears?.call(profileId, from, to);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, DateTime from, DateTime? to)? getYear,
+    TResult Function(String profileId, DateTime from, DateTime? to)? queryYears,
     required TResult orElse(),
   }) {
-    if (getYear != null) {
-      return getYear(profileId, from, to);
+    if (queryYears != null) {
+      return queryYears(profileId, from, to);
     }
     return orElse();
   }
@@ -222,37 +225,37 @@ class _$GetYearsEventImpl implements GetYearsEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GetYearsEvent value) getYear,
+    required TResult Function(QueryYearsEvent value) queryYears,
   }) {
-    return getYear(this);
+    return queryYears(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GetYearsEvent value)? getYear,
+    TResult? Function(QueryYearsEvent value)? queryYears,
   }) {
-    return getYear?.call(this);
+    return queryYears?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetYearsEvent value)? getYear,
+    TResult Function(QueryYearsEvent value)? queryYears,
     required TResult orElse(),
   }) {
-    if (getYear != null) {
-      return getYear(this);
+    if (queryYears != null) {
+      return queryYears(this);
     }
     return orElse();
   }
 }
 
-abstract class GetYearsEvent implements YearsEvent {
-  const factory GetYearsEvent(
+abstract class QueryYearsEvent implements YearsEvent {
+  const factory QueryYearsEvent(
       {required final String profileId,
       required final DateTime from,
-      final DateTime? to}) = _$GetYearsEventImpl;
+      final DateTime? to}) = _$QueryYearsEventImpl;
 
   @override
   String get profileId;
@@ -265,7 +268,7 @@ abstract class GetYearsEvent implements YearsEvent {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetYearsEventImplCopyWith<_$GetYearsEventImpl> get copyWith =>
+  _$$QueryYearsEventImplCopyWith<_$QueryYearsEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -295,23 +298,23 @@ mixin _$YearsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(YearsLoading value) loading,
-    required TResult Function(YearsLoaded value) loaded,
-    required TResult Function(YearsLoadingError value) error,
+    required TResult Function(YearsLoadingState value) loading,
+    required TResult Function(YearsLoadedState value) loaded,
+    required TResult Function(YearsLoadingErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(YearsLoading value)? loading,
-    TResult? Function(YearsLoaded value)? loaded,
-    TResult? Function(YearsLoadingError value)? error,
+    TResult? Function(YearsLoadingState value)? loading,
+    TResult? Function(YearsLoadedState value)? loaded,
+    TResult? Function(YearsLoadingErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(YearsLoading value)? loading,
-    TResult Function(YearsLoaded value)? loaded,
-    TResult Function(YearsLoadingError value)? error,
+    TResult Function(YearsLoadingState value)? loading,
+    TResult Function(YearsLoadedState value)? loaded,
+    TResult Function(YearsLoadingErrorState value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -339,18 +342,18 @@ class _$YearsStateCopyWithImpl<$Res, $Val extends YearsState>
 }
 
 /// @nodoc
-abstract class _$$YearsLoadingImplCopyWith<$Res> {
-  factory _$$YearsLoadingImplCopyWith(
-          _$YearsLoadingImpl value, $Res Function(_$YearsLoadingImpl) then) =
-      __$$YearsLoadingImplCopyWithImpl<$Res>;
+abstract class _$$YearsLoadingStateImplCopyWith<$Res> {
+  factory _$$YearsLoadingStateImplCopyWith(_$YearsLoadingStateImpl value,
+          $Res Function(_$YearsLoadingStateImpl) then) =
+      __$$YearsLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$YearsLoadingImplCopyWithImpl<$Res>
-    extends _$YearsStateCopyWithImpl<$Res, _$YearsLoadingImpl>
-    implements _$$YearsLoadingImplCopyWith<$Res> {
-  __$$YearsLoadingImplCopyWithImpl(
-      _$YearsLoadingImpl _value, $Res Function(_$YearsLoadingImpl) _then)
+class __$$YearsLoadingStateImplCopyWithImpl<$Res>
+    extends _$YearsStateCopyWithImpl<$Res, _$YearsLoadingStateImpl>
+    implements _$$YearsLoadingStateImplCopyWith<$Res> {
+  __$$YearsLoadingStateImplCopyWithImpl(_$YearsLoadingStateImpl _value,
+      $Res Function(_$YearsLoadingStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of YearsState
@@ -359,8 +362,8 @@ class __$$YearsLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$YearsLoadingImpl implements YearsLoading {
-  const _$YearsLoadingImpl();
+class _$YearsLoadingStateImpl implements YearsLoadingState {
+  const _$YearsLoadingStateImpl();
 
   @override
   String toString() {
@@ -370,7 +373,7 @@ class _$YearsLoadingImpl implements YearsLoading {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$YearsLoadingImpl);
+        (other.runtimeType == runtimeType && other is _$YearsLoadingStateImpl);
   }
 
   @override
@@ -413,9 +416,9 @@ class _$YearsLoadingImpl implements YearsLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(YearsLoading value) loading,
-    required TResult Function(YearsLoaded value) loaded,
-    required TResult Function(YearsLoadingError value) error,
+    required TResult Function(YearsLoadingState value) loading,
+    required TResult Function(YearsLoadedState value) loaded,
+    required TResult Function(YearsLoadingErrorState value) error,
   }) {
     return loading(this);
   }
@@ -423,9 +426,9 @@ class _$YearsLoadingImpl implements YearsLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(YearsLoading value)? loading,
-    TResult? Function(YearsLoaded value)? loaded,
-    TResult? Function(YearsLoadingError value)? error,
+    TResult? Function(YearsLoadingState value)? loading,
+    TResult? Function(YearsLoadedState value)? loaded,
+    TResult? Function(YearsLoadingErrorState value)? error,
   }) {
     return loading?.call(this);
   }
@@ -433,9 +436,9 @@ class _$YearsLoadingImpl implements YearsLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(YearsLoading value)? loading,
-    TResult Function(YearsLoaded value)? loaded,
-    TResult Function(YearsLoadingError value)? error,
+    TResult Function(YearsLoadingState value)? loading,
+    TResult Function(YearsLoadedState value)? loaded,
+    TResult Function(YearsLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -445,25 +448,25 @@ class _$YearsLoadingImpl implements YearsLoading {
   }
 }
 
-abstract class YearsLoading implements YearsState {
-  const factory YearsLoading() = _$YearsLoadingImpl;
+abstract class YearsLoadingState implements YearsState {
+  const factory YearsLoadingState() = _$YearsLoadingStateImpl;
 }
 
 /// @nodoc
-abstract class _$$YearsLoadedImplCopyWith<$Res> {
-  factory _$$YearsLoadedImplCopyWith(
-          _$YearsLoadedImpl value, $Res Function(_$YearsLoadedImpl) then) =
-      __$$YearsLoadedImplCopyWithImpl<$Res>;
+abstract class _$$YearsLoadedStateImplCopyWith<$Res> {
+  factory _$$YearsLoadedStateImplCopyWith(_$YearsLoadedStateImpl value,
+          $Res Function(_$YearsLoadedStateImpl) then) =
+      __$$YearsLoadedStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Year> years});
 }
 
 /// @nodoc
-class __$$YearsLoadedImplCopyWithImpl<$Res>
-    extends _$YearsStateCopyWithImpl<$Res, _$YearsLoadedImpl>
-    implements _$$YearsLoadedImplCopyWith<$Res> {
-  __$$YearsLoadedImplCopyWithImpl(
-      _$YearsLoadedImpl _value, $Res Function(_$YearsLoadedImpl) _then)
+class __$$YearsLoadedStateImplCopyWithImpl<$Res>
+    extends _$YearsStateCopyWithImpl<$Res, _$YearsLoadedStateImpl>
+    implements _$$YearsLoadedStateImplCopyWith<$Res> {
+  __$$YearsLoadedStateImplCopyWithImpl(_$YearsLoadedStateImpl _value,
+      $Res Function(_$YearsLoadedStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of YearsState
@@ -473,7 +476,7 @@ class __$$YearsLoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? years = null,
   }) {
-    return _then(_$YearsLoadedImpl(
+    return _then(_$YearsLoadedStateImpl(
       years: null == years
           ? _value._years
           : years // ignore: cast_nullable_to_non_nullable
@@ -484,8 +487,9 @@ class __$$YearsLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$YearsLoadedImpl implements YearsLoaded {
-  const _$YearsLoadedImpl({required final List<Year> years}) : _years = years;
+class _$YearsLoadedStateImpl implements YearsLoadedState {
+  const _$YearsLoadedStateImpl({required final List<Year> years})
+      : _years = years;
 
   final List<Year> _years;
   @override
@@ -504,7 +508,7 @@ class _$YearsLoadedImpl implements YearsLoaded {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$YearsLoadedImpl &&
+            other is _$YearsLoadedStateImpl &&
             const DeepCollectionEquality().equals(other._years, _years));
   }
 
@@ -517,8 +521,9 @@ class _$YearsLoadedImpl implements YearsLoaded {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$YearsLoadedImplCopyWith<_$YearsLoadedImpl> get copyWith =>
-      __$$YearsLoadedImplCopyWithImpl<_$YearsLoadedImpl>(this, _$identity);
+  _$$YearsLoadedStateImplCopyWith<_$YearsLoadedStateImpl> get copyWith =>
+      __$$YearsLoadedStateImplCopyWithImpl<_$YearsLoadedStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -557,9 +562,9 @@ class _$YearsLoadedImpl implements YearsLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(YearsLoading value) loading,
-    required TResult Function(YearsLoaded value) loaded,
-    required TResult Function(YearsLoadingError value) error,
+    required TResult Function(YearsLoadingState value) loading,
+    required TResult Function(YearsLoadedState value) loaded,
+    required TResult Function(YearsLoadingErrorState value) error,
   }) {
     return loaded(this);
   }
@@ -567,9 +572,9 @@ class _$YearsLoadedImpl implements YearsLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(YearsLoading value)? loading,
-    TResult? Function(YearsLoaded value)? loaded,
-    TResult? Function(YearsLoadingError value)? error,
+    TResult? Function(YearsLoadingState value)? loading,
+    TResult? Function(YearsLoadedState value)? loaded,
+    TResult? Function(YearsLoadingErrorState value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -577,9 +582,9 @@ class _$YearsLoadedImpl implements YearsLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(YearsLoading value)? loading,
-    TResult Function(YearsLoaded value)? loaded,
-    TResult Function(YearsLoadingError value)? error,
+    TResult Function(YearsLoadingState value)? loading,
+    TResult Function(YearsLoadedState value)? loaded,
+    TResult Function(YearsLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -589,32 +594,34 @@ class _$YearsLoadedImpl implements YearsLoaded {
   }
 }
 
-abstract class YearsLoaded implements YearsState {
-  const factory YearsLoaded({required final List<Year> years}) =
-      _$YearsLoadedImpl;
+abstract class YearsLoadedState implements YearsState {
+  const factory YearsLoadedState({required final List<Year> years}) =
+      _$YearsLoadedStateImpl;
 
   List<Year> get years;
 
   /// Create a copy of YearsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$YearsLoadedImplCopyWith<_$YearsLoadedImpl> get copyWith =>
+  _$$YearsLoadedStateImplCopyWith<_$YearsLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$YearsLoadingErrorImplCopyWith<$Res> {
-  factory _$$YearsLoadingErrorImplCopyWith(_$YearsLoadingErrorImpl value,
-          $Res Function(_$YearsLoadingErrorImpl) then) =
-      __$$YearsLoadingErrorImplCopyWithImpl<$Res>;
+abstract class _$$YearsLoadingErrorStateImplCopyWith<$Res> {
+  factory _$$YearsLoadingErrorStateImplCopyWith(
+          _$YearsLoadingErrorStateImpl value,
+          $Res Function(_$YearsLoadingErrorStateImpl) then) =
+      __$$YearsLoadingErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$YearsLoadingErrorImplCopyWithImpl<$Res>
-    extends _$YearsStateCopyWithImpl<$Res, _$YearsLoadingErrorImpl>
-    implements _$$YearsLoadingErrorImplCopyWith<$Res> {
-  __$$YearsLoadingErrorImplCopyWithImpl(_$YearsLoadingErrorImpl _value,
-      $Res Function(_$YearsLoadingErrorImpl) _then)
+class __$$YearsLoadingErrorStateImplCopyWithImpl<$Res>
+    extends _$YearsStateCopyWithImpl<$Res, _$YearsLoadingErrorStateImpl>
+    implements _$$YearsLoadingErrorStateImplCopyWith<$Res> {
+  __$$YearsLoadingErrorStateImplCopyWithImpl(
+      _$YearsLoadingErrorStateImpl _value,
+      $Res Function(_$YearsLoadingErrorStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of YearsState
@@ -623,8 +630,8 @@ class __$$YearsLoadingErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$YearsLoadingErrorImpl implements YearsLoadingError {
-  const _$YearsLoadingErrorImpl();
+class _$YearsLoadingErrorStateImpl implements YearsLoadingErrorState {
+  const _$YearsLoadingErrorStateImpl();
 
   @override
   String toString() {
@@ -634,7 +641,8 @@ class _$YearsLoadingErrorImpl implements YearsLoadingError {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$YearsLoadingErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$YearsLoadingErrorStateImpl);
   }
 
   @override
@@ -677,9 +685,9 @@ class _$YearsLoadingErrorImpl implements YearsLoadingError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(YearsLoading value) loading,
-    required TResult Function(YearsLoaded value) loaded,
-    required TResult Function(YearsLoadingError value) error,
+    required TResult Function(YearsLoadingState value) loading,
+    required TResult Function(YearsLoadedState value) loaded,
+    required TResult Function(YearsLoadingErrorState value) error,
   }) {
     return error(this);
   }
@@ -687,9 +695,9 @@ class _$YearsLoadingErrorImpl implements YearsLoadingError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(YearsLoading value)? loading,
-    TResult? Function(YearsLoaded value)? loaded,
-    TResult? Function(YearsLoadingError value)? error,
+    TResult? Function(YearsLoadingState value)? loading,
+    TResult? Function(YearsLoadedState value)? loaded,
+    TResult? Function(YearsLoadingErrorState value)? error,
   }) {
     return error?.call(this);
   }
@@ -697,9 +705,9 @@ class _$YearsLoadingErrorImpl implements YearsLoadingError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(YearsLoading value)? loading,
-    TResult Function(YearsLoaded value)? loaded,
-    TResult Function(YearsLoadingError value)? error,
+    TResult Function(YearsLoadingState value)? loading,
+    TResult Function(YearsLoadedState value)? loaded,
+    TResult Function(YearsLoadingErrorState value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -709,6 +717,6 @@ class _$YearsLoadingErrorImpl implements YearsLoadingError {
   }
 }
 
-abstract class YearsLoadingError implements YearsState {
-  const factory YearsLoadingError() = _$YearsLoadingErrorImpl;
+abstract class YearsLoadingErrorState implements YearsState {
+  const factory YearsLoadingErrorState() = _$YearsLoadingErrorStateImpl;
 }

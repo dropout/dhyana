@@ -248,9 +248,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           buildTabBarViewItem(
             context,
             'years',
-            YearTab(
-              // profile: profile,
-            ),
+            YearTab(profile: profile),
           ),
         ],
       ),

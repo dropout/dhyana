@@ -60,6 +60,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseWait => 'Please wait';
 
   @override
+  String get notAvailable => 'Not available';
+
+  @override
+  String get notAvailableAbbr => 'N/A';
+
+  @override
   String get inputWarmupLabel => 'Warmup';
 
   @override
@@ -186,7 +192,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get averagePerDay => 'Average per day';
 
   @override
+  String get averagePerWeek => 'Average per week';
+
+  @override
+  String get averagePerMonth => 'Average per month';
+
+  @override
+  String get averagePerYear => 'Average per year';
+
+  @override
   String get averageAbbr => 'Avg.';
+
+  @override
+  String get statsSignedUp => 'Joined';
+
+  @override
+  String get statsFirstSession => 'First session';
 
   @override
   String get statsCurrentStreak => 'Current streak';
@@ -241,6 +262,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statsNextMilestone => 'Next milestone';
+
+  @override
+  String statsNextMilestoneIn(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more days',
+      many: '$count more days',
+      few: '$count more days',
+      two: 'In $count more days',
+      one: 'In $count more days',
+      zero: '$count more day',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get statsLoadingData => 'Loading data...';

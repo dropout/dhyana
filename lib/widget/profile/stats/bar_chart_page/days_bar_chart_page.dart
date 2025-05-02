@@ -59,7 +59,6 @@ class DaysBarChartPage extends StatelessWidget {
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
         barData: List.generate(difference.inDays.abs(), (index) {
-          DateTime day = statsInterval.from.add(Duration(days: index));
           return BarData(
             value: 0,
             label: '',

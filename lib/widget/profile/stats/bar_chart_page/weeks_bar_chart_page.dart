@@ -1,9 +1,7 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/model/week.dart';
 import 'package:dhyana/util/date_time_utils.dart';
@@ -14,7 +12,6 @@ import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import 'stats_bar_chart.dart';
 
@@ -167,7 +164,7 @@ class WeeksBarChartPage extends StatelessWidget {
           minutes: calculatedStats.averageMinutes.toInt()
         ).toFormattedString(context)
       ),
-      postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
+      postfix: Text(AppLocalizations.of(context).averagePerWeek.toLowerCase()),
     );
   }
 
