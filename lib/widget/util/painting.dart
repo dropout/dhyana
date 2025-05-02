@@ -6,7 +6,7 @@ Path extractPathUntilLength(
     ) {
   var currentLength = 0.0;
 
-  final path = new Path();
+  final path = Path();
 
   var metricsIterator = originalPath.computeMetrics().iterator;
 

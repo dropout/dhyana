@@ -1,3 +1,4 @@
+export 'bar_chart_error_page.dart';
 export 'calculated_stats_view.dart';
 export 'days_bar_chart_page.dart';
 export 'months_bar_chart_page.dart';

@@ -13,7 +13,6 @@ import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'stats_bar_chart.dart';
 
 class WeeksBarChartPage extends StatelessWidget {
 
@@ -37,7 +36,7 @@ class WeeksBarChartPage extends StatelessWidget {
           case WeeksLoadingState():
             return buildLoadingState(context, state);
           case WeeksLoadingErrorState():
-            return const SizedBox.shrink();
+            return BarChartPageError();
           case WeeksLoadedState():
             return buildLoadedState(context, state);
         }

@@ -1,4 +1,3 @@
-import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 class LabelValueDetail extends StatelessWidget {

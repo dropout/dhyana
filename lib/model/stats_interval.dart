@@ -1,4 +1,3 @@
-import 'package:dhyana/enum/stats_interval_type.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

@@ -1,12 +1,7 @@
-import 'dart:math' as math;
 
 import 'package:bar_chart/bar_chart.dart';
-import 'package:bar_chart/src/label_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-import 'models.dart';
-import 'painting.dart';
 
 typedef InfoBuilderDelegate = Widget Function(
   BuildContext context,

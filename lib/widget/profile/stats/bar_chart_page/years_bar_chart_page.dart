@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import 'stats_bar_chart.dart';
 
 class YearsBarChartPage extends StatelessWidget {
 
@@ -38,7 +37,7 @@ class YearsBarChartPage extends StatelessWidget {
           case YearsLoadingState():
             return buildLoadingState(context, state);
           case YearsLoadingErrorState():
-            return const SizedBox.shrink();
+            return BarChartPageError();
           case YearsLoadedState():
             return buildLoadedState(context, state);
         }
