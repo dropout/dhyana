@@ -104,7 +104,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     await Future.delayed(Duration(seconds: 1));
     int yearsCount = queryOptions.to.year - queryOptions.from.year;
     List<Year> years = [];
-    for (var i = 0; i <= yearsCount; ++i) {
+    for (var i = 0; i <= yearsCount - 1; ++i) {
       DateTime date = queryOptions.from.copyWith(
         year: queryOptions.from.year + i,
       );
