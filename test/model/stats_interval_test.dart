@@ -95,21 +95,21 @@ void main() {
         StatsInterval.generateWeekIntervals(DateTime(2025, 4, 26, 9, 53));
       expect(intervals.length, 4);
 
-      // first month
-      expect(intervals[0].from, DateTime(2025, 3, 31));
+      // first 6 weeks
+      expect(intervals[0].from, DateTime(2025, 3, 17));
       expect(intervals[0].to, DateTime(2025, 4, 28));
 
-      // second month
-      expect(intervals[1].from, DateTime(2025, 3, 3));
-      expect(intervals[1].to, DateTime(2025, 3, 31));
+      // second 6 weeks
+      expect(intervals[1].from, DateTime(2025, 2, 3));
+      expect(intervals[1].to, DateTime(2025, 3, 17));
 
-      // third month
-      expect(intervals[2].from, DateTime(2025, 2, 3));
-      expect(intervals[2].to, DateTime(2025, 3, 3));
+      // third 6 weeks
+      expect(intervals[2].from, DateTime(2024, 12, 23));
+      expect(intervals[2].to, DateTime(2025, 2, 3));
 
-      // fourth week
-      expect(intervals[3].from, DateTime(2025, 1, 6));
-      expect(intervals[3].to, DateTime(2025, 2, 3));
+      // fourth 6 weeks
+      expect(intervals[3].from, DateTime(2024, 11, 11));
+      expect(intervals[3].to, DateTime(2024, 12, 23));
 
     });
 

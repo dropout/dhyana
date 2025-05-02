@@ -128,13 +128,13 @@ class StatsInterval with _$StatsInterval {
 
   static List<StatsInterval> generateWeekIntervals(
     DateTime now, {
-      int weeksInInterval = 4,
+      int weeksInInterval = 6,
       int intervalCount = 4,
   }) {
     StatsInterval thisWeek = StatsInterval.thisWeek(now);
     StatsInterval firstInterval = thisWeek.copyWith(
-      from: thisWeek.from.subtract(
-        Duration(days: (weeksInInterval - 1) * 7),
+      from: thisWeek.from.copyWith(
+        day: thisWeek.from.day - (weeksInInterval - 1) * 7,
       ),
     );
 
@@ -142,18 +142,20 @@ class StatsInterval with _$StatsInterval {
       firstInterval,
     ];
 
-    for (var i = 0; i < intervalCount - 1; ++i) {
+    // (weeksInInterval - 1) because first is already added
+    for (var i = 1; i < intervalCount; i++) {
       result.add(
         firstInterval.copyWith(
           from: firstInterval.from.copyWith(
-            day: firstInterval.from.day - weeksInInterval * (i + 1) * 7,
+            day: firstInterval.from.day - (weeksInInterval) * 7 * i,
           ),
           to: firstInterval.to.copyWith(
-            day: firstInterval.to.day - weeksInInterval * (i + 1) * 7,
+            day: firstInterval.to.day - (weeksInInterval) * 7 * i,
           ),
         )
       );
     }
+    print('result: $result');
 
     return result;
   }

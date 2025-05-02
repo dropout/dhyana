@@ -96,6 +96,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             backButton: widget.backButton,
           ),
           if (widget.enablePullToRefresh) CupertinoSliverRefreshControl(
+            refreshTriggerPullDistance: 200,
             onRefresh: () => _onRefresh(context),
           ),
           if (widget.enableTitleSliver) buildTitleEffectSliverTitle(
