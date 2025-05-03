@@ -268,12 +268,12 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count more days',
-      many: '$count more days',
-      few: '$count more days',
-      two: 'In $count more days',
-      one: 'In $count more days',
-      zero: '$count more day',
+      other: 'Next milestone in $count more days.',
+      many: 'Next milestone in $count more days.',
+      few: 'Next milestone in $count more days.',
+      two: 'Next milestone in $count more days.',
+      one: 'Next milestone in $count more day.',
+      zero: 'Next milestone in $count more days.',
     );
     return '$_temp0';
   }

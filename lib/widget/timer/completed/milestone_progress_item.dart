@@ -191,8 +191,8 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
 
   Widget _buildCompleted() {
     return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: Colors.green,
+      decoration: BoxDecoration(
+        color: widget.completedColor,
         shape: BoxShape.circle,
       ),
       child: CustomPaint(

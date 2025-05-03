@@ -104,8 +104,9 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
           ),
           Gap.large(),
           MilestoneProgress(
-            oldProfile: oldProfile,
-            updatedProfile: updatedProfile,
+            profile: updatedProfile,
+            showAnimation: updatedProfile.
+              consecutiveDaysProgressCheck(oldProfile),
           ),
           Gap.large(),
           ProgressSummary(

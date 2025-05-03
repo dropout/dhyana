@@ -71,4 +71,9 @@ class Profile with _$Profile implements Model {
     return '$firstName $lastName';
   }
 
+  bool consecutiveDaysProgressCheck(Profile oldProfile) {
+    return (oldProfile.statsReport.consecutiveDays.current
+      < statsReport.consecutiveDays.current);
+  }
+
 }

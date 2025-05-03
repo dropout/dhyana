@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 class MilestonesView extends StatefulWidget {
 
   final Profile profile;
+  final bool showMeter;
 
   const MilestonesView({
     required this.profile,
+    this.showMeter = false,
     super.key
   });
 
@@ -35,7 +37,7 @@ class _MilestonesViewState extends State<MilestonesView> {
             ),
           ),
         ),
-        Positioned.fill(
+        if (widget.showMeter) Positioned.fill(
           child: Align(
             alignment: Alignment.bottomRight,
             child: Padding(

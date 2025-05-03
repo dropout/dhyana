@@ -35,7 +35,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   @override
   void initState() {
-
     primaryTC = TabController(length: 4, vsync: this);
     scrollController = ScrollController();
 

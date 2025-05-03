@@ -102,7 +102,7 @@
   "statsAverageSessions": "Average sessions",
   "statsCount": "Count",
   "statsNextMilestone": "Next milestone",
-  "statsNextMilestoneIn": "{count, plural, =0{{count} more day} =1{In {count} more days} =2{In {count} more days} few{{count} more days} many{{count} more days} other{{count} more days}}",
+  "statsNextMilestoneIn": "{count, plural, =0{Next milestone in {count} more days.} =1{Next milestone in {count} more day.} =2{Next milestone in {count} more days.} few{Next milestone in {count} more days.} many{Next milestone in {count} more days.} other{Next milestone in {count} more days.}}",
   "statsLoadingData": "Loading data...",
 
   "signOut": "Signout",

@@ -155,7 +155,6 @@ class StatsInterval with _$StatsInterval {
         )
       );
     }
-    print('result: $result');
 
     return result;
   }

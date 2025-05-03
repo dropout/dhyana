@@ -5,6 +5,7 @@ import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/timer/completed/milestone_progress.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/gap.dart';
@@ -73,6 +74,8 @@ class _ProfileViewState extends State<ProfileView> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          Gap.large(),
+          MilestoneProgress(profile: profile),
           Gap.large(),
           Row(
             children: [

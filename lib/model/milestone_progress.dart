@@ -20,4 +20,6 @@ class MilestoneProgress with _$MilestoneProgress {
   factory MilestoneProgress.fromJson(Map<String, Object?> json) =>
     _$MilestoneProgressFromJson(json);
 
+  int get remainingDaysCount => targetDaysCount - completedDaysCount;
+
 }

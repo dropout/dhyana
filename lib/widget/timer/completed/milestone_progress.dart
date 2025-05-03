@@ -1,17 +1,21 @@
+import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
 import 'milestone_progress_item.dart';
 
 class MilestoneProgress extends StatefulWidget {
 
-  final Profile oldProfile;
-  final Profile updatedProfile;
+  final Profile profile;
+  final bool showAnimation;
+  final bool showText;
 
   const MilestoneProgress({
-    required this.oldProfile,
-    required this.updatedProfile,
+    required this.profile,
+    this.showAnimation = false,
+    this.showText = true,
     super.key,
   });
 
@@ -23,23 +27,29 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      spacing: AppThemeData.spacingXs,
-      children: buildMilestoneItems(context),
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: AppThemeData.spacingXs,
+          children: buildMilestoneItems(context),
+        ),
+        Gap.small(),
+        buildMilestoneText(context),
+      ],
     );
   }
 
   List<Widget> buildMilestoneItems(BuildContext context) {
-    Profile updatedProfile = widget.updatedProfile;
 
-    int count = updatedProfile.statsReport.milestoneProgress.targetDaysCount;
-    int completedCount = updatedProfile.statsReport.milestoneProgress.completedDaysCount;
+
+    int count = widget.profile.statsReport.milestoneProgress.targetDaysCount;
+    int completedCount = widget.profile.statsReport.milestoneProgress.completedDaysCount;
     int incompleteCount = count - completedCount;
-    // bool consecutiveDaysProgress = (oldProfile.statsReport.consecutiveDays.current
-    //   < updatedProfile.statsReport.consecutiveDays.current);
-    bool consecutiveDaysProgress = true;
+
+    final Color completedColor = Colors.green.shade600;
+    final Color incompleteColor = Colors.grey.shade800;
 
     const double size = 36;
     return [
@@ -49,16 +59,18 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
           height: size,
           child: MilestoneProgressItem(
             mode: MilestoneProgressItemMode.completed,
-            incompleteColor: Colors.grey.shade800,
+            completedColor: completedColor,
+            incompleteColor: incompleteColor,
           ),
         ),
-      if (consecutiveDaysProgress)
+      if (widget.showAnimation)
         SizedBox(
           width: size,
           height: size,
           child: MilestoneProgressItem(
             mode: MilestoneProgressItemMode.animate,
-            incompleteColor: Colors.grey.shade800,
+            completedColor: completedColor,
+            incompleteColor: incompleteColor,
           ),
         ),
       for (int i = 0; i < incompleteCount; i++)
@@ -67,11 +79,21 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
           height: size,
           child: MilestoneProgressItem(
             mode: MilestoneProgressItemMode.incomplete,
-            incompleteColor: Colors.grey.shade800,
+            completedColor: completedColor,
+            incompleteColor: incompleteColor,
           ),
         ),
     ];
 
+  }
+
+  Widget buildMilestoneText(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context).statsNextMilestoneIn(
+        widget.profile.statsReport.milestoneProgress.remainingDaysCount
+      ),
+      style: Theme.of(context).textTheme.titleMedium,
+    );
   }
 
 }

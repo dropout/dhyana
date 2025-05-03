@@ -268,12 +268,12 @@ class AppLocalizationsHu extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count nap múlva',
-      many: '$count nap múlva',
-      few: '$count nap múlva',
-      two: '$count nap múlva',
-      one: 'Még $count nap',
-      zero: '$count nap múlva',
+      other: 'Még $count a következő mérföldkőig.',
+      many: 'Még $count a következő mérföldkőig.',
+      few: 'Még $count a következő mérföldkőig.',
+      two: 'Még $count a következő mérföldkőig.',
+      one: 'Még $count a következő mérföldkőig.',
+      zero: 'Még $count a következő mérföldkőig.',
     );
     return '$_temp0';
   }
