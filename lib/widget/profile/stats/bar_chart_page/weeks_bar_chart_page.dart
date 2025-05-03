@@ -77,14 +77,11 @@ class WeeksBarChartPage extends StatelessWidget {
         barData: state.weeks.map((week) {
           return BarData(
             value: week.minutesCount.toDouble(),
-            label: AppLocalizations.of(context).weekNumber(
-              week.startDate.year,
-              week.startDate.weekNumber,
-            )
+            label: getWeekLabel(context, week),
           );
         }).toList(),
         infoBuilderDelegate: (context, index) =>
-            buildBarInfo(context, index, state),
+          buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(
         calculatedStats: CalculatedStats.fromWeeks(state.weeks),
@@ -215,6 +212,24 @@ class WeeksBarChartPage extends StatelessWidget {
           ),
 
         ),
+      );
+    }
+  }
+
+  // This is a workaround for the case when:
+  // - the week starts in December
+  // - the week considered first week according to ISO standards
+  // (considered first week if the week contains the first Thursday of the year)
+  String getWeekLabel(BuildContext context, Week week) {
+    if (week.startDate.weekNumber == 1 && week.startDate.month == 12) {
+      return AppLocalizations.of(context).weekNumber(
+        week.startDate.year + 1,
+        week.startDate.weekNumber,
+      );
+    } else {
+      return  AppLocalizations.of(context).weekNumber(
+        week.startDate.year,
+        week.startDate.weekNumber,
       );
     }
   }
