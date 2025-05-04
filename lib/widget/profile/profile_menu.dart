@@ -1,6 +1,8 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
@@ -15,7 +17,7 @@ class ProfileMenu extends StatelessWidget {
     super.key
   });
 
-  void _onActivityTapped(BuildContext context) {
+  void _onSessionHistoryTapped(BuildContext context) {
     SessionHistoryRoute(profileId: profile.id).push(context);
     context.hapticsTap();
   }
@@ -43,45 +45,59 @@ class ProfileMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       child: Column(
         children: [
-          ListTile(
+          _buildTile(
             title: Text(
               AppLocalizations.of(context).editProfile,
               style: textStyle,
             ),
-            enabled: true,
             onTap: () => _onEditProfileTapped(context),
           ),
           const Divider(height: 0),
-          ListTile(
+          _buildTile(
             title: Text(
               AppLocalizations.of(context).sessionsHistory,
               style: textStyle,
             ),
-            enabled: true,
-            onTap: () => _onActivityTapped(context),
+            onTap: () => _onSessionHistoryTapped(context),
           ),
           const Divider(height: 0),
-          ListTile(
+          _buildTile(
             title: Text(
               AppLocalizations.of(context).profileStats,
               style: textStyle,
             ),
-            enabled: true,
             onTap: () => _onStatisticsTapped(context),
           ),
           const Divider(height: 0),
-          ListTile(
+          _buildTile(
             title: Text(
               AppLocalizations.of(context).signOut,
               style: textStyle,
             ),
-            enabled: true,
             onTap: () => _onSignoutTapped(context),
           ),
-          const Divider(height: 0),
+          // const Divider(height: 0),
         ],
       )
     );
 
+  }
+
+  Widget _buildTile({
+    required Widget title,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(AppThemeData.borderRadiusMd),
+      ),
+      color: AppColors.backgroundPaperLight,
+      child: InkWell(
+        onTap: onTap,
+        child: ListTile(
+          title: title,
+        ),
+      ),
+    );
   }
 }
