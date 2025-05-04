@@ -611,6 +611,12 @@ abstract class AppLocalizations {
   /// **'{count, plural, =0{Még {count} a következő mérföldkőig.} =1{Még {count} a következő mérföldkőig.} =2{Még {count} a következő mérföldkőig.} few{Még {count} a következő mérföldkőig.} many{Még {count} a következő mérföldkőig.} other{Még {count} a következő mérföldkőig.}}'**
   String statsNextMilestoneIn(num count);
 
+  /// No description provided for @statsNextMilestoneInShort.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} nap múlva} =1{{count} nap múlva} =2{{count} nap múlva} few{{count} nap múlva} many{{count} nap múlva} other{{count} nap múlva}}'**
+  String statsNextMilestoneInShort(num count);
+
   /// No description provided for @statsLoadingData.
   ///
   /// In hu, this message translates to:

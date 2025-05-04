@@ -42,7 +42,7 @@ class DetailedMilestonesView extends StatelessWidget {
   }
 
   String getNextMilestoneText(BuildContext context, MilestoneProgress milestoneProgress) {
-    return AppLocalizations.of(context).statsNextMilestoneIn(
+    return AppLocalizations.of(context).statsNextMilestoneInShort(
       milestoneProgress.targetDaysCount - milestoneProgress.completedDaysCount,
     );
   }

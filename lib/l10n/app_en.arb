@@ -103,6 +103,7 @@
   "statsCount": "Count",
   "statsNextMilestone": "Next milestone",
   "statsNextMilestoneIn": "{count, plural, =0{Next milestone in {count} more days.} =1{Next milestone in {count} more day.} =2{Next milestone in {count} more days.} few{Next milestone in {count} more days.} many{Next milestone in {count} more days.} other{Next milestone in {count} more days.}}",
+  "statsNextMilestoneInShort": "{count, plural, =0{In {count} more days} =1{In {count} more day.} =2{In {count} more days} few{In {count} more days} many{In {count} more days} other{In {count} more days}}",
   "statsLoadingData": "Loading data...",
 
   "signOut": "Signout",

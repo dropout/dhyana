@@ -279,6 +279,21 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String statsNextMilestoneInShort(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'In $count more days',
+      many: 'In $count more days',
+      few: 'In $count more days',
+      two: 'In $count more days',
+      one: 'In $count more day.',
+      zero: 'In $count more days',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get statsLoadingData => 'Loading data...';
 
   @override

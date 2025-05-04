@@ -279,6 +279,21 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
+  String statsNextMilestoneInShort(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count nap múlva',
+      many: '$count nap múlva',
+      few: '$count nap múlva',
+      two: '$count nap múlva',
+      one: '$count nap múlva',
+      zero: '$count nap múlva',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get statsLoadingData => 'Adatok betöltése...';
 
   @override
