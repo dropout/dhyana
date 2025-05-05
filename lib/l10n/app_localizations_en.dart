@@ -150,6 +150,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get timerSettingsHistory => 'Settings history';
 
   @override
+  String get profileImageLabel => 'Profile image';
+
+  @override
   String get profileFirstnameLabel => 'Firstname';
 
   @override

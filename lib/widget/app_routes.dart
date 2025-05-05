@@ -29,11 +29,12 @@ GoRouter createAppRouter({required InitResult initResult}) {
 
 @TypedGoRoute<HomeRoute>(
   path: '/',
-  name: 'HOME'
+  name: 'HOME',
 )
 class HomeRoute extends GoRouteData {
   final TimerSettings? $extra;
   const HomeRoute({this.$extra});
+
   @override
   Widget build(BuildContext context, GoRouterState state) =>
     HomeScreen(timerSettings: $extra);

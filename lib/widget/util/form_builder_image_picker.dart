@@ -164,8 +164,9 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildCurrentImageDisplay(),
+        buildCurrentImageDisplay(context),
       ],
     );
   }
@@ -189,7 +190,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     );
   }
 
-  Widget buildCurrentImageDisplay() {
+  Widget buildCurrentImageDisplay(BuildContext context) {
     ImageProvider imageProvider;
     if (hasInitialValue && hasSelectedImage == false) {
       imageProvider = NetworkImage(widget.initialImageUrl!);

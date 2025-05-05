@@ -377,6 +377,12 @@ abstract class AppLocalizations {
   /// **'Legutóbbi beállítások'**
   String get timerSettingsHistory;
 
+  /// No description provided for @profileImageLabel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profil kép'**
+  String get profileImageLabel;
+
   /// No description provided for @profileFirstnameLabel.
   ///
   /// In hu, this message translates to:

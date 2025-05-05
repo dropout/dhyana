@@ -150,6 +150,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get timerSettingsHistory => 'Legutóbbi beállítások';
 
   @override
+  String get profileImageLabel => 'Profil kép';
+
+  @override
   String get profileFirstnameLabel => 'Keresztnév';
 
   @override

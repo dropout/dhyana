@@ -53,7 +53,6 @@ class _ProfileViewState extends State<ProfileView> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
           // Profile avatar + name
           Container(
             width: AppThemeData.circleLg,
@@ -90,7 +89,6 @@ class _ProfileViewState extends State<ProfileView> {
           ),
           Gap.large(),
           ProfileMetricsView(profile: profile),
-
           Gap.large(),
           ProfileMenu(profile: profile),
           Gap.large(),

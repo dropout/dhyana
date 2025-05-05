@@ -1,7 +1,9 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/form_builder_image_picker.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -56,8 +58,13 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       skipDisabled: true,
       onChanged: () => onFormChanged(context),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            AppLocalizations.of(context).profileImageLabel,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          Gap.xs(),
           FutureBuilder(
             future: Future.value(profile.photoUrl),
             builder: (context, snapshot) {
@@ -75,32 +82,64 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               }
             }
           ),
-          buildNameDisplay(context),
-          FormBuilderTextField(
-            name: 'firstName',
-            controller: firstNameTextController,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context).profileFirstnameLabel
-            ),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-            ]),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.next,
+          // buildNameDisplay(context),
+          Gap.medium(),
+          buildTextInput(context,
+              name: 'firstName',
+              label: AppLocalizations.of(context).profileFirstnameLabel,
+              controller: firstNameTextController
+            //   textInputAction: TextInputAction.next, ??
           ),
-          FormBuilderTextField(
-            name: 'lastName',
-            controller: lastNameTextController,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context).profileLastnameLabel,
-            ),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-            ]),
-            keyboardType: TextInputType.text,
+          Gap.medium(),
+          buildTextInput(context,
+              name: 'lastName',
+              label: AppLocalizations.of(context).profileLastnameLabel,
+              controller: lastNameTextController
           ),
         ],
       )
+    );
+  }
+
+  Widget buildTextInput(BuildContext context, {
+    required String name,
+    required String label,
+    required TextEditingController controller,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        Gap.xs(),
+        FormBuilderTextField(
+          name: name,
+          controller: controller,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            alignLabelWithHint: true,
+            border: OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.backgroundPaperLight,
+                width: 2.0,
+              ),
+            ),
+            fillColor: AppColors.backgroundPaperLight,
+            filled: true,
+          ),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+          ]),
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.next,
+        ),
+      ]
     );
   }
 
