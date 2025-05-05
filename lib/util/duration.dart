@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 extension DurationUtils on Duration {
 
-  String toFormattedString(BuildContext context) {
+  String toFormattedLocalizedString(BuildContext context) {
     int hours = inHours;
     int minutes = inMinutes.remainder(60);
 
@@ -21,4 +21,25 @@ extension DurationUtils on Duration {
     return formattedDuration.trim();
   }
 
+  String formatHHmmss() {
+    String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
+    String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
+    return "${_twoDigits(inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  String formatHHmm() {
+    String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
+    return "${_twoDigits(inHours)}:$twoDigitMinutes";
+  }
+
+  String formatMMss() {
+    String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
+    String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
+    return "$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+}
+
+String _twoDigits(int n) {
+  return n.toString().padLeft(2, "0");
 }

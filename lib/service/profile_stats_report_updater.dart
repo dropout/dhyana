@@ -17,7 +17,7 @@ class ProfileStatsReportUpdater {
     return stats.lastSessionDate != null;
   }
 
-  bool isValidConsecutiveDays(
+  bool hasValidConsecutiveDays(
     DateTime lastSessionDate,
     DateTime currentSessionDate
   ) {
@@ -45,7 +45,7 @@ class ProfileStatsReportUpdater {
     // When the last session was on the day before yesterday or earlier
     // value should be set to 0 since the user missed a day and consecutive
     // days are broken
-    if (isValidConsecutiveDays(lastSessionDate, currentSessionDate) == false) {
+    if (hasValidConsecutiveDays(lastSessionDate, currentSessionDate) == false) {
       logger.t('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
       return 0;
     }
@@ -116,7 +116,7 @@ class ProfileStatsReportUpdater {
 
   /// Update milestone progress in the profile statistics report
   /// with new session data.
-  ProfileStatisticsReport updateMilestoneProgress(
+  ProfileStatisticsReport updateMilestoneProgressWithSession(
     ProfileStatisticsReport oldStatsReport,
     ProfileStatisticsReport updatedStatsReport,
     Session session,
@@ -180,10 +180,13 @@ class ProfileStatsReportUpdater {
 
   }
 
-  /// Checks consecutive days count in the profile statistics report.
-  /// If the consecutive days are valid, does nothing, if not, resets the count
-  /// and returns the updated profile statistics report.
-  ProfileStatisticsReport checkConsecutiveDays(ProfileStatisticsReport statsReport) {
+  /// Validates the consecutive days count in the stats report.
+  /// If the consecutive days are valid, does nothing, if not:
+  /// - resets the consecutive days count
+  /// - resets the milestone progress
+  ProfileStatisticsReport validateStatsReport(
+    ProfileStatisticsReport statsReport
+  ) {
 
     final DateTime? lastSessionDate = statsReport.lastSessionDate;
 
@@ -195,10 +198,15 @@ class ProfileStatsReportUpdater {
 
     final DateTime now = DateTime.now();
 
+    // Check if consecutive days has been already validated today
+    // In that case no need to continue
+    if (now.isSameDay(statsReport.consecutiveDays.lastChecked)) {
+      logger.t('Skipping validating consecutive days: it\' the same day!');
+      return statsReport;
+    }
+
     // If consecutive days are valid, no need to update
-    final bool isConsecutiveDaysValid =
-      isValidConsecutiveDays(lastSessionDate, now);
-    if (isConsecutiveDaysValid) {
+    if (hasValidConsecutiveDays(lastSessionDate, now)) {
       logger.t('Consecutive days are valid: ${statsReport.consecutiveDays.current}');
       return statsReport.copyWith(
         consecutiveDays: statsReport.consecutiveDays.copyWith(
@@ -213,6 +221,10 @@ class ProfileStatsReportUpdater {
       consecutiveDays: statsReport.consecutiveDays.copyWith(
         current: 0,
         lastChecked: now,
+      ),
+      milestoneProgress: statsReport.milestoneProgress.copyWith(
+        completedDaysCount: 0,
+        sessions: [],
       ),
     );
 

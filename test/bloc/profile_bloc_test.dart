@@ -5,9 +5,7 @@ import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/id_generator_service.dart';
-import 'package:dhyana/util/profile_stats_report_updater.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -108,22 +106,6 @@ void main() {
           completeProfile: false,
         )
       ),
-      expect: () => [
-        ProfileState.loaded(profile: profile),
-      ],
-      verify: (_) {
-        verify(() => mockProfileRepository.update(profile)).called(1);
-      },
-    );
-
-    blocTest<ProfileBloc, ProfileState>(
-      'emits [ProfileState.loaded()] when ValidateConsecutiveDays is added',
-      build: () {
-        when(() => mockProfileStatsUpdater.checkConsecutiveDays(profile.statsReport)).thenReturn(profile.statsReport);
-        when(() => mockProfileRepository.update(any())).thenAnswer((_) async => profile);
-        return profileBloc;
-      },
-      act: (bloc) => bloc.add(ValidateConsecutiveDays(profile: profile)),
       expect: () => [
         ProfileState.loaded(profile: profile),
       ],

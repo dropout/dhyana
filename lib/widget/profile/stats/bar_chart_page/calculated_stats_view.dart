@@ -62,7 +62,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
                   width: double.infinity,
                   key: ValueKey(calculatedStats.totalMinutes),
                   child: Text(
-                    Duration(minutes: calculatedStats.totalMinutes).toFormattedString(context),
+                    Duration(minutes: calculatedStats.totalMinutes).toFormattedLocalizedString(context),
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.backgroundPaperLight,

@@ -5,9 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/id_generator_service.dart';
-import 'package:dhyana/service/shader_service.dart';
 
 class Services {
 

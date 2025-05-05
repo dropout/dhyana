@@ -163,7 +163,7 @@ class MonthsBarChartPage extends StatelessWidget {
       mainText: Text(
         Duration(
           minutes: calculatedStats.averageMinutes.toInt()
-        ).toFormattedString(context)
+        ).toFormattedLocalizedString(context)
       ),
       postfix: Text(AppLocalizations.of(context).averagePerMonth.toLowerCase()),
     );
@@ -186,7 +186,7 @@ class MonthsBarChartPage extends StatelessWidget {
             ).format(month.startDate),
           ),
           mainText: Text(
-            Duration(minutes: month.minutesCount).toFormattedString(context)
+            Duration(minutes: month.minutesCount).toFormattedLocalizedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),

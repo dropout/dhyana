@@ -5,7 +5,7 @@ import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/util/logger_factory.dart';
-import 'package:dhyana/util/profile_stats_report_updater.dart';
+import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:logger/logger.dart';
 
 class UpdateProfileStatsTask {
@@ -51,7 +51,7 @@ class UpdateProfileStatsTask {
     logger.t('Completed days: ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}');
 
     // Update milestone progress
-    updatedStatsReport = profileStatsUpdater.updateMilestoneProgress(
+    updatedStatsReport = profileStatsUpdater.updateMilestoneProgressWithSession(
       oldStatsReport,
       updatedStatsReport,
       session,

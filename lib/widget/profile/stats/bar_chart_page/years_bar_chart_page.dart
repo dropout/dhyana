@@ -160,7 +160,7 @@ class YearsBarChartPage extends StatelessWidget {
       mainText: Text(
         Duration(
           minutes: calculatedStats.averageMinutes.toInt()
-        ).toFormattedString(context)
+        ).toFormattedLocalizedString(context)
       ),
       postfix: Text(AppLocalizations.of(context).averagePerYear.toLowerCase()),
     );
@@ -183,7 +183,7 @@ class YearsBarChartPage extends StatelessWidget {
             ).format(year.startDate),
           ),
           mainText: Text(
-            Duration(minutes: year.minutesCount).toFormattedString(context)
+            Duration(minutes: year.minutesCount).toFormattedLocalizedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),

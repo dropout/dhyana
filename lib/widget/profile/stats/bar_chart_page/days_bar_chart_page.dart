@@ -160,7 +160,7 @@ class DaysBarChartPage extends StatelessWidget {
       mainText: Text(
         Duration(
           minutes: calculatedStats.averageMinutes.toInt()
-        ).toFormattedString(context),
+        ).toFormattedLocalizedString(context),
       ),
       postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
     );
@@ -183,7 +183,7 @@ class DaysBarChartPage extends StatelessWidget {
             ).format(day.startDate)
           ),
           mainText: Text(
-            Duration(minutes: day.minutesCount).toFormattedString(context)
+            Duration(minutes: day.minutesCount).toFormattedLocalizedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),

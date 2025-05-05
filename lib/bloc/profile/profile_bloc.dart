@@ -2,8 +2,7 @@ import 'package:dhyana/bloc/profile/data_update/all.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/id_generator_service.dart';
-import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/util/profile_stats_report_updater.dart';
+import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
@@ -36,7 +35,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<LoadProfile>(_onLoadProfile);
     on<UpdateProfile>(_onUpdateProfile);
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
-    on<ValidateConsecutiveDays>(_onValidateConsecutiveDays);
     on<ClearProfileData>(_onClearProfileData);
   }
 
@@ -45,8 +43,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       logger.t('Loading profile: ${event.profileId}');
       Profile profile = await profileRepository.read(event.profileId);
 
-      // Check if consecutive days are still valid
-      add(ProfileEvent.validateConsecutiveDays(profile: profile));
+      // Check if consecutive days are valid
+      ProfileStatisticsReport updatedStatsReport =
+        profileStatsUpdater.validateStatsReport(profile.statsReport);
+
+      if (updatedStatsReport != profile.statsReport) {
+        logger.t('Consecutive days and milestone progress have been invalidated!');
+        profile = profile.copyWith(
+          statsReport: updatedStatsReport
+        );
+        // lazy update the profile
+        profileRepository.update(profile);
+      }
 
       emit(ProfileState.loaded(profile: profile));
       event.onComplete?.call(profile);
@@ -86,45 +94,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onProfileLoadingErrorOccured(ProfileErrorOccured event, emit) {
     emit(const ProfileErrorState());
-  }
-
-  void _onValidateConsecutiveDays(ValidateConsecutiveDays event, emit) async {
-    try {
-
-      final DateTime now = DateTime.now();
-
-      // Check if it has been already validated today
-      // In that case no need to continue
-      Profile profile = event.profile;
-      final bool isSameDay = now.isSameDay(profile.statsReport.consecutiveDays.lastChecked);
-      if (isSameDay == true && event.forceValidation == false) {
-        logger.t('Skipping validating consecutive days: it\' the same day, forceValidation: ${event.forceValidation.toString()}');
-        return;
-      }
-
-      ProfileStatisticsReport updatedStatsReport =
-        profileStatsUpdater.checkConsecutiveDays(event.profile.statsReport);
-
-      // Update the profile with newly calculated report
-      Profile updatedProfile = event.profile.copyWith(
-        statsReport: updatedStatsReport
-      );
-
-      emit(ProfileState.loaded(profile: updatedProfile));
-      logger.t('Consecutive days change: ${event.profile.statsReport.consecutiveDays.current} -> ${updatedProfile.statsReport.consecutiveDays.current}');
-      event.onComplete?.call(updatedProfile);
-
-      // Save the validated profile data
-      await profileRepository.update(updatedProfile);
-      logger.t('Consecutive days checked at: ${updatedStatsReport.consecutiveDays.lastChecked.toString()}');
-    } catch(e, stack) {
-      crashlyticsService.recordError(
-        exception: e,
-        stackTrace: stack,
-        reason: 'Unable to validate consecutive days: ${event.profile.statsReport.consecutiveDays.toString()}'
-      );
-      event.onError?.call(e, stack);
-    }
   }
 
   void _onClearProfileData(ClearProfileData event, emit) async {

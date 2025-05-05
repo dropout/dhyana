@@ -91,68 +91,52 @@ class _InfoTriggerBarsState extends State<InfoTriggerBars> {
         for (var index = 0; index < barChartData.length; index++)
 
           Expanded(
+            child: GestureDetector(
+                onLongPressStart: (details) =>
+                    handleLongPressStart(context, index, details),
 
-              child: GestureDetector(
+                onLongPressEnd: (_) =>
+                    handleLongPressEnd(context, index),
 
-                  onLongPressStart: (details) =>
-                      handleLongPressStart(context, index, details),
+                child: Listener(
+                  behavior: HitTestBehavior.opaque,
+                  onPointerMove: (PointerMoveEvent event) {
+                    int? targetBarIndex = _barHitTest(event.position);
+                    if (_isInfoTriggered && targetBarIndex != null && targetBarIndex != selectedIndex) {
+                      setState(() {
+                        selectedIndex = targetBarIndex;
+                      });
+                      // widget.onInfoChanged?.call(targetBarIndex, barChartData[targetBarIndex]);
+                    }
+                  },
+                  child: InfoTriggerBar(
+                    color: (selectedIndex == index) ? widget.selectedBarColor : widget.barColor,
+                    index: index,
+                    heightFactor: math.min((barChartData[index].value / widget.barChartContext.displayRange), 1),
+                    isSelected: selectedIndex == index,
+                  ),
+                )
 
-                  onLongPressEnd: (_) =>
-                      handleLongPressEnd(context, index),
-
-                  child: Listener(
-                    behavior: HitTestBehavior.opaque,
-                    onPointerMove: (PointerMoveEvent event) {
-                      int? targetBarIndex = _barHitTest(event.position);
-                      if (_isInfoTriggered && targetBarIndex != null && targetBarIndex != selectedIndex) {
-                        setState(() {
-                          selectedIndex = targetBarIndex;
-                        });
-                        // widget.onInfoChanged?.call(targetBarIndex, barChartData[targetBarIndex]);
-                      }
-                    },
-                    child: InfoTriggerBar(
-                      color: (selectedIndex == index) ? widget.selectedBarColor : widget.barColor,
-                      index: index,
-                      heightFactor: math.min((barChartData[index].value / widget.barChartContext.displayRange), 1),
-                      isSelected: selectedIndex == index,
-                    ),
-                  )
-
-              )
-
+            )
           )
       ],
     );
   }
 
   void handleLongPressStart(
-      BuildContext context,
-      int index,
-      LongPressStartDetails details
-      ) {
+    BuildContext context,
+    int index,
+    LongPressStartDetails details
+  ) {
     final box = context.findAncestorRenderObjectOfType<RenderBox>();
     if (box == null) return;
-
-    final hitTestResult = BoxHitTestResult();
-    Offset local = box.globalToLocal(details.globalPosition);
-    if (box.hitTest(hitTestResult, position: local)) {
-      for (final hit in hitTestResult.path) {
-        // temporary variable so that the [is] allows access of [index]
-        final target = hit.target;
-        if (target is RenderInfoTriggerArea) {
-          print('target: ${target.localToGlobal(Offset.zero)}');
-          // return target.barIndex;
-        }
-      }
-    }
 
     setState(() {
       _isInfoTriggered = true;
       selectedIndex = index;
       widget.onInfoTriggered?.call(
-          index,
-          widget.barChartContext.dataSource[index]
+        index,
+        widget.barChartContext.dataSource[index]
       );
     });
   }

@@ -30,12 +30,6 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
     required TResult Function() error,
     required TResult Function() clearData,
   }) =>
@@ -52,12 +46,6 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult? Function()? error,
     TResult? Function()? clearData,
   }) =>
@@ -74,12 +62,6 @@ mixin _$ProfileEvent {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult Function()? error,
     TResult Function()? clearData,
     required TResult orElse(),
@@ -89,8 +71,6 @@ mixin _$ProfileEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
   }) =>
@@ -99,7 +79,6 @@ mixin _$ProfileEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
   }) =>
@@ -108,7 +87,6 @@ mixin _$ProfileEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
@@ -239,12 +217,6 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
     required TResult Function() error,
     required TResult Function() clearData,
   }) {
@@ -264,12 +236,6 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult? Function()? error,
     TResult? Function()? clearData,
   }) {
@@ -289,12 +255,6 @@ class _$LoadProfileImpl implements LoadProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult Function()? error,
     TResult Function()? clearData,
     required TResult orElse(),
@@ -310,8 +270,6 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
   }) {
@@ -323,7 +281,6 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
   }) {
@@ -335,7 +292,6 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
@@ -514,12 +470,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
     required TResult Function() error,
     required TResult Function() clearData,
   }) {
@@ -540,12 +490,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult? Function()? error,
     TResult? Function()? clearData,
   }) {
@@ -566,12 +510,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult Function()? error,
     TResult Function()? clearData,
     required TResult orElse(),
@@ -588,8 +526,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
   }) {
@@ -601,7 +537,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
   }) {
@@ -613,7 +548,6 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
@@ -644,268 +578,6 @@ abstract class UpdateProfile implements ProfileEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ValidateConsecutiveDaysImplCopyWith<$Res> {
-  factory _$$ValidateConsecutiveDaysImplCopyWith(
-          _$ValidateConsecutiveDaysImpl value,
-          $Res Function(_$ValidateConsecutiveDaysImpl) then) =
-      __$$ValidateConsecutiveDaysImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {Profile profile,
-      bool forceValidation,
-      void Function(Profile)? onComplete,
-      void Function(Object?, StackTrace)? onError});
-
-  $ProfileCopyWith<$Res> get profile;
-}
-
-/// @nodoc
-class __$$ValidateConsecutiveDaysImplCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$ValidateConsecutiveDaysImpl>
-    implements _$$ValidateConsecutiveDaysImplCopyWith<$Res> {
-  __$$ValidateConsecutiveDaysImplCopyWithImpl(
-      _$ValidateConsecutiveDaysImpl _value,
-      $Res Function(_$ValidateConsecutiveDaysImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? profile = null,
-    Object? forceValidation = null,
-    Object? onComplete = freezed,
-    Object? onError = freezed,
-  }) {
-    return _then(_$ValidateConsecutiveDaysImpl(
-      profile: null == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as Profile,
-      forceValidation: null == forceValidation
-          ? _value.forceValidation
-          : forceValidation // ignore: cast_nullable_to_non_nullable
-              as bool,
-      onComplete: freezed == onComplete
-          ? _value.onComplete
-          : onComplete // ignore: cast_nullable_to_non_nullable
-              as void Function(Profile)?,
-      onError: freezed == onError
-          ? _value.onError
-          : onError // ignore: cast_nullable_to_non_nullable
-              as void Function(Object?, StackTrace)?,
-    ));
-  }
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ProfileCopyWith<$Res> get profile {
-    return $ProfileCopyWith<$Res>(_value.profile, (value) {
-      return _then(_value.copyWith(profile: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$ValidateConsecutiveDaysImpl implements ValidateConsecutiveDays {
-  const _$ValidateConsecutiveDaysImpl(
-      {required this.profile,
-      this.forceValidation = false,
-      this.onComplete,
-      this.onError});
-
-  @override
-  final Profile profile;
-  @override
-  @JsonKey()
-  final bool forceValidation;
-  @override
-  final void Function(Profile)? onComplete;
-  @override
-  final void Function(Object?, StackTrace)? onError;
-
-  @override
-  String toString() {
-    return 'ProfileEvent.validateConsecutiveDays(profile: $profile, forceValidation: $forceValidation, onComplete: $onComplete, onError: $onError)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ValidateConsecutiveDaysImpl &&
-            (identical(other.profile, profile) || other.profile == profile) &&
-            (identical(other.forceValidation, forceValidation) ||
-                other.forceValidation == forceValidation) &&
-            (identical(other.onComplete, onComplete) ||
-                other.onComplete == onComplete) &&
-            (identical(other.onError, onError) || other.onError == onError));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, profile, forceValidation, onComplete, onError);
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ValidateConsecutiveDaysImplCopyWith<_$ValidateConsecutiveDaysImpl>
-      get copyWith => __$$ValidateConsecutiveDaysImplCopyWithImpl<
-          _$ValidateConsecutiveDaysImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String profileId,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        loadProfile,
-    required TResult Function(
-            Profile profile,
-            Map<String, dynamic> formData,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError,
-            bool completeProfile)
-        updateProfile,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
-    required TResult Function() error,
-    required TResult Function() clearData,
-  }) {
-    return validateConsecutiveDays(
-        profile, forceValidation, onComplete, onError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        loadProfile,
-    TResult? Function(
-            Profile profile,
-            Map<String, dynamic> formData,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError,
-            bool completeProfile)?
-        updateProfile,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
-    TResult? Function()? error,
-    TResult? Function()? clearData,
-  }) {
-    return validateConsecutiveDays?.call(
-        profile, forceValidation, onComplete, onError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        loadProfile,
-    TResult Function(
-            Profile profile,
-            Map<String, dynamic> formData,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError,
-            bool completeProfile)?
-        updateProfile,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
-    TResult Function()? error,
-    TResult Function()? clearData,
-    required TResult orElse(),
-  }) {
-    if (validateConsecutiveDays != null) {
-      return validateConsecutiveDays(
-          profile, forceValidation, onComplete, onError);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadProfile value) loadProfile,
-    required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
-    required TResult Function(ProfileErrorOccured value) error,
-    required TResult Function(ClearProfileData value) clearData,
-  }) {
-    return validateConsecutiveDays(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadProfile value)? loadProfile,
-    TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
-    TResult? Function(ProfileErrorOccured value)? error,
-    TResult? Function(ClearProfileData value)? clearData,
-  }) {
-    return validateConsecutiveDays?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadProfile value)? loadProfile,
-    TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
-    TResult Function(ProfileErrorOccured value)? error,
-    TResult Function(ClearProfileData value)? clearData,
-    required TResult orElse(),
-  }) {
-    if (validateConsecutiveDays != null) {
-      return validateConsecutiveDays(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ValidateConsecutiveDays implements ProfileEvent {
-  const factory ValidateConsecutiveDays(
-          {required final Profile profile,
-          final bool forceValidation,
-          final void Function(Profile)? onComplete,
-          final void Function(Object?, StackTrace)? onError}) =
-      _$ValidateConsecutiveDaysImpl;
-
-  Profile get profile;
-  bool get forceValidation;
-  void Function(Profile)? get onComplete;
-  void Function(Object?, StackTrace)? get onError;
-
-  /// Create a copy of ProfileEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ValidateConsecutiveDaysImplCopyWith<_$ValidateConsecutiveDaysImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -962,12 +634,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
     required TResult Function() error,
     required TResult Function() clearData,
   }) {
@@ -987,12 +653,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult? Function()? error,
     TResult? Function()? clearData,
   }) {
@@ -1012,12 +672,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult Function()? error,
     TResult Function()? clearData,
     required TResult orElse(),
@@ -1033,8 +687,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
   }) {
@@ -1046,7 +698,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
   }) {
@@ -1058,7 +709,6 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),
@@ -1127,12 +777,6 @@ class _$ClearProfileDataImpl implements ClearProfileData {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)
         updateProfile,
-    required TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)
-        validateConsecutiveDays,
     required TResult Function() error,
     required TResult Function() clearData,
   }) {
@@ -1152,12 +796,6 @@ class _$ClearProfileDataImpl implements ClearProfileData {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult? Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult? Function()? error,
     TResult? Function()? clearData,
   }) {
@@ -1177,12 +815,6 @@ class _$ClearProfileDataImpl implements ClearProfileData {
             void Function(Object?, StackTrace)? onError,
             bool completeProfile)?
         updateProfile,
-    TResult Function(
-            Profile profile,
-            bool forceValidation,
-            void Function(Profile)? onComplete,
-            void Function(Object?, StackTrace)? onError)?
-        validateConsecutiveDays,
     TResult Function()? error,
     TResult Function()? clearData,
     required TResult orElse(),
@@ -1198,8 +830,6 @@ class _$ClearProfileDataImpl implements ClearProfileData {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadProfile value) loadProfile,
     required TResult Function(UpdateProfile value) updateProfile,
-    required TResult Function(ValidateConsecutiveDays value)
-        validateConsecutiveDays,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
   }) {
@@ -1211,7 +841,6 @@ class _$ClearProfileDataImpl implements ClearProfileData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadProfile value)? loadProfile,
     TResult? Function(UpdateProfile value)? updateProfile,
-    TResult? Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
   }) {
@@ -1223,7 +852,6 @@ class _$ClearProfileDataImpl implements ClearProfileData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadProfile value)? loadProfile,
     TResult Function(UpdateProfile value)? updateProfile,
-    TResult Function(ValidateConsecutiveDays value)? validateConsecutiveDays,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
     required TResult orElse(),

@@ -17,13 +17,6 @@ class ProfileEvent with _$ProfileEvent {
     @Default(false) bool completeProfile,
   }) = UpdateProfile;
 
-  const factory ProfileEvent.validateConsecutiveDays({
-    required Profile profile,
-    @Default(false) bool forceValidation,
-    void Function(Profile profile)? onComplete,
-    void Function(Object? error, StackTrace stackTrace)? onError,
-  }) = ValidateConsecutiveDays;
-
   const factory ProfileEvent.error() = ProfileErrorOccured;
   const factory ProfileEvent.clearData() = ClearProfileData;
 

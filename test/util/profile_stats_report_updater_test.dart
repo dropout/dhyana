@@ -1,5 +1,5 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/util/profile_stats_report_updater.dart';
+import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -8,11 +8,11 @@ void main() {
 
     test('can tell if the consecutive days are valid when last session was before yesterday', () {
       ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
-      expect(profileStatsCalculator.isValidConsecutiveDays(
+      expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 8, 30, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
       ), false);
-      expect(profileStatsCalculator.isValidConsecutiveDays(
+      expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 12, 10, 0, 0),
         DateTime(2024, 1, 1, 0, 0),
       ), false);
@@ -20,7 +20,7 @@ void main() {
 
     test('can tell if the consecutive days are valid when last session was yesterday', () {
       ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
-      expect(profileStatsCalculator.isValidConsecutiveDays(
+      expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 8, 31, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
       ), true);
@@ -28,7 +28,7 @@ void main() {
 
     test('can tell if the consecutive days are valid when last session was today', () {
       ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
-      expect(profileStatsCalculator.isValidConsecutiveDays(
+      expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 9, 1, 3, 0),
         DateTime(2023, 9, 1, 12, 0),
       ), true);

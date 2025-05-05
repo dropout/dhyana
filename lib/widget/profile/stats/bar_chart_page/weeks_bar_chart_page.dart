@@ -157,7 +157,7 @@ class WeeksBarChartPage extends StatelessWidget {
       mainText: Text(
         Duration(
           minutes: calculatedStats.averageMinutes.toInt()
-        ).toFormattedString(context)
+        ).toFormattedLocalizedString(context)
       ),
       postfix: Text(AppLocalizations.of(context).averagePerWeek.toLowerCase()),
     );
@@ -183,7 +183,7 @@ class WeeksBarChartPage extends StatelessWidget {
             ),
           ),
           mainText: Text(
-            Duration(minutes: week.minutesCount).toFormattedString(context)
+            Duration(minutes: week.minutesCount).toFormattedLocalizedString(context)
           ),
           postfix: Padding(
             padding: const EdgeInsets.only(top: AppThemeData.paddingXs),
