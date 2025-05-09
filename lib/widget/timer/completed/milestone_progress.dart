@@ -11,11 +11,13 @@ class MilestoneProgress extends StatefulWidget {
   final Profile profile;
   final bool showAnimation;
   final bool showText;
+  final double itemSize;
 
   const MilestoneProgress({
     required this.profile,
     this.showAnimation = false,
     this.showText = true,
+    this.itemSize = 36,
     super.key,
   });
 
@@ -42,49 +44,56 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
   }
 
   List<Widget> buildMilestoneItems(BuildContext context) {
-
-
-    int count = widget.profile.statsReport.milestoneProgress.targetDaysCount;
-    int completedCount = widget.profile.statsReport.milestoneProgress.completedDaysCount;
-    int incompleteCount = count - completedCount;
+    final milestoneProgress = widget.profile.statsReport.milestoneProgress;
+    final int targetCount = milestoneProgress.targetDaysCount;
+    final int completedCount = milestoneProgress.completedDaysCount;
 
     final Color completedColor = Colors.green.shade600;
     final Color incompleteColor = Colors.grey.shade800;
 
-    const double size = 36;
-    return [
-      for (int i = 0; i < completedCount - 1; i++)
-        SizedBox(
-          width: size,
-          height: size,
-          child: MilestoneProgressItem(
-            mode: MilestoneProgressItemMode.completed,
-            completedColor: completedColor,
-            incompleteColor: incompleteColor,
-          ),
-        ),
-      if (widget.showAnimation)
-        SizedBox(
-          width: size,
-          height: size,
-          child: MilestoneProgressItem(
-            mode: MilestoneProgressItemMode.animate,
-            completedColor: completedColor,
-            incompleteColor: incompleteColor,
-          ),
-        ),
-      for (int i = 0; i < incompleteCount; i++)
-        SizedBox(
-          width: size,
-          height: size,
+    List<Widget> result = List<Widget>.filled(
+      targetCount,
+      const SizedBox.shrink(),
+    );
+
+    int i = targetCount;
+    while (i > 0) {
+      if (i > completedCount) {
+        result[i - 1] = SizedBox.square(
+          dimension: widget.itemSize,
           child: MilestoneProgressItem(
             mode: MilestoneProgressItemMode.incomplete,
             completedColor: completedColor,
             incompleteColor: incompleteColor,
           ),
-        ),
-    ];
+        );
+      } else if (i == completedCount) {
+        result[i - 1] = SizedBox.square(
+          dimension: widget.itemSize,
+          child: MilestoneProgressItem(
+            mode: widget.showAnimation
+              ? MilestoneProgressItemMode.animate
+              : MilestoneProgressItemMode.completed,
+            completedColor: completedColor,
+            incompleteColor: incompleteColor,
+          )
+        );
+      } else {
+        result[i - 1] = SizedBox.square(
+          dimension: widget.itemSize,
+          child: MilestoneProgressItem(
+            mode: MilestoneProgressItemMode.completed,
+            completedColor: completedColor,
+            incompleteColor: incompleteColor,
+          ),
+        );
 
+      }
+
+      i--;
+    }
+
+    return result;
   }
 
   Widget buildMilestoneText(BuildContext context) {
