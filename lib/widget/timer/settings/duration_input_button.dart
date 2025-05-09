@@ -25,7 +25,7 @@ class DurationInputButton extends StatelessWidget {
       highlightElevation: 0,
       shape: const CircleBorder(side: BorderSide.none),
       fillColor: Colors.black,
-      splashColor: AppColors.bloodRed,
+      splashColor: AppColors.splashColor,
       clipBehavior: Clip.none,
       child: child,
     );

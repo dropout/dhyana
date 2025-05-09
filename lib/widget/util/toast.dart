@@ -144,4 +144,3 @@ class ToastLayoutDelegate extends SingleChildLayoutDelegate {
   }
 
 }
-

@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/util/painting.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +25,7 @@ class TimerStartButton extends StatefulWidget {
 
   @override
   State<TimerStartButton> createState() => _TimerStartButtonState();
+
 }
 
 class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerProviderStateMixin {
@@ -87,7 +87,7 @@ class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerPr
     return DecoratedBox(
       decoration: ShapeDecoration(
         shape: StadiumBorder(),
-        color: AppColors.bloodRed,
+        color: AppColors.red,
       ),
       child: Stack(
         children: [
@@ -148,9 +148,7 @@ class ShaderPainter extends CustomPainter {
 
   final FragmentShader shader;
   final double time;
-
   late final Paint _paint;
-  late final Paint _blurPaint;
 
   ShaderPainter({
     required this.shader,
@@ -158,11 +156,6 @@ class ShaderPainter extends CustomPainter {
   }) {
     _paint = Paint()
       ..shader = shader;
-
-    _blurPaint = Paint()
-      // ..color = Colors.black.withAlpha(96)
-      ..color = AppColors.bloodRed.withAlpha(64)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(32));
   }
 
   @override
@@ -170,30 +163,22 @@ class ShaderPainter extends CustomPainter {
 
     // we will only use 2 colors for now
     // primary red color
-    Color color = AppColors.bloodRed;
-
-    // darken the primary red color
-    HSLColor accentColorHsl = HSLColor.fromColor(color);
-    accentColorHsl = accentColorHsl.withLightness(accentColorHsl.lightness - 0.05);
-    Color colorAccent = accentColorHsl.toColor();
+    Color color = AppColors.red;
+    Color colorAccent = AppColors.redAccent;
 
     shader.setFloatUniforms((setter) {
       setter.setVector(vm.Vector2(size.width, size.height));
-      setter.setFloat(time / 2);
+      setter.setFloat(time);
 
       // colors: 0.0 - 1.0
       setter.setVectors([
         vm.Vector3(color.r, color.g, color.b),
-        vm.Vector3(color.r, color.g, color.b),
         vm.Vector3(colorAccent.r, colorAccent.g, colorAccent.b),
+        vm.Vector3(color.r, color.g, color.b),
         vm.Vector3(colorAccent.r, colorAccent.g, colorAccent.b),
       ]);
     });
 
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, size.width, size.height), Radius.circular(size.height / 2)),
-      _blurPaint,
-    );
     canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, size.width, size.height), Radius.circular(size.height/2)), _paint);
   }
 
@@ -225,7 +210,6 @@ class StartButtonText extends LeafRenderObjectWidget {
     renderObject.buttonText = buttonText;
   }
 }
-
 
 class RenderStartButtonText extends RenderBox {
 
@@ -267,4 +251,3 @@ class RenderStartButtonText extends RenderBox {
   }
 
 }
-

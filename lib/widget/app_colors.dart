@@ -6,38 +6,10 @@ class AppColors {
   // static const Color backgroundPaper = Color(0xFFF0E7D7);
   static const Color backgroundPaper = Color(0xFFDDCCB2);
   static const Color backgroundPaperLight = Color(0xFFEFE7DC);
-  static const Color bloodRed = Color(0xFFE4002B);
 
-  // static const Color originalBlueSky = Color(0xFFACE0F4);
-  // static const Color originalDeepPurple = Color(0xFF1E1954);
-  // static const Color originalMiddleBlue = Color(0xFF0294C2);
-  //
-  // static const Color deepSkyBlue = Color(0xFF0D75F8);
-  // static const Color purpleHaze = Color(0xFFA81FE0);
-  // static const Color clearSkyBlue = Color(0xFF09E8FF);
-  //
-  // // Primary color
-  // static const Color primary = originalDeepPurple;
-  // // static const Color primary = deepSkyBlue;
-  //
-  // static AppColor primaryShades = AppColor(primary);
-  // static HSLColor primaryHsl = HSLColor.fromColor(primary);
-  // static const Color onPrimary = Colors.white;
-  // static Color primaryContainer = primaryShades.shade900;
-  // static Color onPrimaryContainer = primaryShades.shade100;
-  //
-  // // Secondary color
-  // static const Color secondary = purpleHaze;
-  //
-  // static AppColor secondaryShades = AppColor(secondary);
-  // static HSLColor secondaryHsl = HSLColor.fromColor(secondary);
-  // static const Color onSecondary = Colors.white;
-  // static Color secondaryContainer = secondaryShades.shade900;
-  // static Color onSecondaryContainer = secondaryShades.shade100;
-  //
-  // static Color background = const Color(0xFF1E1954);
-  //
-  // static Color textColor = const Color(0xFFFFFFFF);
+  static const Color red = Color(0xFFBB0A11);
+  static const Color redAccent = Color(0xFFE4002B);
+  static const Color splashColor = Colors.black;
 
 }
 
