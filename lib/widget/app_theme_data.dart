@@ -33,6 +33,14 @@ class AppThemeData {
   static const double circleLg = 96.0;
   static const double circleXl = 128.0;
 
+  static const defaultBoxShadow = [
+    BoxShadow(
+      color: Colors.black26,
+      offset: Offset(1, 2),
+      blurRadius: 1.0,
+    )
+  ];
+
   final bool isDark;
   AppThemeData({required this.isDark});
 

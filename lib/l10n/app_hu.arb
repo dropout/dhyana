@@ -40,8 +40,6 @@
   "session": "Ülés",
   "sessions": "Ülések",
 
-
-
   "timerFinishSessionButtonText": "Befejezés",
   "timerDiscardSessionButtonText": "Megszakítás",
 
@@ -59,6 +57,8 @@
   "sessionsHistory": "Ülések",
   "editProfile": "Profil szerkesztése",
   "timerSettingsHistory": "Legutóbbi beállítások",
+  "timerSettingsHistoryApplied": "Időzítő beállítások alkalmazva.",
+  "timerSettingsHistoryEmpty": "Még nincsenek legutóbbi időzítő beaállítások elmentve.",
 
   "profileImageLabel": "Profil kép",
   "profileFirstnameLabel": "Keresztnév",

@@ -14,11 +14,10 @@ import 'package:dhyana/util/logger_factory.dart';
 
 import 'init_result.dart';
 
-/*
-  Manages the initialization process.
-  Creates and configures providers, services and all the necessary objects used
-  at the start of the application.
- */
+
+/// Manages the initialization process.
+/// Creates and configures providers, services and all the necessary objects used
+/// at the start of the application.
 class Initializer {
 
   final Logger logger = getLogger('Initializer');

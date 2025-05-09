@@ -10,7 +10,7 @@ class TimerSettingsHistoryState with _$TimerSettingsHistoryState {
     TimerSettingsHistoryLoading;
 
   const factory TimerSettingsHistoryState.loaded({
-    required List<TimerSettings> timerSettingsList,
+    required List<TimerSettingsHistoryRecord> timerSettingsList,
   }) = TimerSettingsHistoryLoaded;
 
   const factory TimerSettingsHistoryState.error() =

@@ -23,14 +23,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
       initialEvent: TimerSettingsHistoryEvent.loadSettingsList(
         profileId: profileId
       ),
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        extendBodyBehindAppBar: true,
-        body: SafeArea(
-          bottom: false,
-          child: buildStates(context),
-        )
-      ),
+      child: buildStates(context),
     );
   }
 
@@ -39,22 +32,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
       builder: (context, state) {
         switch (state) {
           case TimerSettingsHistoryLoaded():
-            return DefaultScreenSetup(
-              title: AppLocalizations.of(context).timerSettingsHistory,
-              slivers: [
-                SliverSafeArea(
-                  sliver: SliverPadding(
-                    padding: const EdgeInsets.only(
-                      left: AppThemeData.paddingLg,
-                      right: AppThemeData.paddingLg,
-                    ),
-                    sliver: TimerSettingsHistoryList(
-                      settingsList: state.timerSettingsList
-                    ),
-                  ),
-                ),
-              ],
-            );
+            return buildLoadedState(context, state);
           case TimerSettingsHistoryLoading():
             return DefaultScreenSetup(
               title: AppLocalizations.of(context).timerSettingsHistory,
@@ -79,6 +57,69 @@ class TimerSettingsHistoryScreen extends StatelessWidget
         }
       }
     );
+  }
+
+  Widget buildLoadedState(
+    BuildContext context,
+    TimerSettingsHistoryLoaded state
+  ) {
+    if (state.timerSettingsList.isEmpty) {
+      return DefaultScreenSetup(
+        title: AppLocalizations.of(context).timerSettingsHistory,
+        enableScrolling: false,
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.only(
+              left: AppThemeData.paddingLg,
+              right: AppThemeData.paddingLg,
+            ),
+            sliver: SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.info_rounded,
+                    color: Colors.black,
+                    size: 96,
+                  ),
+                  const SizedBox(height: AppThemeData.spacingMd),
+                  Text(AppLocalizations.of(context).timerSettingsHistoryEmpty,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ]
+              )
+            )
+          )
+        ],
+      );
+    } else {
+      return DefaultScreenSetup(
+        title: AppLocalizations.of(context).timerSettingsHistory,
+        slivers: [
+          SliverSafeArea(
+            top: false,
+            minimum: EdgeInsets.only(
+              bottom: AppThemeData.padding4Xl,
+            ),
+            sliver: SliverPadding(
+              padding: const EdgeInsets.only(
+                left: AppThemeData.paddingLg,
+                right: AppThemeData.paddingLg,
+              ),
+              sliver: TimerSettingsHistoryList(
+                profileId: profileId,
+                timerSettingsHistoryRecordList: state.timerSettingsList
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
   }
 
 }

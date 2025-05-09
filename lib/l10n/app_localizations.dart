@@ -377,6 +377,18 @@ abstract class AppLocalizations {
   /// **'Legutóbbi beállítások'**
   String get timerSettingsHistory;
 
+  /// No description provided for @timerSettingsHistoryApplied.
+  ///
+  /// In hu, this message translates to:
+  /// **'Időzítő beállítások alkalmazva.'**
+  String get timerSettingsHistoryApplied;
+
+  /// No description provided for @timerSettingsHistoryEmpty.
+  ///
+  /// In hu, this message translates to:
+  /// **'Még nincsenek legutóbbi időzítő beaállítások elmentve.'**
+  String get timerSettingsHistoryEmpty;
+
   /// No description provided for @profileImageLabel.
   ///
   /// In hu, this message translates to:

@@ -1,17 +1,18 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/model/all.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
 class TimerSettingsHistoryListItem extends StatelessWidget {
 
-  final TimerSettings timerSettings;
+  final TimerSettingsHistoryRecord timerSettingsHistoryRecord;
   final void Function() onTap;
 
   const TimerSettingsHistoryListItem({
-    required this.timerSettings,
+    required this.timerSettingsHistoryRecord,
     required this.onTap,
     super.key
   });
@@ -22,22 +23,18 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.backgroundPaperLight,
         borderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black38,
-            offset: Offset(1,2),
-            // spreadRadius: .0,
-            blurRadius: 1.0,
-          )
-        ]
+        boxShadow: AppThemeData.defaultBoxShadow,
       ),
-      // surfaceTintColor: Colors.amber,
       child: Stack(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              buildDurationColumn(context, timerSettings.duration),
+              buildDurationColumn(
+                context,
+                timerSettingsHistoryRecord.timerSettings.duration
+              ),
+              Gap.small(),
               buildDetailsColumn(context),
               const Spacer(),
               const Icon(
@@ -64,26 +61,30 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
 
   Widget buildDurationColumn(BuildContext context, Duration duration) {
     return Padding(
-      padding: const EdgeInsets.all(AppThemeData.paddingXl),
+      padding: const EdgeInsets.all(
+        AppThemeData.paddingXl
+      ),
       child: Column(
         children: [
-          Container(
-            width: 64,
-            height: 64,
-            decoration: const ShapeDecoration(
-              shape: CircleBorder(),
+          DecoratedBox(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
               color: Colors.black,
             ),
-            child: Center(
-              child: Text(duration.inMinutes.toString().toUpperCase(),
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.backgroundPaperLight,
+            child: SizedBox(
+              width: 64,
+              height: 64,
+              child: Center(
+                child: Text(duration.inMinutes.toString().toUpperCase(),
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.backgroundPaperLight,
+                  ),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: AppThemeData.spacingSm),
+          Gap.small(),
           Text(AppLocalizations.of(context).minutesPlural(duration.inMinutes),
             style: Theme.of(context).textTheme.titleLarge,
           ),
@@ -93,27 +94,38 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
   }
 
   Widget buildDetailsColumn(BuildContext context) {
+    final timerSettings = timerSettingsHistoryRecord.timerSettings;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingXl),
+      padding: const EdgeInsets.symmetric(
+        vertical: AppThemeData.paddingMd
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildDetail(
             context,
-            'Warmup'.toUpperCase(),
-            AppLocalizations.of(context).minutesPluralWithNumber(timerSettings.warmup.inMinutes)
+            AppLocalizations.of(context).inputWarmupLabel.toUpperCase(),
+            AppLocalizations.of(context).minutesPluralWithNumber(
+              timerSettings.warmup.inMinutes
+            )
           ),
           const SizedBox(height: AppThemeData.spacingSm),
           buildDetail(
             context,
-            'Starting sound'.toUpperCase(),
-            getLocalizedSoundName(timerSettings.startingSound, AppLocalizations.of(context)),
+            AppLocalizations.of(context).inputStartingSoundLabel.toUpperCase(),
+            getLocalizedSoundName(
+              timerSettings.startingSound,
+              AppLocalizations.of(context)
+            ),
           ),
           const SizedBox(height: AppThemeData.spacingSm),
           buildDetail(
             context,
-            'Ending sound'.toUpperCase(),
-            getLocalizedSoundName(timerSettings.endingSound, AppLocalizations.of(context)),
+            AppLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),
+            getLocalizedSoundName(
+              timerSettings.endingSound,
+              AppLocalizations.of(context)
+            ),
           )
         ],
       ),

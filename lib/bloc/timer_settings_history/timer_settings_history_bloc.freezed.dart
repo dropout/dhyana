@@ -554,7 +554,9 @@ mixin _$TimerSettingsHistoryState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TimerSettings> timerSettingsList) loaded,
+    required TResult Function(
+            List<TimerSettingsHistoryRecord> timerSettingsList)
+        loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -562,7 +564,8 @@ mixin _$TimerSettingsHistoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult? Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -570,7 +573,8 @@ mixin _$TimerSettingsHistoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -667,7 +671,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TimerSettings> timerSettingsList) loaded,
+    required TResult Function(
+            List<TimerSettingsHistoryRecord> timerSettingsList)
+        loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -678,7 +684,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult? Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -689,7 +696,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -788,7 +796,9 @@ class _$TimerSettingsHistoryLoadingImpl implements TimerSettingsHistoryLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TimerSettings> timerSettingsList) loaded,
+    required TResult Function(
+            List<TimerSettingsHistoryRecord> timerSettingsList)
+        loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -799,7 +809,8 @@ class _$TimerSettingsHistoryLoadingImpl implements TimerSettingsHistoryLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult? Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -810,7 +821,8 @@ class _$TimerSettingsHistoryLoadingImpl implements TimerSettingsHistoryLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -871,7 +883,7 @@ abstract class _$$TimerSettingsHistoryLoadedImplCopyWith<$Res> {
           $Res Function(_$TimerSettingsHistoryLoadedImpl) then) =
       __$$TimerSettingsHistoryLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TimerSettings> timerSettingsList});
+  $Res call({List<TimerSettingsHistoryRecord> timerSettingsList});
 }
 
 /// @nodoc
@@ -895,7 +907,7 @@ class __$$TimerSettingsHistoryLoadedImplCopyWithImpl<$Res>
       timerSettingsList: null == timerSettingsList
           ? _value._timerSettingsList
           : timerSettingsList // ignore: cast_nullable_to_non_nullable
-              as List<TimerSettings>,
+              as List<TimerSettingsHistoryRecord>,
     ));
   }
 }
@@ -904,12 +916,12 @@ class __$$TimerSettingsHistoryLoadedImplCopyWithImpl<$Res>
 
 class _$TimerSettingsHistoryLoadedImpl implements TimerSettingsHistoryLoaded {
   const _$TimerSettingsHistoryLoadedImpl(
-      {required final List<TimerSettings> timerSettingsList})
+      {required final List<TimerSettingsHistoryRecord> timerSettingsList})
       : _timerSettingsList = timerSettingsList;
 
-  final List<TimerSettings> _timerSettingsList;
+  final List<TimerSettingsHistoryRecord> _timerSettingsList;
   @override
-  List<TimerSettings> get timerSettingsList {
+  List<TimerSettingsHistoryRecord> get timerSettingsList {
     if (_timerSettingsList is EqualUnmodifiableListView)
       return _timerSettingsList;
     // ignore: implicit_dynamic_type
@@ -948,7 +960,9 @@ class _$TimerSettingsHistoryLoadedImpl implements TimerSettingsHistoryLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TimerSettings> timerSettingsList) loaded,
+    required TResult Function(
+            List<TimerSettingsHistoryRecord> timerSettingsList)
+        loaded,
     required TResult Function() error,
   }) {
     return loaded(timerSettingsList);
@@ -959,7 +973,8 @@ class _$TimerSettingsHistoryLoadedImpl implements TimerSettingsHistoryLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult? Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult? Function()? error,
   }) {
     return loaded?.call(timerSettingsList);
@@ -970,7 +985,8 @@ class _$TimerSettingsHistoryLoadedImpl implements TimerSettingsHistoryLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -1020,10 +1036,10 @@ class _$TimerSettingsHistoryLoadedImpl implements TimerSettingsHistoryLoaded {
 
 abstract class TimerSettingsHistoryLoaded implements TimerSettingsHistoryState {
   const factory TimerSettingsHistoryLoaded(
-          {required final List<TimerSettings> timerSettingsList}) =
+          {required final List<TimerSettingsHistoryRecord> timerSettingsList}) =
       _$TimerSettingsHistoryLoadedImpl;
 
-  List<TimerSettings> get timerSettingsList;
+  List<TimerSettingsHistoryRecord> get timerSettingsList;
 
   /// Create a copy of TimerSettingsHistoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -1079,7 +1095,9 @@ class _$TimerSettingsHistoryErrorImpl implements TimerSettingsHistoryError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TimerSettings> timerSettingsList) loaded,
+    required TResult Function(
+            List<TimerSettingsHistoryRecord> timerSettingsList)
+        loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -1090,7 +1108,8 @@ class _$TimerSettingsHistoryErrorImpl implements TimerSettingsHistoryError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult? Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -1101,7 +1120,8 @@ class _$TimerSettingsHistoryErrorImpl implements TimerSettingsHistoryError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TimerSettings> timerSettingsList)? loaded,
+    TResult Function(List<TimerSettingsHistoryRecord> timerSettingsList)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {

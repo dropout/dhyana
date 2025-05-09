@@ -1,21 +1,22 @@
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/model/timer_settings_query_options.dart';
+import 'package:dhyana/model/timer_settings_history_record.dart';
+import 'package:dhyana/model/timer_settings_history_record_query_options.dart';
 
 abstract interface class TimerSettingsHistoryRepository {
 
-  Future<void> saveSettings(
+  Future<void> recordTimerSettingsHistory(
     String profileId,
-    TimerSettings timerSettings
+    TimerSettings timerSettings,
   );
 
-  Future<List<TimerSettings>> query(
+  Future<List<TimerSettingsHistoryRecord>> query(
     String profileId,
-    TimerSettingsHistoryQueryOptions queryOptions
+    TimerSettingsHistoryRecordQueryOptions queryOptions
   );
 
-  Stream<List<TimerSettings>> queryStream(
+  Stream<List<TimerSettingsHistoryRecord>> queryStream(
     String profileId,
-    TimerSettingsHistoryQueryOptions queryOptions
+    TimerSettingsHistoryRecordQueryOptions queryOptions
   );
 
 }

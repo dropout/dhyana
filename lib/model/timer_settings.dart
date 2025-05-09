@@ -29,9 +29,9 @@ class TimerSettings with _$TimerSettings implements Model {
     try {
       List<String> parts = idString.split('-');
       Duration warmup = Duration(seconds: int.parse(parts[0], radix: 10));
+      Sound startingSound = getSoundById(int.parse(parts[2], radix: 10));
       Duration duration = Duration(seconds: int.parse(parts[1], radix: 10));
-      Sound startingSound = Sound.values[int.parse(parts[2], radix: 10)];
-      Sound endingSound = Sound.values[int.parse(parts[3], radix: 10)];
+      Sound endingSound = getSoundById(int.parse(parts[2], radix: 10));
       return TimerSettings(
         warmup: warmup,
         duration: duration,
@@ -46,7 +46,7 @@ class TimerSettings with _$TimerSettings implements Model {
 
   @override
   String get id {
-    return '${warmup.inSeconds}-${duration.inSeconds}-${startingSound.index}-${endingSound.index}';
+    return '${warmup.inSeconds}-${startingSound.id}-${duration.inSeconds}-${endingSound.id}';
   }
 
 }

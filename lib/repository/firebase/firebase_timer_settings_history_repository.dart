@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/firebase/firebase_timer_settings_history_data_provider.dart';
+import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/model/timer_settings_query_options.dart';
+import 'package:dhyana/model/timer_settings_history_record.dart';
+import 'package:dhyana/model/timer_settings_history_record_query_options.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
 
 class FirebaseTimerSettingsHistoryRepository
@@ -12,25 +13,41 @@ class FirebaseTimerSettingsHistoryRepository
   FirebaseTimerSettingsHistoryRepository(this.fireStore);
 
   @override
-  Future<void> saveSettings(String profileId, TimerSettings timerSettings) async {
+  Future<void> recordTimerSettingsHistory(
+    String profileId,
+    TimerSettings timerSettings,
+  ) async {
     FirebaseTimerSettingsHistoryDataProvider timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
         fireStore,
         profileId,
       );
 
-    bool exists = await timerSettingsHistoryDataProvider.exists(timerSettings.id);
-    if (exists) {
-      await timerSettingsHistoryDataProvider.update(timerSettings);
-    } else {
-      await timerSettingsHistoryDataProvider.create(timerSettings);
+    try {
+      TimerSettingsHistoryRecord timerSettingsHistoryRecord = await
+        timerSettingsHistoryDataProvider.read(timerSettings.id);
+      await timerSettingsHistoryDataProvider.update(
+        timerSettingsHistoryRecord.copyWith(
+          useCount: timerSettingsHistoryRecord.useCount + 1,
+          lastUsed: DateTime.now(),
+        )
+      );
+    } on FirebaseDocumentNotFoundException {
+      await timerSettingsHistoryDataProvider.create(
+        TimerSettingsHistoryRecord(
+          id: timerSettings.id,
+          timerSettings: timerSettings,
+          useCount: 1,
+          lastUsed: DateTime.now(),
+        )
+      );
     }
   }
 
   @override
-  Future<List<TimerSettings>> query(
+  Future<List<TimerSettingsHistoryRecord>> query(
     String profileId,
-    TimerSettingsHistoryQueryOptions queryOptions
+    TimerSettingsHistoryRecordQueryOptions queryOptions
   ) {
     FirebaseTimerSettingsHistoryDataProvider timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
@@ -41,9 +58,9 @@ class FirebaseTimerSettingsHistoryRepository
   }
 
   @override
-  Stream<List<TimerSettings>> queryStream(
+  Stream<List<TimerSettingsHistoryRecord>> queryStream(
     String profileId,
-    TimerSettingsHistoryQueryOptions queryOptions,
+    TimerSettingsHistoryRecordQueryOptions queryOptions,
   ) {
     FirebaseTimerSettingsHistoryDataProvider timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
@@ -52,8 +69,5 @@ class FirebaseTimerSettingsHistoryRepository
       );
     return timerSettingsHistoryDataProvider.queryStream(queryOptions);
   }
-
-
-
 
 }

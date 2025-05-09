@@ -150,6 +150,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get timerSettingsHistory => 'Settings history';
 
   @override
+  String get timerSettingsHistoryApplied => 'Timer settings applied.';
+
+  @override
+  String get timerSettingsHistoryEmpty => 'There are no timer settings\n saved in history yet.';
+
+  @override
   String get profileImageLabel => 'Profile image';
 
   @override

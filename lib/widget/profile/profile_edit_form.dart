@@ -84,21 +84,43 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           ),
           // buildNameDisplay(context),
           Gap.medium(),
-          buildTextInput(context,
-              name: 'firstName',
-              label: AppLocalizations.of(context).profileFirstnameLabel,
-              controller: firstNameTextController
-            //   textInputAction: TextInputAction.next, ??
-          ),
-          Gap.medium(),
-          buildTextInput(context,
-              name: 'lastName',
-              label: AppLocalizations.of(context).profileLastnameLabel,
-              controller: lastNameTextController
-          ),
+          ...buildNameInputs(context),
         ],
       )
     );
+  }
+
+  List<Widget> buildNameInputs(BuildContext context) {
+    Locale locale = Localizations.localeOf(context);
+    if (locale.languageCode.toLowerCase() == 'hu' ) {
+      return [
+        buildTextInput(context,
+          name: 'lastName',
+          label: AppLocalizations.of(context).profileLastnameLabel,
+          controller: lastNameTextController
+        ),
+        Gap.medium(),
+        buildTextInput(context,
+          name: 'firstName',
+          label: AppLocalizations.of(context).profileFirstnameLabel,
+          controller: firstNameTextController
+        ),
+      ];
+    } else {
+      return [
+        buildTextInput(context,
+          name: 'firstName',
+          label: AppLocalizations.of(context).profileFirstnameLabel,
+          controller: firstNameTextController
+        ),
+        Gap.medium(),
+        buildTextInput(context,
+          name: 'lastName',
+          label: AppLocalizations.of(context).profileLastnameLabel,
+          controller: lastNameTextController
+        ),
+      ];
+    }
   }
 
   Widget buildTextInput(BuildContext context, {
@@ -140,19 +162,6 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           textInputAction: TextInputAction.next,
         ),
       ]
-    );
-  }
-
-  Widget buildNameDisplay(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppThemeData.spacingMd),
-      child: Text(
-        _getLiveDisplayName(context),
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-          fontWeight: FontWeight.bold,
-        )
-      ),
     );
   }
 

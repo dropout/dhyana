@@ -150,6 +150,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get timerSettingsHistory => 'Legutóbbi beállítások';
 
   @override
+  String get timerSettingsHistoryApplied => 'Időzítő beállítások alkalmazva.';
+
+  @override
+  String get timerSettingsHistoryEmpty => 'Még nincsenek legutóbbi időzítő beaállítások elmentve.';
+
+  @override
   String get profileImageLabel => 'Profil kép';
 
   @override

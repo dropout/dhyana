@@ -1,4 +1,5 @@
-import 'package:dhyana/model/timer_settings_query_options.dart';
+import 'package:dhyana/model/timer_settings_history_record.dart';
+import 'package:dhyana/model/timer_settings_history_record_query_options.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
@@ -30,10 +31,10 @@ class TimerSettingsHistoryBloc
   void _onLoadTimerSettingsHistory(LoadTimerSettingsHistoryEvent event, emit) async {
     try {
       emit(const TimerSettingsHistoryState.loading());
-      List<TimerSettings> timerSettingsList =
+      List<TimerSettingsHistoryRecord> timerSettingsList =
       await timerSettingsHistoryRepository.query(
         event.profileId,
-        const TimerSettingsHistoryQueryOptions(limit: 5),
+        const TimerSettingsHistoryRecordQueryOptions(limit: 5),
       );
       emit(TimerSettingsHistoryState.loaded(timerSettingsList: timerSettingsList));
       logger.t('Loaded ${timerSettingsList.length} timer settings from history');
@@ -42,18 +43,18 @@ class TimerSettingsHistoryBloc
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to timer settings history: ${event.profileId}'
+        reason: 'Unable to load timer settings history record: ${event.profileId}'
       );
     }
   }
 
   void _onSaveTimerSettingsHistory(SaveTimerSettingsHistoryEvent event, emit) async {
     try {
-      await timerSettingsHistoryRepository.saveSettings(
+      await timerSettingsHistoryRepository.recordTimerSettingsHistory(
         event.profileId,
-        event.timerSettings
+        event.timerSettings,
       );
-      logger.t('Timer settings successfully saved.');
+      logger.t('Timer settings history record successfully saved.');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

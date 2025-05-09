@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
+import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/model.dart';
-import 'package:dhyana/data_provider/data_provider.dart';
 
 class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
 
@@ -19,6 +18,12 @@ class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
   @override
   Future<M> read(String id) async {
     DocumentSnapshot<M> snapshot = await collectionRef.doc(id).get();
+    if (!snapshot.exists) {
+      throw FirebaseDocumentNotFoundException(
+        id: id,
+        collectionPath: collectionRef.path,
+      );
+    }
     return snapshot.data()!;
   }
 
