@@ -39,7 +39,6 @@ class AppButton extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     final (textStyle, padding) = _getButtonParams(context, buttonSize);
@@ -52,7 +51,7 @@ class AppButton extends StatelessWidget {
       highlightElevation: 0,
       shape: const StadiumBorder(),
       fillColor: bColor,
-      splashColor: Colors.red,
+      // splashColor: Colors.red,
       clipBehavior: Clip.none,
       child: Text(text,
           style: textStyle,

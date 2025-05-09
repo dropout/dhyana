@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SoundInputButton extends StatelessWidget {
@@ -25,7 +26,7 @@ class SoundInputButton extends StatelessWidget {
       constraints: const BoxConstraints(), // removes unnecessary padding
       shape: const StadiumBorder(),
       fillColor: Colors.black, //background color
-      splashColor: Colors.red,
+      splashColor: AppColors.splashColor,
       clipBehavior: Clip.none,
       child: child,
     );

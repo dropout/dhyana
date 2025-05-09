@@ -124,7 +124,6 @@ class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerPr
               color: Colors.transparent,
               child: InkWell(
                 customBorder: const StadiumBorder(),
-                splashColor: Colors.white.withAlpha(50),
                 onTap: widget.onTap,
               ),
             ),
