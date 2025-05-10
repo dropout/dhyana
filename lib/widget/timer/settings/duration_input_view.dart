@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/timer/settings/all.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -59,48 +60,53 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
   }
 
   Widget buildContent(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      child: ListWheelScrollView(
-        controller: scrollController,
-        physics: scrollPhysics,
-        itemExtent: 48,
-        children: widget.values.map((int value) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: AppThemeData.paddingXl
+      ),
+      child: SizedBox(
+        height: 300,
+        child: ListWheelScrollView(
+          controller: scrollController,
+          physics: scrollPhysics,
+          itemExtent: 48,
+          children: widget.values.map((int value) {
 
-          String text;
-          TextStyle textStyle;
-          if (value == widget.values[selectedIndex]) {
-            text = AppLocalizations.of(context).minutesPluralWithNumber(value);
-            textStyle = Theme.of(context).textTheme.headlineMedium!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+            String text;
+            TextStyle textStyle;
+            if (value == widget.values[selectedIndex]) {
+              text = AppLocalizations.of(context).minutesPluralWithNumber(value);
+              textStyle = Theme.of(context).textTheme.headlineMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              );
+            } else {
+              text = value.toString();
+              textStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              );
+            }
+
+            return SizedBox(
+              height: 48,
+              child: AnimatedDefaultTextStyle(
+                style: textStyle,
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeOut,
+                child: Center(
+                  child: Text(text),
+                ),
+              )
             );
-          } else {
-            text = value.toString();
-            textStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.bold,
-            );
-          }
 
-          return SizedBox(
-            height: 48,
-            child: AnimatedDefaultTextStyle(
-              style: textStyle,
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeOut,
-              child: Center(
-                child: Text(text),
-              ),
-            )
-          );
-
-        }).toList(),
-        onSelectedItemChanged: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-      )
+          }).toList(),
+          onSelectedItemChanged: (int index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+        )
+      ),
     );
   }
 

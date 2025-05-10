@@ -32,7 +32,7 @@ class InputView extends StatelessWidget {
           child: SafeArea(
             child: Column(
               // button width match its parent width
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 buildContent(context),
                 buildActionButtons(context),
@@ -67,12 +67,9 @@ class InputView extends StatelessWidget {
   }
 
   Widget buildActionButtons(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppThemeData.spacingMd),
-      child: AppButton(
-        text: AppLocalizations.of(context).okay.toUpperCase(),
-        onTap: () => onSave?.call(),
-      ),
+    return AppButton(
+      text: AppLocalizations.of(context).okay.toUpperCase(),
+      onTap: () => onSave?.call(),
     );
   }
 
