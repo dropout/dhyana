@@ -261,8 +261,8 @@ class CirclePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CirclePainter oldDelegate) {
     return (
-        oldDelegate.animation != animation ||
-            oldDelegate.color != color
+      oldDelegate.animation != animation ||
+      oldDelegate.color != color
     );
   }
 

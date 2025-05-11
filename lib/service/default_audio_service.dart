@@ -14,10 +14,16 @@ class DefaultAudioService implements AudioService {
 
   DefaultAudioService() {
     audioPlayer.setPlayerMode(PlayerMode.lowLatency);
+    audioPlayer.setReleaseMode(ReleaseMode.stop);
   }
 
   @override
-  Future<void> play(Sound sound) {
+  Future<void> play(Sound sound) async {
+    // Need to stop the audio player, because in case its already playing the
+    // same sound, it will not play the same sound again.
+    if (audioPlayer.state == PlayerState.playing) {
+      await audioPlayer.stop();
+    }
     logger.t('Playing sound: ${sound.name} ${sound.audioResourcePath}');
     return audioPlayer.play(AssetSource(sound.audioResourcePath));
   }
