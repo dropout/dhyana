@@ -48,27 +48,26 @@ class PresenceView extends StatelessWidget {
   }
 
   Widget buildTable(BuildContext context, List<Presence> presenceList) {
-    List<List<Presence>> slicedPresenceList = presenceList.slices(3).toList();
+    List<List<Presence>> slicedPresenceList =
+      presenceList.slices(3).toList();
     return Table(
-      children: [
-        ...List.generate(slicedPresenceList.length, (rowIndex) =>
-            TableRow(
-              children: List.generate(3, (columnIndex) {
-                if (columnIndex < slicedPresenceList[rowIndex].length) {
-                  return TableCell(
-                    child: Container(
-                      child: PresenceListItem(
-                        presence: slicedPresenceList[rowIndex][columnIndex])
-                          .gridReveal(rowIndex,columnIndex),
-                    )
-                  );
-                } else {
-                  return const TableCell(child: SizedBox.shrink());
-                }
-              }),
-            )
-        ),
-      ],
+      children: List.generate(slicedPresenceList.length, (rowIndex) =>
+        TableRow(
+          children: List.generate(3, (columnIndex) {
+            if (columnIndex < slicedPresenceList[rowIndex].length) {
+              return TableCell(
+                child: Container(
+                  child: PresenceListItem(
+                    presence: slicedPresenceList[rowIndex][columnIndex])
+                      .gridReveal(rowIndex,columnIndex),
+                )
+              );
+            } else {
+              return const TableCell(child: SizedBox.shrink());
+            }
+          }),
+        )
+      ),
     );
   }
 
@@ -84,11 +83,13 @@ class PresenceView extends StatelessWidget {
               presenceList: presenceList,
               batchSize: batchSize,
               maxPageCount: maxPageCount,
-              onTap: () => BlocProvider.of<PresenceBloc>(context).add(PresenceEvent.loadMore(
-                lastDocumentId: presenceList.last.id,
-                batchSize: batchSize
-              )),
-              );
+              onTap: () => BlocProvider.of<PresenceBloc>(context).add(
+                PresenceEvent.loadMore(
+                  lastDocumentId: presenceList.last.id,
+                  batchSize: batchSize
+                )
+              ),
+            );
           case PresenceLoadingMoreState():
             return LoadMoreButton(
               text: AppLocalizations.of(context).loading,

@@ -8,9 +8,11 @@ class PresenceListItem extends StatelessWidget {
 
   final Presence presence;
   final Color textColor;
+  final Color borderColor;
 
   const PresenceListItem({
     required this.presence,
+    this.borderColor = Colors.black,
     this.textColor = Colors.black,
     super.key
   });
@@ -22,7 +24,7 @@ class PresenceListItem extends StatelessWidget {
         DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.black,
+            color: borderColor,
           ),
           child: Padding(
             padding: const EdgeInsets.all(4.0),

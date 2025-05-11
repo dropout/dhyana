@@ -19,7 +19,7 @@ class PresenceList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       runSpacing: AppThemeData.spacingLg,
-      spacing: AppThemeData.spacingLg,
+      spacing: AppThemeData.spacingMd,
       children: presenceList.map(
         (p) => PresenceListItem(
           presence: p,

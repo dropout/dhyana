@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/presence/presence_list.dart';
+import 'package:dhyana/widget/presence/presence_table.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,7 +57,7 @@ class _PresenceAreaState extends State<PresenceArea> {
           padding: const EdgeInsets.symmetric(
             horizontal: AppThemeData.spacingLg
           ),
-          child: PresenceList(
+          child: PresenceTable(
             presenceList: state.presenceList,
             textColor: Colors.white,
           ),

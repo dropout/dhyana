@@ -95,35 +95,37 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
     Profile updatedProfile,
   ) {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Gap.xxl(),
-          SessionResult(
-            timerState: widget.timerState,
-            profile: updatedProfile,
-          ),
-          Gap.large(),
-          MilestoneProgress(
-            profile: updatedProfile,
-            showAnimation: updatedProfile.
-              consecutiveDaysProgressCheck(oldProfile),
-          ),
-          Gap.large(),
-          ProgressSummary(
-            oldProfile: oldProfile,
-            updatedProfile: updatedProfile,
-          ),
-          Gap.xxl(),
-          PresenceArea(
-            profile: updatedProfile
-          ),
-          SizedBox(
-            // as per size of bottom area gradient
-            // see timer_screen.dart
-            height: 160,
-          ),
-        ]
+      child: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Gap.xl(),
+            SessionResult(
+              timerState: widget.timerState,
+              profile: updatedProfile,
+            ),
+            Gap.large(),
+            MilestoneProgress(
+              profile: updatedProfile,
+              showAnimation: updatedProfile.
+                consecutiveDaysProgressCheck(oldProfile),
+            ),
+            Gap.large(),
+            ProgressSummary(
+              oldProfile: oldProfile,
+              updatedProfile: updatedProfile,
+            ),
+            Gap.xxl(),
+            PresenceArea(
+              profile: updatedProfile
+            ),
+            SizedBox(
+              // as per size of bottom area gradient - safearea bottom
+              // see timer_screen.dart
+              height: 140,
+            ),
+          ]
+        ),
       ),
     );
   }
