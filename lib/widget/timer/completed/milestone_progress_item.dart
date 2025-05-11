@@ -42,7 +42,7 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
   late final ParticleController particleController;
   int lastEmit = 0;
   int emitGap = 1;
-  int particleCount = 12;
+  int particleCount = 2;
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
               rnd.getDouble(-1, 1),
             );
 
-            velocity = velocity * rnd.getDouble(1.0, 2.0);
+            velocity = velocity * rnd.getDouble(2.0, 4.0);
 
             particles.add(Particle(
               vx: velocity.x,
@@ -80,8 +80,8 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
 
           for (int i = particles.length - 1; i >= 0; i--) {
             Particle p = particles[i];
-            p.vx = p.vx * 0.98;
-            p.vy = p.vy * 0.98;
+            p.vx = p.vx * 0.97;
+            p.vy = p.vy * 0.97;
             p.update();
 
             if (p.age >= p.lifespan) {
@@ -102,27 +102,24 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
     );
 
     if (widget.mode == MilestoneProgressItemMode.animate) {
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
         animationController.forward();
         timeParticles();
       });
-
     }
 
     _circleAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
     ).animate(
-        CurvedAnimation(
-          parent: animationController,
-          curve: const Interval(
-              .0,
-              1.0,
-              // curve: Cubic
-              // curve: Cubic(.23,.61,.61,1.58)
-              curve: Curves.elasticOut,
-          ),
-        )
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(
+          .0,
+          1.0,
+          curve: Curves.elasticOut,
+        ),
+      )
     );
 
     _shapeAnimation = Tween<double>(
@@ -144,7 +141,7 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
   void resetParticles() {
     setState(() {
       lastEmit = 0;
-      particleCount = 12;
+      particleCount = 48;
     });
   }
 

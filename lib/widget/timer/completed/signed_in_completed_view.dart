@@ -109,6 +109,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
               profile: updatedProfile,
               showAnimation: updatedProfile.
                 consecutiveDaysProgressCheck(oldProfile),
+              textColor: Colors.white,
             ),
             Gap.large(),
             ProgressSummary(

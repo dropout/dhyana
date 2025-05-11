@@ -12,12 +12,14 @@ class MilestoneProgress extends StatefulWidget {
   final bool showAnimation;
   final bool showText;
   final double itemSize;
+  final Color textColor;
 
   const MilestoneProgress({
     required this.profile,
     this.showAnimation = false,
     this.showText = true,
     this.itemSize = 36,
+    this.textColor = Colors.black,
     super.key,
   });
 
@@ -101,7 +103,10 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
       AppLocalizations.of(context).statsNextMilestoneIn(
         widget.profile.statsReport.milestoneProgress.remainingDaysCount
       ),
-      style: Theme.of(context).textTheme.titleMedium,
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+        color: widget.textColor,
+      )
+
     );
   }
 

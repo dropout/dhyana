@@ -82,19 +82,22 @@ class TimerCompletedView extends StatelessWidget {
         alignment: AlignmentDirectional.bottomCenter,
         clipBehavior: Clip.none,
         children: [
-          Container(
-            height: 160,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.0, 0.8],
-                colors: [
-                  Colors.transparent,
-                  Colors.black,
-                ]
+          // can grab scrollable area underneath
+          IgnorePointer(
+            child: Container(
+              height: 160,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.0, 0.8],
+                  colors: [
+                    Colors.transparent,
+                    Colors.black,
+                  ]
+                )
               )
-            )
+            ),
           ),
           SafeArea(
             // padding: const EdgeInsets.all(AppThemeData.spacingMd),
