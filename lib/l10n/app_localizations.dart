@@ -515,6 +515,12 @@ abstract class AppLocalizations {
   /// **'Első ülés'**
   String get statsFirstSession;
 
+  /// No description provided for @statsLastSession.
+  ///
+  /// In hu, this message translates to:
+  /// **'Legutóbbi ülés'**
+  String get statsLastSession;
+
   /// No description provided for @statsCurrentStreak.
   ///
   /// In hu, this message translates to:

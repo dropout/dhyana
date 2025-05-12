@@ -56,15 +56,22 @@ class DetailedProfileView extends StatelessWidget {
               ),
               Gap.medium(),
               LabelValueDetail(
-                label: 'Signed up',
-                value: getSignedUpDateText(
+                label: AppLocalizations.of(context).statsSignedUp,
+                value: formatDateTime(
                   context,
                   profile.signupDate,
                 ),
               ),
               LabelValueDetail(
-                label: 'First session',
-                value: getFirstSessionDateText(
+                label: AppLocalizations.of(context).statsFirstSession,
+                value: formatDateTime(
+                  context,
+                  profile.statsReport.firstSessionDate
+                ),
+              ),
+              LabelValueDetail(
+                label: AppLocalizations.of(context).statsLastSession,
+                value: formatDateTime(
                   context,
                   profile.statsReport.firstSessionDate
                 ),
@@ -75,34 +82,12 @@ class DetailedProfileView extends StatelessWidget {
     );
   }
 
-  String getSignedUpDateText(
-    BuildContext context,
-    DateTime? signedUpDate,
-  ) {
-    if (signedUpDate == null) {
+  String formatDateTime(BuildContext context, DateTime? dateTime) {
+    if (dateTime == null) {
       return AppLocalizations.of(context).notAvailable;
-    } else {
-      return '${DateFormat.yMMMd(
-        Localizations.localeOf(context).toString()
-      ).format(signedUpDate)} ${DateFormat.Hm(
-        Localizations.localeOf(context).toString()
-      ).format(signedUpDate)}';
     }
-  }
-
-  String getFirstSessionDateText(
-    BuildContext context,
-    DateTime? firstSessionDate,
-  ) {
-    if (firstSessionDate == null) {
-      return AppLocalizations.of(context).notAvailable;
-    } else {
-      return '${DateFormat.yMMMd(
-        Localizations.localeOf(context).toString()
-      ).format(firstSessionDate)} ${DateFormat.Hm(
-        Localizations.localeOf(context).toString()
-      ).format(firstSessionDate)}';
-    }
+    final locale = Localizations.localeOf(context).toString();
+    return '${DateFormat.yMMMd(locale).format(dateTime)} ${DateFormat.Hm(locale).format(dateTime)}';
   }
 
 }

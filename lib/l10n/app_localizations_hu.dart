@@ -219,6 +219,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get statsFirstSession => 'Első ülés';
 
   @override
+  String get statsLastSession => 'Legutóbbi ülés';
+
+  @override
   String get statsCurrentStreak => 'Aktuális sorozat';
 
   @override

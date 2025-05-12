@@ -87,6 +87,7 @@
 
   "statsSignedUp": "Csatlakozás",
   "statsFirstSession": "Első ülés",
+  "statsLastSession": "Legutóbbi ülés",
   "statsCurrentStreak": "Aktuális sorozat",
   "statsStartedAt": "Aktuálist sorozat kezdete",
   "statsNotyetStarted": "Még nem kezdted el",

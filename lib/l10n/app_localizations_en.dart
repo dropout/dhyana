@@ -219,6 +219,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsFirstSession => 'First session';
 
   @override
+  String get statsLastSession => 'Last session';
+
+  @override
   String get statsCurrentStreak => 'Current streak';
 
   @override

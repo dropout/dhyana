@@ -84,6 +84,7 @@
 
   "statsSignedUp": "Joined",
   "statsFirstSession": "First session",
+  "statsLastSession": "Last session",
   "statsCurrentStreak": "Current streak",
   "statsStartedAt": "Started at",
   "statsNotyetStarted": "Not yet started",
