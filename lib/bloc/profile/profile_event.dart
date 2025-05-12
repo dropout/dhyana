@@ -19,5 +19,6 @@ class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.error() = ProfileErrorOccured;
   const factory ProfileEvent.clearData() = ClearProfileData;
+  const factory ProfileEvent.validateProfileStats() = ValidateProfileStats;
 
 }

@@ -32,6 +32,7 @@ mixin _$ProfileEvent {
         updateProfile,
     required TResult Function() error,
     required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +49,7 @@ mixin _$ProfileEvent {
         updateProfile,
     TResult? Function()? error,
     TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +66,7 @@ mixin _$ProfileEvent {
         updateProfile,
     TResult Function()? error,
     TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,6 +76,7 @@ mixin _$ProfileEvent {
     required TResult Function(UpdateProfile value) updateProfile,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +85,7 @@ mixin _$ProfileEvent {
     TResult? Function(UpdateProfile value)? updateProfile,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +94,7 @@ mixin _$ProfileEvent {
     TResult Function(UpdateProfile value)? updateProfile,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -219,6 +225,7 @@ class _$LoadProfileImpl implements LoadProfile {
         updateProfile,
     required TResult Function() error,
     required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
   }) {
     return loadProfile(profileId, onComplete, onError);
   }
@@ -238,6 +245,7 @@ class _$LoadProfileImpl implements LoadProfile {
         updateProfile,
     TResult? Function()? error,
     TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
   }) {
     return loadProfile?.call(profileId, onComplete, onError);
   }
@@ -257,6 +265,7 @@ class _$LoadProfileImpl implements LoadProfile {
         updateProfile,
     TResult Function()? error,
     TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -272,6 +281,7 @@ class _$LoadProfileImpl implements LoadProfile {
     required TResult Function(UpdateProfile value) updateProfile,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
   }) {
     return loadProfile(this);
   }
@@ -283,6 +293,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult? Function(UpdateProfile value)? updateProfile,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
   }) {
     return loadProfile?.call(this);
   }
@@ -294,6 +305,7 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult Function(UpdateProfile value)? updateProfile,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
@@ -472,6 +484,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
         updateProfile,
     required TResult Function() error,
     required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
   }) {
     return updateProfile(
         profile, formData, onComplete, onError, completeProfile);
@@ -492,6 +505,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
         updateProfile,
     TResult? Function()? error,
     TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
   }) {
     return updateProfile?.call(
         profile, formData, onComplete, onError, completeProfile);
@@ -512,6 +526,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
         updateProfile,
     TResult Function()? error,
     TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -528,6 +543,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     required TResult Function(UpdateProfile value) updateProfile,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
   }) {
     return updateProfile(this);
   }
@@ -539,6 +555,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult? Function(UpdateProfile value)? updateProfile,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
   }) {
     return updateProfile?.call(this);
   }
@@ -550,6 +567,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
     TResult Function(UpdateProfile value)? updateProfile,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -636,6 +654,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
         updateProfile,
     required TResult Function() error,
     required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
   }) {
     return error();
   }
@@ -655,6 +674,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
         updateProfile,
     TResult? Function()? error,
     TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
   }) {
     return error?.call();
   }
@@ -674,6 +694,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
         updateProfile,
     TResult Function()? error,
     TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -689,6 +710,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     required TResult Function(UpdateProfile value) updateProfile,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
   }) {
     return error(this);
   }
@@ -700,6 +722,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult? Function(UpdateProfile value)? updateProfile,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
   }) {
     return error?.call(this);
   }
@@ -711,6 +734,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
     TResult Function(UpdateProfile value)? updateProfile,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -779,6 +803,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
         updateProfile,
     required TResult Function() error,
     required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
   }) {
     return clearData();
   }
@@ -798,6 +823,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
         updateProfile,
     TResult? Function()? error,
     TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
   }) {
     return clearData?.call();
   }
@@ -817,6 +843,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
         updateProfile,
     TResult Function()? error,
     TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
     required TResult orElse(),
   }) {
     if (clearData != null) {
@@ -832,6 +859,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
     required TResult Function(UpdateProfile value) updateProfile,
     required TResult Function(ProfileErrorOccured value) error,
     required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
   }) {
     return clearData(this);
   }
@@ -843,6 +871,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
     TResult? Function(UpdateProfile value)? updateProfile,
     TResult? Function(ProfileErrorOccured value)? error,
     TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
   }) {
     return clearData?.call(this);
   }
@@ -854,6 +883,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
     TResult Function(UpdateProfile value)? updateProfile,
     TResult Function(ProfileErrorOccured value)? error,
     TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
     required TResult orElse(),
   }) {
     if (clearData != null) {
@@ -865,6 +895,156 @@ class _$ClearProfileDataImpl implements ClearProfileData {
 
 abstract class ClearProfileData implements ProfileEvent {
   const factory ClearProfileData() = _$ClearProfileDataImpl;
+}
+
+/// @nodoc
+abstract class _$$ValidateProfileStatsImplCopyWith<$Res> {
+  factory _$$ValidateProfileStatsImplCopyWith(_$ValidateProfileStatsImpl value,
+          $Res Function(_$ValidateProfileStatsImpl) then) =
+      __$$ValidateProfileStatsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ValidateProfileStatsImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ValidateProfileStatsImpl>
+    implements _$$ValidateProfileStatsImplCopyWith<$Res> {
+  __$$ValidateProfileStatsImplCopyWithImpl(_$ValidateProfileStatsImpl _value,
+      $Res Function(_$ValidateProfileStatsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ValidateProfileStatsImpl implements ValidateProfileStats {
+  const _$ValidateProfileStatsImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.validateProfileStats()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ValidateProfileStatsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String profileId,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)
+        loadProfile,
+    required TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)
+        updateProfile,
+    required TResult Function() error,
+    required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
+  }) {
+    return validateProfileStats();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String profileId, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        loadProfile,
+    TResult? Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult? Function()? error,
+    TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
+  }) {
+    return validateProfileStats?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String profileId, void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        loadProfile,
+    TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult Function()? error,
+    TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
+    required TResult orElse(),
+  }) {
+    if (validateProfileStats != null) {
+      return validateProfileStats();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadProfile value) loadProfile,
+    required TResult Function(UpdateProfile value) updateProfile,
+    required TResult Function(ProfileErrorOccured value) error,
+    required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
+  }) {
+    return validateProfileStats(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadProfile value)? loadProfile,
+    TResult? Function(UpdateProfile value)? updateProfile,
+    TResult? Function(ProfileErrorOccured value)? error,
+    TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
+  }) {
+    return validateProfileStats?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProfile value)? loadProfile,
+    TResult Function(UpdateProfile value)? updateProfile,
+    TResult Function(ProfileErrorOccured value)? error,
+    TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
+    required TResult orElse(),
+  }) {
+    if (validateProfileStats != null) {
+      return validateProfileStats(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ValidateProfileStats implements ProfileEvent {
+  const factory ValidateProfileStats() = _$ValidateProfileStatsImpl;
 }
 
 /// @nodoc

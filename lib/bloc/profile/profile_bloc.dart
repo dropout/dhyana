@@ -36,6 +36,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdateProfile>(_onUpdateProfile);
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
     on<ClearProfileData>(_onClearProfileData);
+    on<ValidateProfileStats>(_onValidateProfileStats);
+
   }
 
   void _onLoadProfile(LoadProfile event, emit) async {
@@ -99,6 +101,43 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onClearProfileData(ClearProfileData event, emit) async {
     emit(const ProfileState.initial());
     logger.t('Profile data cleared!');
+  }
+
+  void _onValidateProfileStats(ValidateProfileStats event, emit) async {
+    try {
+
+      late final Profile profile;
+      switch (state) {
+        case ProfileLoadedState():
+          logger.t('Validating profile stats');
+          profile = (state as ProfileLoadedState).profile;
+        default:
+          logger.t('Profile not loaded yet, skipping stats validation');
+          return;
+      }
+
+      ProfileStatisticsReport updatedStatsReport =
+        profileStatsUpdater.validateStatsReport(profile.statsReport);
+
+      if (updatedStatsReport != profile.statsReport) {
+        Profile updatedProfile = profile.copyWith(
+          statsReport: updatedStatsReport
+        );
+        // lazy update the profile
+        profileRepository.update(updatedProfile);
+        logger.t('Consecutive days and milestone progress have been invalidated!');
+        emit(ProfileState.loaded(profile: profile));
+      } else {
+        logger.t('Profile stats are valid');
+      }
+
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Unable to validate profile stats'
+      );
+    }
   }
 
 }

@@ -6,8 +6,8 @@ import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileScreen extends StatelessWidget
-  with DefaultScreenSetupHelpersMixin {
+
+class ProfileScreen extends StatefulWidget {
 
   final String profileId;
 
@@ -15,6 +15,21 @@ class ProfileScreen extends StatelessWidget
     required this.profileId,
     super.key,
   });
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>
+  with DefaultScreenSetupHelpersMixin {
+
+  @override
+  initState() {
+    BlocProvider.of<ProfileBloc>(context).add(
+      ProfileEvent.validateProfileStats(),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,5 +79,5 @@ class ProfileScreen extends StatelessWidget
       },
     );
   }
-
 }
+
