@@ -16,9 +16,11 @@ class Services {
   final HapticsService hapticsService;
   final ResourceResolver resourceResolver;
   final IdGeneratorService idGeneratorService;
+  final RemoteConfigService remoteConfigService;
 
   Services({
     required this.hapticsService,
+    required this.remoteConfigService,
     required this.resourceResolver,
     required SharedPreferences sharedPreferences,
     required FirebaseFirestore firebaseFirestore,

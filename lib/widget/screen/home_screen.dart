@@ -46,18 +46,16 @@ class HomeScreen extends StatelessWidget {
       ),
       extendBodyBehindAppBar: true,
       body: BlocBuilder<TimerSettingsBloc, TimerSettingsState>(
-          builder: (BuildContext context, TimerSettingsState state) {
-            switch (state) {
-              case TimerSettingsDataErrorState():
-                return const AppErrorDisplay();
-              case TimerSettingsDataLoadingState():
-                return const AppLoadingDisplay();
-              case TimerSettingsDataLoadedState():
-                return TimerSettingsView(
-                  timerSettings: state.timerSettings,
-                );
-            }
+        builder: (BuildContext context, TimerSettingsState state) {
+          switch (state) {
+            case TimerSettingsDataErrorState():
+              return const AppErrorDisplay();
+            case TimerSettingsDataLoadingState():
+              return const AppLoadingDisplay();
+            case TimerSettingsDataLoadedState():
+              return TimerSettingsView(timerSettings: state.timerSettings);
           }
+        }
       ),
     );
   }

@@ -179,6 +179,18 @@ abstract class AppLocalizations {
   /// **'Felkészülés'**
   String get warmup;
 
+  /// No description provided for @underMaintenanceTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Az alkalmazás karbantartás miatt nem elérhető'**
+  String get underMaintenanceTitle;
+
+  /// No description provided for @underMaintenanceBody.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kérlek nézz vissza később.'**
+  String get underMaintenanceBody;
+
   /// No description provided for @loading.
   ///
   /// In hu, this message translates to:

@@ -18,6 +18,8 @@
   "loading": "Loading...",
   "loadMore": "Load more",
   "pleaseWait": "Please wait",
+  "underMaintenanceTitle": "The application is under maintenance",
+  "underMaintenanceBody": "Please check back later.",
 
   "notAvailable": "Not available",
   "notAvailableAbbr": "N/A",

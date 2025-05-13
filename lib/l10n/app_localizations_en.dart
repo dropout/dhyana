@@ -51,6 +51,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get warmup => 'Warmup';
 
   @override
+  String get underMaintenanceTitle => 'The application is under maintenance';
+
+  @override
+  String get underMaintenanceBody => 'Please check back later.';
+
+  @override
   String get loading => 'Loading...';
 
   @override

@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 Curve _curve = Curves.easeOut;
-int _interval = 32;
-int _duration = 640;
+const int _interval = 32; // in ms
+const int _duration = 640; // in ms
 
 extension RevealListAnimation on List<Widget> {
 
   List<Widget> revealListAnimation({
     double delay = 0.0,
+    int interval = _interval,
+    int duration = _duration,
   }) {
     return animate(
       delay: delay.ms,
-      interval: _interval.ms,
+      interval: interval.ms,
     ).fadeIn(
       curve: _curve,
-      duration: _duration.ms
+      duration: duration.ms
     );
   }
+
 }
 
 extension RevealWidgetAnimation on Widget {

@@ -29,7 +29,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   void didUpdateWidget(TimerSettingsView oldWidget) {
     if (widget.timerSettings != oldWidget.timerSettings) {
       BlocProvider.of<TimerSettingsBloc>(context).add(
-          TimerSettingsEvent.load(timerSettings: widget.timerSettings)
+        TimerSettingsEvent.load(timerSettings: widget.timerSettings)
       );
     }
     super.didUpdateWidget(oldWidget);

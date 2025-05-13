@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:dhyana/init/all.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 
-import 'init/init_result.dart';
 import 'widget/app.dart';
 
 void main() async {

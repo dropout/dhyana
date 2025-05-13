@@ -38,9 +38,13 @@ class Initializer {
     );
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     HapticsService hapticsService = await HapticsService.create();
+    RemoteConfigService remoteConfigService = await RemoteConfigService
+      .create(firebaseProvider.remoteConfig, firebaseProvider.crashlytics);
+
     Services services = Services(
       sharedPreferences: sharedPreferences,
       hapticsService: hapticsService,
+      remoteConfigService: remoteConfigService,
       firebaseAnalytics: firebaseProvider.analytics,
       firebaseCrashlytics: firebaseProvider.crashlytics,
       firebaseFirestore: firebaseProvider.firestore,

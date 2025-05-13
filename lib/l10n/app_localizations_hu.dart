@@ -51,6 +51,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get warmup => 'Felkészülés';
 
   @override
+  String get underMaintenanceTitle => 'Az alkalmazás karbantartás miatt nem elérhető';
+
+  @override
+  String get underMaintenanceBody => 'Kérlek nézz vissza később.';
+
+  @override
   String get loading => 'Betöltés...';
 
   @override

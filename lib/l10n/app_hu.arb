@@ -14,6 +14,8 @@
 
   "okay": "Rendben",
   "warmup": "Felkészülés",
+  "underMaintenanceTitle": "Az alkalmazás karbantartás miatt nem elérhető",
+  "underMaintenanceBody": "Kérlek nézz vissza később.",
 
   "loading": "Betöltés...",
   "loadMore": "Több betöltése",
