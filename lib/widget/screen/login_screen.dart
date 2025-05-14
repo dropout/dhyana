@@ -1,8 +1,8 @@
+import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/util/launch_url.dart';
@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
           backgroundColor: backgroundColor,
           body: body,
           extendBodyBehindAppBar: true,
-          appBar: const CustomAppBar(
+          appBar: CustomAppBar(
             leading: CustomBackButton(),
           ),
         );
@@ -113,15 +113,6 @@ class LoginScreen extends StatelessWidget {
                 buildLegalText(context),
               ]
             ),
-            // const Positioned(
-            //   top: AppThemeData.spacingMd,
-            //   left: AppThemeData.spacingMd,
-            //   child: SizedBox(
-            //     width: 40,
-            //     height: 40,
-            //     child: CustomBackButton()
-            //   ),
-            // ),
           ],
         ),
       );
@@ -142,28 +133,29 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget buildHeadline(BuildContext context) {
+
+
+
     TextStyle textStyle = Theme.of(context).textTheme.displayLarge!.copyWith(
       fontWeight: FontWeight.bold,
       color: Colors.black,
     );
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(AppLocalizations.of(context).loginHeadline1, style: textStyle),
-          Text(AppLocalizations.of(context).loginHeadline2, style: textStyle),
-          Text(AppLocalizations.of(context).loginHeadline3, style: textStyle),
-        ].animate(
-          delay: 128.ms,
-          interval: 256.ms,
-        ).fadeIn(
-          curve: Curves.easeOutExpo,
-          duration: 768.ms
-        ).moveY(
-          begin: -24,
-          end: 0,
-          curve: Curves.easeOutExpo,
-          duration: 768.ms,
+      children: [
+        LoginHeadlineTextEffect(
+          text: AppLocalizations.of(context).loginHeadline1,
+          textStyle: textStyle,
         ),
+        LoginHeadlineTextEffect(
+          text: AppLocalizations.of(context).loginHeadline2,
+          textStyle: textStyle,
+        ),
+        LoginHeadlineTextEffect(
+          text: AppLocalizations.of(context).loginHeadline3,
+          textStyle: textStyle,
+        ),
+      ]
     );
   }
 
@@ -201,7 +193,7 @@ class LoginScreen extends StatelessWidget {
         textAlign: TextAlign.center,
         text: TextSpan(
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              height: 1.5
+            height: 1.5
           ),
           children: [
             TextSpan(
@@ -211,6 +203,7 @@ class LoginScreen extends StatelessWidget {
               text: AppLocalizations.of(context).loginLegalPart2,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () => _onTermsTap(context),
@@ -222,6 +215,7 @@ class LoginScreen extends StatelessWidget {
               text: AppLocalizations.of(context).loginLegalPart4,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () => _onPrivacyTap(context),
@@ -233,4 +227,119 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+}
+
+class LoginHeadlineTextEffect extends StatefulWidget {
+
+  final String text;
+  final TextStyle textStyle;
+  final Duration initialDelay;
+
+  const LoginHeadlineTextEffect({
+    required this.text,
+    required this.textStyle,
+    this.initialDelay = Duration.zero,
+    super.key,
+  });
+
+  @override
+  State<LoginHeadlineTextEffect> createState() => _LoginHeadlineTextEffectState();
+}
+
+class _LoginHeadlineTextEffectState extends State<LoginHeadlineTextEffect>
+with SingleTickerProviderStateMixin {
+
+  late final AnimationController animController;
+  late final List<Animation<double>> _opacities;
+  late final List<AnimDto> data;
+
+  @override
+  void initState() {
+    animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    );
+
+    data = List.generate(widget.text.length, (i) => AnimDto(
+      index: i,
+      letter: widget.text[i],
+    ));
+
+    // Calculate the interval step based on the number of segments and overlap factor
+    final double intervalStep = 1.0 / data.length;
+
+    // Create opacity animations for each text segment
+    _opacities = data.map((item) {
+      return Tween<double>(begin: 0.0, end: 1.0).animate(
+        curvedAnimation(
+          animController,
+          item.index,
+          intervalStep,
+          0.1,
+          curve: Curves.easeIn,
+        ),
+      );
+    }).toList();
+
+    Future.delayed(widget.initialDelay, () {
+      animController.forward();
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: animController,
+      builder: (context, child) {
+        return RichText(
+          text: TextSpan(
+            children: data.map((d) {
+              return WidgetSpan(
+                child: Opacity(
+                  opacity: _opacities[d.index].value,
+                  child: Text(
+                    d.letter,
+                    style: widget.textStyle,
+                  ),
+                ),
+              );
+            }).toList(),
+          )
+        );
+      }
+    );
+  }
+
+}
+
+class AnimDto {
+  final int index;
+  final String letter;
+
+  const AnimDto({
+    required this.index,
+    required this.letter,
+  }) : assert(letter.length == 1, 'letter must be a single character');
+
+}
+
+CurvedAnimation curvedAnimation(
+  AnimationController controller,
+  int index,
+  double intervalStep,
+  double overlapFactor, {
+  Curve curve = Curves.easeInOut,
+}) {
+  double start = index * intervalStep * (1 - overlapFactor); // start before the previous animation finishes
+  double end = start + intervalStep; // finishes its own step
+  return CurvedAnimation(
+    parent: controller,
+    curve: Interval(
+      start.clamp(0.0, 1.0), // Ensure the interval stays within bounds
+      end.clamp(0.0, 1.0),
+      curve: curve,
+    ),
+  );
 }
