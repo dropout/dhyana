@@ -92,6 +92,7 @@ class _CustomBackButtonState extends State<CustomBackButton>
         onTap: () => _onTap(context),
         onTapDown: (_) => _onTapDown(context),
         child: SizedBox.square(
+          dimension: 48,
           child: DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
