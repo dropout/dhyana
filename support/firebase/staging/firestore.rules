@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+  
+  function isAuthenticated() {
+    return request.auth != null;
+	}
+
+  
+  
+  match /{document=**} {
+    allow create, read, write, update, delete: if isAuthenticated();
+  }
+
+
+//     function isUpdateToOpenField(attr) {
+//       return request.resource.data.diff(resource.data).affectedKeys().hasOnly([attr]);
+//     }
+
+//     function isAdmin() {
+//       return request.auth != null && request.auth.token.admin == true;
+//     }
+
+//     allow create, read, write, update, delete: if isAdmin();
+
+//     match /articles/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow update: if isUpdateToOpenField('playCount');
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+
+//     match /authors/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+
+//     match /authorArticles/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+
+//     match /categoryArticles/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+
+// 		match /categories/{document=**} {
+// 		  allow read: if true;
+// 		  allow write: if false;
+// 		  allow create, read, write, update, delete: if isAdmin();
+// 		}
+
+//     match /sounds/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+    
+//     match /tags/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+    
+//     match /tagArticles/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+    
+//     match /articleTags/{document=**} {
+//       allow read: if true;
+//       allow write: if false;
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+
+//     match /profiles/{profileId} {
+//       allow read: if request.auth != null;
+//       allow create, write: if request.auth != null && request.auth.uid == profileId;
+
+//       match /sessions/{document=**} {
+//         allow create, read, write: if request.auth != null && request.auth.uid == profileId;
+//       }
+
+//       allow create, read, write, update, delete: if isAdmin();
+//     }
+
+	}
+  
+}
