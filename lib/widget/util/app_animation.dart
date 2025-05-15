@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 Curve _curve = Curves.easeOut;
@@ -52,6 +53,25 @@ extension RevealWidgetAnimation on Widget {
 
 }
 
+class SpringCurve extends Curve {
+  @override
+  double transform(double t) {
+    // A SpringSimulation that will simulate spring physics.
+    final simulation = SpringSimulation(
+      const SpringDescription(
+        mass: 1,
+        stiffness: 120, // Stiffness of the spring
+        damping: 30, // Damping to control oscillation
+      ),
+      0, // Initial position
+      1, // Target position
+      0, // Initial velocity
+    );
+
+    return simulation.x(t); // The position of the spring at time t
+  }
+}
+
 Widget animatedSwitcherTransition(
   Widget child,
   Animation<double> animation,
@@ -68,4 +88,17 @@ Widget animatedSwitcherTransition(
     ),
     child: child,
   );
+}
+
+(double, List<double>) calculateIntervals({
+  int intervalCount = 10,
+  double overlapFactor = 0.0,
+}) {
+  double intervalLength = 1.0 / (intervalCount - overlapFactor * (intervalCount - 1));
+
+  List<double> startTimes = List.generate(intervalCount, (index) {
+    return index * intervalLength * (1 - overlapFactor);
+  });
+
+  return (intervalLength, startTimes);
 }

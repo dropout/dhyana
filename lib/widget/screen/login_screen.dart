@@ -1,6 +1,7 @@
 import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/widget/util/app_animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,27 +134,34 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget buildHeadline(BuildContext context) {
-
-
-
     TextStyle textStyle = Theme.of(context).textTheme.displayLarge!.copyWith(
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w900,
+      fontSize: 80,
       color: Colors.black,
+      height: .9,
     );
+
+    Duration letterDuration = const Duration(milliseconds: 500);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LoginHeadlineTextEffect(
           text: AppLocalizations.of(context).loginHeadline1,
           textStyle: textStyle,
+          duration: letterDuration * 3,
         ),
         LoginHeadlineTextEffect(
           text: AppLocalizations.of(context).loginHeadline2,
           textStyle: textStyle,
+          duration: letterDuration * 3,
+          initialDelay: const Duration(milliseconds: 250),
         ),
         LoginHeadlineTextEffect(
           text: AppLocalizations.of(context).loginHeadline3,
           textStyle: textStyle,
+          duration: letterDuration * 4,
+          initialDelay: const Duration(milliseconds: 500),
         ),
       ]
     );
@@ -233,11 +241,13 @@ class LoginHeadlineTextEffect extends StatefulWidget {
 
   final String text;
   final TextStyle textStyle;
+  final Duration duration;
   final Duration initialDelay;
 
   const LoginHeadlineTextEffect({
     required this.text,
     required this.textStyle,
+    this.duration = const Duration(seconds: 2),
     this.initialDelay = Duration.zero,
     super.key,
   });
@@ -251,32 +261,35 @@ with SingleTickerProviderStateMixin {
 
   late final AnimationController animController;
   late final List<Animation<double>> _opacities;
-  late final List<AnimDto> data;
+  late final List<_AnimDto> data;
 
   @override
   void initState() {
     animController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: widget.duration,
     );
 
-    data = List.generate(widget.text.length, (i) => AnimDto(
+    data = List.generate(widget.text.length, (i) => _AnimDto(
       index: i,
       letter: widget.text[i],
     ));
 
-    // Calculate the interval step based on the number of segments and overlap factor
-    final double intervalStep = 1.0 / data.length;
+    final intervalData = calculateIntervals(
+      intervalCount: data.length,
+      overlapFactor: 0.75,
+    );
 
     // Create opacity animations for each text segment
     _opacities = data.map((item) {
       return Tween<double>(begin: 0.0, end: 1.0).animate(
-        curvedAnimation(
-          animController,
-          item.index,
-          intervalStep,
-          0.1,
-          curve: Curves.easeIn,
+        CurvedAnimation(
+          parent: animController,
+          curve: Interval(
+            intervalData.$2[item.index],
+            intervalData.$2[item.index] + intervalData.$1,
+            curve: Curves.easeIn,
+          ),
         ),
       );
     }).toList();
@@ -292,7 +305,7 @@ with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animController,
-      builder: (context, child) {
+      builder: (context, _) {
         return RichText(
           text: TextSpan(
             children: data.map((d) {
@@ -302,44 +315,25 @@ with SingleTickerProviderStateMixin {
                   child: Text(
                     d.letter,
                     style: widget.textStyle,
-                  ),
+                  )
                 ),
               );
             }).toList(),
           )
         );
-      }
+      },
     );
   }
 
 }
 
-class AnimDto {
+class _AnimDto {
   final int index;
   final String letter;
 
-  const AnimDto({
+  const _AnimDto({
     required this.index,
     required this.letter,
   }) : assert(letter.length == 1, 'letter must be a single character');
 
-}
-
-CurvedAnimation curvedAnimation(
-  AnimationController controller,
-  int index,
-  double intervalStep,
-  double overlapFactor, {
-  Curve curve = Curves.easeInOut,
-}) {
-  double start = index * intervalStep * (1 - overlapFactor); // start before the previous animation finishes
-  double end = start + intervalStep; // finishes its own step
-  return CurvedAnimation(
-    parent: controller,
-    curve: Interval(
-      start.clamp(0.0, 1.0), // Ensure the interval stays within bounds
-      end.clamp(0.0, 1.0),
-      curve: curve,
-    ),
-  );
 }
