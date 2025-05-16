@@ -25,7 +25,10 @@ class ProfileButton extends StatelessWidget {
 
   void _signedInTap(BuildContext context, Profile profile) {
     if (profile.completed) {
-      ProfileRoute(profileId: profile.id).push(context);
+      ProfileRoute(
+        profileId: profile.id,
+        $extra: profile
+      ).push(context);
     } else {
       ProfileWizardRoute(profileId: profile.id).push(context);
     }

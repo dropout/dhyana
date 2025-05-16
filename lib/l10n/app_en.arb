@@ -113,6 +113,7 @@
   "statsLoadingData": "Loading data...",
 
   "signOut": "Signout",
+  "signOutSuccessfulMessage": "Successfully signed out!",
   "profileSignoutTitle": "Signout",
   "profileSignoutQuestion": "Are you sure you want to sign out?",
   "profileSignoutYes": "Yes",

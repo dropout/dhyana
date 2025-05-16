@@ -4,6 +4,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -71,10 +72,20 @@ Widget _getSignoutDialog(BuildContext context) {
 
           // do the signout
           authBloc.add(const SignOut());
-          profileBloc.add(const ProfileEvent.clearData());
-          const HomeRoute().go(context);
+
           context.hapticsTap();
           context.logEvent(name: 'profile_signout_pressed');
+
+          Future.delayed(Durations.medium1, () {
+            if (context.mounted) {
+              context.showSuccessfulToast(
+                  AppLocalizations.of(context).signOutSuccessfulMessage
+              );
+            }
+          });
+
+          const HomeRoute().go(context);
+          profileBloc.add(const ProfileEvent.clearData());
         },
       ),
     ],

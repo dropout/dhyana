@@ -665,6 +665,12 @@ abstract class AppLocalizations {
   /// **'Kijelentkezés'**
   String get signOut;
 
+  /// No description provided for @signOutSuccessfulMessage.
+  ///
+  /// In hu, this message translates to:
+  /// **'Sikeresen kijelentkeztél!'**
+  String get signOutSuccessfulMessage;
+
   /// No description provided for @profileSignoutTitle.
   ///
   /// In hu, this message translates to:

@@ -318,6 +318,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get signOut => 'Kijelentkezés';
 
   @override
+  String get signOutSuccessfulMessage => 'Sikeresen kijelentkeztél!';
+
+  @override
   String get profileSignoutTitle => 'Kijelentkezés';
 
   @override

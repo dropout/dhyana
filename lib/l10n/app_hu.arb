@@ -114,6 +114,7 @@
   "statsLoadingData": "Adatok betöltése...",
 
   "signOut": "Kijelentkezés",
+  "signOutSuccessfulMessage": "Sikeresen kijelentkeztél!",
   "profileSignoutTitle": "Kijelentkezés",
   "profileSignoutQuestion": "Biztos, hogy ki akarsz jelentkezni?",
   "profileSignoutYes": "Igen",

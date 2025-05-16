@@ -5,6 +5,8 @@ class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.loadProfile({
     required String profileId,
+    /// Optional. If given does not trigger loading from repository.
+    Profile? profile,
     void Function(Profile)? onComplete,
     void Function(Object?, StackTrace)? onError,
   }) = LoadProfile;

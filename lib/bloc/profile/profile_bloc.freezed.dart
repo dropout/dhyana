@@ -20,6 +20,7 @@ mixin _$ProfileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String profileId,
+            Profile? profile,
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         loadProfile,
@@ -37,7 +38,10 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult? Function(
@@ -54,7 +58,10 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult Function(
@@ -129,8 +136,11 @@ abstract class _$$LoadProfileImplCopyWith<$Res> {
   @useResult
   $Res call(
       {String profileId,
+      Profile? profile,
       void Function(Profile)? onComplete,
       void Function(Object?, StackTrace)? onError});
+
+  $ProfileCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -147,6 +157,7 @@ class __$$LoadProfileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? profileId = null,
+    Object? profile = freezed,
     Object? onComplete = freezed,
     Object? onError = freezed,
   }) {
@@ -155,6 +166,10 @@ class __$$LoadProfileImplCopyWithImpl<$Res>
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as String,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
       onComplete: freezed == onComplete
           ? _value.onComplete
           : onComplete // ignore: cast_nullable_to_non_nullable
@@ -165,16 +180,34 @@ class __$$LoadProfileImplCopyWithImpl<$Res>
               as void Function(Object?, StackTrace)?,
     ));
   }
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res>? get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+
+    return $ProfileCopyWith<$Res>(_value.profile!, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$LoadProfileImpl implements LoadProfile {
   const _$LoadProfileImpl(
-      {required this.profileId, this.onComplete, this.onError});
+      {required this.profileId, this.profile, this.onComplete, this.onError});
 
   @override
   final String profileId;
+
+  /// Optional. If given does not trigger loading from repository.
+  @override
+  final Profile? profile;
   @override
   final void Function(Profile)? onComplete;
   @override
@@ -182,7 +215,7 @@ class _$LoadProfileImpl implements LoadProfile {
 
   @override
   String toString() {
-    return 'ProfileEvent.loadProfile(profileId: $profileId, onComplete: $onComplete, onError: $onError)';
+    return 'ProfileEvent.loadProfile(profileId: $profileId, profile: $profile, onComplete: $onComplete, onError: $onError)';
   }
 
   @override
@@ -192,13 +225,15 @@ class _$LoadProfileImpl implements LoadProfile {
             other is _$LoadProfileImpl &&
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.onComplete, onComplete) ||
                 other.onComplete == onComplete) &&
             (identical(other.onError, onError) || other.onError == onError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, profileId, onComplete, onError);
+  int get hashCode =>
+      Object.hash(runtimeType, profileId, profile, onComplete, onError);
 
   /// Create a copy of ProfileEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -213,6 +248,7 @@ class _$LoadProfileImpl implements LoadProfile {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String profileId,
+            Profile? profile,
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         loadProfile,
@@ -227,13 +263,16 @@ class _$LoadProfileImpl implements LoadProfile {
     required TResult Function() clearData,
     required TResult Function() validateProfileStats,
   }) {
-    return loadProfile(profileId, onComplete, onError);
+    return loadProfile(profileId, profile, onComplete, onError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult? Function(
@@ -247,13 +286,16 @@ class _$LoadProfileImpl implements LoadProfile {
     TResult? Function()? clearData,
     TResult? Function()? validateProfileStats,
   }) {
-    return loadProfile?.call(profileId, onComplete, onError);
+    return loadProfile?.call(profileId, profile, onComplete, onError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult Function(
@@ -269,7 +311,7 @@ class _$LoadProfileImpl implements LoadProfile {
     required TResult orElse(),
   }) {
     if (loadProfile != null) {
-      return loadProfile(profileId, onComplete, onError);
+      return loadProfile(profileId, profile, onComplete, onError);
     }
     return orElse();
   }
@@ -318,10 +360,14 @@ class _$LoadProfileImpl implements LoadProfile {
 abstract class LoadProfile implements ProfileEvent {
   const factory LoadProfile(
       {required final String profileId,
+      final Profile? profile,
       final void Function(Profile)? onComplete,
       final void Function(Object?, StackTrace)? onError}) = _$LoadProfileImpl;
 
   String get profileId;
+
+  /// Optional. If given does not trigger loading from repository.
+  Profile? get profile;
   void Function(Profile)? get onComplete;
   void Function(Object?, StackTrace)? get onError;
 
@@ -472,6 +518,7 @@ class _$UpdateProfileImpl implements UpdateProfile {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String profileId,
+            Profile? profile,
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         loadProfile,
@@ -493,7 +540,10 @@ class _$UpdateProfileImpl implements UpdateProfile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult? Function(
@@ -514,7 +564,10 @@ class _$UpdateProfileImpl implements UpdateProfile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult Function(
@@ -642,6 +695,7 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String profileId,
+            Profile? profile,
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         loadProfile,
@@ -662,7 +716,10 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult? Function(
@@ -682,7 +739,10 @@ class _$ProfileErrorOccuredImpl implements ProfileErrorOccured {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult Function(
@@ -791,6 +851,7 @@ class _$ClearProfileDataImpl implements ClearProfileData {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String profileId,
+            Profile? profile,
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         loadProfile,
@@ -811,7 +872,10 @@ class _$ClearProfileDataImpl implements ClearProfileData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult? Function(
@@ -831,7 +895,10 @@ class _$ClearProfileDataImpl implements ClearProfileData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult Function(
@@ -941,6 +1008,7 @@ class _$ValidateProfileStatsImpl implements ValidateProfileStats {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String profileId,
+            Profile? profile,
             void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)
         loadProfile,
@@ -961,7 +1029,10 @@ class _$ValidateProfileStatsImpl implements ValidateProfileStats {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String profileId, void Function(Profile)? onComplete,
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult? Function(
@@ -981,7 +1052,10 @@ class _$ValidateProfileStatsImpl implements ValidateProfileStats {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String profileId, void Function(Profile)? onComplete,
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
             void Function(Object?, StackTrace)? onError)?
         loadProfile,
     TResult Function(

@@ -109,12 +109,15 @@ mixin AuthRedirectHook {
 )
 class ProfileRoute extends GoRouteData with AuthRedirectHook {
   final String profileId;
+  final Profile? $extra;
   const ProfileRoute({
     required this.profileId,
+    this.$extra,
   });
+
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileScreen(profileId: profileId);
+    ProfileScreen(profileId: profileId, profile: $extra);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);

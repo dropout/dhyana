@@ -318,6 +318,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signOut => 'Signout';
 
   @override
+  String get signOutSuccessfulMessage => 'Successfully signed out!';
+
+  @override
   String get profileSignoutTitle => 'Signout';
 
   @override

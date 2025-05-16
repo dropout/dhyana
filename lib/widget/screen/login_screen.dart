@@ -141,7 +141,7 @@ class LoginScreen extends StatelessWidget {
       height: .9,
     );
 
-    Duration letterDuration = const Duration(milliseconds: 500);
+    Duration letterDuration = Durations.medium3;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -155,13 +155,13 @@ class LoginScreen extends StatelessWidget {
           text: AppLocalizations.of(context).loginHeadline2,
           textStyle: textStyle,
           duration: letterDuration * 3,
-          initialDelay: const Duration(milliseconds: 250),
+          initialDelay: Durations.medium1,
         ),
         LoginHeadlineTextEffect(
           text: AppLocalizations.of(context).loginHeadline3,
           textStyle: textStyle,
           duration: letterDuration * 4,
-          initialDelay: const Duration(milliseconds: 500),
+          initialDelay: Durations.long2,
         ),
       ]
     );
@@ -295,7 +295,9 @@ with SingleTickerProviderStateMixin {
     }).toList();
 
     Future.delayed(widget.initialDelay, () {
-      animController.forward();
+      if (mounted) {
+        animController.forward();
+      }
     });
 
     super.initState();
@@ -323,6 +325,12 @@ with SingleTickerProviderStateMixin {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    animController.dispose();
+    super.dispose();
   }
 
 }

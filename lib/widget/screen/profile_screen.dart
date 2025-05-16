@@ -1,18 +1,20 @@
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/profile/profile_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class ProfileScreen extends StatefulWidget {
 
   final String profileId;
+  final Profile? profile;
 
   const ProfileScreen({
     required this.profileId,
+    this.profile,
     super.key,
   });
 
@@ -26,7 +28,10 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   initState() {
     BlocProvider.of<ProfileBloc>(context).add(
-      ProfileEvent.validateProfileStats(),
+      ProfileEvent.loadProfile(
+        profileId: widget.profileId,
+        profile: widget.profile,
+      ),
     );
     super.initState();
   }
@@ -39,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           case ProfileLoadingState():
             return DefaultScreenSetup(
               enableScrolling: false,
-              title: AppLocalizations.of(context).profile,
+              title: '',
               slivers: [
                 buildLoadingSliver(context)
               ],
@@ -69,11 +74,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                 buildErrorSliver(context),
               ],
             );
-          default:
+          case ProfileStateInitial():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).profile,
-              slivers: [],
               enableScrolling: false,
+              title: '',
             );
         }
       },
