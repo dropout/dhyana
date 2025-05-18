@@ -41,7 +41,7 @@ export default beforeUserCreated(async (event:AuthBlockingEvent) => {
         },
         milestoneProgress: {
           completedDaysCount: 0,
-          targetDaysCount: 0,
+          targetDaysCount: 7,
           sessions: [],
         },
         milestoneCount: 0,
