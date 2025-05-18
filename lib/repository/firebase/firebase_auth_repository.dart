@@ -1,7 +1,4 @@
-import 'package:dhyana/model/profile_statistics_report.dart';
-import 'package:dhyana/util/default_profile_data.dart';
 import 'package:logger/logger.dart';
-import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/data_provider/profile_data_provider.dart';
 import 'package:dhyana/repository/auth_repository.dart';
@@ -14,14 +11,6 @@ class FirebaseAuthRepository implements AuthRepository {
   final AuthProvider authDataProvider;
   final ProfileDataProvider profileDataProvider;
 
-  /*
-    The profile is created while signing in for the first time.
-    If authStateChange or userChange stream data is received before
-    finsihing creating a profile, an error is occurred.
-    This flag is used to guard the process from the stream events when sign
-    in pressed and to rely on the signin method direct result not the change
-    might be coming from the streams.
-   */
   bool _isSigningIn = false;
 
   FirebaseAuthRepository({
@@ -49,14 +38,11 @@ class FirebaseAuthRepository implements AuthRepository {
     _isSigningIn = true;
     SigninResult signinResult =
       await authDataProvider.signIn(signinMethodType);
-    bool isFirst = isFirstSignin(signinResult);
-    if (isFirst) {
-      logger.t('First time signing in, creating profile...');
-      await _createProfile(signinResult);
-    }
+    // Insert profile creation here if cannot use Google Cloud Identity Provider
+    // blocking function
     _isSigningIn = false;
     // End of guarding operations
-    return (signinResult.user, isFirst);
+    return (signinResult.user, isFirstSignin(signinResult));
   }
 
   @override
@@ -67,21 +53,6 @@ class FirebaseAuthRepository implements AuthRepository {
   @override
   Future<void> deleteUser() async {
     return authDataProvider.deleteUser();
-  }
-
-  Future<void> _createProfile(SigninResult signinResult) async {
-    Profile profile = Profile(
-      id: signinResult.user.uid,
-      firstName: '',
-      lastName: signinResult.user.displayName ?? '',
-      email: signinResult.user.email ?? '',
-      photoUrl: DefaultProfileData.photoUrl,
-      photoBlurhash: DefaultProfileData.photoBlurhash,
-      signupDate: DateTime.now(),
-      statsReport: const ProfileStatisticsReport(),
-      completed: false,
-    );
-    await profileDataProvider.create(profile);
   }
 
 }
