@@ -38,28 +38,30 @@ class AppErrorDisplay extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16.0),
       color: Theme.of(context).colorScheme.error,
-      child: Stack(
-          fit: StackFit.expand,
-          clipBehavior: Clip.none,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_rounded,
-                  color: Theme.of(context).colorScheme.onError,
-                  size: 96,
-                ),
-                const SizedBox(height: AppThemeData.spacingMd),
-                _buildHeadLine(context, headlineFinal),
-                const SizedBox(height: AppThemeData.spacingSm),
-                _buildText(context, textFinal),
-              ]
-            ),
-            if (onButtonTap != null) _buildButton(context, buttonTextFinal),
-          ]
+      child: SafeArea(
+        top: false,
+        child: Stack(
+            fit: StackFit.expand,
+            clipBehavior: Clip.none,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_rounded,
+                    color: Theme.of(context).colorScheme.onError,
+                    size: 96,
+                  ),
+                  const SizedBox(height: AppThemeData.spacingMd),
+                  _buildHeadLine(context, headlineFinal),
+                  const SizedBox(height: AppThemeData.spacingSm),
+                  _buildText(context, textFinal),
+                ]
+              ),
+              if (onButtonTap != null) _buildButton(context, buttonTextFinal),
+            ]
+        ),
       ),
     );
 
@@ -87,11 +89,17 @@ class AppErrorDisplay extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context, String buttonText) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: AppButton(
-        onTap: () => _handleButtonTap(context),
-        text: buttonText,
+    return Positioned(
+      left: 0,
+      right: 0,
+      bottom: AppThemeData.spacingXl,
+      child: Center(
+        child: AppButton(
+          bColor: Theme.of(context).colorScheme.onError,
+          fColor: Theme.of(context).colorScheme.error,
+          onTap: () => _handleButtonTap(context),
+          text: buttonText.toUpperCase(),
+        ),
       ),
     );
   }
