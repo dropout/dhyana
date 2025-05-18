@@ -120,6 +120,17 @@
   "profileSignoutYes": "Igen",
   "profileSignoutCancel": "Mégsem",
 
+  "profileDeleteTitle": "Profil törlése",
+  "profileDeleteQuestion": "Biztos, hogy törölni szeretnéd a profilodat?",
+  "profileDeleteYes": "Törlés",
+  "profileDeleteCancel": "Mégsem",
+
+  "deleteProfileScreenTitle": "Profil törlése!",
+  "deleteProfileScreenText": "Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.",
+
+  "deleteProfileScreenSuccessTitle": "A profilodat töröltük!",
+  "deleteProfileScreenOkayButtonText": "Rendben",
+
   "presence": "Jelenlét",
   "presenceScreenSubTitle": "Mozgasd a csuszkát a jelenlét időkeretének beállításához.",
 

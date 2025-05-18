@@ -132,7 +132,7 @@ class ProfileWizardRoute extends GoRouteData with AuthRedirectHook {
   const ProfileWizardRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileWizardScreen();
+    ProfileWizardScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
@@ -162,6 +162,20 @@ class ProfileEditRoute extends GoRouteData with AuthRedirectHook {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
     const ProfileEditScreen();
+  @override
+  String? redirect(BuildContext context, GoRouterState state) =>
+    authRedirectHook(context, state);
+}
+
+@TypedGoRoute<DeleteProfileRoute>(
+  path: '/deleteProfile',
+  name: 'DELETE_PROFILE',
+)
+class DeleteProfileRoute extends GoRouteData with AuthRedirectHook {
+  const DeleteProfileRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+    const DeleteProfileScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);

@@ -1,6 +1,12 @@
 export 'auth/auth_bloc.dart';
+export 'days/days_bloc.dart';
+export 'delete_user/delete_user_bloc.dart';
+export 'months/months_bloc.dart';
+export 'presence/presence_bloc.dart';
 export 'profile/profile_bloc.dart';
-export 'stats_interval/stats_interval_bloc.dart';
+export 'session_logger/session_logger_bloc.dart';
 export 'sessions/sessions_bloc.dart';
 export 'timer/timer_bloc.dart';
 export 'timer_settings/timer_settings_bloc.dart';
+export 'weeks/weeks_bloc.dart';
+export 'years/years_bloc.dart';

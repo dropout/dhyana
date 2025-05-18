@@ -10,6 +10,10 @@ import 'model.dart';
 part 'profile.freezed.dart';
 part 'profile.g.dart';
 
+// When editing profile make sure to check the profile model
+// in firebase functions, because thats where the
+// initial profile db record is created.
+
 @freezed
 class Profile with _$Profile implements Model {
 

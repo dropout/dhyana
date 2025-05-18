@@ -119,6 +119,17 @@
   "profileSignoutYes": "Yes",
   "profileSignoutCancel": "No",
 
+  "profileDeleteTitle": "Delete profile",
+  "profileDeleteQuestion": "Are you sure you want to delete your profile?",
+  "profileDeleteYes": "Delete",
+  "profileDeleteCancel": "Cancel",
+
+  "deleteProfileScreenTitle": "Delete profile!",
+  "deleteProfileScreenText": "To delete your profile, you need to sign in again for security reasons.",
+
+  "deleteProfileScreenSuccessTitle": "Your profile\nhas been deleted!",
+  "deleteProfileScreenOkayButtonText": "Okay",
+
   "presence": "Presence",
   "presenceScreenSubTitle": "Move the slider to adjust presence timerframe.",
 

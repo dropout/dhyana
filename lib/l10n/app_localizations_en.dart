@@ -333,6 +333,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSignoutCancel => 'No';
 
   @override
+  String get profileDeleteTitle => 'Delete profile';
+
+  @override
+  String get profileDeleteQuestion => 'Are you sure you want to delete your profile?';
+
+  @override
+  String get profileDeleteYes => 'Delete';
+
+  @override
+  String get profileDeleteCancel => 'Cancel';
+
+  @override
+  String get deleteProfileScreenTitle => 'Delete profile!';
+
+  @override
+  String get deleteProfileScreenText => 'To delete your profile, you need to sign in again for security reasons.';
+
+  @override
+  String get deleteProfileScreenSuccessTitle => 'Your profile\nhas been deleted!';
+
+  @override
+  String get deleteProfileScreenOkayButtonText => 'Okay';
+
+  @override
   String get presence => 'Presence';
 
   @override

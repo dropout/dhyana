@@ -8,6 +8,10 @@ import 'milestone_progress.dart';
 part 'profile_statistics_report.freezed.dart';
 part 'profile_statistics_report.g.dart';
 
+// When editing profile make sure to check the profile model
+// in firebase functions, because thats where the
+// initial profile db record is created.
+
 @freezed
 class ProfileStatisticsReport with _$ProfileStatisticsReport {
 

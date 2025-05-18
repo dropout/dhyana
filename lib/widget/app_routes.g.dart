@@ -14,6 +14,7 @@ List<RouteBase> get $appRoutes => [
       $profileWizardRoute,
       $profileStatsRoute,
       $profileEditRoute,
+      $deleteProfileRoute,
       $sessionHistoryRoute,
       $timerSettingsHistoryRoute,
       $presenceRoute,
@@ -187,6 +188,30 @@ extension $ProfileEditRouteExtension on ProfileEditRoute {
 
   String get location => GoRouteData.$location(
         '/editProfile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $deleteProfileRoute => GoRouteData.$route(
+      path: '/deleteProfile',
+      name: 'DELETE_PROFILE',
+      factory: $DeleteProfileRouteExtension._fromState,
+    );
+
+extension $DeleteProfileRouteExtension on DeleteProfileRoute {
+  static DeleteProfileRoute _fromState(GoRouterState state) =>
+      const DeleteProfileRoute();
+
+  String get location => GoRouteData.$location(
+        '/deleteProfile',
       );
 
   void go(BuildContext context) => context.go(location);

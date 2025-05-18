@@ -333,6 +333,30 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileSignoutCancel => 'Mégsem';
 
   @override
+  String get profileDeleteTitle => 'Profil törlése';
+
+  @override
+  String get profileDeleteQuestion => 'Biztos, hogy törölni szeretnéd a profilodat?';
+
+  @override
+  String get profileDeleteYes => 'Törlés';
+
+  @override
+  String get profileDeleteCancel => 'Mégsem';
+
+  @override
+  String get deleteProfileScreenTitle => 'Profil törlése!';
+
+  @override
+  String get deleteProfileScreenText => 'Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.';
+
+  @override
+  String get deleteProfileScreenSuccessTitle => 'A profilodat töröltük!';
+
+  @override
+  String get deleteProfileScreenOkayButtonText => 'Rendben';
+
+  @override
   String get presence => 'Jelenlét';
 
   @override

@@ -37,6 +37,11 @@ class ProfileMenu extends StatelessWidget {
     context.hapticsTap();
   }
 
+  void _onDeleteProfileTapped(BuildContext context) {
+    showDeleteProfileDialog(context, profile);
+    context.hapticsTap();
+  }
+
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
@@ -76,6 +81,14 @@ class ProfileMenu extends StatelessWidget {
             ),
             onTap: () => _onSignoutTapped(context),
           ),
+          const Divider(height: 0),
+          _buildTile(
+            title: Text(
+              AppLocalizations.of(context).profileDeleteTitle,
+              style: textStyle,
+            ),
+            onTap: () => _onDeleteProfileTapped(context),
+          )
           // const Divider(height: 0),
         ],
       )

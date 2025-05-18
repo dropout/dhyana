@@ -695,6 +695,54 @@ abstract class AppLocalizations {
   /// **'Mégsem'**
   String get profileSignoutCancel;
 
+  /// No description provided for @profileDeleteTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profil törlése'**
+  String get profileDeleteTitle;
+
+  /// No description provided for @profileDeleteQuestion.
+  ///
+  /// In hu, this message translates to:
+  /// **'Biztos, hogy törölni szeretnéd a profilodat?'**
+  String get profileDeleteQuestion;
+
+  /// No description provided for @profileDeleteYes.
+  ///
+  /// In hu, this message translates to:
+  /// **'Törlés'**
+  String get profileDeleteYes;
+
+  /// No description provided for @profileDeleteCancel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mégsem'**
+  String get profileDeleteCancel;
+
+  /// No description provided for @deleteProfileScreenTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profil törlése!'**
+  String get deleteProfileScreenTitle;
+
+  /// No description provided for @deleteProfileScreenText.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.'**
+  String get deleteProfileScreenText;
+
+  /// No description provided for @deleteProfileScreenSuccessTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'A profilodat töröltük!'**
+  String get deleteProfileScreenSuccessTitle;
+
+  /// No description provided for @deleteProfileScreenOkayButtonText.
+  ///
+  /// In hu, this message translates to:
+  /// **'Rendben'**
+  String get deleteProfileScreenOkayButtonText;
+
   /// No description provided for @presence.
   ///
   /// In hu, this message translates to:

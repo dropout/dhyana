@@ -2,6 +2,7 @@ import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:dhyana/widget/screen/all.dart';
@@ -12,7 +13,12 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ProfileWizardScreen extends StatefulWidget {
 
-  const ProfileWizardScreen({super.key});
+  final String profileId;
+
+  const ProfileWizardScreen({
+    required this.profileId,
+    super.key
+  });
 
   @override
   State<ProfileWizardScreen> createState() => _ProfileWizardScreenState();
@@ -24,6 +30,14 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   LoadingState state = LoadingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
     GlobalKey<FormBuilderState>();
+
+  @override
+  void initState() {
+    BlocProvider.of<ProfileBloc>(context).add(
+      ProfileEvent.loadProfile(profileId: widget.profileId)
+    );
+    super.initState();
+  }
 
   void _onSave(BuildContext context, Profile profile) {
     FormBuilderState? formState = formStateKey.currentState;
@@ -83,6 +97,11 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
               context,
               DefaultScreenSetup(
                 title: AppLocalizations.of(context).profileWizardTitle,
+                enableTitleSliver: false,
+                backgroundColor: Theme.of(context).colorScheme.error,
+                appBarBackgroundColor: Theme.of(context).colorScheme.error,
+                backButton: CustomBackButton.light(),
+                titleColor: Colors.white,
                 enableScrolling: false,
                 enableScaffolding: false,
                 slivers: [

@@ -5,6 +5,10 @@ import 'package:flutter/foundation.dart';
 part 'consecutive_days.freezed.dart';
 part 'consecutive_days.g.dart';
 
+// When editing profile make sure to check the profile model
+// in firebase functions, because thats where the
+// initial profile db record is created.
+
 @freezed
 class ConsecutiveDays with _$ConsecutiveDays {
 

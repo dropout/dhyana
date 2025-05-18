@@ -94,6 +94,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             backgroundColor: widget.appBarBackgroundColor,
             titleColor: widget.titleColor,
             backButton: widget.backButton,
+            enableTitleSliver: widget.enableTitleSliver,
           ),
           if (widget.enablePullToRefresh) CupertinoSliverRefreshControl(
             refreshTriggerPullDistance: 200,
@@ -113,7 +114,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   Widget buildScaffolding(BuildContext context, Widget body) {
     if (widget.enableScaffolding) {
       return Scaffold(
-        backgroundColor: widget.backgroundColor ?? Theme.of(context).colorScheme.surface,
+        backgroundColor: widget.backgroundColor,
         body: body,
       );
     } else {
@@ -151,6 +152,7 @@ mixin DefaultScreenSetupHelpersMixin {
     Color? backgroundColor,
     Color? titleColor,
     Widget? backButton,
+    bool enableTitleSliver = true,
   }) {
     Widget? titleWidget;
     if (title != null) {
@@ -159,6 +161,7 @@ mixin DefaultScreenSetupHelpersMixin {
         title,
         titleOpacity: titleOpacity,
         color: titleColor,
+        enableTitleSliver: enableTitleSliver,
       );
     }
 
@@ -166,6 +169,7 @@ mixin DefaultScreenSetupHelpersMixin {
       centerTitle: false,
       elevation: 0,
       // stretch: true, // Not working?
+      backgroundColor: backgroundColor,
       floating: false,
       pinned: true,
       scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect
@@ -175,7 +179,9 @@ mixin DefaultScreenSetupHelpersMixin {
           top: AppThemeData.paddingSm,
           bottom: AppThemeData.paddingSm
         ),
-        child: backButton ?? CustomBackButton()
+        child: backButton ?? CustomBackButton(
+          backgroundColor: titleColor,
+        )
       ),
       leadingWidth: 56.0,
       title: titleWidget,
@@ -187,11 +193,24 @@ mixin DefaultScreenSetupHelpersMixin {
     String titleText, {
       double? titleOpacity,
       Color? color,
+      bool enableTitleSliver = true,
   }) {
+
+    Offset of;
+    double o;
+    if (titleOpacity == null || enableTitleSliver == false) {
+      of = Offset(0, 0);
+      o = 1.0;
+    } else {
+      of = Offset(0, AppThemeData.spacingSm * (1.0 - titleOpacity));
+      o = titleOpacity;
+    }
+
+
     return Transform.translate(
-      offset: Offset(0, AppThemeData.spacingSm * (1.0 - (titleOpacity ?? 1.0))),
+      offset: of,
       child: Opacity(
-        opacity: titleOpacity ?? 1.0,
+        opacity: o,
         child: Text(
           titleText,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(

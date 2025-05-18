@@ -1,5 +1,4 @@
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/bloc/session_logger/session_logger_bloc.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';

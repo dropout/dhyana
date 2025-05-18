@@ -1,5 +1,4 @@
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';

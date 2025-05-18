@@ -1,9 +1,12 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/profile/profile_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,8 +46,9 @@ class _ProfileScreenState extends State<ProfileScreen>
         switch (state) {
           case ProfileLoadingState():
             return DefaultScreenSetup(
+              title: AppLocalizations.of(context).profile,
               enableScrolling: false,
-              title: '',
+              enableTitleSliver: false,
               slivers: [
                 buildLoadingSliver(context)
               ],
@@ -66,12 +70,28 @@ class _ProfileScreenState extends State<ProfileScreen>
             return DefaultScreenSetup(
               title: AppLocalizations.of(context).profile,
               titleColor: Colors.white,
+              enableTitleSliver: false,
               backgroundColor: Theme.of(context).colorScheme.error,
               appBarBackgroundColor: Theme.of(context).colorScheme.error,
               backButton: CustomBackButton.light(),
               enableScrolling: false,
               slivers: [
-                buildErrorSliver(context),
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: AppErrorDisplay(
+                    onButtonTap: () {
+                      BlocProvider.of<AuthBloc>(context).add(
+                        AuthEvent.signOut(),
+                      );
+                      const HomeRoute().go(context);
+                      BlocProvider.of<ProfileBloc>(context).add(
+                        const ProfileEvent.clearData(),
+                      );
+                    },
+                    buttonText: AppLocalizations.of(context).signOut,
+                  ),
+                )
+                // buildErrorSliver(context),
               ],
             );
           case ProfileStateInitial():
