@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "dhyana-staging"
+  },
+  "targets": {},
+  "etags": {
+    "dhyana-staging": {
+      "extensionInstances": {
+        "delete-user-data": "6968f6c4c00741d6baf74ecf2ae6f0fbed443826a3784a7d1e5da8f796ed2f9a"
+      }
+    }
   }
 }

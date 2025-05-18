@@ -26,5 +26,7 @@
   "remoteconfig": {
     "template": "remoteconfig.template.json"
   },
-  "extensions": {}
+  "extensions": {
+    "delete-user-data": "firebase/delete-user-data@0.1.24"
+  }
 }
