@@ -118,7 +118,7 @@ void main() {
       ProfileStatisticsReport newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
-      expect(newStats.consecutiveDays.current, 0);
+      expect(newStats.consecutiveDays.current, 1);
       expect(newStats.completedMinutesCount, 0);
       expect(newStats.completedSessionsCount, 0);
       expect(newStats.completedDaysCount, 0);

@@ -43,11 +43,11 @@ class ProfileStatsReportUpdater {
 
     // Case 1:
     // When the last session was on the day before yesterday or earlier
-    // value should be set to 0 since the user missed a day and consecutive
-    // days are broken
+    // value should be set to 1 since the user missed a day and consecutive
+    // days are broken but with the current session the user is starting a new streak
     if (hasValidConsecutiveDays(lastSessionDate, currentSessionDate) == false) {
       logger.t('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
-      return 0;
+      return 1;
     }
 
     // Case 2:
