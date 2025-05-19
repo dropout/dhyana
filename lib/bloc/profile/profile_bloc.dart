@@ -37,7 +37,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileErrorOccured>(_onProfileLoadingErrorOccured);
     on<ClearProfileData>(_onClearProfileData);
     on<ValidateProfileStats>(_onValidateProfileStats);
-
   }
 
   void _onLoadProfile(LoadProfile event, emit) async {
@@ -48,6 +47,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profile = event.profile!;
       } else {
         logger.t('Loading profile: ${event.profileId}');
+        emit(const ProfileState.loading());
         profile = await profileRepository.read(event.profileId);
       }
 

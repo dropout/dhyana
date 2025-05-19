@@ -19,7 +19,6 @@ void main() {
   final FakeModelFactory fakeFactory = FakeModelFactory();
 
   late Profile profile;
-  // late Session session;
 
   late ProfileBloc profileBloc;
   late MockProfileRepository mockProfileRepository;
@@ -30,7 +29,6 @@ void main() {
 
   setUp(() {
     profile = fakeFactory.createProfile();
-    // session = fakeFactory.createSession();
 
     mockProfileRepository = MockProfileRepository();
     mockStatisticsRepository = MockStatisticsRepository();
@@ -47,7 +45,7 @@ void main() {
     );
 
     registerFallbackValue(fakeFactory.createProfile());
-    registerFallbackValue(fakeFactory.createSession());
+    registerFallbackValue(ProfileStatisticsReport());
   });
 
   tearDown(() {
@@ -60,9 +58,10 @@ void main() {
       'emits [ProfileState.loading(), ProfileState.loaded()] when LoadProfile is added',
       build: () {
         when(() => mockProfileRepository.read(any())).thenAnswer((_) async => profile);
+        when(() => mockProfileStatsUpdater.validateStatsReport(any())).thenReturn(profile.statsReport);
         return profileBloc;
       },
-      act: (bloc) => bloc.add(const LoadProfile(profileId: '1')),
+      act: (bloc) => bloc.add(const ProfileEvent.loadProfile(profileId: "1")),
       expect: () => [
         const ProfileState.loading(),
         ProfileState.loaded(profile: profile),
@@ -122,34 +121,6 @@ void main() {
         const ProfileState.initial(),
       ],
     );
-
-    // blocTest<ProfileBloc, ProfileState>(
-    //   'emits [ProfileState.loaded()] when LogSession is added',
-    //   build: () {
-    //     when(() => mockProfileRepository.read('1')).thenAnswer((_) async => profile);
-    //     when(() => mockIdGeneratorService.sessionId('1')).thenReturn('1');
-    //     // when(() => mockProfileStatsUpdater.updateProfileStatsReportWithNewSession(profile.statsReport, any())).thenReturn(profile.statsReport);
-    //     when(() => mockStatisticsRepository.logSession(profile, any())).thenAnswer((_) async {});
-    //     when(() => mockProfileRepository.update(profile)).thenAnswer((_) async => profile);
-    //     return profileBloc;
-    //   },
-    //   act: (bloc) => bloc.add(ProfileEvent.logSession(
-    //     profileId: '1',
-    //     startTime: DateTime(2000, 1, 1),
-    //     endTime: DateTime(2000, 1, 1).add(const Duration(hours: 1)),
-    //     duration: const Duration(hours: 1),
-    //     timerSettings: const TimerSettings(),
-    //   )),
-    //   expect: () => [
-    //     ProfileState.loaded(profile: profile),
-    //   ],
-    //   verify: (_) {
-    //     verify(() => mockProfileRepository.read('1')).called(1);
-    //     // verify(() => mockProfileStatsUpdater.updateProfileStatsReportWithNewSession(profile.statsReport, any())).called(1);
-    //     verify(() => mockStatisticsRepository.logSession(profile, any())).called(1);
-    //     verify(() => mockProfileRepository.update(profile)).called(1);
-    //   },
-    // );
 
   });
 }
