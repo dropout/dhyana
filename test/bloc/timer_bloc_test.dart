@@ -37,6 +37,7 @@ void main() async {
 
     late TimerBloc timerBloc;
     late TimerSettings defaultTimerSettings;
+    late DateTime startTime;
     late MockTimerServiceFactory mockTimerServiceFactory;
     late MockTimerService mockWarmupTimerService;
     late MockTimerService mockTimerService;
@@ -50,6 +51,7 @@ void main() async {
 
     setUp(() {
       defaultTimerSettings = TimerSettingsFactory.withUuid();
+      startTime = DateTime(2024,1,1,0,0,0);
 
       warmupTickerStreamController = StreamController();
       warmupFinishedStreamController = StreamController(sync: true);
@@ -119,10 +121,10 @@ void main() async {
 
     test('can close resources', () async {
       _stubTimerServiceFactory(
-          defaultTimerSettings,
-          mockTimerServiceFactory,
-          mockWarmupTimerService,
-          mockTimerService
+        defaultTimerSettings,
+        mockTimerServiceFactory,
+        mockWarmupTimerService,
+        mockTimerService
       );
       timerBloc = TimerBloc(
         timerSettings: defaultTimerSettings,
@@ -158,10 +160,10 @@ void main() async {
         act: (bloc) {
           // start
           when(() => mockWarmupTimerService.startTime)
-              .thenReturn(DateTime(2024,1,1,0,0,0));
+              .thenReturn(startTime);
           when(() => mockWarmupTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
 
           // pause
           when(() => mockWarmupTimerService.elapsedTime)
@@ -178,6 +180,7 @@ void main() async {
             timerStage: TimerStage.warmup,
             elapsedWarmupTime: Duration.zero,
             elapsedTime: Duration.zero,
+            startTime: startTime,
           ),
           TimerState(
             timerSettings: timerBloc.timerSettings,
@@ -185,6 +188,7 @@ void main() async {
             timerStage: TimerStage.warmup,
             elapsedWarmupTime: const Duration(seconds: 2),
             elapsedTime: Duration.zero,
+            startTime: startTime,
           ),
           TimerState(
             timerSettings: defaultTimerSettings,
@@ -192,6 +196,7 @@ void main() async {
             timerStage: TimerStage.warmup,
             elapsedWarmupTime: const Duration(seconds: 2),
             elapsedTime: Duration.zero,
+            startTime: startTime,
           ),
         ],
         verify: (timerBloc) {
@@ -224,7 +229,7 @@ void main() async {
               .thenReturn(DateTime(2024,1,1,0,0,0));
           when(() => mockWarmupTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
 
           when(() => mockWarmupTimerService.elapsedTime)
               .thenReturn(timerBloc.timerSettings.warmup);
@@ -285,7 +290,7 @@ void main() async {
               .thenReturn(DateTime(2024,1,1,0,0,0));
           when(() => mockTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
 
           // pause
           when(() => mockTimerService.elapsedTime)
@@ -302,7 +307,7 @@ void main() async {
             timerStage: TimerStage.timer,
             elapsedWarmupTime: Duration.zero,
             elapsedTime: Duration.zero,
-            startTime: DateTime(2024,1,1,0,0,0),
+            startTime: startTime,
           ),
           TimerState(
             timerSettings: timerBloc.timerSettings,
@@ -310,7 +315,7 @@ void main() async {
             timerStage: TimerStage.timer,
             elapsedWarmupTime: Duration.zero,
             elapsedTime: const Duration(seconds: 2),
-            startTime: DateTime(2024,1,1,0,0,0),
+            startTime: startTime,
           ),
           TimerState(
             timerSettings: timerBloc.timerSettings,
@@ -318,7 +323,7 @@ void main() async {
             timerStage: TimerStage.timer,
             elapsedWarmupTime: Duration.zero,
             elapsedTime: const Duration(seconds: 2),
-            startTime: DateTime(2024,1,1,0,0,0),
+            startTime: startTime,
           ),
         ],
         verify: (timerBloc) {
@@ -352,10 +357,10 @@ void main() async {
         act: (bloc) {
           // start
           when(() => mockTimerService.startTime)
-              .thenReturn(DateTime(2024,1,1,0,0,0));
+              .thenReturn(startTime);
           when(() => mockTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
 
           when(() => mockTimerService.elapsedTime)
               .thenReturn(timerBloc.timerSettings.duration);
@@ -370,7 +375,7 @@ void main() async {
             timerStage: TimerStage.timer,
             elapsedWarmupTime: Duration.zero,
             elapsedTime: Duration.zero,
-            startTime: DateTime(2024,1,1,0,0,0),
+            startTime: startTime,
           ),
           TimerState(
             timerSettings: timerBloc.timerSettings,
@@ -378,7 +383,7 @@ void main() async {
             timerStage: TimerStage.timer,
             elapsedWarmupTime: Duration.zero,
             elapsedTime: timerBloc.timerSettings.duration,
-            startTime: DateTime(2024,1,1,0,0,0),
+            startTime: startTime,
           ),
         ],
         verify: (timerBloc) {
@@ -412,10 +417,10 @@ void main() async {
         act: (bloc) {
           // start
           when(() => mockWarmupTimerService.startTime)
-              .thenReturn(DateTime(2024,1,1,0,0,0));
+              .thenReturn(startTime);
           when(() => mockWarmupTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
 
           when(() => mockWarmupTimerService.elapsedTime)
               .thenReturn(timerBloc.timerSettings.warmup);
@@ -471,10 +476,10 @@ void main() async {
         act: (bloc) {
           // start
           when(() => mockTimerService.startTime)
-              .thenReturn(DateTime(2024,1,1,0,0,0));
+              .thenReturn(startTime);
           when(() => mockTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
         },
         expect: ()  => [
           TimerState(
@@ -518,10 +523,10 @@ void main() async {
         act: (bloc) {
           // start
           when(() => mockTimerService.startTime)
-              .thenReturn(DateTime(2024,1,1,0,0,0));
+              .thenReturn(startTime);
           when(() => mockTimerService.elapsedTime)
               .thenReturn(const Duration(seconds: 0));
-          bloc.add(TimerStarted());
+          bloc.add(TimerStarted(startTime: startTime));
 
           when(() => mockTimerService.elapsedTime)
               .thenReturn(timerBloc.timerSettings.duration);

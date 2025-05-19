@@ -10,7 +10,9 @@ sealed class TimerEvent with _$TimerEvent {
   }) = WarmupTicked;
 
   const factory TimerEvent.warmupCompleted() = WarmupCompleted;
-  const factory TimerEvent.started() = TimerStarted;
+  const factory TimerEvent.started({
+    required DateTime startTime,
+  }) = TimerStarted;
   const factory TimerEvent.paused() = TimerPaused;
   const factory TimerEvent.resumed() = TimerResumed;
   const factory TimerEvent.completed() = TimerCompleted;

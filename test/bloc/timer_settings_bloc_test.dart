@@ -42,7 +42,7 @@ void main() async {
           duration: const Duration(minutes: 5),
           startingSound: Sound.smallBell,
           endingSound: Sound.smallBell,
-          lastUsed: DateTime.now(),
+          lastUsed: DateTime(2025, 1, 1),
         );
         when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
             .thenAnswer((_) => timerSettings);
@@ -59,7 +59,7 @@ void main() async {
             duration: const Duration(minutes: 5),
             startingSound: Sound.smallBell,
             endingSound: Sound.smallBell,
-            lastUsed: DateTime.now(),
+            lastUsed: DateTime(2025, 1, 1),
           )
         )
       ],
@@ -79,7 +79,7 @@ void main() async {
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              lastUsed: DateTime.now(),
+              lastUsed: DateTime(2025, 1, 1),
             )
           ));
         },
@@ -90,7 +90,7 @@ void main() async {
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              lastUsed: DateTime.now(),
+              lastUsed: DateTime(2025, 1, 1),
             )
           )
         ],
@@ -107,7 +107,7 @@ void main() async {
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              lastUsed: DateTime.now(),
+              lastUsed: DateTime(2025, 1, 1),
             )
           )).thenAnswer((_) => Future.value(null));
           return timerSettingsBloc;
@@ -119,7 +119,7 @@ void main() async {
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              lastUsed: DateTime.now(),
+              lastUsed: DateTime(2025, 1, 1),
             )
           ));
         },
@@ -129,7 +129,7 @@ void main() async {
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              lastUsed: DateTime.now(),
+              lastUsed: DateTime(2025, 1, 1),
             )
           )
         ],
@@ -141,7 +141,7 @@ void main() async {
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
-              lastUsed: DateTime.now(),
+              lastUsed: DateTime(2025, 1, 1),
             )
           ));
         }

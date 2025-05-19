@@ -107,7 +107,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     }
   }
 
-  void _onTimerStarted(TimerStarted start, emit) async {
+  void _onTimerStarted(TimerStarted event, emit) async {
     try {
       logger.t('Starting timer');
       TimerStage stage;
@@ -124,7 +124,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         stage = TimerStage.timer;
       }
       emit(state.copyWith(
-        startTime: DateTime.now(),
+        startTime: event.startTime,
         timerStatus: TimerStatus.running,
         timerStage: stage,
       ));

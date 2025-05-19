@@ -46,7 +46,9 @@ class TimerBlocProviders extends StatelessWidget {
                 );
 
                 // Start the timer
-                timerBloc.add(const TimerEvent.started());
+                timerBloc.add(TimerEvent.started(
+                  startTime: DateTime.now(),
+                ));
                 return timerBloc;
               },
               lazy: false,

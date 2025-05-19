@@ -20,7 +20,7 @@ mixin _$TimerEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -34,7 +34,7 @@ mixin _$TimerEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -48,7 +48,7 @@ mixin _$TimerEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -203,7 +203,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -220,7 +220,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -237,7 +237,7 @@ class _$WarmupTickedImpl extends WarmupTicked with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -372,7 +372,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -389,7 +389,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -406,7 +406,7 @@ class _$WarmupCompletedImpl extends WarmupCompleted
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -488,6 +488,8 @@ abstract class _$$TimerStartedImplCopyWith<$Res> {
   factory _$$TimerStartedImplCopyWith(
           _$TimerStartedImpl value, $Res Function(_$TimerStartedImpl) then) =
       __$$TimerStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime startTime});
 }
 
 /// @nodoc
@@ -500,39 +502,67 @@ class __$$TimerStartedImplCopyWithImpl<$Res>
 
   /// Create a copy of TimerEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? startTime = null,
+  }) {
+    return _then(_$TimerStartedImpl(
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
-  const _$TimerStartedImpl() : super._();
+  const _$TimerStartedImpl({required this.startTime}) : super._();
+
+  @override
+  final DateTime startTime;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerEvent.started()';
+    return 'TimerEvent.started(startTime: $startTime)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TimerEvent.started'));
+    properties
+      ..add(DiagnosticsProperty('type', 'TimerEvent.started'))
+      ..add(DiagnosticsProperty('startTime', startTime));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TimerStartedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$TimerStartedImpl &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, startTime);
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TimerStartedImplCopyWith<_$TimerStartedImpl> get copyWith =>
+      __$$TimerStartedImplCopyWithImpl<_$TimerStartedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -541,7 +571,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     required TResult Function(Object? error, StackTrace stackTrace) error,
     required TResult Function() finished,
   }) {
-    return started();
+    return started(startTime);
   }
 
   @override
@@ -549,7 +579,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -558,7 +588,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     TResult? Function(Object? error, StackTrace stackTrace)? error,
     TResult? Function()? finished,
   }) {
-    return started?.call();
+    return started?.call(startTime);
   }
 
   @override
@@ -566,7 +596,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -577,7 +607,7 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
     required TResult orElse(),
   }) {
     if (started != null) {
-      return started();
+      return started(startTime);
     }
     return orElse();
   }
@@ -639,8 +669,17 @@ class _$TimerStartedImpl extends TimerStarted with DiagnosticableTreeMixin {
 }
 
 abstract class TimerStarted extends TimerEvent {
-  const factory TimerStarted() = _$TimerStartedImpl;
+  const factory TimerStarted({required final DateTime startTime}) =
+      _$TimerStartedImpl;
   const TimerStarted._() : super._();
+
+  DateTime get startTime;
+
+  /// Create a copy of TimerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TimerStartedImplCopyWith<_$TimerStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -692,7 +731,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -709,7 +748,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -726,7 +765,7 @@ class _$TimerPausedImpl extends TimerPaused with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -852,7 +891,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -869,7 +908,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -886,7 +925,7 @@ class _$TimerResumedImpl extends TimerResumed with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -1012,7 +1051,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -1029,7 +1068,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -1046,7 +1085,7 @@ class _$TimerCompletedImpl extends TimerCompleted with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -1201,7 +1240,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -1218,7 +1257,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -1235,7 +1274,7 @@ class _$TimerTickedImpl extends TimerTicked with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -1369,7 +1408,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -1386,7 +1425,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -1403,7 +1442,7 @@ class _$TimerResetImpl extends TimerReset with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -1569,7 +1608,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -1586,7 +1625,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -1603,7 +1642,7 @@ class _$TimerErrorOccurredImpl extends TimerErrorOccurred
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
@@ -1740,7 +1779,7 @@ class _$TimerFinishedImpl extends TimerFinished with DiagnosticableTreeMixin {
   TResult when<TResult extends Object?>({
     required TResult Function(int ticks) warmupTicked,
     required TResult Function() warmupCompleted,
-    required TResult Function() started,
+    required TResult Function(DateTime startTime) started,
     required TResult Function() paused,
     required TResult Function() resumed,
     required TResult Function() completed,
@@ -1757,7 +1796,7 @@ class _$TimerFinishedImpl extends TimerFinished with DiagnosticableTreeMixin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int ticks)? warmupTicked,
     TResult? Function()? warmupCompleted,
-    TResult? Function()? started,
+    TResult? Function(DateTime startTime)? started,
     TResult? Function()? paused,
     TResult? Function()? resumed,
     TResult? Function()? completed,
@@ -1774,7 +1813,7 @@ class _$TimerFinishedImpl extends TimerFinished with DiagnosticableTreeMixin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int ticks)? warmupTicked,
     TResult Function()? warmupCompleted,
-    TResult Function()? started,
+    TResult Function(DateTime startTime)? started,
     TResult Function()? paused,
     TResult Function()? resumed,
     TResult Function()? completed,
