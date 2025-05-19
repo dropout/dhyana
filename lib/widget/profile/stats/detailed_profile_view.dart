@@ -27,64 +27,60 @@ class DetailedProfileView extends StatelessWidget {
           left: AppThemeData.paddingLg,
           right: AppThemeData.paddingLg,
         ),
-        child: Padding(
-          // padding: const EdgeInsets.all(AppThemeData.paddingLg),
-          padding: const EdgeInsets.all(0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppThemeData.paddingXs),
-                      child: ProfileImage.fromProfile(profile, size: 48),
-                    ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
                   ),
-                  Gap.medium(),
-                  Text(
-                    profile.displayName,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
-              ),
-              Gap.medium(),
-              LabelValueDetail(
-                label: AppLocalizations.of(context).statsSignedUp,
-                value: formatDateTime(
-                  context,
-                  profile.signupDate,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppThemeData.paddingXs),
+                    child: ProfileImage.fromProfile(profile, size: 48),
+                  ),
                 ),
+                Gap.medium(),
+                Text(
+                  profile.displayName,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
+              ],
+            ),
+            Gap.medium(),
+            LabelValueDetail(
+              label: AppLocalizations.of(context).statsSignedUp,
+              value: formatDateTime(
+                context,
+                profile.signupDate,
               ),
-              LabelValueDetail(
-                label: AppLocalizations.of(context).statsFirstSession,
-                value: formatDateTime(
-                  context,
-                  profile.statsReport.firstSessionDate
-                ),
+            ),
+            LabelValueDetail(
+              label: AppLocalizations.of(context).statsFirstSession,
+              value: formatDateTime(
+                context,
+                profile.statsReport.firstSessionDate
               ),
-              LabelValueDetail(
-                label: AppLocalizations.of(context).statsLastSession,
-                value: formatDateTime(
-                  context,
-                  profile.statsReport.firstSessionDate
-                ),
+            ),
+            LabelValueDetail(
+              label: AppLocalizations.of(context).statsLastSession,
+              value: formatDateTime(
+                context,
+                profile.statsReport.firstSessionDate
               ),
-            ],
-          ),
+            ),
+          ],
         )
     );
   }
 
   String formatDateTime(BuildContext context, DateTime? dateTime) {
     if (dateTime == null) {
-      return AppLocalizations.of(context).notAvailable;
+      return AppLocalizations.of(context).notAvailableAbbr;
     }
     final locale = Localizations.localeOf(context).toString();
     return '${DateFormat.yMMMd(locale).format(dateTime)} ${DateFormat.Hm(locale).format(dateTime)}';

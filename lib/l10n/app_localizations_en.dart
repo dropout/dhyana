@@ -333,7 +333,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSignoutCancel => 'No';
 
   @override
-  String get profileDeleteTitle => 'Delete profile';
+  String get profileDeleteTitle => 'Delete Profile';
 
   @override
   String get profileDeleteQuestion => 'Are you sure you want to delete your profile?';

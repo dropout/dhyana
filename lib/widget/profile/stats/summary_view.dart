@@ -4,11 +4,11 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 
-class ProfileMetricsView extends StatelessWidget {
+class SummaryView extends StatelessWidget {
 
   final Profile? profile;
 
-  const ProfileMetricsView({
+  const SummaryView({
     this.profile,
     super.key
   });
@@ -21,29 +21,29 @@ class ProfileMetricsView extends StatelessWidget {
     int daysCount = (profile != null) ?  profile!.statsReport.completedDaysCount : 0;
 
     return AppCard(
-      title: AppLocalizations.of(context).highlights,
+      title: AppLocalizations.of(context).statsSummary,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              child: ProfileMetricBox(
-                sessionCount,
-                'Sessions',
-              )
+            child: SummaryItem(
+              sessionCount,
+              AppLocalizations.of(context).sessionsPlural(sessionCount)
+            )
           ),
           const SizedBox(width: AppThemeData.spacingMd),
           Expanded(
-              child: ProfileMetricBox(
-                minutesCount,
-                'Perc',
-              )
+            child: SummaryItem(
+              minutesCount,
+              AppLocalizations.of(context).minutesPlural(minutesCount),
+            )
           ),
           const SizedBox(width: AppThemeData.spacingMd),
           Expanded(
-              child: ProfileMetricBox(
-                daysCount,
-                'Nap',
-              )
+            child: SummaryItem(
+              daysCount,
+              AppLocalizations.of(context).daysPlural(daysCount),
+            )
           )
         ],
       ),
@@ -52,41 +52,16 @@ class ProfileMetricsView extends StatelessWidget {
 
 }
 
-class ProfileMetricsDisplayLoading extends StatelessWidget {
-
-  const ProfileMetricsDisplayLoading({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Expanded(
-            child: ProfileMetricBoxLoading()
-        ),
-        SizedBox(width: 8),
-        Expanded(
-            child: ProfileMetricBoxLoading()
-        ),
-        SizedBox(width: 8),
-        Expanded(
-            child: ProfileMetricBoxLoading()
-        )
-      ],
-    );
-  }
-}
-
-
-class ProfileMetricBox extends StatelessWidget {
+class SummaryItem extends StatelessWidget {
 
   final String label;
   final int value;
 
-  const ProfileMetricBox(
-      this.value,
-      this.label,
-      {super.key}
-      );
+  const SummaryItem(
+    this.value,
+    this.label,
+    {super.key}
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -116,21 +91,4 @@ class ProfileMetricBox extends StatelessWidget {
     );
   }
 
-}
-
-class ProfileMetricBoxLoading extends StatelessWidget {
-
-  const ProfileMetricBoxLoading({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // width: 20,
-      height: 96,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.0),
-        color: Colors.white,
-      ),
-    );
-  }
 }

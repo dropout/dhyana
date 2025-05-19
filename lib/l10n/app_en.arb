@@ -119,7 +119,7 @@
   "profileSignoutYes": "Yes",
   "profileSignoutCancel": "No",
 
-  "profileDeleteTitle": "Delete profile",
+  "profileDeleteTitle": "Delete Profile",
   "profileDeleteQuestion": "Are you sure you want to delete your profile?",
   "profileDeleteYes": "Delete",
   "profileDeleteCancel": "Cancel",

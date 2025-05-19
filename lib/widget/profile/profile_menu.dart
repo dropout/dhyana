@@ -76,10 +76,10 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           _buildTile(
             title: Text(
-              AppLocalizations.of(context).signOut,
+              'Donate',
               style: textStyle,
             ),
-            onTap: () => _onSignoutTapped(context),
+            onTap: () => null,
           ),
           const Divider(height: 0),
           _buildTile(
@@ -88,8 +88,15 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => _onDeleteProfileTapped(context),
-          )
-          // const Divider(height: 0),
+          ),
+          const Divider(height: 0),
+          _buildTile(
+            title: Text(
+              AppLocalizations.of(context).signOut,
+              style: textStyle,
+            ),
+            onTap: () => _onSignoutTapped(context),
+          ),
         ],
       )
     );
