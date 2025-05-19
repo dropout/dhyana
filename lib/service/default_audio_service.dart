@@ -12,6 +12,8 @@ class DefaultAudioService implements AudioService {
   final Logger logger = getLogger('DefaultAudioService');
   AudioPlayer audioPlayer = AudioPlayer();
 
+
+
   DefaultAudioService() {
     audioPlayer.setPlayerMode(PlayerMode.lowLatency);
     audioPlayer.setReleaseMode(ReleaseMode.stop);
@@ -19,6 +21,11 @@ class DefaultAudioService implements AudioService {
 
   @override
   Future<void> play(Sound sound) async {
+    if (sound == Sound.none) {
+      logger.t('No sound to play');
+      return;
+    }
+
     // Need to stop the audio player, because in case its already playing the
     // same sound, it will not play the same sound again.
     if (audioPlayer.state == PlayerState.playing) {
@@ -26,6 +33,22 @@ class DefaultAudioService implements AudioService {
     }
     logger.t('Playing sound: ${sound.name} ${sound.audioResourcePath}');
     return audioPlayer.play(AssetSource(sound.audioResourcePath));
+  }
+
+  @override
+  bool get isPlaying {
+    return audioPlayer.state == PlayerState.playing;
+  }
+
+  @override
+  Stream<bool> get isPlayingStream {
+    return audioPlayer.onPlayerStateChanged.map((state) => state == PlayerState.playing);
+  }
+
+  @override
+  Future<void> stop() {
+    logger.t('Stopping sound');
+    return audioPlayer.stop();
   }
 
   @override

@@ -42,6 +42,7 @@ class Initializer {
       .create(firebaseProvider.remoteConfig, firebaseProvider.crashlytics);
 
     Services services = Services(
+      audioService: DefaultAudioService(),
       sharedPreferences: sharedPreferences,
       hapticsService: hapticsService,
       remoteConfigService: remoteConfigService,

@@ -1,3 +1,6 @@
+import 'package:dhyana/widget/timer/settings/sound_input_page.dart';
+import 'package:dhyana/widget/timer/sound_input_play_button.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -73,16 +76,18 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
     return Column(
       children: [
         SizedBox(
-          height: 300,
+          height: 192,
           child: PageView(
             onPageChanged: (int index) => _onPageChanged(context, index),
             controller: pageController,
             physics: const SoundInputPageViewScrollPhysics(),
-            children: Sound.values.map((Sound s) => buildPage(
-              context, s
+            children: Sound.values.map((Sound s) => SoundInputPage(
+              audioService: context.services.audioService,
+              sound: s,
             )).toList(),
           ),
         ),
+        buildPlayButton(context),
         SizedBox(
           height: 48,
           child: Center(
@@ -120,6 +125,13 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
           style: Theme.of(context).textTheme.titleMedium
         )
       ]
+    );
+  }
+
+  Widget buildPlayButton(BuildContext context) {
+    return SoundInputPlayButton(
+      audioService: context.services.audioService,
+      sound: getEnumByIndex(selectedIndex, Sound.values),
     );
   }
 

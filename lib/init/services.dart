@@ -17,11 +17,13 @@ class Services {
   final ResourceResolver resourceResolver;
   final IdGeneratorService idGeneratorService;
   final RemoteConfigService remoteConfigService;
+  final AudioService audioService;
 
   Services({
     required this.hapticsService,
     required this.remoteConfigService,
     required this.resourceResolver,
+    required this.audioService,
     required SharedPreferences sharedPreferences,
     required FirebaseFirestore firebaseFirestore,
     required FirebaseAnalytics firebaseAnalytics,

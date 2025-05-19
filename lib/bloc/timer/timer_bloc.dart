@@ -264,8 +264,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     _durationFinishedSub.cancel();
     durationTimer.close();
 
-    audioService.close();
-
     return super.close();
   }
 

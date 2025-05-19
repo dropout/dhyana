@@ -59,7 +59,7 @@ with SingleTickerProviderStateMixin {
       });
 
       // hide
-      Future.delayed(widget.animationDelay + Duration(seconds: 3), () {
+      Future.delayed(widget.animationDelay + Duration(seconds: 5), () {
         animationController.reverse();
       });
     }

@@ -3,7 +3,6 @@ import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.d
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/default_audio_service.dart';
 import 'package:dhyana/service/default_timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -41,7 +40,7 @@ class TimerBlocProviders extends StatelessWidget {
                   timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
                       DefaultTimerService.new
                   ),
-                  audioService: DefaultAudioService(),
+                  audioService: context.services.audioService,
                   crashlyticsService: services.crashlyticsService,
                 );
 
