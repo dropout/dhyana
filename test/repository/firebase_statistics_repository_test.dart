@@ -7,6 +7,7 @@ import 'package:dhyana/model/all.dart';
 
 class MockFirebaseDataProviderFactory extends Mock implements FirebaseDataProviderFactory {}
 class MockFirebaseDayDataProvider extends Mock implements FirebaseDayDataProvider {}
+class MockFirebaseWeekDataProvider extends Mock implements FirebaseWeekDataProvider {}
 class MockFirebaseMonthDataProvider extends Mock implements FirebaseMonthDataProvider {}
 class MockFirebaseYearDataProvider extends Mock implements FirebaseYearDataProvider {}
 class MockFirebaseSessionDataProvider extends Mock implements FirebaseSessionDataProvider {}
@@ -94,16 +95,19 @@ void main() {
 
         final mockSessionDataProvider = MockFirebaseSessionDataProvider();
         final mockDayDataProvider = MockFirebaseDayDataProvider();
+        final mockWeekDataProvider = MockFirebaseWeekDataProvider();
         final mockMonthDataProvider = MockFirebaseMonthDataProvider();
         final mockYearDataProvider = MockFirebaseYearDataProvider();
 
         when(() => dataProviderFactory.createSessionDataProvider(any())).thenReturn(mockSessionDataProvider);
         when(() => dataProviderFactory.createDayDataProvider(any())).thenReturn(mockDayDataProvider);
+        when(() => dataProviderFactory.createWeekDataProvider(any())).thenReturn(mockWeekDataProvider);
         when(() => dataProviderFactory.createMonthDataProvider(any())).thenReturn(mockMonthDataProvider);
         when(() => dataProviderFactory.createYearDataProvider(any())).thenReturn(mockYearDataProvider);
 
         when(() => mockSessionDataProvider.create(session)).thenAnswer((_) async => Future<void>.value());
         when(() => mockDayDataProvider.logSession(session, profile)).thenAnswer((_) async => Future<void>.value());
+        when(() => mockWeekDataProvider.logSession(session)).thenAnswer((_) async => Future<void>.value());
         when(() => mockMonthDataProvider.logSession(session)).thenAnswer((_) async => Future<void>.value());
         when(() => mockYearDataProvider.logSession(session)).thenAnswer((_) async => Future<void>.value());
 

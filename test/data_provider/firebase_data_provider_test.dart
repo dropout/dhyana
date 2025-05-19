@@ -76,11 +76,11 @@ void main() {
 
     test('can create data', () {
       when(() => mockModel.id)
-          .thenReturn('fake_id');
+        .thenReturn('fake_id');
       when(() => mockCollectionRef.doc('fake_id'))
-          .thenReturn(mockDocumentRef);
+        .thenReturn(mockDocumentRef);
       when(() => mockDocumentRef.set(mockModel))
-          .thenAnswer((_) => Future.value(null));
+        .thenAnswer((_) => Future.value(null));
 
       FirebaseDataProvider<MockModel> firebaseDataProvider =
           FirebaseDataProvider(mockCollectionRef);
@@ -101,6 +101,8 @@ void main() {
           .thenAnswer((_) => Future.value(mockDocumentSnapshot));
       when(() => mockDocumentSnapshot.data())
           .thenReturn(mockModel);
+      when(() => mockDocumentSnapshot.exists)
+          .thenReturn(true);
 
       FirebaseDataProvider<MockModel> firebaseDataProvider =
           FirebaseDataProvider(mockCollectionRef);
@@ -184,13 +186,13 @@ void main() {
       ]);
     });
 
-    test('can convert query to list', () async {
-
-    });
-
-    test('can convert query to stream', () async {
-
-    });
+    // test('can convert query to list', () async {
+    //
+    // });
+    //
+    // test('can convert query to stream', () async {
+    //
+    // });
 
     // test('can query data', () async {
     //   when(() => mockModel.id)
