@@ -3,29 +3,15 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Today extends StatefulWidget {
+class Today extends StatelessWidget {
 
   const Today({
     super.key
   });
 
   @override
-  State<Today> createState() => _TodayState();
-}
-
-class _TodayState extends State<Today>
-  with WidgetsBindingObserver {
-
-  late DateTime today;
-
-  @override
-  void initState() {
-    today = DateTime.now();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    DateTime today = DateTime.now();
     return CustomPaint(
       painter: TodayPainter(
         dateText: TextSpan(
@@ -46,17 +32,6 @@ class _TodayState extends State<Today>
     );
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        setState(() {
-          today = DateTime.now();
-        });
-      default:
-    }
-    super.didChangeAppLifecycleState(state);
-  }
 
 }
 

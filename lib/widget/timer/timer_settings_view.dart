@@ -2,6 +2,7 @@ import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -79,7 +80,9 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         Positioned(
           top: kToolbarHeight + 4,
           left: AppThemeData.paddingLg,
-          child: Today(),
+          child: Today(
+            key: ValueKey(DateTime.now().toDayId()),
+          ),
         ),
         SafeArea(
           child: Column(
