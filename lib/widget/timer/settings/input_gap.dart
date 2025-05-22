@@ -14,7 +14,8 @@ class InputGap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.symmetric(
-          vertical: AppThemeData.paddingMd,
+          vertical: 0,
+          // vertical: AppThemeData.paddingMd,
           horizontal: 0,
         ),
         child: SizedBox(

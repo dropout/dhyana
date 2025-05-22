@@ -1,3 +1,4 @@
+import 'package:dhyana/service/default_shader_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,7 +36,7 @@ class Services {
       crashlyticsService: FirebaseCrashlyticsService(firebaseCrashlytics),
       sharedPrefs: sharedPreferences,
     ),
-    shaderService = ShaderService(),
+    shaderService = DefaultShaderService(),
     idGeneratorService = IdGeneratorService(FirebaseIdGenerator(firebaseFirestore));
 
 }

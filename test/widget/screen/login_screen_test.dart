@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,9 +33,7 @@ void main() {
       );
 
       // wait for the "Who are you?" animation to finish
-      // 256 * 2 + 512 * 3
-      // as defined in LoginScreen animation
-      await tester.pumpAndSettle(const Duration(milliseconds: 256 * 2 + 512 * 3));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       expect(find.text('Bejelentkezés Google-lal'), findsOneWidget);
       expect(find.text('Bejelentkezés Apple-lel'), findsOneWidget);
