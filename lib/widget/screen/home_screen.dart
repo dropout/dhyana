@@ -53,7 +53,9 @@ class HomeScreen extends StatelessWidget {
             case TimerSettingsDataLoadingState():
               return const AppLoadingDisplay();
             case TimerSettingsDataLoadedState():
-              return TimerSettingsView(timerSettings: state.timerSettings);
+              return TimerSettingsView(
+                timerSettings: state.timerSettings
+              );
           }
         }
       ),

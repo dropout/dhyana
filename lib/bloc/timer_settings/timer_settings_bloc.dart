@@ -28,21 +28,16 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
   void _onLoadTimerSettingsData(LoadTimerSettingsData event, emit) async {
     try {
       if (event.timerSettings != null) {
-        logger.t('Using timer settings from event...');
         emit(TimerSettingsState.loaded(
           timerSettings: event.timerSettings!,
         ));
+        logger.t('Using timer settings from event');
       } else {
-        emit(const TimerSettingsState.loading());
-        logger.t('Loading timer settings data...');
-        TimerSettings timerSettings =
-          timerSettingsSharedPrefsService.getTimerSettings();
-        logger.t('Loaded timer setting from shared prefs...');
         emit(TimerSettingsState.loaded(
-          timerSettings: timerSettings,
+          timerSettings: timerSettingsSharedPrefsService.getTimerSettings(),
         ));
+        logger.t('Loaded timer setting from shared preferences');
       }
-      logger.t('Loaded timer settings data!');
     } catch (e, stack) {
       emit(const TimerSettingsState.error());
       crashlyticsService.recordError(
@@ -54,17 +49,17 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
 
   }
 
-  /*
-    Don't emit loading state, on the interface its
-    not important to display.
-   */
   void _onTimerSettingsChanged(TimerSettingsChanged event, emit) async {
     try {
-      await timerSettingsSharedPrefsService.setTimerSettings(
+      // Emit the new timer settings to the state
+      emit(TimerSettingsState.loaded(timerSettings: event.timerSettings));
+
+      // Lazy save the new timer settings to shared preferences
+      timerSettingsSharedPrefsService.setTimerSettings(
         event.timerSettings
       );
-      emit(TimerSettingsState.loaded(timerSettings: event.timerSettings));
-      logger.t('Timer settings changed...');
+
+      logger.t('Timer settings changed');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

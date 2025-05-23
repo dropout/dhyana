@@ -106,10 +106,10 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
     isLoading = true;
 
     imageProvider = CachedNetworkImageProvider(
-        widget.imageUrl,
-        errorListener: (error) {
-          widget.crashlyticsService.recordError(exception: error,);
-        }
+      widget.imageUrl,
+      errorListener: (error) {
+        widget.crashlyticsService.recordError(exception: error,);
+      }
     );
 
     imageStreamListener = ImageStreamListener((_, __) {
@@ -124,10 +124,13 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
     // A cached image will be resolved before the first
     // build call, so NO animation will be displayed in that case
     // Must force a 'loading state' first then a 'not loading'
-    // to properly trigger the opacity animation
-    Future.delayed(Duration.zero).whenComplete(() {
-      imageProvider.resolve(const ImageConfiguration())
+    // to properly trigger the opacity animation that 'transforms' from
+    // blurhash to image
+    Future.delayed(Duration.zero, () {
+      if (mounted) {
+        imageProvider.resolve(const ImageConfiguration())
           .addListener(imageStreamListener);
+      }
     });
 
     super.initState();
@@ -162,8 +165,6 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
 
 
   }
-
-
 
   @override
   void dispose() {

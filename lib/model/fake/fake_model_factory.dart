@@ -1,9 +1,18 @@
+import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:faker/faker.dart';
 import 'package:dhyana/model/all.dart';
 
 class FakeModelFactory {
   final Faker _faker = Faker();
+
+  User createUser() {
+    return User(
+      uid: _faker.guid.guid(),
+      email: _faker.internet.email(),
+      metaData: UserMetaData(),
+    );
+  }
 
   Profile createProfile() {
     return Profile(

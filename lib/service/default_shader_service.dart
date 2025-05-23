@@ -26,4 +26,13 @@ class DefaultShaderService implements ShaderService {
     }
   }
 
+  @override
+  void close() {
+    for (var shader in shaders.values) {
+      shader.dispose();
+    }
+    shaders.clear();
+  }
+
+
 }
