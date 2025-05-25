@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 extension AppContext on BuildContext {
 
   void hapticsTap() {
-    Services services = Provider.of<Services>(this, listen: false);
     services.hapticsService.tap();
   }
 

@@ -14,14 +14,41 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 
-class LoginScreen extends StatelessWidget {
 
+class LoginScreen extends StatefulWidget {
   final UrlLauncher urlLauncher;
 
   const LoginScreen({
     this.urlLauncher = const UrlLauncher(),
     super.key,
   });
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
+  late final TapGestureRecognizer _termsTapRecognizer;
+  late final TapGestureRecognizer _privacyTapRecognizer;
+
+  @override
+  void initState() {
+    _termsTapRecognizer = TapGestureRecognizer()
+      ..onTap = () => _onTermsTap(context);
+
+    _privacyTapRecognizer = TapGestureRecognizer()
+      ..onTap = () => _onPrivacyTap(context);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _termsTapRecognizer.dispose();
+    _privacyTapRecognizer.dispose();
+    super.dispose();
+  }
 
   void _onLoginWithGoogleTap(BuildContext context) {
     BlocProvider.of<AuthBloc>(context).add(AuthEvent.signinWithGoogle(
@@ -44,22 +71,25 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _onTermsTap(BuildContext context) {
-    urlLauncher.launchInAppWebView('https://google.com');
+    if (!mounted) return;
+    widget.urlLauncher.launchInAppWebView('https://google.com');
     context.logEvent(name: 'view_tou_pressed');
     context.hapticsTap();
   }
 
   void _onDismissErrorTap(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(const AuthEvent.dismissSigninError());
+    BlocProvider.of<AuthBloc>(context)
+      .add(const AuthEvent.dismissSigninError());
   }
 
   void _onPrivacyTap(BuildContext context) {
-    urlLauncher.launchInAppWebView('https://google.com');
+    if (!mounted) return;
+    widget.urlLauncher.launchInAppWebView('https://google.com');
     context.logEvent(name: 'view_privacy_policy_pressed');
     context.hapticsTap();
   }
 
-  void _handleSigninComplete(BuildContext context ,user, isFirstSignin) {
+  void _handleSigninComplete(BuildContext context, user, isFirstSignin) {
     if (isFirstSignin) {
       ProfileWizardRoute(profileId: user.uid).replace(context);
     } else {
@@ -70,53 +100,53 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        late final Widget body;
-        Color backgroundColor = Theme.of(context).colorScheme.surface; 
-        switch (state) {
-          case AuthStateErrorOccured():
-            backgroundColor = Theme.of(context).colorScheme.error;
-            body = buildErrorState(context);
-          case AuthStateSigningIn():
-            body = buildLoadingState(context);
-          default:
-            body = buildSignedOutState(context);
-        }
+        builder: (context, state) {
+          late final Widget body;
+          Color backgroundColor = Theme.of(context).colorScheme.surface;
+          switch (state) {
+            case AuthStateErrorOccured():
+              backgroundColor = Theme.of(context).colorScheme.error;
+              body = buildErrorState(context);
+            case AuthStateSigningIn():
+              body = buildLoadingState(context);
+            default:
+              body = buildSignedOutState(context);
+          }
 
-        return Scaffold(
-          backgroundColor: backgroundColor,
-          body: body,
-          extendBodyBehindAppBar: true,
-          appBar: CustomAppBar(
-            leading: CustomBackButton(),
-          ),
-        );
-      }
+          return Scaffold(
+            backgroundColor: backgroundColor,
+            body: body,
+            extendBodyBehindAppBar: true,
+            appBar: CustomAppBar(
+              leading: CustomBackButton(),
+            ),
+          );
+        }
     );
   }
 
   Widget buildSignedOutState(BuildContext context) {
     return SafeArea(
-        child: Stack(
-          fit: StackFit.expand,
-          clipBehavior: Clip.none,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Container(
-                    child: buildHeadline(context)),
-                ),
-                buildActions(context),
-                buildLegalText(context),
-              ]
-            ),
-          ],
-        ),
-      );
+      child: Stack(
+        fit: StackFit.expand,
+        clipBehavior: Clip.none,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: Container(
+                  child: buildHeadline(context)),
+              ),
+              buildActions(context),
+              buildLegalText(context),
+            ]
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildErrorState(BuildContext context) {
@@ -144,26 +174,26 @@ class LoginScreen extends StatelessWidget {
     Duration letterDuration = Durations.medium3;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        LoginHeadlineTextEffect(
-          text: AppLocalizations.of(context).loginHeadline1,
-          textStyle: textStyle,
-          duration: letterDuration * 3,
-        ),
-        LoginHeadlineTextEffect(
-          text: AppLocalizations.of(context).loginHeadline2,
-          textStyle: textStyle,
-          duration: letterDuration * 3,
-          initialDelay: Durations.medium1,
-        ),
-        LoginHeadlineTextEffect(
-          text: AppLocalizations.of(context).loginHeadline3,
-          textStyle: textStyle,
-          duration: letterDuration * 4,
-          initialDelay: Durations.long2,
-        ),
-      ]
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          LoginHeadlineTextEffect(
+            text: AppLocalizations.of(context).loginHeadline1,
+            textStyle: textStyle,
+            duration: letterDuration * 3,
+          ),
+          LoginHeadlineTextEffect(
+            text: AppLocalizations.of(context).loginHeadline2,
+            textStyle: textStyle,
+            duration: letterDuration * 3,
+            initialDelay: Durations.medium1,
+          ),
+          LoginHeadlineTextEffect(
+            text: AppLocalizations.of(context).loginHeadline3,
+            textStyle: textStyle,
+            duration: letterDuration * 4,
+            initialDelay: Durations.long2,
+          ),
+        ]
     );
   }
 
@@ -201,7 +231,7 @@ class LoginScreen extends StatelessWidget {
         textAlign: TextAlign.center,
         text: TextSpan(
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            height: 1.5
+              height: 1.5
           ),
           children: [
             TextSpan(
@@ -213,8 +243,7 @@ class LoginScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
               ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => _onTermsTap(context),
+              recognizer: _termsTapRecognizer,
             ),
             TextSpan(
               text: AppLocalizations.of(context).loginLegalPart3,
@@ -225,8 +254,7 @@ class LoginScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
               ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => _onPrivacyTap(context),
+              recognizer: _privacyTapRecognizer,
             ),
             const TextSpan(text: '.',)
           ],
@@ -234,7 +262,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class LoginHeadlineTextEffect extends StatefulWidget {
@@ -257,7 +284,7 @@ class LoginHeadlineTextEffect extends StatefulWidget {
 }
 
 class _LoginHeadlineTextEffectState extends State<LoginHeadlineTextEffect>
-with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
 
   late final AnimationController animController;
   late final List<Animation<double>> _opacities;

@@ -49,7 +49,6 @@ void main() {
     late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockCrashlyticsService mockCrashlyticsService;
 
-
     // doesn't make sense to mock this because the FragmentShader
     // cannot be mocked neither, so you need to load the shader anyhow
     late ShaderService shaderService = DefaultShaderService();
