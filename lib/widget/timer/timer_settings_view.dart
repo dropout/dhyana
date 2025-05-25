@@ -105,17 +105,17 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         WarmupTimeInput(
-            label: AppLocalizations.of(context).inputWarmupLabel,
-            value: widget.timerSettings.warmup,
-            onChange: (Duration duration) =>
-              _onWarmupChange(context, duration)
+          label: AppLocalizations.of(context).inputWarmupLabel,
+          value: widget.timerSettings.warmup,
+          onChange: (Duration duration) =>
+            _onWarmupChange(context, duration)
         ),
         const InputGap(),
         SoundInput(
-            label: AppLocalizations.of(context).inputStartingSoundLabel,
-            value: widget.timerSettings.startingSound,
-            onChange: (Sound startingSound) =>
-              _onStartingSoundChange(context, startingSound)
+          label: AppLocalizations.of(context).inputStartingSoundLabel,
+          value: widget.timerSettings.startingSound,
+          onChange: (Sound startingSound) =>
+            _onStartingSoundChange(context, startingSound)
         ),
         const InputGap(),
         DurationInput(

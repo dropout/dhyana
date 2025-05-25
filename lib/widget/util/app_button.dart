@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
       // splashColor: Colors.red,
       clipBehavior: Clip.none,
       child: Text(text,
-          style: textStyle,
+        style: textStyle,
       ),
     );
   }
