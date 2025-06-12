@@ -68,6 +68,7 @@ class InputView extends StatelessWidget {
 
   Widget buildActionButtons(BuildContext context) {
     return AppButton(
+      key: const Key('input_view_save_button'),
       text: AppLocalizations.of(context).okay.toUpperCase(),
       onTap: () => onSave?.call(),
     );

@@ -159,7 +159,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get timerSettingsHistoryApplied => 'Timer settings applied.';
 
   @override
-  String get timerSettingsHistoryEmpty => 'There are no timer settings\n saved in history yet.';
+  String get timerSettingsHistoryEmpty =>
+      'There are no timer settings\n saved in history yet.';
 
   @override
   String get profileImageLabel => 'Profile image';
@@ -186,7 +187,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoAccessDialogTitle => 'Cannot access photos';
 
   @override
-  String get photoAccessDialogText => 'The application doesn\'t have a permission to access you photos. Please go into \'Settings\' and give access to the photos in order to change you profile photo.';
+  String get photoAccessDialogText =>
+      'The application doesn\'t have a permission to access you photos. Please go into \'Settings\' and give access to the photos in order to change you profile photo.';
 
   @override
   String get photoAccessDialogButtonText => 'Okay';
@@ -336,7 +338,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileDeleteTitle => 'Delete Profile';
 
   @override
-  String get profileDeleteQuestion => 'Are you sure you want to delete your profile?';
+  String get profileDeleteQuestion =>
+      'Are you sure you want to delete your profile?';
 
   @override
   String get profileDeleteYes => 'Delete';
@@ -348,10 +351,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteProfileScreenTitle => 'Delete profile!';
 
   @override
-  String get deleteProfileScreenText => 'To delete your profile, you need to sign in again for security reasons.';
+  String get deleteProfileScreenText =>
+      'To delete your profile, you need to sign in again for security reasons.';
 
   @override
-  String get deleteProfileScreenSuccessTitle => 'Your profile\nhas been deleted!';
+  String get deleteProfileScreenSuccessTitle =>
+      'Your profile\nhas been deleted!';
 
   @override
   String get deleteProfileScreenOkayButtonText => 'Okay';
@@ -360,7 +365,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get presence => 'Presence';
 
   @override
-  String get presenceScreenSubTitle => 'Move the slider to adjust presence timerframe.';
+  String get presenceScreenSubTitle =>
+      'Move the slider to adjust presence timerframe.';
 
   @override
   String get minutesAbbr => 'm';

@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/init/init_result.dart';
 import 'package:dhyana/transition/linear_gradient_mask_transition.dart';
+import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/all.dart';
@@ -66,7 +67,7 @@ class TimerRoute extends GoRouteData {
       ) {
         return LinearGradientMaskTransition(
           progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
-          shader: context.services.shaderService.get('shaders/linear_gradient_mask.frag'),
+          shader: context.services.shaderService.get(Assets.shaderLinearGradientMask),
           child: child,
         );
       },

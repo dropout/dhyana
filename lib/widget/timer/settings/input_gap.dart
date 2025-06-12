@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 class InputGap extends StatelessWidget {
@@ -13,18 +14,18 @@ class InputGap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.symmetric(
-          vertical: 0,
-          // vertical: AppThemeData.paddingMd,
+          // vertical: 0,
+          vertical: AppThemeData.paddingMd,
           horizontal: 0,
         ),
         child: SizedBox(
-            width: 21,
-            height: 21,
-            child: CustomPaint(
-              painter: GapIconPainter(
-                isEndGap: isEndGap,
-              ),
-            )
+          width: 16,
+          height: 16,
+          child: CustomPaint(
+            painter: GapIconPainter(
+              isEndGap: isEndGap,
+            ),
+          )
         )
     );
   }

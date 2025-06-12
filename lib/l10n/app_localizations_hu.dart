@@ -51,7 +51,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get warmup => 'Felkészülés';
 
   @override
-  String get underMaintenanceTitle => 'Az alkalmazás karbantartás miatt nem elérhető';
+  String get underMaintenanceTitle =>
+      'Az alkalmazás karbantartás miatt nem elérhető';
 
   @override
   String get underMaintenanceBody => 'Kérlek nézz vissza később.';
@@ -159,7 +160,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get timerSettingsHistoryApplied => 'Időzítő beállítások alkalmazva.';
 
   @override
-  String get timerSettingsHistoryEmpty => 'Még nincsenek legutóbbi időzítő beaállítások elmentve.';
+  String get timerSettingsHistoryEmpty =>
+      'Még nincsenek legutóbbi időzítő beaállítások elmentve.';
 
   @override
   String get profileImageLabel => 'Profil kép';
@@ -186,7 +188,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get photoAccessDialogTitle => 'Fotók nem érhetőek el';
 
   @override
-  String get photoAccessDialogText => 'Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon \'Beállítások\' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.';
+  String get photoAccessDialogText =>
+      'Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon \'Beállítások\' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.';
 
   @override
   String get photoAccessDialogButtonText => 'Rendben';
@@ -336,7 +339,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileDeleteTitle => 'Profil törlése';
 
   @override
-  String get profileDeleteQuestion => 'Biztos, hogy törölni szeretnéd a profilodat?';
+  String get profileDeleteQuestion =>
+      'Biztos, hogy törölni szeretnéd a profilodat?';
 
   @override
   String get profileDeleteYes => 'Törlés';
@@ -348,7 +352,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get deleteProfileScreenTitle => 'Profil törlése!';
 
   @override
-  String get deleteProfileScreenText => 'Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.';
+  String get deleteProfileScreenText =>
+      'Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.';
 
   @override
   String get deleteProfileScreenSuccessTitle => 'A profilodat töröltük!';
@@ -360,7 +365,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get presence => 'Jelenlét';
 
   @override
-  String get presenceScreenSubTitle => 'Mozgasd a csuszkát a jelenlét időkeretének beállításához.';
+  String get presenceScreenSubTitle =>
+      'Mozgasd a csuszkát a jelenlét időkeretének beállításához.';
 
   @override
   String get minutesAbbr => 'p';

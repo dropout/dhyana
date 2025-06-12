@@ -2,6 +2,7 @@ import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -104,8 +105,11 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        StartTimeText(),
+        const InputGap(),
         WarmupTimeInput(
           label: AppLocalizations.of(context).inputWarmupLabel,
+          overlayService: context.services.overlayService,
           value: widget.timerSettings.warmup,
           onChange: (Duration duration) =>
             _onWarmupChange(context, duration)
@@ -131,7 +135,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           onChange: (Sound endingSound) =>
             _onEndingSoundChange(context, endingSound)
         ),
-        const InputGap(isEndGap: true),
+        const InputGap(),
         EndTimeText(
           timerSettings: widget.timerSettings,
         ),
@@ -146,7 +150,9 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         padding: const EdgeInsets.only(bottom: AppThemeData.paddingLg),
         child: TimerStartButton(
           onTap: () => _onStartButtonTap(context),
-          fragmentShader: context.services.shaderService.get('shaders/gradient_flow.frag'),
+          fragmentShader: context.services.shaderService.get(
+            Assets.shaderGradientFlow
+          ),
           timerSettings: widget.timerSettings,
         ),
       ),

@@ -87,6 +87,7 @@ dependency_overrides:
   intl: ^0.19.0
 
 flutter:
+  generate: true # For generating localizations?
   assets:
     - assets/sounds/
     - assets/images/

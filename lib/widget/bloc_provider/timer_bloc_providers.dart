@@ -34,6 +34,7 @@ class TimerBlocProviders extends StatelessWidget {
             BlocProvider<TimerBloc>(
               create: (BuildContext context) {
                 final TimerBloc timerBloc = TimerBloc(
+                  // timerSettings: timerSettings,
                   timerSettings: timerSettings.copyWith(
                     duration: Duration(seconds: 3),
                   ),
