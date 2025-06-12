@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'duration_input_view.dart';
 import 'duration_input_button.dart';
 
-class DurationInput extends StatefulWidget {
+class DurationInput extends StatelessWidget {
   
   final String label;
   final Duration value;
@@ -20,15 +20,8 @@ class DurationInput extends StatefulWidget {
     super.key
   });
 
-  @override
-  State<DurationInput> createState() => _DurationInputState();
-
-}
-
-class _DurationInputState extends State<DurationInput> {
-
   void _onSelected(BuildContext context, Duration duration) {
-    widget.onChange?.call(duration);
+    onChange?.call(duration);
     context.pop();
   }
 
@@ -41,9 +34,9 @@ class _DurationInputState extends State<DurationInput> {
       useRootNavigator: true,
       builder: (context) {
         return DurationInputView(
-          title: widget.label,
-          initialValue: widget.value,
-          values: List<int>.generate(108, (int i) => i+1),
+          title: label,
+          initialValue: value,
+          availableValues: List<int>.generate(108, (int i) => i+1),
           onSelect: (Duration duration) => _onSelected(context, duration),
         );
       }
@@ -56,7 +49,7 @@ class _DurationInputState extends State<DurationInput> {
     return DurationInputButton(
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(AppThemeData.paddingXl),
-      child: Text(widget.value.inMinutes.toString(),
+      child: Text(value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayLarge!.copyWith(
           color: AppColors.backgroundPaperLight,

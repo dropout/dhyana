@@ -19,12 +19,14 @@ class Services {
   final IdGeneratorService idGeneratorService;
   final RemoteConfigService remoteConfigService;
   final AudioService audioService;
+  final OverlayService overlayService;
 
   Services({
     required this.hapticsService,
     required this.remoteConfigService,
     required this.resourceResolver,
     required this.audioService,
+    required this.overlayService,
     required SharedPreferences sharedPreferences,
     required FirebaseFirestore firebaseFirestore,
     required FirebaseAnalytics firebaseAnalytics,

@@ -3,6 +3,7 @@ import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,7 @@ class Initializer {
 
     Services services = Services(
       audioService: DefaultAudioService(),
+      overlayService: DefaultOverlayService(),
       sharedPreferences: sharedPreferences,
       hapticsService: hapticsService,
       remoteConfigService: remoteConfigService,
@@ -53,8 +55,8 @@ class Initializer {
     );
 
     logger.t('Preload shaders');
-    await services.shaderService.loadShader('shaders/linear_gradient_mask.frag');
-    await services.shaderService.loadShader('shaders/gradient_flow.frag');
+    await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
+    await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
     logger.t('Initialize repositories');
     AuthRepository authRepository = FirebaseAuthRepository(

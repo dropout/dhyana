@@ -1,17 +1,17 @@
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/timer/settings/all.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 
 class DurationInputView extends StatefulWidget {
 
-  final String title;
+  final List<int> availableValues;
   final Duration? initialValue;
-  final List<int> values;
+  final String title;
   final void Function(Duration duration)? onSelect;
 
   const DurationInputView({
-    required this.values,
+    required this.availableValues,
     this.initialValue,
     this.title = '',
     this.onSelect,
@@ -20,6 +20,7 @@ class DurationInputView extends StatefulWidget {
 
   @override
   State<DurationInputView> createState() => _DurationInputViewState();
+
 }
 
 class _DurationInputViewState extends State<DurationInputView> with TickerProviderStateMixin {
@@ -32,7 +33,7 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
   void initState() {
     if (widget.initialValue != null) {
       int minutes = widget.initialValue!.inMinutes;
-      int indexOfInitialValue = widget.values.indexOf(minutes);
+      int indexOfInitialValue = widget.availableValues.indexOf(minutes);
       selectedIndex = (indexOfInitialValue >= 0) ? indexOfInitialValue : 0;
     } else {
       selectedIndex = 0;
@@ -47,7 +48,9 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
   }
 
   void _onSelectButtonPress(BuildContext context) {
-    widget.onSelect?.call(Duration(minutes: widget.values[selectedIndex]));
+    widget.onSelect?.call(
+      Duration(minutes: widget.availableValues[selectedIndex])
+    );
   }
 
   @override
@@ -55,11 +58,11 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
     return InputView(
       title: widget.title,
       onSave: () => _onSelectButtonPress(context),
-      child: buildContent(context),
+      child: buildListWheelScollView(context),
     );
   }
 
-  Widget buildContent(BuildContext context) {
+  Widget buildListWheelScollView(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
         bottom: AppThemeData.paddingXl
@@ -70,36 +73,7 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
           controller: scrollController,
           physics: scrollPhysics,
           itemExtent: 48,
-          children: widget.values.map((int value) {
-
-            String text;
-            TextStyle textStyle;
-            if (value == widget.values[selectedIndex]) {
-              text = AppLocalizations.of(context).minutesPluralWithNumber(value);
-              textStyle = Theme.of(context).textTheme.headlineMedium!.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              );
-            } else {
-              text = value.toString();
-              textStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              );
-            }
-
-            return SizedBox(
-              height: 48,
-              child: AnimatedDefaultTextStyle(
-                style: textStyle,
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeOut,
-                child: Center(
-                  child: Text(text),
-                ),
-              )
-            );
-
-          }).toList(),
+          children: buildListWheelScrollViewChildren(context),
           onSelectedItemChanged: (int index) {
             setState(() {
               selectedIndex = index;
@@ -108,6 +82,39 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
         )
       ),
     );
+  }
+
+  List<Widget> buildListWheelScrollViewChildren(BuildContext context) {
+    return widget.availableValues.map((int value) {
+
+      String text;
+      TextStyle textStyle;
+      if (value == widget.availableValues[selectedIndex]) {
+        text = context.localizations.minutesPluralWithNumber(value);
+        textStyle = context.theme.textTheme.headlineMedium!.copyWith(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        );
+      } else {
+        text = value.toString();
+        textStyle = context.theme.textTheme.bodyLarge!.copyWith(
+          fontWeight: FontWeight.bold,
+        );
+      }
+
+      return SizedBox(
+        height: 48,
+        child: AnimatedDefaultTextStyle(
+          style: textStyle,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+          child: Center(
+            child: Text(text),
+          ),
+        )
+      );
+
+    }).toList();
   }
 
 }
