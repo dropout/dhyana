@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,65 +10,51 @@ part of 'timer_settings_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$TimerSettingsEvent {
-  TimerSettings? get timerSettings => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TimerSettings? timerSettings) load,
-    required TResult Function(TimerSettings timerSettings) changed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettings? timerSettings)? load,
-    TResult? Function(TimerSettings timerSettings)? changed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TimerSettings? timerSettings)? load,
-    TResult Function(TimerSettings timerSettings)? changed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadTimerSettingsData value) load,
-    required TResult Function(TimerSettingsChanged value) changed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadTimerSettingsData value)? load,
-    TResult? Function(TimerSettingsChanged value)? changed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadTimerSettingsData value)? load,
-    TResult Function(TimerSettingsChanged value)? changed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+mixin _$TimerSettingsEvent implements DiagnosticableTreeMixin {
+  TimerSettings? get timerSettings;
 
   /// Create a copy of TimerSettingsEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TimerSettingsEventCopyWith<TimerSettingsEvent> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$TimerSettingsEventCopyWithImpl<TimerSettingsEvent>(
+          this as TimerSettingsEvent, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'TimerSettingsEvent'))
+      ..add(DiagnosticsProperty('timerSettings', timerSettings));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TimerSettingsEvent &&
+            (identical(other.timerSettings, timerSettings) ||
+                other.timerSettings == timerSettings));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, timerSettings);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsEvent(timerSettings: $timerSettings)';
+  }
 }
 
 /// @nodoc
-abstract class $TimerSettingsEventCopyWith<$Res> {
+abstract mixin class $TimerSettingsEventCopyWith<$Res> {
   factory $TimerSettingsEventCopyWith(
-          TimerSettingsEvent value, $Res Function(TimerSettingsEvent) then) =
-      _$TimerSettingsEventCopyWithImpl<$Res, TimerSettingsEvent>;
+          TimerSettingsEvent value, $Res Function(TimerSettingsEvent) _then) =
+      _$TimerSettingsEventCopyWithImpl;
   @useResult
   $Res call({TimerSettings timerSettings});
 
@@ -75,14 +62,12 @@ abstract class $TimerSettingsEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TimerSettingsEventCopyWithImpl<$Res, $Val extends TimerSettingsEvent>
+class _$TimerSettingsEventCopyWithImpl<$Res>
     implements $TimerSettingsEventCopyWith<$Res> {
-  _$TimerSettingsEventCopyWithImpl(this._value, this._then);
+  _$TimerSettingsEventCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final TimerSettingsEvent _self;
+  final $Res Function(TimerSettingsEvent) _then;
 
   /// Create a copy of TimerSettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -91,12 +76,12 @@ class _$TimerSettingsEventCopyWithImpl<$Res, $Val extends TimerSettingsEvent>
   $Res call({
     Object? timerSettings = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       timerSettings: null == timerSettings
-          ? _value.timerSettings!
+          ? _self.timerSettings!
           : timerSettings // ignore: cast_nullable_to_non_nullable
               as TimerSettings,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of TimerSettingsEvent
@@ -104,72 +89,36 @@ class _$TimerSettingsEventCopyWithImpl<$Res, $Val extends TimerSettingsEvent>
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingsCopyWith<$Res>? get timerSettings {
-    if (_value.timerSettings == null) {
+    if (_self.timerSettings == null) {
       return null;
     }
 
-    return $TimerSettingsCopyWith<$Res>(_value.timerSettings!, (value) {
-      return _then(_value.copyWith(timerSettings: value) as $Val);
+    return $TimerSettingsCopyWith<$Res>(_self.timerSettings!, (value) {
+      return _then(_self.copyWith(timerSettings: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$LoadTimerSettingsDataImplCopyWith<$Res>
-    implements $TimerSettingsEventCopyWith<$Res> {
-  factory _$$LoadTimerSettingsDataImplCopyWith(
-          _$LoadTimerSettingsDataImpl value,
-          $Res Function(_$LoadTimerSettingsDataImpl) then) =
-      __$$LoadTimerSettingsDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TimerSettings? timerSettings});
 
-  @override
-  $TimerSettingsCopyWith<$Res>? get timerSettings;
-}
-
-/// @nodoc
-class __$$LoadTimerSettingsDataImplCopyWithImpl<$Res>
-    extends _$TimerSettingsEventCopyWithImpl<$Res, _$LoadTimerSettingsDataImpl>
-    implements _$$LoadTimerSettingsDataImplCopyWith<$Res> {
-  __$$LoadTimerSettingsDataImplCopyWithImpl(_$LoadTimerSettingsDataImpl _value,
-      $Res Function(_$LoadTimerSettingsDataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TimerSettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? timerSettings = freezed,
-  }) {
-    return _then(_$LoadTimerSettingsDataImpl(
-      timerSettings: freezed == timerSettings
-          ? _value.timerSettings
-          : timerSettings // ignore: cast_nullable_to_non_nullable
-              as TimerSettings?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadTimerSettingsDataImpl extends LoadTimerSettingsData
+class LoadTimerSettingsData extends TimerSettingsEvent
     with DiagnosticableTreeMixin {
-  const _$LoadTimerSettingsDataImpl({this.timerSettings}) : super._();
+  const LoadTimerSettingsData({this.timerSettings}) : super._();
 
   @override
   final TimerSettings? timerSettings;
 
+  /// Create a copy of TimerSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsEvent.load(timerSettings: $timerSettings)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $LoadTimerSettingsDataCopyWith<LoadTimerSettingsData> get copyWith =>
+      _$LoadTimerSettingsDataCopyWithImpl<LoadTimerSettingsData>(
+          this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TimerSettingsEvent.load'))
       ..add(DiagnosticsProperty('timerSettings', timerSettings));
@@ -179,7 +128,7 @@ class _$LoadTimerSettingsDataImpl extends LoadTimerSettingsData
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadTimerSettingsDataImpl &&
+            other is LoadTimerSettingsData &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
@@ -187,128 +136,46 @@ class _$LoadTimerSettingsDataImpl extends LoadTimerSettingsData
   @override
   int get hashCode => Object.hash(runtimeType, timerSettings);
 
-  /// Create a copy of TimerSettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$LoadTimerSettingsDataImplCopyWith<_$LoadTimerSettingsDataImpl>
-      get copyWith => __$$LoadTimerSettingsDataImplCopyWithImpl<
-          _$LoadTimerSettingsDataImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TimerSettings? timerSettings) load,
-    required TResult Function(TimerSettings timerSettings) changed,
-  }) {
-    return load(timerSettings);
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsEvent.load(timerSettings: $timerSettings)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettings? timerSettings)? load,
-    TResult? Function(TimerSettings timerSettings)? changed,
-  }) {
-    return load?.call(timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TimerSettings? timerSettings)? load,
-    TResult Function(TimerSettings timerSettings)? changed,
-    required TResult orElse(),
-  }) {
-    if (load != null) {
-      return load(timerSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadTimerSettingsData value) load,
-    required TResult Function(TimerSettingsChanged value) changed,
-  }) {
-    return load(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadTimerSettingsData value)? load,
-    TResult? Function(TimerSettingsChanged value)? changed,
-  }) {
-    return load?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadTimerSettingsData value)? load,
-    TResult Function(TimerSettingsChanged value)? changed,
-    required TResult orElse(),
-  }) {
-    if (load != null) {
-      return load(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadTimerSettingsData extends TimerSettingsEvent {
-  const factory LoadTimerSettingsData({final TimerSettings? timerSettings}) =
-      _$LoadTimerSettingsDataImpl;
-  const LoadTimerSettingsData._() : super._();
-
-  @override
-  TimerSettings? get timerSettings;
-
-  /// Create a copy of TimerSettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadTimerSettingsDataImplCopyWith<_$LoadTimerSettingsDataImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsChangedImplCopyWith<$Res>
+abstract mixin class $LoadTimerSettingsDataCopyWith<$Res>
     implements $TimerSettingsEventCopyWith<$Res> {
-  factory _$$TimerSettingsChangedImplCopyWith(_$TimerSettingsChangedImpl value,
-          $Res Function(_$TimerSettingsChangedImpl) then) =
-      __$$TimerSettingsChangedImplCopyWithImpl<$Res>;
+  factory $LoadTimerSettingsDataCopyWith(LoadTimerSettingsData value,
+          $Res Function(LoadTimerSettingsData) _then) =
+      _$LoadTimerSettingsDataCopyWithImpl;
   @override
   @useResult
-  $Res call({TimerSettings timerSettings});
+  $Res call({TimerSettings? timerSettings});
 
   @override
-  $TimerSettingsCopyWith<$Res> get timerSettings;
+  $TimerSettingsCopyWith<$Res>? get timerSettings;
 }
 
 /// @nodoc
-class __$$TimerSettingsChangedImplCopyWithImpl<$Res>
-    extends _$TimerSettingsEventCopyWithImpl<$Res, _$TimerSettingsChangedImpl>
-    implements _$$TimerSettingsChangedImplCopyWith<$Res> {
-  __$$TimerSettingsChangedImplCopyWithImpl(_$TimerSettingsChangedImpl _value,
-      $Res Function(_$TimerSettingsChangedImpl) _then)
-      : super(_value, _then);
+class _$LoadTimerSettingsDataCopyWithImpl<$Res>
+    implements $LoadTimerSettingsDataCopyWith<$Res> {
+  _$LoadTimerSettingsDataCopyWithImpl(this._self, this._then);
+
+  final LoadTimerSettingsData _self;
+  final $Res Function(LoadTimerSettingsData) _then;
 
   /// Create a copy of TimerSettingsEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? timerSettings = null,
+    Object? timerSettings = freezed,
   }) {
-    return _then(_$TimerSettingsChangedImpl(
-      timerSettings: null == timerSettings
-          ? _value.timerSettings
+    return _then(LoadTimerSettingsData(
+      timerSettings: freezed == timerSettings
+          ? _self.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
-              as TimerSettings,
+              as TimerSettings?,
     ));
   }
 
@@ -316,30 +183,37 @@ class __$$TimerSettingsChangedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TimerSettingsCopyWith<$Res> get timerSettings {
-    return $TimerSettingsCopyWith<$Res>(_value.timerSettings, (value) {
-      return _then(_value.copyWith(timerSettings: value));
+  $TimerSettingsCopyWith<$Res>? get timerSettings {
+    if (_self.timerSettings == null) {
+      return null;
+    }
+
+    return $TimerSettingsCopyWith<$Res>(_self.timerSettings!, (value) {
+      return _then(_self.copyWith(timerSettings: value));
     });
   }
 }
 
 /// @nodoc
 
-class _$TimerSettingsChangedImpl extends TimerSettingsChanged
+class TimerSettingsChanged extends TimerSettingsEvent
     with DiagnosticableTreeMixin {
-  const _$TimerSettingsChangedImpl({required this.timerSettings}) : super._();
+  const TimerSettingsChanged({required this.timerSettings}) : super._();
 
   @override
   final TimerSettings timerSettings;
 
+  /// Create a copy of TimerSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsEvent.changed(timerSettings: $timerSettings)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TimerSettingsChangedCopyWith<TimerSettingsChanged> get copyWith =>
+      _$TimerSettingsChangedCopyWithImpl<TimerSettingsChanged>(
+          this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TimerSettingsEvent.changed'))
       ..add(DiagnosticsProperty('timerSettings', timerSettings));
@@ -349,7 +223,7 @@ class _$TimerSettingsChangedImpl extends TimerSettingsChanged
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsChangedImpl &&
+            other is TimerSettingsChanged &&
             (identical(other.timerSettings, timerSettings) ||
                 other.timerSettings == timerSettings));
   }
@@ -357,295 +231,163 @@ class _$TimerSettingsChangedImpl extends TimerSettingsChanged
   @override
   int get hashCode => Object.hash(runtimeType, timerSettings);
 
-  /// Create a copy of TimerSettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TimerSettingsChangedImplCopyWith<_$TimerSettingsChangedImpl>
-      get copyWith =>
-          __$$TimerSettingsChangedImplCopyWithImpl<_$TimerSettingsChangedImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TimerSettings? timerSettings) load,
-    required TResult Function(TimerSettings timerSettings) changed,
-  }) {
-    return changed(timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettings? timerSettings)? load,
-    TResult? Function(TimerSettings timerSettings)? changed,
-  }) {
-    return changed?.call(timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TimerSettings? timerSettings)? load,
-    TResult Function(TimerSettings timerSettings)? changed,
-    required TResult orElse(),
-  }) {
-    if (changed != null) {
-      return changed(timerSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadTimerSettingsData value) load,
-    required TResult Function(TimerSettingsChanged value) changed,
-  }) {
-    return changed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadTimerSettingsData value)? load,
-    TResult? Function(TimerSettingsChanged value)? changed,
-  }) {
-    return changed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadTimerSettingsData value)? load,
-    TResult Function(TimerSettingsChanged value)? changed,
-    required TResult orElse(),
-  }) {
-    if (changed != null) {
-      return changed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TimerSettingsChanged extends TimerSettingsEvent {
-  const factory TimerSettingsChanged(
-          {required final TimerSettings timerSettings}) =
-      _$TimerSettingsChangedImpl;
-  const TimerSettingsChanged._() : super._();
-
-  @override
-  TimerSettings get timerSettings;
-
-  /// Create a copy of TimerSettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimerSettingsChangedImplCopyWith<_$TimerSettingsChangedImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$TimerSettingsState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(TimerSettings timerSettings) loaded,
-    required TResult Function() error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(TimerSettings timerSettings)? loaded,
-    TResult? Function()? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(TimerSettings timerSettings)? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsDataLoadingState value) loading,
-    required TResult Function(TimerSettingsDataLoadedState value) loaded,
-    required TResult Function(TimerSettingsDataErrorState value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsDataLoadingState value)? loading,
-    TResult? Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult? Function(TimerSettingsDataErrorState value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsDataLoadingState value)? loading,
-    TResult Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult Function(TimerSettingsDataErrorState value)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TimerSettingsStateCopyWith<$Res> {
-  factory $TimerSettingsStateCopyWith(
-          TimerSettingsState value, $Res Function(TimerSettingsState) then) =
-      _$TimerSettingsStateCopyWithImpl<$Res, TimerSettingsState>;
-}
-
-/// @nodoc
-class _$TimerSettingsStateCopyWithImpl<$Res, $Val extends TimerSettingsState>
-    implements $TimerSettingsStateCopyWith<$Res> {
-  _$TimerSettingsStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TimerSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$TimerSettingsDataLoadingStateImplCopyWith<$Res> {
-  factory _$$TimerSettingsDataLoadingStateImplCopyWith(
-          _$TimerSettingsDataLoadingStateImpl value,
-          $Res Function(_$TimerSettingsDataLoadingStateImpl) then) =
-      __$$TimerSettingsDataLoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TimerSettingsDataLoadingStateImplCopyWithImpl<$Res>
-    extends _$TimerSettingsStateCopyWithImpl<$Res,
-        _$TimerSettingsDataLoadingStateImpl>
-    implements _$$TimerSettingsDataLoadingStateImplCopyWith<$Res> {
-  __$$TimerSettingsDataLoadingStateImplCopyWithImpl(
-      _$TimerSettingsDataLoadingStateImpl _value,
-      $Res Function(_$TimerSettingsDataLoadingStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TimerSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$TimerSettingsDataLoadingStateImpl extends TimerSettingsDataLoadingState
-    with DiagnosticableTreeMixin {
-  const _$TimerSettingsDataLoadingStateImpl() : super._();
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsState.loading()';
+    return 'TimerSettingsEvent.changed(timerSettings: $timerSettings)';
   }
+}
+
+/// @nodoc
+abstract mixin class $TimerSettingsChangedCopyWith<$Res>
+    implements $TimerSettingsEventCopyWith<$Res> {
+  factory $TimerSettingsChangedCopyWith(TimerSettingsChanged value,
+          $Res Function(TimerSettingsChanged) _then) =
+      _$TimerSettingsChangedCopyWithImpl;
+  @override
+  @useResult
+  $Res call({TimerSettings timerSettings});
 
   @override
+  $TimerSettingsCopyWith<$Res> get timerSettings;
+}
+
+/// @nodoc
+class _$TimerSettingsChangedCopyWithImpl<$Res>
+    implements $TimerSettingsChangedCopyWith<$Res> {
+  _$TimerSettingsChangedCopyWithImpl(this._self, this._then);
+
+  final TimerSettingsChanged _self;
+  final $Res Function(TimerSettingsChanged) _then;
+
+  /// Create a copy of TimerSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? timerSettings = null,
+  }) {
+    return _then(TimerSettingsChanged(
+      timerSettings: null == timerSettings
+          ? _self.timerSettings
+          : timerSettings // ignore: cast_nullable_to_non_nullable
+              as TimerSettings,
+    ));
+  }
+
+  /// Create a copy of TimerSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TimerSettingsCopyWith<$Res> get timerSettings {
+    return $TimerSettingsCopyWith<$Res>(_self.timerSettings, (value) {
+      return _then(_self.copyWith(timerSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$TimerSettingsState implements DiagnosticableTreeMixin {
+  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TimerSettingsState.loading'));
+    properties..add(DiagnosticsProperty('type', 'TimerSettingsState'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsDataLoadingStateImpl);
+        (other.runtimeType == runtimeType && other is TimerSettingsState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(TimerSettings timerSettings) loaded,
-    required TResult Function() error,
-  }) {
-    return loading();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsState()';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(TimerSettings timerSettings)? loaded,
-    TResult? Function()? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(TimerSettings timerSettings)? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsDataLoadingState value) loading,
-    required TResult Function(TimerSettingsDataLoadedState value) loaded,
-    required TResult Function(TimerSettingsDataErrorState value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsDataLoadingState value)? loading,
-    TResult? Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult? Function(TimerSettingsDataErrorState value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsDataLoadingState value)? loading,
-    TResult Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult Function(TimerSettingsDataErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TimerSettingsDataLoadingState extends TimerSettingsState {
-  const factory TimerSettingsDataLoadingState() =
-      _$TimerSettingsDataLoadingStateImpl;
-  const TimerSettingsDataLoadingState._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TimerSettingsDataLoadedStateImplCopyWith<$Res> {
-  factory _$$TimerSettingsDataLoadedStateImplCopyWith(
-          _$TimerSettingsDataLoadedStateImpl value,
-          $Res Function(_$TimerSettingsDataLoadedStateImpl) then) =
-      __$$TimerSettingsDataLoadedStateImplCopyWithImpl<$Res>;
+class $TimerSettingsStateCopyWith<$Res> {
+  $TimerSettingsStateCopyWith(
+      TimerSettingsState _, $Res Function(TimerSettingsState) __);
+}
+
+/// @nodoc
+
+class TimerSettingsDataLoadingState extends TimerSettingsState
+    with DiagnosticableTreeMixin {
+  const TimerSettingsDataLoadingState() : super._();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'TimerSettingsState.loading'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TimerSettingsDataLoadingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsState.loading()';
+  }
+}
+
+/// @nodoc
+
+class TimerSettingsDataLoadedState extends TimerSettingsState
+    with DiagnosticableTreeMixin {
+  const TimerSettingsDataLoadedState({required this.timerSettings}) : super._();
+
+  final TimerSettings timerSettings;
+
+  /// Create a copy of TimerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TimerSettingsDataLoadedStateCopyWith<TimerSettingsDataLoadedState>
+      get copyWith => _$TimerSettingsDataLoadedStateCopyWithImpl<
+          TimerSettingsDataLoadedState>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'TimerSettingsState.loaded'))
+      ..add(DiagnosticsProperty('timerSettings', timerSettings));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TimerSettingsDataLoadedState &&
+            (identical(other.timerSettings, timerSettings) ||
+                other.timerSettings == timerSettings));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, timerSettings);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsState.loaded(timerSettings: $timerSettings)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TimerSettingsDataLoadedStateCopyWith<$Res>
+    implements $TimerSettingsStateCopyWith<$Res> {
+  factory $TimerSettingsDataLoadedStateCopyWith(
+          TimerSettingsDataLoadedState value,
+          $Res Function(TimerSettingsDataLoadedState) _then) =
+      _$TimerSettingsDataLoadedStateCopyWithImpl;
   @useResult
   $Res call({TimerSettings timerSettings});
 
@@ -653,25 +395,22 @@ abstract class _$$TimerSettingsDataLoadedStateImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TimerSettingsDataLoadedStateImplCopyWithImpl<$Res>
-    extends _$TimerSettingsStateCopyWithImpl<$Res,
-        _$TimerSettingsDataLoadedStateImpl>
-    implements _$$TimerSettingsDataLoadedStateImplCopyWith<$Res> {
-  __$$TimerSettingsDataLoadedStateImplCopyWithImpl(
-      _$TimerSettingsDataLoadedStateImpl _value,
-      $Res Function(_$TimerSettingsDataLoadedStateImpl) _then)
-      : super(_value, _then);
+class _$TimerSettingsDataLoadedStateCopyWithImpl<$Res>
+    implements $TimerSettingsDataLoadedStateCopyWith<$Res> {
+  _$TimerSettingsDataLoadedStateCopyWithImpl(this._self, this._then);
+
+  final TimerSettingsDataLoadedState _self;
+  final $Res Function(TimerSettingsDataLoadedState) _then;
 
   /// Create a copy of TimerSettingsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? timerSettings = null,
   }) {
-    return _then(_$TimerSettingsDataLoadedStateImpl(
+    return _then(TimerSettingsDataLoadedState(
       timerSettings: null == timerSettings
-          ? _value.timerSettings
+          ? _self.timerSettings
           : timerSettings // ignore: cast_nullable_to_non_nullable
               as TimerSettings,
     ));
@@ -682,262 +421,37 @@ class __$$TimerSettingsDataLoadedStateImplCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingsCopyWith<$Res> get timerSettings {
-    return $TimerSettingsCopyWith<$Res>(_value.timerSettings, (value) {
-      return _then(_value.copyWith(timerSettings: value));
+    return $TimerSettingsCopyWith<$Res>(_self.timerSettings, (value) {
+      return _then(_self.copyWith(timerSettings: value));
     });
   }
 }
 
 /// @nodoc
 
-class _$TimerSettingsDataLoadedStateImpl extends TimerSettingsDataLoadedState
+class TimerSettingsDataErrorState extends TimerSettingsState
     with DiagnosticableTreeMixin {
-  const _$TimerSettingsDataLoadedStateImpl({required this.timerSettings})
-      : super._();
-
-  @override
-  final TimerSettings timerSettings;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsState.loaded(timerSettings: $timerSettings)';
-  }
+  const TimerSettingsDataErrorState() : super._();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TimerSettingsState.loaded'))
-      ..add(DiagnosticsProperty('timerSettings', timerSettings));
+    properties..add(DiagnosticsProperty('type', 'TimerSettingsState.error'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsDataLoadedStateImpl &&
-            (identical(other.timerSettings, timerSettings) ||
-                other.timerSettings == timerSettings));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, timerSettings);
-
-  /// Create a copy of TimerSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TimerSettingsDataLoadedStateImplCopyWith<
-          _$TimerSettingsDataLoadedStateImpl>
-      get copyWith => __$$TimerSettingsDataLoadedStateImplCopyWithImpl<
-          _$TimerSettingsDataLoadedStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(TimerSettings timerSettings) loaded,
-    required TResult Function() error,
-  }) {
-    return loaded(timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(TimerSettings timerSettings)? loaded,
-    TResult? Function()? error,
-  }) {
-    return loaded?.call(timerSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(TimerSettings timerSettings)? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(timerSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsDataLoadingState value) loading,
-    required TResult Function(TimerSettingsDataLoadedState value) loaded,
-    required TResult Function(TimerSettingsDataErrorState value) error,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsDataLoadingState value)? loading,
-    TResult? Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult? Function(TimerSettingsDataErrorState value)? error,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsDataLoadingState value)? loading,
-    TResult Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult Function(TimerSettingsDataErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TimerSettingsDataLoadedState extends TimerSettingsState {
-  const factory TimerSettingsDataLoadedState(
-          {required final TimerSettings timerSettings}) =
-      _$TimerSettingsDataLoadedStateImpl;
-  const TimerSettingsDataLoadedState._() : super._();
-
-  TimerSettings get timerSettings;
-
-  /// Create a copy of TimerSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimerSettingsDataLoadedStateImplCopyWith<
-          _$TimerSettingsDataLoadedStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TimerSettingsDataErrorStateImplCopyWith<$Res> {
-  factory _$$TimerSettingsDataErrorStateImplCopyWith(
-          _$TimerSettingsDataErrorStateImpl value,
-          $Res Function(_$TimerSettingsDataErrorStateImpl) then) =
-      __$$TimerSettingsDataErrorStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TimerSettingsDataErrorStateImplCopyWithImpl<$Res>
-    extends _$TimerSettingsStateCopyWithImpl<$Res,
-        _$TimerSettingsDataErrorStateImpl>
-    implements _$$TimerSettingsDataErrorStateImplCopyWith<$Res> {
-  __$$TimerSettingsDataErrorStateImplCopyWithImpl(
-      _$TimerSettingsDataErrorStateImpl _value,
-      $Res Function(_$TimerSettingsDataErrorStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TimerSettingsState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$TimerSettingsDataErrorStateImpl extends TimerSettingsDataErrorState
-    with DiagnosticableTreeMixin {
-  const _$TimerSettingsDataErrorStateImpl() : super._();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsState.error()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TimerSettingsState.error'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsDataErrorStateImpl);
+            other is TimerSettingsDataErrorState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(TimerSettings timerSettings) loaded,
-    required TResult Function() error,
-  }) {
-    return error();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(TimerSettings timerSettings)? loaded,
-    TResult? Function()? error,
-  }) {
-    return error?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(TimerSettings timerSettings)? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TimerSettingsDataLoadingState value) loading,
-    required TResult Function(TimerSettingsDataLoadedState value) loaded,
-    required TResult Function(TimerSettingsDataErrorState value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TimerSettingsDataLoadingState value)? loading,
-    TResult? Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult? Function(TimerSettingsDataErrorState value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TimerSettingsDataLoadingState value)? loading,
-    TResult Function(TimerSettingsDataLoadedState value)? loaded,
-    TResult Function(TimerSettingsDataErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsState.error()';
   }
 }
 
-abstract class TimerSettingsDataErrorState extends TimerSettingsState {
-  const factory TimerSettingsDataErrorState() =
-      _$TimerSettingsDataErrorStateImpl;
-  const TimerSettingsDataErrorState._() : super._();
-}
+// dart format on

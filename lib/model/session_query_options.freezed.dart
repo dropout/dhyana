@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,120 +10,26 @@ part of 'session_query_options.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SessionQueryOptions _$SessionQueryOptionsFromJson(Map<String, dynamic> json) {
-  return _SessionQueryOptions.fromJson(json);
-}
-
 /// @nodoc
-mixin _$SessionQueryOptions {
-  int get limit => throw _privateConstructorUsedError;
-
-  /// Serializes this SessionQueryOptions to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+mixin _$SessionQueryOptions implements DiagnosticableTreeMixin {
+  int get limit;
 
   /// Create a copy of SessionQueryOptions
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SessionQueryOptionsCopyWith<SessionQueryOptions> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$SessionQueryOptionsCopyWithImpl<SessionQueryOptions>(
+          this as SessionQueryOptions, _$identity);
 
-/// @nodoc
-abstract class $SessionQueryOptionsCopyWith<$Res> {
-  factory $SessionQueryOptionsCopyWith(
-          SessionQueryOptions value, $Res Function(SessionQueryOptions) then) =
-      _$SessionQueryOptionsCopyWithImpl<$Res, SessionQueryOptions>;
-  @useResult
-  $Res call({int limit});
-}
-
-/// @nodoc
-class _$SessionQueryOptionsCopyWithImpl<$Res, $Val extends SessionQueryOptions>
-    implements $SessionQueryOptionsCopyWith<$Res> {
-  _$SessionQueryOptionsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SessionQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_value.copyWith(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SessionQueryOptionsImplCopyWith<$Res>
-    implements $SessionQueryOptionsCopyWith<$Res> {
-  factory _$$SessionQueryOptionsImplCopyWith(_$SessionQueryOptionsImpl value,
-          $Res Function(_$SessionQueryOptionsImpl) then) =
-      __$$SessionQueryOptionsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int limit});
-}
-
-/// @nodoc
-class __$$SessionQueryOptionsImplCopyWithImpl<$Res>
-    extends _$SessionQueryOptionsCopyWithImpl<$Res, _$SessionQueryOptionsImpl>
-    implements _$$SessionQueryOptionsImplCopyWith<$Res> {
-  __$$SessionQueryOptionsImplCopyWithImpl(_$SessionQueryOptionsImpl _value,
-      $Res Function(_$SessionQueryOptionsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SessionQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_$SessionQueryOptionsImpl(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SessionQueryOptionsImpl extends _SessionQueryOptions
-    with DiagnosticableTreeMixin {
-  const _$SessionQueryOptionsImpl({this.limit = 20}) : super._();
-
-  factory _$SessionQueryOptionsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SessionQueryOptionsImplFromJson(json);
-
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SessionQueryOptions(limit: $limit)';
-  }
+  /// Serializes this SessionQueryOptions to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SessionQueryOptions'))
       ..add(DiagnosticsProperty('limit', limit));
@@ -132,7 +39,7 @@ class _$SessionQueryOptionsImpl extends _SessionQueryOptions
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SessionQueryOptionsImpl &&
+            other is SessionQueryOptions &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
@@ -140,38 +47,131 @@ class _$SessionQueryOptionsImpl extends _SessionQueryOptions
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SessionQueryOptions(limit: $limit)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SessionQueryOptionsCopyWith<$Res> {
+  factory $SessionQueryOptionsCopyWith(
+          SessionQueryOptions value, $Res Function(SessionQueryOptions) _then) =
+      _$SessionQueryOptionsCopyWithImpl;
+  @useResult
+  $Res call({int limit});
+}
+
+/// @nodoc
+class _$SessionQueryOptionsCopyWithImpl<$Res>
+    implements $SessionQueryOptionsCopyWith<$Res> {
+  _$SessionQueryOptionsCopyWithImpl(this._self, this._then);
+
+  final SessionQueryOptions _self;
+  final $Res Function(SessionQueryOptions) _then;
+
   /// Create a copy of SessionQueryOptions
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$SessionQueryOptionsImplCopyWith<_$SessionQueryOptionsImpl> get copyWith =>
-      __$$SessionQueryOptionsImplCopyWithImpl<_$SessionQueryOptionsImpl>(
+  @override
+  $Res call({
+    Object? limit = null,
+  }) {
+    return _then(_self.copyWith(
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SessionQueryOptions extends SessionQueryOptions
+    with DiagnosticableTreeMixin {
+  const _SessionQueryOptions({this.limit = 20}) : super._();
+  factory _SessionQueryOptions.fromJson(Map<String, dynamic> json) =>
+      _$SessionQueryOptionsFromJson(json);
+
+  @override
+  @JsonKey()
+  final int limit;
+
+  /// Create a copy of SessionQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SessionQueryOptionsCopyWith<_SessionQueryOptions> get copyWith =>
+      __$SessionQueryOptionsCopyWithImpl<_SessionQueryOptions>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SessionQueryOptionsImplToJson(
+    return _$SessionQueryOptionsToJson(
       this,
     );
   }
-}
-
-abstract class _SessionQueryOptions extends SessionQueryOptions {
-  const factory _SessionQueryOptions({final int limit}) =
-      _$SessionQueryOptionsImpl;
-  const _SessionQueryOptions._() : super._();
-
-  factory _SessionQueryOptions.fromJson(Map<String, dynamic> json) =
-      _$SessionQueryOptionsImpl.fromJson;
 
   @override
-  int get limit;
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'SessionQueryOptions'))
+      ..add(DiagnosticsProperty('limit', limit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SessionQueryOptions &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, limit);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SessionQueryOptions(limit: $limit)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SessionQueryOptionsCopyWith<$Res>
+    implements $SessionQueryOptionsCopyWith<$Res> {
+  factory _$SessionQueryOptionsCopyWith(_SessionQueryOptions value,
+          $Res Function(_SessionQueryOptions) _then) =
+      __$SessionQueryOptionsCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int limit});
+}
+
+/// @nodoc
+class __$SessionQueryOptionsCopyWithImpl<$Res>
+    implements _$SessionQueryOptionsCopyWith<$Res> {
+  __$SessionQueryOptionsCopyWithImpl(this._self, this._then);
+
+  final _SessionQueryOptions _self;
+  final $Res Function(_SessionQueryOptions) _then;
 
   /// Create a copy of SessionQueryOptions
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SessionQueryOptionsImplCopyWith<_$SessionQueryOptionsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? limit = null,
+  }) {
+    return _then(_SessionQueryOptions(
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
+
+// dart format on

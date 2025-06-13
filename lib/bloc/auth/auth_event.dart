@@ -1,7 +1,7 @@
 part of 'auth_bloc.dart';
 
 @freezed
-sealed class AuthEvent with _$AuthEvent {
+abstract class AuthEvent with _$AuthEvent {
 
   const AuthEvent._();
 

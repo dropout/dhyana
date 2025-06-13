@@ -6,9 +6,8 @@ part of 'milestone_progress.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MilestoneProgressImpl _$$MilestoneProgressImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MilestoneProgressImpl(
+_MilestoneProgress _$MilestoneProgressFromJson(Map<String, dynamic> json) =>
+    _MilestoneProgress(
       completedDaysCount: (json['completedDaysCount'] as num?)?.toInt() ?? 0,
       targetDaysCount: (json['targetDaysCount'] as num?)?.toInt() ?? 7,
       sessions: (json['sessions'] as List<dynamic>?)
@@ -17,8 +16,7 @@ _$MilestoneProgressImpl _$$MilestoneProgressImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$MilestoneProgressImplToJson(
-        _$MilestoneProgressImpl instance) =>
+Map<String, dynamic> _$MilestoneProgressToJson(_MilestoneProgress instance) =>
     <String, dynamic>{
       'completedDaysCount': instance.completedDaysCount,
       'targetDaysCount': instance.targetDaysCount,

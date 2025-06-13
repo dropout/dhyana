@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 part 'year_query_options.freezed.dart';
 
 @freezed
-class YearQueryOptions with _$YearQueryOptions {
+sealed class YearQueryOptions with _$YearQueryOptions {
 
   const YearQueryOptions._();
 

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 part 'day_query_options.freezed.dart';
 
 @freezed
-class DayQueryOptions with _$DayQueryOptions {
+sealed class DayQueryOptions with _$DayQueryOptions {
 
   const DayQueryOptions._();
 

@@ -32,7 +32,7 @@ GoRouter createAppRouter({required InitResult initResult}) {
   path: '/',
   name: 'HOME',
 )
-class HomeRoute extends GoRouteData {
+class HomeRoute extends GoRouteData with _$HomeRoute {
   final TimerSettings? $extra;
   const HomeRoute({this.$extra});
 
@@ -45,7 +45,7 @@ class HomeRoute extends GoRouteData {
   path: '/timer',
   name: 'TIMER',
 )
-class TimerRoute extends GoRouteData {
+class TimerRoute extends GoRouteData with _$TimerRoute {
   final TimerSettings $extra;
   const TimerRoute({required this.$extra});
   @override
@@ -79,7 +79,7 @@ class TimerRoute extends GoRouteData {
   path: '/login',
   name: 'LOGIN',
 )
-class LoginRoute extends GoRouteData {
+class LoginRoute extends GoRouteData with _$LoginRoute {
   const LoginRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -108,7 +108,9 @@ mixin AuthRedirectHook {
   path: '/profile/:profileId',
   name: 'PROFILE',
 )
-class ProfileRoute extends GoRouteData with AuthRedirectHook {
+class ProfileRoute extends GoRouteData
+  with AuthRedirectHook, _$ProfileRoute {
+
   final String profileId;
   final Profile? $extra;
   const ProfileRoute({
@@ -122,13 +124,16 @@ class ProfileRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<ProfileWizardRoute>(
   path: '/profileWizard/:profileId',
   name: 'PROFILE_WIZARD',
 )
-class ProfileWizardRoute extends GoRouteData with AuthRedirectHook {
+class ProfileWizardRoute extends GoRouteData
+  with AuthRedirectHook, _$ProfileWizardRoute {
+
   final String profileId;
   const ProfileWizardRoute({required this.profileId});
   @override
@@ -137,13 +142,16 @@ class ProfileWizardRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<ProfileStatsRoute>(
   path: '/profileStats/:profileId',
   name: 'PROFILE_STATS',
 )
-class ProfileStatsRoute extends GoRouteData with AuthRedirectHook {
+class ProfileStatsRoute extends GoRouteData
+  with AuthRedirectHook, _$ProfileStatsRoute {
+
   final String profileId;
   const ProfileStatsRoute({required this.profileId});
   @override
@@ -152,13 +160,16 @@ class ProfileStatsRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<ProfileEditRoute>(
   path: '/editProfile',
   name: 'EDIT_PROFILE'
 )
-class ProfileEditRoute extends GoRouteData with AuthRedirectHook {
+class ProfileEditRoute extends GoRouteData
+  with AuthRedirectHook, _$ProfileEditRoute {
+
   const ProfileEditRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -166,13 +177,16 @@ class ProfileEditRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<DeleteProfileRoute>(
   path: '/deleteProfile',
   name: 'DELETE_PROFILE',
 )
-class DeleteProfileRoute extends GoRouteData with AuthRedirectHook {
+class DeleteProfileRoute extends GoRouteData
+  with AuthRedirectHook, _$DeleteProfileRoute {
+
   const DeleteProfileRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -180,13 +194,16 @@ class DeleteProfileRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<SessionHistoryRoute>(
   path: '/activity',
   name: 'ACTIVITY',
 )
-class SessionHistoryRoute extends GoRouteData with AuthRedirectHook {
+class SessionHistoryRoute extends GoRouteData
+  with AuthRedirectHook, _$SessionHistoryRoute {
+
   final String profileId;
   const SessionHistoryRoute({required this.profileId});
   @override
@@ -195,13 +212,16 @@ class SessionHistoryRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<TimerSettingsHistoryRoute>(
   path: '/timerSettingsHistory/:profileId',
   name: 'TIMER_SETTINGS_HISTORY',
 )
-class TimerSettingsHistoryRoute extends GoRouteData with AuthRedirectHook {
+class TimerSettingsHistoryRoute extends GoRouteData
+  with AuthRedirectHook, _$TimerSettingsHistoryRoute {
+
   final String profileId;
   const TimerSettingsHistoryRoute({required this.profileId});
   @override
@@ -210,13 +230,16 @@ class TimerSettingsHistoryRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }
 
 @TypedGoRoute<PresenceRoute>(
   path: '/presence',
   name: 'PRESENCE',
 )
-class PresenceRoute extends GoRouteData with AuthRedirectHook {
+class PresenceRoute extends GoRouteData
+
+  with AuthRedirectHook, _$PresenceRoute {
   const PresenceRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -224,4 +247,5 @@ class PresenceRoute extends GoRouteData with AuthRedirectHook {
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
     authRedirectHook(context, state);
+
 }

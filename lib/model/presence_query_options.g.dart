@@ -6,9 +6,9 @@ part of 'presence_query_options.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PresenceQueryOptionsImpl _$$PresenceQueryOptionsImplFromJson(
+_PresenceQueryOptions _$PresenceQueryOptionsFromJson(
         Map<String, dynamic> json) =>
-    _$PresenceQueryOptionsImpl(
+    _PresenceQueryOptions(
       windowSize: json['windowSize'] == null
           ? const Duration(hours: 3)
           : Duration(microseconds: (json['windowSize'] as num).toInt()),
@@ -17,8 +17,8 @@ _$PresenceQueryOptionsImpl _$$PresenceQueryOptionsImplFromJson(
       lastDocumentId: json['lastDocumentId'] as String?,
     );
 
-Map<String, dynamic> _$$PresenceQueryOptionsImplToJson(
-        _$PresenceQueryOptionsImpl instance) =>
+Map<String, dynamic> _$PresenceQueryOptionsToJson(
+        _PresenceQueryOptions instance) =>
     <String, dynamic>{
       'windowSize': instance.windowSize.inMicroseconds,
       'limit': instance.limit,

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 part 'week_query_options.freezed.dart';
 
 @freezed
-class WeekQueryOptions with _$WeekQueryOptions {
+sealed class WeekQueryOptions with _$WeekQueryOptions {
 
   const WeekQueryOptions._();
 

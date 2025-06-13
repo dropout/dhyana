@@ -9,7 +9,7 @@ part 'day.freezed.dart';
 part 'day.g.dart';
 
 @freezed
-class Day with _$Day implements Model {
+sealed class Day with _$Day implements Model {
 
   const Day._();
 

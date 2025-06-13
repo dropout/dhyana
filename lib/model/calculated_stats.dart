@@ -9,7 +9,7 @@ part 'calculated_stats.freezed.dart';
 part 'calculated_stats.g.dart';
 
 @freezed
-class CalculatedStats with _$CalculatedStats {
+sealed class CalculatedStats with _$CalculatedStats {
 
   const factory CalculatedStats({
     @Default(0) int totalMinutes,

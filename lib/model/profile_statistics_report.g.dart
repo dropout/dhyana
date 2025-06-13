@@ -6,9 +6,9 @@ part of 'profile_statistics_report.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProfileStatisticsReportImpl _$$ProfileStatisticsReportImplFromJson(
+_ProfileStatisticsReport _$ProfileStatisticsReportFromJson(
         Map<String, dynamic> json) =>
-    _$ProfileStatisticsReportImpl(
+    _ProfileStatisticsReport(
       consecutiveDays: json['consecutiveDays'] == null
           ? const ConsecutiveDays()
           : ConsecutiveDays.fromJson(
@@ -29,8 +29,8 @@ _$ProfileStatisticsReportImpl _$$ProfileStatisticsReportImplFromJson(
           .fromJson((json['lastSessionDate'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$$ProfileStatisticsReportImplToJson(
-        _$ProfileStatisticsReportImpl instance) =>
+Map<String, dynamic> _$ProfileStatisticsReportToJson(
+        _ProfileStatisticsReport instance) =>
     <String, dynamic>{
       'consecutiveDays': instance.consecutiveDays.toJson(),
       'milestoneProgress': instance.milestoneProgress.toJson(),

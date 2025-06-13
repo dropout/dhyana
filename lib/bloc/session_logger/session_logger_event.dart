@@ -1,7 +1,7 @@
 part of 'session_logger_bloc.dart';
 
 @freezed
-class SessionLoggerEvent with _$SessionLoggerEvent {
+sealed class SessionLoggerEvent with _$SessionLoggerEvent {
 
   const factory SessionLoggerEvent.logSession({
     required String profileId,

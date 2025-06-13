@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,204 +10,32 @@ part of 'session.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Session _$SessionFromJson(Map<String, dynamic> json) {
-  return _Session.fromJson(json);
-}
-
 /// @nodoc
-mixin _$Session {
-  String get id => throw _privateConstructorUsedError;
+mixin _$Session implements DiagnosticableTreeMixin {
+  String get id;
   @DateTimeConverter()
-  DateTime get startTime => throw _privateConstructorUsedError;
+  DateTime get startTime;
   @DateTimeConverter()
-  DateTime get endTime => throw _privateConstructorUsedError;
+  DateTime get endTime;
   @DurationConverter()
-  Duration get duration => throw _privateConstructorUsedError;
-  TimerSettings get timerSettings => throw _privateConstructorUsedError;
-
-  /// Serializes this Session to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Duration get duration;
+  TimerSettings get timerSettings;
 
   /// Create a copy of Session
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SessionCopyWith<Session> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SessionCopyWith<$Res> {
-  factory $SessionCopyWith(Session value, $Res Function(Session) then) =
-      _$SessionCopyWithImpl<$Res, Session>;
-  @useResult
-  $Res call(
-      {String id,
-      @DateTimeConverter() DateTime startTime,
-      @DateTimeConverter() DateTime endTime,
-      @DurationConverter() Duration duration,
-      TimerSettings timerSettings});
-
-  $TimerSettingsCopyWith<$Res> get timerSettings;
-}
-
-/// @nodoc
-class _$SessionCopyWithImpl<$Res, $Val extends Session>
-    implements $SessionCopyWith<$Res> {
-  _$SessionCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? startTime = null,
-    Object? endTime = null,
-    Object? duration = null,
-    Object? timerSettings = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      startTime: null == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      endTime: null == endTime
-          ? _value.endTime
-          : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      timerSettings: null == timerSettings
-          ? _value.timerSettings
-          : timerSettings // ignore: cast_nullable_to_non_nullable
-              as TimerSettings,
-    ) as $Val);
-  }
+  $SessionCopyWith<Session> get copyWith =>
+      _$SessionCopyWithImpl<Session>(this as Session, _$identity);
 
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingsCopyWith<$Res> get timerSettings {
-    return $TimerSettingsCopyWith<$Res>(_value.timerSettings, (value) {
-      return _then(_value.copyWith(timerSettings: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$SessionImplCopyWith<$Res> implements $SessionCopyWith<$Res> {
-  factory _$$SessionImplCopyWith(
-          _$SessionImpl value, $Res Function(_$SessionImpl) then) =
-      __$$SessionImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @DateTimeConverter() DateTime startTime,
-      @DateTimeConverter() DateTime endTime,
-      @DurationConverter() Duration duration,
-      TimerSettings timerSettings});
-
-  @override
-  $TimerSettingsCopyWith<$Res> get timerSettings;
-}
-
-/// @nodoc
-class __$$SessionImplCopyWithImpl<$Res>
-    extends _$SessionCopyWithImpl<$Res, _$SessionImpl>
-    implements _$$SessionImplCopyWith<$Res> {
-  __$$SessionImplCopyWithImpl(
-      _$SessionImpl _value, $Res Function(_$SessionImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? startTime = null,
-    Object? endTime = null,
-    Object? duration = null,
-    Object? timerSettings = null,
-  }) {
-    return _then(_$SessionImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      startTime: null == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      endTime: null == endTime
-          ? _value.endTime
-          : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      timerSettings: null == timerSettings
-          ? _value.timerSettings
-          : timerSettings // ignore: cast_nullable_to_non_nullable
-              as TimerSettings,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
-  const _$SessionImpl(
-      {required this.id,
-      @DateTimeConverter() required this.startTime,
-      @DateTimeConverter() required this.endTime,
-      @DurationConverter() required this.duration,
-      required this.timerSettings})
-      : super._();
-
-  factory _$SessionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SessionImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  @DateTimeConverter()
-  final DateTime startTime;
-  @override
-  @DateTimeConverter()
-  final DateTime endTime;
-  @override
-  @DurationConverter()
-  final Duration duration;
-  @override
-  final TimerSettings timerSettings;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Session(id: $id, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings)';
-  }
+  /// Serializes this Session to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Session'))
       ..add(DiagnosticsProperty('id', id))
@@ -220,7 +49,7 @@ class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SessionImpl &&
+            other is Session &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
@@ -236,51 +65,227 @@ class _$SessionImpl extends _Session with DiagnosticableTreeMixin {
   int get hashCode =>
       Object.hash(runtimeType, id, startTime, endTime, duration, timerSettings);
 
-  /// Create a copy of Session
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SessionImplCopyWith<_$SessionImpl> get copyWith =>
-      __$$SessionImplCopyWithImpl<_$SessionImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SessionImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Session(id: $id, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings)';
   }
 }
 
-abstract class _Session extends Session {
-  const factory _Session(
-      {required final String id,
-      @DateTimeConverter() required final DateTime startTime,
-      @DateTimeConverter() required final DateTime endTime,
-      @DurationConverter() required final Duration duration,
-      required final TimerSettings timerSettings}) = _$SessionImpl;
-  const _Session._() : super._();
+/// @nodoc
+abstract mixin class $SessionCopyWith<$Res> {
+  factory $SessionCopyWith(Session value, $Res Function(Session) _then) =
+      _$SessionCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      @DateTimeConverter() DateTime startTime,
+      @DateTimeConverter() DateTime endTime,
+      @DurationConverter() Duration duration,
+      TimerSettings timerSettings});
 
-  factory _Session.fromJson(Map<String, dynamic> json) = _$SessionImpl.fromJson;
+  $TimerSettingsCopyWith<$Res> get timerSettings;
+}
+
+/// @nodoc
+class _$SessionCopyWithImpl<$Res> implements $SessionCopyWith<$Res> {
+  _$SessionCopyWithImpl(this._self, this._then);
+
+  final Session _self;
+  final $Res Function(Session) _then;
+
+  /// Create a copy of Session
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? startTime = null,
+    Object? endTime = null,
+    Object? duration = null,
+    Object? timerSettings = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _self.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _self.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duration: null == duration
+          ? _self.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      timerSettings: null == timerSettings
+          ? _self.timerSettings
+          : timerSettings // ignore: cast_nullable_to_non_nullable
+              as TimerSettings,
+    ));
+  }
+
+  /// Create a copy of Session
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TimerSettingsCopyWith<$Res> get timerSettings {
+    return $TimerSettingsCopyWith<$Res>(_self.timerSettings, (value) {
+      return _then(_self.copyWith(timerSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Session extends Session with DiagnosticableTreeMixin {
+  const _Session(
+      {required this.id,
+      @DateTimeConverter() required this.startTime,
+      @DateTimeConverter() required this.endTime,
+      @DurationConverter() required this.duration,
+      required this.timerSettings})
+      : super._();
+  factory _Session.fromJson(Map<String, dynamic> json) =>
+      _$SessionFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
   @DateTimeConverter()
-  DateTime get startTime;
+  final DateTime startTime;
   @override
   @DateTimeConverter()
-  DateTime get endTime;
+  final DateTime endTime;
   @override
   @DurationConverter()
-  Duration get duration;
+  final Duration duration;
   @override
-  TimerSettings get timerSettings;
+  final TimerSettings timerSettings;
 
   /// Create a copy of Session
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SessionImplCopyWith<_$SessionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$SessionCopyWith<_Session> get copyWith =>
+      __$SessionCopyWithImpl<_Session>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SessionToJson(
+      this,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'Session'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('endTime', endTime))
+      ..add(DiagnosticsProperty('duration', duration))
+      ..add(DiagnosticsProperty('timerSettings', timerSettings));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Session &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.timerSettings, timerSettings) ||
+                other.timerSettings == timerSettings));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, startTime, endTime, duration, timerSettings);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Session(id: $id, startTime: $startTime, endTime: $endTime, duration: $duration, timerSettings: $timerSettings)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
+  factory _$SessionCopyWith(_Session value, $Res Function(_Session) _then) =
+      __$SessionCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @DateTimeConverter() DateTime startTime,
+      @DateTimeConverter() DateTime endTime,
+      @DurationConverter() Duration duration,
+      TimerSettings timerSettings});
+
+  @override
+  $TimerSettingsCopyWith<$Res> get timerSettings;
+}
+
+/// @nodoc
+class __$SessionCopyWithImpl<$Res> implements _$SessionCopyWith<$Res> {
+  __$SessionCopyWithImpl(this._self, this._then);
+
+  final _Session _self;
+  final $Res Function(_Session) _then;
+
+  /// Create a copy of Session
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? startTime = null,
+    Object? endTime = null,
+    Object? duration = null,
+    Object? timerSettings = null,
+  }) {
+    return _then(_Session(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _self.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _self.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duration: null == duration
+          ? _self.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      timerSettings: null == timerSettings
+          ? _self.timerSettings
+          : timerSettings // ignore: cast_nullable_to_non_nullable
+              as TimerSettings,
+    ));
+  }
+
+  /// Create a copy of Session
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TimerSettingsCopyWith<$Res> get timerSettings {
+    return $TimerSettingsCopyWith<$Res>(_self.timerSettings, (value) {
+      return _then(_self.copyWith(timerSettings: value));
+    });
+  }
+}
+
+// dart format on

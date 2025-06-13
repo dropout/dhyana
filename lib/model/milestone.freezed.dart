@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,87 +10,66 @@ part of 'milestone.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Milestone _$MilestoneFromJson(Map<String, dynamic> json) {
-  return _Milestone.fromJson(json);
-}
-
 /// @nodoc
-mixin _$Milestone {
-  String get id => throw _privateConstructorUsedError;
-  List<Day> get days => throw _privateConstructorUsedError;
-
-  /// Serializes this Milestone to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+mixin _$Milestone implements DiagnosticableTreeMixin {
+  String get id;
+  List<Day> get days;
 
   /// Create a copy of Milestone
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MilestoneCopyWith<Milestone> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MilestoneCopyWith<$Res> {
-  factory $MilestoneCopyWith(Milestone value, $Res Function(Milestone) then) =
-      _$MilestoneCopyWithImpl<$Res, Milestone>;
-  @useResult
-  $Res call({String id, List<Day> days});
-}
-
-/// @nodoc
-class _$MilestoneCopyWithImpl<$Res, $Val extends Milestone>
-    implements $MilestoneCopyWith<$Res> {
-  _$MilestoneCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Milestone
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $MilestoneCopyWith<Milestone> get copyWith =>
+      _$MilestoneCopyWithImpl<Milestone>(this as Milestone, _$identity);
+
+  /// Serializes this Milestone to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? days = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      days: null == days
-          ? _value.days
-          : days // ignore: cast_nullable_to_non_nullable
-              as List<Day>,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'Milestone'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('days', days));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Milestone &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other.days, days));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, const DeepCollectionEquality().hash(days));
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Milestone(id: $id, days: $days)';
   }
 }
 
 /// @nodoc
-abstract class _$$MilestoneImplCopyWith<$Res>
-    implements $MilestoneCopyWith<$Res> {
-  factory _$$MilestoneImplCopyWith(
-          _$MilestoneImpl value, $Res Function(_$MilestoneImpl) then) =
-      __$$MilestoneImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $MilestoneCopyWith<$Res> {
+  factory $MilestoneCopyWith(Milestone value, $Res Function(Milestone) _then) =
+      _$MilestoneCopyWithImpl;
   @useResult
   $Res call({String id, List<Day> days});
 }
 
 /// @nodoc
-class __$$MilestoneImplCopyWithImpl<$Res>
-    extends _$MilestoneCopyWithImpl<$Res, _$MilestoneImpl>
-    implements _$$MilestoneImplCopyWith<$Res> {
-  __$$MilestoneImplCopyWithImpl(
-      _$MilestoneImpl _value, $Res Function(_$MilestoneImpl) _then)
-      : super(_value, _then);
+class _$MilestoneCopyWithImpl<$Res> implements $MilestoneCopyWith<$Res> {
+  _$MilestoneCopyWithImpl(this._self, this._then);
+
+  final Milestone _self;
+  final $Res Function(Milestone) _then;
 
   /// Create a copy of Milestone
   /// with the given fields replaced by the non-null parameter values.
@@ -99,13 +79,13 @@ class __$$MilestoneImplCopyWithImpl<$Res>
     Object? id = null,
     Object? days = null,
   }) {
-    return _then(_$MilestoneImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       days: null == days
-          ? _value._days
+          ? _self.days
           : days // ignore: cast_nullable_to_non_nullable
               as List<Day>,
     ));
@@ -114,13 +94,12 @@ class __$$MilestoneImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
-  const _$MilestoneImpl({required this.id, final List<Day> days = const []})
+class _Milestone extends Milestone with DiagnosticableTreeMixin {
+  const _Milestone({required this.id, final List<Day> days = const []})
       : _days = days,
         super._();
-
-  factory _$MilestoneImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MilestoneImplFromJson(json);
+  factory _Milestone.fromJson(Map<String, dynamic> json) =>
+      _$MilestoneFromJson(json);
 
   @override
   final String id;
@@ -133,14 +112,23 @@ class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(_days);
   }
 
+  /// Create a copy of Milestone
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Milestone(id: $id, days: $days)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MilestoneCopyWith<_Milestone> get copyWith =>
+      __$MilestoneCopyWithImpl<_Milestone>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$MilestoneToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Milestone'))
       ..add(DiagnosticsProperty('id', id))
@@ -151,7 +139,7 @@ class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MilestoneImpl &&
+            other is _Milestone &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._days, _days));
   }
@@ -161,39 +149,49 @@ class _$MilestoneImpl extends _Milestone with DiagnosticableTreeMixin {
   int get hashCode =>
       Object.hash(runtimeType, id, const DeepCollectionEquality().hash(_days));
 
-  /// Create a copy of Milestone
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MilestoneImplCopyWith<_$MilestoneImpl> get copyWith =>
-      __$$MilestoneImplCopyWithImpl<_$MilestoneImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MilestoneImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Milestone(id: $id, days: $days)';
   }
 }
 
-abstract class _Milestone extends Milestone {
-  const factory _Milestone({required final String id, final List<Day> days}) =
-      _$MilestoneImpl;
-  const _Milestone._() : super._();
-
-  factory _Milestone.fromJson(Map<String, dynamic> json) =
-      _$MilestoneImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$MilestoneCopyWith<$Res>
+    implements $MilestoneCopyWith<$Res> {
+  factory _$MilestoneCopyWith(
+          _Milestone value, $Res Function(_Milestone) _then) =
+      __$MilestoneCopyWithImpl;
   @override
-  String get id;
-  @override
-  List<Day> get days;
+  @useResult
+  $Res call({String id, List<Day> days});
+}
+
+/// @nodoc
+class __$MilestoneCopyWithImpl<$Res> implements _$MilestoneCopyWith<$Res> {
+  __$MilestoneCopyWithImpl(this._self, this._then);
+
+  final _Milestone _self;
+  final $Res Function(_Milestone) _then;
 
   /// Create a copy of Milestone
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MilestoneImplCopyWith<_$MilestoneImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? days = null,
+  }) {
+    return _then(_Milestone(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      days: null == days
+          ? _self._days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<Day>,
+    ));
+  }
 }
+
+// dart format on

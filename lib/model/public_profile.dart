@@ -9,7 +9,7 @@ part 'public_profile.freezed.dart';
 part 'public_profile.g.dart';
 
 @freezed
-class PublicProfile with _$PublicProfile {
+sealed class PublicProfile with _$PublicProfile {
 
   const factory PublicProfile({
     required String id,

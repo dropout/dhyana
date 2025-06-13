@@ -45,7 +45,7 @@ class ProfileButton extends StatelessWidget {
     );
   }
   
-  Widget buildSignedOut(context) {
+  Widget buildSignedOut(BuildContext context) {
     return Stack(
       children: <Widget>[
         const DecoratedBox(

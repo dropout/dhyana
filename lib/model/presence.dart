@@ -9,7 +9,7 @@ part 'presence.freezed.dart';
 part 'presence.g.dart';
 
 @freezed
-class Presence with _$Presence implements Model {
+sealed class Presence with _$Presence implements Model {
 
   const Presence._();
 

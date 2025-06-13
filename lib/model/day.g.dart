@@ -6,7 +6,7 @@ part of 'day.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DayImpl _$$DayImplFromJson(Map<String, dynamic> json) => _$DayImpl(
+_Day _$DayFromJson(Map<String, dynamic> json) => _Day(
       id: json['id'] as String,
       startDate: const DateTimeConverter()
           .fromJson((json['startDate'] as num).toInt()),
@@ -20,7 +20,7 @@ _$DayImpl _$$DayImplFromJson(Map<String, dynamic> json) => _$DayImpl(
           (json['consecutiveDaysCount'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$DayImplToJson(_$DayImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$DayToJson(_Day instance) => <String, dynamic>{
       'id': instance.id,
       'startDate': const DateTimeConverter().toJson(instance.startDate),
       'sessions': instance.sessions.map((e) => e.toJson()).toList(),

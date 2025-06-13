@@ -6,7 +6,7 @@ part 'session_query_options.freezed.dart';
 part 'session_query_options.g.dart';
 
 @freezed
-class SessionQueryOptions with _$SessionQueryOptions {
+sealed class SessionQueryOptions with _$SessionQueryOptions {
 
   const SessionQueryOptions._();
 

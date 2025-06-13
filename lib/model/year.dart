@@ -8,7 +8,7 @@ part 'year.freezed.dart';
 part 'year.g.dart';
 
 @freezed
-class Year with _$Year implements Model {
+sealed class Year with _$Year implements Model {
 
   const Year._();
 

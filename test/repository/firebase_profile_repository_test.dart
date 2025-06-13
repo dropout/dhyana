@@ -4,6 +4,7 @@ import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_query_options.dart';
 import 'package:dhyana/repository/firebase/all.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,7 +18,13 @@ class MockStorageDataProvider
 
 class MockProfile
   extends Mock
-  implements Profile {}
+  implements Profile {
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MockProfile';
+  }
+}
 
 void main() {
 

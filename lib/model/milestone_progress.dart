@@ -11,7 +11,7 @@ part 'milestone_progress.g.dart';
 // initial profile db record is created.
 
 @freezed
-class MilestoneProgress with _$MilestoneProgress {
+sealed class MilestoneProgress with _$MilestoneProgress {
 
   const MilestoneProgress._();
 

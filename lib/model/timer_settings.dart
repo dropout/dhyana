@@ -10,7 +10,7 @@ part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';
 
 @freezed
-class TimerSettings with _$TimerSettings implements Model {
+sealed class TimerSettings with _$TimerSettings implements Model {
 
   const TimerSettings._();
 

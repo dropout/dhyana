@@ -6,14 +6,13 @@ part of 'profile_query_options.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProfileQueryOptionsImpl _$$ProfileQueryOptionsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ProfileQueryOptionsImpl(
+_ProfileQueryOptions _$ProfileQueryOptionsFromJson(Map<String, dynamic> json) =>
+    _ProfileQueryOptions(
       limit: (json['limit'] as num?)?.toInt() ?? 20,
     );
 
-Map<String, dynamic> _$$ProfileQueryOptionsImplToJson(
-        _$ProfileQueryOptionsImpl instance) =>
+Map<String, dynamic> _$ProfileQueryOptionsToJson(
+        _ProfileQueryOptions instance) =>
     <String, dynamic>{
       'limit': instance.limit,
     };

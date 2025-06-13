@@ -15,7 +15,7 @@ part 'profile.g.dart';
 // initial profile db record is created.
 
 @freezed
-class Profile with _$Profile implements Model {
+abstract class Profile with _$Profile implements Model {
 
   const Profile._();
 

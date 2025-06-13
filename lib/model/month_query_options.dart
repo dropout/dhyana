@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 part 'month_query_options.freezed.dart';
 
 @freezed
-class MonthQueryOptions with _$MonthQueryOptions {
+sealed class MonthQueryOptions with _$MonthQueryOptions {
 
   const MonthQueryOptions._();
 

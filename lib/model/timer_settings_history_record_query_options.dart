@@ -5,7 +5,8 @@ part 'timer_settings_history_record_query_options.freezed.dart';
 part 'timer_settings_history_record_query_options.g.dart';
 
 @freezed
-class TimerSettingsHistoryRecordQueryOptions with _$TimerSettingsHistoryRecordQueryOptions {
+sealed class TimerSettingsHistoryRecordQueryOptions
+  with _$TimerSettingsHistoryRecordQueryOptions {
 
   const TimerSettingsHistoryRecordQueryOptions._();
 

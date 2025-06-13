@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,132 +10,29 @@ part of 'timer_settings_history_record_query_options.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-TimerSettingsHistoryRecordQueryOptions
-    _$TimerSettingsHistoryRecordQueryOptionsFromJson(
-        Map<String, dynamic> json) {
-  return _TimerSettingsHistoryRecordQueryOptions.fromJson(json);
-}
-
 /// @nodoc
-mixin _$TimerSettingsHistoryRecordQueryOptions {
-  int get limit => throw _privateConstructorUsedError;
-
-  /// Serializes this TimerSettingsHistoryRecordQueryOptions to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+mixin _$TimerSettingsHistoryRecordQueryOptions
+    implements DiagnosticableTreeMixin {
+  int get limit;
 
   /// Create a copy of TimerSettingsHistoryRecordQueryOptions
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TimerSettingsHistoryRecordQueryOptionsCopyWith<
           TimerSettingsHistoryRecordQueryOptions>
-      get copyWith => throw _privateConstructorUsedError;
-}
+      get copyWith => _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<
+              TimerSettingsHistoryRecordQueryOptions>(
+          this as TimerSettingsHistoryRecordQueryOptions, _$identity);
 
-/// @nodoc
-abstract class $TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
-  factory $TimerSettingsHistoryRecordQueryOptionsCopyWith(
-          TimerSettingsHistoryRecordQueryOptions value,
-          $Res Function(TimerSettingsHistoryRecordQueryOptions) then) =
-      _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<$Res,
-          TimerSettingsHistoryRecordQueryOptions>;
-  @useResult
-  $Res call({int limit});
-}
-
-/// @nodoc
-class _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<$Res,
-        $Val extends TimerSettingsHistoryRecordQueryOptions>
-    implements $TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
-  _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TimerSettingsHistoryRecordQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_value.copyWith(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$TimerSettingsHistoryRecordQueryOptionsImplCopyWith<$Res>
-    implements $TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
-  factory _$$TimerSettingsHistoryRecordQueryOptionsImplCopyWith(
-          _$TimerSettingsHistoryRecordQueryOptionsImpl value,
-          $Res Function(_$TimerSettingsHistoryRecordQueryOptionsImpl) then) =
-      __$$TimerSettingsHistoryRecordQueryOptionsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int limit});
-}
-
-/// @nodoc
-class __$$TimerSettingsHistoryRecordQueryOptionsImplCopyWithImpl<$Res>
-    extends _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<$Res,
-        _$TimerSettingsHistoryRecordQueryOptionsImpl>
-    implements _$$TimerSettingsHistoryRecordQueryOptionsImplCopyWith<$Res> {
-  __$$TimerSettingsHistoryRecordQueryOptionsImplCopyWithImpl(
-      _$TimerSettingsHistoryRecordQueryOptionsImpl _value,
-      $Res Function(_$TimerSettingsHistoryRecordQueryOptionsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TimerSettingsHistoryRecordQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_$TimerSettingsHistoryRecordQueryOptionsImpl(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$TimerSettingsHistoryRecordQueryOptionsImpl
-    extends _TimerSettingsHistoryRecordQueryOptions
-    with DiagnosticableTreeMixin {
-  const _$TimerSettingsHistoryRecordQueryOptionsImpl({this.limit = 20})
-      : super._();
-
-  factory _$TimerSettingsHistoryRecordQueryOptionsImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$TimerSettingsHistoryRecordQueryOptionsImplFromJson(json);
-
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TimerSettingsHistoryRecordQueryOptions(limit: $limit)';
-  }
+  /// Serializes this TimerSettingsHistoryRecordQueryOptions to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(
           DiagnosticsProperty('type', 'TimerSettingsHistoryRecordQueryOptions'))
@@ -145,7 +43,7 @@ class _$TimerSettingsHistoryRecordQueryOptionsImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingsHistoryRecordQueryOptionsImpl &&
+            other is TimerSettingsHistoryRecordQueryOptions &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
@@ -153,43 +51,137 @@ class _$TimerSettingsHistoryRecordQueryOptionsImpl
   @override
   int get hashCode => Object.hash(runtimeType, limit);
 
-  /// Create a copy of TimerSettingsHistoryRecordQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TimerSettingsHistoryRecordQueryOptionsImplCopyWith<
-          _$TimerSettingsHistoryRecordQueryOptionsImpl>
-      get copyWith =>
-          __$$TimerSettingsHistoryRecordQueryOptionsImplCopyWithImpl<
-              _$TimerSettingsHistoryRecordQueryOptionsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TimerSettingsHistoryRecordQueryOptionsImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsHistoryRecordQueryOptions(limit: $limit)';
   }
 }
 
-abstract class _TimerSettingsHistoryRecordQueryOptions
-    extends TimerSettingsHistoryRecordQueryOptions {
-  const factory _TimerSettingsHistoryRecordQueryOptions({final int limit}) =
-      _$TimerSettingsHistoryRecordQueryOptionsImpl;
-  const _TimerSettingsHistoryRecordQueryOptions._() : super._();
+/// @nodoc
+abstract mixin class $TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
+  factory $TimerSettingsHistoryRecordQueryOptionsCopyWith(
+          TimerSettingsHistoryRecordQueryOptions value,
+          $Res Function(TimerSettingsHistoryRecordQueryOptions) _then) =
+      _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl;
+  @useResult
+  $Res call({int limit});
+}
 
+/// @nodoc
+class _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<$Res>
+    implements $TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
+  _$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl(this._self, this._then);
+
+  final TimerSettingsHistoryRecordQueryOptions _self;
+  final $Res Function(TimerSettingsHistoryRecordQueryOptions) _then;
+
+  /// Create a copy of TimerSettingsHistoryRecordQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? limit = null,
+  }) {
+    return _then(_self.copyWith(
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _TimerSettingsHistoryRecordQueryOptions
+    extends TimerSettingsHistoryRecordQueryOptions
+    with DiagnosticableTreeMixin {
+  const _TimerSettingsHistoryRecordQueryOptions({this.limit = 20}) : super._();
   factory _TimerSettingsHistoryRecordQueryOptions.fromJson(
-          Map<String, dynamic> json) =
-      _$TimerSettingsHistoryRecordQueryOptionsImpl.fromJson;
+          Map<String, dynamic> json) =>
+      _$TimerSettingsHistoryRecordQueryOptionsFromJson(json);
 
   @override
-  int get limit;
+  @JsonKey()
+  final int limit;
 
   /// Create a copy of TimerSettingsHistoryRecordQueryOptions
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimerSettingsHistoryRecordQueryOptionsImplCopyWith<
-          _$TimerSettingsHistoryRecordQueryOptionsImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$TimerSettingsHistoryRecordQueryOptionsCopyWith<
+          _TimerSettingsHistoryRecordQueryOptions>
+      get copyWith => __$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<
+          _TimerSettingsHistoryRecordQueryOptions>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TimerSettingsHistoryRecordQueryOptionsToJson(
+      this,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'TimerSettingsHistoryRecordQueryOptions'))
+      ..add(DiagnosticsProperty('limit', limit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _TimerSettingsHistoryRecordQueryOptions &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, limit);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TimerSettingsHistoryRecordQueryOptions(limit: $limit)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res>
+    implements $TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
+  factory _$TimerSettingsHistoryRecordQueryOptionsCopyWith(
+          _TimerSettingsHistoryRecordQueryOptions value,
+          $Res Function(_TimerSettingsHistoryRecordQueryOptions) _then) =
+      __$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int limit});
+}
+
+/// @nodoc
+class __$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl<$Res>
+    implements _$TimerSettingsHistoryRecordQueryOptionsCopyWith<$Res> {
+  __$TimerSettingsHistoryRecordQueryOptionsCopyWithImpl(this._self, this._then);
+
+  final _TimerSettingsHistoryRecordQueryOptions _self;
+  final $Res Function(_TimerSettingsHistoryRecordQueryOptions) _then;
+
+  /// Create a copy of TimerSettingsHistoryRecordQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? limit = null,
+  }) {
+    return _then(_TimerSettingsHistoryRecordQueryOptions(
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+// dart format on

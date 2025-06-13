@@ -10,7 +10,7 @@ part 'consecutive_days.g.dart';
 // initial profile db record is created.
 
 @freezed
-class ConsecutiveDays with _$ConsecutiveDays {
+sealed class ConsecutiveDays with _$ConsecutiveDays {
 
   const ConsecutiveDays._();
 

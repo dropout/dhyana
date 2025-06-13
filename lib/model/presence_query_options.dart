@@ -6,7 +6,7 @@ part 'presence_query_options.freezed.dart';
 part 'presence_query_options.g.dart';
 
 @freezed
-class PresenceQueryOptions with _$PresenceQueryOptions {
+sealed class PresenceQueryOptions with _$PresenceQueryOptions {
 
   const PresenceQueryOptions._();
 

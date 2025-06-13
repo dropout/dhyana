@@ -6,8 +6,8 @@ part of 'timer_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TimerSettingsImpl _$$TimerSettingsImplFromJson(Map<String, dynamic> json) =>
-    _$TimerSettingsImpl(
+_TimerSettings _$TimerSettingsFromJson(Map<String, dynamic> json) =>
+    _TimerSettings(
       warmup: json['warmup'] == null
           ? const Duration(minutes: 1)
           : const DurationConverter().fromJson((json['warmup'] as num).toInt()),
@@ -24,7 +24,7 @@ _$TimerSettingsImpl _$$TimerSettingsImplFromJson(Map<String, dynamic> json) =>
           .fromJson((json['lastUsed'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$$TimerSettingsImplToJson(_$TimerSettingsImpl instance) =>
+Map<String, dynamic> _$TimerSettingsToJson(_TimerSettings instance) =>
     <String, dynamic>{
       'warmup': const DurationConverter().toJson(instance.warmup),
       'duration': const DurationConverter().toJson(instance.duration),

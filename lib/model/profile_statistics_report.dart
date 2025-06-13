@@ -13,7 +13,7 @@ part 'profile_statistics_report.g.dart';
 // initial profile db record is created.
 
 @freezed
-class ProfileStatisticsReport with _$ProfileStatisticsReport {
+sealed class ProfileStatisticsReport with _$ProfileStatisticsReport {
 
   const factory ProfileStatisticsReport({
     @Default(ConsecutiveDays()) ConsecutiveDays consecutiveDays,

@@ -6,7 +6,7 @@ part of 'week.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WeekImpl _$$WeekImplFromJson(Map<String, dynamic> json) => _$WeekImpl(
+_Week _$WeekFromJson(Map<String, dynamic> json) => _Week(
       id: json['id'] as String,
       startDate: const DateTimeConverter()
           .fromJson((json['startDate'] as num).toInt()),
@@ -14,8 +14,7 @@ _$WeekImpl _$$WeekImplFromJson(Map<String, dynamic> json) => _$WeekImpl(
       sessionCount: (json['sessionCount'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$WeekImplToJson(_$WeekImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WeekToJson(_Week instance) => <String, dynamic>{
       'id': instance.id,
       'startDate': const DateTimeConverter().toJson(instance.startDate),
       'minutesCount': instance.minutesCount,

@@ -7,7 +7,7 @@ part 'milestone.freezed.dart';
 part 'milestone.g.dart';
 
 @freezed
-class Milestone with _$Milestone {
+sealed class Milestone with _$Milestone {
 
   const Milestone._();
 

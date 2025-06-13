@@ -10,7 +10,7 @@ part 'session.freezed.dart';
 part 'session.g.dart';
 
 @freezed
-class Session with _$Session implements Model {
+sealed class Session with _$Session implements Model {
 
   const Session._();
 

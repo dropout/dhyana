@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,138 +10,25 @@ part of 'month_query_options.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$MonthQueryOptions {
-  DateTime get from => throw _privateConstructorUsedError;
-  DateTime get to => throw _privateConstructorUsedError;
-  int get limit => throw _privateConstructorUsedError;
+mixin _$MonthQueryOptions implements DiagnosticableTreeMixin {
+  DateTime get from;
+  DateTime get to;
+  int get limit;
 
   /// Create a copy of MonthQueryOptions
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $MonthQueryOptionsCopyWith<MonthQueryOptions> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MonthQueryOptionsCopyWith<$Res> {
-  factory $MonthQueryOptionsCopyWith(
-          MonthQueryOptions value, $Res Function(MonthQueryOptions) then) =
-      _$MonthQueryOptionsCopyWithImpl<$Res, MonthQueryOptions>;
-  @useResult
-  $Res call({DateTime from, DateTime to, int limit});
-}
-
-/// @nodoc
-class _$MonthQueryOptionsCopyWithImpl<$Res, $Val extends MonthQueryOptions>
-    implements $MonthQueryOptionsCopyWith<$Res> {
-  _$MonthQueryOptionsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MonthQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? from = null,
-    Object? to = null,
-    Object? limit = null,
-  }) {
-    return _then(_value.copyWith(
-      from: null == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      to: null == to
-          ? _value.to
-          : to // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$MonthQueryOptionsImplCopyWith<$Res>
-    implements $MonthQueryOptionsCopyWith<$Res> {
-  factory _$$MonthQueryOptionsImplCopyWith(_$MonthQueryOptionsImpl value,
-          $Res Function(_$MonthQueryOptionsImpl) then) =
-      __$$MonthQueryOptionsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({DateTime from, DateTime to, int limit});
-}
-
-/// @nodoc
-class __$$MonthQueryOptionsImplCopyWithImpl<$Res>
-    extends _$MonthQueryOptionsCopyWithImpl<$Res, _$MonthQueryOptionsImpl>
-    implements _$$MonthQueryOptionsImplCopyWith<$Res> {
-  __$$MonthQueryOptionsImplCopyWithImpl(_$MonthQueryOptionsImpl _value,
-      $Res Function(_$MonthQueryOptionsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MonthQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? from = null,
-    Object? to = null,
-    Object? limit = null,
-  }) {
-    return _then(_$MonthQueryOptionsImpl(
-      from: null == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      to: null == to
-          ? _value.to
-          : to // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$MonthQueryOptionsImpl extends _MonthQueryOptions
-    with DiagnosticableTreeMixin {
-  const _$MonthQueryOptionsImpl(
-      {required this.from, required this.to, this.limit = 20})
-      : super._();
-
-  @override
-  final DateTime from;
-  @override
-  final DateTime to;
-  @override
-  @JsonKey()
-  final int limit;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MonthQueryOptions(from: $from, to: $to, limit: $limit)';
-  }
+      _$MonthQueryOptionsCopyWithImpl<MonthQueryOptions>(
+          this as MonthQueryOptions, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'MonthQueryOptions'))
       ..add(DiagnosticsProperty('from', from))
@@ -152,7 +40,7 @@ class _$MonthQueryOptionsImpl extends _MonthQueryOptions
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MonthQueryOptionsImpl &&
+            other is MonthQueryOptions &&
             (identical(other.from, from) || other.from == from) &&
             (identical(other.to, to) || other.to == to) &&
             (identical(other.limit, limit) || other.limit == limit));
@@ -161,34 +49,150 @@ class _$MonthQueryOptionsImpl extends _MonthQueryOptions
   @override
   int get hashCode => Object.hash(runtimeType, from, to, limit);
 
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MonthQueryOptions(from: $from, to: $to, limit: $limit)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $MonthQueryOptionsCopyWith<$Res> {
+  factory $MonthQueryOptionsCopyWith(
+          MonthQueryOptions value, $Res Function(MonthQueryOptions) _then) =
+      _$MonthQueryOptionsCopyWithImpl;
+  @useResult
+  $Res call({DateTime from, DateTime to, int limit});
+}
+
+/// @nodoc
+class _$MonthQueryOptionsCopyWithImpl<$Res>
+    implements $MonthQueryOptionsCopyWith<$Res> {
+  _$MonthQueryOptionsCopyWithImpl(this._self, this._then);
+
+  final MonthQueryOptions _self;
+  final $Res Function(MonthQueryOptions) _then;
+
   /// Create a copy of MonthQueryOptions
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? from = null,
+    Object? to = null,
+    Object? limit = null,
+  }) {
+    return _then(_self.copyWith(
+      from: null == from
+          ? _self.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      to: null == to
+          ? _self.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _MonthQueryOptions extends MonthQueryOptions
+    with DiagnosticableTreeMixin {
+  const _MonthQueryOptions(
+      {required this.from, required this.to, this.limit = 20})
+      : super._();
+
+  @override
+  final DateTime from;
+  @override
+  final DateTime to;
+  @override
+  @JsonKey()
+  final int limit;
+
+  /// Create a copy of MonthQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MonthQueryOptionsCopyWith<_MonthQueryOptions> get copyWith =>
+      __$MonthQueryOptionsCopyWithImpl<_MonthQueryOptions>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'MonthQueryOptions'))
+      ..add(DiagnosticsProperty('from', from))
+      ..add(DiagnosticsProperty('to', to))
+      ..add(DiagnosticsProperty('limit', limit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _MonthQueryOptions &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, from, to, limit);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MonthQueryOptions(from: $from, to: $to, limit: $limit)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$MonthQueryOptionsCopyWith<$Res>
+    implements $MonthQueryOptionsCopyWith<$Res> {
+  factory _$MonthQueryOptionsCopyWith(
+          _MonthQueryOptions value, $Res Function(_MonthQueryOptions) _then) =
+      __$MonthQueryOptionsCopyWithImpl;
+  @override
+  @useResult
+  $Res call({DateTime from, DateTime to, int limit});
+}
+
+/// @nodoc
+class __$MonthQueryOptionsCopyWithImpl<$Res>
+    implements _$MonthQueryOptionsCopyWith<$Res> {
+  __$MonthQueryOptionsCopyWithImpl(this._self, this._then);
+
+  final _MonthQueryOptions _self;
+  final $Res Function(_MonthQueryOptions) _then;
+
+  /// Create a copy of MonthQueryOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$MonthQueryOptionsImplCopyWith<_$MonthQueryOptionsImpl> get copyWith =>
-      __$$MonthQueryOptionsImplCopyWithImpl<_$MonthQueryOptionsImpl>(
-          this, _$identity);
+  $Res call({
+    Object? from = null,
+    Object? to = null,
+    Object? limit = null,
+  }) {
+    return _then(_MonthQueryOptions(
+      from: null == from
+          ? _self.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      to: null == to
+          ? _self.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
-abstract class _MonthQueryOptions extends MonthQueryOptions {
-  const factory _MonthQueryOptions(
-      {required final DateTime from,
-      required final DateTime to,
-      final int limit}) = _$MonthQueryOptionsImpl;
-  const _MonthQueryOptions._() : super._();
-
-  @override
-  DateTime get from;
-  @override
-  DateTime get to;
-  @override
-  int get limit;
-
-  /// Create a copy of MonthQueryOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MonthQueryOptionsImplCopyWith<_$MonthQueryOptionsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

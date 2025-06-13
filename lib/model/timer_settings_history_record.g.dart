@@ -6,9 +6,9 @@ part of 'timer_settings_history_record.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TimerSettingsHistoryRecordImpl _$$TimerSettingsHistoryRecordImplFromJson(
+_TimerSettingsHistoryRecord _$TimerSettingsHistoryRecordFromJson(
         Map<String, dynamic> json) =>
-    _$TimerSettingsHistoryRecordImpl(
+    _TimerSettingsHistoryRecord(
       id: json['id'] as String,
       timerSettings:
           TimerSettings.fromJson(json['timerSettings'] as Map<String, dynamic>),
@@ -16,8 +16,8 @@ _$TimerSettingsHistoryRecordImpl _$$TimerSettingsHistoryRecordImplFromJson(
       lastUsed: DateTime.parse(json['lastUsed'] as String),
     );
 
-Map<String, dynamic> _$$TimerSettingsHistoryRecordImplToJson(
-        _$TimerSettingsHistoryRecordImpl instance) =>
+Map<String, dynamic> _$TimerSettingsHistoryRecordToJson(
+        _TimerSettingsHistoryRecord instance) =>
     <String, dynamic>{
       'id': instance.id,
       'timerSettings': instance.timerSettings.toJson(),

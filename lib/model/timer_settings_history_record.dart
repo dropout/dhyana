@@ -8,7 +8,7 @@ part 'timer_settings_history_record.freezed.dart';
 part 'timer_settings_history_record.g.dart';
 
 @freezed
-class TimerSettingsHistoryRecord with _$TimerSettingsHistoryRecord implements Model {
+sealed class TimerSettingsHistoryRecord with _$TimerSettingsHistoryRecord implements Model {
 
   const TimerSettingsHistoryRecord._();
 

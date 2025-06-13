@@ -6,6 +6,7 @@ import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/all.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -37,11 +38,24 @@ class MockHapticsService
 
 class FakeSigninWithGoogle
   extends Fake
-  implements SigninWithGoogle {}
+  implements SigninWithGoogle {
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FakeSigninWithGoogle';
+  }
+}
 
 class FakeSigninWithApple
   extends Fake
-  implements SigninWithApple {}
+  implements SigninWithApple {
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FakeSigninWithApple';
+  }
+
+}
 
 
 void main() {

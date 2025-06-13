@@ -8,7 +8,7 @@ part 'week.freezed.dart';
 part 'week.g.dart';
 
 @freezed
-class Week with _$Week implements Model {
+sealed class Week with _$Week implements Model {
 
   const Week._();
 

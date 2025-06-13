@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,95 +10,68 @@ part of 'consecutive_days.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ConsecutiveDays _$ConsecutiveDaysFromJson(Map<String, dynamic> json) {
-  return _ConsecutiveDays.fromJson(json);
-}
-
 /// @nodoc
-mixin _$ConsecutiveDays {
-  int get current => throw _privateConstructorUsedError;
-  int get longest => throw _privateConstructorUsedError;
+mixin _$ConsecutiveDays implements DiagnosticableTreeMixin {
+  int get current;
+  int get longest;
   @DateTimeOrNullConverter()
-  DateTime? get startedAt => throw _privateConstructorUsedError;
+  DateTime? get startedAt;
   @DateTimeOrNullConverter()
-  DateTime? get lastChecked => throw _privateConstructorUsedError;
-
-  /// Serializes this ConsecutiveDays to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DateTime? get lastChecked;
 
   /// Create a copy of ConsecutiveDays
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConsecutiveDaysCopyWith<ConsecutiveDays> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ConsecutiveDaysCopyWith<$Res> {
-  factory $ConsecutiveDaysCopyWith(
-          ConsecutiveDays value, $Res Function(ConsecutiveDays) then) =
-      _$ConsecutiveDaysCopyWithImpl<$Res, ConsecutiveDays>;
-  @useResult
-  $Res call(
-      {int current,
-      int longest,
-      @DateTimeOrNullConverter() DateTime? startedAt,
-      @DateTimeOrNullConverter() DateTime? lastChecked});
-}
-
-/// @nodoc
-class _$ConsecutiveDaysCopyWithImpl<$Res, $Val extends ConsecutiveDays>
-    implements $ConsecutiveDaysCopyWith<$Res> {
-  _$ConsecutiveDaysCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ConsecutiveDays
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ConsecutiveDaysCopyWith<ConsecutiveDays> get copyWith =>
+      _$ConsecutiveDaysCopyWithImpl<ConsecutiveDays>(
+          this as ConsecutiveDays, _$identity);
+
+  /// Serializes this ConsecutiveDays to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? current = null,
-    Object? longest = null,
-    Object? startedAt = freezed,
-    Object? lastChecked = freezed,
-  }) {
-    return _then(_value.copyWith(
-      current: null == current
-          ? _value.current
-          : current // ignore: cast_nullable_to_non_nullable
-              as int,
-      longest: null == longest
-          ? _value.longest
-          : longest // ignore: cast_nullable_to_non_nullable
-              as int,
-      startedAt: freezed == startedAt
-          ? _value.startedAt
-          : startedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      lastChecked: freezed == lastChecked
-          ? _value.lastChecked
-          : lastChecked // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'ConsecutiveDays'))
+      ..add(DiagnosticsProperty('current', current))
+      ..add(DiagnosticsProperty('longest', longest))
+      ..add(DiagnosticsProperty('startedAt', startedAt))
+      ..add(DiagnosticsProperty('lastChecked', lastChecked));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ConsecutiveDays &&
+            (identical(other.current, current) || other.current == current) &&
+            (identical(other.longest, longest) || other.longest == longest) &&
+            (identical(other.startedAt, startedAt) ||
+                other.startedAt == startedAt) &&
+            (identical(other.lastChecked, lastChecked) ||
+                other.lastChecked == lastChecked));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, current, longest, startedAt, lastChecked);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
   }
 }
 
 /// @nodoc
-abstract class _$$ConsecutiveDaysImplCopyWith<$Res>
-    implements $ConsecutiveDaysCopyWith<$Res> {
-  factory _$$ConsecutiveDaysImplCopyWith(_$ConsecutiveDaysImpl value,
-          $Res Function(_$ConsecutiveDaysImpl) then) =
-      __$$ConsecutiveDaysImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ConsecutiveDaysCopyWith<$Res> {
+  factory $ConsecutiveDaysCopyWith(
+          ConsecutiveDays value, $Res Function(ConsecutiveDays) _then) =
+      _$ConsecutiveDaysCopyWithImpl;
   @useResult
   $Res call(
       {int current,
@@ -107,12 +81,12 @@ abstract class _$$ConsecutiveDaysImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ConsecutiveDaysImplCopyWithImpl<$Res>
-    extends _$ConsecutiveDaysCopyWithImpl<$Res, _$ConsecutiveDaysImpl>
-    implements _$$ConsecutiveDaysImplCopyWith<$Res> {
-  __$$ConsecutiveDaysImplCopyWithImpl(
-      _$ConsecutiveDaysImpl _value, $Res Function(_$ConsecutiveDaysImpl) _then)
-      : super(_value, _then);
+class _$ConsecutiveDaysCopyWithImpl<$Res>
+    implements $ConsecutiveDaysCopyWith<$Res> {
+  _$ConsecutiveDaysCopyWithImpl(this._self, this._then);
+
+  final ConsecutiveDays _self;
+  final $Res Function(ConsecutiveDays) _then;
 
   /// Create a copy of ConsecutiveDays
   /// with the given fields replaced by the non-null parameter values.
@@ -124,21 +98,21 @@ class __$$ConsecutiveDaysImplCopyWithImpl<$Res>
     Object? startedAt = freezed,
     Object? lastChecked = freezed,
   }) {
-    return _then(_$ConsecutiveDaysImpl(
+    return _then(_self.copyWith(
       current: null == current
-          ? _value.current
+          ? _self.current
           : current // ignore: cast_nullable_to_non_nullable
               as int,
       longest: null == longest
-          ? _value.longest
+          ? _self.longest
           : longest // ignore: cast_nullable_to_non_nullable
               as int,
       startedAt: freezed == startedAt
-          ? _value.startedAt
+          ? _self.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       lastChecked: freezed == lastChecked
-          ? _value.lastChecked
+          ? _self.lastChecked
           : lastChecked // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
@@ -147,17 +121,15 @@ class __$$ConsecutiveDaysImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ConsecutiveDaysImpl extends _ConsecutiveDays
-    with DiagnosticableTreeMixin {
-  const _$ConsecutiveDaysImpl(
+class _ConsecutiveDays extends ConsecutiveDays with DiagnosticableTreeMixin {
+  const _ConsecutiveDays(
       {this.current = 0,
       this.longest = 0,
       @DateTimeOrNullConverter() this.startedAt,
       @DateTimeOrNullConverter() this.lastChecked})
       : super._();
-
-  factory _$ConsecutiveDaysImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConsecutiveDaysImplFromJson(json);
+  factory _ConsecutiveDays.fromJson(Map<String, dynamic> json) =>
+      _$ConsecutiveDaysFromJson(json);
 
   @override
   @JsonKey()
@@ -172,14 +144,23 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
   @DateTimeOrNullConverter()
   final DateTime? lastChecked;
 
+  /// Create a copy of ConsecutiveDays
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ConsecutiveDaysCopyWith<_ConsecutiveDays> get copyWith =>
+      __$ConsecutiveDaysCopyWithImpl<_ConsecutiveDays>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ConsecutiveDaysToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ConsecutiveDays'))
       ..add(DiagnosticsProperty('current', current))
@@ -192,7 +173,7 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConsecutiveDaysImpl &&
+            other is _ConsecutiveDays &&
             (identical(other.current, current) || other.current == current) &&
             (identical(other.longest, longest) || other.longest == longest) &&
             (identical(other.startedAt, startedAt) ||
@@ -206,50 +187,64 @@ class _$ConsecutiveDaysImpl extends _ConsecutiveDays
   int get hashCode =>
       Object.hash(runtimeType, current, longest, startedAt, lastChecked);
 
-  /// Create a copy of ConsecutiveDays
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ConsecutiveDaysImplCopyWith<_$ConsecutiveDaysImpl> get copyWith =>
-      __$$ConsecutiveDaysImplCopyWithImpl<_$ConsecutiveDaysImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConsecutiveDaysImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
   }
 }
 
-abstract class _ConsecutiveDays extends ConsecutiveDays {
-  const factory _ConsecutiveDays(
-          {final int current,
-          final int longest,
-          @DateTimeOrNullConverter() final DateTime? startedAt,
-          @DateTimeOrNullConverter() final DateTime? lastChecked}) =
-      _$ConsecutiveDaysImpl;
-  const _ConsecutiveDays._() : super._();
+/// @nodoc
+abstract mixin class _$ConsecutiveDaysCopyWith<$Res>
+    implements $ConsecutiveDaysCopyWith<$Res> {
+  factory _$ConsecutiveDaysCopyWith(
+          _ConsecutiveDays value, $Res Function(_ConsecutiveDays) _then) =
+      __$ConsecutiveDaysCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int current,
+      int longest,
+      @DateTimeOrNullConverter() DateTime? startedAt,
+      @DateTimeOrNullConverter() DateTime? lastChecked});
+}
 
-  factory _ConsecutiveDays.fromJson(Map<String, dynamic> json) =
-      _$ConsecutiveDaysImpl.fromJson;
+/// @nodoc
+class __$ConsecutiveDaysCopyWithImpl<$Res>
+    implements _$ConsecutiveDaysCopyWith<$Res> {
+  __$ConsecutiveDaysCopyWithImpl(this._self, this._then);
 
-  @override
-  int get current;
-  @override
-  int get longest;
-  @override
-  @DateTimeOrNullConverter()
-  DateTime? get startedAt;
-  @override
-  @DateTimeOrNullConverter()
-  DateTime? get lastChecked;
+  final _ConsecutiveDays _self;
+  final $Res Function(_ConsecutiveDays) _then;
 
   /// Create a copy of ConsecutiveDays
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConsecutiveDaysImplCopyWith<_$ConsecutiveDaysImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? current = null,
+    Object? longest = null,
+    Object? startedAt = freezed,
+    Object? lastChecked = freezed,
+  }) {
+    return _then(_ConsecutiveDays(
+      current: null == current
+          ? _self.current
+          : current // ignore: cast_nullable_to_non_nullable
+              as int,
+      longest: null == longest
+          ? _self.longest
+          : longest // ignore: cast_nullable_to_non_nullable
+              as int,
+      startedAt: freezed == startedAt
+          ? _self.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastChecked: freezed == lastChecked
+          ? _self.lastChecked
+          : lastChecked // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
 }
+
+// dart format on

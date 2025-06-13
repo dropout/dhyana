@@ -6,7 +6,7 @@ part of 'month.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MonthImpl _$$MonthImplFromJson(Map<String, dynamic> json) => _$MonthImpl(
+_Month _$MonthFromJson(Map<String, dynamic> json) => _Month(
       id: json['id'] as String,
       startDate: const DateTimeConverter()
           .fromJson((json['startDate'] as num).toInt()),
@@ -14,8 +14,7 @@ _$MonthImpl _$$MonthImplFromJson(Map<String, dynamic> json) => _$MonthImpl(
       sessionCount: (json['sessionCount'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$MonthImplToJson(_$MonthImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MonthToJson(_Month instance) => <String, dynamic>{
       'id': instance.id,
       'startDate': const DateTimeConverter().toJson(instance.startDate),
       'minutesCount': instance.minutesCount,

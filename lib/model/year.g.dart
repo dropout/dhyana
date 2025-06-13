@@ -6,7 +6,7 @@ part of 'year.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$YearImpl _$$YearImplFromJson(Map<String, dynamic> json) => _$YearImpl(
+_Year _$YearFromJson(Map<String, dynamic> json) => _Year(
       id: json['id'] as String,
       startDate: const DateTimeConverter()
           .fromJson((json['startDate'] as num).toInt()),
@@ -14,8 +14,7 @@ _$YearImpl _$$YearImplFromJson(Map<String, dynamic> json) => _$YearImpl(
       sessionCount: (json['sessionCount'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$YearImplToJson(_$YearImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$YearToJson(_Year instance) => <String, dynamic>{
       'id': instance.id,
       'startDate': const DateTimeConverter().toJson(instance.startDate),
       'minutesCount': instance.minutesCount,

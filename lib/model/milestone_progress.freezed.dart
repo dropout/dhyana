@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,96 +10,75 @@ part of 'milestone_progress.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-MilestoneProgress _$MilestoneProgressFromJson(Map<String, dynamic> json) {
-  return _MilestoneProgress.fromJson(json);
-}
-
 /// @nodoc
-mixin _$MilestoneProgress {
-  int get completedDaysCount => throw _privateConstructorUsedError;
-  int get targetDaysCount => throw _privateConstructorUsedError;
-  List<Session> get sessions => throw _privateConstructorUsedError;
-
-  /// Serializes this MilestoneProgress to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+mixin _$MilestoneProgress implements DiagnosticableTreeMixin {
+  int get completedDaysCount;
+  int get targetDaysCount;
+  List<Session> get sessions;
 
   /// Create a copy of MilestoneProgress
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MilestoneProgressCopyWith<MilestoneProgress> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MilestoneProgressCopyWith<$Res> {
-  factory $MilestoneProgressCopyWith(
-          MilestoneProgress value, $Res Function(MilestoneProgress) then) =
-      _$MilestoneProgressCopyWithImpl<$Res, MilestoneProgress>;
-  @useResult
-  $Res call(
-      {int completedDaysCount, int targetDaysCount, List<Session> sessions});
-}
-
-/// @nodoc
-class _$MilestoneProgressCopyWithImpl<$Res, $Val extends MilestoneProgress>
-    implements $MilestoneProgressCopyWith<$Res> {
-  _$MilestoneProgressCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MilestoneProgress
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $MilestoneProgressCopyWith<MilestoneProgress> get copyWith =>
+      _$MilestoneProgressCopyWithImpl<MilestoneProgress>(
+          this as MilestoneProgress, _$identity);
+
+  /// Serializes this MilestoneProgress to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? completedDaysCount = null,
-    Object? targetDaysCount = null,
-    Object? sessions = null,
-  }) {
-    return _then(_value.copyWith(
-      completedDaysCount: null == completedDaysCount
-          ? _value.completedDaysCount
-          : completedDaysCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      targetDaysCount: null == targetDaysCount
-          ? _value.targetDaysCount
-          : targetDaysCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      sessions: null == sessions
-          ? _value.sessions
-          : sessions // ignore: cast_nullable_to_non_nullable
-              as List<Session>,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'MilestoneProgress'))
+      ..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))
+      ..add(DiagnosticsProperty('targetDaysCount', targetDaysCount))
+      ..add(DiagnosticsProperty('sessions', sessions));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is MilestoneProgress &&
+            (identical(other.completedDaysCount, completedDaysCount) ||
+                other.completedDaysCount == completedDaysCount) &&
+            (identical(other.targetDaysCount, targetDaysCount) ||
+                other.targetDaysCount == targetDaysCount) &&
+            const DeepCollectionEquality().equals(other.sessions, sessions));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, completedDaysCount,
+      targetDaysCount, const DeepCollectionEquality().hash(sessions));
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
   }
 }
 
 /// @nodoc
-abstract class _$$MilestoneProgressImplCopyWith<$Res>
-    implements $MilestoneProgressCopyWith<$Res> {
-  factory _$$MilestoneProgressImplCopyWith(_$MilestoneProgressImpl value,
-          $Res Function(_$MilestoneProgressImpl) then) =
-      __$$MilestoneProgressImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $MilestoneProgressCopyWith<$Res> {
+  factory $MilestoneProgressCopyWith(
+          MilestoneProgress value, $Res Function(MilestoneProgress) _then) =
+      _$MilestoneProgressCopyWithImpl;
   @useResult
   $Res call(
       {int completedDaysCount, int targetDaysCount, List<Session> sessions});
 }
 
 /// @nodoc
-class __$$MilestoneProgressImplCopyWithImpl<$Res>
-    extends _$MilestoneProgressCopyWithImpl<$Res, _$MilestoneProgressImpl>
-    implements _$$MilestoneProgressImplCopyWith<$Res> {
-  __$$MilestoneProgressImplCopyWithImpl(_$MilestoneProgressImpl _value,
-      $Res Function(_$MilestoneProgressImpl) _then)
-      : super(_value, _then);
+class _$MilestoneProgressCopyWithImpl<$Res>
+    implements $MilestoneProgressCopyWith<$Res> {
+  _$MilestoneProgressCopyWithImpl(this._self, this._then);
+
+  final MilestoneProgress _self;
+  final $Res Function(MilestoneProgress) _then;
 
   /// Create a copy of MilestoneProgress
   /// with the given fields replaced by the non-null parameter values.
@@ -109,17 +89,17 @@ class __$$MilestoneProgressImplCopyWithImpl<$Res>
     Object? targetDaysCount = null,
     Object? sessions = null,
   }) {
-    return _then(_$MilestoneProgressImpl(
+    return _then(_self.copyWith(
       completedDaysCount: null == completedDaysCount
-          ? _value.completedDaysCount
+          ? _self.completedDaysCount
           : completedDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
       targetDaysCount: null == targetDaysCount
-          ? _value.targetDaysCount
+          ? _self.targetDaysCount
           : targetDaysCount // ignore: cast_nullable_to_non_nullable
               as int,
       sessions: null == sessions
-          ? _value._sessions
+          ? _self.sessions
           : sessions // ignore: cast_nullable_to_non_nullable
               as List<Session>,
     ));
@@ -128,17 +108,16 @@ class __$$MilestoneProgressImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MilestoneProgressImpl extends _MilestoneProgress
+class _MilestoneProgress extends MilestoneProgress
     with DiagnosticableTreeMixin {
-  const _$MilestoneProgressImpl(
+  const _MilestoneProgress(
       {this.completedDaysCount = 0,
       this.targetDaysCount = 7,
       final List<Session> sessions = const []})
       : _sessions = sessions,
         super._();
-
-  factory _$MilestoneProgressImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MilestoneProgressImplFromJson(json);
+  factory _MilestoneProgress.fromJson(Map<String, dynamic> json) =>
+      _$MilestoneProgressFromJson(json);
 
   @override
   @JsonKey()
@@ -155,14 +134,23 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
     return EqualUnmodifiableListView(_sessions);
   }
 
+  /// Create a copy of MilestoneProgress
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MilestoneProgressCopyWith<_MilestoneProgress> get copyWith =>
+      __$MilestoneProgressCopyWithImpl<_MilestoneProgress>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$MilestoneProgressToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'MilestoneProgress'))
       ..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))
@@ -174,7 +162,7 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MilestoneProgressImpl &&
+            other is _MilestoneProgress &&
             (identical(other.completedDaysCount, completedDaysCount) ||
                 other.completedDaysCount == completedDaysCount) &&
             (identical(other.targetDaysCount, targetDaysCount) ||
@@ -187,44 +175,56 @@ class _$MilestoneProgressImpl extends _MilestoneProgress
   int get hashCode => Object.hash(runtimeType, completedDaysCount,
       targetDaysCount, const DeepCollectionEquality().hash(_sessions));
 
-  /// Create a copy of MilestoneProgress
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MilestoneProgressImplCopyWith<_$MilestoneProgressImpl> get copyWith =>
-      __$$MilestoneProgressImplCopyWithImpl<_$MilestoneProgressImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MilestoneProgressImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
   }
 }
 
-abstract class _MilestoneProgress extends MilestoneProgress {
-  const factory _MilestoneProgress(
-      {final int completedDaysCount,
-      final int targetDaysCount,
-      final List<Session> sessions}) = _$MilestoneProgressImpl;
-  const _MilestoneProgress._() : super._();
+/// @nodoc
+abstract mixin class _$MilestoneProgressCopyWith<$Res>
+    implements $MilestoneProgressCopyWith<$Res> {
+  factory _$MilestoneProgressCopyWith(
+          _MilestoneProgress value, $Res Function(_MilestoneProgress) _then) =
+      __$MilestoneProgressCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int completedDaysCount, int targetDaysCount, List<Session> sessions});
+}
 
-  factory _MilestoneProgress.fromJson(Map<String, dynamic> json) =
-      _$MilestoneProgressImpl.fromJson;
+/// @nodoc
+class __$MilestoneProgressCopyWithImpl<$Res>
+    implements _$MilestoneProgressCopyWith<$Res> {
+  __$MilestoneProgressCopyWithImpl(this._self, this._then);
 
-  @override
-  int get completedDaysCount;
-  @override
-  int get targetDaysCount;
-  @override
-  List<Session> get sessions;
+  final _MilestoneProgress _self;
+  final $Res Function(_MilestoneProgress) _then;
 
   /// Create a copy of MilestoneProgress
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MilestoneProgressImplCopyWith<_$MilestoneProgressImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? completedDaysCount = null,
+    Object? targetDaysCount = null,
+    Object? sessions = null,
+  }) {
+    return _then(_MilestoneProgress(
+      completedDaysCount: null == completedDaysCount
+          ? _self.completedDaysCount
+          : completedDaysCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      targetDaysCount: null == targetDaysCount
+          ? _self.targetDaysCount
+          : targetDaysCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessions: null == sessions
+          ? _self._sessions
+          : sessions // ignore: cast_nullable_to_non_nullable
+              as List<Session>,
+    ));
+  }
 }
+
+// dart format on

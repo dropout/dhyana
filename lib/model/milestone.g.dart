@@ -6,8 +6,7 @@ part of 'milestone.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MilestoneImpl _$$MilestoneImplFromJson(Map<String, dynamic> json) =>
-    _$MilestoneImpl(
+_Milestone _$MilestoneFromJson(Map<String, dynamic> json) => _Milestone(
       id: json['id'] as String,
       days: (json['days'] as List<dynamic>?)
               ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
@@ -15,7 +14,7 @@ _$MilestoneImpl _$$MilestoneImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$MilestoneImplToJson(_$MilestoneImpl instance) =>
+Map<String, dynamic> _$MilestoneToJson(_Milestone instance) =>
     <String, dynamic>{
       'id': instance.id,
       'days': instance.days.map((e) => e.toJson()).toList(),

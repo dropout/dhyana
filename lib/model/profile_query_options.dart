@@ -5,7 +5,7 @@ part 'profile_query_options.freezed.dart';
 part 'profile_query_options.g.dart';
 
 @freezed
-class ProfileQueryOptions with _$ProfileQueryOptions {
+sealed class ProfileQueryOptions with _$ProfileQueryOptions {
 
   const ProfileQueryOptions._();
 

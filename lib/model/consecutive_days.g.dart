@@ -6,9 +6,8 @@ part of 'consecutive_days.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ConsecutiveDaysImpl _$$ConsecutiveDaysImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ConsecutiveDaysImpl(
+_ConsecutiveDays _$ConsecutiveDaysFromJson(Map<String, dynamic> json) =>
+    _ConsecutiveDays(
       current: (json['current'] as num?)?.toInt() ?? 0,
       longest: (json['longest'] as num?)?.toInt() ?? 0,
       startedAt: const DateTimeOrNullConverter()
@@ -17,8 +16,7 @@ _$ConsecutiveDaysImpl _$$ConsecutiveDaysImplFromJson(
           .fromJson((json['lastChecked'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$$ConsecutiveDaysImplToJson(
-        _$ConsecutiveDaysImpl instance) =>
+Map<String, dynamic> _$ConsecutiveDaysToJson(_ConsecutiveDays instance) =>
     <String, dynamic>{
       'current': instance.current,
       'longest': instance.longest,

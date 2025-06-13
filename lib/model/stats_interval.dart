@@ -5,7 +5,7 @@ part 'stats_interval.freezed.dart';
 part 'stats_interval.g.dart';
 
 @freezed
-class StatsInterval with _$StatsInterval {
+sealed class StatsInterval with _$StatsInterval {
 
   const StatsInterval._();
 

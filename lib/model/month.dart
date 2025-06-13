@@ -8,7 +8,7 @@ part 'month.freezed.dart';
 part 'month.g.dart';
 
 @freezed
-class Month with _$Month implements Model {
+sealed class Month with _$Month implements Model {
 
   const Month._();
 
