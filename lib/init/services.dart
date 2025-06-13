@@ -1,44 +1,89 @@
 import 'package:dhyana/service/default_shader_service.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 
-class Services {
+/// An abstract class makes it easy to mock services in test context
+/// as it is injected as a Provider so you can inject your mocked Services
+/// into the tests.
+abstract class Services {
+  AnalyticsService get analyticsService;
+  CrashlyticsService get crashlyticsService;
+  TimerSettingsSharedPrefsService get timerSettingsSharedPrefsService;
+  ShaderService get shaderService;
+  HapticsService get hapticsService;
+  ResourceResolver get resourceResolver;
+  IdGeneratorService get idGeneratorService;
+  RemoteConfigService get remoteConfigService;
+  AudioService get audioService;
+  OverlayService get overlayService;
+}
 
-  final AnalyticsService analyticsService;
-  final CrashlyticsService crashlyticsService;
-  final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
-  final ShaderService shaderService;
-  final HapticsService hapticsService;
-  final ResourceResolver resourceResolver;
-  final IdGeneratorService idGeneratorService;
-  final RemoteConfigService remoteConfigService;
-  final AudioService audioService;
-  final OverlayService overlayService;
+class DefaultServices extends Services {
 
-  Services({
-    required this.hapticsService,
-    required this.remoteConfigService,
-    required this.resourceResolver,
-    required this.audioService,
-    required this.overlayService,
+  final AnalyticsService _analyticsService;
+  final CrashlyticsService _crashlyticsService;
+  final TimerSettingsSharedPrefsService _timerSettingsSharedPrefsService;
+  final ShaderService _shaderService;
+  final HapticsService _hapticsService;
+  final ResourceResolver _resourceResolver;
+  final IdGeneratorService _idGeneratorService;
+  final RemoteConfigService _remoteConfigService;
+  final AudioService _audioService;
+  final OverlayService _overlayService;
+
+  DefaultServices({
+    required HapticsService hapticsService,
+    required RemoteConfigService remoteConfigService,
+    required ResourceResolver resourceResolver,
+    required AudioService audioService,
+    required OverlayService overlayService,
     required SharedPreferences sharedPreferences,
-    required FirebaseFirestore firebaseFirestore,
-    required FirebaseAnalytics firebaseAnalytics,
-    required FirebaseCrashlytics firebaseCrashlytics,
-  }) :
-    analyticsService = FirebaseAnalyticsService(firebaseAnalytics),
-    crashlyticsService = FirebaseCrashlyticsService(firebaseCrashlytics),
-    timerSettingsSharedPrefsService = TimerSettingsSharedPrefsService(
-      crashlyticsService: FirebaseCrashlyticsService(firebaseCrashlytics),
-      sharedPrefs: sharedPreferences,
-    ),
-    shaderService = DefaultShaderService(),
-    idGeneratorService = IdGeneratorService(FirebaseIdGenerator(firebaseFirestore));
+    required IdGeneratorService idGeneratorService,
+    required AnalyticsService analyticsService,
+    required CrashlyticsService crashlyticsService,
+  })  : _hapticsService = hapticsService,
+        _remoteConfigService = remoteConfigService,
+        _resourceResolver = resourceResolver,
+        _audioService = audioService,
+        _overlayService = overlayService,
+        _analyticsService = analyticsService,
+        _crashlyticsService = crashlyticsService,
+        _timerSettingsSharedPrefsService = TimerSettingsSharedPrefsService(
+          crashlyticsService: crashlyticsService,
+          sharedPrefs: sharedPreferences,
+        ),
+        _shaderService = DefaultShaderService(),
+        _idGeneratorService = idGeneratorService;
+
+  @override
+  AnalyticsService get analyticsService => _analyticsService;
+
+  @override
+  CrashlyticsService get crashlyticsService => _crashlyticsService;
+
+  @override
+  TimerSettingsSharedPrefsService get timerSettingsSharedPrefsService => _timerSettingsSharedPrefsService;
+
+  @override
+  ShaderService get shaderService => _shaderService;
+
+  @override
+  HapticsService get hapticsService => _hapticsService;
+
+  @override
+  ResourceResolver get resourceResolver => _resourceResolver;
+
+  @override
+  IdGeneratorService get idGeneratorService => _idGeneratorService;
+
+  @override
+  RemoteConfigService get remoteConfigService => _remoteConfigService;
+
+  @override
+  AudioService get audioService => _audioService;
+
+  @override
+  OverlayService get overlayService => _overlayService;
 
 }

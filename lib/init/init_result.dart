@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class InitResult {
 
   final TimerSettings timerSettings;
-  final Services services;
+  final DefaultServices services;
   final Repositories repositories;
   final List<Provider> providers;
   final ProfileBloc profileBloc;

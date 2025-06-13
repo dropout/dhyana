@@ -18,11 +18,27 @@ import 'package:provider/provider.dart';
 
 import '../../../test_context_providers.dart';
 
+class MockServices
+  extends Mock
+  implements Services {}
+
 class MockOverlayService
-    extends Mock
-    implements OverlayService {}
+  extends Mock
+  implements OverlayService {}
+
+class MockHapticsService
+  extends Mock
+  implements HapticsService {}
+
+class FakeBuildContext
+  extends Fake
+  implements BuildContext {}
 
 void main() {
+
+  setUpAll(() {
+    registerFallbackValue(FakeBuildContext());
+  });
 
   group('WarmupTimeInput', () {
 
@@ -53,6 +69,45 @@ void main() {
       );
     });
 
+
+    testWidgets('calls overlayservice showmodalsheet when tapped', (WidgetTester tester) async {
+
+      MockOverlayService mockOverlayService = MockOverlayService();
+      when(() => mockOverlayService.showModalBottomSheet(
+        any(that: isA<BuildContext>()),
+        any(that: isA<WidgetBuilder>()),
+      )).thenAnswer((_) async => null);
+
+      MockHapticsService mockHapticsService = MockHapticsService();
+
+      MockServices mockServices = MockServices();
+      when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
+
+      await tester.pumpWidget(
+        getAllTestContextProviders(
+          Provider<Services>(
+            create: (_) => mockServices,
+            child: MaterialApp(
+              home: Scaffold(
+                body: WarmupTimeInput(
+                  label: 'Test label',
+                  value: Duration(minutes: 3),
+                  overlayService: mockOverlayService,
+                )
+              )
+            )
+          )
+        )
+      );
+
+      await tester.tap(find.byKey(Key('warmup_time_duration_input_button')));
+      await tester.pumpAndSettle();
+
+      verify(() => mockOverlayService.showModalBottomSheet(
+        any(that: isA<BuildContext>()),
+        any(that: isA<WidgetBuilder>()),
+      )).called(1);
+    });
 
   });
 

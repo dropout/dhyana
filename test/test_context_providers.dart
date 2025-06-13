@@ -1,3 +1,4 @@
+import 'package:dhyana/init/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ Widget getAppTestProviders(Widget child) {
   return MultiProvider(
     providers: [
       Provider<AnalyticsService>(create: (_) => LoggingAnalyticsService()),
-      Provider<CrashlyticsService>(create: (_) => LoggingCrashlyticsService())
+      Provider<CrashlyticsService>(create: (_) => LoggingCrashlyticsService()),
     ],
     child: child,
   );

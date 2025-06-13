@@ -30,7 +30,7 @@ class MockProfileBloc
 
 class MockServices
   extends Mock
-  implements Services {}
+  implements DefaultServices {}
 
 class MockCrashlyticsService
   extends Mock
@@ -84,7 +84,7 @@ void main() {
           .thenReturn(TimerSettings());
 
       await tester.pumpWidget(
-        Provider<Services>(
+        Provider<DefaultServices>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             MultiBlocProvider(
@@ -113,7 +113,7 @@ void main() {
           .thenReturn(const AuthState.signedOut());
 
       await tester.pumpWidget(
-        Provider<Services>(
+        Provider<DefaultServices>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             MultiBlocProvider(
@@ -147,7 +147,7 @@ void main() {
         .thenThrow(Exception('Error occured'));
 
       await tester.pumpWidget(
-        Provider<Services>(
+        Provider<DefaultServices>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             MultiBlocProvider(
@@ -174,7 +174,7 @@ void main() {
           .thenReturn(const AuthState.signedOut());
 
       await tester.pumpWidget(
-        Provider<Services>(
+        Provider<DefaultServices>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
               MultiBlocProvider(
@@ -216,7 +216,7 @@ void main() {
       // hence the complication of runAsync
       await tester.runAsync(() async {
         await tester.pumpWidget(
-            Provider<Services>(
+            Provider<DefaultServices>(
                 create: (context) => mockServices,
                 child: getAllTestContextProviders(
                     MultiBlocProvider(

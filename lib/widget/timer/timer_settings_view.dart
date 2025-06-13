@@ -117,6 +117,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         const InputGap(),
         SoundInput(
           label: AppLocalizations.of(context).inputStartingSoundLabel,
+          overlayService: context.services.overlayService,
           value: widget.timerSettings.startingSound,
           onChange: (Sound startingSound) =>
             _onStartingSoundChange(context, startingSound)
@@ -131,6 +132,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         const InputGap(),
         SoundInput(
           label: AppLocalizations.of(context).inputEndingSoundLabel,
+          overlayService: context.services.overlayService,
           value: widget.timerSettings.endingSound,
           onChange: (Sound endingSound) =>
             _onEndingSoundChange(context, endingSound)

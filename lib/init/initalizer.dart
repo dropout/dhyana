@@ -3,6 +3,7 @@ import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
@@ -38,19 +39,23 @@ class Initializer {
       storageDataProvider: storageDataProvider
     );
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    HapticsService hapticsService = await HapticsService.create();
+    HapticsService hapticsService = await DefaultHapticsService.create();
     RemoteConfigService remoteConfigService = await RemoteConfigService
       .create(firebaseProvider.remoteConfig, firebaseProvider.crashlytics);
 
-    Services services = Services(
+    DefaultServices services = DefaultServices(
       audioService: DefaultAudioService(),
       overlayService: DefaultOverlayService(),
       sharedPreferences: sharedPreferences,
       hapticsService: hapticsService,
       remoteConfigService: remoteConfigService,
-      firebaseAnalytics: firebaseProvider.analytics,
-      firebaseCrashlytics: firebaseProvider.crashlytics,
-      firebaseFirestore: firebaseProvider.firestore,
+      analyticsService: FirebaseAnalyticsService(firebaseProvider.analytics),
+      crashlyticsService: FirebaseCrashlyticsService(
+        firebaseProvider.crashlytics
+      ),
+      idGeneratorService: IdGeneratorService(
+        FirebaseIdGenerator(firebaseProvider.firestore),
+      ),
       resourceResolver: resourceResolver,
     );
 
@@ -137,7 +142,7 @@ class Initializer {
     throughout the application.
    */
   List<Provider> _createProviders(
-    Services srvcs,
+    DefaultServices srvcs,
     Repositories repos,
   ) {
     return [

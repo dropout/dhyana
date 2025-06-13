@@ -26,7 +26,7 @@ class MockUrlLauncher
 
 class MockServices
   extends Mock
-  implements Services {}
+  implements DefaultServices {}
 
 class MockAnalyticsService
   extends Mock
@@ -158,7 +158,7 @@ void main() {
           .thenAnswer((_) => Future.value(true));
 
         await tester.pumpWidget(
-          Provider<Services>(
+          Provider<DefaultServices>(
             create: (context) => mockServices,
             child: getAllTestContextProviders(
               BlocProvider<AuthBloc>(
@@ -195,7 +195,7 @@ void main() {
           .thenAnswer((_) => Future.value(true));
 
         await tester.pumpWidget(
-          Provider<Services>(
+          Provider<DefaultServices>(
             create: (context) => mockServices,
             child: getAllTestContextProviders(
               BlocProvider<AuthBloc>(
@@ -230,7 +230,7 @@ void main() {
             .thenAnswer((_) => Future.value(true));
 
         await tester.pumpWidget(
-          Provider<Services>(
+          Provider<DefaultServices>(
             create: (context) => mockServices,
             child: getAllTestContextProviders(
               BlocProvider<AuthBloc>(

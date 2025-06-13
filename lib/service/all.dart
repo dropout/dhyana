@@ -2,6 +2,7 @@ export 'analytics_service.dart';
 export 'audio_service.dart';
 export 'crashlytics_service.dart';
 export 'default_audio_service.dart';
+export 'default_haptics_service.dart';
 export 'default_resource_resolver.dart';
 export 'default_timer_service.dart';
 export 'default_overlay_service.dart';

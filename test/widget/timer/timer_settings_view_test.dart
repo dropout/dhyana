@@ -22,7 +22,7 @@ class MockTimerSettingsBloc
 
 class MockServices
   extends Mock
-  implements Services {}
+  implements DefaultServices {}
 
 void main() {
 
@@ -51,7 +51,7 @@ void main() {
       TimerSettings timerSettings = TimerSettings();
 
       await tester.pumpWidget(
-        Provider<Services>(
+        Provider<DefaultServices>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             BlocProvider<TimerSettingsBloc>(
