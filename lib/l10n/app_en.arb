@@ -58,6 +58,7 @@
   "profile": "Profile",
   "sessionsHistory": "Sessions",
   "editProfile": "Edit Profile",
+  "donate": "Donate",
   "timerSettingsHistory": "Settings history",
   "timerSettingsHistoryApplied": "Timer settings applied.",
   "timerSettingsHistoryEmpty": "There are no timer settings\n saved in history yet.",

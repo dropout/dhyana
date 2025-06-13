@@ -52,7 +52,7 @@ class ProfileMenu extends StatelessWidget {
         children: [
           _buildTile(
             title: Text(
-              AppLocalizations.of(context).editProfile,
+              context.localizations.editProfile,
               style: textStyle,
             ),
             onTap: () => _onEditProfileTapped(context),
@@ -60,7 +60,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           _buildTile(
             title: Text(
-              AppLocalizations.of(context).sessionsHistory,
+              context.localizations.sessionsHistory,
               style: textStyle,
             ),
             onTap: () => _onSessionHistoryTapped(context),
@@ -68,7 +68,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           _buildTile(
             title: Text(
-              AppLocalizations.of(context).profileStats,
+              context.localizations.profileStats,
               style: textStyle,
             ),
             onTap: () => _onStatisticsTapped(context),
@@ -76,7 +76,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           _buildTile(
             title: Text(
-              'Donate',
+              context.localizations.donate,
               style: textStyle,
             ),
             onTap: () => null,
@@ -84,7 +84,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           _buildTile(
             title: Text(
-              AppLocalizations.of(context).profileDeleteTitle,
+              context.localizations.profileDeleteTitle,
               style: textStyle,
             ),
             onTap: () => _onDeleteProfileTapped(context),
@@ -92,7 +92,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           _buildTile(
             title: Text(
-              AppLocalizations.of(context).signOut,
+              context.localizations.signOut,
               style: textStyle,
             ),
             onTap: () => _onSignoutTapped(context),

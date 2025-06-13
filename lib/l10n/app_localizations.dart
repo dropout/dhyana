@@ -386,6 +386,12 @@ abstract class AppLocalizations {
   /// **'Profil szerkesztése'**
   String get editProfile;
 
+  /// No description provided for @donate.
+  ///
+  /// In hu, this message translates to:
+  /// **'Adományozás'**
+  String get donate;
+
   /// No description provided for @timerSettingsHistory.
   ///
   /// In hu, this message translates to:

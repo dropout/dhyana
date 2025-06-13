@@ -154,6 +154,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get editProfile => 'Profil szerkesztése';
 
   @override
+  String get donate => 'Adományozás';
+
+  @override
   String get timerSettingsHistory => 'Legutóbbi beállítások';
 
   @override

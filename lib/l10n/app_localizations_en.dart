@@ -153,6 +153,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editProfile => 'Edit Profile';
 
   @override
+  String get donate => 'Donate';
+
+  @override
   String get timerSettingsHistory => 'Settings history';
 
   @override
