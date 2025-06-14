@@ -10,8 +10,8 @@ class SoundInputPageViewScrollPhysics extends ScrollPhysics {
 
   @override
   SpringDescription get spring => const SpringDescription(
-    mass: 50,
-    stiffness: 100,
-    damping: 0.8,
+    mass: 1.0,
+    stiffness: 500.0,
+    damping: 40,
   );
 }
