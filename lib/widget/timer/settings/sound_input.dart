@@ -1,6 +1,6 @@
+import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/timer/settings/sound_input_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,45 +9,56 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/localization.dart';
 
 import 'sound_input_view.dart';
+import 'sound_input_button.dart';
 
-class SoundInput extends StatefulWidget {
+/// A widget that allows users to select a starting sound
+/// or an ending sound for a timer.
+class SoundInput extends StatelessWidget {
 
+  /// Label used for input view title.
   final String label;
+
+  /// The selected sound value.
   final Sound value;
+
+  /// Callback function that is called when the value changes.
   final void Function(Sound sound)? onChange;
+
+  /// The service used to manage overlays, such as showing modal bottom sheets.
+  final OverlayService overlayService;
 
   const SoundInput({
     required this.label,
     required this.value,
+    required this.overlayService,
     this.onChange,
     super.key
   });
 
-  @override
-  State<SoundInput> createState() => _SoundInputState();
-}
-
-class _SoundInputState extends State<SoundInput> {
-
   void _onSelected(BuildContext context, Sound sound) {
-    widget.onChange?.call(sound);
+    onChange?.call(sound);
     context.pop();
   }
 
   void _onInputTap(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      useRootNavigator: true,
-      builder: (context) {
-        return SoundInputView(
-          title: widget.label,
-          initialValue: widget.value,
-          onSelect: (Sound sound) => _onSelected(context, sound),
-        );
-      }
+    overlayService.showModalBottomSheet(
+      context,
+      (context) => SoundInputView(
+        title: label,
+        initialValue: value,
+        onSelect: (Sound sound) => _onSelected(context, sound),
+      ),
+      // isScrollControlled: true,
+      // backgroundColor: Colors.transparent,
+      // shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      // useRootNavigator: true,
+      // builder: (context) {
+      //   return SoundInputView(
+      //     title: widget.label,
+      //     initialValue: widget.value,
+      //     onSelect: (Sound sound) => _onSelected(context, sound),
+      //   );
+      // }
     );
     context.hapticsTap();
   }
@@ -55,6 +66,7 @@ class _SoundInputState extends State<SoundInput> {
   @override
   Widget build(BuildContext context) {
     return SoundInputButton(
+      key: Key('sound_input_button'),
       padding: const EdgeInsets.symmetric(
         horizontal: AppThemeData.spacingMd,
         vertical: AppThemeData.spacingSm,
@@ -62,7 +74,7 @@ class _SoundInputState extends State<SoundInput> {
       onTap: () => _onInputTap(context),
       child: Text(
         getLocalizedSoundName(
-          widget.value,
+          value,
           AppLocalizations.of(context)
         ),
         style: Theme.of(context).textTheme.titleMedium!.copyWith(

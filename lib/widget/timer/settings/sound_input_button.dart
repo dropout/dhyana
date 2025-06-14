@@ -25,7 +25,7 @@ class SoundInputButton extends StatelessWidget {
       highlightElevation: 0,
       constraints: const BoxConstraints(), // removes unnecessary padding
       shape: const StadiumBorder(),
-      fillColor: Colors.black, //background color
+      fillColor: Colors.black, // background color
       splashColor: AppColors.splashColor,
       clipBehavior: Clip.none,
       child: child,
