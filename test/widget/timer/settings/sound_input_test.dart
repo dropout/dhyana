@@ -39,16 +39,16 @@ void main() {
       MockOverlayService mockOverlayService = MockOverlayService();
 
       await tester.pumpWidget(
-          getAllTestContextProviders(
-              Provider<Services>(
-                  create: (_) => MockServices(),
-                  child: SoundInput(
-                    label: 'Label for sound input',
-                    overlayService: mockOverlayService,
-                    value: Sound.none,
-                  )
-              )
+        getAllTestContextProviders(
+          Provider<Services>(
+            create: (_) => MockServices(),
+            child: SoundInput(
+              label: 'Label for sound input',
+              overlayService: mockOverlayService,
+              value: Sound.none,
+            )
           )
+        )
       );
 
       // Verify initial value
