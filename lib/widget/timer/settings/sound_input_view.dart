@@ -17,17 +17,18 @@ class SoundInputView extends StatefulWidget {
   final Sound? initialValue;
 
   const SoundInputView({
-    required this.title,
+    this.title = '',
     this.initialValue,
     this.onSelect,
     super.key
   });
 
   @override
-  State<SoundInputView> createState() => _SoundInputViewState();
+  State<SoundInputView> createState() => SoundInputViewState();
 }
 
-class _SoundInputViewState extends State<SoundInputView> with TickerProviderStateMixin {
+class SoundInputViewState extends State<SoundInputView>
+  with TickerProviderStateMixin {
 
   late PageController pageController;
   late TabController tabController;
@@ -68,11 +69,11 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
     return InputView(
       title: widget.title,
       onSave: () => _onSelectButtonPress(context),
-      child: buildContent(context),
+      child: buildInputViewContent(context),
     );
   }
 
-  Widget buildContent(BuildContext context) {
+  Widget buildInputViewContent(BuildContext context) {
     return Column(
       children: [
         SizedBox(
@@ -100,31 +101,6 @@ class _SoundInputViewState extends State<SoundInputView> with TickerProviderStat
           ),
         )
       ],
-    );
-  }
-
-  Widget buildPage(BuildContext context, Sound sound) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 128,
-          height: 128,
-          decoration: BoxDecoration(
-            color: Colors.purpleAccent,
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(sound.imageResourcePath)
-            )
-          ),
-        ),
-        const SizedBox(height: AppThemeData.spacingLg),
-        Text(
-          getLocalizedSoundName(sound, AppLocalizations.of(context)),
-          style: Theme.of(context).textTheme.titleMedium
-        )
-      ]
     );
   }
 

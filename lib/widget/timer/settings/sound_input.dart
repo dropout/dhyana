@@ -48,17 +48,6 @@ class SoundInput extends StatelessWidget {
         initialValue: value,
         onSelect: (Sound sound) => _onSelected(context, sound),
       ),
-      // isScrollControlled: true,
-      // backgroundColor: Colors.transparent,
-      // shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      // useRootNavigator: true,
-      // builder: (context) {
-      //   return SoundInputView(
-      //     title: widget.label,
-      //     initialValue: widget.value,
-      //     onSelect: (Sound sound) => _onSelected(context, sound),
-      //   );
-      // }
     );
     context.hapticsTap();
   }
