@@ -68,7 +68,7 @@ void main() {
       expect(find.byType(SoundInputPage), findsOneWidget);
       expect(find.byType(SoundInputPlayButton), findsOneWidget);
       expect(find.text('Nincs hang'), findsOneWidget);
-
+      expect(find.byType(SoundInputPlayButton), findsOneWidget);
     });
 
     testWidgets('calls onchanged when value is changed', (WidgetTester tester) async  {
@@ -94,7 +94,8 @@ void main() {
         )
       );
 
-      final SoundInputViewState state = tester.state(find.byType(SoundInputView));
+      final SoundInputViewState state =
+        tester.state(find.byType(SoundInputView));
 
       expect(state.selectedIndex, 0);
 
@@ -113,9 +114,6 @@ void main() {
       expect(state.selectedIndex, 1);
 
     });
-
-
-
 
   });
 }

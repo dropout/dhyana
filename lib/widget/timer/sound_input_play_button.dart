@@ -16,12 +16,12 @@ class SoundInputPlayButton extends StatefulWidget {
   });
 
   @override
-  State<SoundInputPlayButton> createState() => _SoundInputPlayButtonState();
+  State<SoundInputPlayButton> createState() => SoundInputPlayButtonState();
 }
 
-class _SoundInputPlayButtonState extends State<SoundInputPlayButton> {
+class SoundInputPlayButtonState extends State<SoundInputPlayButton> {
   
-  bool _isPlaying = false;
+  bool isPlaying = false;
   late final StreamSubscription<bool> _isPlayingSubscription;
   
   @override
@@ -29,27 +29,28 @@ class _SoundInputPlayButtonState extends State<SoundInputPlayButton> {
     _isPlayingSubscription = widget.audioService.
       isPlayingStream.listen((isPlaying) {
         setState(() {
-          _isPlaying = isPlaying;
+          this.isPlaying = isPlaying;
         });
       });
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     if (widget.sound == Sound.none) {
       return IconButton(
+        key: const Key('sound_input_play_button_none'),
         icon: const Icon(
-            size: 48,
-            Icons.play_circle_fill_rounded,
+          size: 48,
+          Icons.play_circle_fill_rounded,
         ),
         onPressed: null,
       );
     }
 
-    if (_isPlaying) {
+    if (isPlaying) {
       return IconButton(
+        key: const Key('sound_input_play_button_stop'),
         icon: const Icon(
           size: 48,
           Icons.stop_circle_rounded
@@ -60,6 +61,7 @@ class _SoundInputPlayButtonState extends State<SoundInputPlayButton> {
       );
     } else {
       return IconButton(
+        key: const Key('sound_input_play_button_play'),
         icon: const Icon(
           Icons.play_circle_fill_rounded,
           size: 48,
