@@ -5,26 +5,29 @@ import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
-class SoundInputPage extends StatefulWidget {
 
+/// No state management, because the playback state is
+/// not displayed in this widget.
+class SoundInputPage extends StatelessWidget {
+
+  final double size;
   final Sound sound;
   final AudioService audioService;
 
   const SoundInputPage({
     required this.sound,
     required this.audioService,
+    this.size = 128.0,
     super.key,
   });
 
-  @override
-  State<SoundInputPage> createState() => _SoundInputPageState();
-}
-
-class _SoundInputPageState extends State<SoundInputPage> {
-
   void _onImageTap(BuildContext context) {
-    if (widget.sound != Sound.none) {
-      widget.audioService.play(widget.sound);
+    if (sound == Sound.none) return;
+
+    if (audioService.isPlaying) {
+      audioService.stop();
+    } else {
+      audioService.play(sound);
     }
   }
 
@@ -36,21 +39,22 @@ class _SoundInputPageState extends State<SoundInputPage> {
           GestureDetector(
             onTap: () => _onImageTap(context),
             child: Container(
-              width: 128,
-              height: 128,
+              key: const Key('sound_input_page_image_container'),
+              width: size,
+              height: size,
               decoration: BoxDecoration(
                 color: Colors.purpleAccent,
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(widget.sound.imageResourcePath)
+                  image: AssetImage(sound.imageResourcePath)
                 )
               ),
             ),
           ),
           const SizedBox(height: AppThemeData.spacingLg),
           Text(
-            getLocalizedSoundName(widget.sound, AppLocalizations.of(context)),
+            getLocalizedSoundName(sound, AppLocalizations.of(context)),
             style: Theme.of(context).textTheme.titleMedium
           )
         ]
