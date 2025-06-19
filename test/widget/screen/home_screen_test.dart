@@ -6,11 +6,14 @@ import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/default_shader_service.dart';
+import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
+import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
+import 'package:dhyana/widget/timer/settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +33,11 @@ class MockProfileBloc
 
 class MockServices
   extends Mock
-  implements DefaultServices {}
+  implements Services {}
+
+class MockOverlayService
+  extends Mock
+  implements OverlayService {}
 
 class MockCrashlyticsService
   extends Mock
@@ -48,6 +55,7 @@ void main() {
     late MockServices mockServices;
     late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockCrashlyticsService mockCrashlyticsService;
+    late MockOverlayService mockOverlayService;
 
     // doesn't make sense to mock this because the FragmentShader
     // cannot be mocked neither, so you need to load the shader anyhow
@@ -59,6 +67,7 @@ void main() {
       mockServices = MockServices();
       mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
       mockCrashlyticsService = MockCrashlyticsService();
+      mockOverlayService = MockOverlayService();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
@@ -66,6 +75,8 @@ void main() {
         .thenReturn(mockTimerSettingsSharedPrefsService);
       when(() => mockServices.shaderService)
         .thenReturn(shaderService);
+      when(() => mockServices.overlayService)
+        .thenReturn(mockOverlayService);
 
       // preload the only shader which is used in HomeScreen
       await shaderService.loadShader('shaders/gradient_flow.frag');
@@ -75,16 +86,16 @@ void main() {
       shaderService.close();
     });
 
-    testWidgets('HomeScreen can load TimerSettings without constructor argument given', (WidgetTester tester) async {
+    testWidgets('can load TimerSettings without constructor argument given', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.signedOut());
 
       when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
-          .thenReturn(TimerSettings());
+        .thenReturn(TimerSettings());
 
       await tester.pumpWidget(
-        Provider<DefaultServices>(
+        Provider<Services>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             MultiBlocProvider(
@@ -107,13 +118,13 @@ void main() {
 
     });
 
-    testWidgets('HomeScreen does not load TimerSettings when its given in the constructor', (WidgetTester tester) async {
+    testWidgets('does not load TimerSettings when its given as a parameter in the constructor', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
           .thenReturn(const AuthState.signedOut());
 
       await tester.pumpWidget(
-        Provider<DefaultServices>(
+        Provider<Services>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             MultiBlocProvider(
@@ -138,7 +149,7 @@ void main() {
 
     });
 
-    testWidgets('HomeScreen can display an error state', (WidgetTester tester) async {
+    testWidgets('can display an error state', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
           .thenReturn(const AuthState.signedOut());
@@ -147,7 +158,7 @@ void main() {
         .thenThrow(Exception('Error occured'));
 
       await tester.pumpWidget(
-        Provider<DefaultServices>(
+        Provider<Services>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
             MultiBlocProvider(
@@ -168,13 +179,13 @@ void main() {
     });
 
 
-    testWidgets('HomeScreen will display a sign in button when signed out', (WidgetTester tester) async {
+    testWidgets('will display a sign in button when signed out', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
           .thenReturn(const AuthState.signedOut());
 
       await tester.pumpWidget(
-        Provider<DefaultServices>(
+        Provider<Services>(
           create: (context) => mockServices,
           child: getAllTestContextProviders(
               MultiBlocProvider(
@@ -196,7 +207,7 @@ void main() {
       expect(find.byIcon(Icons.account_circle_outlined), findsOneWidget);
     });
 
-    testWidgets('HomeScreen will display a view profile button when signed in', (WidgetTester tester) async {
+    testWidgets('will display a view profile button when signed in', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
         .thenReturn(
@@ -216,7 +227,55 @@ void main() {
       // hence the complication of runAsync
       await tester.runAsync(() async {
         await tester.pumpWidget(
-            Provider<DefaultServices>(
+          getAllTestContextProviders(
+            Provider<Services>(
+              create: (context) => mockServices,
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider<AuthBloc>(
+                    create: (context) => mockAuthBloc,
+                  ),
+                  BlocProvider<ProfileBloc>(
+                    create: (context) => mockProfileBloc,
+                  )
+                ],
+                child: const HomeScreen(
+                  timerSettings: TimerSettings(),
+                ),
+              )
+            )
+          )
+        );
+
+        await tester.pump(Duration(milliseconds: 1000));
+
+        expect(find.byType(TimerSettingsView), findsOneWidget);
+        expect(find.byType(ProfileButton), findsOneWidget);
+      });
+
+    });
+
+    testWidgets('will display a timer settings history button when signed in', (WidgetTester tester) async {
+
+      when(() => mockAuthBloc.state)
+        .thenReturn(
+          AuthState.signedIn(
+            user: FakeModelFactory().createUser()
+          )
+        );
+
+      when(() => mockProfileBloc.state)
+        .thenReturn(ProfileState.loaded(
+            profile: FakeModelFactory().createProfile()
+          )
+        );
+
+      // Because of ProfileImage initState Future.delayed
+      // need to run the test in real async mode not fake async
+      // hence the complication of runAsync
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+            Provider<Services>(
                 create: (context) => mockServices,
                 child: getAllTestContextProviders(
                     MultiBlocProvider(
@@ -238,8 +297,7 @@ void main() {
 
         await tester.pump(Duration(milliseconds: 1000));
 
-        expect(find.byType(TimerSettingsView), findsOneWidget);
-        expect(find.byType(ProfileImage), findsOneWidget);
+        expect(find.byType(TimerSettingsHistoryButton), findsOneWidget);
 
       });
 
