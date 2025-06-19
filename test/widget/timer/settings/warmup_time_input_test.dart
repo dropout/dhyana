@@ -37,25 +37,23 @@ class FakeBuildContext
 void main() {
 
   setUpAll(() {
+    // to be able to use WidgetBuilder
+    // in modal content with fake context
     registerFallbackValue(FakeBuildContext());
   });
 
   group('WarmupTimeInput', () {
 
-    testWidgets('shows the value selected', (WidgetTester tester) async {
+    testWidgets('render with initial value', (WidgetTester tester) async {
 
       MockOverlayService mockOverlayService = MockOverlayService();
 
       await tester.pumpWidget(
         getAllTestContextProviders(
-          MaterialApp(
-            home: Scaffold(
-              body: WarmupTimeInput(
-                label: 'Test label',
-                value: Duration(minutes: 3),
-                overlayService: mockOverlayService
-              )
-            )
+          WarmupTimeInput(
+            label: 'Test label',
+            value: Duration(minutes: 3),
+            overlayService: mockOverlayService
           )
         )
       );
@@ -70,7 +68,7 @@ void main() {
     });
 
 
-    testWidgets('calls overlayservice showmodalsheet when tapped', (WidgetTester tester) async {
+    testWidgets('opens modal on button tap', (WidgetTester tester) async {
 
       MockOverlayService mockOverlayService = MockOverlayService();
       when(() => mockOverlayService.showModalBottomSheet(

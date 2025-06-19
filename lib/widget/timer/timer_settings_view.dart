@@ -111,8 +111,8 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           buildInputGap(context),
           WarmupTimeInput(
             label: AppLocalizations.of(context).inputWarmupLabel,
-            overlayService: context.services.overlayService,
             value: widget.timerSettings.warmup,
+            overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
               _onWarmupChange(context, duration)
           ),
@@ -128,6 +128,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           DurationInput(
             label: AppLocalizations.of(context).inputDurationLabel,
             value: widget.timerSettings.duration,
+            overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
               _onDurationChange(context, duration),
           ),
