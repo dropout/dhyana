@@ -102,46 +102,49 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   Widget buildInputs(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        StartTimeText(),
-        const InputGap(),
-        WarmupTimeInput(
-          label: AppLocalizations.of(context).inputWarmupLabel,
-          overlayService: context.services.overlayService,
-          value: widget.timerSettings.warmup,
-          onChange: (Duration duration) =>
-            _onWarmupChange(context, duration)
-        ),
-        const InputGap(),
-        SoundInput(
-          label: AppLocalizations.of(context).inputStartingSoundLabel,
-          overlayService: context.services.overlayService,
-          value: widget.timerSettings.startingSound,
-          onChange: (Sound startingSound) =>
-            _onStartingSoundChange(context, startingSound)
-        ),
-        const InputGap(),
-        DurationInput(
-          label: AppLocalizations.of(context).inputDurationLabel,
-          value: widget.timerSettings.duration,
-          onChange: (Duration duration) =>
-            _onDurationChange(context, duration),
-        ),
-        const InputGap(),
-        SoundInput(
-          label: AppLocalizations.of(context).inputEndingSoundLabel,
-          overlayService: context.services.overlayService,
-          value: widget.timerSettings.endingSound,
-          onChange: (Sound endingSound) =>
-            _onEndingSoundChange(context, endingSound)
-        ),
-        const InputGap(),
-        EndTimeText(
-          timerSettings: widget.timerSettings,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppThemeData.padding2Xl),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StartTimeText(),
+          buildInputGap(context),
+          WarmupTimeInput(
+            label: AppLocalizations.of(context).inputWarmupLabel,
+            overlayService: context.services.overlayService,
+            value: widget.timerSettings.warmup,
+            onChange: (Duration duration) =>
+              _onWarmupChange(context, duration)
+          ),
+          buildInputGap(context),
+          SoundInput(
+            label: AppLocalizations.of(context).inputStartingSoundLabel,
+            overlayService: context.services.overlayService,
+            value: widget.timerSettings.startingSound,
+            onChange: (Sound startingSound) =>
+              _onStartingSoundChange(context, startingSound)
+          ),
+          buildInputGap(context),
+          DurationInput(
+            label: AppLocalizations.of(context).inputDurationLabel,
+            value: widget.timerSettings.duration,
+            onChange: (Duration duration) =>
+              _onDurationChange(context, duration),
+          ),
+          buildInputGap(context),
+          SoundInput(
+            label: AppLocalizations.of(context).inputEndingSoundLabel,
+            overlayService: context.services.overlayService,
+            value: widget.timerSettings.endingSound,
+            onChange: (Sound endingSound) =>
+              _onEndingSoundChange(context, endingSound)
+          ),
+          buildInputGap(context),
+          EndTimeText(
+            timerSettings: widget.timerSettings,
+          ),
+        ],
+      ),
     );
   }
 
@@ -157,6 +160,14 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           ),
           timerSettings: widget.timerSettings,
         ),
+      ),
+    );
+  }
+
+  Widget buildInputGap(BuildContext context) {
+    return Expanded(
+      child: InputGap(
+        isEndGap: false,
       ),
     );
   }

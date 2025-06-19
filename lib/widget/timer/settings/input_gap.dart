@@ -12,21 +12,14 @@ class InputGap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.symmetric(
-          // vertical: 0,
-          vertical: AppThemeData.paddingMd,
-          horizontal: 0,
+    return SizedBox(
+      width: 16,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: GapIconPainter(
+          isEndGap: isEndGap,
         ),
-        child: SizedBox(
-          width: 16,
-          height: 16,
-          child: CustomPaint(
-            painter: GapIconPainter(
-              isEndGap: isEndGap,
-            ),
-          )
-        )
+      )
     );
   }
 
@@ -35,10 +28,13 @@ class InputGap extends StatelessWidget {
 class GapIconPainter extends CustomPainter {
 
   final bool isEndGap;
-  final double padding = 3;
+  final double padding;
+  final double preferredSize;
 
   GapIconPainter({
     this.isEndGap = false,
+    this.padding = 3,
+    this.preferredSize = 16,
   });
 
   final Paint _paint = Paint()
@@ -50,8 +46,17 @@ class GapIconPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
 
-    final Offset topCenter = Offset(size.width/2, padding);
-    final Offset bottomCenter = Offset(size.width/2, size.height - padding);
+    // final Offset topCenter = Offset(size.width/2, padding);
+    // final Offset bottomCenter = Offset(size.width/2, size.height - padding);
+
+    // if the height is less than the preferred size, do not draw
+    if (size.height < preferredSize) {
+      return;
+    }
+
+    double topStart = (size.height - preferredSize) / 2;
+    final Offset topCenter = Offset(size.width / 2, topStart);
+    final Offset bottomCenter = Offset(topCenter.dx, topCenter.dy + preferredSize);
 
     // vertical line
     canvas.drawLine(topCenter, bottomCenter, _paint);

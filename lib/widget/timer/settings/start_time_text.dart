@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -17,7 +18,7 @@ class _StartTimeTextState extends State<StartTimeText> {
   @override
   void initState() {
     now = DateTime.now();
-    _timer = Timer.periodic(const Duration(minutes: 1), _onTimerTick);
+    _timer = Timer.periodic(const Duration(seconds: 45), _onTimerTick);
     super.initState();
   }
 
@@ -29,16 +30,10 @@ class _StartTimeTextState extends State<StartTimeText> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8.0,
-      ),
-      child: Text(
-        DateFormat.Hm().format(now),
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          fontWeight: FontWeight.w800,
-        ),
+    return Text(
+      DateFormat.Hm().format(now),
+      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        fontWeight: FontWeight.w800,
       ),
     );
   }

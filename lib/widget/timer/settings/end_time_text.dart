@@ -26,7 +26,7 @@ class _EndTimeTextState extends State<EndTimeText> {
   @override
   void initState() {
     end = DateTime.now().add(widget.timerSettings.warmup + widget.timerSettings.duration);
-    _timer = Timer.periodic(const Duration(minutes: 1), _onTimerTick);
+    _timer = Timer.periodic(const Duration(seconds: 45), _onTimerTick);
     super.initState();
   }
 
@@ -50,16 +50,10 @@ class _EndTimeTextState extends State<EndTimeText> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppThemeData.spacingMd,
-        vertical: AppThemeData.spacingSm,
-      ),
-      child: Text(
-        DateFormat.Hm().format(end),
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          fontWeight: FontWeight.w800,
-        ),
+    return Text(
+      DateFormat.Hm().format(end),
+      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        fontWeight: FontWeight.w800,
       ),
     );
   }
