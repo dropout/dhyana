@@ -1,11 +1,14 @@
-
 import 'package:bar_chart/bar_chart.dart';
 import 'package:flutter/material.dart';
-
 
 typedef InfoBuilderDelegate = Widget Function(
   BuildContext context,
   int index,
+);
+
+typedef InfoTriggerCallback = void Function(
+  int index,
+  BarData barData,
 );
 
 class InfoHeaderBarChart extends StatefulWidget {
@@ -25,6 +28,10 @@ class InfoHeaderBarChart extends StatefulWidget {
   final EdgeInsets barPadding;
   final String averageLabel;
 
+  final InfoTriggerCallback? onInfoTriggered;
+  final InfoTriggerCallback? onInfoChanged;
+  final InfoTriggerCallback? onInfoDismissed;
+
   const InfoHeaderBarChart({
     required this.dataSource,
     required this.displayRangeSetter,
@@ -34,6 +41,11 @@ class InfoHeaderBarChart extends StatefulWidget {
     required this.yAxisLabelFormatter,
     required this.infoBuilderDelegate,
     required this.averageLabel,
+
+    this.onInfoTriggered,
+    this.onInfoChanged,
+    this.onInfoDismissed,
+
     this.barPadding = const EdgeInsets.only(
       // top: 100,
       right: 32,
@@ -130,16 +142,19 @@ class _InfoHeaderBarChartState extends State<InfoHeaderBarChart> {
           setState(() {
             selectedIndex = index;
           });
+          widget.onInfoTriggered?.call(index, barData);
         },
         onInfoChanged: (index, barData) {
           setState(() {
             selectedIndex = index;
           });
+          widget.onInfoChanged?.call(index, barData);
         },
         onInfoDismissed: (index, barData) {
           setState(() {
             selectedIndex = -1;
           });
+          widget.onInfoDismissed?.call(index, barData);
         },
       ),
     );
