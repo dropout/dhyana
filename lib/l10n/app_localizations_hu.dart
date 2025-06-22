@@ -176,7 +176,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileLastnameLabel => 'Vezetéknév';
 
   @override
-  String get profileSaveButtonIdle => 'Ment';
+  String get profileSaveButtonIdle => 'Mentés';
 
   @override
   String get profileSaveButtonSaving => 'Mentés...';

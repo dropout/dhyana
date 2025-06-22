@@ -11,7 +11,7 @@ void main() {
 
     testWidgets('renders with initial value', (WidgetTester tester) async {
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           DurationInputView(
             availableValues: [3, 5, 10, 15],
             initialValue: Duration(minutes: 5),
@@ -26,7 +26,7 @@ void main() {
       final Completer<Duration> completer = Completer<Duration>();
       Duration changedValue = Duration.zero;
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           DurationInputView(
             availableValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             initialValue: Duration(minutes: 5),

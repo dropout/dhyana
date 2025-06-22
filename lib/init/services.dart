@@ -17,6 +17,7 @@ abstract class Services {
   RemoteConfigService get remoteConfigService;
   AudioService get audioService;
   OverlayService get overlayService;
+  CacheManagerService get cacheManagerService;
 }
 
 class DefaultServices extends Services {
@@ -31,6 +32,7 @@ class DefaultServices extends Services {
   final RemoteConfigService _remoteConfigService;
   final AudioService _audioService;
   final OverlayService _overlayService;
+  final CacheManagerService _cacheManagerService;
 
   DefaultServices({
     required HapticsService hapticsService,
@@ -38,6 +40,7 @@ class DefaultServices extends Services {
     required ResourceResolver resourceResolver,
     required AudioService audioService,
     required OverlayService overlayService,
+    required CacheManagerService cacheManagerService,
     required SharedPreferences sharedPreferences,
     required IdGeneratorService idGeneratorService,
     required AnalyticsService analyticsService,
@@ -54,7 +57,8 @@ class DefaultServices extends Services {
           sharedPrefs: sharedPreferences,
         ),
         _shaderService = DefaultShaderService(),
-        _idGeneratorService = idGeneratorService;
+        _idGeneratorService = idGeneratorService,
+        _cacheManagerService = cacheManagerService;
 
   @override
   AnalyticsService get analyticsService => _analyticsService;
@@ -63,7 +67,8 @@ class DefaultServices extends Services {
   CrashlyticsService get crashlyticsService => _crashlyticsService;
 
   @override
-  TimerSettingsSharedPrefsService get timerSettingsSharedPrefsService => _timerSettingsSharedPrefsService;
+  TimerSettingsSharedPrefsService get timerSettingsSharedPrefsService =>
+    _timerSettingsSharedPrefsService;
 
   @override
   ShaderService get shaderService => _shaderService;
@@ -85,5 +90,8 @@ class DefaultServices extends Services {
 
   @override
   OverlayService get overlayService => _overlayService;
+
+  @override
+  CacheManagerService get cacheManagerService => _cacheManagerService;
 
 }

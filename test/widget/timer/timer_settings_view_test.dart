@@ -53,7 +53,7 @@ void main() {
       await tester.pumpWidget(
         Provider<DefaultServices>(
           create: (context) => mockServices,
-          child: getAllTestContextProviders(
+          child: withAllContextProviders(
             BlocProvider<TimerSettingsBloc>(
               create: (context) => MockTimerSettingsBloc(),
               child: TimerSettingsView(timerSettings: timerSettings)

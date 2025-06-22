@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/all.dart';
@@ -13,8 +12,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
 import '../../test_context_providers.dart';
-
-typedef OnCompleteCallback = Function(User, bool);
 
 class MockAuthBloc
   extends MockBloc<AuthEvent, AuthState>
@@ -91,7 +88,7 @@ void main() {
           .thenReturn(const AuthState.signedOut());
 
         await tester.pumpWidget(
-          getAllTestContextProviders(
+          withAllContextProviders(
             BlocProvider<AuthBloc>(
               create: (context) => mockAuthBloc,
               child: const LoginScreen()
@@ -114,7 +111,7 @@ void main() {
           .thenReturn(const AuthState.signingIn());
 
         await tester.pumpWidget(
-          getAllTestContextProviders(
+          withAllContextProviders(
             BlocProvider<AuthBloc>(
               create: (context) => mockAuthBloc,
               child: const LoginScreen()
@@ -132,7 +129,7 @@ void main() {
             .thenReturn(const AuthState.error());
 
         await tester.pumpWidget(
-          getAllTestContextProviders(
+          withAllContextProviders(
             BlocProvider<AuthBloc>(
               create: (context) => mockAuthBloc,
               child: const LoginScreen()
@@ -158,9 +155,9 @@ void main() {
           .thenAnswer((_) => Future.value(true));
 
         await tester.pumpWidget(
-          Provider<DefaultServices>(
+          Provider<Services>(
             create: (context) => mockServices,
-            child: getAllTestContextProviders(
+            child: withAllContextProviders(
               BlocProvider<AuthBloc>(
                 create: (context) => mockAuthBloc,
                 child: LoginScreen(
@@ -180,10 +177,10 @@ void main() {
         expect(googleButton, findsOneWidget);
 
         await tester.tap(googleButton);
-        verify(() => mockAuthBloc.add(
-            any(that: isA<SigninWithGoogle>())
-        )).called(1);
-
+        final result = verify(() => mockAuthBloc.add(
+          any(that: isA<SigninWithGoogle>())
+        ));
+        expect(result.callCount, equals(1));
       });
 
       testWidgets('LoginScreen has working login with Apple button', (WidgetTester tester) async {
@@ -195,9 +192,9 @@ void main() {
           .thenAnswer((_) => Future.value(true));
 
         await tester.pumpWidget(
-          Provider<DefaultServices>(
+          Provider<Services>(
             create: (context) => mockServices,
-            child: getAllTestContextProviders(
+            child: withAllContextProviders(
               BlocProvider<AuthBloc>(
                 create: (context) => mockAuthBloc,
                 child: LoginScreen(
@@ -216,7 +213,7 @@ void main() {
         expect(appleButton, findsOneWidget);
         await tester.tap(appleButton);
         verify(() => mockAuthBloc.add(
-            any(that: isA<SigninWithApple>())
+          any(that: isA<SigninWithApple>())
         )).called(1);
 
       });
@@ -230,9 +227,9 @@ void main() {
             .thenAnswer((_) => Future.value(true));
 
         await tester.pumpWidget(
-          Provider<DefaultServices>(
+          Provider<Services>(
             create: (context) => mockServices,
-            child: getAllTestContextProviders(
+            child: withAllContextProviders(
               BlocProvider<AuthBloc>(
                 create: (context) => mockAuthBloc,
                 child: LoginScreen(

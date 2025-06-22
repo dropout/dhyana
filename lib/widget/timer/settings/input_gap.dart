@@ -1,25 +1,23 @@
-import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 class InputGap extends StatelessWidget {
 
+  final double preferedSize;
   final bool isEndGap;
 
   const InputGap({
+    this.preferedSize = 16,
     this.isEndGap = false,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 16,
-      height: double.infinity,
-      child: CustomPaint(
-        painter: GapIconPainter(
-          isEndGap: isEndGap,
-        ),
-      )
+    return CustomPaint(
+      painter: GapIconPainter(
+        isEndGap: isEndGap,
+        preferredSize: preferedSize,
+      ),
     );
   }
 
@@ -28,12 +26,10 @@ class InputGap extends StatelessWidget {
 class GapIconPainter extends CustomPainter {
 
   final bool isEndGap;
-  final double padding;
   final double preferredSize;
 
   GapIconPainter({
     this.isEndGap = false,
-    this.padding = 3,
     this.preferredSize = 16,
   });
 
@@ -45,9 +41,6 @@ class GapIconPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
-    // final Offset topCenter = Offset(size.width/2, padding);
-    // final Offset bottomCenter = Offset(size.width/2, size.height - padding);
 
     // if the height is less than the preferred size, do not draw
     if (size.height < preferredSize) {

@@ -55,7 +55,7 @@ void main() {
         .thenAnswer((_) => Stream<bool>.value(false));
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
             child: SoundInputView(
@@ -80,7 +80,7 @@ void main() {
       Sound changedValue = Sound.none;
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
             child: SoundInputView(

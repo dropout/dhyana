@@ -10,7 +10,6 @@ import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
 import 'package:dhyana/widget/timer/settings_history/timer_settings_history_button.dart';
@@ -97,7 +96,7 @@ void main() {
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: getAllTestContextProviders(
+          child: withAllContextProviders(
             MultiBlocProvider(
               providers: [
                 BlocProvider<AuthBloc>(
@@ -126,7 +125,7 @@ void main() {
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: getAllTestContextProviders(
+          child: withAllContextProviders(
             MultiBlocProvider(
               providers: [
                 BlocProvider<AuthBloc>(
@@ -160,7 +159,7 @@ void main() {
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: getAllTestContextProviders(
+          child: withAllContextProviders(
             MultiBlocProvider(
               providers: [
                 BlocProvider<AuthBloc>(
@@ -187,7 +186,7 @@ void main() {
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: getAllTestContextProviders(
+          child: withAllContextProviders(
               MultiBlocProvider(
                 providers: [
                   BlocProvider<AuthBloc>(
@@ -227,7 +226,7 @@ void main() {
       // hence the complication of runAsync
       await tester.runAsync(() async {
         await tester.pumpWidget(
-          getAllTestContextProviders(
+          withAllContextProviders(
             Provider<Services>(
               create: (context) => mockServices,
               child: MultiBlocProvider(
@@ -277,7 +276,7 @@ void main() {
         await tester.pumpWidget(
             Provider<Services>(
                 create: (context) => mockServices,
-                child: getAllTestContextProviders(
+                child: withAllContextProviders(
                     MultiBlocProvider(
                       providers: [
                         BlocProvider<AuthBloc>(

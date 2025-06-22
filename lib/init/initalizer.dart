@@ -57,6 +57,7 @@ class Initializer {
         FirebaseIdGenerator(firebaseProvider.firestore),
       ),
       resourceResolver: resourceResolver,
+      cacheManagerService: DefaultCacheManagerService(),
     );
 
     logger.t('Preload shaders');

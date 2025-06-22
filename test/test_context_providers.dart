@@ -1,11 +1,10 @@
-import 'package:dhyana/init/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-Widget getTestLocalizationsProvider(Widget child, {
+Widget withLocalizationProvider(Widget child, {
   Locale locale = const Locale('hu', 'HU')
 }) {
   return Localizations(
@@ -30,8 +29,12 @@ Widget getAppTestProviders(Widget child) {
   );
 }
 
-Widget getAllTestContextProviders(Widget child, {
+Widget withAllContextProviders(Widget child, {
   Locale locale = const Locale('hu', 'HU')
-}) {
-  return getTestLocalizationsProvider(getAppTestProviders(child), locale: locale);
-}
+}) => withLocalizationProvider(
+  getAppTestProviders(child),
+  locale: locale
+);
+
+
+

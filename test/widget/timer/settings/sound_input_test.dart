@@ -39,7 +39,7 @@ void main() {
       MockOverlayService mockOverlayService = MockOverlayService();
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => MockServices(),
             child: SoundInput(
@@ -81,7 +81,7 @@ void main() {
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
             child: SoundInput(

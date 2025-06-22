@@ -3,9 +3,7 @@ import 'package:dhyana/widget/timer/sound_input_play_button.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/enum/sound.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/all.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
 
 import 'input_view.dart';
 import 'sound_input_page_view_scroll_physics.dart';

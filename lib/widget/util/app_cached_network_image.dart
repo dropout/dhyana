@@ -107,6 +107,7 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
 
     imageProvider = CachedNetworkImageProvider(
       widget.imageUrl,
+      cacheManager: context.services.cacheManagerService.cacheManager,
       errorListener: (error) {
         widget.crashlyticsService.recordError(exception: error,);
       }
@@ -121,9 +122,9 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
       }
     });
 
-    // A cached image will be resolved before the first
+    // A _CACHED_ image will be resolved before the first
     // build call, so NO animation will be displayed in that case
-    // Must force a 'loading state' first then a 'not loading'
+    // Must force a 'loading state' first then a 'loaded state'
     // to properly trigger the opacity animation that 'transforms' from
     // blurhash to image
     Future.delayed(Duration.zero, () {
@@ -146,24 +147,22 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
       );
     } else {
       return AnimatedOpacity(
-          opacity: isLoading ? 0.0 : 1.0,
-          duration: Durations.short4,
-          child: Image(
-            fit: BoxFit.cover,
-            image: imageProvider,
-            errorBuilder: (context, error, stackTrace) {
-              context.recordError(error, stackTrace, 'Unable to display image');
-              return const Center(
-                child: Icon(
-                  Icons.broken_image_rounded,
-                )
-              );
-            },
-          )
+        opacity: isLoading ? 0.0 : 1.0,
+        duration: Durations.short4,
+        child: Image(
+          fit: BoxFit.cover,
+          image: imageProvider,
+          errorBuilder: (context, error, stackTrace) {
+            context.recordError(error, stackTrace, 'Unable to display image');
+            return const Center(
+              child: Icon(
+                Icons.broken_image_rounded,
+              )
+            );
+          },
+        )
       );
     }
-
-
   }
 
   @override

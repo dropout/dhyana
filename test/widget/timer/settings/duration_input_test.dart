@@ -40,7 +40,7 @@ void main() {
 
     testWidgets('renders with initial value', (WidgetTester tester) async {
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           DurationInput(
             label: 'Test Duration',
             value: const Duration(minutes: 5),
@@ -70,7 +70,7 @@ void main() {
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
             child: MaterialApp(

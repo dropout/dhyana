@@ -45,7 +45,7 @@ void main() {
     testWidgets('renders with initial sound', (WidgetTester tester) async {
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
             child: SoundInputPlayButton(
@@ -76,7 +76,7 @@ void main() {
         });
 
       await tester.pumpWidget(
-        getAllTestContextProviders(
+        withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
             child: SoundInputPlayButton(

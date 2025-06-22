@@ -27,7 +27,7 @@ class ProfileWizardScreen extends StatefulWidget {
 class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   with DefaultScreenSetupHelpersMixin {
 
-  LoadingState state = LoadingState.idle;
+  LoadingState formProcessingState = LoadingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
     GlobalKey<FormBuilderState>();
 
@@ -43,7 +43,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
     FormBuilderState? formState = formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
       setState(() {
-        state = LoadingState.loading;
+        formProcessingState = LoadingState.loading;
       });
       Map<String, dynamic>? values = formState.value;
       BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
@@ -52,12 +52,12 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
         completeProfile: true,
         onComplete: (profile) {
           setState(() {
-            state = LoadingState.loaded;
+            formProcessingState = LoadingState.loaded;
           });
         },
         onError: (e, stack) {
           setState(() {
-            state = LoadingState.idle;
+            formProcessingState = LoadingState.idle;
           });
         },
       ));
@@ -71,7 +71,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   void _onFormChanged(BuildContext context) {
     setState(() {
-      state = LoadingState.idle;
+      formProcessingState = LoadingState.idle;
     });
   }
 
@@ -111,61 +111,68 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             );
           case ProfileLoadedState():
             return buildScaffolding(
-                context,
-                DefaultScreenSetup(
-                  title: AppLocalizations.of(context).profileWizardTitle,
-                  enableScaffolding: false,
-                  slivers: [
+              context,
+              DefaultScreenSetup(
+                title: AppLocalizations.of(context).profileWizardTitle,
+                enableScaffolding: false,
+                slivers: [
 
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppThemeData.paddingLg,
-                        ),
-                        child: ProfileEditForm(
-                          profile: state.profile,
-                          formStateKey: formStateKey,
-                          onChanged: () => _onFormChanged(context),
-                        ),
+                  // The profile edit form.
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppThemeData.paddingLg,
+                      ),
+                      child: ProfileEditForm(
+                        profile: state.profile,
+                        formStateKey: formStateKey,
+                        onChanged: () => _onFormChanged(context),
                       ),
                     ),
+                  ),
 
-                    SliverSafeArea(
-                        top: false,
-                        sliver: SliverToBoxAdapter(
-                          // The layout widgets below are needed to
-                          // restrict button size to its content,
-                          // otherwise the button would end up
-                          // using the whole width.
-                          child: SizedBox(
-                            height: AppThemeData.spacing4xl,
-                            child: Center(
-                              child: TextButton(
-                                onPressed: () => _onSignOut(context),
-                                child: Text(
-                                  AppLocalizations.of(context).signOut.toUpperCase(),
-                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                  // Display a sign out button under the edit form
+                  // just in case the user cannot continue
+                  // with the profile wizard.
+                  SliverSafeArea(
+                    top: false,
+                    sliver: SliverToBoxAdapter(
+                      // The layout widgets below are needed to
+                      // restrict button size to its content,
+                      // otherwise the button would end up
+                      // using the whole width.
+                      child: SizedBox(
+                        height: AppThemeData.spacing4xl,
+                        child: Center(
+                          child: TextButton(
+                            onPressed: () => _onSignOut(context),
+                            child: Text(
+                              AppLocalizations.of(context).signOut.toUpperCase(),
+                              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        )
-                    ),
-
-                  ],
-                ),
-                actionButtonLayer: SafeArea(
-                  top: false,
-                  child: Align(
-                    alignment: const Alignment(0.0, 1.0),
-                    child: buildOverlayActionButton(
-                      context,
-                      state.profile
-                    ),
+                        ),
+                      ),
+                    )
                   ),
-                )
+
+                ],
+              ),
+
+              // Profile edit form action is not part of the profile
+              // edit form, as the form is reused in profile edit screen.
+              actionButtonLayer: SafeArea(
+                top: false,
+                child: Align(
+                  alignment: const Alignment(0.0, 1.0),
+                  child: buildOverlayActionButton(
+                    context,
+                    state.profile
+                  ),
+                ),
+              )
             );
           default:
             return DefaultScreenSetup(
@@ -189,7 +196,6 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
         children: [
           contentLayer,
           actionButtonLayer ?? Align(
-            // alignment: const Alignment(1.0, 0.0),
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
@@ -202,7 +208,8 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   }
 
   Widget buildOverlayActionButton(BuildContext context, Profile profile) {
-    switch (state) {
+
+    switch (formProcessingState) {
       case LoadingState.idle:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
@@ -221,89 +228,3 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-// class ProfileWizardScreen extends StatelessWidget {
-//
-//   final String profileId;
-//
-//   const ProfileWizardScreen({
-//     required this.profileId,
-//     super.key
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Theme.of(context).colorScheme.surface,
-//       extendBodyBehindAppBar: true,
-//       appBar: const CustomAppBar(
-//         leading: CustomBackButton(),
-//       ),
-//       body: buildBody(context)
-//       // body: ProfileBlocProvider(
-//       //   initialEvent: LoadProfile(profileId: profileId),
-//       //   child: buildBody(context),
-//       // )
-//     );
-//   }
-//
-//   Widget buildBody(BuildContext context, ) {
-//     return BlocBuilder<ProfileBloc, ProfileState>(
-//       builder: (BuildContext context, ProfileState state) {
-//         switch(state) {
-//           case ProfileLoadingState():
-//             return const AppLoadingDisplay();
-//           case ProfileErrorState():
-//             return const AppErrorDisplay();
-//           case ProfileLoadedState():
-//             // return const AppErrorDisplay();
-//             return buildLoaded(context, state);
-//           default:
-//             return const SizedBox.shrink();
-//         }
-//       },
-//     );
-//   }
-//
-//   Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
-//     return SafeArea(
-//       child: Stack(
-//         fit: StackFit.expand,
-//         clipBehavior: Clip.none,
-//         children: [
-//           Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               const SizedBox(height: AppThemeData.spacingXl),
-//               Text(
-//                 AppLocalizations.of(context).profileWizardTitle,
-//                 textAlign: TextAlign.center,
-//                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-//                   fontWeight: FontWeight.bold,
-//                 )
-//               ),
-//               Expanded(
-//                 child: ProfileWizardView(
-//                   profile: state.profile,
-//                 )
-//               )
-//             ],
-//           )
-//         ],
-//       ),
-//     );
-//   }
-//
-// }

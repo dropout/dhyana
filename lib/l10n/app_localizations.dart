@@ -431,7 +431,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileSaveButtonIdle.
   ///
   /// In hu, this message translates to:
-  /// **'Ment'**
+  /// **'Mentés'**
   String get profileSaveButtonIdle;
 
   /// No description provided for @profileSaveButtonSaving.
