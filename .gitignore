@@ -47,3 +47,5 @@ app.*.map.json
 
 # Sensitive files
 GoogleService-Info.plist
+android/app/google-services.json
+**/google-services.json

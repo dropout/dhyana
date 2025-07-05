@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -42,7 +43,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.dhyana"
+        applicationId "dev.adampalinkas.dhyana"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
@@ -58,6 +59,28 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions += "default"
+
+    productFlavors {
+        development {
+            dimension = "default"
+            manifestPlaceholders = [appName: "[DEV] Creating Flavors"]
+            applicationIdSuffix = ".dev"
+        }
+
+        staging {
+            dimension = "default"
+            manifestPlaceholders = [appName: "[STG] Creating Flavors"]
+            applicationIdSuffix = ".staging"
+        }
+
+        production {
+            dimension = "default"
+            manifestPlaceholders = [appName: "Creating Flavors"]
+            applicationIdSuffix = ".prod"
+        }
+    }
 }
 
 flutter {
@@ -65,5 +88,6 @@ flutter {
 }
 
 dependencies {
-
+    implementation platform('com.google.firebase:firebase-bom:33.16.0')
+    implementation 'com.google.firebase:firebase-analytics'
 }

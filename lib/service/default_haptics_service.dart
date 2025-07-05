@@ -1,30 +1,16 @@
-import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:gaimon/gaimon.dart';
 
 import 'haptics_service.dart';
 
-class DefaultHapticsService extends HapticsService {
-
-  final bool canVibrate;
-
-  DefaultHapticsService._create({
-    required this.canVibrate,
-  });
+class DefaultHapticsService implements HapticsService {
 
   @override
   void tap() {
-    if (canVibrate) Vibrate.feedback(FeedbackType.impact);
+    Gaimon.medium();
   }
 
   @override
   void select() {
-    if (canVibrate) Vibrate.feedback(FeedbackType.selection);
+    Gaimon.selection();
   }
-
-  static Future<DefaultHapticsService> create() async {
-    final bool canVibrate = await Vibrate.canVibrate;
-    return DefaultHapticsService._create(
-      canVibrate: canVibrate,
-    );
-  }
-
 }

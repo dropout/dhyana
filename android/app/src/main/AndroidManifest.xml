@@ -10,7 +10,7 @@
 
 
     <application
-        android:label="dhyana"
+        android:label="${appName}"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
