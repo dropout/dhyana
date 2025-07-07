@@ -3,7 +3,6 @@ import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/assets.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -76,28 +75,17 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: kToolbarHeight + 4,
-          left: AppThemeData.paddingLg,
-          child: Today(
-            key: ValueKey(DateTime.now().toDayId()),
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: buildInputs(context)
           ),
-        ),
-        SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: buildInputs(context)
-              ),
-              buildStartButton(context),
-            ],
-          ),
-        )
-      ],
+          buildStartButton(context),
+        ],
+      ),
     );
   }
 

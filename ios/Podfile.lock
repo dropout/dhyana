@@ -163,7 +163,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.1)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - Flutter (1.0.0)
-  - flutter_vibrate (0.0.1):
+  - gaimon (0.0.1):
     - Flutter
   - google_sign_in_ios (0.0.1):
     - AppAuth (>= 1.7.4)
@@ -280,7 +280,7 @@ DEPENDENCIES:
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.13.0`)
   - Flutter (from `Flutter`)
-  - flutter_vibrate (from `.symlinks/plugins/flutter_vibrate/ios`)
+  - gaimon (from `.symlinks/plugins/gaimon/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -355,8 +355,8 @@ EXTERNAL SOURCES:
     :tag: 11.13.0
   Flutter:
     :path: Flutter
-  flutter_vibrate:
-    :path: ".symlinks/plugins/flutter_vibrate/ios"
+  gaimon:
+    :path: ".symlinks/plugins/gaimon/ios"
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/darwin"
   image_picker_ios:
@@ -421,7 +421,7 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: aca73668bc95e8efccb618e0167eab05d19d3a75
   FirebaseStorage: 2a3e5402a565e06e121308dadfe0626976fd6b45
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_vibrate: 9f4c2ab57008965f78969472367c329dd77eb801
+  gaimon: 266fec2cd27726df54a6694c14fc9e3f2a415c33
   google_sign_in_ios: 7411fab6948df90490dc4620ecbcabdc3ca04017
   GoogleAppMeasurement: 0dfca1a4b534d123de3945e28f77869d10d0d600
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
