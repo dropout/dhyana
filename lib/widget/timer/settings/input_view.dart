@@ -30,6 +30,9 @@ class InputView extends StatelessWidget {
             color: AppColors.backgroundPaper,
           ),
           child: SafeArea(
+            minimum: const EdgeInsets.only(
+              bottom: AppThemeData.paddingXl,
+            ),
             child: Column(
               // button width match its parent width
               // crossAxisAlignment: CrossAxisAlignment.stretch,
