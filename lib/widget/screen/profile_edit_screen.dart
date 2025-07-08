@@ -46,7 +46,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
         },
       ));
     }
-    context.hapticsTap();
   }
   void _onFormChanged(BuildContext context) {
     setState(() {
