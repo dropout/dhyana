@@ -61,7 +61,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                 SliverSafeArea(
                   top: false,
                   sliver: SliverToBoxAdapter(
-                    child: ProfileView(),
+                    child: ProfileView(
+                      profile: state.profile,
+                    ),
                   ),
                 )
               ],

@@ -1,8 +1,5 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
-import 'package:dhyana/service/all.dart';
-import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/foundation.dart';
@@ -12,26 +9,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
 import '../../test_context_providers.dart';
-
-class MockAuthBloc
-  extends MockBloc<AuthEvent, AuthState>
-  implements AuthBloc {}
-
-class MockUrlLauncher
-  extends Mock
-  implements UrlLauncher {}
-
-class MockServices
-  extends Mock
-  implements DefaultServices {}
-
-class MockAnalyticsService
-  extends Mock
-  implements AnalyticsService {}
-
-class MockHapticsService
-  extends Mock
-  implements HapticsService {}
+import '../../mock_definitions.dart';
 
 class FakeSigninWithGoogle
   extends Fake

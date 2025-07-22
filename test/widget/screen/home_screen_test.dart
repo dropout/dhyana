@@ -1,14 +1,10 @@
 
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/default_shader_service.dart';
-import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/shader_service.dart';
-import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
@@ -21,30 +17,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
 import '../../test_context_providers.dart';
-
-class MockAuthBloc
-  extends MockBloc<AuthEvent, AuthState>
-  implements AuthBloc {}
-
-class MockProfileBloc
-  extends MockBloc<ProfileEvent, ProfileState>
-  implements ProfileBloc {}
-
-class MockServices
-  extends Mock
-  implements Services {}
-
-class MockOverlayService
-  extends Mock
-  implements OverlayService {}
-
-class MockCrashlyticsService
-  extends Mock
-  implements CrashlyticsService {}
-
-class MockTimerSettingsSharedPrefsService
-  extends Mock
-  implements TimerSettingsSharedPrefsService {}
+import '../../mock_definitions.dart';
 
 void main() {
 
@@ -55,6 +28,8 @@ void main() {
     late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockOverlayService mockOverlayService;
+    late MockCacheManagerService mockCacheManagerService;
+    late MockCacheManager mockCacheManager;
 
     // doesn't make sense to mock this because the FragmentShader
     // cannot be mocked neither, so you need to load the shader anyhow
@@ -67,6 +42,20 @@ void main() {
       mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
       mockCrashlyticsService = MockCrashlyticsService();
       mockOverlayService = MockOverlayService();
+      mockCacheManagerService = MockCacheManagerService();
+      mockCacheManager = MockCacheManager();
+
+      when(() => mockAuthBloc.state)
+        .thenReturn(const AuthState.signedOut());
+
+      when(() => mockProfileBloc.state)
+        .thenReturn(ProfileState.initial());
+
+      when(() => mockServices.cacheManagerService)
+        .thenReturn(mockCacheManagerService);
+
+      when(() => mockCacheManagerService.cacheManager)
+        .thenReturn(mockCacheManager);
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
@@ -302,12 +291,6 @@ void main() {
 
     });
 
-
-
   });
-
-
-
-
 
 }
