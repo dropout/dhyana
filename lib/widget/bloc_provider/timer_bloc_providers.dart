@@ -1,7 +1,4 @@
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
-import 'package:dhyana/init/repositories.dart';
-import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default_timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
@@ -22,8 +19,8 @@ class TimerBlocProviders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Services services = context.services;
-    Repositories repos = context.repos;
+    final services = context.services;
+    final repos = context.repos;
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (BuildContext context, AuthState authState) {
         final bool isSignedIn = (authState is AuthStateSignedIn);
@@ -62,9 +59,9 @@ class TimerBlocProviders extends StatelessWidget {
                 );
 
                 // Show the presence if user is signed in
-                if (isSignedIn) {
+                if (isSignedIn && profileId != null) {
                   presenceBloc.add(
-                    PresenceEvent.showPresence(profileId: profileId!)
+                    PresenceEvent.showPresence(profileId: profileId)
                   );
                 }
 

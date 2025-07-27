@@ -42,16 +42,16 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   // Show black overlay
-  void _onOverlayTargetTapped(BuildContext context) {
+  void _onShowOverlayClickTargetTapped(BuildContext context) {
     setState(() {
-      showOverlay = false;
+      showOverlay = true;
     });
   }
 
   // Hide black overlay
-  void _onOverlayClickTargetTapped(BuildContext context) {
+  void _onOverlayTapped(BuildContext context) {
     setState(() {
-      showOverlay = true;
+      showOverlay = false;
     });
   }
 
@@ -87,7 +87,7 @@ class _TimerScreenState extends State<TimerScreen> {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        buildOverlayClickTarget(context),
+        buildShowOverlayClickTarget(context),
         AnimatedSwitcher(
           duration: Durations.extralong4,
           switchInCurve: Curves.easeOutCubic,
@@ -107,9 +107,10 @@ class _TimerScreenState extends State<TimerScreen> {
     );
   }
 
-  Widget buildOverlayClickTarget(BuildContext context) {
+  Widget buildShowOverlayClickTarget(BuildContext context) {
     return GestureDetector(
-      onTap: () => _onOverlayClickTargetTapped(context),
+      key: const Key('timer_screen_show_overlay_click_target'),
+      onTap: () => _onShowOverlayClickTargetTapped(context),
       child: Container(
         width: double.infinity,
         height: double.infinity,
@@ -123,7 +124,7 @@ class _TimerScreenState extends State<TimerScreen> {
     final bool shouldShowOverlay =
       showOverlay && timerState.timerStatus != TimerStatus.completed;
     return GestureDetector(
-      onTap: () => _onOverlayTargetTapped(context),
+      onTap: () => _onOverlayTapped(context),
       child: TimerRunningOverlay(
         isEnabled: shouldShowOverlay
       ),

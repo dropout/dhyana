@@ -2,8 +2,6 @@ import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/completed/all.dart';
-import 'package:dhyana/widget/timer/completed/milestone_progress.dart';
-import 'package:dhyana/widget/timer/completed/progress_summary.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/gap.dart';
@@ -104,7 +102,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
               profile: updatedProfile,
             ),
             Gap.large(),
-            MilestoneProgress(
+            MilestoneProgressView(
               profile: updatedProfile,
               showAnimation: updatedProfile.
                 consecutiveDaysProgressCheck(oldProfile),

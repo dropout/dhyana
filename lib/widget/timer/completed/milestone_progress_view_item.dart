@@ -5,30 +5,30 @@ import 'package:particle_field/particle_field.dart';
 import 'package:rnd/rnd.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
-enum MilestoneProgressItemMode {
+enum MilestoneProgressViewItemMode {
   incomplete,
   completed,
   animate,
 }
 
-class MilestoneProgressItem extends StatefulWidget {
+class MilestoneProgressViewItem extends StatefulWidget {
 
-  final MilestoneProgressItemMode mode;
+  final MilestoneProgressViewItemMode mode;
   final Color completedColor;
   final Color incompleteColor;
 
-  const MilestoneProgressItem({
-    this.mode = MilestoneProgressItemMode.completed,
+  const MilestoneProgressViewItem({
+    this.mode = MilestoneProgressViewItemMode.completed,
     this.completedColor = Colors.green,
     this.incompleteColor = Colors.grey,
     super.key,
   });
 
   @override
-  State<MilestoneProgressItem> createState() => _MilestoneProgressItemState();
+  State<MilestoneProgressViewItem> createState() => _MilestoneProgressViewItemState();
 }
 
-class _MilestoneProgressItemState extends State<MilestoneProgressItem>
+class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
     with TickerProviderStateMixin {
 
   // main animation controller
@@ -101,7 +101,7 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
       duration: const Duration(milliseconds: 1200),
     );
 
-    if (widget.mode == MilestoneProgressItemMode.animate) {
+    if (widget.mode == MilestoneProgressViewItemMode.animate) {
       Future.delayed(const Duration(milliseconds: 500), () {
         animationController.forward();
         timeParticles();
@@ -156,7 +156,7 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (widget.mode == MilestoneProgressItemMode.animate) {
+        if (widget.mode == MilestoneProgressViewItemMode.animate) {
           animationController.forward(from: 0.0);
           resetParticles();
           timeParticles();
@@ -168,11 +168,11 @@ class _MilestoneProgressItemState extends State<MilestoneProgressItem>
 
   Widget _buildContent() {
     switch (widget.mode) {
-      case MilestoneProgressItemMode.incomplete:
+      case MilestoneProgressViewItemMode.incomplete:
         return _buildIncomplete();
-      case MilestoneProgressItemMode.completed:
+      case MilestoneProgressViewItemMode.completed:
         return _buildCompleted();
-      case MilestoneProgressItemMode.animate:
+      case MilestoneProgressViewItemMode.animate:
         return _buildAnimated();
     }
   }

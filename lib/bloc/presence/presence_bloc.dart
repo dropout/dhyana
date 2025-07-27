@@ -100,16 +100,8 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
         ));
         logger.t('Showing presence.');
       } else {
-        await presenceRepository.showPresence(
-          Presence(
-            id: profile.id,
-            profile: PublicProfile.anonymous(),
-            startedAt: DateTime.now(),
-          )
-        );
-        logger.t('User is signed in but profile is incomplete, showing anonymous presence.');
+        logger.t('User is signed in but profile is incomplete, NOT showing presence.');
       }
-      logger.t('Successfully showed presence.');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

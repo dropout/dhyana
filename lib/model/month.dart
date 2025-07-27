@@ -20,6 +20,6 @@ sealed class Month with _$Month implements Model {
   }) = _Month;
 
   factory Month.fromJson(Map<String, Object?> json) =>
-      _$MonthFromJson(json);
+    _$MonthFromJson(json);
 
 }

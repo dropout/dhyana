@@ -4,9 +4,9 @@ import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
-import 'milestone_progress_item.dart';
+import 'milestone_progress_view_item.dart';
 
-class MilestoneProgress extends StatefulWidget {
+class MilestoneProgressView extends StatefulWidget {
 
   final Profile profile;
   final bool showAnimation;
@@ -14,7 +14,7 @@ class MilestoneProgress extends StatefulWidget {
   final double itemSize;
   final Color textColor;
 
-  const MilestoneProgress({
+  const MilestoneProgressView({
     required this.profile,
     this.showAnimation = false,
     this.showText = true,
@@ -24,10 +24,10 @@ class MilestoneProgress extends StatefulWidget {
   });
 
   @override
-  State<MilestoneProgress> createState() => _MilestoneProgressState();
+  State<MilestoneProgressView> createState() => _MilestoneProgressViewState();
 }
 
-class _MilestoneProgressState extends State<MilestoneProgress> {
+class _MilestoneProgressViewState extends State<MilestoneProgressView> {
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +63,8 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
       if (i > completedCount) {
         result[i - 1] = SizedBox.square(
           dimension: widget.itemSize,
-          child: MilestoneProgressItem(
-            mode: MilestoneProgressItemMode.incomplete,
+          child: MilestoneProgressViewItem(
+            mode: MilestoneProgressViewItemMode.incomplete,
             completedColor: completedColor,
             incompleteColor: incompleteColor,
           ),
@@ -72,10 +72,10 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
       } else if (i == completedCount) {
         result[i - 1] = SizedBox.square(
           dimension: widget.itemSize,
-          child: MilestoneProgressItem(
+          child: MilestoneProgressViewItem(
             mode: widget.showAnimation
-              ? MilestoneProgressItemMode.animate
-              : MilestoneProgressItemMode.completed,
+              ? MilestoneProgressViewItemMode.animate
+              : MilestoneProgressViewItemMode.completed,
             completedColor: completedColor,
             incompleteColor: incompleteColor,
           )
@@ -83,8 +83,8 @@ class _MilestoneProgressState extends State<MilestoneProgress> {
       } else {
         result[i - 1] = SizedBox.square(
           dimension: widget.itemSize,
-          child: MilestoneProgressItem(
-            mode: MilestoneProgressItemMode.completed,
+          child: MilestoneProgressViewItem(
+            mode: MilestoneProgressViewItemMode.completed,
             completedColor: completedColor,
             incompleteColor: incompleteColor,
           ),

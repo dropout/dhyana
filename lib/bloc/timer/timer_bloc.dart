@@ -13,19 +13,13 @@ part 'timer_event.dart';
 part 'timer_state.dart';
 part 'timer_bloc.freezed.dart';
 
-/*
-
-    Manages business logic of a timed session.
-
-    Functionality:
-    - Timer: start, pause, resume, finish, reset
-    - Audio: play starting sound, play ending sound
-
-    Details:
-    1. phase (optional): warmup timer
-    2. phase: actual session timer
-
- */
+/// Bloc that manages the timer for a session, including warmup and duration timers.
+/// It handles starting, pausing, resuming, finishing, and resetting the timer,
+/// as well as playing audio cues for starting and ending the session.
+///
+/// There are two phases:
+/// 1. Warmup phase (optional): A timer that runs before the main session.
+/// 2. Main session phase: The actual timer for the session duration.
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
   final Logger logger = getLogger('TimerBloc');

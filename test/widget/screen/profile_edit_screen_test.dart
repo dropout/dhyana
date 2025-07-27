@@ -122,7 +122,7 @@ void main() {
         await tester.pumpAndSettle();
 
         final result = verify(() => mockProfileBloc.add(
-            captureAny(that: isA<UpdateProfile>())
+          captureAny(that: isA<UpdateProfile>())
         ));
 
         UpdateProfile updateProfileEvent = result.captured.first as UpdateProfile;

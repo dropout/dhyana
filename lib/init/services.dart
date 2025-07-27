@@ -3,9 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 
-/// An abstract class makes it easy to mock services in test context
-/// as it is injected as a Provider so you can inject your mocked Services
-/// into the tests.
 abstract class Services {
   AnalyticsService get analyticsService;
   CrashlyticsService get crashlyticsService;
