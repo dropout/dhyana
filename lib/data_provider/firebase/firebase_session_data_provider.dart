@@ -35,13 +35,10 @@ class FirebaseSessionDataProvider
     return q.limit(queryOptions.limit);
   }
 
-  static String generateId(String profileId) {
-    return FirebaseFirestore.instance
-      .collection('profiles')
-      .doc(profileId)
-      .collection('sessions')
-      .doc()
-      .id;
+  static String generateId() {
+    // Collection name doesn't matter here, we just need a unique ID
+    return FirebaseFirestore.instance.collection('id_generators')
+      .doc().id;
   }
 
 }

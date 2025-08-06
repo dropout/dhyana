@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:dhyana/model/milestone_progress.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/model/all.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:logger/logger.dart';
 
@@ -228,6 +226,73 @@ class ProfileStatsReportUpdater {
       ),
     );
 
+  }
+
+  UpdateProfileStatsResult updateProfileStatsWithSession(
+    Profile profile,
+    Session session,
+  ) {
+
+    final ProfileStatisticsReport oldStatsReport = profile.statsReport;
+    ProfileStatisticsReport updatedStatsReport = oldStatsReport.copyWith();
+
+    // Update consecutive days
+    updatedStatsReport = updateConsecutiveDays(
+      updatedStatsReport,
+      session.startTime
+    );
+    logger.t('Consecutive days: ${oldStatsReport.consecutiveDays.current} -> ${updatedStatsReport.consecutiveDays.current}');
+
+    // Update completed days
+    updatedStatsReport = updateCompletedDays(
+      updatedStatsReport,
+      session.startTime,
+    );
+    logger.t('Completed days: ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}');
+
+    // Update milestone progress
+    updatedStatsReport = updateMilestoneProgressWithSession(
+      oldStatsReport,
+      updatedStatsReport,
+      session,
+    );
+
+    // Check if a milestone has been completed
+    int prevMileStoneCount = oldStatsReport.milestoneProgress.completedDaysCount;
+    int newMileStoneCount = updatedStatsReport.milestoneProgress.completedDaysCount;
+    int targetMileStoneCount = updatedStatsReport.milestoneProgress.targetDaysCount;
+    if (prevMileStoneCount == (targetMileStoneCount - 1) &&
+     newMileStoneCount == targetMileStoneCount) {
+      updatedStatsReport = updatedStatsReport.copyWith(
+        milestoneCount: updatedStatsReport.milestoneCount + 1,
+      );
+      logger.t('Milestone completed');
+    }
+
+    // Add session results to stats
+    updatedStatsReport = updatedStatsReport.copyWith(
+      lastSessionDate: session.startTime,
+      completedMinutesCount: updatedStatsReport.completedMinutesCount +
+        session.duration.inMinutes,
+      completedSessionsCount: updatedStatsReport.completedSessionsCount + 1,
+      firstSessionDate: (oldStatsReport.firstSessionDate == null) ?
+        session.startTime : oldStatsReport.firstSessionDate,
+    );
+    logger.t('Last session date: ${oldStatsReport.lastSessionDate}'
+      ' -> ${updatedStatsReport.lastSessionDate}');
+    logger.t('Completed minutes count: ${oldStatsReport.completedMinutesCount}'
+      ' -> ${updatedStatsReport.completedMinutesCount}');
+    logger.t('Completed session count: ${oldStatsReport.completedSessionsCount}'
+      ' -> ${updatedStatsReport.completedSessionsCount}');
+
+    // Update profile statistics report with data from new session
+    Profile updatedProfile = profile.copyWith(statsReport: updatedStatsReport);
+
+    return UpdateProfileStatsResult(
+      oldProfile: profile,
+      updatedProfile: updatedProfile,
+      session: session,
+    );
   }
 
 }

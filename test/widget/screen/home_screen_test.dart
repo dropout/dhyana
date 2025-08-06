@@ -8,7 +8,6 @@ import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/timer/all.dart';
-import 'package:dhyana/widget/timer/settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

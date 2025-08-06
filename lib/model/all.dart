@@ -19,6 +19,7 @@ export 'session_query_options.dart';
 export 'timer_settings.dart';
 export 'timer_settings_history_record.dart';
 export 'timer_settings_history_record_query_options.dart';
+export 'update_profile_stats_result.dart';
 export 'week.dart';
 export 'week_query_options.dart';
 export 'year.dart';

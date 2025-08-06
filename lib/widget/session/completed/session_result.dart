@@ -1,25 +1,20 @@
-import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_avatar.dart';
 import 'package:flutter/material.dart';
 
-class SessionResult extends StatefulWidget {
+class SessionResult extends StatelessWidget {
 
-  final TimerState timerState;
+  final Session session;
   final Profile? profile;
 
   const SessionResult({
-    required this.timerState,
+    required this.session,
     this.profile,
     super.key
   });
 
-  @override
-  State<SessionResult> createState() => _SessionResultState();
-}
-
-class _SessionResultState extends State<SessionResult> {
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +22,7 @@ class _SessionResultState extends State<SessionResult> {
     return Column(
       children: [
         ProfileAvatar(
-          profile: widget.profile ?? Profile.anonymous(),
+          profile: profile ?? Profile.anonymous(),
           imageSize: AppThemeData.circleLg,
           textStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
             color: Colors.white,
@@ -35,7 +30,7 @@ class _SessionResultState extends State<SessionResult> {
           ),
         ),
         const SizedBox(height: AppThemeData.spacingMd),
-        buildCompletedText(context, widget.timerState.elapsedTime),
+        buildCompletedText(context, session.duration),
       ],
     );
 
@@ -51,7 +46,7 @@ class _SessionResultState extends State<SessionResult> {
         children: [
           const TextSpan(text: 'Completed  '),
           TextSpan(
-            text: widget.timerState.elapsedTime.inMinutes.toString(),
+            text: session.duration.inMinutes.toString(),
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,

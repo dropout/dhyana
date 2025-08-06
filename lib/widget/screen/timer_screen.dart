@@ -1,11 +1,13 @@
 import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/model/session.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
-import 'package:dhyana/widget/timer/running/timer_running_overlay.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/overlay_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/timer/timer_completed_view.dart';
 import 'package:dhyana/widget/timer/timer_running_view.dart';
 
 class TimerScreen extends StatefulWidget {
@@ -23,38 +25,6 @@ class TimerScreen extends StatefulWidget {
 
 class _TimerScreenState extends State<TimerScreen> {
 
-  bool showOverlay = false;
-
-  // Handle going into background
-  void Function() _onBackground(BuildContext context) {
-    TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
-    return () {
-      timerBloc.add(TimerEvent.paused());
-    };
-  }
-
-  // Handle resuming from background
-  void Function() _onResume(BuildContext context) {
-    TimerBloc timerBloc = BlocProvider.of<TimerBloc>(context);
-    return () {
-      timerBloc.add(TimerEvent.resumed());
-    };
-  }
-
-  // Show black overlay
-  void _onShowOverlayClickTargetTapped(BuildContext context) {
-    setState(() {
-      showOverlay = true;
-    });
-  }
-
-  // Hide black overlay
-  void _onOverlayTapped(BuildContext context) {
-    setState(() {
-      showOverlay = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return TimerBlocProviders(
@@ -64,71 +34,37 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   Widget buildScaffolding(BuildContext context) {
-    return BlocBuilder<TimerBloc, TimerState>(
+    return BlocConsumer<TimerBloc, TimerState>(
       builder: (BuildContext context, TimerState timerState) {
         return Scaffold(
           backgroundColor: Colors.black,
           extendBodyBehindAppBar: true,
-          body: Stack(
-            fit: StackFit.expand,
-            clipBehavior: Clip.none,
-            children: [
-              buildContent(context, timerState),
-              buildOverlay(context, timerState),
-            ],
+          body: OverlayToggle(
+            child: TimerRunningView(
+              timerState: timerState,
+            ),
           ),
         );
       },
+      listenWhen: (TimerState prevState, TimerState currentState) {
+        return prevState.timerStatus != TimerStatus.completed
+          && currentState.timerStatus == TimerStatus.completed;
+      },
+      listener: (BuildContext context, TimerState timerState) {
+        Session session = Session(
+          id: context.services.idGeneratorService.sessionId(),
+          timerSettings: widget.timerSettings,
+          startTime: timerState.startTime ?? DateTime.now().subtract(timerState.elapsedTime),
+          endTime: timerState.endTime ?? DateTime.now(),
+          duration: timerState.elapsedTime,
+        );
+        SessionCompletedRoute($extra: session).replace(context);
+      },
+
     );
+
   }
 
-  Widget buildContent(BuildContext context, TimerState timerState) {
-    final bool isCompleted = (timerState.timerStatus == TimerStatus.completed);
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        buildShowOverlayClickTarget(context),
-        AnimatedSwitcher(
-          duration: Durations.extralong4,
-          switchInCurve: Curves.easeOutCubic,
-          switchOutCurve: Curves.easeInCubic,
-          child: isCompleted
-            ? TimerCompletedView(
-                timerSettings: widget.timerSettings,
-                timerState: timerState,
-              )
-            : TimerRunningView(
-                timerState: timerState,
-                onBackground: _onBackground(context),
-                onResume: _onResume(context),
-              ),
-        ),
-      ],
-    );
-  }
 
-  Widget buildShowOverlayClickTarget(BuildContext context) {
-    return GestureDetector(
-      key: const Key('timer_screen_show_overlay_click_target'),
-      onTap: () => _onShowOverlayClickTargetTapped(context),
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.black,
-      )
-    );
-  }
-
-  Widget buildOverlay(BuildContext context, TimerState timerState) {
-    // If the timer is completed, this should be false anyway
-    final bool shouldShowOverlay =
-      showOverlay && timerState.timerStatus != TimerStatus.completed;
-    return GestureDetector(
-      onTap: () => _onOverlayTapped(context),
-      child: TimerRunningOverlay(
-        isEnabled: shouldShowOverlay
-      ),
-    );
-  }
 
 }

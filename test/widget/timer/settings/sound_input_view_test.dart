@@ -5,7 +5,7 @@ import 'package:dhyana/init/services.dart';
 import 'package:dhyana/service/audio_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_page.dart';
-import 'package:dhyana/widget/timer/sound_input_play_button.dart';
+import 'package:dhyana/widget/timer/settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_view.dart';

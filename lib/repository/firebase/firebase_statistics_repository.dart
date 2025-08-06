@@ -72,7 +72,10 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<void> logSession(Profile profile, Session session) async {
+  Future<void> logSession(
+    Profile profile,
+    Session session
+  ) async {
     await dataProviderFactory
       .createSessionDataProvider(profile.id)
       .create(session);

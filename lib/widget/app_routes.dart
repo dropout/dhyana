@@ -75,6 +75,26 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
   }
 }
 
+@TypedGoRoute<SessionCompletedRoute>(
+  path: '/sessionCompleted',
+  name: 'SESSION_COMPLETED',
+) class SessionCompletedRoute extends GoRouteData
+  with _$SessionCompletedRoute {
+
+  final Session $extra;
+
+  const SessionCompletedRoute({
+    required this.$extra,
+  });
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+    SessionCompletedScreen(
+      session: $extra,
+      key: state.pageKey,
+    );
+}
+
 @TypedGoRoute<LoginRoute>(
   path: '/login',
   name: 'LOGIN',

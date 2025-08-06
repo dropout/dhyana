@@ -5,7 +5,7 @@ import 'package:dhyana/model/profile_query_options.dart';
 import 'package:dhyana/repository/crud_repository.dart';
 
 abstract interface class ProfileRepository
-    implements CrudRepository<Profile> {
+  implements CrudRepository<Profile> {
 
   Future<Profile> updateProfileWithImage(
     Profile profile,

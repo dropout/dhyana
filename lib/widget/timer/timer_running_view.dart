@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
@@ -9,15 +10,9 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 class TimerRunningView extends StatefulWidget {
 
   final TimerState timerState;
-  final void Function()? onInit;
-  final void Function()? onBackground;
-  final void Function()? onResume;
 
   const TimerRunningView({
     required this.timerState,
-    this.onInit,
-    this.onBackground,
-    this.onResume,
     super.key,
   });
 
@@ -32,17 +27,18 @@ class _TimerRunningViewState extends State<TimerRunningView>
   initState() {
     WakelockPlus.enable();
     WidgetsBinding.instance.addObserver(this);
-    widget.onInit?.call();
     super.initState();
+  }
+
+  void _onBackground(BuildContext context) {
+    BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.timerState.timerStatus == TimerStatus.error) {
       return AppErrorDisplay(
-        onButtonTap: () {
-          GoRouter.of(context).pop();
-        },
+        onButtonTap: () => GoRouter.of(context).pop(),
       );
     } else {
       return buildLayout(context);
@@ -88,9 +84,7 @@ class _TimerRunningViewState extends State<TimerRunningView>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.paused:
-        widget.onBackground?.call();
-      case AppLifecycleState.resumed:
-        widget.onResume?.call();
+        _onBackground(context);
       default:
     }
     super.didChangeAppLifecycleState(state);

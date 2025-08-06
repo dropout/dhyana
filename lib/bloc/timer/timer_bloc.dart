@@ -37,14 +37,11 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   late final StreamSubscription _durationTickerSub;
   late final StreamSubscription _durationFinishedSub;
 
-  void Function(TimerState)? onComplete;
-
   TimerBloc({
     required this.timerSettings,
     required this.timerServiceFactory,
     required this.audioService,
     required this.crashlyticsService,
-    this.onComplete,
   }) : super(TimerState.initial(timerSettings: timerSettings)) {
 
     // Prepare warmup timer
@@ -217,7 +214,6 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     );
 
     emit(timerState);
-    onComplete?.call(timerState);
     logger.t('Timer completed');
   }
 

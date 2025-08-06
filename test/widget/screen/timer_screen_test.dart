@@ -8,7 +8,6 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/screen/timer_screen.dart';
-import 'package:dhyana/widget/timer/timer_completed_view.dart';
 import 'package:dhyana/widget/timer/timer_running_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -209,16 +208,17 @@ void main() {
         );
         await tester.pumpAndSettle();
       }).then((_) {
-        expect(find.byType(TimerCompletedView), findsNothing);
+        // expect(find.byType(TimerCompletedView), findsNothing);
+
       });
 
     });
 
-    testWidgets('can show overlay when overlay target tapped', (WidgetTester tester) async {
+    testWidgets('can show overlay when overlay gesture target tapped', (WidgetTester tester) async {
 
     });
 
-    testWidgets('can hide overlay when overlay target tapped', (WidgetTester tester) async {
+    testWidgets('can hide overlay when overlay tapped', (WidgetTester tester) async {
 
     });
 

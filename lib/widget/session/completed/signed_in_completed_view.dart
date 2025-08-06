@@ -1,23 +1,25 @@
 import 'package:dhyana/bloc/all.dart';
-import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/timer/completed/all.dart';
+import 'package:dhyana/model/all.dart';
+import 'package:dhyana/widget/presence/presence_area.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'milestone_progress_view.dart';
+import 'progress_summary.dart';
+import 'session_result.dart';
+
+
 class SignedInCompletedView extends StatefulWidget {
 
   final String profileId;
-  final TimerSettings timerSettings;
-  final TimerState timerState;
+  final Session session;
 
   const SignedInCompletedView({
     required this.profileId,
-    required this.timerSettings,
-    required this.timerState,
+    required this.session,
     super.key,
   });
 
@@ -30,17 +32,17 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   @override
   void initState() {
     ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
-    BlocProvider.of<SessionLoggerBloc>(context).add(
-      SessionLoggerEvent.logSession(
+    BlocProvider.of<SessionCompletedBloc>(context).add(
+      SessionCompletedEvent.logSession(
         profileId: widget.profileId,
-        startTime: widget.timerState.startTime ?? DateTime.now().subtract(widget.timerState.elapsedTime),
-        endTime: widget.timerState.endTime ?? DateTime.now(),
-        duration: widget.timerState.elapsedTime,
-        timerSettings: widget.timerSettings,
-        onComplete: (Profile updatedProfile) {
+        session: widget.session,
+        onComplete: (UpdateProfileStatsResult updateResult) {
           // refresh the profile
           profileBloc.add(
-            ProfileEvent.loadProfile(profileId: updatedProfile.id)
+            ProfileEvent.loadProfile(
+              profileId: widget.profileId,
+              profile: updateResult.updatedProfile
+            ),
           );
         },
       )
@@ -50,27 +52,19 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SessionLoggerBloc, SessionLoggerState>(
+    return BlocBuilder<SessionCompletedBloc, SessionCompletedState>(
       builder: (context, state) {
         switch (state) {
-          case SessionLoggerInitialState():
+          case SessionCompletedInitialState():
             return buildLoading(context);
-          case SessionLoggerLoadingState():
+          case SessionCompletedLoadingState():
             return buildLoading(context);
-          case SessionLoggerErrorState():
+          case SessionCompletedErrorState():
             return buildError(context);
-          case SessionLoggerSavingState():
-            return buildLoaded(
-              context,
-              state.oldProfile,
-              state.updatedProfile,
-            );
-          case SessionLoggerSavedState():
-            return buildLoaded(
-              context,
-              state.oldProfile,
-              state.updatedProfile,
-            );
+          case SessionCompletedSavingState():
+            return buildLoaded(context, state.updateResult);
+          case SessionCompletedSavedState():
+            return buildLoaded(context, state.updateResult);
           default:
             return SizedBox.shrink();
         }
@@ -88,8 +82,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   Widget buildLoaded(
     BuildContext context,
-    Profile oldProfile,
-    Profile updatedProfile,
+    UpdateProfileStatsResult updateResult,
   ) {
     return SingleChildScrollView(
       child: SafeArea(
@@ -98,28 +91,28 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
           children: [
             Gap.xl(),
             SessionResult(
-              timerState: widget.timerState,
-              profile: updatedProfile,
+              session: widget.session,
+              profile: updateResult.updatedProfile,
             ),
             Gap.large(),
             MilestoneProgressView(
-              profile: updatedProfile,
-              showAnimation: updatedProfile.
-                consecutiveDaysProgressCheck(oldProfile),
+              profile: updateResult.updatedProfile,
+              showAnimation: updateResult.updatedProfile.
+                consecutiveDaysProgressCheck(updateResult.oldProfile),
               textColor: Colors.white,
             ),
             Gap.large(),
             ProgressSummary(
-              oldProfile: oldProfile,
-              updatedProfile: updatedProfile,
+              oldProfile: updateResult.oldProfile,
+              updatedProfile: updateResult.updatedProfile,
             ),
             Gap.xxl(),
             PresenceArea(
-              profile: updatedProfile
+              profile: updateResult.updatedProfile
             ),
             SizedBox(
               // as per size of bottom area gradient - safearea bottom
-              // see timer_screen.dart
+              // see [session_completed_screen.dart]
               height: 140,
             ),
           ]

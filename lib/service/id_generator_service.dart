@@ -6,8 +6,8 @@ class IdGeneratorService {
 
   IdGeneratorService(this._idGenerator);
 
-  String sessionId(String profileId) {
-    return _idGenerator.sessionId(profileId);
+  String sessionId() {
+    return _idGenerator.sessionId();
   }
 
 }

@@ -4,8 +4,6 @@ import 'package:dhyana/widget/bloc_provider/timer_settings_bloc_provider.dart';
 import 'package:dhyana/widget/presence/presence_button.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/timer/all.dart';
-import 'package:dhyana/widget/timer/settings/today.dart';
-import 'package:dhyana/widget/timer/settings_history/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/signed_in.dart';

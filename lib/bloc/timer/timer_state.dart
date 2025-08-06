@@ -56,10 +56,4 @@ sealed class TimerState with _$TimerState {
     );
   }
 
-
-
-
-
-
-
 }

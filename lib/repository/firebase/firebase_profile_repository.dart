@@ -7,8 +7,8 @@ import 'package:dhyana/repository/profile_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseProfileRepository
-    extends CrudRepositoryOps<Profile>
-    implements ProfileRepository {
+  extends CrudRepositoryOps<Profile>
+  implements ProfileRepository {
 
   final ProfileDataProvider profileDataProvider;
   final StorageDataProvider storageDataProvider;
@@ -43,10 +43,10 @@ class FirebaseProfileRepository
 
   @override
   Future<List<Profile>> query(ProfileQueryOptions queryOptions) =>
-      profileDataProvider.query(queryOptions);
+    profileDataProvider.query(queryOptions);
 
   @override
   Stream<List<Profile>> queryStream(ProfileQueryOptions queryOptions) =>
-      profileDataProvider.queryStream(queryOptions);
+    profileDataProvider.queryStream(queryOptions);
 
 }

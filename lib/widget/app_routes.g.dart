@@ -9,6 +9,7 @@ part of 'app_routes.dart';
 List<RouteBase> get $appRoutes => [
       $homeRoute,
       $timerRoute,
+      $sessionCompletedRoute,
       $loginRoute,
       $profileRoute,
       $profileWizardRoute,
@@ -70,6 +71,41 @@ mixin _$TimerRoute on GoRouteData {
   @override
   String get location => GoRouteData.$location(
         '/timer',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $sessionCompletedRoute => GoRouteData.$route(
+      path: '/sessionCompleted',
+      name: 'SESSION_COMPLETED',
+      factory: _$SessionCompletedRoute._fromState,
+    );
+
+mixin _$SessionCompletedRoute on GoRouteData {
+  static SessionCompletedRoute _fromState(GoRouterState state) =>
+      SessionCompletedRoute(
+        $extra: state.extra as Session,
+      );
+
+  SessionCompletedRoute get _self => this as SessionCompletedRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+        '/sessionCompleted',
       );
 
   @override

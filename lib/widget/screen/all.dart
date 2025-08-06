@@ -7,6 +7,7 @@ export 'profile_edit_screen.dart';
 export 'profile_screen.dart';
 export 'profile_stats_screen.dart';
 export 'profile_wizard_screen.dart';
+export 'session_completed_screen.dart';
 export 'session_history_screen.dart';
 export 'timer_screen.dart';
 export 'timer_settings_history_screen.dart';

@@ -1,14 +1,14 @@
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/model/session.dart';
 import 'package:flutter/material.dart';
 
 import 'session_result.dart';
 
 class SignedOutCompletedView extends StatelessWidget {
 
-  final TimerState timerState;
+  final Session session;
 
   const SignedOutCompletedView({
-    required this.timerState,
+    required this.session,
     super.key
   });
 
@@ -18,7 +18,7 @@ class SignedOutCompletedView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SessionResult(
-          timerState: timerState
+          session: session,
         )
       ],
     );

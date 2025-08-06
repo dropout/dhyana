@@ -7,7 +7,7 @@ import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days_view.dart';
 import 'package:dhyana/widget/profile/stats/milestones_view.dart';
 import 'package:dhyana/widget/profile/stats/summary_view.dart';
-import 'package:dhyana/widget/timer/completed/milestone_progress_view.dart';
+import 'package:dhyana/widget/session/completed/milestone_progress_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -28,17 +28,20 @@ class TimerBlocProviders extends StatelessWidget {
 
         return MultiBlocProvider(
           providers: [
+
             BlocProvider<TimerBloc>(
               create: (BuildContext context) {
+
+                // Create the timer bloc with the provided timer settings
                 final TimerBloc timerBloc = TimerBloc(
                   // timerSettings: timerSettings,
                   timerSettings: timerSettings.copyWith(
-                    duration: Duration(seconds: 3),
+                    duration: Duration(seconds: 10),
                   ),
                   timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
-                      DefaultTimerService.new
+                    DefaultTimerService.new
                   ),
-                  audioService: context.services.audioService,
+                  audioService: services.audioService,
                   crashlyticsService: services.crashlyticsService,
                 );
 
@@ -46,12 +49,16 @@ class TimerBlocProviders extends StatelessWidget {
                 timerBloc.add(TimerEvent.started(
                   startTime: DateTime.now(),
                 ));
+
                 return timerBloc;
               },
               lazy: false,
             ),
+
             BlocProvider<PresenceBloc>(
               create: (_) {
+
+                // Create the presence bloc
                 final PresenceBloc presenceBloc = PresenceBloc(
                   presenceRepository: repos.presenceRepository,
                   profileRepository: repos.profileRepository,
@@ -72,12 +79,15 @@ class TimerBlocProviders extends StatelessWidget {
 
             BlocProvider<TimerSettingsHistoryBloc>(
               create: (_) {
+
+                // Create the timer settings history bloc
                 final TimerSettingsHistoryBloc timerSettingsHistoryBloc =
                   TimerSettingsHistoryBloc(
                     timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
                     crashlyticsService: services.crashlyticsService
                   );
 
+                // Save the timer settings if user is signed in
                 if (isSignedIn) {
                   timerSettingsHistoryBloc.add(TimerSettingsHistoryEvent.saveSettings(
                     profileId: profileId!,
@@ -88,40 +98,7 @@ class TimerBlocProviders extends StatelessWidget {
               },
               lazy: false,
             ),
-
           ],
-          child: _TimerCompletedListener(child: child),
-        );
-      },
-    );
-  }
-
-}
-
-class _TimerCompletedListener extends StatelessWidget {
-
-  final Widget child;
-
-  const _TimerCompletedListener({
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (_, ProfileState profileState) {
-        return BlocListener<TimerBloc, TimerState>(
-          listener: (BuildContext context, TimerState timerState) {
-            if (profileState is ProfileLoadedState) {
-              BlocProvider.of<PresenceBloc>(context).add(
-                PresenceEvent.load(ownProfileId: profileState.profile.id)
-              );
-            }
-          },
-          listenWhen: (TimerState prevState, TimerState currentState) {
-            return prevState.timerStatus != TimerStatus.completed
-              && currentState.timerStatus == TimerStatus.completed;
-          },
           child: child,
         );
       },
