@@ -2,8 +2,9 @@ import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/timer/running/timer_running_cover.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/overlay_toggle.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
@@ -39,7 +40,7 @@ class _TimerScreenState extends State<TimerScreen> {
         return Scaffold(
           backgroundColor: Colors.black,
           extendBodyBehindAppBar: true,
-          body: OverlayToggle(
+          body: TimerRunningCover(
             child: TimerRunningView(
               timerState: timerState,
             ),

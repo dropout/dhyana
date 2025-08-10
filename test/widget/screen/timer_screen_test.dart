@@ -214,13 +214,7 @@ void main() {
 
     });
 
-    testWidgets('can show overlay when overlay gesture target tapped', (WidgetTester tester) async {
 
-    });
-
-    testWidgets('can hide overlay when overlay tapped', (WidgetTester tester) async {
-
-    });
 
   }); // eof group
 } // eof main
