@@ -57,7 +57,6 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
       child: TimerScreen(
         key: state.pageKey,
         timerSettings: $extra,
-        // timerSettings: $timerSettings,
       ),
       transitionsBuilder: (
         BuildContext context,
@@ -65,6 +64,9 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
         Animation<double> secondaryAnimation,
         Widget child,
       ) {
+        print('Animation value: ${animation.value}');
+        print('Animatinon status: ${animation.status}');
+
         return LinearGradientMaskTransition(
           progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
           shader: context.services.shaderService.get(Assets.shaderLinearGradientMask),
@@ -88,11 +90,40 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
   });
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-    SessionCompletedScreen(
-      session: $extra,
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
       key: state.pageKey,
+      transitionDuration: Durations.long4,
+      reverseTransitionDuration: Durations.long1,
+      child: SessionCompletedScreen(
+        session: $extra,
+        key: state.pageKey,
+      ),
+      transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+      ) {
+        if (animation.status == AnimationStatus.reverse) {
+          return LinearGradientMaskTransition(
+            progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
+            shader: context.services.shaderService.get(Assets.shaderLinearGradientMask),
+            child: child,
+          );
+        } else {
+          return FadeTransition(
+            opacity: CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+            child: child,
+          );
+        }
+      },
     );
+  }
+
 }
 
 @TypedGoRoute<LoginRoute>(
