@@ -64,9 +64,6 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
         Animation<double> secondaryAnimation,
         Widget child,
       ) {
-        print('Animation value: ${animation.value}');
-        print('Animatinon status: ${animation.status}');
-
         return LinearGradientMaskTransition(
           progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
           shader: context.services.shaderService.get(Assets.shaderLinearGradientMask),
@@ -93,7 +90,7 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage(
       key: state.pageKey,
-      transitionDuration: Durations.long4,
+      transitionDuration: Durations.extralong4,
       reverseTransitionDuration: Durations.long1,
       child: SessionCompletedScreen(
         session: $extra,
@@ -115,7 +112,7 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
           return FadeTransition(
             opacity: CurvedAnimation(
               parent: animation,
-              curve: Curves.easeInOut,
+              curve: Curves.easeInOutExpo,
             ),
             child: child,
           );
