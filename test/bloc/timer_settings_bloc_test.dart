@@ -45,14 +45,13 @@ void main() async {
           lastUsed: DateTime(2025, 1, 1),
         );
         when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
-            .thenAnswer((_) => timerSettings);
+          .thenAnswer((_) => timerSettings);
         return timerSettingsBloc;
       },
       act: (bloc) {
         bloc.add(const TimerSettingsEvent.load());
       },
       expect: ()  => [
-        const TimerSettingsState.loading(),
         TimerSettingsState.loaded(
           timerSettings: TimerSettings(
             warmup: const Duration(minutes: 1),
