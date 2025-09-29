@@ -15,6 +15,7 @@ abstract class Services {
   AudioService get audioService;
   OverlayService get overlayService;
   CacheManagerService get cacheManagerService;
+  WakelockService get wakelockService;
 }
 
 class DefaultServices extends Services {
@@ -30,6 +31,7 @@ class DefaultServices extends Services {
   final AudioService _audioService;
   final OverlayService _overlayService;
   final CacheManagerService _cacheManagerService;
+  final WakelockService _wakelockService;
 
   DefaultServices({
     required HapticsService hapticsService,
@@ -42,20 +44,22 @@ class DefaultServices extends Services {
     required IdGeneratorService idGeneratorService,
     required AnalyticsService analyticsService,
     required CrashlyticsService crashlyticsService,
+    required WakelockService wakelockService,
   })  : _hapticsService = hapticsService,
-        _remoteConfigService = remoteConfigService,
-        _resourceResolver = resourceResolver,
-        _audioService = audioService,
-        _overlayService = overlayService,
-        _analyticsService = analyticsService,
-        _crashlyticsService = crashlyticsService,
-        _timerSettingsSharedPrefsService = TimerSettingsSharedPrefsService(
-          crashlyticsService: crashlyticsService,
-          sharedPrefs: sharedPreferences,
-        ),
-        _shaderService = DefaultShaderService(),
-        _idGeneratorService = idGeneratorService,
-        _cacheManagerService = cacheManagerService;
+    _remoteConfigService = remoteConfigService,
+    _resourceResolver = resourceResolver,
+    _audioService = audioService,
+    _overlayService = overlayService,
+    _analyticsService = analyticsService,
+    _crashlyticsService = crashlyticsService,
+    _timerSettingsSharedPrefsService = TimerSettingsSharedPrefsService(
+      crashlyticsService: crashlyticsService,
+      sharedPrefs: sharedPreferences,
+    ),
+    _shaderService = DefaultShaderService(),
+    _idGeneratorService = idGeneratorService,
+    _cacheManagerService = cacheManagerService,
+    _wakelockService = wakelockService;
 
   @override
   AnalyticsService get analyticsService => _analyticsService;
@@ -90,5 +94,8 @@ class DefaultServices extends Services {
 
   @override
   CacheManagerService get cacheManagerService => _cacheManagerService;
+
+  @override
+  WakelockService get wakelockService => _wakelockService;
 
 }

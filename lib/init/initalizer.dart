@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
+import 'package:dhyana/data_provider/profile_data_provider.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,6 +62,7 @@ class Initializer {
       ),
       resourceResolver: resourceResolver,
       cacheManagerService: DefaultCacheManagerService(),
+      wakelockService: WakelockService(),
     );
 
     logger.t('Preload shaders');

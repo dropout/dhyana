@@ -43,6 +43,7 @@ class _TimerScreenState extends State<TimerScreen> {
           body: TimerRunningCover(
             child: TimerRunningView(
               timerState: timerState,
+              wakelockService: context.services.wakelockService,
             ),
           ),
         );

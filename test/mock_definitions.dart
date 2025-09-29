@@ -68,6 +68,10 @@ class MockUrlLauncher
   extends Mock
   implements UrlLauncher {}
 
+class MockWakelockService
+  extends Mock
+  implements WakelockService {}
+
 // Repositories ----------------------------------------------------------------
 
 class MockRepositories
