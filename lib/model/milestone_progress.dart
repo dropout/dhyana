@@ -17,6 +17,7 @@ sealed class MilestoneProgress with _$MilestoneProgress {
 
   const factory MilestoneProgress({
     @Default(0) int completedDaysCount,
+    // Update default targetDaysCount in firebase function onbeforeCreateUser too
     @Default(7) int targetDaysCount,
     @Default([]) List<Session> sessions,
   }) = _MilestoneProgress;

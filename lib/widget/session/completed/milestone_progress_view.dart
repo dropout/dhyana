@@ -106,7 +106,6 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
         color: widget.textColor,
       )
-
     );
   }
 
