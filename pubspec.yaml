@@ -13,10 +13,10 @@ dependencies:
     sdk: flutter
 
   # System & Architectural
-  intl: ^0.18.1
+  intl: ^0.20.2
   logger: ^2.0.2+1
-  go_router: ^15.1.3
-  go_router_builder: ^3.0.0
+  go_router: ^16.2.4
+  go_router_builder: ^4.1.0
   provider: ^6.0.5
   flutter_bloc: ^9.1.1
   equatable: ^2.0.5
@@ -24,7 +24,7 @@ dependencies:
   json_annotation: ^4.8.1
   blurhash_dart: ^1.1.0
   uuid: ^4.4.0
-  package_info_plus: ^8.0.0
+  package_info_plus: ^9.0.0
   vector_math: ^2.1.4
   collection: ^1.19.0
   faker: ^2.2.0
@@ -53,20 +53,20 @@ dependencies:
   gaimon: ^1.4.1 # haptic feedback library
 
   # Firebase
-  firebase_core: ^3.3.0
-  cloud_firestore: ^5.2.1
-  firebase_storage: ^12.1.3
-  firebase_remote_config: ^5.2.0
+  firebase_core: ^4.1.1
+  cloud_firestore: ^6.0.2
+  firebase_storage: ^13.0.2
+  firebase_remote_config: ^6.0.2
 
   # Firebase Auth
-  firebase_auth: ^5.1.4
-  google_sign_in: ^6.1.0
+  firebase_auth: ^6.1.0
+  google_sign_in: ^7.2.0
   sign_in_with_apple: ^7.0.1
   crypto: ^3.0.2
 
   # Firebase diagnostics
-  firebase_analytics: ^11.2.1
-  firebase_crashlytics: ^4.0.4
+  firebase_analytics: ^12.0.2
+  firebase_crashlytics: ^5.0.2
 
   bar_chart:
     path: packages/bar_chart
@@ -85,8 +85,8 @@ dev_dependencies:
   mocktail: ^1.0.3
   mocktail_image_network: ^1.2.0
 
-dependency_overrides:
-  intl: ^0.20.2
+#dependency_overrides:
+#  intl: ^0.20.2
 
 flutter:
   generate: true # For generating localizations?
