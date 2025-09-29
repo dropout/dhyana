@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart';
 
 class GradientTranslate extends GradientTransform {
 
@@ -14,7 +15,7 @@ class GradientTranslate extends GradientTransform {
   @override
   Matrix4 transform(Rect bounds, {TextDirection? textDirection}) {
     return Matrix4.identity()
-      ..translate(x, y);
+      ..translateByVector3(Vector3(x, y, 0));
   }
 
   @override
