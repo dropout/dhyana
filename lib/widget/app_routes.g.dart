@@ -24,10 +24,10 @@ List<RouteBase> get $appRoutes => [
 RouteBase get $homeRoute => GoRouteData.$route(
       path: '/',
       name: 'HOME',
-      factory: _$HomeRoute._fromState,
+      factory: $HomeRoute._fromState,
     );
 
-mixin _$HomeRoute on GoRouteData {
+mixin $HomeRoute on GoRouteData {
   static HomeRoute _fromState(GoRouterState state) => HomeRoute(
         $extra: state.extra as TimerSettings?,
       );
@@ -58,10 +58,10 @@ mixin _$HomeRoute on GoRouteData {
 RouteBase get $timerRoute => GoRouteData.$route(
       path: '/timer',
       name: 'TIMER',
-      factory: _$TimerRoute._fromState,
+      factory: $TimerRoute._fromState,
     );
 
-mixin _$TimerRoute on GoRouteData {
+mixin $TimerRoute on GoRouteData {
   static TimerRoute _fromState(GoRouterState state) => TimerRoute(
         $extra: state.extra as TimerSettings,
       );
@@ -92,10 +92,10 @@ mixin _$TimerRoute on GoRouteData {
 RouteBase get $sessionCompletedRoute => GoRouteData.$route(
       path: '/sessionCompleted',
       name: 'SESSION_COMPLETED',
-      factory: _$SessionCompletedRoute._fromState,
+      factory: $SessionCompletedRoute._fromState,
     );
 
-mixin _$SessionCompletedRoute on GoRouteData {
+mixin $SessionCompletedRoute on GoRouteData {
   static SessionCompletedRoute _fromState(GoRouterState state) =>
       SessionCompletedRoute(
         $extra: state.extra as Session,
@@ -127,10 +127,10 @@ mixin _$SessionCompletedRoute on GoRouteData {
 RouteBase get $loginRoute => GoRouteData.$route(
       path: '/login',
       name: 'LOGIN',
-      factory: _$LoginRoute._fromState,
+      factory: $LoginRoute._fromState,
     );
 
-mixin _$LoginRoute on GoRouteData {
+mixin $LoginRoute on GoRouteData {
   static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   @override
@@ -155,10 +155,10 @@ mixin _$LoginRoute on GoRouteData {
 RouteBase get $profileRoute => GoRouteData.$route(
       path: '/profile/:profileId',
       name: 'PROFILE',
-      factory: _$ProfileRoute._fromState,
+      factory: $ProfileRoute._fromState,
     );
 
-mixin _$ProfileRoute on GoRouteData {
+mixin $ProfileRoute on GoRouteData {
   static ProfileRoute _fromState(GoRouterState state) => ProfileRoute(
         profileId: state.pathParameters['profileId']!,
         $extra: state.extra as Profile?,
@@ -190,10 +190,10 @@ mixin _$ProfileRoute on GoRouteData {
 RouteBase get $profileWizardRoute => GoRouteData.$route(
       path: '/profileWizard/:profileId',
       name: 'PROFILE_WIZARD',
-      factory: _$ProfileWizardRoute._fromState,
+      factory: $ProfileWizardRoute._fromState,
     );
 
-mixin _$ProfileWizardRoute on GoRouteData {
+mixin $ProfileWizardRoute on GoRouteData {
   static ProfileWizardRoute _fromState(GoRouterState state) =>
       ProfileWizardRoute(
         profileId: state.pathParameters['profileId']!,
@@ -223,10 +223,10 @@ mixin _$ProfileWizardRoute on GoRouteData {
 RouteBase get $profileStatsRoute => GoRouteData.$route(
       path: '/profileStats/:profileId',
       name: 'PROFILE_STATS',
-      factory: _$ProfileStatsRoute._fromState,
+      factory: $ProfileStatsRoute._fromState,
     );
 
-mixin _$ProfileStatsRoute on GoRouteData {
+mixin $ProfileStatsRoute on GoRouteData {
   static ProfileStatsRoute _fromState(GoRouterState state) => ProfileStatsRoute(
         profileId: state.pathParameters['profileId']!,
       );
@@ -255,10 +255,10 @@ mixin _$ProfileStatsRoute on GoRouteData {
 RouteBase get $profileEditRoute => GoRouteData.$route(
       path: '/editProfile',
       name: 'EDIT_PROFILE',
-      factory: _$ProfileEditRoute._fromState,
+      factory: $ProfileEditRoute._fromState,
     );
 
-mixin _$ProfileEditRoute on GoRouteData {
+mixin $ProfileEditRoute on GoRouteData {
   static ProfileEditRoute _fromState(GoRouterState state) =>
       const ProfileEditRoute();
 
@@ -284,10 +284,10 @@ mixin _$ProfileEditRoute on GoRouteData {
 RouteBase get $deleteProfileRoute => GoRouteData.$route(
       path: '/deleteProfile',
       name: 'DELETE_PROFILE',
-      factory: _$DeleteProfileRoute._fromState,
+      factory: $DeleteProfileRoute._fromState,
     );
 
-mixin _$DeleteProfileRoute on GoRouteData {
+mixin $DeleteProfileRoute on GoRouteData {
   static DeleteProfileRoute _fromState(GoRouterState state) =>
       const DeleteProfileRoute();
 
@@ -313,10 +313,10 @@ mixin _$DeleteProfileRoute on GoRouteData {
 RouteBase get $sessionHistoryRoute => GoRouteData.$route(
       path: '/activity',
       name: 'ACTIVITY',
-      factory: _$SessionHistoryRoute._fromState,
+      factory: $SessionHistoryRoute._fromState,
     );
 
-mixin _$SessionHistoryRoute on GoRouteData {
+mixin $SessionHistoryRoute on GoRouteData {
   static SessionHistoryRoute _fromState(GoRouterState state) =>
       SessionHistoryRoute(
         profileId: state.uri.queryParameters['profile-id']!,
@@ -349,10 +349,10 @@ mixin _$SessionHistoryRoute on GoRouteData {
 RouteBase get $timerSettingsHistoryRoute => GoRouteData.$route(
       path: '/timerSettingsHistory/:profileId',
       name: 'TIMER_SETTINGS_HISTORY',
-      factory: _$TimerSettingsHistoryRoute._fromState,
+      factory: $TimerSettingsHistoryRoute._fromState,
     );
 
-mixin _$TimerSettingsHistoryRoute on GoRouteData {
+mixin $TimerSettingsHistoryRoute on GoRouteData {
   static TimerSettingsHistoryRoute _fromState(GoRouterState state) =>
       TimerSettingsHistoryRoute(
         profileId: state.pathParameters['profileId']!,
@@ -382,10 +382,10 @@ mixin _$TimerSettingsHistoryRoute on GoRouteData {
 RouteBase get $presenceRoute => GoRouteData.$route(
       path: '/presence',
       name: 'PRESENCE',
-      factory: _$PresenceRoute._fromState,
+      factory: $PresenceRoute._fromState,
     );
 
-mixin _$PresenceRoute on GoRouteData {
+mixin $PresenceRoute on GoRouteData {
   static PresenceRoute _fromState(GoRouterState state) => const PresenceRoute();
 
   @override

@@ -32,7 +32,7 @@ GoRouter createAppRouter({required InitResult initResult}) {
   path: '/',
   name: 'HOME',
 )
-class HomeRoute extends GoRouteData with _$HomeRoute {
+class HomeRoute extends GoRouteData with $HomeRoute {
   final TimerSettings? $extra;
   const HomeRoute({this.$extra});
 
@@ -45,7 +45,7 @@ class HomeRoute extends GoRouteData with _$HomeRoute {
   path: '/timer',
   name: 'TIMER',
 )
-class TimerRoute extends GoRouteData with _$TimerRoute {
+class TimerRoute extends GoRouteData with $TimerRoute {
   final TimerSettings $extra;
   const TimerRoute({required this.$extra});
   @override
@@ -78,7 +78,7 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
   path: '/sessionCompleted',
   name: 'SESSION_COMPLETED',
 ) class SessionCompletedRoute extends GoRouteData
-  with _$SessionCompletedRoute {
+  with $SessionCompletedRoute {
 
   final Session $extra;
 
@@ -127,7 +127,7 @@ class TimerRoute extends GoRouteData with _$TimerRoute {
   path: '/login',
   name: 'LOGIN',
 )
-class LoginRoute extends GoRouteData with _$LoginRoute {
+class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -157,7 +157,7 @@ mixin AuthRedirectHook {
   name: 'PROFILE',
 )
 class ProfileRoute extends GoRouteData
-  with AuthRedirectHook, _$ProfileRoute {
+  with AuthRedirectHook, $ProfileRoute {
 
   final String profileId;
   final Profile? $extra;
@@ -180,7 +180,7 @@ class ProfileRoute extends GoRouteData
   name: 'PROFILE_WIZARD',
 )
 class ProfileWizardRoute extends GoRouteData
-  with AuthRedirectHook, _$ProfileWizardRoute {
+  with AuthRedirectHook, $ProfileWizardRoute {
 
   final String profileId;
   const ProfileWizardRoute({required this.profileId});
@@ -198,7 +198,7 @@ class ProfileWizardRoute extends GoRouteData
   name: 'PROFILE_STATS',
 )
 class ProfileStatsRoute extends GoRouteData
-  with AuthRedirectHook, _$ProfileStatsRoute {
+  with AuthRedirectHook, $ProfileStatsRoute {
 
   final String profileId;
   const ProfileStatsRoute({required this.profileId});
@@ -216,7 +216,7 @@ class ProfileStatsRoute extends GoRouteData
   name: 'EDIT_PROFILE'
 )
 class ProfileEditRoute extends GoRouteData
-  with AuthRedirectHook, _$ProfileEditRoute {
+  with AuthRedirectHook, $ProfileEditRoute {
 
   const ProfileEditRoute();
   @override
@@ -233,7 +233,7 @@ class ProfileEditRoute extends GoRouteData
   name: 'DELETE_PROFILE',
 )
 class DeleteProfileRoute extends GoRouteData
-  with AuthRedirectHook, _$DeleteProfileRoute {
+  with AuthRedirectHook, $DeleteProfileRoute {
 
   const DeleteProfileRoute();
   @override
@@ -250,7 +250,7 @@ class DeleteProfileRoute extends GoRouteData
   name: 'ACTIVITY',
 )
 class SessionHistoryRoute extends GoRouteData
-  with AuthRedirectHook, _$SessionHistoryRoute {
+  with AuthRedirectHook, $SessionHistoryRoute {
 
   final String profileId;
   const SessionHistoryRoute({required this.profileId});
@@ -268,7 +268,7 @@ class SessionHistoryRoute extends GoRouteData
   name: 'TIMER_SETTINGS_HISTORY',
 )
 class TimerSettingsHistoryRoute extends GoRouteData
-  with AuthRedirectHook, _$TimerSettingsHistoryRoute {
+  with AuthRedirectHook, $TimerSettingsHistoryRoute {
 
   final String profileId;
   const TimerSettingsHistoryRoute({required this.profileId});
@@ -287,7 +287,7 @@ class TimerSettingsHistoryRoute extends GoRouteData
 )
 class PresenceRoute extends GoRouteData
 
-  with AuthRedirectHook, _$PresenceRoute {
+  with AuthRedirectHook, $PresenceRoute {
   const PresenceRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
