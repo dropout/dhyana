@@ -76,6 +76,10 @@ class MockWakelockService
   extends Mock
   implements WakelockService {}
 
+class MockIdGeneratorService
+  extends Mock
+  implements IdGeneratorService {}
+
 // Repositories ----------------------------------------------------------------
 
 class MockRepositories
@@ -93,3 +97,7 @@ class MockProfileRepository
 class MockTimerSettingsHistoryRepository
   extends Mock
   implements TimerSettingsHistoryRepository {}
+
+class MockStatisticsRepository
+  extends Mock
+  implements StatisticsRepository {}

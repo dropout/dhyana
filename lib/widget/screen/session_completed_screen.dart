@@ -85,6 +85,7 @@ class SessionCompletedScreen extends StatelessWidget {
           SafeArea(
             top: false,
             child: AppButton(
+              key: const Key('session_completed_screen_okay_button'),
               onTap: () => _onOkayButtonPressed(context),
               text: AppLocalizations.of(context).okay.toUpperCase(),
               bColor: Colors.white,
