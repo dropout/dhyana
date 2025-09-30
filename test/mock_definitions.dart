@@ -26,6 +26,10 @@ class MockPresenceBloc
   extends MockBloc<PresenceEvent, PresenceState>
   implements PresenceBloc {}
 
+class MockTimerBloc
+  extends MockBloc<TimerEvent, TimerState>
+  implements TimerBloc {}
+
 // Services --------------------------------------------------------------------
 
 class MockServices

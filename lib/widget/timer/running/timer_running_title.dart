@@ -54,10 +54,10 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
         return null;
       case TimerStage.warmup:
         return Text(
-        AppLocalizations.of(context).inputWarmupLabel,
-        style: style,
-        key: const ValueKey<String>('Warmup'),
-      );
+          AppLocalizations.of(context).inputWarmupLabel,
+          style: style,
+          key: const ValueKey<String>('timer_running_title_warmup_title_text'),
+        );
     }
   }
 

@@ -7,6 +7,10 @@ import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
+
+/// Controls displayed when the timer is running or paused
+/// Includes the main play/pause button and the pause menu
+/// with animated appearance/disappearance of menu items
 class TimerRunningControls extends StatefulWidget {
 
   final double iconSize = 64;
@@ -18,13 +22,13 @@ class TimerRunningControls extends StatefulWidget {
   });
 
   @override
-  State<TimerRunningControls> createState() => _TimerRunningControlsState();
+  State<TimerRunningControls> createState() => TimerRunningControlsState();
 }
 
-class _TimerRunningControlsState extends State<TimerRunningControls> with SingleTickerProviderStateMixin {
+class TimerRunningControlsState extends State<TimerRunningControls> with SingleTickerProviderStateMixin {
 
   // Predefined values
-  // Update if pause menu change required
+  // Update if pause menu item count change required
   static const int _itemCount = 2;
   static const _itemAnimationTime = Duration(milliseconds: 250);
   static const _staggerTime = Duration(milliseconds: 100);
@@ -33,7 +37,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   // First item doesn't have a stagger delay
   static const _animationDuration = Duration(milliseconds: 100 + 250);
 
-  late AnimationController _animationController;
+  late AnimationController animationController;
   final List<Interval> _itemSlideIntervals = [];
 
   // For now it only loops through 2 items
@@ -57,7 +61,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   @override
   void initState() {
     _createAnimationIntervals();
-    _animationController = AnimationController(
+    animationController = AnimationController(
       vsync: this,
       duration: _animationDuration,
     );
@@ -67,17 +71,18 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   @override
   void didUpdateWidget(TimerRunningControls oldWidget) {
     if (oldWidget.timerState.timerStatus != TimerStatus.paused && widget.timerState.timerStatus == TimerStatus.paused) {
-      _animationController.forward(from: 0.0);
+      animationController.forward(from: 0.0);
     }
     if (oldWidget.timerState.timerStatus == TimerStatus.paused && widget.timerState.timerStatus != TimerStatus.paused) {
-      _animationController.reverse(from: 1.0);
+      animationController.reverse(from: 1.0);
     }
     super.didUpdateWidget(oldWidget);
   }
 
   void _onPause(BuildContext context) {
     BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
-    context.logEvent(name: 'timer_pause',);
+    context.logEvent(name: 'timer_pause');
+    context.hapticsTap();
   }
 
   void _onResume(BuildContext context) {
@@ -120,9 +125,12 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
     String text,
     Color textColor,
     Color bgColor,
-    Function(BuildContext context) action,
+    Function(BuildContext context) action, {
+      Key? key,
+    }
   ) {
     return TextButton(
+      key: key,
       onPressed: () => action(context),
       style: TextButton.styleFrom(
         minimumSize: const Size(160, 0),
@@ -146,18 +154,20 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   List<Widget> _buildAnimatedPauseMenuItems(BuildContext context) {
     final List<Widget> items = [
       _buildMenuItem(
-          context,
-          AppLocalizations.of(context).timerDiscardSessionButtonText.toUpperCase(),
-          Colors.white,
-          Colors.grey.shade800,
-          _onDiscard
+        context,
+        AppLocalizations.of(context).timerDiscardSessionButtonText.toUpperCase(),
+        Colors.white,
+        Colors.grey.shade800,
+        _onDiscard,
+        key: const Key('timer_running_controls_discard_button'),
       ),
       if (shouldShowFinishButton) _buildMenuItem(
         context,
         AppLocalizations.of(context).timerFinishSessionButtonText.toUpperCase(),
         Colors.black,
         Colors.white,
-        _onFinish
+        _onFinish,
+        key: const Key('timer_running_controls_finish_button'),
       ),
     ];
 
@@ -165,15 +175,15 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
     for (var i = 0; i < items.length; ++i) {
       listItems.add(
         AnimatedBuilder(
-          animation: _animationController,
+          animation: animationController,
           builder: (context, child) {
             final animationPercent = Curves.linear.transform(
-              _itemSlideIntervals[i].transform(_animationController.value),
+              _itemSlideIntervals[i].transform(animationController.value),
             );
             final opacity = animationPercent;
             return ExcludeSemantics(
               child: IgnorePointer(
-                ignoring: animationPercent == 0,
+                ignoring: (animationPercent <= 0),
                 child: Opacity(
                   opacity: opacity,
                   child: child,
@@ -201,12 +211,14 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
   }
 
   Widget _buildMainButton(BuildContext context, TimerState timerState) {
-    EdgeInsets padding = const EdgeInsets.all(
+    final EdgeInsets padding = const EdgeInsets.all(
       AppThemeData.paddingLg,
     );
+    final Key key = const Key('timer_running_controls_main_button');
     switch (timerState.timerStatus) {
       case TimerStatus.idle:
         return IconButton(
+          key: key,
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
@@ -217,17 +229,18 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
         );
       case TimerStatus.running:
         return IconButton(
+          key: key,
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onPause(context),
-          // icon: const Icon(Icons.pause_circle_rounded,
           icon: const Icon(Icons.pause_rounded,
             color: Colors.white,
           )
         );
       case TimerStatus.paused:
         return IconButton(
+          key: key,
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
@@ -238,6 +251,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
         );
       case TimerStatus.completed:
         return IconButton(
+          key: key,
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
@@ -248,6 +262,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
         );
       case TimerStatus.error:
         return IconButton(
+          key: key,
           iconSize: widget.iconSize,
           padding: padding,
           alignment: Alignment.center,
@@ -261,7 +276,7 @@ class _TimerRunningControlsState extends State<TimerRunningControls> with Single
 
   @override
   void dispose() {
-    _animationController.dispose();
+    animationController.dispose();
     super.dispose();
   }
 
