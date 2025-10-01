@@ -2,6 +2,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_avatar.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 class SessionResult extends StatelessWidget {
@@ -18,7 +19,6 @@ class SessionResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         ProfileAvatar(
@@ -33,18 +33,19 @@ class SessionResult extends StatelessWidget {
         buildCompletedText(context, session.duration),
       ],
     );
-
   }
 
   Widget buildCompletedText(BuildContext context, Duration timeElapsed) {
     return RichText(
+      key: const Key('session_result_completed_text'),
       text: TextSpan(
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
           color: Colors.white,
-          // fontWeight: FontWeight.bold,
         ),
         children: [
-          const TextSpan(text: 'Completed  '),
+          TextSpan(
+            text: '${context.localizations.sessionResultCompleted} '
+          ),
           TextSpan(
             text: session.duration.inMinutes.toString(),
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
@@ -52,7 +53,9 @@ class SessionResult extends StatelessWidget {
               fontWeight: FontWeight.bold,
             )
           ),
-          const TextSpan(text: '  minutes'),
+          TextSpan(
+            text: '  ${context.localizations.sessionResultMinutes(session.duration.inMinutes)}'
+          ),
         ]
       )
     );
