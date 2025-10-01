@@ -15,23 +15,23 @@ class MockFirebaseFirestore
   extends Mock
   implements FirebaseFirestore {}
 
-class MockDocumentReference<MockModel>
+class MockDocumentReference
   extends Mock
   implements DocumentReference<MockModel> {}
 
-class MockCollectionReference<MockModel>
+class MockCollectionReference
   extends Mock
   implements CollectionReference<MockModel> {}
 
-class MockDocumentSnapshot<MockModel>
+class MockDocumentSnapshot
   extends Mock
   implements DocumentSnapshot<MockModel> {}
 
-class MockQuerySnapshot<MockModel>
+class MockQuerySnapshot
   extends Mock
   implements QuerySnapshot<MockModel> {}
 
-class MockQueryDocumentSnapshot<MockModel>
+class MockQueryDocumentSnapshot
     extends Mock
     implements QueryDocumentSnapshot<MockModel> {}
 
@@ -39,7 +39,7 @@ class MockModel
   extends Mock
   implements Model {}
 
-class MockQuery<MockModel>
+class MockQuery
   extends Mock
   implements Query<MockModel> {}
 
@@ -47,11 +47,11 @@ void main() {
 
   group('FirebaseDataProvider', () {
 
-    late StreamController<MockDocumentSnapshot<MockModel>> mockDocumentSnapshotStreamController;
-    late StreamController<MockQuerySnapshot<MockModel>> mockQuerySnapshotController;
-    late MockCollectionReference<MockModel> mockCollectionRef;
-    late MockDocumentReference<MockModel> mockDocumentRef;
-    late MockDocumentSnapshot<MockModel> mockDocumentSnapshot;
+    late StreamController<MockDocumentSnapshot> mockDocumentSnapshotStreamController;
+    late StreamController<MockQuerySnapshot> mockQuerySnapshotController;
+    late MockCollectionReference mockCollectionRef;
+    late MockDocumentReference mockDocumentRef;
+    late MockDocumentSnapshot mockDocumentSnapshot;
     // late MockQuerySnapshot<MockModel> mockQuerySnapshot;
     // late MockQueryDocumentSnapshot<MockModel> mockQueryDocumentSnapshot;
     late MockModel mockModel;
