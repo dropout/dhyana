@@ -302,6 +302,18 @@ abstract class AppLocalizations {
   /// **'Ülések'**
   String get sessions;
 
+  /// No description provided for @sessionResultCompleted.
+  ///
+  /// In hu, this message translates to:
+  /// **'Teljesítettél'**
+  String get sessionResultCompleted;
+
+  /// No description provided for @sessionResultMinutes.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{percet} =1{percet} =2{percet} few{percet} many{percet} other{percet}}'**
+  String sessionResultMinutes(num count);
+
   /// No description provided for @timerFinishSessionButtonText.
   ///
   /// In hu, this message translates to:

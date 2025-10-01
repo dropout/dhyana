@@ -111,6 +111,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sessions => 'Sessions';
 
   @override
+  String get sessionResultCompleted => 'Completed';
+
+  @override
+  String sessionResultMinutes(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'minutes',
+      many: 'minutes',
+      few: 'minutes',
+      two: 'minutes',
+      one: 'minute',
+      zero: 'minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get timerFinishSessionButtonText => 'Finish session';
 
   @override

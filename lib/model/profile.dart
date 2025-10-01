@@ -4,6 +4,7 @@ import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 import 'model.dart';
 
@@ -31,32 +32,9 @@ abstract class Profile with _$Profile implements Model {
     required bool completed,
   }) = _Profile;
 
-  factory Profile.generateId({
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String photoUrl,
-    required String photoBlurhash,
-    required DateTime signupDate,
-    required ProfileStatisticsReport statsReport,
-    required bool completed,
-  }) {
-    return Profile(
-      id: FirebaseFirestore.instance.collection('profiles').doc().id,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      photoUrl: photoUrl,
-      photoBlurhash: photoBlurhash,
-      signupDate: signupDate,
-      statsReport: statsReport,
-      completed: completed,
-    );
-  }
-
   factory Profile.anonymous() {
     return Profile(
-      id: FirebaseFirestore.instance.collection('profiles').doc().id,
+      id: Uuid().v4(),
       firstName: DefaultProfileData.firstName,
       lastName: DefaultProfileData.lastName,
       email: '',

@@ -42,6 +42,9 @@
   "session": "Ülés",
   "sessions": "Ülések",
 
+  "sessionResultCompleted": "Teljesítettél",
+  "sessionResultMinutes": "{count, plural, =0{percet} =1{percet} =2{percet} few{percet} many{percet} other{percet}}",
+
   "timerFinishSessionButtonText": "Befejezés",
   "timerDiscardSessionButtonText": "Megszakítás",
 

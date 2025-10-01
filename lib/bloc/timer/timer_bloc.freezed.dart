@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -38,6 +37,321 @@ mixin _$TimerEvent implements DiagnosticableTreeMixin {
 /// @nodoc
 class $TimerEventCopyWith<$Res> {
   $TimerEventCopyWith(TimerEvent _, $Res Function(TimerEvent) __);
+}
+
+/// Adds pattern-matching-related methods to [TimerEvent].
+extension TimerEventPatterns on TimerEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WarmupTicked value)? warmupTicked,
+    TResult Function(WarmupCompleted value)? warmupCompleted,
+    TResult Function(TimerStarted value)? started,
+    TResult Function(TimerPaused value)? paused,
+    TResult Function(TimerResumed value)? resumed,
+    TResult Function(TimerCompleted value)? completed,
+    TResult Function(TimerTicked value)? timerTicked,
+    TResult Function(TimerReset value)? reset,
+    TResult Function(TimerErrorOccurred value)? error,
+    TResult Function(TimerFinished value)? finished,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case WarmupTicked() when warmupTicked != null:
+        return warmupTicked(_that);
+      case WarmupCompleted() when warmupCompleted != null:
+        return warmupCompleted(_that);
+      case TimerStarted() when started != null:
+        return started(_that);
+      case TimerPaused() when paused != null:
+        return paused(_that);
+      case TimerResumed() when resumed != null:
+        return resumed(_that);
+      case TimerCompleted() when completed != null:
+        return completed(_that);
+      case TimerTicked() when timerTicked != null:
+        return timerTicked(_that);
+      case TimerReset() when reset != null:
+        return reset(_that);
+      case TimerErrorOccurred() when error != null:
+        return error(_that);
+      case TimerFinished() when finished != null:
+        return finished(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WarmupTicked value) warmupTicked,
+    required TResult Function(WarmupCompleted value) warmupCompleted,
+    required TResult Function(TimerStarted value) started,
+    required TResult Function(TimerPaused value) paused,
+    required TResult Function(TimerResumed value) resumed,
+    required TResult Function(TimerCompleted value) completed,
+    required TResult Function(TimerTicked value) timerTicked,
+    required TResult Function(TimerReset value) reset,
+    required TResult Function(TimerErrorOccurred value) error,
+    required TResult Function(TimerFinished value) finished,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case WarmupTicked():
+        return warmupTicked(_that);
+      case WarmupCompleted():
+        return warmupCompleted(_that);
+      case TimerStarted():
+        return started(_that);
+      case TimerPaused():
+        return paused(_that);
+      case TimerResumed():
+        return resumed(_that);
+      case TimerCompleted():
+        return completed(_that);
+      case TimerTicked():
+        return timerTicked(_that);
+      case TimerReset():
+        return reset(_that);
+      case TimerErrorOccurred():
+        return error(_that);
+      case TimerFinished():
+        return finished(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(WarmupTicked value)? warmupTicked,
+    TResult? Function(WarmupCompleted value)? warmupCompleted,
+    TResult? Function(TimerStarted value)? started,
+    TResult? Function(TimerPaused value)? paused,
+    TResult? Function(TimerResumed value)? resumed,
+    TResult? Function(TimerCompleted value)? completed,
+    TResult? Function(TimerTicked value)? timerTicked,
+    TResult? Function(TimerReset value)? reset,
+    TResult? Function(TimerErrorOccurred value)? error,
+    TResult? Function(TimerFinished value)? finished,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case WarmupTicked() when warmupTicked != null:
+        return warmupTicked(_that);
+      case WarmupCompleted() when warmupCompleted != null:
+        return warmupCompleted(_that);
+      case TimerStarted() when started != null:
+        return started(_that);
+      case TimerPaused() when paused != null:
+        return paused(_that);
+      case TimerResumed() when resumed != null:
+        return resumed(_that);
+      case TimerCompleted() when completed != null:
+        return completed(_that);
+      case TimerTicked() when timerTicked != null:
+        return timerTicked(_that);
+      case TimerReset() when reset != null:
+        return reset(_that);
+      case TimerErrorOccurred() when error != null:
+        return error(_that);
+      case TimerFinished() when finished != null:
+        return finished(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int ticks)? warmupTicked,
+    TResult Function()? warmupCompleted,
+    TResult Function(DateTime startTime)? started,
+    TResult Function()? paused,
+    TResult Function()? resumed,
+    TResult Function()? completed,
+    TResult Function(int ticks)? timerTicked,
+    TResult Function()? reset,
+    TResult Function(Object? error, StackTrace stackTrace)? error,
+    TResult Function()? finished,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case WarmupTicked() when warmupTicked != null:
+        return warmupTicked(_that.ticks);
+      case WarmupCompleted() when warmupCompleted != null:
+        return warmupCompleted();
+      case TimerStarted() when started != null:
+        return started(_that.startTime);
+      case TimerPaused() when paused != null:
+        return paused();
+      case TimerResumed() when resumed != null:
+        return resumed();
+      case TimerCompleted() when completed != null:
+        return completed();
+      case TimerTicked() when timerTicked != null:
+        return timerTicked(_that.ticks);
+      case TimerReset() when reset != null:
+        return reset();
+      case TimerErrorOccurred() when error != null:
+        return error(_that.error, _that.stackTrace);
+      case TimerFinished() when finished != null:
+        return finished();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int ticks) warmupTicked,
+    required TResult Function() warmupCompleted,
+    required TResult Function(DateTime startTime) started,
+    required TResult Function() paused,
+    required TResult Function() resumed,
+    required TResult Function() completed,
+    required TResult Function(int ticks) timerTicked,
+    required TResult Function() reset,
+    required TResult Function(Object? error, StackTrace stackTrace) error,
+    required TResult Function() finished,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case WarmupTicked():
+        return warmupTicked(_that.ticks);
+      case WarmupCompleted():
+        return warmupCompleted();
+      case TimerStarted():
+        return started(_that.startTime);
+      case TimerPaused():
+        return paused();
+      case TimerResumed():
+        return resumed();
+      case TimerCompleted():
+        return completed();
+      case TimerTicked():
+        return timerTicked(_that.ticks);
+      case TimerReset():
+        return reset();
+      case TimerErrorOccurred():
+        return error(_that.error, _that.stackTrace);
+      case TimerFinished():
+        return finished();
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int ticks)? warmupTicked,
+    TResult? Function()? warmupCompleted,
+    TResult? Function(DateTime startTime)? started,
+    TResult? Function()? paused,
+    TResult? Function()? resumed,
+    TResult? Function()? completed,
+    TResult? Function(int ticks)? timerTicked,
+    TResult? Function()? reset,
+    TResult? Function(Object? error, StackTrace stackTrace)? error,
+    TResult? Function()? finished,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case WarmupTicked() when warmupTicked != null:
+        return warmupTicked(_that.ticks);
+      case WarmupCompleted() when warmupCompleted != null:
+        return warmupCompleted();
+      case TimerStarted() when started != null:
+        return started(_that.startTime);
+      case TimerPaused() when paused != null:
+        return paused();
+      case TimerResumed() when resumed != null:
+        return resumed();
+      case TimerCompleted() when completed != null:
+        return completed();
+      case TimerTicked() when timerTicked != null:
+        return timerTicked(_that.ticks);
+      case TimerReset() when reset != null:
+        return reset();
+      case TimerErrorOccurred() when error != null:
+        return error(_that.error, _that.stackTrace);
+      case TimerFinished() when finished != null:
+        return finished();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
@@ -617,6 +931,204 @@ class _$TimerStateCopyWithImpl<$Res> implements $TimerStateCopyWith<$Res> {
     return $TimerSettingsCopyWith<$Res>(_self.timerSettings, (value) {
       return _then(_self.copyWith(timerSettings: value));
     });
+  }
+}
+
+/// Adds pattern-matching-related methods to [TimerState].
+extension TimerStatePatterns on TimerState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_TimerState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TimerState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_TimerState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TimerState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_TimerState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TimerState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            TimerSettings timerSettings,
+            TimerStatus timerStatus,
+            TimerStage timerStage,
+            Duration elapsedWarmupTime,
+            Duration elapsedTime,
+            DateTime? startTime,
+            DateTime? endTime)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TimerState() when $default != null:
+        return $default(
+            _that.timerSettings,
+            _that.timerStatus,
+            _that.timerStage,
+            _that.elapsedWarmupTime,
+            _that.elapsedTime,
+            _that.startTime,
+            _that.endTime);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            TimerSettings timerSettings,
+            TimerStatus timerStatus,
+            TimerStage timerStage,
+            Duration elapsedWarmupTime,
+            Duration elapsedTime,
+            DateTime? startTime,
+            DateTime? endTime)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TimerState():
+        return $default(
+            _that.timerSettings,
+            _that.timerStatus,
+            _that.timerStage,
+            _that.elapsedWarmupTime,
+            _that.elapsedTime,
+            _that.startTime,
+            _that.endTime);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            TimerSettings timerSettings,
+            TimerStatus timerStatus,
+            TimerStage timerStage,
+            Duration elapsedWarmupTime,
+            Duration elapsedTime,
+            DateTime? startTime,
+            DateTime? endTime)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TimerState() when $default != null:
+        return $default(
+            _that.timerSettings,
+            _that.timerStatus,
+            _that.timerStage,
+            _that.elapsedWarmupTime,
+            _that.elapsedTime,
+            _that.startTime,
+            _that.endTime);
+      case _:
+        return null;
+    }
   }
 }
 

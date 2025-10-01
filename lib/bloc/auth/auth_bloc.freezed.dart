@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -38,6 +37,325 @@ mixin _$AuthEvent implements DiagnosticableTreeMixin {
 /// @nodoc
 class $AuthEventCopyWith<$Res> {
   $AuthEventCopyWith(AuthEvent _, $Res Function(AuthEvent) __);
+}
+
+/// Adds pattern-matching-related methods to [AuthEvent].
+extension AuthEventPatterns on AuthEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitializeAuth value)? initializeAuth,
+    TResult Function(SigninWithGoogle value)? signinWithGoogle,
+    TResult Function(SigninWithApple value)? signinWithApple,
+    TResult Function(SigninWithEmailAndPassword value)?
+        signinWithEmailAndPassword,
+    TResult Function(SignOut value)? signOut,
+    TResult Function(DismissSigninError value)? dismissSigninError,
+    TResult Function(ReceiveAuthStateChange value)? receiveAuthStateChange,
+    TResult Function(ReceiveUserChange value)? receiveUserChange,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case InitializeAuth() when initializeAuth != null:
+        return initializeAuth(_that);
+      case SigninWithGoogle() when signinWithGoogle != null:
+        return signinWithGoogle(_that);
+      case SigninWithApple() when signinWithApple != null:
+        return signinWithApple(_that);
+      case SigninWithEmailAndPassword() when signinWithEmailAndPassword != null:
+        return signinWithEmailAndPassword(_that);
+      case SignOut() when signOut != null:
+        return signOut(_that);
+      case DismissSigninError() when dismissSigninError != null:
+        return dismissSigninError(_that);
+      case ReceiveAuthStateChange() when receiveAuthStateChange != null:
+        return receiveAuthStateChange(_that);
+      case ReceiveUserChange() when receiveUserChange != null:
+        return receiveUserChange(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitializeAuth value) initializeAuth,
+    required TResult Function(SigninWithGoogle value) signinWithGoogle,
+    required TResult Function(SigninWithApple value) signinWithApple,
+    required TResult Function(SigninWithEmailAndPassword value)
+        signinWithEmailAndPassword,
+    required TResult Function(SignOut value) signOut,
+    required TResult Function(DismissSigninError value) dismissSigninError,
+    required TResult Function(ReceiveAuthStateChange value)
+        receiveAuthStateChange,
+    required TResult Function(ReceiveUserChange value) receiveUserChange,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case InitializeAuth():
+        return initializeAuth(_that);
+      case SigninWithGoogle():
+        return signinWithGoogle(_that);
+      case SigninWithApple():
+        return signinWithApple(_that);
+      case SigninWithEmailAndPassword():
+        return signinWithEmailAndPassword(_that);
+      case SignOut():
+        return signOut(_that);
+      case DismissSigninError():
+        return dismissSigninError(_that);
+      case ReceiveAuthStateChange():
+        return receiveAuthStateChange(_that);
+      case ReceiveUserChange():
+        return receiveUserChange(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitializeAuth value)? initializeAuth,
+    TResult? Function(SigninWithGoogle value)? signinWithGoogle,
+    TResult? Function(SigninWithApple value)? signinWithApple,
+    TResult? Function(SigninWithEmailAndPassword value)?
+        signinWithEmailAndPassword,
+    TResult? Function(SignOut value)? signOut,
+    TResult? Function(DismissSigninError value)? dismissSigninError,
+    TResult? Function(ReceiveAuthStateChange value)? receiveAuthStateChange,
+    TResult? Function(ReceiveUserChange value)? receiveUserChange,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case InitializeAuth() when initializeAuth != null:
+        return initializeAuth(_that);
+      case SigninWithGoogle() when signinWithGoogle != null:
+        return signinWithGoogle(_that);
+      case SigninWithApple() when signinWithApple != null:
+        return signinWithApple(_that);
+      case SigninWithEmailAndPassword() when signinWithEmailAndPassword != null:
+        return signinWithEmailAndPassword(_that);
+      case SignOut() when signOut != null:
+        return signOut(_that);
+      case DismissSigninError() when dismissSigninError != null:
+        return dismissSigninError(_that);
+      case ReceiveAuthStateChange() when receiveAuthStateChange != null:
+        return receiveAuthStateChange(_that);
+      case ReceiveUserChange() when receiveUserChange != null:
+        return receiveUserChange(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initializeAuth,
+    TResult Function(void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)?
+        signinWithGoogle,
+    TResult Function(void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)?
+        signinWithApple,
+    TResult Function(
+            String email,
+            String password,
+            void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)?
+        signinWithEmailAndPassword,
+    TResult Function(Function()? onSignedOut)? signOut,
+    TResult Function()? dismissSigninError,
+    TResult Function(User? user)? receiveAuthStateChange,
+    TResult Function(User? user)? receiveUserChange,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case InitializeAuth() when initializeAuth != null:
+        return initializeAuth();
+      case SigninWithGoogle() when signinWithGoogle != null:
+        return signinWithGoogle(_that.onComplete, _that.onError);
+      case SigninWithApple() when signinWithApple != null:
+        return signinWithApple(_that.onComplete, _that.onError);
+      case SigninWithEmailAndPassword() when signinWithEmailAndPassword != null:
+        return signinWithEmailAndPassword(
+            _that.email, _that.password, _that.onComplete, _that.onError);
+      case SignOut() when signOut != null:
+        return signOut(_that.onSignedOut);
+      case DismissSigninError() when dismissSigninError != null:
+        return dismissSigninError();
+      case ReceiveAuthStateChange() when receiveAuthStateChange != null:
+        return receiveAuthStateChange(_that.user);
+      case ReceiveUserChange() when receiveUserChange != null:
+        return receiveUserChange(_that.user);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initializeAuth,
+    required TResult Function(
+            void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)
+        signinWithGoogle,
+    required TResult Function(
+            void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)
+        signinWithApple,
+    required TResult Function(
+            String email,
+            String password,
+            void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)
+        signinWithEmailAndPassword,
+    required TResult Function(Function()? onSignedOut) signOut,
+    required TResult Function() dismissSigninError,
+    required TResult Function(User? user) receiveAuthStateChange,
+    required TResult Function(User? user) receiveUserChange,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case InitializeAuth():
+        return initializeAuth();
+      case SigninWithGoogle():
+        return signinWithGoogle(_that.onComplete, _that.onError);
+      case SigninWithApple():
+        return signinWithApple(_that.onComplete, _that.onError);
+      case SigninWithEmailAndPassword():
+        return signinWithEmailAndPassword(
+            _that.email, _that.password, _that.onComplete, _that.onError);
+      case SignOut():
+        return signOut(_that.onSignedOut);
+      case DismissSigninError():
+        return dismissSigninError();
+      case ReceiveAuthStateChange():
+        return receiveAuthStateChange(_that.user);
+      case ReceiveUserChange():
+        return receiveUserChange(_that.user);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initializeAuth,
+    TResult? Function(void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)?
+        signinWithGoogle,
+    TResult? Function(void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)?
+        signinWithApple,
+    TResult? Function(
+            String email,
+            String password,
+            void Function(User user, bool isFirstSignin)? onComplete,
+            void Function(Object? error, StackTrace stackTrace)? onError)?
+        signinWithEmailAndPassword,
+    TResult? Function(Function()? onSignedOut)? signOut,
+    TResult? Function()? dismissSigninError,
+    TResult? Function(User? user)? receiveAuthStateChange,
+    TResult? Function(User? user)? receiveUserChange,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case InitializeAuth() when initializeAuth != null:
+        return initializeAuth();
+      case SigninWithGoogle() when signinWithGoogle != null:
+        return signinWithGoogle(_that.onComplete, _that.onError);
+      case SigninWithApple() when signinWithApple != null:
+        return signinWithApple(_that.onComplete, _that.onError);
+      case SigninWithEmailAndPassword() when signinWithEmailAndPassword != null:
+        return signinWithEmailAndPassword(
+            _that.email, _that.password, _that.onComplete, _that.onError);
+      case SignOut() when signOut != null:
+        return signOut(_that.onSignedOut);
+      case DismissSigninError() when dismissSigninError != null:
+        return dismissSigninError();
+      case ReceiveAuthStateChange() when receiveAuthStateChange != null:
+        return receiveAuthStateChange(_that.user);
+      case ReceiveUserChange() when receiveUserChange != null:
+        return receiveUserChange(_that.user);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
@@ -603,6 +921,231 @@ mixin _$AuthState implements DiagnosticableTreeMixin {
 /// @nodoc
 class $AuthStateCopyWith<$Res> {
   $AuthStateCopyWith(AuthState _, $Res Function(AuthState) __);
+}
+
+/// Adds pattern-matching-related methods to [AuthState].
+extension AuthStatePatterns on AuthState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthStateInitial value)? initial,
+    TResult Function(AuthStateSignedOut value)? signedOut,
+    TResult Function(AuthStateSigningIn value)? signingIn,
+    TResult Function(AuthStateSignedIn value)? signedIn,
+    TResult Function(AuthStateErrorOccured value)? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case AuthStateInitial() when initial != null:
+        return initial(_that);
+      case AuthStateSignedOut() when signedOut != null:
+        return signedOut(_that);
+      case AuthStateSigningIn() when signingIn != null:
+        return signingIn(_that);
+      case AuthStateSignedIn() when signedIn != null:
+        return signedIn(_that);
+      case AuthStateErrorOccured() when error != null:
+        return error(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthStateInitial value) initial,
+    required TResult Function(AuthStateSignedOut value) signedOut,
+    required TResult Function(AuthStateSigningIn value) signingIn,
+    required TResult Function(AuthStateSignedIn value) signedIn,
+    required TResult Function(AuthStateErrorOccured value) error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case AuthStateInitial():
+        return initial(_that);
+      case AuthStateSignedOut():
+        return signedOut(_that);
+      case AuthStateSigningIn():
+        return signingIn(_that);
+      case AuthStateSignedIn():
+        return signedIn(_that);
+      case AuthStateErrorOccured():
+        return error(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthStateInitial value)? initial,
+    TResult? Function(AuthStateSignedOut value)? signedOut,
+    TResult? Function(AuthStateSigningIn value)? signingIn,
+    TResult? Function(AuthStateSignedIn value)? signedIn,
+    TResult? Function(AuthStateErrorOccured value)? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case AuthStateInitial() when initial != null:
+        return initial(_that);
+      case AuthStateSignedOut() when signedOut != null:
+        return signedOut(_that);
+      case AuthStateSigningIn() when signingIn != null:
+        return signingIn(_that);
+      case AuthStateSignedIn() when signedIn != null:
+        return signedIn(_that);
+      case AuthStateErrorOccured() when error != null:
+        return error(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signedOut,
+    TResult Function()? signingIn,
+    TResult Function(User user)? signedIn,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case AuthStateInitial() when initial != null:
+        return initial();
+      case AuthStateSignedOut() when signedOut != null:
+        return signedOut();
+      case AuthStateSigningIn() when signingIn != null:
+        return signingIn();
+      case AuthStateSignedIn() when signedIn != null:
+        return signedIn(_that.user);
+      case AuthStateErrorOccured() when error != null:
+        return error();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signedOut,
+    required TResult Function() signingIn,
+    required TResult Function(User user) signedIn,
+    required TResult Function() error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case AuthStateInitial():
+        return initial();
+      case AuthStateSignedOut():
+        return signedOut();
+      case AuthStateSigningIn():
+        return signingIn();
+      case AuthStateSignedIn():
+        return signedIn(_that.user);
+      case AuthStateErrorOccured():
+        return error();
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signedOut,
+    TResult? Function()? signingIn,
+    TResult? Function(User user)? signedIn,
+    TResult? Function()? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case AuthStateInitial() when initial != null:
+        return initial();
+      case AuthStateSignedOut() when signedOut != null:
+        return signedOut();
+      case AuthStateSigningIn() when signingIn != null:
+        return signingIn();
+      case AuthStateSignedIn() when signedIn != null:
+        return signedIn(_that.user);
+      case AuthStateErrorOccured() when error != null:
+        return error();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc

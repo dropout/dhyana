@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -33,6 +32,208 @@ mixin _$DaysEvent {
 /// @nodoc
 class $DaysEventCopyWith<$Res> {
   $DaysEventCopyWith(DaysEvent _, $Res Function(DaysEvent) __);
+}
+
+/// Adds pattern-matching-related methods to [DaysEvent].
+extension DaysEventPatterns on DaysEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QueryDaysEvent value)? queryDays,
+    TResult Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
+    TResult Function(DaysErrorEvent value)? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case QueryDaysEvent() when queryDays != null:
+        return queryDays(_that);
+      case ReceiveUpdateDaysEvent() when receiveUpdate != null:
+        return receiveUpdate(_that);
+      case DaysErrorEvent() when error != null:
+        return error(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QueryDaysEvent value) queryDays,
+    required TResult Function(ReceiveUpdateDaysEvent value) receiveUpdate,
+    required TResult Function(DaysErrorEvent value) error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case QueryDaysEvent():
+        return queryDays(_that);
+      case ReceiveUpdateDaysEvent():
+        return receiveUpdate(_that);
+      case DaysErrorEvent():
+        return error(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(QueryDaysEvent value)? queryDays,
+    TResult? Function(ReceiveUpdateDaysEvent value)? receiveUpdate,
+    TResult? Function(DaysErrorEvent value)? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case QueryDaysEvent() when queryDays != null:
+        return queryDays(_that);
+      case ReceiveUpdateDaysEvent() when receiveUpdate != null:
+        return receiveUpdate(_that);
+      case DaysErrorEvent() when error != null:
+        return error(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String profileId, DateTime from, DateTime to, bool useStream)?
+        queryDays,
+    TResult Function(List<Day> days)? receiveUpdate,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case QueryDaysEvent() when queryDays != null:
+        return queryDays(
+            _that.profileId, _that.from, _that.to, _that.useStream);
+      case ReceiveUpdateDaysEvent() when receiveUpdate != null:
+        return receiveUpdate(_that.days);
+      case DaysErrorEvent() when error != null:
+        return error();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String profileId, DateTime from, DateTime to, bool useStream)
+        queryDays,
+    required TResult Function(List<Day> days) receiveUpdate,
+    required TResult Function() error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case QueryDaysEvent():
+        return queryDays(
+            _that.profileId, _that.from, _that.to, _that.useStream);
+      case ReceiveUpdateDaysEvent():
+        return receiveUpdate(_that.days);
+      case DaysErrorEvent():
+        return error();
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String profileId, DateTime from, DateTime to, bool useStream)?
+        queryDays,
+    TResult? Function(List<Day> days)? receiveUpdate,
+    TResult? Function()? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case QueryDaysEvent() when queryDays != null:
+        return queryDays(
+            _that.profileId, _that.from, _that.to, _that.useStream);
+      case ReceiveUpdateDaysEvent() when receiveUpdate != null:
+        return receiveUpdate(_that.days);
+      case DaysErrorEvent() when error != null:
+        return error();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
@@ -241,6 +442,201 @@ mixin _$DaysState {
 /// @nodoc
 class $DaysStateCopyWith<$Res> {
   $DaysStateCopyWith(DaysState _, $Res Function(DaysState) __);
+}
+
+/// Adds pattern-matching-related methods to [DaysState].
+extension DaysStatePatterns on DaysState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DaysLoadingState value)? loading,
+    TResult Function(DaysLoadedState value)? loaded,
+    TResult Function(DaysLoadingErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DaysLoadingState() when loading != null:
+        return loading(_that);
+      case DaysLoadedState() when loaded != null:
+        return loaded(_that);
+      case DaysLoadingErrorState() when error != null:
+        return error(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DaysLoadingState value) loading,
+    required TResult Function(DaysLoadedState value) loaded,
+    required TResult Function(DaysLoadingErrorState value) error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DaysLoadingState():
+        return loading(_that);
+      case DaysLoadedState():
+        return loaded(_that);
+      case DaysLoadingErrorState():
+        return error(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DaysLoadingState value)? loading,
+    TResult? Function(DaysLoadedState value)? loaded,
+    TResult? Function(DaysLoadingErrorState value)? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DaysLoadingState() when loading != null:
+        return loading(_that);
+      case DaysLoadedState() when loaded != null:
+        return loaded(_that);
+      case DaysLoadingErrorState() when error != null:
+        return error(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(DateTime from, DateTime to, List<Day> days,
+            CalculatedStats calculatedStats)?
+        loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DaysLoadingState() when loading != null:
+        return loading();
+      case DaysLoadedState() when loaded != null:
+        return loaded(_that.from, _that.to, _that.days, _that.calculatedStats);
+      case DaysLoadingErrorState() when error != null:
+        return error();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(DateTime from, DateTime to, List<Day> days,
+            CalculatedStats calculatedStats)
+        loaded,
+    required TResult Function() error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DaysLoadingState():
+        return loading();
+      case DaysLoadedState():
+        return loaded(_that.from, _that.to, _that.days, _that.calculatedStats);
+      case DaysLoadingErrorState():
+        return error();
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(DateTime from, DateTime to, List<Day> days,
+            CalculatedStats calculatedStats)?
+        loaded,
+    TResult? Function()? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DaysLoadingState() when loading != null:
+        return loading();
+      case DaysLoadedState() when loaded != null:
+        return loaded(_that.from, _that.to, _that.days, _that.calculatedStats);
+      case DaysLoadingErrorState() when error != null:
+        return error();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc

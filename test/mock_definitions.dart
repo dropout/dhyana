@@ -30,6 +30,10 @@ class MockTimerBloc
   extends MockBloc<TimerEvent, TimerState>
   implements TimerBloc {}
 
+class MockSessionCompletedBloc
+  extends MockBloc<SessionCompletedEvent, SessionCompletedState>
+  implements SessionCompletedBloc {}
+
 // Services --------------------------------------------------------------------
 
 class MockServices

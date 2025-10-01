@@ -112,6 +112,24 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sessions => 'Ülések';
 
   @override
+  String get sessionResultCompleted => 'Teljesítettél';
+
+  @override
+  String sessionResultMinutes(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'percet',
+      many: 'percet',
+      few: 'percet',
+      two: 'percet',
+      one: 'percet',
+      zero: 'percet',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get timerFinishSessionButtonText => 'Befejezés';
 
   @override

@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -33,6 +32,274 @@ mixin _$ProfileEvent {
 /// @nodoc
 class $ProfileEventCopyWith<$Res> {
   $ProfileEventCopyWith(ProfileEvent _, $Res Function(ProfileEvent) __);
+}
+
+/// Adds pattern-matching-related methods to [ProfileEvent].
+extension ProfileEventPatterns on ProfileEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProfile value)? loadProfile,
+    TResult Function(UpdateProfile value)? updateProfile,
+    TResult Function(ProfileErrorOccured value)? error,
+    TResult Function(ClearProfileData value)? clearData,
+    TResult Function(ValidateProfileStats value)? validateProfileStats,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case LoadProfile() when loadProfile != null:
+        return loadProfile(_that);
+      case UpdateProfile() when updateProfile != null:
+        return updateProfile(_that);
+      case ProfileErrorOccured() when error != null:
+        return error(_that);
+      case ClearProfileData() when clearData != null:
+        return clearData(_that);
+      case ValidateProfileStats() when validateProfileStats != null:
+        return validateProfileStats(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadProfile value) loadProfile,
+    required TResult Function(UpdateProfile value) updateProfile,
+    required TResult Function(ProfileErrorOccured value) error,
+    required TResult Function(ClearProfileData value) clearData,
+    required TResult Function(ValidateProfileStats value) validateProfileStats,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case LoadProfile():
+        return loadProfile(_that);
+      case UpdateProfile():
+        return updateProfile(_that);
+      case ProfileErrorOccured():
+        return error(_that);
+      case ClearProfileData():
+        return clearData(_that);
+      case ValidateProfileStats():
+        return validateProfileStats(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadProfile value)? loadProfile,
+    TResult? Function(UpdateProfile value)? updateProfile,
+    TResult? Function(ProfileErrorOccured value)? error,
+    TResult? Function(ClearProfileData value)? clearData,
+    TResult? Function(ValidateProfileStats value)? validateProfileStats,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case LoadProfile() when loadProfile != null:
+        return loadProfile(_that);
+      case UpdateProfile() when updateProfile != null:
+        return updateProfile(_that);
+      case ProfileErrorOccured() when error != null:
+        return error(_that);
+      case ClearProfileData() when clearData != null:
+        return clearData(_that);
+      case ValidateProfileStats() when validateProfileStats != null:
+        return validateProfileStats(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        loadProfile,
+    TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile profile)? onComplete,
+            void Function(Object? error, StackTrace stack)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult Function()? error,
+    TResult Function()? clearData,
+    TResult Function()? validateProfileStats,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case LoadProfile() when loadProfile != null:
+        return loadProfile(
+            _that.profileId, _that.profile, _that.onComplete, _that.onError);
+      case UpdateProfile() when updateProfile != null:
+        return updateProfile(_that.profile, _that.formData, _that.onComplete,
+            _that.onError, _that.completeProfile);
+      case ProfileErrorOccured() when error != null:
+        return error();
+      case ClearProfileData() when clearData != null:
+        return clearData();
+      case ValidateProfileStats() when validateProfileStats != null:
+        return validateProfileStats();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)
+        loadProfile,
+    required TResult Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile profile)? onComplete,
+            void Function(Object? error, StackTrace stack)? onError,
+            bool completeProfile)
+        updateProfile,
+    required TResult Function() error,
+    required TResult Function() clearData,
+    required TResult Function() validateProfileStats,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case LoadProfile():
+        return loadProfile(
+            _that.profileId, _that.profile, _that.onComplete, _that.onError);
+      case UpdateProfile():
+        return updateProfile(_that.profile, _that.formData, _that.onComplete,
+            _that.onError, _that.completeProfile);
+      case ProfileErrorOccured():
+        return error();
+      case ClearProfileData():
+        return clearData();
+      case ValidateProfileStats():
+        return validateProfileStats();
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String profileId,
+            Profile? profile,
+            void Function(Profile)? onComplete,
+            void Function(Object?, StackTrace)? onError)?
+        loadProfile,
+    TResult? Function(
+            Profile profile,
+            Map<String, dynamic> formData,
+            void Function(Profile profile)? onComplete,
+            void Function(Object? error, StackTrace stack)? onError,
+            bool completeProfile)?
+        updateProfile,
+    TResult? Function()? error,
+    TResult? Function()? clearData,
+    TResult? Function()? validateProfileStats,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case LoadProfile() when loadProfile != null:
+        return loadProfile(
+            _that.profileId, _that.profile, _that.onComplete, _that.onError);
+      case UpdateProfile() when updateProfile != null:
+        return updateProfile(_that.profile, _that.formData, _that.onComplete,
+            _that.onError, _that.completeProfile);
+      case ProfileErrorOccured() when error != null:
+        return error();
+      case ClearProfileData() when clearData != null:
+        return clearData();
+      case ValidateProfileStats() when validateProfileStats != null:
+        return validateProfileStats();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
@@ -355,6 +622,213 @@ mixin _$ProfileState {
 /// @nodoc
 class $ProfileStateCopyWith<$Res> {
   $ProfileStateCopyWith(ProfileState _, $Res Function(ProfileState) __);
+}
+
+/// Adds pattern-matching-related methods to [ProfileState].
+extension ProfileStatePatterns on ProfileState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileStateInitial value)? initial,
+    TResult Function(ProfileLoadingState value)? loading,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ProfileStateInitial() when initial != null:
+        return initial(_that);
+      case ProfileLoadingState() when loading != null:
+        return loading(_that);
+      case ProfileLoadedState() when loaded != null:
+        return loaded(_that);
+      case ProfileErrorState() when error != null:
+        return error(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileStateInitial value) initial,
+    required TResult Function(ProfileLoadingState value) loading,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileErrorState value) error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ProfileStateInitial():
+        return initial(_that);
+      case ProfileLoadingState():
+        return loading(_that);
+      case ProfileLoadedState():
+        return loaded(_that);
+      case ProfileErrorState():
+        return error(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateInitial value)? initial,
+    TResult? Function(ProfileLoadingState value)? loading,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileErrorState value)? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ProfileStateInitial() when initial != null:
+        return initial(_that);
+      case ProfileLoadingState() when loading != null:
+        return loading(_that);
+      case ProfileLoadedState() when loaded != null:
+        return loaded(_that);
+      case ProfileErrorState() when error != null:
+        return error(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Profile profile)? loaded,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ProfileStateInitial() when initial != null:
+        return initial();
+      case ProfileLoadingState() when loading != null:
+        return loading();
+      case ProfileLoadedState() when loaded != null:
+        return loaded(_that.profile);
+      case ProfileErrorState() when error != null:
+        return error();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Profile profile) loaded,
+    required TResult Function() error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ProfileStateInitial():
+        return initial();
+      case ProfileLoadingState():
+        return loading();
+      case ProfileLoadedState():
+        return loaded(_that.profile);
+      case ProfileErrorState():
+        return error();
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Profile profile)? loaded,
+    TResult? Function()? error,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ProfileStateInitial() when initial != null:
+        return initial();
+      case ProfileLoadingState() when loading != null:
+        return loading();
+      case ProfileLoadedState() when loaded != null:
+        return loaded(_that.profile);
+      case ProfileErrorState() when error != null:
+        return error();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc

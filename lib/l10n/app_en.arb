@@ -42,6 +42,9 @@
   "session": "Session",
   "sessions": "Sessions",
 
+  "sessionResultCompleted": "Completed",
+  "sessionResultMinutes": "{count, plural, =0{minute} =1{minute} =2{minutes} few{minutes} many{minutes} other{minutes}}",
+
   "timerFinishSessionButtonText": "Finish session",
   "timerDiscardSessionButtonText": "Discard session",
 
