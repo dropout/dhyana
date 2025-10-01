@@ -8,8 +8,6 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/bloc_provider/timer_bloc_providers.dart';
-import 'package:dhyana/widget/screen/timer_screen.dart';
-import 'package:dhyana/widget/timer/timer_running_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

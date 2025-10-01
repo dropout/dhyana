@@ -5,7 +5,6 @@ import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/id_generator_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

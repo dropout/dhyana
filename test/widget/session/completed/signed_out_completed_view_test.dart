@@ -3,7 +3,6 @@ import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/session/completed/session_result.dart';
 import 'package:dhyana/widget/session/completed/signed_out_completed_view.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 
 import '../../../test_context_providers.dart';
 

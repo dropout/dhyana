@@ -5,7 +5,6 @@ import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
-import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';

@@ -1,7 +1,6 @@
 import 'package:dhyana/service/default_shader_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/service/id_generator_service.dart';
 
 abstract class Services {
   AnalyticsService get analyticsService;

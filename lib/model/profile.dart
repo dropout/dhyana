@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/default_profile_data.dart';

@@ -1,22 +1,15 @@
-import 'package:dhyana/bloc/presence/presence_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/bloc/session_completed/session_completed_bloc.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/update_profile_stats_result.dart';
 import 'package:dhyana/widget/presence/presence_area.dart';
-import 'package:dhyana/widget/profile/profile_avatar.dart';
 import 'package:dhyana/widget/session/all.dart';
-import 'package:dhyana/widget/session/completed/session_result.dart';
-import 'package:dhyana/widget/session/completed/signed_in_completed_view.dart';
-import 'package:dhyana/widget/session/completed/signed_out_completed_view.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +20,6 @@ void main() {
 
   late MockProfileBloc mockProfileBloc;
   late MockSessionCompletedBloc mockSessionCompletedBloc;
-  late MockPresenceBloc mockPresenceBloc;
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
