@@ -179,15 +179,17 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
 
   Widget _buildIncomplete() {
     return DecoratedBox(
-        decoration: BoxDecoration(
-          color: widget.incompleteColor,
-          shape: BoxShape.circle,
-        )
+      key: const Key('milestone_progress_view_item_incomplete'),
+      decoration: BoxDecoration(
+        color: widget.incompleteColor,
+        shape: BoxShape.circle,
+      )
     );
   }
 
   Widget _buildCompleted() {
     return DecoratedBox(
+      key: const Key('milestone_progress_view_item_completed'),
       decoration: BoxDecoration(
         color: widget.completedColor,
         shape: BoxShape.circle,
@@ -200,11 +202,11 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
 
   Widget _buildAnimated() {
     return Stack(
+      key: const Key('milestone_progress_view_item_animated'),
       fit: StackFit.expand, // re-expand to fill the parent
       children: [
         _buildIncomplete(),
         ParticleField(controller: particleController),
-
         AnimatedBuilder(
           animation: _circleAnimation,
           builder: (BuildContext context, Widget? child) {

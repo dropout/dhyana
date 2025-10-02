@@ -1,6 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
@@ -34,13 +35,14 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
     return Column(
       children: [
         Row(
+          key: const Key('milestone_progress_view_row'),
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: AppThemeData.spacingXs,
           children: buildMilestoneItems(context),
         ),
         Gap.small(),
-        buildMilestoneText(context),
+        if (widget.showText) buildMilestoneText(context),
       ],
     );
   }
@@ -100,7 +102,8 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
 
   Widget buildMilestoneText(BuildContext context) {
     return Text(
-      AppLocalizations.of(context).statsNextMilestoneIn(
+      key: const Key('milestone_progress_view_text'),
+      context.localizations.statsNextMilestoneIn(
         widget.profile.statsReport.milestoneProgress.remainingDaysCount
       ),
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
