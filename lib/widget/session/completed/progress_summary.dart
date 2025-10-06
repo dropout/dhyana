@@ -32,6 +32,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
         children: [
           Expanded(
             child: ProgressSummaryItem(
+              key: const Key('progress_summary_sessions'),
               oldValue: widget.oldProfile.statsReport.completedSessionsCount,
               newValue: widget.updatedProfile.statsReport.completedSessionsCount,
               label: AppLocalizations.of(context).sessionsPlural(
@@ -43,6 +44,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
           const SizedBox(width: AppThemeData.spacingMd),
           Expanded(
             child: ProgressSummaryItem(
+              key: const Key('progress_summary_minutes'),
               oldValue: widget.oldProfile.statsReport.completedMinutesCount,
               newValue: widget.updatedProfile.statsReport.completedMinutesCount,
               label: AppLocalizations.of(context).minutesPlural(
@@ -54,6 +56,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
           const SizedBox(width: AppThemeData.spacingMd),
           Expanded(
             child: ProgressSummaryItem(
+              key: const Key('progress_summary_days'),
               oldValue: widget.oldProfile.statsReport.completedDaysCount,
               newValue: widget.updatedProfile.statsReport.completedDaysCount,
               label: AppLocalizations.of(context).daysPlural(

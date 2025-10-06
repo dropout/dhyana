@@ -70,7 +70,7 @@ with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
-    String old = getLocalizedRoundedNumber(
+    String oldValue = getLocalizedRoundedNumber(
       context,
       widget.oldValue,
       shorten: true
@@ -91,11 +91,11 @@ with SingleTickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 8),
-              FlipWidget(
+              FlipWidget<String>(
                 flipType: FlipType.spinFlip,
                 itemStream: Stream.fromIterable([newVal]),
                 itemBuilder: buildItem,
-                initialValue: old,
+                initialValue: oldValue,
                 flipDirection: AxisDirection.up,
               ),
               const SizedBox(height: 8),
@@ -117,6 +117,7 @@ with SingleTickerProviderStateMixin {
   Widget buildItem(BuildContext context, String? value) {
     return Center(
       child: Text(
+        key: const Key('progress_summary_item_value_text'),
         value ?? '',
         textAlign: TextAlign.center,
         style: const TextStyle(
@@ -142,6 +143,7 @@ with SingleTickerProviderStateMixin {
                     scale: animationController.isForwardOrCompleted ?
                     showAnimation.value : hideAnimation.value,
                     child: DecoratedBox(
+                      key: const Key('progress_summary_item_diff_indicator'),
                       decoration: ShapeDecoration(
                         shape: StadiumBorder(),
                         color: Colors.green,
@@ -170,6 +172,12 @@ with SingleTickerProviderStateMixin {
     } else {
       return SizedBox.shrink();
     }
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
 }

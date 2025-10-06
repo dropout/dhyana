@@ -1,8 +1,6 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
 import 'milestone_progress_view_item.dart';

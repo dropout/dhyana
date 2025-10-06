@@ -1,15 +1,11 @@
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/profile/profile_avatar.dart';
 import 'package:dhyana/widget/session/completed/milestone_progress_view.dart';
 import 'package:dhyana/widget/session/completed/milestone_progress_view_item.dart';
-import 'package:dhyana/widget/session/completed/session_result.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:particle_field/particle_field.dart';
 import 'package:provider/provider.dart';
 
 import '../../../mock_definitions.dart';
