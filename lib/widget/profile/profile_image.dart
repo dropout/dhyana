@@ -35,6 +35,7 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      key: const Key('profile_image_sized_box'),
       width: size,
       height: size,
       child: AppCachedNetworkImage(
@@ -45,6 +46,9 @@ class ProfileImage extends StatelessWidget {
     );
   }
 
+  // Maybe useful later...
+  // Efficient way to create a circular image from any ImageProvider
+  // No clipping involved
   Widget buildCircularImage(BuildContext context, ImageProvider imageProvider) {
     return DecoratedBox(
       decoration: BoxDecoration(
