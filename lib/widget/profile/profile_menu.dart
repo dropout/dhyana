@@ -44,7 +44,6 @@ class ProfileMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
-
     return AppCard(
       padding: EdgeInsets.zero,
       child: Column(
@@ -55,6 +54,7 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => _onEditProfileTapped(context),
+            key: const Key('profile_menu_edit_profile_tile'),
           ),
           const Divider(height: 0),
           _buildTile(
@@ -63,6 +63,7 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => _onSessionHistoryTapped(context),
+            key: const Key('profile_menu_session_history_tile'),
           ),
           const Divider(height: 0),
           _buildTile(
@@ -71,6 +72,7 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => _onStatisticsTapped(context),
+            key: const Key('profile_menu_statistics_tile'),
           ),
           const Divider(height: 0),
           _buildTile(
@@ -79,6 +81,7 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => null,
+            key: const Key('profile_menu_donate_tile'),
           ),
           const Divider(height: 0),
           _buildTile(
@@ -87,6 +90,7 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => _onDeleteProfileTapped(context),
+            key: const Key('profile_menu_delete_profile_tile'),
           ),
           const Divider(height: 0),
           _buildTile(
@@ -95,6 +99,7 @@ class ProfileMenu extends StatelessWidget {
               style: textStyle,
             ),
             onTap: () => _onSignoutTapped(context),
+            key: const Key('profile_menu_signout_tile'),
           ),
         ],
       )
@@ -105,6 +110,7 @@ class ProfileMenu extends StatelessWidget {
   Widget _buildTile({
     required Widget title,
     required VoidCallback onTap,
+    Key? key,
   }) {
     return Material(
       borderRadius: const BorderRadius.all(
@@ -114,6 +120,7 @@ class ProfileMenu extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: ListTile(
+          key: key,
           title: title,
         ),
       ),
