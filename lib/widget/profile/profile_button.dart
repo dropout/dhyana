@@ -25,10 +25,7 @@ class ProfileButton extends StatelessWidget {
 
   void _signedInTap(BuildContext context, Profile profile) {
     if (profile.completed) {
-      ProfileRoute(
-        profileId: profile.id,
-        $extra: profile
-      ).push(context);
+      ProfileRoute(profileId: profile.id, $extra: profile).push(context);
     } else {
       ProfileWizardRoute(profileId: profile.id).push(context);
     }
@@ -55,6 +52,7 @@ class ProfileButton extends StatelessWidget {
             color: Colors.black
           ),
           child: Icon(
+            key: Key('profile_button_signed_out_icon'),
             Icons.account_circle_outlined,
             size: 40.0,
             color: AppColors.backgroundPaper,
@@ -65,6 +63,7 @@ class ProfileButton extends StatelessWidget {
             shape: const CircleBorder(),
             color: Colors.transparent,
             child: InkWell(
+              key: const Key('profile_button_signed_out_ink_well'),
               customBorder: const CircleBorder(),
               onTap: () => _signedOutTap(context),
             ),
@@ -120,6 +119,7 @@ class ProfileButton extends StatelessWidget {
             shape: const CircleBorder(),
             color: Colors.transparent,
             child: InkWell(
+              key: const Key('profile_button_signed_in_ink_well'),
               customBorder: const CircleBorder(),
               onTap: () => _signedInTap(context, profile),
             ),
@@ -133,8 +133,10 @@ class ProfileButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         ProfileRoute(profileId: profileId).go(context);
+        context.hapticsTap();
       },
       child: const Icon(
+        key: Key('profile_button_error_icon'),
         Icons.warning_amber_rounded,
         size: 40.0,
         color: Colors.black,
