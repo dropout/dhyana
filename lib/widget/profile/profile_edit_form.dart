@@ -1,6 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_colors.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:dhyana/widget/util/form_builder_image_picker.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context).profileImageLabel,
+            context.localizations.profileImageLabel,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           Gap.xs(),
@@ -68,8 +69,9 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               }
               if (snapshot.hasData) {
                 return FormBuilderImagePicker(
+                  key: const Key('profile_edit_form_image_picker'),
                   name: 'imageData',
-                  labelText: 'Profile image',
+                  labelText: context.localizations.profileImageLabel,
                   initialImageUrl: snapshot.data!,
                 );
               } else {
@@ -77,7 +79,6 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               }
             }
           ),
-          // buildNameDisplay(context),
           Gap.medium(),
           ...buildNameInputs(context),
         ],
@@ -86,33 +87,38 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
   }
 
   List<Widget> buildNameInputs(BuildContext context) {
+    // First name first or last name first depending on locale
     Locale locale = Localizations.localeOf(context);
     if (locale.languageCode.toLowerCase() == 'hu' ) {
       return [
         buildTextInput(context,
           name: 'lastName',
-          label: AppLocalizations.of(context).profileLastnameLabel,
-          controller: lastNameTextController
+          label: context.localizations.profileLastnameLabel,
+          controller: lastNameTextController,
+          key: const Key('profile_edit_form_last_name_input'),
         ),
         Gap.medium(),
         buildTextInput(context,
           name: 'firstName',
-          label: AppLocalizations.of(context).profileFirstnameLabel,
-          controller: firstNameTextController
+          label: context.localizations.profileFirstnameLabel,
+          controller: firstNameTextController,
+          key: const Key('profile_edit_form_first_name_input'),
         ),
       ];
     } else {
       return [
         buildTextInput(context,
           name: 'firstName',
-          label: AppLocalizations.of(context).profileFirstnameLabel,
-          controller: firstNameTextController
+          label: context.localizations.profileFirstnameLabel,
+          controller: firstNameTextController,
+          key: const Key('profile_edit_form_first_name_input'),
         ),
         Gap.medium(),
         buildTextInput(context,
           name: 'lastName',
-          label: AppLocalizations.of(context).profileLastnameLabel,
-          controller: lastNameTextController
+          label: context.localizations.profileLastnameLabel,
+          controller: lastNameTextController,
+          key: const Key('profile_edit_form_last_name_input'),
         ),
       ];
     }
@@ -122,6 +128,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     required String name,
     required String label,
     required TextEditingController controller,
+    Key? key,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,6 +139,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         ),
         Gap.xs(),
         FormBuilderTextField(
+          key: key,
           name: name,
           controller: controller,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
