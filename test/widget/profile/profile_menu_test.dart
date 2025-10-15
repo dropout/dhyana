@@ -1,11 +1,7 @@
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
-import 'package:dhyana/widget/session/completed/progress_summary_item.dart';
-import 'package:dhyana/widget/util/app_cached_network_image.dart';
-import 'package:flip_board/flip_widget.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';

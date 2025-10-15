@@ -60,6 +60,7 @@ class _ConsecutiveDaysViewState extends State<ConsecutiveDaysView> {
     );
   }
 
+  // not in use currently
   Widget buildConsecutiveDaysStartTime(BuildContext context) {
     final ConsecutiveDays consecutiveDays =
       widget.profile.statsReport.consecutiveDays;

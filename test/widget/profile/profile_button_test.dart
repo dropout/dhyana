@@ -4,15 +4,10 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/util/default_profile_data.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/profile/profile_avatar.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/session/completed/progress_summary_item.dart';
 import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/app_cached_network_image.dart';
-import 'package:flip_board/flip_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +103,7 @@ void main() {
 
     testWidgets('will show loading state when profile is loading', (WidgetTester tester) async {
 
-      final Profile profile = FakeModelFactory().createProfile();
+      FakeModelFactory().createProfile();
       final User user = FakeModelFactory().createUser();
 
       when(() => mockAuthBloc.state)
@@ -139,7 +134,7 @@ void main() {
 
     testWidgets('will show error state when profile loading failed', (WidgetTester tester) async {
 
-      final Profile profile = FakeModelFactory().createProfile();
+      FakeModelFactory().createProfile();
       final User user = FakeModelFactory().createUser();
 
       when(() => mockAuthBloc.state)

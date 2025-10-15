@@ -8,8 +8,6 @@ import 'package:dhyana/widget/util/form_builder_image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
 import 'package:provider/provider.dart';
@@ -51,17 +49,6 @@ void main() {
     testWidgets('renders all form fields with default values', (WidgetTester tester) async {
 
       // https://firebasestorage.googleapis.com/v0/b/dhyana-timer.appspot.com/o/profiles%2Fdefault%2Fphoto.jpg?alt=media&token=0d5bb454-7ce3-4f27-9ccf-7822fd559bb4
-      final interceptor = nock('https://firebasestorage.googleapis.com')
-        .get('/v0/b/dhyana-timer.appspot.com/o/profiles%2Fdefault%2Fphoto.jpg')
-        ..query({'alt': 'media', 'token': '0d5bb454-7ce3-4f27-9ccf-7822fd559bb4'})
-        ..reply(
-          200,
-          base64Decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII='),
-          headers: {
-            'Content-Type': 'image/jpeg',
-            'Cache-Control': 'no-cache',
-          }
-        );
 
       await tester.pumpWidget(
         withAllContextProviders(

@@ -4,6 +4,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,11 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
     super.key
   });
 
+  ConsecutiveDays get consecutiveDays =>
+    profile.statsReport.consecutiveDays;
+
   @override
   Widget build(BuildContext context) {
-    final ConsecutiveDays consecutiveDays =
-      profile.statsReport.consecutiveDays;
 
     return AppCard(
         title: AppLocalizations.of(context).consecutiveDays,
@@ -31,19 +33,19 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
         child: Column(
           children: [
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsCurrentStreak,
+              label: context.localizations.statsCurrentStreak,
               value: consecutiveDays.current.toString(),
             ),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsStartedAt,
+              label: context.localizations.statsStartedAt,
               value: getStartedAtString(context),
             ),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsLastCheckedAt,
+              label: context.localizations.statsLastCheckedAt,
               value: getLastCheckedTimeString(context),
             ),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsLongestStreak,
+              label: context.localizations.statsLongestStreak,
               value: consecutiveDays.longest.toString(),
             ),
           ],
@@ -52,22 +54,18 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
   }
 
   String getStartedAtString(BuildContext context) {
-    final ConsecutiveDays consecutiveDays =
-        profile.statsReport.consecutiveDays;
     if (consecutiveDays.current > 0 && consecutiveDays.startedAt != null) {
       return consecutiveDays.startedAt!.toFormattedDateTimeString(context);
     } else {
-      return AppLocalizations.of(context).notAvailableAbbr;
+      return context.localizations.notAvailableAbbr;
     }
   }
 
   String getLastCheckedTimeString(BuildContext context) {
-    final ConsecutiveDays consecutiveDays =
-        profile.statsReport.consecutiveDays;
     if (consecutiveDays.lastChecked != null) {
       return consecutiveDays.lastChecked!.toFormattedDateTimeString(context);
     } else {
-      return AppLocalizations.of(context).statsNotyetChecked;
+      return context.localizations.statsNotyetChecked;
     }
   }
 
