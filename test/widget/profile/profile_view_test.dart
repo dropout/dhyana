@@ -31,8 +31,8 @@ void main() {
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
       mockCacheManagerService = MockCacheManagerService();
-      mockCacheManager = MockCacheManager();
 
+      mockCacheManager = MockCacheManager();
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
       when(() => mockServices.cacheManagerService)

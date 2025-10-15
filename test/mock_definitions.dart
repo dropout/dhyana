@@ -6,7 +6,10 @@ import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
+
+class MockGoRouter extends Mock implements GoRouter {}
 
 // BLoCs -----------------------------------------------------------------------
 
