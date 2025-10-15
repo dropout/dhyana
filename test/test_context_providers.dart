@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+List<LocalizationsDelegate> getLocalizationDelegates() {
+  return const [
+    AppLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
+}
+
 Widget withLocalizationProvider(Widget child, {
   Locale locale = const Locale('hu', 'HU')
 }) {
   return Localizations(
-    delegates: const [
-      AppLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
+    delegates: getLocalizationDelegates(),
     locale: locale,
     child: child,
   );
