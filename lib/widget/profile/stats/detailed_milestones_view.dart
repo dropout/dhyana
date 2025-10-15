@@ -4,6 +4,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 class DetailedMilestonesView extends StatelessWidget {
@@ -20,7 +21,7 @@ class DetailedMilestonesView extends StatelessWidget {
     final int milestoneCount = profile.statsReport.milestoneCount;
 
     return AppCard(
-        title: AppLocalizations.of(context).milestones,
+        title: context.localizations.milestones,
         padding: EdgeInsets.only(
           bottom: AppThemeData.paddingLg,
           left: AppThemeData.paddingLg,
@@ -29,11 +30,11 @@ class DetailedMilestonesView extends StatelessWidget {
         child: Column(
           children: [
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsCount,
+              label: context.localizations.statsCount,
               value: milestoneCount.toString(),
             ),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsNextMilestone,
+              label: context.localizations.statsNextMilestone,
               value: getNextMilestoneText(context, profile.statsReport.milestoneProgress),
             ),
           ],
@@ -42,7 +43,7 @@ class DetailedMilestonesView extends StatelessWidget {
   }
 
   String getNextMilestoneText(BuildContext context, MilestoneProgress milestoneProgress) {
-    return AppLocalizations.of(context).statsNextMilestoneInShort(
+    return context.localizations.statsNextMilestoneInShort(
       milestoneProgress.targetDaysCount - milestoneProgress.completedDaysCount,
     );
   }
