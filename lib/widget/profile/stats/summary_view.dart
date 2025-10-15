@@ -1,7 +1,7 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 class SummaryView extends StatelessWidget {
@@ -21,28 +21,28 @@ class SummaryView extends StatelessWidget {
     int daysCount = (profile != null) ?  profile!.statsReport.completedDaysCount : 0;
 
     return AppCard(
-      title: AppLocalizations.of(context).statsSummary,
+      title: context.localizations.statsSummary,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: SummaryItem(
               sessionCount,
-              AppLocalizations.of(context).sessionsPlural(sessionCount)
+              context.localizations.sessionsPlural(sessionCount)
             )
           ),
           const SizedBox(width: AppThemeData.spacingMd),
           Expanded(
             child: SummaryItem(
               minutesCount,
-              AppLocalizations.of(context).minutesPlural(minutesCount),
+              context.localizations.minutesPlural(minutesCount),
             )
           ),
           const SizedBox(width: AppThemeData.spacingMd),
           Expanded(
             child: SummaryItem(
               daysCount,
-              AppLocalizations.of(context).daysPlural(daysCount),
+              context.localizations.daysPlural(daysCount),
             )
           )
         ],

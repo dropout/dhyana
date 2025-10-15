@@ -7,16 +7,19 @@ import '../../../test_context_providers.dart';
 
 void main() {
 
-  group('MilestonesView', () {
+  group('DetailedSummaryView', () {
 
     setUp(() async {
 
     });
 
-    testWidgets('can show milestone count', (WidgetTester tester) async {
+    testWidgets('can show detailed statistics summary data', (WidgetTester tester) async {
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         statsReport: ProfileStatisticsReport(
           milestoneCount: 5,
+          completedSessionsCount: 43,
+          completedMinutesCount: 1234,
+          completedDaysCount: 12,
           milestoneProgress: MilestoneProgress(
             targetDaysCount: 7,
             completedDaysCount: 5,
@@ -26,15 +29,18 @@ void main() {
 
       await tester.pumpWidget(
         withAllContextProviders(
-          MilestonesView(
+          DetailedSummaryView(
             profile: profile,
           )
         )
       );
       await tester.pumpAndSettle();
 
-      expect(find.text(profile.statsReport.milestoneCount.toStringAsFixed(0)), findsOneWidget);
+      expect(find.text(profile.statsReport.completedDaysCount.toString()), findsOneWidget);
+      expect(find.text(profile.statsReport.completedSessionsCount.toString()), findsOneWidget);
+      expect(find.text(profile.statsReport.completedMinutesCount.toString()), findsOneWidget);
 
+      expect(find.byType(LabelValueDetail), findsNWidgets(3));
     });
 
   }); // eof group

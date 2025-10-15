@@ -1,13 +1,13 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
 import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class DetailedProfileView extends StatelessWidget {
 
@@ -21,7 +21,7 @@ class DetailedProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-        title: AppLocalizations.of(context).profile,
+        title: context.localizations.profile,
         padding: EdgeInsets.only(
           bottom: AppThemeData.paddingLg,
           left: AppThemeData.paddingLg,
@@ -53,24 +53,24 @@ class DetailedProfileView extends StatelessWidget {
             ),
             Gap.medium(),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsSignedUp,
+              label: context.localizations.statsSignedUp,
               value: formatDateTime(
                 context,
                 profile.signupDate,
               ),
             ),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsFirstSession,
+              label: context.localizations.statsFirstSession,
               value: formatDateTime(
                 context,
                 profile.statsReport.firstSessionDate
               ),
             ),
             LabelValueDetail(
-              label: AppLocalizations.of(context).statsLastSession,
+              label: context.localizations.statsLastSession,
               value: formatDateTime(
                 context,
-                profile.statsReport.firstSessionDate
+                profile.statsReport.lastSessionDate
               ),
             ),
           ],
@@ -80,10 +80,9 @@ class DetailedProfileView extends StatelessWidget {
 
   String formatDateTime(BuildContext context, DateTime? dateTime) {
     if (dateTime == null) {
-      return AppLocalizations.of(context).notAvailableAbbr;
+      return context.localizations.notAvailableAbbr;
     }
-    final locale = Localizations.localeOf(context).toString();
-    return '${DateFormat.yMMMd(locale).format(dateTime)} ${DateFormat.Hm(locale).format(dateTime)}';
+    return dateTime.toFormattedDateTimeString(context);
   }
 
 }

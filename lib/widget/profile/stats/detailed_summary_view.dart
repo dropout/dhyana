@@ -1,7 +1,7 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 import 'label_value_detail.dart';
@@ -18,7 +18,7 @@ class DetailedSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      title: AppLocalizations.of(context).statsSummary,
+      title: context.localizations.statsSummary,
       padding: EdgeInsets.only(
         bottom: AppThemeData.paddingLg,
         left: AppThemeData.paddingLg,
@@ -27,17 +27,15 @@ class DetailedSummaryView extends StatelessWidget {
       child: Column(
         children: [
           LabelValueDetail(
-            label: AppLocalizations.of(context).statsTotalTimeSpent,
+            label: context.localizations.statsTotalTimeSpent,
             value: profile.statsReport.completedMinutesCount.toString(),
           ),
-          // Divider(),
           LabelValueDetail(
-            label: AppLocalizations.of(context).statsTotalSessions,
+            label: context.localizations.statsTotalSessions,
             value: profile.statsReport.completedSessionsCount.toString(),
           ),
-          // Divider(),
           LabelValueDetail(
-            label: AppLocalizations.of(context).statsTotalDays,
+            label: context.localizations.statsTotalDays,
             value: profile.statsReport.completedDaysCount.toString(),
           )
         ],
