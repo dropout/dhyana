@@ -110,6 +110,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     List<Widget> chartAreaSlivers,
   ) {
     return CustomScrollView(
+      key: const Key('profile_stats_custom_scroll_view'),
       controller: scrollController,
       slivers: [
 
@@ -157,6 +158,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       child: Padding(
         padding: const EdgeInsets.only(bottom: AppThemeData.paddingSm),
         child: TabBar(
+          key: const Key('profile_stats_tab_bar'),
           padding: const EdgeInsets.only(
             top: AppThemeData.spacingSm,
             left: AppThemeData.spacingMd,
@@ -172,7 +174,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           labelPadding: const EdgeInsets.symmetric(
               horizontal: AppThemeData.spacingSm
           ),
-          // indicatorColor: Colors.black,
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorAnimation: TabIndicatorAnimation.elastic,
           automaticIndicatorColorAdjustment: false,
@@ -185,38 +186,41 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
           dividerColor: Colors.transparent,
           tabs: [
-            buildTabBarItem(context, AppLocalizations.of(context).days),
-            buildTabBarItem(context, AppLocalizations.of(context).weeks),
-            buildTabBarItem(context, AppLocalizations.of(context).months),
-            buildTabBarItem(context, AppLocalizations.of(context).years),
+            buildTabBarItem(
+              context,
+              AppLocalizations.of(context).days,
+              key: const Key('profile_stats_view_days_tab'),
+            ),
+            buildTabBarItem(
+              context,
+              AppLocalizations.of(context).weeks,
+              key: const Key('profile_stats_view_weeks_tab'),
+            ),
+            buildTabBarItem(
+              context,
+              AppLocalizations.of(context).months,
+              key: const Key('profile_stats_view_months_tab'),
+            ),
+            buildTabBarItem(
+              context,
+              AppLocalizations.of(context).years,
+              key: const Key('profile_stats_view_years_tab'),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildTabBarViewItem(
+  Widget buildTabBarItem(
     BuildContext context,
-    String pageStorageKeyId,
-    Widget child
+    String label,
+    { Key? key }
   ) {
-    return child;
-    // return DecoratedBox(
-    //   decoration: BoxDecoration(
-    //     color: Colors.black,
-    //   ),
-    //   child: Padding(
-    //     // padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
-    //     padding: const EdgeInsets.all(0),
-    //     child: child,
-    //   ),
-    // );
-  }
-
-  Widget buildTabBarItem(BuildContext context, String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingSm),
       child: Tab(
+        key: key,
         height: 32,
         child: Text(label),
       ),
@@ -229,25 +233,17 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       child: TabBarView(
         controller: primaryTC,
         children: [
-          buildTabBarViewItem(
-            context,
-            'days',
-            DaysTab(profile: profile),
+          DaysTab(
+            profile: profile
           ),
-          buildTabBarViewItem(
-            context,
-            'weeks',
-            WeekTab(profile: profile),
+          WeekTab(
+            profile: profile,
           ),
-          buildTabBarViewItem(
-            context,
-            'months',
-            MonthTab(profile: profile),
+          MonthTab(
+            profile: profile,
           ),
-          buildTabBarViewItem(
-            context,
-            'years',
-            YearTab(profile: profile),
+          YearTab(
+            profile: profile,
           ),
         ],
       ),
