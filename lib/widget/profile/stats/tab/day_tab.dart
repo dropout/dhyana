@@ -1,7 +1,7 @@
+import 'package:dhyana/bloc/days/days_cubit.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/bloc/days/days_bloc.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/calculated_stats.dart';
@@ -56,16 +56,16 @@ class DaysTabState extends State<DaysTab> {
                 });
               },
               itemBuilder: (context, index) {
-                return BlocProvider<DaysBloc>(
+                return BlocProvider<DaysCubit>(
                   create: (BuildContext context) {
-                    return DaysBloc(
+                    return DaysCubit(
                       statisticsRepository: context.repos.statisticsRepository,
                       crashlyticsService: context.services.crashlyticsService
-                    )..add(DaysEvent.queryDays(
+                    )..queryDays(
                       profileId: widget.profile.id,
                       from: intervals[index].from,
                       to: intervals[index].to,
-                    ));
+                    );
                   },
                   child: DaysBarChartPage(
                     pageIndex: index,

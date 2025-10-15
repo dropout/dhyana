@@ -1,5 +1,5 @@
 export 'auth/auth_bloc.dart';
-export 'days/days_bloc.dart';
+export 'days/days_cubit.dart';
 export 'delete_user/delete_user_cubit.dart';
 export 'months/months_bloc.dart';
 export 'presence/presence_bloc.dart';

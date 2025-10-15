@@ -1,4 +1,4 @@
-part of 'days_bloc.dart';
+part of 'days_cubit.dart';
 
 @freezed
 sealed class DaysState with _$DaysState {

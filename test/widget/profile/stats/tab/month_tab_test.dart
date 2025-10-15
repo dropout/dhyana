@@ -36,7 +36,6 @@ void main() {
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-
       when(() => mockServices.cacheManagerService)
         .thenReturn(mockCacheManagerService);
       when(() => mockCacheManagerService.cacheManager)
@@ -45,10 +44,8 @@ void main() {
       mockRepositories = MockRepositories();
       mockStatisticsRepository = MockStatisticsRepository();
 
-
       when(() => mockRepositories.statisticsRepository)
         .thenReturn(mockStatisticsRepository);
-
     });
 
     testWidgets('can be created with its default values', (WidgetTester tester) async {

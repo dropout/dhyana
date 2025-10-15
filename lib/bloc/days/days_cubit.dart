@@ -1,47 +1,51 @@
-import 'package:dhyana/model/all.dart';
-import 'package:dhyana/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/model/day.dart';
+import 'package:dhyana/model/day_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'days_event.dart';
 part 'days_state.dart';
-part 'days_bloc.freezed.dart';
+part 'days_cubit.freezed.dart';
 
-class DaysBloc extends Bloc<DaysEvent, DaysState> {
+class DaysCubit extends Cubit<DaysState> {
 
-  final Logger logger = getLogger('DaysBloc');
+  final Logger logger = getLogger('DaysCubit');
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
 
-  DaysBloc({
+  DaysCubit({
     required this.statisticsRepository,
     required this.crashlyticsService,
-  }) : super(const DaysState.loading()) {
-    on<QueryDaysEvent>(_onQueryDaysEvent);
-  }
+  }) : super(const DaysState.loading());
 
-  void _onQueryDaysEvent(QueryDaysEvent event, emit) async {
+  void queryDays({
+    required String profileId,
+    required DateTime from,
+    required DateTime to,
+  }) async {
     try {
-      logger.t('Loading days: ${event.from} ... ${event.to}');
+      logger.t('Loading days: $from ... $to');
       emit(const DaysState.loading());
       DayQueryOptions queryOptions = DayQueryOptions(
-        from: event.from,
-        to: event.to,
+        from: from,
+        to: to,
       );
 
       List<Day> days = await statisticsRepository.queryDays(
-        event.profileId,
+        profileId,
         queryOptions,
       );
       days = _fillEmptyDays(days, queryOptions);
 
       emit(DaysState.loaded(
-        from: event.from,
-        to: event.to,
+        from: from,
+        to: to,
         days: days,
         calculatedStats: CalculatedStats.fromDays(days),
       ));
@@ -78,6 +82,18 @@ class DaysBloc extends Bloc<DaysEvent, DaysState> {
     return result;
   }
 
-
-
 }
+
+
+  // const factory DaysEvent.queryDays({
+  //   required String profileId,
+  //   required DateTime from,
+  //   required DateTime to,
+  //   @Default(false) bool useStream,
+  // }) = QueryDaysEvent;
+  //
+  // const factory DaysEvent.receiveUpdate({
+  //   required List<Day> days,
+  // }) = ReceiveUpdateDaysEvent;
+  //
+  // const factory DaysEvent.error() = DaysErrorEvent;
