@@ -17,10 +17,10 @@ class YearTab extends StatefulWidget {
   });
 
   @override
-  State<YearTab> createState() => _YearTabState();
+  State<YearTab> createState() => YearTabState();
 }
 
-class _YearTabState extends State<YearTab> {
+class YearTabState extends State<YearTab> {
 
   // Intervals
   late final List<StatsInterval> intervals;

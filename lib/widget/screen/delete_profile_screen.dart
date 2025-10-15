@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/delete_user/delete_user_bloc.dart';
+import 'package:dhyana/bloc/delete_user/delete_user_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/repository/all.dart';
@@ -29,13 +29,13 @@ class DeleteProfileScreen extends StatelessWidget {
     ProfileRepository profileRepository =
       context.repos.profileRepository;
 
-    return BlocProvider<DeleteUserBloc>(
+    return BlocProvider<DeleteUserCubit>(
       create: (_) {
-        return DeleteUserBloc(
+        return DeleteUserCubit(
           authRepository: authRepository,
           profileRepository: profileRepository,
           crashlyticsService: crashlyticsService,
-        )..add(const DeleteUserEvent.deleteUser());
+        )..deleteUser();
       },
       child: const DeleteProfileScreenContent()
     );
@@ -66,16 +66,14 @@ class DeleteProfileScreenContent extends StatelessWidget {
   }
 
   void _onSigninCompleted(BuildContext context, User user) {
-    BlocProvider.of<DeleteUserBloc>(context).add(
-      const DeleteUserEvent.deleteUser()
-    );
+    BlocProvider.of<DeleteUserCubit>(context).deleteUser();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, authState) {
-        return BlocBuilder<DeleteUserBloc, DeleteUserState>(
+        return BlocBuilder<DeleteUserCubit, DeleteUserState>(
           builder: (context, deleteProfileState) {
             bool showBackButton = false;
             Widget body = Container();

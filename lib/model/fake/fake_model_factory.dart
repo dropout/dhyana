@@ -57,6 +57,10 @@ class FakeModelFactory {
     );
   }
 
+  List<Week> createWeeks(int count) {
+    return List.generate(count, (_) => createWeek());
+  }
+
   Month createMonth({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return Month(

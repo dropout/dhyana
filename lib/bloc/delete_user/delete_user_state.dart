@@ -1,4 +1,4 @@
-part of 'delete_user_bloc.dart';
+part of 'delete_user_cubit.dart';
 
 @freezed
 sealed class DeleteUserState with _$DeleteUserState {

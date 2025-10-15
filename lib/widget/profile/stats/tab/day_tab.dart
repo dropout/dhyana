@@ -18,10 +18,10 @@ class DaysTab extends StatefulWidget {
   });
 
   @override
-  State<DaysTab> createState() => _DaysTabState();
+  State<DaysTab> createState() => DaysTabState();
 }
 
-class _DaysTabState extends State<DaysTab> {
+class DaysTabState extends State<DaysTab> {
 
   // Intervals
   late final List<StatsInterval> intervals;

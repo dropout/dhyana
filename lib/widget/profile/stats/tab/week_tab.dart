@@ -17,10 +17,10 @@ class WeekTab extends StatefulWidget {
   });
 
   @override
-  State<WeekTab> createState() => _WeekTabState();
+  State<WeekTab> createState() => WeekTabState();
 }
 
-class _WeekTabState extends State<WeekTab> {
+class WeekTabState extends State<WeekTab> {
 
   // Intervals
   late final List<StatsInterval> intervals;
