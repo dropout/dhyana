@@ -9,11 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PresenceBlocProvider extends StatelessWidget {
 
   final Widget child;
-  final PresenceEvent? initialEvent;
+  final PresenceEvent? onCreateEvent;
 
   const PresenceBlocProvider({
     required this.child,
-    this.initialEvent,
+    this.onCreateEvent,
     super.key
   });
 
@@ -30,8 +30,8 @@ class PresenceBlocProvider extends StatelessWidget {
         );
         return BlocProvider<PresenceBloc>(
           create: (BuildContext context) {
-            if (initialEvent != null) {
-              presenceBloc.add(initialEvent!);
+            if (onCreateEvent != null) {
+              presenceBloc.add(onCreateEvent!);
             }
             return presenceBloc;
           },

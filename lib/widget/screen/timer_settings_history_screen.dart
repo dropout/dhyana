@@ -20,7 +20,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return TimerSettingsHistoryBlocProvider(
-      initialEvent: TimerSettingsHistoryEvent.loadSettingsList(
+      onCreateEvent: TimerSettingsHistoryEvent.loadSettingsList(
         profileId: profileId
       ),
       child: buildStates(context),

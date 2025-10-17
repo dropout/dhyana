@@ -20,7 +20,7 @@ class SessionHistoryScreen extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return SessionsBlocProvider(
-      initialEvent: SessionsEvent.loadSessions(
+      onCreateEvent: SessionsEvent.loadSessions(
         profileId: profileId
       ),
       child: buildSessionsState(context),

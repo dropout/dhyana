@@ -58,7 +58,7 @@ class _PresenceScreenState extends State<PresenceScreen>
   @override
   Widget build(BuildContext context) {
     return PresenceBlocProvider(
-      initialEvent: PresenceEvent.load(),
+      onCreateEvent: PresenceEvent.load(),
       child: buildStates(context),
     );
   }

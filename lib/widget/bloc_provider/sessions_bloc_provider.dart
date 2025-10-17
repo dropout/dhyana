@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SessionsBlocProvider extends StatelessWidget {
 
   final Widget child;
-  final SessionsEvent? initialEvent;
+  final SessionsEvent? onCreateEvent;
 
   const SessionsBlocProvider({
     required this.child,
-    this.initialEvent,
+    this.onCreateEvent,
     super.key
   });
 
@@ -27,8 +27,8 @@ class SessionsBlocProvider extends StatelessWidget {
           statisticsRepository: repos.statisticsRepository,
           crashlyticsService: services.crashlyticsService,
         );
-        if (initialEvent != null) {
-          sessionsBloc.add(initialEvent!);
+        if (onCreateEvent != null) {
+          sessionsBloc.add(onCreateEvent!);
         }
         return sessionsBloc;
       },

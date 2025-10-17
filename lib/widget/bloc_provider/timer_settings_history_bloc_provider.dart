@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TimerSettingsHistoryBlocProvider extends StatelessWidget {
 
-  final TimerSettingsHistoryEvent? initialEvent;
+  final TimerSettingsHistoryEvent? onCreateEvent;
   final Widget? child;
 
   const TimerSettingsHistoryBlocProvider({
     this.child,
-    this.initialEvent,
+    this.onCreateEvent,
     super.key,
   });
 
@@ -22,8 +22,8 @@ class TimerSettingsHistoryBlocProvider extends StatelessWidget {
           timerSettingsHistoryRepository: context.repos.timerSettingsHistoryRepository,
           crashlyticsService: context.services.crashlyticsService
         );
-        if (initialEvent != null) {
-          timerSettingsHistoryBloc.add(initialEvent!);
+        if (onCreateEvent != null) {
+          timerSettingsHistoryBloc.add(onCreateEvent!);
         }
         return timerSettingsHistoryBloc;
       },
