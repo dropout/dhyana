@@ -134,6 +134,18 @@ class LoginRoute extends GoRouteData with $LoginRoute {
     LoginScreen();
 }
 
+@TypedGoRoute<DonateRoute>(
+  path: '/donate',
+  name: 'DONATE',
+)
+class DonateRoute extends GoRouteData
+  with AuthRedirectHook, $DonateRoute {
+  const DonateRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+    const DonateScreen();
+}
+
 /*
     Routes that require authentication
  */
@@ -297,3 +309,5 @@ class PresenceRoute extends GoRouteData
     authRedirectHook(context, state);
 
 }
+
+

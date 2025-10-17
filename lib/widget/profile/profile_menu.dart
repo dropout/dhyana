@@ -31,6 +31,11 @@ class ProfileMenu extends StatelessWidget {
     context.hapticsTap();
   }
 
+  void _onDonateTapped(BuildContext context) {
+    DonateRoute().push(context);
+    context.hapticsTap();
+  }
+
   void _onSignoutTapped(BuildContext context) {
     showSignoutDialog(context);
     context.hapticsTap();
@@ -80,7 +85,7 @@ class ProfileMenu extends StatelessWidget {
               context.localizations.donate,
               style: textStyle,
             ),
-            onTap: () => null,
+            onTap: () => _onDonateTapped(context),
             key: const Key('profile_menu_donate_tile'),
           ),
           const Divider(height: 0),
