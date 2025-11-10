@@ -7,38 +7,32 @@ part of 'app_routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $homeRoute,
-      $timerRoute,
-      $sessionCompletedRoute,
-      $loginRoute,
-      $donateRoute,
-      $profileRoute,
-      $profileWizardRoute,
-      $profileStatsRoute,
-      $profileEditRoute,
-      $deleteProfileRoute,
-      $sessionHistoryRoute,
-      $timerSettingsHistoryRoute,
-      $presenceRoute,
-    ];
+  $homeRoute,
+  $timerRoute,
+  $sessionCompletedRoute,
+  $loginRoute,
+  $donateRoute,
+  $profileRoute,
+  $profileWizardRoute,
+  $profileStatsRoute,
+  $profileEditRoute,
+  $deleteProfileRoute,
+  $sessionHistoryRoute,
+  $timerSettingsHistoryRoute,
+  $presenceRoute,
+];
 
-RouteBase get $homeRoute => GoRouteData.$route(
-      path: '/',
-      name: 'HOME',
-      factory: $HomeRoute._fromState,
-    );
+RouteBase get $homeRoute =>
+    GoRouteData.$route(path: '/', name: 'HOME', factory: $HomeRoute._fromState);
 
 mixin $HomeRoute on GoRouteData {
-  static HomeRoute _fromState(GoRouterState state) => HomeRoute(
-        $extra: state.extra as TimerSettings?,
-      );
+  static HomeRoute _fromState(GoRouterState state) =>
+      HomeRoute($extra: state.extra as TimerSettings?);
 
   HomeRoute get _self => this as HomeRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/',
-      );
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -57,22 +51,19 @@ mixin $HomeRoute on GoRouteData {
 }
 
 RouteBase get $timerRoute => GoRouteData.$route(
-      path: '/timer',
-      name: 'TIMER',
-      factory: $TimerRoute._fromState,
-    );
+  path: '/timer',
+  name: 'TIMER',
+  factory: $TimerRoute._fromState,
+);
 
 mixin $TimerRoute on GoRouteData {
-  static TimerRoute _fromState(GoRouterState state) => TimerRoute(
-        $extra: state.extra as TimerSettings,
-      );
+  static TimerRoute _fromState(GoRouterState state) =>
+      TimerRoute($extra: state.extra as TimerSettings);
 
   TimerRoute get _self => this as TimerRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/timer',
-      );
+  String get location => GoRouteData.$location('/timer');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -91,23 +82,19 @@ mixin $TimerRoute on GoRouteData {
 }
 
 RouteBase get $sessionCompletedRoute => GoRouteData.$route(
-      path: '/sessionCompleted',
-      name: 'SESSION_COMPLETED',
-      factory: $SessionCompletedRoute._fromState,
-    );
+  path: '/sessionCompleted',
+  name: 'SESSION_COMPLETED',
+  factory: $SessionCompletedRoute._fromState,
+);
 
 mixin $SessionCompletedRoute on GoRouteData {
   static SessionCompletedRoute _fromState(GoRouterState state) =>
-      SessionCompletedRoute(
-        $extra: state.extra as Session,
-      );
+      SessionCompletedRoute($extra: state.extra as Session);
 
   SessionCompletedRoute get _self => this as SessionCompletedRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/sessionCompleted',
-      );
+  String get location => GoRouteData.$location('/sessionCompleted');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -126,18 +113,16 @@ mixin $SessionCompletedRoute on GoRouteData {
 }
 
 RouteBase get $loginRoute => GoRouteData.$route(
-      path: '/login',
-      name: 'LOGIN',
-      factory: $LoginRoute._fromState,
-    );
+  path: '/login',
+  name: 'LOGIN',
+  factory: $LoginRoute._fromState,
+);
 
 mixin $LoginRoute on GoRouteData {
   static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/login',
-      );
+  String get location => GoRouteData.$location('/login');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -154,18 +139,16 @@ mixin $LoginRoute on GoRouteData {
 }
 
 RouteBase get $donateRoute => GoRouteData.$route(
-      path: '/donate',
-      name: 'DONATE',
-      factory: $DonateRoute._fromState,
-    );
+  path: '/donate',
+  name: 'DONATE',
+  factory: $DonateRoute._fromState,
+);
 
 mixin $DonateRoute on GoRouteData {
   static DonateRoute _fromState(GoRouterState state) => const DonateRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/donate',
-      );
+  String get location => GoRouteData.$location('/donate');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -182,23 +165,22 @@ mixin $DonateRoute on GoRouteData {
 }
 
 RouteBase get $profileRoute => GoRouteData.$route(
-      path: '/profile/:profileId',
-      name: 'PROFILE',
-      factory: $ProfileRoute._fromState,
-    );
+  path: '/profile/:profileId',
+  name: 'PROFILE',
+  factory: $ProfileRoute._fromState,
+);
 
 mixin $ProfileRoute on GoRouteData {
   static ProfileRoute _fromState(GoRouterState state) => ProfileRoute(
-        profileId: state.pathParameters['profileId']!,
-        $extra: state.extra as Profile?,
-      );
+    profileId: state.pathParameters['profileId']!,
+    $extra: state.extra as Profile?,
+  );
 
   ProfileRoute get _self => this as ProfileRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/profile/${Uri.encodeComponent(_self.profileId)}',
-      );
+  String get location =>
+      GoRouteData.$location('/profile/${Uri.encodeComponent(_self.profileId)}');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -217,23 +199,21 @@ mixin $ProfileRoute on GoRouteData {
 }
 
 RouteBase get $profileWizardRoute => GoRouteData.$route(
-      path: '/profileWizard/:profileId',
-      name: 'PROFILE_WIZARD',
-      factory: $ProfileWizardRoute._fromState,
-    );
+  path: '/profileWizard/:profileId',
+  name: 'PROFILE_WIZARD',
+  factory: $ProfileWizardRoute._fromState,
+);
 
 mixin $ProfileWizardRoute on GoRouteData {
   static ProfileWizardRoute _fromState(GoRouterState state) =>
-      ProfileWizardRoute(
-        profileId: state.pathParameters['profileId']!,
-      );
+      ProfileWizardRoute(profileId: state.pathParameters['profileId']!);
 
   ProfileWizardRoute get _self => this as ProfileWizardRoute;
 
   @override
   String get location => GoRouteData.$location(
-        '/profileWizard/${Uri.encodeComponent(_self.profileId)}',
-      );
+    '/profileWizard/${Uri.encodeComponent(_self.profileId)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -250,22 +230,21 @@ mixin $ProfileWizardRoute on GoRouteData {
 }
 
 RouteBase get $profileStatsRoute => GoRouteData.$route(
-      path: '/profileStats/:profileId',
-      name: 'PROFILE_STATS',
-      factory: $ProfileStatsRoute._fromState,
-    );
+  path: '/profileStats/:profileId',
+  name: 'PROFILE_STATS',
+  factory: $ProfileStatsRoute._fromState,
+);
 
 mixin $ProfileStatsRoute on GoRouteData {
-  static ProfileStatsRoute _fromState(GoRouterState state) => ProfileStatsRoute(
-        profileId: state.pathParameters['profileId']!,
-      );
+  static ProfileStatsRoute _fromState(GoRouterState state) =>
+      ProfileStatsRoute(profileId: state.pathParameters['profileId']!);
 
   ProfileStatsRoute get _self => this as ProfileStatsRoute;
 
   @override
   String get location => GoRouteData.$location(
-        '/profileStats/${Uri.encodeComponent(_self.profileId)}',
-      );
+    '/profileStats/${Uri.encodeComponent(_self.profileId)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -282,19 +261,17 @@ mixin $ProfileStatsRoute on GoRouteData {
 }
 
 RouteBase get $profileEditRoute => GoRouteData.$route(
-      path: '/editProfile',
-      name: 'EDIT_PROFILE',
-      factory: $ProfileEditRoute._fromState,
-    );
+  path: '/editProfile',
+  name: 'EDIT_PROFILE',
+  factory: $ProfileEditRoute._fromState,
+);
 
 mixin $ProfileEditRoute on GoRouteData {
   static ProfileEditRoute _fromState(GoRouterState state) =>
       const ProfileEditRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/editProfile',
-      );
+  String get location => GoRouteData.$location('/editProfile');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -311,19 +288,17 @@ mixin $ProfileEditRoute on GoRouteData {
 }
 
 RouteBase get $deleteProfileRoute => GoRouteData.$route(
-      path: '/deleteProfile',
-      name: 'DELETE_PROFILE',
-      factory: $DeleteProfileRoute._fromState,
-    );
+  path: '/deleteProfile',
+  name: 'DELETE_PROFILE',
+  factory: $DeleteProfileRoute._fromState,
+);
 
 mixin $DeleteProfileRoute on GoRouteData {
   static DeleteProfileRoute _fromState(GoRouterState state) =>
       const DeleteProfileRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/deleteProfile',
-      );
+  String get location => GoRouteData.$location('/deleteProfile');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -340,26 +315,22 @@ mixin $DeleteProfileRoute on GoRouteData {
 }
 
 RouteBase get $sessionHistoryRoute => GoRouteData.$route(
-      path: '/activity',
-      name: 'ACTIVITY',
-      factory: $SessionHistoryRoute._fromState,
-    );
+  path: '/activity',
+  name: 'ACTIVITY',
+  factory: $SessionHistoryRoute._fromState,
+);
 
 mixin $SessionHistoryRoute on GoRouteData {
   static SessionHistoryRoute _fromState(GoRouterState state) =>
-      SessionHistoryRoute(
-        profileId: state.uri.queryParameters['profile-id']!,
-      );
+      SessionHistoryRoute(profileId: state.uri.queryParameters['profile-id']!);
 
   SessionHistoryRoute get _self => this as SessionHistoryRoute;
 
   @override
   String get location => GoRouteData.$location(
-        '/activity',
-        queryParams: {
-          'profile-id': _self.profileId,
-        },
-      );
+    '/activity',
+    queryParams: {'profile-id': _self.profileId},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -376,23 +347,21 @@ mixin $SessionHistoryRoute on GoRouteData {
 }
 
 RouteBase get $timerSettingsHistoryRoute => GoRouteData.$route(
-      path: '/timerSettingsHistory/:profileId',
-      name: 'TIMER_SETTINGS_HISTORY',
-      factory: $TimerSettingsHistoryRoute._fromState,
-    );
+  path: '/timerSettingsHistory/:profileId',
+  name: 'TIMER_SETTINGS_HISTORY',
+  factory: $TimerSettingsHistoryRoute._fromState,
+);
 
 mixin $TimerSettingsHistoryRoute on GoRouteData {
   static TimerSettingsHistoryRoute _fromState(GoRouterState state) =>
-      TimerSettingsHistoryRoute(
-        profileId: state.pathParameters['profileId']!,
-      );
+      TimerSettingsHistoryRoute(profileId: state.pathParameters['profileId']!);
 
   TimerSettingsHistoryRoute get _self => this as TimerSettingsHistoryRoute;
 
   @override
   String get location => GoRouteData.$location(
-        '/timerSettingsHistory/${Uri.encodeComponent(_self.profileId)}',
-      );
+    '/timerSettingsHistory/${Uri.encodeComponent(_self.profileId)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -409,18 +378,16 @@ mixin $TimerSettingsHistoryRoute on GoRouteData {
 }
 
 RouteBase get $presenceRoute => GoRouteData.$route(
-      path: '/presence',
-      name: 'PRESENCE',
-      factory: $PresenceRoute._fromState,
-    );
+  path: '/presence',
+  name: 'PRESENCE',
+  factory: $PresenceRoute._fromState,
+);
 
 mixin $PresenceRoute on GoRouteData {
   static PresenceRoute _fromState(GoRouterState state) => const PresenceRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/presence',
-      );
+  String get location => GoRouteData.$location('/presence');
 
   @override
   void go(BuildContext context) => context.go(location);

@@ -7,12 +7,8 @@ part of 'session_query_options.dart';
 // **************************************************************************
 
 _SessionQueryOptions _$SessionQueryOptionsFromJson(Map<String, dynamic> json) =>
-    _SessionQueryOptions(
-      limit: (json['limit'] as num?)?.toInt() ?? 20,
-    );
+    _SessionQueryOptions(limit: (json['limit'] as num?)?.toInt() ?? 20);
 
 Map<String, dynamic> _$SessionQueryOptionsToJson(
-        _SessionQueryOptions instance) =>
-    <String, dynamic>{
-      'limit': instance.limit,
-    };
+  _SessionQueryOptions instance,
+) => <String, dynamic>{'limit': instance.limit};

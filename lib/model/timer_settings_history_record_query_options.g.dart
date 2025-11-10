@@ -7,14 +7,11 @@ part of 'timer_settings_history_record_query_options.dart';
 // **************************************************************************
 
 _TimerSettingsHistoryRecordQueryOptions
-    _$TimerSettingsHistoryRecordQueryOptionsFromJson(
-            Map<String, dynamic> json) =>
-        _TimerSettingsHistoryRecordQueryOptions(
-          limit: (json['limit'] as num?)?.toInt() ?? 20,
-        );
+_$TimerSettingsHistoryRecordQueryOptionsFromJson(Map<String, dynamic> json) =>
+    _TimerSettingsHistoryRecordQueryOptions(
+      limit: (json['limit'] as num?)?.toInt() ?? 20,
+    );
 
 Map<String, dynamic> _$TimerSettingsHistoryRecordQueryOptionsToJson(
-        _TimerSettingsHistoryRecordQueryOptions instance) =>
-    <String, dynamic>{
-      'limit': instance.limit,
-    };
+  _TimerSettingsHistoryRecordQueryOptions instance,
+) => <String, dynamic>{'limit': instance.limit};

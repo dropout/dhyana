@@ -7,12 +7,8 @@ part of 'profile_query_options.dart';
 // **************************************************************************
 
 _ProfileQueryOptions _$ProfileQueryOptionsFromJson(Map<String, dynamic> json) =>
-    _ProfileQueryOptions(
-      limit: (json['limit'] as num?)?.toInt() ?? 20,
-    );
+    _ProfileQueryOptions(limit: (json['limit'] as num?)?.toInt() ?? 20);
 
 Map<String, dynamic> _$ProfileQueryOptionsToJson(
-        _ProfileQueryOptions instance) =>
-    <String, dynamic>{
-      'limit': instance.limit,
-    };
+  _ProfileQueryOptions instance,
+) => <String, dynamic>{'limit': instance.limit};

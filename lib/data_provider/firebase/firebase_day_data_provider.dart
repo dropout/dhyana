@@ -39,7 +39,7 @@ class FirebaseDayDataProvider
         minutesCount: today.minutesCount + session.duration.inMinutes,
         sessions: today.sessions.toList()..add(session),
       );
-    } catch(_, __) {
+    } catch(_) {
       // Day doesn't exists in database yet
       updatedToday = Day(
         id: todayId,

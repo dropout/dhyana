@@ -7,12 +7,13 @@ part of 'milestone.dart';
 // **************************************************************************
 
 _Milestone _$MilestoneFromJson(Map<String, dynamic> json) => _Milestone(
-      id: json['id'] as String,
-      days: (json['days'] as List<dynamic>?)
-              ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-    );
+  id: json['id'] as String,
+  days:
+      (json['days'] as List<dynamic>?)
+          ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+);
 
 Map<String, dynamic> _$MilestoneToJson(_Milestone instance) =>
     <String, dynamic>{

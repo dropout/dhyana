@@ -6,7 +6,6 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
-import 'default_screen_setup.dart';
 
 class DonateScreen extends StatelessWidget {
 
@@ -168,3 +167,18 @@ class DonateScreen extends StatelessWidget {
   }
 
 }
+
+class DonationSelector extends StatefulWidget {
+  const DonationSelector({super.key});
+
+  @override
+  State<DonationSelector> createState() => _DonationSelectorState();
+}
+
+class _DonationSelectorState extends State<DonationSelector> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+

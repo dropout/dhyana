@@ -11,4 +11,5 @@ export 'localization.dart';
 export 'logger_factory.dart';
 export 'painting.dart';
 export 'remap_range.dart';
+export 'remote_config_keys.dart';
 export 'string.dart';

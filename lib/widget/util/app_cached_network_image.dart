@@ -113,7 +113,7 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
       }
     );
 
-    imageStreamListener = ImageStreamListener((_, __) {
+    imageStreamListener = ImageStreamListener((_, _) {
       // make sure the widget is mounted in case of frequent clicking
       if (mounted) {
         setState(() {

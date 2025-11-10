@@ -5,6 +5,7 @@ import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/service/firebase_remote_settings_service.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
@@ -17,9 +18,9 @@ import 'package:dhyana/util/logger_factory.dart';
 
 import 'init_result.dart';
 
-
 /// Manages the initialization process.
-/// Creates and configures providers, services and all the necessary objects used
+/// Creates and configures providers, repositories,
+/// services and all the necessary objects required
 /// at the start of the application.
 class Initializer {
 
@@ -28,86 +29,51 @@ class Initializer {
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization sequence');
 
-    // Data providers
+    // Create data providers shared between builders
     logger.t('Initialize data providers');
     FirebaseProfileDataProvider profileDataProvider =
       FirebaseProfileDataProvider(firebaseProvider.firestore);
     FirebaseStorageDataProvider storageDataProvider =
       FirebaseStorageDataProvider(firebaseProvider.storage);
 
-    logger.t('Initialize services');
-    ResourceResolver resourceResolver = DefaultResourceResolver(
-      storageDataProvider: storageDataProvider
+    // Build repositories
+    logger.t('Initialize repositories');
+    final repoBuilder = RepositoriesBuilder(
+      firebaseProvider: firebaseProvider,
+      profileDataProvider: profileDataProvider,
+      storageDataProvider: storageDataProvider,
     );
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    HapticsService hapticsService = DefaultHapticsService();
-    RemoteConfigService remoteConfigService = await RemoteConfigService
-      .create(firebaseProvider.remoteConfig, firebaseProvider.crashlytics);
 
-    DefaultServices services = DefaultServices(
-      audioService: DefaultAudioService(),
-      overlayService: DefaultOverlayService(),
+    final repos = repoBuilder
+      .presenceRepository(StubbedPresenceRepository())
+      .statisticsRepository(StubbedStatisticsRepository())
+      .build();
+
+    // Build services
+    logger.t('Initialize services');
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await FirebaseRemoteSettingsService.configureDefaults(firebaseProvider.remoteConfig);
+
+    final services = ServicesBuilder(
+      firebaseProvider: firebaseProvider,
+      storageDataProvider: storageDataProvider,
       sharedPreferences: sharedPreferences,
-      hapticsService: hapticsService,
-      remoteConfigService: remoteConfigService,
-      analyticsService: FirebaseAnalyticsService(firebaseProvider.analytics),
-      crashlyticsService: FirebaseCrashlyticsService(
-        firebaseProvider.crashlytics
-      ),
-      idGeneratorService: IdGeneratorService(
-        FirebaseIdGenerator(firebaseProvider.firestore),
-      ),
-      resourceResolver: resourceResolver,
-      cacheManagerService: DefaultCacheManagerService(),
-      wakelockService: WakelockService(),
-    );
+    ).build();
+
+    logger.t('Fetch remote settings');
+    final remoteSettings = await services
+      .remoteConfigService
+      .fetchRemoteSettings();
 
     logger.t('Preload shaders');
     await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
-    logger.t('Initialize repositories');
-    AuthRepository authRepository = FirebaseAuthRepository(
-      authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
-      profileDataProvider: profileDataProvider,
-    );
-
-    ProfileRepository profileRepository = FirebaseProfileRepository(
-      profileDataProvider: profileDataProvider,
-      storageDataProvider: storageDataProvider,
-    );
-
-    // PresenceRepository presenceRepository = FirebasePresenceRepository(
-    //   presenceDataProvider: FirebasePresenceDataProvider(
-    //     FirebaseFirestore.instance
-    //   )
-    // );
-
-    // StatisticsRepository statisticsRepository = FirebaseStatisticsRepository(
-    //   dataProviderFactory: FirebaseDataProviderFactory(
-    //     fireStore: firebaseProvider.firestore
-    //   )
-    // );
-
-    PresenceRepository presenceRepository = StubbedPresenceRepository();
-    StatisticsRepository statisticsRepository = StubbedStatisticsRepository();
-
-    TimerSettingsHistoryRepository timerSettingsHistoryRepository =
-      FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);
-
-    Repositories repos = Repositories(
-      authRepository: authRepository,
-      profileRepository: profileRepository,
-      presenceRepository: presenceRepository,
-      statisticsRepository: statisticsRepository,
-      timerSettingsHistoryRepository: timerSettingsHistoryRepository,
-    );
-
     logger.t('Initialize providers');
-    List<Provider> providers = _createProviders(
-      services,
-      repos,
-    );
+    List<Provider> providers = [
+      Provider<Services>(create: (_) => services),
+      Provider<Repositories>(create: (_) => repos),
+    ];
 
     logger.t('Parsing timer settings from shared prefs');
     TimerSettings timerSettings = services
@@ -126,7 +92,7 @@ class Initializer {
     );
 
     if (user != null) {
-      logger.t('User is already signed in, loading profile: ${user.uid}');
+      logger.t('User is already signed in, initiate profile loading for user: ${user.uid}');
       profileBloc.add(ProfileEvent.loadProfile(profileId: user.uid));
     }
 
@@ -137,21 +103,8 @@ class Initializer {
       repositories: repos,
       providers: providers,
       profileBloc: profileBloc,
+      remoteSettings: remoteSettings,
     );
-  }
-
-  /*
-    Create a list of providers that will be used
-    throughout the application.
-   */
-  List<Provider> _createProviders(
-    DefaultServices srvcs,
-    Repositories repos,
-  ) {
-    return [
-      Provider<Services>(create: (_) => srvcs),
-      Provider<Repositories>(create: (_) => repos),
-    ];
   }
 
 }

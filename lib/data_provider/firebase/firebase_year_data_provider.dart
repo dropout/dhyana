@@ -53,7 +53,7 @@ class FirebaseYearDataProvider
         minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
         sessionCount: thisMonth.sessionCount + 1,
       );
-    } catch(_, __) {
+    } catch(_) {
       // Year doesn't exists in database yet
       updatedYear = Year(
         id: yearId,

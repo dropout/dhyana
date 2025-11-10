@@ -52,7 +52,7 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
         sessionCount: thisMonth.sessionCount + 1,
         minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
       );
-    } catch(_, __) {
+    } catch(_) {
       // Month doesn't exists in database yet
       updatedMonth = Month(
         id: monthId,

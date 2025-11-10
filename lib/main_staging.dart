@@ -24,7 +24,7 @@ void main() async {
 
   InitResult initResult = await Initializer().init(firebaseProvider);
 
-  if (initResult.services.remoteConfigService.maintenanceModeEnabled) {
+  if (initResult.remoteSettings.maintenanceModeEnabled) {
     runApp(AppMaintenanceMode());
   } else {
     runApp(App(

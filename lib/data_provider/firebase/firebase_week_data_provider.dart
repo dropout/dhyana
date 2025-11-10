@@ -53,7 +53,7 @@ class FirebaseWeekDataProvider
         sessionCount: thisWeek.sessionCount + 1,
         minutesCount: thisWeek.minutesCount + session.duration.inMinutes,
       );
-    } catch(_, __) {
+    } catch(_) {
       // Week doesn't exist in database yet
       updatedWeek = Week(
         id: weekId,

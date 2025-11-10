@@ -19,7 +19,7 @@ class MockTimerSettingsBloc
 
 class MockServices
   extends Mock
-  implements DefaultServices {}
+  implements Services {}
 
 class MockOverlayService
   extends Mock

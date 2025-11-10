@@ -13,15 +13,18 @@ _TimerSettings _$TimerSettingsFromJson(Map<String, dynamic> json) =>
           : const DurationConverter().fromJson((json['warmup'] as num).toInt()),
       duration: json['duration'] == null
           ? const Duration(minutes: 10)
-          : const DurationConverter()
-              .fromJson((json['duration'] as num).toInt()),
+          : const DurationConverter().fromJson(
+              (json['duration'] as num).toInt(),
+            ),
       startingSound:
           $enumDecodeNullable(_$SoundEnumMap, json['startingSound']) ??
-              Sound.smallBell,
-      endingSound: $enumDecodeNullable(_$SoundEnumMap, json['endingSound']) ??
           Sound.smallBell,
-      lastUsed: const DateTimeOrNullConverter()
-          .fromJson((json['lastUsed'] as num?)?.toInt()),
+      endingSound:
+          $enumDecodeNullable(_$SoundEnumMap, json['endingSound']) ??
+          Sound.smallBell,
+      lastUsed: const DateTimeOrNullConverter().fromJson(
+        (json['lastUsed'] as num?)?.toInt(),
+      ),
     );
 
 Map<String, dynamic> _$TimerSettingsToJson(_TimerSettings instance) =>
@@ -33,7 +36,4 @@ Map<String, dynamic> _$TimerSettingsToJson(_TimerSettings instance) =>
       'lastUsed': const DateTimeOrNullConverter().toJson(instance.lastUsed),
     };
 
-const _$SoundEnumMap = {
-  Sound.none: 'none',
-  Sound.smallBell: 'smallBell',
-};
+const _$SoundEnumMap = {Sound.none: 'none', Sound.smallBell: 'smallBell'};

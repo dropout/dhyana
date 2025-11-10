@@ -16,7 +16,7 @@ export 'logging_analytics_service.dart';
 export 'logging_crashlytics_service.dart';
 export 'overlay_service.dart';
 export 'profile_stats_report_updater.dart';
-export 'remote_config_service.dart';
+export 'remote_settings_service.dart';
 export 'resource_resolver.dart';
 export 'shader_service.dart';
 export 'timer_service.dart';

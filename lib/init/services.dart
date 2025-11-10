@@ -1,100 +1,111 @@
+import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/service/default_shader_service.dart';
+import 'package:dhyana/service/firebase_remote_settings_service.dart';
+import 'package:dhyana/util/firebase_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/service/all.dart';
 
-abstract class Services {
-  AnalyticsService get analyticsService;
-  CrashlyticsService get crashlyticsService;
-  TimerSettingsSharedPrefsService get timerSettingsSharedPrefsService;
-  ShaderService get shaderService;
-  HapticsService get hapticsService;
-  ResourceResolver get resourceResolver;
-  IdGeneratorService get idGeneratorService;
-  RemoteConfigService get remoteConfigService;
-  AudioService get audioService;
-  OverlayService get overlayService;
-  CacheManagerService get cacheManagerService;
-  WakelockService get wakelockService;
+/// A container for all services used in the app.
+/// Available on the context object via Provider and BuildContext extension
+/// convenience methods.
+class Services {
+
+  final AnalyticsService analyticsService;
+  final CrashlyticsService crashlyticsService;
+  final HapticsService hapticsService;
+  final RemoteSettingsService remoteConfigService;
+  final ResourceResolver resourceResolver;
+  final AudioService audioService;
+  final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
+  final ShaderService shaderService;
+  final IdGeneratorService idGeneratorService;
+  final OverlayService overlayService;
+  final CacheManagerService cacheManagerService;
+  final WakelockService wakelockService;
+
+  Services({
+    required this.analyticsService,
+    required this.crashlyticsService,
+    required this.hapticsService,
+    required this.remoteConfigService,
+    required this.resourceResolver,
+    required this.shaderService,
+    required this.audioService,
+    required this.overlayService,
+    required this.cacheManagerService,
+    required this.timerSettingsSharedPrefsService,
+    required this.idGeneratorService,
+    required this.wakelockService,
+  });
+
 }
 
-class DefaultServices extends Services {
+class ServicesBuilder {
 
-  final AnalyticsService _analyticsService;
-  final CrashlyticsService _crashlyticsService;
-  final TimerSettingsSharedPrefsService _timerSettingsSharedPrefsService;
-  final ShaderService _shaderService;
-  final HapticsService _hapticsService;
-  final ResourceResolver _resourceResolver;
-  final IdGeneratorService _idGeneratorService;
-  final RemoteConfigService _remoteConfigService;
-  final AudioService _audioService;
-  final OverlayService _overlayService;
-  final CacheManagerService _cacheManagerService;
-  final WakelockService _wakelockService;
+  late AudioService _audioService;
+  late OverlayService _overlayService;
+  late HapticsService _hapticsService;
+  late AnalyticsService _analyticsService;
+  late CrashlyticsService _crashlyticsService;
+  late RemoteSettingsService _remoteConfigService;
+  late ResourceResolver _resourceResolver;
+  late IdGeneratorService _idGeneratorService;
+  late CacheManagerService _cacheManagerService;
+  late WakelockService _wakelockService;
+  late TimerSettingsSharedPrefsService _timerSettingsSharedPrefsService;
+  late ShaderService _shaderService;
 
-  DefaultServices({
-    required HapticsService hapticsService,
-    required RemoteConfigService remoteConfigService,
-    required ResourceResolver resourceResolver,
-    required AudioService audioService,
-    required OverlayService overlayService,
-    required CacheManagerService cacheManagerService,
+  ServicesBuilder({
+    required FirebaseProvider firebaseProvider,
+    required StorageDataProvider storageDataProvider,
     required SharedPreferences sharedPreferences,
-    required IdGeneratorService idGeneratorService,
-    required AnalyticsService analyticsService,
-    required CrashlyticsService crashlyticsService,
-    required WakelockService wakelockService,
-  })  : _hapticsService = hapticsService,
-    _remoteConfigService = remoteConfigService,
-    _resourceResolver = resourceResolver,
-    _audioService = audioService,
-    _overlayService = overlayService,
-    _analyticsService = analyticsService,
-    _crashlyticsService = crashlyticsService,
-    _timerSettingsSharedPrefsService = TimerSettingsSharedPrefsService(
-      crashlyticsService: crashlyticsService,
-      sharedPrefs: sharedPreferences,
-    ),
-    _shaderService = DefaultShaderService(),
-    _idGeneratorService = idGeneratorService,
-    _cacheManagerService = cacheManagerService,
-    _wakelockService = wakelockService;
+  }) {
+    _audioService = DefaultAudioService();
+    _overlayService = DefaultOverlayService();
+    _hapticsService = DefaultHapticsService();
+    _analyticsService = FirebaseAnalyticsService(
+      firebaseProvider.analytics,
+    );
+    _crashlyticsService = FirebaseCrashlyticsService(
+      firebaseProvider.crashlytics,
+    );
+    _idGeneratorService = IdGeneratorService(
+      FirebaseIdGenerator(firebaseProvider.firestore),
+    );
+    _resourceResolver = DefaultResourceResolver(
+      storageDataProvider: storageDataProvider,
+    );
+    _cacheManagerService = DefaultCacheManagerService();
+    _wakelockService = WakelockService();
 
-  @override
-  AnalyticsService get analyticsService => _analyticsService;
+    _remoteConfigService = FirebaseRemoteSettingsService(
+      firebaseProvider.remoteConfig,
+    );
 
-  @override
-  CrashlyticsService get crashlyticsService => _crashlyticsService;
+    _timerSettingsSharedPrefsService =
+      TimerSettingsSharedPrefsService(
+        crashlyticsService: _crashlyticsService,
+        sharedPrefs: sharedPreferences,
+      );
 
-  @override
-  TimerSettingsSharedPrefsService get timerSettingsSharedPrefsService =>
-    _timerSettingsSharedPrefsService;
+    _shaderService = DefaultShaderService();
+  }
 
-  @override
-  ShaderService get shaderService => _shaderService;
-
-  @override
-  HapticsService get hapticsService => _hapticsService;
-
-  @override
-  ResourceResolver get resourceResolver => _resourceResolver;
-
-  @override
-  IdGeneratorService get idGeneratorService => _idGeneratorService;
-
-  @override
-  RemoteConfigService get remoteConfigService => _remoteConfigService;
-
-  @override
-  AudioService get audioService => _audioService;
-
-  @override
-  OverlayService get overlayService => _overlayService;
-
-  @override
-  CacheManagerService get cacheManagerService => _cacheManagerService;
-
-  @override
-  WakelockService get wakelockService => _wakelockService;
+  Services build() {
+    return Services(
+      audioService: _audioService,
+      overlayService: _overlayService,
+      hapticsService: _hapticsService,
+      analyticsService: _analyticsService,
+      crashlyticsService: _crashlyticsService,
+      remoteConfigService: _remoteConfigService,
+      resourceResolver: _resourceResolver,
+      idGeneratorService: _idGeneratorService,
+      cacheManagerService: _cacheManagerService,
+      wakelockService: _wakelockService,
+      timerSettingsSharedPrefsService: _timerSettingsSharedPrefsService,
+      shaderService: _shaderService,
+    );
+  }
 
 }

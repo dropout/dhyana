@@ -10,7 +10,8 @@ _MilestoneProgress _$MilestoneProgressFromJson(Map<String, dynamic> json) =>
     _MilestoneProgress(
       completedDaysCount: (json['completedDaysCount'] as num?)?.toInt() ?? 0,
       targetDaysCount: (json['targetDaysCount'] as num?)?.toInt() ?? 7,
-      sessions: (json['sessions'] as List<dynamic>?)
+      sessions:
+          (json['sessions'] as List<dynamic>?)
               ?.map((e) => Session.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
