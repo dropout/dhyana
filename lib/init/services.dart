@@ -13,7 +13,7 @@ class Services {
   final AnalyticsService analyticsService;
   final CrashlyticsService crashlyticsService;
   final HapticsService hapticsService;
-  final RemoteSettingsService remoteConfigService;
+  final RemoteSettingsService remoteSettingsService;
   final ResourceResolver resourceResolver;
   final AudioService audioService;
   final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
@@ -27,7 +27,7 @@ class Services {
     required this.analyticsService,
     required this.crashlyticsService,
     required this.hapticsService,
-    required this.remoteConfigService,
+    required this.remoteSettingsService,
     required this.resourceResolver,
     required this.shaderService,
     required this.audioService,
@@ -98,7 +98,7 @@ class ServicesBuilder {
       hapticsService: _hapticsService,
       analyticsService: _analyticsService,
       crashlyticsService: _crashlyticsService,
-      remoteConfigService: _remoteConfigService,
+      remoteSettingsService: _remoteConfigService,
       resourceResolver: _resourceResolver,
       idGeneratorService: _idGeneratorService,
       cacheManagerService: _cacheManagerService,

@@ -1,6 +1,7 @@
 export 'assets.dart';
 export 'blurhash.dart';
 export 'date_time_utils.dart';
+export 'debounce_stream_transformer.dart';
 export 'default_profile_data.dart';
 export 'duration.dart';
 export 'enum_helper.dart';

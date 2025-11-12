@@ -1,37 +1,46 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
-import 'package:dhyana/init/init_result.dart';
+import 'package:dhyana/bloc/remote_settings/remote_settings_cubit.dart';
+import 'package:dhyana/init/all.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
+import 'app_colors.dart';
 import 'app_routes.dart';
 
+/// The main app widget.
+/// It sets up the top-level providers and
+/// the MaterialApp with routing.
 class App extends StatelessWidget {
 
   final InitResult initResult;
-  late final AuthBloc authBloc;
   late final GoRouter router;
 
   App({
     required this.initResult,
     super.key
-  }) {
-    authBloc = AuthBloc(
-      initialAuthState: (initResult.user != null) ? AuthState.signedIn(user: initResult.user!) : const AuthState.initial(),
-      authenticationRepository: initResult.repositories.authRepository,
-      analyticsService: initResult.services.analyticsService,
-      crashlyticsService: initResult.services.crashlyticsService,
-    );
+  }) :
     router = createAppRouter(initResult: initResult);
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<RemoteSettingsCubit, RemoteSettingsState>(
+      builder: (context, state) {
+        if (state.settings.maintenanceModeEnabled) {
+          return buildMaintenanceModeApp(context);
+        } else {
+          return buildApp(context);
+        }
+      },
+    );
+  }
+
+  /// Builds the main app.
+  Widget buildApp(BuildContext context) {
     return GestureDetector(
       onTap: () {
         // unfocus user input if clicks anywhere on screen
@@ -41,45 +50,73 @@ class App extends StatelessWidget {
           currentFocus.focusedChild!.unfocus();
         }
       },
-      child: MultiProvider(
-        providers: [
-          Provider<InitResult>(create: (_) => initResult),
-          ...initResult.providers
+      child: MaterialApp.router(
+        builder: (BuildContext context, Widget? child) {
+          child ??= const SizedBox.shrink();
+          return MediaQuery.withClampedTextScaling(
+            maxScaleFactor: 1.0,
+            child: child
+          );
+        },
+        routerConfig: router,
+        supportedLocales: const [
+          Locale('hu', 'HU'),
+          Locale('en', 'EN')
         ],
-        child: MultiBlocProvider(
-          providers: <BlocProvider>[
-            BlocProvider<AuthBloc>(create: (_) => authBloc),
-            BlocProvider<ProfileBloc>(create: (_) => initResult.profileBloc),
-          ],
-          child: buildApp(context),
-        ),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        theme: AppThemeData(isDark: false).themeData,
+      )
+    );
+  }
+
+  /// Builds a simple maintenance mode app.
+  Widget buildMaintenanceModeApp(BuildContext context) {
+    return MaterialApp(
+      color: AppColors.backgroundPaper,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      home: Scaffold(
+        backgroundColor: AppColors.backgroundPaper,
+        body: Padding(
+          padding: const EdgeInsets.all(AppThemeData.paddingLg),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.build,
+                size: 32,
+                color: Colors.black,
+              ),
+              Gap.medium(),
+              Text(
+                AppLocalizations.of(context).underMaintenanceTitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Gap.small(),
+              Text(
+                AppLocalizations.of(context).underMaintenanceBody,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+            ],
+          ),
+        )
       ),
     );
   }
-
-  Widget buildApp(BuildContext context) {
-    return MaterialApp.router(
-      builder: (BuildContext context, Widget? child) {
-        child ??= const SizedBox.shrink();
-        return MediaQuery.withClampedTextScaling(
-          maxScaleFactor: 1.0,
-          child: child
-        );
-      },
-      routerConfig: router,
-      supportedLocales: const [
-        Locale('hu', 'HU'),
-        Locale('en', 'EN')
-      ],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      theme: AppThemeData(isDark: false).themeData,
-    );
-  }
-
 }
+
 

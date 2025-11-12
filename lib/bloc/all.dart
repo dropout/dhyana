@@ -4,6 +4,7 @@ export 'delete_user/delete_user_cubit.dart';
 export 'months/months_bloc.dart';
 export 'presence/presence_bloc.dart';
 export 'profile/profile_bloc.dart';
+export 'remote_settings/remote_settings_cubit.dart';
 export 'session_completed/session_completed_bloc.dart';
 export 'sessions/sessions_bloc.dart';
 export 'timer/timer_bloc.dart';

@@ -24,7 +24,6 @@ class FirebaseRemoteSettingsService implements RemoteSettingsService {
         remote_config_keys.maintenanceModeEnabledKey: remoteSettings.maintenanceModeEnabled,
         remote_config_keys.minimumRequiredAppVersionKey: remoteSettings.minimumRequiredAppVersion,
         remote_config_keys.contactUrlKey: remoteSettings.contactUrl,
-        remote_config_keys.eventsUrlKey: remoteSettings.eventsUrl,
         remote_config_keys.privacyPolicyUrlKey: remoteSettings.privacyPolicyUrl,
         remote_config_keys.termsOfServiceUrlKey: remoteSettings.termsOfServiceUrl,
       },

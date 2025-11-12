@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'init/all.dart';
 import 'util/firebase_provider.dart';
 import 'widget/app.dart';
-import 'widget/app_maintenance_mode.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,13 +22,7 @@ void main() async {
   // Bloc.observer = DebugPrintBlocObserver();
 
   InitResult initResult = await Initializer().init(firebaseProvider);
-
-  if (initResult.remoteSettings.maintenanceModeEnabled) {
-    runApp(AppMaintenanceMode());
-  } else {
-    runApp(App(
-      initResult: initResult,
-    ));
-  }
-
+  runApp(App(
+    initResult: initResult,
+  ));
 }

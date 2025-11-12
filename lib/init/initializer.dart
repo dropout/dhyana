@@ -9,7 +9,6 @@ import 'package:dhyana/service/firebase_remote_settings_service.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:logger/logger.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
@@ -27,17 +26,17 @@ class Initializer {
   final Logger logger = getLogger('Initializer');
 
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
-    logger.t('Starting initialization sequence');
+    logger.t('Starting initialization process');
 
     // Create data providers shared between builders
-    logger.t('Initialize data providers');
+    logger.t('Create data providers');
     FirebaseProfileDataProvider profileDataProvider =
       FirebaseProfileDataProvider(firebaseProvider.firestore);
     FirebaseStorageDataProvider storageDataProvider =
       FirebaseStorageDataProvider(firebaseProvider.storage);
 
     // Build repositories
-    logger.t('Initialize repositories');
+    logger.t('Create repositories');
     final repoBuilder = RepositoriesBuilder(
       firebaseProvider: firebaseProvider,
       profileDataProvider: profileDataProvider,
@@ -50,7 +49,7 @@ class Initializer {
       .build();
 
     // Build services
-    logger.t('Initialize services');
+    logger.t('Create services');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await FirebaseRemoteSettingsService.configureDefaults(firebaseProvider.remoteConfig);
 
@@ -62,18 +61,12 @@ class Initializer {
 
     logger.t('Fetch remote settings');
     final remoteSettings = await services
-      .remoteConfigService
+      .remoteSettingsService
       .fetchRemoteSettings();
 
     logger.t('Preload shaders');
     await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
-
-    logger.t('Initialize providers');
-    List<Provider> providers = [
-      Provider<Services>(create: (_) => services),
-      Provider<Repositories>(create: (_) => repos),
-    ];
 
     logger.t('Parsing timer settings from shared prefs');
     TimerSettings timerSettings = services
@@ -82,7 +75,6 @@ class Initializer {
 
     logger.t('Checking if the user has already signed in');
     User? user = await repos.authRepository.authStateChange.first;
-
     ProfileBloc profileBloc = ProfileBloc(
       profileRepository: repos.profileRepository,
       statisticsRepository: repos.statisticsRepository,
@@ -90,7 +82,6 @@ class Initializer {
       crashlyticsService: services.crashlyticsService,
       profileStatsUpdater: ProfileStatsReportUpdater(),
     );
-
     if (user != null) {
       logger.t('User is already signed in, initiate profile loading for user: ${user.uid}');
       profileBloc.add(ProfileEvent.loadProfile(profileId: user.uid));
@@ -101,7 +92,6 @@ class Initializer {
       timerSettings: timerSettings,
       services: services,
       repositories: repos,
-      providers: providers,
       profileBloc: profileBloc,
       remoteSettings: remoteSettings,
     );
