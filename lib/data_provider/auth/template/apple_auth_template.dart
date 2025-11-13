@@ -65,6 +65,7 @@ class AppleAuthTemplate implements AuthTemplate {
     final credential = firebase_auth.OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,
       rawNonce: rawNonce,
+      accessToken: appleCredential.authorizationCode,
     );
 
     // Sign in the user with Firebase. If the nonce we generated earlier does
