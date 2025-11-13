@@ -9,6 +9,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 
 import 'app_colors.dart';
+import 'app_providers.dart';
 import 'app_routes.dart';
 
 /// The main app widget.
@@ -28,14 +29,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RemoteSettingsCubit, RemoteSettingsState>(
+    return AppProviders(
+      initResult: initResult,
+      child: BlocBuilder<RemoteSettingsCubit, RemoteSettingsState>(
       builder: (context, state) {
-        if (state.settings.maintenanceModeEnabled) {
-          return buildMaintenanceModeApp(context);
-        } else {
-          return buildApp(context);
-        }
-      },
+          if (state.settings.maintenanceModeEnabled) {
+            return buildMaintenanceModeApp(context);
+          } else {
+            return buildApp(context);
+          }
+        },
+      ),
     );
   }
 
@@ -74,7 +78,8 @@ class App extends StatelessWidget {
     );
   }
 
-  /// Builds a simple maintenance mode app.
+  /// Builds a simplified maintenance mode app with
+  /// a localized maintenance message.
   Widget buildMaintenanceModeApp(BuildContext context) {
     return MaterialApp(
       color: AppColors.backgroundPaper,
@@ -110,7 +115,6 @@ class App extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
             ],
           ),
         )
@@ -118,5 +122,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-

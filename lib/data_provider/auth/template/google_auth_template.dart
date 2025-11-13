@@ -6,34 +6,61 @@ import 'package:dhyana/data_provider/auth/util/convert_user.dart';
 
 import 'auth_template.dart';
 
+bool _initialized = false;
+
 class GoogleAuthTemplate implements AuthTemplate {
 
-  final GoogleSignIn _googleSignIn;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
-  GoogleAuthTemplate(this._firebaseAuth, this._googleSignIn);
+  GoogleAuthTemplate(this._firebaseAuth);
 
   @override
   Future<SigninResult> signIn() async {
 
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    if (googleUser == null) {
-      throw const SignInCancelled('Signin with Google was cancelled');
+    // GoogleSignIn needs to be initialized only once
+    if (!_initialized) {
+      await _googleSignIn.initialize();
+      _initialized = true;
     }
 
-    final googleAuth = await googleUser.authentication;
+    late GoogleSignInAccount googleUser;
+    try {
+      googleUser = await _googleSignIn.authenticate(
+        scopeHint: [
+          'email',
+          'https://www.googleapis.com/auth/userinfo.profile'
+        ],
+      );
+    } on GoogleSignInException catch (e) {
+      switch (e.code) {
+        case GoogleSignInExceptionCode.canceled:
+          throw const SignInCancelled('Sign in with Google was cancelled');
+        default:
+          rethrow;
+      }
+    }
 
-    firebase_auth.AuthCredential credential = firebase_auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
+    final googleAuth = googleUser.authentication;
+    firebase_auth.AuthCredential credential = firebase_auth.
+      GoogleAuthProvider.credential(
       idToken: googleAuth.idToken,
     );
 
     firebase_auth.UserCredential userCredential =
       await _firebaseAuth.signInWithCredential(credential);
-    User? user = await convertFirebaseUser(userCredential.user);
+
+    User? user;
+    if (userCredential.user == null) {
+      throw const SignInWithGoogleFailure(
+        'Sign in with Google failed: No user returned',
+      );
+    } else {
+      user = convertFirebaseUser(userCredential.user!);
+    }
 
     SigninResult signinResult = SigninResult(
-      user: user!,
+      user: user,
       additionalUserInfo: userCredential.additionalUserInfo,
     );
 

@@ -4,23 +4,15 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 
 // Convert firebase user to a library domain user model.
 // This could be useful with multiple auth providers implemented.
-Future<User?> convertFirebaseUser(firebase_auth.User? firebaseUser) async {
-
-  if (firebaseUser == null) {
-    return null;
-  }
-
-  return User(
-    uid: firebaseUser.uid,
-    metaData: UserMetaData(
-      creationTime: firebaseUser.metadata.creationTime,
-      lastSignInTime: firebaseUser.metadata.lastSignInTime,
-    ),
-    displayName: firebaseUser.displayName,
-    email: firebaseUser.email,
-    photoUrl: firebaseUser.photoURL,
-    roles: const [],
-    accessLevel: 0,
-  );
-
-}
+User convertFirebaseUser(firebase_auth.User firebaseUser) => User(
+  uid: firebaseUser.uid,
+  metaData: UserMetaData(
+    creationTime: firebaseUser.metadata.creationTime,
+    lastSignInTime: firebaseUser.metadata.lastSignInTime,
+  ),
+  displayName: firebaseUser.displayName,
+  email: firebaseUser.email,
+  photoUrl: firebaseUser.photoURL,
+  roles: const [],
+  accessLevel: 0,
+);

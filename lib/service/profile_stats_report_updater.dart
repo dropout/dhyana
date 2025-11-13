@@ -199,7 +199,7 @@ class ProfileStatsReportUpdater {
     // Check if consecutive days has been already validated today
     // In that case no need to continue
     if (now.isSameDay(statsReport.consecutiveDays.lastChecked)) {
-      logger.t('Skipping validating consecutive days: it\' the same day!');
+      logger.t('Skipping validating consecutive days: it\'s the same day!');
       return statsReport;
     }
 

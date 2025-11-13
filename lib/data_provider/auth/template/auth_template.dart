@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dhyana/data_provider/auth/enum/signin_method_type.dart';
 import 'package:dhyana/data_provider/auth/model/all.dart';
 
@@ -16,12 +15,7 @@ abstract class AuthTemplate {
   }) {
     switch (authProviderType) {
       case SigninMethodType.google:
-        return GoogleAuthTemplate(firebaseAuth, GoogleSignIn(
-          scopes: [
-            'email',
-            'https://www.googleapis.com/auth/userinfo.profile'
-          ]
-        ));
+        return GoogleAuthTemplate(firebaseAuth);
       case SigninMethodType.apple:
         return AppleAuthTemplate(firebaseAuth);
       case SigninMethodType.emailAndPassword:

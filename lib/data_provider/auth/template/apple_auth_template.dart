@@ -12,7 +12,6 @@ import 'auth_template.dart';
 class AppleAuthTemplate implements AuthTemplate {
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
-  // final FacebookAuth _facebookAuth;
 
   AppleAuthTemplate(this._firebaseAuth);
 
@@ -71,25 +70,34 @@ class AppleAuthTemplate implements AuthTemplate {
     // Sign in the user with Firebase. If the nonce we generated earlier does
     // not match the nonce in `appleCredential.identityToken`, sign in will fail.
     firebase_auth.UserCredential userCredential =
-    await _firebaseAuth.signInWithCredential(credential);
+      await _firebaseAuth.signInWithCredential(credential);
 
     // Apple only provides this data the first time the user signs in.
     // Firebase does not store the users name when signing in with Apple.
     // The user needs to be updated manually with this data.
     // Also no profile image is provided
-    firebase_auth.User? fbUser = await updateDisplayName(appleCredential);
-    User? user = await convertFirebaseUser(fbUser);
+    firebase_auth.User? fbUser = userCredential.user;
+    if (fbUser == null) {
+      throw const SignInWithAppleFailure(
+        'Sign in with Apple failed: No user returned',
+      );
+    } else {
+      fbUser = await updateDisplayName(fbUser, appleCredential);
+    }
 
-    SigninResult signinResult = SigninResult(
-      user: user!,
+    // Our domain user model
+    User user = convertFirebaseUser(fbUser);
+
+    return SigninResult(
+      user: user,
       additionalUserInfo: userCredential.additionalUserInfo,
     );
-
-    return signinResult;
-
   }
 
-  Future<firebase_auth.User?> updateDisplayName(AuthorizationCredentialAppleID appleCredential) async {
+  Future<firebase_auth.User> updateDisplayName(
+    firebase_auth.User fbUser,
+    AuthorizationCredentialAppleID appleCredential
+  ) async {
     String displayName = '';
 
     if (appleCredential.familyName != null) {
@@ -101,13 +109,11 @@ class AppleAuthTemplate implements AuthTemplate {
     }
 
     if (displayName.isNotEmpty) {
-      final firebase_auth.User? oldUser = _firebaseAuth.currentUser;
-      await oldUser?.updateDisplayName(displayName);
+      await fbUser.updateDisplayName(displayName);
+      await fbUser.reload(); // Might not be necessary??
     }
 
-    final firebase_auth.User? newUser = _firebaseAuth.currentUser;
-
-    return newUser!;
+    return fbUser;
   }
 
 }

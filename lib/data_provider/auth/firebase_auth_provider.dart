@@ -10,32 +10,27 @@ import 'package:dhyana/data_provider/auth/util/convert_user.dart';
 
 import 'model/all.dart';
 
+/// Firebase implementation of [AuthProvider]
+/// Uses `firebase_auth` package to provide authentication features.
 class FirebaseAuthProvider implements AuthProvider {
 
+  /// Firebase Auth instance
   final firebase_auth.FirebaseAuth _auth;
+
+  /// Our domain user object
+  /// Will be updated on auth state changes
+  /// If user is not signed in, this will be null
   User? _user;
 
-  FirebaseAuthProvider(
-    this._auth,
-  );
+  FirebaseAuthProvider(this._auth);
 
   @override
-  Stream<User?> get authStateChange {
-    return _auth.authStateChanges()
-      .asyncMap<User?>((firebase_auth.User? firebaseUser) async {
-        _user = await convertFirebaseUser(firebaseUser);
-        return _user;
-    });
-  }
+  Stream<User?> get authStateChange =>
+    _auth.authStateChanges().map(_mapUser);
 
   @override
-  Stream<User?> get userChange {
-    return _auth.userChanges()
-      .asyncMap<User?>((firebase_auth.User? firebaseUser) async {
-        _user = await convertFirebaseUser(firebaseUser);
-        return _user;
-    });
-  }
+  Stream<User?> get userChange =>
+    _auth.userChanges().map(_mapUser);
 
   @override
   Future<User?> get user => Future.value(_user);
@@ -61,7 +56,6 @@ class FirebaseAuthProvider implements AuthProvider {
     return signinResult;
   }
 
-
   @override
   Future<void> signOut() async {
 
@@ -73,8 +67,8 @@ class FirebaseAuthProvider implements AuthProvider {
      */
     if (defaultTargetPlatform == TargetPlatform.android) {
       try {
-        GoogleSignIn googleSignIn = GoogleSignIn();
-        bool isSignedInWithGoogle = await googleSignIn.isSignedIn();
+        GoogleSignIn googleSignIn = GoogleSignIn.instance;
+        bool isSignedInWithGoogle = await googleSignIn.attemptLightweightAuthentication() != null;
         if (isSignedInWithGoogle) {
           await googleSignIn.disconnect().catchError((e, stack) {
             FirebaseCrashlytics.instance.recordError(e, stack,
@@ -99,6 +93,17 @@ class FirebaseAuthProvider implements AuthProvider {
       throw Exception('Unable to delete user, because it look like its not signed in...');
     } else {
       return _auth.currentUser!.delete();
+    }
+  }
+
+  /// Maps Firebase User to our domain User
+  User? _mapUser(firebase_auth.User? firebaseUser) {
+    if (firebaseUser == null) {
+      _user = null;
+      return null;
+    } else {
+      _user = convertFirebaseUser(firebaseUser);
+      return _user;
     }
   }
 

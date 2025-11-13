@@ -73,7 +73,7 @@ class Initializer {
       .timerSettingsSharedPrefsService
       .getTimerSettings();
 
-    logger.t('Checking if the user has already signed in');
+
     User? user = await repos.authRepository.authStateChange.first;
     ProfileBloc profileBloc = ProfileBloc(
       profileRepository: repos.profileRepository,
@@ -82,9 +82,12 @@ class Initializer {
       crashlyticsService: services.crashlyticsService,
       profileStatsUpdater: ProfileStatsReportUpdater(),
     );
+
     if (user != null) {
       logger.t('User is already signed in, initiate profile loading for user: ${user.uid}');
       profileBloc.add(ProfileEvent.loadProfile(profileId: user.uid));
+    } else {
+      logger.t('User not signed in');
     }
 
     return InitResult(

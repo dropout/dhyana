@@ -17,6 +17,14 @@ class SignInWithAppleFailure implements Exception {
   String toString() => 'SignInWithAppleFailure: $msg';
 }
 
+// Email and Password
+class SignInWithEmailAndPasswordFailure implements Exception {
+  final String msg;
+  const SignInWithEmailAndPasswordFailure(this.msg);
+  @override
+  String toString() => 'SignInWithEmailAndPasswordFailure: $msg';
+}
+
 // Specific exception to handle case when user cancels
 // the signin process
 class SignInCancelled implements Exception {

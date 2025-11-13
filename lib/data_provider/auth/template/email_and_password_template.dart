@@ -1,3 +1,4 @@
+import 'package:dhyana/data_provider/auth/exception.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:dhyana/data_provider/auth/model/all.dart';
 import 'package:dhyana/data_provider/auth/util/convert_user.dart';
@@ -23,12 +24,18 @@ class EmailAndPasswordTemplate implements AuthTemplate {
         email: email,
         password: password
       );
-    User? user = await convertFirebaseUser(userCredential.user);
-    SigninResult signinResult = SigninResult(
-      user: user!,
+
+    if (userCredential.user == null) {
+      throw const SignInWithEmailAndPasswordFailure(
+        'Sign in with Email and Password failed: No user returned',
+      );
+    }
+
+    User? user = convertFirebaseUser(userCredential.user!);
+    return SigninResult(
+      user: user,
       additionalUserInfo: userCredential.additionalUserInfo
     );
-    return signinResult;
   }
 
 }
