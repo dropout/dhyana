@@ -33,6 +33,8 @@ class AppThemeData {
   static const double circleLg = 96.0;
   static const double circleXl = 128.0;
 
+  static const double inputHeight = 42.0;
+
   static const defaultBoxShadow = [
     BoxShadow(
       color: Colors.black26,
