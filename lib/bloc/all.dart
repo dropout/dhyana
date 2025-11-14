@@ -1,7 +1,7 @@
 export 'auth/auth_bloc.dart';
 export 'days/days_cubit.dart';
 export 'delete_user/delete_user_cubit.dart';
-export 'months/months_bloc.dart';
+export 'months/months_cubit.dart';
 export 'presence/presence_bloc.dart';
 export 'profile/profile_bloc.dart';
 export 'remote_settings/remote_settings_cubit.dart';

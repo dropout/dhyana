@@ -1,5 +1,5 @@
 
-import 'package:dhyana/bloc/months/months_bloc.dart';
+import 'package:dhyana/bloc/months/months_cubit.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/months_bar_chart_page.dart';
@@ -55,16 +55,16 @@ class MonthTabState extends State<MonthTab> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return BlocProvider<MonthsBloc>(
+                  return BlocProvider<MonthsCubit>(
                     create: (BuildContext context) {
-                      return MonthsBloc(
+                      return MonthsCubit(
                           statisticsRepository: context.repos.statisticsRepository,
                           crashlyticsService: context.services.crashlyticsService
-                      )..add(MonthsEvent.queryMonths(
+                      )..queryMonths(
                         profileId: widget.profile.id,
                         from: intervals[index].from,
                         to: intervals[index].to,
-                      ));
+                      );
                     },
                     child: MonthsBarChartPage(
                       pageIndex: index,

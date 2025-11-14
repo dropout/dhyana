@@ -13,9 +13,6 @@ _RemoteSettings _$RemoteSettingsFromJson(
   minimumRequiredAppVersion:
       json['minimumRequiredAppVersion'] as String? ?? "1.0.0",
   contactUrl: json['contactUrl'] as String? ?? "https://lazits.app/kapcsolat",
-  eventsUrl:
-      json['eventsUrl'] as String? ??
-      "https://domjanaron.hu/agykontroll-tanfolyam",
   privacyPolicyUrl:
       json['privacyPolicyUrl'] as String? ?? "https://lazits.app/adatkezeles",
   termsOfServiceUrl:
@@ -27,7 +24,6 @@ Map<String, dynamic> _$RemoteSettingsToJson(_RemoteSettings instance) =>
       'maintenanceModeEnabled': instance.maintenanceModeEnabled,
       'minimumRequiredAppVersion': instance.minimumRequiredAppVersion,
       'contactUrl': instance.contactUrl,
-      'eventsUrl': instance.eventsUrl,
       'privacyPolicyUrl': instance.privacyPolicyUrl,
       'termsOfServiceUrl': instance.termsOfServiceUrl,
     };

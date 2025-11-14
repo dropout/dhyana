@@ -1,8 +1,7 @@
-part of 'months_bloc.dart';
+part of 'months_cubit.dart';
 
 @freezed
-sealed class MonthsState with _$MonthsState {
-
+class MonthsState with _$MonthsState {
   const factory MonthsState.loading() = MonthsLoadingState;
   const factory MonthsState.loaded({
     required List<Month> months,

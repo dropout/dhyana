@@ -1,40 +1,42 @@
-import 'package:dhyana/model/all.dart';
-import 'package:dhyana/util/all.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/month.dart';
+import 'package:dhyana/model/month_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/util/all.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'months_event.dart';
 part 'months_state.dart';
-part 'months_bloc.freezed.dart';
+part 'months_cubit.freezed.dart';
 
-class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
+class MonthsCubit extends Cubit<MonthsState> {
 
-  final Logger logger = getLogger('MonthsBloc');
+  final Logger logger = getLogger('MonthsCubit');
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
 
-  MonthsBloc({
+  MonthsCubit({
     required this.statisticsRepository,
     required this.crashlyticsService,
-  }) : super(const MonthsState.loading()) {
-    on<QueryMonthsEvent>(_onQueryMonthsEvent);
-  }
+  }) : super(const MonthsState.loading());
 
-  void _onQueryMonthsEvent(QueryMonthsEvent event, emit) async {
+  void queryMonths({
+    required String profileId,
+    required DateTime from,
+    DateTime? to,
+  }) async {
     try {
-      logger.t('Loading months: ${event.from} ... ${event.to}');
+      logger.t('Loading months: $from ... $to');
       emit(const MonthsState.loading());
       MonthQueryOptions queryOptions = MonthQueryOptions(
-        from: event.from,
-        to: event.to ?? DateTime.now()
+        from: from,
+        to: to ?? DateTime.now()
       );
       List<Month> months = await statisticsRepository.queryMonths(
-        event.profileId,
+        profileId,
         queryOptions,
       );
 
@@ -76,4 +78,5 @@ class MonthsBloc extends Bloc<MonthsEvent, MonthsState> {
 
     return result;
   }
+
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RemoteSettings implements DiagnosticableTreeMixin {
 
- bool get maintenanceModeEnabled; String get minimumRequiredAppVersion; String get contactUrl; String get eventsUrl; String get privacyPolicyUrl; String get termsOfServiceUrl;
+ bool get maintenanceModeEnabled; String get minimumRequiredAppVersion; String get contactUrl; String get privacyPolicyUrl; String get termsOfServiceUrl;
 /// Create a copy of RemoteSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,21 +29,21 @@ $RemoteSettingsCopyWith<RemoteSettings> get copyWith => _$RemoteSettingsCopyWith
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'RemoteSettings'))
-    ..add(DiagnosticsProperty('maintenanceModeEnabled', maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', contactUrl))..add(DiagnosticsProperty('eventsUrl', eventsUrl))..add(DiagnosticsProperty('privacyPolicyUrl', privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', termsOfServiceUrl));
+    ..add(DiagnosticsProperty('maintenanceModeEnabled', maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', contactUrl))..add(DiagnosticsProperty('privacyPolicyUrl', privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', termsOfServiceUrl));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.eventsUrl, eventsUrl) || other.eventsUrl == eventsUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,eventsUrl,privacyPolicyUrl,termsOfServiceUrl);
+int get hashCode => Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,privacyPolicyUrl,termsOfServiceUrl);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, eventsUrl: $eventsUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
+  return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $RemoteSettingsCopyWith<$Res>  {
   factory $RemoteSettingsCopyWith(RemoteSettings value, $Res Function(RemoteSettings) _then) = _$RemoteSettingsCopyWithImpl;
 @useResult
 $Res call({
- bool maintenanceModeEnabled, String minimumRequiredAppVersion, String contactUrl, String eventsUrl, String privacyPolicyUrl, String termsOfServiceUrl
+ bool maintenanceModeEnabled, String minimumRequiredAppVersion, String contactUrl, String privacyPolicyUrl, String termsOfServiceUrl
 });
 
 
@@ -71,12 +71,11 @@ class _$RemoteSettingsCopyWithImpl<$Res>
 
 /// Create a copy of RemoteSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? maintenanceModeEnabled = null,Object? minimumRequiredAppVersion = null,Object? contactUrl = null,Object? eventsUrl = null,Object? privacyPolicyUrl = null,Object? termsOfServiceUrl = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? maintenanceModeEnabled = null,Object? minimumRequiredAppVersion = null,Object? contactUrl = null,Object? privacyPolicyUrl = null,Object? termsOfServiceUrl = null,}) {
   return _then(_self.copyWith(
 maintenanceModeEnabled: null == maintenanceModeEnabled ? _self.maintenanceModeEnabled : maintenanceModeEnabled // ignore: cast_nullable_to_non_nullable
 as bool,minimumRequiredAppVersion: null == minimumRequiredAppVersion ? _self.minimumRequiredAppVersion : minimumRequiredAppVersion // ignore: cast_nullable_to_non_nullable
 as String,contactUrl: null == contactUrl ? _self.contactUrl : contactUrl // ignore: cast_nullable_to_non_nullable
-as String,eventsUrl: null == eventsUrl ? _self.eventsUrl : eventsUrl // ignore: cast_nullable_to_non_nullable
 as String,privacyPolicyUrl: null == privacyPolicyUrl ? _self.privacyPolicyUrl : privacyPolicyUrl // ignore: cast_nullable_to_non_nullable
 as String,termsOfServiceUrl: null == termsOfServiceUrl ? _self.termsOfServiceUrl : termsOfServiceUrl // ignore: cast_nullable_to_non_nullable
 as String,
@@ -126,10 +125,7 @@ return $default(_that);case _:
 final _that = this;
 switch (_that) {
 case _RemoteSettings():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return $default(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -164,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool maintenanceModeEnabled,  String minimumRequiredAppVersion,  String contactUrl,  String eventsUrl,  String privacyPolicyUrl,  String termsOfServiceUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool maintenanceModeEnabled,  String minimumRequiredAppVersion,  String contactUrl,  String privacyPolicyUrl,  String termsOfServiceUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RemoteSettings() when $default != null:
-return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_that.contactUrl,_that.eventsUrl,_that.privacyPolicyUrl,_that.termsOfServiceUrl);case _:
+return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_that.contactUrl,_that.privacyPolicyUrl,_that.termsOfServiceUrl);case _:
   return orElse();
 
 }
@@ -185,13 +181,10 @@ return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool maintenanceModeEnabled,  String minimumRequiredAppVersion,  String contactUrl,  String eventsUrl,  String privacyPolicyUrl,  String termsOfServiceUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool maintenanceModeEnabled,  String minimumRequiredAppVersion,  String contactUrl,  String privacyPolicyUrl,  String termsOfServiceUrl)  $default,) {final _that = this;
 switch (_that) {
 case _RemoteSettings():
-return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_that.contactUrl,_that.eventsUrl,_that.privacyPolicyUrl,_that.termsOfServiceUrl);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_that.contactUrl,_that.privacyPolicyUrl,_that.termsOfServiceUrl);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -205,10 +198,10 @@ return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool maintenanceModeEnabled,  String minimumRequiredAppVersion,  String contactUrl,  String eventsUrl,  String privacyPolicyUrl,  String termsOfServiceUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool maintenanceModeEnabled,  String minimumRequiredAppVersion,  String contactUrl,  String privacyPolicyUrl,  String termsOfServiceUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _RemoteSettings() when $default != null:
-return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_that.contactUrl,_that.eventsUrl,_that.privacyPolicyUrl,_that.termsOfServiceUrl);case _:
+return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_that.contactUrl,_that.privacyPolicyUrl,_that.termsOfServiceUrl);case _:
   return null;
 
 }
@@ -220,13 +213,12 @@ return $default(_that.maintenanceModeEnabled,_that.minimumRequiredAppVersion,_th
 @JsonSerializable()
 
 class _RemoteSettings extends RemoteSettings with DiagnosticableTreeMixin {
-   _RemoteSettings({this.maintenanceModeEnabled = false, this.minimumRequiredAppVersion = "1.0.0", this.contactUrl = "https://lazits.app/kapcsolat", this.eventsUrl = "https://domjanaron.hu/agykontroll-tanfolyam", this.privacyPolicyUrl = "https://lazits.app/adatkezeles", this.termsOfServiceUrl = "https://lazits.app/aszf"}): super._();
+   _RemoteSettings({this.maintenanceModeEnabled = false, this.minimumRequiredAppVersion = "1.0.0", this.contactUrl = "https://lazits.app/kapcsolat", this.privacyPolicyUrl = "https://lazits.app/adatkezeles", this.termsOfServiceUrl = "https://lazits.app/aszf"}): super._();
   factory _RemoteSettings.fromJson(Map<String, dynamic> json) => _$RemoteSettingsFromJson(json);
 
 @override@JsonKey() final  bool maintenanceModeEnabled;
 @override@JsonKey() final  String minimumRequiredAppVersion;
 @override@JsonKey() final  String contactUrl;
-@override@JsonKey() final  String eventsUrl;
 @override@JsonKey() final  String privacyPolicyUrl;
 @override@JsonKey() final  String termsOfServiceUrl;
 
@@ -244,21 +236,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'RemoteSettings'))
-    ..add(DiagnosticsProperty('maintenanceModeEnabled', maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', contactUrl))..add(DiagnosticsProperty('eventsUrl', eventsUrl))..add(DiagnosticsProperty('privacyPolicyUrl', privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', termsOfServiceUrl));
+    ..add(DiagnosticsProperty('maintenanceModeEnabled', maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', contactUrl))..add(DiagnosticsProperty('privacyPolicyUrl', privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', termsOfServiceUrl));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.eventsUrl, eventsUrl) || other.eventsUrl == eventsUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,eventsUrl,privacyPolicyUrl,termsOfServiceUrl);
+int get hashCode => Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,privacyPolicyUrl,termsOfServiceUrl);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, eventsUrl: $eventsUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
+  return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
 }
 
 
@@ -269,7 +261,7 @@ abstract mixin class _$RemoteSettingsCopyWith<$Res> implements $RemoteSettingsCo
   factory _$RemoteSettingsCopyWith(_RemoteSettings value, $Res Function(_RemoteSettings) _then) = __$RemoteSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- bool maintenanceModeEnabled, String minimumRequiredAppVersion, String contactUrl, String eventsUrl, String privacyPolicyUrl, String termsOfServiceUrl
+ bool maintenanceModeEnabled, String minimumRequiredAppVersion, String contactUrl, String privacyPolicyUrl, String termsOfServiceUrl
 });
 
 
@@ -286,12 +278,11 @@ class __$RemoteSettingsCopyWithImpl<$Res>
 
 /// Create a copy of RemoteSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? maintenanceModeEnabled = null,Object? minimumRequiredAppVersion = null,Object? contactUrl = null,Object? eventsUrl = null,Object? privacyPolicyUrl = null,Object? termsOfServiceUrl = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? maintenanceModeEnabled = null,Object? minimumRequiredAppVersion = null,Object? contactUrl = null,Object? privacyPolicyUrl = null,Object? termsOfServiceUrl = null,}) {
   return _then(_RemoteSettings(
 maintenanceModeEnabled: null == maintenanceModeEnabled ? _self.maintenanceModeEnabled : maintenanceModeEnabled // ignore: cast_nullable_to_non_nullable
 as bool,minimumRequiredAppVersion: null == minimumRequiredAppVersion ? _self.minimumRequiredAppVersion : minimumRequiredAppVersion // ignore: cast_nullable_to_non_nullable
 as String,contactUrl: null == contactUrl ? _self.contactUrl : contactUrl // ignore: cast_nullable_to_non_nullable
-as String,eventsUrl: null == eventsUrl ? _self.eventsUrl : eventsUrl // ignore: cast_nullable_to_non_nullable
 as String,privacyPolicyUrl: null == privacyPolicyUrl ? _self.privacyPolicyUrl : privacyPolicyUrl // ignore: cast_nullable_to_non_nullable
 as String,termsOfServiceUrl: null == termsOfServiceUrl ? _self.termsOfServiceUrl : termsOfServiceUrl // ignore: cast_nullable_to_non_nullable
 as String,

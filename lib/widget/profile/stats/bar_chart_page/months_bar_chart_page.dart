@@ -1,5 +1,5 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/bloc/months/months_bloc.dart';
+import 'package:dhyana/bloc/months/months_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/month.dart';
@@ -31,7 +31,7 @@ class MonthsBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MonthsBloc, MonthsState>(
+    return BlocConsumer<MonthsCubit, MonthsState>(
       builder: (context, state) {
         switch (state) {
           case MonthsLoadingState():
@@ -40,6 +40,8 @@ class MonthsBarChartPage extends StatelessWidget {
             return BarChartPageError();
           case MonthsLoadedState():
             return buildLoadedState(context, state);
+          default:
+            return SizedBox.shrink();
         }
       },
       listener: (context, state) {
