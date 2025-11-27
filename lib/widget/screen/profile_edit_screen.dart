@@ -169,6 +169,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
           text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
+      case LoadingState.error:
+        return AppButton(
+          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          onTap: () => _onSave(context, profile),
+        );
     }
   }
 

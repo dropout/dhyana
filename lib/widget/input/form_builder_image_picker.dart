@@ -59,19 +59,7 @@ class FormBuilderImagePicker extends FormBuilderField<Uint8List> {
 }
 
 class FormBuilderImagePickerState
-    extends FormBuilderFieldState<FormBuilderImagePicker, Uint8List> {
-
-
-
-  @override
-  void initState() {
-
-    if (widget.initialImageUrl != null) {
-
-    }
-
-    super.initState();
-  }
+  extends FormBuilderFieldState<FormBuilderImagePicker, Uint8List> {
 }
 
 

@@ -1,6 +1,7 @@
 export 'app_settings.dart';
 export 'calculated_stats.dart';
 export 'consecutive_days.dart';
+export 'city_search_result.dart';
 export 'day.dart';
 export 'day_query_options.dart';
 export 'milestone.dart';

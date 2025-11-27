@@ -33,3 +33,18 @@ export interface MilestoneProgress {
   targetDaysCount: number;
   sessions: [];
 }
+
+export interface CitySearchResult {
+  placeId: string;
+  name: string;
+  types: string[];
+  location?: {
+    latitude: number,
+    longitude: number
+  } | null;
+}
+
+export interface CitySearchResponse {
+  queryString: string;
+  results: CitySearchResult[];
+}

@@ -1,9 +1,7 @@
 import 'package:dhyana/data_provider/all.dart';
-import 'package:dhyana/service/default_shader_service.dart';
-import 'package:dhyana/service/firebase_remote_settings_service.dart';
+import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dhyana/service/all.dart';
 
 /// A container for all services used in the app.
 /// Available on the context object via Provider and BuildContext extension
@@ -22,6 +20,7 @@ class Services {
   final OverlayService overlayService;
   final CacheManagerService cacheManagerService;
   final WakelockService wakelockService;
+  final FunctionsService functionsService;
 
   Services({
     required this.analyticsService,
@@ -36,6 +35,7 @@ class Services {
     required this.timerSettingsSharedPrefsService,
     required this.idGeneratorService,
     required this.wakelockService,
+    required this.functionsService,
   });
 
 }
@@ -54,6 +54,7 @@ class ServicesBuilder {
   late WakelockService _wakelockService;
   late TimerSettingsSharedPrefsService _timerSettingsSharedPrefsService;
   late ShaderService _shaderService;
+  late FunctionsService _functionsService;
 
   ServicesBuilder({
     required FirebaseProvider firebaseProvider,
@@ -76,7 +77,7 @@ class ServicesBuilder {
       storageDataProvider: storageDataProvider,
     );
     _cacheManagerService = DefaultCacheManagerService();
-    _wakelockService = WakelockService();
+    _wakelockService = DefaultWakelockService();
 
     _remoteConfigService = FirebaseRemoteSettingsService(
       firebaseProvider.remoteConfig,
@@ -89,6 +90,9 @@ class ServicesBuilder {
       );
 
     _shaderService = DefaultShaderService();
+    _functionsService = FirebaseFunctionsService(
+      fbFunctions: firebaseProvider.functions,
+    );
   }
 
   Services build() {
@@ -105,6 +109,7 @@ class ServicesBuilder {
       wakelockService: _wakelockService,
       timerSettingsSharedPrefsService: _timerSettingsSharedPrefsService,
       shaderService: _shaderService,
+      functionsService: _functionsService,
     );
   }
 

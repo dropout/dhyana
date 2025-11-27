@@ -1,17 +1,8 @@
-import 'package:wakelock_plus/wakelock_plus.dart';
 
-class WakelockService {
+abstract interface class WakelockService {
 
-  Future<void> enable() async {
-    WakelockPlus.enable();
-  }
-
-  Future<void> disable() async {
-    WakelockPlus.disable();
-  }
-
-  Future<bool> isEnabled() async {
-    return WakelockPlus.enabled;
-  }
+  Future<void> enable();
+  Future<void> disable();
+  Future<bool> isEnabled();
 
 }

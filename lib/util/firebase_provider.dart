@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -56,6 +57,7 @@ class FirebaseProvider {
     _setFirebaseFirestoreEmulatorUsage();
     await _setFirebaseStorageEmulatorUsage();
     await _setFirebaseAuthEmulatorUsage();
+    await _setFirebaseFunctionsEmulatorUsage();
     _useEmulator = true;
   }
 
@@ -78,10 +80,11 @@ class FirebaseProvider {
   FirebaseAnalytics get analytics =>
     FirebaseAnalytics.instance;
 
-
   FirebaseRemoteConfig get remoteConfig =>
     FirebaseRemoteConfig.instance;
 
+  FirebaseFunctions get functions =>
+    FirebaseFunctions.instanceFor(region: "europe-central2");
 
   bool get isEmulatorUsageEnabled => _useEmulator;
 
@@ -124,6 +127,16 @@ class FirebaseProvider {
       rethrow;
     }
   }
+
+    Future<void> _setFirebaseFunctionsEmulatorUsage() async {
+      try {
+        FirebaseFunctions.instance.useFunctionsEmulator(_getEmulatorHost(), 5001);
+        logger.t('Functions emulator host: ${_getEmulatorHost()}:5001}');
+      } catch (err) {
+        logger.t('Unable to set Firebase Auth emulator!');
+        rethrow;
+      }
+    }
 
   String _getEmulatorHost() {
     return '127.0.0.1';

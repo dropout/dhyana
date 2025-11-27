@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
-class UserMetaData extends Equatable {
-
+@immutable
+class UserMetaData {
   final DateTime? creationTime;
   final DateTime? lastSignInTime;
 
@@ -11,7 +11,25 @@ class UserMetaData extends Equatable {
   });
 
   @override
-  List<Object?> get props => [creationTime, lastSignInTime];
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is UserMetaData &&
+      other.creationTime == creationTime &&
+      other.lastSignInTime == lastSignInTime;
+  }
+
+  @override
+  int get hashCode => Object.hash(creationTime, lastSignInTime);
+
+  UserMetaData copyWith({
+    DateTime? creationTime,
+    DateTime? lastSignInTime,
+  }) {
+    return UserMetaData(
+      creationTime: creationTime ?? this.creationTime,
+      lastSignInTime: lastSignInTime ?? this.lastSignInTime,
+    );
+  }
 
   @override
   String toString() {

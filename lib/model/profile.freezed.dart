@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Profile implements DiagnosticableTreeMixin {
 
- String get id; String get firstName; String get lastName; String get email; String get photoUrl; String get photoBlurhash;@DateTimeConverter() DateTime get signupDate; ProfileStatisticsReport get statsReport; bool get completed;
+ String get id; String get firstName; String get lastName; String get email; String get photoUrl; String get photoBlurhash;@DateTimeConverter() DateTime get signupDate; ProfileStatisticsReport get statsReport; bool get completed; Location? get location;
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,21 +29,21 @@ $ProfileCopyWith<Profile> get copyWith => _$ProfileCopyWithImpl<Profile>(this as
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Profile'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstName', firstName))..add(DiagnosticsProperty('lastName', lastName))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('photoUrl', photoUrl))..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))..add(DiagnosticsProperty('signupDate', signupDate))..add(DiagnosticsProperty('statsReport', statsReport))..add(DiagnosticsProperty('completed', completed));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstName', firstName))..add(DiagnosticsProperty('lastName', lastName))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('photoUrl', photoUrl))..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))..add(DiagnosticsProperty('signupDate', signupDate))..add(DiagnosticsProperty('statsReport', statsReport))..add(DiagnosticsProperty('completed', completed))..add(DiagnosticsProperty('location', location));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed)&&(identical(other.location, location) || other.location == location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,signupDate,statsReport,completed);
+int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,signupDate,statsReport,completed,location);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Profile(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, signupDate: $signupDate, statsReport: $statsReport, completed: $completed)';
+  return 'Profile(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, signupDate: $signupDate, statsReport: $statsReport, completed: $completed, location: $location)';
 }
 
 
@@ -54,11 +54,11 @@ abstract mixin class $ProfileCopyWith<$Res>  {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) _then) = _$ProfileCopyWithImpl;
 @useResult
 $Res call({
- String id, String firstName, String lastName, String email, String photoUrl, String photoBlurhash,@DateTimeConverter() DateTime signupDate, ProfileStatisticsReport statsReport, bool completed
+ String id, String firstName, String lastName, String email, String photoUrl, String photoBlurhash,@DateTimeConverter() DateTime signupDate, ProfileStatisticsReport statsReport, bool completed, Location? location
 });
 
 
-$ProfileStatisticsReportCopyWith<$Res> get statsReport;
+$ProfileStatisticsReportCopyWith<$Res> get statsReport;$LocationCopyWith<$Res>? get location;
 
 }
 /// @nodoc
@@ -71,7 +71,7 @@ class _$ProfileCopyWithImpl<$Res>
 
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? photoUrl = null,Object? photoBlurhash = null,Object? signupDate = null,Object? statsReport = null,Object? completed = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? photoUrl = null,Object? photoBlurhash = null,Object? signupDate = null,Object? statsReport = null,Object? completed = null,Object? location = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,8 @@ as String,photoBlurhash: null == photoBlurhash ? _self.photoBlurhash : photoBlur
 as String,signupDate: null == signupDate ? _self.signupDate : signupDate // ignore: cast_nullable_to_non_nullable
 as DateTime,statsReport: null == statsReport ? _self.statsReport : statsReport // ignore: cast_nullable_to_non_nullable
 as ProfileStatisticsReport,completed: null == completed ? _self.completed : completed // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
+as Location?,
   ));
 }
 /// Create a copy of Profile
@@ -93,6 +94,18 @@ $ProfileStatisticsReportCopyWith<$Res> get statsReport {
   
   return $ProfileStatisticsReportCopyWith<$Res>(_self.statsReport, (value) {
     return _then(_self.copyWith(statsReport: value));
+  });
+}/// Create a copy of Profile
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocationCopyWith<$Res>? get location {
+    if (_self.location == null) {
+    return null;
+  }
+
+  return $LocationCopyWith<$Res>(_self.location!, (value) {
+    return _then(_self.copyWith(location: value));
   });
 }
 }
@@ -176,10 +189,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String firstName,  String lastName,  String email,  String photoUrl,  String photoBlurhash, @DateTimeConverter()  DateTime signupDate,  ProfileStatisticsReport statsReport,  bool completed)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String firstName,  String lastName,  String email,  String photoUrl,  String photoBlurhash, @DateTimeConverter()  DateTime signupDate,  ProfileStatisticsReport statsReport,  bool completed,  Location? location)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Profile() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoUrl,_that.photoBlurhash,_that.signupDate,_that.statsReport,_that.completed);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoUrl,_that.photoBlurhash,_that.signupDate,_that.statsReport,_that.completed,_that.location);case _:
   return orElse();
 
 }
@@ -197,10 +210,10 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoU
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String firstName,  String lastName,  String email,  String photoUrl,  String photoBlurhash, @DateTimeConverter()  DateTime signupDate,  ProfileStatisticsReport statsReport,  bool completed)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String firstName,  String lastName,  String email,  String photoUrl,  String photoBlurhash, @DateTimeConverter()  DateTime signupDate,  ProfileStatisticsReport statsReport,  bool completed,  Location? location)  $default,) {final _that = this;
 switch (_that) {
 case _Profile():
-return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoUrl,_that.photoBlurhash,_that.signupDate,_that.statsReport,_that.completed);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoUrl,_that.photoBlurhash,_that.signupDate,_that.statsReport,_that.completed,_that.location);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -217,10 +230,10 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoU
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String firstName,  String lastName,  String email,  String photoUrl,  String photoBlurhash, @DateTimeConverter()  DateTime signupDate,  ProfileStatisticsReport statsReport,  bool completed)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String firstName,  String lastName,  String email,  String photoUrl,  String photoBlurhash, @DateTimeConverter()  DateTime signupDate,  ProfileStatisticsReport statsReport,  bool completed,  Location? location)?  $default,) {final _that = this;
 switch (_that) {
 case _Profile() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoUrl,_that.photoBlurhash,_that.signupDate,_that.statsReport,_that.completed);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoUrl,_that.photoBlurhash,_that.signupDate,_that.statsReport,_that.completed,_that.location);case _:
   return null;
 
 }
@@ -232,7 +245,7 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoU
 @JsonSerializable()
 
 class _Profile extends Profile with DiagnosticableTreeMixin {
-  const _Profile({required this.id, required this.firstName, required this.lastName, required this.email, required this.photoUrl, required this.photoBlurhash, @DateTimeConverter() required this.signupDate, required this.statsReport, required this.completed}): super._();
+  const _Profile({required this.id, required this.firstName, required this.lastName, required this.email, required this.photoUrl, required this.photoBlurhash, @DateTimeConverter() required this.signupDate, required this.statsReport, required this.completed, this.location}): super._();
   factory _Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 
 @override final  String id;
@@ -244,6 +257,7 @@ class _Profile extends Profile with DiagnosticableTreeMixin {
 @override@DateTimeConverter() final  DateTime signupDate;
 @override final  ProfileStatisticsReport statsReport;
 @override final  bool completed;
+@override final  Location? location;
 
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
@@ -259,21 +273,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Profile'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstName', firstName))..add(DiagnosticsProperty('lastName', lastName))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('photoUrl', photoUrl))..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))..add(DiagnosticsProperty('signupDate', signupDate))..add(DiagnosticsProperty('statsReport', statsReport))..add(DiagnosticsProperty('completed', completed));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstName', firstName))..add(DiagnosticsProperty('lastName', lastName))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('photoUrl', photoUrl))..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))..add(DiagnosticsProperty('signupDate', signupDate))..add(DiagnosticsProperty('statsReport', statsReport))..add(DiagnosticsProperty('completed', completed))..add(DiagnosticsProperty('location', location));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed)&&(identical(other.location, location) || other.location == location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,signupDate,statsReport,completed);
+int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,signupDate,statsReport,completed,location);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Profile(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, signupDate: $signupDate, statsReport: $statsReport, completed: $completed)';
+  return 'Profile(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, signupDate: $signupDate, statsReport: $statsReport, completed: $completed, location: $location)';
 }
 
 
@@ -284,11 +298,11 @@ abstract mixin class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   factory _$ProfileCopyWith(_Profile value, $Res Function(_Profile) _then) = __$ProfileCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String firstName, String lastName, String email, String photoUrl, String photoBlurhash,@DateTimeConverter() DateTime signupDate, ProfileStatisticsReport statsReport, bool completed
+ String id, String firstName, String lastName, String email, String photoUrl, String photoBlurhash,@DateTimeConverter() DateTime signupDate, ProfileStatisticsReport statsReport, bool completed, Location? location
 });
 
 
-@override $ProfileStatisticsReportCopyWith<$Res> get statsReport;
+@override $ProfileStatisticsReportCopyWith<$Res> get statsReport;@override $LocationCopyWith<$Res>? get location;
 
 }
 /// @nodoc
@@ -301,7 +315,7 @@ class __$ProfileCopyWithImpl<$Res>
 
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? photoUrl = null,Object? photoBlurhash = null,Object? signupDate = null,Object? statsReport = null,Object? completed = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? photoUrl = null,Object? photoBlurhash = null,Object? signupDate = null,Object? statsReport = null,Object? completed = null,Object? location = freezed,}) {
   return _then(_Profile(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
@@ -312,7 +326,8 @@ as String,photoBlurhash: null == photoBlurhash ? _self.photoBlurhash : photoBlur
 as String,signupDate: null == signupDate ? _self.signupDate : signupDate // ignore: cast_nullable_to_non_nullable
 as DateTime,statsReport: null == statsReport ? _self.statsReport : statsReport // ignore: cast_nullable_to_non_nullable
 as ProfileStatisticsReport,completed: null == completed ? _self.completed : completed // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
+as Location?,
   ));
 }
 
@@ -324,6 +339,18 @@ $ProfileStatisticsReportCopyWith<$Res> get statsReport {
   
   return $ProfileStatisticsReportCopyWith<$Res>(_self.statsReport, (value) {
     return _then(_self.copyWith(statsReport: value));
+  });
+}/// Create a copy of Profile
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocationCopyWith<$Res>? get location {
+    if (_self.location == null) {
+    return null;
+  }
+
+  return $LocationCopyWith<$Res>(_self.location!, (value) {
+    return _then(_self.copyWith(location: value));
   });
 }
 }

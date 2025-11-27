@@ -1,0 +1,15 @@
+import 'package:dhyana/model/city_search_result.dart';
+
+abstract class FunctionsService {
+
+  const FunctionsService();
+
+  Future<List<CitySearchResult>> citySearch({
+    required String queryString,
+  });
+
+  Future<CitySearchResult> getCityLocation({
+    required CitySearchResult citySearchResult,
+  });
+
+}

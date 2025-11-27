@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
+import 'location.dart';
 import 'model.dart';
 
 part 'profile.freezed.dart';
@@ -29,6 +30,7 @@ abstract class Profile with _$Profile implements Model {
     @DateTimeConverter() required DateTime signupDate,
     required ProfileStatisticsReport statsReport,
     required bool completed,
+    Location? location,
   }) = _Profile;
 
   factory Profile.anonymous() {

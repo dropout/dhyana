@@ -20,6 +20,9 @@ _Profile _$ProfileFromJson(Map<String, dynamic> json) => _Profile(
     json['statsReport'] as Map<String, dynamic>,
   ),
   completed: json['completed'] as bool,
+  location: json['location'] == null
+      ? null
+      : Location.fromJson(json['location'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$ProfileToJson(_Profile instance) => <String, dynamic>{
@@ -32,4 +35,5 @@ Map<String, dynamic> _$ProfileToJson(_Profile instance) => <String, dynamic>{
   'signupDate': const DateTimeConverter().toJson(instance.signupDate),
   'statsReport': instance.statsReport.toJson(),
   'completed': instance.completed,
+  'location': instance.location?.toJson(),
 };

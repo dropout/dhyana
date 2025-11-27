@@ -1,6 +1,5 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/input/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -26,9 +25,9 @@ class ProfileEditForm extends StatefulWidget {
 class _ProfileEditFormState extends State<ProfileEditForm> {
 
   late final GlobalKey<FormBuilderState> _formKey;
-  late final TextEditingController firstNameTextController =
+  final TextEditingController firstNameTextController =
     TextEditingController();
-  late final TextEditingController lastNameTextController =
+  final TextEditingController lastNameTextController =
     TextEditingController();
 
   @override
@@ -79,6 +78,15 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           ),
           Gap.medium(),
           ...buildNameInputs(context),
+          Gap.medium(),
+          FormBuilderCitySelector(
+            key: const Key('profile_edit_form_image_picker'),
+            name: 'location',
+            onChanged: (location) {
+              print(location);
+              // _formKey.currentState?.fields['location']?.validate();
+            },
+          ),
         ],
       )
     );
@@ -89,136 +97,61 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     Locale locale = Localizations.localeOf(context);
     if (locale.languageCode.toLowerCase() == 'hu' ) {
       return [
-        buildTextInput(context,
+        AppTextInput(
           name: 'lastName',
           label: context.localizations.profileLastnameLabel,
           controller: lastNameTextController,
           key: const Key('profile_edit_form_last_name_input'),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+          ]),
+          onChanged: (_) {
+            _formKey.currentState?.fields['lastName']?.validate();
+          },
         ),
         Gap.medium(),
-        buildTextInput(context,
+        AppTextInput(
           name: 'firstName',
           label: context.localizations.profileFirstnameLabel,
           controller: firstNameTextController,
           key: const Key('profile_edit_form_first_name_input'),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+          ]),
+          onChanged: (_) {
+            _formKey.currentState?.fields['firstName']?.validate();
+          },
         ),
       ];
     } else {
       return [
-        buildTextInput(context,
+        AppTextInput(
           name: 'firstName',
           label: context.localizations.profileFirstnameLabel,
           controller: firstNameTextController,
           key: const Key('profile_edit_form_first_name_input'),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+          ]),
+          onChanged: (_) {
+            _formKey.currentState?.fields['firstName']?.validate();
+          },
         ),
         Gap.medium(),
-        buildTextInput(context,
+        AppTextInput(
           name: 'lastName',
           label: context.localizations.profileLastnameLabel,
           controller: lastNameTextController,
           key: const Key('profile_edit_form_last_name_input'),
-        ),
-      ];
-    }
-  }
-
-  Widget buildTextInput(BuildContext context, {
-    required String name,
-    required String label,
-    required TextEditingController controller,
-    Key? key,
-  }) {
-
-    final border = OutlineInputBorder(
-      borderSide: BorderSide(
-        color: AppColors.backgroundPaperLight,
-        width: 2.0,
-      ),
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        Gap.xs(),
-        FormBuilderTextField(
-          key: key,
-          name: name,
-          controller: controller,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-          onChanged: (_) {
-            _formKey.currentState?.fields[name]?.validate();
-          },
-          textAlignVertical: TextAlignVertical.center,
-          decoration: InputDecoration(
-            constraints: BoxConstraints
-              .tightFor(height: AppThemeData.inputHeight),
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            alignLabelWithHint: true,
-            border: border,
-            enabledBorder: border, // mute enabled border color change
-            focusedBorder: border, // mute focus border color change
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.error.withValues(alpha: 0.5),
-                width: 2.0,
-              ),
-            ),
-            fillColor: AppColors.backgroundPaperLight,
-            filled: true,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: AppThemeData.paddingSm,
-              vertical: AppThemeData.paddingSm,
-            ),
-          ),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
-          // Mute default error text to avoid height changes
-          // that would cause the TextField to shrink.
-          // Instead, we render the error text separately below.
-          errorBuilder: (_, _) => SizedBox.shrink(),
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.next,
-          // cursorHeight: 18.0,
+          onChanged: (_) {
+            _formKey.currentState?.fields['lastName']?.validate();
+          },
         ),
-
-        Gap.xs(),
-
-        // Render error text separately so that the
-        // TextInput's height doesn't change on error
-        // Also defer the building after everything else
-        // in the current level of context.
-        Builder(builder: (context) {
-          final fbState = FormBuilder.of(context);
-          final fieldState = fbState?.fields[name];
-          final errorText = fieldState?.errorText;
-
-          if (errorText == null) {
-            return const SizedBox.shrink();
-          }
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppThemeData.paddingMd),
-            child: Text(
-              errorText,
-              style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(
-                  color: Theme.of(context).colorScheme.error,
-                  fontWeight: FontWeight.bold,
-                ),
-            ),
-          );
-        }),
-
-      ]
-    );
+      ];
+    }
   }
 
 }

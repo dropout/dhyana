@@ -224,6 +224,11 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
           text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
+      default:
+        return AppButton(
+          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          onTap: () => _onSave(context, profile),
+        );
     }
   }
 

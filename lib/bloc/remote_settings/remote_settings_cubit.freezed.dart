@@ -121,10 +121,7 @@ return loaded(_that);case _:
 final _that = this;
 switch (_that) {
 case _Loaded():
-return loaded(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return loaded(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -183,10 +180,7 @@ return loaded(_that.settings);case _:
 @optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( RemoteSettings settings)  loaded,}) {final _that = this;
 switch (_that) {
 case _Loaded():
-return loaded(_that.settings);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return loaded(_that.settings);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
