@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_colors.dart';
@@ -47,7 +47,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
         builder: (BuildContext context, ProfileState state) {
           switch (state) {
             case ProfileLoadingState():

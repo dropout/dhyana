@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_colors.dart';
@@ -64,7 +64,7 @@ void showDeleteProfileDialog(BuildContext context, Profile profile) {
 
 Widget _getSignoutDialog(BuildContext context) {
   AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
-  ProfileBloc profileBloc = BlocProvider.of<ProfileBloc>(context);
+  final profileCubit = BlocProvider.of<ProfileCubit>(context);
   return AlertDialog(
     title: Text(AppLocalizations.of(context).profileSignoutTitle),
     content: Text(AppLocalizations.of(context).profileSignoutQuestion),
@@ -112,7 +112,7 @@ Widget _getSignoutDialog(BuildContext context) {
           });
 
           const HomeRoute().go(context);
-          profileBloc.add(const ProfileEvent.clearData());
+          profileCubit.clearData();
         },
       ),
     ],

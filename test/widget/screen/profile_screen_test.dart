@@ -17,14 +17,14 @@ import '../../mock_definitions.dart';
 void main() {
 
   group('ProfileScreen', () {
-    late MockProfileBloc mockProfileBloc;
+    late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockCacheManagerService mockCacheManagerService;
     late MockCacheManager mockCacheManager;
 
     setUp(() async {
-      mockProfileBloc = MockProfileBloc();
+      mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
       mockCacheManagerService = MockCacheManagerService();
@@ -40,7 +40,7 @@ void main() {
 
     testWidgets('can load Profile without constructor argument given', (WidgetTester tester) async {
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loading());
 
       await tester.pumpWidget(
@@ -49,8 +49,8 @@ void main() {
               child: withAllContextProviders(
                   MultiBlocProvider(
                     providers: [
-                      BlocProvider<ProfileBloc>(
-                        create: (context) => mockProfileBloc,
+                      BlocProvider<ProfileCubit>(
+                        create: (context) => mockProfileCubit,
                       ),
                     ],
                     child: const ProfileScreen(
@@ -63,14 +63,14 @@ void main() {
 
       await tester.pump(Duration(milliseconds: 1000));
 
-      verify(() => mockProfileBloc.add(
-        ProfileEvent.loadProfile(profileId: 'test_profile_id')
+      verify(() => mockProfileCubit.loadProfile(
+        'test_profile_id'
       )).called(1);
     });
 
     testWidgets('does not load Profile when its given as a parameter in the constructor', (WidgetTester tester) async {
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(const ProfileState.initial());
 
       final Profile profileStub = FakeModelFactory().createProfile();
@@ -81,8 +81,8 @@ void main() {
           child: withAllContextProviders(
               MultiBlocProvider(
               providers: [
-                BlocProvider<ProfileBloc>(
-                  create: (context) => mockProfileBloc,
+                BlocProvider<ProfileCubit>(
+                  create: (context) => mockProfileCubit,
                 ),
               ],
               child: ProfileScreen(
@@ -97,18 +97,15 @@ void main() {
 
       // when profile is given as a parameter
       // it does not load the profile, just stores it in the bloc
-      verify(() => mockProfileBloc.add(
-        ProfileEvent.loadProfile(
-          profileId: 'test_profile_id',
-          profile: profileStub,
-        )
-      ));
-
+      verify(() => mockProfileCubit.loadProfile(
+        'test_profile_id',
+        profile: profileStub,
+      )).called(1);
     });
 
     testWidgets('can display a loading state', (WidgetTester tester) async {
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loading());
 
       await tester.pumpWidget(
@@ -117,8 +114,8 @@ void main() {
               child: withAllContextProviders(
                   MultiBlocProvider(
                     providers: [
-                      BlocProvider<ProfileBloc>(
-                        create: (context) => mockProfileBloc,
+                      BlocProvider<ProfileCubit>(
+                        create: (context) => mockProfileCubit,
                       ),
                     ],
                     child: const ProfileScreen(
@@ -135,7 +132,7 @@ void main() {
 
     testWidgets('can display an error state', (WidgetTester tester) async {
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.error());
 
       await tester.pumpWidget(
@@ -144,8 +141,8 @@ void main() {
           child: withAllContextProviders(
             MultiBlocProvider(
               providers: [
-                BlocProvider<ProfileBloc>(
-                  create: (context) => mockProfileBloc,
+                BlocProvider<ProfileCubit>(
+                  create: (context) => mockProfileCubit,
                 ),
               ],
               child: const ProfileScreen(
@@ -163,7 +160,7 @@ void main() {
 
       final Profile profileStub = FakeModelFactory().createProfile();
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profileStub));
 
       await tester.runAsync(() async {
@@ -173,8 +170,8 @@ void main() {
             child: withAllContextProviders(
               MultiBlocProvider(
                 providers: [
-                  BlocProvider<ProfileBloc>(
-                    create: (context) => mockProfileBloc,
+                  BlocProvider<ProfileCubit>(
+                    create: (context) => mockProfileCubit,
                   ),
                 ],
                 child: const ProfileScreen(

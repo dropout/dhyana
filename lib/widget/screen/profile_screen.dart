@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
@@ -30,18 +30,16 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   initState() {
-    BlocProvider.of<ProfileBloc>(context).add(
-      ProfileEvent.loadProfile(
-        profileId: widget.profileId,
-        profile: widget.profile,
-      ),
+    BlocProvider.of<ProfileCubit>(context).loadProfile(
+      widget.profileId,
+      profile: widget.profile,
     );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch (state) {
           case ProfileLoadingState():
@@ -86,9 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         AuthEvent.signOut(),
                       );
                       const HomeRoute().go(context);
-                      BlocProvider.of<ProfileBloc>(context).add(
-                        const ProfileEvent.clearData(),
-                      );
+                      context.read<ProfileCubit>().clearData();
                     },
                     buttonText: AppLocalizations.of(context).signOut,
                   ),

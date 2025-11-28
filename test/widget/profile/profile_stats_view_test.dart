@@ -19,7 +19,7 @@ import '../../mock_definitions.dart';
 void main() {
 
   group('ProfileStatsView', () {
-    late MockProfileBloc mockProfileBloc;
+    late MockProfileCubit mockProfileBloc;
     late MockServices mockServices;
     late MockRepositories mockRepositories;
     late MockStatisticsRepository mockStatisticsRepository;
@@ -30,7 +30,7 @@ void main() {
     setUp(() async {
 
       // Blocs
-      mockProfileBloc = MockProfileBloc();
+      mockProfileBloc = MockProfileCubit();
 
       // Services
       mockServices = MockServices();
@@ -67,7 +67,7 @@ void main() {
             providers: [
               Provider<Services>(create: (_) => mockServices),
               Provider<Repositories>(create: (_) => mockRepositories),
-              BlocProvider<ProfileBloc>(create: (_) => mockProfileBloc),
+              BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
               Material(
@@ -112,7 +112,7 @@ void main() {
             providers: [
               Provider<Services>(create: (_) => mockServices),
               Provider<Repositories>(create: (_) => mockRepositories),
-              BlocProvider<ProfileBloc>(create: (_) => mockProfileBloc),
+              BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
               Material(
@@ -142,7 +142,7 @@ void main() {
             providers: [
               Provider<Services>(create: (_) => mockServices),
               Provider<Repositories>(create: (_) => mockRepositories),
-              BlocProvider<ProfileBloc>(create: (_) => mockProfileBloc),
+              BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
               Material(
@@ -172,7 +172,7 @@ void main() {
             providers: [
               Provider<Services>(create: (_) => mockServices),
               Provider<Repositories>(create: (_) => mockRepositories),
-              BlocProvider<ProfileBloc>(create: (_) => mockProfileBloc),
+              BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
               Material(

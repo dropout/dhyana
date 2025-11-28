@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/init/repositories.dart';
@@ -73,7 +73,7 @@ class Initializer {
       .getTimerSettings();
 
     User? user = await repos.authRepository.authStateChange.first;
-    ProfileBloc profileBloc = ProfileBloc(
+    ProfileCubit profileCubit = ProfileCubit(
       profileRepository: repos.profileRepository,
       statisticsRepository: repos.statisticsRepository,
       idGeneratorService: services.idGeneratorService,
@@ -83,7 +83,7 @@ class Initializer {
 
     if (user != null) {
       logger.t('User is already signed in, initiate profile loading for user: ${user.uid}');
-      profileBloc.add(ProfileEvent.loadProfile(profileId: user.uid));
+      profileCubit.loadProfile(user.uid);
     } else {
       logger.t('User not signed in');
     }
@@ -93,7 +93,7 @@ class Initializer {
       timerSettings: timerSettings,
       services: services,
       repositories: repos,
-      profileBloc: profileBloc,
+      profileCubit: profileCubit,
       remoteSettings: remoteSettings,
     );
   }

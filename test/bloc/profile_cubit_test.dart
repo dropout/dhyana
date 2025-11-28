@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/repository/profile_repository.dart';
@@ -19,7 +19,7 @@ void main() {
 
   late Profile profile;
 
-  late ProfileBloc profileBloc;
+  late ProfileCubit profileCubit;
   late MockProfileRepository mockProfileRepository;
   late MockStatisticsRepository mockStatisticsRepository;
   late MockCrashlyticsService mockCrashlyticsService;
@@ -35,7 +35,7 @@ void main() {
     mockIdGeneratorService = MockIdGeneratorService();
     mockProfileStatsUpdater = MockProfileStatsUpdater();
 
-    profileBloc = ProfileBloc(
+    profileCubit = ProfileCubit(
       profileRepository: mockProfileRepository,
       statisticsRepository: mockStatisticsRepository,
       crashlyticsService: mockCrashlyticsService,
@@ -48,19 +48,19 @@ void main() {
   });
 
   tearDown(() {
-    profileBloc.close();
+    profileCubit.close();
   });
 
   group('ProfileBloc', () {
 
-    blocTest<ProfileBloc, ProfileState>(
+    blocTest<ProfileCubit, ProfileState>(
       'emits [ProfileState.loading(), ProfileState.loaded()] when LoadProfile is added',
       build: () {
         when(() => mockProfileRepository.read(any())).thenAnswer((_) async => profile);
         when(() => mockProfileStatsUpdater.validateStatsReport(any())).thenReturn(profile.statsReport);
-        return profileBloc;
+        return profileCubit;
       },
-      act: (bloc) => bloc.add(const ProfileEvent.loadProfile(profileId: "1")),
+      act: (cubit) => cubit.loadProfile("1"),
       expect: () => [
         const ProfileState.loading(),
         ProfileState.loaded(profile: profile),
@@ -70,13 +70,13 @@ void main() {
       },
     );
 
-    blocTest<ProfileBloc, ProfileState>(
+    blocTest<ProfileCubit, ProfileState>(
       'emits [ProfileState.loading(), ProfileErrorState()] when LoadProfile fails',
       build: () {
         when(() => mockProfileRepository.read(any())).thenThrow(Exception('Failed to load profile'));
-        return profileBloc;
+        return profileCubit;
       },
-      act: (bloc) => bloc.add(const LoadProfile(profileId: '1')),
+      act: (cubit) => cubit.loadProfile('1'),
       expect: () => [
         const ProfileState.loading(),
         const ProfileState.error(),
@@ -91,18 +91,16 @@ void main() {
       },
     );
 
-    blocTest<ProfileBloc, ProfileState>(
+    blocTest<ProfileCubit, ProfileState>(
       'emits [ProfileState.loaded()] when UpdateProfile is added',
       build: () {
         when(() => mockProfileRepository.update(any())).thenAnswer((_) async => profile);
-        return profileBloc;
+        return profileCubit;
       },
-      act: (bloc) => bloc.add(
-        ProfileEvent.updateProfile(
-          profile: profile,
-          formData: {},
-          completeProfile: false,
-        )
+      act: (cubit) => cubit.updateProfile(
+        profile: profile,
+        formData: {},
+        completeProfile: false,
       ),
       expect: () => [
         ProfileState.loaded(profile: profile),
@@ -112,10 +110,10 @@ void main() {
       },
     );
 
-    blocTest<ProfileBloc, ProfileState>(
+    blocTest<ProfileCubit, ProfileState>(
       'emits [ProfileState.initial()] when ResetProfileContent is added',
-      build: () => profileBloc,
-      act: (bloc) => bloc.add(const ProfileEvent.clearData()),
+      build: () => profileCubit,
+      act: (cubit) => cubit.clearData(),
       expect: () => [
         const ProfileState.initial(),
       ],

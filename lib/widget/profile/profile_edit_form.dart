@@ -25,16 +25,10 @@ class ProfileEditForm extends StatefulWidget {
 class _ProfileEditFormState extends State<ProfileEditForm> {
 
   late final GlobalKey<FormBuilderState> _formKey;
-  final TextEditingController firstNameTextController =
-    TextEditingController();
-  final TextEditingController lastNameTextController =
-    TextEditingController();
 
   @override
   void initState() {
     _formKey = widget.formStateKey ?? GlobalKey<FormBuilderState>();
-    firstNameTextController.text = widget.profile.firstName;
-    lastNameTextController.text = widget.profile.lastName;
     super.initState();
   }
 
@@ -80,11 +74,11 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           ...buildNameInputs(context),
           Gap.medium(),
           FormBuilderCitySelector(
-            key: const Key('profile_edit_form_image_picker'),
             name: 'location',
+            key: const Key('profile_edit_form_image_picker'),
+            initialValue: profile.location,
             onChanged: (location) {
-              print(location);
-              // _formKey.currentState?.fields['location']?.validate();
+              _formKey.currentState?.fields['location']?.validate();
             },
           ),
         ],
@@ -100,8 +94,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         AppTextInput(
           name: 'lastName',
           label: context.localizations.profileLastnameLabel,
-          controller: lastNameTextController,
           key: const Key('profile_edit_form_last_name_input'),
+          initialValue: widget.profile.lastName,
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
@@ -113,8 +107,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         AppTextInput(
           name: 'firstName',
           label: context.localizations.profileFirstnameLabel,
-          controller: firstNameTextController,
           key: const Key('profile_edit_form_first_name_input'),
+          initialValue: widget.profile.firstName,
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
@@ -128,8 +122,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         AppTextInput(
           name: 'firstName',
           label: context.localizations.profileFirstnameLabel,
-          controller: firstNameTextController,
           key: const Key('profile_edit_form_first_name_input'),
+          initialValue: widget.profile.firstName,
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
@@ -141,8 +135,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         AppTextInput(
           name: 'lastName',
           label: context.localizations.profileLastnameLabel,
-          controller: lastNameTextController,
           key: const Key('profile_edit_form_last_name_input'),
+          initialValue: widget.profile.lastName,
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),

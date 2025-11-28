@@ -9,15 +9,15 @@ class AppTextInput extends StatelessWidget {
 
   final String name;
   final String label;
-  final TextEditingController? controller;
+  final String? initialValue;
   final Function(String?)? onChanged;
   final FormFieldValidator<String>? validator;
 
   const AppTextInput({
     required this.name,
     required this.label,
+    this.initialValue,
     this.onChanged,
-    this.controller,
     this.validator,
     super.key
   });
@@ -35,7 +35,7 @@ class AppTextInput extends StatelessWidget {
         FormBuilderTextField(
           key: key,
           name: name,
-          controller: controller,
+          initialValue: initialValue,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontWeight: FontWeight.bold,
           ),

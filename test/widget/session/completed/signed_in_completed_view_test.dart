@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/session_completed/session_completed_bloc.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
@@ -18,7 +18,7 @@ import '../../../test_context_providers.dart';
 
 void main() {
 
-  late MockProfileBloc mockProfileBloc;
+  late MockProfileCubit mockProfileCubit;
   late MockSessionCompletedBloc mockSessionCompletedBloc;
 
   late MockServices mockServices;
@@ -31,7 +31,7 @@ void main() {
 
   setUpAll(() async {
 
-    mockProfileBloc = MockProfileBloc();
+    mockProfileCubit = MockProfileCubit();
     mockSessionCompletedBloc = MockSessionCompletedBloc();
 
     mockServices = MockServices();
@@ -55,16 +55,11 @@ void main() {
     when(() => mockRepositories.presenceRepository)
       .thenReturn(mockPresenceRepository);
 
-
-
     registerFallbackValue(LogSessionEvent(
       profileId: 'profileId',
       session: FakeModelFactory().createSession(),
     ));
 
-    registerFallbackValue(LoadProfile(
-      profileId: 'profileId'
-    ));
   });
 
   group('SignedInCompletedView', () {
@@ -84,7 +79,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>.value(value: mockServices),
-                BlocProvider<ProfileBloc>.value(value: mockProfileBloc),
+                BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                 BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
               ],
               child: SignedInCompletedView(
@@ -113,12 +108,10 @@ void main() {
 
         logSessionEvent.onComplete!(updateResult);
 
-        LoadProfile loadProfileEvent = verify(() => mockProfileBloc.add(
-          captureAny(that: isA<LoadProfile>())
-        )).captured.first as LoadProfile;
-
-        expect(loadProfileEvent.profileId, equals('profileId'));
-        expect(loadProfileEvent.profile, equals(updateResult.updatedProfile));
+        verify(() => mockProfileCubit.loadProfile(
+          'profileId',
+          profile: updateResult.updatedProfile,
+        )).called(1);
 
       });
 
@@ -137,7 +130,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>.value(value: mockServices),
-                BlocProvider<ProfileBloc>.value(value: mockProfileBloc),
+                BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                 BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
               ],
               child: SignedInCompletedView(
@@ -166,7 +159,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>.value(value: mockServices),
-                BlocProvider<ProfileBloc>.value(value: mockProfileBloc),
+                BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                 BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
               ],
               child: SignedInCompletedView(
@@ -194,7 +187,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>.value(value: mockServices),
-                BlocProvider<ProfileBloc>.value(value: mockProfileBloc),
+                BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                 BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
               ],
               child: SignedInCompletedView(
@@ -230,7 +223,7 @@ void main() {
               providers: [
                 Provider<Services>.value(value: mockServices),
                 Provider<Repositories>.value(value: mockRepositories),
-                BlocProvider<ProfileBloc>.value(value: mockProfileBloc),
+                BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                 BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc),
               ],
               child: SignedInCompletedView(
@@ -269,7 +262,7 @@ void main() {
               providers: [
                 Provider<Services>.value(value: mockServices),
                 Provider<Repositories>.value(value: mockRepositories),
-                BlocProvider<ProfileBloc>.value(value: mockProfileBloc),
+                BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                 BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc),
               ],
               child: SignedInCompletedView(

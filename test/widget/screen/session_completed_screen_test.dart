@@ -20,7 +20,7 @@ void main() {
 
   group('SessionCompletedScreen', () {
 
-    late MockProfileBloc mockProfileBloc;
+    late MockProfileCubit profileCubit;
     late MockAuthBloc mockAuthBloc;
 
     late MockServices mockServices;
@@ -34,7 +34,7 @@ void main() {
     late MockHapticsService mockHapticsService;
 
     setUp(() async {
-      mockProfileBloc = MockProfileBloc();
+      profileCubit = MockProfileCubit();
       mockAuthBloc = MockAuthBloc();
 
       mockServices = MockServices();
@@ -47,10 +47,10 @@ void main() {
       mockCacheManagerService = MockCacheManagerService();
       mockHapticsService = MockHapticsService();
 
-      when(() => mockProfileBloc.stream)
+      when(() => profileCubit.stream)
         .thenAnswer((_) => const Stream<ProfileState>.empty());
 
-      when(() => mockProfileBloc.state)
+      when(() => profileCubit.state)
         .thenReturn(const ProfileState.initial());
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.initial());
@@ -89,8 +89,8 @@ void main() {
                 BlocProvider<AuthBloc>.value(
                   value: mockAuthBloc,
                 ),
-                BlocProvider<ProfileBloc>.value(
-                  value: mockProfileBloc,
+                BlocProvider<ProfileCubit>.value(
+                  value: profileCubit,
                 ),
                 Provider<Repositories>.value(
                   value: mockRepositories,
@@ -129,8 +129,8 @@ void main() {
                 BlocProvider<AuthBloc>.value(
                   value: mockAuthBloc,
                 ),
-                BlocProvider<ProfileBloc>.value(
-                  value: mockProfileBloc,
+                BlocProvider<ProfileCubit>.value(
+                  value: profileCubit,
                 ),
                 Provider<Repositories>.value(
                   value: mockRepositories,
@@ -169,8 +169,8 @@ void main() {
                 BlocProvider<AuthBloc>.value(
                   value: mockAuthBloc,
                 ),
-                BlocProvider<ProfileBloc>.value(
-                  value: mockProfileBloc,
+                BlocProvider<ProfileCubit>.value(
+                  value: profileCubit,
                 ),
                 Provider<Repositories>.value(
                   value: mockRepositories,
@@ -225,8 +225,8 @@ void main() {
                     BlocProvider<AuthBloc>.value(
                       value: mockAuthBloc,
                     ),
-                    BlocProvider<ProfileBloc>.value(
-                      value: mockProfileBloc,
+                    BlocProvider<ProfileCubit>.value(
+                      value: profileCubit,
                     ),
                     Provider<Repositories>.value(
                       value: mockRepositories,

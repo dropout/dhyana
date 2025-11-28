@@ -29,6 +29,7 @@ class DefaultProfileDataUpdater extends ProfileDataUpdater {
       firstName: getFirstName(formData) ?? profile.firstName,
       lastName:  getLastName(formData) ?? profile.lastName,
       completed: (completeProfile) ? true : profile.completed,
+      location: getLocation(formData),
     );
 
     Uint8List? imageData = getImageData(formData);

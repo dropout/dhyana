@@ -1,4 +1,3 @@
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
@@ -9,6 +8,8 @@ import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+import '../../bloc/profile/profile_cubit.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   const ProfileEditScreen({super.key});
@@ -31,7 +32,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
         state = LoadingState.loading;
       });
       Map<String, dynamic>? values = formState.value;
-      BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
+      BlocProvider.of<ProfileCubit>(context).updateProfile(
         profile: profile,
         formData: values,
         onComplete: (profile) {
@@ -44,7 +45,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
             state = LoadingState.idle;
           });
         },
-      ));
+      );
     }
   }
   void _onFormChanged(BuildContext context) {
@@ -55,7 +56,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
           case ProfileLoadingState():
@@ -141,7 +142,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
         children: [
           contentLayer,
           actionButtonLayer ?? Align(
-            // alignment: const Alignment(1.0, 0.0),
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),

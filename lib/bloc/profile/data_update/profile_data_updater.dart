@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:dhyana/model/location.dart';
 import 'package:dhyana/model/profile.dart';
 
 abstract class ProfileDataUpdater {
@@ -25,6 +26,13 @@ abstract class ProfileDataUpdater {
       return null;
     }
     return formData['imageData'] as Uint8List;
+  }
+
+  Location? getLocation(Map<String,dynamic> formData) {
+    if (formData.containsKey('location') == false || formData['location'] == null) {
+      return null;
+    }
+    return formData['location'] as Location;
   }
 
 }

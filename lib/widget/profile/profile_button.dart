@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
@@ -74,7 +74,7 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildSignedIn(BuildContext context, String userId) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
           case ProfileLoadingState():

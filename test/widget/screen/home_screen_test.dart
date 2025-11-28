@@ -22,7 +22,7 @@ void main() {
 
   group('HomeScreen', () {
     late MockAuthBloc mockAuthBloc;
-    late MockProfileBloc mockProfileBloc;
+    late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockCrashlyticsService mockCrashlyticsService;
@@ -36,7 +36,7 @@ void main() {
 
     setUp(() async {
       mockAuthBloc = MockAuthBloc();
-      mockProfileBloc = MockProfileBloc();
+      mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
       mockCrashlyticsService = MockCrashlyticsService();
@@ -47,7 +47,7 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.signedOut());
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.initial());
 
       when(() => mockServices.cacheManagerService)
@@ -203,7 +203,7 @@ void main() {
           )
         );
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
             profile: FakeModelFactory().createProfile()
           )
@@ -222,8 +222,8 @@ void main() {
                   BlocProvider<AuthBloc>(
                     create: (context) => mockAuthBloc,
                   ),
-                  BlocProvider<ProfileBloc>(
-                    create: (context) => mockProfileBloc,
+                  BlocProvider<ProfileCubit>(
+                    create: (context) => mockProfileCubit,
                   )
                 ],
                 child: const HomeScreen(
@@ -251,7 +251,7 @@ void main() {
           )
         );
 
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
             profile: FakeModelFactory().createProfile()
           )
@@ -270,8 +270,8 @@ void main() {
                         BlocProvider<AuthBloc>(
                           create: (context) => mockAuthBloc,
                         ),
-                        BlocProvider<ProfileBloc>(
-                          create: (context) => mockProfileBloc,
+                        BlocProvider<ProfileCubit>(
+                          create: (context) => mockProfileCubit,
                         )
                       ],
                       child: const HomeScreen(

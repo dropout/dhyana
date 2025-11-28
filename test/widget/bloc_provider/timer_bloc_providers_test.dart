@@ -21,7 +21,7 @@ void main() {
 
   group('TimerBlocProviders', () {
     late MockAuthBloc mockAuthBloc;
-    late MockProfileBloc mockProfileBloc;
+    late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockCacheManagerService mockCacheManagerService;
@@ -45,7 +45,7 @@ void main() {
 
       // BLoCs
       mockAuthBloc = MockAuthBloc();
-      mockProfileBloc = MockProfileBloc();
+      mockProfileCubit = MockProfileCubit();
 
       // Services
       mockServices = MockServices();
@@ -99,13 +99,13 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
 
       await tester.runAsync(() async {
@@ -118,7 +118,7 @@ void main() {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileBloc>(create: (context) => mockProfileBloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: withAllContextProviders(
                 TimerBlocProviders(
@@ -168,13 +168,13 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
 
       await tester.runAsync(() async {
@@ -187,7 +187,7 @@ void main() {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileBloc>(create: (context) => mockProfileBloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: withAllContextProviders(
                 TimerBlocProviders(
@@ -222,13 +222,13 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfileBloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
 
       await tester.runAsync(() async {
@@ -241,7 +241,7 @@ void main() {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileBloc>(create: (context) => mockProfileBloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: withAllContextProviders(
                 TimerBlocProviders(

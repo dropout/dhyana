@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
@@ -33,8 +33,8 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   @override
   void initState() {
-    BlocProvider.of<ProfileBloc>(context).add(
-      ProfileEvent.loadProfile(profileId: widget.profileId)
+    context.read<ProfileCubit>().loadProfile(
+      widget.profileId,
     );
     super.initState();
   }
@@ -46,7 +46,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
         formProcessingState = LoadingState.loading;
       });
       Map<String, dynamic>? values = formState.value;
-      BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.updateProfile(
+      context.read<ProfileCubit>().updateProfile(
         profile: profile,
         formData: values,
         completeProfile: true,
@@ -60,7 +60,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             formProcessingState = LoadingState.idle;
           });
         },
-      ));
+      );
     }
   }
 
@@ -77,7 +77,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
           case ProfileLoadingState():

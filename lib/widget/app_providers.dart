@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/remote_settings/remote_settings_cubit.dart';
 import 'package:dhyana/init/all.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class AppProviders extends StatelessWidget {
             ),
             lazy: false,
           ),
-          BlocProvider<ProfileBloc>(create: (_) => initResult.profileBloc),
+          BlocProvider<ProfileCubit>(create: (_) => initResult.profileCubit),
           BlocProvider<RemoteSettingsCubit>(
             create: (_) => RemoteSettingsCubit(
               initialRemoteSettings: initResult.remoteSettings,

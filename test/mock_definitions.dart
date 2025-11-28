@@ -17,9 +17,9 @@ class MockAuthBloc
   extends MockBloc<AuthEvent, AuthState>
   implements AuthBloc {}
 
-class MockProfileBloc
-  extends MockBloc<ProfileEvent, ProfileState>
-  implements ProfileBloc {}
+class MockProfileCubit
+  extends MockCubit<ProfileState>
+  implements ProfileCubit {}
 
 class MockTimerSettingsHistoryBloc
   extends MockBloc<TimerSettingsHistoryEvent, TimerSettingsHistoryState>

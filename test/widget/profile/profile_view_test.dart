@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
@@ -20,14 +20,14 @@ import '../../mock_definitions.dart';
 void main() {
 
   group('ProfileView', () {
-    late MockProfileBloc mockProfileBloc;
+    late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockCacheManagerService mockCacheManagerService;
     late MockCacheManager mockCacheManager;
 
     setUp(() async {
-      mockProfileBloc = MockProfileBloc();
+      mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
       mockCacheManagerService = MockCacheManagerService();
@@ -52,8 +52,8 @@ void main() {
                 child: withAllContextProviders(
                     MultiBlocProvider(
                       providers: [
-                        BlocProvider<ProfileBloc>(
-                          create: (context) => mockProfileBloc,
+                        BlocProvider<ProfileCubit>(
+                          create: (context) => mockProfileCubit,
                         ),
                       ],
                       child: SingleChildScrollView(

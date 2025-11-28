@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
@@ -22,7 +22,7 @@ import '../mock_go_router_provider.dart';
 void main() {
 
   late MockAuthBloc mockAuthBloc;
-  late MockProfileBloc mockProfilebloc;
+  late MockProfileCubit mockProfileCubit;
   late MockGoRouter mockGoRouter;
 
   late MockServices mockServices;
@@ -33,7 +33,7 @@ void main() {
   setUpAll(() async {
 
     mockAuthBloc = MockAuthBloc();
-    mockProfilebloc = MockProfileBloc();
+    mockProfileCubit = MockProfileCubit();
     mockGoRouter = MockGoRouter();
     mockServices = MockServices();
 
@@ -108,7 +108,7 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfilebloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loading());
 
       await tester.runAsync(() async {
@@ -118,7 +118,7 @@ void main() {
               providers: [
                 Provider<Services>(create: (context) => mockServices),
                 BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileBloc>(create: (context) => mockProfilebloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: MockGoRouterProvider(
                 mockGoRouter: mockGoRouter,
@@ -139,7 +139,7 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfilebloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.error());
 
 
@@ -153,7 +153,7 @@ void main() {
               providers: [
                 Provider<Services>(create: (context) => mockServices),
                 BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileBloc>(create: (context) => mockProfilebloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: MockGoRouterProvider(
                 mockGoRouter: mockGoRouter,
@@ -189,7 +189,7 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfilebloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
 
       final GoRouter goRouter = GoRouter(
@@ -201,7 +201,7 @@ void main() {
                 providers: [
                   Provider<Services>(create: (context) => mockServices),
                   BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                  BlocProvider<ProfileBloc>(create: (context) => mockProfilebloc),
+                  BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
                 ],
                 child: ProfileButton(),
               )
@@ -245,7 +245,7 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
-      when(() => mockProfilebloc.state)
+      when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(profile: profile));
 
       final GoRouter goRouter = GoRouter(
@@ -257,7 +257,7 @@ void main() {
                 providers: [
                   Provider<Services>(create: (context) => mockServices),
                   BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-                  BlocProvider<ProfileBloc>(create: (context) => mockProfilebloc),
+                  BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
                 ],
                 child: ProfileButton(),
               )
