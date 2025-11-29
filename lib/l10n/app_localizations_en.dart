@@ -193,6 +193,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileLastnameLabel => 'Lastname';
 
   @override
+  String get profileLocationLabel => 'City';
+
+  @override
   String get profileSaveButtonIdle => 'Save';
 
   @override
@@ -591,4 +594,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get millionShort => 'm';
+
+  @override
+  String get locationInputPlaceholder => 'Select your city';
+
+  @override
+  String get locationInputCurrentSelection => 'Current selection:';
+
+  @override
+  String get locationInputNoSelection => 'No city selected yet';
+
+  @override
+  String get locationInputNoResults => 'No results found';
+
+  @override
+  String get locationInputErrorMessage =>
+      'An unexpected error occured.\nPlease try again later.';
 }

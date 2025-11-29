@@ -194,6 +194,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileLastnameLabel => 'Vezetéknév';
 
   @override
+  String get profileLocationLabel => 'Város';
+
+  @override
   String get profileSaveButtonIdle => 'Mentés';
 
   @override
@@ -591,4 +594,20 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get millionShort => 'm';
+
+  @override
+  String get locationInputPlaceholder => 'Válaszz egy várost';
+
+  @override
+  String get locationInputCurrentSelection => 'Current selection:';
+
+  @override
+  String get locationInputNoSelection => 'Nincs kiválasztva város';
+
+  @override
+  String get locationInputNoResults => 'Nincs találat';
+
+  @override
+  String get locationInputErrorMessage =>
+      'Váratlan hiba történt.\nKérlek próbáld újra később.';
 }

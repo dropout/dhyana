@@ -47,12 +47,10 @@ class AppThemeData {
   AppThemeData({required this.isDark});
 
   ThemeData get themeData {
-
     ColorScheme colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.red,
       surface: AppColors.backgroundPaper,
     );
-
     ThemeData themeData = ThemeData(
       fontFamily: 'RobotoSlab',
       appBarTheme: const AppBarTheme(
@@ -72,7 +70,10 @@ class AppThemeData {
           foregroundColor: Colors.white,
           backgroundColor: Colors.black,
         )
-      )
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        dragHandleSize: Size(48, 4),
+      ),
     );
 
     return themeData;

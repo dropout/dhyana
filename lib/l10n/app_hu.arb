@@ -69,6 +69,7 @@
   "profileImageLabel": "Profil kép",
   "profileFirstnameLabel": "Keresztnév",
   "profileLastnameLabel": "Vezetéknév",
+  "profileLocationLabel": "Város",
 
   "profileSaveButtonIdle": "Mentés",
   "profileSaveButtonSaving": "Mentés...",
@@ -176,5 +177,12 @@
   "thousand": "ezer",
   "thousandShort": "e",
   "million": "millió",
-  "millionShort": "m"
+  "millionShort": "m",
+
+  "locationInputPlaceholder": "Válaszz egy várost",
+  "locationInputCurrentSelection": "Current selection:",
+  "locationInputNoSelection": "Nincs kiválasztva város",
+  "locationInputNoResults": "Nincs találat",
+  "locationInputErrorMessage": "Váratlan hiba történt.\nKérlek próbáld újra később."
+
 }

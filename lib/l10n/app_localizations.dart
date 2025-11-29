@@ -440,6 +440,12 @@ abstract class AppLocalizations {
   /// **'Vezetéknév'**
   String get profileLastnameLabel;
 
+  /// No description provided for @profileLocationLabel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Város'**
+  String get profileLocationLabel;
+
   /// No description provided for @profileSaveButtonIdle.
   ///
   /// In hu, this message translates to:
@@ -889,6 +895,36 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'m'**
   String get millionShort;
+
+  /// No description provided for @locationInputPlaceholder.
+  ///
+  /// In hu, this message translates to:
+  /// **'Válaszz egy várost'**
+  String get locationInputPlaceholder;
+
+  /// No description provided for @locationInputCurrentSelection.
+  ///
+  /// In hu, this message translates to:
+  /// **'Current selection:'**
+  String get locationInputCurrentSelection;
+
+  /// No description provided for @locationInputNoSelection.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nincs kiválasztva város'**
+  String get locationInputNoSelection;
+
+  /// No description provided for @locationInputNoResults.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nincs találat'**
+  String get locationInputNoResults;
+
+  /// No description provided for @locationInputErrorMessage.
+  ///
+  /// In hu, this message translates to:
+  /// **'Váratlan hiba történt.\nKérlek próbáld újra később.'**
+  String get locationInputErrorMessage;
 }
 
 class _AppLocalizationsDelegate

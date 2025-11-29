@@ -69,6 +69,7 @@
   "profileImageLabel": "Profile image",
   "profileFirstnameLabel": "Firstname",
   "profileLastnameLabel": "Lastname",
+  "profileLocationLabel": "City",
 
   "profileSaveButtonIdle": "Save",
   "profileSaveButtonSaving": "Saving...",
@@ -175,6 +176,12 @@
   "thousand": "thousand",
   "thousandShort": "k",
   "million": "million",
-  "millionShort": "m"
+  "millionShort": "m",
+
+  "locationInputPlaceholder": "Select your city",
+  "locationInputCurrentSelection": "Current selection:",
+  "locationInputNoSelection": "No city selected yet",
+  "locationInputNoResults": "No results found",
+  "locationInputErrorMessage": "An unexpected error occured.\nPlease try again later."
 
 }

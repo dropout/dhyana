@@ -75,11 +75,11 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           Gap.medium(),
           FormBuilderCitySelector(
             name: 'location',
+            label: context.localizations.profileLocationLabel,
             key: const Key('profile_edit_form_image_picker'),
             initialValue: profile.location,
-            onChanged: (location) {
-              _formKey.currentState?.fields['location']?.validate();
-            },
+            onChanged: (_) =>
+              _formKey.currentState?.fields['location']?.validate(),
           ),
         ],
       )
@@ -99,9 +99,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
-          onChanged: (_) {
-            _formKey.currentState?.fields['lastName']?.validate();
-          },
+          onChanged: (_) =>
+            _formKey.currentState?.fields['lastName']?.validate(),
         ),
         Gap.medium(),
         AppTextInput(
@@ -112,9 +111,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
-          onChanged: (_) {
-            _formKey.currentState?.fields['firstName']?.validate();
-          },
+          onChanged: (_) =>
+            _formKey.currentState?.fields['firstName']?.validate(),
         ),
       ];
     } else {
@@ -127,9 +125,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
-          onChanged: (_) {
-            _formKey.currentState?.fields['firstName']?.validate();
-          },
+          onChanged: (_) =>
+            _formKey.currentState?.fields['firstName']?.validate(),
         ),
         Gap.medium(),
         AppTextInput(
@@ -140,9 +137,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
-          onChanged: (_) {
-            _formKey.currentState?.fields['lastName']?.validate();
-          },
+          onChanged: (_) =>
+            _formKey.currentState?.fields['lastName']?.validate(),
         ),
       ];
     }
