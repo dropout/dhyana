@@ -39,6 +39,7 @@ class ProfileImage extends StatelessWidget {
       width: size,
       height: size,
       child: AppCachedNetworkImage(
+        key: ValueKey(photoUrl),
         imageUrl: Future.value(photoUrl),
         blurHash: photoBlurhash,
         circular: true,
