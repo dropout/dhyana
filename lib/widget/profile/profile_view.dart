@@ -38,7 +38,7 @@ class ProfileView extends StatelessWidget {
             ),
             child: ProfileImage.fromProfile(profile),
           ),
-          Gap.large(),
+          Gap.small(),
           Text(
             profile.displayName,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(

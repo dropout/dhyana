@@ -52,23 +52,11 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             style: Theme.of(context).textTheme.labelLarge,
           ),
           Gap.xs(),
-          FutureBuilder(
-            future: Future.value(profile.photoUrl),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Text('error');
-              }
-              if (snapshot.hasData) {
-                return FormBuilderImagePicker(
-                  key: const Key('profile_edit_form_image_picker'),
-                  name: 'imageData',
-                  labelText: context.localizations.profileImageLabel,
-                  initialImageUrl: snapshot.data!,
-                );
-              } else {
-                return Container();
-              }
-            }
+          FormBuilderProfileImagePicker(
+            key: const Key('profile_edit_form_image_picker'),
+            name: 'imageData',
+            label: context.localizations.profileImageLabel,
+            profile: profile,
           ),
           Gap.medium(),
           ...buildNameInputs(context),
@@ -76,7 +64,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           FormBuilderCitySelector(
             name: 'location',
             label: context.localizations.profileLocationLabel,
-            key: const Key('profile_edit_form_image_picker'),
+            key: const Key('profile_edit_form_location_input'),
             initialValue: profile.location,
             onChanged: (_) =>
               _formKey.currentState?.fields['location']?.validate(),

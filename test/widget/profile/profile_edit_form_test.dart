@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/input/form_builder_image_picker.dart';
+import 'package:dhyana/widget/input/form_builder_profile_image_picker.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -64,9 +64,9 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final formBuilderImagePicker = tester.widget<FormBuilderImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
+      final formBuilderImagePicker = tester.widget<FormBuilderProfileImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
 
-      expect(formBuilderImagePicker.initialImageUrl, profile.photoUrl);
+      expect(formBuilderImagePicker.profile, profile);
 
       expect(find.text(profile.firstName), findsOneWidget);
       expect(find.text(profile.lastName), findsOneWidget);
@@ -120,8 +120,8 @@ void main() {
         await tester.pumpAndSettle();
       }).then((_) async {
 
-        final formBuilderImagePicker = tester.widget<FormBuilderImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
-        expect(formBuilderImagePicker.initialImageUrl, profile.photoUrl);
+        final formBuilderImagePicker = tester.widget<FormBuilderProfileImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
+        expect(formBuilderImagePicker.profile, profile);
 
         final firstNameFieldFinder = find.descendant(
           of: find.byKey(const Key('profile_edit_form_first_name_input')),

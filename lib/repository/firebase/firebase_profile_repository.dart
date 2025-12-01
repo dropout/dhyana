@@ -4,6 +4,7 @@ import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/crud_repository_operations.dart';
 import 'package:dhyana/repository/profile_repository.dart';
+import 'package:dhyana/util/blurhash.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseProfileRepository
@@ -35,8 +36,11 @@ class FirebaseProfileRepository
     String photoUrl = await uploadTask.snapshot.ref.getDownloadURL();
 
     // Update profile with new photoUrl
-    Profile newProfile = profile.copyWith(photoUrl: photoUrl);
-    await profileDataProvider.update(profile);
+    Profile newProfile = profile.copyWith(
+      photoUrl: photoUrl,
+      photoBlurhash: createBlurHash(imageData),
+    );
+    await profileDataProvider.update(newProfile);
 
     return newProfile;
   }
