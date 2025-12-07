@@ -133,7 +133,7 @@
   "profileSignoutCancel": "No",
 
   "profileDeleteTitle": "Delete Profile",
-  "profileDeleteQuestion": "Are you sure you want to delete your profile?",
+  "profileDeleteQuestion": "All your data will be permanently deleted and cannot be restored.\nAre you sure?",
   "profileDeleteYes": "Delete",
   "profileDeleteCancel": "Cancel",
 

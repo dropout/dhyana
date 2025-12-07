@@ -3,7 +3,6 @@ import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/profile/all.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days_view.dart';
 import 'package:dhyana/widget/profile/stats/milestones_view.dart';
 import 'package:dhyana/widget/profile/stats/summary_view.dart';

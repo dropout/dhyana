@@ -1,8 +1,6 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/bloc/profile_settings/profile_settings_cubit.dart';
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/profile/profile_settings_form.dart';
@@ -40,7 +38,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
       setState(() {
         loadingState = LoadingState.loading;
       });
-
       context.read<ProfileCubit>().updateProfileSettings(
         profile: profile,
         settingsFormData: formState.value,
@@ -100,6 +97,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                     sliver: SliverToBoxAdapter(
                       child: ProfileSettingsForm(
                         formStateKey: formStateKey,
+                        profile: profileState.profile,
                         profileSettings: profileState.settings,
                         onChanged: () => _onFormChanged(context),
                       ),

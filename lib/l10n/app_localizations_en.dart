@@ -389,7 +389,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileDeleteQuestion =>
-      'Are you sure you want to delete your profile?';
+      'All your data will be permanently deleted and cannot be restored.\nAre you sure?';
 
   @override
   String get profileDeleteYes => 'Delete';

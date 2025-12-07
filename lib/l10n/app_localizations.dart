@@ -773,7 +773,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileDeleteQuestion.
   ///
   /// In hu, this message translates to:
-  /// **'Biztos, hogy törölni szeretnéd a profilodat?'**
+  /// **'Minden adatod véglegesen törlődni fog és nem lesz visszaállítható. Biztos vagy benne?'**
   String get profileDeleteQuestion;
 
   /// No description provided for @profileDeleteYes.

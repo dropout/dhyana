@@ -1,18 +1,20 @@
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/all.dart';
-import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ProfileSettingsForm extends StatefulWidget {
 
+  final Profile profile;
   final ProfileSettings profileSettings;
   final VoidCallback? onChanged;
   final GlobalKey<FormBuilderState> formStateKey;
 
   const ProfileSettingsForm({
+    required this.profile,
     required this.profileSettings,
     required this.formStateKey,
     this.onChanged,
@@ -26,16 +28,23 @@ class ProfileSettingsForm extends StatefulWidget {
 
 class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
 
-  late final GlobalKey<FormBuilderState> _formKey;
+  // In case a field has to be validated on change to remove the
+  // validation errors when its no longer invalid.
+  // late final GlobalKey<FormBuilderState> _formKey;
 
   @override
   void initState() {
-    _formKey = widget.formStateKey ?? GlobalKey<FormBuilderState>();
+    // _formKey = widget.formStateKey ?? GlobalKey<FormBuilderState>();
     super.initState();
   }
 
   void _onFormChanged() {
     widget.onChanged?.call();
+  }
+
+  void _onDeleteProfileTapped(BuildContext context) {
+    showDeleteProfileDialog(context, widget.profile);
+    context.hapticsTap();
   }
 
   @override
@@ -67,6 +76,11 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
             title: context.localizations.usePresenceFeatureTitle,
             helperText: context.localizations.usePresenceFeatureDescription,
             initialValue: widget.profileSettings.usePresenceFeature,
+          ),
+          Gap.large(),
+          AppButton.small(
+            text: context.localizations.profileDeleteTitle.toUpperCase(),
+            onTap: () => _onDeleteProfileTapped(context),
           ),
         ],
       ),

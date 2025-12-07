@@ -390,7 +390,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get profileDeleteQuestion =>
-      'Biztos, hogy törölni szeretnéd a profilodat?';
+      'Minden adatod véglegesen törlődni fog és nem lesz visszaállítható. Biztos vagy benne?';
 
   @override
   String get profileDeleteYes => 'Törlés';

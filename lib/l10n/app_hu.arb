@@ -134,7 +134,7 @@
   "profileSignoutCancel": "Mégsem",
 
   "profileDeleteTitle": "Profil törlése",
-  "profileDeleteQuestion": "Biztos, hogy törölni szeretnéd a profilodat?",
+  "profileDeleteQuestion": "Minden adatod véglegesen törlődni fog és nem lesz visszaállítható. Biztos vagy benne?",
   "profileDeleteYes": "Törlés",
   "profileDeleteCancel": "Mégsem",
 
