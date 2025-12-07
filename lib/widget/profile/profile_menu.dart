@@ -36,6 +36,11 @@ class ProfileMenu extends StatelessWidget {
     context.hapticsTap();
   }
 
+  void _onSettingsTapped(BuildContext context) {
+    ProfileSettingsRoute(profileId: profile.id).push(context);
+    context.hapticsTap();
+  }
+
   void _onSignoutTapped(BuildContext context) {
     showSignoutDialog(context);
     context.hapticsTap();
@@ -53,7 +58,7 @@ class ProfileMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       child: Column(
         children: [
-          _buildTile(
+          ProfileMenuTile(
             title: Text(
               context.localizations.editProfile,
               style: textStyle,
@@ -62,7 +67,7 @@ class ProfileMenu extends StatelessWidget {
             key: const Key('profile_menu_edit_profile_tile'),
           ),
           const Divider(height: 0),
-          _buildTile(
+          ProfileMenuTile(
             title: Text(
               context.localizations.sessionsHistory,
               style: textStyle,
@@ -71,7 +76,7 @@ class ProfileMenu extends StatelessWidget {
             key: const Key('profile_menu_session_history_tile'),
           ),
           const Divider(height: 0),
-          _buildTile(
+          ProfileMenuTile(
             title: Text(
               context.localizations.profileStats,
               style: textStyle,
@@ -80,7 +85,7 @@ class ProfileMenu extends StatelessWidget {
             key: const Key('profile_menu_statistics_tile'),
           ),
           const Divider(height: 0),
-          _buildTile(
+          ProfileMenuTile(
             title: Text(
               context.localizations.donate,
               style: textStyle,
@@ -89,7 +94,7 @@ class ProfileMenu extends StatelessWidget {
             key: const Key('profile_menu_donate_tile'),
           ),
           const Divider(height: 0),
-          _buildTile(
+          ProfileMenuTile(
             title: Text(
               context.localizations.profileDeleteTitle,
               style: textStyle,
@@ -98,7 +103,16 @@ class ProfileMenu extends StatelessWidget {
             key: const Key('profile_menu_delete_profile_tile'),
           ),
           const Divider(height: 0),
-          _buildTile(
+          ProfileMenuTile(
+            title: Text(
+              context.localizations.profileSettings,
+              style: textStyle,
+            ),
+            onTap: () => _onSettingsTapped(context),
+            key: const Key('profile_menu_settings_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
             title: Text(
               context.localizations.signOut,
               style: textStyle,
@@ -112,11 +126,21 @@ class ProfileMenu extends StatelessWidget {
 
   }
 
-  Widget _buildTile({
-    required Widget title,
-    required VoidCallback onTap,
-    Key? key,
-  }) {
+}
+
+class ProfileMenuTile extends StatelessWidget {
+
+  final Widget title;
+  final VoidCallback onTap;
+
+  const ProfileMenuTile({
+    required this.title,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       borderRadius: const BorderRadius.all(
         Radius.circular(AppThemeData.borderRadiusMd),
@@ -132,3 +156,4 @@ class ProfileMenu extends StatelessWidget {
     );
   }
 }
+

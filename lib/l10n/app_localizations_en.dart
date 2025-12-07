@@ -218,6 +218,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Okay';
 
   @override
+  String get profileSettings => 'Profile Settings';
+
+  @override
+  String get showTimeOnTimerSettingsScreenTitle =>
+      'Show current time on Timer Settings Screen';
+
+  @override
+  String get showTimeOnTimerSettingsScreenDescription =>
+      'When enabled, the session starting and finishing times will be displayed on the Timer Settings screen.';
+
+  @override
+  String get showStatsOnFinishScreenTitle =>
+      'Show statistics on Session Finish Screen';
+
+  @override
+  String get showStatsOnFinishScreenDescription =>
+      'When enabled, session result statistics will be displayed on the Session Finish screen.';
+
+  @override
+  String get usePresenceFeatureTitle => 'Enable Presence feature';
+
+  @override
+  String get usePresenceFeatureDescription =>
+      'When enabled, user will be able to see other users who are currently practicing.';
+
+  @override
   String get profileStats => 'Statistics';
 
   @override

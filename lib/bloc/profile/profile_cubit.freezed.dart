@@ -125,12 +125,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( Profile profile)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( Profile profile,  ProfileSettings settings)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ProfileStateInitial() when initial != null:
 return initial();case ProfileLoadingState() when loading != null:
 return loading();case ProfileLoadedState() when loaded != null:
-return loaded(_that.profile);case ProfileErrorState() when error != null:
+return loaded(_that.profile,_that.settings);case ProfileErrorState() when error != null:
 return error();case _:
   return orElse();
 
@@ -149,12 +149,12 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( Profile profile)  loaded,required TResult Function()  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( Profile profile,  ProfileSettings settings)  loaded,required TResult Function()  error,}) {final _that = this;
 switch (_that) {
 case ProfileStateInitial():
 return initial();case ProfileLoadingState():
 return loading();case ProfileLoadedState():
-return loaded(_that.profile);case ProfileErrorState():
+return loaded(_that.profile,_that.settings);case ProfileErrorState():
 return error();}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -169,12 +169,12 @@ return error();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( Profile profile)?  loaded,TResult? Function()?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( Profile profile,  ProfileSettings settings)?  loaded,TResult? Function()?  error,}) {final _that = this;
 switch (_that) {
 case ProfileStateInitial() when initial != null:
 return initial();case ProfileLoadingState() when loading != null:
 return loading();case ProfileLoadedState() when loaded != null:
-return loaded(_that.profile);case ProfileErrorState() when error != null:
+return loaded(_that.profile,_that.settings);case ProfileErrorState() when error != null:
 return error();case _:
   return null;
 
@@ -251,10 +251,11 @@ String toString() {
 
 
 class ProfileLoadedState extends ProfileState {
-  const ProfileLoadedState({required this.profile}): super._();
+  const ProfileLoadedState({required this.profile, required this.settings}): super._();
   
 
  final  Profile profile;
+ final  ProfileSettings settings;
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -266,16 +267,16 @@ $ProfileLoadedStateCopyWith<ProfileLoadedState> get copyWith => _$ProfileLoadedS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileLoadedState&&(identical(other.profile, profile) || other.profile == profile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileLoadedState&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.settings, settings) || other.settings == settings));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,profile);
+int get hashCode => Object.hash(runtimeType,profile,settings);
 
 @override
 String toString() {
-  return 'ProfileState.loaded(profile: $profile)';
+  return 'ProfileState.loaded(profile: $profile, settings: $settings)';
 }
 
 
@@ -286,11 +287,11 @@ abstract mixin class $ProfileLoadedStateCopyWith<$Res> implements $ProfileStateC
   factory $ProfileLoadedStateCopyWith(ProfileLoadedState value, $Res Function(ProfileLoadedState) _then) = _$ProfileLoadedStateCopyWithImpl;
 @useResult
 $Res call({
- Profile profile
+ Profile profile, ProfileSettings settings
 });
 
 
-$ProfileCopyWith<$Res> get profile;
+$ProfileCopyWith<$Res> get profile;$ProfileSettingsCopyWith<$Res> get settings;
 
 }
 /// @nodoc
@@ -303,10 +304,11 @@ class _$ProfileLoadedStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? profile = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? profile = null,Object? settings = null,}) {
   return _then(ProfileLoadedState(
 profile: null == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
-as Profile,
+as Profile,settings: null == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
+as ProfileSettings,
   ));
 }
 
@@ -318,6 +320,15 @@ $ProfileCopyWith<$Res> get profile {
   
   return $ProfileCopyWith<$Res>(_self.profile, (value) {
     return _then(_self.copyWith(profile: value));
+  });
+}/// Create a copy of ProfileState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileSettingsCopyWith<$Res> get settings {
+  
+  return $ProfileSettingsCopyWith<$Res>(_self.settings, (value) {
+    return _then(_self.copyWith(settings: value));
   });
 }
 }

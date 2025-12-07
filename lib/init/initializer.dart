@@ -75,6 +75,7 @@ class Initializer {
     User? user = await repos.authRepository.authStateChange.first;
     ProfileCubit profileCubit = ProfileCubit(
       profileRepository: repos.profileRepository,
+      settingsRepository: repos.settingsRepository,
       statisticsRepository: repos.statisticsRepository,
       idGeneratorService: services.idGeneratorService,
       crashlyticsService: services.crashlyticsService,

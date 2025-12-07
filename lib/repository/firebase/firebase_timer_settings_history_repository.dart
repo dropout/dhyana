@@ -32,7 +32,7 @@ class FirebaseTimerSettingsHistoryRepository
           lastUsed: DateTime.now(),
         )
       );
-    } on FirebaseDocumentNotFoundException {
+    } on DocumentNotFoundException {
       await timerSettingsHistoryDataProvider.create(
         TimerSettingsHistoryRecord(
           id: timerSettings.id,

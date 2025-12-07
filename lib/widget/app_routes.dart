@@ -310,4 +310,22 @@ class PresenceRoute extends GoRouteData
 
 }
 
+@TypedGoRoute<ProfileSettingsRoute>(
+  path: '/profileSettings/:profileId',
+  name: 'PROFILE_SETTINGS',
+)
+class ProfileSettingsRoute extends GoRouteData
+  with AuthRedirectHook, $ProfileSettingsRoute {
+
+  final String profileId;
+  const ProfileSettingsRoute({required this.profileId});
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+    ProfileSettingsScreen(profileId: profileId);
+  @override
+  String? redirect(BuildContext context, GoRouterState state) =>
+    authRedirectHook(context, state);
+
+}
+
 

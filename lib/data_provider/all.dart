@@ -1,4 +1,5 @@
 export 'data_provider.dart';
+export 'data_provider_exception.dart';
 export 'day_data_provider.dart';
 export 'presence_data_provider.dart';
 export 'profile_data_provider.dart';

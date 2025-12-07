@@ -2,6 +2,7 @@ import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/profile/all.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
@@ -161,7 +162,10 @@ void main() {
       final Profile profileStub = FakeModelFactory().createProfile();
 
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profileStub));
+        .thenReturn(ProfileState.loaded(
+          profile: profileStub,
+          settings: ProfileSettings(id: profileStub.id)
+        ));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(

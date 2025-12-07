@@ -8,7 +8,8 @@ sealed class ProfileState with _$ProfileState {
   const factory ProfileState.initial() = ProfileStateInitial;
   const factory ProfileState.loading() = ProfileLoadingState;
   const factory ProfileState.loaded({
-    required Profile profile
+    required Profile profile,
+    required ProfileSettings settings,
   }) = ProfileLoadedState;
   const factory ProfileState.error() = ProfileErrorState;
 

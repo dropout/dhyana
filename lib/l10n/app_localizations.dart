@@ -488,6 +488,48 @@ abstract class AppLocalizations {
   /// **'Rendben'**
   String get photoAccessDialogButtonText;
 
+  /// No description provided for @profileSettings.
+  ///
+  /// In hu, this message translates to:
+  /// **'Profil beállítások'**
+  String get profileSettings;
+
+  /// No description provided for @showTimeOnTimerSettingsScreenTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Idő megjelenítése az Időzítő beállítások képernyőn'**
+  String get showTimeOnTimerSettingsScreenTitle;
+
+  /// No description provided for @showTimeOnTimerSettingsScreenDescription.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.'**
+  String get showTimeOnTimerSettingsScreenDescription;
+
+  /// No description provided for @showStatsOnFinishScreenTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Statisztika megjelenítése a Gyakorlat befejezése képernyőn'**
+  String get showStatsOnFinishScreenTitle;
+
+  /// No description provided for @showStatsOnFinishScreenDescription.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ha engedélyezve van, a gyakorlat befejezése képernyőn megjelenik a gyakorlat eredmény statisztikája.'**
+  String get showStatsOnFinishScreenDescription;
+
+  /// No description provided for @usePresenceFeatureTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Jelenlét funkció engedélyezése'**
+  String get usePresenceFeatureTitle;
+
+  /// No description provided for @usePresenceFeatureDescription.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.'**
+  String get usePresenceFeatureDescription;
+
   /// No description provided for @profileStats.
   ///
   /// In hu, this message translates to:

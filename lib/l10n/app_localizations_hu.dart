@@ -219,6 +219,32 @@ class AppLocalizationsHu extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Rendben';
 
   @override
+  String get profileSettings => 'Profil beállítások';
+
+  @override
+  String get showTimeOnTimerSettingsScreenTitle =>
+      'Idő megjelenítése az Időzítő beállítások képernyőn';
+
+  @override
+  String get showTimeOnTimerSettingsScreenDescription =>
+      'Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.';
+
+  @override
+  String get showStatsOnFinishScreenTitle =>
+      'Statisztika megjelenítése a Gyakorlat befejezése képernyőn';
+
+  @override
+  String get showStatsOnFinishScreenDescription =>
+      'Ha engedélyezve van, a gyakorlat befejezése képernyőn megjelenik a gyakorlat eredmény statisztikája.';
+
+  @override
+  String get usePresenceFeatureTitle => 'Jelenlét funkció engedélyezése';
+
+  @override
+  String get usePresenceFeatureDescription =>
+      'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.';
+
+  @override
   String get profileStats => 'Statisztika';
 
   @override

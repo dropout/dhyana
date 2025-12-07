@@ -81,6 +81,14 @@
   "photoAccessDialogText": "Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon 'Beállítások' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.",
   "photoAccessDialogButtonText": "Rendben",
 
+  "profileSettings": "Profil beállítások",
+  "showTimeOnTimerSettingsScreenTitle": "Idő megjelenítése az Időzítő beállítások képernyőn",
+  "showTimeOnTimerSettingsScreenDescription": "Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.",
+  "showStatsOnFinishScreenTitle": "Statisztika megjelenítése a Gyakorlat befejezése képernyőn",
+  "showStatsOnFinishScreenDescription": "Ha engedélyezve van, a gyakorlat befejezése képernyőn megjelenik a gyakorlat eredmény statisztikája.",
+  "usePresenceFeatureTitle": "Jelenlét funkció engedélyezése",
+  "usePresenceFeatureDescription": "Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.",
+
   "profileStats": "Statisztika",
   "consecutiveDays": "Egymás utáni napok",
   "highlights": "Kiemelt adatok",

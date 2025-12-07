@@ -2,6 +2,7 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default_shader_service.dart';
 import 'package:dhyana/service/shader_service.dart';
@@ -203,9 +204,11 @@ void main() {
           )
         );
 
+      final profile = FakeModelFactory().createProfile();
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
-            profile: FakeModelFactory().createProfile()
+            profile: profile,
+            settings: ProfileSettings(id: profile.id)
           )
         );
 
@@ -251,9 +254,11 @@ void main() {
           )
         );
 
+      final profile = FakeModelFactory().createProfile();
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
-            profile: FakeModelFactory().createProfile()
+            profile: profile,
+            settings: ProfileSettings(id: profile.id)
           )
         );
 

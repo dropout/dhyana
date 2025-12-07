@@ -5,6 +5,7 @@ import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/bloc_provider/timer_bloc_providers.dart';
@@ -100,13 +101,19 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
@@ -169,13 +176,19 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
@@ -223,13 +236,19 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(

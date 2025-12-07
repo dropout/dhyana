@@ -2,17 +2,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/repository/profile_repository.dart';
-import 'package:dhyana/repository/statistics_repository.dart';
-import 'package:dhyana/service/all.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockProfileRepository extends Mock implements ProfileRepository {}
-class MockStatisticsRepository extends Mock implements StatisticsRepository {}
-class MockCrashlyticsService extends Mock implements CrashlyticsService {}
-class MockIdGeneratorService extends Mock implements IdGeneratorService {}
-class MockProfileStatsUpdater extends Mock implements ProfileStatsReportUpdater {}
+import '../mock_definitions.dart';
 
 void main() {
   final FakeModelFactory fakeFactory = FakeModelFactory();
@@ -25,6 +19,7 @@ void main() {
   late MockCrashlyticsService mockCrashlyticsService;
   late MockIdGeneratorService mockIdGeneratorService;
   late MockProfileStatsUpdater mockProfileStatsUpdater;
+  late MockSettingsRepository mockSettingsRepository;
 
   setUp(() {
     profile = fakeFactory.createProfile();
@@ -34,9 +29,11 @@ void main() {
     mockCrashlyticsService = MockCrashlyticsService();
     mockIdGeneratorService = MockIdGeneratorService();
     mockProfileStatsUpdater = MockProfileStatsUpdater();
+    mockSettingsRepository = MockSettingsRepository();
 
     profileCubit = ProfileCubit(
       profileRepository: mockProfileRepository,
+      settingsRepository: mockSettingsRepository,
       statisticsRepository: mockStatisticsRepository,
       crashlyticsService: mockCrashlyticsService,
       idGeneratorService: mockIdGeneratorService,
@@ -63,7 +60,7 @@ void main() {
       act: (cubit) => cubit.loadProfile("1"),
       expect: () => [
         const ProfileState.loading(),
-        ProfileState.loaded(profile: profile),
+        ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id)),
       ],
       verify: (_) {
         verify(() => mockProfileRepository.read('1')).called(1);
@@ -103,7 +100,7 @@ void main() {
         completeProfile: false,
       ),
       expect: () => [
-        ProfileState.loaded(profile: profile),
+        ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id)),
       ],
       verify: (_) {
         verify(() => mockProfileRepository.update(profile)).called(1);

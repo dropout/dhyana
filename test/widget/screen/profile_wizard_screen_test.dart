@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:dhyana/widget/screen/profile_wizard_screen.dart';
 import 'package:dhyana/widget/util/all.dart';
@@ -86,11 +87,11 @@ void main() {
         final Profile profile = FakeModelFactory().createProfile();
 
         when(() => mockProfileCubit.state).thenReturn(
-          ProfileState.loaded(profile: profile)
+          ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id))
         );
         when(() => mockProfileCubit.stream).thenAnswer(
           (_) => Stream<ProfileState>.fromIterable([
-            ProfileState.loaded(profile: profile)
+            ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id))
           ])
         );
 
@@ -118,11 +119,11 @@ void main() {
         final Profile profile = FakeModelFactory().createProfile();
 
         when(() => mockProfileCubit.state).thenReturn(
-          ProfileState.loaded(profile: profile)
+          ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id))
         );
         when(() => mockProfileCubit.stream).thenAnswer(
           (_) => Stream<ProfileState>.fromIterable([
-            ProfileState.loaded(profile: profile)
+            ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id))
           ])
         );
 

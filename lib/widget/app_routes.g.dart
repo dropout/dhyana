@@ -20,6 +20,7 @@ List<RouteBase> get $appRoutes => [
   $sessionHistoryRoute,
   $timerSettingsHistoryRoute,
   $presenceRoute,
+  $profileSettingsRoute,
 ];
 
 RouteBase get $homeRoute =>
@@ -388,6 +389,37 @@ mixin $PresenceRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/presence');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $profileSettingsRoute => GoRouteData.$route(
+  path: '/profileSettings/:profileId',
+  name: 'PROFILE_SETTINGS',
+  factory: $ProfileSettingsRoute._fromState,
+);
+
+mixin $ProfileSettingsRoute on GoRouteData {
+  static ProfileSettingsRoute _fromState(GoRouterState state) =>
+      ProfileSettingsRoute(profileId: state.pathParameters['profileId']!);
+
+  ProfileSettingsRoute get _self => this as ProfileSettingsRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/profileSettings/${Uri.encodeComponent(_self.profileId)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);

@@ -4,6 +4,7 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
@@ -190,7 +191,10 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
 
       final GoRouter goRouter = GoRouter(
         routes: [
@@ -246,7 +250,10 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(user: user));
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(profile: profile));
+        .thenReturn(ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        ));
 
       final GoRouter goRouter = GoRouter(
         routes: [

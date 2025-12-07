@@ -87,6 +87,10 @@ class MockIdGeneratorService
   extends Mock
   implements IdGeneratorService {}
 
+class MockProfileStatsUpdater
+  extends Mock
+  implements ProfileStatsReportUpdater {}
+
 // Repositories ----------------------------------------------------------------
 
 class MockRepositories
@@ -108,3 +112,7 @@ class MockTimerSettingsHistoryRepository
 class MockStatisticsRepository
   extends Mock
   implements StatisticsRepository {}
+
+class MockSettingsRepository
+  extends Mock
+  implements SettingsRepository {}

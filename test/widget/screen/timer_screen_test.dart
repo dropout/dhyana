@@ -5,6 +5,7 @@ import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/screen/timer_screen.dart';
@@ -138,7 +139,10 @@ void main() {
         AuthState.signedIn(user: user)
       );
       when(() => mockProfileCubit.state).thenReturn(
-        ProfileState.loaded(profile: profile)
+        ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        )
       );
 
       when(() => mockProfileRepository.read(profile.id))
@@ -148,7 +152,10 @@ void main() {
         AuthState.signedIn(user: user)
       );
       when(() => mockProfileCubit.state).thenReturn(
-        ProfileState.loaded(profile: profile)
+        ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        )
       );
 
       await tester.runAsync(() async {
@@ -192,7 +199,10 @@ void main() {
         AuthState.signedIn(user: user)
       );
       when(() => mockProfileCubit.state).thenReturn(
-        ProfileState.loaded(profile: profile)
+        ProfileState.loaded(
+          profile: profile,
+          settings: ProfileSettings(id: profile.id)
+        )
       );
 
       when(() => mockProfileRepository.read(profile.id))

@@ -81,6 +81,14 @@
   "photoAccessDialogText": "The application doesn't have a permission to access you photos. Please go into 'Settings' and give access to the photos in order to change you profile photo.",
   "photoAccessDialogButtonText": "Okay",
 
+  "profileSettings": "Profile Settings",
+  "showTimeOnTimerSettingsScreenTitle": "Show current time on Timer Settings Screen",
+  "showTimeOnTimerSettingsScreenDescription": "When enabled, the session starting and finishing times will be displayed on the Timer Settings screen.",
+  "showStatsOnFinishScreenTitle": "Show statistics on Session Finish Screen",
+  "showStatsOnFinishScreenDescription": "When enabled, session result statistics will be displayed on the Session Finish screen.",
+  "usePresenceFeatureTitle": "Enable Presence feature",
+  "usePresenceFeatureDescription": "When enabled, user will be able to see other users who are currently practicing.",
+
   "profileStats": "Statistics",
   "average": "Average",
   "averagePerDay": "Average per day",
