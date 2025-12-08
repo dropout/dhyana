@@ -1,3 +1,5 @@
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/bloc_provider/timer_settings_bloc_provider.dart';
@@ -56,12 +58,28 @@ class HomeScreen extends StatelessWidget {
             case TimerSettingsDataLoadingState():
               return const AppLoadingDisplay();
             case TimerSettingsDataLoadedState():
-              return TimerSettingsView(
-                timerSettings: state.timerSettings
-              );
+              return buildLoadedState(context, state);
           }
         }
       ),
+    );
+  }
+
+  Widget buildLoadedState(BuildContext context, TimerSettingsDataLoadedState state) {
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, profileState) {
+        if (profileState is ProfileLoadedState) {
+          return TimerSettingsView(
+            timerSettings: state.timerSettings,
+            profileSettings: profileState.settings,
+          );
+        } else {
+          return TimerSettingsView(
+            timerSettings: state.timerSettings,
+            profileSettings: ProfileSettings(id: 'anonymous'),
+          );
+        }
+      },
     );
   }
 

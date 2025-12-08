@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
@@ -58,7 +59,10 @@ void main() {
           child: withAllContextProviders(
             BlocProvider<TimerSettingsBloc>(
               create: (context) => MockTimerSettingsBloc(),
-              child: TimerSettingsView(timerSettings: timerSettings)
+              child: TimerSettingsView(
+                timerSettings: timerSettings,
+                profileSettings: ProfileSettings(id: 'profileSettingsId'),
+              )
             )
           )
         )

@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_routes.dart';
@@ -14,9 +15,11 @@ import 'settings/all.dart';
 class TimerSettingsView extends StatefulWidget {
   
   final TimerSettings timerSettings;
+  final ProfileSettings profileSettings;
   
   const TimerSettingsView({
     required this.timerSettings,
+    required this.profileSettings,
     super.key
   });
 
@@ -90,13 +93,15 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   Widget buildInputs(BuildContext context) {
+    final profileSettings = widget.profileSettings;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppThemeData.padding2Xl),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          StartTimeText(),
-          buildInputGap(context),
+          if (profileSettings.showTimeOnTimerSettingsScreen) StartTimeText(),
+          if (profileSettings.showTimeOnTimerSettingsScreen) buildInputGap(context),
           WarmupTimeInput(
             label: AppLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
@@ -128,8 +133,8 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             onChange: (Sound endingSound) =>
               _onEndingSoundChange(context, endingSound)
           ),
-          buildInputGap(context),
-          EndTimeText(
+          if (profileSettings.showTimeOnTimerSettingsScreen) buildInputGap(context),
+          if (profileSettings.showTimeOnTimerSettingsScreen) EndTimeText(
             timerSettings: widget.timerSettings,
           ),
         ],
@@ -154,6 +159,15 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   Widget buildInputGap(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: 48,
+      ),
+      child: InputGap(
+        isEndGap: false,
+      )
+    );
+
     return Expanded(
       child: InputGap(
         isEndGap: false,

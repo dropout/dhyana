@@ -28,7 +28,7 @@ class ProfileSettingsForm extends StatefulWidget {
 
 class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
 
-  // In case a field has to be validated on change to remove the
+  // In case a field has to be revalidated on change to remove the
   // validation errors when its no longer invalid.
   // late final GlobalKey<FormBuilderState> _formKey;
 
