@@ -1,5 +1,5 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/bloc/years/years_bloc.dart';
+import 'package:dhyana/bloc/years/years_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/stats_interval.dart';
@@ -31,7 +31,7 @@ class YearsBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<YearsBloc, YearsState>(
+    return BlocConsumer<YearsCubit, YearsState>(
       builder: (context, state) {
         switch (state) {
           case YearsLoadingState():

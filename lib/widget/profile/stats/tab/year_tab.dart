@@ -1,5 +1,5 @@
 
-import 'package:dhyana/bloc/years/years_bloc.dart';
+import 'package:dhyana/bloc/years/years_cubit.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/years_bar_chart_page.dart';
@@ -55,16 +55,16 @@ class YearTabState extends State<YearTab> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return BlocProvider<YearsBloc>(
+                  return BlocProvider<YearsCubit>(
                     create: (BuildContext context) {
-                      return YearsBloc(
+                      return YearsCubit(
                         statisticsRepository: context.repos.statisticsRepository,
                         crashlyticsService: context.services.crashlyticsService
-                      )..add(YearsEvent.queryYears(
-                        profileId: widget.profile.id,
-                        from: intervals[index].from,
+                      )..queryYears(
+                        widget.profile.id,
+                        intervals[index].from,
                         to: intervals[index].to,
-                      ));
+                      );
                     },
                     child: YearsBarChartPage(
                       pageIndex: index,

@@ -1,53 +1,50 @@
-import 'package:dhyana/model/all.dart';
-import 'package:dhyana/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/year.dart';
+import 'package:dhyana/model/year_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'years_event.dart';
 part 'years_state.dart';
-part 'years_bloc.freezed.dart';
+part 'years_cubit.freezed.dart';
 
-class YearsBloc extends Bloc<YearsEvent, YearsState> {
+class YearsCubit extends Cubit<YearsState> {
 
   final Logger logger = getLogger('YearBloc');
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
 
-  YearsBloc({
+  YearsCubit({
     required this.statisticsRepository,
     required this.crashlyticsService,
-  }) : super(const YearsState.loading()) {
-    on<QueryYearsEvent>(_onQueryYearsEvent);
-  }
+  }) : super(const YearsState.loading());
 
-  void _onQueryYearsEvent(QueryYearsEvent event, emit) async {
+  Future<void> queryYears(String profileId, DateTime from, {DateTime? to}) async {
     try {
-      logger.t('Loading years: ${event.from.toString()} ... ${event.to.toString()}');
       emit(const YearsState.loading());
 
       YearQueryOptions queryOptions = YearQueryOptions(
-        from: event.from,
-        to: event.to ?? DateTime.now()
+        from: from,
+        to: to ?? DateTime.now()
       );
 
       List<Year> years = await statisticsRepository.queryYears(
-        event.profileId,
+        profileId,
         queryOptions,
       );
 
       emit(YearsState.loaded(years: _fillEmptyYears(years, queryOptions)));
-      logger.t('Successfully loaded years count: ${years.length}');
     } catch (e, stack) {
-      logger.t('Failed to get year');
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
         reason: 'Unable to load years data'
       );
+      emit(const YearsState.error());
     }
   }
 
@@ -76,5 +73,6 @@ class YearsBloc extends Bloc<YearsEvent, YearsState> {
 
     return years;
   }
+
 
 }

@@ -1,4 +1,4 @@
-part of 'years_bloc.dart';
+part of 'years_cubit.dart';
 
 @freezed
 sealed class YearsState with _$YearsState {
