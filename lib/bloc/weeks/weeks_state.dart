@@ -1,4 +1,4 @@
-part of 'weeks_bloc.dart';
+part of 'weeks_cubit.dart';
 
 @freezed
 sealed class WeeksState with _$WeeksState {

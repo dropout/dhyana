@@ -11,5 +11,5 @@ export 'sessions/sessions_cubit.dart';
 export 'timer/timer_bloc.dart';
 export 'timer_settings/timer_settings_bloc.dart';
 export 'timer_settings_history/timer_settings_history_bloc.dart';
-export 'weeks/weeks_bloc.dart';
+export 'weeks/weeks_cubit.dart';
 export 'years/years_cubit.dart';

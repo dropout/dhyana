@@ -1,45 +1,50 @@
-import 'package:dhyana/model/all.dart';
-import 'package:dhyana/util/all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/model/week.dart';
+import 'package:dhyana/model/week_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'weeks_event.dart';
 part 'weeks_state.dart';
-part 'weeks_bloc.freezed.dart';
+part 'weeks_cubit.freezed.dart';
 
-class WeeksBloc extends Bloc<WeeksEvent, WeeksState> {
+class WeeksCubit extends Cubit<WeeksState> {
 
-  final Logger logger = getLogger('WeeksBloc');
+  final Logger logger = getLogger('WeeksCubit');
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
 
-  WeeksBloc({
+  WeeksCubit({
     required this.statisticsRepository,
     required this.crashlyticsService,
-  }) : super(const WeeksState.loading()) {
-    on<GetWeeksEvent>(_onGetWeeksEvent);
-  }
+  }) : super(const WeeksState.loading());
 
-  void _onGetWeeksEvent(GetWeeksEvent event, emit) async {
+  Future<void> queryWeeks(
+    String profileId,
+    DateTime from, {
+      required DateTime to,
+    }
+  ) async {
     try {
-      logger.t('Loading weeks: ${event.from} ... ${event.to}');
+      logger.t('Loading weeks: $from ... $to');
       emit(const WeeksState.loading());
       WeekQueryOptions queryOptions = WeekQueryOptions(
-        from: event.from,
-        to: event.to,
+        from: from,
+        to: to,
       );
       List<Week> weeks = await statisticsRepository.queryWeeks(
-        event.profileId,
+        profileId,
         queryOptions,
       );
 
       emit(WeeksState.loaded(
-        from: event.from,
-        to: event.to,
+        from: from,
+        to: to,
         weeks: _fillEmptyWeeks(weeks, queryOptions),
         calculatedStats: CalculatedStats.fromWeeks(weeks),
       ));

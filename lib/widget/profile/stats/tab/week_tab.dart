@@ -1,5 +1,5 @@
 
-import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
+import 'package:dhyana/bloc/weeks/weeks_cubit.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/weeks_bar_chart_page.dart';
@@ -55,16 +55,16 @@ class WeekTabState extends State<WeekTab> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return BlocProvider<WeeksBloc>(
+                  return BlocProvider<WeeksCubit>(
                     create: (BuildContext context) {
-                      return WeeksBloc(
+                      return WeeksCubit(
                         statisticsRepository: context.repos.statisticsRepository,
                         crashlyticsService: context.services.crashlyticsService
-                      )..add(WeeksEvent.queryWeeks(
-                        profileId: widget.profile.id,
-                        from: intervals[index].from,
+                      )..queryWeeks(
+                        widget.profile.id,
+                        intervals[index].from,
                         to: intervals[index].to,
-                      ));
+                      );
                     },
                     child: WeeksBarChartPage(
                       pageIndex: index,

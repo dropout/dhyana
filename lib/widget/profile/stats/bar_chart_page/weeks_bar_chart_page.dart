@@ -1,5 +1,5 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/bloc/weeks/weeks_bloc.dart';
+import 'package:dhyana/bloc/weeks/weeks_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/stats_interval.dart';
@@ -29,7 +29,7 @@ class WeeksBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<WeeksBloc, WeeksState>(
+    return BlocConsumer<WeeksCubit, WeeksState>(
       builder: (context, state) {
         switch (state) {
           case WeeksLoadingState():
