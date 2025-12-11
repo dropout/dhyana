@@ -6,14 +6,11 @@ import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 part 'months_state.dart';
 part 'months_cubit.freezed.dart';
 
-class MonthsCubit extends Cubit<MonthsState> {
-
-  final Logger logger = getLogger('MonthsCubit');
+class MonthsCubit extends Cubit<MonthsState> with LoggerMixin {
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;

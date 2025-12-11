@@ -2,14 +2,11 @@ import 'dart:typed_data';
 
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/repository/profile_repository.dart';
-import 'package:dhyana/util/logger_factory.dart';
-import 'package:logger/logger.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 
 import 'profile_data_updater.dart';
 
-class DefaultProfileDataUpdater extends ProfileDataUpdater {
-
-  final Logger logger = getLogger('DefaultProfileUpdateStrategy');
+class DefaultProfileDataUpdater extends ProfileDataUpdater with LoggerMixin {
 
   final Profile profile;
   final Map<String, dynamic> formData;

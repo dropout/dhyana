@@ -4,16 +4,13 @@ import 'package:dhyana/model/year_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 part 'years_state.dart';
 part 'years_cubit.freezed.dart';
 
-class YearsCubit extends Cubit<YearsState> {
-
-  final Logger logger = getLogger('YearBloc');
+class YearsCubit extends Cubit<YearsState> with LoggerMixin {
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;

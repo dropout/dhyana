@@ -9,7 +9,7 @@ export 'faker.dart';
 export 'firebase_provider.dart';
 export 'launch_url.dart';
 export 'localization.dart';
-export 'logger_factory.dart';
+export 'logger_mixin.dart';
 export 'painting.dart';
 export 'remap_range.dart';
 export 'remote_config_keys.dart';

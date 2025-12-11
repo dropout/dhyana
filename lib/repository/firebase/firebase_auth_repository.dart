@@ -1,12 +1,9 @@
-import 'package:logger/logger.dart';
 import 'package:dhyana/data_provider/auth/all.dart';
 import 'package:dhyana/data_provider/profile_data_provider.dart';
 import 'package:dhyana/repository/auth_repository.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 
-class FirebaseAuthRepository implements AuthRepository {
-
-  final Logger logger = getLogger('FirebaseAuthRepository');
+class FirebaseAuthRepository with LoggerMixin implements AuthRepository {
 
   final AuthProvider authDataProvider;
   final ProfileDataProvider profileDataProvider;

@@ -9,19 +9,16 @@ import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 import 'data_update/profile_data_updater.dart';
 
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
 
-class ProfileCubit extends Cubit<ProfileState> {
-
-  final Logger logger = getLogger('ProfileBloc');
+class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
 
   final ProfileRepository profileRepository;
   final SettingsRepository settingsRepository;

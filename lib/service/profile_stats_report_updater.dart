@@ -2,12 +2,9 @@ import 'dart:math';
 
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/util/all.dart';
-import 'package:logger/logger.dart';
 
 /// Updates profile statistics report
-class ProfileStatsReportUpdater {
-
-  final Logger logger = getLogger('ProfileStatsReportUpdater');
+class ProfileStatsReportUpdater with LoggerMixin {
 
   ProfileStatsReportUpdater();
 

@@ -5,16 +5,13 @@ import 'package:dhyana/model/day_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 part 'days_state.dart';
 part 'days_cubit.freezed.dart';
 
-class DaysCubit extends Cubit<DaysState> {
-
-  final Logger logger = getLogger('DaysCubit');
+class DaysCubit extends Cubit<DaysState> with LoggerMixin {
 
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;

@@ -1,18 +1,15 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:logger/logger.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/util/all.dart';
 
 import 'audio_service.dart';
 
-class DefaultAudioService implements AudioService {
+class DefaultAudioService with LoggerMixin implements AudioService {
 
-  final Logger logger = getLogger('DefaultAudioService');
   AudioPlayer audioPlayer = AudioPlayer();
-
-
 
   DefaultAudioService() {
     audioPlayer.setPlayerMode(PlayerMode.lowLatency);

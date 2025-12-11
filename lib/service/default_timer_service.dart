@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:logger/logger.dart';
 import 'package:dhyana/service/timer_service.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 
-class DefaultTimerService implements TimerService {
+class DefaultTimerService with LoggerMixin implements TimerService {
 
-  final Logger logger = getLogger('DefaultTimerService');
   final Duration _duration;
   final int tickIntervalInMilliSeconds;
 

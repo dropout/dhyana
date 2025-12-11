@@ -6,16 +6,13 @@ import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 part 'presence_state.dart';
 part 'presence_cubit.freezed.dart';
 
-class PresenceCubit extends Cubit<PresenceState> {
-
-  final Logger logger = getLogger('PresenceCubit');
+class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
 
   final PresenceRepository presenceRepository;
   final ProfileRepository profileRepository;

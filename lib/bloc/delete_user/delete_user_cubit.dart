@@ -2,16 +2,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 part 'delete_user_state.dart';
 part 'delete_user_cubit.freezed.dart';
 
-class DeleteUserCubit extends Cubit<DeleteUserState> {
-
-  final Logger logger = getLogger('DeleteUserCubit');
+class DeleteUserCubit extends Cubit<DeleteUserState> with LoggerMixin {
 
   final AuthRepository authRepository;
   final ProfileRepository profileRepository;

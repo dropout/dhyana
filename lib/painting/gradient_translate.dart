@@ -7,10 +7,7 @@ class GradientTranslate extends GradientTransform {
   final double x;
   final double y;
 
-  const GradientTranslate(
-      this.x,
-      this.y
-      );
+  const GradientTranslate(this.x, this.y);
 
   @override
   Matrix4 transform(Rect bounds, {TextDirection? textDirection}) {
@@ -19,7 +16,7 @@ class GradientTranslate extends GradientTransform {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator == (Object other) {
     if (identical(this, other)) {
       return true;
     }

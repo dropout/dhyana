@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 
 part 'timer_event.dart';
 part 'timer_state.dart';
@@ -20,9 +19,7 @@ part 'timer_bloc.freezed.dart';
 /// There are two phases:
 /// 1. Warmup phase (optional): A timer that runs before the main session.
 /// 2. Main session phase: The actual timer for the session duration.
-class TimerBloc extends Bloc<TimerEvent, TimerState> {
-
-  final Logger logger = getLogger('TimerBloc');
+class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
 
   final TimerSettings timerSettings;
   final TimerServiceFactory timerServiceFactory;

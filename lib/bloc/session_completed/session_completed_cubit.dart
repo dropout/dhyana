@@ -3,9 +3,8 @@ import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/all.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 part 'session_completed_state.dart';
 part 'session_completed_cubit.freezed.dart';
@@ -14,9 +13,7 @@ part 'session_completed_cubit.freezed.dart';
 /// When a session is completed, this cubit handles updating the profile stats,
 /// logging the session to statistics, and emitting states to reflect the progress.
 /// Addresses the requirements of displaying data and progress on SessionCompletedScreen.
-class SessionCompletedCubit extends Cubit<SessionCompletedState> {
-
-  final Logger logger = getLogger('SessionLoggerCubit');
+class SessionCompletedCubit extends Cubit<SessionCompletedState> with LoggerMixin {
 
   final ProfileRepository profileRepository;
   final StatisticsRepository statisticsRepository;

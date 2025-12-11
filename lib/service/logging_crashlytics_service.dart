@@ -1,11 +1,8 @@
-import 'package:logger/logger.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 
 import 'crashlytics_service.dart';
 
-class LoggingCrashlyticsService implements CrashlyticsService {
-
-  final Logger logger = getLogger('LoggingCrashlyticsService');
+class LoggingCrashlyticsService with LoggerMixin implements CrashlyticsService {
 
   @override
   void recordError({

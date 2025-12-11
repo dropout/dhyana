@@ -1,7 +1,7 @@
 // import 'package:dhyana/data_provider/all.dart';
 // import 'package:dhyana/model/all.dart';
 // import 'package:dhyana/repository/crud_repository_operations.dart';
-// import 'package:dhyana/util/logger_factory.dart';
+// import 'package:dhyana/util/logger_mixin.dart';
 // import 'package:logger/logger.dart';
 // import 'package:dhyana/repository/session_repository.dart';
 //

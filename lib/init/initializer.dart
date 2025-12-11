@@ -7,12 +7,11 @@ import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
-import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/init/services.dart';
-import 'package:dhyana/util/logger_factory.dart';
+import 'package:dhyana/util/logger_mixin.dart';
 
 import 'init_result.dart';
 
@@ -20,9 +19,7 @@ import 'init_result.dart';
 /// Creates and configures providers, repositories,
 /// services and all the necessary objects required
 /// at the start of the application.
-class Initializer {
-
-  final Logger logger = getLogger('Initializer');
+class Initializer with LoggerMixin {
 
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization process');
