@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
-import 'package:dhyana/widget/bloc_provider/timer_settings_bloc_provider.dart';
+import 'package:dhyana/widget/bloc_provider/timer_settings_cubit_provider.dart';
 import 'package:dhyana/widget/presence/presence_button.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/timer/all.dart';
@@ -25,8 +25,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TimerSettingsBlocProvider(
-      onCreate: (timerSettingsBloc) => timerSettingsBloc.loadTimerSettings(),
+    return TimerSettingsCubitProvider(
+      onCreate: (timerSettingsCubit) => timerSettingsCubit.loadTimerSettings(),
       child: buildScaffolding(context),
     );
   }

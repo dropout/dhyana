@@ -1,7 +1,7 @@
-import 'package:dhyana/bloc/presence/presence_bloc.dart';
+import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
-import 'package:dhyana/widget/bloc_provider/presence_bloc_provider.dart';
+import 'package:dhyana/widget/bloc_provider/presence_cubit_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +34,9 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   void _onIntervalChangeEnd(BuildContext context, double value) {
     if (value.round() != intervalInMinutes.round()) {
-      BlocProvider.of<PresenceBloc>(context).add(
-        PresenceEvent.load(
-          intervalInMinutes: value.round(),
-          batchSize: widget.batchSize,
-        )
+      BlocProvider.of<PresenceCubit>(context).loadPresenceData(
+        intervalInMinutes: value.round(),
+        batchSize: widget.batchSize,
       );
       setState(() {
         intervalInMinutes = value;
@@ -47,24 +45,22 @@ class _PresenceScreenState extends State<PresenceScreen>
   }
 
   Future<void> _onRefresh(BuildContext context) async {
-    BlocProvider.of<PresenceBloc>(context).add(
-      PresenceEvent.load(
-        intervalInMinutes: intervalInMinutes.round(),
-        batchSize: widget.batchSize,
-      )
+    BlocProvider.of<PresenceCubit>(context).loadPresenceData(
+      intervalInMinutes: intervalInMinutes.round(),
+      batchSize: widget.batchSize,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return PresenceBlocProvider(
-      onCreateEvent: PresenceEvent.load(),
+    return PresenceCubitProvider(
+      onCreate: (presenceCubit) => presenceCubit.loadPresenceData(),
       child: buildStates(context),
     );
   }
 
   Widget buildStates(BuildContext context) {
-    return BlocBuilder<PresenceBloc, PresenceState>(
+    return BlocBuilder<PresenceCubit, PresenceState>(
       builder: (BuildContext context, PresenceState state) {
         switch (state) {
           case PresenceLoadingState():

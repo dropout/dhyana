@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
@@ -19,16 +19,15 @@ class TimerSettingsHistoryScreen extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return TimerSettingsHistoryBlocProvider(
-      onCreateEvent: TimerSettingsHistoryEvent.loadSettingsList(
-        profileId: profileId
-      ),
+    return TimerSettingsHistoryCubitProvider(
+      onCreate: (timerSettingsHistoryCubit) =>
+        timerSettingsHistoryCubit.loadSettings(profileId),
       child: buildStates(context),
     );
   }
 
   Widget buildStates(BuildContext context) {
-    return BlocBuilder<TimerSettingsHistoryBloc, TimerSettingsHistoryState>(
+    return BlocBuilder<TimerSettingsHistoryCubit, TimerSettingsHistoryState>(
       builder: (context, state) {
         switch (state) {
           case TimerSettingsHistoryLoaded():

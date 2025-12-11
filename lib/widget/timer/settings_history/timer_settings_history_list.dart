@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_bloc.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/model/timer_settings_history_record.dart';
@@ -26,11 +26,9 @@ class TimerSettingsHistoryList extends StatelessWidget {
   void _onListItemTap(BuildContext context, TimerSettings timerSettings) {
     HomeRoute($extra: timerSettings).go(context);
     context.hapticsTap();
-    BlocProvider.of<TimerSettingsHistoryBloc>(context).add(
-      TimerSettingsHistoryEvent.saveSettings(
-        timerSettings: timerSettings,
-        profileId: profileId,
-      )
+    BlocProvider.of<TimerSettingsHistoryCubit>(context).saveSettings(
+      profileId,
+      timerSettings,
     );
 
     Future.delayed(Durations.medium1, () {

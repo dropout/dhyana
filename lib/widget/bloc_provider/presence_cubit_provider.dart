@@ -1,19 +1,19 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/presence/presence_bloc.dart';
+import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PresenceBlocProvider extends StatelessWidget {
+class PresenceCubitProvider extends StatelessWidget {
 
   final Widget child;
-  final PresenceEvent? onCreateEvent;
+  final Function(PresenceCubit)? onCreate;
 
-  const PresenceBlocProvider({
+  const PresenceCubitProvider({
     required this.child,
-    this.onCreateEvent,
+    this.onCreate,
     super.key
   });
 
@@ -23,17 +23,15 @@ class PresenceBlocProvider extends StatelessWidget {
     Repositories repos = context.repos;
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (BuildContext context, AuthState authState) {
-        PresenceBloc presenceBloc = PresenceBloc(
+        final presenceCubit = PresenceCubit(
           presenceRepository: repos.presenceRepository,
           profileRepository: repos.profileRepository,
           crashlyticsService: services.crashlyticsService,
         );
-        return BlocProvider<PresenceBloc>(
+        return BlocProvider<PresenceCubit>(
           create: (BuildContext context) {
-            if (onCreateEvent != null) {
-              presenceBloc.add(onCreateEvent!);
-            }
-            return presenceBloc;
+            onCreate?.call(presenceCubit);
+            return presenceCubit;
           },
           child: child,
         );

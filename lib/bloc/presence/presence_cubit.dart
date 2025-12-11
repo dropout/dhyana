@@ -1,41 +1,43 @@
-import 'package:dhyana/model/all.dart';
-import 'package:dhyana/repository/profile_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/presence.dart';
+import 'package:dhyana/model/presence_query_options.dart';
+import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/public_profile.dart';
 import 'package:dhyana/repository/presence_repository.dart';
+import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'presence_event.dart';
 part 'presence_state.dart';
-part 'presence_bloc.freezed.dart';
+part 'presence_cubit.freezed.dart';
 
-class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
+class PresenceCubit extends Cubit<PresenceState> {
 
-  final Logger logger = getLogger('PresenceBloc');
+  final Logger logger = getLogger('PresenceCubit');
 
   final PresenceRepository presenceRepository;
   final ProfileRepository profileRepository;
   final CrashlyticsService crashlyticsService;
 
-  PresenceBloc({
+  PresenceCubit({
     required this.presenceRepository,
     required this.profileRepository,
     required this.crashlyticsService,
-  }) : super(const PresenceState.initial()) {
-    on<LoadPresenceData>(_onLoadPresenceData);
-    on<LoadMorePresenceData>(_onLoadMorePresenceData);
-    on<ShowPresence>(_onShowPresence);
-  }
+  }) : super(const PresenceState.initial());
 
-  void _onLoadPresenceData(LoadPresenceData event, emit) async {
+  Future<void> loadPresenceData({
+    String? ownProfileId,
+    int intervalInMinutes = 60,
+    int batchSize = 18,
+  }) async {
     try {
       emit(PresenceState.loading());
       List<Presence> presenceList = await presenceRepository
         .query(PresenceQueryOptions(
           limit: 18,
-          ownProfileId: event.ownProfileId,
+          ownProfileId: ownProfileId,
         ));
       logger.t('Loaded ${presenceList.length} presence items');
       emit(PresenceState.loaded(presenceList: presenceList));
@@ -49,7 +51,10 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
     }
   }
 
-  void _onLoadMorePresenceData(LoadMorePresenceData event, emit) async {
+  Future<void> loadMorePresenceData(String lastDocumentId, {
+    int intervalInMinutes = 60,
+    int batchSize = 18,
+  }) async {
     try {
 
       // Get existing presence list
@@ -64,8 +69,8 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
         presenceList: existingPresenceList
       ));
       PresenceQueryOptions queryOptions = PresenceQueryOptions(
-        limit: event.batchSize,
-        lastDocumentId: event.lastDocumentId,
+        limit: batchSize,
+        lastDocumentId: lastDocumentId,
       );
       List<Presence> morePresenceList = await presenceRepository.query(queryOptions);
 
@@ -89,9 +94,9 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
     }
   }
 
-  void _onShowPresence(ShowPresence event, emit) async {
+  Future<void> showPresence(String profileId) async {
     try {
-      Profile profile = await profileRepository.read(event.profileId);
+      Profile profile = await profileRepository.read(profileId);
       if (profile.completed) {
         await presenceRepository.showPresence(Presence(
           id: profile.id,
@@ -109,7 +114,6 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
         reason: 'Unable to show presence!'
       );
     }
-
   }
 
 }

@@ -1,4 +1,4 @@
-part of 'timer_settings_history_bloc.dart';
+part of 'timer_settings_history_cubit.dart';
 
 @freezed
 class TimerSettingsHistoryState with _$TimerSettingsHistoryState {

@@ -25,13 +25,13 @@ class MockTimerSettingsCubit
   extends MockCubit<TimerSettingsState>
   implements TimerSettingsCubit {}
 
-class MockTimerSettingsHistoryBloc
-  extends MockBloc<TimerSettingsHistoryEvent, TimerSettingsHistoryState>
-  implements TimerSettingsHistoryBloc {}
+class MockTimerSettingsHistoryCubit
+  extends MockCubit<TimerSettingsHistoryState>
+  implements TimerSettingsHistoryCubit {}
 
 class MockPresenceBloc
-  extends MockBloc<PresenceEvent, PresenceState>
-  implements PresenceBloc {}
+  extends MockCubit<PresenceState>
+  implements PresenceCubit {}
 
 class MockTimerBloc
   extends MockBloc<TimerEvent, TimerState>

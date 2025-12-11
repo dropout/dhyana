@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:dhyana/bloc/presence/presence_bloc.dart';
+import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/widget/presence/all.dart';
@@ -20,7 +20,7 @@ class PresenceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PresenceBloc, PresenceState>(
+    return BlocBuilder<PresenceCubit, PresenceState>(
       builder: (BuildContext context, PresenceState state) {
         switch (state) {
           case PresenceLoadingState():
@@ -72,7 +72,7 @@ class PresenceView extends StatelessWidget {
   }
 
   Widget buildLoadMoreButton(BuildContext context, List<Presence> presenceList) {
-    return BlocBuilder<PresenceBloc, PresenceState>(
+    return BlocBuilder<PresenceCubit, PresenceState>(
       builder: (BuildContext context, PresenceState state) {
         switch (state) {
           case PresenceLoadingState():
@@ -83,12 +83,11 @@ class PresenceView extends StatelessWidget {
               presenceList: presenceList,
               batchSize: batchSize,
               maxPageCount: maxPageCount,
-              onTap: () => BlocProvider.of<PresenceBloc>(context).add(
-                PresenceEvent.loadMore(
-                  lastDocumentId: presenceList.last.id,
+              onTap: () => BlocProvider.of<PresenceCubit>(context).
+                loadMorePresenceData(
+                  presenceList.last.id,
                   batchSize: batchSize
-                )
-              ),
+                ),
             );
           case PresenceLoadingMoreState():
             return LoadMoreButton(

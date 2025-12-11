@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/sessions/sessions_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/screen/all.dart';
 
-import 'package:dhyana/widget/bloc_provider/sessions_bloc_provider.dart';
+import 'package:dhyana/widget/bloc_provider/sessions_cubit_provider.dart';
 import 'package:dhyana/widget/session/history/session_history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

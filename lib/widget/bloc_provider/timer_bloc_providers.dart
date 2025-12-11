@@ -55,11 +55,11 @@ class TimerBlocProviders extends StatelessWidget {
               lazy: false,
             ),
 
-            BlocProvider<PresenceBloc>(
+            BlocProvider<PresenceCubit>(
               create: (_) {
 
                 // Create the presence bloc
-                final PresenceBloc presenceBloc = PresenceBloc(
+                final presenceBloc = PresenceCubit(
                   presenceRepository: repos.presenceRepository,
                   profileRepository: repos.profileRepository,
                   crashlyticsService: services.crashlyticsService,
@@ -67,9 +67,7 @@ class TimerBlocProviders extends StatelessWidget {
 
                 // Show the presence if user is signed in
                 if (isSignedIn && profileId != null) {
-                  presenceBloc.add(
-                    PresenceEvent.showPresence(profileId: profileId)
-                  );
+                  presenceBloc.showPresence(profileId);
                 }
 
                 return presenceBloc;
@@ -77,24 +75,24 @@ class TimerBlocProviders extends StatelessWidget {
               lazy: false,
             ),
 
-            BlocProvider<TimerSettingsHistoryBloc>(
+            BlocProvider<TimerSettingsHistoryCubit>(
               create: (_) {
 
                 // Create the timer settings history bloc
-                final TimerSettingsHistoryBloc timerSettingsHistoryBloc =
-                  TimerSettingsHistoryBloc(
+                final timerSettingsHistoryCubit =
+                  TimerSettingsHistoryCubit(
                     timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
                     crashlyticsService: services.crashlyticsService
                   );
 
                 // Save the timer settings if user is signed in
                 if (isSignedIn) {
-                  timerSettingsHistoryBloc.add(TimerSettingsHistoryEvent.saveSettings(
-                    profileId: profileId!,
-                    timerSettings: timerSettings
-                  ));
+
+                  timerSettingsHistoryCubit.saveSettings(
+                    profileId!, timerSettings
+                  );
                 }
-                return timerSettingsHistoryBloc;
+                return timerSettingsHistoryCubit;
               },
               lazy: false,
             ),

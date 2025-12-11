@@ -1,4 +1,4 @@
-part of 'presence_bloc.dart';
+part of 'presence_cubit.dart';
 
 @freezed
 sealed class PresenceState with _$PresenceState {
