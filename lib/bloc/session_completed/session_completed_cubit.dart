@@ -1,20 +1,22 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/logger_factory.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'session_completed_event.dart';
 part 'session_completed_state.dart';
-part 'session_completed_bloc.freezed.dart';
+part 'session_completed_cubit.freezed.dart';
 
-class SessionCompletedBloc
-    extends Bloc<SessionCompletedEvent, SessionCompletedState> {
+/// Cubit to manage the state of session completion and logging
+/// When a session is completed, this cubit handles updating the profile stats,
+/// logging the session to statistics, and emitting states to reflect the progress.
+/// Addresses the requirements of displaying data and progress on SessionCompletedScreen.
+class SessionCompletedCubit extends Cubit<SessionCompletedState> {
 
-  final Logger logger = getLogger('SessionLoggerBloc');
+  final Logger logger = getLogger('SessionLoggerCubit');
 
   final ProfileRepository profileRepository;
   final StatisticsRepository statisticsRepository;
@@ -22,33 +24,30 @@ class SessionCompletedBloc
   final CrashlyticsService crashlyticsService;
   final IdGeneratorService idGeneratorService;
 
-  SessionCompletedBloc({
+  SessionCompletedCubit({
     required this.profileRepository,
     required this.statisticsRepository,
     required this.crashlyticsService,
     required this.idGeneratorService,
-  }) : super(const SessionCompletedState.initial()) {
-    on<LogSessionEvent>(_onLogSession);
-  }
+  }) : super(const SessionCompletedState.initial());
 
-  void _onLogSession(
-    LogSessionEvent event,
-    Emitter<SessionCompletedState> emit
-  ) async {
+  Future<void> logSession(String profileId, Session session, {
+    void Function(UpdateProfileStatsResult updateResults)? onComplete,
+    void Function(Object? error, StackTrace stack)? onError,
+  }) async {
     try {
-
       // Loading state will be indicated by the UI
       emit(const SessionCompletedState.loading());
 
       // Load an up-to-date profile and assemble a session object
-      Profile profile = await profileRepository.read(event.profileId);
+      Profile profile = await profileRepository.read(profileId);
 
       // Update profile stats with new session
       ProfileStatsReportUpdater profileStatsUpdater =
         ProfileStatsReportUpdater();
       UpdateProfileStatsResult updateResult =
         profileStatsUpdater.updateProfileStatsWithSession(
-          profile, event.session,
+          profile, session,
         );
 
       // Saving state happens in the background, not indicated by the UI
@@ -60,26 +59,27 @@ class SessionCompletedBloc
       // Log session data for statistics
       await statisticsRepository.logSession(
         updateResult.updatedProfile,
-        event.session,
+        session,
       );
 
       // Update the profile with the new stats
       await profileRepository.update(updateResult.updatedProfile);
 
+      // Emit saved state
       emit(SessionCompletedState.saved(
         updateResult: updateResult,
       ));
 
-      event.onComplete?.call(updateResult);
+      onComplete?.call(updateResult);
       logger.t('Session successfully logged!');
     } catch (e, stack) {
       crashlyticsService.recordError(
-          exception: e,
-          stackTrace: stack,
-          reason: 'Unable to log session: ${event.profileId}'
+        exception: e,
+        stackTrace: stack,
+        reason: 'Error logging session in SessionCompletedCubit',
       );
-      emit(SessionCompletedState.error());
-      event.onError?.call(e, stack);
+      emit(const SessionCompletedState.error());
+      onError?.call(e, stack);
     }
   }
 

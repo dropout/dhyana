@@ -167,12 +167,6 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         isEndGap: false,
       )
     );
-
-    return Expanded(
-      child: InputGap(
-        isEndGap: false,
-      ),
-    );
   }
 
 }

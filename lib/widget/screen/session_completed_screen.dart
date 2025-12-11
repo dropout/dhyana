@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/session_completed/session_completed_bloc.dart';
+import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
@@ -44,8 +44,8 @@ class SessionCompletedScreen extends StatelessWidget {
   }
 
   Widget buildSignedInView(BuildContext context, String profileId) {
-    return BlocProvider<SessionCompletedBloc>(
-      create: (context) => SessionCompletedBloc(
+    return BlocProvider<SessionCompletedCubit>(
+      create: (context) => SessionCompletedCubit(
         profileRepository: context.repos.profileRepository,
         statisticsRepository: context.repos.statisticsRepository,
         idGeneratorService: context.services.idGeneratorService,

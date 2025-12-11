@@ -11,7 +11,7 @@ import 'package:mocktail/mocktail.dart';
 
 class MockGoRouter extends Mock implements GoRouter {}
 
-// BLoCs -----------------------------------------------------------------------
+// BLoCs & Cubits --------------------------------------------------------------
 
 class MockAuthBloc
   extends MockBloc<AuthEvent, AuthState>
@@ -33,9 +33,9 @@ class MockTimerBloc
   extends MockBloc<TimerEvent, TimerState>
   implements TimerBloc {}
 
-class MockSessionCompletedBloc
-  extends MockBloc<SessionCompletedEvent, SessionCompletedState>
-  implements SessionCompletedBloc {}
+class MockSessionCompletedCubit
+  extends MockCubit<SessionCompletedState>
+  implements SessionCompletedCubit {}
 
 // Services --------------------------------------------------------------------
 

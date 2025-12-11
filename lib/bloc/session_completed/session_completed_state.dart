@@ -1,4 +1,4 @@
-part of 'session_completed_bloc.dart';
+part of 'session_completed_cubit.dart';
 
 @freezed
 class SessionCompletedState with _$SessionCompletedState {

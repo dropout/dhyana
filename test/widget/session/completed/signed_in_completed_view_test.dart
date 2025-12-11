@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/bloc/session_completed/session_completed_bloc.dart';
+import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
@@ -19,7 +19,7 @@ import '../../../test_context_providers.dart';
 void main() {
 
   late MockProfileCubit mockProfileCubit;
-  late MockSessionCompletedBloc mockSessionCompletedBloc;
+  late MockSessionCompletedCubit mockSessionCompletedCubit;
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
@@ -32,7 +32,7 @@ void main() {
   setUpAll(() async {
 
     mockProfileCubit = MockProfileCubit();
-    mockSessionCompletedBloc = MockSessionCompletedBloc();
+    mockSessionCompletedCubit = MockSessionCompletedCubit();
 
     mockServices = MockServices();
     mockCrashlyticsService = MockCrashlyticsService();
@@ -55,23 +55,34 @@ void main() {
     when(() => mockRepositories.presenceRepository)
       .thenReturn(mockPresenceRepository);
 
-    registerFallbackValue(LogSessionEvent(
-      profileId: 'profileId',
-      session: FakeModelFactory().createSession(),
-    ));
-
   });
 
   group('SignedInCompletedView', () {
 
     testWidgets('can log session on initialization', (WidgetTester tester) async {
 
-      final Session session = FakeModelFactory().createSession();
+      final profileId = 'profileId';
+      final session = FakeModelFactory().createSession();
+      final UpdateProfileStatsResult updateResult = UpdateProfileStatsResult(
+        updatedProfile: FakeModelFactory().createProfile(),
+        oldProfile: FakeModelFactory().createProfile(),
+        session: session,
+      );
 
-      when(() =>mockSessionCompletedBloc.state)
+      when(() =>mockSessionCompletedCubit.state)
         .thenReturn(const SessionCompletedInitialState());
-      when(() => mockSessionCompletedBloc.stream)
+      when(() => mockSessionCompletedCubit.stream)
         .thenAnswer((_) => const Stream<SessionCompletedState>.empty());
+
+      when(() => mockSessionCompletedCubit.logSession(
+        profileId,
+        session,
+        onComplete: any(named: 'onComplete'),
+      )).thenAnswer((invocation) async {
+        final onComplete = invocation.namedArguments[const Symbol('onComplete')]
+          as void Function(UpdateProfileStatsResult)?;
+        onComplete?.call(updateResult);
+      });
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
@@ -80,7 +91,7 @@ void main() {
               providers: [
                 Provider<Services>.value(value: mockServices),
                 BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
-                BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
+                BlocProvider<SessionCompletedCubit>.value(value: mockSessionCompletedCubit)
               ],
               child: SignedInCompletedView(
                 profileId: 'profileId',
@@ -92,21 +103,11 @@ void main() {
         await tester.pump();
       }).then((_) {
 
-        final result = verify(() => mockSessionCompletedBloc.add(
-          captureAny(that: isA<LogSessionEvent>())
-        ));
-        LogSessionEvent logSessionEvent = result.captured.first as LogSessionEvent;
-
-        expect(logSessionEvent.profileId, equals('profileId'));
-        expect(logSessionEvent.session, equals(session));
-
-        UpdateProfileStatsResult updateResult = UpdateProfileStatsResult(
-          updatedProfile: FakeModelFactory().createProfile(),
-          oldProfile: FakeModelFactory().createProfile(),
-          session: session,
-        );
-
-        logSessionEvent.onComplete!(updateResult);
+        verify(() => mockSessionCompletedCubit.logSession(
+          'profileId',
+          session,
+          onComplete: any(named: 'onComplete'),
+        )).called(1);
 
         verify(() => mockProfileCubit.loadProfile(
           'profileId',
@@ -121,7 +122,7 @@ void main() {
     testWidgets('can show loading when initial state', (WidgetTester tester) async {
       final Session session = FakeModelFactory().createSession();
 
-      when(() =>mockSessionCompletedBloc.state)
+      when(() =>mockSessionCompletedCubit.state)
         .thenReturn(const SessionCompletedState.initial());
 
       await tester.runAsync(() async {
@@ -131,7 +132,7 @@ void main() {
               providers: [
                 Provider<Services>.value(value: mockServices),
                 BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
-                BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
+                BlocProvider<SessionCompletedCubit>.value(value: mockSessionCompletedCubit)
               ],
               child: SignedInCompletedView(
                 profileId: 'profileId',
@@ -150,7 +151,7 @@ void main() {
     testWidgets('can show loading when loading state', (WidgetTester tester) async {
       final Session session = FakeModelFactory().createSession();
 
-      when(() =>mockSessionCompletedBloc.state)
+      when(() =>mockSessionCompletedCubit.state)
         .thenReturn(const SessionCompletedState.loading());
 
       await tester.runAsync(() async {
@@ -160,7 +161,7 @@ void main() {
               providers: [
                 Provider<Services>.value(value: mockServices),
                 BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
-                BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
+                BlocProvider<SessionCompletedCubit>.value(value: mockSessionCompletedCubit)
               ],
               child: SignedInCompletedView(
                 profileId: 'profileId',
@@ -178,7 +179,7 @@ void main() {
     testWidgets('can show error when error state', (WidgetTester tester) async {
       final Session session = FakeModelFactory().createSession();
 
-      when(() =>mockSessionCompletedBloc.state)
+      when(() =>mockSessionCompletedCubit.state)
         .thenReturn(const SessionCompletedState.error());
 
       await tester.runAsync(() async {
@@ -188,7 +189,7 @@ void main() {
               providers: [
                 Provider<Services>.value(value: mockServices),
                 BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
-                BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc)
+                BlocProvider<SessionCompletedCubit>.value(value: mockSessionCompletedCubit)
               ],
               child: SignedInCompletedView(
                 profileId: 'profileId',
@@ -211,7 +212,7 @@ void main() {
         session: session,
       );
 
-      when(() => mockSessionCompletedBloc.state)
+      when(() => mockSessionCompletedCubit.state)
         .thenReturn(SessionCompletedState.saving(
           updateResult: updateResult,
         ));
@@ -224,7 +225,7 @@ void main() {
                 Provider<Services>.value(value: mockServices),
                 Provider<Repositories>.value(value: mockRepositories),
                 BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
-                BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc),
+                BlocProvider<SessionCompletedCubit>.value(value: mockSessionCompletedCubit),
               ],
               child: SignedInCompletedView(
                 profileId: 'profileId',
@@ -250,7 +251,7 @@ void main() {
         session: session,
       );
 
-      when(() => mockSessionCompletedBloc.state)
+      when(() => mockSessionCompletedCubit.state)
         .thenReturn(SessionCompletedState.saved(
           updateResult: updateResult,
         ));
@@ -263,7 +264,7 @@ void main() {
                 Provider<Services>.value(value: mockServices),
                 Provider<Repositories>.value(value: mockRepositories),
                 BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
-                BlocProvider<SessionCompletedBloc>.value(value: mockSessionCompletedBloc),
+                BlocProvider<SessionCompletedCubit>.value(value: mockSessionCompletedCubit),
               ],
               child: SignedInCompletedView(
                 profileId: 'profileId',

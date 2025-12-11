@@ -32,10 +32,8 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   @override
   void initState() {
     final profileCubit = BlocProvider.of<ProfileCubit>(context);
-    BlocProvider.of<SessionCompletedBloc>(context).add(
-      SessionCompletedEvent.logSession(
-        profileId: widget.profileId,
-        session: widget.session,
+    BlocProvider.of<SessionCompletedCubit>(context)
+      .logSession(widget.profileId, widget.session,
         onComplete: (UpdateProfileStatsResult updateResult) {
           // refresh the profile
           profileCubit.loadProfile(
@@ -43,14 +41,13 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
             profile: updateResult.updatedProfile
           );
         },
-      )
-    );
+      );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SessionCompletedBloc, SessionCompletedState>(
+    return BlocBuilder<SessionCompletedCubit, SessionCompletedState>(
       builder: (context, state) {
         switch (state) {
           case SessionCompletedInitialState():
