@@ -2,31 +2,29 @@ import 'package:dhyana/init/services.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
+import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 
 class TimerSettingsBlocProvider extends StatelessWidget {
 
   final Widget child;
-  final TimerSettingsEvent? onCreateEvent;
+  final Function(TimerSettingsCubit)? onCreate;
 
   const TimerSettingsBlocProvider({
     required this.child,
-    this.onCreateEvent,
+    this.onCreate,
     super.key
   });
 
   @override
   Widget build(BuildContext context) {
     Services services = context.services;
-    return BlocProvider<TimerSettingsBloc>(
+    return BlocProvider<TimerSettingsCubit>(
       create: (context) {
-        TimerSettingsBloc timerSettingsBloc = TimerSettingsBloc(
+        final timerSettingsBloc = TimerSettingsCubit(
           crashlyticsService: services.crashlyticsService,
           timerSettingsSharedPrefsService: services.timerSettingsSharedPrefsService
         );
-        if (onCreateEvent != null) {
-          timerSettingsBloc.add(onCreateEvent!);
-        }
+        onCreate?.call(timerSettingsBloc);
         return timerSettingsBloc;
       },
       child: child,

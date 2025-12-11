@@ -18,16 +18,16 @@ void main() async {
 
   group('TimerBloc', () {
 
-    late TimerSettingsBloc timerSettingsBloc;
+    late TimerSettingsCubit timerSettingsBloc;
     late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUp(() {
       mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
       mockCrashlyticsService = MockCrashlyticsService();
-      timerSettingsBloc = TimerSettingsBloc(
-          crashlyticsService: mockCrashlyticsService,
-          timerSettingsSharedPrefsService: mockTimerSettingsSharedPrefsService
+      timerSettingsBloc = TimerSettingsCubit(
+        crashlyticsService: mockCrashlyticsService,
+        timerSettingsSharedPrefsService: mockTimerSettingsSharedPrefsService
       );
     });
 
@@ -35,7 +35,7 @@ void main() async {
       expect(timerSettingsBloc.state, isA<TimerSettingsDataLoadingState>());
     });
 
-    blocTest<TimerSettingsBloc, TimerSettingsState>('can load timersettings from shared preferences',
+    blocTest<TimerSettingsCubit, TimerSettingsState>('can load timersettings from shared preferences',
       build: () {
         TimerSettings timerSettings = TimerSettings(
           warmup: const Duration(minutes: 1),
@@ -49,7 +49,7 @@ void main() async {
         return timerSettingsBloc;
       },
       act: (bloc) {
-        bloc.add(const TimerSettingsEvent.load());
+        bloc.loadTimerSettings();
       },
       expect: ()  => [
         TimerSettingsState.loaded(
@@ -67,12 +67,12 @@ void main() async {
       }
     );
 
-    blocTest<TimerSettingsBloc, TimerSettingsState>('can load the timersettings specified in the event',
+    blocTest<TimerSettingsCubit, TimerSettingsState>('can load the timersettings specified in the event',
         build: () {
           return timerSettingsBloc;
         },
         act: (bloc) {
-          bloc.add(TimerSettingsEvent.load(
+          bloc.loadTimerSettings(
             timerSettings: TimerSettings(
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
@@ -80,7 +80,7 @@ void main() async {
               endingSound: Sound.smallBell,
               lastUsed: DateTime(2025, 1, 1),
             )
-          ));
+          );
         },
         expect: ()  => [
           TimerSettingsState.loaded(
@@ -98,7 +98,7 @@ void main() async {
         }
     );
 
-    blocTest<TimerSettingsBloc, TimerSettingsState>('can save timersettings to shared preferences',
+    blocTest<TimerSettingsCubit, TimerSettingsState>('can save timersettings to shared preferences',
         build: () {
           when(() => mockTimerSettingsSharedPrefsService.setTimerSettings(
             TimerSettings(
@@ -112,15 +112,15 @@ void main() async {
           return timerSettingsBloc;
         },
         act: (bloc) {
-          bloc.add(TimerSettingsEvent.changed(
-            timerSettings: TimerSettings(
+          bloc.timerSettingsChanged(
+            TimerSettings(
               warmup: const Duration(minutes: 5),
               duration: const Duration(minutes: 20),
               startingSound: Sound.none,
               endingSound: Sound.smallBell,
               lastUsed: DateTime(2025, 1, 1),
             )
-          ));
+          );
         },
         expect: ()  => [
           TimerSettingsState.loaded(

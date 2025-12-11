@@ -1,35 +1,31 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/all.dart';
-import 'package:dhyana/util/all.dart';
+import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
+import 'package:dhyana/util/logger_factory.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:logger/logger.dart';
 
-part 'timer_settings_event.dart';
 part 'timer_settings_state.dart';
-part 'timer_settings_bloc.freezed.dart';
+part 'timer_settings_cubit.freezed.dart';
 
-class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
+class TimerSettingsCubit extends Cubit<TimerSettingsState> {
 
   final Logger logger = getLogger('TimerSettingsBloc');
 
   TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
   CrashlyticsService crashlyticsService;
 
-  TimerSettingsBloc({
+  TimerSettingsCubit({
     required this.timerSettingsSharedPrefsService,
     required this.crashlyticsService,
-  }) : super(const TimerSettingsState.loading()) {
-    on<LoadTimerSettingsData>(_onLoadTimerSettingsData);
-    on<TimerSettingsChanged>(_onTimerSettingsChanged);
-  }
+  }) : super(const TimerSettingsState.loading());
 
-  void _onLoadTimerSettingsData(LoadTimerSettingsData event, emit) async {
+  Future<void> loadTimerSettings({TimerSettings? timerSettings}) async {
     try {
-      if (event.timerSettings != null) {
+      if (timerSettings != null) {
         emit(TimerSettingsState.loaded(
-          timerSettings: event.timerSettings!,
+          timerSettings: timerSettings,
         ));
         logger.t('Using timer settings from event');
       } else {
@@ -47,17 +43,16 @@ class TimerSettingsBloc extends Bloc<TimerSettingsEvent, TimerSettingsState> {
       );
     }
 
+
   }
 
-  void _onTimerSettingsChanged(TimerSettingsChanged event, emit) async {
+  Future<void> timerSettingsChanged(TimerSettings timerSettings) async {
     try {
       // Emit the new timer settings to the state
-      emit(TimerSettingsState.loaded(timerSettings: event.timerSettings));
+      emit(TimerSettingsState.loaded(timerSettings: timerSettings));
 
       // Lazy save the new timer settings to shared preferences
-      timerSettingsSharedPrefsService.setTimerSettings(
-        event.timerSettings
-      );
+      timerSettingsSharedPrefsService.setTimerSettings(timerSettings);
 
       logger.t('Timer settings changed');
     } catch (e, stack) {

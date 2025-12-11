@@ -21,6 +21,10 @@ class MockProfileCubit
   extends MockCubit<ProfileState>
   implements ProfileCubit {}
 
+class MockTimerSettingsCubit
+  extends MockCubit<TimerSettingsState>
+  implements TimerSettingsCubit {}
+
 class MockTimerSettingsHistoryBloc
   extends MockBloc<TimerSettingsHistoryEvent, TimerSettingsHistoryState>
   implements TimerSettingsHistoryBloc {}

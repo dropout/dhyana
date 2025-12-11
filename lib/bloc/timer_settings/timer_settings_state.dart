@@ -1,4 +1,4 @@
-part of 'timer_settings_bloc.dart';
+part of 'timer_settings_cubit.dart';
 
 @freezed
 sealed class TimerSettingsState with _$TimerSettingsState {

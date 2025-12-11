@@ -1,4 +1,3 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/profile_settings.dart';
@@ -12,19 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
+import '../../mock_definitions.dart';
 import '../../test_context_providers.dart';
-
-class MockTimerSettingsBloc
-  extends MockBloc<TimerSettingsEvent, TimerSettingsState>
-  implements TimerSettingsBloc {}
-
-class MockServices
-  extends Mock
-  implements Services {}
-
-class MockOverlayService
-  extends Mock
-  implements OverlayService {}
 
 void main() {
 
@@ -57,8 +45,8 @@ void main() {
         Provider<Services>(
           create: (context) => mockServices,
           child: withAllContextProviders(
-            BlocProvider<TimerSettingsBloc>(
-              create: (context) => MockTimerSettingsBloc(),
+            BlocProvider<TimerSettingsCubit>(
+              create: (context) => MockTimerSettingsCubit(),
               child: TimerSettingsView(
                 timerSettings: timerSettings,
                 profileSettings: ProfileSettings(id: 'profileSettingsId'),

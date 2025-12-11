@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/timer_settings/timer_settings_bloc.dart';
+import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile_settings.dart';
@@ -32,42 +32,42 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   @override
   void didUpdateWidget(TimerSettingsView oldWidget) {
     if (widget.timerSettings != oldWidget.timerSettings) {
-      BlocProvider.of<TimerSettingsBloc>(context).add(
-        TimerSettingsEvent.load(timerSettings: widget.timerSettings)
+      BlocProvider.of<TimerSettingsCubit>(context).loadTimerSettings(
+        timerSettings: widget.timerSettings
       );
     }
     super.didUpdateWidget(oldWidget);
   }
 
   void _onWarmupChange(BuildContext context, Duration warmupDuration) {
-    BlocProvider.of<TimerSettingsBloc>(context).add(
-      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+      widget.timerSettings.copyWith(
         warmup: warmupDuration,
-      ))
+      )
     );
   }
 
   void _onStartingSoundChange(BuildContext context, Sound startingSound) {
-    BlocProvider.of<TimerSettingsBloc>(context).add(
-      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+      widget.timerSettings.copyWith(
         startingSound: startingSound,
-      ))
+      )
     );
   }
 
   void _onDurationChange(BuildContext context, Duration duration) {
-    BlocProvider.of<TimerSettingsBloc>(context).add(
-      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+      widget.timerSettings.copyWith(
         duration: duration,
-      ))
+      )
     );
   }
 
   void _onEndingSoundChange(BuildContext context, Sound endingSound) {
-    BlocProvider.of<TimerSettingsBloc>(context).add(
-      TimerSettingsChanged(timerSettings: widget.timerSettings.copyWith(
+    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+      widget.timerSettings.copyWith(
         endingSound: endingSound,
-      ))
+      )
     );
   }
 
