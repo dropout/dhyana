@@ -1,18 +1,18 @@
-import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
+import 'package:dhyana/bloc/sessions/sessions_cubit.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SessionsBlocProvider extends StatelessWidget {
+class SessionsCubitProvider extends StatelessWidget {
 
   final Widget child;
-  final SessionsEvent? onCreateEvent;
+  final Function(SessionsCubit)? onCreate;
 
-  const SessionsBlocProvider({
+  const SessionsCubitProvider({
     required this.child,
-    this.onCreateEvent,
+    this.onCreate,
     super.key
   });
 
@@ -20,16 +20,14 @@ class SessionsBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     Services services = context.services;
     Repositories repos = context.repos;
-    return BlocProvider<SessionsBloc>(
+    return BlocProvider<SessionsCubit>(
       create: (BuildContext context) {
-        SessionsBloc sessionsBloc = SessionsBloc(
+        SessionsCubit sessionsBloc = SessionsCubit(
           authRepository: repos.authRepository,
           statisticsRepository: repos.statisticsRepository,
           crashlyticsService: services.crashlyticsService,
         );
-        if (onCreateEvent != null) {
-          sessionsBloc.add(onCreateEvent!);
-        }
+        onCreate?.call(sessionsBloc);
         return sessionsBloc;
       },
       child: child,

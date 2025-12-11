@@ -1,38 +1,34 @@
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/session_query_options.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_factory.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'sessions_event.dart';
 part 'sessions_state.dart';
-part 'sessions_bloc.freezed.dart';
+part 'sessions_cubit.freezed.dart';
 
-class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
+class SessionsCubit extends Cubit<SessionsState> {
 
-  final Logger logger = getLogger('SessionsBloc');
+  final Logger logger = getLogger('SessionsCubit');
 
   final StatisticsRepository statisticsRepository;
   final AuthRepository authRepository;
   final CrashlyticsService crashlyticsService;
 
-  SessionsBloc({
+  SessionsCubit({
     required this.statisticsRepository,
     required this.authRepository,
     required this.crashlyticsService,
-  }) : super(const SessionsState.initial()) {
-    on<LoadSessionsEvent>(_onLoadSessions);
-  }
+  }) : super(const SessionsState.initial());
 
-  void _onLoadSessions(LoadSessionsEvent event, emit) async {
+  Future<void> loadSessions(String profileId) async {
     try {
       emit(const SessionsState.loading());
       List<Session> sessions = await statisticsRepository.querySessions(
-        event.profileId,
+        profileId,
         const SessionQueryOptions()
       );
       emit(SessionsState.loaded(sessions: sessions));
@@ -44,7 +40,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
         stackTrace: stack,
         reason: 'Unable to add session'
       );
-      logger.t('Failed to load sessions for: ${event.profileId}');
+      logger.t('Failed to load sessions for: $profileId');
     }
   }
 

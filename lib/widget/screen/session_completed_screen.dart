@@ -1,12 +1,11 @@
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/session/completed/signed_in_completed_view.dart';
 import 'package:dhyana/widget/session/completed/signed_out_completed_view.dart';
-import 'package:dhyana/widget/util/app_button.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
+import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,6 +43,24 @@ class SessionCompletedScreen extends StatelessWidget {
   }
 
   Widget buildSignedInView(BuildContext context, String profileId) {
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        switch (state) {
+          case ProfileStateInitial():
+            return AppLoadingDisplay();
+          case ProfileLoadingState():
+            return AppLoadingDisplay();
+          case ProfileErrorState():
+            return AppErrorDisplay();
+          case ProfileLoadedState():
+            // return AppLoadingDisplay();
+            return buildLoaded(context, state);
+        }
+      },
+    );
+  }
+
+  Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
     return BlocProvider<SessionCompletedCubit>(
       create: (context) => SessionCompletedCubit(
         profileRepository: context.repos.profileRepository,
@@ -52,8 +69,9 @@ class SessionCompletedScreen extends StatelessWidget {
         crashlyticsService: context.services.crashlyticsService,
       ),
       child: SignedInCompletedView(
-        profileId: profileId,
+        profileId: state.profile.id,
         session: session,
+        profileSettings: state.settings,
       ),
     );
   }

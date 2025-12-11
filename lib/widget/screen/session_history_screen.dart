@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/sessions/sessions_bloc.dart';
+import 'package:dhyana/bloc/sessions/sessions_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/screen/all.dart';
 
@@ -19,17 +19,14 @@ class SessionHistoryScreen extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return SessionsBlocProvider(
-      onCreateEvent: SessionsEvent.loadSessions(
-        profileId: profileId
-      ),
+    return SessionsCubitProvider(
+      onCreate: (sessionsBloc) => sessionsBloc.loadSessions(profileId),
       child: buildSessionsState(context),
     );
-
   }
 
   Widget buildSessionsState(BuildContext context) {
-    return BlocBuilder<SessionsBloc, SessionsState>(
+    return BlocBuilder<SessionsCubit, SessionsState>(
       builder: (context, state) {
         switch (state) {
           case SessionsLoaded():

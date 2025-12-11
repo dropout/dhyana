@@ -20,6 +20,7 @@ class SessionResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ProfileAvatar(
           profile: profile ?? Profile.anonymous(),

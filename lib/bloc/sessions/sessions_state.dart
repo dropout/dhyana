@@ -1,4 +1,4 @@
-part of 'sessions_bloc.dart';
+part of 'sessions_cubit.dart';
 
 @freezed
 class SessionsState with _$SessionsState {

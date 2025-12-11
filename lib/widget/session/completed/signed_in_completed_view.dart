@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/presence/presence_area.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
@@ -16,10 +17,12 @@ class SignedInCompletedView extends StatefulWidget {
 
   final String profileId;
   final Session session;
+  final ProfileSettings profileSettings;
 
   const SignedInCompletedView({
     required this.profileId,
     required this.session,
+    required this.profileSettings,
     super.key,
   });
 
@@ -79,30 +82,43 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
     BuildContext context,
     UpdateProfileStatsResult updateResult,
   ) {
+    if (widget.profileSettings.usePresenceFeature == false &&
+        widget.profileSettings.showStatsOnFinishScreen == false) {
+      return SizedBox.expand(
+        child: Center(
+          child: SessionResult(
+            session: widget.session,
+            profile: updateResult.updatedProfile,
+          ),
+        ),
+      );
+    }
+
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Gap.xl(),
             SessionResult(
               session: widget.session,
               profile: updateResult.updatedProfile,
             ),
-            Gap.large(),
-            MilestoneProgressView(
+            Gap.xl(),
+            if (widget.profileSettings.showStatsOnFinishScreen) MilestoneProgressView(
               profile: updateResult.updatedProfile,
               showAnimation: updateResult.updatedProfile.
                 consecutiveDaysProgressCheck(updateResult.oldProfile),
               textColor: Colors.white,
             ),
-            Gap.large(),
-            ProgressSummary(
+            if (widget.profileSettings.showStatsOnFinishScreen) Gap.large(),
+            if (widget.profileSettings.showStatsOnFinishScreen) ProgressSummary(
               oldProfile: updateResult.oldProfile,
               updatedProfile: updateResult.updatedProfile,
             ),
-            Gap.xxl(),
-            PresenceArea(
+            if (widget.profileSettings.usePresenceFeature) Gap.xxl(),
+            if (widget.profileSettings.usePresenceFeature) PresenceArea(
               profile: updateResult.updatedProfile
             ),
             SizedBox(

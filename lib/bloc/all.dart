@@ -7,7 +7,7 @@ export 'profile/profile_cubit.dart';
 export 'profile_settings/profile_settings_cubit.dart';
 export 'remote_settings/remote_settings_cubit.dart';
 export 'session_completed/session_completed_cubit.dart';
-export 'sessions/sessions_bloc.dart';
+export 'sessions/sessions_cubit.dart';
 export 'timer/timer_bloc.dart';
 export 'timer_settings/timer_settings_bloc.dart';
 export 'timer_settings_history/timer_settings_history_bloc.dart';
