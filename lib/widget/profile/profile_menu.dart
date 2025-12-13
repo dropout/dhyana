@@ -1,5 +1,4 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:dhyana/widget/util/app_card.dart';
@@ -131,12 +130,19 @@ class ProfileMenuTile extends StatelessWidget {
       borderRadius: const BorderRadius.all(
         Radius.circular(AppThemeData.borderRadiusMd),
       ),
-      color: AppColors.backgroundPaperLight,
+      color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        child: ListTile(
+        child: SizedBox(
           key: key,
-          title: title,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppThemeData.paddingXl,
+              vertical: AppThemeData.paddingLg,
+            ),
+            child: title,
+          ),
         ),
       ),
     );
