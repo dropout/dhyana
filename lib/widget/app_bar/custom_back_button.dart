@@ -1,4 +1,3 @@
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
 import 'package:flutter/material.dart';

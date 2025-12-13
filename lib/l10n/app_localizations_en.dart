@@ -222,11 +222,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get showTimeOnTimerSettingsScreenTitle =>
-      'Show current time on Timer Settings Screen';
+      'Show timeframe on Timer Settings Screen';
 
   @override
   String get showTimeOnTimerSettingsScreenDescription =>
-      'When enabled, the session starting and finishing times will be displayed on the Timer Settings screen.';
+      'Enable this option to show session start and end times on the Timer Settings screen.';
 
   @override
   String get showStatsOnFinishScreenTitle =>
@@ -234,7 +234,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get showStatsOnFinishScreenDescription =>
-      'When enabled, session result statistics will be displayed on the Session Finish screen.';
+      'When enabled, your statistics updated with the finished session will be displayed on the Session Finish screen.';
 
   @override
   String get usePresenceFeatureTitle => 'Enable Presence feature';

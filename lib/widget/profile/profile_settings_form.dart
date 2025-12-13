@@ -125,7 +125,7 @@ class ProfileSettingsSwitch extends StatelessWidget {
               children: [
                 FormBuilderSwitch(
                   name: name,
-                  title: Text(title),
+                  title: Text(title, style: Theme.of(context).textTheme.labelLarge),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     helperStyle: Theme.of(context).textTheme.bodyLarge,

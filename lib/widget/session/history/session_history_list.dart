@@ -1,7 +1,8 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,32 +18,39 @@ class SessionHistoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
-          sessions.map((s) => Card(
-            color: AppColors.backgroundPaperLight,
-            child: ListTile(
-              title: buildSessionTitle(context, s),
-              subtitle: buildSessionSubTitle(context, s),
-            ),
-          )).toList().intersperse(const Divider(height: 0))
+          sessions.map((s) {
+            final startTime = DateFormat.Hm(locale.toString()).format(s.startTime);
+            final endTime = DateFormat.Hm(locale.toString()).format(s.endTime);
+            return AppCard(
+              padding: const EdgeInsets.all(AppThemeData.paddingMd),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    DateFormat.yMMMMd(locale.toString()).format(s.startTime),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Text(
+                    '$startTime - $endTime',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Text(
+                    context.localizations.minutesPluralWithNumber(s.duration.inMinutes),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            );
+          }).toList().intersperse(Gap.small())
         )
       ),
-    );
-  }
-
-  Widget buildSessionTitle(BuildContext context, Session session) {
-    Locale locale = Localizations.localeOf(context);
-    final String when = '${DateFormat.yMMMMd(locale.toString()).format(session.startTime)} ${DateFormat.Hm(locale.toString()).format(session.startTime)}';
-    return Text(when);
-  }
-
-  Widget buildSessionSubTitle(BuildContext context, Session session) {
-    return Text(
-      AppLocalizations.of(context)
-        .minutesPluralWithNumber(session.duration.inMinutes)
     );
   }
 
