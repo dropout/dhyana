@@ -36,6 +36,10 @@ class AppCard extends StatelessWidget {
         color: AppColors.backgroundPaperLight,
         borderRadius: BorderRadius.circular(AppThemeData.borderRadiusMd),
         boxShadow: AppThemeData.defaultBoxShadow,
+        border: Border.all(
+          color: Color.lerp(AppColors.backgroundPaperLight, Colors.white, 0.33)!,
+          width: 1.0,
+        ),
       ),
       child: SizedBox(
         width: double.infinity,

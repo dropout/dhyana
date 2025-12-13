@@ -183,6 +183,10 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
       decoration: BoxDecoration(
         color: widget.incompleteColor,
         shape: BoxShape.circle,
+        border: Border.all(
+          color: Color.lerp(widget.incompleteColor, Colors.white, 0.2)!,
+          width: 2.0,
+        ),
       )
     );
   }
@@ -191,8 +195,18 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
     return DecoratedBox(
       key: const Key('milestone_progress_view_item_completed'),
       decoration: BoxDecoration(
-        color: widget.completedColor,
         shape: BoxShape.circle,
+        border: Border.all(
+          color: Color.lerp(widget.completedColor, Colors.white, 0.2)!,
+          width: 2.0,
+        ),
+        gradient: RadialGradient(
+          colors: [
+            Color.lerp(widget.completedColor, Colors.black, 0.15)!,
+            widget.completedColor,
+          ],
+          stops: const [0.33, 1.0],
+        ),
       ),
       child: CustomPaint(
         painter: CheckShapePainter(),
@@ -253,10 +267,26 @@ class CirclePainter extends CustomPainter {
       ..color = color
       ..style = PaintingStyle.fill;
 
+      final gradient = RadialGradient(
+          colors: [
+            Color.lerp(color, Colors.black, 0.15)!,
+            color,
+          ],
+          stops: const [0.33, 1.0],
+        );
+
+      gradient.createShader(
+        Rect.fromCircle(
+          center: Offset(size.width/2, size.height/2),
+          radius: size.width/2,
+        )
+      );
+
+
     canvas.drawCircle(
-        Offset(size.width/2, size.height/2),
-        size.width/2 * animation,
-        paint
+      Offset(size.width/2, size.height/2),
+      size.width/2 * animation,
+      paint
     );
   }
 

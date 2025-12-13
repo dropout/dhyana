@@ -39,7 +39,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
           spacing: AppThemeData.spacingXs,
           children: buildMilestoneItems(context),
         ),
-        Gap.small(),
+        Gap.medium(),
         if (widget.showText) buildMilestoneText(context),
       ],
     );
@@ -104,7 +104,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
       context.localizations.statsNextMilestoneIn(
         widget.profile.statsReport.milestoneProgress.remainingDaysCount
       ),
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+      style: Theme.of(context).textTheme.titleSmall!.copyWith(
         color: widget.textColor,
       )
     );

@@ -87,6 +87,9 @@ class _CustomBackButtonState extends State<CustomBackButton>
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = widget.backgroundColor ?? Colors.black;
+    final foregroundColor = widget.foregroundColor ?? Colors.white;
+
     return RepaintBoundary(
       child: GestureDetector(
         onTap: () => _onTap(context),
@@ -95,8 +98,12 @@ class _CustomBackButtonState extends State<CustomBackButton>
           dimension: 48,
           child: DecoratedBox(
             decoration: BoxDecoration(
+              color: backgroundColor,
               shape: BoxShape.circle,
-              color: widget.backgroundColor ?? Colors.black,
+              border: Border.all(
+                color: Color.lerp(backgroundColor, Colors.white, 0.33)!,
+                width: 2.0,
+              ),
             ),
             child: ClipOval(
               child: AnimatedBuilder(
@@ -108,7 +115,7 @@ class _CustomBackButtonState extends State<CustomBackButton>
                         alignment: Alignment(alignmentAnimation.value, 0.0),
                         child: Icon(
                           Icons.arrow_back,
-                          color: widget.foregroundColor ?? AppColors.backgroundPaperLight,
+                          color: foregroundColor,
                           size: AppThemeData.spacingLg,
                         )
                       ),
@@ -130,3 +137,4 @@ class _CustomBackButtonState extends State<CustomBackButton>
   }
 
 }
+

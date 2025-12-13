@@ -15,6 +15,4 @@ sealed class PresenceState with _$PresenceState {
   }) = PresenceLoadedState;
   const factory PresenceState.error() = PresenceErrorState;
 
-
-
 }
