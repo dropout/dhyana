@@ -1,8 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/util/localization.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
@@ -22,8 +21,8 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: AppColors.backgroundPaperLight,
-        borderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
-        boxShadow: AppThemeData.defaultBoxShadow,
+        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+        boxShadow: DesignSpec.defaultBoxShadow,
       ),
       child: Stack(
         children: [
@@ -47,7 +46,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                borderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+                borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
                 highlightColor: Colors.white.withValues(alpha: 0.25),
                 splashColor: Colors.white.withValues(alpha: 0.25),
                 onTap: onTap,
@@ -62,7 +61,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
   Widget buildDurationColumn(BuildContext context, Duration duration) {
     return Padding(
       padding: const EdgeInsets.all(
-        AppThemeData.paddingXl
+        DesignSpec.paddingXl
       ),
       child: Column(
         children: [
@@ -97,7 +96,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
     final timerSettings = timerSettingsHistoryRecord.timerSettings;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: AppThemeData.paddingMd
+        vertical: DesignSpec.paddingMd
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +108,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
               timerSettings.warmup.inMinutes
             )
           ),
-          const SizedBox(height: AppThemeData.spacingSm),
+          const SizedBox(height: DesignSpec.spacingSm),
           buildDetail(
             context,
             AppLocalizations.of(context).inputStartingSoundLabel.toUpperCase(),
@@ -118,7 +117,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
               AppLocalizations.of(context)
             ),
           ),
-          const SizedBox(height: AppThemeData.spacingSm),
+          const SizedBox(height: DesignSpec.spacingSm),
           buildDetail(
             context,
             AppLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),

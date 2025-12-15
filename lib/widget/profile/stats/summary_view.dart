@@ -1,5 +1,5 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -31,14 +31,14 @@ class SummaryView extends StatelessWidget {
               context.localizations.sessionsPlural(sessionCount)
             )
           ),
-          const SizedBox(width: AppThemeData.spacingMd),
+          const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: SummaryItem(
               minutesCount,
               context.localizations.minutesPlural(minutesCount),
             )
           ),
-          const SizedBox(width: AppThemeData.spacingMd),
+          const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: SummaryItem(
               daysCount,
@@ -66,7 +66,7 @@ class SummaryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppThemeData.paddingMd),
+      padding: EdgeInsets.all(DesignSpec.paddingMd),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

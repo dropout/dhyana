@@ -6,9 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 
-import 'app_colors.dart';
 import 'app_providers.dart';
 import 'app_routes.dart';
 
@@ -73,7 +72,7 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        theme: AppThemeData(isDark: false).themeData,
+        theme: DesignSpec().themeData,
       )
     );
   }
@@ -88,7 +87,7 @@ class App extends StatelessWidget {
       home: Scaffold(
         backgroundColor: AppColors.backgroundPaper,
         body: Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingLg),
+          padding: EdgeInsets.all(DesignSpec.paddingLg),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

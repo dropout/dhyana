@@ -1,7 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/milestone_progress.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
 
@@ -42,8 +42,8 @@ class _MilestonesViewState extends State<MilestonesView> {
             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.only(
-                bottom: AppThemeData.paddingLg,
-                right: AppThemeData.paddingLg,
+                bottom: DesignSpec.paddingLg,
+                right: DesignSpec.paddingLg,
               ),
               child: buildMilestoneBars(
                 context,

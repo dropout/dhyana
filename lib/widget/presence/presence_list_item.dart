@@ -1,5 +1,5 @@
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class PresenceListItem extends StatelessWidget {
         ),
         Gap.small(),
         SizedBox(
-          width: 56 + AppThemeData.spacingLg,
+          width: 56 + DesignSpec.spacingLg,
           child: Center(
             child: Text(
               presence.profile.firstName,

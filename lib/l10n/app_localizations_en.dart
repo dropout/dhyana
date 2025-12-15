@@ -48,6 +48,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get okay => 'Okay';
 
   @override
+  String get close => 'Close';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
   String get warmup => 'Warmup';
 
   @override

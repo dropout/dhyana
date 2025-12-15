@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/input/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +69,7 @@ class AppTextInput extends StatelessWidget {
             return const SizedBox.shrink();
           }
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppThemeData.paddingMd),
+            padding: EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
             child: Text(
               errorText,
               style: Theme.of(context)

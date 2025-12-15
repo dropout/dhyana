@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 import 'gap.dart';
@@ -94,8 +94,8 @@ class _ToastState extends State<Toast>
         shape: StadiumBorder(),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppThemeData.paddingLg,
-            vertical: AppThemeData.paddingMd,
+            horizontal: DesignSpec.paddingLg,
+            vertical: DesignSpec.paddingMd,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -125,8 +125,8 @@ class ToastLayoutDelegate extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     return BoxConstraints(
-      maxWidth: constraints.maxWidth - AppThemeData.paddingLg * 2,
-      maxHeight: constraints.maxHeight - AppThemeData.paddingLg * 2,
+      maxWidth: constraints.maxWidth - DesignSpec.paddingLg * 2,
+      maxHeight: constraints.maxHeight - DesignSpec.paddingLg * 2,
     );
   }
 
@@ -134,7 +134,7 @@ class ToastLayoutDelegate extends SingleChildLayoutDelegate {
   Offset getPositionForChild(Size size, Size childSize) {
     return Offset(
       size.width / 2 - childSize.width / 2,
-      kToolbarHeight + AppThemeData.spacingSm,
+      kToolbarHeight + DesignSpec.spacingSm,
     );
   }
 

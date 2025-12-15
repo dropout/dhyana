@@ -1,7 +1,6 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -119,7 +118,7 @@ class ProfileSettingsSwitch extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppThemeData.paddingXl,
+              horizontal: DesignSpec.paddingXl,
             ),
             child: Wrap(
               children: [
@@ -140,7 +139,7 @@ class ProfileSettingsSwitch extends StatelessWidget {
         Gap.small(),
         if (helperText != null) Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppThemeData.paddingXl,
+            horizontal: DesignSpec.paddingXl,
           ),
           child: Text(
             helperText!,

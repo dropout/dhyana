@@ -5,7 +5,7 @@ import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,7 +95,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   Widget buildInputs(BuildContext context) {
     final profileSettings = widget.profileSettings;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppThemeData.padding2Xl),
+      padding: const EdgeInsets.symmetric(vertical: DesignSpec.padding2Xl),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -146,7 +146,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: AppThemeData.paddingLg),
+        padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
         child: TimerStartButton(
           onTap: () => _onStartButtonTap(context),
           fragmentShader: context.services.shaderService.get(

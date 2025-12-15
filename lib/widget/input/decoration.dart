@@ -1,5 +1,4 @@
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 InputDecoration getTextInputDecoration(BuildContext context) {
@@ -13,7 +12,7 @@ InputDecoration getTextInputDecoration(BuildContext context) {
 
   return InputDecoration(
     constraints: BoxConstraints
-      .tightFor(height: AppThemeData.inputHeight),
+      .tightFor(height: DesignSpec.inputHeight),
     floatingLabelBehavior: FloatingLabelBehavior.never,
     alignLabelWithHint: true,
     border: border,
@@ -27,9 +26,9 @@ InputDecoration getTextInputDecoration(BuildContext context) {
     ),
     fillColor: AppColors.backgroundPaperLight,
     filled: true,
-    contentPadding: EdgeInsets.symmetric(
-      horizontal: AppThemeData.paddingSm,
-      vertical: AppThemeData.paddingSm,
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: DesignSpec.paddingSm,
+      vertical: DesignSpec.paddingSm,
     ),
   );
 }

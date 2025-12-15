@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 
 
 /// Controls displayed when the timer is running or paused
@@ -113,7 +113,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildPauseMenu(context, widget.timerState),
-          const SizedBox(height: AppThemeData.spacingXl),
+          const SizedBox(height: DesignSpec.spacingXl),
           _buildMainButton(context, widget.timerState),
         ],
       ),
@@ -137,8 +137,8 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
         backgroundColor: bgColor,
         foregroundColor: textColor,
         padding: const EdgeInsets.symmetric(
-          horizontal: AppThemeData.spacingLg,
-          vertical: AppThemeData.spacingMd,
+          horizontal: DesignSpec.spacingLg,
+          vertical: DesignSpec.spacingMd,
         )
       ),
       child: Text(
@@ -197,7 +197,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     }
 
     return listItems.intersperse(
-      const SizedBox(height: AppThemeData.spacingMd)
+      const SizedBox(height: DesignSpec.spacingMd)
     );
   }
 
@@ -212,7 +212,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
 
   Widget _buildMainButton(BuildContext context, TimerState timerState) {
     final EdgeInsets padding = const EdgeInsets.all(
-      AppThemeData.paddingLg,
+      DesignSpec.paddingLg,
     );
     final Key key = const Key('timer_running_controls_main_button');
     switch (timerState.timerStatus) {

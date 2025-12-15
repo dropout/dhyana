@@ -1,5 +1,5 @@
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 

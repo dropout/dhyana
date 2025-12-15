@@ -1,5 +1,5 @@
 import 'package:dhyana/util/remap_range.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class AppLoadingIndicator extends StatefulWidget {
@@ -9,7 +9,7 @@ class AppLoadingIndicator extends StatefulWidget {
   final Curve curve;
 
   const AppLoadingIndicator({
-    this.size = AppThemeData.spacingMd,
+    this.size = DesignSpec.spacingMd,
     this.duration = const Duration(milliseconds: 512),
     this.curve = Curves.easeInOutSine,
     super.key

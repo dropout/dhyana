@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/bloc_provider/all.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:dhyana/widget/timer/settings_history/all.dart';
@@ -69,8 +69,8 @@ class TimerSettingsHistoryScreen extends StatelessWidget
         slivers: [
           SliverPadding(
             padding: const EdgeInsets.only(
-              left: AppThemeData.paddingLg,
-              right: AppThemeData.paddingLg,
+              left: DesignSpec.paddingLg,
+              right: DesignSpec.paddingLg,
             ),
             sliver: SliverFillRemaining(
               hasScrollBody: false,
@@ -84,7 +84,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
                     color: Colors.black,
                     size: 96,
                   ),
-                  const SizedBox(height: AppThemeData.spacingMd),
+                  const SizedBox(height: DesignSpec.spacingMd),
                   Text(AppLocalizations.of(context).timerSettingsHistoryEmpty,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
@@ -101,13 +101,13 @@ class TimerSettingsHistoryScreen extends StatelessWidget
         slivers: [
           SliverSafeArea(
             top: false,
-            minimum: EdgeInsets.only(
-              bottom: AppThemeData.padding4Xl,
+            minimum: const EdgeInsets.only(
+              bottom: DesignSpec.padding4Xl,
             ),
             sliver: SliverPadding(
               padding: const EdgeInsets.only(
-                left: AppThemeData.paddingLg,
-                right: AppThemeData.paddingLg,
+                left: DesignSpec.paddingLg,
+                right: DesignSpec.paddingLg,
               ),
               sliver: TimerSettingsHistoryList(
                 profileId: profileId,

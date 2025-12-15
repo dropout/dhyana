@@ -1,6 +1,6 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_avatar.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +24,13 @@ class SessionResult extends StatelessWidget {
       children: [
         ProfileAvatar(
           profile: profile ?? Profile.anonymous(),
-          imageSize: AppThemeData.circleLg,
+          imageSize: DesignSpec.circleLg,
           textStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: AppThemeData.spacingMd),
+        const SizedBox(height: DesignSpec.spacingMd),
         buildCompletedText(context, session.duration),
       ],
     );

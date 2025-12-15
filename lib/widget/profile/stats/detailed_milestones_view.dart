@@ -1,6 +1,6 @@
 import 'package:dhyana/model/milestone_progress.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -21,10 +21,10 @@ class DetailedMilestonesView extends StatelessWidget {
 
     return AppCard(
         title: context.localizations.milestones,
-        padding: EdgeInsets.only(
-          bottom: AppThemeData.paddingLg,
-          left: AppThemeData.paddingLg,
-          right: AppThemeData.paddingLg,
+        padding: const EdgeInsets.only(
+          bottom: DesignSpec.paddingLg,
+          left: DesignSpec.paddingLg,
+          right: DesignSpec.paddingLg,
         ),
         child: Column(
           children: [

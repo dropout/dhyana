@@ -1,5 +1,4 @@
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class BarChartInfoTriggerBox extends StatelessWidget {
@@ -45,7 +44,7 @@ class BarChartInfoTriggerBox extends StatelessWidget {
             color: Colors.grey.shade500,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(AppThemeData.borderRadiusSm),
+          borderRadius: BorderRadius.circular(DesignSpec.borderRadiusSm),
           color: Colors.grey.shade900,
         ),
         child: Padding(

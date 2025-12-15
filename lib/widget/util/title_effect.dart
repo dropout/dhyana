@@ -3,8 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 
 mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {
 
@@ -21,7 +20,7 @@ mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {
 
   void Function() createListener(ScrollController scrollController, void Function(VoidCallback) setState) {
     return () {
-      double min = CustomAppBar.widgetHeight - AppThemeData.spacingMd;
+      double min = CustomAppBar.widgetHeight - DesignSpec.spacingMd;
       double max = min * 2;
       double delta = max - min;
       double offset = scrollController.offset;
@@ -58,7 +57,7 @@ mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {
 
   Widget? buildTitleEffectAppBarTitle(BuildContext context, String titleText) {
     return Transform.translate(
-      offset: Offset(0, AppThemeData.spacingSm * (1.0 - titleEffectRatio)),
+      offset: Offset(0, DesignSpec.spacingSm * (1.0 - titleEffectRatio)),
       child: Opacity(
         opacity: titleEffectRatio,
         child: Text(
@@ -83,7 +82,7 @@ mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {
   Widget buildTitleEffectSliverTitle(BuildContext context, String title) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(AppThemeData.spacingMd),
+        padding: const EdgeInsets.all(DesignSpec.spacingMd),
         child: buildTitleEffectTitle(context, title),
       )
     );

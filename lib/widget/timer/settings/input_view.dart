@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 
 class InputView extends StatelessWidget {
@@ -26,12 +25,12 @@ class InputView extends StatelessWidget {
       children: [
         buildAppBar(context),
         DecoratedBox(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.backgroundPaper,
           ),
           child: SafeArea(
             minimum: const EdgeInsets.only(
-              bottom: AppThemeData.paddingXl,
+              bottom: DesignSpec.paddingXl,
             ),
             child: Column(
               // button width match its parent width
@@ -50,8 +49,8 @@ class InputView extends StatelessWidget {
   Widget buildAppBar(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(AppThemeData.borderRadiusLg),
-        topRight: Radius.circular(AppThemeData.borderRadiusLg),
+        topLeft: Radius.circular(DesignSpec.borderRadiusLg),
+        topRight: Radius.circular(DesignSpec.borderRadiusLg),
       ),
       child: AppBar(
         title: Text(

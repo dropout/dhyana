@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 
 enum AppButtonSize {
   small,
@@ -10,8 +10,8 @@ enum AppButtonSize {
 class AppButton extends StatelessWidget {
 
   final String text;
-  final Color? fColor;
-  final Color? bColor;
+  final Color fColor;
+  final Color bColor;
   final void Function()? onTap;
   final AppButtonSize buttonSize;
   
@@ -26,8 +26,8 @@ class AppButton extends StatelessWidget {
 
   factory AppButton.small({
     required String text,
-    Color? fColor,
-    Color? bColor,
+    Color fColor = Colors.white,
+    Color bColor = Colors.black,
     void Function()? onTap,
   }) {
     return AppButton(
@@ -44,17 +44,22 @@ class AppButton extends StatelessWidget {
     final (textStyle, padding) = _getButtonParams(context, buttonSize);
     return RawMaterialButton(
       padding: padding,
-      onPressed: () => onTap?.call(),
+      onPressed: onTap,
       elevation: 0,
       hoverElevation: 0,
       focusElevation: 0,
       highlightElevation: 0,
+      disabledElevation: 0,
       shape: const StadiumBorder(),
+      // fillColor: (onTap == null) ? Color.lerp(bColor, Colors.black, 0.2) : bColor,
       fillColor: bColor,
-      // splashColor: Colors.red,
       clipBehavior: Clip.none,
       child: Text(text,
-        style: textStyle,
+        style: textStyle.copyWith(
+          color: (onTap == null)
+            ? Color.lerp(textStyle.color, Colors.black, 0.2)
+            : textStyle.color,
+        ),
       ),
     );
   }
@@ -69,8 +74,8 @@ class AppButton extends StatelessWidget {
             fontWeight: FontWeight.w900,
           ),
           const EdgeInsets.symmetric(
-            vertical: AppThemeData.paddingSm,
-            horizontal: AppThemeData.paddingMd,
+            vertical: DesignSpec.paddingSm,
+            horizontal: DesignSpec.paddingLg,
           ),
         );
       case AppButtonSize.medium:
@@ -80,8 +85,8 @@ class AppButton extends StatelessWidget {
             fontWeight: FontWeight.w900,
           ),
           const EdgeInsets.symmetric(
-            vertical: AppThemeData.paddingMd,
-            horizontal: AppThemeData.paddingLg,
+            vertical: DesignSpec.paddingMd,
+            horizontal: DesignSpec.paddingXl,
           ),
         );
       case AppButtonSize.large:
@@ -91,8 +96,8 @@ class AppButton extends StatelessWidget {
             fontWeight: FontWeight.w900,
           ),
           const EdgeInsets.symmetric(
-            vertical: AppThemeData.paddingLg,
-            horizontal: AppThemeData.paddingXl,
+            vertical: DesignSpec.paddingLg,
+            horizontal: DesignSpec.padding2Xl,
           ),
         );
     }

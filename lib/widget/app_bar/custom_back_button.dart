@@ -1,5 +1,5 @@
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -115,7 +115,7 @@ class _CustomBackButtonState extends State<CustomBackButton>
                         child: Icon(
                           Icons.arrow_back,
                           color: foregroundColor,
-                          size: AppThemeData.spacingLg,
+                          size: DesignSpec.spacingLg,
                         )
                       ),
                     ]

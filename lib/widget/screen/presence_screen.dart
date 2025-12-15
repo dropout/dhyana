@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/bloc_provider/presence_cubit_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
@@ -86,7 +86,7 @@ class _PresenceScreenState extends State<PresenceScreen>
                   sliver: SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppThemeData.spacingMd
+                        horizontal: DesignSpec.spacingMd
                       ),
                       child: PresenceView(
                         batchSize: widget.batchSize,
@@ -105,8 +105,8 @@ class _PresenceScreenState extends State<PresenceScreen>
                   top: false,
                   sliver: SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppThemeData.spacingMd
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: DesignSpec.spacingMd
                       ),
                       child: PresenceView(
                         batchSize: widget.batchSize,
@@ -143,15 +143,15 @@ class _PresenceScreenState extends State<PresenceScreen>
   }) {
     return SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppThemeData.paddingLg
+          padding: EdgeInsets.symmetric(
+            horizontal: DesignSpec.paddingLg
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(AppLocalizations.of(context).presenceScreenSubTitle),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppThemeData.paddingLg),
+                padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
                 child: Slider(
                   divisions: 17,
                   min: 10,

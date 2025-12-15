@@ -1,5 +1,4 @@
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 import 'gap.dart';
@@ -17,14 +16,14 @@ class AppCard extends StatelessWidget {
     this.child,
     this.titleGap = true,
     this.titlePadding = const EdgeInsets.only(
-      top: AppThemeData.paddingLg,
-      left: AppThemeData.paddingLg,
-      right: AppThemeData.paddingLg,
+      top: DesignSpec.paddingLg,
+      left: DesignSpec.paddingLg,
+      right: DesignSpec.paddingLg,
     ),
     this.padding = const EdgeInsets.only(
-      left: AppThemeData.paddingLg,
-      right: AppThemeData.paddingLg,
-      bottom: AppThemeData.paddingLg,
+      left: DesignSpec.paddingLg,
+      right: DesignSpec.paddingLg,
+      bottom: DesignSpec.paddingLg,
     ),
     super.key,
   });
@@ -34,8 +33,8 @@ class AppCard extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: AppColors.backgroundPaperLight,
-        borderRadius: BorderRadius.circular(AppThemeData.borderRadiusMd),
-        boxShadow: AppThemeData.defaultBoxShadow,
+        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+        boxShadow: DesignSpec.defaultBoxShadow,
         border: Border.all(
           color: Color.lerp(AppColors.backgroundPaperLight, Colors.white, 0.33)!,
           width: 1.0,

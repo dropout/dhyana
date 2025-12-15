@@ -3,8 +3,7 @@ import 'dart:ui';
 
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shaders/flutter_shaders.dart';
 import 'package:intl/intl.dart' as intl;
@@ -102,8 +101,8 @@ class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerPr
           // Text
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppThemeData.spacingXl,
-              vertical: AppThemeData.spacingMd
+              horizontal: DesignSpec.spacingXl,
+              vertical: DesignSpec.spacingMd
             ),
             child: StartButtonText(
               buttonText: TextSpan(

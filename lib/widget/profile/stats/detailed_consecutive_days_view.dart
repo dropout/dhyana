@@ -2,7 +2,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/consecutive_days.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
@@ -25,10 +25,10 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
 
     return AppCard(
         title: AppLocalizations.of(context).consecutiveDays,
-        padding: EdgeInsets.only(
-          bottom: AppThemeData.paddingLg,
-          left: AppThemeData.paddingLg,
-          right: AppThemeData.paddingLg,
+        padding: const EdgeInsets.only(
+          bottom: DesignSpec.paddingLg,
+          left: DesignSpec.paddingLg,
+          right: DesignSpec.paddingLg,
         ),
         child: Column(
           children: [

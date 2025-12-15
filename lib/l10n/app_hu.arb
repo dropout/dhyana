@@ -13,6 +13,8 @@
   "milestones": "Mérföldkövek",
 
   "okay": "Rendben",
+  "close": "Bezárás",
+  "cancel": "Mégsem",
   "warmup": "Felkészülés",
   "underMaintenanceTitle": "Az alkalmazás karbantartás miatt nem elérhető",
   "underMaintenanceBody": "Kérlek nézz vissza később.",

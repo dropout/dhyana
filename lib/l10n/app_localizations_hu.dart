@@ -48,6 +48,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get okay => 'Rendben';
 
   @override
+  String get close => 'Bezárás';
+
+  @override
+  String get cancel => 'Mégsem';
+
+  @override
   String get warmup => 'Felkészülés';
 
   @override

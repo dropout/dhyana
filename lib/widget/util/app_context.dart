@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 
 extension AppContext on BuildContext {
 
-  void hapticsTap() => services.hapticsService.tap();
+  void hapticsTap() =>
+    services.hapticsService.tap();
 
   void logEvent({
     required String name,
@@ -24,16 +25,16 @@ extension AppContext on BuildContext {
     );
 
   Services get services =>
-    Provider.of<Services>(this, listen: false);
+    read<Services>();
 
   Repositories get repos =>
-    Provider.of<Repositories>(this, listen: false);
+    read<Repositories>();
 
   InitResult get initResult =>
-    Provider.of<InitResult>(this, listen: false);
+    read<InitResult>();
 
   bool get isSignedIn {
-    AuthBloc authBloc = Provider.of<AuthBloc>(this, listen: false);
+    AuthBloc authBloc = read<AuthBloc>();
     return (authBloc.state is AuthStateSignedIn);
   }
 

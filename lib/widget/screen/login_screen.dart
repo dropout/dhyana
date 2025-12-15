@@ -11,7 +11,7 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 
 
@@ -199,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget buildActions(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppThemeData.spacingMd),
+      padding: const EdgeInsets.all(DesignSpec.spacingMd),
       child: Column(
         children: [
           AppButton(
@@ -208,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
             fColor: Colors.white,
             onTap: () => _onLoginWithGoogleTap(context),
           ),
-          const SizedBox(height: AppThemeData.spacingMd),
+          const SizedBox(height: DesignSpec.spacingMd),
           AppButton(
             text: AppLocalizations.of(context).loginSigninApple,
             bColor: Colors.black,
@@ -222,10 +222,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget buildLegalText(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: AppThemeData.spacingMd,
-        right: AppThemeData.spacingMd,
-        bottom: AppThemeData.spacingMd,
+      padding: EdgeInsets.only(
+        left: DesignSpec.spacingMd,
+        right: DesignSpec.spacingMd,
+        bottom: DesignSpec.spacingMd,
       ),
       child: RichText(
         textAlign: TextAlign.center,

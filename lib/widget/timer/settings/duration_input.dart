@@ -1,8 +1,7 @@
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:go_router/go_router.dart';
 
 import 'duration_input_view.dart';
@@ -76,7 +75,7 @@ class DurationInput extends StatelessWidget {
     return DurationInputButton(
       key: Key('timer_duration_input_button'),
       onTap: () => _onInputTap(context),
-      padding: const EdgeInsets.all(AppThemeData.paddingXl),
+      padding: const EdgeInsets.all(DesignSpec.paddingXl),
       child: Text(value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayLarge!.copyWith(

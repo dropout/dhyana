@@ -1,5 +1,5 @@
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/widget/app_colors.dart';
 
 class DurationInputButton extends StatelessWidget {
 

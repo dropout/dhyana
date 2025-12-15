@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class Gap extends StatelessWidget {
@@ -11,25 +11,25 @@ class Gap extends StatelessWidget {
   });
 
   factory Gap.xxs() =>
-      const Gap(size: AppThemeData.spacingXxs);
+      const Gap(size: DesignSpec.spacingXxs);
 
   factory Gap.xs() =>
-      const Gap(size: AppThemeData.spacingXs);
+      const Gap(size: DesignSpec.spacingXs);
 
   factory Gap.small() =>
-      const Gap(size: AppThemeData.spacingSm);
+      const Gap(size: DesignSpec.spacingSm);
 
   factory Gap.medium() =>
-      const Gap(size: AppThemeData.spacingMd);
+      const Gap(size: DesignSpec.spacingMd);
 
   factory Gap.large() =>
-      const Gap(size: AppThemeData.spacingLg);
+      const Gap(size: DesignSpec.spacingLg);
 
   factory Gap.xl() =>
-      const Gap(size: AppThemeData.spacingXl);
+      const Gap(size: DesignSpec.spacingXl);
 
   factory Gap.xxl() =>
-      const Gap(size: AppThemeData.spacing2xl);
+      const Gap(size: DesignSpec.spacing2xl);
 
   @override
   Widget build(BuildContext context) {

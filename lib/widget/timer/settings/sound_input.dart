@@ -1,6 +1,5 @@
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -57,8 +56,8 @@ class SoundInput extends StatelessWidget {
     return SoundInputButton(
       key: Key('sound_input_button'),
       padding: const EdgeInsets.symmetric(
-        horizontal: AppThemeData.spacingMd,
-        vertical: AppThemeData.spacingSm,
+        horizontal: DesignSpec.spacingMd,
+        vertical: DesignSpec.spacingSm,
       ),
       onTap: () => _onInputTap(context),
       child: Text(

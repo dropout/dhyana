@@ -6,8 +6,7 @@ import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/duration.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
@@ -104,9 +103,9 @@ class DaysBarChartPage extends StatelessWidget {
        ),
        Expanded(
          child: Padding(
-           padding: const EdgeInsets.only(
-             left: AppThemeData.paddingLg,
-             right: AppThemeData.paddingXl + 32,
+           padding: EdgeInsets.only(
+             left: DesignSpec.paddingLg,
+             right: DesignSpec.paddingXl + 32,
            ),
            child: calculatedStats,
          )
@@ -186,7 +185,7 @@ class DaysBarChartPage extends StatelessWidget {
             Duration(minutes: day.minutesCount).toFormattedLocalizedString(context)
           ),
           postfix: Padding(
-            padding: const EdgeInsets.only(top: AppThemeData.paddingXs),
+            padding: EdgeInsets.only(top: DesignSpec.paddingXs),
             child: Row(
               children: [
                 Row(

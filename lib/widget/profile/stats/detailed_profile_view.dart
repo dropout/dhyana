@@ -1,6 +1,6 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
@@ -22,10 +22,10 @@ class DetailedProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppCard(
         title: context.localizations.profile,
-        padding: EdgeInsets.only(
-          bottom: AppThemeData.paddingLg,
-          left: AppThemeData.paddingLg,
-          right: AppThemeData.paddingLg,
+        padding: const EdgeInsets.only(
+          bottom: DesignSpec.paddingLg,
+          left: DesignSpec.paddingLg,
+          right: DesignSpec.paddingLg,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,7 +38,7 @@ class DetailedProfileView extends StatelessWidget {
                     color: Colors.black,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(AppThemeData.paddingXs),
+                    padding: const EdgeInsets.all(DesignSpec.paddingXs),
                     child: ProfileImage.fromProfile(profile, size: 48),
                   ),
                 ),

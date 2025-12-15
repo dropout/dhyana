@@ -1,5 +1,5 @@
 import 'package:dhyana/util/localization.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flip_board/flip_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -85,7 +85,7 @@ with SingleTickerProviderStateMixin {
       children: [
         buildDiffIndicator(context),
         Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingMd),
+          padding: const EdgeInsets.all(DesignSpec.paddingMd),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,7 +134,7 @@ with SingleTickerProviderStateMixin {
       return Align(
           alignment: Alignment.topRight,
           child: Transform.translate(
-              offset: Offset(0, -AppThemeData.spacingXs),
+              offset: const Offset(0, -DesignSpec.spacingXs),
               child: AnimatedBuilder(
                 animation: animationController.isForwardOrCompleted ?
                 showAnimation : hideAnimation,
@@ -150,8 +150,8 @@ with SingleTickerProviderStateMixin {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: AppThemeData.paddingSm,
-                            vertical: AppThemeData.paddingXs
+                            horizontal: DesignSpec.paddingSm,
+                            vertical: DesignSpec.paddingXs
                         ),
                         child: Text(
                           '+${widget.newValue - widget.oldValue}',

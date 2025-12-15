@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:dhyana/enum/loading_state.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ mixin ScreenHelperMixin {
           actionButtonLayer ?? Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
+              padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingXl),
               child: actionButtonLayer,
             ),
           ),

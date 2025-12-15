@@ -176,6 +176,18 @@ abstract class AppLocalizations {
   /// **'Rendben'**
   String get okay;
 
+  /// No description provided for @close.
+  ///
+  /// In hu, this message translates to:
+  /// **'Bezárás'**
+  String get close;
+
+  /// No description provided for @cancel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Mégsem'**
+  String get cancel;
+
   /// No description provided for @warmup.
   ///
   /// In hu, this message translates to:

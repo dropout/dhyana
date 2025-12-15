@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 
 class DefaultScreenSetup extends StatefulWidget {
 
@@ -56,7 +56,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   }
 
   void _calculateAppBarTitleOpacity() {
-    double min = CustomAppBar.widgetHeight - AppThemeData.spacingMd;
+    double min = CustomAppBar.widgetHeight - DesignSpec.spacingMd;
     double max = min * 2;
     double delta = max - min;
     double offset = titleEffectScrollController.offset;
@@ -175,9 +175,9 @@ mixin DefaultScreenSetupHelpersMixin {
       scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect
       leading: Padding(
         padding: EdgeInsets.only(
-          left: AppThemeData.paddingLg,
-          top: AppThemeData.paddingSm,
-          bottom: AppThemeData.paddingSm
+          left: DesignSpec.paddingLg,
+          top: DesignSpec.paddingSm,
+          bottom: DesignSpec.paddingSm
         ),
         child: backButton ?? CustomBackButton(
           backgroundColor: titleColor,
@@ -202,7 +202,7 @@ mixin DefaultScreenSetupHelpersMixin {
       of = Offset(0, 0);
       o = 1.0;
     } else {
-      of = Offset(0, AppThemeData.spacingSm * (1.0 - titleOpacity));
+      of = Offset(0, DesignSpec.spacingSm * (1.0 - titleOpacity));
       o = titleOpacity;
     }
 
@@ -243,7 +243,7 @@ mixin DefaultScreenSetupHelpersMixin {
   }) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(AppThemeData.spacingMd),
+        padding: EdgeInsets.all(DesignSpec.spacingMd),
         child: buildTitleEffectTitle(context, title, color: color),
       )
     );

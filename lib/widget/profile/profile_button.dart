@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_colors.dart';
 import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_indicator.dart';
@@ -45,14 +45,14 @@ class ProfileButton extends StatelessWidget {
   Widget buildSignedOut(BuildContext context) {
     return Stack(
       children: <Widget>[
-        const DecoratedBox(
+        DecoratedBox(
           position: DecorationPosition.background,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.black
           ),
           child: Icon(
-            key: Key('profile_button_signed_out_icon'),
+            key: const Key('profile_button_signed_out_icon'),
             Icons.account_circle_outlined,
             size: 40.0,
             color: AppColors.backgroundPaper,

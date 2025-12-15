@@ -1,5 +1,5 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
@@ -20,15 +20,15 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Profile avatar + name
           Gap.large(),
           Container(
-            width: AppThemeData.circleLg,
-            height: AppThemeData.circleLg,
+            width: DesignSpec.circleLg,
+            height: DesignSpec.circleLg,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(

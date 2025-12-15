@@ -1,6 +1,6 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
@@ -128,7 +128,7 @@ class ProfileMenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: const BorderRadius.all(
-        Radius.circular(AppThemeData.borderRadiusMd),
+        Radius.circular(DesignSpec.borderRadiusMd),
       ),
       color: Colors.transparent,
       child: InkWell(
@@ -138,8 +138,8 @@ class ProfileMenuTile extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppThemeData.paddingXl,
-              vertical: AppThemeData.paddingLg,
+              horizontal: DesignSpec.paddingXl,
+              vertical: DesignSpec.paddingLg,
             ),
             child: title,
           ),

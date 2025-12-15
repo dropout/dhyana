@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/timer/running/all.dart';
 
 class TimerRunningView extends StatefulWidget {
@@ -49,7 +49,7 @@ class _TimerRunningViewState extends State<TimerRunningView>
 
   Widget buildLayout(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppThemeData.spacingMd),
+      padding: const EdgeInsets.all(DesignSpec.spacingMd),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Stack(

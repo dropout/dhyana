@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/timer/settings/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
   Widget buildListWheelScollView(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        bottom: AppThemeData.paddingXl
+        bottom: DesignSpec.paddingXl
       ),
       child: SizedBox(
         height: 300,

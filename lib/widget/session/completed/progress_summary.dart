@@ -1,6 +1,6 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 import 'progress_summary_item.dart';
@@ -26,7 +26,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.spacingLg),
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.spacingLg),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -41,7 +41,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
               animationDelay: Durations.short1,
             )
           ),
-          const SizedBox(width: AppThemeData.spacingMd),
+          const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: ProgressSummaryItem(
               key: const Key('progress_summary_minutes'),
@@ -53,7 +53,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
               animationDelay: Durations.medium1,
             )
           ),
-          const SizedBox(width: AppThemeData.spacingMd),
+          const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: ProgressSummaryItem(
               key: const Key('progress_summary_days'),

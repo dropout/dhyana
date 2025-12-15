@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -262,8 +262,8 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     return GestureDetector(
       onTap: () => _onWidgetTapped(context),
       child: SizedBox(
-        width: AppThemeData.circleLg,
-        height: AppThemeData.circleLg,
+        width: DesignSpec.circleLg,
+        height: DesignSpec.circleLg,
         child: Stack(
           children: [
             // Use DecorationImage so the ImageProvider is painted inside the circle
@@ -330,9 +330,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   }
 
   Offset _computeIndicatorPosition(double angleDegrees) {
-    final double radius = AppThemeData.circleLg / 2 - 10.0; // minus the border width
+    final double radius = DesignSpec.circleLg / 2 - 10.0; // minus the border width
     final double angleRadians = angleDegrees * math.pi / 180.0;
-    final double center = AppThemeData.circleLg / 2;
+    final double center = DesignSpec.circleLg / 2;
     final double left = center + radius * math.cos(angleRadians) - _indicatorSize / 2;
     final double top = center + radius * math.sin(angleRadians) - _indicatorSize / 2;
     return Offset(left, top);

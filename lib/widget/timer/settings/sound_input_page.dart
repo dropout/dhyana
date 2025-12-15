@@ -2,7 +2,7 @@ import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/service/audio_service.dart';
 import 'package:dhyana/util/localization.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 
@@ -52,7 +52,7 @@ class SoundInputPage extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppThemeData.spacingLg),
+          const SizedBox(height: DesignSpec.spacingLg),
           Text(
             getLocalizedSoundName(sound, AppLocalizations.of(context)),
             style: Theme.of(context).textTheme.titleMedium

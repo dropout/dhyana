@@ -1,7 +1,7 @@
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/all.dart';
@@ -96,7 +96,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                       // child: ProfileEditView(profile: state.profile),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppThemeData.paddingLg,
+                          horizontal: DesignSpec.paddingLg,
                         ),
                         child: ProfileEditForm(
                           profile: state.profile,
@@ -144,7 +144,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
           actionButtonLayer ?? Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
+              padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingXl),
               child: actionButtonLayer,
             ),
           ),

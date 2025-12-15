@@ -1,7 +1,7 @@
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 
 import 'app_button.dart';
 
@@ -53,9 +53,9 @@ class AppErrorDisplay extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onError,
                     size: 96,
                   ),
-                  const SizedBox(height: AppThemeData.spacingMd),
+                  const SizedBox(height: DesignSpec.spacingMd),
                   _buildHeadLine(context, headlineFinal),
-                  const SizedBox(height: AppThemeData.spacingSm),
+                  const SizedBox(height: DesignSpec.spacingSm),
                   _buildText(context, textFinal),
                 ]
               ),
@@ -92,7 +92,7 @@ class AppErrorDisplay extends StatelessWidget {
     return Positioned(
       left: 0,
       right: 0,
-      bottom: AppThemeData.spacingXl,
+      bottom: DesignSpec.spacingXl,
       child: Center(
         child: AppButton(
           bColor: Theme.of(context).colorScheme.onError,

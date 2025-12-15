@@ -1,5 +1,5 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +19,10 @@ class DetailedSummaryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppCard(
       title: context.localizations.statsSummary,
-      padding: EdgeInsets.only(
-        bottom: AppThemeData.paddingLg,
-        left: AppThemeData.paddingLg,
-        right: AppThemeData.paddingLg,
+      padding: const EdgeInsets.only(
+        bottom: DesignSpec.paddingLg,
+        left: DesignSpec.paddingLg,
+        right: DesignSpec.paddingLg,
       ),
       child: Column(
         children: [

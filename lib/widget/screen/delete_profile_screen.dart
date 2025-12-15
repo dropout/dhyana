@@ -8,7 +8,7 @@ import 'package:dhyana/repository/all.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/widget/app_bar/all.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -173,7 +173,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
   Widget buildCompletedScreen(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(AppThemeData.spacingMd),
+        padding: const EdgeInsets.all(DesignSpec.spacingMd),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -191,7 +191,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              bottom: AppThemeData.spacingXl,
+              bottom: DesignSpec.spacingXl,
               child: Center(
                 child: AppButton(
                   onTap: () {

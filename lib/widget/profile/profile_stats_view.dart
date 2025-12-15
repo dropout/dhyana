@@ -3,8 +3,7 @@ import 'dart:math' as math;
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +129,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   Widget buildStatsDataArea(BuildContext context, Profile profile) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.all(AppThemeData.spacingMd),
+        padding: const EdgeInsets.all(DesignSpec.spacingMd),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -156,14 +155,14 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         color: AppColors.backgroundPaper,
       ),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: AppThemeData.paddingSm),
+        padding: const EdgeInsets.only(bottom: DesignSpec.paddingSm),
         child: TabBar(
           key: const Key('profile_stats_tab_bar'),
           padding: const EdgeInsets.only(
-            top: AppThemeData.spacingSm,
-            left: AppThemeData.spacingMd,
-            right: AppThemeData.spacingMd,
-            bottom: AppThemeData.spacingXs,
+            top: DesignSpec.spacingSm,
+            left: DesignSpec.spacingMd,
+            right: DesignSpec.spacingMd,
+            bottom: DesignSpec.spacingXs,
           ),
           controller: primaryTC,
           indicator: const ShapeDecoration(
@@ -172,7 +171,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           ),
           labelColor: Colors.white,
           labelPadding: const EdgeInsets.symmetric(
-              horizontal: AppThemeData.spacingSm
+              horizontal: DesignSpec.spacingSm
           ),
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorAnimation: TabIndicatorAnimation.elastic,
@@ -183,7 +182,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           splashFactory: NoSplash.splashFactory,
           // long tap splash still visible
           // make it look better with splash border radius
-          splashBorderRadius: BorderRadius.circular(AppThemeData.borderRadiusLg),
+          splashBorderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
           dividerColor: Colors.transparent,
           tabs: [
             buildTabBarItem(
@@ -218,7 +217,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     { Key? key }
   ) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingSm),
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingSm),
       child: Tab(
         key: key,
         height: 32,

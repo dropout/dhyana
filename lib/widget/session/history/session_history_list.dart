@@ -1,5 +1,5 @@
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
@@ -20,14 +20,14 @@ class SessionHistoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           sessions.map((s) {
             final startTime = DateFormat.Hm(locale.toString()).format(s.startTime);
             final endTime = DateFormat.Hm(locale.toString()).format(s.endTime);
             return AppCard(
-              padding: const EdgeInsets.all(AppThemeData.paddingMd),
+              padding: const EdgeInsets.all(DesignSpec.paddingMd),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

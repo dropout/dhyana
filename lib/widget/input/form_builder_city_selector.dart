@@ -2,8 +2,7 @@ import 'package:dart_geohash/dart_geohash.dart';
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/location.dart';
-import 'package:dhyana/widget/app_colors.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/input/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
@@ -287,7 +286,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
       child: Column(
         children: [
           // Gap.large(),
@@ -372,7 +371,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
   Widget buildLoaded(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppThemeData.paddingLg),
+      padding: const EdgeInsets.all(DesignSpec.paddingLg),
       child: Column(
         children: [
           Gap.large(),

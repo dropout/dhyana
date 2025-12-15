@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_settings_form.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:dhyana/widget/util/screen.dart';
@@ -56,7 +56,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
   }
 
   void _onFormChanged(BuildContext context) {
-    print('Form changed');
     setState(() {
       loadingState = LoadingState.idle;
     });
@@ -91,8 +90,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                   SliverSafeArea(
                     top: false,
                     minimum: const EdgeInsets.only(
-                      left: AppThemeData.paddingLg,
-                      right: AppThemeData.paddingLg,
+                      left: DesignSpec.paddingLg,
+                      right: DesignSpec.paddingLg,
                     ),
                     sliver: SliverToBoxAdapter(
                       child: ProfileSettingsForm(

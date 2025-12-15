@@ -3,7 +3,7 @@ import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/all.dart';
@@ -121,7 +121,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppThemeData.paddingLg,
+                        horizontal: DesignSpec.paddingLg,
                       ),
                       child: ProfileEditForm(
                         profile: state.profile,
@@ -142,7 +142,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                       // otherwise the button would end up
                       // using the whole width.
                       child: SizedBox(
-                        height: AppThemeData.spacing4xl,
+                        height: DesignSpec.spacing4xl,
                         child: Center(
                           child: TextButton(
                             onPressed: () => _onSignOut(context),
@@ -198,7 +198,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
           actionButtonLayer ?? Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppThemeData.paddingXl),
+              padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingXl),
               child: actionButtonLayer,
             ),
           ),

@@ -1,5 +1,5 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
           key: const Key('milestone_progress_view_row'),
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
-          spacing: AppThemeData.spacingXs,
+          spacing: DesignSpec.spacingXs,
           children: buildMilestoneItems(context),
         ),
         Gap.medium(),

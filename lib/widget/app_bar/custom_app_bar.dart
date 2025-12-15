@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/app_theme_data.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       bottom: false,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppThemeData.paddingLg),
+        padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
         child: NavigationToolbar(
           leading: Row(
             children: [
