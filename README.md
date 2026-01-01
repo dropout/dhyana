@@ -2,8 +2,11 @@
 
 ## Overview
 
-<video src="docs/assets/video.mp4" controls title="Demo Video"></video>
 
+[![Overview](https://github.com/dropout/dhyana/blob/63f2e48ef5cbf9d7963f2fb9f151498be3d867c5/docs/assets/video_placeholder.jpg)](https://github.com/dropout/dhyana/blob/63f2e48ef5cbf9d7963f2fb9f151498be3d867c5/docs/assets/video.mp4)
+
+
+https://github.com/dropout/dhyana/blob/63f2e48ef5cbf9d7963f2fb9f151498be3d867c5/docs/assets/video.mp4
 A simple and clean meditation timer, when you just need a timer to support your practice.
 Least noise possible but with enough features to be able to support a busy lifestyle.
 
