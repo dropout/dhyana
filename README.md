@@ -1,57 +1,89 @@
-# Dhyana - Meditation Timer
+# Dhyana - Meditation Timer (Work in Progress)
 
-## What?
-A simple meditation timer (Work in progress version)  
+## Overview
 
-## How?
-Encourage your practice with measuring consecutive days.  
-Support your practice with the presence of community members.  
-Simple and easy to use.
+<video src="docs/assets/video.mp4" controls title="Demo Video"></video>
 
-## Who?
-For serious practitioners. No guided meditations.
+A simple and clean meditation timer, when you just need a timer to support your practice.
+Least noise possible but with enough features to be able to support a busy lifestyle.
+
+## Tech stack: 
+- Flutter 
+- Firebase 
+- Google Cloud Platform
+- Stripe
 
 ## Features
 
-### Timer 
+### Timer Settings
 - Preparation time
 - Starting sound
 - Duration
 - Ending sound
+- Settings history
+
+### Timer / Session
+- Display timer phases
+- Dimmable screen
+- Pause timer
+- Discard session / Finish session
 
 ### Profile
-- Name, profile image
-- Track sessions
-- Count consecutive days
+- Edit profile
+  - Profile image
+  - Firstname
+  - Lastname
+  - Location, geohash (City Selector via Cloud Functions / Google Maps API)
+- Profile settings
+  - Show / Hide statistics and progress
+  - Show / Hide current time on timer settings screen
+- Delete profile
 
-### Community
-- Show who you have meditated with
+### Statistics
+- Session history
+- Count consecutive days
+- Count milestones (after every 7 consecutive days)
+- Count minutes, days, sessions
+- Display statistics in bar chart with selectable timeframes (days, weeks, months, years)
+
+### Social
+- Show who you have practiced with
+- Sort practitioners by closest location (via GeoHashing)
+
+### Clean Architecture
+
+- Presentation: Widgets
+- Domain: Blocs, Cubits, Services
+- Data: Models, DataProviders, Repositories
+- Dependency Injection: Provider
+- Flavors: Dev, Staging, Prod
+- Localization
+- Crashlytics
+- Unit tests (mostly)
+
+### Custom Widget Packages
+- Barchart
+- Particle System
 
 ## Getting Started
 
-Currently developing on iOS platform.  
-The application won't run without `GoogleService-Info.plist`.
+The application won't run without platform specific firebase configuration files placed into its folder according to flavor being built againts.
 
 ### Requirements
 - flutter
 - firebase cli
 - gsutil cli
+- gcloud cli
 
-### Flavors configured (iOS only for now):
-- local
-- staging
-- production
+### Useful commands
 
-
-## Commands
-
-### Code generation
-
-- build localizations: `flutter gen-l10n`
-- build freezed models: `dart run build_runner build`
+- generate localizations: `flutter gen-l10n`
+- generate code: `dart run build_runner build`
 - start firebase emulator: `./start_firebase_emulator.sh -d empty_with_admin_user`
 
 ### Building
 
+#### Staging
 - release android: `flutter build appbundle --release --flavor staging -t ./lib/main_staging.dart`
 - release ios: `flutter build ipa --release --flavor staging -t ./lib/main_staging.dart`
+
