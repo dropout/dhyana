@@ -11,10 +11,14 @@ class PresenceView extends StatelessWidget {
 
   final int batchSize;
   final int maxPageCount;
+  final Color borderColor;
+  final Color textColor;
 
   const PresenceView({
     required this.batchSize,
     this.maxPageCount = 3,
+    this.borderColor = Colors.black,
+    this.textColor = Colors.black,
     super.key,
   });
 
@@ -58,6 +62,8 @@ class PresenceView extends StatelessWidget {
               return TableCell(
                 child: Container(
                   child: PresenceListItem(
+                    borderColor: borderColor,
+                    textColor: textColor,
                     presence: slicedPresenceList[rowIndex][columnIndex])
                       .gridReveal(rowIndex,columnIndex),
                 )

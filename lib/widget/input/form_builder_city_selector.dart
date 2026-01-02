@@ -30,6 +30,7 @@ class FormBuilderCitySelector extends FormBuilderField<Location> {
     builder: (FormFieldState<Location?> field) {
       return CitySelectorInput(
         label: label,
+        placeholderText: field.context.localizations.locationInputPlaceholder,
         initialLocation: field.value,
         onChanged: (location) => field.didChange(location),
       );
@@ -48,11 +49,13 @@ class CitySelectorInput extends StatefulWidget {
   final String label;
   final Location? initialLocation;
   final void Function(Location location)? onChanged;
+  final String placeholderText;
 
   const CitySelectorInput({
     required this.label,
     required this.initialLocation,
     this.onChanged,
+    this.placeholderText = 'Select a city',
     super.key,
   });
 
@@ -79,7 +82,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
     } else if (hasInitialValue && hasSelectedValue == false) {
       return widget.initialLocation!.name;
     } else {
-      return context.localizations.locationInputPlaceholder;
+      return widget.placeholderText;
     }
   }
 

@@ -37,6 +37,8 @@ class PresenceArea extends StatelessWidget {
       child: PresenceView(
         batchSize: batchSize,
         maxPageCount: maxPageCount,
+        borderColor: Colors.grey.shade500,
+        textColor: Colors.grey.shade500,
       ),
     );
   }
