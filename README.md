@@ -2,7 +2,9 @@
 
 ## Overview
 
-<video src="docs/assets/video.mp4" controls title="Demo Video"></video>
+
+[![Overview](https://raw.githubusercontent.com/dropout/dhyana/refs/heads/main/docs/assets/video_placeholder.png)](https://raw.githubusercontent.com/dropout/dhyana/refs/heads/main/docs/assets/video.mp4)
+
 
 A simple and clean meditation timer, when you just need a timer to support your practice.
 Least noise possible but with enough features to be able to support a busy lifestyle.
