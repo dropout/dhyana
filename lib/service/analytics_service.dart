@@ -1,4 +1,4 @@
-abstract class AnalyticsService {
+abstract interface class AnalyticsService {
 
   void logEvent({
     required String name,

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
 
-abstract class AudioService  {
+abstract interface class AudioService  {
 
   Future<void> play(Sound sound);
   Future<void> stop();

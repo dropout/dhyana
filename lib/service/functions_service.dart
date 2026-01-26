@@ -1,6 +1,6 @@
 import 'package:dhyana/model/city_search_result.dart';
 
-abstract class FunctionsService {
+abstract interface class FunctionsService {
 
   const FunctionsService();
 

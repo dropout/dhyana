@@ -1,6 +1,6 @@
 import 'package:gaimon/gaimon.dart';
 
-import 'haptics_service.dart';
+import '../haptics_service.dart';
 
 class DefaultHapticsService implements HapticsService {
 

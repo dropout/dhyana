@@ -5,7 +5,7 @@ import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/util/all.dart';
 
-import 'audio_service.dart';
+import '../audio_service.dart';
 
 class DefaultAudioService with LoggerMixin implements AudioService {
 

@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/default_shader_service.dart';
+import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/widget/timer/all.dart';

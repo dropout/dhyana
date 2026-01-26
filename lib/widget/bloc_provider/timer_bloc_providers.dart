@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/default_timer_service.dart';
+import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

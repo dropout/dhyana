@@ -208,9 +208,10 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     } on PlatformException catch (e, stack) {
       if (context.mounted) {
         if (e.code == 'photo_access_denied') {
-          showDialog(context: context, builder: (BuildContext ctx) {
-            return buildPhotoAccessDialog(ctx);
-          });
+          showDialog(
+            context: context,
+            builder: (BuildContext ctx) => buildPhotoAccessDialog(ctx)
+          );
         }
       }
       crashlyticsService.recordError(

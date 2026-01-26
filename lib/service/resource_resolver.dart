@@ -1,6 +1,6 @@
 import 'package:dhyana/model/profile.dart';
 
-abstract class ResourceResolver {
+abstract interface class ResourceResolver {
 
   Future<String> getProfileImageUrl(Profile profile);
 

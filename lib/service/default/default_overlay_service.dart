@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart' as m;
 
-import 'overlay_service.dart';
+import '../overlay_service.dart';
 
-class DefaultOverlayService extends OverlayService {
+class DefaultOverlayService implements OverlayService {
 
   @override
   Future<T?> showModalBottomSheet<T>(

@@ -1,6 +1,6 @@
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'wakelock_service.dart';
+import '../wakelock_service.dart';
 
 class DefaultWakelockService implements WakelockService {
 

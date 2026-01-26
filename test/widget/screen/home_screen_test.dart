@@ -4,7 +4,7 @@ import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/default_shader_service.dart';
+import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/screen/all.dart';

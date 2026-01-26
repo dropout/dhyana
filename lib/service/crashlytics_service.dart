@@ -1,4 +1,4 @@
-abstract class CrashlyticsService {
+abstract interface class CrashlyticsService {
 
   void recordError({
     required dynamic exception,

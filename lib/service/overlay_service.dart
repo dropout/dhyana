@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class OverlayService {
+abstract interface class OverlayService {
 
   Future<T?> showModalBottomSheet<T>(
     BuildContext context,

@@ -1,6 +1,6 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-import 'cache_manager_service.dart';
+import '../cache_manager_service.dart';
 
 /// A cache manager service that CachedNetworkImage uses by default.
 /// This is useful for testing purposes, as you can provide a mock
