@@ -5,6 +5,7 @@ version: 0.6.0+1
 
 environment:
   sdk: '>=3.8.0 <4.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
@@ -49,6 +50,7 @@ dependencies:
   shared_preferences: ^2.0.5
   gaimon: ^1.4.1 # haptic feedback library
   dart_geohash: ^2.1.0
+  tflite_flutter: ^0.12.1 # For NSFW model inference
 
   # Firebase
   firebase_core: ^4.1.1
@@ -90,6 +92,7 @@ flutter:
   assets:
     - assets/sounds/
     - assets/images/
+    - assets/nsfw.tflite
 
   shaders:
     - shaders/linear_gradient_mask.frag
