@@ -286,32 +286,27 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         height: DesignSpec.circleLg,
         child: Stack(
           children: [
-            // Use DecorationImage so the ImageProvider is painted inside the circle
-            AnimatedSwitcher(
-              duration: Durations.medium2,
-              child: DecoratedBox(
-                key: ValueKey<ImageProvider>(imageProvider),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 4.0,
-                  ),
-                  color: Colors.grey.shade400,
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
+            // show current image
+            ProfileImagePickerCurrentImage(imageProvider: imageProvider),
+
+            // show a loading indicator when picking an image
+            // this makes sense when cold starting,
+            // because it may take a while on some devices
+            if (_processingState == ProfileImagePickerProcessState.pickingImage)
+              SizedBox.expand(
+                child: CircularProgressIndicator(
+                  strokeWidth: 4.0,
+                  color: AppColors.backgroundPaperLight,
                 ),
-                // ClipOval ensures child content (if any) matches the circular shape
-                child: SizedBox.expand(),
-              ),
             ),
+
             // show edit indicator
             Positioned(
               left: indicatorPos.dx,
               top: indicatorPos.dy,
-              child: buildEditIndicator(context),
+              child: ProfileImagePickerEditIndicator(
+                indicatorSize: _indicatorSize,
+              ),
             ),
           ],
         ),
@@ -329,10 +324,31 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     }
   }
 
-  Widget buildEditIndicator(BuildContext context) {
+  Offset _computeIndicatorPosition(double angleDegrees) {
+    final double radius = DesignSpec.circleLg / 2 - 10.0; // minus the border width
+    final double angleRadians = angleDegrees * math.pi / 180.0;
+    final double center = DesignSpec.circleLg / 2;
+    final double left = center + radius * math.cos(angleRadians) - _indicatorSize / 2;
+    final double top = center + radius * math.sin(angleRadians) - _indicatorSize / 2;
+    return Offset(left, top);
+  }
+
+}
+
+class ProfileImagePickerEditIndicator extends StatelessWidget {
+
+  final double indicatorSize;
+
+  const ProfileImagePickerEditIndicator({
+    this.indicatorSize = 32.0,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      width: _indicatorSize,
-      height: _indicatorSize,
+      width: indicatorSize,
+      height: indicatorSize,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
@@ -348,14 +364,43 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       ),
     );
   }
+}
 
-  Offset _computeIndicatorPosition(double angleDegrees) {
-    final double radius = DesignSpec.circleLg / 2 - 10.0; // minus the border width
-    final double angleRadians = angleDegrees * math.pi / 180.0;
-    final double center = DesignSpec.circleLg / 2;
-    final double left = center + radius * math.cos(angleRadians) - _indicatorSize / 2;
-    final double top = center + radius * math.sin(angleRadians) - _indicatorSize / 2;
-    return Offset(left, top);
+
+
+class ProfileImagePickerCurrentImage extends StatelessWidget {
+
+  final ImageProvider imageProvider;
+  final void Function()? onTap;
+
+  const ProfileImagePickerCurrentImage({
+    required this.imageProvider,
+    this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: Durations.medium2,
+      child: DecoratedBox(
+        key: ValueKey<ImageProvider>(imageProvider),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Colors.black,
+            width: 4.0,
+          ),
+          color: Colors.grey.shade400,
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+        // ClipOval ensures child content (if any) matches the circular shape
+        child: SizedBox.expand(),
+      ),
+    );
   }
 
 }

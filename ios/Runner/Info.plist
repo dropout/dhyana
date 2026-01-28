@@ -43,13 +43,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to take a profile photo.</string>
+	<string>Access to the camera is used for taking a selfie for your profile.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>The application will sync your data with the Apple Health app to give you better insights.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>The application will sync your data with the Apple Health app to give you better insights.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to pick a profile image from the image library.</string>
+	<string>Access to the photo library is used for selecting a profile picture.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
