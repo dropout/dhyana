@@ -83,6 +83,10 @@
   "photoAccessDialogText": "Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon 'Beállítások' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.",
   "photoAccessDialogButtonText": "Rendben",
 
+  "imageNotSafeDialogTitle": "Nem megfelelő kép",
+  "imageNotSafeDialogText": "A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.",
+  "imageNotSafeDialogButtonText": "Rendben",
+
   "profileSettings": "Profil beállítások",
   "showTimeOnTimerSettingsScreenTitle": "Idő megjelenítése az Időzítő beállítások képernyőn",
   "showTimeOnTimerSettingsScreenDescription": "Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.",

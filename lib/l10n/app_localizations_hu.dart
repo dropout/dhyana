@@ -225,6 +225,16 @@ class AppLocalizationsHu extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Rendben';
 
   @override
+  String get imageNotSafeDialogTitle => 'Nem megfelelő kép';
+
+  @override
+  String get imageNotSafeDialogText =>
+      'A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.';
+
+  @override
+  String get imageNotSafeDialogButtonText => 'Rendben';
+
+  @override
   String get profileSettings => 'Profil beállítások';
 
   @override

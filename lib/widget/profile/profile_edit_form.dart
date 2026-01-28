@@ -1,4 +1,5 @@
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/widget/dialog/all.dart';
 import 'package:dhyana/widget/input/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,37 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     widget.onChanged?.call();
   }
 
+  void showImageErrorSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('error uploading image'),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
+  void onProfileImagePickerError(
+    BuildContext context,
+    ProfileImagePickerError errorType,
+    dynamic error
+  ) {
+    switch (errorType) {
+      case ProfileImagePickerError.photoAccessDenied:
+        showDialog(
+          context: context,
+          builder: (context) => const PhotoAccessDeniedDialog()
+        );
+        break;
+      case ProfileImagePickerError.notSafeImage:
+        showDialog(
+          context: context,
+          builder: (context) => const ImageUploadNotSafeDialog()
+        );
+      default:
+        showImageErrorSnackBar(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var profile = widget.profile;
@@ -57,6 +89,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             name: 'imageData',
             label: context.localizations.profileImageLabel,
             profile: profile,
+            onError: (errorType, error) => onProfileImagePickerError(context, errorType, error),
           ),
           Gap.medium(),
           ...buildNameInputs(context),

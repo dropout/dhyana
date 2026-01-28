@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/all.dart';
@@ -9,24 +8,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
+import 'package:dhyana/service/all.dart';
 
-/// A FormBuilder field that allows users to pick an image from their device.
-/// It displays the selected image when its url is provided,
-/// and will return the selected image data as Uint8List.
+/// A FormBuilder field that allows users to pick an image for their profile
+/// from their device.
+/// It displays the selected profile's image.
+/// It uses the [ProfileImagePicker] widget internally to
+/// handle the image selection.
 class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
 
+  /// The profile associated with the image picker.
   final Profile profile;
+
+  /// The label for the image picker.
   final String label;
+
+  final void Function(ProfileImagePickerError, dynamic)? onError;
 
   FormBuilderProfileImagePicker({
     required this.profile,
     this.label = 'Profile Image',
+    this.onError,
     // From Super
     required super.name,
-    AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
+    super.autovalidateMode = AutovalidateMode.disabled,
     super.enabled,
     super.initialValue,
     super.focusNode,
@@ -46,7 +53,8 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
         label: widget.label,
         onImageSelected: (value) {
           field.didChange(value);
-        }
+        },
+        onError: widget.onError,
       );
     },
   );
@@ -58,16 +66,31 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
 class FormBuilderImagePickerState
   extends FormBuilderFieldState<FormBuilderProfileImagePicker, Uint8List> {}
 
+
+enum ProfileImagePickerError {
+  photoAccessDenied,
+  imageLoadingFailed,
+  notSafeImage,
+  unknown,
+}
+
+enum ProfileImagePickerProcessState {
+  idle,
+  pickingImage,
+}
+
 class ProfileImagePicker extends StatefulWidget {
 
   final String label;
   final Profile profile;
 
   final void Function(Uint8List)? onImageSelected;
+  final void Function(ProfileImagePickerError, dynamic)? onError;
 
   const ProfileImagePicker({
     required this.profile,
     this.onImageSelected,
+    this.onError,
     this.label = 'Profile Image',
     super.key,
   });
@@ -80,7 +103,10 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
   static const double _indicatorSize = 32.0;
 
-  ImagePicker picker = ImagePicker();
+  ProfileImagePickerProcessState _processingState =
+    ProfileImagePickerProcessState.idle;
+
+  final ImagePicker picker = ImagePicker();
   Uint8List? selectedImageData;
 
   // New fields to manage network image loading/listening
@@ -105,17 +131,17 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
     // ensure stream is (re)resolved if needed when dependencies change
     _updateNetworkImageListenerIfNeeded();
+    super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant ProfileImagePicker oldWidget) {
-    super.didUpdateWidget(oldWidget);
     if (oldWidget.profile.photoUrl != widget.profile.photoUrl) {
       _updateNetworkImageListenerIfNeeded();
     }
+    super.didUpdateWidget(oldWidget);
   }
 
   void _updateNetworkImageListenerIfNeeded() {
@@ -186,45 +212,57 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   }
 
   void _selectFile(BuildContext context) async {
-    final crashlyticsService = context.services.crashlyticsService;
-
     try {
+
+      // Start picking image
+      setState(() {
+        _processingState = ProfileImagePickerProcessState.pickingImage;
+      });
       XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile == null) return;
 
-      Uint8List data = await pickedFile.readAsBytes();
-      img.Command imageCommand = img.Command();
-      imageCommand.decodeImage(data);
-      imageCommand.copyResizeCropSquare(
-        size: 128,
-      );
-      imageCommand.encodeJpg(quality: 90);
+      // No image selected, return to idle state
+      if (pickedFile == null) {
+        setState(() {
+          _processingState = ProfileImagePickerProcessState.idle;
+        });
+        return;
+      }
 
-      Uint8List? imageData = await imageCommand.getBytes();
+      // Detect NSFW content
+      final safeImageDetector = await DefaultSafeImageDetector.load();
+      img.Image? image = img.decodeImage(await pickedFile.readAsBytes());
+      if (image == null) {
+        setState(() {
+          _processingState = ProfileImagePickerProcessState.idle;
+        });
+        return;
+      } else {
+        image = img.copyResizeCropSquare(image, size: 224);
+      }
+
+      final detectionResult = await safeImageDetector.detectImageSafety(image);
+      if (!detectionResult.isSafe) {
+        setState(() {
+          _processingState = ProfileImagePickerProcessState.idle;
+        });
+        widget.onError?.call(ProfileImagePickerError.notSafeImage, null);
+        return;
+      }
+
+      Uint8List? imageData = img.encodeJpg(image, quality: 90);
       setState(() {
         selectedImageData = imageData;
+        _processingState = ProfileImagePickerProcessState.idle;
       });
       widget.onImageSelected?.call(selectedImageData!);
-    } on PlatformException catch (e, stack) {
-      if (context.mounted) {
-        if (e.code == 'photo_access_denied') {
-          showDialog(
-            context: context,
-            builder: (BuildContext ctx) => buildPhotoAccessDialog(ctx)
-          );
-        }
+    } on PlatformException catch (e) {
+      if (e.code == 'photo_access_denied') {
+        widget.onError?.call(ProfileImagePickerError.photoAccessDenied, e);
+      } else {
+        widget.onError?.call(ProfileImagePickerError.unknown, e);
       }
-      crashlyticsService.recordError(
-        exception: e,
-        stackTrace: stack,
-        reason: 'PlatformException in ImagePickerWidget::_selectFile',
-      );
-    } catch (e, stack) {
-      crashlyticsService.recordError(
-        exception: e,
-        stackTrace: stack,
-        reason: 'Unknown error occurred while trying to pick an image',
-      );
+    } catch (e) {
+      widget.onError?.call(ProfileImagePickerError.unknown, e);
     }
   }
 
@@ -234,25 +272,6 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildCurrentImageDisplay(context),
-      ],
-    );
-  }
-
-  Widget buildPhotoAccessDialog(BuildContext context) {
-    return AlertDialog(
-      title: Text(AppLocalizations.of(context).photoAccessDialogTitle),
-      content: Text(AppLocalizations.of(context).photoAccessDialogText
-      ),
-      actions: <Widget>[
-        TextButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
-          child: Text(AppLocalizations.of(context).photoAccessDialogButtonText.toUpperCase()),
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
-        ),
       ],
     );
   }

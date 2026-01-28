@@ -23,6 +23,7 @@ export 'overlay_service.dart';
 export 'profile_stats_report_updater.dart';
 export 'remote_settings_service.dart';
 export 'resource_resolver.dart';
+export 'safe_image_detector_service.dart';
 export 'shader_service.dart';
 export 'timer_service.dart';
 export 'timer_service_factory.dart';

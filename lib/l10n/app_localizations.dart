@@ -500,6 +500,24 @@ abstract class AppLocalizations {
   /// **'Rendben'**
   String get photoAccessDialogButtonText;
 
+  /// No description provided for @imageNotSafeDialogTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nem megfelelő kép'**
+  String get imageNotSafeDialogTitle;
+
+  /// No description provided for @imageNotSafeDialogText.
+  ///
+  /// In hu, this message translates to:
+  /// **'A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.'**
+  String get imageNotSafeDialogText;
+
+  /// No description provided for @imageNotSafeDialogButtonText.
+  ///
+  /// In hu, this message translates to:
+  /// **'Rendben'**
+  String get imageNotSafeDialogButtonText;
+
   /// No description provided for @profileSettings.
   ///
   /// In hu, this message translates to:

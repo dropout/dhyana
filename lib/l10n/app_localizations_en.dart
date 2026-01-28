@@ -224,6 +224,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoAccessDialogButtonText => 'Okay';
 
   @override
+  String get imageNotSafeDialogTitle => 'Unsafe image';
+
+  @override
+  String get imageNotSafeDialogText =>
+      'The selected image may contain inappropriate content. Please choose a different image.';
+
+  @override
+  String get imageNotSafeDialogButtonText => 'Okay';
+
+  @override
   String get profileSettings => 'Profile Settings';
 
   @override

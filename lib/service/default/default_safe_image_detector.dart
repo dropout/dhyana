@@ -27,7 +27,7 @@ class DefaultSafeImageDetector implements SafeImageDetectorService {
   static const _kInputHeight = 224;
 
   /// Path to the TFLite model
-  static const _kModelPath = 'packages/dhyana/assets/nsfw.tflite';
+  static const _kModelPath = 'assets/nsfw.tflite';
 
   /// Default threshold for classifying NSFW content
   static const _kNSFWThreshold = 0.7;
@@ -77,7 +77,7 @@ class DefaultSafeImageDetector implements SafeImageDetectorService {
       throw Exception('Failed to get a valid score from the model output.');
     }
 
-    return ImageSafetyDetectionResult(score > _threshold, score);
+    return ImageSafetyDetectionResult(score < _threshold, score);
   }
 
   /// Converts an image to a byte list suitable for the model input
