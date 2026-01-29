@@ -87,7 +87,7 @@
   "imageNotSafeDialogText": "The selected image may contain inappropriate content. Please choose a different image.",
   "imageNotSafeDialogButtonText": "Okay",
 
-  "profileSettings": "Profile Settings",
+  "profileSettings": "Settings",
   "showTimeOnTimerSettingsScreenTitle": "Show timeframe on Timer Settings Screen",
   "showTimeOnTimerSettingsScreenDescription": "Enable this option to show session start and end times on the Timer Settings screen.",
   "showStatsOnFinishScreenTitle": "Show statistics on Session Finish Screen",
