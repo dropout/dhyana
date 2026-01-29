@@ -2,6 +2,8 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'dialog_button.dart';
+
 class PhotoAccessDeniedDialog extends StatelessWidget {
 
   const PhotoAccessDeniedDialog({super.key});
@@ -13,13 +15,12 @@ class PhotoAccessDeniedDialog extends StatelessWidget {
       content: Text(AppLocalizations.of(context).photoAccessDialogText
       ),
       actions: <Widget>[
-        TextButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
-          child: Text(AppLocalizations.of(context).photoAccessDialogButtonText.toUpperCase()),
+        DialogButton.primary(
+          text: AppLocalizations.of(context).photoAccessDialogButtonText,
           onPressed: () {
             GoRouter.of(context).pop();
+            // Open app settings
+            // Note: Implementation to open app settings is not included here
           },
         ),
       ],

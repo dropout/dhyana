@@ -234,7 +234,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get imageNotSafeDialogButtonText => 'Okay';
 
   @override
-  String get profileSettings => 'Profile Settings';
+  String get profileSettings => 'Settings';
 
   @override
   String get showTimeOnTimerSettingsScreenTitle =>

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A helper function to show a dialog with custom transition and styling,
+/// specific to the app's design guidelines.
 void showAppDialog(BuildContext context, Widget dialog) {
   showGeneralDialog(
     context: context,

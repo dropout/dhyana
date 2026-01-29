@@ -235,7 +235,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get imageNotSafeDialogButtonText => 'Rendben';
 
   @override
-  String get profileSettings => 'Profil beállítások';
+  String get profileSettings => 'Beállítások';
 
   @override
   String get showTimeOnTimerSettingsScreenTitle =>

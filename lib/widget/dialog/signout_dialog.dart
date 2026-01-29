@@ -9,7 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import 'dialog_button.dart';
+
 class SignoutDialog extends StatelessWidget {
+
   const SignoutDialog({super.key});
 
   @override
@@ -21,29 +24,15 @@ class SignoutDialog extends StatelessWidget {
     content: Text(AppLocalizations.of(context).profileSignoutQuestion),
     backgroundColor: AppColors.backgroundPaperLight,
     actions: [
-      TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
-          textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        child: Text(AppLocalizations.of(context).profileSignoutCancel),
+      DialogButton.secondary(
+        text: AppLocalizations.of(context).profileSignoutCancel,
         onPressed: () {
           context.pop();
           context.hapticsTap();
         },
       ),
-      TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-          textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        child: Text(AppLocalizations.of(context).profileSignoutYes,),
+      DialogButton.primary(
+        text: AppLocalizations.of(context).profileSignoutYes,
         onPressed: () {
           // close are you sure dialog
           context.pop();

@@ -521,7 +521,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileSettings.
   ///
   /// In hu, this message translates to:
-  /// **'Profil beállítások'**
+  /// **'Beállítások'**
   String get profileSettings;
 
   /// No description provided for @showTimeOnTimerSettingsScreenTitle.
