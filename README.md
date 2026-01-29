@@ -2,18 +2,25 @@
 
 ## Overview
 
+A minimalist meditation timer designed to eliminate distractions, when you just need a timer to support your practice. Built with a focus on clean, well-crafted interfaces and scalable cloud architecture.
 
-[![Overview](https://raw.githubusercontent.com/dropout/dhyana/refs/heads/main/docs/assets/video_placeholder.png)](https://raw.githubusercontent.com/dropout/dhyana/refs/heads/main/docs/assets/video.mp4)
-
-
-A simple and clean meditation timer, when you just need a timer to support your practice.
-Least noise possible but with enough features to be able to support a busy lifestyle.
+[![Overview](docs/assets/overview.gif)](docs/assets/overview.gif)
+[![Overview](docs/assets/profile_stats.gif)](docs/assets/profile_stats.gif)
 
 ## Tech stack: 
 - Flutter 
 - Firebase 
 - Google Cloud Platform
-- Stripe
+
+## Clean Architecture (+)
+- Presentation: Widgets, Blocs, Cubits
+- Domain: Models, Repository Interfaces, Service Interfaces, Service Implementations
+- Data: Repository Implementations DataProvider Interfaces, DataProvider Implementations
+- Dependency Injection: Provider
+- Flavors: Dev, Staging, Prod
+- Localization
+- Crashlytics
+- Unit tests (mostly) using mocktail
 
 ## Features
 
@@ -37,8 +44,9 @@ Least noise possible but with enough features to be able to support a busy lifes
   - Lastname
   - Location, geohash (City Selector via Cloud Functions / Google Maps API)
 - Profile settings
-  - Show / Hide statistics and progress
+  - Show / Hide statistics and progress 
   - Show / Hide current time on timer settings screen
+  - Participate in social functionality
 - Delete profile
 
 ### Statistics
@@ -52,30 +60,27 @@ Least noise possible but with enough features to be able to support a busy lifes
 - Show who you have practiced with
 - Sort practitioners by closest location (via GeoHashing)
 
-### Clean Architecture
-
-- Presentation: Widgets
-- Domain: Blocs, Cubits, Services
-- Data: Models, DataProviders, Repositories
-- Dependency Injection: Provider
-- Flavors: Dev, Staging, Prod
-- Localization
-- Crashlytics
-- Unit tests (mostly)
-
 ### Custom Widget Packages
-- Barchart
-- Particle System
+- **Barchart widget** with an aim on visual independency
+- **Particle System** initial *prototype version*
 
 ## Getting Started
 
-The application won't run without platform specific firebase configuration files placed into its folder according to flavor being built againts.
+The application won't run without platform specific firebase configuration files placed into its folder according to flavor being built against.
 
-### Requirements
+### Prerequisites
 - flutter
 - firebase cli
 - gsutil cli
 - gcloud cli
+
+### Setup
+1. Clone the repo: `git clone ...`
+2. Install dependencies: `flutter pub get`
+3. Add your `google-services.json` and `GoogleService-Info.plist` files to the respective flavor folders:
+   - `ios/config/staging/`
+   - `android/app/src/staging/`
+4. Run the app: `flutter run --flavor staging -t lib/main_staging.dart`
 
 ### Useful commands
 
