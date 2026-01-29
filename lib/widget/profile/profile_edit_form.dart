@@ -53,16 +53,10 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
   ) {
     switch (errorType) {
       case ProfileImagePickerError.photoAccessDenied:
-        showDialog(
-          context: context,
-          builder: (context) => const PhotoAccessDeniedDialog()
-        );
+        showAppDialog(context, const PhotoAccessDeniedDialog());
         break;
       case ProfileImagePickerError.notSafeImage:
-        showDialog(
-          context: context,
-          builder: (context) => const ImageUploadNotSafeDialog()
-        );
+        showAppDialog(context, const ImageUploadNotSafeDialog());
       default:
         showImageErrorSnackBar(context);
     }

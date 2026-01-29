@@ -1,6 +1,7 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/dialog/all.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -42,7 +43,7 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
   }
 
   void _onDeleteProfileTapped(BuildContext context) {
-    showDeleteProfileDialog(context, widget.profile);
+    showAppDialog(context, DeleteProfileDialog());
     context.hapticsTap();
   }
 

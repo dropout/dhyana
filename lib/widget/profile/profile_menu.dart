@@ -1,6 +1,7 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/dialog/all.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
@@ -41,7 +42,7 @@ class ProfileMenu extends StatelessWidget {
   }
 
   void _onSignoutTapped(BuildContext context) {
-    showSignoutDialog(context);
+    showAppDialog(context, SignoutDialog());
     context.hapticsTap();
   }
 

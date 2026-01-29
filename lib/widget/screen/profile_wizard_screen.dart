@@ -4,6 +4,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/dialog/signout_dialog.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:dhyana/widget/screen/all.dart';
 import 'package:dhyana/widget/util/all.dart';
@@ -65,7 +66,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   }
 
   void _onSignOut(BuildContext context) {
-    showSignoutDialog(context);
+    showAppDialog(context, SignoutDialog());
     context.hapticsTap();
   }
 
