@@ -1,0 +1,23 @@
+graph TD
+
+  appProviders[AppProviders] -->|AuthCubit| app["App"]
+  app --> materialApp["MaterialApp.router"]
+
+  materialApp --> route["LoginRoute (/login)"]
+  route --> screen["LoginScreen"]
+  screen --> blocBuilder["BlocBuilder&lt;AuthCubit, AuthState&gt;"]
+  blocBuilder -->|AuthState| loginView["LoginView"]
+  screen --> backButton["BackButton"]
+  backButton -.->|context.pop| materialApp
+
+
+  loginView -->|AuthStateSigningIn| loading["AppLoadingDisplay"]
+  loginView -->|AuthStateErrorOccured| error["AppErrorDisplay"]
+  loginView -->|default| signedOut["LoginSignedOutView"]
+
+  signedOut --> signinButton[SignInButton]
+  signinButton -.->|context.read| appProviders
+
+  style appProviders fill:#FF9800,stroke:#333,stroke-width:2px,color:#fff
+  style signinButton fill:#4CAF50,stroke:#333,stroke-width:1px,color:#fff
+  style backButton fill:#4CAF50,stroke:#333,stroke-width:1px,color:#fff

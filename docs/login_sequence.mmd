@@ -1,0 +1,41 @@
+sequenceDiagram
+    actor User
+    participant LoginView
+    participant LoginSignedOutView
+    participant AuthCubit
+    participant AuthRepository
+    participant AuthProvider
+
+    User->>LoginSignedOutView: Tap "Sign in with Google/Apple"
+    alt Google
+        LoginSignedOutView->>AuthCubit: signInWithGoogle(onComplete)
+    else Apple
+        LoginSignedOutView->>AuthCubit: signInWithApple(onComplete)
+    end
+    LoginSignedOutView->>LoginSignedOutView: logEvent + hapticsTap
+    AuthCubit->>AuthCubit: emit AuthState.signingIn
+    AuthCubit->>AuthRepository: signIn(SigninMethodType)
+    AuthRepository->>AuthProvider: signIn(...)
+
+    alt Sign-in success
+        AuthProvider-->>AuthRepository: SigninResult(user, isFirstSignin)
+        AuthRepository-->>AuthCubit: (user, isFirstSignin)
+        AuthCubit->>AuthCubit: emit AuthState.signedIn
+        AuthCubit->>AuthCubit: logEvent sign_in
+        AuthCubit-->>LoginSignedOutView: onComplete(user, isFirstSignin)
+        alt First sign-in
+            LoginSignedOutView->>LoginView: ProfileWizardRoute.replace
+        else Returning user
+            LoginSignedOutView->>LoginView: ProfileRoute.replace
+        end
+    else User cancelled
+        AuthProvider-->>AuthRepository: SignInCancelled
+        AuthRepository-->>AuthCubit: SignInCancelled
+        AuthCubit->>AuthCubit: emit AuthState.signedOut
+        LoginView-->>User: stays on signed-out UI
+    else Error
+        AuthProvider-->>AuthRepository: error
+        AuthRepository-->>AuthCubit: error
+        AuthCubit->>AuthCubit: emit AuthState.error
+        LoginView-->>User: AppErrorDisplay (Retry)
+    end
