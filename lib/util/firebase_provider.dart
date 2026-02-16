@@ -64,18 +64,14 @@ class FirebaseProvider {
   FirebaseFirestore get firestore =>
     FirebaseFirestore.instance;
 
-
   FirebaseStorage get storage =>
     FirebaseStorage.instanceFor();
-
 
   FirebaseAuth get auth =>
     FirebaseAuth.instance;
 
-
   FirebaseCrashlytics get crashlytics =>
     FirebaseCrashlytics.instance;
-
 
   FirebaseAnalytics get analytics =>
     FirebaseAnalytics.instance;

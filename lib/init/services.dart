@@ -1,6 +1,7 @@
 import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/util/launch_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A container for all services used in the app.
@@ -21,6 +22,7 @@ class Services {
   final CacheManagerService cacheManagerService;
   final WakelockService wakelockService;
   final FunctionsService functionsService;
+  final UrlLauncher urlLauncher;
 
   Services({
     required this.analyticsService,
@@ -36,6 +38,7 @@ class Services {
     required this.idGeneratorService,
     required this.wakelockService,
     required this.functionsService,
+    required this.urlLauncher,
   });
 
 }
@@ -110,6 +113,7 @@ class ServicesBuilder {
       timerSettingsSharedPrefsService: _timerSettingsSharedPrefsService,
       shaderService: _shaderService,
       functionsService: _functionsService,
+      urlLauncher: const UrlLauncher(),
     );
   }
 

@@ -80,9 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   hasScrollBody: false,
                   child: AppErrorDisplay(
                     onButtonTap: () {
-                      BlocProvider.of<AuthBloc>(context).add(
-                        AuthEvent.signOut(),
-                      );
+                      context.read<AuthCubit>().signOut();
                       const HomeRoute().go(context);
                       context.read<ProfileCubit>().clearData();
                     },

@@ -1,18 +1,16 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/init/all.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 extension AppContext on BuildContext {
 
   void hapticsTap() =>
-    services.hapticsService.tap();
+    HapticFeedback.lightImpact();
 
-  void logEvent({
-    required String name,
-    Map<String, Object>? parameters,
-  }) => services.analyticsService.logEvent(
+  void logEvent({required String name, Map<String, Object>? parameters, }) =>
+    services.analyticsService.logEvent(
       name: name,
       parameters: parameters
     );
@@ -32,11 +30,6 @@ extension AppContext on BuildContext {
 
   InitResult get initResult =>
     read<InitResult>();
-
-  bool get isSignedIn {
-    AuthBloc authBloc = read<AuthBloc>();
-    return (authBloc.state is AuthStateSignedIn);
-  }
 
   AppLocalizations get localizations =>
     AppLocalizations.of(this);

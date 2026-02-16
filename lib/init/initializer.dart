@@ -96,4 +96,67 @@ class Initializer with LoggerMixin {
     );
   }
 
+  // Future<InitResult> testInit() async {
+  //   logger.t('Starting test initialization process');
+  //
+  //   // Create data providers shared between builders
+  //   logger.t('Create data providers');
+  //   FirebaseProfileDataProvider profileDataProvider =
+  //     FirebaseProfileDataProvider(FirebaseProvider.test().firestore);
+  //   FirebaseStorageDataProvider storageDataProvider =
+  //     FirebaseStorageDataProvider(FirebaseProvider.test().storage);
+  //
+  //   // Build repositories
+  //   logger.t('Create repositories');
+  //   final repoBuilder = RepositoriesBuilder(
+  //     firebaseProvider: FirebaseProvider.test(),
+  //     profileDataProvider: profileDataProvider,
+  //     storageDataProvider: storageDataProvider,
+  //   );
+  //
+  //
+  //
+  //   final repos = repoBuilder
+  //     .presenceRepository(StubbedPresenceRepository())
+  //     .statisticsRepository(StubbedStatisticsRepository())
+  //     .build();
+  //
+  //   // Build services
+  //   logger.t('Create services');
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   await FirebaseRemoteSettingsService.configureDefaults(FirebaseProvider.test().remoteConfig);
+  //
+  //   final services = ServicesBuilder(
+  //     firebaseProvider: FirebaseProvider.test(),
+  //     storageDataProvider: storageDataProvider,
+  //     sharedPreferences: sharedPreferences,
+  //   ).build();
+  //
+  //   logger.t('Fetch remote settings');
+  //   final remoteSettings = await services
+  //     .remoteSettingsService
+  //     .fetchRemoteSettings();
+  //
+  //   logger.t('Parsing timer settings from shared prefs');
+  //   TimerSettings timerSettings = services
+  //     .timerSettingsSharedPrefsService
+  //     .getTimerSettings();
+  //
+  //   return InitResult(
+  //     user: null,
+  //     timerSettings: timerSettings,
+  //     services: services,
+  //     repositories: repos,
+  //     profileCubit: ProfileCubit(
+  //       profileRepository: repos.profileRepository,
+  //       settingsRepository: repos.settingsRepository,
+  //       statisticsRepository: repos.statisticsRepository,
+  //       idGeneratorService: services.idGeneratorService,
+  //       crashlyticsService: services.crashlyticsService,
+  //       profileStatsUpdater: ProfileStatsReportUpdater(),
+  //     ),
+  //     remoteSettings: remoteSettings,
+  //   );
+  // }
+
 }

@@ -17,45 +17,43 @@ class SignoutDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
-  final profileCubit = BlocProvider.of<ProfileCubit>(context);
-  return AlertDialog(
-    title: Text(AppLocalizations.of(context).profileSignoutTitle),
-    content: Text(AppLocalizations.of(context).profileSignoutQuestion),
-    backgroundColor: AppColors.backgroundPaperLight,
-    actions: [
-      DialogButton.secondary(
-        text: AppLocalizations.of(context).profileSignoutCancel,
-        onPressed: () {
-          context.pop();
-          context.hapticsTap();
-        },
-      ),
-      DialogButton.primary(
-        text: AppLocalizations.of(context).profileSignoutYes,
-        onPressed: () {
-          // close are you sure dialog
-          context.pop();
+    return AlertDialog(
+      title: Text(AppLocalizations.of(context).profileSignoutTitle),
+      content: Text(AppLocalizations.of(context).profileSignoutQuestion),
+      backgroundColor: AppColors.backgroundPaperLight,
+      actions: [
+        DialogButton.secondary(
+          text: AppLocalizations.of(context).profileSignoutCancel,
+          onPressed: () {
+            context.pop();
+            context.hapticsTap();
+          },
+        ),
+        DialogButton.primary(
+          text: AppLocalizations.of(context).profileSignoutYes,
+          onPressed: () {
+            // close are you sure dialog
+            context.pop();
 
-          // do the signout
-          authBloc.add(const SignOut());
+            // do the signout
+            context.read<AuthCubit>().signOut();
 
-          context.hapticsTap();
-          context.logEvent(name: 'profile_signout_pressed');
+            context.hapticsTap();
+            context.logEvent(name: 'profile_signout_pressed');
 
-          Future.delayed(Durations.medium1, () {
-            if (context.mounted) {
-              context.showSuccessfulToast(
-                AppLocalizations.of(context).signOutSuccessfulMessage
-              );
-            }
-          });
+            Future.delayed(Durations.medium1, () {
+              if (context.mounted) {
+                context.showSuccessfulToast(
+                  AppLocalizations.of(context).signOutSuccessfulMessage
+                );
+              }
+            });
 
-          const HomeRoute().go(context);
-          profileCubit.clearData();
-        },
-      ),
-    ],
-  );
+            const HomeRoute().go(context);
+            context.read<ProfileCubit>().clearData();
+          },
+        ),
+      ],
+    );
   }
 }

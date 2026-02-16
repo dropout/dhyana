@@ -46,20 +46,16 @@ class DeleteProfileScreenContent extends StatelessWidget {
   const DeleteProfileScreenContent({super.key});
 
   void _signInWithGoogle(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(
-      AuthEvent.signinWithGoogle(
-        onComplete: (user, _) => _onSigninCompleted(context, user)
-      )
+    context.read<AuthCubit>().signInWithGoogle(
+      onComplete: (user, _) => _onSigninCompleted(context, user)
     );
     context.services.analyticsService
       .logEvent(name: 'login_with_google_button_pressed');
   }
 
   void _signInWithApple(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(
-      AuthEvent.signinWithApple(
-        onComplete: (user, _) => _onSigninCompleted(context, user)
-      )
+    context.read<AuthCubit>().signInWithApple(
+      onComplete: (user, _) => _onSigninCompleted(context, user)
     );
     context.services.analyticsService
       .logEvent(name: 'login_with_apple_button_pressed');
@@ -71,7 +67,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, authState) {
         return BlocBuilder<DeleteUserCubit, DeleteUserState>(
           builder: (context, deleteProfileState) {
@@ -195,7 +191,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
               child: Center(
                 child: AppButton(
                   onTap: () {
-                    BlocProvider.of<AuthBloc>(context).add(AuthEvent.signOut());
+                    context.read<AuthCubit>().signOut();
                     HomeRoute().go(context);
                   },
                   text: AppLocalizations.of(context).deleteProfileScreenOkayButtonText.toUpperCase(),

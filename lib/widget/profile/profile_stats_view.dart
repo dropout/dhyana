@@ -5,6 +5,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/profile/stats/stats_data_area_sliver.dart';
 import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -52,20 +53,22 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
             case ProfileLoadingState():
               return buildScaffolding(
                 context,
-                [],
                 buildProfileLoadingContent(context),
               );
             case ProfileErrorState():
               return buildScaffolding(
                 context,
-                [],
                 buildProfileErrorContent(context),
               );
             case ProfileLoadedState():
               return buildScaffolding(
                 context,
-                [buildStatsDataArea(context, state.profile)],
-                buildProfileLoadedContent(context, state.profile),
+                [
+                  buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+                  StatsDataAreaSliver(profile: state.profile),
+                  ...buildBarchartSlivers(context, state.profile),
+                ],
+
               );
             default:
               return const SizedBox.shrink();
@@ -92,7 +95,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     ];
   }
 
-  List<Widget> buildProfileLoadedContent(BuildContext context, Profile profile) {
+  List<Widget> buildBarchartSlivers(BuildContext context, Profile profile) {
     return [
       PinnedHeaderSliver(
         child: buildTabBar(context),
@@ -105,8 +108,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   Widget buildScaffolding(
     BuildContext context,
-    List<Widget> statsAreaSlivers,
-    List<Widget> chartAreaSlivers,
+    List<Widget> slivers,
   ) {
     return CustomScrollView(
       key: const Key('profile_stats_custom_scroll_view'),
@@ -116,36 +118,10 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
         // Appearing-disappearing title effect when scrolling down
         buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
 
-        // Stats data area
-        ...statsAreaSlivers,
-
-        // Bar chart area
-        ...chartAreaSlivers,
+        // Content slivers
+        ...slivers
 
       ],
-    );
-  }
-
-  Widget buildStatsDataArea(BuildContext context, Profile profile) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(DesignSpec.spacingMd),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            buildTitleEffectTitle(context, AppLocalizations.of(context).profileStats),
-            Gap.medium(),
-            DetailedProfileView(profile: profile),
-            Gap.medium(),
-            DetailedConsecutiveDaysView(profile: profile),
-            Gap.medium(),
-            DetailedMilestonesView(profile: profile),
-            Gap.medium(),
-            DetailedSummaryView(profile: profile),
-          ],
-        ),
-      ),
     );
   }
 

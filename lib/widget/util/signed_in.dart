@@ -15,7 +15,7 @@ class SignedIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         switch (state) {
           case AuthStateSignedIn():

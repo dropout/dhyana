@@ -22,7 +22,7 @@ import '../mock_go_router_provider.dart';
 
 void main() {
 
-  late MockAuthBloc mockAuthBloc;
+  late MockAuthCubit mockAuthBloc;
   late MockProfileCubit mockProfileCubit;
   late MockGoRouter mockGoRouter;
 
@@ -33,7 +33,7 @@ void main() {
 
   setUpAll(() async {
 
-    mockAuthBloc = MockAuthBloc();
+    mockAuthBloc = MockAuthCubit();
     mockProfileCubit = MockProfileCubit();
     mockGoRouter = MockGoRouter();
     mockServices = MockServices();
@@ -73,7 +73,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>(create: (context) => mockServices),
-                BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
               ],
               child: MockGoRouterProvider(
                 mockGoRouter: mockGoRouter,
@@ -118,7 +118,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>(create: (context) => mockServices),
-                BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                 BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: MockGoRouterProvider(
@@ -153,7 +153,7 @@ void main() {
             MultiProvider(
               providers: [
                 Provider<Services>(create: (context) => mockServices),
-                BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                 BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: MockGoRouterProvider(
@@ -204,7 +204,7 @@ void main() {
               MultiProvider(
                 providers: [
                   Provider<Services>(create: (context) => mockServices),
-                  BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                  BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                   BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
                 ],
                 child: ProfileButton(),
@@ -263,7 +263,7 @@ void main() {
               MultiProvider(
                 providers: [
                   Provider<Services>(create: (context) => mockServices),
-                  BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                  BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                   BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
                 ],
                 child: ProfileButton(),

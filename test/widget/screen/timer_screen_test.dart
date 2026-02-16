@@ -21,7 +21,7 @@ import '../../mock_definitions.dart';
 void main() {
 
   group('TimerScreen', () {
-    late MockAuthBloc mockAuthBloc;
+    late MockAuthCubit mockAuthBloc;
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
@@ -45,7 +45,7 @@ void main() {
     setUp(() async {
 
       // BLoCs
-      mockAuthBloc = MockAuthBloc();
+      mockAuthBloc = MockAuthCubit();
       mockProfileCubit = MockProfileCubit();
 
       // Services
@@ -106,7 +106,7 @@ void main() {
             ],
             child: MultiBlocProvider(
               providers: [
-                BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                 BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: withAllContextProviders(
@@ -167,7 +167,7 @@ void main() {
             ],
             child: MultiBlocProvider(
               providers: [
-                BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                 BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: withAllContextProviders(
@@ -217,7 +217,7 @@ void main() {
             ],
             child: MultiBlocProvider(
               providers: [
-                BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
                 BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: withAllContextProviders(

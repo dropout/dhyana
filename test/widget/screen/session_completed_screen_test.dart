@@ -21,7 +21,7 @@ void main() {
   group('SessionCompletedScreen', () {
 
     late MockProfileCubit profileCubit;
-    late MockAuthBloc mockAuthBloc;
+    late MockAuthCubit mockAuthBloc;
 
     late MockServices mockServices;
     late MockRepositories mockRepositories;
@@ -35,7 +35,7 @@ void main() {
 
     setUp(() async {
       profileCubit = MockProfileCubit();
-      mockAuthBloc = MockAuthBloc();
+      mockAuthBloc = MockAuthCubit();
 
       mockServices = MockServices();
       mockRepositories = MockRepositories();
@@ -86,7 +86,7 @@ void main() {
           withAllContextProviders(
             MultiProvider(
               providers: [
-                BlocProvider<AuthBloc>.value(
+                BlocProvider<AuthCubit>.value(
                   value: mockAuthBloc,
                 ),
                 BlocProvider<ProfileCubit>.value(
@@ -126,7 +126,7 @@ void main() {
           withAllContextProviders(
             MultiProvider(
               providers: [
-                BlocProvider<AuthBloc>.value(
+                BlocProvider<AuthCubit>.value(
                   value: mockAuthBloc,
                 ),
                 BlocProvider<ProfileCubit>.value(
@@ -166,7 +166,7 @@ void main() {
           withAllContextProviders(
             MultiProvider(
               providers: [
-                BlocProvider<AuthBloc>.value(
+                BlocProvider<AuthCubit>.value(
                   value: mockAuthBloc,
                 ),
                 BlocProvider<ProfileCubit>.value(
@@ -222,7 +222,7 @@ void main() {
               return withAllContextProviders(
                 MultiProvider(
                   providers: [
-                    BlocProvider<AuthBloc>.value(
+                    BlocProvider<AuthCubit>.value(
                       value: mockAuthBloc,
                     ),
                     BlocProvider<ProfileCubit>.value(

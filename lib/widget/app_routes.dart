@@ -153,8 +153,8 @@ class DonateRoute extends GoRouteData
 mixin AuthRedirectHook {
   String? authRedirectHook(BuildContext context, GoRouterState state) {
     final LoginRoute loginRoute = const LoginRoute();
-    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
-    final bool isAuthenticated = (authBloc.state is AuthStateSignedIn);
+    final AuthCubit authCubit = context.read<AuthCubit>();
+    final bool isAuthenticated = (authCubit.state is AuthStateSignedIn);
     final bool isLoginScreenShown = state.matchedLocation == loginRoute.location;
     if (!isAuthenticated && !isLoginScreenShown) {
       return loginRoute.location;

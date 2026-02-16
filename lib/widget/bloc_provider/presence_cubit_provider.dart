@@ -21,7 +21,8 @@ class PresenceCubitProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     Services services = context.services;
     Repositories repos = context.repos;
-    return BlocBuilder<AuthBloc, AuthState>(
+
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (BuildContext context, AuthState authState) {
         final presenceCubit = PresenceCubit(
           presenceRepository: repos.presenceRepository,

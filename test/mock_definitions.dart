@@ -13,9 +13,9 @@ class MockGoRouter extends Mock implements GoRouter {}
 
 // BLoCs & Cubits --------------------------------------------------------------
 
-class MockAuthBloc
-  extends MockBloc<AuthEvent, AuthState>
-  implements AuthBloc {}
+class MockAuthCubit
+  extends MockCubit<AuthState>
+  implements AuthCubit {}
 
 class MockProfileCubit
   extends MockCubit<ProfileState>

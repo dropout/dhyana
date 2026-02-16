@@ -21,7 +21,7 @@ class TimerBlocProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     final services = context.services;
     final repos = context.repos;
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (BuildContext context, AuthState authState) {
         final bool isSignedIn = (authState is AuthStateSignedIn);
         final String? profileId = (isSignedIn) ? authState.user.uid : null;

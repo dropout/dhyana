@@ -29,8 +29,8 @@ class AppProviders extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (_) => AuthBloc(
+          BlocProvider<AuthCubit>(
+            create: (_) => AuthCubit(
               initialAuthState: (initResult.user != null) ? AuthState.signedIn(user: initResult.user!) : const AuthState.initial(),
               authenticationRepository: initResult.repositories.authRepository,
               analyticsService: initResult.services.analyticsService,

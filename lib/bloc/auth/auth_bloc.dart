@@ -8,20 +8,19 @@ import 'package:dhyana/service/analytics_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
-part 'auth_event.dart';
 part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
+class AuthCubit extends Cubit<AuthState> with LoggerMixin {
 
   final AuthRepository _authRepository;
   final AnalyticsService _analyticsService;
   final CrashlyticsService _crashlyticsService;
 
-  late StreamSubscription _authStateChangeSub;
-  late StreamSubscription _userChangeSub;
+  late StreamSubscription<User?> _authStateChangeSub;
+  late StreamSubscription<User?> _userChangeSub;
 
-  AuthBloc({
+  AuthCubit({
     required AuthRepository authenticationRepository,
     required AnalyticsService analyticsService,
     required CrashlyticsService crashlyticsService,
@@ -32,44 +31,32 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
     _crashlyticsService = crashlyticsService,
   super(initialAuthState) {
 
-    // Handling auth state change stream
-    _authStateChangeSub = _authRepository.authStateChange
-      .listen((User? user) {
-        add(AuthEvent.receiveAuthStateChange(user: user));
-      });
-    _authStateChangeSub.onError((error, stackTrace) {
-      _crashlyticsService.recordError(
-        exception: error,
-        stackTrace: stackTrace,
-        reason: 'Error occured when receiving event from _auth_ state change stream'
-      );
-    });
+    _authStateChangeSub = _authRepository.authStateChange.listen(
+      _handleAuthStateChange,
+      onError: (error, stackTrace) {
+        _crashlyticsService.recordError(
+          exception: error,
+          stackTrace: stackTrace,
+          reason: 'Error occured when receiving event from _auth_ state change stream'
+        );
+      },
+    );
 
-    // Handling user change stream
-    _userChangeSub = _authRepository.userChange
-      .listen((User? user) {
-        add(AuthEvent.receiveUserChange(user: user));
-      });
-
-    _userChangeSub.onError((error, stackTrace) {
-      _crashlyticsService.recordError(
-        exception: error,
-        stackTrace: stackTrace,
-        reason: 'Error occured when receiving event from _user_ state change stream'
-      );
-    });
-
-    on<InitializeAuth>(_onInitializeAuth);
-    on<SigninWithGoogle>(_onSigninWithGoogle);
-    on<SigninWithApple>(_onSigninWithApple);
-    on<SigninWithEmailAndPassword>(_onSigninWithEmailAndPassword);
-    on<ReceiveAuthStateChange>(_onAuthStateChange);
-    on<ReceiveUserChange>(_onUserChange);
-    on<SignOut>(_onSignout);
-    on<DismissSigninError>(_onDismissSigninError);
+    _userChangeSub = _authRepository.userChange.listen(
+      _handleUserChange,
+      onError: (error, stackTrace) {
+        _crashlyticsService.recordError(
+          exception: error,
+          stackTrace: stackTrace,
+          reason: 'Error occured when receiving event from _user_ state change stream'
+        );
+      },
+    );
   }
 
-  void _onInitializeAuth(InitializeAuth event, emit) async {
+  Future<void> initializeAuth() async {
+    if (isClosed) { return; }
+
     User? user = await _authRepository.authStateChange.first;
     if (user != null) {
       emit(AuthState.signedIn(user: user));
@@ -78,14 +65,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
     }
   }
 
-  void _onSigninWithGoogle(SigninWithGoogle event, emit) async {
+  Future<void> signInWithGoogle({
+    void Function(User user, bool isFirstSignin)? onComplete,
+    void Function(Object? error, StackTrace stackTrace)? onError,
+  }) async {
     try {
       logger.t('Signing in with Google');
       emit(const AuthState.signingIn());
       var (user, isFirstSignin) = await _authRepository
         .signIn(SigninMethodType.google);
       emit(AuthState.signedIn(user: user));
-      event.onComplete?.call(user, isFirstSignin);
+      onComplete?.call(user, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Google');
     } on SignInCancelled {
@@ -98,18 +88,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
         reason: 'Unable to sign in with Google'
       );
       emit(const AuthState.error());
-      event.onError?.call(e, stack);
+      onError?.call(e, stack);
     }
   }
 
-  void _onSigninWithApple(SigninWithApple event, emit) async {
+  Future<void> signInWithApple({
+    void Function(User user, bool isFirstSignin)? onComplete,
+    void Function(Object? error, StackTrace stackTrace)? onError,
+  }) async {
     try {
       logger.t('Signing in with Apple');
       emit(const AuthState.signingIn());
       var (user, isFirstSignin) = await _authRepository
         .signIn(SigninMethodType.apple);
       emit(AuthState.signedIn(user: user));
-      event.onComplete?.call(user, isFirstSignin);
+      onComplete?.call(user, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Apple');
     } on SignInCancelled {
@@ -122,24 +115,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
         reason: 'Unable to sign in with Apple'
       );
       emit(const AuthState.error());
-      event.onError?.call(e, stack);
+      onError?.call(e, stack);
     }
 
   }
 
-  void _onSigninWithEmailAndPassword(
-    SigninWithEmailAndPassword event, emit
-  ) async {
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+    void Function(User user, bool isFirstSignin)? onComplete,
+    void Function(Object? error, StackTrace stackTrace)? onError,
+  }) async {
     try {
       logger.t('Signing in with Email and Password...');
       emit(const AuthState.signingIn());
       var (user, isFirstSignin) = await _authRepository.signIn(
         SigninMethodType.emailAndPassword,
-        email: event.email,
-        password: event.password,
+        email: email,
+        password: password,
       );
       emit(AuthState.signedIn(user: user));
-      event.onComplete?.call(user, isFirstSignin);
+      onComplete?.call(user, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Email and Password');
     } on SignInCancelled {
@@ -152,41 +148,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
         reason: 'Unable to sign in with Email and Password'
       );
       emit(const AuthState.error());
-      event.onError?.call(e, stack);
+      onError?.call(e, stack);
     }
   }
 
-  void _onAuthStateChange(ReceiveAuthStateChange event, emit) async {
-    User? user = event.user;
-    if (user != null) {
-      logger.t('AuthState change received, user signed in...');
-      emit(AuthState.signedIn(user: user));
-    } else {
-      logger.t('AuthState change received, user signed out...');
-      emit(const AuthState.signedOut());
-    }
-  }
-
-  // TODO: Update relevant profile data when changed
-  void _onUserChange(ReceiveUserChange event, emit) async {
-    User? user = event.user;
-
-    if (user == null) {
-      logger.t('User change received signed out...');
-      emit(const AuthState.signedOut());
-    } else {
-      logger.t('User change received signed in...');
-      emit(AuthState.signedIn(user: user));
-    }
-  }
-
-  void _onSignout(SignOut event, emit) async {
+  Future<void> signOut({
+    Function()? onSignedOut,
+  }) async {
     try {
       logger.t('Signing out...');
       await _authRepository.signOut();
-      _authStateChangeSub.cancel();
-      _userChangeSub.cancel();
-      event.onSignedOut?.call();
+      await _authStateChangeSub.cancel();
+      await _userChangeSub.cancel();
+      onSignedOut?.call();
       emit(const AuthState.signedOut());
       logger.t('Successfully signed out');
       _logAnalyticsSuccessfulSignout();
@@ -199,14 +173,41 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with LoggerMixin {
     }
   }
 
-  void _onDismissSigninError(DismissSigninError event, emit) {
+  void dismissSigninError() {
     emit(const AuthState.signedOut());
+  }
+
+  void _handleAuthStateChange(User? user) {
+    if (isClosed) {
+      return;
+    }
+    if (user != null) {
+      logger.t('AuthState change received, user signed in...');
+      emit(AuthState.signedIn(user: user));
+    } else {
+      logger.t('AuthState change received, user signed out...');
+      emit(const AuthState.signedOut());
+    }
+  }
+
+  // TODO: Update relevant profile data when changed
+  void _handleUserChange(User? user) {
+    if (isClosed) {
+      return;
+    }
+    if (user == null) {
+      logger.t('User change received signed out...');
+      emit(const AuthState.signedOut());
+    } else {
+      logger.t('User change received signed in...');
+      emit(AuthState.signedIn(user: user));
+    }
   }
 
   @override
   Future<void> close() async {
-    _authStateChangeSub.cancel();
-    _userChangeSub.cancel();
+    await _authStateChangeSub.cancel();
+    await _userChangeSub.cancel();
     return super.close();
   }
 
