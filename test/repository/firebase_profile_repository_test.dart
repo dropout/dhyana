@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/profile_data_provider.dart';
+import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_query_options.dart';
 import 'package:dhyana/repository/firebase/all.dart';

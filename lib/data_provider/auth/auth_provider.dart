@@ -1,5 +1,7 @@
 import 'package:dhyana/data_provider/auth/enum/signin_method_type.dart';
-import 'package:dhyana/data_provider/auth/model/all.dart';
+
+import 'model/signin_result.dart';
+import 'model/user.dart';
 
 abstract interface class AuthProvider {
 

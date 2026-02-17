@@ -1,5 +1,7 @@
 export 'app_settings.dart';
 export 'calculated_stats.dart';
+export 'chant.dart';
+export 'chanting_settings.dart';
 export 'consecutive_days.dart';
 export 'city_search_result.dart';
 export 'day.dart';

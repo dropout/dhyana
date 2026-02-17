@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/init/init_result.dart';
-import 'package:dhyana/transition/linear_gradient_mask_transition.dart';
+import 'package:dhyana/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:dhyana/widget/screen/all.dart';
@@ -72,6 +72,18 @@ class TimerRoute extends GoRouteData with $TimerRoute {
       },
     );
   }
+}
+
+@TypedGoRoute<ChantingRoute>(
+  path: '/chanting',
+  name: 'CHANTING',
+)
+class ChantingRoute extends GoRouteData with $ChantingRoute {
+  final ChantingSettings $extra;
+  const ChantingRoute({required this.$extra});
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+    ChantingScreen(chantingSettings: $extra);
 }
 
 @TypedGoRoute<SessionCompletedRoute>(

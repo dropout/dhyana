@@ -32,6 +32,8 @@
   "inputEndingSoundLabel": "Ending sound",
 
   "startTimerButtonText": "Start",
+  "sessionModeTimerLabel": "Timer",
+  "sessionModeChantingLabel": "Chanting",
 
   "noSound": "No sound",
   "inputSoundChukpi": "Chukpi",

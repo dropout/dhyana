@@ -94,6 +94,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get startTimerButtonText => 'Start';
 
   @override
+  String get sessionModeTimerLabel => 'Időzítő';
+
+  @override
+  String get sessionModeChantingLabel => 'Kántálás';
+
+  @override
   String get noSound => 'Nincs hang';
 
   @override

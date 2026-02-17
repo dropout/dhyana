@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/profile_data_provider.dart';
+import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/crud_repository_operations.dart';
 import 'package:dhyana/repository/profile_repository.dart';

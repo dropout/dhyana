@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
+import 'package:dhyana/data_provider/auth/model/signin_result.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:dhyana/data_provider/auth/exception.dart';
-import 'package:dhyana/data_provider/auth/model/all.dart';
 import 'package:dhyana/data_provider/auth/util/convert_user.dart';
 
 import 'auth_template.dart';

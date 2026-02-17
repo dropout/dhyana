@@ -1,4 +1,5 @@
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/data_provider/auth/model/user_meta_data.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:faker/faker.dart';
 import 'package:dhyana/model/all.dart';

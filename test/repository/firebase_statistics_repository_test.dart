@@ -1,7 +1,12 @@
+import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
+import 'package:dhyana/data_provider/firebase/firebase_day_data_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_month_data_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_session_data_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_week_data_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_year_data_provider.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:dhyana/data_provider/firebase/all.dart';
 import 'package:dhyana/repository/firebase/firebase_statistics_repository.dart';
 import 'package:dhyana/model/all.dart';
 

@@ -32,6 +32,8 @@
   "inputEndingSoundLabel": "Végehang",
 
   "startTimerButtonText": "Start",
+  "sessionModeTimerLabel": "Időzítő",
+  "sessionModeChantingLabel": "Kántálás",
 
   "noSound": "Nincs hang",
   "inputSoundChukpi": "Chukpi",

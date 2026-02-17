@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:dhyana/data_provider/auth/model/all.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/data_provider/auth/model/signin_result.dart';
 
 bool isFirstSignin(SigninResult signinResult) {
   firebase_auth.AdditionalUserInfo? additionalUserInfo =

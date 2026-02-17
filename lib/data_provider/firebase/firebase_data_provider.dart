@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/data_provider.dart';
+import 'package:dhyana/data_provider/data_provider_exception.dart';
 import 'package:dhyana/model/model.dart';
+
+import 'firebase_model_extension.dart';
 
 /// A generic Firebase Firestore data provider for CRUD operations.
 /// M extends Model to ensure the model has an 'id' field and can be converted

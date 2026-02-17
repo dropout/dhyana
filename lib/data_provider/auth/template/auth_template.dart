@@ -1,6 +1,6 @@
+import 'package:dhyana/data_provider/auth/model/signin_result.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:dhyana/data_provider/auth/enum/signin_method_type.dart';
-import 'package:dhyana/data_provider/auth/model/all.dart';
 
 import 'apple_auth_template.dart';
 import 'google_auth_template.dart';

@@ -1,5 +1,6 @@
-import 'package:dhyana/data_provider/all.dart';
 import 'package:dhyana/model/all.dart';
+
+import 'data_provider.dart';
 
 abstract interface class DayDataProvider implements DataProvider<Day> {
 

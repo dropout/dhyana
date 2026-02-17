@@ -1,4 +1,5 @@
 import 'package:dhyana/data_provider/auth/firebase_auth_provider.dart';
+import 'package:dhyana/data_provider/firebase/firebase_chants_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
 import 'package:dhyana/data_provider/firebase/firebase_presence_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_settings_data_provider.dart';
@@ -13,6 +14,7 @@ import 'package:dhyana/util/firebase_provider.dart';
 class Repositories {
 
   final AuthRepository authRepository;
+  final ChantsRepository chantsRepository;
   final ProfileRepository profileRepository;
   final PresenceRepository presenceRepository;
   final StatisticsRepository statisticsRepository;
@@ -21,6 +23,7 @@ class Repositories {
 
   const Repositories({
     required this.authRepository,
+    required this.chantsRepository,
     required this.profileRepository,
     required this.presenceRepository,
     required this.statisticsRepository,
@@ -36,6 +39,7 @@ class Repositories {
 class RepositoriesBuilder {
 
   late AuthRepository _authRepository;
+  late ChantsRepository _chantsRepository;
   late ProfileRepository _profileRepository;
   late PresenceRepository _presenceRepository;
   late StatisticsRepository _statisticsRepository;
@@ -52,6 +56,12 @@ class RepositoriesBuilder {
     _authRepository = FirebaseAuthRepository(
       authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
       profileDataProvider: profileDataProvider,
+    );
+
+    _chantsRepository = FirebaseChantsRepository(
+      chantsDataProvider: FirebaseChantsDataProvider(
+        firebaseProvider.firestore
+      ),
     );
 
     _profileRepository = FirebaseProfileRepository(
@@ -89,6 +99,11 @@ class RepositoriesBuilder {
     return this;
   }
 
+  RepositoriesBuilder chantsRepository(ChantsRepository repo) {
+    _chantsRepository = repo;
+    return this;
+  }
+
   RepositoriesBuilder profileRepository(ProfileRepository repo) {
     _profileRepository = repo;
     return this;
@@ -120,6 +135,7 @@ class RepositoriesBuilder {
   Repositories build() {
     return Repositories(
       authRepository: _authRepository,
+      chantsRepository: _chantsRepository,
       presenceRepository: _presenceRepository,
       profileRepository: _profileRepository,
       statisticsRepository: _statisticsRepository,

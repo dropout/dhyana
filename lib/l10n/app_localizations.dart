@@ -266,6 +266,18 @@ abstract class AppLocalizations {
   /// **'Start'**
   String get startTimerButtonText;
 
+  /// No description provided for @sessionModeTimerLabel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Időzítő'**
+  String get sessionModeTimerLabel;
+
+  /// No description provided for @sessionModeChantingLabel.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kántálás'**
+  String get sessionModeChantingLabel;
+
   /// No description provided for @noSound.
   ///
   /// In hu, this message translates to:

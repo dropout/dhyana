@@ -1,4 +1,4 @@
-import 'package:dhyana/data_provider/all.dart';
+import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';

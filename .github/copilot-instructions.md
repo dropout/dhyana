@@ -9,7 +9,7 @@ Dhyana is a Flutter meditation timer app written in Dart, using clean architectu
 - **Presentation**: Flutter widgets + state management (Bloc/Cubit).
 - **Domain**: Models and repository interfaces.
 - **Data**: Repository implementations and data providers.
-- **Infrastructure**: Services (Audio, Notifications, Analytics) and Firebase Functions.
+- **Infrastructure**: External Services (Audio, Notifications, Analytics) and Firebase Functions.
 
 ### Architectural Rules
 - Follow layered flow: `Widget -> Cubit/Bloc -> Repository -> Data Provider` with state flowing back to UI.
@@ -55,10 +55,11 @@ Dhyana is a Flutter meditation timer app written in Dart, using clean architectu
 - Keep widgets focused on presentation; avoid business logic in widgets.
 - Use composition over inheritance; prefer small reusable widgets.
 - Use `const` constructors and widgets where possible for performance.
+- Use the `lib/widget/util/app_context.dart` BuildContext extensions for accessing Repositories(`context.repos.profileRepository`), Services (`context.services.audioService`), and Localizations (`context.localizations`).
 
 ### Cubit/Bloc Conventions
 - Name Cubits with `Cubit` suffix (e.g., `TimerSettingsCubit`).
-- Define states as immutable classes, preferably with `freezed`.
+- Define states as immutable classes, preferably with `freezed` in their own files (e.g., `TimerSettingsState` in `timer_settings_state.dart`).
 - Emit new states on changes; avoid mutating existing state. Use `copyWith` for updates.
 - Keep Cubits focused on a single feature or screen; avoid god Cubits.
 - Avoid creating Cubits for a single state change; prefer direct state management in the widget for simple cases.
@@ -74,6 +75,7 @@ Dhyana is a Flutter meditation timer app written in Dart, using clean architectu
 - Extend `CrudRepository` or similar base interfaces for common operations when applicable; avoid duplicating CRUD methods across repositories.
 - When implementing a Firebase data provider, extend a base `FirebaseDataProvider` that handles common Firebase interactions; avoid duplicating Firebase logic across providers.
 - Use `freezed` for data models returned by repositories; avoid mutable models or those without value equality.
+- Always include new repositories and data providers in the DI setup; avoid manual instantiation in Cubits/Blocs.
 
 ### Service Conventions
 - Define service interfaces in the `service/` folder; implementations can be in `service/default/` or `service/firebase/`.

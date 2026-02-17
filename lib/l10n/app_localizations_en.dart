@@ -93,6 +93,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get startTimerButtonText => 'Start';
 
   @override
+  String get sessionModeTimerLabel => 'Timer';
+
+  @override
+  String get sessionModeChantingLabel => 'Chanting';
+
+  @override
   String get noSound => 'No sound';
 
   @override
