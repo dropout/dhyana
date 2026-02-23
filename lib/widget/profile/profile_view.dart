@@ -3,10 +3,13 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/session/completed/milestone_progress_view.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
+
+import 'stats/consecutive_days_view.dart';
+import 'stats/milestones_view.dart';
+import 'stats/summary_view.dart';
 
 class ProfileView extends StatelessWidget {
 

@@ -21,28 +21,28 @@ class SummaryView extends StatelessWidget {
     int daysCount = (profile != null) ?  profile!.statsReport.completedDaysCount : 0;
 
     return AppCard(
-      title: context.localizations.statsSummary,
+      title: context.l10n.statsSummary,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: SummaryItem(
               sessionCount,
-              context.localizations.sessionsPlural(sessionCount)
+              context.l10n.sessionsPlural(sessionCount)
             )
           ),
           const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: SummaryItem(
               minutesCount,
-              context.localizations.minutesPlural(minutesCount),
+              context.l10n.minutesPlural(minutesCount),
             )
           ),
           const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: SummaryItem(
               daysCount,
-              context.localizations.daysPlural(daysCount),
+              context.l10n.daysPlural(daysCount),
             )
           )
         ],

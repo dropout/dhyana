@@ -3,10 +3,11 @@ import 'package:dhyana/model/consecutive_days.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';
+
+import 'package:dhyana/widget/util/app_context.dart';
 
 class DetailedConsecutiveDaysView extends StatelessWidget {
 
@@ -33,19 +34,19 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
         child: Column(
           children: [
             LabelValueDetail(
-              label: context.localizations.statsCurrentStreak,
+              label: context.l10n.statsCurrentStreak,
               value: consecutiveDays.current.toString(),
             ),
             LabelValueDetail(
-              label: context.localizations.statsStartedAt,
+              label: context.l10n.statsStartedAt,
               value: getStartedAtString(context),
             ),
             LabelValueDetail(
-              label: context.localizations.statsLastCheckedAt,
+              label: context.l10n.statsLastCheckedAt,
               value: getLastCheckedTimeString(context),
             ),
             LabelValueDetail(
-              label: context.localizations.statsLongestStreak,
+              label: context.l10n.statsLongestStreak,
               value: consecutiveDays.longest.toString(),
             ),
           ],
@@ -57,7 +58,7 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
     if (consecutiveDays.current > 0 && consecutiveDays.startedAt != null) {
       return consecutiveDays.startedAt!.toFormattedDateTimeString(context);
     } else {
-      return context.localizations.notAvailableAbbr;
+      return context.l10n.notAvailableAbbr;
     }
   }
 
@@ -65,7 +66,7 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
     if (consecutiveDays.lastChecked != null) {
       return consecutiveDays.lastChecked!.toFormattedDateTimeString(context);
     } else {
-      return context.localizations.statsNotyetChecked;
+      return context.l10n.statsNotyetChecked;
     }
   }
 

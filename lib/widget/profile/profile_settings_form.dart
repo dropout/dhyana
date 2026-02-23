@@ -1,8 +1,11 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/dialog/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/dialog/delete_profile_dialog.dart';
+import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/dialog_helper.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -59,27 +62,27 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           Gap.medium(),
           ProfileSettingsSwitch(
             name: 'showTimeOnTimerSettingsScreen',
-            title: context.localizations.showTimeOnTimerSettingsScreenTitle,
-            helperText: context.localizations.showTimeOnTimerSettingsScreenDescription,
+            title: context.l10n.showTimeOnTimerSettingsScreenTitle,
+            helperText: context.l10n.showTimeOnTimerSettingsScreenDescription,
             initialValue: widget.profileSettings.showTimeOnTimerSettingsScreen,
           ),
           Gap.large(),
           ProfileSettingsSwitch(
             name: 'showStatsOnFinishScreen',
-            title: context.localizations.showStatsOnFinishScreenTitle,
-            helperText: context.localizations.showStatsOnFinishScreenDescription,
+            title: context.l10n.showStatsOnFinishScreenTitle,
+            helperText: context.l10n.showStatsOnFinishScreenDescription,
             initialValue: widget.profileSettings.showStatsOnFinishScreen,
           ),
           Gap.large(),
           ProfileSettingsSwitch(
             name: 'usePresenceFeature',
-            title: context.localizations.usePresenceFeatureTitle,
-            helperText: context.localizations.usePresenceFeatureDescription,
+            title: context.l10n.usePresenceFeatureTitle,
+            helperText: context.l10n.usePresenceFeatureDescription,
             initialValue: widget.profileSettings.usePresenceFeature,
           ),
           Gap.large(),
           AppButton.small(
-            text: context.localizations.profileDeleteTitle.toUpperCase(),
+            text: context.l10n.profileDeleteTitle.toUpperCase(),
             onTap: () => _onDeleteProfileTapped(context),
           ),
         ],

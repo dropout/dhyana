@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/running/timer_running_time.dart';
 import 'package:dhyana/widget/timer/running/timer_running_title.dart';

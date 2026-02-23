@@ -40,7 +40,7 @@ class SessionHistoryList extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
-                    context.localizations.minutesPluralWithNumber(s.duration.inMinutes),
+                    context.l10n.minutesPluralWithNumber(s.duration.inMinutes),
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

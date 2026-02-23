@@ -7,11 +7,15 @@ import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import 'bar_chart_error_page.dart';
+import 'bar_chart_info_trigger_box.dart';
+import 'calculated_stats_view.dart';
+import 'stats_bar_chart.dart';
 
 
 class DaysBarChartPage extends StatelessWidget {

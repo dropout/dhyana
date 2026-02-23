@@ -2,7 +2,6 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
 import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -21,7 +20,7 @@ class DetailedProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-        title: context.localizations.profile,
+        title: context.l10n.profile,
         padding: const EdgeInsets.only(
           bottom: DesignSpec.paddingLg,
           left: DesignSpec.paddingLg,
@@ -53,21 +52,21 @@ class DetailedProfileView extends StatelessWidget {
             ),
             Gap.medium(),
             LabelValueDetail(
-              label: context.localizations.statsSignedUp,
+              label: context.l10n.statsSignedUp,
               value: formatDateTime(
                 context,
                 profile.signupDate,
               ),
             ),
             LabelValueDetail(
-              label: context.localizations.statsFirstSession,
+              label: context.l10n.statsFirstSession,
               value: formatDateTime(
                 context,
                 profile.statsReport.firstSessionDate
               ),
             ),
             LabelValueDetail(
-              label: context.localizations.statsLastSession,
+              label: context.l10n.statsLastSession,
               value: formatDateTime(
                 context,
                 profile.statsReport.lastSessionDate
@@ -80,11 +79,9 @@ class DetailedProfileView extends StatelessWidget {
 
   String formatDateTime(BuildContext context, DateTime? dateTime) {
     if (dateTime == null) {
-      return context.localizations.notAvailableAbbr;
+      return context.l10n.notAvailableAbbr;
     }
     return dateTime.toFormattedDateTimeString(context);
   }
 
 }
-
-

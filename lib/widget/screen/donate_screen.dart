@@ -1,4 +1,5 @@
-import 'package:dhyana/widget/app_bar/all.dart';
+import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
+import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/donate/amount_selector.dart';
 import 'package:dhyana/widget/donate/custom_amount_sheet.dart';
@@ -82,7 +83,7 @@ class _DonateScreenState extends State<DonateScreen> {
               ),
               AppButton(
                 // text: 'Close'.toUpperCase(),
-                text: context.localizations.close.toUpperCase(),
+                text: context.l10n.close.toUpperCase(),
                 onTap: () => Navigator.of(context).pop(),
               ),
             ],
@@ -191,4 +192,3 @@ class _DonateScreenState extends State<DonateScreen> {
   }
 
 }
-

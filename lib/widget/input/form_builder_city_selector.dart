@@ -3,10 +3,13 @@ import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/location.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/input/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/debouncer.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+import 'decoration.dart';
 
 class FormBuilderCitySelector extends FormBuilderField<Location> {
 
@@ -30,7 +33,7 @@ class FormBuilderCitySelector extends FormBuilderField<Location> {
     builder: (FormFieldState<Location?> field) {
       return CitySelectorInput(
         label: label,
-        placeholderText: field.context.localizations.locationInputPlaceholder,
+        placeholderText: field.context.l10n.locationInputPlaceholder,
         initialLocation: field.value,
         onChanged: (location) => field.didChange(location),
       );
@@ -347,7 +350,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
   Widget buildIdle(BuildContext context) {
     if (widget.location == null) {
       return Center(
-        child: Text(context.localizations.locationInputNoSelection),
+        child: Text(context.l10n.locationInputNoSelection),
       );
     } else {
       return Center(
@@ -356,7 +359,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              context.localizations.locationInputCurrentSelection,
+              context.l10n.locationInputCurrentSelection,
               textAlign: TextAlign.center,
             ),
             Text(
@@ -415,7 +418,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         ),
         Gap.medium(),
         Text(
-          context.localizations.locationInputErrorMessage,
+          context.l10n.locationInputErrorMessage,
           textAlign: TextAlign.center,
         ),
       ]

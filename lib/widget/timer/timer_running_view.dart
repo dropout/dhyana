@@ -1,11 +1,14 @@
 import 'package:dhyana/service/wakelock_service.dart';
-import 'package:dhyana/widget/util/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/widget/timer/running/timer_running_title.dart';
+import 'package:dhyana/widget/timer/running/timer_running_time.dart';
+import 'package:dhyana/widget/timer/running/timer_running_controls.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/timer/running/all.dart';
+
 
 class TimerRunningView extends StatefulWidget {
 

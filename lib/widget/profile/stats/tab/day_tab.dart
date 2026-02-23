@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/days/days_cubit.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/profile/stats/bar_chart_page/days_bar_chart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/day.dart';

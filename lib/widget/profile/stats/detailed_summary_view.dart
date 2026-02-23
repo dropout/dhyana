@@ -18,7 +18,7 @@ class DetailedSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      title: context.localizations.statsSummary,
+      title: context.l10n.statsSummary,
       padding: const EdgeInsets.only(
         bottom: DesignSpec.paddingLg,
         left: DesignSpec.paddingLg,
@@ -27,15 +27,15 @@ class DetailedSummaryView extends StatelessWidget {
       child: Column(
         children: [
           LabelValueDetail(
-            label: context.localizations.statsTotalTimeSpent,
+            label: context.l10n.statsTotalTimeSpent,
             value: profile.statsReport.completedMinutesCount.toString(),
           ),
           LabelValueDetail(
-            label: context.localizations.statsTotalSessions,
+            label: context.l10n.statsTotalSessions,
             value: profile.statsReport.completedSessionsCount.toString(),
           ),
           LabelValueDetail(
-            label: context.localizations.statsTotalDays,
+            label: context.l10n.statsTotalDays,
             value: profile.statsReport.completedDaysCount.toString(),
           )
         ],

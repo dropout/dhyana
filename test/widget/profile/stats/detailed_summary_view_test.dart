@@ -1,6 +1,7 @@
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
+import 'package:dhyana/widget/profile/stats/detailed_summary_view.dart';
+import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_context_providers.dart';

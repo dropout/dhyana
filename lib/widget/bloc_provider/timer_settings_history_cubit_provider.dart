@@ -1,6 +1,5 @@
-import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

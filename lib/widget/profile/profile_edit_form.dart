@@ -1,7 +1,12 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/dialog/all.dart';
-import 'package:dhyana/widget/input/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/dialog/image_upload_not_safe_dialog.dart';
+import 'package:dhyana/widget/dialog/photo_access_denied_dialog.dart';
+import 'package:dhyana/widget/input/app_text_input.dart';
+import 'package:dhyana/widget/input/form_builder_city_selector.dart';
+import 'package:dhyana/widget/input/form_builder_profile_image_picker.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/dialog_helper.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -74,14 +79,14 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.localizations.profileImageLabel,
+            context.l10n.profileImageLabel,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           Gap.xs(),
           FormBuilderProfileImagePicker(
             key: const Key('profile_edit_form_image_picker'),
             name: 'imageData',
-            label: context.localizations.profileImageLabel,
+            label: context.l10n.profileImageLabel,
             profile: profile,
             onError: (errorType, error) => onProfileImagePickerError(context, errorType, error),
           ),
@@ -90,7 +95,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           Gap.medium(),
           FormBuilderCitySelector(
             name: 'location',
-            label: context.localizations.profileLocationLabel,
+            label: context.l10n.profileLocationLabel,
             key: const Key('profile_edit_form_location_input'),
             initialValue: profile.location,
             onChanged: (_) =>
@@ -108,7 +113,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       return [
         AppTextInput(
           name: 'lastName',
-          label: context.localizations.profileLastnameLabel,
+          label: context.l10n.profileLastnameLabel,
           key: const Key('profile_edit_form_last_name_input'),
           initialValue: widget.profile.lastName,
           validator: FormBuilderValidators.compose([
@@ -120,7 +125,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         Gap.medium(),
         AppTextInput(
           name: 'firstName',
-          label: context.localizations.profileFirstnameLabel,
+          label: context.l10n.profileFirstnameLabel,
           key: const Key('profile_edit_form_first_name_input'),
           initialValue: widget.profile.firstName,
           validator: FormBuilderValidators.compose([
@@ -134,7 +139,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       return [
         AppTextInput(
           name: 'firstName',
-          label: context.localizations.profileFirstnameLabel,
+          label: context.l10n.profileFirstnameLabel,
           key: const Key('profile_edit_form_first_name_input'),
           initialValue: widget.profile.firstName,
           validator: FormBuilderValidators.compose([
@@ -146,7 +151,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         Gap.medium(),
         AppTextInput(
           name: 'lastName',
-          label: context.localizations.profileLastnameLabel,
+          label: context.l10n.profileLastnameLabel,
           key: const Key('profile_edit_form_last_name_input'),
           initialValue: widget.profile.lastName,
           validator: FormBuilderValidators.compose([

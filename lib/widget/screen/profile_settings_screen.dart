@@ -4,7 +4,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_settings_form.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +63,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final screenTitle = context.localizations.profileSettings;
+    final screenTitle = context.l10n.profileSettings;
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState profileState) {
         switch (profileState) {

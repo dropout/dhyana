@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:dhyana/model/factory/all.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/model/factory/timer_settings_factory.dart';
 
 import 'crashlytics_service.dart';
 

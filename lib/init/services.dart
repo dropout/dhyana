@@ -1,6 +1,8 @@
 import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/default/shared_preferences_service_default.dart';
+import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +19,7 @@ class Services {
   final ResourceResolver resourceResolver;
   final AudioService audioService;
   final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
+  final SharedPreferencesService sharedPreferencesService;
   final ShaderService shaderService;
   final IdGeneratorService idGeneratorService;
   final OverlayService overlayService;
@@ -36,6 +39,7 @@ class Services {
     required this.overlayService,
     required this.cacheManagerService,
     required this.timerSettingsSharedPrefsService,
+    required this.sharedPreferencesService,
     required this.idGeneratorService,
     required this.wakelockService,
     required this.functionsService,
@@ -57,6 +61,7 @@ class ServicesBuilder {
   late CacheManagerService _cacheManagerService;
   late WakelockService _wakelockService;
   late TimerSettingsSharedPrefsService _timerSettingsSharedPrefsService;
+  late SharedPreferencesService _sharedPreferencesService;
   late ShaderService _shaderService;
   late FunctionsService _functionsService;
 
@@ -93,6 +98,10 @@ class ServicesBuilder {
         sharedPrefs: sharedPreferences,
       );
 
+    _sharedPreferencesService = DefaultSharedPreferencesService(
+      sharedPreferences
+    );
+
     _shaderService = DefaultShaderService();
     _functionsService = FirebaseFunctionsService(
       fbFunctions: firebaseProvider.functions,
@@ -112,6 +121,7 @@ class ServicesBuilder {
       cacheManagerService: _cacheManagerService,
       wakelockService: _wakelockService,
       timerSettingsSharedPrefsService: _timerSettingsSharedPrefsService,
+      sharedPreferencesService: _sharedPreferencesService,
       shaderService: _shaderService,
       functionsService: _functionsService,
       urlLauncher: const UrlLauncher(),

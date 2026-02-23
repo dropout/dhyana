@@ -1,6 +1,6 @@
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/timer/settings/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/timer/settings/input_view.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 class DurationInputView extends StatefulWidget {
@@ -90,7 +90,7 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
       String text;
       TextStyle textStyle;
       if (value == widget.availableValues[selectedIndex]) {
-        text = context.localizations.minutesPluralWithNumber(value);
+        text = context.l10n.minutesPluralWithNumber(value);
         textStyle = context.theme.textTheme.headlineMedium!.copyWith(
           fontWeight: FontWeight.bold,
           color: Colors.black,

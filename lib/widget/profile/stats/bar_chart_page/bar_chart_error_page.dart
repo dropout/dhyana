@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 
 class BarChartPageError extends StatelessWidget {

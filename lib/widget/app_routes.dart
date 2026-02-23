@@ -3,13 +3,28 @@ import 'package:dhyana/init/init_result.dart';
 import 'package:dhyana/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_keys.dart';
-import 'package:dhyana/widget/screen/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/model/all.dart';
+
+import 'screen/chanting_screen.dart';
+import 'screen/delete_profile_screen.dart';
+import 'screen/donate_screen.dart';
+import 'screen/home_screen.dart';
+import 'screen/login_screen.dart';
+import 'screen/presence_screen.dart';
+import 'screen/profile_edit_screen.dart';
+import 'screen/profile_screen.dart';
+import 'screen/profile_settings_screen.dart';
+import 'screen/profile_stats_screen.dart';
+import 'screen/profile_wizard_screen.dart';
+import 'screen/session_completed_screen.dart';
+import 'screen/session_history_screen.dart';
+import 'screen/timer_screen.dart';
+import 'screen/timer_settings_history_screen.dart';
 
 part 'app_routes.g.dart';
 
@@ -339,5 +354,3 @@ class ProfileSettingsRoute extends GoRouteData
     authRedirectHook(context, state);
 
 }
-
-

@@ -2,10 +2,12 @@ import 'package:collection/collection.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/all.dart';
-import 'package:dhyana/widget/presence/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_animation.dart';
+import 'package:dhyana/widget/util/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'presence_list_item.dart';
 
 class PresenceView extends StatelessWidget {
 

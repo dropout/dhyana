@@ -39,7 +39,7 @@ class _DonateButtonState extends State<DonateButton> {
               color: isEnabled ? Colors.white : Colors.white.withValues(alpha: 0.5),
               fontWeight: FontWeight.w900,
             ),
-            child: Text(context.localizations.donate.toUpperCase()),
+            child: Text(context.l10n.donate.toUpperCase()),
           ),
         ),
       ),

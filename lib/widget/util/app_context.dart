@@ -31,7 +31,7 @@ extension AppContext on BuildContext {
   InitResult get initResult =>
     read<InitResult>();
 
-  AppLocalizations get localizations =>
+  AppLocalizations get l10n =>
     AppLocalizations.of(this);
 
   ThemeData get theme =>

@@ -1,31 +1,32 @@
+import 'package:dhyana/util/faker.dart';
+import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/model/all.dart';
+import 'package:faker/faker.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/auth/model/user_meta_data.dart';
-import 'package:dhyana/util/all.dart';
-import 'package:faker/faker.dart';
-import 'package:dhyana/model/all.dart';
 
 class FakeModelFactory {
-  final Faker _faker = Faker();
+  final Faker faker = Faker();
 
   User createUser() {
     return User(
-      uid: _faker.guid.guid(),
-      email: _faker.internet.email(),
+      uid: faker.guid.guid(),
+      email: faker.internet.email(),
       metaData: UserMetaData(),
     );
   }
 
   Profile createProfile() {
     return Profile(
-      id: _faker.guid.guid(),
-      firstName: _faker.person.firstName(),
-      lastName: _faker.person.lastName(),
-      email: _faker.internet.email(),
-      photoUrl: _faker.profilePhotoUrl(),
-      photoBlurhash: _faker.profilePhotoBlurhash(),
+      id: faker.guid.guid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      email: faker.internet.email(),
+      photoUrl: faker.profilePhotoUrl(),
+      photoBlurhash: faker.profilePhotoBlurhash(),
       signupDate: DateTime.now(),
       statsReport: const ProfileStatisticsReport(),
-      completed: _faker.randomGenerator.boolean(),
+      completed: faker.randomGenerator.boolean(),
     );
   }
 
@@ -39,8 +40,8 @@ class FakeModelFactory {
       id: startDate.toDayId(),
       startDate: startDate,
       sessions: [],
-      minutesCount: _faker.randomGenerator.integer(100),
-      sessionCount: _faker.randomGenerator.integer(10),
+      minutesCount: faker.randomGenerator.integer(100),
+      sessionCount: faker.randomGenerator.integer(10),
     );
   }
 
@@ -53,8 +54,8 @@ class FakeModelFactory {
     return Week(
       id: startDate.toWeekId(),
       startDate: startDate,
-      minutesCount: 80 + _faker.randomGenerator.integer(100 * 7 - 80),
-      sessionCount: 3 + _faker.randomGenerator.integer(4 * 7),
+      minutesCount: 80 + faker.randomGenerator.integer(100 * 7 - 80),
+      sessionCount: 3 + faker.randomGenerator.integer(4 * 7),
     );
   }
 
@@ -65,10 +66,10 @@ class FakeModelFactory {
   Month createMonth({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return Month(
-      id: _faker.guid.guid(),
+      id: faker.guid.guid(),
       startDate: startDate,
-      minutesCount: 600 + _faker.randomGenerator.integer(1000 * 3 - 600),
-      sessionCount: _faker.randomGenerator.integer(100) * 3,
+      minutesCount: 600 + faker.randomGenerator.integer(1000 * 3 - 600),
+      sessionCount: faker.randomGenerator.integer(100) * 3,
     );
   }
 
@@ -79,7 +80,7 @@ class FakeModelFactory {
   Year createYear({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return Year(
-      id: _faker.guid.guid(),
+      id: faker.guid.guid(),
       startDate: startDate,
       minutesCount: randomMinutesCount(365),
       sessionCount: randomSessionCount(365),
@@ -92,10 +93,10 @@ class FakeModelFactory {
 
   Session createSession() {
     return Session(
-      id: _faker.guid.guid(),
+      id: faker.guid.guid(),
       startTime: DateTime.now(),
       endTime: DateTime.now().add(const Duration(hours: 1)),
-      duration: Duration(minutes: _faker.randomGenerator.integer(60)),
+      duration: Duration(minutes: faker.randomGenerator.integer(60)),
       timerSettings: const TimerSettings(),
     );
   }
@@ -111,8 +112,8 @@ class FakeModelFactory {
   }) {
     int sum = 0;
     for (var i = 0; i < numDays; ++i) {
-      sum += _faker.randomGenerator.integer(
-        max + _faker.randomGenerator.integer(spread, min: spread * -1),
+      sum += faker.randomGenerator.integer(
+        max + faker.randomGenerator.integer(spread, min: spread * -1),
         min: 10
       );
     }
@@ -126,8 +127,8 @@ class FakeModelFactory {
   }) {
     int sum = 0;
     for (var i = 0; i < numDays; ++i) {
-      sum += _faker.randomGenerator.integer(
-        max + _faker.randomGenerator.integer(spread),
+      sum += faker.randomGenerator.integer(
+        max + faker.randomGenerator.integer(spread),
         min: 1
       );
     }
@@ -135,4 +136,3 @@ class FakeModelFactory {
   }
 
 }
-

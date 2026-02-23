@@ -1,7 +1,6 @@
-import 'package:dhyana/bloc/all.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/bloc_provider/all.dart';
+import 'package:dhyana/widget/bloc_provider/timer_bloc_providers.dart';
 import 'package:dhyana/widget/timer/running/timer_running_cover.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 

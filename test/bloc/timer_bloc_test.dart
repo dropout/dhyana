@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/factory/timer_settings_factory.dart';
 import 'package:dhyana/model/timer_settings.dart';

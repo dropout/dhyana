@@ -1,4 +1,7 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/bloc/presence/presence_cubit.dart';
+import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';

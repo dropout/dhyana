@@ -1,9 +1,10 @@
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/input/all.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+
+import 'decoration.dart';
 
 class AppTextInput extends StatelessWidget {
 

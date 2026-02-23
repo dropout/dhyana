@@ -6,7 +6,7 @@ import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/profile/profile_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -100,4 +100,3 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 }
-

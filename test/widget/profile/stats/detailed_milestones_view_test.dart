@@ -1,7 +1,8 @@
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/widget/profile/stats/all.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/profile/stats/detailed_milestones_view.dart';
+import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_context_providers.dart';
@@ -37,7 +38,7 @@ void main() {
       final context = tester.element(find.byType(DetailedMilestonesView));
 
       expect(find.text(profile.statsReport.milestoneCount.toString()), findsOneWidget);
-      expect(find.text(context.localizations.statsNextMilestoneInShort(2)), findsOneWidget);
+      expect(find.text(context.l10n.statsNextMilestoneInShort(2)), findsOneWidget);
 
       expect(find.byType(LabelValueDetail), findsNWidgets(2));
     });

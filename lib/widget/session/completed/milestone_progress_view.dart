@@ -1,6 +1,7 @@
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
 import 'milestone_progress_view_item.dart';
@@ -101,7 +102,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
   Widget buildMilestoneText(BuildContext context) {
     return Text(
       key: const Key('milestone_progress_view_text'),
-      context.localizations.statsNextMilestoneIn(
+      context.l10n.statsNextMilestoneIn(
         widget.profile.statsReport.milestoneProgress.remainingDaysCount
       ),
       style: Theme.of(context).textTheme.titleSmall!.copyWith(

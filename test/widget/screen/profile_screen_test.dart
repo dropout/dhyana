@@ -1,10 +1,10 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
-import 'package:dhyana/widget/profile/all.dart';
-import 'package:dhyana/widget/screen/all.dart';
+import 'package:dhyana/widget/profile/profile_view.dart';
+import 'package:dhyana/widget/screen/profile_screen.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

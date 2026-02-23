@@ -45,7 +45,7 @@ class SessionResult extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: '${context.localizations.sessionResultCompleted} '
+            text: '${context.l10n.sessionResultCompleted} '
           ),
           TextSpan(
             text: session.duration.inMinutes.toString(),
@@ -55,7 +55,7 @@ class SessionResult extends StatelessWidget {
             )
           ),
           TextSpan(
-            text: '  ${context.localizations.sessionResultMinutes(session.duration.inMinutes)}'
+            text: '  ${context.l10n.sessionResultMinutes(session.duration.inMinutes)}'
           ),
         ]
       )

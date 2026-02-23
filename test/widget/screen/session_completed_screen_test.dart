@@ -1,9 +1,10 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/screen/all.dart';
+import 'package:dhyana/widget/screen/session_completed_screen.dart';
 import 'package:dhyana/widget/session/completed/signed_in_completed_view.dart';
 import 'package:dhyana/widget/session/completed/signed_out_completed_view.dart';
 import 'package:flutter/material.dart';

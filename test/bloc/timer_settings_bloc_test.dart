@@ -1,18 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockTimerSettingsSharedPrefsService
-    extends Mock
-    implements TimerSettingsSharedPrefsService {}
-
-class MockCrashlyticsService
-    extends Mock
-    implements CrashlyticsService {}
+import '../mock_definitions.dart';
 
 void main() async {
 

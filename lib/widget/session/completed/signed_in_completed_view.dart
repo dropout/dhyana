@@ -1,4 +1,5 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/presence/presence_area.dart';

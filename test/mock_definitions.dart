@@ -1,5 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/bloc/presence/presence_cubit.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
+import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
+import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/repository/all.dart';

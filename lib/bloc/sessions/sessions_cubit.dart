@@ -1,10 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/model/all.dart';
 import 'package:dhyana/repository/auth_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dhyana/model/session.dart';
+import 'package:dhyana/model/session_query_options.dart';
 
 part 'sessions_state.dart';
 part 'sessions_cubit.freezed.dart';

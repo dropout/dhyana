@@ -5,8 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/service/timer_service.dart';
+import 'package:dhyana/service/timer_service_factory.dart';
+import 'package:dhyana/service/audio_service.dart';
+import 'package:dhyana/service/crashlytics_service.dart';
 
 part 'timer_event.dart';
 part 'timer_state.dart';

@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
-import 'package:dhyana/widget/util/all.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
