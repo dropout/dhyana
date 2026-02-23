@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 
+typedef TimerSettingsCubitProviderBuilder = Widget Function(BuildContext context, TimerSettingsState state);
+
 class TimerSettingsCubitProvider extends StatelessWidget {
 
-  final Widget child;
+  final TimerSettingsCubitProviderBuilder builder;
   final Function(TimerSettingsCubit)? onCreate;
 
   const TimerSettingsCubitProvider({
-    required this.child,
+    required this.builder,
     this.onCreate,
     super.key
   });
@@ -27,7 +29,11 @@ class TimerSettingsCubitProvider extends StatelessWidget {
         onCreate?.call(timerSettingsBloc);
         return timerSettingsBloc;
       },
-      child: child,
+      child: Builder(
+        builder: (ctx) => BlocBuilder<TimerSettingsCubit, TimerSettingsState>(
+          builder: builder,
+        ),
+      ),
     );
   }
 

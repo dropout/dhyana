@@ -9,8 +9,14 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/widget/timer/settings/start_time_text.dart';
+import 'package:dhyana/widget/timer/settings/warmup_input.dart';
+import 'package:dhyana/widget/timer/settings/sound_input.dart';
+import 'package:dhyana/widget/timer/settings/duration_input.dart';
+import 'package:dhyana/widget/timer/settings/end_time_text.dart';
+import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
+import 'package:dhyana/widget/timer/settings/input_gap.dart';
 
-import 'settings/all.dart';
 
 class TimerSettingsView extends StatefulWidget {
   

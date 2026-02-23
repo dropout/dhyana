@@ -1,11 +1,15 @@
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/shader_service.dart';
-import 'package:dhyana/widget/timer/all.dart';
+import 'package:dhyana/widget/timer/settings/duration_input.dart';
+import 'package:dhyana/widget/timer/settings/sound_input.dart';
+import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
+import 'package:dhyana/widget/timer/settings/warmup_input.dart';
+import 'package:dhyana/widget/timer/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

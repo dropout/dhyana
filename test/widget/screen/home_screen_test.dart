@@ -1,5 +1,5 @@
-
-import 'package:dhyana/bloc/all.dart';
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile_settings.dart';
@@ -7,8 +7,9 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
-import 'package:dhyana/widget/screen/all.dart';
-import 'package:dhyana/widget/timer/all.dart';
+import 'package:dhyana/widget/screen/home_screen.dart';
+import 'package:dhyana/widget/timer/settings_history/timer_settings_history_button.dart';
+import 'package:dhyana/widget/timer/timer_settings_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

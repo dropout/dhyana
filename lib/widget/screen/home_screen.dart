@@ -1,25 +1,25 @@
-import 'package:dhyana/bloc/chanting_settings/chanting_settings_cubit.dart';
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/bloc/home_screen/home_screen_appbar.dart';
+import 'package:dhyana/bloc/home_screen/home_screen_cubit.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/enum/session_type.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/util/all.dart';
-import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
+import 'package:dhyana/widget/bloc_provider/chanting_settings_provider.dart';
+import 'package:dhyana/widget/bloc_provider/home_screen_cubit_provider.dart';
+import 'package:dhyana/widget/bloc_provider/safe_profile_settings.dart';
 import 'package:dhyana/widget/bloc_provider/timer_settings_cubit_provider.dart';
 import 'package:dhyana/widget/chanting/chanting_settings_view.dart';
-import 'package:dhyana/widget/home/session_mode_toggle.dart';
-import 'package:dhyana/widget/presence/presence_button.dart';
-import 'package:dhyana/widget/profile/profile_button.dart';
-import 'package:dhyana/widget/timer/all.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/home/session_type_toggle.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/widget/timer/timer_settings_view.dart';
 
-class HomeScreen extends StatefulWidget {
+
+class HomeScreen extends StatelessWidget {
+
   final TimerSettings? timerSettings;
 
   const HomeScreen({
@@ -28,138 +28,102 @@ class HomeScreen extends StatefulWidget {
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
-  SessionType _sessionMode = SessionType.sitting;
-
-  void _setSessionMode(SessionType mode) {
-    if (mode == _sessionMode) {
-      return;
-    }
-    setState(() {
-      _sessionMode = mode;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return TimerSettingsCubitProvider(
-      onCreate: (timerSettingsCubit) => timerSettingsCubit.loadTimerSettings(
-        timerSettings: widget.timerSettings,
-      ),
-      child: Builder(
-        builder: (context) {
-          return BlocProvider<ChantingSettingsCubit>(
-            create: (_) => ChantingSettingsCubit(
-              chantsRepository: context.repos.chantsRepository,
-              crashlyticsService: context.services.crashlyticsService,
-            ),
-            child: buildScaffolding(context),
-          );
-        },
-      ),
+    return HomeScreenCubitProvider(
+      onCreate: (context, cubit) => cubit.init(timerSettings),
+      builder: (context, state) {
+        return switch (state) {
+          HomeScreenStateLoading() => const AppLoadingDisplay(),
+          HomeScreenStateLoaded() => buildScaffolding(context, state),
+        };
+      }
     );
   }
 
-  Widget buildScaffolding(BuildContext context) {
+  Widget buildScaffolding(BuildContext context, HomeScreenStateLoaded state) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: CustomAppBar(
-        leading: Today(
-          key: ValueKey(DateTime.now().toDayId()),
-        ),
-        trailing: [
-          SignedIn(yes: (context, profileId) {
-            return PresenceButton();
-          }),
-          SignedIn(yes: (context, profileId) {
-            return TimerSettingsHistoryButton(profileId: profileId);
-          }),
-          const ProfileButton(),
-        ],
-      ),
+      appBar: HomeScreenAppbar(homeScreenState: state),
       extendBodyBehindAppBar: true,
-      body: BlocBuilder<TimerSettingsCubit, TimerSettingsState>(
-        builder: (BuildContext context, TimerSettingsState state) {
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          buildBody(context, state),
+          Positioned(
+            bottom: DesignSpec.spacingLg,
+            right: DesignSpec.spacingLg,
+            child: SafeArea(child: buildToggle(context, state)),
+          ),
+        ],
+      )
+    );
+  }
+
+  Widget buildToggle(BuildContext context, HomeScreenStateLoaded state) {
+    return SessionTypeToggle(
+      activeMode: state.sessionType,
+      onModeChanged: (mode) {
+        switch (mode) {
+          case SessionType.sitting:
+            context.read<HomeScreenCubit>().setSessionType(SessionType.sitting);
+            break;
+          case SessionType.chanting:
+            context.read<HomeScreenCubit>().setSessionType(SessionType.chanting);
+            break;
+        }
+      },
+    );
+  }
+
+  Widget buildBody(BuildContext context, HomeScreenStateLoaded state) {
+    return AnimatedSwitcher(
+      duration: Durations.medium4,
+      switchInCurve: Curves.easeOutCubic,
+      switchOutCurve: Curves.easeInCubic,
+      // layoutBuilder: (currentChild, previousChildren) {
+      //   return Stack(
+      //     alignment: Alignment.center,
+      //     children: [
+      //       ...previousChildren,
+      //       if (currentChild != null) currentChild,
+      //     ],
+      //   );
+      // },
+      child: switch (state.sessionType) {
+        SessionType.sitting => buildTimerSettingsView(context, state),
+        SessionType.chanting => buildChantingSettingsView(context),
+      },
+    );
+  }
+
+  Widget buildTimerSettingsView(BuildContext context, HomeScreenStateLoaded state) {
+    return SafeProfileSettings(
+      key: ValueKey('timer_settings_branch'),
+      builder: (context, profileSettings) => TimerSettingsCubitProvider(
+        onCreate: (cubit) => cubit.loadTimerSettings(timerSettings: state.timerSettings),
+        builder: (context, state) {
           return switch (state) {
             TimerSettingsDataErrorState() => const AppErrorDisplay(),
             TimerSettingsDataLoadingState() => const AppLoadingDisplay(),
-            TimerSettingsDataLoadedState() => buildLoadedState(context, state),
+            TimerSettingsDataLoadedState() => TimerSettingsView(
+              timerSettings: state.timerSettings,
+              profileSettings: profileSettings,
+            ),
           };
-        },
-      ),
+        }
+      )
     );
   }
 
-  Widget buildLoadedState(
-    BuildContext context,
-    TimerSettingsDataLoadedState state,
-  ) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (context, profileState) {
-        final profileSettings = switch (profileState) {
-          ProfileLoadedState(:final settings) => settings,
-          _ => const ProfileSettings(id: 'anonymous'),
-        };
-
-        return SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: SessionModeToggle(
-                  activeMode: _sessionMode,
-                  onModeChanged: _setSessionMode,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: AnimatedSwitcher(
-                  duration: Durations.short4,
-                  switchInCurve: Curves.easeOutCubic,
-                  switchOutCurve: Curves.easeInCubic,
-                  layoutBuilder: (currentChild, previousChildren) {
-                    return Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ...previousChildren,
-                        if (currentChild != null) currentChild,
-                      ],
-                    );
-                  },
-                  child: switch (_sessionMode) {
-                    SessionType.sitting => TimerSettingsView(
-                        key: const ValueKey('timer-settings-view'),
-                        timerSettings: state.timerSettings,
-                        profileSettings: profileSettings,
-                      ),
-                    SessionType.chanting => _buildChantingSettingsView(
-                        context,
-                      ),
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildChantingSettingsView(BuildContext context) {
-    return BlocBuilder<ChantingSettingsCubit, ChantingSettingsState>(
-      builder: (context, chantingState) {
-        return ChantingSettingsView(
-          key: const ValueKey('chanting-settings-view'),
-          chants: chantingState.selectedChants,
-          onReorder: (oldIndex, newIndex) {
-            context.read<ChantingSettingsCubit>().reorder(oldIndex, newIndex);
-          },
-        );
-      },
+  Widget buildChantingSettingsView(BuildContext context) {
+    return SafeProfileSettings(
+      key: ValueKey('chanting_settings_branch'),
+      builder: (context, profileSettings) => ChantingSettingsCubitProvider(
+        builder: (context, state) => ChantingSettingsView(
+          chants: [],
+          onReorder: (int oldIndex, int newIndex) {  },
+        )
+      )
     );
   }
 }

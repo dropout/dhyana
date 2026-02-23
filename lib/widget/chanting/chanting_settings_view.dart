@@ -28,31 +28,29 @@ class ChantingSettingsView extends StatelessWidget {
             ? DesignSpec.padding4Xl
             : DesignSpec.paddingLg;
 
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    horizontalPadding,
-                    DesignSpec.padding2Xl,
-                    horizontalPadding,
-                    DesignSpec.paddingXl,
-                  ),
-                  child: _ChantList(
-                    chants: chants,
-                    title: title,
-                    onReorder: onReorder,
-                  ),
+        return Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  horizontalPadding,
+                  DesignSpec.padding2Xl,
+                  horizontalPadding,
+                  DesignSpec.paddingXl,
+                ),
+                child: _ChantList(
+                  chants: chants,
+                  title: title,
+                  onReorder: onReorder,
                 ),
               ),
-              _StartButton(
-                onTap: onStart,
-              ),
-            ],
-          ),
+            ),
+            _StartButton(
+              onTap: onStart,
+            ),
+          ],
         );
       },
     );
@@ -79,7 +77,8 @@ class _ChantList extends StatelessWidget {
       children: [
         if (title != null)
           Padding(
-            padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+            // padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+            padding: EdgeInsets.zero,
             child: Text(
               title ?? '',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
