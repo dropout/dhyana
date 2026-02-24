@@ -48,12 +48,20 @@ GoRouter createAppRouter({required InitResult initResult}) {
   name: 'HOME',
 )
 class HomeRoute extends GoRouteData with $HomeRoute {
-  final TimerSettings? $extra;
-  const HomeRoute({this.$extra});
+
+  final Object? $extra;
+  final int? nonce;
+  const HomeRoute({
+    this.$extra,
+    this.nonce,
+  });
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-    HomeScreen(timerSettings: $extra, key: ValueKey($extra));
+  Widget build(BuildContext context, GoRouterState state) {
+    final timerSettings = $extra is TimerSettings ? $extra as TimerSettings : null;
+    return HomeScreen(timerSettings: timerSettings, key: ValueKey($extra));
+  }
+
 }
 
 @TypedGoRoute<TimerRoute>(
