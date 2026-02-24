@@ -58,6 +58,12 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     _saveSelectedChantsToSharedPrefs(updated);
   }
 
+  void removeFromSelectedChants(Chant chant) {
+    final updated = List<Chant>.from(state.selectedChants)..remove(chant);
+    emit(state.copyWith(selectedChants: updated));
+    _saveSelectedChantsToSharedPrefs(updated);
+  }
+
   /// Reorders the chant list by removing the element at [oldIndex] and inserting
   /// it at [newIndex]. Bounds are clamped so accidental out-of-range inputs from
   /// the UI do not crash the app.

@@ -48,6 +48,10 @@ class ChantingSettingsView extends StatelessWidget {
     context.read<ChantingSettingsCubit>().reorderSelectedChants(oldIndex, newIndex);
   }
 
+  void _onChantRemoved(BuildContext context, Chant chant) {
+    context.read<ChantingSettingsCubit>().removeFromSelectedChants(chant);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChantingSettingsCubit, ChantingSettingsState>(
@@ -79,6 +83,7 @@ class ChantingSettingsView extends StatelessWidget {
                 child: _ChantList(
                   chants: state.selectedChants,
                   onAddChant: () => _triggerAddChantSheet(context, availableChants),
+                  onChantRemoved: (chant) => _onChantRemoved(context, chant),
                   onReorder: (oldIndex, newIndex) =>
                     _onReorderSelectedChants(context, oldIndex, newIndex),
                 ),
@@ -100,43 +105,19 @@ class _ChantList extends StatelessWidget {
   final List<Chant> chants;
   final void Function(int oldIndex, int newIndex) onReorder;
   final VoidCallback onAddChant;
+  final void Function(Chant) onChantRemoved;
 
   const _ChantList({
     required this.chants,
     required this.onReorder,
     required this.onAddChant,
+    required this.onChantRemoved,
   });
 
   @override
   Widget build(BuildContext context) {
     if (chants.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(DesignSpec.paddingLg),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'No chants added yet.',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            Gap.small(),
-            Text(
-              'Tap the + button to add chants to your session.',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            Gap.small(),
-            AddChantButton(
-              onTap: onAddChant,
-            )
-          ],
-        ),
-      );
+      return buildEmpty(context);
     }
 
     return ReorderableListView.builder(
@@ -160,6 +141,7 @@ class _ChantList extends StatelessWidget {
           chant: chant,
           index: index,
           enableDragging: chants.length > 1, // disable dragging if there's only one item
+          onDismiss: () => onChantRemoved(chant),
         );
       },
       proxyDecorator: (child, index, animation) {
@@ -186,6 +168,36 @@ class _ChantList extends StatelessWidget {
 
   }
 
+  Widget buildEmpty(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(DesignSpec.paddingLg),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'No chants added yet.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Gap.small(),
+          Text(
+            'Tap the + button to add chants to your session.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Gap.small(),
+          AddChantButton(
+            onTap: onAddChant,
+          )
+        ],
+      ),
+    );
+  }
+
 }
 
 class _ChantListItem extends StatelessWidget {
@@ -193,32 +205,39 @@ class _ChantListItem extends StatelessWidget {
   final Chant chant;
   final int index;
   final bool enableDragging;
+  final VoidCallback onDismiss;
 
   const _ChantListItem({
     required this.chant,
     required this.index,
+    required this.onDismiss,
     this.enableDragging = true,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
-      ),
-      title: Text(
-        '${index + 1}. ${chant.name}',
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          fontWeight: FontWeight.w700,
+    return Dismissible(
+      key: ValueKey(chant.id),
+      direction: DismissDirection.endToStart,
+      onDismissed: (_) => onDismiss(),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
         ),
-      ),
-      trailing: ReorderableDragStartListener(
-        enabled: enableDragging,
-        index: index,
-        child: enableDragging
-          ? const Icon(Icons.drag_handle)
-          : const SizedBox.shrink(),
+        title: Text(
+          '${index + 1}. ${chant.name}',
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        trailing: ReorderableDragStartListener(
+          enabled: enableDragging,
+          index: index,
+          child: enableDragging
+            ? const Icon(Icons.drag_handle)
+            : const SizedBox.shrink(),
+        ),
       ),
     );
   }
