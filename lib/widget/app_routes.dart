@@ -50,14 +50,17 @@ GoRouter createAppRouter({required InitResult initResult}) {
 class HomeRoute extends GoRouteData with $HomeRoute {
 
   final Object? $extra;
-  final int? nonce;
+
   const HomeRoute({
     this.$extra,
-    this.nonce,
   });
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    // Type cast the extra parameter in the build method to be able to use
+    // select widget mode in in devtools. Otherwise the go_router_builder
+    // generated code fails to type cast the extra parameter to the
+    // exact type when rebuilding the widget tree for select widget mode.
     final timerSettings = $extra is TimerSettings ? $extra as TimerSettings : null;
     return HomeScreen(timerSettings: timerSettings, key: ValueKey($extra));
   }

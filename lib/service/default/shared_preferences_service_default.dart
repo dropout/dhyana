@@ -1,3 +1,4 @@
+import 'package:dhyana/enum/shared_preferences_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../shared_preferences_service.dart';
 
@@ -10,8 +11,8 @@ class DefaultSharedPreferencesService implements SharedPreferencesService {
   const DefaultSharedPreferencesService(this.prefs);
 
   @override
-  Future<T?> get<T>({required String key}) async {
-    final value = prefs.get(key);
+  Future<T?> get<T>({required SharedPreferencesKey key}) async {
+    final value = prefs.get(key.name);
     if (value is T) {
       return value;
     }
@@ -19,17 +20,17 @@ class DefaultSharedPreferencesService implements SharedPreferencesService {
   }
 
   @override
-  Future<void> set<T>({required String key, required T value}) async {
+  Future<void> set<T>({required SharedPreferencesKey key, required T value}) async {
     if (value is int) {
-      await prefs.setInt(key, value);
+      await prefs.setInt(key.name, value);
     } else if (value is double) {
-      await prefs.setDouble(key, value);
+      await prefs.setDouble(key.name, value);
     } else if (value is bool) {
-      await prefs.setBool(key, value);
+      await prefs.setBool(key.name, value);
     } else if (value is String) {
-      await prefs.setString(key, value);
+      await prefs.setString(key.name, value);
     } else if (value is List<String>) {
-      await prefs.setStringList(key, value);
+      await prefs.setStringList(key.name, value);
     } else {
       throw ArgumentError('Unsupported value type: \\${value.runtimeType}');
     }

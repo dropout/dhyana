@@ -46,7 +46,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onWarmupChange(BuildContext context, Duration warmupDuration) {
-    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+    context.read<TimerSettingsCubit>().timerSettingsChanged(
       widget.timerSettings.copyWith(
         warmup: warmupDuration,
       )
@@ -54,7 +54,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onStartingSoundChange(BuildContext context, Sound startingSound) {
-    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+    context.read<TimerSettingsCubit>().timerSettingsChanged(
       widget.timerSettings.copyWith(
         startingSound: startingSound,
       )
@@ -62,7 +62,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onDurationChange(BuildContext context, Duration duration) {
-    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+    context.read<TimerSettingsCubit>().timerSettingsChanged(
       widget.timerSettings.copyWith(
         duration: duration,
       )
@@ -70,7 +70,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   void _onEndingSoundChange(BuildContext context, Sound endingSound) {
-    BlocProvider.of<TimerSettingsCubit>(context).timerSettingsChanged(
+    context.read<TimerSettingsCubit>().timerSettingsChanged(
       widget.timerSettings.copyWith(
         endingSound: endingSound,
       )

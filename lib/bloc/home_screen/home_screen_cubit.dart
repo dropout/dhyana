@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dhyana/enum/shared_preferences_key.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/enum/session_type.dart';
@@ -53,7 +54,10 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
         stackTrace: stackTrace,
         reason: 'Failed to load HomeScreenState from SharedPreferences',
       );
-      emit(HomeScreenState.loaded(sessionType: SessionType.sitting));
+      emit(HomeScreenState.loaded(
+        // timerSettings: ,
+        sessionType: SessionType.sitting
+      ));
     }
   }
 
@@ -96,7 +100,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   Future<HomeScreenState> _loadStateFromSharedPreferences() async {
     final jsonString = await sharedPreferencesService.get<String>(
-      key: 'homeScreenState');
+      key: SharedPreferencesKey.homeScreenState);
     Map<String, Object?> json = jsonString != null ? Map<String,
       Object?>.from(jsonDecode(jsonString)) : {};
     return HomeScreenState.fromJson(json);
@@ -105,7 +109,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   Future<void> _saveStateToSharedPreferences(HomeScreenState state) async {
     final jsonString = jsonEncode(state.toJson());
     await sharedPreferencesService.set(
-      key: 'homeScreenState',
+      key: SharedPreferencesKey.homeScreenState,
       value: jsonString,
     );
   }

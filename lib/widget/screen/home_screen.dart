@@ -152,8 +152,8 @@ class HomeScreen extends StatelessWidget {
   Widget buildBody(BuildContext context, HomeScreenStateLoaded state) {
     return AnimatedSwitcher(
       duration: Durations.medium4,
-      switchInCurve: Curves.easeOutCubic,
-      switchOutCurve: Curves.easeInCubic,
+      // switchInCurve: Curves.fastLinearToSlowEaseIn,
+      // switchOutCurve: Curves.fastLinearToSlowEaseIn,
       // layoutBuilder: (currentChild, previousChildren) {
       //   return Stack(
       //     alignment: Alignment.center,
@@ -190,7 +190,7 @@ class HomeScreen extends StatelessWidget {
     return SafeProfileSettings(
       key: ValueKey('timer_settings_branch'),
       builder: (context, profileSettings) => TimerSettingsCubitProvider(
-        onCreate: (cubit) => cubit.loadTimerSettings(timerSettings: state.timerSettings),
+        onCreate: (cubit) => cubit.loadTimerSettings(timerSettings: timerSettings),
         builder: (context, state) {
           return switch (state) {
             TimerSettingsDataErrorState() => const AppErrorDisplay(),
@@ -220,9 +220,9 @@ class HomeScreen extends StatelessWidget {
     return SafeProfileSettings(
       key: ValueKey('chanting_settings_branch'),
       builder: (context, profileSettings) => ChantingSettingsCubitProvider(
+        onCreate: (cubit) => cubit.loadAvailableChants(),
         builder: (context, state) => ChantingSettingsView(
-          chants: [],
-          onReorder: (int oldIndex, int newIndex) {  },
+          availableChants: state.availableChants,
         )
       )
     );
