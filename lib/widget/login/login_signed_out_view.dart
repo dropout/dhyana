@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/login/login_headline_text_effect.dart';
 import 'package:dhyana/widget/util/app_button.dart';
@@ -11,7 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginSignedOutView extends StatelessWidget {
 
+  final void Function(User user, bool isFirstSignin) onSigninComplete;
+
   const LoginSignedOutView({
+    required this.onSigninComplete,
     super.key,
   });
 
@@ -49,11 +52,7 @@ class LoginSignedOutView extends StatelessWidget {
   }
 
   void _handleSigninComplete(BuildContext context, user, isFirstSignin) {
-    if (isFirstSignin) {
-      ProfileWizardRoute(profileId: user.uid).replace(context);
-    } else {
-      ProfileRoute(profileId: user.uid).replace(context);
-    }
+    onSigninComplete(user, isFirstSignin);
   }
 
   @override
