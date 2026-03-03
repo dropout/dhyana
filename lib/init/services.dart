@@ -1,7 +1,9 @@
 import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/default/default_lyrics_service.dart';
 import 'package:dhyana/service/default/shared_preferences_service_default.dart';
+import 'package:dhyana/service/lyrics_service.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/util/launch_url.dart';
@@ -27,6 +29,7 @@ class Services {
   final WakelockService wakelockService;
   final FunctionsService functionsService;
   final UrlLauncher urlLauncher;
+  final LyricsService lyricsService;
 
   Services({
     required this.analyticsService,
@@ -44,6 +47,7 @@ class Services {
     required this.wakelockService,
     required this.functionsService,
     required this.urlLauncher,
+    required this.lyricsService,
   });
 
 }
@@ -64,6 +68,8 @@ class ServicesBuilder {
   late SharedPreferencesService _sharedPreferencesService;
   late ShaderService _shaderService;
   late FunctionsService _functionsService;
+  late UrlLauncher _urlLauncher;
+  late LyricsService _lyricsService;
 
   ServicesBuilder({
     required FirebaseProvider firebaseProvider,
@@ -106,6 +112,8 @@ class ServicesBuilder {
     _functionsService = FirebaseFunctionsService(
       fbFunctions: firebaseProvider.functions,
     );
+    _urlLauncher = const UrlLauncher();
+    _lyricsService = DefaultLyricsService();
   }
 
   Services build() {
@@ -124,7 +132,8 @@ class ServicesBuilder {
       sharedPreferencesService: _sharedPreferencesService,
       shaderService: _shaderService,
       functionsService: _functionsService,
-      urlLauncher: const UrlLauncher(),
+      urlLauncher: _urlLauncher,
+      lyricsService: _lyricsService,
     );
   }
 

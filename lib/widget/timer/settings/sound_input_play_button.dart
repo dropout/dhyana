@@ -67,7 +67,7 @@ class SoundInputPlayButtonState extends State<SoundInputPlayButton> {
           size: 48,
         ),
         onPressed: () {
-          widget.audioService.play(widget.sound);
+          widget.audioService.playSound(widget.sound);
         },
       );
     }

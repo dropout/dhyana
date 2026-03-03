@@ -192,7 +192,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
     }
   }
 
-  // TODO: Update relevant profile data when changed
+  // TODO: Update relevant profile data when changed?
   void _handleUserChange(User? user) {
     if (isClosed) {
       return;

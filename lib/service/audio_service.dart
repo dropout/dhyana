@@ -1,13 +1,21 @@
 import 'dart:async';
 
+import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/model/chant.dart';
 
 abstract interface class AudioService  {
 
-  Future<void> play(Sound sound);
+  Future<void> playSound(Sound sound);
+  Future<Duration?> loadFromUrl(String url);
+  Future<void> play();
+  Future<void> pause();
+  Future<void> seek(Duration position);
   Future<void> stop();
   bool get isPlaying;
   Stream<bool> get isPlayingStream;
+  Stream<Duration> get positionStream;
+  Stream<PlaybackState> get playbackStateStream;
   void close();
 
 }

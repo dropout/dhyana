@@ -27,7 +27,7 @@ class SoundInputPage extends StatelessWidget {
     if (audioService.isPlaying) {
       audioService.stop();
     } else {
-      audioService.play(sound);
+      audioService.playSound(sound);
     }
   }
 

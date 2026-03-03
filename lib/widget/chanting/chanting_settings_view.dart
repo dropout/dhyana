@@ -1,5 +1,7 @@
 import 'package:dhyana/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/model/chant.dart';
+import 'package:dhyana/model/chanting_settings.dart';
+import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -13,13 +15,9 @@ import 'add_chant_sheet.dart';
 class ChantingSettingsView extends StatelessWidget {
 
   final List<Chant> availableChants;
-  // final void Function(int oldIndex, int newIndex) onReorder;
-  final void Function()? onStart;
 
   const ChantingSettingsView({
     required this.availableChants,
-    // required this.onReorder,
-    this.onStart,
     super.key,
   });
 
@@ -50,6 +48,15 @@ class ChantingSettingsView extends StatelessWidget {
 
   void _onChantRemoved(BuildContext context, Chant chant) {
     context.read<ChantingSettingsCubit>().removeFromSelectedChants(chant);
+  }
+
+  void _onStart(BuildContext context) {
+    final selectedChants = context.read<ChantingSettingsCubit>().state.selectedChants;
+    if (selectedChants.isNotEmpty) {
+      ChantingRoute(
+        $extra: ChantingSettings(selectedChants: selectedChants),
+      ).push(context);
+    }
   }
 
   @override
@@ -90,7 +97,7 @@ class ChantingSettingsView extends StatelessWidget {
             ),
           ),
           _StartButton(
-            onTap: onStart,
+            onTap: () => _onStart(context),
           ),
         ],
       ),

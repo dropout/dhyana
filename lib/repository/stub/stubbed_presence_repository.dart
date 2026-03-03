@@ -70,37 +70,31 @@ class StubbedPresenceRepository implements PresenceRepository {
 
   @override
   Future<void> create(Presence model) {
-    // TODO: implement create
     throw UnimplementedError();
   }
 
   @override
   Future<void> delete(String id) {
-    // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
   Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions) {
-    // TODO: implement queryStream
     throw UnimplementedError();
   }
 
   @override
   Future<Presence> read(String id) {
-    // TODO: implement read
     throw UnimplementedError();
   }
 
   @override
   Stream<Presence> readStream(String id) {
-    // TODO: implement readStream
     throw UnimplementedError();
   }
 
   @override
   Future<void> update(Presence model) {
-    // TODO: implement update
     throw UnimplementedError();
   }
 

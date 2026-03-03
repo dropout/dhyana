@@ -65,7 +65,7 @@ void main() {
 
     testWidgets('can play and stop a sound', (WidgetTester tester) async {
 
-      when(() => mockAudioService.play(Sound.smallBell))
+      when(() => mockAudioService.playSound(Sound.smallBell))
         .thenAnswer((_) async {
           isPlayingStreamController.add(true);
         });
@@ -95,7 +95,7 @@ void main() {
       await tester.tap(find.byKey(const Key('sound_input_play_button_play')));
       await tester.pumpAndSettle();
       expect(state.isPlaying, isTrue);
-      verify(() => mockAudioService.play(Sound.smallBell)).called(1);
+      verify(() => mockAudioService.playSound(Sound.smallBell)).called(1);
 
       await tester.tap(find.byKey(const Key('sound_input_play_button_stop')));
       await tester.pumpAndSettle();

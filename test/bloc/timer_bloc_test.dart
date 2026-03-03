@@ -65,7 +65,7 @@ void main() async {
       mockAudioService = MockAudioService();
       mockCrashlyticsService = MockCrashlyticsService();
 
-      when(() => mockAudioService.play(any()))
+      when(() => mockAudioService.playSound(any()))
           .thenAnswer((_) => Future.value(null));
 
       when(() => mockWarmupTimerService.tickStream)
@@ -262,7 +262,7 @@ void main() async {
             () => mockTimerService.start(),
           ]);
           expect(timerBloc.activeTimer.duration, timerBloc.timerSettings.duration);
-          verifyNever(() => mockAudioService.play(any()));
+          verifyNever(() => mockAudioService.playSound(any()));
         },
     );
 
@@ -397,7 +397,7 @@ void main() async {
             () => mockTimerService.start(),
             () => mockTimerService.elapsedTime,
           ]);
-          verifyNever(() => mockAudioService.play(any()));
+          verifyNever(() => mockAudioService.playSound(any()));
         },
     );
 
@@ -456,7 +456,7 @@ void main() async {
           verifyInOrder([
             () => mockWarmupTimerService.start(),
             () => mockWarmupTimerService.elapsedTime,
-            () => mockAudioService.play(Sound.smallBell),
+            () => mockAudioService.playSound(Sound.smallBell),
           ]);
         },
     );
@@ -502,7 +502,7 @@ void main() async {
         verify: (timerBloc) {
           verifyInOrder([
             () => mockTimerService.start(),
-            () => mockAudioService.play(timerBloc.timerSettings.startingSound),
+            () => mockAudioService.playSound(timerBloc.timerSettings.startingSound),
           ]);
         },
     );
@@ -569,7 +569,7 @@ void main() async {
         verify: (timerBloc) {
           verifyInOrder([
             () => mockTimerService.start(),
-            () => mockAudioService.play(timerBloc.timerSettings.endingSound),
+            () => mockAudioService.playSound(timerBloc.timerSettings.endingSound),
           ]);
         },
     );

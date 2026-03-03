@@ -17,4 +17,18 @@ class DefaultResourceResolver implements ResourceResolver {
     return storageDataProvider.getDownloadURL(path);
   }
 
+  @override
+  Future<String> getChantAudioUrl(String chantId) {
+    String audioFilename = 'chant.mp3';
+    String path = '/chants/$chantId/$audioFilename';
+    return storageDataProvider.getDownloadURL(path);
+  }
+
+  @override
+  Future<String> getChantLyricsUrl(String chantId) {
+    String lyricsFilename = 'chant.ttml';
+    String path = '/chants/$chantId/$lyricsFilename';
+    return storageDataProvider.getDownloadURL(path);
+  }
+
 }

@@ -61,7 +61,7 @@ void main() {
 
     testWidgets('plays sound on image tap', (WidgetTester tester) async {
 
-      when(() => mockAudioService.play(Sound.smallBell))
+      when(() => mockAudioService.playSound(Sound.smallBell))
         .thenAnswer((_) async {});
 
 
@@ -85,7 +85,7 @@ void main() {
         find.byKey(const Key('sound_input_page_image_container'))
       );
 
-      verify(() => mockAudioService.play(Sound.smallBell)).called(1);
+      verify(() => mockAudioService.playSound(Sound.smallBell)).called(1);
     });
 
     testWidgets('stops sound on image tap if its already playing', (WidgetTester tester) async {

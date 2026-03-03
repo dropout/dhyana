@@ -30,8 +30,8 @@ class PresenceTable extends StatelessWidget {
                 child: PresenceListItem(
                   borderColor: Colors.grey,
                   textColor: textColor,
-                  presence: slicedPresenceList[rowIndex][columnIndex])
-                    .gridReveal(rowIndex,columnIndex),
+                  presence: slicedPresenceList[rowIndex][columnIndex],
+                ).gridReveal(rowIndex, columnIndex),
               );
             } else {
               return const SizedBox.shrink();

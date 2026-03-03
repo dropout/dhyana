@@ -110,7 +110,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
         logger.t('No Warmup time');
         durationTimer.start();
         if (timerSettings.startingSound != Sound.none) {
-          audioService.play(timerSettings.startingSound);
+          audioService.playSound(timerSettings.startingSound);
         }
         stage = TimerStage.timer;
       }
@@ -178,7 +178,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
     final Duration elapsedWarmupTime = warmupTimer!.elapsedTime;
 
     if (timerSettings.startingSound != Sound.none) {
-      audioService.play(timerSettings.startingSound);
+      audioService.playSound(timerSettings.startingSound);
     }
 
     durationTimer.start();
@@ -202,7 +202,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
   void _onTimerCompleted(TimerCompleted completed, emit) async {
 
     if (timerSettings.endingSound != Sound.none) {
-      audioService.play(timerSettings.endingSound);
+      audioService.playSound(timerSettings.endingSound);
     }
 
     TimerState timerState = TimerState.completed(

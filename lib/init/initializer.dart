@@ -5,7 +5,6 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dart';
 import 'package:dhyana/init/repositories.dart';
-import 'package:dhyana/repository/stub/stubbed_chants_repository.dart';
 import 'package:dhyana/repository/stub/stubbed_presence_repository.dart';
 import 'package:dhyana/repository/stub/stubbed_statistics_repository.dart';
 import 'package:dhyana/util/assets.dart';
@@ -45,7 +44,7 @@ class Initializer with LoggerMixin {
     final repos = repoBuilder
       .presenceRepository(StubbedPresenceRepository())
       .statisticsRepository(StubbedStatisticsRepository())
-      .chantsRepository(StubbedChantsRepository())
+      // .chantsRepository(StubbedChantsRepository())
       .build();
 
     // Build services

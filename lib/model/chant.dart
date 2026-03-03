@@ -1,3 +1,4 @@
+import 'package:dhyana/model/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -14,6 +15,7 @@ sealed class Chant with _$Chant implements Model {
   const factory Chant({
     required String id,
     required String name,
+    @DurationConverter() required Duration length,
     required String audioResourceUrl,
     required String lyricsResourceUrl,
   }) = _Chant;
