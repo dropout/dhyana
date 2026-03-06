@@ -14,7 +14,6 @@ part 'chanting_state.dart';
 part 'chanting_cubit.freezed.dart';
 
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
-  
   final ChantingSettings chantingSettings;
   final AudioService audioService;
   final LyricsService lyricsService;
@@ -34,22 +33,26 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     _init();
   }
 
+  Stream<Duration> get positionStream => audioService.positionStream.distinct();
+
+  void _onPositionChanged(Duration position) {
+    final activeLineIndex =
+        state.lyricsDocument?.activeLineIndex(position) ?? 0;
+    emit(state.copyWith(position: position, activeLineIndex: activeLineIndex));
+  }
+
+  void _onPlaybackStateChanged(PlaybackState playbackState) {
+    emit(state.copyWith(playbackState: playbackState));
+  }
+
   Future<void> _init() async {
     try {
-      _positionSubscription = audioService.positionStream.listen((position) {
-        // logger.t('Audio position update: $position');
-        final activeLineIndex = state.lyricsDocument?.activeLineIndex(position) ?? 0;
-
-        emit(state.copyWith(
-          position: position,
-          activeLineIndex: activeLineIndex
-        ));
-      });
-      _playbackStateSubscription = audioService.playbackStateStream.listen((
-        playbackState
-      ) {
-        emit(state.copyWith(playbackState: playbackState));
-      });
+      _positionSubscription = audioService.positionStream.distinct().listen(
+        _onPositionChanged,
+      );
+      _playbackStateSubscription = audioService.playbackStateStream
+          .distinct()
+          .listen(_onPlaybackStateChanged);
       if (state.chantingSettings.selectedChants.isNotEmpty) {
         final firstChant = state.chantingSettings.selectedChants.first;
         await _loadChant(firstChant);
@@ -66,10 +69,13 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   }
 
   Future<void> play() => audioService.play();
-
   Future<void> pause() => audioService.pause();
+  Future<void> seek(Duration position) async {
+    await audioService.seek(position);
+    logger.t('Seek to position: ${position.inSeconds} seconds');
+  }
 
-  Future<void> seek(Duration position) => audioService.seek(position);
+  Future<void> release() => audioService.release();
 
   Future<void> prev() async {
     if (state.currentIndex > 0) {
@@ -92,7 +98,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   Future<void> _loadChant(Chant chant) async {
     try {
       emit(state.copyWith(playbackState: PlaybackState.loading));
-      
+
       // load audio
       final url = await resourceResolver.getChantAudioUrl(chant.id);
       final duration = await audioService.loadFromUrl(url);
@@ -122,6 +128,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   Future<void> close() {
     _positionSubscription?.cancel();
     _playbackStateSubscription?.cancel();
+    audioService.release();
     return super.close();
   }
 }

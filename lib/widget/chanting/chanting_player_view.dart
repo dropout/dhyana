@@ -40,7 +40,7 @@ class ChantingPlayerView extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [        
-        buildLyricsView(context),
+        LyricsView(chantingState: chantingState),
         Positioned(
           left: 0,
           bottom: 0,
@@ -51,23 +51,11 @@ class ChantingPlayerView extends StatelessWidget {
     );
   }
 
-  Widget buildLyricsView(BuildContext context) {
-    if (chantingState.lyricsDocument != null) {
-      return LyricsView(
-        document: chantingState.lyricsDocument!,
-        activeLineIndex: chantingState.activeLineIndex,
-        position: chantingState.position,       
-      );
-    } else {
-      return const Center(
-        child: Text('No lyrics available'),
-      );
-    }
-  }
-
   Widget buildControls(BuildContext context) {
     return Stack(
       children: [
+
+
         Positioned.fill(
           child: IgnorePointer(
             child: DecoratedBox(
@@ -85,10 +73,14 @@ class ChantingPlayerView extends StatelessWidget {
             ),
           ),
         ),
+
         SafeArea(
-          // top: false,
           child: Padding(
-            padding: EdgeInsets.only(top: DesignSpec.padding2Xl),
+            padding: EdgeInsets.only(
+              top: DesignSpec.padding2Xl,
+              left: DesignSpec.paddingLg,
+              right: DesignSpec.paddingLg,
+            ),
             child: PlayerControls(
               position: chantingState.position,
               duration: chantingState.duration,

@@ -1,4 +1,8 @@
+import 'dart:math' as math;
+
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:ttml_parser/ttml_parser.dart';
 
 /// Renders a single [TtmlLine] with per-word highlight animation.
@@ -27,26 +31,43 @@ class LyricLine extends StatelessWidget {
 
   CrossAxisAlignment get _crossAxisAlignment {
     final type = agent?.type;
-    return type == 'other'
-        ? CrossAxisAlignment.end
-        : CrossAxisAlignment.start;
+    return type == 'other' ? CrossAxisAlignment.end : CrossAxisAlignment.start;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-      child: Column(
-        crossAxisAlignment: _crossAxisAlignment,
-        children: [
-          if (_isInstrumental)
-            _buildInstrumental()
-          else
-            Wrap(
-              runSpacing: 4,
-              children: _buildWords(),
-            ),
-        ],
+    // return Container(
+    //   width: double.infinity,
+    //   color: Colors.pink,
+    //   child: Padding(
+    //     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+    //     child: Wrap(
+    //       spacing: 8.0, // Gap between adjacent chips
+    //       runSpacing: 4.0, // Gap between lines
+    //       children: <Widget>[
+    //         Chip(label: Text('Item 1')),
+    //         Chip(label: Text('Item 2')),
+    //         Chip(label: Text('Item 3')),
+    //         Chip(label: Text('Item 4')),
+    //       ],
+    //     ),
+    //   ),
+    // );
+
+    return AnimatedScale(
+      duration: Durations.short4,
+      scale: isActive ? 1.0 : 0.95,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        child: Column(
+          crossAxisAlignment: _crossAxisAlignment,
+          children: [
+            if (_isInstrumental)
+              _buildInstrumental()
+            else
+              Wrap(runSpacing: 4, children: _buildWords()),
+          ],
+        ),
       ),
     );
   }
@@ -54,10 +75,8 @@ class LyricLine extends StatelessWidget {
   Widget _buildInstrumental() {
     return Icon(
       Icons.music_note,
-      color: isActive
-          ? Colors.white54
-          : Colors.white.withValues(alpha: 0.35),
-      size: 28,
+      color: isActive ? Colors.white54 : Colors.white.withValues(alpha: 0.35),
+      size: 26,
     );
   }
 
@@ -88,7 +107,7 @@ class LyricLine extends StatelessWidget {
     return Text(
       ' ',
       style: TextStyle(
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: FontWeight.w800,
         color: Colors.white.withValues(alpha: 0.45),
       ),
@@ -114,7 +133,7 @@ class LyricLine extends StatelessWidget {
       return Text(
         word.text,
         style: const TextStyle(
-          fontSize: 28,
+          fontSize: 26,
           fontWeight: FontWeight.w800,
           color: Colors.white,
         ),
@@ -125,22 +144,19 @@ class LyricLine extends StatelessWidget {
       final wordDurationMicros = word.duration.inMicroseconds;
       final progress = wordDurationMicros <= 0
           ? 1.0
-          : ((position - word.begin).inMicroseconds / wordDurationMicros)
-              .clamp(0.0, 1.0);
+          : ((position - word.begin).inMicroseconds / wordDurationMicros).clamp(
+              0.0,
+              1.0,
+            );
 
-      const style = TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.w800,
-      );
+      const style = TextStyle(fontSize: 26, fontWeight: FontWeight.w800);
 
       return Stack(
         children: [
           // Bottom layer — dim, unfilled background.
           Text(
             word.text,
-            style: style.copyWith(
-              color: Colors.white.withValues(alpha: 0.45),
-            ),
+            style: style.copyWith(color: Colors.white.withValues(alpha: 0.45)),
           ),
           // Top layer — full white, clipped to the current progress width.
           ClipRect(
@@ -161,10 +177,77 @@ class LyricLine extends StatelessWidget {
     return Text(
       word.text,
       style: TextStyle(
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: FontWeight.w800,
         color: Colors.white.withValues(alpha: 0.45),
       ),
     );
   }
+}
+
+
+
+
+
+
+
+
+class LyricLinesNotification extends Notification {
+  final Map<int, double> visibleOffsets;
+  LyricLinesNotification(this.visibleOffsets);
+}
+
+class LyricLinesSliverList extends SliverMultiBoxAdaptorWidget {
+  const LyricLinesSliverList({super.key, required super.delegate});
+
+  @override
+  RenderLyricLinesSliverList createRenderObject(BuildContext context) {
+  final SliverMultiBoxAdaptorElement childManager = context as SliverMultiBoxAdaptorElement;
+    return RenderLyricLinesSliverList(
+      context: context,
+      childManager: childManager,
+    );
+  }
+}
+
+class RenderLyricLinesSliverList extends RenderSliverList {
+  final BuildContext? context;
+
+  RenderLyricLinesSliverList({required super.childManager, this.context});
+
+  // Keep track of the last reported state
+  Map<int, double>? _lastOffsets;
+
+  @override
+  void performLayout() {
+    super.performLayout();
+  
+    final Map<int, double> currentOffsets = {};
+    RenderBox? child = firstChild;
+  
+    while (child != null) {
+      final SliverMultiBoxAdaptorParentData childParentData = 
+          child.parentData! as SliverMultiBoxAdaptorParentData;
+      
+      // layoutOffset is the distance from the top of the SliverList
+      final double itemOffset = childParentData.layoutOffset ?? 0.0;
+      
+      currentOffsets[childParentData.index!] = itemOffset;
+      
+      child = childAfter(child);
+    }
+
+    // Only dispatch if the scroll positions have changed
+    // Note: Using MapEquality here since values (offsets) change frequently
+    if (!const MapEquality().equals(_lastOffsets, currentOffsets)) {
+      _lastOffsets = Map.from(currentOffsets);
+      
+      Future.microtask(() {
+        if (context != null && (context as Element).mounted) {
+          LyricLinesNotification(currentOffsets).dispatch(context);
+        }
+      });
+    }
+  }
+  
 }

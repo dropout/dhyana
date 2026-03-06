@@ -49,6 +49,10 @@ GoRouter createAppRouter({required InitResult initResult}) {
 )
 class HomeRoute extends GoRouteData with $HomeRoute {
 
+  // Can't enforce a type for the extra parameter in the constructor because go_router generated
+  // code needs to be able to pass any type of extra parameter when rebuilding the widget tree
+  // for select widget mode in devtools. 
+  // So we will type cast the extra parameter in the build method instead.
   final Object? $extra;
 
   const HomeRoute({
@@ -105,11 +109,23 @@ class TimerRoute extends GoRouteData with $TimerRoute {
   name: 'CHANTING',
 )
 class ChantingRoute extends GoRouteData with $ChantingRoute {
-  final ChantingSettings $extra;
+  
+  final Object? $extra;
   const ChantingRoute({required this.$extra});
+
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-    ChantingScreen(chantingSettings: $extra);
+  Widget build(BuildContext context, GoRouterState state) {
+    final ChantingSettings chantingSettings = 
+      ($extra is ChantingSettings) 
+        ? $extra as ChantingSettings 
+        : ChantingSettings(selectedChants: []);
+
+    return ChantingScreen(
+      chantingSettings: chantingSettings,
+      key: state.pageKey,
+    );
+  }
+    
 }
 
 @TypedGoRoute<SessionCompletedRoute>(

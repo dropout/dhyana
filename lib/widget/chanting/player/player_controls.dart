@@ -40,6 +40,11 @@ class PlayerControls extends StatelessWidget {
     final double maxMs = safeDuration.inMilliseconds.toDouble();
     final double currentMs = safePosition.inMilliseconds.toDouble();
 
+    final TextStyle? timeTextStyle = context.theme.textTheme.bodyMedium?.copyWith(
+      color: Colors.white70,
+      fontWeight: FontWeight.bold,
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -54,25 +59,22 @@ class PlayerControls extends StatelessWidget {
                 },
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: <Widget>[
-              Text(
-                _formatDuration(safePosition),
-                style: context.theme.textTheme.bodyMedium?.copyWith(
-                  color: Colors.white70,
-                ),              
-              ),
-              const Spacer(),
-              Text(
-                _formatDuration(safeDuration),
-                style: context.theme.textTheme.bodyMedium?.copyWith(
-                  color: Colors.white70,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  _formatDuration(safePosition),
+                  style: timeTextStyle,
                 ),
-              ),
-            ],
+                const Spacer(),
+                Text(
+                  _formatDuration(safeDuration),
+                  style: timeTextStyle,
+                ),              
+              ],
+            ),
           ),
-        ),
+
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

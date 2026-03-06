@@ -4,12 +4,14 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'app_circular_progress_indicator.dart';
 
 class AppLoadingDisplay extends StatelessWidget {
-
+  
   final String? text;
+  final Color? color;
 
   const AppLoadingDisplay({
-    this.text,
-    super.key,
+    this.text, 
+    this.color, 
+    super.key
   });
 
   @override
@@ -23,13 +25,17 @@ class AppLoadingDisplay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const AppCircularProgressIndicator(),
+            AppCircularProgressIndicator(color: color ?? Theme.of(context).primaryColor),
             if (hasText) const SizedBox(height: DesignSpec.spacingLg),
-            if (hasText) Text(text!, textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleLarge)
-          ]
-        )
+            if (hasText)
+              Text(
+                text!,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+          ],
+        ),
       ),
     );
-
   }
 }

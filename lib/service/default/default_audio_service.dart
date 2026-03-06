@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dhyana/enum/playback_state.dart';
-import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/enum/sound.dart';
 
@@ -84,6 +83,12 @@ class DefaultAudioService with LoggerMixin implements AudioService {
   Future<void> stop() {
     logger.t('Stop playback');
     return audioPlayer.stop();
+  }
+
+  @override
+  Future<void> release() {
+    logger.t('Release audio player resources');
+    return audioPlayer.release();
   }
 
   /// Disposes the audio player when the service is closed.

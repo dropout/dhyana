@@ -50,7 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               constraints: const BoxConstraints.tightFor(width: widgetHeight),
               child: w,
             )).toList().intersperse(Gap.small()),
-          ),
+          ),          
         ),
       ),
     );
