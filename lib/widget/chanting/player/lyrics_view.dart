@@ -65,6 +65,29 @@ class _LyricsViewState extends State<LyricsView> {
     });
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  /// Scrolls to the active line when the active line index changes.
+  @override
+  void didUpdateWidget(covariant LyricsView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.chantingState.activeLineIndex !=
+        oldWidget.chantingState.activeLineIndex) {
+      debugPrint(
+        'Active line index changed: ${oldWidget.chantingState.activeLineIndex} -> ${widget.chantingState.activeLineIndex}',
+      );
+      // if (widget.chantingState.playbackState != .playing) {
+        _scrollToActiveLine();
+      // }
+      
+    }
+  }
+
   /// Handler for when the isScrolling on [ScrollController] changes.
   /// When user scrolls manually, we want to pause playback to avoid fighting
   /// with the auto-scrolling behavior.
@@ -85,25 +108,29 @@ class _LyricsViewState extends State<LyricsView> {
     }
   }
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+  /// Handler for scroll events.
+  /// The goal of handling scroll events is to seek the chant to the line 
+  /// that is closest to the center of the view when user scrolls manually.
+  /// During programmatic scrolls (e.g. when active line changes during playback), 
+  /// we do not want to trigger seeking.
+  void _onScroll() {
 
-  /// Scrolls to the active line when the active line index changes.
-  @override
-  void didUpdateWidget(covariant LyricsView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.chantingState.activeLineIndex !=
-        oldWidget.chantingState.activeLineIndex) {
-      debugPrint(
-        'Active line index changed: ${oldWidget.chantingState.activeLineIndex} -> ${widget.chantingState.activeLineIndex}',
-      );
-      _scrollToActiveLine();
+    // If not user-initiated scroll, do not trigger seeking
+    if (!isScrolling) {
+      return;
     }
-  }
+
+    // 
+    final targetPosition = _calculateActiveLineBeginPosition();
+
+    if (targetPosition != null) {
+      BlocProvider.of<ChantingCubit>(
+        context,
+        listen: false,
+      ).seek(targetPosition);
+      debugPrint('Seeking to position: ${targetPosition.formatHHMMSSmm()}');
+    }
+  }  
 
   /// Scrolls the view to center the active line. 
   /// Only called when the active line changes.
@@ -131,41 +158,25 @@ class _LyricsViewState extends State<LyricsView> {
         isAnimating = true;
       });
 
-      await _scrollController.animateTo(
+      final animationFinished = _scrollController.animateTo(
         targetOffset,
         duration: Durations.long1,
         curve: Curves.easeInOut,
       );
 
-      setState(() {
-        isAnimating = false;
+      animationFinished.whenComplete(() {
+        setState(() {
+          isAnimating = false;
+        });
       });
     }
   }
 
-  /// Handler for scroll events.
-  void _onScroll() {    
-    // If user is actively scrolling, do not auto-scroll 
-    // to avoid fighting with user scroll
-    if (!isPointerDown && isAnimating) {
-      return;
-    }
-
-    final targetPosition = _calculateActiveLineScrollPosition();
-
-    if (targetPosition != null) {
-      BlocProvider.of<ChantingCubit>(
-        context,
-        listen: false,
-      ).seek(targetPosition);
-      debugPrint('Seeking to position: ${targetPosition.formatHHMMSSmm()}');
-    }
-  }
 
   /// Calculates the target scroll position to keep the active line centered.
-  /// It finds the currently visible line that is closest to the 'center' 
-  /// of the view, and returns the begin time of that line to seek the chant to.
-  Duration? _calculateActiveLineScrollPosition() {
+  /// If the closest line is the same as the current active line, 
+  /// returns null to indicate no seeking needed.
+  Duration? _calculateActiveLineBeginPosition() {
     double minOffset = double.infinity;
     int closestLineIndex = 0;
 

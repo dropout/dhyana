@@ -16,6 +16,7 @@ part 'chanting_cubit.freezed.dart';
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
+  
   final ChantingSettings chantingSettings;
   final AudioService audioService;
   final LyricsService lyricsService;
