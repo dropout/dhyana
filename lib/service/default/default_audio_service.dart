@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dhyana/enum/playback_state.dart';
+import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/enum/sound.dart';
 
@@ -74,7 +75,7 @@ class DefaultAudioService with LoggerMixin implements AudioService {
   /// Seeks the currently playing sound to the specified position.
   @override
   Future<void> seek(Duration position) {
-    logger.t('Seek audio to position: ${position.inSeconds} seconds');
+    logger.t('Seek audio to position: ${position.formatHHMMSSmm()} seconds');
     return audioPlayer.seek(position);
   }
 

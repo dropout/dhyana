@@ -1,16 +1,24 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
+import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/chanting/player/lyric_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Displays the lyrics for the currently playing chant, with auto-scrolling
+/// to keep the active line centered.
+/// Users can also manually scroll through the lyrics, that will also
+/// seek the chant to the corresponding line. During user-initiated scrolls,
+/// playback will be paused to avoid fighting with the auto-scrolling behavior.
 class LyricsView extends StatefulWidget {
+  /// The current state of the chanting player, containing
+  /// the lyrics document and active line index.
   final ChantingState chantingState;
+
+  /// The vertical offset from the top of the screen where
+  /// the active line should be centered.
   final double topOffset;
 
+  /// Creates a [LyricsView] widget.
   const LyricsView({
     required this.chantingState,
     this.topOffset = 200.0,
@@ -22,14 +30,25 @@ class LyricsView extends StatefulWidget {
 }
 
 class _LyricsViewState extends State<LyricsView> {
+  
+  /// Scroll controller to manage programmatic scrolling and 
+  /// listen to user scroll events.
   final ScrollController _scrollController = ScrollController();
-
-  // late final StreamSubscription<Duration> _progressSub;
-
-  List<(int, double)> _visibleOffsets = [];
+  
+  /// Flag to indicate whether there is scrolling of 
+  /// any kind (user-initiated or programmatic) currently happening.
   bool isScrolling = false;
+  
+  /// Flag to indicate whether the user is currently touching the screen.
   bool isPointerDown = false;
+
+  /// Flag to indicate whether we are currently 
+  /// animating the scroll position programmatically.  
   bool isAnimating = false;
+
+  /// List of currently visible line indices and 
+  /// their offsets from the top of the scroll view.
+  List<(int, double)> _visibleLineOffsets = []; // (lineIndex, offsetFromTop)
 
   @override
   void initState() {
@@ -38,6 +57,7 @@ class _LyricsViewState extends State<LyricsView> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _scrollController.addListener(_onScroll);
       if (_scrollController.hasClients) {
+        // Reliable way to detect user-initiated scrolls vs programmatic scrolls
         _scrollController.position.isScrollingNotifier.addListener(
           _onIsScrollingChanged,
         );
@@ -45,6 +65,9 @@ class _LyricsViewState extends State<LyricsView> {
     });
   }
 
+  /// Handler for when the isScrolling on [ScrollController] changes.
+  /// When user scrolls manually, we want to pause playback to avoid fighting
+  /// with the auto-scrolling behavior.
   void _onIsScrollingChanged() {
     // Ensure that we only pause when user is actively touching the screen
     // When animating scroll programmatically, do not pause
@@ -56,41 +79,51 @@ class _LyricsViewState extends State<LyricsView> {
     } else {
       setState(() {
         isScrolling = false;
+        // If we just finished a user scroll, snap to the active line
+        _scrollToActiveLine();
       });
     }
   }
 
   @override
   void dispose() {
-    // _progressSub.cancel();
     _scrollController.dispose();
     super.dispose();
   }
 
+  /// Scrolls to the active line when the active line index changes.
   @override
   void didUpdateWidget(covariant LyricsView oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.chantingState.activeLineIndex !=
         oldWidget.chantingState.activeLineIndex) {
+      debugPrint(
+        'Active line index changed: ${oldWidget.chantingState.activeLineIndex} -> ${widget.chantingState.activeLineIndex}',
+      );
       _scrollToActiveLine();
     }
   }
 
+  /// Scrolls the view to center the active line. 
+  /// Only called when the active line changes.
   void _scrollToActiveLine() async {
     // Don't auto-scroll if user is actively scrolling
     if (isScrolling) return;
 
     final activeIndex = widget.chantingState.activeLineIndex;
 
-    final target = _visibleOffsets.firstWhere(
-      (entry) => entry.$1 == activeIndex,
+    // Find the offset of the active line from the list of currently visible lines
+    // If not found, indicate with a negative index and skip the auto-scrolling
+    final target = _visibleLineOffsets.firstWhere(
+      (entry) => (entry.$1 == activeIndex),
       orElse: () => (-1, 0.0),
     );
 
+    // If the active line is currently visible, animate to center it
     if (target.$1 >= 0) {
       final targetOffset = widget.topOffset + target.$2 - widget.topOffset;
-      print(
+      debugPrint(
         'Current offset: ${_scrollController.offset}, Target offset: $targetOffset',
       );
 
@@ -108,46 +141,56 @@ class _LyricsViewState extends State<LyricsView> {
         isAnimating = false;
       });
     }
-
   }
 
-  void _onScroll() {
-    print('Scroll offset: ${_scrollController.offset}');
-    _calculateActiveLineScroll();
+  /// Handler for scroll events.
+  void _onScroll() {    
+    // If user is actively scrolling, do not auto-scroll 
+    // to avoid fighting with user scroll
+    if (!isPointerDown && isAnimating) {
+      return;
+    }
+
+    final targetPosition = _calculateActiveLineScrollPosition();
+
+    if (targetPosition != null) {
+      BlocProvider.of<ChantingCubit>(
+        context,
+        listen: false,
+      ).seek(targetPosition);
+      debugPrint('Seeking to position: ${targetPosition.formatHHMMSSmm()}');
+    }
   }
 
-  void _calculateActiveLineScroll() {
+  /// Calculates the target scroll position to keep the active line centered.
+  /// It finds the currently visible line that is closest to the 'center' 
+  /// of the view, and returns the begin time of that line to seek the chant to.
+  Duration? _calculateActiveLineScrollPosition() {
     double minOffset = double.infinity;
     int closestLineIndex = 0;
-    for (final entry in _visibleOffsets) {
+
+    // Find the visible line that is closest to the center of the view
+    for (final entry in _visibleLineOffsets) {
       final localOffset = entry.$2 - _scrollController.offset;
-
-      if (localOffset < 0) continue; // Skip lines that are above the current scroll position
-
       if (localOffset.abs() < minOffset) {
         minOffset = localOffset.abs();
         closestLineIndex = entry.$1;
       }
     }
+    debugPrint('Closest Line Index: $closestLineIndex with offset: $minOffset');
 
-    // print('Closest Line Index: $closestLineIndex with offset: $minOffset');
+    // If the closest line is different from the current active line, 
+    // return the begin time of that line to seek to. 
+    // Otherwise, return null to indicate no seeking.
     if (widget.chantingState.activeLineIndex != closestLineIndex) {
-      // closestLineIndex = max(
-      //   0, 
-      //   widget.chantingState.lyricsDocument?.lines.length ?? 0 - 1
-      // );
       final targetLine =
         widget.chantingState.lyricsDocument?.lines[closestLineIndex];
       if (targetLine != null) {
-        // print(
-        //   'Seeking to line index: $closestLineIndex at position: ${targetLine.begin.inSeconds} seconds',
-        // );
-        BlocProvider.of<ChantingCubit>(
-          context,
-          listen: false,
-        ).seek(targetLine.begin);
+        return targetLine.begin;
       }
     }
+
+    return null;
   }
 
   @override
@@ -160,9 +203,9 @@ class _LyricsViewState extends State<LyricsView> {
     return NotificationListener<LyricLinesNotification>(
       onNotification: (notification) {
         setState(() {
-          _visibleOffsets = notification.visibleOffsets.entries
-              .map((e) => (e.key, e.value))
-              .toList();
+          _visibleLineOffsets = notification.visibleOffsets.entries
+            .map((e) => (e.key, e.value))
+            .toList();
         });
         return true; // Indicate we've handled the notification
       },
