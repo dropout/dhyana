@@ -13,6 +13,8 @@ import 'package:ttml_parser/ttml_parser.dart';
 part 'chanting_state.dart';
 part 'chanting_cubit.freezed.dart';
 
+/// Cubit responsible for managing the state of the chanting player, including
+/// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   final ChantingSettings chantingSettings;
   final AudioService audioService;
@@ -23,6 +25,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   StreamSubscription? _positionSubscription;
   StreamSubscription? _playbackStateSubscription;
 
+  /// Creates a new instance of [ChantingCubit] with the provided services and settings.
   ChantingCubit({
     required this.chantingSettings,
     required this.audioService,
@@ -37,12 +40,25 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   void _onPositionChanged(Duration position) {
     final activeLineIndex =
-        state.lyricsDocument?.activeLineIndex(position) ?? 0;
-    emit(state.copyWith(position: position, activeLineIndex: activeLineIndex));
+      state.lyricsDocument?.activeLineIndex(position) ?? 0;
+
+    // If position falls between two lines,
+    // keep the line index unchanged until the next line is active
+    if (activeLineIndex == -1) {
+      emit(state.copyWith(position: position));
+    } else {
+      emit(
+        state.copyWith(
+          position: position, 
+          activeLineIndex: activeLineIndex
+        ),
+      );
+    }
   }
 
   void _onPlaybackStateChanged(PlaybackState playbackState) {
     emit(state.copyWith(playbackState: playbackState));
+    logger.t('Playback state changed: $playbackState');
   }
 
   Future<void> _init() async {
