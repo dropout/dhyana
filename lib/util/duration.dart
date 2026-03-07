@@ -38,6 +38,13 @@ extension DurationUtils on Duration {
     return "$twoDigitMinutes:$twoDigitSeconds";
   }
 
+  String formatHHMMSSmm() {
+    String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
+    String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
+    String twoDigitMilliseconds = _twoDigits(inMilliseconds.remainder(1000) ~/ 10);
+    return "${_twoDigits(inHours)}:$twoDigitMinutes:$twoDigitSeconds.$twoDigitMilliseconds";
+  }
+
 }
 
 String _twoDigits(int n) {
