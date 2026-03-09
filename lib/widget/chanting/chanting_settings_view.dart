@@ -128,6 +128,7 @@ class _ChantList extends StatelessWidget {
     }
 
     return ReorderableListView.builder(
+      physics: ClampingScrollPhysics(),
       buildDefaultDragHandles: false,
       itemCount: chants.length,
       onReorder: (oldIndex, newIndex) {
@@ -137,14 +138,16 @@ class _ChantList extends StatelessWidget {
       },
       footer: Padding(
         padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
-        child: AddChantButton(
-          onTap: onAddChant,
+        child: SizedBox.shrink( // to prevent stretching of the button
+          child: AddChantButton(
+            onTap: onAddChant,
+          ),
         ),
       ),
       itemBuilder: (context, index) {
         final chant = chants[index];
         return _ChantListItem(
-          key: ValueKey(chant.id),
+          key: ObjectKey(chant.id),
           chant: chant,
           index: index,
           enableDragging: chants.length > 1, // disable dragging if there's only one item

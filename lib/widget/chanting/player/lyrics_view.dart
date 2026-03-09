@@ -102,8 +102,6 @@ class _LyricsViewState extends State<LyricsView> {
     } else {
       setState(() {
         isScrolling = false;
-        // If we just finished a user scroll, snap to the active line
-        _scrollToActiveLine();
       });
     }
   }
@@ -188,7 +186,7 @@ class _LyricsViewState extends State<LyricsView> {
         closestLineIndex = entry.$1;
       }
     }
-    debugPrint('Closest Line Index: $closestLineIndex with offset: $minOffset');
+    // debugPrint('Closest Line Index: $closestLineIndex with offset: $minOffset');
 
     // If the closest line is different from the current active line, 
     // return the begin time of that line to seek to. 
