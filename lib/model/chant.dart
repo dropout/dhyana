@@ -16,8 +16,6 @@ sealed class Chant with _$Chant implements Model {
     required String id,
     required String name,
     @DurationConverter() required Duration length,
-    required String audioResourceUrl,
-    required String lyricsResourceUrl,
   }) = _Chant;
 
   factory Chant.fromJson(Map<String, Object?> json) =>

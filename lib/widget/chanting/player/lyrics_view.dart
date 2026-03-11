@@ -195,7 +195,7 @@ class _LyricsViewState extends State<LyricsView> {
       final targetLine =
         widget.chantingState.lyricsDocument?.lines[closestLineIndex];
       if (targetLine != null) {
-        return targetLine.begin;
+        return targetLine.start;
       }
     }
 
@@ -242,9 +242,6 @@ class _LyricsViewState extends State<LyricsView> {
                   line: line,
                   position: widget.chantingState.position,
                   isActive: index == widget.chantingState.activeLineIndex,
-                  agent: widget.chantingState.lyricsDocument?.agentFor(
-                    line.agentId,
-                  ),
                 );
               }, childCount: lyricsDocument.lines.length),
             ),

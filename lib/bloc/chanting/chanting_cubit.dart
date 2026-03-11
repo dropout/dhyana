@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/model/chant.dart';
+import 'package:dhyana/model/lyrics_document.dart';
 import 'package:dhyana/service/all.dart';
 import 'package:dhyana/service/lyrics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ttml_parser/ttml_parser.dart';
 
 part 'chanting_state.dart';
 part 'chanting_cubit.freezed.dart';

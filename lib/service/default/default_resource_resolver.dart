@@ -26,7 +26,7 @@ class DefaultResourceResolver implements ResourceResolver {
 
   @override
   Future<String> getChantLyricsUrl(String chantId) {
-    String lyricsFilename = 'chant.ttml';
+    String lyricsFilename = 'chant.ass';
     String path = '/chants/$chantId/$lyricsFilename';
     return storageDataProvider.getDownloadURL(path);
   }

@@ -1,10 +1,11 @@
 
 import 'package:collection/collection.dart';
+import 'package:dhyana/model/lyrics_line.dart';
+import 'package:dhyana/model/lyrics_word.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:ttml_parser/ttml_parser.dart';
 
-/// Renders a single [TtmlLine] with per-word highlight animation.
+/// Renders a single [LyricsLine] with per-word highlight animation.
 ///
 /// Words are rendered in one of four visual states:
 /// - **Inactive** — the line is not currently active.
@@ -18,20 +19,13 @@ class LyricLine extends StatelessWidget {
     required this.line,
     required this.position,
     required this.isActive,
-    required this.agent,
   });
 
-  final TtmlLine line;
+  final LyricsLine line;
   final Duration position;
   final bool isActive;
-  final TtmlAgent? agent;
 
   bool get _isInstrumental => line.words.every((w) => w.text == '0');
-
-  CrossAxisAlignment get _crossAxisAlignment {
-    final type = agent?.type;
-    return type == 'other' ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +53,7 @@ class LyricLine extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         child: Column(
-          crossAxisAlignment: _crossAxisAlignment,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (_isInstrumental)
               _buildInstrumental()
@@ -113,7 +107,7 @@ class LyricLine extends StatelessWidget {
     );
   }
 
-  Widget _buildWord(TtmlWord word) {
+  Widget _buildWord(LyricsWord word) {
     if (!isActive) {
       return Text(
         word.text,
@@ -126,7 +120,7 @@ class LyricLine extends StatelessWidget {
     }
 
     final isSung = position >= word.end;
-    final isSinging = !isSung && position >= word.begin;
+    final isSinging = !isSung && position >= word.start;
 
     if (isSung) {
       return Text(
@@ -143,7 +137,7 @@ class LyricLine extends StatelessWidget {
       final wordDurationMicros = word.duration.inMicroseconds;
       final progress = wordDurationMicros <= 0
           ? 1.0
-          : ((position - word.begin).inMicroseconds / wordDurationMicros).clamp(
+          : ((position - word.start).inMicroseconds / wordDurationMicros).clamp(
               0.0,
               1.0,
             );

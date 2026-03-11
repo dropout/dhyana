@@ -31,8 +31,6 @@ class StubbedChantsRepository implements ChantsRepository {
         id: _faker.guid.guid(),
         name: chantName,
         length: Duration(minutes: 5 + index),
-        audioResourceUrl: 'https://example.com/audio/${chantName.toLowerCase().replaceAll(' ', '_')}.mp3',
-        lyricsResourceUrl: 'https://example.com/lyrics/${chantName.toLowerCase().replaceAll(' ', '_')}.txt',
       );
     });
   }

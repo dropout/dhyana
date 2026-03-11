@@ -13,7 +13,7 @@ sealed class ChantingState with _$ChantingState {
     @Default(Duration.zero) Duration duration,
     @Default(Duration.zero) Duration position,
     @Default(0) activeLineIndex,
-    TtmlDocument? lyricsDocument,     
+    LyricsDocument? lyricsDocument,     
   }) = _ChantingState;
 
 }
