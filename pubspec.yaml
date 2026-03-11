@@ -51,9 +51,10 @@ dependencies:
   gaimon: ^1.4.1 # haptic feedback library
   dart_geohash: ^2.1.0
   tflite_flutter: ^0.12.1 # For NSFW model inference
-  ttml_parser:
+  assa_parser:
     git:
-      url: git@github.com:dropout/ttml_parser.git
+      url: git@github.com:dropout/assa_parser.git
+  
 
   # Firebase
   firebase_core: ^4.1.1

@@ -1,7 +1,7 @@
-import 'package:ttml_parser/ttml_parser.dart';
+import 'package:dhyana/model/lyrics_document.dart';
 
 abstract interface class LyricsService {
   
-  Future<TtmlDocument> loadLyrics(String lyricsResourceUrl);
+  Future<LyricsDocument> loadLyrics(String lyricsResourceUrl);
 
 }

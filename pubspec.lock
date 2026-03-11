@@ -41,6 +41,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.7.0"
+  assa_parser:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "65a53895eaa089128bf4535a4e7d99ec32cf7925"
+      url: "git@github.com:dropout/assa_parser.git"
+    source: git
+    version: "0.1.0"
   async:
     dependency: transitive
     description:
@@ -1583,15 +1592,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.1"
-  ttml_parser:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "689756f8d22f03e375ea3bc836b264acb7079735"
-      url: "git@github.com:dropout/ttml_parser.git"
-    source: git
-    version: "0.1.0"
   typed_data:
     dependency: transitive
     description:
@@ -1785,5 +1785,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.10.8 <4.0.0"
+  dart: ">=3.10.3 <4.0.0"
   flutter: ">=3.38.4"
