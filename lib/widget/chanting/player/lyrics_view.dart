@@ -152,13 +152,14 @@ class _LyricsViewState extends State<LyricsView> {
         'Current offset: ${_scrollController.offset}, Target offset: $targetOffset',
       );
 
+
       setState(() {
         isAnimating = true;
       });
 
       final animationFinished = _scrollController.animateTo(
         targetOffset,
-        duration: Durations.long1,
+        duration: Durations.long4,
         curve: Curves.easeInOut,
       );
 
@@ -229,8 +230,9 @@ class _LyricsViewState extends State<LyricsView> {
             isPointerDown = false;
           });
         },
-        child: CustomScrollView(
+        child: CustomScrollView(        
           controller: _scrollController,
+          physics: ClampingScrollPhysics(),
           slivers: [
             SliverPadding(
               padding: EdgeInsets.only(top: widget.topOffset),

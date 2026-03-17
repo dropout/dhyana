@@ -19,5 +19,5 @@ sealed class LyricsWord with _$LyricsWord {
   Duration get duration => end - start;
 
   factory LyricsWord.fromJson(Map<String, dynamic> json) =>
-      _$LyricsWordFromJson(json);
+    _$LyricsWordFromJson(json);
 }
