@@ -9,6 +9,11 @@ import 'package:flutter/rendering.dart';
 /// The [position] is used to determine the state of each word (inactive, pending, singing, sung).
 /// The [isActive] is currently not used, but can be used in the future to apply additional styling to the active line.
 class LyricLine extends StatelessWidget {
+
+  final LyricsLine line;
+  final Duration position;
+  final bool isActive;
+
   const LyricLine({
     super.key,
     required this.line,
@@ -16,15 +21,11 @@ class LyricLine extends StatelessWidget {
     required this.isActive,
   });
 
-  final LyricsLine line;
-  final Duration position;
-  final bool isActive;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-      child: Wrap(runSpacing: 4, children: _buildWords()),
+      child: Wrap(runSpacing: -6, children: _buildWords()),
     );
   }
 
