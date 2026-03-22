@@ -9,7 +9,6 @@ import 'package:dhyana/widget/timer/running/timer_running_time.dart';
 import 'package:dhyana/widget/timer/running/timer_running_controls.dart';
 import 'package:dhyana/widget/design_spec.dart';
 
-
 class TimerRunningView extends StatefulWidget {
 
   final TimerState timerState;

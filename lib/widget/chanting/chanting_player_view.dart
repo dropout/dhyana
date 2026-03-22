@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/enum/playback_state.dart';
+import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/chanting/player/lyrics_view.dart';
 import 'package:dhyana/widget/chanting/player/player_controls.dart';
 import 'package:dhyana/widget/chanting/player/playlist_sheet.dart';
@@ -8,21 +9,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Main view for the chanting player, displaying the lyrics and playback controls.
-class ChantingPlayerView extends StatelessWidget {
-
+class ChantingPlayerView extends StatefulWidget {
   /// The current state of the chanting player, containing
   /// the lyrics document, playback position, and playback state, etc...
   final ChantingState chantingState;
 
+  /// Service to manage wakelock during chanting sessions.
+  final WakelockService wakelockService;
+
   /// Creates a [ChantingPlayerView] widget.
   const ChantingPlayerView({
     required this.chantingState,
-    super.key
+    required this.wakelockService,
+    super.key,
   });
 
+  @override
+  State<ChantingPlayerView> createState() => _ChantingPlayerViewState();
+}
+
+class _ChantingPlayerViewState extends State<ChantingPlayerView> 
+  with WidgetsBindingObserver {
+
+  @override
+  void initState() {
+    widget.wakelockService.enable();
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.wakelockService.disable();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   /// Handles play/pause button press by toggling playback state
-  void _onPlayPausePressed(BuildContext context) {  
-    if (chantingState.playbackState == PlaybackState.playing) {
+  void _onPlayPausePressed(BuildContext context) {
+    if (widget.chantingState.playbackState == PlaybackState.playing) {
       context.read<ChantingCubit>().pause();
     } else {
       context.read<ChantingCubit>().play();
@@ -49,9 +74,7 @@ class ChantingPlayerView extends StatelessWidget {
       showDragHandle: false,
       builder: (bottomSheetContext) => SizedBox(
         height: MediaQuery.of(bottomSheetContext).size.height * 0.75,
-        child: PlaylistSheet(
-          chantingState: chantingState,
-        )
+        child: PlaylistSheet(chantingState: widget.chantingState),
       ),
     );
   }
@@ -60,14 +83,9 @@ class ChantingPlayerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
-      children: [        
-        LyricsView(chantingState: chantingState),
-        Positioned(
-          left: 0,
-          bottom: 0,
-          right: 0,
-          child: buildControls(context),
-        )
+      children: [
+        LyricsView(chantingState: widget.chantingState),
+        Positioned(left: 0, bottom: 0, right: 0, child: buildControls(context)),
       ],
     );
   }
@@ -75,8 +93,6 @@ class ChantingPlayerView extends StatelessWidget {
   Widget buildControls(BuildContext context) {
     return Stack(
       children: [
-
-
         Positioned.fill(
           child: IgnorePointer(
             child: DecoratedBox(
@@ -104,10 +120,9 @@ class ChantingPlayerView extends StatelessWidget {
               bottom: DesignSpec.paddingLg,
             ),
             child: PlayerControls(
-              position: chantingState.position,
-              duration: chantingState.duration,
-              isPlaying:
-                (chantingState.playbackState == PlaybackState.playing),
+              position: widget.chantingState.position,
+              duration: widget.chantingState.duration,
+              isPlaying: (widget.chantingState.playbackState == PlaybackState.playing),
               onNextPressed: () => _onNextPressed(context),
               onPlayPausePressed: () => _onPlayPausePressed(context),
               onPreviousPressed: () => _onPreviousPressed(context),
@@ -118,5 +133,4 @@ class ChantingPlayerView extends StatelessWidget {
       ],
     );
   }
-
 }

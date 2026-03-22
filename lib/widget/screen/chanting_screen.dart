@@ -49,6 +49,7 @@ class ChantingScreen extends StatelessWidget {
             PlaybackState.error => Center(child: Text('Error loading chant')),
             _ => ChantingPlayerView(
               chantingState: state,
+              wakelockService: context.services.wakelockService,
             ),
           };
         }
