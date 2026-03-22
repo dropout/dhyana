@@ -86,7 +86,7 @@ class ChantingPlayerView extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.8),
+                    Colors.black.withValues(alpha: 0.9),
                   ],
                   stops: const [0.0, 0.5],
                 ),
@@ -101,6 +101,7 @@ class ChantingPlayerView extends StatelessWidget {
               top: DesignSpec.padding2Xl,
               left: DesignSpec.paddingLg,
               right: DesignSpec.paddingLg,
+              bottom: DesignSpec.paddingLg,
             ),
             child: PlayerControls(
               position: chantingState.position,

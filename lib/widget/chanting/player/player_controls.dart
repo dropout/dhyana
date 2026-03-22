@@ -4,10 +4,11 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
-/// Displays transport controls and a seekable progress bar for audio playback.
+/// Displays transport controls and a non-seekable progress bar for audio playback.
 /// Shows the current position and total duration of the chant, and allows
 /// users to play/pause, skip tracks, and open the playlist.
 class PlayerControls extends StatelessWidget {
+
   /// Creates a [PlayerControls] widget.
   const PlayerControls({
     required this.position,
@@ -102,71 +103,42 @@ class PlayerControls extends StatelessWidget {
             ],
           ),
         ),
-
         Gap.medium(),
-
         buildControlsRow(context),
-
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-        //     IconButton(
-        //       onPressed: isPreviousEnabled ? onPreviousPressed : null,
-        //       icon: const Icon(Icons.skip_previous_rounded),
-        //       color: isPreviousEnabled ? Colors.white : Colors.white54,
-        //       tooltip: 'Previous',
-        //     ),
-        //     const SizedBox(width: 8),
-        //     IconButton.filled(
-        //       onPressed: onPlayPausePressed,
-        //       icon: Icon(
-        //         isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-        //       ),
-        //       tooltip: isPlaying ? 'Pause' : 'Play',
-        //     ),
-        //     const SizedBox(width: 8),
-        //     IconButton(
-        //       onPressed: isNextEnabled ? onNextPressed : null,
-        //       icon: const Icon(Icons.skip_next_rounded),
-        //       color: isNextEnabled ? Colors.white : Colors.white54,
-        //       tooltip: 'Next',
-        //     ),
-        //   ],
-        // ),
-
-
-
       ],
     );
   }
 
   Widget buildControlsRow(BuildContext context) {
-    return Row(
+    return Row(    
       children: [
-        Expanded(child: Row()),
+        Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             IconButton(
+              iconSize: 32,
               onPressed: isPreviousEnabled ? onPreviousPressed : null,
               icon: const Icon(Icons.skip_previous_rounded),
               color: isPreviousEnabled ? Colors.white : Colors.white54,
-              tooltip: 'Previous',
             ),
-            const SizedBox(width: 8),
+            Gap.small(),
             IconButton.filled(
+              iconSize: 42,
               onPressed: onPlayPausePressed,
               icon: Icon(
                 isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
               ),
-              tooltip: isPlaying ? 'Pause' : 'Play',
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.red, // Change this color
+              ),
             ),
-            const SizedBox(width: 8),
+            Gap.small(),
             IconButton(
+              iconSize: 32,
               onPressed: isNextEnabled ? onNextPressed : null,
               icon: const Icon(Icons.skip_next_rounded),
               color: isNextEnabled ? Colors.white : Colors.white54,
-              tooltip: 'Next',
             ),
           ],
         ),
@@ -175,10 +147,10 @@ class PlayerControls extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
+                iconSize: 32,
                 onPressed: onPlaylistPressed,
                 icon: const Icon(Icons.playlist_play_rounded),
                 color: Colors.white,
-                tooltip: 'Playlist',
               ),
             ],
           )
