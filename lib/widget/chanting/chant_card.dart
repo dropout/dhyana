@@ -30,9 +30,11 @@ class ChantCard extends StatelessWidget {
             dimension: 32,
             child: Center(
               child: Text(
-              '${index + 1}.',
-              textAlign: TextAlign.center,
-              style: context.theme.textTheme.bodyLarge,
+                '${index + 1}.',
+                textAlign: TextAlign.center,
+                style: context.theme.textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),
@@ -47,11 +49,15 @@ class ChantCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.theme.textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-
-                Text(chant.length.formatMMss()),
+                Text(
+                  chant.length.formatMMss(),
+                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ],
             ),
           ),
