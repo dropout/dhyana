@@ -159,7 +159,7 @@ class _LyricsViewState extends State<LyricsView> {
 
       final animationFinished = _scrollController.animateTo(
         targetOffset,
-        duration: Durations.long4,
+        duration: Durations.long2 * 2,
         curve: Curves.easeInOut,
       );
 
