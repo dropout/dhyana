@@ -1,4 +1,4 @@
 enum SessionType {
-  sitting,
+  timer,
   chanting,
 }

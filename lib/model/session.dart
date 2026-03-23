@@ -1,3 +1,5 @@
+import 'package:dhyana/enum/session_type.dart';
+import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -16,10 +18,12 @@ sealed class Session with _$Session implements Model {
 
   const factory Session({
     required String id,
+    required SessionType type,
     @DateTimeConverter() required DateTime startTime,
     @DateTimeConverter() required DateTime endTime,
     @DurationConverter() required Duration duration,
-    required TimerSettings timerSettings,
+    TimerSettings? timerSettings,
+    ChantingSettings? chantingSettings,
   }) = _Session;
 
   factory Session.fromJson(Map<String, Object?> json) =>

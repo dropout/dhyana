@@ -1,3 +1,4 @@
+import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/bloc_provider/timer_bloc_providers.dart';
@@ -46,8 +47,9 @@ class TimerScreen extends StatelessWidget {
           && currentState.timerStatus == TimerStatus.completed;
       },
       listener: (BuildContext context, TimerState timerState) {
-        Session session = Session(
+        Session session = Session(          
           id: context.services.idGeneratorService.sessionId(),
+          type: SessionType.timer,
           timerSettings: timerSettings,
           startTime: timerState.startTime ?? DateTime.now().subtract(timerState.elapsedTime),
           endTime: timerState.endTime ?? DateTime.now(),
@@ -59,5 +61,5 @@ class TimerScreen extends StatelessWidget {
     );
 
   }
-  
+
 }

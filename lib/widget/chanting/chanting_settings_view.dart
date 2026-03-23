@@ -90,9 +90,9 @@ class ChantingSettingsView extends StatelessWidget {
           Gap.medium(),
           Text(
             'Chanting',
-            style: Theme.of(
-              context,
-            ).textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.w800),
+            style: context.theme.textTheme.headlineLarge!.copyWith(
+              fontWeight: FontWeight.w800
+            ),
           ),
           Expanded(
             child: Padding(

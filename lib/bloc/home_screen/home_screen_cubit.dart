@@ -24,9 +24,9 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   Future<void> init(TimerSettings? timerSettings) async {
     if (timerSettings != null) {
-      setSessionType(SessionType.sitting);
+      setSessionType(SessionType.timer);
       emit(HomeScreenState.loaded(
-        sessionType: SessionType.sitting,
+        sessionType: SessionType.timer,
         timerSettings: timerSettings
       ));
     } else {
@@ -34,7 +34,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
         final homeScreenState = await _loadStateFromSharedPreferences();
         emit(homeScreenState);
       } catch (e, stackTrace) {
-        emit(HomeScreenState.loaded(sessionType: SessionType.sitting));
+        emit(HomeScreenState.loaded(sessionType: SessionType.timer));
         crashlyticsService.recordError(
           exception: e,
           stackTrace: stackTrace,
@@ -56,7 +56,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       );
       emit(HomeScreenState.loaded(
         // timerSettings: ,
-        sessionType: SessionType.sitting
+        sessionType: SessionType.timer
       ));
     }
   }
@@ -82,9 +82,9 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     try {
       final currentState = state;
       if (currentState is HomeScreenStateLoaded) {
-        final newSessionType = currentState.sessionType == SessionType.sitting
+        final newSessionType = currentState.sessionType == SessionType.timer
           ? SessionType.chanting
-          : SessionType.sitting;
+          : SessionType.timer;
         final updatedState = currentState.copyWith(sessionType: newSessionType);
         emit(updatedState);
         _saveStateToSharedPreferences(updatedState);

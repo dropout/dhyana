@@ -40,7 +40,7 @@ import 'package:dhyana/widget/timer/timer_settings_view.dart';
 /// - A body area that switches between [buildTimerSettingsView] and
 ///   [buildChantingSettingsView] depending on the active [SessionType].
 /// - A [SessionTypeToggle] anchored to the bottom-right corner, allowing
-///   the user to switch between [SessionType.sitting] and
+///   the user to switch between [SessionType.timer] and
 ///   [SessionType.chanting] at any time.
 ///
 /// Transitions between the two session views are animated using an
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
   /// Optional pre-configured timer settings to seed the sitting session with.
   ///
   /// When non-null, [HomeScreenCubit.init] uses this value to skip loading
-  /// persisted settings and jumps straight to [SessionType.sitting] with the
+  /// persisted settings and jumps straight to [SessionType.timer] with the
   /// supplied configuration. This is used, for example, when navigating from a
   /// history entry or from a notification that carries a specific session
   /// configuration.
@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Builds the [SessionTypeToggle] that lets the user switch between
-  /// [SessionType.sitting] and [SessionType.chanting].
+  /// [SessionType.timer] and [SessionType.chanting].
   ///
   /// Mode changes are forwarded to [HomeScreenCubit.setSessionType], which
   /// persists the selection via [SharedPreferencesService] and emits a new
@@ -132,8 +132,8 @@ class HomeScreen extends StatelessWidget {
       activeMode: state.sessionType,
       onModeChanged: (mode) {
         switch (mode) {
-          case SessionType.sitting:
-            context.read<HomeScreenCubit>().setSessionType(SessionType.sitting);
+          case SessionType.timer:
+            context.read<HomeScreenCubit>().setSessionType(SessionType.timer);
             break;
           case SessionType.chanting:
             context.read<HomeScreenCubit>().setSessionType(SessionType.chanting);
@@ -164,7 +164,7 @@ class HomeScreen extends StatelessWidget {
       //   );
       // },
       child: switch (state.sessionType) {
-        SessionType.sitting => buildTimerSettingsView(context, state),
+        SessionType.timer => buildTimerSettingsView(context, state),
         SessionType.chanting => buildChantingSettingsView(context),
       },
     );

@@ -1,3 +1,4 @@
+import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/util/faker.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/model/all.dart';
@@ -94,6 +95,7 @@ class FakeModelFactory {
   Session createSession() {
     return Session(
       id: faker.guid.guid(),
+      type: SessionType.timer,
       startTime: DateTime.now(),
       endTime: DateTime.now().add(const Duration(hours: 1)),
       duration: Duration(minutes: faker.randomGenerator.integer(60)),
