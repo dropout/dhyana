@@ -23,21 +23,17 @@ class SessionTypeToggle extends StatelessWidget {
     return CustomInkWell(
       onTap: () {
         context.hapticsTap();
-        SessionType newMode = (activeMode == SessionType.sitting)
+        SessionType newMode = (activeMode == SessionType.timer)
           ? SessionType.chanting
-          : SessionType.sitting;
+          : SessionType.timer;
         onModeChanged(newMode);
       },
-      child: Container(
+      child: Padding(
         padding: padding ?? const EdgeInsets.all(DesignSpec.paddingMd),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
-        ),
         child: Icon(
-          (activeMode == SessionType.sitting)
-            ? Icons.timer_outlined
-            : Icons.music_note,
+          (activeMode == SessionType.timer)
+            ? Icons.music_note
+            : Icons.hourglass_bottom_rounded,
           color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
       ),

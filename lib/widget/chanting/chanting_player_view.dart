@@ -138,4 +138,5 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
       ],
     );
   }
+  
 }

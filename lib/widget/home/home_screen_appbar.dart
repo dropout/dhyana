@@ -27,7 +27,7 @@ class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
         SignedIn(yes: (context, profileId) {
           return PresenceButton();
         }),
-        if (homeScreenState.sessionType == .sitting) SignedIn(yes: (context, profileId) {
+        if (homeScreenState.sessionType == .timer) SignedIn(yes: (context, profileId) {
           return TimerSettingsHistoryButton(profileId: profileId);
         }),
         const ProfileButton(),
