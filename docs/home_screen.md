@@ -41,8 +41,8 @@ The `$extra` parameter carries an optional `TimerSettings` object that can be in
 
 On cubit creation `HomeScreenCubit.init(timerSettings)` is called immediately:
 
-- **`timerSettings` is non-null** → emits `HomeScreenStateLoaded` with `SessionType.sitting` and the supplied settings — no I/O performed.
-- **`timerSettings` is null** → loads the last-persisted `HomeScreenState` from `SharedPreferencesService`. Falls back to `SessionType.sitting` with default settings on error, recording the failure with `CrashlyticsService`.
+- **`timerSettings` is non-null** → emits `HomeScreenStateLoaded` with `SessionType.timer` and the supplied settings — no I/O performed.
+- **`timerSettings` is null** → loads the last-persisted `HomeScreenState` from `SharedPreferencesService`. Falls back to `SessionType.timer` with default settings on error, recording the failure with `CrashlyticsService`.
 
 ```mermaid
 stateDiagram-v2
@@ -84,7 +84,7 @@ Once `HomeScreenStateLoaded` is emitted the screen renders a `Scaffold` with thr
 
 ## Session Type Toggle
 
-`SessionTypeToggle` is a floating action-style button that switches between `SessionType.sitting` and `SessionType.chanting`. Tapping it calls `HomeScreenCubit.setSessionType(...)`, which:
+`SessionTypeToggle` is a floating action-style button that switches between `SessionType.timer` and `SessionType.chanting`. Tapping it calls `HomeScreenCubit.setSessionType(...)`, which:
 
 1. Updates the in-memory `HomeScreenStateLoaded` via `copyWith`.
 2. Persists the new state to `SharedPreferencesService` as JSON.
@@ -100,7 +100,7 @@ The app-bar is context-aware and adjusts its trailing actions based on authentic
 |----------|-------------------------------|--------------------------------------------|
 | Leading  | `Today`                       | Always shown (displays today's date)       |
 | Trailing | `PresenceButton`              | Signed-in only                             |
-| Trailing | `TimerSettingsHistoryButton`  | Signed-in **and** `SessionType.sitting`    |
+| Trailing | `TimerSettingsHistoryButton`  | Signed-in **and** `SessionType.timer`    |
 | Trailing | `ProfileButton`               | Always shown                               |
 
 `SignedIn` is a guard widget that renders its `yes` builder only when an authenticated user is available.
@@ -208,7 +208,6 @@ graph TD
 ## Behavior Notes
 
 - **Deep-link pre-configuration:** Passing a `TimerSettings` to `HomeScreen` skips all persistence reads and lands the user directly on the sitting configuration with those settings. A `ValueKey` on the constructor parameter ensures Flutter re-creates the widget tree when the settings object changes.
-- **Fallback on error:** If `SharedPreferencesService` throws during `init`, the cubit falls back to `SessionType.sitting` with default `TimerSettings` and records the error in Crashlytics. The user is never shown an error state at this level.
+- **Fallback on error:** If `SharedPreferencesService` throws during `init`, the cubit falls back to `SessionType.timer` with default `TimerSettings` and records the error in Crashlytics. The user is never shown an error state at this level.
 - **Scoped cubit lifetime:** Each session branch (`timer_settings_branch` / `chanting_settings_branch`) carries a `ValueKey` so that Flutter preserves — rather than recreates — the cubit subtree when the `AnimatedSwitcher` rebuilds while the same branch is active.
 - **Profile settings fallback:** `SafeProfileSettings` always provides a non-null `ProfileSettings` to its children. When the user is anonymous or the profile hasn't loaded yet, `ProfileSettings(id: 'anonymous')` is used so the settings views never block on authentication.
-
