@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/model/presence_query_options.dart';
 import 'package:dhyana/model/public_profile.dart';
-import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/util/all.dart';
 import 'package:faker/faker.dart';
 

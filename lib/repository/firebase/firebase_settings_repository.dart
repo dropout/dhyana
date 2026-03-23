@@ -1,6 +1,7 @@
 import 'package:dhyana/data_provider/settings_data_provider.dart';
 import 'package:dhyana/model/profile_settings.dart';
-import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/repository/crud_repository_operations.dart';
+import 'package:dhyana/repository/settings_repository.dart';
 
 /// A Firebase implementation of SettingsRepository for managing ProfileSettings.
 /// It uses SettingsDataProvider to perform CRUD operations.

@@ -5,14 +5,26 @@ import 'package:dhyana/data_provider/firebase/firebase_presence_data_provider.da
 import 'package:dhyana/data_provider/firebase/firebase_settings_data_provider.dart';
 import 'package:dhyana/data_provider/profile_data_provider.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
-import 'package:dhyana/repository/all.dart';
+import 'package:dhyana/repository/auth_repository.dart';
+import 'package:dhyana/repository/chants_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_auth_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_chants_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_profile_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_settings_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_statistics_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_timer_settings_history_repository.dart';
+import 'package:dhyana/repository/firebase/firebase_presence_repository.dart';
+import 'package:dhyana/repository/presence_repository.dart';
+import 'package:dhyana/repository/profile_repository.dart';
+import 'package:dhyana/repository/settings_repository.dart';
+import 'package:dhyana/repository/statistics_repository.dart';
+import 'package:dhyana/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 
 /// Container class for all repositories used in the application.
 /// Injected as a dependency with Provider, and accessible via BuildContext
 /// extension convenience methods.
 class Repositories {
-
   final AuthRepository authRepository;
   final ChantsRepository chantsRepository;
   final ProfileRepository profileRepository;
@@ -30,14 +42,12 @@ class Repositories {
     required this.settingsRepository,
     required this.timerSettingsHistoryRepository,
   });
-
 }
 
 /// Builder class for Repositories to improve init code structure and
 /// allow customization of individual repositories to improve
 /// developer experience by providing easy way to stub data.
 class RepositoriesBuilder {
-
   late AuthRepository _authRepository;
   late ChantsRepository _chantsRepository;
   late ProfileRepository _profileRepository;
@@ -52,7 +62,6 @@ class RepositoriesBuilder {
     required ProfileDataProvider profileDataProvider,
     required StorageDataProvider storageDataProvider,
   }) {
-
     _authRepository = FirebaseAuthRepository(
       authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
       profileDataProvider: profileDataProvider,
@@ -60,7 +69,7 @@ class RepositoriesBuilder {
 
     _chantsRepository = FirebaseChantsRepository(
       chantsDataProvider: FirebaseChantsDataProvider(
-        firebaseProvider.firestore
+        firebaseProvider.firestore,
       ),
     );
 
@@ -71,25 +80,25 @@ class RepositoriesBuilder {
 
     _presenceRepository = FirebasePresenceRepository(
       presenceDataProvider: FirebasePresenceDataProvider(
-        firebaseProvider.firestore
-      )
+        firebaseProvider.firestore,
+      ),
     );
 
     _statisticsRepository = FirebaseStatisticsRepository(
       dataProviderFactory: FirebaseDataProviderFactory(
-        fireStore: firebaseProvider.firestore
-      )
+        fireStore: firebaseProvider.firestore,
+      ),
     );
 
     _settingsRepository = FirebaseSettingsRepository(
       settingsDataProvider: FirebaseSettingsDataProvider(
-        firebaseProvider.firestore
+        firebaseProvider.firestore,
       ),
     );
 
-    _timerSettingsHistoryRepository =
-      FirebaseTimerSettingsHistoryRepository(firebaseProvider.firestore);
-
+    _timerSettingsHistoryRepository = FirebaseTimerSettingsHistoryRepository(
+      firebaseProvider.firestore,
+    );
   }
 
   // Convenience methods to override default repositories
@@ -125,7 +134,7 @@ class RepositoriesBuilder {
   }
 
   RepositoriesBuilder timerSettingsHistoryRepository(
-    TimerSettingsHistoryRepository repo
+    TimerSettingsHistoryRepository repo,
   ) {
     _timerSettingsHistoryRepository = repo;
     return this;
@@ -143,5 +152,4 @@ class RepositoriesBuilder {
       timerSettingsHistoryRepository: _timerSettingsHistoryRepository,
     );
   }
-
 }
