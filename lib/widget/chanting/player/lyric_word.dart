@@ -3,7 +3,6 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
-enum LyricWordState { inactive, pending, singing, sung }
 
 class LyricWord extends StatelessWidget {
   final LyricsWord word;
