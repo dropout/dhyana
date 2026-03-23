@@ -39,13 +39,13 @@ class PlayerControls extends StatelessWidget {
   final bool isPreviousEnabled;
 
   /// Callback invoked when the user presses the "Next" button.
-  final VoidCallback onNextPressed;
+  final VoidCallback? onNextPressed;
 
   /// Callback invoked when the user presses the "Play/Pause" button.
   final VoidCallback onPlayPausePressed;
 
   /// Callback invoked when the user presses the "Previous" button.
-  final VoidCallback onPreviousPressed;
+  final VoidCallback? onPreviousPressed;
 
   /// Callback invoked when the user presses the "Playlist" button.
   final VoidCallback onPlaylistPressed;

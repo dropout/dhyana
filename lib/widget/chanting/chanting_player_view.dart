@@ -91,6 +91,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   }
 
   Widget buildControls(BuildContext context) {
+    final chantingSettings = widget.chantingState.chantingSettings;
     return Stack(
       children: [
         Positioned.fill(
@@ -123,9 +124,13 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
               position: widget.chantingState.position,
               duration: widget.chantingState.duration,
               isPlaying: (widget.chantingState.playbackState == PlaybackState.playing),
-              onNextPressed: () => _onNextPressed(context),
+              onNextPressed: widget.chantingState.currentIndex < chantingSettings.selectedChants.length - 1
+                  ? () => _onNextPressed(context)
+                  : null,              
               onPlayPausePressed: () => _onPlayPausePressed(context),
-              onPreviousPressed: () => _onPreviousPressed(context),
+              onPreviousPressed: widget.chantingState.currentIndex > 0
+                  ? () => _onPreviousPressed(context)
+                  : null,
               onPlaylistPressed: () => _onPlaylistPressed(context),
             ),
           ),
