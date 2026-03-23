@@ -9,7 +9,9 @@ typedef ChantingSettingsCubitProviderBuilder = Widget Function(
   ChantingSettingsState state,
 );
 
-///
+/// A widget that provides a [ChantingSettingsCubit] to its descendants and rebuilds
+/// the state changes. 
+/// It also allows for an optional callback when the cubit is created. 
 class ChantingSettingsCubitProvider extends StatelessWidget {
 
   final ChantingSettingsCubitProviderBuilder builder;
