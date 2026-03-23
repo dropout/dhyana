@@ -107,10 +107,15 @@ class DefaultAudioService with LoggerMixin implements AudioService {
   Stream<PlaybackState> get playbackStateStream => 
     audioPlayer.onPlayerStateChanged.map((state) => state.toPlaybackState());
 
+  /// Returns a stream that emits an event when the audio 
+  /// player has completed playing a sound.
+  @override
+  Stream<void> get onCompletedStream => audioPlayer.onPlayerComplete;
+
 }
 
-/// Extension method to convert PlayerState from the 
-/// audioplayers package to PlaybackState used in the application.
+/// Extension method to decouple PlayerState from the 
+/// audioplayers package to domain PlaybackState used in the application.
 extension DefaultPlaybackStateExtension on PlayerState {
   PlaybackState toPlaybackState() {
     return switch (this) {

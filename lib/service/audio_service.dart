@@ -16,6 +16,7 @@ abstract interface class AudioService {
   Stream<bool> get isPlayingStream;
   Stream<Duration> get positionStream;
   Stream<PlaybackState> get playbackStateStream;
+  Stream<void> get onCompletedStream;
   void close();
 
 }
