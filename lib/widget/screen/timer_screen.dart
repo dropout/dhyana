@@ -10,7 +10,7 @@ import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/timer_running_view.dart';
 
-class TimerScreen extends StatefulWidget {
+class TimerScreen extends StatelessWidget {
 
   final TimerSettings timerSettings;
 
@@ -20,15 +20,9 @@ class TimerScreen extends StatefulWidget {
   });
 
   @override
-  State<TimerScreen> createState() => _TimerScreenState();
-}
-
-class _TimerScreenState extends State<TimerScreen> {
-
-  @override
   Widget build(BuildContext context) {
     return TimerBlocProviders(
-      timerSettings: widget.timerSettings,
+      timerSettings: timerSettings,
       child: buildScaffolding(context),
     );
   }
@@ -54,7 +48,7 @@ class _TimerScreenState extends State<TimerScreen> {
       listener: (BuildContext context, TimerState timerState) {
         Session session = Session(
           id: context.services.idGeneratorService.sessionId(),
-          timerSettings: widget.timerSettings,
+          timerSettings: timerSettings,
           startTime: timerState.startTime ?? DateTime.now().subtract(timerState.elapsedTime),
           endTime: timerState.endTime ?? DateTime.now(),
           duration: timerState.elapsedTime,
@@ -65,7 +59,5 @@ class _TimerScreenState extends State<TimerScreen> {
     );
 
   }
-
-
-
+  
 }
