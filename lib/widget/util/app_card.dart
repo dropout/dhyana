@@ -43,7 +43,7 @@ class AppCard extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if (title.isNotEmpty) buildTitle(context, title),
             if (titleGap && title.isNotEmpty) Gap.medium(),

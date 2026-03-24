@@ -1,3 +1,4 @@
+import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
@@ -27,23 +28,36 @@ class SessionHistoryList extends StatelessWidget {
             final startTime = DateFormat.Hm(locale.toString()).format(s.startTime);
             final endTime = DateFormat.Hm(locale.toString()).format(s.endTime);
             return AppCard(
-              padding: const EdgeInsets.all(DesignSpec.paddingMd),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.all(DesignSpec.paddingMd),              
+              child: Stack(
                 children: [
-                  Text(
-                    DateFormat.yMMMMd(locale.toString()).format(s.startTime),
-                    style: Theme.of(context).textTheme.bodyLarge,
+                  Column(                    
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        DateFormat.yMMMMd(locale.toString()).format(s.startTime),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Text(
+                        '$startTime - $endTime',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Text(
+                        context.l10n.minutesPluralWithNumber(s.duration.inMinutes),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
                   ),
-                  Text(
-                    '$startTime - $endTime',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  Text(
-                    context.l10n.minutesPluralWithNumber(s.duration.inMinutes),
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Icon(
+                      (s.type == SessionType.timer) ? 
+                        Icons.timer_rounded : 
+                        Icons.music_note_rounded,
+                    )
                   )
                 ],
               ),
