@@ -13,7 +13,18 @@ import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
-import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/service/audio_service.dart';
+import 'package:dhyana/service/cache_manager_service.dart';
+import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/service/haptics_service.dart';
+import 'package:dhyana/service/id_generator_service.dart';
+import 'package:dhyana/service/overlay_service.dart';
+import 'package:dhyana/service/profile_stats_report_updater.dart';
+import 'package:dhyana/service/timer_service.dart';
+import 'package:dhyana/service/timer_service_factory.dart';
+import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
+import 'package:dhyana/service/wakelock_service.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:go_router/go_router.dart';
@@ -104,6 +115,14 @@ class MockIdGeneratorService
 class MockProfileStatsUpdater
   extends Mock
   implements ProfileStatsReportUpdater {}
+
+class MockTimerServiceFactory
+  extends Mock
+  implements TimerServiceFactory {}
+
+class MockTimerService
+  extends Mock
+  implements TimerService {}
 
 // Repositories ----------------------------------------------------------------
 

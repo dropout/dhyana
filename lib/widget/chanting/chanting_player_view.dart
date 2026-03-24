@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/enum/playback_state.dart';
-import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/wakelock_service.dart';
 import 'package:dhyana/widget/chanting/player/lyrics_view.dart';
 import 'package:dhyana/widget/chanting/player/player_controls.dart';
 import 'package:dhyana/widget/chanting/player/playlist_sheet.dart';

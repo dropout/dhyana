@@ -1,4 +1,4 @@
-import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,5 +1,8 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/service/all.dart';
+import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/service/logging_analytics_service.dart';
+import 'package:dhyana/service/logging_crashlytics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';

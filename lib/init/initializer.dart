@@ -7,10 +7,11 @@ import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dar
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/stub/stubbed_presence_repository.dart';
 import 'package:dhyana/repository/stub/stubbed_statistics_repository.dart';
+import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
+import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/logger_mixin.dart';

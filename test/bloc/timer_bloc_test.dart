@@ -5,25 +5,10 @@ import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/factory/timer_settings_factory.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockCrashlyticsService
-  extends Mock
-  implements CrashlyticsService {}
-
-class MockTimerServiceFactory
-  extends Mock
-  implements TimerServiceFactory {}
-
-class MockTimerService
-  extends Mock
-  implements TimerService {}
-
-class MockAudioService
-  extends Mock
-  implements AudioService {}
+import '../mock_definitions.dart';
 
 void main() async {
 

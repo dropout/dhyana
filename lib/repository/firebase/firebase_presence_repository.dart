@@ -1,5 +1,6 @@
 import 'package:dhyana/data_provider/presence_data_provider.dart';
-import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/presence.dart';
+import 'package:dhyana/model/presence_query_options.dart';
 import 'package:dhyana/repository/crud_repository_operations.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 

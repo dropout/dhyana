@@ -1,7 +1,9 @@
 
 import 'package:dhyana/bloc/years/years_cubit.dart';
-import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/model/year.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/years_bar_chart_page.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

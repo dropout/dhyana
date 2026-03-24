@@ -1,6 +1,8 @@
 
 import 'package:dhyana/bloc/months/months_cubit.dart';
-import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/calculated_stats.dart';
+import 'package:dhyana/model/month.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/months_bar_chart_page.dart';
 import 'package:dhyana/widget/util/app_context.dart';

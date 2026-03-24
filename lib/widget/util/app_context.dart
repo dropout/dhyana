@@ -1,4 +1,6 @@
-import 'package:dhyana/init/all.dart';
+import 'package:dhyana/init/init_result.dart';
+import 'package:dhyana/init/repositories.dart';
+import 'package:dhyana/init/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

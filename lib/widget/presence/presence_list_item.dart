@@ -1,4 +1,4 @@
-import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/gap.dart';

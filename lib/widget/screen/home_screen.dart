@@ -2,7 +2,6 @@ import 'package:dhyana/widget/home/home_screen_appbar.dart';
 import 'package:dhyana/bloc/home_screen/home_screen_cubit.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/enum/session_type.dart';
-import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/bloc_provider/chanting_settings_provider.dart';
 import 'package:dhyana/widget/bloc_provider/home_screen_cubit_provider.dart';

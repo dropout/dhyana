@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/service/default/default_safe_image_detector.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
-import 'package:dhyana/service/all.dart';
 
 /// A FormBuilder field that allows users to pick an image for their profile
 /// from their device.

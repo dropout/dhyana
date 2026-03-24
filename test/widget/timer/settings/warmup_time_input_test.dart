@@ -1,24 +1,12 @@
 import 'package:dhyana/init/services.dart';
-import 'package:dhyana/service/all.dart';
 import 'package:dhyana/widget/timer/settings/warmup_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
+import '../../../mock_definitions.dart';
 import '../../../test_context_providers.dart';
-
-class MockServices
-  extends Mock
-  implements Services {}
-
-class MockOverlayService
-  extends Mock
-  implements OverlayService {}
-
-class MockHapticsService
-  extends Mock
-  implements HapticsService {}
 
 class FakeBuildContext
   extends Fake

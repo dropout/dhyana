@@ -1,5 +1,5 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/timer_settings_history_record.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/gap.dart';

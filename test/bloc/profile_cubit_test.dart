@@ -1,8 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/model/all.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

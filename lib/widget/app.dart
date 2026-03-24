@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/remote_settings/remote_settings_cubit.dart';
-import 'package:dhyana/init/all.dart';
+import 'package:dhyana/init/init_result.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

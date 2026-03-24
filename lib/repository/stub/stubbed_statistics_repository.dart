@@ -1,4 +1,14 @@
-import 'package:dhyana/model/all.dart';
+import 'package:dhyana/model/day.dart';
+import 'package:dhyana/model/day_query_options.dart';
+import 'package:dhyana/model/month.dart';
+import 'package:dhyana/model/month_query_options.dart';
+import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/model/session.dart';
+import 'package:dhyana/model/session_query_options.dart';
+import 'package:dhyana/model/week.dart';
+import 'package:dhyana/model/week_query_options.dart';
+import 'package:dhyana/model/year.dart';
+import 'package:dhyana/model/year_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';

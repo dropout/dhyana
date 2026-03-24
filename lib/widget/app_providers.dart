@@ -1,7 +1,9 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/remote_settings/remote_settings_cubit.dart';
-import 'package:dhyana/init/all.dart';
+import 'package:dhyana/init/init_result.dart';
+import 'package:dhyana/init/repositories.dart';
+import 'package:dhyana/init/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
