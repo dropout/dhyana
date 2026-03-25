@@ -55,7 +55,9 @@ class SoundInputPage extends StatelessWidget {
           const SizedBox(height: DesignSpec.spacingLg),
           Text(
             getLocalizedSoundName(sound, AppLocalizations.of(context)),
-            style: Theme.of(context).textTheme.titleMedium
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+            )
           )
         ]
     );

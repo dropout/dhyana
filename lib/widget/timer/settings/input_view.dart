@@ -30,11 +30,10 @@ class InputView extends StatelessWidget {
           ),
           child: SafeArea(
             minimum: const EdgeInsets.only(
-              bottom: DesignSpec.paddingXl,
+              top: DesignSpec.paddingLg,
+              bottom: DesignSpec.padding3Xl,
             ),
-            child: Column(
-              // button width match its parent width
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: Column(              
               children: [
                 buildContent(context),
                 buildActionButtons(context),
@@ -55,7 +54,7 @@ class InputView extends StatelessWidget {
       child: AppBar(
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
             fontWeight: FontWeight.bold,
           )
         ),

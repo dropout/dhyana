@@ -65,7 +65,7 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
   Widget buildListWheelScollView(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        bottom: DesignSpec.paddingXl
+        bottom: DesignSpec.padding2Xl,
       ),
       child: SizedBox(
         height: 300,
@@ -92,13 +92,13 @@ class _DurationInputViewState extends State<DurationInputView> with TickerProvid
       if (value == widget.availableValues[selectedIndex]) {
         text = context.l10n.minutesPluralWithNumber(value);
         textStyle = context.theme.textTheme.headlineMedium!.copyWith(
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w800,
           color: Colors.black,
         );
       } else {
         text = value.toString();
-        textStyle = context.theme.textTheme.bodyLarge!.copyWith(
-          fontWeight: FontWeight.bold,
+        textStyle = context.theme.textTheme.headlineSmall!.copyWith(
+          fontWeight: FontWeight.w600,
         );
       }
 
