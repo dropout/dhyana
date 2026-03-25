@@ -5,6 +5,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/stats_data_area_sliver.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/title_effect.dart';
@@ -70,7 +71,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
               return buildScaffolding(
                 context,
                 [
-                  buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+                  buildTitleEffectSliverTitle(context, context.l10n.profileStats),
                   StatsDataAreaSliver(profile: state.profile),
                   ...buildBarchartSlivers(context, state.profile),
                 ],
@@ -122,7 +123,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       slivers: [
 
         // Appearing-disappearing title effect when scrolling down
-        buildTitleEffectAppBar(context, AppLocalizations.of(context).profileStats),
+        buildTitleEffectAppBar(context, context.l10n.profileStats),
 
         // Content slivers
         ...slivers
