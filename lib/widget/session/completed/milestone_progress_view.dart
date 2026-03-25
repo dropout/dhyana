@@ -105,7 +105,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
       context.l10n.statsNextMilestoneIn(
         widget.profile.statsReport.milestoneProgress.remainingDaysCount
       ),
-      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
         color: widget.textColor,
       )
     );
