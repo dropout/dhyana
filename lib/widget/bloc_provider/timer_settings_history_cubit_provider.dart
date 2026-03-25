@@ -20,6 +20,7 @@ class TimerSettingsHistoryCubitProvider extends StatelessWidget {
       create: (_) {
         final timerSettingsHistoryCubit = TimerSettingsHistoryCubit(
           timerSettingsHistoryRepository: context.repos.timerSettingsHistoryRepository,
+          timerSettingsSharedPrefsService: context.services.timerSettingsSharedPrefsService,
           crashlyticsService: context.services.crashlyticsService
         );
         onCreate?.call(timerSettingsHistoryCubit);

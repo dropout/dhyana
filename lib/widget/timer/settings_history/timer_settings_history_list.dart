@@ -23,21 +23,28 @@ class TimerSettingsHistoryList extends StatelessWidget {
     super.key
   });
 
-  void _onListItemTap(BuildContext context, TimerSettings timerSettings) {
-    HomeRoute($extra: timerSettings).go(context);
+  void _onListItemTap(BuildContext context, TimerSettings timerSettings) async {
+    
     context.hapticsTap();
-    BlocProvider.of<TimerSettingsHistoryCubit>(context).saveSettings(
+
+    // Save the selected settings to the history cubit so that it can be    
+    await context.read<TimerSettingsHistoryCubit>().useSettings(
       profileId,
       timerSettings,
     );
 
-    Future.delayed(Durations.medium1, () {
-      if (context.mounted) {
-        context.showSuccessfulToast(
-          AppLocalizations.of(context).timerSettingsHistoryApplied
-        );
-      }
-    });
+    // Force home screen recreation to apply the selected timer settings.
+    if (context.mounted) {
+      HomeRoute(refresh: DateTime.now().millisecondsSinceEpoch).go(context);
+      Future.delayed(Durations.medium1, () {
+        if (context.mounted) {
+          context.showSuccessfulToast(
+            AppLocalizations.of(context).timerSettingsHistoryApplied
+          );
+        }
+      });
+    }
+
   }
 
   @override

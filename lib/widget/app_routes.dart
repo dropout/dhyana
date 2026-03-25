@@ -36,7 +36,6 @@ GoRouter createAppRouter({required InitResult initResult}) {
     debugLogDiagnostics: kDebugMode,
     navigatorKey: AppWidgetKeys.rootNavigatorKey,
     initialLocation: '/',
-    initialExtra: initResult.timerSettings,
     routes: $appRoutes,
     // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
   );
@@ -46,38 +45,23 @@ GoRouter createAppRouter({required InitResult initResult}) {
     Routes that does not require authentication
  */
 
-@TypedGoRoute<HomeRoute>(
-  path: '/',
-  name: 'HOME',
-)
+@TypedGoRoute<HomeRoute>(path: '/', name: 'HOME')
 class HomeRoute extends GoRouteData with $HomeRoute {
 
-  // Can't enforce a type for the extra parameter in the constructor because go_router generated
-  // code needs to be able to pass any type of extra parameter when rebuilding the widget tree
-  // for select widget mode in devtools. 
-  // So we will type cast the extra parameter in the build method instead.
-  final Object? $extra;
+  // An option to force home screen recreation when navigating to it, 
+  // which is useful to apply changes that requires home screen reload such 
+  // as timer settings change.
+  final int? refresh;
 
-  const HomeRoute({
-    this.$extra,
-  });
+  const HomeRoute({this.refresh});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    // Type cast the extra parameter in the build method to be able to use
-    // select widget mode in in devtools. Otherwise the go_router_builder
-    // generated code fails to type cast the extra parameter to the
-    // exact type when rebuilding the widget tree for select widget mode.
-    final timerSettings = $extra is TimerSettings ? $extra as TimerSettings : null;
-    return HomeScreen(timerSettings: timerSettings, key: ValueKey($extra));
+    return HomeScreen(key: ValueKey(refresh));
   }
-
 }
 
-@TypedGoRoute<TimerRoute>(
-  path: '/timer',
-  name: 'TIMER',
-)
+@TypedGoRoute<TimerRoute>(path: '/timer', name: 'TIMER')
 class TimerRoute extends GoRouteData with $TimerRoute {
   final TimerSettings $extra;
   const TimerRoute({required this.$extra});
@@ -87,40 +71,38 @@ class TimerRoute extends GoRouteData with $TimerRoute {
     return CustomTransitionPage(
       transitionDuration: transitionDuration,
       reverseTransitionDuration: transitionDuration,
-      child: TimerScreen(
-        key: state.pageKey,
-        timerSettings: $extra,
-      ),
-      transitionsBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-      ) {
-        return LinearGradientMaskTransition(
-          progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
-          shader: context.services.shaderService.get(Assets.shaderLinearGradientMask),
-          child: child,
-        );
-      },
+      child: TimerScreen(key: state.pageKey, timerSettings: $extra),
+      transitionsBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return LinearGradientMaskTransition(
+              progress: CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeIn,
+              ),
+              shader: context.services.shaderService.get(
+                Assets.shaderLinearGradientMask,
+              ),
+              child: child,
+            );
+          },
     );
   }
 }
 
-@TypedGoRoute<ChantingRoute>(
-  path: '/chanting',
-  name: 'CHANTING',
-)
+@TypedGoRoute<ChantingRoute>(path: '/chanting', name: 'CHANTING')
 class ChantingRoute extends GoRouteData with $ChantingRoute {
-  
   final Object? $extra;
   const ChantingRoute({required this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final ChantingSettings chantingSettings = 
-      ($extra is ChantingSettings) 
-        ? $extra as ChantingSettings 
+    final ChantingSettings chantingSettings = ($extra is ChantingSettings)
+        ? $extra as ChantingSettings
         : ChantingSettings(selectedChants: []);
 
     return ChantingScreen(
@@ -128,20 +110,16 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
       key: state.pageKey,
     );
   }
-    
 }
 
 @TypedGoRoute<SessionCompletedRoute>(
   path: '/sessionCompleted',
   name: 'SESSION_COMPLETED',
-) class SessionCompletedRoute extends GoRouteData
-  with $SessionCompletedRoute {
-
+)
+class SessionCompletedRoute extends GoRouteData with $SessionCompletedRoute {
   final Session $extra;
 
-  const SessionCompletedRoute({
-    required this.$extra,
-  });
+  const SessionCompletedRoute({required this.$extra});
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
@@ -149,58 +127,52 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
       key: state.pageKey,
       transitionDuration: Durations.extralong4,
       reverseTransitionDuration: Durations.long1,
-      child: SessionCompletedScreen(
-        session: $extra,
-        key: state.pageKey,
-      ),
-      transitionsBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-      ) {
-        if (animation.status == AnimationStatus.reverse) {
-          return LinearGradientMaskTransition(
-            progress: CurvedAnimation(parent: animation, curve: Curves.easeIn),
-            shader: context.services.shaderService.get(Assets.shaderLinearGradientMask),
-            child: child,
-          );
-        } else {
-          return FadeTransition(
-            opacity: CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeInOutExpo,
-            ),
-            child: child,
-          );
-        }
-      },
+      child: SessionCompletedScreen(session: $extra, key: state.pageKey),
+      transitionsBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            if (animation.status == AnimationStatus.reverse) {
+              return LinearGradientMaskTransition(
+                progress: CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeIn,
+                ),
+                shader: context.services.shaderService.get(
+                  Assets.shaderLinearGradientMask,
+                ),
+                child: child,
+              );
+            } else {
+              return FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOutExpo,
+                ),
+                child: child,
+              );
+            }
+          },
     );
   }
-
 }
 
-@TypedGoRoute<LoginRoute>(
-  path: '/login',
-  name: 'LOGIN',
-)
+@TypedGoRoute<LoginRoute>(path: '/login', name: 'LOGIN')
 class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-    LoginScreen();
+  Widget build(BuildContext context, GoRouterState state) => LoginScreen();
 }
 
-@TypedGoRoute<DonateRoute>(
-  path: '/donate',
-  name: 'DONATE',
-)
-class DonateRoute extends GoRouteData
-  with AuthRedirectHook, $DonateRoute {
+@TypedGoRoute<DonateRoute>(path: '/donate', name: 'DONATE')
+class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
   const DonateRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    const DonateScreen();
+      const DonateScreen();
 }
 
 /*
@@ -212,7 +184,8 @@ mixin AuthRedirectHook {
     final LoginRoute loginRoute = const LoginRoute();
     final AuthCubit authCubit = context.read<AuthCubit>();
     final bool isAuthenticated = (authCubit.state is AuthStateSignedIn);
-    final bool isLoginScreenShown = state.matchedLocation == loginRoute.location;
+    final bool isLoginScreenShown =
+        state.matchedLocation == loginRoute.location;
     if (!isAuthenticated && !isLoginScreenShown) {
       return loginRoute.location;
     } else {
@@ -221,27 +194,18 @@ mixin AuthRedirectHook {
   }
 }
 
-@TypedGoRoute<ProfileRoute>(
-  path: '/profile/:profileId',
-  name: 'PROFILE',
-)
-class ProfileRoute extends GoRouteData
-  with AuthRedirectHook, $ProfileRoute {
-
+@TypedGoRoute<ProfileRoute>(path: '/profile/:profileId', name: 'PROFILE')
+class ProfileRoute extends GoRouteData with AuthRedirectHook, $ProfileRoute {
   final String profileId;
   final Profile? $extra;
-  const ProfileRoute({
-    required this.profileId,
-    this.$extra,
-  });
+  const ProfileRoute({required this.profileId, this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileScreen(profileId: profileId, profile: $extra);
+      ProfileScreen(profileId: profileId, profile: $extra);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
 @TypedGoRoute<ProfileWizardRoute>(
@@ -249,17 +213,15 @@ class ProfileRoute extends GoRouteData
   name: 'PROFILE_WIZARD',
 )
 class ProfileWizardRoute extends GoRouteData
-  with AuthRedirectHook, $ProfileWizardRoute {
-
+    with AuthRedirectHook, $ProfileWizardRoute {
   final String profileId;
   const ProfileWizardRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileWizardScreen(profileId: profileId);
+      ProfileWizardScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
 @TypedGoRoute<ProfileStatsRoute>(
@@ -267,34 +229,27 @@ class ProfileWizardRoute extends GoRouteData
   name: 'PROFILE_STATS',
 )
 class ProfileStatsRoute extends GoRouteData
-  with AuthRedirectHook, $ProfileStatsRoute {
-
+    with AuthRedirectHook, $ProfileStatsRoute {
   final String profileId;
   const ProfileStatsRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileStatsScreen(profileId: profileId);
+      ProfileStatsScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
-@TypedGoRoute<ProfileEditRoute>(
-  path: '/editProfile',
-  name: 'EDIT_PROFILE'
-)
+@TypedGoRoute<ProfileEditRoute>(path: '/editProfile', name: 'EDIT_PROFILE')
 class ProfileEditRoute extends GoRouteData
-  with AuthRedirectHook, $ProfileEditRoute {
-
+    with AuthRedirectHook, $ProfileEditRoute {
   const ProfileEditRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    const ProfileEditScreen();
+      const ProfileEditScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
 @TypedGoRoute<DeleteProfileRoute>(
@@ -302,34 +257,27 @@ class ProfileEditRoute extends GoRouteData
   name: 'DELETE_PROFILE',
 )
 class DeleteProfileRoute extends GoRouteData
-  with AuthRedirectHook, $DeleteProfileRoute {
-
+    with AuthRedirectHook, $DeleteProfileRoute {
   const DeleteProfileRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    const DeleteProfileScreen();
+      const DeleteProfileScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
-@TypedGoRoute<SessionHistoryRoute>(
-  path: '/activity',
-  name: 'ACTIVITY',
-)
+@TypedGoRoute<SessionHistoryRoute>(path: '/activity', name: 'ACTIVITY')
 class SessionHistoryRoute extends GoRouteData
-  with AuthRedirectHook, $SessionHistoryRoute {
-
+    with AuthRedirectHook, $SessionHistoryRoute {
   final String profileId;
   const SessionHistoryRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    SessionHistoryScreen(profileId: profileId);
+      SessionHistoryScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
 @TypedGoRoute<TimerSettingsHistoryRoute>(
@@ -337,34 +285,25 @@ class SessionHistoryRoute extends GoRouteData
   name: 'TIMER_SETTINGS_HISTORY',
 )
 class TimerSettingsHistoryRoute extends GoRouteData
-  with AuthRedirectHook, $TimerSettingsHistoryRoute {
-
+    with AuthRedirectHook, $TimerSettingsHistoryRoute {
   final String profileId;
   const TimerSettingsHistoryRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    TimerSettingsHistoryScreen(profileId: profileId);
+      TimerSettingsHistoryScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
-@TypedGoRoute<PresenceRoute>(
-  path: '/presence',
-  name: 'PRESENCE',
-)
-class PresenceRoute extends GoRouteData
-
-  with AuthRedirectHook, $PresenceRoute {
+@TypedGoRoute<PresenceRoute>(path: '/presence', name: 'PRESENCE')
+class PresenceRoute extends GoRouteData with AuthRedirectHook, $PresenceRoute {
   const PresenceRoute();
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-    PresenceScreen();
+  Widget build(BuildContext context, GoRouterState state) => PresenceScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }
 
 @TypedGoRoute<ProfileSettingsRoute>(
@@ -372,15 +311,13 @@ class PresenceRoute extends GoRouteData
   name: 'PROFILE_SETTINGS',
 )
 class ProfileSettingsRoute extends GoRouteData
-  with AuthRedirectHook, $ProfileSettingsRoute {
-
+    with AuthRedirectHook, $ProfileSettingsRoute {
   final String profileId;
   const ProfileSettingsRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileSettingsScreen(profileId: profileId);
+      ProfileSettingsScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-    authRedirectHook(context, state);
-
+      authRedirectHook(context, state);
 }

@@ -85,6 +85,7 @@ class TimerBlocProviders extends StatelessWidget {
                 final timerSettingsHistoryCubit =
                   TimerSettingsHistoryCubit(
                     timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
+                    timerSettingsSharedPrefsService: services.timerSettingsSharedPrefsService,
                     crashlyticsService: services.crashlyticsService
                   );
 

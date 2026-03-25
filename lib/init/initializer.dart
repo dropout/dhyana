@@ -12,7 +12,6 @@ import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
@@ -45,7 +44,6 @@ class Initializer with LoggerMixin {
     final repos = repoBuilder
       .presenceRepository(StubbedPresenceRepository())
       .statisticsRepository(StubbedStatisticsRepository())
-      // .chantsRepository(StubbedChantsRepository())
       .build();
 
     // Build services
@@ -68,11 +66,6 @@ class Initializer with LoggerMixin {
     await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
-    logger.t('Parsing timer settings from shared prefs');
-    TimerSettings timerSettings = services
-      .timerSettingsSharedPrefsService
-      .getTimerSettings();
-
     User? user = await repos.authRepository.authStateChange.first;
     ProfileCubit profileCubit = ProfileCubit(
       profileRepository: repos.profileRepository,
@@ -92,7 +85,6 @@ class Initializer with LoggerMixin {
 
     return InitResult(
       user: user,
-      timerSettings: timerSettings,
       services: services,
       repositories: repos,
       profileCubit: profileCubit,
