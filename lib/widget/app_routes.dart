@@ -211,7 +211,7 @@ class ProfileRoute extends GoRouteData with AuthRedirectHook, $ProfileRoute {
       final Profile profile = ($extra is Profile) ? $extra as Profile : throw Exception('Invalid profile data');
       return ProfileScreen(profileId: profileId, profile: profile);
     } catch (e) {
-      // If the passed profile data is invalid, 
+      // If the passed profile data is invalid or not present, 
       // load the profile from just the profile id.
       return ProfileScreen(profileId: profileId);
     }

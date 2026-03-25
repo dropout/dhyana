@@ -9,7 +9,7 @@ class ChantList extends StatelessWidget {
   final List<Chant> chants;
   final void Function(int oldIndex, int newIndex) onReorder;
   final VoidCallback onAddChant;
-  final void Function(Chant) onChantRemoved;
+  final void Function(Chant, int) onChantRemoved;
 
   const ChantList({
     required this.chants,
@@ -50,9 +50,9 @@ class ChantList extends StatelessWidget {
             : 0.0;
 
         return Dismissible(        
-          key: ValueKey('${chant.id}.$index.dismissible'),
+          key: ValueKey('${chant.id}.$index'),
           direction: DismissDirection.endToStart,
-          onDismissed: (_) => onChantRemoved(chant),
+          onDismissed: (_) => onChantRemoved(chant, index),
           child: Padding(
             padding: EdgeInsets.only(bottom: paddingBottom),
             child: ChantCard(

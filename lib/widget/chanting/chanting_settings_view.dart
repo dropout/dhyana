@@ -53,8 +53,9 @@ class ChantingSettingsView extends StatelessWidget {
     );
   }
 
-  void _onChantRemoved(BuildContext context, Chant chant) {
-    context.read<ChantingSettingsCubit>().removeFromSelectedChants(chant);
+  void _onChantRemoved(BuildContext context, Chant chant, int index) {
+    context.read<ChantingSettingsCubit>()
+      .removeFromSelectedChants(index);
   }
 
   void _onStart(BuildContext context) {
@@ -104,7 +105,7 @@ class ChantingSettingsView extends StatelessWidget {
                 chants: state.selectedChants,
                 onAddChant: () =>
                     _triggerAddChantSheet(context, availableChants),
-                onChantRemoved: (chant) => _onChantRemoved(context, chant),
+                onChantRemoved: (chant, index) => _onChantRemoved(context, chant, index),
                 onReorder: (oldIndex, newIndex) =>
                     _onReorderSelectedChants(context, oldIndex, newIndex),
               ),

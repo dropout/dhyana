@@ -53,13 +53,15 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
   }
 
   void addToSelectedChants(Chant chant) {
-    final updated = List<Chant>.from(state.selectedChants)..add(chant);
+    final updated = List<Chant>.from(state.selectedChants)
+      ..add(chant);
     emit(state.copyWith(selectedChants: updated));
     _saveSelectedChantsToSharedPrefs(updated);
   }
 
-  void removeFromSelectedChants(Chant chant) {
-    final updated = List<Chant>.from(state.selectedChants)..remove(chant);
+  void removeFromSelectedChants(int index) {
+    final updated = List<Chant>.from(state.selectedChants)
+      ..removeAt(index);
     emit(state.copyWith(selectedChants: updated));
     _saveSelectedChantsToSharedPrefs(updated);
   }
