@@ -196,13 +196,28 @@ mixin AuthRedirectHook {
 
 @TypedGoRoute<ProfileRoute>(path: '/profile/:profileId', name: 'PROFILE')
 class ProfileRoute extends GoRouteData with AuthRedirectHook, $ProfileRoute {
+  
   final String profileId;
-  final Profile? $extra;
+  
+  /// Pass the [Profile] object through extra to avoid unnecessary 
+  /// profile data fetching.
+  final Object? $extra;
+  
   const ProfileRoute({required this.profileId, this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      ProfileScreen(profileId: profileId, profile: $extra);
+  Widget build(BuildContext context, GoRouterState state) {
+    try {
+      final Profile profile = ($extra is Profile) ? $extra as Profile : throw Exception('Invalid profile data');
+      return ProfileScreen(profileId: profileId, profile: profile);
+    } catch (e) {
+      // If the passed profile data is invalid, 
+      // load the profile from just the profile id.
+      return ProfileScreen(profileId: profileId);
+    }
+    
+  }
+      
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
       authRedirectHook(context, state);
