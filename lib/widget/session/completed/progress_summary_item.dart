@@ -55,12 +55,12 @@ with SingleTickerProviderStateMixin {
 
       // show
       Future.delayed(widget.animationDelay, () {
-        animationController.forward();
+        if (mounted) animationController.forward();
       });
 
       // hide
       Future.delayed(widget.animationDelay + Duration(seconds: 5), () {
-        animationController.reverse();
+        if (mounted) animationController.reverse();        
       });
     }
 
