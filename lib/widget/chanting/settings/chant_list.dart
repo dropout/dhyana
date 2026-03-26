@@ -5,7 +5,7 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
-class ChantList extends StatelessWidget {
+class ChantList extends StatefulWidget {
   final List<Chant> chants;
   final void Function(int oldIndex, int newIndex) onReorder;
   final VoidCallback onAddChant;
@@ -20,39 +20,60 @@ class ChantList extends StatelessWidget {
   });
 
   @override
+  State<ChantList> createState() => _ChantListState();
+}
+
+class _ChantListState extends State<ChantList> {
+  late List<_ChantingListItem> _chants;
+
+  @override
+  void initState() {
+    super.initState();
+    _chants = widget.chants.map((e) => 
+    _ChantingListItem(chant: e, key: UniqueKey())).toList();
+  }
+
+  @override
+  void didUpdateWidget(ChantList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.chants != widget.chants) {
+      setState(() {
+        _chants = widget.chants.map((e) => _ChantingListItem(chant: e, key: UniqueKey())).toList();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (chants.isEmpty) {
+    if (_chants.isEmpty) {
       return buildEmpty(context);
     }
 
     return ReorderableListView.builder(
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       buildDefaultDragHandles: false,
-      itemCount: chants.length,
+      itemCount: _chants.length,
       onReorder: (oldIndex, newIndex) {
         final int adjustedIndex = (newIndex > oldIndex)
             ? newIndex - 1
             : newIndex;
-        onReorder(oldIndex, adjustedIndex);
+        widget.onReorder(oldIndex, adjustedIndex);
       },
       footer: Padding(
         padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
-        child: Center(
-          // Drop parent constraints stretching full width
-          child: AddChantButton(onTap: onAddChant),
-        ),
+        child: Center(child: AddChantButton(onTap: widget.onAddChant)),
       ),
       itemBuilder: (context, index) {
-        final chant = chants[index];
-        final enableDragging = chants.length > 1;
-        final paddingBottom = index < chants.length - 1
+        final chant = _chants[index].chant;
+        final enableDragging = _chants.length > 1;
+        final paddingBottom = index < _chants.length - 1
             ? DesignSpec.paddingSm
             : 0.0;
 
-        return Dismissible(        
-          key: ValueKey('${chant.id}.$index'),
+        return Dismissible(
+          key: _chants[index].key,
           direction: DismissDirection.endToStart,
-          onDismissed: (_) => onChantRemoved(chant, index),
+          onDismissed: (_) => widget.onChantRemoved(chant, index),
           child: Padding(
             padding: EdgeInsets.only(bottom: paddingBottom),
             child: ChantCard(
@@ -68,7 +89,6 @@ class ChantList extends StatelessWidget {
             ),
           ),
         );
-
       },
       proxyDecorator: (child, index, animation) {
         return AnimatedBuilder(
@@ -117,9 +137,16 @@ class ChantList extends StatelessWidget {
             ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
           ),
           Gap.small(),
-          AddChantButton(onTap: onAddChant),
+          AddChantButton(onTap: widget.onAddChant),
         ],
       ),
     );
   }
+}
+
+class _ChantingListItem {
+  final Chant chant;
+  final UniqueKey key;
+
+  _ChantingListItem({required this.chant, required this.key});
 }
