@@ -27,7 +27,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       setSessionType(SessionType.timer);
       emit(HomeScreenState.loaded(
         sessionType: SessionType.timer,
-        timerSettings: timerSettings
       ));
     } else {
       try {
