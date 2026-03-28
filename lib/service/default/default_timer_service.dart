@@ -17,6 +17,9 @@ class DefaultTimerService with LoggerMixin implements TimerService {
   DateTime? _startTime;
   DateTime? _endTime;
 
+  Function(int tick)? _tickCallback;
+  Function()? _finishedCallback;
+
   final StreamController<int> _tickStreamController =
     StreamController<int>.broadcast();
 
@@ -46,6 +49,7 @@ class DefaultTimerService with LoggerMixin implements TimerService {
         if (_stopwatch.isRunning) {
           _ticks++;
           _tickStreamController.add(_ticks);
+          _tickCallback?.call(_ticks);
         }
       }
     );
@@ -104,8 +108,10 @@ class DefaultTimerService with LoggerMixin implements TimerService {
 
     _finished = true;
     _finishedStreamController.add(null);
+    _finishedCallback?.call();
   }
 
+  @override
   Duration get remainingTime {
     int diff = _duration.inMilliseconds - _stopwatch.elapsedMilliseconds;
     return Duration(milliseconds: diff);
@@ -163,7 +169,9 @@ class DefaultTimerService with LoggerMixin implements TimerService {
     _ticker = null;
 
     _tickStreamController.close();
+    _tickCallback = null;
     _finishedStreamController.close();
+    _finishedCallback = null;
   }
 
 }

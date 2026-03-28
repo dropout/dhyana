@@ -1,5 +1,4 @@
-abstract interface class TimerService  {
-
+abstract interface class TimerService {
   void start();
   void stop();
   void reset();
@@ -10,9 +9,13 @@ abstract interface class TimerService  {
   DateTime? get startTime;
   DateTime? get endTime;
   Duration get elapsedTime;
+  Duration get remainingTime;
   bool get running;
   bool get finished;
-  Stream<int> get tickStream;
-  Stream<void> get finishedStream;
 
+  Stream<int> get tickStream;
+  void onTick(void Function(int tick) callback);
+
+  Stream<void> get finishedStream;
+  void onFinished(void Function() callback);
 }
