@@ -8,6 +8,7 @@ import 'package:dhyana/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_keys.dart';
 import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,9 +48,8 @@ GoRouter createAppRouter({required InitResult initResult}) {
 
 @TypedGoRoute<HomeRoute>(path: '/', name: 'HOME')
 class HomeRoute extends GoRouteData with $HomeRoute {
-
-  // An option to force home screen recreation when navigating to it, 
-  // which is useful to apply changes that requires home screen reload such 
+  // An option to force home screen recreation when navigating to it,
+  // which is useful to apply changes that requires home screen reload such
   // as timer settings change.
   final int? refresh;
 
@@ -96,19 +96,24 @@ class TimerRoute extends GoRouteData with $TimerRoute {
 
 @TypedGoRoute<ChantingRoute>(path: '/chanting', name: 'CHANTING')
 class ChantingRoute extends GoRouteData with $ChantingRoute {
-  final Object? $extra;
+  final Object $extra;
   const ChantingRoute({required this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final ChantingSettings chantingSettings = ($extra is ChantingSettings)
+    try {
+      final ChantingSettings chantingSettings = ($extra is ChantingSettings)
         ? $extra as ChantingSettings
-        : ChantingSettings(selectedChants: []);
-
-    return ChantingScreen(
-      chantingSettings: chantingSettings,
-      key: state.pageKey,
-    );
+        : throw Exception('Invalid chanting settings data');
+      return ChantingScreen(
+        chantingSettings: chantingSettings,
+        key: state.pageKey,
+      );
+    } catch (e) {
+      return AppErrorDisplay(
+        onButtonTap: () => HomeRoute().go(context),        
+      );
+    }
   }
 }
 
@@ -196,28 +201,28 @@ mixin AuthRedirectHook {
 
 @TypedGoRoute<ProfileRoute>(path: '/profile/:profileId', name: 'PROFILE')
 class ProfileRoute extends GoRouteData with AuthRedirectHook, $ProfileRoute {
-  
   final String profileId;
-  
-  /// Pass the [Profile] object through extra to avoid unnecessary 
+
+  /// Pass the [Profile] object through extra to avoid unnecessary
   /// profile data fetching.
   final Object? $extra;
-  
+
   const ProfileRoute({required this.profileId, this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     try {
-      final Profile profile = ($extra is Profile) ? $extra as Profile : throw Exception('Invalid profile data');
+      final Profile profile = ($extra is Profile)
+          ? $extra as Profile
+          : throw Exception('Invalid profile data');
       return ProfileScreen(profileId: profileId, profile: profile);
     } catch (e) {
-      // If the passed profile data is invalid or not present, 
+      // If the passed profile data is invalid or not present,
       // load the profile from just the profile id.
       return ProfileScreen(profileId: profileId);
     }
-    
   }
-      
+
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
       authRedirectHook(context, state);

@@ -46,7 +46,13 @@ class WarmupTimeInput extends StatelessWidget {
       (context) => DurationInputView(
         title: label,
         initialValue: value,
-        availableValues: availableValues,
+        availableValues: const [
+          Duration.zero,
+          Duration(minutes: 1),
+          Duration(minutes: 2),
+          Duration(minutes: 3),
+          Duration(minutes: 5),
+        ],
         onSelect: (Duration duration) => _onSelected(context, duration),
       )
     );

@@ -9,7 +9,6 @@ import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/bloc_provider/chanting_bloc_providers.dart';
 import 'package:dhyana/widget/chanting/chanting_player_view.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,14 +36,10 @@ class ChantingScreen extends StatelessWidget {
           extendBodyBehindAppBar: true,
           appBar: CustomAppBar(leading: CustomBackButton()),
           backgroundColor: Colors.black,
-          body: switch (state.playbackState) {
-            PlaybackState.loading => AppLoadingDisplay(),
-            PlaybackState.error => Center(child: Text('Error loading chant')),
-            _ => ChantingPlayerView(
-              chantingState: state,
-              wakelockService: context.services.wakelockService,
-            ),
-          },
+          body: ChantingPlayerView(
+            chantingState: state,
+            wakelockService: context.services.wakelockService,
+          ),
         );
       },
       listenWhen: (prevState, currentState) {

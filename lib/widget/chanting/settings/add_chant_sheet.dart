@@ -1,8 +1,10 @@
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/widget/chanting/chant_card.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AddChantSheet extends StatefulWidget {
   final List<Chant> availableChants;
@@ -70,7 +72,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
           ),
           child: Center(
             child: Text(
-              'Add Chant',
+              context.l10n.chantingAddChantSheetTitle,
               textAlign: TextAlign.center,
               style: context.theme.textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
@@ -83,20 +85,24 @@ class _AddChantSheetState extends State<AddChantSheet> {
           left: 0,
           right: 0,
           bottom: 0,
-          child: SizedBox(
-            height:
-                MediaQuery.of(context).viewPadding.bottom +
-                DesignSpec.spacingLg,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    AppColors.backgroundPaper.withValues(alpha: 0.25),
-                    AppColors.backgroundPaper.withValues(alpha: 1.0),
-                  ],
-                  stops: [0.0, 0.75],
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.backgroundPaper.withValues(alpha: 0.25),
+                  AppColors.backgroundPaper.withValues(alpha: 1.0),
+                ],
+                stops: [0.0, 0.75],
+              ),
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: DesignSpec.padding2Xl),
+                child: AppButton(
+                  onTap: () => context.pop(),
+                  text: context.l10n.close.toUpperCase(),
                 ),
               ),
             ),
@@ -129,7 +135,7 @@ class _AddChantButtonState extends State<_AddChantButton> {
       _showCheckIcon = true;
     });
 
-    await Future<void>.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(milliseconds: 1500));
     if (!mounted) {
       return;
     }
@@ -144,8 +150,9 @@ class _AddChantButtonState extends State<_AddChantButton> {
     return IconButton(
       icon: Icon(
         _showCheckIcon
-            ? Icons.check_circle_rounded
-            : Icons.add_circle_outline_rounded,
+          ? Icons.check_circle_rounded
+          : Icons.add_circle_outline_rounded,
+        color: _showCheckIcon ? Colors.green : Colors.black,
       ),
       onPressed: _handleTap,
     );

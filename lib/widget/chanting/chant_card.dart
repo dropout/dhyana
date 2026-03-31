@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 class ChantCard extends StatelessWidget {
   final int index;
   final Chant chant;
-  final bool isCurrent;
+  final Color textColor;
   final Widget? trailing;
 
   const ChantCard({
     required this.index,
     required this.chant,
     this.trailing,
-    this.isCurrent = false,
+    this.textColor = Colors.black,
     super.key,
   });
 
@@ -34,6 +34,7 @@ class ChantCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: context.theme.textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.w500,
+                  color: textColor,
                 ),
               ),
             ),
@@ -50,12 +51,14 @@ class ChantCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: context.theme.textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.w800,
+                    color: textColor,
                   ),
                 ),
                 Text(
                   chant.length.formatMMss(),
                   style: context.theme.textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w500,
+                    color: textColor,
                   ),
                 ),
               ],
@@ -66,19 +69,5 @@ class ChantCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget buildTrailing(BuildContext context) {
-    if (isCurrent) {
-      return Icon(
-        Icons.music_note_rounded,
-        color: context.theme.colorScheme.primary,
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.play_circle_outline_rounded),
-        onPressed: () {},
-      );
-    }
   }
 }

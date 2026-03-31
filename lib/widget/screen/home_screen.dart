@@ -111,8 +111,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           buildBody(context, state),
           Positioned(
-            bottom: DesignSpec.spacingLg,
-            right: DesignSpec.spacingLg,
+            bottom: DesignSpec.spacingLg - 2,
+            right: DesignSpec.spacingXl,
             child: SafeArea(child: buildToggle(context, state)),
           ),
         ],
@@ -222,6 +222,7 @@ class HomeScreen extends StatelessWidget {
         onCreate: (cubit) => cubit.loadAvailableChants(),
         builder: (context, state) => ChantingSettingsView(
           availableChants: state.availableChants,
+          profileSettings: profileSettings,
         )
       )
     );

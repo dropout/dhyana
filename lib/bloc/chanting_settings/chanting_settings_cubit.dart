@@ -13,7 +13,7 @@ part 'chanting_settings_state.dart';
 part 'chanting_settings_cubit.freezed.dart';
 
 class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
-    with LoggerMixin {
+  with LoggerMixin {
 
   final ChantsRepository chantsRepository;
   final SharedPreferencesService sharedPreferencesService;

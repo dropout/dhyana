@@ -50,7 +50,6 @@ class _ChantListState extends State<ChantList> {
     }
 
     return ReorderableListView.builder(
-      physics: const ClampingScrollPhysics(),
       buildDefaultDragHandles: false,
       itemCount: _chants.length,
       onReorder: (oldIndex, newIndex) {
@@ -60,7 +59,7 @@ class _ChantListState extends State<ChantList> {
         widget.onReorder(oldIndex, adjustedIndex);
       },
       footer: Padding(
-        padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
+        padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
         child: Center(child: AddChantButton(onTap: widget.onAddChant)),
       ),
       itemBuilder: (context, index) {
@@ -83,8 +82,8 @@ class _ChantListState extends State<ChantList> {
                 enabled: enableDragging,
                 index: index,
                 child: enableDragging
-                    ? const Icon(Icons.drag_handle)
-                    : const SizedBox.shrink(),
+                  ? const Icon(Icons.drag_handle)
+                  : const SizedBox.shrink(),
               ),
             ),
           ),

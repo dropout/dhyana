@@ -1,3 +1,5 @@
+import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
+import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -11,9 +13,7 @@ class PlayerControls extends StatelessWidget {
 
   /// Creates a [PlayerControls] widget.
   const PlayerControls({
-    required this.position,
-    required this.duration,
-    required this.isPlaying,
+    required this.chantingState,
     required this.onNextPressed,
     required this.onPlayPausePressed,
     required this.onPreviousPressed,
@@ -21,16 +21,12 @@ class PlayerControls extends StatelessWidget {
     super.key,
     this.isNextEnabled = true,
     this.isPreviousEnabled = true,
+    this.showProgressBar = true,
+    this.showTime = true,
   });
 
-  /// The total duration of the currently playing chant.
-  final Duration duration;
-
-  /// The current playback position within the chant.
-  final Duration position;
-
-  /// Whether the chant is currently playing.
-  final bool isPlaying;
+  /// The current state of the chanting player
+  final ChantingState chantingState;
 
   /// Whether the "Next" button should be enabled.
   final bool isNextEnabled;
@@ -49,6 +45,16 @@ class PlayerControls extends StatelessWidget {
 
   /// Callback invoked when the user presses the "Playlist" button.
   final VoidCallback onPlaylistPressed;
+
+  /// Whether to show the progress bar above the controls.
+  final bool showProgressBar;
+
+  /// Whether to show the current position and total duration text.
+  final bool showTime;
+
+  Duration get position => chantingState.position;
+  Duration get duration => chantingState.duration;
+  bool get isPlaying => chantingState.playbackState == .playing;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +80,7 @@ class PlayerControls extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Padding(
+        if (showProgressBar) Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: DesignSpec.paddingLg,
             vertical: DesignSpec.paddingLg,
@@ -85,7 +91,7 @@ class PlayerControls extends StatelessWidget {
             valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
           ),
         ),
-        Padding(
+        if (showTime) Padding(
           padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
           child: Row(
             children: <Widget>[
@@ -123,15 +129,9 @@ class PlayerControls extends StatelessWidget {
               color: isPreviousEnabled ? Colors.white : Colors.white54,
             ),
             Gap.small(),
-            IconButton.filled(
-              iconSize: 42,
-              onPressed: onPlayPausePressed,
-              icon: Icon(
-                isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-              ),
-              style: IconButton.styleFrom(
-                backgroundColor: AppColors.red, // Change this color
-              ),
+            PlayPauseButton(
+              playbackState: chantingState.playbackState,
+              onPressed: onPlayPausePressed
             ),
             Gap.small(),
             IconButton(
@@ -159,4 +159,69 @@ class PlayerControls extends StatelessWidget {
     );
     
   }
+}
+
+
+/// Circular play/pause button that can show a loading spinner.
+class PlayPauseButton extends StatelessWidget {
+  const PlayPauseButton({
+    required this.playbackState,
+    required this.onPressed,
+    super.key,
+    this.backgroundColor = AppColors.red,
+    this.iconColor = Colors.white,
+    this.size = 42,
+    this.disableWhileLoading = true,
+  });
+
+  final PlaybackState playbackState;
+  final VoidCallback onPressed;
+  final Color backgroundColor;
+  final Color iconColor;
+  final double size;
+  final bool disableWhileLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    final VoidCallback? resolvedOnPressed = disableWhileLoading && playbackState == .loading
+        ? null
+        : onPressed;
+
+    return IconButton.filled(
+      iconSize: size,
+      onPressed: resolvedOnPressed,
+      style: IconButton.styleFrom(backgroundColor: backgroundColor),
+      icon: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 200),
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        child: playbackState == .loading
+            ? SizedBox(
+                key: const ValueKey<String>('loading'),
+                width: size,
+                height: size,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.4,
+                  valueColor: AlwaysStoppedAnimation<Color>(iconColor),
+                ),
+              )
+            : Icon(
+                key: ValueKey<PlaybackState>(playbackState),
+                playbackState == .playing
+                    ? Icons.pause_rounded
+                    : Icons.play_arrow_rounded,
+                color: iconColor,
+              ),
+      ),
+    );
+  }
+}
+
+/// Optional helper for mapping state to loading UI.
+/// Adjust enum values to your [playbackState] model.
+extension ChantingStateLoadingX on ChantingState {
+  bool get isPlaybackLoading => switch (playbackState) {
+        .loading => true,
+        _ => false,
+      };
 }

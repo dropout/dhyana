@@ -4,7 +4,6 @@ import 'package:dhyana/service/timer_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
 class DefaultTimerService with LoggerMixin implements TimerService {
-
   final Duration _duration;
   final int tickIntervalInMilliSeconds;
 
@@ -21,10 +20,10 @@ class DefaultTimerService with LoggerMixin implements TimerService {
   Function()? _finishedCallback;
 
   final StreamController<int> _tickStreamController =
-    StreamController<int>.broadcast();
+      StreamController<int>.broadcast();
 
   final StreamController<void> _finishedStreamController =
-    StreamController<void>.broadcast();
+      StreamController<void>.broadcast();
 
   DefaultTimerService({
     required Duration duration,
@@ -51,20 +50,27 @@ class DefaultTimerService with LoggerMixin implements TimerService {
           _tickStreamController.add(_ticks);
           _tickCallback?.call(_ticks);
         }
-      }
+      },
     );
 
-    _timer = Timer(
-      remainingTime,
-      _handleTimerCompleted
-    );
+    _timer = Timer(remainingTime, _handleTimerCompleted);
 
     _stopwatch.start();
   }
 
   @override
+  void onTick(void Function(int tick) callback) {
+    _tickCallback = callback;
+  }
+
+  @override
+  void onFinished(void Function() callback) {
+    _finishedCallback = callback;
+  }
+
+  @override
   void stop() {
-    logger.t('Stop');
+    logger.t('Stop - ${DateTime.now()}');
     _stopwatch.stop();
     _timer?.cancel();
     _ticker?.cancel();
@@ -105,6 +111,7 @@ class DefaultTimerService with LoggerMixin implements TimerService {
     _stopwatch.stop();
 
     _endTime = DateTime.now();
+    
 
     _finished = true;
     _finishedStreamController.add(null);
@@ -113,8 +120,9 @@ class DefaultTimerService with LoggerMixin implements TimerService {
 
   @override
   Duration get remainingTime {
-    int diff = _duration.inMilliseconds - _stopwatch.elapsedMilliseconds;
-    return Duration(milliseconds: diff);
+    // int diff = _duration.inMilliseconds - _stopwatch.elapsedMilliseconds;
+    return _duration - _stopwatch.elapsed;
+    // return Duration(milliseconds: diff);
   }
 
   @override
@@ -131,10 +139,10 @@ class DefaultTimerService with LoggerMixin implements TimerService {
   }
 
   @override
-  DateTime? get startTime  => _startTime;
+  DateTime? get startTime => _startTime;
 
   @override
-  DateTime? get endTime  => _endTime;
+  DateTime? get endTime => _endTime;
 
   @override
   Duration get elapsedTime {
@@ -173,5 +181,4 @@ class DefaultTimerService with LoggerMixin implements TimerService {
     _finishedStreamController.close();
     _finishedCallback = null;
   }
-
 }

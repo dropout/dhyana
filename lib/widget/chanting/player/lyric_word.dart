@@ -3,12 +3,16 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
+class LyricWordWidget extends StatelessWidget {
 
-class LyricWord extends StatelessWidget {
   final LyricsWord word;
   final Duration position;
 
-  const LyricWord({required this.word, required this.position, super.key});
+  const LyricWordWidget({
+    required this.word, 
+    required this.position, 
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {

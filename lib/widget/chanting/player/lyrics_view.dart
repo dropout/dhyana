@@ -80,11 +80,8 @@ class _LyricsViewState extends State<LyricsView> {
         oldWidget.chantingState.activeLineIndex) {
       debugPrint(
         'Active line index changed: ${oldWidget.chantingState.activeLineIndex} -> ${widget.chantingState.activeLineIndex}',
-      );
-      // if (widget.chantingState.playbackState != .playing) {
-        _scrollToActiveLine();
-      // }
-      
+      );      
+      _scrollToActiveLine();
     }
   }
 
@@ -95,7 +92,7 @@ class _LyricsViewState extends State<LyricsView> {
     // Ensure that we only pause when user is actively touching the screen
     // When animating scroll programmatically, do not pause
     if (_scrollController.position.isScrollingNotifier.value && isPointerDown) {
-      BlocProvider.of<ChantingCubit>(context, listen: false).pause();
+      context.read<ChantingCubit>().pause();
       setState(() {
         isScrolling = true;
       });
@@ -243,7 +240,11 @@ class _LyricsViewState extends State<LyricsView> {
                 return LyricLine(
                   line: line,
                   position: widget.chantingState.position,
-                  isActive: index == widget.chantingState.activeLineIndex,
+                  chantingState: widget.chantingState,                  
+                  isActive: switch (widget.chantingState.playbackState) {
+                    .completed => false,
+                    _ => index <= widget.chantingState.activeLineIndex,
+                  },
                 );
               }, childCount: lyricsDocument.lines.length),
             ),

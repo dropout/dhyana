@@ -65,7 +65,6 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
 class FormBuilderImagePickerState
   extends FormBuilderFieldState<FormBuilderProfileImagePicker, Uint8List> {}
 
-
 enum ProfileImagePickerError {
   photoAccessDenied,
   imageLoadingFailed,

@@ -96,6 +96,8 @@
   "showStatsOnFinishScreenDescription": "When enabled, your statistics updated with the finished session will be displayed on the Session Finish screen.",
   "usePresenceFeatureTitle": "Enable Presence feature",
   "usePresenceFeatureDescription": "When enabled, user will be able to see other users who are currently practicing.",
+  "chantingGapLengthTitle": "Chanting Gap length",
+  "chantingGapLengthDescription": "Duration of the gap between the chants.",
 
   "profileStats": "Statistics",
   "average": "Average",
@@ -154,6 +156,10 @@
   "presence": "Presence",
   "presenceScreenSubTitle": "Move the slider to adjust presence timerframe.",
 
+  "secondsAbbr": "s",
+  "secondsPlural": "{count, plural, =0{second} =1{second} =2{seconds} few{seconds} many{seconds} other{seconds}}",
+  "secondsPluralWithNumber": "{count, plural, =0{{count} second} =1{{count} second} =2{{count} seconds} few{{count} seconds} many{{count} seconds} other{{count} seconds}}",
+
   "minutesAbbr": "m",
   "minutesPlural": "{count, plural, =0{minute} =1{minute} =2{minutes} few{minutes} many{minutes} other{minutes}}",
   "minutesPluralWithNumber": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
@@ -198,6 +204,17 @@
   "locationInputCurrentSelection": "Current selection:",
   "locationInputNoSelection": "No city selected yet",
   "locationInputNoResults": "No results found",
-  "locationInputErrorMessage": "An unexpected error occured.\nPlease try again later."
+  "locationInputErrorMessage": "An unexpected error occured.\nPlease try again later.",
+
+  "chantingTitle": "Chanting",
+  "chantingNextChantIn": "Next chant in",
+  "chantingAddChantSheetTitle": "Add Chant",
+  "chantingPlaylistSheetTitle": "Playlist",
+
+  "chantingPlaylistBadgeLoading": "Loading",
+  "chantingPlaylistBadgePlaying": "Playing",
+  "chantingPlaylistBadgePaused": "Paused",
+  "chantingPlaylistBadgeCompleted": "Completed",
+  "chantingPlaylistBadgeNext": "Next"
 
 }

@@ -6,6 +6,7 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,6 @@ import 'package:dhyana/widget/timer/settings/warmup_input.dart';
 import 'package:dhyana/widget/timer/settings/sound_input.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
 import 'package:dhyana/widget/timer/settings/end_time_text.dart';
-import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
 import 'package:dhyana/widget/timer/settings/input_gap.dart';
 
 
@@ -149,17 +149,15 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   Widget buildStartButton(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
-        child: TimerStartButton(
-          onTap: () => _onStartButtonTap(context),
-          fragmentShader: context.services.shaderService.get(
-            Assets.shaderGradientFlow
-          ),
-          timerSettings: widget.timerSettings,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+      child: SessionStartButton(
+        onTap: () => _onStartButtonTap(context),
+        fragmentShader: context.services.shaderService.get(
+          Assets.shaderGradientFlow
         ),
+        colorA: Colors.red.shade900,
+        colorB: Colors.red.shade600,
       ),
     );
   }

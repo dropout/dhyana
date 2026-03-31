@@ -33,8 +33,8 @@ class SessionTypeToggle extends StatelessWidget {
         child: Icon(
           (activeMode == SessionType.timer)
             ? Icons.music_note
-            : Icons.hourglass_bottom_rounded,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+            : Icons.timer_outlined,
+          color: Colors.white,
         ),
       ),
     );
@@ -97,7 +97,7 @@ class _CustomInkWellState extends State<CustomInkWell>
           builder: (context, child) =>
             CustomPaint(
               painter: _InkRipplePainter(
-                endSize: 64,
+                endSize: 48,
                 progress: _progressAnimation.value,
               ),
               child: widget.child,
@@ -116,22 +116,26 @@ class _CustomInkWellState extends State<CustomInkWell>
 
 class _InkRipplePainter extends CustomPainter {
 
-  final double startSize;
   final double endSize;
   final double progress;
 
   const _InkRipplePainter({
     required this.endSize,
     required this.progress,
-    this.startSize = 0.0,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawCircle(
       Offset(size.width / 2, size.height / 2),
-      startSize + (endSize - startSize) * progress,
+      endSize * progress,
       Paint()..color = Colors.black.withValues(alpha: (1.0 - progress) * 0.3),
+    );
+
+    canvas.drawCircle(
+      Offset(size.width / 2, size.height / 2),
+      24,
+      Paint()..color = Colors.black,
     );
   }
 

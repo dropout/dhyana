@@ -12,7 +12,7 @@ import '../audio_service.dart';
 class DefaultAudioService with LoggerMixin implements AudioService {
 
   /// The audio player instance used to play sounds.
-  AudioPlayer audioPlayer = AudioPlayer();
+  final AudioPlayer audioPlayer = AudioPlayer();
 
   /// Creates a new instance of the DefaultAudioService and configures the audio player.
   DefaultAudioService() {

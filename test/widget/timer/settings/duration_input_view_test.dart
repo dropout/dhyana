@@ -13,7 +13,12 @@ void main() {
       await tester.pumpWidget(
         withAllContextProviders(
           DurationInputView(
-            availableValues: [3, 5, 10, 15],
+            availableValues: const [
+              Duration(minutes: 1),
+              Duration(minutes: 5),
+              Duration(minutes: 10),
+              Duration(minutes: 15),
+            ],
             initialValue: Duration(minutes: 5),
           ),
         )
@@ -28,7 +33,18 @@ void main() {
       await tester.pumpWidget(
         withAllContextProviders(
           DurationInputView(
-            availableValues: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            availableValues: const [
+              Duration(minutes: 1),
+              Duration(minutes: 2),
+              Duration(minutes: 3),
+              Duration(minutes: 4),
+              Duration(minutes: 5),
+              Duration(minutes: 6),
+              Duration(minutes: 7),
+              Duration(minutes: 8),
+              Duration(minutes: 9),
+              Duration(minutes: 10),
+            ],
             initialValue: Duration(minutes: 5),
             onSelect: (Duration duration) {
               completer.complete(duration);

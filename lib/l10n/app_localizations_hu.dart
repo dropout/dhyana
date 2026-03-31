@@ -267,6 +267,13 @@ class AppLocalizationsHu extends AppLocalizations {
       'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.';
 
   @override
+  String get chantingGapLengthTitle => 'Kántálás közötti szünet hossza';
+
+  @override
+  String get chantingGapLengthDescription =>
+      'A kántálás közötti szünet időtartama.';
+
+  @override
   String get profileStats => 'Statisztika';
 
   @override
@@ -439,6 +446,39 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get presenceScreenSubTitle =>
       'Mozgasd a csuszkát a jelenlét időkeretének beállításához.';
+
+  @override
+  String get secondsAbbr => 'mp';
+
+  @override
+  String secondsPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'másodperc',
+      many: 'másodperc',
+      few: 'másodperc',
+      two: 'másodperc',
+      one: 'másodperc',
+      zero: 'másodperc',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String secondsPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count másodperc',
+      many: '$count másodperc',
+      few: '$count másodperc',
+      two: '$count másodperc',
+      one: '$count másodperc',
+      zero: '$count másodperc',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get minutesAbbr => 'p';
@@ -658,4 +698,31 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get locationInputErrorMessage =>
       'Váratlan hiba történt.\nKérlek próbáld újra később.';
+
+  @override
+  String get chantingTitle => 'Éneklés';
+
+  @override
+  String get chantingNextChantIn => 'Következő éneklés';
+
+  @override
+  String get chantingAddChantSheetTitle => 'Hozzáadás';
+
+  @override
+  String get chantingPlaylistSheetTitle => 'Lejátszási lista';
+
+  @override
+  String get chantingPlaylistBadgeLoading => 'Betöltés';
+
+  @override
+  String get chantingPlaylistBadgePlaying => 'Lejátszás';
+
+  @override
+  String get chantingPlaylistBadgePaused => 'Szünet';
+
+  @override
+  String get chantingPlaylistBadgeCompleted => 'Befejezett';
+
+  @override
+  String get chantingPlaylistBadgeNext => 'Következő';
 }

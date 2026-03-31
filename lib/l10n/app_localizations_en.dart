@@ -266,6 +266,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'When enabled, user will be able to see other users who are currently practicing.';
 
   @override
+  String get chantingGapLengthTitle => 'Chanting Gap length';
+
+  @override
+  String get chantingGapLengthDescription =>
+      'Duration of the gap between the chants.';
+
+  @override
   String get profileStats => 'Statistics';
 
   @override
@@ -439,6 +446,39 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get presenceScreenSubTitle =>
       'Move the slider to adjust presence timerframe.';
+
+  @override
+  String get secondsAbbr => 's';
+
+  @override
+  String secondsPlural(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'seconds',
+      many: 'seconds',
+      few: 'seconds',
+      two: 'seconds',
+      one: 'second',
+      zero: 'second',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String secondsPluralWithNumber(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seconds',
+      many: '$count seconds',
+      few: '$count seconds',
+      two: '$count seconds',
+      one: '$count second',
+      zero: '$count second',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get minutesAbbr => 'm';
@@ -658,4 +698,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get locationInputErrorMessage =>
       'An unexpected error occured.\nPlease try again later.';
+
+  @override
+  String get chantingTitle => 'Chanting';
+
+  @override
+  String get chantingNextChantIn => 'Next chant in';
+
+  @override
+  String get chantingAddChantSheetTitle => 'Add Chant';
+
+  @override
+  String get chantingPlaylistSheetTitle => 'Playlist';
+
+  @override
+  String get chantingPlaylistBadgeLoading => 'Loading';
+
+  @override
+  String get chantingPlaylistBadgePlaying => 'Playing';
+
+  @override
+  String get chantingPlaylistBadgePaused => 'Paused';
+
+  @override
+  String get chantingPlaylistBadgeCompleted => 'Completed';
+
+  @override
+  String get chantingPlaylistBadgeNext => 'Next';
 }

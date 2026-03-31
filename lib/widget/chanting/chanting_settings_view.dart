@@ -1,10 +1,12 @@
 import 'package:dhyana/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/chanting_settings.dart';
+import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/chanting/settings/chant_list.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:dhyana/widget/util/gap.dart';
@@ -14,9 +16,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'settings/add_chant_sheet.dart';
 
 class ChantingSettingsView extends StatelessWidget {
+  
   final List<Chant> availableChants;
+  final ProfileSettings profileSettings;
 
-  const ChantingSettingsView({required this.availableChants, super.key});
+  const ChantingSettingsView({
+    required this.profileSettings,
+    required this.availableChants, 
+    super.key
+  });
 
   void _triggerAddChantSheet(
     BuildContext context,
@@ -60,12 +68,15 @@ class ChantingSettingsView extends StatelessWidget {
 
   void _onStart(BuildContext context) {
     final selectedChants = context
-        .read<ChantingSettingsCubit>()
-        .state
-        .selectedChants;
+      .read<ChantingSettingsCubit>()
+      .state
+      .selectedChants;
     if (selectedChants.isNotEmpty) {
       ChantingRoute(
-        $extra: ChantingSettings(selectedChants: selectedChants),
+        $extra: ChantingSettings(
+          selectedChants: selectedChants,
+          gapLength: profileSettings.chantingGapLength,
+        ),
       ).push(context);
     }
   }
@@ -82,7 +93,7 @@ class ChantingSettingsView extends StatelessWidget {
     );
   }
 
-  Widget buildLoaded(BuildContext context, ChantingSettingsState state) {
+  Widget buildLoaded(BuildContext context, ChantingSettingsState state) {    
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -90,7 +101,7 @@ class ChantingSettingsView extends StatelessWidget {
         children: [
           Gap.medium(),
           Text(
-            'Chanting',
+            context.l10n.chantingTitle,
             style: context.theme.textTheme.headlineLarge!.copyWith(
               fontWeight: FontWeight.w800
             ),
@@ -99,41 +110,39 @@ class ChantingSettingsView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: DesignSpec.paddingLg,
-                vertical: DesignSpec.padding2Xl,
+                vertical: DesignSpec.paddingXl,
               ),
               child: ChantList(
                 chants: state.selectedChants,
-                onAddChant: () =>
-                    _triggerAddChantSheet(context, availableChants),
-                onChantRemoved: (chant, index) => _onChantRemoved(context, chant, index),
-                onReorder: (oldIndex, newIndex) =>
-                    _onReorderSelectedChants(context, oldIndex, newIndex),
+                onAddChant: () => _triggerAddChantSheet(
+                  context, 
+                  availableChants
+                ),
+                onChantRemoved: (chant, index) => _onChantRemoved(
+                  context, 
+                  chant, 
+                  index
+                ),
+                onReorder: (oldIndex, newIndex) => _onReorderSelectedChants(
+                  context, 
+                  oldIndex, 
+                  newIndex
+                ),
               ),
             ),
           ),
-          _StartButton(onTap: () => _onStart(context)),
+          Padding(
+            padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+            child: SessionStartButton(
+              onTap: () => _onStart(context), 
+              fragmentShader: context.services.shaderService.get(
+                Assets.shaderGradientFlow
+              ),
+              colorA: Colors.green.shade900,
+              colorB: Colors.green.shade500,
+            ),
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class _StartButton extends StatelessWidget {
-  final void Function()? onTap;
-
-  const _StartButton({this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
-        child: AppButton(
-          text: context.l10n.startTimerButtonText.toUpperCase(),
-          buttonSize: AppButtonSize.large,
-          onTap: onTap,
-        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:dhyana/model/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'model.dart';
@@ -13,6 +14,7 @@ sealed class ProfileSettings with _$ProfileSettings implements Model {
     @Default(false) bool showTimeOnTimerSettingsScreen,
     @Default(true) bool showStatsOnFinishScreen,
     @Default(true) bool usePresenceFeature,
+    @DurationConverter() @Default(Duration(seconds: 10)) Duration chantingGapLength,
   }) = _ProfileSettings;
 
   factory ProfileSettings.fromJson(Map<String, dynamic> json) =>

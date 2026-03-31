@@ -2,6 +2,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/dialog/delete_profile_dialog.dart';
+import 'package:dhyana/widget/input/form_builder_duration_input.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
@@ -26,18 +27,12 @@ class ProfileSettingsForm extends StatefulWidget {
 
   @override
   State<ProfileSettingsForm> createState() => _ProfileSettingsFormState();
-
 }
 
 class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
 
-  // In case a field has to be revalidated on change to remove the
-  // validation errors when its no longer invalid.
-  // late final GlobalKey<FormBuilderState> _formKey;
-
   @override
   void initState() {
-    // _formKey = widget.formStateKey ?? GlobalKey<FormBuilderState>();
     super.initState();
   }
 
@@ -81,6 +76,13 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
             initialValue: widget.profileSettings.usePresenceFeature,
           ),
           Gap.large(),
+          ProfileSettingsDurationInput(
+            title: context.l10n.chantingGapLengthTitle,
+            name: 'chantingGapLength',
+            helperText: context.l10n.chantingGapLengthDescription,              
+            initialValue: widget.profileSettings.chantingGapLength,
+          ),
+          Gap.large(),
           AppButton.small(
             text: context.l10n.profileDeleteTitle.toUpperCase(),
             onTap: () => _onDeleteProfileTapped(context),
@@ -89,9 +91,6 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
       ),
     );
   }
-
-
-
 }
 
 class ProfileSettingsSwitch extends StatelessWidget {
@@ -108,7 +107,7 @@ class ProfileSettingsSwitch extends StatelessWidget {
     required this.initialValue,
     this.helperText,
     this.onChanged,
-    super.key
+    super.key,
   });
 
   @override
@@ -128,7 +127,10 @@ class ProfileSettingsSwitch extends StatelessWidget {
               children: [
                 FormBuilderSwitch(
                   name: name,
-                  title: Text(title, style: Theme.of(context).textTheme.labelLarge),
+                  title: Text(
+                    title,
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     helperStyle: Theme.of(context).textTheme.bodyLarge,
@@ -138,19 +140,78 @@ class ProfileSettingsSwitch extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ),
         Gap.small(),
-        if (helperText != null) Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: DesignSpec.paddingXl,
+        if (helperText != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingXl,
+            ),
+            child: Text(
+              helperText!,
+              style: context.theme.textTheme.bodyMedium,
+            ),
           ),
-          child: Text(
-            helperText!,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ),
       ],
     );
   }
 }
+
+class ProfileSettingsDurationInput extends StatelessWidget {
+  
+  final String title;
+  final String name;
+  final String? helperText;
+  final Duration initialValue;
+  final ValueChanged<Duration?>? onChanged;  
+
+  const ProfileSettingsDurationInput({
+    required this.title,
+    required this.name,
+    required this.initialValue,
+    this.helperText,
+    this.onChanged,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Column(
+      crossAxisAlignment: .stretch,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: AppColors.backgroundPaperLight,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingXl,
+            ),
+            child: FormBuilderDurationInput(
+              name: name,
+              label: title,
+              initialValue: initialValue,
+              onChanged: onChanged,
+              valueTransformer: (value) => value?.inSeconds ?? 0,
+            ),
+          ),
+        ),
+        Gap.small(),
+        if (helperText != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingXl,
+            ),
+            child: Text(
+              helperText!,
+              style: context.theme.textTheme.bodyMedium,
+            ),
+          ),
+      ],
+    );
+  }
+}
+

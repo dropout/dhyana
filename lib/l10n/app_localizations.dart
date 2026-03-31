@@ -572,6 +572,18 @@ abstract class AppLocalizations {
   /// **'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.'**
   String get usePresenceFeatureDescription;
 
+  /// No description provided for @chantingGapLengthTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Kántálás közötti szünet hossza'**
+  String get chantingGapLengthTitle;
+
+  /// No description provided for @chantingGapLengthDescription.
+  ///
+  /// In hu, this message translates to:
+  /// **'A kántálás közötti szünet időtartama.'**
+  String get chantingGapLengthDescription;
+
   /// No description provided for @profileStats.
   ///
   /// In hu, this message translates to:
@@ -866,6 +878,24 @@ abstract class AppLocalizations {
   /// **'Mozgasd a csuszkát a jelenlét időkeretének beállításához.'**
   String get presenceScreenSubTitle;
 
+  /// No description provided for @secondsAbbr.
+  ///
+  /// In hu, this message translates to:
+  /// **'mp'**
+  String get secondsAbbr;
+
+  /// No description provided for @secondsPlural.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{másodperc} =1{másodperc} =2{másodperc} few{másodperc} many{másodperc} other{másodperc}}'**
+  String secondsPlural(num count);
+
+  /// No description provided for @secondsPluralWithNumber.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} másodperc} =1{{count} másodperc} =2{{count} másodperc} few{{count} másodperc} many{{count} másodperc} other{{count} másodperc}}'**
+  String secondsPluralWithNumber(num count);
+
   /// No description provided for @minutesAbbr.
   ///
   /// In hu, this message translates to:
@@ -1009,6 +1039,60 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Váratlan hiba történt.\nKérlek próbáld újra később.'**
   String get locationInputErrorMessage;
+
+  /// No description provided for @chantingTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Éneklés'**
+  String get chantingTitle;
+
+  /// No description provided for @chantingNextChantIn.
+  ///
+  /// In hu, this message translates to:
+  /// **'Következő éneklés'**
+  String get chantingNextChantIn;
+
+  /// No description provided for @chantingAddChantSheetTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hozzáadás'**
+  String get chantingAddChantSheetTitle;
+
+  /// No description provided for @chantingPlaylistSheetTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Lejátszási lista'**
+  String get chantingPlaylistSheetTitle;
+
+  /// No description provided for @chantingPlaylistBadgeLoading.
+  ///
+  /// In hu, this message translates to:
+  /// **'Betöltés'**
+  String get chantingPlaylistBadgeLoading;
+
+  /// No description provided for @chantingPlaylistBadgePlaying.
+  ///
+  /// In hu, this message translates to:
+  /// **'Lejátszás'**
+  String get chantingPlaylistBadgePlaying;
+
+  /// No description provided for @chantingPlaylistBadgePaused.
+  ///
+  /// In hu, this message translates to:
+  /// **'Szünet'**
+  String get chantingPlaylistBadgePaused;
+
+  /// No description provided for @chantingPlaylistBadgeCompleted.
+  ///
+  /// In hu, this message translates to:
+  /// **'Befejezett'**
+  String get chantingPlaylistBadgeCompleted;
+
+  /// No description provided for @chantingPlaylistBadgeNext.
+  ///
+  /// In hu, this message translates to:
+  /// **'Következő'**
+  String get chantingPlaylistBadgeNext;
 }
 
 class _AppLocalizationsDelegate
