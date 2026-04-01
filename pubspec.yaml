@@ -45,6 +45,8 @@ dependencies:
 
   # Additional functionalities
   audioplayers: ^6.0.0
+  audio_service: ^0.18.18
+  audio_session: ^0.2.3
   wakelock_plus: ^1.1.1
   url_launcher: ^6.1.5
   shared_preferences: ^2.0.5

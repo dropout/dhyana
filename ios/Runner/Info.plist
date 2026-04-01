@@ -50,6 +50,10 @@
 	<string>The application will sync your data with the Apple Health app to give you better insights.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Access to the photo library is used for selecting a profile picture.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
