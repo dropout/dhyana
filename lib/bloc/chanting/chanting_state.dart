@@ -13,6 +13,7 @@ sealed class ChantingState with _$ChantingState {
     // playback
     @Default(Duration.zero) Duration elapsedTime,
     @Default(0) int currentIndex,
+    @Default(false) bool isLoading,
     @Default(PlaybackState.stopped) PlaybackState playbackState,
     @Default(Duration.zero) Duration duration,
     @Default(Duration.zero) Duration position,
@@ -32,6 +33,5 @@ sealed class ChantingState with _$ChantingState {
 
   bool get isGapActive => gapRemaining != Duration.zero;
   int get remainingSeconds => isGapActive ? min(gapRemaining.inSeconds + 1, chantingSettings.gapLength.inSeconds) : 0;
-
 
 }

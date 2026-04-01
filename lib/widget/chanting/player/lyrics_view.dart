@@ -148,8 +148,7 @@ class _LyricsViewState extends State<LyricsView> {
       debugPrint(
         'Current offset: ${_scrollController.offset}, Target offset: $targetOffset',
       );
-
-
+      
       setState(() {
         isAnimating = true;
       });
@@ -167,7 +166,6 @@ class _LyricsViewState extends State<LyricsView> {
       });
     }
   }
-
 
   /// Calculates the target scroll position to keep the active line centered.
   /// If the closest line is the same as the current active line, 

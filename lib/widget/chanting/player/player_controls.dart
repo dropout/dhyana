@@ -130,6 +130,7 @@ class PlayerControls extends StatelessWidget {
             ),
             Gap.small(),
             PlayPauseButton(
+              isLoading: chantingState.isLoading,
               playbackState: chantingState.playbackState,
               onPressed: onPlayPausePressed
             ),
@@ -167,6 +168,7 @@ class PlayPauseButton extends StatelessWidget {
   const PlayPauseButton({
     required this.playbackState,
     required this.onPressed,
+    required this.isLoading,
     super.key,
     this.backgroundColor = AppColors.red,
     this.iconColor = Colors.white,
@@ -180,10 +182,11 @@ class PlayPauseButton extends StatelessWidget {
   final Color iconColor;
   final double size;
   final bool disableWhileLoading;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
-    final VoidCallback? resolvedOnPressed = disableWhileLoading && playbackState == .loading
+    final VoidCallback? resolvedOnPressed = disableWhileLoading && isLoading
         ? null
         : onPressed;
 
@@ -195,7 +198,7 @@ class PlayPauseButton extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
-        child: playbackState == .loading
+        child: isLoading
             ? SizedBox(
                 key: const ValueKey<String>('loading'),
                 width: size,
@@ -215,13 +218,4 @@ class PlayPauseButton extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Optional helper for mapping state to loading UI.
-/// Adjust enum values to your [playbackState] model.
-extension ChantingStateLoadingX on ChantingState {
-  bool get isPlaybackLoading => switch (playbackState) {
-        .loading => true,
-        _ => false,
-      };
 }

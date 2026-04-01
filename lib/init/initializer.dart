@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:audio_service/audio_service.dart' as audio_service;
+import 'package:audio_session/audio_session.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
@@ -7,6 +9,7 @@ import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dar
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/stub/stubbed_presence_repository.dart';
 import 'package:dhyana/repository/stub/stubbed_statistics_repository.dart';
+import 'package:dhyana/service/default/dhyana_audio_handler.dart';
 import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
@@ -22,16 +25,15 @@ import 'init_result.dart';
 /// services and all the necessary objects required
 /// at the start of the application.
 class Initializer with LoggerMixin {
-
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization process');
 
     // Create data providers shared between builders
     logger.t('Create data providers');
     FirebaseProfileDataProvider profileDataProvider =
-      FirebaseProfileDataProvider(firebaseProvider.firestore);
+        FirebaseProfileDataProvider(firebaseProvider.firestore);
     FirebaseStorageDataProvider storageDataProvider =
-      FirebaseStorageDataProvider(firebaseProvider.storage);
+        FirebaseStorageDataProvider(firebaseProvider.storage);
 
     // Build repositories
     logger.t('Create repositories');
@@ -49,17 +51,34 @@ class Initializer with LoggerMixin {
     // Build services
     logger.t('Create services');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await FirebaseRemoteSettingsService.configureDefaults(firebaseProvider.remoteConfig);
+    await FirebaseRemoteSettingsService.configureDefaults(
+      firebaseProvider.remoteConfig,
+    );
+
+    logger.t('Initialize audio handler');
+    final audioHandler = await audio_service.AudioService.init(
+      builder: () => DhyanaAudioHandler(),
+      config: const audio_service.AudioServiceConfig(
+        androidNotificationChannelId: 'com.dhyana.audio',
+        androidNotificationChannelName: 'Dhyana',
+        androidNotificationOngoing: true,
+      ),
+    );
+    
+    logger.t('Initialize audio session');
+    final audioSession = await AudioSession.instance;
+    await audioSession.configure(const AudioSessionConfiguration.music());
+    await audioSession.setActive(true);
 
     final services = ServicesBuilder(
       firebaseProvider: firebaseProvider,
       storageDataProvider: storageDataProvider,
       sharedPreferences: sharedPreferences,
+      audioHandler: audioHandler,
     ).build();
 
     logger.t('Fetch remote settings');
-    final remoteSettings = await services
-      .remoteSettingsService
+    final remoteSettings = await services.remoteSettingsService
       .fetchRemoteSettings();
 
     logger.t('Preload shaders');
@@ -77,7 +96,9 @@ class Initializer with LoggerMixin {
     );
 
     if (user != null) {
-      logger.t('User is already signed in, initiate profile loading for user: ${user.uid}');
+      logger.t(
+        'User is already signed in, initiate profile loading for user: ${user.uid}',
+      );
       profileCubit.loadProfile(user.uid);
     } else {
       logger.t('User not signed in');
@@ -91,68 +112,5 @@ class Initializer with LoggerMixin {
       remoteSettings: remoteSettings,
     );
   }
-
-  // Future<InitResult> testInit() async {
-  //   logger.t('Starting test initialization process');
-  //
-  //   // Create data providers shared between builders
-  //   logger.t('Create data providers');
-  //   FirebaseProfileDataProvider profileDataProvider =
-  //     FirebaseProfileDataProvider(FirebaseProvider.test().firestore);
-  //   FirebaseStorageDataProvider storageDataProvider =
-  //     FirebaseStorageDataProvider(FirebaseProvider.test().storage);
-  //
-  //   // Build repositories
-  //   logger.t('Create repositories');
-  //   final repoBuilder = RepositoriesBuilder(
-  //     firebaseProvider: FirebaseProvider.test(),
-  //     profileDataProvider: profileDataProvider,
-  //     storageDataProvider: storageDataProvider,
-  //   );
-  //
-  //
-  //
-  //   final repos = repoBuilder
-  //     .presenceRepository(StubbedPresenceRepository())
-  //     .statisticsRepository(StubbedStatisticsRepository())
-  //     .build();
-  //
-  //   // Build services
-  //   logger.t('Create services');
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   await FirebaseRemoteSettingsService.configureDefaults(FirebaseProvider.test().remoteConfig);
-  //
-  //   final services = ServicesBuilder(
-  //     firebaseProvider: FirebaseProvider.test(),
-  //     storageDataProvider: storageDataProvider,
-  //     sharedPreferences: sharedPreferences,
-  //   ).build();
-  //
-  //   logger.t('Fetch remote settings');
-  //   final remoteSettings = await services
-  //     .remoteSettingsService
-  //     .fetchRemoteSettings();
-  //
-  //   logger.t('Parsing timer settings from shared prefs');
-  //   TimerSettings timerSettings = services
-  //     .timerSettingsSharedPrefsService
-  //     .getTimerSettings();
-  //
-  //   return InitResult(
-  //     user: null,
-  //     timerSettings: timerSettings,
-  //     services: services,
-  //     repositories: repos,
-  //     profileCubit: ProfileCubit(
-  //       profileRepository: repos.profileRepository,
-  //       settingsRepository: repos.settingsRepository,
-  //       statisticsRepository: repos.statisticsRepository,
-  //       idGeneratorService: services.idGeneratorService,
-  //       crashlyticsService: services.crashlyticsService,
-  //       profileStatsUpdater: ProfileStatsReportUpdater(),
-  //     ),
-  //     remoteSettings: remoteSettings,
-  //   );
-  // }
-
+  
 }

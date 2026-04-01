@@ -6,7 +6,7 @@ import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/lyrics_document.dart';
 import 'package:dhyana/service/audio_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/default/all.dart';
+import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
 import 'package:dhyana/service/resource_resolver.dart';
 import 'package:dhyana/service/timer_service.dart';
@@ -45,15 +45,17 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   Stream<Duration> get positionStream => audioService.positionStream.distinct();
 
-  /// Initializes the cubit by setting up stream subscriptions 
+  /// Initializes the cubit by setting up stream subscriptions
   /// and loading/playing the first chant.
   Future<void> _init() async {
     try {
-      _positionSubscription = audioService.positionStream.distinct().listen(
-        _onPositionChanged,
-      );
+      _positionSubscription = audioService.positionStream
+        .listen(_onPositionChanged);
+      
+      // The same state might be emitted multiple times (for ex.: .playing)
       _playbackStateSubscription = audioService.playbackStateStream
-        .listen(_onPlaybackStateChanged);
+        .distinct().listen(_onPlaybackStateChanged);
+
       if (state.chantingSettings.selectedChants.isNotEmpty) {
         final firstChant = state.chantingSettings.selectedChants.first;
         await _loadChant(firstChant);
@@ -69,30 +71,41 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  /// Responsible for loading a chant's audio and lyrics, 
+  /// Responsible for loading a chant's audio and lyrics,
   /// and updating the state accordingly.
   Future<void> _loadChant(Chant chant) async {
     try {
-      emit(state.copyWith(playbackState: PlaybackState.loading));
-      
+      logger.t('Loading chant: ${chant.name}');
+      emit(state.copyWith(isLoading: true));
+
+      await audioService.release();
+
       // load lyrics
       final lyricsUrl = await resourceResolver.getChantLyricsUrl(chant.id);
       final lyricsDocument = await lyricsService.loadLyrics(lyricsUrl);
 
       // load audio
-      final url = await resourceResolver.getChantAudioUrl(chant.id);
-      final duration = await audioService.loadFromUrl(url);
+      final duration = await audioService.loadFromUrl(
+        await resourceResolver.getChantAudioUrl(chant.id),
+        title: chant.name,
+      );;
 
       emit(
         state.copyWith(
+          isLoading: false,
           duration: duration ?? Duration.zero,
           position: Duration.zero,
           lyricsDocument: lyricsDocument,
         ),
       );
-      logger.t('Chant loaded: ${chant.name}, duration: ${duration?.inSeconds ?? 'unknown'} seconds');
+      logger.t(
+        'Chant loaded: ${chant.name}, duration: ${duration?.inSeconds ?? 'unknown'} seconds',
+      );
     } catch (e, st) {
-      emit(state.copyWith(playbackState: PlaybackState.error));
+      emit(state.copyWith(
+        isLoading: false,
+        playbackState: PlaybackState.error,
+      ));
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -104,30 +117,27 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   /// Handles position updates from the audio service, updating the current position
   /// and active lyrics line index in the state.
   void _onPositionChanged(Duration position) {
-
     final activeLineIndex =
-      state.lyricsDocument?.activeLineIndex(position) ?? 0;
+        state.lyricsDocument?.activeLineIndex(position) ?? 0;
 
     // If position falls between two lines,
     // keep the line index unchanged until the next line is active
     if (activeLineIndex == -1) {
       emit(state.copyWith(position: position));
     } else {
-      emit(state.copyWith(
-        position: position, 
-        activeLineIndex: activeLineIndex
-      ));
+      emit(
+        state.copyWith(position: position, activeLineIndex: activeLineIndex),
+      );
     }
-
   }
 
-  /// Handles starting a gap after a chant finishes.  
+  /// Handles starting a gap after a chant finishes.
   void _onPlaybackStateChanged(PlaybackState playbackState) {
-    emit(state.copyWith(playbackState: playbackState));    
+    emit(state.copyWith(playbackState: playbackState));
     if (playbackState == PlaybackState.completed) {
       final isLastChant =
-        state.currentIndex ==
-        state.chantingSettings.selectedChants.length - 1;
+          state.currentIndex ==
+          state.chantingSettings.selectedChants.length - 1;
       if (!isLastChant) {
         _startGap();
       }
@@ -141,12 +151,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
     // Initialize gaptimer
     _gapTimerService =
-      DefaultTimerService(
-          duration: chantingSettings.gapLength,
-          tickIntervalInMilliSeconds: 250,
-        )
-        ..onTick(_onGapTick)
-        ..onFinished(_onGapFinished);
+        DefaultTimerService(
+            duration: chantingSettings.gapLength,
+            tickIntervalInMilliSeconds: 250,
+          )
+          ..onTick(_onGapTick)
+          ..onFinished(_onGapFinished);
 
     emit(
       state.copyWith(
@@ -158,7 +168,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     logger.t('Gap started: ${chantingSettings.gapLength.inSeconds} seconds');
   }
 
-  /// Cancels the gap timer and updates the state to indicate 
+  /// Cancels the gap timer and updates the state to indicate
   /// that the gap is no longer active.
   void _cancelGap() {
     _gapTimerService?.close();
@@ -177,7 +187,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   void _onGapFinished() {
     _gapTimerService?.close();
     _gapTimerService = null;
-    
+
     _advanceToNextTrack();
     logger.t('Gap finished, advancing to next track');
   }
@@ -186,16 +196,13 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   Future<void> _advanceToNextTrack() async {
     final newIndex = state.currentIndex + 1;
     final chant = state.chantingSettings.selectedChants[newIndex];
-    await _loadChant(chant);    
-    emit(state.copyWith(
-      currentIndex: newIndex,
-      gapRemaining: Duration.zero,
-    ));
+    await _loadChant(chant);
+    emit(state.copyWith(currentIndex: newIndex, gapRemaining: Duration.zero));
     play();
     logger.t('Auto-advanced to chant index $newIndex');
   }
 
-  /// Starts playback. If a gap is active, starts the gap timer; 
+  /// Starts playback. If a gap is active, starts the gap timer;
   ///otherwise, starts audio playback.
   Future<void> play() async {
     if (state.isGapActive) {
@@ -225,19 +232,27 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     logger.t('Seek to position: ${position.inSeconds} seconds');
   }
 
-  /// Moves to the previous track in the playlist, 
-  /// or restarts the current track if already at the first track.
+  /// Moves to the previous track in the playlist,
+  /// or restarts the current track if gap is active.
   Future<void> prev() async {
+    
+    // Record if the gap was active before cancelling
+    final isGapActive = state.isGapActive;
+
+    // Cancel any active gap when user manually goes to previous track
     _cancelGap();
 
-    if (state.currentIndex == 0) {
-      // If user tries to go to previous track when the first track is active, restart the current track
+    // If user tries to go to previous track when the gap is active,
+    // restart the current track instead of going to 
+    // the previous track in the playlist
+    if (isGapActive) {
       await audioService.seek(Duration.zero);
       play();
-      logger.t('Restarted current chant since it is the first chant in the playlist');
+      logger.t('Restarted current chant since the gap was active');
       return;
     }
 
+    // If gap was not active, proceed with going to previous track as normal
     if (state.currentIndex > 0) {
       final newIndex = state.currentIndex - 1;
       final chant = state.chantingSettings.selectedChants[newIndex];
@@ -248,6 +263,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       play();
       logger.t('Moved to previous chant index $newIndex');
     }
+
   }
 
   /// Moves to the next track in the playlist, if not already at the last track.

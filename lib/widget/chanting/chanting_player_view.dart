@@ -101,7 +101,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             ),
             crossFadeState:
                 widget.chantingState.isGapActive &&
-                    widget.chantingState.playbackState != .loading
+                  !widget.chantingState.isLoading
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
             duration: Durations.medium1,
@@ -127,7 +127,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   }
 
   Widget buildLyricsView(BuildContext context) {
-    if (widget.chantingState.playbackState == .loading) {
+    if (widget.chantingState.isLoading) {
       return SizedBox.shrink();
     } else {
       return LyricsView(

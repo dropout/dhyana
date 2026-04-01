@@ -6,7 +6,7 @@ import 'package:dhyana/enum/sound.dart';
 abstract interface class AudioService {
 
   Future<void> playSound(Sound sound);
-  Future<Duration?> loadFromUrl(String url);
+  Future<Duration?> loadFromUrl(String url, {String? title});
   Future<void> play();
   Future<void> pause();
   Future<void> seek(Duration position);

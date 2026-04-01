@@ -4,8 +4,9 @@ import 'package:dhyana/service/analytics_service.dart';
 import 'package:dhyana/service/audio_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/default/default_audio_service.dart';
+import 'package:dhyana/service/default/audio_handler_audio_service.dart';
 import 'package:dhyana/service/default/default_cache_manager_service.dart';
+import 'package:dhyana/service/default/dhyana_audio_handler.dart';
 import 'package:dhyana/service/default/default_haptics_service.dart';
 import 'package:dhyana/service/default/default_lyrics_service.dart';
 import 'package:dhyana/service/default/default_overlay_service.dart';
@@ -98,8 +99,9 @@ class ServicesBuilder {
     required FirebaseProvider firebaseProvider,
     required StorageDataProvider storageDataProvider,
     required SharedPreferences sharedPreferences,
+    required DhyanaAudioHandler audioHandler,
   }) {
-    _audioService = DefaultAudioService();
+    _audioService = AudioHandlerAudioService(audioHandler);
     _overlayService = DefaultOverlayService();
     _hapticsService = DefaultHapticsService();
     _analyticsService = FirebaseAnalyticsService(
