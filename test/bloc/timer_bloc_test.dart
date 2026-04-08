@@ -26,7 +26,7 @@ void main() async {
     late MockTimerServiceFactory mockTimerServiceFactory;
     late MockTimerService mockWarmupTimerService;
     late MockTimerService mockTimerService;
-    late MockAudioService mockAudioService;
+    late MockTimerAudioService mockAudioService;
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUpAll(() {
@@ -47,7 +47,7 @@ void main() async {
       mockTimerServiceFactory = MockTimerServiceFactory();
       mockWarmupTimerService = MockTimerService();
       mockTimerService = MockTimerService();
-      mockAudioService = MockAudioService();
+      mockAudioService = MockTimerAudioService();
       mockCrashlyticsService = MockCrashlyticsService();
 
       when(() => mockAudioService.playSound(any()))

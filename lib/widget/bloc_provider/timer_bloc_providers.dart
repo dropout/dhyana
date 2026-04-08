@@ -4,6 +4,7 @@ import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_timer_service.dart';
+import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -36,15 +37,16 @@ class TimerBlocProviders extends StatelessWidget {
               create: (BuildContext context) {
 
                 // Create the timer bloc with the provided timer settings
+                // TODO: Use the timer settings instead of hardcoding a short duration for testing
                 final TimerBloc timerBloc = TimerBloc(
-                  // timerSettings: timerSettings,
-                  timerSettings: timerSettings.copyWith(
-                    duration: Duration(seconds: 3),
-                  ),
+                  timerSettings: timerSettings,
+                  // timerSettings: timerSettings.copyWith(
+                  //   duration: Duration(seconds: 3),
+                  // ),
                   timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
                     DefaultTimerService.new
                   ),
-                  audioService: services.audioService,
+                  audioService: TimerAudioService(services.audioHandler),
                   crashlyticsService: services.crashlyticsService,
                 );
 

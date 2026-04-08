@@ -1,3 +1,4 @@
+import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/util/enum_helper.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_page.dart';
@@ -9,7 +10,6 @@ import 'input_view.dart';
 import 'sound_input_page_view_scroll_physics.dart';
 
 class SoundInputView extends StatefulWidget {
-
   final String title;
   final void Function(Sound sound)? onSelect;
   final Sound? initialValue;
@@ -18,7 +18,7 @@ class SoundInputView extends StatefulWidget {
     this.title = '',
     this.initialValue,
     this.onSelect,
-    super.key
+    super.key,
   });
 
   @override
@@ -26,7 +26,9 @@ class SoundInputView extends StatefulWidget {
 }
 
 class SoundInputViewState extends State<SoundInputView>
-  with TickerProviderStateMixin {
+    with TickerProviderStateMixin {
+  
+  late final TimerAudioService audioService;
 
   late PageController pageController;
   late TabController tabController;
@@ -34,10 +36,8 @@ class SoundInputViewState extends State<SoundInputView>
 
   @override
   void initState() {
-    tabController = TabController(
-      length: Sound.values.length,
-      vsync: this
-    );
+    audioService = TimerAudioService(context.services.audioHandler);
+    tabController = TabController(length: Sound.values.length, vsync: this);
 
     if (widget.initialValue != null) {
       final int initialIndex = getEnumIndex(widget.initialValue, Sound.values);
@@ -80,10 +80,9 @@ class SoundInputViewState extends State<SoundInputView>
             onPageChanged: (int index) => _onPageChanged(context, index),
             controller: pageController,
             physics: const SoundInputPageViewScrollPhysics(),
-            children: Sound.values.map((Sound s) => SoundInputPage(
-              audioService: context.services.audioService,
-              sound: s,
-            )).toList(),
+            children: Sound.values.map(
+              (Sound s) => SoundInputPage(audioService: audioService, sound: s),
+            ).toList(),
           ),
         ),
         buildPlayButton(context),
@@ -97,16 +96,23 @@ class SoundInputViewState extends State<SoundInputView>
               borderStyle: BorderStyle.none,
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
   Widget buildPlayButton(BuildContext context) {
     return SoundInputPlayButton(
-      audioService: context.services.audioService,
+      audioService: audioService,
       sound: getEnumByIndex(selectedIndex, Sound.values),
     );
   }
 
+  @override
+  void dispose() {
+    pageController.dispose();
+    tabController.dispose();
+    audioService.release();
+    super.dispose();
+  }
 }

@@ -43,8 +43,8 @@ class ChantingScreen extends StatelessWidget {
         );
       },
       listenWhen: (prevState, currentState) {
-        final isCompleted = prevState.playbackState != PlaybackState.completed
-          && currentState.playbackState == PlaybackState.completed;
+        final isCompleted = prevState.playbackState != AudioPlaybackState.completed
+          && currentState.playbackState == AudioPlaybackState.completed;
         final isLastChant = currentState.currentIndex == 
           currentState.chantingSettings.selectedChants.length - 1;
         return isCompleted && isLastChant;

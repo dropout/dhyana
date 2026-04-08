@@ -2,40 +2,31 @@ import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/init/services.dart';
-import 'package:dhyana/service/audio_service.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
+import '../../../mock_definitions.dart';
 import '../../../test_context_providers.dart';
-
-class MockServices
-    extends Mock
-    implements Services {}
-
-class MockAudioService
-    extends Mock
-    implements AudioService {}
 
 void main() {
 
   late MockServices mockServices;
-  late MockAudioService mockAudioService;
+  late MockTimerAudioService mockAudioService;
   late StreamController<bool> isPlayingStreamController;
 
   group('SoundInputPlayButton', () {
 
     setUp(() {
-      mockAudioService = MockAudioService();
+      mockAudioService = MockTimerAudioService();
       isPlayingStreamController = StreamController();
       when(() => mockAudioService.isPlayingStream)
           .thenAnswer((_) => isPlayingStreamController.stream);
 
       mockServices = MockServices();
-      when(() => mockServices.audioService)
-          .thenReturn(mockAudioService);
+
     });
 
     tearDown(() {

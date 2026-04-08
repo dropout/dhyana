@@ -8,7 +8,7 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/service/timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
-import 'package:dhyana/service/audio_service.dart';
+import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 
 part 'timer_event.dart';
@@ -23,10 +23,10 @@ part 'timer_bloc.freezed.dart';
 /// 1. Warmup phase (optional): A timer that runs before the main session.
 /// 2. Main session phase: The actual timer for the session duration.
 class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
-
+    
   final TimerSettings timerSettings;
   final TimerServiceFactory timerServiceFactory;
-  final AudioService audioService;
+  final TimerAudioService audioService;
   final CrashlyticsService crashlyticsService;
 
   TimerService? warmupTimer;
@@ -43,27 +43,24 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
     required this.audioService,
     required this.crashlyticsService,
   }) : super(TimerState.initial(timerSettings: timerSettings)) {
-
     // Prepare warmup timer
     if (hasWarmupTime) {
-      warmupTimer = timerServiceFactory
-        .getTimerService(timerSettings.warmup);
+      warmupTimer = timerServiceFactory.getTimerService(timerSettings.warmup);
       _warmupTickerSub = warmupTimer!.tickStream.listen(
-        (t) => add(WarmupTicked(ticks: t))
+        (t) => add(WarmupTicked(ticks: t)),
       );
       _warmupFinishedSub = warmupTimer!.finishedStream.listen(
-        (t) => add(WarmupCompleted())
+        (t) => add(WarmupCompleted()),
       );
     }
 
     // Prepare the timer for the session
-    durationTimer = timerServiceFactory
-      .getTimerService(timerSettings.duration);
+    durationTimer = timerServiceFactory.getTimerService(timerSettings.duration);
     _durationTickerSub = durationTimer.tickStream.listen(
-      (t) => add(TimerTicked(ticks: t))
+      (t) => add(TimerTicked(ticks: t)),
     );
     _durationFinishedSub = durationTimer.finishedStream.listen(
-      (t) => add(TimerCompleted())
+      (t) => add(TimerCompleted()),
     );
 
     on<TimerStarted>(_onTimerStarted);
@@ -101,6 +98,9 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
   void _onTimerStarted(TimerStarted event, emit) async {
     try {
       logger.t('Starting timer');
+
+      await audioService.setupSession(timerSettings);
+
       TimerStage stage;
       if (hasWarmupTime) {
         logger.t('Has warmup time');
@@ -109,37 +109,37 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
       } else {
         logger.t('No Warmup time');
         durationTimer.start();
-        if (timerSettings.startingSound != Sound.none) {
-          audioService.playSound(timerSettings.startingSound);
-        }
+        audioService.playSound(timerSettings.startingSound);
         stage = TimerStage.timer;
       }
-      emit(state.copyWith(
-        startTime: event.startTime,
-        timerStatus: TimerStatus.running,
-        timerStage: stage,
-      ));
+      audioService.start();
+      emit(
+        state.copyWith(
+          startTime: event.startTime,
+          timerStatus: TimerStatus.running,
+          timerStage: stage,
+        ),
+      );
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to setup sounds for timer session'
+        reason: 'Unable to setup sounds for timer session',
       );
-      emit(state.copyWith(
-        timerStatus: TimerStatus.error,
-      ));
+      emit(state.copyWith(timerStatus: TimerStatus.error));
     }
   }
 
   void _onTimerPaused(TimerPaused pause, emit) {
     if (state.timerStatus == TimerStatus.running) {
-      logger.t('Pause timer');
       activeTimer.stop();
-      emit(state.copyWith(
-        timerStatus: TimerStatus.paused,
-        elapsedWarmupTime: elapsedWarmupTime,
-        elapsedTime: durationTimer.elapsedTime
-      ));
+      emit(
+        state.copyWith(
+          timerStatus: TimerStatus.paused,
+          elapsedWarmupTime: elapsedWarmupTime,
+          elapsedTime: durationTimer.elapsedTime,
+        ),
+      );
     } else {
       logger.t('Timer is not running, nothing to pause');
     }
@@ -147,11 +147,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
 
   void _onTimerResumed(TimerResumed resume, emit) {
     if (state.timerStatus == TimerStatus.paused) {
-      logger.t('Resume timer');
       activeTimer.start();
-      emit(state.copyWith(
-        timerStatus: TimerStatus.running
-      ));
+      emit(state.copyWith(timerStatus: TimerStatus.running));
     } else {
       logger.t('Timer is running, nothing to resume');
     }
@@ -167,10 +164,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
   }
 
   void _onWarmupTicked(WarmupTicked event, emit) {
-    final Duration elapsedWarmupTime = warmupTimer!.elapsedTime;
-    emit(state.copyWith(
-      elapsedWarmupTime: elapsedWarmupTime,
-    ));
+    audioService.updatePosition(state.elapsedTime + elapsedWarmupTime);
+    emit(state.copyWith(elapsedWarmupTime: elapsedWarmupTime));
   }
 
   void _onWarmupCompleted(WarmupCompleted event, emit) {
@@ -183,27 +178,27 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
 
     durationTimer.start();
 
-    emit(state.copyWith(
-      timerStatus: TimerStatus.running,
-      timerStage: TimerStage.timer,
-      elapsedWarmupTime: elapsedWarmupTime,
-      elapsedTime: durationTimer.elapsedTime,
-    ));
+    emit(
+      state.copyWith(
+        timerStatus: TimerStatus.running,
+        timerStage: TimerStage.timer,
+        elapsedWarmupTime: elapsedWarmupTime,
+        elapsedTime: durationTimer.elapsedTime,
+      ),
+    );
   }
 
   // Tick every 500ms as a default setting in timer service
   void _onTimerTicked(TimerTicked event, emit) {
-    emit(state.copyWith(
-      elapsedTime: durationTimer.elapsedTime,
-    ));
+    audioService.updatePosition(state.elapsedTime + elapsedWarmupTime);
+    emit(state.copyWith(elapsedTime: durationTimer.elapsedTime));
   }
 
   // The timer has reached it's end
   void _onTimerCompleted(TimerCompleted completed, emit) async {
-
-    if (timerSettings.endingSound != Sound.none) {
-      audioService.playSound(timerSettings.endingSound);
-    }
+    
+    // TODO: Make sure that the background sound is stopped
+    audioService.playSound(timerSettings.endingSound);
 
     TimerState timerState = TimerState.completed(
       timerSettings: timerSettings,
@@ -222,23 +217,23 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
     logger.t('Timer finished');
     warmupTimer?.stop();
     durationTimer.stop();
-    emit(state.copyWith(
-      timerStatus: TimerStatus.completed,
-      elapsedWarmupTime: elapsedWarmupTime,
-      elapsedTime: durationTimer.elapsedTime,
-      endTime: activeTimer.endTime,
-    ));
+    emit(
+      state.copyWith(
+        timerStatus: TimerStatus.completed,
+        elapsedWarmupTime: elapsedWarmupTime,
+        elapsedTime: durationTimer.elapsedTime,
+        endTime: activeTimer.endTime,
+      ),
+    );
   }
 
   void _onTimerErrorOccurred(TimerErrorOccurred event, emit) {
     activeTimer.stop();
-    emit(state.copyWith(
-      timerStatus: TimerStatus.error,
-    ));
+    emit(state.copyWith(timerStatus: TimerStatus.error));
     crashlyticsService.recordError(
       exception: event.error,
       stackTrace: event.stackTrace,
-      reason: 'An error occurred while the timer was running'
+      reason: 'An error occurred while the timer was running',
     );
   }
 
@@ -253,6 +248,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> with LoggerMixin {
     _durationTickerSub.cancel();
     _durationFinishedSub.cancel();
     durationTimer.close();
+
+    audioService.release();
 
     return super.close();
   }

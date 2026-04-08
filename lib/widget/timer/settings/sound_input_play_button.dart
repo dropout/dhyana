@@ -1,13 +1,18 @@
 import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
-import 'package:dhyana/service/audio_service.dart';
+import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:flutter/material.dart';
 
+/// A button that plays the given sound when pressed, 
+/// and shows a stop button while the sound is playing.
 class SoundInputPlayButton extends StatefulWidget {
 
+  /// The sound to play when the button is pressed.
   final Sound sound;
-  final AudioService audioService;
+
+  /// The audio service to use for playing the sound.
+  final TimerAudioService audioService;
 
   const SoundInputPlayButton({
     required this.sound,

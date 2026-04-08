@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/init/services.dart';
-import 'package:dhyana/service/audio_service.dart';
-import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_page.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,19 +10,8 @@ import 'package:dhyana/widget/timer/settings/sound_input_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
+import '../../../mock_definitions.dart';
 import '../../../test_context_providers.dart';
-
-class MockHapticsService
-  extends Mock
-  implements HapticsService {}
-
-class MockServices
-  extends Mock
-  implements Services {}
-
-class MockAudioService
-  extends Mock
-  implements AudioService {}
 
 class FakeBuildContext
   extends Fake
@@ -33,16 +20,16 @@ class FakeBuildContext
 void main() {
 
   late MockHapticsService mockHapticsService;
-  late MockAudioService mockAudioService;
+  late MockTimerAudioService mockAudioService;
   late MockServices mockServices;
 
   setUpAll(() {
     mockServices = MockServices();
     mockHapticsService = MockHapticsService();
-    mockAudioService = MockAudioService();
+    mockAudioService = MockTimerAudioService();
 
     when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
-    when(() => mockServices.audioService).thenReturn(mockAudioService);
+    // when(() => mockServices.audioService).thenReturn(mockAudioService);
 
     registerFallbackValue(FakeBuildContext());
   });

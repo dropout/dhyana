@@ -176,7 +176,7 @@ class PlayPauseButton extends StatelessWidget {
     this.disableWhileLoading = true,
   });
 
-  final PlaybackState playbackState;
+  final AudioPlaybackState playbackState;
   final VoidCallback onPressed;
   final Color backgroundColor;
   final Color iconColor;
@@ -209,7 +209,7 @@ class PlayPauseButton extends StatelessWidget {
                 ),
               )
             : Icon(
-                key: ValueKey<PlaybackState>(playbackState),
+                key: ValueKey<AudioPlaybackState>(playbackState),
                 playbackState == .playing
                     ? Icons.pause_rounded
                     : Icons.play_arrow_rounded,

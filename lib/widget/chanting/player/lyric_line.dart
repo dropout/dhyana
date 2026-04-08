@@ -77,14 +77,6 @@ class LyricLine extends StatelessWidget {
             color: Colors.grey.shade600,
           ),
         );
-      case .loading:
-        return Text(
-          word.text,
-          style: context.theme.textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.w700,
-            color: Colors.white54,
-          ),
-        );
       default:
         return LyricWordWidget(word: word, position: position);
     }

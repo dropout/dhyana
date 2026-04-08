@@ -50,7 +50,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
 
   /// Handles play/pause button press by toggling playback state
   void _onPlayPausePressed(BuildContext context) {
-    if (widget.chantingState.playbackState == PlaybackState.playing) {
+    if (widget.chantingState.playbackState == AudioPlaybackState.playing) {
       context.read<ChantingCubit>().pause();
     } else {
       context.read<ChantingCubit>().play();

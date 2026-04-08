@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart' as audio_service;
 import 'package:audio_session/audio_session.dart';
+import 'package:dhyana/audio/app_audio_handler.dart';
+import 'package:dhyana/audio/audio_session_configuration.dart';
+import 'package:dhyana/audio/timer_audio_handler.dart';
+import 'package:dhyana/audio/chanting_audio_handler.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
@@ -9,7 +13,6 @@ import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dar
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/repository/stub/stubbed_presence_repository.dart';
 import 'package:dhyana/repository/stub/stubbed_statistics_repository.dart';
-import 'package:dhyana/service/default/dhyana_audio_handler.dart';
 import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
@@ -26,6 +29,7 @@ import 'init_result.dart';
 /// at the start of the application.
 class Initializer with LoggerMixin {
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
+    
     logger.t('Starting initialization process');
 
     // Create data providers shared between builders
@@ -43,6 +47,7 @@ class Initializer with LoggerMixin {
       storageDataProvider: storageDataProvider,
     );
 
+    // TODO: Remove stubbed repositories and replace with real implementations
     final repos = repoBuilder
       .presenceRepository(StubbedPresenceRepository())
       .statisticsRepository(StubbedStatisticsRepository())
@@ -57,7 +62,10 @@ class Initializer with LoggerMixin {
 
     logger.t('Initialize audio handler');
     final audioHandler = await audio_service.AudioService.init(
-      builder: () => DhyanaAudioHandler(),
+      builder: () => AppAudioHandler(
+        TimerAudioHandler(),
+        ChantingAudioHandler(),
+      ),
       config: const audio_service.AudioServiceConfig(
         androidNotificationChannelId: 'com.dhyana.audio',
         androidNotificationChannelName: 'Dhyana',
@@ -67,7 +75,7 @@ class Initializer with LoggerMixin {
     
     logger.t('Initialize audio session');
     final audioSession = await AudioSession.instance;
-    await audioSession.configure(const AudioSessionConfiguration.music());
+    await audioSession.configure(getAudioSessionConfiguration());
     await audioSession.setActive(true);
 
     final services = ServicesBuilder(

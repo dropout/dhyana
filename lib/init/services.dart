@@ -1,12 +1,10 @@
+import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/service/analytics_service.dart';
-import 'package:dhyana/service/audio_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/default/audio_handler_audio_service.dart';
 import 'package:dhyana/service/default/default_cache_manager_service.dart';
-import 'package:dhyana/service/default/dhyana_audio_handler.dart';
 import 'package:dhyana/service/default/default_haptics_service.dart';
 import 'package:dhyana/service/default/default_lyrics_service.dart';
 import 'package:dhyana/service/default/default_overlay_service.dart';
@@ -43,7 +41,7 @@ class Services {
   final HapticsService hapticsService;
   final RemoteSettingsService remoteSettingsService;
   final ResourceResolver resourceResolver;
-  final AudioService audioService;
+  final AppAudioHandler audioHandler;
   final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
   final SharedPreferencesService sharedPreferencesService;
   final ShaderService shaderService;
@@ -62,7 +60,7 @@ class Services {
     required this.remoteSettingsService,
     required this.resourceResolver,
     required this.shaderService,
-    required this.audioService,
+    required this.audioHandler,
     required this.overlayService,
     required this.cacheManagerService,
     required this.timerSettingsSharedPrefsService,
@@ -78,7 +76,6 @@ class Services {
 
 class ServicesBuilder {
 
-  late AudioService _audioService;
   late OverlayService _overlayService;
   late HapticsService _hapticsService;
   late AnalyticsService _analyticsService;
@@ -94,14 +91,15 @@ class ServicesBuilder {
   late FunctionsService _functionsService;
   late UrlLauncher _urlLauncher;
   late LyricsService _lyricsService;
+  late AppAudioHandler _audioHandler;
 
   ServicesBuilder({
     required FirebaseProvider firebaseProvider,
     required StorageDataProvider storageDataProvider,
     required SharedPreferences sharedPreferences,
-    required DhyanaAudioHandler audioHandler,
+    required AppAudioHandler audioHandler,
   }) {
-    _audioService = AudioHandlerAudioService(audioHandler);
+    _audioHandler = audioHandler;
     _overlayService = DefaultOverlayService();
     _hapticsService = DefaultHapticsService();
     _analyticsService = FirebaseAnalyticsService(
@@ -143,7 +141,6 @@ class ServicesBuilder {
 
   Services build() {
     return Services(
-      audioService: _audioService,
       overlayService: _overlayService,
       hapticsService: _hapticsService,
       analyticsService: _analyticsService,
@@ -159,6 +156,7 @@ class ServicesBuilder {
       functionsService: _functionsService,
       urlLauncher: _urlLauncher,
       lyricsService: _lyricsService,
+      audioHandler: _audioHandler,
     );
   }
 

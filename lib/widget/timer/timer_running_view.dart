@@ -1,6 +1,5 @@
 import 'package:dhyana/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
@@ -35,7 +34,7 @@ class _TimerRunningViewState extends State<TimerRunningView>
   }
 
   void _onBackground(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
+    // BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
   }
 
   @override

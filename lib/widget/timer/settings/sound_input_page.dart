@@ -1,19 +1,23 @@
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/service/audio_service.dart';
+import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
-
-/// No state management, because the playback state is
-/// not displayed in this widget.
+/// A page in the [SoundInputView] page view, displaying a single sound option.
 class SoundInputPage extends StatelessWidget {
 
-  final double size;
+  /// The sound to display and play on tap.
   final Sound sound;
-  final AudioService audioService;
 
+  /// The audio service used to play the sound on tap.
+  final TimerAudioService audioService;
+
+  /// The size of the sound image.
+  final double size;
+  
+  /// Creates a [SoundInputPage] with the given [sound] and [audioService].
   const SoundInputPage({
     required this.sound,
     required this.audioService,
@@ -22,8 +26,6 @@ class SoundInputPage extends StatelessWidget {
   });
 
   void _onImageTap(BuildContext context) {
-    if (sound == Sound.none) return;
-
     if (audioService.isPlaying) {
       audioService.stop();
     } else {

@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/lyrics_document.dart';
-import 'package:dhyana/service/audio_service.dart';
+import 'package:dhyana/service/chanting_audio_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
@@ -21,8 +21,9 @@ part 'chanting_cubit.freezed.dart';
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
+  
   final ChantingSettings chantingSettings;
-  final AudioService audioService;
+  final ChantingAudioService audioService;
   final LyricsService lyricsService;
   final ResourceResolver resourceResolver;
   final CrashlyticsService crashlyticsService;
@@ -34,11 +35,11 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   /// Creates a new instance of [ChantingCubit] with the provided services and settings.
   ChantingCubit({
-    required this.chantingSettings,
+    required this.chantingSettings,    
     required this.audioService,
     required this.lyricsService,
     required this.resourceResolver,
-    required this.crashlyticsService,
+    required this.crashlyticsService,    
   }) : super(ChantingState(chantingSettings: chantingSettings)) {
     _init();
   }
@@ -62,7 +63,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
         play();
       }
     } catch (e, st) {
-      emit(state.copyWith(playbackState: PlaybackState.error));
+      emit(state.copyWith(playbackState: AudioPlaybackState.error));
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -85,26 +86,26 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       final lyricsDocument = await lyricsService.loadLyrics(lyricsUrl);
 
       // load audio
-      final duration = await audioService.loadFromUrl(
+      final duration = await audioService.loadChant(
         await resourceResolver.getChantAudioUrl(chant.id),
         title: chant.name,
-      );;
+      );
 
       emit(
         state.copyWith(
           isLoading: false,
-          duration: duration ?? Duration.zero,
+          duration: duration,
           position: Duration.zero,
           lyricsDocument: lyricsDocument,
         ),
       );
       logger.t(
-        'Chant loaded: ${chant.name}, duration: ${duration?.inSeconds ?? 'unknown'} seconds',
+        'Chant loaded: ${chant.name}, duration: ${audioService.duration}',
       );
     } catch (e, st) {
       emit(state.copyWith(
         isLoading: false,
-        playbackState: PlaybackState.error,
+        playbackState: AudioPlaybackState.error,
       ));
       crashlyticsService.recordError(
         exception: e,
@@ -132,12 +133,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   }
 
   /// Handles starting a gap after a chant finishes.
-  void _onPlaybackStateChanged(PlaybackState playbackState) {
+  void _onPlaybackStateChanged(AudioPlaybackState playbackState) {
     emit(state.copyWith(playbackState: playbackState));
-    if (playbackState == PlaybackState.completed) {
+    if (playbackState == AudioPlaybackState.completed) {
       final isLastChant =
-          state.currentIndex ==
-          state.chantingSettings.selectedChants.length - 1;
+        (state.currentIndex ==
+        state.chantingSettings.selectedChants.length - 1);
       if (!isLastChant) {
         _startGap();
       }
@@ -161,7 +162,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     emit(
       state.copyWith(
         gapRemaining: chantingSettings.gapLength,
-        playbackState: PlaybackState.playing,
+        playbackState: AudioPlaybackState.playing,
       ),
     );
     _gapTimerService!.start();
@@ -207,7 +208,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   Future<void> play() async {
     if (state.isGapActive) {
       _gapTimerService?.start();
-      emit(state.copyWith(playbackState: PlaybackState.playing));
+      emit(state.copyWith(playbackState: AudioPlaybackState.playing));
     } else {
       audioService.play();
       logger.t('Playback started');
@@ -219,7 +220,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   Future<void> pause() async {
     if (state.isGapActive) {
       _gapTimerService?.stop();
-      emit(state.copyWith(playbackState: PlaybackState.paused));
+      emit(state.copyWith(playbackState: AudioPlaybackState.paused));
     } else {
       audioService.pause();
       logger.t('Playback paused');

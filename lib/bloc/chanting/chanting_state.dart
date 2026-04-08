@@ -14,7 +14,7 @@ sealed class ChantingState with _$ChantingState {
     @Default(Duration.zero) Duration elapsedTime,
     @Default(0) int currentIndex,
     @Default(false) bool isLoading,
-    @Default(PlaybackState.stopped) PlaybackState playbackState,
+    @Default(AudioPlaybackState.stopped) AudioPlaybackState playbackState,
     @Default(Duration.zero) Duration duration,
     @Default(Duration.zero) Duration position,
     

@@ -95,7 +95,6 @@ class PlaylistSheet extends StatelessWidget {
       return PlaylistItemBadge(text: switch (chantingState.playbackState) {
         .playing => context.l10n.chantingPlaylistBadgePlaying,
         .paused => context.l10n.chantingPlaylistBadgePaused,
-        .loading => context.l10n.chantingPlaylistBadgeLoading,
         .completed => context.l10n.chantingPlaylistBadgeCompleted,
         _ => context.l10n.chantingPlaylistBadgePlaying,
       });

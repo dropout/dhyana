@@ -2,6 +2,7 @@ import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/model/chanting_settings.dart';
+import 'package:dhyana/service/chanting_audio_service.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,7 @@ class ChantingBlocProviders extends StatelessWidget {
             BlocProvider<ChantingCubit>(
               create: (context) => ChantingCubit(
                 chantingSettings: chantingSettings,
-                audioService: services.audioService,
+                audioService: ChantingAudioService(services.audioHandler),
                 lyricsService: services.lyricsService,
                 resourceResolver: services.resourceResolver,
                 crashlyticsService: services.crashlyticsService,
