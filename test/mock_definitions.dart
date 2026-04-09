@@ -4,7 +4,7 @@ import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
-import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
+import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/init/repositories.dart';

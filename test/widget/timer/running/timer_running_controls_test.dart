@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
+import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/running/timer_running_controls.dart';

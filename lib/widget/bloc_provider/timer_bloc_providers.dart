@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
-import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
+import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/timer_audio_service.dart';

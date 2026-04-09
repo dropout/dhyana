@@ -1,4 +1,4 @@
-part of 'timer_bloc.dart';
+part of 'timer_cubit.dart';
 
 enum TimerStatus {
   idle,
@@ -14,11 +14,11 @@ enum TimerStage {
 }
 
 @freezed
-sealed class TimerState with _$TimerState {
+sealed class TimerCubitState with _$TimerCubitState {
 
-  const TimerState._();
+  const TimerCubitState._();
 
-  const factory TimerState({
+  const factory TimerCubitState({
     required TimerSettings timerSettings,
     required TimerStatus timerStatus,
     required TimerStage timerStage,
@@ -26,26 +26,28 @@ sealed class TimerState with _$TimerState {
     required Duration elapsedTime,
     DateTime? startTime,
     DateTime? endTime,
-  }) = _TimerState;
+  }) = _TimerCubitState;
 
-  factory TimerState.initial({required TimerSettings timerSettings}) {
-    return TimerState(
+  factory TimerCubitState.initial({required TimerSettings timerSettings}) {
+    return TimerCubitState(
       timerSettings: timerSettings,
       timerStatus: TimerStatus.idle,
-      timerStage: (timerSettings.warmup != Duration.zero) ? TimerStage.warmup : TimerStage.timer,
+      timerStage: (timerSettings.warmup != Duration.zero) 
+        ? TimerStage.warmup 
+        : TimerStage.timer,
       elapsedWarmupTime: Duration.zero,
       elapsedTime: Duration.zero,
     );
   }
 
-  factory TimerState.completed({
+  factory TimerCubitState.completed({
     required TimerSettings timerSettings,
     required DateTime startTime,
     required DateTime endTime,
     required Duration elapsedTime,
     required Duration elapsedWarmupTime,
   }) {
-    return TimerState(
+    return TimerCubitState(
       timerSettings: timerSettings,
       timerStatus: TimerStatus.completed,
       timerStage: TimerStage.timer,
@@ -55,5 +57,5 @@ sealed class TimerState with _$TimerState {
       endTime: endTime,
     );
   }
-
+  
 }

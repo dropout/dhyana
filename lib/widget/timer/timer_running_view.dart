@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
+import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
