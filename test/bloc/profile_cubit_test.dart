@@ -13,6 +13,7 @@ void main() {
   final FakeModelFactory fakeFactory = FakeModelFactory();
 
   late Profile profile;
+  late ProfileSettings profileSettings;
 
   late ProfileCubit profileCubit;
   late MockProfileRepository mockProfileRepository;
@@ -24,6 +25,7 @@ void main() {
 
   setUp(() {
     profile = fakeFactory.createProfile();
+    profileSettings = ProfileSettings(id: profile.id); // default values
 
     mockProfileRepository = MockProfileRepository();
     mockStatisticsRepository = MockStatisticsRepository();
@@ -50,49 +52,66 @@ void main() {
   });
 
   group('ProfileBloc', () {
-
     blocTest<ProfileCubit, ProfileState>(
-      'emits [ProfileState.loading(), ProfileState.loaded()] when LoadProfile is added',
+      'emits [ProfileState.loading(), ProfileState.loaded()] when .loadProfile() is successful',
       build: () {
-        when(() => mockProfileRepository.read(any())).thenAnswer((_) async => profile);
-        when(() => mockProfileStatsUpdater.validateStatsReport(any())).thenReturn(profile.statsReport);
+        when(
+          () => mockProfileRepository.read(any()),
+        ).thenAnswer((_) async => profile);
+        when(
+          () => mockSettingsRepository.read(any()),
+        ).thenAnswer((_) async => profileSettings);
+        when(
+          () => mockProfileStatsUpdater.validateStatsReport(any()),
+        ).thenReturn(profile.statsReport);
         return profileCubit;
       },
-      act: (cubit) => cubit.loadProfile("1"),
+      act: (cubit) => cubit.loadProfile(profile.id),
       expect: () => [
         const ProfileState.loading(),
-        ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id)),
+        ProfileState.loaded(
+          profile: profile,
+          settings: profileSettings,
+        ),
       ],
       verify: (_) {
-        verify(() => mockProfileRepository.read('1')).called(1);
+        verify(() => mockProfileRepository.read(profile.id)).called(1);
+        verify(() => mockSettingsRepository.read(profile.id)).called(1);
+        verify(() => mockProfileStatsUpdater.validateStatsReport(profile.statsReport)).called(1);
       },
     );
 
     blocTest<ProfileCubit, ProfileState>(
       'emits [ProfileState.loading(), ProfileErrorState()] when LoadProfile fails',
       build: () {
-        when(() => mockProfileRepository.read(any())).thenThrow(Exception('Failed to load profile'));
+        when(
+          () => mockProfileRepository.read(any()),
+        ).thenThrow(Exception('Failed to load profile'));
         return profileCubit;
       },
       act: (cubit) => cubit.loadProfile('1'),
-      expect: () => [
-        const ProfileState.loading(),
-        const ProfileState.error(),
-      ],
+      expect: () => [const ProfileState.loading(), const ProfileState.error()],
       verify: (_) {
         verify(() => mockProfileRepository.read('1')).called(1);
-        verify(() => mockCrashlyticsService.recordError(
-          exception: any(named: 'exception'),
-          stackTrace: any(named: 'stackTrace'),
-          reason: any(named: 'reason'),
-        )).called(1);
+        verify(
+          () => mockCrashlyticsService.recordError(
+            exception: any(named: 'exception'),
+            stackTrace: any(named: 'stackTrace'),
+            reason: any(named: 'reason'),
+          ),
+        ).called(1);
       },
     );
 
     blocTest<ProfileCubit, ProfileState>(
-      'emits [ProfileState.loaded()] when UpdateProfile is added',
+      'emits [ProfileState.loaded()] when .updateProfile() is successful',
       build: () {
-        when(() => mockProfileRepository.update(any())).thenAnswer((_) async => profile);
+        when(
+          () => mockProfileRepository.update(any()),
+        ).thenAnswer((_) async => profile);
+        when(
+          () => mockSettingsRepository.read(any()),
+        ).thenAnswer((_) async => profileSettings);
         return profileCubit;
       },
       act: (cubit) => cubit.updateProfile(
@@ -101,7 +120,10 @@ void main() {
         completeProfile: false,
       ),
       expect: () => [
-        ProfileState.loaded(profile: profile, settings: ProfileSettings(id: profile.id)),
+        ProfileState.loaded(
+          profile: profile,
+          settings: profileSettings,
+        ),
       ],
       verify: (_) {
         verify(() => mockProfileRepository.update(profile)).called(1);
@@ -112,10 +134,7 @@ void main() {
       'emits [ProfileState.initial()] when ResetProfileContent is added',
       build: () => profileCubit,
       act: (cubit) => cubit.clearData(),
-      expect: () => [
-        const ProfileState.initial(),
-      ],
+      expect: () => [const ProfileState.initial()],
     );
-
   });
 }
