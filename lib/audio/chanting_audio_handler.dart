@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:dhyana/util/throttle_stream_transformer.dart';
 
 enum ChantingHandlerCustomAction { loadChant, release }
 
@@ -21,13 +20,16 @@ class ChantingAudioHandler extends BaseAudioHandler {
 
   ChantingAudioHandler() {
     _chantPlayer.setReleaseMode(ReleaseMode.stop);
+    _chantPlayer.positionUpdater = TimerPositionUpdater(
+      interval: const Duration(milliseconds: 250),
+      getPosition: _chantPlayer.getCurrentPosition,
+    );
 
     _chantStateSubscription = _chantPlayer.onPlayerStateChanged
       .distinct()
       .listen(_onChantPlayerStateChanged);
 
     _chantPositionSubscription = _chantPlayer.onPositionChanged
-      .transform(ThrottleStreamTransformer(Duration(milliseconds: 100)))
       .listen((p) {
         playbackState.add(playbackState.value.copyWith(updatePosition: p));
       });

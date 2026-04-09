@@ -7,7 +7,7 @@ class ChantingAudioService {
   final AppAudioHandler _audioHandler;
 
   ChantingAudioService(this._audioHandler) {
-    _switchToHandler();
+    _switchToChantingAudioHandler();
   }
 
   Future<Duration> loadChant(String url, {String? title}) async {
@@ -77,7 +77,7 @@ class ChantingAudioService {
     }
   }
 
-  void _switchToHandler() {
+  void _switchToChantingAudioHandler() {
     _audioHandler.customAction(AppAudioHandler.switchAction, {
       'handlerId': ChantingAudioHandler.handlerId,
     });

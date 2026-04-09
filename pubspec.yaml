@@ -1,7 +1,7 @@
 name: dhyana
 description: A meditation timer application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.7.0+2
+version: 0.8.0+3
 
 environment:
   sdk: '>=3.10.0 <4.0.0'

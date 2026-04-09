@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/running/timer_running_controls.dart';
@@ -16,13 +16,13 @@ void main() {
 
   group('TimerRunningControls', () {
 
-    late MockTimerBloc mockTimerBloc;
+    late MockTimerCubit mockTimerCubit;
     late MockServices mockServices;
     late MockHapticsService mockHapticsService;
     late MockAnalyticsService mockAnalyticsService;
 
     setUp(() async {
-      mockTimerBloc = MockTimerBloc();
+      mockTimerCubit = MockTimerCubit();
       mockServices = MockServices();
       mockHapticsService = MockHapticsService();
       mockAnalyticsService = MockAnalyticsService();
@@ -37,15 +37,15 @@ void main() {
 
     testWidgets('main button shows play icon when TimerStatus.idle', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
         )
       );
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<TimerBloc>.value(
-            value: mockTimerBloc,
+          BlocProvider<TimerCubit>.value(
+            value: mockTimerCubit,
             child: TimerRunningControls(
               timerState: timerState,
             ),
@@ -63,7 +63,7 @@ void main() {
 
     testWidgets('main button shows pause icon when TimerStatus.running', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings()
       ).copyWith(
         timerStatus: TimerStatus.running,
@@ -71,8 +71,8 @@ void main() {
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<TimerBloc>.value(
-            value: mockTimerBloc,
+          BlocProvider<TimerCubit>.value(
+            value: mockTimerCubit,
             child: TimerRunningControls(
               timerState: timerState,
             ),
@@ -90,7 +90,7 @@ void main() {
 
     testWidgets('main button shows play icon when TimerStatus.paused', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings()
       ).copyWith(
         timerStatus: TimerStatus.paused,
@@ -98,8 +98,8 @@ void main() {
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<TimerBloc>.value(
-            value: mockTimerBloc,
+          BlocProvider<TimerCubit>.value(
+            value: mockTimerCubit,
             child: TimerRunningControls(
               timerState: timerState,
             ),
@@ -117,7 +117,7 @@ void main() {
 
     testWidgets('shows pause menu when TimerStatus.paused and has warmup time', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings()
       ).copyWith(
         timerStatus: TimerStatus.paused,
@@ -125,8 +125,8 @@ void main() {
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<TimerBloc>.value(
-            value: mockTimerBloc,
+          BlocProvider<TimerCubit>.value(
+            value: mockTimerCubit,
             child: TimerRunningControls(
               timerState: timerState,
             ),
@@ -150,7 +150,7 @@ void main() {
 
     testWidgets('shows pause menu when TimerStatus.paused and has no warmup time', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
           warmup: Duration.zero,
         )
@@ -161,8 +161,8 @@ void main() {
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<TimerBloc>.value(
-            value: mockTimerBloc,
+          BlocProvider<TimerCubit>.value(
+            value: mockTimerCubit,
             child: TimerRunningControls(
               timerState: timerState,
             ),
@@ -186,7 +186,7 @@ void main() {
 
     testWidgets('can pause the timer', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
         )
       ).copyWith(
@@ -197,8 +197,8 @@ void main() {
         withAllContextProviders(
           Provider<Services>.value(
             value: mockServices,
-            child: BlocProvider<TimerBloc>.value(
-              value: mockTimerBloc,
+            child: BlocProvider<TimerCubit>.value(
+              value: mockTimerCubit,
               child: TimerRunningControls(
                 timerState: timerState,
               ),
@@ -210,16 +210,14 @@ void main() {
 
       await tester.tap(find.byKey(const Key('timer_running_controls_main_button')));
 
-      verify(() => mockTimerBloc.add(
-        TimerEvent.paused()
-      )).called(1);
+      verify(() => mockTimerCubit.pause()).called(1);
 
     });
 
 
     testWidgets('can resume the timer', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
         )
       ).copyWith(
@@ -230,8 +228,8 @@ void main() {
         withAllContextProviders(
           Provider<Services>.value(
             value: mockServices,
-            child: BlocProvider<TimerBloc>.value(
-              value: mockTimerBloc,
+            child: BlocProvider<TimerCubit>.value(
+              value: mockTimerCubit,
               child: TimerRunningControls(
                 timerState: timerState,
               ),
@@ -243,16 +241,14 @@ void main() {
 
       await tester.tap(find.byKey(const Key('timer_running_controls_main_button')));
 
-      verify(() => mockTimerBloc.add(
-        TimerEvent.resumed()
-      )).called(1);
+      verify(() => mockTimerCubit.resume()).called(1);
 
     });
 
     // Testing against popping routes is a bit tricky
     testWidgets('can discard the session', (WidgetTester tester) async {
 
-      TimerState timerState = TimerState.initial(
+      TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
           warmup: Duration.zero,
         ),
@@ -279,8 +275,8 @@ void main() {
               return withAllContextProviders(
                 Provider<Services>.value(
                   value: mockServices,
-                  child: BlocProvider<TimerBloc>.value(
-                    value: mockTimerBloc,
+                  child: BlocProvider<TimerCubit>.value(
+                    value: mockTimerCubit,
                     child: TimerRunningControls(
                       timerState: timerState,
                     ),
@@ -325,7 +321,7 @@ void main() {
 
     testWidgets('can finish the timer', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
         )
       ).copyWith(
@@ -338,8 +334,8 @@ void main() {
         withAllContextProviders(
           Provider<Services>.value(
             value: mockServices,
-            child: BlocProvider<TimerBloc>.value(
-              value: mockTimerBloc,
+            child: BlocProvider<TimerCubit>.value(
+              value: mockTimerCubit,
               child: TimerRunningControls(
                 timerState: timerState,
               ),
@@ -358,9 +354,7 @@ void main() {
         find.byKey(const Key('timer_running_controls_finish_button'))
       );
 
-      verify(() => mockTimerBloc.add(
-        TimerEvent.finished()
-      )).called(1);
+      verify(() => mockTimerCubit.finish()).called(1);
 
     });
 

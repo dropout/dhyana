@@ -1,3 +1,4 @@
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
@@ -7,7 +8,6 @@ import 'package:dhyana/widget/util/app_context.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/timer_running_view.dart';
 
@@ -29,8 +29,8 @@ class TimerScreen extends StatelessWidget {
   }
 
   Widget buildScaffolding(BuildContext context) {
-    return BlocConsumer<TimerBloc, TimerState>(
-      builder: (BuildContext context, TimerState timerState) {
+    return BlocConsumer<TimerCubit, TimerCubitState>(
+      builder: (BuildContext context, TimerCubitState timerState) {
         return Scaffold(
           backgroundColor: Colors.black,
           extendBodyBehindAppBar: true,
@@ -42,11 +42,11 @@ class TimerScreen extends StatelessWidget {
           ),
         );
       },
-      listenWhen: (TimerState prevState, TimerState currentState) {
+      listenWhen: (TimerCubitState prevState, TimerCubitState currentState) {
         return prevState.timerStatus != TimerStatus.completed
           && currentState.timerStatus == TimerStatus.completed;
       },
-      listener: (BuildContext context, TimerState timerState) {
+      listener: (BuildContext context, TimerCubitState timerState) {
         Session session = Session(          
           id: context.services.idGeneratorService.sessionId(),
           type: SessionType.timer,

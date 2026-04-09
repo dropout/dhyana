@@ -1,9 +1,9 @@
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/design_spec.dart';
 
@@ -14,7 +14,7 @@ import 'package:dhyana/widget/design_spec.dart';
 class TimerRunningControls extends StatefulWidget {
 
   final double iconSize = 64;
-  final TimerState timerState;
+  final TimerCubitState timerState;
 
   const TimerRunningControls({
     required this.timerState,
@@ -80,13 +80,13 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
   }
 
   void _onPause(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(TimerEvent.paused());
+    context.read<TimerCubit>().pause();
     context.logEvent(name: 'timer_pause');
     context.hapticsTap();
   }
 
   void _onResume(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(TimerEvent.resumed());
+    context.read<TimerCubit>().resume();
     context.logEvent(name: 'timer_resume');
     context.hapticsTap();
   }
@@ -98,7 +98,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
   }
 
   void _onFinish(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(TimerEvent.finished());
+    context.read<TimerCubit>().finish();
     context.logEvent(name: 'timer_finish');
     context.hapticsTap();
   }
@@ -201,7 +201,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     );
   }
 
-  Widget _buildPauseMenu(BuildContext context, TimerState timerState) {
+  Widget _buildPauseMenu(BuildContext context, TimerCubitState timerState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -210,7 +210,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     );
   }
 
-  Widget _buildMainButton(BuildContext context, TimerState timerState) {
+  Widget _buildMainButton(BuildContext context, TimerCubitState timerState) {
     final EdgeInsets padding = const EdgeInsets.all(
       DesignSpec.paddingLg,
     );

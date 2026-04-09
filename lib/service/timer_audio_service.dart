@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/timer_audio_handler.dart';
 import 'package:dhyana/enum/sound.dart';
@@ -14,7 +15,7 @@ class TimerAudioService {
   /// Upon initialization, it sends a custom action to the [AppAudioHandler] to
   /// switch to the [TimerAudioHandler] for handling timer-related audio actions.
   TimerAudioService(this._audioHandler) {
-    _switchToHandler();
+    _switchToTimerAudioHandler();
   }
 
   /// Plays the specified [sound] by sending a custom action to the [AppAudioHandler].
@@ -23,14 +24,27 @@ class TimerAudioService {
       'sound': sound.name,
     });
 
+  /// Sets up the audio session for the timer with the given [timerSettings].
+  /// This should be called before starting the timer to ensure that the audio
+  /// session is properly configured for background execution and 
+  /// lock screen data display (e.g., total length of the session).
   Future<void> setupSession(TimerSettings timerSettings) =>
-    _audioHandler.customAction(TimerHandlerCustomAction.setup.name, timerSettings.toJson());
+    _audioHandler.customAction(
+      TimerHandlerCustomAction.setup.name, 
+      timerSettings.toJson()
+    );
   
   /// Does not play sound, just instructs the handler to initiate an
   /// OS-level media session, which is necessary for background execution and
   /// lock screen controls to work properly.
   Future<void> start() =>
     _audioHandler.play();
+
+  Future<void> resume() =>
+    _audioHandler.play();
+
+  Future<void> pause() =>
+    _audioHandler.pause();
   
   Future<void> stop() =>
     _audioHandler.stop();
@@ -48,9 +62,11 @@ class TimerAudioService {
   Stream<bool> get isPlayingStream =>
     _audioHandler.playbackState.map((state) => state.playing);
 
-  void _switchToHandler() => 
+  Stream<PlaybackState> get playbackStateStream => _audioHandler.playbackState;
+
+  void _switchToTimerAudioHandler() => 
     _audioHandler.customAction(AppAudioHandler.switchAction, {
       'handlerId': TimerAudioHandler.handlerId,
     });
-  
+    
 }

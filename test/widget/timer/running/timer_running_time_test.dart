@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/timer/running/timer_running_time.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +15,7 @@ void main() {
 
     testWidgets('can show warmup remaining time', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
         )
       );
@@ -34,7 +34,7 @@ void main() {
 
     testWidgets('can show timer remaining time', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings(
           warmup: Duration.zero,
         )

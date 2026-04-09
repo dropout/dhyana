@@ -1,10 +1,10 @@
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
 
 class TimerRunningTitle extends StatefulWidget {
 
-  final TimerState timerState;
+  final TimerCubitState timerState;
   final Offset positionOffset;
 
   const TimerRunningTitle({
@@ -43,7 +43,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
     );
   }
 
-  Widget? buildText(BuildContext context, TimerState timerState) {
+  Widget? buildText(BuildContext context, TimerCubitState timerState) {
     TextStyle style = Theme.of(context).textTheme.titleLarge!.copyWith(
       fontFamily: 'RobotoCondensed',
       fontWeight: FontWeight.bold,

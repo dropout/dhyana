@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/wakelock_service.dart';
 import 'package:dhyana/widget/timer/running/timer_running_controls.dart';
@@ -36,7 +36,7 @@ void main() {
 
     testWidgets('can display all necessary widgets', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings()
       );
 
@@ -57,7 +57,7 @@ void main() {
 
     testWidgets('can enable wakelock service when initialized', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings()
       );
 
@@ -83,7 +83,7 @@ void main() {
 
     testWidgets('can disable wakelock service disposed', (WidgetTester tester) async {
 
-      final TimerState timerState = TimerState.initial(
+      final TimerCubitState timerState = TimerCubitState.initial(
         timerSettings: TimerSettings()
       );
 

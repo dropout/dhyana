@@ -1,14 +1,13 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
-import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class TimerBlocProviders extends StatelessWidget {
 
@@ -33,31 +32,19 @@ class TimerBlocProviders extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
 
-            BlocProvider<TimerBloc>(
-              create: (BuildContext context) {
-
-                // Create the timer bloc with the provided timer settings
-                // TODO: Use the timer settings instead of hardcoding a short duration for testing
-                final TimerBloc timerBloc = TimerBloc(
+            BlocProvider<TimerCubit>(
+              create: (context) {
+                final timerCubit = TimerCubit(
                   timerSettings: timerSettings,
-                  // timerSettings: timerSettings.copyWith(
-                  //   duration: Duration(seconds: 3),
-                  // ),
-                  timerServiceFactory: TimerServiceFactory<DefaultTimerService>(
-                    DefaultTimerService.new
-                  ),
                   audioService: TimerAudioService(services.audioHandler),
                   crashlyticsService: services.crashlyticsService,
                 );
 
-                // Start the timer
-                timerBloc.add(TimerEvent.started(
-                  startTime: DateTime.now(),
-                ));
+                timerCubit.start();
 
-                return timerBloc;
+                return timerCubit;
               },
-              lazy: false,
+              lazy: false,                         
             ),
 
             BlocProvider<PresenceCubit>(
@@ -102,6 +89,7 @@ class TimerBlocProviders extends StatelessWidget {
               },
               lazy: false,
             ),
+
           ],
           child: child,
         );

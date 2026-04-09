@@ -1,9 +1,9 @@
+import 'package:dhyana/bloc/simple_timer/cubit/timer_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/bloc/timer/timer_bloc.dart';
 
 class TimerRunningTime extends StatelessWidget {
 
-  final TimerState timerState;
+  final TimerCubitState timerState;
 
   const TimerRunningTime({
     required this.timerState,

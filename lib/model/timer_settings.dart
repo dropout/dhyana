@@ -43,10 +43,19 @@ sealed class TimerSettings with _$TimerSettings implements Model {
     }
   }
   
-
   @override
   String get id {
     return '${warmup.inSeconds}-${startingSound.id}-${duration.inSeconds}-${endingSound.id}';
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  bool get hasWarmupTime {
+    return warmup != Duration.zero;
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Duration get totalTime {
+    return warmup + duration;
   }
 
 }
