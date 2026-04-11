@@ -151,9 +151,9 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
     final r = audioService.playSound(state.timerSettings.endingSound);
 
     // TODO: Try to stop the audio service when ending sound finishes
-    r.then((_) {
-      print('Sound finished playing, stopping audio service');
-    });
+    // r.then((_) {
+    //   print('Sound finished playing, stopping audio service');
+    // });
 
     emit(
       state.copyWith(

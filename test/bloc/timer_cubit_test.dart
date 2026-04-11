@@ -594,5 +594,84 @@ void main() async {
         ).called(1);
       },
     );
+
+    blocTest<TimerCubit, TimerCubitState>(
+      'can handle timer completed',
+      build: () {
+        when(
+          () => mockAudioService.setupSession(defaultTimerSettings),
+        ).thenAnswer((_) => Future.value(null));
+        when(
+          () => mockAudioService.start(),
+        ).thenAnswer((_) => Future.value(null));
+        when(
+          () => mockAudioService.playSound(defaultTimerSettings.endingSound),
+        ).thenAnswer((_) => Future.value(null));
+
+        final timerCubit = TimerCubit(
+          timerSettings: defaultTimerSettings,
+          eventScheduler: eventScheduler,
+          audioService: mockAudioService,
+          crashlyticsService: loggingCrashlyticsService,
+        );
+        return timerCubit;
+      },
+      act: (cubit) => withClock(Clock(() => fixedTime), () async {
+        // Fire the timer completed listener
+        await cubit.start();
+
+        playbackStateStreamController.add(
+          PlaybackState(
+            processingState: AudioProcessingState.ready,
+            playing: true,
+            updatePosition: defaultTimerSettings.totalTime,
+          ),
+        );
+      }),
+      expect: () => [
+        TimerCubitState(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.running,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: Duration.zero,
+          elapsedTime: Duration.zero,
+          startTime: fixedTime,
+        ),
+        TimerCubitState(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.running,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: defaultTimerSettings.warmup,
+          elapsedTime: Duration.zero,
+          startTime: fixedTime,
+        ),
+        TimerCubitState(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.completed,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: defaultTimerSettings.warmup,
+          elapsedTime: defaultTimerSettings.duration,
+          startTime: fixedTime,
+          endTime: fixedTime,
+        ),
+        TimerCubitState(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.completed,
+          timerStage: TimerStage.timer,
+          elapsedWarmupTime: defaultTimerSettings.warmup,
+          elapsedTime: defaultTimerSettings.duration,
+          startTime: fixedTime,
+          endTime: fixedTime,
+        ),
+      ],
+      verify: (timerCubit) {
+        verifyInOrder([
+          () => mockAudioService.playSound(defaultTimerSettings.startingSound),
+          () => mockAudioService.playSound(defaultTimerSettings.endingSound),          
+        ]);
+      },
+    );
+
+
   }); // eof group
 } // eof main
