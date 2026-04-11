@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:clock/clock.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
@@ -25,24 +26,20 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 }
 
 class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
-  final TimerSettings timerSettings;
+
   final TimerAudioService audioService;
+  final TimerEventScheduler eventScheduler;
   final CrashlyticsService crashlyticsService;
 
   StreamSubscription? _playbackStateSub;
-  late final TimerEventScheduler _eventScheduler;
 
   TimerCubit({
-    required this.timerSettings,
+    required TimerSettings timerSettings,
     required this.audioService,
+    required this.eventScheduler,
     required this.crashlyticsService,
   }) : super(TimerCubitState.initial(timerSettings: timerSettings)) {
-    _eventScheduler = TimerEventScheduler(
-      source: TimerAudioServiceElapsedTimeSource(audioService),
-    );
-    
-    _eventScheduler.addListener(timerSettings.totalTime, _onTimerCompleted);
-
+    eventScheduler.addListener(timerSettings.totalTime, _onTimerCompleted);
     _playbackStateSub = audioService.playbackStateStream.listen(
       _onPlaybackStateChanged,
     );
@@ -50,110 +47,118 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
 
   Future<void> start() async {
     try {
-      await audioService.setupSession(timerSettings);
-      audioService.start();
-      _eventScheduler.reset();      
+      await audioService.setupSession(state.timerSettings);
+      final startFuture = audioService.start();
+      eventScheduler.reset();
 
-      TimerStage initialStage = timerSettings.hasWarmupTime
-        ? TimerStage.warmup
-        : TimerStage.timer;
+      TimerStage initialStage = state.timerSettings.hasWarmupTime
+          ? TimerStage.warmup
+          : TimerStage.timer;
 
-      if (timerSettings.hasWarmupTime) {
-        _eventScheduler.addListener(timerSettings.warmup, _warmupCompleted);
+      Future playSoundFuture = Future.value(null);
+      if (state.timerSettings.hasWarmupTime) {
+        eventScheduler.addListener(state.timerSettings.warmup, _warmupCompleted);
       } else {
-        audioService.playSound(timerSettings.startingSound);
+        playSoundFuture = audioService.playSound(state.timerSettings.startingSound);
       }
-      _eventScheduler.start();
+      eventScheduler.start();
 
       emit(
         state.copyWith(
-          startTime: DateTime.now(),
+          startTime: clock.now(),
           timerStatus: TimerStatus.running,
           timerStage: initialStage,
         ),
       );
-      logger.t('Timer started - ${DateTime.now()}');
+      logger.t('Timer started - ${clock.now()}');
+
+      // Wait for both the audio service to start and the starting sound to play
+      await Future.wait([startFuture, playSoundFuture]);
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to setup sounds for timer session',
+        reason: 'Unable to setup timer session',
       );
       emit(state.copyWith(timerStatus: TimerStatus.error));
     }
   }
 
   void pause() {
-    logger.t('Pausing timer - ${DateTime.now()}');
+    logger.t('Pausing timer - ${clock.now()}');
     audioService.pause();
   }
 
   void resume() {
-    logger.t('Resuming timer - ${DateTime.now()}');
+    logger.t('Resuming timer - ${clock.now()}');
     audioService.resume();
   }
 
   void finish() {
-    final n = DateTime.now();
+    final n = clock.now();
     logger.t('Finishing timer - $n');
     audioService.stop();
-    emit(
-      state.copyWith(
-        timerStatus: TimerStatus.completed,
-        endTime: n,
-      ),
-    );
+    eventScheduler.stop();
+    emit(state.copyWith(timerStatus: TimerStatus.completed, endTime: n));
   }
 
+  /// Updates time values, and playing/paused status based on [playbackState] 
+  /// changes from the audio service.
   void _onPlaybackStateChanged(PlaybackState playbackState) {
     final position = playbackState.position;
 
+    // This is important so that on starting, there won't be a
+    // brief flash of the paused state before the timer starts running
     late final TimerStatus timerStatus;
     if (playbackState.processingState == AudioProcessingState.idle) {
       timerStatus = TimerStatus.idle;
-      return;
     } else {
       timerStatus = playbackState.playing
         ? TimerStatus.running
-        : TimerStatus.paused;      
-    }    
+        : TimerStatus.paused;
+    }
+
     emit(
       state.copyWith(
         timerStatus: timerStatus,
-        elapsedTime: position - timerSettings.warmup,
-        elapsedWarmupTime: position >= timerSettings.warmup
-          ? timerSettings.warmup
+        elapsedWarmupTime: position >= state.timerSettings.warmup
+          ? state.timerSettings.warmup
           : position,
+        elapsedTime: state.timerStage == TimerStage.warmup
+          ? Duration.zero 
+          : position - state.timerSettings.warmup,
       ),
     );
   }
 
+  /// Handles warmup completion by playing the starting sound and transitioning
+  /// to the timer stage. 
   void _warmupCompleted(Duration elapsedWarmupTime) {
-    logger.t('Warmup completed - ${DateTime.now()}');    
-    audioService.playSound(timerSettings.startingSound);
+    logger.t('Warmup completed - ${clock.now()}');
+    audioService.playSound(state.timerSettings.startingSound);
     emit(
       state.copyWith(
-        timerStatus: TimerStatus.running,
         timerStage: TimerStage.timer,
-        elapsedTime: Duration.zero,
       ),
     );
   }
 
+  /// Handles timer completion by playing the ending sound
+  /// and setting end time. 
   void _onTimerCompleted(Duration elapsedTime) {
-    final n = DateTime.now();
+    final n = clock.now();
     logger.t('Timer completed - $n');
-    final r = audioService.playSound(timerSettings.endingSound);
+    final r = audioService.playSound(state.timerSettings.endingSound);
 
+    // TODO: Try to stop the audio service when ending sound finishes
     r.then((_) {
       print('Sound finished playing, stopping audio service');
     });
 
-    
     emit(
       state.copyWith(
         timerStatus: TimerStatus.completed,
-        elapsedTime: elapsedTime - timerSettings.warmup,
+        elapsedTime: elapsedTime - state.timerSettings.warmup,
         endTime: n,
       ),
     );
@@ -163,9 +168,9 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
   Future<void> close() {
     _playbackStateSub?.cancel();
     _playbackStateSub = null;
-    _eventScheduler.dispose();
+    eventScheduler.dispose();
     audioService.release();
-    
+
     return super.close();
   }
 

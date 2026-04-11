@@ -102,4 +102,15 @@ class TimerEventScheduler {
       }
     }
   }
+
+  bool get isRunning => _subscription != null;
+  bool get hasListeners => _listeners.isNotEmpty;
+  int get listenerCount =>
+    _listeners.values.fold(0, (sum, list) => sum + list.length);
+
+  @override
+  String toString() {
+    return 'TimerEventScheduler(isRunning: $isRunning, listeners: $listenerCount, at: ${_listeners.keys.toList()} )';
+  }
+
 }

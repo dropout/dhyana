@@ -4,6 +4,7 @@ import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
+import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +38,11 @@ class TimerBlocProviders extends StatelessWidget {
                 final timerCubit = TimerCubit(
                   timerSettings: timerSettings,
                   audioService: TimerAudioService(services.audioHandler),
+                  eventScheduler: TimerEventScheduler(
+                    source: TimerAudioServiceElapsedTimeSource(
+                      TimerAudioService(services.audioHandler),
+                    ),
+                  ),
                   crashlyticsService: services.crashlyticsService,
                 );
 

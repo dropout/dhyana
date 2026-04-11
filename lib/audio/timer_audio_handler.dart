@@ -193,7 +193,6 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
     );
   }
 
-
   void _onPlayerStateChanged(PlayerState state) {
     final isNowPlaying = (state == PlayerState.playing);
     playbackState.add(

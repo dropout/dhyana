@@ -29,6 +29,7 @@ dependencies:
   faker: ^2.2.0
   rnd: 0.2.0
   flutter_cache_manager: ^3.4.1
+  clock: ^1.1.2 # For faking time in tests and better time handling in general
 
   # Ui
   flutter_animate: ^4.2.0

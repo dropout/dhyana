@@ -28,6 +28,7 @@ import 'package:dhyana/service/timer_service_factory.dart';
 import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 import 'package:dhyana/service/wakelock_service.dart';
 import 'package:dhyana/util/launch_url.dart';
+import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
@@ -59,6 +60,10 @@ class MockPresenceBloc
 class MockTimerCubit
   extends MockCubit<TimerCubitState> 
   implements TimerCubit {}
+
+class MockTimerEventScheduler 
+  extends Mock 
+  implements TimerEventScheduler {}
 
 class MockSessionCompletedCubit
   extends MockCubit<SessionCompletedState>
