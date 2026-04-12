@@ -49,7 +49,9 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
 
 
     // Configure audio player for discrete sounds.
-    _audioPlayer.setPlayerMode(.lowLatency);
+    // Keep .mediaPlayer mode so that on android we will also have an o
+    // oncomplete event
+    _audioPlayer.setPlayerMode(.mediaPlayer);
     _audioPlayer.setReleaseMode(.stop);
   }
 
@@ -183,7 +185,8 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
       await _audioPlayer.stop();
     }
 
-    return _audioPlayer.play(AssetSource(sound.audioResourcePath));
+    await _audioPlayer.play(AssetSource(sound.audioResourcePath));
+    await _audioPlayer.onPlayerComplete.first;
   }
 
   Future<void> _updateTimerPosition(Duration position) async {

@@ -20,13 +20,12 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 
   @override
   Stream<Duration> get elapsedTimeStream =>
-    timerAudioService.playbackStateStream.map((playbackState) {
-      return playbackState.position;
-    });
+      timerAudioService.playbackStateStream.map((playbackState) {
+        return playbackState.position;
+      });
 }
 
 class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
-
   final TimerAudioService audioService;
   final TimerEventScheduler eventScheduler;
   final CrashlyticsService crashlyticsService;
@@ -57,9 +56,14 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
 
       Future playSoundFuture = Future.value(null);
       if (state.timerSettings.hasWarmupTime) {
-        eventScheduler.addListener(state.timerSettings.warmup, _warmupCompleted);
+        eventScheduler.addListener(
+          state.timerSettings.warmup,
+          _warmupCompleted,
+        );
       } else {
-        playSoundFuture = audioService.playSound(state.timerSettings.startingSound);
+        playSoundFuture = audioService.playSound(
+          state.timerSettings.startingSound,
+        );
       }
       eventScheduler.start();
 
@@ -102,7 +106,7 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
     emit(state.copyWith(timerStatus: TimerStatus.completed, endTime: n));
   }
 
-  /// Updates time values, and playing/paused status based on [playbackState] 
+  /// Updates time values, and playing/paused status based on [playbackState]
   /// changes from the audio service.
   void _onPlaybackStateChanged(PlaybackState playbackState) {
     final position = playbackState.position;
@@ -114,46 +118,44 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
       timerStatus = TimerStatus.idle;
     } else {
       timerStatus = playbackState.playing
-        ? TimerStatus.running
-        : TimerStatus.paused;
+          ? TimerStatus.running
+          : TimerStatus.paused;
     }
 
     emit(
       state.copyWith(
         timerStatus: timerStatus,
         elapsedWarmupTime: position >= state.timerSettings.warmup
-          ? state.timerSettings.warmup
-          : position,
+            ? state.timerSettings.warmup
+            : position,
         elapsedTime: state.timerStage == TimerStage.warmup
-          ? Duration.zero 
-          : position - state.timerSettings.warmup,
+            ? Duration.zero
+            : position - state.timerSettings.warmup,
       ),
     );
   }
 
   /// Handles warmup completion by playing the starting sound and transitioning
-  /// to the timer stage. 
+  /// to the timer stage.
   void _warmupCompleted(Duration elapsedWarmupTime) {
     logger.t('Warmup completed - ${clock.now()}');
     audioService.playSound(state.timerSettings.startingSound);
-    emit(
-      state.copyWith(
-        timerStage: TimerStage.timer,
-      ),
-    );
+    emit(state.copyWith(timerStage: TimerStage.timer));
   }
 
   /// Handles timer completion by playing the ending sound
-  /// and setting end time. 
+  /// and setting end time.
   void _onTimerCompleted(Duration elapsedTime) {
     final n = clock.now();
     logger.t('Timer completed - $n');
-    final r = audioService.playSound(state.timerSettings.endingSound);
 
-    // TODO: Try to stop the audio service when ending sound finishes
-    // r.then((_) {
-    //   print('Sound finished playing, stopping audio service');
-    // });
+    // Only stop 'background' player which is responsible 
+    // for maintaining the OS media session, so that the 'audio' player 
+    // can still play the ending sound without being cut off
+    final r = audioService.playSound(state.timerSettings.endingSound);
+    r.then((_) {
+      audioService.stop();
+    });
 
     emit(
       state.copyWith(
@@ -173,5 +175,4 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
 
     return super.close();
   }
-
 }
