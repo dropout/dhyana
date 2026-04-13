@@ -19,7 +19,6 @@ part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
 
 class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
-
   final ProfileRepository profileRepository;
   final SettingsRepository settingsRepository;
   final StatisticsRepository statisticsRepository;
@@ -36,11 +35,13 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
     required this.profileStatsUpdater,
   }) : super(const ProfileState.initial());
 
-  void loadProfile(String profileId, {
+  void loadProfile(
+    String profileId, {
     Profile? profile,
     void Function(Profile)? onComplete,
     void Function(Object?, StackTrace)? onError,
   }) async {
+
     try {
       late Profile result;
       if (profile != null) {
@@ -53,14 +54,14 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
       }
 
       // Check if consecutive days are valid
-      ProfileStatisticsReport updatedStatsReport =
-        profileStatsUpdater.validateStatsReport(result.statsReport);
+      ProfileStatisticsReport updatedStatsReport = profileStatsUpdater
+          .validateStatsReport(result.statsReport);
 
       if (updatedStatsReport != result.statsReport) {
-        logger.t('Consecutive days and milestone progress have been invalidated!');
-        result = result.copyWith(
-          statsReport: updatedStatsReport
+        logger.t(
+          'Consecutive days and milestone progress have been invalidated!',
         );
+        result = result.copyWith(statsReport: updatedStatsReport);
         // lazy update the profile
         profileRepository.update(result);
       }
@@ -74,7 +75,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
       crashlyticsService.recordError(
         exception: exception,
         stackTrace: stackTrace,
-        reason: 'Unable to load profile: $profileId'
+        reason: 'Unable to load profile: $profileId',
       );
       onError?.call(exception, stackTrace);
     }
@@ -103,7 +104,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to update profile: ${profile.id}'
+        reason: 'Unable to update profile: ${profile.id}',
       );
       onError?.call(e, stack);
     }
@@ -128,12 +129,10 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to update profile settings for profile: ${profile.id}'
+        reason: 'Unable to update profile settings for profile: ${profile.id}',
       );
       onError?.call(e, stack);
     }
-
-
   }
 
   void clearData() {
@@ -145,11 +144,11 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
     try {
       return await settingsRepository.read(profileId);
     } on DocumentNotFoundException {
-      logger.w('No settings found for profile: $profileId, using default settings');
+      logger.w(
+        'No settings found for profile: $profileId, using default settings',
+      );
       return ProfileSettings(id: profileId);
     }
   }
-
-
-
+  
 }

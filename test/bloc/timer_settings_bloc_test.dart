@@ -9,7 +9,7 @@ import '../mock_definitions.dart';
 
 void main() async {
 
-  group('TimerBloc', () {
+  group('TimerSettingsCubit', () {
 
     late TimerSettingsCubit timerSettingsBloc;
     late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
