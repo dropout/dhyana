@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/bloc_provider/timer_bloc_providers.dart';
+import 'package:dhyana/widget/bloc_provider/timer_context.dart';
 import 'package:dhyana/widget/timer/running/timer_running_cover.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 
@@ -22,7 +22,8 @@ class TimerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TimerBlocProviders(
+    return TimerContext(
+      onInit: TimerContext.defaultInitHook,
       timerSettings: timerSettings,
       child: buildScaffolding(context),
     );
