@@ -13,6 +13,7 @@ import 'package:dhyana/widget/timer/settings/sound_input_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 // transitive dependency required for shareValue() on Stream<PlaybackState>
+// ignore: depend_on_referenced_packages
 import 'package:rxdart/rxdart.dart'; 
 
 import '../../../mock_definitions.dart';

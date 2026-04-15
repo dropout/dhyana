@@ -19,6 +19,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 // transitive dependency required for shareValue() on Stream<PlaybackState>
+// ignore: depend_on_referenced_packages
 import 'package:rxdart/rxdart.dart'; 
 
 import '../../test_context_providers.dart';

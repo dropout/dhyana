@@ -8,7 +8,6 @@ import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
 import 'package:dhyana/widget/timer/settings/sound_input.dart';
-import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
 import 'package:dhyana/widget/timer/settings/warmup_input.dart';
 import 'package:dhyana/widget/timer/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
