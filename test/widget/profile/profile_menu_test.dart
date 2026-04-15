@@ -25,7 +25,6 @@ void main() {
 
     when(() => mockServices.crashlyticsService)
       .thenReturn(mockCrashlyticsService);
-
     when(() => mockServices.cacheManagerService)
       .thenReturn(mockCacheManagerService);
     when(() => mockCacheManagerService.cacheManager)
@@ -44,7 +43,7 @@ void main() {
           withAllContextProviders(
             MultiProvider(
               providers: [
-                Provider<Services>(create: (context) =>mockServices ),
+                Provider<Services>(create: (context) => mockServices ),
               ],
               child: ProfileMenu(
                 profile: profile,
@@ -57,11 +56,9 @@ void main() {
         expect(find.byKey(const Key('profile_menu_session_history_tile')), findsOneWidget);
         expect(find.byKey(const Key('profile_menu_statistics_tile')), findsOneWidget);
         expect(find.byKey(const Key('profile_menu_donate_tile')), findsOneWidget);
-        expect(find.byKey(const Key('profile_menu_delete_profile_tile')), findsOneWidget);
+        expect(find.byKey(const Key('profile_menu_settings_tile')), findsOneWidget);
         expect(find.byKey(const Key('profile_menu_signout_tile')), findsOneWidget);
       });
-
-
 
     });
 

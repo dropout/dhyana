@@ -3,6 +3,7 @@ import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/screen/session_completed_screen.dart';
 import 'package:dhyana/widget/session/completed/signed_in_completed_view.dart';
@@ -18,9 +19,7 @@ import '../../test_context_providers.dart';
 import '../../mock_definitions.dart';
 
 void main() {
-
   group('SessionCompletedScreen', () {
-
     late MockProfileCubit profileCubit;
     late MockAuthCubit mockAuthBloc;
 
@@ -48,170 +47,151 @@ void main() {
       mockCacheManagerService = MockCacheManagerService();
       mockHapticsService = MockHapticsService();
 
-      when(() => profileCubit.stream)
-        .thenAnswer((_) => const Stream<ProfileState>.empty());
+      when(
+        () => profileCubit.stream,
+      ).thenAnswer((_) => const Stream<ProfileState>.empty());
 
-      when(() => profileCubit.state)
-        .thenReturn(const ProfileState.initial());
-      when(() => mockAuthBloc.state)
-        .thenReturn(const AuthState.initial());
+      when(() => profileCubit.state).thenReturn(const ProfileState.initial());
+      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
-      when(() => mockCacheManagerService.cacheManager)
-        .thenReturn(MockCacheManager());
+      when(
+        () => mockServices.cacheManagerService,
+      ).thenReturn(mockCacheManagerService);
+      when(
+        () => mockCacheManagerService.cacheManager,
+      ).thenReturn(MockCacheManager());
 
-      when(() => mockServices.idGeneratorService)
-        .thenReturn(mockIdGeneratorService);
-      when(() => mockServices.crashlyticsService)
-        .thenReturn(mockCrashlyticsService);
-      when(() => mockServices.hapticsService)
-        .thenReturn(mockHapticsService);
+      when(
+        () => mockServices.idGeneratorService,
+      ).thenReturn(mockIdGeneratorService);
+      when(
+        () => mockServices.crashlyticsService,
+      ).thenReturn(mockCrashlyticsService);
+      when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
-      when(() => mockRepositories.profileRepository)
-        .thenReturn(mockProfileRepository);
-      when(() => mockRepositories.statisticsRepository)
-        .thenReturn(mockStatisticsRepository);
-
+      when(
+        () => mockRepositories.profileRepository,
+      ).thenReturn(mockProfileRepository);
+      when(
+        () => mockRepositories.statisticsRepository,
+      ).thenReturn(mockStatisticsRepository);
     });
 
-    testWidgets('can display session completed view when signed out', (WidgetTester tester) async {
-
+    testWidgets('can display session completed view when signed out', (
+      WidgetTester tester,
+    ) async {
       Session session = FakeModelFactory().createSession();
 
-      when(() => mockAuthBloc.state)
-        .thenReturn(const AuthState.initial());
+      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
-          withAllContextProviders(
-            MultiProvider(
-              providers: [
-                BlocProvider<AuthCubit>.value(
-                  value: mockAuthBloc,
+      await tester
+          .runAsync(() async {
+            await tester.pumpWidget(
+              withAllContextProviders(
+                MultiProvider(
+                  providers: [
+                    BlocProvider<AuthCubit>.value(value: mockAuthBloc),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
+                    Provider<Repositories>.value(value: mockRepositories),
+                    Provider<Services>.value(value: mockServices),
+                  ],
+                  child: SessionCompletedScreen(session: session),
                 ),
-                BlocProvider<ProfileCubit>.value(
-                  value: profileCubit,
-                ),
-                Provider<Repositories>.value(
-                  value: mockRepositories,
-                ),
-                Provider<Services>.value(
-                  value: mockServices,
-                ),
-              ],
-              child: SessionCompletedScreen(
-                session: session,
               ),
-            )
-          )
-        );
-        await tester.pumpAndSettle();
-      }).then((_) async{
-        expect(find.byType(SignedOutCompletedView), findsOneWidget);
-      });
-
+            );
+            await tester.pumpAndSettle();
+          })
+          .then((_) async {
+            expect(find.byType(SignedOutCompletedView), findsOneWidget);
+          });
     });
 
-    testWidgets('can display session completed view when signed in', (WidgetTester tester) async {
+    testWidgets('can display session completed view when signed in', (
+      WidgetTester tester,
+    ) async {
+      final profile = FakeModelFactory().createProfile();
+      final session = FakeModelFactory().createSession();
 
-      Session session = FakeModelFactory().createSession();
+      when(
+        () => mockAuthBloc.state,
+      ).thenReturn(AuthState.signedIn(user: FakeModelFactory().createUser()));
 
-      when(() => mockAuthBloc.state)
-        .thenReturn(AuthState.signedIn(
-        user: FakeModelFactory().createUser()
+      when(() => profileCubit.state).thenReturn(ProfileState.loaded(
+        profile: profile,
+        settings: ProfileSettings(id: profile.id),
       ));
-
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
-          withAllContextProviders(
-            MultiProvider(
-              providers: [
-                BlocProvider<AuthCubit>.value(
-                  value: mockAuthBloc,
+    
+      await tester
+          .runAsync(() async {
+            await tester.pumpWidget(
+              withAllContextProviders(
+                MultiProvider(
+                  providers: [
+                    BlocProvider<AuthCubit>.value(value: mockAuthBloc),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
+                    Provider<Repositories>.value(value: mockRepositories),
+                    Provider<Services>.value(value: mockServices),
+                  ],
+                  child: SessionCompletedScreen(session: session),
                 ),
-                BlocProvider<ProfileCubit>.value(
-                  value: profileCubit,
-                ),
-                Provider<Repositories>.value(
-                  value: mockRepositories,
-                ),
-                Provider<Services>.value(
-                  value: mockServices,
-                ),
-              ],
-              child: SessionCompletedScreen(
-                session: session,
               ),
-            )
-          )
-        );
-        await tester.pumpAndSettle();
-      }).then((_) async{
-        expect(find.byType(SignedInCompletedView), findsOneWidget);
-      });
-
+            );
+            await tester.pumpAndSettle(const Duration(milliseconds: 500));
+          })
+          .then((_) async {
+            expect(find.byType(SignedInCompletedView), findsOneWidget);
+          });
     });
 
     testWidgets('can display okay button', (WidgetTester tester) async {
+      final profile = FakeModelFactory().createProfile();
+      final session = FakeModelFactory().createSession();
 
-      Session session = FakeModelFactory().createSession();
+      when(
+        () => mockAuthBloc.state,
+      ).thenReturn(AuthState.signedIn(user: FakeModelFactory().createUser()));
 
-      when(() => mockAuthBloc.state)
-        .thenReturn(AuthState.signedIn(
-        user: FakeModelFactory().createUser()
+      when(() => profileCubit.state).thenReturn(ProfileState.loaded(
+        profile: profile,
+        settings: ProfileSettings(id: profile.id),
       ));
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
-          withAllContextProviders(
-            MultiProvider(
-              providers: [
-                BlocProvider<AuthCubit>.value(
-                  value: mockAuthBloc,
+      await tester
+          .runAsync(() async {
+            await tester.pumpWidget(
+              withAllContextProviders(
+                MultiProvider(
+                  providers: [
+                    BlocProvider<AuthCubit>.value(value: mockAuthBloc),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
+                    Provider<Repositories>.value(value: mockRepositories),
+                    Provider<Services>.value(value: mockServices),
+                  ],
+                  child: SessionCompletedScreen(session: session),
                 ),
-                BlocProvider<ProfileCubit>.value(
-                  value: profileCubit,
-                ),
-                Provider<Repositories>.value(
-                  value: mockRepositories,
-                ),
-                Provider<Services>.value(
-                  value: mockServices,
-                ),
-              ],
-              child: SessionCompletedScreen(
-                session: session,
               ),
-            )
-          )
-        );
-        await tester.pumpAndSettle();
-      }).then((_) async {
-        expect(
-          find.byKey(const Key('session_completed_screen_okay_button')),
-          findsOneWidget
-        );
-
-      });
-
-
+            );
+            await tester.pumpAndSettle();
+          })
+          .then((_) async {
+            expect(
+              find.byKey(const Key('session_completed_screen_okay_button')),
+              findsOneWidget,
+            );
+          });
     });
 
-    testWidgets('can go to home screen when okay button tapped', (WidgetTester tester) async {
-
+    testWidgets('can go to home screen when okay button tapped', (
+      WidgetTester tester,
+    ) async {
       bool didPop = false;
       Session session = FakeModelFactory().createSession();
 
-      when(() => mockAuthBloc.state)
-        .thenReturn(const AuthState.initial());
+      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
       final GoRouter goRouter = GoRouter(
         routes: [
-          GoRoute(
-            path: '/',
-            builder: (context, state) => SizedBox.shrink(),
-          ),
+          GoRoute(path: '/', builder: (context, state) => SizedBox.shrink()),
           GoRoute(
             path: '/test',
             name: 'test',
@@ -223,46 +203,31 @@ void main() {
               return withAllContextProviders(
                 MultiProvider(
                   providers: [
-                    BlocProvider<AuthCubit>.value(
-                      value: mockAuthBloc,
-                    ),
-                    BlocProvider<ProfileCubit>.value(
-                      value: profileCubit,
-                    ),
-                    Provider<Repositories>.value(
-                      value: mockRepositories,
-                    ),
-                    Provider<Services>.value(
-                      value: mockServices,
-                    ),
+                    BlocProvider<AuthCubit>.value(value: mockAuthBloc),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
+                    Provider<Repositories>.value(value: mockRepositories),
+                    Provider<Services>.value(value: mockServices),
                   ],
-                  child: SessionCompletedScreen(
-                    session: session,
-                  ),
-                )
+                  child: SessionCompletedScreen(session: session),
+                ),
               );
             },
-          )
-        ]
+          ),
+        ],
       );
 
-      await tester.pumpWidget(
-        MaterialApp.router(
-          routerConfig: goRouter,
-        ),
-      );
+      await tester.pumpWidget(MaterialApp.router(routerConfig: goRouter));
 
       goRouter.pushNamed('test');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('session_completed_screen_okay_button')));
+      await tester.tap(
+        find.byKey(const Key('session_completed_screen_okay_button')),
+      );
       await tester.pumpAndSettle();
 
       expect(didPop, true);
       expect(goRouter.state.path, '/');
-
     });
-
-
   }); // eof group
 } // eof main

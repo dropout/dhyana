@@ -99,8 +99,6 @@ void main() {
 
     });
 
-
-
     group('LoginScreen events', () {
       testWidgets('LoginScreen has working login with Google button', (WidgetTester tester) async {
 
@@ -109,6 +107,10 @@ void main() {
 
         when(() => mockUrlLauncher.launchInAppWebView(any()))
           .thenAnswer((_) => Future.value(true));
+
+        when(() => mockAuthCubit.signInWithGoogle(
+          onComplete: any(named: 'onComplete'),
+        )).thenAnswer((_) => Future.value(null));
 
         await tester.pumpWidget(
           Provider<Services>(
@@ -131,7 +133,10 @@ void main() {
         expect(googleButton, findsOneWidget);
 
         await tester.tap(googleButton);
-        verify(() => mockAuthCubit.signInWithGoogle()).called(1);
+
+        verify(() => mockAuthCubit.signInWithGoogle(
+          onComplete: any(named: 'onComplete'),
+        )).called(1);
       });
 
       testWidgets('LoginScreen has working login with Apple button', (WidgetTester tester) async {
@@ -141,6 +146,10 @@ void main() {
 
         when(() => mockUrlLauncher.launchInAppWebView(any()))
           .thenAnswer((_) => Future.value(true));
+
+        when(() => mockAuthCubit.signInWithApple(
+          onComplete: any(named: 'onComplete'),
+        )).thenAnswer((_) => Future.value(null));
 
         await tester.pumpWidget(
           Provider<Services>(
@@ -161,7 +170,9 @@ void main() {
         );
         expect(appleButton, findsOneWidget);
         await tester.tap(appleButton);
-        verify(() => mockAuthCubit.signInWithApple()).called(1);
+        verify(() => mockAuthCubit.signInWithApple(
+          onComplete: any(named: 'onComplete'),
+        )).called(1);
       });
 
       testWidgets('LoginScreen has working ToU button', (WidgetTester tester) async {

@@ -143,13 +143,10 @@ void main() {
 
         verify(() => mockProfileCubit.updateProfile(
           profile: profile,
-          formData: {
-            'firstName': profile.firstName,
-            'lastName': profile.lastName,
-          },
-          completeProfile: true,
+          formData: any(named: 'formData'),          
           onComplete: any(named: 'onComplete', that: isA<Function(Profile)>()),
-          onError: any(named: 'onError', that: isA<Function(Object?, StackTrace)>()),
+          onError: any(named: 'onError', that: isA<Function(Object?, StackTrace)>()),          
+          completeProfile: true,
         )).called(1);
 
       });

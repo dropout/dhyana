@@ -57,7 +57,6 @@ class SessionCompletedScreen extends StatelessWidget {
           case ProfileErrorState():
             return AppErrorDisplay();
           case ProfileLoadedState():
-            // return AppLoadingDisplay();
             return buildLoaded(context, state);
         }
       },

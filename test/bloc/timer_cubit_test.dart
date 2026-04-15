@@ -70,7 +70,7 @@ void main() async {
     setUpAll(() {
       defaultTimerSettings = TimerSettingsFactory.withUuid();
       playbackStateStreamController =
-        StreamController<PlaybackState>.broadcast();
+          StreamController<PlaybackState>.broadcast();
     });
 
     setUp(() {
@@ -606,6 +606,9 @@ void main() async {
         when(
           () => mockAudioService.playSound(defaultTimerSettings.endingSound),
         ).thenAnswer((_) => Future.value(null));
+        when(
+          () => mockAudioService.stop(),
+        ).thenAnswer((_) => Future.value(null));
 
         final timerCubit = TimerCubit(
           timerSettings: defaultTimerSettings,
@@ -666,11 +669,9 @@ void main() async {
       verify: (timerCubit) {
         verifyInOrder([
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-          () => mockAudioService.playSound(defaultTimerSettings.endingSound),          
+          () => mockAudioService.playSound(defaultTimerSettings.endingSound),
         ]);
       },
     );
-
-
   }); // eof group
 } // eof main

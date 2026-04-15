@@ -1,3 +1,6 @@
+import 'package:audio_service/audio_service.dart';
+import 'package:dhyana/audio/app_audio_handler.dart';
+import 'package:dhyana/audio/timer_audio_handler.dart';
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
@@ -15,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../test_context_providers.dart';
 import '../../mock_definitions.dart';
@@ -22,6 +26,7 @@ import '../../mock_definitions.dart';
 void main() {
 
   group('TimerScreen', () {
+
     late MockAuthCubit mockAuthBloc;
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
@@ -33,6 +38,8 @@ void main() {
     late MockPresenceRepository mockPresenceRepository;
     late MockProfileRepository mockProfileRepository;
     late MockTimerSettingsHistoryRepository mockTimerSettingsHistoryRepository;
+    late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
+    late MockAppAudioHandler mockAudioHandler;
 
     setUpAll(() {
       registerFallbackValue(Presence(
@@ -54,6 +61,7 @@ void main() {
       mockCacheManagerService = MockCacheManagerService();
       mockCacheManager = MockCacheManager();
       mockWakelockService = MockWakelockService();
+      mockAudioHandler = MockAppAudioHandler();      
 
       when(() => mockServices.wakelockService)
         .thenReturn(mockWakelockService);
@@ -63,6 +71,7 @@ void main() {
       mockPresenceRepository = MockPresenceRepository();
       mockProfileRepository = mockProfileRepository = MockProfileRepository();
       mockTimerSettingsHistoryRepository = MockTimerSettingsHistoryRepository();
+      mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
@@ -72,6 +81,10 @@ void main() {
         .thenReturn(mockCacheManager);
       when(() => mockServices.wakelockService)
         .thenReturn(mockWakelockService);
+      when(() => mockServices.audioHandler)
+        .thenReturn(mockAudioHandler);
+      when(() => mockServices.timerSettingsSharedPrefsService)
+        .thenReturn(mockTimerSettingsSharedPrefsService);
 
       when(() => mockWakelockService.enable())
         .thenAnswer((_) async => {});
@@ -93,6 +106,12 @@ void main() {
 
       when(() => mockAuthBloc.state).thenReturn(AuthState.signedOut());
       when(() => mockProfileCubit.state).thenReturn(ProfileState.initial());
+      when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.playbackState)
+        .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
@@ -144,7 +163,6 @@ void main() {
 
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
-
       when(() => mockAuthBloc.state).thenReturn(
         AuthState.signedIn(user: user)
       );
@@ -154,6 +172,14 @@ void main() {
           settings: ProfileSettings(id: profile.id)
         )
       );
+
+      when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.playbackState)
+        .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
+
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
@@ -201,9 +227,15 @@ void main() {
           settings: ProfileSettings(id: profile.id)
         )
       );
-
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
+
+      when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.playbackState)
+        .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.runAsync(() async {
         await tester.pumpWidget(

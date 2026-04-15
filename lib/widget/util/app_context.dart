@@ -3,13 +3,12 @@ import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 extension AppContext on BuildContext {
 
   void hapticsTap() =>
-    HapticFeedback.lightImpact();
+    services.hapticsService.tap();
 
   void logEvent({required String name, Map<String, Object>? parameters, }) =>
     services.analyticsService.logEvent(

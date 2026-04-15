@@ -135,7 +135,7 @@ class ProfileMenuTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: SizedBox(
-          key: key,
+          key: Key('$key-sizedbox'),
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(
