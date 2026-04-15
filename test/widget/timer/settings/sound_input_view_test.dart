@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:audio_service/audio_service.dart';
+import 'package:dhyana/audio/app_audio_handler.dart';
+import 'package:dhyana/audio/timer_audio_handler.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_page.dart';
@@ -9,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
+// transitive dependency required for shareValue() on Stream<PlaybackState>
+import 'package:rxdart/rxdart.dart'; 
 
 import '../../../mock_definitions.dart';
 import '../../../test_context_providers.dart';
@@ -22,14 +27,17 @@ void main() {
   late MockHapticsService mockHapticsService;
   late MockTimerAudioService mockAudioService;
   late MockServices mockServices;
+  late MockAppAudioHandler mockAudioHandler;
 
   setUpAll(() {
     mockServices = MockServices();
     mockHapticsService = MockHapticsService();
     mockAudioService = MockTimerAudioService();
+    mockAudioHandler = MockAppAudioHandler();
 
     when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
     // when(() => mockServices.audioService).thenReturn(mockAudioService);
+    when(() => mockServices.audioHandler).thenReturn(mockAudioHandler);
 
     registerFallbackValue(FakeBuildContext());
   });
@@ -40,6 +48,13 @@ void main() {
 
       when(() => mockAudioService.isPlayingStream)
         .thenAnswer((_) => Stream<bool>.value(false));
+
+      when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.playbackState)
+        .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.pumpWidget(
         withAllContextProviders(
@@ -65,6 +80,13 @@ void main() {
 
       final Completer<Sound> completer = Completer<Sound>();
       Sound changedValue = Sound.none;
+
+      when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
+        .thenAnswer((_) => Future.value(null));
+      when(() => mockAudioHandler.playbackState)
+        .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.pumpWidget(
         withAllContextProviders(

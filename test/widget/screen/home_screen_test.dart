@@ -31,6 +31,7 @@ void main() {
     late MockOverlayService mockOverlayService;
     late MockCacheManagerService mockCacheManagerService;
     late MockCacheManager mockCacheManager;
+    late MockSharedPreferencesService mockSharedPreferencesService;
 
     // doesn't make sense to mock this because the FragmentShader
     // cannot be mocked neither, so you need to load the shader anyhow
@@ -45,6 +46,7 @@ void main() {
       mockOverlayService = MockOverlayService();
       mockCacheManagerService = MockCacheManagerService();
       mockCacheManager = MockCacheManager();
+      mockSharedPreferencesService = MockSharedPreferencesService();
 
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.signedOut());
@@ -58,6 +60,8 @@ void main() {
       when(() => mockCacheManagerService.cacheManager)
         .thenReturn(mockCacheManager);
 
+      when(() => mockServices.sharedPreferencesService)
+        .thenReturn(mockSharedPreferencesService);
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
       when(() => mockServices.timerSettingsSharedPrefsService)
@@ -92,6 +96,9 @@ void main() {
                 BlocProvider<AuthCubit>(
                   create: (context) => mockAuthBloc,
                 ),
+                BlocProvider<ProfileCubit>(
+                  create: (context) => mockProfileCubit,
+                )
               ],
               child: const HomeScreen(),
             )
@@ -110,7 +117,7 @@ void main() {
     testWidgets('does not load TimerSettings when its given as a parameter in the constructor', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
-          .thenReturn(const AuthState.signedOut());
+        .thenReturn(const AuthState.signedOut());
 
       await tester.pumpWidget(
         Provider<Services>(
@@ -118,9 +125,8 @@ void main() {
           child: withAllContextProviders(
             MultiBlocProvider(
               providers: [
-                BlocProvider<AuthCubit>(
-                  create: (context) => mockAuthBloc,
-                ),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: const HomeScreen(
                 timerSettings: TimerSettings(),
@@ -141,8 +147,7 @@ void main() {
     testWidgets('can display an error state', (WidgetTester tester) async {
 
       when(() => mockAuthBloc.state)
-          .thenReturn(const AuthState.signedOut());
-
+        .thenReturn(const AuthState.signedOut());
       when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
         .thenThrow(Exception('Error occured'));
 
@@ -152,9 +157,8 @@ void main() {
           child: withAllContextProviders(
             MultiBlocProvider(
               providers: [
-                BlocProvider<AuthCubit>(
-                  create: (context) => mockAuthBloc,
-                ),
+                BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),
+                BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
               ],
               child: const HomeScreen(),
             )
@@ -179,9 +183,8 @@ void main() {
           child: withAllContextProviders(
               MultiBlocProvider(
                 providers: [
-                  BlocProvider<AuthCubit>(
-                    create: (context) => mockAuthBloc,
-                  ),
+                  BlocProvider<AuthCubit>(create: (context) => mockAuthBloc),                  
+                  BlocProvider<ProfileCubit>(create: (context) => mockProfileCubit),
                 ],
                 child: const HomeScreen(
                   timerSettings: TimerSettings(),

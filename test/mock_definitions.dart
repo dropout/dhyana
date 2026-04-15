@@ -22,6 +22,7 @@ import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
+import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/service/timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
@@ -86,6 +87,10 @@ class MockCacheManager
 class MockCrashlyticsService
   extends Mock
   implements CrashlyticsService {}
+
+class MockSharedPreferencesService
+  extends Mock
+  implements SharedPreferencesService {}
 
 class MockTimerSettingsSharedPrefsService
   extends Mock

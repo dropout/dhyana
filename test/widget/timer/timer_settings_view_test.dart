@@ -5,6 +5,7 @@ import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/shader_service.dart';
+import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
 import 'package:dhyana/widget/timer/settings/sound_input.dart';
 import 'package:dhyana/widget/timer/settings/timer_start_button.dart';
@@ -65,7 +66,7 @@ void main() {
       expect(find.byType(WarmupTimeInput), findsOneWidget);
       expect(find.byType(SoundInput), findsExactly(2));
       expect(find.byType(DurationInput), findsOneWidget);
-      expect(find.byType(TimerStartButton), findsOneWidget);
+      expect(find.byType(SessionStartButton), findsOneWidget);
 
     });
 
