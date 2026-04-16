@@ -2,7 +2,10 @@
   "name": "maintenance_scripts",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "seed:presence:hungary:dry-run": "node src/seed_presence_hungary.mjs --project dhyana-staging --dry-run",
+    "seed:presence:hungary:staging": "node src/seed_presence_hungary.mjs --project dhyana-staging --confirm"
+  },
   "license": "MIT",
   "private": true,
   "dependencies": {
