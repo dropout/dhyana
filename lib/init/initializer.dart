@@ -11,8 +11,6 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dart';
 import 'package:dhyana/init/repositories.dart';
-import 'package:dhyana/repository/stub/stubbed_presence_repository.dart';
-import 'package:dhyana/repository/stub/stubbed_statistics_repository.dart';
 import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
@@ -47,11 +45,7 @@ class Initializer with LoggerMixin {
       storageDataProvider: storageDataProvider,
     );
 
-    // TODO: Remove stubbed repositories and replace with real implementations
-    final repos = repoBuilder
-      .presenceRepository(StubbedPresenceRepository())
-      .statisticsRepository(StubbedStatisticsRepository())
-      .build();
+    final repos = repoBuilder.build();
 
     // Build services
     logger.t('Create services');

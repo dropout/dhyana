@@ -31,8 +31,8 @@ class PresenceArea extends StatelessWidget {
         profileRepository: context.repos.profileRepository,
       )..loadPresenceData(
         ownProfileId: profile.id,
-        batchSize: batchSize,
-        intervalInMinutes: intervalInMinutes,
+        limit: batchSize,
+        interval: Duration(minutes: intervalInMinutes),
       ),
       child: PresenceView(
         batchSize: batchSize,

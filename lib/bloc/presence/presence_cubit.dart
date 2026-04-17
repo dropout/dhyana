@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/model/location.dart';
 import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/model/presence_query_options.dart';
 import 'package:dhyana/model/profile.dart';
@@ -12,30 +13,48 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'presence_state.dart';
 part 'presence_cubit.freezed.dart';
 
+/// Enables showing and querying presence data to show who is around
+/// who you have practiced with. 
 class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
-
+  
+  /// Repository to show and query presence data.
   final PresenceRepository presenceRepository;
+
+  /// Repository to read profile data to show presence.
   final ProfileRepository profileRepository;
+
+  /// Service to log errors
   final CrashlyticsService crashlyticsService;
 
+  /// Creates a new [PresenceCubit] with the given repositories and services.
   PresenceCubit({
     required this.presenceRepository,
     required this.profileRepository,
     required this.crashlyticsService,
   }) : super(const PresenceState.initial());
 
+  /// Loads presence data based on the given query options.
+  /// If [ownProfileId] is provided, it will exclude it from the results.
+  /// If [location] is provided it will filter and sort the results by distance 
+  /// to the location.
   Future<void> loadPresenceData({
     String? ownProfileId,
-    int intervalInMinutes = 60,
-    int batchSize = 18,
+    Location? location,
+    double rangeInKm = 100.0,
+    Duration interval = const Duration(minutes: 60),
+    int limit = 18,
   }) async {
     try {
       emit(PresenceState.loading());
-      List<Presence> presenceList = await presenceRepository
-        .query(PresenceQueryOptions(
-          limit: 18,
+      List<Presence> presenceList = await presenceRepository.query(
+        PresenceQueryOptions(
+          limit: limit,
           ownProfileId: ownProfileId,
-        ));
+          location: location,
+          rangeInKm: rangeInKm,
+          windowSize: interval,
+        ),
+      );
       logger.t('Loaded ${presenceList.length} presence items');
       emit(PresenceState.loaded(presenceList: presenceList));
     } catch (e, stack) {
@@ -43,7 +62,7 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to load presence data'
+        reason: 'Unable to load presence data',
       );
     }
   }
@@ -95,20 +114,25 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
     try {
       Profile profile = await profileRepository.read(profileId);
       if (profile.completed) {
-        await presenceRepository.showPresence(Presence(
-          id: profile.id,
-          profile: PublicProfile.fromProfile(profile: profile),
-          startedAt: DateTime.now(),
-        ));
+        await presenceRepository.showPresence(
+          Presence(
+            id: profile.id,
+            profile: PublicProfile.fromProfile(profile: profile),
+            startedAt: DateTime.now(),
+            location: profile.location,
+          ),
+        );
         logger.t('Showing presence.');
       } else {
-        logger.t('User is signed in but profile is incomplete, NOT showing presence.');
+        logger.t(
+          'User is signed in but profile is incomplete, NOT showing presence.',
+        );
       }
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to show presence!'
+        reason: 'Unable to show presence!',
       );
     }
   }

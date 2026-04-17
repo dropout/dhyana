@@ -1,23 +1,26 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
+import 'location.dart';
 
 part 'presence_query_options.freezed.dart';
 part 'presence_query_options.g.dart';
 
 @freezed
 sealed class PresenceQueryOptions with _$PresenceQueryOptions {
-
+  
   const PresenceQueryOptions._();
 
   const factory PresenceQueryOptions({
     @Default(Duration(hours: 3)) Duration windowSize,
     @Default(20) int limit,
-    String ? ownProfileId,
+    String? ownProfileId,
     String? lastDocumentId,
+    Location? location,
+    @Default(100) double rangeInKm,
   }) = _PresenceQueryOptions;
 
   factory PresenceQueryOptions.fromJson(Map<String, Object?> json) =>
-      _$PresenceQueryOptionsFromJson(json);
+    _$PresenceQueryOptionsFromJson(json);
 
 }

@@ -34,9 +34,9 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   void _onIntervalChangeEnd(BuildContext context, double value) {
     if (value.round() != intervalInMinutes.round()) {
-      BlocProvider.of<PresenceCubit>(context).loadPresenceData(
-        intervalInMinutes: value.round(),
-        batchSize: widget.batchSize,
+      context.read<PresenceCubit>().loadPresenceData(
+        interval: Duration(minutes: value.round()),
+        limit: widget.batchSize,
       );
       setState(() {
         intervalInMinutes = value;
@@ -45,9 +45,9 @@ class _PresenceScreenState extends State<PresenceScreen>
   }
 
   Future<void> _onRefresh(BuildContext context) async {
-    BlocProvider.of<PresenceCubit>(context).loadPresenceData(
-      intervalInMinutes: intervalInMinutes.round(),
-      batchSize: widget.batchSize,
+    context.read<PresenceCubit>().loadPresenceData(
+      interval: Duration(minutes: intervalInMinutes.round()),
+      limit: widget.batchSize,
     );
   }
 

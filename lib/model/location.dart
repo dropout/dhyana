@@ -7,6 +7,9 @@ part 'location.g.dart';
 
 @freezed
 sealed class Location with _$Location {
+
+  const Location._();
+
   const factory Location({
     required String name,
     required LatLng latLng,
@@ -15,4 +18,8 @@ sealed class Location with _$Location {
 
   factory Location.fromJson(Map<String, dynamic> json) =>
     _$LocationFromJson(json);
+
+  double distanceTo(Location other) =>
+    latLng.distanceTo(other.latLng);
+
 }
