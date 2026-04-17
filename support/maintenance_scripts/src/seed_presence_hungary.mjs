@@ -1,6 +1,8 @@
 import admin from "firebase-admin";
+import {initFirebaseApp} from "./create_app.mjs";
 
-const STAGING_PROJECT_ID = "dhyana-staging";
+initFirebaseApp();
+
 const GEOHASH_ALPHABET = "0123456789bcdefghjkmnpqrstuvwxyz";
 const GEOHASH_PRECISION = 8;
 const DEFAULT_PHOTO_URL =
@@ -92,7 +94,7 @@ function buildPresencePayloads() {
     const seq = String(index + 1).padStart(3, "0");
     const docId = `staging-hu-${seq}`;
     const geoHash = encodeGeohash(city.latitude, city.longitude);
-    const startedAt = now - index * 60_000;
+    const startedAt = now - index * 60_000 * 10;
 
     return {
       docId,
@@ -100,8 +102,8 @@ function buildPresencePayloads() {
         id: docId,
         profile: {
           id: `profile-${docId}`,
-          firstName: "Meditator",
-          lastName: seq,
+          firstName: `${city.name}`,
+          lastName: `Lastname ${seq}`,
           photoUrl: DEFAULT_PHOTO_URL,
           photoBlurhash: DEFAULT_PHOTO_BLURHASH,
         },
@@ -127,20 +129,6 @@ function printUsageAndExit(message) {
     "Usage: node src/seed_presence_hungary.mjs --project=dhyana-staging (--confirm|--dry-run)",
   );
   process.exit(1);
-}
-
-if (HUNGARIAN_CITIES.length !== 18) {
-  printUsageAndExit("Seeder requires exactly 18 Hungarian cities.");
-}
-
-if (!projectId) {
-  printUsageAndExit("Missing required --project argument.");
-}
-
-if (projectId !== STAGING_PROJECT_ID) {
-  printUsageAndExit(
-    `Refusing to run for project '${projectId}'. Allowed project: '${STAGING_PROJECT_ID}'.`,
-  );
 }
 
 if (!isDryRun && !isConfirmed) {
