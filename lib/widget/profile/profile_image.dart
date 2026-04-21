@@ -23,6 +23,7 @@ class ProfileImage extends StatelessWidget {
       width: size,
       height: size,
       child: AppCachedNetworkImage(
+        key: ValueKey(profile), // Rebuild when profile changes
         imagePath: profile.profileImagePath,
         blurHash: profile.photoBlurhash,
         resourceResolver: context.services.resourceResolver,

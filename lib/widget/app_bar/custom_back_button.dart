@@ -1,5 +1,6 @@
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -77,6 +78,7 @@ class _CustomBackButtonState extends State<CustomBackButton>
     } else {
       const HomeRoute().go(context);
     }
+    context.hapticsTap();
   }
 
   void _onTapDown(BuildContext context) {

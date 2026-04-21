@@ -6,7 +6,7 @@ class DefaultHapticsService implements HapticsService {
 
   @override
   void tap() {
-    Gaimon.rigid();
+    Gaimon.medium();
   }
 
   @override
