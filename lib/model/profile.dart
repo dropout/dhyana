@@ -1,4 +1,5 @@
 import 'package:dhyana/model/converter/date_time_converter.dart';
+import 'package:dhyana/model/profile_model.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
 import 'location.dart';
-import 'model.dart';
 
 part 'profile.freezed.dart';
 part 'profile.g.dart';
@@ -15,8 +15,9 @@ part 'profile.g.dart';
 // in firebase functions, because thats where the
 // initial profile db record is created.
 
+
 @freezed
-abstract class Profile with _$Profile implements Model {
+abstract class Profile with _$Profile implements ProfileModel {
 
   const Profile._();
 
@@ -50,13 +51,16 @@ abstract class Profile with _$Profile implements Model {
   factory Profile.fromJson(Map<String, Object?> json) =>
     _$ProfileFromJson(json);
 
-  String get displayName {
-    return '$firstName $lastName';
-  }
-
-  bool consecutiveDaysProgressCheck(Profile oldProfile) {
-    return (oldProfile.statsReport.consecutiveDays.current
+  bool consecutiveDaysProgressCheck(Profile oldProfile) =>
+    (oldProfile.statsReport.consecutiveDays.current
       < statsReport.consecutiveDays.current);
-  }
 
+  @override
+  String get displayName => 
+    '$firstName $lastName';
+
+  @override
+  String get profileImagePath =>
+    '/profiles/$id/photo.jpg';
+  
 }

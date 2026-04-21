@@ -1,36 +1,20 @@
-import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/util/default_profile_data.dart';
+import 'package:dhyana/model/profile_model.dart';
 import 'package:dhyana/widget/util/app_cached_network_image.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {
 
   static const defaultSize = 96.0;
 
-  final String photoUrl;
-  final String photoBlurhash;
+  final ProfileModel profile;
   final double size;
 
   const ProfileImage({
-    required this.photoUrl,
-    required this.photoBlurhash,
+    required this.profile,
     this.size = defaultSize,
     super.key
   });
-
-  ProfileImage.fromProfile(Profile profile, {
-    this.size=defaultSize,
-    super.key
-  }) :
-    photoUrl = profile.photoUrl,
-    photoBlurhash = profile.photoBlurhash;
-
-  const ProfileImage.anonymous({
-    this.size=defaultSize,
-    super.key
-  }) :
-    photoUrl = DefaultProfileData.photoUrl,
-    photoBlurhash = DefaultProfileData.photoBlurhash;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +23,9 @@ class ProfileImage extends StatelessWidget {
       width: size,
       height: size,
       child: AppCachedNetworkImage(
-        key: ValueKey(photoUrl),
-        imageUrl: Future.value(photoUrl),
-        blurHash: photoBlurhash,
+        imagePath: profile.profileImagePath,
+        blurHash: profile.photoBlurhash,
+        resourceResolver: context.services.resourceResolver,
         circular: true,
       ),
     );

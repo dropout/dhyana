@@ -39,7 +39,7 @@ class ProfileView extends StatelessWidget {
                 width: 4.0,
               ),
             ),
-            child: ProfileImage.fromProfile(profile),
+            child: ProfileImage(profile: profile),
           ),
           Gap.small(),
           Text(

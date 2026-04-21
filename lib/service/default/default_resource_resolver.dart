@@ -1,19 +1,13 @@
-import 'package:dhyana/data_provider/storage_data_provider.dart';
-import 'package:dhyana/model/profile.dart';
 import '../resource_resolver.dart';
 
-class DefaultResourceResolver implements ResourceResolver {
+class DefaultResourceResolver extends ResourceResolver {
 
-  final StorageDataProvider storageDataProvider;
-
-  DefaultResourceResolver({
-    required this.storageDataProvider,
-  });
+  DefaultResourceResolver({required super.storageDataProvider});
 
   @override
-  Future<String> getProfileImageUrl(Profile profile) {
+  Future<String> getProfileImageUrl(String profileId) {
     String imageFilename = 'photo.jpg';
-    String path = '/profiles/${profile.id}/$imageFilename';
+    String path = '/profiles/$profileId/$imageFilename';
     return storageDataProvider.getDownloadURL(path);
   }
 
@@ -30,5 +24,4 @@ class DefaultResourceResolver implements ResourceResolver {
     String path = '/chants/$chantId/$lyricsFilename';
     return storageDataProvider.getDownloadURL(path);
   }
-
 }

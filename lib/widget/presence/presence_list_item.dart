@@ -29,8 +29,7 @@ class PresenceListItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: ProfileImage(
-              photoUrl: presence.profile.photoUrl,
-              photoBlurhash: presence.profile.photoBlurhash,
+              profile: presence.profile,
               size: 56,
             ),
           ),

@@ -1,11 +1,17 @@
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/data_provider/storage_data_provider.dart';
 
-abstract interface class ResourceResolver {
+abstract class ResourceResolver {
 
-  Future<String> getProfileImageUrl(Profile profile);
+  StorageDataProvider storageDataProvider;
+
+  ResourceResolver({required this.storageDataProvider});
+
+  /// Resolves a storage path to a download URL.
+  Future<String> resolveStoragePath(String path) =>
+    storageDataProvider.getDownloadURL(path);
+
+  Future<String> getProfileImageUrl(String profileId);
   Future<String> getChantAudioUrl(String chantId);
   Future<String> getChantLyricsUrl(String chantId);
 
 }
-
-

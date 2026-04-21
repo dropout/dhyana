@@ -5,15 +5,11 @@ import 'package:flutter/material.dart';
 
 class PresenceButton extends StatelessWidget {
 
-  // final String profileId;
-
   const PresenceButton({
-    // required this.profileId,
     super.key
   });
 
   void _onButtonTap(BuildContext context) {
-    // TimerSettingsHistoryRoute(profileId: profileId).push(context);
     const PresenceRoute().push(context);
     context.hapticsTap();
   }

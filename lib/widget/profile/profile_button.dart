@@ -3,6 +3,7 @@ import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
+import 'package:dhyana/widget/util/app_cached_network_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_indicator.dart';
 import 'package:dhyana/widget/util/signed_in.dart';
@@ -35,9 +36,8 @@ class ProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SignedIn(
-      yes: (context, profileId) {
-        return buildSignedIn(context, profileId);
-      },
+      yes: (context, profileId) =>
+        buildSignedIn(context, profileId),      
       no: buildSignedOut(context),
     );
   }
@@ -104,15 +104,15 @@ class ProfileButton extends StatelessWidget {
     return Stack(
       children: <Widget>[
         DecoratedBox(
-          position: DecorationPosition.foreground,
+          position: .foreground,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
+            shape: .circle,
             border: Border.all(
               color: Colors.black,
               width: 3.0,
             ),
           ),
-          child: ProfileImage.fromProfile(profile, size: 40)
+          child: ProfileImage(profile: profile),
         ),
         Positioned.fill(
           child: Material(

@@ -1,16 +1,14 @@
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/gap.dart';
-import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 
-/*
-  CustomAppBar is a custom AppBar that allows for a custom leading widget,
-  title text, and trailing widgets.
-  Intended height of the AppBar is 56 (kToolbarHeight).
-  Padding for the widgets is 8 top and bottom.
-  Padding for the AppBar is 16 left and right.
-  Leading and trailing widget height is constrained to a height of 40.
- */
+
+///  CustomAppBar is a custom AppBar that allows for a custom leading widget,
+///  title text, and trailing widgets.
+///  Intended height of the AppBar is 56 (kToolbarHeight).
+///  Padding for the widgets is 8 top and bottom.
+///  Padding for the AppBar is 16 left and right.
+///  Leading and trailing widget height is constrained to a height of 40.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   static const double widgetHeight = kToolbarHeight - 16.0;
@@ -46,11 +44,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: trailing.map((w) => ConstrainedBox(
-              constraints: const BoxConstraints.tightFor(width: widgetHeight),
-              child: w,
-            )).toList().intersperse(Gap.small()),
-          ),          
+            children: trailing,
+          ),
         ),
       ),
     );

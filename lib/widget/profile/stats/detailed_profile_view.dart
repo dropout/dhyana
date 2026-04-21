@@ -38,7 +38,7 @@ class DetailedProfileView extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(DesignSpec.paddingXs),
-                    child: ProfileImage.fromProfile(profile, size: 48),
+                    child: ProfileImage(profile: profile, size: 48),
                   ),
                 ),
                 Gap.medium(),

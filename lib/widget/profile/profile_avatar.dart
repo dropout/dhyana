@@ -33,7 +33,7 @@ class ProfileAvatar extends StatelessWidget {
                 width: 4.0,
               ),
             ),
-            child: ProfileImage.fromProfile(profile),
+            child: ProfileImage(profile: profile),
           ),
         ),
         const SizedBox(height: DesignSpec.spacingMd),
