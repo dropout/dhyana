@@ -54,6 +54,7 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
         widget.onModeChanged(newMode);
       },
       child: FlipWidget<SessionType>(
+        flipDuration: Durations.medium2,
         flipType: .spinFlip,
         flipCurve: FlipWidget.bounceFastFlip,
         itemStream: _modeStreamController.stream,
