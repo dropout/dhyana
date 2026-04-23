@@ -44,6 +44,7 @@ class ChantingSettingsView extends StatelessWidget {
         ),
       ),
     );
+    context.hapticsTap();
   }
 
   void _onChantSelected(BuildContext context, Chant chant) {
@@ -78,7 +79,9 @@ class ChantingSettingsView extends StatelessWidget {
           gapLength: profileSettings.chantingGapLength,
         ),
       ).push(context);
+      context.hapticsTap();
     }
+    
   }
 
   @override

@@ -55,16 +55,19 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     } else {
       context.read<ChantingCubit>().play();
     }
+    context.hapticsTap();
   }
 
   /// Handles seek action by seeking the chant to the specified position.
   void _onNextPressed(BuildContext context) {
     context.read<ChantingCubit>().next();
+    context.hapticsTap();
   }
 
   /// Handles previous button press by skipping to the previous chant in the playlist.
   void _onPreviousPressed(BuildContext context) {
     context.read<ChantingCubit>().prev();
+    context.hapticsTap();
   }
 
   /// Handles playlist button press by opening the playlist bottom sheet.
@@ -85,6 +88,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
         ),
       ),
     );
+    context.hapticsTap();
   }
 
   @override
