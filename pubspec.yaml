@@ -43,6 +43,7 @@ dependencies:
   flutter_shaders: ^0.1.2
   flip_board: ^1.0.0
   blurhash_dart: ^1.1.0
+  carousel_slider: ^5.1.2
 
   # Additional functionalities
   audioplayers: ^6.0.0
