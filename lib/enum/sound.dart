@@ -11,9 +11,9 @@ extension ImageResourceUrl on Sound {
   String get imageResourcePath {
     switch (this) {
       case Sound.none:
-        return 'assets/images/00.png';
+        return 'assets/images/no_sound.jpg';
       case Sound.smallBell:
-        return 'assets/images/01.png';
+        return 'assets/images/small_bell.jpg';
     }
   }
 }

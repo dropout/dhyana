@@ -11,7 +11,7 @@ import 'sound_input_view.dart';
 import 'sound_input_button.dart';
 
 /// A widget that allows users to select a starting sound
-/// or an ending sound for a timer.
+/// or an ending sound for the timer feature.
 class SoundInput extends StatelessWidget {
 
   /// Label used for input view title.

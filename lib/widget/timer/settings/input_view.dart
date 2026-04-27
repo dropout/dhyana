@@ -30,7 +30,6 @@ class InputView extends StatelessWidget {
           ),
           child: SafeArea(
             minimum: const EdgeInsets.only(
-              top: DesignSpec.paddingLg,
               bottom: DesignSpec.padding3Xl,
             ),
             child: Column(              

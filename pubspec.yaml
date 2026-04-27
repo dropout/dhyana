@@ -44,6 +44,7 @@ dependencies:
   flip_board: ^1.0.0
   blurhash_dart: ^1.1.0
   carousel_slider: ^5.1.2
+  smooth_page_indicator: ^2.0.1
 
   # Additional functionalities
   audioplayers: ^6.0.0

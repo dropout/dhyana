@@ -5,7 +5,6 @@ import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/timer_audio_handler.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/init/services.dart';
-import 'package:dhyana/widget/timer/settings/sound_input_page.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +67,7 @@ void main() {
         )
       );
 
-      expect(find.byType(SoundInputPage), findsOneWidget);
+      expect(find.byType(SoundInputCard), findsOneWidget);
       expect(find.byType(SoundInputPlayButton), findsOneWidget);
       expect(find.text('Nincs hang'), findsOneWidget);
       expect(find.byType(SoundInputPlayButton), findsOneWidget);

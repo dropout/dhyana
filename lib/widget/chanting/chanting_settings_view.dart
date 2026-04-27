@@ -56,10 +56,8 @@ class ChantingSettingsView extends StatelessWidget {
     int oldIndex,
     int newIndex,
   ) {
-    context.read<ChantingSettingsCubit>().reorderSelectedChants(
-      oldIndex,
-      newIndex,
-    );
+    context.read<ChantingSettingsCubit>()
+      .reorderSelectedChants(oldIndex,newIndex);
   }
 
   void _onChantRemoved(BuildContext context, Chant chant, int index) {
