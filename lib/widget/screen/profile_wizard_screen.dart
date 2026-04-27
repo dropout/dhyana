@@ -57,13 +57,18 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
           setState(() {
             formProcessingState = LoadingState.loaded;
           });
+          context.services.hapticsService.success();
         },
         onError: (e, stack) {
           setState(() {
             formProcessingState = LoadingState.idle;
           });
+          context.services.hapticsService.error();
         },
       );
+      context.services.hapticsService.tap();
+    } else {
+      context.services.hapticsService.error();
     }
   }
 

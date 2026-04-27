@@ -5,6 +5,7 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
 import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -19,11 +20,11 @@ class ProfileEditScreen extends StatefulWidget {
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen>
-  with DefaultScreenSetupHelpersMixin {
-
+    with DefaultScreenSetupHelpersMixin {
+  
   LoadingState state = LoadingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
-    GlobalKey<FormBuilderState>();
+      GlobalKey<FormBuilderState>();
 
   void _onSave(BuildContext context, Profile profile) {
     FormBuilderState? formState = formStateKey.currentState;
@@ -32,22 +33,28 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
         state = LoadingState.loading;
       });
       Map<String, dynamic>? values = formState.value;
-      BlocProvider.of<ProfileCubit>(context).updateProfile(
+      context.read<ProfileCubit>().updateProfile(
         profile: profile,
         formData: values,
         onComplete: (profile) {
           setState(() {
             state = LoadingState.loaded;
           });
+          context.services.hapticsService.success();
         },
         onError: (e, stack) {
           setState(() {
             state = LoadingState.idle;
           });
+          context.services.hapticsService.error();
         },
       );
-    }
+      context.services.hapticsService.tap();
+    } else {
+      context.services.hapticsService.error();
+    }    
   }
+
   void _onFormChanged(BuildContext context) {
     setState(() {
       state = LoadingState.idle;
@@ -58,7 +65,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
-        switch(state) {
+        switch (state) {
           case ProfileLoadingState():
             return buildScaffolding(
               context,
@@ -66,22 +73,18 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                 title: AppLocalizations.of(context).editProfile,
                 enableScrolling: false,
                 enableScaffolding: false,
-                slivers: [
-                  buildLoadingSliver(context),
-                ],
+                slivers: [buildLoadingSliver(context)],
               ),
             );
           case ProfileErrorState():
             return buildScaffolding(
-                context,
-                DefaultScreenSetup(
-                  title: AppLocalizations.of(context).editProfile,
-                  enableScrolling: false,
-                  enableScaffolding: false,
-                  slivers: [
-                    buildErrorSliver(context),
-                  ],
-                ),
+              context,
+              DefaultScreenSetup(
+                title: AppLocalizations.of(context).editProfile,
+                enableScrolling: false,
+                enableScaffolding: false,
+                slivers: [buildErrorSliver(context)],
+              ),
             );
           case ProfileLoadedState():
             return buildScaffolding(
@@ -112,12 +115,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                 top: false,
                 child: Align(
                   alignment: const Alignment(0.0, 1.0),
-                  child: buildOverlayActionButton(
-                    context,
-                    state.profile
-                  ),
+                  child: buildOverlayActionButton(context, state.profile),
                 ),
-              )
+              ),
             );
           default:
             return DefaultScreenSetup(
@@ -127,27 +127,29 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
         }
       },
     );
-
   }
 
   Widget buildScaffolding(
     BuildContext context,
-    Widget contentLayer,
-    {Widget? actionButtonLayer}
-  ) {
+    Widget contentLayer, {
+    Widget? actionButtonLayer,
+  }) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         clipBehavior: Clip.none,
         children: [
           contentLayer,
-          actionButtonLayer ?? Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingXl),
-              child: actionButtonLayer,
-            ),
-          ),
+          actionButtonLayer ??
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: DesignSpec.paddingXl,
+                  ),
+                  child: actionButtonLayer,
+                ),
+              ),
         ],
       ),
     );
@@ -157,24 +159,31 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
     switch (state) {
       case LoadingState.idle:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
       case LoadingState.loading:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonSaving.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonSaving.toUpperCase(),
         );
       case LoadingState.loaded:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
       case LoadingState.error:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
     }
   }
-
 }

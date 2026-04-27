@@ -11,7 +11,6 @@ import 'duration_input_button.dart';
 /// A widget that allows users to select a duration for a timer.
 /// By default, it provides options for 1 to 108 minutes.
 class DurationInput extends StatelessWidget {
-
   /// Label used for input view title.
   final String label;
 
@@ -34,11 +33,12 @@ class DurationInput extends StatelessWidget {
     required this.overlayService,
     this.availableValues = defaultMinutesSelectorValues,
     this.onChange,
-    super.key
+    super.key,
   });
 
   void _onSelected(BuildContext context, Duration duration) {
     onChange?.call(duration);
+    context.hapticsTap();
     context.pop();
   }
 
@@ -50,26 +50,26 @@ class DurationInput extends StatelessWidget {
         initialValue: value,
         availableValues: availableValues,
         onSelect: (Duration duration) => _onSelected(context, duration),
-      )
+      ),
     );
     context.hapticsTap();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return DurationInputButton(
       key: Key('timer_duration_input_button'),
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(DesignSpec.paddingXl),
-      child: Text(value.inMinutes.toString(),
+      child: Text(
+        value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayLarge!.copyWith(
           color: AppColors.backgroundPaperLight,
           fontWeight: FontWeight.w900,
           height: 1.0,
-        )
+        ),
       ),
     );
   }
-  
 }

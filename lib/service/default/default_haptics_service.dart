@@ -5,12 +5,15 @@ import '../haptics_service.dart';
 class DefaultHapticsService implements HapticsService {
 
   @override
-  void tap() {
-    Gaimon.medium();
-  }
+  void tap() => Gaimon.heavy();
+  
+  @override
+  void select() => Gaimon.selection();
 
   @override
-  void select() {
-    Gaimon.selection();
-  }
+  void error() => Gaimon.error();
+
+  @override
+  void success() => Gaimon.success();
+  
 }
