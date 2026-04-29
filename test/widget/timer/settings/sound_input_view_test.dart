@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/audio/timer_audio_handler.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/widget/timer/settings/sound_input_play_button.dart';
@@ -51,8 +50,6 @@ void main() {
 
       when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
         .thenAnswer((_) => Future.value(null));
-      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
-        .thenAnswer((_) => Future.value(null));
       when(() => mockAudioHandler.playbackState)
         .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
@@ -82,8 +79,6 @@ void main() {
       Sound changedValue = Sound.none;
 
       when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
-        .thenAnswer((_) => Future.value(null));
-      when(() => mockAudioHandler.customAction(TimerHandlerCustomAction.release.name, any()))
         .thenAnswer((_) => Future.value(null));
       when(() => mockAudioHandler.playbackState)
         .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());

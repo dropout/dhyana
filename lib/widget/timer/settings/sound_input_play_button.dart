@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 /// A button that plays the given sound when pressed, 
@@ -24,8 +25,8 @@ class SoundInputPlayButton extends StatefulWidget {
   State<SoundInputPlayButton> createState() => SoundInputPlayButtonState();
 }
 
-class SoundInputPlayButtonState extends State<SoundInputPlayButton> {
-  
+class SoundInputPlayButtonState extends State<SoundInputPlayButton> {  
+
   bool isPlaying = false;
   late final StreamSubscription<bool> _isPlayingSubscription;
   
@@ -42,23 +43,18 @@ class SoundInputPlayButtonState extends State<SoundInputPlayButton> {
 
   @override
   Widget build(BuildContext context) {
+    
     if (widget.sound == Sound.none) {
-      return IconButton(
-        key: const Key('sound_input_play_button_none'),
-        icon: const Icon(
-          size: 48,
-          Icons.play_circle_fill_rounded,
-        ),
-        onPressed: null,
-      );
+      return const SizedBox.shrink();
     }
 
     if (isPlaying) {
       return IconButton(
         key: const Key('sound_input_play_button_stop'),
         icon: const Icon(
-          size: 48,
-          Icons.stop_circle_rounded
+          Icons.stop_circle_rounded,
+          size: 32,
+          color: AppColors.backgroundPaperLight,
         ),
         onPressed: () {
           widget.audioService.stop();
@@ -69,7 +65,8 @@ class SoundInputPlayButtonState extends State<SoundInputPlayButton> {
         key: const Key('sound_input_play_button_play'),
         icon: const Icon(
           Icons.play_circle_fill_rounded,
-          size: 48,
+          size: 32,
+          color: AppColors.backgroundPaperLight,
         ),
         onPressed: () {
           widget.audioService.playSound(widget.sound);

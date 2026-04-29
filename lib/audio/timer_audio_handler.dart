@@ -1,22 +1,20 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
-enum TimerHandlerCustomAction { setup, playSound, updatePosition, release }
+/// Enum representing custom actions that the [TimerAudioHandler] can handle.
+enum TimerHandlerCustomAction { start, playSound }
 
 /// Custom [AudioHandler] that manages audio for the timer session, including
 /// maintaining an active media session for background execution and lock screen
 /// integration, as well as playing discrete sounds for timer cues.
-
 /// It also servers as a source of truth for the timer.
 class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
-  
   static const handlerId = 'TimerAudioHandler';
-  static const tickInterval = Duration(milliseconds: 250);
 
   /// This player is used to maintain an active media session with the OS,
   /// which is necessary for background execution and lock screen to work.
@@ -25,34 +23,24 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
   /// This player is used for playing discrete sounds (e.g. bell sounds) without
   /// affecting the OS media session, which is necessary to avoid unintended
   /// side effects like pausing music playback when a bell sound is played.
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  final AudioPlayer _soundPlayer = AudioPlayer();
 
-  StreamSubscription<PlayerState>? _playerStateSubscription;
-  StreamSubscription<Duration>? _playerPositionSubscription;
+  StreamSubscription<PlayerState>? _bgPlayerStateSub;
+  StreamSubscription<Duration>? _bgPlayerPositionSub;
+
+  DateTime? _lastPositionUpdateTime;
+  Duration _sessionDuration = Duration.zero;
 
   TimerAudioHandler() {
     // Configure background player for the timer session.
-    _backgroundPlayer.positionUpdater = TimerPositionUpdater(
-      interval: tickInterval,
-      getPosition: _backgroundPlayer.getCurrentPosition,
+    _backgroundPlayer.setLoopMode(LoopMode.one);
+    _bgPlayerStateSub = _backgroundPlayer.playerStateStream.listen(
+      _onBgPlayerStateChanged,
     );
-    _backgroundPlayer.setPlayerMode(.mediaPlayer);
-    _backgroundPlayer.setReleaseMode(.loop);
 
-    _playerStateSubscription = _backgroundPlayer.onPlayerStateChanged
-      .listen(_onPlayerStateChanged);
-
-    _playerPositionSubscription = _backgroundPlayer.onPositionChanged
-      .listen((p) => playbackState.add(
-        playbackState.value.copyWith(updatePosition: p))
-      );
-
-
-    // Configure audio player for discrete sounds.
-    // Keep .mediaPlayer mode so that on android we will also have an o
-    // oncomplete event
-    _audioPlayer.setPlayerMode(.mediaPlayer);
-    _audioPlayer.setReleaseMode(.stop);
+    _bgPlayerPositionSub = _backgroundPlayer.positionStream.listen(
+      _onPositionChanged,
+    );
   }
 
   // TODO: Revisit error handling in this class.
@@ -61,7 +49,7 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
     String name, [
     Map<String, dynamic>? extras,
   ]) async {
-    // Parse the custom into corresponding enum value
+    // Parse the custom action string into corresponding enum value
     final action = TimerHandlerCustomAction.values.firstWhere(
       (e) => e.name == name,
       orElse: () => throw UnimplementedError('Unknown custom action: $name'),
@@ -69,13 +57,13 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
 
     // Handle the custom action based on the parsed enum value
     switch (action) {
-      case TimerHandlerCustomAction.setup:
+      case TimerHandlerCustomAction.start:
         try {
           final timerSettings = TimerSettings.fromJson(extras!);
-          return _setupSession(timerSettings);
+          return _start(timerSettings);
         } catch (e) {
           throw ArgumentError(
-            'Invalid timer settings for setup action: $extras',
+            'Invalid timer settings for start action: $extras',
           );
         }
       case TimerHandlerCustomAction.playSound:
@@ -84,46 +72,35 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
           final sound = Sound.values.firstWhere(
             (s) => s.name == soundValue,
             orElse: () =>
-              throw ArgumentError('Unknown sound value: $soundValue'),
+                throw ArgumentError('Unknown sound value: $soundValue'),
           );
           return _playSound(sound);
         } catch (e) {
           throw ArgumentError('Invalid sound for playSound action: $extras');
         }
-      case TimerHandlerCustomAction.updatePosition:
-        try {
-          final positionInMilliseconds =
-            extras!['positionInMilliseconds'] as int;
-          return _updateTimerPosition(
-            Duration(milliseconds: positionInMilliseconds),
-          );
-        } catch (e) {
-          throw ArgumentError(
-            'Invalid position for updatePosition action: $extras',
-          );
-        }
-      case TimerHandlerCustomAction.release:
-        mediaItem.add(null);
-        playbackState.add(
-          PlaybackState(
-            controls: [],
-            systemActions: const {},
-            androidCompactActionIndices: const [],
-          ),
-        );
-        // Only release the background player, which is responsible 
-        // for maintaining the OS media session.
-        // Do not release the audio player, which is responsible for playing discrete
-        // sounds, so that when the route changes to show a completed session
-        // the ending sound can still play without being cut off by the audio player.
-        _backgroundPlayer.release();
-        return;
+      // case TimerHandlerCustomAction.release:
+      //   mediaItem.add(null);
+      //   playbackState.add(
+      //     PlaybackState(
+      //       controls: [],
+      //       systemActions: const {},
+      //       androidCompactActionIndices: const [],
+      //     ),
+      //   );
+      //   // Only release the background player, which is responsible
+      //   // for maintaining the OS media session.
+      //   // Do not release the audio player, which is responsible for playing discrete
+      //   // sounds, so that when the route changes to show a completed session
+      //   // the ending sound can still play without being cut off by the audio player.
+      //   await _backgroundPlayer.stop();
+      //   return;
     }
   }
 
   @override
   Future<void> play() async {
-    _backgroundPlayer.resume();
+    _lastPositionUpdateTime = DateTime.now();
+    _backgroundPlayer.play();
     playbackState.add(
       playbackState.value.copyWith(
         playing: true,
@@ -136,29 +113,32 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
 
   @override
   Future<void> pause() async {
-    _backgroundPlayer.pause();
+    await _backgroundPlayer.pause();
     playbackState.add(
       playbackState.value.copyWith(
         playing: false,
         processingState: AudioProcessingState.ready,
-        controls: [],
       ),
     );
   }
 
   @override
-  stop() async {
-    _backgroundPlayer.stop();
+  stop() async {    
+    await _backgroundPlayer.stop();
     playbackState.add(
       playbackState.value.copyWith(
         playing: false,
         processingState: AudioProcessingState.idle,
-        controls: [],
       ),
     );
   }
 
-  Future<void> _setupSession(TimerSettings timerSettings) async {
+  Future<void> _start(TimerSettings timerSettings) async {
+    // Set the source for background player to a silent audio asset,
+    // which will keep the media session active
+    await _backgroundPlayer.setAsset(Sound.none.audioResourcePath);
+
+    // Configure lock screen media info
     mediaItem.add(
       MediaItem(
         id: DateTime.now().toIso8601String(),
@@ -171,51 +151,92 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
         ),
       ),
     );
-    await _backgroundPlayer.setSource(
-      AssetSource(Sound.none.audioResourcePath),
-    );
-  }
 
-  /// Plays a discrete bell sound using the low-latency player.
-  /// Does not affect the OS media session.
-  Future<void> _playSound(Sound sound) async {
-    if (sound == Sound.none) return;
-
-    if (_audioPlayer.state == PlayerState.playing) {
-      await _audioPlayer.stop();
-    }
-
-    await _audioPlayer.play(AssetSource(sound.audioResourcePath));
-    await _audioPlayer.onPlayerComplete.first;
-  }
-
-  Future<void> _updateTimerPosition(Duration position) async {
-    playbackState.add(playbackState.value.copyWith(updatePosition: position));
-    logger.t(
-      'Updated timer position: $position Duration: ${mediaItem.value?.duration}',
-    );
-  }
-
-  void _onPlayerStateChanged(PlayerState state) {
-    final isNowPlaying = (state == PlayerState.playing);
+    _lastPositionUpdateTime = DateTime.now();
+    _sessionDuration = Duration.zero;
+    play();
     playbackState.add(
       playbackState.value.copyWith(
-        controls: [isNowPlaying ? MediaControl.pause : MediaControl.play],
+        playing: true,
+        processingState: AudioProcessingState.ready,
+        controls: [],
         systemActions: const {},
-        processingState: _toProcessingState(state),
-        playing: isNowPlaying,
       ),
     );
   }
 
-  AudioProcessingState _toProcessingState(PlayerState state) => switch (state) {
-    PlayerState.playing => AudioProcessingState.ready,
-    PlayerState.paused => AudioProcessingState.ready,
-    PlayerState.stopped => AudioProcessingState.idle,
-    PlayerState.completed => AudioProcessingState.completed,
-    PlayerState.disposed => AudioProcessingState.idle,
-  };
+  /// Plays a discrete bell sounds using a dedicated audio player.
+  /// Does not affect the OS media session.
+  Future<void> _playSound(Sound sound) async {
+    if (sound == Sound.none) return;
 
+    if (_soundPlayer.playing) {
+      await _soundPlayer.stop();
+    }
+
+    await _soundPlayer.setAsset(sound.audioResourcePath);
+    if (_backgroundPlayer.playing == false) {
+      playbackState.add(
+        playbackState.value.copyWith(
+          processingState: AudioProcessingState.ready,
+          playing: true,
+        ),
+      );
+    }
+    await _soundPlayer.play();
+    if (_backgroundPlayer.playing == false) {
+      playbackState.add(
+        playbackState.value.copyWith(
+          processingState: AudioProcessingState.idle,
+          playing: false,
+        ),
+      );
+    }
+  }
+
+  void _onBgPlayerStateChanged(PlayerState state) {
+    logger.t('Background player state changed: $state');
+    // Ignore .completed state from the background player,
+    // because it's looping and will emit .completed after each loop,
+    // which would cause side effects if we treated it as a real completed state.
+    if (state.processingState == ProcessingState.completed) return;
+
+    playbackState.add(
+      playbackState.value.copyWith(
+        systemActions: const {},
+        processingState: _toProcessingState(state),
+        playing: state.playing,
+      ),
+    );
+  }
+
+  void _onPositionChanged(Duration position) {
+    final n = DateTime.now();
+    if (_lastPositionUpdateTime == null) {
+      _lastPositionUpdateTime = n;
+    } else {
+      final diff = n.difference(_lastPositionUpdateTime!);
+      _sessionDuration += diff;
+      playbackState.add(
+        playbackState.value.copyWith(updatePosition: _sessionDuration),
+      );
+      _lastPositionUpdateTime = n;
+    }
+    logger.t('Session duration: $_sessionDuration');
+  }
+
+  AudioProcessingState _toProcessingState(PlayerState state) => switch (state) {
+    PlayerState(processingState: ProcessingState.idle) =>
+      AudioProcessingState.idle,
+    PlayerState(processingState: ProcessingState.loading) =>
+      AudioProcessingState.loading,
+    PlayerState(processingState: ProcessingState.buffering) =>
+      AudioProcessingState.loading,
+    PlayerState(processingState: ProcessingState.ready) =>
+      AudioProcessingState.ready,
+    PlayerState(processingState: ProcessingState.completed) =>
+      AudioProcessingState.completed,
+  };
 
   @override
   Future<void> click([MediaButton button = MediaButton.media]) async {
@@ -226,12 +247,14 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
   }
 
   void close() {
-    _playerStateSubscription?.cancel();
-    _playerStateSubscription = null;
-    _playerPositionSubscription?.cancel();
-    _playerPositionSubscription = null;
+    _bgPlayerStateSub?.cancel();
+    _bgPlayerStateSub = null;
+    _bgPlayerPositionSub?.cancel();
+    _bgPlayerPositionSub = null;
+    _lastPositionUpdateTime = null;
+
     _backgroundPlayer.dispose();
-    _audioPlayer.dispose();
+    _soundPlayer.dispose();
   }
   
 }

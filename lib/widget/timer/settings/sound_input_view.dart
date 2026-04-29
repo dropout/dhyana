@@ -28,61 +28,59 @@ class SoundInputCard extends StatelessWidget {
       onTap: () {        
         audioService.playSound(sound);
       },
-      child: SizedBox.expand(
-        child: Stack(
-          children: [       
-            DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.lerp(
-                    AppColors.backgroundPaperLight,
-                    Colors.white,
-                    0.33,
-                  )!,
-                  width: 1.0,
-                ),
-                boxShadow: DesignSpec.defaultBoxShadow,
-                borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
-                image: DecorationImage(
-                  image: AssetImage(sound.imageResourcePath),
-                  fit: BoxFit.cover,
-                ),
+      child: Stack(
+        children: [       
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.lerp(
+                  AppColors.backgroundPaperLight,
+                  Colors.white,
+                  0.33,
+                )!,
+                width: 1.0,
               ),
-              child: Align(
-                alignment: .bottomCenter,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: DesignSpec.paddingSm,
+              boxShadow: DesignSpec.defaultBoxShadow,
+              borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+              image: DecorationImage(
+                image: AssetImage(sound.imageResourcePath),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Align(
+              alignment: .bottomCenter,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  vertical: DesignSpec.paddingSm,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.5),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(DesignSpec.borderRadiusMd),
+                    bottomRight: Radius.circular(DesignSpec.borderRadiusMd),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.5),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(DesignSpec.borderRadiusMd),
-                      bottomRight: Radius.circular(DesignSpec.borderRadiusMd),
-                    ),
-                  ),
-                  child: Text(
-                    getLocalizedSoundName(sound, context.l10n),
-                    textAlign: TextAlign.center,
-                    style: context.theme.textTheme.labelMedium!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
+                ),
+                child: Text(
+                  getLocalizedSoundName(sound, context.l10n),
+                  textAlign: TextAlign.center,
+                  style: context.theme.textTheme.labelMedium!.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
             ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: SoundInputPlayButton(              
-                sound: sound,
-                audioService: audioService,
-              ),
+          ),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: SoundInputPlayButton(              
+              sound: sound,
+              audioService: audioService,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -152,7 +150,7 @@ class SoundInputViewState extends State<SoundInputView>
       crossAxisAlignment: .stretch,
       children: [
         SizedBox(
-          height: 128,
+          height: 200,
           child: CarouselSlider(                        
             options: CarouselOptions(
               aspectRatio: 1.6,
@@ -207,7 +205,6 @@ class SoundInputViewState extends State<SoundInputView>
   @override
   void dispose() {
     tabController.dispose();
-    audioService.release();
     audioService.stop();
     super.dispose();
   }

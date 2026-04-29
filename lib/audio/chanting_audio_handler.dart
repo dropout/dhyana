@@ -1,16 +1,15 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 
-enum ChantingHandlerCustomAction { loadChant, release }
+enum ChantingHandlerCustomAction { loadChant }
 
 /// Bridges the OS media session with audio playback.
 /// The [_chantPlayer] drives the OS lock screen / notification controls via
 /// the [playbackState] and [mediaItem] subjects inherited from
 /// [BaseAudioHandler].
 class ChantingAudioHandler extends BaseAudioHandler {
-  
   static const handlerId = 'ChantingAudioHandler';
 
   final AudioPlayer _chantPlayer = AudioPlayer();
@@ -19,20 +18,12 @@ class ChantingAudioHandler extends BaseAudioHandler {
   StreamSubscription<Duration>? _chantPositionSubscription;
 
   ChantingAudioHandler() {
-    _chantPlayer.setReleaseMode(ReleaseMode.stop);
-    _chantPlayer.positionUpdater = TimerPositionUpdater(
-      interval: const Duration(milliseconds: 250),
-      getPosition: _chantPlayer.getCurrentPosition,
+    _chantStateSubscription = _chantPlayer.playerStateStream.distinct().listen(
+      _onChantPlayerStateChanged,
     );
-
-    _chantStateSubscription = _chantPlayer.onPlayerStateChanged
-      .distinct()
-      .listen(_onChantPlayerStateChanged);
-
-    _chantPositionSubscription = _chantPlayer.onPositionChanged
-      .listen((p) {
-        playbackState.add(playbackState.value.copyWith(updatePosition: p));
-      });
+    _chantPositionSubscription = _chantPlayer.positionStream.listen((p) {
+      playbackState.add(playbackState.value.copyWith(updatePosition: p));
+    });
   }
 
   @override
@@ -53,24 +44,14 @@ class ChantingAudioHandler extends BaseAudioHandler {
           return loadChant(url, title: title);
         } catch (e) {
           throw ArgumentError('Invalid extras for loadChant action: $extras');
-        }
-      case ChantingHandlerCustomAction.release:
-        mediaItem.add(null);
-        playbackState.add(PlaybackState(
-          controls: [],
-          systemActions: const {},
-          androidCompactActionIndices: const [],
-        ));
-        return _chantPlayer.release();
+        }     
     }
-
   }
 
   /// Loads a chant from [url] and updates the OS media session [mediaItem]
   /// with [title] so the lock screen shows the chant name.
   Future<Duration?> loadChant(String url, {String? title}) async {
-    await _chantPlayer.setSourceUrl(url);
-    final duration = await _chantPlayer.getDuration();
+    final duration = await _chantPlayer.setUrl(url);
     mediaItem.add(
       MediaItem(
         id: url,
@@ -87,20 +68,18 @@ class ChantingAudioHandler extends BaseAudioHandler {
   }
 
   @override
-  Future<void> play() =>
-    _chantPlayer.resume();
-  
-  @override
-  Future<void> pause() => 
-    _chantPlayer.pause();
+  Future<void> play() => _chantPlayer.play();
 
   @override
-  Future<void> seek(Duration position) => 
-    _chantPlayer.seek(position);
-  
+  Future<void> pause() => _chantPlayer.pause();
+
+  @override
+  Future<void> seek(Duration position) => _chantPlayer.seek(position);
+
   @override
   Future<void> stop() async {
     await _chantPlayer.stop();
+    mediaItem.add(null);
     playbackState.add(
       playbackState.value.copyWith(
         playing: false,
@@ -109,25 +88,29 @@ class ChantingAudioHandler extends BaseAudioHandler {
       ),
     );
   }
-  
+
   void _onChantPlayerStateChanged(PlayerState state) {
-    final isNowPlaying = (state == PlayerState.playing);
     playbackState.add(
       playbackState.value.copyWith(
-        controls: [isNowPlaying ? MediaControl.pause : MediaControl.play],
+        controls: [state.playing ? MediaControl.pause : MediaControl.play],
         systemActions: const {},
         processingState: _toProcessingState(state),
-        playing: isNowPlaying,
+        playing: state.playing,
       ),
     );
   }
 
   AudioProcessingState _toProcessingState(PlayerState state) => switch (state) {
-    PlayerState.playing => AudioProcessingState.ready,
-    PlayerState.paused => AudioProcessingState.ready,
-    PlayerState.stopped => AudioProcessingState.idle,
-    PlayerState.completed => AudioProcessingState.completed,
-    PlayerState.disposed => AudioProcessingState.idle,
+    PlayerState(processingState: ProcessingState.idle) =>
+      AudioProcessingState.idle,
+    PlayerState(processingState: ProcessingState.loading) =>
+      AudioProcessingState.loading,
+    PlayerState(processingState: ProcessingState.buffering) =>
+      AudioProcessingState.buffering,
+    PlayerState(processingState: ProcessingState.ready) =>
+      AudioProcessingState.ready,
+    PlayerState(processingState: ProcessingState.completed) =>
+      AudioProcessingState.completed,
   };
 
   @override
@@ -143,5 +126,5 @@ class ChantingAudioHandler extends BaseAudioHandler {
     _chantPositionSubscription?.cancel();
     _chantPlayer.dispose();
   }
-
+  
 }

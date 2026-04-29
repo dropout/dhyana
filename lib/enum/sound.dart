@@ -22,9 +22,9 @@ extension SoundResourceUrl on Sound {
   String get audioResourcePath {
     switch (this) {
       case Sound.none:
-        return 'sounds/no_sound.mp3';
+        return 'assets/sounds/no_sound.mp3';
       case Sound.smallBell:
-        return 'sounds/small_bell.mp3';
+        return 'assets/sounds/small_bell.mp3';
     }
   }
 }

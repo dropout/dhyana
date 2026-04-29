@@ -46,8 +46,7 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
 
   Future<void> start() async {
     try {
-      await audioService.setupSession(state.timerSettings);
-      final startFuture = audioService.start();
+      final startFuture = audioService.start(state.timerSettings);
       eventScheduler.reset();
 
       TimerStage initialStage = state.timerSettings.hasWarmupTime
@@ -171,7 +170,7 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
     _playbackStateSub?.cancel();
     _playbackStateSub = null;
     eventScheduler.dispose();
-    audioService.release();
+    audioService.stop();
 
     return super.close();
   }

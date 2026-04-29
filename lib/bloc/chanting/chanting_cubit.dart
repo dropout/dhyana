@@ -79,7 +79,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       logger.t('Loading chant: ${chant.name}');
       emit(state.copyWith(isLoading: true));
 
-      await audioService.release();
+      await audioService.stop();
 
       // load lyrics
       final lyricsUrl = await resourceResolver.getChantLyricsUrl(chant.id);
@@ -287,7 +287,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     _gapTimerService?.close();
     _positionSubscription?.cancel();
     _playbackStateSubscription?.cancel();
-    audioService.release();
+    audioService.stop();
     return super.close();
   }
   

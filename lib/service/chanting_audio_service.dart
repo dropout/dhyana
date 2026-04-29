@@ -27,8 +27,6 @@ class ChantingAudioService {
   Future<void> pause() => _audioHandler.pause();
   Future<void> seek(Duration position) => _audioHandler.seek(position);
   Future<void> stop() => _audioHandler.stop();
-  Future<void> release() =>
-      _audioHandler.customAction(ChantingHandlerCustomAction.release.name);
 
   bool get playing =>
     _audioHandler.playbackState.value.playing;

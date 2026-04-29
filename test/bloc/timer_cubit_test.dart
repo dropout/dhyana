@@ -85,7 +85,7 @@ void main() async {
       ).thenAnswer((_) => playbackStateStreamController.stream);
 
       when(
-        () => mockAudioService.release(),
+        () => mockAudioService.stop(),
       ).thenAnswer((_) => Future.value(null));
     });
 
@@ -129,17 +129,14 @@ void main() async {
       expect(eventScheduler.isRunning, false);
       expect(eventScheduler.listenerCount, 0);
 
-      verify(() => mockAudioService.release()).called(1);
+      verify(() => mockAudioService.stop()).called(1);
     });
 
     blocTest<TimerCubit, TimerCubitState>(
       'can start a timer session when there is a warmup time',
       build: () {
         when(
-          () => mockAudioService.setupSession(defaultTimerSettings),
-        ).thenAnswer((_) => Future.value(null));
-        when(
-          () => mockAudioService.start(),
+          () => mockAudioService.start(defaultTimerSettings),
         ).thenAnswer((_) => Future.value(null));
 
         final timerCubit = TimerCubit(
@@ -174,66 +171,16 @@ void main() async {
       ],
       verify: (cubit) {
         verifyInOrder([
-          () => mockAudioService.setupSession(cubit.state.timerSettings),
-          () => mockAudioService.start(),
+          () => mockAudioService.start(cubit.state.timerSettings),
         ]);
       },
-    );
-
-    blocTest<TimerCubit, TimerCubitState>(
-      'start handles error when setupSession throws',
-      build: () {
-        when(
-          () => mockAudioService.setupSession(defaultTimerSettings),
-        ).thenThrow(Exception('setup failed'));
-
-        final timerCubit = TimerCubit(
-          timerSettings: defaultTimerSettings,
-          eventScheduler: eventScheduler,
-          audioService: mockAudioService,
-          crashlyticsService: loggingCrashlyticsService,
-        );
-        return timerCubit;
-      },
-      act: (cubit) async {
-        await withClock(Clock.fixed(fixedTime), () async {
-          await cubit.start();
-
-          expect(eventScheduler.hasListeners, true);
-          expect(eventScheduler.isRunning, false);
-          // one for timer completed
-          expect(eventScheduler.listenerCount, 1);
-        });
-      },
-      expect: () => <TimerCubitState>[
-        TimerCubitState(
-          timerSettings: defaultTimerSettings,
-          timerStatus: TimerStatus.error,
-          timerStage: TimerStage.warmup,
-          elapsedWarmupTime: Duration.zero,
-          elapsedTime: Duration.zero,
-        ),
-      ],
-      verify: (timerCubit) {
-        verify(
-          () => mockAudioService.setupSession(defaultTimerSettings),
-        ).called(1);
-        verifyNever(() => mockAudioService.start());
-
-        expect(timerCubit.state.timerStatus, TimerStatus.error);
-      },
-    );
+    );    
 
     blocTest<TimerCubit, TimerCubitState>(
       'can start a timer session when there is no warmup time',
       build: () {
         when(
-          () => mockAudioService.setupSession(
-            defaultTimerSettings.copyWith(warmup: Duration.zero),
-          ),
-        ).thenAnswer((_) => Future.value(null));
-        when(
-          () => mockAudioService.start(),
+          () => mockAudioService.start(defaultTimerSettings.copyWith(warmup: Duration.zero)),
         ).thenAnswer((_) => Future.value(null));
         when(
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
@@ -264,10 +211,7 @@ void main() async {
       ],
       verify: (timerCubit) {
         verifyInOrder([
-          () => mockAudioService.setupSession(
-            defaultTimerSettings.copyWith(warmup: Duration.zero),
-          ),
-          () => mockAudioService.start(),
+          () => mockAudioService.start(defaultTimerSettings.copyWith(warmup: Duration.zero)),
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
         ]);
       },
@@ -421,10 +365,7 @@ void main() async {
       'can measure elapsed warmup time correctly in warmup stage',
       build: () {
         when(
-          () => mockAudioService.setupSession(defaultTimerSettings),
-        ).thenAnswer((_) => Future.value(null));
-        when(
-          () => mockAudioService.start(),
+          () => mockAudioService.start(defaultTimerSettings),
         ).thenAnswer((_) => Future.value(null));
         when(
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
@@ -487,10 +428,7 @@ void main() async {
       'can measure elapsed warmup time correctly in timer stage',
       build: () {
         when(
-          () => mockAudioService.setupSession(defaultTimerSettings),
-        ).thenAnswer((_) => Future.value(null));
-        when(
-          () => mockAudioService.start(),
+          () => mockAudioService.start(defaultTimerSettings),
         ).thenAnswer((_) => Future.value(null));
         when(
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
@@ -598,10 +536,7 @@ void main() async {
       'can handle timer completed',
       build: () {
         when(
-          () => mockAudioService.setupSession(defaultTimerSettings),
-        ).thenAnswer((_) => Future.value(null));
-        when(
-          () => mockAudioService.start(),
+          () => mockAudioService.start(defaultTimerSettings),
         ).thenAnswer((_) => Future.value(null));
         when(
           () => mockAudioService.playSound(defaultTimerSettings.endingSound),

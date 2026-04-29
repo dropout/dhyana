@@ -4,7 +4,9 @@
 /// Library implementations should map their states to these internal states.
 enum AudioPlaybackState {
   idle,
+  ready,
   playing,
+  loading,
   paused,
   stopped,
   completed,
