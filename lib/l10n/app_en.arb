@@ -1,182 +1,819 @@
 {
+  "@@locale": "en",
   "minute": "Minute",
+  "@minute": {
+    "description": "Singular form of minute.",
+    "placeholders": {}
+  },
   "minutes": "Minutes",
+  "@minutes": {
+    "description": "Plural form of minute.",
+    "placeholders": {}
+  },
   "day": "Day",
+  "@day": {
+    "description": "Singular form of day.",
+    "placeholders": {}
+  },
   "days": "Days",
+  "@days": {
+    "description": "Plural form of day.",
+    "placeholders": {}
+  },
   "week": "Week",
+  "@week": {
+    "description": "Singular form of week.",
+    "placeholders": {}
+  },
   "weeks": "Weeks",
+  "@weeks": {
+    "description": "Plural form of week.",
+    "placeholders": {}
+  },
   "month": "Month",
+  "@month": {
+    "description": "Singular form of month.",
+    "placeholders": {}
+  },
   "months": "Months",
+  "@months": {
+    "description": "Plural form of month.",
+    "placeholders": {}
+  },
   "year": "Year",
+  "@year": {
+    "description": "Singular form of year.",
+    "placeholders": {}
+  },
   "years": "Years",
+  "@years": {
+    "description": "Plural form of year.",
+    "placeholders": {}
+  },
   "milestone": "Milestone",
+  "@milestone": {
+    "description": "Singular form of milestone.",
+    "placeholders": {}
+  },
   "milestones": "Milestones",
-
+  "@milestones": {
+    "description": "Plural form of milestone.",
+    "placeholders": {}
+  },
   "okay": "Okay",
+  "@okay": {
+    "description": "Confirmation button text.",
+    "placeholders": {}
+  },
   "close": "Close",
+  "@close": {
+    "description": "Close button text.",
+    "placeholders": {}
+  },
   "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text.",
+    "placeholders": {}
+  },
   "warmup": "Warmup",
-
+  "@warmup": {
+    "description": "Warmup label.",
+    "placeholders": {}
+  },
   "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text.",
+    "placeholders": {}
+  },
   "loadMore": "Load more",
+  "@loadMore": {
+    "description": "Load more button text.",
+    "placeholders": {}
+  },
   "pleaseWait": "Please wait",
+  "@pleaseWait": {
+    "description": "Please wait indicator text.",
+    "placeholders": {}
+  },
   "underMaintenanceTitle": "The application is under maintenance",
+  "@underMaintenanceTitle": {
+    "description": "Under maintenance title text.",
+    "placeholders": {}
+  },
   "underMaintenanceBody": "Please check back later.",
+  "@underMaintenanceBody": {
+    "description": "Under maintenance body text.",
+    "placeholders": {}
+  },
 
   "notAvailable": "Not available",
+  "@notAvailable": {
+    "description": "Not available text.",
+    "placeholders": {}
+  },
   "notAvailableAbbr": "N/A",
+  "@notAvailableAbbr": {
+    "description": "Not available abbreviation.",
+    "placeholders": {}
+  },
 
   "inputWarmupLabel": "Warmup",
+  "@inputWarmupLabel": {
+    "description": "Warmup input label.",
+    "placeholders": {}
+  },
   "inputStartingSoundLabel": "Starting sound",
+  "@inputStartingSoundLabel": {
+    "description": "Starting sound input label.",
+    "placeholders": {}
+  },
   "inputDurationLabel": "Duration",
+  "@inputDurationLabel": {
+    "description": "Duration input label.",
+    "placeholders": {}
+  },
   "inputEndingSoundLabel": "Ending sound",
+  "@inputEndingSoundLabel": {
+    "description": "Ending sound input label.",
+    "placeholders": {}
+  },
 
   "startTimerButtonText": "Start",
+  "@startTimerButtonText": {
+    "description": "Start timer button text.",
+    "placeholders": {}
+  },
   "sessionModeTimerLabel": "Timer",
+  "@sessionModeTimerLabel": {
+    "description": "Timer session mode label.",
+    "placeholders": {}
+  },
   "sessionModeChantingLabel": "Chanting",
+  "@sessionModeChantingLabel": {
+    "description": "Chanting session mode label.",
+    "placeholders": {}
+  },
 
   "noSound": "No sound",
+  "@noSound": {
+    "description": "No sound option text.",
+    "placeholders": {}
+  },
   "inputSoundChukpi": "Chukpi",
+  "@inputSoundChukpi": {
+    "description": "Chukpi sound option text.",
+    "placeholders": {}
+  },
+  "inputSoundVibrate": "Vibrate",
+  "@inputSoundVibrate": {
+    "description": "Vibrate sound option text.",
+    "placeholders": {}
+  },
   "inputSoundSmallBell": "Small Bell",
+  "@inputSoundSmallBell": {
+    "description": "Small Bell sound option text.",
+    "placeholders": {}
+  },
 
   "errorHeadline": "Ooops!",
+  "@errorHeadline": {
+    "description": "Error headline text.",
+    "placeholders": {}
+  },
   "errorText": "An unexpected error has occured.",
+  "@errorText": {
+    "description": "Error body text.",
+    "placeholders": {}
+  },
   "errorButtonText": "Okay",
+  "@errorButtonText": {
+    "description": "Error button text.",
+    "placeholders": {}
+  },
 
   "session": "Session",
+  "@session": {
+    "description": "Singular form of session.",
+    "placeholders": {}
+  },
   "sessions": "Sessions",
+  "@sessions": {
+    "description": "Plural form of session.",
+    "placeholders": {}
+  },
 
   "sessionResultCompleted": "Completed",
+  "@sessionResultCompleted": {
+    "description": "Session result completed status.",
+    "placeholders": {}
+  },
   "sessionResultMinutes": "{count, plural, =0{minute} =1{minute} =2{minutes} few{minutes} many{minutes} other{minutes}}",
+  "@sessionResultMinutes": {
+    "description": "Session result minutes text.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
 
   "timerFinishSessionButtonText": "Finish session",
+  "@timerFinishSessionButtonText": {
+    "description": "Finish session button text.",
+    "placeholders": {}
+  },
   "timerDiscardSessionButtonText": "Discard session",
+  "@timerDiscardSessionButtonText": {
+    "description": "Discard session button text.",
+    "placeholders": {}
+  },
 
   "loginHeadline1": "Who",
+  "@loginHeadline1": {
+    "description": "Login headline part 1.",
+    "placeholders": {}
+  },
   "loginHeadline2": "are",
+  "@loginHeadline2": {
+    "description": "Login headline part 2.",
+    "placeholders": {}
+  },
   "loginHeadline3": "you?",
+  "@loginHeadline3": {
+    "description": "Login headline part 3.",
+    "placeholders": {}
+  },
   "loginSigninGoogle": "Login with Google",
+  "@loginSigninGoogle": {
+    "description": "Login with Google button text.",
+    "placeholders": {}
+  },
   "loginSigninApple": "Login with Apple",
+  "@loginSigninApple": {
+    "description": "Login with Apple button text.",
+    "placeholders": {}
+  },
   "loginLegalPart1": "By logging in you accept the\n",
+  "@loginLegalPart1": {
+    "description": "Login legal part 1.",
+    "placeholders": {}
+  },
   "loginLegalPart2": "Terms of Use",
+  "@loginLegalPart2": {
+    "description": "Login legal part 2.",
+    "placeholders": {}
+  },
   "loginLegalPart3": " and the ",
+  "@loginLegalPart3": {
+    "description": "Login legal part 3.",
+    "placeholders": {}
+  },
   "loginLegalPart4": "Privacy statement",
-
+  "@loginLegalPart4": {
+    "description": "Login legal part 4.",
+    "placeholders": {}
+  },
   "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title.",
+    "placeholders": {}
+  },
   "sessionsHistory": "Sessions",
+  "@sessionsHistory": {
+    "description": "Sessions history screen title.",
+    "placeholders": {}
+  },
   "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit profile button text.",
+    "placeholders": {}
+  },
   "donate": "Donate",
+  "@donate": {
+    "description": "Donate button text.",
+    "placeholders": {}
+  },
   "timerSettingsHistory": "Settings history",
+  "@timerSettingsHistory": {
+    "description": "Timer settings history screen title.",
+    "placeholders": {}
+  },
   "timerSettingsHistoryApplied": "Timer settings applied.",
+  "@timerSettingsHistoryApplied": {
+    "description": "Timer settings applied message.",
+    "placeholders": {}
+  },
   "timerSettingsHistoryEmpty": "There are no timer settings\n saved in history yet.",
+  "@timerSettingsHistoryEmpty": {
+    "description": "Timer settings history empty message.",
+    "placeholders": {}
+  },
 
   "profileImageLabel": "Profile image",
+  "@profileImageLabel": {
+    "description": "Profile image input label.",
+    "placeholders": {}
+  },
   "profileFirstnameLabel": "Firstname",
+  "@profileFirstnameLabel": {
+    "description": "Profile firstname input label.",
+    "placeholders": {}
+  },
   "profileLastnameLabel": "Lastname",
+  "@profileLastnameLabel": {
+    "description": "Profile lastname input label.",
+    "placeholders": {}
+  },
   "profileLocationLabel": "City",
-
+  "@profileLocationLabel": {
+    "description": "Profile location input label.",
+    "placeholders": {}
+  },
   "profileSaveButtonIdle": "Save",
+  "@profileSaveButtonIdle": {
+    "description": "Profile save button idle state text.",
+    "placeholders": {}
+  },
   "profileSaveButtonSaving": "Saving...",
+  "@profileSaveButtonSaving": {
+    "description": "Profile save button saving state text.",
+    "placeholders": {}
+  },
   "profileSaveButtonSaved": "Saved!",
-
+  "@profileSaveButtonSaved": {
+    "description": "Profile save button saved state text.",
+    "placeholders": {}
+  },
   "profileWizardTitle": "Complete your profile!",
-
+  "@profileWizardTitle": {
+    "description": "Profile wizard title.",
+    "placeholders": {}
+  },
+  "profileWizardDescription": "Add your name and profile photo to complete the profile and unlock the full potential of the application.",
+  "@profileWizardDescription": {
+    "description": "Profile wizard description.",
+    "placeholders": {}
+  },
   "photoAccessDialogTitle": "Cannot access photos",
+  "@photoAccessDialogTitle": {
+    "description": "Photo access dialog title.",
+    "placeholders": {}
+  },
   "photoAccessDialogText": "The application doesn't have a permission to access you photos. Please go into 'Settings' and give access to the photos in order to change you profile photo.",
+  "@photoAccessDialogText": {
+    "description": "Photo access dialog text.",
+    "placeholders": {}
+  },
   "photoAccessDialogButtonText": "Okay",
-
+  "@photoAccessDialogButtonText": {
+    "description": "Photo access dialog button text.",
+    "placeholders": {}
+  },
   "imageNotSafeDialogTitle": "Unsafe image",
+  "@imageNotSafeDialogTitle": {
+    "description": "Unsafe image dialog title.",
+    "placeholders": {}
+  },
   "imageNotSafeDialogText": "The selected image may contain inappropriate content. Please choose a different image.",
+  "@imageNotSafeDialogText": {
+    "description": "Unsafe image dialog text.",
+    "placeholders": {}
+  },
   "imageNotSafeDialogButtonText": "Okay",
-
+  "@imageNotSafeDialogButtonText": {
+    "description": "Unsafe image dialog button text.",
+    "placeholders": {}
+  },
   "profileSettings": "Settings",
+  "@profileSettings": {
+    "description": "Profile settings title.",
+    "placeholders": {}
+  },
   "showTimeOnTimerSettingsScreenTitle": "Show timeframe on Timer Settings Screen",
+  "@showTimeOnTimerSettingsScreenTitle": {
+    "description": "Show timeframe on Timer Settings Screen title.",
+    "placeholders": {}
+  },
   "showTimeOnTimerSettingsScreenDescription": "Enable this option to show session start and end times on the Timer Settings screen.",
+  "@showTimeOnTimerSettingsScreenDescription": {
+    "description": "Show timeframe on Timer Settings Screen description.",
+    "placeholders": {}
+  },
   "showStatsOnFinishScreenTitle": "Show statistics on Session Finish Screen",
+  "@showStatsOnFinishScreenTitle": {
+    "description": "Show statistics on Session Finish Screen title.",
+    "placeholders": {}
+  },
   "showStatsOnFinishScreenDescription": "When enabled, your statistics updated with the finished session will be displayed on the Session Finish screen.",
+  "@showStatsOnFinishScreenDescription": {
+    "description": "Show statistics on Session Finish Screen description.",
+    "placeholders": {}
+  },
   "usePresenceFeatureTitle": "Enable Presence feature",
+  "@usePresenceFeatureTitle": {
+    "description": "Enable Presence feature title.",
+    "placeholders": {}
+  },
   "usePresenceFeatureDescription": "When enabled, user will be able to see other users who are currently practicing.",
+  "@usePresenceFeatureDescription": {
+    "description": "Enable Presence feature description.",
+    "placeholders": {}
+  },
   "chantingGapLengthTitle": "Chanting Gap length",
+  "@chantingGapLengthTitle": {
+    "description": "Chanting Gap length title.",
+    "placeholders": {}
+  },
   "chantingGapLengthDescription": "Duration of the gap between the chants.",
-
+  "@chantingGapLengthDescription": {
+    "description": "Chanting Gap length description.",
+    "placeholders": {}
+  },
   "profileStats": "Statistics",
+  "@profileStats": {
+    "description": "Profile statistics title.",
+    "placeholders": {}
+  },
   "average": "Average",
+  "@average": {
+    "description": "Average label.",
+    "placeholders": {}
+  },
   "averagePerDay": "Average per day",
+  "@averagePerDay": {
+    "description": "Average per day label.",
+    "placeholders": {}
+  },
   "averagePerWeek": "Average per week",
+  "@averagePerWeek": {
+    "description": "Average per week label.",
+    "placeholders": {}
+  },
   "averagePerMonth": "Average per month",
+  "@averagePerMonth": {
+    "description": "Average per month label.",
+    "placeholders": {}
+  },
   "averagePerYear": "Average per year",
+  "@averagePerYear": {
+    "description": "Average per year label.",
+    "placeholders": {}
+  },
   "averageAbbr": "Avg.",
-
+  "@averageAbbr": {
+    "description": "Average abbreviation.",
+    "placeholders": {}
+  },
   "statsSignedUp": "Joined",
+  "@statsSignedUp": {
+    "description": "Stats signed up date label.",
+    "placeholders": {}
+  },
   "statsFirstSession": "First session",
+  "@statsFirstSession": {
+    "description": "Stats first session date label.",
+    "placeholders": {}
+  },
   "statsLastSession": "Last session",
+  "@statsLastSession": {
+    "description": "Stats last session date label.",
+    "placeholders": {}
+  },
   "statsCurrentStreak": "Current streak",
+  "@statsCurrentStreak": {
+    "description": "Stats current streak label.",
+    "placeholders": {}
+  },
   "statsStartedAt": "Started at",
+  "@statsStartedAt": {
+    "description": "Stats started at date label.",
+    "placeholders": {}
+  },
   "statsNotyetStarted": "Not yet started",
+  "@statsNotyetStarted": {
+    "description": "Stats not yet started label.",
+    "placeholders": {}
+  },
   "statsLastCheckedAt": "Last checked",
+  "@statsLastCheckedAt": {
+    "description": "Stats last checked at date label.",
+    "placeholders": {}
+  },
   "statsNotyetChecked": "Not yet checked",
+  "@statsNotyetChecked": {
+    "description": "Stats not yet checked label.",
+    "placeholders": {}
+  },
   "statsLongestStreak": "Longest streak",
-
+  "@statsLongestStreak": {
+    "description": "Stats longest streak label.",
+    "placeholders": {}
+  },
   "consecutiveDays": "Consecutive days",
+  "@consecutiveDays": {
+    "description": "Consecutive days label.",
+    "placeholders": {}
+  },
   "highlights": "Highlights",
+  "@highlights": {
+    "description": "Highlights label.",
+    "placeholders": {}
+  },
   "statsTimePerDay": "Time per day",
+  "@statsTimePerDay": {
+    "description": "Stats time per day label.",
+    "placeholders": {}
+  },
   "statsTimePerWeek": "Time per week",
+  "@statsTimePerWeek": {
+    "description": "Stats time per week label.",
+    "placeholders": {}
+  },
   "statsTimePerMonth": "Time per month",
+  "@statsTimePerMonth": {
+    "description": "Stats time per month label.",
+    "placeholders": {}
+  },
   "statsTimePerYear": "Time per years",
+  "@statsTimePerYear": {
+    "description": "Stats time per year label.",
+    "placeholders": {}
+  },
   "statsSummary": "Summary",
+  "@statsSummary": {
+    "description": "Stats summary label.",
+    "placeholders": {}
+  },
   "statsTotalTimeSpent": "Total time",
+  "@statsTotalTimeSpent": {
+    "description": "Stats total time spent label.",
+    "placeholders": {}
+  },
   "statsTotalSessions": "Total sessions",
+  "@statsTotalSessions": {
+    "description": "Stats total sessions label.",
+    "placeholders": {}
+  },
   "statsTotalDays": "Total days",
+  "@statsTotalDays": {
+    "description": "Stats total days label.",
+    "placeholders": {}
+  },
   "statsAverageTimeSpent": "Average time",
+  "@statsAverageTimeSpent": {
+    "description": "Stats average time spent label.",
+    "placeholders": {}
+  },
   "statsAverageSessions": "Average sessions",
+  "@statsAverageSessions": {
+    "description": "Stats average sessions label.",
+    "placeholders": {}
+  },
   "statsCount": "Count",
+  "@statsCount": {
+    "description": "Stats count label.",
+    "placeholders": {}
+  },
   "statsNextMilestone": "Next milestone",
+  "@statsNextMilestone": {
+    "description": "Stats next milestone label.",
+    "placeholders": {}
+  },
   "statsNextMilestoneIn": "{count, plural, =0{Next milestone in {count} more days.} =1{Next milestone in {count} more day.} =2{Next milestone in {count} more days.} few{Next milestone in {count} more days.} many{Next milestone in {count} more days.} other{Next milestone in {count} more days.}}",
+  "@statsNextMilestoneIn": {
+    "description": "Stats next milestone in label.",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "statsNextMilestoneInShort": "{count, plural, =0{In {count} more days} =1{In {count} more day.} =2{In {count} more days} few{In {count} more days} many{In {count} more days} other{In {count} more days}}",
+  "@statsNextMilestoneInShort": {
+    "description": "Stats next milestone in short label.",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "statsLoadingData": "Loading data...",
-
+  "@statsLoadingData": {
+    "description": "Stats loading data indicator text.",
+    "placeholders": {}
+  },
   "signOut": "Signout",
+  "@signOut": {
+    "description": "Signout button text.",
+    "placeholders": {}
+  },
   "signOutSuccessfulMessage": "Successfully signed out!",
+  "@signOutSuccessfulMessage": {
+    "description": "Signout successful message.",
+    "placeholders": {}
+  },
   "profileSignoutTitle": "Signout",
+  "@profileSignoutTitle": {
+    "description": "Profile signout dialog title.",
+    "placeholders": {}
+  },
   "profileSignoutQuestion": "Are you sure you want to sign out?",
+  "@profileSignoutQuestion": {
+    "description": "Profile signout dialog question.",
+    "placeholders": {}
+  },
   "profileSignoutYes": "Yes",
+  "@profileSignoutYes": {
+    "description": "Profile signout dialog yes button.",
+    "placeholders": {}
+  },
   "profileSignoutCancel": "No",
-
+  "@profileSignoutCancel": {
+    "description": "Profile signout dialog cancel button.",
+    "placeholders": {}
+  },
   "profileDeleteTitle": "Delete Profile",
+  "@profileDeleteTitle": {
+    "description": "Profile delete dialog title.",
+    "placeholders": {}
+  },
   "profileDeleteQuestion": "All your data will be permanently deleted and cannot be restored.\nAre you sure?",
+  "@profileDeleteQuestion": {
+    "description": "Profile delete dialog question.",
+    "placeholders": {}
+  },
   "profileDeleteYes": "Delete",
+  "@profileDeleteYes": {
+    "description": "Profile delete dialog delete button.",
+    "placeholders": {}
+  },
   "profileDeleteCancel": "Cancel",
-
+  "@profileDeleteCancel": {
+    "description": "Profile delete dialog cancel button.",
+    "placeholders": {}
+  },
   "deleteProfileScreenTitle": "Delete profile!",
+  "@deleteProfileScreenTitle": {
+    "description": "Delete profile screen title.",
+    "placeholders": {}
+  },
   "deleteProfileScreenText": "To delete your profile, you need to sign in again for security reasons.",
-
+  "@deleteProfileScreenText": {
+    "description": "Delete profile screen text.",
+    "placeholders": {}
+  },
   "deleteProfileScreenSuccessTitle": "Your profile\nhas been deleted!",
+  "@deleteProfileScreenSuccessTitle": {
+    "description": "Delete profile screen success title.",
+    "placeholders": {}
+  },
   "deleteProfileScreenOkayButtonText": "Okay",
-
+  "@deleteProfileScreenOkayButtonText": {
+    "description": "Delete profile screen success button text.",
+    "placeholders": {}
+  },
   "presence": "Presence",
+  "@presence": {
+    "description": "Presence screen title.",
+    "placeholders": {}
+  },
   "presenceScreenSubTitle": "Move the slider to adjust presence timerframe.",
-
+  "@presenceScreenSubTitle": {
+    "description": "Presence screen subtitle.",
+    "placeholders": {}
+  },
   "secondsAbbr": "s",
+  "@secondsAbbr": {
+    "description": "Seconds abbreviation.",
+    "placeholders": {}
+  },
   "secondsPlural": "{count, plural, =0{second} =1{second} =2{seconds} few{seconds} many{seconds} other{seconds}}",
+  "@secondsPlural": {
+    "description": "Seconds plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "secondsPluralWithNumber": "{count, plural, =0{{count} second} =1{{count} second} =2{{count} seconds} few{{count} seconds} many{{count} seconds} other{{count} seconds}}",
-
+  "@secondsPluralWithNumber": {
+    "description": "Seconds plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "minutesAbbr": "m",
+  "@minutesAbbr": {
+    "description": "Minutes abbreviation.",
+    "placeholders": {}
+  },
   "minutesPlural": "{count, plural, =0{minute} =1{minute} =2{minutes} few{minutes} many{minutes} other{minutes}}",
+  "@minutesPlural": {
+    "description": "Minutes plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "minutesPluralWithNumber": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
-
+  "@minutesPluralWithNumber": {
+    "description": "Minutes plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "hoursAbbr": "h",
+  "@hoursAbbr": {
+    "description": "Hours abbreviation.",
+    "placeholders": {}
+  },
   "hoursPlural": "{count, plural, =0{hour} =1{hour} =2{hours} few{hours} many{hours} other{hours}}",
+  "@hoursPlural": {
+    "description": "Hours plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "hoursPluralWithNumber": "{count, plural, =0{{count} hour} =1{{count} hour} =2{{count} hours} few{{count} hours} many{{count} hours} other{{count} hours}}",
-
+  "@hoursPluralWithNumber": {
+    "description": "Hours plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "sessionsPlural": "{count, plural, =0{session} =1{session} =2{sessions} few{sessions} many{sessions} other{sessions}}",
+  "@sessionsPlural": {
+    "description": "Sessions plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "sessionsPluralWithNumber": "{count, plural, =0{{count} session} =1{{count} session} =2{{count} sessions} few{{count} sessions} many{{count} sessions} other{{count} sessions}}",
-
+  "@sessionsPluralWithNumber": {
+    "description": "Sessions plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "daysPlural": "{count, plural, =0{day} =1{day} =2{days} few{days} many{days} other{days}}",
+  "@daysPlural": {
+    "description": "Days plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "daysPluralWithNumber": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} days} few{{count} days} many{{count} days} other{{count} days}}",
-
+  "@daysPluralWithNumber": {
+    "description": "Days plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "weeksPlural": "{count, plural, =0{week} =1{week} =2{weeks} few{weeks} many{weeks} other{weeks}}",
+  "@weeksPlural": {
+    "description": "Weeks plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "weeksPluralWithNumber": "{count, plural, =0{{count} week} =1{{count} week} =2{{count} weeks} few{{count} weeks} many{{count} weeks} other{{count} weeks}}",
-
+  "@weeksPluralWithNumber": {
+    "description": "Weeks plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "weekNumber": "{year} W{weekNumber}",
   "@weekNumber": {
     "description": "Show the number of the week.",
@@ -191,30 +828,114 @@
       }
     }
   },
-
   "consecutiveDaysPlural": "{count, plural, =0{day} =1{day} =2{consecutive days} few{consecutive days} many{consecutive days} other{consecutive days}}",
+  "@consecutiveDaysPlural": {
+    "description": "Consecutive days plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}",
-
+  "@consecutiveDaysPluralWithNumber": {
+    "description": "Consecutive days plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "thousand": "thousand",
+  "@thousand": {
+    "description": "Thousand label.",
+    "placeholders": {}
+  },
   "thousandShort": "k",
+  "@thousandShort": {
+    "description": "Thousand abbreviation.",
+    "placeholders": {}
+  },
   "million": "million",
+  "@million": {
+    "description": "Million label.",
+    "placeholders": {}
+  },
   "millionShort": "m",
-
+  "@millionShort": {
+    "description": "Million abbreviation.",
+    "placeholders": {}
+  },
   "locationInputPlaceholder": "Select your city",
+  "@locationInputPlaceholder": {
+    "description": "Location input placeholder.",
+    "placeholders": {}
+  },
   "locationInputCurrentSelection": "Current selection:",
+  "@locationInputCurrentSelection": {
+    "description": "Location input current selection label.",
+    "placeholders": {}
+  },
   "locationInputNoSelection": "No city selected yet",
+  "@locationInputNoSelection": {
+    "description": "Location input no selection label.",
+    "placeholders": {}
+  },
   "locationInputNoResults": "No results found",
+  "@locationInputNoResults": {
+    "description": "Location input no results label.",
+    "placeholders": {}
+  },
   "locationInputErrorMessage": "An unexpected error occured.\nPlease try again later.",
-
+  "@locationInputErrorMessage": {
+    "description": "Location input error message.",
+    "placeholders": {}
+  },
   "chantingTitle": "Chanting",
+  "@chantingTitle": {
+    "description": "Chanting screen title.",
+    "placeholders": {}
+  },
   "chantingNextChantIn": "Next chant in",
+  "@chantingNextChantIn": {
+    "description": "Next chant in label.",
+    "placeholders": {}
+  },
   "chantingAddChantSheetTitle": "Add Chant",
+  "@chantingAddChantSheetTitle": {
+    "description": "Add chant sheet title.",
+    "placeholders": {}
+  },
   "chantingPlaylistSheetTitle": "Playlist",
-
+  "@chantingPlaylistSheetTitle": {
+    "description": "Chanting playlist sheet title.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgeLoading": "Loading",
+  "@chantingPlaylistBadgeLoading": {
+    "description": "Chanting playlist badge loading label.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgePlaying": "Playing",
+  "@chantingPlaylistBadgePlaying": {
+    "description": "Chanting playlist badge playing label.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgePaused": "Paused",
+  "@chantingPlaylistBadgePaused": {
+    "description": "Chanting playlist badge paused label.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgeCompleted": "Completed",
-  "chantingPlaylistBadgeNext": "Next"
-
+  "@chantingPlaylistBadgeCompleted": {
+    "description": "Chanting playlist badge completed label.",
+    "placeholders": {}
+  },
+  "chantingPlaylistBadgeNext": "Next",
+  "@chantingPlaylistBadgeNext": {
+    "description": "Chanting playlist badge next label.",
+    "placeholders": {}
+  }
 }

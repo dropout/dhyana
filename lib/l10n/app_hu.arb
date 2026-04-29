@@ -1,186 +1,807 @@
 {
+  "@@locale": "hu",
   "minute": "Perc",
+  "@minute": {
+    "description": "A(z) minute fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "minutes": "Perc",
+  "@minutes": {
+    "description": "A(z) minutes fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "day": "Nap",
+  "@day": {
+    "description": "A(z) day fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "days": "Napok",
+  "@days": {
+    "description": "A(z) days fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "week": "Hét",
+  "@week": {
+    "description": "A(z) week fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "weeks": "Hetek",
+  "@weeks": {
+    "description": "A(z) weeks fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "month": "Hónap",
+  "@month": {
+    "description": "A(z) month fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "months": "Hónapok",
+  "@months": {
+    "description": "A(z) months fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "year": "Év",
+  "@year": {
+    "description": "A(z) year fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "years": "Évek",
+  "@years": {
+    "description": "A(z) years fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "milestone": "Mérföldkő",
+  "@milestone": {
+    "description": "A(z) milestone fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "milestones": "Mérföldkövek",
-
+  "@milestones": {
+    "description": "A(z) milestones fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "okay": "Rendben",
+  "@okay": {
+    "description": "A(z) okay fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "close": "Bezárás",
+  "@close": {
+    "description": "A(z) close fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "cancel": "Mégsem",
+  "@cancel": {
+    "description": "A(z) cancel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "warmup": "Felkészülés",
+  "@warmup": {
+    "description": "A(z) warmup fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "underMaintenanceTitle": "Az alkalmazás karbantartás miatt nem elérhető",
+  "@underMaintenanceTitle": {
+    "description": "A(z) underMaintenanceTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "underMaintenanceBody": "Kérlek nézz vissza később.",
-
+  "@underMaintenanceBody": {
+    "description": "A(z) underMaintenanceBody fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loading": "Betöltés...",
+  "@loading": {
+    "description": "A(z) loading fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loadMore": "Több betöltése",
+  "@loadMore": {
+    "description": "A(z) loadMore fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "pleaseWait": "Kérlek várj",
-
+  "@pleaseWait": {
+    "description": "A(z) pleaseWait fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "notAvailable": "Nem elérhető",
+  "@notAvailable": {
+    "description": "A(z) notAvailable fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "notAvailableAbbr": "N/A",
-
+  "@notAvailableAbbr": {
+    "description": "A(z) notAvailableAbbr fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputWarmupLabel": "Felkészülés",
+  "@inputWarmupLabel": {
+    "description": "A(z) inputWarmupLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputStartingSoundLabel": "Kezdőhang",
+  "@inputStartingSoundLabel": {
+    "description": "A(z) inputStartingSoundLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputDurationLabel": "Időtartam",
+  "@inputDurationLabel": {
+    "description": "A(z) inputDurationLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputEndingSoundLabel": "Végehang",
-
+  "@inputEndingSoundLabel": {
+    "description": "A(z) inputEndingSoundLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "startTimerButtonText": "Start",
+  "@startTimerButtonText": {
+    "description": "A(z) startTimerButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "sessionModeTimerLabel": "Időzítő",
+  "@sessionModeTimerLabel": {
+    "description": "A(z) sessionModeTimerLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "sessionModeChantingLabel": "Kántálás",
-
+  "@sessionModeChantingLabel": {
+    "description": "A(z) sessionModeChantingLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "noSound": "Nincs hang",
+  "@noSound": {
+    "description": "A(z) noSound fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputSoundChukpi": "Chukpi",
+  "@inputSoundChukpi": {
+    "description": "A(z) inputSoundChukpi fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "inputSoundVibrate": "Rezgés",
+  "@inputSoundVibrate": {
+    "description": "A(z) inputSoundVibrate fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputSoundSmallBell": "Csengettyű",
-
+  "@inputSoundSmallBell": {
+    "description": "A(z) inputSoundSmallBell fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "errorHeadline": "Hoppá!",
+  "@errorHeadline": {
+    "description": "A(z) errorHeadline fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "errorText": "Váratlan probléma támadt.",
+  "@errorText": {
+    "description": "A(z) errorText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "errorButtonText": "Rendben",
-
+  "@errorButtonText": {
+    "description": "A(z) errorButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "session": "Ülés",
+  "@session": {
+    "description": "A(z) session fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "sessions": "Ülések",
-
+  "@sessions": {
+    "description": "A(z) sessions fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "sessionResultCompleted": "Teljesítettél",
+  "@sessionResultCompleted": {
+    "description": "A(z) sessionResultCompleted fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "sessionResultMinutes": "{count, plural, =0{percet} =1{percet} =2{percet} few{percet} many{percet} other{percet}}",
-
+  "@sessionResultMinutes": {
+    "description": "A(z) sessionResultMinutes fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "timerFinishSessionButtonText": "Befejezés",
+  "@timerFinishSessionButtonText": {
+    "description": "A(z) timerFinishSessionButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "timerDiscardSessionButtonText": "Megszakítás",
-
+  "@timerDiscardSessionButtonText": {
+    "description": "A(z) timerDiscardSessionButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginHeadline1": "Ki",
+  "@loginHeadline1": {
+    "description": "A(z) loginHeadline1 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginHeadline2": "vagy",
+  "@loginHeadline2": {
+    "description": "A(z) loginHeadline2 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginHeadline3": "te?",
+  "@loginHeadline3": {
+    "description": "A(z) loginHeadline3 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginSigninGoogle": "Bejelentkezés Google-lal",
+  "@loginSigninGoogle": {
+    "description": "A(z) loginSigninGoogle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginSigninApple": "Bejelentkezés Apple-lel",
+  "@loginSigninApple": {
+    "description": "A(z) loginSigninApple fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginLegalPart1": "A bejelentkezéssel elfogadod az\n",
+  "@loginLegalPart1": {
+    "description": "A(z) loginLegalPart1 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginLegalPart2": "ÁSZF-et",
+  "@loginLegalPart2": {
+    "description": "A(z) loginLegalPart2 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginLegalPart3": " és az ",
+  "@loginLegalPart3": {
+    "description": "A(z) loginLegalPart3 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginLegalPart4": "Adatvédelmi nyilatkozatot",
-
+  "@loginLegalPart4": {
+    "description": "A(z) loginLegalPart4 fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profile": "Profil",
+  "@profile": {
+    "description": "A(z) profile fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "sessionsHistory": "Ülések",
+  "@sessionsHistory": {
+    "description": "A(z) sessionsHistory fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "editProfile": "Profil szerkesztése",
+  "@editProfile": {
+    "description": "A(z) editProfile fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "donate": "Adományozás",
+  "@donate": {
+    "description": "A(z) donate fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "timerSettingsHistory": "Legutóbbi beállítások",
+  "@timerSettingsHistory": {
+    "description": "A(z) timerSettingsHistory fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "timerSettingsHistoryApplied": "Időzítő beállítások alkalmazva.",
+  "@timerSettingsHistoryApplied": {
+    "description": "A(z) timerSettingsHistoryApplied fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "timerSettingsHistoryEmpty": "Még nincsenek legutóbbi időzítő beaállítások elmentve.",
-
+  "@timerSettingsHistoryEmpty": {
+    "description": "A(z) timerSettingsHistoryEmpty fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileImageLabel": "Profil kép",
+  "@profileImageLabel": {
+    "description": "A(z) profileImageLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileFirstnameLabel": "Keresztnév",
+  "@profileFirstnameLabel": {
+    "description": "A(z) profileFirstnameLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileLastnameLabel": "Vezetéknév",
+  "@profileLastnameLabel": {
+    "description": "A(z) profileLastnameLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileLocationLabel": "Város",
-
+  "@profileLocationLabel": {
+    "description": "A(z) profileLocationLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSaveButtonIdle": "Mentés",
+  "@profileSaveButtonIdle": {
+    "description": "A(z) profileSaveButtonIdle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSaveButtonSaving": "Mentés...",
+  "@profileSaveButtonSaving": {
+    "description": "A(z) profileSaveButtonSaving fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSaveButtonSaved": "Elmentve!",
-
+  "@profileSaveButtonSaved": {
+    "description": "A(z) profileSaveButtonSaved fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileWizardTitle": "Véglegesítsd a profilodat!",
-
+  "@profileWizardTitle": {
+    "description": "A(z) profileWizardTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "photoAccessDialogTitle": "Fotók nem érhetőek el",
+  "@photoAccessDialogTitle": {
+    "description": "A(z) photoAccessDialogTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "photoAccessDialogText": "Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon 'Beállítások' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.",
+  "@photoAccessDialogText": {
+    "description": "A(z) photoAccessDialogText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "photoAccessDialogButtonText": "Rendben",
-
+  "@photoAccessDialogButtonText": {
+    "description": "A(z) photoAccessDialogButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "imageNotSafeDialogTitle": "Nem megfelelő kép",
+  "@imageNotSafeDialogTitle": {
+    "description": "A(z) imageNotSafeDialogTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "imageNotSafeDialogText": "A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.",
+  "@imageNotSafeDialogText": {
+    "description": "A(z) imageNotSafeDialogText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "imageNotSafeDialogButtonText": "Rendben",
-
+  "@imageNotSafeDialogButtonText": {
+    "description": "A(z) imageNotSafeDialogButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSettings": "Beállítások",
+  "@profileSettings": {
+    "description": "A(z) profileSettings fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "showTimeOnTimerSettingsScreenTitle": "Idő megjelenítése az Időzítő beállítások képernyőn",
+  "@showTimeOnTimerSettingsScreenTitle": {
+    "description": "A(z) showTimeOnTimerSettingsScreenTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "showTimeOnTimerSettingsScreenDescription": "Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.",
+  "@showTimeOnTimerSettingsScreenDescription": {
+    "description": "A(z) showTimeOnTimerSettingsScreenDescription fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "showStatsOnFinishScreenTitle": "Statisztika megjelenítése a Gyakorlat befejezése képernyőn",
+  "@showStatsOnFinishScreenTitle": {
+    "description": "A(z) showStatsOnFinishScreenTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "showStatsOnFinishScreenDescription": "Ha engedélyezve van, a gyakorlat befejezése képernyőn megjelenik a gyakorlat eredmény statisztikája.",
+  "@showStatsOnFinishScreenDescription": {
+    "description": "A(z) showStatsOnFinishScreenDescription fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "usePresenceFeatureTitle": "Jelenlét funkció engedélyezése",
+  "@usePresenceFeatureTitle": {
+    "description": "A(z) usePresenceFeatureTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "usePresenceFeatureDescription": "Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.",
+  "@usePresenceFeatureDescription": {
+    "description": "A(z) usePresenceFeatureDescription fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingGapLengthTitle": "Kántálás közötti szünet hossza",
+  "@chantingGapLengthTitle": {
+    "description": "A(z) chantingGapLengthTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingGapLengthDescription": "A kántálás közötti szünet időtartama.",
-
+  "@chantingGapLengthDescription": {
+    "description": "A(z) chantingGapLengthDescription fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileStats": "Statisztika",
+  "@profileStats": {
+    "description": "A(z) profileStats fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "consecutiveDays": "Egymás utáni napok",
+  "@consecutiveDays": {
+    "description": "A(z) consecutiveDays fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "highlights": "Kiemelt adatok",
-
+  "@highlights": {
+    "description": "A(z) highlights fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "average": "Átlag",
+  "@average": {
+    "description": "A(z) average fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "averagePerDay": "Átlagosan naponta",
+  "@averagePerDay": {
+    "description": "A(z) averagePerDay fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "averagePerWeek": "Átlagosan hetente",
+  "@averagePerWeek": {
+    "description": "A(z) averagePerWeek fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "averagePerMonth": "Átlagosan havonta",
+  "@averagePerMonth": {
+    "description": "A(z) averagePerMonth fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "averagePerYear": "Átlagosan évente",
+  "@averagePerYear": {
+    "description": "A(z) averagePerYear fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "averageAbbr": "Átl.",
-
+  "@averageAbbr": {
+    "description": "A(z) averageAbbr fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsSignedUp": "Csatlakozás",
+  "@statsSignedUp": {
+    "description": "A(z) statsSignedUp fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsFirstSession": "Első ülés",
+  "@statsFirstSession": {
+    "description": "A(z) statsFirstSession fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsLastSession": "Legutóbbi ülés",
+  "@statsLastSession": {
+    "description": "A(z) statsLastSession fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsCurrentStreak": "Aktuális sorozat",
+  "@statsCurrentStreak": {
+    "description": "A(z) statsCurrentStreak fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsStartedAt": "Aktuálist sorozat kezdete",
+  "@statsStartedAt": {
+    "description": "A(z) statsStartedAt fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsNotyetStarted": "Még nem kezdted el",
+  "@statsNotyetStarted": {
+    "description": "A(z) statsNotyetStarted fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsLastCheckedAt": "Legutolsó ellenőrzés",
+  "@statsLastCheckedAt": {
+    "description": "A(z) statsLastCheckedAt fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsNotyetChecked": "Még nincs ellenőrizve",
+  "@statsNotyetChecked": {
+    "description": "A(z) statsNotyetChecked fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsLongestStreak": "Leghosszabb sorozat",
-
+  "@statsLongestStreak": {
+    "description": "A(z) statsLongestStreak fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTimePerDay": "Idő naponta",
+  "@statsTimePerDay": {
+    "description": "A(z) statsTimePerDay fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTimePerWeek": "Idő hetente",
+  "@statsTimePerWeek": {
+    "description": "A(z) statsTimePerWeek fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTimePerMonth": "Idő havonta",
+  "@statsTimePerMonth": {
+    "description": "A(z) statsTimePerMonth fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTimePerYear": "Idő évente",
+  "@statsTimePerYear": {
+    "description": "A(z) statsTimePerYear fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsSummary": "Összesítés",
+  "@statsSummary": {
+    "description": "A(z) statsSummary fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTotalTimeSpent": "Összes idő",
+  "@statsTotalTimeSpent": {
+    "description": "A(z) statsTotalTimeSpent fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTotalSessions": "Összes alkalom",
+  "@statsTotalSessions": {
+    "description": "A(z) statsTotalSessions fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsTotalDays": "Összes nap",
+  "@statsTotalDays": {
+    "description": "A(z) statsTotalDays fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsAverageTimeSpent": "Átlagos idő",
+  "@statsAverageTimeSpent": {
+    "description": "A(z) statsAverageTimeSpent fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsAverageSessions": "Átlagos alkalom",
+  "@statsAverageSessions": {
+    "description": "A(z) statsAverageSessions fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsCount": "Darab",
+  "@statsCount": {
+    "description": "A(z) statsCount fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsNextMilestone": "Következő mérföldkő",
+  "@statsNextMilestone": {
+    "description": "A(z) statsNextMilestone fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsNextMilestoneIn": "{count, plural, =0{Még {count} a következő mérföldkőig.} =1{Még {count} a következő mérföldkőig.} =2{Még {count} a következő mérföldkőig.} few{Még {count} a következő mérföldkőig.} many{Még {count} a következő mérföldkőig.} other{Még {count} a következő mérföldkőig.}}",
+  "@statsNextMilestoneIn": {
+    "description": "A(z) statsNextMilestoneIn fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "statsNextMilestoneInShort": "{count, plural, =0{{count} nap múlva} =1{{count} nap múlva} =2{{count} nap múlva} few{{count} nap múlva} many{{count} nap múlva} other{{count} nap múlva}}",
+  "@statsNextMilestoneInShort": {
+    "description": "A(z) statsNextMilestoneInShort fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "statsLoadingData": "Adatok betöltése...",
-
+  "@statsLoadingData": {
+    "description": "A(z) statsLoadingData fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "signOut": "Kijelentkezés",
+  "@signOut": {
+    "description": "A(z) signOut fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "signOutSuccessfulMessage": "Sikeresen kijelentkeztél!",
+  "@signOutSuccessfulMessage": {
+    "description": "A(z) signOutSuccessfulMessage fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSignoutTitle": "Kijelentkezés",
+  "@profileSignoutTitle": {
+    "description": "A(z) profileSignoutTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSignoutQuestion": "Biztos, hogy ki akarsz jelentkezni?",
+  "@profileSignoutQuestion": {
+    "description": "A(z) profileSignoutQuestion fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSignoutYes": "Igen",
+  "@profileSignoutYes": {
+    "description": "A(z) profileSignoutYes fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileSignoutCancel": "Mégsem",
-
+  "@profileSignoutCancel": {
+    "description": "A(z) profileSignoutCancel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileDeleteTitle": "Profil törlése",
+  "@profileDeleteTitle": {
+    "description": "A(z) profileDeleteTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileDeleteQuestion": "Minden adatod véglegesen törlődni fog és nem lesz visszaállítható. Biztos vagy benne?",
+  "@profileDeleteQuestion": {
+    "description": "A(z) profileDeleteQuestion fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileDeleteYes": "Törlés",
+  "@profileDeleteYes": {
+    "description": "A(z) profileDeleteYes fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "profileDeleteCancel": "Mégsem",
-
+  "@profileDeleteCancel": {
+    "description": "A(z) profileDeleteCancel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "deleteProfileScreenTitle": "Profil törlése!",
+  "@deleteProfileScreenTitle": {
+    "description": "A(z) deleteProfileScreenTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "deleteProfileScreenText": "Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.",
-
+  "@deleteProfileScreenText": {
+    "description": "A(z) deleteProfileScreenText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "deleteProfileScreenSuccessTitle": "A profilodat töröltük!",
+  "@deleteProfileScreenSuccessTitle": {
+    "description": "A(z) deleteProfileScreenSuccessTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "deleteProfileScreenOkayButtonText": "Rendben",
-
+  "@deleteProfileScreenOkayButtonText": {
+    "description": "A(z) deleteProfileScreenOkayButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "presence": "Jelenlét",
+  "@presence": {
+    "description": "A(z) presence fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "presenceScreenSubTitle": "Mozgasd a csuszkát a jelenlét időkeretének beállításához.",
-
+  "@presenceScreenSubTitle": {
+    "description": "A(z) presenceScreenSubTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "secondsAbbr": "mp",
+  "@secondsAbbr": {
+    "description": "A(z) secondsAbbr fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "secondsPlural": "{count, plural, =0{másodperc} =1{másodperc} =2{másodperc} few{másodperc} many{másodperc} other{másodperc}}",
+  "@secondsPlural": {
+    "description": "A(z) secondsPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "secondsPluralWithNumber": "{count, plural, =0{{count} másodperc} =1{{count} másodperc} =2{{count} másodperc} few{{count} másodperc} many{{count} másodperc} other{{count} másodperc}}",
-
+  "@secondsPluralWithNumber": {
+    "description": "A(z) secondsPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "minutesAbbr": "p",
+  "@minutesAbbr": {
+    "description": "A(z) minutesAbbr fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "minutesPlural": "{count, plural, =0{perc} =1{perc} =2{perc} few{perc} many{perc} other{perc}}",
+  "@minutesPlural": {
+    "description": "A(z) minutesPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "minutesPluralWithNumber": "{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}",
-
+  "@minutesPluralWithNumber": {
+    "description": "A(z) minutesPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "hoursAbbr": "ó",
+  "@hoursAbbr": {
+    "description": "A(z) hoursAbbr fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "hoursPlural": "{count, plural, =0{óra} =1{óra} =2{óra} few{óra} many{óra} other{óra}}",
+  "@hoursPlural": {
+    "description": "A(z) hoursPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "hoursPluralWithNumber": "{count, plural, =0{{count} óra} =1{{count} óra} =2{{count} óra} few{{count} óra} many{{count} óra} other{{count} óra}}",
-
+  "@hoursPluralWithNumber": {
+    "description": "A(z) hoursPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "sessionsPlural": "{count, plural, =0{ülés} =1{ülés} =2{ülés} few{ülés} many{ülés} other{ülés}}",
+  "@sessionsPlural": {
+    "description": "A(z) sessionsPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "sessionsPluralWithNumber": "{count, plural, =0{{count} ülés} =1{{count} ülés} =2{{count} ülés} few{{count} ülés} many{{count} ülés} other{{count} ülés}}",
-
+  "@sessionsPluralWithNumber": {
+    "description": "A(z) sessionsPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "daysPlural": "{count, plural, =0{nap} =1{nap} =2{nap} few{nap} many{nap} other{nap}}",
+  "@daysPlural": {
+    "description": "A(z) daysPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "daysPluralWithNumber": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}",
-
+  "@daysPluralWithNumber": {
+    "description": "A(z) daysPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "weeksPlural": "{count, plural, =0{hét} =1{hét} =2{hét} few{hét} many{hét} other{hét}}",
+  "@weeksPlural": {
+    "description": "A(z) weeksPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "weeksPluralWithNumber": "{count, plural, =0{{count} hét} =1{{count} hét} =2{{count} hét} few{{count} hét} many{{count} hét} other{{count} hét}}",
-
+  "@weeksPluralWithNumber": {
+    "description": "A(z) weeksPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "weekNumber": "{year} {weekNumber}H",
   "@weekNumber": {
-    "description": "A hét számának megjelenítése.",
+    "description": "A(z) weekNumber fordítási kulcs leírása.",
     "placeholders": {
       "year": {
         "type": "int",
@@ -192,30 +813,114 @@
       }
     }
   },
-
   "consecutiveDaysPlural": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}",
+  "@consecutiveDaysPlural": {
+    "description": "A(z) consecutiveDaysPlural fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}",
-
+  "@consecutiveDaysPluralWithNumber": {
+    "description": "A(z) consecutiveDaysPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "thousand": "ezer",
+  "@thousand": {
+    "description": "A(z) thousand fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "thousandShort": "e",
+  "@thousandShort": {
+    "description": "A(z) thousandShort fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "million": "millió",
+  "@million": {
+    "description": "A(z) million fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "millionShort": "m",
-
+  "@millionShort": {
+    "description": "A(z) millionShort fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "locationInputPlaceholder": "Válaszz egy várost",
+  "@locationInputPlaceholder": {
+    "description": "A(z) locationInputPlaceholder fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "locationInputCurrentSelection": "Current selection:",
+  "@locationInputCurrentSelection": {
+    "description": "A(z) locationInputCurrentSelection fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "locationInputNoSelection": "Nincs kiválasztva város",
+  "@locationInputNoSelection": {
+    "description": "A(z) locationInputNoSelection fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "locationInputNoResults": "Nincs találat",
+  "@locationInputNoResults": {
+    "description": "A(z) locationInputNoResults fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "locationInputErrorMessage": "Váratlan hiba történt.\nKérlek próbáld újra később.",
-
+  "@locationInputErrorMessage": {
+    "description": "A(z) locationInputErrorMessage fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingTitle": "Éneklés",
+  "@chantingTitle": {
+    "description": "A(z) chantingTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingNextChantIn": "Következő éneklés",
+  "@chantingNextChantIn": {
+    "description": "A(z) chantingNextChantIn fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingAddChantSheetTitle": "Hozzáadás",
+  "@chantingAddChantSheetTitle": {
+    "description": "A(z) chantingAddChantSheetTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingPlaylistSheetTitle": "Lejátszási lista",
-
+  "@chantingPlaylistSheetTitle": {
+    "description": "A(z) chantingPlaylistSheetTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgeLoading": "Betöltés",
+  "@chantingPlaylistBadgeLoading": {
+    "description": "A(z) chantingPlaylistBadgeLoading fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgePlaying": "Lejátszás",
+  "@chantingPlaylistBadgePlaying": {
+    "description": "A(z) chantingPlaylistBadgePlaying fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgePaused": "Szünet",
+  "@chantingPlaylistBadgePaused": {
+    "description": "A(z) chantingPlaylistBadgePaused fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgeCompleted": "Befejezett",
-  "chantingPlaylistBadgeNext": "Következő"
-
+  "@chantingPlaylistBadgeCompleted": {
+    "description": "A(z) chantingPlaylistBadgeCompleted fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "chantingPlaylistBadgeNext": "Következő",
+  "@chantingPlaylistBadgeNext": {
+    "description": "A(z) chantingPlaylistBadgeNext fordítási kulcs leírása.",
+    "placeholders": {}
+  }
 }

@@ -98,997 +98,1003 @@ abstract class AppLocalizations {
     Locale('hu'),
   ];
 
-  /// No description provided for @minute.
+  /// A(z) minute fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Perc'**
   String get minute;
 
-  /// No description provided for @minutes.
+  /// A(z) minutes fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Perc'**
   String get minutes;
 
-  /// No description provided for @day.
+  /// A(z) day fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Nap'**
   String get day;
 
-  /// No description provided for @days.
+  /// A(z) days fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Napok'**
   String get days;
 
-  /// No description provided for @week.
+  /// A(z) week fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Hét'**
   String get week;
 
-  /// No description provided for @weeks.
+  /// A(z) weeks fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Hetek'**
   String get weeks;
 
-  /// No description provided for @month.
+  /// A(z) month fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Hónap'**
   String get month;
 
-  /// No description provided for @months.
+  /// A(z) months fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Hónapok'**
   String get months;
 
-  /// No description provided for @year.
+  /// A(z) year fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Év'**
   String get year;
 
-  /// No description provided for @years.
+  /// A(z) years fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Évek'**
   String get years;
 
-  /// No description provided for @milestone.
+  /// A(z) milestone fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mérföldkő'**
   String get milestone;
 
-  /// No description provided for @milestones.
+  /// A(z) milestones fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mérföldkövek'**
   String get milestones;
 
-  /// No description provided for @okay.
+  /// A(z) okay fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Rendben'**
   String get okay;
 
-  /// No description provided for @close.
+  /// A(z) close fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Bezárás'**
   String get close;
 
-  /// No description provided for @cancel.
+  /// A(z) cancel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mégsem'**
   String get cancel;
 
-  /// No description provided for @warmup.
+  /// A(z) warmup fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Felkészülés'**
   String get warmup;
 
-  /// No description provided for @underMaintenanceTitle.
+  /// A(z) underMaintenanceTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Az alkalmazás karbantartás miatt nem elérhető'**
   String get underMaintenanceTitle;
 
-  /// No description provided for @underMaintenanceBody.
+  /// A(z) underMaintenanceBody fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kérlek nézz vissza később.'**
   String get underMaintenanceBody;
 
-  /// No description provided for @loading.
+  /// A(z) loading fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Betöltés...'**
   String get loading;
 
-  /// No description provided for @loadMore.
+  /// A(z) loadMore fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Több betöltése'**
   String get loadMore;
 
-  /// No description provided for @pleaseWait.
+  /// A(z) pleaseWait fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kérlek várj'**
   String get pleaseWait;
 
-  /// No description provided for @notAvailable.
+  /// A(z) notAvailable fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Nem elérhető'**
   String get notAvailable;
 
-  /// No description provided for @notAvailableAbbr.
+  /// A(z) notAvailableAbbr fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'N/A'**
   String get notAvailableAbbr;
 
-  /// No description provided for @inputWarmupLabel.
+  /// A(z) inputWarmupLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Felkészülés'**
   String get inputWarmupLabel;
 
-  /// No description provided for @inputStartingSoundLabel.
+  /// A(z) inputStartingSoundLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kezdőhang'**
   String get inputStartingSoundLabel;
 
-  /// No description provided for @inputDurationLabel.
+  /// A(z) inputDurationLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Időtartam'**
   String get inputDurationLabel;
 
-  /// No description provided for @inputEndingSoundLabel.
+  /// A(z) inputEndingSoundLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Végehang'**
   String get inputEndingSoundLabel;
 
-  /// No description provided for @startTimerButtonText.
+  /// A(z) startTimerButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Start'**
   String get startTimerButtonText;
 
-  /// No description provided for @sessionModeTimerLabel.
+  /// A(z) sessionModeTimerLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Időzítő'**
   String get sessionModeTimerLabel;
 
-  /// No description provided for @sessionModeChantingLabel.
+  /// A(z) sessionModeChantingLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kántálás'**
   String get sessionModeChantingLabel;
 
-  /// No description provided for @noSound.
+  /// A(z) noSound fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Nincs hang'**
   String get noSound;
 
-  /// No description provided for @inputSoundChukpi.
+  /// A(z) inputSoundChukpi fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Chukpi'**
   String get inputSoundChukpi;
 
-  /// No description provided for @inputSoundSmallBell.
+  /// A(z) inputSoundVibrate fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Rezgés'**
+  String get inputSoundVibrate;
+
+  /// A(z) inputSoundSmallBell fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Csengettyű'**
   String get inputSoundSmallBell;
 
-  /// No description provided for @errorHeadline.
+  /// A(z) errorHeadline fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Hoppá!'**
   String get errorHeadline;
 
-  /// No description provided for @errorText.
+  /// A(z) errorText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Váratlan probléma támadt.'**
   String get errorText;
 
-  /// No description provided for @errorButtonText.
+  /// A(z) errorButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Rendben'**
   String get errorButtonText;
 
-  /// No description provided for @session.
+  /// A(z) session fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ülés'**
   String get session;
 
-  /// No description provided for @sessions.
+  /// A(z) sessions fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ülések'**
   String get sessions;
 
-  /// No description provided for @sessionResultCompleted.
+  /// A(z) sessionResultCompleted fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Teljesítettél'**
   String get sessionResultCompleted;
 
-  /// No description provided for @sessionResultMinutes.
+  /// A(z) sessionResultMinutes fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{percet} =1{percet} =2{percet} few{percet} many{percet} other{percet}}'**
-  String sessionResultMinutes(num count);
+  String sessionResultMinutes(int count);
 
-  /// No description provided for @timerFinishSessionButtonText.
+  /// A(z) timerFinishSessionButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Befejezés'**
   String get timerFinishSessionButtonText;
 
-  /// No description provided for @timerDiscardSessionButtonText.
+  /// A(z) timerDiscardSessionButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Megszakítás'**
   String get timerDiscardSessionButtonText;
 
-  /// No description provided for @loginHeadline1.
+  /// A(z) loginHeadline1 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ki'**
   String get loginHeadline1;
 
-  /// No description provided for @loginHeadline2.
+  /// A(z) loginHeadline2 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'vagy'**
   String get loginHeadline2;
 
-  /// No description provided for @loginHeadline3.
+  /// A(z) loginHeadline3 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'te?'**
   String get loginHeadline3;
 
-  /// No description provided for @loginSigninGoogle.
+  /// A(z) loginSigninGoogle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Bejelentkezés Google-lal'**
   String get loginSigninGoogle;
 
-  /// No description provided for @loginSigninApple.
+  /// A(z) loginSigninApple fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Bejelentkezés Apple-lel'**
   String get loginSigninApple;
 
-  /// No description provided for @loginLegalPart1.
+  /// A(z) loginLegalPart1 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'A bejelentkezéssel elfogadod az\n'**
   String get loginLegalPart1;
 
-  /// No description provided for @loginLegalPart2.
+  /// A(z) loginLegalPart2 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'ÁSZF-et'**
   String get loginLegalPart2;
 
-  /// No description provided for @loginLegalPart3.
+  /// A(z) loginLegalPart3 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **' és az '**
   String get loginLegalPart3;
 
-  /// No description provided for @loginLegalPart4.
+  /// A(z) loginLegalPart4 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Adatvédelmi nyilatkozatot'**
   String get loginLegalPart4;
 
-  /// No description provided for @profile.
+  /// A(z) profile fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Profil'**
   String get profile;
 
-  /// No description provided for @sessionsHistory.
+  /// A(z) sessionsHistory fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ülések'**
   String get sessionsHistory;
 
-  /// No description provided for @editProfile.
+  /// A(z) editProfile fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Profil szerkesztése'**
   String get editProfile;
 
-  /// No description provided for @donate.
+  /// A(z) donate fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Adományozás'**
   String get donate;
 
-  /// No description provided for @timerSettingsHistory.
+  /// A(z) timerSettingsHistory fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Legutóbbi beállítások'**
   String get timerSettingsHistory;
 
-  /// No description provided for @timerSettingsHistoryApplied.
+  /// A(z) timerSettingsHistoryApplied fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Időzítő beállítások alkalmazva.'**
   String get timerSettingsHistoryApplied;
 
-  /// No description provided for @timerSettingsHistoryEmpty.
+  /// A(z) timerSettingsHistoryEmpty fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Még nincsenek legutóbbi időzítő beaállítások elmentve.'**
   String get timerSettingsHistoryEmpty;
 
-  /// No description provided for @profileImageLabel.
+  /// A(z) profileImageLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Profil kép'**
   String get profileImageLabel;
 
-  /// No description provided for @profileFirstnameLabel.
+  /// A(z) profileFirstnameLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Keresztnév'**
   String get profileFirstnameLabel;
 
-  /// No description provided for @profileLastnameLabel.
+  /// A(z) profileLastnameLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Vezetéknév'**
   String get profileLastnameLabel;
 
-  /// No description provided for @profileLocationLabel.
+  /// A(z) profileLocationLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Város'**
   String get profileLocationLabel;
 
-  /// No description provided for @profileSaveButtonIdle.
+  /// A(z) profileSaveButtonIdle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mentés'**
   String get profileSaveButtonIdle;
 
-  /// No description provided for @profileSaveButtonSaving.
+  /// A(z) profileSaveButtonSaving fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mentés...'**
   String get profileSaveButtonSaving;
 
-  /// No description provided for @profileSaveButtonSaved.
+  /// A(z) profileSaveButtonSaved fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Elmentve!'**
   String get profileSaveButtonSaved;
 
-  /// No description provided for @profileWizardTitle.
+  /// A(z) profileWizardTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Véglegesítsd a profilodat!'**
   String get profileWizardTitle;
 
-  /// No description provided for @photoAccessDialogTitle.
+  /// A(z) photoAccessDialogTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Fotók nem érhetőek el'**
   String get photoAccessDialogTitle;
 
-  /// No description provided for @photoAccessDialogText.
+  /// A(z) photoAccessDialogText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Az alkalmazásnak nincs engedélye hozzáférni a fotókhoz. Kérlek a telefon \'Beállítások\' menüjében engedélyezd a hozzáférést a fotókhoz, hogy meg tudjuk változtatni a profilképed.'**
   String get photoAccessDialogText;
 
-  /// No description provided for @photoAccessDialogButtonText.
+  /// A(z) photoAccessDialogButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Rendben'**
   String get photoAccessDialogButtonText;
 
-  /// No description provided for @imageNotSafeDialogTitle.
+  /// A(z) imageNotSafeDialogTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Nem megfelelő kép'**
   String get imageNotSafeDialogTitle;
 
-  /// No description provided for @imageNotSafeDialogText.
+  /// A(z) imageNotSafeDialogText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.'**
   String get imageNotSafeDialogText;
 
-  /// No description provided for @imageNotSafeDialogButtonText.
+  /// A(z) imageNotSafeDialogButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Rendben'**
   String get imageNotSafeDialogButtonText;
 
-  /// No description provided for @profileSettings.
+  /// A(z) profileSettings fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Beállítások'**
   String get profileSettings;
 
-  /// No description provided for @showTimeOnTimerSettingsScreenTitle.
+  /// A(z) showTimeOnTimerSettingsScreenTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Idő megjelenítése az Időzítő beállítások képernyőn'**
   String get showTimeOnTimerSettingsScreenTitle;
 
-  /// No description provided for @showTimeOnTimerSettingsScreenDescription.
+  /// A(z) showTimeOnTimerSettingsScreenDescription fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.'**
   String get showTimeOnTimerSettingsScreenDescription;
 
-  /// No description provided for @showStatsOnFinishScreenTitle.
+  /// A(z) showStatsOnFinishScreenTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Statisztika megjelenítése a Gyakorlat befejezése képernyőn'**
   String get showStatsOnFinishScreenTitle;
 
-  /// No description provided for @showStatsOnFinishScreenDescription.
+  /// A(z) showStatsOnFinishScreenDescription fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ha engedélyezve van, a gyakorlat befejezése képernyőn megjelenik a gyakorlat eredmény statisztikája.'**
   String get showStatsOnFinishScreenDescription;
 
-  /// No description provided for @usePresenceFeatureTitle.
+  /// A(z) usePresenceFeatureTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Jelenlét funkció engedélyezése'**
   String get usePresenceFeatureTitle;
 
-  /// No description provided for @usePresenceFeatureDescription.
+  /// A(z) usePresenceFeatureDescription fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.'**
   String get usePresenceFeatureDescription;
 
-  /// No description provided for @chantingGapLengthTitle.
+  /// A(z) chantingGapLengthTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kántálás közötti szünet hossza'**
   String get chantingGapLengthTitle;
 
-  /// No description provided for @chantingGapLengthDescription.
+  /// A(z) chantingGapLengthDescription fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'A kántálás közötti szünet időtartama.'**
   String get chantingGapLengthDescription;
 
-  /// No description provided for @profileStats.
+  /// A(z) profileStats fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Statisztika'**
   String get profileStats;
 
-  /// No description provided for @consecutiveDays.
+  /// A(z) consecutiveDays fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Egymás utáni napok'**
   String get consecutiveDays;
 
-  /// No description provided for @highlights.
+  /// A(z) highlights fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kiemelt adatok'**
   String get highlights;
 
-  /// No description provided for @average.
+  /// A(z) average fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlag'**
   String get average;
 
-  /// No description provided for @averagePerDay.
+  /// A(z) averagePerDay fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlagosan naponta'**
   String get averagePerDay;
 
-  /// No description provided for @averagePerWeek.
+  /// A(z) averagePerWeek fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlagosan hetente'**
   String get averagePerWeek;
 
-  /// No description provided for @averagePerMonth.
+  /// A(z) averagePerMonth fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlagosan havonta'**
   String get averagePerMonth;
 
-  /// No description provided for @averagePerYear.
+  /// A(z) averagePerYear fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlagosan évente'**
   String get averagePerYear;
 
-  /// No description provided for @averageAbbr.
+  /// A(z) averageAbbr fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átl.'**
   String get averageAbbr;
 
-  /// No description provided for @statsSignedUp.
+  /// A(z) statsSignedUp fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Csatlakozás'**
   String get statsSignedUp;
 
-  /// No description provided for @statsFirstSession.
+  /// A(z) statsFirstSession fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Első ülés'**
   String get statsFirstSession;
 
-  /// No description provided for @statsLastSession.
+  /// A(z) statsLastSession fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Legutóbbi ülés'**
   String get statsLastSession;
 
-  /// No description provided for @statsCurrentStreak.
+  /// A(z) statsCurrentStreak fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Aktuális sorozat'**
   String get statsCurrentStreak;
 
-  /// No description provided for @statsStartedAt.
+  /// A(z) statsStartedAt fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Aktuálist sorozat kezdete'**
   String get statsStartedAt;
 
-  /// No description provided for @statsNotyetStarted.
+  /// A(z) statsNotyetStarted fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Még nem kezdted el'**
   String get statsNotyetStarted;
 
-  /// No description provided for @statsLastCheckedAt.
+  /// A(z) statsLastCheckedAt fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Legutolsó ellenőrzés'**
   String get statsLastCheckedAt;
 
-  /// No description provided for @statsNotyetChecked.
+  /// A(z) statsNotyetChecked fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Még nincs ellenőrizve'**
   String get statsNotyetChecked;
 
-  /// No description provided for @statsLongestStreak.
+  /// A(z) statsLongestStreak fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Leghosszabb sorozat'**
   String get statsLongestStreak;
 
-  /// No description provided for @statsTimePerDay.
+  /// A(z) statsTimePerDay fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Idő naponta'**
   String get statsTimePerDay;
 
-  /// No description provided for @statsTimePerWeek.
+  /// A(z) statsTimePerWeek fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Idő hetente'**
   String get statsTimePerWeek;
 
-  /// No description provided for @statsTimePerMonth.
+  /// A(z) statsTimePerMonth fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Idő havonta'**
   String get statsTimePerMonth;
 
-  /// No description provided for @statsTimePerYear.
+  /// A(z) statsTimePerYear fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Idő évente'**
   String get statsTimePerYear;
 
-  /// No description provided for @statsSummary.
+  /// A(z) statsSummary fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Összesítés'**
   String get statsSummary;
 
-  /// No description provided for @statsTotalTimeSpent.
+  /// A(z) statsTotalTimeSpent fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Összes idő'**
   String get statsTotalTimeSpent;
 
-  /// No description provided for @statsTotalSessions.
+  /// A(z) statsTotalSessions fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Összes alkalom'**
   String get statsTotalSessions;
 
-  /// No description provided for @statsTotalDays.
+  /// A(z) statsTotalDays fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Összes nap'**
   String get statsTotalDays;
 
-  /// No description provided for @statsAverageTimeSpent.
+  /// A(z) statsAverageTimeSpent fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlagos idő'**
   String get statsAverageTimeSpent;
 
-  /// No description provided for @statsAverageSessions.
+  /// A(z) statsAverageSessions fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Átlagos alkalom'**
   String get statsAverageSessions;
 
-  /// No description provided for @statsCount.
+  /// A(z) statsCount fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Darab'**
   String get statsCount;
 
-  /// No description provided for @statsNextMilestone.
+  /// A(z) statsNextMilestone fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Következő mérföldkő'**
   String get statsNextMilestone;
 
-  /// No description provided for @statsNextMilestoneIn.
+  /// A(z) statsNextMilestoneIn fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{Még {count} a következő mérföldkőig.} =1{Még {count} a következő mérföldkőig.} =2{Még {count} a következő mérföldkőig.} few{Még {count} a következő mérföldkőig.} many{Még {count} a következő mérföldkőig.} other{Még {count} a következő mérföldkőig.}}'**
   String statsNextMilestoneIn(num count);
 
-  /// No description provided for @statsNextMilestoneInShort.
+  /// A(z) statsNextMilestoneInShort fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap múlva} =1{{count} nap múlva} =2{{count} nap múlva} few{{count} nap múlva} many{{count} nap múlva} other{{count} nap múlva}}'**
   String statsNextMilestoneInShort(num count);
 
-  /// No description provided for @statsLoadingData.
+  /// A(z) statsLoadingData fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Adatok betöltése...'**
   String get statsLoadingData;
 
-  /// No description provided for @signOut.
+  /// A(z) signOut fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kijelentkezés'**
   String get signOut;
 
-  /// No description provided for @signOutSuccessfulMessage.
+  /// A(z) signOutSuccessfulMessage fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Sikeresen kijelentkeztél!'**
   String get signOutSuccessfulMessage;
 
-  /// No description provided for @profileSignoutTitle.
+  /// A(z) profileSignoutTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Kijelentkezés'**
   String get profileSignoutTitle;
 
-  /// No description provided for @profileSignoutQuestion.
+  /// A(z) profileSignoutQuestion fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Biztos, hogy ki akarsz jelentkezni?'**
   String get profileSignoutQuestion;
 
-  /// No description provided for @profileSignoutYes.
+  /// A(z) profileSignoutYes fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Igen'**
   String get profileSignoutYes;
 
-  /// No description provided for @profileSignoutCancel.
+  /// A(z) profileSignoutCancel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mégsem'**
   String get profileSignoutCancel;
 
-  /// No description provided for @profileDeleteTitle.
+  /// A(z) profileDeleteTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Profil törlése'**
   String get profileDeleteTitle;
 
-  /// No description provided for @profileDeleteQuestion.
+  /// A(z) profileDeleteQuestion fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Minden adatod véglegesen törlődni fog és nem lesz visszaállítható. Biztos vagy benne?'**
   String get profileDeleteQuestion;
 
-  /// No description provided for @profileDeleteYes.
+  /// A(z) profileDeleteYes fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Törlés'**
   String get profileDeleteYes;
 
-  /// No description provided for @profileDeleteCancel.
+  /// A(z) profileDeleteCancel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mégsem'**
   String get profileDeleteCancel;
 
-  /// No description provided for @deleteProfileScreenTitle.
+  /// A(z) deleteProfileScreenTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Profil törlése!'**
   String get deleteProfileScreenTitle;
 
-  /// No description provided for @deleteProfileScreenText.
+  /// A(z) deleteProfileScreenText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Ahhoz, hogy töröljük a profilod, biztonsági okokból újra be kell jelentkezned.'**
   String get deleteProfileScreenText;
 
-  /// No description provided for @deleteProfileScreenSuccessTitle.
+  /// A(z) deleteProfileScreenSuccessTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'A profilodat töröltük!'**
   String get deleteProfileScreenSuccessTitle;
 
-  /// No description provided for @deleteProfileScreenOkayButtonText.
+  /// A(z) deleteProfileScreenOkayButtonText fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Rendben'**
   String get deleteProfileScreenOkayButtonText;
 
-  /// No description provided for @presence.
+  /// A(z) presence fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Jelenlét'**
   String get presence;
 
-  /// No description provided for @presenceScreenSubTitle.
+  /// A(z) presenceScreenSubTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Mozgasd a csuszkát a jelenlét időkeretének beállításához.'**
   String get presenceScreenSubTitle;
 
-  /// No description provided for @secondsAbbr.
+  /// A(z) secondsAbbr fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'mp'**
   String get secondsAbbr;
 
-  /// No description provided for @secondsPlural.
+  /// A(z) secondsPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{másodperc} =1{másodperc} =2{másodperc} few{másodperc} many{másodperc} other{másodperc}}'**
-  String secondsPlural(num count);
+  String secondsPlural(int count);
 
-  /// No description provided for @secondsPluralWithNumber.
+  /// A(z) secondsPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} másodperc} =1{{count} másodperc} =2{{count} másodperc} few{{count} másodperc} many{{count} másodperc} other{{count} másodperc}}'**
-  String secondsPluralWithNumber(num count);
+  String secondsPluralWithNumber(int count);
 
-  /// No description provided for @minutesAbbr.
+  /// A(z) minutesAbbr fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'p'**
   String get minutesAbbr;
 
-  /// No description provided for @minutesPlural.
+  /// A(z) minutesPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{perc} =1{perc} =2{perc} few{perc} many{perc} other{perc}}'**
-  String minutesPlural(num count);
+  String minutesPlural(int count);
 
-  /// No description provided for @minutesPluralWithNumber.
+  /// A(z) minutesPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}'**
-  String minutesPluralWithNumber(num count);
+  String minutesPluralWithNumber(int count);
 
-  /// No description provided for @hoursAbbr.
+  /// A(z) hoursAbbr fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'ó'**
   String get hoursAbbr;
 
-  /// No description provided for @hoursPlural.
+  /// A(z) hoursPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{óra} =1{óra} =2{óra} few{óra} many{óra} other{óra}}'**
-  String hoursPlural(num count);
+  String hoursPlural(int count);
 
-  /// No description provided for @hoursPluralWithNumber.
+  /// A(z) hoursPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} óra} =1{{count} óra} =2{{count} óra} few{{count} óra} many{{count} óra} other{{count} óra}}'**
-  String hoursPluralWithNumber(num count);
+  String hoursPluralWithNumber(int count);
 
-  /// No description provided for @sessionsPlural.
+  /// A(z) sessionsPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{ülés} =1{ülés} =2{ülés} few{ülés} many{ülés} other{ülés}}'**
-  String sessionsPlural(num count);
+  String sessionsPlural(int count);
 
-  /// No description provided for @sessionsPluralWithNumber.
+  /// A(z) sessionsPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} ülés} =1{{count} ülés} =2{{count} ülés} few{{count} ülés} many{{count} ülés} other{{count} ülés}}'**
-  String sessionsPluralWithNumber(num count);
+  String sessionsPluralWithNumber(int count);
 
-  /// No description provided for @daysPlural.
+  /// A(z) daysPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{nap} =1{nap} =2{nap} few{nap} many{nap} other{nap}}'**
-  String daysPlural(num count);
+  String daysPlural(int count);
 
-  /// No description provided for @daysPluralWithNumber.
+  /// A(z) daysPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} nap} few{{count} nap} many{{count} nap} other{{count} nap}}'**
-  String daysPluralWithNumber(num count);
+  String daysPluralWithNumber(int count);
 
-  /// No description provided for @weeksPlural.
+  /// A(z) weeksPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{hét} =1{hét} =2{hét} few{hét} many{hét} other{hét}}'**
-  String weeksPlural(num count);
+  String weeksPlural(int count);
 
-  /// No description provided for @weeksPluralWithNumber.
+  /// A(z) weeksPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} hét} =1{{count} hét} =2{{count} hét} few{{count} hét} many{{count} hét} other{{count} hét}}'**
-  String weeksPluralWithNumber(num count);
+  String weeksPluralWithNumber(int count);
 
-  /// A hét számának megjelenítése.
+  /// A(z) weekNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{year} {weekNumber}H'**
   String weekNumber(int year, int weekNumber);
 
-  /// No description provided for @consecutiveDaysPlural.
+  /// A(z) consecutiveDaysPlural fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
-  String consecutiveDaysPlural(num count);
+  String consecutiveDaysPlural(int count);
 
-  /// No description provided for @consecutiveDaysPluralWithNumber.
+  /// A(z) consecutiveDaysPluralWithNumber fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
-  String consecutiveDaysPluralWithNumber(num count);
+  String consecutiveDaysPluralWithNumber(int count);
 
-  /// No description provided for @thousand.
+  /// A(z) thousand fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'ezer'**
   String get thousand;
 
-  /// No description provided for @thousandShort.
+  /// A(z) thousandShort fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'e'**
   String get thousandShort;
 
-  /// No description provided for @million.
+  /// A(z) million fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'millió'**
   String get million;
 
-  /// No description provided for @millionShort.
+  /// A(z) millionShort fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'m'**
   String get millionShort;
 
-  /// No description provided for @locationInputPlaceholder.
+  /// A(z) locationInputPlaceholder fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Válaszz egy várost'**
   String get locationInputPlaceholder;
 
-  /// No description provided for @locationInputCurrentSelection.
+  /// A(z) locationInputCurrentSelection fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Current selection:'**
   String get locationInputCurrentSelection;
 
-  /// No description provided for @locationInputNoSelection.
+  /// A(z) locationInputNoSelection fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Nincs kiválasztva város'**
   String get locationInputNoSelection;
 
-  /// No description provided for @locationInputNoResults.
+  /// A(z) locationInputNoResults fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Nincs találat'**
   String get locationInputNoResults;
 
-  /// No description provided for @locationInputErrorMessage.
+  /// A(z) locationInputErrorMessage fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Váratlan hiba történt.\nKérlek próbáld újra később.'**
   String get locationInputErrorMessage;
 
-  /// No description provided for @chantingTitle.
+  /// A(z) chantingTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Éneklés'**
   String get chantingTitle;
 
-  /// No description provided for @chantingNextChantIn.
+  /// A(z) chantingNextChantIn fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Következő éneklés'**
   String get chantingNextChantIn;
 
-  /// No description provided for @chantingAddChantSheetTitle.
+  /// A(z) chantingAddChantSheetTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Hozzáadás'**
   String get chantingAddChantSheetTitle;
 
-  /// No description provided for @chantingPlaylistSheetTitle.
+  /// A(z) chantingPlaylistSheetTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Lejátszási lista'**
   String get chantingPlaylistSheetTitle;
 
-  /// No description provided for @chantingPlaylistBadgeLoading.
+  /// A(z) chantingPlaylistBadgeLoading fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Betöltés'**
   String get chantingPlaylistBadgeLoading;
 
-  /// No description provided for @chantingPlaylistBadgePlaying.
+  /// A(z) chantingPlaylistBadgePlaying fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Lejátszás'**
   String get chantingPlaylistBadgePlaying;
 
-  /// No description provided for @chantingPlaylistBadgePaused.
+  /// A(z) chantingPlaylistBadgePaused fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Szünet'**
   String get chantingPlaylistBadgePaused;
 
-  /// No description provided for @chantingPlaylistBadgeCompleted.
+  /// A(z) chantingPlaylistBadgeCompleted fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Befejezett'**
   String get chantingPlaylistBadgeCompleted;
 
-  /// No description provided for @chantingPlaylistBadgeNext.
+  /// A(z) chantingPlaylistBadgeNext fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
   /// **'Következő'**

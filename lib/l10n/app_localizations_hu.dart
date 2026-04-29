@@ -106,6 +106,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get inputSoundChukpi => 'Chukpi';
 
   @override
+  String get inputSoundVibrate => 'Rezgés';
+
+  @override
   String get inputSoundSmallBell => 'Csengettyű';
 
   @override
@@ -127,7 +130,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sessionResultCompleted => 'Teljesítettél';
 
   @override
-  String sessionResultMinutes(num count) {
+  String sessionResultMinutes(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -451,7 +458,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String get secondsAbbr => 'mp';
 
   @override
-  String secondsPlural(num count) {
+  String secondsPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -466,16 +477,20 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String secondsPluralWithNumber(num count) {
+  String secondsPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count másodperc',
-      many: '$count másodperc',
-      few: '$count másodperc',
-      two: '$count másodperc',
-      one: '$count másodperc',
-      zero: '$count másodperc',
+      other: '$countString másodperc',
+      many: '$countString másodperc',
+      few: '$countString másodperc',
+      two: '$countString másodperc',
+      one: '$countString másodperc',
+      zero: '$countString másodperc',
     );
     return '$_temp0';
   }
@@ -484,7 +499,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String get minutesAbbr => 'p';
 
   @override
-  String minutesPlural(num count) {
+  String minutesPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -499,16 +518,20 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String minutesPluralWithNumber(num count) {
+  String minutesPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count perc',
-      many: '$count perc',
-      few: '$count perc',
-      two: '$count perc',
-      one: '$count perc',
-      zero: '$count perc',
+      other: '$countString perc',
+      many: '$countString perc',
+      few: '$countString perc',
+      two: '$countString perc',
+      one: '$countString perc',
+      zero: '$countString perc',
     );
     return '$_temp0';
   }
@@ -517,7 +540,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String get hoursAbbr => 'ó';
 
   @override
-  String hoursPlural(num count) {
+  String hoursPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -532,22 +559,30 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String hoursPluralWithNumber(num count) {
+  String hoursPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count óra',
-      many: '$count óra',
-      few: '$count óra',
-      two: '$count óra',
-      one: '$count óra',
-      zero: '$count óra',
+      other: '$countString óra',
+      many: '$countString óra',
+      few: '$countString óra',
+      two: '$countString óra',
+      one: '$countString óra',
+      zero: '$countString óra',
     );
     return '$_temp0';
   }
 
   @override
-  String sessionsPlural(num count) {
+  String sessionsPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -562,22 +597,30 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String sessionsPluralWithNumber(num count) {
+  String sessionsPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count ülés',
-      many: '$count ülés',
-      few: '$count ülés',
-      two: '$count ülés',
-      one: '$count ülés',
-      zero: '$count ülés',
+      other: '$countString ülés',
+      many: '$countString ülés',
+      few: '$countString ülés',
+      two: '$countString ülés',
+      one: '$countString ülés',
+      zero: '$countString ülés',
     );
     return '$_temp0';
   }
 
   @override
-  String daysPlural(num count) {
+  String daysPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -592,22 +635,30 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String daysPluralWithNumber(num count) {
+  String daysPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count nap',
-      many: '$count nap',
-      few: '$count nap',
-      two: '$count nap',
-      one: '$count nap',
-      zero: '$count nap',
+      other: '$countString nap',
+      many: '$countString nap',
+      few: '$countString nap',
+      two: '$countString nap',
+      one: '$countString nap',
+      zero: '$countString nap',
     );
     return '$_temp0';
   }
 
   @override
-  String weeksPlural(num count) {
+  String weeksPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -622,16 +673,20 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String weeksPluralWithNumber(num count) {
+  String weeksPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count hét',
-      many: '$count hét',
-      few: '$count hét',
-      two: '$count hét',
-      one: '$count hét',
-      zero: '$count hét',
+      other: '$countString hét',
+      many: '$countString hét',
+      few: '$countString hét',
+      two: '$countString hét',
+      one: '$countString hét',
+      zero: '$countString hét',
     );
     return '$_temp0';
   }
@@ -642,31 +697,39 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String consecutiveDaysPlural(num count) {
+  String consecutiveDaysPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count egymás utáni nap',
-      many: '$count egymás utáni nap',
-      few: '$count egymás utáni nap',
-      two: '$count egymás utáni nap',
-      one: '$count nap',
-      zero: '$count nap',
+      other: '$countString egymás utáni nap',
+      many: '$countString egymás utáni nap',
+      few: '$countString egymás utáni nap',
+      two: '$countString egymás utáni nap',
+      one: '$countString nap',
+      zero: '$countString nap',
     );
     return '$_temp0';
   }
 
   @override
-  String consecutiveDaysPluralWithNumber(num count) {
+  String consecutiveDaysPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count egymás utáni nap',
-      many: '$count egymás utáni nap',
-      few: '$count egymás utáni nap',
-      two: '$count egymás utáni nap',
-      one: '$count nap',
-      zero: '$count nap',
+      other: '$countString egymás utáni nap',
+      many: '$countString egymás utáni nap',
+      few: '$countString egymás utáni nap',
+      two: '$countString egymás utáni nap',
+      one: '$countString nap',
+      zero: '$countString nap',
     );
     return '$_temp0';
   }
