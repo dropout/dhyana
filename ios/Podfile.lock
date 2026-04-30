@@ -14,9 +14,6 @@ PODS:
     - FlutterMacOS
   - audio_session (0.0.1):
     - Flutter
-  - audioplayers_darwin (0.0.1):
-    - Flutter
-    - FlutterMacOS
   - cloud_firestore (6.1.3):
     - Firebase/Firestore (= 12.9.0)
     - firebase_core
@@ -312,7 +309,6 @@ PODS:
 DEPENDENCIES:
   - audio_service (from `.symlinks/plugins/audio_service/darwin`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
-  - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/darwin`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -384,8 +380,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audio_service/darwin"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
-  audioplayers_darwin:
-    :path: ".symlinks/plugins/audioplayers_darwin/darwin"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   cloud_functions:
@@ -442,7 +436,6 @@ SPEC CHECKSUMS:
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
   audio_service: cab6c1a0eaf01b5a35b567e11fa67d3cc1956910
   audio_session: 19e9480dbdd4e5f6c4543826b2e8b0e4ab6145fe
-  audioplayers_darwin: f15e209a3e856d1a7edcf98dc029f484fead2242
   cloud_firestore: 90c4f245978a00fdfba814984b699890dd140d70
   cloud_functions: 776390f184b021fcf87c028fac5487d2dec6abfe
   Firebase: 065f2bb395062046623036d8e6dc857bc2521d56

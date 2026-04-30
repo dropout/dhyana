@@ -104,6 +104,7 @@ flutter:
   assets:
     - assets/sounds/
     - assets/images/
+    - assets/haptics/
     - assets/nsfw.tflite
 
   shaders:

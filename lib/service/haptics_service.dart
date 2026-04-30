@@ -3,4 +3,5 @@ abstract interface class HapticsService {
   void select();
   void error();
   void success();
+  void patternFromData(String assetPath);  
 }

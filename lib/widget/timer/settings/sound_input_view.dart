@@ -12,77 +12,66 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'input_view.dart';
 
 class SoundInputCard extends StatelessWidget {
-
   final Sound sound;
-  final TimerAudioService audioService;
+  final VoidCallback onTap;
 
-  const SoundInputCard({
-    required this.sound,
-    required this.audioService,
-    super.key,
-  });
+  const SoundInputCard({required this.sound, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {        
-        audioService.playSound(sound);
-      },
-      child: Stack(
-        children: [       
-          DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.lerp(
-                  AppColors.backgroundPaperLight,
-                  Colors.white,
-                  0.33,
-                )!,
-                width: 1.0,
-              ),
-              boxShadow: DesignSpec.defaultBoxShadow,
-              borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
-              image: DecorationImage(
-                image: AssetImage(sound.imageResourcePath),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Align(
-              alignment: .bottomCenter,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  vertical: DesignSpec.paddingSm,
-                ),
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+        boxShadow: DesignSpec.defaultBoxShadow,
+      ),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          children: [
+            Expanded(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.5),
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(DesignSpec.borderRadiusMd),
+                    topRight: Radius.circular(DesignSpec.borderRadiusMd),
+                  ),
+                  image: DecorationImage(
+                    image: AssetImage(sound.imageResourcePath),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: SizedBox.expand(),
+            )
+            ),
+            SizedBox(
+              height: 32, 
+              child: DecoratedBox(                          
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(DesignSpec.borderRadiusMd),
                     bottomRight: Radius.circular(DesignSpec.borderRadiusMd),
                   ),
-                ),
-                child: Text(
-                  getLocalizedSoundName(sound, context.l10n),
-                  textAlign: TextAlign.center,
-                  style: context.theme.textTheme.labelMedium!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
+                  color: Colors.black,
+                ), 
+                child: SizedBox.expand(
+                  child: Center(
+                    child: Text(
+                      getLocalizedSoundName(sound, context.l10n),
+                      textAlign: TextAlign.center,
+                      style: context.theme.textTheme.labelMedium!.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                   ),
-                ),
+                )
               ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: SoundInputPlayButton(              
-              sound: sound,
-              audioService: audioService,
-            ),
-          ),
-        ],
+          ],
+        )
       ),
-    );
+    );    
   }
 }
 
@@ -136,6 +125,14 @@ class SoundInputViewState extends State<SoundInputView>
     context.services.hapticsService.select();
   }
 
+  void _onInputCardTap(BuildContext context, Sound sound) async {
+    if (sound == Sound.vibrate) {
+      context.services.hapticsService.patternFromData(Sound.vibrate.assetPath);
+    } else {
+      audioService.playSound(sound);
+    }    
+  }
+
   @override
   Widget build(BuildContext context) {
     return InputView(
@@ -151,7 +148,7 @@ class SoundInputViewState extends State<SoundInputView>
       children: [
         SizedBox(
           height: 200,
-          child: CarouselSlider(                        
+          child: CarouselSlider(
             options: CarouselOptions(
               aspectRatio: 1.6,
               enlargeFactor: .33,
@@ -169,7 +166,10 @@ class SoundInputViewState extends State<SoundInputView>
                     padding: const EdgeInsets.symmetric(
                       vertical: DesignSpec.paddingSm,
                     ),
-                    child: SoundInputCard(sound: i, audioService: audioService),
+                    child: SoundInputCard(
+                      sound: i,
+                      onTap: () => _onInputCardTap(context, i),
+                    ),
                   );
                 },
               );

@@ -9,8 +9,11 @@ String getLocalizedSoundName(
   switch (sound) {
     case Sound.none:
       return localizations.noSound;
+    case Sound.vibrate:
+      return localizations.inputSoundVibrate;
     case Sound.smallBell:
       return localizations.inputSoundSmallBell;
+    
   }
 }
 

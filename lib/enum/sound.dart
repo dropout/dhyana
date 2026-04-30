@@ -1,6 +1,7 @@
 enum Sound {
   none(0, 0),
-  smallBell(1, 1);
+  vibrate(1, 1),
+  smallBell(2, 2);
 
   const Sound(this.id, this.priority);
   final int id;
@@ -14,17 +15,21 @@ extension ImageResourceUrl on Sound {
         return 'assets/images/no_sound.jpg';
       case Sound.smallBell:
         return 'assets/images/small_bell.jpg';
+      case Sound.vibrate:
+        return 'assets/images/vibrate.jpg'; 
     }
   }
 }
 
-extension SoundResourceUrl on Sound {
-  String get audioResourcePath {
+extension ResourceUrl on Sound {
+  String get assetPath {
     switch (this) {
       case Sound.none:
         return 'assets/sounds/no_sound.mp3';
       case Sound.smallBell:
         return 'assets/sounds/small_bell.mp3';
+      case Sound.vibrate:
+        return 'assets/haptics/vibration.ahap';
     }
   }
 }

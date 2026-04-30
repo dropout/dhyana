@@ -136,7 +136,7 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
   Future<void> _start(TimerSettings timerSettings) async {
     // Set the source for background player to a silent audio asset,
     // which will keep the media session active
-    await _backgroundPlayer.setAsset(Sound.none.audioResourcePath);
+    await _backgroundPlayer.setAsset(Sound.none.assetPath);
 
     // Configure lock screen media info
     mediaItem.add(
@@ -174,7 +174,7 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
       await _soundPlayer.stop();
     }
 
-    await _soundPlayer.setAsset(sound.audioResourcePath);
+    await _soundPlayer.setAsset(sound.assetPath);
     if (_backgroundPlayer.playing == false) {
       playbackState.add(
         playbackState.value.copyWith(
