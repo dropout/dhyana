@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:clock/clock.dart';
+import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
@@ -19,14 +21,15 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
   TimerAudioServiceElapsedTimeSource(this.timerAudioService);
 
   @override
-  Stream<Duration> get elapsedTimeStream =>
-      timerAudioService.playbackStateStream.map((playbackState) {
-        return playbackState.position;
-      });
+  Stream<Duration> get elapsedTimeStream => timerAudioService
+      .playbackStateStream
+      .map((playbackState) => playbackState.position)
+      .distinct();
 }
 
 class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
   final TimerAudioService audioService;
+  final HapticsService hapticsService;
   final TimerEventScheduler eventScheduler;
   final CrashlyticsService crashlyticsService;
 
@@ -35,17 +38,25 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
   TimerCubit({
     required TimerSettings timerSettings,
     required this.audioService,
+    required this.hapticsService,
     required this.eventScheduler,
     required this.crashlyticsService,
   }) : super(TimerCubitState.initial(timerSettings: timerSettings)) {
     eventScheduler.addListener(timerSettings.totalTime, _onTimerCompleted);
-    _playbackStateSub = audioService.playbackStateStream.listen(
-      _onPlaybackStateChanged,
-    );
+
+    // Frame the subscription to start after the timer is started, to avoid reacting 
+    // to playback state changes before the timer starts running.
+    // Also, only listen to playback state changes until the timer is completed, 
+    // to avoid reacting to any playback state changes after the timer is done 
+    _playbackStateSub = audioService.playbackStateStream
+        .skipWhile((_) => state.startTime == null)
+        .takeWhile((_) => state.timerStatus != TimerStatus.completed)
+        .listen(_onPlaybackStateChanged);
   }
 
   Future<void> start() async {
     try {
+      logger.t('Starting timer - ${clock.now()}');
       final startFuture = audioService.start(state.timerSettings);
       eventScheduler.reset();
 
@@ -66,6 +77,10 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
       }
       eventScheduler.start();
 
+      // Wait for the audio service to settle down after setting the
+      // audio source and starting, before emitting the running state,
+      // to avoid the brief flash of paused state on timer launch.
+      await startFuture;
       emit(
         state.copyWith(
           startTime: clock.now(),
@@ -75,8 +90,8 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
       );
       logger.t('Timer started - ${clock.now()}');
 
-      // Wait for both the audio service to start and the starting sound to play
-      await Future.wait([startFuture, playSoundFuture]);
+      // Wait for the starting sound to finish
+      await playSoundFuture;
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -148,13 +163,19 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
     final n = clock.now();
     logger.t('Timer completed - $n');
 
-    // Only stop 'background' player which is responsible 
-    // for maintaining the OS media session, so that the 'audio' player 
+    late Future r;
+    if (state.timerSettings.endingSound == .vibrate) {
+      hapticsService.patternFromData(state.timerSettings.endingSound.assetPath);
+      r = Future.value(null);
+    } else {
+      r = audioService.playSound(state.timerSettings.endingSound);      
+    }
+
+    // Only stop 'background' player after the ending sound is played,
+    // to ensure the ending sound is not cut off.
+    // for maintaining the OS media session, so that the 'audio' player
     // can still play the ending sound without being cut off
-    final r = audioService.playSound(state.timerSettings.endingSound);
-    r.then((_) {
-      audioService.stop();
-    });
+    r.then((_) => audioService.stop());
 
     emit(
       state.copyWith(
@@ -169,6 +190,7 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
   Future<void> close() {
     _playbackStateSub?.cancel();
     _playbackStateSub = null;
+    eventScheduler.stop();
     eventScheduler.dispose();
     audioService.stop();
 

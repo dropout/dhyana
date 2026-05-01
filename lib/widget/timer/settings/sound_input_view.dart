@@ -1,10 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dhyana/service/timer_audio_service.dart';
+import 'package:dhyana/service/simple_audio_service.dart';
 import 'package:dhyana/util/enum_helper.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/timer/settings/sound_input_play_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -19,7 +18,6 @@ class SoundInputCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
@@ -37,23 +35,23 @@ class SoundInputCard extends StatelessWidget {
                     topRight: Radius.circular(DesignSpec.borderRadiusMd),
                   ),
                   image: DecorationImage(
-                    image: AssetImage(sound.imageResourcePath),
+                    image: AssetImage(sound.imagePath),
                     fit: BoxFit.cover,
                   ),
                 ),
                 child: SizedBox.expand(),
-            )
+              ),
             ),
             SizedBox(
-              height: 32, 
-              child: DecoratedBox(                          
+              height: 32,
+              child: DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(DesignSpec.borderRadiusMd),
                     bottomRight: Radius.circular(DesignSpec.borderRadiusMd),
                   ),
                   color: Colors.black,
-                ), 
+                ),
                 child: SizedBox.expand(
                   child: Center(
                     child: Text(
@@ -65,13 +63,13 @@ class SoundInputCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ),
             ),
           ],
-        )
+        ),
       ),
-    );    
+    );
   }
 }
 
@@ -93,13 +91,13 @@ class SoundInputView extends StatefulWidget {
 
 class SoundInputViewState extends State<SoundInputView>
     with TickerProviderStateMixin {
-  late final TimerAudioService audioService;
+  late final SimpleAudioService audioService;
   late TabController tabController;
   int selectedIndex = 0;
 
   @override
   void initState() {
-    audioService = TimerAudioService(context.services.audioHandler);
+    audioService = SimpleAudioService();
     tabController = TabController(length: Sound.values.length, vsync: this);
 
     if (widget.initialValue != null) {
@@ -129,8 +127,8 @@ class SoundInputViewState extends State<SoundInputView>
     if (sound == Sound.vibrate) {
       context.services.hapticsService.patternFromData(Sound.vibrate.assetPath);
     } else {
-      audioService.playSound(sound);
-    }    
+      audioService.play(sound);
+    }
   }
 
   @override
@@ -195,17 +193,11 @@ class SoundInputViewState extends State<SoundInputView>
     );
   }
 
-  Widget buildPlayButton(BuildContext context) {
-    return SoundInputPlayButton(
-      audioService: audioService,
-      sound: getEnumByIndex(selectedIndex, Sound.values),
-    );
-  }
-
   @override
   void dispose() {
     tabController.dispose();
     audioService.stop();
+    audioService.dispose();
     super.dispose();
   }
 }

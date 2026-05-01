@@ -9,7 +9,7 @@ enum Sound {
 }
 
 extension ImageResourceUrl on Sound {
-  String get imageResourcePath {
+  String get imagePath {
     switch (this) {
       case Sound.none:
         return 'assets/images/no_sound.jpg';

@@ -14,14 +14,14 @@ class ChantingAudioHandler extends BaseAudioHandler {
 
   final AudioPlayer _chantPlayer = AudioPlayer();
 
-  StreamSubscription<PlayerState>? _chantStateSubscription;
-  StreamSubscription<Duration>? _chantPositionSubscription;
+  StreamSubscription<PlayerState>? _stateSub;
+  StreamSubscription<Duration>? _positionSub;
 
   ChantingAudioHandler() {
-    _chantStateSubscription = _chantPlayer.playerStateStream.distinct().listen(
+    _stateSub = _chantPlayer.playerStateStream.distinct().listen(
       _onChantPlayerStateChanged,
     );
-    _chantPositionSubscription = _chantPlayer.positionStream.listen((p) {
+    _positionSub = _chantPlayer.positionStream.listen((p) {
       playbackState.add(playbackState.value.copyWith(updatePosition: p));
     });
   }
@@ -122,8 +122,8 @@ class ChantingAudioHandler extends BaseAudioHandler {
   }
 
   void close() {
-    _chantStateSubscription?.cancel();
-    _chantPositionSubscription?.cancel();
+    _stateSub?.cancel();
+    _positionSub?.cancel();
     _chantPlayer.dispose();
   }
   

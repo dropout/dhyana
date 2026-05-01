@@ -39,7 +39,7 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
     );
 
     _bgPlayerPositionSub = _backgroundPlayer.positionStream.listen(
-      _onPositionChanged,
+      _onBgPlayerPositionChanged,
     );
   }
 
@@ -78,22 +78,6 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
         } catch (e) {
           throw ArgumentError('Invalid sound for playSound action: $extras');
         }
-      // case TimerHandlerCustomAction.release:
-      //   mediaItem.add(null);
-      //   playbackState.add(
-      //     PlaybackState(
-      //       controls: [],
-      //       systemActions: const {},
-      //       androidCompactActionIndices: const [],
-      //     ),
-      //   );
-      //   // Only release the background player, which is responsible
-      //   // for maintaining the OS media session.
-      //   // Do not release the audio player, which is responsible for playing discrete
-      //   // sounds, so that when the route changes to show a completed session
-      //   // the ending sound can still play without being cut off by the audio player.
-      //   await _backgroundPlayer.stop();
-      //   return;
     }
   }
 
@@ -125,10 +109,13 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
   @override
   stop() async {    
     await _backgroundPlayer.stop();
+    _lastPositionUpdateTime = null;
+    _sessionDuration = Duration.zero;
     playbackState.add(
       playbackState.value.copyWith(
         playing: false,
         processingState: AudioProcessingState.idle,
+        updatePosition: Duration.zero,
       ),
     );
   }
@@ -161,6 +148,7 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
         processingState: AudioProcessingState.ready,
         controls: [],
         systemActions: const {},
+        updatePosition: Duration.zero,
       ),
     );
   }
@@ -175,27 +163,10 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
     }
 
     await _soundPlayer.setAsset(sound.assetPath);
-    if (_backgroundPlayer.playing == false) {
-      playbackState.add(
-        playbackState.value.copyWith(
-          processingState: AudioProcessingState.ready,
-          playing: true,
-        ),
-      );
-    }
     await _soundPlayer.play();
-    if (_backgroundPlayer.playing == false) {
-      playbackState.add(
-        playbackState.value.copyWith(
-          processingState: AudioProcessingState.idle,
-          playing: false,
-        ),
-      );
-    }
   }
 
   void _onBgPlayerStateChanged(PlayerState state) {
-    logger.t('Background player state changed: $state');
     // Ignore .completed state from the background player,
     // because it's looping and will emit .completed after each loop,
     // which would cause side effects if we treated it as a real completed state.
@@ -210,8 +181,8 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
     );
   }
 
-  void _onPositionChanged(Duration position) {
-    final n = DateTime.now();
+  void _onBgPlayerPositionChanged(_) {
+    final n = DateTime.now();    
     if (_lastPositionUpdateTime == null) {
       _lastPositionUpdateTime = n;
     } else {
@@ -222,7 +193,6 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
       );
       _lastPositionUpdateTime = n;
     }
-    logger.t('Session duration: $_sessionDuration');
   }
 
   AudioProcessingState _toProcessingState(PlayerState state) => switch (state) {
@@ -231,7 +201,7 @@ class TimerAudioHandler extends BaseAudioHandler with LoggerMixin {
     PlayerState(processingState: ProcessingState.loading) =>
       AudioProcessingState.loading,
     PlayerState(processingState: ProcessingState.buffering) =>
-      AudioProcessingState.loading,
+      AudioProcessingState.buffering,
     PlayerState(processingState: ProcessingState.ready) =>
       AudioProcessingState.ready,
     PlayerState(processingState: ProcessingState.completed) =>

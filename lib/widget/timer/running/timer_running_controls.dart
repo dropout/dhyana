@@ -7,26 +7,21 @@ import 'package:go_router/go_router.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/design_spec.dart';
 
-
 /// Controls displayed when the timer is running or paused
 /// Includes the main play/pause button and the pause menu
 /// with animated appearance/disappearance of menu items
 class TimerRunningControls extends StatefulWidget {
-
   final double iconSize = 64;
   final TimerCubitState timerState;
 
-  const TimerRunningControls({
-    required this.timerState,
-    super.key,
-  });
+  const TimerRunningControls({required this.timerState, super.key});
 
   @override
   State<TimerRunningControls> createState() => TimerRunningControlsState();
 }
 
-class TimerRunningControlsState extends State<TimerRunningControls> with SingleTickerProviderStateMixin {
-
+class TimerRunningControlsState extends State<TimerRunningControls>
+    with SingleTickerProviderStateMixin {
   // Predefined values
   // Update if pause menu item count change required
   static const int _itemCount = 2;
@@ -54,8 +49,9 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     }
   }
 
-  bool get shouldShowFinishButton  {
-    return widget.timerState.timerStage == TimerStage.timer && widget.timerState.elapsedTime > const Duration(minutes: 1);
+  bool get shouldShowFinishButton {
+    return widget.timerState.timerStage == TimerStage.timer &&
+        widget.timerState.elapsedTime > const Duration(minutes: 1);
   }
 
   @override
@@ -70,10 +66,15 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
 
   @override
   void didUpdateWidget(TimerRunningControls oldWidget) {
-    if (oldWidget.timerState.timerStatus != TimerStatus.paused && widget.timerState.timerStatus == TimerStatus.paused) {
+    // From non-paused to paused - play show animation forward
+    if (oldWidget.timerState.timerStatus != TimerStatus.paused &&
+        widget.timerState.timerStatus == TimerStatus.paused) {
       animationController.forward(from: 0.0);
     }
-    if (oldWidget.timerState.timerStatus == TimerStatus.paused && widget.timerState.timerStatus != TimerStatus.paused) {
+
+    // From paused to non-paused - play show animation in reverse to hide it
+    if (oldWidget.timerState.timerStatus == TimerStatus.paused &&
+        widget.timerState.timerStatus != TimerStatus.paused) {
       animationController.reverse(from: 1.0);
     }
     super.didUpdateWidget(oldWidget);
@@ -81,26 +82,26 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
 
   void _onPause(BuildContext context) {
     context.read<TimerCubit>().pause();
-    context.logEvent(name: 'timer_pause');
     context.hapticsTap();
+    context.logEvent(name: 'timer_pause');
   }
 
   void _onResume(BuildContext context) {
     context.read<TimerCubit>().resume();
-    context.logEvent(name: 'timer_resume');
     context.hapticsTap();
+    context.logEvent(name: 'timer_resume');
   }
 
   void _onDiscard(BuildContext context) {
     context.pop();
-    context.logEvent(name: 'timer_discard');
     context.hapticsTap();
+    context.logEvent(name: 'timer_discard');
   }
 
   void _onFinish(BuildContext context) {
     context.read<TimerCubit>().finish();
-    context.logEvent(name: 'timer_finish');
     context.hapticsTap();
+    context.logEvent(name: 'timer_finish');
   }
 
   @override
@@ -126,9 +127,8 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     Color textColor,
     Color bgColor,
     Function(BuildContext context) action, {
-      Key? key,
-    }
-  ) {
+    Key? key,
+  }) {
     return TextButton(
       key: key,
       onPressed: () => action(context),
@@ -139,14 +139,14 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
         padding: const EdgeInsets.symmetric(
           horizontal: DesignSpec.spacingLg,
           vertical: DesignSpec.spacingMd,
-        )
+        ),
       ),
       child: Text(
         text,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: textColor,
           fontWeight: FontWeight.bold,
-        )
+        ),
       ),
     );
   }
@@ -155,20 +155,25 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     final List<Widget> items = [
       _buildMenuItem(
         context,
-        AppLocalizations.of(context).timerDiscardSessionButtonText.toUpperCase(),
+        AppLocalizations.of(
+          context,
+        ).timerDiscardSessionButtonText.toUpperCase(),
         Colors.white,
         Colors.grey.shade800,
         _onDiscard,
         key: const Key('timer_running_controls_discard_button'),
       ),
-      if (shouldShowFinishButton) _buildMenuItem(
-        context,
-        AppLocalizations.of(context).timerFinishSessionButtonText.toUpperCase(),
-        Colors.black,
-        Colors.white,
-        _onFinish,
-        key: const Key('timer_running_controls_finish_button'),
-      ),
+      if (shouldShowFinishButton)
+        _buildMenuItem(
+          context,
+          AppLocalizations.of(
+            context,
+          ).timerFinishSessionButtonText.toUpperCase(),
+          Colors.black,
+          Colors.white,
+          _onFinish,
+          key: const Key('timer_running_controls_finish_button'),
+        ),
     ];
 
     final listItems = <Widget>[];
@@ -184,21 +189,16 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
             return ExcludeSemantics(
               child: IgnorePointer(
                 ignoring: (animationPercent <= 0),
-                child: Opacity(
-                  opacity: opacity,
-                  child: child,
-                ),
+                child: Opacity(opacity: opacity, child: child),
               ),
             );
           },
           child: items[i],
-        )
+        ),
       );
     }
 
-    return listItems.intersperse(
-      const SizedBox(height: DesignSpec.spacingMd)
-    );
+    return listItems.intersperse(const SizedBox(height: DesignSpec.spacingMd));
   }
 
   Widget _buildPauseMenu(BuildContext context, TimerCubitState timerState) {
@@ -211,9 +211,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
   }
 
   Widget _buildMainButton(BuildContext context, TimerCubitState timerState) {
-    final EdgeInsets padding = const EdgeInsets.all(
-      DesignSpec.paddingLg,
-    );
+    final EdgeInsets padding = const EdgeInsets.all(DesignSpec.paddingLg);
     final Key key = const Key('timer_running_controls_main_button');
     switch (timerState.timerStatus) {
       case TimerStatus.idle:
@@ -223,9 +221,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
           padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onResume(context),
-          icon: const Icon(Icons.play_arrow_rounded,
-            color: Colors.white,
-          )
+          icon: const Icon(Icons.play_arrow_rounded, color: Colors.white),
         );
       case TimerStatus.running:
         return IconButton(
@@ -234,9 +230,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
           padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onPause(context),
-          icon: const Icon(Icons.pause_rounded,
-            color: Colors.white,
-          )
+          icon: const Icon(Icons.pause_rounded, color: Colors.white),
         );
       case TimerStatus.paused:
         return IconButton(
@@ -245,21 +239,14 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
           padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onResume(context),
-          icon: const Icon(Icons.play_arrow_rounded,
-            color: Colors.white,
-          )
+          icon: const Icon(Icons.play_arrow_rounded, color: Colors.white),
         );
       case TimerStatus.completed:
-        return IconButton(
-          key: key,
-          iconSize: widget.iconSize,
-          padding: padding,
-          alignment: Alignment.center,
-          onPressed: () => _onResume(context),
-          icon: const Icon(Icons.play_arrow_rounded,
-            color: Colors.white,
-          )
-        );
+        // This state is only briefly shown before navigating to the completed 
+        // session view, so we can return an empty widget here since 
+        // it avoids any potential issues 
+        // with the main button still being visible during the transition.
+        return SizedBox.shrink();
       case TimerStatus.error:
         return IconButton(
           key: key,
@@ -267,9 +254,7 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
           padding: padding,
           alignment: Alignment.center,
           onPressed: () => _onDiscard(context),
-          icon: const Icon(Icons.close,
-            color: Colors.white,
-          )
+          icon: const Icon(Icons.close, color: Colors.white),
         );
     }
   }
@@ -279,5 +264,4 @@ class TimerRunningControlsState extends State<TimerRunningControls> with SingleT
     animationController.dispose();
     super.dispose();
   }
-
 }

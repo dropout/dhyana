@@ -109,6 +109,7 @@ class _TimerContextState extends State<TimerContext> {
     final timerCubit = TimerCubit(
       timerSettings: timerSettings,
       audioService: timerAudioService,
+      hapticsService: services.hapticsService,
       eventScheduler: TimerEventScheduler(
         source: TimerAudioServiceElapsedTimeSource(timerAudioService),
       ),

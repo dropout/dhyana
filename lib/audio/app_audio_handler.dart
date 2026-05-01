@@ -46,7 +46,7 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
           inner = _timerAudioHandler;
         }
 
-        logger.t('Switched audio handler to $handlerId');
+        logger.t('Switched to $handlerId');
         return null;
       default:
         return super.customAction(name, extras);

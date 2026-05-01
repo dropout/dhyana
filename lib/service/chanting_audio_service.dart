@@ -57,7 +57,6 @@ class ChantingAudioService {
 
   AudioPlaybackState _toAudioPlaybackState(PlaybackState playbackState) {
 
-  
     if (playbackState.playing) {
       return AudioPlaybackState.playing;
     }

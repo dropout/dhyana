@@ -245,6 +245,7 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
   @override
   void dispose() {
     animationController.dispose();
+    particleController.dispose();
     super.dispose();
   }
 

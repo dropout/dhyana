@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
-import 'package:dhyana/service/timer_audio_service.dart';
+import 'package:dhyana/service/simple_audio_service.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class SoundInputPlayButton extends StatefulWidget {
   final Sound sound;
 
   /// The audio service to use for playing the sound.
-  final TimerAudioService audioService;
+  final SimpleAudioService audioService;
 
   const SoundInputPlayButton({
     required this.sound,
@@ -69,7 +69,7 @@ class SoundInputPlayButtonState extends State<SoundInputPlayButton> {
           color: AppColors.backgroundPaperLight,
         ),
         onPressed: () {
-          widget.audioService.playSound(widget.sound);
+          widget.audioService.play(widget.sound);
         },
       );
     }

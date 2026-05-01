@@ -62,6 +62,7 @@ void main() async {
     // late TimerCubit timerCubit;
     late TimerSettings defaultTimerSettings;
     late MockTimerAudioService mockAudioService;
+    late MockHapticsService mockHapticsService;
     late TimerEventScheduler eventScheduler;
     late CrashlyticsService loggingCrashlyticsService;
 
@@ -75,6 +76,7 @@ void main() async {
 
     setUp(() {
       mockAudioService = MockTimerAudioService();
+      mockHapticsService = MockHapticsService();
       loggingCrashlyticsService = LoggingCrashlyticsService();
       eventScheduler = TimerEventScheduler(
         source: TimerAudioServiceElapsedTimeSource(mockAudioService),
@@ -97,6 +99,7 @@ void main() async {
       final timerCubit = TimerCubit(
         timerSettings: defaultTimerSettings,
         audioService: mockAudioService,
+        hapticsService: mockHapticsService,
         eventScheduler: eventScheduler,
         crashlyticsService: loggingCrashlyticsService,
       );
@@ -118,6 +121,7 @@ void main() async {
         timerSettings: defaultTimerSettings,
         eventScheduler: eventScheduler,
         audioService: mockAudioService,
+        hapticsService: mockHapticsService,
         crashlyticsService: loggingCrashlyticsService,
       );
 
@@ -143,6 +147,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -190,6 +195,7 @@ void main() async {
           timerSettings: defaultTimerSettings.copyWith(warmup: Duration.zero),
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -227,6 +233,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -250,6 +257,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -274,6 +282,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -305,6 +314,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -334,6 +344,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -375,6 +386,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
@@ -438,6 +450,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
 
@@ -549,6 +562,7 @@ void main() async {
           timerSettings: defaultTimerSettings,
           eventScheduler: eventScheduler,
           audioService: mockAudioService,
+          hapticsService: mockHapticsService,
           crashlyticsService: loggingCrashlyticsService,
         );
         return timerCubit;
