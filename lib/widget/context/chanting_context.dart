@@ -7,12 +7,14 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChantingBlocProviders extends StatelessWidget {
+/// Provides the necessary context for chanting sessions, 
+/// including the chanting cubit and presence cubit.
+class ChantingContext extends StatelessWidget {
 
   final Widget child;
   final ChantingSettings chantingSettings;
 
-  const ChantingBlocProviders({
+  const ChantingContext({
     required this.child,
     required this.chantingSettings,
     super.key,

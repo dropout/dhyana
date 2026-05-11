@@ -8,10 +8,10 @@ typedef SmartBlocOnCreate<T> = T Function(BuildContext context);
 /// bloc's state is immediately required in the current widgets working tree.
 class SmartBlocProvider<T extends StateStreamableSource<S>, S> extends StatelessWidget {
 
-  /// [onCreate] is the function that creates the bloc. It is called with the
+  /// [create] is the function that creates the bloc. It is called with the
   /// current [BuildContext] and should return an instance of the bloc.
   /// It's not called in every build, but only when the bloc is first created.
-  final SmartBlocOnCreate<T> onCreate;
+  final SmartBlocOnCreate<T> create;
 
   /// [builder] is the function that builds the widget tree based on the bloc's
   /// state. It is called with the current [BuildContext] and the bloc's state
@@ -19,7 +19,7 @@ class SmartBlocProvider<T extends StateStreamableSource<S>, S> extends Stateless
   final SmartBlocBuilder<S> builder;
 
   const SmartBlocProvider({
-    required this.onCreate,
+    required this.create,
     required this.builder,
     super.key
   });
@@ -27,7 +27,7 @@ class SmartBlocProvider<T extends StateStreamableSource<S>, S> extends Stateless
   @override
   Widget build(BuildContext context) {
     return BlocProvider<T>(
-      create: onCreate,
+      create: create,
       child: Builder(
         builder: (context) => BlocBuilder<T, S>(
           builder: (context, state) => builder(context, state)

@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/bloc_provider/timer_context.dart';
+import 'package:dhyana/widget/context/timer_context.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

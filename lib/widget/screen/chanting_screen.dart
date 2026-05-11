@@ -6,7 +6,7 @@ import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/app_routes.dart';
-import 'package:dhyana/widget/bloc_provider/chanting_bloc_providers.dart';
+import 'package:dhyana/widget/context/chanting_context.dart';
 import 'package:dhyana/widget/chanting/chanting_player_view.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class ChantingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChantingBlocProviders(
+    return ChantingContext(
       chantingSettings: chantingSettings,
       child: buildScaffolding(context),
     );

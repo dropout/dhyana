@@ -1,9 +1,10 @@
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/widget/context/smart_bloc_provider.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/bloc_provider/presence_cubit_provider.dart';
 import 'package:dhyana/widget/presence/presence_view.dart';
 import 'package:dhyana/widget/screen/default_screen_setup.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,9 +54,16 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   @override
   Widget build(BuildContext context) {
-    return PresenceCubitProvider(
-      onCreate: (presenceCubit) => presenceCubit.loadPresenceData(),
-      child: buildStates(context),
+    return SmartBlocProvider<PresenceCubit, PresenceState>(
+      create: (context) => PresenceCubit(
+        presenceRepository: context.repos.presenceRepository,
+        profileRepository: context.repos.profileRepository,
+        crashlyticsService: context.services.crashlyticsService,
+      )..loadPresenceData(
+        interval: Duration(minutes: sliderPosition.round()),
+        limit: widget.batchSize,
+      ),
+      builder: (context, state) => buildStates(context),
     );
   }
 

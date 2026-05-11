@@ -1,7 +1,8 @@
 import 'package:dhyana/bloc/sessions/sessions_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/bloc_provider/sessions_cubit_provider.dart';
+import 'package:dhyana/widget/context/smart_bloc_provider.dart';
 import 'package:dhyana/widget/session/history/session_history_list.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,9 +20,13 @@ class SessionHistoryScreen extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return SessionsCubitProvider(
-      onCreate: (sessionsBloc) => sessionsBloc.loadSessions(profileId),
-      child: buildSessionsState(context),
+    return SmartBlocProvider<SessionsCubit, SessionsState>(
+      create: (context) => SessionsCubit(
+        authRepository: context.repos.authRepository,
+        statisticsRepository: context.repos.statisticsRepository,
+        crashlyticsService: context.services.crashlyticsService,
+      )..loadSessions(profileId),
+      builder: (context, state) => buildSessionsState(context),
     );
   }
 

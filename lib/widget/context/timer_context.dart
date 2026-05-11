@@ -19,8 +19,8 @@ typedef TimerContextHook =
     String? profileId,
   );
 
-/// A widget that provides the necessary BLoCs for the timer screen and handles 
-/// their initialization and disposal.
+/// A widget that provides the necessary context for the timer screen, 
+/// including the timer cubit, presence cubit, and timer settings history cubit.
 class TimerContext extends StatefulWidget {
   
   /// The default initialization hook for the timer context. This will start the timer

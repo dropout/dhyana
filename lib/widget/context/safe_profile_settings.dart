@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 typedef SafeProfileSettingsBuilder = Widget Function(BuildContext context, ProfileSettings settings);
 
+/// A widget that provides a safe way to access profile settings. 
+/// If the profile is not loaded, or not available (e.g. user is not signed in), 
+/// it will provide a default anonymous profile settings object.
 class SafeProfileSettings extends StatelessWidget {
 
   final SafeProfileSettingsBuilder builder;

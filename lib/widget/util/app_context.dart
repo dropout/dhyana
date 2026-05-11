@@ -10,7 +10,7 @@ extension AppContext on BuildContext {
   void hapticsTap() =>
     services.hapticsService.tap();
 
-  void logEvent({required String name, Map<String, Object>? parameters, }) =>
+  void logEvent({required String name, Map<String, Object>? parameters}) =>
     services.analyticsService.logEvent(
       name: name,
       parameters: parameters
