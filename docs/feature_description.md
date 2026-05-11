@@ -123,11 +123,11 @@ Provide at least one concrete service example to clarify boundaries.
 class ConcreteFeatureService implements FeatureService {
   ConcreteFeatureService(this._library);
 
-  final SessionPlanDataProvider _library;
+  final FeatureLibrary _library;
 
   @override
-  Future<void> play(Feature feature) {
-    return _library.play(feature);
+  Future<void> doFeature(RequiredData requiredData) {
+    return _library.doFeature(requiredData);
   }
 }
 ```
