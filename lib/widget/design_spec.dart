@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class DesignSpec {
 
+  static const double maxContentWidth = 512.0;
+
   static const double spacingXxs = 2.0;
   static const double spacingXs = 4.0;
   static const double spacingSm = 8.0;

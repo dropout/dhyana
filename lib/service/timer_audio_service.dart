@@ -23,19 +23,25 @@ class TimerAudioService {
     _audioHandler.customAction(TimerHandlerCustomAction.playSound.name, {
       'sound': sound.name,
     });
-   
+  
+  /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].  
   Future<void> start(TimerSettings timerSettings) =>
     _audioHandler.customAction(TimerHandlerCustomAction.start.name, timerSettings.toJson());
 
+  /// Resumes audio playback by delegating to the [AppAudioHandler]'s play method.
   Future<void> resume() =>
     _audioHandler.play();
 
+  /// Pauses audio playback by delegating to the [AppAudioHandler]'s pause method.
   Future<void> pause() =>
     _audioHandler.pause();
   
+  /// Stops audio playback by delegating to the [AppAudioHandler]'s stop method.
+  /// This method will release resources and reset the playback state, 
+  /// effectively stopping any ongoing timer audio.
   Future<void> stop() =>
     _audioHandler.stop();
-  
+    
   bool get isPlaying => _audioHandler.playbackState.value.playing;
 
   Stream<bool> get isPlayingStream =>

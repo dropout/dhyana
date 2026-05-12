@@ -113,21 +113,26 @@ class ChantingSettingsView extends StatelessWidget {
                 horizontal: DesignSpec.paddingLg,
                 vertical: DesignSpec.paddingXl,
               ),
-              child: ChantList(
-                chants: state.selectedChants,
-                onAddChant: () => _triggerAddChantSheet(
-                  context, 
-                  availableChants
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: DesignSpec.maxContentWidth,
                 ),
-                onChantRemoved: (chant, index) => _onChantRemoved(
-                  context, 
-                  chant, 
-                  index
-                ),
-                onReorder: (oldIndex, newIndex) => _onReorderSelectedChants(
-                  context, 
-                  oldIndex, 
-                  newIndex
+                child: ChantList(
+                  chants: state.selectedChants,
+                  onAddChant: () => _triggerAddChantSheet(
+                    context, 
+                    availableChants
+                  ),
+                  onChantRemoved: (chant, index) => _onChantRemoved(
+                    context, 
+                    chant, 
+                    index
+                  ),
+                  onReorder: (oldIndex, newIndex) => _onReorderSelectedChants(
+                    context, 
+                    oldIndex, 
+                    newIndex
+                  ),
                 ),
               ),
             ),
