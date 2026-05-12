@@ -12,6 +12,7 @@ import 'package:dhyana/widget/home/session_type_toggle.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
+import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/widget/timer/timer_settings_view.dart';
@@ -20,7 +21,7 @@ import 'package:dhyana/widget/timer/timer_settings_view.dart';
 /// a sitting meditation session and a chanting session, and configure settings
 /// for either before starting.
 ///
-/// [HomeScreen] is driven by [HomeScreenCubit]. 
+/// [HomeScreen] is driven by [HomeScreenCubit].
 /// On creation the cubit is initialised with an
 /// optional [timerSettings] value so that callers can deep-link directly into a
 /// pre-configured sitting session (e.g. from a notification or a history entry).
@@ -126,19 +127,22 @@ class HomeScreen extends StatelessWidget {
   /// persists the selection via [SharedPreferencesService] and emits a new
   /// [HomeScreenStateLoaded] with the updated [SessionType].
   Widget buildToggle(BuildContext context, HomeScreenStateLoaded state) {
-    return SessionTypeToggle(
-      activeMode: state.sessionType,
-      onModeChanged: (mode) {
-        final hsCubit = context.read<HomeScreenCubit>(); 
-        switch (mode) {
-          case SessionType.timer:
-            hsCubit.setSessionType(SessionType.timer);
-            break;
-          case SessionType.chanting:
-            hsCubit.setSessionType(SessionType.chanting);
-            break;
-        }
-      },
+    return SignedIn(
+      yes: (context, uid) => SessionTypeToggle(
+        activeMode: state.sessionType,
+        onModeChanged: (mode) {
+          final hsCubit = context.read<HomeScreenCubit>();
+          switch (mode) {
+            case SessionType.timer:
+              hsCubit.setSessionType(SessionType.timer);
+              break;
+            case SessionType.chanting:
+              hsCubit.setSessionType(SessionType.chanting);
+              break;
+          }
+        },
+      ),
+      no: const SizedBox.shrink(),
     );
   }
 
@@ -233,5 +237,4 @@ class HomeScreen extends StatelessWidget {
           ),
     );
   }
-
 }
