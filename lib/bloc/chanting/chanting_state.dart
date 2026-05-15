@@ -12,26 +12,24 @@ sealed class ChantingState with _$ChantingState {
     
     // playback
     @Default(Duration.zero) Duration elapsedTime,
-    @Default(0) int currentIndex,
     @Default(false) bool isLoading,
-    @Default(AudioPlaybackState.stopped) AudioPlaybackState playbackState,
-    @Default(Duration.zero) Duration duration,
-    @Default(Duration.zero) Duration position,
+
+    required PlaybackState playbackState,
+    MediaItem? mediaItem,
     
     // lyrics
-    @Default(0) activeLineIndex,
+    @Default(0) int activeLineIndex,
+    @Default(LoadingState.loading) LoadingState lyricsLoadingState,
     LyricsDocument? lyricsDocument,
     
     // session data
     DateTime? startTime,
-    DateTime? endTime,  
-
-    // gap
-    @Default(Duration.zero) Duration gapRemaining,
+    DateTime? endTime,
 
   }) = _ChantingState;
 
-  bool get isGapActive => gapRemaining != Duration.zero;
-  int get remainingSeconds => isGapActive ? min(gapRemaining.inSeconds + 1, chantingSettings.gapLength.inSeconds) : 0;
+  int get currentIndex => playbackState.queueIndex ?? 0;
+  Duration get position => playbackState.position;
+  Duration get duration => mediaItem?.duration ?? Duration.zero;
 
 }

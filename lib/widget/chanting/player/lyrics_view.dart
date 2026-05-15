@@ -30,23 +30,22 @@ class LyricsView extends StatefulWidget {
 }
 
 class _LyricsViewState extends State<LyricsView> {
-  
-  /// Scroll controller to manage programmatic scrolling and 
+  /// Scroll controller to manage programmatic scrolling and
   /// listen to user scroll events.
   final ScrollController _scrollController = ScrollController();
-  
-  /// Flag to indicate whether there is scrolling of 
+
+  /// Flag to indicate whether there is scrolling of
   /// any kind (user-initiated or programmatic) currently happening.
   bool isScrolling = false;
-  
+
   /// Flag to indicate whether the user is currently touching the screen.
   bool isPointerDown = false;
 
-  /// Flag to indicate whether we are currently 
-  /// animating the scroll position programmatically.  
+  /// Flag to indicate whether we are currently
+  /// animating the scroll position programmatically.
   bool isAnimating = false;
 
-  /// List of currently visible line indices and 
+  /// List of currently visible line indices and
   /// their offsets from the top of the scroll view.
   List<(int, double)> _visibleLineOffsets = []; // (lineIndex, offsetFromTop)
 
@@ -80,7 +79,7 @@ class _LyricsViewState extends State<LyricsView> {
         oldWidget.chantingState.activeLineIndex) {
       debugPrint(
         'Active line index changed: ${oldWidget.chantingState.activeLineIndex} -> ${widget.chantingState.activeLineIndex}',
-      );      
+      );
       _scrollToActiveLine();
     }
   }
@@ -104,30 +103,26 @@ class _LyricsViewState extends State<LyricsView> {
   }
 
   /// Handler for scroll events.
-  /// The goal of handling scroll events is to seek the chant to the line 
+  /// The goal of handling scroll events is to seek the chant to the line
   /// that is closest to the center of the view when user scrolls manually.
-  /// During programmatic scrolls (e.g. when active line changes during playback), 
+  /// During programmatic scrolls (e.g. when active line changes during playback),
   /// we do not want to trigger seeking.
   void _onScroll() {
-
     // If not user-initiated scroll, do not trigger seeking
     if (!isScrolling) {
       return;
     }
 
-    // 
+    // Calculate the target line to seek to based on the current scroll position
     final targetPosition = _calculateActiveLineBeginPosition();
 
     if (targetPosition != null) {
-      BlocProvider.of<ChantingCubit>(
-        context,
-        listen: false,
-      ).seek(targetPosition);
+      context.read<ChantingCubit>().seek(targetPosition);
       debugPrint('Seeking to position: ${targetPosition.formatHHMMSSmm()}');
     }
-  }  
+  }
 
-  /// Scrolls the view to center the active line. 
+  /// Scrolls the view to center the active line.
   /// Only called when the active line changes.
   void _scrollToActiveLine() async {
     // Don't auto-scroll if user is actively scrolling
@@ -148,7 +143,7 @@ class _LyricsViewState extends State<LyricsView> {
       debugPrint(
         'Current offset: ${_scrollController.offset}, Target offset: $targetOffset',
       );
-      
+
       setState(() {
         isAnimating = true;
       });
@@ -168,7 +163,7 @@ class _LyricsViewState extends State<LyricsView> {
   }
 
   /// Calculates the target scroll position to keep the active line centered.
-  /// If the closest line is the same as the current active line, 
+  /// If the closest line is the same as the current active line,
   /// returns null to indicate no seeking needed.
   Duration? _calculateActiveLineBeginPosition() {
     double minOffset = double.infinity;
@@ -184,12 +179,12 @@ class _LyricsViewState extends State<LyricsView> {
     }
     // debugPrint('Closest Line Index: $closestLineIndex with offset: $minOffset');
 
-    // If the closest line is different from the current active line, 
-    // return the begin time of that line to seek to. 
+    // If the closest line is different from the current active line,
+    // return the begin time of that line to seek to.
     // Otherwise, return null to indicate no seeking.
     if (widget.chantingState.activeLineIndex != closestLineIndex) {
       final targetLine =
-        widget.chantingState.lyricsDocument?.lines[closestLineIndex];
+          widget.chantingState.lyricsDocument?.lines[closestLineIndex];
       if (targetLine != null) {
         return targetLine.start;
       }
@@ -198,19 +193,43 @@ class _LyricsViewState extends State<LyricsView> {
     return null;
   }
 
+  /// Build the list of slivers separately from the CustomScrollView so that
+  /// in the initialization phase the isScrollNotifier listener can be 
+  /// attached to the ScrollController that is attached to a CustomScrollView.
+  /// So even if it's empty the CustomScrollView should always be built with a 
+  /// ScrollController attached.
   @override
   Widget build(BuildContext context) {
-    final lyricsDocument = widget.chantingState.lyricsDocument;
-    if (lyricsDocument == null) {
-      return Center(child: Text('No lyrics available'));
+    final slivers = <Widget>[];
+    if (widget.chantingState.lyricsLoadingState == .loaded) {
+      final lyricsDocument = widget.chantingState.lyricsDocument!;
+      slivers.addAll([
+        SliverPadding(
+          padding: EdgeInsets.only(top: widget.topOffset),
+        ), // Extra space at the top
+        LyricLinesSliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            final line = lyricsDocument.lines[index];
+            return LyricLine(
+              line: line,
+              position: widget.chantingState.position,
+              chantingState: widget.chantingState,
+              isActive: index <= widget.chantingState.activeLineIndex,
+            );
+          }, childCount: widget.chantingState.lyricsDocument!.lines.length),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.only(bottom: 300),
+        ), // Extra space at the bottom
+      ]);
     }
 
     return NotificationListener<LyricLinesNotification>(
       onNotification: (notification) {
         setState(() {
           _visibleLineOffsets = notification.visibleOffsets.entries
-            .map((e) => (e.key, e.value))
-            .toList();
+              .map((e) => (e.key, e.value))
+              .toList();
         });
         return true; // Indicate we've handled the notification
       },
@@ -225,31 +244,10 @@ class _LyricsViewState extends State<LyricsView> {
             isPointerDown = false;
           });
         },
-        child: CustomScrollView(        
+        child: CustomScrollView(
           controller: _scrollController,
           physics: ClampingScrollPhysics(),
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.only(top: widget.topOffset),
-            ), // Extra space at the top
-            LyricLinesSliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                final line = lyricsDocument.lines[index];
-                return LyricLine(
-                  line: line,
-                  position: widget.chantingState.position,
-                  chantingState: widget.chantingState,                  
-                  isActive: switch (widget.chantingState.playbackState) {
-                    .completed => false,
-                    _ => index <= widget.chantingState.activeLineIndex,
-                  },
-                );
-              }, childCount: lyricsDocument.lines.length),
-            ),
-            SliverPadding(
-              padding: EdgeInsets.only(bottom: 300),
-            ), // Extra space at the bottom
-          ],
+          slivers: slivers,
         ),
       ),
     );

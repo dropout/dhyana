@@ -29,6 +29,7 @@ class StubbedChantsRepository implements ChantsRepository {
       final chantName = _chantNames[index];
       return Chant(
         id: _faker.guid.guid(),
+        order: index,
         name: chantName,
         length: Duration(minutes: 5 + index),
       );

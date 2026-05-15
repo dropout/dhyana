@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:collection/collection.dart';
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/model/lyrics_line.dart';
@@ -57,8 +58,10 @@ class LyricLine extends StatelessWidget {
     );
   }
 
+  // TODO: This cannot happen with the current data model,
+  // completed is the end of playlist
   Widget _buildWord(BuildContext context, LyricsWord word) {
-    if (chantingState.isGapActive) {
+    if (chantingState.playbackState.processingState == AudioProcessingState.completed) {
       return Text(
         word.text,
         style: context.theme.textTheme.headlineSmall!.copyWith(
@@ -66,19 +69,8 @@ class LyricLine extends StatelessWidget {
           color: Colors.grey.shade600,
         ),
       );
-    }
-
-    switch (chantingState.playbackState) {
-      case .completed:
-        return Text(
-          word.text,
-          style: context.theme.textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.w700,
-            color: Colors.grey.shade600,
-          ),
-        );
-      default:
-        return LyricWordWidget(word: word, position: position);
+    } else {
+      return LyricWordWidget(word: word, position: position);
     }
 
   }

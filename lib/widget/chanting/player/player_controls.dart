@@ -1,5 +1,5 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -54,16 +54,16 @@ class PlayerControls extends StatelessWidget {
 
   Duration get position => chantingState.position;
   Duration get duration => chantingState.duration;
-  bool get isPlaying => chantingState.playbackState == .playing;
+  bool get isPlaying => chantingState.playbackState.playing == true;
 
   @override
   Widget build(BuildContext context) {
     final Duration safeDuration = duration < Duration.zero
-        ? Duration.zero
-        : duration;
+      ? Duration.zero
+      : duration;
     final Duration safePosition = position < Duration.zero
-        ? Duration.zero
-        : position > safeDuration
+      ? Duration.zero
+      : position > safeDuration
         ? safeDuration
         : position;
 
@@ -176,7 +176,7 @@ class PlayPauseButton extends StatelessWidget {
     this.disableWhileLoading = true,
   });
 
-  final AudioPlaybackState playbackState;
+  final PlaybackState playbackState;
   final VoidCallback onPressed;
   final Color backgroundColor;
   final Color iconColor;
@@ -187,8 +187,8 @@ class PlayPauseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final VoidCallback? resolvedOnPressed = disableWhileLoading && isLoading
-        ? null
-        : onPressed;
+      ? null
+      : onPressed;
 
     return IconButton.filled(
       iconSize: size,
@@ -209,8 +209,8 @@ class PlayPauseButton extends StatelessWidget {
                 ),
               )
             : Icon(
-                key: ValueKey<AudioPlaybackState>(playbackState),
-                playbackState == .playing
+                key: ValueKey<bool?>(playbackState.playing),
+                playbackState.playing == true
                     ? Icons.pause_rounded
                     : Icons.play_arrow_rounded,
                 color: iconColor,

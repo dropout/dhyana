@@ -1,15 +1,12 @@
 import 'dart:async';
-import 'dart:math';
 
-import 'package:dhyana/enum/playback_state.dart';
-import 'package:dhyana/model/chant.dart';
+import 'package:audio_service/audio_service.dart';
+import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/model/lyrics_document.dart';
 import 'package:dhyana/service/chanting_audio_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/default/default_timer_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
 import 'package:dhyana/service/resource_resolver.dart';
-import 'package:dhyana/service/timer_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/chanting_settings.dart';
@@ -21,49 +18,40 @@ part 'chanting_cubit.freezed.dart';
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
-  
   final ChantingSettings chantingSettings;
   final ChantingAudioService audioService;
   final LyricsService lyricsService;
   final ResourceResolver resourceResolver;
   final CrashlyticsService crashlyticsService;
 
-  StreamSubscription? _positionSubscription;
-  StreamSubscription? _playbackStateSubscription;
-
-  TimerService? _gapTimerService;
+  StreamSubscription<PlaybackState>? _playbackStateSub;
+  StreamSubscription<MediaItem?>? _mediaItemSub;
 
   /// Creates a new instance of [ChantingCubit] with the provided services and settings.
   ChantingCubit({
-    required this.chantingSettings,    
+    required this.chantingSettings,
     required this.audioService,
     required this.lyricsService,
     required this.resourceResolver,
-    required this.crashlyticsService,    
-  }) : super(ChantingState(chantingSettings: chantingSettings)) {
+    required this.crashlyticsService,
+  }) : super(
+         ChantingState(
+           chantingSettings: chantingSettings,
+           playbackState: audioService.playbackState,
+         ),
+       ) {
     _init();
   }
 
-  Stream<Duration> get positionStream => audioService.positionStream.distinct();
 
   /// Initializes the cubit by setting up stream subscriptions
-  /// and loading/playing the first chant.
   Future<void> _init() async {
     try {
-      _positionSubscription = audioService.positionStream
-        .listen(_onPositionChanged);
-      
-      // The same state might be emitted multiple times (for ex.: .playing)
-      _playbackStateSubscription = audioService.playbackStateStream
-        .distinct().listen(_onPlaybackStateChanged);
-
-      if (state.chantingSettings.selectedChants.isNotEmpty) {
-        final firstChant = state.chantingSettings.selectedChants.first;
-        await _loadChant(firstChant);
-        play();
-      }
+      _playbackStateSub = audioService.playbackStateStream
+        .listen(_onPlaybackStateChanged);
+      _mediaItemSub = audioService.mediaItemStream.listen(_onMediaItemChanged);
     } catch (e, st) {
-      emit(state.copyWith(playbackState: AudioPlaybackState.error));
+      // emit(state.copyWith(playbackState: AudioPlaybackState.error));
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -72,160 +60,105 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  /// Responsible for loading a chant's audio and lyrics,
-  /// and updating the state accordingly.
-  Future<void> _loadChant(Chant chant) async {
+  Future<void> setup(ChantingSettings chantingSettings) async {
     try {
-      logger.t('Loading chant: ${chant.name}');
+      logger.t('Setting up ${chantingSettings.selectedChants.length} chants');
       emit(state.copyWith(isLoading: true));
 
       await audioService.stop();
 
-      // load lyrics
-      final lyricsUrl = await resourceResolver.getChantLyricsUrl(chant.id);
-      final lyricsDocument = await lyricsService.loadLyrics(lyricsUrl);
-
       // load audio
-      final duration = await audioService.loadChant(
-        await resourceResolver.getChantAudioUrl(chant.id),
-        title: chant.name,
-      );
+      final chants = chantingSettings.selectedChants;
+      final resourceUrls = <String, String>{};
 
+      for (var chant in chants) {
+        final url = await resourceResolver.getChantAudioUrl(chant.id);
+        resourceUrls[chant.id] = url;
+      }
+
+      // Duration of the first item in the playlist
+      await audioService.setup(chantingSettings, resourceUrls);
+
+      emit(state.copyWith(isLoading: false));
+    } catch (e, st) {
       emit(
         state.copyWith(
           isLoading: false,
-          duration: duration,
-          position: Duration.zero,
-          lyricsDocument: lyricsDocument,
+          // playbackState: AudioPlaybackState.error,
         ),
       );
-      logger.t(
-        'Chant loaded: ${chant.name}, duration: ${audioService.duration}',
-      );
-    } catch (e, st) {
-      emit(state.copyWith(
-        isLoading: false,
-        playbackState: AudioPlaybackState.error,
-      ));
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
-        reason: 'Error loading chant ${chant.name}',
+        reason: 'Error setting up chants',
       );
     }
   }
 
-  /// Handles position updates from the audio service, updating the current position
-  /// and active lyrics line index in the state.
-  void _onPositionChanged(Duration position) {
+  Future<void> _loadLyricsForChant(String chantId) async {
+    try {
+      logger.t('Loading lyrics for chant ID: $chantId');
+      emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
+      final lyricsUrl = await resourceResolver.getChantLyricsUrl(chantId);
+      final lyricsDocument = await lyricsService.loadLyrics(lyricsUrl);
+      if (isClosed) return;
+      emit(
+        state.copyWith(
+          lyricsLoadingState: LoadingState.loaded,
+          lyricsDocument: lyricsDocument,
+        ),
+      );
+    } catch (e, st) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: st,
+        reason: 'Error loading lyrics for chant $chantId',
+      );
+    }
+  }
+
+  /// Calculates the active lyrics line index based on the current position.
+  void _positionUpdate(Duration position) {
     final activeLineIndex =
         state.lyricsDocument?.activeLineIndex(position) ?? 0;
 
     // If position falls between two lines,
     // keep the line index unchanged until the next line is active
-    if (activeLineIndex == -1) {
-      emit(state.copyWith(position: position));
-    } else {
-      emit(
-        state.copyWith(position: position, activeLineIndex: activeLineIndex),
-      );
+    if (activeLineIndex >= 0) {
+      emit(state.copyWith(activeLineIndex: activeLineIndex));
     }
   }
 
   /// Handles starting a gap after a chant finishes.
-  void _onPlaybackStateChanged(AudioPlaybackState playbackState) {
-    emit(state.copyWith(playbackState: playbackState));
-    if (playbackState == AudioPlaybackState.completed) {
-      final isLastChant =
-        (state.currentIndex ==
-        state.chantingSettings.selectedChants.length - 1);
-      if (!isLastChant) {
-        _startGap();
-      }
+  void _onPlaybackStateChanged(PlaybackState pbState) {
+    emit(state.copyWith(playbackState: pbState));
+    _positionUpdate(pbState.position);
+
+    if (pbState.processingState == AudioProcessingState.completed &&
+        pbState.queueIndex ==
+            state.chantingSettings.selectedChants.length - 1) {
+
+      logger.t('Chanting session completed $pbState');
+      return;
+    } else if (pbState.processingState == AudioProcessingState.completed) {
+      logger.t('Track completed, moving to next track');
     }
-    logger.t('Playback state changed: $playbackState');
+
+    // logger.t('Current index: ${pbState.queueIndex}');
   }
 
-  /// Starts the gap timer and updates the state to indicate that the gap is active.
-  void _startGap() {
-    _gapTimerService?.close();
-
-    // Initialize gaptimer
-    _gapTimerService =
-        DefaultTimerService(
-            duration: chantingSettings.gapLength,
-            tickIntervalInMilliSeconds: 250,
-          )
-          ..onTick(_onGapTick)
-          ..onFinished(_onGapFinished);
-
-    emit(
-      state.copyWith(
-        gapRemaining: chantingSettings.gapLength,
-        playbackState: AudioPlaybackState.playing,
-      ),
-    );
-    _gapTimerService!.start();
-    logger.t('Gap started: ${chantingSettings.gapLength.inSeconds} seconds');
+  void _onMediaItemChanged(MediaItem? mediaItem) {
+    if (mediaItem == null) return;
+    emit(state.copyWith(mediaItem: mediaItem));
+    _loadLyricsForChant(mediaItem.id);
+    logger.t('Media item changed: ${mediaItem.title}');
   }
 
-  /// Cancels the gap timer and updates the state to indicate
-  /// that the gap is no longer active.
-  void _cancelGap() {
-    _gapTimerService?.close();
-    _gapTimerService = null;
-    emit(state.copyWith(gapRemaining: Duration.zero));
-  }
+  /// Start/resume playback.
+  Future<void> play() => audioService.play();
 
-  /// Handles gap timer tick events, updating the remaining gap time in the state.
-  void _onGapTick(int tick) {
-    final ts = _gapTimerService!;
-    final remaining = ts.remainingTime;
-    emit(state.copyWith(gapRemaining: remaining));
-  }
-
-  /// Handles the completion of the gap timer, advancing to the next track.
-  void _onGapFinished() {
-    _gapTimerService?.close();
-    _gapTimerService = null;
-
-    _advanceToNextTrack();
-    logger.t('Gap finished, advancing to next track');
-  }
-
-  /// Advances to the next track in the playlist, loading it and starting playback.
-  Future<void> _advanceToNextTrack() async {
-    final newIndex = state.currentIndex + 1;
-    final chant = state.chantingSettings.selectedChants[newIndex];
-    await _loadChant(chant);
-    emit(state.copyWith(currentIndex: newIndex, gapRemaining: Duration.zero));
-    play();
-    logger.t('Auto-advanced to chant index $newIndex');
-  }
-
-  /// Starts playback. If a gap is active, starts the gap timer;
-  ///otherwise, starts audio playback.
-  Future<void> play() async {
-    if (state.isGapActive) {
-      _gapTimerService?.start();
-      emit(state.copyWith(playbackState: AudioPlaybackState.playing));
-    } else {
-      audioService.play();
-      logger.t('Playback started');
-    }
-  }
-
-  /// Pauses playback. If a gap is active, pauses the gap timer;
-  /// otherwise, pauses audio playback.
-  Future<void> pause() async {
-    if (state.isGapActive) {
-      _gapTimerService?.stop();
-      emit(state.copyWith(playbackState: AudioPlaybackState.paused));
-    } else {
-      audioService.pause();
-      logger.t('Playback paused');
-    }
-  }
+  /// Pause playback.
+  Future<void> pause() => audioService.pause();
 
   /// Seeks to the specified position in the current chant.
   Future<void> seek(Duration position) async {
@@ -234,61 +167,17 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   }
 
   /// Moves to the previous track in the playlist,
-  /// or restarts the current track if gap is active.
-  Future<void> prev() async {
-    
-    // Record if the gap was active before cancelling
-    final isGapActive = state.isGapActive;
-
-    // Cancel any active gap when user manually goes to previous track
-    _cancelGap();
-
-    // If user tries to go to previous track when the gap is active,
-    // restart the current track instead of going to 
-    // the previous track in the playlist
-    if (isGapActive) {
-      await audioService.seek(Duration.zero);
-      play();
-      logger.t('Restarted current chant since the gap was active');
-      return;
-    }
-
-    // If gap was not active, proceed with going to previous track as normal
-    if (state.currentIndex > 0) {
-      final newIndex = state.currentIndex - 1;
-      final chant = state.chantingSettings.selectedChants[newIndex];
-      _gapTimerService?.close();
-      emit(state.copyWith(currentIndex: newIndex));
-      await audioService.seek(Duration.zero);
-      await _loadChant(chant);
-      play();
-      logger.t('Moved to previous chant index $newIndex');
-    }
-
-  }
+  /// or restarts the current track if it's the first track
+  Future<void> prev() => audioService.prev();
 
   /// Moves to the next track in the playlist, if not already at the last track.
-  Future<void> next() async {
-    _cancelGap();
-    if (state.currentIndex < state.chantingSettings.selectedChants.length - 1) {
-      final newIndex = state.currentIndex + 1;
-      final chant = state.chantingSettings.selectedChants[newIndex];
-      _gapTimerService?.close();
-      emit(state.copyWith(currentIndex: newIndex));
-      await audioService.seek(Duration.zero);
-      await _loadChant(chant);
-      play();
-      logger.t('Moved to next chant index $newIndex');
-    }
-  }
+  Future<void> next() => audioService.next();
 
   @override
   Future<void> close() {
-    _gapTimerService?.close();
-    _positionSubscription?.cancel();
-    _playbackStateSubscription?.cancel();
+    _playbackStateSub?.cancel();
+    _mediaItemSub?.cancel();
     audioService.stop();
     return super.close();
   }
-  
 }

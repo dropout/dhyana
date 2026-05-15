@@ -1,12 +1,10 @@
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/service/wakelock_service.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/chanting/player/lyrics_view.dart';
 import 'package:dhyana/widget/chanting/player/player_controls.dart';
 import 'package:dhyana/widget/chanting/player/playlist_sheet.dart';
 import 'package:dhyana/widget/design_spec.dart';
-import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,7 +48,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
 
   /// Handles play/pause button press by toggling playback state
   void _onPlayPausePressed(BuildContext context) {
-    if (widget.chantingState.playbackState == AudioPlaybackState.playing) {
+    if (widget.chantingState.playbackState.playing == true) {
       context.read<ChantingCubit>().pause();
     } else {
       context.read<ChantingCubit>().play();
@@ -58,13 +56,13 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     context.hapticsTap();
   }
 
-  /// Handles seek action by seeking the chant to the specified position.
+  /// Skip to next track
   void _onNextPressed(BuildContext context) {
     context.read<ChantingCubit>().next();
     context.hapticsTap();
   }
 
-  /// Handles previous button press by skipping to the previous chant in the playlist.
+  /// Go to previous track
   void _onPreviousPressed(BuildContext context) {
     context.read<ChantingCubit>().prev();
     context.hapticsTap();
@@ -97,33 +95,37 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
       fit: StackFit.expand,
       children: [
         Positioned.fill(
-          child: AnimatedCrossFade(
-            firstChild: buildLyricsView(context),
-            secondChild: _GapCountdownOverlay(
-              key: ValueKey('second'),
-              chantingState: widget.chantingState,
-            ),
-            crossFadeState:
-                widget.chantingState.isGapActive &&
-                  !widget.chantingState.isLoading
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
-            duration: Durations.medium1,
-            layoutBuilder: (topChild, topKey, bottomChild, bottomKey) {
-              return Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Positioned(
-                    key: bottomKey,
-                    // We use alignment to ensure the outgoing widget
-                    // doesn't try to expand to infinite height
-                    child: bottomChild,
-                  ),
-                  Positioned(key: topKey, child: topChild),
-                ],
-              );
-            },
-          ),
+          child: buildLyricsView(context),          
+
+          // child: AnimatedCrossFade(
+          //   firstChild: buildLyricsView(context),
+          //   secondChild: _GapCountdownOverlay(
+          //     key: ValueKey('second'),
+          //     chantingState: widget.chantingState,
+          //   ),
+          //   crossFadeState:
+          //       widget.chantingState.isGapActive &&
+          //         !widget.chantingState.isLoading
+          //       ? CrossFadeState.showSecond
+          //       : CrossFadeState.showFirst,
+          //   duration: Durations.medium1,
+          //   layoutBuilder: (topChild, topKey, bottomChild, bottomKey) {
+          //     return Stack(
+          //       clipBehavior: Clip.none,
+          //       children: [
+          //         Positioned(
+          //           key: bottomKey,
+          //           // We use alignment to ensure the outgoing widget
+          //           // doesn't try to expand to infinite height
+          //           child: bottomChild,
+          //         ),
+          //         Positioned(key: topKey, child: topChild),
+          //       ],
+          //     );
+          //   },
+          // ),
+
+
         ),
         Positioned(left: 0, bottom: 0, right: 0, child: buildControls(context)),
       ],
@@ -131,14 +133,15 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   }
 
   Widget buildLyricsView(BuildContext context) {
-    if (widget.chantingState.isLoading) {
-      return SizedBox.shrink();
-    } else {
-      return LyricsView(
-        chantingState: widget.chantingState,
-        key: ValueKey('lyrics'),
-      );
-    }
+    return LyricsView(
+      chantingState: widget.chantingState,
+      key: ValueKey('lyrics'),
+    );
+    // if (widget.chantingState.isLoading) {
+    //   return SizedBox.shrink();
+    // } else {
+
+    // }
   }
 
   Widget buildControls(BuildContext context) {
@@ -180,74 +183,62 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
 
   Widget buildPlayerControls(BuildContext context) {
     final chantingState = widget.chantingState;
-    if (chantingState.isGapActive) {
-      return PlayerControls(
-        chantingState: chantingState,
-        onNextPressed: () => _onNextPressed(context),
-        onPreviousPressed: () => _onPreviousPressed(context),
-        onPlayPausePressed: () => _onPlayPausePressed(context),
-        onPlaylistPressed: () => _onPlaylistPressed(context),
-        showProgressBar: false,
-        showTime: false,
-      );
-    } else {
-      return PlayerControls(
-        chantingState: chantingState,
-        onNextPressed:
-            chantingState.currentIndex <
-                chantingState.chantingSettings.selectedChants.length - 1
-            ? () => _onNextPressed(context)
-            : null,
-        onPlayPausePressed: () => _onPlayPausePressed(context),
-        onPreviousPressed: widget.chantingState.currentIndex > 0
-            ? () => _onPreviousPressed(context)
-            : null,
-        onPlaylistPressed: () => _onPlaylistPressed(context),
-      );
-    }
+    return PlayerControls(
+      chantingState: chantingState,
+      onNextPressed:
+          chantingState.currentIndex <
+              chantingState.chantingSettings.selectedChants.length - 1
+          ? () => _onNextPressed(context)
+          : null,
+      onPlayPausePressed: () => _onPlayPausePressed(context),
+      onPreviousPressed: widget.chantingState.currentIndex > 0
+          ? () => _onPreviousPressed(context)
+          : null,
+      onPlaylistPressed: () => _onPlaylistPressed(context),
+    );
   }
 }
 
 /// Fullscreen overlay shown between chanting playlist items during the gap countdown.
-class _GapCountdownOverlay extends StatelessWidget {
-  final ChantingState chantingState;
+// class _GapCountdownOverlay extends StatelessWidget {
+//   final ChantingState chantingState;
 
-  const _GapCountdownOverlay({required this.chantingState, super.key});
+//   const _GapCountdownOverlay({required this.chantingState, super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final seconds = chantingState.isGapActive
-        ? chantingState.remainingSeconds
-        : chantingState.chantingSettings.gapLength.inSeconds;
+//   @override
+//   Widget build(BuildContext context) {
+//     final seconds = chantingState.isGapActive
+//         ? chantingState.remainingSeconds
+//         : chantingState.chantingSettings.gapLength.inSeconds;
 
-    return ColoredBox(
-      color: Colors.black.withValues(alpha: 0.6),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              context.l10n.chantingNextChantIn,
-              style: const TextStyle(color: Colors.white70, fontSize: 16),
-            ),
-            Gap.medium(),
-            AnimatedSwitcher(
-              duration: Durations.medium1,
-              switchInCurve: Curves.easeInExpo,
-              switchOutCurve: Curves.easeOutExpo,
-              child: Text(
-                '$seconds',
-                key: ValueKey(seconds),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 64,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//     return ColoredBox(
+//       color: Colors.black.withValues(alpha: 0.6),
+//       child: Center(
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             Text(
+//               context.l10n.chantingNextChantIn,
+//               style: const TextStyle(color: Colors.white70, fontSize: 16),
+//             ),
+//             Gap.medium(),
+//             AnimatedSwitcher(
+//               duration: Durations.medium1,
+//               switchInCurve: Curves.easeInExpo,
+//               switchOutCurve: Curves.easeOutExpo,
+//               child: Text(
+//                 '$seconds',
+//                 key: ValueKey(seconds),
+//                 style: const TextStyle(
+//                   color: Colors.white,
+//                   fontSize: 64,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

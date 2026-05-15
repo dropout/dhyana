@@ -1,5 +1,5 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/enum/playback_state.dart';
 import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/model/session.dart';
@@ -13,18 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChantingScreen extends StatelessWidget {
-  
   final ChantingSettings chantingSettings;
 
-  const ChantingScreen({
-    required this.chantingSettings,
-    super.key,
-  });
+  const ChantingScreen({required this.chantingSettings, super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChantingContext(
       chantingSettings: chantingSettings,
+      onCreate: (chantingCubit, presenceCubit) async {
+        await chantingCubit.setup(chantingSettings);
+        chantingCubit.play();
+      },
       child: buildScaffolding(context),
     );
   }
@@ -43,16 +43,17 @@ class ChantingScreen extends StatelessWidget {
         );
       },
       listenWhen: (prevState, currentState) {
-        final isCompleted = prevState.playbackState != AudioPlaybackState.completed
-          && currentState.playbackState == AudioPlaybackState.completed;
-        final isLastChant = currentState.currentIndex == 
-          currentState.chantingSettings.selectedChants.length - 1;
-        return isCompleted && isLastChant;
+        return (
+          prevState.playbackState.processingState !=
+            AudioProcessingState.completed &&
+          currentState.playbackState.processingState ==
+              AudioProcessingState.completed
+        );
       },
       listener: (context, state) {
         final elapsedTime = state.chantingSettings.selectedChants.fold(
-          Duration.zero, 
-          (total, chant) => total + chant.length
+          Duration.zero,
+          (total, chant) => total + chant.length,
         );
         Session session = Session(
           id: context.services.idGeneratorService.sessionId(),
@@ -65,7 +66,5 @@ class ChantingScreen extends StatelessWidget {
         SessionCompletedRoute($extra: session).replace(context);
       },
     );
-
   }
-
 }

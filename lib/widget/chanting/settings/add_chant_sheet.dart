@@ -35,7 +35,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
             top: 80,
             left: DesignSpec.paddingLg,
             right: DesignSpec.paddingLg,
-            bottom: MediaQuery.of(context).viewPadding.bottom,
+            bottom: 100,
           ),
           itemCount: widget.availableChants.length,
           itemBuilder: (context, index) {

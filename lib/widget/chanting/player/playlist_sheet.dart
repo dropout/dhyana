@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class PlaylistSheet extends StatelessWidget {
-
   const PlaylistSheet({super.key});
 
   @override
@@ -47,19 +46,17 @@ class PlaylistSheet extends StatelessWidget {
                 ),
                 itemCount: state.chantingSettings.selectedChants.length,
                 itemBuilder: (context, index) {
-                  final chant =
-                    state.chantingSettings.selectedChants[index];
+                  final chant = state.chantingSettings.selectedChants[index];
                   return Padding(
-                    padding: const EdgeInsets.only(bottom: DesignSpec.paddingSm),
+                    padding: const EdgeInsets.only(
+                      bottom: DesignSpec.paddingSm,
+                    ),
                     child: ChantCard(
                       index: index,
                       chant: chant,
-                      textColor: switch (state.isGapActive) {
-                        true when index <= state.currentIndex => Colors.grey.shade600,
-                        _ => index < state.currentIndex
-                            ? Colors.grey.shade600
-                            : Colors.black,
-                      },
+                      textColor: index < state.currentIndex
+                          ? Colors.grey.shade600
+                          : Colors.black,
                       trailing: buildTrailing(context, index, state),
                     ),
                   );
@@ -86,52 +83,44 @@ class PlaylistSheet extends StatelessWidget {
     );
   }
 
-  Widget? buildTrailing(BuildContext context, int index, ChantingState chantingState) {
-    if (chantingState.isGapActive && index == chantingState.currentIndex + 1) {
-      return PlaylistItemBadge(text: context.l10n.chantingPlaylistBadgeNext);
+  Widget? buildTrailing(
+    BuildContext context,
+    int index,
+    ChantingState chantingState,
+  ) {
+    if (index == chantingState.currentIndex) {
+      return switch (chantingState.playbackState.playing) {
+        true => PlaylistItemBadge(text: context.l10n.chantingPlaylistBadgePlaying),
+        false => PlaylistItemBadge(text: context.l10n.chantingPlaylistBadgePaused),
+      };
     }
-
-    if (!chantingState.isGapActive && index == chantingState.currentIndex) {
-      return PlaylistItemBadge(text: switch (chantingState.playbackState) {
-        .playing => context.l10n.chantingPlaylistBadgePlaying,
-        .paused => context.l10n.chantingPlaylistBadgePaused,
-        .completed => context.l10n.chantingPlaylistBadgeCompleted,
-        _ => context.l10n.chantingPlaylistBadgePlaying,
-      });
-    }
-
     return null;
   }
-
 }
 
 class PlaylistItemBadge extends StatelessWidget {
-
   final String text;
 
-  const PlaylistItemBadge({
-    required this.text,
-    super.key,
-  });
+  const PlaylistItemBadge({required this.text, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: DesignSpec.paddingSm,
-          vertical: DesignSpec.paddingXs,
+      padding: EdgeInsets.symmetric(
+        horizontal: DesignSpec.paddingSm,
+        vertical: DesignSpec.paddingXs,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        text.toUpperCase(),
+        style: context.theme.textTheme.labelSmall!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
         ),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Text(
-          text.toUpperCase(),
-          style: context.theme.textTheme.labelSmall!.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      );
+      ),
+    );
   }
 }

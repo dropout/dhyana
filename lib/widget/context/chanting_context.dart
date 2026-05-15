@@ -13,10 +13,12 @@ class ChantingContext extends StatelessWidget {
 
   final Widget child;
   final ChantingSettings chantingSettings;
+  final void Function(ChantingCubit, PresenceCubit)? onCreate;
 
   const ChantingContext({
     required this.child,
     required this.chantingSettings,
+    this.onCreate,
     super.key,
   });
 
@@ -30,34 +32,33 @@ class ChantingContext extends StatelessWidget {
         final bool isSignedIn = (authState is AuthStateSignedIn);
         final String? profileId = (isSignedIn) ? authState.user.uid : null;
 
+        final chantingCubit = ChantingCubit(
+          chantingSettings: chantingSettings,
+          audioService: ChantingAudioService(services.audioHandler),
+          lyricsService: services.lyricsService,
+          resourceResolver: services.resourceResolver,
+          crashlyticsService: services.crashlyticsService,
+        );
+
+        final presenceCubit = PresenceCubit(
+          presenceRepository: repos.presenceRepository,
+          profileRepository: repos.profileRepository,
+          crashlyticsService: services.crashlyticsService,
+        );
+
+        if (isSignedIn && profileId != null) {
+          presenceCubit.showPresence(profileId);
+        }
+
+        onCreate?.call(chantingCubit, presenceCubit);
+
         return MultiBlocProvider(
           providers: [
             BlocProvider<ChantingCubit>(
-              create: (context) => ChantingCubit(
-                chantingSettings: chantingSettings,
-                audioService: ChantingAudioService(services.audioHandler),
-                lyricsService: services.lyricsService,
-                resourceResolver: services.resourceResolver,
-                crashlyticsService: services.crashlyticsService,
-              ),
+              create: (_) => chantingCubit,
             ),
-
             BlocProvider<PresenceCubit>(
-              create: (_) {
-                // Create the presence bloc
-                final presenceBloc = PresenceCubit(
-                  presenceRepository: repos.presenceRepository,
-                  profileRepository: repos.profileRepository,
-                  crashlyticsService: services.crashlyticsService,
-                );
-
-                // Show the presence if user is signed in
-                if (isSignedIn && profileId != null) {
-                  presenceBloc.showPresence(profileId);
-                }
-                return presenceBloc;
-              },
-              lazy: false,
+              create: (_) => presenceCubit,
             ),
           ],
           child: child,

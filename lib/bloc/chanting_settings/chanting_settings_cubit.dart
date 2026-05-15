@@ -30,7 +30,8 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       logger.t('Loading available chants');
       emit(state.copyWith(isLoading: true, error: null));
 
-      final chants = await chantsRepository.queryAll();
+      final chants = (await chantsRepository.queryAll())
+        ..sort((a, b) => a.order.compareTo(b.order));
       final selectedChants = await _loadSelectedChantsFromSharedPrefs();
 
       emit(state.copyWith(
@@ -90,16 +91,23 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
   }
 
   Future<List<Chant>> _loadSelectedChantsFromSharedPrefs() async {
-    final jsonString = await sharedPreferencesService.get<String>(
-      key: SharedPreferencesKey.selectedChants,
-    );
-
-    if (jsonString == null || jsonString.isEmpty) {
+    try {
+      final jsonString = await sharedPreferencesService.get<String>(
+        key: SharedPreferencesKey.selectedChants,
+      );    
+      if (jsonString == null || jsonString.isEmpty) {
+        return [];
+      }
+      final List<dynamic> jsonList = jsonDecode(jsonString);
+      return jsonList.map((json) => Chant.fromJson(json)).toList();    
+    } catch (e, st) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: st,
+        reason: 'Failed to load selected chants from shared preferences, returning empty list',
+      );
       return [];
     }
-
-    final List<dynamic> jsonList = jsonDecode(jsonString);
-    return jsonList.map((json) => Chant.fromJson(json)).toList();
   }
 
   Future<void> _saveSelectedChantsToSharedPrefs(List<Chant> selectedChants) async {
