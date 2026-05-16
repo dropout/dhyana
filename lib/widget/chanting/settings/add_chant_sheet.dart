@@ -21,8 +21,10 @@ class AddChantSheet extends StatefulWidget {
 }
 
 class _AddChantSheetState extends State<AddChantSheet> {
+
   void _onListItemTap(Chant chant) {
     widget.onChantSelected?.call(chant);
+    context.hapticsTap();
   }
 
   @override

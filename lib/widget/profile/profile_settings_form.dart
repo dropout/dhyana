@@ -76,13 +76,6 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
             initialValue: widget.profileSettings.usePresenceFeature,
           ),
           Gap.large(),
-          ProfileSettingsDurationInput(
-            title: context.l10n.chantingGapLengthTitle,
-            name: 'chantingGapLength',
-            helperText: context.l10n.chantingGapLengthDescription,              
-            initialValue: widget.profileSettings.chantingGapLength,
-          ),
-          Gap.large(),
           AppButton.small(
             text: context.l10n.profileDeleteTitle.toUpperCase(),
             onTap: () => _onDeleteProfileTapped(context),
