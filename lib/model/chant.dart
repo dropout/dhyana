@@ -15,7 +15,7 @@ sealed class Chant with _$Chant implements Model {
   const factory Chant({
     required String id,
     required String name,
-    required int order,
+    @Default(0) int order,
     @DurationConverter() required Duration length,
   }) = _Chant;
 
