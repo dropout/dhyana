@@ -45,6 +45,12 @@ class ChantingAudioService {
   Stream<PlaybackState> get playbackStateStream => _audioHandler.playbackState;
   PlaybackState get playbackState => _audioHandler.playbackState.value;
 
+  // Position  
+  Stream<Duration> get positionStream => _audioHandler.playbackState
+    .map((pb) => pb.position);
+  Duration get position => _audioHandler.playbackState.value.position;
+  Future<Duration> get outputLatency => _audioHandler.outputLatency;
+
   void _switchToChantingAudioHandler() {
     _audioHandler.customAction(AppAudioHandler.switchAction, {
       'handlerId': ChantingAudioHandler.handlerId,

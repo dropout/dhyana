@@ -1,4 +1,3 @@
-import 'package:dhyana/model/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'model.dart';

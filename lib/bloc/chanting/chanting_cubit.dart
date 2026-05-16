@@ -50,6 +50,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       _playbackStateSub = audioService.playbackStateStream
         .listen(_onPlaybackStateChanged);
       _mediaItemSub = audioService.mediaItemStream.listen(_onMediaItemChanged);
+      _updateOutputLatency();
     } catch (e, st) {
       // emit(state.copyWith(playbackState: AudioPlaybackState.error));
       crashlyticsService.recordError(
@@ -129,10 +130,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  /// Handles starting a gap after a chant finishes.
   void _onPlaybackStateChanged(PlaybackState pbState) {
     emit(state.copyWith(playbackState: pbState));
-    _positionUpdate(pbState.position);
+    // Compensate for output latency when updating position to keep lyrics in sync
+    // This useful when bluetooth earbuds, which can have significant latency
+    // _positionUpdate(pbState.position - state.outputLatency);
+    _positionUpdate(state.latencyCompensatedPosition);
 
     if (pbState.processingState == AudioProcessingState.completed &&
         pbState.queueIndex ==
@@ -154,8 +157,18 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     logger.t('Media item changed: ${mediaItem.title}');
   }
 
+  void _updateOutputLatency() async {
+    final latency = await audioService.outputLatency;
+    emit(state.copyWith(outputLatency: latency));
+    logger.t('Output latency updated: ${latency.inMilliseconds} ms');
+  }
+
   /// Start/resume playback.
-  Future<void> play() => audioService.play();
+  /// Updates the output latency before playing to ensure lyrics stay in sync.
+  Future<void> play() async {     
+    _updateOutputLatency();
+    return audioService.play();
+  }
 
   /// Pause playback.
   Future<void> pause() => audioService.pause();

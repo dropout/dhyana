@@ -74,7 +74,6 @@ class ChantingSettingsView extends StatelessWidget {
       ChantingRoute(
         $extra: ChantingSettings(
           selectedChants: selectedChants,
-          gapLength: profileSettings.chantingGapLength,
         ),
       ).push(context);
       context.hapticsTap();

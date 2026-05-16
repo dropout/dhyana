@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:audio_service/audio_service.dart';
+import 'package:audio_session/audio_session.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
 import 'chanting_audio_handler.dart';
@@ -22,6 +24,16 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
   /// as the default handler. 
   AppAudioHandler(this._timerAudioHandler, this._chantingAudioHandler)
     : super(_timerAudioHandler);
+
+
+  Future<Duration> get outputLatency async {
+    if (Platform.isIOS) {
+      return AVAudioSession().outputLatency;
+    } else {
+      return Duration.zero;
+    }
+  }
+  
 
   /// Overrides the [customAction] method to handle switching between audio 
   /// handlers based on the received custom action. When a `switchToHandler` 

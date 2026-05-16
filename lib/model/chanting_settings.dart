@@ -15,7 +15,6 @@ sealed class ChantingSettings with _$ChantingSettings implements Model {
 
   const factory ChantingSettings({
     @Default(<Chant>[]) List<Chant> selectedChants,
-    @Default(Duration(seconds: 10)) Duration gapLength,
     @DateTimeOrNullConverter() DateTime? lastUsed,
   }) = _ChantingSettings;
 

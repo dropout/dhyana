@@ -5,9 +5,9 @@ AudioSessionConfiguration getAudioSessionConfiguration() {
   return const AudioSessionConfiguration(
 
     // ios
-    avAudioSessionCategory: AVAudioSessionCategory.playback,
-    avAudioSessionMode: AVAudioSessionMode.defaultMode,
-    avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.none,
+    avAudioSessionCategory: .playback,
+    avAudioSessionMode: .moviePlayback,
+    avAudioSessionCategoryOptions: .allowBluetooth,
     avAudioSessionRouteSharingPolicy: AVAudioSessionRouteSharingPolicy.defaultPolicy,
     avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.notifyOthersOnDeactivation,
 
