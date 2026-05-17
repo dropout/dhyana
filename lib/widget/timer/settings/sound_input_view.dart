@@ -6,6 +6,7 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/enum/sound.dart';
+import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'input_view.dart';
@@ -97,7 +98,7 @@ class SoundInputViewState extends State<SoundInputView>
 
   @override
   void initState() {
-    audioService = SimpleAudioService();
+    audioService = SimpleAudioService(soloud: SoLoud.instance);
     tabController = TabController(length: Sound.values.length, vsync: this);
 
     if (widget.initialValue != null) {

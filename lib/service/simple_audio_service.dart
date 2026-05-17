@@ -1,33 +1,59 @@
 import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:flutter_soloud/flutter_soloud.dart';
 
-/// A simple audio service that can play discrete sounds without 
+/// A simple audio service that can play discrete sounds without
 /// maintaining an active media session with the OS.
 class SimpleAudioService {
-	SimpleAudioService({AudioPlayer? player}) : _player = player ?? AudioPlayer();
+  final SoLoud _soloud;
+  AudioSource? _soundSource;
+  SoundHandle? _soundHandle;
+  final StreamController<bool> _isPlayingController =
+      StreamController<bool>.broadcast();
 
-	final AudioPlayer _player;
+  SimpleAudioService({required SoLoud soloud}) : _soloud = soloud;
 
-	Stream<Duration> get positionStream => _player.positionStream;
+  bool get isPlaying {
+    if (_soundHandle != null && _soloud.getIsValidVoiceHandle(_soundHandle!)) {
+      return _soloud.getPause(_soundHandle!) == false;
+    } else {
+      return false;
+    }
+  }
 
-	bool get isPlaying => _player.playing;
+  Stream<bool> get isPlayingStream => _isPlayingController.stream;
 
-	Stream<bool> get isPlayingStream => _player.playingStream;
+  Future<void> play(Sound sound) async {
+    await _disposeSoundResources();
+    final s = await _soloud.loadAsset(sound.assetPath);
+    _soundHandle = _soloud.play(s);
+    _isPlayingController.add(true);
+    s.allInstancesFinished.first.then((_) {
+      _isPlayingController.add(false);
+      _soloud.disposeSource(s);
+    });
+  }
 
-	Future<void> play(Sound sound) async {
-		await _player.stop();
+  Future<void> stop() async {
+    if (_soundHandle != null && _soloud.getIsValidVoiceHandle(_soundHandle!)) {
+      await _soloud.stop(_soundHandle!);
+    }
+  }
 
-		if (sound == Sound.none) {
-			return;
-		}
+  Future<void> _disposeSoundResources() async {
+    if (_soundHandle != null && _soloud.getIsValidVoiceHandle(_soundHandle!)) {
+      await _soloud.stop(_soundHandle!);
+      _soundHandle = null;
+    }
+    if (_soundSource != null) {
+      await _soloud.disposeSource(_soundSource!);
+      _soundSource = null;
+    }
+  }
 
-		await _player.setAsset(sound.assetPath);
-		await _player.play();
-	}
-
-	Future<void> stop() => _player.stop();
-
-	Future<void> dispose() => _player.dispose();
+  Future<void> dispose() async {
+    await _disposeSoundResources();
+    _isPlayingController.close();
+  }
 }
