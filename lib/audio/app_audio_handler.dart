@@ -4,7 +4,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
-import 'chanting_audio_handler.dart';
+import 'so_chanting_audio_handler.dart';
 import 'timer_audio_handler.dart';
 
 /// The main audio handler for the app that manages switching 
@@ -14,16 +14,19 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
   /// The action name for switching audio handlers.
   static const switchAction = 'switchToHandler';
 
-  /// The [ChantingAudioHandler] that handles chanting-related audio actions.
-  final ChantingAudioHandler _chantingAudioHandler;
+  /// The [SoLoudChantingAudioHandler] that handles chanting-related audio
+  /// actions using flutter_soloud.
+  final SoLoudChantingAudioHandler _soLoudChantingAudioHandler;
 
   /// The [TimerAudioHandler] that handles timer-related audio actions.
   final TimerAudioHandler _timerAudioHandler;
 
-  /// Creates an [AppAudioHandler] that initializes with the [TimerAudioHandler] 
-  /// as the default handler. 
-  AppAudioHandler(this._timerAudioHandler, this._chantingAudioHandler)
-    : super(_timerAudioHandler);
+  /// Creates an [AppAudioHandler] that initializes with the [TimerAudioHandler]
+  /// as the default handler.
+  AppAudioHandler(
+    this._timerAudioHandler,
+    this._soLoudChantingAudioHandler,
+  ) : super(_timerAudioHandler);
 
 
   Future<Duration> get outputLatency async {
@@ -50,8 +53,8 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
         stop(); // stop everything that is ongoing
         String handlerId = extras!['handlerId'] as String;
 
-        if (handlerId == ChantingAudioHandler.handlerId) {
-          inner = _chantingAudioHandler;
+        if (handlerId == SoLoudChantingAudioHandler.handlerId) {
+          inner = _soLoudChantingAudioHandler;
         }
 
         if (handlerId == TimerAudioHandler.handlerId) {
@@ -65,10 +68,9 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
     }
   }
 
-  /// Closes both the chanting and timer audio handlers when 
-  /// the app audio handler is closed.
+  /// Closes all audio handlers when the app audio handler is closed.
   void close() {
-    _chantingAudioHandler.close();
+    _soLoudChantingAudioHandler.close();
     _timerAudioHandler.close();
   }
 

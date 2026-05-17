@@ -155,9 +155,11 @@ class _LyricsViewState extends State<LyricsView> {
       );
 
       animationFinished.whenComplete(() {
-        setState(() {
-          isAnimating = false;
-        });
+        if (mounted) {
+          setState(() {
+            isAnimating = false;
+          });
+        }
       });
     }
   }
@@ -212,7 +214,7 @@ class _LyricsViewState extends State<LyricsView> {
             final line = lyricsDocument.lines[index];
             return LyricLine(
               line: line,
-              position: widget.chantingState.latencyCompensatedPosition,
+              position: widget.chantingState.position,
               chantingState: widget.chantingState,
               isActive: index <= widget.chantingState.activeLineIndex,
             );

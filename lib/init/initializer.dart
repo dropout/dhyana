@@ -5,7 +5,7 @@ import 'package:audio_session/audio_session.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/audio_session_configuration.dart';
 import 'package:dhyana/audio/timer_audio_handler.dart';
-import 'package:dhyana/audio/chanting_audio_handler.dart';
+import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
@@ -15,6 +15,7 @@ import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
+import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/logger_mixin.dart';
@@ -54,11 +55,12 @@ class Initializer with LoggerMixin {
       firebaseProvider.remoteConfig,
     );
 
-    logger.t('Initialize audio handler');
+    logger.t('Initialize audio');
+    await SoLoud.instance.init();
     final audioHandler = await audio_service.AudioService.init(
       builder: () => AppAudioHandler(
         TimerAudioHandler(),
-        ChantingAudioHandler(),
+        SoLoudChantingAudioHandler(soloud: SoLoud.instance),
       ),
       config: const audio_service.AudioServiceConfig(
         androidNotificationChannelId: 'com.dhyana.audio',

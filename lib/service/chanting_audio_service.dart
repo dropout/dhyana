@@ -4,9 +4,9 @@ import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 
 class ChantingAudioService {
-  final AppAudioHandler _audioHandler;
+  final AppAudioHandler audioHandler;
 
-  ChantingAudioService(this._audioHandler) {
+  ChantingAudioService(this.audioHandler) {
     _switchToChantingAudioHandler();
   }
 
@@ -14,7 +14,7 @@ class ChantingAudioService {
     ChantingSettings settings, 
     Map<String, String> resourceUrls
   ) async {
-    final result = await _audioHandler.customAction(
+    final result = await audioHandler.customAction(
       ChantingHandlerCustomAction.setup.name, {
         'chantingSettings': settings.toJson(),
         'resourceUrls': resourceUrls,
@@ -23,36 +23,36 @@ class ChantingAudioService {
     return result;
   }
 
-  Future<void> play() => _audioHandler.play();
-  Future<void> pause() => _audioHandler.pause();
-  Future<void> seek(Duration position) => _audioHandler.seek(position);
-  Future<void> stop() => _audioHandler.stop();
-  Future<void> prev() => _audioHandler.skipToPrevious();
-  Future<void> next() => _audioHandler.skipToNext();
+  Future<void> play() => audioHandler.play();
+  Future<void> pause() => audioHandler.pause();
+  Future<void> seek(Duration position) => audioHandler.seek(position);
+  Future<void> stop() => audioHandler.stop();
+  Future<void> prev() => audioHandler.skipToPrevious();
+  Future<void> next() => audioHandler.skipToNext();
 
-  bool get playing => _audioHandler.playbackState.value.playing;
+  bool get playing => audioHandler.playbackState.value.playing;
   
   // Duration
   Duration get duration => mediaItem?.duration ?? Duration.zero;
   Stream<Duration?> get durationStream =>
-    _audioHandler.mediaItem.where((m) => m != null).map((m) => m!.duration);
+    audioHandler.mediaItem.where((m) => m != null).map((m) => m!.duration);
 
   // MediaItem
-  Stream<MediaItem?> get mediaItemStream => _audioHandler.mediaItem;
-  MediaItem? get mediaItem => _audioHandler.mediaItem.value;
+  Stream<MediaItem?> get mediaItemStream => audioHandler.mediaItem;
+  MediaItem? get mediaItem => audioHandler.mediaItem.value;
 
   // PlaybackState
-  Stream<PlaybackState> get playbackStateStream => _audioHandler.playbackState;
-  PlaybackState get playbackState => _audioHandler.playbackState.value;
+  Stream<PlaybackState> get playbackStateStream => audioHandler.playbackState;
+  PlaybackState get playbackState => audioHandler.playbackState.value;
 
   // Position  
-  Stream<Duration> get positionStream => _audioHandler.playbackState
+  Stream<Duration> get positionStream => audioHandler.playbackState
     .map((pb) => pb.position);
-  Duration get position => _audioHandler.playbackState.value.position;
-  Future<Duration> get outputLatency => _audioHandler.outputLatency;
+  Duration get position => audioHandler.playbackState.value.position;
+  Future<Duration> get outputLatency => audioHandler.outputLatency;
 
   void _switchToChantingAudioHandler() {
-    _audioHandler.customAction(AppAudioHandler.switchAction, {
+    audioHandler.customAction(AppAudioHandler.switchAction, {
       'handlerId': ChantingAudioHandler.handlerId,
     });
   }

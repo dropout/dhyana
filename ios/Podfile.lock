@@ -175,6 +175,8 @@ PODS:
     - GoogleUtilities/Environment (~> 8.1)
     - GTMSessionFetcher/Core (< 6.0, >= 3.4)
   - Flutter (1.0.0)
+  - flutter_soloud (0.0.1):
+    - Flutter
   - gaimon (0.0.1):
     - Flutter
   - google_sign_in_ios (0.0.1):
@@ -319,6 +321,7 @@ DEPENDENCIES:
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `12.9.0`)
   - Flutter (from `Flutter`)
+  - flutter_soloud (from `.symlinks/plugins/flutter_soloud/ios`)
   - gaimon (from `.symlinks/plugins/gaimon/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
@@ -401,6 +404,8 @@ EXTERNAL SOURCES:
     :tag: 12.9.0
   Flutter:
     :path: Flutter
+  flutter_soloud:
+    :path: ".symlinks/plugins/flutter_soloud/ios"
   gaimon:
     :path: ".symlinks/plugins/gaimon/ios"
   google_sign_in_ios:
@@ -470,6 +475,7 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: 9d2fa84a46676302b89dbd5e6e62bce2fe376909
   FirebaseStorage: 3ba2348d876c295236cdd9f408a62d3f9ff8e6b5
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_soloud: 86b611ec552abaa532d0090e9d702fdcfa1fcdba
   gaimon: 266fec2cd27726df54a6694c14fc9e3f2a415c33
   google_sign_in_ios: 7336a3372ea93ea56a21e126a0055ffca3723601
   GoogleAdsOnDeviceConversion: d68c69dd9581a0f5da02617b6f377e5be483970f
