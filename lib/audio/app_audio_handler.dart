@@ -5,7 +5,7 @@ import 'package:audio_session/audio_session.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
 import 'so_chanting_audio_handler.dart';
-import 'timer_audio_handler.dart';
+import 'so_timer_audio_handler.dart';
 
 /// The main audio handler for the app that manages switching 
 /// between different audio handlers
@@ -18,10 +18,10 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
   /// actions using flutter_soloud.
   final SoLoudChantingAudioHandler _soLoudChantingAudioHandler;
 
-  /// The [TimerAudioHandler] that handles timer-related audio actions.
-  final TimerAudioHandler _timerAudioHandler;
+  /// The [SoTimerAudioHandler] that handles timer-related audio actions.
+  final SoTimerAudioHandler _timerAudioHandler;
 
-  /// Creates an [AppAudioHandler] that initializes with the [TimerAudioHandler]
+  /// Creates an [AppAudioHandler] that initializes with the [SoTimerAudioHandler]
   /// as the default handler.
   AppAudioHandler(
     this._timerAudioHandler,
@@ -57,7 +57,7 @@ class AppAudioHandler extends SwitchAudioHandler with LoggerMixin {
           inner = _soLoudChantingAudioHandler;
         }
 
-        if (handlerId == TimerAudioHandler.handlerId) {
+        if (handlerId == SoTimerAudioHandler.handlerId) {
           inner = _timerAudioHandler;
         }
 

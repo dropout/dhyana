@@ -1,6 +1,6 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/audio/chanting_audio_handler.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
+import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 
 class ChantingAudioService {
@@ -15,7 +15,7 @@ class ChantingAudioService {
     Map<String, String> resourceUrls
   ) async {
     final result = await audioHandler.customAction(
-      ChantingHandlerCustomAction.setup.name, {
+      SoLoudChantingAudioHandlerCustomAction.setup.name, {
         'chantingSettings': settings.toJson(),
         'resourceUrls': resourceUrls,
       }
@@ -53,7 +53,7 @@ class ChantingAudioService {
 
   void _switchToChantingAudioHandler() {
     audioHandler.customAction(AppAudioHandler.switchAction, {
-      'handlerId': ChantingAudioHandler.handlerId,
+      'handlerId': SoLoudChantingAudioHandler.handlerId,
     });
   }
 }

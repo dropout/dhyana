@@ -4,8 +4,8 @@ import 'package:audio_service/audio_service.dart' as audio_service;
 import 'package:audio_session/audio_session.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/audio_session_configuration.dart';
-import 'package:dhyana/audio/timer_audio_handler.dart';
 import 'package:dhyana/audio/so_chanting_audio_handler.dart';
+import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
@@ -59,7 +59,7 @@ class Initializer with LoggerMixin {
     await SoLoud.instance.init();
     final audioHandler = await audio_service.AudioService.init(
       builder: () => AppAudioHandler(
-        TimerAudioHandler(),
+        SoTimerAudioHandler(soloud: SoLoud.instance),
         SoLoudChantingAudioHandler(soloud: SoLoud.instance),
       ),
       config: const audio_service.AudioServiceConfig(

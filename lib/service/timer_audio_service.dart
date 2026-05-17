@@ -1,6 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/audio/timer_audio_handler.dart';
+import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/model/timer_settings.dart';
 
@@ -20,13 +20,13 @@ class TimerAudioService {
 
   /// Plays the specified [sound] by sending a custom action to the [AppAudioHandler].
   Future<void> playSound(Sound sound) =>
-    _audioHandler.customAction(TimerHandlerCustomAction.playSound.name, {
+    _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {
       'sound': sound.name,
     });
   
   /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].  
   Future<void> start(TimerSettings timerSettings) =>
-    _audioHandler.customAction(TimerHandlerCustomAction.start.name, timerSettings.toJson());
+    _audioHandler.customAction(SoTimerHandlerCustomAction.start.name, timerSettings.toJson());
 
   /// Resumes audio playback by delegating to the [AppAudioHandler]'s play method.
   Future<void> resume() =>
@@ -52,7 +52,7 @@ class TimerAudioService {
 
   void _switchToTimerAudioHandler() => 
     _audioHandler.customAction(AppAudioHandler.switchAction, {
-      'handlerId': TimerAudioHandler.handlerId,
+      'handlerId': SoTimerAudioHandler.handlerId,
     });
     
 }
