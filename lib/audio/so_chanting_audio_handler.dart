@@ -101,7 +101,9 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       await _playCurrentTrack();
     }
 
-    _startPositionTimer();
+    _startPositionTimer(intervalMs: getIntervalMs(
+      _playlist[_currentIndex].mediaItem.duration ?? const Duration(minutes: 5)
+    ));
     _broadcastPlaybackState();
   }
 
@@ -235,10 +237,24 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     _currentIndex = -1;
   }
 
-  void _startPositionTimer() {
+  int getIntervalMs(Duration duration) {
+    if (duration <= const Duration(seconds: 30)) {
+      return 32;
+    } else if (duration <= const Duration(minutes: 1)) {
+      return 100;
+    } else if (duration <= const Duration(minutes: 5)) {
+      return 250;
+    } else if (duration <= const Duration(minutes: 10)) {
+      return 500;
+    } else {
+      return 1000;
+    }
+  }
+
+  void _startPositionTimer({int intervalMs = 250}) {
     _positionTimer?.cancel();
     _positionTimer = Timer.periodic(
-      const Duration(milliseconds: 250),
+      Duration(milliseconds: intervalMs),
       (_) => _broadcastPlaybackState(),
     );
   }

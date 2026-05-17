@@ -21,9 +21,13 @@ class AddChantSheet extends StatefulWidget {
 }
 
 class _AddChantSheetState extends State<AddChantSheet> {
-
   void _onListItemTap(Chant chant) {
     widget.onChantSelected?.call(chant);
+    context.hapticsTap();
+  }
+
+  void _onOkayPressed(BuildContext context) {
+    context.pop();
     context.hapticsTap();
   }
 
@@ -44,7 +48,9 @@ class _AddChantSheetState extends State<AddChantSheet> {
             final chant = widget.availableChants[index];
             final paddingBottom = index != widget.availableChants.length - 1;
             return Padding(
-              padding: EdgeInsets.only(bottom: paddingBottom ? DesignSpec.paddingSm : 0.0),
+              padding: EdgeInsets.only(
+                bottom: paddingBottom ? DesignSpec.paddingSm : 0.0,
+              ),
               child: ChantCard(
                 index: index,
                 chant: chant,
@@ -103,7 +109,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: DesignSpec.padding2Xl),
                 child: AppButton(
-                  onTap: () => context.pop(),
+                  onTap: () => _onOkayPressed(context),
                   text: context.l10n.close.toUpperCase(),
                 ),
               ),
@@ -152,8 +158,8 @@ class _AddChantButtonState extends State<_AddChantButton> {
     return IconButton(
       icon: Icon(
         _showCheckIcon
-          ? Icons.check_circle_rounded
-          : Icons.add_circle_outline_rounded,
+            ? Icons.check_circle_rounded
+            : Icons.add_circle_outline_rounded,
         color: _showCheckIcon ? Colors.green : Colors.black,
       ),
       onPressed: _handleTap,
