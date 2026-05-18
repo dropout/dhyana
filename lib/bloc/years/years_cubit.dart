@@ -68,7 +68,7 @@ class YearsCubit extends Cubit<YearsState> with LoggerMixin {
       result.add(y);
     }
 
-    return years;
+    return result;
   }
 
 

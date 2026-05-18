@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/data_provider/year_data_provider.dart';
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/year.dart';
 import 'package:dhyana/model/year_query_options.dart';
@@ -25,10 +26,10 @@ class FirebaseYearDataProvider
   );
 
   Query<Year> _buildQuery(YearQueryOptions queryOptions) {
-    final FieldPath fieldPath = FieldPath(const ['date']);
+    final FieldPath fieldPath = FieldPath(const ['startDate']);
     Query<Year> query = collectionRef
-      .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-      .where(fieldPath, isLessThan: queryOptions.to)
+      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
+      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(queryOptions.to))
       .orderBy(fieldPath);
     return query;
   }
@@ -48,10 +49,10 @@ class FirebaseYearDataProvider
     late Year updatedYear;
     try {
       // Year exists
-      Year thisMonth = await read(yearId);
-      updatedYear = thisMonth.copyWith(
-        minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
-        sessionCount: thisMonth.sessionCount + 1,
+      Year thisYear = await read(yearId);
+      updatedYear = thisYear.copyWith(
+        minutesCount: thisYear.minutesCount + session.duration.inMinutes,
+        sessionCount: thisYear.sessionCount + 1,
       );
     } catch(_) {
       // Year doesn't exists in database yet

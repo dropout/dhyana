@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/data_provider/month_data_provider.dart';
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/month.dart';
 import 'package:dhyana/model/month_query_options.dart';
 import 'package:dhyana/model/session.dart';
@@ -23,10 +24,10 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
   );
 
   Query<Month> _buildQuery(MonthQueryOptions queryOptions) {
-    final FieldPath fieldPath = FieldPath(const ['date']);
+    final FieldPath fieldPath = FieldPath(const ['startDate']);
     Query<Month> query = collectionRef
-      .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-      .where(fieldPath, isLessThan: queryOptions.to)
+      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
+      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(queryOptions.to))
       .orderBy(fieldPath);
     return query;
   }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/data_provider/week_data_provider.dart';
+import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/week.dart';
 import 'package:dhyana/model/week_query_options.dart';
@@ -25,10 +26,10 @@ class FirebaseWeekDataProvider
   );
 
   Query<Week> _buildQuery(WeekQueryOptions queryOptions) {
-    final FieldPath fieldPath = FieldPath(const ['date']);
+    final FieldPath fieldPath = FieldPath(const ['startDate']);
     Query<Week> query = collectionRef
-      .where(fieldPath, isGreaterThanOrEqualTo: queryOptions.from)
-      .where(fieldPath, isLessThan: queryOptions.to)
+      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
+      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(queryOptions.to))
       .orderBy(fieldPath);
     return query;
   }
