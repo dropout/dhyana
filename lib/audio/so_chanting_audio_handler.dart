@@ -28,7 +28,10 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
   Timer? _positionTimer;
 
   SoLoudChantingAudioHandler({required this.soloud})
-    : assert(soloud.isInitialized, 'SoLoud instance must be initialized before creating the handler');
+    : assert(
+        soloud.isInitialized,
+        'SoLoud instance must be initialized before creating the audio handler',
+      );
 
   @override
   Future<dynamic> customAction(
@@ -68,7 +71,7 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       if (url == null) {
         throw ArgumentError('No URL found for chant: ${chant.id}');
       }
-      final source = await soloud.loadUrl(url, mode: .disk);
+      final source = await soloud.loadUrl(url, mode: .memory);
       entries.add(
         _PlaylistEntry(
           source: source,
@@ -101,15 +104,16 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       await _playCurrentTrack();
     }
 
-    _startPositionTimer(intervalMs: getIntervalMs(
-      _playlist[_currentIndex].mediaItem.duration ?? const Duration(minutes: 5)
-    ));
+    // need to be short enough to keep word highlighting precise
+    _startPositionTimer(intervalMs: 64); // 15 fps?
     _broadcastPlaybackState();
   }
 
   @override
   Future<void> pause() async {
     if (_soundHandle == null) return;
+    if (soloud.getPause(_soundHandle!)) return; // already paused
+
     soloud.setPause(_soundHandle!, true);
     _stopPositionTimer();
     _broadcastPlaybackState();

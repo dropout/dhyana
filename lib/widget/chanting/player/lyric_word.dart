@@ -3,26 +3,36 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
-class LyricWordWidget extends StatelessWidget {
+enum WordState {
+  active,
+  pending,
+  sung,
+}
 
+class LyricWordWidget extends StatelessWidget {
   final LyricsWord word;
-  final Duration position;
+  final WordState wordState;
 
   const LyricWordWidget({
-    required this.word, 
-    required this.position, 
-    super.key
+    required this.word,
+    required this.wordState,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     late final Color color;
-    if (position < word.start) {
-      color = Colors.white;
-    } else if (position >= word.end) {
-      color = Colors.grey.shade600;
-    } else {
-      color = AppColors.redAccent;
+
+    switch (wordState) {
+      case WordState.active:
+        color = AppColors.redAccent;
+        break;
+      case WordState.sung:
+        color = Colors.grey.shade600;
+        break;
+      case WordState.pending:
+        color = Colors.white;
+        break;
     }
 
     return AnimatedDefaultTextStyle(

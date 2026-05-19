@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class DesignSpec {
 
+  static const String fontFamilyName = 'RobotoSlab';
+  static const String condensedFontFamilyName = 'RobotoCondensed';
+
   static const double maxContentWidth = 512.0;
 
   static const double spacingXxs = 2.0;
@@ -52,7 +55,7 @@ class DesignSpec {
       surface: AppColors.backgroundPaper,
     );
     ThemeData themeData = ThemeData(
-      fontFamily: 'RobotoSlab',
+      fontFamily: DesignSpec.fontFamilyName,
       appBarTheme: AppBarTheme(
         foregroundColor: Colors.black,
         backgroundColor: AppColors.backgroundPaper,

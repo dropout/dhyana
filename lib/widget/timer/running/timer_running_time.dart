@@ -1,4 +1,5 @@
 import 'package:dhyana/bloc/timer/timer_cubit.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class TimerRunningTime extends StatelessWidget {
@@ -51,7 +52,7 @@ class TimerRunningTime extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
-                fontFamily: 'RobotoCondensed',
+                fontFamily: DesignSpec.condensedFontFamilyName,
                 fontWeight: FontWeight.w100,
                 fontSize: 96.0,
               )

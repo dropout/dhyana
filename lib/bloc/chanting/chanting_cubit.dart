@@ -7,6 +7,7 @@ import 'package:dhyana/service/chanting_audio_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
 import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/chanting_settings.dart';
@@ -43,12 +44,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     _init();
   }
 
-
   /// Initializes the cubit by setting up stream subscriptions
   Future<void> _init() async {
     try {
-      _playbackStateSub = audioService.playbackStateStream
-        .listen(_onPlaybackStateChanged);
+      _playbackStateSub = audioService.playbackStateStream.listen(
+        _onPlaybackStateChanged,
+      );
       _mediaItemSub = audioService.mediaItemStream.listen(_onMediaItemChanged);
       _updateOutputLatency();
     } catch (e, st) {
@@ -61,9 +62,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  Future<void> setup(ChantingSettings chantingSettings) async {
+  Future<void> setup(
+    ChantingSettings chantingSettings,
+  ) async {
     try {
       logger.t('Setting up ${chantingSettings.selectedChants.length} chants');
+
       emit(state.copyWith(isLoading: true));
 
       await audioService.stop();
@@ -102,7 +106,10 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
       final lyricsUrl = await resourceResolver.getChantLyricsUrl(chantId);
       final lyricsDocument = await lyricsService.loadLyrics(lyricsUrl);
+
+      // User quickly pressed back button
       if (isClosed) return;
+
       emit(
         state.copyWith(
           lyricsLoadingState: LoadingState.loaded,
@@ -119,9 +126,9 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   }
 
   /// Calculates the active lyrics line index based on the current position.
-  void _positionUpdate(Duration position) {
+  void _playbackPositionUpdate(Duration position) {
     final activeLineIndex =
-        state.lyricsDocument?.activeLineIndex(position) ?? 0;
+        state.lyricsDocument?.getExactLineIndex(position) ?? 0;
 
     // If position falls between two lines,
     // keep the line index unchanged until the next line is active
@@ -132,22 +139,20 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   void _onPlaybackStateChanged(PlaybackState pbState) {
     emit(state.copyWith(playbackState: pbState));
-    // Compensate for output latency when updating position to keep lyrics in sync
-    // This useful when bluetooth earbuds, which can have significant latency
-    // _positionUpdate(pbState.position - state.outputLatency);
-    _positionUpdate(state.latencyCompensatedPosition);
+
+    // Only update while playing
+    if (pbState.playing) {
+      _playbackPositionUpdate(state.latencyCompensatedPosition);
+    }
 
     if (pbState.processingState == AudioProcessingState.completed &&
         pbState.queueIndex ==
             state.chantingSettings.selectedChants.length - 1) {
-
       logger.t('Chanting session completed $pbState');
       return;
     } else if (pbState.processingState == AudioProcessingState.completed) {
       logger.t('Track completed, moving to next track');
     }
-
-    // logger.t('Current index: ${pbState.queueIndex}');
   }
 
   void _onMediaItemChanged(MediaItem? mediaItem) {
@@ -165,7 +170,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   /// Start/resume playback.
   /// Updates the output latency before playing to ensure lyrics stay in sync.
-  Future<void> play() async {     
+  Future<void> play() async {
     _updateOutputLatency();
     return audioService.play();
   }
@@ -176,7 +181,18 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   /// Seeks to the specified position in the current chant.
   Future<void> seek(Duration position) async {
     await audioService.seek(position);
-    logger.t('Seek to position: ${position.inSeconds} seconds');
+    logger.t('Seek to position: ${position.formatHHMMSSmm()}');
+  }
+
+  Future<void> seekToLine(int lineIndex) async {
+    final targetPosition = state.lyricsDocument?.lines[lineIndex].start;
+    if (targetPosition != null && lineIndex != state.activeLineIndex) {
+      emit(state.copyWith(activeLineIndex: lineIndex));
+      // emit(state.copyWith(playbackState: state.playbackState.copyWith(updatePosition: targetPosition)));
+      seek(targetPosition);
+    } else {
+      // logger.w('Attempted to seek to line index $lineIndex, but it is out of bounds');
+    }
   }
 
   /// Moves to the previous track in the playlist,

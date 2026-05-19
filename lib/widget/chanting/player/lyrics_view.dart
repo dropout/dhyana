@@ -1,6 +1,7 @@
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/util/duration.dart';
+import 'package:dhyana/util/text.dart';
 import 'package:dhyana/widget/chanting/player/lyric_line.dart';
+import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,9 +19,12 @@ class LyricsView extends StatefulWidget {
   /// the active line should be centered.
   final double topOffset;
 
+  final double maxWidth;
+
   /// Creates a [LyricsView] widget.
   const LyricsView({
     required this.chantingState,
+    required this.maxWidth,
     this.topOffset = 200.0,
     super.key,
   });
@@ -45,9 +49,7 @@ class _LyricsViewState extends State<LyricsView> {
   /// animating the scroll position programmatically.
   bool isAnimating = false;
 
-  /// List of currently visible line indices and
-  /// their offsets from the top of the scroll view.
-  List<(int, double)> _visibleLineOffsets = []; // (lineIndex, offsetFromTop)
+  List<double> _lyricLineHeights = [];
 
   @override
   void initState() {
@@ -75,12 +77,38 @@ class _LyricsViewState extends State<LyricsView> {
   void didUpdateWidget(covariant LyricsView oldWidget) {
     super.didUpdateWidget(oldWidget);
 
+    // Scroll to lines while the chant is playing.
     if (widget.chantingState.activeLineIndex !=
         oldWidget.chantingState.activeLineIndex) {
       debugPrint(
         'Active line index changed: ${oldWidget.chantingState.activeLineIndex} -> ${widget.chantingState.activeLineIndex}',
       );
-      _scrollToActiveLine();
+
+      // Only auto-scroll when the chant is playing.
+      // If not playing, user can scroll freely without fighting with auto-scroll.
+      if (widget.chantingState.playbackState.playing) {
+        _scrollToLine(widget.chantingState.activeLineIndex);
+      }
+    }
+
+    // Update line height when the lyrics document is loaded
+    if (widget.chantingState.lyricsDocument !=
+        oldWidget.chantingState.lyricsDocument) {
+      final lh = <double>[];
+      for (final line in widget.chantingState.lyricsDocument?.lines ?? []) {
+        final height = calculateTextHeight(
+          line.text,
+          context.theme.textTheme.headlineSmall!.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+          widget.maxWidth,
+          LyricLine.linePadding,
+        );
+        lh.add(height);
+      }
+      setState(() {
+        _lyricLineHeights = lh;
+      });
     }
   }
 
@@ -113,103 +141,91 @@ class _LyricsViewState extends State<LyricsView> {
       return;
     }
 
-    // Calculate the target line to seek to based on the current scroll position
-    final targetPosition = _calculateActiveLineBeginPosition();
-
-    if (targetPosition != null) {
-      context.read<ChantingCubit>().seek(targetPosition);
-      debugPrint('Seeking to position: ${targetPosition.formatHHMMSSmm()}');
-    }
+    final targetActiveLineIndex = _calculateActiveLineIndexFromScroll();
+    context.read<ChantingCubit>().seekToLine(targetActiveLineIndex);
   }
 
   /// Scrolls the view to center the active line.
   /// Only called when the active line changes.
-  void _scrollToActiveLine() async {
+  void _scrollToLine(int lineIndex) async {
     // Don't auto-scroll if user is actively scrolling
     if (isScrolling) return;
 
-    final activeIndex = widget.chantingState.activeLineIndex;
+    // final lineHeights = widget.chantingState.lyricsLineHeights;
+    if (_lyricLineHeights.isEmpty || lineIndex >= _lyricLineHeights.length) {
+      return;
+    }
 
-    // Find the offset of the active line from the list of currently visible lines
-    // If not found, indicate with a negative index and skip the auto-scrolling
-    final target = _visibleLineOffsets.firstWhere(
-      (entry) => (entry.$1 == activeIndex),
-      orElse: () => (-1, 0.0),
+    // Calculate the cumulative scroll offset for the target line.
+    // The top SliverPadding of [topOffset] pixels shifts line content
+    // visually, but scroll offset 0 aligns to the first line (after padding).
+    // Summing heights up to lineIndex gives the offset where that line begins.
+    double targetScrollOffset = 0;
+    for (int i = 0; i < lineIndex; i++) {
+      targetScrollOffset += _lyricLineHeights[i];
+    }
+
+    debugPrint(
+      'Scrolling to line $lineIndex — '
+      'current offset: ${_scrollController.offset}, '
+      'target offset: $targetScrollOffset',
     );
 
-    // If the active line is currently visible, animate to center it
-    if (target.$1 >= 0) {
-      final targetOffset = widget.topOffset + target.$2 - widget.topOffset;
-      debugPrint(
-        'Current offset: ${_scrollController.offset}, Target offset: $targetOffset',
-      );
+    setState(() {
+      isAnimating = true;
+    });
 
-      setState(() {
-        isAnimating = true;
-      });
+    final animationFinished = _scrollController.animateTo(
+      targetScrollOffset,
+      duration: Durations.long2 * 2,
+      curve: Curves.easeInOut,
+    );
 
-      final animationFinished = _scrollController.animateTo(
-        targetOffset,
-        duration: Durations.long2 * 2,
-        curve: Curves.easeInOut,
-      );
-
-      animationFinished.whenComplete(() {
-        if (mounted) {
-          setState(() {
-            isAnimating = false;
-          });
-        }
-      });
-    }
+    animationFinished.whenComplete(() {
+      if (mounted) {
+        setState(() {
+          isAnimating = false;
+        });
+      }
+    });
   }
 
-  /// Calculates the target scroll position to keep the active line centered.
-  /// If the closest line is the same as the current active line,
-  /// returns null to indicate no seeking needed.
-  Duration? _calculateActiveLineBeginPosition() {
-    double minOffset = double.infinity;
+  int _calculateActiveLineIndexFromScroll() {
+    final lineHeights = _lyricLineHeights;
+    if (lineHeights.isEmpty) return 0;
+
+    double minDiff = double.infinity;
     int closestLineIndex = 0;
+    double cumulativeOffset = 0;
 
-    // Find the visible line that is closest to the center of the view
-    for (final entry in _visibleLineOffsets) {
-      final localOffset = entry.$2 - _scrollController.offset;
-      if (localOffset.abs() < minOffset) {
-        minOffset = localOffset.abs();
-        closestLineIndex = entry.$1;
+    // Find the line whose cumulative offset is closest to the current scroll position
+    for (int i = 0; i < lineHeights.length; i++) {
+      final diff = (cumulativeOffset - _scrollController.offset).abs();
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestLineIndex = i;
       }
-    }
-    // debugPrint('Closest Line Index: $closestLineIndex with offset: $minOffset');
-
-    // If the closest line is different from the current active line,
-    // return the begin time of that line to seek to.
-    // Otherwise, return null to indicate no seeking.
-    if (widget.chantingState.activeLineIndex != closestLineIndex) {
-      final targetLine =
-          widget.chantingState.lyricsDocument?.lines[closestLineIndex];
-      if (targetLine != null) {
-        return targetLine.start;
-      }
+      cumulativeOffset += lineHeights[i];
     }
 
-    return null;
+    return closestLineIndex;
   }
 
   /// Build the list of slivers separately from the CustomScrollView so that
-  /// in the initialization phase the isScrollNotifier listener can be 
+  /// in the initialization phase the isScrollNotifier listener can be
   /// attached to the ScrollController that is attached to a CustomScrollView.
-  /// So even if it's empty the CustomScrollView should always be built with a 
+  /// So even if it's empty the CustomScrollView should always be built with a
   /// ScrollController attached.
   @override
   Widget build(BuildContext context) {
     final slivers = <Widget>[];
-    if (widget.chantingState.lyricsLoadingState == .loaded) {
+    if (widget.chantingState.lyricsLoadingState == .loaded && _lyricLineHeights.isNotEmpty) {
       final lyricsDocument = widget.chantingState.lyricsDocument!;
       slivers.addAll([
         SliverPadding(
           padding: EdgeInsets.only(top: widget.topOffset),
         ), // Extra space at the top
-        LyricLinesSliverList(
+        SliverVariedExtentList(
           delegate: SliverChildBuilderDelegate((context, index) {
             final line = lyricsDocument.lines[index];
             return LyricLine(
@@ -219,6 +235,9 @@ class _LyricsViewState extends State<LyricsView> {
               isActive: index <= widget.chantingState.activeLineIndex,
             );
           }, childCount: widget.chantingState.lyricsDocument!.lines.length),
+          itemExtentBuilder: (index, sliverLayoutDimensions) {
+            return _lyricLineHeights[index];
+          },
         ),
         SliverPadding(
           padding: EdgeInsets.only(bottom: 300),
@@ -226,31 +245,21 @@ class _LyricsViewState extends State<LyricsView> {
       ]);
     }
 
-    return NotificationListener<LyricLinesNotification>(
-      onNotification: (notification) {
+    return Listener(
+      onPointerDown: (_) {
         setState(() {
-          _visibleLineOffsets = notification.visibleOffsets.entries
-              .map((e) => (e.key, e.value))
-              .toList();
+          isPointerDown = true;
         });
-        return true; // Indicate we've handled the notification
       },
-      child: Listener(
-        onPointerDown: (_) {
-          setState(() {
-            isPointerDown = true;
-          });
-        },
-        onPointerUp: (_) {
-          setState(() {
-            isPointerDown = false;
-          });
-        },
-        child: CustomScrollView(
-          controller: _scrollController,
-          physics: ClampingScrollPhysics(),
-          slivers: slivers,
-        ),
+      onPointerUp: (_) {
+        setState(() {
+          isPointerDown = false;
+        });
+      },
+      child: CustomScrollView(
+        controller: _scrollController,
+        physics: ClampingScrollPhysics(),
+        slivers: slivers,
       ),
     );
   }

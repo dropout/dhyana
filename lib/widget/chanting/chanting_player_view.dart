@@ -8,10 +8,9 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Main view for the chanting player, 
+/// Main view for the chanting player,
 /// displaying the lyrics and playback controls.
 class ChantingPlayerView extends StatefulWidget {
-
   /// The current state of the chanting player, containing
   /// the lyrics document, playback position, and playback state, etc...
   final ChantingState chantingState;
@@ -95,7 +94,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
       fit: StackFit.expand,
       children: [
         Positioned.fill(
-          child: buildLyricsView(context),          
+          child: buildLyricsView(context),
 
           // child: AnimatedCrossFade(
           //   firstChild: buildLyricsView(context),
@@ -124,8 +123,6 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
           //     );
           //   },
           // ),
-
-
         ),
         Positioned(left: 0, bottom: 0, right: 0, child: buildControls(context)),
       ],
@@ -133,15 +130,15 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   }
 
   Widget buildLyricsView(BuildContext context) {
-    return LyricsView(
-      chantingState: widget.chantingState,
-      key: ValueKey('lyrics'),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return LyricsView(          
+          chantingState: widget.chantingState,
+          maxWidth: constraints.maxWidth,
+        );
+      },
     );
-    // if (widget.chantingState.isLoading) {
-    //   return SizedBox.shrink();
-    // } else {
 
-    // }
   }
 
   Widget buildControls(BuildContext context) {

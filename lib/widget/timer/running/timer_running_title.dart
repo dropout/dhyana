@@ -1,5 +1,6 @@
 import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class TimerRunningTitle extends StatefulWidget {
@@ -45,7 +46,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
 
   Widget? buildText(BuildContext context, TimerCubitState timerState) {
     TextStyle style = Theme.of(context).textTheme.titleLarge!.copyWith(
-      fontFamily: 'RobotoCondensed',
+      fontFamily: DesignSpec.condensedFontFamilyName,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     );
