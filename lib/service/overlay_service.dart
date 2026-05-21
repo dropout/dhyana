@@ -4,7 +4,9 @@ abstract interface class OverlayService {
 
   Future<T?> showModalBottomSheet<T>(
     BuildContext context,
-    Widget Function(BuildContext) builder,
+    Widget Function(BuildContext) builder, {
+      bool enableDrag = true,
+    }
   );
 
 }
