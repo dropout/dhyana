@@ -1,4 +1,4 @@
-import 'package:dhyana/util/duration.dart';
+
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/timer/settings/duration_input_view.dart';
 import 'package:dhyana/widget/util/app_context.dart';
@@ -36,9 +36,9 @@ class FormBuilderDurationInput extends FormBuilderField<Duration> {
           field.context.services.overlayService.showModalBottomSheet(
             field.context,
             (context) => DurationInputView(
-              availableValues: defaultChantGapSelectorValues,
+
               title: label,
-              initialValue: field.value ?? Duration.zero,
+              initialValue: field.value?.inMinutes,
               onSelect: (duration) {
                 field.didChange(duration);
                 context.pop();

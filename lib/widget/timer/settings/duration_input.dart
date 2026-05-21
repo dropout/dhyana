@@ -1,5 +1,4 @@
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/util/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/design_spec.dart';
@@ -17,8 +16,13 @@ class DurationInput extends StatelessWidget {
   /// The selected duration value.
   final Duration value;
 
-  /// List of available values in minutes.
-  final List<Duration> availableValues;
+  /// Minimum duration in minutes. Default is 1.
+  /// This ensures that users select a positive duration.
+  final int minMinutes;
+
+  /// Maximum duration in minutes. Default is 60.
+  /// This provides a reasonable upper limit for timer durations.
+  final int maxMinutes;
 
   /// Callback function that is called when the value changes.
   final void Function(Duration duration)? onChange;
@@ -31,7 +35,8 @@ class DurationInput extends StatelessWidget {
     required this.label,
     required this.value,
     required this.overlayService,
-    this.availableValues = defaultMinutesSelectorValues,
+    this.minMinutes = 1,
+    this.maxMinutes = 60,    
     this.onChange,
     super.key,
   });
@@ -47,10 +52,12 @@ class DurationInput extends StatelessWidget {
       context,
       (context) => DurationInputView(
         title: label,
-        initialValue: value,
-        availableValues: availableValues,
+        initialValue: value.inMinutes,
+        minMinutes: minMinutes,
+        maxMinutes: maxMinutes,
         onSelect: (Duration duration) => _onSelected(context, duration),
       ),
+      enableDrag: false,
     );
     context.hapticsTap();
   }
