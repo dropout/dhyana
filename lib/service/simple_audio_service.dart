@@ -29,10 +29,12 @@ class SimpleAudioService {
     final s = await _soloud.loadAsset(sound.assetPath);
     _soundHandle = _soloud.play(s);
     _isPlayingController.add(true);
-    s.allInstancesFinished.first.then((_) {
-      _isPlayingController.add(false);
-      _soloud.disposeSource(s);
-    });
+    s.allInstancesFinished      
+      .first.then((_) {
+        if (_isPlayingController.isClosed) return;
+        _isPlayingController.add(false);
+        _soloud.disposeSource(s);
+      });
   }
 
   Future<void> stop() async {
