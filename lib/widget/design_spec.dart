@@ -133,6 +133,7 @@ class AppColors {
 
   static const Color backgroundPaper = Color(0xFFDDCCB2);
   static const Color backgroundPaperLight = Color(0xFFEFE7DC);
+  static const Color backgroundPaperDark = Color(0xFFBFAE94);
 
   static const Color red = Color(0xFFBB0A11);
   static const Color redAccent = Color(0xFFE4002B);
