@@ -76,9 +76,6 @@ class _IntDialInputState extends State<IntDialInput> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = Size(constraints.maxWidth, constraints.maxHeight);
-        final radius =
-            min(size.width, size.height) / 2 -
-            27; // 24 is the stroke width of the dial
         return GestureDetector(
           behavior: .opaque,
           onPanUpdate: (details) => _onPanUpdate(details, size),

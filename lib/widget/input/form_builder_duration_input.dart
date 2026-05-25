@@ -36,18 +36,12 @@ class FormBuilderDurationInput extends FormBuilderField<Duration> {
           field.context.services.overlayService.showModalBottomSheet(
             field.context,
             (context) => DurationInputView(
-
               title: label,
               initialValue: field.value?.inMinutes,
               onSelect: (duration) {
                 field.didChange(duration);
                 context.pop();
               },
-              durationFormatter: (d, isSelected) {
-                return isSelected
-                  ? field.context.l10n.secondsPluralWithNumber(d.inSeconds)
-                  : d.inSeconds.toString();
-              }
             ),
           );
           field.context.hapticsTap();

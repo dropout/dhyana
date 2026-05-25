@@ -44,6 +44,7 @@ void main() {
           DurationInput(
             label: 'Test Duration',
             value: const Duration(minutes: 5),
+            preparationTime: const Duration(minutes: 0),
             overlayService: mockOverlayService,
             onChange: (Duration duration) {
               // Handle change
@@ -78,6 +79,7 @@ void main() {
                 body: DurationInput(
                   label: 'Test Duration',
                   value: const Duration(minutes: 5),
+                  preparationTime: const Duration(minutes: 0),
                   overlayService: mockOverlayService,
                 ),
               ),

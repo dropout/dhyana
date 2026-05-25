@@ -16,6 +16,9 @@ class DurationInput extends StatelessWidget {
   /// The selected duration value.
   final Duration value;
 
+  // To show session start and end time correctly in the input view
+  final Duration preparationTime;
+
   /// Minimum duration in minutes. Default is 1.
   /// This ensures that users select a positive duration.
   final int minMinutes;
@@ -34,9 +37,10 @@ class DurationInput extends StatelessWidget {
   const DurationInput({
     required this.label,
     required this.value,
+    required this.preparationTime,
     required this.overlayService,
     this.minMinutes = 1,
-    this.maxMinutes = 60,    
+    this.maxMinutes = 60,
     this.onChange,
     super.key,
   });
@@ -53,6 +57,7 @@ class DurationInput extends StatelessWidget {
       (context) => DurationInputView(
         title: label,
         initialValue: value.inMinutes,
+        preparationTime: preparationTime,
         minMinutes: minMinutes,
         maxMinutes: maxMinutes,
         onSelect: (Duration duration) => _onSelected(context, duration),

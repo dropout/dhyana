@@ -136,6 +136,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           DurationInput(
             label: AppLocalizations.of(context).inputDurationLabel,
             value: widget.timerSettings.duration,
+            preparationTime: widget.timerSettings.warmup,
             overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
               _onDurationChange(context, duration),

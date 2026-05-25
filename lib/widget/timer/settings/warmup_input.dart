@@ -52,6 +52,7 @@ class WarmupTimeInput extends StatelessWidget {
       (context) => DurationInputView(
         title: label,
         initialValue: value.inMinutes,
+        showStartEndTimes: false,
         minMinutes: minMinutes,
         maxMinutes: maxMinutes,        
         onSelect: (Duration duration) => _onSelected(context, duration),
@@ -65,7 +66,8 @@ class WarmupTimeInput extends StatelessWidget {
     return InputButton(
       key: const Key('warmup_time_input_button'),
       onTap: () => _onInputTap(context),
-      padding: const EdgeInsets.all(DesignSpec.paddingMd),
+      padding: const EdgeInsets.all(DesignSpec.paddingXl),
+      shape: CircleBorder(),
       child: Text(
         value.inMinutes.toString(),
         textAlign: TextAlign.center,
