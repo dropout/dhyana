@@ -61,7 +61,8 @@ class _IntDialInputState extends State<IntDialInput> {
     double percentage = angle / (2 * pi);
 
     // 6. Calculate your duration (min to max)
-    int newDuration = ((widget.max - widget.min) * percentage).round() + widget.min;
+    int newDuration =
+        ((widget.max - widget.min) * percentage).round() + widget.min;
     if (newDuration != _currentDuration) {
       setState(() {
         _currentDuration = newDuration;
@@ -84,16 +85,11 @@ class _IntDialInputState extends State<IntDialInput> {
           child: Stack(
             fit: .expand,
             children: [
-
               // Draw the dial
               buildDial(context, size),
 
-              // Draw a drag handle at the edge of the dial
-              buildHandle(context, size, radius),
-
               // Draw a label in the center of the dial showing the selected duration
-              buildLabel(context),
-
+              buildLabel2(context),
             ],
           ),
         );
@@ -132,22 +128,32 @@ class _IntDialInputState extends State<IntDialInput> {
     );
   }
 
-  Widget buildHandle(BuildContext context, Size size, double radius) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final angle = _currentDuration / widget.max * 2 * pi - pi / 2;
-    final left = center.dx + radius * cos(angle) - 12;
-    final top = center.dy + radius * sin(angle) - 12;
-
-    return Positioned(
-      left: left,
-      top: top,
-      child: Container(
-        width: 24,
-        height: 24,
-        decoration: BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+  Widget buildLabel2(BuildContext context) {
+    return Center(
+      child: Text.rich(
+        textAlign: TextAlign.center,
+        TextSpan(
+          children: [
+            TextSpan(
+              text: '$_currentDuration\n',
+              style: context.theme.textTheme.displaySmall!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            TextSpan(
+              text: context.l10n.minutesPlural(_currentDuration),
+              style: context.theme.textTheme.bodyLarge!.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
 }
 
 class DialPainter extends CustomPainter {
@@ -207,9 +213,34 @@ class DialPainter extends CustomPainter {
       false,
       progressPaint,
     );
+
+    // Draw a small rectangle at the end of the arc to create a handle effect
+    final handleAngle = -pi / 2 + roundedSweepAngle;
+    final handleRadius = radius ;
+    final handleX = center.dx + handleRadius * cos(handleAngle);
+    final handleY = center.dy + handleRadius * sin(handleAngle);
+    // Rotate the canvas to align the rectangle with the angle of the handle
+    canvas.save();
+    canvas.translate(handleX, handleY);
+    canvas.rotate(handleAngle); 
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(center: Offset(0, 0), width: 24, height: 14),
+        Radius.circular(12),
+      ),
+      Paint()..color = Colors.black,
+    );
+    canvas.restore();
+
+    // canvas.drawCircle(
+    //   Offset(handleX, handleY),
+    //   strokeWidth / 2,
+    //   Paint()..color = Colors.red,
+    // );
   }
 
   @override
   bool shouldRepaint(covariant DialPainter oldDelegate) =>
-      oldDelegate.percentage != percentage || oldDelegate.strokeWidth != strokeWidth;
+      oldDelegate.percentage != percentage ||
+      oldDelegate.strokeWidth != strokeWidth;
 }
