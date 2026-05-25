@@ -5,7 +5,7 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:go_router/go_router.dart';
 
 import 'duration_input_view.dart';
-import 'duration_input_button.dart';
+import 'input_button.dart';
 
 /// A widget that allows users to select a duration for a timer.
 /// By default, it provides options for 1 to 108 minutes.
@@ -64,7 +64,7 @@ class DurationInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DurationInputButton(
+    return InputButton(
       key: Key('timer_duration_input_button'),
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(DesignSpec.paddingXl),

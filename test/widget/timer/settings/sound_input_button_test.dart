@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/timer/settings/sound_input_button.dart';
+import 'package:dhyana/widget/timer/settings/input_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: SoundInputButton(
+              body: InputButton(
                 onTap: () {},
                 child: Container(key: testKey),
               ),
@@ -27,7 +27,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: SoundInputButton(
+            body: InputButton(
               onTap: () {
                 tapped = true;
               },

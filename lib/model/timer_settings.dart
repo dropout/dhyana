@@ -17,6 +17,8 @@ sealed class TimerSettings with _$TimerSettings implements Model {
   const factory TimerSettings({
     @DurationConverter() @Default(Duration(minutes: 1)) Duration warmup,
     @DurationConverter() @Default(Duration(minutes: 10)) Duration duration,
+    @Default(0) int intervalCount,
+    @Default(Sound.triangle) Sound intervalSound,
     @Default(Sound.smallBell) Sound startingSound,
     @Default(Sound.smallBell) Sound endingSound,
     @DateTimeOrNullConverter() DateTime? lastUsed,

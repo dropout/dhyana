@@ -8,7 +8,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/util/localization.dart';
 
 import 'sound_input_view.dart';
-import 'sound_input_button.dart';
+import 'input_button.dart';
 
 /// A widget that allows users to select a starting sound
 /// or an ending sound for the timer feature.
@@ -53,7 +53,7 @@ class SoundInput extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return SoundInputButton(
+    return InputButton(
       key: Key('sound_input_button'),
       padding: const EdgeInsets.symmetric(
         horizontal: DesignSpec.spacingMd,

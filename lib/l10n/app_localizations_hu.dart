@@ -88,6 +88,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get inputDurationLabel => 'Időtartam';
 
   @override
+  String get inputIntervalCountLabel => 'Ismétlések száma';
+
+  @override
   String get inputEndingSoundLabel => 'Végehang';
 
   @override
@@ -110,6 +113,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get inputSoundSmallBell => 'Csengettyű';
+
+  @override
+  String get inputSoundTriangle => 'Harang';
 
   @override
   String get errorHeadline => 'Hoppá!';

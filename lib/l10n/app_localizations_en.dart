@@ -87,6 +87,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inputDurationLabel => 'Duration';
 
   @override
+  String get inputIntervalCountLabel => 'Interval count';
+
+  @override
   String get inputEndingSoundLabel => 'Ending sound';
 
   @override
@@ -109,6 +112,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inputSoundSmallBell => 'Small Bell';
+
+  @override
+  String get inputSoundTriangle => 'Triangle';
 
   @override
   String get errorHeadline => 'Ooops!';

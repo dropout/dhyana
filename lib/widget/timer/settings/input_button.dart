@@ -1,16 +1,19 @@
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
-class DurationInputButton extends StatelessWidget {
 
-  final Widget child;
+class InputButton extends StatelessWidget {
+
   final void Function() onTap;
   final EdgeInsets padding;
+  final Widget? child;
+  final ShapeBorder shape;
 
-  const DurationInputButton({
-    required this.child,
+  const InputButton({
     required this.onTap,
+    this.shape = const StadiumBorder(),
     this.padding = EdgeInsets.zero,
+    this.child,
     super.key
   });
 
@@ -23,12 +26,12 @@ class DurationInputButton extends StatelessWidget {
       hoverElevation: 0,
       focusElevation: 0,
       highlightElevation: 0,
-      shape: const CircleBorder(side: BorderSide.none),
-      fillColor: Colors.black,
+      constraints: const BoxConstraints(), // removes unnecessary padding
+      shape: shape,
+      fillColor: Colors.black, // background color
       splashColor: AppColors.splashColor,
       clipBehavior: Clip.none,
       child: child,
     );
   }
-
 }

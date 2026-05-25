@@ -1,11 +1,11 @@
 import 'package:dhyana/service/overlay_service.dart';
+import 'package:dhyana/widget/timer/settings/input_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:go_router/go_router.dart';
 
 import 'duration_input_view.dart';
-import 'duration_input_button.dart';
 
 /// A widget that allows users to select a warmup time for a timer.
 /// By default, it provides options for 0, 1, 2, 3, and 5 minutes.
@@ -62,8 +62,8 @@ class WarmupTimeInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DurationInputButton(
-      key: Key('warmup_time_duration_input_button'),
+    return InputButton(
+      key: const Key('warmup_time_input_button'),
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(DesignSpec.paddingMd),
       child: Text(

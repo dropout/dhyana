@@ -14,6 +14,7 @@ import 'package:dhyana/widget/timer/settings/start_time_text.dart';
 import 'package:dhyana/widget/timer/settings/warmup_input.dart';
 import 'package:dhyana/widget/timer/settings/sound_input.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
+import 'package:dhyana/widget/timer/settings/interval_input.dart';
 import 'package:dhyana/widget/timer/settings/end_time_text.dart';
 import 'package:dhyana/widget/timer/settings/input_gap.dart';
 
@@ -65,6 +66,14 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
       widget.timerSettings.copyWith(
         duration: duration,
+      )
+    );
+  }
+
+  void _onIntervalCountChange(BuildContext context, int intervalCount) {
+    context.read<TimerSettingsCubit>().timerSettingsChanged(
+      widget.timerSettings.copyWith(
+        intervalCount: intervalCount,
       )
     );
   }
@@ -130,6 +139,14 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
               _onDurationChange(context, duration),
+          ),
+          buildInputGap(context),
+          IntervalInput(
+            label: AppLocalizations.of(context).inputIntervalCountLabel,
+            value: widget.timerSettings.intervalCount,
+            overlayService: context.services.overlayService,
+            onChange: (int intervalCount) =>
+              _onIntervalCountChange(context, intervalCount),
           ),
           buildInputGap(context),
           SoundInput(

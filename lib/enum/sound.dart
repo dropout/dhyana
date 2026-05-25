@@ -1,7 +1,8 @@
 enum Sound {
   none(0, 0),
   vibrate(1, 1),
-  smallBell(2, 2);
+  smallBell(2, 2),
+  triangle(3, 3);
 
   const Sound(this.id, this.priority);
   final int id;
@@ -16,7 +17,9 @@ extension ImageResourceUrl on Sound {
       case Sound.smallBell:
         return 'assets/images/small_bell.jpg';
       case Sound.vibrate:
-        return 'assets/images/vibrate.jpg'; 
+        return 'assets/images/vibrate.jpg';
+      case Sound.triangle:
+        return 'assets/images/triangle.jpg'; 
     }
   }
 }
@@ -30,6 +33,8 @@ extension ResourceUrl on Sound {
         return 'assets/sounds/small_bell.mp3';
       case Sound.vibrate:
         return 'assets/haptics/vibration.ahap';
+      case Sound.triangle:
+        return 'assets/sounds/triangle.mp3';
     }
   }
 }

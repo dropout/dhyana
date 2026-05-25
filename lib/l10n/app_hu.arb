@@ -130,6 +130,11 @@
     "description": "A(z) inputDurationLabel fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "inputIntervalCountLabel": "Ismétlések száma",
+  "@inputIntervalCountLabel": {
+    "description": "A(z) inputIntervalCountLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "inputEndingSoundLabel": "Végehang",
   "@inputEndingSoundLabel": {
     "description": "A(z) inputEndingSoundLabel fordítási kulcs leírása.",
@@ -168,6 +173,11 @@
   "inputSoundSmallBell": "Csengettyű",
   "@inputSoundSmallBell": {
     "description": "A(z) inputSoundSmallBell fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "inputSoundTriangle": "Harang",
+  "@inputSoundTriangle": {
+    "description": "A(z) inputSoundTriangle fordítási kulcs leírása.",
     "placeholders": {}
   },
   "errorHeadline": "Hoppá!",

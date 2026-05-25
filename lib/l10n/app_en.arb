@@ -132,6 +132,11 @@
     "description": "Duration input label.",
     "placeholders": {}
   },
+  "inputIntervalCountLabel": "Interval count",
+  "@inputIntervalCountLabel": {
+    "description": "Interval count input label.",
+    "placeholders": {}
+  },
   "inputEndingSoundLabel": "Ending sound",
   "@inputEndingSoundLabel": {
     "description": "Ending sound input label.",
@@ -172,6 +177,11 @@
   "inputSoundSmallBell": "Small Bell",
   "@inputSoundSmallBell": {
     "description": "Small Bell sound option text.",
+    "placeholders": {}
+  },
+  "inputSoundTriangle": "Triangle",
+  "@inputSoundTriangle": {
+    "description": "Triangle sound option text.",
     "placeholders": {}
   },
 

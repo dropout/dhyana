@@ -254,6 +254,12 @@ abstract class AppLocalizations {
   /// **'Időtartam'**
   String get inputDurationLabel;
 
+  /// A(z) inputIntervalCountLabel fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ismétlések száma'**
+  String get inputIntervalCountLabel;
+
   /// A(z) inputEndingSoundLabel fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
@@ -301,6 +307,12 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Csengettyű'**
   String get inputSoundSmallBell;
+
+  /// A(z) inputSoundTriangle fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Harang'**
+  String get inputSoundTriangle;
 
   /// A(z) errorHeadline fordítási kulcs leírása.
   ///

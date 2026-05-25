@@ -13,7 +13,8 @@ String getLocalizedSoundName(
       return localizations.inputSoundVibrate;
     case Sound.smallBell:
       return localizations.inputSoundSmallBell;
-    
+    case Sound.triangle:
+      return localizations.inputSoundTriangle;    
   }
 }
 
