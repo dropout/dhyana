@@ -73,6 +73,7 @@ class DurationInput extends StatelessWidget {
       key: Key('timer_duration_input_button'),
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(DesignSpec.paddingXl),
+      shape: CircleBorder(),
       child: Text(
         value.inMinutes.toString(),
         textAlign: TextAlign.center,

@@ -183,7 +183,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   Widget buildInputGap(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minHeight: 48,
+        minHeight: 42,
       ),
       child: InputGap(
         isEndGap: false,
