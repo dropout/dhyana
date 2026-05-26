@@ -149,12 +149,12 @@ class SoundInputViewState extends State<SoundInputView>
           height: 200,
           child: CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 1.6,
+              aspectRatio: 16 / 9,
               enlargeFactor: .33,
               enableInfiniteScroll: false,
               enlargeCenterPage: true, // This pushes the item to the center
               viewportFraction:
-                  0.5, // Controls how much of the side items you see
+                  0.6, // Controls how much of the side items you see
               initialPage: selectedIndex,
               onPageChanged: (index, reason) => _onIndexChanged(index),
             ),
