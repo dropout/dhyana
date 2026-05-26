@@ -3,6 +3,7 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/timer/settings/input_view.dart';
 import 'package:dhyana/widget/timer/settings/input_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -69,12 +70,14 @@ class IntervalInput extends StatelessWidget {
       ),
       shape: const StadiumBorder(side: BorderSide.none),
       child: Text(
-        '${value.toString()} intervals',
+        value == 0
+            ? context.l10n.noInterval
+            : context.l10n.intervalPluralWithNumber(value),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: AppColors.backgroundPaperLight,
           fontWeight: FontWeight.w800,
-        )
+        ),
       ),
     );
   }
@@ -115,6 +118,13 @@ class _IntervalInputViewState extends State<_IntervalInputView> {
     widget.onSelect?.call(selectedCount);
   }
 
+  void _onOptionSelected(BuildContext context, int newValue) {
+    setState(() {
+      selectedCount = newValue;
+    });
+    context.services.hapticsService.select();
+  }
+
   @override
   Widget build(BuildContext context) {
     final options = List<int>.generate(
@@ -136,46 +146,17 @@ class _IntervalInputViewState extends State<_IntervalInputView> {
             padding: const EdgeInsets.only(
               left: DesignSpec.paddingLg,
               right: DesignSpec.paddingLg,
-              bottom: DesignSpec.paddingLg,
+              bottom: DesignSpec.padding2Xl,
               top: DesignSpec.paddingMd,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  selectedCount.toString(),
-                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(height: DesignSpec.paddingMd),
-                ToggleButtons(
-                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
-                  constraints: const BoxConstraints(minWidth: 60, minHeight: 48),
-                  onPressed: (index) {
-                    setState(() {
-                      selectedCount = options[index];
-                    });
-                    context.services.hapticsService.select();
-                  },
-                  isSelected: options
-                      .map((option) => option == selectedCount)
-                      .toList(growable: false),
-                  children: options
-                      .map(
-                        (option) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: DesignSpec.paddingSm,
-                          ),
-                          child: Text(
-                            option.toString(),
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ),
-                      )
-                      .toList(growable: false),
+                CustomToggleButton(
+                  options: options,
+                  selectedValue: selectedCount,
+                  onChanged: (newValue) => _onOptionSelected(context, newValue),
                 ),
               ],
             ),
@@ -183,5 +164,224 @@ class _IntervalInputViewState extends State<_IntervalInputView> {
         ),
       ),
     );
+  }  
+}
+
+// A custom toggle button widget that allows specific behaviour and styling
+// for the interval count selection.
+class CustomToggleButton extends StatelessWidget {
+  final List<int> options;
+  final int selectedValue;
+  final ValueChanged<int> onChanged;
+
+  const CustomToggleButton({
+    required this.options,
+    required this.selectedValue,
+    required this.onChanged,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final columnCount = 2;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final gridItemWidth =
+            (constraints.maxWidth / columnCount) -
+            DesignSpec.spacingMd / 2; // Calculate width for each item
+        final gridItemHeight = 160.0; // Fixed height for each item
+
+        return Column(
+          children: [
+            Row(
+              spacing: DesignSpec.spacingMd,
+              children: [
+                SizedBox(
+                  width: gridItemWidth,
+                  height: gridItemHeight,
+                  child: CustomToggleButtonItem(
+                    intervalCount: 0,
+                    title: context.l10n.noInterval,
+                    text: context.l10n.intervalNoIntervalsText,
+                    isSelected: selectedValue == 0,
+                    onTap: () => onChanged(0),
+                  ),
+                ),
+                SizedBox(
+                  width: gridItemWidth,
+                  height: gridItemHeight,
+                  child: CustomToggleButtonItem(
+                    intervalCount: 1,
+                    title: context.l10n.intervalPluralWithNumber(1),
+                    text: context.l10n.intervalOneIntervalText,
+                    isSelected: selectedValue == 1,
+                    onTap: () => onChanged(1),
+                  ),
+                ),
+              ],
+            ),
+            Gap.medium(),
+            Row(
+              spacing: DesignSpec.spacingMd,
+              children: [
+                SizedBox(
+                  width: gridItemWidth,
+                  height: gridItemHeight,
+                  child: CustomToggleButtonItem(
+                    intervalCount: 2,
+                    title: context.l10n.intervalPluralWithNumber(2),
+                    text: context.l10n.intervalTwoIntervalsText,
+                    isSelected: selectedValue == 2,
+                    onTap: () => onChanged(2),
+                  ),
+                ),
+                SizedBox(
+                  width: gridItemWidth,
+                  height: gridItemHeight,
+                  child: CustomToggleButtonItem(
+                    intervalCount: 3,
+                    title: context.l10n.intervalPluralWithNumber(3),
+                    text: context.l10n.intervalThreeIntervalsText,
+                    isSelected: selectedValue == 3,
+                    onTap: () => onChanged(3),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class CustomToggleButtonItem extends StatelessWidget {
+  final String title;
+  final String text;
+  final bool isSelected;
+  final VoidCallback? onTap;
+  final int intervalCount;
+
+  const CustomToggleButtonItem({
+    required this.intervalCount,
+    required this.title,
+    required this.text,
+    required this.isSelected,
+    this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final backgroundColor = isSelected
+        ? Colors.black
+        : AppColors.backgroundPaperLight;
+    final textColor = isSelected ? Colors.white : Colors.black;
+
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: TweenAnimationBuilder(
+            tween: ColorTween(
+              begin: AppColors.backgroundPaperLight,
+              end: backgroundColor,
+            ),
+            duration: Durations.short4,
+            builder: (context, color, child) {
+              return DecoratedBox(
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: DesignSpec.paddingSm,
+                    horizontal: DesignSpec.paddingMd,
+                  ),
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(
+                      begin: Colors.black,
+                      end: textColor,
+                    ),
+                    duration: Durations.short4,                    
+                    builder: (context, tColor, child) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleMedium!
+                              .copyWith(
+                                color: tColor, 
+                                fontWeight: FontWeight.w800
+                              ),
+                          ),
+                          Text(
+                            text,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: tColor,
+                            ),
+                          ),
+                          Gap.small(),
+                          IntervalBar(
+                            intervalCount: intervalCount,
+                            highlightColor:
+                                isSelected ? Colors.white : Colors.black,
+                          ),
+                        ],
+                      );
+                    }
+                  ),
+                ),
+              );
+            
+            },
+
+          ),
+        ),
+   
+        Positioned(
+          top: 8,
+          right: 8,
+          child: AnimatedOpacity(
+            opacity: isSelected ? 1.0 : 0.0,
+            duration: Durations.short4,
+            child: Icon(Icons.check_circle, color: textColor, size: 24),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class IntervalBar extends StatelessWidget {
+  final int intervalCount;
+  final Color highlightColor;
+
+  const IntervalBar({
+    required this.intervalCount,
+    this.highlightColor = AppColors.backgroundPaperLight,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final items = List.generate(
+      intervalCount + 1,
+      (index) => Expanded(
+        child: Container(
+          height: 12,
+          decoration: BoxDecoration(
+            color: highlightColor,
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+      ),
+    );
+
+    return Row(spacing: DesignSpec.spacingSm, children: items);
   }
 }

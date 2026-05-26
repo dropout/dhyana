@@ -87,7 +87,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inputDurationLabel => 'Duration';
 
   @override
-  String get inputIntervalCountLabel => 'Interval count';
+  String get inputIntervalCountLabel => 'Intervals';
+
+  @override
+  String get intervalNoIntervalsText => 'No interval sounds will be played.';
+
+  @override
+  String get intervalOneIntervalText => 'At the half of the session.';
+
+  @override
+  String get intervalTwoIntervalsText =>
+      'At the third and two-thirds of the session.';
+
+  @override
+  String get intervalThreeIntervalsText =>
+      'At the quarter, half, and three-quarters.';
 
   @override
   String get inputEndingSoundLabel => 'Ending sound';
@@ -736,6 +750,47 @@ class AppLocalizationsEn extends AppLocalizations {
       two: '$countString consecutive days',
       one: '$countString day',
       zero: '$countString day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noInterval => 'No interval';
+
+  @override
+  String intervalPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'intervals',
+      many: 'intervals',
+      few: 'intervals',
+      two: 'intervals',
+      one: 'interval',
+      zero: 'interval',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String intervalPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString intervals',
+      many: '$countString intervals',
+      few: '$countString intervals',
+      two: '$countString intervals',
+      one: '$countString interval',
+      zero: '$countString interval',
     );
     return '$_temp0';
   }

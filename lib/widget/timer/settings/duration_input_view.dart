@@ -79,10 +79,8 @@ class _DurationInputViewState extends State<DurationInputView>
 
   @override
   Widget build(BuildContext context) {
-    final startTime = DateTime.now();
-    final endTime = startTime
-        .add(Duration(minutes: selectedMinutes))
-        .add(widget.preparationTime);
+    final startTime = DateTime.now().add(widget.preparationTime);
+    final endTime = startTime.add(Duration(minutes: selectedMinutes));
 
     return InputView(
       title: widget.title,

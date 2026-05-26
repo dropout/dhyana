@@ -254,11 +254,35 @@ abstract class AppLocalizations {
   /// **'Időtartam'**
   String get inputDurationLabel;
 
-  /// A(z) inputIntervalCountLabel fordítási kulcs leírása.
+  /// Az időközök számának bemeneti címkéje.
   ///
   /// In hu, this message translates to:
-  /// **'Ismétlések száma'**
+  /// **'Időközök'**
   String get inputIntervalCountLabel;
+
+  /// A(z) intervalNoIntervals fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nincs időközi jelzés.'**
+  String get intervalNoIntervalsText;
+
+  /// A(z) intervalOneIntervalText fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Az ülés felénél egy időközi jelzés.'**
+  String get intervalOneIntervalText;
+
+  /// A(z) intervalTwoIntervalsText fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'A harmadánál és a kétharmadánál két időközi jelzés.'**
+  String get intervalTwoIntervalsText;
+
+  /// A(z) intervalThreeIntervalsText fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'A negyedénél, felénél és háromnegyedénél.'**
+  String get intervalThreeIntervalsText;
 
   /// A(z) inputEndingSoundLabel fordítási kulcs leírása.
   ///
@@ -1003,6 +1027,24 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}'**
   String consecutiveDaysPluralWithNumber(int count);
+
+  /// A(z) noInterval fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nincs időköz'**
+  String get noInterval;
+
+  /// Az intervallum magyar fordítása többesszám formában.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{időköz} =1{időköz} =2{időköz} few{időköz} many{időköz} other{időköz}}'**
+  String intervalPlural(int count);
+
+  /// Az intervallum magyar fordítása többesszám formában, számmal együtt.
+  ///
+  /// In hu, this message translates to:
+  /// **'{count, plural, =0{{count} időköz} =1{{count} időköz} =2{{count} időköz} few{{count} időköz} many{{count} időköz} other{{count} időköz}}'**
+  String intervalPluralWithNumber(int count);
 
   /// A(z) thousand fordítási kulcs leírása.
   ///

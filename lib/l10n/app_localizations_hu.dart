@@ -88,7 +88,21 @@ class AppLocalizationsHu extends AppLocalizations {
   String get inputDurationLabel => 'Időtartam';
 
   @override
-  String get inputIntervalCountLabel => 'Ismétlések száma';
+  String get inputIntervalCountLabel => 'Időközök';
+
+  @override
+  String get intervalNoIntervalsText => 'Nincs időközi jelzés.';
+
+  @override
+  String get intervalOneIntervalText => 'Az ülés felénél egy időközi jelzés.';
+
+  @override
+  String get intervalTwoIntervalsText =>
+      'A harmadánál és a kétharmadánál két időközi jelzés.';
+
+  @override
+  String get intervalThreeIntervalsText =>
+      'A negyedénél, felénél és háromnegyedénél.';
 
   @override
   String get inputEndingSoundLabel => 'Végehang';
@@ -736,6 +750,47 @@ class AppLocalizationsHu extends AppLocalizations {
       two: '$countString egymás utáni nap',
       one: '$countString nap',
       zero: '$countString nap',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noInterval => 'Nincs időköz';
+
+  @override
+  String intervalPlural(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'időköz',
+      many: 'időköz',
+      few: 'időköz',
+      two: 'időköz',
+      one: 'időköz',
+      zero: 'időköz',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String intervalPluralWithNumber(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString időköz',
+      many: '$countString időköz',
+      few: '$countString időköz',
+      two: '$countString időköz',
+      one: '$countString időköz',
+      zero: '$countString időköz',
     );
     return '$_temp0';
   }

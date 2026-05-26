@@ -132,9 +132,29 @@
     "description": "Duration input label.",
     "placeholders": {}
   },
-  "inputIntervalCountLabel": "Interval count",
+  "inputIntervalCountLabel": "Intervals",
   "@inputIntervalCountLabel": {
-    "description": "Interval count input label.",
+    "description": "Label for interval count input.",
+    "placeholders": {}
+  },
+  "intervalNoIntervalsText": "No interval sounds will be played.",
+  "@intervalNoIntervalsText": {
+    "description": "Text for no interval sound option.",
+    "placeholders": {}
+  },
+  "intervalOneIntervalText": "At the half of the session.",
+  "@intervalOneIntervalText": {
+    "description": "Text for one interval sound option.",
+    "placeholders": {}
+  },
+  "intervalTwoIntervalsText": "At the third and two-thirds of the session.",
+  "@intervalTwoIntervalsText": {
+    "description": "Text for two interval sounds option.",
+    "placeholders": {}
+  },
+  "intervalThreeIntervalsText": "At the quarter, half, and three-quarters.",
+  "@intervalThreeIntervalsText": {
+    "description": "Text for three interval sounds option.",
     "placeholders": {}
   },
   "inputEndingSoundLabel": "Ending sound",
@@ -851,6 +871,31 @@
   "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} day} =1{{count} day} =2{{count} consecutive days} few{{count} consecutive days} many{{count} consecutive days} other{{count} consecutive days}}",
   "@consecutiveDaysPluralWithNumber": {
     "description": "Consecutive days plural with number.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "noInterval": "No interval",
+  "@noInterval": {
+    "description": "No interval label.",
+    "placeholders": {}
+  },
+  "intervalPlural": "{count, plural, =0{interval} =1{interval} =2{intervals} few{intervals} many{intervals} other{intervals}}",
+  "@intervalPlural": {
+    "description": "Intervals plural.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalPluralWithNumber": "{count, plural, =0{{count} interval} =1{{count} interval} =2{{count} intervals} few{{count} intervals} many{{count} intervals} other{{count} intervals}}",
+  "@intervalPluralWithNumber": {
+    "description": "Intervals plural with number.",
     "placeholders": {
       "count": {
         "type": "int",

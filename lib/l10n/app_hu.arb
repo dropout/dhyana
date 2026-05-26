@@ -130,9 +130,29 @@
     "description": "A(z) inputDurationLabel fordítási kulcs leírása.",
     "placeholders": {}
   },
-  "inputIntervalCountLabel": "Ismétlések száma",
+  "inputIntervalCountLabel": "Időközök",
   "@inputIntervalCountLabel": {
-    "description": "A(z) inputIntervalCountLabel fordítási kulcs leírása.",
+    "description": "Az időközök számának bemeneti címkéje.",
+    "placeholders": {}
+  },
+  "intervalNoIntervalsText": "Nincs időközi jelzés.",
+  "@intervalNoIntervalsText": {
+    "description": "A(z) intervalNoIntervals fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "intervalOneIntervalText": "Az ülés felénél egy időközi jelzés.",
+  "@intervalOneIntervalText": {
+    "description": "A(z) intervalOneIntervalText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "intervalTwoIntervalsText": "A harmadánál és a kétharmadánál két időközi jelzés.",
+  "@intervalTwoIntervalsText": {
+    "description": "A(z) intervalTwoIntervalsText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "intervalThreeIntervalsText": "A negyedénél, felénél és háromnegyedénél.",
+  "@intervalThreeIntervalsText": {
+    "description": "A(z) intervalThreeIntervalsText fordítási kulcs leírása.",
     "placeholders": {}
   },
   "inputEndingSoundLabel": "Végehang",
@@ -836,6 +856,31 @@
   "consecutiveDaysPluralWithNumber": "{count, plural, =0{{count} nap} =1{{count} nap} =2{{count} egymás utáni nap} few{{count} egymás utáni nap} many{{count} egymás utáni nap} other{{count} egymás utáni nap}}",
   "@consecutiveDaysPluralWithNumber": {
     "description": "A(z) consecutiveDaysPluralWithNumber fordítási kulcs leírása.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "noInterval": "Nincs időköz",
+  "@noInterval": {
+    "description": "A(z) noInterval fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "intervalPlural": "{count, plural, =0{időköz} =1{időköz} =2{időköz} few{időköz} many{időköz} other{időköz}}",
+  "@intervalPlural": {
+    "description": "Az intervallum magyar fordítása többesszám formában.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalPluralWithNumber": "{count, plural, =0{{count} időköz} =1{{count} időköz} =2{{count} időköz} few{{count} időköz} many{{count} időköz} other{{count} időköz}}",
+  "@intervalPluralWithNumber": {
+    "description": "Az intervallum magyar fordítása többesszám formában, számmal együtt.",
     "placeholders": {
       "count": {
         "type": "int",
