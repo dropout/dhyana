@@ -336,10 +336,8 @@ class CustomToggleButtonItem extends StatelessWidget {
                     }
                   ),
                 ),
-              );
-            
+              );            
             },
-
           ),
         ),
    

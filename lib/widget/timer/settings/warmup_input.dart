@@ -5,7 +5,7 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:go_router/go_router.dart';
 
-import 'duration_input_view.dart';
+import 'warmup_input_view.dart';
 
 /// A widget that allows users to select a warmup time for a timer.
 /// By default, it provides options for 0, 1, 2, 3, and 5 minutes.
@@ -15,14 +15,6 @@ class WarmupTimeInput extends StatelessWidget {
 
   /// The selected warmup time value.
   final Duration value;
-
-  /// Minimum warmup time in minutes. Default is 0.
-  /// This allows users to have no warmup time if they choose.
-  final int minMinutes;
-  
-  /// Maximum warmup time in minutes. Default is 5.
-  /// This provides a reasonable upper limit for warmup times.
-  final int maxMinutes;
 
   /// Callback function that is called when the value changes.
   final void Function(Duration duration)? onChange;
@@ -34,8 +26,6 @@ class WarmupTimeInput extends StatelessWidget {
     required this.label,
     required this.value,
     required this.overlayService,
-    this.minMinutes = 0,
-    this.maxMinutes = 5,
     this.onChange,
     super.key,
   });
@@ -49,12 +39,10 @@ class WarmupTimeInput extends StatelessWidget {
     overlayService.showModalBottomSheet(
       context,
       enableDrag: false,
-      (context) => DurationInputView(
+      (context) => WarmupInputView(
         title: label,
         initialValue: value.inMinutes,
-        showStartEndTimes: false,
-        minMinutes: minMinutes,
-        maxMinutes: maxMinutes,        
+        showStartEndTimes: false,              
         onSelect: (Duration duration) => _onSelected(context, duration),
       ),
     );

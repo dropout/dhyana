@@ -101,7 +101,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get intervalThreeIntervalsText =>
-      'At the quarter, half, and three-quarters.';
+      'At the quarter, half and three-quarters.';
 
   @override
   String get inputEndingSoundLabel => 'Ending sound';

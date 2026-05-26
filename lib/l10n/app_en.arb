@@ -152,7 +152,7 @@
     "description": "Text for two interval sounds option.",
     "placeholders": {}
   },
-  "intervalThreeIntervalsText": "At the quarter, half, and three-quarters.",
+  "intervalThreeIntervalsText": "At the quarter, half and three-quarters.",
   "@intervalThreeIntervalsText": {
     "description": "Text for three interval sounds option.",
     "placeholders": {}
