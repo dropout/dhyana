@@ -8,20 +8,53 @@ import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/design_spec.dart';
 
+/// A default screen setup widget that provides common UI elements and behaviors.
+/// This widget is designed to be flexible and customizable, allowing you 
+/// to easily create new screens with a consistent look and feel across the app.
 class DefaultScreenSetup extends StatefulWidget {
 
+  /// The title of the screen, displayed in the app bar and as a sliver title.
   final String title;
+
+  /// The list of slivers to display in the screen's scroll view.
   final List<Widget> slivers;
+
+  /// An optional back button widget to display in the app bar. 
+  /// If not provided, a default back button will be used.
   final Widget? backButton;
+
+  /// Flag to enable or disable the app bar sliver. 
+  /// When enabled, the app bar will have a title that fades in as you scroll down.
   final bool enableAppBarSliver;
+
+  /// Flag to enable or disable the title sliver. 
+  /// This is complementary to [enableAppBarSliver] and controls whether the 
+  /// title is also displayed as a sliver below the app bar that fades out as you scroll down.
   final bool enableTitleSliver;
+
+  /// Flag to enable or disable scrolling in the screen.
+  /// Useful for screens that have a fixed layout and do not require scrolling.
   final bool enableScrolling;
+
+  /// Embed the CustomScrollView in a Scaffold.
+  /// Set to false if you want to provide your own Scaffold or use 
+  /// this widget in a context where a Scaffold is not appropriate. 
   final bool enableScaffolding;
+
+  /// Color for text widget in the title
   final Color? titleColor;
+
+  /// Background color for the Scaffold. Only applicable if [enableScaffolding] is true.
   final Color? backgroundColor;
+
+  /// Background color for the AppBar. Only applicable if [enableAppBarSliver] is true.
   final Color? appBarBackgroundColor;
 
+  /// Flag to enable or disable pull-to-refresh functionality.
   final bool enablePullToRefresh;
+  
+  /// An optional callback function that is called when the user performs 
+  /// a pull-to-refresh action.
   final Future<void> Function()? onRefresh;
 
   const DefaultScreenSetup({
