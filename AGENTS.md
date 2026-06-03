@@ -50,6 +50,21 @@ For running and building commands look at the commands documentaiton: [`docs/com
 - Keep Firebase details behind providers and repositories.
 - Keep services stateless unless the integration requires lifecycle management (e.g., audio playback, notification scheduling). Document the reason when a stateful service is necessary.
 
+## AI Directory and Agent Customizations
+- Project-specific AI assets live in `ai/`.
+- Agents should inspect this folder early when starting work in this repository.
+
+Current layout:
+- `ai/skills/`: reusable workflow skills (`*/SKILL.md`) and skill references.
+- `ai/prompts/`: reusable task prompts (`*.prompt.md`).
+
+Usage guidance for agents (Copilot, Claude, Antigravity, or other coding agents):
+- Prefer matching project skills before applying generic behavior.
+- When a task matches a skill description, read that skill's `SKILL.md` and follow it.
+- For focused one-off tasks, check `ai/prompts/` for an existing prompt template before creating a new one.
+- If a requested customization type is not present (for example hooks or subagents), propose creating it under `ai/` instead of scattering files.
+- Keep new AI assets in this folder so future agents can discover and reuse them consistently.
+
 ## Feature Work Checklist
 - Define or adjust interfaces first (repository, provider, service).
 - Implement changes by layer in matching feature folders.
