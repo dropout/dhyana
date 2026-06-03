@@ -8,8 +8,8 @@ A minimalist meditation timer designed to eliminate distractions, when you just 
 [![Overview](docs/assets/profile_stats.gif)](docs/assets/profile_stats.gif)
 
 ## Tech stack: 
-- Flutter 
-- Firebase 
+- Flutter
+- Firebase
 - Google Cloud Platform
 
 ## Clean Architecture (+)
@@ -24,18 +24,23 @@ A minimalist meditation timer designed to eliminate distractions, when you just 
 
 ## Features
 
-### Timer Settings
+### Timer
 - Preparation time
 - Starting sound
 - Duration
+- Interval sounds
 - Ending sound
 - Settings history
-
-### Timer / Session
+- Runs in the background with lock-screen support
 - Display timer phases
 - Dimmable screen
 - Pause timer
 - Discard session / Finish session
+
+### Chanting Session
+- Karaoke-style audio playback with lyrics
+- Create custom playlists
+- Variable gap-length between chants
 
 ### Profile
 - Edit profile
@@ -60,37 +65,20 @@ A minimalist meditation timer designed to eliminate distractions, when you just 
 - Show who you have practiced with
 - Sort practitioners by closest location (via GeoHashing)
 
-### Custom Widget Packages
+### Custom Packages
 - **Barchart widget** with an aim on visual independency
-- **Particle System** initial *prototype version*
+- **Particle System widget** initial *prototype version*
+- **ASSA Subtitle parser** for chanting feature
+- **Mindful minutes health sync** with Apple Health and Android Healthkit support
 
-## Getting Started
-
-The application won't run without platform specific firebase configuration files placed into its folder according to flavor being built against.
-
-### Prerequisites
+## Prerequisites
 - flutter
 - firebase cli
 - gsutil cli
 - gcloud cli
 
-### Setup
-1. Clone the repo: `git clone ...`
-2. Install dependencies: `flutter pub get`
-3. Add your `google-services.json` and `GoogleService-Info.plist` files to the respective flavor folders:
-   - `ios/config/staging/`
-   - `android/app/src/staging/`
-4. Run the app: `flutter run --flavor staging -t lib/main_staging.dart`
+## Getting Started
 
-### Useful commands
+Look at AGENTS.md on how to get started with the project.
 
-- generate localizations: `flutter gen-l10n`
-- generate code: `dart run build_runner build`
-- start firebase emulator: `./start_firebase_emulator.sh -d empty_with_admin_user`
-
-### Building
-
-#### Staging
-- release android: `flutter build appbundle --release --flavor staging -t ./lib/main_staging.dart`
-- release ios: `flutter build ipa --release --flavor staging -t ./lib/main_staging.dart`
 
