@@ -52,7 +52,7 @@ class _ChantListState extends State<ChantList> {
     return ReorderableListView.builder(
       buildDefaultDragHandles: false,
       itemCount: _chants.length,
-      onReorder: (oldIndex, newIndex) {
+      onReorderItem: (oldIndex, newIndex) {
         final int adjustedIndex = (newIndex > oldIndex)
             ? newIndex - 1
             : newIndex;
