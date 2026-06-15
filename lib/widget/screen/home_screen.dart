@@ -7,15 +7,14 @@ import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/context/safe_profile_settings.dart';
 import 'package:dhyana/widget/chanting/chanting_settings_view.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/home/home_screen_bottom_menu.dart';
 import 'package:dhyana/widget/home/session_type_toggle.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/widget/timer/timer_settings_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The main entry-point screen of the app, allowing users to choose between
 /// a sitting meditation session and a chanting session, and configure settings
@@ -110,39 +109,9 @@ class HomeScreen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           buildBody(context, state),
-          Positioned(
-            bottom: DesignSpec.spacingLg - 2,
-            right: DesignSpec.spacingXl,
-            child: SafeArea(child: buildToggle(context, state)),
-          ),
+          buildBottomMenu(context, state),
         ],
       ),
-    );
-  }
-
-  /// Builds the [SessionTypeToggle] that lets the user switch between
-  /// [SessionType.timer] and [SessionType.chanting].
-  ///
-  /// Mode changes are forwarded to [HomeScreenCubit.setSessionType], which
-  /// persists the selection via [SharedPreferencesService] and emits a new
-  /// [HomeScreenStateLoaded] with the updated [SessionType].
-  Widget buildToggle(BuildContext context, HomeScreenStateLoaded state) {
-    return SignedIn(
-      yes: (context, uid) => SessionTypeToggle(
-        activeMode: state.sessionType,
-        onModeChanged: (mode) {
-          final hsCubit = context.read<HomeScreenCubit>();
-          switch (mode) {
-            case SessionType.timer:
-              hsCubit.setSessionType(SessionType.timer);
-              break;
-            case SessionType.chanting:
-              hsCubit.setSessionType(SessionType.chanting);
-              break;
-          }
-        },
-      ),
-      no: const SizedBox.shrink(),
     );
   }
 
@@ -169,6 +138,15 @@ class HomeScreen extends StatelessWidget {
       child: switch (state.sessionType) {
         SessionType.timer => buildTimerSettingsView(context, state),
         SessionType.chanting => buildChantingSettingsView(context),
+      },
+    );
+  }
+
+  Widget buildBottomMenu(BuildContext context, HomeScreenStateLoaded state) {    
+    return HomeScreenBottomMenu(
+      sessionType: state.sessionType,
+      onSessionTypeChange: (newType) {
+        context.read<HomeScreenCubit>().setSessionType(newType);
       },
     );
   }
