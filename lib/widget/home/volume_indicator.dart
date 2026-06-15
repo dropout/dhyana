@@ -23,8 +23,8 @@ class VolumeIndicator extends StatefulWidget {
 
   const VolumeIndicator({
     this.visibilityThreshold = 0.25,
-    this.showOnVolumeChangeAboveThreshold = false,
-    this.waitDuration = const Duration(milliseconds: 1500),
+    this.showOnVolumeChangeAboveThreshold = true,
+    this.waitDuration = const Duration(milliseconds: 1600),
     this.fadeDuration = const Duration(milliseconds: 500),
     super.key,
   });
@@ -69,6 +69,8 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
           CurveTween(curve: Interval(waitRatio, 1.0, curve: Curves.easeOut)),
         )
         .animate(_animationController);
+
+
   }
 
   @override
@@ -81,13 +83,18 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     flutterVolumeListener.volume.then((value) {
       setState(() {
         _currentVolume = value;
+        if (widget.showOnVolumeChangeAboveThreshold && _currentVolume >= widget.visibilityThreshold) {
+          _animationController.forward(from: 0.0);
+        }
       });
     });
 
     _volumeStreamSub = flutterVolumeListener.onVolumeChanged.listen((volume) {
       setState(() {
         _currentVolume = volume;
-        _animationController.forward(from: 0.0);
+        if (widget.showOnVolumeChangeAboveThreshold && _currentVolume >= widget.visibilityThreshold) {          
+          _animationController.forward(from: 0.0);
+        }        
       });
     });
   }
@@ -97,7 +104,7 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
 
     if (_currentVolume < widget.visibilityThreshold) {
       return buildIndicator(context);
-    } else {
+    } else if (widget.showOnVolumeChangeAboveThreshold && _currentVolume >= widget.visibilityThreshold) {
       return AnimatedBuilder(
         animation: _fadeAnimation,
         builder: (context, child) {
@@ -107,7 +114,9 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
           );
         },
       );
-    }    
+    } else {
+      return const SizedBox.shrink();
+    }   
   }
 
   Widget buildIndicator(BuildContext context) {
