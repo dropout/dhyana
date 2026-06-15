@@ -98,6 +98,7 @@ class _WarmupInputViewState extends State<WarmupInputView>
                   onSelect: (minutes) {
                     setState(() {
                       selectedMinutes = minutes;
+                      context.services.hapticsService.select();
                     });
                   },
                 ),
@@ -240,10 +241,11 @@ class _WarmupTimeOptionItem extends StatelessWidget {
                       children: [
                         Text(
                           minutes.toString(),
-                          style: context.theme.textTheme.displayMedium?.copyWith(
-                            color: textColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: context.theme.textTheme.displayMedium
+                              ?.copyWith(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                         Text(
                           context.l10n.minutesPlural(minutes),
@@ -264,15 +266,11 @@ class _WarmupTimeOptionItem extends StatelessWidget {
                 child: AnimatedOpacity(
                   opacity: isSelected ? 1 : 0,
                   duration: const Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.check_circle,
-                    color: textColor,
-                    size: 24,
-                  ),
+                  child: Icon(Icons.check_circle, color: textColor, size: 24),
                 ),
               ),
-            ]
-          );          
+            ],
+          );
         },
       ),
     );

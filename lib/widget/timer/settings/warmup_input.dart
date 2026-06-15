@@ -32,6 +32,7 @@ class WarmupTimeInput extends StatelessWidget {
 
   void _onSelected(BuildContext context, Duration duration) {
     onChange?.call(duration);
+    context.hapticsTap();
     context.pop();
   }
 
