@@ -23,7 +23,7 @@ dependencies:
   freezed_annotation: ^3.0.0
   json_annotation: ^4.8.1
   uuid: ^4.4.0
-  package_info_plus: ^9.0.0
+  package_info_plus: ^10.1.0
   vector_math: ^2.1.4
   collection: ^1.19.0
   faker: ^2.2.0
@@ -60,7 +60,9 @@ dependencies:
   assa_parser:
     git:
       url: git@github.com:dropout/assa_parser.git
-  
+  flutter_volume_listener:
+    git:
+      url: git@github.com:dropout/flutter_volume_listener.git
 
   # Firebase
   firebase_core: ^4.1.1
@@ -72,7 +74,7 @@ dependencies:
   # Firebase Auth
   firebase_auth: ^6.1.0
   google_sign_in: ^7.2.0
-  sign_in_with_apple: ^7.0.1
+  sign_in_with_apple: ^8.1.0
   crypto: ^3.0.2
 
   # Firebase diagnostics
@@ -102,6 +104,9 @@ dev_dependencies:
 
 flutter:
   generate: true # For generating localizations?
+  config:
+    enable-swift-package-manager: false
+
   assets:
     - assets/sounds/
     - assets/images/
