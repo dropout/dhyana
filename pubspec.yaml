@@ -56,13 +56,18 @@ dependencies:
   shared_preferences: ^2.0.5
   gaimon: ^1.4.1 # haptic feedback library
   dart_geohash: ^2.1.0
-  tflite_flutter: ^0.12.1 # For NSFW model inference
+  tflite_flutter: # For NSFW model inference
+    git:
+      url: git@github.com:dropout/flutter-tflite.git
   assa_parser:
     git:
       url: git@github.com:dropout/assa_parser.git
   flutter_volume_listener:
     git:
       url: git@github.com:dropout/flutter_volume_listener.git
+  flutter_mindful_minutes:
+    git:
+      url: git@github.com:dropout/flutter_mindful_minutes.git
 
   # Firebase
   firebase_core: ^4.1.1
