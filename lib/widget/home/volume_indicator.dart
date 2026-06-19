@@ -76,6 +76,7 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
   @override
   void dispose() {
     _volumeStreamSub?.cancel();
+    _animationController.dispose();
     super.dispose();
   }
 
