@@ -12,7 +12,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get minute => 'Perc';
 
   @override
-  String get minutes => 'Perc';
+  String get minutes => 'Percek';
 
   @override
   String get day => 'Nap';
@@ -57,8 +57,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get warmup => 'Felkészülés';
 
   @override
-  String get underMaintenanceTitle =>
-      'Az alkalmazás karbantartás miatt nem elérhető';
+  String get underMaintenanceTitle => 'Az alkalmazás karbantartás alatt van';
 
   @override
   String get underMaintenanceBody => 'Kérlek nézz vissza később.';
@@ -248,6 +247,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileWizardTitle => 'Véglegesítsd a profilodat!';
 
   @override
+  String get profileWizardDescription =>
+      'Add meg a nevedet és profil fotódat a profil befejezéséhez és az alkalmazás teljes potenciáljának feloldásához.';
+
+  @override
   String get photoAccessDialogTitle => 'Fotók nem érhetőek el';
 
   @override
@@ -271,14 +274,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get profileSettings => 'Beállítások';
 
   @override
-  String get showTimeOnTimerSettingsScreenTitle =>
-      'Idő megjelenítése az Időzítő beállítások képernyőn';
-
-  @override
-  String get showTimeOnTimerSettingsScreenDescription =>
-      'Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.';
-
-  @override
   String get showStatsOnFinishScreenTitle =>
       'Statisztika megjelenítése a Gyakorlat befejezése képernyőn';
 
@@ -292,13 +287,6 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get usePresenceFeatureDescription =>
       'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.';
-
-  @override
-  String get chantingGapLengthTitle => 'Kántálás közötti szünet hossza';
-
-  @override
-  String get chantingGapLengthDescription =>
-      'A kántálás közötti szünet időtartama.';
 
   @override
   String get profileStats => 'Statisztika';
@@ -811,7 +799,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get locationInputPlaceholder => 'Válaszz egy várost';
 
   @override
-  String get locationInputCurrentSelection => 'Current selection:';
+  String get locationInputCurrentSelection => 'Jelenlegi választás:';
 
   @override
   String get locationInputNoSelection => 'Nincs kiválasztva város';
@@ -849,4 +837,44 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get chantingPlaylistBadgeNext => 'Következő';
+
+  @override
+  String get healthConnect_platformNotSupportedTitle =>
+      'Health Connect nem támogatott';
+
+  @override
+  String get healthConnect_platformNotSupportedText =>
+      'A Health Connect szolgáltatás nem támogatott ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
+
+  @override
+  String get healthConnect_initializingTitle_ios =>
+      'Apple Health Connect inicializálása';
+
+  @override
+  String get healthConnect_initializingText_ios =>
+      'Apple Health Connect inicializálása';
+
+  @override
+  String get healthConnect_initializingTitle_android =>
+      'Google Health Connect inicializálása';
+
+  @override
+  String get healthConnect_initializingText_android =>
+      'Google Health Connect inicializálása';
+
+  @override
+  String get healthConnect_serviceNotAvailableTitle_ios =>
+      'Apple Health Connect szolgáltatás nem elérhető';
+
+  @override
+  String get healthConnect_serviceNotAvailableText_ios =>
+      'Az Apple Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
+
+  @override
+  String get healthConnect_serviceNotAvailableTitle_android =>
+      'Google Health Connect';
+
+  @override
+  String get healthConnect_serviceNotAvailableText_android =>
+      'A Google Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
 }

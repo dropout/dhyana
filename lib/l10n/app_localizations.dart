@@ -98,16 +98,16 @@ abstract class AppLocalizations {
     Locale('hu'),
   ];
 
-  /// A(z) minute fordítási kulcs leírása.
+  /// Singular form of minute.
   ///
   /// In hu, this message translates to:
   /// **'Perc'**
   String get minute;
 
-  /// A(z) minutes fordítási kulcs leírása.
+  /// Plural form of minute.
   ///
   /// In hu, this message translates to:
-  /// **'Perc'**
+  /// **'Percek'**
   String get minutes;
 
   /// A(z) day fordítási kulcs leírása.
@@ -194,13 +194,13 @@ abstract class AppLocalizations {
   /// **'Felkészülés'**
   String get warmup;
 
-  /// A(z) underMaintenanceTitle fordítási kulcs leírása.
+  /// Under maintenance title text.
   ///
   /// In hu, this message translates to:
-  /// **'Az alkalmazás karbantartás miatt nem elérhető'**
+  /// **'Az alkalmazás karbantartás alatt van'**
   String get underMaintenanceTitle;
 
-  /// A(z) underMaintenanceBody fordítási kulcs leírása.
+  /// Under maintenance body text.
   ///
   /// In hu, this message translates to:
   /// **'Kérlek nézz vissza később.'**
@@ -536,6 +536,12 @@ abstract class AppLocalizations {
   /// **'Véglegesítsd a profilodat!'**
   String get profileWizardTitle;
 
+  /// Profile wizard description.
+  ///
+  /// In hu, this message translates to:
+  /// **'Add meg a nevedet és profil fotódat a profil befejezéséhez és az alkalmazás teljes potenciáljának feloldásához.'**
+  String get profileWizardDescription;
+
   /// A(z) photoAccessDialogTitle fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
@@ -560,7 +566,7 @@ abstract class AppLocalizations {
   /// **'Nem megfelelő kép'**
   String get imageNotSafeDialogTitle;
 
-  /// A(z) imageNotSafeDialogText fordítási kulcs leírása.
+  /// Image not safe dialog text.
   ///
   /// In hu, this message translates to:
   /// **'A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.'**
@@ -577,18 +583,6 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Beállítások'**
   String get profileSettings;
-
-  /// A(z) showTimeOnTimerSettingsScreenTitle fordítási kulcs leírása.
-  ///
-  /// In hu, this message translates to:
-  /// **'Idő megjelenítése az Időzítő beállítások képernyőn'**
-  String get showTimeOnTimerSettingsScreenTitle;
-
-  /// A(z) showTimeOnTimerSettingsScreenDescription fordítási kulcs leírása.
-  ///
-  /// In hu, this message translates to:
-  /// **'Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.'**
-  String get showTimeOnTimerSettingsScreenDescription;
 
   /// A(z) showStatsOnFinishScreenTitle fordítási kulcs leírása.
   ///
@@ -613,18 +607,6 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.'**
   String get usePresenceFeatureDescription;
-
-  /// A(z) chantingGapLengthTitle fordítási kulcs leírása.
-  ///
-  /// In hu, this message translates to:
-  /// **'Kántálás közötti szünet hossza'**
-  String get chantingGapLengthTitle;
-
-  /// A(z) chantingGapLengthDescription fordítási kulcs leírása.
-  ///
-  /// In hu, this message translates to:
-  /// **'A kántálás közötti szünet időtartama.'**
-  String get chantingGapLengthDescription;
 
   /// A(z) profileStats fordítási kulcs leírása.
   ///
@@ -1076,10 +1058,10 @@ abstract class AppLocalizations {
   /// **'Válaszz egy várost'**
   String get locationInputPlaceholder;
 
-  /// A(z) locationInputCurrentSelection fordítási kulcs leírása.
+  /// Location input current selection label.
   ///
   /// In hu, this message translates to:
-  /// **'Current selection:'**
+  /// **'Jelenlegi választás:'**
   String get locationInputCurrentSelection;
 
   /// A(z) locationInputNoSelection fordítási kulcs leírása.
@@ -1153,6 +1135,66 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'Következő'**
   String get chantingPlaylistBadgeNext;
+
+  /// Health Connect platform not supported title.
+  ///
+  /// In hu, this message translates to:
+  /// **'Health Connect nem támogatott'**
+  String get healthConnect_platformNotSupportedTitle;
+
+  /// Health Connect platform not supported helper text.
+  ///
+  /// In hu, this message translates to:
+  /// **'A Health Connect szolgáltatás nem támogatott ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
+  String get healthConnect_platformNotSupportedText;
+
+  /// Health Connect initializing title for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Apple Health Connect inicializálása'**
+  String get healthConnect_initializingTitle_ios;
+
+  /// Health Connect initializing helper text for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Apple Health Connect inicializálása'**
+  String get healthConnect_initializingText_ios;
+
+  /// Health Connect initializing title for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'Google Health Connect inicializálása'**
+  String get healthConnect_initializingTitle_android;
+
+  /// Health Connect initializing helper text for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'Google Health Connect inicializálása'**
+  String get healthConnect_initializingText_android;
+
+  /// Health Connect service not available title for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Apple Health Connect szolgáltatás nem elérhető'**
+  String get healthConnect_serviceNotAvailableTitle_ios;
+
+  /// Health Connect service not available helper text for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Az Apple Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
+  String get healthConnect_serviceNotAvailableText_ios;
+
+  /// Health Connect service not available title for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'Google Health Connect'**
+  String get healthConnect_serviceNotAvailableTitle_android;
+
+  /// Health Connect service not available helper text for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'A Google Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
+  String get healthConnect_serviceNotAvailableText_android;
 }
 
 class _AppLocalizationsDelegate

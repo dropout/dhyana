@@ -7,6 +7,7 @@ import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/default/default_cache_manager_service.dart';
 import 'package:dhyana/service/default/default_haptics_service.dart';
 import 'package:dhyana/service/default/default_lyrics_service.dart';
+import 'package:dhyana/service/default/default_mindful_minutes_service.dart';
 import 'package:dhyana/service/default/default_overlay_service.dart';
 import 'package:dhyana/service/default/default_resource_resolver.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
@@ -20,6 +21,7 @@ import 'package:dhyana/service/functions_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
+import 'package:dhyana/service/mindful_minutes_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/remote_settings_service.dart';
 import 'package:dhyana/service/resource_resolver.dart';
@@ -29,6 +31,7 @@ import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 import 'package:dhyana/service/wakelock_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/util/launch_url.dart';
+import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A container for all services used in the app.
@@ -52,6 +55,7 @@ class Services {
   final FunctionsService functionsService;
   final UrlLauncher urlLauncher;
   final LyricsService lyricsService;
+  final MindfulMinutesService mindfulMinutesService;
 
   Services({
     required this.analyticsService,
@@ -70,6 +74,7 @@ class Services {
     required this.functionsService,
     required this.urlLauncher,
     required this.lyricsService,
+    required this.mindfulMinutesService,
   });
 
 }
@@ -92,6 +97,7 @@ class ServicesBuilder {
   late UrlLauncher _urlLauncher;
   late LyricsService _lyricsService;
   late AppAudioHandler _audioHandler;
+  late MindfulMinutesService _mindfulMinutesService;
 
   ServicesBuilder({
     required FirebaseProvider firebaseProvider,
@@ -137,6 +143,9 @@ class ServicesBuilder {
     );
     _urlLauncher = const UrlLauncher();
     _lyricsService = DefaultLyricsService();
+    _mindfulMinutesService = DefaultMindfulMinutesService(
+      flutterMindfulMinutes: FlutterMindfulMinutes(),
+    );
   }
 
   Services build() {
@@ -157,6 +166,7 @@ class ServicesBuilder {
       urlLauncher: _urlLauncher,
       lyricsService: _lyricsService,
       audioHandler: _audioHandler,
+      mindfulMinutesService: _mindfulMinutesService,
     );
   }
 

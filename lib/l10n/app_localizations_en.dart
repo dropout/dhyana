@@ -247,6 +247,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileWizardTitle => 'Complete your profile!';
 
   @override
+  String get profileWizardDescription =>
+      'Add your name and profile photo to complete the profile and unlock the full potential of the application.';
+
+  @override
   String get photoAccessDialogTitle => 'Cannot access photos';
 
   @override
@@ -270,16 +274,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSettings => 'Settings';
 
   @override
-  String get showTimeOnTimerSettingsScreenTitle =>
-      'Show timeframe on Timer Settings Screen';
-
-  @override
-  String get showTimeOnTimerSettingsScreenDescription =>
-      'Enable this option to show session start and end times on the Timer Settings screen.';
-
-  @override
   String get showStatsOnFinishScreenTitle =>
-      'Show statistics on Session Finish Screen';
+      'Show statistics on\nSession Finish Screen';
 
   @override
   String get showStatsOnFinishScreenDescription =>
@@ -291,13 +287,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get usePresenceFeatureDescription =>
       'When enabled, user will be able to see other users who are currently practicing.';
-
-  @override
-  String get chantingGapLengthTitle => 'Chanting Gap length';
-
-  @override
-  String get chantingGapLengthDescription =>
-      'Duration of the gap between the chants.';
 
   @override
   String get profileStats => 'Statistics';
@@ -849,4 +838,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chantingPlaylistBadgeNext => 'Next';
+
+  @override
+  String get healthConnect_platformNotSupportedTitle =>
+      'Health Connect not supported';
+
+  @override
+  String get healthConnect_platformNotSupportedText =>
+      'The Health Connect service is not supported on this device. Please check if the service is installed and enabled.';
+
+  @override
+  String get healthConnect_initializingTitle_ios =>
+      'Initializing Apple Health Connect';
+
+  @override
+  String get healthConnect_initializingText_ios =>
+      'Initializing Apple Health Connect';
+
+  @override
+  String get healthConnect_initializingTitle_android =>
+      'Initializing Google Health Connect';
+
+  @override
+  String get healthConnect_initializingText_android =>
+      'Initializing Google Health Connect';
+
+  @override
+  String get healthConnect_serviceNotAvailableTitle_ios =>
+      'Apple Health Connect service is not available';
+
+  @override
+  String get healthConnect_serviceNotAvailableText_ios =>
+      'Apple Health Connect service is not available on this device. Please check if the service is installed and enabled.';
+
+  @override
+  String get healthConnect_serviceNotAvailableTitle_android =>
+      'Save completed sessions to\nGoogle Health Connect';
+
+  @override
+  String get healthConnect_serviceNotAvailableText_android =>
+      'Google Health Connect service is not available on this device. Please check if you have the latest updates installed.';
 }

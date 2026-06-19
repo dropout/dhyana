@@ -420,17 +420,7 @@
     "description": "Profile settings title.",
     "placeholders": {}
   },
-  "showTimeOnTimerSettingsScreenTitle": "Show timeframe on Timer Settings Screen",
-  "@showTimeOnTimerSettingsScreenTitle": {
-    "description": "Show timeframe on Timer Settings Screen title.",
-    "placeholders": {}
-  },
-  "showTimeOnTimerSettingsScreenDescription": "Enable this option to show session start and end times on the Timer Settings screen.",
-  "@showTimeOnTimerSettingsScreenDescription": {
-    "description": "Show timeframe on Timer Settings Screen description.",
-    "placeholders": {}
-  },
-  "showStatsOnFinishScreenTitle": "Show statistics on Session Finish Screen",
+  "showStatsOnFinishScreenTitle": "Show statistics on\nSession Finish Screen",
   "@showStatsOnFinishScreenTitle": {
     "description": "Show statistics on Session Finish Screen title.",
     "placeholders": {}
@@ -448,16 +438,6 @@
   "usePresenceFeatureDescription": "When enabled, user will be able to see other users who are currently practicing.",
   "@usePresenceFeatureDescription": {
     "description": "Enable Presence feature description.",
-    "placeholders": {}
-  },
-  "chantingGapLengthTitle": "Chanting Gap length",
-  "@chantingGapLengthTitle": {
-    "description": "Chanting Gap length title.",
-    "placeholders": {}
-  },
-  "chantingGapLengthDescription": "Duration of the gap between the chants.",
-  "@chantingGapLengthDescription": {
-    "description": "Chanting Gap length description.",
     "placeholders": {}
   },
   "profileStats": "Statistics",
@@ -992,5 +972,65 @@
   "@chantingPlaylistBadgeNext": {
     "description": "Chanting playlist badge next label.",
     "placeholders": {}
+  },
+  "healthConnect_platformNotSupportedTitle": "Health Connect not supported",
+  "@healthConnect_platformNotSupportedTitle": {
+    "description": "Health Connect platform not supported title.",
+    "placeholders": {}
+  },
+  "healthConnect_platformNotSupportedText": "The Health Connect service is not supported on this device. Please check if the service is installed and enabled.",
+  "@healthConnect_platformNotSupportedText": {
+    "description": "Health Connect platform not supported helper text.",
+    "placeholders": {}
+  },
+  "healthConnect_initializingTitle_ios": "Initializing Apple Health Connect",
+  "@healthConnect_initializingTitle_ios": {
+    "description": "Health Connect initializing title for iOS.",
+    "placeholders": {}
+  },
+
+  "healthConnect_initializingText_ios": "Initializing Apple Health Connect",
+  "@healthConnect_initializingText_ios": {
+    "description": "Health Connect initializing helper text for iOS.",
+    "placeholders": {}
+  },
+
+  "healthConnect_initializingTitle_android": "Initializing Google Health Connect",
+  "@healthConnect_initializingTitle_android": {
+    "description": "Health Connect initializing title for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_initializingText_android": "Initializing Google Health Connect",
+  "@healthConnect_initializingText_android": {
+    "description": "Health Connect initializing helper text for Android.",
+    "placeholders": {}  
+  },
+
+  "healthConnect_serviceNotAvailableTitle_ios": "Apple Health Connect service is not available",
+  "@healthConnect_serviceNotAvailableTitle_ios": {
+    "description": "Health Connect service not available title for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_serviceNotAvailableText_ios": "Apple Health Connect service is not available on this device. Please check if the service is installed and enabled.",
+  "@healthConnect_serviceNotAvailableText_ios": {
+    "description": "Health Connect service not available helper text for iOS.",
+    "placeholders": {}
+  },
+
+  "healthConnect_serviceNotAvailableTitle_android": "Save completed sessions to\nGoogle Health Connect",
+  "@healthConnect_serviceNotAvailableTitle_android": {
+    "description": "Health Connect service not available title for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_serviceNotAvailableText_android": "Google Health Connect service is not available on this device. Please check if you have the latest updates installed.",
+  "@healthConnect_serviceNotAvailableText_android": {
+    "description": "Health Connect service not available helper text for Android.",
+    "placeholders": {} 
   }
+
+
+
+
+
+
 }

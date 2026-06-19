@@ -3,6 +3,8 @@ import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/dialog/delete_profile_dialog.dart';
 import 'package:dhyana/widget/input/form_builder_duration_input.dart';
+import 'package:dhyana/widget/profile/settings/profile_settings_health_connect.dart';
+import 'package:dhyana/widget/profile/settings/profile_settings_switch.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
@@ -55,13 +57,10 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
       child: Column(
         children: [
           Gap.medium(),
-          ProfileSettingsSwitch(
-            name: 'showTimeOnTimerSettingsScreen',
-            title: context.l10n.showTimeOnTimerSettingsScreenTitle,
-            helperText: context.l10n.showTimeOnTimerSettingsScreenDescription,
-            initialValue: widget.profileSettings.showTimeOnTimerSettingsScreen,
+          ProfileSettingsHealthConnect(
+            mindfulMinutesService: context.services.mindfulMinutesService,
           ),
-          Gap.large(),
+          Gap.large(),  
           ProfileSettingsSwitch(
             name: 'showStatsOnFinishScreen',
             title: context.l10n.showStatsOnFinishScreenTitle,
@@ -86,70 +85,6 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
   }
 }
 
-class ProfileSettingsSwitch extends StatelessWidget {
-
-  final String title;
-  final String name;
-  final String? helperText;
-  final bool initialValue;
-  final ValueChanged<bool?>? onChanged;
-
-  const ProfileSettingsSwitch({
-    required this.title,
-    required this.name,
-    required this.initialValue,
-    this.helperText,
-    this.onChanged,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: AppColors.backgroundPaperLight,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: DesignSpec.paddingXl,
-            ),
-            child: Wrap(
-              children: [
-                FormBuilderSwitch(
-                  name: name,
-                  title: Text(
-                    title,
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    helperStyle: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  initialValue: initialValue,
-                  onChanged: onChanged,
-                ),
-              ],
-            ),
-          ),
-        ),
-        Gap.small(),
-        if (helperText != null)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: DesignSpec.paddingXl,
-            ),
-            child: Text(
-              helperText!,
-              style: context.theme.textTheme.bodyMedium,
-            ),
-          ),
-      ],
-    );
-  }
-}
 
 class ProfileSettingsDurationInput extends StatelessWidget {
   

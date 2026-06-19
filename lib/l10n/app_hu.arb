@@ -2,12 +2,12 @@
   "@@locale": "hu",
   "minute": "Perc",
   "@minute": {
-    "description": "A(z) minute fordítási kulcs leírása.",
+    "description": "Singular form of minute.",
     "placeholders": {}
   },
-  "minutes": "Perc",
+  "minutes": "Percek",
   "@minutes": {
-    "description": "A(z) minutes fordítási kulcs leírása.",
+    "description": "Plural form of minute.",
     "placeholders": {}
   },
   "day": "Nap",
@@ -80,14 +80,14 @@
     "description": "A(z) warmup fordítási kulcs leírása.",
     "placeholders": {}
   },
-  "underMaintenanceTitle": "Az alkalmazás karbantartás miatt nem elérhető",
+  "underMaintenanceTitle": "Az alkalmazás karbantartás alatt van",
   "@underMaintenanceTitle": {
-    "description": "A(z) underMaintenanceTitle fordítási kulcs leírása.",
+    "description": "Under maintenance title text.",
     "placeholders": {}
   },
   "underMaintenanceBody": "Kérlek nézz vissza később.",
   "@underMaintenanceBody": {
-    "description": "A(z) underMaintenanceBody fordítási kulcs leírása.",
+    "description": "Under maintenance body text.",
     "placeholders": {}
   },
   "loading": "Betöltés...",
@@ -370,6 +370,11 @@
     "description": "A(z) profileWizardTitle fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "profileWizardDescription": "Add meg a nevedet és profil fotódat a profil befejezéséhez és az alkalmazás teljes potenciáljának feloldásához.",
+  "@profileWizardDescription": {
+    "description": "Profile wizard description.",
+    "placeholders": {}
+  },
   "photoAccessDialogTitle": "Fotók nem érhetőek el",
   "@photoAccessDialogTitle": {
     "description": "A(z) photoAccessDialogTitle fordítási kulcs leírása.",
@@ -392,7 +397,7 @@
   },
   "imageNotSafeDialogText": "A kiválasztott kép nem megfelelő a profilképként való használatra. Kérlek válassz egy másik képet.",
   "@imageNotSafeDialogText": {
-    "description": "A(z) imageNotSafeDialogText fordítási kulcs leírása.",
+    "description": "Image not safe dialog text.",
     "placeholders": {}
   },
   "imageNotSafeDialogButtonText": "Rendben",
@@ -403,16 +408,6 @@
   "profileSettings": "Beállítások",
   "@profileSettings": {
     "description": "A(z) profileSettings fordítási kulcs leírása.",
-    "placeholders": {}
-  },
-  "showTimeOnTimerSettingsScreenTitle": "Idő megjelenítése az Időzítő beállítások képernyőn",
-  "@showTimeOnTimerSettingsScreenTitle": {
-    "description": "A(z) showTimeOnTimerSettingsScreenTitle fordítási kulcs leírása.",
-    "placeholders": {}
-  },
-  "showTimeOnTimerSettingsScreenDescription": "Ha engedélyezve van, az időzítő beállítások képernyőn megjelenik a gyakorlat kezdetének és végének időpontja.",
-  "@showTimeOnTimerSettingsScreenDescription": {
-    "description": "A(z) showTimeOnTimerSettingsScreenDescription fordítási kulcs leírása.",
     "placeholders": {}
   },
   "showStatsOnFinishScreenTitle": "Statisztika megjelenítése a Gyakorlat befejezése képernyőn",
@@ -433,16 +428,6 @@
   "usePresenceFeatureDescription": "Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.",
   "@usePresenceFeatureDescription": {
     "description": "A(z) usePresenceFeatureDescription fordítási kulcs leírása.",
-    "placeholders": {}
-  },
-  "chantingGapLengthTitle": "Kántálás közötti szünet hossza",
-  "@chantingGapLengthTitle": {
-    "description": "A(z) chantingGapLengthTitle fordítási kulcs leírása.",
-    "placeholders": {}
-  },
-  "chantingGapLengthDescription": "A kántálás közötti szünet időtartama.",
-  "@chantingGapLengthDescription": {
-    "description": "A(z) chantingGapLengthDescription fordítási kulcs leírása.",
     "placeholders": {}
   },
   "profileStats": "Statisztika",
@@ -913,9 +898,9 @@
     "description": "A(z) locationInputPlaceholder fordítási kulcs leírása.",
     "placeholders": {}
   },
-  "locationInputCurrentSelection": "Current selection:",
+  "locationInputCurrentSelection": "Jelenlegi választás:",
   "@locationInputCurrentSelection": {
-    "description": "A(z) locationInputCurrentSelection fordítási kulcs leírása.",
+    "description": "Location input current selection label.",
     "placeholders": {}
   },
   "locationInputNoSelection": "Nincs kiválasztva város",
@@ -976,6 +961,57 @@
   "chantingPlaylistBadgeNext": "Következő",
   "@chantingPlaylistBadgeNext": {
     "description": "A(z) chantingPlaylistBadgeNext fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+
+  "healthConnect_platformNotSupportedTitle": "Health Connect nem támogatott",
+  "@healthConnect_platformNotSupportedTitle": {
+    "description": "Health Connect platform not supported title.",
+    "placeholders": {}
+  },
+  "healthConnect_platformNotSupportedText": "A Health Connect szolgáltatás nem támogatott ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.",
+  "@healthConnect_platformNotSupportedText": {
+    "description": "Health Connect platform not supported helper text.",
+    "placeholders": {}
+  },
+  "healthConnect_initializingTitle_ios": "Apple Health Connect inicializálása",
+  "@healthConnect_initializingTitle_ios": {
+    "description": "Health Connect initializing title for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_initializingText_ios": "Apple Health Connect inicializálása",
+  "@healthConnect_initializingText_ios": {
+    "description": "Health Connect initializing helper text for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_initializingTitle_android": "Google Health Connect inicializálása",
+  "@healthConnect_initializingTitle_android": {
+    "description": "Health Connect initializing title for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_initializingText_android": "Google Health Connect inicializálása",
+  "@healthConnect_initializingText_android": {
+    "description": "Health Connect initializing helper text for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_serviceNotAvailableTitle_ios": "Apple Health Connect szolgáltatás nem elérhető",
+  "@healthConnect_serviceNotAvailableTitle_ios": {
+    "description": "Health Connect service not available title for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_serviceNotAvailableText_ios": "Az Apple Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.",
+  "@healthConnect_serviceNotAvailableText_ios": {
+    "description": "Health Connect service not available helper text for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_serviceNotAvailableTitle_android": "Google Health Connect",
+  "@healthConnect_serviceNotAvailableTitle_android": {
+    "description": "Health Connect service not available title for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_serviceNotAvailableText_android": "A Google Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.",
+  "@healthConnect_serviceNotAvailableText_android": {
+    "description": "Health Connect service not available helper text for Android.",
     "placeholders": {}
   }
 }

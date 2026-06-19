@@ -10,7 +10,6 @@ sealed class ProfileSettings with _$ProfileSettings implements Model {
 
   const factory ProfileSettings({
     required String id,
-    @Default(false) bool showTimeOnTimerSettingsScreen,
     @Default(true) bool showStatsOnFinishScreen,
     @Default(true) bool usePresenceFeature,
   }) = _ProfileSettings;
