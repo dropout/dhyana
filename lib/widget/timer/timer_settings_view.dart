@@ -10,12 +10,10 @@ import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/widget/timer/settings/start_time_text.dart';
 import 'package:dhyana/widget/timer/settings/warmup_input.dart';
 import 'package:dhyana/widget/timer/settings/sound_input.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';
 import 'package:dhyana/widget/timer/settings/interval_input.dart';
-import 'package:dhyana/widget/timer/settings/end_time_text.dart';
 import 'package:dhyana/widget/timer/settings/input_gap.dart';
 
 
@@ -115,8 +113,6 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (profileSettings.showTimeOnTimerSettingsScreen) StartTimeText(),
-          if (profileSettings.showTimeOnTimerSettingsScreen) buildInputGap(context),
           WarmupTimeInput(
             label: AppLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
@@ -156,10 +152,6 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             value: widget.timerSettings.endingSound,
             onChange: (Sound endingSound) =>
               _onEndingSoundChange(context, endingSound)
-          ),
-          if (profileSettings.showTimeOnTimerSettingsScreen) buildInputGap(context),
-          if (profileSettings.showTimeOnTimerSettingsScreen) EndTimeText(
-            timerSettings: widget.timerSettings,
           ),
         ],
       ),
