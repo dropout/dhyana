@@ -76,6 +76,8 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           ),
           Gap.large(),
           AppButton.small(
+            fColor: Colors.black,
+            bColor: Colors.transparent,
             text: context.l10n.profileDeleteTitle.toUpperCase(),
             onTap: () => _onDeleteProfileTapped(context),
           ),
