@@ -106,7 +106,6 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   }
 
   Widget buildInputs(BuildContext context) {
-    final profileSettings = widget.profileSettings;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: DesignSpec.padding2Xl),
       child: Column(

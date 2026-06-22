@@ -108,10 +108,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                 top: false,
                 child: Align(
                   alignment: const Alignment(0.0, 1.0),
-                  child: buildOverlayActionButton(
-                    context,
-                    loadingState,
-                    onAction: () => _onSave(context, profileState.profile),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+                    child: buildOverlayActionButton(
+                      context,
+                      loadingState,
+                      onAction: () => _onSave(context, profileState.profile),
+                    ),
                   ),
                 ),
               )
@@ -145,7 +148,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
         }
       },
     );
-
 
   }
 
