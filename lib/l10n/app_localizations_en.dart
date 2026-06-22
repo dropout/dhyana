@@ -840,32 +840,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chantingPlaylistBadgeNext => 'Next';
 
   @override
-  String get healthConnect_platformNotSupportedTitle =>
-      'Health Connect not supported';
-
-  @override
-  String get healthConnect_platformNotSupportedText =>
-      'The Health Connect service is not supported on this device. Please check if the service is installed and enabled.';
-
-  @override
   String get healthConnect_initializingTitle_ios =>
-      'Initializing Apple Health Connect';
+      'Save completed sessions to\nApple Health';
 
   @override
   String get healthConnect_initializingText_ios =>
-      'Initializing Apple Health Connect';
+      'Checking service availability...';
 
   @override
   String get healthConnect_initializingTitle_android =>
-      'Initializing Google Health Connect';
+      'Save completed sessions to\nGoogle Health Connect';
 
   @override
   String get healthConnect_initializingText_android =>
-      'Initializing Google Health Connect';
+      'Checking service availability...';
 
   @override
   String get healthConnect_serviceNotAvailableTitle_ios =>
-      'Apple Health Connect service is not available';
+      'Save completed sessions to\nApple Health';
 
   @override
   String get healthConnect_serviceNotAvailableText_ios =>
@@ -878,4 +870,36 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get healthConnect_serviceNotAvailableText_android =>
       'Google Health Connect service is not available on this device. Please check if you have the latest updates installed.';
+
+  @override
+  String get healthConnect_readyTitle_ios =>
+      'Save completed sessions to\nApple Health';
+
+  @override
+  String get healthConnect_readyText_ios =>
+      'Sync the time you\'ve spent meditating in the application to Apple Health and keep your health data centralized.';
+
+  @override
+  String get healthConnect_readyTitle_android =>
+      'Save completed sessions to\nGoogle Health';
+
+  @override
+  String get healthConnect_readyText_android =>
+      'Keep the time you\'ve spent meditating in the application in sync with Google Health Connect.';
+
+  @override
+  String get healthConnect_unnecessaryTitle_ios =>
+      'Save completed sessions to\nApple Health';
+
+  @override
+  String get healthConnect_unnecessaryText_ios =>
+      'Keep the time you\'ve spent meditating in sync with Apple Health. To manage permissions, go to Settings > Health > Data Access & Devices.';
+
+  @override
+  String get healthConnect_unnecessaryTitle_android =>
+      'Save completed sessions to\nGoogle Health Connect';
+
+  @override
+  String get healthConnect_unnecessaryText_android =>
+      'Keep the time you\'ve spent meditating in the application in sync with Google Health Connect. To manage permissions, go to Settings > Security & Privacy > Privacy > Health Connect.';
 }

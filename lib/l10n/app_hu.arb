@@ -964,47 +964,40 @@
     "placeholders": {}
   },
 
-  "healthConnect_platformNotSupportedTitle": "Health Connect nem támogatott",
-  "@healthConnect_platformNotSupportedTitle": {
-    "description": "Health Connect platform not supported title.",
-    "placeholders": {}
-  },
-  "healthConnect_platformNotSupportedText": "A Health Connect szolgáltatás nem támogatott ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.",
-  "@healthConnect_platformNotSupportedText": {
-    "description": "Health Connect platform not supported helper text.",
-    "placeholders": {}
-  },
-  "healthConnect_initializingTitle_ios": "Apple Health Connect inicializálása",
+
+
+  "healthConnect_initializingTitle_ios": "Befejezett ülések mentése az\nApple Health-be",
   "@healthConnect_initializingTitle_ios": {
     "description": "Health Connect initializing title for iOS.",
     "placeholders": {}
   },
-  "healthConnect_initializingText_ios": "Apple Health Connect inicializálása",
+  "healthConnect_initializingText_ios": "Szolgáltatás elérhetőségének ellenőrzése...",
   "@healthConnect_initializingText_ios": {
     "description": "Health Connect initializing helper text for iOS.",
     "placeholders": {}
   },
-  "healthConnect_initializingTitle_android": "Google Health Connect inicializálása",
+
+  "healthConnect_initializingTitle_android": "Befejezett ülések mentése a\nGoogle Health-be",
   "@healthConnect_initializingTitle_android": {
     "description": "Health Connect initializing title for Android.",
     "placeholders": {}
   },
-  "healthConnect_initializingText_android": "Google Health Connect inicializálása",
+  "healthConnect_initializingText_android": "Szolgáltatás elérhetőségének ellenőrzése...",
   "@healthConnect_initializingText_android": {
     "description": "Health Connect initializing helper text for Android.",
     "placeholders": {}
   },
-  "healthConnect_serviceNotAvailableTitle_ios": "Apple Health Connect szolgáltatás nem elérhető",
+  "healthConnect_serviceNotAvailableTitle_ios": "Befejezett ülések mentése az\nApple Health-be",
   "@healthConnect_serviceNotAvailableTitle_ios": {
     "description": "Health Connect service not available title for iOS.",
     "placeholders": {}
   },
-  "healthConnect_serviceNotAvailableText_ios": "Az Apple Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.",
+  "healthConnect_serviceNotAvailableText_ios": "Az Apple Health szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.",
   "@healthConnect_serviceNotAvailableText_ios": {
     "description": "Health Connect service not available helper text for iOS.",
     "placeholders": {}
   },
-  "healthConnect_serviceNotAvailableTitle_android": "Google Health Connect",
+  "healthConnect_serviceNotAvailableTitle_android": "Befejezett ülések mentése a\nGoogle Health-be",
   "@healthConnect_serviceNotAvailableTitle_android": {
     "description": "Health Connect service not available title for Android.",
     "placeholders": {}
@@ -1013,5 +1006,56 @@
   "@healthConnect_serviceNotAvailableText_android": {
     "description": "Health Connect service not available helper text for Android.",
     "placeholders": {}
+  },
+
+  "healthConnect_readyTitle_ios": "Befejezett ülések mentése az\nApple Health-be",
+  "@healthConnect_readyTitle_ios": {
+    "description": "Health Connect ready title for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_readyText_ios": "Engedélyezd az Apple Health szolgáltatást, hogy a meditációra fordított időt elmenthessük és ezáltal egy helyen tarthatod az egészségügyi adataidat.",
+  "@healthConnect_readyText_ios": {
+    "description": "Health Connect ready helper text for iOS.",
+    "placeholders": {}
+  },
+
+  "healthConnect_readyTitle_android": "Befejezett ülések mentése a\nGoogle Health-be",
+  "@healthConnect_readyTitle_android": {
+    "description": "Health Connect ready title for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_readyText_android": "Engedélyezd a Google Health Connect szolgáltatást, hogy a meditációra fordított időt elmenthessük és ezáltal egy helyen tarthatod az egészségügyi adataidat.",
+  "@healthConnect_readyText_android": {
+    "description": "Health Connect ready helper text for Android.",
+    "placeholders": {}
+  },
+
+  "healthConnect_unnecessaryTitle_ios": "Befejezett ülések mentése az\nApple Health-be",
+  "@healthConnect_unnecessaryTitle_ios": {
+    "description": "Health Connect unnecessary title for iOS.",
+    "placeholders": {}
+  },
+  "healthConnect_unnecessaryText_ios": "Az Apple Health szolgáltatás már engedélyezve van, így a meditációra fordított időt már elmenthetjük az Apple Health-be.",
+  "@healthConnect_unnecessaryText_ios": {
+    "description": "Health Connect unnecessary helper text for iOS.",
+    "placeholders": {}
+  },
+  
+  "healthConnect_unnecessaryTitle_android": "Befejezett ülések mentése a\nGoogle Health-be",
+  "@healthConnect_unnecessaryTitle_android": {
+    "description": "Health Connect unnecessary title for Android.",
+    "placeholders": {}
+  },
+  "healthConnect_unnecessaryText_android": "A Google Health Connect szolgáltatás már engedélyezve van, így a meditációra fordított időt már elmenthetjük a Google Health Connect-be.",
+  "@healthConnect_unnecessaryText_android": {
+    "description": "Health Connect unnecessary helper text for Android.",
+    "placeholders": {}
   }
+
+
+
+
+
+
+
 }

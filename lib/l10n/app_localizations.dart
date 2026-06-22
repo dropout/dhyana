@@ -1136,58 +1136,46 @@ abstract class AppLocalizations {
   /// **'Következő'**
   String get chantingPlaylistBadgeNext;
 
-  /// Health Connect platform not supported title.
-  ///
-  /// In hu, this message translates to:
-  /// **'Health Connect nem támogatott'**
-  String get healthConnect_platformNotSupportedTitle;
-
-  /// Health Connect platform not supported helper text.
-  ///
-  /// In hu, this message translates to:
-  /// **'A Health Connect szolgáltatás nem támogatott ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
-  String get healthConnect_platformNotSupportedText;
-
   /// Health Connect initializing title for iOS.
   ///
   /// In hu, this message translates to:
-  /// **'Apple Health Connect inicializálása'**
+  /// **'Befejezett ülések mentése az\nApple Health-be'**
   String get healthConnect_initializingTitle_ios;
 
   /// Health Connect initializing helper text for iOS.
   ///
   /// In hu, this message translates to:
-  /// **'Apple Health Connect inicializálása'**
+  /// **'Szolgáltatás elérhetőségének ellenőrzése...'**
   String get healthConnect_initializingText_ios;
 
   /// Health Connect initializing title for Android.
   ///
   /// In hu, this message translates to:
-  /// **'Google Health Connect inicializálása'**
+  /// **'Befejezett ülések mentése a\nGoogle Health-be'**
   String get healthConnect_initializingTitle_android;
 
   /// Health Connect initializing helper text for Android.
   ///
   /// In hu, this message translates to:
-  /// **'Google Health Connect inicializálása'**
+  /// **'Szolgáltatás elérhetőségének ellenőrzése...'**
   String get healthConnect_initializingText_android;
 
   /// Health Connect service not available title for iOS.
   ///
   /// In hu, this message translates to:
-  /// **'Apple Health Connect szolgáltatás nem elérhető'**
+  /// **'Befejezett ülések mentése az\nApple Health-be'**
   String get healthConnect_serviceNotAvailableTitle_ios;
 
   /// Health Connect service not available helper text for iOS.
   ///
   /// In hu, this message translates to:
-  /// **'Az Apple Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
+  /// **'Az Apple Health szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
   String get healthConnect_serviceNotAvailableText_ios;
 
   /// Health Connect service not available title for Android.
   ///
   /// In hu, this message translates to:
-  /// **'Google Health Connect'**
+  /// **'Befejezett ülések mentése a\nGoogle Health-be'**
   String get healthConnect_serviceNotAvailableTitle_android;
 
   /// Health Connect service not available helper text for Android.
@@ -1195,6 +1183,54 @@ abstract class AppLocalizations {
   /// In hu, this message translates to:
   /// **'A Google Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.'**
   String get healthConnect_serviceNotAvailableText_android;
+
+  /// Health Connect ready title for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Befejezett ülések mentése az\nApple Health-be'**
+  String get healthConnect_readyTitle_ios;
+
+  /// Health Connect ready helper text for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Engedélyezd az Apple Health szolgáltatást, hogy a meditációra fordított időt elmenthessük és ezáltal egy helyen tarthatod az egészségügyi adataidat.'**
+  String get healthConnect_readyText_ios;
+
+  /// Health Connect ready title for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'Befejezett ülések mentése a\nGoogle Health-be'**
+  String get healthConnect_readyTitle_android;
+
+  /// Health Connect ready helper text for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'Engedélyezd a Google Health Connect szolgáltatást, hogy a meditációra fordított időt elmenthessük és ezáltal egy helyen tarthatod az egészségügyi adataidat.'**
+  String get healthConnect_readyText_android;
+
+  /// Health Connect unnecessary title for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Befejezett ülések mentése az\nApple Health-be'**
+  String get healthConnect_unnecessaryTitle_ios;
+
+  /// Health Connect unnecessary helper text for iOS.
+  ///
+  /// In hu, this message translates to:
+  /// **'Az Apple Health szolgáltatás már engedélyezve van, így a meditációra fordított időt már elmenthetjük az Apple Health-be.'**
+  String get healthConnect_unnecessaryText_ios;
+
+  /// Health Connect unnecessary title for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'Befejezett ülések mentése a\nGoogle Health-be'**
+  String get healthConnect_unnecessaryTitle_android;
+
+  /// Health Connect unnecessary helper text for Android.
+  ///
+  /// In hu, this message translates to:
+  /// **'A Google Health Connect szolgáltatás már engedélyezve van, így a meditációra fordított időt már elmenthetjük a Google Health Connect-be.'**
+  String get healthConnect_unnecessaryText_android;
 }
 
 class _AppLocalizationsDelegate

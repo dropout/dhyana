@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ProfileSettingsForm extends StatefulWidget {
-
   final Profile profile;
   final ProfileSettings profileSettings;
   final VoidCallback? onChanged;
@@ -32,7 +31,6 @@ class ProfileSettingsForm extends StatefulWidget {
 }
 
 class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
-
   @override
   void initState() {
     super.initState();
@@ -41,7 +39,7 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
   void _onFormChanged() {
     widget.onChanged?.call();
   }
-
+  
   void _onDeleteProfileTapped(BuildContext context) {
     showAppDialog(context, DeleteProfileDialog());
     context.hapticsTap();
@@ -55,46 +53,44 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
       skipDisabled: true,
       onChanged: _onFormChanged,
       child: Column(
-        children: [
-          Gap.medium(),
-          ProfileSettingsHealthConnect(
-            mindfulMinutesService: context.services.mindfulMinutesService,
-          ),
-          Gap.large(),  
-          ProfileSettingsSwitch(
-            name: 'showStatsOnFinishScreen',
-            title: context.l10n.showStatsOnFinishScreenTitle,
-            helperText: context.l10n.showStatsOnFinishScreenDescription,
-            initialValue: widget.profileSettings.showStatsOnFinishScreen,
-          ),
-          Gap.large(),
-          ProfileSettingsSwitch(
-            name: 'usePresenceFeature',
-            title: context.l10n.usePresenceFeatureTitle,
-            helperText: context.l10n.usePresenceFeatureDescription,
-            initialValue: widget.profileSettings.usePresenceFeature,
-          ),
-          Gap.large(),
-          AppButton.small(
-            fColor: Colors.black,
-            bColor: Colors.transparent,
-            text: context.l10n.profileDeleteTitle.toUpperCase(),
-            onTap: () => _onDeleteProfileTapped(context),
-          ),
-        ],
+          children: [
+            Gap.medium(),
+            ProfileSettingsHealthConnect(
+              mindfulMinutesService: context.services.mindfulMinutesService,
+            ),
+            Gap.large(),
+            ProfileSettingsSwitch(
+              name: 'showStatsOnFinishScreen',
+              title: context.l10n.showStatsOnFinishScreenTitle,
+              helperText: context.l10n.showStatsOnFinishScreenDescription,
+              initialValue: widget.profileSettings.showStatsOnFinishScreen,
+            ),
+            Gap.large(),
+            ProfileSettingsSwitch(
+              name: 'usePresenceFeature',
+              title: context.l10n.usePresenceFeatureTitle,
+              helperText: context.l10n.usePresenceFeatureDescription,
+              initialValue: widget.profileSettings.usePresenceFeature,
+            ),
+            Gap.large(),
+            AppButton.small(
+              fColor: Colors.black,
+              bColor: Colors.transparent,
+              text: context.l10n.profileDeleteTitle.toUpperCase(),
+              onTap: () => _onDeleteProfileTapped(context),
+            ),
+          ],
       ),
     );
   }
 }
 
-
 class ProfileSettingsDurationInput extends StatelessWidget {
-  
   final String title;
   final String name;
   final String? helperText;
   final Duration initialValue;
-  final ValueChanged<Duration?>? onChanged;  
+  final ValueChanged<Duration?>? onChanged;
 
   const ProfileSettingsDurationInput({
     required this.title,
@@ -107,7 +103,6 @@ class ProfileSettingsDurationInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Column(
       crossAxisAlignment: .stretch,
       children: [
@@ -135,13 +130,9 @@ class ProfileSettingsDurationInput extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSpec.paddingXl,
             ),
-            child: Text(
-              helperText!,
-              style: context.theme.textTheme.bodyMedium,
-            ),
+            child: Text(helperText!, style: context.theme.textTheme.bodyMedium),
           ),
       ],
     );
   }
 }
-

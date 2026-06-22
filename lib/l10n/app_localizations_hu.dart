@@ -839,42 +839,66 @@ class AppLocalizationsHu extends AppLocalizations {
   String get chantingPlaylistBadgeNext => 'Következő';
 
   @override
-  String get healthConnect_platformNotSupportedTitle =>
-      'Health Connect nem támogatott';
-
-  @override
-  String get healthConnect_platformNotSupportedText =>
-      'A Health Connect szolgáltatás nem támogatott ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
-
-  @override
   String get healthConnect_initializingTitle_ios =>
-      'Apple Health Connect inicializálása';
+      'Befejezett ülések mentése az\nApple Health-be';
 
   @override
   String get healthConnect_initializingText_ios =>
-      'Apple Health Connect inicializálása';
+      'Szolgáltatás elérhetőségének ellenőrzése...';
 
   @override
   String get healthConnect_initializingTitle_android =>
-      'Google Health Connect inicializálása';
+      'Befejezett ülések mentése a\nGoogle Health-be';
 
   @override
   String get healthConnect_initializingText_android =>
-      'Google Health Connect inicializálása';
+      'Szolgáltatás elérhetőségének ellenőrzése...';
 
   @override
   String get healthConnect_serviceNotAvailableTitle_ios =>
-      'Apple Health Connect szolgáltatás nem elérhető';
+      'Befejezett ülések mentése az\nApple Health-be';
 
   @override
   String get healthConnect_serviceNotAvailableText_ios =>
-      'Az Apple Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
+      'Az Apple Health szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
 
   @override
   String get healthConnect_serviceNotAvailableTitle_android =>
-      'Google Health Connect';
+      'Befejezett ülések mentése a\nGoogle Health-be';
 
   @override
   String get healthConnect_serviceNotAvailableText_android =>
       'A Google Health Connect szolgáltatás nem elérhető ezen az eszközön. Kérlek ellenőrizd, hogy a szolgáltatás telepítve és engedélyezve van-e.';
+
+  @override
+  String get healthConnect_readyTitle_ios =>
+      'Befejezett ülések mentése az\nApple Health-be';
+
+  @override
+  String get healthConnect_readyText_ios =>
+      'Engedélyezd az Apple Health szolgáltatást, hogy a meditációra fordított időt elmenthessük és ezáltal egy helyen tarthatod az egészségügyi adataidat.';
+
+  @override
+  String get healthConnect_readyTitle_android =>
+      'Befejezett ülések mentése a\nGoogle Health-be';
+
+  @override
+  String get healthConnect_readyText_android =>
+      'Engedélyezd a Google Health Connect szolgáltatást, hogy a meditációra fordított időt elmenthessük és ezáltal egy helyen tarthatod az egészségügyi adataidat.';
+
+  @override
+  String get healthConnect_unnecessaryTitle_ios =>
+      'Befejezett ülések mentése az\nApple Health-be';
+
+  @override
+  String get healthConnect_unnecessaryText_ios =>
+      'Az Apple Health szolgáltatás már engedélyezve van, így a meditációra fordított időt már elmenthetjük az Apple Health-be.';
+
+  @override
+  String get healthConnect_unnecessaryTitle_android =>
+      'Befejezett ülések mentése a\nGoogle Health-be';
+
+  @override
+  String get healthConnect_unnecessaryText_android =>
+      'A Google Health Connect szolgáltatás már engedélyezve van, így a meditációra fordított időt már elmenthetjük a Google Health Connect-be.';
 }

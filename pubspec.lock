@@ -677,7 +677,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "27e2e023ad349935fab17739e05f2f14da9b7d72"
+      resolved-ref: "0861937ef4305beee2d1fe4ab82101010ba8b942"
       url: "git@github.com:dropout/flutter_mindful_minutes.git"
     source: git
     version: "0.1.0"
