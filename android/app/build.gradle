@@ -65,19 +65,19 @@ android {
     productFlavors {
         development {
             dimension = "default"
-            manifestPlaceholders = [appName: "[DEV] Creating Flavors"]
+            manifestPlaceholders = [appName: "Dhyana [DEV]"]
             applicationIdSuffix = ".dev"
         }
 
         staging {
             dimension = "default"
-            manifestPlaceholders = [appName: "[STG] Creating Flavors"]
+            manifestPlaceholders = [appName: "Dhyana [STG]"]
             applicationIdSuffix = ".staging"
         }
 
         production {
             dimension = "default"
-            manifestPlaceholders = [appName: "Creating Flavors"]
+            manifestPlaceholders = [appName: "Dhyana - Simple Meditation Timer"]
             applicationIdSuffix = ".prod"
         }
     }
