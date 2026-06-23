@@ -893,7 +893,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get healthConnect_unnecessaryText_ios =>
-      'Keep the time you\'ve spent meditating in sync with Apple Health. To manage permissions, go to Settings > Health > Data Access & Devices.';
+      'Keep the time you\'ve spent meditating in sync with Apple Health. To manage permissions, go to Settings > Apps > Health > Data Access & Devices.';
 
   @override
   String get healthConnect_unnecessaryTitle_android =>

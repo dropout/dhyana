@@ -1043,7 +1043,7 @@
     "description": "Health Connect unnecessary title for iOS.",
     "placeholders": {}
   },
-  "healthConnect_unnecessaryText_ios": "Keep the time you've spent meditating in sync with Apple Health. To manage permissions, go to Settings > Health > Data Access & Devices.",
+  "healthConnect_unnecessaryText_ios": "Keep the time you've spent meditating in sync with Apple Health. To manage permissions, go to Settings > Apps > Health > Data Access & Devices.",
   "@healthConnect_unnecessaryText_ios": {
     "description": "Health Connect unnecessary helper text for iOS.",
     "placeholders": {}
