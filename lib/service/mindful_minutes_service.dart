@@ -5,5 +5,5 @@ abstract interface class MindfulMinutesService {
   Future<AuthorizationStatus> getAuthorizationStatus();
   Future<RequestStatusForAuthorization> getRequestForAuthorizationStatus();
   Future<bool> requestAuthorization();
-  Future<void> saveMindfulMinutes(DateTime start, DateTime end);
+  Future<void> logMindfulMinutes(DateTime start, DateTime end);
 }

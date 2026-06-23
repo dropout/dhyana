@@ -1,3 +1,4 @@
+import 'package:dhyana/service/mindful_minutes_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
@@ -24,12 +25,14 @@ class SessionCompletedCubit extends Cubit<SessionCompletedState> with LoggerMixi
 
   final CrashlyticsService crashlyticsService;
   final IdGeneratorService idGeneratorService;
+  final MindfulMinutesService mindfulMinutesService;
 
   SessionCompletedCubit({
     required this.profileRepository,
     required this.statisticsRepository,
     required this.crashlyticsService,
     required this.idGeneratorService,
+    required this.mindfulMinutesService,    
   }) : super(const SessionCompletedState.initial());
 
   Future<void> logSession(String profileId, Session session, {
@@ -62,6 +65,18 @@ class SessionCompletedCubit extends Cubit<SessionCompletedState> with LoggerMixi
         updateResult.updatedProfile,
         session,
       );
+
+      // Save session data to Mindful Minutes if authorized
+      final authorizationStatus = await mindfulMinutesService.getAuthorizationStatus();
+      if (authorizationStatus == .authorized) {        
+        await mindfulMinutesService.logMindfulMinutes(
+          session.startTime,
+          session.endTime,
+        );
+        logger.t('Mindful minutes authorized, saving session...');
+      } else {
+        logger.t('Mindful Minutes is not authorized: $authorizationStatus');
+      }
 
       // Update the profile with the new stats
       await profileRepository.update(updateResult.updatedProfile);

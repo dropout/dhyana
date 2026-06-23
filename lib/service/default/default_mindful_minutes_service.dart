@@ -26,7 +26,7 @@ class DefaultMindfulMinutesService implements MindfulMinutesService {
     flutterMindfulMinutes.requestAuthorization();
 
   @override
-  Future<void> saveMindfulMinutes(DateTime start, DateTime end) async {
+  Future<void> logMindfulMinutes(DateTime start, DateTime end) async {
     return flutterMindfulMinutes.writeMindfulMinutes(start, end);
   }
 }
