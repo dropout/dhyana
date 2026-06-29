@@ -1,117 +1,75 @@
-import 'dart:convert';
-
-import 'package:dhyana/enum/shared_preferences_key.dart';
-import 'package:dhyana/model/timer_settings.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/enum/session_type.dart';
-import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'home_screen_state.dart';
 part 'home_screen_cubit.freezed.dart';
-part 'home_screen_cubit.g.dart';
 
-class HomeScreenCubit extends Cubit<HomeScreenState> {
-
-  final SharedPreferencesService sharedPreferencesService;
+class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
+  final HomeScreenState? initialState;
   final CrashlyticsService crashlyticsService;
 
   HomeScreenCubit({
-    required this.sharedPreferencesService,
+    this.initialState,
     required this.crashlyticsService,
-  }) : super(const HomeScreenState.loading());
+  }) : super(initialState ?? HomeScreenState());
 
-  Future<void> init(TimerSettings? timerSettings) async {
-    if (timerSettings != null) {
-      setSessionType(SessionType.timer);
-      emit(HomeScreenState.loaded(
-        sessionType: SessionType.timer,
-      ));
-    } else {
-      try {
-        final homeScreenState = await _loadStateFromSharedPreferences();
-        emit(homeScreenState);
-      } catch (e, stackTrace) {
-        emit(HomeScreenState.loaded(sessionType: SessionType.timer));
-        crashlyticsService.recordError(
-          exception: e,
-          stackTrace: stackTrace,
-          reason: 'Failed to load HomeScreenState from SharedPreferences during init',
-        );
-      }
-    }
-  }
-
-  Future<void> loadState() async {
+  @override
+  HomeScreenState? fromJson(Map<String, dynamic> json) {
     try {
-      final homeScreenState = await _loadStateFromSharedPreferences();
-      emit(homeScreenState);
-    } catch (e, stackTrace) {
+      if (initialState != null) {
+        return initialState;
+      } else {
+        final sessionType = SessionType.values.byName(json['sessionType'] as String);
+        return HomeScreenState(sessionType: sessionType);
+      }
+    } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
-        stackTrace: stackTrace,
-        reason: 'Failed to load HomeScreenState from SharedPreferences',
+        stackTrace: stack,
+        reason: 'Failed to deserialize HomeScreenState from JSON',
       );
-      emit(HomeScreenState.loaded(
-        // timerSettings: ,
-        sessionType: SessionType.timer
-      ));
+      return null;
     }
   }
+
+  @override
+  Map<String, dynamic> toJson(HomeScreenState state) {
+    return {
+      'sessionType': state.sessionType.name,
+    };
+  }  
 
   Future<void> setSessionType(SessionType sessionType) async {
     try {
-      final currentState = state;
-      if (currentState is HomeScreenStateLoaded) {
-        final updatedState = currentState.copyWith(sessionType: sessionType);
-        emit(updatedState);
-        _saveStateToSharedPreferences(updatedState);
-      }
+      final updatedState = state.copyWith(sessionType: sessionType);
+      emit(updatedState);
     } catch (e, stackTrace) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stackTrace,
-        reason: 'Failed to update session type and save HomeScreenState to SharedPreferences',
+        reason:
+            'Failed to update session type and save HomeScreenState to SharedPreferences',
       );
     }
   }
 
   Future<void> toggleSessionType() async {
     try {
-      final currentState = state;
-      if (currentState is HomeScreenStateLoaded) {
-        final newSessionType = currentState.sessionType == SessionType.timer
-          ? SessionType.chanting
-          : SessionType.timer;
-        final updatedState = currentState.copyWith(sessionType: newSessionType);
-        emit(updatedState);
-        _saveStateToSharedPreferences(updatedState);
-      }
+      final newSessionType = state.sessionType == SessionType.timer
+        ? SessionType.chanting
+        : SessionType.timer;
+      final updatedState = state.copyWith(sessionType: newSessionType);
+      emit(updatedState);
     } catch (e, stackTrace) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stackTrace,
-        reason: 'Failed to toggle session type and save HomeScreenState to SharedPreferences',
+        reason:
+            'Failed to toggle session type and save HomeScreenState to SharedPreferences',
       );
     }
   }
-
-  Future<HomeScreenState> _loadStateFromSharedPreferences() async {
-    final jsonString = await sharedPreferencesService.get<String>(
-      key: SharedPreferencesKey.homeScreenState);
-    Map<String, Object?> json = jsonString != null ? Map<String,
-      Object?>.from(jsonDecode(jsonString)) : {};
-    return HomeScreenState.fromJson(json);
-  }
-
-  Future<void> _saveStateToSharedPreferences(HomeScreenState state) async {
-    final jsonString = jsonEncode(state.toJson());
-    await sharedPreferencesService.set(
-      key: SharedPreferencesKey.homeScreenState,
-      value: jsonString,
-    );
-  }
-
 
 }

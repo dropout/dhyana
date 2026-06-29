@@ -25,16 +25,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// optional [timerSettings] value so that callers can deep-link directly into a
 /// pre-configured sitting session (e.g. from a notification or a history entry).
 ///
-/// ## State machine
-///
-/// | [HomeScreenState]          | Rendered widget                        |
-/// |----------------------------|----------------------------------------|
-/// | [HomeScreenStateLoading]   | [AppLoadingDisplay] (full-screen)      |
-/// | [HomeScreenStateLoaded]    | Full [Scaffold] with body and app-bar  |
 ///
 /// ## Layout
 ///
-/// Once loaded, the screen renders:
+/// The screen renders:
 /// - A [HomeScreenAppbar] at the top (extends behind the app-bar area).
 /// - A body area that switches between [buildTimerSettingsView] and
 ///   [buildChantingSettingsView] depending on the active [SessionType].
@@ -78,20 +72,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
       create: (context) => HomeScreenCubit(
-        sharedPreferencesService: context.services.sharedPreferencesService,
+        initialState: timerSettings != null ? const HomeScreenState(
+          sessionType: SessionType.timer,
+        ) : null,
         crashlyticsService: context.services.crashlyticsService,
-      )..init(timerSettings),
-      builder: (context, state) {
-        return switch (state) {
-          HomeScreenStateLoading() => const AppLoadingDisplay(),
-          HomeScreenStateLoaded() => buildScaffolding(context, state),
-        };
-      },
+      ),
+      builder: (context, state) =>
+        buildScaffolding(context, state),
     );
   }
 
   /// Builds the [Scaffold] that wraps the loaded home screen content.
-  Widget buildScaffolding(BuildContext context, HomeScreenStateLoaded state) {
+  Widget buildScaffolding(BuildContext context, HomeScreenState state) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: HomeScreenAppbar(homeScreenState: state),
@@ -104,8 +96,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Builds the animated body that switches between the sitting and chanting
-  /// settings views based on [HomeScreenStateLoaded.sessionType].
-  Widget buildBody(BuildContext context, HomeScreenStateLoaded state) {
+  /// settings views based on [HomeScreenState.sessionType].
+  Widget buildBody(BuildContext context, HomeScreenState state) {
     return AnimatedSwitcher(
       duration: Durations.medium4,
       // switchInCurve: Curves.fastLinearToSlowEaseIn,
@@ -126,7 +118,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildBottomMenu(BuildContext context, HomeScreenStateLoaded state) {
+  Widget buildBottomMenu(BuildContext context, HomeScreenState state) {
     return HomeScreenBottomMenu(
       sessionType: state.sessionType,
       onSessionTypeChange: (newType) {
@@ -149,7 +141,7 @@ class HomeScreen extends StatelessWidget {
   /// - [TimerSettingsView] once settings are available.
   Widget buildTimerSettingsView(
     BuildContext context,
-    HomeScreenStateLoaded state,
+    HomeScreenState state,
   ) {
     return SafeProfileSettings(
       key: ValueKey('timer_settings_branch'),

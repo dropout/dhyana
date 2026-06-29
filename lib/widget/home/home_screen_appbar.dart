@@ -10,7 +10,7 @@ import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final HomeScreenStateLoaded homeScreenState;
+  final HomeScreenState homeScreenState;
 
   const HomeScreenAppbar({required this.homeScreenState, super.key});
 

@@ -151,8 +151,7 @@ class _ProfileSettingsHealthConnectState
       _authorizationStatus == AuthorizationStatus.authorized;
 
   void _requestAuthorization(BuildContext context) async {
-    // TODO: Check if plugin api can be harmonized to return a single status object instead of two separate calls.
-    final result = await widget.mindfulMinutesService.requestAuthorization();
+    await widget.mindfulMinutesService.requestAuthorization();
     _updateServiceStatus();
   }
 
