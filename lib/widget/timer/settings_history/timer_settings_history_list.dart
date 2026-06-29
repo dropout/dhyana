@@ -35,7 +35,10 @@ class TimerSettingsHistoryList extends StatelessWidget {
 
     // Force home screen recreation to apply the selected timer settings.
     if (context.mounted) {
-      HomeRoute(refresh: DateTime.now().millisecondsSinceEpoch).go(context);
+      HomeRoute(
+        refresh: DateTime.now().millisecondsSinceEpoch,
+        $extra: timerSettings,
+      ).go(context);
       Future.delayed(Durations.medium1, () {
         if (context.mounted) {
           context.showSuccessfulToast(

@@ -23,7 +23,6 @@ class TimerSettingsHistoryScreen extends StatelessWidget
       create: (_) {
         final timerSettingsHistoryCubit = TimerSettingsHistoryCubit(
           timerSettingsHistoryRepository: context.repos.timerSettingsHistoryRepository,
-          timerSettingsSharedPrefsService: context.services.timerSettingsSharedPrefsService,
           crashlyticsService: context.services.crashlyticsService
         );
         timerSettingsHistoryCubit.loadSettings(profileId);

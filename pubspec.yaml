@@ -20,6 +20,7 @@ dependencies:
   go_router_builder: ^4.1.0
   provider: ^6.0.5
   flutter_bloc: ^9.1.1
+  hydrated_bloc: ^11.0.0
   freezed_annotation: ^3.0.0
   json_annotation: ^4.8.1
   uuid: ^4.4.0
@@ -30,6 +31,7 @@ dependencies:
   rnd: 0.2.0
   flutter_cache_manager: ^3.4.1
   clock: ^1.1.2 # For faking time in tests and better time handling in general
+  path_provider: ^2.1.5
 
   # Ui
   flutter_animate: ^4.2.0
@@ -109,8 +111,6 @@ dev_dependencies:
 
 flutter:
   generate: true # For generating localizations?
-  config:
-    enable-swift-package-manager: false
 
   assets:
     - assets/sounds/

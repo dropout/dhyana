@@ -1,64 +1,60 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'timer_settings_state.dart';
 part 'timer_settings_cubit.freezed.dart';
 
-class TimerSettingsCubit extends Cubit<TimerSettingsState> with LoggerMixin {
-
-  TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
+class TimerSettingsCubit extends HydratedCubit<TimerSettingsState>
+    with LoggerMixin {
   CrashlyticsService crashlyticsService;
 
   TimerSettingsCubit({
-    required this.timerSettingsSharedPrefsService,
     required this.crashlyticsService,
-  }) : super(const TimerSettingsState.loading());
+  }) : super(TimerSettingsState(timerSettings: TimerSettings()));
 
-  Future<void> loadTimerSettings({TimerSettings? timerSettings}) async {
+  @override
+  TimerSettingsState fromJson(Map<String, dynamic> json) {
     try {
-      if (timerSettings != null) {
-        emit(TimerSettingsState.loaded(
-          timerSettings: timerSettings,
-        ));
-        logger.t('Using timer settings from event');
-      } else {
-        emit(TimerSettingsState.loaded(
-          timerSettings: timerSettingsSharedPrefsService.getTimerSettings(),
-        ));
-        logger.t('Loaded timer setting from shared preferences');
-      }
+      final timerSettings = TimerSettings.fromJson(json);
+      return state.copyWith(timerSettings: timerSettings);
     } catch (e, stack) {
-      emit(const TimerSettingsState.error());
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to load timer settings'
+        reason: 'Failed to deserialize TimerSettings from JSON',
       );
+      return state;
     }
+  }
 
-
+  @override
+  Map<String, dynamic> toJson(TimerSettingsState state) {
+    try {
+      return state.timerSettings.toJson();
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Failed to serialize TimerSettings to JSON',
+      );
+      return {};
+    }
   }
 
   Future<void> timerSettingsChanged(TimerSettings timerSettings) async {
     try {
-      // Emit the new timer settings to the state
-      emit(TimerSettingsState.loaded(timerSettings: timerSettings));
-
-      // Lazy save the new timer settings to shared preferences
-      timerSettingsSharedPrefsService.setTimerSettings(timerSettings);
-
+      emit(state.copyWith(timerSettings: timerSettings));
       logger.t('Timer settings changed');
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to save timer settings to sharedprefs when change occured'
+        reason:
+          'Unable to propagate timer settings change to state. TimerSettings: $timerSettings',
       );
     }
   }
-
 }

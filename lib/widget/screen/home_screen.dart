@@ -74,10 +74,6 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({this.timerSettings, super.key});
 
   /// Builds the root widget tree for the home screen.
-  ///
-  /// Initialises [HomeScreenCubit], passing
-  /// [timerSettings] to [HomeScreenCubit.init]. While the cubit is loading
-  /// [AppLoadingDisplay] is shown; once loaded, [buildScaffolding] is called.
   @override
   Widget build(BuildContext context) {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
@@ -95,11 +91,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Builds the [Scaffold] that wraps the loaded home screen content.
-  ///
-  /// The scaffold contains:
-  /// - A [HomeScreenAppbar] that is extended behind the app-bar region.
-  /// - A full-expand [Stack] with [buildBody] filling the background and
-  ///   a bottom-right-anchored [SessionTypeToggle] floating above it.
   Widget buildScaffolding(BuildContext context, HomeScreenStateLoaded state) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -107,20 +98,13 @@ class HomeScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: Stack(
         fit: StackFit.expand,
-        children: [
-          buildBody(context, state),
-          buildBottomMenu(context, state),
-        ],
+        children: [buildBody(context, state), buildBottomMenu(context, state)],
       ),
     );
   }
 
   /// Builds the animated body that switches between the sitting and chanting
   /// settings views based on [HomeScreenStateLoaded.sessionType].
-  ///
-  /// Uses an [AnimatedSwitcher] with [Durations.medium4] and cubic easing
-  /// curves to provide a smooth cross-fade transition whenever the active
-  /// [SessionType] changes.
   Widget buildBody(BuildContext context, HomeScreenStateLoaded state) {
     return AnimatedSwitcher(
       duration: Durations.medium4,
@@ -142,7 +126,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildBottomMenu(BuildContext context, HomeScreenStateLoaded state) {    
+  Widget buildBottomMenu(BuildContext context, HomeScreenStateLoaded state) {
     return HomeScreenBottomMenu(
       sessionType: state.sessionType,
       onSessionTypeChange: (newType) {
@@ -171,20 +155,20 @@ class HomeScreen extends StatelessWidget {
       key: ValueKey('timer_settings_branch'),
       builder: (context, profileSettings) =>
           SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
-            create: (context) => TimerSettingsCubit(
-              crashlyticsService: context.services.crashlyticsService,
-              timerSettingsSharedPrefsService:
-                  context.services.timerSettingsSharedPrefsService,
-            )..loadTimerSettings(timerSettings: timerSettings),
+            create: (context) {
+              final cubit = TimerSettingsCubit(
+                crashlyticsService: context.services.crashlyticsService,
+              );
+              if (timerSettings != null) {
+                cubit.timerSettingsChanged(timerSettings!);
+              }
+              return cubit;
+            },
             builder: (context, state) {
-              return switch (state) {
-                TimerSettingsDataErrorState() => const AppErrorDisplay(),
-                TimerSettingsDataLoadingState() => const AppLoadingDisplay(),
-                TimerSettingsDataLoadedState() => TimerSettingsView(
-                  timerSettings: state.timerSettings,
-                  profileSettings: profileSettings,
-                ),
-              };
+              return TimerSettingsView(
+                timerSettings: state.timerSettings,
+                profileSettings: profileSettings,
+              );
             },
           ),
     );

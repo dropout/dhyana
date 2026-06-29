@@ -37,9 +37,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
   @override
   void didUpdateWidget(TimerSettingsView oldWidget) {
     if (widget.timerSettings != oldWidget.timerSettings) {
-      BlocProvider.of<TimerSettingsCubit>(context).loadTimerSettings(
-        timerSettings: widget.timerSettings
-      );
+      context.read<TimerSettingsCubit>().timerSettingsChanged(widget.timerSettings);
     }
     super.didUpdateWidget(oldWidget);
   }

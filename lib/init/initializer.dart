@@ -16,6 +16,8 @@ import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/init/services.dart';
 import 'package:dhyana/util/logger_mixin.dart';
@@ -30,6 +32,11 @@ class Initializer with LoggerMixin {
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     
     logger.t('Starting initialization process');
+
+    logger.t('Configuring HydratedBloc storage');
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: HydratedStorageDirectory((await getApplicationDocumentsDirectory()).path)
+    );
 
     // Create data providers shared between builders
     logger.t('Create data providers');

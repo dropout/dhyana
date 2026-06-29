@@ -5,11 +5,8 @@ sealed class TimerSettingsState with _$TimerSettingsState {
 
   const TimerSettingsState._();
 
-  const factory TimerSettingsState.loading() = TimerSettingsDataLoadingState;
-  const factory TimerSettingsState.loaded({
+  const factory TimerSettingsState({
     required TimerSettings timerSettings,
-  }) = TimerSettingsDataLoadedState;
-
-  const factory TimerSettingsState.error() = TimerSettingsDataErrorState;
+  }) = _TimerSettingsState;
 
 }

@@ -133,7 +133,6 @@ class _TimerContextState extends State<TimerContext> {
   ) {
     final timerSettingsHistoryCubit = TimerSettingsHistoryCubit(
       timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
-      timerSettingsSharedPrefsService: services.timerSettingsSharedPrefsService,
       crashlyticsService: services.crashlyticsService,
     );
     return timerSettingsHistoryCubit;

@@ -70,6 +70,7 @@ class SessionCompletedScreen extends StatelessWidget {
         statisticsRepository: context.repos.statisticsRepository,
         idGeneratorService: context.services.idGeneratorService,
         crashlyticsService: context.services.crashlyticsService,
+        mindfulMinutesService: context.services.mindfulMinutesService,
       ),
       child: SignedInCompletedView(
         profileId: state.profile.id,
