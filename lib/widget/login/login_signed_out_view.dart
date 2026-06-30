@@ -9,9 +9,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+typedef OnSigninComplete = void Function(User user, bool isFirstSignin);
+
 class LoginSignedOutView extends StatelessWidget {
 
-  final void Function(User user, bool isFirstSignin) onSigninComplete;
+  final OnSigninComplete onSigninComplete;
 
   const LoginSignedOutView({
     required this.onSigninComplete,
@@ -39,6 +41,7 @@ class LoginSignedOutView extends StatelessWidget {
   }
 
   void _onTermsTap(BuildContext context) {
+    // TODO: Replace with actual terms of service URL
     context.services.urlLauncher.launchInAppWebView('https://google.com');
     context.logEvent(name: 'view_tou_pressed');
     context.hapticsTap();
@@ -46,6 +49,7 @@ class LoginSignedOutView extends StatelessWidget {
 
 
   void _onPrivacyTap(BuildContext context) {
+    // TODO: Replace with actual privacy policy URL
     context.services.urlLauncher.launchInAppWebView('https://google.com');
     context.logEvent(name: 'view_privacy_policy_pressed');
     context.hapticsTap();

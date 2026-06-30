@@ -201,6 +201,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginLegalPart4 => 'Privacy statement';
 
   @override
+  String get loginGoToProfile => 'Go to your profile';
+
+  @override
   String get profile => 'Profile';
 
   @override

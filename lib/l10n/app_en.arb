@@ -304,6 +304,11 @@
     "description": "Login legal part 4.",
     "placeholders": {}
   },
+  "loginGoToProfile": "Go to your profile",
+  "@loginGoToProfile": {
+    "description": "Login go to profile button text.",
+    "placeholders": {}
+  },
   "profile": "Profile",
   "@profile": {
     "description": "Profile screen title.",

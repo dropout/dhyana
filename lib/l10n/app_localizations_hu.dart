@@ -201,6 +201,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get loginLegalPart4 => 'Adatvédelmi nyilatkozatot';
 
   @override
+  String get loginGoToProfile => 'Ugrás a profilodra';
+
+  @override
   String get profile => 'Profil';
 
   @override

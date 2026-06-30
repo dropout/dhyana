@@ -295,6 +295,11 @@
     "description": "A(z) loginLegalPart4 fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "loginGoToProfile": "Ugrás a profilodra",
+  "@loginGoToProfile": {
+    "description": "Login go to profile button text.",
+    "placeholders": {}
+  },
   "profile": "Profil",
   "@profile": {
     "description": "A(z) profile fordítási kulcs leírása.",

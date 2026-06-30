@@ -15,14 +15,14 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
+        builder: (context, authState) {
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: CustomAppBar(
               leading: CustomBackButton(),
             ),
             body: LoginView(
-              authState: state,
+              authState: authState,
             ),
           );
         }

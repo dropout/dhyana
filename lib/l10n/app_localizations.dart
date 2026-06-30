@@ -446,6 +446,12 @@ abstract class AppLocalizations {
   /// **'Adatvédelmi nyilatkozatot'**
   String get loginLegalPart4;
 
+  /// Login go to profile button text.
+  ///
+  /// In hu, this message translates to:
+  /// **'Ugrás a profilodra'**
+  String get loginGoToProfile;
+
   /// A(z) profile fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:
