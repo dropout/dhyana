@@ -1,3 +1,4 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/init/init_result.dart';
 import 'package:dhyana/init/repositories.dart';
 import 'package:dhyana/init/services.dart';

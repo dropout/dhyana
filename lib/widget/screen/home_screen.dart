@@ -1,3 +1,4 @@
+import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/widget/context/smart_bloc_provider.dart';
 import 'package:dhyana/widget/home/home_screen_appbar.dart';
@@ -72,13 +73,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
       create: (context) => HomeScreenCubit(
-        initialState: timerSettings != null ? const HomeScreenState(
-          sessionType: SessionType.timer,
-        ) : null,
+        initialState: timerSettings != null
+            ? const HomeScreenState(sessionType: SessionType.timer)
+            : null,
         crashlyticsService: context.services.crashlyticsService,
       ),
-      builder: (context, state) =>
-        buildScaffolding(context, state),
+      builder: (context, state) => buildScaffolding(context, state),
     );
   }
 
@@ -98,22 +98,32 @@ class HomeScreen extends StatelessWidget {
   /// Builds the animated body that switches between the sitting and chanting
   /// settings views based on [HomeScreenState.sessionType].
   Widget buildBody(BuildContext context, HomeScreenState state) {
-    return AnimatedSwitcher(
-      duration: Durations.medium4,
-      // switchInCurve: Curves.fastLinearToSlowEaseIn,
-      // switchOutCurve: Curves.fastLinearToSlowEaseIn,
-      // layoutBuilder: (currentChild, previousChildren) {
-      //   return Stack(
-      //     alignment: Alignment.center,
-      //     children: [
-      //       ...previousChildren,
-      //       if (currentChild != null) currentChild,
-      //     ],
-      //   );
-      // },
-      child: switch (state.sessionType) {
-        SessionType.timer => buildTimerSettingsView(context, state),
-        SessionType.chanting => buildChantingSettingsView(context),
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, authState) {
+        SessionType sessionType = state.sessionType;
+        if (authState is! AuthStateSignedIn) {
+          sessionType = .timer;
+        }
+        return AnimatedSwitcher(
+          key: ValueKey(sessionType),
+          duration: Durations.medium4,      
+          // switchInCurve: Curves.fastLinearToSlowEaseIn,
+          // switchOutCurve: Curves.fastLinearToSlowEaseIn,
+          // layoutBuilder: (currentChild, previousChildren) {
+          //   return Stack(
+          //     alignment: Alignment.center,
+          //     children: [
+          //       ...previousChildren,
+          //       if (currentChild != null) currentChild,
+          //     ],
+          //   );
+          // },
+          child: switch (sessionType) {
+            SessionType.timer => buildTimerSettingsView(context, state),
+            SessionType.chanting => buildChantingSettingsView(context),
+          },
+        );
+
       },
     );
   }
@@ -139,10 +149,7 @@ class HomeScreen extends StatelessWidget {
   /// - [AppLoadingDisplay] while settings are loading.
   /// - [AppErrorDisplay] if an error occurred.
   /// - [TimerSettingsView] once settings are available.
-  Widget buildTimerSettingsView(
-    BuildContext context,
-    HomeScreenState state,
-  ) {
+  Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) {
     return SafeProfileSettings(
       key: ValueKey('timer_settings_branch'),
       builder: (context, profileSettings) =>

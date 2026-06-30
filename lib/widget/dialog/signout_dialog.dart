@@ -44,12 +44,12 @@ class SignoutDialog extends StatelessWidget {
             Future.delayed(Durations.medium1, () {
               if (context.mounted) {
                 context.showSuccessfulToast(
-                  AppLocalizations.of(context).signOutSuccessfulMessage
+                  context.l10n.signOutSuccessfulMessage
                 );
               }
             });
 
-            const HomeRoute().go(context);
+            HomeRoute(refresh: DateTime.now().millisecondsSinceEpoch).go(context);
             context.read<ProfileCubit>().clearData();
           },
         ),

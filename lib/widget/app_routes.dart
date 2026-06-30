@@ -76,9 +76,7 @@ class HomeRoute extends GoRouteData with $HomeRoute {
     final TimerSettings? timerSettings = ($extra is TimerSettings)
       ? $extra as TimerSettings
       : null;
-
     return HomeScreen(
-      key: ValueKey(refresh),
       timerSettings: timerSettings,
     );
   }

@@ -111,6 +111,8 @@ dev_dependencies:
 
 flutter:
   generate: true # For generating localizations?
+  config: 
+    enable-swift-package-manager: false #tflite not compatible with SPM yet, so disable it to avoid build errors
 
   assets:
     - assets/sounds/
