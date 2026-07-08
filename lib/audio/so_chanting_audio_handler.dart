@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/model/chanting_settings.dart';
@@ -48,8 +49,10 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
           final chantingSettings = ChantingSettings.fromJson(
             extras!['chantingSettings'] as Map<String, Object?>,
           );
-          final resourceUrls = extras['resourceUrls'] as Map<String, String>;
-          final duration = await setup(chantingSettings, resourceUrls);
+          final localAudioPaths =
+              (extras['localAudioPaths'] ?? extras['resourceUrls'])
+                  as Map<String, String>;
+          final duration = await setup(chantingSettings, localAudioPaths);
           return duration ?? Duration.zero;
         } catch (e) {
           throw ArgumentError('Invalid extras for `$action` action: $extras');
@@ -57,21 +60,26 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     }
   }
 
-  /// Loads all chants from URLs into the playlist and returns the duration
+  /// Loads all chants from local files into the playlist and returns the
   /// of the first track.
   Future<Duration?> setup(
     ChantingSettings settings,
-    Map<String, String> resourceUrls,
+    Map<String, String> localAudioPaths,
   ) async {
     await _clearPlaylist();
 
     final entries = <_PlaylistEntry>[];
     for (final chant in settings.selectedChants) {
-      final url = resourceUrls[chant.id];
-      if (url == null) {
-        throw ArgumentError('No URL found for chant: ${chant.id}');
+      final localPath = localAudioPaths[chant.id];
+      if (localPath == null) {
+        throw ArgumentError('No local audio path found for chant: ${chant.id}');
       }
-      final source = await soloud.loadUrl(url, mode: .memory);
+      final file = File(localPath);
+      if (!await file.exists()) {
+        throw FileSystemException('Local audio file not found', localPath);
+      }
+
+      final source = await soloud.loadFile(localPath, mode: LoadMode.disk);
       entries.add(
         _PlaylistEntry(
           source: source,

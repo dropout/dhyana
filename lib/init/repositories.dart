@@ -1,4 +1,6 @@
+import 'package:dhyana/cache/chant_cache_validator.dart';
 import 'package:dhyana/data_provider/auth/firebase_auth_provider.dart';
+import 'package:dhyana/data_provider/drift/drift_chant_cache_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_chants_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
 import 'package:dhyana/data_provider/firebase/firebase_presence_data_provider.dart';
@@ -6,7 +8,9 @@ import 'package:dhyana/data_provider/firebase/firebase_settings_data_provider.da
 import 'package:dhyana/data_provider/profile_data_provider.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/repository/auth_repository.dart';
+import 'package:dhyana/repository/chant_playback_repository.dart';
 import 'package:dhyana/repository/chants_repository.dart';
+import 'package:dhyana/repository/default/default_chant_playback_repository.dart';
 import 'package:dhyana/repository/firebase/firebase_auth_repository.dart';
 import 'package:dhyana/repository/firebase/firebase_chants_repository.dart';
 import 'package:dhyana/repository/firebase/firebase_profile_repository.dart';
@@ -19,6 +23,8 @@ import 'package:dhyana/repository/profile_repository.dart';
 import 'package:dhyana/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
+import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:dhyana/service/default/default_chant_cache_manager_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 
 /// Container class for all repositories used in the application.
@@ -32,6 +38,7 @@ class Repositories {
   final StatisticsRepository statisticsRepository;
   final SettingsRepository settingsRepository;
   final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
+  final ChantPlaybackRepository chantPlaybackRepository;
 
   const Repositories({
     required this.authRepository,
@@ -41,6 +48,7 @@ class Repositories {
     required this.statisticsRepository,
     required this.settingsRepository,
     required this.timerSettingsHistoryRepository,
+    required this.chantPlaybackRepository,
   });
 }
 
@@ -55,6 +63,7 @@ class RepositoriesBuilder {
   late StatisticsRepository _statisticsRepository;
   late SettingsRepository _settingsRepository;
   late TimerSettingsHistoryRepository _timerSettingsHistoryRepository;
+  late ChantPlaybackRepository _chantPlaybackRepository;
 
   // Default constructor initializing with Firebase implementations
   RepositoriesBuilder({
@@ -99,6 +108,24 @@ class RepositoriesBuilder {
     _timerSettingsHistoryRepository = FirebaseTimerSettingsHistoryRepository(
       firebaseProvider.firestore,
     );
+
+    final cacheManager = DefaultChantCacheManagerService(
+      storageDataProvider: storageDataProvider,
+    );
+    final cacheDataProvider = DriftChantCacheDataProvider(ChantCacheDatabase());
+
+    _chantPlaybackRepository = DefaultChantPlaybackRepository(
+      chantsDataProvider: FirebaseChantsDataProvider(
+        firebaseProvider.firestore,
+      ),
+      cacheDataProvider: cacheDataProvider,
+      storageDataProvider: storageDataProvider,
+      cacheManager: cacheManager,
+      cacheValidator: ChantCacheValidator(
+        cacheManager: cacheManager, 
+        cacheDataProvider: cacheDataProvider
+      ),
+    );
   }
 
   // Convenience methods to override default repositories
@@ -140,6 +167,11 @@ class RepositoriesBuilder {
     return this;
   }
 
+  RepositoriesBuilder chantPlaybackRepository(ChantPlaybackRepository repo) {
+    _chantPlaybackRepository = repo;
+    return this;
+  }
+
   // Build the final Repositories object
   Repositories build() {
     return Repositories(
@@ -150,6 +182,7 @@ class RepositoriesBuilder {
       statisticsRepository: _statisticsRepository,
       settingsRepository: _settingsRepository,
       timerSettingsHistoryRepository: _timerSettingsHistoryRepository,
+      chantPlaybackRepository: _chantPlaybackRepository,
     );
   }
 }

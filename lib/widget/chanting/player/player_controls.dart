@@ -130,7 +130,7 @@ class PlayerControls extends StatelessWidget {
             ),
             Gap.small(),
             PlayPauseButton(
-              isLoading: chantingState.isLoading,
+              isLoading: chantingState.loadingState == .loading,
               playbackState: chantingState.playbackState,
               onPressed: onPlayPausePressed
             ),

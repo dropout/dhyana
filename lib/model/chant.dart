@@ -1,3 +1,4 @@
+import 'package:dhyana/model/chant_asset_metadata.dart';
 import 'package:dhyana/model/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -15,8 +16,9 @@ sealed class Chant with _$Chant implements Model {
   const factory Chant({
     required String id,
     required String name,
+    required ChantMetaData metaData,
     @Default(0) int order,
-    @DurationConverter() required Duration length,
+    @DurationConverter() required Duration length,    
   }) = _Chant;
 
   factory Chant.fromJson(Map<String, Object?> json) =>

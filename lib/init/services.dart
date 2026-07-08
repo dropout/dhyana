@@ -1,5 +1,5 @@
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/data_provider/firebase/firebase_id_generator.dart';
+import 'package:dhyana/data_provider/firebase/tools/firebase_id_generator.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:dhyana/service/analytics_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';

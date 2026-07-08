@@ -12,12 +12,12 @@ class ChantingAudioService {
 
   Future<Duration> setup(
     ChantingSettings settings, 
-    Map<String, String> resourceUrls
+    Map<String, String> localAudioPaths
   ) async {
     final result = await audioHandler.customAction(
       SoLoudChantingAudioHandlerCustomAction.setup.name, {
         'chantingSettings': settings.toJson(),
-        'resourceUrls': resourceUrls,
+        'localAudioPaths': localAudioPaths,
       }
     );
     return result;

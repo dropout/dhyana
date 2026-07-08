@@ -292,6 +292,13 @@ class AppLocalizationsHu extends AppLocalizations {
       'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.';
 
   @override
+  String get clearCache => 'Gyorsítótár törlése';
+
+  @override
+  String get clearCacheDescription =>
+      'Törli az összes gyorsítótárban tárolt hang- és dalszövegfájlt a mantrákhoz. Ez felszabadítja a tárhelyet, de újra le kell töltened a fájlokat, ha újra szeretnéd lejátszani őket.';
+
+  @override
   String get profileStats => 'Statisztika';
 
   @override

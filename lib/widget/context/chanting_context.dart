@@ -37,6 +37,7 @@ class ChantingContext extends StatelessWidget {
           audioService: ChantingAudioService(services.audioHandler),
           lyricsService: services.lyricsService,
           resourceResolver: services.resourceResolver,
+          chantPlaybackRepository: repos.chantPlaybackRepository,
           crashlyticsService: services.crashlyticsService,
         );
 

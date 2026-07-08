@@ -445,6 +445,16 @@
     "description": "Enable Presence feature description.",
     "placeholders": {}
   },
+  "clearCache": "Clear cache",
+  "@clearCache": {
+    "description": "Clear cache button text.",
+    "placeholders": {}
+  },
+  "clearCacheDescription": "'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.'",
+  "@clearCacheDescription": {
+    "description": "Clear cache description.",
+    "placeholders": {}
+  },
   "profileStats": "Statistics",
   "@profileStats": {
     "description": "Profile statistics title.",

@@ -435,6 +435,17 @@
     "description": "A(z) usePresenceFeatureDescription fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "clearCache": "Gyorsítótár törlése",
+  "@clearCache": {
+    "description": "A(z) clearCache fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "clearCacheDescription": "Törli az összes gyorsítótárban tárolt hang- és dalszövegfájlt a mantrákhoz. Ez felszabadítja a tárhelyet, de újra le kell töltened a fájlokat, ha újra szeretnéd lejátszani őket.",
+  "@clearCacheDescription": {
+    "description": "A(z) clearCacheDescription fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+
   "profileStats": "Statisztika",
   "@profileStats": {
     "description": "A(z) profileStats fordítási kulcs leírása.",

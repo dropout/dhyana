@@ -5,6 +5,7 @@ import 'package:dhyana/widget/chanting/player/lyrics_view.dart';
 import 'package:dhyana/widget/chanting/player/player_controls.dart';
 import 'package:dhyana/widget/chanting/player/playlist_sheet.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -89,12 +90,18 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
+
     return Stack(
       fit: StackFit.expand,
       children: [
         Positioned.fill(
-          child: buildLyricsView(context),
+          child: switch (widget.chantingState.loadingState) {
+            .error => AppErrorDisplay(),
+            _ => buildLyricsView(context),
+          }
+
+          // child: buildLyricsView(context),
 
           // child: AnimatedCrossFade(
           //   firstChild: buildLyricsView(context),

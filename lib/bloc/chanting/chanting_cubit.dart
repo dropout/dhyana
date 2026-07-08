@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/enum/loading_state.dart';
+import 'package:dhyana/cache/caching_progress.dart';
 import 'package:dhyana/model/lyrics_document.dart';
+import 'package:dhyana/repository/chant_playback_repository.dart';
 import 'package:dhyana/service/chanting_audio_service.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
@@ -23,7 +24,10 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   final ChantingAudioService audioService;
   final LyricsService lyricsService;
   final ResourceResolver resourceResolver;
+  final ChantPlaybackRepository chantPlaybackRepository;
   final CrashlyticsService crashlyticsService;
+
+  Map<String, String> _localLyricsPaths = {};
 
   StreamSubscription<PlaybackState>? _playbackStateSub;
   StreamSubscription<MediaItem?>? _mediaItemSub;
@@ -34,6 +38,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     required this.audioService,
     required this.lyricsService,
     required this.resourceResolver,
+    required this.chantPlaybackRepository,
     required this.crashlyticsService,
   }) : super(
          ChantingState(
@@ -62,33 +67,63 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  Future<void> setup(
-    ChantingSettings chantingSettings,
-  ) async {
+  Future<void> setup(ChantingSettings chantingSettings) async {
     try {
       logger.t('Setting up ${chantingSettings.selectedChants.length} chants');
 
-      emit(state.copyWith(isLoading: true));
+      emit(state.copyWith(loadingState: .loading));
 
       await audioService.stop();
 
       // load audio
       final chants = chantingSettings.selectedChants;
-      final resourceUrls = <String, String>{};
+      final prepared = chantPlaybackRepository.preparePlayableAssets(
+        chants.map((chant) => chant.id).toList(growable: false),
+      );
 
-      for (var chant in chants) {
-        final url = await resourceResolver.getChantAudioUrl(chant.id);
-        resourceUrls[chant.id] = url;
+      late CachingProgress chantingProgress;
+      await for (final progress in prepared) {
+        chantingProgress = progress;
+        emit(
+          state.copyWith(
+            loadingProgress: state.loadingProgress.copyWith(
+              progress: progress.progress,
+            ),
+          ),
+        );
       }
 
-      // Duration of the first item in the playlist
-      await audioService.setup(chantingSettings, resourceUrls);
 
-      emit(state.copyWith(isLoading: false));
+      final resources = chantingProgress.results
+          .map((r) => r.localResources)
+          .toList();
+
+      final localAudioPaths = <String, String>{};
+      final localLyricsPaths = <String, String>{};
+
+      // TODO: Clean up this logic once we have a more robust way to handle cached chant resources
+      // for (final chant in chants) {
+      //   final resources = prepared[chant.id];
+      //   if (resources == null) {
+      //     throw StateError('No prepared resources found for chant ${chant.id}');
+      //   }
+      //   localAudioPaths[chant.id] = resources.audioLocalPath;
+      //   localLyricsPaths[chant.id] = resources.lyricsLocalPath;
+      // }
+
+      // _localLyricsPaths = localLyricsPaths;
+
+      // Duration of the first item in the playlist
+      // await audioService.setup(chantingSettings, localAudioPaths);
+
+      print('Chanting setup complete with ${resources.length} resources');
+      print('Final progress: $chantingProgress');
+
+      emit(state.copyWith(loadingState: .loaded));
     } catch (e, st) {
       emit(
         state.copyWith(
-          isLoading: false,
+          loadingState: .error,
           // playbackState: AudioPlaybackState.error,
         ),
       );
@@ -104,8 +139,11 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     try {
       logger.t('Loading lyrics for chant ID: $chantId');
       emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
-      final lyricsUrl = await resourceResolver.getChantLyricsUrl(chantId);
-      final lyricsDocument = await lyricsService.loadLyrics(lyricsUrl);
+      final lyricsPath = _localLyricsPaths[chantId];
+      if (lyricsPath == null || lyricsPath.isEmpty) {
+        throw StateError('No local lyrics path found for chant $chantId');
+      }
+      final lyricsDocument = await lyricsService.loadLyrics(lyricsPath);
 
       // User quickly pressed back button
       if (isClosed) return;

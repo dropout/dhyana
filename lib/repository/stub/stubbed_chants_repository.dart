@@ -1,4 +1,5 @@
 import 'package:dhyana/model/chant.dart';
+import 'package:dhyana/model/chant_asset_metadata.dart';
 import 'package:dhyana/repository/chants_repository.dart';
 import 'package:faker/faker.dart';
 
@@ -32,6 +33,19 @@ class StubbedChantsRepository implements ChantsRepository {
         order: index,
         name: chantName,
         length: Duration(minutes: 5 + index),
+        metaData: ChantMetaData(
+          id: _faker.guid.guid(),
+          audioVersion: 1,
+          lyricsVersion: 1,
+          coverVersion: 1,
+          audioSha256: _faker.randomGenerator.string(64),
+          lyricsSha256: _faker.randomGenerator.string(64),
+          coverSha256: _faker.randomGenerator.string(64),
+          audioBytes: 1024 * (5 + index),
+          lyricsBytes: 512 * (5 + index),
+          coverBytes: 256 * (5 + index),
+          updatedAt: DateTime.now().subtract(Duration(days: index)),
+        )
       );
     });
   }

@@ -614,6 +614,18 @@ abstract class AppLocalizations {
   /// **'Ha engedélyezve van, láthatod kikkel gyakorolsz együtt. Ilyenkor mások számára is látható leszel, hogy te is gyakorolsz.'**
   String get usePresenceFeatureDescription;
 
+  /// A(z) clearCache fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Gyorsítótár törlése'**
+  String get clearCache;
+
+  /// A(z) clearCacheDescription fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Törli az összes gyorsítótárban tárolt hang- és dalszövegfájlt a mantrákhoz. Ez felszabadítja a tárhelyet, de újra le kell töltened a fájlokat, ha újra szeretnéd lejátszani őket.'**
+  String get clearCacheDescription;
+
   /// A(z) profileStats fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:

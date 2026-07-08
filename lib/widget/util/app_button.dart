@@ -39,6 +39,36 @@ class AppButton extends StatelessWidget {
     );
   }
 
+  factory AppButton.medium({
+    required String text,
+    Color fColor = Colors.white,
+    Color bColor = Colors.black,
+    void Function()? onTap,
+  }) {
+    return AppButton(
+      text: text,
+      fColor: fColor,
+      bColor: bColor,
+      onTap: onTap,
+      buttonSize: AppButtonSize.medium,
+    );
+  }
+
+  factory AppButton.large({
+    required String text,
+    Color fColor = Colors.white,
+    Color bColor = Colors.black,
+    void Function()? onTap,
+  }) {
+    return AppButton(
+      text: text,
+      fColor: fColor,
+      bColor: bColor,
+      onTap: onTap,
+      buttonSize: AppButtonSize.large,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final (textStyle, padding) = _getButtonParams(context, buttonSize);

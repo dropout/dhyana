@@ -1,5 +1,26 @@
 part of 'chanting_cubit.dart';
 
+enum LoadingState {
+  loading,
+  loaded,
+  error,
+}
+
+// TODO: Cleanup to remove redundancy with [CachingProgress] and [ChantLoadingProgress]
+@freezed
+sealed class ChantLoadingProgress with _$ChantLoadingProgress {
+  const ChantLoadingProgress._();
+
+  const factory ChantLoadingProgress({
+    @Default(0) int targetChants,
+    @Default(0) int completedChants,
+    @Default(0.0) double progress,    
+  }) = _ChantLoadingProgress;
+
+}
+
+
+
 @freezed
 sealed class ChantingState with _$ChantingState {
 
@@ -9,11 +30,14 @@ sealed class ChantingState with _$ChantingState {
 
     // settings
     required ChantingSettings chantingSettings,
+
+    // loading
+    required PlaybackState playbackState,
+    @Default(ChantLoadingProgress()) ChantLoadingProgress loadingProgress,
     
     // playback
     @Default(Duration.zero) Duration elapsedTime,
-    @Default(false) bool isLoading,
-    required PlaybackState playbackState,
+    @Default(LoadingState.loading) LoadingState loadingState,  
     MediaItem? mediaItem,
     @Default(Duration.zero) Duration outputLatency,
     

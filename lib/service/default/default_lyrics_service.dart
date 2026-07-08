@@ -12,6 +12,14 @@ class DefaultLyricsService implements LyricsService {
 
   @override
   Future<LyricsDocument> loadLyrics(String lyricsResourceUrl) async {
+    if (_isRemoteUrl(lyricsResourceUrl)) {
+      return _loadLyricsFromRemote(lyricsResourceUrl);
+    }
+
+    return _loadLyricsFromLocalFile(lyricsResourceUrl);
+  }
+
+  Future<LyricsDocument> _loadLyricsFromRemote(String lyricsResourceUrl) async {
     final HttpClient httpClient = HttpClient();
     final HttpClientRequest request = await httpClient.getUrl(
       Uri.parse(lyricsResourceUrl),
@@ -26,8 +34,26 @@ class DefaultLyricsService implements LyricsService {
     httpClient.close();
 
     final assaDocument = _assaParser.parse(lyricsContent);
-    
+
     return _convertAssaToLyricsDocument(assaDocument);
+  }
+
+  Future<LyricsDocument> _loadLyricsFromLocalFile(
+    String absoluteFilePath,
+  ) async {
+    final file = File(absoluteFilePath);
+    if (!await file.exists()) {
+      throw FileSystemException('Lyrics file not found', absoluteFilePath);
+    }
+
+    final lyricsContent = await file.readAsString();
+    final assaDocument = _assaParser.parse(lyricsContent);
+
+    return _convertAssaToLyricsDocument(assaDocument);
+  }
+
+  bool _isRemoteUrl(String value) {
+    return value.startsWith('http://') || value.startsWith('https://');
   }
 
   LyricsDocument _convertAssaToLyricsDocument(AssaDocument assaDocument) {
@@ -48,6 +74,4 @@ class DefaultLyricsService implements LyricsService {
 
     return LyricsDocument(lines: lines);
   }
-
-
 }

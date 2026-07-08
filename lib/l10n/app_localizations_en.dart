@@ -292,6 +292,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'When enabled, user will be able to see other users who are currently practicing.';
 
   @override
+  String get clearCache => 'Clear cache';
+
+  @override
+  String get clearCacheDescription =>
+      '\'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.\'';
+
+  @override
   String get profileStats => 'Statistics';
 
   @override

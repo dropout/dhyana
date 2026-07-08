@@ -49,10 +49,10 @@ dependencies:
   smooth_page_indicator: ^2.0.1
 
   # Additional functionalities
+  drift: ^2.30.0
   audio_service: ^0.18.18
   audio_session: ^0.2.3
   flutter_soloud: ^4.0.5
-
   wakelock_plus: ^1.1.1
   url_launcher: ^6.1.5
   shared_preferences: ^2.0.5
@@ -107,6 +107,7 @@ dev_dependencies:
   bloc_test: ^10.0.0
   mocktail: ^1.0.3
   mocktail_image_network: ^1.2.0
+  drift_dev: ^2.30.0
 
 
 flutter:

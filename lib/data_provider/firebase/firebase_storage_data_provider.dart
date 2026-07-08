@@ -1,11 +1,10 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dhyana/data_provider/storage_data_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-
 class FirebaseStorageDataProvider implements StorageDataProvider {
-
   final FirebaseStorage storage;
 
   const FirebaseStorageDataProvider(this.storage);
@@ -28,9 +27,18 @@ class FirebaseStorageDataProvider implements StorageDataProvider {
   }
 
   @override
+  Future<DownloadTask> downloadFile({
+    required String storagePath,
+    required String destinationPath,
+  }) async {
+    final storageFileRef = storage.ref().child(storagePath);
+    return storageFileRef.writeToFile(File(destinationPath));    
+  }
+
+  @override
   Future<List<Reference>> deleteFolder(String path) async {
     ListResult result = await storage.ref(path).listAll();
-    for(var item in result.items) {
+    for (var item in result.items) {
       await item.delete();
     }
     return result.items;
@@ -41,4 +49,10 @@ class FirebaseStorageDataProvider implements StorageDataProvider {
     return storage.ref('path').delete();
   }
 
+  Future<List<Reference>> _listAllFiles(String folderPath) async {
+    final storageRef = storage.ref().child(folderPath);
+    final listResult = await storageRef.listAll();
+    return listResult.items.toList();
+  }
+  
 }
