@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:dhyana/cache/caching_progress.dart';
 import 'package:dhyana/cache/chant_cache_validator.dart';
 import 'package:dhyana/data_provider/chants_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/tools/batch_download_task.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/enum/cache_download_state.dart';
+import 'package:dhyana/model/caching_progress.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/data_provider/chant_cache_data_provider.dart';
@@ -75,7 +75,12 @@ class DefaultChantPlaybackRepository
         ));
       }
 
-      yield CachingProgress(progress: 1.0, results: results);
+      yield CachingProgress(
+        progress: 1.0,
+        totalTasks: results.length,
+        completedTasks: results.length,
+        results: results,
+      );
       return;
     }
 
@@ -112,10 +117,17 @@ class DefaultChantPlaybackRepository
     // Assemble a BatchDownloadTask to manage the download of all tasks
     final batchDownloadTask = BatchDownloadTask(downloadTasks);
 
+
     // Yield progress updates as the batch download progresses
     await for (final progress in batchDownloadTask.progressStream) {
-      // Ensure that progress doesn't reach 1.0 until all tasks are complete
-      yield CachingProgress(progress: max(progress, 0.99), results: []);
+      // Ensure that progress doesn't reach 1.0 until all downloads are validated, 
+      // to avoid premature completion
+      yield CachingProgress(
+        progress: min(progress, 0.99), 
+        totalTasks: batchDownloadTask.totalTasks,
+        completedTasks: batchDownloadTask.completedTasks,
+        results: []
+      );
     }
 
     // Wait for all download validation futures to complete before yielding the final progress update
@@ -140,8 +152,13 @@ class DefaultChantPlaybackRepository
       );
     }
 
-    yield CachingProgress(progress: 1.0, results: results);
-
+    yield CachingProgress(
+      progress: 1.0,
+      totalTasks: batchDownloadTask.totalTasks,
+      completedTasks: batchDownloadTask.completedTasks,
+      results: results
+    );
+    batchDownloadTask.dispose();
     logger.t('All chant assets have been cached and validated successfully.');
   }
 
@@ -323,7 +340,7 @@ class DefaultChantPlaybackRepository
     return (
       chantId: chant.id,
       localResources: ChantLocalResources(
-        contentId: chant.id,
+        chant: chant,        
         audioLocalPath: audioPath,
         lyricsLocalPath: lyricsPath,
         audioVersion: metadata.audioVersion,

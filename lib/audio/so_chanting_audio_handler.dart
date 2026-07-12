@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/model/chanting_settings.dart';
+import 'package:dhyana/model/chant_local_resources.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
 enum SoLoudChantingAudioHandlerCustomAction { setup }
@@ -44,16 +46,16 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       orElse: () => throw UnimplementedError('Unknown custom action: $name'),
     );
     switch (action) {
-      case SoLoudChantingAudioHandlerCustomAction.setup:
+      case .setup:
         try {
-          final chantingSettings = ChantingSettings.fromJson(
-            extras!['chantingSettings'] as Map<String, Object?>,
-          );
-          final localAudioPaths =
-              (extras['localAudioPaths'] ?? extras['resourceUrls'])
-                  as Map<String, String>;
-          final duration = await setup(chantingSettings, localAudioPaths);
-          return duration ?? Duration.zero;
+          // Expecting extras to contain a JSON-encoded list of ChantLocalResources
+          final resourcesJson = extras!['resources'] as String?;
+          final List<ChantLocalResources> resources = resourcesJson != null
+            ? (jsonDecode(resourcesJson) as List)
+                .map((item) => ChantLocalResources.fromJson(item as Map<String, Object?>))
+                .toList()
+            : [];
+          return await setup(resources);
         } catch (e) {
           throw ArgumentError('Invalid extras for `$action` action: $extras');
         }
@@ -61,25 +63,28 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
   }
 
   /// Loads all chants from local files into the playlist and returns the
-  /// of the first track.
+  /// duration of the first track.
   Future<Duration?> setup(
-    ChantingSettings settings,
-    Map<String, String> localAudioPaths,
+    List<ChantLocalResources> resources,
   ) async {
     await _clearPlaylist();
 
+    // Guard against empty resources list
+    if (resources.isEmpty) {
+      return Duration.zero;
+    }
+
     final entries = <_PlaylistEntry>[];
-    for (final chant in settings.selectedChants) {
-      final localPath = localAudioPaths[chant.id];
-      if (localPath == null) {
-        throw ArgumentError('No local audio path found for chant: ${chant.id}');
-      }
+    for (final r in resources) {
+      final chant = r.chant;
+      final localPath = r.audioLocalPath;
       final file = File(localPath);
       if (!await file.exists()) {
         throw FileSystemException('Local audio file not found', localPath);
       }
 
-      final source = await soloud.loadFile(localPath, mode: LoadMode.disk);
+      // TODO: Does loading a file consume a lot of memory? Should we load on demand instead?
+      final source = await soloud.loadFile(localPath);
       entries.add(
         _PlaylistEntry(
           source: source,
@@ -104,7 +109,11 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
 
   @override
   Future<void> play() async {
-    if (_playlist.isEmpty || _currentIndex < 0) return;
+    if (_playlist.isEmpty || _currentIndex < 0) {
+      debugPrint('No track to play. Playlist is empty or index is invalid.');
+      return;
+    }
+    
 
     if (_soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)) {
       soloud.setPause(_soundHandle!, false);
@@ -247,20 +256,6 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     }
     _playlist = [];
     _currentIndex = -1;
-  }
-
-  int getIntervalMs(Duration duration) {
-    if (duration <= const Duration(seconds: 30)) {
-      return 32;
-    } else if (duration <= const Duration(minutes: 1)) {
-      return 100;
-    } else if (duration <= const Duration(minutes: 5)) {
-      return 250;
-    } else if (duration <= const Duration(minutes: 10)) {
-      return 500;
-    } else {
-      return 1000;
-    }
   }
 
   void _startPositionTimer({int intervalMs = 250}) {

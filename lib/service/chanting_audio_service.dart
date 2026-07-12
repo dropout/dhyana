@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/so_chanting_audio_handler.dart';
-import 'package:dhyana/model/chanting_settings.dart';
+import 'package:dhyana/model/chant_local_resources.dart';
 
 class ChantingAudioService {
   final AppAudioHandler audioHandler;
@@ -11,13 +13,11 @@ class ChantingAudioService {
   }
 
   Future<Duration> setup(
-    ChantingSettings settings, 
-    Map<String, String> localAudioPaths
+    List<ChantLocalResources> resources,
   ) async {
     final result = await audioHandler.customAction(
       SoLoudChantingAudioHandlerCustomAction.setup.name, {
-        'chantingSettings': settings.toJson(),
-        'localAudioPaths': localAudioPaths,
+        'resources': jsonEncode(resources),
       }
     );
     return result;

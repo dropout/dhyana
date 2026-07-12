@@ -1,3 +1,4 @@
+import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,7 @@ sealed class ChantLocalResources with _$ChantLocalResources implements Model {
   const ChantLocalResources._();
 
   const factory ChantLocalResources({
-    required String contentId,
+    required Chant chant,
     required String audioLocalPath,
     required String lyricsLocalPath,
     required int audioVersion,
@@ -21,5 +22,5 @@ sealed class ChantLocalResources with _$ChantLocalResources implements Model {
       _$ChantLocalResourcesFromJson(json);
 
   @override
-  String get id => contentId;
+  String get id => chant.id;
 }

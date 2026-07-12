@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/cache/caching_progress.dart';
+import 'package:dhyana/enum/loading_state.dart';
+import 'package:dhyana/model/caching_progress.dart';
+import 'package:dhyana/model/chant_local_resources.dart';
 import 'package:dhyana/model/lyrics_document.dart';
 import 'package:dhyana/repository/chant_playback_repository.dart';
 import 'package:dhyana/service/chanting_audio_service.dart';
@@ -27,8 +29,6 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   final ChantPlaybackRepository chantPlaybackRepository;
   final CrashlyticsService crashlyticsService;
 
-  Map<String, String> _localLyricsPaths = {};
-
   StreamSubscription<PlaybackState>? _playbackStateSub;
   StreamSubscription<MediaItem?>? _mediaItemSub;
 
@@ -41,11 +41,11 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     required this.chantPlaybackRepository,
     required this.crashlyticsService,
   }) : super(
-         ChantingState(
-           chantingSettings: chantingSettings,
-           playbackState: audioService.playbackState,
-         ),
-       ) {
+    ChantingState(
+      chantingSettings: chantingSettings,
+      playbackState: audioService.playbackState,
+    ),
+  ) {
     _init();
   }
 
@@ -67,70 +67,59 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
+  /// Sets up the chanting session by caching chants to local storage and 
+  /// preparing the audio service.
   Future<void> setup(ChantingSettings chantingSettings) async {
     try {
       logger.t('Setting up ${chantingSettings.selectedChants.length} chants');
 
       emit(state.copyWith(loadingState: .loading));
 
+      // Stop any existing playback before setting up new chants
       await audioService.stop();
 
-      // load audio
+      // Start caching and preparing chants for playback
       final chants = chantingSettings.selectedChants;
       final prepared = chantPlaybackRepository.preparePlayableAssets(
         chants.map((chant) => chant.id).toList(growable: false),
       );
 
-      late CachingProgress chantingProgress;
+      // Update the state with caching progress as it occurs
+      late CachingProgress cachingProgress;
       await for (final progress in prepared) {
-        chantingProgress = progress;
-        emit(
-          state.copyWith(
-            loadingProgress: state.loadingProgress.copyWith(
-              progress: progress.progress,
-            ),
+        cachingProgress = progress;
+        emit(              
+          state.copyWith(            
+            cachingProgress: cachingProgress,
           ),
         );
       }
 
+      // Take the final results and prepare the audio service
+      List<ChantLocalResources> resources = cachingProgress.results
+        .map((r) => r.localResources)
+        .toList();
+      await audioService.setup(resources);
 
-      final resources = chantingProgress.results
-          .map((r) => r.localResources)
-          .toList();
+      emit(
+        state.copyWith(
+          loadingState: .loaded,
+          cachingProgress: cachingProgress,
+          chantResources: resources,
+        ),
+      );
 
-      final localAudioPaths = <String, String>{};
-      final localLyricsPaths = <String, String>{};
-
-      // TODO: Clean up this logic once we have a more robust way to handle cached chant resources
-      // for (final chant in chants) {
-      //   final resources = prepared[chant.id];
-      //   if (resources == null) {
-      //     throw StateError('No prepared resources found for chant ${chant.id}');
-      //   }
-      //   localAudioPaths[chant.id] = resources.audioLocalPath;
-      //   localLyricsPaths[chant.id] = resources.lyricsLocalPath;
-      // }
-
-      // _localLyricsPaths = localLyricsPaths;
-
-      // Duration of the first item in the playlist
-      // await audioService.setup(chantingSettings, localAudioPaths);
-
-      print('Chanting setup complete with ${resources.length} resources');
-      print('Final progress: $chantingProgress');
-
-      emit(state.copyWith(loadingState: .loaded));
+      logger.t('Chanting setup complete with ${resources.length} chants');
     } catch (e, st) {
       emit(
         state.copyWith(
           loadingState: .error,
-          // playbackState: AudioPlaybackState.error,
         ),
       );
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
-        reason: 'Error setting up chants',
+        reason: 'Error setting up chants: ${e.toString()}',
       );
     }
   }
@@ -139,10 +128,10 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     try {
       logger.t('Loading lyrics for chant ID: $chantId');
       emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
-      final lyricsPath = _localLyricsPaths[chantId];
-      if (lyricsPath == null || lyricsPath.isEmpty) {
-        throw StateError('No local lyrics path found for chant $chantId');
-      }
+      final lyricsPath = state.chantResources
+        .firstWhere((r) => r.id == chantId)
+        .lyricsLocalPath;
+
       final lyricsDocument = await lyricsService.loadLyrics(lyricsPath);
 
       // User quickly pressed back button
@@ -200,6 +189,8 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     logger.t('Media item changed: ${mediaItem.title}');
   }
 
+  /// When using a Bluetooth headset, we need to account for the output latency 
+  /// to keep the lyrics in sync with the audio.
   void _updateOutputLatency() async {
     final latency = await audioService.outputLatency;
     emit(state.copyWith(outputLatency: latency));
@@ -222,6 +213,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     logger.t('Seek to position: ${position.formatHHMMSSmm()}');
   }
 
+  /// Seeks to the start of the specified lyrics line index.
   Future<void> seekToLine(int lineIndex) async {
     final targetPosition = state.lyricsDocument?.lines[lineIndex].start;
     if (targetPosition != null && lineIndex != state.activeLineIndex) {

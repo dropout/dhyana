@@ -6,6 +6,7 @@ import 'package:dhyana/widget/chanting/player/player_controls.dart';
 import 'package:dhyana/widget/chanting/player/playlist_sheet.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -90,16 +91,16 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   }
 
   @override
-  Widget build(BuildContext context) {    
-
+  Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
         Positioned.fill(
           child: switch (widget.chantingState.loadingState) {
+            .loading => buildLoadingView(context),
             .error => AppErrorDisplay(),
             _ => buildLyricsView(context),
-          }
+          },
 
           // child: buildLyricsView(context),
 
@@ -136,16 +137,36 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     );
   }
 
+  Widget buildLoadingView(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Preparing chants assets... ${widget.chantingState.cachingProgress.completedTasks} / ${widget.chantingState.cachingProgress.totalTasks}',
+          style: context.theme.textTheme.bodyMedium?.copyWith(color: Colors.white)
+        ),
+        Gap.small(),
+        FractionallySizedBox(
+          widthFactor: 0.75,
+          // padding: const EdgeInsets.all(DesignSpec.paddingLg),
+          child: LinearProgressIndicator(
+            backgroundColor: Colors.grey.shade600,
+            color: Colors.white,
+            value: widget.chantingState.cachingProgress.progress,
+          ),
+        ),    
+      ]
+    );
+  }
+
   Widget buildLyricsView(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return LyricsView(          
+        return LyricsView(
           chantingState: widget.chantingState,
           maxWidth: constraints.maxWidth,
         );
       },
     );
-
   }
 
   Widget buildControls(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:dhyana/cache/caching_progress.dart';
+import 'package:dhyana/model/caching_progress.dart';
 
 abstract interface class ChantPlaybackRepository {
 

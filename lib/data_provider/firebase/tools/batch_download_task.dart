@@ -91,6 +91,9 @@ class BatchDownloadTask extends ChangeNotifier {
     return downloadedBytes / totalBytes;
   }
 
+  int get totalTasks => _tasks.length;
+  int get completedTasks => _tasks.where((t) => t.snapshot.state == TaskState.success).length;
+
   @override
   void dispose() {
     _progressController.close();
