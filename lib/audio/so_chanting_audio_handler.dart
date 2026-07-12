@@ -10,9 +10,8 @@ import 'package:flutter_soloud/flutter_soloud.dart';
 enum SoLoudChantingAudioHandlerCustomAction { setup }
 
 class _PlaylistEntry {
-  final AudioSource source;
+  final ChantLocalResources source;
   final MediaItem mediaItem;
-
   const _PlaylistEntry({required this.source, required this.mediaItem});
 }
 
@@ -26,7 +25,10 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
 
   List<_PlaylistEntry> _playlist = [];
   int _currentIndex = -1;
+
   SoundHandle? _soundHandle;
+  AudioSource? _currentSource;
+
   StreamSubscription<void>? _trackEndedSub;
   Timer? _positionTimer;
 
@@ -83,11 +85,9 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
         throw FileSystemException('Local audio file not found', localPath);
       }
 
-      // TODO: Does loading a file consume a lot of memory? Should we load on demand instead?
-      final source = await soloud.loadFile(localPath);
       entries.add(
         _PlaylistEntry(
-          source: source,
+          source: r,
           mediaItem: MediaItem(
             id: chant.id,
             title: chant.name,
@@ -113,8 +113,6 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       debugPrint('No track to play. Playlist is empty or index is invalid.');
       return;
     }
-    
-
     if (_soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)) {
       soloud.setPause(_soundHandle!, false);
     } else {
@@ -155,8 +153,8 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       await soloud.stop(_soundHandle!);
     }
     _soundHandle = null;
-
     mediaItem.add(null);
+    
     playbackState.add(
       PlaybackState(
         controls: [MediaControl.play],
@@ -195,18 +193,51 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     return !soloud.getPause(_soundHandle!);
   }
 
+  Future<void> _createAudioSource(String localPath) async {
+    playbackState.add(
+      PlaybackState(
+        controls: [],
+        processingState: AudioProcessingState.loading,
+        playing: false,
+        updatePosition: Duration.zero,
+      ),
+    );
+
+    // dispose the previous source if it exists
+    if (_currentSource != null) {
+      soloud.disposeSource(_currentSource!);
+      _currentSource = null;
+    }
+    // load the new source
+    _currentSource = await soloud.loadFile(localPath);
+
+    playbackState.add(
+      PlaybackState(
+        controls: [],
+        processingState: AudioProcessingState.idle,
+        playing: false,
+        updatePosition: Duration.zero,
+      ),
+    );
+  }
+
   Future<void> _playCurrentTrack() async {
     if (_playlist.isEmpty ||
         _currentIndex < 0 ||
         _currentIndex >= _playlist.length) {
       return;
     }
-    final entry = _playlist[_currentIndex];
-    _soundHandle = soloud.play(entry.source);
-    _trackEndedSub?.cancel();
-    _trackEndedSub = entry.source.allInstancesFinished.listen((_) {
-      _onTrackEnded();
-    });
+
+    if (_currentSource != null) {
+      _soundHandle = soloud.play(_currentSource!);
+      _trackEndedSub?.cancel();
+      _trackEndedSub = _currentSource?.allInstancesFinished.listen((_) {
+        _onTrackEnded();
+      });
+    } else {
+      debugPrint('Current source is null. Cannot play track.');
+    }
+
   }
 
   void _onTrackEnded() {
@@ -249,11 +280,12 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
   Future<void> _clearPlaylist() async {
     _stopPositionTimer();
     await _stopCurrentHandle();
-    for (final entry in _playlist) {
-      if (soloud.isInitialized) {
-        await soloud.disposeSource(entry.source);
-      }
+    
+    if (soloud.isInitialized && _currentSource != null) {
+      // only dispose the source if it is valid and initialized        
+      await soloud.disposeSource(_currentSource!);
     }
+    
     _playlist = [];
     _currentIndex = -1;
   }
@@ -307,10 +339,8 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       soloud.stop(_soundHandle!);
     }
     _soundHandle = null;
-    if (soloud.isInitialized) {
-      for (final entry in _playlist) {
-        soloud.disposeSource(entry.source);
-      }
+    if (soloud.isInitialized && _currentSource != null) {
+      soloud.disposeSource(_currentSource!);
     }
     _playlist = [];
     _currentIndex = -1;

@@ -91,25 +91,36 @@ class _LyricsViewState extends State<LyricsView> {
       }
     }
 
-    // Update line height when the lyrics document is loaded
+    // Update line height when change there is a change in the lyrics document 
     if (widget.chantingState.lyricsDocument !=
-        oldWidget.chantingState.lyricsDocument) {
-      final lh = <double>[];
-      for (final line in widget.chantingState.lyricsDocument?.lines ?? []) {
-        final height = calculateTextHeight(
-          line.text,
-          context.theme.textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-          widget.maxWidth,
-          LyricLine.linePadding,
-        );
-        lh.add(height);
-      }
+        oldWidget.chantingState.lyricsDocument) {             
       setState(() {
-        _lyricLineHeights = lh;
+        _lyricLineHeights = _calculateLyricLineHeights();
+      });
+    } else if (_lyricLineHeights.isEmpty &&
+        widget.chantingState.lyricsDocument?.lines.isNotEmpty == true) {
+      // If the lyric line heights are empty but the lyrics document is loaded,
+      // calculate the line heights.
+      setState(() {
+        _lyricLineHeights = _calculateLyricLineHeights();
       });
     }
+  }
+
+  List<double> _calculateLyricLineHeights() {
+    final lh = <double>[];
+    for (final line in widget.chantingState.lyricsDocument?.lines ?? []) {
+      final height = calculateTextHeight(
+        line.text,
+        context.theme.textTheme.headlineSmall!.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
+        widget.maxWidth,
+        LyricLine.linePadding,
+      );
+      lh.add(height);
+    }
+    return lh;
   }
 
   /// Handler for when the isScrolling on [ScrollController] changes.

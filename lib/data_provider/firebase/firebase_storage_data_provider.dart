@@ -45,14 +45,7 @@ class FirebaseStorageDataProvider implements StorageDataProvider {
   }
 
   @override
-  Future<void> deleteFile(String path) {
-    return storage.ref('path').delete();
-  }
+  Future<void> deleteFile(String path) =>
+      storage.ref(path).delete();
 
-  Future<List<Reference>> _listAllFiles(String folderPath) async {
-    final storageRef = storage.ref().child(folderPath);
-    final listResult = await storageRef.listAll();
-    return listResult.items.toList();
-  }
-  
 }

@@ -41,11 +41,11 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     required this.chantPlaybackRepository,
     required this.crashlyticsService,
   }) : super(
-    ChantingState(
-      chantingSettings: chantingSettings,
-      playbackState: audioService.playbackState,
-    ),
-  ) {
+         ChantingState(
+           chantingSettings: chantingSettings,
+           playbackState: audioService.playbackState,
+         ),
+       ) {
     _init();
   }
 
@@ -67,7 +67,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  /// Sets up the chanting session by caching chants to local storage and 
+  /// Sets up the chanting session by caching chants to local storage and
   /// preparing the audio service.
   Future<void> setup(ChantingSettings chantingSettings) async {
     try {
@@ -88,17 +88,13 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       late CachingProgress cachingProgress;
       await for (final progress in prepared) {
         cachingProgress = progress;
-        emit(              
-          state.copyWith(            
-            cachingProgress: cachingProgress,
-          ),
-        );
+        emit(state.copyWith(cachingProgress: cachingProgress));
       }
 
       // Take the final results and prepare the audio service
       List<ChantLocalResources> resources = cachingProgress.results
-        .map((r) => r.localResources)
-        .toList();
+          .map((r) => r.localResources)
+          .toList();
       await audioService.setup(resources);
 
       emit(
@@ -111,11 +107,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
       logger.t('Chanting setup complete with ${resources.length} chants');
     } catch (e, st) {
-      emit(
-        state.copyWith(
-          loadingState: .error,
-        ),
-      );
+      emit(state.copyWith(loadingState: .error));
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -129,8 +121,8 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       logger.t('Loading lyrics for chant ID: $chantId');
       emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
       final lyricsPath = state.chantResources
-        .firstWhere((r) => r.id == chantId)
-        .lyricsLocalPath;
+          .firstWhere((r) => r.id == chantId)
+          .lyricsLocalPath;
 
       final lyricsDocument = await lyricsService.loadLyrics(lyricsPath);
 
@@ -189,7 +181,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     logger.t('Media item changed: ${mediaItem.title}');
   }
 
-  /// When using a Bluetooth headset, we need to account for the output latency 
+  /// When using a Bluetooth headset, we need to account for the output latency
   /// to keep the lyrics in sync with the audio.
   void _updateOutputLatency() async {
     final latency = await audioService.outputLatency;

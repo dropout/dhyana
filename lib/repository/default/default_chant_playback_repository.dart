@@ -252,10 +252,6 @@ class DefaultChantPlaybackRepository
       downloadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
         switch (snapshot.state) {
           case TaskState.running:
-            logger.t(
-              'Download progress for chant asset ${chant.id} - ${assetType.name}: '
-              '${(snapshot.bytesTransferred / snapshot.totalBytes * 100).toStringAsFixed(2)}%',
-            );
             break;
           case TaskState.success:
             logger.t(
