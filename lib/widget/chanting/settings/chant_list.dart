@@ -94,6 +94,7 @@ class _ChantListState extends State<ChantList> {
           animation: animation,
           builder: (BuildContext context, Widget? child) {
             return Material(
+              color: Colors.transparent,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white.withAlpha((animation.value * 40).toInt()),
@@ -108,7 +109,10 @@ class _ChantListState extends State<ChantList> {
               ),
             );
           },
-          child: child,
+          child: ChantCard(
+            index: index,
+            chant: _chants[index].chant,              
+          ),
         );
       },
     );
