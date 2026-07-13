@@ -102,6 +102,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
           loadingState: .loaded,
           cachingProgress: cachingProgress,
           chantResources: resources,
+          startTime: DateTime.now(),
         ),
       );
 
@@ -157,7 +158,23 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   }
 
   void _onPlaybackStateChanged(PlaybackState pbState) {
-    emit(state.copyWith(playbackState: pbState));
+
+    // Update the elapsed session time based on the PlaybackState.updateTime
+    // by comparing previous and current PlaybackState.updateTime 
+    // only when the audio is playing.
+    var elapsedSessionTime = state.elapsedSessionTime;
+    if (state.playbackState.playing == true && pbState.playing == true) {
+      final previousUpdateTime = state.playbackState.updateTime;
+      final currentUpdateTime = pbState.updateTime;
+      elapsedSessionTime += currentUpdateTime.difference(previousUpdateTime);
+    }
+    
+    emit(
+      state.copyWith(
+        playbackState: pbState, 
+        elapsedSessionTime: elapsedSessionTime
+      )
+    );
 
     // Only update while playing
     if (pbState.playing) {
@@ -168,6 +185,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
         pbState.queueIndex ==
             state.chantingSettings.selectedChants.length - 1) {
       logger.t('Chanting session completed $pbState');
+      emit(state.copyWith(endTime: DateTime.now()));
       return;
     } else if (pbState.processingState == AudioProcessingState.completed) {
       logger.t('Track completed, moving to next track');

@@ -29,6 +29,7 @@ sealed class ChantingState with _$ChantingState {
     // session data
     DateTime? startTime,
     DateTime? endTime,
+    @Default(Duration.zero) Duration elapsedSessionTime,
 
   }) = _ChantingState;
 

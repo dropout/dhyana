@@ -43,25 +43,19 @@ class ChantingScreen extends StatelessWidget {
         );
       },
       listenWhen: (prevState, currentState) {
-        return (
-          prevState.playbackState.processingState !=
-            AudioProcessingState.completed &&
-          currentState.playbackState.processingState ==
-              AudioProcessingState.completed
-        );
+        return (prevState.playbackState.processingState !=
+                AudioProcessingState.completed &&
+            currentState.playbackState.processingState ==
+                AudioProcessingState.completed);
       },
       listener: (context, state) {
-        final elapsedTime = state.chantingSettings.selectedChants.fold(
-          Duration.zero,
-          (total, chant) => total + chant.length,
-        );
         Session session = Session(
           id: context.services.idGeneratorService.sessionId(),
           type: SessionType.chanting,
           chantingSettings: state.chantingSettings,
-          startTime: state.startTime ?? DateTime.now().subtract(elapsedTime),
+          startTime: state.startTime ?? DateTime.now().subtract(state.elapsedSessionTime),
           endTime: state.endTime ?? DateTime.now(),
-          duration: elapsedTime,
+          duration: state.elapsedSessionTime,
         );
         SessionCompletedRoute($extra: session).replace(context);
       },
