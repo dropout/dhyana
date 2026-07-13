@@ -3,17 +3,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:dhyana/audio/so_chanting_audio_resource_manager.dart';
+import 'package:dhyana/audio/so_chanting_playlist_manager.dart';
+import 'package:dhyana/audio/so_chanting_playback_reporter.dart';
 import 'package:dhyana/model/chant_local_resources.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
 enum SoLoudChantingAudioHandlerCustomAction { setup }
-
-class _PlaylistEntry {
-  final ChantLocalResources source;
-  final MediaItem mediaItem;
-  const _PlaylistEntry({required this.source, required this.mediaItem});
-}
 
 /// Bridges the OS media session with audio playback using flutter_soloud.
 /// Manually manages a playlist since flutter_soloud has no built-in
@@ -23,20 +20,46 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
 
   final SoLoud soloud;
 
-  List<_PlaylistEntry> _playlist = [];
-  int _currentIndex = -1;
+  late final SoChantingAudioResourceManager _audioResourceManager;
+  late final SoChantingPlaylistManager _playlistManager;
+  late final SoChantingPlaybackReporter _playbackReporter;
 
   SoundHandle? _soundHandle;
-  AudioSource? _currentSource;
 
   StreamSubscription<void>? _trackEndedSub;
-  Timer? _positionTimer;
 
-  SoLoudChantingAudioHandler({required this.soloud})
+  SoLoudChantingAudioHandler({
+    required this.soloud,
+    SoChantingAudioResourceManager? audioResourceManager,
+    SoChantingPlaylistManager? playlistManager,
+    SoChantingPlaybackReporter? playbackReporter,
+  })
     : assert(
         soloud.isInitialized,
         'SoLoud instance must be initialized before creating the audio handler',
+      ) {
+    _audioResourceManager =
+        audioResourceManager ??
+        SoLoudSoChantingAudioResourceManager(soloud: soloud);
+    _playlistManager =
+        playlistManager ??
+        SoChantingPlaylistManager(
+          onCurrentIndexChanged: _audioResourceManager.invalidate,
+        );
+    _playbackReporter =
+      playbackReporter ??
+      SoLoudSoChantingPlaybackReporter(
+        playbackStateSink: playbackState.add,
+        positionProvider: () =>
+          _soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)
+          ? soloud.getPosition(_soundHandle!)
+          : Duration.zero,
+        playingProvider: () => _isPlaying,
+        queueIndexProvider: () => _playlistManager.currentIndex >= 0
+          ? _playlistManager.currentIndex
+          : null,
       );
+  }
 
   @override
   Future<dynamic> customAction(
@@ -53,10 +76,14 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
           // Expecting extras to contain a JSON-encoded list of ChantLocalResources
           final resourcesJson = extras!['resources'] as String?;
           final List<ChantLocalResources> resources = resourcesJson != null
-            ? (jsonDecode(resourcesJson) as List)
-                .map((item) => ChantLocalResources.fromJson(item as Map<String, Object?>))
-                .toList()
-            : [];
+              ? (jsonDecode(resourcesJson) as List)
+                    .map(
+                      (item) => ChantLocalResources.fromJson(
+                        item as Map<String, Object?>,
+                      ),
+                    )
+                    .toList()
+              : [];
           return await setup(resources);
         } catch (e) {
           throw ArgumentError('Invalid extras for `$action` action: $extras');
@@ -66,9 +93,7 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
 
   /// Loads all chants from local files into the playlist and returns the
   /// duration of the first track.
-  Future<Duration?> setup(
-    List<ChantLocalResources> resources,
-  ) async {
+  Future<Duration?> setup(List<ChantLocalResources> resources) async {
     await _clearPlaylist();
 
     // Guard against empty resources list
@@ -76,7 +101,7 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       return Duration.zero;
     }
 
-    final entries = <_PlaylistEntry>[];
+    final entries = <SoChantingPlaylistEntry>[];
     for (final r in resources) {
       final chant = r.chant;
       final localPath = r.audioLocalPath;
@@ -86,7 +111,7 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       }
 
       entries.add(
-        _PlaylistEntry(
+        SoChantingPlaylistEntry(
           source: r,
           mediaItem: MediaItem(
             id: chant.id,
@@ -97,31 +122,29 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       );
     }
 
-    _playlist = entries;
-    _currentIndex = entries.isEmpty ? -1 : 0;
+    await _playlistManager.setup(entries);
 
-    if (_playlist.isNotEmpty) {
-      mediaItem.add(_playlist[0].mediaItem);
-      return _playlist[0].mediaItem.duration;
+    final currentMediaItem = _playlistManager.currentMediaItem;
+    if (currentMediaItem != null) {
+      mediaItem.add(currentMediaItem);
+      return currentMediaItem.duration;
     }
     return Duration.zero;
   }
 
   @override
   Future<void> play() async {
-    if (_playlist.isEmpty || _currentIndex < 0) {
+    if (!_playlistManager.hasCurrent) {
       debugPrint('No track to play. Playlist is empty or index is invalid.');
       return;
     }
     if (_soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)) {
       soloud.setPause(_soundHandle!, false);
+      _playbackReporter.start();
+      _playbackReporter.emitCurrentState();
     } else {
       await _playCurrentTrack();
     }
-
-    // need to be short enough to keep word highlighting precise
-    _startPositionTimer(intervalMs: 64); // 15 fps?
-    _broadcastPlaybackState();
   }
 
   @override
@@ -130,8 +153,8 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     if (soloud.getPause(_soundHandle!)) return; // already paused
 
     soloud.setPause(_soundHandle!, true);
-    _stopPositionTimer();
-    _broadcastPlaybackState();
+    _playbackReporter.stop();
+    _playbackReporter.emitCurrentState();
   }
 
   @override
@@ -140,12 +163,11 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       return;
     }
     soloud.seek(_soundHandle!, position);
-    _broadcastPlaybackState();
+    _playbackReporter.emitCurrentState();
   }
 
   @override
   Future<void> stop() async {
-    _stopPositionTimer();
     _trackEndedSub?.cancel();
     _trackEndedSub = null;
 
@@ -153,38 +175,47 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       await soloud.stop(_soundHandle!);
     }
     _soundHandle = null;
+    _playbackReporter.stop();
     mediaItem.add(null);
-    
-    playbackState.add(
-      PlaybackState(
-        controls: [MediaControl.play],
-        processingState: AudioProcessingState.idle,
-        playing: false,
-        updatePosition: Duration.zero,
-      ),
-    );
+    _playbackReporter.emitStopped();
   }
 
   @override
   Future<void> skipToPrevious() async {
-    if (_currentIndex <= 0) return;
+    if (!_playlistManager.hasCurrent) return;
     final wasPlaying = _isPlaying;
     await _stopCurrentHandle();
-    _currentIndex--;
+    try {
+      await _playlistManager.skipToPrevious();
+    } on StateError catch (e) {
+      debugPrint('Cannot skip to previous: ${e.message}');
+      return;
+    }
     _updateCurrentMediaItem();
-    if (wasPlaying) await _playCurrentTrack();
-    _broadcastPlaybackState();
+    if (wasPlaying) {
+      await _playCurrentTrack();
+    } else {
+      _playbackReporter.emitCurrentState();
+    }
   }
 
   @override
   Future<void> skipToNext() async {
-    if (_currentIndex >= _playlist.length - 1) return;
+    if (!_playlistManager.hasCurrent) return;
     final wasPlaying = _isPlaying;
     await _stopCurrentHandle();
-    _currentIndex++;
+    try {
+      await _playlistManager.skipToNext();
+    } on StateError catch (e) {
+      debugPrint('Cannot skip to next: ${e.message}');
+      return;
+    }
     _updateCurrentMediaItem();
-    if (wasPlaying) await _playCurrentTrack();
-    _broadcastPlaybackState();
+    if (wasPlaying) {
+      await _playCurrentTrack();
+    } else {
+      _playbackReporter.emitCurrentState();
+    }
   }
 
   bool get _isPlaying {
@@ -193,74 +224,52 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     return !soloud.getPause(_soundHandle!);
   }
 
-  Future<void> _createAudioSource(String localPath) async {
-    playbackState.add(
-      PlaybackState(
-        controls: [],
-        processingState: AudioProcessingState.loading,
-        playing: false,
-        updatePosition: Duration.zero,
-      ),
-    );
-
-    // dispose the previous source if it exists
-    if (_currentSource != null) {
-      soloud.disposeSource(_currentSource!);
-      _currentSource = null;
-    }
-    // load the new source
-    _currentSource = await soloud.loadFile(localPath);
-
-    playbackState.add(
-      PlaybackState(
-        controls: [],
-        processingState: AudioProcessingState.idle,
-        playing: false,
-        updatePosition: Duration.zero,
-      ),
-    );
-  }
-
   Future<void> _playCurrentTrack() async {
-    if (_playlist.isEmpty ||
-        _currentIndex < 0 ||
-        _currentIndex >= _playlist.length) {
+    if (!_playlistManager.hasCurrent) {
       return;
     }
 
-    if (_currentSource != null) {
-      _soundHandle = soloud.play(_currentSource!);
+    if (!_audioResourceManager.isLoaded) {
+      _playbackReporter.emitLoading();
+    }
+
+    final currentEntry = _playlistManager.currentEntry;
+    if (currentEntry == null) return;
+
+    final source = await _audioResourceManager.load(
+      currentEntry.source.audioLocalPath,
+    );
+
+    if (source != null) {
+      _soundHandle = soloud.play(source);
+      _playbackReporter.start();
+      _playbackReporter.emitCurrentState();
       _trackEndedSub?.cancel();
-      _trackEndedSub = _currentSource?.allInstancesFinished.listen((_) {
+      _trackEndedSub = source.allInstancesFinished.listen((_) {
         _onTrackEnded();
       });
     } else {
       debugPrint('Current source is null. Cannot play track.');
     }
-
   }
 
-  void _onTrackEnded() {
+  Future<void> _onTrackEnded() async {
     _trackEndedSub?.cancel();
     _trackEndedSub = null;
     _soundHandle = null;
+    _playbackReporter.stop();
 
-    if (_currentIndex < _playlist.length - 1) {
-      _currentIndex++;
+
+    try {
+      await _playlistManager.skipToNext();
       _updateCurrentMediaItem();
-      _playCurrentTrack().then((_) => _broadcastPlaybackState());
-    } else {
-      _stopPositionTimer();
-      playbackState.add(
-        PlaybackState(
-          controls: [MediaControl.play],
-          processingState: AudioProcessingState.completed,
-          playing: false,
-          queueIndex: _currentIndex,
-          updatePosition: Duration.zero,
-        ),
-      );
+      _playCurrentTrack();
+    } catch (e) {
+      debugPrint('Cannot skip to next: ${e.toString()}');            
+    } finally {
+      _playbackReporter.emitCurrentState();
     }
+
   }
 
   Future<void> _stopCurrentHandle() async {
@@ -269,59 +278,19 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     if (_soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)) {
       await soloud.stop(_soundHandle!);
     }
+    _playbackReporter.stop();
     _soundHandle = null;
   }
 
   void _updateCurrentMediaItem() {
-    if (_currentIndex < 0 || _currentIndex >= _playlist.length) return;
-    mediaItem.add(_playlist[_currentIndex].mediaItem);
+    final item = _playlistManager.currentMediaItem;
+    if (item == null) return;
+    mediaItem.add(item);
   }
 
   Future<void> _clearPlaylist() async {
-    _stopPositionTimer();
     await _stopCurrentHandle();
-    
-    if (soloud.isInitialized && _currentSource != null) {
-      // only dispose the source if it is valid and initialized        
-      await soloud.disposeSource(_currentSource!);
-    }
-    
-    _playlist = [];
-    _currentIndex = -1;
-  }
-
-  void _startPositionTimer({int intervalMs = 250}) {
-    _positionTimer?.cancel();
-    _positionTimer = Timer.periodic(
-      Duration(milliseconds: intervalMs),
-      (_) => _broadcastPlaybackState(),
-    );
-  }
-
-  void _stopPositionTimer() {
-    _positionTimer?.cancel();
-    _positionTimer = null;
-  }
-
-  void _broadcastPlaybackState() {
-    final position =
-        _soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)
-        ? soloud.getPosition(_soundHandle!)
-        : Duration.zero;
-
-    final playing = _isPlaying;
-    playbackState.add(
-      PlaybackState(
-        controls: [playing ? MediaControl.pause : MediaControl.play],
-        systemActions: const {},
-        processingState: playing
-            ? AudioProcessingState.ready
-            : AudioProcessingState.idle,
-        playing: playing,
-        queueIndex: _currentIndex >= 0 ? _currentIndex : null,
-        updatePosition: position,
-      ),
-    );
+    await _playlistManager.clear();
   }
 
   @override
@@ -330,7 +299,6 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
   }
 
   void close() {
-    _stopPositionTimer();
     _trackEndedSub?.cancel();
     _trackEndedSub = null;
     if (_soundHandle != null &&
@@ -339,10 +307,9 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
       soloud.stop(_soundHandle!);
     }
     _soundHandle = null;
-    if (soloud.isInitialized && _currentSource != null) {
-      soloud.disposeSource(_currentSource!);
-    }
-    _playlist = [];
-    _currentIndex = -1;
+    _playbackReporter.stop();
+    unawaited(_playlistManager.clear());
   }
 }
+
+

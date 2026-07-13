@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 /// Shows the current position and total duration of the chant, and allows
 /// users to play/pause, skip tracks, and open the playlist.
 class PlayerControls extends StatelessWidget {
-
   /// Creates a [PlayerControls] widget.
   const PlayerControls({
     required this.chantingState,
@@ -59,11 +58,11 @@ class PlayerControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Duration safeDuration = duration < Duration.zero
-      ? Duration.zero
-      : duration;
+        ? Duration.zero
+        : duration;
     final Duration safePosition = position < Duration.zero
-      ? Duration.zero
-      : position > safeDuration
+        ? Duration.zero
+        : position > safeDuration
         ? safeDuration
         : position;
 
@@ -80,35 +79,39 @@ class PlayerControls extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        if (showProgressBar) Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: DesignSpec.paddingLg,
-            vertical: DesignSpec.paddingLg,
+        if (showProgressBar)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingLg,
+              vertical: DesignSpec.paddingLg,
+            ),
+            child: LinearProgressIndicator(
+              value: maxMs == 0 ? 0 : currentMs / maxMs,
+              backgroundColor: Colors.white24,
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
           ),
-          child: LinearProgressIndicator(
-            value: maxMs == 0 ? 0 : currentMs / maxMs,
-            backgroundColor: Colors.white24,
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+        if (showTime)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingLg,
+            ),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  safePosition.formatMss(),
+                  textAlign: TextAlign.start,
+                  style: timeTextStyle,
+                ),
+                const Spacer(),
+                Text(
+                  safeDuration.formatMss(),
+                  textAlign: TextAlign.end,
+                  style: timeTextStyle,
+                ),
+              ],
+            ),
           ),
-        ),
-        if (showTime) Padding(
-          padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
-          child: Row(
-            children: <Widget>[
-              Text(
-                safePosition.formatMss(),
-                textAlign: TextAlign.start,
-                style: timeTextStyle,
-              ),
-              const Spacer(),
-              Text(
-                safeDuration.formatMss(),
-                textAlign: TextAlign.end,
-                style: timeTextStyle,
-              ),
-            ],
-          ),
-        ),
         Gap.medium(),
         buildControlsRow(context),
       ],
@@ -116,7 +119,8 @@ class PlayerControls extends StatelessWidget {
   }
 
   Widget buildControlsRow(BuildContext context) {
-    return Row(    
+    final isLoading = _isLoading();
+    return Row(
       children: [
         Spacer(),
         Row(
@@ -130,9 +134,9 @@ class PlayerControls extends StatelessWidget {
             ),
             Gap.small(),
             PlayPauseButton(
-              isLoading: chantingState.loadingState == .loading,
+              isLoading: isLoading,
               playbackState: chantingState.playbackState,
-              onPressed: onPlayPausePressed
+              onPressed: onPlayPausePressed,
             ),
             Gap.small(),
             IconButton(
@@ -154,14 +158,23 @@ class PlayerControls extends StatelessWidget {
                 color: Colors.white,
               ),
             ],
-          )
+          ),
         ),
       ],
     );
-    
+  }
+
+  bool _isLoading() {
+    if (chantingState.loadingState == .loading) {
+      return true;
+    }
+    return switch (chantingState.playbackState.processingState) {
+      AudioProcessingState.loading => true,
+      AudioProcessingState.buffering => true,
+      _ => false,
+    };
   }
 }
-
 
 /// Circular play/pause button that can show a loading spinner.
 class PlayPauseButton extends StatelessWidget {
@@ -187,8 +200,8 @@ class PlayPauseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final VoidCallback? resolvedOnPressed = disableWhileLoading && isLoading
-      ? null
-      : onPressed;
+        ? null
+        : onPressed;
 
     return IconButton.filled(
       iconSize: size,
@@ -198,6 +211,15 @@ class PlayPauseButton extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
+        transitionBuilder: (child, animation) {
+          return ScaleTransition(
+            scale: animation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+          );
+        },
         child: isLoading
             ? SizedBox(
                 key: const ValueKey<String>('loading'),
