@@ -24,4 +24,12 @@ class DefaultResourceResolver extends ResourceResolver {
     String path = '/chants/$chantId/$lyricsFilename';
     return storageDataProvider.getDownloadURL(path);
   }
+
+  @override
+  Future<String> getChantImageUrl(String chantId) {
+    String imageFilename = 'cover.jpg';
+    String path = '/chants/$chantId/$imageFilename';
+    return storageDataProvider.getDownloadURL(path);
+  }
+  
 }

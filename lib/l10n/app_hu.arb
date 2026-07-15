@@ -954,6 +954,21 @@
     "description": "A(z) chantingPlaylistSheetTitle fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "chantingAddChantSheetEmptyState": "Nincs elérhető ének.",
+  "@chantingAddChantSheetEmptyState": {
+    "description": "A(z) chantingAddChantSheetEmptyState fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "chantingAddChantListItemAddAction": "Hozzáadás",
+  "@chantingAddChantListItemAddAction": {
+    "description": "A(z) chantingAddChantListItemAddAction fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "chantingAddChantListItemAddedAction": "Hozzáadva",
+  "@chantingAddChantListItemAddedAction": {
+    "description": "A(z) chantingAddChantListItemAddedAction fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "chantingPlaylistBadgeLoading": "Betöltés",
   "@chantingPlaylistBadgeLoading": {
     "description": "A(z) chantingPlaylistBadgeLoading fordítási kulcs leírása.",

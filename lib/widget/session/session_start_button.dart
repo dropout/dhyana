@@ -11,12 +11,14 @@ class SessionStartButton extends StatefulWidget {
   final FragmentShader fragmentShader;
   final Color colorA;
   final Color colorB;
+  final Color textColor;
 
   const SessionStartButton({
     required this.onTap,
     required this.fragmentShader,
     this.colorA = AppColors.red,
     this.colorB = AppColors.redAccent,
+    this.textColor = Colors.white,
     super.key,
   });
 
@@ -82,7 +84,7 @@ class _SessionStartButtonState extends State<SessionStartButton>
             child: Text(
               context.l10n.startTimerButtonText.toUpperCase(),
               style: context.theme.textTheme.titleLarge?.copyWith(
-                color: Colors.white,
+                color: widget.textColor,
                 fontWeight: FontWeight.w900,
               ),
             ),
@@ -118,7 +120,12 @@ class ShaderPainter extends CustomPainter {
   final Color colorB;
   late final Paint _paint;
 
-  ShaderPainter({required this.shader, required this.time, required this.colorA, required this.colorB}) {
+  ShaderPainter({
+    required this.shader,
+    required this.time,
+    required this.colorA,
+    required this.colorB,
+  }) {
     _paint = Paint()..shader = shader;
   }
 

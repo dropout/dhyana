@@ -17,6 +17,7 @@ sealed class Chant with _$Chant implements Model {
     required String id,
     required String name,
     required ChantMetaData metaData,
+    required String blurHash,
     @Default(0) int order,
     @DurationConverter() required Duration length,    
   }) = _Chant;

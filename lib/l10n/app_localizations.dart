@@ -1124,6 +1124,24 @@ abstract class AppLocalizations {
   /// **'Lejátszási lista'**
   String get chantingPlaylistSheetTitle;
 
+  /// A(z) chantingAddChantSheetEmptyState fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nincs elérhető ének.'**
+  String get chantingAddChantSheetEmptyState;
+
+  /// A(z) chantingAddChantListItemAddAction fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hozzáadás'**
+  String get chantingAddChantListItemAddAction;
+
+  /// A(z) chantingAddChantListItemAddedAction fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Hozzáadva'**
+  String get chantingAddChantListItemAddedAction;
+
   /// A(z) chantingPlaylistBadgeLoading fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:

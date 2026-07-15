@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class DesignSpec {
-
   static const String fontFamilyName = 'RobotoSlab';
   static const String condensedFontFamilyName = 'RobotoCondensed';
 
@@ -38,11 +37,7 @@ class DesignSpec {
 
   static const double inputHeight = 42.0;
   static const defaultBoxShadow = [
-    BoxShadow(
-      color: Colors.black26,
-      offset: Offset(1, 2),
-      blurRadius: 1.0,
-    )
+    BoxShadow(color: Colors.black26, offset: Offset(1, 2), blurRadius: 1.0),
   ];
 
   final AppColors colors = const AppColors();
@@ -72,19 +67,15 @@ class DesignSpec {
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
           backgroundColor: Colors.black,
-        )
+        ),
       ),
-      bottomSheetTheme: BottomSheetThemeData(
-        dragHandleSize: Size(48, 4),
-      ),
+      bottomSheetTheme: BottomSheetThemeData(dragHandleSize: Size(48, 4)),
     );
     return themeData;
   }
-
 }
 
 class AppThemeData {
-
   static const double spacingXxs = 2.0;
   static const double spacingXs = 4.0;
   static const double spacingSm = 8.0;
@@ -117,28 +108,36 @@ class AppThemeData {
   static const double inputHeight = 42.0;
 
   static const defaultBoxShadow = [
-    BoxShadow(
-      color: Colors.black26,
-      offset: Offset(1, 2),
-      blurRadius: 1.0,
-    )
+    BoxShadow(color: Colors.black26, offset: Offset(1, 2), blurRadius: 1.0),
   ];
 
   final bool isDark;
   AppThemeData({required this.isDark});
-
 }
 
 class AppColors {
 
-  static const Color backgroundPaper = Color(0xFFDDCCB2);
-  static const Color backgroundPaperLight = Color(0xFFEFE7DC);
-  static const Color backgroundPaperDark = Color(0xFFBFAE94);
+  static const gold = Color(0xFFEFBF04);
+  static const charcoal = Color(0xFF4A4A4A);
+  static const burgundy = Color(0xFF660033);
+  static const navyBlue = Color(0xFF000080);
+  static const parchment = Color(0xFFF1E9D2);
+
+  static const ecru = Color(0xFFE0CD95);
+  static const midnightBlue = Color(0xFF272757);
+  static const armyGreen = Color(0xFF5D6532);
+  static const lavender = Color(0xFFD3D3FF);
+  static const mintGreen = Color(0xFFADEBB3);
+  static const crimsonRed = Color(0xFFB22222);
+  static const blushPink = Color(0xFFFF7782);
+  
+  static const Color backgroundPaper = Color(0xFFE0CD95);
+  static const Color backgroundPaperLight = Color(0xFFF4EDD8);
+  static const Color backgroundPaperDark = Color(0xFFD7BE75);
 
   static const Color red = Color(0xFFBB0A11);
   static const Color redAccent = Color(0xFFE4002B);
   static const Color splashColor = Colors.black;
 
   const AppColors();
-
 }

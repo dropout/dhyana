@@ -3,6 +3,7 @@ import 'package:dhyana/audio/so_chanting_playlist_manager.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/chant_asset_metadata.dart';
 import 'package:dhyana/model/chant_local_resources.dart';
+import 'package:dhyana/util/default_profile_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 ChantLocalResources _resource({
@@ -14,6 +15,7 @@ ChantLocalResources _resource({
   final chant = Chant(
     id: id,
     name: name,
+    blurHash: DefaultProfileData.photoBlurhash,
     metaData: ChantMetaData(
       id: id,
       audioVersion: 1,

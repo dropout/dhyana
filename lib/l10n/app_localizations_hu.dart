@@ -834,6 +834,15 @@ class AppLocalizationsHu extends AppLocalizations {
   String get chantingPlaylistSheetTitle => 'Lejátszási lista';
 
   @override
+  String get chantingAddChantSheetEmptyState => 'Nincs elérhető ének.';
+
+  @override
+  String get chantingAddChantListItemAddAction => 'Hozzáadás';
+
+  @override
+  String get chantingAddChantListItemAddedAction => 'Hozzáadva';
+
+  @override
   String get chantingPlaylistBadgeLoading => 'Betöltés';
 
   @override

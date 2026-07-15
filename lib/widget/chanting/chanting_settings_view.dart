@@ -36,8 +36,9 @@ class ChantingSettingsView extends StatelessWidget {
       useSafeArea: true,
       backgroundColor: AppColors.backgroundPaper,
       showDragHandle: false,
+      enableDrag: false,
       builder: (bottomSheetContext) => SizedBox(
-        height: MediaQuery.of(bottomSheetContext).size.height * 0.75,
+        height: MediaQuery.of(bottomSheetContext).size.height - 120,
         child: AddChantSheet(
           availableChants: availableChants,
           onChantSelected: (chant) => _onChantSelected(context, chant),
@@ -143,8 +144,8 @@ class ChantingSettingsView extends StatelessWidget {
               fragmentShader: context.services.shaderService.get(
                 Assets.shaderGradientFlow
               ),
-              colorA: Colors.green.shade900,
-              colorB: Colors.green.shade500,
+              colorA: AppColors.crimsonRed,
+              colorB: Color(0xFFD93838), // Crimson Red Tint 3
             ),
           ),
         ],

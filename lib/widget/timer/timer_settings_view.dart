@@ -163,8 +163,8 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         fragmentShader: context.services.shaderService.get(
           Assets.shaderGradientFlow
         ),
-        colorA: Colors.red.shade900,
-        colorB: Colors.red.shade600,
+        colorA: AppColors.crimsonRed,
+        colorB: Color(0xFFD93838), // Crimson Red Tint 3
       ),
     );
   }

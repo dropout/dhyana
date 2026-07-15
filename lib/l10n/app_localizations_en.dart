@@ -835,6 +835,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chantingPlaylistSheetTitle => 'Playlist';
 
   @override
+  String get chantingAddChantSheetEmptyState => 'No chants available.';
+
+  @override
+  String get chantingAddChantListItemAddAction => 'Add Chant';
+
+  @override
+  String get chantingAddChantListItemAddedAction => 'Added';
+
+  @override
   String get chantingPlaylistBadgeLoading => 'Loading';
 
   @override

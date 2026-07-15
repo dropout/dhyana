@@ -1,6 +1,7 @@
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/chant_asset_metadata.dart';
 import 'package:dhyana/repository/chants_repository.dart';
+import 'package:dhyana/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
 
 const List<String> _chantNames = [
@@ -33,6 +34,7 @@ class StubbedChantsRepository implements ChantsRepository {
         order: index,
         name: chantName,
         length: Duration(minutes: 5 + index),
+        blurHash: DefaultProfileData.photoBlurhash,
         metaData: ChantMetaData(
           id: _faker.guid.guid(),
           audioVersion: 1,

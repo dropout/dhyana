@@ -958,6 +958,21 @@
     "description": "Add chant sheet title.",
     "placeholders": {}
   },
+  "chantingAddChantSheetEmptyState": "No chants available.",
+  "@chantingAddChantSheetEmptyState": {
+    "description": "Add chant sheet empty state.",
+    "placeholders": {}
+  },
+  "chantingAddChantListItemAddAction": "Add Chant",
+  "@chantingAddChantListItemAddAction": {
+    "description": "Chanting add chant list item add action label.",
+    "placeholders": {}
+  },
+  "chantingAddChantListItemAddedAction": "Added",
+  "@chantingAddChantListItemAddedAction": {
+    "description": "Chanting add chant list item added action label.",
+    "placeholders": {}
+  },
   "chantingPlaylistSheetTitle": "Playlist",
   "@chantingPlaylistSheetTitle": {
     "description": "Chanting playlist sheet title.",

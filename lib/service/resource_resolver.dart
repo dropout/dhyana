@@ -11,6 +11,7 @@ abstract class ResourceResolver {
     storageDataProvider.getDownloadURL(path);
 
   Future<String> getProfileImageUrl(String profileId);
+  Future<String> getChantImageUrl(String chantId);
   Future<String> getChantAudioUrl(String chantId);
   Future<String> getChantLyricsUrl(String chantId);
 

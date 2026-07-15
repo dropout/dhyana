@@ -18,11 +18,13 @@ class AppCachedNetworkImage extends StatefulWidget {
   final String blurHash;
   final ResourceResolver resourceResolver;
   final bool circular;
+  final double borderRadius;
 
   const AppCachedNetworkImage({
     required this.imagePath,
     required this.blurHash,
     required this.resourceResolver,
+    this.borderRadius = 0.0,
     this.circular = false,
     super.key,
   });
@@ -32,7 +34,6 @@ class AppCachedNetworkImage extends StatefulWidget {
 }
 
 class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
-  
   LoadingState loadingState = LoadingState.loading;
   String? currentImageUrl;
 
@@ -55,23 +56,23 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
 
   void _resolveImage() {
     context.services.resourceResolver
-      .resolveStoragePath(widget.imagePath)
-      .then((imageUrl) {
-        if (mounted) {
-          setState(() {
-            loadingState = LoadingState.loaded;
-            currentImageUrl = imageUrl;
-          });
-        }
-      })
-      .catchError((error) {
-        if (mounted) {
-          context.services.crashlyticsService.recordError(exception: error);
-          setState(() {
-            loadingState = LoadingState.error;
-          });
-        }
-      });
+        .resolveStoragePath(widget.imagePath)
+        .then((imageUrl) {
+          if (mounted) {
+            setState(() {
+              loadingState = LoadingState.loaded;
+              currentImageUrl = imageUrl;
+            });
+          }
+        })
+        .catchError((error) {
+          if (mounted) {
+            context.services.crashlyticsService.recordError(exception: error);
+            setState(() {
+              loadingState = LoadingState.error;
+            });
+          }
+        });
   }
 
   @override
@@ -82,10 +83,12 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
         buildPlaceHolder(context, widget.blurHash),
         if (loadingState == LoadingState.loaded && currentImageUrl != null)
           _CustomCachedNetworkImage(
+            key: ValueKey(currentImageUrl),
             imageUrl: currentImageUrl!,
             crashlyticsService: context.services.crashlyticsService,
             circular: widget.circular,
-          )
+            borderRadius: widget.borderRadius,
+          ),
       ],
     );
   }
@@ -94,8 +97,12 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
     if (widget.circular) {
       return buildCircularImage(context, BlurHashImage(blurHash));
     } else {
-      return SizedBox.expand(
-        child: Image(fit: BoxFit.cover, image: BlurHashImage(blurHash)),
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          image: DecorationImage(image: BlurHashImage(blurHash), fit: BoxFit.cover),
+        ),
       );
     }
   }
@@ -115,16 +122,19 @@ class _CustomCachedNetworkImage extends StatefulWidget {
   final String imageUrl;
   final CrashlyticsService crashlyticsService;
   final bool circular;
+  final double borderRadius;
 
   const _CustomCachedNetworkImage({
     required this.imageUrl,
     required this.crashlyticsService,
+    this.borderRadius = 0.0,
     this.circular = false,
+    super.key,
   });
 
   @override
   State<_CustomCachedNetworkImage> createState() =>
-    _CustomCachedNetworkImageState();
+      _CustomCachedNetworkImageState();
 }
 
 class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
@@ -154,8 +164,8 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
     });
 
     imageProvider
-      .resolve(const ImageConfiguration())
-      .addListener(imageStreamListener);
+        .resolve(const ImageConfiguration())
+        .addListener(imageStreamListener);
 
     // A _CACHED_ image will be resolved before the first
     // build call, so NO animation will be displayed in that case
@@ -165,8 +175,8 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
     Future.delayed(Duration.zero, () {
       if (mounted) {
         imageProvider
-          .resolve(const ImageConfiguration())
-          .addListener(imageStreamListener);
+            .resolve(const ImageConfiguration())
+            .addListener(imageStreamListener);
       }
     });
 
@@ -182,17 +192,21 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
         child: buildCircularImage(context, imageProvider),
       );
     } else {
-      return AnimatedOpacity(
-        opacity: isLoading ? 0.0 : 1.0,
+      return TweenAnimationBuilder<double>(
+        tween: Tween<double>(begin: 0.0, end: isLoading ? 0.0 : 1.0),
         duration: Durations.short4,
-        child: Image(
-          fit: BoxFit.cover,
-          image: imageProvider,
-          errorBuilder: (context, error, stackTrace) {
-            context.recordError(error, stackTrace, 'Unable to display image');
-            return const Center(child: Icon(Icons.broken_image_rounded));
-          },
-        ),
+        builder: (context, value, child) {
+          return Opacity(
+            opacity: value,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+                image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+              ),
+            ),
+          );
+        },
       );
     }
   }
@@ -200,8 +214,8 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
   @override
   void dispose() {
     imageProvider
-      .resolve(const ImageConfiguration())
-      .removeListener(imageStreamListener);
+        .resolve(const ImageConfiguration())
+        .removeListener(imageStreamListener);
     super.dispose();
   }
 }
