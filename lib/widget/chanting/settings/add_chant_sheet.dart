@@ -101,7 +101,6 @@ class _AddChantSheetState extends State<AddChantSheet> {
         ),
       ),
       child: Padding(
-        // padding: const EdgeInsets.all(DesignSpec.paddingMd),
         padding: const EdgeInsets.only(top: DesignSpec.paddingMd),
         child: SizedBox.expand(
           child: Scrollbar(
