@@ -49,7 +49,7 @@ class ChantingSettingsView extends StatelessWidget {
   }
 
   void _onChantSelected(BuildContext context, Chant chant) {
-    context.read<ChantingSettingsCubit>().addToSelectedChants(chant);
+    context.read<ChantingSettingsCubit>().addToPlaylist(chant);
   }
 
   void _onReorderSelectedChants(
@@ -58,19 +58,19 @@ class ChantingSettingsView extends StatelessWidget {
     int newIndex,
   ) {
     context.read<ChantingSettingsCubit>()
-      .reorderSelectedChants(oldIndex,newIndex);
+      .reorderPlaylist(oldIndex,newIndex);
   }
 
   void _onChantRemoved(BuildContext context, ChantViewModel chantViewModel, int index) {
     context.read<ChantingSettingsCubit>()
-      .removeFromSelectedChants(index);
+      .removeFromPlaylist(index);
   }
 
   void _onStart(BuildContext context) {
     final selectedChants = context
       .read<ChantingSettingsCubit>()
       .state
-      .selectedChants;
+      .playlist;
     if (selectedChants.isNotEmpty) {
       ChantingRoute(
         $extra: ChantingSettings(
@@ -118,7 +118,7 @@ class ChantingSettingsView extends StatelessWidget {
                   maxWidth: DesignSpec.maxContentWidth,
                 ),
                 child: ChantList(
-                  chants: state.selectedChants,
+                  chants: state.playlist,
                   onAddChant: () => _triggerAddChantSheet(
                     context, 
                     availableChants

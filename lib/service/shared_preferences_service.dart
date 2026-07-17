@@ -16,4 +16,3 @@ abstract class SharedPreferencesService {
   /// Clears all values.
   Future<void> clear();
 }
-

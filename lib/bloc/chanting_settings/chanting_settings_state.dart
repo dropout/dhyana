@@ -6,7 +6,7 @@ sealed class ChantingSettingsState with _$ChantingSettingsState {
 
   const factory ChantingSettingsState({
     required List<Chant> availableChants,
-    required List<ChantViewModel> selectedChants,
+    required List<ChantViewModel> playlist,
     required bool isLoading,
     String? error,
   }) = _ChantingSettingsState;
@@ -14,8 +14,8 @@ sealed class ChantingSettingsState with _$ChantingSettingsState {
   factory ChantingSettingsState.initial() {
     return ChantingSettingsState(
       availableChants: const [],
-      selectedChants: const [],
-      isLoading: false,
+      playlist: const [],
+      isLoading: true,
     );
   }
 }

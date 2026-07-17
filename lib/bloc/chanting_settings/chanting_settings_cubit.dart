@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dhyana/enum/shared_preferences_key.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/repository/chants_repository.dart';
@@ -14,20 +15,71 @@ part 'chanting_settings_state.dart';
 part 'chanting_settings_cubit.freezed.dart';
 
 /// A Cubit that manages the state of the chanting settings.
-/// Enables adding new chants, removing chants, and reordering the chants 
+/// Enables adding new chants, removing chants, and reordering the chants
 /// in the playlist.
 class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     with LoggerMixin {
+  
+  /// The repository for fetching available chants.
   final ChantsRepository chantsRepository;
+
+  /// The service for interacting with shared preferences.
   final SharedPreferencesService sharedPreferencesService;
+
+  /// The service for logging errors to Crashlytics.
   final CrashlyticsService crashlyticsService;
 
+  /// Creates a new instance of [ChantingSettingsCubit].
   ChantingSettingsCubit({
     required this.chantsRepository,
     required this.sharedPreferencesService,
     required this.crashlyticsService,
-  }) : super(ChantingSettingsState.initial());
+  }) : super(ChantingSettingsState.initial()) {
+    _initialize();
+  }
 
+  /// Initializes the Cubit by loading the playlist chant IDs from shared preferences
+  /// and fetching the available chants from the repository.
+  /// It then creates the playlist based on the loaded chant IDs and available chants.
+  Future<void> _initialize() async {
+    try {
+      logger.t('Initializing ChantingSettingsCubit');
+
+      // Load the playlist chant IDs from shared preferences
+      final List<String> playlistChantIds = await _loadPlaylistChantIds();
+
+      // Fetch all available chants from the repository
+      final List<Chant> freshChantList = await chantsRepository.queryAll();
+
+      // Create the playlist based on the loaded chant IDs and available chants
+      final List<ChantViewModel> playlist = <ChantViewModel>[];
+      for (final chantId in playlistChantIds) {
+        try {
+          final chant = freshChantList.firstWhere((c) => c.id == chantId);
+          playlist.add(ChantViewModel(
+            uniqueId: Uuid().v4(),
+            chant: chant,
+          ));
+        } catch (e) {
+          // Chant not found in network data, skip
+          logger.t('Chant with ID $chantId not found in available chants, skipping');
+        }
+      }
+
+      emit(state.copyWith(playlist: playlist, isLoading: false));
+      logger.t('Restored playlist with ${playlist.length} chants from shared preferences');
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Failed to initialize ChantingSettingsCubit',
+      );
+      emit(state.copyWith(isLoading: false, error: e.toString()));
+    }
+  }
+
+  /// Loads the available chants from the repository and updates the state.
+  /// It also sorts the chants based on their order property.
   Future<void> loadAvailableChants() async {
     try {
       logger.t('Loading available chants');
@@ -35,13 +87,10 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
       final chants = (await chantsRepository.queryAll())
         ..sort((a, b) => a.order.compareTo(b.order));
-      // final selectedChants = await _loadSelectedChantsFromSharedPrefs();
-      final selectedChants = <ChantViewModel>[];
 
       emit(
         state.copyWith(
           availableChants: chants,
-          selectedChants: selectedChants,
           isLoading: false,
         ),
       );
@@ -56,58 +105,84 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     }
   }
 
-  void addToSelectedChants(Chant chant) {
+  /// Adds a chant to the playlist.
+  void addToPlaylist(Chant chant) {
     final ChantViewModel chantViewModel = ChantViewModel(
       uniqueId: Uuid().v4(),
       chant: chant,
     );
 
-    final updated = List<ChantViewModel>.from(state.selectedChants)
+    final updated = List<ChantViewModel>.from(state.playlist)
       ..add(chantViewModel);
-    emit(state.copyWith(selectedChants: updated));
+    emit(state.copyWith(playlist: updated));
     // _saveSelectedChantsToSharedPrefs(updated);
     logger.t('Added chant ${chant.name} to selected chants');
   }
 
-  void removeFromSelectedChants(int index) {
-    final targetChantViewModel = state.selectedChants[index];
-    final updated = List<ChantViewModel>.from(state.selectedChants)
+  /// Removes a chant from the playlist at the specified [index].
+  void removeFromPlaylist(int index) {
+    // Check if the index is valid
+    if (index < 0 || index >= state.playlist.length) {
+      logger.t('Invalid index $index for selected chants');
+      return;
+    }
+
+    // Get the chant to be removed for logging purposes
+    final targetChantViewModel = state.playlist[index];
+    final updated = List<ChantViewModel>.from(state.playlist)
       ..removeAt(index);
-    emit(state.copyWith(selectedChants: updated));
-    // _saveSelectedChantsToSharedPrefs(updated);
-    logger.t('Removed chant ${targetChantViewModel.chant.name} at index $index from selected chants');
+        
+    // Save the updated list of playlist chant IDs to shared preferences    
+    _savePlaylistChantIds(updated.map((c) => c.chant.id).toList());
+
+    emit(state.copyWith(playlist: updated));
+
+    logger.t(
+      'Removed chant ${targetChantViewModel.chant.name} at index $index from selected chants',
+    );
   }
 
   /// Reorders the chant list by removing the element at [oldIndex] and inserting
   /// it at [newIndex]. Bounds are clamped so accidental out-of-range inputs from
   /// the UI do not crash the app.
-  void reorderSelectedChants(int oldIndex, int newIndex) {
-    if (state.selectedChants.isEmpty) {
+  void reorderPlaylist(int oldIndex, int newIndex) {
+
+    // Check if the selected chants list is empty
+    if (state.playlist.isEmpty) {
       logger.t('Selected chants list is empty, cannot reorder');
       return;
     }
 
-    final int safeOldIndex = oldIndex.clamp(0, state.selectedChants.length - 1);
-    final int safeNewIndex = newIndex.clamp(0, state.selectedChants.length - 1);
+    final int safeOldIndex = oldIndex.clamp(0, state.playlist.length - 1);
+    final int safeNewIndex = newIndex.clamp(0, state.playlist.length - 1);
 
+    // If the old index and new index are the same, no reordering is needed
     if (safeOldIndex == safeNewIndex) {
       return;
     }
 
-    
-
+    // Create a copy of the selected chants list to modify
     final updatedSelectedChants = List<ChantViewModel>.from(
-      state.selectedChants,
+      state.playlist,
     );
+
+    // Remove the chant at the old index and insert it at the new index
     final movedChant = updatedSelectedChants.removeAt(safeOldIndex);
     updatedSelectedChants.insert(safeNewIndex, movedChant);
+    
+    // Save the updated list of playlist chant IDs to shared preferences
+    _savePlaylistChantIds(updatedSelectedChants.map((c) => c.chant.id).toList());
 
-    emit(state.copyWith(selectedChants: updatedSelectedChants));
-    logger.t('Reordering indices: oldIndex=$safeOldIndex, newIndex=$safeNewIndex');
-    // _saveSelectedChantsToSharedPrefs(updatedSelectedChants);
+    emit(state.copyWith(playlist: updatedSelectedChants));
+    
+    logger.t(
+      'Reordering indices: oldIndex=$safeOldIndex, newIndex=$safeNewIndex',
+    );    
   }
 
-  Future<List<Chant>> _loadSelectedChantsFromSharedPrefs() async {
+  /// Loads the playlist chant IDs from shared preferences and returns 
+  /// them as a list of strings.
+  Future<List<String>> _loadPlaylistChantIds() async {
     try {
       final jsonString = await sharedPreferencesService.get<String>(
         key: SharedPreferencesKey.selectedChants,
@@ -115,8 +190,9 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       if (jsonString == null || jsonString.isEmpty) {
         return [];
       }
-      final List<dynamic> jsonList = jsonDecode(jsonString);
-      return jsonList.map((json) => Chant.fromJson(json)).toList();
+      final dynamic decoded = jsonDecode(jsonString);
+      final List<String> jsonList = (decoded as List<dynamic>).cast<String>();
+      return jsonList;
     } catch (e, st) {
       crashlyticsService.recordError(
         exception: e,
@@ -128,15 +204,13 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     }
   }
 
-  Future<void> _saveSelectedChantsToSharedPrefs(
-    List<Chant> selectedChants,
-  ) async {
-    final jsonString = jsonEncode(
-      selectedChants.map((chant) => chant.toJson()).toList(),
-    );
+  /// Saves the playlist chant IDs to shared preferences as a JSON string.
+  Future<void> _savePlaylistChantIds(List<String> selectedChantIds) async {
+    final jsonString = jsonEncode(selectedChantIds);
     await sharedPreferencesService.set(
       key: SharedPreferencesKey.selectedChants,
       value: jsonString,
     );
   }
+
 }
