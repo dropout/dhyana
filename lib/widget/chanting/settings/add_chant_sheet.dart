@@ -3,6 +3,7 @@ import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_cached_network_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/widget/util/inset_surface.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -86,30 +87,13 @@ class _AddChantSheetState extends State<AddChantSheet> {
   }
 
   Widget buildChantsAvailableState(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.backgroundPaperLight,
-        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
-        boxShadow: DesignSpec.defaultBoxShadow,
-        border: Border.all(
-          color: Color.lerp(
-            AppColors.backgroundPaperLight,
-            Colors.white,
-            0.33,
-          )!,
-          width: 1.0,
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: DesignSpec.paddingMd),
-        child: SizedBox.expand(
-          child: Scrollbar(
+    
+    return InsetSurface(
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
+      child: Scrollbar(
             child: ListView.builder(
               padding: EdgeInsets.only(
-                // top: DesignSpec.paddingMd,
-                left: DesignSpec.paddingMd,
-                right: DesignSpec.paddingMd,
-                //   bottom: DesignSpec.paddingXl,
+                top: DesignSpec.paddingMd,
               ),
               itemCount: widget.availableChants.length,
               itemBuilder: (context, index) {
@@ -128,8 +112,6 @@ class _AddChantSheetState extends State<AddChantSheet> {
               },
             ),
           ),
-        ),
-      ),
     );    
   }
 }
@@ -182,7 +164,9 @@ class _AddChantButtonState extends State<_AddChantButton> {
             minimumSize: const Size(0, 24),
           ),
           label: Text(
-            _showCheckIcon ? context.l10n.chantingAddChantListItemAddedAction.toUpperCase() : context.l10n.chantingAddChantListItemAddAction.toUpperCase(),
+            _showCheckIcon
+                ? context.l10n.chantingAddChantListItemAddedAction.toUpperCase()
+                : context.l10n.chantingAddChantListItemAddAction.toUpperCase(),
             style: context.theme.textTheme.labelSmall!.copyWith(
               color: _showCheckIcon ? Colors.white : Colors.black,
               fontWeight: FontWeight.bold,
