@@ -47,6 +47,7 @@ dependencies:
   blurhash_dart: ^1.1.0
   carousel_slider: ^5.1.2
   smooth_page_indicator: ^2.0.1
+  flutter_slidable: ^4.0.3
 
   # Additional functionalities
   drift: ^2.30.0
