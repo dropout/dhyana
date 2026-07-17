@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dhyana/enum/shared_preferences_key.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/repository/chants_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';
@@ -12,9 +13,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'chanting_settings_state.dart';
 part 'chanting_settings_cubit.freezed.dart';
 
+/// A Cubit that manages the state of the chanting settings.
+/// Enables adding new chants, removing chants, and reordering the chants 
+/// in the playlist.
 class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
-  with LoggerMixin {
-
+    with LoggerMixin {
   final ChantsRepository chantsRepository;
   final SharedPreferencesService sharedPreferencesService;
   final CrashlyticsService crashlyticsService;
@@ -32,13 +35,16 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
       final chants = (await chantsRepository.queryAll())
         ..sort((a, b) => a.order.compareTo(b.order));
-      final selectedChants = await _loadSelectedChantsFromSharedPrefs();
+      // final selectedChants = await _loadSelectedChantsFromSharedPrefs();
+      final selectedChants = <ChantViewModel>[];
 
-      emit(state.copyWith(
-        availableChants: chants,
-        selectedChants: selectedChants,
-        isLoading: false,
-      ));
+      emit(
+        state.copyWith(
+          availableChants: chants,
+          selectedChants: selectedChants,
+          isLoading: false,
+        ),
+      );
       logger.t('Successfully loaded ${chants.length} chants');
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -46,25 +52,30 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
         stackTrace: stack,
         reason: 'Failed to load available chants',
       );
-      emit(state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      ));
+      emit(state.copyWith(isLoading: false, error: e.toString()));
     }
   }
 
   void addToSelectedChants(Chant chant) {
-    final updated = List<Chant>.from(state.selectedChants)
-      ..add(chant);
+    final ChantViewModel chantViewModel = ChantViewModel(
+      uniqueId: Uuid().v4(),
+      chant: chant,
+    );
+
+    final updated = List<ChantViewModel>.from(state.selectedChants)
+      ..add(chantViewModel);
     emit(state.copyWith(selectedChants: updated));
-    _saveSelectedChantsToSharedPrefs(updated);
+    // _saveSelectedChantsToSharedPrefs(updated);
+    logger.t('Added chant ${chant.name} to selected chants');
   }
 
   void removeFromSelectedChants(int index) {
-    final updated = List<Chant>.from(state.selectedChants)
+    final targetChantViewModel = state.selectedChants[index];
+    final updated = List<ChantViewModel>.from(state.selectedChants)
       ..removeAt(index);
     emit(state.copyWith(selectedChants: updated));
-    _saveSelectedChantsToSharedPrefs(updated);
+    // _saveSelectedChantsToSharedPrefs(updated);
+    logger.t('Removed chant ${targetChantViewModel.chant.name} at index $index from selected chants');
   }
 
   /// Reorders the chant list by removing the element at [oldIndex] and inserting
@@ -72,6 +83,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
   /// the UI do not crash the app.
   void reorderSelectedChants(int oldIndex, int newIndex) {
     if (state.selectedChants.isEmpty) {
+      logger.t('Selected chants list is empty, cannot reorder');
       return;
     }
 
@@ -82,42 +94,49 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       return;
     }
 
-    final updatedSelectedChants = List<Chant>.from(state.selectedChants);
+    
+
+    final updatedSelectedChants = List<ChantViewModel>.from(
+      state.selectedChants,
+    );
     final movedChant = updatedSelectedChants.removeAt(safeOldIndex);
     updatedSelectedChants.insert(safeNewIndex, movedChant);
 
     emit(state.copyWith(selectedChants: updatedSelectedChants));
-    _saveSelectedChantsToSharedPrefs(updatedSelectedChants);
+    logger.t('Reordering indices: oldIndex=$safeOldIndex, newIndex=$safeNewIndex');
+    // _saveSelectedChantsToSharedPrefs(updatedSelectedChants);
   }
 
   Future<List<Chant>> _loadSelectedChantsFromSharedPrefs() async {
     try {
       final jsonString = await sharedPreferencesService.get<String>(
         key: SharedPreferencesKey.selectedChants,
-      );    
+      );
       if (jsonString == null || jsonString.isEmpty) {
         return [];
       }
       final List<dynamic> jsonList = jsonDecode(jsonString);
-      return jsonList.map((json) => Chant.fromJson(json)).toList();    
+      return jsonList.map((json) => Chant.fromJson(json)).toList();
     } catch (e, st) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
-        reason: 'Failed to load selected chants from shared preferences, returning empty list',
+        reason:
+            'Failed to load selected chants from shared preferences, returning empty list',
       );
       return [];
     }
   }
 
-  Future<void> _saveSelectedChantsToSharedPrefs(List<Chant> selectedChants) async {
+  Future<void> _saveSelectedChantsToSharedPrefs(
+    List<Chant> selectedChants,
+  ) async {
     final jsonString = jsonEncode(
-      selectedChants.map((chant) => chant.toJson()).toList()
+      selectedChants.map((chant) => chant.toJson()).toList(),
     );
     await sharedPreferencesService.set(
       key: SharedPreferencesKey.selectedChants,
       value: jsonString,
     );
   }
-
 }

@@ -101,7 +101,10 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          image: DecorationImage(image: BlurHashImage(blurHash), fit: BoxFit.cover),
+          image: DecorationImage(
+            image: BlurHashImage(blurHash),
+            fit: BoxFit.cover,
+          ),
         ),
       );
     }

@@ -14,7 +14,7 @@ sealed class ChantingSettings with _$ChantingSettings implements Model {
   const ChantingSettings._();
 
   const factory ChantingSettings({
-    @Default(<Chant>[]) List<Chant> selectedChants,
+    @Default(<ChantViewModel>[]) List<ChantViewModel> selectedChants,
     @DateTimeOrNullConverter() DateTime? lastUsed,
   }) = _ChantingSettings;
 
@@ -23,7 +23,7 @@ sealed class ChantingSettings with _$ChantingSettings implements Model {
 
   @override
   String get id {
-    return selectedChants.map((chant) => chant.id).join('-');
+    return selectedChants.map((viewModel) => viewModel.chant.id).join('-');
   }
 
 }

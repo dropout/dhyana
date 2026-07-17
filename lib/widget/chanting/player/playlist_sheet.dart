@@ -46,14 +46,14 @@ class PlaylistSheet extends StatelessWidget {
                 ),
                 itemCount: state.chantingSettings.selectedChants.length,
                 itemBuilder: (context, index) {
-                  final chant = state.chantingSettings.selectedChants[index];
+                  final chantViewModel = state.chantingSettings.selectedChants[index];
                   return Padding(
                     padding: const EdgeInsets.only(
                       bottom: DesignSpec.paddingSm,
                     ),
                     child: ChantCard(
                       index: index,
-                      chant: chant,
+                      chantViewModel: chantViewModel,
                       textColor: index < state.currentIndex
                           ? Colors.grey.shade600
                           : Colors.black,

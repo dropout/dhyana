@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 
 class ChantCard extends StatelessWidget {
   final int index;
-  final Chant chant;
+  final ChantViewModel chantViewModel;
   final Color textColor;
   final Widget? trailing;
 
   const ChantCard({
     required this.index,
-    required this.chant,
+    required this.chantViewModel,
     this.trailing,
     this.textColor = Colors.black,
     super.key,
@@ -27,7 +27,7 @@ class ChantCard extends StatelessWidget {
         color: AppColors.backgroundPaperLight,
         borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
         boxShadow: DesignSpec.defaultBoxShadow,
-      ),      
+      ),
       child: Row(
         children: [
           SizedBox.square(
@@ -38,11 +38,11 @@ class ChantCard extends StatelessWidget {
                 bottomLeft: Radius.circular(DesignSpec.borderRadiusMd),
               ),
               child: AppCachedNetworkImage(
-                imagePath: '/chants/${chant.id}/cover.jpg',
-                blurHash: chant.blurHash,
+                imagePath: '/chants/${chantViewModel.chant.id}/cover.jpg',
+                blurHash: chantViewModel.chant.blurHash,
                 resourceResolver: context.services.resourceResolver,
               ),
-            )
+            ),
           ),
           Gap.medium(),
           Expanded(
@@ -51,7 +51,7 @@ class ChantCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  chant.name,
+                  chantViewModel.chant.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.theme.textTheme.bodyMedium!.copyWith(
@@ -60,7 +60,7 @@ class ChantCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  chant.length.formatMMss(),
+                  chantViewModel.chant.length.formatMMss(),
                   style: context.theme.textTheme.bodySmall!.copyWith(
                     fontWeight: FontWeight.w500,
                     color: textColor,

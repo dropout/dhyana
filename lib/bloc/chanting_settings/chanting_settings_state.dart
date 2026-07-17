@@ -2,12 +2,11 @@ part of 'chanting_settings_cubit.dart';
 
 @freezed
 sealed class ChantingSettingsState with _$ChantingSettingsState {
-
   const ChantingSettingsState._();
 
   const factory ChantingSettingsState({
     required List<Chant> availableChants,
-    required List<Chant> selectedChants,
+    required List<ChantViewModel> selectedChants,
     required bool isLoading,
     String? error,
   }) = _ChantingSettingsState;
@@ -19,5 +18,4 @@ sealed class ChantingSettingsState with _$ChantingSettingsState {
       isLoading: false,
     );
   }
-
 }
