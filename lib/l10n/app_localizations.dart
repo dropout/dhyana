@@ -782,6 +782,12 @@ abstract class AppLocalizations {
   /// **'Összes nap'**
   String get statsTotalDays;
 
+  /// A(z) statsTotal fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Összesen'**
+  String get statsTotal;
+
   /// A(z) statsAverageTimeSpent fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:

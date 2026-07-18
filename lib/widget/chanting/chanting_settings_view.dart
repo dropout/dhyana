@@ -16,15 +16,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'settings/add_chant_sheet.dart';
 
 class ChantingSettingsView extends StatelessWidget {
-  
   final List<Chant> availableChants;
   final ProfileSettings profileSettings;
 
   const ChantingSettingsView({
     required this.profileSettings,
-    required this.availableChants, 
-    super.key
+    required this.availableChants,
+    super.key,
   });
+
+  String  getTotalDurationText(BuildContext context) {
+    final totalDuration = availableChants.fold<Duration>(
+      Duration.zero,
+      (previousValue, chant) => previousValue + chant.length,
+    );
+    final minutes = totalDuration.inMinutes;
+    return context.l10n.minutesPluralWithNumber(minutes).toUpperCase();
+  }
 
   void _triggerAddChantSheet(
     BuildContext context,
@@ -57,29 +65,25 @@ class ChantingSettingsView extends StatelessWidget {
     int oldIndex,
     int newIndex,
   ) {
-    context.read<ChantingSettingsCubit>()
-      .reorderPlaylist(oldIndex,newIndex);
+    context.read<ChantingSettingsCubit>().reorderPlaylist(oldIndex, newIndex);
   }
 
-  void _onChantRemoved(BuildContext context, ChantViewModel chantViewModel, int index) {
-    context.read<ChantingSettingsCubit>()
-      .removeFromPlaylist(index);
+  void _onChantRemoved(
+    BuildContext context,
+    ChantViewModel chantViewModel,
+    int index,
+  ) {
+    context.read<ChantingSettingsCubit>().removeFromPlaylist(index);
   }
 
   void _onStart(BuildContext context) {
-    final selectedChants = context
-      .read<ChantingSettingsCubit>()
-      .state
-      .playlist;
+    final selectedChants = context.read<ChantingSettingsCubit>().state.playlist;
     if (selectedChants.isNotEmpty) {
       ChantingRoute(
-        $extra: ChantingSettings(
-          selectedChants: selectedChants,
-        ),
+        $extra: ChantingSettings(selectedChants: selectedChants),
       ).push(context);
       context.hapticsTap();
     }
-    
   }
 
   @override
@@ -94,7 +98,7 @@ class ChantingSettingsView extends StatelessWidget {
     );
   }
 
-  Widget buildLoaded(BuildContext context, ChantingSettingsState state) {    
+  Widget buildLoaded(BuildContext context, ChantingSettingsState state) {
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -104,14 +108,15 @@ class ChantingSettingsView extends StatelessWidget {
           Text(
             context.l10n.chantingTitle,
             style: context.theme.textTheme.headlineLarge!.copyWith(
-              fontWeight: FontWeight.w800
+              fontWeight: FontWeight.w800,
             ),
           ),
+          Gap.medium(),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: DesignSpec.paddingLg,
-                vertical: DesignSpec.paddingXl,
+              padding: const EdgeInsets.only(
+                left: DesignSpec.paddingLg,
+                right: DesignSpec.paddingLg,
               ),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(
@@ -119,30 +124,41 @@ class ChantingSettingsView extends StatelessWidget {
                 ),
                 child: ChantList(
                   chants: state.playlist,
-                  onAddChant: () => _triggerAddChantSheet(
-                    context, 
-                    availableChants
-                  ),
-                  onChantRemoved: (chant, index) => _onChantRemoved(
-                    context, 
-                    chant, 
-                    index
-                  ),
-                  onReorder: (oldIndex, newIndex) => _onReorderSelectedChants(
-                    context, 
-                    oldIndex, 
-                    newIndex
-                  ),
+                  onAddChant: () =>
+                      _triggerAddChantSheet(context, availableChants),
+                  onChantRemoved: (chant, index) =>
+                      _onChantRemoved(context, chant, index),
+                  onReorder: (oldIndex, newIndex) =>
+                      _onReorderSelectedChants(context, oldIndex, newIndex),
                 ),
               ),
             ),
           ),
           Padding(
+            padding: const EdgeInsets.only(
+              left: DesignSpec.paddingXl,
+              right: DesignSpec.paddingXl,
+              top: DesignSpec.paddingXs,
+              bottom: DesignSpec.paddingXl,
+            ),
+            child: Row(
+              mainAxisAlignment: .center,
+              children: [
+                Text(
+                  '${getTotalDurationText(context)} ${context.l10n.statsTotal.toUpperCase()}',
+                  style: context.theme.textTheme.labelMedium!.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
             child: SessionStartButton(
-              onTap: () => _onStart(context), 
+              onTap: () => _onStart(context),
               fragmentShader: context.services.shaderService.get(
-                Assets.shaderGradientFlow
+                Assets.shaderGradientFlow,
               ),
               colorA: AppColors.crimsonRed,
               colorB: Color(0xFFD93838), // Crimson Red Tint 3

@@ -377,6 +377,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statsTotalDays => 'Total days';
 
   @override
+  String get statsTotal => 'Total';
+
+  @override
   String get statsAverageTimeSpent => 'Average time';
 
   @override

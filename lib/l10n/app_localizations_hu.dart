@@ -377,6 +377,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get statsTotalDays => 'Összes nap';
 
   @override
+  String get statsTotal => 'Összesen';
+
+  @override
   String get statsAverageTimeSpent => 'Átlagos idő';
 
   @override

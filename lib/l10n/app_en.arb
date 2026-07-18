@@ -570,6 +570,11 @@
     "description": "Stats summary label.",
     "placeholders": {}
   },
+  "statsTotal": "Total",
+  "@statsTotal": {
+    "description": "Stats total label.",
+    "placeholders": {}
+  },
   "statsTotalTimeSpent": "Total time",
   "@statsTotalTimeSpent": {
     "description": "Stats total time spent label.",

@@ -576,6 +576,11 @@
     "description": "A(z) statsTotalDays fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "statsTotal": "Összesen",
+  "@statsTotal": {
+    "description": "A(z) statsTotal fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "statsAverageTimeSpent": "Átlagos idő",
   "@statsAverageTimeSpent": {
     "description": "A(z) statsAverageTimeSpent fordítási kulcs leírása.",
