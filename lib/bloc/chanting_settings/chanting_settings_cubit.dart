@@ -107,39 +107,57 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
   /// Adds a chant to the playlist.
   void addToPlaylist(Chant chant) {
-    final ChantViewModel chantViewModel = ChantViewModel(
-      uniqueId: Uuid().v4(),
-      chant: chant,
-    );
+    try {
+      logger.t('Adding chant ${chant.name} to playlist');
+      final ChantViewModel chantViewModel = ChantViewModel(
+        uniqueId: Uuid().v4(),
+        chant: chant,
+      );
 
-    final updated = List<ChantViewModel>.from(state.playlist)
-      ..add(chantViewModel);
-    emit(state.copyWith(playlist: updated));
-    // _saveSelectedChantsToSharedPrefs(updated);
-    logger.t('Added chant ${chant.name} to selected chants');
+      final updated = List<ChantViewModel>.from(state.playlist)
+        ..add(chantViewModel);
+      emit(state.copyWith(playlist: updated));
+      _savePlaylistChantIds(updated.map((c) => c.chant.id).toList());
+      logger.t('Successfully added chant ${chant.name} to playlist');
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Failed to add chant ${chant.name} to playlist',
+      );
+    }
   }
 
   /// Removes a chant from the playlist at the specified [index].
   void removeFromPlaylist(int index) {
-    // Check if the index is valid
-    if (index < 0 || index >= state.playlist.length) {
-      logger.t('Invalid index $index for selected chants');
-      return;
-    }
 
-    // Get the chant to be removed for logging purposes
-    final targetChantViewModel = state.playlist[index];
-    final updated = List<ChantViewModel>.from(state.playlist)
-      ..removeAt(index);
-        
-    // Save the updated list of playlist chant IDs to shared preferences    
-    _savePlaylistChantIds(updated.map((c) => c.chant.id).toList());
+    try {
+      // Check if the index is valid
+      if (index < 0 || index >= state.playlist.length) {
+        logger.t('Invalid index $index for selected chants');
+        return;
+      }
 
-    emit(state.copyWith(playlist: updated));
+      // Get the chant to be removed for logging purposes
+      final targetChantViewModel = state.playlist[index];
+      final updated = List<ChantViewModel>.from(state.playlist)
+        ..removeAt(index);
+          
+      // Save the updated list of playlist chant IDs to shared preferences    
+      _savePlaylistChantIds(updated.map((c) => c.chant.id).toList());
 
-    logger.t(
-      'Removed chant ${targetChantViewModel.chant.name} at index $index from selected chants',
-    );
+      emit(state.copyWith(playlist: updated));
+
+      logger.t(
+        'Removed chant ${targetChantViewModel.chant.name} at index $index from selected chants',
+      );    
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Failed to remove chant at index $index from playlist',
+      );
+    }    
   }
 
   /// Reorders the chant list by removing the element at [oldIndex] and inserting
@@ -147,37 +165,48 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
   /// the UI do not crash the app.
   void reorderPlaylist(int oldIndex, int newIndex) {
 
-    // Check if the selected chants list is empty
-    if (state.playlist.isEmpty) {
-      logger.t('Selected chants list is empty, cannot reorder');
-      return;
+    try {      
+      // Check if the selected chants list is empty
+      if (state.playlist.isEmpty) {
+        logger.t('Selected chants list is empty, cannot reorder');
+        return;
+      }
+
+      final int safeOldIndex = oldIndex.clamp(0, state.playlist.length - 1);
+      final int safeNewIndex = newIndex.clamp(0, state.playlist.length - 1);
+
+      // If the old index and new index are the same, no reordering is needed
+      if (safeOldIndex == safeNewIndex) {
+        return;
+      }
+
+      // Create a copy of the selected chants list to modify
+      final updatedSelectedChants = List<ChantViewModel>.from(
+        state.playlist,
+      );
+
+      // Remove the chant at the old index and insert it at the new index
+      final movedChant = updatedSelectedChants.removeAt(safeOldIndex);
+      updatedSelectedChants.insert(safeNewIndex, movedChant);
+      
+      // Save the updated list of playlist chant IDs to shared preferences
+      _savePlaylistChantIds(updatedSelectedChants.map((c) => c.chant.id).toList());
+
+      emit(state.copyWith(playlist: updatedSelectedChants));
+      
+      logger.t(
+        'Reordering indices: oldIndex=$safeOldIndex, newIndex=$safeNewIndex',
+      );    
+
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Failed to reorder playlist from index $oldIndex to $newIndex',
+      );
     }
 
-    final int safeOldIndex = oldIndex.clamp(0, state.playlist.length - 1);
-    final int safeNewIndex = newIndex.clamp(0, state.playlist.length - 1);
-
-    // If the old index and new index are the same, no reordering is needed
-    if (safeOldIndex == safeNewIndex) {
-      return;
-    }
-
-    // Create a copy of the selected chants list to modify
-    final updatedSelectedChants = List<ChantViewModel>.from(
-      state.playlist,
-    );
-
-    // Remove the chant at the old index and insert it at the new index
-    final movedChant = updatedSelectedChants.removeAt(safeOldIndex);
-    updatedSelectedChants.insert(safeNewIndex, movedChant);
     
-    // Save the updated list of playlist chant IDs to shared preferences
-    _savePlaylistChantIds(updatedSelectedChants.map((c) => c.chant.id).toList());
-
-    emit(state.copyWith(playlist: updatedSelectedChants));
-    
-    logger.t(
-      'Reordering indices: oldIndex=$safeOldIndex, newIndex=$safeNewIndex',
-    );    
   }
 
   /// Loads the playlist chant IDs from shared preferences and returns 
