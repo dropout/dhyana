@@ -25,10 +25,10 @@ class ChantingSettingsView extends StatelessWidget {
     super.key,
   });
 
-  String  getTotalDurationText(BuildContext context) {
-    final totalDuration = availableChants.fold<Duration>(
+  String getTotalDurationText(BuildContext context, ChantingSettingsState state) {    
+    final totalDuration = state.playlist.fold<Duration>(
       Duration.zero,
-      (previousValue, chant) => previousValue + chant.length,
+      (previousValue, chantViewModel) => previousValue + chantViewModel.chant.length,
     );
     final minutes = totalDuration.inMinutes;
     return context.l10n.minutesPluralWithNumber(minutes).toUpperCase();
@@ -134,7 +134,7 @@ class ChantingSettingsView extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
+          if (state.playlist.isNotEmpty) Padding(
             padding: const EdgeInsets.only(
               left: DesignSpec.paddingXl,
               right: DesignSpec.paddingXl,
@@ -145,7 +145,7 @@ class ChantingSettingsView extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 Text(
-                  '${getTotalDurationText(context)} ${context.l10n.statsTotal.toUpperCase()}',
+                  '${getTotalDurationText(context, state)} ${context.l10n.statsTotal.toUpperCase()}',
                   style: context.theme.textTheme.labelMedium!.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
