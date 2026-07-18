@@ -259,11 +259,13 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     _soundHandle = null;
     _playbackReporter.stop();
 
-
     try {
       await _playlistManager.skipToNext();
       _updateCurrentMediaItem();
       _playCurrentTrack();
+    } on StateError {
+      // No more tracks in the playlist. Emit completed state.
+      _playbackReporter.emitCompleted();
     } catch (e) {
       debugPrint('Cannot skip to next: ${e.toString()}');            
     } finally {
