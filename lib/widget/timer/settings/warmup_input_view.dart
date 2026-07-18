@@ -212,7 +212,7 @@ class _WarmupTimeOptionItem extends StatelessWidget {
         : AppColors.backgroundPaperLight;
 
     final textColor = isSelected
-        ? AppColors.backgroundPaperLight
+        ? AppColors.gold
         : Colors.black;
 
     return GestureDetector(

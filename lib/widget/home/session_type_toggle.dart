@@ -81,7 +81,7 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
         padding: const EdgeInsets.all(DesignSpec.paddingMd),
         child: Icon(
           (item == SessionType.timer) ? Icons.music_note : Icons.timer_outlined,
-          color: AppColors.mintGreen,
+          color: AppColors.gold,
         ),
       ),
     );

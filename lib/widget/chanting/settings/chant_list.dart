@@ -105,9 +105,11 @@ class ChantList extends StatelessWidget {
         motion: const ScrollMotion(),
         extentRatio: 0.25,
         children: [
-          CustomSlidableAction(          
-
-            onPressed: (_) => onChantRemoved(chant, index),
+          CustomSlidableAction(
+            onPressed: (_) { 
+              onChantRemoved(chant, index);
+              context.hapticsTap();
+            },
             backgroundColor: Colors.transparent,
             // foregroundColor: Colors.white,
             padding: EdgeInsets.only(
@@ -160,8 +162,10 @@ class DynamicSlideActionIcon extends StatelessWidget {
       animation: slidableController.animation,      
       builder: (context, child) {
         
-        // value goes from 0.0 (closed) to 1.0 (fully extended to the extentRatio)
+        // goes from 0.0 (closed) to 0.25 (button visible)
         final slideValue = slidableController.animation.value;
+
+        // value goes from 0.0 (closed) to 1.0
         final animationValue = slideValue.remapAndClamp(0.0, 0.25, 0.0, 1.0).toDouble();
 
         return Opacity(
@@ -170,13 +174,10 @@ class DynamicSlideActionIcon extends StatelessWidget {
             scale: animationValue, // Scale the icon up to 150% size
             child: Container(
               decoration: ShapeDecoration(
-                // Fade the background color in based on the slide amount
-                // color: Colors.red.withValues(alpha: slideValue.clamp(0.0, 1.0)),
                 shape: RoundedSuperellipseBorder(
                   borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
                 ),
                 color: context.theme.colorScheme.error,
-                // borderRadius: BorderRadius.circular(12),
               ),
               alignment: Alignment.center,
               child: const Icon(

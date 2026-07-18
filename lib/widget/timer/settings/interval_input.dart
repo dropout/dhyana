@@ -75,7 +75,7 @@ class IntervalInput extends StatelessWidget {
             : context.l10n.intervalPluralWithNumber(value),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          color: AppColors.mintGreen,
+          color: AppColors.gold,
           fontWeight: FontWeight.w800,
         ),
       ),
@@ -277,7 +277,7 @@ class CustomToggleButtonItem extends StatelessWidget {
     final backgroundColor = isSelected
         ? Colors.black
         : AppColors.backgroundPaperLight;
-    final textColor = isSelected ? Colors.white : Colors.black;
+    final textColor = isSelected ? AppColors.gold : Colors.black;
 
     return Stack(
       children: [
@@ -336,7 +336,7 @@ class CustomToggleButtonItem extends StatelessWidget {
                     }
                   ),
                 ),
-              );            
+              );
             },
           ),
         ),
