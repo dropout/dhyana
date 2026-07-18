@@ -75,7 +75,7 @@ class IntervalInput extends StatelessWidget {
             : context.l10n.intervalPluralWithNumber(value),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          color: AppColors.backgroundPaperLight,
+          color: AppColors.mintGreen,
           fontWeight: FontWeight.w800,
         ),
       ),

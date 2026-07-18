@@ -1,3 +1,4 @@
+import 'package:dhyana/widget/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class AddChantButton extends StatelessWidget {
@@ -13,7 +14,7 @@ class AddChantButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton.filled(
       iconSize: 36,
-      color: Colors.white,
+      color: AppColors.mintGreen,
       icon: const Icon(Icons.add_rounded),
       onPressed: onTap,
       style: IconButton.styleFrom(

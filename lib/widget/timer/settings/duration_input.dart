@@ -78,7 +78,7 @@ class DurationInput extends StatelessWidget {
         value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayLarge!.copyWith(
-          color: AppColors.backgroundPaperLight,
+          color: AppColors.mintGreen,
           fontWeight: FontWeight.w900,
           height: 1.0,
         ),

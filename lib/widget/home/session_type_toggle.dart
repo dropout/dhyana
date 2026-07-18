@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
-import 'package:flip_board/flip_widget.dart';
 import 'package:flutter/material.dart';
 
 /// Toggle button that switches the home screen between the timer settings view
@@ -53,20 +52,27 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
             : SessionType.timer;
         widget.onModeChanged(newMode);
       },
-      child: FlipWidget<SessionType>(
-        flipDuration: Durations.medium2,
-        flipType: .spinFlip,
-        flipCurve: FlipWidget.bounceFastFlip,
-        itemStream: _modeStreamController.stream,
-        itemBuilder: _builder,
-        flipDirection: .left,
-        initialValue: (widget.activeMode == .timer) ? .chanting : .timer,
+      child: AnimatedSwitcher(
+        duration: Durations.medium2,
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        transitionBuilder: (child, animation) {
+          return ScaleTransition(
+            scale: animation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+          );
+        },
+        child: _builder(context, widget.activeMode),
       ),
     );
   }
 
   Widget _builder(BuildContext context, SessionType? item) {
     return DecoratedBox(
+      key: ValueKey(item?.name ?? 'unknown'),
       decoration: BoxDecoration(
       shape: BoxShape.circle,
       color: Colors.black,
@@ -75,7 +81,7 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
         padding: const EdgeInsets.all(DesignSpec.paddingMd),
         child: Icon(
           (item == SessionType.timer) ? Icons.music_note : Icons.timer_outlined,
-          color: Colors.white,
+          color: AppColors.mintGreen,
         ),
       ),
     );
