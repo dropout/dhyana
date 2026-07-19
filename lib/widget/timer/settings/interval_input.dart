@@ -293,7 +293,8 @@ class CustomToggleButtonItem extends StatelessWidget {
               return DecoratedBox(
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+                  boxShadow: DesignSpec.defaultBoxShadow,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -342,8 +343,8 @@ class CustomToggleButtonItem extends StatelessWidget {
         ),
    
         Positioned(
-          top: 8,
-          right: 8,
+          top: DesignSpec.paddingMd,
+          right: DesignSpec.paddingMd,
           child: AnimatedOpacity(
             opacity: isSelected ? 1.0 : 0.0,
             duration: Durations.short4,

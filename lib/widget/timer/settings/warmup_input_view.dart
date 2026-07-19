@@ -226,7 +226,8 @@ class _WarmupTimeOptionItem extends StatelessWidget {
               DecoratedBox(
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+                  boxShadow: DesignSpec.defaultBoxShadow,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -261,8 +262,8 @@ class _WarmupTimeOptionItem extends StatelessWidget {
 
               // If this option is selected, show a checkmark in the top right corner
               Positioned(
-                top: 8,
-                right: 8,
+                top: DesignSpec.paddingMd,
+                right: DesignSpec.paddingMd,
                 child: AnimatedOpacity(
                   opacity: isSelected ? 1 : 0,
                   duration: const Duration(milliseconds: 300),
