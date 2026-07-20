@@ -1,18 +1,5 @@
 import { z } from 'zod';
 
-export const ProfileSchema = z.object({
-  id: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  email: z.string().email(),
-  photoUrl: z.string(),
-  photoBlurhash: z.string(),
-  signupDate: z.number(),
-  statsReport: ProfileStatisticsReportSchema,
-  completed: z.boolean(),
-});
-export type Profile = z.infer<typeof ProfileSchema>;
-
 export const ProfileStatisticsReportSchema = z.object({
   consecutiveDays: z.object({
     current: z.number(),
@@ -33,6 +20,21 @@ export const ProfileStatisticsReportSchema = z.object({
   lastSessionDate: z.number().nullable(),
 });
 export type ProfileStatisticsReport = z.infer<typeof ProfileStatisticsReportSchema>;
+
+export const ProfileSchema = z.object({
+  id: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string().email(),
+  photoUrl: z.string(),
+  photoBlurhash: z.string(),
+  signupDate: z.number(),
+  statsReport: ProfileStatisticsReportSchema,
+  completed: z.boolean(),
+});
+export type Profile = z.infer<typeof ProfileSchema>;
+
+
 
 export const ConsecutiveDaysSchema = z.object({
   current: z.number(),
@@ -66,3 +68,16 @@ export const CitySearchResponseSchema = z.object({
   results: z.array(CitySearchResultSchema),
 });
 export type CitySearchResponse = z.infer<typeof CitySearchResponseSchema>;
+
+export const SessionSchema = z.object({
+  id: z.string(),
+  type: z.string(),
+  startTime: z.number(),
+  endTime: z.number(),
+  duration: z.number(),
+  timerSettings: z.unknown().optional().nullable(),
+  chantingSettings: z.unknown().optional().nullable(),
+});
+export type Session = z.infer<typeof SessionSchema>;
+
+

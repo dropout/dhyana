@@ -57,9 +57,9 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
 
   Future<void> toggleSessionType() async {
     try {
-      final newSessionType = state.sessionType == SessionType.timer
+      final newSessionType = state.sessionType == SessionType.sitting
         ? SessionType.chanting
-        : SessionType.timer;
+        : SessionType.sitting;
       final updatedState = state.copyWith(sessionType: newSessionType);
       emit(updatedState);
     } catch (e, stackTrace) {

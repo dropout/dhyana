@@ -102,7 +102,7 @@ class FakeModelFactory {
   Session createSession() {
     return Session(
       id: faker.guid.guid(),
-      type: SessionType.timer,
+      type: SessionType.sitting,
       startTime: DateTime.now(),
       endTime: DateTime.now().add(const Duration(hours: 1)),
       duration: Duration(minutes: faker.randomGenerator.integer(60)),

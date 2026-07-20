@@ -34,7 +34,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// - A body area that switches between [buildTimerSettingsView] and
 ///   [buildChantingSettingsView] depending on the active [SessionType].
 /// - A [SessionTypeToggle] anchored to the bottom-right corner, allowing
-///   the user to switch between [SessionType.timer] and
+///   the user to switch between [SessionType.sitting] and
 ///   [SessionType.chanting] at any time.
 ///
 /// Transitions between the two session views are animated using an
@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
   /// Optional pre-configured timer settings to seed the sitting session with.
   ///
   /// When non-null, [HomeScreenCubit.init] uses this value to skip loading
-  /// persisted settings and jumps straight to [SessionType.timer] with the
+  /// persisted settings and jumps straight to [SessionType.sitting] with the
   /// supplied configuration. This is used, for example, when navigating from a
   /// history entry or from a notification that carries a specific session
   /// configuration.
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
       create: (context) => HomeScreenCubit(
         initialState: timerSettings != null
-            ? const HomeScreenState(sessionType: SessionType.timer)
+            ? const HomeScreenState(sessionType: SessionType.sitting)
             : null,
         crashlyticsService: context.services.crashlyticsService,
       ),
@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, authState) {
         SessionType sessionType = state.sessionType;
         if (authState is! AuthStateSignedIn) {
-          sessionType = .timer;
+          sessionType = .sitting;
         }
         return AnimatedSwitcher(
           key: ValueKey(sessionType),
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
           //   );
           // },
           child: switch (sessionType) {
-            SessionType.timer => buildTimerSettingsView(context, state),
+            SessionType.sitting => buildTimerSettingsView(context, state),
             SessionType.chanting => buildChantingSettingsView(context),
           },
         );

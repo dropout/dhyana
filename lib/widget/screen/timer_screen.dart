@@ -49,7 +49,7 @@ class TimerScreen extends StatelessWidget {
       listener: (BuildContext context, TimerCubitState timerState) {
         Session session = Session(          
           id: context.services.idGeneratorService.sessionId(),
-          type: SessionType.timer,
+          type: SessionType.sitting,
           timerSettings: timerSettings,
           startTime: timerState.startTime ?? DateTime.now().subtract(timerState.elapsedTime),
           endTime: timerState.endTime ?? DateTime.now(),

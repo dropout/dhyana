@@ -25,7 +25,7 @@ class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
               child: PresenceButton(),
             ),
             TrailingSlot(
-              show: homeScreenState.sessionType == .timer,
+              show: homeScreenState.sessionType == .sitting,
               child: TimerSettingsHistoryButton(profileId: profileId),
             ),
             TrailingSlot(

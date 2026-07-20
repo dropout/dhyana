@@ -4,6 +4,6 @@ part of 'home_screen_cubit.dart';
 sealed class HomeScreenState with _$HomeScreenState {
   const HomeScreenState._();
   const factory HomeScreenState({
-    @Default(SessionType.timer) SessionType sessionType,
+    @Default(SessionType.sitting) SessionType sessionType,
   }) = _HomeScreenState;
 }

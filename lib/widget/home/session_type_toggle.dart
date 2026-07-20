@@ -47,9 +47,9 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
     return GestureDetector(
       onTap: () {
         context.hapticsTap();
-        SessionType newMode = (widget.activeMode == SessionType.timer)
+        SessionType newMode = (widget.activeMode == SessionType.sitting)
             ? SessionType.chanting
-            : SessionType.timer;
+            : SessionType.sitting;
         widget.onModeChanged(newMode);
       },
       child: AnimatedSwitcher(
@@ -80,7 +80,7 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
       child: Padding(
         padding: const EdgeInsets.all(DesignSpec.paddingMd),
         child: Icon(
-          (item == SessionType.timer) ? Icons.music_note : Icons.timer_outlined,
+          (item == SessionType.sitting) ? Icons.music_note : Icons.timer_outlined,
           color: AppColors.gold,
         ),
       ),
