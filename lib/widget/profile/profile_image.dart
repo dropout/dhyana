@@ -1,20 +1,21 @@
 import 'package:dhyana/model/profile_model.dart';
+import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
 import 'package:dhyana/widget/util/app_cached_network_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
+/// A widget that displays a profile image for a given [ProfileModel].
+/// If the profile has a valid image, it will be displayed. Otherwise, a
+/// placeholder avatar with the first letter of the profile's display name
+/// will be shown. The size of the image can be customized via the [size] parameter.
 class ProfileImage extends StatelessWidget {
-
-  static const defaultSize = 96.0;
-
+  /// The profile model containing the user's profile information.
   final ProfileModel profile;
+
+  /// The size of the profile image. Defaults to [defaultSize].
   final double size;
 
-  const ProfileImage({
-    required this.profile,
-    this.size = defaultSize,
-    super.key
-  });
+  const ProfileImage({required this.profile, this.size = 96.0, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +23,19 @@ class ProfileImage extends StatelessWidget {
       key: const Key('profile_image_sized_box'),
       width: size,
       height: size,
-      child: AppCachedNetworkImage(
-        key: ValueKey(profile), // Rebuild when profile changes
-        imagePath: profile.profileImagePath,
-        blurHash: profile.photoBlurhash,
-        resourceResolver: context.services.resourceResolver,
-        circular: true,
-      ),
+      child: switch (profile.hasProfileImage) {
+        true => AppCachedNetworkImage(
+          key: ValueKey(profile), // Rebuild when profile changes
+          imagePath: profile.profileImagePath,
+          blurHash: profile.photoBlurhash!,
+          resourceResolver: context.services.resourceResolver,
+          circular: true,
+        ),
+        false => ProfileImagePlaceholder(
+          name: profile.displayName,
+          backgroundColor: Colors.grey,
+        ),
+      },    
     );
   }
 
@@ -39,12 +46,8 @@ class ProfileImage extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: DecorationImage(
-          image: imageProvider,
-          fit: BoxFit.cover
-        ),
+        image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
       ),
     );
   }
-
 }

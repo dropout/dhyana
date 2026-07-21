@@ -30,14 +30,14 @@ class ProfileView extends StatelessWidget {
               children: [
                 // Profile avatar + name
                 Gap.large(),
-                Container(
-                  width: DesignSpec.circleLg,
-                  height: DesignSpec.circleLg,
+                DecoratedBox(
+                  // let the border be visible on top of the image
+                  position: .foreground, 
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.black, width: 4.0),
+                    border: Border.all(color: Colors.black, width: 4.0,),
                   ),
-                  child: ProfileImage(profile: profile),
+                  child: ProfileImage(profile: profile, size: DesignSpec.circleLg),
                 ),
                 Gap.small(),
                 Text(

@@ -19,8 +19,8 @@ sealed class PublicProfile with _$PublicProfile implements ProfileModel {
     required String id,
     required String firstName,
     required String lastName,
-    required String photoUrl,
-    required String photoBlurhash,
+    required String? photoUrl,
+    required String? photoBlurhash,
     Location? location,
   }) = _PublicProfile;
 
@@ -57,5 +57,9 @@ sealed class PublicProfile with _$PublicProfile implements ProfileModel {
   @override
   String get profileImagePath =>
     '/profiles/$id/photo.jpg';
+
+  @override
+  bool get hasProfileImage =>
+    photoUrl != null && photoUrl!.isNotEmpty;
 
 }

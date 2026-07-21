@@ -26,8 +26,8 @@ abstract class Profile with _$Profile implements ProfileModel {
     required String firstName,
     required String lastName,
     required String email,
-    required String photoUrl,
-    required String photoBlurhash,
+    required String? photoUrl,
+    required String? photoBlurhash,
     @DateTimeConverter() required DateTime signupDate,
     required ProfileStatisticsReport statsReport,
     required bool completed,
@@ -61,6 +61,10 @@ abstract class Profile with _$Profile implements ProfileModel {
 
   @override
   String get profileImagePath =>
-    '/profiles/$id/photo.jpg';
+    '/profiles/$id/photo.jpg';  
+
+  @override
+  bool get hasProfileImage =>
+    photoUrl != null && photoUrl!.isNotEmpty;
   
 }
