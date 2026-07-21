@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/service/default/default_safe_image_detector.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,6 @@ import 'package:image_picker/image_picker.dart';
 /// It uses the [ProfileImagePicker] widget internally to
 /// handle the image selection.
 class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
-
   /// The profile associated with the image picker.
   final Profile profile;
 
@@ -43,27 +43,27 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
     super.onReset,
     super.key,
   }) : super(
-    builder: (FormFieldState<Uint8List?> field) {
-      final state = field as FormBuilderImagePickerState;
-      final widget = state.widget;
+         builder: (FormFieldState<Uint8List?> field) {
+           final state = field as FormBuilderImagePickerState;
+           final widget = state.widget;
 
-      return ProfileImagePicker(
-        profile: widget.profile,
-        label: widget.label,
-        onImageSelected: (value) {
-          field.didChange(value);
-        },
-        onError: widget.onError,
-      );
-    },
-  );
+           return ProfileImagePicker(
+             profile: widget.profile,
+             label: widget.label,
+             onImageSelected: (value) {
+               field.didChange(value);
+             },
+             onError: widget.onError,
+           );
+         },
+       );
 
   @override
   FormBuilderImagePickerState createState() => FormBuilderImagePickerState();
 }
 
 class FormBuilderImagePickerState
-  extends FormBuilderFieldState<FormBuilderProfileImagePicker, Uint8List> {}
+    extends FormBuilderFieldState<FormBuilderProfileImagePicker, Uint8List> {}
 
 enum ProfileImagePickerError {
   photoAccessDenied,
@@ -72,13 +72,9 @@ enum ProfileImagePickerError {
   unknown,
 }
 
-enum ProfileImagePickerProcessState {
-  idle,
-  pickingImage,
-}
+enum ProfileImagePickerProcessState { idle, pickingImage }
 
 class ProfileImagePicker extends StatefulWidget {
-
   final String label;
   final Profile profile;
 
@@ -98,24 +94,28 @@ class ProfileImagePicker extends StatefulWidget {
 }
 
 class _ProfileImagePickerState extends State<ProfileImagePicker> {
-
+  /// The size of the edit indicator that appears on the profile image picker.
   static const double _indicatorSize = 32.0;
 
+  /// The current processing state of the profile image picker.
   ProfileImagePickerProcessState _processingState =
-    ProfileImagePickerProcessState.idle;
+      ProfileImagePickerProcessState.idle;
 
+  /// The image picker instance used to select images from the device.
   final ImagePicker picker = ImagePicker();
+
+  /// The currently selected image data in bytes.
   Uint8List? selectedImageData;
 
-  // New fields to manage network image loading/listening
+  // Fields to manage network image loading/listening
   ImageProvider? _imageProvider;
   ImageStream? _networkImageStream;
   ImageStreamListener? _networkImageListener;
   bool _initialImageLoaded = false;
   String? _currentImageUrl;
 
-  bool get hasSelectedImage =>
-    selectedImageData != null;
+  /// Returns true if a new image has been selected by the user.
+  bool get hasSelectedImage => selectedImageData != null;
 
   @override
   void initState() {
@@ -143,8 +143,8 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   }
 
   void _updateNetworkImageListenerIfNeeded() {
-    final String newUrl = widget.profile.photoUrl;
-    if (newUrl.isEmpty) {
+    final String? newUrl = widget.profile.photoUrl;
+    if (newUrl == null || newUrl.isEmpty) {
       _removeNetworkImageListener();
       _currentImageUrl = null;
       _initialImageLoaded = false;
@@ -211,7 +211,6 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
   void _selectFile(BuildContext context) async {
     try {
-
       // Start picking image
       setState(() {
         _processingState = ProfileImagePickerProcessState.pickingImage;
@@ -268,15 +267,35 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        buildCurrentImageDisplay(context),
-      ],
+      children: [buildCurrentImageDisplay(context)],
     );
   }
 
   Widget buildCurrentImageDisplay(BuildContext context) {
-    ImageProvider imageProvider = _getImageProvider();
+    ImageProvider? imageProvider = _getImageProvider();
     final Offset indicatorPos = _computeIndicatorPosition(45.0);
+
+    late final Widget profileImageWidget;
+    if (imageProvider != null) {
+      profileImageWidget = ProfileImagePickerCurrentImage(
+        imageProvider: imageProvider,
+      );
+    } else {
+      profileImageWidget = SizedBox.expand(
+        child: DecoratedBox(
+          position: .foreground, // draw border on top of its child
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 4.0),
+          ),
+          child: ProfileImagePlaceholder(
+            name: widget.profile.displayName,
+            backgroundColor: Colors.grey,
+          ),
+        ),
+      );
+    }
+
     return GestureDetector(
       onTap: () => _onWidgetTapped(context),
       child: SizedBox(
@@ -285,7 +304,8 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         child: Stack(
           children: [
             // show current image
-            ProfileImagePickerCurrentImage(imageProvider: imageProvider),
+            profileImageWidget,
+            // ProfileImagePickerCurrentImage(imageProvider: imageProvider),
 
             // show a loading indicator when picking an image
             // this makes sense when cold starting,
@@ -296,7 +316,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                   strokeWidth: 4.0,
                   color: AppColors.backgroundPaperLight,
                 ),
-            ),
+              ),
 
             // show edit indicator
             Positioned(
@@ -312,35 +332,49 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     );
   }
 
-  ImageProvider _getImageProvider() {
+  ImageProvider? _getImageProvider() {
+    // If a new image has been selected, use that
     if (hasSelectedImage) {
       return MemoryImage(selectedImageData!);
-    } else if (_imageProvider != null && _initialImageLoaded) {
-      return NetworkImage(widget.profile.photoUrl);
-    } else {
-      return BlurHashImage(widget.profile.photoBlurhash);
     }
+
+    // If the profile has a photoUrl, use that
+    if (widget.profile.hasProfileImage &&
+        _initialImageLoaded &&
+        _imageProvider != null) {
+      return _imageProvider;
+    }
+
+    // If the profile has photoUrl but not loaded yet, and has a blurhash, use that
+    if (widget.profile.hasProfileImage && !_initialImageLoaded && widget.profile.photoBlurhash != null) {
+      return BlurHashImage(widget.profile.photoBlurhash!);
+    }
+
+    // Return null to indicate to use generated placeholder
+    // instead of an image.    
+    return null;
   }
 
+  /// Computes the position of the edit indicator based on the given angle in degrees.
+  /// The indicator is positioned on the circumference of the profile image circle.
   Offset _computeIndicatorPosition(double angleDegrees) {
-    final double radius = DesignSpec.circleLg / 2 - 10.0; // minus the border width
+    final double radius =
+        DesignSpec.circleLg / 2 - 10.0; // minus the border width
     final double angleRadians = angleDegrees * math.pi / 180.0;
     final double center = DesignSpec.circleLg / 2;
-    final double left = center + radius * math.cos(angleRadians) - _indicatorSize / 2;
-    final double top = center + radius * math.sin(angleRadians) - _indicatorSize / 2;
+    final double left =
+        center + radius * math.cos(angleRadians) - _indicatorSize / 2;
+    final double top =
+        center + radius * math.sin(angleRadians) - _indicatorSize / 2;
     return Offset(left, top);
   }
-
 }
 
+/// A small circular edit indicator that appears on the profile image picker.
 class ProfileImagePickerEditIndicator extends StatelessWidget {
-
   final double indicatorSize;
 
-  const ProfileImagePickerEditIndicator({
-    this.indicatorSize = 32.0,
-    super.key,
-  });
+  const ProfileImagePickerEditIndicator({this.indicatorSize = 32.0, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -348,26 +382,17 @@ class ProfileImagePickerEditIndicator extends StatelessWidget {
       width: indicatorSize,
       height: indicatorSize,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 3.0,
-        ),
+        border: Border.all(color: Colors.black, width: 3.0),
         shape: BoxShape.circle,
         color: Colors.white,
       ),
-      child: const Icon(
-        Icons.edit,
-        color: Colors.black,
-        size: 16,
-      ),
+      child: const Icon(Icons.edit, color: Colors.black, size: 16),
     );
   }
 }
 
-
-
+/// A widget that displays the current profile image in a circular shape.
 class ProfileImagePickerCurrentImage extends StatelessWidget {
-
   final ImageProvider imageProvider;
   final void Function()? onTap;
 
@@ -382,23 +407,17 @@ class ProfileImagePickerCurrentImage extends StatelessWidget {
     return AnimatedSwitcher(
       duration: Durations.medium2,
       child: DecoratedBox(
+        // Whenever the imageProvider changes, we want to trigger a rebuild of the DecoratedBox.
+        // that trigger the AnimatedSwitcher to animate the transition between the old and new image.
         key: ValueKey<ImageProvider>(imageProvider),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.black,
-            width: 4.0,
-          ),
+          border: Border.all(color: Colors.black, width: 4.0),
           color: Colors.grey.shade400,
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
+          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
-        // ClipOval ensures child content (if any) matches the circular shape
         child: SizedBox.expand(),
       ),
     );
   }
-
 }
