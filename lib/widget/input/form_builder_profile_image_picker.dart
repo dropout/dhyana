@@ -359,7 +359,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   /// The indicator is positioned on the circumference of the profile image circle.
   Offset _computeIndicatorPosition(double angleDegrees) {
     final double radius =
-        DesignSpec.circleLg / 2 - 10.0; // minus the border width
+        DesignSpec.circleLg / 2 - 6.0; // minus the border width
     final double angleRadians = angleDegrees * math.pi / 180.0;
     final double center = DesignSpec.circleLg / 2;
     final double left =
