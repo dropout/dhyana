@@ -2,7 +2,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/enum/sound.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 
 /// Service that provides timer-specific audio functionality by delegating to
 /// the [AppAudioHandler] with appropriate custom actions.

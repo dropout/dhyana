@@ -2,7 +2,7 @@ import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';

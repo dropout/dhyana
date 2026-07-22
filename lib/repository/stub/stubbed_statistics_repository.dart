@@ -11,7 +11,7 @@ import 'package:dhyana/model/year.dart';
 import 'package:dhyana/model/year_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:flutter/material.dart';
 
 class StubbedStatisticsRepository implements StatisticsRepository {

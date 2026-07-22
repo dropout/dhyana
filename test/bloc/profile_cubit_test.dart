@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/data_provider_exception.dart';
 import 'package:dhyana/model/consecutive_days.dart';
-import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';

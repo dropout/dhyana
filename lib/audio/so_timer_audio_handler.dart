@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/enum/sound.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
 enum SoTimerHandlerCustomAction { start, playSound }

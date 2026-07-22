@@ -1,5 +1,5 @@
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/widget/timer/settings/input_button.dart';
+import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/design_spec.dart';

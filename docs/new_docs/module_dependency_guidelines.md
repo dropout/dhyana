@@ -6,6 +6,12 @@ This document defines import and dependency rules for the modular architecture i
 
 Keep modules independent, testable, and easy to evolve by preventing deep cross-module coupling.
 
+## Rule of thumb
+
+1. Domain knows what is needed.
+2. Data knows how it is done.
+3. Presentation/application depends on domain contract, never on data implementation.
+
 ## Current module roots
 
 - `lib/modules/account`

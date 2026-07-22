@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dhyana/widget/timer/running/timer_running_cover.dart';
+import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_cover.dart';
 
 import '../../../test_context_providers.dart';
 

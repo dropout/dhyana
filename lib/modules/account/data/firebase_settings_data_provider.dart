@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/account/data/settings_data_provider.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 
-import 'firebase_data_provider.dart';
+import '../../../data_provider/firebase/firebase_data_provider.dart';
 
 /// A Firebase Firestore data provider for ProfileSettings.
 /// Implements CRUD operations specific to ProfileSettings.

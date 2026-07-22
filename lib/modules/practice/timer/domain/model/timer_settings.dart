@@ -1,10 +1,9 @@
+import 'package:dhyana/core/domain/model/converter/date_time_or_null_converter.dart';
+import 'package:dhyana/core/domain/model/converter/duration_converter.dart';
+import 'package:dhyana/core/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dhyana/enum/sound.dart';
-
-import 'converter/date_time_or_null_converter.dart';
-import 'converter/duration_converter.dart';
-import '../core/domain/model/model.dart';
 
 part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';

@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/timer/settings/input_button.dart';
+import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

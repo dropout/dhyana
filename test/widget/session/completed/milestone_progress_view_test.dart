@@ -1,5 +1,5 @@
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/widget/session/completed/milestone_progress_view.dart';
 import 'package:dhyana/widget/session/completed/milestone_progress_view_item.dart';

@@ -1,4 +1,4 @@
-import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/widget/session/completed/progress_summary.dart';
 import 'package:dhyana/widget/session/completed/progress_summary_item.dart';

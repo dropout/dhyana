@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 import 'chant.dart';
-import 'converter/date_time_or_null_converter.dart';
+import '../core/domain/model/converter/date_time_or_null_converter.dart';
 import '../core/domain/model/model.dart';
 
 part 'chanting_settings.freezed.dart';

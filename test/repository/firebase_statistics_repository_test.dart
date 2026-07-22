@@ -5,7 +5,7 @@ import 'package:dhyana/data_provider/firebase/firebase_session_data_provider.dar
 import 'package:dhyana/data_provider/firebase/firebase_week_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_year_data_provider.dart';
 import 'package:dhyana/model/day.dart';
-import 'package:dhyana/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/month.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';

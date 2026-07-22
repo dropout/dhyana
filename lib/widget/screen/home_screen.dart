@@ -5,7 +5,7 @@ import 'package:dhyana/widget/home/home_screen_appbar.dart';
 import 'package:dhyana/bloc/home_screen/home_screen_cubit.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/enum/session_type.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/widget/context/safe_profile_settings.dart';
 import 'package:dhyana/widget/chanting/chanting_settings_view.dart';
 import 'package:dhyana/widget/home/home_screen_bottom_menu.dart';
@@ -14,7 +14,7 @@ import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/widget/timer/timer_settings_view.dart';
+import 'package:dhyana/modules/practice/timer/presentation/widget/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The main entry-point screen of the app, allowing users to choose between

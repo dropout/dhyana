@@ -1,7 +1,8 @@
+import 'package:dhyana/core/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import '../core/domain/model/model.dart';
+
 import 'timer_settings.dart';
 
 part 'timer_settings_history_record.freezed.dart';

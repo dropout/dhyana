@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/timer_settings_history_data_provider.dart';
-import 'package:dhyana/model/timer_settings_history_record.dart';
-import 'package:dhyana/model/timer_settings_history_record_query_options.dart';
+import 'package:dhyana/modules/practice/timer/data/timer_settings_history_data_provider.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record_query_options.dart';
 
-import 'firebase_data_provider.dart';
-import 'firebase_model_extension.dart';
+import '../../../../data_provider/firebase/firebase_data_provider.dart';
+import '../../../../data_provider/firebase/firebase_model_extension.dart';
 
 class FirebaseTimerSettingsHistoryDataProvider
   extends FirebaseDataProvider<TimerSettingsHistoryRecord>

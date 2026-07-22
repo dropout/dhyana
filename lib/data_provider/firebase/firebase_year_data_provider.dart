@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/data_provider/year_data_provider.dart';
-import 'package:dhyana/model/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/year.dart';
 import 'package:dhyana/model/year_query_options.dart';

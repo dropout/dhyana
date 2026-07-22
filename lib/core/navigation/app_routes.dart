@@ -3,7 +3,7 @@ import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_keys.dart';
@@ -27,8 +27,8 @@ import '../../widget/screen/profile_stats_screen.dart';
 import '../../modules/account/presentation/widget/screen/profile_wizard_screen.dart';
 import '../../widget/screen/session_completed_screen.dart';
 import '../../widget/screen/session_history_screen.dart';
-import '../../widget/screen/timer_screen.dart';
-import '../../widget/screen/timer_settings_history_screen.dart';
+import '../../modules/practice/timer/presentation/widget/timer_screen.dart';
+import '../../modules/practice/timer/presentation/widget/timer_settings_history_screen.dart';
 
 part 'app_routes.g.dart';
 

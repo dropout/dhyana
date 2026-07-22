@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/widget/timer/settings/duration_input_view.dart';
+import 'package:dhyana/modules/practice/timer/presentation/widget/settings/duration_input_view.dart';
 
 import '../../../test_context_providers.dart';
 

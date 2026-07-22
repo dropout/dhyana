@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/model/timer_settings.dart';
-import 'package:dhyana/widget/timer/running/timer_running_controls.dart';
+import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

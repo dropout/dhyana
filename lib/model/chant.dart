@@ -1,5 +1,5 @@
 import 'package:dhyana/model/chant_asset_metadata.dart';
-import 'package:dhyana/model/converter/duration_converter.dart';
+import 'package:dhyana/core/domain/model/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
