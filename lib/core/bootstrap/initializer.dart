@@ -8,7 +8,7 @@ import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
-import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
+import 'package:dhyana/modules/account/data/firebase_profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';

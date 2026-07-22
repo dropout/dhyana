@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'firebase_day_data_provider.dart';
 import 'firebase_month_data_provider.dart';
-import 'firebase_profile_data_provider.dart';
+import '../../modules/account/data/firebase_profile_data_provider.dart';
 import 'firebase_year_data_provider.dart';
 import 'firebase_session_data_provider.dart';
 import 'firebase_week_data_provider.dart';

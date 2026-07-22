@@ -13,7 +13,7 @@ import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/account/domain/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
-import 'package:dhyana/repository/timer_settings_history_repository.dart';
+import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/service/analytics_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/service/chanting_audio_service.dart';
