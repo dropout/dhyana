@@ -48,7 +48,7 @@ void main() {
                   providers: [
                     Provider<Services>(create: (context) => mockServices),
                   ],
-                  child: ProfileImage(profile: testProfile),
+                  child: ProfileImage(profile: testProfile, size: 32.0),
                 ),
               ),
             );
@@ -57,8 +57,8 @@ void main() {
             final sizedBox = tester.widget<SizedBox>(
               find.byKey(const Key('profile_image_sized_box')),
             );
-            expect(sizedBox.width, equals(ProfileImage.defaultSize));
-            expect(sizedBox.height, equals(ProfileImage.defaultSize));
+            expect(sizedBox.width, equals(32.0));
+            expect(sizedBox.height, equals(32.0));
 
             expect(find.byType(AppCachedNetworkImage), findsOneWidget);
           });

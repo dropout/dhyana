@@ -1,18 +1,37 @@
+import 'dart:typed_data';
 
+import 'package:dhyana/util/logger_mixin.dart';
 import 'package:image/image.dart' as img;
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-import 'package:dhyana/service/safe_image_detector_service.dart';
+import 'package:dhyana/service/safe_image_detector.dart';
 
+class DefaultSafeImageDetectorFactory implements SafeImageDetectorFactory {
+  /// Path to the TFLite model
+  static const _kModelPath = 'assets/nsfw.tflite';
 
-// import 'package:image/image.dart' as img;
-import 'dart:typed_data';
+  /// Default threshold for classifying NSFW content
+  static const _kNSFWThreshold = 0.7;
 
+  /// Threshold for NSFW classification
+  final double threshold;
 
+  const DefaultSafeImageDetectorFactory({
+    this.threshold = _kNSFWThreshold,
+  });
+
+  @override
+  Future<SafeImageDetector> create() async {
+    final interpreter = await Interpreter.fromAsset(_kModelPath);
+    return DefaultSafeImageDetector._(
+      interpreter: interpreter,
+      threshold: threshold,
+    );
+  }
+}
 
 /// NsfwDetector class handles the NSFW detection process.
-class DefaultSafeImageDetector implements SafeImageDetectorService {
-
+class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
   /// Defines the mean values for each channel,
   /// used in the Visual Geometry Group model.
   /// These values are used for preprocessing input images.
@@ -26,34 +45,27 @@ class DefaultSafeImageDetector implements SafeImageDetectorService {
   /// Default input height for the model
   static const _kInputHeight = 224;
 
-  /// Path to the TFLite model
-  static const _kModelPath = 'assets/nsfw.tflite';
-
-  /// Default threshold for classifying NSFW content
-  static const _kNSFWThreshold = 0.7;
-
   /// Interpreter for running the TFLite model
-  late final Interpreter _interpreter;
+  final Interpreter _interpreter;
 
   /// Threshold for NSFW classification
-  late final double _threshold;
+  final double _threshold;
 
-  /// Private constructor for creating an instance of NsfwDetector
-  DefaultSafeImageDetector._create(this._interpreter, this._threshold);
-
-  /// Loads the NSFW detector with default parameters
-  static Future<DefaultSafeImageDetector> load({double threshold = _kNSFWThreshold}) async {
-    final interpreter = await Interpreter.fromAsset(_kModelPath);
-    return DefaultSafeImageDetector._create(interpreter, threshold);
-  }
+  DefaultSafeImageDetector._({
+    required Interpreter interpreter,
+    required double threshold,
+  }) : _interpreter = interpreter,
+       _threshold = threshold;
 
   /// Detects NSFW content from an image
   @override
   Future<ImageSafetyDetectionResult> detectImageSafety(img.Image image) async {
-
     // Resize the image to the required input size for the model
-    img.Image resizedImage =
-        img.copyResize(image, width: _kInputWidth, height: _kInputHeight);
+    img.Image resizedImage = img.copyResize(
+      image,
+      width: _kInputWidth,
+      height: _kInputHeight,
+    );
 
     // Convert the image to a normalized byte list
     Uint8List input = _toNormalizedByteList(resizedImage);
@@ -77,6 +89,7 @@ class DefaultSafeImageDetector implements SafeImageDetectorService {
       throw Exception('Failed to get a valid score from the model output.');
     }
 
+    logger.t('NSFW detection score: $score, passed threshold: ${score < _threshold}');
     return ImageSafetyDetectionResult(score < _threshold, score);
   }
 
@@ -100,8 +113,8 @@ class DefaultSafeImageDetector implements SafeImageDetectorService {
   }
 
   /// Closes the interpreter to release resources
-  void close() {
+  @override
+  void releaseModel() {
     _interpreter.close();
   }
-
 }

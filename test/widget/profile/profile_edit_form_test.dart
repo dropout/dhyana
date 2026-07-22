@@ -22,6 +22,9 @@ void main() {
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockCacheManagerService mockCacheManagerService;
+    late MockResourceResolver mockResourceResolver;
+    late MockSafeImageDetectorFactory mockSafeImageDetectorFactory;
+    late MockSafeImageDetector safeImageDetector;
 
     setUpAll(() async {
       nock.init();
@@ -34,9 +37,20 @@ void main() {
 
       mockCrashlyticsService = MockCrashlyticsService();
       mockCacheManagerService = MockCacheManagerService();
+      mockResourceResolver = MockResourceResolver();
+      mockSafeImageDetectorFactory = MockSafeImageDetectorFactory();
+      safeImageDetector = MockSafeImageDetector();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
+      when(() => mockServices.safeImageDetectorFactory)
+        .thenReturn(mockSafeImageDetectorFactory);
+      when(() => mockSafeImageDetectorFactory.create())
+        .thenAnswer((_) async => safeImageDetector);
+      when(() => mockServices.resourceResolver)
+        .thenReturn(mockResourceResolver);
+      when(() => mockResourceResolver.resolveStoragePath(any()))
+        .thenAnswer((_) async => profile.photoUrl!);
 
       when(() => mockServices.cacheManagerService)
         .thenReturn(mockCacheManagerService);
@@ -47,6 +61,10 @@ void main() {
     });
 
     testWidgets('renders all form fields with default values', (WidgetTester tester) async {
+      final profileWithoutPhoto = profile.copyWith(
+        photoUrl: null,
+        photoBlurhash: null,
+      );
 
       // https://firebasestorage.googleapis.com/v0/b/dhyana-timer.appspot.com/o/profiles%2Fdefault%2Fphoto.jpg?alt=media&token=0d5bb454-7ce3-4f27-9ccf-7822fd559bb4
 
@@ -57,7 +75,7 @@ void main() {
               Provider<Services>(create: (context) => mockServices ),
             ],
           child: Material(
-            child: ProfileEditForm(profile: profile)
+            child: ProfileEditForm(profile: profileWithoutPhoto)
           ),
           )
         )
@@ -66,10 +84,10 @@ void main() {
 
       final formBuilderImagePicker = tester.widget<FormBuilderProfileImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
 
-      expect(formBuilderImagePicker.profile, profile);
+      expect(formBuilderImagePicker.profile, profileWithoutPhoto);
 
-      expect(find.text(profile.firstName), findsOneWidget);
-      expect(find.text(profile.lastName), findsOneWidget);
+      expect(find.text(profileWithoutPhoto.firstName), findsOneWidget);
+      expect(find.text(profileWithoutPhoto.lastName), findsOneWidget);
       expect(find.byType(FormBuilderTextField), findsNWidgets(2));
     });
 
@@ -149,9 +167,6 @@ void main() {
         expect(formBuildState.value['firstName'], 'TestFirstName');
         expect(formBuildState.value['lastName'], 'TestLastName');
       });
-
-
-
 
     });
 

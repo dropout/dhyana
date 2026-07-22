@@ -1,16 +1,23 @@
+import 'dart:typed_data';
 import 'dart:math' as math;
 
+import 'package:dhyana/enum/loading_state.dart';
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/service/default/default_safe_image_detector.dart';
+import 'package:dhyana/service/safe_image_detector.dart';
+import 'package:dhyana/widget/input/profile_image_picker/profile_image_picker_current_image.dart';
+import 'package:dhyana/widget/input/profile_image_picker/profile_image_picker_edit_badge.dart';
+import 'package:dhyana/widget/input/profile_image_picker/profile_image_selection_controller.dart';
 import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
+
+Future<XFile?> _pickProfileImageFromGallery() {
+  return ImagePicker().pickImage(source: ImageSource.gallery);
+}
 
 /// A FormBuilder field that allows users to pick an image for their profile
 /// from their device.
@@ -25,11 +32,13 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
   final String label;
 
   final void Function(ProfileImagePickerError, dynamic)? onError;
+  final PickProfileImage pickImage;
 
   FormBuilderProfileImagePicker({
     required this.profile,
-    this.label = 'Profile Image',
+    required this.label,
     this.onError,
+    this.pickImage = _pickProfileImageFromGallery,
     // From Super
     required super.name,
     super.autovalidateMode = AutovalidateMode.disabled,
@@ -50,10 +59,12 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
            return ProfileImagePicker(
              profile: widget.profile,
              label: widget.label,
+             imageData: field.value,
              onImageSelected: (value) {
                field.didChange(value);
              },
              onError: widget.onError,
+             pickImage: widget.pickImage,
            );
          },
        );
@@ -65,27 +76,24 @@ class FormBuilderProfileImagePicker extends FormBuilderField<Uint8List> {
 class FormBuilderImagePickerState
     extends FormBuilderFieldState<FormBuilderProfileImagePicker, Uint8List> {}
 
-enum ProfileImagePickerError {
-  photoAccessDenied,
-  imageLoadingFailed,
-  notSafeImage,
-  unknown,
-}
-
 enum ProfileImagePickerProcessState { idle, pickingImage }
 
 class ProfileImagePicker extends StatefulWidget {
   final String label;
   final Profile profile;
+  final Uint8List? imageData;
 
   final void Function(Uint8List)? onImageSelected;
   final void Function(ProfileImagePickerError, dynamic)? onError;
+  final PickProfileImage pickImage;
 
   const ProfileImagePicker({
     required this.profile,
+    required this.label,
+    this.imageData,
     this.onImageSelected,
     this.onError,
-    this.label = 'Profile Image',
+    this.pickImage = _pickProfileImageFromGallery,
     super.key,
   });
 
@@ -97,205 +105,128 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   /// The size of the edit indicator that appears on the profile image picker.
   static const double _indicatorSize = 32.0;
 
+  /// Loading state for the resources needed for image safety detection.
+  LoadingState _nsfwDetectorLoadingState = .loading;
+
   /// The current processing state of the profile image picker.
   ProfileImagePickerProcessState _processingState =
       ProfileImagePickerProcessState.idle;
 
-  /// The image picker instance used to select images from the device.
-  final ImagePicker picker = ImagePicker();
-
-  /// The currently selected image data in bytes.
-  Uint8List? selectedImageData;
-
-  // Fields to manage network image loading/listening
-  ImageProvider? _imageProvider;
-  ImageStream? _networkImageStream;
-  ImageStreamListener? _networkImageListener;
-  bool _initialImageLoaded = false;
-  String? _currentImageUrl;
-
-  /// Returns true if a new image has been selected by the user.
-  bool get hasSelectedImage => selectedImageData != null;
+  late final SafeImageDetector _safeImageDetectorService;
+  late ProfileImageSelectionController _imageSelectionController;
 
   @override
   void initState() {
-    // start resolving after first frame to ensure context is available
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateNetworkImageListenerIfNeeded();
-    });
-
     super.initState();
+    _initializeResources();
   }
 
-  @override
-  void didChangeDependencies() {
-    // ensure stream is (re)resolved if needed when dependencies change
-    _updateNetworkImageListenerIfNeeded();
-    super.didChangeDependencies();
+  /// Initializes the resources needed for image safety detection.
+  /// Don't add this to services singleton it consumes a lot of memory and is 
+  /// only needed for this widget.
+  void _initializeResources() async {
+    final crashlyticsService = context.services.crashlyticsService;
+
+    try {
+      _safeImageDetectorService =
+          await context.services.safeImageDetectorFactory.create();
+      _initializeController();
+
+      if (mounted) {
+        setState(() {
+          _nsfwDetectorLoadingState = LoadingState.loaded;
+        });
+      } else {
+        _safeImageDetectorService.releaseModel();
+      }
+    } catch (error, stackTrace) {
+      crashlyticsService.recordError(
+        exception: error,
+        stackTrace: stackTrace,
+        reason: 'Failed to initialize safe image detector',
+      );
+      if (mounted) {
+        setState(() {
+          _nsfwDetectorLoadingState = LoadingState.error;
+        });
+      }
+    }
   }
 
   @override
   void didUpdateWidget(covariant ProfileImagePicker oldWidget) {
-    if (oldWidget.profile.photoUrl != widget.profile.photoUrl) {
-      _updateNetworkImageListenerIfNeeded();
-    }
     super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.pickImage != widget.pickImage) {
+      _initializeController();
+    }
   }
 
-  void _updateNetworkImageListenerIfNeeded() {
-    final String? newUrl = widget.profile.photoUrl;
-    if (newUrl == null || newUrl.isEmpty) {
-      _removeNetworkImageListener();
-      _currentImageUrl = null;
-      _initialImageLoaded = false;
-      return;
-    }
-
-    if (_currentImageUrl == newUrl && _networkImageStream != null) {
-      // already resolving the same url
-      return;
-    }
-
-    // Remove old listener if any
-    _removeNetworkImageListener();
-
-    _currentImageUrl = newUrl;
-    final provider = NetworkImage(newUrl);
-    final ImageConfiguration config = createLocalImageConfiguration(context);
-    final ImageStream stream = provider.resolve(config);
-
-    _initialImageLoaded = false;
-
-    _networkImageListener = ImageStreamListener(
-      (ImageInfo image, bool synchronousCall) {
-        if (!mounted) return;
-        setState(() {
-          _initialImageLoaded = true;
-        });
-      },
-      onError: (dynamic error, StackTrace? stackTrace) {
-        if (!mounted) return;
-        setState(() {
-          _initialImageLoaded = false;
-        });
-      },
+  void _initializeController() {
+    _imageSelectionController = ProfileImageSelectionController(
+      pickImage: widget.pickImage,
+      safeImageDetectorService: _safeImageDetectorService,
     );
-
-    stream.addListener(_networkImageListener!);
-    _networkImageStream = stream;
-    _imageProvider = provider;
-  }
-
-  void _removeNetworkImageListener() {
-    if (_networkImageStream != null && _networkImageListener != null) {
-      try {
-        _networkImageStream!.removeListener(_networkImageListener!);
-      } catch (_) {
-        // ignore if already removed
-      }
-    }
-    _networkImageStream = null;
-    _networkImageListener = null;
-  }
-
-  @override
-  void dispose() {
-    _removeNetworkImageListener();
-    super.dispose();
   }
 
   void _onWidgetTapped(BuildContext context) {
-    _selectFile(context);
+    if (_processingState == ProfileImagePickerProcessState.pickingImage) {
+      return;
+    }
+
+    _selectFile();
     context.hapticsTap();
   }
 
-  void _selectFile(BuildContext context) async {
-    try {
-      // Start picking image
-      setState(() {
-        _processingState = ProfileImagePickerProcessState.pickingImage;
-      });
-      XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  void _selectFile() async {
+    setState(() {
+      _processingState = ProfileImagePickerProcessState.pickingImage;
+    });
 
-      // No image selected, return to idle state
-      if (pickedFile == null) {
-        setState(() {
-          _processingState = ProfileImagePickerProcessState.idle;
-        });
-        return;
-      }
+    final result = await _imageSelectionController.selectProfileImage();
 
-      // Detect NSFW content
-      final safeImageDetector = await DefaultSafeImageDetector.load();
-      img.Image? image = img.decodeImage(await pickedFile.readAsBytes());
-      if (image == null) {
-        setState(() {
-          _processingState = ProfileImagePickerProcessState.idle;
-        });
-        return;
-      } else {
-        image = img.copyResizeCropSquare(image, size: 224);
-      }
+    if (!mounted) {
+      return;
+    }
 
-      final detectionResult = await safeImageDetector.detectImageSafety(image);
-      if (!detectionResult.isSafe) {
-        setState(() {
-          _processingState = ProfileImagePickerProcessState.idle;
-        });
-        widget.onError?.call(ProfileImagePickerError.notSafeImage, null);
-        return;
-      }
+    setState(() {
+      _processingState = ProfileImagePickerProcessState.idle;
+    });
 
-      Uint8List? imageData = img.encodeJpg(image, quality: 90);
-      setState(() {
-        selectedImageData = imageData;
-        _processingState = ProfileImagePickerProcessState.idle;
-      });
-      widget.onImageSelected?.call(selectedImageData!);
-    } on PlatformException catch (e) {
-      if (e.code == 'photo_access_denied') {
-        widget.onError?.call(ProfileImagePickerError.photoAccessDenied, e);
-      } else {
-        widget.onError?.call(ProfileImagePickerError.unknown, e);
-      }
-    } catch (e) {
-      widget.onError?.call(ProfileImagePickerError.unknown, e);
+    if (result.imageData != null) {
+      widget.onImageSelected?.call(result.imageData!);
+    }
+
+    if (result.error != null) {
+      widget.onError?.call(result.error!, result.details);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [buildCurrentImageDisplay(context)],
+    // Handle the loading state of the NSFW detector
+    switch (_nsfwDetectorLoadingState) {
+      case LoadingState.loading:
+        return buildLoading(context);
+      case LoadingState.loaded:
+        return buildLoaded(context);
+      case LoadingState.error:
+        return const SizedBox.shrink();
+      default:
+        return const SizedBox.shrink();      
+    }
+  }
+
+  Widget buildLoading(BuildContext context) {
+    return SizedBox(
+      width: DesignSpec.circleLg,
+      height: DesignSpec.circleLg,
+      child: const Center(child: CircularProgressIndicator()),
     );
   }
 
-  Widget buildCurrentImageDisplay(BuildContext context) {
-    ImageProvider? imageProvider = _getImageProvider();
-    final Offset indicatorPos = _computeIndicatorPosition(45.0);
-
-    late final Widget profileImageWidget;
-    if (imageProvider != null) {
-      profileImageWidget = ProfileImagePickerCurrentImage(
-        imageProvider: imageProvider,
-      );
-    } else {
-      profileImageWidget = SizedBox.expand(
-        child: DecoratedBox(
-          position: .foreground, // draw border on top of its child
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.black, width: 4.0),
-          ),
-          child: ProfileImagePlaceholder(
-            name: widget.profile.displayName,
-            backgroundColor: Colors.grey,
-          ),
-        ),
-      );
-    }
-
+  Widget buildLoaded(BuildContext context) {
+    final Offset indicatorPos = _computeEditBadgePosition(45.0);
     return GestureDetector(
       onTap: () => _onWidgetTapped(context),
       child: SizedBox(
@@ -303,9 +234,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         height: DesignSpec.circleLg,
         child: Stack(
           children: [
-            // show current image
-            profileImageWidget,
-            // ProfileImagePickerCurrentImage(imageProvider: imageProvider),
+            _buildCurrentImage(),
 
             // show a loading indicator when picking an image
             // this makes sense when cold starting,
@@ -322,9 +251,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
             Positioned(
               left: indicatorPos.dx,
               top: indicatorPos.dy,
-              child: ProfileImagePickerEditIndicator(
-                indicatorSize: _indicatorSize,
-              ),
+              child: ProfileImagePickerEditBadge(indicatorSize: _indicatorSize),
             ),
           ],
         ),
@@ -332,32 +259,33 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     );
   }
 
-  ImageProvider? _getImageProvider() {
-    // If a new image has been selected, use that
-    if (hasSelectedImage) {
-      return MemoryImage(selectedImageData!);
+  Widget _buildCurrentImage() {
+    if (widget.imageData != null) {
+      return ProfileImagePickerCurrentImage(
+        imageProvider: MemoryImage(widget.imageData!),
+      );
     }
 
-    // If the profile has a photoUrl, use that
-    if (widget.profile.hasProfileImage &&
-        _initialImageLoaded &&
-        _imageProvider != null) {
-      return _imageProvider;
-    }
-
-    // If the profile has photoUrl but not loaded yet, and has a blurhash, use that
-    if (widget.profile.hasProfileImage && !_initialImageLoaded && widget.profile.photoBlurhash != null) {
-      return BlurHashImage(widget.profile.photoBlurhash!);
-    }
-
-    // Return null to indicate to use generated placeholder
-    // instead of an image.    
-    return null;
+    return SizedBox.expand(
+      child: DecoratedBox(
+        position: DecorationPosition.foreground,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.black, width: 4.0),
+        ),
+        child: widget.profile.hasProfileImage
+            ? ProfileImage(profile: widget.profile, size: DesignSpec.circleLg)
+            : ProfileImagePlaceholder(
+                name: widget.profile.displayName,
+                backgroundColor: Colors.grey,
+              ),
+      ),
+    );
   }
 
   /// Computes the position of the edit indicator based on the given angle in degrees.
   /// The indicator is positioned on the circumference of the profile image circle.
-  Offset _computeIndicatorPosition(double angleDegrees) {
+  Offset _computeEditBadgePosition(double angleDegrees) {
     final double radius =
         DesignSpec.circleLg / 2 - 6.0; // minus the border width
     final double angleRadians = angleDegrees * math.pi / 180.0;
@@ -368,56 +296,13 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         center + radius * math.sin(angleRadians) - _indicatorSize / 2;
     return Offset(left, top);
   }
-}
-
-/// A small circular edit indicator that appears on the profile image picker.
-class ProfileImagePickerEditIndicator extends StatelessWidget {
-  final double indicatorSize;
-
-  const ProfileImagePickerEditIndicator({this.indicatorSize = 32.0, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: indicatorSize,
-      height: indicatorSize,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 3.0),
-        shape: BoxShape.circle,
-        color: Colors.white,
-      ),
-      child: const Icon(Icons.edit, color: Colors.black, size: 16),
-    );
+  void dispose() {
+    if (_nsfwDetectorLoadingState == LoadingState.loaded) {
+      _safeImageDetectorService.releaseModel();
+    }
+    super.dispose();
   }
-}
 
-/// A widget that displays the current profile image in a circular shape.
-class ProfileImagePickerCurrentImage extends StatelessWidget {
-  final ImageProvider imageProvider;
-  final void Function()? onTap;
-
-  const ProfileImagePickerCurrentImage({
-    required this.imageProvider,
-    this.onTap,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: Durations.medium2,
-      child: DecoratedBox(
-        // Whenever the imageProvider changes, we want to trigger a rebuild of the DecoratedBox.
-        // that trigger the AnimatedSwitcher to animate the transition between the old and new image.
-        key: ValueKey<ImageProvider>(imageProvider),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.black, width: 4.0),
-          color: Colors.grey.shade400,
-          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-        ),
-        child: SizedBox.expand(),
-      ),
-    );
-  }
 }

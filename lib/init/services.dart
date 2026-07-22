@@ -10,6 +10,7 @@ import 'package:dhyana/service/default/default_lyrics_service.dart';
 import 'package:dhyana/service/default/default_mindful_minutes_service.dart';
 import 'package:dhyana/service/default/default_overlay_service.dart';
 import 'package:dhyana/service/default/default_resource_resolver.dart';
+import 'package:dhyana/service/default/default_safe_image_detector.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/default/default_wakelock_service.dart';
 import 'package:dhyana/service/default/shared_preferences_service_default.dart';
@@ -25,6 +26,7 @@ import 'package:dhyana/service/mindful_minutes_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/remote_settings_service.dart';
 import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/service/safe_image_detector.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
@@ -56,6 +58,7 @@ class Services {
   final UrlLauncher urlLauncher;
   final LyricsService lyricsService;
   final MindfulMinutesService mindfulMinutesService;
+  final SafeImageDetectorFactory safeImageDetectorFactory;
 
   Services({
     required this.analyticsService,
@@ -75,6 +78,7 @@ class Services {
     required this.urlLauncher,
     required this.lyricsService,
     required this.mindfulMinutesService,
+    required this.safeImageDetectorFactory,
   });
 
 }
@@ -98,6 +102,7 @@ class ServicesBuilder {
   late LyricsService _lyricsService;
   late AppAudioHandler _audioHandler;
   late MindfulMinutesService _mindfulMinutesService;
+  late SafeImageDetectorFactory _safeImageDetectorFactory;
 
   ServicesBuilder({
     required FirebaseProvider firebaseProvider,
@@ -146,6 +151,7 @@ class ServicesBuilder {
     _mindfulMinutesService = DefaultMindfulMinutesService(
       flutterMindfulMinutes: FlutterMindfulMinutes(),
     );
+    _safeImageDetectorFactory = const DefaultSafeImageDetectorFactory();
   }
 
   Services build() {
@@ -167,6 +173,7 @@ class ServicesBuilder {
       lyricsService: _lyricsService,
       audioHandler: _audioHandler,
       mindfulMinutesService: _mindfulMinutesService,
+      safeImageDetectorFactory: _safeImageDetectorFactory,
     );
   }
 

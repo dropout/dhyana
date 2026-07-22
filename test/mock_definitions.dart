@@ -22,6 +22,8 @@ import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/id_generator_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
+import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/service/safe_image_detector.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/service/timer_service.dart';
@@ -124,6 +126,14 @@ class MockUrlLauncher
   extends Mock
   implements UrlLauncher {}
 
+class MockSafeImageDetectorFactory
+  extends Mock
+  implements SafeImageDetectorFactory {}
+
+class MockSafeImageDetector
+  extends Mock
+  implements SafeImageDetector {}
+
 class MockWakelockService
   extends Mock
   implements WakelockService {}
@@ -143,6 +153,10 @@ class MockTimerServiceFactory
 class MockTimerService
   extends Mock
   implements TimerService {}
+
+class MockResourceResolver
+  extends Mock
+  implements ResourceResolver {}
 
 // Repositories ----------------------------------------------------------------
 
