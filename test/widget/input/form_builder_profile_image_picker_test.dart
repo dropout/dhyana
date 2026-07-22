@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/service/safe_image_detector.dart';

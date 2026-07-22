@@ -5,7 +5,7 @@ import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/context/chanting_context.dart';
 import 'package:dhyana/widget/chanting/chanting_player_view.dart';
 import 'package:dhyana/widget/util/app_context.dart';

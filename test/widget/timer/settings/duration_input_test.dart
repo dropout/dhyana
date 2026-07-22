@@ -1,4 +1,4 @@
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/widget/timer/settings/duration_input.dart';

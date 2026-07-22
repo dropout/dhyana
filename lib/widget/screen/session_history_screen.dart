@@ -1,12 +1,12 @@
 import 'package:dhyana/bloc/sessions/sessions_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/context/smart_bloc_provider.dart';
+import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/widget/session/history/session_history_list.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'default_screen_setup.dart';
+import '../../core/presentation/default_screen_setup.dart';
 
 class SessionHistoryScreen extends StatelessWidget
   with DefaultScreenSetupHelpersMixin {

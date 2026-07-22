@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dhyana/util/firebase_provider.dart';
-import 'package:dhyana/init/init_result.dart';
-import 'package:dhyana/init/initializer.dart';
+import 'package:dhyana/core/bootstrap/init_result.dart';
+import 'package:dhyana/core/bootstrap/initializer.dart';
 
 import 'widget/app.dart';
 

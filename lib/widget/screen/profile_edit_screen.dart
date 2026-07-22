@@ -3,7 +3,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
-import 'package:dhyana/widget/screen/default_screen_setup.dart';
+import 'package:dhyana/core/presentation/default_screen_setup.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

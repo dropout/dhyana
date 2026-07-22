@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/init/repositories.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/repositories.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';

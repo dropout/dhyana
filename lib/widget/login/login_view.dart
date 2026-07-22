@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/login/login_signed_in_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';

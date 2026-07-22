@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dhyana/widget/app_keys.dart';
+import 'package:dhyana/core/navigation/app_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/model/factory/timer_settings_factory.dart';

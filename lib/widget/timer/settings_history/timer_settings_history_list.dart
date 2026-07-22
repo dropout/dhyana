@@ -2,7 +2,7 @@ import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/model/timer_settings_history_record.dart';
-import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/timer/settings_history/timer_settings_history_list_item.dart';
 import 'package:dhyana/widget/util/app_animation.dart';

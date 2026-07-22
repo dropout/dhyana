@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/chanting_settings/chanting_settings_cubit.dart';
-import 'package:dhyana/widget/context/smart_bloc_provider.dart';
+import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/widget/home/home_screen_appbar.dart';
 import 'package:dhyana/bloc/home_screen/home_screen_cubit.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';

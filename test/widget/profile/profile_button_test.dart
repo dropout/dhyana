@@ -1,11 +1,11 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/profile_settings.dart';
-import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/util/app_loading_indicator.dart';

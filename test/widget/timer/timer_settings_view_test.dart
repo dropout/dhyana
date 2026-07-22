@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';

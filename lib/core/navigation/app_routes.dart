@@ -1,12 +1,12 @@
 import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/init/init_result.dart';
+import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
-import 'package:dhyana/widget/app_keys.dart';
+import 'package:dhyana/core/navigation/app_keys.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:flutter/foundation.dart';
@@ -14,29 +14,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'screen/chanting_screen.dart';
-import 'screen/delete_profile_screen.dart';
-import 'screen/donate_screen.dart';
-import 'screen/home_screen.dart';
-import 'screen/login_screen.dart';
-import 'screen/presence_screen.dart';
-import 'screen/profile_edit_screen.dart';
-import 'screen/profile_screen.dart';
-import 'screen/profile_settings_screen.dart';
-import 'screen/profile_stats_screen.dart';
-import 'screen/profile_wizard_screen.dart';
-import 'screen/session_completed_screen.dart';
-import 'screen/session_history_screen.dart';
-import 'screen/timer_screen.dart';
-import 'screen/timer_settings_history_screen.dart';
+import '../../widget/screen/chanting_screen.dart';
+import '../../widget/screen/delete_profile_screen.dart';
+import '../../widget/screen/donate_screen.dart';
+import '../../widget/screen/home_screen.dart';
+import '../../widget/screen/login_screen.dart';
+import '../../widget/screen/presence_screen.dart';
+import '../../widget/screen/profile_edit_screen.dart';
+import '../../widget/screen/profile_screen.dart';
+import '../../widget/screen/profile_settings_screen.dart';
+import '../../widget/screen/profile_stats_screen.dart';
+import '../../widget/screen/profile_wizard_screen.dart';
+import '../../widget/screen/session_completed_screen.dart';
+import '../../widget/screen/session_history_screen.dart';
+import '../../widget/screen/timer_screen.dart';
+import '../../widget/screen/timer_settings_history_screen.dart';
 
 part 'app_routes.g.dart';
 
 // -----------------------------------------------------------------------------
-//  Instead of using typed parameters for the routes, we need to use a generic 
-//  Object, because with typed parameters devtools will not be able 
+//  Instead of using typed parameters for the routes, we need to use a generic
+//  Object, because with typed parameters devtools will not be able
 //  to serialize the parameters and will throw an error.
-//  Making 'select widget mode' unusable where the route is used with 
+//  Making 'select widget mode' unusable where the route is used with
 //  typed parameters.
 // -----------------------------------------------------------------------------
 
@@ -56,29 +56,27 @@ GoRouter createAppRouter({required InitResult initResult}) {
 
 @TypedGoRoute<HomeRoute>(path: '/', name: 'HOME')
 class HomeRoute extends GoRouteData with $HomeRoute {
-  
   /// An option to force home screen recreation when navigating to it,
   /// which is useful to apply changes that requires home screen reload such
   /// as timer settings change.
   final int? refresh;
 
-  /// Use [TimerSettings] object as extra to propagate 
+  /// Use [TimerSettings] object as extra to propagate
   /// timer settings to the home screen.
   final Object? $extra;
 
-  const HomeRoute({
-    this.refresh,
-    this.$extra,
-  }) : assert($extra is TimerSettings || $extra == null, 'Invalid extra data for HomeRoute. Expected TimerSettings or null.');
+  const HomeRoute({this.refresh, this.$extra})
+    : assert(
+        $extra is TimerSettings || $extra == null,
+        'Invalid extra data for HomeRoute. Expected TimerSettings or null.',
+      );
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     final TimerSettings? timerSettings = ($extra is TimerSettings)
-      ? $extra as TimerSettings
-      : null;
-    return HomeScreen(
-      timerSettings: timerSettings,
-    );
+        ? $extra as TimerSettings
+        : null;
+    return HomeScreen(timerSettings: timerSettings);
   }
 }
 
@@ -117,27 +115,27 @@ class TimerRoute extends GoRouteData with $TimerRoute {
 
 @TypedGoRoute<ChantingRoute>(path: '/chanting', name: 'CHANTING')
 class ChantingRoute extends GoRouteData with $ChantingRoute {
-  
   /// Use [ChantingSettings] as extra to propagate chanting settings.
   final Object $extra;
-  
-  const ChantingRoute({required this.$extra}) : 
-    assert($extra is ChantingSettings, 'Invalid extra data for ChantingRoute. Expected ChantingSettings.');
+
+  const ChantingRoute({required this.$extra})
+    : assert(
+        $extra is ChantingSettings,
+        'Invalid extra data for ChantingRoute. Expected ChantingSettings.',
+      );
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     try {
       final ChantingSettings chantingSettings = ($extra is ChantingSettings)
-        ? $extra as ChantingSettings
-        : throw Exception('Invalid chanting settings data');
+          ? $extra as ChantingSettings
+          : throw Exception('Invalid chanting settings data');
       return ChantingScreen(
         chantingSettings: chantingSettings,
         key: state.pageKey,
       );
     } catch (e) {
-      return AppErrorDisplay(
-        onButtonTap: () => HomeRoute().go(context),        
-      );
+      return AppErrorDisplay(onButtonTap: () => HomeRoute().go(context));
     }
   }
 }

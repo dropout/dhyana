@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'default_screen_setup.dart';
+import '../../core/presentation/default_screen_setup.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
 

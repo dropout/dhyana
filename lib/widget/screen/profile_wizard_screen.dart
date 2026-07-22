@@ -6,7 +6,7 @@ import 'package:dhyana/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/dialog/signout_dialog.dart';
 import 'package:dhyana/widget/profile/profile_edit_form.dart';
-import 'package:dhyana/widget/screen/default_screen_setup.dart';
+import 'package:dhyana/core/presentation/default_screen_setup.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';

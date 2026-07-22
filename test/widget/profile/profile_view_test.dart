@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/profile.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';

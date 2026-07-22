@@ -1,4 +1,4 @@
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/profile/profile_avatar.dart';

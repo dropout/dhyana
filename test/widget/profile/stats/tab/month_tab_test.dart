@@ -1,5 +1,5 @@
-import 'package:dhyana/init/repositories.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/repositories.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/milestone_progress.dart';
 import 'package:dhyana/model/month_query_options.dart';

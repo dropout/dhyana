@@ -10,7 +10,7 @@ import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dart';
-import 'package:dhyana/init/repositories.dart';
+import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
@@ -19,7 +19,7 @@ import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
 import 'init_result.dart';

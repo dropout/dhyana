@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/remote_settings/remote_settings_cubit.dart';
-import 'package:dhyana/init/init_result.dart';
+import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/widget/design_spec.dart';
 
-import 'app_providers.dart';
-import 'app_routes.dart';
+import '../core/di/app_providers.dart';
+import 'package:dhyana/core/navigation/app_routes.dart';
 
 /// The main app widget.
 /// It sets up the top-level providers and

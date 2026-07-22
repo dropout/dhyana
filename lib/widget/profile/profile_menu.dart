@@ -1,5 +1,5 @@
 import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/widget/app_routes.dart';
+import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/dialog/signout_dialog.dart';
 import 'package:dhyana/widget/util/app_card.dart';

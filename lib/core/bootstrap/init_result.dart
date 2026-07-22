@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
-import 'package:dhyana/init/repositories.dart';
-import 'package:dhyana/init/services.dart';
+import 'package:dhyana/core/di/repositories.dart';
+import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/remote_settings.dart';
 
 class InitResult {
