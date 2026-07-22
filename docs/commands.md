@@ -20,6 +20,7 @@ If no build mode specified, use `debug`.
     - If build_runner reports conflicts, resolve with `dart run build_runner build --delete-conflicting-outputs`.
 - Watch for code changes and generate code: `pub run build_runner watch`
 - Static checks: `flutter analyze`
+- Module boundary checks: `bash support/maintenance_scripts/check_module_boundaries.sh`
 - Run: `flutter run --flavor <flavor> -t lib/main_<flavor>.dart --<build_mode>`
 - Test: `flutter test`
     - Run with `--coverage` for getting test coverage report.

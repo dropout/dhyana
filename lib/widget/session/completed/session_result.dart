@@ -1,4 +1,4 @@
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_avatar.dart';

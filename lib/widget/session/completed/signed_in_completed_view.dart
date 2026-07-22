@@ -1,6 +1,6 @@
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/update_profile_stats_result.dart';
 import 'package:dhyana/widget/presence/presence_area.dart';

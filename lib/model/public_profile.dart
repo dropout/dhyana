@@ -1,11 +1,10 @@
 import 'package:dhyana/model/location.dart';
-import 'package:dhyana/model/profile_model.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile_model.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
-
-import 'profile.dart';
 
 part 'public_profile.freezed.dart';
 part 'public_profile.g.dart';

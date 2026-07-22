@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/milestone_progress.dart';

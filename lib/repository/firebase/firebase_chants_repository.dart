@@ -1,7 +1,7 @@
 import 'package:dhyana/data_provider/chants_data_provider.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/repository/chants_repository.dart';
-import 'package:dhyana/repository/crud_repository_operations.dart';
+import 'package:dhyana/core/domain/repository/crud_repository_operations.dart';
 
 class FirebaseChantsRepository
     extends CrudRepositoryOps<Chant>

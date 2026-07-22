@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'chant.dart';
 import 'converter/date_time_or_null_converter.dart';
-import 'model.dart';
+import '../core/domain/model/model.dart';
 
 part 'chanting_settings.freezed.dart';
 part 'chanting_settings.g.dart';

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/widget/input/form_builder_profile_image_picker.dart';
-import 'package:dhyana/widget/profile/profile_edit_form.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_edit_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';

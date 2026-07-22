@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
 
-import 'model.dart';
+import '../core/domain/model/model.dart';
 
 part 'week.freezed.dart';
 part 'week.g.dart';

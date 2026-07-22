@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';

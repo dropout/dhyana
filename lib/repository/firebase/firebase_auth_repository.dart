@@ -3,8 +3,8 @@ import 'package:dhyana/data_provider/auth/firebase_auth_provider.dart';
 import 'package:dhyana/data_provider/auth/model/signin_result.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/auth/util/is_first_signin.dart';
-import 'package:dhyana/data_provider/profile_data_provider.dart';
-import 'package:dhyana/repository/auth_repository.dart';
+import 'package:dhyana/modules/account/data/profile_data_provider.dart';
+import 'package:dhyana/modules/account/domain/repository/auth_repository.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
 /// Firebase implementation of [AuthRepository]

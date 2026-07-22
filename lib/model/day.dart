@@ -2,7 +2,7 @@ import 'package:dhyana/model/converter/date_time_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'model.dart';
+import '../core/domain/model/model.dart';
 import 'session.dart';
 
 part 'day.freezed.dart';

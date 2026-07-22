@@ -4,7 +4,7 @@ import 'package:dhyana/enum/sound.dart';
 
 import 'converter/date_time_or_null_converter.dart';
 import 'converter/duration_converter.dart';
-import 'model.dart';
+import '../core/domain/model/model.dart';
 
 part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';

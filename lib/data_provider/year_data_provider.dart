@@ -1,4 +1,4 @@
-import 'data_provider.dart';
+import '../core/data/data_provider.dart';
 import 'package:dhyana/model/year.dart';
 import 'package:dhyana/model/year_query_options.dart';
 import 'package:dhyana/model/session.dart';

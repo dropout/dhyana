@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/settings_data_provider.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/modules/account/data/settings_data_provider.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 
 import 'firebase_data_provider.dart';
 

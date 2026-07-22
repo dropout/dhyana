@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/service/safe_image_detector.dart';
 import 'package:dhyana/widget/input/form_builder_profile_image_picker.dart';
 import 'package:dhyana/widget/input/profile_image_picker/profile_image_selection_controller.dart';

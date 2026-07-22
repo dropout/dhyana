@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/model/model.dart';
+import 'package:dhyana/core/domain/model/model.dart';
 
 extension FirebaseModelExtension on Model {
   Map<String, dynamic> toFireStore() => toJson();

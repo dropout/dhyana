@@ -1,9 +1,9 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/widget/screen/session_completed_screen.dart';
 import 'package:dhyana/widget/session/completed/signed_in_completed_view.dart';

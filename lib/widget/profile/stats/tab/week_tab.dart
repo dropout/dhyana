@@ -1,7 +1,7 @@
 
 import 'package:dhyana/bloc/weeks/weeks_cubit.dart';
 import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/model/week.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/weeks_bar_chart_page.dart';

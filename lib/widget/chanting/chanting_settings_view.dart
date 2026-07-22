@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/model/chant.dart';
 import 'package:dhyana/model/chanting_settings.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/chanting/settings/chant_list.dart';

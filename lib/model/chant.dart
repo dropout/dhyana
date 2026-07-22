@@ -3,7 +3,7 @@ import 'package:dhyana/model/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'model.dart';
+import '../core/domain/model/model.dart';
 
 part 'chant.freezed.dart';
 part 'chant.g.dart';

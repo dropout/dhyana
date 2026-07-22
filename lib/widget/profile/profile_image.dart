@@ -1,4 +1,4 @@
-import 'package:dhyana/model/profile_model.dart';
+import 'package:dhyana/modules/account/domain/model/profile_model.dart';
 import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
 import 'package:dhyana/widget/util/app_cached_network_image.dart';
 import 'package:dhyana/widget/util/app_context.dart';

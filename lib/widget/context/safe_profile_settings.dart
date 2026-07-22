@@ -1,5 +1,5 @@
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

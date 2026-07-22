@@ -6,7 +6,7 @@ import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/audio_session_configuration.dart';
 import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/data_provider/firebase/firebase_profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dart';

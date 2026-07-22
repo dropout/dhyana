@@ -1,0 +1,19 @@
+name: Module Boundaries
+
+on:
+  pull_request:
+    paths:
+      - 'lib/modules/**'
+      - 'support/maintenance_scripts/check_module_boundaries.sh'
+      - '.github/workflows/module-boundaries.yml'
+  workflow_dispatch:
+
+jobs:
+  check-module-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run module boundary check
+        run: bash support/maintenance_scripts/check_module_boundaries.sh

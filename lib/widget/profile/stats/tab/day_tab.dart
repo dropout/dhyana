@@ -3,7 +3,7 @@ import 'package:dhyana/widget/profile/stats/bar_chart_page/days_bar_chart_page.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/model/day.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/util/app_context.dart';

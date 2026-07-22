@@ -1,4 +1,4 @@
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/model/chanting_settings.dart';

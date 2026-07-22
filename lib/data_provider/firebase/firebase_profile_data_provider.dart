@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
-import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/data_provider/profile_data_provider.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/account/data/profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/model/profile_query_options.dart';
 

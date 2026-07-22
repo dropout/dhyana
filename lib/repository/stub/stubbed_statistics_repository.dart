@@ -2,7 +2,7 @@ import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/day_query_options.dart';
 import 'package:dhyana/model/month.dart';
 import 'package:dhyana/model/month_query_options.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/session_query_options.dart';
 import 'package:dhyana/model/week.dart';

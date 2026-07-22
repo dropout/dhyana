@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/data_provider/data_provider_exception.dart';
+import 'package:dhyana/core/data/data_provider_exception.dart';
 import 'package:dhyana/data_provider/firebase/firebase_timer_settings_history_data_provider.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/model/timer_settings_history_record.dart';

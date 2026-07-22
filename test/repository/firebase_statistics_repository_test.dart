@@ -7,7 +7,7 @@ import 'package:dhyana/data_provider/firebase/firebase_year_data_provider.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/month.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/year.dart';
 import 'package:flutter_test/flutter_test.dart';

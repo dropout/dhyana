@@ -1,7 +1,7 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/milestone_progress.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';

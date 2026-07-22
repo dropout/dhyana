@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:dhyana/data_provider/profile_data_provider.dart';
+import 'package:dhyana/modules/account/data/profile_data_provider.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/profile_query_options.dart';
-import 'package:dhyana/repository/crud_repository_operations.dart';
-import 'package:dhyana/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/crud_repository_operations.dart';
+import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
 import 'package:dhyana/util/blurhash.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 

@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
@@ -10,8 +10,8 @@ import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/repository/presence_repository.dart';
-import 'package:dhyana/repository/profile_repository.dart';
-import 'package:dhyana/repository/settings_repository.dart';
+import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/account/domain/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/service/analytics_service.dart';

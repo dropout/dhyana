@@ -3,7 +3,7 @@ import 'package:dhyana/model/location.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'model.dart';
+import '../core/domain/model/model.dart';
 import 'public_profile.dart';
 
 part 'presence.freezed.dart';

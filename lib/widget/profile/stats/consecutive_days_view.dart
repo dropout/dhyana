@@ -1,6 +1,6 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/consecutive_days.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/widget/design_spec.dart';
 import 'package:dhyana/widget/util/app_card.dart';
 import 'package:flutter/material.dart';

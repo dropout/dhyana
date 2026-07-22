@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 import 'converter/duration_converter.dart';
-import 'model.dart';
+import '../core/domain/model/model.dart';
 import 'timer_settings.dart';
 
 part 'session.freezed.dart';

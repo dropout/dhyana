@@ -1,5 +1,7 @@
 # Overview
 
+See also: [Module Dependency Guidelines](module_dependency_guidelines.md)
+
 ## Modules
 
 Modules are representing a self-contained feature or domain of the app. Each module should have its own data layer, business logic, and presentation layer. Modules can depend on core and other modules, but should not directly depend on the internal implementation of other modules.

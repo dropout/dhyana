@@ -1,11 +1,11 @@
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/widget/profile/profile_footer.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_menu.dart';
-import 'package:dhyana/widget/profile/profile_view.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_view.dart';
 import 'package:dhyana/widget/profile/stats/consecutive_days_view.dart';
 import 'package:dhyana/widget/profile/stats/milestones_view.dart';
 import 'package:dhyana/widget/profile/stats/summary_view.dart';

@@ -1,6 +1,6 @@
 import 'package:dhyana/enum/cached_asset_type.dart';
 import 'package:dhyana/model/converter/date_time_converter.dart';
-import 'package:dhyana/model/model.dart';
+import 'package:dhyana/core/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chant_asset_metadata.freezed.dart';

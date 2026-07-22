@@ -1,9 +1,9 @@
-import 'package:dhyana/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/profile.dart';
-import 'package:dhyana/model/profile_settings.dart';
-import 'package:dhyana/widget/profile/profile_edit_form.dart';
-import 'package:dhyana/widget/screen/profile_edit_screen.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_edit_form.dart';
+import 'package:dhyana/modules/account/presentation/widget/screen/profile_edit_screen.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';

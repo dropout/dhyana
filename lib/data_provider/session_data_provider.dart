@@ -1,4 +1,4 @@
-import 'package:dhyana/data_provider/data_provider.dart';
+import 'package:dhyana/core/data/data_provider.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/session_query_options.dart';
 

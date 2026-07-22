@@ -1,6 +1,6 @@
 import 'package:dhyana/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/model/profile_settings.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';

@@ -1,7 +1,7 @@
 import 'package:dhyana/enum/session_type.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/month.dart';
-import 'package:dhyana/model/profile.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/profile_statistics_report.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/timer_settings.dart';
