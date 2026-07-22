@@ -18,7 +18,7 @@ class SessionStartButton extends StatefulWidget {
     required this.fragmentShader,
     this.colorA = AppColors.red,
     this.colorB = AppColors.redAccent,
-    this.textColor = Colors.white,
+    this.textColor = AppColors.buttonForeground,
     super.key,
   });
 

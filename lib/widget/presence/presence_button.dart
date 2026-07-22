@@ -25,10 +25,10 @@ class PresenceButton extends StatelessWidget {
 
       onPressed: () => _onButtonTap(context),
       constraints: const BoxConstraints(),
-      fillColor: Colors.black,
+      fillColor: AppColors.buttonBackground,
       child: const SizedBox.expand(
         child: Icon(Icons.public_rounded,
-          color: AppColors.backgroundPaperLight,
+          color: AppColors.buttonForeground,
           size: 24,
         ),
       ),

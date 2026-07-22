@@ -139,5 +139,9 @@ class AppColors {
   static const Color redAccent = Color(0xFFE4002B);
   static const Color splashColor = Colors.black;
 
+
+  static const Color buttonForeground = backgroundPaperLight;
+  static const Color buttonBackground = Colors.black;
+
   const AppColors();
 }

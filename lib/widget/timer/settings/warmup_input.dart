@@ -61,7 +61,7 @@ class WarmupTimeInput extends StatelessWidget {
         value.inMinutes.toString(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displaySmall!.copyWith(
-          color: AppColors.gold,
+          color: AppColors.buttonForeground,
           fontWeight: FontWeight.w900,
           height: 1.0,
         ),

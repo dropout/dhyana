@@ -14,11 +14,11 @@ class AddChantButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton.filled(
       iconSize: 36,
-      color: AppColors.gold,
+      color: AppColors.buttonForeground,
       icon: const Icon(Icons.add_rounded),
       onPressed: onTap,
       style: IconButton.styleFrom(
-        backgroundColor: Colors.black, // Change this to your desired color
+        backgroundColor: AppColors.buttonBackground,
       ),
     );
   }

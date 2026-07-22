@@ -75,13 +75,13 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
       key: ValueKey(item?.name ?? 'unknown'),
       decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.black,
+      color: AppColors.buttonBackground,
       ),
       child: Padding(
         padding: const EdgeInsets.all(DesignSpec.paddingMd),
         child: Icon(
           (item == SessionType.sitting) ? Icons.music_note : Icons.timer_outlined,
-          color: AppColors.gold,
+          color: AppColors.buttonForeground,
         ),
       ),
     );

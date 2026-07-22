@@ -28,14 +28,14 @@ class TimerSettingsHistoryButton extends StatelessWidget {
 
       onPressed: () => _onButtonTap(context),
       constraints: const BoxConstraints(),
-      fillColor: Colors.black,
+      fillColor: AppColors.buttonBackground,
       child: const SizedBox.expand(
         child: Padding(
           padding: EdgeInsets.only(
             right: 2.0, // it's hard to center an icon in circle
           ),
           child: Icon(Icons.history,
-            color: AppColors.backgroundPaperLight,
+            color: AppColors.buttonForeground,
             size: 24,
           ),
         ),

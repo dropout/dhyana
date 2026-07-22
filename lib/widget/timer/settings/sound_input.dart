@@ -66,7 +66,7 @@ class SoundInput extends StatelessWidget {
           AppLocalizations.of(context)
         ),
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          color: AppColors.gold,
+          color: AppColors.buttonForeground,
           fontWeight: FontWeight.w800,
         )
       ),
