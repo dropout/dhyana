@@ -1,5 +1,5 @@
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

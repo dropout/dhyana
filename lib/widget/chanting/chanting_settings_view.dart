@@ -5,7 +5,7 @@ import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/chanting/settings/chant_list.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/app_loading_display.dart';

@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shaders/flutter_shaders.dart';
 import 'package:intl/intl.dart' as intl;

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dhyana/enum/sound.dart';
 import 'package:dhyana/service/simple_audio_service.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
 /// A button that plays the given sound when pressed, 

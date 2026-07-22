@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:dhyana/enum/loading_state.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/util/app_button.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

@@ -17,7 +17,7 @@ import 'package:go_router/go_router.dart';
 import '../../widget/screen/chanting_screen.dart';
 import '../../widget/screen/delete_profile_screen.dart';
 import '../../widget/screen/donate_screen.dart';
-import '../../widget/screen/home_screen.dart';
+import '../presentation/home_screen.dart';
 import '../../modules/account/presentation/widget/screen/login_screen.dart';
 import '../../widget/screen/presence_screen.dart';
 import '../../modules/account/presentation/widget/screen/profile_edit_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:dhyana/util/localization.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flip_board/flip_widget.dart';
 import 'package:flutter/material.dart';
 

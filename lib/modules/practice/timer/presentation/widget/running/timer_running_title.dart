@@ -1,6 +1,6 @@
-import 'package:dhyana/bloc/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class TimerRunningTitle extends StatefulWidget {

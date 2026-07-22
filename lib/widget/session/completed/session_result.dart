@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_avatar.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

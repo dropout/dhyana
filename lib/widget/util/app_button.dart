@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 
 enum AppButtonSize {
   small,

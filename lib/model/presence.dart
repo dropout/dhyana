@@ -1,10 +1,10 @@
 import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/location.dart';
+import 'package:dhyana/modules/account/domain/model/public_profile.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 import '../core/domain/model/model.dart';
-import 'public_profile.dart';
 
 part 'presence.freezed.dart';
 part 'presence.g.dart';

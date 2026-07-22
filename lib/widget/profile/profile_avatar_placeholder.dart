@@ -1,29 +1,21 @@
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
-/// A profile image placeholder widget that takes a name and displays 
-/// a circular avatar with a randomized background color 
+/// A profile avatar placeholder widget that takes a [Profile] model
+/// and displays a circular avatar with a randomized background color 
 /// from a list of predefined colors. 
 ///
-/// The placeholder displays the first letter of
-/// the profile's  name in uppercase.
+/// The avatar displays the first letter of the profile's first name in uppercase.
 class ProfileImagePlaceholder extends StatelessWidget {
-
-  /// The name to be displayed in the placeholder.
-  final String name;
-
-  /// The background color of the placeholder. If not provided, a random color
-  /// from the predefined list will be used.
+  final String firstName;
   final Color? backgroundColor;
 
   const ProfileImagePlaceholder({
-    required this.name,
+    required this.firstName,
     this.backgroundColor,
     super.key,
   });
 
-  /// A list of predefined colors to be used as background colors 
-  /// for the placeholder.
   static const List<Color> _defaultColors = [
     Color(0xFF6C63FF),
     Color(0xFFFF6B6B),
@@ -35,13 +27,13 @@ class ProfileImagePlaceholder extends StatelessWidget {
 
   Color _getBackgroundColor() {
     if (backgroundColor != null) return backgroundColor!;
-    final index = name.hashCode % _defaultColors.length;
+    final index = firstName.hashCode % _defaultColors.length;
     return _defaultColors[index.abs()];
   }
 
   @override
   Widget build(BuildContext context) {
-    final initial = name.isNotEmpty ? name[0].toUpperCase() : '?';
+    final initial = firstName.isNotEmpty ? firstName[0].toUpperCase() : '?';
     
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -57,7 +49,7 @@ class ProfileImagePlaceholder extends StatelessWidget {
               initial,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 100, // Set large enough to scale down
+                fontSize: 100,
                 fontWeight: FontWeight.bold,
               ),        
             ),

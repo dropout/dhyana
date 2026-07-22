@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:audio_service/audio_service.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:clock/clock.dart';
-import 'package:dhyana/bloc/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/core/domain/model/factory/timer_settings_factory.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/service/crashlytics_service.dart';

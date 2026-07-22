@@ -1,5 +1,5 @@
 import 'package:dhyana/enum/session_type.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/home/session_type_toggle.dart';
 import 'package:dhyana/widget/home/volume_indicator.dart';import 'package:dhyana/widget/util/signed_in.dart';
 import 'package:flutter/material.dart';

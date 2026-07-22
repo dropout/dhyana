@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_view.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';

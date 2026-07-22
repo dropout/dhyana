@@ -2,7 +2,7 @@ import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.d
 import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/model/remote_settings.dart';
+import 'package:dhyana/core/domain/model/remote_settings.dart';
 
 class InitResult {
 

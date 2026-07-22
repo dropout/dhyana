@@ -1,11 +1,11 @@
-import 'package:dhyana/bloc/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 
 /// Controls displayed when the timer is running or paused
 /// Includes the main play/pause button and the pause menu

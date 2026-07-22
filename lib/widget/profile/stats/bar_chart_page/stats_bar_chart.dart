@@ -1,6 +1,6 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 

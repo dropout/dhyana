@@ -1,4 +1,4 @@
-import 'package:dhyana/model/remote_settings.dart';
+import 'package:dhyana/core/domain/model/remote_settings.dart';
 
 abstract interface class RemoteSettingsService {
 

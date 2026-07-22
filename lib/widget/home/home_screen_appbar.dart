@@ -1,7 +1,7 @@
 import 'package:dhyana/bloc/home_screen/home_screen_cubit.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/presence/presence_button.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/today.dart';

@@ -3,7 +3,7 @@ import 'package:dhyana/model/location.dart';
 import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/model/presence_query_options.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/public_profile.dart';
+import 'package:dhyana/modules/account/domain/model/public_profile.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
 import 'package:dhyana/service/crashlytics_service.dart';

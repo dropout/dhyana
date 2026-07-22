@@ -1,6 +1,6 @@
-import 'package:dhyana/bloc/timer_settings_history/timer_settings_history_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/default_screen_setup.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_list.dart';
 import 'package:dhyana/widget/util/app_context.dart';

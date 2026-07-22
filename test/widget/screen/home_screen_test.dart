@@ -7,7 +7,7 @@ import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/service/default/default_shader_service.dart';
 import 'package:dhyana/service/shader_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
-import 'package:dhyana/widget/screen/home_screen.dart';
+import 'package:dhyana/core/presentation/home_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_settings_view.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';

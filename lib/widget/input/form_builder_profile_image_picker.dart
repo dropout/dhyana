@@ -7,7 +7,7 @@ import 'package:dhyana/service/safe_image_detector.dart';
 import 'package:dhyana/widget/input/profile_image_picker/profile_image_picker_current_image.dart';
 import 'package:dhyana/widget/input/profile_image_picker/profile_image_picker_edit_badge.dart';
 import 'package:dhyana/widget/input/profile_image_picker/profile_image_selection_controller.dart';
-import 'package:dhyana/widget/design_spec.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
 import 'package:dhyana/widget/util/app_context.dart';
