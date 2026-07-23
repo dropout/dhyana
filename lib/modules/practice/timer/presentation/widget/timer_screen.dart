@@ -6,7 +6,7 @@ import 'package:dhyana/model/session.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_context.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_cover.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_running_view.dart';
 

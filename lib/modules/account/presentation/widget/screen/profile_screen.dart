@@ -6,7 +6,7 @@ import 'package:dhyana/core/presentation/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_view.dart';
 import 'package:dhyana/core/presentation/default_screen_setup.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

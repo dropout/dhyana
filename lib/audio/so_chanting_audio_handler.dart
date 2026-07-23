@@ -6,7 +6,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/so_chanting_audio_resource_manager.dart';
 import 'package:dhyana/audio/so_chanting_playlist_manager.dart';
 import 'package:dhyana/audio/so_chanting_playback_reporter.dart';
-import 'package:dhyana/model/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resources.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 

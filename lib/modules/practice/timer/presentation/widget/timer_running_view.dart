@@ -2,7 +2,7 @@ import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubi
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/util/app_error_display.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_title.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_time.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_controls.dart';

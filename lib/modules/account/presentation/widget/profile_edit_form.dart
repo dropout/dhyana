@@ -5,9 +5,9 @@ import 'package:dhyana/core/presentation/dialog/photo_access_denied_dialog.dart'
 import 'package:dhyana/core/presentation/input/app_text_input.dart';
 import 'package:dhyana/core/presentation/input/form_builder_city_selector.dart';
 import 'package:dhyana/core/presentation/input/form_builder_profile_image_picker.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/dialog_helper.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/dialog_helper.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';

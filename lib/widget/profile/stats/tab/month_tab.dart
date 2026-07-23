@@ -5,7 +5,7 @@ import 'package:dhyana/model/month.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/stats_interval.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/months_bar_chart_page.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

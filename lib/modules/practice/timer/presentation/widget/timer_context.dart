@@ -7,7 +7,7 @@ import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

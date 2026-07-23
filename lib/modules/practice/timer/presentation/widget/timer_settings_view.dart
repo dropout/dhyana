@@ -7,7 +7,7 @@ import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/session/session_start_button.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/warmup_input.dart';

@@ -10,7 +10,7 @@ import 'package:dhyana/core/presentation/input/profile_image_picker/profile_imag
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
 import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:image_picker/image_picker.dart';

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/donate/amount_selector.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 
 class DonateView extends StatefulWidget {

@@ -2,9 +2,9 @@ import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/dialog/signout_dialog.dart';
-import 'package:dhyana/widget/util/app_card.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/dialog_helper.dart';
+import 'package:dhyana/core/presentation/util/app_card.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/dialog_helper.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMenu extends StatelessWidget {

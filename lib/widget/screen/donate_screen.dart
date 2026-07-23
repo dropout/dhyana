@@ -4,9 +4,9 @@ import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/donate/amount_selector.dart';
 import 'package:dhyana/widget/donate/custom_amount_sheet.dart';
 import 'package:dhyana/widget/donate/donate_button.dart';
-import 'package:dhyana/widget/util/app_button.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/app_button.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

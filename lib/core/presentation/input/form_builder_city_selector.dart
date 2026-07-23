@@ -3,9 +3,9 @@ import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/model/city_search_result.dart';
 import 'package:dhyana/model/location.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/debouncer.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/debouncer.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 

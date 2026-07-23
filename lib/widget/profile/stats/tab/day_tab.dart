@@ -6,7 +6,7 @@ import 'package:dhyana/model/day.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/calculated_stats.dart';
 import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 
 class DaysTab extends StatefulWidget {
 

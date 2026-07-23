@@ -6,7 +6,7 @@ import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/default/default_cache_manager_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_haptics_service.dart';
-import 'package:dhyana/service/default/default_lyrics_service.dart';
+import 'package:dhyana/modules/practice/chanting/infrastructure/default_lyrics_service.dart';
 import 'package:dhyana/service/default/default_mindful_minutes_service.dart';
 import 'package:dhyana/service/default/default_overlay_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_resource_resolver.dart';
@@ -21,7 +21,7 @@ import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_ser
 import 'package:dhyana/core/domain/service/functions_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';
-import 'package:dhyana/service/lyrics_service.dart';
+import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
 import 'package:dhyana/service/mindful_minutes_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/core/domain/service/remote_settings_service.dart';

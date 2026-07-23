@@ -8,7 +8,7 @@ import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/bar_chart_page/bar_chart_error_page.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

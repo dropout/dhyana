@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/model/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resources.dart';
 
 typedef SoChantingPlaylistIndexChanged = Future<void> Function();
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_volume_listener/flutter_volume_listener.dart';
 

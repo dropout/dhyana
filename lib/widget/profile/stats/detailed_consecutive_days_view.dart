@@ -4,10 +4,10 @@ import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/widget/profile/stats/label_value_detail.dart';
-import 'package:dhyana/widget/util/app_card.dart';
+import 'package:dhyana/core/presentation/util/app_card.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 
 class DetailedConsecutiveDaysView extends StatelessWidget {
 

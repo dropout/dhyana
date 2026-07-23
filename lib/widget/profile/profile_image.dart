@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/account/domain/model/profile_model.dart';
 import 'package:dhyana/widget/profile/profile_image_placeholder.dart';
-import 'package:dhyana/widget/util/app_cached_network_image.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_cached_network_image.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that displays a profile image for a given [ProfileModel].

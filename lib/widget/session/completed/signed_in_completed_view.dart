@@ -4,9 +4,9 @@ import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/model/update_profile_stats_result.dart';
 import 'package:dhyana/widget/presence/presence_area.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
-import 'package:dhyana/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

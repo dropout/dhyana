@@ -16,7 +16,7 @@ import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';
-import 'package:dhyana/service/chanting_audio_service.dart';
+import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';

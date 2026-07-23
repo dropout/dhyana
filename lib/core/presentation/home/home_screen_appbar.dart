@@ -6,7 +6,7 @@ import 'package:dhyana/widget/presence/presence_button.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/today.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_button.dart';
-import 'package:dhyana/widget/util/signed_in.dart';
+import 'package:dhyana/core/presentation/util/signed_in.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {

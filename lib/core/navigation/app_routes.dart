@@ -1,21 +1,21 @@
 import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
-import 'package:dhyana/model/chanting_settings.dart';
+import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/widget/transition/linear_gradient_mask_transition.dart';
+import 'package:dhyana/core/presentation/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_keys.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_error_display.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../widget/screen/chanting_screen.dart';
-import '../../widget/screen/delete_profile_screen.dart';
+import '../../modules/practice/chanting/presentation/widget/chanting_screen.dart';
+import '../../modules/account/presentation/widget/screen/delete_profile_screen.dart';
 import '../../widget/screen/donate_screen.dart';
 import '../presentation/home_screen.dart';
 import '../../modules/account/presentation/widget/screen/login_screen.dart';

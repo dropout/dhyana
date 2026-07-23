@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/home/session_type_toggle.dart';
-import 'package:dhyana/core/presentation/home/volume_indicator.dart';import 'package:dhyana/widget/util/signed_in.dart';
+import 'package:dhyana/core/presentation/home/volume_indicator.dart';import 'package:dhyana/core/presentation/util/signed_in.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenBottomMenu extends StatefulWidget {

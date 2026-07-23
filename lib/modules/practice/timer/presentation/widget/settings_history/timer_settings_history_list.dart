@@ -5,10 +5,10 @@ import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_histor
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_list_item.dart';
-import 'package:dhyana/widget/util/app_animation.dart';
-import 'package:dhyana/widget/util/app_context.dart';
-import 'package:dhyana/widget/util/intersperse.dart';
-import 'package:dhyana/widget/util/toast.dart';
+import 'package:dhyana/core/presentation/util/app_animation.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/intersperse.dart';
+import 'package:dhyana/core/presentation/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

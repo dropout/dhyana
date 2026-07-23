@@ -1,8 +1,8 @@
 import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/account/presentation/widget/login/login_signed_in_view.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
-import 'package:dhyana/widget/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

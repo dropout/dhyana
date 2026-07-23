@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:dhyana/model/presence.dart';
 import 'package:dhyana/widget/presence/presence_list_item.dart';
-import 'package:dhyana/widget/util/app_animation.dart';
+import 'package:dhyana/core/presentation/util/app_animation.dart';
 import 'package:flutter/material.dart';
 
 class PresenceTable extends StatelessWidget {

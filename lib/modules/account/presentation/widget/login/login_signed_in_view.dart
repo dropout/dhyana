@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/util/app_button.dart';
-import 'package:dhyana/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/util/app_button.dart';
+import 'package:dhyana/core/presentation/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that displays an empty screen with a button at the bottom.

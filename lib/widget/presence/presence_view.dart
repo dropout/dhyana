@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:dhyana/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/model/presence.dart';
-import 'package:dhyana/widget/util/app_animation.dart';
-import 'package:dhyana/widget/util/app_button.dart';
+import 'package:dhyana/core/presentation/util/app_animation.dart';
+import 'package:dhyana/core/presentation/util/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

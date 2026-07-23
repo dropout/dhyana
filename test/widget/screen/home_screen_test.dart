@@ -10,7 +10,7 @@ import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/core/presentation/home_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_settings_view.dart';
-import 'package:dhyana/widget/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

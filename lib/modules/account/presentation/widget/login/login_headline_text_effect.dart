@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/util/app_animation.dart';
+import 'package:dhyana/core/presentation/util/app_animation.dart';
 import 'package:flutter/material.dart';
 
 class LoginHeadlineTextEffect extends StatefulWidget {
