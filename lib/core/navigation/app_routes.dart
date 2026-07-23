@@ -4,11 +4,11 @@ import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/model/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/core/presentation/transition/linear_gradient_mask_transition.dart';
+import 'package:dhyana/core/presentation/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_keys.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
-import 'package:dhyana/core/presentation/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,17 +16,17 @@ import 'package:go_router/go_router.dart';
 
 import '../../modules/practice/chanting/presentation/widget/chanting_screen.dart';
 import '../../modules/account/presentation/widget/screen/delete_profile_screen.dart';
-import '../../widget/screen/donate_screen.dart';
+import '../../modules/donate/presentation/widget/donate_screen.dart';
 import '../presentation/home_screen.dart';
 import '../../modules/account/presentation/widget/screen/login_screen.dart';
-import '../../widget/screen/presence_screen.dart';
+import '../../modules/social/presentation/widget/presence_screen.dart';
 import '../../modules/account/presentation/widget/screen/profile_edit_screen.dart';
 import '../../modules/account/presentation/widget/screen/profile_screen.dart';
 import '../../modules/account/presentation/widget/screen/profile_settings_screen.dart';
-import '../../widget/screen/profile_stats_screen.dart';
+import '../../modules/insights/presentation/widget/profile_stats_screen.dart';
 import '../../modules/account/presentation/widget/screen/profile_wizard_screen.dart';
-import '../../widget/screen/session_completed_screen.dart';
-import '../../widget/screen/session_history_screen.dart';
+import '../../modules/practice/session/presentation/widget/session_completed_screen.dart';
+import '../../modules/practice/session/presentation/widget/session_history_screen.dart';
 import '../../modules/practice/timer/presentation/widget/timer_screen.dart';
 import '../../modules/practice/timer/presentation/widget/timer_settings_history_screen.dart';
 

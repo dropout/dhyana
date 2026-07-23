@@ -1,4 +1,4 @@
-import 'package:dhyana/cache/chant_cache_validator.dart';
+import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
 import 'package:dhyana/data_provider/auth/firebase_auth_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';

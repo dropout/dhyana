@@ -8,7 +8,7 @@ import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/core/presentation/util/app_loading_indicator.dart';
+import 'package:dhyana/core/presentation/widget/util/app_loading_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

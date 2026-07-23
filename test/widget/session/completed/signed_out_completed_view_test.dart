@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/session/completed/session_result.dart';
-import 'package:dhyana/widget/session/completed/signed_out_completed_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/widget/completed/session_result.dart';
+import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_context_providers.dart';

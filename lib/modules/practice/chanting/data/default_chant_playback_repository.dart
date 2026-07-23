@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:dhyana/cache/chant_cache_validator.dart';
+import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
 import 'package:dhyana/modules/practice/chanting/domain/chants_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/tools/batch_download_task.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';

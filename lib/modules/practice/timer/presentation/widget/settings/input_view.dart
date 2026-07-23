@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/util/app_button.dart';
+import 'package:dhyana/core/presentation/widget/util/app_button.dart';
 
 class InputView extends StatelessWidget {
 

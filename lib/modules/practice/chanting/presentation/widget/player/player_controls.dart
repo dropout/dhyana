@@ -2,8 +2,8 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
-import 'package:dhyana/core/presentation/util/gap.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 
 /// Displays transport controls and a non-seekable progress bar for audio playback.

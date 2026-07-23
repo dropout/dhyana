@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'core/bootstrap/init_result.dart';
 import 'core/bootstrap/initializer.dart';
 import 'util/firebase_provider.dart';
-import 'widget/app.dart';
+import 'core/presentation/widget/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

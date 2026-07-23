@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_word.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 enum WordState {

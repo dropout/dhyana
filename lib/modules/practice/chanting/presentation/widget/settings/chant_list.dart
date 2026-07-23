@@ -3,9 +3,9 @@ import 'package:dhyana/util/remap_range.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chant_card.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/settings/add_chant_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
-import 'package:dhyana/core/presentation/util/gap.dart';
-import 'package:dhyana/core/presentation/util/inset_surface.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/widget/util/inset_surface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 

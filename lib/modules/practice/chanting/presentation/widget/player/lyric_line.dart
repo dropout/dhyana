@@ -2,7 +2,7 @@ import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chan
 import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_line.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_word.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/player/lyric_word.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 /// Renders a single [LyricsLine] with per-word highlight animation.

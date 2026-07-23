@@ -1,5 +1,5 @@
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/widget/session/completed/milestone_progress_view_item.dart';
+import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';

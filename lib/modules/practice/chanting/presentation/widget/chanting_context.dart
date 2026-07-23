@@ -1,9 +1,9 @@
 import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/bloc/presence/presence_cubit.dart';
+import 'package:dhyana/modules/social/presentation/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

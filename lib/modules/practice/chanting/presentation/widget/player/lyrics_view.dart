@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/util/text.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/player/lyric_line.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

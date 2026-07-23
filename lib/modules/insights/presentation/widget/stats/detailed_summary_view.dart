@@ -1,0 +1,45 @@
+import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
+import 'package:dhyana/core/presentation/widget/util/app_card.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:flutter/material.dart';
+
+import 'label_value_detail.dart';
+
+class DetailedSummaryView extends StatelessWidget {
+
+  final Profile profile;
+
+  const DetailedSummaryView({
+    required this.profile,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      title: context.l10n.statsSummary,
+      padding: const EdgeInsets.only(
+        bottom: DesignSpec.paddingLg,
+        left: DesignSpec.paddingLg,
+        right: DesignSpec.paddingLg,
+      ),
+      child: Column(
+        children: [
+          LabelValueDetail(
+            label: context.l10n.statsTotalTimeSpent,
+            value: profile.statsReport.completedMinutesCount.toString(),
+          ),
+          LabelValueDetail(
+            label: context.l10n.statsTotalSessions,
+            value: profile.statsReport.completedSessionsCount.toString(),
+          ),
+          LabelValueDetail(
+            label: context.l10n.statsTotalDays,
+            value: profile.statsReport.completedDaysCount.toString(),
+          )
+        ],
+      )
+    );
+  }
+}

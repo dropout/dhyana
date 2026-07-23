@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/service/simple_audio_service.dart';
 import 'package:dhyana/util/enum_helper.dart';
 import 'package:dhyana/util/localization.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';

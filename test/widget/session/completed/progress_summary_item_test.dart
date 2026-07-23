@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/session/completed/progress_summary_item.dart';
+import 'package:dhyana/modules/practice/session/presentation/widget/completed/progress_summary_item.dart';
 import 'package:flip_board/flip_widget.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

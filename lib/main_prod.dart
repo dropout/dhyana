@@ -4,7 +4,7 @@ import 'package:dhyana/util/firebase_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'widget/app.dart';
+import 'core/presentation/widget/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

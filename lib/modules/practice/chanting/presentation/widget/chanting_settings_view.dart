@@ -6,10 +6,10 @@ import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/settings/chant_list.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/session/session_start_button.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
-import 'package:dhyana/core/presentation/util/app_loading_display.dart';
-import 'package:dhyana/core/presentation/util/gap.dart';
+import 'package:dhyana/core/presentation/widget/session_start_button.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

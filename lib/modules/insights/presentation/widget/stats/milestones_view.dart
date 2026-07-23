@@ -1,0 +1,89 @@
+import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/model/milestone_progress.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/presentation/design_spec.dart';
+import 'package:dhyana/core/presentation/widget/util/app_card.dart';
+import 'package:flutter/material.dart';
+
+class MilestonesView extends StatefulWidget {
+
+  final Profile profile;
+  final bool showMeter;
+
+  const MilestonesView({
+    required this.profile,
+    this.showMeter = false,
+    super.key
+  });
+
+  @override
+  State<MilestonesView> createState() => _MilestonesViewState();
+}
+
+class _MilestonesViewState extends State<MilestonesView> {
+
+  @override
+  Widget build(BuildContext context) {
+    final int milestoneCount = widget.profile.statsReport.milestoneCount;
+
+    return Stack(
+      children: [
+        AppCard(
+          title: AppLocalizations.of(context).milestones,
+          child: Text(
+            milestoneCount.toStringAsFixed(0),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        if (widget.showMeter) Positioned.fill(
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: DesignSpec.paddingLg,
+                right: DesignSpec.paddingLg,
+              ),
+              child: buildMilestoneBars(
+                context,
+                widget.profile.statsReport.milestoneProgress,
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildMilestoneBars(
+    BuildContext context,
+    MilestoneProgress milestoneProgress
+  ) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 3.0,
+      children:
+        List.generate(7, (index) {
+          return buildMilestoneBar(context, index < milestoneProgress.completedDaysCount);
+        }).reversed.toList(),
+    );
+  }
+
+  Widget buildMilestoneBar(
+    BuildContext context,
+    bool completed,
+  ) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: completed ? Colors.black : Colors.black.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(2.0),
+      ),
+      child: SizedBox(
+        width: 18,
+        height: 6,
+      )
+    );
+  }
+
+}

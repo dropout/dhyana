@@ -1,11 +1,11 @@
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/core/presentation/app_bar/custom_back_button.dart';
+import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_settings_form.dart';
-import 'package:dhyana/core/presentation/util/app_context.dart';
-import 'package:dhyana/core/presentation/util/screen.dart';
+import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/widget/util/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

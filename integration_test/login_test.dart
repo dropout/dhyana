@@ -1,7 +1,7 @@
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/bootstrap/initializer.dart';
 import 'package:dhyana/util/firebase_provider.dart';
-import 'package:dhyana/widget/app.dart';
+import 'package:dhyana/core/presentation/widget/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
