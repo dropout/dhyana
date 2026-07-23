@@ -1,5 +1,5 @@
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/input/form_builder_duration_input.dart';
+import 'package:dhyana/core/presentation/input/form_builder_duration_input.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/gap.dart';
 import 'package:flutter/material.dart';

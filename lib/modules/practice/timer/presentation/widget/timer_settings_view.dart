@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';

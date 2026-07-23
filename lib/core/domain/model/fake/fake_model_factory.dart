@@ -1,4 +1,4 @@
-import 'package:dhyana/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/model/day.dart';
 import 'package:dhyana/model/month.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';

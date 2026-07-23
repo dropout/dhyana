@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
-import 'package:dhyana/service/wakelock_service.dart';
+import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/widget/util/app_error_display.dart';

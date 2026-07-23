@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/account/domain/repository/settings_repository.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_settings_state.dart';

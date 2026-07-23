@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:dhyana/enum/sound.dart';
-import 'package:dhyana/service/simple_audio_service.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
+import 'package:dhyana/core/domain/service/simple_audio_service.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 

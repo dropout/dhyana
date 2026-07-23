@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/input/int_dial_input.dart';
+import 'package:dhyana/core/presentation/input/int_dial_input.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_gap.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_view.dart';
 import 'package:dhyana/widget/util/app_card.dart';

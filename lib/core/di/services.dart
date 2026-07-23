@@ -1,36 +1,35 @@
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/data_provider/firebase/tools/firebase_id_generator.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
-import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/default/default_cache_manager_service.dart';
-import 'package:dhyana/service/default/default_haptics_service.dart';
+import 'package:dhyana/core/infrastructure/platform/default_haptics_service.dart';
 import 'package:dhyana/service/default/default_lyrics_service.dart';
 import 'package:dhyana/service/default/default_mindful_minutes_service.dart';
 import 'package:dhyana/service/default/default_overlay_service.dart';
-import 'package:dhyana/service/default/default_resource_resolver.dart';
+import 'package:dhyana/core/infrastructure/platform/default_resource_resolver.dart';
 import 'package:dhyana/service/default/default_safe_image_detector.dart';
-import 'package:dhyana/service/default/default_shader_service.dart';
-import 'package:dhyana/service/default/default_wakelock_service.dart';
+import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
+import 'package:dhyana/core/infrastructure/platform/default_wakelock_service.dart';
 import 'package:dhyana/service/default/shared_preferences_service_default.dart';
-import 'package:dhyana/service/firebase/firebase_analytics_service.dart';
-import 'package:dhyana/service/firebase/firebase_crashlytics_service.dart';
-import 'package:dhyana/service/firebase/firebase_functions_service.dart';
-import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
-import 'package:dhyana/service/functions_service.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_analytics_service.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_crashlytics_service.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_functions_service.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
+import 'package:dhyana/core/domain/service/functions_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
-import 'package:dhyana/service/id_generator_service.dart';
+import 'package:dhyana/core/domain/service/id_generator_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
 import 'package:dhyana/service/mindful_minutes_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/service/remote_settings_service.dart';
-import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/core/domain/service/remote_settings_service.dart';
+import 'package:dhyana/core/domain/service/resource_resolver.dart';
 import 'package:dhyana/service/safe_image_detector.dart';
-import 'package:dhyana/service/shader_service.dart';
+import 'package:dhyana/core/domain/service/shader_service.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
-import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
-import 'package:dhyana/service/wakelock_service.dart';
+import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
@@ -47,7 +46,6 @@ class Services {
   final RemoteSettingsService remoteSettingsService;
   final ResourceResolver resourceResolver;
   final AppAudioHandler audioHandler;
-  final TimerSettingsSharedPrefsService timerSettingsSharedPrefsService;
   final SharedPreferencesService sharedPreferencesService;
   final ShaderService shaderService;
   final IdGeneratorService idGeneratorService;
@@ -70,7 +68,6 @@ class Services {
     required this.audioHandler,
     required this.overlayService,
     required this.cacheManagerService,
-    required this.timerSettingsSharedPrefsService,
     required this.sharedPreferencesService,
     required this.idGeneratorService,
     required this.wakelockService,
@@ -94,7 +91,6 @@ class ServicesBuilder {
   late IdGeneratorService _idGeneratorService;
   late CacheManagerService _cacheManagerService;
   late WakelockService _wakelockService;
-  late TimerSettingsSharedPrefsService _timerSettingsSharedPrefsService;
   late SharedPreferencesService _sharedPreferencesService;
   late ShaderService _shaderService;
   late FunctionsService _functionsService;
@@ -132,12 +128,6 @@ class ServicesBuilder {
       firebaseProvider.remoteConfig,
     );
 
-    _timerSettingsSharedPrefsService =
-      TimerSettingsSharedPrefsService(
-        crashlyticsService: _crashlyticsService,
-        sharedPrefs: sharedPreferences,
-      );
-
     _sharedPreferencesService = DefaultSharedPreferencesService(
       sharedPreferences
     );
@@ -165,7 +155,6 @@ class ServicesBuilder {
       idGeneratorService: _idGeneratorService,
       cacheManagerService: _cacheManagerService,
       wakelockService: _wakelockService,
-      timerSettingsSharedPrefsService: _timerSettingsSharedPrefsService,
       sharedPreferencesService: _sharedPreferencesService,
       shaderService: _shaderService,
       functionsService: _functionsService,

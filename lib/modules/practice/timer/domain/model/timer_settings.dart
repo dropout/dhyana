@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/model/converter/duration_converter.dart';
 import 'package:dhyana/core/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 
 part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';

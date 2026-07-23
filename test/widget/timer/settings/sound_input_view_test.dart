@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';

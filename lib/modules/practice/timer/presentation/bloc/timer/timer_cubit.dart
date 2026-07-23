@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:clock/clock.dart';
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';

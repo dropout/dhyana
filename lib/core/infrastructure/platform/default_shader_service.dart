@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dhyana/service/shader_service.dart';
+import 'package:dhyana/core/domain/service/shader_service.dart';
 
 class DefaultShaderService implements ShaderService {
 

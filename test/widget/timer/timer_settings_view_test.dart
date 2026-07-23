@@ -2,9 +2,9 @@ import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/t
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/service/default/default_shader_service.dart';
+import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/service/shader_service.dart';
+import 'package:dhyana/core/domain/service/shader_service.dart';
 import 'package:dhyana/widget/session/session_start_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/duration_input.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/sound_input.dart';

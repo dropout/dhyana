@@ -1,4 +1,4 @@
-import 'package:dhyana/enum/cached_asset_type.dart';
+import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract interface class ChantCacheManagerService {

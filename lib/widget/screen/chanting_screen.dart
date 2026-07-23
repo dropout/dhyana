@@ -1,10 +1,10 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/model/session.dart';
-import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
-import 'package:dhyana/widget/app_bar/custom_back_button.dart';
+import 'package:dhyana/core/presentation/app_bar/custom_app_bar.dart';
+import 'package:dhyana/core/presentation/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/widget/context/chanting_context.dart';
 import 'package:dhyana/widget/chanting/chanting_player_view.dart';

@@ -1,4 +1,4 @@
-import 'package:dhyana/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/model/chanting_settings.dart';
 import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';

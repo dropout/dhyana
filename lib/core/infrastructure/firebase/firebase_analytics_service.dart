@@ -1,6 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/core/domain/service/analytics_service.dart';
 
 class FirebaseAnalyticsService implements AnalyticsService {
 

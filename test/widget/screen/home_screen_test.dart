@@ -4,8 +4,8 @@ import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/service/default/default_shader_service.dart';
-import 'package:dhyana/service/shader_service.dart';
+import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
+import 'package:dhyana/core/domain/service/shader_service.dart';
 import 'package:dhyana/widget/profile/profile_button.dart';
 import 'package:dhyana/core/presentation/home_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_button.dart';
@@ -26,7 +26,6 @@ void main() {
     late MockAuthCubit mockAuthBloc;
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
-    late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockOverlayService mockOverlayService;
     late MockCacheManagerService mockCacheManagerService;
@@ -40,8 +39,7 @@ void main() {
     setUp(() async {
       mockAuthBloc = MockAuthCubit();
       mockProfileCubit = MockProfileCubit();
-      mockServices = MockServices();
-      mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
+      mockServices = MockServices();      
       mockCrashlyticsService = MockCrashlyticsService();
       mockOverlayService = MockOverlayService();
       mockCacheManagerService = MockCacheManagerService();
@@ -64,8 +62,6 @@ void main() {
         .thenReturn(mockSharedPreferencesService);
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-      when(() => mockServices.timerSettingsSharedPrefsService)
-        .thenReturn(mockTimerSettingsSharedPrefsService);
       when(() => mockServices.shaderService)
         .thenReturn(shaderService);
       when(() => mockServices.overlayService)
@@ -83,9 +79,6 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.signedOut());
-
-      when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
-        .thenReturn(TimerSettings());
 
       await tester.pumpWidget(
         Provider<Services>(
@@ -110,7 +103,6 @@ void main() {
       await tester.pump();
 
       expect(find.byType(TimerSettingsView), findsOneWidget);
-      verify(() => mockTimerSettingsSharedPrefsService.getTimerSettings()).called(1);
 
     });
 
@@ -140,7 +132,6 @@ void main() {
       await tester.pump();
 
       expect(find.byType(TimerSettingsView), findsOneWidget);
-      verifyNever(() => mockTimerSettingsSharedPrefsService.getTimerSettings());
 
     });
 
@@ -148,8 +139,6 @@ void main() {
 
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.signedOut());
-      when(() => mockTimerSettingsSharedPrefsService.getTimerSettings())
-        .thenThrow(Exception('Error occured'));
 
       await tester.pumpWidget(
         Provider<Services>(

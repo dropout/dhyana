@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/model/caching_progress.dart';
 import 'package:dhyana/model/chant_local_resources.dart';
 import 'package:dhyana/model/lyrics_document.dart';
 import 'package:dhyana/repository/chant_playback_repository.dart';
 import 'package:dhyana/service/chanting_audio_service.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/lyrics_service.dart';
-import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/core/domain/service/resource_resolver.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

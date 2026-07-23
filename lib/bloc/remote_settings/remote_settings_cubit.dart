@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:dhyana/core/domain/model/remote_settings.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/remote_settings_service.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/remote_settings_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

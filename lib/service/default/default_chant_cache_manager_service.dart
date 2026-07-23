@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:dhyana/data_provider/storage_data_provider.dart';
-import 'package:dhyana/enum/cached_asset_type.dart';
+import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/service/chant_cache_manager_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';

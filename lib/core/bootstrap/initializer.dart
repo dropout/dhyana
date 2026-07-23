@@ -11,7 +11,7 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/modules/account/data/firebase_profile_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
-import 'package:dhyana/service/firebase/firebase_remote_settings_service.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';

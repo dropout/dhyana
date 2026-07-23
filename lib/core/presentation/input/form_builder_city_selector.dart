@@ -1,5 +1,5 @@
 import 'package:dart_geohash/dart_geohash.dart';
-import 'package:dhyana/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/model/city_search_result.dart';
 import 'package:dhyana/model/location.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';

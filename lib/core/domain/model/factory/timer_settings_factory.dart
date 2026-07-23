@@ -1,4 +1,4 @@
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 
 class TimerSettingsFactory {

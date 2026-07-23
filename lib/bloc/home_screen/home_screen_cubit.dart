@@ -1,5 +1,5 @@
-import 'package:dhyana/enum/session_type.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 

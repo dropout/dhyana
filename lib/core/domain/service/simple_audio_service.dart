@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
 /// A simple audio service that can play discrete sounds without

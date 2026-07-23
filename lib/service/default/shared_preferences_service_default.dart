@@ -1,4 +1,4 @@
-import 'package:dhyana/enum/shared_preferences_key.dart';
+import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../shared_preferences_service.dart';
 

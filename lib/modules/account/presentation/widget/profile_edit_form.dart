@@ -1,10 +1,10 @@
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/widget/input/profile_image_picker/profile_image_selection_controller.dart';
-import 'package:dhyana/widget/dialog/image_upload_not_safe_dialog.dart';
-import 'package:dhyana/widget/dialog/photo_access_denied_dialog.dart';
-import 'package:dhyana/widget/input/app_text_input.dart';
-import 'package:dhyana/widget/input/form_builder_city_selector.dart';
-import 'package:dhyana/widget/input/form_builder_profile_image_picker.dart';
+import 'package:dhyana/core/presentation/input/profile_image_picker/profile_image_selection_controller.dart';
+import 'package:dhyana/core/presentation/dialog/image_upload_not_safe_dialog.dart';
+import 'package:dhyana/core/presentation/dialog/photo_access_denied_dialog.dart';
+import 'package:dhyana/core/presentation/input/app_text_input.dart';
+import 'package:dhyana/core/presentation/input/form_builder_city_selector.dart';
+import 'package:dhyana/core/presentation/input/form_builder_profile_image_picker.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/dialog_helper.dart';
 import 'package:dhyana/widget/util/gap.dart';

@@ -1,5 +1,5 @@
 import 'package:dhyana/bloc/chanting/chanting_cubit.dart';
-import 'package:dhyana/service/wakelock_service.dart';
+import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/chanting/player/lyrics_view.dart';
 import 'package:dhyana/widget/chanting/player/player_controls.dart';

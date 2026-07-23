@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:dhyana/widget/app_bar/custom_app_bar.dart';
-import 'package:dhyana/widget/app_bar/custom_back_button.dart';
+import 'package:dhyana/core/presentation/app_bar/custom_app_bar.dart';
+import 'package:dhyana/core/presentation/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 
 mixin TitleEffectMixin<T extends StatefulWidget> on State<T> {

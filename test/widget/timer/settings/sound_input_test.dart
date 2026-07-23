@@ -1,4 +1,4 @@
-import 'package:dhyana/enum/sound.dart';
+import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/service/haptics_service.dart';
 import 'package:dhyana/service/overlay_service.dart';

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dhyana/enum/loading_state.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
-import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/resource_resolver.dart';
 import 'package:dhyana/widget/util/app_context.dart';
 import 'package:dhyana/widget/util/image.dart';
 import 'package:flutter/material.dart';

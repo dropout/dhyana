@@ -39,7 +39,6 @@ void main() {
     late MockPresenceRepository mockPresenceRepository;
     late MockProfileRepository mockProfileRepository;
     late MockTimerSettingsHistoryRepository mockTimerSettingsHistoryRepository;
-    late MockTimerSettingsSharedPrefsService mockTimerSettingsSharedPrefsService;
     late MockAppAudioHandler mockAudioHandler;
 
     setUpAll(() {
@@ -72,7 +71,6 @@ void main() {
       mockPresenceRepository = MockPresenceRepository();
       mockProfileRepository = mockProfileRepository = MockProfileRepository();
       mockTimerSettingsHistoryRepository = MockTimerSettingsHistoryRepository();
-      mockTimerSettingsSharedPrefsService = MockTimerSettingsSharedPrefsService();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
@@ -84,8 +82,6 @@ void main() {
         .thenReturn(mockWakelockService);
       when(() => mockServices.audioHandler)
         .thenReturn(mockAudioHandler);
-      when(() => mockServices.timerSettingsSharedPrefsService)
-        .thenReturn(mockTimerSettingsSharedPrefsService);
 
       when(() => mockWakelockService.enable())
         .thenAnswer((_) async => {});

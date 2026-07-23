@@ -1,6 +1,6 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
-import '../crashlytics_service.dart';
+import '../../domain/service/crashlytics_service.dart';
 
 class FirebaseCrashlyticsService implements CrashlyticsService {
 

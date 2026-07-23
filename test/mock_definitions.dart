@@ -14,22 +14,21 @@ import 'package:dhyana/modules/account/domain/repository/profile_repository.dart
 import 'package:dhyana/modules/account/domain/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
-import 'package:dhyana/service/analytics_service.dart';
+import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/service/chanting_audio_service.dart';
-import 'package:dhyana/service/crashlytics_service.dart';
+import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
-import 'package:dhyana/service/id_generator_service.dart';
+import 'package:dhyana/core/domain/service/id_generator_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
-import 'package:dhyana/service/resource_resolver.dart';
+import 'package:dhyana/core/domain/service/resource_resolver.dart';
 import 'package:dhyana/service/safe_image_detector.dart';
 import 'package:dhyana/service/shared_preferences_service.dart';
 import 'package:dhyana/service/timer_audio_service.dart';
 import 'package:dhyana/service/timer_service.dart';
 import 'package:dhyana/service/timer_service_factory.dart';
-import 'package:dhyana/service/timer_settings_shared_prefs_service.dart';
-import 'package:dhyana/service/wakelock_service.dart';
+import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -93,10 +92,6 @@ class MockCrashlyticsService
 class MockSharedPreferencesService
   extends Mock
   implements SharedPreferencesService {}
-
-class MockTimerSettingsSharedPrefsService
-  extends Mock
-  implements TimerSettingsSharedPrefsService {}
 
 class MockOverlayService
   extends Mock
