@@ -3,7 +3,7 @@ import 'package:dhyana/modules/account/presentation/bloc/profile/data_update/def
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
-import 'package:dhyana/repository/statistics_repository.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';
 import 'package:dhyana/service/profile_stats_report_updater.dart';
@@ -131,5 +131,5 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
     emit(const ProfileState.initial());
     logger.t('Profile data cleared!');
   }
-  
+
 }

@@ -1,7 +1,7 @@
 import 'package:dhyana/service/mindful_minutes_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
-import 'package:dhyana/repository/statistics_repository.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/model/update_profile_stats_result.dart';

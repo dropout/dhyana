@@ -100,10 +100,11 @@ class ChantList extends StatelessWidget {
         : 0.0;
 
     return Slidable(
+      closeOnScroll: true,
       key: ValueKey(chant.uniqueId),
-      endActionPane: ActionPane(
+      endActionPane: ActionPane(      
         motion: const ScrollMotion(),
-        extentRatio: 0.25,
+        extentRatio: 0.25,        
         children: [
           CustomSlidableAction(
             onPressed: (_) { 

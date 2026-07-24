@@ -12,7 +12,7 @@ import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:dhyana/repository/firebase/firebase_statistics_repository.dart';
+import 'package:dhyana/modules/insights/data/firebase_statistics_repository.dart';
 
 class MockFirebaseDataProviderFactory extends Mock implements FirebaseDataProviderFactory {}
 class MockFirebaseDayDataProvider extends Mock implements FirebaseDayDataProvider {}

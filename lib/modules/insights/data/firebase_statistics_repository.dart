@@ -10,7 +10,7 @@ import 'package:dhyana/modules/insights/domain/model/week.dart';
 import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:dhyana/modules/insights/domain/model/year_query_options.dart';
-import 'package:dhyana/repository/statistics_repository.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseStatisticsRepository extends StatisticsRepository {

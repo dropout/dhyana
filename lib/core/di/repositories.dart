@@ -13,12 +13,12 @@ import 'package:dhyana/modules/practice/chanting/data/default_chant_playback_rep
 import 'package:dhyana/repository/firebase/firebase_auth_repository.dart';
 import 'package:dhyana/modules/practice/chanting/data/firebase_chants_repository.dart';
 import 'package:dhyana/modules/account/data/firebase_profile_repository.dart';
-import 'package:dhyana/repository/firebase/firebase_statistics_repository.dart';
+import 'package:dhyana/modules/insights/data/firebase_statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/firebase_timer_settings_history_repository.dart';
-import 'package:dhyana/repository/firebase/firebase_presence_repository.dart';
-import 'package:dhyana/repository/presence_repository.dart';
+import 'package:dhyana/modules/social/data/firebase_presence_repository.dart';
+import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
-import 'package:dhyana/repository/statistics_repository.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_chant_cache_manager_service.dart';
