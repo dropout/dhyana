@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/modules/account/presentation/bloc/delete_user/delete_user_cubit.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/account/domain/repository/auth_repository.dart';
-import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';

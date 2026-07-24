@@ -1,18 +1,18 @@
 import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
-import 'package:dhyana/data_provider/firebase/firebase_day_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_month_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_session_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_week_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_year_data_provider.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_day_data_provider.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_month_data_provider.dart';
+import 'package:dhyana/modules/practice/session/data/datasource/firebase_session_data_provider.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_week_data_provider.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_year_data_provider.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/insights/domain/model/month.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:dhyana/modules/insights/data/firebase_statistics_repository.dart';
+import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
 
 class MockFirebaseDataProviderFactory extends Mock implements FirebaseDataProviderFactory {}
 class MockFirebaseDayDataProvider extends Mock implements FirebaseDayDataProvider {}

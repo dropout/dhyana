@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_milestones_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';

@@ -1,0 +1,38 @@
+import 'dart:typed_data';
+
+import 'package:dhyana/core/domain/model/location.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
+
+abstract class ProfileDataUpdater {
+
+  Future<Profile> update();
+
+  String? getFirstName(Map<String,dynamic> formData) {
+    if (!formData.containsKey('firstName')) {
+      return null;
+    }
+    return formData['firstName'] as String;
+  }
+
+  String? getLastName(Map<String,dynamic> formData) {
+    if (!formData.containsKey('lastName')) {
+      return null;
+    }
+    return formData['lastName'] as String;
+  }
+
+  Uint8List? getImageData(Map<String,dynamic> formData) {
+    if (formData.containsKey('imageData') == false || formData['imageData'] == null) {
+      return null;
+    }
+    return formData['imageData'] as Uint8List;
+  }
+
+  Location? getLocation(Map<String,dynamic> formData) {
+    if (formData.containsKey('location') == false || formData['location'] == null) {
+      return null;
+    }
+    return formData['location'] as Location;
+  }
+
+}

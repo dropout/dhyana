@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/remote_settings.dart';

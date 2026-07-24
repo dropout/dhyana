@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';

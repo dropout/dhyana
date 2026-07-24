@@ -1,4 +1,4 @@
-import 'package:dhyana/data_provider/storage_data_provider.dart';
+import 'package:dhyana/core/data/datasource/storage_data_provider.dart';
 
 abstract class ResourceResolver {
 

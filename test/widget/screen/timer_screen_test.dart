@@ -1,13 +1,13 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/data_provider/auth/model/user.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/social/domain/model/presence.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/social/domain/model/public_profile.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_screen.dart';

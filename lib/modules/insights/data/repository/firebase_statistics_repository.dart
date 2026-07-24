@@ -1,0 +1,110 @@
+import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
+import 'package:dhyana/modules/insights/domain/model/day.dart';
+import 'package:dhyana/modules/insights/domain/model/day_query_options.dart';
+import 'package:dhyana/modules/insights/domain/model/month.dart';
+import 'package:dhyana/modules/insights/domain/model/month_query_options.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session_query_options.dart';
+import 'package:dhyana/modules/insights/domain/model/week.dart';
+import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';
+import 'package:dhyana/modules/insights/domain/model/year.dart';
+import 'package:dhyana/modules/insights/domain/model/year_query_options.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
+import 'package:dhyana/util/date_time_utils.dart';
+
+class FirebaseStatisticsRepository extends StatisticsRepository {
+
+  final FirebaseDataProviderFactory dataProviderFactory;
+
+  FirebaseStatisticsRepository({
+    required this.dataProviderFactory,
+  });
+
+  @override
+  Future<Day> getDay(String profileId, DateTime dateTime) {
+    final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
+    return dataProvider.read(dateTime.toDayId());
+  }
+
+  @override
+  Future<Week> getWeek(String profileId, DateTime dateTime) {
+    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
+    return dataProvider.read(dateTime.toWeekId());
+  }
+
+  @override
+  Future<Month> getMonth(String profileId, DateTime dateTime) {
+    final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
+    return dataProvider.read(dateTime.toMonthId());
+  }
+
+  @override
+  Future<Year> getYear(String profileId, DateTime dateTime) {
+    final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
+    return dataProvider.read(dateTime.toYearId());
+  }
+
+  @override
+  Future<Session> getSession(String profileId, String sessionId) {
+    final dataProvider = dataProviderFactory.createSessionDataProvider(profileId);
+    return dataProvider.read(sessionId);
+  }
+
+  @override
+  Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) {
+    final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
+    return dataProvider.query(queryOptions);
+  }
+
+  @override
+  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) {
+    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
+    return dataProvider.query(queryOptions);
+  }
+
+  @override
+  Future<List<Month>> queryMonths(String profileId, MonthQueryOptions queryOptions) {
+    final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
+    return dataProvider.query(queryOptions);
+  }
+
+  @override
+  Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions) {
+    final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
+    return dataProvider.query(queryOptions);
+  }
+
+  @override
+  Future<List<Session>> querySessions(String profileId, SessionQueryOptions queryOptions) {
+    final dataProvider = dataProviderFactory.createSessionDataProvider(profileId);
+    return dataProvider.query(queryOptions);
+  }
+
+  @override
+  Future<void> logSession(
+    Profile profile,
+    Session session
+  ) async {
+    await dataProviderFactory
+      .createSessionDataProvider(profile.id)
+      .create(session);
+
+    await dataProviderFactory
+      .createDayDataProvider(profile.id)
+      .logSession(session, profile);
+
+    await dataProviderFactory
+      .createWeekDataProvider(profile.id)
+      .logSession(session);
+
+    await dataProviderFactory
+      .createMonthDataProvider(profile.id)
+      .logSession(session);
+
+    await dataProviderFactory
+      .createYearDataProvider(profile.id)
+      .logSession(session);
+  }
+
+}

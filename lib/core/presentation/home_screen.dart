@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/widget/home/home_screen_appbar.dart';

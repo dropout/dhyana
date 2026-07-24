@@ -1,6 +1,9 @@
+import 'package:dhyana/core/navigation/app_keys.dart';
 import 'package:dhyana/core/presentation/bloc/remote_settings/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/presentation/widget/util/gap.dart';
+import 'package:dhyana/modules/account/routes.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,23 +18,24 @@ import 'package:dhyana/core/navigation/app_routes.dart';
 /// It sets up the top-level providers and
 /// the MaterialApp with routing.
 class App extends StatelessWidget {
-
   final InitResult initResult;
   late final GoRouter router;
 
-  App({
-    required this.initResult,
-    super.key
-  }) :
-    router = createAppRouter(initResult: initResult);
-
+  App({required this.initResult, super.key})
+    : router = GoRouter(
+        debugLogDiagnostics: kDebugMode,
+        navigatorKey: AppWidgetKeys.rootNavigatorKey,
+        initialLocation: '/',
+        routes: [...$coreRoutes, ...$accountRoutes],
+        // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
+      );
 
   @override
   Widget build(BuildContext context) {
     return AppProviders(
       initResult: initResult,
       child: BlocBuilder<RemoteSettingsCubit, RemoteSettingsState>(
-      builder: (context, state) {
+        builder: (context, state) {
           if (state.settings.maintenanceModeEnabled) {
             return buildMaintenanceModeApp(context);
           } else {
@@ -49,7 +53,8 @@ class App extends StatelessWidget {
         // unfocus user input if clicks anywhere on screen
         // useful for hiding keyboard after user input
         FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
           currentFocus.focusedChild!.unfocus();
         }
       },
@@ -58,14 +63,11 @@ class App extends StatelessWidget {
           child ??= const SizedBox.shrink();
           return MediaQuery.withClampedTextScaling(
             maxScaleFactor: 1.0,
-            child: child
+            child: child,
           );
         },
         routerConfig: router,
-        supportedLocales: const [
-          Locale('hu', 'HU'),
-          Locale('en', 'EN')
-        ],
+        supportedLocales: const [Locale('hu', 'HU'), Locale('en', 'EN')],
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -73,7 +75,7 @@ class App extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         theme: DesignSpec().themeData,
-      )
+      ),
     );
   }
 
@@ -91,11 +93,7 @@ class App extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.build,
-                size: 32,
-                color: Colors.black,
-              ),
+              Icon(Icons.build, size: 32, color: Colors.black),
               Gap.medium(),
               Text(
                 AppLocalizations.of(context).underMaintenanceTitle,
@@ -116,7 +114,7 @@ class App extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:dhyana/model/city_search_result.dart';
+import 'package:dhyana/core/domain/model/city_search_result.dart';
 
 import '../../domain/service/functions_service.dart';
 

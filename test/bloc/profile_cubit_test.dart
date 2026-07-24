@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

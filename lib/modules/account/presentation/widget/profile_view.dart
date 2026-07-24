@@ -1,7 +1,7 @@
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_footer.dart';
-import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
+import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_menu.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view.dart';
 import 'package:dhyana/core/presentation/widget/util/gap.dart';

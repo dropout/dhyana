@@ -1,7 +1,7 @@
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_view.dart';

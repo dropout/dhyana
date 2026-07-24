@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
 import 'package:dhyana/modules/practice/chanting/domain/chants_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/tools/batch_download_task.dart';
+import 'package:dhyana/core/data/datasource/tools/batch_download_task.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/caching_progress.dart';
@@ -12,7 +12,7 @@ import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resources.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/modules/practice/chanting/domain/chant_cache_data_provider.dart';
-import 'package:dhyana/data_provider/storage_data_provider.dart';
+import 'package:dhyana/core/data/datasource/storage_data_provider.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager_service.dart';

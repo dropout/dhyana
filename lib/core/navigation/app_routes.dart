@@ -1,34 +1,27 @@
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/core/bootstrap/init_result.dart';
+import 'package:dhyana/modules/account/routes.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/core/presentation/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';
-import 'package:dhyana/core/navigation/app_keys.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../modules/practice/chanting/presentation/widget/chanting_screen.dart';
-import '../../modules/account/presentation/widget/screen/delete_profile_screen.dart';
 import '../../modules/donate/presentation/widget/donate_screen.dart';
 import '../presentation/home_screen.dart';
-import '../../modules/account/presentation/widget/screen/login_screen.dart';
 import '../../modules/social/presentation/widget/presence_screen.dart';
-import '../../modules/account/presentation/widget/screen/profile_edit_screen.dart';
-import '../../modules/account/presentation/widget/screen/profile_screen.dart';
+
 import '../../modules/account/presentation/widget/screen/profile_settings_screen.dart';
 import '../../modules/insights/presentation/widget/profile_stats_screen.dart';
-import '../../modules/account/presentation/widget/screen/profile_wizard_screen.dart';
+
 import '../../modules/practice/session/presentation/widget/session_completed_screen.dart';
 import '../../modules/practice/session/presentation/widget/session_history_screen.dart';
 import '../../modules/practice/timer/presentation/widget/timer_screen.dart';
 import '../../modules/practice/timer/presentation/widget/timer_settings_history_screen.dart';
+import 'auth_redirect_hook.dart';
 
 part 'app_routes.g.dart';
 
@@ -40,15 +33,15 @@ part 'app_routes.g.dart';
 //  typed parameters.
 // -----------------------------------------------------------------------------
 
-GoRouter createAppRouter({required InitResult initResult}) {
-  return GoRouter(
-    debugLogDiagnostics: kDebugMode,
-    navigatorKey: AppWidgetKeys.rootNavigatorKey,
-    initialLocation: '/',
-    routes: $appRoutes,
-    // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
-  );
-}
+// GoRouter createAppRouter({required InitResult initResult}) {
+//   return GoRouter(
+//     debugLogDiagnostics: kDebugMode,
+//     navigatorKey: AppWidgetKeys.rootNavigatorKey,
+//     initialLocation: '/',
+//     routes: $appRoutes,
+//     // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
+//   );
+// }
 
 /*
     Routes that does not require authentication
@@ -188,13 +181,6 @@ class SessionCompletedRoute extends GoRouteData with $SessionCompletedRoute {
   }
 }
 
-@TypedGoRoute<LoginRoute>(path: '/login', name: 'LOGIN')
-class LoginRoute extends GoRouteData with $LoginRoute {
-  const LoginRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) => LoginScreen();
-}
-
 @TypedGoRoute<DonateRoute>(path: '/donate', name: 'DONATE')
 class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
   const DonateRoute();
@@ -207,65 +193,9 @@ class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
     Routes that require authentication
  */
 
-mixin AuthRedirectHook {
-  String? authRedirectHook(BuildContext context, GoRouterState state) {
-    final LoginRoute loginRoute = const LoginRoute();
-    final AuthCubit authCubit = context.read<AuthCubit>();
-    final bool isAuthenticated = (authCubit.state is AuthStateSignedIn);
-    final bool isLoginScreenShown =
-        state.matchedLocation == loginRoute.location;
-    if (!isAuthenticated && !isLoginScreenShown) {
-      return loginRoute.location;
-    } else {
-      return null;
-    }
-  }
-}
 
-@TypedGoRoute<ProfileRoute>(path: '/profile/:profileId', name: 'PROFILE')
-class ProfileRoute extends GoRouteData with AuthRedirectHook, $ProfileRoute {
-  final String profileId;
 
-  /// Pass the [Profile] object through extra to avoid unnecessary
-  /// profile data fetching.
-  final Object? $extra;
 
-  const ProfileRoute({required this.profileId, this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    try {
-      final Profile profile = ($extra is Profile)
-          ? $extra as Profile
-          : throw Exception('Invalid profile data');
-      return ProfileScreen(profileId: profileId, profile: profile);
-    } catch (e) {
-      // If the passed profile data is invalid or not present,
-      // load the profile from just the profile id.
-      return ProfileScreen(profileId: profileId);
-    }
-  }
-
-  @override
-  String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
-}
-
-@TypedGoRoute<ProfileWizardRoute>(
-  path: '/profileWizard/:profileId',
-  name: 'PROFILE_WIZARD',
-)
-class ProfileWizardRoute extends GoRouteData
-    with AuthRedirectHook, $ProfileWizardRoute {
-  final String profileId;
-  const ProfileWizardRoute({required this.profileId});
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      ProfileWizardScreen(profileId: profileId);
-  @override
-  String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
-}
 
 @TypedGoRoute<ProfileStatsRoute>(
   path: '/profileStats/:profileId',
@@ -280,35 +210,10 @@ class ProfileStatsRoute extends GoRouteData
       ProfileStatsScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
+      authRedirectHook(context, state, const LoginRoute());
 }
 
-@TypedGoRoute<ProfileEditRoute>(path: '/editProfile', name: 'EDIT_PROFILE')
-class ProfileEditRoute extends GoRouteData
-    with AuthRedirectHook, $ProfileEditRoute {
-  const ProfileEditRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const ProfileEditScreen();
-  @override
-  String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
-}
 
-@TypedGoRoute<DeleteProfileRoute>(
-  path: '/deleteProfile',
-  name: 'DELETE_PROFILE',
-)
-class DeleteProfileRoute extends GoRouteData
-    with AuthRedirectHook, $DeleteProfileRoute {
-  const DeleteProfileRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const DeleteProfileScreen();
-  @override
-  String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
-}
 
 @TypedGoRoute<SessionHistoryRoute>(path: '/activity', name: 'ACTIVITY')
 class SessionHistoryRoute extends GoRouteData
@@ -320,7 +225,7 @@ class SessionHistoryRoute extends GoRouteData
       SessionHistoryScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
+      authRedirectHook(context, state, const LoginRoute());
 }
 
 @TypedGoRoute<TimerSettingsHistoryRoute>(
@@ -336,7 +241,7 @@ class TimerSettingsHistoryRoute extends GoRouteData
       TimerSettingsHistoryScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
+      authRedirectHook(context, state, const LoginRoute());
 }
 
 @TypedGoRoute<PresenceRoute>(path: '/presence', name: 'PRESENCE')
@@ -346,7 +251,7 @@ class PresenceRoute extends GoRouteData with AuthRedirectHook, $PresenceRoute {
   Widget build(BuildContext context, GoRouterState state) => PresenceScreen();
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
+      authRedirectHook(context, state, const LoginRoute());
 }
 
 @TypedGoRoute<ProfileSettingsRoute>(
@@ -362,5 +267,19 @@ class ProfileSettingsRoute extends GoRouteData
       ProfileSettingsScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
-      authRedirectHook(context, state);
+      authRedirectHook(context, state, const LoginRoute());
 }
+
+
+List<RouteBase> $coreRoutes = [
+  $homeRoute,
+  $timerRoute,
+  $chantingRoute,
+  $sessionCompletedRoute,
+  $donateRoute,
+  $profileStatsRoute,
+  $sessionHistoryRoute,
+  $timerSettingsHistoryRoute,
+  $presenceRoute,
+  $profileSettingsRoute,
+];

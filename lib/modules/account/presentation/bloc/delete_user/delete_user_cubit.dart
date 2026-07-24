@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/account/domain/repository/auth_repository.dart';
-import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

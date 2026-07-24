@@ -2,7 +2,7 @@ import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart'
 import 'package:dhyana/modules/account/presentation/widget/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
 
 import '../../../../../core/presentation/widget/app_bar/custom_app_bar.dart';
 

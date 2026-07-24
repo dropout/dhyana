@@ -1,8 +1,8 @@
-import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/insights/presentation/widget/profile_stats_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_consecutive_days_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_milestones_view.dart';

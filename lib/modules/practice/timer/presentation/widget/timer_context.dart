@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/modules/social/presentation/bloc/presence/presence_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings_history/timer_settings_history_cubit.dart';

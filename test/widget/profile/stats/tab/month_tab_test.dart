@@ -3,7 +3,7 @@ import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
 import 'package:dhyana/modules/insights/domain/model/month_query_options.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/bar_chart_page/months_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/tab/month_tab.dart';

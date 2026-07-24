@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/social/domain/model/presence.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
+import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
 import 'package:dhyana/core/presentation/widget/util/gap.dart';
 import 'package:flutter/material.dart';
 

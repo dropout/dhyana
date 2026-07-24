@@ -4,7 +4,6 @@ import 'package:audio_service/audio_service.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:clock/clock.dart';
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
-import 'package:dhyana/core/domain/model/factory/timer_settings_factory.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/logging_crashlytics_service.dart';
@@ -69,7 +68,7 @@ void main() async {
     late StreamController<PlaybackState> playbackStateStreamController;
 
     setUpAll(() {
-      defaultTimerSettings = TimerSettingsFactory.withUuid();
+      defaultTimerSettings = TimerSettings();      
       playbackStateStreamController =
           StreamController<PlaybackState>.broadcast();
     });
@@ -86,9 +85,7 @@ void main() async {
         () => mockAudioService.playbackStateStream,
       ).thenAnswer((_) => playbackStateStreamController.stream);
 
-      when(
-        () => mockAudioService.stop(),
-      ).thenAnswer((_) => Future.value(null));
+      when(() => mockAudioService.stop()).thenAnswer((_) => Future.value(null));
     });
 
     tearDownAll(() {
@@ -179,13 +176,15 @@ void main() async {
           () => mockAudioService.start(cubit.state.timerSettings),
         ]);
       },
-    );    
+    );
 
     blocTest<TimerCubit, TimerCubitState>(
       'can start a timer session when there is no warmup time',
       build: () {
         when(
-          () => mockAudioService.start(defaultTimerSettings.copyWith(warmup: Duration.zero)),
+          () => mockAudioService.start(
+            defaultTimerSettings.copyWith(warmup: Duration.zero),
+          ),
         ).thenAnswer((_) => Future.value(null));
         when(
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
@@ -217,7 +216,9 @@ void main() async {
       ],
       verify: (timerCubit) {
         verifyInOrder([
-          () => mockAudioService.start(defaultTimerSettings.copyWith(warmup: Duration.zero)),
+          () => mockAudioService.start(
+            defaultTimerSettings.copyWith(warmup: Duration.zero),
+          ),
           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
         ]);
       },

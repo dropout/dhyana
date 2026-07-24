@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dhyana/model/lat_lng.dart';
+import 'package:dhyana/core/domain/model/lat_lng.dart';
 
 /// Calculates the bounding box for a given center point and distance in kilometers.
 (LatLng, LatLng) calculateBoundingBox(LatLng center, double distanceInKm) {

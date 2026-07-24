@@ -2,14 +2,14 @@ import 'dart:typed_data';
 import 'dart:math' as math;
 
 import 'package:dhyana/core/domain/enum/loading_state.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/service/safe_image_detector.dart';
 import 'package:dhyana/core/presentation/widget/input/profile_image_picker/profile_image_picker_current_image.dart';
 import 'package:dhyana/core/presentation/widget/input/profile_image_picker/profile_image_picker_edit_badge.dart';
 import 'package:dhyana/core/presentation/widget/input/profile_image_picker/profile_image_selection_controller.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
-import 'package:dhyana/modules/account/presentation/widget/profile_image_placeholder.dart';
+import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
+import 'package:dhyana/core/presentation/widget/profile/profile_image_placeholder.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

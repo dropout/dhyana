@@ -1,6 +1,6 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_menu.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

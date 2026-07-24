@@ -1,7 +1,7 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
-import 'package:dhyana/modules/account/presentation/widget/profile_avatar.dart';
+import 'package:dhyana/core/presentation/widget/profile/profile_avatar.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/session_result.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

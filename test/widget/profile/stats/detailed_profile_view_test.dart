@@ -1,10 +1,10 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
+import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_profile_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
