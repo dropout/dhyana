@@ -9,14 +9,14 @@ import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/util/blurhash.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class FirebaseProfileRepository
+class DefaultProfileRepository
   extends CrudRepositoryOps<Profile>
   implements ProfileRepository {
 
   final ProfileDataProvider profileDataProvider;
   final StorageDataProvider storageDataProvider;
 
-  const FirebaseProfileRepository({
+  const DefaultProfileRepository({
     required this.profileDataProvider,
     required this.storageDataProvider,
   }) : super(profileDataProvider);

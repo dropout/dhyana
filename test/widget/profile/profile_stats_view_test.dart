@@ -31,8 +31,6 @@ void main() {
     late MockRepositories mockRepositories;
     late MockStatisticsRepository mockStatisticsRepository;
     late MockCrashlyticsService mockCrashlyticsService;
-    late MockCacheManagerService mockCacheManagerService;
-    late MockCacheManager mockCacheManager;
 
     setUp(() async {
 
@@ -41,16 +39,10 @@ void main() {
 
       // Services
       mockServices = MockServices();
-      mockCrashlyticsService = MockCrashlyticsService();
-      mockCacheManagerService = MockCacheManagerService();
+      mockCrashlyticsService = MockCrashlyticsService();    
 
-      mockCacheManager = MockCacheManager();
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
-      when(() => mockCacheManagerService.cacheManager)
-          .thenReturn(mockCacheManager);
 
       // Repositories
       mockRepositories = MockRepositories();

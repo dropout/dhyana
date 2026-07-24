@@ -27,8 +27,6 @@ void main() {
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockOverlayService mockOverlayService;
-    late MockCacheManagerService mockCacheManagerService;
-    late MockCacheManager mockCacheManager;
     late MockSharedPreferencesService mockSharedPreferencesService;
 
     // doesn't make sense to mock this because the FragmentShader
@@ -41,8 +39,6 @@ void main() {
       mockServices = MockServices();      
       mockCrashlyticsService = MockCrashlyticsService();
       mockOverlayService = MockOverlayService();
-      mockCacheManagerService = MockCacheManagerService();
-      mockCacheManager = MockCacheManager();
       mockSharedPreferencesService = MockSharedPreferencesService();
 
       when(() => mockAuthBloc.state)
@@ -50,12 +46,6 @@ void main() {
 
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.initial());
-
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
-
-      when(() => mockCacheManagerService.cacheManager)
-        .thenReturn(mockCacheManager);
 
       when(() => mockServices.sharedPreferencesService)
         .thenReturn(mockSharedPreferencesService);

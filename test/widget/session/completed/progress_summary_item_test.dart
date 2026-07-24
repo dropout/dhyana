@@ -15,23 +15,13 @@ void main() {
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
-  late MockCacheManagerService mockCacheManagerService;
 
   setUpAll(() async {
-
     mockServices = MockServices();
-
     mockCrashlyticsService = MockCrashlyticsService();
-    mockCacheManagerService = MockCacheManagerService();
 
     when(() => mockServices.crashlyticsService)
       .thenReturn(mockCrashlyticsService);
-
-    when(() => mockServices.cacheManagerService)
-      .thenReturn(mockCacheManagerService);
-    when(() => mockCacheManagerService.cacheManager)
-      .thenReturn(MockCacheManager());
-
   });
 
   group('ProgressSummaryItem', () {

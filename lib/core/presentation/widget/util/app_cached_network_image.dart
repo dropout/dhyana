@@ -151,7 +151,6 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
 
     imageProvider = CachedNetworkImageProvider(
       widget.imageUrl,
-      cacheManager: context.services.cacheManagerService.cacheManager,
       errorListener: (error) {
         widget.crashlyticsService.recordError(exception: error);
       },

@@ -14,7 +14,6 @@ import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
-import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/service/haptics_service.dart';
@@ -75,10 +74,6 @@ class MockSessionCompletedCubit
 class MockServices
   extends Mock
   implements Services {}
-
-class MockCacheManagerService
-  extends Mock
-  implements CacheManagerService {}
 
 class MockCacheManager
   extends Mock

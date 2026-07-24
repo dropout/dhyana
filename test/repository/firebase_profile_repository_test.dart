@@ -4,7 +4,7 @@ import 'package:dhyana/core/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage_data_provider.dart';
 import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/core/domain/model/profile_query_options.dart';
-import 'package:dhyana/core/data/repository/firebase_profile_repository.dart';
+import 'package:dhyana/core/data/repository/default_profile_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -36,7 +36,7 @@ void main() {
     late MockProfileDataProvider mockProfileDataProvider;
     late MockStorageDataProvider mockStorageDataProvider;
     late MockProfile mockProfile;
-    late FirebaseProfileRepository firebaseProfileRepository;
+    late DefaultProfileRepository firebaseProfileRepository;
 
     setUp(() {
       profileStreamController = StreamController<MockProfile>(sync: true);
@@ -45,7 +45,7 @@ void main() {
       mockProfileDataProvider = MockProfileDataProvider();
       mockStorageDataProvider = MockStorageDataProvider();
       mockProfile = MockProfile();
-      firebaseProfileRepository = FirebaseProfileRepository(
+      firebaseProfileRepository = DefaultProfileRepository(
         profileDataProvider: mockProfileDataProvider,
         storageDataProvider: mockStorageDataProvider
       );

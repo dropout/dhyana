@@ -27,7 +27,6 @@ void main() {
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
-  late MockCacheManagerService mockCacheManagerService;
 
   late MockRepositories mockRepositories;
   late MockProfileRepository mockProfileRepository;
@@ -39,18 +38,10 @@ void main() {
 
     mockServices = MockServices();
     mockCrashlyticsService = MockCrashlyticsService();
-    mockCacheManagerService = MockCacheManagerService();
 
     when(
       () => mockServices.crashlyticsService,
     ).thenReturn(mockCrashlyticsService);
-
-    when(
-      () => mockServices.cacheManagerService,
-    ).thenReturn(mockCacheManagerService);
-    when(
-      () => mockCacheManagerService.cacheManager,
-    ).thenReturn(MockCacheManager());
 
     mockRepositories = MockRepositories();
     mockProfileRepository = MockProfileRepository();

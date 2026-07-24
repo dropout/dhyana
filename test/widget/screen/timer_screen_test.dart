@@ -31,9 +31,7 @@ void main() {
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
-    late MockCacheManagerService mockCacheManagerService;
     late MockWakelockService mockWakelockService;
-    late MockCacheManager mockCacheManager;
     late MockRepositories mockRepositories;
     late MockPresenceRepository mockPresenceRepository;
     late MockProfileRepository mockProfileRepository;
@@ -57,8 +55,6 @@ void main() {
       // Services
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
-      mockCacheManagerService = MockCacheManagerService();
-      mockCacheManager = MockCacheManager();
       mockWakelockService = MockWakelockService();
       mockAudioHandler = MockAppAudioHandler();      
 
@@ -73,10 +69,6 @@ void main() {
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
-      when(() => mockCacheManagerService.cacheManager)
-        .thenReturn(mockCacheManager);
       when(() => mockServices.wakelockService)
         .thenReturn(mockWakelockService);
       when(() => mockServices.audioHandler)

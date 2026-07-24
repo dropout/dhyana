@@ -2,9 +2,7 @@ import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/core/data/datasource/tools/firebase_id_generator.dart';
 import 'package:dhyana/core/data/datasource/storage_data_provider.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
-import 'package:dhyana/service/cache_manager_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/service/default/default_cache_manager_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_haptics_service.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_lyrics_service.dart';
 import 'package:dhyana/service/default/default_mindful_minutes_service.dart';
@@ -50,7 +48,6 @@ class Services {
   final ShaderService shaderService;
   final IdGeneratorService idGeneratorService;
   final OverlayService overlayService;
-  final CacheManagerService cacheManagerService;
   final WakelockService wakelockService;
   final FunctionsService functionsService;
   final UrlLauncher urlLauncher;
@@ -67,7 +64,6 @@ class Services {
     required this.shaderService,
     required this.audioHandler,
     required this.overlayService,
-    required this.cacheManagerService,
     required this.sharedPreferencesService,
     required this.idGeneratorService,
     required this.wakelockService,
@@ -89,7 +85,6 @@ class ServicesBuilder {
   late RemoteSettingsService _remoteConfigService;
   late ResourceResolver _resourceResolver;
   late IdGeneratorService _idGeneratorService;
-  late CacheManagerService _cacheManagerService;
   late WakelockService _wakelockService;
   late SharedPreferencesService _sharedPreferencesService;
   late ShaderService _shaderService;
@@ -121,7 +116,6 @@ class ServicesBuilder {
     _resourceResolver = DefaultResourceResolver(
       storageDataProvider: storageDataProvider,
     );
-    _cacheManagerService = DefaultCacheManagerService();
     _wakelockService = DefaultWakelockService();
 
     _remoteConfigService = FirebaseRemoteSettingsService(
@@ -153,7 +147,6 @@ class ServicesBuilder {
       remoteSettingsService: _remoteConfigService,
       resourceResolver: _resourceResolver,
       idGeneratorService: _idGeneratorService,
-      cacheManagerService: _cacheManagerService,
       wakelockService: _wakelockService,
       sharedPreferencesService: _sharedPreferencesService,
       shaderService: _shaderService,

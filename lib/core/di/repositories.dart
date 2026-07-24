@@ -10,9 +10,9 @@ import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
 import 'package:dhyana/modules/practice/chanting/data/default_chant_playback_repository.dart';
-import 'package:dhyana/core/data/repository/firebase_auth_repository.dart';
+import 'package:dhyana/core/data/repository/default_auth_repository.dart';
 import 'package:dhyana/modules/practice/chanting/data/firebase_chants_repository.dart';
-import 'package:dhyana/core/data/repository/firebase_profile_repository.dart';
+import 'package:dhyana/core/data/repository/default_profile_repository.dart';
 import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
@@ -65,7 +65,7 @@ class RepositoriesBuilder {
     required ProfileDataProvider profileDataProvider,
     required StorageDataProvider storageDataProvider,
   }) {
-    _authRepository = FirebaseAuthRepository(
+    _authRepository = DefaultAuthRepository(
       authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
       profileDataProvider: profileDataProvider,
     );
@@ -76,7 +76,7 @@ class RepositoriesBuilder {
       ),
     );
 
-    _profileRepository = FirebaseProfileRepository(
+    _profileRepository = DefaultProfileRepository(
       profileDataProvider: profileDataProvider,
       storageDataProvider: storageDataProvider,
     );

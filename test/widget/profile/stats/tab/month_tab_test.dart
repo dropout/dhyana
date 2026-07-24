@@ -22,7 +22,6 @@ void main() {
     late MockRepositories mockRepositories;
     late MockStatisticsRepository mockStatisticsRepository;
     late MockCrashlyticsService mockCrashlyticsService;
-    late MockCacheManagerService mockCacheManagerService;
 
     setUpAll(() {
       registerFallbackValue(MonthQueryOptions(
@@ -32,18 +31,11 @@ void main() {
     });
 
     setUp(() async {
-
       mockServices = MockServices();
-
       mockCrashlyticsService = MockCrashlyticsService();
-      mockCacheManagerService = MockCacheManagerService();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
-      when(() => mockCacheManagerService.cacheManager)
-        .thenReturn(MockCacheManager());
 
       mockRepositories = MockRepositories();
       mockStatisticsRepository = MockStatisticsRepository();

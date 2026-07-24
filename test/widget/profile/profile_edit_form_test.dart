@@ -21,7 +21,6 @@ void main() {
     late Profile profile;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
-    late MockCacheManagerService mockCacheManagerService;
     late MockResourceResolver mockResourceResolver;
     late MockSafeImageDetectorFactory mockSafeImageDetectorFactory;
     late MockSafeImageDetector safeImageDetector;
@@ -36,7 +35,6 @@ void main() {
       mockServices = MockServices();
 
       mockCrashlyticsService = MockCrashlyticsService();
-      mockCacheManagerService = MockCacheManagerService();
       mockResourceResolver = MockResourceResolver();
       mockSafeImageDetectorFactory = MockSafeImageDetectorFactory();
       safeImageDetector = MockSafeImageDetector();
@@ -51,11 +49,6 @@ void main() {
         .thenReturn(mockResourceResolver);
       when(() => mockResourceResolver.resolveStoragePath(any()))
         .thenAnswer((_) async => profile.photoUrl!);
-
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
-      when(() => mockCacheManagerService.cacheManager)
-        .thenReturn(MockCacheManager());
 
       nock.cleanAll();
     });

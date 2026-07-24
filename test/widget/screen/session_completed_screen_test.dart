@@ -29,7 +29,6 @@ void main() {
     late MockStatisticsRepository mockStatisticsRepository;
     late MockIdGeneratorService mockIdGeneratorService;
     late MockCrashlyticsService mockCrashlyticsService;
-    late MockCacheManagerService mockCacheManagerService;
     late MockHapticsService mockHapticsService;
 
     setUp(() async {
@@ -43,7 +42,6 @@ void main() {
       mockCrashlyticsService = MockCrashlyticsService();
       mockProfileRepository = MockProfileRepository();
       mockStatisticsRepository = MockStatisticsRepository();
-      mockCacheManagerService = MockCacheManagerService();
       mockHapticsService = MockHapticsService();
 
       when(
@@ -52,13 +50,6 @@ void main() {
 
       when(() => profileCubit.state).thenReturn(const ProfileState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-
-      when(
-        () => mockServices.cacheManagerService,
-      ).thenReturn(mockCacheManagerService);
-      when(
-        () => mockCacheManagerService.cacheManager,
-      ).thenReturn(MockCacheManager());
 
       when(
         () => mockServices.idGeneratorService,

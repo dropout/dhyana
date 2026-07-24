@@ -20,22 +20,14 @@ void main() {
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
-    late MockCacheManagerService mockCacheManagerService;
-    late MockCacheManager mockCacheManager;
 
     setUp(() async {
       mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
-      mockCacheManagerService = MockCacheManagerService();
-      mockCacheManager = MockCacheManager();
-
-      when(() => mockCacheManagerService.cacheManager)
-        .thenReturn(mockCacheManager);
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-      when(() => mockServices.cacheManagerService)
-        .thenReturn(mockCacheManagerService);
+
     });
 
     testWidgets('can load Profile without constructor argument given', (WidgetTester tester) async {

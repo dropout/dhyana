@@ -27,7 +27,6 @@ void main() {
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
-  late MockCacheManagerService mockCacheManagerService;
   late MockHapticsService mockHapticsService;
 
   setUpAll(() async {
@@ -38,16 +37,10 @@ void main() {
     mockServices = MockServices();
 
     mockCrashlyticsService = MockCrashlyticsService();
-    mockCacheManagerService = MockCacheManagerService();
     mockHapticsService = MockHapticsService();
 
     when(() => mockServices.crashlyticsService)
       .thenReturn(mockCrashlyticsService);
-
-    when(() => mockServices.cacheManagerService)
-      .thenReturn(mockCacheManagerService);
-    when(() => mockCacheManagerService.cacheManager)
-      .thenReturn(MockCacheManager());
     when(() => mockServices.hapticsService)
       .thenReturn(mockHapticsService);
 
