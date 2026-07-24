@@ -14,8 +14,11 @@ Keep modules independent, testable, and easy to evolve by preventing deep cross-
 
 ## Current module roots
 
+- `lib/core/`
 - `lib/modules/account`
-- `lib/modules/practice`
+- `lib/modules/practice/session`
+- `lib/modules/practice/timer`
+- `lib/modules/practice/chanting`
 - `lib/modules/insights`
 - `lib/modules/social`
 
@@ -108,6 +111,52 @@ import 'package:dhyana/modules/account/presentation/bloc/profile_cubit.dart';
    - core shared UI/utilities
 2. Presentation cannot depend on another module's bloc/cubit/widgets/screens.
 
+## Foreign models in presentation
+
+Presentation may use a model from another module, but not by default and not freely.
+
+Allowed:
+
+1. The model is a stable business contract shared across modules.
+2. The model is imported through a public domain API or shared domain kernel.
+3. The widget genuinely needs the full model semantics, not just a few display fields.
+
+Prefer mapping instead when:
+
+1. The widget only needs a subset of fields.
+2. The foreign model is shaped around another module's use case.
+3. The UI would become tightly coupled to another module's future changes.
+
+Recommended pattern:
+
+1. Keep cross-module models at module boundaries.
+2. Map them into local presentation models or view models before rendering.
+3. Let leaf widgets consume local UI-focused models whenever practical.
+
+### Example: acceptable usage
+
+An insights widget can render a shared `Session` domain entity if `Session` is a stable cross-module concept and is exposed from shared domain or a module public domain API.
+
+### Example: better local mapping
+
+If an insights widget only needs:
+
+1. session duration
+2. completion time
+3. session type
+
+then prefer an insights-local presentation model such as `SessionSummaryViewData` instead of binding the widget directly to the full foreign `Session` entity.
+
+### When to move a model into shared domain
+
+Move a model into the shared domain kernel when:
+
+1. It is used by multiple modules as the same core business concept.
+2. It is stable and not shaped around one module's private workflow.
+3. Multiple modules would otherwise import the same feature-owned domain file directly.
+
+If those conditions do not hold, keep the model module-private and map at the boundary.
+
 ## Migration guardrails
 
 1. During migration, temporary cross-module imports are allowed only behind TODO markers and must be removed in the same phase or next phase PR.
@@ -121,6 +170,7 @@ import 'package:dhyana/modules/account/presentation/bloc/profile_cubit.dart';
 3. Did a domain file import UI or infrastructure details?
 4. Are mappings done at module boundaries instead of leaking foreign models deeply?
 5. Are shared abstractions placed in core/shared rather than in a feature module?
+6. Are presentation widgets depending on foreign domain models only when those models are stable shared contracts?
 
 ## Automation
 

@@ -1,13 +1,11 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/model/converter/duration_converter.dart';
+import 'package:dhyana/core/domain/model/model.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-
-import '../core/domain/model/converter/duration_converter.dart';
-import '../core/domain/model/model.dart';
-
 
 part 'session.freezed.dart';
 part 'session.g.dart';

@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:dhyana/model/presence.dart';
-import 'package:dhyana/model/presence_query_options.dart';
-import 'package:dhyana/modules/account/domain/model/public_profile.dart';
+import 'package:dhyana/modules/social/domain/model/presence.dart';
+import 'package:dhyana/modules/social/domain/model/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/model/public_profile.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:faker/faker.dart';

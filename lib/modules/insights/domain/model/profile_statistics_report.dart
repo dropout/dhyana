@@ -1,9 +1,8 @@
 import 'package:dhyana/core/domain/model/converter/date_time_or_null_converter.dart';
+import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
+import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-
-import 'consecutive_days.dart';
-import 'milestone_progress.dart';
 
 part 'profile_statistics_report.freezed.dart';
 part 'profile_statistics_report.g.dart';

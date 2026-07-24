@@ -1,8 +1,8 @@
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/profile/profile_footer.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/profile/profile_menu.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_footer.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_menu.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view.dart';
 import 'package:dhyana/core/presentation/widget/util/gap.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,11 @@ class ProfileView extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.black, width: 4.0,),
                   ),
-                  child: ProfileImage(profile: profile, size: DesignSpec.circleLg),
+                  child: ProfileImage(
+                    profileName: profile.displayName,
+                    profileImagePath: 'profiles/${profile.id}/photo.jpg',
+                    profilePhotoBlurhash: profile.photoBlurhash,
+                    size: DesignSpec.circleLg),
                 ),
                 Gap.small(),
                 Text(
@@ -53,7 +57,7 @@ class ProfileView extends StatelessWidget {
                   children: [
                     Expanded(child: ConsecutiveDaysView(profile: profile)),
                     Gap.medium(),
-                    Expanded(child: MilestonesView(profile: profile)),
+                    Expanded(child: MilestonesView(profileStatsReport: profile.statsReport)),
                   ],
                 ),
                 Gap.large(),

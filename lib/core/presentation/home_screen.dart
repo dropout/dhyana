@@ -1,4 +1,5 @@
 import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/widget/home/home_screen_appbar.dart';
@@ -6,7 +7,6 @@ import 'package:dhyana/core/presentation/bloc/home_screen/home_screen_cubit.dart
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/widget/context/safe_profile_settings.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_settings_view.dart';
 import 'package:dhyana/core/presentation/widget/home/home_screen_bottom_menu.dart';
 import 'package:dhyana/core/presentation/widget/home/session_type_toggle.dart';
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
         }
         return AnimatedSwitcher(
           key: ValueKey(sessionType),
-          duration: Durations.medium4,      
+          duration: Durations.medium4,
           // switchInCurve: Curves.fastLinearToSlowEaseIn,
           // switchOutCurve: Curves.fastLinearToSlowEaseIn,
           // layoutBuilder: (currentChild, previousChildren) {
@@ -123,7 +123,6 @@ class HomeScreen extends StatelessWidget {
             SessionType.chanting => buildChantingSettingsView(context),
           },
         );
-
       },
     );
   }
@@ -150,27 +149,66 @@ class HomeScreen extends StatelessWidget {
   /// - [AppErrorDisplay] if an error occurred.
   /// - [TimerSettingsView] once settings are available.
   Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) {
-    return SafeProfileSettings(
-      key: ValueKey('timer_settings_branch'),
-      builder: (context, profileSettings) =>
-          SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
-            create: (context) {
-              final cubit = TimerSettingsCubit(
-                crashlyticsService: context.services.crashlyticsService,
-              );
-              if (timerSettings != null) {
-                cubit.timerSettingsChanged(timerSettings!);
-              }
-              return cubit;
-            },
-            builder: (context, state) {
-              return TimerSettingsView(
-                timerSettings: state.timerSettings,
-                profileSettings: profileSettings,
-              );
-            },
-          ),
+    return SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
+      create: (context) {
+        final cubit = TimerSettingsCubit(
+          crashlyticsService: context.services.crashlyticsService,
+        );
+        if (timerSettings != null) {
+          cubit.timerSettingsChanged(timerSettings!);
+        }
+        return cubit;
+      },
+      builder: (context, state) {
+        return TimerSettingsView(timerSettings: state.timerSettings);
+      },
     );
+
+    // return BlocBuilder<ProfileCubit, ProfileState>(
+    //   builder: (context, profileState) {
+    //     return switch (profileState) {
+    //       ProfileLoadedState() =>
+    //         SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
+    //           create: (context) {
+    //             final cubit = TimerSettingsCubit(
+    //               crashlyticsService: context.services.crashlyticsService,
+    //             );
+    //             if (timerSettings != null) {
+    //               cubit.timerSettingsChanged(timerSettings!);
+    //             }
+    //             return cubit;
+    //           },
+    //           builder: (context, state) {
+    //             return TimerSettingsView(timerSettings: state.timerSettings);
+    //           },
+    //         ),
+    //       _ =>
+    //         SizedBox.shrink(), // Show nothing while profile is loading or in error state
+    //     };
+    //   },
+    // );
+
+    // return SafeProfileSettings(
+    //   key: ValueKey('timer_settings_branch'),
+    //   builder: (context, profileSettings) =>
+    //       SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
+    //         create: (context) {
+    //           final cubit = TimerSettingsCubit(
+    //             crashlyticsService: context.services.crashlyticsService,
+    //           );
+    //           if (timerSettings != null) {
+    //             cubit.timerSettingsChanged(timerSettings!);
+    //           }
+    //           return cubit;
+    //         },
+    //         builder: (context, state) {
+    //           return TimerSettingsView(
+    //             timerSettings: state.timerSettings,
+    //             profileSettings: profileSettings,
+    //           );
+    //         },
+    //       ),
+    // );
   }
 
   /// Builds the chanting-session branch of the home screen.
@@ -181,21 +219,32 @@ class HomeScreen extends StatelessWidget {
   ///    the ambient [ProfileCubit], falling back to an anonymous profile.
   ///
   Widget buildChantingSettingsView(BuildContext context) {
-    return SafeProfileSettings(
-      key: ValueKey('chanting_settings_branch'),
-      builder: (context, profileSettings) =>
-          SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
-            create: (context) => ChantingSettingsCubit(
-              chantsRepository: context.repos.chantsRepository,
-              sharedPreferencesService:
-                  context.services.sharedPreferencesService,
-              crashlyticsService: context.services.crashlyticsService,
-            )..loadAvailableChants(),
-            builder: (context, state) => ChantingSettingsView(
-              availableChants: state.availableChants,
-              profileSettings: profileSettings,
-            ),
-          ),
+    return SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
+      create: (context) => ChantingSettingsCubit(
+        chantsRepository: context.repos.chantsRepository,
+        sharedPreferencesService: context.services.sharedPreferencesService,
+        crashlyticsService: context.services.crashlyticsService,
+      )..loadAvailableChants(),
+      builder: (context, state) => ChantingSettingsView(
+        availableChants: state.availableChants,
+      ),
     );
+
+    // return SafeProfileSettings(
+    //   key: ValueKey('chanting_settings_branch'),
+    //   builder: (context, profileSettings) =>
+    //       SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
+    //         create: (context) => ChantingSettingsCubit(
+    //           chantsRepository: context.repos.chantsRepository,
+    //           sharedPreferencesService:
+    //               context.services.sharedPreferencesService,
+    //           crashlyticsService: context.services.crashlyticsService,
+    //         )..loadAvailableChants(),
+    //         builder: (context, state) => ChantingSettingsView(
+    //           availableChants: state.availableChants,
+    //           profileSettings: profileSettings,
+    //         ),
+    //       ),
+    // );
   }
 }

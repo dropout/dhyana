@@ -1,6 +1,6 @@
-import 'package:dhyana/model/week.dart';
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/week_query_options.dart';
+import 'package:dhyana/modules/insights/domain/model/week.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';
   
 import '../core/data/data_provider.dart';
 

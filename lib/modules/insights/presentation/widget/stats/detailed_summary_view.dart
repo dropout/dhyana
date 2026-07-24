@@ -1,17 +1,17 @@
-import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/widget/util/app_card.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:flutter/material.dart';
 
 import 'label_value_detail.dart';
 
 class DetailedSummaryView extends StatelessWidget {
 
-  final Profile profile;
+  final ProfileStatisticsReport profileStatsReport;
 
   const DetailedSummaryView({
-    required this.profile,
+    required this.profileStatsReport,
     super.key,
   });
 
@@ -28,15 +28,15 @@ class DetailedSummaryView extends StatelessWidget {
         children: [
           LabelValueDetail(
             label: context.l10n.statsTotalTimeSpent,
-            value: profile.statsReport.completedMinutesCount.toString(),
+            value: profileStatsReport.completedMinutesCount.toString(),
           ),
           LabelValueDetail(
             label: context.l10n.statsTotalSessions,
-            value: profile.statsReport.completedSessionsCount.toString(),
+            value: profileStatsReport.completedSessionsCount.toString(),
           ),
           LabelValueDetail(
             label: context.l10n.statsTotalDays,
-            value: profile.statsReport.completedDaysCount.toString(),
+            value: profileStatsReport.completedDaysCount.toString(),
           )
         ],
       )

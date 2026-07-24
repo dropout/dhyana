@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/model/year.dart';
-import 'package:dhyana/model/year_query_options.dart';
+import 'package:dhyana/modules/insights/domain/model/year.dart';
+import 'package:dhyana/modules/insights/domain/model/year_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/date_time_utils.dart';

@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
 import 'package:flutter/material.dart';
 
 class ProfileAvatar extends StatelessWidget {
@@ -33,7 +33,12 @@ class ProfileAvatar extends StatelessWidget {
                 width: 4.0,
               ),
             ),
-            child: ProfileImage(profile: profile),
+            child: ProfileImage(
+              profileName: profile.displayName,
+              profileImagePath: profile.photoUrl,
+              profilePhotoBlurhash: profile.photoBlurhash,
+              size: imageSize,
+            ),
           ),
         ),
         const SizedBox(height: DesignSpec.spacingMd),

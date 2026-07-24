@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';
@@ -75,7 +75,7 @@ class SessionCompletedScreen extends StatelessWidget {
       child: SignedInCompletedView(
         profileId: state.profile.id,
         session: session,
-        profileSettings: state.settings,
+        profileSettings: state.profile.settings,
       ),
     );
   }

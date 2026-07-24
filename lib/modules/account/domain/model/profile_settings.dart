@@ -1,14 +1,12 @@
-import 'package:dhyana/core/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_settings.freezed.dart';
 part 'profile_settings.g.dart';
 
 @freezed
-sealed class ProfileSettings with _$ProfileSettings implements Model {
+sealed class ProfileSettings with _$ProfileSettings {
 
   const factory ProfileSettings({
-    required String id,
     @Default(true) bool showStatsOnFinishScreen,
     @Default(true) bool usePresenceFeature,
   }) = _ProfileSettings;

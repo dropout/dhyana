@@ -2,7 +2,7 @@ import 'package:dhyana/modules/account/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/core/presentation/widget/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';

@@ -3,8 +3,7 @@ import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/widget/profile/profile_stats_view.dart';
+import 'package:dhyana/modules/insights/presentation/widget/profile_stats_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_consecutive_days_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_milestones_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_profile_view.dart';
@@ -69,7 +68,6 @@ void main() {
       when(() => mockProfileBloc.state)
         .thenReturn(ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         ));
 
       await tester.runAsync(() async {
@@ -177,7 +175,6 @@ void main() {
       when(() => mockProfileBloc.state)
         .thenReturn(ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         ));
 
       await tester.runAsync(() async {

@@ -2,7 +2,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';

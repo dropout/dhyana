@@ -1,4 +1,4 @@
-import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/modules/insights/domain/model/stats_interval.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

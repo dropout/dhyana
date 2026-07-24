@@ -4,8 +4,8 @@ import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/session_query_options.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session_query_options.dart';
 
 part 'sessions_state.dart';
 part 'sessions_cubit.freezed.dart';

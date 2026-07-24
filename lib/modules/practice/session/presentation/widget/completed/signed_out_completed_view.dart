@@ -1,4 +1,4 @@
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:flutter/material.dart';
 
 import 'session_result.dart';

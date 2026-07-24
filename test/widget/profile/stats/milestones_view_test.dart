@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/milestone_progress.dart';
+import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/milestones_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -29,7 +29,7 @@ void main() {
       await tester.pumpWidget(
         withAllContextProviders(
           MilestonesView(
-            profile: profile,
+            profileStatsReport: profile.statsReport,
           )
         )
       );

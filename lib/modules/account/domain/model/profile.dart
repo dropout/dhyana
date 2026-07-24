@@ -1,7 +1,8 @@
 import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
 import 'package:dhyana/model/location.dart';
 import 'package:dhyana/modules/account/domain/model/profile_model.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,6 @@ part 'profile.g.dart';
 // When editing profile make sure to check the profile model
 // in firebase functions, because thats where the
 // initial profile db record is created.
-
 
 @freezed
 abstract class Profile with _$Profile implements ProfileModel {
@@ -27,6 +27,7 @@ abstract class Profile with _$Profile implements ProfileModel {
     required String email,
     required String? photoUrl,
     required String? photoBlurhash,
+    @Default(ProfileSettings()) ProfileSettings settings,
     @DateTimeConverter() required DateTime signupDate,
     required ProfileStatisticsReport statsReport,
     required bool completed,

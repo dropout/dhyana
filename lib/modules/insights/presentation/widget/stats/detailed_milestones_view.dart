@@ -1,24 +1,24 @@
-import 'package:dhyana/model/milestone_progress.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/widget/util/app_card.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:flutter/material.dart';
 
 import 'label_value_detail.dart';
 
 class DetailedMilestonesView extends StatelessWidget {
 
-  final Profile profile;
+  final ProfileStatisticsReport profileStatsReport;
 
   const DetailedMilestonesView({
-    required this.profile,
+    required this.profileStatsReport,
     super.key
   });
 
   @override
   Widget build(BuildContext context) {
-    final int milestoneCount = profile.statsReport.milestoneCount;
+    final int milestoneCount = profileStatsReport.milestoneCount;
 
     return AppCard(
         title: context.l10n.milestones,
@@ -35,7 +35,7 @@ class DetailedMilestonesView extends StatelessWidget {
             ),
             LabelValueDetail(
               label: context.l10n.statsNextMilestone,
-              value: getNextMilestoneText(context, profile.statsReport.milestoneProgress),
+              value: getNextMilestoneText(context, profileStatsReport.milestoneProgress),
             ),
           ],
         )

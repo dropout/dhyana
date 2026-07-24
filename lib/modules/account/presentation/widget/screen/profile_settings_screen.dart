@@ -97,7 +97,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                       child: ProfileSettingsForm(
                         formStateKey: formStateKey,
                         profile: profileState.profile,
-                        profileSettings: profileState.settings,
+                        profileSettings: profileState.profile.settings,
                         onChanged: () => _onFormChanged(context),
                       ),
                     ),

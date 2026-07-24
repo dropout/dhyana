@@ -4,7 +4,7 @@ import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/model/update_profile_stats_result.dart';
 import 'package:dhyana/modules/social/presentation/widget/presence_area.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view.dart';
@@ -111,7 +111,7 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     session: session,
-                    profileSettings: ProfileSettings(id: 'profile_settings_id'),
+                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -168,7 +168,7 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     session: session,
-                    profileSettings: ProfileSettings(id: 'profile_settings_id'),
+                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -212,7 +212,7 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     session: session,
-                    profileSettings: ProfileSettings(id: 'profile_settings_id'),
+                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -254,7 +254,7 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     session: session,
-                    profileSettings: ProfileSettings(id: 'profile_settings_id'),
+                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -304,7 +304,7 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     session: session,
-                    profileSettings: ProfileSettings(id: 'profile_settings_id'),
+                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -357,7 +357,7 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     session: session,
-                    profileSettings: ProfileSettings(id: 'profile_settings_id'),
+                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),

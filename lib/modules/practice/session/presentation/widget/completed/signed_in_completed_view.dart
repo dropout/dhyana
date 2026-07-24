@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/model/update_profile_stats_result.dart';
 import 'package:dhyana/modules/social/presentation/widget/presence_area.dart';
 import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';

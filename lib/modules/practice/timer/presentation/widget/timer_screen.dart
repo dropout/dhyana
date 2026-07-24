@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_context.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/running/timer_running_cover.dart';

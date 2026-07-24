@@ -2,19 +2,16 @@ import 'package:dhyana/modules/insights/presentation/bloc/days/days_cubit.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/bar_chart_page/days_bar_chart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/model/day.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/model/stats_interval.dart';
+import 'package:dhyana/modules/insights/domain/model/day.dart';
+import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
+import 'package:dhyana/modules/insights/domain/model/stats_interval.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 
 class DaysTab extends StatefulWidget {
-
-  final Profile profile;
+  final String profileId;
 
   const DaysTab({
-    required this.profile,
-    super.key,
+    required this.profileId, super.key
   });
 
   @override
@@ -22,7 +19,6 @@ class DaysTab extends StatefulWidget {
 }
 
 class DaysTabState extends State<DaysTab> {
-
   // Intervals
   late final List<StatsInterval> intervals;
 
@@ -42,9 +38,7 @@ class DaysTabState extends State<DaysTab> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.black,
-          ),
+          decoration: BoxDecoration(color: Colors.black),
           child: SizedBox(
             height: 540,
             child: PageView.builder(
@@ -60,9 +54,9 @@ class DaysTabState extends State<DaysTab> {
                   create: (BuildContext context) {
                     return DaysCubit(
                       statisticsRepository: context.repos.statisticsRepository,
-                      crashlyticsService: context.services.crashlyticsService
+                      crashlyticsService: context.services.crashlyticsService,
                     )..queryDays(
-                      profileId: widget.profile.id,
+                      profileId: widget.profileId,
                       from: intervals[index].from,
                       to: intervals[index].to,
                     );
@@ -73,17 +67,18 @@ class DaysTabState extends State<DaysTab> {
                     onDaysLoaded: (List<Day> loadedDays) {
                       setState(() {
                         days = loadedDays;
-                        calculatedStats ??= CalculatedStats.fromDays(loadedDays);
+                        calculatedStats ??= CalculatedStats.fromDays(
+                          loadedDays,
+                        );
                       });
                     },
                   ),
                 );
               },
             ),
-          )
+          ),
         ),
       ],
     );
   }
-
 }

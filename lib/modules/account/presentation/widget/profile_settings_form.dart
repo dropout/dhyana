@@ -1,9 +1,9 @@
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/core/presentation/widget/dialog/delete_profile_dialog.dart';
-import 'package:dhyana/widget/profile/settings/profile_settings_clear_cache.dart';
-import 'package:dhyana/widget/profile/settings/profile_settings_health_connect.dart';
-import 'package:dhyana/widget/profile/settings/profile_settings_switch.dart';
+import 'package:dhyana/modules/account/presentation/widget/settings/profile_settings_clear_cache.dart';
+import 'package:dhyana/modules/account/presentation/widget/settings/profile_settings_health_connect.dart';
+import 'package:dhyana/modules/account/presentation/widget/settings/profile_settings_switch.dart';
 import 'package:dhyana/core/presentation/widget/util/app_button.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:dhyana/core/presentation/widget/util/dialog_helper.dart';

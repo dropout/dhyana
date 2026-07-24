@@ -2,9 +2,9 @@ import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.d
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/widget/profile/profile_footer.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
-import 'package:dhyana/widget/profile/profile_menu.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_footer.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_menu.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/consecutive_days_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/milestones_view.dart';

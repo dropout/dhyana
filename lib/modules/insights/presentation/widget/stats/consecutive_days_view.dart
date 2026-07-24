@@ -1,5 +1,5 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/consecutive_days.dart';
+import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/widget/util/app_card.dart';

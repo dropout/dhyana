@@ -1,9 +1,9 @@
 import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import '../core/domain/model/model.dart';
-import 'session.dart';
 
 part 'day.freezed.dart';
 part 'day.g.dart';

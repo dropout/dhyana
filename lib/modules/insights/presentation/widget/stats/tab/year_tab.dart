@@ -1,21 +1,18 @@
-
 import 'package:dhyana/modules/insights/presentation/bloc/years/years_cubit.dart';
-import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/model/year.dart';
+import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
+import 'package:dhyana/modules/insights/domain/model/stats_interval.dart';
+import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/bar_chart_page/years_bar_chart_page.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class YearTab extends StatefulWidget {
-
-  final Profile profile;
+class YearTab extends StatefulWidget {  
+  final String profileId;
 
   const YearTab({
-    required this.profile,
-    super.key,
+    required this.profileId, 
+    super.key
   });
 
   @override
@@ -23,7 +20,6 @@ class YearTab extends StatefulWidget {
 }
 
 class YearTabState extends State<YearTab> {
-
   // Intervals
   late final List<StatsInterval> intervals;
 
@@ -43,48 +39,45 @@ class YearTabState extends State<YearTab> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.black,
-            ),
-            child: SizedBox(
-              height: 540,
-              child: PageView.builder(
-                reverse: true,
-                itemCount: 4,
-                onPageChanged: (index) {
-                  setState(() {
-                    calculatedStats = CalculatedStats.fromYears(years);
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return BlocProvider<YearsCubit>(
-                    create: (BuildContext context) {
-                      return YearsCubit(
-                        statisticsRepository: context.repos.statisticsRepository,
-                        crashlyticsService: context.services.crashlyticsService
-                      )..queryYears(
-                        widget.profile.id,
-                        intervals[index].from,
-                        to: intervals[index].to,
-                      );
+          decoration: BoxDecoration(color: Colors.black),
+          child: SizedBox(
+            height: 540,
+            child: PageView.builder(
+              reverse: true,
+              itemCount: 4,
+              onPageChanged: (index) {
+                setState(() {
+                  calculatedStats = CalculatedStats.fromYears(years);
+                });
+              },
+              itemBuilder: (context, index) {
+                return BlocProvider<YearsCubit>(
+                  create: (BuildContext context) {
+                    return YearsCubit(
+                      statisticsRepository: context.repos.statisticsRepository,
+                      crashlyticsService: context.services.crashlyticsService,
+                    )..queryYears(
+                      widget.profileId,
+                      intervals[index].from,
+                      to: intervals[index].to,
+                    );
+                  },
+                  child: YearsBarChartPage(
+                    pageIndex: index,
+                    statsInterval: intervals[index],
+                    onYearsLoaded: (List<Year> loadedYears) {
+                      setState(() {
+                        years = loadedYears;
+                        calculatedStats ??= CalculatedStats.fromYears(years);
+                      });
                     },
-                    child: YearsBarChartPage(
-                      pageIndex: index,
-                      statsInterval: intervals[index],
-                      onYearsLoaded: (List<Year> loadedYears) {
-                        setState(() {
-                          years = loadedYears;
-                          calculatedStats ??= CalculatedStats.fromYears(years);
-                        });
-                      },
-                    ),
-                  );
-                },
-              ),
-            )
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ],
     );
   }
-
 }

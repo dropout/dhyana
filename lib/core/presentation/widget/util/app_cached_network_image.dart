@@ -15,7 +15,7 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 /// (e.g. Firebase Storage development, staging, production)
 class AppCachedNetworkImage extends StatefulWidget {
   final String imagePath;
-  final String blurHash;
+  final String? blurHash;
   final ResourceResolver resourceResolver;
   final bool circular;
   final double borderRadius;
@@ -80,7 +80,7 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        buildPlaceHolder(context, widget.blurHash),
+        if (widget.blurHash != null) buildPlaceHolder(context, widget.blurHash!),
         if (loadingState == LoadingState.loaded && currentImageUrl != null)
           _CustomCachedNetworkImage(
             key: ValueKey(currentImageUrl),
@@ -189,10 +189,15 @@ class _CustomCachedNetworkImageState extends State<_CustomCachedNetworkImage> {
   @override
   Widget build(BuildContext context) {
     if (widget.circular) {
-      return AnimatedOpacity(
-        opacity: isLoading ? 0.0 : 1.0,
+      return TweenAnimationBuilder<double>(
+        tween: Tween<double>(begin: 0.0, end: isLoading ? 0.0 : 1.0),
         duration: Durations.short4,
-        child: buildCircularImage(context, imageProvider),
+        builder: (context, value, child) {
+          return Opacity(
+            opacity: value,
+            child: buildCircularImage(context, imageProvider),
+          );
+        },
       );
     } else {
       return TweenAnimationBuilder<double>(

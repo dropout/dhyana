@@ -9,12 +9,17 @@ import 'detailed_profile_view.dart';
 import 'detailed_summary_view.dart';
 
 class StatsDataAreaSliver extends StatelessWidget {
-
   final Profile profile;
+  final String profileName;
+  final String? profilePhotoUrl;
+  final String? profilePhotoBlurhash;
 
   const StatsDataAreaSliver({
     required this.profile,
-    super.key
+    required this.profileName,
+    required this.profilePhotoUrl,
+    required this.profilePhotoBlurhash,
+    super.key,
   });
 
   @override
@@ -26,13 +31,21 @@ class StatsDataAreaSliver extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            DetailedProfileView(profile: profile),
+            DetailedProfileView(
+              profileName: profile.displayName,
+              signupDate: profile.signupDate,
+              profileStatsReport: profile.statsReport,
+              profilePhotoUrl: profile.photoUrl,
+              profilePhotoBlurhash: profile.photoBlurhash,
+            ),
             Gap.medium(),
-            DetailedConsecutiveDaysView(profile: profile),
+            DetailedConsecutiveDaysView(
+              profileStatsReport: profile.statsReport,
+            ),
             Gap.medium(),
-            DetailedMilestonesView(profile: profile),
+            DetailedMilestonesView(profileStatsReport: profile.statsReport),
             Gap.medium(),
-            DetailedSummaryView(profile: profile),
+            DetailedSummaryView(profileStatsReport: profile.statsReport),
           ],
         ),
       ),

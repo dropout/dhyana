@@ -1,7 +1,7 @@
-import 'package:dhyana/model/consecutive_days.dart';
+import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_consecutive_days_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';
@@ -32,7 +32,7 @@ void main() {
       await tester.pumpWidget(
         withAllContextProviders(
           DetailedConsecutiveDaysView(
-            profile: profile,
+            profileStatsReport: profile.statsReport,
           )
         )
       );

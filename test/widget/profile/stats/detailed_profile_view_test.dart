@@ -1,10 +1,10 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/milestone_progress.dart';
+import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_profile_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -63,7 +63,11 @@ void main() {
                 Provider<Services>(create: (context) =>mockServices ),
               ],
               child: DetailedProfileView(
-                profile: profile,
+                profileName: profile.displayName,
+                signupDate: profile.signupDate,
+                profileStatsReport: profile.statsReport,
+                profilePhotoUrl: profile.photoUrl,
+                profilePhotoBlurhash: profile.photoBlurhash,
               ),
             )
           )

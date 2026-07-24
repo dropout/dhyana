@@ -3,9 +3,9 @@ import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_model_extension.dart';
 import 'package:dhyana/data_provider/week_data_provider.dart';
 import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
-import 'package:dhyana/model/session.dart';
-import 'package:dhyana/model/week.dart';
-import 'package:dhyana/model/week_query_options.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/modules/insights/domain/model/week.dart';
+import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseWeekDataProvider

@@ -1,9 +1,9 @@
 import 'package:dhyana/core/presentation/widget/app_bar/custom_app_bar.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/widget/donate/amount_selector.dart';
-import 'package:dhyana/widget/donate/custom_amount_sheet.dart';
-import 'package:dhyana/widget/donate/donate_button.dart';
+import 'package:dhyana/modules/donate/presentation/widget/amount_selector.dart';
+import 'package:dhyana/modules/donate/presentation/widget/custom_amount_sheet.dart';
+import 'package:dhyana/modules/donate/presentation/widget/donate_button.dart';
 import 'package:dhyana/core/presentation/widget/util/app_button.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:dhyana/core/presentation/widget/util/gap.dart';

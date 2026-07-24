@@ -1,7 +1,6 @@
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
@@ -20,11 +19,9 @@ import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input
 class TimerSettingsView extends StatefulWidget {
   
   final TimerSettings timerSettings;
-  final ProfileSettings profileSettings;
   
   const TimerSettingsView({
     required this.timerSettings,
-    required this.profileSettings,
     super.key
   });
 

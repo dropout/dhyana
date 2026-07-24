@@ -1,10 +1,8 @@
-import 'package:dhyana/modules/account/presentation/bloc/profile/data_update/default_profile_data_updater.dart';
-import 'package:dhyana/core/data/data_provider_exception.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/account/presentation/bloc/profile/data_update/default_profile_data_updater.dart';
+import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/account/domain/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';
@@ -20,7 +18,6 @@ part 'profile_cubit.freezed.dart';
 
 class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   final ProfileRepository profileRepository;
-  final SettingsRepository settingsRepository;
   final StatisticsRepository statisticsRepository;
   final CrashlyticsService crashlyticsService;
   final IdGeneratorService idGeneratorService;
@@ -29,7 +26,6 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   ProfileCubit({
     required this.profileRepository,
     required this.statisticsRepository,
-    required this.settingsRepository,
     required this.crashlyticsService,
     required this.idGeneratorService,
     required this.profileStatsUpdater,
@@ -41,7 +37,6 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
     void Function(Profile)? onComplete,
     void Function(Object?, StackTrace)? onError,
   }) async {
-
     try {
       late Profile result;
       if (profile != null) {
@@ -65,9 +60,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
         // lazy update the profile
         profileRepository.update(result);
       }
-      final ProfileSettings settings = await _loadProfileSettings(result.id);
-
-      emit(ProfileState.loaded(profile: result, settings: settings));
+      emit(ProfileState.loaded(profile: result));
       onComplete?.call(result);
       logger.t('Loaded profile: ${result.displayName}');
     } catch (exception, stackTrace) {
@@ -97,8 +90,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
         completeProfile: completeProfile,
       );
       final result = await profileUpdater.update();
-      final settings = await _loadProfileSettings(result.id);
-      emit(ProfileState.loaded(profile: result, settings: settings));
+      emit(ProfileState.loaded(profile: result));
       onComplete?.call(result);
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -118,12 +110,12 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   }) async {
     try {
       logger.t('Updating profile settings');
-      final updatedSettings = ProfileSettings.fromJson({
-        ...settingsFormData,
-        'id': profile.id,
-      });
-      await settingsRepository.update(updatedSettings);
-      emit(ProfileState.loaded(profile: profile, settings: updatedSettings));
+      final updatedSettings = ProfileSettings.fromJson({...settingsFormData});
+      final updatedProfile = profile.copyWith(settings: updatedSettings);
+
+      await profileRepository.update(updatedProfile);
+
+      emit(ProfileState.loaded(profile: updatedProfile));
       onComplete?.call(updatedSettings);
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -138,17 +130,6 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   void clearData() {
     emit(const ProfileState.initial());
     logger.t('Profile data cleared!');
-  }
-
-  Future<ProfileSettings> _loadProfileSettings(String profileId) async {
-    try {
-      return await settingsRepository.read(profileId);
-    } on DocumentNotFoundException {
-      logger.w(
-        'No settings found for profile: $profileId, using default settings',
-      );
-      return ProfileSettings(id: profileId);
-    }
   }
   
 }

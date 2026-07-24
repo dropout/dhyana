@@ -1,6 +1,5 @@
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
 import 'package:dhyana/service/overlay_service.dart';
@@ -53,7 +52,6 @@ void main() {
               create: (context) => MockTimerSettingsCubit(),
               child: TimerSettingsView(
                 timerSettings: timerSettings,
-                profileSettings: ProfileSettings(id: 'profileSettingsId'),
               )
             )
           )

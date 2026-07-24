@@ -2,7 +2,6 @@ import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.d
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/modules/account/presentation/widget/profile_view.dart';
 import 'package:dhyana/modules/account/presentation/widget/screen/profile_screen.dart';
 import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
@@ -164,7 +163,6 @@ void main() {
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
           profile: profileStub,
-          settings: ProfileSettings(id: profileStub.id)
         ));
 
       await tester.runAsync(() async {

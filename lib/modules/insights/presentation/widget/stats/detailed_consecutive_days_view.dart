@@ -1,6 +1,6 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/model/consecutive_days.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';
@@ -11,15 +11,15 @@ import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 
 class DetailedConsecutiveDaysView extends StatelessWidget {
 
-  final Profile profile;
+  final ProfileStatisticsReport profileStatsReport;
 
   const DetailedConsecutiveDaysView({
-    required this.profile,
+    required this.profileStatsReport,
     super.key
   });
 
   ConsecutiveDays get consecutiveDays =>
-    profile.statsReport.consecutiveDays;
+    profileStatsReport.consecutiveDays;
 
   @override
   Widget build(BuildContext context) {

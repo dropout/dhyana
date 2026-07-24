@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/stats_data_area_sliver.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
@@ -13,10 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../modules/insights/presentation/widget/stats/tab/day_tab.dart';
-import '../../modules/insights/presentation/widget/stats/tab/month_tab.dart';
-import '../../modules/insights/presentation/widget/stats/tab/week_tab.dart';
-import '../../modules/insights/presentation/widget/stats/tab/year_tab.dart';
+import 'stats/tab/day_tab.dart';
+import 'stats/tab/month_tab.dart';
+import 'stats/tab/week_tab.dart';
+import 'stats/tab/year_tab.dart';
 
 class ProfileStatsView extends StatefulWidget {
 
@@ -72,8 +71,13 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                 context,
                 [
                   buildTitleEffectSliverTitle(context, context.l10n.profileStats),
-                  StatsDataAreaSliver(profile: state.profile),
-                  ...buildBarchartSlivers(context, state.profile),
+                  StatsDataAreaSliver(
+                    profile: state.profile,
+                    profileName: state.profile.displayName,
+                    profilePhotoUrl: state.profile.profileImagePath,
+                    profilePhotoBlurhash: state.profile.photoBlurhash,
+                  ),
+                  ...buildBarchartSlivers(context, state.profile.id),
                 ],
 
               );
@@ -102,13 +106,13 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     ];
   }
 
-  List<Widget> buildBarchartSlivers(BuildContext context, Profile profile) {
+  List<Widget> buildBarchartSlivers(BuildContext context, String profileId) {
     return [
       PinnedHeaderSliver(
         child: buildTabBar(context),
       ),
       _SliverFillRemainingCustom(
-        child: buildTabBarView(context, profile),
+        child: buildTabBarView(context, profileId),
       )
     ];
   }
@@ -209,23 +213,23 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  Widget buildTabBarView(BuildContext context, Profile profile) {
+  Widget buildTabBarView(BuildContext context, String profileId) {
     return SizedBox(
       height: 540,
       child: TabBarView(
         controller: primaryTC,
         children: [
           DaysTab(
-            profile: profile
+            profileId: profileId,
           ),
           WeekTab(
-            profile: profile,
+            profileId: profileId,
           ),
           MonthTab(
-            profile: profile,
+            profileId: profileId,
           ),
           YearTab(
-            profile: profile,
+            profileId: profileId,
           ),
         ],
       ),

@@ -1,7 +1,6 @@
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/settings/chant_list.dart';
@@ -17,10 +16,8 @@ import 'settings/add_chant_sheet.dart';
 
 class ChantingSettingsView extends StatelessWidget {
   final List<Chant> availableChants;
-  final ProfileSettings profileSettings;
 
   const ChantingSettingsView({
-    required this.profileSettings,
     required this.availableChants,
     super.key,
   });

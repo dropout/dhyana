@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/account/domain/model/profile.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'session.dart';
 
 part 'update_profile_stats_result.freezed.dart';
 part 'update_profile_stats_result.g.dart';

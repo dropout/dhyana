@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:dhyana/model/presence.dart';
+import 'package:dhyana/modules/social/domain/model/presence.dart';
 import 'package:dhyana/modules/social/presentation/widget/presence_list_item.dart';
 import 'package:dhyana/core/presentation/widget/util/app_animation.dart';
 import 'package:flutter/material.dart';

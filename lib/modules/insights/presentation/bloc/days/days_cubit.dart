@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/model/day.dart';
-import 'package:dhyana/model/day_query_options.dart';
+import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
+import 'package:dhyana/modules/insights/domain/model/day.dart';
+import 'package:dhyana/modules/insights/domain/model/day_query_options.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/date_time_utils.dart';

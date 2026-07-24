@@ -1,4 +1,4 @@
-import 'package:dhyana/widget/profile/profile_stats_view.dart';
+import 'package:dhyana/modules/insights/presentation/widget/profile_stats_view.dart';
 import 'package:flutter/material.dart';
 
 class ProfileStatsScreen extends StatelessWidget {

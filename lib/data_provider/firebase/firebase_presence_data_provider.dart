@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/data_provider/presence_data_provider.dart';
 import 'package:dhyana/data_provider/firebase/firebase_data_provider.dart';
 import 'package:dhyana/model/location.dart';
-import 'package:dhyana/model/presence.dart';
-import 'package:dhyana/model/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/model/presence.dart';
+import 'package:dhyana/modules/social/domain/model/presence_query_options.dart';
 import 'package:dhyana/util/location.dart';
 
 import 'firebase_model_extension.dart';

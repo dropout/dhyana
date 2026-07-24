@@ -1,9 +1,7 @@
-
 import 'package:dhyana/modules/insights/presentation/bloc/weeks/weeks_cubit.dart';
-import 'package:dhyana/model/calculated_stats.dart';
-import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/model/stats_interval.dart';
-import 'package:dhyana/model/week.dart';
+import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
+import 'package:dhyana/modules/insights/domain/model/stats_interval.dart';
+import 'package:dhyana/modules/insights/domain/model/week.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/bar_chart_page/weeks_bar_chart_page.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeekTab extends StatefulWidget {
 
-  final Profile profile;
+  final String profileId;
 
   const WeekTab({
-    required this.profile,
+    required this.profileId,
     super.key,
   });
 
@@ -63,7 +61,7 @@ class WeekTabState extends State<WeekTab> {
                         statisticsRepository: context.repos.statisticsRepository,
                         crashlyticsService: context.services.crashlyticsService
                       )..queryWeeks(
-                        widget.profile.id,
+                        widget.profileId,
                         intervals[index].from,
                         to: intervals[index].to,
                       );

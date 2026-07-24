@@ -1,11 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.dart';
-import 'package:dhyana/core/data/data_provider_exception.dart';
-import 'package:dhyana/model/consecutive_days.dart';
+import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
 import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -24,14 +23,13 @@ void main() {
   final FakeModelFactory fakeFactory = FakeModelFactory();
 
   late Profile profile;
-  late ProfileSettings profileSettings;
 
   late MockProfileRepository mockProfileRepository;
   late MockStatisticsRepository mockStatisticsRepository;
   late MockCrashlyticsService mockCrashlyticsService;
   late MockIdGeneratorService mockIdGeneratorService;
   late MockProfileStatsUpdater mockProfileStatsUpdater;
-  late MockSettingsRepository mockSettingsRepository;
+
 
   late MockCallback mockCallback;
 
@@ -46,7 +44,6 @@ void main() {
   ProfileCubit createProfileCubit() {
     return ProfileCubit(
       profileRepository: mockProfileRepository,
-      settingsRepository: mockSettingsRepository,
       statisticsRepository: mockStatisticsRepository,
       crashlyticsService: mockCrashlyticsService,
       idGeneratorService: mockIdGeneratorService,
@@ -58,14 +55,12 @@ void main() {
     profile = fakeFactory.createProfile().copyWith(
       statsReport: validStatsReport,
     );
-    profileSettings = ProfileSettings(id: profile.id); // default values
 
     mockProfileRepository = MockProfileRepository();
     mockStatisticsRepository = MockStatisticsRepository();
     mockCrashlyticsService = MockCrashlyticsService();
     mockIdGeneratorService = MockIdGeneratorService();
-    mockProfileStatsUpdater = MockProfileStatsUpdater();
-    mockSettingsRepository = MockSettingsRepository();
+    mockProfileStatsUpdater = MockProfileStatsUpdater();  
 
     mockCallback = MockCallback();
 
@@ -80,10 +75,7 @@ void main() {
       build: () {
         when(
           () => mockProfileRepository.read(profile.id),
-        ).thenAnswer((_) async => profile);
-        when(
-          () => mockSettingsRepository.read(profile.id),
-        ).thenAnswer((_) async => profileSettings);
+        ).thenAnswer((_) async => profile);        
         when(
           () => mockProfileStatsUpdater.validateStatsReport(profile.statsReport),
         ).thenReturn(profile.statsReport);
@@ -97,24 +89,18 @@ void main() {
         const ProfileState.loading(),
         ProfileState.loaded(
           profile: profile,
-          settings: profileSettings,
         ),
       ],
       verify: (_) {
         verify(() => mockProfileRepository.read(profile.id)).called(1);
-        verify(() => mockSettingsRepository.read(profile.id)).called(1);
         verify(() => mockProfileStatsUpdater.validateStatsReport(profile.statsReport)).called(1);
         verify(() => mockCallback.onComplete(profile)).called(1);
       },
     );
 
     blocTest<ProfileCubit, ProfileState>(
-      'can successfully load profile when profile parameter is provided',
+      'can successfully propagate the value when profile parameter is provided',
       build: () {
-        when(
-          () => mockSettingsRepository.read(profile.id),
-        ).thenAnswer((_) async => profileSettings);
-
         when(
           () => mockProfileStatsUpdater.validateStatsReport(profile.statsReport),
         ).thenReturn(profile.statsReport);
@@ -124,25 +110,19 @@ void main() {
       expect: () => [
         ProfileState.loaded(
           profile: profile,
-          settings: profileSettings,
         ),
       ],
       verify: (_) {
         verifyNever(() => mockProfileRepository.read(profile.id));
-        verify(() => mockSettingsRepository.read(profile.id)).called(1);
         verify(() => mockProfileStatsUpdater.validateStatsReport(profile.statsReport)).called(1);
       },
     );
 
     blocTest<ProfileCubit, ProfileState>(
       'can update profile with invalidated stats report when loading profile',
-      build: () {
-                
+      build: () {                
         when(() => mockProfileRepository.read(profile.id))
           .thenAnswer((_) async => profile);
-
-        when(() => mockSettingsRepository.read(profile.id))
-          .thenAnswer((_) async => profileSettings);
 
         when(() => mockProfileStatsUpdater.validateStatsReport(validStatsReport))
           .thenReturn(invalidStatsReport);
@@ -158,7 +138,6 @@ void main() {
         const ProfileState.loading(),
         ProfileState.loaded(
           profile: profile.copyWith(statsReport: invalidStatsReport),
-          settings: profileSettings,
         ),
       ],
       verify: (_) {
@@ -209,10 +188,6 @@ void main() {
           () => mockProfileStatsUpdater.validateStatsReport(profile.statsReport),
         ).thenReturn(profile.statsReport);
 
-        when(
-          () => mockSettingsRepository.read(profile.id),
-        ).thenThrow(DocumentNotFoundException(message: 'Profile settings not found'));
-
         return createProfileCubit();
       },
       act: (cubit) => cubit.loadProfile(
@@ -222,8 +197,7 @@ void main() {
       expect: () => [
         const ProfileState.loading(), 
         ProfileState.loaded(
-          profile: profile,
-          settings: ProfileSettings(id: profile.id), // default settings returned when not found
+          profile: profile,        
         ),
       ],
       verify: (_) {
@@ -238,9 +212,6 @@ void main() {
         when(
           () => mockProfileRepository.update(profile),
         ).thenAnswer((_) async => profile);
-        when(
-          () => mockSettingsRepository.read(profile.id),
-        ).thenAnswer((_) async => profileSettings);
         return createProfileCubit();
       },
       act: (cubit) => cubit.updateProfile(
@@ -252,7 +223,6 @@ void main() {
       expect: () => [
         ProfileState.loaded(
           profile: profile,
-          settings: profileSettings,
         ),
       ],
       verify: (_) {
@@ -287,63 +257,7 @@ void main() {
         ).called(1);
         verify(() => mockCallback.onError(any(), any())).called(1);
       },
-    );
-
-    blocTest<ProfileCubit, ProfileState>(
-      'can successfully update profile settings',
-      build: () {
-        final updatedSettings = ProfileSettings(id: profile.id);
-        when(
-          () => mockSettingsRepository.update(updatedSettings),
-        ).thenAnswer((_) async => updatedSettings);
-        return createProfileCubit();
-      },
-      act: (cubit) => cubit.updateProfileSettings(
-        profile: profile,
-        settingsFormData: {},
-        onComplete: mockCallback.onSettingsComplete,
-      ),
-      expect: () => [
-        ProfileState.loaded(
-          profile: profile,
-          settings: ProfileSettings(id: profile.id),
-        ),
-      ],
-      verify: (_) {
-        final updatedSettings = ProfileSettings(id: profile.id);
-        verify(() => mockSettingsRepository.update(updatedSettings)).called(1);
-        verify(() => mockCallback.onSettingsComplete(updatedSettings)).called(1);
-      },
-    );
-
-    blocTest<ProfileCubit, ProfileState>(
-      'can handle profile settings update failure',
-      build: () {
-        final updatedSettings = ProfileSettings(id: profile.id);
-        when(
-          () => mockSettingsRepository.update(updatedSettings),
-        ).thenThrow(Exception('Failed to update profile settings'));
-        return createProfileCubit();
-      },
-      act: (cubit) => cubit.updateProfileSettings(
-        profile: profile,
-        settingsFormData: {},
-        onError: mockCallback.onError,
-      ),
-      expect: () => [
-        // No state emission on error, only error handling
-      ],
-      verify: (_) {
-        verify(
-          () => mockCrashlyticsService.recordError(
-            exception: any(named: 'exception'),
-            stackTrace: any(named: 'stackTrace'),
-            reason: any(named: 'reason'),
-          ),
-        ).called(1);
-        verify(() => mockCallback.onError(any(), any())).called(1);
-      },
-    );
+    );    
 
     blocTest<ProfileCubit, ProfileState>(
       'can clear profile data and reset to initial state',

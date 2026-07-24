@@ -3,8 +3,7 @@ import 'package:dhyana/modules/account/presentation/bloc/profile/profile_cubit.d
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/session_completed_screen.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';
@@ -118,7 +117,6 @@ void main() {
 
       when(() => profileCubit.state).thenReturn(ProfileState.loaded(
         profile: profile,
-        settings: ProfileSettings(id: profile.id),
       ));
     
       await tester
@@ -153,7 +151,6 @@ void main() {
 
       when(() => profileCubit.state).thenReturn(ProfileState.loaded(
         profile: profile,
-        settings: ProfileSettings(id: profile.id),
       ));
 
       await tester

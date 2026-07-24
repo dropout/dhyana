@@ -11,7 +11,6 @@ import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/repository/presence_repository.dart';
 import 'package:dhyana/modules/account/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/account/domain/repository/settings_repository.dart';
 import 'package:dhyana/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
@@ -174,7 +173,3 @@ class MockTimerSettingsHistoryRepository
 class MockStatisticsRepository
   extends Mock
   implements StatisticsRepository {}
-
-class MockSettingsRepository
-  extends Mock
-  implements SettingsRepository {}

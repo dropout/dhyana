@@ -6,10 +6,9 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/model/presence.dart';
+import 'package:dhyana/modules/social/domain/model/presence.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
-import 'package:dhyana/modules/account/domain/model/public_profile.dart';
+import 'package:dhyana/modules/social/domain/model/public_profile.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/timer_running_view.dart';
@@ -152,7 +151,6 @@ void main() {
       when(() => mockProfileCubit.state).thenReturn(
         ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         )
       );
 
@@ -164,7 +162,6 @@ void main() {
       when(() => mockProfileCubit.state).thenReturn(
         ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         )
       );
 
@@ -217,7 +214,6 @@ void main() {
       when(() => mockProfileCubit.state).thenReturn(
         ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         )
       );
       when(() => mockProfileRepository.read(profile.id))

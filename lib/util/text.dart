@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// Calculates the height of a given text string when rendered with a 
+/// specific style and width, including padding.
+/// [text] The text string to measure.
+/// [style] The text style to apply when measuring the text.
+/// [maxWidth] The maximum width available for the text.
+/// [padding] The padding to apply around the text.
+/// [softWrap] Whether the text should wrap at soft line breaks. Defaults to true.
+/// Returns the total height of the text including padding.
 double calculateTextHeight(
   String text,
   TextStyle style,

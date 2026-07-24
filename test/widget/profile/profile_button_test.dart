@@ -4,10 +4,9 @@ import 'package:dhyana/data_provider/auth/model/user.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/account/domain/model/profile.dart';
-import 'package:dhyana/modules/account/domain/model/profile_settings.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
-import 'package:dhyana/widget/profile/profile_button.dart';
-import 'package:dhyana/widget/profile/profile_image.dart';
+import 'package:dhyana/core/presentation/widget/profile_button.dart';
+import 'package:dhyana/modules/account/presentation/widget/profile_image.dart';
 import 'package:dhyana/core/presentation/widget/util/app_loading_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -193,7 +192,6 @@ void main() {
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         ));
 
       final GoRouter goRouter = GoRouter(
@@ -252,7 +250,6 @@ void main() {
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
           profile: profile,
-          settings: ProfileSettings(id: profile.id)
         ));
 
       final GoRouter goRouter = GoRouter(
