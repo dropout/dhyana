@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
-import 'package:dhyana/service/shared_preferences_service.dart';
+import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';

@@ -12,7 +12,7 @@ import 'package:dhyana/core/data/datasource/firebase_profile_data_provider.dart'
 import 'package:dhyana/core/data/datasource/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
-import 'package:dhyana/service/profile_stats_report_updater.dart';
+import 'package:dhyana/core/presentation/bloc/profile/data_update/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';

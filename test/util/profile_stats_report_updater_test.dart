@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
-import 'package:dhyana/service/profile_stats_report_updater.dart';
+import 'package:dhyana/core/presentation/bloc/profile/data_update/profile_stats_report_updater.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

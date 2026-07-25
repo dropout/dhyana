@@ -16,16 +16,15 @@ import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_h
 import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/service/haptics_service.dart';
+import 'package:dhyana/core/domain/service/haptics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';
-import 'package:dhyana/service/overlay_service.dart';
-import 'package:dhyana/service/profile_stats_report_updater.dart';
+import 'package:dhyana/core/domain/service/overlay_service.dart';
+import 'package:dhyana/core/presentation/bloc/profile/data_update/profile_stats_report_updater.dart';
 import 'package:dhyana/core/domain/service/resource_resolver.dart';
-import 'package:dhyana/service/safe_image_detector.dart';
-import 'package:dhyana/service/shared_preferences_service.dart';
-import 'package:dhyana/service/timer_audio_service.dart';
-import 'package:dhyana/service/timer_service.dart';
-import 'package:dhyana/service/timer_service_factory.dart';
+import 'package:dhyana/modules/account/domain/service/safe_image_detector.dart';
+import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
+import 'package:dhyana/modules/practice/timer/infrastructure/timer_audio_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/service/timer_service.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
@@ -134,10 +133,6 @@ class MockIdGeneratorService
 class MockProfileStatsUpdater
   extends Mock
   implements ProfileStatsReportUpdater {}
-
-class MockTimerServiceFactory
-  extends Mock
-  implements TimerServiceFactory {}
 
 class MockTimerService
   extends Mock

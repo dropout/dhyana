@@ -1,4 +1,4 @@
-import 'package:dhyana/service/overlay_service.dart';
+import 'package:dhyana/core/domain/service/overlay_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';

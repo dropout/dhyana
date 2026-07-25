@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/service/timer_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/service/timer_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 
 class DefaultTimerService with LoggerMixin implements TimerService {

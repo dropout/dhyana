@@ -1,4 +1,4 @@
-import 'package:dhyana/service/mindful_minutes_service.dart';
+import 'package:dhyana/core/domain/service/mindful_minutes_service.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 
 class DefaultMindfulMinutesService implements MindfulMinutesService {

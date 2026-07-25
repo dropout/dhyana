@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/service/haptics_service.dart';
-import 'package:dhyana/service/overlay_service.dart';
+import 'package:dhyana/core/domain/service/haptics_service.dart';
+import 'package:dhyana/core/domain/service/overlay_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/modules/practice/timer/presentation/widget/settings/sound_input.dart';

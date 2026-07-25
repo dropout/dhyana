@@ -4,7 +4,7 @@ import 'package:dhyana/util/logger_mixin.dart';
 import 'package:image/image.dart' as img;
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-import 'package:dhyana/service/safe_image_detector.dart';
+import 'package:dhyana/modules/account/domain/service/safe_image_detector.dart';
 
 class DefaultSafeImageDetectorFactory implements SafeImageDetectorFactory {
   /// Path to the TFLite model
