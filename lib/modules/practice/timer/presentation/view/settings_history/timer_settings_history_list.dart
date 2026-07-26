@@ -1,10 +1,10 @@
-import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings_history/timer_settings_history_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record.dart';
 import 'package:dhyana/core/navigation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings_history/timer_settings_history_list_item.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings_history/timer_settings_history_list_item.dart';
 import 'package:dhyana/core/presentation/widget/util/app_animation.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:dhyana/core/presentation/widget/util/intersperse.dart';

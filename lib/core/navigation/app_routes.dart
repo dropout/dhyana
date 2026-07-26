@@ -12,15 +12,15 @@ import 'package:go_router/go_router.dart';
 import '../../modules/practice/chanting/presentation/widget/chanting_screen.dart';
 import '../../modules/donate/presentation/widget/donate_screen.dart';
 import '../presentation/home_screen.dart';
-import '../../modules/social/presentation/widget/presence_screen.dart';
+import '../../modules/social/presentation/view/presence_screen.dart';
 
 import '../../modules/profile/presentation/view/screen/profile_settings_screen.dart';
 import '../../modules/insights/presentation/widget/profile_stats_screen.dart';
 
 import '../../modules/practice/session/presentation/widget/session_completed_screen.dart';
 import '../../modules/practice/session/presentation/widget/session_history_screen.dart';
-import '../../modules/practice/timer/presentation/widget/timer_screen.dart';
-import '../../modules/practice/timer/presentation/widget/timer_settings_history_screen.dart';
+import '../../modules/practice/timer/presentation/view/timer_screen.dart';
+import '../../modules/practice/timer/presentation/view/timer_settings_history_screen.dart';
 import 'auth_redirect_hook.dart';
 
 part 'app_routes.g.dart';

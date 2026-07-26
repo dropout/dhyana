@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
@@ -9,11 +9,11 @@ import 'package:dhyana/core/presentation/widget/session_start_button.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/warmup_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/sound_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/duration_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/interval_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_gap.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/warmup_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/sound_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/duration_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/interval_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/input_gap.dart';
 
 
 class TimerSettingsView extends StatefulWidget {

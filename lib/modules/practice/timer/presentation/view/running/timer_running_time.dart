@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 

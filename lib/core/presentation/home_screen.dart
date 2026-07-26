@@ -4,7 +4,7 @@ import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_sett
 import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/widget/home/home_screen_appbar.dart';
 import 'package:dhyana/core/presentation/bloc/home_screen/home_screen_cubit.dart';
-import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_settings_view.dart';
@@ -14,7 +14,7 @@ import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/timer_settings_view.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The main entry-point screen of the app, allowing users to choose between

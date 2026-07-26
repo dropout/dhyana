@@ -7,7 +7,6 @@ import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cu
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../profile_mock_definitions.dart';
 import '../../../../mock_definitions.dart';
 
 void main() {

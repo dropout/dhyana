@@ -1,8 +1,8 @@
-import 'package:dhyana/modules/social/presentation/bloc/presence/presence_cubit.dart';
+import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/social/presentation/widget/presence_view.dart';
+import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
 import 'package:dhyana/core/presentation/default_screen_setup.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

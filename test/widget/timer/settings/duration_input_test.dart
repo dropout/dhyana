@@ -1,8 +1,8 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/service/haptics_service.dart';
 import 'package:dhyana/core/domain/service/overlay_service.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/duration_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/widget/settings/input_button.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/duration_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/settings/input_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

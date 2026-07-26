@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:dhyana/modules/social/presentation/bloc/presence/presence_cubit.dart';
+import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/social/domain/model/presence.dart';
 import 'package:dhyana/core/presentation/widget/util/app_animation.dart';
