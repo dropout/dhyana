@@ -1,5 +1,5 @@
 import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
@@ -7,7 +7,7 @@ import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/core/presentation/widget/profile/profile_button.dart';
 import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
 import 'package:dhyana/core/presentation/widget/util/app_loading_indicator.dart';
-import 'package:dhyana/modules/account/routes.dart';
+import 'package:dhyana/modules/profile/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/core/data/datasource/tools/firebase_id_generator.dart';
-import 'package:dhyana/core/data/datasource/storage_data_provider.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator.dart';
+import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_haptics_service.dart';
@@ -8,7 +8,7 @@ import 'package:dhyana/modules/practice/chanting/infrastructure/default_lyrics_s
 import 'package:dhyana/core/infrastructure/platform/default_mindful_minutes_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_overlay_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_resource_resolver.dart';
-import 'package:dhyana/modules/account/infrastructure/default_safe_image_detector.dart';
+import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_wakelock_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shared_preferences_service.dart';
@@ -24,7 +24,7 @@ import 'package:dhyana/core/domain/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/domain/service/overlay_service.dart';
 import 'package:dhyana/core/domain/service/remote_settings_service.dart';
 import 'package:dhyana/core/domain/service/resource_resolver.dart';
-import 'package:dhyana/modules/account/domain/service/safe_image_detector.dart';
+import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/core/domain/service/shader_service.dart';
 import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
@@ -128,7 +128,7 @@ class ServicesBuilder {
 
     _shaderService = DefaultShaderService();
     _functionsService = FirebaseFunctionsService(
-      fbFunctions: firebaseProvider.functions,
+      firebaseProvider.functions,
     );
     _urlLauncher = const UrlLauncher();
     _lyricsService = DefaultLyricsService();

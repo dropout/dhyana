@@ -5,7 +5,7 @@ import 'package:dhyana/modules/social/domain/model/presence_query_options.dart';
 import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/social/domain/model/public_profile.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

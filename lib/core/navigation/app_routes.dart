@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/account/routes.dart';
+import 'package:dhyana/modules/profile/routes.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
@@ -14,7 +14,7 @@ import '../../modules/donate/presentation/widget/donate_screen.dart';
 import '../presentation/home_screen.dart';
 import '../../modules/social/presentation/widget/presence_screen.dart';
 
-import '../../modules/account/presentation/widget/screen/profile_settings_screen.dart';
+import '../../modules/profile/presentation/view/screen/profile_settings_screen.dart';
 import '../../modules/insights/presentation/widget/profile_stats_screen.dart';
 
 import '../../modules/practice/session/presentation/widget/session_completed_screen.dart';

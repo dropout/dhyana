@@ -1,13 +1,13 @@
 import 'package:dhyana/core/domain/service/mindful_minutes_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/core/domain/model/update_profile_stats_result.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';
-import 'package:dhyana/core/presentation/bloc/profile/data_update/profile_stats_report_updater.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/account/presentation/widget/screen/login_screen.dart';
+import 'package:dhyana/modules/profile/presentation/view/screen/login_screen.dart';
 import 'package:dhyana/core/presentation/widget/util/app_button.dart';
 import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';

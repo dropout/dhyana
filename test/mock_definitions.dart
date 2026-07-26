@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
+import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dhyana/modules/social/presentation/bloc/presence/presence_cubit.dart';
-import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings/timer_settings_cubit.dart';
@@ -10,7 +10,6 @@ import 'package:dhyana/modules/practice/timer/presentation/bloc/timer_settings_h
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
@@ -19,18 +18,19 @@ import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/haptics_service.dart';
 import 'package:dhyana/core/domain/service/id_generator_service.dart';
 import 'package:dhyana/core/domain/service/overlay_service.dart';
-import 'package:dhyana/core/presentation/bloc/profile/data_update/profile_stats_report_updater.dart';
 import 'package:dhyana/core/domain/service/resource_resolver.dart';
-import 'package:dhyana/modules/account/domain/service/safe_image_detector.dart';
 import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
 import 'package:dhyana/modules/practice/timer/infrastructure/timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_service.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
+import 'package:dhyana/core/domain/repository/storage_repository.dart';
 import 'package:dhyana/util/launch_url.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
+
+export 'modules/profile/profile_mock_definitions.dart';
 
 class MockGoRouter extends Mock implements GoRouter {}
 
@@ -39,10 +39,6 @@ class MockGoRouter extends Mock implements GoRouter {}
 class MockAuthCubit
   extends MockCubit<AuthState>
   implements AuthCubit {}
-
-class MockProfileCubit
-  extends MockCubit<ProfileState>
-  implements ProfileCubit {}
 
 class MockTimerSettingsCubit
   extends MockCubit<TimerSettingsState>
@@ -114,14 +110,6 @@ class MockUrlLauncher
   extends Mock
   implements UrlLauncher {}
 
-class MockSafeImageDetectorFactory
-  extends Mock
-  implements SafeImageDetectorFactory {}
-
-class MockSafeImageDetector
-  extends Mock
-  implements SafeImageDetector {}
-
 class MockWakelockService
   extends Mock
   implements WakelockService {}
@@ -129,10 +117,6 @@ class MockWakelockService
 class MockIdGeneratorService
   extends Mock
   implements IdGeneratorService {}
-
-class MockProfileStatsUpdater
-  extends Mock
-  implements ProfileStatsReportUpdater {}
 
 class MockTimerService
   extends Mock
@@ -152,10 +136,6 @@ class MockPresenceRepository
   extends Mock
   implements PresenceRepository {}
 
-class MockProfileRepository
-  extends Mock
-  implements ProfileRepository {}
-
 class MockTimerSettingsHistoryRepository
   extends Mock
   implements TimerSettingsHistoryRepository {}
@@ -163,3 +143,12 @@ class MockTimerSettingsHistoryRepository
 class MockStatisticsRepository
   extends Mock
   implements StatisticsRepository {}
+
+class MockAuthRepository 
+  extends Mock 
+  implements AuthRepository {}
+
+class MockStorageRepository
+  extends Mock
+  implements StorageRepository {}
+

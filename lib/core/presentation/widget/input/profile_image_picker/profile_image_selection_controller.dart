@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/account/domain/service/safe_image_detector.dart';
+import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';

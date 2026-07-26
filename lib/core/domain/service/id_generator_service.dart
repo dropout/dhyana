@@ -1,4 +1,4 @@
-import 'package:dhyana/core/data/id_generator.dart';
+import 'package:dhyana/core/domain/service/id_generator.dart';
 
 class IdGeneratorService {
 

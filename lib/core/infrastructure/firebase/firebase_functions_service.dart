@@ -7,9 +7,7 @@ class FirebaseFunctionsService implements FunctionsService {
 
   final FirebaseFunctions fbFunctions;
 
-  const FirebaseFunctionsService({
-    required this.fbFunctions,
-  });
+  const FirebaseFunctionsService(this.fbFunctions);
 
   // Because the search result in this call
   // doesn't contain nested location object,

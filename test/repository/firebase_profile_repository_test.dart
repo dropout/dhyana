@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:dhyana/core/data/datasource/profile_data_provider.dart';
-import 'package:dhyana/core/data/datasource/storage_data_provider.dart';
+import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
+import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/model/profile.dart';
 import 'package:dhyana/core/domain/model/profile_query_options.dart';
-import 'package:dhyana/core/data/repository/default_profile_repository.dart';
+import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

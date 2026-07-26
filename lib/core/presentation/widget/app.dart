@@ -2,7 +2,7 @@ import 'package:dhyana/core/navigation/app_keys.dart';
 import 'package:dhyana/core/presentation/bloc/remote_settings/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/presentation/widget/util/gap.dart';
-import 'package:dhyana/modules/account/routes.dart';
+import 'package:dhyana/modules/profile/routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

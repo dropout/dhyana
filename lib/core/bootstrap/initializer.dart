@@ -6,13 +6,16 @@ import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/audio_session_configuration.dart';
 import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
-import 'package:dhyana/core/presentation/bloc/profile/profile_cubit.dart';
+import 'package:dhyana/core/bootstrap/dependency_injection.dart';
+import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
+import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
+import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
-import 'package:dhyana/core/data/datasource/firebase_profile_data_provider.dart';
-import 'package:dhyana/core/data/datasource/firebase_storage_data_provider.dart';
+import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
+import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
-import 'package:dhyana/core/presentation/bloc/profile/data_update/profile_stats_report_updater.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
@@ -37,6 +40,8 @@ class Initializer with LoggerMixin {
     HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: HydratedStorageDirectory((await getApplicationDocumentsDirectory()).path)
     );
+
+    initializeDependencies();
 
     // Create data providers shared between builders
     logger.t('Create data providers');
@@ -97,14 +102,7 @@ class Initializer with LoggerMixin {
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
     User? user = await repos.authRepository.authStateChange.first;
-    ProfileCubit profileCubit = ProfileCubit(
-      profileRepository: repos.profileRepository,
-      statisticsRepository: repos.statisticsRepository,
-      idGeneratorService: services.idGeneratorService,
-      crashlyticsService: services.crashlyticsService,
-      profileStatsUpdater: ProfileStatsReportUpdater(),
-    );
-
+    final profileCubit = getIt<ProfileCubit>();
     if (user != null) {
       logger.t(
         'User is already signed in, initiate profile loading for user: ${user.uid}',
