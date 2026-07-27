@@ -5,7 +5,6 @@ import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart
 import 'package:dhyana/modules/social/data/datasource/firebase_presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
-import 'package:dhyana/modules/social/domain/usecase/load_more_presence_data_use_case.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
 import 'package:dhyana/modules/social/domain/usecase/show_presence_use_case.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
@@ -29,7 +28,7 @@ void _configureDataProviders() {
 
 void _configureRepositories() {
   getIt.registerLazySingleton<PresenceRepository>(
-    () => FirebasePresenceRepository(
+    () => DefaultPresenceRepository(
       presenceDataProvider: getIt.get<PresenceDataProvider>(),
     ),
   );
@@ -38,11 +37,6 @@ void _configureRepositories() {
 void _configureUseCases() {
   getIt.registerLazySingleton(
     () => LoadPresenceDataUseCase(
-      presenceRepository: getIt.get<PresenceRepository>(),
-    ),
-  );
-  getIt.registerLazySingleton(
-    () => LoadMorePresenceDataUseCase(
       presenceRepository: getIt.get<PresenceRepository>(),
     ),
   );
@@ -59,7 +53,6 @@ void _configureViewModels() {
   getIt.registerFactory<PresenceCubit>(() {
     return PresenceCubit(
       loadPresenceDataUseCase: getIt.get<LoadPresenceDataUseCase>(),
-      loadMorePresenceDataUseCase: getIt.get<LoadMorePresenceDataUseCase>(),
       showPresenceUseCase: getIt.get<ShowPresenceUseCase>(),
       crashlyticsService: getIt.get<CrashlyticsService>(),
     );

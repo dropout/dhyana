@@ -1,4 +1,3 @@
-import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
@@ -12,21 +11,7 @@ class LoadPresenceDataUseCase {
     required this.presenceRepository,
   });
 
-  Future<List<Presence>> execute({
-    String? ownProfileId,
-    Location? location,
-    double rangeInKm = 100.0,
-    Duration interval = const Duration(minutes: 60),
-    int limit = 18,
-  }) {
-    return presenceRepository.query(
-      PresenceQueryOptions(
-        limit: limit,
-        ownProfileId: ownProfileId,
-        location: location,
-        rangeInKm: rangeInKm,
-        windowSize: interval,
-      ),
-    );
+  Future<List<Presence>> execute(PresenceQueryOptions queryOptions) {
+    return presenceRepository.query(queryOptions);
   }
 }

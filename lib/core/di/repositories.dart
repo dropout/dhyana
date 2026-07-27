@@ -81,7 +81,7 @@ class RepositoriesBuilder {
       storageDataProvider: storageDataProvider,
     );
 
-    _presenceRepository = FirebasePresenceRepository(
+    _presenceRepository = DefaultPresenceRepository(
       presenceDataProvider: FirebasePresenceDataProvider(
         firebaseProvider.firestore,
       ),

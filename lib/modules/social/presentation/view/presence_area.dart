@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
+import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -24,12 +24,16 @@ class PresenceArea extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {    return BlocProvider<PresenceCubit>(
-      create: (context) => GetIt.instance.get<PresenceCubit>()..loadPresenceData(
-        ownProfileId: profile.id,
-        limit: batchSize,
-        interval: Duration(minutes: intervalInMinutes),
-      ),
+  Widget build(BuildContext context) {
+    return BlocProvider<PresenceCubit>(
+      create: (context) =>
+          GetIt.instance.get<PresenceCubit>()..loadPresenceData(
+            queryOptions: PresenceQueryOptions(
+              ownProfileId: profile.id,
+              limit: batchSize,
+              windowSize: Duration(minutes: intervalInMinutes),
+            ),
+          ),
       child: PresenceView(
         batchSize: batchSize,
         maxPageCount: maxPageCount,

@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/domain/entity/presence/presence.dart';
@@ -91,11 +92,14 @@ class PresenceView extends StatelessWidget {
               presenceList: presenceList,
               batchSize: batchSize,
               maxPageCount: maxPageCount,
-              onTap: () => BlocProvider.of<PresenceCubit>(context).
-                loadMorePresenceData(
-                  presenceList.last.id,
-                  batchSize: batchSize
-                ),
+              onTap: () => BlocProvider.of<PresenceCubit>(context)
+                  .loadPresenceData(
+                    queryOptions: PresenceQueryOptions(
+                      lastDocumentId: presenceList.last.id,
+                      limit: batchSize,
+                    ),
+                    appendResult: true,
+                  ),
             );
           case PresenceLoadingMoreState():
             return LoadMoreButton(

@@ -1,10 +1,9 @@
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
+import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/core/presentation/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
 import 'package:dhyana/core/presentation/default_screen_setup.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -35,8 +34,10 @@ class _PresenceScreenState extends State<PresenceScreen>
   void _onIntervalChangeEnd(BuildContext context, double value) {
     if (value.round() != intervalInMinutes.round()) {
       context.read<PresenceCubit>().loadPresenceData(
-        interval: Duration(minutes: value.round()),
-        limit: widget.batchSize,
+        queryOptions: PresenceQueryOptions(
+          windowSize: Duration(minutes: value.round()),
+          limit: widget.batchSize,
+        ),
       );
       setState(() {
         intervalInMinutes = value;
@@ -46,18 +47,23 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   Future<void> _onRefresh(BuildContext context) async {
     context.read<PresenceCubit>().loadPresenceData(
-      interval: Duration(minutes: intervalInMinutes.round()),
-      limit: widget.batchSize,
+      queryOptions: PresenceQueryOptions(
+        windowSize: Duration(minutes: intervalInMinutes.round()),
+        limit: widget.batchSize,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PresenceCubit>(
-      create: (context) => GetIt.instance.get<PresenceCubit>()..loadPresenceData(
-        interval: Duration(minutes: sliderPosition.round()),
-        limit: widget.batchSize,
-      ),
+      create: (context) =>
+          GetIt.instance.get<PresenceCubit>()..loadPresenceData(
+            queryOptions: PresenceQueryOptions(
+              windowSize: Duration(minutes: sliderPosition.round()),
+              limit: widget.batchSize,
+            ),
+          ),
       child: Builder(
         builder: (context) => buildStates(context),
       ),

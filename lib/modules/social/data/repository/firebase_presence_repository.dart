@@ -4,11 +4,11 @@ import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/core/domain/repository/crud_repository_operations.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
 
-class FirebasePresenceRepository extends CrudRepositoryOps<Presence>
+class DefaultPresenceRepository extends CrudRepositoryOps<Presence>
     implements PresenceRepository {
   final PresenceDataProvider presenceDataProvider;
 
-  const FirebasePresenceRepository({required this.presenceDataProvider})
+  const DefaultPresenceRepository({required this.presenceDataProvider})
     : super(presenceDataProvider);
 
   @override
