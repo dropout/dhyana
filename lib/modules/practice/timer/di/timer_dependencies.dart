@@ -2,8 +2,8 @@ import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/haptics_service.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/modules/practice/timer/infrastructure/timer_audio_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/infrastructure/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
@@ -32,8 +32,8 @@ void _configureRepositories() {
 }
 
 void _configureServices() {
-  getIt.registerFactory<TimerAudioService>(
-    () => TimerAudioService(getIt.get<AppAudioHandler>()),
+  getIt.registerFactory<DefaultTimerAudioService>(
+    () => DefaultTimerAudioService(getIt.get<AppAudioHandler>()),
   );
 }
 
@@ -46,7 +46,7 @@ void _configureViewModels() {
     timerSettings,
     _,
   ) {
-    final audioService = getIt.get<TimerAudioService>();
+    final audioService = getIt.get<DefaultTimerAudioService>();
     return TimerCubit(
       timerSettings: timerSettings,
       audioService: audioService,
@@ -57,4 +57,6 @@ void _configureViewModels() {
       crashlyticsService: getIt.get<CrashlyticsService>(),
     );
   });
+
+
 }

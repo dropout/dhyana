@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/entity/converter/duration_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

@@ -4,8 +4,8 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/modules/practice/timer/infrastructure/timer_audio_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/infrastructure/default_timer_audio_service.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';

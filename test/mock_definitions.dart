@@ -20,7 +20,7 @@ import 'package:dhyana/core/domain/service/id_generator_service.dart';
 import 'package:dhyana/core/domain/service/overlay_service.dart';
 import 'package:dhyana/core/domain/service/resource_resolver.dart';
 import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
-import 'package:dhyana/modules/practice/timer/infrastructure/timer_audio_service.dart';
+import 'package:dhyana/modules/practice/timer/infrastructure/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_service.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
@@ -100,7 +100,7 @@ class MockAppAudioHandler
 
 class MockTimerAudioService
   extends Mock
-  implements TimerAudioService {}
+  implements DefaultTimerAudioService {}
 
 class MockChantingAudioService
   extends Mock

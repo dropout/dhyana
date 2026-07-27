@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/practice/timer/data/datasource/timer_settings_history_data_provider.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record_query_options.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_query_options.dart';
 
 import '../../../../../core/data/datasource/firebase_data_provider.dart';
 import '../../../../../core/data/datasource/firebase_model_extension.dart';

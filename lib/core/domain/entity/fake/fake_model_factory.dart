@@ -4,7 +4,7 @@ import 'package:dhyana/modules/insights/domain/model/month.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/insights/domain/model/week.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:dhyana/util/faker.dart';

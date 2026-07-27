@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings_history_record_query_options.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_query_options.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';

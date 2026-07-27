@@ -2,51 +2,60 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 
 /// Service that provides timer-specific audio functionality by delegating to
 /// the [AppAudioHandler] with appropriate custom actions.
-class TimerAudioService {
+class DefaultTimerAudioService implements TimerAudioService {
   
   /// The [AppAudioHandler] that this service uses to control audio playback.
   final AppAudioHandler _audioHandler;
 
-  /// Creates a [TimerAudioService] that uses the given [AppAudioHandler].
+  /// Creates a [DefaultTimerAudioService] that uses the given [AppAudioHandler].
   /// Upon initialization, it sends a custom action to the [AppAudioHandler] to
   /// switch to the [TimerAudioHandler] for handling timer-related audio actions.
-  TimerAudioService(this._audioHandler) {
+  DefaultTimerAudioService(this._audioHandler) {
     _switchToTimerAudioHandler();
   }
 
   /// Plays the specified [sound] by sending a custom action to the [AppAudioHandler].
+  @override
   Future<void> playSound(Sound sound) =>
     _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {
       'sound': sound.name,
     });
   
-  /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].  
+  /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].
+  @override
   Future<void> start(TimerSettings timerSettings) =>
     _audioHandler.customAction(SoTimerHandlerCustomAction.start.name, timerSettings.toJson());
 
   /// Resumes audio playback by delegating to the [AppAudioHandler]'s play method.
+  @override
   Future<void> resume() =>
     _audioHandler.play();
 
   /// Pauses audio playback by delegating to the [AppAudioHandler]'s pause method.
+  @override
   Future<void> pause() =>
     _audioHandler.pause();
   
   /// Stops audio playback by delegating to the [AppAudioHandler]'s stop method.
   /// This method will release resources and reset the playback state, 
   /// effectively stopping any ongoing timer audio.
+  @override
   Future<void> stop() =>
     _audioHandler.stop();
     
+  @override
   bool get isPlaying => _audioHandler.playbackState.value.playing;
 
+  @override
   Stream<bool> get isPlayingStream =>
     _audioHandler.playbackState.map((state) => state.playing);
 
+  @override
   Stream<PlaybackState> get playbackStateStream 
     => _audioHandler.playbackState;
 

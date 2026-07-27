@@ -23,3 +23,8 @@ class InitResult {
   });
 
 }
+
+
+class NewInitResult {
+
+}

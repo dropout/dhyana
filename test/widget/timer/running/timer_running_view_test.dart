@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_controls.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_time.dart';

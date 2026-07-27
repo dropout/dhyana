@@ -7,6 +7,7 @@ import 'package:dhyana/audio/audio_session_configuration.dart';
 import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
+import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
@@ -30,14 +31,36 @@ import 'init_result.dart';
 /// at the start of the application.
 class Initializer with LoggerMixin {
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
-    
     logger.t('Starting initialization process');
 
     logger.t('Configuring HydratedBloc storage');
     HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: HydratedStorageDirectory((await getApplicationDocumentsDirectory()).path)
+      storageDirectory: HydratedStorageDirectory(
+        (await getApplicationDocumentsDirectory()).path,
+      ),
     );
 
+    logger.t('Configuring application audio library');
+    await SoLoud.instance.init();
+    final audioHandler = await audio_service.AudioService.init(
+      builder: () => AppAudioHandler(
+        SoTimerAudioHandler(soloud: SoLoud.instance),
+        SoLoudChantingAudioHandler(soloud: SoLoud.instance),
+      ),
+      config: const audio_service.AudioServiceConfig(
+        androidNotificationChannelId: 'com.dhyana.audio',
+        androidNotificationChannelName: 'Dhyana',
+        androidNotificationOngoing: true,
+      ),
+    );
+
+    logger.t('Configuring audio session');
+    final audioSession = await AudioSession.instance;
+    await audioSession.configure(getAudioSessionConfiguration());
+    await audioSession.setActive(true);
+
+    logger.t('Configuring dependency injection');
+    getIt.registerSingleton<AppAudioHandler>(audioHandler);
     initializeDependencies();
 
     // Create data providers shared between builders
@@ -64,25 +87,6 @@ class Initializer with LoggerMixin {
       firebaseProvider.remoteConfig,
     );
 
-    logger.t('Initialize audio');
-    await SoLoud.instance.init();
-    final audioHandler = await audio_service.AudioService.init(
-      builder: () => AppAudioHandler(
-        SoTimerAudioHandler(soloud: SoLoud.instance),
-        SoLoudChantingAudioHandler(soloud: SoLoud.instance),
-      ),
-      config: const audio_service.AudioServiceConfig(
-        androidNotificationChannelId: 'com.dhyana.audio',
-        androidNotificationChannelName: 'Dhyana',
-        androidNotificationOngoing: true,
-      ),
-    );
-    
-    logger.t('Initialize audio session');
-    final audioSession = await AudioSession.instance;
-    await audioSession.configure(getAudioSessionConfiguration());
-    await audioSession.setActive(true);
-
     final services = ServicesBuilder(
       firebaseProvider: firebaseProvider,
       storageDataProvider: storageDataProvider,
@@ -92,13 +96,14 @@ class Initializer with LoggerMixin {
 
     logger.t('Fetch remote settings');
     final remoteSettings = await services.remoteSettingsService
-      .fetchRemoteSettings();
+        .fetchRemoteSettings();
 
     logger.t('Preload shaders');
     await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
-    User? user = await repos.authRepository.authStateChange.first;
+    logger.t('');
+    User? user = await getIt<AuthRepository>().authStateChange.first;
     final profileCubit = getIt<ProfileCubit>();
     if (user != null) {
       logger.t(
@@ -117,5 +122,4 @@ class Initializer with LoggerMixin {
       remoteSettings: remoteSettings,
     );
   }
-  
 }
