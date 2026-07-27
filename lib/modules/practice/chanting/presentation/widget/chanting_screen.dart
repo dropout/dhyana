@@ -21,7 +21,7 @@ class ChantingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChantingContext(
       chantingSettings: chantingSettings,
-      onCreate: (chantingCubit, presenceCubit) async {
+      onCreate: (chantingCubit) async {
         await chantingCubit.setup(chantingSettings);
         chantingCubit.play();
       },

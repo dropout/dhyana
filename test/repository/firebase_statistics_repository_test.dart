@@ -5,9 +5,9 @@ import 'package:dhyana/modules/practice/session/data/datasource/firebase_session
 import 'package:dhyana/modules/insights/data/datasource/firebase_week_data_provider.dart';
 import 'package:dhyana/modules/insights/data/datasource/firebase_year_data_provider.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
-import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/insights/domain/model/month.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:flutter_test/flutter_test.dart';

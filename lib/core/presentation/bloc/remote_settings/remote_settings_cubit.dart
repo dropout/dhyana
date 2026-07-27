@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/core/domain/model/remote_settings.dart';
+import 'package:dhyana/core/domain/entity/remote_settings.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/remote_settings_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

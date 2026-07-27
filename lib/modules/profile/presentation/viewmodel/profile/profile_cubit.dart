@@ -1,8 +1,8 @@
-import 'package:dhyana/core/domain/model/profile_settings.dart';
+import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

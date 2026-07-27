@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_footer.dart';
 import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_menu.dart';

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/model/lat_lng.dart';
+import 'package:dhyana/core/domain/entity/lat_lng.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'city_search_result.freezed.dart';

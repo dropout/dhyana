@@ -10,19 +10,19 @@ import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 typedef TimerContextHook =
-  void Function(
-    TimerCubit timerCubit,
-    PresenceCubit presenceCubit,
-    TimerSettingsHistoryCubit timerSettingsHistoryCubit,
-    String? profileId,
-  );
+    void Function(
+      TimerCubit timerCubit,
+      PresenceCubit presenceCubit,
+      TimerSettingsHistoryCubit timerSettingsHistoryCubit,
+      String? profileId,
+    );
 
-/// A widget that provides the necessary context for the timer screen, 
+/// A widget that provides the necessary context for the timer screen,
 /// including the timer cubit, presence cubit, and timer settings history cubit.
 class TimerContext extends StatefulWidget {
-  
   /// The default initialization hook for the timer context. This will start the timer
   /// and initialize presence and timer settings history if a profile ID is provided.
   static void defaultInitHook(
@@ -34,7 +34,10 @@ class TimerContext extends StatefulWidget {
     timerCubit.start();
     if (profileId != null) {
       presenceCubit.showPresence(profileId);
-      timerSettingsHistoryCubit.saveSettings(profileId, timerCubit.state.timerSettings);
+      timerSettingsHistoryCubit.saveSettings(
+        profileId,
+        timerCubit.state.timerSettings,
+      );
     }
   }
 
@@ -43,7 +46,7 @@ class TimerContext extends StatefulWidget {
 
   /// An optional initialization hook that can be used to customize the initialization
   final TimerContextHook? onInit;
-  
+
   /// The child widget that will have access to the provided BLoCs.
   final Widget child;
 
@@ -70,19 +73,17 @@ class _TimerContextState extends State<TimerContext> {
       orElse: () => null,
     );
 
-    timerCubit = createTimerCubit(
-      widget.timerSettings, 
-      context.services
-    );
-    
-    presenceCubit = createPresenceCubit(
-      context.services, 
-      context.repos
-    );
-    timerSettingsHistoryCubit = createTimerSettingsHistoryCubit(
-      context.services, 
-      context.repos
-    );
+    // timerCubit = createTimerCubit(widget.timerSettings, context.services);
+
+    // presenceCubit = createPresenceCubit(
+    //   context.services,
+    //   context.repos
+    // );
+
+    // timerSettingsHistoryCubit = createTimerSettingsHistoryCubit(
+    //   context.services,
+    //   context.repos
+    // );
 
     widget.onInit?.call(
       timerCubit,
@@ -102,51 +103,56 @@ class _TimerContextState extends State<TimerContext> {
     super.dispose();
   }
 
-  TimerCubit createTimerCubit(TimerSettings timerSettings, Services services) {
-    final TimerAudioService timerAudioService = TimerAudioService(
-      services.audioHandler,
-    );
-    final timerCubit = TimerCubit(
-      timerSettings: timerSettings,
-      audioService: timerAudioService,
-      hapticsService: services.hapticsService,
-      eventScheduler: TimerEventScheduler(
-        source: TimerAudioServiceElapsedTimeSource(timerAudioService),
-      ),
-      crashlyticsService: services.crashlyticsService,
-    );
-    return timerCubit;
-  }
+  // TimerCubit createTimerCubit(TimerSettings timerSettings, Services services) {
+  //   final TimerAudioService timerAudioService = TimerAudioService(
+  //     services.audioHandler,
+  //   );
+  //   final timerCubit = TimerCubit(
+  //     timerSettings: timerSettings,
+  //     audioService: timerAudioService,
+  //     hapticsService: services.hapticsService,
+  //     eventScheduler: TimerEventScheduler(
+  //       source: TimerAudioServiceElapsedTimeSource(timerAudioService),
+  //     ),
+  //     crashlyticsService: services.crashlyticsService,
+  //   );
+  //   return timerCubit;
+  // }
 
-  PresenceCubit createPresenceCubit(Services services, Repositories repos) {
-    final presenceCubit = PresenceCubit(
-      presenceRepository: repos.presenceRepository,
-      profileRepository: repos.profileRepository,
-      crashlyticsService: services.crashlyticsService,
-    );
-    return presenceCubit;
-  }
+  // PresenceCubit createPresenceCubit(Services services, Repositories repos) {
+  //   final presenceCubit = PresenceCubit(
+  //     presenceRepository: repos.presenceRepository,
+  //     profileRepository: repos.profileRepository,
+  //     crashlyticsService: services.crashlyticsService,
+  //   );
+  //   return presenceCubit;
+  // }
 
-  TimerSettingsHistoryCubit createTimerSettingsHistoryCubit(
-    Services services,
-    Repositories repos,
-  ) {
-    final timerSettingsHistoryCubit = TimerSettingsHistoryCubit(
-      timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
-      crashlyticsService: services.crashlyticsService,
-    );
-    return timerSettingsHistoryCubit;
-  }
+  // TimerSettingsHistoryCubit createTimerSettingsHistoryCubit(
+  //   Services services,
+  //   Repositories repos,
+  // ) {
+  //   final timerSettingsHistoryCubit = TimerSettingsHistoryCubit(
+  //     timerSettingsHistoryRepository: repos.timerSettingsHistoryRepository,
+  //     crashlyticsService: services.crashlyticsService,
+  //   );
+  //   return timerSettingsHistoryCubit;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: timerCubit),
-        BlocProvider.value(value: presenceCubit),
-        BlocProvider.value(value: timerSettingsHistoryCubit),
-      ],
+    return BlocProvider<TimerCubit>(
+      create: (_) => GetIt.instance.get<TimerCubit>(),
       child: widget.child,
     );
+
+    // return MultiBlocProvider(
+    //   providers: [
+    //     BlocProvider.value(value: timerCubit),
+    //     BlocProvider.value(value: presenceCubit),
+    //     BlocProvider.value(value: timerSettingsHistoryCubit),
+    //   ],
+    //   child: widget.child,
+    // );
   }
 }

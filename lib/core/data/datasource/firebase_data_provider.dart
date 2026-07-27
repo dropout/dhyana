@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/data_provider.dart';
 import 'package:dhyana/core/data/data_provider_exception.dart';
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 
 import 'firebase_model_extension.dart';
 
 /// A generic Firebase Firestore data provider for CRUD operations.
 /// M extends Model to ensure the model has an 'id' field and can be converted
 /// to Firestore format.
-class FirebaseDataProvider<M extends Model> implements DataProvider<M> {
+class FirebaseDataProvider<M extends Entity> implements DataProvider<M> {
 
   final CollectionReference<M> collectionRef;
 

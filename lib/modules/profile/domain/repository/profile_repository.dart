@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/model/profile.dart';
-import 'package:dhyana/core/domain/model/profile_query_options.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile_query_options.dart';
 import 'package:dhyana/core/domain/repository/crud_repository.dart';
 
 abstract interface class ProfileRepository

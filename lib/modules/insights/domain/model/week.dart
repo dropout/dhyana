@@ -1,13 +1,13 @@
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 
 part 'week.freezed.dart';
 part 'week.g.dart';
 
 @freezed
-sealed class Week with _$Week implements Model {
+sealed class Week with _$Week implements Entity {
 
   const Week._();
 

@@ -1,8 +1,8 @@
 
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
-import 'package:dhyana/core/domain/model/profile_query_options.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile_query_options.dart';
 import 'package:dhyana/core/domain/repository/crud_repository_operations.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 

@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/model/model.dart';
-import 'package:dhyana/core/domain/model/converter/duration_converter.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
+import 'package:dhyana/core/domain/entity/converter/duration_converter.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant_asset_metadata.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -28,7 +28,7 @@ sealed class ChantViewModel with _$ChantViewModel {
 }
 
 @freezed
-sealed class Chant with _$Chant implements Model {
+sealed class Chant with _$Chant implements Entity {
 
   const Chant._();
 

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -9,7 +9,7 @@ part 'timer_settings_history_record.freezed.dart';
 part 'timer_settings_history_record.g.dart';
 
 @freezed
-sealed class TimerSettingsHistoryRecord with _$TimerSettingsHistoryRecord implements Model {
+sealed class TimerSettingsHistoryRecord with _$TimerSettingsHistoryRecord implements Entity {
 
   const TimerSettingsHistoryRecord._();
 

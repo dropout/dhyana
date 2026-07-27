@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:clock/clock.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
-import 'package:dhyana/core/domain/model/location.dart';
-import 'package:dhyana/modules/social/domain/model/presence.dart';
-import 'package:dhyana/modules/social/domain/model/presence_query_options.dart';
+import 'package:dhyana/core/domain/entity/location.dart';
+import 'package:dhyana/core/domain/entity/presence/presence.dart';
+import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/util/location.dart';
 
-import '../../../../core/data/datasource/firebase_model_extension.dart';
 
 class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
     implements PresenceDataProvider {

@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/model/profile.dart';
-import 'package:dhyana/core/domain/model/profile_settings.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
 import 'package:dhyana/core/presentation/widget/dialog/delete_profile_dialog.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_clear_cache.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_health_connect.dart';

@@ -1,13 +1,13 @@
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
-import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chant_asset_metadata.freezed.dart';
 part 'chant_asset_metadata.g.dart';
 
 @freezed
-sealed class ChantMetaData with _$ChantMetaData implements Model {
+sealed class ChantMetaData with _$ChantMetaData implements Entity {
   const ChantMetaData._();
 
   const factory ChantMetaData({

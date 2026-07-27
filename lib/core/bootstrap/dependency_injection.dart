@@ -1,5 +1,7 @@
-import 'package:dhyana/core/di/dependency_injection.dart';
+import 'package:dhyana/core/di/core_dependencies.dart';
 import 'package:dhyana/modules/profile/di/dependency_injection.dart';
+import 'package:dhyana/modules/social/di/social_dependencies.dart';
+import 'package:dhyana/modules/practice/timer/di/timer_dependencies.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:get_it/get_it.dart';
 
@@ -10,4 +12,6 @@ Future<void> initializeDependencies() async {
 
   configureCoreDependencies();
   configureProfileModuleDependencies();
+  configureSocialModuleDependencies();
+  configureTimerModuleDependencies();
 }

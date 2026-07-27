@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -37,7 +37,7 @@ class MockQueryDocumentSnapshot
 
 class MockModel
   extends Mock
-  implements Model {}
+  implements Entity {}
 
 class MockQuery
   extends Mock

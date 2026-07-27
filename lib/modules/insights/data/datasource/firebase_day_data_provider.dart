@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/insights/data/datasource/day_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
-import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
 import 'package:dhyana/modules/insights/domain/model/day_query_options.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 

@@ -1,12 +1,11 @@
+import 'package:get_it/get_it.dart';
+
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
@@ -16,7 +15,6 @@ import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
 import 'package:dhyana/util/firebase_provider.dart';
-import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
@@ -69,12 +67,6 @@ void _configureUseCases() {
       profileRepository: getIt.get<ProfileRepository>(),
     ),
   );
-
-  getIt.registerLazySingleton(
-    () => DeleteProfileUseCase(
-      authRepository: getIt.get<AuthRepository>(),
-    ),
-  );
 }
 
 void _configureViewModels() {
@@ -83,13 +75,6 @@ void _configureViewModels() {
       loadProfileUseCase: getIt.get<LoadProfileUseCase>(),
       updateProfileUseCase: getIt.get<UpdateProfileUseCase>(),
       updateProfileSettingsUseCase: getIt.get<UpdateProfileSettingsUseCase>(),
-      crashlyticsService: getIt.get<CrashlyticsService>(),
-    ),
-  );
-
-  getIt.registerFactory(
-    () => DeleteProfileCubit(
-      deleteProfileUseCase: getIt.get<DeleteProfileUseCase>(),
       crashlyticsService: getIt.get<CrashlyticsService>(),
     ),
   );

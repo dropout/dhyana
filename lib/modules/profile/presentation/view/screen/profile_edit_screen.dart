@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
 import 'package:dhyana/core/presentation/default_screen_setup.dart';

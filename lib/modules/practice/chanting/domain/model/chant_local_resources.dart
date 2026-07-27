@@ -1,12 +1,12 @@
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chant_local_resources.freezed.dart';
 part 'chant_local_resources.g.dart';
 
 @freezed
-sealed class ChantLocalResources with _$ChantLocalResources implements Model {
+sealed class ChantLocalResources with _$ChantLocalResources implements Entity {
   const ChantLocalResources._();
 
   const factory ChantLocalResources({

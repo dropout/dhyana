@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/model/converter/date_time_or_null_converter.dart';
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -9,7 +9,7 @@ part 'chanting_settings.freezed.dart';
 part 'chanting_settings.g.dart';
 
 @freezed
-sealed class ChantingSettings with _$ChantingSettings implements Model {
+sealed class ChantingSettings with _$ChantingSettings implements Entity {
 
   const ChantingSettings._();
 

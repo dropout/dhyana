@@ -5,10 +5,10 @@ import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cu
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/social/domain/model/presence.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
-import 'package:dhyana/modules/social/domain/model/public_profile.dart';
+import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/entity/presence/presence.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
 import 'package:dhyana/modules/practice/timer/domain/model/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_running_view.dart';

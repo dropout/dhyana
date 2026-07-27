@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';

@@ -13,7 +13,7 @@ class ChantingContext extends StatelessWidget {
 
   final Widget child;
   final ChantingSettings chantingSettings;
-  final void Function(ChantingCubit, PresenceCubit)? onCreate;
+  final void Function(ChantingCubit)? onCreate;
 
   const ChantingContext({
     required this.child,
@@ -29,8 +29,8 @@ class ChantingContext extends StatelessWidget {
 
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (BuildContext context, AuthState authState) {
-        final bool isSignedIn = (authState is AuthStateSignedIn);
-        final String? profileId = (isSignedIn) ? authState.user.uid : null;
+        // final bool isSignedIn = (authState is AuthStateSignedIn);
+        // final String? profileId = (isSignedIn) ? authState.user.uid : null;
 
         final chantingCubit = ChantingCubit(
           chantingSettings: chantingSettings,
@@ -41,27 +41,28 @@ class ChantingContext extends StatelessWidget {
           crashlyticsService: services.crashlyticsService,
         );
 
-        final presenceCubit = PresenceCubit(
-          presenceRepository: repos.presenceRepository,
-          profileRepository: repos.profileRepository,
-          crashlyticsService: services.crashlyticsService,
-        );
+        // final presenceCubit = PresenceCubit(
+        //   loadPresenceDataUseCase: LoadPresenceDataUseCase(
+        //     presenceRepository: repos.presenceRepository,
+        //   ),
+        //   loadMorePresenceDataUseCase: LoadMorePresenceDataUseCase(
+        //     presenceRepository: repos.presenceRepository,
+        //   ),
+        //   showPresenceUseCase: ShowPresenceUseCase(
+        //     presenceRepository: repos.presenceRepository,
+        //     profileRepository: repos.profileRepository,
+        //   ),
+        //   crashlyticsService: services.crashlyticsService,
+        // );
 
-        if (isSignedIn && profileId != null) {
-          presenceCubit.showPresence(profileId);
-        }
+        // if (isSignedIn && profileId != null) {
+        //   presenceCubit.showPresence(profileId);
+        // }
 
-        onCreate?.call(chantingCubit, presenceCubit);
+        onCreate?.call(chantingCubit);
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider<ChantingCubit>(
-              create: (_) => chantingCubit,
-            ),
-            BlocProvider<PresenceCubit>(
-              create: (_) => presenceCubit,
-            ),
-          ],
+        return BlocProvider<ChantingCubit>(
+          create: (_) => chantingCubit,
           child: child,
         );
       },

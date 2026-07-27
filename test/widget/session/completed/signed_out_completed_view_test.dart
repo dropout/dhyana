@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/session_result.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';

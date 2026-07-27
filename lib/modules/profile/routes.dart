@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/navigation/auth_redirect_hook.dart';
 
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_screen.dart';

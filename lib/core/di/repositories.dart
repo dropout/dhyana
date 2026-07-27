@@ -16,7 +16,7 @@ import 'package:dhyana/modules/profile/data/repository/default_profile_repositor
 import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
-import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
+import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';

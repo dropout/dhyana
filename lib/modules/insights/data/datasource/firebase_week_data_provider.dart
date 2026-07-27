@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/insights/data/datasource/week_data_provider.dart';
-import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/modules/insights/domain/model/week.dart';
 import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';

@@ -7,13 +7,13 @@ import 'package:dhyana/core/presentation/default_screen_setup.dart';
 import 'package:dhyana/core/presentation/widget/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class PresenceScreen extends StatefulWidget {
-
   final int batchSize;
 
   const PresenceScreen({
-    this.batchSize = 18,// 3 * 6 profiles per batch
+    this.batchSize = 18, // 3 * 6 profiles per batch
     super.key,
   });
 
@@ -22,8 +22,7 @@ class PresenceScreen extends StatefulWidget {
 }
 
 class _PresenceScreenState extends State<PresenceScreen>
-  with DefaultScreenSetupHelpersMixin {
-
+    with DefaultScreenSetupHelpersMixin {
   double sliderPosition = 60;
   double intervalInMinutes = 60;
 
@@ -54,17 +53,28 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   @override
   Widget build(BuildContext context) {
-    return SmartBlocProvider<PresenceCubit, PresenceState>(
-      create: (context) => PresenceCubit(
-        presenceRepository: context.repos.presenceRepository,
-        profileRepository: context.repos.profileRepository,
-        crashlyticsService: context.services.crashlyticsService,
-      )..loadPresenceData(
+    return BlocProvider<PresenceCubit>(
+      create: (context) => GetIt.instance.get<PresenceCubit>()..loadPresenceData(
         interval: Duration(minutes: sliderPosition.round()),
         limit: widget.batchSize,
       ),
-      builder: (context, state) => buildStates(context),
+      child: Builder(
+        builder: (context) => buildStates(context),
+      ),
     );
+
+    // return SmartBlocProvider<PresenceCubit, PresenceState>(
+    //   create: (context) =>
+    //       PresenceCubit(
+    //         presenceRepository: context.repos.presenceRepository,
+    //         profileRepository: context.repos.profileRepository,
+    //         crashlyticsService: context.services.crashlyticsService,
+    //       )..loadPresenceData(
+    //         interval: Duration(minutes: sliderPosition.round()),
+    //         limit: widget.batchSize,
+    //       ),
+    //   builder: (context, state) => buildStates(context),
+    // );
   }
 
   Widget buildStates(BuildContext context) {
@@ -79,7 +89,7 @@ class _PresenceScreenState extends State<PresenceScreen>
               onRefresh: () => _onRefresh(context),
               slivers: [
                 buildControlsArea(context, controlsEnabled: false),
-                buildLoadingSliver(context)
+                buildLoadingSliver(context),
               ],
             );
           case PresenceLoadedState():
@@ -94,11 +104,9 @@ class _PresenceScreenState extends State<PresenceScreen>
                   sliver: SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: DesignSpec.spacingMd
+                        horizontal: DesignSpec.spacingMd,
                       ),
-                      child: PresenceView(
-                        batchSize: widget.batchSize,
-                      ),
+                      child: PresenceView(batchSize: widget.batchSize),
                     ),
                   ),
                 ),
@@ -114,11 +122,9 @@ class _PresenceScreenState extends State<PresenceScreen>
                   sliver: SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: DesignSpec.spacingMd
+                        horizontal: DesignSpec.spacingMd,
                       ),
-                      child: PresenceView(
-                        batchSize: widget.batchSize,
-                      ),
+                      child: PresenceView(batchSize: widget.batchSize),
                     ),
                   ),
                 ),
@@ -130,54 +136,52 @@ class _PresenceScreenState extends State<PresenceScreen>
               title: AppLocalizations.of(context).presence,
               slivers: [
                 buildControlsArea(context, controlsEnabled: false),
-                buildErrorSliver(context)
+                buildErrorSliver(context),
               ],
             );
           default:
             return DefaultScreenSetup(
               title: AppLocalizations.of(context).presence,
               enableScrolling: false,
-              slivers: [
-                buildControlsArea(context, controlsEnabled: false),
-              ],
+              slivers: [buildControlsArea(context, controlsEnabled: false)],
             );
         }
       },
     );
   }
 
-  Widget buildControlsArea(BuildContext context, {
+  Widget buildControlsArea(
+    BuildContext context, {
     bool controlsEnabled = true,
   }) {
     return SliverToBoxAdapter(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: DesignSpec.paddingLg
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(AppLocalizations.of(context).presenceScreenSubTitle),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
-                child: Slider(
-                  divisions: 17,
-                  min: 10,
-                  max: 180,
-                  activeColor: Colors.black,
-                  label: AppLocalizations.of(context)
-                    .minutesPluralWithNumber(sliderPosition.round()),
-                  value: sliderPosition,
-                  onChanged: controlsEnabled ? (sliderValue) =>
-                    _onIntervalChange(context, sliderValue) : null,
-                  onChangeEnd: (sliderValue) =>
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(AppLocalizations.of(context).presenceScreenSubTitle),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
+              child: Slider(
+                divisions: 17,
+                min: 10,
+                max: 180,
+                activeColor: Colors.black,
+                label: AppLocalizations.of(
+                  context,
+                ).minutesPluralWithNumber(sliderPosition.round()),
+                value: sliderPosition,
+                onChanged: controlsEnabled
+                    ? (sliderValue) => _onIntervalChange(context, sliderValue)
+                    : null,
+                onChangeEnd: (sliderValue) =>
                     _onIntervalChangeEnd(context, sliderValue),
-                ),
-              )
-            ],
-          ),
-        )
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
-
 }

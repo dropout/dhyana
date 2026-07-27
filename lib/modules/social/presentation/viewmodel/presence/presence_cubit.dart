@@ -1,12 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/model/location.dart';
-import 'package:dhyana/modules/social/domain/model/presence.dart';
-import 'package:dhyana/modules/social/domain/model/presence_query_options.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
-import 'package:dhyana/modules/social/domain/model/public_profile.dart';
-import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/entity/location.dart';
+import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/modules/social/domain/usecase/load_more_presence_data_use_case.dart';
+import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
+import 'package:dhyana/modules/social/domain/usecase/show_presence_use_case.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,20 +14,24 @@ part 'presence_cubit.freezed.dart';
 /// Enables showing and querying presence data to show who is around
 /// who you have practiced with. 
 class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
-  
-  /// Repository to show and query presence data.
-  final PresenceRepository presenceRepository;
 
-  /// Repository to read profile data to show presence.
-  final ProfileRepository profileRepository;
+  /// Use case to load presence data.
+  final LoadPresenceDataUseCase loadPresenceDataUseCase;
+
+  /// Use case to load additional presence data pages.
+  final LoadMorePresenceDataUseCase loadMorePresenceDataUseCase;
+
+  /// Use case to show user presence.
+  final ShowPresenceUseCase showPresenceUseCase;
 
   /// Service to log errors
   final CrashlyticsService crashlyticsService;
 
   /// Creates a new [PresenceCubit] with the given repositories and services.
   PresenceCubit({
-    required this.presenceRepository,
-    required this.profileRepository,
+    required this.loadPresenceDataUseCase,
+    required this.loadMorePresenceDataUseCase,
+    required this.showPresenceUseCase,
     required this.crashlyticsService,
   }) : super(const PresenceState.initial());
 
@@ -46,14 +48,12 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
   }) async {
     try {
       emit(PresenceState.loading());
-      List<Presence> presenceList = await presenceRepository.query(
-        PresenceQueryOptions(
-          limit: limit,
-          ownProfileId: ownProfileId,
-          location: location,
-          rangeInKm: rangeInKm,
-          windowSize: interval,
-        ),
+      final presenceList = await loadPresenceDataUseCase.execute(
+        ownProfileId: ownProfileId,
+        location: location,
+        rangeInKm: rangeInKm,
+        interval: interval,
+        limit: limit,
       );
       logger.t('Loaded ${presenceList.length} presence items');
       emit(PresenceState.loaded(presenceList: presenceList));
@@ -84,11 +84,10 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
       emit(PresenceState.loadingMore(
         presenceList: existingPresenceList
       ));
-      PresenceQueryOptions queryOptions = PresenceQueryOptions(
-        limit: batchSize,
+      final morePresenceList = await loadMorePresenceDataUseCase.execute(
         lastDocumentId: lastDocumentId,
+        batchSize: batchSize,
       );
-      List<Presence> morePresenceList = await presenceRepository.query(queryOptions);
 
       // Combine existing and more presence list
       final List<Presence> resultList = [
@@ -112,22 +111,7 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
 
   Future<void> showPresence(String profileId) async {
     try {
-      Profile profile = await profileRepository.read(profileId);
-      if (profile.completed) {
-        await presenceRepository.showPresence(
-          Presence(
-            id: profile.id,
-            profile: PublicProfile.fromProfile(profile: profile),
-            startedAt: DateTime.now(),
-            location: profile.location,
-          ),
-        );
-        logger.t('Showing presence.');
-      } else {
-        logger.t(
-          'User is signed in but profile is incomplete, NOT showing presence.',
-        );
-      }
+      await showPresenceUseCase.execute(profileId);
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

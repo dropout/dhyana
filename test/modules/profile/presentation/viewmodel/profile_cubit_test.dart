@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

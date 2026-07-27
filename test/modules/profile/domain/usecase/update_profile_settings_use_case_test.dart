@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/model/fake/fake_model_factory.dart';
+import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

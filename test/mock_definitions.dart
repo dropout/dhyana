@@ -9,7 +9,7 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_setti
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
+import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';

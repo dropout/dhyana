@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/model/converter/date_time_converter.dart';
-import 'package:dhyana/core/domain/model/model.dart';
+import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -7,7 +7,7 @@ part 'year.freezed.dart';
 part 'year.g.dart';
 
 @freezed
-sealed class Year with _$Year implements Model {
+sealed class Year with _$Year implements Entity {
 
   const Year._();
 

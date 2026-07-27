@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/core/domain/model/profile.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/widget/dialog/signout_dialog.dart';

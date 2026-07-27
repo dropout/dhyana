@@ -1,8 +1,8 @@
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
-import 'package:dhyana/modules/social/domain/model/presence.dart';
-import 'package:dhyana/modules/social/domain/model/presence_query_options.dart';
+import 'package:dhyana/core/domain/entity/presence/presence.dart';
+import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/core/domain/repository/crud_repository_operations.dart';
-import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
+import 'package:dhyana/core/domain/repository/presence_repository.dart';
 
 class FirebasePresenceRepository extends CrudRepositoryOps<Presence>
     implements PresenceRepository {
