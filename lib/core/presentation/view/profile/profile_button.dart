@@ -5,7 +5,7 @@ import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_indicator.dart';
 import 'package:dhyana/core/presentation/view/util/signed_in.dart';
-import 'package:dhyana/modules/profile/routes.dart';
+import 'package:dhyana/modules/profile/profile_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

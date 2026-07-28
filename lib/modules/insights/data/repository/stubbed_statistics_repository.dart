@@ -4,7 +4,6 @@ import 'package:dhyana/modules/insights/domain/model/month.dart';
 import 'package:dhyana/modules/insights/domain/model/month_query_options.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/entity/session_query_options.dart';
 import 'package:dhyana/modules/insights/domain/model/week.dart';
 import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
@@ -42,12 +41,6 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   Future<Year> getYear(String profileId, DateTime dateTime) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createYear());
-  }
-
-  @override
-  Future<Session> getSession(String profileId, String sessionId) async {
-    await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createSession());
   }
 
   @override
@@ -128,13 +121,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Session>> querySessions(String profileId, SessionQueryOptions queryOptions) async {
-    await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createSessions(queryOptions.limit));
-  }
-
-  @override
-  Future<void> logSession(Profile profile, Session session) {
+  Future<void> logSessionStatistics(Profile profile, Session session) {
     return Future.value();
   }
 }

@@ -1,6 +1,6 @@
+import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,12 +12,12 @@ part 'sessions_cubit.freezed.dart';
 
 class SessionsCubit extends Cubit<SessionsState> with LoggerMixin {
 
-  final StatisticsRepository statisticsRepository;
+  final SessionRepository sessionRepository;
   final AuthRepository authRepository;
   final CrashlyticsService crashlyticsService;
 
   SessionsCubit({
-    required this.statisticsRepository,
+    required this.sessionRepository,
     required this.authRepository,
     required this.crashlyticsService,
   }) : super(const SessionsState.initial());
@@ -25,7 +25,7 @@ class SessionsCubit extends Cubit<SessionsState> with LoggerMixin {
   Future<void> loadSessions(String profileId) async {
     try {
       emit(const SessionsState.loading());
-      List<Session> sessions = await statisticsRepository.querySessions(
+      final sessions = await sessionRepository.query(
         profileId,
         const SessionQueryOptions()
       );
@@ -36,7 +36,7 @@ class SessionsCubit extends Cubit<SessionsState> with LoggerMixin {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
-        reason: 'Unable to add session'
+        reason: 'Unable to load session'
       );
       logger.t('Failed to load sessions for: $profileId');
     }

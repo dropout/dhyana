@@ -1,18 +1,15 @@
-import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/core/presentation/viewmodel/remote_settings/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
-import 'package:dhyana/modules/profile/routes.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 
 import '../../di/app_providers.dart';
-import 'package:dhyana/core/presentation/app_routes.dart';
 
 /// The main app widget.
 /// It sets up the top-level providers and
@@ -21,14 +18,9 @@ class App extends StatelessWidget {
   final InitResult initResult;
   late final GoRouter router;
 
-  App({required this.initResult, super.key})
-    : router = GoRouter(
-        debugLogDiagnostics: kDebugMode,
-        navigatorKey: AppWidgetKeys.rootNavigatorKey,
-        initialLocation: '/',
-        routes: [...$coreRoutes, ...$accountRoutes],
-        // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
-      );
+  App({required this.initResult, super.key}) {
+    router = GetIt.I.get<GoRouter>();
+  }    
 
   @override
   Widget build(BuildContext context) {

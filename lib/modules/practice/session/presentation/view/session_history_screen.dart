@@ -1,12 +1,12 @@
+import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/sessions/sessions_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/history/session_history_list.dart';
-import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
-import '../../../../../core/presentation/view/default_screen_setup.dart';
 
 class SessionHistoryScreen extends StatelessWidget
   with DefaultScreenSetupHelpersMixin {
@@ -21,11 +21,7 @@ class SessionHistoryScreen extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return SmartBlocProvider<SessionsCubit, SessionsState>(
-      create: (context) => SessionsCubit(
-        authRepository: context.repos.authRepository,
-        statisticsRepository: context.repos.statisticsRepository,
-        crashlyticsService: context.services.crashlyticsService,
-      )..loadSessions(profileId),
+      create: (context) => GetIt.I.get<SessionsCubit>()..loadSessions(profileId),        
       builder: (context, state) => buildSessionsState(context),
     );
   }

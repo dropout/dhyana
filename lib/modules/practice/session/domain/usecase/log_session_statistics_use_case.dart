@@ -16,7 +16,7 @@ class LogSessionStatisticsUseCase with LoggerMixin {
   });
 
   Future<void> execute(Profile updatedProfile, Session session) async {
-    await statisticsRepository.logSession(updatedProfile, session);
+    await statisticsRepository.logSessionStatistics(updatedProfile, session);
 
     final authorizationStatus =
         await mindfulMinutesService.getAuthorizationStatus();

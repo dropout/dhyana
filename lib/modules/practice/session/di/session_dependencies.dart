@@ -1,3 +1,4 @@
+import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
@@ -6,6 +7,7 @@ import 'package:dhyana/modules/practice/session/domain/repository/session_reposi
 import 'package:dhyana/modules/practice/session/domain/usecase/log_session_statistics_use_case.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
+import 'package:dhyana/modules/practice/session/presentation/viewmodel/sessions/sessions_cubit.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:get_it/get_it.dart';
 
@@ -56,5 +58,15 @@ void _configureViewModels() {
       logSessionUseCase: getIt.get<LogSessionStatisticsUseCase>(),
     );
   });
+
+  getIt.registerFactory<SessionsCubit>(() {
+    return SessionsCubit(
+      sessionRepository: getIt.get<SessionRepository>(),
+      authRepository: getIt.get<AuthRepository>(),
+      crashlyticsService: getIt.get<CrashlyticsService>(),
+    );
+  });
+
+
 
 }

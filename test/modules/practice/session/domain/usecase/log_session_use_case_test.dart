@@ -55,7 +55,7 @@ void main() {
     final profile = createProfile();
     final session = createSession();
 
-    when(() => statisticsRepository.logSession(profile, session))
+    when(() => statisticsRepository.logSessionStatistics(profile, session))
         .thenAnswer((_) async {});
     when(() => mindfulMinutesService.getAuthorizationStatus())
         .thenAnswer((_) async => AuthorizationStatus.authorized);
@@ -66,7 +66,7 @@ void main() {
 
     await useCase.execute(profile, session);
 
-    verify(() => statisticsRepository.logSession(profile, session)).called(1);
+    verify(() => statisticsRepository.logSessionStatistics(profile, session)).called(1);
     verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
     verify(() => mindfulMinutesService.logMindfulMinutes(
           session.startTime,
@@ -82,14 +82,14 @@ void main() {
       orElse: () => AuthorizationStatus.authorized,
     );
 
-    when(() => statisticsRepository.logSession(profile, session))
+    when(() => statisticsRepository.logSessionStatistics(profile, session))
         .thenAnswer((_) async {});
     when(() => mindfulMinutesService.getAuthorizationStatus())
         .thenAnswer((_) async => unauthorizedStatus);
 
     await useCase.execute(profile, session);
 
-    verify(() => statisticsRepository.logSession(profile, session)).called(1);
+    verify(() => statisticsRepository.logSessionStatistics(profile, session)).called(1);
     verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
     verifyNever(() => mindfulMinutesService.logMindfulMinutes(any(), any()));
   });

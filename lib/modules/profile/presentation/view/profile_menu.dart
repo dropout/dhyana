@@ -5,7 +5,8 @@ import 'package:dhyana/core/presentation/view/dialog/signout_dialog.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/dialog_helper.dart';
-import 'package:dhyana/modules/profile/routes.dart';
+import 'package:dhyana/modules/practice/session/session_routes.dart';
+import 'package:dhyana/modules/profile/profile_routes.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMenu extends StatelessWidget {

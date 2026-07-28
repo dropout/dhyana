@@ -88,6 +88,7 @@ class RepositoriesBuilder {
     );
 
     _statisticsRepository = FirebaseStatisticsRepository(
+      fireStore: firebaseProvider.firestore,
       dataProviderFactory: FirebaseDataProviderFactory(
         fireStore: firebaseProvider.firestore,
       ),

@@ -10,13 +10,15 @@ import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/core/presentation/app_routes.dart';
+import 'package:dhyana/modules/practice/session/session_routes.dart';
+import 'package:dhyana/modules/practice/timer/timer_routes.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
-import 'package:dhyana/modules/profile/routes.dart';
+import 'package:dhyana/modules/profile/profile_routes.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -69,7 +71,7 @@ class Initializer with LoggerMixin {
       debugLogDiagnostics: kDebugMode,
       navigatorKey: AppWidgetKeys.rootNavigatorKey,
       initialLocation: '/',
-      routes: [...$coreRoutes, ...$accountRoutes],
+      routes: [...$coreRoutes, ...$profileRoutes, ...$timerRoutes, ...$sessionRoutes],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );
     getIt.registerSingleton<GoRouter>(router);

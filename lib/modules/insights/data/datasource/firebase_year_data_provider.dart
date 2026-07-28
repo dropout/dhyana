@@ -3,10 +3,8 @@ import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/insights/data/datasource/year_data_provider.dart';
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:dhyana/modules/insights/domain/model/year_query_options.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseYearDataProvider
     extends FirebaseDataProvider<Year>
@@ -43,31 +41,8 @@ class FirebaseYearDataProvider
       buildStreamFromQuery(_buildQuery(queryOptions));
 
   @override
-  Future<void> logSession(Session session) async {
-    final String yearId = session.startTime.toYearId();
-
-    late Year updatedYear;
-    try {
-      // Year exists
-      Year thisYear = await read(yearId);
-      updatedYear = thisYear.copyWith(
-        minutesCount: thisYear.minutesCount + session.duration.inMinutes,
-        sessionCount: thisYear.sessionCount + 1,
-      );
-    } catch(_) {
-      // Year doesn't exists in database yet
-      updatedYear = Year(
-        id: yearId,
-        startDate: DateTime(
-          session.startTime.year,
-        ),
-        sessionCount: 1,
-        minutesCount: session.duration.inMinutes,
-      );
-    }
-
-    DocumentReference<Year> yearRef = collectionRef.doc(updatedYear.id);
-    await yearRef.set(updatedYear, SetOptions(merge: true));
-  }
+  Future<void> set(Year year, {bool merge = false, List<Object>? mergeFields}) async =>
+      collectionRef.doc(year.id).set(year, SetOptions(merge: merge, mergeFields: mergeFields));    
+  
 
 }

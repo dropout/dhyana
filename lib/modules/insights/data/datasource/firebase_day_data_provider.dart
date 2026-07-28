@@ -5,9 +5,6 @@ import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
 import 'package:dhyana/modules/insights/domain/model/day_query_options.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseDayDataProvider
     extends FirebaseDataProvider<Day>
@@ -27,39 +24,8 @@ class FirebaseDayDataProvider
   );
 
   @override
-  Future<void> logSession(Session session, Profile profile) async {
-    final String todayId = session.startTime.toDayId();
-
-    late Day updatedToday;
-    try {
-      // Day exists
-      Day today = await read(todayId);
-      updatedToday = today.copyWith(
-        sessionCount: today.sessionCount + 1,
-        minutesCount: today.minutesCount + session.duration.inMinutes,
-        sessions: today.sessions.toList()..add(session),
-      );
-    } catch(_) {
-      // Day doesn't exists in database yet
-      updatedToday = Day(
-        id: todayId,
-        startDate: DateTime(
-          session.startTime.year,
-          session.startTime.month,
-          session.startTime.day,
-        ),
-        consecutiveDaysCount: profile.statsReport.consecutiveDays.current,
-        sessionCount: 1,
-        sessions: [
-          session
-        ],
-        minutesCount: session.duration.inMinutes,
-      );
-    }
-
-    DocumentReference<Day> dayRef = collectionRef.doc(updatedToday.id);
-    await dayRef.set(updatedToday, SetOptions(merge: true));
-  }
+  Future<void> set(Day day, {bool merge = false, List<Object>? mergeFields}) async =>    
+    collectionRef.doc(day.id).set(day, SetOptions(merge: merge, mergeFields: mergeFields));  
 
   Query<Day> _buildQuery(DayQueryOptions queryOptions) {
     final FieldPath fieldPath = FieldPath(const ['startDate']);

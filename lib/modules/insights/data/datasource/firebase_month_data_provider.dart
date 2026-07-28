@@ -5,8 +5,6 @@ import 'package:dhyana/modules/insights/data/datasource/month_data_provider.dart
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/modules/insights/domain/model/month.dart';
 import 'package:dhyana/modules/insights/domain/model/month_query_options.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements MonthDataProvider {
 
@@ -42,34 +40,7 @@ class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements M
       buildStreamFromQuery(_buildQuery(queryOptions));
 
   @override
-  Future<void> logSession(Session session) async {
-    final String monthId = session.startTime.toMonthId();
-
-    late Month updatedMonth;
-    try {
-      // Month exists
-      Month thisMonth = await read(monthId);
-      updatedMonth = thisMonth.copyWith(
-        sessionCount: thisMonth.sessionCount + 1,
-        minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
-      );
-    } catch(_) {
-      // Month doesn't exists in database yet
-      updatedMonth = Month(
-        id: monthId,
-        startDate: DateTime(
-          session.startTime.year,
-          session.startTime.month,
-        ),
-        minutesCount: session.duration.inMinutes,
-        sessionCount: 1,
-      );
-    }
-
-    DocumentReference<Month> monthRef = collectionRef.doc(updatedMonth.id);
-    await monthRef.set(updatedMonth, SetOptions(merge: true));
-
-
-  }
+  Future<void> set(Month month, {bool merge = false, List<Object>? mergeFields}) async =>
+      collectionRef.doc(month.id).set(month, SetOptions(merge: merge, mergeFields: mergeFields));    
 
 }
