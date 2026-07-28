@@ -2,6 +2,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 
+/// An interface for a service that manages audio playback for a timer application.
 abstract interface class TimerAudioService {
 
   Future<void> playSound(Sound sound);

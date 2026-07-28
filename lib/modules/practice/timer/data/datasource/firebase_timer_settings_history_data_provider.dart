@@ -24,6 +24,8 @@ class FirebaseTimerSettingsHistoryDataProvider
       )
   );
 
+  
+
   Query<TimerSettingsHistoryRecord> _buildQuery(TimerSettingsHistoryRecordQueryOptions queryOptions) {
     return collectionRef
       .orderBy('lastUsed', descending: true)

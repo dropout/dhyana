@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';

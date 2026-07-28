@@ -6,7 +6,7 @@ import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
 import 'package:dhyana/modules/insights/domain/model/day_query_options.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 
 class FirebaseDayDataProvider

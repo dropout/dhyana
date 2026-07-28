@@ -1,7 +1,7 @@
 import '../../../../core/data/data_provider.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
 import 'package:dhyana/modules/insights/domain/model/day_query_options.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 
 abstract interface class DayDataProvider implements DataProvider<Day> {

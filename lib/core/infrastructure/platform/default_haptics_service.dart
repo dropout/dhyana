@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:gaimon/gaimon.dart';
-
-import '../../domain/service/haptics_service.dart';
+import 'package:dhyana/core/domain/service/haptics_service.dart';
 
 class DefaultHapticsService implements HapticsService {
   @override

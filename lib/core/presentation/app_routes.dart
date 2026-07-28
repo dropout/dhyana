@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/profile/routes.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/presentation/view/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/util/assets.dart';

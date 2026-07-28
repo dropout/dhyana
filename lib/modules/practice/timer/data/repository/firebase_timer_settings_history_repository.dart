@@ -18,14 +18,14 @@ class FirebaseTimerSettingsHistoryRepository
     String profileId,
     TimerSettings timerSettings,
   ) async {
-    FirebaseTimerSettingsHistoryDataProvider timerSettingsHistoryDataProvider =
+    final timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
         fireStore,
         profileId,
       );
 
     try {
-      TimerSettingsHistoryRecord timerSettingsHistoryRecord = await
+      final timerSettingsHistoryRecord = await
         timerSettingsHistoryDataProvider.read(timerSettings.id);
       await timerSettingsHistoryDataProvider.update(
         timerSettingsHistoryRecord.copyWith(
@@ -50,7 +50,7 @@ class FirebaseTimerSettingsHistoryRepository
     String profileId,
     TimerSettingsHistoryRecordQueryOptions queryOptions
   ) {
-    FirebaseTimerSettingsHistoryDataProvider timerSettingsHistoryDataProvider =
+    final timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
         fireStore,
         profileId,
@@ -63,7 +63,7 @@ class FirebaseTimerSettingsHistoryRepository
     String profileId,
     TimerSettingsHistoryRecordQueryOptions queryOptions,
   ) {
-    FirebaseTimerSettingsHistoryDataProvider timerSettingsHistoryDataProvider =
+    final timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
         fireStore,
         profileId,

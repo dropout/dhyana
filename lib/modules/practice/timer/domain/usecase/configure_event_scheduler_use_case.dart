@@ -2,6 +2,8 @@ import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart'
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
 
+/// A use case that configures the event scheduler with the appropriate 
+/// timer events based on the provided timer settings.
 class ConfigureEventSchedulerUseCase with LoggerMixin {
   final TimerEventScheduler eventScheduler;
 

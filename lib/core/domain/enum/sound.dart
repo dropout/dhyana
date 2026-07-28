@@ -1,12 +1,15 @@
-enum Sound {
-  none(0, 0),
-  vibrate(1, 1),
-  smallBell(2, 2),
-  triangle(3, 3);
+enum SoundType { audio, haptic }
 
-  const Sound(this.id, this.priority);
+enum Sound {
+  none(0, 0, SoundType.audio),
+  vibrate(1, 1, SoundType.haptic),
+  smallBell(2, 2, SoundType.audio),
+  triangle(3, 3, SoundType.audio);
+
+  const Sound(this.id, this.priority, this.type);
   final int id;
   final int priority;
+  final SoundType type;
 }
 
 extension ImageResourceUrl on Sound {
@@ -19,7 +22,7 @@ extension ImageResourceUrl on Sound {
       case Sound.vibrate:
         return 'assets/images/vibrate.jpg';
       case Sound.triangle:
-        return 'assets/images/triangle.jpg'; 
+        return 'assets/images/triangle.jpg';
     }
   }
 }
@@ -40,5 +43,8 @@ extension ResourceUrl on Sound {
 }
 
 Sound getSoundById(int id) {
-  return Sound.values.firstWhere((sound) => sound.id == id, orElse: () => Sound.none);
+  return Sound.values.firstWhere(
+    (sound) => sound.id == id,
+    orElse: () => Sound.none,
+  );
 }

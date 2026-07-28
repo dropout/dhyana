@@ -3,7 +3,7 @@ import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/insights/data/datasource/year_data_provider.dart';
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:dhyana/modules/insights/domain/model/year_query_options.dart';
 import 'package:dhyana/util/date_time_utils.dart';

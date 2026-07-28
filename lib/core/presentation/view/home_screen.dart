@@ -1,5 +1,4 @@
 import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_appbar.dart';
@@ -9,61 +8,19 @@ import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_settings_view.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_bottom_menu.dart';
-import 'package:dhyana/core/presentation/view/home/session_type_toggle.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
-import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
-import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
-/// The main entry-point screen of the app, allowing users to choose between
-/// a sitting meditation session and a chanting session, and configure settings
-/// for either before starting.
-///
-/// [HomeScreen] is driven by [HomeScreenCubit].
-/// On creation the cubit is initialised with an
-/// optional [timerSettings] value so that callers can deep-link directly into a
-/// pre-configured sitting session (e.g. from a notification or a history entry).
-///
-///
-/// ## Layout
-///
-/// The screen renders:
-/// - A [HomeScreenAppbar] at the top (extends behind the app-bar area).
-/// - A body area that switches between [buildTimerSettingsView] and
-///   [buildChantingSettingsView] depending on the active [SessionType].
-/// - A [SessionTypeToggle] anchored to the bottom-right corner, allowing
-///   the user to switch between [SessionType.sitting] and
-///   [SessionType.chanting] at any time.
-///
-/// Transitions between the two session views are animated using an
-/// [AnimatedSwitcher].
-///
-/// ## Data flow
-///
-/// ```
-/// HomeScreen
-///   └─ HomeScreenCubitProvider  (creates & owns HomeScreenCubit)
-///        └─ HomeScreenStateLoaded
-///             ├─ buildTimerSettingsView
-///             │    ├─ SafeProfileSettings  (reads ProfileSettings from ProfileCubit)
-///             │    └─ TimerSettingsCubitProvider → TimerSettingsView
-///             └─ buildChantingSettingsView
-///                  ├─ SafeProfileSettings
-///                  └─ ChantingSettingsCubitProvider → ChantingSettingsView
-/// ```
+/// A screen that allows the user to configure and start 
+/// a sitting or chanting session.
 class HomeScreen extends StatelessWidget {
-  /// Optional pre-configured timer settings to seed the sitting session with.
-  ///
-  /// When non-null, [HomeScreenCubit.init] uses this value to skip loading
-  /// persisted settings and jumps straight to [SessionType.sitting] with the
-  /// supplied configuration. This is used, for example, when navigating from a
-  /// history entry or from a notification that carries a specific session
-  /// configuration.
-  ///
-  /// When null, the cubit loads the last-used settings from
-  /// [SharedPreferencesService].
+
+  /// Optional [TimerSettings] to pre-configure the sitting session branch of
+  /// the home screen. If provided, the home screen will start in the
+  /// [SessionType.sitting] branch with the given settings pre-loaded.
   final TimerSettings? timerSettings;
 
   const HomeScreen({this.timerSettings, super.key});
@@ -127,6 +84,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  /// Builds the bottom menu that allows the user to switch between
+  /// sitting and chanting session types.
   Widget buildBottomMenu(BuildContext context, HomeScreenState state) {
     return HomeScreenBottomMenu(
       sessionType: state.sessionType,
@@ -137,23 +96,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Builds the sitting-session branch of the home screen.
-  ///
-  /// Wraps [TimerSettingsView] in a [SafeProfileSettings] provider:
-  ///
-  /// 1. [SafeProfileSettings] — resolves the current [ProfileSettings] from
-  ///    the ambient [ProfileCubit], falling back to an anonymous profile when
-  ///    none is available.
-  ///
-  /// The inner state switch shows:
-  /// - [AppLoadingDisplay] while settings are loading.
-  /// - [AppErrorDisplay] if an error occurred.
-  /// - [TimerSettingsView] once settings are available.
   Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) {
     return SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
       create: (context) {
-        final cubit = TimerSettingsCubit(
-          crashlyticsService: context.services.crashlyticsService,
-        );
+        final cubit = GetIt.instance.get<TimerSettingsCubit>();
         if (timerSettings != null) {
           cubit.timerSettingsChanged(timerSettings!);
         }
@@ -163,61 +109,9 @@ class HomeScreen extends StatelessWidget {
         return TimerSettingsView(timerSettings: state.timerSettings);
       },
     );
-
-    // return BlocBuilder<ProfileCubit, ProfileState>(
-    //   builder: (context, profileState) {
-    //     return switch (profileState) {
-    //       ProfileLoadedState() =>
-    //         SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
-    //           create: (context) {
-    //             final cubit = TimerSettingsCubit(
-    //               crashlyticsService: context.services.crashlyticsService,
-    //             );
-    //             if (timerSettings != null) {
-    //               cubit.timerSettingsChanged(timerSettings!);
-    //             }
-    //             return cubit;
-    //           },
-    //           builder: (context, state) {
-    //             return TimerSettingsView(timerSettings: state.timerSettings);
-    //           },
-    //         ),
-    //       _ =>
-    //         SizedBox.shrink(), // Show nothing while profile is loading or in error state
-    //     };
-    //   },
-    // );
-
-    // return SafeProfileSettings(
-    //   key: ValueKey('timer_settings_branch'),
-    //   builder: (context, profileSettings) =>
-    //       SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
-    //         create: (context) {
-    //           final cubit = TimerSettingsCubit(
-    //             crashlyticsService: context.services.crashlyticsService,
-    //           );
-    //           if (timerSettings != null) {
-    //             cubit.timerSettingsChanged(timerSettings!);
-    //           }
-    //           return cubit;
-    //         },
-    //         builder: (context, state) {
-    //           return TimerSettingsView(
-    //             timerSettings: state.timerSettings,
-    //             profileSettings: profileSettings,
-    //           );
-    //         },
-    //       ),
-    // );
   }
 
   /// Builds the chanting-session branch of the home screen.
-  ///
-  /// Wraps [ChantingSettingsView] in a [SafeProfileSettings] provider:
-  ///
-  /// 1. [SafeProfileSettings] — resolves the current [ProfileSettings] from
-  ///    the ambient [ProfileCubit], falling back to an anonymous profile.
-  ///
   Widget buildChantingSettingsView(BuildContext context) {
     return SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
       create: (context) => ChantingSettingsCubit(
@@ -229,22 +123,5 @@ class HomeScreen extends StatelessWidget {
         availableChants: state.availableChants,
       ),
     );
-
-    // return SafeProfileSettings(
-    //   key: ValueKey('chanting_settings_branch'),
-    //   builder: (context, profileSettings) =>
-    //       SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
-    //         create: (context) => ChantingSettingsCubit(
-    //           chantsRepository: context.repos.chantsRepository,
-    //           sharedPreferencesService:
-    //               context.services.sharedPreferencesService,
-    //           crashlyticsService: context.services.crashlyticsService,
-    //         )..loadAvailableChants(),
-    //         builder: (context, state) => ChantingSettingsView(
-    //           availableChants: state.availableChants,
-    //           profileSettings: profileSettings,
-    //         ),
-    //       ),
-    // );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/practice/session/data/datasource/session_data_provider.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session_query_options.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session_query_options.dart';
 
 import '../../../../../core/data/datasource/firebase_data_provider.dart';
 import '../../../../../core/data/datasource/firebase_model_extension.dart';

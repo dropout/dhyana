@@ -4,6 +4,8 @@ import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
+import 'package:flutter/services.dart';
+import 'package:gaimon/gaimon.dart';
 
 /// Service that provides timer-specific audio functionality by delegating to
 /// the [AppAudioHandler] with appropriate custom actions.
@@ -22,9 +24,14 @@ class DefaultTimerAudioService implements TimerAudioService {
   /// Plays the specified [sound] by sending a custom action to the [AppAudioHandler].
   @override
   Future<void> playSound(Sound sound) =>
-    _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {
-      'sound': sound.name,
-    });
+    switch (sound.type) {
+      SoundType.audio => _playAudioSound(sound),
+      SoundType.haptic => _playHapticSound(sound),
+    };
+
+    // _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {
+    //   'sound': sound.name,
+    // });
   
   /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].
   @override
@@ -63,5 +70,17 @@ class DefaultTimerAudioService implements TimerAudioService {
     _audioHandler.customAction(AppAudioHandler.switchAction, {
       'handlerId': SoTimerAudioHandler.handlerId,
     });
-    
+  
+  Future<void> _playAudioSound(Sound sound) {
+    return _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {
+      'sound': sound.name,
+    });
+  }
+
+  Future<void> _playHapticSound(Sound sound) async {
+    final String response = await rootBundle
+      .loadString(sound.assetPath);
+    Gaimon.patternFromData(response);
+  }
+
 }

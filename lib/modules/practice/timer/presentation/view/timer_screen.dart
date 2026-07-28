@@ -1,11 +1,7 @@
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
-import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/modules/practice/session/domain/model/session.dart';
-import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_cover.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
@@ -19,12 +15,6 @@ class TimerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return TimerContext(
-    //   onInit: TimerContext.defaultInitHook,
-    //   timerSettings: timerSettings,
-    //   child: buildScaffolding(context),
-    // );
-
     return BlocProvider<TimerCubit>(
       create: (context) {
         final timerCubit = GetIt.instance.get<TimerCubit>(param1: timerSettings);
@@ -36,7 +26,7 @@ class TimerScreen extends StatelessWidget {
   }
 
   Widget buildScaffolding(BuildContext context) {
-    return BlocConsumer<TimerCubit, TimerState>(
+    return BlocBuilder<TimerCubit, TimerState>(
       builder: (BuildContext context, TimerState timerState) {
         return Scaffold(
           backgroundColor: Colors.black,
@@ -48,24 +38,7 @@ class TimerScreen extends StatelessWidget {
             ),
           ),
         );
-      },
-      listenWhen: (TimerState prevState, TimerState currentState) {
-        return prevState.timerStatus != TimerStatus.completed &&
-            currentState.timerStatus == TimerStatus.completed;
-      },
-      listener: (BuildContext context, TimerState timerState) {
-        Session session = Session(
-          id: context.services.idGeneratorService.sessionId(),
-          type: SessionType.sitting,
-          timerSettings: timerSettings,
-          startTime:
-              timerState.startTime ??
-              DateTime.now().subtract(timerState.elapsedTime),
-          endTime: timerState.endTime ?? DateTime.now(),
-          duration: timerState.elapsedTime,
-        );
-        SessionCompletedRoute($extra: session).replace(context);
-      },
+      },      
     );
   }
 }

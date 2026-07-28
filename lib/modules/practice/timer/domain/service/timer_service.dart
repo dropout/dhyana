@@ -1,3 +1,4 @@
+// Legacy timer, not in use currently, but kept for reference and potential future use.
 abstract interface class TimerService {
   void start();
   void stop();
