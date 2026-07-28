@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/social/data/datasource/firebase_presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';

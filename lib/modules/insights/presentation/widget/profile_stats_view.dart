@@ -4,10 +4,10 @@ import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cu
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/stats_data_area_sliver.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
-import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
-import 'package:dhyana/core/presentation/widget/util/title_effect.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/view/util/title_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

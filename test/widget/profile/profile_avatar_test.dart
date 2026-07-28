@@ -2,7 +2,7 @@ import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/util/default_profile_data.dart';
-import 'package:dhyana/core/presentation/widget/profile/profile_avatar.dart';
+import 'package:dhyana/core/presentation/view/profile/profile_avatar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';

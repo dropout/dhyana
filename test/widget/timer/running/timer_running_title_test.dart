@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_time.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_title.dart';
@@ -17,7 +17,7 @@ void main() {
 
     testWidgets('shows warmup text when there is warmup time', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
         )
       );
@@ -41,7 +41,7 @@ void main() {
 
     testWidgets('does not show warmup text when timer running', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
           warmup: Duration.zero,
         )

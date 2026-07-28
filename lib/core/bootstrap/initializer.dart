@@ -8,15 +8,20 @@ import 'package:dhyana/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/presentation/app_keys.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
+import 'package:dhyana/modules/profile/routes.dart';
 import 'package:dhyana/util/assets.dart';
 import 'package:dhyana/util/firebase_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,6 +63,16 @@ class Initializer with LoggerMixin {
     final audioSession = await AudioSession.instance;
     await audioSession.configure(getAudioSessionConfiguration());
     await audioSession.setActive(true);
+
+    logger.t('Configuring app router');
+    final router = GoRouter(
+      debugLogDiagnostics: kDebugMode,
+      navigatorKey: AppWidgetKeys.rootNavigatorKey,
+      initialLocation: '/',
+      routes: [...$coreRoutes, ...$accountRoutes],
+      // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
+    );
+    getIt.registerSingleton<GoRouter>(router);
 
     logger.t('Configuring dependency injection');
     getIt.registerSingleton<AppAudioHandler>(audioHandler);

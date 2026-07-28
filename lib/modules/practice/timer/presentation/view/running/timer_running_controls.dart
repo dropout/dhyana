@@ -1,6 +1,9 @@
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/intersperse.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +15,7 @@ import 'package:dhyana/core/presentation/design_spec.dart';
 /// with animated appearance/disappearance of menu items
 class TimerRunningControls extends StatefulWidget {
   final double iconSize = 64;
-  final TimerCubitState timerState;
+  final TimerState timerState;
 
   const TimerRunningControls({required this.timerState, super.key});
 
@@ -201,7 +204,7 @@ class TimerRunningControlsState extends State<TimerRunningControls>
     return listItems.intersperse(const SizedBox(height: DesignSpec.spacingMd));
   }
 
-  Widget _buildPauseMenu(BuildContext context, TimerCubitState timerState) {
+  Widget _buildPauseMenu(BuildContext context, TimerState timerState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -210,7 +213,7 @@ class TimerRunningControlsState extends State<TimerRunningControls>
     );
   }
 
-  Widget _buildMainButton(BuildContext context, TimerCubitState timerState) {
+  Widget _buildMainButton(BuildContext context, TimerState timerState) {
     final EdgeInsets padding = const EdgeInsets.all(DesignSpec.paddingLg);
     final Key key = const Key('timer_running_controls_main_button');
     switch (timerState.timerStatus) {

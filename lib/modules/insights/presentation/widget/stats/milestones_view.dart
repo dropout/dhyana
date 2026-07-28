@@ -1,7 +1,7 @@
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/widget/util/app_card.dart';
+import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:flutter/material.dart';
 

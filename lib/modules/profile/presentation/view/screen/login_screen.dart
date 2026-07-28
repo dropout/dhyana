@@ -1,10 +1,10 @@
-import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
+import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
 import 'package:dhyana/modules/profile/presentation/view/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
 
-import '../../../../../core/presentation/widget/app_bar/custom_app_bar.dart';
+import '../../../../../core/presentation/view/app_bar/custom_app_bar.dart';
 
 class LoginScreen extends StatelessWidget {
 

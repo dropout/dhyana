@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/presentation/widget/input/form_builder_profile_image_picker.dart';
+import 'package:dhyana/core/presentation/view/input/form_builder_profile_image_picker.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

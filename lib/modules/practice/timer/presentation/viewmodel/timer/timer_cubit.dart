@@ -6,19 +6,31 @@ import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/core/domain/service/haptics_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/usecase/configure_event_scheduler_use_case.dart';
+import 'package:dhyana/modules/practice/timer/domain/usecase/start_timer_use_case.dart';
+import 'package:dhyana/modules/practice/timer/domain/usecase/playback_state_change_use_case.dart';
+import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/util/timer_event_scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'timer_state.dart';
+// part 'timer_state.dart';
 part 'timer_cubit.freezed.dart';
 
+/// A source of elapsed time that is based 
+/// on the playback state of a [TimerAudioService].
+/// To keep the timer running in the background we must rely on audio playback,
+/// so we use the playback state of the audio service that plays a silent sound
+/// to determine the elapsed time.
 class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
   final TimerAudioService timerAudioService;
 
-  TimerAudioServiceElapsedTimeSource(this.timerAudioService);
+  const TimerAudioServiceElapsedTimeSource(this.timerAudioService);
 
   @override
   Stream<Duration> get elapsedTimeStream => timerAudioService
@@ -27,11 +39,22 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
     .distinct();
 }
 
-class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
+/// Cubit that manages the state of a timer, 
+/// including its settings, status, and elapsed time.
+/// In this viewmodel, we skip usecases that would 
+/// contain a single line service calßl for pragmatic reasons.
+class TimerCubit extends Cubit<TimerState> with LoggerMixin {
+  // Services
   final TimerAudioService audioService;
   final HapticsService hapticsService;
   final TimerEventScheduler eventScheduler;
   final CrashlyticsService crashlyticsService;
+
+  // Use cases  
+  final ConfigureEventSchedulerUseCase configureEventSchedulerUseCase;
+  final StartTimerUseCase startTimerUseCase;
+  final PlaybackStateChangeUseCase playbackStateChangeUseCase;
+  
 
   StreamSubscription? _playbackStateSub;
 
@@ -41,56 +64,61 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
     required this.hapticsService,
     required this.eventScheduler,
     required this.crashlyticsService,
-  }) : super(TimerCubitState.initial(timerSettings: timerSettings)) {
-    _configureEventScheduler(state.timerSettings);    
+    required this.configureEventSchedulerUseCase,
+    required this.startTimerUseCase,
+    required this.playbackStateChangeUseCase,
+  }) : super(TimerState.initial(timerSettings: timerSettings)) {
+    // _configureEventScheduler(state.timerSettings);
+
+    // TODO: Execute event scheduler configuration from usecase
 
     // Frame the subscription to start after the timer is started, to avoid reacting 
     // to playback state changes before the timer starts running.
     // Also, only listen to playback state changes until the timer is completed, 
     // to avoid reacting to any playback state changes after the timer is done 
     _playbackStateSub = audioService.playbackStateStream
-        .skipWhile((_) => state.startTime == null)
-        .takeWhile((_) => state.timerStatus != TimerStatus.completed)
-        .listen(_onPlaybackStateChanged);
+      .skipWhile((_) => state.startTime == null)
+      .takeWhile((_) => state.timerStatus != TimerStatus.completed)
+      .listen(_onPlaybackStateChanged);
   }
 
   Future<void> start() async {
     try {
-      logger.t('Starting timer - ${clock.now()}');
-      final startFuture = audioService.start(state.timerSettings);
-      eventScheduler.reset();      
+      // logger.t('Starting timer - ${clock.now()}');
+      // final startFuture = audioService.start(state.timerSettings);
+      // eventScheduler.reset();      
 
-      TimerStage initialStage = state.timerSettings.hasWarmupTime
-          ? TimerStage.warmup
-          : TimerStage.timer;
+      // TimerStage initialStage = state.timerSettings.hasWarmupTime
+      //     ? TimerStage.warmup
+      //     : TimerStage.timer;
 
-      // Play starting sound immediately if there is no warmup time
-      // otherwise, it will be played when the warmup is completed
-      Future playSoundFuture = Future.value(null);
-      if (state.timerSettings.hasWarmupTime == false) {
-        playSoundFuture = audioService.playSound(
-          state.timerSettings.startingSound,
-        );
-      }
+      // // Play starting sound immediately if there is no warmup time
+      // // otherwise, it will be played when the warmup is completed
+      // Future playSoundFuture = Future.value(null);
+      // if (state.timerSettings.hasWarmupTime == false) {
+      //   playSoundFuture = audioService.playSound(
+      //     state.timerSettings.startingSound,
+      //   );
+      // }
 
-      // Start the event scheduler
-      eventScheduler.start();
+      // // Start the event scheduler
+      // eventScheduler.start();
 
-      // Wait for the audio service to finish setting up the timer session
-      await startFuture;
-      emit(
-        state.copyWith(
-          startTime: clock.now(),
-          timerStatus: TimerStatus.running,
-          timerStage: initialStage,
-        ),
-      );
-      logger.t('Timer started - ${clock.now()}');
+      // // Wait for the audio service to finish setting up the timer session
+      // await startFuture;
+      // emit(
+      //   state.copyWith(
+      //     startTime: clock.now(),
+      //     timerStatus: TimerStatus.running,
+      //     timerStage: initialStage,
+      //   ),
+      // );
+      // logger.t('Timer started - ${clock.now()}');
 
-      // After waiting for the timer session to be setup, 
-      // wait for the starting sound to be played
-      // then let the method terminate
-      await playSoundFuture;
+      // // After waiting for the timer session to be setup, 
+      // // wait for the starting sound to be played
+      // // then let the method terminate
+      // await playSoundFuture;
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -119,33 +147,6 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
     emit(state.copyWith(timerStatus: TimerStatus.completed, endTime: n));
   }
 
-  /// Configures the event scheduler with the appropriate timer 
-  /// events based on the provided [timerSettings]. 
-  void _configureEventScheduler(TimerSettings timerSettings) {
-    // Schedule the timer completion event
-    eventScheduler.addListener(timerSettings.totalTime, _onTimerCompleted);
-
-    // Schedule the warmup completion event, if there is a warmup time
-    if (timerSettings.hasWarmupTime) {
-      eventScheduler.addListener(
-        timerSettings.warmup,
-        _warmupCompleted,
-      );
-    }
-
-    // Schedule timer interval events, if there are any intervals
-    final sectionDuration = Duration(milliseconds: (timerSettings.duration.inMilliseconds / (timerSettings.intervalCount + 1)).round());    
-    for (var i=0; i<timerSettings.intervalCount; i++) {
-      eventScheduler.addListener(
-        timerSettings.warmup + (sectionDuration * (i + 1)),
-        (elapsedTime) => _onInterval(),
-      );      
-    }
-    
-    logger.t('Event scheduler warmup complete @ ${timerSettings.warmup}');
-    logger.t('Event scheduler interval times @ ${List.generate(timerSettings.intervalCount, (i) => timerSettings.warmup + (sectionDuration * (i + 1)))}');
-    logger.t('Event scheduler total time complete @ ${timerSettings.totalTime}');
-  }
 
   /// Updates time values, and playing/paused status based on [playbackState]
   /// changes from the audio service.
@@ -178,16 +179,16 @@ class TimerCubit extends Cubit<TimerCubitState> with LoggerMixin {
 
   /// Handles warmup completion by playing the starting sound and transitioning
   /// to the timer stage.
-  void _warmupCompleted(Duration elapsedWarmupTime) {
-    logger.t('Warmup completed - ${clock.now()}');
+  void _warmupCompleted(Duration elapsedWarmupTime) {    
     audioService.playSound(state.timerSettings.startingSound);
     emit(state.copyWith(timerStage: TimerStage.timer));
+    logger.t('Warmup completed - ${clock.now()}');
   }
 
   /// Handles interval events by playing the interval sound.
-  void _onInterval() {    
+  void _onInterval(Duration elapsedTime) {
     audioService.playSound(state.timerSettings.intervalSound);
-    logger.t('Interval reached, playing interval sound: ${state.timerSettings.intervalSound.name} - ${clock.now()}');
+    logger.t('Interval reached, playing interval sound: ${state.timerSettings.intervalSound.name} - Elapsed time: ${elapsedTime.formatHHmmss()}');
   }
 
   /// Handles timer completion by playing the ending sound

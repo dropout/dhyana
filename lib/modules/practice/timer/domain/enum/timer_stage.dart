@@ -1,0 +1,4 @@
+enum TimerStage {
+  warmup,
+  timer
+}

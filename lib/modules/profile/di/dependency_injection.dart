@@ -11,7 +11,7 @@ import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cu
 import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
 import 'package:dhyana/util/firebase_provider.dart';

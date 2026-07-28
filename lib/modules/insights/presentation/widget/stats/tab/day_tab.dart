@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/model/day.dart';
 import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/model/stats_interval.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
 
 class DaysTab extends StatefulWidget {
   final String profileId;

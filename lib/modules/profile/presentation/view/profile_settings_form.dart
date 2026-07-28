@@ -1,13 +1,13 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
-import 'package:dhyana/core/presentation/widget/dialog/delete_profile_dialog.dart';
+import 'package:dhyana/core/presentation/view/dialog/delete_profile_dialog.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_clear_cache.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_health_connect.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_switch.dart';
-import 'package:dhyana/core/presentation/widget/util/app_button.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/dialog_helper.dart';
-import 'package:dhyana/core/presentation/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/view/util/app_button.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/dialog_helper.dart';
+import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 

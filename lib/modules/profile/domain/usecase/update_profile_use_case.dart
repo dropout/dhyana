@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/util/blurhash.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';

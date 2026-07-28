@@ -3,7 +3,7 @@ import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/model/stats_interval.dart';
 import 'package:dhyana/modules/insights/domain/model/year.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/bar_chart_page/years_bar_chart_page.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

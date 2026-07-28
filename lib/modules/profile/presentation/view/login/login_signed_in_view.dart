@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/widget/util/app_button.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_button.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/modules/profile/routes.dart';
 import 'package:flutter/material.dart';
 

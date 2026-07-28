@@ -1,7 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
@@ -53,7 +54,7 @@ class MockPresenceBloc
   implements PresenceCubit {}
 
 class MockTimerCubit
-  extends MockCubit<TimerCubitState> 
+  extends MockCubit<TimerState> 
   implements TimerCubit {}
 
 class MockTimerEventScheduler 

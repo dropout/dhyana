@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
 import 'package:dhyana/modules/profile/di/dependency_injection.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/core/presentation/widget/app_bar/custom_app_bar.dart';
-import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/core/navigation/app_routes.dart';
+import 'package:dhyana/core/presentation/view/app_bar/custom_app_bar.dart';
+import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/widget/util/app_button.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
-import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_button.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

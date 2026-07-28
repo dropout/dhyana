@@ -1,3 +1,6 @@
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
@@ -37,7 +40,7 @@ void main() {
 
     testWidgets('main button shows play icon when TimerStatus.idle', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
         )
       );
@@ -63,7 +66,7 @@ void main() {
 
     testWidgets('main button shows pause icon when TimerStatus.running', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings()
       ).copyWith(
         timerStatus: TimerStatus.running,
@@ -90,7 +93,7 @@ void main() {
 
     testWidgets('main button shows play icon when TimerStatus.paused', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings()
       ).copyWith(
         timerStatus: TimerStatus.paused,
@@ -117,7 +120,7 @@ void main() {
 
     testWidgets('shows pause menu when TimerStatus.paused and has warmup time', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings()
       ).copyWith(
         timerStatus: TimerStatus.paused,
@@ -150,7 +153,7 @@ void main() {
 
     testWidgets('shows pause menu when TimerStatus.paused and has no warmup time', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
           warmup: Duration.zero,
         )
@@ -186,7 +189,7 @@ void main() {
 
     testWidgets('can pause the timer', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
         )
       ).copyWith(
@@ -217,7 +220,7 @@ void main() {
 
     testWidgets('can resume the timer', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
         )
       ).copyWith(
@@ -248,7 +251,7 @@ void main() {
     // Testing against popping routes is a bit tricky
     testWidgets('can discard the session', (WidgetTester tester) async {
 
-      TimerCubitState timerState = TimerCubitState.initial(
+      TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
           warmup: Duration.zero,
         ),
@@ -321,7 +324,7 @@ void main() {
 
     testWidgets('can finish the timer', (WidgetTester tester) async {
 
-      final TimerCubitState timerState = TimerCubitState.initial(
+      final TimerState timerState = TimerState.initial(
         timerSettings: TimerSettings(
         )
       ).copyWith(

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/widget/util/app_version_number.dart';
+import 'package:dhyana/core/presentation/view/util/app_version_number.dart';
 import 'package:flutter/material.dart';
 
 class ProfileFooter extends StatelessWidget {

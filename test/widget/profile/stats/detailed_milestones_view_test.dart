@@ -4,7 +4,7 @@ import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_milestones_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_context_providers.dart';

@@ -1,10 +1,10 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/widget/util/app_card.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/gap.dart';
-import 'package:dhyana/core/presentation/widget/util/intersperse.dart';
+import 'package:dhyana/core/presentation/view/util/app_card.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/core/presentation/view/util/intersperse.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,12 +1,13 @@
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
-import 'package:dhyana/core/navigation/app_routes.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/timer_context.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_cover.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_running_view.dart';
 import 'package:get_it/get_it.dart';
@@ -35,8 +36,8 @@ class TimerScreen extends StatelessWidget {
   }
 
   Widget buildScaffolding(BuildContext context) {
-    return BlocConsumer<TimerCubit, TimerCubitState>(
-      builder: (BuildContext context, TimerCubitState timerState) {
+    return BlocConsumer<TimerCubit, TimerState>(
+      builder: (BuildContext context, TimerState timerState) {
         return Scaffold(
           backgroundColor: Colors.black,
           extendBodyBehindAppBar: true,
@@ -48,11 +49,11 @@ class TimerScreen extends StatelessWidget {
           ),
         );
       },
-      listenWhen: (TimerCubitState prevState, TimerCubitState currentState) {
+      listenWhen: (TimerState prevState, TimerState currentState) {
         return prevState.timerStatus != TimerStatus.completed &&
             currentState.timerStatus == TimerStatus.completed;
       },
-      listener: (BuildContext context, TimerCubitState timerState) {
+      listener: (BuildContext context, TimerState timerState) {
         Session session = Session(
           id: context.services.idGeneratorService.sessionId(),
           type: SessionType.sitting,

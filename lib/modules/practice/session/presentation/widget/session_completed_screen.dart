@@ -2,14 +2,14 @@ import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cu
 import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/session/domain/model/session.dart';
-import 'package:dhyana/core/navigation/app_routes.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';
-import 'package:dhyana/core/presentation/widget/util/app_button.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
-import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
-import 'package:dhyana/core/presentation/widget/util/signed_in.dart';
+import 'package:dhyana/core/presentation/view/util/app_button.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/view/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

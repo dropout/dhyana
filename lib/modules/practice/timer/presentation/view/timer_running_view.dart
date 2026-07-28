@@ -1,8 +1,9 @@
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_title.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_time.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/running/timer_running_controls.dart';
@@ -10,7 +11,7 @@ import 'package:dhyana/core/presentation/design_spec.dart';
 
 class TimerRunningView extends StatefulWidget {
 
-  final TimerCubitState timerState;
+  final TimerState timerState;
   final WakelockService wakelockService;
 
   const TimerRunningView({

@@ -1,10 +1,10 @@
-import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/profile/presentation/view/login/login_headline_text_effect.dart';
-import 'package:dhyana/core/presentation/widget/util/app_button.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/app_button.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

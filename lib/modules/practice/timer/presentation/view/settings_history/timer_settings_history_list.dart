@@ -2,13 +2,13 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_setti
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
-import 'package:dhyana/core/navigation/app_routes.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/settings_history/timer_settings_history_list_item.dart';
-import 'package:dhyana/core/presentation/widget/util/app_animation.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/intersperse.dart';
-import 'package:dhyana/core/presentation/widget/util/toast.dart';
+import 'package:dhyana/core/presentation/view/util/app_animation.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/intersperse.dart';
+import 'package:dhyana/core/presentation/view/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

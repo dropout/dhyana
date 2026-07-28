@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
-import 'package:dhyana/core/presentation/default_screen_setup.dart';
+import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';

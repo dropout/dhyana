@@ -1,10 +1,10 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/navigation/app_routes.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/widget/dialog/signout_dialog.dart';
-import 'package:dhyana/core/presentation/widget/util/app_card.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/dialog_helper.dart';
+import 'package:dhyana/core/presentation/view/dialog/signout_dialog.dart';
+import 'package:dhyana/core/presentation/view/util/app_card.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/dialog_helper.dart';
 import 'package:dhyana/modules/profile/routes.dart';
 import 'package:flutter/material.dart';
 

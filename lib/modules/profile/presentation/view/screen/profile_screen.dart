@@ -1,12 +1,12 @@
-import 'package:dhyana/core/presentation/bloc/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/presentation/widget/app_bar/custom_back_button.dart';
-import 'package:dhyana/core/navigation/app_routes.dart';
+import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
+import 'package:dhyana/core/presentation/app_routes.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_view.dart';
-import 'package:dhyana/core/presentation/default_screen_setup.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

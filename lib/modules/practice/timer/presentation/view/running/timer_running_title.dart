@@ -1,17 +1,17 @@
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class TimerRunningTitle extends StatefulWidget {
-
-  final TimerCubitState timerState;
+  final TimerState timerState;
   final Offset positionOffset;
 
   const TimerRunningTitle({
     required this.timerState,
     required this.positionOffset,
-    super.key
+    super.key,
   });
 
   @override
@@ -19,7 +19,6 @@ class TimerRunningTitle extends StatefulWidget {
 }
 
 class _TimerRunningTitleState extends State<TimerRunningTitle> {
-
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
@@ -33,10 +32,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
             end: const Offset(0.0, 0.0),
           ).animate(animation),
           child: FadeTransition(
-            opacity: Tween<double>(
-              begin: 0,
-              end: 1,
-            ).animate(animation),
+            opacity: Tween<double>(begin: 0, end: 1).animate(animation),
             child: child,
           ),
         );
@@ -44,7 +40,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
     );
   }
 
-  Widget? buildText(BuildContext context, TimerCubitState timerState) {
+  Widget? buildText(BuildContext context, TimerState timerState) {
     TextStyle style = Theme.of(context).textTheme.titleLarge!.copyWith(
       fontFamily: DesignSpec.condensedFontFamilyName,
       fontWeight: FontWeight.bold,
@@ -61,5 +57,4 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
         );
     }
   }
-
 }

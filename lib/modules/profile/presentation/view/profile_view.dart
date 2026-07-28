@@ -1,10 +1,10 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_footer.dart';
-import 'package:dhyana/core/presentation/widget/profile/profile_image.dart';
+import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_menu.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view.dart';
-import 'package:dhyana/core/presentation/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 
 import '../../../insights/presentation/widget/stats/consecutive_days_view.dart';

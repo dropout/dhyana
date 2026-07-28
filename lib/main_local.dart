@@ -4,7 +4,7 @@ import 'package:dhyana/util/firebase_provider.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/bootstrap/initializer.dart';
 
-import 'core/presentation/widget/app.dart';
+import 'core/presentation/view/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

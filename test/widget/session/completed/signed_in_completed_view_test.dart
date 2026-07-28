@@ -11,8 +11,8 @@ import 'package:dhyana/modules/practice/session/presentation/widget/completed/mi
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/progress_summary.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/session_result.dart';
 import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
-import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

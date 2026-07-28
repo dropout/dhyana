@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 
 class UpdateProfileSettingsUseCase {
   final ProfileRepository profileRepository;

@@ -1,7 +1,7 @@
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/donate/presentation/widget/donate_button.dart';
-import 'package:dhyana/core/presentation/widget/util/app_context.dart';
-import 'package:dhyana/core/presentation/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

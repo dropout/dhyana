@@ -12,8 +12,8 @@ import 'package:dhyana/modules/insights/presentation/widget/stats/tab/day_tab.da
 import 'package:dhyana/modules/insights/presentation/widget/stats/tab/month_tab.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/tab/week_tab.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/tab/year_tab.dart';
-import 'package:dhyana/core/presentation/widget/util/app_error_display.dart';
-import 'package:dhyana/core/presentation/widget/util/app_loading_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
+import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

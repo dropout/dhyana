@@ -2,7 +2,7 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/insights/domain/model/calculated_stats.dart';
 import 'package:dhyana/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/widget/util/gap.dart';
+import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 
 
