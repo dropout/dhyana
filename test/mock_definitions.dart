@@ -2,16 +2,17 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/audio/app_audio_handler.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
-import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
+import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
-import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
+import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
@@ -62,7 +63,7 @@ class MockTimerEventScheduler
   implements TimerEventScheduler {}
 
 class MockSessionCompletedCubit
-  extends MockCubit<SessionCompletedState>
+  extends MockCubit<SessionCompletedData>
   implements SessionCompletedCubit {}
 
 // Services --------------------------------------------------------------------

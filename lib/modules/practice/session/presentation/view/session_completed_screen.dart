@@ -1,10 +1,10 @@
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
+import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/presentation/app_routes.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_out_completed_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/signed_in_completed_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/signed_out_completed_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
@@ -12,6 +12,7 @@ import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:dhyana/core/presentation/view/util/signed_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class SessionCompletedScreen extends StatelessWidget {
 
@@ -65,13 +66,7 @@ class SessionCompletedScreen extends StatelessWidget {
 
   Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
     return BlocProvider<SessionCompletedCubit>(
-      create: (context) => SessionCompletedCubit(
-        profileRepository: context.repos.profileRepository,
-        statisticsRepository: context.repos.statisticsRepository,
-        idGeneratorService: context.services.idGeneratorService,
-        crashlyticsService: context.services.crashlyticsService,
-        mindfulMinutesService: context.services.mindfulMinutesService,
-      ),
+      create: (context) => GetIt.instance.get<SessionCompletedCubit>(),
       child: SignedInCompletedView(
         profileId: state.profile.id,
         session: session,

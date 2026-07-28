@@ -9,7 +9,7 @@ import 'package:dhyana/modules/profile/presentation/view/profile_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/consecutive_days_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/milestones_view.dart';
 import 'package:dhyana/modules/insights/presentation/widget/stats/summary_view.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

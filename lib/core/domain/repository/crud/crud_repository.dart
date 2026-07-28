@@ -1,5 +1,6 @@
 import 'package:dhyana/core/domain/entity/entity.dart';
 
+/// Base interface for CRUD operations on entities of type M.
 abstract interface class CrudRepository<M extends Entity> {
 
   Future<void> create(M model);

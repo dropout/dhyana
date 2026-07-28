@@ -17,8 +17,8 @@ import '../../modules/social/presentation/view/presence_screen.dart';
 import '../../modules/profile/presentation/view/screen/profile_settings_screen.dart';
 import '../../modules/insights/presentation/widget/profile_stats_screen.dart';
 
-import '../../modules/practice/session/presentation/widget/session_completed_screen.dart';
-import '../../modules/practice/session/presentation/widget/session_history_screen.dart';
+import '../../modules/practice/session/presentation/view/session_completed_screen.dart';
+import '../../modules/practice/session/presentation/view/session_history_screen.dart';
 import '../../modules/practice/timer/presentation/view/timer_screen.dart';
 import '../../modules/practice/timer/presentation/view/timer_settings_history_screen.dart';
 import 'auth_redirect_hook.dart';

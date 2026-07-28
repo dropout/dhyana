@@ -18,7 +18,7 @@ import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_set
 import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
+import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_chant_cache_manager_service.dart';

@@ -1,4 +1,4 @@
-# Timer module
+# Timer Module
 
 ## Overview
 The timer module is responsible for managing timer sessions, including setup, execution, and history management. It integrates with audio services to provide interval and ending sounds, and ensures accurate time measurement even when the app is running in the background.

@@ -76,7 +76,7 @@ class StartTimerUseCase with LoggerMixin {
 
     // Execute additional tasks such as showing presence and 
     // recording timer settings history
-    _executeAdditionalTasks();
+    _executeAdditionalTasks(state.timerSettings);
 
     logger.t('Timer session is ready and started - ${clock.now()}');
     return state.copyWith(

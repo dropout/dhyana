@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 
-import 'crud_repository.dart';
+import 'crud/crud_repository.dart';
 
 abstract interface class PresenceRepository
   implements CrudRepository<Presence> {

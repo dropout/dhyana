@@ -3,7 +3,7 @@ import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dar
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_query_options.dart';
-import 'package:dhyana/core/domain/repository/crud_repository_operations.dart';
+import 'package:dhyana/core/domain/repository/crud/crud_repository_operations.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 
 class DefaultProfileRepository

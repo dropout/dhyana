@@ -1,5 +1,6 @@
+import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/modules/practice/session/presentation/bloc/session_completed/session_completed_cubit.dart';
+import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
@@ -7,10 +8,10 @@ import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_area.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/milestone_progress_view.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/progress_summary.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/session_result.dart';
-import 'package:dhyana/modules/practice/session/presentation/widget/completed/signed_in_completed_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/progress_summary.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/session_result.dart';
+import 'package:dhyana/modules/practice/session/presentation/view/completed/signed_in_completed_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,10 +70,10 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedInitialState());
+      ).thenReturn(const SessionCompletedInitialData());
       when(
         () => mockSessionCompletedCubit.stream,
-      ).thenAnswer((_) => const Stream<SessionCompletedState>.empty());
+      ).thenAnswer((_) => const Stream<SessionCompletedData>.empty());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -134,7 +135,7 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedState.initial());
+      ).thenReturn(const SessionCompletedData.initial());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -178,7 +179,7 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedState.loading());
+      ).thenReturn(const SessionCompletedData.loading());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -220,7 +221,7 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedState.error());
+      ).thenReturn(const SessionCompletedData.error());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -269,7 +270,7 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(SessionCompletedState.saving(updateResult: updateResult));
+      ).thenReturn(SessionCompletedData.saving(updateResult: updateResult));
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -322,7 +323,7 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(SessionCompletedState.saved(updateResult: updateResult));
+      ).thenReturn(SessionCompletedData.saved(updateResult: updateResult));
 
       when(
         () => mockSessionCompletedCubit.logSession(
