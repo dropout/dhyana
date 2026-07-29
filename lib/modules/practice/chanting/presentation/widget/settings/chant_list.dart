@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
-import 'package:dhyana/util/remap_range.dart';
+import 'package:dhyana/core/util/remap_range.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chant_card.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/settings/add_chant_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';

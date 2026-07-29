@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/audio/so_chanting_playback_reporter.dart';
+import 'package:dhyana/core/audio/so_chanting_playback_reporter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeTimer implements Timer {

@@ -1,4 +1,4 @@
-import 'package:dhyana/util/remap_range.dart';
+import 'package:dhyana/core/util/remap_range.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 

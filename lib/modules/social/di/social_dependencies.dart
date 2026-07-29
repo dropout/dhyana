@@ -1,11 +1,11 @@
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/social/data/datasource/firebase_presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
-import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;

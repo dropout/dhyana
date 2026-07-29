@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart' as audio_service;
 import 'package:audio_session/audio_session.dart';
-import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/audio/audio_session_configuration.dart';
-import 'package:dhyana/audio/so_chanting_audio_handler.dart';
-import 'package:dhyana/audio/so_timer_audio_handler.dart';
+import 'package:dhyana/core/audio/app_audio_handler.dart';
+import 'package:dhyana/core/audio/audio_session_configuration.dart';
+import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
+import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
@@ -19,16 +19,17 @@ import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provid
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/modules/profile/profile_routes.dart';
-import 'package:dhyana/util/assets.dart';
-import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/core/util/assets.dart';
+import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
 import 'init_result.dart';
 
@@ -74,10 +75,10 @@ class Initializer with LoggerMixin {
       routes: [...$coreRoutes, ...$profileRoutes, ...$timerRoutes, ...$sessionRoutes],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );
-    getIt.registerSingleton<GoRouter>(router);
+    GetIt.I.registerSingleton<GoRouter>(router);
 
     logger.t('Configuring dependency injection');
-    getIt.registerSingleton<AppAudioHandler>(audioHandler);
+    GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);
     initializeDependencies();
 
     // Create data providers shared between builders
@@ -120,8 +121,8 @@ class Initializer with LoggerMixin {
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
     logger.t('');
-    User? user = await getIt<AuthRepository>().authStateChange.first;
-    final profileCubit = getIt<ProfileCubit>();
+    User? user = await GetIt.I<AuthRepository>().authStateChange.first;
+    final profileCubit = GetIt.I<ProfileCubit>();
     if (user != null) {
       logger.t(
         'User is already signed in, initiate profile loading for user: ${user.uid}',

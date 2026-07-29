@@ -3,9 +3,9 @@ import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'days_state.dart';

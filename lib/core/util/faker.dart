@@ -1,4 +1,4 @@
-import 'package:dhyana/util/default_profile_data.dart';
+import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
 
 extension FakerExtension on Faker {

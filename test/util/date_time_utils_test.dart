@@ -1,4 +1,4 @@
-import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

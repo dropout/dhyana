@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
 enum DeleteProfileResult {
 	completed,

@@ -5,8 +5,8 @@ import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/insights/domain/entity/milestone_progress.dart';
 import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
-import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
 /// Updates profile statistics report
 class ProfileStatsReportUpdater with LoggerMixin {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' as m;
 
-import '../../domain/service/overlay_service.dart';
+import '../../service/overlay_service.dart';
 
 class DefaultOverlayService implements OverlayService {
 

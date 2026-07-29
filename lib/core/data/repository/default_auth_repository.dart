@@ -6,7 +6,7 @@ import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/data/datasource/auth/util/is_first_signin.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
 /// Firebase implementation of [AuthRepository]
 /// Uses [FirebaseAuthProvider] to perform authentication operations

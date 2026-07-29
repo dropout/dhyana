@@ -1,4 +1,4 @@
-import 'package:dhyana/util/remap_range.dart';
+import 'package:dhyana/core/util/remap_range.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -2,8 +2,8 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_setti
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
-import 'package:dhyana/core/domain/service/overlay_service.dart';
-import 'package:dhyana/core/domain/service/shader_service.dart';
+import 'package:dhyana/core/service/overlay_service.dart';
+import 'package:dhyana/core/service/shader_service.dart';
 import 'package:dhyana/core/presentation/view/session_start_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/settings/duration_input.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/settings/sound_input.dart';

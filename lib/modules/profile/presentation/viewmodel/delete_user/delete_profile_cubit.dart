@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'delete_profile_state.dart';

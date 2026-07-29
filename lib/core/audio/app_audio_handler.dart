@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
 import 'so_chanting_audio_handler.dart';
 import 'so_timer_audio_handler.dart';

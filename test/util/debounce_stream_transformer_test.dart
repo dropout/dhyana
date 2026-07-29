@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/util/debounce_stream_transformer.dart';
+import 'package:dhyana/core/util/debounce_stream_transformer.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 

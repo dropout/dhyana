@@ -10,7 +10,7 @@ import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/caching_progress.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resources.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/modules/practice/chanting/domain/chant_cache_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';

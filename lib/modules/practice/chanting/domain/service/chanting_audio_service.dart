@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/audio/so_chanting_audio_handler.dart';
+import 'package:dhyana/core/audio/app_audio_handler.dart';
+import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resources.dart';
 
 class ChantingAudioService {

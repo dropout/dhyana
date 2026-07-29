@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
-import 'package:dhyana/util/duration.dart';
+import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_cached_network_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';

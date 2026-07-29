@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dhyana/util/math.dart';
+import 'package:dhyana/core/util/math.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'lat_lng.freezed.dart';

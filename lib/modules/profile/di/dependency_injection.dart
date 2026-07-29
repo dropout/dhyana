@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
@@ -14,7 +14,7 @@ import 'package:dhyana/modules/profile/data/repository/default_profile_repositor
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
-import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/core/util/firebase_provider.dart';
 
 final getIt = GetIt.instance;
 

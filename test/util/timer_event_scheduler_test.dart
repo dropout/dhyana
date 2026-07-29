@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/util/timer_event_scheduler.dart';
+import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeElapsedTimeSource implements ElapsedTimeSource {

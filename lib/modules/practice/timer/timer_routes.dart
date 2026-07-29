@@ -5,7 +5,7 @@ import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart'
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history_screen.dart';
 import 'package:dhyana/modules/profile/profile_routes.dart';
-import 'package:dhyana/util/assets.dart';
+import 'package:dhyana/core/util/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

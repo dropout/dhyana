@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/util/throttle_stream_transformer.dart';
+import 'package:dhyana/core/util/throttle_stream_transformer.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

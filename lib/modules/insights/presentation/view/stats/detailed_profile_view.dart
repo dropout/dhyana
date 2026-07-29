@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
-import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/label_value_detail.dart';

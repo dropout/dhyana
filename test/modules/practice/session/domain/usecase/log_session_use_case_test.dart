@@ -2,7 +2,7 @@ import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/core/domain/service/mindful_minutes_service.dart';
+import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/log_session_statistics_use_case.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';

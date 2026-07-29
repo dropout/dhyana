@@ -1,4 +1,4 @@
-import '../../domain/service/resource_resolver.dart';
+import '../../service/resource_resolver.dart';
 
 class DefaultResourceResolver extends ResourceResolver {
 

@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 
 import 'package:dhyana/core/data/datasource/auth/auth_provider.dart';
@@ -14,18 +14,18 @@ import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/data/repository/default_auth_repository.dart';
 
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/core/domain/service/analytics_service.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/core/domain/service/functions_service.dart';
-import 'package:dhyana/core/domain/service/haptics_service.dart';
-import 'package:dhyana/core/domain/service/id_generator_service.dart';
-import 'package:dhyana/core/domain/service/mindful_minutes_service.dart';
-import 'package:dhyana/core/domain/service/overlay_service.dart';
-import 'package:dhyana/core/domain/service/remote_settings_service.dart';
-import 'package:dhyana/core/domain/service/resource_resolver.dart';
-import 'package:dhyana/core/domain/service/shader_service.dart';
-import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
-import 'package:dhyana/core/domain/service/wakelock_service.dart';
+import 'package:dhyana/core/service/analytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/functions_service.dart';
+import 'package:dhyana/core/service/haptics_service.dart';
+import 'package:dhyana/core/service/id_generator_service.dart';
+import 'package:dhyana/core/service/mindful_minutes_service.dart';
+import 'package:dhyana/core/service/overlay_service.dart';
+import 'package:dhyana/core/service/remote_settings_service.dart';
+import 'package:dhyana/core/service/resource_resolver.dart';
+import 'package:dhyana/core/service/shader_service.dart';
+import 'package:dhyana/core/service/shared_preferences_service.dart';
+import 'package:dhyana/core/service/wakelock_service.dart';
 
 import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator_service.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_analytics_service.dart';

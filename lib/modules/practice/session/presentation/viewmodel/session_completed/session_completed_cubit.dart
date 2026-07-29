@@ -6,8 +6,8 @@ import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
 /// Cubit to manage the state of session completion and logging
 /// When a session is completed, this cubit handles updating the profile stats,

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'core/bootstrap/init_result.dart';
 import 'core/bootstrap/initializer.dart';
-import 'util/firebase_provider.dart';
+import 'core/util/firebase_provider.dart';
 import 'core/presentation/view/app.dart';
 
 void main() async {

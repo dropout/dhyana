@@ -5,15 +5,15 @@ import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 
-import 'package:dhyana/util/logger_mixin.dart';
-import 'package:dhyana/util/timer_event_scheduler.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/core/util/timer_event_scheduler.dart';
 
 /// A use case that starts the timer, initializes the timer audio service,
 /// and shows the user's presence if authenticated.

@@ -3,8 +3,8 @@ import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart'
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_query_options.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'timer_settings_history_state.dart';

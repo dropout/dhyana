@@ -5,7 +5,7 @@ import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/session_completed_screen.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/session_history_screen.dart';
 import 'package:dhyana/modules/profile/profile_routes.dart';
-import 'package:dhyana/util/assets.dart';
+import 'package:dhyana/core/util/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

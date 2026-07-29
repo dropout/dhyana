@@ -4,7 +4,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:clock/clock.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
@@ -13,9 +13,9 @@ import 'package:dhyana/modules/practice/timer/domain/usecase/complete_timer_use_
 import 'package:dhyana/modules/practice/timer/domain/usecase/configure_event_scheduler_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/start_timer_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/playback_state_change_use_case.dart';
-import 'package:dhyana/util/duration.dart';
-import 'package:dhyana/util/logger_mixin.dart';
-import 'package:dhyana/util/timer_event_scheduler.dart';
+import 'package:dhyana/core/util/duration.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 

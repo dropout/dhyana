@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/core/domain/service/id_generator_service.dart';
+import 'package:dhyana/core/service/id_generator_service.dart';
 
 
 class FirebaseIdGeneratorService implements IdGeneratorService {

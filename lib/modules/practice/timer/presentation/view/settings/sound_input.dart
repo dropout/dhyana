@@ -1,11 +1,11 @@
-import 'package:dhyana/core/domain/service/overlay_service.dart';
+import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/util/localization.dart';
+import 'package:dhyana/core/util/localization.dart';
 
 import 'sound_input_view.dart';
 import 'input_button.dart';

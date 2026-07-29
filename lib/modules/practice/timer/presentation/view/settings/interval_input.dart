@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/service/overlay_service.dart';
+import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/settings/input_view.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/settings/input_button.dart';

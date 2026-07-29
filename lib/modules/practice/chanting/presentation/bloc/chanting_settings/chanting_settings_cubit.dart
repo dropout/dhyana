@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
-import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
+import 'package:dhyana/core/service/shared_preferences_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chanting_settings_state.dart';

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 
 /// Use case for loading a profile and validating its statistics report.

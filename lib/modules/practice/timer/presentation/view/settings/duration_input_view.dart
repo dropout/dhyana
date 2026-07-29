@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/input/int_dial_input.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/settings/input_gap.dart';

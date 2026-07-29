@@ -8,7 +8,7 @@ import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
-import 'package:dhyana/util/location.dart';
+import 'package:dhyana/core/util/location.dart';
 
 
 class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>

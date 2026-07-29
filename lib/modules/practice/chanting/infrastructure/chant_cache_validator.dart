@@ -4,7 +4,7 @@ import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant_asset_metadata.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager_service.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:drift/drift.dart';
 
 class ChantCacheValidationResult {

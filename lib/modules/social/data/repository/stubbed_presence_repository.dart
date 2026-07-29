@@ -4,7 +4,7 @@ import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
-import 'package:dhyana/util/default_profile_data.dart';
+import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
 
 final List<String> maleFirstnames = ['James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Charles', 'Christopher', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth'];

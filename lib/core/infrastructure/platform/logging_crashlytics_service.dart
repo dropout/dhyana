@@ -1,6 +1,6 @@
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 
-import '../../domain/service/crashlytics_service.dart';
+import '../../service/crashlytics_service.dart';
 
 class LoggingCrashlyticsService with LoggerMixin implements CrashlyticsService {
 

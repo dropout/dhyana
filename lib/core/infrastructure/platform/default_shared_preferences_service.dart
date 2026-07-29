@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../domain/service/shared_preferences_service.dart';
+import '../../service/shared_preferences_service.dart';
 
 /// Default implementation of [SharedPreferencesService] using the shared_preferences package.
 class DefaultSharedPreferencesService implements SharedPreferencesService {

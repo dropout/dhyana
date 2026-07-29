@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
-import 'package:dhyana/core/domain/service/wakelock_service.dart';
+import 'package:dhyana/core/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';

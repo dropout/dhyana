@@ -7,11 +7,11 @@ import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resour
 import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_document.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
-import 'package:dhyana/core/domain/service/resource_resolver.dart';
-import 'package:dhyana/util/duration.dart';
-import 'package:dhyana/util/logger_mixin.dart';
+import 'package:dhyana/core/service/resource_resolver.dart';
+import 'package:dhyana/core/util/duration.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

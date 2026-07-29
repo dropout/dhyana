@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dhyana/core/domain/service/mindful_minutes_service.dart';
+import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';

@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
 import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
-import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:get_it/get_it.dart';
 
 void configureInsightsModuleDependencies() {
@@ -18,7 +18,7 @@ void _configureRepostories() {
     final firebaseProvider = GetIt.I.get<FirebaseProvider>();
     return FirebaseStatisticsRepository(
       fireStore: firebaseProvider.firestore,
-      dataProviderFactory: FirebaseDataProviderFactory(
+      dataProviderFactory: FirebaseInsightsDataProviderFactory(
         fireStore: firebaseProvider.firestore,
       )
     );

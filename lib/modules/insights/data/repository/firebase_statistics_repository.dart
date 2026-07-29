@@ -1,4 +1,4 @@
-import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
@@ -10,11 +10,11 @@ import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
 
 class FirebaseStatisticsRepository extends StatisticsRepository {
 
-  final FirebaseDataProviderFactory dataProviderFactory;
+  final FirebaseInsightsDataProviderFactory dataProviderFactory;
 
   FirebaseStatisticsRepository({
     required this.dataProviderFactory, required fireStore,

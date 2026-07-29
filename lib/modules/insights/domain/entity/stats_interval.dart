@@ -1,4 +1,4 @@
-import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'stats_interval.freezed.dart';

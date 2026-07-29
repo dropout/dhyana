@@ -2,11 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/core/domain/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:dhyana/util/logger_mixin.dart';
-import 'package:dhyana/util/date_time_utils.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
 
 part 'months_state.dart';
 part 'months_cubit.freezed.dart';

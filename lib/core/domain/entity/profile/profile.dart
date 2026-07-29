@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_model.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
 import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
-import 'package:dhyana/util/default_profile_data.dart';
+import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';

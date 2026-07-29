@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dhyana/core/domain/service/simple_audio_service.dart';
-import 'package:dhyana/util/enum_helper.dart';
-import 'package:dhyana/util/localization.dart';
+import 'package:dhyana/core/service/simple_audio_service.dart';
+import 'package:dhyana/core/util/enum_helper.dart';
+import 'package:dhyana/core/util/localization.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';

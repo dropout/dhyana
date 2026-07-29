@@ -2,7 +2,7 @@ import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_vali
 import 'package:dhyana/core/data/datasource/auth/firebase_auth_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';
-import 'package:dhyana/data_provider/firebase/firebase_data_provider_factory.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
 import 'package:dhyana/modules/social/data/datasource/firebase_presence_data_provider.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
@@ -22,7 +22,7 @@ import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_chant_cache_manager_service.dart';
-import 'package:dhyana/util/firebase_provider.dart';
+import 'package:dhyana/core/util/firebase_provider.dart';
 
 /// Container class for all repositories used in the application.
 /// Injected as a dependency with Provider, and accessible via BuildContext
@@ -89,7 +89,7 @@ class RepositoriesBuilder {
 
     _statisticsRepository = FirebaseStatisticsRepository(
       fireStore: firebaseProvider.firestore,
-      dataProviderFactory: FirebaseDataProviderFactory(
+      dataProviderFactory: FirebaseInsightsDataProviderFactory(
         fireStore: firebaseProvider.firestore,
       ),
     );

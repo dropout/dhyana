@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
-import 'package:dhyana/util/assets.dart';
+import 'package:dhyana/core/util/assets.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/session_start_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';

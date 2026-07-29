@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:dhyana/core/domain/entity/remote_settings.dart';
-import 'package:dhyana/core/domain/service/remote_settings_service.dart';
-import 'package:dhyana/util/debounce_stream_transformer.dart';
+import 'package:dhyana/core/service/remote_settings_service.dart';
+import 'package:dhyana/core/util/debounce_stream_transformer.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:dhyana/util/remote_config_keys.dart' as remote_config_keys;
+import 'package:dhyana/core/util/remote_config_keys.dart' as remote_config_keys;
 
 class FirebaseRemoteSettingsService implements RemoteSettingsService {
 

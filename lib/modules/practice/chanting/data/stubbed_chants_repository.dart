@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chant_asset_metadata.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
-import 'package:dhyana/util/default_profile_data.dart';
+import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
 
 const List<String> _chantNames = [
