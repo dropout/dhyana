@@ -1,7 +1,7 @@
-import 'package:dhyana/modules/auth/data/datasource/auth/enum/signin_method_type.dart';
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
 
 import 'model/signin_result.dart';
-import 'model/user.dart';
 
 /// Abstract interface for authentication providers
 /// Defines the contract for authentication operations and state management

@@ -1,5 +1,5 @@
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 
 class SigninResult {
 

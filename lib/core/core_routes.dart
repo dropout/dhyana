@@ -1,6 +1,5 @@
 import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 import 'package:dhyana/core/presentation/view/home_screen.dart';
-import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
@@ -9,8 +8,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../modules/practice/chanting/presentation/widget/chanting_screen.dart';
 import '../../modules/donate/presentation/widget/donate_screen.dart';
-import '../../modules/social/presentation/view/presence_screen.dart';
-import '../../modules/insights/presentation/view/profile_stats_screen.dart';
 
 part 'core_routes.g.dart';
 
