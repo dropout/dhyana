@@ -1,105 +1,62 @@
-import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
-import 'package:dhyana/core/data/datasource/auth/firebase_auth_provider.dart';
-import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
-import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';
-import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
-import 'package:dhyana/modules/social/data/datasource/firebase_presence_data_provider.dart';
-import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
-import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
-import 'package:dhyana/modules/practice/chanting/data/default_chant_playback_repository.dart';
-import 'package:dhyana/core/data/repository/default_auth_repository.dart';
-import 'package:dhyana/modules/practice/chanting/data/firebase_chants_repository.dart';
-import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
-import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
-import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
-import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
 import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
+import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
+import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
+import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';
+import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
+import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
+import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
+import 'package:dhyana/modules/practice/chanting/data/default_chant_playback_repository.dart';
+import 'package:dhyana/modules/practice/chanting/data/firebase_chants_repository.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_chant_cache_manager_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
+import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
+import 'package:get_it/get_it.dart';
 
 /// Container class for all repositories used in the application.
 /// Injected as a dependency with Provider, and accessible via BuildContext
 /// extension convenience methods.
 class Repositories {
-  final AuthRepository authRepository;
+  // final AuthRepository authRepository;
   final ChantsRepository chantsRepository;
-  final ProfileRepository profileRepository;
-  final PresenceRepository presenceRepository;
-  final StatisticsRepository statisticsRepository;
-  final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
+  late final ProfileRepository profileRepository;
+  late final PresenceRepository presenceRepository;
+  late final StatisticsRepository statisticsRepository;
+  late final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
   final ChantPlaybackRepository chantPlaybackRepository;
 
-  const Repositories({
-    required this.authRepository,
+  Repositories({
     required this.chantsRepository,
-    required this.profileRepository,
-    required this.presenceRepository,
-    required this.statisticsRepository,
-    required this.timerSettingsHistoryRepository,
     required this.chantPlaybackRepository,
-  });
+  }) {
+    profileRepository = GetIt.I.get<ProfileRepository>();
+    statisticsRepository = GetIt.I.get<StatisticsRepository>();
+    presenceRepository = GetIt.I.get<PresenceRepository>();
+    timerSettingsHistoryRepository = GetIt.I.get<TimerSettingsHistoryRepository>();
+  }
 }
 
 /// Builder class for Repositories to improve init code structure and
 /// allow customization of individual repositories to improve
 /// developer experience by providing easy way to stub data.
 class RepositoriesBuilder {
-  late AuthRepository _authRepository;
   late ChantsRepository _chantsRepository;
-  late ProfileRepository _profileRepository;
-  late PresenceRepository _presenceRepository;
-  late StatisticsRepository _statisticsRepository;
-  late TimerSettingsHistoryRepository _timerSettingsHistoryRepository;
   late ChantPlaybackRepository _chantPlaybackRepository;
 
   // Default constructor initializing with Firebase implementations
   RepositoriesBuilder({
     required FirebaseProvider firebaseProvider,
-    required ProfileDataProvider profileDataProvider,
-    required StorageDataProvider storageDataProvider,
   }) {
-    _authRepository = DefaultAuthRepository(
-      authDataProvider: FirebaseAuthProvider(firebaseProvider.auth),
-      profileDataProvider: profileDataProvider,
-    );
-
     _chantsRepository = FirebaseChantsRepository(
       chantsDataProvider: FirebaseChantsDataProvider(
         firebaseProvider.firestore,
       ),
     );
 
-    _profileRepository = DefaultProfileRepository(
-      profileDataProvider: profileDataProvider,
-      storageDataProvider: storageDataProvider,
-    );
-
-    _presenceRepository = DefaultPresenceRepository(
-      presenceDataProvider: FirebasePresenceDataProvider(
-        firebaseProvider.firestore,
-      ),
-    );
-
-    _statisticsRepository = FirebaseStatisticsRepository(
-      fireStore: firebaseProvider.firestore,
-      dataProviderFactory: FirebaseInsightsDataProviderFactory(
-        fireStore: firebaseProvider.firestore,
-      ),
-    );
-
-    _timerSettingsHistoryRepository = FirebaseTimerSettingsHistoryRepository(
-      firebaseProvider.firestore,
-    );
-
     final cacheManager = DefaultChantCacheManagerService(
-      storageDataProvider: storageDataProvider,
+      storageDataProvider: GetIt.I.get<StorageDataProvider>(),
     );
     final cacheDataProvider = DriftChantCacheDataProvider(ChantCacheDatabase());
 
@@ -108,7 +65,7 @@ class RepositoriesBuilder {
         firebaseProvider.firestore,
       ),
       cacheDataProvider: cacheDataProvider,
-      storageDataProvider: storageDataProvider,
+      storageDataProvider: GetIt.I.get<StorageDataProvider>(),
       cacheManager: cacheManager,
       cacheValidator: ChantCacheValidator(
         cacheManager: cacheManager, 
@@ -117,37 +74,9 @@ class RepositoriesBuilder {
     );
   }
 
-  // Convenience methods to override default repositories
-  // to improve developer experience and testability
-  RepositoriesBuilder authRepository(AuthRepository repo) {
-    _authRepository = repo;
-    return this;
-  }
 
   RepositoriesBuilder chantsRepository(ChantsRepository repo) {
     _chantsRepository = repo;
-    return this;
-  }
-
-  RepositoriesBuilder profileRepository(ProfileRepository repo) {
-    _profileRepository = repo;
-    return this;
-  }
-
-  RepositoriesBuilder presenceRepository(PresenceRepository repo) {
-    _presenceRepository = repo;
-    return this;
-  }
-
-  RepositoriesBuilder statisticsRepository(StatisticsRepository repo) {
-    _statisticsRepository = repo;
-    return this;
-  }
-
-  RepositoriesBuilder timerSettingsHistoryRepository(
-    TimerSettingsHistoryRepository repo,
-  ) {
-    _timerSettingsHistoryRepository = repo;
     return this;
   }
 
@@ -159,12 +88,7 @@ class RepositoriesBuilder {
   // Build the final Repositories object
   Repositories build() {
     return Repositories(
-      authRepository: _authRepository,
       chantsRepository: _chantsRepository,
-      presenceRepository: _presenceRepository,
-      profileRepository: _profileRepository,
-      statisticsRepository: _statisticsRepository,
-      timerSettingsHistoryRepository: _timerSettingsHistoryRepository,
       chantPlaybackRepository: _chantPlaybackRepository,
     );
   }

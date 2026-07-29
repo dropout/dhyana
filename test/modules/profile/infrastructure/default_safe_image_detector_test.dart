@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
-import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
+import 'package:dhyana/modules/profile/data/service/default_safe_image_detector.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:mocktail/mocktail.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
-import 'package:dhyana/modules/profile/di/dependency_injection.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/modules/profile/profile_di.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';

@@ -1,9 +1,9 @@
-import 'package:dhyana/core/di/core_dependencies.dart';
-import 'package:dhyana/modules/insights/di/insights_dependencies.dart';
-import 'package:dhyana/modules/practice/session/di/session_dependencies.dart';
-import 'package:dhyana/modules/profile/di/dependency_injection.dart';
-import 'package:dhyana/modules/social/di/social_dependencies.dart';
-import 'package:dhyana/modules/practice/timer/di/timer_dependencies.dart';
+import 'package:dhyana/core/core_di.dart';
+import 'package:dhyana/modules/insights/insights_di.dart';
+import 'package:dhyana/modules/practice/session/session_di.dart';
+import 'package:dhyana/modules/profile/profile_di.dart';
+import 'package:dhyana/modules/social/social_di.dart';
+import 'package:dhyana/modules/practice/timer/timer_di.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:get_it/get_it.dart';
 

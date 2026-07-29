@@ -11,7 +11,7 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
 part 'auth_state.dart';
-part 'auth_bloc.freezed.dart';
+part 'auth_cubit.freezed.dart';
 
 class AuthCubit extends Cubit<AuthState> with LoggerMixin {
 

@@ -83,8 +83,6 @@ class Initializer with LoggerMixin {
 
     // Create data providers shared between builders
     logger.t('Create data providers');
-    FirebaseProfileDataProvider profileDataProvider =
-        FirebaseProfileDataProvider(firebaseProvider.firestore);
     FirebaseStorageDataProvider storageDataProvider =
         FirebaseStorageDataProvider(firebaseProvider.storage);
 
@@ -92,8 +90,6 @@ class Initializer with LoggerMixin {
     logger.t('Create repositories');
     final repoBuilder = RepositoriesBuilder(
       firebaseProvider: firebaseProvider,
-      profileDataProvider: profileDataProvider,
-      storageDataProvider: storageDataProvider,
     );
 
     final repos = repoBuilder.build();

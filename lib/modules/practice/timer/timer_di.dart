@@ -10,7 +10,7 @@ import 'package:dhyana/modules/practice/timer/domain/usecase/complete_timer_use_
 import 'package:dhyana/modules/practice/timer/domain/usecase/configure_event_scheduler_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/start_timer_use_case.dart';
-import 'package:dhyana/modules/practice/timer/infrastructure/default_timer_audio_service.dart';
+import 'package:dhyana/modules/practice/timer/data/service/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';

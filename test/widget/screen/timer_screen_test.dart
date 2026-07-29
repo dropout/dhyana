@@ -1,6 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';

@@ -13,7 +13,7 @@ import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dar
 import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
-import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
+import 'package:dhyana/modules/profile/data/service/default_safe_image_detector.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 
 final getIt = GetIt.instance;

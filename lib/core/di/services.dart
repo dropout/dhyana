@@ -1,21 +1,9 @@
 import 'package:dhyana/core/audio/app_audio_handler.dart';
-import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator_service.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/core/infrastructure/platform/default_haptics_service.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_lyrics_service.dart';
-import 'package:dhyana/core/infrastructure/platform/default_mindful_minutes_service.dart';
-import 'package:dhyana/core/infrastructure/platform/default_overlay_service.dart';
-import 'package:dhyana/core/infrastructure/platform/default_resource_resolver.dart';
-import 'package:dhyana/modules/profile/infrastructure/default_safe_image_detector.dart';
-import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
-import 'package:dhyana/core/infrastructure/platform/default_wakelock_service.dart';
-import 'package:dhyana/core/infrastructure/platform/default_shared_preferences_service.dart';
-import 'package:dhyana/core/infrastructure/firebase/firebase_analytics_service.dart';
-import 'package:dhyana/core/infrastructure/firebase/firebase_crashlytics_service.dart';
-import 'package:dhyana/core/infrastructure/firebase/firebase_functions_service.dart';
-import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
+import 'package:dhyana/modules/profile/data/service/default_safe_image_detector.dart';
 import 'package:dhyana/core/service/functions_service.dart';
 import 'package:dhyana/core/service/haptics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
@@ -30,7 +18,7 @@ import 'package:dhyana/core/service/shared_preferences_service.dart';
 import 'package:dhyana/core/service/wakelock_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/core/util/launch_url.dart';
-import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A container for all services used in the app.
@@ -75,20 +63,8 @@ class Services {
 }
 
 class ServicesBuilder {
-  late OverlayService _overlayService;
-  late HapticsService _hapticsService;
-  late AnalyticsService _analyticsService;
-  late CrashlyticsService _crashlyticsService;
-  late RemoteSettingsService _remoteConfigService;
-  late ResourceResolver _resourceResolver;
-  late IdGeneratorService _idGeneratorService;
-  late WakelockService _wakelockService;
-  late SharedPreferencesService _sharedPreferencesService;
-  late ShaderService _shaderService;
-  late FunctionsService _functionsService;
   late UrlLauncher _urlLauncher;
   late LyricsService _lyricsService;
-  late AppAudioHandler _audioHandler;
   late MindfulMinutesService _mindfulMinutesService;
   late SafeImageDetectorFactory _safeImageDetectorFactory;
 
@@ -98,56 +74,27 @@ class ServicesBuilder {
     required SharedPreferences sharedPreferences,
     required AppAudioHandler audioHandler,
   }) {
-    _audioHandler = audioHandler;
-    _overlayService = DefaultOverlayService();
-    _hapticsService = DefaultHapticsService();
-    _analyticsService = FirebaseAnalyticsService(firebaseProvider.analytics);
-    _crashlyticsService = FirebaseCrashlyticsService(
-      firebaseProvider.crashlytics,
-    );
-    _idGeneratorService = FirebaseIdGeneratorService(
-      firebaseProvider.firestore,
-    );
-
-    _resourceResolver = DefaultResourceResolver(
-      storageDataProvider: storageDataProvider,
-    );
-    _wakelockService = DefaultWakelockService();
-
-    _remoteConfigService = FirebaseRemoteSettingsService(
-      firebaseProvider.remoteConfig,
-    );
-
-    _sharedPreferencesService = DefaultSharedPreferencesService(
-      sharedPreferences,
-    );
-
-    _shaderService = DefaultShaderService();
-    _functionsService = FirebaseFunctionsService(firebaseProvider.functions);
     _urlLauncher = const UrlLauncher();
     _lyricsService = DefaultLyricsService();
-    _mindfulMinutesService = DefaultMindfulMinutesService(
-      flutterMindfulMinutes: FlutterMindfulMinutes(),
-    );
     _safeImageDetectorFactory = const DefaultSafeImageDetectorFactory();
   }
 
   Services build() {
     return Services(
-      overlayService: _overlayService,
-      hapticsService: _hapticsService,
-      analyticsService: _analyticsService,
-      crashlyticsService: _crashlyticsService,
-      remoteSettingsService: _remoteConfigService,
-      resourceResolver: _resourceResolver,
-      idGeneratorService: _idGeneratorService,
-      wakelockService: _wakelockService,
-      sharedPreferencesService: _sharedPreferencesService,
-      shaderService: _shaderService,
-      functionsService: _functionsService,
+      overlayService: GetIt.I.get<OverlayService>(),
+      hapticsService: GetIt.I.get<HapticsService>(),
+      analyticsService: GetIt.I.get<AnalyticsService>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+      remoteSettingsService: GetIt.I.get<RemoteSettingsService>(),
+      resourceResolver: GetIt.I.get<ResourceResolver>(),
+      idGeneratorService: GetIt.I.get<IdGeneratorService>(),
+      wakelockService: GetIt.I.get<WakelockService>(),
+      sharedPreferencesService: GetIt.I.get<SharedPreferencesService>(),
+      shaderService: GetIt.I.get<ShaderService>(),
+      functionsService: GetIt.I.get<FunctionsService>(),
       urlLauncher: _urlLauncher,
       lyricsService: _lyricsService,
-      audioHandler: _audioHandler,
+      audioHandler: GetIt.I.get<AppAudioHandler>(),
       mindfulMinutesService: _mindfulMinutesService,
       safeImageDetectorFactory: _safeImageDetectorFactory,
     );

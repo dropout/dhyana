@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_bloc.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/view/login/login_signed_in_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';

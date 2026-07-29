@@ -1,5 +1,8 @@
 import 'package:dhyana/core/data/repository/default_storage_repository.dart';
+import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +48,7 @@ final getIt = GetIt.instance;
 Future<void> configureCoreDependencies() async {
   _registerDataProviders();
   _registerRepositories();
+  _registerViewModels();
   await _registerServices();
 }
 
@@ -70,57 +74,53 @@ void _registerRepositories() {
       storageDataProvider: getIt<StorageDataProvider>(),
     ),
   );
-
 }
 
 Future<void> _registerServices() async {
+  getIt.registerLazySingleton<AnalyticsService>(
+    () => FirebaseAnalyticsService(getIt<FirebaseProvider>().analytics),
+  );
 
-	if (getIt.isRegistered<AnalyticsService>()) {
-		return;
-	}
+  getIt.registerLazySingleton<CrashlyticsService>(
+    () => FirebaseCrashlyticsService(getIt<FirebaseProvider>().crashlytics),
+  );
 
-	getIt.registerLazySingleton<AnalyticsService>(
-		() => FirebaseAnalyticsService(getIt<FirebaseProvider>().analytics),
-	);
+  getIt.registerLazySingleton<FunctionsService>(
+    () => FirebaseFunctionsService(getIt<FirebaseProvider>().functions),
+  );
 
-	getIt.registerLazySingleton<CrashlyticsService>(
-		() => FirebaseCrashlyticsService(getIt<FirebaseProvider>().crashlytics),
-	);
+  getIt.registerLazySingleton<HapticsService>(DefaultHapticsService.new);
+  getIt.registerLazySingleton<OverlayService>(DefaultOverlayService.new);
+  getIt.registerLazySingleton<WakelockService>(DefaultWakelockService.new);
+  getIt.registerLazySingleton<ShaderService>(DefaultShaderService.new);
 
-	getIt.registerLazySingleton<FunctionsService>(
-		() => FirebaseFunctionsService(
-			getIt<FirebaseProvider>().functions,
-		),
-	);
+  getIt.registerLazySingleton<ResourceResolver>(
+    () => DefaultResourceResolver(
+      storageDataProvider: getIt<StorageDataProvider>(),
+    ),
+  );
 
-	getIt.registerLazySingleton<HapticsService>(DefaultHapticsService.new);
-	getIt.registerLazySingleton<OverlayService>(DefaultOverlayService.new);
-	getIt.registerLazySingleton<WakelockService>(DefaultWakelockService.new);
-	getIt.registerLazySingleton<ShaderService>(DefaultShaderService.new);
+  getIt.registerLazySingleton<IdGeneratorService>(
+    () => FirebaseIdGeneratorService(getIt<FirebaseProvider>().firestore),
+  );
 
-	getIt.registerLazySingleton<ResourceResolver>(
-		() => DefaultResourceResolver(
-			storageDataProvider: getIt<StorageDataProvider>(),
-		),
-	);
-
-	getIt.registerLazySingleton<IdGeneratorService>(
-		() => FirebaseIdGeneratorService(getIt<FirebaseProvider>().firestore),		
-	);
-
-	getIt.registerLazySingleton<MindfulMinutesService>(
-		() => DefaultMindfulMinutesService(
-			flutterMindfulMinutes: FlutterMindfulMinutes(),
-		),
-	);
+  getIt.registerLazySingleton<MindfulMinutesService>(
+    () => DefaultMindfulMinutesService(
+      flutterMindfulMinutes: FlutterMindfulMinutes(),
+    ),
+  );
 
   final sharedPreferences = await SharedPreferences.getInstance();
-	getIt.registerLazySingleton<SharedPreferencesService>(
-		() => DefaultSharedPreferencesService(sharedPreferences),
-	);
+  getIt.registerLazySingleton<SharedPreferencesService>(
+    () => DefaultSharedPreferencesService(sharedPreferences),
+  );
 
-	getIt.registerLazySingleton<RemoteSettingsService>(
-		() => FirebaseRemoteSettingsService(getIt<FirebaseProvider>().remoteConfig),
-	);
+  getIt.registerLazySingleton<RemoteSettingsService>(
+    () => FirebaseRemoteSettingsService(getIt<FirebaseProvider>().remoteConfig),
+  );
+}
+
+void _registerViewModels() {
+
 
 }
