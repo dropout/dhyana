@@ -27,7 +27,7 @@ import 'package:dhyana/core/domain/service/shader_service.dart';
 import 'package:dhyana/core/domain/service/shared_preferences_service.dart';
 import 'package:dhyana/core/domain/service/wakelock_service.dart';
 
-import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator_service.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_analytics_service.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_crashlytics_service.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_functions_service.dart';
@@ -105,9 +105,7 @@ Future<void> _registerServices() async {
 	);
 
 	getIt.registerLazySingleton<IdGeneratorService>(
-		() => IdGeneratorService(
-			FirebaseIdGenerator(getIt<FirebaseProvider>().firestore),
-		),
+		() => FirebaseIdGeneratorService(getIt<FirebaseProvider>().firestore),		
 	);
 
 	getIt.registerLazySingleton<MindfulMinutesService>(

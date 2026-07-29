@@ -1,5 +1,5 @@
 import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator.dart';
+import 'package:dhyana/core/infrastructure/firebase/firebase_id_generator_service.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/service/analytics_service.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
@@ -37,7 +37,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Available on the context object via Provider and BuildContext extension
 /// convenience methods.
 class Services {
-
   final AnalyticsService analyticsService;
   final CrashlyticsService crashlyticsService;
   final HapticsService hapticsService;
@@ -73,11 +72,9 @@ class Services {
     required this.mindfulMinutesService,
     required this.safeImageDetectorFactory,
   });
-
 }
 
 class ServicesBuilder {
-
   late OverlayService _overlayService;
   late HapticsService _hapticsService;
   late AnalyticsService _analyticsService;
@@ -104,15 +101,14 @@ class ServicesBuilder {
     _audioHandler = audioHandler;
     _overlayService = DefaultOverlayService();
     _hapticsService = DefaultHapticsService();
-    _analyticsService = FirebaseAnalyticsService(
-      firebaseProvider.analytics,
-    );
+    _analyticsService = FirebaseAnalyticsService(firebaseProvider.analytics);
     _crashlyticsService = FirebaseCrashlyticsService(
       firebaseProvider.crashlytics,
     );
-    _idGeneratorService = IdGeneratorService(
-      FirebaseIdGenerator(firebaseProvider.firestore),
+    _idGeneratorService = FirebaseIdGeneratorService(
+      firebaseProvider.firestore,
     );
+
     _resourceResolver = DefaultResourceResolver(
       storageDataProvider: storageDataProvider,
     );
@@ -123,13 +119,11 @@ class ServicesBuilder {
     );
 
     _sharedPreferencesService = DefaultSharedPreferencesService(
-      sharedPreferences
+      sharedPreferences,
     );
 
     _shaderService = DefaultShaderService();
-    _functionsService = FirebaseFunctionsService(
-      firebaseProvider.functions,
-    );
+    _functionsService = FirebaseFunctionsService(firebaseProvider.functions);
     _urlLauncher = const UrlLauncher();
     _lyricsService = DefaultLyricsService();
     _mindfulMinutesService = DefaultMindfulMinutesService(
@@ -158,5 +152,4 @@ class ServicesBuilder {
       safeImageDetectorFactory: _safeImageDetectorFactory,
     );
   }
-
 }

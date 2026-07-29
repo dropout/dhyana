@@ -2,7 +2,7 @@ import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
 import 'package:flutter_test/flutter_test.dart';

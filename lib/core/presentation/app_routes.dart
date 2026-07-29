@@ -10,7 +10,7 @@ import '../../modules/donate/presentation/widget/donate_screen.dart';
 import 'view/home_screen.dart';
 import '../../modules/social/presentation/view/presence_screen.dart';
 
-import '../../modules/insights/presentation/widget/profile_stats_screen.dart';
+import '../../modules/insights/presentation/view/profile_stats_screen.dart';
 
 import 'auth_redirect_hook.dart';
 

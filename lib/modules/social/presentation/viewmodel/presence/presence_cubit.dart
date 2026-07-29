@@ -3,7 +3,6 @@ import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
-import 'package:dhyana/modules/social/domain/usecase/show_presence_use_case.dart';
 import 'package:dhyana/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,16 +16,12 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
   /// Use case to load presence data.
   final LoadPresenceDataUseCase loadPresenceDataUseCase;
 
-  /// Use case to show user presence.
-  final ShowPresenceUseCase showPresenceUseCase;
-
   /// Service to log errors
   final CrashlyticsService crashlyticsService;
 
   /// Creates a new [PresenceCubit] with the given repositories and services.
   PresenceCubit({
     required this.loadPresenceDataUseCase,
-    required this.showPresenceUseCase,
     required this.crashlyticsService,
   }) : super(const PresenceState.initial());
 
@@ -74,19 +69,6 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
       return (state as PresenceLoadingMoreState).presenceList;
     }
     return const <Presence>[];
-  }
-
-  /// Shows the presence of the user with the given [profileId].
-  Future<void> showPresence(String profileId) async {
-    try {
-      await showPresenceUseCase.execute(profileId);
-    } catch (e, stack) {
-      crashlyticsService.recordError(
-        exception: e,
-        stackTrace: stack,
-        reason: 'Unable to show presence!',
-      );
-    }
   }
 
 }

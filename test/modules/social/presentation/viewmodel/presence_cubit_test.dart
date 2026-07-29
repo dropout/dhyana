@@ -5,7 +5,6 @@ import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
 import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
-import 'package:dhyana/modules/social/domain/usecase/show_presence_use_case.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,17 +14,13 @@ import '../../../../mock_definitions.dart';
 class MockLoadPresenceDataUseCase extends Mock
 		implements LoadPresenceDataUseCase {}
 
-class MockShowPresenceUseCase extends Mock implements ShowPresenceUseCase {}
-
 void main() {
 	late MockLoadPresenceDataUseCase loadPresenceDataUseCase;
-	late MockShowPresenceUseCase showPresenceUseCase;
 	late MockCrashlyticsService crashlyticsService;
 
 	PresenceCubit buildCubit() {
 		return PresenceCubit(
 			loadPresenceDataUseCase: loadPresenceDataUseCase,
-			showPresenceUseCase: showPresenceUseCase,
 			crashlyticsService: crashlyticsService,
 		);
 	}
@@ -59,7 +54,6 @@ void main() {
 
 	setUp(() {
 		loadPresenceDataUseCase = MockLoadPresenceDataUseCase();
-		showPresenceUseCase = MockShowPresenceUseCase();
 		crashlyticsService = MockCrashlyticsService();
 
 		when(
@@ -274,46 +268,46 @@ void main() {
 		);
 	});
 
-	group('PresenceCubit.showPresence', () {
-		blocTest<PresenceCubit, PresenceState>(
-			'calls use case and emits no state when successful',
-			build: buildCubit,
-			setUp: () {
-				when(() => showPresenceUseCase.execute('profile-1'))
-						.thenAnswer((_) async {});
-			},
-			act: (cubit) => cubit.showPresence('profile-1'),
-			expect: () => <PresenceState>[],
-			verify: (_) {
-				verify(() => showPresenceUseCase.execute('profile-1')).called(1);
-				verifyNever(
-					() => crashlyticsService.recordError(
-						exception: any(named: 'exception'),
-						stackTrace: any(named: 'stackTrace'),
-						reason: any(named: 'reason'),
-					),
-				);
-			},
-		);
+	// group('PresenceCubit.showPresence', () {
+	// 	blocTest<PresenceCubit, PresenceState>(
+	// 		'calls use case and emits no state when successful',
+	// 		build: buildCubit,
+	// 		setUp: () {
+	// 			when(() => showPresenceUseCase.execute('profile-1'))
+	// 					.thenAnswer((_) async {});
+	// 		},
+	// 		act: (cubit) => cubit.showPresence('profile-1'),
+	// 		expect: () => <PresenceState>[],
+	// 		verify: (_) {
+	// 			verify(() => showPresenceUseCase.execute('profile-1')).called(1);
+	// 			verifyNever(
+	// 				() => crashlyticsService.recordError(
+	// 					exception: any(named: 'exception'),
+	// 					stackTrace: any(named: 'stackTrace'),
+	// 					reason: any(named: 'reason'),
+	// 				),
+	// 			);
+	// 		},
+	// 	);
 
-		blocTest<PresenceCubit, PresenceState>(
-			'records crashlytics and emits no state when use case throws',
-			build: buildCubit,
-			setUp: () {
-				when(() => showPresenceUseCase.execute('profile-2'))
-						.thenThrow(Exception('show failed'));
-			},
-			act: (cubit) => cubit.showPresence('profile-2'),
-			expect: () => <PresenceState>[],
-			verify: (_) {
-				verify(
-					() => crashlyticsService.recordError(
-						exception: any(named: 'exception'),
-						stackTrace: any(named: 'stackTrace'),
-						reason: 'Unable to show presence!',
-					),
-				).called(1);
-			},
-		);
-	});
+	// 	blocTest<PresenceCubit, PresenceState>(
+	// 		'records crashlytics and emits no state when use case throws',
+	// 		build: buildCubit,
+	// 		setUp: () {
+	// 			when(() => showPresenceUseCase.execute('profile-2'))
+	// 					.thenThrow(Exception('show failed'));
+	// 		},
+	// 		act: (cubit) => cubit.showPresence('profile-2'),
+	// 		expect: () => <PresenceState>[],
+	// 		verify: (_) {
+	// 			verify(
+	// 				() => crashlyticsService.recordError(
+	// 					exception: any(named: 'exception'),
+	// 					stackTrace: any(named: 'stackTrace'),
+	// 					reason: 'Unable to show presence!',
+	// 				),
+	// 			).called(1);
+	// 		},
+	// 	);
+	// });
 }

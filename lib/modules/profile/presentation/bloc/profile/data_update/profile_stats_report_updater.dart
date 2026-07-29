@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
+import 'package:dhyana/modules/insights/domain/entity/milestone_progress.dart';
 import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:dhyana/util/logger_mixin.dart';

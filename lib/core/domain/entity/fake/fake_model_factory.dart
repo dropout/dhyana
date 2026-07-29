@@ -1,12 +1,12 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/modules/insights/domain/model/day.dart';
-import 'package:dhyana/modules/insights/domain/model/month.dart';
+import 'package:dhyana/modules/insights/domain/entity/day.dart';
+import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
-import 'package:dhyana/modules/insights/domain/model/week.dart';
-import 'package:dhyana/modules/insights/domain/model/year.dart';
+import 'package:dhyana/modules/insights/domain/entity/week.dart';
+import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/util/faker.dart';
 import 'package:dhyana/util/date_time_utils.dart';
 import 'package:faker/faker.dart';

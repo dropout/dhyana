@@ -7,9 +7,9 @@ import 'package:dhyana/modules/practice/session/presentation/view/completed/mile
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 
-import '../../../insights/presentation/widget/stats/consecutive_days_view.dart';
-import '../../../insights/presentation/widget/stats/milestones_view.dart';
-import '../../../insights/presentation/widget/stats/summary_view.dart';
+import '../../../insights/presentation/view/stats/consecutive_days_view.dart';
+import '../../../insights/presentation/view/stats/milestones_view.dart';
+import '../../../insights/presentation/view/stats/summary_view.dart';
 
 class ProfileView extends StatelessWidget {
   final Profile profile;

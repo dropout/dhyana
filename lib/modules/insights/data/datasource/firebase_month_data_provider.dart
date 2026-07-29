@@ -3,8 +3,8 @@ import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/insights/data/datasource/month_data_provider.dart';
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
-import 'package:dhyana/modules/insights/domain/model/month.dart';
-import 'package:dhyana/modules/insights/domain/model/month_query_options.dart';
+import 'package:dhyana/modules/insights/domain/entity/month.dart';
+import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 
 class FirebaseMonthDataProvider extends FirebaseDataProvider<Month> implements MonthDataProvider {
 

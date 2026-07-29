@@ -1,12 +1,12 @@
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/insights/domain/model/milestone_progress.dart';
+import 'package:dhyana/modules/insights/domain/entity/milestone_progress.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
-import 'package:dhyana/modules/insights/domain/model/week_query_options.dart';
-import 'package:dhyana/modules/insights/presentation/widget/stats/bar_chart_page/weeks_bar_chart_page.dart';
-import 'package:dhyana/modules/insights/presentation/widget/stats/tab/week_tab.dart';
+import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
+import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/weeks_bar_chart_page.dart';
+import 'package:dhyana/modules/insights/presentation/view/stats/tab/week_tab.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';

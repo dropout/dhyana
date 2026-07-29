@@ -1,10 +1,10 @@
-import 'package:dhyana/modules/insights/domain/model/consecutive_days.dart';
+import 'package:dhyana/modules/insights/domain/entity/consecutive_days.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/insights/domain/model/profile_statistics_report.dart';
+import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/util/date_time_utils.dart';
-import 'package:dhyana/modules/insights/presentation/widget/stats/detailed_consecutive_days_view.dart';
-import 'package:dhyana/modules/insights/presentation/widget/stats/label_value_detail.dart';
+import 'package:dhyana/modules/insights/presentation/view/stats/detailed_consecutive_days_view.dart';
+import 'package:dhyana/modules/insights/presentation/view/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_context_providers.dart';
