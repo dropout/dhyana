@@ -1,8 +1,8 @@
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
+import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/profile/presentation/view/login/login_headline_text_effect.dart';
+import 'package:dhyana/modules/auth/presentation/view/login/login_headline_text_effect.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/gestures.dart';

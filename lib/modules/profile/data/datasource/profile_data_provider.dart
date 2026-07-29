@@ -1,4 +1,4 @@
-import 'package:dhyana/core/data/data_provider.dart';
+import 'package:dhyana/core/data/datasource/data_provider.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_query_options.dart';
 

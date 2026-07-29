@@ -10,8 +10,8 @@ import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/core/util/faker.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:faker/faker.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user_meta_data.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user_meta_data.dart';
 
 class FakeModelFactory {
   final Faker faker = Faker();

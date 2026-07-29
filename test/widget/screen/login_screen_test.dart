@@ -1,6 +1,6 @@
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/profile/presentation/view/screen/login_screen.dart';
+import 'package:dhyana/modules/auth/presentation/view/login_screen.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';

@@ -7,20 +7,21 @@ import 'package:dhyana/core/audio/audio_session_configuration.dart';
 import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
+import 'package:dhyana/core/core_routes.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
-import 'package:dhyana/core/presentation/app_routes.dart';
+import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
-import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/modules/profile/profile_routes.dart';
 import 'package:dhyana/core/util/assets.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
+import 'package:dhyana/modules/social/social_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
@@ -72,7 +73,14 @@ class Initializer with LoggerMixin {
       debugLogDiagnostics: kDebugMode,
       navigatorKey: AppWidgetKeys.rootNavigatorKey,
       initialLocation: '/',
-      routes: [...$coreRoutes, ...$profileRoutes, ...$timerRoutes, ...$sessionRoutes],
+      routes: [
+        ...$coreRoutes, 
+        ...$authRoutes,
+        ...$profileRoutes, 
+        ...$timerRoutes, 
+        ...$sessionRoutes,
+        ...$socialRoutes,        
+      ],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );
     GetIt.I.registerSingleton<GoRouter>(router);

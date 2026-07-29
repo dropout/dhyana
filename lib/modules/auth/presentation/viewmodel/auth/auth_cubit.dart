@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:dhyana/core/data/datasource/auth/enum/signin_method_type.dart';
-import 'package:dhyana/core/data/datasource/auth/exception.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/enum/signin_method_type.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

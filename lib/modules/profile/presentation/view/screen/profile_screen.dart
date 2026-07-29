@@ -1,9 +1,9 @@
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
-import 'package:dhyana/core/presentation/app_routes.dart';
+import 'package:dhyana/core/core_routes.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_view.dart';
 import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';

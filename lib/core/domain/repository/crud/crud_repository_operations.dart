@@ -1,4 +1,4 @@
-import 'package:dhyana/core/data/data_provider.dart';
+import 'package:dhyana/core/data/datasource/data_provider.dart';
 
 /// A generic CRUD repository operations class that delegates to a DataProvider.
 /// This class provides basic Create, Read, Update, and Delete operations

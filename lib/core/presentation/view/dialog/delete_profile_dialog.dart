@@ -31,7 +31,7 @@ class DeleteProfileDialog extends StatelessWidget {
             context.pop(); // close are you sure dialog
             context.hapticsTap();
             context.logEvent(name: 'profile_delete_pressed');
-            const DeleteProfileRoute().go(context);
+            const ProfileDeleteRoute().go(context);
           },
         )
       ],

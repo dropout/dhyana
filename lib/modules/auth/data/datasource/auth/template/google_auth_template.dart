@@ -1,9 +1,9 @@
-import 'package:dhyana/core/data/datasource/auth/model/signin_result.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:dhyana/core/data/datasource/auth/exception.dart';
-import 'package:dhyana/core/data/datasource/auth/util/convert_user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/util/convert_user.dart';
 
 import 'auth_template.dart';
 

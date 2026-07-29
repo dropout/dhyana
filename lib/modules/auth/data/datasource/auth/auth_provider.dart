@@ -1,4 +1,4 @@
-import 'package:dhyana/core/data/datasource/auth/enum/signin_method_type.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/enum/signin_method_type.dart';
 
 import 'model/signin_result.dart';
 import 'model/user.dart';

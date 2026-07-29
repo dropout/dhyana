@@ -1,14 +1,14 @@
-import 'package:dhyana/core/data/datasource/auth/enum/signin_method_type.dart';
-import 'package:dhyana/core/data/datasource/auth/model/signin_result.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
-import 'package:dhyana/core/data/datasource/auth/template/auth_template.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/enum/signin_method_type.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/template/auth_template.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart' show
 TargetPlatform, defaultTargetPlatform;
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:dhyana/core/data/datasource/auth/auth_provider.dart';
-import 'package:dhyana/core/data/datasource/auth/util/convert_user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/util/convert_user.dart';
 
 /// Firebase implementation of [AuthProvider]
 /// Uses `firebase_auth` package to provide authentication features.

@@ -1,8 +1,5 @@
 import 'package:dhyana/core/data/repository/default_storage_repository.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 
-import 'package:dhyana/core/data/datasource/auth/auth_provider.dart';
-import 'package:dhyana/core/data/datasource/auth/firebase_auth_provider.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/firebase_auth_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/data/repository/default_auth_repository.dart';

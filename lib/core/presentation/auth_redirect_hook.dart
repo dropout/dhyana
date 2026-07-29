@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

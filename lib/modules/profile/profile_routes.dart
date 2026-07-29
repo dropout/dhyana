@@ -1,3 +1,4 @@
+import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,18 +8,11 @@ import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_screen.dart';
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_wizard_screen.dart';
-import 'package:dhyana/modules/profile/presentation/view/screen/login_screen.dart';
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_edit_screen.dart';
 import 'package:dhyana/modules/profile/presentation/view/screen/delete_profile_screen.dart';
 
 part 'profile_routes.g.dart';
 
-@TypedGoRoute<LoginRoute>(path: '/login', name: 'LOGIN')
-class LoginRoute extends GoRouteData with $LoginRoute {
-  const LoginRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) => LoginScreen();
-}
 
 @TypedGoRoute<ProfileWizardRoute>(
   path: '/profileWizard/:profileId',
@@ -77,13 +71,13 @@ class ProfileEditRoute extends GoRouteData
       authRedirectHook(context, state, const LoginRoute());
 }
 
-@TypedGoRoute<DeleteProfileRoute>(
+@TypedGoRoute<ProfileDeleteRoute>(
   path: '/deleteProfile',
   name: 'DELETE_PROFILE',
 )
-class DeleteProfileRoute extends GoRouteData
-    with AuthRedirectHook, $DeleteProfileRoute {
-  const DeleteProfileRoute();
+class ProfileDeleteRoute extends GoRouteData
+    with AuthRedirectHook, $ProfileDeleteRoute {
+  const ProfileDeleteRoute();
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const DeleteProfileScreen();
@@ -114,7 +108,7 @@ final List<RouteBase> $profileRoutes = [
   $profileWizardRoute,
   $profileRoute,
   $profileEditRoute,
-  $deleteProfileRoute,
+  $profileDeleteRoute,
   $profileSettingsRoute,
 ];
 

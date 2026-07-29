@@ -1,5 +1,5 @@
 import 'package:clock/clock.dart';
-import 'package:dhyana/core/data/datasource/auth/model/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/domain/entity/presence/presence.dart';
 import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
