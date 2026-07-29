@@ -11,7 +11,7 @@ import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/firebase_auth_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/data/repository/default_auth_repository.dart';
+import 'package:dhyana/modules/auth/data/repository/default_auth_repository.dart';
 
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/service/analytics_service.dart';

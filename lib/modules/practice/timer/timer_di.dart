@@ -5,6 +5,7 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/complete_timer_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/configure_event_scheduler_use_case.dart';
@@ -29,7 +30,7 @@ void configureTimerModuleDependencies() {
 }
 
 void _configureRepositories() {
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<TimerSettingsHistoryRepository>(
     () => FirebaseTimerSettingsHistoryRepository(
       getIt.get<FirebaseProvider>().firestore,
     ),

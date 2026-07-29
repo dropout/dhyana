@@ -65,7 +65,6 @@ class Services {
 class ServicesBuilder {
   late UrlLauncher _urlLauncher;
   late LyricsService _lyricsService;
-  late MindfulMinutesService _mindfulMinutesService;
   late SafeImageDetectorFactory _safeImageDetectorFactory;
 
   ServicesBuilder({
@@ -95,7 +94,7 @@ class ServicesBuilder {
       urlLauncher: _urlLauncher,
       lyricsService: _lyricsService,
       audioHandler: GetIt.I.get<AppAudioHandler>(),
-      mindfulMinutesService: _mindfulMinutesService,
+      mindfulMinutesService: GetIt.I.get<MindfulMinutesService>(),
       safeImageDetectorFactory: _safeImageDetectorFactory,
     );
   }

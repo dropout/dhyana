@@ -104,7 +104,6 @@ class ProfileSettingsRoute extends GoRouteData
 
 
 final List<RouteBase> $profileRoutes = [
-  $loginRoute,
   $profileWizardRoute,
   $profileRoute,
   $profileEditRoute,

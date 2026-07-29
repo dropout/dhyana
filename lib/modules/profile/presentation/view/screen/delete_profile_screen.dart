@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:dhyana/core/domain/entity/auth/user.dart';
 import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/profile/profile_di.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
-import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_app_bar.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';

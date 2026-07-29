@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/core/domain/entity/auth/user.dart';
 import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

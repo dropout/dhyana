@@ -1,3 +1,4 @@
+import 'package:dhyana/core/service/profile_stats_updater_service.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
@@ -6,7 +7,7 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
+import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/modules/profile/data/datasource/firebase_profile_data_provider.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
@@ -45,13 +46,16 @@ void _configureServices() {
   getIt.registerLazySingleton<SafeImageDetectorFactory>(
     () => DefaultSafeImageDetectorFactory(),
   );
+  getIt.registerLazySingleton<ProfileStatsUpdaterService>(
+    () => DefaultProfileReportUpdaterService(),
+  );
 }
 
 void _configureUseCases() {
   getIt.registerLazySingleton(
     () => LoadProfileUseCase(
       profileRepository: getIt.get<ProfileRepository>(),
-      profileStatsUpdater: ProfileStatsReportUpdater(),
+      profileStatsUpdater: DefaultProfileReportUpdaterService(),
     ),
   );
 

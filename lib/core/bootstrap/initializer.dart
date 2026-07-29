@@ -11,7 +11,8 @@ import 'package:dhyana/core/core_routes.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/modules/insights/insights_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
@@ -74,12 +75,13 @@ class Initializer with LoggerMixin {
       navigatorKey: AppWidgetKeys.rootNavigatorKey,
       initialLocation: '/',
       routes: [
-        ...$coreRoutes, 
         ...$authRoutes,
+        ...$coreRoutes,
         ...$profileRoutes, 
-        ...$timerRoutes, 
+        ...$timerRoutes,
         ...$sessionRoutes,
-        ...$socialRoutes,        
+        ...$socialRoutes, 
+        ...$insightsRoutes,      
       ],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );
@@ -99,7 +101,7 @@ class Initializer with LoggerMixin {
     final repoBuilder = RepositoriesBuilder(
       firebaseProvider: firebaseProvider,
     );
-
+    
     final repos = repoBuilder.build();
 
     // Build services

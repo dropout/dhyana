@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/service/profile_stats_updater_service.dart';
 import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/insights/domain/entity/milestone_progress.dart';
@@ -9,9 +10,9 @@ import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
 /// Updates profile statistics report
-class ProfileStatsReportUpdater with LoggerMixin {
+class DefaultProfileReportUpdaterService with LoggerMixin implements ProfileStatsUpdaterService {
 
-  ProfileStatsReportUpdater();
+  DefaultProfileReportUpdaterService();
 
   bool hasLastSession(ProfileStatisticsReport stats) {
     return stats.lastSessionDate != null;
@@ -184,6 +185,7 @@ class ProfileStatsReportUpdater with LoggerMixin {
   /// If the consecutive days are valid, does nothing, if not:
   /// - resets the consecutive days count
   /// - resets the milestone progress
+  @override
   ProfileStatisticsReport validateStatsReport(
     ProfileStatisticsReport statsReport
   ) {
@@ -230,6 +232,9 @@ class ProfileStatsReportUpdater with LoggerMixin {
 
   }
 
+  /// Updates the profile statistics report with new session data
+  /// and returns the updated profile.
+  @override
   UpdateProfileStatsResult updateProfileStatsWithSession(
     Profile profile,
     Session session,

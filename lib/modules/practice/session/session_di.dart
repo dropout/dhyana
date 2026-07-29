@@ -2,6 +2,7 @@ import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/profile_stats_updater_service.dart';
 import 'package:dhyana/modules/practice/session/data/repository/firebase_session_repository.dart';
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/log_session_statistics_use_case.dart';
@@ -37,6 +38,7 @@ void _configureUseCases() {
   getIt.registerFactory<UpdateProfileWithSessionUseCase>(
     () => UpdateProfileWithSessionUseCase(
       profileRepository: getIt.get<ProfileRepository>(),
+      profileStatsUpdaterService: getIt.get<ProfileStatsUpdaterService>()
     ),
   );
 

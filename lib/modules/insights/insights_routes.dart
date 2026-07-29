@@ -21,3 +21,7 @@ class ProfileStatsRoute extends GoRouteData
   String? redirect(BuildContext context, GoRouterState state) =>
       authRedirectHook(context, state, const LoginRoute());
 }
+
+List<RouteBase> $insightsRoutes = [
+  $profileStatsRoute,
+];

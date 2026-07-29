@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/domain/entity/user_meta_data.dart';
+import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/core/domain/entity/auth/user_meta_data.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 // Convert firebase user to a library domain user model.

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
-
+import 'package:dhyana/core/domain/entity/auth/user.dart';
 
 bool isFirstSignin(SigninResult signinResult) {
   firebase_auth.AdditionalUserInfo? additionalUserInfo =
     signinResult.additionalUserInfo;
-  firebase_auth.User user = signinResult.user;
+  User user = signinResult.user;
   if (additionalUserInfo != null) {
     return additionalUserInfo.isNewUser;
   } else {

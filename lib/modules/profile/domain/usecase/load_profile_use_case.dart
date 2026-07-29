@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
+import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 
@@ -14,7 +14,7 @@ class LoadProfileUseCase with LoggerMixin {
   final ProfileRepository profileRepository;
 
   /// The updater responsible for validating and updating the profile's statistics report.
-  final ProfileStatsReportUpdater profileStatsUpdater;
+  final DefaultProfileReportUpdaterService profileStatsUpdater;
     
   LoadProfileUseCase({
     required this.profileRepository,

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/service/profile_stats_updater_service.dart';
 import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
@@ -127,6 +128,10 @@ class MockTimerService
 class MockResourceResolver
   extends Mock
   implements ResourceResolver {}
+
+class MockProfileStatsUpdaterService
+  extends Mock
+  implements ProfileStatsUpdaterService {}
 
 // Repositories ----------------------------------------------------------------
 

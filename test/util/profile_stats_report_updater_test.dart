@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/insights/domain/entity/consecutive_days.dart';
 import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
+import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -8,7 +8,7 @@ void main() {
   group('ProfileStatisticsReportCalculator.hasValidConsecutiveDays', () {
 
     test('can tell if the consecutive days are valid when last session was before yesterday', () {
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
       expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 8, 30, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -20,7 +20,7 @@ void main() {
     });
 
     test('can tell if the consecutive days are valid when last session was yesterday', () {
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
       expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 8, 31, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -28,7 +28,7 @@ void main() {
     });
 
     test('can tell if the consecutive days are valid when last session was today', () {
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
       expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 9, 1, 3, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -47,7 +47,7 @@ void main() {
         completedDaysCount: 0,
       );
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
 
       final currentSessionDate = DateTime(2023, 8, 31, 12, 0);
 
@@ -69,7 +69,7 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
       final currentSessionDate = DateTime(2023, 9, 1, 12, 0);
 
       ProfileStatisticsReport newStats =
@@ -90,7 +90,7 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
@@ -112,7 +112,7 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 9, 3, 12, 0);
 
@@ -137,7 +137,7 @@ void main() {
         completedDaysCount: 0,
       );
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
@@ -161,7 +161,7 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
@@ -187,7 +187,7 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStatsReportUpdater profileStatsCalculator = ProfileStatsReportUpdater();
+      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
 
       ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
         stats,

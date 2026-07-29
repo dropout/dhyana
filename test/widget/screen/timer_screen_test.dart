@@ -1,8 +1,8 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
+import 'package:dhyana/core/domain/entity/auth/user.dart';
 import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/modules/auth/data/datasource/auth/model/user.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';

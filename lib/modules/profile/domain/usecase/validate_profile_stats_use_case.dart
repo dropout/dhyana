@@ -1,8 +1,8 @@
 import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/data_update/profile_stats_report_updater.dart';
+import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 
 class ValidateProfileStatsUseCase {
-  final ProfileStatsReportUpdater profileStatsReportUpdater;
+  final DefaultProfileReportUpdaterService profileStatsReportUpdater;
 
   ValidateProfileStatsUseCase({
     required this.profileStatsReportUpdater,
