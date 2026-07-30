@@ -6,8 +6,8 @@ import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
 import 'package:dhyana/core/util/location.dart';
 
 

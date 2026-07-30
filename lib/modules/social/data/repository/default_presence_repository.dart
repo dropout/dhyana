@@ -1,19 +1,18 @@
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
 import 'package:dhyana/core/domain/repository/crud/crud_repository_operations.dart';
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
+import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 
 class DefaultPresenceRepository extends CrudRepositoryOps<Presence>
     implements PresenceRepository {
+  
   final PresenceDataProvider presenceDataProvider;
 
-  const DefaultPresenceRepository({required this.presenceDataProvider})
-    : super(presenceDataProvider);
-
-  @override
-  Future<void> showPresence(Presence presence) =>
-    presenceDataProvider.create(presence);
+  const DefaultPresenceRepository({
+    required this.presenceDataProvider,
+  }) : super(presenceDataProvider);
+  
 
   @override
   Future<List<Presence>> query(PresenceQueryOptions queryOptions) async {

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
 
 abstract interface class PresenceDataProvider implements DataProvider<Presence> {
 

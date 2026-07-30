@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
+import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';

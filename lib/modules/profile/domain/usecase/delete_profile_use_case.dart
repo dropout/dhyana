@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/service/auth_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
 enum DeleteProfileResult {
@@ -7,16 +7,16 @@ enum DeleteProfileResult {
 }
 
 class DeleteProfileUseCase with LoggerMixin {
-	final AuthRepository authRepository;
+	final AuthService authService;
 
 	DeleteProfileUseCase({
-		required this.authRepository,
+		required this.authService,
 	});
 
 	Future<DeleteProfileResult> execute() async {
 		try {
 			logger.t('Attempting to delete user account');
-			await authRepository.deleteUser();
+			await authService.deleteUser();
 			logger.t('User account deleted successfully');
 			return DeleteProfileResult.completed;
 		} on Exception catch (e) {

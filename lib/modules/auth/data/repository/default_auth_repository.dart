@@ -1,22 +1,17 @@
 import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
-import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
 import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
-import 'package:dhyana/modules/auth/data/datasource/auth/firebase_auth_provider.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/util/is_first_signin.dart';
-import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
-/// Firebase implementation of [AuthRepository]
-/// Uses [FirebaseAuthProvider] to perform authentication operations
+/// Default implementation of [AuthRepository]
+/// Uses [AuthProvider] to perform authentication operations
 class DefaultAuthRepository with LoggerMixin implements AuthRepository {
 
   /// Data provider for authentication operations
   final AuthProvider authDataProvider;
-
-  /// Data provider for profile operations, used to check if it's the user's first sign-in
-  final ProfileDataProvider profileDataProvider;
 
   /// Flag to indicate if a sign-in operation is in progress
   bool _isSigningIn = false;
@@ -24,7 +19,7 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
   /// Constructs a [DefaultAuthRepository] with the given data providers.
   DefaultAuthRepository({
     required this.authDataProvider,
-    required this.profileDataProvider,
+
   });
 
   /// Guards auth state change streams to prevent emitting values during sign-in process

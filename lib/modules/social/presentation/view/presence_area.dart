@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
 import 'package:flutter/material.dart';

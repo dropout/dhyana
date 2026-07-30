@@ -8,9 +8,24 @@ import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.da
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
+class UpdateSessionData {
+  final String id;
+  final String sessionTypeName;
+  final DateTime startTime;
+  final DateTime endTime;
+  final Duration duration;
+
+  const UpdateSessionData({
+    required this.id,
+    required this.sessionTypeName,
+    required this.startTime,
+    required this.endTime,
+    required this.duration,
+  });
+}
+
 /// Updates profile statistics report
 class ProfileStatsReportUpdater with LoggerMixin {
-
   ProfileStatsReportUpdater();
 
   bool hasLastSession(ProfileStatisticsReport stats) {
@@ -19,7 +34,7 @@ class ProfileStatsReportUpdater with LoggerMixin {
 
   bool hasValidConsecutiveDays(
     DateTime lastSessionDate,
-    DateTime currentSessionDate
+    DateTime currentSessionDate,
   ) {
     return (currentSessionDate.isBeforeYesterday(lastSessionDate) == false);
   }
@@ -30,7 +45,6 @@ class ProfileStatsReportUpdater with LoggerMixin {
     ProfileStatisticsReport stats,
     DateTime currentSessionDate,
   ) {
-
     // Case 0:
     // Last session is null, this is the first session,
     // so consecutive days should be 1
@@ -46,7 +60,9 @@ class ProfileStatsReportUpdater with LoggerMixin {
     // value should be set to 1 since the user missed a day and consecutive
     // days are broken but with the current session the user is starting a new streak
     if (hasValidConsecutiveDays(lastSessionDate, currentSessionDate) == false) {
-      logger.t('Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+      logger.t(
+        'Reset consecutive days counting. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}',
+      );
       return 1;
     }
 
@@ -54,13 +70,17 @@ class ProfileStatsReportUpdater with LoggerMixin {
     // When the last session was on yesterday, value should be incremented by 1
     bool isPreviousDay = currentSessionDate.isYesterday(lastSessionDate);
     if (isPreviousDay) {
-      logger.t('Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+      logger.t(
+        'Incrementing consecutive days. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}',
+      );
       return stats.consecutiveDays.current + 1;
     }
 
     // Case 3:
     // The session is on the same day, so no need to increment or reset
-    logger.t('Not incrementing consecutive days, same day. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+    logger.t(
+      'Not incrementing consecutive days, same day. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}',
+    );
     return stats.consecutiveDays.current;
   }
 
@@ -69,13 +89,17 @@ class ProfileStatsReportUpdater with LoggerMixin {
     ProfileStatisticsReport stats,
     DateTime currentSessionDate,
   ) {
-    final int calculatedConsecutiveDays =
-      calculateConsecutiveDaysCount(stats, currentSessionDate);
+    final int calculatedConsecutiveDays = calculateConsecutiveDaysCount(
+      stats,
+      currentSessionDate,
+    );
     return stats.copyWith(
       consecutiveDays: stats.consecutiveDays.copyWith(
         current: calculatedConsecutiveDays,
         longest: max(calculatedConsecutiveDays, stats.consecutiveDays.longest),
-        startedAt: (calculatedConsecutiveDays == 1) ? currentSessionDate : stats.consecutiveDays.startedAt,
+        startedAt: (calculatedConsecutiveDays == 1)
+            ? currentSessionDate
+            : stats.consecutiveDays.startedAt,
         lastChecked: currentSessionDate,
       ),
     );
@@ -86,14 +110,11 @@ class ProfileStatsReportUpdater with LoggerMixin {
     ProfileStatisticsReport stats,
     DateTime currentSessionDate,
   ) {
-
     // Case 0:
     // Its the first day, so completed days should be incremented
     if (stats.lastSessionDate == null) {
       logger.t('Completed days + 1, first session');
-      return stats.copyWith(
-        completedDaysCount: stats.completedDaysCount + 1,
-      );
+      return stats.copyWith(completedDaysCount: stats.completedDaysCount + 1);
     }
 
     // Case 1:
@@ -101,17 +122,19 @@ class ProfileStatsReportUpdater with LoggerMixin {
     DateTime lastSessionDate = stats.lastSessionDate!;
     bool sameDay = currentSessionDate.isSameDay(lastSessionDate);
     if (sameDay) {
-      logger.t('Not incrementing completed days, same day. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
+      logger.t(
+        'Not incrementing completed days, same day. Last: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}',
+      );
       return stats;
     }
 
     // Case 2:
     // If its not the the same day as the last session completed days
     // should be incremented
-    logger.t('Completed days + 1: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}');
-    return stats.copyWith(
-      completedDaysCount: stats.completedDaysCount + 1,
+    logger.t(
+      'Completed days + 1: ${lastSessionDate.toDayId()} | Current: ${currentSessionDate.toDayId()}',
     );
+    return stats.copyWith(completedDaysCount: stats.completedDaysCount + 1);
   }
 
   /// Update milestone progress in the profile statistics report
@@ -121,7 +144,6 @@ class ProfileStatsReportUpdater with LoggerMixin {
     ProfileStatisticsReport updatedStatsReport,
     Session session,
   ) {
-
     // Case 0:
     // The consecutive days has been reset,
     // reset the milestone progress too
@@ -135,13 +157,15 @@ class ProfileStatsReportUpdater with LoggerMixin {
 
     // Check for consecutive days change
     final int consecutiveDaysDiff =
-      updatedStatsReport.consecutiveDays.current -
+        updatedStatsReport.consecutiveDays.current -
         oldStatsReport.consecutiveDays.current;
 
     // Case 1:
     // If the consecutive days have not changed, no need to update
     if (consecutiveDaysDiff == 0) {
-      logger.t('No change in consecutive days, skipping milestone progress update');
+      logger.t(
+        'No change in consecutive days, skipping milestone progress update',
+      );
       return updatedStatsReport;
     }
 
@@ -149,11 +173,13 @@ class ProfileStatsReportUpdater with LoggerMixin {
     // If the consecutive days have increased,
     // update the milestone progress too
     if (consecutiveDaysDiff > 0) {
-      MilestoneProgress milestoneProgress = updatedStatsReport.milestoneProgress;
+      MilestoneProgress milestoneProgress =
+          updatedStatsReport.milestoneProgress;
 
       // Case 2.1:
       // If the milestone progress is already completed, restart the progress
-      if (milestoneProgress.completedDaysCount == milestoneProgress.targetDaysCount) {
+      if (milestoneProgress.completedDaysCount ==
+          milestoneProgress.targetDaysCount) {
         return updatedStatsReport.copyWith(
           milestoneProgress: MilestoneProgress(
             completedDaysCount: 1,
@@ -164,7 +190,8 @@ class ProfileStatsReportUpdater with LoggerMixin {
 
       // Case 2.2:
       // If there are still milestones to complete, update the progress
-      if (milestoneProgress.completedDaysCount < milestoneProgress.targetDaysCount) {
+      if (milestoneProgress.completedDaysCount <
+          milestoneProgress.targetDaysCount) {
         return updatedStatsReport.copyWith(
           milestoneProgress: milestoneProgress.copyWith(
             completedDaysCount: milestoneProgress.completedDaysCount + 1,
@@ -177,7 +204,6 @@ class ProfileStatsReportUpdater with LoggerMixin {
     // Consecutive days negative? Should not happen
     // Maybe throw an error instead?
     return updatedStatsReport;
-
   }
 
   /// Validates the consecutive days count in the stats report.
@@ -185,9 +211,8 @@ class ProfileStatsReportUpdater with LoggerMixin {
   /// - resets the consecutive days count
   /// - resets the milestone progress
   ProfileStatisticsReport validateStatsReport(
-    ProfileStatisticsReport statsReport
+    ProfileStatisticsReport statsReport,
   ) {
-
     final DateTime? lastSessionDate = statsReport.lastSessionDate;
 
     // Check if the user has a last session, if not, no need to validate
@@ -207,11 +232,11 @@ class ProfileStatsReportUpdater with LoggerMixin {
 
     // If consecutive days are valid, no need to update
     if (hasValidConsecutiveDays(lastSessionDate, now)) {
-      logger.t('Consecutive days are valid: ${statsReport.consecutiveDays.current}');
+      logger.t(
+        'Consecutive days are valid: ${statsReport.consecutiveDays.current}',
+      );
       return statsReport.copyWith(
-        consecutiveDays: statsReport.consecutiveDays.copyWith(
-          lastChecked: now,
-        ),
+        consecutiveDays: statsReport.consecutiveDays.copyWith(lastChecked: now),
       );
     }
 
@@ -227,30 +252,32 @@ class ProfileStatsReportUpdater with LoggerMixin {
         sessions: [],
       ),
     );
-
   }
 
   UpdateProfileStatsResult updateProfileStatsWithSession(
     Profile profile,
     Session session,
   ) {
-
     final ProfileStatisticsReport oldStatsReport = profile.statsReport;
     ProfileStatisticsReport updatedStatsReport = oldStatsReport.copyWith();
 
     // Update consecutive days
     updatedStatsReport = updateConsecutiveDays(
       updatedStatsReport,
-      session.startTime
+      session.startTime,
     );
-    logger.t('Consecutive days: ${oldStatsReport.consecutiveDays.current} -> ${updatedStatsReport.consecutiveDays.current}');
+    logger.t(
+      'Consecutive days: ${oldStatsReport.consecutiveDays.current} -> ${updatedStatsReport.consecutiveDays.current}',
+    );
 
     // Update completed days
     updatedStatsReport = updateCompletedDays(
       updatedStatsReport,
       session.startTime,
     );
-    logger.t('Completed days: ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}');
+    logger.t(
+      'Completed days: ${oldStatsReport.completedDaysCount} -> ${updatedStatsReport.completedDaysCount}',
+    );
 
     // Update milestone progress
     updatedStatsReport = updateMilestoneProgressWithSession(
@@ -260,11 +287,14 @@ class ProfileStatsReportUpdater with LoggerMixin {
     );
 
     // Check if a milestone has been completed
-    int prevMileStoneCount = oldStatsReport.milestoneProgress.completedDaysCount;
-    int newMileStoneCount = updatedStatsReport.milestoneProgress.completedDaysCount;
-    int targetMileStoneCount = updatedStatsReport.milestoneProgress.targetDaysCount;
+    int prevMileStoneCount =
+        oldStatsReport.milestoneProgress.completedDaysCount;
+    int newMileStoneCount =
+        updatedStatsReport.milestoneProgress.completedDaysCount;
+    int targetMileStoneCount =
+        updatedStatsReport.milestoneProgress.targetDaysCount;
     if (prevMileStoneCount == (targetMileStoneCount - 1) &&
-     newMileStoneCount == targetMileStoneCount) {
+        newMileStoneCount == targetMileStoneCount) {
       updatedStatsReport = updatedStatsReport.copyWith(
         milestoneCount: updatedStatsReport.milestoneCount + 1,
       );
@@ -274,18 +304,25 @@ class ProfileStatsReportUpdater with LoggerMixin {
     // Add session results to stats
     updatedStatsReport = updatedStatsReport.copyWith(
       lastSessionDate: session.startTime,
-      completedMinutesCount: updatedStatsReport.completedMinutesCount +
-        session.duration.inMinutes,
+      completedMinutesCount:
+          updatedStatsReport.completedMinutesCount + session.duration.inMinutes,
       completedSessionsCount: updatedStatsReport.completedSessionsCount + 1,
-      firstSessionDate: (oldStatsReport.firstSessionDate == null) ?
-        session.startTime : oldStatsReport.firstSessionDate,
+      firstSessionDate: (oldStatsReport.firstSessionDate == null)
+          ? session.startTime
+          : oldStatsReport.firstSessionDate,
     );
-    logger.t('Last session date: ${oldStatsReport.lastSessionDate}'
-      ' -> ${updatedStatsReport.lastSessionDate}');
-    logger.t('Completed minutes count: ${oldStatsReport.completedMinutesCount}'
-      ' -> ${updatedStatsReport.completedMinutesCount}');
-    logger.t('Completed session count: ${oldStatsReport.completedSessionsCount}'
-      ' -> ${updatedStatsReport.completedSessionsCount}');
+    logger.t(
+      'Last session date: ${oldStatsReport.lastSessionDate}'
+      ' -> ${updatedStatsReport.lastSessionDate}',
+    );
+    logger.t(
+      'Completed minutes count: ${oldStatsReport.completedMinutesCount}'
+      ' -> ${updatedStatsReport.completedMinutesCount}',
+    );
+    logger.t(
+      'Completed session count: ${oldStatsReport.completedSessionsCount}'
+      ' -> ${updatedStatsReport.completedSessionsCount}',
+    );
 
     // Update profile statistics report with data from new session
     Profile updatedProfile = profile.copyWith(statsReport: updatedStatsReport);
@@ -296,5 +333,4 @@ class ProfileStatsReportUpdater with LoggerMixin {
       session: session,
     );
   }
-
 }

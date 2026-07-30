@@ -1,8 +1,10 @@
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
+import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/social/data/datasource/firebase_presence_data_provider.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
-import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
+import 'package:dhyana/modules/social/data/repository/default_presence_repository.dart';
+import 'package:dhyana/modules/social/data/service/default_presence_service.dart';
+import 'package:dhyana/core/service/presence_service.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
@@ -13,6 +15,7 @@ final getIt = GetIt.instance;
 void configureSocialModuleDependencies() {
   _configureDataProviders();
   _configureRepositories();
+  _configureServices();
   _configureUseCases();
   _configureViewModels();
 }
@@ -27,6 +30,14 @@ void _configureRepositories() {
   getIt.registerLazySingleton<PresenceRepository>(
     () => DefaultPresenceRepository(
       presenceDataProvider: getIt.get<PresenceDataProvider>(),
+    ),
+  );
+}
+
+void _configureServices() {
+  GetIt.I.registerLazySingleton<PresenceService>(
+    () => DefaultPresenceService(
+      presenceRepository: getIt.get<PresenceRepository>(),
     ),
   );
 }

@@ -5,7 +5,6 @@ import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:dhyana/core/util/firebase_provider.dart';
-import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 
 import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/firebase_auth_provider.dart';
@@ -13,7 +12,7 @@ import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provid
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/modules/auth/data/repository/default_auth_repository.dart';
 
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/functions_service.dart';
@@ -40,8 +39,6 @@ import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart'
 import 'package:dhyana/core/infrastructure/platform/default_shared_preferences_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_wakelock_service.dart';
 
-final getIt = GetIt.instance;
-
 Future<void> configureCoreDependencies() async {
   _registerDataProviders();
   _registerRepositories();
@@ -50,70 +47,69 @@ Future<void> configureCoreDependencies() async {
 }
 
 void _registerDataProviders() {
-  final firebaseProvider = getIt<FirebaseProvider>();
-  getIt.registerLazySingleton<AuthProvider>(
+  final firebaseProvider = GetIt.I.get<FirebaseProvider>();
+  GetIt.I.registerLazySingleton<AuthProvider>(
     () => FirebaseAuthProvider(firebaseProvider.auth),
   );
-  getIt.registerLazySingleton<StorageDataProvider>(
+  GetIt.I.registerLazySingleton<StorageDataProvider>(
     () => FirebaseStorageDataProvider(firebaseProvider.storage),
   );
 }
 
 void _registerRepositories() {
-  getIt.registerLazySingleton<AuthRepository>(
+  GetIt.I.registerLazySingleton<AuthRepository>(
     () => DefaultAuthRepository(
-      authDataProvider: getIt<AuthProvider>(),
-      profileDataProvider: getIt<ProfileDataProvider>(),
+      authDataProvider: GetIt.I.get<AuthProvider>(),
     ),
   );
-  getIt.registerLazySingleton<StorageRepository>(
+  GetIt.I.registerLazySingleton<StorageRepository>(
     () => DefaultStorageRepository(
-      storageDataProvider: getIt<StorageDataProvider>(),
+      storageDataProvider: GetIt.I.get<StorageDataProvider>(),
     ),
   );
 }
 
 Future<void> _registerServices() async {
-  getIt.registerLazySingleton<AnalyticsService>(
-    () => FirebaseAnalyticsService(getIt<FirebaseProvider>().analytics),
+  GetIt.I.registerLazySingleton<AnalyticsService>(
+    () => FirebaseAnalyticsService(GetIt.I.get<FirebaseProvider>().analytics),
   );
 
-  getIt.registerLazySingleton<CrashlyticsService>(
-    () => FirebaseCrashlyticsService(getIt<FirebaseProvider>().crashlytics),
+  GetIt.I.registerLazySingleton<CrashlyticsService>(
+    () => FirebaseCrashlyticsService(GetIt.I.get<FirebaseProvider>().crashlytics),
   );
 
-  getIt.registerLazySingleton<FunctionsService>(
-    () => FirebaseFunctionsService(getIt<FirebaseProvider>().functions),
+  GetIt.I.registerLazySingleton<FunctionsService>(
+    () => FirebaseFunctionsService(GetIt.I.get<FirebaseProvider>().functions),
   );
 
-  getIt.registerLazySingleton<HapticsService>(DefaultHapticsService.new);
-  getIt.registerLazySingleton<OverlayService>(DefaultOverlayService.new);
-  getIt.registerLazySingleton<WakelockService>(DefaultWakelockService.new);
-  getIt.registerLazySingleton<ShaderService>(DefaultShaderService.new);
+  GetIt.I.registerLazySingleton<HapticsService>(DefaultHapticsService.new);
+  GetIt.I.registerLazySingleton<OverlayService>(DefaultOverlayService.new);
+  GetIt.I.registerLazySingleton<WakelockService>(DefaultWakelockService.new);
+  GetIt.I.registerLazySingleton<ShaderService>(DefaultShaderService.new);
 
-  getIt.registerLazySingleton<ResourceResolver>(
+  GetIt.I.registerLazySingleton<ResourceResolver>(
     () => DefaultResourceResolver(
-      storageDataProvider: getIt<StorageDataProvider>(),
+      storageDataProvider: GetIt.I.get<StorageDataProvider>(),
     ),
   );
 
-  getIt.registerLazySingleton<IdGeneratorService>(
-    () => FirebaseIdGeneratorService(getIt<FirebaseProvider>().firestore),
+  GetIt.I.registerLazySingleton<IdGeneratorService>(
+    () => FirebaseIdGeneratorService(GetIt.I.get<FirebaseProvider>().firestore),
   );
 
-  getIt.registerLazySingleton<MindfulMinutesService>(
+  GetIt.I.registerLazySingleton<MindfulMinutesService>(
     () => DefaultMindfulMinutesService(
       flutterMindfulMinutes: FlutterMindfulMinutes(),
     ),
   );
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  getIt.registerLazySingleton<SharedPreferencesService>(
+  GetIt.I.registerLazySingleton<SharedPreferencesService>(
     () => DefaultSharedPreferencesService(sharedPreferences),
   );
 
-  getIt.registerLazySingleton<RemoteSettingsService>(
-    () => FirebaseRemoteSettingsService(getIt<FirebaseProvider>().remoteConfig),
+  GetIt.I.registerLazySingleton<RemoteSettingsService>(
+    () => FirebaseRemoteSettingsService(GetIt.I.get<FirebaseProvider>().remoteConfig),
   );
 }
 

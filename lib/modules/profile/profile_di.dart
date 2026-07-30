@@ -1,4 +1,6 @@
 import 'package:dhyana/core/service/profile_stats_updater_service.dart';
+import 'package:dhyana/modules/practice/timer/data/datasource/timer_profile_data_provider.dart';
+import 'package:dhyana/modules/profile/data/datasource/default_timer_profile_data_provider.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
@@ -17,8 +19,6 @@ import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/modules/profile/data/service/default_safe_image_detector.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 
-final getIt = GetIt.instance;
-
 void configureProfileModuleDependencies() {
   _configureDataProviders();
   _configureRepositories();
@@ -28,58 +28,61 @@ void configureProfileModuleDependencies() {
 }
 
 void _configureDataProviders() {
-  getIt.registerLazySingleton<ProfileDataProvider>(
-    () => FirebaseProfileDataProvider(getIt.get<FirebaseProvider>().firestore),
+  GetIt.I.registerLazySingleton<ProfileDataProvider>(
+    () => FirebaseProfileDataProvider(GetIt.I.get<FirebaseProvider>().firestore),
+  );
+  GetIt.I.registerLazySingleton<TimerProfileDataProvider>(
+    () => DefaultTimerProfileDataProvider(GetIt.I.get<FirebaseProvider>().firestore),
   );
 }
 
 void _configureRepositories() {
-  getIt.registerLazySingleton<ProfileRepository>(
+  GetIt.I.registerLazySingleton<ProfileRepository>(
     () => DefaultProfileRepository(
-      profileDataProvider: getIt.get<ProfileDataProvider>(),
-      storageDataProvider: getIt.get<StorageDataProvider>(),
+      profileDataProvider: GetIt.I.get<ProfileDataProvider>(),
+      storageDataProvider: GetIt.I.get<StorageDataProvider>(),
     ),
   );
 }
 
 void _configureServices() {
-  getIt.registerLazySingleton<SafeImageDetectorFactory>(
+  GetIt.I.registerLazySingleton<SafeImageDetectorFactory>(
     () => DefaultSafeImageDetectorFactory(),
   );
-  getIt.registerLazySingleton<ProfileStatsUpdaterService>(
+  GetIt.I.registerLazySingleton<ProfileStatsUpdaterService>(
     () => DefaultProfileReportUpdaterService(),
   );
 }
 
 void _configureUseCases() {
-  getIt.registerLazySingleton(
+  GetIt.I.registerLazySingleton(
     () => LoadProfileUseCase(
-      profileRepository: getIt.get<ProfileRepository>(),
+      profileRepository: GetIt.I.get<ProfileRepository>(),
       profileStatsUpdater: DefaultProfileReportUpdaterService(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  GetIt.I.registerLazySingleton(
     () => UpdateProfileUseCase(
-      profileRepository: getIt.get<ProfileRepository>(),
-      storageRepository: getIt.get<StorageRepository>(),
+      profileRepository: GetIt.I.get<ProfileRepository>(),
+      storageRepository: GetIt.I.get<StorageRepository>(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  GetIt.I.registerLazySingleton(
     () => UpdateProfileSettingsUseCase(
-      profileRepository: getIt.get<ProfileRepository>(),
+      profileRepository: GetIt.I.get<ProfileRepository>(),
     ),
   );
 }
 
 void _configureViewModels() {
-  getIt.registerLazySingleton(
+  GetIt.I.registerLazySingleton(
     () => ProfileCubit(
-      loadProfileUseCase: getIt.get<LoadProfileUseCase>(),
-      updateProfileUseCase: getIt.get<UpdateProfileUseCase>(),
-      updateProfileSettingsUseCase: getIt.get<UpdateProfileSettingsUseCase>(),
-      crashlyticsService: getIt.get<CrashlyticsService>(),
+      loadProfileUseCase: GetIt.I.get<LoadProfileUseCase>(),
+      updateProfileUseCase: GetIt.I.get<UpdateProfileUseCase>(),
+      updateProfileSettingsUseCase: GetIt.I.get<UpdateProfileSettingsUseCase>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     ),
   );
 }

@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
-import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
-import 'package:dhyana/modules/social/data/repository/firebase_presence_repository.dart';
+import 'package:dhyana/modules/social/data/repository/default_presence_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -97,7 +97,9 @@ void main() {
       when(() => mockPresenceDataProvider.create(presence))
           .thenAnswer((_) async {});
 
-      await firebasePresenceRepository.showPresence(presence);
+      await firebasePresenceRepository.create(
+        presence
+      );
 
       verify(() => mockPresenceDataProvider.create(presence)).called(1);
     });

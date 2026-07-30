@@ -1,9 +1,9 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
 
 part 'presence.freezed.dart';
 part 'presence.g.dart';

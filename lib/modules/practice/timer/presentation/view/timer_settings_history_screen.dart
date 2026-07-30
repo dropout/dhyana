@@ -2,7 +2,7 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_setti
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings_history/timer_settings_history_list.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history/timer_settings_history_list.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

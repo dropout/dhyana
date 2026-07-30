@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
-import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
+import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
 
@@ -43,7 +43,6 @@ PublicProfile _randomPublicProfile(_Gender gender) {
   }
 }
 
-
 class StubbedPresenceRepository implements PresenceRepository {
 
   final Faker _faker = Faker();
@@ -61,11 +60,6 @@ class StubbedPresenceRepository implements PresenceRepository {
         );
       });
     });
-  }
-
-  @override
-  Future<void> showPresence(Presence presence) {
-    return Future.value();
   }
 
   @override

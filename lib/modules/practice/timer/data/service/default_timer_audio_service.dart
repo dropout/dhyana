@@ -7,8 +7,10 @@ import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service
 import 'package:flutter/services.dart';
 import 'package:gaimon/gaimon.dart';
 
-/// Service that provides timer-specific audio functionality by delegating to
-/// the [AppAudioHandler] with appropriate custom actions.
+
+/// A timer service that measures time based on audio playback. 
+/// It uses an [AppAudioHandler] to control audio playback and 
+/// manage timer-related actions.
 class DefaultTimerAudioService implements TimerAudioService {
   
   /// The [AppAudioHandler] that this service uses to control audio playback.

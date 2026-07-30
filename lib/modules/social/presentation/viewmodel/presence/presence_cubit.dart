@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';

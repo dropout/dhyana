@@ -4,8 +4,8 @@ import 'package:dhyana/core/presentation/view/app_bar/custom_app_bar.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_button.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_button.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings/today.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings_history/timer_settings_history_button.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/today.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/core/presentation/view/util/signed_in.dart';
 import 'package:flutter/material.dart';
 

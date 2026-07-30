@@ -4,6 +4,9 @@ import 'package:dhyana/modules/practice/timer/domain/service/timer_service.dart'
 import 'package:dhyana/core/util/logger_mixin.dart';
 
 // Legacy timer, not in use currently, but kept for reference and potential future use.
+
+/// A timer service that provides basic timer functionality, 
+/// with pure Dart implementation.
 class DefaultTimerService with LoggerMixin implements TimerService {
   final Duration _duration;
   final int tickIntervalInMilliSeconds;

@@ -1,6 +1,5 @@
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,12 +12,10 @@ part 'sessions_cubit.freezed.dart';
 class SessionsCubit extends Cubit<SessionsState> with LoggerMixin {
 
   final SessionRepository sessionRepository;
-  final AuthRepository authRepository;
   final CrashlyticsService crashlyticsService;
 
   SessionsCubit({
     required this.sessionRepository,
-    required this.authRepository,
     required this.crashlyticsService,
   }) : super(const SessionsState.initial());
 

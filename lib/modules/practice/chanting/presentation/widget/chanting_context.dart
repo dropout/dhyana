@@ -1,4 +1,3 @@
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
@@ -26,11 +25,7 @@ class ChantingContext extends StatelessWidget {
     final services = context.services;
     final repos = context.repos;
 
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (BuildContext context, AuthState authState) {
-        // final bool isSignedIn = (authState is AuthStateSignedIn);
-        // final String? profileId = (isSignedIn) ? authState.user.uid : null;
-
+        // TODO: Show presence for chanting sessions
         final chantingCubit = ChantingCubit(
           chantingSettings: chantingSettings,
           audioService: ChantingAudioService(services.audioHandler),
@@ -64,7 +59,7 @@ class ChantingContext extends StatelessWidget {
           create: (_) => chantingCubit,
           child: child,
         );
-      },
-    );
+    //   },
+    // );
   }
 }

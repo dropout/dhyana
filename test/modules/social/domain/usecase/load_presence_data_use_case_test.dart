@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/presence/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

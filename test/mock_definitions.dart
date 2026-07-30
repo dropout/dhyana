@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/service/auth_service.dart';
+import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/service/profile_stats_updater_service.dart';
 import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
@@ -12,7 +13,7 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_setti
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
+import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
@@ -132,6 +133,10 @@ class MockResourceResolver
 class MockProfileStatsUpdaterService
   extends Mock
   implements ProfileStatsUpdaterService {}
+
+class MockAuthService
+  extends Mock
+  implements AuthService {}
 
 // Repositories ----------------------------------------------------------------
 

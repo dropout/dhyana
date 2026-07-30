@@ -10,7 +10,7 @@ import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_se
 import 'package:dhyana/core/presentation/view/home/home_screen_bottom_menu.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_view.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -58,6 +58,7 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, authState) {
         SessionType sessionType = state.sessionType;
+        // TODO: Move this logic to usecase or cubit
         if (authState is! AuthStateSignedIn) {
           sessionType = .sitting;
         }

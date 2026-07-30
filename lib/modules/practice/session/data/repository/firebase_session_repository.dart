@@ -31,20 +31,6 @@ class FirebaseSessionRepository implements SessionRepository {
     )..delete(sessionId);
   
   @override
-  Future<List<Session>> query(String profileId, SessionQueryOptions queryOptions) async =>
-    FirebaseSessionDataProvider(
-      firestore,
-      profileId,
-    ).query(queryOptions);
-    
-  @override
-  Stream<List<Session>> queryStream(String profileId, SessionQueryOptions queryOptions) =>
-    FirebaseSessionDataProvider(
-      firestore,
-      profileId,
-    ).queryStream(queryOptions);
-  
-  @override
   Future<Session> read(String profileId, String id) async => 
     await FirebaseSessionDataProvider(
       firestore,
@@ -65,12 +51,18 @@ class FirebaseSessionRepository implements SessionRepository {
       profileId,
     ).update(model);
 
-  
-
-  
-
-
-
-
+  @override
+  Future<List<Session>> query(String profileId, SessionQueryOptions queryOptions) async =>
+    FirebaseSessionDataProvider(
+      firestore,
+      profileId,
+    ).query(queryOptions);
+    
+  @override
+  Stream<List<Session>> queryStream(String profileId, SessionQueryOptions queryOptions) =>
+    FirebaseSessionDataProvider(
+      firestore,
+      profileId,
+    ).queryStream(queryOptions);  
  
 }

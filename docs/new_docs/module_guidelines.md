@@ -109,6 +109,7 @@ lib/
 ### Data Layer Guidelines
 - **Data Sources**: Implement data sources for remote APIs, local databases, or any other data provider. Use interfaces to abstract the implementation details.
 - **Repositories**: Implement repositories that act as a bridge between the data sources and the domain
+
 - **Services**: Implement module-specific services that provide additional functionality or business logic.
 
 ### Domain Layer Guidelines

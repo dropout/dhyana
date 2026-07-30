@@ -7,8 +7,8 @@ import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart'
 import 'package:dhyana/core/service/shader_service.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_button.dart';
 import 'package:dhyana/core/presentation/view/home_screen.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings_history/timer_settings_history_button.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_view.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history/timer_settings_history_button.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/timer_settings_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

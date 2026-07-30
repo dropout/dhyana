@@ -1,4 +1,3 @@
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
@@ -53,7 +52,6 @@ void _configureUseCases() {
 void _configureViewModels() {
   getIt.registerFactory<SessionCompletedCubit>(() {
     return SessionCompletedCubit(
-      profileRepository: getIt.get<ProfileRepository>(),
       statisticsRepository: getIt.get<StatisticsRepository>(),
       crashlyticsService: getIt.get<CrashlyticsService>(),
       saveSessionToProfileUseCase: getIt.get<UpdateProfileWithSessionUseCase>(),
@@ -64,7 +62,6 @@ void _configureViewModels() {
   getIt.registerFactory<SessionsCubit>(() {
     return SessionsCubit(
       sessionRepository: getIt.get<SessionRepository>(),
-      authRepository: getIt.get<AuthRepository>(),
       crashlyticsService: getIt.get<CrashlyticsService>(),
     );
   });

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 

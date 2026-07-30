@@ -1,29 +1,26 @@
 import 'package:clock/clock.dart';
-import 'package:dhyana/core/domain/entity/presence/presence.dart';
-import 'package:dhyana/core/domain/entity/presence/public_profile.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
+
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/core/util/timer_event_scheduler.dart';
+
+import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
+import 'package:dhyana/core/service/presence_service.dart';
 
-import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/core/util/timer_event_scheduler.dart';
+/// A use case that starts the timer:
+/// - 1. Setup the timer audio service and play the starting sound.
+/// - 2. Setup the timer event scheduler and schedule the timer events.,
 
-/// A use case that starts the timer, initializes the timer audio service,
-/// and shows the user's presence if authenticated.
 class StartTimerUseCase with LoggerMixin {
-  /// Used to check if the user is authenticated and to get the user's
-  /// profile ID for presence tracking.
-  final AuthRepository authRepository;
 
-  /// Used to get the user's profile for presence tracking.
-  final ProfileRepository profileRepository;
+  /// The timer data repository is used to read the user's 
+  /// authentication and profile data.
+  final DefaultTimerDataRepository timerDataRepository;
 
   /// Used to start the timer audio service and play sounds.
   final TimerAudioService timerAudioService;
@@ -35,18 +32,17 @@ class StartTimerUseCase with LoggerMixin {
   final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
 
   /// Used to show the user's presence when the timer starts.
-  final PresenceRepository presenceRepository;
+  final PresenceService presenceService;
 
   /// Used to log errors and exceptions that occur during the execution of this use case.
   final CrashlyticsService crashlyticsService;
 
   StartTimerUseCase({
-    required this.authRepository,
-    required this.profileRepository,
+    required this.timerDataRepository,
     required this.timerAudioService,
     required this.eventScheduler,
     required this.timerSettingsHistoryRepository,
-    required this.presenceRepository,
+    required this.presenceService,
     required this.crashlyticsService,
   });
 
@@ -90,35 +86,42 @@ class StartTimerUseCase with LoggerMixin {
   /// and does the following:
   /// - Records the current timer settings to the history.
   /// - Shows the user's presence if the user has enabled the presence feature.
+  /// Move to a business logic service if used in multiple use cases?
   Future<void> _executeAdditionalTasks(TimerSettings timerSettings) async {
     try {
-      User? user = await authRepository.authStateChange.first;
-      if (user == null) {
-        logger.t('User is not authenticated, skipping presence, history}');
+      final authData = await timerDataRepository.getTimerAuthData();
+      if (!authData.isAuthenticated) {
+        logger.t('User is not authenticated, skipping presence, history');
         return;
       }
-      final profile = await profileRepository.readStream(user.uid).first;
+
+      if (authData.userId == null) {
+        logger.t('User is authenticated but userId is null, skipping presence, history');
+        return;
+      }
+
+      final profileId = authData.userId!;
+      final timerProfileData = await timerDataRepository.getTimerProfileData(profileId);
 
       logger.t('Recording timer settings history');
       timerSettingsHistoryRepository.recordTimerSettingsHistory(
-        profile.id,
+        timerProfileData.profileId,
         timerSettings,
       );
 
-      if (profile.settings.usePresenceFeature == false) {
+      if (timerProfileData.usePresenceFeature == false) {
         logger.t('User has disabled presence feature, skipping showing presence');
         return;
       }
 
       logger.t('Showing presence}');
-      final publicProfile = PublicProfile.fromProfile(profile: profile);
-      await presenceRepository.showPresence(
-        Presence(
-          id: publicProfile.id,
-          profile: publicProfile,
-          location: publicProfile.location,
-          startedAt: clock.now(),
-        ),
+      await presenceService.showPresence(
+        profileId: timerProfileData.profileId,
+        firstName: timerProfileData.firstName,
+        lastName: timerProfileData.lastName,
+        photoBlurhash: timerProfileData.photoBlurhash,
+        location: timerProfileData.location,
+        startedAt: clock.now(),
       );
     } catch (e, stack) {
       crashlyticsService.recordError(

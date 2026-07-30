@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
 import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
+import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';

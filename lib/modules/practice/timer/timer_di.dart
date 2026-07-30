@@ -1,8 +1,9 @@
 import 'package:dhyana/core/audio/app_audio_handler.dart';
-import 'package:dhyana/core/domain/repository/auth_repository.dart';
-import 'package:dhyana/core/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
+import 'package:dhyana/modules/practice/timer/data/datasource/timer_auth_data_provider.dart';
+import 'package:dhyana/modules/practice/timer/data/datasource/timer_profile_data_provider.dart';
+import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
@@ -13,16 +14,14 @@ import 'package:dhyana/modules/practice/timer/domain/usecase/playback_state_chan
 import 'package:dhyana/modules/practice/timer/domain/usecase/start_timer_use_case.dart';
 import 'package:dhyana/modules/practice/timer/data/service/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
+import 'package:dhyana/core/service/presence_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-final getIt = GetIt.instance;
-
-void configureTimerModuleDependencies() {
+void configureTimerModuleDependencies() {  
   _configureRepositories();
   _configureServices();
   _configureUseCases();
@@ -30,21 +29,29 @@ void configureTimerModuleDependencies() {
 }
 
 void _configureRepositories() {
-  getIt.registerLazySingleton<TimerSettingsHistoryRepository>(
+  GetIt.I.registerLazySingleton<TimerSettingsHistoryRepository>(
     () => FirebaseTimerSettingsHistoryRepository(
-      getIt.get<FirebaseProvider>().firestore,
+      GetIt.I.get<FirebaseProvider>().firestore,
     ),
   );
+
+  GetIt.I.registerLazySingleton<DefaultTimerDataRepository>(
+    () => DefaultTimerDataRepository(
+      timerAuthDataProvider: GetIt.I.get<TimerAuthDataProvider>(),
+      timerProfileDataProvider: GetIt.I.get<TimerProfileDataProvider>(),
+    ),
+  );
+
 }
 
 void _configureServices() {
-  getIt.registerFactory<DefaultTimerAudioService>(
-    () => DefaultTimerAudioService(getIt.get<AppAudioHandler>()),
+  GetIt.I.registerFactory<DefaultTimerAudioService>(
+    () => DefaultTimerAudioService(GetIt.I.get<AppAudioHandler>()),
   );
 }
 
 void _configureUseCases() {
-  getIt.registerFactoryParam<
+  GetIt.I.registerFactoryParam<
     ConfigureEventSchedulerUseCase,
     TimerEventScheduler,
     void
@@ -52,29 +59,28 @@ void _configureUseCases() {
     return ConfigureEventSchedulerUseCase(eventScheduler: eventScheduler);
   });
 
-  getIt.registerFactoryParam<StartTimerUseCase, TimerEventScheduler, void>((
+  GetIt.I.registerFactoryParam<StartTimerUseCase, TimerEventScheduler, void>((
     eventScheduler,
     _,
   ) {
     return StartTimerUseCase(
-      timerAudioService: getIt.get<DefaultTimerAudioService>(),
+      timerDataRepository: GetIt.I.get<DefaultTimerDataRepository>(),
+      timerAudioService: GetIt.I.get<DefaultTimerAudioService>(),
       eventScheduler: eventScheduler,
-      authRepository: getIt.get<AuthRepository>(),
-      timerSettingsHistoryRepository: getIt.get<FirebaseTimerSettingsHistoryRepository>(),
-      profileRepository: getIt.get<ProfileRepository>(),
-      presenceRepository: getIt.get<PresenceRepository>(),
-      crashlyticsService: getIt.get<CrashlyticsService>(),
+      timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),
+      presenceService: GetIt.I.get<PresenceService>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),       
     );
   });
 
-  getIt.registerFactoryParam<CompleteTimerUseCase, TimerAudioService, TimerEventScheduler>((
+  GetIt.I.registerFactoryParam<CompleteTimerUseCase, TimerAudioService, TimerEventScheduler>((
     timerAudioService,
     eventScheduler,    
   ) {
     return CompleteTimerUseCase(
       timerAudioService: timerAudioService,
       eventScheduler: eventScheduler,
-      idGeneratorService: getIt.get<IdGeneratorService>(),
+      idGeneratorService: GetIt.I.get<IdGeneratorService>(),
     );
   });
 }
@@ -82,16 +88,16 @@ void _configureUseCases() {
 void _configureViewModels() {
 
   // Timer Settings Cubit
-  getIt.registerFactory<TimerSettingsCubit>(() => TimerSettingsCubit(
-    crashlyticsService: getIt.get<CrashlyticsService>(),
+  GetIt.I.registerFactory<TimerSettingsCubit>(() => TimerSettingsCubit(
+    crashlyticsService: GetIt.I.get<CrashlyticsService>(),
   ));
 
   // Timer Cubit with parameterized TimerSettings
-  getIt.registerFactoryParam<TimerCubit, TimerSettings, void>((
+  GetIt.I.registerFactoryParam<TimerCubit, TimerSettings, void>((
     timerSettings,
     _,
   ) {
-    final audioService = getIt.get<DefaultTimerAudioService>();
+    final audioService = GetIt.I.get<DefaultTimerAudioService>();
     final timerEventScheduler = TimerEventScheduler(
       source: TimerAudioServiceElapsedTimeSource(audioService),
     );
@@ -99,16 +105,16 @@ void _configureViewModels() {
       timerSettings: timerSettings,
       audioService: audioService,
       eventScheduler: timerEventScheduler,
-      router: getIt.get<GoRouter>(),
-      crashlyticsService: getIt.get<CrashlyticsService>(),
+      router: GetIt.I.get<GoRouter>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
       configureEventSchedulerUseCase: ConfigureEventSchedulerUseCase(
         eventScheduler: timerEventScheduler,
       ),
-      startTimerUseCase: getIt.get<StartTimerUseCase>(
+      startTimerUseCase: GetIt.I.get<StartTimerUseCase>(
         param1: timerEventScheduler,
       ),
       playbackStateChangeUseCase: PlaybackStateChangeUseCase(),
-      completeTimerUseCase: getIt.get<CompleteTimerUseCase>(
+      completeTimerUseCase: GetIt.I.get<CompleteTimerUseCase>(
         param1: audioService,
         param2: timerEventScheduler,
       ),

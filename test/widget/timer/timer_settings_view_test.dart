@@ -5,10 +5,10 @@ import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart'
 import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:dhyana/core/service/shader_service.dart';
 import 'package:dhyana/core/presentation/view/session_start_button.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings/duration_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings/sound_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/settings/warmup_input.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_view.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/duration_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/sound_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/warmup_input.dart';
+import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

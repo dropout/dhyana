@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
 import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/profile/profile_di.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_app_bar.dart';
@@ -15,6 +14,7 @@ import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class DeleteProfileScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class DeleteProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<DeleteProfileCubit>(
       create: (_) {
-        return getIt.get<DeleteProfileCubit>()..deleteProfile();
+        return GetIt.I.get<DeleteProfileCubit>()..deleteProfile();
       },
       child: const DeleteProfileScreenContent()
     );

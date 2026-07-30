@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/auth/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
 import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
 
 abstract class AuthRepository {

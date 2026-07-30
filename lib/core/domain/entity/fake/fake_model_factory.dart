@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/core/domain/entity/auth/user.dart';
-import 'package:dhyana/core/domain/entity/auth/user_meta_data.dart';
+import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_meta_data.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
