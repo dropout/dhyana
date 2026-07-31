@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';

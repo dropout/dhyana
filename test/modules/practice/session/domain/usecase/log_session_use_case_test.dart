@@ -1,32 +1,31 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
-import 'package:dhyana/core/service/mindful_minutes_service.dart';
-import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
-import 'package:dhyana/modules/practice/session/domain/usecase/log_session_statistics_use_case.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockStatisticsRepository extends Mock implements StatisticsRepository {}
+import '../../../../../mock_definitions.dart';
 
-class MockMindfulMinutesService extends Mock implements MindfulMinutesService {}
+// class MockStatisticsRepository extends Mock implements StatisticsRepository {}
+// class MockMindfulMinutesService extends Mock implements MindfulMinutesService {}
 
 void main() {
-  late MockStatisticsRepository statisticsRepository;
+  late MockInsightsService insightsService;
   late MockMindfulMinutesService mindfulMinutesService;
-  late LogSessionStatisticsUseCase useCase;
+  late LogSessionInsightsUseCase useCase;
 
   setUp(() {
-    statisticsRepository = MockStatisticsRepository();
+    insightsService = MockInsightsService();
     mindfulMinutesService = MockMindfulMinutesService();
-    useCase = LogSessionStatisticsUseCase(
-      statisticsRepository: statisticsRepository,
+    useCase = LogSessionInsightsUseCase(
+      insightsService: insightsService,
       mindfulMinutesService: mindfulMinutesService,
     );
   });
-
+  
   Profile createProfile() {
     return Profile(
       id: 'profile-1',
@@ -55,7 +54,7 @@ void main() {
     final profile = createProfile();
     final session = createSession();
 
-    when(() => statisticsRepository.logSessionStatistics(profile, session))
+    when(() => insightsService.logSessionStatistics(profile.id, session))
         .thenAnswer((_) async {});
     when(() => mindfulMinutesService.getAuthorizationStatus())
         .thenAnswer((_) async => AuthorizationStatus.authorized);
@@ -66,7 +65,7 @@ void main() {
 
     await useCase.execute(profile, session);
 
-    verify(() => statisticsRepository.logSessionStatistics(profile, session)).called(1);
+    verify(() => insightsService.logSessionStatistics(profile.id, session)).called(1);
     verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
     verify(() => mindfulMinutesService.logMindfulMinutes(
           session.startTime,
@@ -82,14 +81,14 @@ void main() {
       orElse: () => AuthorizationStatus.authorized,
     );
 
-    when(() => statisticsRepository.logSessionStatistics(profile, session))
+    when(() => insightsService.logSessionStatistics(profile.id, session))
         .thenAnswer((_) async {});
     when(() => mindfulMinutesService.getAuthorizationStatus())
         .thenAnswer((_) async => unauthorizedStatus);
 
     await useCase.execute(profile, session);
 
-    verify(() => statisticsRepository.logSessionStatistics(profile, session)).called(1);
+    verify(() => insightsService.logSessionStatistics(profile.id, session)).called(1);
     verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
     verifyNever(() => mindfulMinutesService.logMindfulMinutes(any(), any()));
   });

@@ -1,28 +1,29 @@
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/core/service/profile_stats_updater_service.dart';
+import 'package:dhyana/core/service/profile_service.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 
 /// Persists a completed session into profile statistics and returns the updated profile.
 class UpdateProfileWithSessionUseCase {
-  final ProfileRepository profileRepository;
-  final ProfileStatsUpdaterService profileStatsUpdaterService;
+
+  final ProfileService profileService;
 
   UpdateProfileWithSessionUseCase({
-    required this.profileRepository,
-    required this.profileStatsUpdaterService,
+    required this.profileService,
   });
 
   Future<UpdateProfileStatsResult> execute(
     String profileId,
     Session session,
   ) async {
-    final profile = await profileRepository.read(profileId);
-
-    final UpdateProfileStatsResult updateResult = profileStatsUpdaterService
-      .updateProfileStatsWithSession(profile, session);
-
-    await profileRepository.update(updateResult.updatedProfile);
-    return updateResult;
+    final ({Profile originalProfile, Profile updatedProfile}) result = await profileService.updateProfileStatsWithSession(
+      profileId,
+      session,
+    );
+    return UpdateProfileStatsResult(
+      oldProfile: result.originalProfile,
+      updatedProfile: result.updatedProfile, 
+      session: session,
+    );
   }
 }

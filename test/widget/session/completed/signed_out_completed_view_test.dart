@@ -10,7 +10,7 @@ void main() {
 
   testWidgets('SignedOutCompletedView renders correctly', (WidgetTester tester) async {
 
-    final Session session = FakeModelFactory().createSession();
+    final AppSession session = FakeModelFactory().createSession();
 
     await tester.pumpWidget(
       withAllContextProviders(

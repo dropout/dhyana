@@ -4,9 +4,9 @@ import 'package:dhyana/modules/auth/domain/entity/user_meta_data.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/core/util/faker.dart';
@@ -106,11 +106,10 @@ class FakeModelFactory {
       startTime: DateTime.now(),
       endTime: DateTime.now().add(const Duration(hours: 1)),
       duration: Duration(minutes: faker.randomGenerator.integer(60)),
-      timerSettings: const TimerSettings(),
     );
   }
 
-  List<Session> createSessions(int count) {
+  List<AppSession> createSessions(int count) {
     return List.generate(count, (_) => createSession());
   }
 

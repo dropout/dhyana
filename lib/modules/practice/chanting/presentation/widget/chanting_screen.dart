@@ -2,12 +2,12 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting/chanting_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_app_bar.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_context.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_player_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +52,6 @@ class ChantingScreen extends StatelessWidget {
         Session session = Session(
           id: context.services.idGeneratorService.sessionId(),
           type: SessionType.chanting,
-          chantingSettings: state.chantingSettings,
           startTime: state.startTime ?? DateTime.now().subtract(state.elapsedSessionTime),
           endTime: state.endTime ?? DateTime.now(),
           duration: state.elapsedSessionTime,

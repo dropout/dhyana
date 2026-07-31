@@ -1,8 +1,8 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/insights/domain/entity/milestone_progress.dart';
+import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/detailed_profile_view.dart';

@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
+import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/practice/session/data/datasource/session_data_provider.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/entity/session_query_options.dart';
-
-import '../../../../../core/data/datasource/firebase_data_provider.dart';
-import '../../../../../core/data/datasource/firebase_model_extension.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 
 class FirebaseSessionDataProvider
     extends FirebaseDataProvider<Session>
@@ -25,18 +23,18 @@ class FirebaseSessionDataProvider
   );
 
   @override
-  Future<List<Session>> query(SessionQueryOptions queryOptions) {
-    return buildListFromQuery(_buildQuery(queryOptions));
+  Future<List<Session>> query({int limit = 20}) {
+    return buildListFromQuery(_buildQuery(limit: limit));
   }
 
   @override
-  Stream<List<Session>> queryStream(SessionQueryOptions queryOptions) {
-    return buildStreamFromQuery(_buildQuery(queryOptions));
+  Stream<List<Session>> queryStream({int limit = 20}) {
+    return buildStreamFromQuery(_buildQuery(limit: limit));
   }
 
-  Query<Session> _buildQuery(SessionQueryOptions queryOptions) {
+  Query<Session> _buildQuery({int limit = 20}) {
     Query<Session> q = collectionRef.orderBy('startTime', descending: true);
-    return q.limit(queryOptions.limit);
+    return q.limit(limit);
   }
 
   static String generateId() {

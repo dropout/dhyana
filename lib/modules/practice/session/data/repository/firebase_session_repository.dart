@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/entity/session_query_options.dart';
 import 'package:dhyana/modules/practice/session/data/datasource/firebase_session_data_provider.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
 
 /// A default implementation of the [SessionRepository] that uses 
@@ -52,17 +51,17 @@ class FirebaseSessionRepository implements SessionRepository {
     ).update(model);
 
   @override
-  Future<List<Session>> query(String profileId, SessionQueryOptions queryOptions) async =>
+  Future<List<Session>> query(String profileId, {int limit = 20}) async =>
     FirebaseSessionDataProvider(
       firestore,
       profileId,
-    ).query(queryOptions);
+    ).query(limit: limit);
     
   @override
-  Stream<List<Session>> queryStream(String profileId, SessionQueryOptions queryOptions) =>
+  Stream<List<Session>> queryStream(String profileId, {int limit = 20}) =>
     FirebaseSessionDataProvider(
       firestore,
       profileId,
-    ).queryStream(queryOptions);  
+    ).queryStream(limit: limit);
  
 }

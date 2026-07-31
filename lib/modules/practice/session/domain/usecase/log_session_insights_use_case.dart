@@ -1,22 +1,22 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
+import 'package:dhyana/core/service/insights_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 
 /// Logs a completed session to statistics and Mindful Minutes when authorized.
-class LogSessionStatisticsUseCase with LoggerMixin {
-  final StatisticsRepository statisticsRepository;
+class LogSessionInsightsUseCase with LoggerMixin {
+  final InsightsService insightsService;
   final MindfulMinutesService mindfulMinutesService;
 
-  LogSessionStatisticsUseCase({
-    required this.statisticsRepository,
+  LogSessionInsightsUseCase({
+    required this.insightsService,
     required this.mindfulMinutesService,
   });
 
-  Future<void> execute(Profile updatedProfile, Session session) async {
-    await statisticsRepository.logSessionStatistics(updatedProfile, session);
+  Future<void> execute(Profile updatedProfile, AppSession session) async {
+    await insightsService.logSessionStatistics(updatedProfile.id, session);
 
     final authorizationStatus =
         await mindfulMinutesService.getAuthorizationStatus();

@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.dart';

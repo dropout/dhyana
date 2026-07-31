@@ -1,26 +1,11 @@
-
-class UpdateSessionData {
-  final String id;
-  final String sessionTypeName;
-  final DateTime startTime;
-  final DateTime endTime;
-  final Duration duration;
-
-  const UpdateSessionData({
-    required this.id,
-    required this.sessionTypeName,
-    required this.startTime,
-    required this.endTime,
-    required this.duration,
-  });
-}
+import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 
 abstract class ProfileService {
 
-  Future<void> updateProfileStatsWithSession(
+  Future<({Profile originalProfile, Profile updatedProfile})> updateProfileStatsWithSession(
     String profileId,
-    UpdateSessionData updateSessionData,
+    Session session,
   );
-
 
 }

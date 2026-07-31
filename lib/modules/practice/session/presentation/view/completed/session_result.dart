@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class SessionResult extends StatelessWidget {
 
-  final Session session;
+  final AppSession session;
   final Profile? profile;
 
   const SessionResult({

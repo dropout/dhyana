@@ -1,8 +1,8 @@
-import 'package:dhyana/modules/insights/domain/entity/milestone_progress.dart';
+import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
-import 'package:dhyana/modules/insights/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
 import 'package:flutter/material.dart';
 
 import 'label_value_detail.dart';

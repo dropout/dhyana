@@ -1,31 +1,9 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/core/domain/entity/converter/duration_converter.dart';
-import 'package:dhyana/core/domain/entity/entity.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 
-part 'session.freezed.dart';
-part 'session.g.dart';
-
-@freezed
-sealed class Session with _$Session implements Entity {
-
-  const Session._();
-
-  const factory Session({
-    required String id,
-    required SessionType type,
-    @DateTimeConverter() required DateTime startTime,
-    @DateTimeConverter() required DateTime endTime,
-    @DurationConverter() required Duration duration,
-    TimerSettings? timerSettings,
-    ChantingSettings? chantingSettings,
-  }) = _Session;
-
-  factory Session.fromJson(Map<String, Object?> json) =>
-    _$SessionFromJson(json);
-
+abstract interface class AppSession {
+  String get id;
+  SessionType get type;
+  DateTime get startTime;
+  DateTime get endTime;
+  Duration get duration;
 }

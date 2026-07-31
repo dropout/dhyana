@@ -8,7 +8,7 @@ import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/practice/session/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +121,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(Profile profile, Session session) {
+  Future<void> logSessionStatistics(Profile profile, AppSession session) {
     return Future.value();
   }
 }

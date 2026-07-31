@@ -4,12 +4,12 @@ import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 
 class FirebaseStatisticsRepository extends StatisticsRepository {

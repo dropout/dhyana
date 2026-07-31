@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_query_options.dart';
 import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -84,19 +83,17 @@ void main() {
     });
 
     test('can query profiles', () {
-      ProfileQueryOptions profileQueryOptions = const ProfileQueryOptions();
-      when(() => mockProfileDataProvider.query(profileQueryOptions))
+      when(() => mockProfileDataProvider.query())
           .thenAnswer((_) => Future.value([mockProfile]));
-      firebaseProfileRepository.query(const ProfileQueryOptions());
-      verify(() => mockProfileDataProvider.query(profileQueryOptions)).called(1);
+      firebaseProfileRepository.query();
+      verify(() => mockProfileDataProvider.query()).called(1);
     });
 
     test('can query profiles stream', () {
-      ProfileQueryOptions profileQueryOptions = const ProfileQueryOptions();
-      when(() => mockProfileDataProvider.queryStream(profileQueryOptions))
+      when(() => mockProfileDataProvider.queryStream())
           .thenAnswer((_) => profileQueryStreamController.stream);
-      firebaseProfileRepository.queryStream(const ProfileQueryOptions());
-      verify(() => mockProfileDataProvider.queryStream(profileQueryOptions))
+      firebaseProfileRepository.queryStream();
+      verify(() => mockProfileDataProvider.queryStream())
           .called(1);
     });
 

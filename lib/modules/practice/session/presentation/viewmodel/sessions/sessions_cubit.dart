@@ -4,7 +4,6 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/entity/session_query_options.dart';
 
 part 'sessions_state.dart';
 part 'sessions_cubit.freezed.dart';
@@ -24,7 +23,6 @@ class SessionsCubit extends Cubit<SessionsState> with LoggerMixin {
       emit(const SessionsState.loading());
       final sessions = await sessionRepository.query(
         profileId,
-        const SessionQueryOptions()
       );
       emit(SessionsState.loaded(sessions: sessions));
       logger.t('Sessions successfully loaded: ${sessions.length}');

@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/practice/session/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
 import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';

@@ -3,7 +3,6 @@ import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_query_options.dart';
 
 class FirebaseProfileDataProvider
     extends FirebaseDataProvider<Profile>
@@ -18,17 +17,17 @@ class FirebaseProfileDataProvider
   );
 
   @override
-  Future<List<Profile>> query(ProfileQueryOptions queryOptions) {
-    return buildListFromQuery(_buildQuery(queryOptions));
+  Future<List<Profile>> query({int limit = 20}) {
+    return buildListFromQuery(_buildQuery(limit: limit));
   }
 
   @override
-  Stream<List<Profile>> queryStream(ProfileQueryOptions queryOptions) {
-    return buildStreamFromQuery(_buildQuery(queryOptions));
+  Stream<List<Profile>> queryStream({int limit = 20}) {
+    return buildStreamFromQuery(_buildQuery(limit: limit));
   }
 
-  Query<Profile> _buildQuery(ProfileQueryOptions queryOptions) {
-    return collectionRef.limit(queryOptions.limit);
+  Query<Profile> _buildQuery({int limit = 20}) {
+    return collectionRef.limit(limit);
   }
 
 }

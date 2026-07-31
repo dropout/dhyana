@@ -26,7 +26,7 @@ void main() {
 
   testWidgets('SessionResult renders correctly', (WidgetTester tester) async {
 
-    final Session session = FakeModelFactory().createSession();
+    final AppSession session = FakeModelFactory().createSession();
 
     await tester.runAsync(() async {
       await tester.pumpWidget(

@@ -1,10 +1,10 @@
-import 'package:dhyana/core/domain/repository/profile_repository.dart';
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/core/service/profile_stats_updater_service.dart';
+import 'package:dhyana/core/service/insights_service.dart';
+import 'package:dhyana/core/service/mindful_minutes_service.dart';
+import 'package:dhyana/core/service/profile_service.dart';
 import 'package:dhyana/modules/practice/session/data/repository/firebase_session_repository.dart';
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
-import 'package:dhyana/modules/practice/session/domain/usecase/log_session_statistics_use_case.dart';
+import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/sessions/sessions_cubit.dart';
@@ -36,15 +36,14 @@ void _configureRepositories() {
 void _configureUseCases() {
   getIt.registerFactory<UpdateProfileWithSessionUseCase>(
     () => UpdateProfileWithSessionUseCase(
-      profileRepository: getIt.get<ProfileRepository>(),
-      profileStatsUpdaterService: getIt.get<ProfileStatsUpdaterService>()
+      profileService: getIt.get<ProfileService>(),
     ),
   );
 
-  getIt.registerFactory<LogSessionStatisticsUseCase>(
-    () => LogSessionStatisticsUseCase(
-      statisticsRepository: getIt.get(),
-      mindfulMinutesService: getIt.get(),
+  getIt.registerFactory<LogSessionInsightsUseCase>(
+    () => LogSessionInsightsUseCase(
+      insightsService: getIt.get<InsightsService>(),
+      mindfulMinutesService: getIt.get<MindfulMinutesService>(),
     ),
   );
 }
@@ -52,10 +51,9 @@ void _configureUseCases() {
 void _configureViewModels() {
   getIt.registerFactory<SessionCompletedCubit>(() {
     return SessionCompletedCubit(
-      statisticsRepository: getIt.get<StatisticsRepository>(),
       crashlyticsService: getIt.get<CrashlyticsService>(),
       saveSessionToProfileUseCase: getIt.get<UpdateProfileWithSessionUseCase>(),
-      logSessionUseCase: getIt.get<LogSessionStatisticsUseCase>(),
+      logSessionUseCase: getIt.get<LogSessionInsightsUseCase>(),
     );
   });
 

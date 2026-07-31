@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/practice/session/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
 import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';

@@ -1,5 +1,4 @@
-import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/entity/session_query_options.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 
 abstract interface class SessionRepository {
 
@@ -9,7 +8,7 @@ abstract interface class SessionRepository {
   Future<void> update(String profileId, Session model);
   Future<void> delete(String profileId, String sessionId);
 
-  Future<List<Session>> query(String profileId, SessionQueryOptions queryOptions);
-  Stream<List<Session>> queryStream(String profileId, SessionQueryOptions queryOptions);
+  Future<List<Session>> query(String profileId, {int limit = 20});
+  Stream<List<Session>> queryStream(String profileId, {int limit = 20});
 
 }
