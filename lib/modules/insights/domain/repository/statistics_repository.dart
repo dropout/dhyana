@@ -2,12 +2,11 @@ import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 
 abstract class StatisticsRepository {
 
@@ -21,6 +20,6 @@ abstract class StatisticsRepository {
   Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions);
   Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions);
 
-  Future<void> logSessionStatistics(Profile profile, Session session);
+  Future<void> logSessionStatistics(String profileId, Session session);
 
 }

@@ -1,4 +1,3 @@
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
@@ -6,6 +5,7 @@ import 'package:dhyana/modules/profile/presentation/view/screen/profile_wizard_s
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -16,46 +16,46 @@ import '../../../../mock_definitions.dart';
 
 void main() {
   group('ProfileWizardScreen Tests', () {
-    late MockProfileCubit mockProfileCubit;
+    late MockProfileEditCubit mockProfileEditCubit;
 
     setUpAll(() {
-      registerFallbackValue(ProfileState.initial());
+      registerFallbackValue(ProfileEditState.initial());
     });
 
     setUp(() {
-      mockProfileCubit = MockProfileCubit();
+      mockProfileEditCubit = MockProfileEditCubit();
     });
 
     testWidgets('will load profile on init', (WidgetTester tester) async {
-      when(() => mockProfileCubit.state).thenReturn(ProfileState.initial());
-      when(() => mockProfileCubit.stream).thenAnswer(
-        (_) => Stream<ProfileState>.fromIterable([ProfileState.initial()])
+      when(() => mockProfileEditCubit.state).thenReturn(ProfileEditState.initial());
+      when(() => mockProfileEditCubit.stream).thenAnswer(
+        (_) => Stream<ProfileEditState>.fromIterable([ProfileEditState.initial()])
       );
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<ProfileCubit>(
-            create: (context) => mockProfileCubit,
+          BlocProvider<ProfileEditCubit>(
+            create: (context) => mockProfileEditCubit,
             child: ProfileWizardScreen(profileId: 'test_profile_id'),
           ),
         )
       );
 
-      verify(() => mockProfileCubit
+      verify(() => mockProfileEditCubit
         .loadProfile('test_profile_id')).called(1);
     });
 
     testWidgets('can display a loading state', (WidgetTester tester) async {
 
-      when(() => mockProfileCubit.state).thenReturn(ProfileState.loading());
-      when(() => mockProfileCubit.stream).thenAnswer(
-        (_) => Stream<ProfileState>.fromIterable([ProfileState.loading()])
+      when(() => mockProfileEditCubit.state).thenReturn(ProfileEditState.loading());
+      when(() => mockProfileEditCubit.stream).thenAnswer(
+        (_) => Stream<ProfileEditState>.fromIterable([ProfileEditState.loading()])
       );
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<ProfileCubit>(
-            create: (context) => mockProfileCubit,
+          BlocProvider<ProfileEditCubit>(
+            create: (context) => mockProfileEditCubit,
             child: ProfileWizardScreen(profileId: 'test_profile_id'),
           ),
         )
@@ -65,15 +65,15 @@ void main() {
 
     testWidgets('can display an error state', (WidgetTester tester) async {
 
-      when(() => mockProfileCubit.state).thenReturn(ProfileState.error());
-      when(() => mockProfileCubit.stream).thenAnswer(
-        (_) => Stream<ProfileState>.fromIterable([ProfileState.error()])
+      when(() => mockProfileEditCubit.state).thenReturn(ProfileEditState.error());
+      when(() => mockProfileEditCubit.stream).thenAnswer(
+        (_) => Stream<ProfileEditState>.fromIterable([ProfileEditState.error()])
       );
 
       await tester.pumpWidget(
         withAllContextProviders(
-          BlocProvider<ProfileCubit>(
-            create: (context) => mockProfileCubit,
+          BlocProvider<ProfileEditCubit>(
+            create: (context) => mockProfileEditCubit,
             child: ProfileWizardScreen(profileId: 'test_profile_id'),
           ),
         )
@@ -87,19 +87,19 @@ void main() {
 
         final Profile profile = FakeModelFactory().createProfile();
 
-        when(() => mockProfileCubit.state).thenReturn(
-          ProfileState.loaded(profile: profile)
+        when(() => mockProfileEditCubit.state).thenReturn(
+          ProfileEditState.loaded(profile: profile)
         );
-        when(() => mockProfileCubit.stream).thenAnswer(
-          (_) => Stream<ProfileState>.fromIterable([
-            ProfileState.loaded(profile: profile)
+        when(() => mockProfileEditCubit.stream).thenAnswer(
+          (_) => Stream<ProfileEditState>.fromIterable([
+            ProfileEditState.loaded(profile: profile)
           ])
         );
 
         await tester.pumpWidget(
           withAllContextProviders(
-            BlocProvider<ProfileCubit>(
-              create: (context) => mockProfileCubit,
+            BlocProvider<ProfileEditCubit>(
+              create: (context) => mockProfileEditCubit,
               child: ProfileWizardScreen(profileId: 'test_profile_id'),
             ),
           ),
@@ -119,19 +119,19 @@ void main() {
       await mockNetworkImages(() async {
         final Profile profile = FakeModelFactory().createProfile();
 
-        when(() => mockProfileCubit.state).thenReturn(
-          ProfileState.loaded(profile: profile)
+        when(() => mockProfileEditCubit.state).thenReturn(
+          ProfileEditState.loaded(profile: profile)
         );
-        when(() => mockProfileCubit.stream).thenAnswer(
-          (_) => Stream<ProfileState>.fromIterable([
-            ProfileState.loaded(profile: profile)
+        when(() => mockProfileEditCubit.stream).thenAnswer(
+          (_) => Stream<ProfileEditState>.fromIterable([
+            ProfileEditState.loaded(profile: profile)
           ])
         );
 
         await tester.pumpWidget(
           withAllContextProviders(
-            BlocProvider<ProfileCubit>(
-              create: (context) => mockProfileCubit,
+            BlocProvider<ProfileEditCubit>(
+              create: (context) => mockProfileEditCubit,
               child: ProfileWizardScreen(profileId: 'test_profile_id'),
             ),
           )
@@ -140,7 +140,7 @@ void main() {
         await tester.tap(find.byType(AppButton));
         await tester.pumpAndSettle();
 
-        verify(() => mockProfileCubit.updateProfile(
+        verify(() => mockProfileEditCubit.updateProfile(
           profile: profile,
           formData: any(named: 'formData'),          
           onComplete: any(named: 'onComplete', that: isA<Function(Profile)>()),

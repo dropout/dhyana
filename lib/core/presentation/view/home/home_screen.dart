@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_settings/chanting_settings_cubit.dart';
 import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_appbar.dart';
@@ -29,11 +29,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
-      create: (context) => HomeScreenCubit(
-        initialState: timerSettings != null
-            ? const HomeScreenState(sessionType: SessionType.sitting)
-            : null,
-        crashlyticsService: context.services.crashlyticsService,
+      create: (_) => GetIt.I.get<HomeScreenCubit>(
+        param1: timerSettings != null
+            ? SessionType.sitting
+            : SessionType.chanting,
       ),
       builder: (context, state) => buildScaffolding(context, state),
     );

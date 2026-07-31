@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 
 abstract interface class SessionRepository {
 

@@ -5,7 +5,7 @@ import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.
 import 'package:dhyana/core/util/assets.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/settings/chant_list.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/session_start_button.dart';
+import 'package:dhyana/core/presentation/view/home/session_start_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';

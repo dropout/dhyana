@@ -7,7 +7,7 @@ class SessionsState with _$SessionsState {
 
   const factory SessionsState.loading() = SessionsLoading;
   const factory SessionsState.loaded({
-    required List<AppSession> sessions,
+    required List<Session> sessions,
   }) = SessionsLoaded;
   const factory SessionsState.error() = SessionsLoadingError;
 

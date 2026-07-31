@@ -1,11 +1,10 @@
 import 'dart:math';
 
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/service/profile_stats_updater_service.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
-import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
@@ -235,7 +234,7 @@ class DefaultProfileReportUpdaterService with LoggerMixin implements ProfileStat
   /// Updates the profile statistics report with new session data
   /// and returns the updated profile.
   @override
-  UpdateProfileStatsResult updateProfileStatsWithSession(
+  Profile updateProfileStatsWithSession(
     Profile profile,
     Session session,
   ) {
@@ -294,12 +293,7 @@ class DefaultProfileReportUpdaterService with LoggerMixin implements ProfileStat
 
     // Update profile statistics report with data from new session
     Profile updatedProfile = profile.copyWith(statsReport: updatedStatsReport);
-
-    return UpdateProfileStatsResult(
-      oldProfile: profile,
-      updatedProfile: updatedProfile,
-      session: session,
-    );
+    return updatedProfile;
   }
 
 }

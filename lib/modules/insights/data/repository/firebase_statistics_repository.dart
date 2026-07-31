@@ -1,23 +1,24 @@
 import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
+import 'package:dhyana/core/data/datasource/insights_profile_data_provider.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
-import 'package:dhyana/modules/practice/session/domain/repository/statistics_repository.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 
 class FirebaseStatisticsRepository extends StatisticsRepository {
-
   final FirebaseInsightsDataProviderFactory dataProviderFactory;
+  final InsightsProfileDataProvider insightsProfileDataProvider;
 
   FirebaseStatisticsRepository({
-    required this.dataProviderFactory, required fireStore,
+    required this.dataProviderFactory,
+    required this.insightsProfileDataProvider,
   });
 
   @override
@@ -51,37 +52,52 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) {
+  Future<List<Week>> queryWeeks(
+    String profileId,
+    WeekQueryOptions queryOptions,
+  ) {
     final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
     return dataProvider.query(queryOptions);
   }
 
   @override
-  Future<List<Month>> queryMonths(String profileId, MonthQueryOptions queryOptions) {
+  Future<List<Month>> queryMonths(
+    String profileId,
+    MonthQueryOptions queryOptions,
+  ) {
     final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
     return dataProvider.query(queryOptions);
   }
 
   @override
-  Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions) {
+  Future<List<Year>> queryYears(
+    String profileId,
+    YearQueryOptions queryOptions,
+  ) {
     final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
     return dataProvider.query(queryOptions);
   }
 
   @override
-  Future<void> logSessionStatistics(
-    Profile profile,
-    Session session
-  ) async {    
-    await _logDayStats(session, profile);
-    await _logWeekStats(session, profile);
-    await _logMonthStats(session, profile);
-    await _logYearStats(session, profile);    
+  Future<void> logSessionStatistics(String profileId, Session session) async {
+    final insightsProfileData = await insightsProfileDataProvider
+        .getInsightsProfileData(profileId);
+    await _logDayStats(
+      session,
+      profileId,
+      insightsProfileData.consecutiveDaysCount,
+    );
+    await _logWeekStats(session, profileId);
+    await _logMonthStats(session, profileId);
+    await _logYearStats(session, profileId);
   }
 
-  Future<void> _logDayStats(Session session, Profile profile) async {
-    final dataProvider = 
-      dataProviderFactory.createDayDataProvider(profile.id);
+  Future<void> _logDayStats(
+    Session session,
+    String profileId,
+    int consecutiveDaysCount,
+  ) async {
+    final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
 
     final String todayId = session.startTime.toDayId();
     late Day updatedToday;
@@ -93,7 +109,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
         minutesCount: today.minutesCount + session.duration.inMinutes,
         sessions: today.sessions.toList()..add(session),
       );
-    } catch(_) {
+    } catch (_) {
       // Day doesn't exists in database yet
       updatedToday = Day(
         id: todayId,
@@ -102,21 +118,18 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
           session.startTime.month,
           session.startTime.day,
         ),
-        consecutiveDaysCount: profile.statsReport.consecutiveDays.current,
+        consecutiveDaysCount: consecutiveDaysCount,
         sessionCount: 1,
-        sessions: [
-          session
-        ],
+        sessions: [session],
         minutesCount: session.duration.inMinutes,
       );
     }
-    
+
     await dataProvider.set(updatedToday, merge: true);
   }
 
-  Future<void> _logWeekStats(Session session, Profile profile) async {
-    final dataProvider = 
-      dataProviderFactory.createWeekDataProvider(profile.id);
+  Future<void> _logWeekStats(Session session, String profileId) async {
+    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
 
     final String weekId = session.startTime.toWeekId();
 
@@ -128,7 +141,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
         sessionCount: thisWeek.sessionCount + 1,
         minutesCount: thisWeek.minutesCount + session.duration.inMinutes,
       );
-    } catch(_) {
+    } catch (_) {
       // Week doesn't exist in database yet
       updatedWeek = Week(
         id: weekId,
@@ -144,9 +157,8 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     await dataProvider.set(updatedWeek, merge: true);
   }
 
-  Future<void> _logMonthStats(Session session, Profile profile) async {
-    final dataProvider = 
-      dataProviderFactory.createMonthDataProvider(profile.id);
+  Future<void> _logMonthStats(Session session, String profileId) async {
+    final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
     final String monthId = session.startTime.toMonthId();
 
     late Month updatedMonth;
@@ -157,14 +169,11 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
         sessionCount: thisMonth.sessionCount + 1,
         minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
       );
-    } catch(_) {
+    } catch (_) {
       // Month doesn't exists in database yet
       updatedMonth = Month(
         id: monthId,
-        startDate: DateTime(
-          session.startTime.year,
-          session.startTime.month,
-        ),
+        startDate: DateTime(session.startTime.year, session.startTime.month),
         minutesCount: session.duration.inMinutes,
         sessionCount: 1,
       );
@@ -173,9 +182,8 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     await dataProvider.set(updatedMonth, merge: true);
   }
 
-  Future<void> _logYearStats(Session session, Profile profile) async {
-    final dataProvider = 
-      dataProviderFactory.createYearDataProvider(profile.id);
+  Future<void> _logYearStats(Session session, String profileId) async {
+    final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
     final String yearId = session.startTime.toYearId();
 
     late Year updatedYear;
@@ -186,13 +194,11 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
         minutesCount: thisYear.minutesCount + session.duration.inMinutes,
         sessionCount: thisYear.sessionCount + 1,
       );
-    } catch(_) {
+    } catch (_) {
       // Year doesn't exists in database yet
       updatedYear = Year(
         id: yearId,
-        startDate: DateTime(
-          session.startTime.year,
-        ),
+        startDate: DateTime(session.startTime.year),
         sessionCount: 1,
         minutesCount: session.duration.inMinutes,
       );
@@ -200,5 +206,4 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
 
     dataProvider.set(updatedYear, merge: true);
   }
-
 }

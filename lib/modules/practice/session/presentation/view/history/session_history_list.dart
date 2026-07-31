@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 
 class SessionHistoryList extends StatelessWidget {
 
-  final List<AppSession> sessions;
+  final List<Session> sessions;
 
   const SessionHistoryList({
     required this.sessions,

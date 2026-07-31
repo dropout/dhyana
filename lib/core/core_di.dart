@@ -1,5 +1,13 @@
 import 'package:dhyana/core/data/repository/default_storage_repository.dart';
+import 'package:dhyana/core/domain/entity/remote_settings.dart';
+import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/home_screen/home_screen_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/remote_settings/remote_settings_cubit.dart';
+import 'package:dhyana/core/service/auth_service.dart';
+import 'package:dhyana/core/service/profile_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,6 +122,34 @@ Future<void> _registerServices() async {
 }
 
 void _registerViewModels() {
+  GetIt.I.registerFactory(
+    () => ProfileCubit(
+      profileService: GetIt.I.get<ProfileService>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+    ),
+  );
 
+  GetIt.I.registerFactoryParam<AuthCubit, AuthState, void>(
+    (initialAuthState, _) => AuthCubit(
+      initialAuthState: initialAuthState,
+      authService: GetIt.I.get<AuthService>(),
+      analyticsService: GetIt.I.get<AnalyticsService>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+    ),
+  );
 
+  GetIt.I.registerFactoryParam<RemoteSettingsCubit, RemoteSettings, void>(
+    (initialRemoteSettings, _) => RemoteSettingsCubit(
+      initialRemoteSettings: initialRemoteSettings,
+      remoteSettingsService: GetIt.I.get<RemoteSettingsService>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+    ),
+  );
+
+  GetIt.I.registerFactoryParam<HomeScreenCubit, SessionType, void>(
+    (initialSessionType, _) => HomeScreenCubit(
+      initialState: HomeScreenState(sessionType: initialSessionType),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+    ),
+  );
 }

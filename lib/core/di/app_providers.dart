@@ -1,6 +1,5 @@
-import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/remote_settings/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/di/repositories.dart';
@@ -13,14 +12,13 @@ import 'package:provider/provider.dart';
 /// Provides the top-level providers for the app, such as repositories,
 /// services and blocs.
 class AppProviders extends StatelessWidget {
-
   final InitResult initResult;
   final Widget child;
 
   const AppProviders({
     required this.initResult,
     required this.child,
-    super.key
+    super.key,
   });
 
   @override
@@ -34,15 +32,23 @@ class AppProviders extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthCubit>(
-            create: (_) => AuthCubit(
-              initialAuthState: (initResult.user != null) ? AuthState.signedIn(user: initResult.user!) : const AuthState.initial(),
-              authenticationRepository: GetIt.I.get<AuthRepository>(),
-              analyticsService: initResult.services.analyticsService,
-              crashlyticsService: initResult.services.crashlyticsService,
-            ),
-            lazy: false,
+            create: (_) => GetIt.I.get<AuthCubit>(
+              param1: (initResult.userId != null)
+                  ? AuthState.signedIn(userId: initResult.userId!)
+                  : const AuthState.initial(),
+              )
+
           ),
-          BlocProvider<ProfileCubit>(create: (_) => initResult.profileCubit),
+          BlocProvider<ProfileCubit>(
+            create: (_) {
+              // TODO: Move to start app usecase?
+              final profileCubit = GetIt.I.get<ProfileCubit>();
+              if (initResult.userId != null) {
+                profileCubit.loadProfile(initResult.userId!);
+              }
+              return profileCubit;
+            },
+          ),
           BlocProvider<RemoteSettingsCubit>(
             create: (_) => RemoteSettingsCubit(
               initialRemoteSettings: initResult.remoteSettings,
@@ -53,8 +59,7 @@ class AppProviders extends StatelessWidget {
           ),
         ],
         child: child,
-      )
+      ),
     );
   }
-
 }

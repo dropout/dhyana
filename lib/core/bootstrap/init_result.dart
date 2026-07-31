@@ -1,30 +1,20 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/remote_settings.dart';
 
 class InitResult {
 
-  // final TimerSettings timerSettings;
   final Services services;
   final Repositories repositories;
-  final ProfileCubit profileCubit;
+  
   final RemoteSettings remoteSettings;
-  final User? user;
+  final String? userId;
 
   InitResult({
-    // required this.timerSettings,
     required this.services,
     required this.repositories,
-    required this.profileCubit,
     required this.remoteSettings,
-    this.user
+    this.userId, 
   });
-
-}
-
-
-class NewInitResult {
 
 }

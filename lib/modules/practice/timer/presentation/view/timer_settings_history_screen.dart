@@ -3,9 +3,9 @@ import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history/timer_settings_history_list.dart';
-import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class TimerSettingsHistoryScreen extends StatelessWidget
   with DefaultScreenSetupHelpersMixin {
@@ -20,14 +20,8 @@ class TimerSettingsHistoryScreen extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TimerSettingsHistoryCubit>(
-      create: (_) {
-        final timerSettingsHistoryCubit = TimerSettingsHistoryCubit(
-          timerSettingsHistoryRepository: context.repos.timerSettingsHistoryRepository,
-          crashlyticsService: context.services.crashlyticsService
-        );
-        timerSettingsHistoryCubit.loadSettings(profileId);
-        return timerSettingsHistoryCubit;
-      },
+      create: (_) =>
+        GetIt.I.get<TimerSettingsHistoryCubit>()..loadSettings(profileId),
       child: buildStates(context),
     );
   }

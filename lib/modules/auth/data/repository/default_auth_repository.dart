@@ -38,7 +38,7 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
 
   /// Performs sign-in using the specified method and credentials.
   @override
-  Future<(User, bool)> signIn(SigninMethodType signinMethodType, {
+  Future<({User user, bool isFirstSignin})> signIn(SigninMethodType signinMethodType, {
     String? email,
     String? password
   }) async {
@@ -50,7 +50,7 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
     // blocking function
     _isSigningIn = false;
     // End of guarding operations
-    return (signinResult.user, isFirstSignin(signinResult));
+    return (user: signinResult.user, isFirstSignin: isFirstSignin(signinResult));
   }
 
   /// Signs out the current user

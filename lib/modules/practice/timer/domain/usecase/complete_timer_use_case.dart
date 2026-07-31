@@ -1,6 +1,6 @@
 import 'package:clock/clock.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';

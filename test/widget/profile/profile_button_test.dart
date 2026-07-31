@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
@@ -101,7 +101,7 @@ void main() {
       final User user = FakeModelFactory().createUser();
 
       when(() => mockAuthBloc.state)
-        .thenReturn(AuthState.signedIn(user: user));
+        .thenReturn(AuthState.signedIn(userId: user.uid));
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loading());
 
@@ -132,7 +132,7 @@ void main() {
       final User user = FakeModelFactory().createUser();
 
       when(() => mockAuthBloc.state)
-        .thenReturn(AuthState.signedIn(user: user));
+        .thenReturn(AuthState.signedIn(userId: user.uid));
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.error());
 
@@ -182,7 +182,7 @@ void main() {
       final location = ProfileRoute(profileId: profile.id).location;
 
       when(() => mockAuthBloc.state)
-        .thenReturn(AuthState.signedIn(user: user));
+        .thenReturn(AuthState.signedIn(userId: user.uid));
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
           profile: profile,
@@ -240,7 +240,7 @@ void main() {
       final location = ProfileWizardRoute(profileId: profile.id).location;
 
       when(() => mockAuthBloc.state)
-        .thenReturn(AuthState.signedIn(user: user));
+        .thenReturn(AuthState.signedIn(userId: user.uid));
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.loaded(
           profile: profile,

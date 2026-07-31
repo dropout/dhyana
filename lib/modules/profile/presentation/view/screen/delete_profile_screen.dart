@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_app_bar.dart';
@@ -36,7 +35,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
 
   void _signInWithGoogle(BuildContext context) {
     context.read<AuthCubit>().signInWithGoogle(
-      onComplete: (user, _) => _onSigninCompleted(context, user)
+      onComplete: (userId, _) => _onSigninCompleted(context, userId)
     );
     context.services.analyticsService
       .logEvent(name: 'login_with_google_button_pressed');
@@ -44,13 +43,13 @@ class DeleteProfileScreenContent extends StatelessWidget {
 
   void _signInWithApple(BuildContext context) {
     context.read<AuthCubit>().signInWithApple(
-      onComplete: (user, _) => _onSigninCompleted(context, user)
+      onComplete: (userId, _) => _onSigninCompleted(context, userId)
     );
     context.services.analyticsService
       .logEvent(name: 'login_with_apple_button_pressed');
   }
 
-  void _onSigninCompleted(BuildContext context, User user) {
+  void _onSigninCompleted(BuildContext context, String userId) {
     BlocProvider.of<DeleteProfileCubit>(context).deleteProfile();
   }
 

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'session_completed_data.freezed.dart';

@@ -1,6 +1,6 @@
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
@@ -25,7 +25,6 @@ void main() {
     late MockServices mockServices;
     late MockRepositories mockRepositories;
 
-    late MockProfileRepository mockProfileRepository;
     late MockStatisticsRepository mockStatisticsRepository;
     late MockIdGeneratorService mockIdGeneratorService;
     late MockCrashlyticsService mockCrashlyticsService;
@@ -40,7 +39,6 @@ void main() {
 
       mockIdGeneratorService = MockIdGeneratorService();
       mockCrashlyticsService = MockCrashlyticsService();
-      mockProfileRepository = MockProfileRepository();
       mockStatisticsRepository = MockStatisticsRepository();
       mockHapticsService = MockHapticsService();
 
@@ -59,9 +57,6 @@ void main() {
       ).thenReturn(mockCrashlyticsService);
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
-      when(
-        () => mockRepositories.profileRepository,
-      ).thenReturn(mockProfileRepository);
       when(
         () => mockRepositories.statisticsRepository,
       ).thenReturn(mockStatisticsRepository);
@@ -104,7 +99,7 @@ void main() {
 
       when(
         () => mockAuthBloc.state,
-      ).thenReturn(AuthState.signedIn(user: FakeModelFactory().createUser()));
+      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUser().uid));
 
       when(() => profileCubit.state).thenReturn(ProfileState.loaded(
         profile: profile,
@@ -138,7 +133,7 @@ void main() {
 
       when(
         () => mockAuthBloc.state,
-      ).thenReturn(AuthState.signedIn(user: FakeModelFactory().createUser()));
+      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUser().uid));
 
       when(() => profileCubit.state).thenReturn(ProfileState.loaded(
         profile: profile,

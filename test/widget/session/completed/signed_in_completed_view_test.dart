@@ -1,12 +1,12 @@
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
-import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_area.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/progress_summary.dart';
@@ -30,8 +30,6 @@ void main() {
   late MockCrashlyticsService mockCrashlyticsService;
 
   late MockRepositories mockRepositories;
-  late MockProfileRepository mockProfileRepository;
-  late MockPresenceRepository mockPresenceRepository;
 
   setUpAll(() async {
     mockProfileCubit = MockProfileCubit();
@@ -45,15 +43,8 @@ void main() {
     ).thenReturn(mockCrashlyticsService);
 
     mockRepositories = MockRepositories();
-    mockProfileRepository = MockProfileRepository();
-    mockPresenceRepository = MockPresenceRepository();
 
-    when(
-      () => mockRepositories.profileRepository,
-    ).thenReturn(mockProfileRepository);
-    when(
-      () => mockRepositories.presenceRepository,
-    ).thenReturn(mockPresenceRepository);
+
   });
 
   group('SignedInCompletedView', () {

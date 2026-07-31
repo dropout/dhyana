@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
@@ -14,7 +14,6 @@ void main() {
   late UpdateProfileWithSessionUseCase useCase;
 
   setUp(() {
-
     useCase = UpdateProfileWithSessionUseCase(
       profileService: profileService = MockProfileService(),
     );
@@ -48,16 +47,20 @@ void main() {
     final profile = createProfile();
     final session = createSession();
     final expectedUpdatedProfile = DefaultProfileReportUpdaterService()
-      .updateProfileStatsWithSession(profile, session)
-      .updatedProfile;
+        .updateProfileStatsWithSession(profile, session);
 
     when(
       () => profileService.updateProfileStatsWithSession(profile.id, session),
-    ).thenAnswer((_) async => (originalProfile: profile, updatedProfile: expectedUpdatedProfile));
+    ).thenAnswer(
+      (_) async =>
+          (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
+    );
 
     final result = await useCase.execute(profile.id, session);
 
     expect(result, equals(expectedUpdatedProfile));
-    verify(() => profileService.updateProfileStatsWithSession(profile.id, session)).called(1);
+    verify(
+      () => profileService.updateProfileStatsWithSession(profile.id, session),
+    ).called(1);
   });
 }

@@ -1,12 +1,12 @@
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
 import 'package:dhyana/core/service/shader_service.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_button.dart';
-import 'package:dhyana/core/presentation/view/home_screen.dart';
+import 'package:dhyana/core/presentation/view/home/home_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history/timer_settings_history_button.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/timer_settings_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
@@ -182,7 +182,7 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(
           AuthState.signedIn(
-            user: FakeModelFactory().createUser()
+            userId: FakeModelFactory().createUser().uid
           )
         );
 
@@ -231,7 +231,7 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(
           AuthState.signedIn(
-            user: FakeModelFactory().createUser()
+            userId: FakeModelFactory().createUser().uid
           )
         );
 

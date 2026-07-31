@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
@@ -10,6 +10,7 @@ import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/dialog_helper.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -49,7 +50,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
         formProcessingState = LoadingState.loading;
       });
       Map<String, dynamic>? values = formState.value;
-      context.read<ProfileCubit>().updateProfile(
+      context.read<ProfileEditCubit>().updateProfile(
         profile: profile,
         formData: values,
         completeProfile: true,

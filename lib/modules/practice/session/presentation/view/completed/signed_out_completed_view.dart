@@ -5,7 +5,7 @@ import 'session_result.dart';
 
 class SignedOutCompletedView extends StatelessWidget {
 
-  final AppSession session;
+  final Session session;
 
   const SignedOutCompletedView({
     required this.session,

@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/auth/presentation/view/login/login_headline_text_effect.dart';

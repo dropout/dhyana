@@ -1,6 +1,4 @@
-import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/practice/session/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
 import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';
@@ -12,7 +10,6 @@ import 'package:dhyana/modules/practice/chanting/data/firebase_chants_repository
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_chant_cache_manager_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
-import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:get_it/get_it.dart';
 
 /// Container class for all repositories used in the application.
@@ -21,20 +18,14 @@ import 'package:get_it/get_it.dart';
 class Repositories {
   // final AuthRepository authRepository;
   final ChantsRepository chantsRepository;
-  late final ProfileRepository profileRepository;
-  late final PresenceRepository presenceRepository;
   late final StatisticsRepository statisticsRepository;
-  late final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
   final ChantPlaybackRepository chantPlaybackRepository;
 
   Repositories({
     required this.chantsRepository,
     required this.chantPlaybackRepository,
   }) {
-    profileRepository = GetIt.I.get<ProfileRepository>();
     statisticsRepository = GetIt.I.get<StatisticsRepository>();
-    presenceRepository = GetIt.I.get<PresenceRepository>();
-    timerSettingsHistoryRepository = GetIt.I.get<TimerSettingsHistoryRepository>();
   }
 }
 

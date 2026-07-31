@@ -68,19 +68,6 @@ class _PresenceScreenState extends State<PresenceScreen>
         builder: (context) => buildStates(context),
       ),
     );
-
-    // return SmartBlocProvider<PresenceCubit, PresenceState>(
-    //   create: (context) =>
-    //       PresenceCubit(
-    //         presenceRepository: context.repos.presenceRepository,
-    //         profileRepository: context.repos.profileRepository,
-    //         crashlyticsService: context.services.crashlyticsService,
-    //       )..loadPresenceData(
-    //         interval: Duration(minutes: sliderPosition.round()),
-    //         limit: widget.batchSize,
-    //       ),
-    //   builder: (context, state) => buildStates(context),
-    // );
   }
 
   Widget buildStates(BuildContext context) {

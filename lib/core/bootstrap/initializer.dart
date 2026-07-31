@@ -8,14 +8,12 @@ import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/core_routes.dart';
-import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
+import 'package:dhyana/core/service/auth_service.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
 import 'package:dhyana/modules/insights/insights_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
@@ -127,22 +125,12 @@ class Initializer with LoggerMixin {
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
     logger.t('');
-    User? user = await GetIt.I<AuthRepository>().authStateChange.first;
-    final profileCubit = GetIt.I<ProfileCubit>();
-    if (user != null) {
-      logger.t(
-        'User is already signed in, initiate profile loading for user: ${user.uid}',
-      );
-      profileCubit.loadProfile(user.uid);
-    } else {
-      logger.t('User not signed in');
-    }
-
+    String? userId = await GetIt.I<AuthService>().userIdStream.first;
+  
     return InitResult(
-      user: user,
+      userId: userId,
       services: services,
       repositories: repos,
-      profileCubit: profileCubit,
       remoteSettings: remoteSettings,
     );
   }

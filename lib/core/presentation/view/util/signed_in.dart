@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +27,7 @@ class SignedIn extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case AuthStateSignedIn():
-            return yes(context, state.user.uid);
+            return yes(context, state.userId);
           default:
             return no;
         }

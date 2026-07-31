@@ -1,10 +1,16 @@
-import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/service/insights_service.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 
 class DefaultInsightsService implements InsightsService {
-   @override
-   Future<void> logSessionStatistics(String profileId, AppSession session) async {
-     // Implement the logic to log session statistics here
-     // For example, you might send this data to a backend service or analytics platform
-   }
- }
+
+  final StatisticsRepository statisticsRepository;
+  const DefaultInsightsService({
+    required this.statisticsRepository,
+  });
+
+  @override
+  Future<void> logSessionStatistics(String profileId, Session session) async {
+    return statisticsRepository.logSessionStatistics(profileId, session);
+  }
+}

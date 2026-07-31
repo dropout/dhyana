@@ -1,8 +1,8 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
@@ -33,9 +33,7 @@ void main() {
     late MockCrashlyticsService mockCrashlyticsService;
     late MockWakelockService mockWakelockService;
     late MockRepositories mockRepositories;
-    late MockPresenceRepository mockPresenceRepository;
     late MockProfileRepository mockProfileRepository;
-    late MockTimerSettingsHistoryRepository mockTimerSettingsHistoryRepository;
     late MockAppAudioHandler mockAudioHandler;
 
     setUpAll(() {
@@ -63,9 +61,7 @@ void main() {
 
       // Repositories
       mockRepositories = MockRepositories();
-      mockPresenceRepository = MockPresenceRepository();
       mockProfileRepository = mockProfileRepository = MockProfileRepository();
-      mockTimerSettingsHistoryRepository = MockTimerSettingsHistoryRepository();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
@@ -78,13 +74,6 @@ void main() {
         .thenAnswer((_) async => {});
       when(() => mockWakelockService.disable())
         .thenAnswer((_) async => {});
-
-      when(() => mockRepositories.presenceRepository)
-        .thenReturn(mockPresenceRepository);
-      when(() => mockRepositories.profileRepository)
-        .thenReturn(mockProfileRepository);
-      when(() => mockRepositories.timerSettingsHistoryRepository)
-        .thenReturn(mockTimerSettingsHistoryRepository);
 
     });
 
@@ -138,7 +127,7 @@ void main() {
       );
 
       when(() => mockAuthBloc.state).thenReturn(
-        AuthState.signedIn(user: user)
+        AuthState.signedIn(userId: user.uid)
       );
       when(() => mockProfileCubit.state).thenReturn(
         ProfileState.loaded(
@@ -149,7 +138,7 @@ void main() {
       when(() => mockProfileRepository.read(profile.id))
         .thenAnswer((_) async => profile);
       when(() => mockAuthBloc.state).thenReturn(
-        AuthState.signedIn(user: user)
+        AuthState.signedIn(userId: user.uid)
       );
       when(() => mockProfileCubit.state).thenReturn(
         ProfileState.loaded(
@@ -201,7 +190,7 @@ void main() {
       );
 
       when(() => mockAuthBloc.state).thenReturn(
-        AuthState.signedIn(user: user)
+        AuthState.signedIn(userId: user.uid)
       );
       when(() => mockProfileCubit.state).thenReturn(
         ProfileState.loaded(

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/practice/timer/data/datasource/timer_profile_data_provider.dart';
+import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 import 'package:dhyana/modules/profile/data/datasource/cache_first_profile_data_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

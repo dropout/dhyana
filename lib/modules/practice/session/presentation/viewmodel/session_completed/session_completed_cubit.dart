@@ -1,9 +1,9 @@
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/entity/profile/update_profile_stats_result.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 

@@ -8,22 +8,22 @@ import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile_state.dart';
-part 'profile_cubit.freezed.dart';
+part 'profile_edit_state.dart';
+part 'profile_edit_cubit.freezed.dart';
 
-class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
+class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
 
   final LoadProfileUseCase loadProfileUseCase;
   final UpdateProfileUseCase updateProfileUseCase;
   final UpdateProfileSettingsUseCase updateProfileSettingsUseCase;
   final CrashlyticsService crashlyticsService;
 
-  ProfileCubit({
+  ProfileEditCubit({
     required this.loadProfileUseCase,
     required this.updateProfileUseCase,
     required this.updateProfileSettingsUseCase,
     required this.crashlyticsService,
-  }) : super(const ProfileState.initial());
+  }) : super(const ProfileEditState.initial());
 
   void loadProfile(
     String profileId, {
@@ -38,14 +38,14 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
         result = profile;
       } else {
         logger.t('Loading profile: $profileId');
-        emit(const ProfileState.loading());
+        emit(const ProfileEditState.loading());
         result = await loadProfileUseCase.execute(profileId);    
       }
-      emit(ProfileState.loaded(profile: result));
+      emit(ProfileEditState.loaded(profile: result));
       onComplete?.call(result);
       logger.t('Loaded profile: ${result.displayName}');      
     } catch (exception, stackTrace) {
-      emit(const ProfileErrorState());
+      emit(const ProfileEditState.error());
       crashlyticsService.recordError(
         exception: exception,
         stackTrace: stackTrace,
@@ -69,7 +69,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
         updatedFields: formData,
         completeProfile: completeProfile,
       );
-      emit(ProfileState.loaded(profile: updateProfile));
+      emit(ProfileEditState.loaded(profile: updateProfile));
       onComplete?.call(updateProfile);
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -95,7 +95,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
         updatedFields: settingsFormData,
       );
 
-      emit(ProfileState.loaded(profile: updatedProfile));
+      emit(ProfileEditState.loaded(profile: updatedProfile));
       onComplete?.call(updatedProfile.settings);
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -108,7 +108,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   }
 
   void clearData() {
-    emit(const ProfileState.initial());
+    emit(const ProfileEditState.initial());
     logger.t('Profile data cleared!');
   }
 }

@@ -2,7 +2,7 @@ import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/modules/practice/timer/data/datasource/timer_auth_data_provider.dart';
-import 'package:dhyana/modules/practice/timer/data/datasource/timer_profile_data_provider.dart';
+import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
@@ -18,6 +18,7 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_setti
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:dhyana/core/service/presence_service.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -86,6 +87,12 @@ void _configureUseCases() {
 }
 
 void _configureViewModels() {
+
+  // Timer Settings History Cubit
+  GetIt.I.registerFactory<TimerSettingsHistoryCubit>(() => TimerSettingsHistoryCubit(
+    timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),
+    crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+  ));
 
   // Timer Settings Cubit
   GetIt.I.registerFactory<TimerSettingsCubit>(() => TimerSettingsCubit(

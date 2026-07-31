@@ -1,8 +1,9 @@
 abstract interface class AuthService {
 
-  Future<void> signInWithApple();
-  Future<void> signInWithGoogle();
-  Future<void> signInWithEmailAndPassword({
+  Stream<String?> get userIdStream;
+  Future<({String userId, bool isFirstSignin})> signInWithApple();
+  Future<({String userId, bool isFirstSignin})> signInWithGoogle();
+  Future<({String userId, bool isFirstSignin})> signInWithEmailAndPassword({
     required String email,
     required String password,
   });

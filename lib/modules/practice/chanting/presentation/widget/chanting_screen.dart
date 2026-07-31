@@ -7,7 +7,7 @@ import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_context.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_player_view.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session.dart';
+import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

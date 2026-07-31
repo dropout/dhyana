@@ -6,11 +6,13 @@ import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.da
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class MockProfileCubit extends MockCubit<ProfileState> implements ProfileCubit {}
+class MockProfileEditCubit extends MockCubit<ProfileEditState> implements ProfileEditCubit {}
 
 class MockSafeImageDetectorFactory extends Mock
     implements SafeImageDetectorFactory {}

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -16,8 +16,8 @@ void main() {
   late MockCrashlyticsService crashlyticsService;
   late FakeModelFactory fakeModelFactory;
 
-  ProfileCubit buildCubit() {
-    return ProfileCubit(
+  ProfileEditCubit buildCubit() {
+    return ProfileEditCubit(
       loadProfileUseCase: loadProfileUseCase,
       updateProfileUseCase: updateProfileUseCase,
       updateProfileSettingsUseCase: updateProfileSettingsUseCase,
@@ -41,8 +41,8 @@ void main() {
     ).thenReturn(null);
   });
 
-  group('ProfileCubit.loadProfile', () {
-    blocTest<ProfileCubit, ProfileState>(
+  group('ProfileEditCubit.loadProfile', () {
+    blocTest<ProfileEditCubit, ProfileEditState>(
       'emits loading then loaded, and calls onComplete on success',
       build: buildCubit,
       act: (cubit) async {
@@ -63,11 +63,11 @@ void main() {
         expect(callbackProfile, equals(profile));
       },
       expect: () => [
-        const ProfileState.loading(),
-        isA<ProfileLoadedState>(),
+        const ProfileEditState.loading(),
+        isA<ProfileEditLoadedState>(),
       ],
       verify: (cubit) {
-        final loadedState = cubit.state as ProfileLoadedState;
+        final loadedState = cubit.state as ProfileEditLoadedState;
         verify(() => loadProfileUseCase.execute(loadedState.profile.id)).called(1);
         verifyNever(
           () => crashlyticsService.recordError(
@@ -79,7 +79,7 @@ void main() {
       },
     );
 
-    blocTest<ProfileCubit, ProfileState>(
+    blocTest<ProfileEditCubit, ProfileEditState>(
       'emits error, calls crashlytics and onError on failure',
       build: buildCubit,
       act: (cubit) async {
@@ -104,8 +104,8 @@ void main() {
         expect(callbackData.$2, same(stackTrace));
       },
       expect: () => [
-        const ProfileState.loading(),
-        const ProfileState.error(),
+        const ProfileEditState.loading(),
+        const ProfileEditState.error(),
       ],
       verify: (_) {
         verify(
@@ -119,10 +119,10 @@ void main() {
     );
   });
 
-  group('ProfileCubit.updateProfile', () {
+  group('ProfileEditCubit.updateProfile', () {
     late String updatedProfileId;
 
-    blocTest<ProfileCubit, ProfileState>(
+    blocTest<ProfileEditCubit, ProfileEditState>(
       'emits loaded and calls onComplete on success',
       build: buildCubit,
       act: (cubit) async {
@@ -152,7 +152,7 @@ void main() {
         expect(callbackProfile, equals(updatedProfile));
       },
       expect: () => [
-        isA<ProfileLoadedState>(),
+        isA<ProfileEditLoadedState>(),
       ],
       verify: (_) {
         verifyNever(
@@ -165,7 +165,7 @@ void main() {
       },
     );
 
-    blocTest<ProfileCubit, ProfileState>(
+    blocTest<ProfileEditCubit, ProfileEditState>(
       'calls crashlytics and onError on failure',
       build: buildCubit,
       act: (cubit) async {
@@ -197,7 +197,7 @@ void main() {
         expect(callbackData.$1, same(exception));
         expect(callbackData.$2, same(stackTrace));
       },
-      expect: () => <ProfileState>[],
+      expect: () => <ProfileEditState>[],
       verify: (_) {
         verify(
           () => crashlyticsService.recordError(
@@ -210,10 +210,10 @@ void main() {
     );
   });
 
-  group('ProfileCubit.updateProfileSettings', () {
+  group('ProfileEditCubit.updateProfileSettings', () {
     late String updatedSettingsProfileId;
 
-    blocTest<ProfileCubit, ProfileState>(
+    blocTest<ProfileEditCubit, ProfileEditState>(
       'emits loaded and calls onComplete on success',
       build: buildCubit,
       act: (cubit) async {
@@ -247,7 +247,7 @@ void main() {
         await callbackCompleter.future;
       },
       expect: () => [
-        isA<ProfileLoadedState>(),
+        isA<ProfileEditLoadedState>(),
       ],
       verify: (_) {
         verifyNever(
@@ -260,7 +260,7 @@ void main() {
       },
     );
 
-    blocTest<ProfileCubit, ProfileState>(
+    blocTest<ProfileEditCubit, ProfileEditState>(
       'calls crashlytics and onError on failure',
       build: buildCubit,
       act: (cubit) async {
@@ -294,7 +294,7 @@ void main() {
         expect(callbackData.$1, same(exception));
         expect(callbackData.$2, same(stackTrace));
       },
-      expect: () => <ProfileState>[],
+      expect: () => <ProfileEditState>[],
       verify: (_) {
         verify(
           () => crashlyticsService.recordError(
