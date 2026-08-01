@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_query_options.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
@@ -31,7 +30,7 @@ class TimerSettingsHistoryCubit
       List<TimerSettingsHistoryRecord> timerSettingsList =
       await timerSettingsHistoryRepository.query(
         profileId,
-        const TimerSettingsHistoryRecordQueryOptions(limit: 5),
+        limit: 5,
       );
       emit(TimerSettingsHistoryState.loaded(timerSettingsList: timerSettingsList));
       logger.t('Loaded ${timerSettingsList.length} timer settings from history');

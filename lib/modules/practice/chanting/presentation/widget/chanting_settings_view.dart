@@ -25,7 +25,7 @@ class ChantingSettingsView extends StatelessWidget {
   String getTotalDurationText(BuildContext context, ChantingSettingsState state) {    
     final totalDuration = state.playlist.fold<Duration>(
       Duration.zero,
-      (previousValue, chantViewModel) => previousValue + chantViewModel.chant.length,
+      (previousValue, chantViewModel) => previousValue + chantViewModel.duration,
     );
     final minutes = totalDuration.inMinutes;
     return context.l10n.minutesPluralWithNumber(minutes).toUpperCase();
@@ -67,7 +67,7 @@ class ChantingSettingsView extends StatelessWidget {
 
   void _onChantRemoved(
     BuildContext context,
-    ChantViewModel chantViewModel,
+    UiChant chantViewModel,
     int index,
   ) {
     context.read<ChantingSettingsCubit>().removeFromPlaylist(index);

@@ -1,7 +1,7 @@
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
 import 'package:dhyana/core/util/assets.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -15,67 +15,53 @@ import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/d
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/interval_input.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/input_gap.dart';
 
-
 class TimerSettingsView extends StatefulWidget {
-  
   final TimerSettings timerSettings;
-  
-  const TimerSettingsView({
-    required this.timerSettings,
-    super.key
-  });
+
+  const TimerSettingsView({required this.timerSettings, super.key});
 
   @override
   State<TimerSettingsView> createState() => _TimerSettingsViewState();
 }
 
 class _TimerSettingsViewState extends State<TimerSettingsView> {
-
   @override
   void didUpdateWidget(TimerSettingsView oldWidget) {
     if (widget.timerSettings != oldWidget.timerSettings) {
-      context.read<TimerSettingsCubit>().timerSettingsChanged(widget.timerSettings);
+      context.read<TimerSettingsCubit>().timerSettingsChanged(
+        widget.timerSettings,
+      );
     }
     super.didUpdateWidget(oldWidget);
   }
 
   void _onWarmupChange(BuildContext context, Duration warmupDuration) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(
-        warmup: warmupDuration,
-      )
+      widget.timerSettings.copyWith(warmup: warmupDuration),
     );
   }
 
   void _onStartingSoundChange(BuildContext context, Sound startingSound) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(
-        startingSound: startingSound,
-      )
+      widget.timerSettings.copyWith(startingSound: startingSound),
     );
   }
 
   void _onDurationChange(BuildContext context, Duration duration) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(
-        duration: duration,
-      )
+      widget.timerSettings.copyWith(duration: duration),
     );
   }
 
   void _onIntervalCountChange(BuildContext context, int intervalCount) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(
-        intervalCount: intervalCount,
-      )
+      widget.timerSettings.copyWith(intervalCount: intervalCount),
     );
   }
 
   void _onEndingSoundChange(BuildContext context, Sound endingSound) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(
-        endingSound: endingSound,
-      )
+      widget.timerSettings.copyWith(endingSound: endingSound),
     );
   }
 
@@ -91,9 +77,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            child: buildInputs(context)
-          ),
+          Expanded(child: buildInputs(context)),
           buildStartButton(context),
         ],
       ),
@@ -111,8 +95,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             label: AppLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
             overlayService: context.services.overlayService,
-            onChange: (Duration duration) =>
-              _onWarmupChange(context, duration)
+            onChange: (Duration duration) => _onWarmupChange(context, duration),
           ),
           buildInputGap(context),
           SoundInput(
@@ -120,7 +103,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             overlayService: context.services.overlayService,
             value: widget.timerSettings.startingSound,
             onChange: (Sound startingSound) =>
-              _onStartingSoundChange(context, startingSound)
+                _onStartingSoundChange(context, startingSound),
           ),
           buildInputGap(context),
           DurationInput(
@@ -129,7 +112,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             preparationTime: widget.timerSettings.warmup,
             overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
-              _onDurationChange(context, duration),
+                _onDurationChange(context, duration),
           ),
           buildInputGap(context),
           IntervalInput(
@@ -137,7 +120,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             value: widget.timerSettings.intervalCount,
             overlayService: context.services.overlayService,
             onChange: (int intervalCount) =>
-              _onIntervalCountChange(context, intervalCount),
+                _onIntervalCountChange(context, intervalCount),
           ),
           buildInputGap(context),
           SoundInput(
@@ -145,7 +128,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
             overlayService: context.services.overlayService,
             value: widget.timerSettings.endingSound,
             onChange: (Sound endingSound) =>
-              _onEndingSoundChange(context, endingSound)
+                _onEndingSoundChange(context, endingSound),
           ),
         ],
       ),
@@ -158,7 +141,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
       child: SessionStartButton(
         onTap: () => _onStartButtonTap(context),
         fragmentShader: context.services.shaderService.get(
-          Assets.shaderGradientFlow
+          Assets.shaderGradientFlow,
         ),
         colorA: AppColors.crimsonRed,
         colorB: Color(0xFFD93838), // Crimson Red Tint 3
@@ -168,13 +151,8 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
   Widget buildInputGap(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(
-        minHeight: 42,
-      ),
-      child: InputGap(
-        isEndGap: false,
-      )
+      constraints: BoxConstraints(minHeight: 42),
+      child: InputGap(isEndGap: false),
     );
   }
-
 }

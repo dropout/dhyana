@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

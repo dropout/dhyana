@@ -5,7 +5,7 @@ import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
 
 import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';

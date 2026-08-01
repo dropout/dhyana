@@ -1,7 +1,7 @@
 import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen.dart';
 import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -18,16 +18,6 @@ part 'core_routes.g.dart';
 //  Making 'select widget mode' unusable where the route is used with
 //  typed parameters.
 // -----------------------------------------------------------------------------
-
-// GoRouter createAppRouter({required InitResult initResult}) {
-//   return GoRouter(
-//     debugLogDiagnostics: kDebugMode,
-//     navigatorKey: AppWidgetKeys.rootNavigatorKey,
-//     initialLocation: '/',
-//     routes: $appRoutes,
-//     // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
-//   );
-// }
 
 /*
     Routes that does not require authentication
@@ -93,6 +83,9 @@ class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
   Widget build(BuildContext context, GoRouterState state) =>
       const DonateScreen();
 }
+
+
+
 
 List<RouteBase> $coreRoutes = [
   $homeRoute,

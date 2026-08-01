@@ -14,7 +14,7 @@ sealed class ChantingSettings with _$ChantingSettings implements Entity {
   const ChantingSettings._();
 
   const factory ChantingSettings({
-    @Default(<ChantViewModel>[]) List<ChantViewModel> selectedChants,
+    @Default(<UiChant>[]) List<UiChant> selectedChants,
     @DateTimeOrNullConverter() DateTime? lastUsed,
   }) = _ChantingSettings;
 
@@ -23,7 +23,7 @@ sealed class ChantingSettings with _$ChantingSettings implements Entity {
 
   @override
   String get id {
-    return selectedChants.map((viewModel) => viewModel.chant.id).join('-');
+    return selectedChants.map((viewModel) => viewModel.chantId).join('-');
   }
 
 }

@@ -9,7 +9,7 @@ import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/social/domain/entity/presence.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

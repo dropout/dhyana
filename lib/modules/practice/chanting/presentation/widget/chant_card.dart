@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class ChantCard extends StatelessWidget {
   final int index;
-  final ChantViewModel chantViewModel;
+  final UiChant chantViewModel;
   final Color textColor;
   final Widget? trailing;
 
@@ -38,8 +38,8 @@ class ChantCard extends StatelessWidget {
                 bottomLeft: Radius.circular(DesignSpec.borderRadiusMd),
               ),
               child: AppCachedNetworkImage(
-                imagePath: '/chants/${chantViewModel.chant.id}/cover.jpg',
-                blurHash: chantViewModel.chant.blurHash,
+                imagePath: '/chants/${chantViewModel.chantId}/cover.jpg',
+                blurHash: chantViewModel.blurHash,
                 resourceResolver: context.services.resourceResolver,
               ),
             ),
@@ -51,7 +51,7 @@ class ChantCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  chantViewModel.chant.name,
+                  chantViewModel.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.theme.textTheme.bodyMedium!.copyWith(
@@ -60,7 +60,7 @@ class ChantCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  chantViewModel.chant.length.formatMMss(),
+                  chantViewModel.duration.formatMMss(),
                   style: context.theme.textTheme.bodySmall!.copyWith(
                     fontWeight: FontWeight.w500,
                     color: textColor,

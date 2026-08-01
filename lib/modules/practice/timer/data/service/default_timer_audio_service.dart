@@ -2,7 +2,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 import 'package:flutter/services.dart';
 import 'package:gaimon/gaimon.dart';

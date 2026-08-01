@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/datasource/data_provider_exception.dart';
 import 'package:dhyana/modules/practice/timer/data/datasource/firebase_timer_settings_history_data_provider.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_query_options.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 
 class FirebaseTimerSettingsHistoryRepository
@@ -48,27 +47,27 @@ class FirebaseTimerSettingsHistoryRepository
   @override
   Future<List<TimerSettingsHistoryRecord>> query(
     String profileId,
-    TimerSettingsHistoryRecordQueryOptions queryOptions
+    {int limit = 20}
   ) {
     final timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
         fireStore,
         profileId,
       );
-    return timerSettingsHistoryDataProvider.query(queryOptions);
+    return timerSettingsHistoryDataProvider.query(limit: limit);
   }
 
   @override
   Stream<List<TimerSettingsHistoryRecord>> queryStream(
     String profileId,
-    TimerSettingsHistoryRecordQueryOptions queryOptions,
+    {int limit = 20}
   ) {
     final timerSettingsHistoryDataProvider =
       FirebaseTimerSettingsHistoryDataProvider(
         fireStore,
         profileId,
       );
-    return timerSettingsHistoryDataProvider.queryStream(queryOptions);
+    return timerSettingsHistoryDataProvider.queryStream(limit: limit);
   }
 
 }

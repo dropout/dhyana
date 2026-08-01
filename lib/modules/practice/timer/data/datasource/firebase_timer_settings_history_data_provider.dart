@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/practice/timer/data/datasource/timer_settings_history_data_provider.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_query_options.dart';
 
 import '../../../../../core/data/datasource/firebase_data_provider.dart';
 import '../../../../../core/data/datasource/firebase_model_extension.dart';
@@ -26,19 +25,19 @@ class FirebaseTimerSettingsHistoryDataProvider
 
   
 
-  Query<TimerSettingsHistoryRecord> _buildQuery(TimerSettingsHistoryRecordQueryOptions queryOptions) {
+  Query<TimerSettingsHistoryRecord> _buildQuery({int limit = 20}) {
     return collectionRef
       .orderBy('lastUsed', descending: true)
-      .limit(queryOptions.limit);
+      .limit(limit);
   }
 
   @override
-  Future<List<TimerSettingsHistoryRecord>> query(TimerSettingsHistoryRecordQueryOptions queryOptions) =>
-      buildListFromQuery(_buildQuery(queryOptions));
+  Future<List<TimerSettingsHistoryRecord>> query({int limit = 20}) =>
+      buildListFromQuery(_buildQuery(limit: limit));
 
   @override
-  Stream<List<TimerSettingsHistoryRecord>> queryStream(TimerSettingsHistoryRecordQueryOptions queryOptions) =>
-    buildStreamFromQuery(_buildQuery(queryOptions));
+  Stream<List<TimerSettingsHistoryRecord>> queryStream({int limit = 20}) =>
+    buildStreamFromQuery(_buildQuery(limit: limit));
 
   static String generateId(String profileId) {
     return FirebaseFirestore.instance

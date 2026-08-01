@@ -5,7 +5,7 @@ import 'package:dhyana/modules/practice/timer/data/datasource/timer_auth_data_pr
 import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/complete_timer_use_case.dart';
@@ -14,7 +14,7 @@ import 'package:dhyana/modules/practice/timer/domain/usecase/playback_state_chan
 import 'package:dhyana/modules/practice/timer/domain/usecase/start_timer_use_case.dart';
 import 'package:dhyana/modules/practice/timer/data/service/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:dhyana/core/service/presence_service.dart';

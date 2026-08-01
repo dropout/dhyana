@@ -3,9 +3,9 @@ import 'package:dhyana/modules/practice/chanting/presentation/bloc/chanting_sett
 import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_appbar.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen/home_screen_cubit.dart';
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/timer_settings/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/widget/chanting_settings_view.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_bottom_menu.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';

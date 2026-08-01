@@ -12,18 +12,35 @@ part 'chant.g.dart';
 /// so that the Flutter reorderable list can identify chants even if there are
 /// multiple ones added to the list.
 @freezed
-sealed class ChantViewModel with _$ChantViewModel {
+sealed class UiChant with _$UiChant {
 
-  const ChantViewModel._();
+  const UiChant._();
 
-  const factory ChantViewModel({
+  const factory UiChant({
+
+    /// A unique identifier for this item. This is used as a key in the list
+    /// so that multiple instances of the same chant can be added to the list and reordered. 
     required String uniqueId,
-    required Chant chant,
-    // required String imageUrl,
-  }) = _ChantViewModel;
+    
+    /// The identifier of the chant. This is used to look up the chant in the database.
+    required String chantId,
 
-  factory ChantViewModel.fromJson(Map<String, Object?> json) =>
-    _$ChantViewModelFromJson(json);
+    /// The name of the chant.
+    required String name,
+
+    /// The blur hash of the chant's cover image.
+    required String blurHash,
+
+    /// The order to display the chant in a list.
+    required int order,
+
+    /// The length of the chant.
+    required Duration duration,
+
+  }) = _UiChant;
+
+  factory UiChant.fromJson(Map<String, Object?> json) =>
+    _$UiChantFromJson(json);
   
 }
 

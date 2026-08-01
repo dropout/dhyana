@@ -81,7 +81,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       // Start caching and preparing chants for playback
       final chantViewModels = chantingSettings.selectedChants;
       final prepared = chantPlaybackRepository.preparePlayableAssets(
-        chantViewModels.map((viewModel) => viewModel.chant.id).toList(growable: false),
+        chantViewModels.map((viewModel) => viewModel.chantId).toList(growable: false),
       );
 
       // Update the state with caching progress as it occurs

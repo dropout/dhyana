@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ChantList extends StatelessWidget {
-  final List<ChantViewModel> chants;
+  final List<UiChant> chants;
   final void Function(int oldIndex, int newIndex) onReorder;
   final VoidCallback onAddChant;
-  final void Function(ChantViewModel, int) onChantRemoved;
+  final void Function(UiChant, int) onChantRemoved;
 
   const ChantList({
     required this.chants,
@@ -90,7 +90,7 @@ class ChantList extends StatelessWidget {
 
   Widget buildPlaylistItem(
     BuildContext context,
-    ChantViewModel chant,
+    UiChant chant,
     int index,
   ) {
     final enableDragging = chants.length > 1;

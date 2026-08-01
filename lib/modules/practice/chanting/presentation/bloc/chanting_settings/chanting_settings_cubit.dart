@@ -52,13 +52,17 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final List<Chant> freshChantList = await chantsRepository.queryAll();
 
       // Create the playlist based on the loaded chant IDs and available chants
-      final List<ChantViewModel> playlist = <ChantViewModel>[];
+      final List<UiChant> playlist = <UiChant>[];
       for (final chantId in playlistChantIds) {
         try {
           final chant = freshChantList.firstWhere((c) => c.id == chantId);
-          playlist.add(ChantViewModel(
+          playlist.add(UiChant(
             uniqueId: Uuid().v4(),
-            chant: chant,
+            chantId: chant.id,
+            name: chant.name,
+            order: chant.order,
+            duration: chant.length,
+            blurHash: chant.blurHash,
           ));
         } catch (e) {
           // Chant not found in network data, skip
@@ -109,15 +113,19 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
   void addToPlaylist(Chant chant) {
     try {
       logger.t('Adding chant ${chant.name} to playlist');
-      final ChantViewModel chantViewModel = ChantViewModel(
+      final UiChant chantViewModel = UiChant(
         uniqueId: Uuid().v4(),
-        chant: chant,
+        chantId: chant.id,
+        name: chant.name,
+        order: chant.order,
+        duration: chant.length,
+        blurHash: chant.blurHash,
       );
 
-      final updated = List<ChantViewModel>.from(state.playlist)
+      final updated = List<UiChant>.from(state.playlist)
         ..add(chantViewModel);
       emit(state.copyWith(playlist: updated));
-      _savePlaylistChantIds(updated.map((c) => c.chant.id).toList());
+      _savePlaylistChantIds(updated.map((c) => c.chantId).toList());
       logger.t('Successfully added chant ${chant.name} to playlist');
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -140,16 +148,16 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
       // Get the chant to be removed for logging purposes
       final targetChantViewModel = state.playlist[index];
-      final updated = List<ChantViewModel>.from(state.playlist)
+      final updated = List<UiChant>.from(state.playlist)
         ..removeAt(index);
           
       // Save the updated list of playlist chant IDs to shared preferences    
-      _savePlaylistChantIds(updated.map((c) => c.chant.id).toList());
+      _savePlaylistChantIds(updated.map((c) => c.chantId).toList());
 
       emit(state.copyWith(playlist: updated));
 
       logger.t(
-        'Removed chant ${targetChantViewModel.chant.name} at index $index from selected chants',
+        'Removed chant ${targetChantViewModel.name} at index $index from selected chants',
       );    
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -181,7 +189,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       }
 
       // Create a copy of the selected chants list to modify
-      final updatedSelectedChants = List<ChantViewModel>.from(
+      final updatedSelectedChants = List<UiChant>.from(
         state.playlist,
       );
 
@@ -190,7 +198,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       updatedSelectedChants.insert(safeNewIndex, movedChant);
       
       // Save the updated list of playlist chant IDs to shared preferences
-      _savePlaylistChantIds(updatedSelectedChants.map((c) => c.chant.id).toList());
+      _savePlaylistChantIds(updatedSelectedChants.map((c) => c.chantId).toList());
 
       emit(state.copyWith(playlist: updatedSelectedChants));
       

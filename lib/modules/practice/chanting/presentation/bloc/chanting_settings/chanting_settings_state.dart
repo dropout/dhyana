@@ -6,7 +6,7 @@ sealed class ChantingSettingsState with _$ChantingSettingsState {
 
   const factory ChantingSettingsState({
     required List<Chant> availableChants,
-    required List<ChantViewModel> playlist,
+    required List<UiChant> playlist,
     required bool isLoading,
     String? error,
   }) = _ChantingSettingsState;

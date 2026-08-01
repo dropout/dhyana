@@ -2,7 +2,7 @@ import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 import 'package:dhyana/core/presentation/view/transition/linear_gradient_mask_transition.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings.dart';
+import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings_history_screen.dart';
 import 'package:dhyana/core/util/assets.dart';
