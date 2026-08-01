@@ -1,3 +1,6 @@
+import 'package:get_it/get_it.dart';
+
+import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/insights_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
@@ -8,10 +11,6 @@ import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insig
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/sessions/sessions_cubit.dart';
-import 'package:dhyana/core/util/firebase_provider.dart';
-import 'package:get_it/get_it.dart';
-
-final getIt = GetIt.instance;
 
 void configureSessionModuleDependencies() {
   _configureDataProviders();
@@ -25,42 +24,42 @@ void _configureDataProviders() {
 }
 
 void _configureRepositories() {
-  getIt.registerLazySingleton<SessionRepository>(() {
+  GetIt.I.registerLazySingleton<SessionRepository>(() {
     return FirebaseSessionRepository(
-      firestore: getIt.get<FirebaseProvider>().firestore,
+      firestore: GetIt.I.get<FirebaseProvider>().firestore,
     );
   });
 
 }
 
 void _configureUseCases() {
-  getIt.registerFactory<UpdateProfileWithSessionUseCase>(
+  GetIt.I.registerFactory<UpdateProfileWithSessionUseCase>(
     () => UpdateProfileWithSessionUseCase(
-      profileService: getIt.get<ProfileService>(),
+      profileService: GetIt.I.get<ProfileService>(),
     ),
   );
 
-  getIt.registerFactory<LogSessionInsightsUseCase>(
+  GetIt.I.registerFactory<LogSessionInsightsUseCase>(
     () => LogSessionInsightsUseCase(
-      insightsService: getIt.get<InsightsService>(),
-      mindfulMinutesService: getIt.get<MindfulMinutesService>(),
+      insightsService: GetIt.I.get<InsightsService>(),
+      mindfulMinutesService: GetIt.I.get<MindfulMinutesService>(),
     ),
   );
 }
 
 void _configureViewModels() {
-  getIt.registerFactory<SessionCompletedCubit>(() {
-    return SessionCompletedCubit(
-      crashlyticsService: getIt.get<CrashlyticsService>(),
-      saveSessionToProfileUseCase: getIt.get<UpdateProfileWithSessionUseCase>(),
-      logSessionUseCase: getIt.get<LogSessionInsightsUseCase>(),
+  GetIt.I.registerFactory<SessionCompletedCubit>(() {
+    return SessionCompletedCubit(      
+      saveSessionToProfileUseCase: GetIt.I.get<UpdateProfileWithSessionUseCase>(),
+      logSessionUseCase: GetIt.I.get<LogSessionInsightsUseCase>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     );
   });
 
-  getIt.registerFactory<SessionsCubit>(() {
+  GetIt.I.registerFactory<SessionsCubit>(() {
     return SessionsCubit(
-      sessionRepository: getIt.get<SessionRepository>(),
-      crashlyticsService: getIt.get<CrashlyticsService>(),
+      sessionRepository: GetIt.I.get<SessionRepository>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     );
   });
 

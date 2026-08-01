@@ -4,8 +4,19 @@ import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-part 'timer_settings_state.dart';
 part 'timer_settings_cubit.freezed.dart';
+
+@freezed
+sealed class TimerSettingsState with _$TimerSettingsState {
+
+  const TimerSettingsState._();
+
+  const factory TimerSettingsState({
+    required TimerSettings timerSettings,
+  }) = _TimerSettingsState;
+
+}
+
 
 class TimerSettingsCubit extends HydratedCubit<TimerSettingsState>
     with LoggerMixin {

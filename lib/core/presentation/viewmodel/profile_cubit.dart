@@ -7,8 +7,22 @@ import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
+
+@freezed
+sealed class ProfileState with _$ProfileState {
+
+  const ProfileState._();
+
+  const factory ProfileState.initial() = ProfileStateInitial;
+  const factory ProfileState.loading() = ProfileLoadingState;
+  const factory ProfileState.loaded({
+    required Profile profile,
+  }) = ProfileLoadedState;
+  const factory ProfileState.error() = ProfileErrorState;
+
+}
+
 
 class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   final ProfileService profileService;

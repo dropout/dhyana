@@ -1,7 +1,7 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:flutter_test/flutter_test.dart';

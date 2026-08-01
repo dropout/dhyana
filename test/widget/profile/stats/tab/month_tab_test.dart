@@ -4,7 +4,7 @@ import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
 import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/profile/domain/entity/profile_statistics_report.dart';
+import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/months_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/tab/month_tab.dart';
 import 'package:flutter_test/flutter_test.dart';

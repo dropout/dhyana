@@ -2,10 +2,10 @@ import 'package:dhyana/core/data/repository/default_storage_repository.dart';
 import 'package:dhyana/core/domain/entity/remote_settings.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/home_screen/home_screen_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/remote_settings/remote_settings_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
 import 'package:dhyana/core/service/auth_service.dart';
 import 'package:dhyana/core/service/profile_service.dart';
 import 'package:get_it/get_it.dart';
@@ -18,9 +18,7 @@ import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/firebase_auth_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/modules/auth/data/repository/default_auth_repository.dart';
 
-import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/functions_service.dart';
@@ -50,8 +48,8 @@ import 'package:dhyana/core/infrastructure/platform/default_wakelock_service.dar
 Future<void> configureCoreDependencies() async {
   _registerDataProviders();
   _registerRepositories();
-  _registerViewModels();
   await _registerServices();
+  _registerViewModels();  
 }
 
 void _registerDataProviders() {
@@ -65,11 +63,6 @@ void _registerDataProviders() {
 }
 
 void _registerRepositories() {
-  GetIt.I.registerLazySingleton<AuthRepository>(
-    () => DefaultAuthRepository(
-      authDataProvider: GetIt.I.get<AuthProvider>(),
-    ),
-  );
   GetIt.I.registerLazySingleton<StorageRepository>(
     () => DefaultStorageRepository(
       storageDataProvider: GetIt.I.get<StorageDataProvider>(),

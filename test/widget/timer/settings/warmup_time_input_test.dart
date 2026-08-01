@@ -1,5 +1,5 @@
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/warmup_input.dart';
+import 'package:dhyana/core/presentation/view/timer_settings/warmup_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

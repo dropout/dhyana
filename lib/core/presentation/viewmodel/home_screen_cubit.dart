@@ -3,8 +3,16 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-part 'home_screen_state.dart';
 part 'home_screen_cubit.freezed.dart';
+
+@freezed
+sealed class HomeScreenState with _$HomeScreenState {
+  const HomeScreenState._();
+  const factory HomeScreenState({
+    @Default(SessionType.sitting) SessionType sessionType,
+  }) = _HomeScreenState;
+}
+
 
 class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
   final HomeScreenState? initialState;

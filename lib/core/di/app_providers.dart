@@ -1,6 +1,6 @@
-import 'package:dhyana/core/presentation/viewmodel/auth/auth_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/remote_settings/remote_settings_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';

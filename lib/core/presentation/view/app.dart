@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/viewmodel/remote_settings/remote_settings_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';

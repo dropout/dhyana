@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
-import 'package:dhyana/core/presentation/viewmodel/profile/profile_cubit.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';

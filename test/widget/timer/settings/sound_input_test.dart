@@ -4,7 +4,7 @@ import 'package:dhyana/core/service/haptics_service.dart';
 import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/modules/practice/timer/presentation/view/timer_settings/sound_input.dart';
+import 'package:dhyana/core/presentation/view/timer_settings/sound_input.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 

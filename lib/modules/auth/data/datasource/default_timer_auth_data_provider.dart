@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
-import 'package:dhyana/modules/practice/timer/data/datasource/timer_auth_data_provider.dart';
+import 'package:dhyana/core/data/datasource/timer_auth_data_provider.dart';
 
 class DefaultTimerAuthDataProvider implements TimerAuthDataProvider {
 

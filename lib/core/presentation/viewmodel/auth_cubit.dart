@@ -8,8 +8,18 @@ import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
-part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
+
+@freezed
+sealed class AuthState with _$AuthState {
+  const AuthState._();
+  const factory AuthState.initial() = AuthStateInitial;
+  const factory AuthState.signedOut() = AuthStateSignedOut;
+  const factory AuthState.signingIn() = AuthStateSigningIn;
+  const factory AuthState.signedIn({required String userId}) = AuthStateSignedIn;
+  const factory AuthState.error() = AuthStateErrorOccured;
+}
+
 
 class AuthCubit extends Cubit<AuthState> with LoggerMixin {
   final AuthService authService;

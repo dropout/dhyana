@@ -6,8 +6,18 @@ import 'package:dhyana/core/service/remote_settings_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'remote_settings_state.dart';
 part 'remote_settings_cubit.freezed.dart';
+
+@freezed
+sealed class RemoteSettingsState with _$RemoteSettingsState {
+
+  const factory RemoteSettingsState.loaded({
+    required RemoteSettings settings,
+  }) = _Loaded;
+
+}
+
+
 
 class RemoteSettingsCubit extends Cubit<RemoteSettingsState> {
 

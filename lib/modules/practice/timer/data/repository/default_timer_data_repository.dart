@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/data/datasource/timer_auth_data_provider.dart';
+import 'package:dhyana/core/data/datasource/timer_auth_data_provider.dart';
 import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 
 class DefaultTimerDataRepository {
