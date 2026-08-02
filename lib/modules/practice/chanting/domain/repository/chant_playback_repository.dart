@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/chanting/domain/model/caching_progress.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
 
 abstract interface class ChantPlaybackRepository {
 

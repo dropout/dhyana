@@ -1,0 +1,7 @@
+class CompleteChantingUseCase {
+
+  void execute() {
+
+  }
+
+}

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_document.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_line.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_word.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_line.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_word.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
 import 'package:assa_parser/assa_parser.dart';
 

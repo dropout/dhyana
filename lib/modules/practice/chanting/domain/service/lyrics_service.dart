@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/chanting/domain/model/lyrics_document.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
 
 abstract interface class LyricsService {
   

@@ -8,7 +8,7 @@ import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/core_routes.dart';
-import 'package:dhyana/core/service/auth_service.dart';
+import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/insights/insights_routes.dart';

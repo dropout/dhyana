@@ -1,8 +1,8 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/so_chanting_playlist_manager.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/chant.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/chant_asset_metadata.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/chant_local_resources.dart';
+import 'package:dhyana/core/domain/entity/chant/chant.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_asset_metadata.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 

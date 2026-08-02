@@ -1,4 +1,3 @@
-import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

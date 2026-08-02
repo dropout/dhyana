@@ -1,0 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhyana/modules/practice/chanting/data/datasource/chants_data_provider.dart';
+import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
+import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
+import 'package:dhyana/core/domain/entity/chant/chant.dart';
+
+class FirebaseChantsDataProvider
+    extends FirebaseDataProvider<Chant>
+    implements ChantsDataProvider {
+
+  FirebaseChantsDataProvider(FirebaseFirestore fireStore) : super(
+    fireStore.collection('chants')
+      .withConverter<Chant>(
+        fromFirestore: (snapshot, _) => fromFireStore(snapshot, Chant.fromJson),
+        toFirestore: (chant, _) => chant.toFireStore(),
+      )
+  );
+
+  @override
+  Future<List<Chant>> queryAll() {
+    return buildListFromQuery(_buildQuery());
+  }
+
+  @override
+  Stream<List<Chant>> queryAllStream() {
+    return buildStreamFromQuery(_buildQuery());
+  }
+
+  Query<Chant> _buildQuery() {
+    return collectionRef.orderBy('name');
+  }
+
+}
+

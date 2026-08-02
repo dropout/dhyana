@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/service/insights_service.dart';
+import 'package:dhyana/core/service/module/insights_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/domain/entity/session.dart';

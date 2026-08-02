@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import 'package:dhyana/core/service/auth_service.dart';
+import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/data/datasource/timer_auth_data_provider.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
 import 'package:dhyana/modules/auth/data/repository/default_auth_repository.dart';

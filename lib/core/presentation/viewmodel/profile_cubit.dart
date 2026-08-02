@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/core/service/profile_service.dart';
+import 'package:dhyana/core/service/module/profile_service.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';

@@ -1,12 +1,12 @@
 import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen.dart';
-import 'package:dhyana/modules/practice/chanting/domain/model/chanting_settings.dart';
+import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
 import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../modules/practice/chanting/presentation/widget/chanting_screen.dart';
+import '../modules/practice/chanting/presentation/view/chanting_screen.dart';
 import '../../modules/donate/presentation/widget/donate_screen.dart';
 
 part 'core_routes.g.dart';

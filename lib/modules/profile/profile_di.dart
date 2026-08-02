@@ -6,7 +6,7 @@ import 'package:dhyana/core/data/datasource/insights_profile_data_provider.dart'
 import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/core/service/profile_service.dart';
+import 'package:dhyana/core/service/module/profile_service.dart';
 
 import 'package:dhyana/modules/profile/data/service/default_profile_service.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';

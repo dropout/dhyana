@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dhyana/core/service/auth_service.dart';
+import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';

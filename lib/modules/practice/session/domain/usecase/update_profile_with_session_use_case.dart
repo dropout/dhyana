@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
-import 'package:dhyana/core/service/profile_service.dart';
+import 'package:dhyana/core/service/module/profile_service.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 
 /// Persists a completed session into profile statistics and returns the updated profile.

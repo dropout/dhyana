@@ -1,12 +1,12 @@
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/chant_cache_validator.dart';
-import 'package:dhyana/modules/practice/chanting/data/drift_chant_cache_data_provider.dart';
-import 'package:dhyana/modules/practice/chanting/data/firebase_chants_data_provider.dart';
+import 'package:dhyana/modules/practice/chanting/data/datasource/drift_chant_cache_data_provider.dart';
+import 'package:dhyana/modules/practice/chanting/data/datasource/firebase_chants_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
-import 'package:dhyana/modules/practice/chanting/data/default_chant_playback_repository.dart';
-import 'package:dhyana/modules/practice/chanting/data/firebase_chants_repository.dart';
+import 'package:dhyana/modules/practice/chanting/data/repository/default_chant_playback_repository.dart';
+import 'package:dhyana/modules/practice/chanting/data/repository/firebase_chants_repository.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/modules/practice/chanting/infrastructure/default_chant_cache_manager_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
