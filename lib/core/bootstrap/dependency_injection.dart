@@ -1,6 +1,7 @@
 import 'package:dhyana/core/core_di.dart';
 import 'package:dhyana/modules/auth/auth_di.dart';
 import 'package:dhyana/modules/insights/insights_di.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_di.dart';
 import 'package:dhyana/modules/practice/session/session_di.dart';
 import 'package:dhyana/modules/profile/profile_di.dart';
 import 'package:dhyana/modules/social/social_di.dart';
@@ -16,6 +17,7 @@ Future<void> initializeDependencies() async {
   configureProfileModuleDependencies();
   configureSocialModuleDependencies();
   configureTimerModuleDependencies();
+  configureChantingModuleDependencies();
   configureSessionModuleDependencies();
   configureInsightsModuleDependencies();
 }

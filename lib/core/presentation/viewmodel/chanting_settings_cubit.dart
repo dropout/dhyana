@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
+import 'package:dhyana/core/service/module/chanting_service.dart';
 import 'package:dhyana/core/service/shared_preferences_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:dhyana/core/domain/entity/chant/chant.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -42,7 +42,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     with LoggerMixin {
   
   /// The repository for fetching available chants.
-  final ChantsRepository chantsRepository;
+  final ChantingService chantingService;
 
   /// The service for interacting with shared preferences.
   final SharedPreferencesService sharedPreferencesService;
@@ -52,7 +52,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
   /// Creates a new instance of [ChantingSettingsCubit].
   ChantingSettingsCubit({
-    required this.chantsRepository,
+    required this.chantingService,
     required this.sharedPreferencesService,
     required this.crashlyticsService,
   }) : super(ChantingSettingsState.initial()) {
@@ -70,7 +70,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final List<String> playlistChantIds = await _loadPlaylistChantIds();
 
       // Fetch all available chants from the repository
-      final List<Chant> freshChantList = await chantsRepository.queryAll();
+      final List<Chant> freshChantList = await chantingService.loadChants();
 
       // Create the playlist based on the loaded chant IDs and available chants
       final List<UiChant> playlist = <UiChant>[];
@@ -110,7 +110,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       logger.t('Loading available chants');
       emit(state.copyWith(isLoading: true, error: null));
 
-      final chants = (await chantsRepository.queryAll())
+      final chants = (await chantingService.loadChants())
         ..sort((a, b) => a.order.compareTo(b.order));
 
       emit(

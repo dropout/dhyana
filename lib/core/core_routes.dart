@@ -1,12 +1,9 @@
 import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen.dart';
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
 import 'package:dhyana/core/domain/entity/timer_settings.dart';
-import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../modules/practice/chanting/presentation/view/chanting_screen.dart';
 import '../../modules/donate/presentation/widget/donate_screen.dart';
 
 part 'core_routes.g.dart';
@@ -18,10 +15,6 @@ part 'core_routes.g.dart';
 //  Making 'select widget mode' unusable where the route is used with
 //  typed parameters.
 // -----------------------------------------------------------------------------
-
-/*
-    Routes that does not require authentication
- */
 
 @TypedGoRoute<HomeRoute>(path: '/', name: 'HOME')
 class HomeRoute extends GoRouteData with $HomeRoute {
@@ -49,33 +42,6 @@ class HomeRoute extends GoRouteData with $HomeRoute {
   }
 }
 
-@TypedGoRoute<ChantingRoute>(path: '/chanting', name: 'CHANTING')
-class ChantingRoute extends GoRouteData with $ChantingRoute {
-  /// Use [ChantingSettings] as extra to propagate chanting settings.
-  final Object $extra;
-
-  const ChantingRoute({required this.$extra})
-    : assert(
-        $extra is ChantingSettings,
-        'Invalid extra data for ChantingRoute. Expected ChantingSettings.',
-      );
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    try {
-      final ChantingSettings chantingSettings = ($extra is ChantingSettings)
-          ? $extra as ChantingSettings
-          : throw Exception('Invalid chanting settings data');
-      return ChantingScreen(
-        chantingSettings: chantingSettings,
-        key: state.pageKey,
-      );
-    } catch (e) {
-      return AppErrorDisplay(onButtonTap: () => HomeRoute().go(context));
-    }
-  }
-}
-
 @TypedGoRoute<DonateRoute>(path: '/donate', name: 'DONATE')
 class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
   const DonateRoute();
@@ -84,11 +50,7 @@ class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
       const DonateScreen();
 }
 
-
-
-
 List<RouteBase> $coreRoutes = [
   $homeRoute,
-  $chantingRoute,
   $donateRoute,
 ];

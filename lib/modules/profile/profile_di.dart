@@ -95,7 +95,6 @@ void _configureUseCases() {
 void _configureViewModels() {
   GetIt.I.registerFactory<ProfileEditCubit>(
     () => ProfileEditCubit(
-      profileRepository: GetIt.I.get<ProfileRepository>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
       loadProfileUseCase: GetIt.I.get<LoadProfileUseCase>(),
       updateProfileUseCase: GetIt.I.get<UpdateProfileUseCase>(),

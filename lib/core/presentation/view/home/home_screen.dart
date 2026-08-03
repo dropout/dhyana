@@ -8,7 +8,6 @@ import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/chanting_settings_view.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_bottom_menu.dart';
-import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/core/presentation/view/timer_settings/timer_settings_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -114,11 +113,8 @@ class HomeScreen extends StatelessWidget {
   /// Builds the chanting-session branch of the home screen.
   Widget buildChantingSettingsView(BuildContext context) {
     return SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
-      create: (context) => ChantingSettingsCubit(
-        chantsRepository: context.repos.chantsRepository,
-        sharedPreferencesService: context.services.sharedPreferencesService,
-        crashlyticsService: context.services.crashlyticsService,
-      )..loadAvailableChants(),
+      create: (context) => GetIt.I.get<ChantingSettingsCubit>()
+        ..loadAvailableChants(),
       builder: (context, state) => ChantingSettingsView(
         availableChants: state.availableChants,
       ),

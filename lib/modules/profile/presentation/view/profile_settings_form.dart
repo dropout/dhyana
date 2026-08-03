@@ -1,7 +1,6 @@
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
 import 'package:dhyana/core/presentation/view/dialog/delete_profile_dialog.dart';
-import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_clear_cache.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_health_connect.dart';
 import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_switch.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
@@ -72,9 +71,10 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
             mindfulMinutesService: context.services.mindfulMinutesService,
           ),
           Gap.large(),
-          ProfileSettingsClearCache(
-            chantPlaybackRepository: context.repos.chantPlaybackRepository,
-          ),
+          // TODO: Re-enable this once we have a proper cache clearing mechanism in place
+          // ProfileSettingsClearCache(
+          //   chantPlaybackRepository: context.repos.chantPlaybackRepository,
+          // ),
           Gap.large(),
           AppButton.small(
             fColor: Colors.black,

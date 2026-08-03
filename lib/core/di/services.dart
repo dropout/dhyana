@@ -2,12 +2,10 @@ import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/modules/practice/chanting/infrastructure/default_lyrics_service.dart';
 import 'package:dhyana/modules/profile/data/service/default_safe_image_detector.dart';
 import 'package:dhyana/core/service/functions_service.dart';
 import 'package:dhyana/core/service/haptics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
-import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:dhyana/core/service/remote_settings_service.dart';
@@ -38,7 +36,6 @@ class Services {
   final WakelockService wakelockService;
   final FunctionsService functionsService;
   final UrlLauncher urlLauncher;
-  final LyricsService lyricsService;
   final MindfulMinutesService mindfulMinutesService;
   final SafeImageDetectorFactory safeImageDetectorFactory;
 
@@ -56,7 +53,6 @@ class Services {
     required this.wakelockService,
     required this.functionsService,
     required this.urlLauncher,
-    required this.lyricsService,
     required this.mindfulMinutesService,
     required this.safeImageDetectorFactory,
   });
@@ -64,7 +60,6 @@ class Services {
 
 class ServicesBuilder {
   late UrlLauncher _urlLauncher;
-  late LyricsService _lyricsService;
   late SafeImageDetectorFactory _safeImageDetectorFactory;
 
   ServicesBuilder({
@@ -74,7 +69,6 @@ class ServicesBuilder {
     required AppAudioHandler audioHandler,
   }) {
     _urlLauncher = const UrlLauncher();
-    _lyricsService = DefaultLyricsService();
     _safeImageDetectorFactory = const DefaultSafeImageDetectorFactory();
   }
 
@@ -92,7 +86,6 @@ class ServicesBuilder {
       shaderService: GetIt.I.get<ShaderService>(),
       functionsService: GetIt.I.get<FunctionsService>(),
       urlLauncher: _urlLauncher,
-      lyricsService: _lyricsService,
       audioHandler: GetIt.I.get<AppAudioHandler>(),
       mindfulMinutesService: GetIt.I.get<MindfulMinutesService>(),
       safeImageDetectorFactory: _safeImageDetectorFactory,

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/chant/chant.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_asset_metadata.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chants_repository.dart';
+import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
 
@@ -22,11 +22,11 @@ const List<String> _chantNames = [
   'Shanti Mantra',
 ];
 
-class StubbedChantsRepository implements ChantsRepository {
+class StubbedChantRepository implements ChantRepository {
   final Faker _faker = Faker();
   late final List<Chant> _chants;
 
-  StubbedChantsRepository() {
+  StubbedChantRepository() {
     _chants = List.generate(_chantNames.length, (index) {
       final chantName = _chantNames[index];
       return Chant(

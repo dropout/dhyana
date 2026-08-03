@@ -95,12 +95,8 @@ class Initializer with LoggerMixin {
         FirebaseStorageDataProvider(firebaseProvider.storage);
 
     // Build repositories
-    logger.t('Create repositories');
-    final repoBuilder = RepositoriesBuilder(
-      firebaseProvider: firebaseProvider,
-    );
-    
-    final repos = repoBuilder.build();
+    logger.t('Create repositories');    
+    final repos = RepositoriesBuilder().build();
 
     // Build services
     logger.t('Create services');

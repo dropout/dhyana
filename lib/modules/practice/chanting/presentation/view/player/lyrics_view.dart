@@ -1,3 +1,4 @@
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting/chanting_cubit.dart';
 import 'package:dhyana/core/util/text.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/view/player/lyric_line.dart';

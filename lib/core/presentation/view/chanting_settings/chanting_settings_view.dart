@@ -1,4 +1,3 @@
-import 'package:dhyana/core/core_routes.dart';
 import 'package:dhyana/core/presentation/viewmodel/chanting_settings_cubit.dart';
 import 'package:dhyana/core/domain/entity/chant/chant.dart';
 import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
@@ -9,6 +8,7 @@ import 'package:dhyana/core/presentation/view/home/session_start_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

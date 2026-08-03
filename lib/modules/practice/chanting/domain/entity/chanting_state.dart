@@ -1,4 +1,14 @@
-part of 'chanting_cubit.dart';
+import 'package:audio_service/audio_service.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
+import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
+
+
+part 'chanting_state.freezed.dart';
 
 @freezed
 sealed class ChantingState with _$ChantingState {

@@ -2,17 +2,58 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
+import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
-import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager_service.dart';
+import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:dhyana/modules/practice/chanting/data/datasource/chant_cache_data_provider.dart';
+import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';
 
-class DefaultChantCacheManagerService implements ChantCacheManagerService {
+class DefaultChantCacheDataRepository implements ChantCacheDataRepository {
   static const _rootFolder = 'chant_cache';
 
+  final ChantCacheDataProvider chantCacheDataProvider;
   final StorageDataProvider storageDataProvider;
 
-  DefaultChantCacheManagerService({required this.storageDataProvider});
+  DefaultChantCacheDataRepository({
+    required this.chantCacheDataProvider,
+    required this.storageDataProvider,
+  });
+
+  @override
+  Future<ChantCacheEntryRow?> readEntry(
+    String contentId,
+    CachedAssetType type,
+  ) async => chantCacheDataProvider.readEntry(contentId, type);
+
+  @override
+  Future<void> upsertEntry(ChantCacheEntryRow row) async =>
+      chantCacheDataProvider.upsertEntry(row);
+
+  @override
+  Future<void> markState({
+    required String contentId,
+    required CachedAssetType assetType,
+    required CacheDownloadState state,
+    String? lastError,
+  }) async {
+    await chantCacheDataProvider.markState(
+      contentId: contentId,
+      assetType: assetType,
+      state: state,
+      lastError: lastError,
+    );
+  }
+
+  @override
+  Future<void> deleteEntry(String contentId, CachedAssetType type) async =>
+    await chantCacheDataProvider.deleteEntry(contentId, type);
+
+  @override
+  Future<void> deleteAllEntries() async =>
+    await chantCacheDataProvider.deleteAllEntries();
+
 
   @override
   Future<void> ensureCacheDirectories() async {
@@ -91,5 +132,6 @@ class DefaultChantCacheManagerService implements ChantCacheManagerService {
       await root.delete(recursive: true);
     }
   }
-  
+
+
 }

@@ -1,3 +1,4 @@
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting/chanting_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/view/chant_card.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';

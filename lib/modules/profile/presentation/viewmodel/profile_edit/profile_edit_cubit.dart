@@ -1,5 +1,4 @@
 import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
@@ -23,7 +22,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
     required this.loadProfileUseCase,
     required this.updateProfileUseCase,
     required this.updateProfileSettingsUseCase,
-    required this.crashlyticsService, required ProfileRepository profileRepository,
+    required this.crashlyticsService,
   }) : super(const ProfileEditState.initial());
 
   void loadProfile(

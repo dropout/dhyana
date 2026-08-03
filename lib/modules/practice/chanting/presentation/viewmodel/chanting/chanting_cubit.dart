@@ -4,28 +4,30 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/domain/enum/loading_state.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/modules/practice/chanting/domain/usecase/complete_chanting_use_case.dart';
+import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_case.dart';
+import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
+import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'chanting_state.dart';
-part 'chanting_cubit.freezed.dart';
 
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   final ChantingSettings chantingSettings;
   final ChantingAudioService audioService;
-  final LyricsService lyricsService;
-  final ChantPlaybackRepository chantPlaybackRepository;
   final CrashlyticsService crashlyticsService;
+
+  final StartChantingUseCase startChantingUseCase;
+  final LoadLyricsUseCase loadLyricsUseCase;
+  final PlaybackStateChangeUseCase playbackStateChangeUseCase;
+  final CompleteChantingUseCase completeChantingUseCase;
 
   StreamSubscription<PlaybackState>? _playbackStateSub;
   StreamSubscription<MediaItem?>? _mediaItemSub;
@@ -33,9 +35,11 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   /// Creates a new instance of [ChantingCubit] with the provided services and settings.
   ChantingCubit({
     required this.chantingSettings,
-    required this.audioService,
-    required this.lyricsService,
-    required this.chantPlaybackRepository,
+    required this.audioService,  
+    required this.startChantingUseCase,
+    required this.loadLyricsUseCase,
+    required this.playbackStateChangeUseCase,
+    required this.completeChantingUseCase,
     required this.crashlyticsService,
   }) : super(
          ChantingState(
@@ -64,27 +68,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  Future<void> start() async {
-    await setup(chantingSettings);
-    play();
-  }
-
   /// Sets up the chanting session by caching chants to local storage and
   /// preparing the audio service.
-  Future<void> setup(ChantingSettings chantingSettings) async {
+  Future<void> start() async {
     try {
-      logger.t('Setting up ${chantingSettings.selectedChants.length} chants');
-
       emit(state.copyWith(loadingState: .loading));
-
-      // Stop any existing playback before setting up new chants
-      await audioService.stop();
-
-      // Start caching and preparing chants for playback
-      final chantViewModels = chantingSettings.selectedChants;
-      final prepared = chantPlaybackRepository.preparePlayableAssets(
-        chantViewModels.map((viewModel) => viewModel.chantId).toList(growable: false),
-      );
+      final prepared = startChantingUseCase.execute(chantingSettings);
 
       // Update the state with caching progress as it occurs
       late CachingProgress cachingProgress;
@@ -93,11 +82,28 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
         emit(state.copyWith(cachingProgress: cachingProgress));
       }
 
-      // Take the final results and prepare the audio service
+      // // Stop any existing playback before setting up new chants
+      // await audioService.stop();
+
+      // // Start caching and preparing chants for playback
+      // final chantViewModels = chantingSettings.selectedChants;
+      // final prepared = chantPlaybackRepository.preparePlayableAssets(
+      //   chantViewModels
+      //       .map((viewModel) => viewModel.chantId)
+      //       .toList(growable: false),
+      // );
+
+      // // Update the state with caching progress as it occurs
+      // late CachingProgress cachingProgress;
+      // await for (final progress in prepared) {
+      //   cachingProgress = progress;
+      //   emit(state.copyWith(cachingProgress: cachingProgress));
+      // }
+
+      // // Take the final results and prepare the audio service
       List<ChantLocalResources> resources = cachingProgress.results
-          .map((r) => r.localResources)
-          .toList();
-      await audioService.setup(resources);
+        .map((r) => r.localResources)
+        .toList();
 
       emit(
         state.copyWith(
@@ -108,7 +114,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
         ),
       );
 
-      logger.t('Chanting setup complete with ${resources.length} chants');
+      // logger.t('Chanting setup complete with ${resources.length} chants');
     } catch (e, st) {
       emit(state.copyWith(loadingState: .error));
       crashlyticsService.recordError(
@@ -121,13 +127,9 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   Future<void> _loadLyricsForChant(String chantId) async {
     try {
-      logger.t('Loading lyrics for chant ID: $chantId');
+      // logger.t('Loading lyrics for chant ID: $chantId');
       emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
-      final lyricsPath = state.chantResources
-          .firstWhere((r) => r.id == chantId)
-          .lyricsLocalPath;
-
-      final lyricsDocument = await lyricsService.loadLyrics(lyricsPath);
+      final lyricsDocument = await loadLyricsUseCase.execute(chantId, state);
 
       // User quickly pressed back button
       if (isClosed) return;
@@ -159,39 +161,42 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     }
   }
 
-  void _onPlaybackStateChanged(PlaybackState pbState) {
-
+  void _onPlaybackStateChanged(PlaybackState pbState) async {
     // Update the elapsed session time based on the PlaybackState.updateTime
-    // by comparing previous and current PlaybackState.updateTime 
+    // by comparing previous and current PlaybackState.updateTime
     // only when the audio is playing.
-    var elapsedSessionTime = state.elapsedSessionTime;
-    if (state.playbackState.playing == true && pbState.playing == true) {
-      final previousUpdateTime = state.playbackState.updateTime;
-      final currentUpdateTime = pbState.updateTime;
-      elapsedSessionTime += currentUpdateTime.difference(previousUpdateTime);
-    }
-    
-    emit(
-      state.copyWith(
-        playbackState: pbState, 
-        elapsedSessionTime: elapsedSessionTime
-      )
-    );
+    // var elapsedSessionTime = state.elapsedSessionTime;
+    // if (state.playbackState.playing == true && pbState.playing == true) {
+    //   final previousUpdateTime = state.playbackState.updateTime;
+    //   final currentUpdateTime = pbState.updateTime;
+    //   elapsedSessionTime += currentUpdateTime.difference(previousUpdateTime);
+    // }
+
+    emit(await playbackStateChangeUseCase.execute(state, pbState));
+
+    // emit(
+    //   state.copyWith(
+    //     playbackState: pbState,
+    //     elapsedSessionTime: elapsedSessionTime,
+    //   ),
+    // );
 
     // Only update while playing
     if (pbState.playing) {
       _playbackPositionUpdate(state.latencyCompensatedPosition);
     }
 
-    if (pbState.processingState == AudioProcessingState.completed &&
-        pbState.queueIndex ==
-            state.chantingSettings.selectedChants.length - 1) {
-      logger.t('Chanting session completed $pbState');
-      emit(state.copyWith(endTime: DateTime.now()));
-      return;
-    } else if (pbState.processingState == AudioProcessingState.completed) {
-      logger.t('Track completed, moving to next track');
-    }
+    // if (pbState.processingState == AudioProcessingState.completed &&
+    //     pbState.queueIndex ==
+    //         state.chantingSettings.selectedChants.length - 1) {
+    //   logger.t('Chanting session completed $pbState');
+    //   emit(state.copyWith(endTime: DateTime.now()));
+    //   return;
+    // } else if (pbState.processingState == AudioProcessingState.completed) {
+    //   logger.t('Track completed, moving to next track');
+    // }
+
+    
   }
 
   void _onMediaItemChanged(MediaItem? mediaItem) {
