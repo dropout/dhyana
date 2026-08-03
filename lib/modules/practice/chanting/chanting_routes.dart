@@ -34,6 +34,6 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
   }
 }
 
-final List<RouteBase> chantingRoutes = [
+final List<RouteBase> $chantingRoutes = [
   $chantingRoute,
 ];

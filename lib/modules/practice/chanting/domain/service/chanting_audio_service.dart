@@ -12,13 +12,10 @@ class ChantingAudioService {
     _switchToChantingAudioHandler();
   }
 
-  Future<Duration> setup(
-    List<ChantLocalResources> resources,
-  ) async {
+  Future<Duration> setup(List<ChantLocalResources> resources) async {
     final result = await audioHandler.customAction(
-      SoLoudChantingAudioHandlerCustomAction.setup.name, {
-        'resources': jsonEncode(resources),
-      }
+      SoLoudChantingAudioHandlerCustomAction.setup.name,
+      {'resources': jsonEncode(resources)},
     );
     return result;
   }
@@ -31,11 +28,11 @@ class ChantingAudioService {
   Future<void> next() => audioHandler.skipToNext();
 
   bool get playing => audioHandler.playbackState.value.playing;
-  
+
   // Duration
   Duration get duration => mediaItem?.duration ?? Duration.zero;
   Stream<Duration?> get durationStream =>
-    audioHandler.mediaItem.where((m) => m != null).map((m) => m!.duration);
+      audioHandler.mediaItem.where((m) => m != null).map((m) => m!.duration);
 
   // MediaItem
   Stream<MediaItem?> get mediaItemStream => audioHandler.mediaItem;
@@ -45,9 +42,9 @@ class ChantingAudioService {
   Stream<PlaybackState> get playbackStateStream => audioHandler.playbackState;
   PlaybackState get playbackState => audioHandler.playbackState.value;
 
-  // Position  
-  Stream<Duration> get positionStream => audioHandler.playbackState
-    .map((pb) => pb.position);
+  // Position
+  Stream<Duration> get positionStream =>
+      audioHandler.playbackState.map((pb) => pb.position);
   Duration get position => audioHandler.playbackState.value.position;
   Future<Duration> get outputLatency => audioHandler.outputLatency;
 
@@ -56,4 +53,10 @@ class ChantingAudioService {
       'handlerId': SoLoudChantingAudioHandler.handlerId,
     });
   }
+
+  Stream<void> get playlistCompletedStream => audioHandler.customEvent.where(
+    (event) =>
+        event is SoLoudChantingAudioHandlerCustomEvent &&
+        event == SoLoudChantingAudioHandlerCustomEvent.playlistCompleted,
+  );
 }

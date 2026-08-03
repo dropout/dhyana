@@ -6,7 +6,7 @@ import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.d
 class LoadLyricsUseCase with LoggerMixin {
   final LyricsService lyricsService;
 
-  LoadLyricsUseCase(this.lyricsService);
+  LoadLyricsUseCase({required this.lyricsService});
 
   Future<LyricsDocument> execute(String chantId, ChantingState state) async {
     logger.t('Loading lyrics for chant ID: $chantId');

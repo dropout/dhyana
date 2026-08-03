@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
 enum SoLoudChantingAudioHandlerCustomAction { setup }
+enum SoLoudChantingAudioHandlerCustomEvent { playlistCompleted }
 
 /// Bridges the OS media session with audio playback using flutter_soloud.
 /// Manually manages a playlist since flutter_soloud has no built-in
@@ -266,6 +267,9 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     } on StateError {
       // No more tracks in the playlist. Emit completed state.
       _playbackReporter.emitCompleted();
+
+      // Fire custom event on audiohandler to notify that the playlist has completed.
+      customEvent.add(SoLoudChantingAudioHandlerCustomEvent.playlistCompleted);
     } catch (e) {
       debugPrint('Cannot skip to next: ${e.toString()}');            
     } finally {

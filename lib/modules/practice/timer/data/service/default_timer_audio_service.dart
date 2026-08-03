@@ -30,10 +30,6 @@ class DefaultTimerAudioService implements TimerAudioService {
       SoundType.audio => _playAudioSound(sound),
       SoundType.haptic => _playHapticSound(sound),
     };
-
-    // _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {
-    //   'sound': sound.name,
-    // });
   
   /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].
   @override

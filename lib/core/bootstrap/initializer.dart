@@ -12,6 +12,7 @@ import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/insights/insights_routes.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
 import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
@@ -77,6 +78,7 @@ class Initializer with LoggerMixin {
         ...$coreRoutes,
         ...$profileRoutes, 
         ...$timerRoutes,
+        ...$chantingRoutes,
         ...$sessionRoutes,
         ...$socialRoutes, 
         ...$insightsRoutes,      

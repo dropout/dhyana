@@ -13,8 +13,10 @@ import 'package:dhyana/modules/practice/chanting/domain/usecase/complete_chantin
 import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
+import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
+import 'package:go_router/go_router.dart';
 
 
 /// Cubit responsible for managing the state of the chanting player, including
@@ -22,6 +24,7 @@ import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
 class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   final ChantingSettings chantingSettings;
   final ChantingAudioService audioService;
+  final GoRouter router;
   final CrashlyticsService crashlyticsService;
 
   final StartChantingUseCase startChantingUseCase;
@@ -31,11 +34,13 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
 
   StreamSubscription<PlaybackState>? _playbackStateSub;
   StreamSubscription<MediaItem?>? _mediaItemSub;
+  StreamSubscription? _playlistCompletedSub;
 
   /// Creates a new instance of [ChantingCubit] with the provided services and settings.
   ChantingCubit({
     required this.chantingSettings,
-    required this.audioService,  
+    required this.audioService,
+    required this.router,
     required this.startChantingUseCase,
     required this.loadLyricsUseCase,
     required this.playbackStateChangeUseCase,
@@ -57,6 +62,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
         _onPlaybackStateChanged,
       );
       _mediaItemSub = audioService.mediaItemStream.listen(_onMediaItemChanged);
+      _playlistCompletedSub = audioService.playlistCompletedStream.listen(_onPlaylistCompleted);
       _updateOutputLatency();
     } catch (e, st) {
       // emit(state.copyWith(playbackState: AudioPlaybackState.error));
@@ -199,6 +205,17 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     
   }
 
+  void _onPlaylistCompleted(_) async {
+    logger.t('Playlist completed');
+    final result = await completeChantingUseCase.execute(state);
+    emit(result.state);
+
+    // Navigate to the session completed screen with the completed session data  
+    logger.t('Navigating to session completed screen');
+    final targetRoute = SessionCompletedRoute($extra: result.session);
+    router.replace(targetRoute.location, extra: result.session);
+  }
+
   void _onMediaItemChanged(MediaItem? mediaItem) {
     if (mediaItem == null) return;
     emit(state.copyWith(mediaItem: mediaItem));
@@ -252,6 +269,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   @override
   Future<void> close() {
     _playbackStateSub?.cancel();
+    _playlistCompletedSub?.cancel();
     _mediaItemSub?.cancel();
     audioService.stop();
     return super.close();
