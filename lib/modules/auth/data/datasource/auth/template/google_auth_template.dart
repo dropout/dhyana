@@ -1,5 +1,6 @@
+import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/util/is_first_signin.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
@@ -51,7 +52,7 @@ class GoogleAuthTemplate implements AuthTemplate {
     firebase_auth.UserCredential userCredential =
       await _firebaseAuth.signInWithCredential(credential);
 
-    User? user;
+    AuthUser? user;
     if (userCredential.user == null) {
       throw const SignInWithGoogleFailure(
         'Sign in with Google failed: No user returned',
@@ -62,7 +63,7 @@ class GoogleAuthTemplate implements AuthTemplate {
 
     SigninResult signinResult = SigninResult(
       user: user,
-      additionalUserInfo: userCredential.additionalUserInfo,
+      isFirstSignIn: isFirstSignin(user, userCredential.additionalUserInfo),
     );
 
     return signinResult;

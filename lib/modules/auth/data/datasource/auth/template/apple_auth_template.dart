@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/util/is_first_signin.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
@@ -87,11 +88,12 @@ class AppleAuthTemplate implements AuthTemplate {
     }
 
     // Our domain user model
-    User user = convertFirebaseUser(fbUser);
+    AuthUser user = convertFirebaseUser(fbUser);
 
     return SigninResult(
       user: user,
-      additionalUserInfo: userCredential.additionalUserInfo,
+      // additionalUserInfo: userCredential.additionalUserInfo,
+      isFirstSignIn: isFirstSignin(user, userCredential.additionalUserInfo),
     );
   }
 

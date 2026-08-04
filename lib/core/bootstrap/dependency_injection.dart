@@ -13,7 +13,7 @@ Future<void> initializeDependencies() async {
   GetIt.I.registerSingleton<FirebaseProvider>(FirebaseProvider());
 
   configureCoreDependencies();
-  configureAuthModuleDependencies();
+  registerAuthModuleDependencies();
   configureProfileModuleDependencies();
   configureSocialModuleDependencies();
   configureTimerModuleDependencies();

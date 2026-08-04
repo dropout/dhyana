@@ -8,13 +8,13 @@ import 'package:dhyana/modules/auth/data/service/default_auth_service.dart';
 import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/modules/auth/data/datasource/default_timer_auth_data_provider.dart';
 
-void configureAuthModuleDependencies() {
-  _configureDataProviders();
-  _configureRepositories();
-  _configureServices();
+void registerAuthModuleDependencies() {
+  _registerDataProviders();
+  _registerRepositories();
+  _registerServices();
 }
 
-void _configureDataProviders() {
+void _registerDataProviders() {
   GetIt.I.registerLazySingleton<TimerAuthDataProvider>(
     () => DefaultTimerAuthDataProvider(
       authProvider: GetIt.I.get<AuthProvider>(),
@@ -22,7 +22,7 @@ void _configureDataProviders() {
   );
 }
 
-void _configureRepositories() {
+void _registerRepositories() {
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => DefaultAuthRepository(
       authDataProvider: GetIt.I.get<AuthProvider>(),
@@ -30,7 +30,7 @@ void _configureRepositories() {
   );
 }
 
-void _configureServices() {
+void _registerServices() {
   GetIt.I.registerLazySingleton<AuthService>(
     () => DefaultAuthService(
       authRepository: GetIt.I.get<AuthRepository>(),

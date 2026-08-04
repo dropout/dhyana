@@ -1,14 +1,13 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'auth_user.dart';
 
 class SigninResult {
 
-  final User user;
-  final firebase_auth.AdditionalUserInfo? additionalUserInfo;
+  final AuthUser user;
+  final bool isFirstSignIn;
 
   SigninResult({
     required this.user,
-    required this.additionalUserInfo,
+    required this.isFirstSignIn,
   });
 
 }

@@ -1,12 +1,12 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/domain/entity/user_meta_data.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user_meta_data.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 // Convert firebase user to a library domain user model.
 // This could be useful with multiple auth providers implemented.
-User convertFirebaseUser(firebase_auth.User firebaseUser) => User(
+AuthUser convertFirebaseUser(firebase_auth.User firebaseUser) => AuthUser(
   uid: firebaseUser.uid,
-  metaData: UserMetaData(
+  metaData: AuthUserMetaData(
     creationTime: firebaseUser.metadata.creationTime,
     lastSignInTime: firebaseUser.metadata.lastSignInTime,
   ),

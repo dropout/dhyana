@@ -1,23 +1,22 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
-
 import 'model/signin_result.dart';
+import 'model/auth_user.dart';
+import 'enum/auth_signin_method_type.dart';
 
 /// Abstract interface for authentication providers
 /// Defines the contract for authentication operations and state management
 abstract interface class AuthProvider {
 
   /// Stream that emits authentication state changes (e.g. sign-in, sign-out)
-  Stream<User?> get authStateChange;
+  Stream<AuthUser?> get authStateChange;
 
   /// Stream that emits user changes (e.g. profile updates)
-  Stream<User?> get userChange;
+  Stream<AuthUser?> get userChange;
 
   /// Gets the current authenticated user, or null if not signed in
-  Future<User?> get user;
+  AuthUser? get user;
 
   /// Performs sign-in using the specified method and credentials.
-  Future<SigninResult> signIn(SigninMethodType authProviderType, {
+  Future<SigninResult> signIn(AuthSigningMethodType authProviderType, {
     String? email,
     String? password
   });
