@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/delete_user/delete_profile_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/delete_profile_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

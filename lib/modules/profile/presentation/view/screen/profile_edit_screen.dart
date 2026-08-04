@@ -7,7 +7,7 @@ import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart'
 import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

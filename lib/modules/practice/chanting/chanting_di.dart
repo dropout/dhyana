@@ -25,7 +25,7 @@ import 'package:dhyana/modules/practice/chanting/domain/usecase/complete_chantin
 import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
-import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting/chanting_cubit.dart';
+import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 

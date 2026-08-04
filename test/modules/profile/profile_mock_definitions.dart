@@ -7,7 +7,7 @@ import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_us
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 

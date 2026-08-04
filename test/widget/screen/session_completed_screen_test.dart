@@ -26,7 +26,6 @@ void main() {
     late MockRepositories mockRepositories;
 
     late MockStatisticsRepository mockStatisticsRepository;
-    late MockIdGeneratorService mockIdGeneratorService;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockHapticsService mockHapticsService;
 
@@ -37,7 +36,6 @@ void main() {
       mockServices = MockServices();
       mockRepositories = MockRepositories();
 
-      mockIdGeneratorService = MockIdGeneratorService();
       mockCrashlyticsService = MockCrashlyticsService();
       mockStatisticsRepository = MockStatisticsRepository();
       mockHapticsService = MockHapticsService();
@@ -49,9 +47,9 @@ void main() {
       when(() => profileCubit.state).thenReturn(const ProfileState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
-      when(
-        () => mockServices.idGeneratorService,
-      ).thenReturn(mockIdGeneratorService);
+      // when(
+      //   () => mockServices.idGeneratorService,
+      // ).thenReturn(mockIdGeneratorService);
       when(
         () => mockServices.crashlyticsService,
       ).thenReturn(mockCrashlyticsService);

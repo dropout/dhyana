@@ -5,7 +5,7 @@ import 'package:dhyana/modules/profile/presentation/view/screen/profile_edit_scr
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

@@ -9,7 +9,7 @@ import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_serv
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
+import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/timer_settings_cubit.dart';

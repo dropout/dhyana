@@ -4,8 +4,21 @@ import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.da
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'delete_profile_state.dart';
 part 'delete_profile_cubit.freezed.dart';
+
+@freezed
+sealed class DeleteProfileState with _$DeleteProfileState {
+
+  const DeleteProfileState._();
+
+  const factory DeleteProfileState.initial() = DeleteProfileInitialState;
+  const factory DeleteProfileState.loading() = DeleteProfileLoadingState;
+  const factory DeleteProfileState.error() = DeleteProfileErrorState;
+  const factory DeleteProfileState.completed() = DeleteProfileCompletedState;
+  const factory DeleteProfileState.authRequired() = DeleteProfileAuthRequiredState;
+
+}
+
 
 class DeleteProfileCubit extends Cubit<DeleteProfileState> with LoggerMixin {
 

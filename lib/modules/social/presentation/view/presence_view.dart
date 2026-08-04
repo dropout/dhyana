@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
+import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/social/domain/entity/presence.dart';
 import 'package:dhyana/core/presentation/view/util/app_animation.dart';

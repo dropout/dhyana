@@ -6,8 +6,25 @@ import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'presence_state.dart';
 part 'presence_cubit.freezed.dart';
+
+@freezed
+sealed class PresenceState with _$PresenceState {
+
+  const PresenceState._();
+
+  const factory PresenceState.initial() = _Initial;
+  const factory PresenceState.loading() = PresenceLoadingState;
+  const factory PresenceState.loadingMore({
+    required List<Presence> presenceList,
+  }) = PresenceLoadingMoreState;
+  const factory PresenceState.loaded({
+    required List<Presence> presenceList,
+  }) = PresenceLoadedState;
+  const factory PresenceState.error() = PresenceErrorState;
+
+}
+
 
 /// Enables showing and querying presence data to show who is around
 /// who you have practiced with. 

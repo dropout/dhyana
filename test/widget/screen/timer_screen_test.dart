@@ -67,8 +67,8 @@ void main() {
         .thenReturn(mockCrashlyticsService);
       when(() => mockServices.wakelockService)
         .thenReturn(mockWakelockService);
-      when(() => mockServices.audioHandler)
-        .thenReturn(mockAudioHandler);
+      // when(() => mockServices.audioHandler)
+      //   .thenReturn(mockAudioHandler);
 
       when(() => mockWakelockService.enable())
         .thenAnswer((_) async => {});
@@ -81,12 +81,12 @@ void main() {
 
       final TimerSettings timerSettings = TimerSettings();
 
-      when(() => mockAuthBloc.state).thenReturn(AuthState.signedOut());
-      when(() => mockProfileCubit.state).thenReturn(ProfileState.initial());
-      when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
-        .thenAnswer((_) => Future.value(null));
-      when(() => mockAudioHandler.playbackState)
-        .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
+      // when(() => mockAuthBloc.state).thenReturn(AuthState.signedOut());
+      // when(() => mockProfileCubit.state).thenReturn(ProfileState.initial());
+      // when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
+        // .thenAnswer((_) => Future.value(null));
+      // when(() => mockAudioHandler.playbackState)
+      //   .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.runAsync(() async {
         await tester.pumpWidget(

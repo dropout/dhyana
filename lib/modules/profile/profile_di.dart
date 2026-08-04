@@ -1,3 +1,4 @@
+import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:dhyana/core/util/firebase_provider.dart';
@@ -9,7 +10,6 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/module/profile_service.dart';
 
 import 'package:dhyana/modules/profile/data/service/default_profile_service.dart';
-import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit/profile_edit_cubit.dart';
 import 'package:dhyana/modules/profile/data/datasource/default_insights_profile_data_provdier.dart';
 import 'package:dhyana/modules/profile/data/datasource/default_timer_profile_data_provider.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';

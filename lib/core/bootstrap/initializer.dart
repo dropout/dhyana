@@ -15,7 +15,6 @@ import 'package:dhyana/modules/insights/insights_routes.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
-import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/modules/profile/profile_routes.dart';
@@ -28,7 +27,6 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
@@ -91,38 +89,26 @@ class Initializer with LoggerMixin {
     GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);
     initializeDependencies();
 
-    // Create data providers shared between builders
-    logger.t('Create data providers');
-    FirebaseStorageDataProvider storageDataProvider =
-        FirebaseStorageDataProvider(firebaseProvider.storage);
-
     // Build repositories
     logger.t('Create repositories');    
     final repos = RepositoriesBuilder().build();
 
     // Build services
     logger.t('Create services');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await FirebaseRemoteSettingsService.configureDefaults(
       firebaseProvider.remoteConfig,
     );
-
-    final services = ServicesBuilder(
-      firebaseProvider: firebaseProvider,
-      storageDataProvider: storageDataProvider,
-      sharedPreferences: sharedPreferences,
-      audioHandler: audioHandler,
-    ).build();
+    final services = ServicesBuilder().build();
 
     logger.t('Fetch remote settings');
     final remoteSettings = await services.remoteSettingsService
-        .fetchRemoteSettings();
+      .fetchRemoteSettings();
 
     logger.t('Preload shaders');
     await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
-    logger.t('');
+    logger.t('Fetching user ID');
     String? userId = await GetIt.I<AuthService>().userIdStream.first;
   
     return InitResult(

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/chant/chant.dart';
 import 'package:dhyana/core/util/remap_range.dart';
-import 'package:dhyana/modules/practice/chanting/presentation/view/chant_card.dart';
+import 'package:dhyana/core/presentation/view/chanting_settings/chant_card.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/add_chant_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';

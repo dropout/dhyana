@@ -8,8 +8,22 @@ import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile_edit_state.dart';
 part 'profile_edit_cubit.freezed.dart';
+
+@freezed
+sealed class ProfileEditState with _$ProfileEditState {
+
+  const ProfileEditState._();
+
+  const factory ProfileEditState.initial() = ProfileEditStateInitial;
+  const factory ProfileEditState.loading() = ProfileEditLoadingState;
+  const factory ProfileEditState.loaded({
+    required Profile profile,
+  }) = ProfileEditLoadedState;
+  const factory ProfileEditState.error() = ProfileEditErrorState;
+
+}
+
 
 class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
 

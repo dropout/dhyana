@@ -9,7 +9,7 @@ import 'package:dhyana/modules/social/data/repository/default_presence_repositor
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/social/data/service/default_presence_service.dart';
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence/presence_cubit.dart';
+import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
 
 void configureSocialModuleDependencies() {
   _configureDataProviders();
