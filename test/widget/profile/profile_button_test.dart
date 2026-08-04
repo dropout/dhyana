@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/auth/auth_routes.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
@@ -98,7 +98,7 @@ void main() {
     testWidgets('will show loading state when profile is loading', (WidgetTester tester) async {
 
       FakeModelFactory().createProfile();
-      final User user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUser();
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(userId: user.uid));
@@ -129,7 +129,7 @@ void main() {
     testWidgets('will show error state when profile loading failed', (WidgetTester tester) async {
 
       FakeModelFactory().createProfile();
-      final User user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUser();
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(userId: user.uid));
@@ -173,7 +173,7 @@ void main() {
 
     testWidgets('will show profile image profile loaded and is completed', (WidgetTester tester) async {
 
-      final User user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUser();
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         id: user.uid,
         completed: true,
@@ -231,7 +231,7 @@ void main() {
     // Need to assert with GoRouter implementation
     testWidgets('will show profile image profile loaded and is not completed', (WidgetTester tester) async {
 
-      final User user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUser();
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         id: user.uid,
         completed: false,

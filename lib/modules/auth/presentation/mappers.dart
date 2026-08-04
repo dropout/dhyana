@@ -1,9 +1,9 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/domain/entity/user_meta_data.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
 
 import 'state.dart';
 
-extension UserToViewStateMapper on User {
+extension UserToViewStateMapper on UserEntity {
   UserViewState toViewState() {
     return UserViewState(
       uid: uid,
@@ -18,8 +18,8 @@ extension UserToViewStateMapper on User {
 }
 
 extension UserViewStateToDomainMapper on UserViewState {
-  User toDomain() {
-    return User(
+  UserEntity toDomain() {
+    return UserEntity(
       uid: uid,
       metaData: metaData.toDomain(),
       displayName: displayName,
@@ -31,7 +31,7 @@ extension UserViewStateToDomainMapper on UserViewState {
   }
 }
 
-extension UserMetaDataToViewStateMapper on UserMetaData {
+extension UserMetaDataToViewStateMapper on UserMetaDataEntity {
   UserMetaDataViewState toViewState() {
     return UserMetaDataViewState(
       creationTime: creationTime,
@@ -41,8 +41,8 @@ extension UserMetaDataToViewStateMapper on UserMetaData {
 }
 
 extension UserMetaDataViewStateToDomainMapper on UserMetaDataViewState {
-  UserMetaData toDomain() {
-    return UserMetaData(
+  UserMetaDataEntity toDomain() {
+    return UserMetaDataEntity(
       creationTime: creationTime,
       lastSignInTime: lastSignInTime,
     );

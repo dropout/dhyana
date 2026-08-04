@@ -1,6 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
@@ -120,7 +120,7 @@ void main() {
       final FakeModelFactory fakeModelFactory = FakeModelFactory();
 
       final TimerSettings timerSettings = TimerSettings();
-      final User user = fakeModelFactory.createUser();
+      final UserEntity user = fakeModelFactory.createUser();
       final Profile profile = fakeModelFactory.createProfile().copyWith(
         id: user.uid,
         completed: true,
@@ -183,7 +183,7 @@ void main() {
       final FakeModelFactory fakeModelFactory = FakeModelFactory();
 
       final TimerSettings timerSettings = TimerSettings();
-      final User user = fakeModelFactory.createUser();
+      final UserEntity user = fakeModelFactory.createUser();
       final Profile profile = fakeModelFactory.createProfile().copyWith(
         id: user.uid,
         completed: true,

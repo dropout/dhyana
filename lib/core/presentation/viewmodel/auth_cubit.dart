@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
+import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,21 +22,21 @@ sealed class AuthState with _$AuthState {
 
 
 class AuthCubit extends Cubit<AuthState> with LoggerMixin {
-  final AuthService authService;
+  final AuthPublicApi authApi;
   final AnalyticsService analyticsService;
   final CrashlyticsService crashlyticsService;
 
   late StreamSubscription<String?> _userIdStreamSub;
 
   AuthCubit({
-    required this.authService,
+    required this.authApi,
     required this.analyticsService,
     required this.crashlyticsService,    
     AuthState initialAuthState = const AuthState.initial(),
   }) : super(initialAuthState) {
 
 
-    _userIdStreamSub = authService.userIdStream.listen(_handleUserIdChange, onError: (error, stackTrace) {
+    _userIdStreamSub = authApi.authSessionStream.map((s) => s.userId).listen(_handleUserIdChange, onError: (error, stackTrace) {
       crashlyticsService.recordError(
         exception: error,
         stackTrace: stackTrace,
@@ -50,7 +50,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
       return;
     }
 
-    String? userId = await authService.userIdStream.first;
+    String? userId = (await authApi.authSessionStream.first).userId;
     if (userId != null) {
       emit(AuthState.signedIn(userId: userId));
     } else {
@@ -65,7 +65,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
     try {
       logger.t('Signing in with Google');
       emit(const AuthState.signingIn());
-      final (:userId, :isFirstSignin) = await authService.signInWithGoogle();
+      final (:userId, :isFirstSignin) = await authApi.signInWithGoogle();
       emit(AuthState.signedIn(userId: userId));
       onComplete?.call(userId, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
@@ -91,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
     try {
       logger.t('Signing in with Apple');
       emit(const AuthState.signingIn());
-      final (:userId, :isFirstSignin) = await authService.signInWithApple();
+      final (:userId, :isFirstSignin) = await authApi.signInWithApple();
       emit(AuthState.signedIn(userId: userId));
       onComplete?.call(userId, isFirstSignin);
       _logAnalyticsSuccessfulSignin();
@@ -119,7 +119,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
     try {
       logger.t('Signing in with Email and Password...');
       emit(const AuthState.signingIn());
-      final (:userId, :isFirstSignin) = await authService.signInWithEmailAndPassword(
+      final (:userId, :isFirstSignin) = await authApi.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -144,7 +144,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
   Future<void> signOut({Function()? onSignedOut}) async {
     try {
       logger.t('Signing out...');
-      await authService.signOut();
+      await authApi.signOut();
       onSignedOut?.call();
       emit(const AuthState.signedOut());
       logger.t('Successfully signed out');

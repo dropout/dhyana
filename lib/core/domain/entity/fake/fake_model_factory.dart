@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
-import 'package:dhyana/modules/auth/domain/entity/user_meta_data.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
@@ -15,11 +15,11 @@ import 'package:faker/faker.dart';
 class FakeModelFactory {
   final Faker faker = Faker();
 
-  User createUser() {
-    return User(
+  UserEntity createUser() {
+    return UserEntity(
       uid: faker.guid.guid(),
       email: faker.internet.email(),
-      metaData: UserMetaData(),
+      metaData: UserMetaDataEntity(),
     );
   }
 

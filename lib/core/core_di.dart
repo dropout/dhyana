@@ -1,3 +1,9 @@
+import 'package:get_it/get_it.dart';
+import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
+import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/data/repository/default_storage_repository.dart';
 import 'package:dhyana/core/domain/entity/remote_settings.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
@@ -6,18 +12,12 @@ import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
-import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/service/module/profile_service.dart';
-import 'package:get_it/get_it.dart';
-import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 
 import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/firebase_auth_provider.dart';
-import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provider.dart';
-import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
@@ -125,7 +125,7 @@ void _registerViewModels() {
   GetIt.I.registerFactoryParam<AuthCubit, AuthState, void>(
     (initialAuthState, _) => AuthCubit(
       initialAuthState: initialAuthState,
-      authService: GetIt.I.get<AuthService>(),
+      authApi: GetIt.I.get<AuthPublicApi>(),
       analyticsService: GetIt.I.get<AnalyticsService>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     ),

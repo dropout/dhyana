@@ -1,12 +1,12 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
 
 abstract class AuthRepository {
-  Stream<User?> get authStateChange;
-  Stream<User?> get userChange;
-  User? get user;
+  Stream<UserEntity?> get authStateChange;
+  Stream<UserEntity?> get userChange;
+  UserEntity? get user;
 
-  Future<({User user, bool isFirstSignin})> signIn(
+  Future<({UserEntity user, bool isFirstSignin})> signIn(
     SigninMethodType signinMethodType, {
     String? email,
     String? password,

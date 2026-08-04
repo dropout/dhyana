@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-typedef OnSigninComplete = void Function(User user, bool isFirstSignin);
+typedef OnSigninComplete = void Function(UserEntity user, bool isFirstSignin);
 
 class LoginSignedOutView extends StatelessWidget {
 

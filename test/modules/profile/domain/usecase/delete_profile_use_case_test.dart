@@ -5,12 +5,12 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../mock_definitions.dart';
 
 void main() {
-  late MockAuthService authService;
+  late MockAuthPublicApi authService;
   late DeleteProfileUseCase useCase;
 
   setUp(() {
-    authService = MockAuthService();
-    useCase = DeleteProfileUseCase(authService: authService);
+    authService = MockAuthPublicApi();
+    useCase = DeleteProfileUseCase(authApi: authService);
   });
 
   group('DeleteProfileUseCase.execute', () {

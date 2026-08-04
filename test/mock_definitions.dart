@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
-import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/service/module/insights_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/service/module/profile_service.dart';
 import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
+import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
@@ -141,9 +141,9 @@ class MockProfileService
   extends Mock
   implements ProfileService {}
 
-class MockAuthService
+class MockAuthPublicApi
   extends Mock
-  implements AuthService {}
+  implements AuthPublicApi {}
 
 class MockInsightsService
   extends Mock

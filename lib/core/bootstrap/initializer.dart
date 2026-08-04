@@ -8,9 +8,9 @@ import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/core_routes.dart';
-import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
+import 'package:dhyana/modules/auth/public/public.dart';
 import 'package:dhyana/modules/insights/insights_routes.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
@@ -109,7 +109,7 @@ class Initializer with LoggerMixin {
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
 
     logger.t('Fetching user ID');
-    String? userId = await GetIt.I<AuthService>().userIdStream.first;
+    String? userId = (await GetIt.I<AuthPublicApi>().authSessionStream.first).userId;
   
     return InitResult(
       userId: userId,

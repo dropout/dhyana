@@ -1,5 +1,5 @@
-import 'package:dhyana/core/service/module/auth_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/modules/auth/public/public.dart';
 
 enum DeleteProfileResult {
 	completed,
@@ -7,16 +7,16 @@ enum DeleteProfileResult {
 }
 
 class DeleteProfileUseCase with LoggerMixin {
-	final AuthService authService;
+	final AuthPublicApi authApi;
 
 	DeleteProfileUseCase({
-		required this.authService,
+		required this.authApi,
 	});
 
 	Future<DeleteProfileResult> execute() async {
 		try {
 			logger.t('Attempting to delete user account');
-			await authService.deleteUser();
+			await authApi.deleteUser();
 			logger.t('User account deleted successfully');
 			return DeleteProfileResult.completed;
 		} on Exception catch (e) {

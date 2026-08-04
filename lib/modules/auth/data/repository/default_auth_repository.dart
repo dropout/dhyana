@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
-import 'package:dhyana/modules/auth/domain/entity/user.dart';
+import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/data/mappers.dart';
 import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
@@ -20,24 +20,24 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
 
   /// Guards auth state change streams to prevent emitting values during sign-in process
   @override
-  Stream<User?> get authStateChange => authDataProvider.authStateChange
+  Stream<UserEntity?> get authStateChange => authDataProvider.authStateChange
       .takeWhile((_) => (_isSigningIn == false))
       .map((authUser) => authUser?.toDomain());
 
   /// Guards user change stream to prevent emitting values during sign-in process
   @override
-  Stream<User?> get userChange => authDataProvider.userChange
+  Stream<UserEntity?> get userChange => authDataProvider.userChange
       .takeWhile((_) => (_isSigningIn == false))
       .map((authUser) => authUser?.toDomain());
 
   /// Gets the current user from the data provider
   @override
-  User? get user =>
+  UserEntity? get user =>
       authDataProvider.user?.toDomain();
 
   /// Performs sign-in using the specified method and credentials.
   @override
-  Future<({User user, bool isFirstSignin})> signIn(
+  Future<({UserEntity user, bool isFirstSignin})> signIn(
     SigninMethodType signinMethodType, {
     String? email,
     String? password,
@@ -61,13 +61,12 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
 
   /// Signs out the current user
   @override
-  Future<void> signOut() {
-    return authDataProvider.signOut();
-  }
+  Future<void> signOut() =>
+    authDataProvider.signOut();
 
   /// Deletes the current user
   @override
-  Future<void> deleteUser() async {
-    return authDataProvider.deleteUser();
-  }
+  Future<void> deleteUser() =>
+    authDataProvider.deleteUser();
+  
 }

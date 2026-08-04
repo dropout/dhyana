@@ -1,20 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'user_meta_data.dart';
+import 'user_meta_data_entity.dart';
 
-part 'user.freezed.dart';
+part 'user_entity.freezed.dart';
 
 @freezed
-sealed class User with _$User {
-  const User._();
+sealed class UserEntity with _$UserEntity {
+  const UserEntity._();
 
-  const factory User({
+  const factory UserEntity({
     required String uid,
-    required UserMetaData metaData,
+    required UserMetaDataEntity metaData,
     String? displayName,
     String? email,
     String? photoUrl,
     @Default(<String>[]) List<String> roles,
     @Default(0) int accessLevel,
-  }) = _User;
+  }) = _UserEntity;
 }
