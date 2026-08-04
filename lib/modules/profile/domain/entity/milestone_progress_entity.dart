@@ -2,27 +2,23 @@ import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'milestone_progress.freezed.dart';
-part 'milestone_progress.g.dart';
+part 'milestone_progress_entity.freezed.dart';
 
 // When editing profile make sure to check the profile model
 // in firebase functions, because thats where the
 // initial profile db record is created.
 
 @freezed
-sealed class MilestoneProgress with _$MilestoneProgress {
+sealed class MilestoneProgressEntity with _$MilestoneProgressEntity {
 
-  const MilestoneProgress._();
+  const MilestoneProgressEntity._();
 
-  const factory MilestoneProgress({
+  const factory MilestoneProgressEntity({
     @Default(0) int completedDaysCount,
     // Update default targetDaysCount in firebase function onbeforeCreateUser too
     @Default(7) int targetDaysCount,
     @Default([]) List<Session> sessions,
-  }) = _MilestoneProgress;
-
-  factory MilestoneProgress.fromJson(Map<String, Object?> json) =>
-    _$MilestoneProgressFromJson(json);
+  }) = _MilestoneProgressEntity;
 
   int get remainingDaysCount => targetDaysCount - completedDaysCount;
 

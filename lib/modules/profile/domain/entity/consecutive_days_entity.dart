@@ -1,27 +1,22 @@
 import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 
-part 'consecutive_days.freezed.dart';
-part 'consecutive_days.g.dart';
+part 'consecutive_days_entity.freezed.dart';
 
 // When editing profile make sure to check the profile model
 // in firebase functions, because thats where the
 // initial profile db record is created.
 
 @freezed
-sealed class ConsecutiveDays with _$ConsecutiveDays {
+sealed class ConsecutiveDaysEntity with _$ConsecutiveDaysEntity {
 
-  const ConsecutiveDays._();
+  const ConsecutiveDaysEntity._();
 
-  const factory ConsecutiveDays({
+  const factory ConsecutiveDaysEntity({
     @Default(0) int current,
     @Default(0) int longest,
     @DateTimeOrNullConverter() DateTime? startedAt,
     @DateTimeOrNullConverter() DateTime? lastChecked,
-  }) = _ConsecutiveDays;
-
-  factory ConsecutiveDays.fromJson(Map<String, Object?> json) =>
-      _$ConsecutiveDaysFromJson(json);
+  }) = _ConsecutiveDaysEntity;
 
 }

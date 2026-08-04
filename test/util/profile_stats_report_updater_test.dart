@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/profile/domain/entity/consecutive_days.dart';
+import 'package:dhyana/modules/profile/domain/entity/consecutive_days_entity.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -41,7 +41,7 @@ void main() {
 
     test('can calculate consecutive days when its the first day', () {
       ProfileStatisticsReport stats = const ProfileStatisticsReport(
-        consecutiveDays: ConsecutiveDays(),
+        consecutiveDays: ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -62,7 +62,7 @@ void main() {
 
     test('can calculate consecutive days when last session was yesterday', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(),
+        consecutiveDays: const ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -83,7 +83,7 @@ void main() {
 
     test('can calculate consecutive days when last session was on the same day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(current: 1),
+        consecutiveDays: const ConsecutiveDaysEntity(current: 1),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -105,7 +105,7 @@ void main() {
 
     test('can calculate consecutive days when last session was before yesterday', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(current: 3),
+        consecutiveDays: const ConsecutiveDaysEntity(current: 3),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -131,7 +131,7 @@ void main() {
 
     test('can calculate completed days when its the first day', () {
       ProfileStatisticsReport stats = const ProfileStatisticsReport(
-        consecutiveDays: ConsecutiveDays(),
+        consecutiveDays: ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
@@ -154,7 +154,7 @@ void main() {
 
     test('can calculate completed days when the last session was on the same day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(),
+        consecutiveDays: const ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 1,
@@ -178,7 +178,7 @@ void main() {
 
     test('can calculate completed days when last session was on an another day', () {
       ProfileStatisticsReport stats = ProfileStatisticsReport(
-        consecutiveDays: const ConsecutiveDays(),
+        consecutiveDays: const ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,

@@ -1,8 +1,8 @@
-import 'package:dhyana/modules/profile/domain/entity/consecutive_days.dart';
+import 'package:dhyana/core/util/date_time_utils.dart';
+import 'package:dhyana/modules/profile/domain/entity/consecutive_days_entity.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
-import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/detailed_consecutive_days_view.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,7 +20,7 @@ void main() {
     testWidgets('can show detailed consecutive days data', (WidgetTester tester) async {
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         statsReport: ProfileStatisticsReport(
-          consecutiveDays: ConsecutiveDays(
+          consecutiveDays: ConsecutiveDaysEntity(
             current: 5,
             longest: 10,
             startedAt: DateTime.now().subtract(const Duration(days: 5)),

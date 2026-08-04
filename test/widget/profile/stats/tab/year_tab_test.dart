@@ -1,7 +1,7 @@
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
+import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
@@ -49,7 +49,7 @@ void main() {
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         statsReport: ProfileStatisticsReport(
           milestoneCount: 5,
-          milestoneProgress: MilestoneProgress(
+          milestoneProgress: MilestoneProgressEntity(
             targetDaysCount: 7,
             completedDaysCount: 5,
           )

@@ -12,7 +12,7 @@ class DefaultTimerAuthDataProvider implements TimerAuthDataProvider {
   @override
   Future<TimerAuthData> getTimerAuthData() async {
     // Check if signed in
-    final user = await authProvider.user;
+    final user = authProvider.user;
     if (user != null) {
       return TimerAuthData(
         isAuthenticated: true,

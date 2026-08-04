@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
+import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
@@ -42,7 +42,7 @@ class DetailedMilestonesView extends StatelessWidget {
     );
   }
 
-  String getNextMilestoneText(BuildContext context, MilestoneProgress milestoneProgress) {
+  String getNextMilestoneText(BuildContext context, MilestoneProgressEntity milestoneProgress) {
     return context.l10n.statsNextMilestoneInShort(
       milestoneProgress.targetDaysCount - milestoneProgress.completedDaysCount,
     );

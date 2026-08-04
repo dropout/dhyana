@@ -4,7 +4,7 @@ import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
+import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
@@ -129,7 +129,7 @@ class DefaultProfileReportUpdaterService with LoggerMixin implements ProfileStat
         oldStatsReport.consecutiveDays.current != 0) {
       logger.t('Resetting milestone progress');
       return updatedStatsReport.copyWith(
-        milestoneProgress: MilestoneProgress(),
+        milestoneProgress: MilestoneProgressEntity(),
       );
     }
 
@@ -149,13 +149,13 @@ class DefaultProfileReportUpdaterService with LoggerMixin implements ProfileStat
     // If the consecutive days have increased,
     // update the milestone progress too
     if (consecutiveDaysDiff > 0) {
-      MilestoneProgress milestoneProgress = updatedStatsReport.milestoneProgress;
+      MilestoneProgressEntity milestoneProgress = updatedStatsReport.milestoneProgress;
 
       // Case 2.1:
       // If the milestone progress is already completed, restart the progress
       if (milestoneProgress.completedDaysCount == milestoneProgress.targetDaysCount) {
         return updatedStatsReport.copyWith(
-          milestoneProgress: MilestoneProgress(
+          milestoneProgress: MilestoneProgressEntity(
             completedDaysCount: 1,
             sessions: [session],
           ),

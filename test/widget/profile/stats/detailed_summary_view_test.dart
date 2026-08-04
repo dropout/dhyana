@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress.dart';
+import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
 import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/detailed_summary_view.dart';
@@ -23,7 +23,7 @@ void main() {
           completedSessionsCount: 43,
           completedMinutesCount: 1234,
           completedDaysCount: 12,
-          milestoneProgress: MilestoneProgress(
+          milestoneProgress: MilestoneProgressEntity(
             targetDaysCount: 7,
             completedDaysCount: 5,
           )
