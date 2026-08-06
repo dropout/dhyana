@@ -1,6 +1,6 @@
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_footer.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
+import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_menu.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
@@ -38,8 +38,8 @@ class ProfileView extends StatelessWidget {
                     border: Border.all(color: Colors.black, width: 4.0,),
                   ),
                   child: ProfileImage(
+                    profileId: profile.id,
                     profileName: profile.displayName,
-                    profileImagePath: 'profiles/${profile.id}/photo.jpg',
                     profilePhotoBlurhash: profile.photoBlurhash,
                     size: DesignSpec.circleLg),
                 ),

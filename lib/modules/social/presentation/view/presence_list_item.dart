@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/social/domain/entity/presence.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
+import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +29,8 @@ class PresenceListItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: ProfileImage(
+              profileId: presence.profile.id,
               profileName: presence.profile.displayName,
-              profileImagePath: presence.profile.photoUrl,
               profilePhotoBlurhash: presence.profile.photoBlurhash,
               size: 56,
             ),

@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
+import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/label_value_detail.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
@@ -9,6 +9,7 @@ import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:flutter/material.dart';
 
 class DetailedProfileView extends StatelessWidget {
+  final String profileId;
   final String profileName;
   final DateTime signupDate;
   final ProfileStatsReport profileStatsReport;
@@ -16,6 +17,7 @@ class DetailedProfileView extends StatelessWidget {
   final String? profilePhotoBlurhash;
 
   const DetailedProfileView({
+    required this.profileId,
     required this.profileName,
     required this.signupDate,
     required this.profileStatsReport,
@@ -46,8 +48,8 @@ class DetailedProfileView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(DesignSpec.paddingXs),
                   child: ProfileImage(
+                    profileId: profileId,
                     profileName: profileName,
-                    profileImagePath: profilePhotoUrl,
                     profilePhotoBlurhash: profilePhotoBlurhash,
                     size: 48
                   ),

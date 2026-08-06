@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/view/profile/profile_image_placeholder.dart';
+import 'package:dhyana/modules/profile/public/view/profile_image_placeholder.dart';
 import 'package:dhyana/core/presentation/view/util/app_cached_network_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +13,12 @@ import 'package:flutter/material.dart';
 /// The size of the image can be customized via the [size] parameter.
 class ProfileImage extends StatelessWidget {
 
+  /// The profile ID.
+  final String profileId;
+
   /// The name for the profile, for example, "John Doe". 
   /// This is used to generate initials for the placeholder.
   final String profileName;
-  
-  /// The profile image path in Firebase Storage.
-  /// For ex.: `profiles/uid/profile.jpg`
-  final String? profileImagePath;
 
   /// The blurhash for the profile image, if available.
   final String? profilePhotoBlurhash;
@@ -29,9 +28,9 @@ class ProfileImage extends StatelessWidget {
 
   // TODO: Clean up how the identity provider images will be used
   const ProfileImage({
+    required this.profileId,
     required this.profileName,
-    required this.profileImagePath,
-    required this.profilePhotoBlurhash,
+    this.profilePhotoBlurhash,
     this.size = 96.0, 
     super.key,
   });
@@ -42,12 +41,15 @@ class ProfileImage extends StatelessWidget {
       key: const Key('profile_image_sized_box'),
       width: size,
       height: size,
-      child: switch (profileImagePath != null) {
+      child: switch (profilePhotoBlurhash != null) {
         true => AppCachedNetworkImage(
-          imagePath: profileImagePath!,
+          imagePath: '/profiles/$profileId/profile.jpg',
           blurHash: profilePhotoBlurhash,
           resourceResolver: context.services.resourceResolver,
           circular: true,
+          errorWidget: ProfileImagePlaceholder(
+            name: profileName,
+          ),
         ),
         false => ProfileImagePlaceholder(
           name: profileName,

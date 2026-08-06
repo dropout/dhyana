@@ -32,6 +32,7 @@ class StatsDataAreaSliver extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             DetailedProfileView(
+              profileId: profile.id,
               profileName: profile.displayName,
               signupDate: profile.signupDate,
               profileStatsReport: profile.statsReport,

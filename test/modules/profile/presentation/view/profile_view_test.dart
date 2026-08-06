@@ -3,7 +3,7 @@ import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_footer.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
+import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_menu.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_view.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/consecutive_days_view.dart';

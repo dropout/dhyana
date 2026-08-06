@@ -1,20 +1,24 @@
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:flutter/material.dart';
 
 class ProfileAvatar extends StatelessWidget {
-
-  final Profile profile;
+  
+  final String profileId;
+  final String profileName;
   final double imageSize;
+
   final TextStyle? textStyle;
+  final String? profilePhotoBlurhash;
 
   const ProfileAvatar({
-    required this.profile,
+    required this.profileId,
+    required this.profileName,
+    this.profilePhotoBlurhash,
     this.imageSize = DefaultProfileData.defaultProfileImageSize,
     this.textStyle,
-    super.key
+    super.key,
   });
 
   @override
@@ -28,37 +32,28 @@ class ProfileAvatar extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.grey,
-                width: 4.0,
-              ),
+              border: Border.all(color: Colors.grey, width: 4.0),
             ),
             child: ProfileImage(
-              profileName: profile.displayName,
-              profileImagePath: profile.photoUrl,
-              profilePhotoBlurhash: profile.photoBlurhash,
+              profileId: profileId,
+              profileName: profileName,
+              profilePhotoBlurhash: profilePhotoBlurhash,
               size: imageSize,
             ),
           ),
         ),
         const SizedBox(height: DesignSpec.spacingMd),
-        buildName(context, profile.firstName, textStyle),
+        buildName(context, profileName, textStyle),
       ],
     );
   }
 
-  Widget buildName(
-    BuildContext context,
-    String text,
-    TextStyle? style
-  ) {
-    TextStyle st = style ?? Theme.of(context).textTheme.displaySmall!.copyWith(
-      fontWeight: FontWeight.bold,
-    );
-    return Text(text,
-      key: const Key('profile_avatar_name_text'),
-      style: st
-    );
+  Widget buildName(BuildContext context, String text, TextStyle? style) {
+    TextStyle st =
+        style ??
+        Theme.of(
+          context,
+        ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold);
+    return Text(text, key: const Key('profile_avatar_name_text'), style: st);
   }
-
 }

@@ -5,7 +5,7 @@ import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
 import 'package:dhyana/core/service/shader_service.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_button.dart';
+import 'package:dhyana/modules/profile/public/view/profile_button.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen.dart';
 import 'package:dhyana/core/presentation/view/app_bar/timer_settings_history_button.dart';
 import 'package:dhyana/core/presentation/view/timer_settings/timer_settings_view.dart';

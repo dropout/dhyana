@@ -2,7 +2,7 @@ import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
+import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_indicator.dart';
 import 'package:dhyana/core/presentation/view/util/signed_in.dart';
@@ -112,8 +112,8 @@ class ProfileButton extends StatelessWidget {
             ),
           ),
           child: ProfileImage(
+            profileId: profile.id,
             profileName: profile.displayName,          
-            profileImagePath: 'profiles/${profile.id}/photo.jpg',
             profilePhotoBlurhash: profile.photoBlurhash,
             size: size,
           ),

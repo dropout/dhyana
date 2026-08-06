@@ -8,8 +8,6 @@ import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile
 import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile_image_picker_edit_badge.dart';
 import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile_image_selection_controller.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_image_placeholder.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -275,8 +273,8 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         ),
         child: widget.profile.hasProfileImage
             ? ProfileImage(
+                profileId: widget.profile.id,
                 profileName: widget.profile.displayName,
-                profileImagePath: widget.profile.photoUrl,
                 profilePhotoBlurhash: widget.profile.photoBlurhash,
                 size: DesignSpec.circleLg,
               )

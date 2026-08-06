@@ -1,7 +1,6 @@
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/core/presentation/view/profile/profile_avatar.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +16,17 @@ class SessionResult extends StatelessWidget {
   });
 
 
+
   @override
   Widget build(BuildContext context) {
+    // TODO: Why the profile can be null in a sessionresult?
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ProfileAvatar(
-          profile: profile ?? Profile.anonymous(),
+          profileId: profile?.id ?? '',
+          profileName: profile?.displayName ?? '',
+          profilePhotoBlurhash: profile?.photoBlurhash,
           imageSize: DesignSpec.circleLg,
           textStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
             color: Colors.white,

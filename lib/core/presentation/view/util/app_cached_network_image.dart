@@ -19,6 +19,7 @@ class AppCachedNetworkImage extends StatefulWidget {
   final ResourceResolver resourceResolver;
   final bool circular;
   final double borderRadius;
+  final Widget errorWidget;
 
   const AppCachedNetworkImage({
     required this.imagePath,
@@ -26,6 +27,7 @@ class AppCachedNetworkImage extends StatefulWidget {
     required this.resourceResolver,
     this.borderRadius = 0.0,
     this.circular = false,
+    this.errorWidget = const Center(child: Icon(Icons.broken_image)),
     super.key,
   });
 
@@ -114,8 +116,8 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image(fit: .cover, image: BlurHashImage(blurHash)),
-        const Center(child: Icon(Icons.broken_image)),
+        if (widget.blurHash != null) buildPlaceHolder(context, blurHash),
+        widget.errorWidget,
       ],
     );
   }
