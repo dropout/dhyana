@@ -1,62 +1,24 @@
-import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
-import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/repository/crud/crud_repository_operations.dart';
+import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 
-class DefaultProfileRepository extends CrudRepositoryOps<Profile>
-    implements ProfileRepository {
-  final ProfileDataProvider profileDataProvider;
-  final StorageDataProvider storageDataProvider;
-  Profile? _currentUser;
+class DefaultProfileRepository 
+  extends CrudRepositoryOps<ProfileEntity> 
+  implements ProfileRepository {
 
-  @override
-  Profile? get currentUser => _currentUser;
+  final ProfileDataProvider profileDataProvider;
 
   DefaultProfileRepository({
     required this.profileDataProvider,
-    required this.storageDataProvider,
-  }) : super(profileDataProvider);
+  }): super(profileDataProvider);
 
   @override
-  Future<List<Profile>> query({int limit = 20}) =>
-      profileDataProvider.query(limit: limit);
+  Future<List<ProfileEntity>> query({int limit = 20}) =>
+    profileDataProvider.query(limit: limit);
 
   @override
-  Stream<List<Profile>> queryStream({int limit = 20}) =>
-      profileDataProvider.queryStream(limit: limit);
+  Stream<List<ProfileEntity>> queryStream({int limit = 20}) =>
+    profileDataProvider.queryStream(limit: limit);
 
-  @override
-  Future<void> create(Profile model) async {
-    await super.create(model);
-    _currentUser = model;
-  }
-
-  @override
-  Future<void> delete(String id) async {
-    await super.delete(id);
-    if (_currentUser?.id == id) {
-      _currentUser = null;
-    }
-  }
-
-  @override
-  Future<Profile> read(String id) async {
-    final profile = await super.read(id);
-    _currentUser = profile;
-    return profile;
-  }
-
-  @override
-  Stream<Profile> readStream(String id) =>
-    super.readStream(id).map((profile) {
-      _currentUser = profile;
-      return profile;
-    });
-
-  @override
-  Future<void> update(Profile model) async {
-    await super.update(model);
-    _currentUser = model;
-  }
 }

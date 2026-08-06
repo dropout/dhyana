@@ -2,13 +2,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/service/module/insights_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
-import 'package:dhyana/core/service/module/profile_service.dart';
 import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
@@ -135,15 +135,15 @@ class MockResourceResolver
 
 class MockProfileStatsUpdaterService
   extends Mock
-  implements ProfileStatsUpdaterService {}
-
-class MockProfileService  
-  extends Mock
-  implements ProfileService {}
+  implements ProfileStatsReportUpdaterService {}
 
 class MockAuthPublicApi
   extends Mock
   implements AuthPublicApi {}
+
+class MockProfilePublicApi
+  extends Mock
+  implements ProfilePublicApi {}
 
 class MockInsightsService
   extends Mock

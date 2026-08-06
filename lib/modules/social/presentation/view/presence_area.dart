@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
 import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

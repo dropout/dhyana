@@ -1,14 +1,14 @@
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
 
 import 'label_value_detail.dart';
 
 class DetailedSummaryView extends StatelessWidget {
 
-  final ProfileStatisticsReport profileStatsReport;
+  final ProfileStatsReport profileStatsReport;
 
   const DetailedSummaryView({
     required this.profileStatsReport,

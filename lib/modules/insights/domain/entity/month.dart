@@ -7,7 +7,7 @@ part 'month.freezed.dart';
 part 'month.g.dart';
 
 @freezed
-sealed class Month with _$Month implements Entity {
+sealed class Month with _$Month implements Dto {
 
   const Month._();
 

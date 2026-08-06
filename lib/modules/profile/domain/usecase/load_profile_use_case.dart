@@ -1,7 +1,7 @@
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
-import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 
 /// Use case for loading a profile and validating its statistics report.
 /// Validating the statistics report ensures that the consecutive days
@@ -14,30 +14,30 @@ class LoadProfileUseCase with LoggerMixin {
   final ProfileRepository profileRepository;
 
   /// The updater responsible for validating and updating the profile's statistics report.
-  final DefaultProfileReportUpdaterService profileStatsUpdater;
+  final ProfileStatsReportUpdaterService profileStatsUpdater;
     
   LoadProfileUseCase({
     required this.profileRepository,
     required this.profileStatsUpdater,
   });
 
-  Future<Profile> execute(String profileId) async {
+  Future<ProfileEntity> execute(String profileId) async {
     // Load the profile from the repository
-    Profile profile = await profileRepository.read(profileId);
+    var profileEntity = await profileRepository.read(profileId);
 
     // Check if consecutive days are valid
     final updatedStatsReport = 
-      profileStatsUpdater.validateStatsReport(profile.statsReport);
+      profileStatsUpdater.validateStatsReport(profileEntity.statsReport);
 
-    if (updatedStatsReport != profile.statsReport) {
+    if (updatedStatsReport != profileEntity.statsReport) {
       logger.t(
         'Consecutive days and milestone progress have been invalidated!',
       );
-      profile = profile.copyWith(statsReport: updatedStatsReport);
+      profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
       
       // lazy update the profile
-      profileRepository.update(profile);
+      profileRepository.update(profileEntity);
     }
-    return profile;
+    return profileEntity;
   }
 }

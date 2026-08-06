@@ -7,7 +7,7 @@ part 'week.freezed.dart';
 part 'week.g.dart';
 
 @freezed
-sealed class Week with _$Week implements Entity {
+sealed class Week with _$Week implements Dto {
 
   const Week._();
 

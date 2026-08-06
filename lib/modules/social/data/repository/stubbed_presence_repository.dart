@@ -78,7 +78,7 @@ class StubbedPresenceRepository implements PresenceRepository {
   }
 
   @override
-  Future<Presence> read(String id) {
+  Future<Presence> read(String id, {bool preferCache = false}) {
     throw UnimplementedError();
   }
 

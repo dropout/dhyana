@@ -3,13 +3,14 @@ import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_stats_report_entity.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/core/util/faker.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:faker/faker.dart';
 
 class FakeModelFactory {
@@ -32,7 +33,21 @@ class FakeModelFactory {
       photoUrl: faker.profilePhotoUrl(),
       photoBlurhash: faker.profilePhotoBlurhash(),
       signupDate: DateTime.now(),
-      statsReport: const ProfileStatisticsReport(),
+      statsReport: const ProfileStatsReport(),
+      completed: faker.randomGenerator.boolean(),
+    );
+  }
+
+  ProfileEntity createProfileEntity() {
+    return ProfileEntity(
+      id: faker.guid.guid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      email: faker.internet.email(),
+      photoUrl: faker.profilePhotoUrl(),
+      photoBlurhash: faker.profilePhotoBlurhash(),
+      signupDate: DateTime.now(),
+      statsReport: const ProfileStatsReportEntity(),
       completed: faker.randomGenerator.boolean(),
     );
   }
@@ -112,7 +127,8 @@ class FakeModelFactory {
     return List.generate(count, (_) => createSession());
   }
 
-  int randomMinutesCount(int numDays, {
+  int randomMinutesCount(
+    int numDays, {
     int max = 200,
     int min = 10,
     int spread = 50,
@@ -121,13 +137,14 @@ class FakeModelFactory {
     for (var i = 0; i < numDays; ++i) {
       sum += faker.randomGenerator.integer(
         max + faker.randomGenerator.integer(spread, min: spread * -1),
-        min: 10
+        min: 10,
       );
     }
     return sum;
   }
 
-  int randomSessionCount(int numDays, {
+  int randomSessionCount(
+    int numDays, {
     int max = 10,
     int min = 1,
     int spread = 5,
@@ -136,10 +153,9 @@ class FakeModelFactory {
     for (var i = 0; i < numDays; ++i) {
       sum += faker.randomGenerator.integer(
         max + faker.randomGenerator.integer(spread),
-        min: 1
+        min: 1,
       );
     }
     return sum;
   }
-
 }

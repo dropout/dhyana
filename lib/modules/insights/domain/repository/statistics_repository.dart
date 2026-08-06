@@ -20,6 +20,6 @@ abstract class StatisticsRepository {
   Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions);
   Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions);
 
-  Future<void> logSessionStatistics(String profileId, Session session);
+  Future<void> logSessionStatistics(String profileId, Session session, int consecutiveDaysCount);
 
 }

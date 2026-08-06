@@ -20,7 +20,7 @@ void main() {
 
   group('ValidateProfileStatsUseCase.execute', () {
     test('delegates to updater and returns validated stats report', () async {
-      final profile = fakeModelFactory.createProfile();
+      final profile = fakeModelFactory.createProfileEntity();
       final statsReport = profile.statsReport;
       final validatedStatsReport = statsReport.copyWith(
         completedDaysCount: statsReport.completedDaysCount + 1,

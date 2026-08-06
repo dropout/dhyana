@@ -9,7 +9,7 @@ part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';
 
 @freezed
-sealed class TimerSettings with _$TimerSettings implements Entity {
+sealed class TimerSettings with _$TimerSettings implements Dto {
 
   const TimerSettings._();
 

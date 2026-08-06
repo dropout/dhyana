@@ -31,7 +31,7 @@ void main() {
 
   group('UpdateProfileUseCase.execute', () {
     test('updates profile data only when image is not provided', () async {
-      final profile = fakeModelFactory.createProfile();
+      final profile = fakeModelFactory.createProfileEntity();
       final updatedFields = <String, dynamic>{
         'firstName': 'John',
         'lastName': 'Doe',
@@ -59,7 +59,7 @@ void main() {
 
     test('uploads image and updates profile with blurhash when image is provided',
         () async {
-      final profile = fakeModelFactory.createProfile();
+      final profile = fakeModelFactory.createProfileEntity();
       final imageData = _createValidImageBytes();
       final updatedFields = <String, dynamic>{
         'imageData': imageData,

@@ -1,6 +1,6 @@
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/profile/public/model/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'detailed_consecutive_days_view.dart';

@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/progress_summary.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/progress_summary_item.dart';
 import 'package:flutter/foundation.dart';

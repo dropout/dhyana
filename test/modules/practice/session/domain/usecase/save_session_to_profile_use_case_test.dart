@@ -1,21 +1,21 @@
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
-import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
+
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
-import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
+import 'package:dhyana/modules/profile/public/model/profile_session.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../mock_definitions.dart';
 
 void main() {
-  late MockProfileService profileService;
+  late MockProfilePublicApi profilePublicApi;
   late UpdateProfileWithSessionUseCase useCase;
 
   setUp(() {
+    profilePublicApi = MockProfilePublicApi();
     useCase = UpdateProfileWithSessionUseCase(
-      profileService: profileService = MockProfileService(),
+      profilePublicApi: profilePublicApi,
     );
   });
 
@@ -28,15 +28,15 @@ void main() {
       photoUrl: null,
       photoBlurhash: null,
       signupDate: DateTime(2026, 1, 1),
-      statsReport: const ProfileStatisticsReport(),
+      statsReport: const ProfileStatsReport(),
       completed: true,
     );
   }
 
-  Session createSession() {
-    return Session(
+  ProfileSession createSession() {
+    return ProfileSession(
       id: 'session-1',
-      type: SessionType.sitting,
+      type: .sitting,
       startTime: DateTime(2026, 1, 2, 10, 0),
       endTime: DateTime(2026, 1, 2, 10, 20),
       duration: const Duration(minutes: 20),
@@ -45,12 +45,32 @@ void main() {
 
   test('returns updated profile and persists it', () async {
     final profile = createProfile();
-    final session = createSession();
-    final expectedUpdatedProfile = DefaultProfileReportUpdaterService()
-        .updateProfileStatsWithSession(profile, session);
+    final profileSession = createSession();
+    final session = Session(
+      id: profileSession.id,
+      type: switch (profileSession.type) {
+        .sitting => .sitting,
+        .chanting => .chanting,
+      },
+      startTime: profileSession.startTime,
+      endTime: profileSession.endTime,
+      duration: profileSession.duration,
+    );
+    final expectedUpdatedProfile = profile.copyWith(
+      statsReport: profile.statsReport.copyWith(
+        completedDaysCount: profile.statsReport.completedDaysCount + 1,
+      ),
+    );
 
     when(
-      () => profileService.updateProfileStatsWithSession(profile.id, session),
+      () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
+    ).thenAnswer(
+      (_) async =>
+          (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
+    );
+
+    when(
+      () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
     ).thenAnswer(
       (_) async =>
           (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
@@ -60,7 +80,7 @@ void main() {
 
     expect(result, equals(expectedUpdatedProfile));
     verify(
-      () => profileService.updateProfileStatsWithSession(profile.id, session),
+      () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
     ).called(1);
   });
 }

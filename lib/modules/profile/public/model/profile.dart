@@ -1,15 +1,15 @@
 import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_model.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
+import 'profile_settings.dart';
+import 'profile_stats_report.dart';
+
 part 'profile.freezed.dart';
-part 'profile.g.dart';
 
 // When editing profile make sure to check the profile model
 // in firebase functions, because thats where the
@@ -29,7 +29,7 @@ abstract class Profile with _$Profile implements ProfileModel {
     required String? photoBlurhash,
     @Default(ProfileSettings()) ProfileSettings settings,
     @DateTimeConverter() required DateTime signupDate,
-    required ProfileStatisticsReport statsReport,
+    required ProfileStatsReport statsReport,
     required bool completed,
     Location? location,
   }) = _Profile;
@@ -43,13 +43,10 @@ abstract class Profile with _$Profile implements ProfileModel {
       photoUrl: DefaultProfileData.photoUrl,
       photoBlurhash: DefaultProfileData.photoBlurhash,
       signupDate: DateTime.now(),
-      statsReport: const ProfileStatisticsReport(),
+      statsReport: const ProfileStatsReport(),
       completed: false,
     );
   }
-
-  factory Profile.fromJson(Map<String, Object?> json) =>
-    _$ProfileFromJson(json);
 
   bool consecutiveDaysProgressCheck(Profile oldProfile) =>
     (oldProfile.statsReport.consecutiveDays.current

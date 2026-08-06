@@ -1,14 +1,14 @@
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
-import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_stats_report_entity.dart';
+import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 
 class ValidateProfileStatsUseCase {
-  final DefaultProfileReportUpdaterService profileStatsReportUpdater;
+  final ProfileStatsReportUpdaterService profileStatsReportUpdater;
 
   ValidateProfileStatsUseCase({
     required this.profileStatsReportUpdater,
   });
 
-  Future<ProfileStatisticsReport> execute(ProfileStatisticsReport statsReport) async {
+  Future<ProfileStatsReportEntity> execute(ProfileStatsReportEntity statsReport) async {
     return profileStatsReportUpdater.validateStatsReport(statsReport);
   }
 }

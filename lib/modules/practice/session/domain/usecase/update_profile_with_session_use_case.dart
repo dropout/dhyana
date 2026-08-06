@@ -1,28 +1,38 @@
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
-import 'package:dhyana/core/service/module/profile_service.dart';
 import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
+import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
+
+import 'package:dhyana/modules/profile/public/model/profile_session.dart';
 
 /// Persists a completed session into profile statistics and returns the updated profile.
 class UpdateProfileWithSessionUseCase {
 
-  final ProfileService profileService;
+  final ProfilePublicApi profilePublicApi;
 
   UpdateProfileWithSessionUseCase({
-    required this.profileService,
+    required this.profilePublicApi,
   });
 
   Future<UpdateProfileStatsResult> execute(
     String profileId,
     Session session,
   ) async {
-    final ({Profile originalProfile, Profile updatedProfile}) result = await profileService.updateProfileStatsWithSession(
+    final result = await profilePublicApi.updateProfileStatsWithSession(
       profileId,
-      session,
+      ProfileSession(
+        id: session.id,
+        startTime: session.startTime,
+        endTime: session.endTime,
+        duration: session.duration,
+        type: switch(session.type) {
+          .sitting => .sitting,
+          .chanting => .chanting,
+        },
+      ),
     );
     return UpdateProfileStatsResult(
       oldProfile: result.originalProfile,
-      updatedProfile: result.updatedProfile, 
+      updatedProfile: result.updatedProfile,
       session: session,
     );
   }

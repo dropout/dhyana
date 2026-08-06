@@ -45,7 +45,7 @@ sealed class UiChant with _$UiChant {
 }
 
 @freezed
-sealed class Chant with _$Chant implements Entity {
+sealed class Chant with _$Chant implements Dto {
 
   const Chant._();
 

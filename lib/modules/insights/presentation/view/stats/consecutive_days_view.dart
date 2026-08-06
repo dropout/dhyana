@@ -1,6 +1,5 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/profile/domain/entity/consecutive_days_entity.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +60,7 @@ class _ConsecutiveDaysViewState extends State<ConsecutiveDaysView> {
 
   // not in use currently
   Widget buildConsecutiveDaysStartTime(BuildContext context) {
-    final ConsecutiveDaysEntity consecutiveDays =
+    final ConsecutiveDays consecutiveDays =
       widget.profile.statsReport.consecutiveDays;
     if (consecutiveDays.current > 0 && consecutiveDays.startedAt != null) {
       Locale locale = Localizations.localeOf(context);

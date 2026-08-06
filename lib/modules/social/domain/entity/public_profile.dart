@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/profile/profile_model.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';

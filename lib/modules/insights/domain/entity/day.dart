@@ -9,7 +9,7 @@ part 'day.freezed.dart';
 part 'day.g.dart';
 
 @freezed
-sealed class Day with _$Day implements Entity {
+sealed class Day with _$Day implements Dto {
 
   const Day._();
 

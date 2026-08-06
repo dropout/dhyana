@@ -1,8 +1,9 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+
 import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_cached_network_image.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';

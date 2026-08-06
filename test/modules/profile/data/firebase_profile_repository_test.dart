@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,37 +16,34 @@ class MockStorageDataProvider
   extends Mock
   implements StorageDataProvider {}
 
-class MockProfile
+class MockProfileEntity
   extends Mock
-  implements Profile {
+  implements ProfileEntity {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'MockProfile';
   }
-}
+} 
 
 void main() {
 
   group('FirebaseProfileRepositoryTest', () {
 
-    late StreamController<MockProfile> profileStreamController;
-    late StreamController<List<MockProfile>> profileQueryStreamController;
+    late StreamController<MockProfileEntity> profileStreamController;
+    late StreamController<List<MockProfileEntity>> profileQueryStreamController;
     late MockProfileDataProvider mockProfileDataProvider;
-    late MockStorageDataProvider mockStorageDataProvider;
-    late MockProfile mockProfile;
+    late MockProfileEntity mockProfile;
     late DefaultProfileRepository firebaseProfileRepository;
 
     setUp(() {
-      profileStreamController = StreamController<MockProfile>(sync: true);
+      profileStreamController = StreamController<MockProfileEntity>(sync: true);
       profileQueryStreamController =
-          StreamController<List<MockProfile>>(sync: true);
+          StreamController<List<MockProfileEntity>>(sync: true);
       mockProfileDataProvider = MockProfileDataProvider();
-      mockStorageDataProvider = MockStorageDataProvider();
-      mockProfile = MockProfile();
+      mockProfile = MockProfileEntity();
       firebaseProfileRepository = DefaultProfileRepository(
         profileDataProvider: mockProfileDataProvider,
-        storageDataProvider: mockStorageDataProvider
       );
     });
 

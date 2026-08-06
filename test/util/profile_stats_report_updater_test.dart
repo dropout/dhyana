@@ -1,14 +1,15 @@
-import 'package:dhyana/modules/profile/domain/entity/consecutive_days_entity.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
-import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:dhyana/modules/profile/domain/entity/consecutive_days_entity.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_stats_report_entity.dart';
+import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 
 void main() {
 
   group('ProfileStatisticsReportCalculator.hasValidConsecutiveDays', () {
 
     test('can tell if the consecutive days are valid when last session was before yesterday', () {
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
       expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 8, 30, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -20,7 +21,7 @@ void main() {
     });
 
     test('can tell if the consecutive days are valid when last session was yesterday', () {
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
       expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 8, 31, 0, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -28,7 +29,7 @@ void main() {
     });
 
     test('can tell if the consecutive days are valid when last session was today', () {
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
       expect(profileStatsCalculator.hasValidConsecutiveDays(
         DateTime(2023, 9, 1, 3, 0),
         DateTime(2023, 9, 1, 12, 0),
@@ -40,18 +41,18 @@ void main() {
   group('ProfileStatisticsReportCalculator.calculateConsecutiveDays', () {
 
     test('can calculate consecutive days when its the first day', () {
-      ProfileStatisticsReport stats = const ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = const ProfileStatsReportEntity(
         consecutiveDays: ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
       );
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
 
       final currentSessionDate = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStatisticsReport newStats =
+      ProfileStatsReportEntity newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionDate);
 
       expect(newStats.consecutiveDays.current, 1);
@@ -61,7 +62,7 @@ void main() {
     });
 
     test('can calculate consecutive days when last session was yesterday', () {
-      ProfileStatisticsReport stats = ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = ProfileStatsReportEntity(
         consecutiveDays: const ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -69,10 +70,10 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
       final currentSessionDate = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStatisticsReport newStats =
+      ProfileStatsReportEntity newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionDate);
 
       expect(newStats.consecutiveDays.current, 1);
@@ -82,7 +83,7 @@ void main() {
     });
 
     test('can calculate consecutive days when last session was on the same day', () {
-      ProfileStatisticsReport stats = ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = ProfileStatsReportEntity(
         consecutiveDays: const ConsecutiveDaysEntity(current: 1),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -90,11 +91,11 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      ProfileStatisticsReport newStats =
+      ProfileStatsReportEntity newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
       expect(newStats.consecutiveDays.current, 1);
@@ -104,7 +105,7 @@ void main() {
     });
 
     test('can calculate consecutive days when last session was before yesterday', () {
-      ProfileStatisticsReport stats = ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = ProfileStatsReportEntity(
         consecutiveDays: const ConsecutiveDaysEntity(current: 3),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -112,11 +113,11 @@ void main() {
         lastSessionDate: DateTime(2023, 9, 1),
       );
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 9, 3, 12, 0);
 
-      ProfileStatisticsReport newStats =
+      ProfileStatsReportEntity newStats =
         profileStatsCalculator.updateConsecutiveDays(stats, currentSessionTime);
 
       expect(newStats.consecutiveDays.current, 1);
@@ -130,18 +131,18 @@ void main() {
   group('profile_stats_calculator.calculateCompletedDay', () {
 
     test('can calculate completed days when its the first day', () {
-      ProfileStatisticsReport stats = const ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = const ProfileStatsReportEntity(
         consecutiveDays: ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
         completedDaysCount: 0,
       );
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
+      ProfileStatsReportEntity newStats = profileStatsCalculator.updateCompletedDays(
         stats,
         currentSessionTime,
       );
@@ -153,7 +154,7 @@ void main() {
     });
 
     test('can calculate completed days when the last session was on the same day', () {
-      ProfileStatisticsReport stats = ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = ProfileStatsReportEntity(
         consecutiveDays: const ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -161,11 +162,11 @@ void main() {
         lastSessionDate: DateTime(2023, 8, 31, 0, 0),
       );
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
 
       final currentSessionTime = DateTime(2023, 8, 31, 12, 0);
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
+      ProfileStatsReportEntity newStats = profileStatsCalculator.updateCompletedDays(
         stats,
         currentSessionTime
       );
@@ -177,7 +178,7 @@ void main() {
     });
 
     test('can calculate completed days when last session was on an another day', () {
-      ProfileStatisticsReport stats = ProfileStatisticsReport(
+      ProfileStatsReportEntity stats = ProfileStatsReportEntity(
         consecutiveDays: const ConsecutiveDaysEntity(),
         completedMinutesCount: 0,
         completedSessionsCount: 0,
@@ -187,9 +188,9 @@ void main() {
 
       final currentSessionTime = DateTime(2023, 9, 1, 12, 0);
 
-      DefaultProfileReportUpdaterService profileStatsCalculator = DefaultProfileReportUpdaterService();
+      ProfileStatsReportUpdaterService profileStatsCalculator = ProfileStatsReportUpdaterService();
 
-      ProfileStatisticsReport newStats = profileStatsCalculator.updateCompletedDays(
+      ProfileStatsReportEntity newStats = profileStatsCalculator.updateCompletedDays(
         stats,
         currentSessionTime
       );

@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/data/mapper/profile_mapper.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -48,7 +50,7 @@ void main() {
       act: (cubit) async {
         final profile = fakeModelFactory.createProfile();
         when(() => loadProfileUseCase.execute(profile.id))
-            .thenAnswer((_) async => profile);
+            .thenAnswer((_) async => profile.toDomain());
 
         final callbackCompleter = Completer<Profile>();
 
@@ -88,7 +90,7 @@ void main() {
         final stackTrace = StackTrace.current;
 
         when(() => loadProfileUseCase.execute(profileId))
-            .thenAnswer((_) => Future<Profile>.error(exception, stackTrace));
+            .thenAnswer((_) => Future<ProfileEntity>.error(exception, stackTrace));
 
         final callbackCompleter = Completer<(Object?, StackTrace)>();
 
@@ -126,7 +128,7 @@ void main() {
       'emits loaded and calls onComplete on success',
       build: buildCubit,
       act: (cubit) async {
-        final profile = fakeModelFactory.createProfile();
+        final profile = fakeModelFactory.createProfileEntity();
         final updatedProfile = profile.copyWith(firstName: 'Updated');
         const formData = <String, dynamic>{'firstName': 'Updated'};
 
@@ -141,7 +143,7 @@ void main() {
         final callbackCompleter = Completer<Profile>();
 
         cubit.updateProfile(
-          profile: profile,
+          profile: profile.toApi(),
           formData: formData,
           onComplete: (result) {
             callbackCompleter.complete(result);
@@ -169,7 +171,7 @@ void main() {
       'calls crashlytics and onError on failure',
       build: buildCubit,
       act: (cubit) async {
-        final profile = fakeModelFactory.createProfile();
+        final profile = fakeModelFactory.createProfileEntity();
         updatedProfileId = profile.id;
         const formData = <String, dynamic>{'firstName': 'Updated'};
         final exception = Exception('update failed');
@@ -181,12 +183,12 @@ void main() {
             updatedFields: formData,
             completeProfile: false,
           ),
-        ).thenAnswer((_) => Future<Profile>.error(exception, stackTrace));
+        ).thenAnswer((_) => Future<ProfileEntity>.error(exception, stackTrace));
 
         final callbackCompleter = Completer<(Object?, StackTrace)>();
 
         cubit.updateProfile(
-          profile: profile,
+          profile: profile.toApi(),
           formData: formData,
           onError: (error, stack) {
             callbackCompleter.complete((error, stack));
@@ -217,7 +219,7 @@ void main() {
       'emits loaded and calls onComplete on success',
       build: buildCubit,
       act: (cubit) async {
-        final profile = fakeModelFactory.createProfile();
+        final profile = fakeModelFactory.createProfileEntity();
         final updatedProfile = profile.copyWith(
           settings: profile.settings.copyWith(showStatsOnFinishScreen: false),
         );
@@ -228,7 +230,7 @@ void main() {
 
         when(
           () => updateProfileSettingsUseCase.execute(
-            profile: profile,
+            profileEntity: profile,
             updatedFields: settingsFormData,
           ),
         ).thenAnswer((_) async => updatedProfile);
@@ -236,7 +238,7 @@ void main() {
         final callbackCompleter = Completer<void>();
 
         cubit.updateProfileSettings(
-          profile: profile,
+          profile: profile.toApi(),
           settingsFormData: settingsFormData,
           onComplete: (settings) {
             expect(settings, equals(updatedProfile.settings));
@@ -275,10 +277,10 @@ void main() {
 
         when(
           () => updateProfileSettingsUseCase.execute(
-            profile: profile,
+            profileEntity: profile.toDomain(),
             updatedFields: settingsFormData,
           ),
-        ).thenAnswer((_) => Future<Profile>.error(exception, stackTrace));
+        ).thenAnswer((_) => Future<ProfileEntity>.error(exception, stackTrace));
 
         final callbackCompleter = Completer<(Object?, StackTrace)>();
 

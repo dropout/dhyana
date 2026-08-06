@@ -120,7 +120,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(String profileId, Session session) {
+  Future<void> logSessionStatistics(String profileId, Session session, int consecutiveDaysCount) async {
     return Future.value();
   }
 }

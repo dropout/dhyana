@@ -1,13 +1,12 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
 
 class MilestonesView extends StatefulWidget {
 
-  final ProfileStatisticsReport profileStatsReport;
+  final ProfileStatsReport profileStatsReport;
   final bool showMeter;
 
   const MilestonesView({
@@ -58,7 +57,7 @@ class _MilestonesViewState extends State<MilestonesView> {
 
   Widget buildMilestoneBars(
     BuildContext context,
-    MilestoneProgressEntity milestoneProgress
+    MilestoneProgress milestoneProgress
   ) {
     return Column(
       mainAxisSize: MainAxisSize.min,

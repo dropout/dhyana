@@ -2,9 +2,7 @@ import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/days_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/tab/day_tab.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,9 +46,9 @@ void main() {
 
     testWidgets('can be created with its default values', (WidgetTester tester) async {
       final Profile profile = FakeModelFactory().createProfile().copyWith(
-        statsReport: ProfileStatisticsReport(
+        statsReport: ProfileStatsReport(
           milestoneCount: 5,
-          milestoneProgress: MilestoneProgressEntity(
+          milestoneProgress: MilestoneProgress(
             targetDaysCount: 7,
             completedDaysCount: 5,
           )

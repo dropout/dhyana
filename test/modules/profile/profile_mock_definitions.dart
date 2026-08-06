@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
+import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
-import 'package:dhyana/modules/profile/data/service/default_profile_stats_report_updater_service.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:mocktail/mocktail.dart';
@@ -22,7 +22,7 @@ class MockSafeImageDetector extends Mock implements SafeImageDetector {}
 class MockInterpreter extends Mock implements Interpreter {}
 
 class MockProfileStatsUpdater extends Mock
-    implements DefaultProfileReportUpdaterService {}
+    implements ProfileStatsReportUpdaterService {}
 
 class MockLoadProfileUseCase extends Mock implements LoadProfileUseCase {}
 

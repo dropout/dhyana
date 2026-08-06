@@ -30,7 +30,7 @@ void main() {
     test(
       'returns loaded profile and does not persist when stats are unchanged',
       () async {
-        final profile = fakeModelFactory.createProfile();
+        final profile = fakeModelFactory.createProfileEntity();
 
         when(
           () => profileRepository.read(profile.id),
@@ -53,7 +53,7 @@ void main() {
     test(
       'returns updated profile and persists when stats are invalidated',
       () async {
-        final profile = fakeModelFactory.createProfile();
+        final profile = fakeModelFactory.createProfileEntity();
         final updatedStatsReport = profile.statsReport.copyWith(
           completedDaysCount: profile.statsReport.completedDaysCount + 1,
         );

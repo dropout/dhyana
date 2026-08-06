@@ -12,7 +12,7 @@ abstract class CrudRepositoryOps<M> {
   const CrudRepositoryOps(this.dataProvider);
 
   Future<void> create(M model) => dataProvider.create(model);
-  Future<M> read(String id) => dataProvider.read(id);
+  Future<M> read(String id, {bool preferCache = false}) => dataProvider.read(id, preferCache: preferCache);
   Stream<M> readStream(String id) => dataProvider.readStream(id);
   Future<void> update(M model) => dataProvider.update(model);
   Future<void> delete(String id) => dataProvider.delete(id);

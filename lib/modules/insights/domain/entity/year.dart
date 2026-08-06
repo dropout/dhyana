@@ -7,7 +7,7 @@ part 'year.freezed.dart';
 part 'year.g.dart';
 
 @freezed
-sealed class Year with _$Year implements Entity {
+sealed class Year with _$Year implements Dto {
 
   const Year._();
 

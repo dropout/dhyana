@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/core/service/module/profile_service.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,12 +24,12 @@ sealed class ProfileState with _$ProfileState {
 
 
 class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
-  final ProfileService profileService;
+  final ProfilePublicApi profilePublicApi;
   final CrashlyticsService crashlyticsService;
 
   StreamSubscription<Profile>? _profileSubscription;
 
-  ProfileCubit({required this.profileService, required this.crashlyticsService})
+  ProfileCubit({required this.profilePublicApi, required this.crashlyticsService})
     : super(const ProfileState.initial());
 
   void loadProfile(
@@ -47,7 +46,7 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
       } else {
         logger.t('Loading profile: $profileId');
         emit(const ProfileState.loading());
-        result = await profileService.loadProfile(profileId);
+        result = await profilePublicApi.getProfile(profileId);
       }
       emit(ProfileState.loaded(profile: result));
       _createSubscription(profileId);
@@ -71,8 +70,8 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
 
   void _createSubscription(String profileId) {
     _profileSubscription?.cancel();
-    _profileSubscription = profileService
-        .readStream(profileId)
+    _profileSubscription = profilePublicApi
+        .getProfileStream(profileId)
         .listen(
           _onProfileChanged,
           onError: (error, stackTrace) {

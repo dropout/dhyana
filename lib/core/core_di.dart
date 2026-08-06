@@ -1,3 +1,4 @@
+import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +13,6 @@ import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
-import 'package:dhyana/core/service/module/profile_service.dart';
 import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 
@@ -117,7 +117,7 @@ Future<void> _registerServices() async {
 void _registerViewModels() {
   GetIt.I.registerFactory(
     () => ProfileCubit(
-      profileService: GetIt.I.get<ProfileService>(),
+      profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     ),
   );

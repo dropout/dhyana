@@ -14,7 +14,7 @@ Future<void> initializeDependencies() async {
 
   configureCoreDependencies();
   registerAuthModuleDependencies();
-  configureProfileModuleDependencies();
+  registerProfileModuleDependencies();
   configureSocialModuleDependencies();
   configureTimerModuleDependencies();
   configureChantingModuleDependencies();

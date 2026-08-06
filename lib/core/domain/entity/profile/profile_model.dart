@@ -1,13 +1,13 @@
 import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/core/domain/entity/entity.dart';
 
 /// An abstract interface class representing a profile model that is used to
 /// display profile information.
 /// This class defines the structure and behavior of a profile model,
 /// wether it is a complete user profile or a public profile that 
 /// contains only public information.
-abstract interface class ProfileModel implements Entity {
+abstract interface class ProfileModel {
   
+  String get id;
   String get firstName;
   String get lastName;
   String get displayName;

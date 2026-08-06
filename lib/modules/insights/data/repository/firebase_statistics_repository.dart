@@ -1,5 +1,4 @@
 import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
-import 'package:dhyana/core/data/datasource/insights_profile_data_provider.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
@@ -14,11 +13,9 @@ import 'package:dhyana/core/util/date_time_utils.dart';
 
 class FirebaseStatisticsRepository extends StatisticsRepository {
   final FirebaseInsightsDataProviderFactory dataProviderFactory;
-  final InsightsProfileDataProvider insightsProfileDataProvider;
 
   FirebaseStatisticsRepository({
     required this.dataProviderFactory,
-    required this.insightsProfileDataProvider,
   });
 
   @override
@@ -79,13 +76,11 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(String profileId, Session session) async {
-    final insightsProfileData = await insightsProfileDataProvider
-        .getInsightsProfileData(profileId);
+  Future<void> logSessionStatistics(String profileId, Session session, int consecutiveDaysCount) async {
     await _logDayStats(
       session,
       profileId,
-      insightsProfileData.consecutiveDaysCount,
+      consecutiveDaysCount,
     );
     await _logWeekStats(session, profileId);
     await _logMonthStats(session, profileId);

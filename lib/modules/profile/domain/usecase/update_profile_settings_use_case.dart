@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_settings_entity.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 
 class UpdateProfileSettingsUseCase {
@@ -9,13 +9,14 @@ class UpdateProfileSettingsUseCase {
     required this.profileRepository,
   });
 
-  Future<Profile> execute({
-    required Profile profile,
+  Future<ProfileEntity> execute({
+    required ProfileEntity profileEntity,
     required Map<String, dynamic> updatedFields,    
   }) async {
-    final updatedSettings = ProfileSettings.fromJson({...updatedFields});
-    final updatedProfile = profile.copyWith(settings: updatedSettings);
-    await profileRepository.update(updatedProfile);
-    return updatedProfile;
+
+    final updatedSettings = ProfileSettingsEntity.fromJson({...updatedFields});
+    final updatedProfileEntity = profileEntity.copyWith(settings: updatedSettings);
+    await profileRepository.update(updatedProfileEntity);
+    return updatedProfileEntity;
   }
 }

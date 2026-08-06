@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/core/domain/repository/storage_repository.dart';
-import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 import 'package:dhyana/core/util/blurhash.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/core/domain/entity/location.dart';
+import 'package:dhyana/core/domain/repository/storage_repository.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
+import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
 
 class UpdateProfileUseCase with LoggerMixin {
 
@@ -17,12 +17,12 @@ class UpdateProfileUseCase with LoggerMixin {
     required this.storageRepository,
   });
 
-  Future<Profile> execute({
-    required Profile profile,
+  Future<ProfileEntity> execute({
+    required ProfileEntity profile,
     required Map<String, dynamic> updatedFields,
     bool completeProfile = false,
   }) async {
-    Profile updatedProfile = profile.copyWith(
+    ProfileEntity updatedProfile = profile.copyWith(
       firstName: _getFirstName(updatedFields) ?? profile.firstName,
       lastName:  _getLastName(updatedFields) ?? profile.lastName,
       completed: (completeProfile) ? true : profile.completed,

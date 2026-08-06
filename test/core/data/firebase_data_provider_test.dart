@@ -37,7 +37,7 @@ class MockQueryDocumentSnapshot
 
 class MockModel
   extends Mock
-  implements Entity {}
+  implements Dto {}
 
 class MockQuery
   extends Mock

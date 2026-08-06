@@ -1,10 +1,10 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 
 abstract interface class ProfileDataProvider
-    implements DataProvider<Profile> {
+    implements DataProvider<ProfileEntity> {
 
-  Future<List<Profile>> query({int limit = 20});
-  Stream<List<Profile>> queryStream({int limit = 20});
+  Future<List<ProfileEntity>> query({int limit = 20});
+  Stream<List<ProfileEntity>> queryStream({int limit = 20});
 
 }

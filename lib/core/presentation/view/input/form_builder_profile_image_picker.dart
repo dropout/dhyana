@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'dart:math' as math;
 
 import 'package:dhyana/core/domain/enum/loading_state.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile_image_picker_current_image.dart';
 import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile_image_picker_edit_badge.dart';

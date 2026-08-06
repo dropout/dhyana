@@ -9,7 +9,7 @@ part 'session.freezed.dart';
 part 'session.g.dart';
 
 @freezed
-sealed class Session with _$Session implements Entity {
+sealed class Session with _$Session implements Dto {
 
   const Session._();
 

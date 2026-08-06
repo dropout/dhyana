@@ -2,6 +2,7 @@ import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'consecutive_days_entity.freezed.dart';
+part 'consecutive_days_entity.g.dart';
 
 // When editing profile make sure to check the profile model
 // in firebase functions, because thats where the
@@ -18,5 +19,8 @@ sealed class ConsecutiveDaysEntity with _$ConsecutiveDaysEntity {
     @DateTimeOrNullConverter() DateTime? startedAt,
     @DateTimeOrNullConverter() DateTime? lastChecked,
   }) = _ConsecutiveDaysEntity;
+
+  factory ConsecutiveDaysEntity.fromJson(Map<String, Object?> json) =>
+    _$ConsecutiveDaysEntityFromJson(json);
 
 }

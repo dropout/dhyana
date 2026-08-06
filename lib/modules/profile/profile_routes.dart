@@ -3,7 +3,7 @@ import 'package:dhyana/modules/profile/presentation/view/screen/profile_settings
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_screen.dart';

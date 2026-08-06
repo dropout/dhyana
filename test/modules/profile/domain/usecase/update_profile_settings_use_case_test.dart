@@ -24,7 +24,7 @@ void main() {
 
   group('UpdateProfileSettingsUseCase.execute', () {
     test('updates profile settings and persists updated profile', () async {
-      final profile = fakeModelFactory.createProfile();
+      final profile = fakeModelFactory.createProfileEntity();
       final updatedFields = <String, dynamic>{
         'showStatsOnFinishScreen': false,
         'usePresenceFeature': false,
@@ -33,7 +33,7 @@ void main() {
       when(() => profileRepository.update(any())).thenAnswer((_) async => profile);
 
       final result = await useCase.execute(
-        profile: profile,
+        profileEntity: profile,
         updatedFields: updatedFields,
       );
 

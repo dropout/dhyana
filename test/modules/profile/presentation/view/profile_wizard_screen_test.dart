@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_wizard_screen.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';

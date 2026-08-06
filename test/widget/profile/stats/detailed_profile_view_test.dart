@@ -1,8 +1,7 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
-import 'package:dhyana/modules/profile/domain/entity/milestone_progress_entity.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
+
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/detailed_profile_view.dart';
@@ -32,14 +31,14 @@ void main() {
 
     testWidgets('can show statistics summary data', (WidgetTester tester) async {
       final Profile profile = FakeModelFactory().createProfile().copyWith(
-        statsReport: ProfileStatisticsReport(
+        statsReport: ProfileStatsReport(
           milestoneCount: 5,
           completedSessionsCount: 43,
           completedMinutesCount: 1234,
           completedDaysCount: 12,
           firstSessionDate: DateTime.now().subtract(const Duration(days: 30)),
           lastSessionDate: DateTime.now().subtract(const Duration(days: 1)),
-          milestoneProgress: MilestoneProgressEntity(
+          milestoneProgress: MilestoneProgress(
             targetDaysCount: 7,
             completedDaysCount: 5,
           )

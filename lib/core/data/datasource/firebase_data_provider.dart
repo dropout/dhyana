@@ -8,7 +8,7 @@ import 'firebase_model_extension.dart';
 /// A generic Firebase Firestore data provider for CRUD operations.
 /// M extends Model to ensure the model has an 'id' field and can be converted
 /// to Firestore format.
-class FirebaseDataProvider<M extends Entity> implements DataProvider<M> {
+class FirebaseDataProvider<M extends Dto> implements DataProvider<M> {
 
   final CollectionReference<M> collectionRef;
 
@@ -26,7 +26,21 @@ class FirebaseDataProvider<M extends Entity> implements DataProvider<M> {
   /// Reads a document from the Firestore collection by its ID.
   /// Throws DocumentNotFoundException if the document does not exist.
   @override
-  Future<M> read(String id) async {
+  Future<M> read(String id, {bool preferCache = false}) async {
+    if (preferCache) {
+      try {
+        DocumentSnapshot<M> snapshot = await collectionRef.doc(id).get(GetOptions(source: Source.cache));
+        if (!snapshot.exists) {
+          throw DocumentNotFoundException(
+            message: 'Document with id $id not found in cache for collection ${collectionRef.path}',
+          );
+        }
+        return snapshot.data()!;
+      } catch (e) {
+        // If the document is not found in cache, fall back to server
+      }
+    }
+
     DocumentSnapshot<M> snapshot = await collectionRef.doc(id).get();
     if (!snapshot.exists) {
       throw DocumentNotFoundException(

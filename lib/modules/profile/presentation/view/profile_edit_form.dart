@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile_image_selection_controller.dart';
 import 'package:dhyana/core/presentation/view/dialog/image_upload_not_safe_dialog.dart';
 import 'package:dhyana/core/presentation/view/dialog/photo_access_denied_dialog.dart';
@@ -12,6 +11,7 @@ import 'package:dhyana/core/presentation/view/input/form_builder_profile_image_p
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/dialog_helper.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 
 
 class ProfileEditForm extends StatefulWidget {

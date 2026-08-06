@@ -74,7 +74,7 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Future<Chant> read(String id) async {
+  Future<Chant> read(String id, {bool preferCache = false}) async {
     await Future.delayed(Duration(milliseconds: 300));
     return _chants.firstWhere(
       (chant) => chant.id == id,

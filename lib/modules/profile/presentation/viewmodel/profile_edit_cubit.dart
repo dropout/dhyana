@@ -1,10 +1,12 @@
-import 'package:dhyana/core/domain/entity/profile/profile_settings.dart';
+import 'package:dhyana/modules/profile/data/mapper/profile_mapper.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/domain/usecase/load_profile_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/modules/profile/public/model/profile.dart';
+import 'package:dhyana/modules/profile/public/model/profile_settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,21 +14,16 @@ part 'profile_edit_cubit.freezed.dart';
 
 @freezed
 sealed class ProfileEditState with _$ProfileEditState {
-
   const ProfileEditState._();
 
   const factory ProfileEditState.initial() = ProfileEditStateInitial;
   const factory ProfileEditState.loading() = ProfileEditLoadingState;
-  const factory ProfileEditState.loaded({
-    required Profile profile,
-  }) = ProfileEditLoadedState;
+  const factory ProfileEditState.loaded({required Profile profile}) =
+      ProfileEditLoadedState;
   const factory ProfileEditState.error() = ProfileEditErrorState;
-
 }
 
-
 class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
-
   final LoadProfileUseCase loadProfileUseCase;
   final UpdateProfileUseCase updateProfileUseCase;
   final UpdateProfileSettingsUseCase updateProfileSettingsUseCase;
@@ -46,18 +43,18 @@ class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
     void Function(Object?, StackTrace)? onError,
   }) async {
     try {
-      late Profile result;
+      late ProfileEntity result;
       if (profile != null) {
         logger.t('Using profile: $profileId');
-        result = profile;
+        result = profile.toDomain();
       } else {
         logger.t('Loading profile: $profileId');
         emit(const ProfileEditState.loading());
-        result = await loadProfileUseCase.execute(profileId);    
+        result = await loadProfileUseCase.execute(profileId);
       }
-      emit(ProfileEditState.loaded(profile: result));
-      onComplete?.call(result);
-      logger.t('Loaded profile: ${result.displayName}');      
+      emit(ProfileEditState.loaded(profile: result.toApi()));
+      onComplete?.call(result.toApi());
+      logger.t('Loaded profile: ${result.displayName}');
     } catch (exception, stackTrace) {
       emit(const ProfileEditState.error());
       crashlyticsService.recordError(
@@ -79,12 +76,12 @@ class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
     try {
       logger.t('Updating profile');
       final updateProfile = await updateProfileUseCase.execute(
-        profile: profile,
+        profile: profile.toDomain(),
         updatedFields: formData,
         completeProfile: completeProfile,
       );
-      emit(ProfileEditState.loaded(profile: updateProfile));
-      onComplete?.call(updateProfile);
+      emit(ProfileEditState.loaded(profile: updateProfile.toApi()));
+      onComplete?.call(updateProfile.toApi());
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -105,12 +102,12 @@ class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
       logger.t('Updating profile settings');
 
       final updatedProfile = await updateProfileSettingsUseCase.execute(
-        profile: profile,
+        profileEntity: profile.toDomain(),
         updatedFields: settingsFormData,
       );
 
-      emit(ProfileEditState.loaded(profile: updatedProfile));
-      onComplete?.call(updatedProfile.settings);
+      emit(ProfileEditState.loaded(profile: updatedProfile.toApi()));
+      onComplete?.call(updatedProfile.toApi().settings);
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

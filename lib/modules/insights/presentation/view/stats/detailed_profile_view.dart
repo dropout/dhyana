@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/profile/profile_statistics_report.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/profile/profile_image.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 class DetailedProfileView extends StatelessWidget {
   final String profileName;
   final DateTime signupDate;
-  final ProfileStatisticsReport profileStatsReport;
+  final ProfileStatsReport profileStatsReport;
   final String? profilePhotoUrl;
   final String? profilePhotoBlurhash;
 

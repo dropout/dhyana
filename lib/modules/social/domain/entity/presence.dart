@@ -9,7 +9,7 @@ part 'presence.freezed.dart';
 part 'presence.g.dart';
 
 @freezed
-sealed class Presence with _$Presence implements Entity {
+sealed class Presence with _$Presence implements Dto {
   const Presence._();
 
   const factory Presence({

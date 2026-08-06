@@ -6,8 +6,9 @@ import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/modules/profile/data/mapper/profile_mapper.dart';
 import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/core/domain/entity/profile/profile.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
 import 'package:dhyana/core/domain/entity/timer_settings.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_screen.dart';
@@ -136,7 +137,7 @@ void main() {
       );
 
       when(() => mockProfileRepository.read(profile.id))
-        .thenAnswer((_) async => profile);
+        .thenAnswer((_) async => profile.toDomain());
       when(() => mockAuthBloc.state).thenReturn(
         AuthState.signedIn(userId: user.uid)
       );
@@ -198,7 +199,7 @@ void main() {
         )
       );
       when(() => mockProfileRepository.read(profile.id))
-        .thenAnswer((_) async => profile);
+        .thenAnswer((_) async => profile.toDomain());
 
       when(() => mockAudioHandler.customAction(AppAudioHandler.switchAction, any()))
         .thenAnswer((_) => Future.value(null));
