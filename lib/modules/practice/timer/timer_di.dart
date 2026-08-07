@@ -8,7 +8,7 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/core/data/datasource/timer_auth_data_provider.dart';
 import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
-import 'package:dhyana/core/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/presence_service.dart';
 import 'package:dhyana/core/presentation/viewmodel/timer_settings_cubit.dart';
 

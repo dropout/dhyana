@@ -4,16 +4,14 @@ import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that displays a profile image.
-/// If [profileImagePath] is provided, it will display the image from 
-/// the network.
-/// If [profileImagePath] is null, it will display a placeholder with 
-/// the user's initials.
+/// If [profilePhotoBlurhash] is not provided or the image fails to load, 
+/// it will display a placeholder with the user's initials.
 /// If [profilePhotoBlurhash] is provided, it will be used to display a 
 /// blurred version of the image while the network image is loading.
 /// The size of the image can be customized via the [size] parameter.
 class ProfileImage extends StatelessWidget {
 
-  /// The profile ID.
+  /// The profile ID. Used for looking up the profile image from the storage.
   final String profileId;
 
   /// The name for the profile, for example, "John Doe". 

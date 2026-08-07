@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/entity/entity.dart';
-import 'package:dhyana/core/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

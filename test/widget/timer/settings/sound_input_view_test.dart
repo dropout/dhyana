@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/core/presentation/view/timer_settings/sound_input_play_button.dart';
+import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:dhyana/core/presentation/view/timer_settings/sound_input_view.dart';
+import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_input_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 // transitive dependency required for shareValue() on Stream<PlaybackState>

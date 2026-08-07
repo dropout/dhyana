@@ -1,6 +1,6 @@
 import 'package:dhyana/core/presentation/auth_redirect_hook.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen.dart';
-import 'package:dhyana/core/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

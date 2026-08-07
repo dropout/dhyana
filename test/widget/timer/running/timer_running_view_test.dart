@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
-import 'package:dhyana/core/domain/entity/timer_settings.dart';
+import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/wakelock_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_controls.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_time.dart';

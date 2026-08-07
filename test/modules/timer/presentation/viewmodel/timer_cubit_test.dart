@@ -6,7 +6,7 @@
 // import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 // import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 // import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-// import 'package:dhyana/core/domain/entity/timer_settings.dart';
+// import 'package:dhyana/modules/practice/timer/timer_module.dart';
 // import 'package:dhyana/core/domain/service/crashlytics_service.dart';
 // import 'package:dhyana/core/infrastructure/platform/logging_crashlytics_service.dart';
 // import 'package:dhyana/util/timer_event_scheduler.dart';
