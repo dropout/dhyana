@@ -1,5 +1,5 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 
@@ -7,7 +7,7 @@ import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 /// service and updates the timer state accordingly.
 class PlaybackStateChangeUseCase {
 
-  TimerState execute(PlaybackState playbackState, TimerState state) {
+  TimerStateEntity execute(PlaybackState playbackState, TimerStateEntity state) {
     final position = playbackState.position;
 
     // This is important so that on starting, there won't be a

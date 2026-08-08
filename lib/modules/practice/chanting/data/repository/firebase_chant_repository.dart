@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_data_provider.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/core/domain/repository/crud/crud_repository_operations.dart';
 

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/domain/enum/loading_state.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/duration.dart';
@@ -13,15 +13,15 @@ import 'package:dhyana/modules/practice/chanting/domain/usecase/complete_chantin
 import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chanting_settings.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
 import 'package:go_router/go_router.dart';
 
 
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
-class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
+class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   final ChantingSettings chantingSettings;
   final ChantingAudioService audioService;
   final GoRouter router;
@@ -47,7 +47,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
     required this.completeChantingUseCase,
     required this.crashlyticsService,
   }) : super(
-         ChantingState(
+         ChantingStateEntity(
            chantingSettings: chantingSettings,
            playbackState: audioService.playbackState,
          ),
@@ -79,10 +79,12 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
   Future<void> start() async {
     try {
       emit(state.copyWith(loadingState: .loading));
-      final prepared = startChantingUseCase.execute(chantingSettings);
+      final prepared = startChantingUseCase.execute(
+        chantingSettings.selectedChants.map((e) => e.chantId).toList(growable: false)
+      );
 
       // Update the state with caching progress as it occurs
-      late CachingProgress cachingProgress;
+      late CachingProgressEntity cachingProgress;
       await for (final progress in prepared) {
         cachingProgress = progress;
         emit(state.copyWith(cachingProgress: cachingProgress));
@@ -107,7 +109,7 @@ class ChantingCubit extends Cubit<ChantingState> with LoggerMixin {
       // }
 
       // // Take the final results and prepare the audio service
-      List<ChantLocalResources> resources = cachingProgress.results
+      List<ChantLocalResourcesEntity> resources = cachingProgress.results
         .map((r) => r.localResources)
         .toList();
 

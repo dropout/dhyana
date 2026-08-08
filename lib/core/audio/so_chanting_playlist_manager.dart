@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 
 typedef SoChantingPlaylistIndexChanged = Future<void> Function();
 
 class SoChantingPlaylistEntry {
-  final ChantLocalResources source;
+  final ChantLocalResourcesEntity source;
   final MediaItem mediaItem;
 
   const SoChantingPlaylistEntry({

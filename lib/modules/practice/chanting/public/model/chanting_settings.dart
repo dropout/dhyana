@@ -1,12 +1,11 @@
 import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chant_playlist_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'chant.dart';
 
 part 'chanting_settings.freezed.dart';
-part 'chanting_settings.g.dart';
 
 @freezed
 sealed class ChantingSettings with _$ChantingSettings implements Dto {
@@ -14,12 +13,9 @@ sealed class ChantingSettings with _$ChantingSettings implements Dto {
   const ChantingSettings._();
 
   const factory ChantingSettings({
-    @Default(<UiChant>[]) List<UiChant> selectedChants,
+    @Default(<ChantPlaylistItem>[]) List<ChantPlaylistItem> selectedChants,
     @DateTimeOrNullConverter() DateTime? lastUsed,
   }) = _ChantingSettings;
-
-  factory ChantingSettings.fromJson(Map<String, Object?> json) =>
-    _$ChantingSettingsFromJson(json);
 
   @override
   String get id {

@@ -2,13 +2,15 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dhyana/core/data/datasource/storage/batch_download_task.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/data/mapper/chant_mapper.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_validator.dart';
@@ -26,7 +28,7 @@ class ChantCacheManager with LoggerMixin {
     required this.cacheValidator,
   });
 
-  Stream<CachingProgress> preparePlayableChantAssets(
+  Stream<CachingProgressEntity> preparePlayableChantAssets(
     List<String> chantIds,
   ) async* {
     logger.t('Preparing playable assets for ${chantIds.length} chants...');
@@ -55,18 +57,18 @@ class ChantCacheManager with LoggerMixin {
       logger.t('All chant cache entries are valid. No caching needed.');
 
       // Build the list of local resources for all chants requested
-      List<({Chant chant, ChantLocalResources localResources})> results = [];
+      List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results = [];
       for (final chantId in chantIds) {
         final chant = validationResults
             .firstWhere((result) => result.chant.id == chantId)
             .chant;
         results.add((
-          chant: chant,
+          chant: chant.toDomain(),
           localResources: (await collectLocalResource(chant)).localResources,
         ));
       }
 
-      yield CachingProgress(
+      yield CachingProgressEntity(
         progress: 1.0,
         totalTasks: results.length,
         completedTasks: results.length,
@@ -113,7 +115,7 @@ class ChantCacheManager with LoggerMixin {
     await for (final progress in batchDownloadTask.progressStream) {
       // Ensure that progress doesn't reach 1.0 until all downloads are validated, 
       // to avoid premature completion
-      yield CachingProgress(
+      yield CachingProgressEntity(
         progress: min(progress, 0.99), 
         totalTasks: batchDownloadTask.totalTasks,
         completedTasks: batchDownloadTask.completedTasks,
@@ -125,7 +127,7 @@ class ChantCacheManager with LoggerMixin {
     await Future.wait(downloadValidationFutures);
 
     // Yield a final progress update with all the prepared chant local resources,
-    List<({Chant chant, ChantLocalResources localResources})> results = [];
+    List<({Chant chant, ChantLocalResourcesEntity localResources})> results = [];
     for (final chantId in chantIds) {
       final chant = validationResults
           .firstWhere((result) => result.chant.id == chantId)
@@ -143,11 +145,12 @@ class ChantCacheManager with LoggerMixin {
       );
     }
 
-    yield CachingProgress(
+    yield CachingProgressEntity(
       progress: 1.0,
       totalTasks: batchDownloadTask.totalTasks,
       completedTasks: batchDownloadTask.completedTasks,
-      results: results
+      results: results.map((e) => (chant: e.chant.toDomain(), localResources: e.localResources))
+          .toList(growable: false),
     );
     batchDownloadTask.dispose();
     logger.t('All chant assets have been cached and validated successfully.');
@@ -315,7 +318,7 @@ Future<List<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>>
 
   /// Collects the local resources for a given chant,
   /// including audio and lyrics file paths.
-  Future<({String chantId, ChantLocalResources localResources})>
+  Future<({String chantId, ChantLocalResourcesEntity localResources})>
   collectLocalResource(Chant chant) async {
     final metadata = chant.metaData;
     final audioPath = await chantCacheRepository.buildCacheFilePath(
@@ -330,8 +333,8 @@ Future<List<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>>
     );
     return (
       chantId: chant.id,
-      localResources: ChantLocalResources(
-        chant: chant,
+      localResources: ChantLocalResourcesEntity(
+        chant: chant.toDomain(),
         audioLocalPath: audioPath,
         lyricsLocalPath: lyricsPath,
         audioVersion: metadata.audioVersion,
@@ -343,10 +346,10 @@ Future<List<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>>
   /// Batch collects the local resources for a list of chants,
   /// returning a list of tuples containing the chant ID and
   /// its corresponding local resources.
-  Future<List<({String chantId, ChantLocalResources localResources})>>
+  Future<List<({String chantId, ChantLocalResourcesEntity localResources})>>
   collectLocalResources(List<Chant> chants) async {
     final localResources =
-        <({String chantId, ChantLocalResources localResources})>[];
+        <({String chantId, ChantLocalResourcesEntity localResources})>[];
     for (final chant in chants) {
       localResources.add(await collectLocalResource(chant));
     }

@@ -1,6 +1,6 @@
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
 
 class LoadLyricsUseCase with LoggerMixin {
@@ -8,7 +8,7 @@ class LoadLyricsUseCase with LoggerMixin {
 
   LoadLyricsUseCase({required this.lyricsService});
 
-  Future<LyricsDocument> execute(String chantId, ChantingState state) async {
+  Future<LyricsDocumentEntity> execute(String chantId, ChantingStateEntity state) async {
     logger.t('Loading lyrics for chant ID: $chantId');
     // emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
       final lyricsPath = state.chantResources

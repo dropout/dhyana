@@ -1,11 +1,11 @@
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class TimerRunningTime extends StatelessWidget {
 
-  final TimerState timerState;
+  final TimerStateEntity timerState;
 
   const TimerRunningTime({
     required this.timerState,

@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/core/service/wakelock_service.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:dhyana/core/presentation/design_spec.dart';
 
 class TimerRunningView extends StatefulWidget {
 
-  final TimerState timerState;
+  final TimerStateEntity timerState;
   final WakelockService wakelockService;
 
   const TimerRunningView({

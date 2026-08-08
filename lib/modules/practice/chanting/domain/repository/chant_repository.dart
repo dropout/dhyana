@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/core/domain/repository/crud/crud_repository.dart';
 
 abstract interface class ChantRepository implements CrudRepository<Chant> {

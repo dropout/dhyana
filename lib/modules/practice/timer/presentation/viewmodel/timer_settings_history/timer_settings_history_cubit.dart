@@ -1,13 +1,30 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'timer_settings_history_state.dart';
 part 'timer_settings_history_cubit.freezed.dart';
+
+@freezed
+class TimerSettingsHistoryState with _$TimerSettingsHistoryState {
+
+  const factory TimerSettingsHistoryState.initial() =
+    _Initial;
+
+  const factory TimerSettingsHistoryState.loading() =
+    TimerSettingsHistoryLoading;
+
+  const factory TimerSettingsHistoryState.loaded({
+    required List<TimerSettingsHistoryRecordEntity> timerSettingsList,
+  }) = TimerSettingsHistoryLoaded;
+
+  const factory TimerSettingsHistoryState.error() =
+    TimerSettingsHistoryError;
+
+}
 
 /// Manages the state of the timer settings history feature.
 class TimerSettingsHistoryCubit
@@ -27,7 +44,7 @@ class TimerSettingsHistoryCubit
   Future<void> loadSettings(String profileId) async {
     try {
       emit(const TimerSettingsHistoryState.loading());
-      List<TimerSettingsHistoryRecord> timerSettingsList =
+      List<TimerSettingsHistoryRecordEntity> timerSettingsList =
       await timerSettingsHistoryRepository.query(
         profileId,
         limit: 5,

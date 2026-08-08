@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
-import 'package:dhyana/core/service/module/chanting_service.dart';
 import 'package:dhyana/core/service/shared_preferences_service.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chant_playlist_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,7 +20,7 @@ sealed class ChantingSettingsState with _$ChantingSettingsState {
 
   const factory ChantingSettingsState({
     required List<Chant> availableChants,
-    required List<UiChant> playlist,
+    required List<ChantPlaylistItem> playlist,
     required bool isLoading,
     String? error,
   }) = _ChantingSettingsState;
@@ -42,7 +42,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     with LoggerMixin {
   
   /// The repository for fetching available chants.
-  final ChantingService chantingService;
+  final ChantingPublicApi chantingApi;
 
   /// The service for interacting with shared preferences.
   final SharedPreferencesService sharedPreferencesService;
@@ -52,7 +52,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
   /// Creates a new instance of [ChantingSettingsCubit].
   ChantingSettingsCubit({
-    required this.chantingService,
+    required this.chantingApi,
     required this.sharedPreferencesService,
     required this.crashlyticsService,
   }) : super(ChantingSettingsState.initial()) {
@@ -70,15 +70,15 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final List<String> playlistChantIds = await _loadPlaylistChantIds();
 
       // Fetch all available chants from the repository
-      final List<Chant> freshChantList = await chantingService.loadChants();
+      final List<Chant> freshChantList = await chantingApi.loadChants();
 
       // Create the playlist based on the loaded chant IDs and available chants
-      final List<UiChant> playlist = <UiChant>[];
+      final List<ChantPlaylistItem> playlist = <ChantPlaylistItem>[];
       for (final chantId in playlistChantIds) {
         try {
           final chant = freshChantList.firstWhere((c) => c.id == chantId);
-          playlist.add(UiChant(
-            uniqueId: Uuid().v4(),
+          playlist.add(ChantPlaylistItem(
+            id: Uuid().v4(),
             chantId: chant.id,
             name: chant.name,
             order: chant.order,
@@ -110,7 +110,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       logger.t('Loading available chants');
       emit(state.copyWith(isLoading: true, error: null));
 
-      final chants = (await chantingService.loadChants())
+      final chants = (await chantingApi.loadChants())
         ..sort((a, b) => a.order.compareTo(b.order));
 
       emit(
@@ -134,8 +134,8 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
   void addToPlaylist(Chant chant) {
     try {
       logger.t('Adding chant ${chant.name} to playlist');
-      final UiChant chantViewModel = UiChant(
-        uniqueId: Uuid().v4(),
+      final ChantPlaylistItem chantViewModel = ChantPlaylistItem(
+        id: Uuid().v4(),
         chantId: chant.id,
         name: chant.name,
         order: chant.order,
@@ -143,7 +143,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
         blurHash: chant.blurHash,
       );
 
-      final updated = List<UiChant>.from(state.playlist)
+      final updated = List<ChantPlaylistItem>.from(state.playlist)
         ..add(chantViewModel);
       emit(state.copyWith(playlist: updated));
       _savePlaylistChantIds(updated.map((c) => c.chantId).toList());
@@ -169,7 +169,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
       // Get the chant to be removed for logging purposes
       final targetChantViewModel = state.playlist[index];
-      final updated = List<UiChant>.from(state.playlist)
+      final updated = List<ChantPlaylistItem>.from(state.playlist)
         ..removeAt(index);
           
       // Save the updated list of playlist chant IDs to shared preferences    
@@ -210,7 +210,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       }
 
       // Create a copy of the selected chants list to modify
-      final updatedSelectedChants = List<UiChant>.from(
+      final updatedSelectedChants = List<ChantPlaylistItem>.from(
         state.playlist,
       );
 

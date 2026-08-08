@@ -6,7 +6,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/so_chanting_audio_resource_manager.dart';
 import 'package:dhyana/core/audio/so_chanting_playlist_manager.dart';
 import 'package:dhyana/core/audio/so_chanting_playback_reporter.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
@@ -76,10 +76,10 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
         try {
           // Expecting extras to contain a JSON-encoded list of ChantLocalResources
           final resourcesJson = extras!['resources'] as String?;
-          final List<ChantLocalResources> resources = resourcesJson != null
+          final List<ChantLocalResourcesEntity> resources = resourcesJson != null
               ? (jsonDecode(resourcesJson) as List)
                     .map(
-                      (item) => ChantLocalResources.fromJson(
+                      (item) => ChantLocalResourcesEntity.fromJson(
                         item as Map<String, Object?>,
                       ),
                     )
@@ -94,7 +94,7 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
 
   /// Loads all chants from local files into the playlist and returns the
   /// duration of the first track.
-  Future<Duration?> setup(List<ChantLocalResources> resources) async {
+  Future<Duration?> setup(List<ChantLocalResourcesEntity> resources) async {
     await _clearPlaylist();
 
     // Guard against empty resources list

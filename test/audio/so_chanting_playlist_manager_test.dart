@@ -1,22 +1,22 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/so_chanting_playlist_manager.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_asset_metadata.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_metadata_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-ChantLocalResources _resource({
+ChantLocalResourcesEntity _resource({
   required String id,
   required String name,
   required String path,
   required Duration length,
 }) {
-  final chant = Chant(
+  final chant = ChantEntity(
     id: id,
     name: name,
     blurHash: DefaultProfileData.photoBlurhash,
-    metaData: ChantMetaData(
+    metaData: ChantMetaDataEntity(
       id: id,
       audioVersion: 1,
       lyricsVersion: 1,
@@ -32,7 +32,7 @@ ChantLocalResources _resource({
     length: length,
   );
 
-  return ChantLocalResources(
+  return ChantLocalResourcesEntity(
     chant: chant,
     audioLocalPath: path,
     lyricsLocalPath: '$path.txt',

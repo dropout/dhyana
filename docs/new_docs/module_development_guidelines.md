@@ -1,6 +1,6 @@
-# Module Guidelines
+# Module Development Guidelines
 
-## Goals
+## Goals of a Module
 - Encapsulate all the functionality of a specific feature in a single module.
 - Provide a clear and consistent structure for developing modules in the application.
 - Ensure separation of concerns between different layers of the module.

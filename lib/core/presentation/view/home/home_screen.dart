@@ -1,9 +1,7 @@
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/chanting_settings_cubit.dart';
 import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_appbar.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
-import 'package:dhyana/core/presentation/viewmodel/timer_settings_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/chanting_settings_view.dart';
@@ -62,18 +60,15 @@ class HomeScreen extends StatelessWidget {
         }
         return AnimatedSwitcher(
           key: ValueKey(sessionType),
-          duration: Durations.medium4,
-          // switchInCurve: Curves.fastLinearToSlowEaseIn,
-          // switchOutCurve: Curves.fastLinearToSlowEaseIn,
-          // layoutBuilder: (currentChild, previousChildren) {
-          //   return Stack(
-          //     alignment: Alignment.center,
-          //     children: [
-          //       ...previousChildren,
-          //       if (currentChild != null) currentChild,
-          //     ],
-          //   );
-          // },
+          duration: Durations.long4,
+          transitionBuilder: (child, animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          switchInCurve: Curves.easeIn,
+          switchOutCurve: Curves.easeOut,
           child: switch (sessionType) {
             SessionType.sitting => buildTimerSettingsView(context, state),
             SessionType.chanting => buildChantingSettingsView(context),
@@ -85,39 +80,20 @@ class HomeScreen extends StatelessWidget {
 
   /// Builds the bottom menu that allows the user to switch between
   /// sitting and chanting session types.
-  Widget buildBottomMenu(BuildContext context, HomeScreenState state) {
-    return HomeScreenBottomMenu(
+  Widget buildBottomMenu(BuildContext context, HomeScreenState state) =>
+    HomeScreenBottomMenu(
       sessionType: state.sessionType,
       onSessionTypeChange: (newType) {
         context.read<HomeScreenCubit>().setSessionType(newType);
       },
     );
-  }
 
   /// Builds the sitting-session branch of the home screen.
-  Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) {
-    return SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
-      create: (context) {
-        final cubit = GetIt.instance.get<TimerSettingsCubit>();
-        if (timerSettings != null) {
-          cubit.timerSettingsChanged(timerSettings!);
-        }
-        return cubit;
-      },
-      builder: (context, state) {
-        return TimerSettingsView(timerSettings: state.timerSettings);
-      },
-    );
-  }
+  Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) =>
+    TimerSettingsView.withCubit(timerSettings: timerSettings);
+  
 
   /// Builds the chanting-session branch of the home screen.
-  Widget buildChantingSettingsView(BuildContext context) {
-    return SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
-      create: (context) => GetIt.I.get<ChantingSettingsCubit>()
-        ..loadAvailableChants(),
-      builder: (context, state) => ChantingSettingsView(
-        availableChants: state.availableChants,
-      ),
-    );
-  }
+  Widget buildChantingSettingsView(BuildContext context) =>
+    ChantingSettingsView.withCubit();
 }

@@ -1,15 +1,15 @@
 import 'package:assa_parser/assa_parser.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document_entity.dart';
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_line.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_word.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_line_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_word_entity.dart';
 
 class LyricsService {
   final AssaParser _assaParser = AssaParser();
   
-  Future<LyricsDocument> loadLyrics(String lyricsResourceUrl) async {
+  Future<LyricsDocumentEntity> loadLyrics(String lyricsResourceUrl) async {
     if (_isRemoteUrl(lyricsResourceUrl)) {
       return _loadLyricsFromRemote(lyricsResourceUrl);
     }
@@ -17,7 +17,7 @@ class LyricsService {
     return _loadLyricsFromLocalFile(lyricsResourceUrl);
   }
 
-  Future<LyricsDocument> _loadLyricsFromRemote(String lyricsResourceUrl) async {
+  Future<LyricsDocumentEntity> _loadLyricsFromRemote(String lyricsResourceUrl) async {
     final HttpClient httpClient = HttpClient();
     final HttpClientRequest request = await httpClient.getUrl(
       Uri.parse(lyricsResourceUrl),
@@ -36,7 +36,7 @@ class LyricsService {
     return _convertAssaToLyricsDocument(assaDocument);
   }
 
-  Future<LyricsDocument> _loadLyricsFromLocalFile(
+  Future<LyricsDocumentEntity> _loadLyricsFromLocalFile(
     String absoluteFilePath,
   ) async {
     final file = File(absoluteFilePath);
@@ -54,14 +54,14 @@ class LyricsService {
     return value.startsWith('http://') || value.startsWith('https://');
   }
 
-  LyricsDocument _convertAssaToLyricsDocument(AssaDocument assaDocument) {
+  LyricsDocumentEntity _convertAssaToLyricsDocument(AssaDocument assaDocument) {
     final lines = assaDocument.lines.map((line) {
-      return LyricsLine(
+      return LyricsLineEntity(
         text: line.words.map((word) => word.text).join(' '),
         start: line.start,
         end: line.end,
         words: line.words.map((word) {
-          return LyricsWord(
+          return LyricsWordEntity(
             text: word.text,
             start: word.start,
             end: word.end,
@@ -70,7 +70,7 @@ class LyricsService {
       );
     }).toList();
 
-    return LyricsDocument(lines: lines);
+    return LyricsDocumentEntity(lines: lines);
   }
 
 }

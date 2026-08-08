@@ -1,6 +1,7 @@
-import 'package:dhyana/core/presentation/viewmodel/timer_settings_cubit.dart';
+import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
 import 'package:dhyana/core/util/assets.dart';
@@ -14,9 +15,32 @@ import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_i
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/duration_input.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/interval_input.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/input_gap.dart';
+import 'package:get_it/get_it.dart';
+
 
 class TimerSettingsView extends StatefulWidget {
   final TimerSettings timerSettings;
+
+  static Widget withCubit({
+    required TimerSettings? timerSettings,
+  }) {
+    return SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
+      key: const ValueKey('timer_settings_cubit'),
+      create: (context) {
+        final cubit = GetIt.instance.get<TimerSettingsCubit>();
+        if (timerSettings != null) {
+          cubit.timerSettingsChanged(timerSettings);
+        }
+        return cubit;
+      },
+      builder: (context, state) {
+        return TimerSettingsView(
+          timerSettings: state.timerSettings,
+          key: const ValueKey('timer_settings_view'),
+        );
+      },
+    );
+  }
 
   const TimerSettingsView({required this.timerSettings, super.key});
 

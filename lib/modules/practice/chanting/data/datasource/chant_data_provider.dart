@@ -1,5 +1,5 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 
 abstract interface class ChantDataProvider implements DataProvider<Chant> {
 

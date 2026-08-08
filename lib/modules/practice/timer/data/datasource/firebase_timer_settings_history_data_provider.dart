@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/practice/timer/data/datasource/timer_settings_history_data_provider.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_entity.dart';
 
 import '../../../../../core/data/datasource/firebase_data_provider.dart';
 import '../../../../../core/data/datasource/firebase_model_extension.dart';
 
 class FirebaseTimerSettingsHistoryDataProvider
-  extends FirebaseDataProvider<TimerSettingsHistoryRecord>
+  extends FirebaseDataProvider<TimerSettingsHistoryRecordEntity>
   implements TimerSettingsHistoryDataProvider {
 
   FirebaseTimerSettingsHistoryDataProvider(
@@ -17,26 +17,26 @@ class FirebaseTimerSettingsHistoryDataProvider
       .collection('profiles')
       .doc(profileId)
       .collection('timerSettingsHistory')
-      .withConverter<TimerSettingsHistoryRecord>(
-        fromFirestore: (snapshot, _) => fromFireStore(snapshot, TimerSettingsHistoryRecord.fromJson),
+      .withConverter<TimerSettingsHistoryRecordEntity>(
+        fromFirestore: (snapshot, _) => fromFireStore(snapshot, TimerSettingsHistoryRecordEntity.fromJson),
         toFirestore: (timerSettings, _) => timerSettings.toFireStore(),
       )
   );
 
   
 
-  Query<TimerSettingsHistoryRecord> _buildQuery({int limit = 20}) {
+  Query<TimerSettingsHistoryRecordEntity> _buildQuery({int limit = 20}) {
     return collectionRef
       .orderBy('lastUsed', descending: true)
       .limit(limit);
   }
 
   @override
-  Future<List<TimerSettingsHistoryRecord>> query({int limit = 20}) =>
+  Future<List<TimerSettingsHistoryRecordEntity>> query({int limit = 20}) =>
       buildListFromQuery(_buildQuery(limit: limit));
 
   @override
-  Stream<List<TimerSettingsHistoryRecord>> queryStream({int limit = 20}) =>
+  Stream<List<TimerSettingsHistoryRecordEntity>> queryStream({int limit = 20}) =>
     buildStreamFromQuery(_buildQuery(limit: limit));
 
   static String generateId(String profileId) {

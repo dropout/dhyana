@@ -1,4 +1,3 @@
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
 import 'package:dhyana/core/util/remap_range.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/chant_card.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/add_chant_button.dart';
@@ -6,14 +5,15 @@ import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:dhyana/core/presentation/view/util/inset_surface.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chant_playlist_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ChantList extends StatelessWidget {
-  final List<UiChant> chants;
+  final List<ChantPlaylistItem> chants;
   final void Function(int oldIndex, int newIndex) onReorder;
   final VoidCallback onAddChant;
-  final void Function(UiChant, int) onChantRemoved;
+  final void Function(ChantPlaylistItem, int) onChantRemoved;
 
   const ChantList({
     required this.chants,
@@ -90,7 +90,7 @@ class ChantList extends StatelessWidget {
 
   Widget buildPlaylistItem(
     BuildContext context,
-    UiChant chant,
+    ChantPlaylistItem chant,
     int index,
   ) {
     final enableDragging = chants.length > 1;
@@ -101,7 +101,7 @@ class ChantList extends StatelessWidget {
 
     return Slidable(
       closeOnScroll: true,
-      key: ValueKey(chant.uniqueId),
+      key: ValueKey(chant.id),
       endActionPane: ActionPane(      
         motion: const ScrollMotion(),
         extentRatio: 0.25,        
@@ -125,7 +125,7 @@ class ChantList extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: paddingBottom),
         child: ChantCard(
-          key: ValueKey(chant.uniqueId),
+          key: ValueKey(chant.id),
           index: index,
           chantViewModel: chant,
           trailing: SizedBox.square(

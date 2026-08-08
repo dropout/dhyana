@@ -5,7 +5,7 @@ import 'package:clock/clock.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
@@ -40,7 +40,7 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 /// including its settings, status, and elapsed time.
 /// In this viewmodel, we skip usecases that would
 /// contain a single line service calßl for pragmatic reasons.
-class TimerCubit extends Cubit<TimerState> with LoggerMixin {
+class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
   
   // Services
   final TimerAudioService audioService;
@@ -67,7 +67,7 @@ class TimerCubit extends Cubit<TimerState> with LoggerMixin {
     required this.startTimerUseCase,
     required this.playbackStateChangeUseCase,
     required this.completeTimerUseCase,
-  }) : super(TimerState.initial(timerSettings: timerSettings)) {
+  }) : super(TimerStateEntity.initial(timerSettings: timerSettings)) {
     configureEventSchedulerUseCase.execute(
       timerSettings: timerSettings,
       onWarmupCompleted: _warmupCompleted,

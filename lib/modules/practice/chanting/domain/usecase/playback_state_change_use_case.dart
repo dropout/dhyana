@@ -1,10 +1,10 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 
 class PlaybackStateChangeUseCase with LoggerMixin {
-  Future<ChantingState> execute(
-    ChantingState currentState,
+  Future<ChantingStateEntity> execute(
+    ChantingStateEntity currentState,
     PlaybackState newPlaybackState,
   ) async {
     // Update the elapsed session time based on the PlaybackState.updateTime
@@ -18,7 +18,7 @@ class PlaybackStateChangeUseCase with LoggerMixin {
       elapsedSessionTime += currentUpdateTime.difference(previousUpdateTime);
     }
 
-    ChantingState updatedState = currentState.copyWith(
+    ChantingStateEntity updatedState = currentState.copyWith(
       playbackState: newPlaybackState,
       elapsedSessionTime: elapsedSessionTime,
     );

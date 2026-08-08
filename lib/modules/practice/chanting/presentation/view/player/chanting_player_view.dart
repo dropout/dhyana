@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting_cubit.dart';
 import 'package:dhyana/core/service/wakelock_service.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
@@ -16,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChantingPlayerView extends StatefulWidget {
   /// The current state of the chanting player, containing
   /// the lyrics document, playback position, and playback state, etc...
-  final ChantingState chantingState;
+  final ChantingStateEntity chantingState;
 
   /// Service to manage wakelock during chanting sessions.
   final WakelockService wakelockService;

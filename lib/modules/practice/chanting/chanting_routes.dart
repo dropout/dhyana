@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chanting_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/view/chanting_screen.dart';

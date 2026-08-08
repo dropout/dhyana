@@ -1,3 +1,4 @@
+import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +11,6 @@ import 'package:dhyana/core/data/datasource/timer_auth_data_provider.dart';
 import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/presence_service.dart';
-import 'package:dhyana/core/presentation/viewmodel/timer_settings_cubit.dart';
 
 import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/service/default_timer_audio_service.dart';
@@ -21,17 +21,17 @@ import 'package:dhyana/modules/practice/timer/domain/usecase/complete_timer_use_
 import 'package:dhyana/modules/practice/timer/domain/usecase/configure_event_scheduler_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/timer/domain/usecase/start_timer_use_case.dart';
-import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 
-void configureTimerModuleDependencies() {  
-  _configureRepositories();
-  _configureServices();
-  _configureUseCases();
-  _configureViewModels();
+void registerTimerModuleDependencies() {  
+  _registerRepositories();
+  _registerServices();
+  _registerUseCases();
+  _registerViewModels();
 }
 
-void _configureRepositories() {
+void _registerRepositories() {
   GetIt.I.registerLazySingleton<TimerSettingsHistoryRepository>(
     () => FirebaseTimerSettingsHistoryRepository(
       GetIt.I.get<FirebaseProvider>().firestore,
@@ -47,13 +47,13 @@ void _configureRepositories() {
 
 }
 
-void _configureServices() {
+void _registerServices() {
   GetIt.I.registerFactory<DefaultTimerAudioService>(
     () => DefaultTimerAudioService(GetIt.I.get<AppAudioHandler>()),
   );
 }
 
-void _configureUseCases() {
+void _registerUseCases() {
   GetIt.I.registerFactoryParam<
     ConfigureEventSchedulerUseCase,
     TimerEventScheduler,
@@ -88,7 +88,7 @@ void _configureUseCases() {
   });
 }
 
-void _configureViewModels() {
+void _registerViewModels() {
 
   // Timer Settings History Cubit
   GetIt.I.registerFactory<TimerSettingsHistoryCubit>(() => TimerSettingsHistoryCubit(

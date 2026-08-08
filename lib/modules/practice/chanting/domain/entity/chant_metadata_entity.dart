@@ -3,14 +3,14 @@ import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'chant_asset_metadata.freezed.dart';
-part 'chant_asset_metadata.g.dart';
+part 'chant_metadata_entity.freezed.dart';
+part 'chant_metadata_entity.g.dart';
 
 @freezed
-sealed class ChantMetaData with _$ChantMetaData implements Dto {
-  const ChantMetaData._();
+sealed class ChantMetaDataEntity with _$ChantMetaDataEntity implements Dto {
+  const ChantMetaDataEntity._();
 
-  const factory ChantMetaData({
+  const factory ChantMetaDataEntity({
     required String id,
     required int audioVersion,
     required int lyricsVersion,
@@ -22,10 +22,10 @@ sealed class ChantMetaData with _$ChantMetaData implements Dto {
     required int lyricsBytes,
     required int coverBytes,
     @DateTimeConverter() required DateTime updatedAt,
-  }) = _ChantMetaData;
+  }) = _ChantMetaDataEntity;
 
-  factory ChantMetaData.fromJson(Map<String, Object?> json) =>
-    _$ChantMetaDataFromJson(json);
+  factory ChantMetaDataEntity.fromJson(Map<String, Object?> json) =>
+    _$ChantMetaDataEntityFromJson(json);
 
   String getStoragePath(CachedAssetType type) {
     switch (type) {

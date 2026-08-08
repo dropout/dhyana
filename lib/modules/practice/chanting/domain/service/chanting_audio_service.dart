@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:audio_service/audio_service.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 
 class ChantingAudioService {
   final AppAudioHandler audioHandler;
@@ -12,7 +12,7 @@ class ChantingAudioService {
     _switchToChantingAudioHandler();
   }
 
-  Future<Duration> setup(List<ChantLocalResources> resources) async {
+  Future<Duration> setup(List<ChantLocalResourcesEntity> resources) async {
     final result = await audioHandler.customAction(
       SoLoudChantingAudioHandlerCustomAction.setup.name,
       {'resources': jsonEncode(resources)},

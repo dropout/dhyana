@@ -1,24 +1,24 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'lyrics_line.dart';
+import 'lyrics_line_entity.dart';
 
-part 'lyrics_document.freezed.dart';
-part 'lyrics_document.g.dart';
+part 'lyrics_document_entity.freezed.dart';
+part 'lyrics_document_entity.g.dart';
 
 /// Immutable lyrics document containing ordered lyric lines.
 @freezed
-sealed class LyricsDocument with _$LyricsDocument {
+sealed class LyricsDocumentEntity with _$LyricsDocumentEntity {
 
-  const LyricsDocument._();
+  const LyricsDocumentEntity._();
   
-  const factory LyricsDocument({
-    required List<LyricsLine> lines,
-  }) = _LyricsDocument;
+  const factory LyricsDocumentEntity({
+    required List<LyricsLineEntity> lines,
+  }) = _LyricsDocumentEntity;
 
-  /// Returns the exact [LyricsLine] at the given [position], 
+  /// Returns the exact [LyricsLineEntity] at the given [position], 
   /// or `null` if none.
-  LyricsLine? getExactLine(Duration position) {
+  LyricsLineEntity? getExactLine(Duration position) {
     final index = getExactLineIndex(position);
     return index == -1 ? null : lines[index];
   }
@@ -36,8 +36,8 @@ sealed class LyricsDocument with _$LyricsDocument {
     return -1;
   }
 
-  /// Returns the [LyricsLine] closest to [position].
-  LyricsLine getClosestLine(Duration position) {
+  /// Returns the [LyricsLineEntity] closest to [position].
+  LyricsLineEntity getClosestLine(Duration position) {
     final index = getClosestLineIndex(position);
     return lines[index];
   }
@@ -58,6 +58,6 @@ sealed class LyricsDocument with _$LyricsDocument {
     return closestIndex;
   }
 
-  factory LyricsDocument.fromJson(Map<String, dynamic> json) =>
-    _$LyricsDocumentFromJson(json);
+  factory LyricsDocumentEntity.fromJson(Map<String, dynamic> json) =>
+    _$LyricsDocumentEntityFromJson(json);
 }

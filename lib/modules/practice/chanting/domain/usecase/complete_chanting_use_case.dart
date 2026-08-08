@@ -1,6 +1,6 @@
 import 'package:dhyana/core/domain/entity/session.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 
 class CompleteChantingUseCase {
 
@@ -10,8 +10,8 @@ class CompleteChantingUseCase {
     required this.idGeneratorService,
   });
 
-  Future<({ChantingState state, Session session})> execute(
-    ChantingState state,
+  Future<({ChantingStateEntity state, Session session})> execute(
+    ChantingStateEntity state,
   ) async {
     final updatedState = state.copyWith(endTime: DateTime.now());
 

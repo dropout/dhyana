@@ -1,11 +1,11 @@
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_line.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_word.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_line_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_word_entity.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/view/player/lyric_word.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 
-/// Renders a single [LyricsLine] with per-word highlight animation.
+/// Renders a single [LyricsLineEntity] with per-word highlight animation.
 /// The [position] is used to determine the state of each word (inactive, pending, singing, sung).
 /// The [isActive] is currently not used, but can be used in the future to apply additional styling to the active line.
 class LyricLine extends StatelessWidget {
@@ -14,11 +14,11 @@ class LyricLine extends StatelessWidget {
     vertical: 8,
   );
 
-  final LyricsLine line;
+  final LyricsLineEntity line;
   final Duration position;
   final bool isActive;
 
-  final ChantingState chantingState;
+  final ChantingStateEntity chantingState;
 
   const LyricLine({
     super.key,
@@ -68,7 +68,7 @@ class LyricLine extends StatelessWidget {
 
   }
 
-  WordState getWordState(LyricsWord word) {
+  WordState getWordState(LyricsWordEntity word) {
     final start = (word.start.inMilliseconds / 100).round();
     final end = (word.end.inMilliseconds / 100).round();
     final pos = (position.inMilliseconds / 100).round();

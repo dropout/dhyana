@@ -1,11 +1,11 @@
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
 class TimerRunningTitle extends StatefulWidget {
-  final TimerState timerState;
+  final TimerStateEntity timerState;
   final Offset positionOffset;
 
   const TimerRunningTitle({
@@ -40,7 +40,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
     );
   }
 
-  Widget? buildText(BuildContext context, TimerState timerState) {
+  Widget? buildText(BuildContext context, TimerStateEntity timerState) {
     TextStyle style = Theme.of(context).textTheme.titleLarge!.copyWith(
       fontFamily: DesignSpec.condensedFontFamilyName,
       fontWeight: FontWeight.bold,

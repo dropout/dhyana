@@ -1,7 +1,7 @@
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_asset_metadata.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_metadata_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:drift/drift.dart';
@@ -88,7 +88,7 @@ class ChantCacheValidator with LoggerMixin {
   }
 
   Future<AssetValidationResult> validateChantAssetCache({
-    required ChantMetaData metadata,
+    required ChantMetaDataEntity metadata,
     required String contentId,
     required CachedAssetType type,
   }) async {

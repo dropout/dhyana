@@ -8,7 +8,7 @@
 // import 'package:dhyana/drift/chant_cache_database.dart';
 // import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 // import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
-// import 'package:dhyana/core/domain/entity/chant/chant.dart';
+// import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 // import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
 // import 'package:dhyana/core/util/logger_mixin.dart';
 // import 'package:dhyana/modules/practice/chanting/data/datasource/chant_cache_data_provider.dart';

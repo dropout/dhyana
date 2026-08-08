@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting_cubit.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/chant_card.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -14,14 +14,14 @@ class PlaylistSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChantingCubit, ChantingState>(
+    return BlocBuilder<ChantingCubit, ChantingStateEntity>(
       builder: (context, cs) {
         return buildContent(context, cs);
       },
     );
   }
 
-  Widget buildContent(BuildContext context, ChantingState state) {
+  Widget buildContent(BuildContext context, ChantingStateEntity state) {
     return Stack(
       fit: StackFit.expand,
       clipBehavior: Clip.none,
@@ -87,7 +87,7 @@ class PlaylistSheet extends StatelessWidget {
   Widget? buildTrailing(
     BuildContext context,
     int index,
-    ChantingState chantingState,
+    ChantingStateEntity chantingState,
   ) {
     if (index == chantingState.currentIndex) {
       return switch (chantingState.playbackState.playing) {

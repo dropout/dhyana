@@ -1,6 +1,4 @@
-import 'package:dhyana/core/presentation/viewmodel/chanting_settings_cubit.dart';
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
+import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
 import 'package:dhyana/core/util/assets.dart';
 import 'package:dhyana/core/presentation/view/chanting_settings/chant_list.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -9,12 +7,29 @@ import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chant.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chant_playlist_item.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chanting_settings.dart';
+import 'package:dhyana/modules/practice/chanting/public/viewmodel/chanting_settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'add_chant_sheet.dart';
 
 class ChantingSettingsView extends StatelessWidget {
+
+  static Widget withCubit() {
+    return SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
+      key: const ValueKey('chanting_settings_cubit'),
+      create: (context) => GetIt.I.get<ChantingSettingsCubit>()
+        ..loadAvailableChants(),
+      builder: (context, state) => ChantingSettingsView(
+        availableChants: state.availableChants,
+      ),
+    );
+  }
+
   final List<Chant> availableChants;
 
   const ChantingSettingsView({
@@ -67,7 +82,7 @@ class ChantingSettingsView extends StatelessWidget {
 
   void _onChantRemoved(
     BuildContext context,
-    UiChant chantViewModel,
+    ChantPlaylistItem chantViewModel,
     int index,
   ) {
     context.read<ChantingSettingsCubit>().removeFromPlaylist(index);

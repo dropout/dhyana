@@ -1,5 +1,5 @@
-import 'package:dhyana/core/presentation/viewmodel/timer_settings_cubit.dart';
 import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
 import 'package:dhyana/core/service/overlay_service.dart';

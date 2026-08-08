@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/datasource/data_provider_exception.dart';
 import 'package:dhyana/modules/practice/timer/data/datasource/firebase_timer_settings_history_data_provider.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 
 class FirebaseTimerSettingsHistoryRepository
@@ -34,7 +34,7 @@ class FirebaseTimerSettingsHistoryRepository
       );
     } on DocumentNotFoundException {
       await timerSettingsHistoryDataProvider.create(
-        TimerSettingsHistoryRecord(
+        TimerSettingsHistoryRecordEntity(
           id: timerSettings.id,
           timerSettings: timerSettings,
           useCount: 1,
@@ -45,7 +45,7 @@ class FirebaseTimerSettingsHistoryRepository
   }
 
   @override
-  Future<List<TimerSettingsHistoryRecord>> query(
+  Future<List<TimerSettingsHistoryRecordEntity>> query(
     String profileId,
     {int limit = 20}
   ) {
@@ -58,7 +58,7 @@ class FirebaseTimerSettingsHistoryRepository
   }
 
   @override
-  Stream<List<TimerSettingsHistoryRecord>> queryStream(
+  Stream<List<TimerSettingsHistoryRecordEntity>> queryStream(
     String profileId,
     {int limit = 20}
   ) {

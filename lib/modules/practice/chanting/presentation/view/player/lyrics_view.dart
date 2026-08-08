@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting_cubit.dart';
 import 'package:dhyana/core/util/text.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/view/player/lyric_line.dart';
@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LyricsView extends StatefulWidget {
   /// The current state of the chanting player, containing
   /// the lyrics document and active line index.
-  final ChantingState chantingState;
+  final ChantingStateEntity chantingState;
 
   /// The vertical offset from the top of the screen where
   /// the active line should be centered.

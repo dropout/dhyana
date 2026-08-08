@@ -95,7 +95,7 @@ Uses a pragmatic, compressed version of Clean Architecture Layers.
 #### 2.1.2. Comparison: Original 4-Layer vs. Pragmatic 3-Layer
 
 | Aspect | Original 4-Layer Clean Architecture | Pragmatic 3-Layer Flutter Architecture |
-|--------|------------------------------------|--------------------------------------|
+|--------|-------------------------------------|----------------------------------------|
 | Layer Breakdown | Entities, Use Cases, Interface Adapters, Frameworks & Drivers | Domain, Data, Presentation |
 | Separation of Presentation/Framework | UI Framework (React/Flutter) is strictly isolated on the outer ring; Presenters/Controllers live in the inner Interface Adapters ring. | UI Widgets and State Management (BLoC/Notifier) are consolidated into the single Presentation layer. |
 | Database & API Isolation | DB & Network drivers live in the outermost layer, separated from Repository Implementations. | Data Sources (DB/API) and Repository Implementations are grouped together inside the Data layer. |

@@ -6,7 +6,7 @@ import 'package:dhyana/core/util/timer_event_scheduler.dart';
 
 import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_state.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
@@ -46,7 +46,7 @@ class StartTimerUseCase with LoggerMixin {
     required this.crashlyticsService,
   });
 
-  Future<TimerState> execute(TimerState state) async {
+  Future<TimerStateEntity> execute(TimerStateEntity state) async {
     logger.t('Starting timer - ${clock.now()}');
     final startFuture = timerAudioService.start(state.timerSettings);
 

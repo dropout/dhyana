@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_asset_metadata.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_metadata_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
@@ -35,7 +35,7 @@ class StubbedChantRepository implements ChantRepository {
         name: chantName,
         length: Duration(minutes: 5 + index),
         blurHash: DefaultProfileData.photoBlurhash,
-        metaData: ChantMetaData(
+        metaData: ChantMetaDataEntity(
           id: _faker.guid.guid(),
           audioVersion: 1,
           lyricsVersion: 1,

@@ -1,24 +1,26 @@
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 
 class StartChantingUseCase with LoggerMixin {
 
+  final ChantRepository chantRepository;
   final ChantCacheManager chantCacheManager;
   final ChantingAudioService chantingAudioService;
 
   StartChantingUseCase({
+    required this.chantRepository,
     required this.chantCacheManager,
     required this.chantingAudioService,
   });
 
 
-  Stream<CachingProgress> execute(ChantingSettings chantingSettings) async* {
+  Stream<CachingProgressEntity> execute(List<String> selectedChantIds) async* {
     // Prepare local resources for chanting
-    logger.t('Setting up ${chantingSettings.selectedChants.length} chants');
+    logger.t('Setting up ${selectedChantIds.length} chants');
 
       // emit(state.copyWith(loadingState: .loading));
 
@@ -26,13 +28,12 @@ class StartChantingUseCase with LoggerMixin {
       await chantingAudioService.stop();
 
       // Start caching and preparing chants for playback
-      final chantViewModels = chantingSettings.selectedChants;
       final prepared = chantCacheManager.preparePlayableChantAssets(
-        chantViewModels.map((viewModel) => viewModel.chantId).toList(growable: false),
+        selectedChantIds,
       );
 
       // Update the state with caching progress as it occurs
-      late CachingProgress cachingProgress;
+      late CachingProgressEntity cachingProgress;
       await for (final progress in prepared) {
         cachingProgress = progress;
         yield cachingProgress;
@@ -40,7 +41,7 @@ class StartChantingUseCase with LoggerMixin {
       }
 
       // Take the final results and prepare the audio service
-      List<ChantLocalResources> resources = cachingProgress.results
+      List<ChantLocalResourcesEntity> resources = cachingProgress.results
           .map((r) => r.localResources)
           .toList();
       await chantingAudioService.setup(resources);

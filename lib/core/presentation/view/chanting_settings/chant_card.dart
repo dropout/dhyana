@@ -1,14 +1,14 @@
-import 'package:dhyana/core/domain/entity/chant/chant.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_cached_network_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/practice/chanting/public/model/chant_playlist_item.dart';
 import 'package:flutter/material.dart';
 
 class ChantCard extends StatelessWidget {
   final int index;
-  final UiChant chantViewModel;
+  final ChantPlaylistItem chantViewModel;
   final Color textColor;
   final Widget? trailing;
 

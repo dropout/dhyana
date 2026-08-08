@@ -1,5 +1,5 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:dhyana/core/util/localization.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class TimerSettingsHistoryListItem extends StatelessWidget {
 
-  final TimerSettingsHistoryRecord timerSettingsHistoryRecord;
+  final TimerSettingsHistoryRecordEntity timerSettingsHistoryRecord;
   final void Function() onTap;
 
   const TimerSettingsHistoryListItem({

@@ -1,30 +1,30 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
 import 'package:dhyana/core/domain/enum/loading_state.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/lyrics_document_entity.dart';
 
 
-part 'chanting_state.freezed.dart';
+part 'chanting_state_entity.freezed.dart';
 
 @freezed
-sealed class ChantingState with _$ChantingState {
+sealed class ChantingStateEntity with _$ChantingStateEntity {
 
-  const ChantingState._();
+  const ChantingStateEntity._();
 
-  const factory ChantingState({
+  const factory ChantingStateEntity({
 
     // settings
     required ChantingSettings chantingSettings,
 
     // loading    
-    @Default(CachingProgress()) CachingProgress cachingProgress,
+    @Default(CachingProgressEntity()) CachingProgressEntity cachingProgress,
     
     // playback
-    @Default([]) List<ChantLocalResources> chantResources,
+    @Default([]) List<ChantLocalResourcesEntity> chantResources,
     required PlaybackState playbackState,
     @Default(Duration.zero) Duration elapsedTime,
     @Default(LoadingState.loading) LoadingState loadingState,  
@@ -34,14 +34,14 @@ sealed class ChantingState with _$ChantingState {
     // lyrics
     @Default(0) int activeLineIndex,
     @Default(LoadingState.loading) LoadingState lyricsLoadingState,
-    LyricsDocument? lyricsDocument,
+    LyricsDocumentEntity? lyricsDocument,
     
     // session data
     DateTime? startTime,
     DateTime? endTime,
     @Default(Duration.zero) Duration elapsedSessionTime,
 
-  }) = _ChantingState;
+  }) = _ChantingStateEntity;
 
   int get currentIndex => playbackState.queueIndex ?? 0;
   Duration get position => playbackState.position;

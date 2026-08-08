@@ -1,20 +1,18 @@
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/domain/entity/chant/chanting_settings.dart';
-import 'package:dhyana/core/presentation/viewmodel/chanting_settings_cubit.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
-import 'package:dhyana/core/service/module/chanting_service.dart';
+
 import 'package:dhyana/core/service/shared_preferences_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/drift_chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/firebase_chant_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/repository/default_chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/data/repository/firebase_chant_repository.dart';
-import 'package:dhyana/modules/practice/chanting/data/service/default_chanting_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager.dart';
@@ -26,18 +24,19 @@ import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_
 import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting_cubit.dart';
+import 'package:dhyana/modules/practice/chanting/public/viewmodel/chanting_settings_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-void configureChantingModuleDependencies() {
-  _configureDataProviders();
-  _configureRepositories();
-  _configureServices();
-  _configureUseCases();
-  _configureViewModels();
+void registerChantingModuleDependencies() {
+  _registerDataProviders();
+  _registerRepositories();
+  _registerServices();
+  _registerUseCases();
+  _registerViewModels();
 }
 
-void _configureDataProviders() {
+void _registerDataProviders() {
   GetIt.I.registerLazySingleton<ChantCacheDataProvider>(
     () => DriftChantCacheDataProvider(ChantCacheDatabase()),
   );
@@ -46,7 +45,7 @@ void _configureDataProviders() {
   );
 }
 
-void _configureRepositories() {
+void _registerRepositories() {
 
   GetIt.I.registerLazySingleton<ChantRepository>(
     () => FirebaseChantRepository(
@@ -62,13 +61,7 @@ void _configureRepositories() {
   );
 }
 
-void _configureServices() {
-  GetIt.I.registerLazySingleton<ChantingService>(
-    () => DefaultChantingService(
-      chantRepository: GetIt.I.get<ChantRepository>(),
-      chantCacheRepository: GetIt.I.get<ChantCacheDataRepository>(),
-    ),
-  );
+void _registerServices() {
   GetIt.I.registerFactory<ChantingAudioService>(
     () => ChantingAudioService(GetIt.I.get<AppAudioHandler>()),
   );
@@ -90,9 +83,10 @@ void _configureServices() {
   ));
 }
 
-void _configureUseCases() {
+void _registerUseCases() {
   GetIt.I.registerFactory<StartChantingUseCase>(
     () => StartChantingUseCase(
+      chantRepository: GetIt.I.get<ChantRepository>(),
       chantCacheManager: GetIt.I.get<ChantCacheManager>(),
       chantingAudioService: GetIt.I.get<ChantingAudioService>(),
     ),
@@ -113,10 +107,10 @@ void _configureUseCases() {
 
 }
 
-void _configureViewModels() {
+void _registerViewModels() {
   GetIt.I.registerFactory<ChantingSettingsCubit>(
     () => ChantingSettingsCubit(
-      chantingService: GetIt.I.get<ChantingService>(), 
+      chantingApi: GetIt.I.get<ChantingPublicApi>(),
       sharedPreferencesService: GetIt.I.get<SharedPreferencesService>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(), 
     ),

@@ -1,10 +1,10 @@
-import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
 
 abstract interface class ChantPlaybackRepository {
 
   /// Prepares the specified chants for playback by ensuring that their audio 
   /// and lyrics assets are cached and valid.
-  Stream<CachingProgress> preparePlayableAssets(List<String> chantIds);
+  Stream<CachingProgressEntity> preparePlayableAssets(List<String> chantIds);
 
   /// Clears all cached chant assets, removing them from local storage 
   /// and the cache database.
