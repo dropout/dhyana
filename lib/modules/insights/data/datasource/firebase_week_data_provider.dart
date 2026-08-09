@@ -4,7 +4,6 @@ import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/insights/data/datasource/week_data_provider.dart';
 import 'package:dhyana/core/data/converter/date_time_converter.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 
 class FirebaseWeekDataProvider
     extends FirebaseDataProvider<Week>
@@ -23,22 +22,22 @@ class FirebaseWeekDataProvider
     )
   );
 
-  Query<Week> _buildQuery(WeekQueryOptions queryOptions) {
+  Query<Week> _buildQuery({required DateTime from, required DateTime to}) {
     final FieldPath fieldPath = FieldPath(const ['startDate']);
     Query<Week> query = collectionRef
-      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
-      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(queryOptions.to))
+      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(from))
+      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(to))
       .orderBy(fieldPath);
     return query;
   }
 
   @override
-  Future<List<Week>> query(WeekQueryOptions queryOptions) =>
-      buildListFromQuery(_buildQuery(queryOptions));
+  Future<List<Week>> query({required DateTime from, required DateTime to}) =>
+      buildListFromQuery(_buildQuery(from: from, to: to));
 
   @override
-  Stream<List<Week>> queryStream(WeekQueryOptions queryOptions) =>
-      buildStreamFromQuery(_buildQuery(queryOptions));
+  Stream<List<Week>> queryStream({required DateTime from, required DateTime to}) =>
+      buildStreamFromQuery(_buildQuery(from: from, to: to));
 
   @override
   Future<void> set(Week week, {bool merge=false, List<Object>? mergeFields}) async =>

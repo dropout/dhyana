@@ -1,11 +1,10 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 
 abstract interface class WeekDataProvider implements DataProvider<Week> {
 
-  Future<void> set(Week week, {bool merge, List<Object>? mergeFields});
-  Future<List<Week>> query(WeekQueryOptions queryOptions);
-  Stream<List<Week>> queryStream(WeekQueryOptions queryOptions);
+  Future<void> set(Week week, {bool merge = false, List<Object>? mergeFields});
+  Future<List<Week>> query({required DateTime from, required DateTime to});
+  Stream<List<Week>> queryStream({required DateTime from, required DateTime to});
 
 }

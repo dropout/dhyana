@@ -7,7 +7,7 @@ import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
 import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
@@ -68,7 +68,7 @@ class MockTimerEventScheduler
   implements TimerEventScheduler {}
 
 class MockSessionCompletedCubit
-  extends MockCubit<SessionCompletedData>
+  extends MockCubit<SessionCompletedDataEntity>
   implements SessionCompletedCubit {}
 
 // Services --------------------------------------------------------------------

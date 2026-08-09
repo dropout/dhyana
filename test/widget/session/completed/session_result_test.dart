@@ -1,6 +1,7 @@
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/profile/public/view/profile_avatar.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/session_result.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,7 +27,7 @@ void main() {
 
   testWidgets('SessionResult renders correctly', (WidgetTester tester) async {
 
-    final Session session = FakeModelFactory().createSession();
+    final SessionEntity session = FakeModelFactory().createSession();
 
     await tester.runAsync(() async {
       await tester.pumpWidget(
@@ -36,7 +37,7 @@ void main() {
               Provider<Services>.value(value: mockServices),
             ],
             child: SessionResult(
-              session: session,
+              session: session.toApi(),
             )
           ),
         )

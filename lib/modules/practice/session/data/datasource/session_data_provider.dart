@@ -1,10 +1,10 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 
 abstract interface class SessionDataProvider
-    implements DataProvider<Session> {
+    implements DataProvider<SessionEntity> {
 
-  Future<List<Session>> query({int limit = 20});
-  Stream<List<Session>> queryStream({int limit = 20});
+  Future<List<SessionEntity>> query({int limit = 20});
+  Stream<List<SessionEntity>> queryStream({int limit = 20});
 
 }

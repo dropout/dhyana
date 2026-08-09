@@ -1,9 +1,9 @@
-import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_area.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
@@ -38,7 +38,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
     context.read<SessionCompletedCubit>().logSession(
       widget.profileId,
       widget.session,
-      onComplete: (UpdateProfileStatsResult updateResult) {
+      onComplete: (UpdateProfileStatsResultEntity updateResult) {
         // refresh the profile
         profileCubit.loadProfile(
           widget.profileId,
@@ -51,18 +51,18 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SessionCompletedCubit, SessionCompletedData>(
+    return BlocBuilder<SessionCompletedCubit, SessionCompletedDataEntity>(
       builder: (context, state) {
         switch (state) {
-          case SessionCompletedInitialData():
+          case SessionCompletedInitialDataEntity():
             return buildLoading(context);
-          case SessionCompletedLoadingData():
+          case SessionCompletedLoadingDataEntity():
             return buildLoading(context);
-          case SessionCompletedErrorData():
+          case SessionCompletedErrorDataEntity():
             return buildError(context);
-          case SessionCompletedSavingData():
+          case SessionCompletedSavingDataEntity():
             return buildLoaded(context, state.updateResult);
-          case SessionCompletedSavedData():
+          case SessionCompletedSavedDataEntity():
             return buildLoaded(context, state.updateResult);
           default:
             return SizedBox.shrink();
@@ -81,7 +81,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
 
   Widget buildLoaded(
     BuildContext context,
-    UpdateProfileStatsResult updateResult,
+    UpdateProfileStatsResultEntity updateResult,
   ) {
     if (widget.profileSettings.usePresenceFeature == false &&
         widget.profileSettings.showStatsOnFinishScreen == false) {

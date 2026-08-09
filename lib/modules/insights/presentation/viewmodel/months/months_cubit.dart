@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
-import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +28,14 @@ class MonthsCubit extends Cubit<MonthsState> with LoggerMixin {
     try {
       logger.t('Loading months: $from ... $to');
       emit(const MonthsState.loading());
-      MonthQueryOptions queryOptions = MonthQueryOptions(
-        from: from,
-        to: to ?? DateTime.now()
-      );
+
       List<Month> months = await statisticsRepository.queryMonths(
         profileId,
-        queryOptions,
+        from: from,
+        to: to ?? DateTime.now(),
       );
 
-      emit(MonthsState.loaded(months: _fillEmptyMonths(months, queryOptions)));
+      emit(MonthsState.loaded(months: _fillEmptyMonths(months, from: from, to: to ?? DateTime.now())));
       logger.t('Successfully loaded months ${months.length}');
 
     } catch (e, stack) {
@@ -51,16 +48,14 @@ class MonthsCubit extends Cubit<MonthsState> with LoggerMixin {
     }
   }
 
-  List<Month> _fillEmptyMonths(List<Month> months, MonthQueryOptions queryOptions) {
+  List<Month> _fillEmptyMonths(List<Month> months, {required DateTime from, required DateTime to}) {
     int monthsCount = DateUtils.monthDelta(
-      queryOptions.from,
-      queryOptions.to,
+      from,
+      to,
     );
 
     logger.t('Querying $monthsCount window');
     logger.t('Got ${months.length} from database');
-
-    final DateTime from = queryOptions.from;
 
     List<Month> result = [];
     for (var i = 0; i < monthsCount; ++i) {

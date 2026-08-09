@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
@@ -30,19 +29,16 @@ class WeeksCubit extends Cubit<WeeksState> with LoggerMixin {
     try {
       logger.t('Loading weeks: $from ... $to');
       emit(const WeeksState.loading());
-      WeekQueryOptions queryOptions = WeekQueryOptions(
-        from: from,
-        to: to,
-      );
       List<Week> weeks = await statisticsRepository.queryWeeks(
         profileId,
-        queryOptions,
+        from: from,
+        to: to,
       );
 
       emit(WeeksState.loaded(
         from: from,
         to: to,
-        weeks: _fillEmptyWeeks(weeks, queryOptions),
+        weeks: _fillEmptyWeeks(weeks, from: from, to: to),
         calculatedStats: CalculatedStats.fromWeeks(weeks),
       ));
       logger.t('Successfully loaded weeks ${weeks.length}');
@@ -57,15 +53,13 @@ class WeeksCubit extends Cubit<WeeksState> with LoggerMixin {
     }
   }
 
-  List<Week> _fillEmptyWeeks(List<Week> weeks, WeekQueryOptions queryOptions) {
+  List<Week> _fillEmptyWeeks(List<Week> weeks, {required DateTime from, required DateTime to}) {
 
-    Duration diff = queryOptions.to.difference(queryOptions.from);
+    Duration diff = to.difference(from);
     int weeksCount = (diff.inDays / 7).ceil();
 
     logger.t('Querying $weeksCount window');
     logger.t('Got ${weeks.length} from database');
-
-    final DateTime from = queryOptions.from;
 
     List<Week> result = [];
     for (var i = 0; i < weeksCount; ++i) {

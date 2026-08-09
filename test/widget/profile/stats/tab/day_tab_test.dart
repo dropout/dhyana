@@ -1,6 +1,5 @@
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/days_bar_chart_page.dart';
@@ -22,10 +21,7 @@ void main() {
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUpAll(() {
-      registerFallbackValue(DayQueryOptions(
-        from: DateTime.now().subtract(const Duration(days: 7)),
-        to: DateTime.now(),
-      ));
+
     });
 
     setUp(() async {
@@ -55,7 +51,7 @@ void main() {
         )
       );
 
-      when(() => mockStatisticsRepository.queryDays(profile.id, any()))
+      when(() => mockStatisticsRepository.queryDays(profile.id, from: any(named: 'from'), to: any(named: 'to')))
         .thenAnswer((_) async => FakeModelFactory().createDays(10));
 
       await tester.pumpWidget(
@@ -77,10 +73,10 @@ void main() {
       final DaysTabState daysTabState = tester.state(find.byType(DaysTab));
 
       // Verify that a query was made for the first interval
-      verify(() => mockStatisticsRepository.queryDays(profile.id, DayQueryOptions(
-        from: daysTabState.intervals[0].from,
-        to: daysTabState.intervals[0].to,
-      ))).called(1);
+      verify(() => mockStatisticsRepository.queryDays(profile.id, 
+        from: daysTabState.intervals[0].from, 
+        to: daysTabState.intervals[0].to)
+      ).called(1);
 
     });
 

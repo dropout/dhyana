@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/practice/session/data/datasource/firebase_session_data_provider.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
 
 /// A default implementation of the [SessionRepository] that uses 
@@ -16,7 +16,7 @@ class FirebaseSessionRepository implements SessionRepository {
   });
   
   @override
-  Future<void> create(String profileId, Session session) async =>
+  Future<void> create(String profileId, SessionEntity session) async =>
     FirebaseSessionDataProvider(
       firestore,
       profileId,
@@ -30,35 +30,35 @@ class FirebaseSessionRepository implements SessionRepository {
     )..delete(sessionId);
   
   @override
-  Future<Session> read(String profileId, String id) async => 
+  Future<SessionEntity> read(String profileId, String id) async => 
     await FirebaseSessionDataProvider(
       firestore,
       profileId,
     ).read(id);
   
   @override
-  Stream<Session> readStream(String profileId, String id) =>
+  Stream<SessionEntity> readStream(String profileId, String id) =>
     FirebaseSessionDataProvider(
       firestore,
       profileId,
     ).readStream(id);
     
   @override
-  Future<void> update(String profileId, Session model) async => 
+  Future<void> update(String profileId, SessionEntity model) async => 
     await FirebaseSessionDataProvider(
       firestore,
       profileId,
     ).update(model);
 
   @override
-  Future<List<Session>> query(String profileId, {int limit = 20}) async =>
+  Future<List<SessionEntity>> query(String profileId, {int limit = 20}) async =>
     FirebaseSessionDataProvider(
       firestore,
       profileId,
     ).query(limit: limit);
     
   @override
-  Stream<List<Session>> queryStream(String profileId, {int limit = 20}) =>
+  Stream<List<SessionEntity>> queryStream(String profileId, {int limit = 20}) =>
     FirebaseSessionDataProvider(
       firestore,
       profileId,

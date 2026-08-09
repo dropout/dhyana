@@ -1,5 +1,6 @@
+import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 
 import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
@@ -9,8 +10,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../../mock_definitions.dart';
 
-// class MockStatisticsRepository extends Mock implements StatisticsRepository {}
-// class MockMindfulMinutesService extends Mock implements MindfulMinutesService {}
 
 void main() {
   late MockInsightsService insightsService;
@@ -40,8 +39,8 @@ void main() {
     );
   }
 
-  Session createSession() {
-    return Session(
+  SessionEntity createSession() {
+    return SessionEntity(
       id: 'session-1',
       type: SessionType.sitting,
       startTime: DateTime(2026, 1, 2, 10, 0),
@@ -54,7 +53,7 @@ void main() {
     final profile = createProfile();
     final session = createSession();
 
-    when(() => insightsService.logSessionStatistics(profile.id, session))
+    when(() => insightsService.logSessionStatistics(profile.id, session.toApi()))
         .thenAnswer((_) async {});
     when(() => mindfulMinutesService.getAuthorizationStatus())
         .thenAnswer((_) async => AuthorizationStatus.authorized);
@@ -63,9 +62,9 @@ void main() {
           session.endTime,
         )).thenAnswer((_) async {});
 
-    await useCase.execute(profile, session);
+    await useCase.execute(profile.id, session);
 
-    verify(() => insightsService.logSessionStatistics(profile.id, session)).called(1);
+    verify(() => insightsService.logSessionStatistics(profile.id, session.toApi())).called(1);
     verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
     verify(() => mindfulMinutesService.logMindfulMinutes(
           session.startTime,
@@ -81,14 +80,14 @@ void main() {
       orElse: () => AuthorizationStatus.authorized,
     );
 
-    when(() => insightsService.logSessionStatistics(profile.id, session))
+    when(() => insightsService.logSessionStatistics(profile.id, session.toApi()))
         .thenAnswer((_) async {});
     when(() => mindfulMinutesService.getAuthorizationStatus())
         .thenAnswer((_) async => unauthorizedStatus);
 
-    await useCase.execute(profile, session);
+    await useCase.execute(profile.id, session);
 
-    verify(() => insightsService.logSessionStatistics(profile.id, session)).called(1);
+    verify(() => insightsService.logSessionStatistics(profile.id, session.toApi())).called(1);
     verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
     verifyNever(() => mindfulMinutesService.logMindfulMinutes(any(), any()));
   });

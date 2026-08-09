@@ -2,7 +2,6 @@ import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/weeks_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/tab/week_tab.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,10 +21,7 @@ void main() {
     late MockCrashlyticsService mockCrashlyticsService;  
 
     setUpAll(() {
-      registerFallbackValue(WeekQueryOptions(
-        from: DateTime.now().subtract(const Duration(days: 7)),
-        to: DateTime.now(),
-      ));
+
     });
 
     setUp(() async {
@@ -55,7 +51,7 @@ void main() {
         )
       );
 
-      when(() => mockStatisticsRepository.queryWeeks(profile.id, any()))
+      when(() => mockStatisticsRepository.queryWeeks(profile.id, from: any(named: 'from'), to: any(named: 'to')))
         .thenAnswer((_) async => FakeModelFactory().createWeeks(4));
 
       await tester.pumpWidget(
@@ -77,10 +73,10 @@ void main() {
       final WeekTabState weekTabState = tester.state(find.byType(WeekTab));
 
       // Verify that a query was made for the first interval
-      verify(() => mockStatisticsRepository.queryWeeks(profile.id, WeekQueryOptions(
+      verify(() => mockStatisticsRepository.queryWeeks(profile.id, 
         from: weekTabState.intervals[0].from,
         to: weekTabState.intervals[0].to,
-      ))).called(1);
+      )).called(1);
 
     });
 

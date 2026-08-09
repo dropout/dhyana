@@ -1,12 +1,13 @@
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data.dart';
+import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:dhyana/modules/social/presentation/view/presence_area.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/progress_summary.dart';
@@ -53,7 +54,7 @@ void main() {
     ) async {
       final profileId = 'profileId';
       final session = FakeModelFactory().createSession();
-      final UpdateProfileStatsResult updateResult = UpdateProfileStatsResult(
+      final UpdateProfileStatsResultEntity updateResult = UpdateProfileStatsResultEntity(
         updatedProfile: FakeModelFactory().createProfile(),
         oldProfile: FakeModelFactory().createProfile(),
         session: session,
@@ -61,21 +62,21 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedInitialData());
+      ).thenReturn(const SessionCompletedInitialDataEntity());
       when(
         () => mockSessionCompletedCubit.stream,
-      ).thenAnswer((_) => const Stream<SessionCompletedData>.empty());
+      ).thenAnswer((_) => const Stream<SessionCompletedDataEntity>.empty());
 
       when(
         () => mockSessionCompletedCubit.logSession(
           profileId,
-          session,
+          session.toApi(),
           onComplete: any(named: 'onComplete'),
         ),
       ).thenAnswer((invocation) async {
         final onComplete =
             invocation.namedArguments[const Symbol('onComplete')]
-                as void Function(UpdateProfileStatsResult)?;
+                as void Function(UpdateProfileStatsResultEntity)?;
         onComplete?.call(updateResult);
       });
 
@@ -93,7 +94,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session,
+                    session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -105,7 +106,7 @@ void main() {
             verify(
               () => mockSessionCompletedCubit.logSession(
                 'profileId',
-                session,
+                session.toApi(),
                 onComplete: any(named: 'onComplete'),
               ),
             ).called(1);
@@ -122,16 +123,16 @@ void main() {
     testWidgets('can show loading when initial state', (
       WidgetTester tester,
     ) async {
-      final Session session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSession();
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedData.initial());
+      ).thenReturn(const SessionCompletedDataEntity.initial());
 
       when(
         () => mockSessionCompletedCubit.logSession(
           'profileId',
-          session,
+          session.toApi(),
           onComplete: any(named: 'onComplete'),
         ),
       ).thenAnswer((_) => Future.value(null));
@@ -150,7 +151,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session,
+                    session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -166,16 +167,16 @@ void main() {
     testWidgets('can show loading when loading state', (
       WidgetTester tester,
     ) async {
-      final Session session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSession();
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedData.loading());
+      ).thenReturn(const SessionCompletedDataEntity.loading());
 
       when(
         () => mockSessionCompletedCubit.logSession(
           'profileId',
-          session,
+          session.toApi(),
           onComplete: any(named: 'onComplete'),
         ),
       ).thenAnswer((_) => Future.value(null));
@@ -194,7 +195,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session,
+                    session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -208,16 +209,16 @@ void main() {
     });
 
     testWidgets('can show error when error state', (WidgetTester tester) async {
-      final Session session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSession();
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedData.error());
+      ).thenReturn(const SessionCompletedDataEntity.error());
 
       when(
         () => mockSessionCompletedCubit.logSession(
           'profileId',
-          session,
+          session.toApi(),
           onComplete: any(named: 'onComplete'),
         ),
       ).thenAnswer((_) => Future.value(null));
@@ -236,7 +237,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session,
+                    session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -252,8 +253,8 @@ void main() {
     testWidgets('can show loaded when saving session', (
       WidgetTester tester,
     ) async {
-      final Session session = FakeModelFactory().createSession();
-      UpdateProfileStatsResult updateResult = UpdateProfileStatsResult(
+      final SessionEntity session = FakeModelFactory().createSession();
+      UpdateProfileStatsResultEntity updateResult = UpdateProfileStatsResultEntity(
         updatedProfile: FakeModelFactory().createProfile(),
         oldProfile: FakeModelFactory().createProfile(),
         session: session,
@@ -261,12 +262,12 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(SessionCompletedData.saving(updateResult: updateResult));
+      ).thenReturn(SessionCompletedDataEntity.saving(updateResult: updateResult));
 
       when(
         () => mockSessionCompletedCubit.logSession(
           'profileId',
-          session,
+          session.toApi(),
           onComplete: any(named: 'onComplete'),
         ),
       ).thenAnswer((_) => Future.value(null));
@@ -286,7 +287,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session,
+                    session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -305,8 +306,8 @@ void main() {
     testWidgets('can show loaded when saving session completed', (
       WidgetTester tester,
     ) async {
-      final Session session = FakeModelFactory().createSession();
-      UpdateProfileStatsResult updateResult = UpdateProfileStatsResult(
+      final SessionEntity session = FakeModelFactory().createSession();
+      UpdateProfileStatsResultEntity updateResult = UpdateProfileStatsResultEntity(
         updatedProfile: FakeModelFactory().createProfile(),
         oldProfile: FakeModelFactory().createProfile(),
         session: session,
@@ -314,12 +315,12 @@ void main() {
 
       when(
         () => mockSessionCompletedCubit.state,
-      ).thenReturn(SessionCompletedData.saved(updateResult: updateResult));
+      ).thenReturn(SessionCompletedDataEntity.saved(updateResult: updateResult));
 
       when(
         () => mockSessionCompletedCubit.logSession(
           'profileId',
-          session,
+          session.toApi(),
           onComplete: any(named: 'onComplete'),
         ),
       ).thenAnswer((_) => Future.value(null));
@@ -339,7 +340,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session,
+                    session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:clock/clock.dart';
+import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
@@ -152,7 +153,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
 
     // Navigate to the session completed screen with the completed session data  
     logger.t('Navigating to session completed screen');
-    final targetRoute = SessionCompletedRoute($extra: result.session);
+    final targetRoute = SessionCompletedRoute($extra: result.session.toApi());
     router.replace(targetRoute.location, extra: result.session);
   }
 

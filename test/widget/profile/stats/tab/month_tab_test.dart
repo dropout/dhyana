@@ -1,7 +1,6 @@
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
-import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/months_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/tab/month_tab.dart';
@@ -22,10 +21,7 @@ void main() {
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUpAll(() {
-      registerFallbackValue(MonthQueryOptions(
-        from: DateTime.now().subtract(const Duration(days: 60)),
-        to: DateTime.now(),
-      ));
+
     });
 
     setUp(() async {
@@ -53,7 +49,7 @@ void main() {
         )
       );
 
-      when(() => mockStatisticsRepository.queryMonths(profile.id, any()))
+      when(() => mockStatisticsRepository.queryMonths(profile.id, from: any(named: 'from'), to: any(named: 'to')))
         .thenAnswer((_) async => FakeModelFactory().createMonths(4));
 
       await tester.pumpWidget(
@@ -75,10 +71,10 @@ void main() {
       final MonthTabState monthTabState = tester.state(find.byType(MonthTab));
 
       // Verify that a query was made for the first interval
-      verify(() => mockStatisticsRepository.queryMonths(profile.id, MonthQueryOptions(
+      verify(() => mockStatisticsRepository.queryMonths(profile.id, 
         from: monthTabState.intervals[0].from,
         to: monthTabState.intervals[0].to,
-      ))).called(1);
+      )).called(1);
 
     });
 

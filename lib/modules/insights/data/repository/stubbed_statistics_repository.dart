@@ -1,12 +1,8 @@
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
-import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
+import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
-import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
-import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
@@ -43,12 +39,12 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions) async {
+  Future<List<Day>> queryDays(String profileId, {required DateTime from, required DateTime to}) async {
     await Future.delayed(Duration(milliseconds: 500));
-    Duration difference = queryOptions.from.difference(queryOptions.to);
+    Duration difference = from.difference(to);
     List<Day> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {
-      DateTime date = queryOptions.from.add(Duration(days: i));
+      DateTime date = from.add(Duration(days: i));
       Day day = _fakeModelFactory.createDay(
         startDate: date,
       );
@@ -61,14 +57,14 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions) async {
+  Future<List<Week>> queryWeeks(String profileId, {required DateTime from, required DateTime to}) async {
     await Future.delayed(Duration(seconds: 1));
-    Duration diff = queryOptions.to.difference(queryOptions.from);
+    Duration diff = to.difference(from);
     int weeksCount = (diff.inDays / 7).ceil();
 
     List<Week> weeks = [];
     for (var i = 0; i < weeksCount; ++i) {
-      DateTime date = queryOptions.from.add(Duration(days: i * 7));
+      DateTime date = from.add(Duration(days: i * 7));
       Week week = _fakeModelFactory.createWeek(startDate: date);
       week = week.copyWith(
         id: date.toWeekId(),
@@ -82,14 +78,14 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   @override
   Future<List<Month>> queryMonths(
     String profileId,
-    MonthQueryOptions queryOptions
+    {required DateTime from, required DateTime to}
   ) async {
     await Future.delayed(Duration(seconds: 1));
-    int monthsCount = DateUtils.monthDelta(queryOptions.from, queryOptions.to);
+    int monthsCount = DateUtils.monthDelta(from, to);
     List<Month> months = [];
     for (var i = 0; i < monthsCount; ++i) {
-      DateTime date = queryOptions.from.copyWith(
-        month: queryOptions.from.month + i,
+      DateTime date = from.copyWith(
+        month: from.month + i,
       );
       Month month = _fakeModelFactory.createMonth(startDate: date);
       month = month.copyWith(
@@ -102,13 +98,13 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions) async {
+  Future<List<Year>> queryYears(String profileId, {required DateTime from, required DateTime to}) async {
     await Future.delayed(Duration(seconds: 1));
-    int yearsCount = queryOptions.to.year - queryOptions.from.year;
+    int yearsCount = to.year - from.year;
     List<Year> years = [];
     for (var i = 0; i <= yearsCount - 1; ++i) {
-      DateTime date = queryOptions.from.copyWith(
-        year: queryOptions.from.year + i,
+      DateTime date = from.copyWith(
+        year: from.year + i,
       );
       Year year = _fakeModelFactory.createYear(startDate: date);
       year = year.copyWith(
@@ -120,7 +116,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(String profileId, Session session, int consecutiveDaysCount) async {
+  Future<void> logSessionStatistics(String profileId, InsightsSessionEntity session, int consecutiveDaysCount) async {
     return Future.value();
   }
 }

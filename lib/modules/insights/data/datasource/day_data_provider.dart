@@ -1,5 +1,4 @@
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
-import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/core/data/datasource/data_provider.dart';
 
 abstract interface class DayDataProvider implements DataProvider<Day> {
@@ -11,7 +10,7 @@ abstract interface class DayDataProvider implements DataProvider<Day> {
     bool merge, 
     List<Object>? mergeFields,
   });
-  Future<List<Day>> query(DayQueryOptions queryOptions);
-  Stream<List<Day>> queryStream(DayQueryOptions queryOptions);
+  Future<List<Day>> query({required DateTime from, required DateTime to});
+  Stream<List<Day>> queryStream({required DateTime from, required DateTime to});
 
 }

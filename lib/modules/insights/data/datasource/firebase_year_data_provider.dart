@@ -4,7 +4,6 @@ import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/insights/data/datasource/year_data_provider.dart';
 import 'package:dhyana/core/data/converter/date_time_converter.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
-import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
 
 class FirebaseYearDataProvider
     extends FirebaseDataProvider<Year>
@@ -23,22 +22,22 @@ class FirebaseYearDataProvider
     )
   );
 
-  Query<Year> _buildQuery(YearQueryOptions queryOptions) {
+  Query<Year> _buildQuery({required DateTime from, required DateTime to}) {
     final FieldPath fieldPath = FieldPath(const ['startDate']);
     Query<Year> query = collectionRef
-      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(queryOptions.from))
-      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(queryOptions.to))
+      .where(fieldPath, isGreaterThanOrEqualTo: const DateTimeConverter().toJson(from))
+      .where(fieldPath, isLessThan: const DateTimeConverter().toJson(to))
       .orderBy(fieldPath);
     return query;
   }
 
   @override
-  Future<List<Year>> query(YearQueryOptions queryOptions) =>
-      buildListFromQuery(_buildQuery(queryOptions));
+  Future<List<Year>> query({required DateTime from, required DateTime to}) =>
+      buildListFromQuery(_buildQuery(from: from, to: to));
 
   @override
-  Stream<List<Year>> queryStream(YearQueryOptions queryOptions) =>
-      buildStreamFromQuery(_buildQuery(queryOptions));
+  Stream<List<Year>> queryStream({required DateTime from, required DateTime to}) =>
+      buildStreamFromQuery(_buildQuery(from: from, to: to));
 
   @override
   Future<void> set(Year year, {bool merge = false, List<Object>? mergeFields}) async =>

@@ -2,7 +2,6 @@ import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/years_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/tab/year_tab.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,10 +21,7 @@ void main() {
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUpAll(() {
-      registerFallbackValue(YearQueryOptions(
-        from: DateTime.now().subtract(const Duration(days: 365*2)),
-        to: DateTime.now(),
-      ));
+
     });
 
     setUp(() async {
@@ -54,7 +50,7 @@ void main() {
         )
       );
 
-      when(() => mockStatisticsRepository.queryYears(profile.id, any()))
+      when(() => mockStatisticsRepository.queryYears(profile.id, from: any(named: 'from'), to: any(named: 'to')))
         .thenAnswer((_) async => FakeModelFactory().createYears(2));
 
       await tester.pumpWidget(
@@ -76,10 +72,10 @@ void main() {
       final YearTabState yearsTabState = tester.state(find.byType(YearTab));
 
       // Verify that a query was made for the first interval
-      verify(() => mockStatisticsRepository.queryYears(profile.id, YearQueryOptions(
+      verify(() => mockStatisticsRepository.queryYears(profile.id, 
         from: yearsTabState.intervals[0].from,
         to: yearsTabState.intervals[0].to,
-      ))).called(1);
+      )).called(1);
 
     });
 

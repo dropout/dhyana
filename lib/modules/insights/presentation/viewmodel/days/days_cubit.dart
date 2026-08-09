@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
-import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
@@ -29,16 +28,13 @@ class DaysCubit extends Cubit<DaysState> with LoggerMixin {
     try {
       logger.t('Loading days: $from ... $to');
       emit(const DaysState.loading());
-      DayQueryOptions queryOptions = DayQueryOptions(
-        from: from,
-        to: to,
-      );
+
 
       List<Day> days = await statisticsRepository.queryDays(
         profileId,
-        queryOptions,
+        from: from, to: to,
       );
-      days = _fillEmptyDays(days, queryOptions);
+      days = _fillEmptyDays(days, from: from, to: to);
 
       emit(DaysState.loaded(
         from: from,
@@ -57,15 +53,13 @@ class DaysCubit extends Cubit<DaysState> with LoggerMixin {
     }
   }
 
-  List<Day> _fillEmptyDays(List<Day> days, DayQueryOptions queryOptions) {
+  List<Day> _fillEmptyDays(List<Day> days, {required DateTime from, required DateTime to}) {
 
-    Duration diff = queryOptions.to.difference(queryOptions.from);
+    Duration diff = to.difference(from);
     int daysCount = diff.inDays.abs();
 
     logger.t('Querying $daysCount window');
     logger.t('Got ${days.length} from database');
-
-    final DateTime from = queryOptions.from;
 
     List<Day> result = [];
     for (var i = 0; i < daysCount; ++i) {
@@ -80,17 +74,3 @@ class DaysCubit extends Cubit<DaysState> with LoggerMixin {
   }
 
 }
-
-
-  // const factory DaysEvent.queryDays({
-  //   required String profileId,
-  //   required DateTime from,
-  //   required DateTime to,
-  //   @Default(false) bool useStream,
-  // }) = QueryDaysEvent;
-  //
-  // const factory DaysEvent.receiveUpdate({
-  //   required List<Day> days,
-  // }) = ReceiveUpdateDaysEvent;
-  //
-  // const factory DaysEvent.error() = DaysErrorEvent;

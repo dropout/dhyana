@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
@@ -46,7 +46,7 @@ void main() {
   test('returns updated profile and persists it', () async {
     final profile = createProfile();
     final profileSession = createSession();
-    final session = Session(
+    final session = SessionEntity(
       id: profileSession.id,
       type: switch (profileSession.type) {
         .sitting => .sitting,

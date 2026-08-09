@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
-import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
@@ -24,17 +23,13 @@ class YearsCubit extends Cubit<YearsState> with LoggerMixin {
     try {
       emit(const YearsState.loading());
 
-      YearQueryOptions queryOptions = YearQueryOptions(
+      List<Year> years = await statisticsRepository.queryYears(
+        profileId,
         from: from,
         to: to ?? DateTime.now()
       );
 
-      List<Year> years = await statisticsRepository.queryYears(
-        profileId,
-        queryOptions,
-      );
-
-      emit(YearsState.loaded(years: _fillEmptyYears(years, queryOptions)));
+      emit(YearsState.loaded(years: _fillEmptyYears(years, from: from, to: to ?? DateTime.now())));
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -45,13 +40,11 @@ class YearsCubit extends Cubit<YearsState> with LoggerMixin {
     }
   }
 
-  List<Year> _fillEmptyYears(List<Year> years, YearQueryOptions queryOptions) {
-    int yearsCount = queryOptions.to.year - queryOptions.from.year;
+  List<Year> _fillEmptyYears(List<Year> years, {required DateTime from, required DateTime to}) {
+    int yearsCount = to.year - from.year;
 
     logger.t('Querying $yearsCount window');
     logger.t('Got ${years.length} from database');
-
-    final DateTime from = queryOptions.from;
 
     List<Year> result = [];
     for (int i = 0; i < yearsCount; i++) {

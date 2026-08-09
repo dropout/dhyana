@@ -3,9 +3,9 @@ import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_stats_report_entity.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/core/util/faker.dart';
@@ -113,8 +113,8 @@ class FakeModelFactory {
     return List.generate(count, (_) => createYear());
   }
 
-  Session createSession() {
-    return Session(
+  SessionEntity createSession() {
+    return SessionEntity(
       id: faker.guid.guid(),
       type: SessionType.sitting,
       startTime: DateTime.now(),
@@ -123,7 +123,7 @@ class FakeModelFactory {
     );
   }
 
-  List<Session> createSessions(int count) {
+  List<SessionEntity> createSessions(int count) {
     return List.generate(count, (_) => createSession());
   }
 

@@ -19,5 +19,5 @@ Future<void> initializeDependencies() async {
   registerTimerModuleDependencies();
   registerChantingModuleDependencies();
   configureSessionModuleDependencies();
-  configureInsightsModuleDependencies();
+  registerInsightsModuleDependencies();
 }

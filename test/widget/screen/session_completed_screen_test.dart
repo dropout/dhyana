@@ -1,4 +1,5 @@
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/di/repositories.dart';
@@ -63,7 +64,7 @@ void main() {
     testWidgets('can display session completed view when signed out', (
       WidgetTester tester,
     ) async {
-      Session session = FakeModelFactory().createSession();
+      SessionEntity session = FakeModelFactory().createSession();
 
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
@@ -78,7 +79,7 @@ void main() {
                     Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
-                  child: SessionCompletedScreen(session: session),
+                  child: SessionCompletedScreen(session: session.toApi()),
                 ),
               ),
             );
@@ -114,7 +115,7 @@ void main() {
                     Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
-                  child: SessionCompletedScreen(session: session),
+                  child: SessionCompletedScreen(session: session.toApi()),
                 ),
               ),
             );
@@ -148,7 +149,7 @@ void main() {
                     Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
-                  child: SessionCompletedScreen(session: session),
+                  child: SessionCompletedScreen(session: session.toApi()),
                 ),
               ),
             );
@@ -166,7 +167,7 @@ void main() {
       WidgetTester tester,
     ) async {
       bool didPop = false;
-      Session session = FakeModelFactory().createSession();
+      SessionEntity session = FakeModelFactory().createSession();
 
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
@@ -189,7 +190,7 @@ void main() {
                     Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
-                  child: SessionCompletedScreen(session: session),
+                  child: SessionCompletedScreen(session: session.toApi()),
                 ),
               );
             },

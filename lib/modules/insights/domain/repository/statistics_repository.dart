@@ -1,12 +1,9 @@
 import 'package:dhyana/modules/insights/domain/entity/day.dart';
-import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
+import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
-import 'package:dhyana/modules/insights/domain/entity/month_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/week_query_options.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
-import 'package:dhyana/modules/insights/domain/entity/year_query_options.dart';
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+
 
 abstract class StatisticsRepository {
 
@@ -15,11 +12,11 @@ abstract class StatisticsRepository {
   Future<Week> getWeek(String profileId, DateTime dateTime);
   Future<Day> getDay(String profileId, DateTime dateTime);
 
-  Future<List<Year>> queryYears(String profileId, YearQueryOptions queryOptions);
-  Future<List<Month>> queryMonths(String profileId, MonthQueryOptions queryOptions);
-  Future<List<Week>> queryWeeks(String profileId, WeekQueryOptions queryOptions);
-  Future<List<Day>> queryDays(String profileId, DayQueryOptions queryOptions);
+  Future<List<Year>> queryYears(String profileId, {required DateTime from, required DateTime to});
+  Future<List<Month>> queryMonths(String profileId, {required DateTime from, required DateTime to});
+  Future<List<Week>> queryWeeks(String profileId, {required DateTime from, required DateTime to});
+  Future<List<Day>> queryDays(String profileId, {required DateTime from, required DateTime to});
 
-  Future<void> logSessionStatistics(String profileId, Session session, int consecutiveDaysCount);
+  Future<void> logSessionStatistics(String profileId, InsightsSessionEntity session, int consecutiveDaysCount);
 
 }

@@ -14,6 +14,7 @@ import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_
 import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/public/model/chanting_settings.dart';
+import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -214,7 +215,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
 
     // Navigate to the session completed screen with the completed session data  
     logger.t('Navigating to session completed screen');
-    final targetRoute = SessionCompletedRoute($extra: result.session);
+    final targetRoute = SessionCompletedRoute($extra: result.session.toApi());
     router.replace(targetRoute.location, extra: result.session);
   }
 

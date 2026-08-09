@@ -1,14 +1,14 @@
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 
 abstract interface class SessionRepository {
 
-  Future<void> create(String profileId, Session model);
-  Future<Session> read(String profileId, String id);
-  Stream<Session> readStream(String profileId, String id);
-  Future<void> update(String profileId, Session model);
+  Future<void> create(String profileId, SessionEntity model);
+  Future<SessionEntity> read(String profileId, String id);
+  Stream<SessionEntity> readStream(String profileId, String id);
+  Future<void> update(String profileId, SessionEntity model);
   Future<void> delete(String profileId, String sessionId);
 
-  Future<List<Session>> query(String profileId, {int limit = 20});
-  Stream<List<Session>> queryStream(String profileId, {int limit = 20});
+  Future<List<SessionEntity>> query(String profileId, {int limit = 20});
+  Stream<List<SessionEntity>> queryStream(String profileId, {int limit = 20});
 
 }

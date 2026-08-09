@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 
 import 'package:dhyana/modules/profile/public/model/profile_session.dart';
@@ -13,9 +13,9 @@ class UpdateProfileWithSessionUseCase {
     required this.profilePublicApi,
   });
 
-  Future<UpdateProfileStatsResult> execute(
+  Future<UpdateProfileStatsResultEntity> execute(
     String profileId,
-    Session session,
+    SessionEntity session,
   ) async {
     final result = await profilePublicApi.updateProfileStatsWithSession(
       profileId,
@@ -30,7 +30,7 @@ class UpdateProfileWithSessionUseCase {
         },
       ),
     );
-    return UpdateProfileStatsResult(
+    return UpdateProfileStatsResultEntity(
       oldProfile: result.originalProfile,
       updatedProfile: result.updatedProfile,
       session: session,
