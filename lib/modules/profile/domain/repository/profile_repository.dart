@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/repository/crud/crud_repository.dart';
+import 'package:dhyana/core/data/repository/crud_repository.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 
 abstract interface class ProfileRepository

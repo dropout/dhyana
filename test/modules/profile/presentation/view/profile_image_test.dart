@@ -1,5 +1,5 @@
 import 'package:dhyana/core/di/services.dart';
-import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/util/fake_model_factory.dart';
 
 import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/core/presentation/view/util/app_cached_network_image.dart';

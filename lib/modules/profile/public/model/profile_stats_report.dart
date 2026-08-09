@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.dart';
+import 'package:dhyana/core/data/converter/date_time_or_null_converter.dart';
 import 'package:dhyana/modules/profile/public/model/consecutive_days.dart';
 import 'package:dhyana/modules/profile/public/model/milestone_progress.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

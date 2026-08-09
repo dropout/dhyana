@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
+import 'package:dhyana/core/data/converter/date_time_converter.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/domain/entity/profile/profile_model.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';

@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/entity/converter/date_time_converter.dart';
-import 'package:dhyana/core/domain/entity/converter/duration_converter.dart';
+import 'package:dhyana/core/data/converter/date_time_converter.dart';
+import 'package:dhyana/core/data/converter/duration_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_session_entity.freezed.dart';

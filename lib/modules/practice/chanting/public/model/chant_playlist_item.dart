@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chant_playlist_item.freezed.dart';
+part 'chant_playlist_item.g.dart';
 
 @freezed
 sealed class ChantPlaylistItem with _$ChantPlaylistItem {
@@ -25,5 +26,8 @@ sealed class ChantPlaylistItem with _$ChantPlaylistItem {
     /// The length of the chant.
     required Duration duration,
   }) = _ChantPlaylistItem;
+
+  factory ChantPlaylistItem.fromJson(Map<String, dynamic> json) =>
+      _$ChantPlaylistItemFromJson(json);
 
 }

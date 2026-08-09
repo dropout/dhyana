@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/domain/usecase/update_profile_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/practice/session/data/datasource/session_data_provider.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 
 class FirebaseSessionDataProvider
     extends FirebaseDataProvider<Session>

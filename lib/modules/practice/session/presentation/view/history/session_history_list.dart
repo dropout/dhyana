@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';

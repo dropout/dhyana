@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/modules/practice/session/data/datasource/firebase_session_data_provider.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
 
 /// A default implementation of the [SessionRepository] that uses 

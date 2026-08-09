@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
-import 'package:dhyana/core/domain/repository/crud/crud_repository_operations.dart';
+import 'package:dhyana/core/data/repository/crud_repository.dart';
 
 class FirebaseChantRepository
     extends CrudRepositoryOps<Chant>
@@ -14,10 +14,10 @@ class FirebaseChantRepository
   }) : super(chantDataProvider);
 
   @override
-  Future<List<Chant>> queryAll() => chantDataProvider.queryAll();
+  Future<List<Chant>> queryAll({bool preferCache = false}) => 
+    chantDataProvider.queryAll(preferCache: preferCache);
 
   @override
   Stream<List<Chant>> queryAllStream() => chantDataProvider.queryAllStream();
 
 }
-

@@ -3,16 +3,17 @@ import 'package:dhyana/modules/practice/chanting/public/api/chanting_public_api.
 import 'package:dhyana/modules/practice/chanting/public/model/chant.dart';
 
 
-class DefaultChantingPublicApiService implements ChantingPublicApi {
+class DefaultChantingPublicApi implements ChantingPublicApi {
 
   final ChantRepository chantRepository;
 
-  DefaultChantingPublicApiService({
+  DefaultChantingPublicApi({
     required this.chantRepository,
   });
 
   @override
-  Future<List<Chant>> loadChants() => chantRepository.queryAll();
+  Future<List<Chant>> loadChants({bool preferCache = false}) => 
+    chantRepository.queryAll(preferCache: preferCache);
 
   @override
   Stream<List<Chant>> get chantsStream => chantRepository.queryAllStream();

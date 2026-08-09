@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
 

@@ -8,7 +8,7 @@
 // import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
 // import 'package:dhyana/modules/insights/domain/model/month.dart';
 // import 'package:dhyana/modules/profile/profile_module.dart';
-// import 'package:dhyana/core/domain/entity/session.dart';
+// import 'package:dhyana/modules/practice/session/public/model/session.dart';
 // import 'package:dhyana/modules/insights/domain/model/year.dart';
 // import 'package:flutter_test/flutter_test.dart';
 // import 'package:mocktail/mocktail.dart';

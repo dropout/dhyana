@@ -43,7 +43,7 @@ void _configureUseCases() {
 void _configureViewModels() {
   GetIt.I.registerFactory<SessionCompletedCubit>(() {
     return SessionCompletedCubit(      
-      saveSessionToProfileUseCase: GetIt.I.get<UpdateProfileWithSessionUseCase>(),
+      updateProfileWithSession: GetIt.I.get<UpdateProfileWithSessionUseCase>(),
       logSessionUseCase: GetIt.I.get<LogSessionInsightsUseCase>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     );

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 
 import 'package:dhyana/modules/insights/presentation/view/stats/consecutive_days_view.dart';

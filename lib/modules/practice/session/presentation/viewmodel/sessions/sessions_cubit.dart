@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 
 part 'sessions_state.dart';
 part 'sessions_cubit.freezed.dart';

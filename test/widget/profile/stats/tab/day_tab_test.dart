@@ -1,7 +1,7 @@
 import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_query_options.dart';
-import 'package:dhyana/core/domain/entity/fake/fake_model_factory.dart';
+import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/days_bar_chart_page.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/tab/day_tab.dart';

@@ -4,7 +4,7 @@ import 'package:dhyana/core/presentation/view/home/home_screen_appbar.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
-import 'package:dhyana/core/presentation/view/chanting_settings/chanting_settings_view.dart';
+import 'package:dhyana/modules/practice/chanting/public/view/chanting_settings/chanting_settings_view.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_bottom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/timer_settings_view.dart';

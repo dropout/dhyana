@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:dhyana/core/domain/repository/storage_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/core/domain/repository/storage_repository.dart';
 
 
 class DefaultStorageRepository implements StorageRepository {

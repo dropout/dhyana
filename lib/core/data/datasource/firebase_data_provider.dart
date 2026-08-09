@@ -80,8 +80,17 @@ class FirebaseDataProvider<M extends Dto> implements DataProvider<M> {
   }
 
   /// Builds a list of models from a Firestore query.
-  Future<List<M>> buildListFromQuery(Query<M> query) async {
-    final QuerySnapshot<M> querySnapshot = await query.get();
+  Future<List<M>> buildListFromQuery(Query<M> query, {bool preferCache = false}) async {
+    if (preferCache) {
+      try {
+        final QuerySnapshot<M> querySnapshot = await query.get(GetOptions(source: Source.cache));
+        return querySnapshot.docs.map((snapshot) => snapshot.data()).toList();
+      } catch (e) {
+        // If the query fails in cache, fall back to server
+      }
+    }
+
+    final QuerySnapshot<M> querySnapshot = await query.get(GetOptions(source: Source.server));
     return querySnapshot.docs.map((snapshot) => snapshot.data()).toList();
   }
 

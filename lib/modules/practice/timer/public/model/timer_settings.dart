@@ -1,5 +1,5 @@
-import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.dart';
-import 'package:dhyana/core/domain/entity/converter/duration_converter.dart';
+import 'package:dhyana/core/data/converter/date_time_or_null_converter.dart';
+import 'package:dhyana/core/data/converter/duration_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';

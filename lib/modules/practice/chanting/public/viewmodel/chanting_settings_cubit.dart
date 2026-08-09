@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dhyana/core/domain/enum/shared_preferences_key.dart';
 import 'package:dhyana/core/service/shared_preferences_service.dart';
-import 'package:dhyana/modules/practice/chanting/public/model/chant_playlist_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -70,7 +69,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final List<String> playlistChantIds = await _loadPlaylistChantIds();
 
       // Fetch all available chants from the repository
-      final List<Chant> freshChantList = await chantingApi.loadChants();
+      final List<Chant> freshChantList = await chantingApi.loadChants(preferCache: true);
 
       // Create the playlist based on the loaded chant IDs and available chants
       final List<ChantPlaylistItem> playlist = <ChantPlaylistItem>[];

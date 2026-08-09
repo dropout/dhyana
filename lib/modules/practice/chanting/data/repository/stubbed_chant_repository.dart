@@ -53,7 +53,7 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Future<List<Chant>> queryAll() async {
+  Future<List<Chant>> queryAll({bool preferCache = false}) async {
     await Future.delayed(Duration(milliseconds: 500));
     return Future.value(List.from(_chants));
   }

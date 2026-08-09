@@ -17,8 +17,8 @@ class FirebaseChantsDataProvider
   );
 
   @override
-  Future<List<Chant>> queryAll() {
-    return buildListFromQuery(_buildQuery());
+  Future<List<Chant>> queryAll({bool preferCache = false}) {
+    return buildListFromQuery(_buildQuery(), preferCache: preferCache);
   }
 
   @override
@@ -27,7 +27,7 @@ class FirebaseChantsDataProvider
   }
 
   Query<Chant> _buildQuery() {
-    return collectionRef.orderBy('name');
+    return collectionRef.orderBy('order');
   }
 
 }

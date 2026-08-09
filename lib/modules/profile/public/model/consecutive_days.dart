@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:dhyana/core/domain/entity/converter/date_time_or_null_converter.dart';
+import 'package:dhyana/core/data/converter/date_time_or_null_converter.dart';
 
 part 'consecutive_days.freezed.dart';
 

@@ -1,4 +1,16 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
+import 'package:dhyana/core/domain/entity/entity.dart';
+
+/// Base interface for CRUD operations on entities of type M.
+abstract interface class CrudRepository<M extends Dto> {
+
+  Future<void> create(M model);
+  Future<M> read(String id, {bool preferCache});
+  Stream<M> readStream(String id);
+  Future<void> update(M model);
+  Future<void> delete(String id);
+
+}
 
 /// A generic CRUD repository operations class that delegates to a DataProvider.
 /// This class provides basic Create, Read, Update, and Delete operations

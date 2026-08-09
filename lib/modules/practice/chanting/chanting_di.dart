@@ -13,6 +13,7 @@ import 'package:dhyana/modules/practice/chanting/data/datasource/drift_chant_cac
 import 'package:dhyana/modules/practice/chanting/data/datasource/firebase_chant_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/repository/default_chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/data/repository/firebase_chant_repository.dart';
+import 'package:dhyana/modules/practice/chanting/data/service/default_chanting_public_api.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager.dart';
@@ -34,6 +35,7 @@ void registerChantingModuleDependencies() {
   _registerServices();
   _registerUseCases();
   _registerViewModels();
+  _registerPublicApi();
 }
 
 void _registerDataProviders() {
@@ -46,10 +48,9 @@ void _registerDataProviders() {
 }
 
 void _registerRepositories() {
-
   GetIt.I.registerLazySingleton<ChantRepository>(
     () => FirebaseChantRepository(
-      chantDataProvider: GetIt.I.get<ChantDataProvider>()
+      chantDataProvider: GetIt.I.get<ChantDataProvider>(),
     ),
   );
 
@@ -66,9 +67,7 @@ void _registerServices() {
     () => ChantingAudioService(GetIt.I.get<AppAudioHandler>()),
   );
 
-  GetIt.I.registerLazySingleton<LyricsService>(  
-    () => LyricsService(),
-  );
+  GetIt.I.registerLazySingleton<LyricsService>(() => LyricsService());
 
   GetIt.I.registerLazySingleton<ChantCacheValidator>(
     () => ChantCacheValidator(
@@ -76,11 +75,13 @@ void _registerServices() {
     ),
   );
 
-  GetIt.I.registerLazySingleton<ChantCacheManager>(() => ChantCacheManager(
-    chantRepository: GetIt.I.get<ChantRepository>(),
-    chantCacheRepository: GetIt.I.get<ChantCacheDataRepository>(),
-    cacheValidator: GetIt.I.get<ChantCacheValidator>(),
-  ));
+  GetIt.I.registerLazySingleton<ChantCacheManager>(
+    () => ChantCacheManager(
+      chantRepository: GetIt.I.get<ChantRepository>(),
+      chantCacheRepository: GetIt.I.get<ChantCacheDataRepository>(),
+      cacheValidator: GetIt.I.get<ChantCacheValidator>(),
+    ),
+  );
 }
 
 void _registerUseCases() {
@@ -92,9 +93,7 @@ void _registerUseCases() {
     ),
   );
   GetIt.I.registerFactory<LoadLyricsUseCase>(
-    () => LoadLyricsUseCase(
-      lyricsService: GetIt.I.get<LyricsService>(),
-    ),
+    () => LoadLyricsUseCase(lyricsService: GetIt.I.get<LyricsService>()),
   );
   GetIt.I.registerFactory<PlaybackStateChangeUseCase>(
     () => PlaybackStateChangeUseCase(),
@@ -104,7 +103,6 @@ void _registerUseCases() {
       idGeneratorService: GetIt.I.get<IdGeneratorService>(),
     ),
   );
-
 }
 
 void _registerViewModels() {
@@ -112,7 +110,7 @@ void _registerViewModels() {
     () => ChantingSettingsCubit(
       chantingApi: GetIt.I.get<ChantingPublicApi>(),
       sharedPreferencesService: GetIt.I.get<SharedPreferencesService>(),
-      crashlyticsService: GetIt.I.get<CrashlyticsService>(), 
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     ),
   );
   GetIt.I.registerFactoryParam<ChantingCubit, ChantingSettings, void>(
@@ -120,12 +118,18 @@ void _registerViewModels() {
       chantingSettings: chantingSettings,
       audioService: GetIt.I.get<ChantingAudioService>(),
       router: GetIt.I.get<GoRouter>(),
-      crashlyticsService: GetIt.I.get<CrashlyticsService>(),       
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
       startChantingUseCase: GetIt.I.get<StartChantingUseCase>(),
       loadLyricsUseCase: GetIt.I.get<LoadLyricsUseCase>(),
       playbackStateChangeUseCase: GetIt.I.get<PlaybackStateChangeUseCase>(),
       completeChantingUseCase: GetIt.I.get<CompleteChantingUseCase>(),
-
+    ),
+  );
+}
+void _registerPublicApi() {
+  GetIt.I.registerLazySingleton<ChantingPublicApi>(
+    () => DefaultChantingPublicApi(
+      chantRepository: GetIt.I.get<ChantRepository>(),
     ),
   );
 }

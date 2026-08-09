@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/entity/session.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 

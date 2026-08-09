@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/repository/crud/crud_repository_operations.dart';
+import 'package:dhyana/core/data/repository/crud_repository.dart';
 import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/domain/repository/profile_repository.dart';
