@@ -41,10 +41,10 @@ sealed class StatsBucket with _$StatsBucket {
   }) = YearStatsBucket;
 
   StatsEntityGranularity get granularity => map(
-    day: (_) => StatsEntityGranularity.day,
-    week: (_) => StatsEntityGranularity.week,
-    month: (_) => StatsEntityGranularity.month,
-    year: (_) => StatsEntityGranularity.year,
+    day: (_) => StatsEntityGranularity.days,
+    week: (_) => StatsEntityGranularity.weeks,
+    month: (_) => StatsEntityGranularity.months,
+    year: (_) => StatsEntityGranularity.years,
   );
 
 }

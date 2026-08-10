@@ -54,7 +54,7 @@ class YearTabState extends State<YearTab> {
                       profileId: widget.profileId,
                       from: intervals[index].from,
                       to: intervals[index].to,
-                      granularity: .year,
+                      granularity: .years,
                     );
                   },
                   child: YearsBarChartPage(

@@ -56,7 +56,7 @@ class DaysTabState extends State<DaysTab> {
                       profileId: widget.profileId,
                       from: intervals[index].from,
                       to: intervals[index].to,
-                      granularity: .day,
+                      granularity: .days,
                     );
                   },
                   child: DaysBarChartPage(

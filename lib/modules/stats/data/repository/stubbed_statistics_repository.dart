@@ -18,7 +18,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsEntityGranularity.day:
+      case StatsEntityGranularity.days:
         final day = await getDay(profileId, dateTime);
         return StatsBucketEntity.day(
           id: day.id,
@@ -26,7 +26,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
           minutesCount: day.minutesCount,
           sessionCount: day.sessionCount,
         );
-      case StatsEntityGranularity.week:
+      case StatsEntityGranularity.weeks:
         final week = await getWeek(profileId, dateTime);
         return StatsBucketEntity.week(
           id: week.id,
@@ -34,7 +34,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
           minutesCount: week.minutesCount,
           sessionCount: week.sessionCount,
         );
-      case StatsEntityGranularity.month:
+      case StatsEntityGranularity.months:
         final month = await getMonth(profileId, dateTime);
         return StatsBucketEntity.month(
           id: month.id,
@@ -42,7 +42,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
           minutesCount: month.minutesCount,
           sessionCount: month.sessionCount,
         );
-      case StatsEntityGranularity.year:
+      case StatsEntityGranularity.years:
         final year = await getYear(profileId, dateTime);
         return StatsBucketEntity.year(
           id: year.id,
@@ -71,7 +71,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsEntityGranularity.day:
+      case StatsEntityGranularity.days:
         final days = await queryDays(profileId, from: from, to: to);
         return days
             .map((day) => StatsBucketEntity.day(
@@ -81,7 +81,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
                   sessionCount: day.sessionCount,
                 ))
             .toList();
-      case StatsEntityGranularity.week:
+      case StatsEntityGranularity.weeks:
         final weeks = await queryWeeks(profileId, from: from, to: to);
         return weeks
             .map((week) => StatsBucketEntity.week(
@@ -91,7 +91,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
                   sessionCount: week.sessionCount,
                 ))
             .toList();
-      case StatsEntityGranularity.month:
+      case StatsEntityGranularity.months:
         final months = await queryMonths(profileId, from: from, to: to);
         return months
             .map((month) => StatsBucketEntity.month(
@@ -101,7 +101,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
                   sessionCount: month.sessionCount,
                 ))
             .toList();
-      case StatsEntityGranularity.year:
+      case StatsEntityGranularity.years:
         final years = await queryYears(profileId, from: from, to: to);
         return years
             .map((year) => StatsBucketEntity.year(

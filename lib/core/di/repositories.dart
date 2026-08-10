@@ -1,14 +1,12 @@
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
-import 'package:get_it/get_it.dart';
 
 /// Container class for all repositories used in the application.
 /// Injected as a dependency with Provider, and accessible via BuildContext
 /// extension convenience methods.
 class Repositories {
   // final AuthRepository authRepository;
-  late final StatisticsRepository statisticsRepository;
+  // late final StatisticsRepository statisticsRepository;
   Repositories() {
-    statisticsRepository = GetIt.I.get<StatisticsRepository>();
+    // statisticsRepository = GetIt.I.get<StatisticsRepository>();
   }
 }
 

@@ -61,7 +61,7 @@ class WeekTabState extends State<WeekTab> {
                         profileId: widget.profileId,
                         from: intervals[index].from,
                         to: intervals[index].to,
-                        granularity: .week,
+                        granularity: .weeks,
                       );
                     },
                     child: WeeksBarChartPage(

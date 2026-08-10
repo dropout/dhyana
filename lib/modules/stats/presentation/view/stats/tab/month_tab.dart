@@ -61,7 +61,7 @@ class MonthTabState extends State<MonthTab> {
                         profileId: widget.profileId,
                         from: intervals[index].from,
                         to: intervals[index].to,
-                        granularity: .month,
+                        granularity: .months,
                       );
                     },
                     child: MonthsBarChartPage(

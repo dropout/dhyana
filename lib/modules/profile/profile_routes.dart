@@ -110,5 +110,3 @@ final List<RouteBase> $profileRoutes = [
   $profileDeleteRoute,
   $profileSettingsRoute,
 ];
-
-

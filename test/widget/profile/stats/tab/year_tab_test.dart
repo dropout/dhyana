@@ -34,9 +34,6 @@ void main() {
       mockRepositories = MockRepositories();
       mockStatisticsRepository = MockStatisticsRepository();
 
-      when(() => mockRepositories.statisticsRepository)
-        .thenReturn(mockStatisticsRepository);
-
     });
 
     testWidgets('can be created with its default values', (WidgetTester tester) async {

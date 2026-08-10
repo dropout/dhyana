@@ -26,7 +26,6 @@ void main() {
     late MockServices mockServices;
     late MockRepositories mockRepositories;
 
-    late MockStatisticsRepository mockStatisticsRepository;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockHapticsService mockHapticsService;
 
@@ -38,7 +37,6 @@ void main() {
       mockRepositories = MockRepositories();
 
       mockCrashlyticsService = MockCrashlyticsService();
-      mockStatisticsRepository = MockStatisticsRepository();
       mockHapticsService = MockHapticsService();
 
       when(
@@ -56,9 +54,6 @@ void main() {
       ).thenReturn(mockCrashlyticsService);
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
-      when(
-        () => mockRepositories.statisticsRepository,
-      ).thenReturn(mockStatisticsRepository);
     });
 
     testWidgets('can display session completed view when signed out', (

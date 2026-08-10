@@ -86,7 +86,7 @@ class Initializer with LoggerMixin {
 
     logger.t('Configuring dependency injection');
     GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);
-    initializeDependencies();
+    await initializeDependencies();
 
     // Build repositories
     logger.t('Create repositories');    

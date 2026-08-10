@@ -14,10 +14,10 @@ class FirebaseStatsDataProviderFactory {
     String profileId,
     StatsEntityGranularity granularity,
   ) => switch (granularity) {
-    .day => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
-    .week => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
-    .month => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
-    .year => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
+    .days => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
+    .weeks => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
+    .months => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
+    .years => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
   };
 
   DayDetailsDataProvider createDayDetailsDataProvider(String profileId) =>

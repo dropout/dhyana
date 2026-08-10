@@ -35,8 +35,7 @@ void main() {
       mockStatisticsRepository = MockStatisticsRepository();
 
 
-      when(() => mockRepositories.statisticsRepository)
-        .thenReturn(mockStatisticsRepository);
+
 
     });
 

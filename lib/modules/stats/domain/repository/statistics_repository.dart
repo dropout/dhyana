@@ -10,7 +10,7 @@ abstract class StatisticsRepository {
     required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsEntityGranularity.day:
+      case StatsEntityGranularity.days:
         final day = await getDay(profileId, dateTime);
         return StatsBucketEntity.day(
           id: day.id,
@@ -18,7 +18,7 @@ abstract class StatisticsRepository {
           minutesCount: day.minutesCount,
           sessionCount: day.sessionCount,
         );
-      case StatsEntityGranularity.week:
+      case StatsEntityGranularity.weeks:
         final week = await getWeek(profileId, dateTime);
         return StatsBucketEntity.week(
           id: week.id,
@@ -26,7 +26,7 @@ abstract class StatisticsRepository {
           minutesCount: week.minutesCount,
           sessionCount: week.sessionCount,
         );
-      case StatsEntityGranularity.month:
+      case StatsEntityGranularity.months:
         final month = await getMonth(profileId, dateTime);
         return StatsBucketEntity.month(
           id: month.id,
@@ -34,7 +34,7 @@ abstract class StatisticsRepository {
           minutesCount: month.minutesCount,
           sessionCount: month.sessionCount,
         );
-      case StatsEntityGranularity.year:
+      case StatsEntityGranularity.years:
         final year = await getYear(profileId, dateTime);
         return StatsBucketEntity.year(
           id: year.id,
@@ -52,7 +52,7 @@ abstract class StatisticsRepository {
     required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsEntityGranularity.day:
+      case StatsEntityGranularity.days:
         final days = await queryDays(profileId, from: from, to: to);
         return days
             .map(
@@ -64,7 +64,7 @@ abstract class StatisticsRepository {
               ),
             )
             .toList();
-      case StatsEntityGranularity.week:
+      case StatsEntityGranularity.weeks:
         final weeks = await queryWeeks(profileId, from: from, to: to);
         return weeks
             .map(
@@ -76,7 +76,7 @@ abstract class StatisticsRepository {
               ),
             )
             .toList();
-      case StatsEntityGranularity.month:
+      case StatsEntityGranularity.months:
         final months = await queryMonths(profileId, from: from, to: to);
         return months
             .map(
@@ -88,7 +88,7 @@ abstract class StatisticsRepository {
               ),
             )
             .toList();
-      case StatsEntityGranularity.year:
+      case StatsEntityGranularity.years:
         final years = await queryYears(profileId, from: from, to: to);
         return years
             .map(

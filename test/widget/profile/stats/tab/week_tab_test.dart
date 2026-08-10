@@ -1,4 +1,3 @@
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
@@ -16,7 +15,6 @@ void main() {
   group('WeekTab', () {
 
     late MockServices mockServices;
-    late MockRepositories mockRepositories;
     late MockStatisticsRepository mockStatisticsRepository;
     late MockCrashlyticsService mockCrashlyticsService;  
 
@@ -31,12 +29,7 @@ void main() {
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
 
-      mockRepositories = MockRepositories();
       mockStatisticsRepository = MockStatisticsRepository();
-
-
-      when(() => mockRepositories.statisticsRepository)
-        .thenReturn(mockStatisticsRepository);
 
     });
 
@@ -59,7 +52,7 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (context) => mockServices),
-              Provider<Repositories>(create: (context) => mockRepositories),
+              // Provider<Repositories>(create: (context) => mockRepositories),
             ],
             child: WeekTab(
               profileId: profile.id,

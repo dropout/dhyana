@@ -1,6 +1,6 @@
 enum StatsGranularity {
-  day,
-  week,
-  month,
-  year,
+  days,
+  weeks,
+  months,
+  years,
 }

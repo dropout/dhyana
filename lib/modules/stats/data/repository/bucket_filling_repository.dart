@@ -36,7 +36,7 @@ class BucketFillingRepository implements StatisticsRepository {
     required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsEntityGranularity.day:
+      case StatsEntityGranularity.days:
         return (await queryDays(profileId, from: from, to: to))
             .map(
               (day) => StatsBucketEntity.day(
@@ -47,7 +47,7 @@ class BucketFillingRepository implements StatisticsRepository {
               ),
             )
             .toList();
-      case StatsEntityGranularity.week:
+      case StatsEntityGranularity.weeks:
         return (await queryWeeks(profileId, from: from, to: to))
             .map(
               (week) => StatsBucketEntity.week(
@@ -58,7 +58,7 @@ class BucketFillingRepository implements StatisticsRepository {
               ),
             )
             .toList();
-      case StatsEntityGranularity.month:
+      case StatsEntityGranularity.months:
         return (await queryMonths(profileId, from: from, to: to))
             .map(
               (month) => StatsBucketEntity.month(
@@ -69,7 +69,7 @@ class BucketFillingRepository implements StatisticsRepository {
               ),
             )
             .toList();
-      case StatsEntityGranularity.year:
+      case StatsEntityGranularity.years:
         return (await queryYears(profileId, from: from, to: to))
             .map(
               (year) => StatsBucketEntity.year(

@@ -29,7 +29,6 @@ void main() {
     late MockProfileCubit mockProfileBloc;
     late MockServices mockServices;
     late MockRepositories mockRepositories;
-    late MockStatisticsRepository mockStatisticsRepository;
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUp(() async {
@@ -46,10 +45,6 @@ void main() {
 
       // Repositories
       mockRepositories = MockRepositories();
-      mockStatisticsRepository = MockStatisticsRepository();
-
-      when(() => mockRepositories.statisticsRepository)
-        .thenReturn(mockStatisticsRepository);
 
     });
 

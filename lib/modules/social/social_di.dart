@@ -36,11 +36,7 @@ void _registerRepositories() {
 }
 
 void _registerServices() {
-  GetIt.I.registerLazySingleton<SocialPublicApi>(
-    () => DefaultSocialPublicApi(
-      presenceRepository: GetIt.I.get<PresenceRepository>(),
-    ),
-  );
+
 }
 
 void _registerUseCases() {

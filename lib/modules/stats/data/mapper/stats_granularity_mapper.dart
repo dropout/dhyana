@@ -3,18 +3,18 @@ import 'package:dhyana/modules/stats/public/enum/stats_granularity.dart';
 
 extension StatsGranularityMapper on StatsEntityGranularity {
   StatsGranularity toApi() => switch (this) {
-    .day => .day,
-    .week => .week,
-    .month => .month,
-    .year => .year,
+    .days => .days,
+    .weeks => .weeks,
+    .months => .months,
+    .years => .years,
   };
 }
 
 extension StatsBucketEntityMapper on StatsGranularity {
   StatsEntityGranularity toEntity() => switch (this) {
-    .day => .day,
-    .week => .week,
-    .month => .month,
-    .year => .year,  
+    .days => .days,
+    .weeks => .weeks,
+    .months => .months,
+    .years => .years,  
   };
 }

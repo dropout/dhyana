@@ -15,10 +15,11 @@ Future<void> initializeDependencies() async {
   await registerCoreDependencies();
   registerAuthModuleDependencies();
   registerProfileModuleDependencies();
+  registerSocialModuleDependencies();
   registerSessionModuleDependencies();
   registerStatsModuleDependencies();  
   registerTimerModuleDependencies();
   registerChantingModuleDependencies();  
-  registerSocialModuleDependencies();
+  
   
 }
