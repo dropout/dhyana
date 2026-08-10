@@ -1,46 +1,44 @@
 import 'package:dhyana/core/data/converter/date_time_converter.dart';
-import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'stats_bucket_entity.freezed.dart';
-part 'stats_bucket_entity.g.dart';
+part 'stats_bucket.freezed.dart';
 
 @Freezed(
   unionKey: 'granularity',
   unionValueCase: FreezedUnionCase.none,
 )
-sealed class StatsBucketEntity with _$StatsBucketEntity implements Dto {
+sealed class StatsBucket with _$StatsBucket {
 
-  const StatsBucketEntity._();
+  const StatsBucket._();
 
-  const factory StatsBucketEntity.day({
+  const factory StatsBucket.day({
     required String id,
     @DateTimeConverter() required DateTime startDate,
     @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-  }) = DayStatsBucketEntity;
+  }) = DayStatsBucket;
 
-  const factory StatsBucketEntity.week({
+  const factory StatsBucket.week({
     required String id,
     @DateTimeConverter() required DateTime startDate,
     @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-  }) = WeekStatsBucketEntity;
+  }) = WeekStatsBucket;
 
-  const factory StatsBucketEntity.month({
+  const factory StatsBucket.month({
     required String id,
     @DateTimeConverter() required DateTime startDate,
     @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-  }) = MonthStatsBucketEntity;
+  }) = MonthStatsBucket;
 
-  const factory StatsBucketEntity.year({
+  const factory StatsBucket.year({
     required String id,
     @DateTimeConverter() required DateTime startDate,
     @Default(0) int minutesCount,
     @Default(0) int sessionCount,
-  }) = YearStatsBucketEntity;
+  }) = YearStatsBucket;
 
   StatsGranularity get granularity => map(
     day: (_) => StatsGranularity.day,
@@ -48,8 +46,5 @@ sealed class StatsBucketEntity with _$StatsBucketEntity implements Dto {
     month: (_) => StatsGranularity.month,
     year: (_) => StatsGranularity.year,
   );
-
-  factory StatsBucketEntity.fromJson(Map<String, Object?> json) =>
-    _$StatsBucketEntityFromJson(json);
 
 }

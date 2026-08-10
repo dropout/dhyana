@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/modules/insights/data/service/default_insights_service.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
-import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_stats_data_provider_factory.dart';
 import 'package:dhyana/modules/insights/data/repository/firebase_statistics_repository.dart';
 
 void registerInsightsModuleDependencies() {
@@ -23,8 +23,8 @@ void _registerRepositories() {
   GetIt.I.registerLazySingleton<StatisticsRepository>(() {
     final firebaseProvider = GetIt.I.get<FirebaseProvider>();
     return FirebaseStatisticsRepository(
-      dataProviderFactory: FirebaseInsightsDataProviderFactory(
-        fireStore: firebaseProvider.firestore,
+        dataProviderFactory: FirebaseStatsDataProviderFactory(
+          fireStore: firebaseProvider.firestore,
       ),
     );
   });

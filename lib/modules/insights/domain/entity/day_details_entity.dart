@@ -12,6 +12,7 @@ sealed class DayDetailsEntity with _$DayDetailsEntity implements Dto {
 
   const factory DayDetailsEntity({
     required String id,
+    required DateTime startDate,    
     @Default([]) List<InsightsSessionEntity> sessions,
     @Default(0) int consecutiveDaysCount,
   }) = _DayDetailsEntity;

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
 import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
@@ -29,11 +30,23 @@ class WeeksCubit extends Cubit<WeeksState> with LoggerMixin {
     try {
       logger.t('Loading weeks: $from ... $to');
       emit(const WeeksState.loading());
-      List<Week> weeks = await statisticsRepository.queryWeeks(
+      final buckets = await statisticsRepository.queryBuckets(
         profileId,
         from: from,
         to: to,
+        granularity: StatsGranularity.week,
       );
+
+      final weeks = buckets
+          .map(
+            (bucket) => Week(
+              id: bucket.id,
+              startDate: bucket.startDate,
+              minutesCount: bucket.minutesCount,
+              sessionCount: bucket.sessionCount,
+            ),
+          )
+          .toList();
 
       emit(WeeksState.loaded(
         from: from,

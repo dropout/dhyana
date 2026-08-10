@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
 import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
@@ -23,11 +24,23 @@ class YearsCubit extends Cubit<YearsState> with LoggerMixin {
     try {
       emit(const YearsState.loading());
 
-      List<Year> years = await statisticsRepository.queryYears(
+      final buckets = await statisticsRepository.queryBuckets(
         profileId,
         from: from,
-        to: to ?? DateTime.now()
+        to: to ?? DateTime.now(),
+        granularity: StatsGranularity.year,
       );
+
+      final years = buckets
+          .map(
+            (bucket) => Year(
+              id: bucket.id,
+              startDate: bucket.startDate,
+              minutesCount: bucket.minutesCount,
+              sessionCount: bucket.sessionCount,
+            ),
+          )
+          .toList();
 
       emit(YearsState.loaded(years: _fillEmptyYears(years, from: from, to: to ?? DateTime.now())));
     } catch (e, stack) {

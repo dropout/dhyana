@@ -1,13 +1,12 @@
 import 'package:dhyana/core/domain/enum/session_type.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/day.dart';
-import 'package:dhyana/modules/insights/domain/entity/month.dart';
+import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
+import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_stats_report_entity.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/core/util/faker.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
@@ -56,24 +55,43 @@ class FakeModelFactory {
     return List.generate(count, (_) => createProfile());
   }
 
-  Day createDay({DateTime? startDate}) {
+  DayStatsBucketEntity createDay({DateTime? startDate}) {
     startDate ??= DateTime.now();
-    return Day(
+    return DayStatsBucketEntity(
       id: startDate.toDayId(),
       startDate: startDate,
-      sessions: [],
       minutesCount: faker.randomGenerator.integer(100),
       sessionCount: faker.randomGenerator.integer(10),
     );
   }
 
-  List<Day> createDays(int count) {
+  List<DayStatsBucketEntity> createDays(int count) {
     return List.generate(count, (_) => createDay());
   }
 
-  Week createWeek({DateTime? startDate}) {
+  DayDetailsEntity createDayDetails({DateTime? startDate}) {
     startDate ??= DateTime.now();
-    return Week(
+    return DayDetailsEntity(
+      id: startDate.toDayId(),
+      startDate: startDate,
+      sessions: createSessions(faker.randomGenerator.integer(5)).map((s) => InsightsSessionEntity(
+        id: s.id,
+        type: s.type,
+        startTime: s.startTime,
+        endTime: s.endTime,
+        duration: s.duration,
+      )).toList(),
+      consecutiveDaysCount: faker.randomGenerator.integer(30),
+    );
+  }
+
+  List<DayDetailsEntity> createDayDetailsList(int count) {
+    return List.generate(count, (_) => createDayDetails());
+  }
+
+  WeekStatsBucketEntity createWeek({DateTime? startDate}) {
+    startDate ??= DateTime.now();
+    return WeekStatsBucketEntity(
       id: startDate.toWeekId(),
       startDate: startDate,
       minutesCount: 80 + faker.randomGenerator.integer(100 * 7 - 80),
@@ -81,13 +99,13 @@ class FakeModelFactory {
     );
   }
 
-  List<Week> createWeeks(int count) {
+  List<WeekStatsBucketEntity> createWeeks(int count) {
     return List.generate(count, (_) => createWeek());
   }
 
-  Month createMonth({DateTime? startDate}) {
+  MonthStatsBucketEntity createMonth({DateTime? startDate}) {
     startDate ??= DateTime.now();
-    return Month(
+    return MonthStatsBucketEntity(
       id: faker.guid.guid(),
       startDate: startDate,
       minutesCount: 600 + faker.randomGenerator.integer(1000 * 3 - 600),
@@ -95,13 +113,13 @@ class FakeModelFactory {
     );
   }
 
-  List<Month> createMonths(int count) {
+  List<MonthStatsBucketEntity> createMonths(int count) {
     return List.generate(count, (_) => createMonth());
   }
 
-  Year createYear({DateTime? startDate}) {
+  YearStatsBucketEntity createYear({DateTime? startDate}) {
     startDate ??= DateTime.now();
-    return Year(
+    return YearStatsBucketEntity(
       id: faker.guid.guid(),
       startDate: startDate,
       minutesCount: randomMinutesCount(365),
@@ -109,7 +127,7 @@ class FakeModelFactory {
     );
   }
 
-  List<Year> createYears(int count) {
+  List<YearStatsBucketEntity> createYears(int count) {
     return List.generate(count, (_) => createYear());
   }
 

@@ -14,7 +14,7 @@ extension InsightsSessionMapper on InsightsSession {
 }
 
 extension InsightsSessionEntityMapper on InsightsSessionEntity {
-  InsightsSession toDto() {
+  InsightsSession toApi() {
     return InsightsSession(
       id: id,
       type: type,

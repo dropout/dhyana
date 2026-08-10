@@ -1,8 +1,7 @@
-import 'package:dhyana/modules/insights/domain/entity/day.dart';
+import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/month.dart';
-import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/year.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
@@ -13,7 +12,110 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   final FakeModelFactory _fakeModelFactory = FakeModelFactory();
 
   @override
-  Future<Day> getDay(String profileId, DateTime dateTime) async {
+  Future<StatsBucketEntity> getBucket(
+    String profileId,
+    DateTime dateTime, {
+    required StatsGranularity granularity,
+  }) async {
+    switch (granularity) {
+      case StatsGranularity.day:
+        final day = await getDay(profileId, dateTime);
+        return StatsBucketEntity.day(
+          id: day.id,
+          startDate: day.startDate,
+          minutesCount: day.minutesCount,
+          sessionCount: day.sessionCount,
+        );
+      case StatsGranularity.week:
+        final week = await getWeek(profileId, dateTime);
+        return StatsBucketEntity.week(
+          id: week.id,
+          startDate: week.startDate,
+          minutesCount: week.minutesCount,
+          sessionCount: week.sessionCount,
+        );
+      case StatsGranularity.month:
+        final month = await getMonth(profileId, dateTime);
+        return StatsBucketEntity.month(
+          id: month.id,
+          startDate: month.startDate,
+          minutesCount: month.minutesCount,
+          sessionCount: month.sessionCount,
+        );
+      case StatsGranularity.year:
+        final year = await getYear(profileId, dateTime);
+        return StatsBucketEntity.year(
+          id: year.id,
+          startDate: year.startDate,
+          minutesCount: year.minutesCount,
+          sessionCount: year.sessionCount,
+        );
+    }
+  }
+
+  // @override
+  // Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime) async {
+  //   final day = await getDay(profileId, dateTime);
+  //   return DayDetailsEntity(
+  //     id: day.id,
+  //     sessions: day.sessions,
+  //     consecutiveDaysCount: day.consecutiveDaysCount,
+  //   );
+  // }
+
+  @override
+  Future<List<StatsBucketEntity>> queryBuckets(
+    String profileId, {
+    required DateTime from,
+    required DateTime to,
+    required StatsGranularity granularity,
+  }) async {
+    switch (granularity) {
+      case StatsGranularity.day:
+        final days = await queryDays(profileId, from: from, to: to);
+        return days
+            .map((day) => StatsBucketEntity.day(
+                  id: day.id,
+                  startDate: day.startDate,
+                  minutesCount: day.minutesCount,
+                  sessionCount: day.sessionCount,
+                ))
+            .toList();
+      case StatsGranularity.week:
+        final weeks = await queryWeeks(profileId, from: from, to: to);
+        return weeks
+            .map((week) => StatsBucketEntity.week(
+                  id: week.id,
+                  startDate: week.startDate,
+                  minutesCount: week.minutesCount,
+                  sessionCount: week.sessionCount,
+                ))
+            .toList();
+      case StatsGranularity.month:
+        final months = await queryMonths(profileId, from: from, to: to);
+        return months
+            .map((month) => StatsBucketEntity.month(
+                  id: month.id,
+                  startDate: month.startDate,
+                  minutesCount: month.minutesCount,
+                  sessionCount: month.sessionCount,
+                ))
+            .toList();
+      case StatsGranularity.year:
+        final years = await queryYears(profileId, from: from, to: to);
+        return years
+            .map((year) => StatsBucketEntity.year(
+                  id: year.id,
+                  startDate: year.startDate,
+                  minutesCount: year.minutesCount,
+                  sessionCount: year.sessionCount,
+                ))
+            .toList();
+    }
+  }
+
+  @override
+  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createDay(
       startDate: dateTime,
@@ -21,31 +123,39 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<Week> getWeek(String profileId, DateTime dateTime) async {
+  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime) async {
+    await Future.delayed(Duration(seconds: 1));
+    return Future.value(_fakeModelFactory.createDayDetails(
+      startDate: dateTime,
+    ));
+  }
+
+  @override
+  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createWeek());
   }
 
   @override
-  Future<Month> getMonth(String profileId, DateTime dateTime) async {
+  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createMonth());
   }
 
   @override
-  Future<Year> getYear(String profileId, DateTime dateTime) async {
+  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.value(_fakeModelFactory.createYear());
   }
 
   @override
-  Future<List<Day>> queryDays(String profileId, {required DateTime from, required DateTime to}) async {
+  Future<List<DayStatsBucketEntity>> queryDays(String profileId, {required DateTime from, required DateTime to}) async {
     await Future.delayed(Duration(milliseconds: 500));
     Duration difference = from.difference(to);
-    List<Day> days = [];
+    List<DayStatsBucketEntity> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {
       DateTime date = from.add(Duration(days: i));
-      Day day = _fakeModelFactory.createDay(
+      DayStatsBucketEntity day = _fakeModelFactory.createDay(
         startDate: date,
       );
       day = day.copyWith(
@@ -57,15 +167,15 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Week>> queryWeeks(String profileId, {required DateTime from, required DateTime to}) async {
+  Future<List<WeekStatsBucketEntity>> queryWeeks(String profileId, {required DateTime from, required DateTime to}) async {
     await Future.delayed(Duration(seconds: 1));
     Duration diff = to.difference(from);
     int weeksCount = (diff.inDays / 7).ceil();
 
-    List<Week> weeks = [];
+    List<WeekStatsBucketEntity> weeks = [];
     for (var i = 0; i < weeksCount; ++i) {
       DateTime date = from.add(Duration(days: i * 7));
-      Week week = _fakeModelFactory.createWeek(startDate: date);
+      WeekStatsBucketEntity week = _fakeModelFactory.createWeek(startDate: date);
       week = week.copyWith(
         id: date.toWeekId(),
       );
@@ -76,18 +186,18 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Month>> queryMonths(
+  Future<List<MonthStatsBucketEntity>> queryMonths(
     String profileId,
     {required DateTime from, required DateTime to}
   ) async {
     await Future.delayed(Duration(seconds: 1));
     int monthsCount = DateUtils.monthDelta(from, to);
-    List<Month> months = [];
+    List<MonthStatsBucketEntity> months = [];
     for (var i = 0; i < monthsCount; ++i) {
       DateTime date = from.copyWith(
         month: from.month + i,
       );
-      Month month = _fakeModelFactory.createMonth(startDate: date);
+      MonthStatsBucketEntity month = _fakeModelFactory.createMonth(startDate: date);
       month = month.copyWith(
         id: date.toMonthId(),
       );
@@ -98,15 +208,15 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<List<Year>> queryYears(String profileId, {required DateTime from, required DateTime to}) async {
+  Future<List<YearStatsBucketEntity>> queryYears(String profileId, {required DateTime from, required DateTime to}) async {
     await Future.delayed(Duration(seconds: 1));
     int yearsCount = to.year - from.year;
-    List<Year> years = [];
+    List<YearStatsBucketEntity> years = [];
     for (var i = 0; i <= yearsCount - 1; ++i) {
       DateTime date = from.copyWith(
         year: from.year + i,
       );
-      Year year = _fakeModelFactory.createYear(startDate: date);
+      YearStatsBucketEntity year = _fakeModelFactory.createYear(startDate: date);
       year = year.copyWith(
         id: date.toYearId(),
       );
@@ -118,5 +228,24 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   @override
   Future<void> logSessionStatistics(String profileId, InsightsSessionEntity session, int consecutiveDaysCount) async {
     return Future.value();
+  }
+
+  @override
+  Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(String profileId, DateTime dateTime) async {
+    final day = await getDay(profileId, dateTime);
+    final details = _fakeModelFactory.createDayDetails(startDate: dateTime);
+    return Future.value((bucket: day, details: details));
+  }
+
+  @override
+  Future<List<({DayStatsBucketEntity bucket, DayDetailsEntity details})>> queryDaysWithDetails(String profileId, {required DateTime from, required DateTime to}) {
+    final days = queryDays(profileId, from: from, to: to);
+    final details = Future.value(_fakeModelFactory.createDayDetailsList(to.difference(from).inDays.abs()));
+    return Future.wait([days, details]).then((results) {
+      final days = results[0] as List<DayStatsBucketEntity>;
+      final details = results[1] as List<DayDetailsEntity>;
+      return List.generate(days.length, (index) => (bucket: days[index], details: details[index]));
+    });
+
   }
 }

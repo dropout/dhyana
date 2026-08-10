@@ -1,65 +1,182 @@
-import 'package:dhyana/modules/insights/data/datasource/firebase_insights_data_provider_factory.dart';
-import 'package:dhyana/modules/insights/domain/entity/day.dart';
+import 'package:dhyana/modules/insights/data/datasource/firebase_stats_data_provider_factory.dart';
+import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/month.dart';
-import 'package:dhyana/modules/insights/domain/entity/week.dart';
-import 'package:dhyana/modules/insights/domain/entity/year.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 
 class FirebaseStatisticsRepository extends StatisticsRepository {
-  final FirebaseInsightsDataProviderFactory dataProviderFactory;
+  final FirebaseStatsDataProviderFactory dataProviderFactory;
 
   FirebaseStatisticsRepository({
     required this.dataProviderFactory,
   });
 
   @override
-  Future<Day> getDay(String profileId, DateTime dateTime) {
-    final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
-    return dataProvider.readStream(dateTime.toDayId()).first;
+  Future<StatsBucketEntity> getBucket(
+    String profileId,
+    DateTime dateTime, {
+    required StatsGranularity granularity,
+  }) {
+    final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      granularity,
+    );
+    return dataProvider.read(_bucketIdFor(dateTime, granularity));
   }
 
   @override
-  Future<Week> getWeek(String profileId, DateTime dateTime) {
-    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
-    return dataProvider.readStream(dateTime.toWeekId()).first;
-  }
-
-  @override
-  Future<Month> getMonth(String profileId, DateTime dateTime) {
-    final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
-    return dataProvider.readStream(dateTime.toMonthId()).first;
-  }
-
-  @override
-  Future<Year> getYear(String profileId, DateTime dateTime) {
-    final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
-    return dataProvider.readStream(dateTime.toYearId()).first;
-  }
-
-  @override
-  Future<List<Day>> queryDays(String profileId, {required DateTime from, required DateTime to}) {
-    final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
+  Future<List<StatsBucketEntity>> queryBuckets(
+    String profileId, {
+    required DateTime from,
+    required DateTime to,
+    required StatsGranularity granularity,
+  }) {
+    final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      granularity,
+    );
     return dataProvider.query(from: from, to: to);
   }
 
   @override
-  Future<List<Week>> queryWeeks(String profileId, {required DateTime from, required DateTime to}) {
-    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
-    return dataProvider.query(from: from, to: to);
+  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime) {
+    final dataProvider = dataProviderFactory.createDayDetailsDataProvider(profileId);
+    return dataProvider.read(dateTime.toDayId());
   }
 
   @override
-  Future<List<Month>> queryMonths(String profileId, {required DateTime from, required DateTime to}) {
-    final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
-    return dataProvider.query(from: from, to: to);
+  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime) async {
+    final bucket = await getBucket(
+      profileId,
+      dateTime,
+      granularity: StatsGranularity.day,
+    );
+
+    return switch (bucket) {
+      DayStatsBucketEntity() => bucket,
+      _ => throw Exception('Expected DayStatsBucketEntity but got ${bucket.runtimeType}'),
+    };
   }
 
   @override
-  Future<List<Year>> queryYears(String profileId, {required DateTime from, required DateTime to}) {
-    final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
-    return dataProvider.query(from: from, to: to);
+  Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(String profileId, DateTime dateTime) async {
+    final dayStatsBucket = await getDay(profileId, dateTime);
+    final dayDetails = await getDayDetails(profileId, dateTime);
+    return (bucket: dayStatsBucket, details: dayDetails);
+  }
+
+  @override
+  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime) async {
+    final bucket = await getBucket(
+      profileId,
+      dateTime,
+      granularity: StatsGranularity.week,
+    );
+    return switch (bucket) {
+      WeekStatsBucketEntity() => bucket,
+      _ => throw Exception('Expected WeekStatsBucketEntity but got ${bucket.runtimeType}'),
+    };
+  }
+
+  @override
+  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime) async {
+    final bucket = await getBucket(
+      profileId,
+      dateTime,
+      granularity: StatsGranularity.month,
+    );
+
+    return switch (bucket) {
+      MonthStatsBucketEntity() => bucket,
+      _ => throw Exception('Expected MonthStatsBucketEntity but got ${bucket.runtimeType}'),
+    };
+  }
+
+  @override
+  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime) async {
+    final bucket = await getBucket(
+      profileId,
+      dateTime,
+      granularity: StatsGranularity.year,
+    );
+    return switch (bucket) {
+      YearStatsBucketEntity() => bucket,
+      _ => throw Exception('Expected YearStatsBucketEntity but got ${bucket.runtimeType}'),
+    };
+  }
+
+  @override
+  Future<List<DayStatsBucketEntity>> queryDays(String profileId, {required DateTime from, required DateTime to}) async {
+    final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.day,
+    );
+    final days = await dataProvider.query(from: from, to: to);
+    return days.map((day) {
+      return switch (day) {
+        DayStatsBucketEntity() => day,
+        _ => throw Exception('Expected DayStatsBucketEntity but got ${day.runtimeType}'),
+      };
+    }).toList();
+  }
+
+  @override
+  Future<List<({DayStatsBucketEntity bucket, DayDetailsEntity details})>> queryDaysWithDetails(String profileId, {required DateTime from, required DateTime to}) async {
+    final days = await queryDays(profileId, from: from, to: to);
+    final dayDetails = await dataProviderFactory.createDayDetailsDataProvider(profileId).query(from: from, to: to);
+
+    final dayDetailsMap = {for (var details in dayDetails) details.id: details};
+    return days.map((day) {
+      final details = dayDetailsMap[day.id];
+      if (details == null) {
+        throw Exception('No details found for day with id ${day.id}');
+      }
+      return (bucket: day, details: details);
+    }).toList();
+  }
+
+  @override
+  Future<List<WeekStatsBucketEntity>> queryWeeks(String profileId, {required DateTime from, required DateTime to}) async {
+    final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.week,
+    );
+    return (await dataProvider.query(from: from, to: to)).map((week) {
+      return switch (week) {
+        WeekStatsBucketEntity() => week,
+        _ => throw Exception('Expected WeekStatsBucketEntity but got ${week.runtimeType}'),
+      };
+    }).toList();
+  }
+
+  @override
+  Future<List<MonthStatsBucketEntity>> queryMonths(String profileId, {required DateTime from, required DateTime to}) async {
+    final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.month,
+    );
+    return (await dataProvider.query(from: from, to: to)).map((month) {
+      return switch (month) {
+        MonthStatsBucketEntity() => month,
+        _ => throw Exception('Expected MonthStatsBucketEntity but got ${month.runtimeType}'),
+      };
+    }).toList();
+  }
+
+  @override
+  Future<List<YearStatsBucketEntity>> queryYears(String profileId, {required DateTime from, required DateTime to}) async   {
+    final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.year,
+    );
+    return (await dataProvider.query(from: from, to: to)).map((year) {
+      return switch (year) {
+        YearStatsBucketEntity() => year,
+        _ => throw Exception('Expected YearStatsBucketEntity but got ${year.runtimeType}'),
+      };
+    }).toList();
   }
 
   @override
@@ -79,53 +196,80 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     String profileId,
     int consecutiveDaysCount,
   ) async {
-    final dataProvider = dataProviderFactory.createDayDataProvider(profileId);
 
     final String todayId = session.startTime.toDayId();
-    late Day updatedToday;
+    late DayStatsBucketEntity updatedToday;
+    late DayDetailsEntity updatedTodayDetails;
+
+    // Update Days Stats Bucket
     try {
       // Day exists
-      Day today = await dataProvider.read(todayId);
+      final today = await getDay(profileId, session.startTime);
+
       updatedToday = today.copyWith(
         sessionCount: today.sessionCount + 1,
         minutesCount: today.minutesCount + session.duration.inMinutes,
-        sessions: today.sessions.toList()..add(session),
+        // sessions: today.sessions.toList()..add(session),
       );
     } catch (_) {
       // Day doesn't exists in database yet
-      updatedToday = Day(
+      updatedToday = DayStatsBucketEntity(
         id: todayId,
         startDate: DateTime(
           session.startTime.year,
           session.startTime.month,
           session.startTime.day,
         ),
-        consecutiveDaysCount: consecutiveDaysCount,
-        sessionCount: 1,
-        sessions: [session],
         minutesCount: session.duration.inMinutes,
+        sessionCount: 1,
       );
     }
 
-    await dataProvider.set(updatedToday, merge: true);
+    // Update Day Details
+    try {
+      // Day details exists
+      final todayDetails = await getDayDetails(profileId, session.startTime);
+      updatedTodayDetails = todayDetails.copyWith(
+        sessions: todayDetails.sessions.toList()..add(session),
+        consecutiveDaysCount: consecutiveDaysCount,
+      );
+    } catch (_) {
+      // Day details doesn't exist in database yet
+      updatedTodayDetails = DayDetailsEntity(
+        id: todayId,
+        startDate: DateTime(
+          session.startTime.year,
+          session.startTime.month,
+          session.startTime.day,
+        ),
+        sessions: [session],
+        consecutiveDaysCount: consecutiveDaysCount,
+      );
+    }
+
+    await dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.day,
+    ).set(updatedToday, merge: true);
+    
+    await dataProviderFactory.createDayDetailsDataProvider(profileId)
+      .set(updatedTodayDetails, merge: true);
   }
 
   Future<void> _logWeekStats(InsightsSessionEntity session, String profileId) async {
-    final dataProvider = dataProviderFactory.createWeekDataProvider(profileId);
-
     final String weekId = session.startTime.toWeekId();
 
-    late Week updatedWeek;
+    late WeekStatsBucketEntity updatedWeek;
     try {
       // Week exists
-      Week thisWeek = await dataProvider.read(weekId);
+      final thisWeek = await getWeek(profileId, session.startTime);
       updatedWeek = thisWeek.copyWith(
         sessionCount: thisWeek.sessionCount + 1,
         minutesCount: thisWeek.minutesCount + session.duration.inMinutes,
       );
     } catch (_) {
       // Week doesn't exist in database yet
-      updatedWeek = Week(
+      updatedWeek = WeekStatsBucketEntity(
         id: weekId,
         startDate: DateTime(
           session.startTime.year,
@@ -136,24 +280,26 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
         minutesCount: session.duration.inMinutes,
       );
     }
-    await dataProvider.set(updatedWeek, merge: true);
+    await dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.week,
+    ).set(updatedWeek, merge: true);
   }
 
   Future<void> _logMonthStats(InsightsSessionEntity session, String profileId) async {
-    final dataProvider = dataProviderFactory.createMonthDataProvider(profileId);
     final String monthId = session.startTime.toMonthId();
 
-    late Month updatedMonth;
+    late MonthStatsBucketEntity updatedMonth;
     try {
       // Month exists
-      Month thisMonth = await dataProvider.read(monthId);
+      final thisMonth = await getMonth(profileId, session.startTime);
       updatedMonth = thisMonth.copyWith(
         sessionCount: thisMonth.sessionCount + 1,
         minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
       );
     } catch (_) {
       // Month doesn't exists in database yet
-      updatedMonth = Month(
+      updatedMonth = MonthStatsBucketEntity(
         id: monthId,
         startDate: DateTime(session.startTime.year, session.startTime.month),
         minutesCount: session.duration.inMinutes,
@@ -161,24 +307,26 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
       );
     }
 
-    await dataProvider.set(updatedMonth, merge: true);
+    await dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.month,
+    ).set(updatedMonth, merge: true);
   }
 
   Future<void> _logYearStats(InsightsSessionEntity session, String profileId) async {
-    final dataProvider = dataProviderFactory.createYearDataProvider(profileId);
     final String yearId = session.startTime.toYearId();
 
-    late Year updatedYear;
+    late YearStatsBucketEntity updatedYear;
     try {
       // Year exists
-      Year thisYear = await dataProvider.read(yearId);
+      final thisYear = await getYear(profileId, session.startTime);
       updatedYear = thisYear.copyWith(
         minutesCount: thisYear.minutesCount + session.duration.inMinutes,
         sessionCount: thisYear.sessionCount + 1,
       );
     } catch (_) {
       // Year doesn't exists in database yet
-      updatedYear = Year(
+      updatedYear = YearStatsBucketEntity(
         id: yearId,
         startDate: DateTime(session.startTime.year),
         sessionCount: 1,
@@ -186,6 +334,22 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
       );
     }
 
-    await dataProvider.set(updatedYear, merge: true);
+    await dataProviderFactory.createStatsBucketDataProvider(
+      profileId,
+      StatsGranularity.year,
+    ).set(updatedYear, merge: true);
+  }
+
+  String _bucketIdFor(DateTime dateTime, StatsGranularity granularity) {
+    switch (granularity) {
+      case StatsGranularity.day:
+        return dateTime.toDayId();
+      case StatsGranularity.week:
+        return dateTime.toWeekId();
+      case StatsGranularity.month:
+        return dateTime.toMonthId();
+      case StatsGranularity.year:
+        return dateTime.toYearId();
+    }
   }
 }

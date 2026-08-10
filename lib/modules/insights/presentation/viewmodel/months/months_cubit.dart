@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/insights/domain/entity/month.dart';
+import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,23 @@ class MonthsCubit extends Cubit<MonthsState> with LoggerMixin {
       logger.t('Loading months: $from ... $to');
       emit(const MonthsState.loading());
 
-      List<Month> months = await statisticsRepository.queryMonths(
+      final buckets = await statisticsRepository.queryBuckets(
         profileId,
         from: from,
         to: to ?? DateTime.now(),
+        granularity: StatsGranularity.month,
       );
+
+      final months = buckets
+          .map(
+            (bucket) => Month(
+              id: bucket.id,
+              startDate: bucket.startDate,
+              minutesCount: bucket.minutesCount,
+              sessionCount: bucket.sessionCount,
+            ),
+          )
+          .toList();
 
       emit(MonthsState.loaded(months: _fillEmptyMonths(months, from: from, to: to ?? DateTime.now())));
       logger.t('Successfully loaded months ${months.length}');
