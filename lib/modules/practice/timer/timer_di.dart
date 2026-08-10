@@ -1,4 +1,6 @@
+import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
+import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,12 +9,9 @@ import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
-import 'package:dhyana/core/data/datasource/timer_auth_data_provider.dart';
-import 'package:dhyana/core/data/datasource/timer_profile_data_provider.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/presence_service.dart';
 
-import 'package:dhyana/modules/practice/timer/data/repository/default_timer_data_repository.dart';
 import 'package:dhyana/modules/practice/timer/data/service/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
@@ -38,13 +37,6 @@ void _registerRepositories() {
     ),
   );
 
-  GetIt.I.registerLazySingleton<DefaultTimerDataRepository>(
-    () => DefaultTimerDataRepository(
-      timerAuthDataProvider: GetIt.I.get<TimerAuthDataProvider>(),
-      timerProfileDataProvider: GetIt.I.get<TimerProfileDataProvider>(),
-    ),
-  );
-
 }
 
 void _registerServices() {
@@ -67,7 +59,8 @@ void _registerUseCases() {
     _,
   ) {
     return StartTimerUseCase(
-      timerDataRepository: GetIt.I.get<DefaultTimerDataRepository>(),
+      authPublicApi: GetIt.I.get<AuthPublicApi>(),
+      profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
       timerAudioService: GetIt.I.get<DefaultTimerAudioService>(),
       eventScheduler: eventScheduler,
       timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),

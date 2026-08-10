@@ -2,7 +2,7 @@ import 'package:dhyana/modules/insights/data/datasource/firebase_stats_data_prov
 import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
+import 'package:dhyana/modules/insights/domain/enum/stats_entity_granularity.dart';
 import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 
@@ -17,7 +17,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   Future<StatsBucketEntity> getBucket(
     String profileId,
     DateTime dateTime, {
-    required StatsGranularity granularity,
+    required StatsEntityGranularity granularity,
   }) {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
@@ -31,7 +31,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     String profileId, {
     required DateTime from,
     required DateTime to,
-    required StatsGranularity granularity,
+    required StatsEntityGranularity granularity,
   }) {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
@@ -51,7 +51,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     final bucket = await getBucket(
       profileId,
       dateTime,
-      granularity: StatsGranularity.day,
+      granularity: StatsEntityGranularity.day,
     );
 
     return switch (bucket) {
@@ -72,7 +72,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     final bucket = await getBucket(
       profileId,
       dateTime,
-      granularity: StatsGranularity.week,
+      granularity: StatsEntityGranularity.week,
     );
     return switch (bucket) {
       WeekStatsBucketEntity() => bucket,
@@ -85,7 +85,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     final bucket = await getBucket(
       profileId,
       dateTime,
-      granularity: StatsGranularity.month,
+      granularity: StatsEntityGranularity.month,
     );
 
     return switch (bucket) {
@@ -99,7 +99,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     final bucket = await getBucket(
       profileId,
       dateTime,
-      granularity: StatsGranularity.year,
+      granularity: StatsEntityGranularity.year,
     );
     return switch (bucket) {
       YearStatsBucketEntity() => bucket,
@@ -111,7 +111,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   Future<List<DayStatsBucketEntity>> queryDays(String profileId, {required DateTime from, required DateTime to}) async {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.day,
+      StatsEntityGranularity.day,
     );
     final days = await dataProvider.query(from: from, to: to);
     return days.map((day) {
@@ -141,7 +141,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   Future<List<WeekStatsBucketEntity>> queryWeeks(String profileId, {required DateTime from, required DateTime to}) async {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.week,
+      StatsEntityGranularity.week,
     );
     return (await dataProvider.query(from: from, to: to)).map((week) {
       return switch (week) {
@@ -155,7 +155,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   Future<List<MonthStatsBucketEntity>> queryMonths(String profileId, {required DateTime from, required DateTime to}) async {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.month,
+      StatsEntityGranularity.month,
     );
     return (await dataProvider.query(from: from, to: to)).map((month) {
       return switch (month) {
@@ -169,7 +169,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   Future<List<YearStatsBucketEntity>> queryYears(String profileId, {required DateTime from, required DateTime to}) async   {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.year,
+      StatsEntityGranularity.year,
     );
     return (await dataProvider.query(from: from, to: to)).map((year) {
       return switch (year) {
@@ -249,7 +249,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
 
     await dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.day,
+      StatsEntityGranularity.day,
     ).set(updatedToday, merge: true);
     
     await dataProviderFactory.createDayDetailsDataProvider(profileId)
@@ -282,7 +282,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     }
     await dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.week,
+      StatsEntityGranularity.week,
     ).set(updatedWeek, merge: true);
   }
 
@@ -309,7 +309,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
 
     await dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.month,
+      StatsEntityGranularity.month,
     ).set(updatedMonth, merge: true);
   }
 
@@ -336,19 +336,19 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
 
     await dataProviderFactory.createStatsBucketDataProvider(
       profileId,
-      StatsGranularity.year,
+      StatsEntityGranularity.year,
     ).set(updatedYear, merge: true);
   }
 
-  String _bucketIdFor(DateTime dateTime, StatsGranularity granularity) {
+  String _bucketIdFor(DateTime dateTime, StatsEntityGranularity granularity) {
     switch (granularity) {
-      case StatsGranularity.day:
+      case StatsEntityGranularity.day:
         return dateTime.toDayId();
-      case StatsGranularity.week:
+      case StatsEntityGranularity.week:
         return dateTime.toWeekId();
-      case StatsGranularity.month:
+      case StatsEntityGranularity.month:
         return dateTime.toMonthId();
-      case StatsGranularity.year:
+      case StatsEntityGranularity.year:
         return dateTime.toYearId();
     }
   }

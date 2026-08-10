@@ -1,12 +1,12 @@
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/home/session_type_toggle.dart';
 import 'package:dhyana/core/presentation/view/home/volume_indicator.dart';import 'package:dhyana/core/presentation/view/util/signed_in.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenBottomMenu extends StatefulWidget {
-	final ValueChanged<SessionType> onSessionTypeChange;
-	final SessionType sessionType;
+	final ValueChanged<HomeScreenViewState> onSessionTypeChange;
+	final HomeScreenViewState sessionType;
 
 	const HomeScreenBottomMenu({
 		required this.onSessionTypeChange,

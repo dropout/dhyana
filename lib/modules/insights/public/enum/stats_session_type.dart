@@ -1,0 +1,4 @@
+enum StatsSessionType {
+  sitting,
+  chanting,
+}

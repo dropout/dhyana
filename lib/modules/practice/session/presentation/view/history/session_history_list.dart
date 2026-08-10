@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
@@ -54,7 +54,7 @@ class SessionHistoryList extends StatelessWidget {
                     top: 0,
                     right: 0,
                     child: Icon(
-                      (s.type == SessionType.sitting) ? 
+                      (s.type == HomeScreenViewState.sitting) ? 
                         Icons.timer_rounded : 
                         Icons.music_note_rounded,
                     )

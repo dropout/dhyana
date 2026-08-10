@@ -17,8 +17,8 @@ class DefaultProfilePublicApi implements ProfilePublicApi {
   });
 
   @override
-  Future<Profile> getProfile(String profileId) => 
-    profileRepository.read(profileId).then((profileEntity) => profileEntity.toApi());
+  Future<Profile> getProfile(String profileId, {bool preferCache = false}) => 
+    profileRepository.read(profileId, preferCache: preferCache).then((profileEntity) => profileEntity.toApi());
 
   @override
   Stream<Profile> getProfileStream(String profileId) =>

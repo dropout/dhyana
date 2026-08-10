@@ -2,7 +2,7 @@ import 'package:dhyana/modules/profile/public/model/profile.dart';
 import 'package:dhyana/modules/profile/public/model/profile_session.dart';
 
 abstract interface class ProfilePublicApi {
-  Future<Profile> getProfile(String profileId);
+  Future<Profile> getProfile(String profileId, {bool preferCache = false});
   Stream<Profile> getProfileStream(String profileId);
   Future<void> updateProfile(Profile updatedProfile);
   Future<({Profile originalProfile, Profile updatedProfile})> updateProfileStatsWithSession(

@@ -1,8 +1,8 @@
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
-import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
+import 'package:dhyana/core/presentation/view/util/smart_bloc_provider.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_appbar.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/modules/practice/chanting/public/view/chanting_settings/chanting_settings_view.dart';
 import 'package:dhyana/core/presentation/view/home/home_screen_bottom_menu.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   /// Optional [TimerSettings] to pre-configure the sitting session branch of
   /// the home screen. If provided, the home screen will start in the
-  /// [SessionType.sitting] branch with the given settings pre-loaded.
+  /// [HomeScreenViewState.sitting] branch with the given settings pre-loaded.
   final TimerSettings? timerSettings;
 
   const HomeScreen({this.timerSettings, super.key});
@@ -28,8 +28,8 @@ class HomeScreen extends StatelessWidget {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
       create: (_) => GetIt.I.get<HomeScreenCubit>(
         param1: timerSettings != null
-            ? SessionType.sitting
-            : SessionType.chanting,
+            ? HomeScreenViewState.sitting
+            : HomeScreenViewState.chanting,
       ),
       builder: (context, state) => buildScaffolding(context, state),
     );
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
   Widget buildBody(BuildContext context, HomeScreenState state) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, authState) {
-        SessionType sessionType = state.sessionType;
+        HomeScreenViewState sessionType = state.sessionType;
         // TODO: Move this logic to usecase or cubit
         if (authState is! AuthStateSignedIn) {
           sessionType = .sitting;
@@ -70,8 +70,8 @@ class HomeScreen extends StatelessWidget {
           switchInCurve: Curves.easeIn,
           switchOutCurve: Curves.easeOut,
           child: switch (sessionType) {
-            SessionType.sitting => buildTimerSettingsView(context, state),
-            SessionType.chanting => buildChantingSettingsView(context),
+            HomeScreenViewState.sitting => buildTimerSettingsView(context, state),
+            HomeScreenViewState.chanting => buildChantingSettingsView(context),
           },
         );
       },

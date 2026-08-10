@@ -1,13 +1,13 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/modules/insights/presentation/viewmodel/days/days_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
-import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +23,7 @@ class DaysBarChartPage extends StatelessWidget {
   final int pageIndex;
   final StatsInterval statsInterval;
 
-  final void Function(List<Day> days)? onDaysLoaded;
+  final void Function(List<DayStatsBucket> days)? onDaysLoaded;
 
   const DaysBarChartPage({
     required this.pageIndex,
@@ -34,28 +34,31 @@ class DaysBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DaysCubit, DaysState>(
+    return BlocConsumer<StatsBucketCubit, StatsBucketState>(
       builder: (context, state) {
         switch (state) {
-          case DaysLoadingState():
+          case StatsBucketLoadingState():
             return buildLoadingState(context, state);
-          case DaysLoadingErrorState():
+          case StatsBucketLoadingErrorState():
             return BarChartPageError();
-          case DaysLoadedState():
+          case StatsBucketLoadedState():
             return buildLoadedState(context, state);
         }
       },
       listener: (context, state) {
-        if (state is DaysLoadedState) {
-          onDaysLoaded?.call(state.days);
+        if (state is StatsBucketLoadedState) {
+          onDaysLoaded?.call(state.buckets.map((bucket) => switch (bucket) {
+            DayStatsBucket dayBucket => dayBucket,
+            _ => throw Exception('Unexpected bucket type: ${bucket.runtimeType}'),
+          }).toList());
         }
       },
       listenWhen: (previous, current) =>
-        current is DaysLoadedState && previous is! DaysLoadedState,
+        current is StatsBucketLoadedState && previous is! StatsBucketLoadedState,
     );
   }
 
-  Widget buildLoadingState(BuildContext context, DaysLoadingState state) {
+  Widget buildLoadingState(BuildContext context, StatsBucketLoadingState state) {
     Duration difference = statsInterval.from.difference(statsInterval.to);
     return buildScaffolding(context,
       chart: StatsBarChart(
@@ -73,12 +76,12 @@ class DaysBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildLoadedState(BuildContext context, DaysLoadedState state) {
+  Widget buildLoadedState(BuildContext context, StatsBucketLoadedState state) {
     return buildScaffolding(
       context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: state.days.map((day) {
+        barData: state.buckets.map((day) {
           return BarData(
             value: day.minutesCount.toDouble(),
             label: DateFormat.E(
@@ -90,7 +93,7 @@ class DaysBarChartPage extends StatelessWidget {
           buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(
-        calculatedStats: CalculatedStats.fromDays(state.days),
+        calculatedStats: CalculatedStats.fromStatsBuckets(state.buckets),
       ),
     );
   }
@@ -118,14 +121,14 @@ class DaysBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfo(BuildContext context, int index, DaysState state) {
+  Widget buildBarInfo(BuildContext context, int index, StatsBucketState state) {
     Widget barInfo;
     switch (state) {
-      case DaysLoadingState():
+      case StatsBucketLoadingState():
         barInfo = buildBarInfoLoading(context, index);
         break;
-      case DaysLoadedState():
-        barInfo = buildBarInfoFromDays(context, index, state.days);
+      case StatsBucketLoadedState():
+        barInfo = buildBarInfoFromDays(context, index, state.buckets);
         break;
       default:
         barInfo = SizedBox.shrink();
@@ -151,8 +154,8 @@ class DaysBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfoIdle(BuildContext context, List<Day> days) {
-    final calculatedStats = CalculatedStats.fromDays(days);
+  Widget buildBarInfoIdle(BuildContext context, List<StatsBucket> days) {
+    final calculatedStats = CalculatedStats.fromStatsBuckets(days);
     return BarChartInfoTriggerBox(
       prefix: Text(createIntervalString(
         context,
@@ -172,7 +175,7 @@ class DaysBarChartPage extends StatelessWidget {
   Widget buildBarInfoFromDays(
     BuildContext context,
     int index,
-    List<Day> days
+    List<StatsBucket> days
   ) {
     if (index < 0) {
       return buildBarInfoIdle(context, days);
@@ -220,12 +223,12 @@ class DaysBarChartPage extends StatelessWidget {
                         color: AppColors.backgroundPaperLight,
                       ),
                       child: Icon(
-                        Icons.link_rounded,
+                        Icons.self_improvement_rounded,
                         size: 18,
                       ),
                     ),
                     Gap.xs(),
-                    Text(day.consecutiveDaysCount.toString()),
+                    Text(day.sessionCount.toString()),
                   ],
                 )
               ],

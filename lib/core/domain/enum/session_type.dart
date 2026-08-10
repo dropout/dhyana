@@ -1,4 +1,0 @@
-enum SessionType {
-  sitting,
-  chanting,
-}

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
+import 'package:dhyana/core/presentation/view/util/smart_bloc_provider.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';

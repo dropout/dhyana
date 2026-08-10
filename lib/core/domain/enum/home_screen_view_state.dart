@@ -1,0 +1,4 @@
+enum HomeScreenViewState {
+  sitting,
+  chanting,
+}

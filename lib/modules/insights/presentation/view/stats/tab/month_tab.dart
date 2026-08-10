@@ -1,11 +1,11 @@
-import 'package:dhyana/modules/insights/presentation/viewmodel/months/months_cubit.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
-import 'package:dhyana/modules/insights/domain/entity/month.dart';
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/months_bar_chart_page.dart';
-import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class MonthTab extends StatefulWidget {
 
@@ -26,7 +26,7 @@ class MonthTabState extends State<MonthTab> {
   late final List<StatsInterval> intervals;
 
   // Calculated stats
-  List<Month> months = [];
+  List<MonthStatsBucket> months = [];
   CalculatedStats? calculatedStats;
 
   @override
@@ -51,28 +51,26 @@ class MonthTabState extends State<MonthTab> {
                 itemCount: 4,
                 onPageChanged: (index) {
                   setState(() {
-                    calculatedStats = CalculatedStats.fromMonths(months);
+                    calculatedStats = CalculatedStats.fromStatsBuckets(months);
                   });
                 },
                 itemBuilder: (context, index) {
-                  return BlocProvider<MonthsCubit>(
+                  return BlocProvider<StatsBucketCubit>(
                     create: (BuildContext context) {
-                      return MonthsCubit(
-                          statisticsRepository: context.repos.statisticsRepository,
-                          crashlyticsService: context.services.crashlyticsService
-                      )..queryMonths(
+                      return GetIt.I.get<StatsBucketCubit>()..query(
                         profileId: widget.profileId,
                         from: intervals[index].from,
                         to: intervals[index].to,
+                        granularity: .month,
                       );
                     },
                     child: MonthsBarChartPage(
                       pageIndex: index,
                       statsInterval: intervals[index],
-                      onMonthsLoaded: (List<Month> loadedMonths) {
+                      onMonthsLoaded: (List<MonthStatsBucket> loadedMonths) {
                         setState(() {
                           months = loadedMonths;
-                          calculatedStats ??= CalculatedStats.fromMonths(months);
+                          calculatedStats ??= CalculatedStats.fromStatsBuckets(months);
                         });
                       },
                     ),

@@ -1,27 +1,29 @@
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/modules/insights/presentation/viewmodel/weeks/weeks_cubit.dart';
+
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
-import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/bar_chart_error_page.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bar_chart_info_trigger_box.dart';
 import 'calculated_stats_view.dart';
 import 'stats_bar_chart.dart';
+
 
 class WeeksBarChartPage extends StatelessWidget {
 
   final int pageIndex;
   final StatsInterval statsInterval;
 
-  final void Function(List<Week> weeks)? onWeeksLoaded;
+  final void Function(List<WeekStatsBucket> weeks)? onWeeksLoaded;
 
   const WeeksBarChartPage({
     required this.pageIndex,
@@ -32,28 +34,31 @@ class WeeksBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<WeeksCubit, WeeksState>(
+    return BlocConsumer<StatsBucketCubit, StatsBucketState>(
       builder: (context, state) {
         switch (state) {
-          case WeeksLoadingState():
+          case StatsBucketLoadingState():
             return buildLoadingState(context, state);
-          case WeeksLoadingErrorState():
+          case StatsBucketLoadingErrorState():
             return BarChartPageError();
-          case WeeksLoadedState():
+          case StatsBucketLoadedState():
             return buildLoadedState(context, state);
         }
       },
       listener: (context, state) {
-        if (state is WeeksLoadedState) {
-          onWeeksLoaded?.call(state.weeks);
+        if (state is StatsBucketLoadedState) {
+          onWeeksLoaded?.call(state.buckets.map((b) => switch(b) {
+            WeekStatsBucket week => week,
+            _ => throw Exception('Unexpected bucket type'),
+          }).toList());
         }
       },
       listenWhen: (previous, current) =>
-        current is WeeksLoadedState && previous is! WeeksLoadedState,
+        current is StatsBucketLoadedState && previous is! StatsBucketLoadedState,
     );
   }
 
-  Widget buildLoadingState(BuildContext context, WeeksLoadingState state) {
+  Widget buildLoadingState(BuildContext context, StatsBucketLoadingState state) {
     Duration difference = statsInterval.to.difference(statsInterval.from);
     int weeksCount = (difference.inDays / 7).ceil();
     return buildScaffolding(context,
@@ -72,12 +77,12 @@ class WeeksBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildLoadedState(BuildContext context, WeeksLoadedState state) {
+  Widget buildLoadedState(BuildContext context, StatsBucketLoadedState state) {
     return buildScaffolding(
       context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: state.weeks.map((week) {
+        barData: state.buckets.map((week) {
           return BarData(
             value: week.minutesCount.toDouble(),
             label: getWeekLabel(context, week),
@@ -87,7 +92,7 @@ class WeeksBarChartPage extends StatelessWidget {
           buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(
-        calculatedStats: CalculatedStats.fromWeeks(state.weeks),
+        calculatedStats: CalculatedStats.fromStatsBuckets(state.buckets),
       ),
     );
   }
@@ -115,14 +120,17 @@ class WeeksBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfo(BuildContext context, int index, WeeksState state) {
+  Widget buildBarInfo(BuildContext context, int index, StatsBucketState state) {
     Widget barInfo;
     switch (state) {
-      case WeeksLoadingState():
+      case StatsBucketLoadingState():
         barInfo = buildBarInfoLoading(context, index);
         break;
-      case WeeksLoadedState():
-        barInfo = buildBarInfoFromWeeks(context, index, state.weeks);
+      case StatsBucketLoadedState():
+        barInfo = buildBarInfoFromWeeks(context, index, state.buckets.map((b) => switch(b) {
+          WeekStatsBucket week => week,
+          _ => throw Exception('Unexpected bucket type'),
+        }).toList());
         break;
       default:
         barInfo = SizedBox.shrink();
@@ -148,8 +156,8 @@ class WeeksBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfoIdle(BuildContext context, List<Week> weeks) {
-    final calculatedStats = CalculatedStats.fromWeeks(weeks);
+  Widget buildBarInfoIdle(BuildContext context, List<WeekStatsBucket> weeks) {
+    final calculatedStats = CalculatedStats.fromStatsBuckets(weeks);
     return BarChartInfoTriggerBox(
       prefix: Text(createIntervalString(
         context,
@@ -169,7 +177,7 @@ class WeeksBarChartPage extends StatelessWidget {
   Widget buildBarInfoFromWeeks(
       BuildContext context,
       int index,
-      List<Week> weeks
+      List<WeekStatsBucket> weeks
       ) {
     if (index < 0) {
       return buildBarInfoIdle(context, weeks);
@@ -223,7 +231,7 @@ class WeeksBarChartPage extends StatelessWidget {
   // - the week starts in December
   // - the week considered first week according to ISO standards
   // (considered first week if the week contains the first Thursday of the year)
-  String getWeekLabel(BuildContext context, Week week) {
+  String getWeekLabel(BuildContext context, StatsBucket week) {
     if (week.startDate.weekNumber == 1 && week.startDate.month == 12) {
       return AppLocalizations.of(context).weekNumber(
         week.startDate.year + 1,

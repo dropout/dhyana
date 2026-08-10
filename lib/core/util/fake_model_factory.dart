@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
@@ -134,7 +134,7 @@ class FakeModelFactory {
   SessionEntity createSession() {
     return SessionEntity(
       id: faker.guid.guid(),
-      type: SessionType.sitting,
+      type: HomeScreenViewState.sitting,
       startTime: DateTime.now(),
       endTime: DateTime.now().add(const Duration(hours: 1)),
       duration: Duration(minutes: faker.randomGenerator.integer(60)),

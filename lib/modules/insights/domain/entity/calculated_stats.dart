@@ -1,9 +1,9 @@
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'day.dart';
 import 'week.dart';
 import 'month.dart';
-import 'year.dart';
 
 part 'calculated_stats.freezed.dart';
 part 'calculated_stats.g.dart';
@@ -17,6 +17,26 @@ sealed class CalculatedStats with _$CalculatedStats {
     @Default(0) int totalSessions,
     @Default(0) double averageSessions,
   }) = _CalculatedStats;
+
+  factory CalculatedStats.fromStatsBuckets(List<StatsBucket> buckets) {
+    int totalMinutes = 0;
+    int totalSessions = 0;
+
+    for (var bucket in buckets) {
+      totalMinutes += bucket.minutesCount;
+      totalSessions += bucket.sessionCount;
+    }
+
+    double averageMinutes = buckets.isEmpty ? 0 : totalMinutes / buckets.length;
+    double averageSessions = buckets.isEmpty ? 0 : totalSessions / buckets.length;
+
+    return CalculatedStats(
+      totalMinutes: totalMinutes,
+      averageMinutes: averageMinutes,
+      totalSessions: totalSessions,
+      averageSessions: averageSessions,
+    );
+  }
 
   factory CalculatedStats.fromDays(List<Day> days) {
     return CalculatedStats(
@@ -45,14 +65,14 @@ sealed class CalculatedStats with _$CalculatedStats {
     );
   }
 
-  factory CalculatedStats.fromYears(List<Year> years) {
-    return CalculatedStats(
-      totalMinutes: years.fold(0, (sum, year) => sum + year.minutesCount),
-      averageMinutes: years.isEmpty ? 0 : years.fold(0, (sum, year) => sum + year.minutesCount) / years.length,
-      totalSessions: years.fold(0, (sum, year) => sum + year.sessionCount),
-      averageSessions: years.isEmpty ? 0 : years.fold(0, (sum, year) => sum + year.sessionCount) / years.length,
-    );
-  }
+  // factory CalculatedStats.fromYears(List<Year> years) {
+  //   return CalculatedStats(
+  //     totalMinutes: years.fold(0, (sum, year) => sum + year.minutesCount),
+  //     averageMinutes: years.isEmpty ? 0 : years.fold(0, (sum, year) => sum + year.minutesCount) / years.length,
+  //     totalSessions: years.fold(0, (sum, year) => sum + year.sessionCount),
+  //     averageSessions: years.isEmpty ? 0 : years.fold(0, (sum, year) => sum + year.sessionCount) / years.length,
+  //   );
+  // }
 
   factory CalculatedStats.fromJson(Map<String, Object?> json) =>
       _$CalculatedStatsFromJson(json);

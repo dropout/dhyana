@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -9,7 +9,7 @@ part 'home_screen_cubit.freezed.dart';
 sealed class HomeScreenState with _$HomeScreenState {
   const HomeScreenState._();
   const factory HomeScreenState({
-    @Default(SessionType.sitting) SessionType sessionType,
+    @Default(HomeScreenViewState.sitting) HomeScreenViewState sessionType,
   }) = _HomeScreenState;
 }
 
@@ -29,7 +29,7 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
       if (initialState != null) {
         return initialState;
       } else {
-        final sessionType = SessionType.values.byName(json['sessionType'] as String);
+        final sessionType = HomeScreenViewState.values.byName(json['sessionType'] as String);
         return HomeScreenState(sessionType: sessionType);
       }
     } catch (e, stack) {
@@ -49,7 +49,7 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
     };
   }  
 
-  Future<void> setSessionType(SessionType sessionType) async {
+  Future<void> setSessionType(HomeScreenViewState sessionType) async {
     try {
       final updatedState = state.copyWith(sessionType: sessionType);
       emit(updatedState);
@@ -65,9 +65,9 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
 
   Future<void> toggleSessionType() async {
     try {
-      final newSessionType = state.sessionType == SessionType.sitting
-        ? SessionType.chanting
-        : SessionType.sitting;
+      final newSessionType = state.sessionType == HomeScreenViewState.sitting
+        ? HomeScreenViewState.chanting
+        : HomeScreenViewState.sitting;
       final updatedState = state.copyWith(sessionType: newSessionType);
       emit(updatedState);
     } catch (e, stackTrace) {

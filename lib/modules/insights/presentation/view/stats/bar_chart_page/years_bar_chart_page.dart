@@ -1,13 +1,13 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/modules/insights/presentation/viewmodel/years/years_cubit.dart';
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
-import 'package:dhyana/modules/insights/domain/entity/year.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +23,7 @@ class YearsBarChartPage extends StatelessWidget {
   final int pageIndex;
   final StatsInterval statsInterval;
 
-  final void Function(List<Year> months)? onYearsLoaded;
+  final void Function(List<YearStatsBucket> months)? onYearsLoaded;
 
   const YearsBarChartPage({
     required this.pageIndex,
@@ -34,28 +34,31 @@ class YearsBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<YearsCubit, YearsState>(
+    return BlocConsumer<StatsBucketCubit, StatsBucketState>(
       builder: (context, state) {
         switch (state) {
-          case YearsLoadingState():
+          case StatsBucketLoadingState():
             return buildLoadingState(context, state);
-          case YearsLoadingErrorState():
+          case StatsBucketLoadingErrorState():
             return BarChartPageError();
-          case YearsLoadedState():
+          case StatsBucketLoadedState():
             return buildLoadedState(context, state);
         }
       },
       listener: (context, state) {
-        if (state is YearsLoadedState) {
-          onYearsLoaded?.call(state.years);
+        if (state is StatsBucketLoadedState) {
+          onYearsLoaded?.call(state.buckets.map((bucket) => switch(bucket) {
+            YearStatsBucket() => bucket,
+            _ => throw Exception('Unexpected bucket type: ${bucket.runtimeType}'),
+          }).toList());
         }
       },
       listenWhen: (previous, current) =>
-      current is YearsLoadedState && previous is! YearsLoadedState,
+      current is StatsBucketLoadedState && previous is! StatsBucketLoadedState,
     );
   }
 
-  Widget buildLoadingState(BuildContext context, YearsLoadingState state) {
+  Widget buildLoadingState(BuildContext context, StatsBucketLoadingState state) {
     int yearsCount = statsInterval.to.year - statsInterval.from.year;
     return buildScaffolding(context,
       chart: StatsBarChart(
@@ -73,12 +76,12 @@ class YearsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildLoadedState(BuildContext context, YearsLoadedState state) {
+  Widget buildLoadedState(BuildContext context, StatsBucketLoadedState state) {
     return buildScaffolding(
       context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: state.years.map((year) {
+        barData: state.buckets.map((year) {
           return BarData(
             value: year.minutesCount.toDouble(),
             label: DateFormat.y(
@@ -90,7 +93,7 @@ class YearsBarChartPage extends StatelessWidget {
             buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(
-        calculatedStats: CalculatedStats.fromYears(state.years),
+        calculatedStats: CalculatedStats.fromStatsBuckets(state.buckets),
       ),
     );
   }
@@ -118,14 +121,14 @@ class YearsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfo(BuildContext context, int index, YearsState state) {
+  Widget buildBarInfo(BuildContext context, int index, StatsBucketState state) {
     Widget barInfo;
     switch (state) {
-      case YearsLoadingState():
+      case StatsBucketLoadingState():
         barInfo = buildBarInfoLoading(context, index);
         break;
-      case YearsLoadedState():
-        barInfo = buildBarInfoFromYears(context, index, state.years);
+      case StatsBucketLoadedState():
+        barInfo = buildBarInfoFromYears(context, index, state.buckets);
         break;
       default:
         barInfo = SizedBox.shrink();
@@ -151,8 +154,8 @@ class YearsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfoIdle(BuildContext context, List<Year> years) {
-    final calculatedStats = CalculatedStats.fromYears(years);
+  Widget buildBarInfoIdle(BuildContext context, List<StatsBucket> years) {
+    final calculatedStats = CalculatedStats.fromStatsBuckets(years);
     return BarChartInfoTriggerBox(
       prefix: Text(createIntervalString(
         context,
@@ -172,7 +175,7 @@ class YearsBarChartPage extends StatelessWidget {
   Widget buildBarInfoFromYears(
       BuildContext context,
       int index,
-      List<Year> years
+      List<StatsBucket> years
       ) {
     if (index < 0) {
       return buildBarInfoIdle(context, years);

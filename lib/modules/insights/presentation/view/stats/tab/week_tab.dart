@@ -1,11 +1,11 @@
-import 'package:dhyana/modules/insights/presentation/viewmodel/weeks/weeks_cubit.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
-import 'package:dhyana/modules/insights/domain/entity/week.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/weeks_bar_chart_page.dart';
-import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class WeekTab extends StatefulWidget {
 
@@ -26,7 +26,7 @@ class WeekTabState extends State<WeekTab> {
   late final List<StatsInterval> intervals;
 
   // Calculated stats
-  List<Week> weeks = [];
+  List<WeekStatsBucket> weeks = [];
   CalculatedStats? calculatedStats;
 
   @override
@@ -51,28 +51,26 @@ class WeekTabState extends State<WeekTab> {
                 itemCount: 4,
                 onPageChanged: (index) {
                   setState(() {
-                    calculatedStats = CalculatedStats.fromWeeks(weeks);
+                    calculatedStats = CalculatedStats.fromStatsBuckets(weeks);
                   });
                 },
                 itemBuilder: (context, index) {
-                  return BlocProvider<WeeksCubit>(
+                  return BlocProvider<StatsBucketCubit>(
                     create: (BuildContext context) {
-                      return WeeksCubit(
-                        statisticsRepository: context.repos.statisticsRepository,
-                        crashlyticsService: context.services.crashlyticsService
-                      )..queryWeeks(
-                        widget.profileId,
-                        intervals[index].from,
+                      return GetIt.I.get<StatsBucketCubit>()..query(
+                        profileId: widget.profileId,
+                        from: intervals[index].from,
                         to: intervals[index].to,
+                        granularity: .week,
                       );
                     },
                     child: WeeksBarChartPage(
                       pageIndex: index,
                       statsInterval: intervals[index],
-                      onWeeksLoaded: (List<Week> loadedWeeks) {
+                      onWeeksLoaded: (List<WeekStatsBucket> loadedWeeks) {
                         setState(() {
                           weeks = loadedWeeks;
-                          calculatedStats ??= CalculatedStats.fromWeeks(weeks);
+                          calculatedStats ??= CalculatedStats.fromStatsBuckets(weeks);
                         });
                       },
                     ),

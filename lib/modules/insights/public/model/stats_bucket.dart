@@ -1,5 +1,5 @@
 import 'package:dhyana/core/data/converter/date_time_converter.dart';
-import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
+import 'package:dhyana/modules/insights/domain/enum/stats_entity_granularity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'stats_bucket.freezed.dart';
@@ -40,11 +40,11 @@ sealed class StatsBucket with _$StatsBucket {
     @Default(0) int sessionCount,
   }) = YearStatsBucket;
 
-  StatsGranularity get granularity => map(
-    day: (_) => StatsGranularity.day,
-    week: (_) => StatsGranularity.week,
-    month: (_) => StatsGranularity.month,
-    year: (_) => StatsGranularity.year,
+  StatsEntityGranularity get granularity => map(
+    day: (_) => StatsEntityGranularity.day,
+    week: (_) => StatsEntityGranularity.week,
+    month: (_) => StatsEntityGranularity.month,
+    year: (_) => StatsEntityGranularity.year,
   );
 
 }

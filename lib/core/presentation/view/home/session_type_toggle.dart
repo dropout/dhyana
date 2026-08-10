@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 /// and the chanting settings view. The widget uses callback pattern to notify
 /// parent of mode changes.
 class SessionTypeToggle extends StatefulWidget {
-  final SessionType activeMode;
-  final ValueChanged<SessionType> onModeChanged;
+  final HomeScreenViewState activeMode;
+  final ValueChanged<HomeScreenViewState> onModeChanged;
   final EdgeInsetsGeometry? padding;
 
   const SessionTypeToggle({
@@ -25,12 +25,12 @@ class SessionTypeToggle extends StatefulWidget {
 }
 
 class _SessionTypeToggleState extends State<SessionTypeToggle> {
-  late final StreamController<SessionType> _modeStreamController;
+  late final StreamController<HomeScreenViewState> _modeStreamController;
 
   @override
   void initState() {
     super.initState();
-    _modeStreamController = StreamController<SessionType>();
+    _modeStreamController = StreamController<HomeScreenViewState>();
     _modeStreamController.add(widget.activeMode);
   }
 
@@ -47,9 +47,9 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
     return GestureDetector(
       onTap: () {
         context.hapticsTap();
-        SessionType newMode = (widget.activeMode == SessionType.sitting)
-            ? SessionType.chanting
-            : SessionType.sitting;
+        HomeScreenViewState newMode = (widget.activeMode == HomeScreenViewState.sitting)
+            ? HomeScreenViewState.chanting
+            : HomeScreenViewState.sitting;
         widget.onModeChanged(newMode);
       },
       child: AnimatedSwitcher(
@@ -70,7 +70,7 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
     );
   }
 
-  Widget _builder(BuildContext context, SessionType? item) {
+  Widget _builder(BuildContext context, HomeScreenViewState? item) {
     return DecoratedBox(
       key: ValueKey(item?.name ?? 'unknown'),
       decoration: BoxDecoration(
@@ -80,7 +80,7 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
       child: Padding(
         padding: const EdgeInsets.all(DesignSpec.paddingMd),
         child: Icon(
-          (item == SessionType.sitting) ? Icons.music_note : Icons.timer_outlined,
+          (item == HomeScreenViewState.sitting) ? Icons.music_note : Icons.timer_outlined,
           color: AppColors.buttonForeground,
         ),
       ),

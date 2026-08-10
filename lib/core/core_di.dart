@@ -7,7 +7,7 @@ import 'package:dhyana/core/data/datasource/storage/firebase_storage_data_provid
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/data/repository/default_storage_repository.dart';
 import 'package:dhyana/core/domain/entity/remote_settings.dart';
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/domain/repository/storage_repository.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/home_screen_cubit.dart';
@@ -139,7 +139,7 @@ void _registerViewModels() {
     ),
   );
 
-  GetIt.I.registerFactoryParam<HomeScreenCubit, SessionType, void>(
+  GetIt.I.registerFactoryParam<HomeScreenCubit, HomeScreenViewState, void>(
     (initialSessionType, _) => HomeScreenCubit(
       initialState: HomeScreenState(sessionType: initialSessionType),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),

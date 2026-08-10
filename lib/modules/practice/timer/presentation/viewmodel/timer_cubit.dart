@@ -154,7 +154,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
     // Navigate to the session completed screen with the completed session data  
     logger.t('Navigating to session completed screen');
     final targetRoute = SessionCompletedRoute($extra: result.session.toApi());
-    router.replace(targetRoute.location, extra: result.session);
+    router.replace(targetRoute.location, extra: result.session.toApi());
   }
 
   @override

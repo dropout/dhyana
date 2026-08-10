@@ -1,16 +1,16 @@
 import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
+import 'package:dhyana/modules/insights/domain/enum/stats_entity_granularity.dart';
 
 abstract class StatisticsRepository {
   Future<StatsBucketEntity> getBucket(
     String profileId,
     DateTime dateTime, {
-    required StatsGranularity granularity,
+    required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsGranularity.day:
+      case StatsEntityGranularity.day:
         final day = await getDay(profileId, dateTime);
         return StatsBucketEntity.day(
           id: day.id,
@@ -18,7 +18,7 @@ abstract class StatisticsRepository {
           minutesCount: day.minutesCount,
           sessionCount: day.sessionCount,
         );
-      case StatsGranularity.week:
+      case StatsEntityGranularity.week:
         final week = await getWeek(profileId, dateTime);
         return StatsBucketEntity.week(
           id: week.id,
@@ -26,7 +26,7 @@ abstract class StatisticsRepository {
           minutesCount: week.minutesCount,
           sessionCount: week.sessionCount,
         );
-      case StatsGranularity.month:
+      case StatsEntityGranularity.month:
         final month = await getMonth(profileId, dateTime);
         return StatsBucketEntity.month(
           id: month.id,
@@ -34,7 +34,7 @@ abstract class StatisticsRepository {
           minutesCount: month.minutesCount,
           sessionCount: month.sessionCount,
         );
-      case StatsGranularity.year:
+      case StatsEntityGranularity.year:
         final year = await getYear(profileId, dateTime);
         return StatsBucketEntity.year(
           id: year.id,
@@ -49,10 +49,10 @@ abstract class StatisticsRepository {
     String profileId, {
     required DateTime from,
     required DateTime to,
-    required StatsGranularity granularity,
+    required StatsEntityGranularity granularity,
   }) async {
     switch (granularity) {
-      case StatsGranularity.day:
+      case StatsEntityGranularity.day:
         final days = await queryDays(profileId, from: from, to: to);
         return days
             .map(
@@ -64,7 +64,7 @@ abstract class StatisticsRepository {
               ),
             )
             .toList();
-      case StatsGranularity.week:
+      case StatsEntityGranularity.week:
         final weeks = await queryWeeks(profileId, from: from, to: to);
         return weeks
             .map(
@@ -76,7 +76,7 @@ abstract class StatisticsRepository {
               ),
             )
             .toList();
-      case StatsGranularity.month:
+      case StatsEntityGranularity.month:
         final months = await queryMonths(profileId, from: from, to: to);
         return months
             .map(
@@ -88,7 +88,7 @@ abstract class StatisticsRepository {
               ),
             )
             .toList();
-      case StatsGranularity.year:
+      case StatsEntityGranularity.year:
         final years = await queryYears(profileId, from: from, to: to);
         return years
             .map(

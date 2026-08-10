@@ -1,13 +1,13 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/modules/insights/presentation/viewmodel/months/months_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
-import 'package:dhyana/modules/insights/domain/entity/month.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +23,7 @@ class MonthsBarChartPage extends StatelessWidget {
   final int pageIndex;
   final StatsInterval statsInterval;
 
-  final void Function(List<Month> months)? onMonthsLoaded;
+  final void Function(List<MonthStatsBucket> months)? onMonthsLoaded;
 
   const MonthsBarChartPage({
     required this.pageIndex,
@@ -34,30 +34,31 @@ class MonthsBarChartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MonthsCubit, MonthsState>(
+    return BlocConsumer<StatsBucketCubit, StatsBucketState>(
       builder: (context, state) {
         switch (state) {
-          case MonthsLoadingState():
+          case StatsBucketLoadingState():
             return buildLoadingState(context, state);
-          case MonthsLoadingErrorState():
+          case StatsBucketLoadingErrorState():
             return BarChartPageError();
-          case MonthsLoadedState():
+          case StatsBucketLoadedState():
             return buildLoadedState(context, state);
-          default:
-            return SizedBox.shrink();
         }
       },
       listener: (context, state) {
-        if (state is MonthsLoadedState) {
-          onMonthsLoaded?.call(state.months);
+        if (state is StatsBucketLoadedState) {
+          onMonthsLoaded?.call(state.buckets.map((b) => switch(b) {
+            MonthStatsBucket month => month,
+            _ => throw Exception('Unexpected bucket type'),
+          }).toList());
         }
       },
       listenWhen: (previous, current) =>
-        current is MonthsLoadedState && previous is! MonthsLoadedState,
+        current is StatsBucketLoadedState && previous is! StatsBucketLoadedState,
     );
   }
 
-  Widget buildLoadingState(BuildContext context, MonthsLoadingState state) {
+  Widget buildLoadingState(BuildContext context, StatsBucketLoadingState state) {
     int monthsCount = DateUtils.monthDelta(
       statsInterval.from,
       statsInterval.to
@@ -78,12 +79,12 @@ class MonthsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildLoadedState(BuildContext context, MonthsLoadedState state) {
+  Widget buildLoadedState(BuildContext context, StatsBucketLoadedState state) {
     return buildScaffolding(
       context,
       chart: StatsBarChart(
         key: ValueKey(pageIndex),
-        barData: state.months.map((month) {
+        barData: state.buckets.map((month) {
           return BarData(
             value: month.minutesCount.toDouble(),
             label: DateFormat.yMMM(
@@ -95,7 +96,7 @@ class MonthsBarChartPage extends StatelessWidget {
           buildBarInfo(context, index, state),
       ),
       calculatedStats: CalculatedStatsView(
-        calculatedStats: CalculatedStats.fromMonths(state.months),
+        calculatedStats: CalculatedStats.fromStatsBuckets(state.buckets),
       ),
     );
   }
@@ -123,14 +124,17 @@ class MonthsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfo(BuildContext context, int index, MonthsState state) {
+  Widget buildBarInfo(BuildContext context, int index, StatsBucketState state) {
     Widget barInfo;
     switch (state) {
-      case MonthsLoadingState():
+      case StatsBucketLoadingState():
         barInfo = buildBarInfoLoading(context, index);
         break;
-      case MonthsLoadedState():
-        barInfo = buildBarInfoFromMonths(context, index, state.months);
+      case StatsBucketLoadedState():
+        barInfo = buildBarInfoFromMonths(context, index, state.buckets.map((b) => switch(b) {
+          MonthStatsBucket() => b,
+          _ => null
+        }).whereType<MonthStatsBucket>().toList());
         break;
       default:
         barInfo = SizedBox.shrink();
@@ -156,8 +160,8 @@ class MonthsBarChartPage extends StatelessWidget {
     );
   }
 
-  Widget buildBarInfoIdle(BuildContext context, List<Month> months) {
-    final calculatedStats = CalculatedStats.fromMonths(months);
+  Widget buildBarInfoIdle(BuildContext context, List<MonthStatsBucket> months) {
+    final calculatedStats = CalculatedStats.fromStatsBuckets(months);
     return BarChartInfoTriggerBox(
       prefix: Text(createIntervalString(
         context,
@@ -177,7 +181,7 @@ class MonthsBarChartPage extends StatelessWidget {
   Widget buildBarInfoFromMonths(
       BuildContext context,
       int index,
-      List<Month> months
+      List<MonthStatsBucket> months
       ) {
     if (index < 0) {
       return buildBarInfoIdle(context, months);

@@ -1,11 +1,11 @@
-import 'package:dhyana/modules/insights/presentation/viewmodel/days/days_cubit.dart';
 import 'package:dhyana/modules/insights/presentation/view/stats/bar_chart_page/days_bar_chart_page.dart';
+import 'package:dhyana/modules/insights/presentation/viewmodel/stats_bucket_cubit.dart';
+import 'package:dhyana/modules/insights/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/insights/domain/entity/day.dart';
 import 'package:dhyana/modules/insights/domain/entity/calculated_stats.dart';
 import 'package:dhyana/modules/insights/domain/entity/stats_interval.dart';
-import 'package:dhyana/core/presentation/view/util/app_context.dart';
+import 'package:get_it/get_it.dart';
 
 class DaysTab extends StatefulWidget {
   final String profileId;
@@ -23,7 +23,7 @@ class DaysTabState extends State<DaysTab> {
   late final List<StatsInterval> intervals;
 
   // Calculated stats
-  List<Day> days = [];
+  List<DayStatsBucket> days = [];
   CalculatedStats? calculatedStats;
 
   @override
@@ -46,28 +46,26 @@ class DaysTabState extends State<DaysTab> {
               itemCount: 4,
               onPageChanged: (index) {
                 setState(() {
-                  calculatedStats = CalculatedStats.fromDays(days);
+                  calculatedStats = CalculatedStats.fromStatsBuckets(days);
                 });
               },
               itemBuilder: (context, index) {
-                return BlocProvider<DaysCubit>(
+                return BlocProvider<StatsBucketCubit>(
                   create: (BuildContext context) {
-                    return DaysCubit(
-                      statisticsRepository: context.repos.statisticsRepository,
-                      crashlyticsService: context.services.crashlyticsService,
-                    )..queryDays(
+                    return GetIt.I.get<StatsBucketCubit>()..query(
                       profileId: widget.profileId,
                       from: intervals[index].from,
                       to: intervals[index].to,
+                      granularity: .day,
                     );
                   },
                   child: DaysBarChartPage(
                     pageIndex: index,
                     statsInterval: intervals[index],
-                    onDaysLoaded: (List<Day> loadedDays) {
+                    onDaysLoaded: (List<DayStatsBucket> loadedDays) {
                       setState(() {
                         days = loadedDays;
-                        calculatedStats ??= CalculatedStats.fromDays(
+                        calculatedStats ??= CalculatedStats.fromStatsBuckets(
                           loadedDays,
                         );
                       });

@@ -1,7 +1,7 @@
 import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/sessions/sessions_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
+import 'package:dhyana/core/presentation/view/util/smart_bloc_provider.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/history/session_history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

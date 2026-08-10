@@ -1,4 +1,4 @@
-import 'package:dhyana/core/presentation/view/smart_bloc_provider.dart';
+import 'package:dhyana/core/presentation/view/util/smart_bloc_provider.dart';
 import 'package:dhyana/core/util/assets.dart';
 import 'package:dhyana/modules/practice/chanting/public/view/chanting_settings/chant_list.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';

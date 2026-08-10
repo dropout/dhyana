@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/session_type.dart';
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/data/converter/duration_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:dhyana/core/data/converter/date_time_converter.dart';
@@ -15,7 +15,7 @@ sealed class InsightsSessionEntity with _$InsightsSessionEntity implements Dto {
 
   const factory InsightsSessionEntity({
     required String id,
-    required SessionType type,
+    required HomeScreenViewState type,
     @DateTimeConverter() required DateTime startTime,
     @DateTimeConverter() required DateTime endTime,
     @DurationConverter() required Duration duration,

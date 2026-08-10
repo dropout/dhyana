@@ -3,7 +3,7 @@ import 'package:dhyana/modules/insights/data/datasource/day_details_data_provide
 import 'package:dhyana/modules/insights/data/datasource/firebase_day_details_data_provider.dart';
 import 'package:dhyana/modules/insights/data/datasource/firebase_stats_bucket_data_provider.dart';
 import 'package:dhyana/modules/insights/data/datasource/stats_bucket_data_provider.dart';
-import 'package:dhyana/modules/insights/domain/entity/stats_granularity.dart';
+import 'package:dhyana/modules/insights/domain/enum/stats_entity_granularity.dart';
 
 class FirebaseStatsDataProviderFactory {
   final FirebaseFirestore fireStore;
@@ -12,7 +12,7 @@ class FirebaseStatsDataProviderFactory {
 
   StatsBucketDataProvider createStatsBucketDataProvider(
     String profileId,
-    StatsGranularity granularity,
+    StatsEntityGranularity granularity,
   ) => switch (granularity) {
     .day => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),
     .week => FirebaseStatsBucketDataProvider(fireStore: fireStore, bucketName: granularity.name, profileId: profileId),

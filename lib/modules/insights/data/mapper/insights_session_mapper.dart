@@ -1,7 +1,7 @@
 import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
-import 'package:dhyana/modules/insights/public/model/insights_session.dart';
+import 'package:dhyana/modules/insights/public/model/stats_session.dart';
 
-extension InsightsSessionMapper on InsightsSession {
+extension InsightsSessionMapper on StatsSession {
   InsightsSessionEntity toEntity() {
     return InsightsSessionEntity(
       id: id,
@@ -14,8 +14,8 @@ extension InsightsSessionMapper on InsightsSession {
 }
 
 extension InsightsSessionEntityMapper on InsightsSessionEntity {
-  InsightsSession toApi() {
-    return InsightsSession(
+  StatsSession toApi() {
+    return StatsSession(
       id: id,
       type: type,
       startTime: startTime,

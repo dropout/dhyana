@@ -1,8 +1,9 @@
+import 'package:dhyana/modules/insights/public/api/stats_public_api.dart';
+import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/core/service/module/insights_service.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/modules/practice/session/data/repository/firebase_session_repository.dart';
 import 'package:dhyana/modules/practice/session/domain/repository/session_repository.dart';
@@ -34,8 +35,13 @@ void _configureRepositories() {
 void _configureUseCases() {
   GetIt.I.registerFactory<LogSessionInsightsUseCase>(
     () => LogSessionInsightsUseCase(
-      insightsService: GetIt.I.get<InsightsService>(),
+      statsPublicApi: GetIt.I.get<StatsPublicApi>(),
       mindfulMinutesService: GetIt.I.get<MindfulMinutesService>(),
+    ),
+  );
+  GetIt.I.registerFactory<UpdateProfileWithSessionUseCase>(
+    () => UpdateProfileWithSessionUseCase(
+      profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
     ),
   );
 }
