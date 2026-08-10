@@ -11,23 +11,23 @@ import 'package:dhyana/modules/social/data/service/default_social_public_api.dar
 import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
 import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
 
-void configureSocialModuleDependencies() {
-  _configureDataProviders();
-  _configureRepositories();
-  _configureServices();
-  _configureUseCases();
-  _configureViewModels();
-  _configurePublicApi();
+void registerSocialModuleDependencies() {
+  _registerDataProviders();
+  _registerUseCases();
+  _registerServices();
+  _registerRepositories();
+  _registerViewModels();
+  _registerPublicApi();
 }
 
-void _configureDataProviders() {
+void _registerDataProviders() {
   GetIt.I.registerLazySingleton<PresenceDataProvider>(
     () =>
         FirebasePresenceDataProvider(GetIt.I.get<FirebaseProvider>().firestore),
   );
 }
 
-void _configureRepositories() {
+void _registerRepositories() {
   GetIt.I.registerLazySingleton<PresenceRepository>(
     () => DefaultPresenceRepository(
       presenceDataProvider: GetIt.I.get<PresenceDataProvider>(),
@@ -35,7 +35,7 @@ void _configureRepositories() {
   );
 }
 
-void _configureServices() {
+void _registerServices() {
   GetIt.I.registerLazySingleton<SocialPublicApi>(
     () => DefaultSocialPublicApi(
       presenceRepository: GetIt.I.get<PresenceRepository>(),
@@ -43,7 +43,7 @@ void _configureServices() {
   );
 }
 
-void _configureUseCases() {
+void _registerUseCases() {
   GetIt.I.registerLazySingleton(
     () => LoadPresenceDataUseCase(
       presenceRepository: GetIt.I.get<PresenceRepository>(),
@@ -51,7 +51,7 @@ void _configureUseCases() {
   );
 }
 
-void _configureViewModels() {
+void _registerViewModels() {
   GetIt.I.registerFactory<PresenceCubit>(() {
     return PresenceCubit(
       loadPresenceDataUseCase: GetIt.I.get<LoadPresenceDataUseCase>(),
@@ -60,7 +60,7 @@ void _configureViewModels() {
   });
 }
 
-void _configurePublicApi() {
+void _registerPublicApi() {
   GetIt.I.registerLazySingleton<SocialPublicApi>(
     () => DefaultSocialPublicApi(
       presenceRepository: GetIt.I.get<PresenceRepository>(),

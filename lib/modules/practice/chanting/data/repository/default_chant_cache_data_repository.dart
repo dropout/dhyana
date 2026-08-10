@@ -133,5 +133,4 @@ class DefaultChantCacheDataRepository implements ChantCacheDataRepository {
     }
   }
 
-
 }

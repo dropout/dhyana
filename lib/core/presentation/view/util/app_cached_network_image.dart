@@ -57,6 +57,7 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
   }
 
   void _resolveImage() {
+    print('Resolving image path: ${widget.imagePath}');
     context.services.resourceResolver
         .resolveStoragePath(widget.imagePath)
         .then((imageUrl) {

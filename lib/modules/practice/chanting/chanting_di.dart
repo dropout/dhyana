@@ -1,11 +1,14 @@
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
-
 import 'package:dhyana/core/service/shared_preferences_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
-import 'package:dhyana/drift/chant_cache_database.dart';
+
 import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_data_provider.dart';
@@ -26,8 +29,7 @@ import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_c
 import 'package:dhyana/modules/practice/chanting/domain/usecase/start_chanting_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/presentation/viewmodel/chanting_cubit.dart';
 import 'package:dhyana/modules/practice/chanting/public/viewmodel/chanting_settings_cubit.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
+
 
 void registerChantingModuleDependencies() {
   _registerDataProviders();

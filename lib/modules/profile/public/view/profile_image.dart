@@ -41,7 +41,7 @@ class ProfileImage extends StatelessWidget {
       height: size,
       child: switch (profilePhotoBlurhash != null) {
         true => AppCachedNetworkImage(
-          imagePath: '/profiles/$profileId/profile.jpg',
+          imagePath: '/profiles/$profileId/photo.jpg',
           blurHash: profilePhotoBlurhash,
           resourceResolver: context.services.resourceResolver,
           circular: true,

@@ -12,18 +12,18 @@ import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_wi
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/sessions/sessions_cubit.dart';
 
-void configureSessionModuleDependencies() {
-  _configureDataProviders();
-  _configureRepositories();
-  _configureUseCases();
-  _configureViewModels();  
+void registerSessionModuleDependencies() {
+  _registerDataProviders();
+  _registerRepositories();
+  _registerUseCases();
+  _registerViewModels();  
 }
 
-void _configureDataProviders() {
+void _registerDataProviders() {
 
 }
 
-void _configureRepositories() {
+void _registerRepositories() {
   GetIt.I.registerLazySingleton<SessionRepository>(() {
     return FirebaseSessionRepository(
       firestore: GetIt.I.get<FirebaseProvider>().firestore,
@@ -32,7 +32,7 @@ void _configureRepositories() {
 
 }
 
-void _configureUseCases() {
+void _registerUseCases() {
   GetIt.I.registerFactory<LogSessionInsightsUseCase>(
     () => LogSessionInsightsUseCase(
       statsPublicApi: GetIt.I.get<StatsPublicApi>(),
@@ -46,7 +46,7 @@ void _configureUseCases() {
   );
 }
 
-void _configureViewModels() {
+void _registerViewModels() {
   GetIt.I.registerFactory<SessionCompletedCubit>(() {
     return SessionCompletedCubit(      
       updateProfileWithSession: GetIt.I.get<UpdateProfileWithSessionUseCase>(),

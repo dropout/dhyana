@@ -45,7 +45,7 @@ import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart'
 import 'package:dhyana/core/infrastructure/platform/default_shared_preferences_service.dart';
 import 'package:dhyana/core/infrastructure/platform/default_wakelock_service.dart';
 
-Future<void> configureCoreDependencies() async {
+Future<void> registerCoreDependencies() async {
   _registerDataProviders();
   _registerRepositories();
   await _registerServices();
