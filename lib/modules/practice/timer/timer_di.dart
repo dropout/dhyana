@@ -1,6 +1,7 @@
 import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
+import 'package:dhyana/modules/social/public/api/social_public_api.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +11,6 @@ import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
-import 'package:dhyana/core/service/presence_service.dart';
 
 import 'package:dhyana/modules/practice/timer/data/service/default_timer_audio_service.dart';
 import 'package:dhyana/modules/practice/timer/data/repository/firebase_timer_settings_history_repository.dart';
@@ -61,10 +61,10 @@ void _registerUseCases() {
     return StartTimerUseCase(
       authPublicApi: GetIt.I.get<AuthPublicApi>(),
       profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
+      socialPublicApi: GetIt.I.get<SocialPublicApi>(),
       timerAudioService: GetIt.I.get<DefaultTimerAudioService>(),
       eventScheduler: eventScheduler,
-      timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),
-      presenceService: GetIt.I.get<PresenceService>(),
+      timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),      
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),       
     );
   });

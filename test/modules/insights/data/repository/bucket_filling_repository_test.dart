@@ -1,6 +1,6 @@
-import 'package:dhyana/modules/insights/data/repository/bucket_filling_repository.dart';
-import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
-import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/data/repository/bucket_filling_repository.dart';
+import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
+import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

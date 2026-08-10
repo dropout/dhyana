@@ -4,8 +4,8 @@ import 'package:dhyana/modules/profile/profile_module.dart';
 
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/modules/profile/public/view/profile_image.dart';
-import 'package:dhyana/modules/insights/presentation/view/stats/detailed_profile_view.dart';
-import 'package:dhyana/modules/insights/presentation/view/stats/label_value_detail.dart';
+import 'package:dhyana/modules/stats/presentation/view/stats/detailed_profile_view.dart';
+import 'package:dhyana/modules/stats/presentation/view/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';

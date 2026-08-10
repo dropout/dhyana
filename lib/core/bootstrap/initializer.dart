@@ -10,7 +10,7 @@ import 'package:dhyana/core/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/core_routes.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_module.dart';
-import 'package:dhyana/modules/insights/insights_routes.dart';
+import 'package:dhyana/modules/stats/stats_routes.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
@@ -78,7 +78,7 @@ class Initializer with LoggerMixin {
         ...$chantingRoutes,
         ...$sessionRoutes,
         ...$socialRoutes, 
-        ...$insightsRoutes,      
+        ...$statsRoutes,      
       ],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );

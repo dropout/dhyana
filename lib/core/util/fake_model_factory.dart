@@ -1,9 +1,9 @@
 import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/day_details_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/insights_session_entity.dart';
-import 'package:dhyana/modules/insights/domain/entity/stats_bucket_entity.dart';
+import 'package:dhyana/modules/stats/domain/entity/day_details_entity.dart';
+import 'package:dhyana/modules/stats/domain/entity/insights_session_entity.dart';
+import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_stats_report_entity.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';

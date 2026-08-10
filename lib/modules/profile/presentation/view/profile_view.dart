@@ -7,9 +7,9 @@ import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
 
-import '../../../insights/presentation/view/stats/consecutive_days_view.dart';
-import '../../../insights/presentation/view/stats/milestones_view.dart';
-import '../../../insights/presentation/view/stats/summary_view.dart';
+import '../../../stats/presentation/view/stats/consecutive_days_view.dart';
+import '../../../stats/presentation/view/stats/milestones_view.dart';
+import '../../../stats/presentation/view/stats/summary_view.dart';
 
 class ProfileView extends StatelessWidget {
   final Profile profile;

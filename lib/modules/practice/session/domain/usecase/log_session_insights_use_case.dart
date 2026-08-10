@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/insights/public/api/stats_public_api.dart';
-import 'package:dhyana/modules/insights/public/model/stats_session.dart';
+import 'package:dhyana/modules/stats/public/api/stats_public_api.dart';
+import 'package:dhyana/modules/stats/public/model/stats_session.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';

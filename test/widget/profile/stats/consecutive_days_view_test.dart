@@ -1,7 +1,7 @@
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 
-import 'package:dhyana/modules/insights/presentation/view/stats/consecutive_days_view.dart';
+import 'package:dhyana/modules/stats/presentation/view/stats/consecutive_days_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../test_context_providers.dart';

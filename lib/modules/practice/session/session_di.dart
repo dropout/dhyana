@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/insights/public/api/stats_public_api.dart';
+import 'package:dhyana/modules/stats/public/api/stats_public_api.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:get_it/get_it.dart';
 

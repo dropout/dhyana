@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/insights/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
 import 'package:get_it/get_it.dart';
 
 /// Container class for all repositories used in the application.

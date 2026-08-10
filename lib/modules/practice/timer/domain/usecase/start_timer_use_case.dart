@@ -3,7 +3,6 @@ import 'package:clock/clock.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
-import 'package:dhyana/core/service/presence_service.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
@@ -12,6 +11,7 @@ import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service
 
 import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
+import 'package:dhyana/modules/social/public/api/social_public_api.dart';
 
 
 /// A use case that starts the timer:
@@ -25,6 +25,9 @@ class StartTimerUseCase with LoggerMixin {
   /// Used to read the user's profile and get the user's settings.
   final ProfilePublicApi profilePublicApi;
 
+  /// Used to show the user's presence when the timer starts.
+  final SocialPublicApi socialPublicApi;
+
   /// Used to start the timer audio service and play sounds.
   final TimerAudioService timerAudioService;
 
@@ -34,19 +37,16 @@ class StartTimerUseCase with LoggerMixin {
   /// Used to save the current timer settings to the history when the timer starts.
   final TimerSettingsHistoryRepository timerSettingsHistoryRepository;
 
-  /// Used to show the user's presence when the timer starts.
-  final PresenceService presenceService;
-
   /// Used to log errors and exceptions that occur during the execution of this use case.
   final CrashlyticsService crashlyticsService;
 
   StartTimerUseCase({
     required this.authPublicApi,
     required this.profilePublicApi,
+    required this.socialPublicApi,
     required this.timerAudioService,
     required this.eventScheduler,
     required this.timerSettingsHistoryRepository,
-    required this.presenceService,
     required this.crashlyticsService,
   });
 
@@ -119,7 +119,7 @@ class StartTimerUseCase with LoggerMixin {
       }
 
       logger.t('Showing presence}');
-      await presenceService.showPresence(
+      await socialPublicApi.showPresence(
         profileId: profile.id,
         firstName: profile.firstName,
         lastName: profile.lastName,
