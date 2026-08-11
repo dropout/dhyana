@@ -19,49 +19,31 @@ class StartChantingUseCase with LoggerMixin {
 
 
   Stream<CachingProgressEntity> execute(List<String> selectedChantIds) async* {
-    // Prepare local resources for chanting
-    logger.t('Setting up ${selectedChantIds.length} chants');
+    logger.t('Starting chanting with ${selectedChantIds.length} chants');
 
-      // emit(state.copyWith(loadingState: .loading));
+    // Stop any existing playback before setting up new chants
+    await chantingAudioService.stop();
 
-      // Stop any existing playback before setting up new chants
-      await chantingAudioService.stop();
+    // Start caching and preparing chants for playback
+    final prepared = chantCacheManager.preparePlayableChantAssets(
+      selectedChantIds,
+    );
 
-      // Start caching and preparing chants for playback
-      final prepared = chantCacheManager.preparePlayableChantAssets(
-        selectedChantIds,
-      );
+    // Update the state with caching progress as it occurs
+    late CachingProgressEntity cachingProgress;
+    await for (final progress in prepared) {
+      cachingProgress = progress;
+      yield cachingProgress;
+    }
 
-      // Update the state with caching progress as it occurs
-      late CachingProgressEntity cachingProgress;
-      await for (final progress in prepared) {
-        cachingProgress = progress;
-        yield cachingProgress;
-        // emit(state.copyWith(cachingProgress: cachingProgress));
-      }
+    // Take the final results and prepare the audio service
+    List<ChantLocalResourcesEntity> resources = cachingProgress.results
+      .map((r) => r.localResources)
+      .toList();
+    await chantingAudioService.setup(resources);
+    chantingAudioService.play();
 
-      // Take the final results and prepare the audio service
-      List<ChantLocalResourcesEntity> resources = cachingProgress.results
-          .map((r) => r.localResources)
-          .toList();
-      await chantingAudioService.setup(resources);
-      chantingAudioService.play();
-
-      // emit(
-      //   state.copyWith(
-      //     loadingState: .loaded,
-      //     cachingProgress: cachingProgress,
-      //     chantResources: resources,
-      //     startTime: DateTime.now(),
-      //   ),
-      // );
-
-      logger.t('Chanting setup complete with ${resources.length} chants');
-
-    // Setup audio service for chanting
-
-    // 
-
+    logger.t('Chanting setup complete with ${resources.length} chants');
   }
 
 }

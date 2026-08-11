@@ -14,7 +14,6 @@ import 'package:dhyana/modules/stats/stats_routes.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_routes.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/timer_routes.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/infrastructure/firebase/firebase_remote_settings_service.dart';
 import 'package:dhyana/modules/profile/profile_routes.dart';
 import 'package:dhyana/core/util/assets.dart';
@@ -88,10 +87,6 @@ class Initializer with LoggerMixin {
     GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);
     await initializeDependencies();
 
-    // Build repositories
-    logger.t('Create repositories');    
-    final repos = RepositoriesBuilder().build();
-
     // Build services
     logger.t('Create services');
     await FirebaseRemoteSettingsService.configureDefaults(
@@ -113,7 +108,6 @@ class Initializer with LoggerMixin {
     return InitResult(
       userId: userId,
       services: services,
-      repositories: repos,
       remoteSettings: remoteSettings,
     );
   }

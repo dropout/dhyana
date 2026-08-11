@@ -14,7 +14,6 @@ import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
@@ -154,10 +153,6 @@ class MockMindfulMinutesService
   implements MindfulMinutesService {}
 
 // Repositories ----------------------------------------------------------------
-
-class MockRepositories
-  extends Mock
-  implements Repositories {}
 
 class MockPresenceRepository
   extends Mock

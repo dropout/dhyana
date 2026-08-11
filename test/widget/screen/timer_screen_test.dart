@@ -3,7 +3,6 @@ import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/data/mapper/profile_mapper.dart';
@@ -33,7 +32,6 @@ void main() {
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockWakelockService mockWakelockService;
-    late MockRepositories mockRepositories;
     late MockProfileRepository mockProfileRepository;
     late MockAppAudioHandler mockAudioHandler;
 
@@ -61,7 +59,6 @@ void main() {
         .thenReturn(mockWakelockService);
 
       // Repositories
-      mockRepositories = MockRepositories();
       mockProfileRepository = mockProfileRepository = MockProfileRepository();
 
       when(() => mockServices.crashlyticsService)
@@ -94,7 +91,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (context) => mockServices),
-              Provider<Repositories>(create: (context) => mockRepositories),
             ],
             child: MultiBlocProvider(
               providers: [
@@ -158,7 +154,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (context) => mockServices),
-              Provider<Repositories>(create: (context) => mockRepositories),
             ],
             child: MultiBlocProvider(
               providers: [
@@ -211,7 +206,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (context) => mockServices),
-              Provider<Repositories>(create: (context) => mockRepositories),
             ],
             child: MultiBlocProvider(
               providers: [

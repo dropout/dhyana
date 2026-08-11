@@ -3,7 +3,6 @@ import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dar
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
@@ -30,8 +29,6 @@ void main() {
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
 
-  late MockRepositories mockRepositories;
-
   setUpAll(() async {
     mockProfileCubit = MockProfileCubit();
     mockSessionCompletedCubit = MockSessionCompletedCubit();
@@ -42,10 +39,6 @@ void main() {
     when(
       () => mockServices.crashlyticsService,
     ).thenReturn(mockCrashlyticsService);
-
-    mockRepositories = MockRepositories();
-
-
   });
 
   group('SignedInCompletedView', () {
@@ -279,7 +272,6 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    Provider<Repositories>.value(value: mockRepositories),
                     BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
@@ -332,7 +324,6 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    Provider<Repositories>.value(value: mockRepositories),
                     BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,

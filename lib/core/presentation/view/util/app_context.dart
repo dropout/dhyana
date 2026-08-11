@@ -1,5 +1,4 @@
 import 'package:dhyana/core/bootstrap/init_result.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +24,6 @@ extension AppContext on BuildContext {
 
   Services get services =>
     read<Services>();
-
-  Repositories get repos =>
-    read<Repositories>();
 
   InitResult get initResult =>
     read<InitResult>();

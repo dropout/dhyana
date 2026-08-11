@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:drift/drift.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:dhyana/core/data/datasource/storage/batch_download_task.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/core/domain/enum/cache_download_state.dart';
@@ -14,9 +17,8 @@ import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resou
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_validator.dart';
-import 'package:drift/drift.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
+/// Process manager for caching chant assets and preparing them for playback.
 class ChantCacheManager with LoggerMixin {
   final ChantRepository chantRepository;
   final ChantCacheDataRepository chantCacheRepository;
@@ -314,8 +316,6 @@ Future<List<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>>
     // );
   }
 
-
-
   /// Collects the local resources for a given chant,
   /// including audio and lyrics file paths.
   Future<({String chantId, ChantLocalResourcesEntity localResources})>
@@ -323,12 +323,12 @@ Future<List<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>>
     final metadata = chant.metaData;
     final audioPath = await chantCacheRepository.buildCacheFilePath(
       contentId: chant.id,
-      assetType: CachedAssetType.audio,
+      assetType: .audio,
       version: metadata.audioVersion,
     );
     final lyricsPath = await chantCacheRepository.buildCacheFilePath(
       contentId: chant.id,
-      assetType: CachedAssetType.lyrics,
+      assetType: .lyrics,
       version: metadata.lyricsVersion,
     );
     return (

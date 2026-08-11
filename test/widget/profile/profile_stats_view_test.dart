@@ -1,5 +1,4 @@
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
@@ -28,7 +27,6 @@ void main() {
   group('ProfileStatsView', () {
     late MockProfileCubit mockProfileBloc;
     late MockServices mockServices;
-    late MockRepositories mockRepositories;
     late MockCrashlyticsService mockCrashlyticsService;
 
     setUp(() async {
@@ -42,9 +40,6 @@ void main() {
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
-
-      // Repositories
-      mockRepositories = MockRepositories();
 
     });
 
@@ -62,7 +57,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (_) => mockServices),
-              Provider<Repositories>(create: (_) => mockRepositories),
               BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
@@ -107,7 +101,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (_) => mockServices),
-              Provider<Repositories>(create: (_) => mockRepositories),
               BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
@@ -137,7 +130,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (_) => mockServices),
-              Provider<Repositories>(create: (_) => mockRepositories),
               BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(
@@ -169,7 +161,6 @@ void main() {
           MultiProvider(
             providers: [
               Provider<Services>(create: (_) => mockServices),
-              Provider<Repositories>(create: (_) => mockRepositories),
               BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
             ],
             child: withAllContextProviders(

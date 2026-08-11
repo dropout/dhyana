@@ -2,7 +2,6 @@ import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart'
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/session_completed_screen.dart';
@@ -24,7 +23,6 @@ void main() {
     late MockAuthCubit mockAuthBloc;
 
     late MockServices mockServices;
-    late MockRepositories mockRepositories;
 
     late MockCrashlyticsService mockCrashlyticsService;
     late MockHapticsService mockHapticsService;
@@ -34,7 +32,6 @@ void main() {
       mockAuthBloc = MockAuthCubit();
 
       mockServices = MockServices();
-      mockRepositories = MockRepositories();
 
       mockCrashlyticsService = MockCrashlyticsService();
       mockHapticsService = MockHapticsService();
@@ -71,7 +68,6 @@ void main() {
                   providers: [
                     BlocProvider<AuthCubit>.value(value: mockAuthBloc),
                     BlocProvider<ProfileCubit>.value(value: profileCubit),
-                    Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),
@@ -107,7 +103,6 @@ void main() {
                   providers: [
                     BlocProvider<AuthCubit>.value(value: mockAuthBloc),
                     BlocProvider<ProfileCubit>.value(value: profileCubit),
-                    Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),
@@ -141,7 +136,6 @@ void main() {
                   providers: [
                     BlocProvider<AuthCubit>.value(value: mockAuthBloc),
                     BlocProvider<ProfileCubit>.value(value: profileCubit),
-                    Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),
@@ -182,7 +176,6 @@ void main() {
                   providers: [
                     BlocProvider<AuthCubit>.value(value: mockAuthBloc),
                     BlocProvider<ProfileCubit>.value(value: profileCubit),
-                    Provider<Repositories>.value(value: mockRepositories),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),

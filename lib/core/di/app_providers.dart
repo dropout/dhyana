@@ -2,7 +2,6 @@ import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
 import 'package:dhyana/core/bootstrap/init_result.dart';
-import 'package:dhyana/core/di/repositories.dart';
 import 'package:dhyana/core/di/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +26,6 @@ class AppProviders extends StatelessWidget {
       providers: [
         Provider<InitResult>.value(value: initResult),
         Provider<Services>.value(value: initResult.services),
-        Provider<Repositories>.value(value: initResult.repositories),
       ],
       child: MultiBlocProvider(
         providers: [

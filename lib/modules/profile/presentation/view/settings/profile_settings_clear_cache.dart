@@ -1,12 +1,12 @@
 import 'package:dhyana/core/domain/enum/loading_state.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chant_playback_repository.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSettingsClearCache extends StatefulWidget {
-  final ChantPlaybackRepository chantPlaybackRepository;
+  final ChantingPublicApi chantPlaybackRepository;
 
   const ProfileSettingsClearCache({
     required this.chantPlaybackRepository,
@@ -26,7 +26,7 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
       loadingState = .loading;
     });
 
-    widget.chantPlaybackRepository.clearCache().then((_) {
+    widget.chantPlaybackRepository.clearCachedChants().then((_) {
       setState(() {
         loadingState = .loaded;
       });

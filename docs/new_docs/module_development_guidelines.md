@@ -100,11 +100,11 @@ lib/
     - Except for `module_routes.dart` or any other module public api offered in the module root folder.
 
 ### Module Dependency Injection Guidelines
-- Split dependency injection of the module into layers with an order from data to domain to presentation
+- Split dependency injection of the module into layers with an order from data to domain to presentation to public api
 - No logic in dependency injection files
 - Use factories for cubits because its often bound to a view/screen
-- Keep use cases transient by using factories
-- Repositoires and services are mostly singletons (For ex.: `HapticsService`, `ProfileRepository`) or factories if their functionality bound to specific viewmodel (For ex.: `TimerAudioService` is a factory because it is bound to the `TimerCubit` and should be disposed when the cubit is disposed)
+- Keep use cases transient by using dependency injections factories for them
+- Repositories and services are mostly singletons (For ex.: `HapticsService`, `ProfileRepository`) or factories if their functionality bound to specific viewmodel (For ex.: `TimerAudioService` is a factory because it is bound to the `TimerCubit` and should be disposed when the cubit is disposed)
 
 ### Data Layer Guidelines
 - **Data Sources**: Implement data sources for remote APIs, local databases, or any other data provider. Use interfaces to abstract the implementation details.

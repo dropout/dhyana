@@ -146,12 +146,11 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
     );
   }
 
-  /// Handles timer completion by executing the complete timer use case.
+  /// Handles timer completion by executing the complete timer use case
+  /// and navigating to the session completed screen with the completed session data.
   void _onTimerCompleted(Duration elapsedTime) async {    
     final result = await completeTimerUseCase.execute(state, elapsedTime);
     emit(result.timerState);
-
-    // Navigate to the session completed screen with the completed session data
     logger.t('Navigating to session completed screen');
     final targetRoute = SessionCompletedRoute($extra: result.session.toApi());
     router.replace(targetRoute.location, extra: result.session.toApi());

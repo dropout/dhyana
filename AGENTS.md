@@ -23,12 +23,17 @@ Run these first when working in a fresh environment:
 For running and building commands look at the commands documentaiton: [`docs/commands.md`](docs/commands.md)
 
 ## Repository Layout
-- `lib/widget/`: UI, routing, view composition.
-- `lib/bloc/`: Cubits/Blocs and state orchestration.
-- `lib/repository/`: repository interfaces + implementations.
-- `lib/data_provider/`: Firebase/local data source boundaries.
-- `lib/service/`: external integrations (audio, analytics, notifications).
-- `lib/init/`: dependency graph and bootstrap.
+- `lib/main_local.dart`, `lib/main_staging.dart`, `lib/main_prod.dart`: App entry points for each flavor.
+- `lib/core/`: Core module, including app entry point, dependency injection, and shared utilities.
+- `lib/drift/`: Drift database configuration for the application.
+- `lib/modules/`: Feature modules, each with its own layers.
+- `lib/modules/auth/`: Authentication feature module.
+- `lib/modules/donate/`: Donation feature module.
+- `lib/modules/profile/`: Profile feature module.
+- `lib/modules/stats/`: Stats feature module.
+- `lib/modules/practice/timer/`: Timer feature module.
+- `lib/modules/practice/chanting/`: Chanting feature module.
+- `lib/modules/practice/session/`: Session feature module.
 - `lib/l10n/`: localization resources.
 - `docs/`: Documentation
 - `ai/`: Agents, Skills, Prompts for AI augmented development.
@@ -45,20 +50,17 @@ For running and building commands look at the commands documentaiton: [`docs/com
 - Use freezed for immutable state and domain models.
 
 ## Project-Specific Expectations
-- Use BuildContext extensions from `lib/widget/util/app_context.dart` to pass repositories/services into Cubits at construction time, use the available shorthands for localization and for accessing context related dependency injection. Only use services directly when it's related to UI (e.g., HapticsService, OverlayService).
-- In Cubits, report errors through Crashlytics and avoid silent failures.
-- Keep Firebase details behind providers and repositories.
-- Keep services stateless unless the integration requires lifecycle management (e.g., audio playback, notification scheduling). Document the reason when a stateful service is necessary.
+
 
 ## AI Directory and Agent Customizations
 - Project-specific AI assets live in `ai/`.
 - Agents should inspect this folder early when starting work in this repository.
 
-Current layout:
+### Current layout
 - `ai/skills/`: reusable workflow skills (`*/SKILL.md`) and skill references.
 - `ai/prompts/`: reusable task prompts (`*.prompt.md`).
 
-Usage guidance for agents (Copilot, Claude, Antigravity, or other coding agents):
+### Usage guidance for agents (Copilot, Claude, Antigravity, or other coding agents):
 - Prefer matching project skills before applying generic behavior.
 - When a task matches a skill description, read that skill's `SKILL.md` and follow it.
 - For focused one-off tasks, check `ai/prompts/` for an existing prompt template before creating a new one.
@@ -66,20 +68,14 @@ Usage guidance for agents (Copilot, Claude, Antigravity, or other coding agents)
 - Keep new AI assets in this folder so future agents can discover and reuse them consistently.
 
 ## Feature Work Checklist
-- Define or adjust interfaces first (repository, provider, service).
-- Implement changes by layer in matching feature folders.
-- Add or update localization strings for user-facing text.
-- Register new repositories and services in lib/init.
-- Add or update unit tests, then integration tests when behavior is user-visible.
-- Name files by feature then type: <feature>_repository.dart, <feature>_cubit.dart, <feature>_state.dart, <feature>_provider.dart.
+
 
 ## Testing Expectations
-- Prioritize unit tests for Cubits, repositories, and services.
-- Reuse shared mocks from test/mock_definitions.dart.
-- Use integration_test for end-to-end flows.
+
 
 ## Source of Truth and References
 - Project overview: [README.md](README.md)
 - Commands for running and building: [docs/commands.md](docs/commands.md)
-- Architecture summary: [docs/architecture_overview.md](docs/architecture_overview.md)
-- Feature design template: [docs/feature_description.md](docs/feature_description.md)
+- Architecture overview: [docs/architecture_overview.md](docs/architecture_overview.md)
+- Module guidelines: [docs/new_docs/module_guidelines.md](docs/new_docs/module_guidelines.md)
+
