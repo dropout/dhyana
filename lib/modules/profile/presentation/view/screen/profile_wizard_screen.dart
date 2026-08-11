@@ -1,5 +1,5 @@
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
@@ -31,7 +31,7 @@ class ProfileWizardScreen extends StatefulWidget {
 class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   with DefaultScreenSetupHelpersMixin {
 
-  LoadingState formProcessingState = LoadingState.idle;
+  ProcessingState formProcessingState = ProcessingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
     GlobalKey<FormBuilderState>();
 
@@ -47,7 +47,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
     FormBuilderState? formState = formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
       setState(() {
-        formProcessingState = LoadingState.loading;
+        formProcessingState = ProcessingState.processing;
       });
       Map<String, dynamic>? values = formState.value;
       context.read<ProfileEditCubit>().updateProfile(
@@ -56,13 +56,13 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
         completeProfile: true,
         onComplete: (profile) {
           setState(() {
-            formProcessingState = LoadingState.loaded;
+            formProcessingState = ProcessingState.completed;
           });
           context.services.hapticsService.success();
         },
         onError: (e, stack) {
           setState(() {
-            formProcessingState = LoadingState.idle;
+            formProcessingState = ProcessingState.idle;
           });
           context.services.hapticsService.error();
         },
@@ -80,7 +80,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   void _onFormChanged(BuildContext context) {
     setState(() {
-      formProcessingState = LoadingState.idle;
+      formProcessingState = ProcessingState.idle;
     });
   }
 
@@ -219,16 +219,16 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   Widget buildOverlayActionButton(BuildContext context, Profile profile) {
 
     switch (formProcessingState) {
-      case LoadingState.idle:
+      case ProcessingState.idle:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
-      case LoadingState.loading:
+      case ProcessingState.processing:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonSaving.toUpperCase(),
         );
-      case LoadingState.loaded:
+      case ProcessingState.completed:
         return AppButton(
           text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,

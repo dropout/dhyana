@@ -1,4 +1,4 @@
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

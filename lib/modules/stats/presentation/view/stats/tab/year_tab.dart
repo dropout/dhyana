@@ -1,8 +1,6 @@
-import 'package:dhyana/modules/stats/domain/entity/calculated_stats.dart';
-import 'package:dhyana/modules/stats/domain/entity/stats_interval.dart';
+import 'package:dhyana/modules/stats/stats_module.dart';
 import 'package:dhyana/modules/stats/presentation/view/stats/bar_chart_page/years_bar_chart_page.dart';
 import 'package:dhyana/modules/stats/presentation/viewmodel/stats_bucket_cubit.dart';
-import 'package:dhyana/modules/stats/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';

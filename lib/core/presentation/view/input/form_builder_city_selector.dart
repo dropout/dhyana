@@ -1,5 +1,5 @@
 import 'package:dart_geohash/dart_geohash.dart';
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/core/domain/entity/city_search_result.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -185,7 +185,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
   final Debouncer debouncer = Debouncer(delay: Duration(milliseconds: 300));
 
-  LoadingState loadingState = LoadingState.idle;
+  ProcessingState loadingState = ProcessingState.idle;
 
   @override
   void initState() {
@@ -200,7 +200,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     if (value.isEmpty) {
       setState(() {
         searchResults = [];
-        loadingState = LoadingState.idle;
+        loadingState = ProcessingState.idle;
       });
       return;
     }
@@ -220,14 +220,14 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
     try {
       setState(() {
-        loadingState = LoadingState.loading;
+        loadingState = ProcessingState.processing;
       });
       final result = await context.services.functionsService
         .citySearch(queryString: queryString);
       setState(() {
         searchQuery = queryString;
         searchResults = result;
-        loadingState = LoadingState.loaded;
+        loadingState = ProcessingState.completed;
       });
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -236,7 +236,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         reason: 'Error searching for cities. Query string: $queryString',
       );
       setState(() {
-        loadingState = LoadingState.error;
+        loadingState = ProcessingState.error;
       });
     }
   }
@@ -246,7 +246,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
     // Get a location with latlng for the selected city
     setState(() {
-      loadingState = LoadingState.loading;
+      loadingState = ProcessingState.processing;
     });
 
     try {
@@ -257,7 +257,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
       // for the CitySearchResult
       if (fullResult.location == null) {
           setState(() {
-            loadingState = LoadingState.error;
+            loadingState = ProcessingState.error;
           });
           crashlyticsService.recordError(
             exception: Exception('Location data is null'),
@@ -283,7 +283,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         reason: 'Error getting location for city: ${citySearchResult.name}',
       );
       setState(() {
-        loadingState = LoadingState.error;
+        loadingState = ProcessingState.error;
       });
     }
 
@@ -322,15 +322,15 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
   Widget buildBottomPart(BuildContext context) {
     switch (loadingState) {
-      case LoadingState.loading:
+      case ProcessingState.processing:
         return Center(
           child: CircularProgressIndicator(),
         );
-      case LoadingState.error:
+      case ProcessingState.error:
         return buildError(context);
-      case LoadingState.idle:
+      case ProcessingState.idle:
         return buildIdle(context);
-      case LoadingState.loaded:
+      case ProcessingState.completed:
         return SingleChildScrollView(
           child: Column(
             children: searchResults.map((result) {

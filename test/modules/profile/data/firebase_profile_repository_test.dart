@@ -1,95 +1,86 @@
 import 'dart:async';
 
-import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
-import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
-import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
-import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockProfileDataProvider
-  extends Mock
-  implements ProfileDataProvider {}
+import 'package:dhyana/modules/profile/data/datasource/profile_data_provider.dart';
+import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
+import 'package:dhyana/modules/profile/data/repository/default_profile_repository.dart';
 
-class MockStorageDataProvider
-  extends Mock
-  implements StorageDataProvider {}
+import '../../../mock_definitions.dart';
 
-class MockProfileEntity
-  extends Mock
-  implements ProfileEntity {
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MockProfile';
-  }
-} 
 
 void main() {
 
   group('FirebaseProfileRepositoryTest', () {
 
-    late StreamController<MockProfileEntity> profileStreamController;
-    late StreamController<List<MockProfileEntity>> profileQueryStreamController;
-    late MockProfileDataProvider mockProfileDataProvider;
-    late MockProfileEntity mockProfile;
-    late DefaultProfileRepository firebaseProfileRepository;
+    late StreamController<ProfileEntity> profileStreamController;
+    late StreamController<List<ProfileEntity>> profileQueryStreamController;
+
+    late ProfileDataProvider mockProfileDataProvider;
+
+    late DefaultProfileRepository profileRepository;
 
     setUp(() {
-      profileStreamController = StreamController<MockProfileEntity>(sync: true);
+      profileStreamController = StreamController<ProfileEntity>(sync: true);
       profileQueryStreamController =
-          StreamController<List<MockProfileEntity>>(sync: true);
+        StreamController<List<ProfileEntity>>(sync: true);
+
       mockProfileDataProvider = MockProfileDataProvider();
-      mockProfile = MockProfileEntity();
-      firebaseProfileRepository = DefaultProfileRepository(
+      
+      profileRepository = DefaultProfileRepository(
         profileDataProvider: mockProfileDataProvider,
       );
     });
 
     tearDown(() {
       profileStreamController.close();
+      profileQueryStreamController.close();
     });
 
     test('can read profile by id', () {
-      when(() => mockProfileDataProvider.read('test_id'))
-          .thenAnswer((_) => Future.value(mockProfile));
-      firebaseProfileRepository.read('test_id');
-      verify(() => mockProfileDataProvider.read('test_id')).called(1);
+      final profileEntity = FakeModelFactory().createProfileEntity();
+      when(() => mockProfileDataProvider.read('test_id', preferCache: false))
+        .thenAnswer((_) => Future.value(profileEntity));
+      profileRepository.read('test_id', preferCache: false);
+      verify(() => mockProfileDataProvider.read('test_id', preferCache: false)).called(1);
     });
 
     test('can read profile stream by id', () {
       when(() => mockProfileDataProvider.readStream('test_id'))
-          .thenAnswer((_) => profileStreamController.stream);
-      firebaseProfileRepository.readStream('test_id');
+        .thenAnswer((_) => profileStreamController.stream);
+      profileRepository.readStream('test_id');
       verify(() => mockProfileDataProvider.readStream('test_id')).called(1);
     });
 
     test('can update profile', () {
-      when(() => mockProfileDataProvider.update(mockProfile))
+      final profileEntity = FakeModelFactory().createProfileEntity();
+      when(() => mockProfileDataProvider.update(profileEntity))
           .thenAnswer((_) => Future.value(null));
-      firebaseProfileRepository.update(mockProfile);
-      verify(() => mockProfileDataProvider.update(mockProfile)).called(1);
+      profileRepository.update(profileEntity);
+      verify(() => mockProfileDataProvider.update(profileEntity)).called(1);
     });
 
     test('can delete profile', () {
       when(() => mockProfileDataProvider.delete('test_id'))
           .thenAnswer((_) => Future.value(null));
-      firebaseProfileRepository.delete('test_id');
+      profileRepository.delete('test_id');
       verify(() => mockProfileDataProvider.delete('test_id')).called(1);
     });
 
     test('can query profiles', () {
+      final profileEntity = FakeModelFactory().createProfileEntity();
       when(() => mockProfileDataProvider.query())
-          .thenAnswer((_) => Future.value([mockProfile]));
-      firebaseProfileRepository.query();
+          .thenAnswer((_) => Future.value([profileEntity]));
+      profileRepository.query();
       verify(() => mockProfileDataProvider.query()).called(1);
     });
 
     test('can query profiles stream', () {
       when(() => mockProfileDataProvider.queryStream())
           .thenAnswer((_) => profileQueryStreamController.stream);
-      firebaseProfileRepository.queryStream();
+      profileRepository.queryStream();
       verify(() => mockProfileDataProvider.queryStream())
           .called(1);
     });

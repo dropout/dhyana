@@ -1,7 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
@@ -27,13 +27,13 @@ sealed class ChantingStateEntity with _$ChantingStateEntity {
     @Default([]) List<ChantLocalResourcesEntity> chantResources,
     required PlaybackState playbackState,
     @Default(Duration.zero) Duration elapsedTime,
-    @Default(LoadingState.loading) LoadingState loadingState,  
+    @Default(ProcessingState.processing) ProcessingState loadingState,  
     MediaItem? mediaItem,
     @Default(Duration.zero) Duration outputLatency,
     
     // lyrics
     @Default(0) int activeLineIndex,
-    @Default(LoadingState.loading) LoadingState lyricsLoadingState,
+    @Default(ProcessingState.processing) ProcessingState lyricsLoadingState,
     LyricsDocumentEntity? lyricsDocument,
     
     // session data

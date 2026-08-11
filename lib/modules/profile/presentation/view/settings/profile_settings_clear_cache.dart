@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
@@ -19,16 +19,16 @@ class ProfileSettingsClearCache extends StatefulWidget {
 }
 
 class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
-  LoadingState loadingState = .idle;
+  ProcessingState loadingState = .idle;
 
   void _onButtonTap(BuildContext context) {
     setState(() {
-      loadingState = .loading;
+      loadingState = .processing;
     });
 
     widget.chantPlaybackRepository.clearCachedChants().then((_) {
       setState(() {
-        loadingState = .loaded;
+        loadingState = .completed;
       });
     });
   }
@@ -60,11 +60,11 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
                   color: Colors.black,
                 ),
               ),
-              if (loadingState == .loading || loadingState == .loaded) Spacer(),
-              if (loadingState == .loading) CircularProgressIndicator.adaptive(
+              if (loadingState == .processing || loadingState == .completed) Spacer(),
+              if (loadingState == .processing) CircularProgressIndicator.adaptive(
 
               ),
-              if (loadingState == .loaded)
+              if (loadingState == .completed)
                 Icon(
                   Icons.check_circle_outline_rounded,
                   size: 20,

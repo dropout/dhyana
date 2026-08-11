@@ -2,7 +2,7 @@ import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart'
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/session_completed_screen.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/signed_in_completed_view.dart';

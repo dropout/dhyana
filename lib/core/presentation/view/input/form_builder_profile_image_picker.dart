@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
 
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
 import 'package:dhyana/core/presentation/view/input/profile_image_picker/profile_image_picker_current_image.dart';
@@ -104,7 +104,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   static const double _indicatorSize = 32.0;
 
   /// Loading state for the resources needed for image safety detection.
-  LoadingState _nsfwDetectorLoadingState = .loading;
+  ProcessingState _nsfwDetectorLoadingState = .processing;
 
   /// The current processing state of the profile image picker.
   ProfileImagePickerProcessState _processingState =
@@ -132,7 +132,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
       if (mounted) {
         setState(() {
-          _nsfwDetectorLoadingState = LoadingState.loaded;
+          _nsfwDetectorLoadingState = ProcessingState.completed;
         });
       } else {
         _safeImageDetectorService.dispose();
@@ -145,7 +145,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       );
       if (mounted) {
         setState(() {
-          _nsfwDetectorLoadingState = LoadingState.error;
+          _nsfwDetectorLoadingState = ProcessingState.error;
         });
       }
     }
@@ -204,11 +204,11 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   Widget build(BuildContext context) {
     // Handle the loading state of the NSFW detector
     switch (_nsfwDetectorLoadingState) {
-      case LoadingState.loading:
+      case ProcessingState.processing:
         return buildLoading(context);
-      case LoadingState.loaded:
+      case ProcessingState.completed:
         return buildLoaded(context);
-      case LoadingState.error:
+      case ProcessingState.error:
         return const SizedBox.shrink();
       default:
         return const SizedBox.shrink();      
@@ -302,7 +302,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
   @override
   void dispose() {
-    if (_nsfwDetectorLoadingState == LoadingState.loaded) {
+    if (_nsfwDetectorLoadingState == ProcessingState.completed) {
       _safeImageDetectorService.dispose();
     }
     super.dispose();

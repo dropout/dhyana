@@ -165,7 +165,7 @@ class PlayerControls extends StatelessWidget {
   }
 
   bool _isLoading() {
-    if (chantingState.loadingState == .loading) {
+    if (chantingState.loadingState == .processing) {
       return true;
     }
     return switch (chantingState.playbackState.processingState) {

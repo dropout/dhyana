@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dhyana/core/domain/enum/sound.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';

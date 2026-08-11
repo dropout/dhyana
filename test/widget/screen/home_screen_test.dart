@@ -1,6 +1,6 @@
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
@@ -27,7 +27,6 @@ void main() {
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockOverlayService mockOverlayService;
-    late MockSharedPreferencesService mockSharedPreferencesService;
 
     // doesn't make sense to mock this because the FragmentShader
     // cannot be mocked neither, so you need to load the shader anyhow
@@ -39,7 +38,6 @@ void main() {
       mockServices = MockServices();      
       mockCrashlyticsService = MockCrashlyticsService();
       mockOverlayService = MockOverlayService();
-      mockSharedPreferencesService = MockSharedPreferencesService();
 
       when(() => mockAuthBloc.state)
         .thenReturn(const AuthState.signedOut());
@@ -47,8 +45,6 @@ void main() {
       when(() => mockProfileCubit.state)
         .thenReturn(ProfileState.initial());
 
-      when(() => mockServices.sharedPreferencesService)
-        .thenReturn(mockSharedPreferencesService);
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
       when(() => mockServices.shaderService)

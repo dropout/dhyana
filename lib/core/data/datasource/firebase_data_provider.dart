@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhyana/core/data/datasource/data_provider.dart';
-import 'package:dhyana/core/data/datasource/data_provider_exception.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 
 import 'firebase_model_extension.dart';

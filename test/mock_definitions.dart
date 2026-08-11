@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/audio/app_audio_handler.dart';
+import 'package:dhyana/core/data/datasource/storage/storage_data_provider.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
@@ -14,7 +15,7 @@ import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
@@ -174,3 +175,6 @@ class MockStorageRepository
   extends Mock
   implements StorageRepository {}
 
+class MockStorageDataProvider
+  extends Mock
+  implements StorageDataProvider {}

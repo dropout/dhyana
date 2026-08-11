@@ -1,7 +1,6 @@
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/modules/stats/presentation/view/stats/label_value_detail.dart';
 import 'package:dhyana/core/presentation/view/util/app_card.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';

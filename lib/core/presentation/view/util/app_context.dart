@@ -1,5 +1,5 @@
-import 'package:dhyana/core/bootstrap/init_result.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/bootstrap/init_result.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

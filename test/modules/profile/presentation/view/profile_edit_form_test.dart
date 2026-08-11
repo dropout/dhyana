@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 
 import 'package:dhyana/core/presentation/view/input/form_builder_profile_image_picker.dart';

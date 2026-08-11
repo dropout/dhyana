@@ -841,7 +841,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chantingAddChantSheetEmptyState => 'No chants available.';
 
   @override
-  String get chantingAddChantListItemAddAction => 'Add Chant';
+  String get chantingAddChantListItemAddAction => 'Add to playlist';
 
   @override
   String get chantingAddChantListItemAddedAction => 'Added';

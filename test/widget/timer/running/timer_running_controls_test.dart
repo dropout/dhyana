@@ -2,7 +2,7 @@ import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.d
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_controls.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';

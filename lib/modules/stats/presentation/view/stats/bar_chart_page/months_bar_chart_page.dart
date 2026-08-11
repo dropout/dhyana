@@ -1,13 +1,11 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/stats/domain/entity/calculated_stats.dart';
-import 'package:dhyana/modules/stats/domain/entity/stats_interval.dart';
+import 'package:dhyana/modules/stats/stats_module.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:dhyana/modules/stats/presentation/viewmodel/stats_bucket_cubit.dart';
-import 'package:dhyana/modules/stats/public/model/stats_bucket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';

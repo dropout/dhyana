@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/enum/sound.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/service/haptics_service.dart';
 import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:flutter_test/flutter_test.dart';

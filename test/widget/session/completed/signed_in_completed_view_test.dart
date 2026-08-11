@@ -3,7 +3,7 @@ import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dar
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';

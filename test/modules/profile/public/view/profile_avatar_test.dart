@@ -1,4 +1,4 @@
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
-import '../../mock_definitions.dart';
-import '../../test_context_providers.dart';
+import '../../../../mock_definitions.dart';
+import '../../../../test_context_providers.dart';
 
 void main() {
 

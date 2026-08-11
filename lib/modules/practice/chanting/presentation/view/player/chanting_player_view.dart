@@ -98,7 +98,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
       children: [
         Positioned.fill(
           child: switch (widget.chantingState.loadingState) {
-            .loading => buildLoadingView(context),
+            .processing => buildLoadingView(context),
             .error => AppErrorDisplay(),
             _ => buildLyricsView(context),
           },

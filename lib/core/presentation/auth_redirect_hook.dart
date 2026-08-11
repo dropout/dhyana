@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+// TODO: Check for redundancy in module based routes auth redirect hook usage
 mixin AuthRedirectHook {
   String? authRedirectHook(BuildContext context, GoRouterState state, GoRouteData redirectRoute) {
     final AuthCubit authCubit = context.read<AuthCubit>();

@@ -231,7 +231,7 @@ class _LyricsViewState extends State<LyricsView> {
   @override
   Widget build(BuildContext context) {
     final slivers = <Widget>[];
-    if (widget.chantingState.lyricsLoadingState == .loaded && _lyricLineHeights.isNotEmpty) {
+    if (widget.chantingState.lyricsLoadingState == .completed && _lyricLineHeights.isNotEmpty) {
       final lyricsDocument = widget.chantingState.lyricsDocument!;
       slivers.addAll([
         SliverPadding(

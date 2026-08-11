@@ -11,7 +11,7 @@ import 'package:get_it/get_it.dart';
 
 Future<void> initializeDependencies() async {
   GetIt.I.registerSingleton<FirebaseProvider>(FirebaseProvider());
-
+  
   await registerCoreDependencies();
   registerAuthModuleDependencies();
   registerProfileModuleDependencies();
@@ -20,6 +20,4 @@ Future<void> initializeDependencies() async {
   registerStatsModuleDependencies();  
   registerTimerModuleDependencies();
   registerChantingModuleDependencies();  
-  
-  
 }

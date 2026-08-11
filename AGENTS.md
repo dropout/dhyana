@@ -20,12 +20,13 @@ Run these first when working in a fresh environment:
 6. Run tests: `flutter test`
 
 ## Run and Build
-For running and building commands look at the commands documentaiton: [`docs/commands.md`](docs/commands.md)
+For running and building commands look at the commands documentation: [`docs/commands.md`](docs/commands.md)
 
 ## Repository Layout
 - `lib/main_local.dart`, `lib/main_staging.dart`, `lib/main_prod.dart`: App entry points for each flavor.
+- `lib/bootstrap/`: Initialization and bootstrap code for the app.
 - `lib/core/`: Core module, including app entry point, dependency injection, and shared utilities.
-- `lib/drift/`: Drift database configuration for the application.
+- `lib/drift/`: Drift database configuration for the app.
 - `lib/modules/`: Feature modules, each with its own layers.
 - `lib/modules/auth/`: Authentication feature module.
 - `lib/modules/donate/`: Donation feature module.
@@ -77,5 +78,5 @@ For running and building commands look at the commands documentaiton: [`docs/com
 - Project overview: [README.md](README.md)
 - Commands for running and building: [docs/commands.md](docs/commands.md)
 - Architecture overview: [docs/architecture_overview.md](docs/architecture_overview.md)
-- Module guidelines: [docs/new_docs/module_guidelines.md](docs/new_docs/module_guidelines.md)
+- Module guidelines: [docs/new_docs/module_guidelines.md](docs/module_guidelines.md)
 

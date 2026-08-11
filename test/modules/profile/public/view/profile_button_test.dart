@@ -2,7 +2,7 @@ import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_indicator.dart';
@@ -13,9 +13,9 @@ import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
-import '../../mock_definitions.dart';
-import '../../test_context_providers.dart';
-import '../mock_go_router_provider.dart';
+import '../../../../mock_definitions.dart';
+import '../../../../test_context_providers.dart';
+import '../../../../widget/mock_go_router_provider.dart';
 
 void main() {
 

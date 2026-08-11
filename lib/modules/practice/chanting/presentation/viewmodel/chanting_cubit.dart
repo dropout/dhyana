@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chanting_state_entity.dart';
@@ -79,7 +79,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   /// preparing the audio service.
   Future<void> start() async {
     try {
-      emit(state.copyWith(loadingState: .loading));
+      emit(state.copyWith(loadingState: .processing));
       final prepared = startChantingUseCase.execute(
         chantingSettings.selectedChants.map((e) => e.chantId).toList(growable: false)
       );
@@ -116,7 +116,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
 
       emit(
         state.copyWith(
-          loadingState: .loaded,
+          loadingState: .completed,
           cachingProgress: cachingProgress,
           chantResources: resources,
           startTime: DateTime.now(),
@@ -137,7 +137,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   Future<void> _loadLyricsForChant(String chantId) async {
     try {
       // logger.t('Loading lyrics for chant ID: $chantId');
-      emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
+      emit(state.copyWith(lyricsLoadingState: ProcessingState.processing));
       final lyricsDocument = await loadLyricsUseCase.execute(chantId, state);
 
       // User quickly pressed back button
@@ -145,7 +145,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
 
       emit(
         state.copyWith(
-          lyricsLoadingState: LoadingState.loaded,
+          lyricsLoadingState: ProcessingState.completed,
           lyricsDocument: lyricsDocument,
         ),
       );

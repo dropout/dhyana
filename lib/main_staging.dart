@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'core/bootstrap/init_result.dart';
-import 'core/bootstrap/initializer.dart';
+import 'bootstrap/init_result.dart';
+import 'bootstrap/initializer.dart';
 import 'core/util/firebase_provider.dart';
 import 'core/presentation/view/app.dart';
 

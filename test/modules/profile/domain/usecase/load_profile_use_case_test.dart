@@ -8,12 +8,12 @@ import '../../profile_mock_definitions.dart';
 
 void main() {
   late MockProfileRepository profileRepository;
-  late MockProfileStatsUpdater profileStatsUpdater;
-  late LoadProfileUseCase useCase;
+  late MockProfileStatsUpdater profileStatsUpdater;  
   late FakeModelFactory fakeModelFactory;
+  late LoadProfileUseCase useCase;
 
   setUpAll(() {
-    registerFallbackValue(FakeModelFactory().createProfile());
+    registerFallbackValue(FakeModelFactory().createProfileEntity());
   });
 
   setUp(() {

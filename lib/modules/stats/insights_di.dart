@@ -11,11 +11,11 @@ import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dar
 import 'package:dhyana/modules/stats/data/datasource/firebase_stats_data_provider_factory.dart';
 import 'package:dhyana/modules/stats/data/repository/firebase_statistics_repository.dart';
 
-void registerStatsModuleDependencies() {
+void registerInsightsModuleDependencies() {
   _registerDataProviders();
   _registerRepositories();
   _registerServices();
-  _registerViewModels();
+  _registerViewModlels();
   _registerPublicApi();
 }
 
@@ -40,7 +40,7 @@ void _registerServices() {
 
 }
 
-void _registerViewModels() {
+void _registerViewModlels() {
   GetIt.I.registerFactory<StatsBucketCubit>(() {
     return StatsBucketCubit(
       statsPublicApi: GetIt.I.get<StatsPublicApi>(),

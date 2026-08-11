@@ -1,5 +1,5 @@
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/stats/domain/entity/calculated_stats.dart';
+import 'package:dhyana/modules/stats/stats_module.dart';
 import 'package:dhyana/core/util/duration.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';

@@ -6,7 +6,7 @@ import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/audio/audio_session_configuration.dart';
 import 'package:dhyana/core/audio/so_chanting_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
-import 'package:dhyana/core/bootstrap/dependency_injection.dart';
+import 'package:dhyana/bootstrap/dependency_injection.dart';
 import 'package:dhyana/core/core_routes.dart';
 import 'package:dhyana/core/presentation/app_keys.dart';
 import 'package:dhyana/modules/auth/auth_module.dart';
@@ -25,7 +25,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
 import 'init_result.dart';

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/service/resource_resolver.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
@@ -36,7 +36,7 @@ class AppCachedNetworkImage extends StatefulWidget {
 }
 
 class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
-  LoadingState loadingState = LoadingState.loading;
+  ProcessingState loadingState = ProcessingState.processing;
   String? currentImageUrl;
 
   @override
@@ -50,20 +50,19 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.imagePath != widget.imagePath) {
       setState(() {
-        loadingState = LoadingState.loading;
+        loadingState = ProcessingState.processing;
         _resolveImage();
       });
     }
   }
 
   void _resolveImage() {
-    print('Resolving image path: ${widget.imagePath}');
     context.services.resourceResolver
         .resolveStoragePath(widget.imagePath)
         .then((imageUrl) {
           if (mounted) {
             setState(() {
-              loadingState = LoadingState.loaded;
+              loadingState = ProcessingState.completed;
               currentImageUrl = imageUrl;
             });
           }
@@ -72,7 +71,7 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
           if (mounted) {
             context.services.crashlyticsService.recordError(exception: error);
             setState(() {
-              loadingState = LoadingState.error;
+              loadingState = ProcessingState.error;
             });
           }
         });
@@ -84,7 +83,7 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
       fit: StackFit.expand,
       children: [
         if (widget.blurHash != null) buildPlaceHolder(context, widget.blurHash!),
-        if (loadingState == LoadingState.loaded && currentImageUrl != null)
+        if (loadingState == ProcessingState.completed && currentImageUrl != null)
           _CustomCachedNetworkImage(
             key: ValueKey(currentImageUrl),
             imageUrl: currentImageUrl!,

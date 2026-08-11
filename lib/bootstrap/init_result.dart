@@ -1,4 +1,4 @@
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/domain/entity/remote_settings.dart';
 
 class InitResult {

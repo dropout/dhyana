@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -23,7 +23,7 @@ class ProfileEditScreen extends StatefulWidget {
 class _ProfileEditScreenState extends State<ProfileEditScreen>
     with DefaultScreenSetupHelpersMixin {
   
-  LoadingState state = LoadingState.idle;
+  ProcessingState state = ProcessingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
       GlobalKey<FormBuilderState>();
 
@@ -31,7 +31,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
     FormBuilderState? formState = formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
       setState(() {
-        state = LoadingState.loading;
+        state = ProcessingState.processing;
       });
       Map<String, dynamic>? values = formState.value;
       context.read<ProfileEditCubit>().updateProfile(
@@ -39,13 +39,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
         formData: values,
         onComplete: (profile) {
           setState(() {
-            state = LoadingState.loaded;
+            state = ProcessingState.completed;
           });
           context.services.hapticsService.success();
         },
         onError: (e, stack) {
           setState(() {
-            state = LoadingState.idle;
+            state = ProcessingState.idle;
           });
           context.services.hapticsService.error();
         },
@@ -58,7 +58,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
 
   void _onFormChanged(BuildContext context) {
     setState(() {
-      state = LoadingState.idle;
+      state = ProcessingState.idle;
     });
   }
 
@@ -158,27 +158,27 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
 
   Widget buildOverlayActionButton(BuildContext context, Profile profile) {
     switch (state) {
-      case LoadingState.idle:
+      case ProcessingState.idle:
         return AppButton(
           text: AppLocalizations.of(
             context,
           ).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
-      case LoadingState.loading:
+      case ProcessingState.processing:
         return AppButton(
           text: AppLocalizations.of(
             context,
           ).profileSaveButtonSaving.toUpperCase(),
         );
-      case LoadingState.loaded:
+      case ProcessingState.completed:
         return AppButton(
           text: AppLocalizations.of(
             context,
           ).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
-      case LoadingState.error:
+      case ProcessingState.error:
         return AppButton(
           text: AppLocalizations.of(
             context,

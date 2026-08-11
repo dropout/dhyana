@@ -11,7 +11,7 @@ void main() {
   late FakeModelFactory fakeModelFactory;
 
   setUpAll(() {
-    registerFallbackValue(FakeModelFactory().createProfile());
+    registerFallbackValue(FakeModelFactory().createProfileEntity());
   });
 
   setUp(() {

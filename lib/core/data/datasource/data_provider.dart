@@ -1,3 +1,5 @@
+
+
 abstract interface class DataProvider<M> {
 
   Future<void> create(M item);
@@ -7,4 +9,14 @@ abstract interface class DataProvider<M> {
   Future<void> delete(String id);
   Future<bool> exists(String id);
 
+}
+
+
+class DocumentNotFoundException implements Exception {
+  final String message;
+  DocumentNotFoundException({required this.message});
+  @override
+  String toString() {
+    return 'DocumentNotFoundException: $message';
+  }
 }

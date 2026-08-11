@@ -1,15 +1,15 @@
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/remote_settings_cubit.dart';
-import 'package:dhyana/core/bootstrap/init_result.dart';
-import 'package:dhyana/core/di/services.dart';
+import 'package:dhyana/bootstrap/init_result.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-/// Provides the top-level providers for the app, such as repositories,
-/// services and blocs.
+/// Application top-level providers for the app.
+/// Enables global access to services, cubits for the UI.
 class AppProviders extends StatelessWidget {
   final InitResult initResult;
   final Widget child;
@@ -35,7 +35,6 @@ class AppProviders extends StatelessWidget {
                   ? AuthState.signedIn(userId: initResult.userId!)
                   : const AuthState.initial(),
               )
-
           ),
           BlocProvider<ProfileCubit>(
             create: (_) {

@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:dhyana/core/domain/enum/loading_state.dart';
+import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
@@ -30,25 +30,25 @@ mixin ScreenHelperMixin {
     );
   }
 
-  Widget buildOverlayActionButton(BuildContext context, LoadingState state, {
+  Widget buildOverlayActionButton(BuildContext context, ProcessingState state, {
     required VoidCallback onAction,
   }) {
     switch (state) {
-      case LoadingState.idle:
+      case ProcessingState.idle:
         return AppButton(
           text: context.l10n.profileSaveButtonIdle.toUpperCase(),
           onTap: onAction,
         );
-      case LoadingState.loading:
+      case ProcessingState.processing:
         return AppButton(
           text: context.l10n.profileSaveButtonSaving.toUpperCase(),
         );
-      case LoadingState.loaded:
+      case ProcessingState.completed:
         return AppButton(
           text: context.l10n.profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
-      case LoadingState.error:
+      case ProcessingState.error:
         return AppButton(
           text: context.l10n.profileSaveButtonIdle.toUpperCase(),
           onTap: onAction,
