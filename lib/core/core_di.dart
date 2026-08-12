@@ -139,10 +139,13 @@ void _registerViewModels() {
     ),
   );
 
-  GetIt.I.registerFactoryParam<HomeScreenCubit, HomeScreenViewState, void>(
+  GetIt.I.registerFactoryParam<HomeScreenCubit, HomeScreenViewState?, void>(
     (initialSessionType, _) => HomeScreenCubit(
-      initialState: HomeScreenState(sessionType: initialSessionType),
+      initialState: (initialSessionType != null) 
+        ? HomeScreenState(sessionType: initialSessionType) 
+        : null,
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     ),
   );
+
 }

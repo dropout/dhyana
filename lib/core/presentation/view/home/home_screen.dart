@@ -27,9 +27,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
       create: (_) => GetIt.I.get<HomeScreenCubit>(
-        param1: timerSettings != null
-            ? HomeScreenViewState.sitting
-            : HomeScreenViewState.chanting,
+        param1: (timerSettings != null)
+          ? HomeScreenViewState.sitting
+          : null,
       ),
       builder: (context, state) => buildScaffolding(context, state),
     );

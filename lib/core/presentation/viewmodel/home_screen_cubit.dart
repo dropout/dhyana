@@ -1,5 +1,6 @@
 import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -13,8 +14,7 @@ sealed class HomeScreenState with _$HomeScreenState {
   }) = _HomeScreenState;
 }
 
-
-class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
+class HomeScreenCubit extends HydratedCubit<HomeScreenState> with LoggerMixin {
   final HomeScreenState? initialState;
   final CrashlyticsService crashlyticsService;
 
@@ -27,9 +27,11 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
   HomeScreenState? fromJson(Map<String, dynamic> json) {
     try {
       if (initialState != null) {
+        logger.t('Using initial state for HomeScreenCubit: $initialState');
         return initialState;
       } else {
         final sessionType = HomeScreenViewState.values.byName(json['sessionType'] as String);
+        logger.t('Restored HomeScreenCubit state from JSON: $sessionType');
         return HomeScreenState(sessionType: sessionType);
       }
     } catch (e, stack) {
@@ -44,6 +46,7 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
 
   @override
   Map<String, dynamic> toJson(HomeScreenState state) {
+    logger.t('Saving HomeScreenCubit state: $state');
     return {
       'sessionType': state.sessionType.name,
     };
@@ -59,23 +62,6 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> {
         stackTrace: stackTrace,
         reason:
             'Failed to update session type and save HomeScreenState to SharedPreferences',
-      );
-    }
-  }
-
-  Future<void> toggleSessionType() async {
-    try {
-      final newSessionType = state.sessionType == HomeScreenViewState.sitting
-        ? HomeScreenViewState.chanting
-        : HomeScreenViewState.sitting;
-      final updatedState = state.copyWith(sessionType: newSessionType);
-      emit(updatedState);
-    } catch (e, stackTrace) {
-      crashlyticsService.recordError(
-        exception: e,
-        stackTrace: stackTrace,
-        reason:
-            'Failed to toggle session type and save HomeScreenState to SharedPreferences',
       );
     }
   }
