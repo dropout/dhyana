@@ -1,0 +1,73 @@
+import 'package:dhyana/core/util/services.dart';
+import 'package:dhyana/modules/practice/timer/public/viewmodel/timer_settings_cubit.dart';
+import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/core/infrastructure/platform/default_shader_service.dart';
+import 'package:dhyana/core/service/overlay_service.dart';
+import 'package:dhyana/core/service/shader_service.dart';
+import 'package:dhyana/core/presentation/view/home/session_start_button.dart';
+import 'package:dhyana/modules/practice/timer/public/view/timer_settings/duration_input.dart';
+import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_input.dart';
+import 'package:dhyana/modules/practice/timer/public/view/timer_settings/warmup_input.dart';
+import 'package:dhyana/modules/practice/timer/public/view/timer_settings/timer_settings_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../../mock_definitions.dart';
+import '../../../../../../test_context_providers.dart';
+
+void main() {
+
+  group('TimerSettingsView', () {
+
+    late MockServices mockServices;
+    late ShaderService shaderService;
+    late OverlayService mockOverlayService;
+
+    setUpAll(() async {
+      mockServices = MockServices();
+      shaderService = DefaultShaderService();
+      mockOverlayService = MockOverlayService();
+
+      when(() => mockServices.shaderService).thenReturn(shaderService);
+      when(() => mockServices.overlayService).thenReturn(mockOverlayService);
+
+      await shaderService.loadShader('shaders/gradient_flow.frag');
+    });
+
+    tearDown(() {
+      shaderService.close();
+    });
+
+    testWidgets('TimerSettingsView has all the necessary interface elements', (WidgetTester tester) async {
+
+      TimerSettings timerSettings = TimerSettings();
+
+      await tester.pumpWidget(
+        Provider<Services>(
+          create: (context) => mockServices,
+          child: withAllContextProviders(
+            BlocProvider<TimerSettingsCubit>(
+              create: (context) => MockTimerSettingsCubit(),
+              child: TimerSettingsView(
+                timerSettings: timerSettings,
+              )
+            )
+          )
+        )
+      );
+
+      await tester.pump();
+
+      expect(find.byType(WarmupTimeInput), findsOneWidget);
+      expect(find.byType(SoundInput), findsExactly(2));
+      expect(find.byType(DurationInput), findsOneWidget);
+      expect(find.byType(SessionStartButton), findsOneWidget);
+
+    });
+
+
+  });
+
+}

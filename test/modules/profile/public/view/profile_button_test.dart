@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../mock_definitions.dart';
 import '../../../../test_context_providers.dart';
-import '../../../../widget/mock_go_router_provider.dart';
+import '../../../../mock_go_router_provider.dart';
 
 void main() {
 

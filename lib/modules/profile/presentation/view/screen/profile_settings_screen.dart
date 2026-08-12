@@ -3,7 +3,7 @@ import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/profile/presentation/view/profile_settings_form.dart';
+import 'package:dhyana/modules/profile/presentation/view/settings/profile_settings_form.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/screen.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
@@ -18,8 +18,8 @@ class ProfileSettingsScreen extends StatefulWidget {
   final String profileId;
 
   const ProfileSettingsScreen({
-  required this.profileId,
-  super.key
+    required this.profileId,
+    super.key,
   });
 
   @override

@@ -42,6 +42,7 @@ class HomeRoute extends GoRouteData with $HomeRoute {
   }
 }
 
+// TODO: Move to module when payment/donate module is created
 @TypedGoRoute<DonateRoute>(path: '/donate', name: 'DONATE')
 class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
   const DonateRoute();
