@@ -1,8 +1,6 @@
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/core/util/default_profile_data.dart';
-import 'package:dhyana/modules/profile/public/view/profile_avatar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -52,8 +50,8 @@ void main() {
       }).then((_) async {
 
         final sizedBox = tester.widget<SizedBox>(find.byKey(const Key('profile_avatar_sized_box')));
-        expect(sizedBox.width, equals(DefaultProfileData.defaultProfileImageSize));
-        expect(sizedBox.height, equals(DefaultProfileData.defaultProfileImageSize));
+        expect(sizedBox.width, equals(128.0)); // Default size in constructor parameter
+        expect(sizedBox.height, equals(128.0));
 
         expect(find.byKey(const Key('profile_avatar_name_text')), findsOneWidget);
         expect(find.text(profile.firstName), findsOneWidget);

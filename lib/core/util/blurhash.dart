@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:blurhash_dart/blurhash_dart.dart';
 import 'package:image/image.dart';
 
+/// Creates a blur hash from an image represented as a byte array.
 String createBlurHash(Uint8List imageBytes, {
   int size = 32,
   int comp = 3,

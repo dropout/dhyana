@@ -1,3 +1,6 @@
+/// This file contains all the assets used in the app.
+/// Assets should be not referenced directly in the code with inline strings, 
+/// but instead should be referenced through this class.
 class Assets {
 
   // Images

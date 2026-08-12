@@ -1,5 +1,4 @@
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,7 @@ class ProfileAvatar extends StatelessWidget {
     required this.profileId,
     required this.profileName,
     this.profilePhotoBlurhash,
-    this.imageSize = DefaultProfileData.defaultProfileImageSize,
+    this.imageSize = 128.0,
     this.textStyle,
     super.key,
   });
