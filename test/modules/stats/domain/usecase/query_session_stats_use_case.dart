@@ -1,6 +1,6 @@
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/stats/domain/enum/stats_entity_granularity.dart';
-import 'package:dhyana/modules/stats/domain/usecase/query_stats_use_case.dart';
+import 'package:dhyana/modules/stats/domain/usecase/query_session_stats_use_case.dart';
 import 'package:dhyana/modules/stats/public/enum/stats_granularity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -9,11 +9,11 @@ import '../../../../mock_definitions.dart';
 
 void main() {
 	late MockStatisticsRepository repository;
-	late QueryStatsUseCase useCase;
+	late QuerySessionStatsUseCase useCase;
 
 	setUp(() {
 		repository = MockStatisticsRepository();
-		useCase = QueryStatsUseCase(repository: repository);
+		useCase = QuerySessionStatsUseCase(repository: repository);
 	});
 
 	group('QueryStatsUseCase.execute', () {

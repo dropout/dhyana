@@ -6,9 +6,9 @@ import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/data/mapper/profile_mapper.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
+import 'package:dhyana/modules/social/domain/entity/social_profile_entity.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer_screen.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_view.dart';
@@ -36,8 +36,8 @@ void main() {
     late MockAppAudioHandler mockAudioHandler;
 
     setUpAll(() {
-      registerFallbackValue(Presence(
-        profile: PublicProfile.fromProfile(profile: FakeModelFactory().createProfile()),
+      registerFallbackValue(PresenceEntity(
+        profile: SocialProfileEntity.fromProfile(profile: FakeModelFactory().createProfile()),
         id: 'test_presence_id',
         startedAt: DateTime.now(),
       ));

@@ -1,14 +1,15 @@
 import 'package:collection/collection.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
+import 'package:dhyana/modules/social/public/viewmodel/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
 import 'package:dhyana/core/presentation/view/util/app_animation.dart';
 import 'package:dhyana/core/presentation/view/util/app_button.dart';
+import 'package:dhyana/modules/social/public/model/presence.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'presence_list_item.dart';
+
 
 class PresenceView extends StatelessWidget {
 
@@ -94,7 +95,7 @@ class PresenceView extends StatelessWidget {
               maxPageCount: maxPageCount,
               onTap: () => BlocProvider.of<PresenceCubit>(context)
                   .loadPresenceData(
-                    queryOptions: PresenceQueryOptions(
+                    queryOptions: PresenceQueryOptionsEntity(
                       lastDocumentId: presenceList.last.id,
                       limit: batchSize,
                     ),

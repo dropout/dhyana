@@ -1,8 +1,9 @@
+import 'package:dhyana/modules/social/data/mapper/presence_mapper.dart';
+import 'package:dhyana/modules/social/public/model/presence.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
+import 'package:dhyana/modules/social/domain/usecase/query_presence_use_case.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -31,7 +32,7 @@ sealed class PresenceState with _$PresenceState {
 class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
 
   /// Use case to load presence data.
-  final LoadPresenceDataUseCase loadPresenceDataUseCase;
+  final QueryPresenceUseCase loadPresenceDataUseCase;
 
   /// Service to log errors
   final CrashlyticsService crashlyticsService;
@@ -45,7 +46,7 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
   /// Loads presence data based on [queryOptions].
   /// If [appendResult] is true, loaded items are appended to current items.
   Future<void> loadPresenceData({
-    required PresenceQueryOptions queryOptions,
+    required PresenceQueryOptionsEntity queryOptions,
     bool appendResult = false,
   }) async {
     try {
@@ -57,7 +58,7 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
       }
 
       final loadedPresenceList =
-          await loadPresenceDataUseCase.execute(queryOptions);
+        (await loadPresenceDataUseCase.execute(queryOptions)).map((e) => e.toApi()).toList();
 
       final resultList = appendResult
           ? <Presence>[...existingPresenceList, ...loadedPresenceList]

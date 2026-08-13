@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/social_profile_entity.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:faker/faker.dart';
@@ -20,12 +20,12 @@ enum _Gender {
   female,
 }
 
-PublicProfile _randomPublicProfile(_Gender gender) {
+SocialProfileEntity _randomPublicProfile(_Gender gender) {
   final Faker faker = Faker();
   int randomInt = Random().nextInt(20);
   switch (gender) {
     case _Gender.male:
-      return PublicProfile(
+      return SocialProfileEntity(
         id: faker.guid.guid(),
         firstName: randomName(maleFirstnames),
         lastName: randomName(lastNames),
@@ -33,7 +33,7 @@ PublicProfile _randomPublicProfile(_Gender gender) {
         photoBlurhash: DefaultProfileData.photoBlurhash,
       );
     case _Gender.female:
-      return PublicProfile(
+      return SocialProfileEntity(
         id: faker.guid.guid(),
         firstName: randomName(femaleFirstnames),
         lastName: randomName(lastNames),
@@ -48,12 +48,12 @@ class StubbedPresenceRepository implements PresenceRepository {
   final Faker _faker = Faker();
 
   @override
-  Future<List<Presence>> query(PresenceQueryOptions queryOptions) async {
+  Future<List<PresenceEntity>> query(PresenceQueryOptionsEntity queryOptions) async {
     await Future.delayed(Duration(seconds: 1));
     return Future.sync(() {
-      return List<Presence>.generate(queryOptions.limit, (index) {
+      return List<PresenceEntity>.generate(queryOptions.limit, (index) {
         _Gender randomGender = Random().nextInt(2) % 2 == 0 ? _Gender.male : _Gender.female;
-        return Presence(
+        return PresenceEntity(
           id: _faker.guid.guid(),
           profile: _randomPublicProfile(randomGender),
           startedAt: DateTime.now().subtract(Duration(minutes: 1 + index * 3)),
@@ -63,7 +63,7 @@ class StubbedPresenceRepository implements PresenceRepository {
   }
 
   @override
-  Future<void> create(Presence model) {
+  Future<void> create(PresenceEntity model) {
     throw UnimplementedError();
   }
 
@@ -73,22 +73,22 @@ class StubbedPresenceRepository implements PresenceRepository {
   }
 
   @override
-  Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions) {
+  Stream<List<PresenceEntity>> queryStream(PresenceQueryOptionsEntity queryOptions) {
     throw UnimplementedError();
   }
 
   @override
-  Future<Presence> read(String id, {bool preferCache = false}) {
+  Future<PresenceEntity> read(String id, {bool preferCache = false}) {
     throw UnimplementedError();
   }
 
   @override
-  Stream<Presence> readStream(String id) {
+  Stream<PresenceEntity> readStream(String id) {
     throw UnimplementedError();
   }
 
   @override
-  Future<void> update(Presence model) {
+  Future<void> update(PresenceEntity model) {
     throw UnimplementedError();
   }
 

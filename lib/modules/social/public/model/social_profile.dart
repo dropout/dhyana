@@ -1,32 +1,33 @@
+import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
+
 import 'package:dhyana/core/domain/entity/profile/profile_model.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
-import 'package:uuid/uuid.dart';
 
-part 'public_profile.freezed.dart';
-part 'public_profile.g.dart';
+
+part 'social_profile.freezed.dart';
 
 @freezed
-sealed class PublicProfile with _$PublicProfile implements ProfileModel {
+sealed class SocialProfile with _$SocialProfile implements ProfileModel {
 
-  const PublicProfile._();
+  const SocialProfile._();
 
-  const factory PublicProfile({
+  const factory SocialProfile({
     required String id,
     required String firstName,
     required String lastName,
     required String? photoUrl,
     required String? photoBlurhash,
     Location? location,
-  }) = _PublicProfile;
+  }) = _SocialProfile;
 
-  factory PublicProfile.fromProfile({
+  factory SocialProfile.fromProfile({
     required Profile profile,
   }) {
-    return PublicProfile(
+    return SocialProfile(
       id: profile.id,
       firstName: profile.firstName,
       lastName: profile.lastName,
@@ -36,8 +37,8 @@ sealed class PublicProfile with _$PublicProfile implements ProfileModel {
     );
   }
 
-  factory PublicProfile.anonymous() {
-    return PublicProfile(
+  factory SocialProfile.anonymous() {
+    return SocialProfile(
       id: const Uuid().v4(),
       firstName: DefaultProfileData.firstName,
       lastName: DefaultProfileData.lastName,
@@ -45,9 +46,6 @@ sealed class PublicProfile with _$PublicProfile implements ProfileModel {
       photoBlurhash: DefaultProfileData.photoBlurhash,
     );
   }
-
-  factory PublicProfile.fromJson(Map<String, Object?> json) =>
-    _$PublicProfileFromJson(json);
 
   @override
   String get displayName => 

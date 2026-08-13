@@ -1,8 +1,11 @@
 import 'package:dhyana/core/domain/entity/location.dart';
+import 'package:dhyana/modules/social/data/mapper/presence_mapper.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
+import 'package:dhyana/modules/social/domain/usecase/show_presence_use_case.dart';
 import 'package:dhyana/modules/social/public/api/social_public_api.dart';
+import 'package:dhyana/modules/social/public/model/presence.dart';
+
 
 class DefaultSocialPublicApi implements SocialPublicApi {
 
@@ -20,21 +23,32 @@ class DefaultSocialPublicApi implements SocialPublicApi {
     String? photoBlurhash,
     Location? location,
     required DateTime startedAt,
-  }) async {
-    return presenceRepository.create(
-      Presence(
-        id: profileId,
-        profile: PublicProfile(
-          id: profileId,
-          firstName: firstName,
-          lastName: lastName,
-          photoUrl: null,
-          photoBlurhash: photoBlurhash,
-          location: location,
-        ),
-        startedAt: startedAt,
+  }) async => ShowPresenceUseCase(presenceRepository).execute(
+      profileId: profileId,
+      firstName: firstName,
+      lastName: lastName,
+      photoBlurhash: photoBlurhash,
+      location: location,
+      startedAt: startedAt,
+    );
+
+  @override
+  Future<List<Presence>> queryPresence({
+    Duration windowSize = const Duration(hours: 3),
+    int limit = 20,
+    double rangeInKm = 100,
+    String? ownProfileId,
+    String? lastDocumentId,
+    Location? location,
+  }) async => (await presenceRepository.query(
+      PresenceQueryOptionsEntity(
+        windowSize: windowSize,
+        limit: limit,
+        rangeInKm: rangeInKm,
+        ownProfileId: ownProfileId,
+        lastDocumentId: lastDocumentId,
         location: location,
-      ),
-    );      
-  }
+      )
+    )).map((e) => e.toApi()).toList();
+      
 }

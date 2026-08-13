@@ -1,5 +1,5 @@
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
+import 'package:dhyana/modules/social/domain/usecase/query_presence_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -7,17 +7,17 @@ import '../../../../mock_definitions.dart';
 
 void main() {
   late MockPresenceRepository presenceRepository;
-  late LoadPresenceDataUseCase useCase;
+  late QueryPresenceUseCase useCase;
 
   setUp(() {
     presenceRepository = MockPresenceRepository();
-    useCase = LoadPresenceDataUseCase(
+    useCase = QueryPresenceUseCase(
       presenceRepository: presenceRepository,
     );
   });
 
   test('forwards query options to repository and returns result', () async {
-    const queryOptions = PresenceQueryOptions(
+    const queryOptions = PresenceQueryOptionsEntity(
       ownProfileId: 'me',
       lastDocumentId: 'last-doc',
       limit: 5,

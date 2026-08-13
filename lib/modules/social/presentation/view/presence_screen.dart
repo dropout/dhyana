@@ -1,8 +1,8 @@
-import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/social_module.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/social/presentation/view/presence_view.dart';
+import 'package:dhyana/modules/social/public/view/presence_view.dart';
 import 'package:dhyana/core/presentation/view/default_screen_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class _PresenceScreenState extends State<PresenceScreen>
   void _onIntervalChangeEnd(BuildContext context, double value) {
     if (value.round() != intervalInMinutes.round()) {
       context.read<PresenceCubit>().loadPresenceData(
-        queryOptions: PresenceQueryOptions(
+        queryOptions: PresenceQueryOptionsEntity(
           windowSize: Duration(minutes: value.round()),
           limit: widget.batchSize,
         ),
@@ -47,7 +47,7 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   Future<void> _onRefresh(BuildContext context) async {
     context.read<PresenceCubit>().loadPresenceData(
-      queryOptions: PresenceQueryOptions(
+      queryOptions: PresenceQueryOptionsEntity(
         windowSize: Duration(minutes: intervalInMinutes.round()),
         limit: widget.batchSize,
       ),
@@ -59,7 +59,7 @@ class _PresenceScreenState extends State<PresenceScreen>
     return BlocProvider<PresenceCubit>(
       create: (context) =>
           GetIt.instance.get<PresenceCubit>()..loadPresenceData(
-            queryOptions: PresenceQueryOptions(
+            queryOptions: PresenceQueryOptionsEntity(
               windowSize: Duration(minutes: sliderPosition.round()),
               limit: widget.batchSize,
             ),

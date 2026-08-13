@@ -8,8 +8,8 @@ import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dar
 import 'package:dhyana/modules/social/data/repository/default_presence_repository.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 import 'package:dhyana/modules/social/data/service/default_social_public_api.dart';
-import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
+import 'package:dhyana/modules/social/domain/usecase/query_presence_use_case.dart';
+import 'package:dhyana/modules/social/public/viewmodel/presence_cubit.dart';
 
 void registerSocialModuleDependencies() {
   _registerDataProviders();
@@ -41,7 +41,7 @@ void _registerServices() {
 
 void _registerUseCases() {
   GetIt.I.registerLazySingleton(
-    () => LoadPresenceDataUseCase(
+    () => QueryPresenceUseCase(
       presenceRepository: GetIt.I.get<PresenceRepository>(),
     ),
   );
@@ -50,7 +50,7 @@ void _registerUseCases() {
 void _registerViewModels() {
   GetIt.I.registerFactory<PresenceCubit>(() {
     return PresenceCubit(
-      loadPresenceDataUseCase: GetIt.I.get<LoadPresenceDataUseCase>(),
+      loadPresenceDataUseCase: GetIt.I.get<QueryPresenceUseCase>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     );
   });

@@ -11,7 +11,7 @@ import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
+import 'package:dhyana/modules/social/social_module.dart';
 import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';

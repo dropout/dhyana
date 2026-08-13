@@ -1,25 +1,26 @@
 import 'dart:async';
 
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
-import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/social_profile_entity.dart';
 import 'package:dhyana/modules/social/data/repository/default_presence_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockPresenceDataProvider extends Mock implements PresenceDataProvider {}
+import '../social_mock_definitions.dart';
+
+
 
 void main() {
   group('DefaultPresenceRepositoryTest', () {
-    late StreamController<Presence> presenceStreamController;
+    late StreamController<PresenceEntity> presenceStreamController;
     late MockPresenceDataProvider mockPresenceDataProvider;
     late DefaultPresenceRepository firebasePresenceRepository;
 
-    Presence createPresence(String id) {
-      return Presence(
+    PresenceEntity createPresence(String id) {
+      return PresenceEntity(
         id: id,
-        profile: const PublicProfile(
+        profile: const SocialProfileEntity(
           id: 'profile-id',
           firstName: 'Ada',
           lastName: 'Lovelace',
@@ -31,7 +32,7 @@ void main() {
     }
 
     setUp(() {
-      presenceStreamController = StreamController<Presence>(sync: true);
+      presenceStreamController = StreamController<PresenceEntity>(sync: true);
       mockPresenceDataProvider = MockPresenceDataProvider();
       firebasePresenceRepository = DefaultPresenceRepository(
         presenceDataProvider: mockPresenceDataProvider,
@@ -69,7 +70,7 @@ void main() {
 
       final stream = firebasePresenceRepository.readStream('test_id');
 
-      expect(stream, isA<Stream<Presence>>());
+      expect(stream, isA<Stream<PresenceEntity>>());
       verify(() => mockPresenceDataProvider.readStream('test_id')).called(1);
     });
 
@@ -105,7 +106,7 @@ void main() {
     });
 
     test('query returns all when ownProfileId is null', () async {
-      const queryOptions = PresenceQueryOptions();
+      const queryOptions = PresenceQueryOptionsEntity();
       final presenceList = [
         createPresence('id-1'),
         createPresence('id-2'),
@@ -120,7 +121,7 @@ void main() {
     });
 
     test('query excludes own profile when ownProfileId is provided', () async {
-      const queryOptions = PresenceQueryOptions(ownProfileId: 'id-1');
+      const queryOptions = PresenceQueryOptionsEntity(ownProfileId: 'id-1');
       final ownPresence = createPresence('id-1');
       final otherPresence = createPresence('id-2');
       when(() => mockPresenceDataProvider.query(queryOptions))
@@ -134,7 +135,7 @@ void main() {
 
     test('queryStream throws UnimplementedError', () {
       expect(
-        () => firebasePresenceRepository.queryStream(const PresenceQueryOptions()),
+        () => firebasePresenceRepository.queryStream(const PresenceQueryOptionsEntity()),
         throwsA(isA<UnimplementedError>()),
       );
     });

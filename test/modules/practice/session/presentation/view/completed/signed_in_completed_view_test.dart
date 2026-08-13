@@ -7,7 +7,7 @@ import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
-import 'package:dhyana/modules/social/presentation/view/presence_area.dart';
+import 'package:dhyana/modules/social/public/view/presence_area.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/progress_summary.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/session_result.dart';

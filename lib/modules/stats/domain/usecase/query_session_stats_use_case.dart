@@ -4,11 +4,11 @@ import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 import 'package:dhyana/modules/stats/public/enum/stats_granularity.dart';
 
 /// Use case for querying statistics buckets from the repository.
-class QueryStatsUseCase {
+class QuerySessionStatsUseCase {
 
   final StatsRepository repository;
 
-  const QueryStatsUseCase({
+  const QuerySessionStatsUseCase({
     required this.repository,
   });
 

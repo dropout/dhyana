@@ -1,7 +1,7 @@
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/profile/public/view/profile_image.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/social/public/model/presence.dart';
 import 'package:flutter/material.dart';
 
 class PresenceListItem extends StatelessWidget {

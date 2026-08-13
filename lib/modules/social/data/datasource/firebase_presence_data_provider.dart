@@ -6,26 +6,26 @@ import 'package:dhyana/core/data/datasource/firebase_model_extension.dart';
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
 import 'package:dhyana/core/data/datasource/firebase_data_provider.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/core/util/location.dart';
 
 
-class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
+class FirebasePresenceDataProvider extends FirebaseDataProvider<PresenceEntity>
     implements PresenceDataProvider {
   FirebasePresenceDataProvider(FirebaseFirestore fireStore)
     : super(
         fireStore
             .collection('presence')
-            .withConverter<Presence>(
+            .withConverter<PresenceEntity>(
               fromFirestore: (snapshot, _) =>
-                  fromFireStore(snapshot, Presence.fromJson),
+                  fromFireStore(snapshot, PresenceEntity.fromJson),
               toFirestore: (presence, _) => presence.toFireStore(),
             ),
       );
 
   @override
-  Future<List<Presence>> query(PresenceQueryOptions queryOptions) async {
+  Future<List<PresenceEntity>> query(PresenceQueryOptionsEntity queryOptions) async {
     final location = queryOptions.location;
     final timeQuery = _buildTimeBasedQuery(
       queryOptions.windowSize,
@@ -62,10 +62,10 @@ class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
   }
 
   @override
-  Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions) =>
+  Stream<List<PresenceEntity>> queryStream(PresenceQueryOptionsEntity queryOptions) =>
       throw UnimplementedError('Not implemented to avoid complexity and cost!');
 
-  Query<Presence> _buildTimeBasedQuery(Duration windowSize, int limit) {
+  Query<PresenceEntity> _buildTimeBasedQuery(Duration windowSize, int limit) {
     final timeThreshold = clock
         .now()
         .subtract(windowSize)
@@ -75,7 +75,7 @@ class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
         .limit(limit);
   }
 
-  Query<Presence> _buildLocationAndTimeBasedQuery({
+  Query<PresenceEntity> _buildLocationAndTimeBasedQuery({
     required Location location,
     required double rangeInKm,
     required Duration windowSize,
@@ -119,8 +119,8 @@ class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
     return q;
   }
 
-  Future<List<Presence>> _runQuery({
-    required Query<Presence> query,
+  Future<List<PresenceEntity>> _runQuery({
+    required Query<PresenceEntity> query,
     required String? lastDocumentId,
   }) async {
     var pagedQuery = query;
@@ -132,8 +132,8 @@ class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
     return results.docs.map((snapshot) => snapshot.data()).toList();
   }
 
-  List<Presence> _sortByDistance(
-    List<Presence> presenceList,
+  List<PresenceEntity> _sortByDistance(
+    List<PresenceEntity> presenceList,
     Location location,
   ) {
     final withLocation = presenceList
@@ -153,7 +153,7 @@ class FirebasePresenceDataProvider extends FirebaseDataProvider<Presence>
     return [...withLocation, ...withoutLocation];
   }
 
-  List<Presence> _sortByTime(List<Presence> presenceList) {
+  List<PresenceEntity> _sortByTime(List<PresenceEntity> presenceList) {
     presenceList.sort((a, b) => b.startedAt.compareTo(a.startedAt));
     return presenceList;
   }

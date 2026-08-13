@@ -4,7 +4,7 @@ import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_c
 import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
-import 'package:dhyana/modules/social/presentation/view/presence_area.dart';
+import 'package:dhyana/modules/social/public/view/presence_area.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
@@ -122,7 +122,7 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
               ),
             if (widget.profileSettings.usePresenceFeature) Gap.xxl(),
             if (widget.profileSettings.usePresenceFeature)
-              PresenceArea(profile: updateResult.updatedProfile),
+              PresenceArea(profileId: updateResult.updatedProfile.id),
             SizedBox(
               // as per size of bottom area gradient - safearea bottom
               // see [session_completed_screen.dart]

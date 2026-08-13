@@ -1,17 +1,17 @@
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 
 /// Use case for loading presence data with optional location based filtering.
-class LoadPresenceDataUseCase {
+class QueryPresenceUseCase {
 
   final PresenceRepository presenceRepository;
 
-  LoadPresenceDataUseCase({
+  QueryPresenceUseCase({
     required this.presenceRepository,
   });
 
-  Future<List<Presence>> execute(PresenceQueryOptions queryOptions) {
+  Future<List<PresenceEntity>> execute(PresenceQueryOptionsEntity queryOptions) {
     return presenceRepository.query(queryOptions);
   }
 }

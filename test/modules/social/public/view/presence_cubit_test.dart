@@ -1,18 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/domain/entity/lat_lng.dart';
 import 'package:dhyana/core/domain/entity/location.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/public_profile.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
-import 'package:dhyana/modules/social/domain/usecase/load_presence_data_use_case.dart';
-import 'package:dhyana/modules/social/presentation/viewmodel/presence_cubit.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/social_profile_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
+import 'package:dhyana/modules/social/domain/usecase/query_presence_use_case.dart';
+import 'package:dhyana/modules/social/social_module.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../mock_definitions.dart';
 
 class MockLoadPresenceDataUseCase extends Mock
-		implements LoadPresenceDataUseCase {}
+		implements QueryPresenceUseCase {}
 
 void main() {
 	late MockLoadPresenceDataUseCase loadPresenceDataUseCase;
@@ -25,10 +25,33 @@ void main() {
 		);
 	}
 
-	Presence createPresence(String id) {
-		return Presence(
+  Location createBerlinLocation() {
+		return Location(
+			name: 'Berlin',
+			latLng: const LatLng(latitude: 52.52, longitude: 13.405),
+			geoHash: 'u33dc1',
+		);
+	}
+
+  Presence createPresence(String id) {
+    return Presence(
+      id: id,
+      profile: SocialProfile(
+        id: 'profile-$id',
+        firstName: 'First$id',
+        lastName: 'Last$id',
+        photoUrl: null,
+        photoBlurhash: null,
+      ),
+      startedAt: DateTime(2026, 1, 1),
+      location: createBerlinLocation(),
+    );
+  }
+
+	PresenceEntity createPresenceEntity(String id) {
+		return PresenceEntity(
 			id: id,
-			profile: PublicProfile(
+			profile: SocialProfileEntity(
 				id: 'profile-$id',
 				firstName: 'First$id',
 				lastName: 'Last$id',
@@ -44,13 +67,7 @@ void main() {
 		);
 	}
 
-	Location createBerlinLocation() {
-		return Location(
-			name: 'Berlin',
-			latLng: const LatLng(latitude: 52.52, longitude: 13.405),
-			geoHash: 'u33dc1',
-		);
-	}
+
 
 	setUp(() {
 		loadPresenceDataUseCase = MockLoadPresenceDataUseCase();
@@ -74,7 +91,7 @@ void main() {
 			'emits loading then loaded when use case succeeds',
 			build: buildCubit,
 			setUp: () {
-				final queryOptions = PresenceQueryOptions(
+				final queryOptions = PresenceQueryOptionsEntity(
 					ownProfileId: 'me',
 					location: createBerlinLocation(),
 					rangeInKm: 42,
@@ -83,10 +100,10 @@ void main() {
 				);
 				when(
 					() => loadPresenceDataUseCase.execute(queryOptions),
-				).thenAnswer((_) async => [createPresence('1'), createPresence('2')]);
+				).thenAnswer((_) async => [createPresenceEntity('1'), createPresenceEntity('2')]);
 			},
 			act: (cubit) {
-				final queryOptions = PresenceQueryOptions(
+				final queryOptions = PresenceQueryOptionsEntity(
 					ownProfileId: 'me',
 					location: createBerlinLocation(),
 					rangeInKm: 42,
@@ -104,7 +121,7 @@ void main() {
 				),
 			],
 			verify: (_) {
-				final queryOptions = PresenceQueryOptions(
+				final queryOptions = PresenceQueryOptionsEntity(
 					ownProfileId: 'me',
 					location: createBerlinLocation(),
 					rangeInKm: 42,
@@ -128,13 +145,13 @@ void main() {
 			'emits loading then error and records crashlytics when use case throws',
 			build: buildCubit,
 			setUp: () {
-				const queryOptions = PresenceQueryOptions();
+				const queryOptions = PresenceQueryOptionsEntity();
 				when(
 					() => loadPresenceDataUseCase.execute(queryOptions),
 				).thenThrow(Exception('load failed'));
 			},
 			act: (cubit) => cubit.loadPresenceData(
-				queryOptions: const PresenceQueryOptions(),
+				queryOptions: const PresenceQueryOptionsEntity(),
 			),
 			expect: () => [
 				const PresenceState.loading(),
@@ -157,16 +174,16 @@ void main() {
 			'emits loadingMore then loaded when appendResult is true from initial state',
 			build: buildCubit,
 			setUp: () {
-				const queryOptions = PresenceQueryOptions(
+				const queryOptions = PresenceQueryOptionsEntity(
 					lastDocumentId: 'doc-1',
 					limit: 2,
 				);
 				when(
 					() => loadPresenceDataUseCase.execute(queryOptions),
-				).thenAnswer((_) async => [createPresence('1'), createPresence('2')]);
+				).thenAnswer((_) async => [createPresenceEntity('1'), createPresenceEntity('2')]);
 			},
 			act: (cubit) => cubit.loadPresenceData(
-				queryOptions: const PresenceQueryOptions(
+				queryOptions: const PresenceQueryOptionsEntity(
 					lastDocumentId: 'doc-1',
 					limit: 2,
 				),
@@ -181,7 +198,7 @@ void main() {
 			verify: (_) {
 				verify(
 					() => loadPresenceDataUseCase.execute(
-						const PresenceQueryOptions(
+						const PresenceQueryOptionsEntity(
 							lastDocumentId: 'doc-1',
 							limit: 2,
 						),
@@ -196,22 +213,22 @@ void main() {
 			setUp: () {
 				when(
 					() => loadPresenceDataUseCase.execute(
-						const PresenceQueryOptions(),
+						const PresenceQueryOptionsEntity(),
 					),
-				).thenAnswer((_) async => [createPresence('1')]);
+				).thenAnswer((_) async => [createPresenceEntity('1')]);
 				when(
 					() => loadPresenceDataUseCase.execute(
-						const PresenceQueryOptions(
+						const PresenceQueryOptionsEntity(
 							lastDocumentId: 'doc-2',
 							limit: 2,
 						),
 					),
-				).thenAnswer((_) async => [createPresence('2'), createPresence('3')]);
+				).thenAnswer((_) async => [createPresenceEntity('2'), createPresenceEntity('3')]);
 			},
 			act: (cubit) async {
-				await cubit.loadPresenceData(queryOptions: const PresenceQueryOptions());
+				await cubit.loadPresenceData(queryOptions: const PresenceQueryOptionsEntity());
 				await cubit.loadPresenceData(
-					queryOptions: const PresenceQueryOptions(
+					queryOptions: const PresenceQueryOptionsEntity(
 						lastDocumentId: 'doc-2',
 						limit: 2,
 					),
@@ -238,7 +255,7 @@ void main() {
 			setUp: () {
 				when(
 					() => loadPresenceDataUseCase.execute(
-						const PresenceQueryOptions(
+						const PresenceQueryOptionsEntity(
 							lastDocumentId: 'doc-3',
 							limit: 4,
 						),
@@ -246,7 +263,7 @@ void main() {
 				).thenThrow(Exception('load more failed'));
 			},
 			act: (cubit) => cubit.loadPresenceData(
-				queryOptions: const PresenceQueryOptions(
+				queryOptions: const PresenceQueryOptionsEntity(
 					lastDocumentId: 'doc-3',
 					limit: 4,
 				),

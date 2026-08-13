@@ -1,10 +1,10 @@
 import 'package:dhyana/core/data/datasource/data_provider.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 
-abstract interface class PresenceDataProvider implements DataProvider<Presence> {
+abstract interface class PresenceDataProvider implements DataProvider<PresenceEntity> {
 
-  Future<List<Presence>> query(PresenceQueryOptions queryOptions);
-  Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions);
+  Future<List<PresenceEntity>> query(PresenceQueryOptionsEntity queryOptions);
+  Stream<List<PresenceEntity>> queryStream(PresenceQueryOptionsEntity queryOptions);
 
 }

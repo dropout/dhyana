@@ -1,10 +1,10 @@
 import 'package:dhyana/modules/social/data/datasource/presence_data_provider.dart';
-import 'package:dhyana/modules/social/domain/entity/presence.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/core/data/repository/crud_repository.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
 
-class DefaultPresenceRepository extends CrudRepositoryOps<Presence>
+class DefaultPresenceRepository extends CrudRepositoryOps<PresenceEntity>
     implements PresenceRepository {
   
   final PresenceDataProvider presenceDataProvider;
@@ -15,12 +15,12 @@ class DefaultPresenceRepository extends CrudRepositoryOps<Presence>
   
 
   @override
-  Future<List<Presence>> query(PresenceQueryOptions queryOptions) async {
-    final List<Presence> presenceList = await presenceDataProvider.query(
+  Future<List<PresenceEntity>> query(PresenceQueryOptionsEntity queryOptions) async {
+    final List<PresenceEntity> presenceList = await presenceDataProvider.query(
       queryOptions,
     );
 
-    final List<Presence> filteredList = _excludeOwnProfile(
+    final List<PresenceEntity> filteredList = _excludeOwnProfile(
       presenceList,
       queryOptions.ownProfileId,
     );
@@ -29,18 +29,18 @@ class DefaultPresenceRepository extends CrudRepositoryOps<Presence>
   }
 
   @override
-  Stream<List<Presence>> queryStream(PresenceQueryOptions queryOptions) =>
+  Stream<List<PresenceEntity>> queryStream(PresenceQueryOptionsEntity queryOptions) =>
       throw UnimplementedError('Not implemented to avoid complexity and cost!');
 
-  List<Presence> _excludeOwnProfile(
-    List<Presence> presenceList,
+  List<PresenceEntity> _excludeOwnProfile(
+    List<PresenceEntity> presenceList,
     String? ownProfileId,
   ) {
     if (ownProfileId == null) {
       return presenceList;
     }
     return presenceList
-      .where((Presence presence) => presence.id != ownProfileId)
+      .where((PresenceEntity presence) => presence.id != ownProfileId)
       .toList();
   }
 }
