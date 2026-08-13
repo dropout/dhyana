@@ -1,10 +1,10 @@
-import 'package:dhyana/modules/stats/data/repository/bucket_filling_repository.dart';
+import 'package:dhyana/modules/stats/data/repository/bucket_filling_stats_repository.dart';
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockStatisticsRepository extends Mock implements StatisticsRepository {}
+class MockStatisticsRepository extends Mock implements StatsRepository {}
 
 void main() {
   group('BucketFillingRepository', () {

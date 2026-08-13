@@ -56,7 +56,7 @@ void main() {
     testWidgets('can display session completed view when signed out', (
       WidgetTester tester,
     ) async {
-      SessionEntity session = FakeModelFactory().createSession();
+      SessionEntity session = FakeModelFactory().createSessionEntity();
 
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
@@ -85,11 +85,11 @@ void main() {
       WidgetTester tester,
     ) async {
       final profile = FakeModelFactory().createProfile();
-      final session = FakeModelFactory().createSession();
+      final session = FakeModelFactory().createSessionEntity();
 
       when(
         () => mockAuthBloc.state,
-      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUser().uid));
+      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUserEntity().uid));
 
       when(() => profileCubit.state).thenReturn(ProfileState.loaded(
         profile: profile,
@@ -118,11 +118,11 @@ void main() {
 
     testWidgets('can display okay button', (WidgetTester tester) async {
       final profile = FakeModelFactory().createProfile();
-      final session = FakeModelFactory().createSession();
+      final session = FakeModelFactory().createSessionEntity();
 
       when(
         () => mockAuthBloc.state,
-      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUser().uid));
+      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUserEntity().uid));
 
       when(() => profileCubit.state).thenReturn(ProfileState.loaded(
         profile: profile,
@@ -156,7 +156,7 @@ void main() {
       WidgetTester tester,
     ) async {
       bool didPop = false;
-      SessionEntity session = FakeModelFactory().createSession();
+      SessionEntity session = FakeModelFactory().createSessionEntity();
 
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 

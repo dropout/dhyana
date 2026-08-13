@@ -178,7 +178,7 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(
           AuthState.signedIn(
-            userId: FakeModelFactory().createUser().uid
+            userId: FakeModelFactory().createUserEntity().uid
           )
         );
 
@@ -227,7 +227,7 @@ void main() {
       when(() => mockAuthBloc.state)
         .thenReturn(
           AuthState.signedIn(
-            userId: FakeModelFactory().createUser().uid
+            userId: FakeModelFactory().createUserEntity().uid
           )
         );
 

@@ -45,7 +45,7 @@ void main() {
       );
 
       when(() => mockStatisticsRepository.queryYears(profile.id, from: any(named: 'from'), to: any(named: 'to')))
-        .thenAnswer((_) async => FakeModelFactory().createYears(2));
+        .thenAnswer((_) async => FakeModelFactory().createYearStatsBucketList(2));
 
       await tester.pumpWidget(
         withAllContextProviders(

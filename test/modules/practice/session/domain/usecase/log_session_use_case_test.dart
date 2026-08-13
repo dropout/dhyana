@@ -1,12 +1,14 @@
-import 'package:dhyana/modules/stats/public/model/stats_session.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
-import 'package:dhyana/modules/profile/profile_module.dart';
-import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
-
-import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
+import 'package:dhyana/modules/stats/public/model/stats_session.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
+
+
+import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
 
 import '../../../../../mock_definitions.dart';
 

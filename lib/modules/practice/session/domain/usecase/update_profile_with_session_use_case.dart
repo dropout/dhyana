@@ -1,10 +1,11 @@
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
-import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
 
-import 'package:dhyana/modules/profile/public/model/profile_session.dart';
-
-/// Persists a completed session into profile statistics and returns the updated profile.
+/// Persists a completed session into profile 
+/// and updates profile statistics.
+/// Returns a container with the original profile, updated profile, 
+/// and the session that the profile was updated with.
 class UpdateProfileWithSessionUseCase {
 
   final ProfilePublicApi profilePublicApi;

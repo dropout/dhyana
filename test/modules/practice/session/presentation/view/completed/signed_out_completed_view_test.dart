@@ -11,7 +11,7 @@ void main() {
 
   testWidgets('SignedOutCompletedView renders correctly', (WidgetTester tester) async {
 
-    final SessionEntity session = FakeModelFactory().createSession();
+    final SessionEntity session = FakeModelFactory().createSessionEntity();
 
     await tester.pumpWidget(
       withAllContextProviders(

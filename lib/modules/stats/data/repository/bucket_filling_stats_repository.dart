@@ -1,15 +1,21 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/modules/stats/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/stats/domain/enum/stats_entity_granularity.dart';
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
-import 'package:flutter/material.dart';
+import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 
-class BucketFillingRepository implements StatisticsRepository {
-  final StatisticsRepository statisticsRepository;
+
+/// A decorator for a [StatsRepository] that fills in 
+/// missing buckets with empty ones.
+/// This is useful for UI components that expect a 
+/// continuous series of buckets, even if some have no data.
+class BucketFillingRepository implements StatsRepository {
+  final StatsRepository statisticsRepository;
 
   const BucketFillingRepository({
     required this.statisticsRepository,
@@ -84,36 +90,37 @@ class BucketFillingRepository implements StatisticsRepository {
   }
 
   @override
-  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime) async {
-    return statisticsRepository.getDay(profileId, dateTime);
+  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime, {bool preferCache = false}) async {
+    return statisticsRepository.getDay(profileId, dateTime, preferCache: preferCache);
   }
 
   @override
-  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime) async {
-    return statisticsRepository.getDayDetails(profileId, dateTime);
+  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime, {bool preferCache = false}) async {
+    return statisticsRepository.getDayDetails(profileId, dateTime, preferCache: preferCache);
   }
 
   @override
   Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(
     String profileId,
-    DateTime dateTime,
-  ) async {
-    return statisticsRepository.getDayWithDetails(profileId, dateTime);
+    DateTime dateTime, {
+    bool preferCache = false,
+  }) async {
+    return statisticsRepository.getDayWithDetails(profileId, dateTime, preferCache: preferCache);
   }
 
   @override
-  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime) async {
-    return statisticsRepository.getWeek(profileId, dateTime);
+  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime, {bool preferCache = false}) async {
+    return statisticsRepository.getWeek(profileId, dateTime, preferCache: preferCache);
   }
 
   @override
-  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime) async {
-    return statisticsRepository.getMonth(profileId, dateTime);
+  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime, {bool preferCache = false}) async {
+    return statisticsRepository.getMonth(profileId, dateTime, preferCache: preferCache);
   }
 
   @override
-  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime) async {
-    return statisticsRepository.getYear(profileId, dateTime);
+  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime, {bool preferCache = false}) async {
+    return statisticsRepository.getYear(profileId, dateTime, preferCache: preferCache);
   }
 
   @override
@@ -226,12 +233,12 @@ class BucketFillingRepository implements StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(
+  Future<void> logSessionStats(
     String profileId,
-    InsightsSessionEntity session,
+    StatsSessionEntity session,
     int consecutiveDaysCount,
   ) async {
-    await statisticsRepository.logSessionStatistics(
+    await statisticsRepository.logSessionStats(
       profileId,
       session,
       consecutiveDaysCount,

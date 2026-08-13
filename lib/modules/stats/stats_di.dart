@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/stats/data/repository/bucket_filling_repository.dart';
+import 'package:dhyana/modules/stats/data/repository/bucket_filling_stats_repository.dart';
 import 'package:dhyana/modules/stats/presentation/viewmodel/stats_bucket_cubit.dart';
 import 'package:dhyana/modules/stats/public/api/stats_public_api.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
@@ -7,9 +7,9 @@ import 'package:dhyana/core/service/crashlytics_service.dart';
 
 import 'package:dhyana/core/util/firebase_provider.dart';
 import 'package:dhyana/modules/stats/data/service/default_stats_public_api.dart';
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 import 'package:dhyana/modules/stats/data/datasource/firebase_stats_data_provider_factory.dart';
-import 'package:dhyana/modules/stats/data/repository/firebase_statistics_repository.dart';
+import 'package:dhyana/modules/stats/data/repository/firebase_stats_repository.dart';
 
 void registerStatsModuleDependencies() {
   _registerDataProviders();
@@ -24,10 +24,10 @@ void _registerDataProviders() {
 }
 
 void _registerRepositories() {
-  GetIt.I.registerLazySingleton<StatisticsRepository>(() {
+  GetIt.I.registerLazySingleton<StatsRepository>(() {
     final firebaseProvider = GetIt.I.get<FirebaseProvider>();
     return BucketFillingRepository(
-      statisticsRepository: FirebaseStatisticsRepository(
+      statisticsRepository: FirestoreStatsRepository(
         dataProviderFactory: FirebaseStatsDataProviderFactory(
           fireStore: firebaseProvider.firestore,
         ),
@@ -52,7 +52,7 @@ void _registerViewModels() {
 void _registerPublicApi() {
   GetIt.I.registerLazySingleton<StatsPublicApi>(() {
     return DefaultStatsPublicApi(
-      statisticsRepository: GetIt.I.get<StatisticsRepository>(),
+      statisticsRepository: GetIt.I.get<StatsRepository>(),
       profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
     );
   });

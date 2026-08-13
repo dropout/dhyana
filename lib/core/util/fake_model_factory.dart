@@ -12,10 +12,14 @@ import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:faker/faker.dart';
 
+
+/// A factory class to create fake model instances for testing purposes.
+/// May also be used to fill in data for UI testing, 
+/// but should not be used for production code.
 class FakeModelFactory {
   final Faker faker = Faker();
 
-  UserEntity createUser() {
+  UserEntity createUserEntity() {
     return UserEntity(
       uid: faker.guid.guid(),
       email: faker.internet.email(),
@@ -37,6 +41,10 @@ class FakeModelFactory {
     );
   }
 
+  List<Profile> createProfiles(int count) {
+    return List.generate(count, (_) => createProfile());
+  }
+
   ProfileEntity createProfileEntity() {
     return ProfileEntity(
       id: faker.guid.guid(),
@@ -51,11 +59,7 @@ class FakeModelFactory {
     );
   }
 
-  List<Profile> createProfiles(int count) {
-    return List.generate(count, (_) => createProfile());
-  }
-
-  DayStatsBucketEntity createDay({DateTime? startDate}) {
+  DayStatsBucketEntity createDayStatsBucketEntity({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return DayStatsBucketEntity(
       id: startDate.toDayId(),
@@ -65,16 +69,16 @@ class FakeModelFactory {
     );
   }
 
-  List<DayStatsBucketEntity> createDays(int count) {
-    return List.generate(count, (_) => createDay());
+  List<DayStatsBucketEntity> createDayStatsBucketList(int count) {
+    return List.generate(count, (_) => createDayStatsBucketEntity());
   }
 
-  DayDetailsEntity createDayDetails({DateTime? startDate}) {
+  DayDetailsEntity createDayDetailsEntity({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return DayDetailsEntity(
       id: startDate.toDayId(),
       startDate: startDate,
-      sessions: createSessions(faker.randomGenerator.integer(5)).map((s) => InsightsSessionEntity(
+      sessions: createSessionEntityList(faker.randomGenerator.integer(5)).map((s) => StatsSessionEntity(
         id: s.id,
         type: s.type,
         startTime: s.startTime,
@@ -85,11 +89,11 @@ class FakeModelFactory {
     );
   }
 
-  List<DayDetailsEntity> createDayDetailsList(int count) {
-    return List.generate(count, (_) => createDayDetails());
+  List<DayDetailsEntity> createDayDetailsEntityList(int count) {
+    return List.generate(count, (_) => createDayDetailsEntity());
   }
 
-  WeekStatsBucketEntity createWeek({DateTime? startDate}) {
+  WeekStatsBucketEntity createWeekStatsBucketEntity({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return WeekStatsBucketEntity(
       id: startDate.toWeekId(),
@@ -99,11 +103,11 @@ class FakeModelFactory {
     );
   }
 
-  List<WeekStatsBucketEntity> createWeeks(int count) {
-    return List.generate(count, (_) => createWeek());
+  List<WeekStatsBucketEntity> createWeekStatsBucketEntityList(int count) {
+    return List.generate(count, (_) => createWeekStatsBucketEntity());
   }
 
-  MonthStatsBucketEntity createMonth({DateTime? startDate}) {
+  MonthStatsBucketEntity createMonthStatsBucketEntity({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return MonthStatsBucketEntity(
       id: faker.guid.guid(),
@@ -113,11 +117,11 @@ class FakeModelFactory {
     );
   }
 
-  List<MonthStatsBucketEntity> createMonths(int count) {
-    return List.generate(count, (_) => createMonth());
+  List<MonthStatsBucketEntity> createMonthStatsBucketEntityList(int count) {
+    return List.generate(count, (_) => createMonthStatsBucketEntity());
   }
 
-  YearStatsBucketEntity createYear({DateTime? startDate}) {
+  YearStatsBucketEntity createYearStatsBucketEntity({DateTime? startDate}) {
     startDate ??= DateTime.now();
     return YearStatsBucketEntity(
       id: faker.guid.guid(),
@@ -127,11 +131,11 @@ class FakeModelFactory {
     );
   }
 
-  List<YearStatsBucketEntity> createYears(int count) {
-    return List.generate(count, (_) => createYear());
+  List<YearStatsBucketEntity> createYearStatsBucketList(int count) {
+    return List.generate(count, (_) => createYearStatsBucketEntity());
   }
 
-  SessionEntity createSession() {
+  SessionEntity createSessionEntity() {
     return SessionEntity(
       id: faker.guid.guid(),
       type: HomeScreenViewState.sitting,
@@ -141,8 +145,8 @@ class FakeModelFactory {
     );
   }
 
-  List<SessionEntity> createSessions(int count) {
-    return List.generate(count, (_) => createSession());
+  List<SessionEntity> createSessionEntityList(int count) {
+    return List.generate(count, (_) => createSessionEntity());
   }
 
   int randomMinutesCount(

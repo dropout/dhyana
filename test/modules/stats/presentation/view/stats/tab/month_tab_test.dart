@@ -45,7 +45,7 @@ void main() {
       );
 
       when(() => mockStatisticsRepository.queryMonths(profile.id, from: any(named: 'from'), to: any(named: 'to')))
-        .thenAnswer((_) async => FakeModelFactory().createMonths(4));
+        .thenAnswer((_) async => FakeModelFactory().createMonthStatsBucketEntityList(4));
 
       await tester.pumpWidget(
         withAllContextProviders(

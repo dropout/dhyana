@@ -44,7 +44,7 @@ void main() {
       );
 
       when(() => mockStatisticsRepository.queryDays(profile.id, from: any(named: 'from'), to: any(named: 'to')))
-        .thenAnswer((_) async => FakeModelFactory().createDays(10));
+        .thenAnswer((_) async => FakeModelFactory().createDayStatsBucketList(10));
 
       await tester.pumpWidget(
         withAllContextProviders(

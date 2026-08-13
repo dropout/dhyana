@@ -9,19 +9,19 @@ part 'insights_session_entity.freezed.dart';
 part 'insights_session_entity.g.dart';
 
 @freezed
-sealed class InsightsSessionEntity with _$InsightsSessionEntity implements Dto {
+sealed class StatsSessionEntity with _$StatsSessionEntity implements Dto {
 
-  const InsightsSessionEntity._();
+  const StatsSessionEntity._();
 
-  const factory InsightsSessionEntity({
+  const factory StatsSessionEntity({
     required String id,
     required HomeScreenViewState type,
     @DateTimeConverter() required DateTime startTime,
     @DateTimeConverter() required DateTime endTime,
     @DurationConverter() required Duration duration,
-  }) = _InsightsSessionEntity;
+  }) = _StatsSessionEntity;
 
-  factory InsightsSessionEntity.fromJson(Map<String, Object?> json) =>
-    _$InsightsSessionEntityFromJson(json);
+  factory StatsSessionEntity.fromJson(Map<String, Object?> json) =>
+    _$StatsSessionEntityFromJson(json);
 
 }

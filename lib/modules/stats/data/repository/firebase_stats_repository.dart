@@ -3,13 +3,15 @@ import 'package:dhyana/modules/stats/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/stats/domain/enum/stats_entity_granularity.dart';
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 
-class FirebaseStatisticsRepository extends StatisticsRepository {
+/// Repository to provide statistics data by granularity 
+/// (day, week, month, year) from Firebase Firestore.
+class FirestoreStatsRepository extends StatsRepository {
   final FirebaseStatsDataProviderFactory dataProviderFactory;
 
-  FirebaseStatisticsRepository({
+  FirestoreStatsRepository({
     required this.dataProviderFactory,
   });
 
@@ -18,6 +20,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     String profileId,
     DateTime dateTime, {
     required StatsEntityGranularity granularity,
+    bool preferCache = false,
   }) {
     final dataProvider = dataProviderFactory.createStatsBucketDataProvider(
       profileId,
@@ -41,13 +44,13 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime) {
+  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime, {bool preferCache = false}) {
     final dataProvider = dataProviderFactory.createDayDetailsDataProvider(profileId);
     return dataProvider.read(dateTime.toDayId());
   }
 
   @override
-  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime) async {
+  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     final bucket = await getBucket(
       profileId,
       dateTime,
@@ -61,14 +64,14 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(String profileId, DateTime dateTime) async {
+  Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     final dayStatsBucket = await getDay(profileId, dateTime);
     final dayDetails = await getDayDetails(profileId, dateTime);
     return (bucket: dayStatsBucket, details: dayDetails);
   }
 
   @override
-  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime) async {
+  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     final bucket = await getBucket(
       profileId,
       dateTime,
@@ -81,7 +84,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime) async {
+  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     final bucket = await getBucket(
       profileId,
       dateTime,
@@ -95,7 +98,7 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime) async {
+  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     final bucket = await getBucket(
       profileId,
       dateTime,
@@ -180,19 +183,19 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(String profileId, InsightsSessionEntity session, int consecutiveDaysCount) async {
-    await _logDayStats(
+  Future<void> logSessionStats(String profileId, StatsSessionEntity session, int consecutiveDaysCount) async {
+    await logDayStats(
       session,
       profileId,
       consecutiveDaysCount,
     );
-    await _logWeekStats(session, profileId);
-    await _logMonthStats(session, profileId);
-    await _logYearStats(session, profileId);
+    await logWeekStats(session, profileId);
+    await logMonthStats(session, profileId);
+    await logYearStats(session, profileId);
   }
 
-  Future<void> _logDayStats(
-    InsightsSessionEntity session,
+  Future<void> logDayStats(
+    StatsSessionEntity session,
     String profileId,
     int consecutiveDaysCount,
   ) async {
@@ -204,7 +207,11 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     // Update Days Stats Bucket
     try {
       // Day exists
-      final today = await getDay(profileId, session.startTime);
+      final today = await getDay(
+        profileId, 
+        session.startTime,
+        preferCache: true,
+      );
 
       updatedToday = today.copyWith(
         sessionCount: today.sessionCount + 1,
@@ -256,13 +263,17 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
       .set(updatedTodayDetails, merge: true);
   }
 
-  Future<void> _logWeekStats(InsightsSessionEntity session, String profileId) async {
+  Future<void> logWeekStats(StatsSessionEntity session, String profileId) async {
     final String weekId = session.startTime.toWeekId();
 
     late WeekStatsBucketEntity updatedWeek;
     try {
       // Week exists
-      final thisWeek = await getWeek(profileId, session.startTime);
+      final thisWeek = await getWeek(
+        profileId, 
+        session.startTime,
+        preferCache: true,
+      );
       updatedWeek = thisWeek.copyWith(
         sessionCount: thisWeek.sessionCount + 1,
         minutesCount: thisWeek.minutesCount + session.duration.inMinutes,
@@ -286,13 +297,17 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     ).set(updatedWeek, merge: true);
   }
 
-  Future<void> _logMonthStats(InsightsSessionEntity session, String profileId) async {
+  Future<void> logMonthStats(StatsSessionEntity session, String profileId) async {
     final String monthId = session.startTime.toMonthId();
 
     late MonthStatsBucketEntity updatedMonth;
     try {
       // Month exists
-      final thisMonth = await getMonth(profileId, session.startTime);
+      final thisMonth = await getMonth(
+        profileId, 
+        session.startTime, 
+        preferCache: true
+      );
       updatedMonth = thisMonth.copyWith(
         sessionCount: thisMonth.sessionCount + 1,
         minutesCount: thisMonth.minutesCount + session.duration.inMinutes,
@@ -313,13 +328,17 @@ class FirebaseStatisticsRepository extends StatisticsRepository {
     ).set(updatedMonth, merge: true);
   }
 
-  Future<void> _logYearStats(InsightsSessionEntity session, String profileId) async {
+  Future<void> logYearStats(StatsSessionEntity session, String profileId) async {
     final String yearId = session.startTime.toYearId();
 
     late YearStatsBucketEntity updatedYear;
     try {
       // Year exists
-      final thisYear = await getYear(profileId, session.startTime);
+      final thisYear = await getYear(
+        profileId, 
+        session.startTime, 
+        preferCache: true
+      );
       updatedYear = thisYear.copyWith(
         minutesCount: thisYear.minutesCount + session.duration.inMinutes,
         sessionCount: thisYear.sessionCount + 1,

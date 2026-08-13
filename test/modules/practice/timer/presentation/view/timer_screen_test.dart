@@ -117,7 +117,7 @@ void main() {
       final FakeModelFactory fakeModelFactory = FakeModelFactory();
 
       final TimerSettings timerSettings = TimerSettings();
-      final UserEntity user = fakeModelFactory.createUser();
+      final UserEntity user = fakeModelFactory.createUserEntity();
       final Profile profile = fakeModelFactory.createProfile().copyWith(
         id: user.uid,
         completed: true,
@@ -179,7 +179,7 @@ void main() {
       final FakeModelFactory fakeModelFactory = FakeModelFactory();
 
       final TimerSettings timerSettings = TimerSettings();
-      final UserEntity user = fakeModelFactory.createUser();
+      final UserEntity user = fakeModelFactory.createUserEntity();
       final Profile profile = fakeModelFactory.createProfile().copyWith(
         id: user.uid,
         completed: true,

@@ -1,16 +1,26 @@
-import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
-import 'package:dhyana/modules/profile/profile_module.dart';
-
-import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
-import 'package:dhyana/modules/profile/public/model/profile_session.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
+import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
+
 import '../../../../../mock_definitions.dart';
+
 
 void main() {
   late MockProfilePublicApi profilePublicApi;
   late UpdateProfileWithSessionUseCase useCase;
+
+  setUpAll(() {
+    registerFallbackValue(ProfileSession(
+      id: 'fallback',
+      type: ProfileSessionType.sitting,
+      startTime: DateTime.utc(1970),
+      endTime: DateTime.utc(1970),
+      duration: Duration.zero,
+    ));
+  });
 
   setUp(() {
     profilePublicApi = MockProfilePublicApi();
@@ -69,16 +79,11 @@ void main() {
           (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
     );
 
-    when(
-      () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
-    ).thenAnswer(
-      (_) async =>
-          (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
-    );
-
     final result = await useCase.execute(profile.id, session);
 
-    expect(result, equals(expectedUpdatedProfile));
+    expect(result.oldProfile, equals(profile));
+    expect(result.updatedProfile, equals(expectedUpdatedProfile));
+    expect(result.session, equals(session));
     verify(
       () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
     ).called(1);

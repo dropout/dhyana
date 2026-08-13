@@ -17,7 +17,7 @@ import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/modules/social/domain/repository/presence_repository.dart';
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
 import 'package:dhyana/core/service/analytics_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
@@ -165,7 +165,7 @@ class MockTimerSettingsHistoryRepository
 
 class MockStatisticsRepository
   extends Mock
-  implements StatisticsRepository {}
+  implements StatsRepository {}
 
 class MockAuthRepository 
   extends Mock 

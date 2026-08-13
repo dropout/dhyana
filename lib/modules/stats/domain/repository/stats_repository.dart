@@ -3,7 +3,7 @@ import 'package:dhyana/modules/stats/domain/entity/insights_session_entity.dart'
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/stats/domain/enum/stats_entity_granularity.dart';
 
-abstract class StatisticsRepository {
+abstract class StatsRepository {
   Future<StatsBucketEntity> getBucket(
     String profileId,
     DateTime dateTime, {
@@ -105,13 +105,13 @@ abstract class StatisticsRepository {
 
   
 
-  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime);
-  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime);
-  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime);
-  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime);
-  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime);
+  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime, {bool preferCache = false});
+  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime, {bool preferCache = false});
+  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime, {bool preferCache = false});
+  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime, {bool preferCache = false});
+  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime, {bool preferCache = false});
   Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})>
-  getDayWithDetails(String profileId, DateTime dateTime);
+  getDayWithDetails(String profileId, DateTime dateTime, {bool preferCache = false});
 
   Future<List<YearStatsBucketEntity>> queryYears(
     String profileId, {
@@ -140,9 +140,9 @@ abstract class StatisticsRepository {
     required DateTime to,
   });
 
-  Future<void> logSessionStatistics(
+  Future<void> logSessionStats(
     String profileId,
-    InsightsSessionEntity session,
+    StatsSessionEntity session,
     int consecutiveDaysCount,
   );
 }

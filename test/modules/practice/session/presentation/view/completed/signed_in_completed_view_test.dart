@@ -46,7 +46,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final profileId = 'profileId';
-      final session = FakeModelFactory().createSession();
+      final session = FakeModelFactory().createSessionEntity();
       final UpdateProfileStatsResultEntity updateResult = UpdateProfileStatsResultEntity(
         updatedProfile: FakeModelFactory().createProfile(),
         oldProfile: FakeModelFactory().createProfile(),
@@ -116,7 +116,7 @@ void main() {
     testWidgets('can show loading when initial state', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSessionEntity();
 
       when(
         () => mockSessionCompletedCubit.state,
@@ -160,7 +160,7 @@ void main() {
     testWidgets('can show loading when loading state', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSessionEntity();
 
       when(
         () => mockSessionCompletedCubit.state,
@@ -202,7 +202,7 @@ void main() {
     });
 
     testWidgets('can show error when error state', (WidgetTester tester) async {
-      final SessionEntity session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSessionEntity();
 
       when(
         () => mockSessionCompletedCubit.state,
@@ -246,7 +246,7 @@ void main() {
     testWidgets('can show loaded when saving session', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSessionEntity();
       UpdateProfileStatsResultEntity updateResult = UpdateProfileStatsResultEntity(
         updatedProfile: FakeModelFactory().createProfile(),
         oldProfile: FakeModelFactory().createProfile(),
@@ -298,7 +298,7 @@ void main() {
     testWidgets('can show loaded when saving session completed', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSession();
+      final SessionEntity session = FakeModelFactory().createSessionEntity();
       UpdateProfileStatsResultEntity updateResult = UpdateProfileStatsResultEntity(
         updatedProfile: FakeModelFactory().createProfile(),
         oldProfile: FakeModelFactory().createProfile(),

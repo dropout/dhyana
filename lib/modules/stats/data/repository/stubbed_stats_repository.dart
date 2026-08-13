@@ -2,12 +2,12 @@ import 'package:dhyana/modules/stats/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
 import 'package:dhyana/modules/stats/domain/enum/stats_entity_granularity.dart';
-import 'package:dhyana/modules/stats/domain/repository/statistics_repository.dart';
+import 'package:dhyana/modules/stats/domain/repository/stats_repository.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:flutter/material.dart';
 
-class StubbedStatisticsRepository implements StatisticsRepository {
+class StubbedStatsRepository implements StatsRepository {
 
   final FakeModelFactory _fakeModelFactory = FakeModelFactory();
 
@@ -115,37 +115,37 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime) async {
+  Future<DayStatsBucketEntity> getDay(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createDay(
+    return Future.value(_fakeModelFactory.createDayStatsBucketEntity(
       startDate: dateTime,
     ));
   }
 
   @override
-  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime) async {
+  Future<DayDetailsEntity> getDayDetails(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createDayDetails(
+    return Future.value(_fakeModelFactory.createDayDetailsEntity(
       startDate: dateTime,
     ));
   }
 
   @override
-  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime) async {
+  Future<WeekStatsBucketEntity> getWeek(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createWeek());
+    return Future.value(_fakeModelFactory.createWeekStatsBucketEntity());
   }
 
   @override
-  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime) async {
+  Future<MonthStatsBucketEntity> getMonth(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createMonth());
+    return Future.value(_fakeModelFactory.createMonthStatsBucketEntity());
   }
 
   @override
-  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime) async {
+  Future<YearStatsBucketEntity> getYear(String profileId, DateTime dateTime, {bool preferCache = false}) async {
     await Future.delayed(Duration(seconds: 1));
-    return Future.value(_fakeModelFactory.createYear());
+    return Future.value(_fakeModelFactory.createYearStatsBucketEntity());
   }
 
   @override
@@ -155,7 +155,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     List<DayStatsBucketEntity> days = [];
     for (var i = 0; i < difference.inDays.abs(); ++i) {
       DateTime date = from.add(Duration(days: i));
-      DayStatsBucketEntity day = _fakeModelFactory.createDay(
+      DayStatsBucketEntity day = _fakeModelFactory.createDayStatsBucketEntity(
         startDate: date,
       );
       day = day.copyWith(
@@ -175,7 +175,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
     List<WeekStatsBucketEntity> weeks = [];
     for (var i = 0; i < weeksCount; ++i) {
       DateTime date = from.add(Duration(days: i * 7));
-      WeekStatsBucketEntity week = _fakeModelFactory.createWeek(startDate: date);
+      WeekStatsBucketEntity week = _fakeModelFactory.createWeekStatsBucketEntity(startDate: date);
       week = week.copyWith(
         id: date.toWeekId(),
       );
@@ -197,7 +197,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
       DateTime date = from.copyWith(
         month: from.month + i,
       );
-      MonthStatsBucketEntity month = _fakeModelFactory.createMonth(startDate: date);
+      MonthStatsBucketEntity month = _fakeModelFactory.createMonthStatsBucketEntity(startDate: date);
       month = month.copyWith(
         id: date.toMonthId(),
       );
@@ -216,7 +216,7 @@ class StubbedStatisticsRepository implements StatisticsRepository {
       DateTime date = from.copyWith(
         year: from.year + i,
       );
-      YearStatsBucketEntity year = _fakeModelFactory.createYear(startDate: date);
+      YearStatsBucketEntity year = _fakeModelFactory.createYearStatsBucketEntity(startDate: date);
       year = year.copyWith(
         id: date.toYearId(),
       );
@@ -226,21 +226,21 @@ class StubbedStatisticsRepository implements StatisticsRepository {
   }
 
   @override
-  Future<void> logSessionStatistics(String profileId, InsightsSessionEntity session, int consecutiveDaysCount) async {
+  Future<void> logSessionStats(String profileId, StatsSessionEntity session, int consecutiveDaysCount) async {
     return Future.value();
   }
 
   @override
-  Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(String profileId, DateTime dateTime) async {
-    final day = await getDay(profileId, dateTime);
-    final details = _fakeModelFactory.createDayDetails(startDate: dateTime);
+  Future<({DayStatsBucketEntity bucket, DayDetailsEntity details})> getDayWithDetails(String profileId, DateTime dateTime, {bool preferCache = false}) async {
+    final day = await getDay(profileId, dateTime, preferCache: preferCache);
+    final details = _fakeModelFactory.createDayDetailsEntity(startDate: dateTime);
     return Future.value((bucket: day, details: details));
   }
 
   @override
   Future<List<({DayStatsBucketEntity bucket, DayDetailsEntity details})>> queryDaysWithDetails(String profileId, {required DateTime from, required DateTime to}) {
     final days = queryDays(profileId, from: from, to: to);
-    final details = Future.value(_fakeModelFactory.createDayDetailsList(to.difference(from).inDays.abs()));
+    final details = Future.value(_fakeModelFactory.createDayDetailsEntityList(to.difference(from).inDays.abs()));
     return Future.wait([days, details]).then((results) {
       final days = results[0] as List<DayStatsBucketEntity>;
       final details = results[1] as List<DayDetailsEntity>;

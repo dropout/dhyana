@@ -45,7 +45,7 @@ void main() {
       );
 
       when(() => mockStatisticsRepository.queryWeeks(profile.id, from: any(named: 'from'), to: any(named: 'to')))
-        .thenAnswer((_) async => FakeModelFactory().createWeeks(4));
+        .thenAnswer((_) async => FakeModelFactory().createWeekStatsBucketEntityList(4));
 
       await tester.pumpWidget(
         withAllContextProviders(

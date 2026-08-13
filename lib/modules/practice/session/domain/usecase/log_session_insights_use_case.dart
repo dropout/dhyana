@@ -1,9 +1,8 @@
-import 'package:dhyana/modules/stats/public/api/stats_public_api.dart';
-import 'package:dhyana/modules/stats/public/model/stats_session.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/core/service/mindful_minutes_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
+import 'package:dhyana/modules/stats/stats_module.dart';
+import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
+
 
 /// Logs a completed session to statistics and Mindful Minutes when authorized.
 class LogSessionInsightsUseCase with LoggerMixin {
@@ -16,6 +15,8 @@ class LogSessionInsightsUseCase with LoggerMixin {
   });
 
   Future<void> execute(String profileId, SessionEntity session) async {
+    
+    // Log to the StatsPublicApi
     await statsPublicApi.logSessionStatistics(
       profileId,
       StatsSession(
@@ -30,9 +31,10 @@ class LogSessionInsightsUseCase with LoggerMixin {
       ),
     );
 
+    // Log to Mindful Minutes Platform Health API if authorized
     final authorizationStatus = await mindfulMinutesService
         .getAuthorizationStatus();
-    if (authorizationStatus == AuthorizationStatus.authorized) {
+    if (authorizationStatus == .authorized) {
       await mindfulMinutesService.logMindfulMinutes(
         session.startTime,
         session.endTime,

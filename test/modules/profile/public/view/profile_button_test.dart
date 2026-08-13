@@ -95,7 +95,7 @@ void main() {
     testWidgets('will show loading state when profile is loading', (WidgetTester tester) async {
 
       FakeModelFactory().createProfile();
-      final UserEntity user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUserEntity();
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(userId: user.uid));
@@ -126,7 +126,7 @@ void main() {
     testWidgets('will show error state when profile loading failed', (WidgetTester tester) async {
 
       FakeModelFactory().createProfile();
-      final UserEntity user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUserEntity();
 
       when(() => mockAuthBloc.state)
         .thenReturn(AuthState.signedIn(userId: user.uid));
@@ -170,7 +170,7 @@ void main() {
 
     testWidgets('will show profile image profile loaded and is completed', (WidgetTester tester) async {
 
-      final UserEntity user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUserEntity();
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         id: user.uid,
         completed: true,
@@ -228,7 +228,7 @@ void main() {
     // Need to assert with GoRouter implementation
     testWidgets('will show profile image profile loaded and is not completed', (WidgetTester tester) async {
 
-      final UserEntity user = FakeModelFactory().createUser();
+      final UserEntity user = FakeModelFactory().createUserEntity();
       final Profile profile = FakeModelFactory().createProfile().copyWith(
         id: user.uid,
         completed: false,
