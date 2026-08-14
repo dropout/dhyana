@@ -34,7 +34,7 @@ void main() {
         .thenReturn(mockCrashlyticsService);
     });
 
-    testWidgets('has all the required widgets to display profile info ', (WidgetTester tester) async {
+    testWidgets('has all the required widgets to display profile info', (WidgetTester tester) async {
 
       final Profile profile = FakeModelFactory().createProfile();
 

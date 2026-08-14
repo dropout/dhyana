@@ -1,16 +1,17 @@
 import 'dart:math' as math;
 
-import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
-import 'package:dhyana/modules/stats/presentation/view/stats/stats_data_area_sliver.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/app_error_display.dart';
 import 'package:dhyana/core/presentation/view/util/app_loading_display.dart';
 import 'package:dhyana/core/presentation/view/util/title_effect.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/modules/stats/presentation/view/stats/stats_data_area_sliver.dart';
 
 import 'stats/tab/day_tab.dart';
 import 'stats/tab/month_tab.dart';

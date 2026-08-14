@@ -15,11 +15,26 @@ void main() {
   final Profile testProfile = FakeModelFactory().createProfile();
 
   late MockServices mockServices;
+  late MockResourceResolver mockResourceResolver;
   late MockCrashlyticsService mockCrashlyticsService;
 
   setUpAll(() async {
     mockServices = MockServices();
     mockCrashlyticsService = MockCrashlyticsService();
+    mockResourceResolver = MockResourceResolver();
+
+    when(
+      () => mockServices.crashlyticsService,
+    ).thenReturn(mockCrashlyticsService);
+
+    when(
+      () => mockServices.resourceResolver,
+    ).thenReturn(mockResourceResolver);
+
+    when(
+      () => mockResourceResolver.resolveStoragePath(any()),
+    ).thenAnswer((_) async => 'https://example.com/profile.jpg');
+
     when(
       () => mockServices.crashlyticsService,
     ).thenReturn(mockCrashlyticsService);

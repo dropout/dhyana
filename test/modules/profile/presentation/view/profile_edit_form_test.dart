@@ -1,11 +1,5 @@
 import 'dart:convert';
 
-import 'package:dhyana/core/util/services.dart';
-import 'package:dhyana/core/util/fake_model_factory.dart';
-
-import 'package:dhyana/core/presentation/view/input/form_builder_profile_image_picker.dart';
-import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
-import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,8 +7,15 @@ import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
 import 'package:provider/provider.dart';
 
+import 'package:dhyana/core/util/services.dart';
+import 'package:dhyana/core/util/fake_model_factory.dart';
+import 'package:dhyana/core/presentation/view/input/form_builder_profile_image_picker.dart';
+import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
+import 'package:dhyana/modules/profile/profile_module.dart';
+
 import '../../../../mock_definitions.dart';
 import '../../../../test_context_providers.dart';
+
 
 void main() {
   group('ProfileEditForm', () {

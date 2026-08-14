@@ -1,3 +1,4 @@
+import 'package:dhyana/core/service/resource_resolver.dart';
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
@@ -5,9 +6,12 @@ import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/util/date_time_utils.dart';
 import 'package:dhyana/modules/stats/presentation/view/stats/detailed_profile_view.dart';
 import 'package:dhyana/modules/stats/presentation/view/stats/label_value_detail.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:nock/nock.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../../../../../mock_definitions.dart';
 import '../../../../../test_context_providers.dart';
@@ -18,14 +22,52 @@ void main() {
 
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
+    late ResourceResolver mockResourceResolver;
+
+    setUpAll(() async {
+      nock.init();
+
+      // Initialize sqflite_ffi for testing because 
+      // app cached network image uses sqflite for caching images
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    });
 
     setUp(() async {
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
+      mockResourceResolver = MockResourceResolver();
 
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
 
+      when(() => mockServices.resourceResolver)
+        .thenReturn(mockResourceResolver);
+        
+      when(
+        () => mockResourceResolver.resolveStoragePath(any()),
+      ).thenAnswer((_) async => 'https://example.com/profile.jpg');
+
+
+      nock.cleanAll();
+      // Mock the MethodChannel for path_provider to return a valid path
+      // CachedNetworkImage uses path_provider to get the cache directory, 
+      // so we need to mock it for testing
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          (MethodCall methodCall) async => '.',
+        );
+
+    });
+
+    tearDown(() async {      
+      // Clear the mock handler for the MethodChannel to avoid affecting other tests
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+        const MethodChannel('plugins.flutter.io/path_provider'),
+        null, // <--- Removes the mock handler
+      );
     });
 
     testWidgets('can show statistics summary data', (WidgetTester tester) async {
@@ -49,7 +91,7 @@ void main() {
           withAllContextProviders(
             MultiProvider(
               providers: [
-                Provider<Services>(create: (context) =>mockServices ),
+                Provider<Services>(create: (context) => mockServices),
               ],
               child: DetailedProfileView(
                 profileId: profile.id,

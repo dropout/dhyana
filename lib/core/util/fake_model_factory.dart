@@ -69,7 +69,7 @@ class FakeModelFactory {
     );
   }
 
-  List<DayStatsBucketEntity> createDayStatsBucketList(int count) {
+  List<DayStatsBucketEntity> createDayStatsBucketEntityList(int count) {
     return List.generate(count, (_) => createDayStatsBucketEntity());
   }
 
@@ -131,7 +131,7 @@ class FakeModelFactory {
     );
   }
 
-  List<YearStatsBucketEntity> createYearStatsBucketList(int count) {
+  List<YearStatsBucketEntity> createYearStatsBucketEntityList(int count) {
     return List.generate(count, (_) => createYearStatsBucketEntity());
   }
 

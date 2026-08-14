@@ -101,6 +101,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
+  sqflite_common_ffi: ^2.4.2
   nock: ^1.2.3
   flutter_lints: ^6.0.0
   build_runner: ^2.4.6

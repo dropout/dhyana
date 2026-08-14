@@ -1,11 +1,12 @@
-import 'package:dhyana/core/util/services.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
+
 import 'package:dhyana/core/util/fake_model_factory.dart';
-import 'package:dhyana/modules/profile/profile_module.dart';
+import 'package:dhyana/modules/stats/data/mapper/stats_bucket_mapper.dart';
 import 'package:dhyana/modules/stats/presentation/view/stats/bar_chart_page/months_bar_chart_page.dart';
 import 'package:dhyana/modules/stats/presentation/view/stats/tab/month_tab.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:provider/provider.dart';
+import 'package:dhyana/modules/stats/presentation/viewmodel/stats_bucket_cubit.dart';
 
 import '../../../../../../mock_definitions.dart';
 import '../../../../../../test_context_providers.dart';
@@ -13,49 +14,38 @@ import '../../../../../../test_context_providers.dart';
 void main() {
 
   group('MonthTab', () {
-
-    late MockServices mockServices;
-    late MockStatisticsRepository mockStatisticsRepository;
+    late MockStatsPublicApi mockStatsPublicApi;
     late MockCrashlyticsService mockCrashlyticsService;
 
-    setUpAll(() {
-
-    });
+    setUpAll(() {});
 
     setUp(() async {
-      mockServices = MockServices();
+      mockStatsPublicApi = MockStatsPublicApi();
       mockCrashlyticsService = MockCrashlyticsService();
+      GetIt.I.registerFactory<StatsBucketCubit>(() {
+        return StatsBucketCubit(
+          statsPublicApi: mockStatsPublicApi,
+          crashlyticsService: mockCrashlyticsService,
+        );
+      });
+    });
 
-      when(() => mockServices.crashlyticsService)
-        .thenReturn(mockCrashlyticsService);
-
-      mockStatisticsRepository = MockStatisticsRepository();
-
+    tearDown(() async {
+      await GetIt.I.reset();
     });
 
     testWidgets('can be created with its default values', (WidgetTester tester) async {
-      final Profile profile = FakeModelFactory().createProfile().copyWith(
-        statsReport: ProfileStatsReport(
-          milestoneCount: 5,
-          milestoneProgress: MilestoneProgress(
-            targetDaysCount: 7,
-            completedDaysCount: 5,
-          )
-        )
-      );
-
-      when(() => mockStatisticsRepository.queryMonths(profile.id, from: any(named: 'from'), to: any(named: 'to')))
-        .thenAnswer((_) async => FakeModelFactory().createMonthStatsBucketEntityList(4));
+      when(() => mockStatsPublicApi.queryBuckets(
+        profileId: 'profileId', 
+        from: any(named: 'from'), 
+        to: any(named: 'to'),
+        granularity: .months,
+      )).thenAnswer((_) async => FakeModelFactory().createMonthStatsBucketEntityList(4).map((e) => e.toApi()).toList());
 
       await tester.pumpWidget(
         withAllContextProviders(
-          MultiProvider(
-            providers: [
-              Provider<Services>(create: (context) => mockServices),
-            ],
-            child: MonthTab(
-              profileId: profile.id,
-            ),
+          MonthTab(
+            profileId: 'profileId',
           )
         )
       );
@@ -64,10 +54,15 @@ void main() {
       expect(find.byType(MonthsBarChartPage), findsOneWidget);
       final MonthTabState monthTabState = tester.state(find.byType(MonthTab));
 
+      expect(monthTabState.months.length, 4);
+      expect(monthTabState.calculatedStats, isNotNull);
+
       // Verify that a query was made for the first interval
-      verify(() => mockStatisticsRepository.queryMonths(profile.id, 
+      verify(() => mockStatsPublicApi.queryBuckets(
+        profileId: 'profileId',
         from: monthTabState.intervals[0].from,
         to: monthTabState.intervals[0].to,
+        granularity: .months,
       )).called(1);
 
     });

@@ -10,9 +10,4 @@ abstract class ResourceResolver {
   Future<String> resolveStoragePath(String path) =>
     storageDataProvider.getDownloadURL(path);
 
-  Future<String> getProfileImageUrl(String profileId);
-  Future<String> getChantImageUrl(String chantId);
-  Future<String> getChantAudioUrl(String chantId);
-  Future<String> getChantLyricsUrl(String chantId);
-
 }
