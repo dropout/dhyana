@@ -4,3 +4,4 @@ import 'package:mocktail/mocktail.dart';
 class MockPresenceDataProvider 
   extends Mock 
   implements PresenceDataProvider {}
+  

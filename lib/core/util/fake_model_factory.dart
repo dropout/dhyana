@@ -1,6 +1,8 @@
 import 'package:dhyana/core/domain/enum/home_screen_view_state.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/presence_entity.dart';
+import 'package:dhyana/modules/social/domain/entity/social_profile_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/day_details_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/insights_session_entity.dart';
 import 'package:dhyana/modules/stats/domain/entity/stats_bucket_entity.dart';
@@ -147,6 +149,27 @@ class FakeModelFactory {
 
   List<SessionEntity> createSessionEntityList(int count) {
     return List.generate(count, (_) => createSessionEntity());
+  }
+
+  PresenceEntity createPresenceEntity() {
+    final profileId = faker.guid.guid();
+    return PresenceEntity(
+      id: profileId,
+      profile: SocialProfileEntity(
+        id: profileId,
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        photoUrl: faker.profilePhotoUrl(),
+        photoBlurhash: faker.profilePhotoBlurhash(),
+        location: null,
+      ),
+      startedAt: DateTime.now(),
+      location: null,
+    );
+  }
+
+  List<PresenceEntity> createPresenceEntityList(int count) {
+    return List.generate(count, (_) => createPresenceEntity());
   }
 
   int randomMinutesCount(
