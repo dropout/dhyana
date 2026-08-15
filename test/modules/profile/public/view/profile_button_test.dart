@@ -1,3 +1,4 @@
+import 'package:dhyana/core/service/resource_resolver.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
@@ -26,6 +27,7 @@ void main() {
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
   late MockHapticsService mockHapticsService;
+  late ResourceResolver mockResourceResolver;
 
   setUpAll(() async {
 
@@ -33,6 +35,7 @@ void main() {
     mockProfileCubit = MockProfileCubit();
     mockGoRouter = MockGoRouter();
     mockServices = MockServices();
+    mockResourceResolver = MockResourceResolver();
 
     mockCrashlyticsService = MockCrashlyticsService();
     mockHapticsService = MockHapticsService();
@@ -41,6 +44,12 @@ void main() {
       .thenReturn(mockCrashlyticsService);
     when(() => mockServices.hapticsService)
       .thenReturn(mockHapticsService);
+
+    when(() => mockServices.resourceResolver)
+      .thenReturn(mockResourceResolver);
+    when(
+      () => mockResourceResolver.resolveStoragePath(any()),
+    ).thenAnswer((_) async => 'https://example.com/profile.jpg');
 
     registerFallbackValue(FakeModelFactory().createProfile());
     registerFallbackValue("String");

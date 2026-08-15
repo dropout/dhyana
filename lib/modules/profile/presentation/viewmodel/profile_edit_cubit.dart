@@ -75,13 +75,13 @@ class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
   }) async {
     try {
       logger.t('Updating profile');
-      final updateProfile = await updateProfileUseCase.execute(
+      final updatedProfile = await updateProfileUseCase.execute(
         profile: profile.toDomain(),
         updatedFields: formData,
         completeProfile: completeProfile,
       );
-      emit(ProfileEditState.loaded(profile: updateProfile.toApi()));
-      onComplete?.call(updateProfile.toApi());
+      emit(ProfileEditState.loaded(profile: updatedProfile.toApi()));
+      onComplete?.call(updatedProfile.toApi());
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,

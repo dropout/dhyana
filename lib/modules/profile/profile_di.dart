@@ -88,8 +88,9 @@ void _registerApi() {
   GetIt.I.registerLazySingleton<ProfilePublicApi>(
     () => DefaultProfilePublicApi(
       profileRepository: GetIt.I.get<ProfileRepository>(),
-      profileStatsReportUpdaterService:
+      profileStatsUpdater:
           GetIt.I.get<ProfileStatsReportUpdaterService>(),
+      storageRepository: GetIt.I.get<StorageRepository>(),
     ),
   );
 }

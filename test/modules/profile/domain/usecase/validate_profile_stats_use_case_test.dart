@@ -5,6 +5,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../profile_mock_definitions.dart';
 
+
 void main() {
   late MockProfileStatsUpdater profileStatsUpdater;
   late ValidateProfileStatsUseCase useCase;

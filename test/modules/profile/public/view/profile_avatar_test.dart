@@ -1,3 +1,4 @@
+import 'package:dhyana/core/service/resource_resolver.dart';
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
@@ -13,16 +14,21 @@ void main() {
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
+  late ResourceResolver mockResourceResolver;
 
   setUpAll(() async {
-
     mockServices = MockServices();
-
+    mockResourceResolver = MockResourceResolver();
     mockCrashlyticsService = MockCrashlyticsService();
 
     when(() => mockServices.crashlyticsService)
       .thenReturn(mockCrashlyticsService);
-
+    when(() => mockServices.resourceResolver)
+      .thenReturn(mockResourceResolver);
+    when(
+      () => mockResourceResolver.resolveStoragePath(any()),
+    ).thenAnswer((_) async => 'https://example.com/profile.jpg');
+    
   });
 
   group('ProfileAvatar', () {
@@ -54,7 +60,7 @@ void main() {
         expect(sizedBox.height, equals(128.0));
 
         expect(find.byKey(const Key('profile_avatar_name_text')), findsOneWidget);
-        expect(find.text(profile.firstName), findsOneWidget);
+        expect(find.text(profile.displayName), findsOneWidget);
 
       });
 

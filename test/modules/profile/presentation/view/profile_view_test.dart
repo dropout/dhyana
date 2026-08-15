@@ -19,58 +19,65 @@ import '../../../../test_context_providers.dart';
 import '../../../../mock_definitions.dart';
 
 void main() {
-
   group('ProfileView', () {
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
+    late MockResourceResolver mockResourceResolver;
 
     setUp(() async {
       mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
+      mockResourceResolver = MockResourceResolver();
 
-      when(() => mockServices.crashlyticsService)
-        .thenReturn(mockCrashlyticsService);
+      when(
+        () => mockServices.crashlyticsService,
+      ).thenReturn(mockCrashlyticsService);
+      when(
+        () => mockServices.resourceResolver,
+      ).thenReturn(mockResourceResolver);
+      when(
+        () => mockResourceResolver.resolveStoragePath(any()),
+      ).thenAnswer((_) async => 'https://example.com/profile.jpg');
     });
 
-    testWidgets('has all the required widgets to display profile info', (WidgetTester tester) async {
-
+    testWidgets('has all the required widgets to display profile info', (
+      WidgetTester tester,
+    ) async {
       final Profile profile = FakeModelFactory().createProfile();
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
-            Provider<Services>(
+      await tester
+          .runAsync(() async {
+            await tester.pumpWidget(
+              Provider<Services>(
                 create: (context) => mockServices,
                 child: withAllContextProviders(
-                    MultiBlocProvider(
-                      providers: [
-                        BlocProvider<ProfileCubit>(
-                          create: (context) => mockProfileCubit,
-                        ),
-                      ],
-                      child: SingleChildScrollView(
-                        child: ProfileView(
-                          profile: profile,
-                        ),
+                  MultiBlocProvider(
+                    providers: [
+                      BlocProvider<ProfileCubit>(
+                        create: (context) => mockProfileCubit,
                       ),
-                    )
-                )
-            )
-        );
-        await tester.pumpAndSettle();
-      }).then((_) {
-        expect(find.byType(ProfileImage), findsOneWidget);
-        expect(find.text(profile.displayName), findsOneWidget);
-        expect(find.byType(MilestoneProgressView), findsOneWidget);
-        expect(find.byType(ConsecutiveDaysView), findsOneWidget);
-        expect(find.byType(MilestonesView), findsOneWidget);
-        expect(find.byType(SummaryView), findsOneWidget);
-        expect(find.byType(ProfileMenu), findsOneWidget);
-        expect(find.byType(ProfileFooter), findsOneWidget);
-      });
+                    ],
+                    child: SingleChildScrollView(
+                      child: ProfileView(profile: profile),
+                    ),
+                  ),
+                ),
+              ),
+            );
+            await tester.pumpAndSettle();
+          })
+          .then((_) {
+            expect(find.byType(ProfileImage), findsOneWidget);
+            expect(find.text(profile.displayName), findsOneWidget);
+            expect(find.byType(MilestoneProgressView), findsOneWidget);
+            expect(find.byType(ConsecutiveDaysView), findsOneWidget);
+            expect(find.byType(MilestonesView), findsOneWidget);
+            expect(find.byType(SummaryView), findsOneWidget);
+            expect(find.byType(ProfileMenu), findsOneWidget);
+            expect(find.byType(ProfileFooter), findsOneWidget);
+          });
     });
-
   });
-
 }

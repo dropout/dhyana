@@ -1,5 +1,4 @@
 import 'package:dhyana/core/domain/enum/processing_state.dart';
-import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
@@ -64,10 +63,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (BuildContext context, ProfileState state) {
+    return BlocBuilder<ProfileEditCubit, ProfileEditState>(
+      builder: (BuildContext context, ProfileEditState state) {
         switch (state) {
-          case ProfileLoadingState():
+          case ProfileEditLoadingState():
             return buildScaffolding(
               context,
               DefaultScreenSetup(
@@ -77,7 +76,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                 slivers: [buildLoadingSliver(context)],
               ),
             );
-          case ProfileErrorState():
+          case ProfileEditErrorState():
             return buildScaffolding(
               context,
               DefaultScreenSetup(
@@ -87,7 +86,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                 slivers: [buildErrorSliver(context)],
               ),
             );
-          case ProfileLoadedState():
+          case ProfileEditLoadedState():
             return buildScaffolding(
               context,
               DefaultScreenSetup(

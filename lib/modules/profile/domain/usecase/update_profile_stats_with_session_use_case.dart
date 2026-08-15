@@ -19,11 +19,14 @@ class UpdateProfileStatsWithSessionUseCase {
     String profileId,
     ProfileSessionEntity session,
   ) async {
-    final originalProfile = await profileRepository.readStream(profileId).first;
+    final originalProfile = await profileRepository.read(profileId, preferCache: true);
     final updatedProfile = profileStatsReportUpdaterService.updateProfileStatsWithSession(
       originalProfile,
       session,
     );
-    return (originalProfile: originalProfile, updatedProfile: updatedProfile);
+    return (
+      originalProfile: originalProfile, 
+      updatedProfile: updatedProfile
+    );
   }
 }

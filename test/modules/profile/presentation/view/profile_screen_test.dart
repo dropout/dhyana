@@ -20,13 +20,24 @@ void main() {
     late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
+    late MockResourceResolver mockResourceResolver;
 
     setUp(() async {
       mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
+      mockResourceResolver = MockResourceResolver();
+
+      
+
       when(() => mockServices.crashlyticsService)
         .thenReturn(mockCrashlyticsService);
+      
+      when(() => mockServices.resourceResolver)
+        .thenReturn(mockResourceResolver);      
+      when(
+        () => mockResourceResolver.resolveStoragePath(any()),
+      ).thenAnswer((_) async => 'https://example.com/profile.jpg');
 
     });
 
@@ -163,7 +174,7 @@ void main() {
             create: (context) => mockServices,
             child: withAllContextProviders(
               MultiBlocProvider(
-                providers: [
+                providers: [                  
                   BlocProvider<ProfileCubit>(
                     create: (context) => mockProfileCubit,
                   ),

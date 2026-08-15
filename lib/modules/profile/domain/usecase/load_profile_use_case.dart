@@ -21,9 +21,11 @@ class LoadProfileUseCase with LoggerMixin {
     required this.profileStatsUpdater,
   });
 
-  Future<ProfileEntity> execute(String profileId) async {
+  Future<ProfileEntity> execute(String profileId, {bool preferCache = false}) async {
     // Load the profile from the repository
-    var profileEntity = await profileRepository.read(profileId);
+    var profileEntity = await profileRepository.read(
+      profileId, preferCache: preferCache
+    );
 
     // Check if consecutive days are valid
     final updatedStatsReport = 
@@ -35,9 +37,10 @@ class LoadProfileUseCase with LoggerMixin {
       );
       profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
       
-      // lazy update the profile
+      // lazy update the profile, no need to await this
       profileRepository.update(profileEntity);
     }
+    
     return profileEntity;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/domain/enum/processing_state.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
@@ -37,7 +36,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   @override
   void initState() {
-    context.read<ProfileCubit>().loadProfile(
+    context.read<ProfileEditCubit>().loadProfile(
       widget.profileId,
     );
     super.initState();
@@ -86,10 +85,10 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (BuildContext context, ProfileState state) {
+    return BlocBuilder<ProfileEditCubit, ProfileEditState>(
+      builder: (BuildContext context, ProfileEditState state) {
         switch(state) {
-          case ProfileLoadingState():
+          case ProfileEditLoadingState():
             return buildScaffolding(
               context,
               DefaultScreenSetup(
@@ -101,7 +100,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 ],
               ),
             );
-          case ProfileErrorState():
+          case ProfileEditErrorState():
             return buildScaffolding(
               context,
               DefaultScreenSetup(
@@ -118,7 +117,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 ],
               ),
             );
-          case ProfileLoadedState():
+          case ProfileEditLoadedState():
             return buildScaffolding(
               context,
               DefaultScreenSetup(

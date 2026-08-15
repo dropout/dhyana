@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
 import 'package:dhyana/modules/profile/data/mapper/profile_mapper.dart';
+import 'package:dhyana/modules/profile/data/mapper/profile_settings_mapper.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/profile/domain/entity/profile_entity.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
@@ -49,8 +50,9 @@ void main() {
       build: buildCubit,
       act: (cubit) async {
         final profile = fakeModelFactory.createProfile();
-        when(() => loadProfileUseCase.execute(profile.id))
-            .thenAnswer((_) async => profile.toDomain());
+        when(
+          () => loadProfileUseCase.execute(profile.id),
+        ).thenAnswer((_) async => profile.toDomain());
 
         final callbackCompleter = Completer<Profile>();
 
@@ -70,7 +72,9 @@ void main() {
       ],
       verify: (cubit) {
         final loadedState = cubit.state as ProfileEditLoadedState;
-        verify(() => loadProfileUseCase.execute(loadedState.profile.id)).called(1);
+        verify(
+          () => loadProfileUseCase.execute(loadedState.profile.id),
+        ).called(1);
         verifyNever(
           () => crashlyticsService.recordError(
             exception: any(named: 'exception'),
@@ -89,8 +93,9 @@ void main() {
         final exception = Exception('load failed');
         final stackTrace = StackTrace.current;
 
-        when(() => loadProfileUseCase.execute(profileId))
-            .thenAnswer((_) => Future<ProfileEntity>.error(exception, stackTrace));
+        when(
+          () => loadProfileUseCase.execute(profileId),
+        ).thenAnswer((_) => Future<ProfileEntity>.error(exception, stackTrace));
 
         final callbackCompleter = Completer<(Object?, StackTrace)>();
 
@@ -151,11 +156,9 @@ void main() {
         );
 
         final callbackProfile = await callbackCompleter.future;
-        expect(callbackProfile, equals(updatedProfile));
+        expect(callbackProfile, equals(updatedProfile.toApi()));
       },
-      expect: () => [
-        isA<ProfileEditLoadedState>(),
-      ],
+      expect: () => [isA<ProfileEditLoadedState>()],
       verify: (_) {
         verifyNever(
           () => crashlyticsService.recordError(
@@ -235,22 +238,20 @@ void main() {
           ),
         ).thenAnswer((_) async => updatedProfile);
 
-        final callbackCompleter = Completer<void>();
+        final callbackCompleter = Completer<ProfileSettings>();
 
         cubit.updateProfileSettings(
           profile: profile.toApi(),
           settingsFormData: settingsFormData,
-          onComplete: (settings) {
-            expect(settings, equals(updatedProfile.settings));
-            callbackCompleter.complete();
+          onComplete: (settings) {            
+            callbackCompleter.complete(settings);
           },
         );
 
-        await callbackCompleter.future;
+        final settings = await callbackCompleter.future;
+        expect(settings, equals(updatedProfile.settings.toApi()));
       },
-      expect: () => [
-        isA<ProfileEditLoadedState>(),
-      ],
+      expect: () => [isA<ProfileEditLoadedState>()],
       verify: (_) {
         verifyNever(
           () => crashlyticsService.recordError(
@@ -302,7 +303,8 @@ void main() {
           () => crashlyticsService.recordError(
             exception: any(named: 'exception'),
             stackTrace: any(named: 'stackTrace'),
-            reason: 'Unable to update profile settings for profile: $updatedSettingsProfileId',
+            reason:
+                'Unable to update profile settings for profile: $updatedSettingsProfileId',
           ),
         ).called(1);
       },

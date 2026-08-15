@@ -33,16 +33,17 @@ void main() {
         final profile = fakeModelFactory.createProfileEntity();
 
         when(
-          () => profileRepository.read(profile.id),
+          () => profileRepository.read(profile.id, preferCache: true),
         ).thenAnswer((_) async => profile);
+
         when(
           () => profileStatsUpdater.validateStatsReport(profile.statsReport),
         ).thenReturn(profile.statsReport);
 
-        final result = await useCase.execute(profile.id);
+        final result = await useCase.execute(profile.id, preferCache: true);
 
         expect(result, equals(profile));
-        verify(() => profileRepository.read(profile.id)).called(1);
+        verify(() => profileRepository.read(profile.id, preferCache: true)).called(1);
         verify(
           () => profileStatsUpdater.validateStatsReport(profile.statsReport),
         ).called(1);
@@ -59,7 +60,7 @@ void main() {
         );
 
         when(
-          () => profileRepository.read(profile.id),
+          () => profileRepository.read(profile.id, preferCache: false),
         ).thenAnswer((_) async => profile);
         when(
           () => profileStatsUpdater.validateStatsReport(profile.statsReport),
@@ -71,7 +72,7 @@ void main() {
         final result = await useCase.execute(profile.id);
 
         expect(result.statsReport, equals(updatedStatsReport));
-        verify(() => profileRepository.read(profile.id)).called(1);
+        verify(() => profileRepository.read(profile.id, preferCache: false)).called(1);
         verify(
           () => profileStatsUpdater.validateStatsReport(profile.statsReport),
         ).called(1);

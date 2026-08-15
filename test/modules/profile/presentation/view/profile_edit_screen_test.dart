@@ -1,4 +1,7 @@
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/service/haptics_service.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/modules/profile/presentation/view/profile_edit_form.dart';
 import 'package:dhyana/modules/profile/presentation/view/screen/profile_edit_screen.dart';
@@ -10,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../test_context_providers.dart';
 import '../../../../mock_definitions.dart';
@@ -17,6 +21,9 @@ import '../../../../mock_definitions.dart';
 void main() {
   group('ProfileEditScreen Tests', () {
     late MockProfileEditCubit mockProfileEditCubit;
+    late Services mockServices;
+    late CrashlyticsService mockCrashlyticsService;
+    late HapticsService mockHapticsService;
 
     setUpAll(() {
       registerFallbackValue(ProfileEditState.initial());
@@ -24,6 +31,14 @@ void main() {
 
     setUp(() {
       mockProfileEditCubit = MockProfileEditCubit();
+      mockCrashlyticsService = MockCrashlyticsService();
+      mockHapticsService = MockHapticsService();
+      mockServices = MockServices();
+
+      when(() => mockServices.crashlyticsService)
+          .thenReturn(mockCrashlyticsService);
+      when(() => mockServices.hapticsService)
+          .thenReturn(mockHapticsService);
     });
 
     testWidgets('displays loading state', (WidgetTester tester) async {
@@ -33,7 +48,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        withAllContextProviders(  
           BlocProvider<ProfileEditCubit>(
             create: (context) => mockProfileEditCubit,
             child: const ProfileEditScreen(),
@@ -75,8 +90,13 @@ void main() {
 
         await tester.pumpWidget(
           withAllContextProviders(
-            BlocProvider<ProfileEditCubit>(
-              create: (context) => mockProfileEditCubit,
+            MultiProvider(
+              providers: [
+                Provider<Services>.value(value: mockServices),
+                BlocProvider<ProfileEditCubit>(
+                  create: (context) => mockProfileEditCubit,                  
+                ),
+              ],
               child: const ProfileEditScreen(),
             ),
           ),
@@ -104,8 +124,13 @@ void main() {
 
         await tester.pumpWidget(
           withAllContextProviders(
-            BlocProvider<ProfileEditCubit>(
-              create: (context) => mockProfileEditCubit,
+            MultiProvider(
+              providers: [
+                Provider<Services>.value(value: mockServices),
+                BlocProvider<ProfileEditCubit>(
+                  create: (context) => mockProfileEditCubit,                  
+                ),                
+              ],
               child: const ProfileEditScreen(),
             ),
           ),
