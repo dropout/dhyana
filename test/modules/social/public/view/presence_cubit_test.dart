@@ -20,7 +20,7 @@ void main() {
 
 	PresenceCubit buildCubit() {
 		return PresenceCubit(
-			loadPresenceDataUseCase: loadPresenceDataUseCase,
+			queryPresenceDataUseCase: loadPresenceDataUseCase,
 			crashlyticsService: crashlyticsService,
 		);
 	}
@@ -103,15 +103,12 @@ void main() {
 				).thenAnswer((_) async => [createPresenceEntity('1'), createPresenceEntity('2')]);
 			},
 			act: (cubit) {
-				final queryOptions = PresenceQueryOptionsEntity(
+				return cubit.loadPresenceData(
 					ownProfileId: 'me',
 					location: createBerlinLocation(),
 					rangeInKm: 42,
 					windowSize: const Duration(minutes: 30),
 					limit: 7,
-				);
-				return cubit.loadPresenceData(
-					queryOptions: queryOptions,
 				);
 			},
 			expect: () => [
@@ -150,9 +147,7 @@ void main() {
 					() => loadPresenceDataUseCase.execute(queryOptions),
 				).thenThrow(Exception('load failed'));
 			},
-			act: (cubit) => cubit.loadPresenceData(
-				queryOptions: const PresenceQueryOptionsEntity(),
-			),
+			act: (cubit) => cubit.loadPresenceData(),
 			expect: () => [
 				const PresenceState.loading(),
 				const PresenceState.error(),
@@ -183,10 +178,8 @@ void main() {
 				).thenAnswer((_) async => [createPresenceEntity('1'), createPresenceEntity('2')]);
 			},
 			act: (cubit) => cubit.loadPresenceData(
-				queryOptions: const PresenceQueryOptionsEntity(
-					lastDocumentId: 'doc-1',
-					limit: 2,
-				),
+        lastDocumentId: 'doc-1',
+        limit: 2,
 				appendResult: true,
 			),
 			expect: () => [
@@ -226,12 +219,10 @@ void main() {
 				).thenAnswer((_) async => [createPresenceEntity('2'), createPresenceEntity('3')]);
 			},
 			act: (cubit) async {
-				await cubit.loadPresenceData(queryOptions: const PresenceQueryOptionsEntity());
+				await cubit.loadPresenceData();
 				await cubit.loadPresenceData(
-					queryOptions: const PresenceQueryOptionsEntity(
-						lastDocumentId: 'doc-2',
-						limit: 2,
-					),
+          lastDocumentId: 'doc-2',
+          limit: 2,
 					appendResult: true,
 				);
 			},
@@ -263,10 +254,8 @@ void main() {
 				).thenThrow(Exception('load more failed'));
 			},
 			act: (cubit) => cubit.loadPresenceData(
-				queryOptions: const PresenceQueryOptionsEntity(
-					lastDocumentId: 'doc-3',
-					limit: 4,
-				),
+        lastDocumentId: 'doc-3',
+        limit: 4,
 				appendResult: true,
 			),
 			expect: () => [

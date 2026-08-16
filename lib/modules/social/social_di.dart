@@ -50,7 +50,7 @@ void _registerUseCases() {
 void _registerViewModels() {
   GetIt.I.registerFactory<PresenceCubit>(() {
     return PresenceCubit(
-      loadPresenceDataUseCase: GetIt.I.get<QueryPresenceUseCase>(),
+      queryPresenceDataUseCase: GetIt.I.get<QueryPresenceUseCase>(),
       crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     );
   });

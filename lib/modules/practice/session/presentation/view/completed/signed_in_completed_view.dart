@@ -122,7 +122,16 @@ class _SignedInCompletedViewState extends State<SignedInCompletedView> {
               ),
             if (widget.profileSettings.usePresenceFeature) Gap.xxl(),
             if (widget.profileSettings.usePresenceFeature)
-              PresenceArea(profileId: updateResult.updatedProfile.id),
+              PresenceArea.withCubit(
+                profileId: updateResult.updatedProfile.id,
+                onCubitCreated: (cubit) {
+                  cubit.loadPresenceData(
+                    ownProfileId: updateResult.updatedProfile.id,
+                    limit: 18,
+                    windowSize: const Duration(minutes: 120),
+                  );
+                },
+              ),
             SizedBox(
               // as per size of bottom area gradient - safearea bottom
               // see [session_completed_screen.dart]

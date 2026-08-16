@@ -1,5 +1,4 @@
 import 'package:dhyana/modules/social/social_module.dart';
-import 'package:dhyana/modules/social/domain/entity/presence_query_options_entity.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/modules/social/public/view/presence_view.dart';
@@ -34,10 +33,8 @@ class _PresenceScreenState extends State<PresenceScreen>
   void _onIntervalChangeEnd(BuildContext context, double value) {
     if (value.round() != intervalInMinutes.round()) {
       context.read<PresenceCubit>().loadPresenceData(
-        queryOptions: PresenceQueryOptionsEntity(
-          windowSize: Duration(minutes: value.round()),
-          limit: widget.batchSize,
-        ),
+        windowSize: Duration(minutes: value.round()),
+        limit: widget.batchSize,
       );
       setState(() {
         intervalInMinutes = value;
@@ -47,10 +44,8 @@ class _PresenceScreenState extends State<PresenceScreen>
 
   Future<void> _onRefresh(BuildContext context) async {
     context.read<PresenceCubit>().loadPresenceData(
-      queryOptions: PresenceQueryOptionsEntity(
-        windowSize: Duration(minutes: intervalInMinutes.round()),
-        limit: widget.batchSize,
-      ),
+      windowSize: Duration(minutes: intervalInMinutes.round()),
+      limit: widget.batchSize,
     );
   }
 
@@ -58,12 +53,10 @@ class _PresenceScreenState extends State<PresenceScreen>
   Widget build(BuildContext context) {
     return BlocProvider<PresenceCubit>(
       create: (context) =>
-          GetIt.instance.get<PresenceCubit>()..loadPresenceData(
-            queryOptions: PresenceQueryOptionsEntity(
-              windowSize: Duration(minutes: sliderPosition.round()),
-              limit: widget.batchSize,
-            ),
-          ),
+        GetIt.instance.get<PresenceCubit>()..loadPresenceData(
+          windowSize: Duration(minutes: sliderPosition.round()),
+          limit: widget.batchSize,
+        ),
       child: Builder(
         builder: (context) => buildStates(context),
       ),

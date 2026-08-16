@@ -1,12 +1,15 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
+
 import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
 import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_completed_data_entity.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
 import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/update_profile_stats_result_entity.dart';
-import 'package:dhyana/core/service/crashlytics_service.dart';
-import 'package:dhyana/core/util/logger_mixin.dart';
+
 
 /// Cubit to manage the state of session completion and logging
 /// When a session is completed, this cubit handles updating the profile stats,
@@ -15,15 +18,15 @@ import 'package:dhyana/core/util/logger_mixin.dart';
 class SessionCompletedCubit extends Cubit<SessionCompletedDataEntity>
     with LoggerMixin {
 
-  final CrashlyticsService crashlyticsService;
-
-  final UpdateProfileWithSessionUseCase updateProfileWithSession;
+  final UpdateProfileWithSessionUseCase updateProfileWithSessionUseCase;
   final LogSessionInsightsUseCase logSessionUseCase;
 
-  SessionCompletedCubit({
-    required this.crashlyticsService,
-    required this.updateProfileWithSession,
+  final CrashlyticsService crashlyticsService;
+
+  SessionCompletedCubit({    
+    required this.updateProfileWithSessionUseCase,
     required this.logSessionUseCase,
+    required this.crashlyticsService,
   }) : super(const SessionCompletedDataEntity.initial());
 
   Future<void> logSession(
@@ -36,7 +39,7 @@ class SessionCompletedCubit extends Cubit<SessionCompletedDataEntity>
       // Loading state will be indicated by the UI
       emit(const SessionCompletedDataEntity.loading());
 
-      final result = await updateProfileWithSession.execute(
+      final result = await updateProfileWithSessionUseCase.execute(
         profileId,
         session.toEntity(),      
       );

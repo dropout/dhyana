@@ -1,3 +1,4 @@
+import 'package:dhyana/core/domain/entity/location.dart';
 import 'package:dhyana/modules/social/data/mapper/presence_mapper.dart';
 import 'package:dhyana/modules/social/public/model/presence.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,44 +10,31 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'presence_cubit.freezed.dart';
 
-@freezed
-sealed class PresenceState with _$PresenceState {
-
-  const PresenceState._();
-
-  const factory PresenceState.initial() = _Initial;
-  const factory PresenceState.loading() = PresenceLoadingState;
-  const factory PresenceState.loadingMore({
-    required List<Presence> presenceList,
-  }) = PresenceLoadingMoreState;
-  const factory PresenceState.loaded({
-    required List<Presence> presenceList,
-  }) = PresenceLoadedState;
-  const factory PresenceState.error() = PresenceErrorState;
-
-}
-
-
 /// Enables showing and querying presence data to show who is around
 /// who you have practiced with. 
 class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
 
   /// Use case to load presence data.
-  final QueryPresenceUseCase loadPresenceDataUseCase;
+  final QueryPresenceUseCase queryPresenceDataUseCase;
 
   /// Service to log errors
   final CrashlyticsService crashlyticsService;
 
   /// Creates a new [PresenceCubit] with the given repositories and services.
   PresenceCubit({
-    required this.loadPresenceDataUseCase,
+    required this.queryPresenceDataUseCase,
     required this.crashlyticsService,
   }) : super(const PresenceState.initial());
 
   /// Loads presence data based on [queryOptions].
   /// If [appendResult] is true, loaded items are appended to current items.
   Future<void> loadPresenceData({
-    required PresenceQueryOptionsEntity queryOptions,
+    Duration windowSize = const Duration(hours: 3),
+    int limit = 20,
+    String? ownProfileId,
+    String? lastDocumentId,
+    Location? location,
+    double rangeInKm = 100,
     bool appendResult = false,
   }) async {
     try {
@@ -58,7 +46,14 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
       }
 
       final loadedPresenceList =
-        (await loadPresenceDataUseCase.execute(queryOptions)).map((e) => e.toApi()).toList();
+        (await queryPresenceDataUseCase.execute(PresenceQueryOptionsEntity(
+          windowSize: windowSize,
+          limit: limit,
+          ownProfileId: ownProfileId,
+          lastDocumentId: lastDocumentId,
+          location: location,
+          rangeInKm: rangeInKm,
+        ))).map((e) => e.toApi()).toList();
 
       final resultList = appendResult
           ? <Presence>[...existingPresenceList, ...loadedPresenceList]
@@ -88,5 +83,22 @@ class PresenceCubit extends Cubit<PresenceState> with LoggerMixin {
     }
     return const <Presence>[];
   }
+
+}
+
+@freezed
+sealed class PresenceState with _$PresenceState {
+
+  const PresenceState._();
+
+  const factory PresenceState.initial() = _Initial;
+  const factory PresenceState.loading() = PresenceLoadingState;
+  const factory PresenceState.loadingMore({
+    required List<Presence> presenceList,
+  }) = PresenceLoadingMoreState;
+  const factory PresenceState.loaded({
+    required List<Presence> presenceList,
+  }) = PresenceLoadedState;
+  const factory PresenceState.error() = PresenceErrorState;
 
 }

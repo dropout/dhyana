@@ -4,37 +4,47 @@ import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/core/presentation/viewmodel/profile_cubit.dart';
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
+import 'package:dhyana/modules/practice/session/domain/usecase/log_session_insights_use_case.dart';
+import 'package:dhyana/modules/practice/session/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/session_completed_screen.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/signed_in_completed_view.dart';
 import 'package:dhyana/modules/practice/session/presentation/view/completed/signed_out_completed_view.dart';
+import 'package:dhyana/modules/practice/session/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../test_context_providers.dart';
 import '../../../../../mock_definitions.dart';
+import '../../session_mock_definitions.dart';
 
 void main() {
   group('SessionCompletedScreen', () {
+    
     late MockProfileCubit profileCubit;
     late MockAuthCubit mockAuthBloc;
 
     late MockServices mockServices;
-
     late MockCrashlyticsService mockCrashlyticsService;
     late MockHapticsService mockHapticsService;
+
+    late LogSessionInsightsUseCase mockLogSessionUseCase;
+    late UpdateProfileWithSessionUseCase mockUpdateProfileWithSessionUseCase;
 
     setUp(() async {
       profileCubit = MockProfileCubit();
       mockAuthBloc = MockAuthCubit();
-
       mockServices = MockServices();
 
       mockCrashlyticsService = MockCrashlyticsService();
       mockHapticsService = MockHapticsService();
+
+      mockLogSessionUseCase = MockLogSessionUseCase();
+      mockUpdateProfileWithSessionUseCase = MockUpdateProfileWithSessionUseCase();
 
       when(
         () => profileCubit.stream,
@@ -43,14 +53,35 @@ void main() {
       when(() => profileCubit.state).thenReturn(const ProfileState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
-      // when(
-      //   () => mockServices.idGeneratorService,
-      // ).thenReturn(mockIdGeneratorService);
+      when(
+        () => mockServices.crashlyticsService,
+      ).thenReturn(mockCrashlyticsService);
+
+      when(
+        () => profileCubit.stream,
+      ).thenAnswer((_) => const Stream<ProfileState>.empty());
+
+      when(() => profileCubit.state).thenReturn(const ProfileState.initial());
+      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+
       when(
         () => mockServices.crashlyticsService,
       ).thenReturn(mockCrashlyticsService);
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
+
+      GetIt.I.registerFactory<SessionCompletedCubit>(() {
+        return SessionCompletedCubit(
+          logSessionUseCase: mockLogSessionUseCase,
+          updateProfileWithSessionUseCase: mockUpdateProfileWithSessionUseCase,          
+          crashlyticsService: mockCrashlyticsService,
+        );
+      });
+
+    });
+
+    tearDown(() {
+      GetIt.I.reset();
     });
 
     testWidgets('can display session completed view when signed out', (
@@ -87,14 +118,14 @@ void main() {
       final profile = FakeModelFactory().createProfile();
       final session = FakeModelFactory().createSessionEntity();
 
-      when(
-        () => mockAuthBloc.state,
-      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUserEntity().uid));
+      when(() => mockAuthBloc.state).thenReturn(
+        AuthState.signedIn(userId: FakeModelFactory().createUserEntity().uid),
+      );
 
-      when(() => profileCubit.state).thenReturn(ProfileState.loaded(
-        profile: profile,
-      ));
-    
+      when(
+        () => profileCubit.state,
+      ).thenReturn(ProfileState.loaded(profile: profile));
+
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
@@ -120,13 +151,13 @@ void main() {
       final profile = FakeModelFactory().createProfile();
       final session = FakeModelFactory().createSessionEntity();
 
-      when(
-        () => mockAuthBloc.state,
-      ).thenReturn(AuthState.signedIn(userId: FakeModelFactory().createUserEntity().uid));
+      when(() => mockAuthBloc.state).thenReturn(
+        AuthState.signedIn(userId: FakeModelFactory().createUserEntity().uid),
+      );
 
-      when(() => profileCubit.state).thenReturn(ProfileState.loaded(
-        profile: profile,
-      ));
+      when(
+        () => profileCubit.state,
+      ).thenReturn(ProfileState.loaded(profile: profile));
 
       await tester
           .runAsync(() async {
