@@ -1,6 +1,4 @@
 import 'package:dhyana/core/util/services.dart';
-import 'package:dhyana/core/service/haptics_service.dart';
-import 'package:dhyana/core/service/overlay_service.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/duration_input.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/input_button.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../mock_definitions.dart';
 import '../../../../../../test_context_providers.dart';
-
-class MockServices
-    extends Mock
-    implements Services {}
-
-class MockOverlayService
-    extends Mock
-    implements OverlayService {}
-
-class MockHapticsService
-    extends Mock
-    implements HapticsService {}
 
 class FakeBuildContext
   extends Fake
@@ -36,9 +23,8 @@ void main() {
 
   group('DurationInput', () {
 
-    MockOverlayService mockOverlayService = MockOverlayService();
-
     testWidgets('renders with initial value', (WidgetTester tester) async {
+      MockOverlayService mockOverlayService = MockOverlayService();
       await tester.pumpWidget(
         withAllContextProviders(
           DurationInput(
@@ -63,12 +49,14 @@ void main() {
       when(() => mockOverlayService.showModalBottomSheet(
         any(that: isA<BuildContext>()),
         any(that: isA<WidgetBuilder>()),
+        enableDrag: false,
       )).thenAnswer((_) async => null);
 
       MockHapticsService mockHapticsService = MockHapticsService();
 
       MockServices mockServices = MockServices();
-      when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
+      when(() => mockServices.hapticsService)
+        .thenReturn(mockHapticsService);
 
       await tester.pumpWidget(
         withAllContextProviders(
@@ -81,6 +69,9 @@ void main() {
                   value: const Duration(minutes: 5),
                   preparationTime: const Duration(minutes: 0),
                   overlayService: mockOverlayService,
+                  onChange: (Duration duration) {
+                    // Handle change
+                  },
                 ),
               ),
             ),
@@ -89,11 +80,12 @@ void main() {
       );
 
       await tester.tap(find.byKey(const Key('timer_duration_input_button')));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       verify(() => mockOverlayService.showModalBottomSheet(
         any(that: isA<BuildContext>()),
         any(that: isA<WidgetBuilder>()),
+        enableDrag: false,
       )).called(1);
 
     });

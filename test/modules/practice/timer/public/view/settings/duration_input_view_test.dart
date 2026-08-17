@@ -1,9 +1,15 @@
 import 'dart:async';
+import 'dart:math' as math;
 
+import 'package:dhyana/core/presentation/view/input/int_dial_input.dart';
+import 'package:dhyana/core/util/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/duration_input_view.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../../mock_definitions.dart';
 import '../../../../../../test_context_providers.dart';
 
 void main() {
@@ -20,29 +26,51 @@ void main() {
         )
       );
 
-      expect(find.text('5 perc', skipOffstage: false), findsOneWidget);
+      // find with textContaining since it sits in a rich text field
+      expect(find.textContaining('5', skipOffstage: false), findsOneWidget);
+      expect(find.textContaining('perc', skipOffstage: false), findsOneWidget);
     });
 
     testWidgets('calls onChanged when value changes', (WidgetTester tester) async {
       final Completer<Duration> completer = Completer<Duration>();
       Duration changedValue = Duration.zero;
+      
+      final mockServices = MockServices();
+      final hapticsService = MockHapticsService();
+      
+      when(() => mockServices.hapticsService)
+        .thenReturn(hapticsService);
+      
+
       await tester.pumpWidget(
         withAllContextProviders(
-          DurationInputView(
-            minMinutes: 1,
-            maxMinutes: 10,
-            initialValue: 5,
-            onSelect: (Duration duration) {
-              completer.complete(duration);
-              changedValue = duration;
-            },
+          Provider<Services>.value(
+            value: mockServices,
+            child: DurationInputView(
+              minMinutes: 1,
+              maxMinutes: 10,
+              initialValue: 1,
+              onSelect: (Duration duration) {
+                completer.complete(duration);
+                changedValue = duration;
+              },
+            ),
           ),
+
         )
       );
 
-      await tester.drag(
-        find.byType(ListWheelScrollView),
-        const Offset(0, -50), // Scroll one item up
+      // await tester.drag(
+      //   find.byType(ListWheelScrollView),
+      //   const Offset(0, -50), // Scroll one item up
+      // );
+
+      await dragAroundDial(
+        tester,
+        find.byType(IntDialInput),
+        radius: 80,
+        steps: 32,
+        sweepAngle: math.pi / 2, // quarter turn
       );
 
       await tester.tap(find.byKey(const Key('input_view_save_button')));
@@ -54,4 +82,36 @@ void main() {
     });
 
   });
+}
+
+
+Future<void> dragAroundDial(
+  WidgetTester tester,
+  Finder dialFinder, {
+  double radius = 80,
+  int steps = 24,
+  double startAngle = 0,
+  double sweepAngle = 2 * math.pi,
+}) async {
+  final center = tester.getCenter(dialFinder);
+
+  Offset pointAt(double angle) {
+    return center + Offset(
+      radius * math.cos(angle),
+      radius * math.sin(angle),
+    );
+  }
+
+  final gesture = await tester.startGesture(pointAt(startAngle));
+
+  for (var step = 1; step <= steps; step++) {
+    final progress = step / steps;
+    await gesture.moveTo(
+      pointAt(startAngle + sweepAngle * progress),
+    );
+    await tester.pump();
+  }
+
+  await gesture.up();
+  await tester.pumpAndSettle();
 }

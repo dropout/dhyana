@@ -115,7 +115,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          WarmupTimeInput(
+          WarmupInput(
             label: AppLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
             overlayService: context.services.overlayService,
@@ -175,7 +175,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
 
   Widget buildInputGap(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: 42),
+      constraints: BoxConstraints(minHeight: 32),
       child: InputGap(isEndGap: false),
     );
   }

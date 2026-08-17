@@ -128,9 +128,6 @@ class _DurationInputViewState extends State<DurationInputView>
                         child: Text(
                           endTime.toFormattedTimeString(context),
                           style: Theme.of(context).textTheme.headlineMedium
-                              ?.copyWith(
-                                // fontFamily: DesignSpec.condensedFontFamilyName,
-                              ),
                         ),
                       ),
                     ),

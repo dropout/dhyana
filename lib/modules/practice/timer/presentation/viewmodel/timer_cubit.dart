@@ -32,9 +32,9 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 
   @override
   Stream<Duration> get elapsedTimeStream => timerAudioService
-      .playbackStateStream
-      .map((playbackState) => playbackState.position)
-      .distinct();
+    .playbackStateStream
+    .map((playbackState) => playbackState.position)
+    .distinct();
 }
 
 /// Cubit that manages the state of a timer,
@@ -42,7 +42,6 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 /// In this viewmodel, we skip usecases that would
 /// contain a single line service calßl for pragmatic reasons.
 class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
-  
   // Services
   final TimerAudioService audioService;
   final TimerEventScheduler eventScheduler;
@@ -120,11 +119,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
   /// Updates time values, and playing/paused status based on [playbackState]
   /// changes from the audio service.
   void _onPlaybackStateChanged(PlaybackState playbackState) {
-    final updatedState = playbackStateChangeUseCase.execute(
-      playbackState,
-      state,
-    );
-    emit(updatedState);
+    emit(playbackStateChangeUseCase.execute(playbackState, state));
     // Avoid noisy logs
   }
 
@@ -148,7 +143,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
 
   /// Handles timer completion by executing the complete timer use case
   /// and navigating to the session completed screen with the completed session data.
-  void _onTimerCompleted(Duration elapsedTime) async {    
+  void _onTimerCompleted(Duration elapsedTime) async {
     final result = await completeTimerUseCase.execute(state, elapsedTime);
     emit(result.timerState);
     logger.t('Navigating to session completed screen');

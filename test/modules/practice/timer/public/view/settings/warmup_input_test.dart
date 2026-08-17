@@ -28,7 +28,7 @@ void main() {
 
       await tester.pumpWidget(
         withAllContextProviders(
-          WarmupTimeInput(
+          WarmupInput(
             label: 'Test label',
             value: Duration(minutes: 3),
             overlayService: mockOverlayService
@@ -40,7 +40,7 @@ void main() {
 
       expect(find.text('3'), findsOneWidget);
       expect(
-        find.byKey(Key('warmup_time_duration_input_button')),
+        find.byKey(Key('warmup_input_button')),
         findsOneWidget
       );
     });
@@ -52,6 +52,7 @@ void main() {
       when(() => mockOverlayService.showModalBottomSheet(
         any(that: isA<BuildContext>()),
         any(that: isA<WidgetBuilder>()),
+        enableDrag: false,
       )).thenAnswer((_) async => null);
 
       MockHapticsService mockHapticsService = MockHapticsService();
@@ -65,7 +66,7 @@ void main() {
             create: (_) => mockServices,
             child: MaterialApp(
               home: Scaffold(
-                body: WarmupTimeInput(
+                body: WarmupInput(
                   label: 'Test label',
                   value: Duration(minutes: 3),
                   overlayService: mockOverlayService,
@@ -76,12 +77,13 @@ void main() {
         )
       );
 
-      await tester.tap(find.byKey(Key('warmup_time_duration_input_button')));
+      await tester.tap(find.byKey(Key('warmup_input_button')));
       await tester.pumpAndSettle();
 
       verify(() => mockOverlayService.showModalBottomSheet(
         any(that: isA<BuildContext>()),
         any(that: isA<WidgetBuilder>()),
+        enableDrag: false,
       )).called(1);
     });
 

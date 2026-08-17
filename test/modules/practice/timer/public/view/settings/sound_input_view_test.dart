@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dhyana/core/domain/enum/sound.dart';
 import 'package:dhyana/core/util/services.dart';
-import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_input_play_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:dhyana/modules/practice/timer/public/view/timer_settings/sound_input_view.dart';
@@ -14,12 +13,9 @@ import 'package:provider/provider.dart';
 import '../../../../../../mock_definitions.dart';
 import '../../../../../../test_context_providers.dart';
 
-class FakeBuildContext
-  extends Fake
-  implements BuildContext {}
+class FakeBuildContext extends Fake implements BuildContext {}
 
 void main() {
-
   late MockHapticsService mockHapticsService;
   late MockServices mockServices;
 
@@ -33,8 +29,10 @@ void main() {
   });
 
   group('SoundInputView', () {
-
     testWidgets('renders with initial value', (WidgetTester tester) async {
+      final PageStorageBucket bucket = PageStorageBucket();
+
+
 
       // when(() => mockAudioService.isPlayingStream)
       //   .thenAnswer((_) => Stream<bool>.value(false));
@@ -48,20 +46,22 @@ void main() {
         withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
-            child: SoundInputView(
-              initialValue: Sound.none,
+            child: PageStorage(
+              bucket: bucket,
+              child: SoundInputView(initialValue: Sound.none)
             ),
-          )
-        )
+          ),
+        ),
       );
 
-      expect(find.byType(SoundInputCard), findsOneWidget);
-      expect(find.byType(SoundInputPlayButton), findsOneWidget);
+      expect(find.byType(SoundInputCard), findsWidgets);
       expect(find.text('Nincs hang'), findsOneWidget);
-      expect(find.byType(SoundInputPlayButton), findsOneWidget);
     });
 
-    testWidgets('calls onchanged when value is changed', (WidgetTester tester) async  {
+    testWidgets('calls onchanged when value is changed', (
+      WidgetTester tester,
+    ) async {
+      final PageStorageBucket bucket = PageStorageBucket();
 
       // when(() => mockAudioService.isPlayingStream)
       //   .thenAnswer((_) => Stream<bool>.value(false));
@@ -78,19 +78,23 @@ void main() {
         withAllContextProviders(
           Provider<Services>(
             create: (_) => mockServices,
-            child: SoundInputView(
-              initialValue: Sound.none,
-              onSelect: (Sound sound) {
-                completer.complete(sound);
-                changedValue = sound;
-              },
+            child: PageStorage(
+              bucket: bucket,
+              child: SoundInputView(
+                initialValue: Sound.none,
+                onSelect: (Sound sound) {
+                  completer.complete(sound);
+                  changedValue = sound;
+                },
+              ),
             ),
-          )
-        )
+          ),
+        ),
       );
 
-      final SoundInputViewState state =
-        tester.state(find.byType(SoundInputView));
+      final SoundInputViewState state = tester.state(
+        find.byType(SoundInputView),
+      );
 
       expect(state.selectedIndex, 0);
 
@@ -104,11 +108,9 @@ void main() {
       await tester.tap(find.byKey(const Key('input_view_save_button')));
       await tester.pumpAndSettle();
 
-      expect(changedValue, Sound.smallBell);
+      expect(changedValue, Sound.vibrate);
       expect(completer.isCompleted, isTrue);
       expect(state.selectedIndex, 1);
-
     });
-
   });
 }

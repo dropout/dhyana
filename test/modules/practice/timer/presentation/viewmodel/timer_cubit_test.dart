@@ -1,629 +1,363 @@
-// import 'dart:async';
+import 'dart:async';
 
-// import 'package:audio_service/audio_service.dart';
-// import 'package:bloc_test/bloc_test.dart';
-// import 'package:clock/clock.dart';
-// import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
-// import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
-// import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer/timer_cubit.dart';
-// import 'package:dhyana/modules/practice/timer/timer_module.dart';
-// import 'package:dhyana/core/domain/service/crashlytics_service.dart';
-// import 'package:dhyana/core/infrastructure/platform/logging_crashlytics_service.dart';
-// import 'package:dhyana/util/timer_event_scheduler.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mocktail/mocktail.dart';
+import 'package:audio_service/audio_service.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:clock/clock.dart';
+import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/core/util/timer_event_scheduler.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
+import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
+import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/core/infrastructure/platform/logging_crashlytics_service.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
-// import '../../../../mock_definitions.dart';
+import '../../../../../mock_definitions.dart' hide MockTimerAudioService;
+import '../../timer_mock_definitions.dart';
 
-// void main() async {
-//   group('TimerAudioServiceElapsedTimeSource', () {
-//     late MockTimerAudioService mockAudioService;
-//     late TimerAudioServiceElapsedTimeSource elapsedTimeSource;
+void main() async {
+  group('TimerAudioServiceElapsedTimeSource', () {
+    late MockTimerAudioService mockAudioService;
+    late TimerAudioServiceElapsedTimeSource elapsedTimeSource;
 
-//     setUp(() {
-//       mockAudioService = MockTimerAudioService();
-//       elapsedTimeSource = TimerAudioServiceElapsedTimeSource(mockAudioService);
-//     });
+    setUp(() {
+      mockAudioService = MockTimerAudioService();
+      elapsedTimeSource = TimerAudioServiceElapsedTimeSource(mockAudioService);
+    });
 
-//     test('emits elapsed time based on audio service playback state', () async {
-//       final StreamController<PlaybackState> playbackStateStreamController =
-//           StreamController<PlaybackState>();
+    test('emits elapsed time based on audio service playback state', () async {
+      final StreamController<PlaybackState> playbackStateStreamController =
+          StreamController<PlaybackState>();
 
-//       when(
-//         () => mockAudioService.playbackStateStream,
-//       ).thenAnswer((_) => playbackStateStreamController.stream);
+      when(
+        () => mockAudioService.playbackStateStream,
+      ).thenAnswer((_) => playbackStateStreamController.stream);
 
-//       final List<Duration> emittedDurations = [];
-//       final subscription = elapsedTimeSource.elapsedTimeStream.listen(
-//         emittedDurations.add,
-//       );
+      final List<Duration> emittedDurations = [];
+      final subscription = elapsedTimeSource.elapsedTimeStream.listen(
+        emittedDurations.add,
+      );
 
-//       // Emit a playback state with position 5 seconds
-//       playbackStateStreamController.add(
-//         PlaybackState(updatePosition: Duration(seconds: 5)),
-//       );
+      // Emit a playback state with position 5 seconds
+      playbackStateStreamController.add(
+        PlaybackState(updatePosition: Duration(seconds: 5)),
+      );
 
-//       // Emit another playback state with position 10 seconds
-//       playbackStateStreamController.add(
-//         PlaybackState(updatePosition: Duration(seconds: 10)),
-//       );
+      // Emit another playback state with position 10 seconds
+      playbackStateStreamController.add(
+        PlaybackState(updatePosition: Duration(seconds: 10)),
+      );
 
-//       await Future.delayed(Duration.zero); // Allow stream to process
+      await Future.delayed(Duration.zero); // Allow stream to process
 
-//       expect(emittedDurations, [Duration(seconds: 5), Duration(seconds: 10)]);
+      expect(emittedDurations, [Duration(seconds: 5), Duration(seconds: 10)]);
 
-//       await subscription.cancel();
-//       await playbackStateStreamController.close();
-//     });
-//   });
+      await subscription.cancel();
+      await playbackStateStreamController.close();
+    });
+  });
 
-//   group('TimerCubit', () {
-//     final DateTime fixedTime = clock.now();
+  group('TimerCubit', () {
+    final DateTime fixedTime = clock.now();
 
-//     // late TimerCubit timerCubit;
-//     late TimerSettings defaultTimerSettings;
-//     late MockTimerAudioService mockAudioService;
-//     late MockHapticsService mockHapticsService;
-//     late TimerEventScheduler eventScheduler;
-//     late CrashlyticsService loggingCrashlyticsService;
+    late TimerSettings defaultTimerSettings;
+    late MockTimerAudioService mockAudioService;
+    late MockGoRouter mockRouter;
+    late MockConfigureEventSchedulerUseCase mockConfigureEventSchedulerUseCase;
+    late MockStartTimerUseCase mockStartTimerUseCase;
+    late MockPlaybackStateChangeUseCase mockPlaybackStateChangeUseCase;
+    late MockCompleteTimerUseCase mockCompleteTimerUseCase;
+    late TimerEventScheduler eventScheduler;
+    late CrashlyticsService loggingCrashlyticsService;
 
-//     late StreamController<PlaybackState> playbackStateStreamController;
+    late StreamController<PlaybackState> playbackStateStreamController;
 
-//     setUpAll(() {
-//       defaultTimerSettings = TimerSettings();      
-//       playbackStateStreamController =
-//           StreamController<PlaybackState>.broadcast();
-//     });
+    TimerCubit createTimerCubit({TimerSettings? timerSettings}) => TimerCubit(
+      timerSettings: timerSettings ?? defaultTimerSettings,
+      audioService: mockAudioService,
+      eventScheduler: eventScheduler,
+      router: mockRouter,
+      crashlyticsService: loggingCrashlyticsService,
+      configureEventSchedulerUseCase: mockConfigureEventSchedulerUseCase,
+      startTimerUseCase: mockStartTimerUseCase,
+      playbackStateChangeUseCase: mockPlaybackStateChangeUseCase,
+      completeTimerUseCase: mockCompleteTimerUseCase,
+    );
 
-//     setUp(() {
-//       mockAudioService = MockTimerAudioService();
-//       mockHapticsService = MockHapticsService();
-//       loggingCrashlyticsService = LoggingCrashlyticsService();
-//       eventScheduler = TimerEventScheduler(
-//         source: TimerAudioServiceElapsedTimeSource(mockAudioService),
-//       );
+    setUpAll(() {
+      defaultTimerSettings = TimerSettings();
+      registerFallbackValue(TimerSettings());
+      playbackStateStreamController =
+          StreamController<PlaybackState>.broadcast();
 
-//       when(
-//         () => mockAudioService.playbackStateStream,
-//       ).thenAnswer((_) => playbackStateStreamController.stream);
+      registerFallbackValue(  
+        TimerStateEntity(
+          timerSettings: TimerSettings(),
+          timerStatus: TimerStatus.idle,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: Duration.zero,
+          elapsedTime: Duration.zero,
+        ),
+      );
 
-//       when(() => mockAudioService.stop()).thenAnswer((_) => Future.value(null));
-//     });
+      registerFallbackValue(PlaybackState());
+    });
 
-//     tearDownAll(() {
-//       playbackStateStreamController.close();
-//     });
+    setUp(() {
+      mockAudioService = MockTimerAudioService();
+      loggingCrashlyticsService = LoggingCrashlyticsService();
+      eventScheduler = TimerEventScheduler(
+        source: TimerAudioServiceElapsedTimeSource(mockAudioService),
+      );
 
-//     test('can be created with its default values', () async {
-//       final timerCubit = TimerCubit(
-//         timerSettings: defaultTimerSettings,
-//         audioService: mockAudioService,
-//         hapticsService: mockHapticsService,
-//         eventScheduler: eventScheduler,
-//         crashlyticsService: loggingCrashlyticsService,
-//       );
+      mockRouter = MockGoRouter();
+      mockConfigureEventSchedulerUseCase = MockConfigureEventSchedulerUseCase();
+      mockStartTimerUseCase = MockStartTimerUseCase();
+      mockPlaybackStateChangeUseCase = MockPlaybackStateChangeUseCase();
+      mockCompleteTimerUseCase = MockCompleteTimerUseCase();
 
-//       expect(timerCubit.state, isA<TimerCubitState>());
-//       expect(timerCubit.state.timerSettings, defaultTimerSettings);
-//       expect(timerCubit.state.timerStatus, TimerStatus.idle);
-//       expect(timerCubit.state.elapsedTime, Duration.zero);
-//       expect(eventScheduler.hasListeners, true);
-//       expect(eventScheduler.isRunning, false);
-//       expect(eventScheduler.listenerCount, 1);
+      when(
+        () => mockAudioService.playbackStateStream,
+      ).thenAnswer((_) => playbackStateStreamController.stream);
 
-//       // close the cubit to clean up resources and avoid affecting other tests
-//       await timerCubit.close();
-//     });
+      when(() => mockAudioService.stop()).thenAnswer((_) => Future.value(null));
+    });
 
-//     test('can close resources', () async {
-//       final timerCubit = TimerCubit(
-//         timerSettings: defaultTimerSettings,
-//         eventScheduler: eventScheduler,
-//         audioService: mockAudioService,
-//         hapticsService: mockHapticsService,
-//         crashlyticsService: loggingCrashlyticsService,
-//       );
+    tearDownAll(() {
+      playbackStateStreamController.close();
+    });
 
-//       await timerCubit.close();
+    test('can be created with its default values', () async {
+      final timerCubit = createTimerCubit();
 
-//       expect(playbackStateStreamController.hasListener, false);
+      expect(timerCubit.state, isA<TimerStateEntity>());
+      expect(timerCubit.state.timerSettings, defaultTimerSettings);
+      expect(timerCubit.state.timerStatus, TimerStatus.idle);
+      expect(timerCubit.state.elapsedTime, Duration.zero);
 
-//       expect(eventScheduler.hasListeners, false);
-//       expect(eventScheduler.isRunning, false);
-//       expect(eventScheduler.listenerCount, 0);
+      verify(
+        () => mockConfigureEventSchedulerUseCase.execute(
+          timerSettings: defaultTimerSettings,
+          onWarmupCompleted: any(named: 'onWarmupCompleted'),
+          onInterval: any(named: 'onInterval'),
+          onTimerCompleted: any(named: 'onTimerCompleted'),
+        ),
+      ).called(1);
 
-//       verify(() => mockAudioService.stop()).called(1);
-//     });
+      // close the cubit to clean up resources
+      await timerCubit.close();
+    });
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can start a timer session when there is a warmup time',
-//       build: () {
-//         when(
-//           () => mockAudioService.start(defaultTimerSettings),
-//         ).thenAnswer((_) => Future.value(null));
+    test('can close resources', () async {
+      final timerCubit = createTimerCubit();
 
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         await withClock(Clock.fixed(fixedTime), () async {
-//           await cubit.start();
+      await timerCubit.close();
 
-//           // assert in act because in verify the cubit is already closed
-//           expect(eventScheduler.hasListeners, true);
-//           expect(eventScheduler.isRunning, true);
+      expect(playbackStateStreamController.hasListener, false);
 
-//           // 1 for timer completed, 1 for warmup completed
-//           expect(eventScheduler.listenerCount, 2);
-//         });
-//       },
-//       expect: () => [
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-//       ],
-//       verify: (cubit) {
-//         verifyInOrder([
-//           () => mockAudioService.start(cubit.state.timerSettings),
-//         ]);
-//       },
-//     );
+      expect(eventScheduler.hasListeners, false);
+      expect(eventScheduler.isRunning, false);
+      expect(eventScheduler.listenerCount, 0);
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can start a timer session when there is no warmup time',
-//       build: () {
-//         when(
-//           () => mockAudioService.start(
-//             defaultTimerSettings.copyWith(warmup: Duration.zero),
-//           ),
-//         ).thenAnswer((_) => Future.value(null));
-//         when(
-//           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-//         ).thenAnswer((_) => Future.value(null));
+      verify(() => mockAudioService.stop()).called(1);
+    });
 
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings.copyWith(warmup: Duration.zero),
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         await withClock(Clock.fixed(fixedTime), () async {
-//           await cubit.start();
-//         });
-//       },
-//       expect: () => [
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings.copyWith(warmup: Duration.zero),
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.timer,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-//       ],
-//       verify: (timerCubit) {
-//         verifyInOrder([
-//           () => mockAudioService.start(
-//             defaultTimerSettings.copyWith(warmup: Duration.zero),
-//           ),
-//           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-//         ]);
-//       },
-//     );
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can start a timer session',
+      build: () {
+        final timerCubit = createTimerCubit();
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can pause',
-//       build: () {
-//         when(
-//           () => mockAudioService.pause(),
-//         ).thenAnswer((_) => Future.value(null));
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         cubit.pause();
-//       },
-//       expect: () => [],
-//       verify: (timerCubit) {
-//         verifyInOrder([() => mockAudioService.pause()]);
-//       },
-//     );
+        when(() => mockStartTimerUseCase.execute(timerCubit.state)).thenAnswer(
+          (_) async => TimerStateEntity(
+            timerSettings: defaultTimerSettings,
+            timerStatus: TimerStatus.running,
+            timerStage: TimerStage.warmup,
+            elapsedWarmupTime: Duration.zero,
+            elapsedTime: Duration.zero,
+            startTime: fixedTime,
+          ),
+        );
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can resume',
-//       build: () {
-//         when(
-//           () => mockAudioService.resume(),
-//         ).thenAnswer((_) => Future.value(null));
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         cubit.resume();
-//       },
-//       expect: () => [],
-//       verify: (timerCubit) {
-//         verifyInOrder([() => mockAudioService.resume()]);
-//       },
-//     );
+        return timerCubit;
+      },
+      act: (cubit) async {
+        await withClock(Clock.fixed(fixedTime), () async {
+          await cubit.start();
+        });
+      },
+      expect: () => [
+        TimerStateEntity(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.running,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: Duration.zero,
+          elapsedTime: Duration.zero,
+          startTime: fixedTime,
+        ),
+      ],
+      verify: (cubit) {
+        verify(
+          () => mockStartTimerUseCase.execute(
+            TimerStateEntity(
+              timerSettings: defaultTimerSettings,
+              timerStatus: TimerStatus.idle,
+              timerStage: TimerStage.warmup,
+              elapsedWarmupTime: Duration.zero,
+              elapsedTime: Duration.zero,
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can finish timer',
-//       build: () {
-//         when(
-//           () => mockAudioService.stop(),
-//         ).thenAnswer((_) => Future.value(null));
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can pause',
+      build: () {
+        when(
+          () => mockAudioService.pause(),
+        ).thenAnswer((_) => Future.value(null));
+        final timerCubit = createTimerCubit();
+        return timerCubit;
+      },
+      act: (cubit) async {
+        cubit.pause();
+      },
+      expect: () => [],
+      verify: (timerCubit) {
+        verifyInOrder([() => mockAudioService.pause()]);
+      },
+    );
 
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         withClock(Clock.fixed(fixedTime), () {
-//           cubit.finish();
-//         });
-//       },
-//       expect: () => [
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.completed,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//           endTime: fixedTime,
-//         ),
-//       ],
-//       verify: (timerCubit) {
-//         verifyInOrder([() => mockAudioService.stop()]);
-//       },
-//     );
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can resume',
+      build: () {
+        when(
+          () => mockAudioService.resume(),
+        ).thenAnswer((_) => Future.value(null));
+        final timerCubit = createTimerCubit();
+        return timerCubit;
+      },
+      act: (cubit) async {
+        cubit.resume();
+      },
+      expect: () => [],
+      verify: (timerCubit) {
+        verifyInOrder([() => mockAudioService.resume()]);
+      },
+    );
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can handle playbackstate change with idle processing state',
-//       build: () {
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         playbackStateStreamController.add(
-//           PlaybackState(processingState: AudioProcessingState.idle),
-//         );
-//         await Future.delayed(Duration.zero); // allow stream to process
-//       },
-//       expect: () => [
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.idle,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//         ),
-//       ],
-//       verify: (timerCubit) {},
-//     );
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can finish timer',
+      build: () {
+        when(
+          () => mockAudioService.stop(),
+        ).thenAnswer((_) => Future.value(null));
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can handle playbackstate change when processing state is not idle and playing is true',
-//       build: () {
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) async {
-//         playbackStateStreamController.add(
-//           PlaybackState(
-//             processingState: AudioProcessingState.ready,
-//             playing: true,
-//           ),
-//         );
-//       },
-//       expect: () => [
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//         ),
-//       ],
-//       verify: (cubit) {},
-//     );
+        final timerCubit = createTimerCubit();
+        return timerCubit;
+      },
+      act: (cubit) async {
+        withClock(Clock.fixed(fixedTime), () {
+          cubit.finish();
+        });
+      },
+      expect: () => [
+        TimerStateEntity(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.completed,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: Duration.zero,
+          elapsedTime: Duration.zero,
+          endTime: fixedTime,
+        ),
+      ],
+      verify: (timerCubit) {
+        verifyInOrder([() => mockAudioService.stop()]);
+        verifyInOrder([() => eventScheduler.stop()]);
+      },
+    );
 
-//     // It seems like its impossible to assert for exact state because of how
-//     // the position is calculated in the audio_service package
-//     // PlaybackState implementation
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can measure elapsed warmup time correctly in warmup stage',
-//       build: () {
-//         when(
-//           () => mockAudioService.start(defaultTimerSettings),
-//         ).thenAnswer((_) => Future.value(null));
-//         when(
-//           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-//         ).thenAnswer((_) => Future.value(null));
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can handle playbackstate change when not yet started',
+      build: () {
+        final timerCubit = createTimerCubit();
+        return timerCubit;
+      },
+      act: (cubit) async {
+        playbackStateStreamController.add(
+          PlaybackState(
+            processingState: AudioProcessingState.ready,
+            playing: true,
+            updateTime: fixedTime,
+          ),
+        );
+        await Future.delayed(Duration.zero); // allow stream to process
+      },
+      expect: () => [],
+      verify: (timerCubit) {
+        verifyNever(() => mockPlaybackStateChangeUseCase.execute(any(), any()));
+      },
+    );
 
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) => withClock(Clock(() => fixedTime), () async {
-//         await cubit.start();
-//         playbackStateStreamController.add(
-//           PlaybackState(
-//             processingState: AudioProcessingState.ready,
-//             playing: true,
-//             updateTime: fixedTime.add(Duration(seconds: 1)),
-//             updatePosition: Duration(seconds: 2),
-//           ),
-//         );
-//       }),
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can handle playbackstate change when already started',
+      build: () {
+        final timerCubit = createTimerCubit();
+        return timerCubit;
+      },
+      act: (cubit) async {
+        playbackStateStreamController.add(
+          PlaybackState(
+            processingState: AudioProcessingState.ready,
+            playing: true,
+            updateTime: fixedTime,
+          ),
+        );
+        await Future.delayed(Duration.zero); // allow stream to process
+      },
+      expect: () => [],
+      verify: (timerCubit) {
+        verifyNever(() => mockPlaybackStateChangeUseCase.execute(any(), any()));
+      },
+    );    
 
-//       expect: () => [
-//         // When starting the timer there is a state emitted
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
+    blocTest<TimerCubit, TimerStateEntity>(
+      'can handle playbackstate change when completed',
+      build: () {
+        return createTimerCubit();
+      },
+      act: (cubit) async {
+        await withClock(Clock.fixed(fixedTime), () async {
+          cubit.finish();
 
-//         // Emitted when playback state change received and the elapsed time
-//         // calculated
-//         isA<TimerCubitState>()
-//             .having(
-//               (state) => state.elapsedWarmupTime.inSeconds,
-//               'elapsedWarmupTime.inSeconds',
-//               1,
-//             )
-//             .having(
-//               (state) => state.timerStatus,
-//               'timerStatus',
-//               TimerStatus.running,
-//             )
-//             .having(
-//               (state) => state.timerStage,
-//               'timerStage',
-//               TimerStage.warmup,
-//             ),
-//       ],
-//       verify: (cubit) {},
-//     );
+          playbackStateStreamController.add(
+            PlaybackState(
+              processingState: AudioProcessingState.ready,
+              playing: true,
+              updateTime: fixedTime,
+            ),
+          );
+          await Future.delayed(Duration.zero); // allow stream to process
+        });
 
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can measure elapsed warmup time correctly in timer stage',
-//       build: () {
-//         when(
-//           () => mockAudioService.start(defaultTimerSettings),
-//         ).thenAnswer((_) => Future.value(null));
-//         when(
-//           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-//         ).thenAnswer((_) => Future.value(null));
+      },
+      expect: () => [
+        TimerStateEntity(
+          timerSettings: defaultTimerSettings,
+          timerStatus: TimerStatus.completed,
+          timerStage: TimerStage.warmup,
+          elapsedWarmupTime: Duration.zero,
+          elapsedTime: Duration.zero,
+          endTime: fixedTime,
+        ),
+      ],
+      verify: (timerCubit) {
+        verifyNever(() => mockPlaybackStateChangeUseCase.execute(any(), any()));
+      },
+    );
 
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-
-//         return timerCubit;
-//       },
-//       act: (cubit) => withClock(Clock(() => fixedTime), () async {
-//         await cubit.start();
-
-//         expect(eventScheduler.hasListeners, true);
-//         expect(eventScheduler.isRunning, true);
-//         expect(eventScheduler.listenerCount, 2);
-
-//         // Fire the warmup completed listener to move to timer stage
-//         playbackStateStreamController.add(
-//           PlaybackState(
-//             processingState: AudioProcessingState.ready,
-//             playing: true,
-//             updatePosition: defaultTimerSettings.warmup,
-//           ),
-//         );
-
-//         playbackStateStreamController.add(
-//           PlaybackState(
-//             processingState: AudioProcessingState.ready,
-//             playing: true,
-//             updateTime: fixedTime,
-//             updatePosition: Duration(seconds: 60 + 5),
-//           ),
-//         );
-//       }),
-//       expect: () => [
-//         // When starting the timer there is a state emitted
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-
-//         // Emitted when playback state change received and the elapsed time
-//         // calculated in warmup stage
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: defaultTimerSettings.warmup,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-
-//         // This state is emitted from scheduler when warmup completed listener
-//         // is fired, transitioning to the timer stage
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.timer,
-//           elapsedWarmupTime: defaultTimerSettings.warmup,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-
-//         // This is the result of the second playback state change from act,
-//         // with position 1 min 5 sec
-//         isA<TimerCubitState>()
-//             .having(
-//               (state) => state.elapsedWarmupTime.inSeconds,
-//               'elapsedWarmupTime.inSeconds',
-//               defaultTimerSettings.warmup.inSeconds,
-//             )
-//             .having(
-//               (state) => state.elapsedTime.inSeconds,
-//               'elapsedTime.inSeconds',
-//               5,
-//             )
-//             .having(
-//               (state) => state.timerStatus,
-//               'timerStatus',
-//               TimerStatus.running,
-//             )
-//             .having(
-//               (state) => state.timerStage,
-//               'timerStage',
-//               TimerStage.timer,
-//             ),
-//       ],
-//       verify: (timerCubit) {
-//         verify(
-//           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-//         ).called(1);
-//       },
-//     );
-
-//     blocTest<TimerCubit, TimerCubitState>(
-//       'can handle timer completed',
-//       build: () {
-//         when(
-//           () => mockAudioService.start(defaultTimerSettings),
-//         ).thenAnswer((_) => Future.value(null));
-//         when(
-//           () => mockAudioService.playSound(defaultTimerSettings.endingSound),
-//         ).thenAnswer((_) => Future.value(null));
-//         when(
-//           () => mockAudioService.stop(),
-//         ).thenAnswer((_) => Future.value(null));
-
-//         final timerCubit = TimerCubit(
-//           timerSettings: defaultTimerSettings,
-//           eventScheduler: eventScheduler,
-//           audioService: mockAudioService,
-//           hapticsService: mockHapticsService,
-//           crashlyticsService: loggingCrashlyticsService,
-//         );
-//         return timerCubit;
-//       },
-//       act: (cubit) => withClock(Clock(() => fixedTime), () async {
-//         // Fire the timer completed listener
-//         await cubit.start();
-
-//         playbackStateStreamController.add(
-//           PlaybackState(
-//             processingState: AudioProcessingState.ready,
-//             playing: true,
-//             updatePosition: defaultTimerSettings.totalTime,
-//           ),
-//         );
-//       }),
-//       expect: () => [
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: Duration.zero,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.running,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: defaultTimerSettings.warmup,
-//           elapsedTime: Duration.zero,
-//           startTime: fixedTime,
-//         ),
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.completed,
-//           timerStage: TimerStage.warmup,
-//           elapsedWarmupTime: defaultTimerSettings.warmup,
-//           elapsedTime: defaultTimerSettings.duration,
-//           startTime: fixedTime,
-//           endTime: fixedTime,
-//         ),
-//         TimerCubitState(
-//           timerSettings: defaultTimerSettings,
-//           timerStatus: TimerStatus.completed,
-//           timerStage: TimerStage.timer,
-//           elapsedWarmupTime: defaultTimerSettings.warmup,
-//           elapsedTime: defaultTimerSettings.duration,
-//           startTime: fixedTime,
-//           endTime: fixedTime,
-//         ),
-//       ],
-//       verify: (timerCubit) {
-//         verifyInOrder([
-//           () => mockAudioService.playSound(defaultTimerSettings.startingSound),
-//           () => mockAudioService.playSound(defaultTimerSettings.endingSound),
-//         ]);
-//       },
-//     );
-//   }); // eof group
-// } // eof main
+  });
+  // eof group
+} // eof main

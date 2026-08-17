@@ -86,7 +86,7 @@ class _IntDialInputState extends State<IntDialInput> {
               buildDial(context, size),
 
               // Draw a label in the center of the dial showing the selected duration
-              buildLabel2(context),
+              buildLabel(context),
             ],
           ),
         );
@@ -113,25 +113,6 @@ class _IntDialInputState extends State<IntDialInput> {
         TextSpan(
           children: [
             TextSpan(
-              text: '$_currentDuration${context.l10n.minutesAbbr}',
-              style: context.theme.textTheme.displaySmall!.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildLabel2(BuildContext context) {
-    return Center(
-      child: Text.rich(
-        textAlign: TextAlign.center,
-        TextSpan(
-          children: [
-            TextSpan(
               text: '$_currentDuration\n',
               style: context.theme.textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.bold,
@@ -150,7 +131,6 @@ class _IntDialInputState extends State<IntDialInput> {
       ),
     );
   }
-
 }
 
 class DialPainter extends CustomPainter {
@@ -213,13 +193,13 @@ class DialPainter extends CustomPainter {
 
     // Draw a small rectangle at the end of the arc to create a handle effect
     final handleAngle = -pi / 2 + roundedSweepAngle;
-    final handleRadius = radius ;
+    final handleRadius = radius;
     final handleX = center.dx + handleRadius * cos(handleAngle);
     final handleY = center.dy + handleRadius * sin(handleAngle);
     // Rotate the canvas to align the rectangle with the angle of the handle
     canvas.save();
     canvas.translate(handleX, handleY);
-    canvas.rotate(handleAngle); 
+    canvas.rotate(handleAngle);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromCenter(center: Offset(0, 0), width: 24, height: 14),

@@ -9,7 +9,7 @@ import 'warmup_input_view.dart';
 
 /// A widget that allows users to select a warmup time for a timer.
 /// By default, it provides options for 0, 1, 2, 3, and 5 minutes.
-class WarmupTimeInput extends StatelessWidget {
+class WarmupInput extends StatelessWidget {
   /// Label used for input view title.
   final String label;
 
@@ -22,7 +22,7 @@ class WarmupTimeInput extends StatelessWidget {
   /// The service used to manage overlays, such as showing modal bottom sheets.
   final OverlayService overlayService;
 
-  const WarmupTimeInput({
+  const WarmupInput({
     required this.label,
     required this.value,
     required this.overlayService,
@@ -53,7 +53,7 @@ class WarmupTimeInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InputButton(
-      key: const Key('warmup_time_input_button'),
+      key: const Key('warmup_input_button'),
       onTap: () => _onInputTap(context),
       padding: const EdgeInsets.all(DesignSpec.paddingXl),
       shape: CircleBorder(),
