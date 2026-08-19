@@ -56,6 +56,7 @@ class HomeScreenCubit extends HydratedCubit<HomeScreenState> with LoggerMixin {
     try {
       final updatedState = state.copyWith(sessionType: sessionType);
       emit(updatedState);
+      logger.t('New session type has been set: $sessionType');
     } catch (e, stackTrace) {
       crashlyticsService.recordError(
         exception: e,

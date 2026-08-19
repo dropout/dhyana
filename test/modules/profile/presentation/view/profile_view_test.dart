@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../../../../test_context_providers.dart';
 import '../../../../mock_definitions.dart';
@@ -24,6 +25,14 @@ void main() {
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockResourceResolver mockResourceResolver;
+
+    // TODO: Try to eliminate the need for this, when CachedNetworkImage is used
+    setUpAll(() async {
+      // nock.init();
+
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    });
 
     setUp(() async {
       mockProfileCubit = MockProfileCubit();

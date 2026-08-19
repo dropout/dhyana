@@ -55,6 +55,7 @@ class _HomeScreenBottomMenuState extends State<HomeScreenBottomMenu> {
   Widget buildToggle(BuildContext context) {
     return SignedIn(
       yes: (context, uid) => SessionTypeToggle(
+        key: const ValueKey('session_type_toggle'),
         activeMode: widget.sessionType,
         onModeChanged: widget.onSessionTypeChange,
       ),

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class InputGap extends StatelessWidget {
 
-  final double preferedSize;
+  final double preferredSize;
   final bool isEndGap;
 
   const InputGap({
-    this.preferedSize = 16,
+    this.preferredSize = 16,
     this.isEndGap = false,
     super.key,
   });
@@ -16,7 +16,7 @@ class InputGap extends StatelessWidget {
     return CustomPaint(
       painter: GapIconPainter(
         isEndGap: isEndGap,
-        preferredSize: preferedSize,
+        preferredSize: preferredSize,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:image/image.dart' as img;
 
 import 'package:dhyana/core/util/services.dart';
 import 'package:dhyana/core/util/fake_model_factory.dart';
@@ -28,6 +29,10 @@ void main() {
     late MockCrashlyticsService mockCrashlyticsService;
     late MockSafeImageDetectorFactory safeImageDetectorFactory;
     late MockSafeImageDetector safeImageDetector;
+
+    setUpAll(() {
+      registerFallbackValue(img.Image(width: 1, height: 1));
+    });
 
     setUp(() {
       mockServices = MockServices();

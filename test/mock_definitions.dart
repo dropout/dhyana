@@ -35,6 +35,7 @@ import 'package:dhyana/core/util/launch_url.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
 export 'modules/profile/profile_mock_definitions.dart';
@@ -43,138 +44,82 @@ class MockGoRouter extends Mock implements GoRouter {}
 
 // BLoCs & Cubits --------------------------------------------------------------
 
-class MockAuthCubit
-  extends MockCubit<AuthState>
-  implements AuthCubit {}
+class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
-class MockTimerSettingsCubit
-  extends MockCubit<TimerSettingsState>
-  implements TimerSettingsCubit {}
+class MockTimerSettingsCubit extends MockCubit<TimerSettingsState>
+    implements TimerSettingsCubit {}
 
-class MockTimerSettingsHistoryCubit
-  extends MockCubit<TimerSettingsHistoryState>
-  implements TimerSettingsHistoryCubit {}
+class MockTimerSettingsHistoryCubit extends MockCubit<TimerSettingsHistoryState>
+    implements TimerSettingsHistoryCubit {}
 
-class MockPresenceBloc
-  extends MockCubit<PresenceState>
-  implements PresenceCubit {}
+class MockPresenceBloc extends MockCubit<PresenceState>
+    implements PresenceCubit {}
 
-class MockTimerCubit
-  extends MockCubit<TimerStateEntity> 
-  implements TimerCubit {}
+class MockTimerCubit extends MockCubit<TimerStateEntity>
+    implements TimerCubit {}
 
-class MockTimerEventScheduler 
-  extends Mock 
-  implements TimerEventScheduler {}
+class MockTimerEventScheduler extends Mock implements TimerEventScheduler {}
 
-class MockSessionCompletedCubit
-  extends MockCubit<SessionCompletedDataEntity>
-  implements SessionCompletedCubit {}
+class MockSessionCompletedCubit extends MockCubit<SessionCompletedDataEntity>
+    implements SessionCompletedCubit {}
 
 // Services --------------------------------------------------------------------
 
-class MockServices
-  extends Mock
-  implements Services {}
+class MockServices extends Mock implements Services {}
 
-class MockCacheManager
-  extends Mock
-  implements BaseCacheManager {}
+class MockCacheManager extends Mock implements BaseCacheManager {}
 
-class MockCrashlyticsService
-  extends Mock
-  implements CrashlyticsService {}
+class MockCrashlyticsService extends Mock implements CrashlyticsService {}
 
-class MockSharedPreferencesService
-  extends Mock
-  implements SharedPreferencesService {}
+class MockSharedPreferencesService extends Mock
+    implements SharedPreferencesService {}
 
-class MockOverlayService
-  extends Mock
-  implements OverlayService {}
+class MockOverlayService extends Mock implements OverlayService {}
 
-class MockAnalyticsService
-  extends Mock
-  implements AnalyticsService {}
+class MockAnalyticsService extends Mock implements AnalyticsService {}
 
-class MockHapticsService
-  extends Mock
-  implements HapticsService {}
+class MockHapticsService extends Mock implements HapticsService {}
 
-class MockAppAudioHandler
-  extends Mock
-  implements AppAudioHandler {}
+class MockAppAudioHandler extends Mock implements AppAudioHandler {}
 
-class MockTimerAudioService
-  extends Mock
-  implements DefaultTimerAudioService {}
+class MockTimerAudioService extends Mock implements DefaultTimerAudioService {}
 
-class MockChantingAudioService
-  extends Mock
-  implements ChantingAudioService {}
+class MockChantingAudioService extends Mock implements ChantingAudioService {}
 
-class MockUrlLauncher
-  extends Mock
-  implements UrlLauncher {}
+class MockUrlLauncher extends Mock implements UrlLauncher {}
 
-class MockWakelockService
-  extends Mock
-  implements WakelockService {}
+class MockWakelockService extends Mock implements WakelockService {}
 
-class MockIdGeneratorService
-  extends Mock
-  implements IdGeneratorService {}
+class MockIdGeneratorService extends Mock implements IdGeneratorService {}
 
-class MockTimerService
-  extends Mock
-  implements TimerService {}
+class MockTimerService extends Mock implements TimerService {}
 
-class MockResourceResolver
-  extends Mock
-  implements ResourceResolver {}
+class MockResourceResolver extends Mock implements ResourceResolver {}
 
-class MockProfileStatsUpdaterService
-  extends Mock
-  implements ProfileStatsReportUpdaterService {}
+class MockProfileStatsUpdaterService extends Mock
+    implements ProfileStatsReportUpdaterService {}
 
-class MockAuthPublicApi
-  extends Mock
-  implements AuthPublicApi {}
+class MockAuthPublicApi extends Mock implements AuthPublicApi {}
 
-class MockProfilePublicApi
-  extends Mock
-  implements ProfilePublicApi {}
+class MockProfilePublicApi extends Mock implements ProfilePublicApi {}
 
-class MockStatsPublicApi
-  extends Mock
-  implements StatsPublicApi {}
+class MockStatsPublicApi extends Mock implements StatsPublicApi {}
 
-class MockMindfulMinutesService
-  extends Mock
-  implements MindfulMinutesService {}
+class MockMindfulMinutesService extends Mock implements MindfulMinutesService {}
 
 // Repositories ----------------------------------------------------------------
 
-class MockPresenceRepository
-  extends Mock
-  implements PresenceRepository {}
+class MockPresenceRepository extends Mock implements PresenceRepository {}
 
-class MockTimerSettingsHistoryRepository
-  extends Mock
-  implements TimerSettingsHistoryRepository {}
+class MockTimerSettingsHistoryRepository extends Mock
+    implements TimerSettingsHistoryRepository {}
 
-class MockStatisticsRepository
-  extends Mock
-  implements StatsRepository {}
+class MockStatisticsRepository extends Mock implements StatsRepository {}
 
-class MockAuthRepository 
-  extends Mock 
-  implements AuthRepository {}
+class MockAuthRepository extends Mock implements AuthRepository {}
 
-class MockStorageRepository
-  extends Mock
-  implements StorageRepository {}
+class MockStorageRepository extends Mock implements StorageRepository {}
 
-class MockStorageDataProvider
-  extends Mock
-  implements StorageDataProvider {}
+class MockStorageDataProvider extends Mock implements StorageDataProvider {}
+
+class MockHydratedStorage extends Mock implements HydratedStorage {}

@@ -108,9 +108,10 @@ class _IntDialInputState extends State<IntDialInput> {
 
   Widget buildLabel(BuildContext context) {
     return Center(
-      child: Text.rich(
+      child: RichText(
+        key: const ValueKey('dial_input_label'),
         textAlign: TextAlign.center,
-        TextSpan(
+        text: TextSpan(
           children: [
             TextSpan(
               text: '$_currentDuration\n',

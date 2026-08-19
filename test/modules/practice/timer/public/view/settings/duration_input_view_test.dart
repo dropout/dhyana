@@ -14,33 +14,35 @@ import '../../../../../../test_context_providers.dart';
 
 void main() {
   group('DurationInputView', () {
-
     testWidgets('renders with initial value', (WidgetTester tester) async {
       await tester.pumpWidget(
         withAllContextProviders(
-          DurationInputView(
-            minMinutes: 1,
-            maxMinutes: 15,
-            initialValue: 5,
-          ),
-        )
+          DurationInputView(minMinutes: 1, maxMinutes: 15, initialValue: 5),
+        ),
       );
 
-      // find with textContaining since it sits in a rich text field
-      expect(find.textContaining('5', skipOffstage: false), findsOneWidget);
-      expect(find.textContaining('perc', skipOffstage: false), findsOneWidget);
+      await tester.pumpAndSettle();
+
+      // find the label for the dial input and verify it contains the initial value
+
+      final RichText label = tester.widget(
+        find.byKey(const ValueKey('dial_input_label')),
+      );
+
+      expect(label.text.toPlainText(), contains('5'));
+      expect(label.text.toPlainText(), contains('perc'));
     });
 
-    testWidgets('calls onChanged when value changes', (WidgetTester tester) async {
+    testWidgets('calls onChanged when value changes', (
+      WidgetTester tester,
+    ) async {
       final Completer<Duration> completer = Completer<Duration>();
       Duration changedValue = Duration.zero;
-      
+
       final mockServices = MockServices();
       final hapticsService = MockHapticsService();
-      
-      when(() => mockServices.hapticsService)
-        .thenReturn(hapticsService);
-      
+
+      when(() => mockServices.hapticsService).thenReturn(hapticsService);
 
       await tester.pumpWidget(
         withAllContextProviders(
@@ -56,8 +58,7 @@ void main() {
               },
             ),
           ),
-
-        )
+        ),
       );
 
       // await tester.drag(
@@ -78,12 +79,9 @@ void main() {
 
       expect(changedValue.inMinutes, 6);
       expect(completer.isCompleted, isTrue);
-
     });
-
   });
 }
-
 
 Future<void> dragAroundDial(
   WidgetTester tester,
@@ -96,19 +94,14 @@ Future<void> dragAroundDial(
   final center = tester.getCenter(dialFinder);
 
   Offset pointAt(double angle) {
-    return center + Offset(
-      radius * math.cos(angle),
-      radius * math.sin(angle),
-    );
+    return center + Offset(radius * math.cos(angle), radius * math.sin(angle));
   }
 
   final gesture = await tester.startGesture(pointAt(startAngle));
 
   for (var step = 1; step <= steps; step++) {
     final progress = step / steps;
-    await gesture.moveTo(
-      pointAt(startAngle + sweepAngle * progress),
-    );
+    await gesture.moveTo(pointAt(startAngle + sweepAngle * progress));
     await tester.pump();
   }
 
