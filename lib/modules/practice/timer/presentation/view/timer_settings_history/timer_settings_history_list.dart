@@ -1,4 +1,5 @@
 import 'package:dhyana/core/core_routes.dart';
+import 'package:dhyana/modules/practice/timer/data/mapper/timer_settings_mapper.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
@@ -56,7 +57,7 @@ class TimerSettingsHistoryList extends StatelessWidget {
       delegate: SliverChildListDelegate(
         timerSettingsHistoryRecordList.map((record) => TimerSettingsHistoryListItem(
           timerSettingsHistoryRecord: record,
-          onTap: () => _onListItemTap(context, record.timerSettings),
+          onTap: () => _onListItemTap(context, record.timerSettings.toApi()),
         )).toList().intersperse(const SizedBox(height: DesignSpec.spacingMd)).revealListAnimation()
       ),
     );

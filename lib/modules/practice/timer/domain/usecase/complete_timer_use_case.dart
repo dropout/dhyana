@@ -1,10 +1,11 @@
 import 'package:clock/clock.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
+import 'package:dhyana/core/util/timer_event_scheduler.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
-import 'package:dhyana/core/util/timer_event_scheduler.dart';
-import 'package:dhyana/core/util/logger_mixin.dart';
+
 
 /// A use case that handles the completion of a timer session.
 class CompleteTimerUseCase with LoggerMixin {

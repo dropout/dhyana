@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
-import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_entity.dart';
 import 'package:dhyana/core/service/wakelock_service.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_controls.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_time.dart';
@@ -37,7 +37,7 @@ void main() {
     testWidgets('can display all necessary widgets', (WidgetTester tester) async {
 
       final TimerStateEntity timerState = TimerStateEntity.initial(
-        timerSettings: TimerSettings()
+        timerSettings: TimerSettingsEntity()
       );
 
         await tester.pumpWidget(
@@ -58,7 +58,7 @@ void main() {
     testWidgets('can enable wakelock service when initialized', (WidgetTester tester) async {
 
       final TimerStateEntity timerState = TimerStateEntity.initial(
-        timerSettings: TimerSettings()
+        timerSettings: TimerSettingsEntity()
       );
 
       final WakelockService wakelockService = MockWakelockService();
@@ -84,7 +84,7 @@ void main() {
     testWidgets('can disable wakelock service disposed', (WidgetTester tester) async {
 
       final TimerStateEntity timerState = TimerStateEntity.initial(
-        timerSettings: TimerSettings()
+        timerSettings: TimerSettingsEntity()
       );
 
       final WakelockService wakelockService = MockWakelockService();

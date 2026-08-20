@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:audio_service/audio_service.dart';
 import 'package:clock/clock.dart';
 import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
+import 'package:dhyana/modules/practice/timer/data/mapper/timer_settings_mapper.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/playback_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
@@ -67,9 +68,9 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
     required this.startTimerUseCase,
     required this.playbackStateChangeUseCase,
     required this.completeTimerUseCase,
-  }) : super(TimerStateEntity.initial(timerSettings: timerSettings)) {
+  }) : super(TimerStateEntity.initial(timerSettings: timerSettings.toDomain())) {
     configureEventSchedulerUseCase.execute(
-      timerSettings: timerSettings,
+      timerSettings: state.timerSettings,
       onWarmupCompleted: _warmupCompleted,
       onInterval: _onInterval,
       onTimerCompleted: _onTimerCompleted,
@@ -118,7 +119,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
 
   /// Updates time values, and playing/paused status based on [playbackState]
   /// changes from the audio service.
-  void _onPlaybackStateChanged(PlaybackState playbackState) {
+  void _onPlaybackStateChanged(PlaybackStateEntity playbackState) {
     emit(playbackStateChangeUseCase.execute(playbackState, state));
     // Avoid noisy logs
   }

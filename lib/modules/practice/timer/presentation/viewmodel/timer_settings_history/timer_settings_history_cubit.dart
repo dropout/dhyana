@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dhyana/modules/practice/timer/data/mapper/timer_settings_mapper.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
@@ -66,7 +67,7 @@ class TimerSettingsHistoryCubit
     try {
       await timerSettingsHistoryRepository.recordTimerSettingsHistory(
         profileId,
-        timerSettings,
+        timerSettings.toDomain(),
       );
       logger.t('Timer settings history record successfully saved.');
     } catch (e, stack) {
@@ -85,7 +86,7 @@ class TimerSettingsHistoryCubit
     try {      
       await timerSettingsHistoryRepository.recordTimerSettingsHistory(
         profileId,
-        timerSettings,
+        timerSettings.toDomain(),
       );      
       logger.t('Selected timer settings are in use.');
     } catch (e, stack) {

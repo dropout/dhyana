@@ -3,7 +3,7 @@ import 'package:clock/clock.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
-import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/repository/timer_settings_history_repository.dart';
@@ -91,7 +91,7 @@ class StartTimerUseCase with LoggerMixin {
   /// - Records the current timer settings to the history.
   /// - Shows the user's presence if the user has enabled the presence feature.
   /// Move to a business logic service if used in multiple use cases?
-  Future<void> _executeAdditionalTasks(TimerSettings timerSettings) async {
+  Future<void> _executeAdditionalTasks(TimerSettingsEntity timerSettings) async {
     try {
       final authData = await authPublicApi.authSessionStream.first;
       if (!authData.isAuthenticated) {

@@ -1,11 +1,13 @@
 import 'dart:async';
 
-import 'package:audio_service/audio_service.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:clock/clock.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
+import 'package:dhyana/modules/practice/timer/data/mapper/timer_settings_mapper.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/playback_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
+import 'package:dhyana/modules/practice/timer/domain/enum/playback_status.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_stage.dart';
 import 'package:dhyana/modules/practice/timer/domain/enum/timer_status.dart';
 import 'package:dhyana/modules/practice/timer/presentation/viewmodel/timer_cubit.dart';
@@ -28,8 +30,8 @@ void main() async {
     });
 
     test('emits elapsed time based on audio service playback state', () async {
-      final StreamController<PlaybackState> playbackStateStreamController =
-          StreamController<PlaybackState>();
+      final StreamController<PlaybackStateEntity> playbackStateStreamController =
+          StreamController<PlaybackStateEntity>();
 
       when(
         () => mockAudioService.playbackStateStream,
@@ -42,12 +44,12 @@ void main() async {
 
       // Emit a playback state with position 5 seconds
       playbackStateStreamController.add(
-        PlaybackState(updatePosition: Duration(seconds: 5)),
+        PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration(seconds: 5)),
       );
 
       // Emit another playback state with position 10 seconds
       playbackStateStreamController.add(
-        PlaybackState(updatePosition: Duration(seconds: 10)),
+        PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration(seconds: 10)),
       );
 
       await Future.delayed(Duration.zero); // Allow stream to process
@@ -72,7 +74,7 @@ void main() async {
     late TimerEventScheduler eventScheduler;
     late CrashlyticsService loggingCrashlyticsService;
 
-    late StreamController<PlaybackState> playbackStateStreamController;
+    late StreamController<PlaybackStateEntity> playbackStateStreamController;
 
     TimerCubit createTimerCubit({TimerSettings? timerSettings}) => TimerCubit(
       timerSettings: timerSettings ?? defaultTimerSettings,
@@ -90,11 +92,11 @@ void main() async {
       defaultTimerSettings = TimerSettings();
       registerFallbackValue(TimerSettings());
       playbackStateStreamController =
-          StreamController<PlaybackState>.broadcast();
+          StreamController<PlaybackStateEntity>.broadcast();
 
       registerFallbackValue(  
         TimerStateEntity(
-          timerSettings: TimerSettings(),
+          timerSettings: defaultTimerSettings.toDomain(),
           timerStatus: TimerStatus.idle,
           timerStage: TimerStage.warmup,
           elapsedWarmupTime: Duration.zero,
@@ -102,7 +104,7 @@ void main() async {
         ),
       );
 
-      registerFallbackValue(PlaybackState());
+      registerFallbackValue(PlaybackStateEntity(status: PlaybackStatus.idle, position: Duration.zero));
     });
 
     setUp(() {
@@ -133,13 +135,13 @@ void main() async {
       final timerCubit = createTimerCubit();
 
       expect(timerCubit.state, isA<TimerStateEntity>());
-      expect(timerCubit.state.timerSettings, defaultTimerSettings);
+      expect(timerCubit.state.timerSettings, defaultTimerSettings.toDomain());
       expect(timerCubit.state.timerStatus, TimerStatus.idle);
       expect(timerCubit.state.elapsedTime, Duration.zero);
 
       verify(
         () => mockConfigureEventSchedulerUseCase.execute(
-          timerSettings: defaultTimerSettings,
+          timerSettings: defaultTimerSettings.toDomain(),
           onWarmupCompleted: any(named: 'onWarmupCompleted'),
           onInterval: any(named: 'onInterval'),
           onTimerCompleted: any(named: 'onTimerCompleted'),
@@ -171,7 +173,7 @@ void main() async {
 
         when(() => mockStartTimerUseCase.execute(timerCubit.state)).thenAnswer(
           (_) async => TimerStateEntity(
-            timerSettings: defaultTimerSettings,
+            timerSettings: defaultTimerSettings.toDomain(),
             timerStatus: TimerStatus.running,
             timerStage: TimerStage.warmup,
             elapsedWarmupTime: Duration.zero,
@@ -189,7 +191,7 @@ void main() async {
       },
       expect: () => [
         TimerStateEntity(
-          timerSettings: defaultTimerSettings,
+          timerSettings: defaultTimerSettings.toDomain(),
           timerStatus: TimerStatus.running,
           timerStage: TimerStage.warmup,
           elapsedWarmupTime: Duration.zero,
@@ -201,7 +203,7 @@ void main() async {
         verify(
           () => mockStartTimerUseCase.execute(
             TimerStateEntity(
-              timerSettings: defaultTimerSettings,
+              timerSettings: defaultTimerSettings.toDomain(),
               timerStatus: TimerStatus.idle,
               timerStage: TimerStage.warmup,
               elapsedWarmupTime: Duration.zero,
@@ -265,7 +267,7 @@ void main() async {
       },
       expect: () => [
         TimerStateEntity(
-          timerSettings: defaultTimerSettings,
+          timerSettings: defaultTimerSettings.toDomain(),
           timerStatus: TimerStatus.completed,
           timerStage: TimerStage.warmup,
           elapsedWarmupTime: Duration.zero,
@@ -287,11 +289,7 @@ void main() async {
       },
       act: (cubit) async {
         playbackStateStreamController.add(
-          PlaybackState(
-            processingState: AudioProcessingState.ready,
-            playing: true,
-            updateTime: fixedTime,
-          ),
+          PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration.zero),
         );
         await Future.delayed(Duration.zero); // allow stream to process
       },
@@ -309,11 +307,7 @@ void main() async {
       },
       act: (cubit) async {
         playbackStateStreamController.add(
-          PlaybackState(
-            processingState: AudioProcessingState.ready,
-            playing: true,
-            updateTime: fixedTime,
-          ),
+          PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration.zero),
         );
         await Future.delayed(Duration.zero); // allow stream to process
       },
@@ -333,11 +327,7 @@ void main() async {
           cubit.finish();
 
           playbackStateStreamController.add(
-            PlaybackState(
-              processingState: AudioProcessingState.ready,
-              playing: true,
-              updateTime: fixedTime,
-            ),
+            PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration.zero),
           );
           await Future.delayed(Duration.zero); // allow stream to process
         });
@@ -345,7 +335,7 @@ void main() async {
       },
       expect: () => [
         TimerStateEntity(
-          timerSettings: defaultTimerSettings,
+          timerSettings: defaultTimerSettings.toDomain(),
           timerStatus: TimerStatus.completed,
           timerStage: TimerStage.warmup,
           elapsedWarmupTime: Duration.zero,

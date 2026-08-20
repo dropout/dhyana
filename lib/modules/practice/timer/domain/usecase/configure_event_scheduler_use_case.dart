@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_entity.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
 
@@ -12,7 +12,7 @@ class ConfigureEventSchedulerUseCase with LoggerMixin {
   /// Configures the event scheduler with the appropriate timer
   /// events based on the provided [timerSettings].
   void execute({
-    required TimerSettings timerSettings,
+    required TimerSettingsEntity timerSettings,
     required void Function(Duration) onWarmupCompleted,
     required void Function(Duration) onInterval,
     required void Function(Duration) onTimerCompleted,    

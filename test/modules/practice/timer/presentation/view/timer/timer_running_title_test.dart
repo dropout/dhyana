@@ -1,5 +1,5 @@
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
-import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_entity.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_time.dart';
 import 'package:dhyana/modules/practice/timer/presentation/view/timer/timer_running_title.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +18,7 @@ void main() {
     testWidgets('shows warmup text when there is warmup time', (WidgetTester tester) async {
 
       final TimerStateEntity timerState = TimerStateEntity.initial(
-        timerSettings: TimerSettings(
+        timerSettings: TimerSettingsEntity(
         )
       );
 
@@ -42,7 +42,7 @@ void main() {
     testWidgets('does not show warmup text when timer running', (WidgetTester tester) async {
 
       final TimerStateEntity timerState = TimerStateEntity.initial(
-        timerSettings: TimerSettings(
+        timerSettings: TimerSettingsEntity(
           warmup: Duration.zero,
         )
       );

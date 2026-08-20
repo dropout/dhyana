@@ -1,11 +1,14 @@
-import 'package:audio_service/audio_service.dart';
+import 'package:flutter/services.dart';
+import 'package:gaimon/gaimon.dart';
+
 import 'package:dhyana/core/audio/app_audio_handler.dart';
 import 'package:dhyana/core/audio/so_timer_audio_handler.dart';
 import 'package:dhyana/core/domain/enum/sound.dart';
-import 'package:dhyana/modules/practice/timer/timer_module.dart';
+import 'package:dhyana/modules/practice/timer/data/mapper/playback_state_mapper.dart';
+import 'package:dhyana/modules/practice/timer/data/mapper/timer_settings_mapper.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/playback_state_entity.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_settings_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
-import 'package:flutter/services.dart';
-import 'package:gaimon/gaimon.dart';
 
 
 /// A timer service that measures time based on audio playback. 
@@ -33,8 +36,8 @@ class DefaultTimerAudioService implements TimerAudioService {
   
   /// Starts the timer with the given [timerSettings] by sending a custom action to the [AppAudioHandler].
   @override
-  Future<void> start(TimerSettings timerSettings) =>
-    _audioHandler.customAction(SoTimerHandlerCustomAction.start.name, timerSettings.toJson());
+  Future<void> start(TimerSettingsEntity timerSettings) =>
+    _audioHandler.customAction(SoTimerHandlerCustomAction.start.name, timerSettings.toApi().toJson());
 
   /// Resumes audio playback by delegating to the [AppAudioHandler]'s play method.
   @override
@@ -61,8 +64,8 @@ class DefaultTimerAudioService implements TimerAudioService {
     _audioHandler.playbackState.map((state) => state.playing);
 
   @override
-  Stream<PlaybackState> get playbackStateStream 
-    => _audioHandler.playbackState;
+  Stream<PlaybackStateEntity> get playbackStateStream 
+    => _audioHandler.playbackState.map((state) => state.toDomain());
 
   void _switchToTimerAudioHandler() => 
     _audioHandler.customAction(AppAudioHandler.switchAction, {
