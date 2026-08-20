@@ -89,7 +89,7 @@ void main() {
     verify(() => eventScheduler.stop()).called(1);
   });
 
-  test('assembles a sitting session with a generated id and the elapsed time', () async {
+  test('assembles a sitting timer session with a generated id and the elapsed time', () async {
     final startTime = DateTime(2026, 3, 1, 8, 0);
     final endTime = DateTime(2026, 3, 1, 8, 10);
 

@@ -2,7 +2,7 @@ import 'package:clock/clock.dart';
 import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/core/util/timer_event_scheduler.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
-import 'package:dhyana/modules/practice/session/domain/entity/session_entity.dart';
+import 'package:dhyana/modules/practice/timer/domain/entity/timer_session_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/entity/timer_state_entity.dart';
 import 'package:dhyana/modules/practice/timer/domain/service/timer_audio_service.dart';
 
@@ -25,7 +25,7 @@ class CompleteTimerUseCase with LoggerMixin {
     required this.idGeneratorService,
   });
 
-  Future<({SessionEntity session, TimerStateEntity timerState})> execute(TimerStateEntity state, Duration elapsedTime) async {
+  Future<({TimerSessionEntity session, TimerStateEntity timerState})> execute(TimerStateEntity state, Duration elapsedTime) async {
     // Play ending sound
     // Only stop 'background' player after the ending sound is played,
     // to ensure the ending sound is not cut off while in background, 
@@ -38,7 +38,7 @@ class CompleteTimerUseCase with LoggerMixin {
     eventScheduler.stop();
 
     // Assemble the session data to be saved
-    SessionEntity session = SessionEntity(
+    TimerSessionEntity session = TimerSessionEntity(
       id: idGeneratorService.sessionId(),
       type: .sitting,
       startTime:

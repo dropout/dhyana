@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:clock/clock.dart';
-import 'package:dhyana/modules/practice/session/data/mapper/session_mapper.dart';
+import 'package:dhyana/modules/practice/session/public/model/session.dart';
 import 'package:dhyana/modules/practice/session/session_routes.dart';
 import 'package:dhyana/modules/practice/timer/data/mapper/timer_settings_mapper.dart';
 import 'package:dhyana/modules/practice/timer/timer_module.dart';
@@ -148,8 +148,19 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
     final result = await completeTimerUseCase.execute(state, elapsedTime);
     emit(result.timerState);
     logger.t('Navigating to session completed screen');
-    final targetRoute = SessionCompletedRoute($extra: result.session.toApi());
-    router.replace(targetRoute.location, extra: result.session.toApi());
+    // Manually assembled here to avoid coupling the timer module to the session module's domain model.
+    final session = Session(
+      id: result.session.id,
+      type: switch (result.session.type) {
+        .chanting => .chanting,
+        .sitting => .sitting,
+      },
+      startTime: result.session.startTime,
+      endTime: result.session.endTime,
+      duration: result.session.duration,
+    );
+    final targetRoute = SessionCompletedRoute($extra: session);
+    router.replace(targetRoute.location, extra: session);
   }
 
   @override
