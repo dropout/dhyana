@@ -103,6 +103,8 @@ class MockAuthPublicApi extends Mock implements AuthPublicApi {}
 
 class MockProfilePublicApi extends Mock implements ProfilePublicApi {}
 
+class MockSocialPublicApi extends Mock implements SocialPublicApi {}
+
 class MockStatsPublicApi extends Mock implements StatsPublicApi {}
 
 class MockMindfulMinutesService extends Mock implements MindfulMinutesService {}
