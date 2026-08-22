@@ -1,4 +1,4 @@
-import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_metadata_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/core/util/default_profile_data.dart';
@@ -24,12 +24,12 @@ const List<String> _chantNames = [
 
 class StubbedChantRepository implements ChantRepository {
   final Faker _faker = Faker();
-  late final List<Chant> _chants;
+  late final List<ChantEntity> _chants;
 
   StubbedChantRepository() {
     _chants = List.generate(_chantNames.length, (index) {
       final chantName = _chantNames[index];
-      return Chant(
+      return ChantEntity(
         id: _faker.guid.guid(),
         order: index,
         name: chantName,
@@ -53,18 +53,18 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Future<List<Chant>> queryAll({bool preferCache = false}) async {
+  Future<List<ChantEntity>> queryAll({bool preferCache = false}) async {
     await Future.delayed(Duration(milliseconds: 500));
     return Future.value(List.from(_chants));
   }
 
   @override
-  Stream<List<Chant>> queryAllStream() {
+  Stream<List<ChantEntity>> queryAllStream() {
     return Stream.value(_chants);
   }
 
   @override
-  Future<void> create(Chant model) {
+  Future<void> create(ChantEntity model) {
     throw UnimplementedError();
   }
 
@@ -74,7 +74,7 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Future<Chant> read(String id, {bool preferCache = false}) async {
+  Future<ChantEntity> read(String id, {bool preferCache = false}) async {
     await Future.delayed(Duration(milliseconds: 300));
     return _chants.firstWhere(
       (chant) => chant.id == id,
@@ -83,7 +83,7 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Stream<Chant> readStream(String id) {
+  Stream<ChantEntity> readStream(String id) {
     return Stream.value(
       _chants.firstWhere(
         (chant) => chant.id == id,
@@ -93,7 +93,7 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Future<void> update(Chant model) {
+  Future<void> update(ChantEntity model) {
     throw UnimplementedError();
   }
 }

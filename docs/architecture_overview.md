@@ -1,7 +1,12 @@
 # Architectural Overview Document
 
+
 ## 1. Context
 Dhyana is a mobile application built that provides helpful tools for mental health practitioners.
+
+### TL;DR
+- Built using Flutter and Firebase
+- Uses feature modules with Clean Architecture principles
 
 ### 1.1 Application Purpose
 The application's purpose is to provide tools for sitting meditation and chanting meditation pratices, records session data, and provides insights into the user's practice. The practice is supported by a social feature that connects users who practiced at the same time.
@@ -9,16 +14,16 @@ The application's purpose is to provide tools for sitting meditation and chantin
 ### 1.2 Technical Goals
 
 #### Pragmatic simplicity
-Finding a balance between providing scalable building blocks for growing feature complexity and keeping over-engineering, boilerplate, and pass-through layers out of the codebase.
+Finding a balance between providing scalable building blocks for growing feature requirements that avoids enterprise-level complexity.
 
 #### Cross-Platform Development
-The application is built using Flutter, which allows for cross-platform development. This enables one codebase to be used for both iOS and Android platforms.
+The application is built using Flutter, which allows for cross-platform development.
 
 #### Modular Architecture
-Features are organized into domain modules, each encapsulating its own data management, business logic, and presentation layers. Modules offer public APIs and view components to other modules. The core module provides entry point into the application with shared services, utilities. 
+Features are organized into domain modules, each encapsulating its own data management, business logic, and presentation layers. Modules offer public APIs and presentation assets to other modules. The core module provides entry point into the application with shared services, utilities. 
 
 #### Dependency Injection
-A Service Locator pattern is used for dependency injection, allowing for easy configuration and management of dependencies across the application.
+A Service Locator pattern is used for dependency injection, allowing for easy configuration and management of dependencies.
 
 #### Serverless Backend
 The application uses Firebase as a comprehensive Backend-as-a-Service (BaaS) platform that operates on a serverless model.

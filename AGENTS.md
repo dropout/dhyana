@@ -50,6 +50,11 @@ For running and building commands look at the commands documentation: [`docs/com
 - Prefer Cubit over Bloc for simple state flows.
 - Use freezed for immutable state and domain models.
 
+## Commenting & Verbosity Rules
+- Keep all inline code comments extremely short and concise (maximum one sentence).
+- Explain *why* complex logic exists, never restate *what* the code visibly does.
+- Avoid conversational fluff, introductions, or verbose summaries in all outputs.
+
 ## Project-Specific Expectations
 
 

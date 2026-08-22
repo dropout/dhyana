@@ -1,13 +1,18 @@
-import 'package:dhyana/drift/chant_cache_database.dart';
-import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
-import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_metadata_entity.dart';
-import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
-import 'package:dhyana/core/util/logger_mixin.dart';
+import 'dart:io';
+
 import 'package:drift/drift.dart';
 
+import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:dhyana/core/util/logger_mixin.dart';
+import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
+import 'package:dhyana/modules/practice/chanting/data/service/file_validation_extension.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
+
+
 class ChantCacheValidationResult {
-  final Chant chant;
+  final ChantEntity chant;
 
   final bool isAudioCacheValid;
   final bool isLyricsCacheValid;
@@ -57,25 +62,26 @@ typedef AssetValidationResult = ({
 });
 
 class ChantCacheValidator with LoggerMixin {
-  final ChantCacheDataRepository chantCacheRepository;
 
-  ChantCacheValidator({
-    required this.chantCacheRepository,
-  });
-
-  Future<ChantCacheValidationResult> validateChantCache(Chant chant) async {
+  Future<ChantCacheValidationResult> validateChantCache(
+    ChantEntity chant,
+    ChantLocalResourcesEntity chantLocalResources,
+    ChantCacheRepository chantCacheRepo
+  ) async {
     logger.t('Validating cache for chant: ${chant.id} - ${chant.name}');
 
     final audioAssetValidation = await validateChantAssetCache(
-      metadata: chant.metaData,
-      contentId: chant.id,
+      chant: chant,
+      localResources: chantLocalResources,
       type: .audio,
+      chantCacheRepo: chantCacheRepo
     );
 
     final lyricsAssetValidation = await validateChantAssetCache(
-      metadata: chant.metaData,
-      contentId: chant.id,
+      chant: chant,
+      localResources: chantLocalResources,
       type: .lyrics,
+      chantCacheRepo: chantCacheRepo
     );
 
     return ChantCacheValidationResult(
@@ -88,23 +94,25 @@ class ChantCacheValidator with LoggerMixin {
   }
 
   Future<AssetValidationResult> validateChantAssetCache({
-    required ChantMetaDataEntity metadata,
-    required String contentId,
+    required ChantEntity chant,
+    required ChantLocalResourcesEntity localResources,
     required CachedAssetType type,
+    required ChantCacheRepository chantCacheRepo,
   }) async {
     // Collecting metadata for the asset from remote source
+    final metadata = chant.metaData;
     final version = metadata.getVersion(type);
     final hash = metadata.getHash(type);
     final bytes = metadata.getBytes(type);
     final remoteUpdatedAt = metadata.updatedAt.millisecondsSinceEpoch;
 
     // Collecting existing cache entry from local database
-    final existing = await chantCacheRepository.readEntry(contentId, type);
+    final existing = await chantCacheRepo.readEntry(chant.id, type);
 
     // If the existing entry is valid and usable, return its local file path
     if (existing != null &&
         await isCacheDataEntryUsable(existing, version, hash, bytes)) {
-      await chantCacheRepository.upsertEntry(
+      await chantCacheRepo.upsertEntry(
         existing.copyWith(
           lastValidatedAtEpochMs: Value(DateTime.now().millisecondsSinceEpoch),
           remoteUpdatedAtEpochMs: remoteUpdatedAt,
@@ -134,7 +142,7 @@ class ChantCacheValidator with LoggerMixin {
       return false;
     }
 
-    final fileExists = await chantCacheRepository.fileExists(row.localFilePath);
+    final fileExists = await File(row.localFilePath).exists();
     if (!fileExists) {
       logger.t(
         'Cache entry ${row.id} file does not exist at path ${row.localFilePath}.',
@@ -143,7 +151,7 @@ class ChantCacheValidator with LoggerMixin {
     }
 
     if (expectedHash != null && expectedHash.isNotEmpty) {
-      final localHash = await chantCacheRepository.sha256FromFile(row.localFilePath);
+      final localHash = await File(row.localFilePath).sha256();
       if (localHash != expectedHash) {
         logger.t(
           'Cache entry ${row.id} hash mismatch: expected $expectedHash, found $localHash.',
@@ -153,7 +161,7 @@ class ChantCacheValidator with LoggerMixin {
     }
 
     if (expectedBytes != null) {
-      final localBytes = await chantCacheRepository.fileSize(row.localFilePath);
+      final localBytes = await File(row.localFilePath).size();
       if (localBytes != expectedBytes) {
         logger.t(
           'Cache entry ${row.id} size mismatch: expected $expectedBytes, found $localBytes.',
@@ -164,4 +172,8 @@ class ChantCacheValidator with LoggerMixin {
 
     return true;
   }
+
+
+
+
 }

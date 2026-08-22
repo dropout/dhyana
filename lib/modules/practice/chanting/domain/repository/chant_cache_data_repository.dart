@@ -1,9 +1,23 @@
 import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
+import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-abstract interface class ChantCacheDataRepository {
+abstract interface class ChantCacheRepository {
+  Stream<CachingProgressEntity> cacheChants(
+    List<String> targetChantIds, 
+    List<ChantEntity> availableChants
+  );
+
+  Future<({String chantId, ChantLocalResourcesEntity localResources})>
+  collectLocalResource(ChantEntity chant);
+
+  Future<List<({String chantId, ChantLocalResourcesEntity localResources})>>
+  collectLocalResources(List<ChantEntity> chants);
+
 
   // ---------------------------------------------------------------------------
   // Local database operations
@@ -11,7 +25,7 @@ abstract interface class ChantCacheDataRepository {
 
   /// Reads a cache entry from the local database for the given content ID and asset type.
   Future<ChantCacheEntryRow?> readEntry(String contentId, CachedAssetType type);
-  
+
   Future<void> markState({
     required String contentId,
     required CachedAssetType assetType,
@@ -31,6 +45,7 @@ abstract interface class ChantCacheDataRepository {
   // ---------------------------------------------------------------------------
   // File system operations
   // ---------------------------------------------------------------------------
+
   /// Builds the file path for a cached asset.
   Future<String> buildCacheFilePath({
     required String contentId,
@@ -41,12 +56,6 @@ abstract interface class ChantCacheDataRepository {
   /// Ensures that the root cache directory exists.
   Future<void> ensureCacheDirectories();
 
-  /// Checks if a file exists at the given absolute path.
-  Future<bool> fileExists(String absolutePath);
-
-  /// Deletes the file at the given absolute path if it exists.
-  Future<void> deleteIfExists(String absolutePath);
-
   /// Downloads a file from the given storage path
   /// to the specified local destination path.
   Future<DownloadTask> downloadToFile({
@@ -54,13 +63,7 @@ abstract interface class ChantCacheDataRepository {
     required String localDestinationPath,
   });
 
-  /// Computes the SHA-256 hash of the file at the given absolute path.
-  Future<String> sha256FromFile(String absolutePath);
-
-  /// Returns the size of the file at the given absolute path in bytes.
-  Future<int> fileSize(String absolutePath);
-
   /// Clears all cached files and directories.
-  Future<void> clearCache();
-
+  Future<void> clearCache();  
 }
+

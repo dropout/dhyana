@@ -19,8 +19,6 @@ import 'package:dhyana/modules/practice/chanting/data/repository/firebase_chant_
 import 'package:dhyana/modules/practice/chanting/data/service/default_chanting_public_api.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
-import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_manager.dart';
-import 'package:dhyana/modules/practice/chanting/domain/service/chant_cache_validator.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/complete_chanting_use_case.dart';
@@ -56,7 +54,7 @@ void _registerRepositories() {
     ),
   );
 
-  GetIt.I.registerLazySingleton<ChantCacheDataRepository>(
+  GetIt.I.registerLazySingleton<ChantCacheRepository>(
     () => DefaultChantCacheDataRepository(
       chantCacheDataProvider: GetIt.I.get<ChantCacheDataProvider>(),
       storageDataProvider: GetIt.I.get<StorageDataProvider>(),
@@ -68,29 +66,14 @@ void _registerServices() {
   GetIt.I.registerFactory<ChantingAudioService>(
     () => ChantingAudioService(GetIt.I.get<AppAudioHandler>()),
   );
-
   GetIt.I.registerLazySingleton<LyricsService>(() => LyricsService());
-
-  GetIt.I.registerLazySingleton<ChantCacheValidator>(
-    () => ChantCacheValidator(
-      chantCacheRepository: GetIt.I.get<ChantCacheDataRepository>(),
-    ),
-  );
-
-  GetIt.I.registerLazySingleton<ChantCacheManager>(
-    () => ChantCacheManager(
-      chantRepository: GetIt.I.get<ChantRepository>(),
-      chantCacheRepository: GetIt.I.get<ChantCacheDataRepository>(),
-      cacheValidator: GetIt.I.get<ChantCacheValidator>(),
-    ),
-  );
 }
 
 void _registerUseCases() {
   GetIt.I.registerFactory<StartChantingUseCase>(
     () => StartChantingUseCase(
-      chantRepository: GetIt.I.get<ChantRepository>(),
-      chantCacheManager: GetIt.I.get<ChantCacheManager>(),
+      chantRepo: GetIt.I.get<ChantRepository>(),
+      chantCacheRepo: GetIt.I.get<ChantCacheRepository>(),
       chantingAudioService: GetIt.I.get<ChantingAudioService>(),
     ),
   );
