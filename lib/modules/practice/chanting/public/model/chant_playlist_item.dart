@@ -9,6 +9,8 @@ sealed class ChantPlaylistItem with _$ChantPlaylistItem {
 
   const factory ChantPlaylistItem({ 
 
+    // This is a unique identifier for this item. This is used as a key in the list
+    // so that multiple instances of the same chant can be added to the list and reordered.
     required String id,
 
     /// The identifier of the chant. This is used to look up the chant in the database.

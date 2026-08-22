@@ -9,6 +9,8 @@ import 'package:dhyana/core/service/id_generator_service.dart';
 import 'package:dhyana/core/service/shared_preferences_service.dart';
 import 'package:dhyana/core/util/firebase_provider.dart';
 
+import 'package:path_provider/path_provider.dart';
+
 import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_cache_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/datasource/chant_data_provider.dart';
@@ -16,11 +18,16 @@ import 'package:dhyana/modules/practice/chanting/data/datasource/drift_chant_cac
 import 'package:dhyana/modules/practice/chanting/data/datasource/firebase_chant_data_provider.dart';
 import 'package:dhyana/modules/practice/chanting/data/repository/default_chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/data/repository/firebase_chant_repository.dart';
+import 'package:dhyana/modules/practice/chanting/data/service/chant_asset_downloader.dart';
+import 'package:dhyana/modules/practice/chanting/data/service/chant_cache_file_system.dart';
+import 'package:dhyana/modules/practice/chanting/data/service/chant_cache_validator.dart';
+import 'package:dhyana/modules/practice/chanting/data/service/chant_local_resource_resolver.dart';
 import 'package:dhyana/modules/practice/chanting/data/service/default_chanting_public_api.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_cache_data_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/repository/chant_repository.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/chanting_audio_service.dart';
 import 'package:dhyana/modules/practice/chanting/domain/service/lyrics_service.dart';
+import 'package:dhyana/modules/practice/chanting/domain/usecase/cache_chants_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/complete_chanting_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/load_lyrics_use_case.dart';
 import 'package:dhyana/modules/practice/chanting/domain/usecase/playback_state_change_use_case.dart';
@@ -58,6 +65,7 @@ void _registerRepositories() {
     () => DefaultChantCacheDataRepository(
       chantCacheDataProvider: GetIt.I.get<ChantCacheDataProvider>(),
       storageDataProvider: GetIt.I.get<StorageDataProvider>(),
+      chantCacheFileSystem: GetIt.I.get<ChantCacheFileSystem>(),
     ),
   );
 }
@@ -67,13 +75,39 @@ void _registerServices() {
     () => ChantingAudioService(GetIt.I.get<AppAudioHandler>()),
   );
   GetIt.I.registerLazySingleton<LyricsService>(() => LyricsService());
+  GetIt.I.registerLazySingleton<ChantCacheFileSystem>(
+    () => ChantCacheFileSystem(
+      documentsDirectoryProvider: getApplicationDocumentsDirectory,
+    ),
+  );
+  GetIt.I.registerLazySingleton<ChantLocalResourceResolver>(
+    () => ChantLocalResourceResolver(
+      chantCacheFileSystem: GetIt.I.get<ChantCacheFileSystem>(),
+    ),
+  );
+  GetIt.I.registerLazySingleton<ChantAssetDownloader>(
+    () => ChantAssetDownloader(
+      chantCacheRepo: GetIt.I.get<ChantCacheRepository>(),
+      chantCacheFileSystem: GetIt.I.get<ChantCacheFileSystem>(),
+      storageDataProvider: GetIt.I.get<StorageDataProvider>(),
+    ),
+  );
+  GetIt.I.registerLazySingleton<ChantCacheValidator>(() => ChantCacheValidator());
 }
 
 void _registerUseCases() {
+  GetIt.I.registerFactory<CacheChantsUseCase>(
+    () => CacheChantsUseCase(
+      chantCacheRepo: GetIt.I.get<ChantCacheRepository>(),
+      chantCacheValidator: GetIt.I.get<ChantCacheValidator>(),
+      chantAssetDownloader: GetIt.I.get<ChantAssetDownloader>(),
+      localResourceResolver: GetIt.I.get<ChantLocalResourceResolver>(),
+    ),
+  );
   GetIt.I.registerFactory<StartChantingUseCase>(
     () => StartChantingUseCase(
       chantRepo: GetIt.I.get<ChantRepository>(),
-      chantCacheRepo: GetIt.I.get<ChantCacheRepository>(),
+      cacheChantsUseCase: GetIt.I.get<CacheChantsUseCase>(),
       chantingAudioService: GetIt.I.get<ChantingAudioService>(),
     ),
   );

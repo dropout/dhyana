@@ -1,23 +1,9 @@
 import 'package:dhyana/core/domain/enum/cache_download_state.dart';
 import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/drift/chant_cache_database.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/caching_progress_entity.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
-import 'package:dhyana/modules/practice/chanting/domain/entity/chant_local_resources_entity.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract interface class ChantCacheRepository {
-  Stream<CachingProgressEntity> cacheChants(
-    List<String> targetChantIds, 
-    List<ChantEntity> availableChants
-  );
-
-  Future<({String chantId, ChantLocalResourcesEntity localResources})>
-  collectLocalResource(ChantEntity chant);
-
-  Future<List<({String chantId, ChantLocalResourcesEntity localResources})>>
-  collectLocalResources(List<ChantEntity> chants);
-
 
   // ---------------------------------------------------------------------------
   // Local database operations
