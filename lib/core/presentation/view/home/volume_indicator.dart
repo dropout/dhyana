@@ -69,8 +69,6 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
           CurveTween(curve: Interval(waitRatio, 1.0, curve: Curves.easeOut)),
         )
         .animate(_animationController);
-
-
   }
 
   @override
@@ -82,30 +80,35 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
 
   Future<void> initPlatformState() async {
     flutterVolumeListener.volume.then((value) {
+      if (!mounted) return;      
       setState(() {
         _currentVolume = value;
-        if (widget.showOnVolumeChangeAboveThreshold && _currentVolume >= widget.visibilityThreshold) {
+        if (widget.showOnVolumeChangeAboveThreshold &&
+            _currentVolume >= widget.visibilityThreshold) {
           _animationController.forward(from: 0.0);
         }
       });
     });
 
-    _volumeStreamSub = flutterVolumeListener.onVolumeChanged.listen((volume) {
+    flutterVolumeListener.onVolumeChanged.skipWhile((_) => !mounted).listen((
+      volume,
+    ) {
       setState(() {
         _currentVolume = volume;
-        if (widget.showOnVolumeChangeAboveThreshold && _currentVolume >= widget.visibilityThreshold) {          
+        if (widget.showOnVolumeChangeAboveThreshold &&
+            _currentVolume >= widget.visibilityThreshold) {
           _animationController.forward(from: 0.0);
-        }        
+        }
       });
-    });
+    });    
   }
 
   @override
   Widget build(BuildContext context) {
-
     if (_currentVolume < widget.visibilityThreshold) {
       return buildIndicator(context);
-    } else if (widget.showOnVolumeChangeAboveThreshold && _currentVolume >= widget.visibilityThreshold) {
+    } else if (widget.showOnVolumeChangeAboveThreshold &&
+        _currentVolume >= widget.visibilityThreshold) {
       return AnimatedBuilder(
         animation: _fadeAnimation,
         builder: (context, child) {
@@ -117,11 +120,11 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
       );
     } else {
       return const SizedBox.shrink();
-    }   
+    }
   }
 
   Widget buildIndicator(BuildContext context) {
-      return DecoratedBox(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(50),
@@ -166,5 +169,4 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
       return Colors.green;
     }
   }
-
 }
