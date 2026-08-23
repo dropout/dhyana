@@ -14,13 +14,13 @@ class DomainLayerIsolationRule extends DartLintRule {
     problemMessage:
         "Domain layer must not depend on '{0}'. A module's domain/ may only "
         'import its own domain/, lib/core/, or another module\'s public/ API.',
-    errorSeverity: ErrorSeverity.WARNING,
+    errorSeverity: .WARNING,
   );
 
   @override
   void run(
     CustomLintResolver resolver,
-    ErrorReporter reporter,
+    DiagnosticReporter reporter,
     CustomLintContext context,
   ) {
     final filePath = resolver.path.replaceAll(r'\', '/');
