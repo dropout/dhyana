@@ -1,0 +1,14 @@
+name: dhyana_lints
+description: Custom analyzer lint rules enforcing Dhyana's clean architecture boundaries.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+
+dependencies:
+  analyzer: ^8.2.0
+  custom_lint_builder: ^0.8.1
+
+dev_dependencies:
+  test: ^1.25.0
