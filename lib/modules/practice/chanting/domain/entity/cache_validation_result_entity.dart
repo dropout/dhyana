@@ -1,5 +1,5 @@
 import 'package:dhyana/core/domain/entity/entity.dart';
-import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
+import 'package:dhyana/modules/practice/chanting/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_cache_entity.dart';
 import 'package:dhyana/modules/practice/chanting/domain/entity/chant_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

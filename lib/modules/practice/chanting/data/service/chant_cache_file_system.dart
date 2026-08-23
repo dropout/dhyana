@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
+import 'package:dhyana/modules/practice/chanting/domain/enum/cached_asset_type.dart';
 
 /// Manages the on-disk layout of cached chant assets.
 class ChantCacheFileSystem {

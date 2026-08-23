@@ -1,4 +1,4 @@
-import 'package:dhyana/core/domain/enum/cached_asset_type.dart';
+import 'package:dhyana/modules/practice/chanting/domain/enum/cached_asset_type.dart';
 import 'package:dhyana/core/data/converter/date_time_converter.dart';
 import 'package:dhyana/core/domain/entity/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
