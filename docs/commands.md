@@ -22,8 +22,9 @@ If no build mode specified, use `debug`.
 - Static checks: `flutter analyze`
 - Module boundary checks: `bash support/maintenance_scripts/check_module_boundaries.sh`
 - Run: `flutter run --flavor <flavor> -t lib/main_<flavor>.dart --<build_mode>`
-- Test: `flutter test`
+- Widget and Unit Tests: `flutter test`
     - Run with `--coverage` for getting test coverage report.
+- Integration Tests: `flutter test integration_test/<test_file>.dart --flavor <flavor> --dart-define=IS_TEST=true`
 - Format: `dart format .`
 - Clean: `flutter clean`
 

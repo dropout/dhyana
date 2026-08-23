@@ -38,7 +38,11 @@ class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
       },
       no: CustomAppBar(
         leading: Today(key: ValueKey(DateTime.now().toDayId())),
-        trailing: [const ProfileButton()],
+        trailing: [
+          const ProfileButton(
+            key: Key('home_screen_appbar_profile_button'),
+          )
+        ],
       ),
     );
   }
