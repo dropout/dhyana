@@ -1,4 +1,5 @@
 import 'package:dhyana/modules/auth/presentation/view/login_screen.dart';
+import 'package:dhyana/modules/auth/presentation/view/login_with_email_and_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,6 +12,15 @@ class LoginRoute extends GoRouteData with $LoginRoute {
   Widget build(BuildContext context, GoRouterState state) => LoginScreen();
 }
 
+@TypedGoRoute<LoginWithEmailAndPasswordRoute>(path: '/login/email', name: 'LOGIN_WITH_EMAIL_AND_PASSWORD')
+class LoginWithEmailAndPasswordRoute extends GoRouteData with $LoginWithEmailAndPasswordRoute {
+  const LoginWithEmailAndPasswordRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const LoginWithEmailAndPasswordScreen();
+}
+
 List<RouteBase> $authRoutes = [
   $loginRoute,
+  $loginWithEmailAndPasswordRoute,
 ];
+

@@ -113,7 +113,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
   Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
-    void Function(String userId, bool isFirstSignin)? onComplete,
+    void Function(String userId)? onComplete,
     void Function(Object? error, StackTrace stackTrace)? onError,
   }) async {
     try {
@@ -124,7 +124,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin {
         password: password,
       );
       emit(AuthState.signedIn(userId: userId));
-      onComplete?.call(userId, isFirstSignin);
+      onComplete?.call(userId);
       _logAnalyticsSuccessfulSignin();
       logger.t('Successfully signed in with Email and Password');
     } on SignInCancelled {

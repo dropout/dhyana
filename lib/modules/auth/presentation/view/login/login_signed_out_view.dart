@@ -1,3 +1,5 @@
+import 'package:dhyana/core/presentation/view/util/gap.dart';
+import 'package:dhyana/modules/auth/auth_routes.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -40,13 +42,18 @@ class LoginSignedOutView extends StatelessWidget {
     context.hapticsTap();
   }
 
+  void _onLoginWithEmailAndPasswordTap(BuildContext context) {
+    LoginWithEmailAndPasswordRoute().push(context);
+    context.logEvent(name: 'login_with_email_and_password_button_pressed');
+    context.hapticsTap();
+  }
+
   void _onTermsTap(BuildContext context) {
     // TODO: Replace with actual terms of service URL
     context.services.urlLauncher.launchInAppWebView('https://google.com');
     context.logEvent(name: 'view_tou_pressed');
     context.hapticsTap();
   }
-
 
   void _onPrivacyTap(BuildContext context) {
     // TODO: Replace with actual privacy policy URL
@@ -139,7 +146,7 @@ class LoginSignedOutView extends StatelessWidget {
             fColor: Colors.white,
             onTap: () => _onLoginWithGoogleTap(context),
           ),
-          const SizedBox(height: DesignSpec.spacingMd),
+          Gap.medium(),
           AppButton(
             text: AppLocalizations
                 .of(context)
@@ -147,6 +154,15 @@ class LoginSignedOutView extends StatelessWidget {
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithAppleTap(context),
+          ),
+          Gap.medium(),
+          AppButton(
+            text: AppLocalizations
+                .of(context)
+                .loginSigninEmailPassword,
+            bColor: Colors.black,
+            fColor: Colors.white,
+            onTap: () => _onLoginWithEmailAndPasswordTap(context),
           ),
         ],
       ),

@@ -24,7 +24,7 @@ If no build mode specified, use `debug`.
 - Run: `flutter run --flavor <flavor> -t lib/main_<flavor>.dart --<build_mode>`
 - Widget and Unit Tests: `flutter test`
     - Run with `--coverage` for getting test coverage report.
-- Integration Tests: `flutter test integration_test/<test_file>.dart --flavor <flavor> --dart-define=IS_TEST=true`
+- Integration Tests: `flutter test integration_test/<test_file>.dart --flavor <flavor> --dart-define=IS_TEST=true --dart-define=TEST_USER_EMAIL=<email> --dart-define=TEST_USER_PASSWORD=<password>`
 - Format: `dart format .`
 - Clean: `flutter clean`
 

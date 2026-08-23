@@ -7,20 +7,21 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'decoration.dart';
 
 class AppTextInput extends StatelessWidget {
-
   final String name;
   final String label;
-  final String? initialValue;
+  final bool obscureText;
+  final String? initialValue;  
   final Function(String?)? onChanged;
   final FormFieldValidator<String>? validator;
 
   const AppTextInput({
     required this.name,
     required this.label,
+    this.obscureText = false,
     this.initialValue,
     this.onChanged,
     this.validator,
-    super.key
+    super.key,
   });
 
   @override
@@ -28,18 +29,16 @@ class AppTextInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
+        Text(label, style: Theme.of(context).textTheme.labelLarge),
         Gap.xs(),
         FormBuilderTextField(
           key: key,
           name: name,
+          obscureText: obscureText,
           initialValue: initialValue,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
           onChanged: onChanged,
           textAlignVertical: TextAlignVertical.center,
           decoration: getTextInputDecoration(context),
@@ -61,30 +60,28 @@ class AppTextInput extends StatelessWidget {
         // TextInput's height doesn't change on error
         // Also defer the building after everything else
         // in the current level of context.
-        Builder(builder: (context) {
-          final fbState = FormBuilder.of(context);
-          final fieldState = fbState?.fields[name];
-          final errorText = fieldState?.errorText;
+        Builder(
+          builder: (context) {
+            final fbState = FormBuilder.of(context);
+            final fieldState = fbState?.fields[name];
+            final errorText = fieldState?.errorText;
 
-          if (errorText == null) {
-            return const SizedBox.shrink();
-          }
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
-            child: Text(
-              errorText,
-              style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(
+            if (errorText == null) {
+              return const SizedBox.shrink();
+            }
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
+              child: Text(
+                errorText,
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: Theme.of(context).colorScheme.error,
                   fontWeight: FontWeight.bold,
                 ),
-            ),
-          );
-        }),
-
-      ]
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

@@ -275,6 +275,31 @@
     "description": "A(z) loginSigninApple fordítási kulcs leírása.",
     "placeholders": {}
   },
+  "loginSigninEmailPassword": "Bejelentkezés Email-lel",
+  "@loginSigninEmailPassword": {
+    "description": "A(z) loginSigninEmailPassword fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "loginSigninEmailPasswordScreenTitle": "Bejelentkezés Email-lel",
+  "@loginSigninEmailPasswordScreenTitle": {
+    "description": "A(z) loginSigninEmailPasswordScreenTitle fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "loginSigninEmailInputLabel": "Email",
+  "@loginSigninEmailInputLabel": {
+    "description": "A(z) loginSigninEmailInputLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "loginSigninPasswordInputLabel": "Jelszó",
+  "@loginSigninPasswordInputLabel": {
+    "description": "A(z) loginSigninPasswordInputLabel fordítási kulcs leírása.",
+    "placeholders": {}
+  },
+  "loginSigninEmailPasswordButtonText": "Bejelentkezés",
+  "@loginSigninEmailPasswordButtonText": {
+    "description": "A(z) loginSigninEmailPasswordButtonText fordítási kulcs leírása.",
+    "placeholders": {}
+  },
   "loginLegalPart1": "A bejelentkezéssel elfogadod az\n",
   "@loginLegalPart1": {
     "description": "A(z) loginLegalPart1 fordítási kulcs leírása.",

@@ -422,6 +422,36 @@ abstract class AppLocalizations {
   /// **'Bejelentkezés Apple-lel'**
   String get loginSigninApple;
 
+  /// A(z) loginSigninEmailPassword fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Bejelentkezés Email-lel'**
+  String get loginSigninEmailPassword;
+
+  /// A(z) loginSigninEmailPasswordScreenTitle fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Bejelentkezés Email-lel'**
+  String get loginSigninEmailPasswordScreenTitle;
+
+  /// A(z) loginSigninEmailInputLabel fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Email'**
+  String get loginSigninEmailInputLabel;
+
+  /// A(z) loginSigninPasswordInputLabel fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Jelszó'**
+  String get loginSigninPasswordInputLabel;
+
+  /// A(z) loginSigninEmailPasswordButtonText fordítási kulcs leírása.
+  ///
+  /// In hu, this message translates to:
+  /// **'Bejelentkezés'**
+  String get loginSigninEmailPasswordButtonText;
+
   /// A(z) loginLegalPart1 fordítási kulcs leírása.
   ///
   /// In hu, this message translates to:

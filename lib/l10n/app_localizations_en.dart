@@ -189,6 +189,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginSigninApple => 'Login with Apple';
 
   @override
+  String get loginSigninEmailPassword => 'Login with Email';
+
+  @override
+  String get loginSigninEmailPasswordScreenTitle => 'Login with Email';
+
+  @override
+  String get loginSigninEmailInputLabel => 'Email';
+
+  @override
+  String get loginSigninPasswordInputLabel => 'Password';
+
+  @override
+  String get loginSigninEmailPasswordButtonText => 'Login';
+
+  @override
   String get loginLegalPart1 => 'By logging in you accept the\n';
 
   @override

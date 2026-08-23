@@ -189,6 +189,21 @@ class AppLocalizationsHu extends AppLocalizations {
   String get loginSigninApple => 'Bejelentkezés Apple-lel';
 
   @override
+  String get loginSigninEmailPassword => 'Bejelentkezés Email-lel';
+
+  @override
+  String get loginSigninEmailPasswordScreenTitle => 'Bejelentkezés Email-lel';
+
+  @override
+  String get loginSigninEmailInputLabel => 'Email';
+
+  @override
+  String get loginSigninPasswordInputLabel => 'Jelszó';
+
+  @override
+  String get loginSigninEmailPasswordButtonText => 'Bejelentkezés';
+
+  @override
   String get loginLegalPart1 => 'A bejelentkezéssel elfogadod az\n';
 
   @override

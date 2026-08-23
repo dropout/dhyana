@@ -26,6 +26,8 @@ class DesignSpec {
   static const double padding3Xl = 48.0;
   static const double padding4Xl = 64.0;
 
+  static const double screenPadding = spacingMd;
+
   static const double borderRadiusSm = 4.0;
   static const double borderRadiusMd = 8.0;
   static const double borderRadiusLg = 16.0;
