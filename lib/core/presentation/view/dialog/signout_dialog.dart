@@ -23,6 +23,7 @@ class SignoutDialog extends StatelessWidget {
       backgroundColor: AppColors.backgroundPaperLight,
       actions: [
         DialogButton.secondary(
+          key: const Key('signout_dialog_cancel_button'),
           text: AppLocalizations.of(context).profileSignoutCancel,
           onPressed: () {
             context.pop();
@@ -30,6 +31,7 @@ class SignoutDialog extends StatelessWidget {
           },
         ),
         DialogButton.primary(
+          key: const Key('signout_dialog_signout_button'),
           text: AppLocalizations.of(context).profileSignoutYes,
           onPressed: () {
             // close are you sure dialog

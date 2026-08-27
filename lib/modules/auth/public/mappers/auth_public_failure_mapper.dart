@@ -21,9 +21,6 @@ extension AuthPublicFailureMapper on Object {
         (this as SignInWithEmailAndPasswordFailure).msg,
       );
     }
-    if (this is SignInFailure) {
-      return const AuthPublicUnknownFailure('Sign-in failed');
-    }
     return AuthPublicUnknownFailure(toString());
   }
 }

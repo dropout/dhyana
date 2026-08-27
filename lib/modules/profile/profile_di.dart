@@ -1,5 +1,8 @@
+import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/profile/data/service/default_profile_public_api.dart';
 import 'package:dhyana/modules/profile/domain/service/profile_stats_updater_service.dart';
+import 'package:dhyana/modules/profile/domain/usecase/delete_profile_use_case.dart';
+import 'package:dhyana/modules/profile/presentation/viewmodel/delete_profile_cubit.dart';
 import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 import 'package:get_it/get_it.dart';
@@ -71,6 +74,14 @@ void _registerUseCases() {
       profileRepository: GetIt.I.get<ProfileRepository>(),
     ),
   );
+
+  GetIt.I.registerLazySingleton(
+    () => DeleteProfileUseCase(
+      authApi: GetIt.I.get<AuthPublicApi>(),
+      profileRepository: GetIt.I.get<ProfileRepository>(),
+      storageRepository: GetIt.I.get<StorageRepository>(),
+    ),
+  );
 }
 
 void _registerViewModels() {
@@ -80,6 +91,13 @@ void _registerViewModels() {
       loadProfileUseCase: GetIt.I.get<LoadProfileUseCase>(),
       updateProfileUseCase: GetIt.I.get<UpdateProfileUseCase>(),
       updateProfileSettingsUseCase: GetIt.I.get<UpdateProfileSettingsUseCase>(),
+    ),
+  );
+
+  GetIt.I.registerFactory<DeleteProfileCubit>(
+    () => DeleteProfileCubit(
+      deleteProfileUseCase: GetIt.I.get<DeleteProfileUseCase>(),
+      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
     ),
   );
 }

@@ -1,71 +1,82 @@
 import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
+import 'package:dhyana/modules/auth/domain/usecase/sign_in_with_auth_provider_use_case.dart';
+import 'package:dhyana/modules/auth/domain/usecase/sign_in_with_email_and_password_use_case.dart';
+import 'package:dhyana/modules/auth/domain/usecase/sign_out_use_case.dart';
 import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/auth/public/mappers/auth_public_failure_mapper.dart';
 
-class DefaultAuthPublicApi implements AuthPublicApi {  
-
+/// Default implementation of [AuthPublicApi] that uses [AuthRepository] and 
+/// various use cases to provide authentication functionality.
+/// TODO: Experimental exception handling
+class DefaultAuthPublicApi implements AuthPublicApi {
   final AuthRepository authRepository;
 
+  final SigninWithAuthProviderUseCase signInWithAuthProviderUseCase;
+  final SignInWithEmailAndPasswordUseCase signInWithEmailAndPasswordUseCase;
+  final SignoutUseCase signOutUseCase;
+  
   const DefaultAuthPublicApi({
     required this.authRepository,
+    required this.signInWithAuthProviderUseCase,
+    required this.signInWithEmailAndPasswordUseCase,
+    required this.signOutUseCase,
   });
 
   @override
   Stream<AuthSession> get authSessionStream {
     return authRepository.authStateChange.map((user) {
       if (user == null) {
-        return (
-          isAuthenticated: false,
-          userId: null,
-        );
+        return (isAuthenticated: false, userId: null);
       }
-      return (
-        isAuthenticated: true,
-        userId: user.uid,
-      );
+      return (isAuthenticated: true, userId: user.uid);
     });
   }
 
   @override
-  Future<AuthPublicSigninResult> signInWithApple() async {
+  Future<AuthSigninResult> signInWithApple() async {
     try {
-      final result = await authRepository.signIn(.apple);
-      return (
-        userId: result.user.uid,
-        isFirstSignin: result.isFirstSignin,
-      );
+      final result = await signInWithAuthProviderUseCase.execute(.apple);
+      return (userId: result.user.uid, isFirstSignin: result.isFirstSignin);
     } catch (error) {
       throw error.toPublicFailure();
     }
   }
 
   @override
-  Future<AuthPublicSigninResult> signInWithGoogle() async {
+  Future<AuthSigninResult> signInWithGoogle() async {
     try {
-      final result = await authRepository.signIn(.google);
-      return (
-        userId: result.user.uid,
-        isFirstSignin: result.isFirstSignin,
-      );
+      final result = await signInWithAuthProviderUseCase.execute(.google);
+      return (userId: result.user.uid, isFirstSignin: result.isFirstSignin);
     } catch (error) {
       throw error.toPublicFailure();
     }
   }
 
   @override
-  Future<AuthPublicSigninResult> signInWithEmailAndPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      final result = await authRepository.signIn(
-        .emailAndPassword,
+      final user = await authRepository.signUpWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return (
-        userId: result.user.uid,
-        isFirstSignin: result.isFirstSignin,
+      return user.uid;
+    } catch (error) {
+      throw error.toPublicFailure();
+    }
+  }
+
+  @override
+  Future<String> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      return await signInWithEmailAndPasswordUseCase.execute(
+        email: email,
+        password: password,
       );
     } catch (error) {
       throw error.toPublicFailure();

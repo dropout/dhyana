@@ -10,7 +10,7 @@ import 'auth_template.dart';
 
 bool _initialized = false;
 
-class GoogleAuthTemplate implements AuthTemplate {
+class GoogleAuthTemplate implements AuthProviderTemplate {
 
   final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   final firebase_auth.FirebaseAuth _firebaseAuth;
@@ -58,7 +58,7 @@ class GoogleAuthTemplate implements AuthTemplate {
         'Sign in with Google failed: No user returned',
       );
     } else {
-      user = convertFirebaseUser(userCredential.user!);
+      user = userCredential.user!.toAuthUser();
     }
 
     SigninResult signinResult = SigninResult(

@@ -1,9 +1,9 @@
-import 'package:dhyana/modules/auth/data/datasource/auth/enum/auth_signin_method_type.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/enum/auth_provider_type.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user_meta_data.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_meta_data_entity.dart';
-import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
+import 'package:dhyana/modules/auth/domain/enum/signin_auth_provider_type.dart';
 
 extension AuthUserMapper on AuthUser {
   UserEntity toDomain() {
@@ -51,13 +51,11 @@ extension UserMetaDataMapper on UserMetaDataEntity {
   }
 }
 
-extension SigninMethodTypeMapper on SigninMethodType {
-  AuthSigningMethodType toData() {
+extension SigninMethodTypeMapper on SigninAuthProviderType {
+  AuthProviderType toData() {
     return switch (this) {
-      SigninMethodType.apple => AuthSigningMethodType.apple,
-      SigninMethodType.emailAndPassword =>
-        AuthSigningMethodType.emailAndPassword,
-      SigninMethodType.google => AuthSigningMethodType.google,
+      SigninAuthProviderType.apple => AuthProviderType.apple,
+      SigninAuthProviderType.google => AuthProviderType.google,
     };
   }
 }

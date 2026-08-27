@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/service/crashlytics_service.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
@@ -19,18 +20,35 @@ sealed class ProfileState with _$ProfileState {
     required Profile profile,
   }) = ProfileLoadedState;
   const factory ProfileState.error() = ProfileErrorState;
-
 }
 
-
 class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
+  
+  final AuthPublicApi authPublicApi;
   final ProfilePublicApi profilePublicApi;
   final CrashlyticsService crashlyticsService;
 
   StreamSubscription<Profile>? _profileSubscription;
+  StreamSubscription<AuthSession>? _userIdStreamSub;
 
-  ProfileCubit({required this.profilePublicApi, required this.crashlyticsService})
-    : super(const ProfileState.initial());
+  ProfileCubit({
+    required this.authPublicApi,
+    required this.profilePublicApi,
+    required this.crashlyticsService,
+  }) : super(const ProfileState.initial()) {
+
+    // When user signs out we need to cancel the profile subscription:
+    _userIdStreamSub = authPublicApi.authSessionStream.listen((authSession) {
+
+      // Cancel either way the user is authenticated or not
+      _profileSubscription?.cancel();
+
+      // Only resubscribe if the user is authenticated
+      if (authSession.isAuthenticated) {
+        _createSubscription(authSession.userId!);
+      }
+    });
+  }
 
   void loadProfile(
     String profileId, {
@@ -87,5 +105,12 @@ class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
 
   void _onProfileChanged(Profile profile) {
     emit(ProfileState.loaded(profile: profile));
+  }
+
+  @override
+  Future<void> close() {
+    _profileSubscription?.cancel();
+    _userIdStreamSub?.cancel();
+    return super.close();
   }
 }

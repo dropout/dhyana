@@ -1,25 +1,26 @@
-import 'package:dhyana/modules/auth/data/datasource/auth/enum/auth_signin_method_type.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/enum/auth_provider_type.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/exception.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/auth_user.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/template/auth_template.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/util/convert_user.dart';
-import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:dhyana/modules/auth/data/datasource/auth/auth_data_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart'
     show TargetPlatform, defaultTargetPlatform;
 import 'package:google_sign_in/google_sign_in.dart';
 
-/// Firebase implementation of [AuthProvider]
+/// Firebase implementation of [AuthDataProvider]
 /// Uses `firebase_auth` package to provide authentication features.
-class FirebaseAuthProvider implements AuthProvider {
+class FirebaseAuthDataProvider implements AuthDataProvider {
   /// Firebase Auth instance
-  final firebase_auth.FirebaseAuth _auth;
+  final FirebaseAuth _auth;
 
   /// Latest auth user emitted from provider streams.
   AuthUser? _user;
 
-  FirebaseAuthProvider(this._auth);
+  FirebaseAuthDataProvider(this._auth);
 
   @override
   Stream<AuthUser?> get authStateChange =>
@@ -32,26 +33,45 @@ class FirebaseAuthProvider implements AuthProvider {
   AuthUser? get user => _user;
 
   @override
-  Future<SigninResult> signIn(
-    AuthSigningMethodType authProviderType, {
-    String? email,
-    String? password,
-  }) async {
-    AuthTemplate authTemplate;
-    if (authProviderType == AuthSigningMethodType.emailAndPassword) {
-      authTemplate = AuthTemplate(
-        _auth,
-        authProviderType,
-        email: email,
-        password: password,
-      );
-    } else {
-      authTemplate = AuthTemplate(_auth, authProviderType);
-    }
-
+  Future<SigninResult> signInWithAuthProvider(
+    AuthProviderType authProviderType,
+  ) async {
+    final AuthProviderTemplate authTemplate = AuthProviderTemplate(
+      _auth,
+      authProviderType,
+    );
     final signinResult = await authTemplate.signIn();
     _user = signinResult.user;
     return signinResult;
+  }
+
+  @override
+  Future<AuthUser> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    UserCredential credential = await _auth
+        .createUserWithEmailAndPassword(email: email, password: password);
+
+    final User user = credential.user!;
+    return user.toAuthUser();
+  }
+
+  @override
+  Future<AuthUser> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    UserCredential userCredential = await _auth
+        .signInWithEmailAndPassword(email: email, password: password);
+
+    if (userCredential.user == null) {
+      throw const SignInWithEmailAndPasswordFailure(
+        'Sign in with Email and Password failed: No user returned',
+      );
+    }
+
+    return userCredential.user!.toAuthUser();
   }
 
   @override
@@ -98,12 +118,11 @@ class FirebaseAuthProvider implements AuthProvider {
   }
 
   /// Maps Firebase User to auth data-layer user.
-  AuthUser? _mapUser(firebase_auth.User? firebaseUser) {
+  AuthUser? _mapUser(User? firebaseUser) {
     if (firebaseUser == null) {
       _user = null;
       return null;
     }
-    _user = convertFirebaseUser(firebaseUser);
-    return _user;
+    return firebaseUser.toAuthUser();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dhyana/core/domain/enum/processing_state.dart';
+import 'package:dhyana/core/presentation/view/util/smart_bloc_provider.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/modules/profile/profile_module.dart';
 import 'package:dhyana/core/presentation/view/app_bar/custom_back_button.dart';
@@ -13,34 +14,22 @@ import 'package:dhyana/modules/profile/presentation/viewmodel/profile_edit_cubit
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get_it/get_it.dart';
 
 class ProfileWizardScreen extends StatefulWidget {
-
   final String profileId;
 
-  const ProfileWizardScreen({
-    required this.profileId,
-    super.key
-  });
+  const ProfileWizardScreen({required this.profileId, super.key});
 
   @override
   State<ProfileWizardScreen> createState() => _ProfileWizardScreenState();
 }
 
 class _ProfileWizardScreenState extends State<ProfileWizardScreen>
-  with DefaultScreenSetupHelpersMixin {
-
+    with DefaultScreenSetupHelpersMixin {
   ProcessingState formProcessingState = ProcessingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
-    GlobalKey<FormBuilderState>();
-
-  @override
-  void initState() {
-    context.read<ProfileEditCubit>().loadProfile(
-      widget.profileId,
-    );
-    super.initState();
-  }
+      GlobalKey<FormBuilderState>();
 
   void _onSave(BuildContext context, Profile profile) {
     FormBuilderState? formState = formStateKey.currentState;
@@ -85,9 +74,10 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileEditCubit, ProfileEditState>(
-      builder: (BuildContext context, ProfileEditState state) {
-        switch(state) {
+    return SmartBlocProvider<ProfileEditCubit, ProfileEditState>(
+      create: (context) => GetIt.I<ProfileEditCubit>()..loadProfile(widget.profileId),
+      builder: (context, state) {
+        switch (state) {
           case ProfileEditLoadingState():
             return buildScaffolding(
               context,
@@ -95,9 +85,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 title: AppLocalizations.of(context).profileWizardTitle,
                 enableScrolling: false,
                 enableScaffolding: false,
-                slivers: [
-                  buildLoadingSliver(context),
-                ],
+                slivers: [buildLoadingSliver(context)],
               ),
             );
           case ProfileEditErrorState():
@@ -112,9 +100,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 titleColor: Colors.white,
                 enableScrolling: false,
                 enableScaffolding: false,
-                slivers: [
-                  buildErrorSliver(context),
-                ],
+                slivers: [buildErrorSliver(context)],
               ),
             );
           case ProfileEditLoadedState():
@@ -124,7 +110,6 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 title: AppLocalizations.of(context).profileWizardTitle,
                 enableScaffolding: false,
                 slivers: [
-
                   // The profile edit form.
                   SliverToBoxAdapter(
                     child: Padding(
@@ -155,17 +140,17 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                           child: TextButton(
                             onPressed: () => _onSignOut(context),
                             child: Text(
-                              AppLocalizations.of(context).signOut.toUpperCase(),
-                              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              AppLocalizations.of(
+                                context,
+                              ).signOut.toUpperCase(),
+                              style: Theme.of(context).textTheme.labelLarge!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ),
-
                 ],
               ),
 
@@ -175,12 +160,9 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 top: false,
                 child: Align(
                   alignment: const Alignment(0.0, 1.0),
-                  child: buildOverlayActionButton(
-                    context,
-                    state.profile
-                  ),
+                  child: buildOverlayActionButton(context, state.profile),
                 ),
-              )
+              ),
             );
           default:
             return DefaultScreenSetup(
@@ -189,55 +171,71 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             );
         }
       },
+    
     );
+
+    // return BlocBuilder<ProfileEditCubit, ProfileEditState>(
+    //   builder: (BuildContext context, ProfileEditState state) {
+        
+    //   },
+    // );
   }
 
   Widget buildScaffolding(
-      BuildContext context,
-      Widget contentLayer,
-      {Widget? actionButtonLayer}
-      ) {
+    BuildContext context,
+    Widget contentLayer, {
+    Widget? actionButtonLayer,
+  }) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         clipBehavior: Clip.none,
         children: [
           contentLayer,
-          actionButtonLayer ?? Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingXl),
-              child: actionButtonLayer,
-            ),
-          ),
+          actionButtonLayer ??
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: DesignSpec.paddingXl,
+                  ),
+                  child: actionButtonLayer,
+                ),
+              ),
         ],
       ),
     );
   }
 
   Widget buildOverlayActionButton(BuildContext context, Profile profile) {
-
     switch (formProcessingState) {
       case ProcessingState.idle:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
       case ProcessingState.processing:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonSaving.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonSaving.toUpperCase(),
         );
       case ProcessingState.completed:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonSaved.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
       default:
         return AppButton(
-          text: AppLocalizations.of(context).profileSaveButtonIdle.toUpperCase(),
+          text: AppLocalizations.of(
+            context,
+          ).profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
     }
   }
-
 }

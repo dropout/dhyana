@@ -1,6 +1,5 @@
 import 'package:dhyana/core/presentation/view/util/gap.dart';
 import 'package:dhyana/modules/auth/auth_routes.dart';
-import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/core/presentation/viewmodel/auth_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:dhyana/core/presentation/design_spec.dart';
@@ -11,33 +10,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-typedef OnSigninComplete = void Function(UserEntity user, bool isFirstSignin);
-
 class LoginSignedOutView extends StatelessWidget {
-
-  final OnSigninComplete onSigninComplete;
-
-  const LoginSignedOutView({
-    required this.onSigninComplete,
-    super.key,
-  });
+  const LoginSignedOutView({super.key});
 
   void _onLoginWithGoogleTap(BuildContext context) {
-    context.read<AuthCubit>().signInWithGoogle(
-      onComplete: (user, isFirstSignin) => _handleSigninComplete(
-        context, user, isFirstSignin
-      )
-    );
+    context.read<AuthCubit>().signInWithGoogle();
     context.logEvent(name: 'login_with_google_button_pressed');
     context.hapticsTap();
   }
 
   void _onLoginWithAppleTap(BuildContext context) {
-    context.read<AuthCubit>().signInWithApple(
-      onComplete: (user, isFirstSignin) => _handleSigninComplete(
-        context, user, isFirstSignin
-      )
-    );
+    context.read<AuthCubit>().signInWithApple();
     context.logEvent(name: 'login_with_apple_button_pressed');
     context.hapticsTap();
   }
@@ -62,10 +45,6 @@ class LoginSignedOutView extends StatelessWidget {
     context.hapticsTap();
   }
 
-  void _handleSigninComplete(BuildContext context, user, isFirstSignin) {
-    onSigninComplete(user, isFirstSignin);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -78,9 +57,7 @@ class LoginSignedOutView extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: Container(child: _buildHeadline(context)),
-              ),
+              Expanded(child: Container(child: _buildHeadline(context))),
               _buildActions(context),
               _buildLegalText(context),
             ],
@@ -91,11 +68,7 @@ class LoginSignedOutView extends StatelessWidget {
   }
 
   Widget _buildHeadline(BuildContext context) {
-    TextStyle textStyle = Theme
-        .of(context)
-        .textTheme
-        .displayLarge!
-        .copyWith(
+    TextStyle textStyle = Theme.of(context).textTheme.displayLarge!.copyWith(
       fontWeight: FontWeight.w900,
       fontSize: 80,
       color: Colors.black,
@@ -105,32 +78,27 @@ class LoginSignedOutView extends StatelessWidget {
     Duration letterDuration = Durations.medium3;
 
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LoginHeadlineTextEffect(
-            text: AppLocalizations
-                .of(context)
-                .loginHeadline1,
-            textStyle: textStyle,
-            duration: letterDuration * 3,
-          ),
-          LoginHeadlineTextEffect(
-            text: AppLocalizations
-                .of(context)
-                .loginHeadline2,
-            textStyle: textStyle,
-            duration: letterDuration * 3,
-            initialDelay: Durations.medium1,
-          ),
-          LoginHeadlineTextEffect(
-            text: AppLocalizations
-                .of(context)
-                .loginHeadline3,
-            textStyle: textStyle,
-            duration: letterDuration * 4,
-            initialDelay: Durations.long2,
-          ),
-        ]);
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        LoginHeadlineTextEffect(
+          text: AppLocalizations.of(context).loginHeadline1,
+          textStyle: textStyle,
+          duration: letterDuration * 3,
+        ),
+        LoginHeadlineTextEffect(
+          text: AppLocalizations.of(context).loginHeadline2,
+          textStyle: textStyle,
+          duration: letterDuration * 3,
+          initialDelay: Durations.medium1,
+        ),
+        LoginHeadlineTextEffect(
+          text: AppLocalizations.of(context).loginHeadline3,
+          textStyle: textStyle,
+          duration: letterDuration * 4,
+          initialDelay: Durations.long2,
+        ),
+      ],
+    );
   }
 
   Widget _buildActions(BuildContext context) {
@@ -139,33 +107,48 @@ class LoginSignedOutView extends StatelessWidget {
       child: Column(
         children: [
           AppButton(
-            text: AppLocalizations
-                .of(context)
-                .loginSigninGoogle,
+            key: const Key('login_with_google_button'),
+            text: AppLocalizations.of(context).loginSigninGoogle,
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithGoogleTap(context),
           ),
           Gap.medium(),
           AppButton(
-            text: AppLocalizations
-                .of(context)
-                .loginSigninApple,
+            key: const Key('login_with_apple_button'),
+            text: AppLocalizations.of(context).loginSigninApple,
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithAppleTap(context),
           ),
           Gap.medium(),
           AppButton(
-            text: AppLocalizations
-                .of(context)
-                .loginSigninEmailPassword,
+            key: const Key('login_with_email_and_password_button'),
+            text: AppLocalizations.of(context).loginSigninEmailPassword,
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithEmailAndPasswordTap(context),
           ),
         ],
       ),
+    );
+  }
+
+  /// Only build the email and password button if the
+  /// the enviroment variable `ENABLE_EMAIL_PASSWORD_SIGNIN` is set to true.
+  Widget buildEmailAndPasswordButton(BuildContext context) {    
+    final bool enableEmailPasswordSigning = bool.fromEnvironment(
+      'ENABLE_EMAIL_PASSWORD_SIGNIN',
+    );
+    if (!enableEmailPasswordSigning) return const SizedBox.shrink();
+
+    return AppButton(
+      text: AppLocalizations
+          .of(context)
+          .loginSigninEmailPassword,
+      bColor: Colors.black,
+      fColor: Colors.white,
+      onTap: () => _onLoginWithEmailAndPasswordTap(context),
     );
   }
 
@@ -179,49 +162,32 @@ class LoginSignedOutView extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          style: Theme
-              .of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(
-              height: 1.5
-          ),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.5),
           children: [
+            TextSpan(text: AppLocalizations.of(context).loginLegalPart1),
             TextSpan(
-              text: AppLocalizations
-                  .of(context)
-                  .loginLegalPart1,
-            ),
-            TextSpan(
-              text: AppLocalizations
-                  .of(context)
-                  .loginLegalPart2,
+              text: AppLocalizations.of(context).loginLegalPart2,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
               ),
-              recognizer: TapGestureRecognizer()..onTap = () => _onTermsTap(context),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => _onTermsTap(context),
             ),
+            TextSpan(text: AppLocalizations.of(context).loginLegalPart3),
             TextSpan(
-              text: AppLocalizations
-                  .of(context)
-                  .loginLegalPart3,
-            ),
-            TextSpan(
-              text: AppLocalizations
-                  .of(context)
-                  .loginLegalPart4,
+              text: AppLocalizations.of(context).loginLegalPart4,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
               ),
-              recognizer: TapGestureRecognizer()..onTap = () => _onPrivacyTap(context),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => _onPrivacyTap(context),
             ),
-            const TextSpan(text: '.',)
+            const TextSpan(text: '.'),
           ],
         ),
       ),
     );
   }
-
 }

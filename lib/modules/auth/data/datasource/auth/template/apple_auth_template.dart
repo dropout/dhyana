@@ -11,7 +11,7 @@ import 'package:dhyana/modules/auth/data/datasource/auth/util/convert_user.dart'
 
 import 'auth_template.dart';
 
-class AppleAuthTemplate implements AuthTemplate {
+class AppleAuthTemplate implements AuthProviderTemplate {
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
@@ -88,7 +88,7 @@ class AppleAuthTemplate implements AuthTemplate {
     }
 
     // Our domain user model
-    AuthUser user = convertFirebaseUser(fbUser);
+    AuthUser user = fbUser.toAuthUser();
 
     return SigninResult(
       user: user,

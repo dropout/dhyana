@@ -1,4 +1,3 @@
-import 'package:dhyana/core/presentation/design_spec.dart';
 import 'package:dhyana/core/presentation/view/input/app_text_input.dart';
 import 'package:dhyana/core/presentation/view/util/app_context.dart';
 import 'package:dhyana/core/presentation/view/util/gap.dart';
@@ -38,7 +37,7 @@ class _LoginWithEmailAndPasswordFormState
   
   @override
   Widget build(BuildContext context) {
-return FormBuilder(
+    return FormBuilder(
       key: _formKey,
       autovalidateMode: AutovalidateMode.disabled,
       skipDisabled: true,
@@ -46,10 +45,10 @@ return FormBuilder(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppTextInput(
+          AppTextInput(          
             name: 'email',
             label: context.l10n.loginSigninEmailInputLabel,
-            key: const Key('login_form_email_input'),
+            formFieldKey: const Key('login_form_email_input'),            
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               FormBuilderValidators.email(),
@@ -62,7 +61,7 @@ return FormBuilder(
             name: 'password',
             label: context.l10n.loginSigninPasswordInputLabel,
             obscureText: true,
-            key: const Key('login_form_password_input'),
+            formFieldKey: const Key('login_form_password_input'),
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ]),

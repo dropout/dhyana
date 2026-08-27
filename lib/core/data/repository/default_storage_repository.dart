@@ -22,4 +22,9 @@ class DefaultStorageRepository implements StorageRepository {
     );
     await uploadTask.whenComplete(() => null);
   }
+
+  @override
+  Future<void> deleteProfileFolder(String profileId) async =>
+    await storageDataProvider.deleteFolder('/profiles/$profileId');
+  
 }

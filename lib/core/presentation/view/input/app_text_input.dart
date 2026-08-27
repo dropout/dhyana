@@ -9,6 +9,7 @@ import 'decoration.dart';
 class AppTextInput extends StatelessWidget {
   final String name;
   final String label;
+  final Key? formFieldKey;
   final bool obscureText;
   final String? initialValue;  
   final Function(String?)? onChanged;
@@ -17,6 +18,7 @@ class AppTextInput extends StatelessWidget {
   const AppTextInput({
     required this.name,
     required this.label,
+    this.formFieldKey,
     this.obscureText = false,
     this.initialValue,
     this.onChanged,
@@ -32,7 +34,7 @@ class AppTextInput extends StatelessWidget {
         Text(label, style: Theme.of(context).textTheme.labelLarge),
         Gap.xs(),
         FormBuilderTextField(
-          key: key,
+          key: formFieldKey,
           name: name,
           obscureText: obscureText,
           initialValue: initialValue,

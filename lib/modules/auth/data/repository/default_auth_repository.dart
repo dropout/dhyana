@@ -1,16 +1,16 @@
-import 'package:dhyana/modules/auth/data/datasource/auth/auth_provider.dart';
+import 'package:dhyana/modules/auth/data/datasource/auth/auth_data_provider.dart';
 import 'package:dhyana/modules/auth/domain/entity/user_entity.dart';
 import 'package:dhyana/modules/auth/data/mappers.dart';
-import 'package:dhyana/modules/auth/domain/enum/signin_method_type.dart';
+import 'package:dhyana/modules/auth/domain/enum/signin_auth_provider_type.dart';
 import 'package:dhyana/modules/auth/data/datasource/auth/model/signin_result.dart';
 import 'package:dhyana/modules/auth/domain/repository/auth_repository.dart';
 import 'package:dhyana/core/util/logger_mixin.dart';
 
 /// Default implementation of [AuthRepository]
-/// Uses [AuthProvider] to perform authentication operations
+/// Uses [AuthDataProvider] to perform authentication operations
 class DefaultAuthRepository with LoggerMixin implements AuthRepository {
   /// Data provider for authentication operations
-  final AuthProvider authDataProvider;
+  final AuthDataProvider authDataProvider;
 
   /// Flag to indicate if a sign-in operation is in progress
   bool _isSigningIn = false;
@@ -37,17 +37,12 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
 
   /// Performs sign-in using the specified method and credentials.
   @override
-  Future<({UserEntity user, bool isFirstSignin})> signIn(
-    SigninMethodType signinMethodType, {
-    String? email,
-    String? password,
-  }) async {
+  Future<({UserEntity user, bool isFirstSignin})> signInWithAuthProvider(
+    SigninAuthProviderType signinMethodType) async {
     // Guard these operations with a flag
     _isSigningIn = true;
-    SigninResult signinResult = await authDataProvider.signIn(
+    SigninResult signinResult = await authDataProvider.signInWithAuthProvider(
       signinMethodType.toData(),
-      email: email,
-      password: password,
     );
     // Insert profile creation here if cannot use Google Cloud Identity Provider
     // blocking function
@@ -57,6 +52,35 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
       user: signinResult.user.toDomain(),
       isFirstSignin: signinResult.isFirstSignIn,
     );
+  }
+
+  @override
+  Future<UserEntity> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    _isSigningIn = true;
+    final user = await authDataProvider.signUpWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    _isSigningIn = false;
+    return user.toDomain();
+  }
+
+
+  @override
+  Future<UserEntity> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    _isSigningIn = true;
+    final user = await authDataProvider.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    _isSigningIn = false;
+    return user.toDomain();
   }
 
   /// Signs out the current user
