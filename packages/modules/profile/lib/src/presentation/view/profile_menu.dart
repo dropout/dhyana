@@ -1,0 +1,147 @@
+import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:profile/src/public/model/profile.dart';
+
+class ProfileMenu extends StatelessWidget {
+
+  final Profile profile;
+
+  const ProfileMenu({
+    required this.profile,
+    super.key
+  });
+
+  void _onSessionHistoryTapped(BuildContext context) {
+    context.services.sessionNavigator.navigateToSessionHistory(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onEditProfileTapped(BuildContext context) {
+    context.services.profileNavigator.navigateToProfileEdit(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onStatisticsTapped(BuildContext context) {
+    ProfileStatsRoute(profileId: profile.id).push(context);
+    context.hapticsTap();
+  }
+
+  void _onDonateTapped(BuildContext context) {
+    DonateRoute().push(context);
+    context.hapticsTap();
+  }
+
+  void _onSettingsTapped(BuildContext context) {
+    context.services.profileNavigator.navigateToProfileSettings(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onSignoutTapped(BuildContext context) {
+    showAppDialog(context, SignoutDialog());
+    context.hapticsTap();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
+    return AppCard(
+      padding: EdgeInsets.zero,
+      child: Column(
+        children: [
+          ProfileMenuTile(
+            title: Text(
+              context.l10n.editProfile,
+              style: textStyle,
+            ),
+            onTap: () => _onEditProfileTapped(context),
+            key: const Key('profile_menu_edit_profile_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              context.l10n.sessionsHistory,
+              style: textStyle,
+            ),
+            onTap: () => _onSessionHistoryTapped(context),
+            key: const Key('profile_menu_session_history_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              context.l10n.profileStats,
+              style: textStyle,
+            ),
+            onTap: () => _onStatisticsTapped(context),
+            key: const Key('profile_menu_statistics_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              context.l10n.donate,
+              style: textStyle,
+            ),
+            onTap: () => _onDonateTapped(context),
+            key: const Key('profile_menu_donate_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              context.l10n.profileSettings,
+              style: textStyle,
+            ),
+            onTap: () => _onSettingsTapped(context),
+            key: const Key('profile_menu_settings_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              context.l10n.signOut,
+              style: textStyle,
+            ),
+            onTap: () => _onSignoutTapped(context),
+            key: const Key('profile_menu_signout_tile'),
+          ),
+        ],
+      )
+    );
+
+  }
+
+}
+
+class ProfileMenuTile extends StatelessWidget {
+
+  final Widget title;
+  final VoidCallback onTap;
+
+  const ProfileMenuTile({
+    required this.title,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(DesignSpec.borderRadiusMd),
+      ),
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: SizedBox(
+          key: Key('$key-sizedbox'),
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingXl,
+              vertical: DesignSpec.paddingLg,
+            ),
+            child: title,
+          ),
+        ),
+      ),
+    );
+  }
+}
+

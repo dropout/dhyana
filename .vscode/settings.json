@@ -1,0 +1,10 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "flutter": true,
+        "dart": true
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).config.dart"
+    }
+}

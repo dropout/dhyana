@@ -1,0 +1,22 @@
+import 'package:social/src/data/datasource/presence_data_provider.dart';
+import 'package:social/src/domain/repository/presence_repository.dart';
+import 'package:social/src/domain/usecase/query_presence_use_case.dart';
+import 'package:social/src/public/viewmodel/presence_cubit.dart';
+import 'package:mocktail/mocktail.dart';
+
+class MockPresenceDataProvider 
+  extends Mock 
+  implements PresenceDataProvider {}
+
+class MockPresenceCubit 
+  extends Mock 
+  implements PresenceCubit {}
+
+class MockPresenceRepository 
+  extends Mock 
+  implements PresenceRepository {}
+
+class MockQueryPresenceUseCase
+  extends Mock
+  implements QueryPresenceUseCase {}
+  

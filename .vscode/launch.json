@@ -1,0 +1,50 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "dhyana - staging (debug)",
+            "type": "dart",
+            "request": "launch",
+            "flutterMode": "debug",
+            "program": "lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging"
+            ],
+            "env": {
+                "NO_XIPH_LIBS": "1"
+            }            
+        },
+        {
+            "name": "dhyana - staging (profile)",
+            "type": "dart",
+            "request": "launch",
+            "flutterMode": "profile",
+            "program": "lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging"
+            ],
+            "env": {
+                "NO_XIPH_LIBS": "1"
+            }            
+        },
+        {
+            "name": "dhyana - staging (release)",
+            "type": "dart",
+            "request": "launch",
+            "flutterMode": "release",
+            "program": "lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging"
+            ],
+            "env": {
+                "NO_XIPH_LIBS": "1"
+            }            
+        }
+    ]
+}

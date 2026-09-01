@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
+import 'package:profile/profile.dart';
+import 'package:session/src/public/model/session.dart';
+
+
+class SessionResult extends StatelessWidget {
+
+  final Session session;
+  final Profile? profile;
+
+  const SessionResult({
+    required this.session,
+    this.profile,
+    super.key
+  });
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: Why the profile can be null in a sessionresult?
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ProfileAvatar(
+          profileId: profile?.id ?? '',
+          profileName: profile?.displayName ?? '',
+          profilePhotoBlurhash: profile?.photoBlurhash,
+          imageSize: DesignSpec.circleLg,
+          textStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: DesignSpec.spacingMd),
+        buildCompletedText(context, session.duration),
+      ],
+    );
+  }
+
+  Widget buildCompletedText(BuildContext context, Duration timeElapsed) {
+    return RichText(
+      key: const Key('session_result_completed_text'),
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          color: Colors.white,
+        ),
+        children: [
+          TextSpan(
+            text: '${context.l10n.sessionResultCompleted} '
+          ),
+          TextSpan(
+            text: session.duration.inMinutes.toString(),
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )
+          ),
+          TextSpan(
+            text: '  ${context.l10n.sessionResultMinutes(session.duration.inMinutes)}'
+          ),
+        ]
+      )
+    );
+  }
+
+}

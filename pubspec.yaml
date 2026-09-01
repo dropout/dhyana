@@ -1,153 +1,99 @@
-name: dhyana
-description: A meditation timer application.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.9.0+4
-
-environment:
+name: mobile_app
+publish_to: none
+environment: 
   sdk: '>=3.10.0 <4.0.0'
-  flutter: ">=1.17.0"
 
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-
-  # System & Architectural
-  intl: ^0.20.2
-  logger: ^2.0.2+1
-  go_router: ^17.0.0
-  go_router_builder: ^4.1.0
-  provider: ^6.0.5
-  get_it: ^9.2.1
-  flutter_bloc: ^9.1.1
-  hydrated_bloc: ^11.0.0
-  freezed_annotation: ^3.0.0
-  json_annotation: ^4.8.1
-  uuid: ^4.4.0
-  package_info_plus: ^10.1.0
-  vector_math: ^2.1.4
-  collection: ^1.19.0
-  faker: ^2.2.0
-  rnd: 0.2.0
-  flutter_cache_manager: ^3.4.1
-  clock: ^1.1.2 # For faking time in tests and better time handling in general
-  path_provider: ^2.1.5
-
-  # Ui
-  flutter_animate: ^4.2.0
-  flutter_form_builder: ^10.0.1
-  image_picker: ^1.0.2
-  form_builder_validators: ^11.0.0
-  cupertino_icons: ^1.0.2
-  image: ^4.0.15
-  cached_network_image: ^3.2.0
-  flutter_blurhash: ^0.9.1
-  flutter_shaders: ^0.1.2
-  flip_board: ^1.0.0
-  blurhash_dart: ^1.1.0
-  carousel_slider: ^5.1.2
-  smooth_page_indicator: ^2.0.1
-  flutter_slidable: ^4.0.3
-
-  # Additional functionalities
-  drift: ^2.30.0
-  audio_service: ^0.18.18
-  audio_session: ^0.2.3
-  flutter_soloud: ^4.0.5
-  wakelock_plus: ^1.1.1
-  url_launcher: ^6.1.5
-  shared_preferences: ^2.0.5
-  gaimon: ^1.4.1 # haptic feedback library
-  dart_geohash: ^2.1.0
-  tflite_flutter: # For NSFW model inference
-    git:
-      url: git@github.com:dropout/flutter-tflite.git
-  assa_parser:
-    git:
-      url: git@github.com:dropout/assa_parser.git
-  flutter_volume_listener:
-    git:
-      url: git@github.com:dropout/flutter_volume_listener.git
-  flutter_mindful_minutes:
-    git:
-      url: git@github.com:dropout/flutter_mindful_minutes.git
-
-  # Firebase
-  firebase_core: ^4.1.1
-  cloud_firestore: ^6.0.2
-  firebase_storage: ^13.0.2
-  firebase_remote_config: ^6.0.2
-  cloud_functions: ^6.0.4
-
-  # Firebase Auth
-  firebase_auth: ^6.1.0
-  google_sign_in: ^7.2.0
-  sign_in_with_apple: ^8.1.0
-  crypto: ^3.0.2
-
-  # Firebase diagnostics
-  firebase_analytics: ^12.0.2
-  firebase_crashlytics: ^5.0.2
-
-  bar_chart:
-    path: packages/bar_chart
-  particle_field:
-    path: packages/particle_field
+workspace:
+  - apps/mobile_app
+  - packages/firebase_provider
+  - packages/core
+  - packages/modules/auth
+  - packages/modules/donate
+  - packages/modules/practice/timer
+  - packages/modules/practice/session
+  - packages/modules/practice/chanting
+  - packages/modules/profile
+  - packages/modules/social
+  - packages/modules/stats
+  - packages/particle_field
+  - packages/bar_chart
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  integration_test:
-    sdk: flutter
+  melos: ^7.5.1
 
-  sqflite_common_ffi: ^2.4.2
-  nock: ^1.2.3
-  flutter_lints: ^6.0.0
-  build_runner: ^2.4.6
-  freezed: ^3.0.6
-  json_serializable: ^6.7.1
-  bloc_test: ^10.0.0
-  mocktail: ^1.0.3
-  mocktail_image_network: ^1.2.0
-  drift_dev: ^2.30.0
+melos:
+  ide:
+    intellij:
+      enabled: false
+  bootstrap:  
+    runPubGetInParallel: false
+    usePubspecOverrides: true
+    hooks:
+      post: melos codegen
 
+  scripts:
+    clean:
+      description: Run flutter clean in all packages
+      run: melos exec -c 1 -- "flutter clean"
+    pub:get:
+      description: Fetch dependencies for all packages
+      run: melos exec -c 1 -- "flutter pub get"
+    format:
+      description: Format Dart code in all packages
+      run: melos exec -c 5 -- "dart format --line-length 120 lib test"
+    analyze:
+      description: Analyze Dart code in all packages
+      run: melos exec -c 5 -- "flutter analyze"
+    test:
+      description: Run tests in all packages
+      run: melos exec -c 1 -- "flutter test"
+      failFast: true
 
-flutter:
-  generate: true # For generating localizations?
-  config: 
-    enable-swift-package-manager: false #tflite not compatible with SPM yet, so disable it to avoid build errors
+    # Code generation
+    codegen:
+      description: Run code generation via build_runner on all packages
+      run: melos exec -c 1 -- "dart run build_runner build --delete-conflicting-outputs"
+    codegen:l10n:
+      description: Run code generation for localization
+      run: melos exec -c 1 -- "flutter gen-l10n"
+    codegen:watch:
+      description: Watch for changes and run code generation
+      run: melos exec -c 1 -- "dart run build_runner watch --delete-conflicting-outputs"
 
-  assets:
-    - assets/sounds/
-    - assets/images/
-    - assets/haptics/
-    - assets/nsfw.tflite
+    # Staging builds
+    build:staging:
+      description: Build staging release for mobile app (Android and iOS)
+      run: |
+        melos run build:android:staging && melos run build:ios:staging
+    build:android:staging:
+      description: Build staging release for mobile app (Android)
+      run: |
+        cd apps/mobile_app && flutter build appbundle --release --flavor staging -t lib/main_staging.dart && cd ../..
+    build:ios:staging:
+      description: Build iOS IPA (staging) for mobile app
+      run: |
+        cd apps/mobile_app && flutter build ipa --release --flavor staging -t lib/main_staging.dart && cd ../..
+    release:staging:
+      description: Run full staging release workflow for mobile app
+      run: |
+        cd apps/mobile_app && ./scripts/release_staging.sh && cd ../..
+    release:staging:bump:
+      description: Bump build number for mobile app staging release
+      run: |
+        cd apps/mobile_app && ./scripts/bump_build_number.sh && cd ../..
 
-  shaders:
-    - shaders/linear_gradient_mask.frag
-    - shaders/gradient_flow.frag
-    - shaders/test.frag
+    # Production builds
+    build:production:
+      description: Build production release for mobile app (Android and iOS)
+      run: |
+        melos run build:android:production && melos run build:ios:production
+    build:android:production:
+      description: Build production release for mobile app (Android)
+      run: |
+        cd apps/mobile_app && flutter build appbundle --release --flavor production -t lib/main_production.dart && cd ../..
+    build:ios:production:
+      description: Build iOS IPA (production) for mobile app
+      run: |
+        cd apps/mobile_app && flutter build ipa --release --flavor production -t lib/main_production.dart && cd ../..
 
-  fonts:
-    - family: RobotoSlab
-      fonts:
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Black.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Bold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-ExtraBold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-ExtraLight.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Light.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Medium.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Regular.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-SemiBold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Thin.ttf
-    - family: RobotoCondensed
-      fonts:
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-BoldItalic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Italic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-LightItalic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf
-
-  uses-material-design: true
+      

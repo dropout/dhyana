@@ -1,0 +1,61 @@
+import 'package:core/src/routes/core_routes.dart';
+import 'package:core/src/presentation/viewmodel/auth_state_cubit.dart';
+import 'package:core/src/presentation/viewmodel/profile_state_cubit.dart';
+import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:core/src/presentation/design_spec.dart';
+import 'package:core/src/presentation/view/util/app_context.dart';
+import 'package:core/src/presentation/view/util/toast.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import 'dialog_button.dart';
+
+class SignoutDialog extends StatelessWidget {
+
+  const SignoutDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(AppLocalizations.of(context).profileSignoutTitle),
+      content: Text(AppLocalizations.of(context).profileSignoutQuestion),
+      backgroundColor: AppColors.backgroundPaperLight,
+      actions: [
+        DialogButton.secondary(
+          key: const Key('signout_dialog_cancel_button'),
+          text: AppLocalizations.of(context).profileSignoutCancel,
+          onPressed: () {
+            context.pop();
+            context.hapticsTap();
+          },
+        ),
+        DialogButton.primary(
+          key: const Key('signout_dialog_signout_button'),
+          text: AppLocalizations.of(context).profileSignoutYes,
+          onPressed: () {
+            // close are you sure dialog
+            context.pop();
+
+            // do the signout
+            context.read<AuthCubit>().signOut();
+
+            context.hapticsTap();
+            context.logEvent(name: 'profile_signout_pressed');
+
+            Future.delayed(Durations.medium1, () {
+              if (context.mounted) {
+                context.showSuccessfulToast(
+                  context.l10n.signOutSuccessfulMessage
+                );
+              }
+            });
+
+            HomeRoute(refresh: DateTime.now().millisecondsSinceEpoch).go(context);
+            context.read<ProfileCubit>().clearData();
+          },
+        ),
+      ],
+    );
+  }
+}

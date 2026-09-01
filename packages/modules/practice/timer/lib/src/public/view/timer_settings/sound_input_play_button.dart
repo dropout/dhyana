@@ -1,0 +1,82 @@
+import 'dart:async';
+
+import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+
+/// A button that plays the given sound when pressed, 
+/// and shows a stop button while the sound is playing.
+class SoundInputPlayButton extends StatefulWidget {
+
+  /// The sound to play when the button is pressed.
+  final Sound sound;
+
+  /// The audio service to use for playing the sound.
+  final SimpleAudioService audioService;
+
+  const SoundInputPlayButton({
+    required this.sound,
+    required this.audioService,
+    super.key,
+  });
+
+  @override
+  State<SoundInputPlayButton> createState() => SoundInputPlayButtonState();
+}
+
+class SoundInputPlayButtonState extends State<SoundInputPlayButton> {  
+
+  bool isPlaying = false;
+  late final StreamSubscription<bool> _isPlayingSubscription;
+  
+  @override
+  initState() {
+    _isPlayingSubscription = widget.audioService.
+      isPlayingStream.listen((isPlaying) {
+        setState(() {
+          this.isPlaying = isPlaying;
+        });
+      });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    
+    if (widget.sound == Sound.none) {
+      return const SizedBox.shrink();
+    }
+
+    if (isPlaying) {
+      return IconButton(
+        key: const Key('sound_input_play_button_stop'),
+        icon: const Icon(
+          Icons.stop_circle_rounded,
+          size: 32,
+          color: AppColors.backgroundPaperLight,
+        ),
+        onPressed: () {
+          widget.audioService.stop();
+        },
+      );
+    } else {
+      return IconButton(
+        key: const Key('sound_input_play_button_play'),
+        icon: const Icon(
+          Icons.play_circle_fill_rounded,
+          size: 32,
+          color: AppColors.backgroundPaperLight,
+        ),
+        onPressed: () {
+          widget.audioService.play(widget.sound);
+        },
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _isPlayingSubscription.cancel();
+    super.dispose();
+  }
+
+}

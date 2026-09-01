@@ -1,0 +1,69 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:core/core.dart';
+import 'package:session/src/data/mapper/session_mapper.dart';
+import 'package:session/src/public/model/session.dart';
+import 'package:session/src/domain/entity/session_completed_data_entity.dart';
+import 'package:session/src/domain/usecase/log_session_insights_use_case.dart';
+import 'package:session/src/domain/usecase/update_profile_with_session_use_case.dart';
+import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
+
+
+/// Cubit to manage the state of session completion and logging
+/// When a session is completed, this cubit handles updating the profile stats,
+/// logging the session to statistics, and emitting states to reflect the progress.
+/// Addresses the requirements of displaying data and progress on SessionCompletedScreen.
+class SessionCompletedCubit extends Cubit<SessionCompletedDataEntity>
+    with LoggerMixin {
+
+  final UpdateProfileWithSessionUseCase updateProfileWithSessionUseCase;
+  final LogSessionInsightsUseCase logSessionUseCase;
+
+  final CrashlyticsService crashlyticsService;
+
+  SessionCompletedCubit({    
+    required this.updateProfileWithSessionUseCase,
+    required this.logSessionUseCase,
+    required this.crashlyticsService,
+  }) : super(const SessionCompletedDataEntity.initial());
+
+  Future<void> logSession(
+    String profileId,
+    Session session, {
+    void Function(UpdateProfileStatsResultEntity updateResults)? onComplete,
+    void Function(Object? error, StackTrace stack)? onError,
+  }) async {
+    try {
+      // Loading state will be indicated by the UI
+      emit(const SessionCompletedDataEntity.loading());
+
+      final result = await updateProfileWithSessionUseCase.execute(
+        profileId,
+        session.toEntity(),      
+      );
+
+      
+
+
+      emit(SessionCompletedDataEntity.saving(
+        updateResult: result
+      ));
+
+      await logSessionUseCase.execute(result.updatedProfile.id, session.toEntity());
+
+      // Emit saved state
+      emit(SessionCompletedDataEntity.saved(updateResult: result));
+
+      onComplete?.call(result);
+      logger.t('Session successfully logged!');
+    } catch (e, stack) {
+      crashlyticsService.recordError(
+        exception: e,
+        stackTrace: stack,
+        reason: 'Error logging session in SessionCompletedCubit',
+      );
+      emit(const SessionCompletedDataEntity.error());
+      onError?.call(e, stack);
+    }
+  }
+}
