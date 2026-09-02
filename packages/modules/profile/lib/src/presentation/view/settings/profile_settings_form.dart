@@ -35,7 +35,7 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
   }
 
   void _onDeleteProfileTapped(BuildContext context) {
-    showAppDialog(context, DeleteProfileDialog());
+    showAppDialog(context, DeleteProfileDialog(profileId: widget.profile.id));
     context.hapticsTap();
   }
 

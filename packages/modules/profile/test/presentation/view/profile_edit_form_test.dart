@@ -1,20 +1,18 @@
 import 'dart:convert';
 
-import 'package:core/core.dart';
 import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
-import 'package:profile/src/data/datasource/faker_profile_extension.dart';
-import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/presentation/view/form_builder_profile_image_picker.dart';
 import 'package:provider/provider.dart';
 
+import 'package:core/core.dart';
+import 'package:profile/src/data/datasource/faker_profile_extension.dart';
+import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/presentation/view/profile_edit_form.dart';
-
-import '../../profile_mock_definitions.dart';
-
 
 
 void main() {

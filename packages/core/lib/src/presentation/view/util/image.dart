@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Efficient way to build circular images, without clipping
 Widget buildCircularImage(BuildContext context, ImageProvider imageProvider) {

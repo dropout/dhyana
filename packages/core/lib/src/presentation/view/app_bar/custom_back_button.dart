@@ -1,6 +1,6 @@
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomBackButton extends StatefulWidget {

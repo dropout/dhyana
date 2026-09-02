@@ -1,5 +1,5 @@
 import 'package:stats/src/presentation/view/profile_stats_view.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ProfileStatsScreen extends StatelessWidget {
 

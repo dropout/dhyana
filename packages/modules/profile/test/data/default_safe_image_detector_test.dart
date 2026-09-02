@@ -1,5 +1,5 @@
-import 'package:profile/src/domain/service/safe_image_detector.dart';
-import 'package:profile/src/data/service/default_safe_image_detector.dart';
+import 'package:core/src/service/safe_image_detector.dart';
+import 'package:core/src/infrastructure/platform/default_safe_image_detector.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:mocktail/mocktail.dart';

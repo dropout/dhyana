@@ -1,5 +1,5 @@
 import 'package:core/src/service/analytics_service.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 
 class LoggingAnalyticsService implements AnalyticsService {

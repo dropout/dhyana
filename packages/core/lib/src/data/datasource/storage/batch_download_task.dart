@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_provider/firebase_provider.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class BatchDownloadTask extends ChangeNotifier {
   final List<DownloadTask> _tasks;

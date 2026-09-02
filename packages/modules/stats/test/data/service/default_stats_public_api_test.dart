@@ -1,4 +1,6 @@
-import 'package:core/core.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
 import 'package:profile/profile.dart';
 import 'package:stats/src/data/mapper/stats_session_mapper.dart';
 import 'package:stats/src/data/service/default_stats_public_api.dart';
@@ -8,10 +10,9 @@ import 'package:stats/src/domain/enum/stats_entity_granularity.dart';
 import 'package:stats/src/public/enum/stats_granularity.dart';
 import 'package:stats/src/public/model/stats_bucket.dart';
 import 'package:stats/src/public/model/stats_session.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../../stats_mock_definitions.dart';
+
 
 void main() {
   late MockStatisticsRepository statisticsRepository;
@@ -46,7 +47,7 @@ void main() {
         const profileId = 'profile-1';
         final session = StatsSession(
           id: 'session-1',
-          type: HomeScreenViewState.sitting,
+          type: .sitting,
           startTime: DateTime(2026, 1, 10, 7),
           endTime: DateTime(2026, 1, 10, 7, 20),
           duration: const Duration(minutes: 20),
@@ -96,7 +97,7 @@ void main() {
       const profileId = 'profile-1';
       final session = StatsSession(
         id: 'session-2',
-        type: HomeScreenViewState.chanting,
+        type: .chanting,
         startTime: DateTime(2026, 1, 11, 8),
         endTime: DateTime(2026, 1, 11, 8, 15),
         duration: const Duration(minutes: 15),

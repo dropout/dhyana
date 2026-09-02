@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 SnackBar getSuccessSnackBar(BuildContext context, String text) {
   return SnackBar(

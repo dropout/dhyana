@@ -2,7 +2,7 @@ import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 

@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:stats/src/presentation/view/profile_stats_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 part 'stats_routes.g.dart';

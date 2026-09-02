@@ -3,7 +3,7 @@ import 'package:core/src/presentation/viewmodel/profile_state_cubit.dart';
 import 'package:core/src/presentation/viewmodel/remote_settings_cubit.dart';
 import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:core/src/util/services.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';

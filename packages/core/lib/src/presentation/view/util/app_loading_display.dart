@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:core/src/presentation/design_spec.dart';
 
 import 'app_circular_progress_indicator.dart';

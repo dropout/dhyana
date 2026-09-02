@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
+import 'package:social/social.dart';
 import 'package:session/src/domain/entity/session_completed_data_entity.dart';
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:session/src/public/model/session.dart';
 
-import 'milestone_progress_view.dart';
-import 'progress_summary.dart';
 import 'session_result.dart';
-
 
 class SignedInCompletedView extends StatefulWidget {
   final String profileId;

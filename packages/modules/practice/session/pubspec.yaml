@@ -12,9 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  material_ui: ^1.1.0
   firebase_provider: ^1.0.0
   core: ^0.0.1
   profile: ^0.0.1
+  social: ^0.0.1
   get_it: ^9.2.1
   go_router: ^18.0.0
   go_router_builder: ^4.4.1

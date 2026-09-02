@@ -1,7 +1,7 @@
 import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:core/src/util/services.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
 extension AppContext on BuildContext {

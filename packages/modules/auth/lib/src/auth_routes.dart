@@ -1,6 +1,6 @@
 import 'package:auth/src/presentation/view/login_screen.dart';
 import 'package:auth/src/presentation/view/login_with_email_and_password_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 part 'auth_routes.g.dart';

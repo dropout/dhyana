@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   child: AppErrorDisplay(
                     onButtonTap: () {
                       context.read<AuthStateCubit>().signOut();
-                      const HomeRoute().go(context);
+                      context.services.homeNavigator.navigateToHome(type: .go);
                       context.read<ProfileStateCubit>().clearData();
                     },
                     buttonText: AppLocalizations.of(context).signOut,

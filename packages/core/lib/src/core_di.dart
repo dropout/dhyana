@@ -1,21 +1,14 @@
-
-
-import 'package:firebase_provider/firebase_provider.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/src/event_bus/event_bus.dart';
 import 'package:core/src/data/datasource/storage/firebase_storage_data_provider.dart';
 import 'package:core/src/data/datasource/storage/storage_data_provider.dart';
 import 'package:core/src/data/repository/default_storage_repository.dart';
 import 'package:core/src/domain/entity/remote_settings.dart';
-import 'package:core/src/domain/enum/home_screen_view_state.dart';
 import 'package:core/src/domain/repository/storage_repository.dart';
-import 'package:core/src/presentation/viewmodel/auth_state_cubit.dart';
-import 'package:core/src/presentation/viewmodel/home_screen_cubit.dart';
-import 'package:core/src/presentation/viewmodel/profile_state_cubit.dart';
 import 'package:core/src/presentation/viewmodel/remote_settings_cubit.dart';
 import 'package:core/src/service/analytics_service.dart';
 import 'package:core/src/service/crashlytics_service.dart';
@@ -42,8 +35,6 @@ import 'package:core/src/infrastructure/platform/default_shader_service.dart';
 import 'package:core/src/infrastructure/platform/default_shared_preferences_service.dart';
 import 'package:core/src/infrastructure/platform/default_wakelock_service.dart';
 
-import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
-import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
 
 extension CoreDependencyInjection on GetIt {
 
@@ -109,40 +100,10 @@ extension CoreDependencyInjection on GetIt {
       () => FirebaseRemoteSettingsService(get<FirebaseProvider>().remoteConfig),
     );    
 
-
-    // ViewModels
-
-    registerFactory(
-      () => ProfileCubit(
-        authPublicApi: get<AuthPublicApi>(),
-        profilePublicApi: get<ProfilePublicApi>(),
-        crashlyticsService: get<CrashlyticsService>(),
-      ),
-    );
-
-    registerFactoryParam<AuthCubit, AuthState, void>(
-      (initialAuthState, _) => AuthCubit(
-        initialAuthState: initialAuthState,
-        router: get<GoRouter>(),
-        authApi: get<AuthPublicApi>(),
-        analyticsService: get<AnalyticsService>(),
-        crashlyticsService: get<CrashlyticsService>(),
-      ),
-    );
-
     registerFactoryParam<RemoteSettingsCubit, RemoteSettings, void>(
       (initialRemoteSettings, _) => RemoteSettingsCubit(
         initialRemoteSettings: initialRemoteSettings,
         remoteSettingsService: get<RemoteSettingsService>(),
-        crashlyticsService: get<CrashlyticsService>(),
-      ),
-    );
-
-    registerFactoryParam<HomeScreenCubit, HomeScreenViewState?, void>(
-      (initialSessionType, _) => HomeScreenCubit(
-        initialState: (initialSessionType != null) 
-          ? HomeScreenState(sessionType: initialSessionType) 
-          : null,
         crashlyticsService: get<CrashlyticsService>(),
       ),
     );

@@ -3,7 +3,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:profile/src/data/datasource/profile_data_provider.dart';
 import 'package:profile/src/domain/repository/profile_repository.dart';
 import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
-import 'package:profile/src/domain/service/safe_image_detector.dart';
 import 'package:profile/src/domain/usecase/load_profile_use_case.dart';
 import 'package:profile/src/domain/usecase/delete_profile_use_case.dart';
 import 'package:profile/src/domain/usecase/update_profile_settings_use_case.dart';
@@ -13,18 +12,9 @@ import 'package:mocktail/mocktail.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 
-
 class MockProfileEditCubit 
   extends MockCubit<ProfileEditState> 
   implements ProfileEditCubit {}
-
-class MockSafeImageDetectorFactory 
-  extends Mock
-  implements SafeImageDetectorFactory {}
-
-class MockSafeImageDetector 
-  extends Mock 
-  implements SafeImageDetector {}
 
 class MockInterpreter 
   extends Mock 

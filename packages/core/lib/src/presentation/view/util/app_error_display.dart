@@ -1,5 +1,5 @@
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/src/presentation/design_spec.dart';
 

@@ -1,0 +1,89 @@
+import 'package:profile/profile.dart';
+import 'package:profile/src/public/view/stats/label_value_detail.dart';
+import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
+
+class DetailedProfileView extends StatelessWidget {
+  final String profileId;
+  final String profileName;
+  final DateTime signupDate;
+  final ProfileStatsReport profileStatsReport;
+  final String? profilePhotoUrl;
+  final String? profilePhotoBlurhash;
+
+  const DetailedProfileView({
+    required this.profileId,
+    required this.profileName,
+    required this.signupDate,
+    required this.profileStatsReport,
+    this.profilePhotoUrl,
+    this.profilePhotoBlurhash,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      title: context.l10n.profile,
+      padding: const EdgeInsets.only(
+        bottom: DesignSpec.paddingLg,
+        left: DesignSpec.paddingLg,
+        right: DesignSpec.paddingLg,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(DesignSpec.paddingXs),
+                  child: ProfileImage(
+                    profileId: profileId,
+                    profileName: profileName,
+                    profilePhotoBlurhash: profilePhotoBlurhash,
+                    size: 48
+                  ),
+                ),
+              ),
+              Gap.medium(),
+              Text(
+                profileName,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+          Gap.medium(),
+          LabelValueDetail(
+            label: context.l10n.statsSignedUp,
+            value: formatDateTime(context, signupDate),
+          ),
+          LabelValueDetail(
+            label: context.l10n.statsFirstSession,
+            value: formatDateTime(
+              context,
+              profileStatsReport.firstSessionDate,
+            ),
+          ),
+          LabelValueDetail(
+            label: context.l10n.statsLastSession,
+            value: formatDateTime(context, profileStatsReport.lastSessionDate),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String formatDateTime(BuildContext context, DateTime? dateTime) {
+    if (dateTime == null) {
+      return context.l10n.notAvailableAbbr;
+    }
+    return dateTime.toFormattedDateTimeString(context);
+  }
+}

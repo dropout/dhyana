@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:core/core.dart';
 import 'package:stats/src/domain/entity/day_details_entity.dart';

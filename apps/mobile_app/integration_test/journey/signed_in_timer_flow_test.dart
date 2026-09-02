@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,7 +20,7 @@ void main() async {
 
     testWidgets('can configure timer settings', (tester) async {
       await AppRobot.runTestApp(firebaseProvider);
-      await tester.pumpUntilFound(find.byType(HomeScreen));
+      await tester.pumpUntilFound(find.byKey(const Key('home_screen_scaffold')));
 
       final authRobot = AuthRobot(tester);
       await authRobot.autoSigninWithEmailAndPassword();

@@ -1,5 +1,5 @@
 import 'package:chanting/src/public/model/chanting_settings.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chanting/src/presentation/view/chanting_screen.dart';
 import 'package:core/core.dart';
@@ -28,7 +28,10 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
         key: state.pageKey,
       );
     } catch (e) {
-      return AppErrorDisplay(onButtonTap: () => HomeRoute().go(context));
+      return AppErrorDisplay(
+        onButtonTap: () => 
+          context.services.homeNavigator.navigateToHome(type: NavigationType.go),
+      );
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 typedef InfoBuilderDelegate = Widget Function(
   BuildContext context,

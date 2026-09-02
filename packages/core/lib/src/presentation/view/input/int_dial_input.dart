@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A custom dial widget that allows users to select minutes for a duration.
 class IntDialInput extends StatefulWidget {

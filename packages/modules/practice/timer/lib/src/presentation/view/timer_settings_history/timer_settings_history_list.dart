@@ -5,7 +5,7 @@ import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:timer/src/presentation/view/timer_settings_history/timer_settings_history_list_item.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TimerSettingsHistoryList extends StatelessWidget {
@@ -31,10 +31,14 @@ class TimerSettingsHistoryList extends StatelessWidget {
 
     // Force home screen recreation to apply the selected timer settings.
     if (context.mounted) {
-      HomeRoute(
+      context.services.homeNavigator.navigateToHome(
         refresh: DateTime.now().millisecondsSinceEpoch,
         $extra: timerSettings,
-      ).go(context);
+      );
+      // HomeRoute(
+      //   refresh: DateTime.now().millisecondsSinceEpoch,
+      //   $extra: timerSettings,
+      // ).go(context);
       Future.delayed(Durations.medium1, () {
         if (context.mounted) {
           context.showSuccessfulToast(

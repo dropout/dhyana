@@ -6,9 +6,10 @@ environment:
 workspace:
   - apps/mobile_app
   - packages/firebase_provider
-  - packages/core
+  - packages/core  
   - packages/modules/auth
   - packages/modules/donate
+  - packages/modules/home
   - packages/modules/practice/timer
   - packages/modules/practice/session
   - packages/modules/practice/chanting

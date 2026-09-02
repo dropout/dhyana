@@ -4,7 +4,7 @@ import 'package:core/src/service/crashlytics_service.dart';
 import 'package:core/src/service/resource_resolver.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
 import 'package:core/src/presentation/view/util/image.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
 /// The [AppCachedNetworkImage] widget is a custom implementation

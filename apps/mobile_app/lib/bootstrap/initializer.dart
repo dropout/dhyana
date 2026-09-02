@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:dhyana/audio/app_audio_handler.dart';
+import 'package:dhyana/audio/audio_session_configuration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
@@ -12,6 +14,7 @@ import 'package:audio_session/audio_session.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
+import 'package:home/home.dart';
 import 'package:profile/profile.dart';
 import 'package:timer/timer.dart';
 import 'package:chanting/chanting.dart';
@@ -62,7 +65,7 @@ class Initializer with LoggerMixin {
       initialLocation: '/',
       routes: [
         ...$authRoutes,
-        ...$coreRoutes,
+        ...$homeRoutes,
         ...$profileRoutes, 
         ...$timerRoutes,
         ...$chantingRoutes,

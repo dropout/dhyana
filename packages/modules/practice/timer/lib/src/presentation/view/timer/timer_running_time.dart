@@ -1,7 +1,7 @@
 import 'package:timer/src/domain/entity/timer_state_entity.dart';
 import 'package:timer/src/domain/enum/timer_stage.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TimerRunningTime extends StatelessWidget {
 

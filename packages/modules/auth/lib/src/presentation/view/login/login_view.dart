@@ -1,6 +1,6 @@
 import 'package:auth/src/presentation/view/login/login_signed_in_view.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'login_signed_out_view.dart';

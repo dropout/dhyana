@@ -10,4 +10,9 @@ class DefaultAuthNavigator extends AuthNavigator {
     NavigationType type = NavigationType.push
   }) async => navigateTo(LoginRoute(), type: type);
 
+  @override
+  Future<void> navigateToLoginWithEmailAndPassword({
+    NavigationType type = NavigationType.push
+  }) async => navigateTo(LoginWithEmailAndPasswordRoute(), type: type);
+
 }

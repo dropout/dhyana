@@ -4,7 +4,7 @@ import 'package:session/src/public/model/session.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
 import 'package:session/src/presentation/view/completed/signed_out_completed_view.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,7 +18,7 @@ class SessionCompletedScreen extends StatelessWidget {
   });
 
   void _onOkayButtonPressed(BuildContext context) {
-    const HomeRoute().go(context);
+    context.services.homeNavigator.navigateToHome();
     context.hapticsTap();
   }
 
@@ -42,7 +42,7 @@ class SessionCompletedScreen extends StatelessWidget {
   }
 
   Widget buildSignedInView(BuildContext context, String profileId) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocBuilder<ProfileStateCubit, ProfileState>(
       builder: (context, state) {
         switch (state) {
           case ProfileStateInitial():

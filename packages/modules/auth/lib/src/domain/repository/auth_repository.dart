@@ -12,7 +12,7 @@ abstract class AuthRepository {
     SigninAuthProviderType signinMethodType
   );
 
-  Future<UserEntity> signUpWithEmailAndPassword({
+  Future<UserEntity> signupWithEmailAndPassword({
     required String email,
     required String password,
   });

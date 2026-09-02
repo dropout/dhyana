@@ -1,6 +1,8 @@
 name: home
+resolution: workspace
 description: "A new Flutter package project."
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -11,10 +13,34 @@ dependencies:
   flutter:
     sdk: flutter
 
+  material_ui: ^1.1.0
+  get_it: ^9.2.1
+  go_router: ^18.0.0
+  go_router_builder: ^4.4.1
+  provider: ^6.1.5+1
+  freezed_annotation: ^3.1.0
+  flutter_bloc: ^9.1.1
+  hydrated_bloc: ^11.0.0
+  faker: ^2.2.0
+
+  firebase_provider: ^1.0.0
+  core: ^0.0.1
+  profile: ^0.0.1
+  timer: ^0.0.1
+  chanting: ^0.0.1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+
+  mocktail: ^1.0.5
+  build_runner: ^2.4.6
+  freezed: ^3.0.6
+  json_serializable: ^6.7.1  
+  bloc_test: ^10.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

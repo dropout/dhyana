@@ -1,7 +1,8 @@
+import 'package:material_ui/material_ui.dart';
+
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:dhyana/modules/practice/timer/timer_routes.dart';
-import 'package:flutter/material.dart';
+
 
 class TimerSettingsHistoryButton extends StatelessWidget {
 
@@ -13,7 +14,9 @@ class TimerSettingsHistoryButton extends StatelessWidget {
   });
 
   void _onButtonTap(BuildContext context) {
-    TimerSettingsHistoryRoute(profileId: profileId).push(context);
+    context.services.timerNavigator.navigateToTimerSettingsHistory(
+      profileId,
+    );
     context.hapticsTap();
   }
 

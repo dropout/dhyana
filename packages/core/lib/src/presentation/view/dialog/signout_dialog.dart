@@ -1,13 +1,15 @@
-import 'package:core/src/routes/core_routes.dart';
 import 'package:core/src/presentation/viewmodel/auth_state_cubit.dart';
 import 'package:core/src/presentation/viewmodel/profile_state_cubit.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:dhyana/l10n/app_localizations.dart';
+
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
 import 'package:core/src/presentation/view/util/toast.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+
 
 import 'dialog_button.dart';
 
@@ -38,7 +40,7 @@ class SignoutDialog extends StatelessWidget {
             context.pop();
 
             // do the signout
-            context.read<AuthCubit>().signOut();
+            context.read<AuthStateCubit>().signOut();
 
             context.hapticsTap();
             context.logEvent(name: 'profile_signout_pressed');
@@ -51,8 +53,11 @@ class SignoutDialog extends StatelessWidget {
               }
             });
 
-            HomeRoute(refresh: DateTime.now().millisecondsSinceEpoch).go(context);
-            context.read<ProfileCubit>().clearData();
+            context.services.homeNavigator.navigateToHome(
+              refresh: DateTime.now().millisecondsSinceEpoch,
+              type: .go
+            );
+            context.read<ProfileStateCubit>().clearData();
           },
         ),
       ],

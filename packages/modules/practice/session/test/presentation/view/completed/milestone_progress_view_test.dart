@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/core.dart';
-import 'package:session/src/presentation/view/completed/milestone_progress_view.dart';
-import 'package:session/src/presentation/view/completed/milestone_progress_view_item.dart';
+import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
+import 'package:profile/src/public/view/stats/milestone_progress_view_item.dart';
 
 
 void main() {

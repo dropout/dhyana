@@ -1,9 +1,15 @@
+import 'package:core/src/infrastructure/platform/default_safe_image_detector.dart';
+import 'package:core/src/navigator/donate_navigator.dart';
+import 'package:core/src/navigator/stats_navigator.dart';
+import 'package:core/src/service/safe_image_detector.dart';
+import 'package:get_it/get_it.dart';
+
 import 'package:core/src/navigator/auth_navigator.dart';
 import 'package:core/src/navigator/home_navigator.dart';
 import 'package:core/src/navigator/profile_navigator.dart';
 import 'package:core/src/navigator/session_navigator.dart';
 import 'package:core/src/navigator/social_navigator.dart';
-import 'package:get_it/get_it.dart';
+import 'package:core/src/navigator/timer_navigator.dart';
 
 import 'package:core/src/service/analytics_service.dart';
 import 'package:core/src/service/crashlytics_service.dart';
@@ -15,10 +21,8 @@ import 'package:core/src/service/remote_settings_service.dart';
 import 'package:core/src/service/resource_resolver.dart';
 import 'package:core/src/service/shader_service.dart';
 import 'package:core/src/service/wakelock_service.dart';
-import 'package:core/src/util/launch_url.dart';
 
-import 'package:dhyana/modules/profile/domain/service/safe_image_detector.dart';
-import 'package:dhyana/modules/profile/data/service/default_safe_image_detector.dart';
+import 'package:core/src/util/launch_url.dart';
 
 
 /// A container for services exposed to the UI.
@@ -42,6 +46,9 @@ class Services {
   final AuthNavigator authNavigator;
   final SessionNavigator sessionNavigator;
   final SocialNavigator socialNavigator;
+  final TimerNavigator timerNavigator;
+  final StatsNavigator statsNavigator;
+  final DonateNavigator donateNavigator;
 
   final SafeImageDetectorFactory safeImageDetectorFactory;
 
@@ -64,6 +71,9 @@ class Services {
     required this.authNavigator,
     required this.sessionNavigator,
     required this.socialNavigator,
+    required this.timerNavigator,
+    required this.statsNavigator,
+    required this.donateNavigator,
   });
 }
 
@@ -92,6 +102,9 @@ class ServicesBuilder {
       authNavigator: GetIt.I.get<AuthNavigator>(),
       sessionNavigator: GetIt.I.get<SessionNavigator>(),
       socialNavigator: GetIt.I.get<SocialNavigator>(),
+      timerNavigator: GetIt.I.get<TimerNavigator>(),
+      statsNavigator: GetIt.I.get<StatsNavigator>(),
+      donateNavigator: GetIt.I.get<DonateNavigator>(),
 
       shaderService: GetIt.I.get<ShaderService>(),
       functionsService: GetIt.I.get<FunctionsService>(),

@@ -3,7 +3,7 @@ import 'package:core/src/domain/enum/processing_state.dart';
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_button.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 mixin ScreenHelperMixin {
 

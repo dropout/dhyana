@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:core/core.dart';
+import 'package:stats/src/public/enum/stats_session_type.dart';
 
 
 part 'stats_session.freezed.dart';
@@ -13,7 +14,7 @@ sealed class StatsSession with _$StatsSession {
 
   const factory StatsSession({
     required String id,
-    required HomeScreenViewState type,
+    required StatsSessionType type,
     @DateTimeConverter() required DateTime startTime,
     @DateTimeConverter() required DateTime endTime,
     @DurationConverter() required Duration duration,

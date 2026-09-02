@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:dhyana/l10n/app_localizations.dart';
+
 import 'package:core/core.dart';
-import 'package:core/src/routes/auth_routes.dart';
 import 'package:auth/src/presentation/view/login/login_headline_text_effect.dart';
 
 
@@ -12,19 +12,19 @@ class LoginSignedOutView extends StatelessWidget {
   const LoginSignedOutView({super.key});
 
   void _onLoginWithGoogleTap(BuildContext context) {
-    context.read<AuthCubit>().signInWithGoogle();
+    context.read<AuthStateCubit>().signinWithGoogle();
     context.logEvent(name: 'login_with_google_button_pressed');
     context.hapticsTap();
   }
 
   void _onLoginWithAppleTap(BuildContext context) {
-    context.read<AuthCubit>().signInWithApple();
+    context.read<AuthStateCubit>().signinWithApple();
     context.logEvent(name: 'login_with_apple_button_pressed');
     context.hapticsTap();
   }
 
   void _onLoginWithEmailAndPasswordTap(BuildContext context) {
-    LoginWithEmailAndPasswordRoute().push(context);
+    context.services.authNavigator.navigateToLoginWithEmailAndPassword();
     context.logEvent(name: 'login_with_email_and_password_button_pressed');
     context.hapticsTap();
   }

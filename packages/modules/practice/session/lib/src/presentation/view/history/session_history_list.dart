@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 
 import 'package:core/core.dart';
@@ -50,7 +50,7 @@ class SessionHistoryList extends StatelessWidget {
                     top: 0,
                     right: 0,
                     child: Icon(
-                      (s.type == HomeScreenViewState.sitting) ? 
+                      (s.type == .sitting) ? 
                         Icons.timer_rounded : 
                         Icons.music_note_rounded,
                     )

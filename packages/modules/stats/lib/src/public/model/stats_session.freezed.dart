@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$StatsSession implements DiagnosticableTreeMixin {
 
- String get id; HomeScreenViewState get type;@DateTimeConverter() DateTime get startTime;@DateTimeConverter() DateTime get endTime;@DurationConverter() Duration get duration;
+ String get id; StatsSessionType get type;@DateTimeConverter() DateTime get startTime;@DateTimeConverter() DateTime get endTime;@DurationConverter() Duration get duration;
 /// Create a copy of StatsSession
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -51,7 +51,7 @@ abstract mixin class $StatsSessionCopyWith<$Res>  {
   factory $StatsSessionCopyWith(StatsSession value, $Res Function(StatsSession) _then) = _$StatsSessionCopyWithImpl;
 @useResult
 $Res call({
- String id, HomeScreenViewState type,@DateTimeConverter() DateTime startTime,@DateTimeConverter() DateTime endTime,@DurationConverter() Duration duration
+ String id, StatsSessionType type,@DateTimeConverter() DateTime startTime,@DateTimeConverter() DateTime endTime,@DurationConverter() Duration duration
 });
 
 
@@ -72,7 +72,7 @@ class _$StatsSessionCopyWithImpl<$Res>
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as HomeScreenViewState,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
+as StatsSessionType,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
 as DateTime,endTime: null == endTime ? _self.endTime : endTime // ignore: cast_nullable_to_non_nullable
 as DateTime,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
 as Duration,
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  HomeScreenViewState type, @DateTimeConverter()  DateTime startTime, @DateTimeConverter()  DateTime endTime, @DurationConverter()  Duration duration)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  StatsSessionType type, @DateTimeConverter()  DateTime startTime, @DateTimeConverter()  DateTime endTime, @DurationConverter()  Duration duration)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _StatsSession() when $default != null:
 return $default(_that.id,_that.type,_that.startTime,_that.endTime,_that.duration);case _:
@@ -178,7 +178,7 @@ return $default(_that.id,_that.type,_that.startTime,_that.endTime,_that.duration
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  HomeScreenViewState type, @DateTimeConverter()  DateTime startTime, @DateTimeConverter()  DateTime endTime, @DurationConverter()  Duration duration)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  StatsSessionType type, @DateTimeConverter()  DateTime startTime, @DateTimeConverter()  DateTime endTime, @DurationConverter()  Duration duration)  $default,) {final _that = this;
 switch (_that) {
 case _StatsSession():
 return $default(_that.id,_that.type,_that.startTime,_that.endTime,_that.duration);}
@@ -195,7 +195,7 @@ return $default(_that.id,_that.type,_that.startTime,_that.endTime,_that.duration
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  HomeScreenViewState type, @DateTimeConverter()  DateTime startTime, @DateTimeConverter()  DateTime endTime, @DurationConverter()  Duration duration)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  StatsSessionType type, @DateTimeConverter()  DateTime startTime, @DateTimeConverter()  DateTime endTime, @DurationConverter()  Duration duration)?  $default,) {final _that = this;
 switch (_that) {
 case _StatsSession() when $default != null:
 return $default(_that.id,_that.type,_that.startTime,_that.endTime,_that.duration);case _:
@@ -214,7 +214,7 @@ class _StatsSession extends StatsSession with DiagnosticableTreeMixin {
   
 
 @override final  String id;
-@override final  HomeScreenViewState type;
+@override final  StatsSessionType type;
 @override@DateTimeConverter() final  DateTime startTime;
 @override@DateTimeConverter() final  DateTime endTime;
 @override@DurationConverter() final  Duration duration;
@@ -255,7 +255,7 @@ abstract mixin class _$StatsSessionCopyWith<$Res> implements $StatsSessionCopyWi
   factory _$StatsSessionCopyWith(_StatsSession value, $Res Function(_StatsSession) _then) = __$StatsSessionCopyWithImpl;
 @override @useResult
 $Res call({
- String id, HomeScreenViewState type,@DateTimeConverter() DateTime startTime,@DateTimeConverter() DateTime endTime,@DurationConverter() Duration duration
+ String id, StatsSessionType type,@DateTimeConverter() DateTime startTime,@DateTimeConverter() DateTime endTime,@DurationConverter() Duration duration
 });
 
 
@@ -276,7 +276,7 @@ class __$StatsSessionCopyWithImpl<$Res>
   return _then(_StatsSession(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as HomeScreenViewState,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
+as StatsSessionType,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
 as DateTime,endTime: null == endTime ? _self.endTime : endTime // ignore: cast_nullable_to_non_nullable
 as DateTime,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
 as Duration,

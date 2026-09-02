@@ -5,7 +5,7 @@ import 'package:chanting/src/public/model/chant.dart';
 import 'package:chanting/src/public/model/chant_playlist_item.dart';
 import 'package:chanting/src/public/model/chanting_settings.dart';
 import 'package:chanting/src/public/viewmodel/chanting_settings_cubit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 

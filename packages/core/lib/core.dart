@@ -1,10 +1,6 @@
 library;
 
 export 'src/core_di.dart';
-export 'src/core_routes.dart';
-
-export 'src/audio/app_audio_handler.dart';
-export 'src/audio/audio_session_configuration.dart';
 
 export 'src/data/converter/date_time_converter.dart';
 export 'src/data/converter/date_time_or_null_converter.dart';
@@ -27,7 +23,6 @@ export 'src/domain/entity/lat_lng.dart';
 export 'src/domain/entity/location.dart';
 export 'src/domain/entity/profile/profile_model.dart';
 export 'src/domain/entity/remote_settings.dart';
-export 'src/domain/enum/home_screen_view_state.dart';
 export 'src/domain/enum/processing_state.dart';
 export 'src/domain/enum/shared_preferences_key.dart';
 export 'src/domain/enum/sound.dart';
@@ -47,6 +42,7 @@ export 'src/infrastructure/platform/default_shared_preferences_service.dart';
 export 'src/infrastructure/platform/default_wakelock_service.dart';
 export 'src/infrastructure/platform/logging_analytics_service.dart';
 export 'src/infrastructure/platform/logging_crashlytics_service.dart';
+export 'src/infrastructure/platform/default_safe_image_detector.dart';
 
 export 'src/navigator/auth_navigator.dart';
 export 'src/navigator/base_navigator.dart';
@@ -56,33 +52,26 @@ export 'src/navigator/profile_navigator.dart';
 export 'src/navigator/session_navigator.dart';
 export 'src/navigator/social_navigator.dart';
 export 'src/navigator/timer_navigator.dart';
+export 'src/navigator/stats_navigator.dart';
+export 'src/navigator/donate_navigator.dart';
 
 export 'src/presentation/app_keys.dart';
 export 'src/presentation/auth_redirect_hook.dart';
 export 'src/presentation/design_spec.dart';
-export 'src/presentation/view/app.dart';
 export 'src/presentation/view/app_bar/custom_app_bar.dart';
 export 'src/presentation/view/app_bar/custom_back_button.dart';
 export 'src/presentation/view/app_bar/presence_button.dart';
 export 'src/presentation/view/app_bar/timer_settings_history_button.dart';
+export 'src/presentation/view/session_start_button.dart';
 export 'src/presentation/view/default_screen_setup.dart';
 export 'src/presentation/view/dialog/delete_profile_dialog.dart';
 export 'src/presentation/view/dialog/dialog_button.dart';
 export 'src/presentation/view/dialog/image_upload_not_safe_dialog.dart';
 export 'src/presentation/view/dialog/photo_access_denied_dialog.dart';
 export 'src/presentation/view/dialog/signout_dialog.dart';
-export 'src/presentation/view/home/home_screen.dart';
-export 'src/presentation/view/home/home_screen_appbar.dart';
-export 'src/presentation/view/home/home_screen_bottom_menu.dart';
-export 'src/presentation/view/home/session_start_button.dart';
-export 'src/presentation/view/home/session_type_toggle.dart';
-export 'src/presentation/view/home/today.dart';
-export 'src/presentation/view/home/volume_indicator.dart';
 export 'src/presentation/view/input/app_text_input.dart';
 export 'src/presentation/view/input/decoration.dart';
 export 'src/presentation/view/input/form_builder_city_selector.dart';
-export 'src/presentation/view/input/form_builder_duration_input.dart';
-export 'src/presentation/view/input/form_builder_profile_image_picker.dart';
 export 'src/presentation/view/input/int_dial_input.dart';
 export 'src/presentation/view/input/profile_image_picker/profile_image_picker_current_image.dart';
 export 'src/presentation/view/input/profile_image_picker/profile_image_picker_edit_badge.dart';
@@ -121,7 +110,6 @@ export 'src/presentation/view/util/state_provider.dart';
 export 'src/presentation/view/util/title_effect.dart';
 export 'src/presentation/view/util/toast.dart';
 export 'src/presentation/viewmodel/auth_state_cubit.dart';
-export 'src/presentation/viewmodel/home_screen_cubit.dart';
 export 'src/presentation/viewmodel/profile_state_cubit.dart';
 export 'src/presentation/viewmodel/remote_settings_cubit.dart';
 
@@ -138,6 +126,7 @@ export 'src/service/shader_service.dart';
 export 'src/service/shared_preferences_service.dart';
 export 'src/service/simple_audio_service.dart';
 export 'src/service/wakelock_service.dart';
+export 'src/service/safe_image_detector.dart';
 
 export 'src/testing/test_context_providers.dart';
 export 'src/testing/mock_go_router_provider.dart';

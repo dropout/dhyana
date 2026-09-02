@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:profile/profile.dart';
 import 'package:core/core.dart';
 
-import 'detailed_consecutive_days_view.dart';
-import 'detailed_milestones_view.dart';
-import 'detailed_profile_view.dart';
-import 'detailed_summary_view.dart';
 
 class StatsDataAreaSliver extends StatelessWidget {
   final Profile profile;

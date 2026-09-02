@@ -3,7 +3,7 @@ import 'package:faker/faker.dart';
 import 'package:profile/src/data/datasource/faker_profile_extension.dart';
 import 'package:profile/src/presentation/view/profile_menu.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/src/public/model/profile.dart';
 import 'package:provider/provider.dart';

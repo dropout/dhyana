@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that displays the current profile image in a circular shape.
 class ProfileImagePickerCurrentImage extends StatelessWidget {

@@ -22,12 +22,12 @@ class ProfileMenu extends StatelessWidget {
   }
 
   void _onStatisticsTapped(BuildContext context) {
-    ProfileStatsRoute(profileId: profile.id).push(context);
+    context.services.statsNavigator.navigateToProfileStats(profile.id);
     context.hapticsTap();
   }
 
   void _onDonateTapped(BuildContext context) {
-    DonateRoute().push(context);
+    context.services.donateNavigator.navigateToDonateScreen();
     context.hapticsTap();
   }
 

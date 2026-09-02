@@ -58,7 +58,7 @@ class DefaultAuthPublicApi implements AuthPublicApi {
     required String password,
   }) async {
     try {
-      final user = await authRepository.signUpWithEmailAndPassword(
+      final user = await authRepository.signupWithEmailAndPassword(
         email: email,
         password: password,
       );

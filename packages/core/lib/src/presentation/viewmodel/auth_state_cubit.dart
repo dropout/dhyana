@@ -26,6 +26,17 @@ abstract class AuthStateCubit extends Cubit<AuthState> {
   Future<void> signinWithApple({
     void Function(String userId, bool isAuthenticated)? onComplete,
   });
+  Future<void> signupWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+
+  Future<void> signinWithEmailAndPassword({
+    required String email,
+    required String password,
+    void Function(String userId)? onComplete,
+  });
+
   Future<void> signOut();
   void dismissSigninError();
 }

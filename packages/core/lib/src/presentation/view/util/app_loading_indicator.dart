@@ -1,6 +1,6 @@
 import 'package:core/src/util/remap_range.dart';
 import 'package:core/src/presentation/design_spec.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AppLoadingIndicator extends StatefulWidget {
 

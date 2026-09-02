@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A small circular edit indicator that appears on the profile image picker.
 class ProfileImagePickerEditBadge extends StatelessWidget {

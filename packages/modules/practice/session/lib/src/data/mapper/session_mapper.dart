@@ -2,7 +2,7 @@ import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/public/model/session.dart';
 
 
-extension SessionMapper  on SessionEntity {
+extension SessionMapper on SessionEntity {
   Session toApi() {
     return Session(
       id: id,

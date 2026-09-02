@@ -1,7 +1,7 @@
 import 'package:stats/src/stats_module.dart';
 import 'package:stats/src/presentation/view/stats/bar_chart_page/weeks_bar_chart_page.dart';
 import 'package:stats/src/presentation/viewmodel/stats_bucket_cubit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 

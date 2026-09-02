@@ -16,8 +16,8 @@ import 'package:session/src/presentation/viewmodel/session_completed/session_com
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:dhyana/modules/social/domain/usecase/query_presence_use_case.dart';
 import 'package:dhyana/modules/social/public/view/presence_area.dart';
-import 'package:session/src/presentation/view/completed/milestone_progress_view.dart';
-import 'package:session/src/presentation/view/completed/progress_summary.dart';
+import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
+import 'package:profile/src/public/view/stats/progress_summary.dart';
 import 'package:session/src/presentation/view/completed/session_result.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
 

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:timer/src/public/view/timer_settings/input_gap.dart';
 import 'package:timer/src/public/view/timer_settings/input_view.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 typedef DurationFormatter = String Function(Duration, bool);
 

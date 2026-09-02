@@ -55,7 +55,7 @@ class DefaultAuthRepository with LoggerMixin implements AuthRepository {
   }
 
   @override
-  Future<UserEntity> signUpWithEmailAndPassword({
+  Future<UserEntity> signupWithEmailAndPassword({
     required String email,
     required String password,
   }) async {

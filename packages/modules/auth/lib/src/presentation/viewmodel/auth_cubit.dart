@@ -4,10 +4,9 @@ import 'package:auth/src/data/datasource/auth/exception.dart';
 import 'package:auth/src/public/api/auth_public_api.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthCubit extends Cubit<AuthState> with LoggerMixin implements AuthStateCubit {
-  // final GoRouter router;
+
   final ProfileNavigator profileNavigator;
   final AuthPublicApi authApi;
   final AnalyticsService analyticsService;
@@ -105,7 +104,8 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin implements AuthStateCu
     }
   }
 
-  Future<void> signInWithEmailAndPassword({
+  @override
+  Future<void> signinWithEmailAndPassword({
     required String email,
     required String password,
     void Function(String userId)? onComplete,
@@ -125,8 +125,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin implements AuthStateCu
 
       // Email/password sign-in is currently only used for integration tests,
       // so we don't need to handle first-time sign-in redirects here.
-      final targetRoute = ProfileRoute(profileId: userId);
-      router.replace(targetRoute.location, extra: userId);
+      profileNavigator.navigateToProfile(userId, type: .replace);
     } on SignInCancelled {
       logger.t('Sign in cancelled');
       emit(const AuthState.signedOut());
@@ -141,6 +140,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin implements AuthStateCu
     }
   }
 
+  @override
   Future<void> signupWithEmailAndPassword({
     required String email,
     required String password,
@@ -164,6 +164,7 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin implements AuthStateCu
     }
   }
 
+  @override
   Future<void> signOut({Function()? onSignedOut}) async {
     try {
       logger.t('Signing out...');
@@ -208,11 +209,10 @@ class AuthCubit extends Cubit<AuthState> with LoggerMixin implements AuthStateCu
 
   void _handleSuccessfulSigninRedirect(String userId, bool isFirstSignin) {
     if (isFirstSignin) {
-      final targetRoute = ProfileWizardRoute(profileId: userId);
-      router.replace(targetRoute.location, extra: userId);
+      profileNavigator.navigateToProfileWizard(userId, type: .replace);
     } else {
-      final targetRoute = ProfileRoute(profileId: userId);
-      router.replace(targetRoute.location, extra: userId);
+      profileNavigator.navigateToProfile(userId, type: .replace);
+
     }
   }
 

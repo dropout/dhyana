@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A helper function to show a dialog with custom transition and styling,
 /// specific to the app's design guidelines.

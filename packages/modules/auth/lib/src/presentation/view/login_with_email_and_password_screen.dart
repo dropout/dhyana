@@ -1,11 +1,10 @@
-import 'package:core/core.dart';
-import 'package:dhyana/modules/profile/profile_routes.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:dhyana/l10n/app_localizations.dart';
 
+import 'package:core/core.dart';
 import 'package:auth/src/presentation/view/login_with_email_and_password/login_with_email_and_password_form.dart';
 
 class LoginWithEmailAndPasswordScreen extends StatefulWidget {
@@ -31,11 +30,11 @@ class _LoginWithEmailAndPasswordScreenState
       Map<String, dynamic>? values = formState.value;
       final email = values['email'] as String;
       final password = values['password'] as String;
-      context.read<AuthCubit>().signInWithEmailAndPassword(
+      context.read<AuthStateCubit>().signinWithEmailAndPassword(
         email: email,
         password: password,
         onComplete: (userId) {
-          ProfileRoute(profileId: userId).go(context);
+          context.services.profileNavigator.navigateToProfile(userId, type: .go);          
         },
       );
     }
@@ -47,7 +46,7 @@ class _LoginWithEmailAndPasswordScreenState
       Map<String, dynamic>? values = formState.value;
       final email = values['email'] as String;
       final password = values['password'] as String;    
-      context.read<AuthCubit>().signupWithEmailAndPassword(
+      context.read<AuthStateCubit>().signupWithEmailAndPassword(
         email: email,
         password: password,
       );

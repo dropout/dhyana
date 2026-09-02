@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:core/core.dart';
+import 'package:profile/src/presentation/view/form_builder_profile_image_picker.dart';
 import 'package:profile/src/public/model/profile.dart';
 
 

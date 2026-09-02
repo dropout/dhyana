@@ -1,5 +1,8 @@
+import 'package:core/src/service/safe_image_detector.dart';
+import 'package:core/src/service/shared_preferences_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'package:core/src/domain/repository/storage_repository.dart';
 import 'package:core/src/presentation/viewmodel/auth_state_cubit.dart';
@@ -32,4 +35,13 @@ class MockAnalyticsService extends Mock implements AnalyticsService {}
 class MockAuthStateCubit extends Mock implements AuthStateCubit {}
 class MockProfileStateCubit extends Mock implements ProfileStateCubit {}
 
+class MockSafeImageDetectorFactory extends Mock implements SafeImageDetectorFactory {}
+class MockSafeImageDetector extends Mock implements SafeImageDetector {}
 
+class MockSharedPreferencesService 
+  extends Mock 
+  implements SharedPreferencesService {}
+
+class MockHydratedStorage 
+  extends Mock 
+  implements HydratedStorage {}

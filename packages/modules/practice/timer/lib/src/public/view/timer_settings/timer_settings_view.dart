@@ -3,7 +3,7 @@ import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/timer_routes.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timer/src/public/view/timer_settings/warmup_input.dart';
 import 'package:timer/src/public/view/timer_settings/sound_input.dart';

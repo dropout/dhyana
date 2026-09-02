@@ -1,6 +1,6 @@
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/gap.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 
 ///  CustomAppBar is a custom AppBar that allows for a custom leading widget,

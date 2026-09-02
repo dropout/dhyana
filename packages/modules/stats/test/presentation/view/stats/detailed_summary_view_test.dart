@@ -4,8 +4,8 @@ import 'package:faker/faker.dart';
 
 import 'package:profile/profile.dart';
 import 'package:stats/src/data/datasource/faker_stats_extension.dart';
-import 'package:stats/src/presentation/view/stats/detailed_summary_view.dart';
-import 'package:stats/src/presentation/view/stats/label_value_detail.dart';
+import 'package:profile/src/public/view/stats/detailed_summary_view.dart';
+import 'package:profile/src/public/view/stats/label_value_detail.dart';
 
 
 void main() {

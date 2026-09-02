@@ -31,12 +31,12 @@ void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProfileStatsResultEntity&&const DeepCollectionEquality().equals(other.oldProfile, oldProfile)&&const DeepCollectionEquality().equals(other.updatedProfile, updatedProfile)&&(identical(other.session, session) || other.session == session));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProfileStatsResultEntity&&(identical(other.oldProfile, oldProfile) || other.oldProfile == oldProfile)&&(identical(other.updatedProfile, updatedProfile) || other.updatedProfile == updatedProfile)&&(identical(other.session, session) || other.session == session));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(oldProfile),const DeepCollectionEquality().hash(updatedProfile),session);
+int get hashCode => Object.hash(runtimeType,oldProfile,updatedProfile,session);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
@@ -55,7 +55,7 @@ $Res call({
 });
 
 
-$SessionEntityCopyWith<$Res> get session;
+$ProfileCopyWith<$Res> get oldProfile;$ProfileCopyWith<$Res> get updatedProfile;$SessionEntityCopyWith<$Res> get session;
 
 }
 /// @nodoc
@@ -68,15 +68,33 @@ class _$UpdateProfileStatsResultEntityCopyWithImpl<$Res>
 
 /// Create a copy of UpdateProfileStatsResultEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? oldProfile = freezed,Object? updatedProfile = freezed,Object? session = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? oldProfile = null,Object? updatedProfile = null,Object? session = null,}) {
   return _then(_self.copyWith(
-oldProfile: freezed == oldProfile ? _self.oldProfile : oldProfile // ignore: cast_nullable_to_non_nullable
-as Profile,updatedProfile: freezed == updatedProfile ? _self.updatedProfile : updatedProfile // ignore: cast_nullable_to_non_nullable
+oldProfile: null == oldProfile ? _self.oldProfile : oldProfile // ignore: cast_nullable_to_non_nullable
+as Profile,updatedProfile: null == updatedProfile ? _self.updatedProfile : updatedProfile // ignore: cast_nullable_to_non_nullable
 as Profile,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as SessionEntity,
   ));
 }
 /// Create a copy of UpdateProfileStatsResultEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileCopyWith<$Res> get oldProfile {
+  
+  return $ProfileCopyWith<$Res>(_self.oldProfile, (value) {
+    return _then(_self.copyWith(oldProfile: value));
+  });
+}/// Create a copy of UpdateProfileStatsResultEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileCopyWith<$Res> get updatedProfile {
+  
+  return $ProfileCopyWith<$Res>(_self.updatedProfile, (value) {
+    return _then(_self.copyWith(updatedProfile: value));
+  });
+}/// Create a copy of UpdateProfileStatsResultEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -240,12 +258,12 @@ void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateProfileStatsResultEntity&&const DeepCollectionEquality().equals(other.oldProfile, oldProfile)&&const DeepCollectionEquality().equals(other.updatedProfile, updatedProfile)&&(identical(other.session, session) || other.session == session));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateProfileStatsResultEntity&&(identical(other.oldProfile, oldProfile) || other.oldProfile == oldProfile)&&(identical(other.updatedProfile, updatedProfile) || other.updatedProfile == updatedProfile)&&(identical(other.session, session) || other.session == session));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(oldProfile),const DeepCollectionEquality().hash(updatedProfile),session);
+int get hashCode => Object.hash(runtimeType,oldProfile,updatedProfile,session);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
@@ -264,7 +282,7 @@ $Res call({
 });
 
 
-@override $SessionEntityCopyWith<$Res> get session;
+@override $ProfileCopyWith<$Res> get oldProfile;@override $ProfileCopyWith<$Res> get updatedProfile;@override $SessionEntityCopyWith<$Res> get session;
 
 }
 /// @nodoc
@@ -277,16 +295,34 @@ class __$UpdateProfileStatsResultEntityCopyWithImpl<$Res>
 
 /// Create a copy of UpdateProfileStatsResultEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? oldProfile = freezed,Object? updatedProfile = freezed,Object? session = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? oldProfile = null,Object? updatedProfile = null,Object? session = null,}) {
   return _then(_UpdateProfileStatsResultEntity(
-oldProfile: freezed == oldProfile ? _self.oldProfile : oldProfile // ignore: cast_nullable_to_non_nullable
-as Profile,updatedProfile: freezed == updatedProfile ? _self.updatedProfile : updatedProfile // ignore: cast_nullable_to_non_nullable
+oldProfile: null == oldProfile ? _self.oldProfile : oldProfile // ignore: cast_nullable_to_non_nullable
+as Profile,updatedProfile: null == updatedProfile ? _self.updatedProfile : updatedProfile // ignore: cast_nullable_to_non_nullable
 as Profile,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as SessionEntity,
   ));
 }
 
 /// Create a copy of UpdateProfileStatsResultEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileCopyWith<$Res> get oldProfile {
+  
+  return $ProfileCopyWith<$Res>(_self.oldProfile, (value) {
+    return _then(_self.copyWith(oldProfile: value));
+  });
+}/// Create a copy of UpdateProfileStatsResultEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileCopyWith<$Res> get updatedProfile {
+  
+  return $ProfileCopyWith<$Res>(_self.updatedProfile, (value) {
+    return _then(_self.copyWith(updatedProfile: value));
+  });
+}/// Create a copy of UpdateProfileStatsResultEntity
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

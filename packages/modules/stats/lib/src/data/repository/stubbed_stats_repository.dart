@@ -6,7 +6,7 @@ import 'package:stats/src/domain/entity/stats_bucket_entity.dart';
 import 'package:stats/src/domain/enum/stats_entity_granularity.dart';
 import 'package:stats/src/domain/repository/stats_repository.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StubbedStatsRepository implements StatsRepository {
 

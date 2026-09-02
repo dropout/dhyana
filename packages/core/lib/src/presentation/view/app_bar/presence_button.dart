@@ -1,7 +1,6 @@
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:dhyana/modules/social/social_routes.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class PresenceButton extends StatelessWidget {
 
@@ -10,7 +9,7 @@ class PresenceButton extends StatelessWidget {
   });
 
   void _onButtonTap(BuildContext context) {
-    const PresenceRoute().push(context);
+    context.services.socialNavigator.navigateToPresence();
     context.hapticsTap();
   }
 

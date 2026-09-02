@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:core/core.dart';
 import 'package:donate/src/presentation/widget/amount_selector.dart';

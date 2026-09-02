@@ -10,7 +10,11 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class DeleteProfileScreen extends StatelessWidget {
-  const DeleteProfileScreen({super.key});
+  final String profileId;
+  const DeleteProfileScreen({
+    required this.profileId,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +181,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
                 child: AppButton(
                   onTap: () {
                     context.read<AuthStateCubit>().signOut();
-                    HomeRoute().go(context);
+                    context.services.homeNavigator.navigateToHome(type: .go);  
                   },
                   text: AppLocalizations.of(
                     context,

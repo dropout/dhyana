@@ -1,15 +1,22 @@
+import 'package:material_ui/material_ui.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:dhyana/l10n/app_localizations.dart';
+
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:dhyana/modules/profile/profile_routes.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'dialog_button.dart';
 
+
 class DeleteProfileDialog extends StatelessWidget {
 
-  const DeleteProfileDialog({super.key});
+  final String profileId;
+
+  const DeleteProfileDialog({
+    required this.profileId, 
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class DeleteProfileDialog extends StatelessWidget {
             context.pop(); // close are you sure dialog
             context.hapticsTap();
             context.logEvent(name: 'profile_delete_pressed');
-            const ProfileDeleteRoute().go(context);
+            context.services.profileNavigator.navigateToProfileDelete(profileId, type: .go);
           },
         )
       ],

@@ -8,7 +8,7 @@ part of 'session.dart';
 
 _Session _$SessionFromJson(Map<String, dynamic> json) => _Session(
   id: json['id'] as String,
-  type: $enumDecode(_$HomeScreenViewStateEnumMap, json['type']),
+  type: $enumDecode(_$SessionTypeEnumMap, json['type']),
   startTime: const DateTimeConverter().fromJson(
     (json['startTime'] as num).toInt(),
   ),
@@ -20,13 +20,13 @@ _Session _$SessionFromJson(Map<String, dynamic> json) => _Session(
 
 Map<String, dynamic> _$SessionToJson(_Session instance) => <String, dynamic>{
   'id': instance.id,
-  'type': _$HomeScreenViewStateEnumMap[instance.type]!,
+  'type': _$SessionTypeEnumMap[instance.type]!,
   'startTime': const DateTimeConverter().toJson(instance.startTime),
   'endTime': const DateTimeConverter().toJson(instance.endTime),
   'duration': const DurationConverter().toJson(instance.duration),
 };
 
-const _$HomeScreenViewStateEnumMap = {
-  HomeScreenViewState.sitting: 'sitting',
-  HomeScreenViewState.chanting: 'chanting',
+const _$SessionTypeEnumMap = {
+  SessionType.sitting: 'sitting',
+  SessionType.chanting: 'chanting',
 };

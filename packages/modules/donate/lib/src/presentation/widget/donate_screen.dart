@@ -2,7 +2,7 @@ import 'package:donate/src/presentation/widget/amount_selector.dart';
 import 'package:donate/src/presentation/widget/custom_amount_sheet.dart';
 import 'package:donate/src/presentation/widget/donate_button.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 class DonateScreen extends StatefulWidget {

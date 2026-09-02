@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:chanting/src/public/model/chant_playlist_item.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ChantCard extends StatelessWidget {
   final int index;

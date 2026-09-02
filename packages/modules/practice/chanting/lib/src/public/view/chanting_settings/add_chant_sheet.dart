@@ -1,6 +1,6 @@
 import 'package:chanting/src/chanting_module.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 class AddChantSheet extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/public/view/profile_image.dart';
 
@@ -14,7 +15,7 @@ class ProfileButton extends StatelessWidget {
   });
   
   void _signedOutTap(BuildContext context) {
-    context.services.authNavigator.navigateToLogin(type: .go  );
+    context.services.authNavigator.navigateToLogin(type: .go);
     context.hapticsTap();
   }
 
@@ -131,7 +132,7 @@ class ProfileButton extends StatelessWidget {
   Widget buildProfileError(BuildContext context, String profileId) {
     return GestureDetector(
       onTap: () {
-        context.services.profileNavigator.navigateToProfile(profileId, navigationType: .go);
+        context.services.profileNavigator.navigateToProfile(profileId, type: .go);
         context.hapticsTap();
       },
       child: const Icon(

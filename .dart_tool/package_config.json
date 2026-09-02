@@ -1568,6 +1568,12 @@
       "languageVersion": "3.13"
     },
     {
+      "name": "home",
+      "rootUri": "../packages/modules/home",
+      "packageUri": "lib/",
+      "languageVersion": "3.13"
+    },
+    {
       "name": "timer",
       "rootUri": "../packages/modules/practice/timer",
       "packageUri": "lib/",

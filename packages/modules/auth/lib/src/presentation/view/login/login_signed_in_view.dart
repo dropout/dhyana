@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
-import 'package:dhyana/modules/profile/profile_routes.dart';
 
 
 /// A widget that displays an empty screen with a button at the bottom.
@@ -44,7 +43,7 @@ class _LoginSignedInViewState extends State<LoginSignedInView> {
   }
 
   void _onButtonTap(BuildContext context, String uid) {
-    ProfileRoute(profileId: uid).replace(context);
+    context.services.profileNavigator.navigateToProfile(uid, type: .replace);
   }
 
   void _showBottomButton() {

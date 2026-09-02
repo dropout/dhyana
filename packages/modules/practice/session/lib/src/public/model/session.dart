@@ -5,6 +5,11 @@ import 'package:flutter/foundation.dart';
 part 'session.freezed.dart';
 part 'session.g.dart';
 
+enum SessionType {
+  sitting,
+  chanting,
+}
+
 @freezed
 sealed class Session with _$Session implements Dto {
 
@@ -12,7 +17,7 @@ sealed class Session with _$Session implements Dto {
 
   const factory Session({
     required String id,
-    required HomeScreenViewState type,
+    required SessionType type,
     @DateTimeConverter() required DateTime startTime,
     @DateTimeConverter() required DateTime endTime,
     @DurationConverter() required Duration duration,

@@ -1,6 +1,6 @@
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/gap.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 

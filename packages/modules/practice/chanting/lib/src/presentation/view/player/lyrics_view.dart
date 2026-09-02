@@ -2,7 +2,7 @@ import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:chanting/src/presentation/view/player/lyric_line.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Displays the lyrics for the currently playing chant, with auto-scrolling

@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:profile/profile.dart';
 import 'package:stats/src/data/datasource/faker_stats_extension.dart';
-import 'package:stats/src/presentation/view/stats/summary_view.dart';
+import 'package:profile/src/public/view/stats/summary_view.dart';
 
 
 

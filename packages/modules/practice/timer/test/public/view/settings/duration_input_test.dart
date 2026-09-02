@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:timer/src/public/view/timer_settings/duration_input.dart';
 import 'package:timer/src/public/view/timer_settings/input_button.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';

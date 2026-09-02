@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:timer/src/public/view/timer_settings/duration_input_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';

@@ -77,6 +77,7 @@ dependencies:
   # Internal packages
   firebase_provider: ^1.0.0
   core: ^0.0.1
+  home: ^0.0.1
   auth: ^0.0.1
   profile: ^0.0.1
   timer: ^0.0.1

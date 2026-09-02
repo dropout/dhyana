@@ -1,6 +1,6 @@
 import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 enum WordState {
   active,

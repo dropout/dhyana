@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:session/src/public/model/session.dart';
 import 'package:session/src/presentation/view/session_completed_screen.dart';
 import 'package:session/src/presentation/view/session_history_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 part  'session_routes.g.dart';

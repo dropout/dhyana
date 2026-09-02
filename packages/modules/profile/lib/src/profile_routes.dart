@@ -62,10 +62,11 @@ class ProfileEditRoute extends GoRouteData
 )
 class ProfileDeleteRoute extends GoRouteData
     with AuthRedirectHook, $ProfileDeleteRoute {
-  const ProfileDeleteRoute();
+  final String profileId;
+  const ProfileDeleteRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const DeleteProfileScreen();
+      DeleteProfileScreen(profileId: profileId);
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
       authRedirectHook(context, state);

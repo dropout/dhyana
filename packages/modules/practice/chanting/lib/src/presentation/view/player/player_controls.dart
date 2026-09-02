@@ -1,7 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Displays transport controls and a non-seekable progress bar for audio playback.
 /// Shows the current position and total duration of the chant, and allows

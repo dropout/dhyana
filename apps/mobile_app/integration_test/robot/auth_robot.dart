@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -83,6 +82,6 @@ class AuthRobot {
     await tester.tap(signoutDialogButtonFinder);
     await tester.pumpAndSettle(Duration(seconds: 1));
     
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byKey(Key('home_screen_scaffold')), findsOneWidget);
   }
 }

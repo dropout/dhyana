@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:social/src/public/view/presence_list_item.dart';
 import 'package:core/core.dart';
 import 'package:social/src/public/model/presence.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class PresenceTable extends StatelessWidget {
 

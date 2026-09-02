@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:core/src/presentation/view/util/app_error_display.dart';
 import 'package:core/src/presentation/view/util/app_loading_display.dart';

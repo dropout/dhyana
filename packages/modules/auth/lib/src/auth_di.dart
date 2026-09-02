@@ -60,13 +60,14 @@ extension AuthModuleDependencyInjection on GetIt {
     );
 
     // View models
-    registerFactory<AuthStateCubit>(
-      () => AuthCubit(
-      
-        analyticsService: get<AnalyticsService>(),
+    // Contract from core module
+    registerFactoryParam<AuthCubit, AuthState, void>(
+      (initialAuthState, _) => AuthCubit(
+        initialAuthState: initialAuthState,
+        profileNavigator: get<ProfileNavigator>(),
         authApi: get<AuthPublicApi>(),
+        analyticsService: get<AnalyticsService>(),
         crashlyticsService: get<CrashlyticsService>(),
-        
       ),
     );
 

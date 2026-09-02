@@ -3,7 +3,7 @@ import 'package:social/src/public/viewmodel/presence_cubit.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/core.dart';
 import 'package:social/src/public/model/presence.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'presence_list_item.dart';

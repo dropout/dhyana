@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:core/core.dart';
-import 'package:session/src/presentation/view/completed/progress_summary.dart';
-import 'package:session/src/presentation/view/completed/progress_summary_item.dart';
+import 'package:profile/src/public/view/stats/progress_summary.dart';
+import 'package:profile/src/public/view/stats/progress_summary_item.dart';
 
 
 

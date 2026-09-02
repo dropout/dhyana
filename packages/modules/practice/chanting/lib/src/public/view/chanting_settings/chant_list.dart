@@ -2,7 +2,7 @@ import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
 import 'package:chanting/src/public/view/chanting_settings/add_chant_button.dart';
 import 'package:core/core.dart';
 import 'package:chanting/src/public/model/chant_playlist_item.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ChantList extends StatelessWidget {

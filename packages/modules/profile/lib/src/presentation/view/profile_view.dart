@@ -1,14 +1,15 @@
-import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
 
+import 'package:core/core.dart';
 import 'package:profile/src/presentation/view/profile_footer.dart';
 import 'package:profile/src/presentation/view/profile_menu.dart';
-import 'package:dhyana/modules/practice/session/presentation/view/completed/milestone_progress_view.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/view/profile_image.dart';
+import 'package:profile/src/public/view/stats/consecutive_days_view.dart';
+import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
+import 'package:profile/src/public/view/stats/milestones_view.dart';
+import 'package:profile/src/public/view/stats/summary_view.dart';
 
-import '../../../stats/presentation/view/stats/consecutive_days_view.dart';
-import '../../../stats/presentation/view/stats/milestones_view.dart';
-import '../../../stats/presentation/view/stats/summary_view.dart';
 
 class ProfileView extends StatelessWidget {
   final Profile profile;

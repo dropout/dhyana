@@ -1,5 +1,5 @@
 import 'package:core/src/presentation/view/util/intersperse.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SeparatorGem extends StatelessWidget {
 

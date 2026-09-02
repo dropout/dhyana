@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,10 +16,10 @@ import 'package:provider/provider.dart';
 import 'package:nock/nock.dart';
 
 import 'package:stats/src/presentation/view/profile_stats_view.dart';
-import 'package:stats/src/presentation/view/stats/detailed_consecutive_days_view.dart';
-import 'package:stats/src/presentation/view/stats/detailed_milestones_view.dart';
-import 'package:stats/src/presentation/view/stats/detailed_profile_view.dart';
-import 'package:stats/src/presentation/view/stats/detailed_summary_view.dart';
+import 'package:profile/src/public/view/stats/detailed_consecutive_days_view.dart';
+import 'package:profile/src/public/view/stats/detailed_milestones_view.dart';
+import 'package:profile/src/public/view/stats/detailed_profile_view.dart';
+import 'package:profile/src/public/view/stats/detailed_summary_view.dart';
 import 'package:stats/src/presentation/view/stats/tab/day_tab.dart';
 import 'package:stats/src/presentation/view/stats/tab/month_tab.dart';
 import 'package:stats/src/presentation/view/stats/tab/week_tab.dart';

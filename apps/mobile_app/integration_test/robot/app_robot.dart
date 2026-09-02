@@ -1,5 +1,5 @@
 import 'package:dhyana/app.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 
 import 'package:dhyana/bootstrap/init_result.dart';

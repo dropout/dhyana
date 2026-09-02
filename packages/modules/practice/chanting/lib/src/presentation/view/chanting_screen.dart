@@ -3,7 +3,7 @@ import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:chanting/src/presentation/view/player/chanting_player_view.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get_it/get_it.dart';
 
 class ChantingScreen extends StatelessWidget {

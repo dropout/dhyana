@@ -3,7 +3,7 @@ import 'package:chanting/src/domain/entity/lyrics_line_entity.dart';
 import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 import 'package:chanting/src/presentation/view/player/lyric_word.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Renders a single [LyricsLineEntity] with per-word highlight animation.
 /// The [position] is used to determine the state of each word (inactive, pending, singing, sung).

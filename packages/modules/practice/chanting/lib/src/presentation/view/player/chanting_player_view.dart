@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_view.dart';
 import 'package:chanting/src/presentation/view/player/player_controls.dart';
 import 'package:chanting/src/presentation/view/player/playlist_sheet.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Main view for the chanting player,
