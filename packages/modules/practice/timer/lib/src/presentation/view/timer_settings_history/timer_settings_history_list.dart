@@ -1,6 +1,6 @@
 import 'package:timer/src/data/mapper/timer_settings_mapper.dart';
 import 'package:timer/src/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:timer/src/presentation/view/timer_settings_history/timer_settings_history_list_item.dart';
@@ -35,7 +35,7 @@ class TimerSettingsHistoryList extends StatelessWidget {
       Future.delayed(Durations.medium1, () {
         if (context.mounted) {
           context.showSuccessfulToast(
-            AppLocalizations.of(context).timerSettingsHistoryApplied,
+            TimerLocalizations.of(context).timerSettingsHistoryApplied,
           );
         }
       });

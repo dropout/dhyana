@@ -1,4 +1,4 @@
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/timer_routes.dart';
@@ -105,14 +105,14 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           WarmupInput(
-            label: AppLocalizations.of(context).inputWarmupLabel,
+            label: TimerLocalizations.of(context).inputWarmupLabel,
             value: widget.timerSettings.warmup,
             overlayService: context.services.overlayService,
             onChange: (Duration duration) => _onWarmupChange(context, duration),
           ),
           buildInputGap(context),
           SoundInput(
-            label: AppLocalizations.of(context).inputStartingSoundLabel,
+            label: TimerLocalizations.of(context).inputStartingSoundLabel,
             overlayService: context.services.overlayService,
             value: widget.timerSettings.startingSound,
             onChange: (Sound startingSound) =>
@@ -120,7 +120,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           ),
           buildInputGap(context),
           DurationInput(
-            label: AppLocalizations.of(context).inputDurationLabel,
+            label: TimerLocalizations.of(context).inputDurationLabel,
             value: widget.timerSettings.duration,
             preparationTime: widget.timerSettings.warmup,
             overlayService: context.services.overlayService,
@@ -129,7 +129,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           ),
           buildInputGap(context),
           IntervalInput(
-            label: AppLocalizations.of(context).inputIntervalCountLabel,
+            label: TimerLocalizations.of(context).inputIntervalCountLabel,
             value: widget.timerSettings.intervalCount,
             overlayService: context.services.overlayService,
             onChange: (int intervalCount) =>
@@ -137,7 +137,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           ),
           buildInputGap(context),
           SoundInput(
-            label: AppLocalizations.of(context).inputEndingSoundLabel,
+            label: TimerLocalizations.of(context).inputEndingSoundLabel,
             overlayService: context.services.overlayService,
             value: widget.timerSettings.endingSound,
             onChange: (Sound endingSound) =>

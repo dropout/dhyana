@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 
 import 'sound_input_view.dart';
 import 'input_button.dart';
@@ -59,7 +59,7 @@ class SoundInput extends StatelessWidget {
       child: Text(
         getLocalizedSoundName(
           value,
-          AppLocalizations.of(context)
+          TimerLocalizations.of(context)
         ),
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: AppColors.buttonForeground,

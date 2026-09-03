@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/timer_localizations.dart';
+
 export 'src/timer_di.dart';
 export 'src/timer_routes.dart';
 

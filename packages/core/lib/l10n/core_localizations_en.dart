@@ -10,6 +10,9 @@ class CoreLocalizationsEn extends CoreLocalizations {
   CoreLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get okay => 'Okay';
+
+  @override
   String get close => 'Close';
 
   @override

@@ -1,3 +1,4 @@
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -51,7 +52,7 @@ class SoundInputCard extends StatelessWidget {
                 child: SizedBox.expand(
                   child: Center(
                     child: Text(
-                      getLocalizedSoundName(sound, context.l10n),
+                      getLocalizedSoundName(sound, TimerLocalizations.of(context)),
                       textAlign: TextAlign.center,
                       style: context.theme.textTheme.labelMedium!.copyWith(
                         color: Colors.white,

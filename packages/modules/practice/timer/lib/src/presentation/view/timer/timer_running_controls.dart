@@ -6,7 +6,7 @@ import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 
 
 /// Controls displayed when the timer is running or paused
@@ -157,7 +157,7 @@ class TimerRunningControlsState extends State<TimerRunningControls>
     final List<Widget> items = [
       _buildMenuItem(
         context,
-        AppLocalizations.of(
+        TimerLocalizations.of(
           context,
         ).timerDiscardSessionButtonText.toUpperCase(),
         Colors.white,
@@ -168,7 +168,7 @@ class TimerRunningControlsState extends State<TimerRunningControls>
       if (shouldShowFinishButton)
         _buildMenuItem(
           context,
-          AppLocalizations.of(
+          TimerLocalizations.of(
             context,
           ).timerFinishSessionButtonText.toUpperCase(),
           Colors.black,

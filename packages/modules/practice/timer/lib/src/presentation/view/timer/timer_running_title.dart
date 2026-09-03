@@ -1,6 +1,6 @@
 import 'package:timer/src/domain/entity/timer_state_entity.dart';
 import 'package:timer/src/domain/enum/timer_stage.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -51,7 +51,7 @@ class _TimerRunningTitleState extends State<TimerRunningTitle> {
         return null;
       case TimerStage.warmup:
         return Text(
-          AppLocalizations.of(context).inputWarmupLabel,
+          TimerLocalizations.of(context).inputWarmupLabel,
           style: style,
           key: const ValueKey<String>('timer_running_title_warmup_title_text'),
         );

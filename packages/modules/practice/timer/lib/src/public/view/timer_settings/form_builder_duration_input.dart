@@ -1,3 +1,4 @@
+import 'package:timer/l10n/timer_localizations.dart';
 
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
@@ -65,7 +66,7 @@ class FormBuilderDurationInput extends FormBuilderField<Duration> {
                   children: [
                     TextSpan(
                       text: field.value != null
-                        ? '${field.value!.inSeconds}${field.context.l10n.secondsAbbr}'
+                        ? '${field.value!.inSeconds}${TimerLocalizations.of(field.context).secondsAbbr}'
                         : 'N/A',                      
                     ),
                     WidgetSpan(

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -106,7 +106,7 @@ class _TimerStartButtonState extends State<TimerStartButton> with SingleTickerPr
             ),
             child: StartButtonText(
               buttonText: TextSpan(
-                text: AppLocalizations.of(context).startTimerButtonText.toUpperCase(),
+                text: TimerLocalizations.of(context).startTimerButtonText.toUpperCase(),
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,

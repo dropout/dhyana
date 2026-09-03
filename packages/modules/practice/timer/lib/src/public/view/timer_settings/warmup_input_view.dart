@@ -1,3 +1,4 @@
+import 'package:timer/l10n/timer_localizations.dart';
 import 'dart:async';
 
 import 'package:timer/src/public/view/timer_settings/input_view.dart';
@@ -247,7 +248,7 @@ class _WarmupTimeOptionItem extends StatelessWidget {
                               ),
                         ),
                         Text(
-                          context.l10n.minutesPlural(minutes),
+                          TimerLocalizations.of(context).minutesPlural(minutes),
                           style: context.theme.textTheme.bodyLarge?.copyWith(
                             color: textColor,
                           ),

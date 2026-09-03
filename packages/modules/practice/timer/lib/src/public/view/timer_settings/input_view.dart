@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/core.dart';
 
 
@@ -69,7 +68,7 @@ class InputView extends StatelessWidget {
   Widget buildActionButtons(BuildContext context) {
     return AppButton(
       key: const Key('input_view_save_button'),
-      text: AppLocalizations.of(context).okay.toUpperCase(),
+      text: context.coreL10n.okay.toUpperCase(),
       onTap: () => onSave?.call(),
     );
   }

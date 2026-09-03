@@ -98,6 +98,12 @@ abstract class CoreLocalizations {
     Locale('hu'),
   ];
 
+  /// No description provided for @okay.
+  ///
+  /// In en, this message translates to:
+  /// **'Okay'**
+  String get okay;
+
   /// No description provided for @close.
   ///
   /// In en, this message translates to:

@@ -1,3 +1,4 @@
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/public/view/timer_settings/input_view.dart';
 import 'package:timer/src/public/view/timer_settings/input_button.dart';
 import 'package:core/core.dart';
@@ -68,8 +69,8 @@ class IntervalInput extends StatelessWidget {
       shape: const StadiumBorder(side: BorderSide.none),
       child: Text(
         value == 0
-            ? context.l10n.noInterval
-            : context.l10n.intervalPluralWithNumber(value),
+            ? TimerLocalizations.of(context).noInterval
+            : TimerLocalizations.of(context).intervalPluralWithNumber(value),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: AppColors.buttonForeground,
@@ -199,8 +200,8 @@ class CustomToggleButton extends StatelessWidget {
                   height: gridItemHeight,
                   child: CustomToggleButtonItem(
                     intervalCount: 0,
-                    title: context.l10n.noInterval,
-                    text: context.l10n.intervalNoIntervalsText,
+                    title: TimerLocalizations.of(context).noInterval,
+                    text: TimerLocalizations.of(context).intervalNoIntervalsText,
                     isSelected: selectedValue == 0,
                     onTap: () => onChanged(0),
                   ),
@@ -210,8 +211,8 @@ class CustomToggleButton extends StatelessWidget {
                   height: gridItemHeight,
                   child: CustomToggleButtonItem(
                     intervalCount: 1,
-                    title: context.l10n.intervalPluralWithNumber(1),
-                    text: context.l10n.intervalOneIntervalText,
+                    title: TimerLocalizations.of(context).intervalPluralWithNumber(1),
+                    text: TimerLocalizations.of(context).intervalOneIntervalText,
                     isSelected: selectedValue == 1,
                     onTap: () => onChanged(1),
                   ),
@@ -227,8 +228,8 @@ class CustomToggleButton extends StatelessWidget {
                   height: gridItemHeight,
                   child: CustomToggleButtonItem(
                     intervalCount: 2,
-                    title: context.l10n.intervalPluralWithNumber(2),
-                    text: context.l10n.intervalTwoIntervalsText,
+                    title: TimerLocalizations.of(context).intervalPluralWithNumber(2),
+                    text: TimerLocalizations.of(context).intervalTwoIntervalsText,
                     isSelected: selectedValue == 2,
                     onTap: () => onChanged(2),
                   ),
@@ -238,8 +239,8 @@ class CustomToggleButton extends StatelessWidget {
                   height: gridItemHeight,
                   child: CustomToggleButtonItem(
                     intervalCount: 3,
-                    title: context.l10n.intervalPluralWithNumber(3),
-                    text: context.l10n.intervalThreeIntervalsText,
+                    title: TimerLocalizations.of(context).intervalPluralWithNumber(3),
+                    text: TimerLocalizations.of(context).intervalThreeIntervalsText,
                     isSelected: selectedValue == 3,
                     onTap: () => onChanged(3),
                   ),

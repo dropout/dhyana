@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "okay": "Okay",
   "close": "Close",
   "profileDeleteTitle": "Delete Profile",
   "profileDeleteQuestion": "All your data will be permanently deleted and cannot be restored.\nAre you sure?",

@@ -1,4 +1,4 @@
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/domain/entity/timer_settings_history_record_entity.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -82,7 +82,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
             ),
           ),
           Gap.small(),
-          Text(AppLocalizations.of(context).minutesPlural(duration.inMinutes),
+          Text(TimerLocalizations.of(context).minutesPlural(duration.inMinutes),
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ],
@@ -101,27 +101,27 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
         children: [
           buildDetail(
             context,
-            AppLocalizations.of(context).inputWarmupLabel.toUpperCase(),
-            AppLocalizations.of(context).minutesPluralWithNumber(
+            TimerLocalizations.of(context).inputWarmupLabel.toUpperCase(),
+            TimerLocalizations.of(context).minutesPluralWithNumber(
               timerSettings.warmup.inMinutes
             )
           ),
           const SizedBox(height: DesignSpec.spacingSm),
           buildDetail(
             context,
-            AppLocalizations.of(context).inputStartingSoundLabel.toUpperCase(),
+            TimerLocalizations.of(context).inputStartingSoundLabel.toUpperCase(),
             getLocalizedSoundName(
               timerSettings.startingSound,
-              AppLocalizations.of(context)
+              TimerLocalizations.of(context)
             ),
           ),
           const SizedBox(height: DesignSpec.spacingSm),
           buildDetail(
             context,
-            AppLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),
+            TimerLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),
             getLocalizedSoundName(
               timerSettings.endingSound,
-              AppLocalizations.of(context)
+              TimerLocalizations.of(context)
             ),
           )
         ],
