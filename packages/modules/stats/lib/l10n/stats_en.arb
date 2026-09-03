@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "days": "Days",
+  "weeks": "Weeks",
+  "months": "Months",
+  "years": "Years",
+  "profileStats": "Statistics",
+  "averagePerDay": "Average per day",
+  "averagePerWeek": "Average per week",
+  "averagePerMonth": "Average per month",
+  "averagePerYear": "Average per year",
+  "averageAbbr": "Avg.",
+  "statsLoadingData": "Loading data...",
+  "pleaseWait": "Please wait",
+  "statsTotalSessions": "Total sessions",
+  "statsTotalTimeSpent": "Total time",
+  "weekNumber": "{year} W{weekNumber}"
+}

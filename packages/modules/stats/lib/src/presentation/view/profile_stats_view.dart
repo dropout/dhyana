@@ -4,8 +4,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/core.dart';
+import 'package:stats/l10n/stats_localizations.dart';
 import 'package:stats/src/presentation/view/stats/stats_data_area_sliver.dart';
 
 import 'stats/tab/day_tab.dart';
@@ -66,7 +66,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
               return buildScaffolding(
                 context,
                 [
-                  buildTitleEffectSliverTitle(context, context.l10n.profileStats),
+                  buildTitleEffectSliverTitle(context, StatsLocalizations.of(context).profileStats),
                   StatsDataAreaSliver(
                     profile: state.profile,
                     profileName: state.profile.displayName,
@@ -123,7 +123,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       slivers: [
 
         // Appearing-disappearing title effect when scrolling down
-        buildTitleEffectAppBar(context, context.l10n.profileStats),
+        buildTitleEffectAppBar(context, StatsLocalizations.of(context).profileStats),
 
         // Content slivers
         ...slivers
@@ -170,22 +170,22 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           tabs: [
             buildTabBarItem(
               context,
-              AppLocalizations.of(context).days,
+              StatsLocalizations.of(context).days,
               key: const Key('profile_stats_view_days_tab'),
             ),
             buildTabBarItem(
               context,
-              AppLocalizations.of(context).weeks,
+              StatsLocalizations.of(context).weeks,
               key: const Key('profile_stats_view_weeks_tab'),
             ),
             buildTabBarItem(
               context,
-              AppLocalizations.of(context).months,
+              StatsLocalizations.of(context).months,
               key: const Key('profile_stats_view_months_tab'),
             ),
             buildTabBarItem(
               context,
-              AppLocalizations.of(context).years,
+              StatsLocalizations.of(context).years,
               key: const Key('profile_stats_view_years_tab'),
             ),
           ],

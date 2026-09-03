@@ -1,7 +1,7 @@
 import 'package:bar_chart/bar_chart.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:stats/l10n/stats_localizations.dart';
 
 class StatsBarChart extends StatefulWidget {
 
@@ -52,7 +52,7 @@ class _StatsBarChartState extends State<StatsBarChart> {
           }
           return widget.infoBuilderDelegate!.call(context, index);
         },
-        averageLabel: AppLocalizations.of(context).averageAbbr.toLowerCase(),
+        averageLabel: StatsLocalizations.of(context).averageAbbr.toLowerCase(),
 
         onInfoTriggered: (index, barData) {
           context.services.hapticsService.select();
@@ -84,7 +84,7 @@ class CustomYAxisLabelFormatter extends YAxisLabelFormatter {
 
     if (max < 90) {
       int minutes = value.toInt();
-      String postFix = AppLocalizations.of(context).minutesAbbr.toLowerCase();
+      String postFix = context.coreL10n.minutesAbbr.toLowerCase();
       return createTextPainter(
         '${minutes.toStringAsFixed(0)}$postFix',
         TextAlign.left,
@@ -93,7 +93,7 @@ class CustomYAxisLabelFormatter extends YAxisLabelFormatter {
       );
     }
 
-    String postFix = AppLocalizations.of(context).hoursAbbr.toLowerCase();
+    String postFix = context.coreL10n.hoursAbbr.toLowerCase();
     int hours = (value ~/ 60);
     return createTextPainter(
       '${hours.toStringAsFixed(0)}$postFix',

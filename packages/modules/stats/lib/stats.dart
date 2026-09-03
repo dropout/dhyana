@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/stats_localizations.dart';
+
 export 'src/stats_di.dart';
 export 'src/stats_routes.dart';
 

@@ -432,10 +432,12 @@
         "firebase_provider",
         "flutter",
         "flutter_bloc",
+        "flutter_localizations",
         "freezed_annotation",
         "get_it",
         "go_router",
         "go_router_builder",
+        "intl",
         "material_ui",
         "profile",
         "provider",
@@ -782,6 +784,24 @@
       ]
     },
     {
+      "name": "intl",
+      "version": "0.20.3",
+      "dependencies": [
+        "clock",
+        "meta",
+        "path"
+      ]
+    },
+    {
+      "name": "flutter_localizations",
+      "version": "0.0.0",
+      "dependencies": [
+        "flutter",
+        "intl",
+        "path"
+      ]
+    },
+    {
       "name": "bloc_test",
       "version": "10.0.0",
       "dependencies": [
@@ -949,24 +969,6 @@
       "version": "1.5.0",
       "dependencies": [
         "flutter"
-      ]
-    },
-    {
-      "name": "intl",
-      "version": "0.20.3",
-      "dependencies": [
-        "clock",
-        "meta",
-        "path"
-      ]
-    },
-    {
-      "name": "flutter_localizations",
-      "version": "0.0.0",
-      "dependencies": [
-        "flutter",
-        "intl",
-        "path"
       ]
     },
     {

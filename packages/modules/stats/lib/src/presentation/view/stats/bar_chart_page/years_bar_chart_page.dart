@@ -1,6 +1,6 @@
 import 'package:bar_chart/bar_chart.dart';
 import 'package:stats/src/presentation/viewmodel/stats_bucket_cubit.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:stats/l10n/stats_localizations.dart';
 import 'package:stats/src/stats_module.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -144,8 +144,8 @@ class YearsBarChartPage extends StatelessWidget {
         statsInterval.to,
         subtractOneDay: true,
       ),
-      mainText: AppLocalizations.of(context).statsLoadingData,
-      postfix: AppLocalizations.of(context).pleaseWait,
+      mainText: StatsLocalizations.of(context).statsLoadingData,
+      postfix: StatsLocalizations.of(context).pleaseWait,
     );
   }
 
@@ -163,7 +163,7 @@ class YearsBarChartPage extends StatelessWidget {
           minutes: calculatedStats.averageMinutes.toInt()
         ).toFormattedLocalizedString(context)
       ),
-      postfix: Text(AppLocalizations.of(context).averagePerYear.toLowerCase()),
+      postfix: Text(StatsLocalizations.of(context).averagePerYear.toLowerCase()),
     );
   }
 

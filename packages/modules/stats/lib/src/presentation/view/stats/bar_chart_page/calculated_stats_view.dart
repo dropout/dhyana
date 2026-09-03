@@ -1,6 +1,6 @@
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
+import 'package:stats/l10n/stats_localizations.dart';
 import 'package:stats/src/stats_module.dart';
 
 
@@ -35,7 +35,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
             Expanded(
               child: buildColumnItem(
                 context,
-                label: AppLocalizations.of(context).statsTotalSessions,
+                label: StatsLocalizations.of(context).statsTotalSessions,
                 child: SizedBox(
                   width: double.infinity,
                   key: ValueKey(calculatedStats.totalSessions),
@@ -54,7 +54,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
             Expanded(
               child: buildColumnItem(
                 context,
-                label: AppLocalizations.of(context).statsTotalTimeSpent,
+                label: StatsLocalizations.of(context).statsTotalTimeSpent,
                 child: SizedBox(
                   width: double.infinity,
                   key: ValueKey(calculatedStats.totalMinutes),

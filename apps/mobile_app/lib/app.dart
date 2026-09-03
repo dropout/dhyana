@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:core/core.dart';
 import 'package:auth/auth.dart';
 import 'package:donate/donate.dart';
+import 'package:stats/stats.dart';
 
 import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -66,6 +67,7 @@ class App extends StatelessWidget {
           AuthLocalizations.delegate,
           CoreLocalizations.delegate,
           DonateLocalizations.delegate,
+          StatsLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

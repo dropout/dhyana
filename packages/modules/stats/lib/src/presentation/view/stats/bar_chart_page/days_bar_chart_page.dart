@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:bar_chart/bar_chart.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:stats/l10n/stats_localizations.dart';
 import 'package:stats/src/stats_module.dart';
 import 'package:core/core.dart';
 import 'package:stats/src/presentation/viewmodel/stats_bucket_cubit.dart';
@@ -145,8 +145,8 @@ class DaysBarChartPage extends StatelessWidget {
         statsInterval.to,
         subtractOneDay: true,
       ),
-      mainText: AppLocalizations.of(context).statsLoadingData,
-      postfix: AppLocalizations.of(context).pleaseWait,
+      mainText: StatsLocalizations.of(context).statsLoadingData,
+      postfix: StatsLocalizations.of(context).pleaseWait,
     );
   }
 
@@ -164,7 +164,7 @@ class DaysBarChartPage extends StatelessWidget {
           minutes: calculatedStats.averageMinutes.toInt()
         ).toFormattedLocalizedString(context),
       ),
-      postfix: Text(AppLocalizations.of(context).averagePerDay.toLowerCase()),
+      postfix: Text(StatsLocalizations.of(context).averagePerDay.toLowerCase()),
     );
   }
 

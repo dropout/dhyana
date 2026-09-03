@@ -3,7 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bar_chart/bar_chart.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:stats/l10n/stats_localizations.dart';
 import 'package:stats/src/stats_module.dart';
 import 'package:core/core.dart';
 import 'package:stats/src/presentation/view/stats/bar_chart_page/bar_chart_error_page.dart';
@@ -147,8 +147,8 @@ class WeeksBarChartPage extends StatelessWidget {
         statsInterval.to,
         subtractOneDay: true,
       ),
-      mainText: AppLocalizations.of(context).statsLoadingData,
-      postfix: AppLocalizations.of(context).pleaseWait,
+      mainText: StatsLocalizations.of(context).statsLoadingData,
+      postfix: StatsLocalizations.of(context).pleaseWait,
     );
   }
 
@@ -166,7 +166,7 @@ class WeeksBarChartPage extends StatelessWidget {
           minutes: calculatedStats.averageMinutes.toInt()
         ).toFormattedLocalizedString(context)
       ),
-      postfix: Text(AppLocalizations.of(context).averagePerWeek.toLowerCase()),
+      postfix: Text(StatsLocalizations.of(context).averagePerWeek.toLowerCase()),
     );
   }
 
@@ -229,12 +229,12 @@ class WeeksBarChartPage extends StatelessWidget {
   // (considered first week if the week contains the first Thursday of the year)
   String getWeekLabel(BuildContext context, StatsBucket week) {
     if (week.startDate.weekNumber == 1 && week.startDate.month == 12) {
-      return AppLocalizations.of(context).weekNumber(
+      return StatsLocalizations.of(context).weekNumber(
         week.startDate.year + 1,
         week.startDate.weekNumber,
       );
     } else {
-      return  AppLocalizations.of(context).weekNumber(
+      return StatsLocalizations.of(context).weekNumber(
         week.startDate.year,
         week.startDate.weekNumber,
       );

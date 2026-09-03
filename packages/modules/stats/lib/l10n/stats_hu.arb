@@ -1,0 +1,18 @@
+{
+  "@@locale": "hu",
+  "days": "Napok",
+  "weeks": "Hetek",
+  "months": "Hónapok",
+  "years": "Évek",
+  "profileStats": "Statisztika",
+  "averagePerDay": "Átlagosan naponta",
+  "averagePerWeek": "Átlagosan hetente",
+  "averagePerMonth": "Átlagosan havonta",
+  "averagePerYear": "Átlagosan évente",
+  "averageAbbr": "Átl.",
+  "statsLoadingData": "Adatok betöltése...",
+  "pleaseWait": "Kérlek várj",
+  "statsTotalSessions": "Összes alkalom",
+  "statsTotalTimeSpent": "Összes idő",
+  "weekNumber": "{year} {weekNumber}H"
+}
