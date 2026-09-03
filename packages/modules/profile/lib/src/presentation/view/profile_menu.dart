@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:profile/src/public/model/profile.dart';
@@ -50,7 +51,7 @@ class ProfileMenu extends StatelessWidget {
         children: [
           ProfileMenuTile(
             title: Text(
-              context.l10n.editProfile,
+              ProfileLocalizations.of(context).editProfile,
               style: textStyle,
             ),
             onTap: () => _onEditProfileTapped(context),
@@ -59,7 +60,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           ProfileMenuTile(
             title: Text(
-              context.l10n.sessionsHistory,
+              ProfileLocalizations.of(context).sessionsHistory,
               style: textStyle,
             ),
             onTap: () => _onSessionHistoryTapped(context),
@@ -68,7 +69,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           ProfileMenuTile(
             title: Text(
-              context.l10n.profileStats,
+              ProfileLocalizations.of(context).profileStats,
               style: textStyle,
             ),
             onTap: () => _onStatisticsTapped(context),
@@ -77,7 +78,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           ProfileMenuTile(
             title: Text(
-              context.l10n.donate,
+              ProfileLocalizations.of(context).donate,
               style: textStyle,
             ),
             onTap: () => _onDonateTapped(context),
@@ -86,7 +87,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           ProfileMenuTile(
             title: Text(
-              context.l10n.profileSettings,
+              ProfileLocalizations.of(context).profileSettings,
               style: textStyle,
             ),
             onTap: () => _onSettingsTapped(context),
@@ -95,7 +96,7 @@ class ProfileMenu extends StatelessWidget {
           const Divider(height: 0),
           ProfileMenuTile(
             title: Text(
-              context.l10n.signOut,
+              ProfileLocalizations.of(context).signOut,
               style: textStyle,
             ),
             onTap: () => _onSignoutTapped(context),

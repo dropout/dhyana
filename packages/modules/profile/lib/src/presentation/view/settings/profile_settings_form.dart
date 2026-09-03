@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/src/presentation/view/settings/profile_settings_health_connect.dart';
 import 'package:profile/src/presentation/view/settings/profile_settings_clear_cache.dart';
 import 'package:profile/src/presentation/view/settings/profile_settings_switch.dart';
@@ -54,15 +55,15 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           Gap.medium(),
           ProfileSettingsSwitch(
             name: 'showStatsOnFinishScreen',
-            title: context.l10n.showStatsOnFinishScreenTitle,
-            helperText: context.l10n.showStatsOnFinishScreenDescription,
+            title: ProfileLocalizations.of(context).showStatsOnFinishScreenTitle,
+            helperText: ProfileLocalizations.of(context).showStatsOnFinishScreenDescription,
             initialValue: widget.profileSettings.showStatsOnFinishScreen,
           ),
           Gap.large(),
           ProfileSettingsSwitch(
             name: 'usePresenceFeature',
-            title: context.l10n.usePresenceFeatureTitle,
-            helperText: context.l10n.usePresenceFeatureDescription,
+            title: ProfileLocalizations.of(context).usePresenceFeatureTitle,
+            helperText: ProfileLocalizations.of(context).usePresenceFeatureDescription,
             initialValue: widget.profileSettings.usePresenceFeature,
           ),
           Gap.large(),
@@ -78,7 +79,7 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           AppButton.small(
             fColor: Colors.black,
             bColor: Colors.transparent,
-            text: context.l10n.profileDeleteTitle.toUpperCase(),
+            text: context.coreL10n.profileDeleteTitle.toUpperCase(),
             onTap: () => _onDeleteProfileTapped(context),
           ),
         ],

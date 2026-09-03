@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/src/presentation/view/settings/profile_settings_form.dart';
 
 import 'package:core/core.dart';
@@ -58,7 +59,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final screenTitle = context.l10n.profileSettings;
+    final screenTitle = ProfileLocalizations.of(context).profileSettings;
     return BlocBuilder<ProfileStateCubit, ProfileState>(
       builder: (BuildContext context, ProfileState profileState) {
         switch (profileState) {

@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
@@ -17,7 +18,7 @@ class DetailedSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      title: context.l10n.statsSummary,
+      title: ProfileLocalizations.of(context).statsSummary,
       padding: const EdgeInsets.only(
         bottom: DesignSpec.paddingLg,
         left: DesignSpec.paddingLg,
@@ -26,15 +27,15 @@ class DetailedSummaryView extends StatelessWidget {
       child: Column(
         children: [
           LabelValueDetail(
-            label: context.l10n.statsTotalTimeSpent,
+            label: ProfileLocalizations.of(context).statsTotalTimeSpent,
             value: profileStatsReport.completedMinutesCount.toString(),
           ),
           LabelValueDetail(
-            label: context.l10n.statsTotalSessions,
+            label: ProfileLocalizations.of(context).statsTotalSessions,
             value: profileStatsReport.completedSessionsCount.toString(),
           ),
           LabelValueDetail(
-            label: context.l10n.statsTotalDays,
+            label: ProfileLocalizations.of(context).statsTotalDays,
             value: profileStatsReport.completedDaysCount.toString(),
           )
         ],

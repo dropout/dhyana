@@ -1,4 +1,4 @@
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/profile.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -25,7 +25,7 @@ class _ConsecutiveDaysViewState extends State<ConsecutiveDaysView> {
 
     return AppCard(
       key: const Key('consecutive_days_view'),
-      title: AppLocalizations.of(context).consecutiveDays,
+      title: ProfileLocalizations.of(context).consecutiveDays,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

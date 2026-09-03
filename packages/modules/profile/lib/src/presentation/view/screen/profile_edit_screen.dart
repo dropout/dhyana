@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:profile/src/presentation/view/profile_edit_form.dart';
@@ -72,7 +72,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
             return buildScaffolding(
               context,
               DefaultScreenSetup(
-                title: AppLocalizations.of(context).editProfile,
+                title: ProfileLocalizations.of(context).editProfile,
                 enableScrolling: false,
                 enableScaffolding: false,
                 slivers: [buildLoadingSliver(context)],
@@ -82,7 +82,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
             return buildScaffolding(
               context,
               DefaultScreenSetup(
-                title: AppLocalizations.of(context).editProfile,
+                title: ProfileLocalizations.of(context).editProfile,
                 enableScrolling: false,
                 enableScaffolding: false,
                 slivers: [buildErrorSliver(context)],
@@ -92,7 +92,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
             return buildScaffolding(
               context,
               DefaultScreenSetup(
-                title: AppLocalizations.of(context).editProfile,
+                title: ProfileLocalizations.of(context).editProfile,
                 enableScaffolding: false,
                 slivers: [
                   SliverSafeArea(
@@ -123,7 +123,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
             );
           default:
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).editProfile,
+              title: ProfileLocalizations.of(context).editProfile,
               enableScrolling: false,
             );
         }
@@ -161,29 +161,21 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
     switch (state) {
       case ProcessingState.idle:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonIdle.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
       case ProcessingState.processing:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonSaving.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonSaving.toUpperCase(),
         );
       case ProcessingState.completed:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonSaved.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
       case ProcessingState.error:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonIdle.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
     }

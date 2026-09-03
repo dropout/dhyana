@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 import 'package:material_ui/material_ui.dart';
@@ -98,7 +99,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
   Widget buildMilestoneText(BuildContext context) {
     return Text(
       key: const Key('milestone_progress_view_text'),
-      context.l10n.statsNextMilestoneIn(
+      ProfileLocalizations.of(context).statsNextMilestoneIn(
         widget.profile.statsReport.milestoneProgress.remainingDaysCount,
       ),
       style: Theme.of(

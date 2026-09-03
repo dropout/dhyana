@@ -1,4 +1,4 @@
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/profile.dart';
 import 'package:core/core.dart';
 import 'package:profile/src/public/view/stats/label_value_detail.dart';
@@ -21,7 +21,7 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return AppCard(
-        title: AppLocalizations.of(context).consecutiveDays,
+        title: ProfileLocalizations.of(context).consecutiveDays,
         padding: const EdgeInsets.only(
           bottom: DesignSpec.paddingLg,
           left: DesignSpec.paddingLg,
@@ -30,19 +30,19 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
         child: Column(
           children: [
             LabelValueDetail(
-              label: context.l10n.statsCurrentStreak,
+              label: ProfileLocalizations.of(context).statsCurrentStreak,
               value: consecutiveDays.current.toString(),
             ),
             LabelValueDetail(
-              label: context.l10n.statsStartedAt,
+              label: ProfileLocalizations.of(context).statsStartedAt,
               value: getStartedAtString(context),
             ),
             LabelValueDetail(
-              label: context.l10n.statsLastCheckedAt,
+              label: ProfileLocalizations.of(context).statsLastCheckedAt,
               value: getLastCheckedTimeString(context),
             ),
             LabelValueDetail(
-              label: context.l10n.statsLongestStreak,
+              label: ProfileLocalizations.of(context).statsLongestStreak,
               value: consecutiveDays.longest.toString(),
             ),
           ],
@@ -54,7 +54,7 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
     if (consecutiveDays.current > 0 && consecutiveDays.startedAt != null) {
       return consecutiveDays.startedAt!.toFormattedDateTimeString(context);
     } else {
-      return context.l10n.notAvailableAbbr;
+      return ProfileLocalizations.of(context).notAvailableAbbr;
     }
   }
 
@@ -62,7 +62,7 @@ class DetailedConsecutiveDaysView extends StatelessWidget {
     if (consecutiveDays.lastChecked != null) {
       return consecutiveDays.lastChecked!.toFormattedDateTimeString(context);
     } else {
-      return context.l10n.statsNotyetChecked;
+      return ProfileLocalizations.of(context).statsNotyetChecked;
     }
   }
 

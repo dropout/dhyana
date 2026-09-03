@@ -9,6 +9,7 @@ import 'package:auth/auth.dart';
 import 'package:donate/donate.dart';
 import 'package:stats/stats.dart';
 import 'package:social/social.dart';
+import 'package:profile/profile.dart';
 
 import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -70,6 +71,7 @@ class App extends StatelessWidget {
           DonateLocalizations.delegate,
           StatsLocalizations.delegate,
           SocialLocalizations.delegate,
+          ProfileLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/src/public/model/profile.dart';
@@ -37,7 +37,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
               key: const Key('progress_summary_sessions'),
               oldValue: widget.oldProfile.statsReport.completedSessionsCount,
               newValue: widget.updatedProfile.statsReport.completedSessionsCount,
-              label: AppLocalizations.of(context).sessionsPlural(
+              label: ProfileLocalizations.of(context).sessionsPlural(
                 widget.updatedProfile.statsReport.completedSessionsCount
               ),
               animationDelay: Durations.short1,
@@ -49,7 +49,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
               key: const Key('progress_summary_minutes'),
               oldValue: widget.oldProfile.statsReport.completedMinutesCount,
               newValue: widget.updatedProfile.statsReport.completedMinutesCount,
-              label: AppLocalizations.of(context).minutesPlural(
+              label: ProfileLocalizations.of(context).minutesPlural(
                 widget.updatedProfile.statsReport.completedMinutesCount
               ),
               animationDelay: Durations.medium1,
@@ -61,7 +61,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
               key: const Key('progress_summary_days'),
               oldValue: widget.oldProfile.statsReport.completedDaysCount,
               newValue: widget.updatedProfile.statsReport.completedDaysCount,
-              label: AppLocalizations.of(context).daysPlural(
+              label: ProfileLocalizations.of(context).daysPlural(
                 widget.updatedProfile.statsReport.completedDaysCount
               ),
               animationDelay: Durations.long1,

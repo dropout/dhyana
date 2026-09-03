@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -57,7 +58,7 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
           child: Row(
             children: [
               Text(
-                context.l10n.clearCache,
+                ProfileLocalizations.of(context).clearCache,
                 textAlign: TextAlign.start,
                 style: context.theme.textTheme.titleSmall?.copyWith(
                   color: Colors.black,
@@ -76,7 +77,7 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingXl),
           child: Text(
-            context.l10n.clearCacheDescription,
+            ProfileLocalizations.of(context).clearCacheDescription,
             style: context.theme.textTheme.bodyMedium,
           ),
         ),

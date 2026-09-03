@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'dart:io';
 
 import 'package:core/core.dart';
@@ -31,38 +32,38 @@ class _LocalizationDTO {
       case _WidgetState.initializing:
         return _LocalizationDTO(
           title: Platform.isIOS
-              ? context.l10n.healthConnect_initializingText_ios
-              : context.l10n.healthConnect_initializingText_android,
+              ? ProfileLocalizations.of(context).healthConnect_initializingText_ios
+              : ProfileLocalizations.of(context).healthConnect_initializingText_android,
           helperText: Platform.isIOS
-              ? context.l10n.healthConnect_initializingText_ios
-              : context.l10n.healthConnect_initializingText_android,
+              ? ProfileLocalizations.of(context).healthConnect_initializingText_ios
+              : ProfileLocalizations.of(context).healthConnect_initializingText_android,
         );
       case _WidgetState.serviceNotAvailable:
         return _LocalizationDTO(
           title: Platform.isIOS
-              ? context.l10n.healthConnect_serviceNotAvailableTitle_ios
-              : context.l10n.healthConnect_serviceNotAvailableTitle_android,
+              ? ProfileLocalizations.of(context).healthConnect_serviceNotAvailableTitle_ios
+              : ProfileLocalizations.of(context).healthConnect_serviceNotAvailableTitle_android,
           helperText: Platform.isIOS
-              ? context.l10n.healthConnect_serviceNotAvailableText_ios
-              : context.l10n.healthConnect_serviceNotAvailableText_android,
+              ? ProfileLocalizations.of(context).healthConnect_serviceNotAvailableText_ios
+              : ProfileLocalizations.of(context).healthConnect_serviceNotAvailableText_android,
         );
       case _WidgetState.ready:
         return _LocalizationDTO(
           title: Platform.isIOS
-              ? context.l10n.healthConnect_readyTitle_ios
-              : context.l10n.healthConnect_readyTitle_android,
+              ? ProfileLocalizations.of(context).healthConnect_readyTitle_ios
+              : ProfileLocalizations.of(context).healthConnect_readyTitle_android,
           helperText: Platform.isIOS
-              ? context.l10n.healthConnect_readyText_ios
-              : context.l10n.healthConnect_readyText_android,
+              ? ProfileLocalizations.of(context).healthConnect_readyText_ios
+              : ProfileLocalizations.of(context).healthConnect_readyText_android,
         );
       case _WidgetState.requestPermissionUnnecessary:
         return _LocalizationDTO(
           title: Platform.isIOS
-              ? context.l10n.healthConnect_unnecessaryTitle_ios
-              : context.l10n.healthConnect_unnecessaryTitle_android,
+              ? ProfileLocalizations.of(context).healthConnect_unnecessaryTitle_ios
+              : ProfileLocalizations.of(context).healthConnect_unnecessaryTitle_android,
           helperText: Platform.isIOS
-              ? context.l10n.healthConnect_unnecessaryText_ios
-              : context.l10n.healthConnect_unnecessaryText_android,
+              ? ProfileLocalizations.of(context).healthConnect_unnecessaryText_ios
+              : ProfileLocalizations.of(context).healthConnect_unnecessaryText_android,
         );
     }
   }

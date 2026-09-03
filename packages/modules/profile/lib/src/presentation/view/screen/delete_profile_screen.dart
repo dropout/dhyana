@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:profile/src/presentation/viewmodel/delete_profile_cubit.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
+import 'package:auth/l10n/auth_localizations.dart';
 
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -113,7 +114,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
               children: [
                 const SizedBox(height: AppThemeData.spacingXl),
                 Text(
-                  AppLocalizations.of(context).deleteProfileScreenTitle,
+                  ProfileLocalizations.of(context).deleteProfileScreenTitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -121,7 +122,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
                 ),
                 const SizedBox(height: AppThemeData.spacingSm),
                 Text(
-                  AppLocalizations.of(context).deleteProfileScreenText,
+                  ProfileLocalizations.of(context).deleteProfileScreenText,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
@@ -130,7 +131,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
-                      text: AppLocalizations.of(context).loginSigninGoogle,
+                      text: AuthLocalizations.of(context).loginSigninGoogle,
                       bColor: Colors.black,
                       fColor: Colors.white,
                       onTap: () => _signInWithGoogle(context),
@@ -139,7 +140,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
                       const SizedBox(height: AppThemeData.spacingSm),
                     if (Platform.isIOS)
                       AppButton(
-                        text: AppLocalizations.of(context).loginSigninApple,
+                        text: AuthLocalizations.of(context).loginSigninApple,
                         bColor: Colors.black,
                         fColor: Colors.white,
                         onTap: () => _signInWithApple(context),
@@ -165,7 +166,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context).deleteProfileScreenSuccessTitle,
+                  ProfileLocalizations.of(context).deleteProfileScreenSuccessTitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -183,7 +184,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
                     context.read<AuthStateCubit>().signOut();
                     context.services.homeNavigator.navigateToHome(type: .go);  
                   },
-                  text: AppLocalizations.of(
+                  text: ProfileLocalizations.of(
                     context,
                   ).deleteProfileScreenOkayButtonText.toUpperCase(),
                 ),

@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 import 'package:material_ui/material_ui.dart';
@@ -18,7 +19,7 @@ class DetailedMilestonesView extends StatelessWidget {
     final int milestoneCount = profileStatsReport.milestoneCount;
 
     return AppCard(
-        title: context.l10n.milestones,
+        title: ProfileLocalizations.of(context).milestones,
         padding: const EdgeInsets.only(
           bottom: DesignSpec.paddingLg,
           left: DesignSpec.paddingLg,
@@ -27,11 +28,11 @@ class DetailedMilestonesView extends StatelessWidget {
         child: Column(
           children: [
             LabelValueDetail(
-              label: context.l10n.statsCount,
+              label: ProfileLocalizations.of(context).statsCount,
               value: milestoneCount.toString(),
             ),
             LabelValueDetail(
-              label: context.l10n.statsNextMilestone,
+              label: ProfileLocalizations.of(context).statsNextMilestone,
               value: getNextMilestoneText(context, profileStatsReport.milestoneProgress),
             ),
           ],
@@ -40,7 +41,7 @@ class DetailedMilestonesView extends StatelessWidget {
   }
 
   String getNextMilestoneText(BuildContext context, MilestoneProgress milestoneProgress) {
-    return context.l10n.statsNextMilestoneInShort(
+    return ProfileLocalizations.of(context).statsNextMilestoneInShort(
       milestoneProgress.targetDaysCount - milestoneProgress.completedDaysCount,
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/src/presentation/view/profile_edit_form.dart';
@@ -76,7 +76,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             return buildScaffolding(
               context,
               DefaultScreenSetup(
-                title: AppLocalizations.of(context).profileWizardTitle,
+                title: ProfileLocalizations.of(context).profileWizardTitle,
                 enableScrolling: false,
                 enableScaffolding: false,
                 slivers: [buildLoadingSliver(context)],
@@ -86,7 +86,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             return buildScaffolding(
               context,
               DefaultScreenSetup(
-                title: AppLocalizations.of(context).profileWizardTitle,
+                title: ProfileLocalizations.of(context).profileWizardTitle,
                 enableTitleSliver: false,
                 backgroundColor: Theme.of(context).colorScheme.error,
                 appBarBackgroundColor: Theme.of(context).colorScheme.error,
@@ -101,7 +101,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             return buildScaffolding(
               context,
               DefaultScreenSetup(
-                title: AppLocalizations.of(context).profileWizardTitle,
+                title: ProfileLocalizations.of(context).profileWizardTitle,
                 enableScaffolding: false,
                 slivers: [
                   // The profile edit form.
@@ -134,7 +134,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                           child: TextButton(
                             onPressed: () => _onSignOut(context),
                             child: Text(
-                              AppLocalizations.of(
+                              ProfileLocalizations.of(
                                 context,
                               ).signOut.toUpperCase(),
                               style: Theme.of(context).textTheme.labelLarge!
@@ -160,7 +160,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
             );
           default:
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).editProfile,
+              title: ProfileLocalizations.of(context).editProfile,
               enableScrolling: false,
             );
         }
@@ -205,29 +205,21 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
     switch (formProcessingState) {
       case ProcessingState.idle:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonIdle.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
       case ProcessingState.processing:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonSaving.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonSaving.toUpperCase(),
         );
       case ProcessingState.completed:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonSaved.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
       default:
         return AppButton(
-          text: AppLocalizations.of(
-            context,
-          ).profileSaveButtonIdle.toUpperCase(),
+          text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
           onTap: () => _onSave(context, profile),
         );
     }

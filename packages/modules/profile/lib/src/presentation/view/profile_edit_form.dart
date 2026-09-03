@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -75,14 +76,14 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.l10n.profileImageLabel,
+            ProfileLocalizations.of(context).profileImageLabel,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           Gap.xs(),
           FormBuilderProfileImagePicker(
             key: const Key('profile_edit_form_image_picker'),
             name: 'imageData',
-            label: context.l10n.profileImageLabel,
+            label: ProfileLocalizations.of(context).profileImageLabel,
             profile: profile,
             onError: (errorType, error) => onProfileImagePickerError(context, errorType, error),
           ),
@@ -91,7 +92,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           Gap.medium(),
           FormBuilderCitySelector(
             name: 'location',
-            label: context.l10n.profileLocationLabel,
+            label: ProfileLocalizations.of(context).profileLocationLabel,
             key: const Key('profile_edit_form_location_input'),
             initialValue: profile.location,
             onChanged: (_) =>
@@ -109,7 +110,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       return [
         AppTextInput(
           name: 'lastName',
-          label: context.l10n.profileLastnameLabel,
+          label: ProfileLocalizations.of(context).profileLastnameLabel,
           key: const Key('profile_edit_form_last_name_input'),
           initialValue: widget.profile.lastName,
           validator: FormBuilderValidators.compose([
@@ -121,7 +122,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         Gap.medium(),
         AppTextInput(
           name: 'firstName',
-          label: context.l10n.profileFirstnameLabel,
+          label: ProfileLocalizations.of(context).profileFirstnameLabel,
           key: const Key('profile_edit_form_first_name_input'),
           initialValue: widget.profile.firstName,
           validator: FormBuilderValidators.compose([
@@ -135,7 +136,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       return [
         AppTextInput(
           name: 'firstName',
-          label: context.l10n.profileFirstnameLabel,
+          label: ProfileLocalizations.of(context).profileFirstnameLabel,
           key: const Key('profile_edit_form_first_name_input'),
           initialValue: widget.profile.firstName,
           validator: FormBuilderValidators.compose([
@@ -147,7 +148,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         Gap.medium(),
         AppTextInput(
           name: 'lastName',
-          label: context.l10n.profileLastnameLabel,
+          label: ProfileLocalizations.of(context).profileLastnameLabel,
           key: const Key('profile_edit_form_last_name_input'),
           initialValue: widget.profile.lastName,
           validator: FormBuilderValidators.compose([

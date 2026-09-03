@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
@@ -21,28 +22,28 @@ class SummaryView extends StatelessWidget {
 
     return AppCard(
       key: const Key('summary_view'),
-      title: context.l10n.statsSummary,
+      title: ProfileLocalizations.of(context).statsSummary,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: SummaryItem(
               sessionCount,
-              context.l10n.sessionsPlural(sessionCount)
+              ProfileLocalizations.of(context).sessionsPlural(sessionCount)
             )
           ),
           const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: SummaryItem(
               minutesCount,
-              context.l10n.minutesPlural(minutesCount),
+              ProfileLocalizations.of(context).minutesPlural(minutesCount),
             )
           ),
           const SizedBox(width: DesignSpec.spacingMd),
           Expanded(
             child: SummaryItem(
               daysCount,
-              context.l10n.daysPlural(daysCount),
+              ProfileLocalizations.of(context).daysPlural(daysCount),
             )
           )
         ],

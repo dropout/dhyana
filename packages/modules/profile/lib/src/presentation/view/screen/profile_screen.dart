@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 
 import 'package:profile/src/presentation/view/profile_view.dart';
 import 'package:material_ui/material_ui.dart';
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           case ProfileLoadingState():
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
-              title: AppLocalizations.of(context).profile,
+              title: ProfileLocalizations.of(context).profile,
               enableScrolling: false,
               enableTitleSliver: false,
               slivers: [
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           case ProfileLoadedState():
             return DefaultScreenSetup(
             key: const Key('profile_screen'),
-              title: AppLocalizations.of(context).profile,
+              title: ProfileLocalizations.of(context).profile,
               enableTitleSliver: false,
               slivers: [
                 SliverSafeArea(
@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           case ProfileErrorState():
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
-              title: AppLocalizations.of(context).profile,
+              title: ProfileLocalizations.of(context).profile,
               titleColor: Colors.white,
               enableTitleSliver: false,
               backgroundColor: Theme.of(context).colorScheme.error,
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       context.services.homeNavigator.navigateToHome(type: .go);
                       context.read<ProfileStateCubit>().clearData();
                     },
-                    buttonText: AppLocalizations.of(context).signOut,
+                    buttonText: context.coreL10n.profileSignoutTitle,
                   ),
                 )
                 // buildErrorSliver(context),

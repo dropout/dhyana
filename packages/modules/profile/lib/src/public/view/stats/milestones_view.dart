@@ -1,4 +1,4 @@
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:profile/profile.dart';
 import 'package:core/core.dart';
@@ -28,7 +28,7 @@ class _MilestonesViewState extends State<MilestonesView> {
       key: const Key('milestones_view'),
       children: [
         AppCard(
-          title: AppLocalizations.of(context).milestones,
+          title: ProfileLocalizations.of(context).milestones,
           child: Text(
             milestoneCount.toStringAsFixed(0),
             style: Theme.of(context).textTheme.titleLarge!.copyWith(

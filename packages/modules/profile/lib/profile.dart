@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/profile_localizations.dart';
+
 export 'src/profile_di.dart';
 export 'src/profile_routes.dart';
 

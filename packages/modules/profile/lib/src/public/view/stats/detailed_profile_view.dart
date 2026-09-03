@@ -1,3 +1,4 @@
+import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/profile.dart';
 import 'package:profile/src/public/view/stats/label_value_detail.dart';
 import 'package:core/core.dart';
@@ -24,7 +25,7 @@ class DetailedProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      title: context.l10n.profile,
+      title: ProfileLocalizations.of(context).profile,
       padding: const EdgeInsets.only(
         bottom: DesignSpec.paddingLg,
         left: DesignSpec.paddingLg,
@@ -61,18 +62,18 @@ class DetailedProfileView extends StatelessWidget {
           ),
           Gap.medium(),
           LabelValueDetail(
-            label: context.l10n.statsSignedUp,
+            label: ProfileLocalizations.of(context).statsSignedUp,
             value: formatDateTime(context, signupDate),
           ),
           LabelValueDetail(
-            label: context.l10n.statsFirstSession,
+            label: ProfileLocalizations.of(context).statsFirstSession,
             value: formatDateTime(
               context,
               profileStatsReport.firstSessionDate,
             ),
           ),
           LabelValueDetail(
-            label: context.l10n.statsLastSession,
+            label: ProfileLocalizations.of(context).statsLastSession,
             value: formatDateTime(context, profileStatsReport.lastSessionDate),
           ),
         ],
@@ -82,7 +83,7 @@ class DetailedProfileView extends StatelessWidget {
 
   String formatDateTime(BuildContext context, DateTime? dateTime) {
     if (dateTime == null) {
-      return context.l10n.notAvailableAbbr;
+      return ProfileLocalizations.of(context).notAvailableAbbr;
     }
     return dateTime.toFormattedDateTimeString(context);
   }
