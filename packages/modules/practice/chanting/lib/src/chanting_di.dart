@@ -20,6 +20,7 @@ import 'package:chanting/src/data/service/chant_cache_file_system.dart';
 import 'package:chanting/src/data/service/chant_cache_validator.dart';
 import 'package:chanting/src/data/service/chant_local_resource_resolver.dart';
 import 'package:chanting/src/data/service/default_chanting_public_api.dart';
+import 'package:chanting/src/service/chanting_cache_clear_capability.dart';
 import 'package:chanting/src/domain/repository/chant_cache_data_repository.dart';
 import 'package:chanting/src/domain/repository/chant_repository.dart';
 import 'package:chanting/src/domain/service/chanting_audio_service.dart';
@@ -34,12 +35,9 @@ import 'package:chanting/src/public/viewmodel/chanting_settings_cubit.dart';
 
 extension ChantingModuleDependencyInjection on GetIt {
   void registerChantingModuleDependencies() {
-
     // Audio handler
     registerFactory<SoLoudChantingAudioHandler>(
-      () => SoLoudChantingAudioHandler(
-        soloud: SoLoud.instance,
-      ),
+      () => SoLoudChantingAudioHandler(soloud: SoLoud.instance),
     );
 
     // Data Providers
@@ -47,7 +45,8 @@ extension ChantingModuleDependencyInjection on GetIt {
       () => DriftChantCacheDataProvider(ChantCacheDatabase()),
     );
     registerLazySingleton<ChantDataProvider>(
-      () => FirebaseChantsDataProvider(GetIt.I.get<FirebaseProvider>().firestore),
+      () =>
+          FirebaseChantsDataProvider(GetIt.I.get<FirebaseProvider>().firestore),
     );
 
     // Repositories
@@ -63,8 +62,7 @@ extension ChantingModuleDependencyInjection on GetIt {
         storageDataProvider: GetIt.I.get<StorageDataProvider>(),
         chantCacheFileSystem: GetIt.I.get<ChantCacheFileSystem>(),
       ),
-    );    
-
+    );
 
     // Services
     registerFactory<ChantingAudioService>(
@@ -88,7 +86,7 @@ extension ChantingModuleDependencyInjection on GetIt {
         storageDataProvider: GetIt.I.get<StorageDataProvider>(),
       ),
     );
-    registerLazySingleton<ChantCacheValidator>(() => ChantCacheValidator());    
+    registerLazySingleton<ChantCacheValidator>(() => ChantCacheValidator());
 
     // Use Cases
     registerFactory<CacheChantsUseCase>(
@@ -143,6 +141,12 @@ extension ChantingModuleDependencyInjection on GetIt {
     registerLazySingleton<ChantingPublicApi>(
       () => DefaultChantingPublicApi(
         chantRepository: GetIt.I.get<ChantRepository>(),
+        chantCacheRepository: GetIt.I.get<ChantCacheRepository>(),
+      ),
+    );
+    registerLazySingleton<ClearCacheCapability>(
+      () => ChantingCacheClearCapability(
+        chantCacheRepository: GetIt.I.get<ChantCacheRepository>(),
       ),
     );
   }

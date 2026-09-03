@@ -1,4 +1,5 @@
 import 'package:profile/src/presentation/view/settings/profile_settings_health_connect.dart';
+import 'package:profile/src/presentation/view/settings/profile_settings_clear_cache.dart';
 import 'package:profile/src/presentation/view/settings/profile_settings_switch.dart';
 import 'package:core/core.dart';
 import 'package:profile/src/public/model/profile.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 class ProfileSettingsForm extends StatefulWidget {
   final Profile profile;
   final ProfileSettings profileSettings;
+  final ClearCacheCapability? clearCacheCapability;
   final VoidCallback? onChanged;
   final GlobalKey<FormBuilderState> formStateKey;
 
@@ -16,6 +18,7 @@ class ProfileSettingsForm extends StatefulWidget {
     required this.profile,
     required this.profileSettings,
     required this.formStateKey,
+    this.clearCacheCapability,
     this.onChanged,
     super.key,
   });
@@ -67,10 +70,10 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
             mindfulMinutesService: context.services.mindfulMinutesService,
           ),
           Gap.large(),
-          // TODO: Re-enable this once we have a proper cache clearing mechanism in place
-          // ProfileSettingsClearCache(
-          //   chantPlaybackRepository: context.repos.chantPlaybackRepository,
-          // ),
+          if (widget.clearCacheCapability != null)
+            ProfileSettingsClearCache(
+              clearCacheCapability: widget.clearCacheCapability!,
+            ),
           Gap.large(),
           AppButton.small(
             fColor: Colors.black,
@@ -83,4 +86,3 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
     );
   }
 }
-

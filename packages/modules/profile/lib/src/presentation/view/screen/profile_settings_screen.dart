@@ -1,4 +1,3 @@
-
 import 'package:profile/src/presentation/view/settings/profile_settings_form.dart';
 
 import 'package:core/core.dart';
@@ -8,13 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:profile/src/public/model/profile.dart';
 
-
 class ProfileSettingsScreen extends StatefulWidget {
-
   final String profileId;
+  final ClearCacheCapability? clearCacheCapability;
 
   const ProfileSettingsScreen({
     required this.profileId,
+    this.clearCacheCapability,
     super.key,
   });
 
@@ -23,11 +22,10 @@ class ProfileSettingsScreen extends StatefulWidget {
 }
 
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
-  with DefaultScreenSetupHelpersMixin, ScreenHelperMixin {
-
+    with DefaultScreenSetupHelpersMixin, ScreenHelperMixin {
   ProcessingState loadingState = ProcessingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
-    GlobalKey<FormBuilderState>();
+      GlobalKey<FormBuilderState>();
 
   void _onSave(BuildContext context, Profile profile) {
     FormBuilderState? formState = formStateKey.currentState;
@@ -71,10 +69,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                 title: screenTitle,
                 enableScrolling: false,
                 enableScaffolding: false,
-                slivers: [
-                  buildLoadingSliver(context),
-                ],
-              )
+                slivers: [buildLoadingSliver(context)],
+              ),
             );
           case ProfileLoadedState():
             return buildScaffolding(
@@ -95,10 +91,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                         formStateKey: formStateKey,
                         profile: profileState.profile,
                         profileSettings: profileState.profile.settings,
+                        clearCacheCapability: widget.clearCacheCapability,
                         onChanged: () => _onFormChanged(context),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               actionButtonLayer: SafeArea(
@@ -106,7 +103,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                 child: Align(
                   alignment: const Alignment(0.0, 1.0),
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+                    padding: const EdgeInsets.only(
+                      bottom: DesignSpec.paddingLg,
+                    ),
                     child: buildOverlayActionButton(
                       context,
                       loadingState,
@@ -114,7 +113,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                     ),
                   ),
                 ),
-              )
+              ),
             );
           case ProfileStateInitial():
             return buildScaffolding(
@@ -123,7 +122,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                 title: screenTitle,
                 enableScrolling: false,
                 enableScaffolding: false,
-              )
+              ),
             );
           case ProfileErrorState():
             return buildScaffolding(
@@ -137,15 +136,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                 backgroundColor: Theme.of(context).colorScheme.error,
                 appBarBackgroundColor: Theme.of(context).colorScheme.error,
                 backButton: CustomBackButton.light(),
-                slivers: [
-                  buildErrorSliver(context),
-                ],
+                slivers: [buildErrorSliver(context)],
               ),
             );
         }
       },
     );
-
   }
-
 }

@@ -1,12 +1,11 @@
 import 'package:core/core.dart';
-import 'package:dhyana/modules/practice/chanting/chanting_module.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ProfileSettingsClearCache extends StatefulWidget {
-  final ChantingPublicApi chantPlaybackRepository;
+  final ClearCacheCapability clearCacheCapability;
 
   const ProfileSettingsClearCache({
-    required this.chantPlaybackRepository,
+    required this.clearCacheCapability,
     super.key,
   });
 
@@ -18,16 +17,23 @@ class ProfileSettingsClearCache extends StatefulWidget {
 class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
   ProcessingState loadingState = .idle;
 
-  void _onButtonTap(BuildContext context) {
+  Future<void> _onButtonTap() async {
     setState(() {
       loadingState = .processing;
     });
 
-    widget.chantPlaybackRepository.clearCachedChants().then((_) {
+    try {
+      await widget.clearCacheCapability();
+      if (!mounted) return;
       setState(() {
         loadingState = .completed;
       });
-    });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        loadingState = .idle;
+      });
+    }
   }
 
   @override
@@ -39,7 +45,7 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
             vertical: DesignSpec.paddingMd,
             horizontal: DesignSpec.paddingXl,
           ),
-          onPressed: () => _onButtonTap(context),
+          onPressed: _onButtonTap,
           elevation: 0,
           hoverElevation: 0,
           focusElevation: 0,
@@ -57,15 +63,12 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
                   color: Colors.black,
                 ),
               ),
-              if (loadingState == .processing || loadingState == .completed) Spacer(),
-              if (loadingState == .processing) CircularProgressIndicator.adaptive(
-
-              ),
+              if (loadingState == .processing || loadingState == .completed)
+                Spacer(),
+              if (loadingState == .processing)
+                CircularProgressIndicator.adaptive(),
               if (loadingState == .completed)
-                Icon(
-                  Icons.check_circle_outline_rounded,
-                  size: 20,
-                )
+                Icon(Icons.check_circle_outline_rounded, size: 20),
             ],
           ),
         ),

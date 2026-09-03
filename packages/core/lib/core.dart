@@ -117,6 +117,7 @@ export 'src/presentation/viewmodel/profile_state_cubit.dart';
 export 'src/presentation/viewmodel/remote_settings_cubit.dart';
 
 export 'src/service/analytics_service.dart';
+export 'src/service/clear_cache_capability.dart';
 export 'src/service/crashlytics_service.dart';
 export 'src/service/functions_service.dart';
 export 'src/service/haptics_service.dart';

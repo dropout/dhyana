@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/src/presentation/view/screen/profile_settings_screen.dart';
@@ -7,7 +8,6 @@ import 'package:profile/src/presentation/view/screen/profile_screen.dart';
 import 'package:profile/src/presentation/view/screen/profile_wizard_screen.dart';
 import 'package:profile/src/presentation/view/screen/profile_edit_screen.dart';
 import 'package:profile/src/presentation/view/screen/delete_profile_screen.dart';
-
 
 part 'profile_routes.g.dart';
 
@@ -35,7 +35,7 @@ class ProfileRoute extends GoRouteData with AuthRedirectHook, $ProfileRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-    ProfileScreen(profileId: profileId);
+      ProfileScreen(profileId: profileId);
 
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
@@ -82,7 +82,10 @@ class ProfileSettingsRoute extends GoRouteData
   const ProfileSettingsRoute({required this.profileId});
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ProfileSettingsScreen(profileId: profileId);
+      ProfileSettingsScreen(
+        profileId: profileId,
+        clearCacheCapability: GetIt.I.get<ClearCacheCapability>(),
+      );
   @override
   String? redirect(BuildContext context, GoRouterState state) =>
       authRedirectHook(context, state);
