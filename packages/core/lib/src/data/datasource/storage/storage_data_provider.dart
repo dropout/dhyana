@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_provider/firebase_provider.dart';
 
 abstract interface class StorageDataProvider {
 

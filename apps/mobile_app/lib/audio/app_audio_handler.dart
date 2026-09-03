@@ -30,6 +30,7 @@ class DefaultAppAudioHandler extends SwitchAudioHandler
     this._soLoudChantingAudioHandler,
   ) : super(_timerAudioHandler);
 
+  @override
   Future<Duration> get outputLatency async {
     if (Platform.isIOS) {
       return AVAudioSession().outputLatency;

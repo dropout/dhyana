@@ -1,7 +1,6 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:core/src/domain/entity/city_search_result.dart';
 import 'package:core/src/service/functions_service.dart';
-
+import 'package:firebase_provider/firebase_provider.dart';
 
 class FirebaseFunctionsService implements FunctionsService {
 

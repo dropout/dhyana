@@ -633,7 +633,7 @@
     },
     {
       "name": "gaimon",
-      "rootUri": "file:///Users/adam/.pub-cache/hosted/pub.dev/gaimon-1.4.3",
+      "rootUri": "file:///Users/adam/.pub-cache/hosted/pub.dev/gaimon-1.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.11"
     },
@@ -903,7 +903,7 @@
     },
     {
       "name": "material_ui",
-      "rootUri": "file:///Users/adam/.pub-cache/hosted/pub.dev/material_ui-1.1.0",
+      "rootUri": "file:///Users/adam/.pub-cache/hosted/pub.dev/material_ui-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.12"
     },

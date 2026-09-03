@@ -13,7 +13,7 @@ export 'package:cloud_firestore/cloud_firestore.dart' show
   FirebaseFirestore, SetOptions, DocumentSnapshot, QueryDocumentSnapshot,
   DocumentReference, CollectionReference, Query,
   QuerySnapshot, WriteBatch, Transaction, FieldPath, FieldValue, Timestamp,
-  GetOptions;
+  GetOptions, Source;
 
 export 'package:firebase_storage/firebase_storage.dart' show
   ListResult, FirebaseStorage, Reference,
@@ -21,7 +21,7 @@ export 'package:firebase_storage/firebase_storage.dart' show
   DownloadTask, TaskState, TaskSnapshot;
 
 export 'package:cloud_functions/cloud_functions.dart' show
-  FirebaseFunctions, HttpsCallable, HttpsCallableResult;
+  FirebaseFunctions, HttpsCallable, HttpsCallableResult, HttpsCallableOptions;
 
 export 'package:firebase_remote_config/firebase_remote_config.dart' show
   FirebaseRemoteConfig, RemoteConfigValue,

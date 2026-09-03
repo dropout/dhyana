@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/src/data/datasource/data_provider.dart';
 import 'package:core/src/domain/entity/serializable_entity.dart';
 

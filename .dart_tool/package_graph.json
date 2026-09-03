@@ -72,6 +72,7 @@
         "intl",
         "json_annotation",
         "logger",
+        "material_ui",
         "package_info_plus",
         "particle_field",
         "path_provider",
@@ -141,6 +142,7 @@
         "flutter_volume_listener",
         "form_builder_validators",
         "freezed_annotation",
+        "gaimon",
         "get_it",
         "go_router",
         "go_router_builder",
@@ -527,7 +529,7 @@
     },
     {
       "name": "material_ui",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "dependencies": [
         "collection",
         "cupertino_ui",
@@ -937,7 +939,7 @@
     },
     {
       "name": "gaimon",
-      "version": "1.4.3",
+      "version": "1.5.0",
       "dependencies": [
         "flutter"
       ]
