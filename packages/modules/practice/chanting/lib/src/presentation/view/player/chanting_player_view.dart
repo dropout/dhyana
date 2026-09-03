@@ -240,7 +240,6 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
 //           mainAxisSize: MainAxisSize.min,
 //           children: [
 //             Text(
-//               context.l10n.chantingNextChantIn,
 //               style: const TextStyle(color: Colors.white70, fontSize: 16),
 //             ),
 //             Gap.medium(),
