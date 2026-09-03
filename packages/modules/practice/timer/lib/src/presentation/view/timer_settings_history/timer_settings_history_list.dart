@@ -9,21 +9,19 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TimerSettingsHistoryList extends StatelessWidget {
-
   final String profileId;
   final List<TimerSettingsHistoryRecordEntity> timerSettingsHistoryRecordList;
 
   const TimerSettingsHistoryList({
     required this.profileId,
     required this.timerSettingsHistoryRecordList,
-    super.key
+    super.key,
   });
 
   void _onListItemTap(BuildContext context, TimerSettings timerSettings) async {
-    
     context.hapticsTap();
 
-    // Save the selected settings to the history cubit so that it can be    
+    // Save the selected settings to the history cubit so that it can be
     await context.read<TimerSettingsHistoryCubit>().useSettings(
       profileId,
       timerSettings,
@@ -33,34 +31,33 @@ class TimerSettingsHistoryList extends StatelessWidget {
     if (context.mounted) {
       context.services.homeNavigator.navigateToHome(
         refresh: DateTime.now().millisecondsSinceEpoch,
-        $extra: timerSettings,
       );
-      // HomeRoute(
-      //   refresh: DateTime.now().millisecondsSinceEpoch,
-      //   $extra: timerSettings,
-      // ).go(context);
       Future.delayed(Durations.medium1, () {
         if (context.mounted) {
           context.showSuccessfulToast(
-            AppLocalizations.of(context).timerSettingsHistoryApplied
+            AppLocalizations.of(context).timerSettingsHistoryApplied,
           );
         }
       });
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildListDelegate(
-        timerSettingsHistoryRecordList.map((record) => TimerSettingsHistoryListItem(
-          timerSettingsHistoryRecord: record,
-          onTap: () => _onListItemTap(context, record.timerSettings.toApi()),
-        )).toList().intersperse(const SizedBox(height: DesignSpec.spacingMd)).revealListAnimation()
+        timerSettingsHistoryRecordList
+            .map(
+              (record) => TimerSettingsHistoryListItem(
+                timerSettingsHistoryRecord: record,
+                onTap: () =>
+                    _onListItemTap(context, record.timerSettings.toApi()),
+              ),
+            )
+            .toList()
+            .intersperse(const SizedBox(height: DesignSpec.spacingMd))
+            .revealListAnimation(),
       ),
     );
   }
-
-
 }

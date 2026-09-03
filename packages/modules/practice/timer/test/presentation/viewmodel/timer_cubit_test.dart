@@ -17,7 +17,6 @@ import 'package:timer/src/public/model/timer_settings.dart';
 
 import '../../timer_mock_definitions.dart';
 
-
 void main() async {
   group('TimerAudioServiceElapsedTimeSource', () {
     late MockTimerAudioService mockAudioService;
@@ -29,12 +28,11 @@ void main() async {
     });
 
     test('emits elapsed time based on audio service playback state', () async {
-      final StreamController<PlaybackStateEntity> playbackStateStreamController =
-          StreamController<PlaybackStateEntity>();
+      final StreamController<PlaybackStateEntity>
+      playbackStateStreamController = StreamController<PlaybackStateEntity>();
 
-      when(
-        () => mockAudioService.playbackStateStream,
-      ).thenAnswer((_) => playbackStateStreamController.stream);
+      when(() => mockAudioService.playbackStateStream)
+          .thenAnswer((_) => playbackStateStreamController.stream);
 
       final List<Duration> emittedDurations = [];
       final subscription = elapsedTimeSource.elapsedTimeStream.listen(
@@ -43,12 +41,18 @@ void main() async {
 
       // Emit a playback state with position 5 seconds
       playbackStateStreamController.add(
-        PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration(seconds: 5)),
+        PlaybackStateEntity(
+          status: PlaybackStatus.playing,
+          position: Duration(seconds: 5),
+        ),
       );
 
       // Emit another playback state with position 10 seconds
       playbackStateStreamController.add(
-        PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration(seconds: 10)),
+        PlaybackStateEntity(
+          status: PlaybackStatus.playing,
+          position: Duration(seconds: 10),
+        ),
       );
 
       await Future.delayed(Duration.zero); // Allow stream to process
@@ -65,13 +69,13 @@ void main() async {
 
     late TimerSettings defaultTimerSettings;
     late MockTimerAudioService mockAudioService;
-    late MockGoRouter mockRouter;
     late MockConfigureEventSchedulerUseCase mockConfigureEventSchedulerUseCase;
     late MockStartTimerUseCase mockStartTimerUseCase;
     late MockPlaybackStateChangeUseCase mockPlaybackStateChangeUseCase;
     late MockCompleteTimerUseCase mockCompleteTimerUseCase;
     late TimerEventScheduler eventScheduler;
     late CrashlyticsService loggingCrashlyticsService;
+    late MockSessionNavigator sessionNavigator;
 
     late StreamController<PlaybackStateEntity> playbackStateStreamController;
 
@@ -79,12 +83,12 @@ void main() async {
       timerSettings: timerSettings ?? defaultTimerSettings,
       audioService: mockAudioService,
       eventScheduler: eventScheduler,
-      router: mockRouter,
       crashlyticsService: loggingCrashlyticsService,
       configureEventSchedulerUseCase: mockConfigureEventSchedulerUseCase,
       startTimerUseCase: mockStartTimerUseCase,
       playbackStateChangeUseCase: mockPlaybackStateChangeUseCase,
       completeTimerUseCase: mockCompleteTimerUseCase,
+      sessionNavigator: sessionNavigator,
     );
 
     setUpAll(() {
@@ -93,7 +97,7 @@ void main() async {
       playbackStateStreamController =
           StreamController<PlaybackStateEntity>.broadcast();
 
-      registerFallbackValue(  
+      registerFallbackValue(
         TimerStateEntity(
           timerSettings: defaultTimerSettings.toDomain(),
           timerStatus: TimerStatus.idle,
@@ -103,7 +107,12 @@ void main() async {
         ),
       );
 
-      registerFallbackValue(PlaybackStateEntity(status: PlaybackStatus.idle, position: Duration.zero));
+      registerFallbackValue(
+        PlaybackStateEntity(
+          status: PlaybackStatus.idle,
+          position: Duration.zero,
+        ),
+      );
     });
 
     setUp(() {
@@ -113,15 +122,14 @@ void main() async {
         source: TimerAudioServiceElapsedTimeSource(mockAudioService),
       );
 
-      mockRouter = MockGoRouter();
+      sessionNavigator = MockSessionNavigator();
       mockConfigureEventSchedulerUseCase = MockConfigureEventSchedulerUseCase();
       mockStartTimerUseCase = MockStartTimerUseCase();
       mockPlaybackStateChangeUseCase = MockPlaybackStateChangeUseCase();
       mockCompleteTimerUseCase = MockCompleteTimerUseCase();
 
-      when(
-        () => mockAudioService.playbackStateStream,
-      ).thenAnswer((_) => playbackStateStreamController.stream);
+      when(() => mockAudioService.playbackStateStream)
+          .thenAnswer((_) => playbackStateStreamController.stream);
 
       when(() => mockAudioService.stop()).thenAnswer((_) => Future.value(null));
     });
@@ -216,9 +224,8 @@ void main() async {
     blocTest<TimerCubit, TimerStateEntity>(
       'can pause',
       build: () {
-        when(
-          () => mockAudioService.pause(),
-        ).thenAnswer((_) => Future.value(null));
+        when(() => mockAudioService.pause())
+            .thenAnswer((_) => Future.value(null));
         final timerCubit = createTimerCubit();
         return timerCubit;
       },
@@ -234,9 +241,8 @@ void main() async {
     blocTest<TimerCubit, TimerStateEntity>(
       'can resume',
       build: () {
-        when(
-          () => mockAudioService.resume(),
-        ).thenAnswer((_) => Future.value(null));
+        when(() => mockAudioService.resume())
+            .thenAnswer((_) => Future.value(null));
         final timerCubit = createTimerCubit();
         return timerCubit;
       },
@@ -252,9 +258,8 @@ void main() async {
     blocTest<TimerCubit, TimerStateEntity>(
       'can finish timer',
       build: () {
-        when(
-          () => mockAudioService.stop(),
-        ).thenAnswer((_) => Future.value(null));
+        when(() => mockAudioService.stop())
+            .thenAnswer((_) => Future.value(null));
 
         final timerCubit = createTimerCubit();
         return timerCubit;
@@ -288,7 +293,10 @@ void main() async {
       },
       act: (cubit) async {
         playbackStateStreamController.add(
-          PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration.zero),
+          PlaybackStateEntity(
+            status: PlaybackStatus.playing,
+            position: Duration.zero,
+          ),
         );
         await Future.delayed(Duration.zero); // allow stream to process
       },
@@ -306,7 +314,10 @@ void main() async {
       },
       act: (cubit) async {
         playbackStateStreamController.add(
-          PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration.zero),
+          PlaybackStateEntity(
+            status: PlaybackStatus.playing,
+            position: Duration.zero,
+          ),
         );
         await Future.delayed(Duration.zero); // allow stream to process
       },
@@ -314,7 +325,7 @@ void main() async {
       verify: (timerCubit) {
         verifyNever(() => mockPlaybackStateChangeUseCase.execute(any(), any()));
       },
-    );    
+    );
 
     blocTest<TimerCubit, TimerStateEntity>(
       'can handle playbackstate change when completed',
@@ -326,11 +337,13 @@ void main() async {
           cubit.finish();
 
           playbackStateStreamController.add(
-            PlaybackStateEntity(status: PlaybackStatus.playing, position: Duration.zero),
+            PlaybackStateEntity(
+              status: PlaybackStatus.playing,
+              position: Duration.zero,
+            ),
           );
           await Future.delayed(Duration.zero); // allow stream to process
         });
-
       },
       expect: () => [
         TimerStateEntity(
@@ -346,7 +359,6 @@ void main() async {
         verifyNever(() => mockPlaybackStateChangeUseCase.execute(any(), any()));
       },
     );
-
   });
   // eof group
 } // eof main

@@ -12,28 +12,22 @@ import 'package:timer/src/public/view/timer_settings/interval_input.dart';
 import 'package:timer/src/public/view/timer_settings/input_gap.dart';
 import 'package:get_it/get_it.dart';
 
-
 class TimerSettingsView extends StatefulWidget {
   final TimerSettings timerSettings;
 
-  static Widget withCubit({
-    required TimerSettings? timerSettings,
-  }) {
-    return SmartBlocProvider<TimerSettingsCubit, TimerSettingsState>(
+  static Widget withCubit() {
+    return BlocProvider.value(
+      value: GetIt.instance.get<TimerSettingsCubit>(),
       key: const ValueKey('timer_settings_cubit'),
-      create: (context) {
-        final cubit = GetIt.instance.get<TimerSettingsCubit>();
-        if (timerSettings != null) {
-          cubit.timerSettingsChanged(timerSettings);
-        }
-        return cubit;
-      },
-      builder: (context, state) {
-        return TimerSettingsView(
-          timerSettings: state.timerSettings,
-          key: const ValueKey('timer_settings_view'),
-        );
-      },
+      child: Builder(
+        builder: (context) =>
+            BlocBuilder<TimerSettingsCubit, TimerSettingsState>(
+              builder: (context, state) => TimerSettingsView(
+                timerSettings: state.timerSettings,
+                key: const ValueKey('timer_settings_view'),
+              ),
+            ),
+      ),
     );
   }
 

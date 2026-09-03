@@ -57,3 +57,6 @@ class MockTimerAppPort
   extends Mock
   implements TimerAppPort {}
   
+class MockSessionNavigator
+  extends Mock
+  implements SessionNavigator {}

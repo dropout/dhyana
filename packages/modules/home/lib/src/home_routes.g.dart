@@ -22,7 +22,6 @@ mixin $HomeRoute on GoRouteData {
       state.uri.queryParameters,
       int.tryParse,
     ),
-    $extra: state.extra as Object?,
   );
 
   HomeRoute get _self => this as HomeRoute;
@@ -36,19 +35,17 @@ mixin $HomeRoute on GoRouteData {
   );
 
   @override
-  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+  void go(BuildContext context) => context.go(location);
 
   @override
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: _self.$extra);
+      context.pushReplacement(location);
 
   @override
-  void replace(BuildContext context) =>
-      context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) => context.replace(location);
 }
 
 T? _$convertMapValue<T>(

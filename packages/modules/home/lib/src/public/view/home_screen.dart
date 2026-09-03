@@ -7,18 +7,14 @@ import 'package:home/src/public/enum/home_screen_view_state.dart';
 import 'package:home/src/public/viewmodel/home_screen_cubit.dart';
 import 'package:timer/timer.dart';
 import 'package:chanting/chanting.dart';
+
 import 'home_screen_appbar.dart';
 import 'home_screen_bottom_menu.dart';
 
 /// A screen that allows the user to configure and start
 /// a sitting or chanting session.
 class HomeScreen extends StatelessWidget {
-  /// Optional [TimerSettings] to pre-configure the sitting session branch of
-  /// the home screen. If provided, the home screen will start in the
-  /// [HomeScreenViewState.sitting] branch with the given settings pre-loaded.
-  final TimerSettings? timerSettings;
-
-  const HomeScreen({this.timerSettings, super.key});
+  const HomeScreen({super.key});
 
   void _onSessionTypeChange(
     BuildContext context,
@@ -31,9 +27,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartBlocProvider<HomeScreenCubit, HomeScreenState>(
-      create: (_) => GetIt.I.get<HomeScreenCubit>(
-        param1: (timerSettings != null) ? HomeScreenViewState.sitting : null,
-      ),
+      create: (_) => GetIt.I.get<HomeScreenCubit>(param1: null),
       builder: (context, state) => buildScaffolding(context, state),
     );
   }
@@ -94,7 +88,7 @@ class HomeScreen extends StatelessWidget {
 
   /// Builds the sitting-session branch of the home screen.
   Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) =>
-      TimerSettingsView.withCubit(timerSettings: timerSettings);
+      TimerSettingsView.withCubit();
 
   /// Builds the chanting-session branch of the home screen.
   Widget buildChantingSettingsView(BuildContext context) =>

@@ -2,15 +2,15 @@ import 'package:auth/auth.dart';
 
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 import 'package:social/social.dart';
 import 'package:timer/src/audio/so_timer_audio_handler.dart';
+import 'package:timer/src/data/mapper/timer_settings_mapper.dart';
 import 'package:timer/src/data/service/default_timer_app_port.dart';
-import 'package:timer/src/domain/entity/timer_state_entity.dart';
+import 'package:timer/src/domain/entity/timer_settings_entity.dart';
 import 'package:timer/src/domain/service/timer_app_port.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/data/service/default_timer_audio_service.dart';
@@ -26,12 +26,9 @@ import 'package:timer/src/presentation/viewmodel/timer_settings_history/timer_se
 
 extension TimerModuleDependencyInjection on GetIt {
   void registerTimerModuleDependencies() {
-
     // Audio handler
     registerFactory<SoTimerAudioHandler>(
-      () => SoTimerAudioHandler(
-        soloud: SoLoud.instance,
-      )
+      () => SoTimerAudioHandler(soloud: SoLoud.instance),
     );
 
     // Repositories
@@ -71,15 +68,17 @@ extension TimerModuleDependencyInjection on GetIt {
         timerAppPort: GetIt.I.get<TimerAppPort>(),
         timerAudioService: GetIt.I.get<DefaultTimerAudioService>(),
         eventScheduler: eventScheduler,
-        timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),      
-        crashlyticsService: GetIt.I.get<CrashlyticsService>(),       
+        timerSettingsHistoryRepository: GetIt.I
+            .get<TimerSettingsHistoryRepository>(),
+        crashlyticsService: GetIt.I.get<CrashlyticsService>(),
       );
     });
 
-    registerFactoryParam<CompleteTimerUseCase, TimerAudioService, TimerEventScheduler>((
-      timerAudioService,
-      eventScheduler,    
-    ) {
+    registerFactoryParam<
+      CompleteTimerUseCase,
+      TimerAudioService,
+      TimerEventScheduler
+    >((timerAudioService, eventScheduler) {
       return CompleteTimerUseCase(
         timerAudioService: timerAudioService,
         eventScheduler: eventScheduler,
@@ -87,21 +86,23 @@ extension TimerModuleDependencyInjection on GetIt {
       );
     });
 
-
     // ViewModels
     // Timer Settings History Cubit
-    registerFactory<TimerSettingsHistoryCubit>(() => TimerSettingsHistoryCubit(
-      timerSettingsHistoryRepository: get<TimerSettingsHistoryRepository>(),
-      crashlyticsService: get<CrashlyticsService>(),
-    ));
+    registerFactory<TimerSettingsHistoryCubit>(
+      () => TimerSettingsHistoryCubit(
+        timerSettingsHistoryRepository: get<TimerSettingsHistoryRepository>(),
+        crashlyticsService: get<CrashlyticsService>(),
+        timerSettingsCubit: get<TimerSettingsCubit>(),
+      ),
+    );
 
     // Timer Settings Cubit
-    registerFactory<TimerSettingsCubit>(() => TimerSettingsCubit(
-      crashlyticsService: get<CrashlyticsService>(),
-    ));
+    registerLazySingleton<TimerSettingsCubit>(
+      () => TimerSettingsCubit(crashlyticsService: get<CrashlyticsService>()),
+    );
 
     // Timer Cubit with parameterized TimerSettings
-    registerFactoryParam<TimerCubit, TimerStateEntity, void>((
+    registerFactoryParam<TimerCubit, TimerSettingsEntity, void>((
       timerSettings,
       _,
     ) {
@@ -113,22 +114,17 @@ extension TimerModuleDependencyInjection on GetIt {
         sessionNavigator: get<SessionNavigator>(),
         audioService: audioService,
         eventScheduler: timerEventScheduler,
-        router: get<GoRouter>(),
         crashlyticsService: get<CrashlyticsService>(),
         configureEventSchedulerUseCase: ConfigureEventSchedulerUseCase(
           eventScheduler: timerEventScheduler,
         ),
-        startTimerUseCase: get<StartTimerUseCase>(
-          param1: timerEventScheduler,
-        ),
+        startTimerUseCase: get<StartTimerUseCase>(param1: timerEventScheduler),
         playbackStateChangeUseCase: PlaybackStateChangeUseCase(),
         completeTimerUseCase: get<CompleteTimerUseCase>(
           param1: audioService,
           param2: timerEventScheduler,
-        ),
+        ), timerSettings: timerSettings.toApi(),
       );
     });
-
-    
   }
 }
