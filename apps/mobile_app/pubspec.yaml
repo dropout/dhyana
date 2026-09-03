@@ -23,17 +23,15 @@ dependencies:
   provider: ^6.0.5
   get_it: ^9.2.1
   flutter_bloc: ^9.1.1
-  hydrated_bloc: ^11.0.0
   freezed_annotation: ^3.0.0
   json_annotation: ^4.8.1
-  uuid: ^4.4.0
-  package_info_plus: ^10.1.0
-  vector_math: ^2.1.4
-  collection: ^1.19.0
-  faker: ^2.2.0
-  rnd: 0.2.0
-  flutter_cache_manager: ^3.4.1
-  clock: ^1.1.2 # For faking time in tests and better time handling in general
+  # package_info_plus: ^10.1.0
+  # vector_math: ^2.1.4
+  # collection: ^1.19.0
+  # faker: ^2.2.0
+  # rnd: 0.2.0
+  # flutter_cache_manager: ^3.4.1
+  # clock: ^1.1.2 # For faking time in tests and better time handling in general
   path_provider: ^2.1.5
 
   # Ui
@@ -71,9 +69,7 @@ dependencies:
   flutter_volume_listener:
     git:
       url: git@github.com:dropout/flutter_volume_listener.git
-  flutter_mindful_minutes:
-    git:
-      url: git@github.com:dropout/flutter_mindful_minutes.git
+
 
   # Internal packages
   firebase_provider: ^1.0.0
@@ -90,24 +86,6 @@ dependencies:
   bar_chart: ^0.0.1
   particle_field: ^1.0.0
 
-  # # Firebase
-  # firebase_core: ^4.1.1
-  # cloud_firestore: ^6.0.2
-  # firebase_storage: ^13.0.2
-  # firebase_remote_config: ^6.0.2
-  # cloud_functions: ^6.0.4
-
-  # # Firebase Auth
-  # firebase_auth: ^6.1.0
-  # google_sign_in: ^7.2.0
-  # sign_in_with_apple: ^8.1.0
-  # crypto: ^3.0.2
-
-  # # Firebase diagnostics
-  # firebase_analytics: ^12.0.2
-  # firebase_crashlytics: ^5.0.2
-
-
 
 dev_dependencies:
   flutter_test:
@@ -115,16 +93,16 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
-  sqflite_common_ffi: ^2.4.2
-  nock: ^1.2.3
+  # sqflite_common_ffi: ^2.4.2
+  # nock: ^1.2.3
   flutter_lints: ^6.0.0
   build_runner: ^2.4.6
   freezed: ^3.0.6
   json_serializable: ^6.7.1
-  bloc_test: ^10.0.0
-  mocktail: ^1.0.3
-  mocktail_image_network: ^1.2.0
-  drift_dev: ^2.30.0
+  # bloc_test: ^10.0.0
+  # mocktail: ^1.0.3
+  # mocktail_image_network: ^1.2.0
+  # drift_dev: ^2.30.0
 
 
 flutter:

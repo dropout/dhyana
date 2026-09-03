@@ -30,9 +30,9 @@ class DefaultTimerService with LoggerMixin implements TimerService {
       StreamController<void>.broadcast();
 
   DefaultTimerService({
-    required Duration duration,
+    required this._duration,
     this.tickIntervalInMilliSeconds = 500,
-  }) : _duration = duration;
+  });
 
   @override
   void start() {

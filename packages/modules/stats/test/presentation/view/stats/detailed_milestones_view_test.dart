@@ -4,10 +4,7 @@ import 'package:faker/faker.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 import 'package:stats/src/data/datasource/faker_stats_extension.dart';
-import 'package:profile/l10n/profile_localizations.dart';
 
-import 'package:profile/src/public/view/stats/detailed_milestones_view.dart';
-import 'package:profile/src/public/view/stats/label_value_detail.dart';
 
 
 void main() {

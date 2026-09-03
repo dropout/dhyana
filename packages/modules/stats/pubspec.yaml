@@ -2,6 +2,7 @@ name: stats
 resolution: workspace
 description: "A new Flutter package project."
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -28,7 +29,11 @@ dependencies:
   flutter_bloc: ^9.1.1
   faker: ^2.2.0
   sqflite_common_ffi: ^2.4.2+1
-  
+  flutter_mindful_minutes:
+    git:
+      url: git@github.com:dropout/flutter_mindful_minutes.git  
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

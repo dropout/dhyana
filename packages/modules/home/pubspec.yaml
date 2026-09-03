@@ -30,6 +30,8 @@ dependencies:
   chanting: ^0.0.1
 
 
+  intl: any
+  flutter_volume_listener: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -13,7 +13,7 @@ class SimpleAudioService {
   final StreamController<bool> _isPlayingController =
       StreamController<bool>.broadcast();
 
-  SimpleAudioService({required SoLoud soloud}) : _soloud = soloud;
+  SimpleAudioService({required this._soloud});
 
   bool get isPlaying {
     if (_soundHandle != null && _soloud.getIsValidVoiceHandle(_soundHandle!)) {

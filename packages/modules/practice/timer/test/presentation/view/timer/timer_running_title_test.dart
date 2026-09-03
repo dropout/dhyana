@@ -5,7 +5,7 @@ import 'package:timer/src/presentation/view/timer/timer_running_title.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../../../core/lib/src/testing/test_context_providers.dart';
+import 'package:core/src/testing/test_context_providers.dart';
 
 void main() {
 

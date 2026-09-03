@@ -1,9 +1,7 @@
-import 'package:profile/l10n/profile_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 
-import 'label_value_detail.dart';
 
 
 class DetailedSummaryView extends StatelessWidget {

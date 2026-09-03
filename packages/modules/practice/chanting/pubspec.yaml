@@ -2,7 +2,9 @@ name: chanting
 resolution: workspace
 description: "A new Flutter package project."
 version: 0.0.1
+publish_to: none
 homepage:
+
 
 environment:
   sdk: ^3.13.1
@@ -34,6 +36,12 @@ dependencies:
   faker: ^2.2.0
   flutter_slidable: ^4.0.3
   mocktail: ^1.0.5
+
+  assa_parser:
+    git:
+      url: git@github.com:dropout/assa_parser.git
+
+
 
 dev_dependencies:
   flutter_test:

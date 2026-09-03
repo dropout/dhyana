@@ -1,4 +1,3 @@
-import 'package:profile/l10n/profile_localizations.dart';
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 import 'package:material_ui/material_ui.dart';

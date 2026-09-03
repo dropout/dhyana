@@ -36,6 +36,9 @@ dependencies:
   smooth_page_indicator: ^3.0.0
 
 
+  flutter_form_builder: any
+  flutter_shaders: any
+  vector_math: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

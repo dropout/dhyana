@@ -37,7 +37,7 @@ class TimerEventScheduler {
 
   StreamSubscription<Duration>? _subscription;
 
-  TimerEventScheduler({required ElapsedTimeSource source}) : _source = source;
+  TimerEventScheduler({required this._source});
 
   /// Registers [listener] to fire once when elapsed time reaches [at].
   ///

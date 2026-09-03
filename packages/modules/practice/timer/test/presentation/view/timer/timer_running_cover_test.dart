@@ -2,7 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:timer/src/presentation/view/timer/timer_running_cover.dart';
 
-import '../../../../../../../core/lib/src/testing/test_context_providers.dart';
+import 'package:core/src/testing/test_context_providers.dart';
 
 void main() {
 

@@ -7,7 +7,6 @@ import 'package:profile/src/data/datasource/faker_profile_extension.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/core.dart';
-import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
 import 'package:profile/src/public/view/stats/milestone_progress_view_item.dart';
 
 

@@ -57,6 +57,15 @@ dependencies:
       url: git@github.com:dropout/flutter_mindful_minutes.git
 
 
+  url_launcher: any
+  blurhash_dart: any
+  logger: any
+  cached_network_image: any
+  flutter_blurhash: any
+  package_info_plus: any
+  dhyana: any
+  flutter_animate: any
+  dart_geohash: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

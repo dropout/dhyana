@@ -40,6 +40,15 @@ dependencies:
       url: git@github.com:dropout/flutter-tflite.git
 
 
+  flip_board: any
+  particle_field: any
+  rnd: any
+  vector_math: any
+  flutter_mindful_minutes:
+    git:
+      url: git@github.com:dropout/flutter_mindful_minutes.git
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

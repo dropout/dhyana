@@ -15,6 +15,7 @@ dependencies:
   rnd: 0.2.0
   vector_math: ^2.1.4
 
+  material_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

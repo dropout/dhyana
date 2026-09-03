@@ -10,8 +10,6 @@ import 'package:profile/src/data/datasource/firebase_profile_data_provider.dart'
 import 'package:profile/src/data/datasource/profile_data_provider.dart';
 import 'package:profile/src/data/repository/default_profile_repository.dart';
 import 'package:profile/src/domain/repository/profile_repository.dart';
-import 'package:core/src/service/safe_image_detector.dart';
-import 'package:core/src/infrastructure/platform/default_safe_image_detector.dart';
 import 'package:profile/src/data/service/default_profile_public_api.dart';
 import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
 import 'package:profile/src/domain/usecase/delete_profile_use_case.dart';

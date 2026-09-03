@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-import 'package:core/src/service/safe_image_detector.dart';
 
 class DefaultSafeImageDetectorFactory implements SafeImageDetectorFactory {
   /// Path to the TFLite model
@@ -53,17 +52,15 @@ class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
   final double _threshold;
 
   DefaultSafeImageDetector._({
-    required Interpreter interpreter,
-    required double threshold,
-  }) : _interpreter = interpreter,
-       _threshold = threshold;
+    required this._interpreter,
+    required this._threshold,
+  });
 
   @visibleForTesting
   DefaultSafeImageDetector.forTest({
-    required Interpreter interpreter,
-    required double threshold,
-  }) : _interpreter = interpreter,
-       _threshold = threshold;
+    required this._interpreter,
+    required this._threshold,
+  });
 
   /// Detects NSFW content from an image
   @override

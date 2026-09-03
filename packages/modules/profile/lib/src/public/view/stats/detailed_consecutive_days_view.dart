@@ -1,7 +1,5 @@
-import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/profile.dart';
 import 'package:core/core.dart';
-import 'package:profile/src/public/view/stats/label_value_detail.dart';
 import 'package:material_ui/material_ui.dart';
 
 

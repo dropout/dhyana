@@ -2,8 +2,6 @@ import 'package:core/core.dart';
 import 'package:faker/faker.dart';
 import 'package:profile/profile.dart';
 import 'package:stats/src/data/datasource/faker_stats_extension.dart';
-import 'package:profile/src/public/view/stats/detailed_consecutive_days_view.dart';
-import 'package:profile/src/public/view/stats/label_value_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 
