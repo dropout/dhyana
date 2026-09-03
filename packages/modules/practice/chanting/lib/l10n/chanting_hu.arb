@@ -1,0 +1,13 @@
+{
+  "@@locale": "hu",
+  "minutesPluralWithNumber": "{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}",
+  "statsTotal": "Összesen",
+  "chantingTitle": "Éneklés",
+  "chantingAddChantSheetTitle": "Hozzáadás",
+  "chantingAddChantSheetEmptyState": "Nincs elérhető ének.",
+  "chantingAddChantListItemAddAction": "Hozzáadás",
+  "chantingAddChantListItemAddedAction": "Hozzáadva",
+  "chantingPlaylistSheetTitle": "Lejátszási lista",
+  "chantingPlaylistBadgePlaying": "Lejátszás",
+  "chantingPlaylistBadgePaused": "Szünet"
+}

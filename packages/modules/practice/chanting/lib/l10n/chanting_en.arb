@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "minutesPluralWithNumber": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
+  "statsTotal": "Total",
+  "chantingTitle": "Chanting",
+  "chantingAddChantSheetTitle": "Add Chant",
+  "chantingAddChantSheetEmptyState": "No chants available.",
+  "chantingAddChantListItemAddAction": "Add to playlist",
+  "chantingAddChantListItemAddedAction": "Added",
+  "chantingPlaylistSheetTitle": "Playlist",
+  "chantingPlaylistBadgePlaying": "Playing",
+  "chantingPlaylistBadgePaused": "Paused"
+}

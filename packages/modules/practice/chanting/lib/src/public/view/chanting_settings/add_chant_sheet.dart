@@ -1,3 +1,4 @@
+import 'package:chanting/l10n/chanting_localizations.dart';
 import 'package:chanting/src/chanting_module.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -37,7 +38,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
             child: Text(
-              context.l10n.chantingAddChantSheetTitle,
+              ChantingLocalizations.of(context).chantingAddChantSheetTitle,
               textAlign: TextAlign.center,
               style: context.theme.textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
@@ -62,7 +63,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
             ),
             child: AppButton(
               onTap: () => _onOkayPressed(context),
-              text: context.l10n.close.toUpperCase(),
+              text: context.coreL10n.close.toUpperCase(),
             ),
           ),
         ],
@@ -73,7 +74,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
   Widget buildEmptyState(BuildContext context) {
     return Center(
       child: Text(
-        context.l10n.chantingAddChantSheetEmptyState,
+        ChantingLocalizations.of(context).chantingAddChantSheetEmptyState,
         textAlign: TextAlign.center,
         style: context.theme.textTheme.titleLarge!.copyWith(
           fontWeight: FontWeight.bold,
@@ -161,8 +162,8 @@ class _AddChantButtonState extends State<_AddChantButton> {
           ),
           label: Text(
             _showCheckIcon
-                ? context.l10n.chantingAddChantListItemAddedAction.toUpperCase()
-                : context.l10n.chantingAddChantListItemAddAction.toUpperCase(),
+                ? ChantingLocalizations.of(context).chantingAddChantListItemAddedAction.toUpperCase()
+                : ChantingLocalizations.of(context).chantingAddChantListItemAddAction.toUpperCase(),
             style: context.theme.textTheme.labelSmall!.copyWith(
               color: _showCheckIcon ? Colors.white : Colors.black,
               fontWeight: FontWeight.bold,

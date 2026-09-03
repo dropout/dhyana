@@ -1,3 +1,4 @@
+import 'package:chanting/l10n/chanting_localizations.dart';
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
@@ -27,7 +28,7 @@ class PlaylistSheet extends StatelessWidget {
           children: [
             Gap.large(),
             Text(
-              context.l10n.chantingPlaylistSheetTitle,
+              ChantingLocalizations.of(context).chantingPlaylistSheetTitle,
               style: context.theme.textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -72,7 +73,7 @@ class PlaylistSheet extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: DesignSpec.padding2Xl),
               child: AppButton(
                 onTap: () => context.pop(),
-                text: context.l10n.close.toUpperCase(),
+                text: context.coreL10n.close.toUpperCase(),
               ),
             ),
           ),
@@ -88,8 +89,8 @@ class PlaylistSheet extends StatelessWidget {
   ) {
     if (index == chantingState.currentIndex) {
       return switch (chantingState.playbackState.playing) {
-        true => PlaylistItemBadge(text: context.l10n.chantingPlaylistBadgePlaying),
-        false => PlaylistItemBadge(text: context.l10n.chantingPlaylistBadgePaused),
+        true => PlaylistItemBadge(text: ChantingLocalizations.of(context).chantingPlaylistBadgePlaying),
+        false => PlaylistItemBadge(text: ChantingLocalizations.of(context).chantingPlaylistBadgePaused),
       };
     }
     return null;

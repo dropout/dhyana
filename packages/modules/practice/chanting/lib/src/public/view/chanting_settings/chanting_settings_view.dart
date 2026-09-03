@@ -1,3 +1,4 @@
+import 'package:chanting/l10n/chanting_localizations.dart';
 import 'package:chanting/src/public/view/chanting_settings/chant_list.dart';
 import 'package:core/core.dart';
 import 'package:chanting/src/chanting_routes.dart';
@@ -37,7 +38,7 @@ class ChantingSettingsView extends StatelessWidget {
       (previousValue, chantViewModel) => previousValue + chantViewModel.duration,
     );
     final minutes = totalDuration.inMinutes;
-    return context.l10n.minutesPluralWithNumber(minutes).toUpperCase();
+    return ChantingLocalizations.of(context).minutesPluralWithNumber(minutes).toUpperCase();
   }
 
   void _triggerAddChantSheet(
@@ -112,7 +113,7 @@ class ChantingSettingsView extends StatelessWidget {
         children: [
           Gap.medium(),
           Text(
-            context.l10n.chantingTitle,
+            ChantingLocalizations.of(context).chantingTitle,
             style: context.theme.textTheme.headlineLarge!.copyWith(
               fontWeight: FontWeight.w800,
             ),
@@ -151,7 +152,7 @@ class ChantingSettingsView extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 Text(
-                  '${getTotalDurationText(context, state)} ${context.l10n.statsTotal.toUpperCase()}',
+                  '${getTotalDurationText(context, state)} ${ChantingLocalizations.of(context).statsTotal.toUpperCase()}',
                   style: context.theme.textTheme.labelMedium!.copyWith(
                     fontWeight: FontWeight.w800,
                   ),

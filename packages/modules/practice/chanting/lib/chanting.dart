@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/chanting_localizations.dart';
+
 export 'src/chanting_di.dart';
 export 'src/chanting_routes.dart';
 
