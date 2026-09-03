@@ -1,14 +1,13 @@
-import 'package:chanting/src/audio/so_chanting_audio_handler.dart';
-import 'package:firebase_provider/firebase_provider.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
-
 import 'package:path_provider/path_provider.dart';
 
 import 'package:chanting/src/chanting_module.dart';
+import 'package:chanting/src/audio/so_chanting_audio_handler.dart';
+import 'package:chanting/src/drift/chant_cache_database.dart';
 import 'package:chanting/src/data/datasource/chant_cache_data_provider.dart';
 import 'package:chanting/src/data/datasource/chant_data_provider.dart';
 import 'package:chanting/src/data/datasource/drift_chant_cache_data_provider.dart';

@@ -1,6 +1,6 @@
 import 'package:chanting/src/domain/enum/cache_download_state.dart';
 import 'package:chanting/src/domain/enum/cached_asset_type.dart';
-import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:chanting/src/drift/chant_cache_database.dart';
 
 abstract interface class ChantCacheDataProvider {
   Future<ChantCacheEntryRow?> readEntry(String contentId, CachedAssetType type);

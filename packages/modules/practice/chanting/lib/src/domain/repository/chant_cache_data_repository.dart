@@ -1,6 +1,6 @@
 import 'package:chanting/src/domain/enum/cache_download_state.dart';
 import 'package:chanting/src/domain/enum/cached_asset_type.dart';
-import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:chanting/src/drift/chant_cache_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract interface class ChantCacheRepository {

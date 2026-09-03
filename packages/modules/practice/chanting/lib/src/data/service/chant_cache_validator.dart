@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 
-import 'package:dhyana/drift/chant_cache_database.dart';
+import 'package:chanting/src/drift/chant_cache_database.dart';
 
 import 'package:core/core.dart';
 import 'package:chanting/src/domain/enum/cached_asset_type.dart';

@@ -8,7 +8,7 @@
 // import 'package:chanting/src/chanting_module.dart';
 
 // import 'package:dhyana/core/util/logger_mixin.dart';
-// import 'package:dhyana/drift/chant_cache_database.dart';
+// import 'package:chanting/src/drift/chant_cache_database.dart';
 // import 'package:chanting/src/data/mapper/chant_mapper.dart';
 
 // import 'package:dhyana/core/domain/enum/cache_download_state.dart';

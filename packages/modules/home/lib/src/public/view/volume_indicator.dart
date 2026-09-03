@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:core/src/presentation/design_spec.dart';
-import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:core/src/presentation/view/util/gap.dart';
+import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_volume_listener/flutter_volume_listener.dart';
 

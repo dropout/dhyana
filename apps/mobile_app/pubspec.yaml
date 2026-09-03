@@ -23,6 +23,7 @@ dependencies:
   provider: ^6.0.5
   get_it: ^9.2.1
   flutter_bloc: ^9.1.1
+  hydrated_bloc: ^11.0.0
   freezed_annotation: ^3.0.0
   json_annotation: ^4.8.1
   # package_info_plus: ^10.1.0

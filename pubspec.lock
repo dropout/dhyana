@@ -430,18 +430,10 @@ packages:
     dependency: transitive
     description:
       name: drift
-      sha256: "3a3f1f6f905037d7426e4c445854139fd6a3d592135f7c96d7931682b73d16f4"
+      sha256: bab55d542d63765f6250ee3e2c62e11bfa1145d4ec2ffa05353c8fb4e10b52c1
       url: "https://pub.dev"
     source: hosted
-    version: "2.34.3"
-  drift_dev:
-    dependency: transitive
-    description:
-      name: drift_dev
-      sha256: "9cfff1576b49725da0d32c040651a41ae195e8c4af8d8da301593e41d7abc2f7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.34.0"
+    version: "2.34.4"
   fake_async:
     dependency: transitive
     description:
@@ -730,12 +722,12 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_mindful_minutes:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "."
       ref: HEAD
       resolved-ref: d8c704fe14eaf20a07a9c7ed64ef9f7e98b446e7
-      url: "git@github.com:dropout/flutter_mindful_minutes.git"
+      url: "https://github.com/dropout/flutter_mindful_minutes.git"
     source: git
     version: "0.1.0"
   flutter_plugin_android_lifecycle:
@@ -776,12 +768,12 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_volume_listener:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "."
       ref: HEAD
       resolved-ref: "4049a839d5473a83aef7d1062f0554fd3bcfa7c4"
-      url: "git@github.com:dropout/flutter_volume_listener.git"
+      url: "https://github.com/dropout/flutter_volume_listener.git"
     source: git
     version: "0.9.0"
   flutter_web_plugins:
@@ -1471,14 +1463,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.2"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
   record_use:
     dependency: transitive
     description:
@@ -1724,14 +1708,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.5.2"
-  sqlparser:
-    dependency: transitive
-    description:
-      name: sqlparser
-      sha256: "40bdddb306a727be9ce510bd2d2b9a6c9db6c586d846ef7b22e3990a2b24f02d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.44.5"
   stack_trace:
     dependency: transitive
     description:

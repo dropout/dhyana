@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_provider/firebase_provider.dart';
 import 'package:stats/src/data/datasource/day_details_data_provider.dart';
 import 'package:stats/src/data/datasource/firebase_day_details_data_provider.dart';
 import 'package:stats/src/data/datasource/firebase_stats_bucket_data_provider.dart';
