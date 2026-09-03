@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:donate/l10n/donate_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
 class DonateButton extends StatefulWidget {
@@ -35,7 +36,7 @@ class _DonateButtonState extends State<DonateButton> {
                   : Colors.white.withValues(alpha: 0.5),
               fontWeight: FontWeight.w900,
             ),
-            child: Text(context.l10n.donate.toUpperCase()),
+            child: Text(DonateLocalizations.of(context).donate.toUpperCase()),
           ),
         ),
       ),

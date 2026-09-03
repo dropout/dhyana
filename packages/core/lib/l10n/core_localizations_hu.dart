@@ -10,6 +10,9 @@ class CoreLocalizationsHu extends CoreLocalizations {
   CoreLocalizationsHu([String locale = 'hu']) : super(locale);
 
   @override
+  String get close => 'Bezárás';
+
+  @override
   String get profileDeleteTitle => 'Profil törlése';
 
   @override

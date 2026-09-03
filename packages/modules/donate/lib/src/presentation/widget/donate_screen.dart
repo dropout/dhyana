@@ -78,7 +78,7 @@ class _DonateScreenState extends State<DonateScreen> {
               ),
               AppButton(
                 // text: 'Close'.toUpperCase(),
-                text: context.l10n.close.toUpperCase(),
+                text: context.coreL10n.close.toUpperCase(),
                 onTap: () => Navigator.of(context).pop(),
               ),
             ],

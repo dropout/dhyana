@@ -44,6 +44,7 @@
         "core",
         "cupertino_icons",
         "dart_geohash",
+        "donate",
         "drift",
         "faker",
         "firebase_provider",
@@ -217,9 +218,11 @@
       "dependencies": [
         "core",
         "flutter",
+        "flutter_localizations",
         "get_it",
         "go_router",
         "go_router_builder",
+        "intl",
         "material_ui"
       ],
       "devDependencies": [
@@ -949,6 +952,24 @@
       ]
     },
     {
+      "name": "intl",
+      "version": "0.20.3",
+      "dependencies": [
+        "clock",
+        "meta",
+        "path"
+      ]
+    },
+    {
+      "name": "flutter_localizations",
+      "version": "0.0.0",
+      "dependencies": [
+        "flutter",
+        "intl",
+        "path"
+      ]
+    },
+    {
       "name": "json_annotation",
       "version": "4.12.0",
       "dependencies": [
@@ -974,24 +995,6 @@
         "meta",
         "sign_in_with_apple_platform_interface",
         "sign_in_with_apple_web"
-      ]
-    },
-    {
-      "name": "intl",
-      "version": "0.20.3",
-      "dependencies": [
-        "clock",
-        "meta",
-        "path"
-      ]
-    },
-    {
-      "name": "flutter_localizations",
-      "version": "0.0.0",
-      "dependencies": [
-        "flutter",
-        "intl",
-        "path"
       ]
     },
     {

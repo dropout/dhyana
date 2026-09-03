@@ -1,5 +1,6 @@
 {
   "@@locale": "hu",
+  "close": "Bezárás",
   "profileDeleteTitle": "Profil törlése",
   "profileDeleteQuestion": "Minden adatod véglegesen törlődni fog és nem lesz visszaállítható. Biztos vagy benne?",
   "profileDeleteCancel": "Mégsem",

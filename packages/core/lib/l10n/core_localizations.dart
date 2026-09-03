@@ -98,6 +98,12 @@ abstract class CoreLocalizations {
     Locale('hu'),
   ];
 
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
   /// No description provided for @profileDeleteTitle.
   ///
   /// In en, this message translates to:
