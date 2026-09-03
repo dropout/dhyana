@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:social/src/public/viewmodel/presence_cubit.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/core.dart';
+import 'package:social/l10n/social_localizations.dart';
 import 'package:social/src/public/model/presence.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +30,7 @@ class PresenceView extends StatelessWidget {
       builder: (BuildContext context, PresenceState state) {
         switch (state) {
           case PresenceLoadingState():
-            return const Text('loading');
+            return Text(SocialLocalizations.of(context).loading);
           case PresenceLoadedState():
             return buildLoaded(context, state.presenceList);
           case PresenceLoadingMoreState():
@@ -87,7 +87,7 @@ class PresenceView extends StatelessWidget {
             return SizedBox.shrink();
           case PresenceLoadedState():
             return LoadMoreButton(
-              text: AppLocalizations.of(context).loadMore,
+              text: SocialLocalizations.of(context).loadMore,
               presenceList: presenceList,
               batchSize: batchSize,
               maxPageCount: maxPageCount,
@@ -100,7 +100,7 @@ class PresenceView extends StatelessWidget {
             );
           case PresenceLoadingMoreState():
             return LoadMoreButton(
-              text: AppLocalizations.of(context).loading,
+              text: SocialLocalizations.of(context).loading,
               presenceList: presenceList,
               batchSize: batchSize,
               maxPageCount: maxPageCount,
@@ -148,7 +148,7 @@ class _LoadMoreButtonState extends State<LoadMoreButton> {
     ) {
       return const SizedBox.shrink();
     } else {
-      String text = widget.text ?? AppLocalizations.of(context).loadMore;
+      String text = widget.text ?? SocialLocalizations.of(context).loadMore;
       return AppButton.small(
         text: text.toUpperCase(),
         onTap: widget.onTap,

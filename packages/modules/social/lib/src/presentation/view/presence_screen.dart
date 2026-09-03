@@ -1,6 +1,6 @@
 import 'package:social/src/social_module.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:core/core.dart';
+import 'package:social/l10n/social_localizations.dart';
 import 'package:social/src/public/view/presence_view.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +68,7 @@ class _PresenceScreenState extends State<PresenceScreen>
         switch (state) {
           case PresenceLoadingState():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).presence,
+              title: SocialLocalizations.of(context).presence,
               enableScrolling: false,
               enablePullToRefresh: true,
               onRefresh: () => _onRefresh(context),
@@ -79,7 +79,7 @@ class _PresenceScreenState extends State<PresenceScreen>
             );
           case PresenceLoadedState():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).presence,
+              title: SocialLocalizations.of(context).presence,
               enablePullToRefresh: true,
               onRefresh: () => _onRefresh(context),
               slivers: [
@@ -99,7 +99,7 @@ class _PresenceScreenState extends State<PresenceScreen>
             );
           case PresenceLoadingMoreState():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).presence,
+              title: SocialLocalizations.of(context).presence,
               slivers: [
                 buildControlsArea(context),
                 SliverSafeArea(
@@ -118,7 +118,7 @@ class _PresenceScreenState extends State<PresenceScreen>
           case PresenceErrorState():
             return DefaultScreenSetup(
               enableScrolling: false,
-              title: AppLocalizations.of(context).presence,
+              title: SocialLocalizations.of(context).presence,
               slivers: [
                 buildControlsArea(context, controlsEnabled: false),
                 buildErrorSliver(context),
@@ -126,7 +126,7 @@ class _PresenceScreenState extends State<PresenceScreen>
             );
           default:
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).presence,
+              title: SocialLocalizations.of(context).presence,
               enableScrolling: false,
               slivers: [buildControlsArea(context, controlsEnabled: false)],
             );
@@ -145,7 +145,7 @@ class _PresenceScreenState extends State<PresenceScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppLocalizations.of(context).presenceScreenSubTitle),
+            Text(SocialLocalizations.of(context).presenceScreenSubTitle),
             Padding(
               padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
               child: Slider(
@@ -153,7 +153,7 @@ class _PresenceScreenState extends State<PresenceScreen>
                 min: 10,
                 max: 180,
                 activeColor: Colors.black,
-                label: AppLocalizations.of(
+                label: SocialLocalizations.of(
                   context,
                 ).minutesPluralWithNumber(sliderPosition.round()),
                 value: sliderPosition,

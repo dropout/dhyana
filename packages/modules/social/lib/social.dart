@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/social_localizations.dart';
+
 export 'src/social_di.dart';
 export 'src/social_routes.dart';
 

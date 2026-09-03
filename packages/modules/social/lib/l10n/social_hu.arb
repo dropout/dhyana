@@ -1,0 +1,8 @@
+{
+  "@@locale": "hu",
+  "presence": "Jelenlét",
+  "presenceScreenSubTitle": "Mozgasd a csuszkát a jelenlét időkeretének beállításához.",
+  "minutesPluralWithNumber": "{count, plural, =0{{count} perc} =1{{count} perc} =2{{count} perc} few{{count} perc} many{{count} perc} other{{count} perc}}",
+  "loadMore": "Több betöltése",
+  "loading": "Betöltés..."
+}

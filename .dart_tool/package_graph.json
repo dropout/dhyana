@@ -406,10 +406,12 @@
         "firebase_provider",
         "flutter",
         "flutter_bloc",
+        "flutter_localizations",
         "freezed_annotation",
         "get_it",
         "go_router",
         "go_router_builder",
+        "intl",
         "mocktail",
         "profile",
         "uuid"
