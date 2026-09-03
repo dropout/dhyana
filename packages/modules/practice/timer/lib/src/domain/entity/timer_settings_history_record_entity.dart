@@ -6,7 +6,7 @@ part 'timer_settings_history_record_entity.freezed.dart';
 part 'timer_settings_history_record_entity.g.dart';
 
 @freezed
-sealed class TimerSettingsHistoryRecordEntity with _$TimerSettingsHistoryRecordEntity implements Dto {
+sealed class TimerSettingsHistoryRecordEntity with _$TimerSettingsHistoryRecordEntity implements SerializableEntity {
 
   const TimerSettingsHistoryRecordEntity._();
 

@@ -5,9 +5,11 @@ import 'package:profile/profile.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/usecase/update_profile_with_session_use_case.dart';
 
+import '../../session_mock_definitions.dart';
+
 
 void main() {
-  late MockProfilePublicApi profilePublicApi;
+  late MockSessionAppPort mockSessionAppPort;
   late UpdateProfileWithSessionUseCase useCase;
 
   setUpAll(() {
@@ -21,9 +23,9 @@ void main() {
   });
 
   setUp(() {
-    profilePublicApi = MockProfilePublicApi();
+    mockSessionAppPort = MockSessionAppPort();
     useCase = UpdateProfileWithSessionUseCase(
-      profilePublicApi: profilePublicApi,
+      sessionAppPort: mockSessionAppPort
     );
   });
 
@@ -57,7 +59,7 @@ void main() {
     final session = SessionEntity(
       id: profileSession.id,
       type: switch (profileSession.type) {
-        .sitting => .sitting,
+        .sitting => .timer,
         .chanting => .chanting,
       },
       startTime: profileSession.startTime,
@@ -71,7 +73,7 @@ void main() {
     );
 
     when(
-      () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
+      () => mockSessionAppPort.updateProfileStatsWithSession(profile.id, any()),
     ).thenAnswer(
       (_) async =>
           (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
@@ -83,7 +85,7 @@ void main() {
     expect(result.updatedProfile, equals(expectedUpdatedProfile));
     expect(result.session, equals(session));
     verify(
-      () => profilePublicApi.updateProfileStatsWithSession(profile.id, any()),
+      () => mockSessionAppPort.updateProfileStatsWithSession(profile.id, any()),
     ).called(1);
   });
 }

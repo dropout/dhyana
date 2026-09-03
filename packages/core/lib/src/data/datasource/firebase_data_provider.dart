@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/src/data/datasource/data_provider.dart';
-import 'package:core/src/domain/entity/entity.dart';
+import 'package:core/src/domain/entity/serializable_entity.dart';
 
 
 import 'firebase_model_extension.dart';
@@ -8,7 +8,7 @@ import 'firebase_model_extension.dart';
 /// A generic Firebase Firestore data provider for CRUD operations.
 /// M extends Model to ensure the model has an 'id' field and can be converted
 /// to Firestore format.
-class FirebaseDataProvider<M extends Dto> implements DataProvider<M> {
+class FirebaseDataProvider<M extends SerializableEntity> implements DataProvider<M> {
 
   final CollectionReference<M> collectionRef;
 

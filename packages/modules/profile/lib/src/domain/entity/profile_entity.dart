@@ -15,7 +15,7 @@ part 'profile_entity.g.dart';
 // TODO: Cleanup ProfileModel interface and its usage
 
 @freezed
-abstract class ProfileEntity with _$ProfileEntity implements Dto, ProfileModel {
+abstract class ProfileEntity with _$ProfileEntity implements SerializableEntity, ProfileDisplayable {
 
   const ProfileEntity._();
 
@@ -59,7 +59,7 @@ abstract class ProfileEntity with _$ProfileEntity implements Dto, ProfileModel {
     '$firstName $lastName';
 
   @override
-  String get profileImagePath =>
+  String get profileImageStoragePath =>
     '/profiles/$id/photo.jpg';  
 
   @override

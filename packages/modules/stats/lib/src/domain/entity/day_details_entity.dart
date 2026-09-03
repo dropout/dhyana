@@ -6,7 +6,7 @@ part 'day_details_entity.freezed.dart';
 part 'day_details_entity.g.dart';
 
 @freezed
-sealed class DayDetailsEntity with _$DayDetailsEntity implements Dto {
+sealed class DayDetailsEntity with _$DayDetailsEntity implements SerializableEntity {
 
   const DayDetailsEntity._();
 

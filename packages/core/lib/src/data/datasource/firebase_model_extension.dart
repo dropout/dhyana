@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:core/src/domain/entity/entity.dart';
+import 'package:core/src/domain/entity/serializable_entity.dart';
 
-extension FirebaseModelExtension on Dto {
+extension FirebaseModelExtension on SerializableEntity {
   Map<String, dynamic> toFireStore() => toJson();
 }
 

@@ -1,7 +1,9 @@
+import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/profile.dart';
+import 'package:profile/src/data/datasource/faker_profile_extension.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/core.dart';
@@ -53,7 +55,7 @@ void main() {
     });
 
     testWidgets('can hide text if parameter is given', (WidgetTester tester) async {
-      final Profile profile = FakeModelFactory().createProfile();
+      final Profile profile = Faker().createProfile();
 
       await tester.pumpWidget(
         withAllContextProviders(
@@ -73,7 +75,7 @@ void main() {
     });
 
     testWidgets('can show animation if parameter is given', (WidgetTester tester) async {
-      Profile profile = FakeModelFactory().createProfile();
+      Profile profile = Faker().createProfile();
 
       profile = profile.copyWith(
         statsReport: profile.statsReport.copyWith(

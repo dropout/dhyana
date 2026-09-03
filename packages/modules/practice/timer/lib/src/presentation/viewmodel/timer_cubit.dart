@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:core/core.dart';
-
 import 'package:timer/src/data/mapper/timer_settings_mapper.dart';
 import 'package:timer/src/domain/entity/playback_state_entity.dart';
 import 'package:timer/src/domain/entity/timer_state_entity.dart';
@@ -16,11 +14,7 @@ import 'package:timer/src/domain/usecase/complete_timer_use_case.dart';
 import 'package:timer/src/domain/usecase/configure_event_scheduler_use_case.dart';
 import 'package:timer/src/domain/usecase/start_timer_use_case.dart';
 import 'package:timer/src/domain/usecase/playback_state_change_use_case.dart';
-
-import 'package:dhyana/modules/practice/session/public/model/session.dart';
-import 'package:dhyana/modules/practice/session/session_routes.dart';
-
-
+import 'package:timer/src/public/model/timer_settings.dart';
 
 /// A source of elapsed time that is based
 /// on the playback state of a [TimerAudioService].
@@ -34,9 +28,9 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 
   @override
   Stream<Duration> get elapsedTimeStream => timerAudioService
-    .playbackStateStream
-    .map((playbackState) => playbackState.position)
-    .distinct();
+      .playbackStateStream
+      .map((playbackState) => playbackState.position)
+      .distinct();
 }
 
 /// Cubit that manages the state of a timer,
@@ -44,10 +38,11 @@ class TimerAudioServiceElapsedTimeSource implements ElapsedTimeSource {
 /// In this viewmodel, we skip usecases that would
 /// contain a single line service calßl for pragmatic reasons.
 class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
+  
   // Services
+  final SessionNavigator sessionNavigator;
   final TimerAudioService audioService;
   final TimerEventScheduler eventScheduler;
-  final GoRouter router;
   final CrashlyticsService crashlyticsService;
 
   // Use cases
@@ -61,15 +56,17 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
 
   TimerCubit({
     required TimerSettings timerSettings,
+    required this.sessionNavigator,
     required this.audioService,
     required this.eventScheduler,
-    required this.router,
     required this.crashlyticsService,
     required this.configureEventSchedulerUseCase,
     required this.startTimerUseCase,
     required this.playbackStateChangeUseCase,
     required this.completeTimerUseCase,
-  }) : super(TimerStateEntity.initial(timerSettings: timerSettings.toDomain())) {
+  }) : super(
+         TimerStateEntity.initial(timerSettings: timerSettings.toDomain()),
+       ) {
     configureEventSchedulerUseCase.execute(
       timerSettings: state.timerSettings,
       onWarmupCompleted: _warmupCompleted,
@@ -149,19 +146,14 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
     final result = await completeTimerUseCase.execute(state, elapsedTime);
     emit(result.timerState);
     logger.t('Navigating to session completed screen');
-    // Manually assembled here to avoid coupling the timer module to the session module's domain model.
-    final session = Session(
-      id: result.session.id,
-      type: switch (result.session.type) {
-        .chanting => .chanting,
-        .sitting => .sitting,
-      },
-      startTime: result.session.startTime,
-      endTime: result.session.endTime,
-      duration: result.session.duration,
+
+    sessionNavigator.navigateToSessionCompletedScreen(
+      startTime: 
+          state.startTime ?? DateTime.now().subtract(state.elapsedTime),
+      endTime: state.endTime ?? DateTime.now(),
+      duration: state.elapsedTime,
+      sessionType: .chanting,
     );
-    final targetRoute = SessionCompletedRoute($extra: session);
-    router.replace(targetRoute.location, extra: session);
   }
 
   @override

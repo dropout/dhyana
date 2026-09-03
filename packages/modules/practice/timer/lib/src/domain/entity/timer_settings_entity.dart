@@ -6,7 +6,7 @@ part 'timer_settings_entity.g.dart';
 
 /// Domain-owned timer configuration, independent of the module's public DTO.
 @freezed
-sealed class TimerSettingsEntity with _$TimerSettingsEntity implements Dto {
+sealed class TimerSettingsEntity with _$TimerSettingsEntity implements SerializableEntity {
 
   const TimerSettingsEntity._();
 
@@ -36,7 +36,7 @@ sealed class TimerSettingsEntity with _$TimerSettingsEntity implements Dto {
         startingSound: startingSound,
         endingSound: endingSound,
       );
-    } catch(e, _) {
+    } catch(e) {
       throw Exception('Unable to convert idString: $idString to TimerSettings');
     }
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
@@ -8,11 +9,10 @@ import 'package:audio_session/audio_session.dart';
 import 'package:chanting/chanting.dart';
 import 'package:timer/timer.dart';
 
-
-/// The main audio handler for the app that manages switching 
+/// The main audio handler for the app that manages switching
 /// between different audio handlers
-class AppAudioHandler extends SwitchAudioHandler {
-
+class DefaultAppAudioHandler extends SwitchAudioHandler
+    implements AppAudioHandler {
   /// The action name for switching audio handlers.
   static const switchAction = 'switchToHandler';
 
@@ -23,13 +23,12 @@ class AppAudioHandler extends SwitchAudioHandler {
   /// The [SoTimerAudioHandler] that handles timer-related audio actions.
   final SoTimerAudioHandler _timerAudioHandler;
 
-  /// Creates an [AppAudioHandler] that initializes with the [SoTimerAudioHandler]
+  /// Creates an [DefaultAppAudioHandler] that initializes with the [SoTimerAudioHandler]
   /// as the default handler.
-  AppAudioHandler(
+  DefaultAppAudioHandler(
     this._timerAudioHandler,
     this._soLoudChantingAudioHandler,
   ) : super(_timerAudioHandler);
-
 
   Future<Duration> get outputLatency async {
     if (Platform.isIOS) {
@@ -38,11 +37,10 @@ class AppAudioHandler extends SwitchAudioHandler {
       return Duration.zero;
     }
   }
-  
 
-  /// Overrides the [customAction] method to handle switching between audio 
-  /// handlers based on the received custom action. When a `switchToHandler` 
-  /// action is received, it checks the `handlerId` in the extras to determine 
+  /// Overrides the [customAction] method to handle switching between audio
+  /// handlers based on the received custom action. When a `switchToHandler`
+  /// action is received, it checks the `handlerId` in the extras to determine
   /// which handler to switch to and updates the `inner` handler accordingly.
   /// Any other custom actions are passed to the superclass implementation.
   @override
@@ -70,10 +68,19 @@ class AppAudioHandler extends SwitchAudioHandler {
     }
   }
 
+  @override
+  void switchToTimerAudioHandler() {
+    customAction(switchAction, {'handlerId': SoTimerAudioHandler.handlerId});
+  }
+
+  @override
+  void switchToChantingAudioHandler() {
+    customAction(switchAction, {'handlerId': SoLoudChantingAudioHandler.handlerId});
+  }
+
   /// Closes all audio handlers when the app audio handler is closed.
   void close() {
     _soLoudChantingAudioHandler.close();
     _timerAudioHandler.close();
   }
-
 }

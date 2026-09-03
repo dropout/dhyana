@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:core/core.dart';
+import 'package:timer/src/domain/entity/timer_session_entity.dart';
 import 'package:timer/src/domain/entity/timer_settings_entity.dart';
 import 'package:timer/src/domain/entity/timer_state_entity.dart';
 import 'package:timer/src/domain/enum/timer_stage.dart';
@@ -111,7 +112,7 @@ void main() {
       );
 
       expect(result.session.id, 'session-1');
-      expect(result.session.type, HomeScreenViewState.sitting);
+      expect(result.session.type, TimerSessionEntityType.sitting);
       expect(result.session.startTime, startTime);
       expect(result.session.endTime, endTime);
       expect(result.session.duration, const Duration(minutes: 5));

@@ -43,7 +43,7 @@ class Initializer with LoggerMixin {
     logger.t('Configuring application audio library');
     await SoLoud.instance.init();
     final audioHandler = await audio_service.AudioService.init(
-      builder: () => AppAudioHandler(
+      builder: () => DefaultAppAudioHandler(
         SoTimerAudioHandler(soloud: SoLoud.instance),
         SoLoudChantingAudioHandler(soloud: SoLoud.instance),
       ),

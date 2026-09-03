@@ -7,7 +7,7 @@ part 'timer_settings.freezed.dart';
 part 'timer_settings.g.dart';
 
 @freezed
-sealed class TimerSettings with _$TimerSettings implements Dto {
+sealed class TimerSettings with _$TimerSettings implements SerializableEntity {
 
   const TimerSettings._();
 
@@ -37,7 +37,7 @@ sealed class TimerSettings with _$TimerSettings implements Dto {
         startingSound: startingSound,
         endingSound: endingSound,
       );
-    } catch(e, _) {
+    } catch(e) {
       throw Exception('Unable to convert idString: $idString to TimerSettings');
     }
   }

@@ -5,13 +5,8 @@ import 'package:flutter/foundation.dart';
 part 'session.freezed.dart';
 part 'session.g.dart';
 
-enum SessionType {
-  sitting,
-  chanting,
-}
-
 @freezed
-sealed class Session with _$Session implements Dto {
+sealed class Session with _$Session implements SerializableEntity {
 
   const Session._();
 

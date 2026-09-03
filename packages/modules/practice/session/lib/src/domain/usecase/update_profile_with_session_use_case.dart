@@ -1,6 +1,7 @@
 import 'package:profile/profile.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
+import 'package:session/src/domain/service/session_app_port.dart';
 
 
 /// Persists a completed session into profile 
@@ -9,17 +10,17 @@ import 'package:session/src/domain/entity/update_profile_stats_result_entity.dar
 /// and the session that the profile was updated with.
 class UpdateProfileWithSessionUseCase {
 
-  final ProfilePublicApi profilePublicApi;
+  final SessionAppPort sessionAppPort;
 
   UpdateProfileWithSessionUseCase({
-    required this.profilePublicApi,
+    required this.sessionAppPort,
   });
 
   Future<UpdateProfileStatsResultEntity> execute(
     String profileId,
     SessionEntity session,
   ) async {
-    final result = await profilePublicApi.updateProfileStatsWithSession(
+    final result = await sessionAppPort.updateProfileStatsWithSession(
       profileId,
       ProfileSession(
         id: session.id,
@@ -27,7 +28,7 @@ class UpdateProfileWithSessionUseCase {
         endTime: session.endTime,
         duration: session.duration,
         type: switch(session.type) {
-          .sitting => .sitting,
+          .timer => .sitting,
           .chanting => .chanting,
         },
       ),

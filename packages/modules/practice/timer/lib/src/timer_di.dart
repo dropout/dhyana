@@ -1,6 +1,4 @@
-import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
-import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
-import 'package:dhyana/modules/social/public/api/social_public_api.dart';
+import 'package:auth/auth.dart';
 
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
@@ -8,8 +6,12 @@ import 'package:go_router/go_router.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
+import 'package:profile/profile.dart';
+import 'package:social/social.dart';
 import 'package:timer/src/audio/so_timer_audio_handler.dart';
+import 'package:timer/src/data/service/default_timer_app_port.dart';
 import 'package:timer/src/domain/entity/timer_state_entity.dart';
+import 'package:timer/src/domain/service/timer_app_port.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/data/service/default_timer_audio_service.dart';
 import 'package:timer/src/data/repository/firebase_timer_settings_history_repository.dart';
@@ -41,7 +43,15 @@ extension TimerModuleDependencyInjection on GetIt {
 
     // Services
     registerFactory<DefaultTimerAudioService>(
-      () => DefaultTimerAudioService(GetIt.I.get<AppAudioHandler>()),
+      () => DefaultTimerAudioService(get<AppAudioHandler>()),
+    );
+
+    registerFactory<TimerAppPort>(
+      () => DefaultTimerAppPort(
+        authPublicApi: get<AuthPublicApi>(),
+        profilePublicApi: get<ProfilePublicApi>(),
+        socialPublicApi: get<SocialPublicApi>(),
+      ),
     );
 
     // Use Cases
@@ -58,9 +68,7 @@ extension TimerModuleDependencyInjection on GetIt {
       _,
     ) {
       return StartTimerUseCase(
-        authPublicApi: GetIt.I.get<AuthPublicApi>(),
-        profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
-        socialPublicApi: GetIt.I.get<SocialPublicApi>(),
+        timerAppPort: GetIt.I.get<TimerAppPort>(),
         timerAudioService: GetIt.I.get<DefaultTimerAudioService>(),
         eventScheduler: eventScheduler,
         timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),      
@@ -83,13 +91,13 @@ extension TimerModuleDependencyInjection on GetIt {
     // ViewModels
     // Timer Settings History Cubit
     registerFactory<TimerSettingsHistoryCubit>(() => TimerSettingsHistoryCubit(
-      timerSettingsHistoryRepository: GetIt.I.get<TimerSettingsHistoryRepository>(),
-      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+      timerSettingsHistoryRepository: get<TimerSettingsHistoryRepository>(),
+      crashlyticsService: get<CrashlyticsService>(),
     ));
 
     // Timer Settings Cubit
     registerFactory<TimerSettingsCubit>(() => TimerSettingsCubit(
-      crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+      crashlyticsService: get<CrashlyticsService>(),
     ));
 
     // Timer Cubit with parameterized TimerSettings
@@ -102,19 +110,19 @@ extension TimerModuleDependencyInjection on GetIt {
         source: TimerAudioServiceElapsedTimeSource(audioService),
       );
       return TimerCubit(
-        timerSettings: timerSettings,
+        sessionNavigator: get<SessionNavigator>(),
         audioService: audioService,
         eventScheduler: timerEventScheduler,
-        router: GetIt.I.get<GoRouter>(),
-        crashlyticsService: GetIt.I.get<CrashlyticsService>(),
+        router: get<GoRouter>(),
+        crashlyticsService: get<CrashlyticsService>(),
         configureEventSchedulerUseCase: ConfigureEventSchedulerUseCase(
           eventScheduler: timerEventScheduler,
         ),
-        startTimerUseCase: GetIt.I.get<StartTimerUseCase>(
+        startTimerUseCase: get<StartTimerUseCase>(
           param1: timerEventScheduler,
         ),
         playbackStateChangeUseCase: PlaybackStateChangeUseCase(),
-        completeTimerUseCase: GetIt.I.get<CompleteTimerUseCase>(
+        completeTimerUseCase: get<CompleteTimerUseCase>(
           param1: audioService,
           param2: timerEventScheduler,
         ),

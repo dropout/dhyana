@@ -7,7 +7,7 @@ part 'presence_entity.freezed.dart';
 part 'presence_entity.g.dart';
 
 @freezed
-sealed class PresenceEntity with _$PresenceEntity implements Dto {
+sealed class PresenceEntity with _$PresenceEntity implements SerializableEntity {
   const PresenceEntity._();
 
   const factory PresenceEntity({

@@ -7,6 +7,7 @@ workspace:
   - apps/mobile_app
   - packages/firebase_provider
   - packages/core  
+  - packages/modules/app_events
   - packages/modules/auth
   - packages/modules/donate
   - packages/modules/home

@@ -49,9 +49,7 @@ class ChantingAudioService {
   Future<Duration> get outputLatency => audioHandler.outputLatency;
 
   void _switchToChantingAudioHandler() {
-    audioHandler.customAction(AppAudioHandler.switchAction, {
-      'handlerId': SoLoudChantingAudioHandler.handlerId,
-    });
+    audioHandler.switchToChantingAudioHandler();
   }
 
   Stream<void> get playlistCompletedStream => audioHandler.customEvent.where(

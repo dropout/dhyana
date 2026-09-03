@@ -54,7 +54,7 @@ class SoTimerAudioHandler extends BaseAudioHandler {
       case SoTimerHandlerCustomAction.start:
         try {
           final timerSettings = TimerSettings.fromJson(extras!);
-          return _start(timerSettings);
+          return await _start(timerSettings);
         } catch (e) {
           throw ArgumentError(
             'Invalid timer settings for start action: $extras',
@@ -68,7 +68,7 @@ class SoTimerAudioHandler extends BaseAudioHandler {
             orElse: () =>
                 throw ArgumentError('Unknown sound value: $soundValue'),
           );
-          return _playSound(sound);
+          return await _playSound(sound);
         } catch (e) {
           throw ArgumentError('Invalid sound for playSound action: $extras');
         }

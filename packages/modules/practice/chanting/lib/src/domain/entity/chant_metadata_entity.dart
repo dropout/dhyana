@@ -6,7 +6,7 @@ part 'chant_metadata_entity.freezed.dart';
 part 'chant_metadata_entity.g.dart';
 
 @freezed
-sealed class ChantMetaDataEntity with _$ChantMetaDataEntity implements Dto {
+sealed class ChantMetaDataEntity with _$ChantMetaDataEntity implements SerializableEntity {
   const ChantMetaDataEntity._();
 
   const factory ChantMetaDataEntity({

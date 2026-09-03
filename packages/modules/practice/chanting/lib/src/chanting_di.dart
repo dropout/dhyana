@@ -2,7 +2,6 @@ import 'package:chanting/src/audio/so_chanting_audio_handler.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:dhyana/drift/chant_cache_database.dart';
 import 'package:core/core.dart';
@@ -130,8 +129,8 @@ extension ChantingModuleDependencyInjection on GetIt {
     registerFactoryParam<ChantingCubit, ChantingSettings, void>(
       (chantingSettings, _) => ChantingCubit(
         chantingSettings: chantingSettings,
+        sessionNavigator: GetIt.I.get<SessionNavigator>(),
         audioService: GetIt.I.get<ChantingAudioService>(),
-        router: GetIt.I.get<GoRouter>(),
         crashlyticsService: GetIt.I.get<CrashlyticsService>(),
         startChantingUseCase: GetIt.I.get<StartChantingUseCase>(),
         loadLyricsUseCase: GetIt.I.get<LoadLyricsUseCase>(),

@@ -8,7 +8,7 @@ part 'chant_entity.freezed.dart';
 part 'chant_entity.g.dart';
 
 @freezed
-sealed class ChantEntity with _$ChantEntity implements Dto {
+sealed class ChantEntity with _$ChantEntity implements SerializableEntity {
 
   const ChantEntity._();
 

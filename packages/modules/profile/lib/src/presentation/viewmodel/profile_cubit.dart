@@ -39,12 +39,12 @@ class ProfileCubit extends Cubit<ProfileState>
   @override
   Future<void> loadProfile(
     String profileId, {
-    ProfileModel? profile,
-    void Function(ProfileModel)? onComplete,
+    ProfileDisplayable? profile,
+    void Function(ProfileDisplayable)? onComplete,
     void Function(Object?, StackTrace)? onError,
   }) async {
     try {
-      late Profile result;
+      late ProfileDisplayable result;
       if (profile != null) {
         logger.t('Using profile: $profileId');
         result = profile;

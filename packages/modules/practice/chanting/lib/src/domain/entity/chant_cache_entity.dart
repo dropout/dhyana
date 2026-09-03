@@ -7,7 +7,7 @@ part 'chant_cache_entity.freezed.dart';
 part 'chant_cache_entity.g.dart';
 
 @freezed
-sealed class ChantCacheEntity with _$ChantCacheEntity implements Dto {
+sealed class ChantCacheEntity with _$ChantCacheEntity implements SerializableEntity {
   const ChantCacheEntity._();
 
   const factory ChantCacheEntity({

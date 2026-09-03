@@ -1,42 +1,35 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
+import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
+import 'package:session/src/data/datasource/faker_session_extension.dart';
+import 'package:social/social.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+import 'package:core/core.dart';
 import 'package:session/src/data/mapper/session_mapper.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/entity/session_completed_data_entity.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
-
-
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
-import 'package:dhyana/modules/social/domain/usecase/query_presence_use_case.dart';
-import 'package:dhyana/modules/social/public/view/presence_area.dart';
-import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
-import 'package:profile/src/public/view/stats/progress_summary.dart';
 import 'package:session/src/presentation/view/completed/session_result.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
 
-import 'package:dhyana/modules/social/public/viewmodel/presence_cubit.dart';
-
-
-import '../../../../../../../../apps/mobile_app/test/mock_definitions.dart';
-import '../../../../../../../core/lib/src/testing/test_context_providers.dart';
-import '../../../../../../social/test/social_mock_definitions.dart';
+import '../../../session_mock_definitions.dart';
 
 void main() {
-  late MockProfileCubit mockProfileCubit;
+  late MockProfileStateCubit mockProfileStateCubit;
   late MockSessionCompletedCubit mockSessionCompletedCubit;
+  late MockPresenceCubit mockPresenceCubit;
 
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
   late MockResourceResolver mockResourceResolver;
-
-  late QueryPresenceUseCase mockQueryPresenceUseCase;
 
   setUpAll(() async {
     nock.init();
@@ -46,17 +39,16 @@ void main() {
   });
 
   setUp(() async {
-    mockProfileCubit = MockProfileCubit();
+    mockProfileStateCubit = MockProfileStateCubit();
     mockSessionCompletedCubit = MockSessionCompletedCubit();
+    mockPresenceCubit = MockPresenceCubit();
 
     mockServices = MockServices();
     mockCrashlyticsService = MockCrashlyticsService();
     mockResourceResolver = MockResourceResolver();
-    mockQueryPresenceUseCase = MockQueryPresenceUseCase();
 
-    when(
-      () => mockServices.crashlyticsService,
-    ).thenReturn(mockCrashlyticsService);
+    when(() => mockServices.crashlyticsService)
+        .thenReturn(mockCrashlyticsService);
 
     when(() => mockServices.resourceResolver).thenReturn(mockResourceResolver);
 
@@ -64,25 +56,20 @@ void main() {
       return Future.value('https://example.com/profile.jpg');
     });
 
-    GetIt.I.registerFactory<QueryPresenceUseCase>(
-      () => mockQueryPresenceUseCase,
-    );
+
     GetIt.I.registerFactory<PresenceCubit>(
-      () => PresenceCubit(
-        crashlyticsService: mockCrashlyticsService,
-        queryPresenceDataUseCase: mockQueryPresenceUseCase,
-      ),
+      () => mockPresenceCubit,
     );
 
-      nock.cleanAll();
-      // Mock the MethodChannel for path_provider to return a valid path
-      // CachedNetworkImage uses path_provider to get the cache directory, 
-      // so we need to mock it for testing
-      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+    nock.cleanAll();
+    // Mock the MethodChannel for path_provider to return a valid path
+    // CachedNetworkImage uses path_provider to get the cache directory,
+    // so we need to mock it for testing
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
           const MethodChannel('plugins.flutter.io/path_provider'),
           (MethodCall methodCall) async => '.',
-        );    
+        );
   });
 
   tearDown(() {
@@ -91,9 +78,9 @@ void main() {
     // Clear the mock handler for the MethodChannel to avoid affecting other tests
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
-      const MethodChannel('plugins.flutter.io/path_provider'),
-      null, // <--- Removes the mock handler
-    );
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          null, // <--- Removes the mock handler
+        );
   });
 
   group('SignedInCompletedView', () {
@@ -101,20 +88,18 @@ void main() {
       WidgetTester tester,
     ) async {
       final profileId = 'profileId';
-      final session = FakeModelFactory().createSessionEntity();
+      final session = Faker().createSessionEntity();
       final UpdateProfileStatsResultEntity updateResult =
           UpdateProfileStatsResultEntity(
-            updatedProfile: FakeModelFactory().createProfile(),
-            oldProfile: FakeModelFactory().createProfile(),
+            updatedProfile: Faker().createProfile(),
+            oldProfile: Faker().createProfile(),
             session: session,
           );
 
-      when(
-        () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedInitialDataEntity());
-      when(
-        () => mockSessionCompletedCubit.stream,
-      ).thenAnswer((_) => const Stream<SessionCompletedDataEntity>.empty());
+      when(() => mockSessionCompletedCubit.state)
+          .thenReturn(const SessionCompletedInitialDataEntity());
+      when(() => mockSessionCompletedCubit.stream)
+          .thenAnswer((_) => const Stream<SessionCompletedDataEntity>.empty());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -136,7 +121,9 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
+                    BlocProvider<ProfileStateCubit>.value(
+                      value: mockProfileStateCubit,
+                    ),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
                     ),
@@ -161,7 +148,7 @@ void main() {
             ).called(1);
 
             verify(
-              () => mockProfileCubit.loadProfile(
+              () => mockProfileStateCubit.loadProfile(
                 'profileId',
                 profile: updateResult.updatedProfile,
               ),
@@ -172,11 +159,10 @@ void main() {
     testWidgets('can show loading when initial state', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSessionEntity();
+      final SessionEntity session = Faker().createSessionEntity();
 
-      when(
-        () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedDataEntity.initial());
+      when(() => mockSessionCompletedCubit.state)
+          .thenReturn(const SessionCompletedDataEntity.initial());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -193,7 +179,9 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
+                    BlocProvider<ProfileStateCubit>.value(
+                      value: mockProfileStateCubit,
+                    ),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
                     ),
@@ -216,11 +204,10 @@ void main() {
     testWidgets('can show loading when loading state', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSessionEntity();
+      final SessionEntity session = Faker().createSessionEntity();
 
-      when(
-        () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedDataEntity.loading());
+      when(() => mockSessionCompletedCubit.state)
+          .thenReturn(const SessionCompletedDataEntity.loading());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -237,7 +224,9 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
+                    BlocProvider<ProfileStateCubit>.value(
+                      value: mockProfileStateCubit,
+                    ),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
                     ),
@@ -258,11 +247,10 @@ void main() {
     });
 
     testWidgets('can show error when error state', (WidgetTester tester) async {
-      final SessionEntity session = FakeModelFactory().createSessionEntity();
+      final SessionEntity session = Faker().createSessionEntity();
 
-      when(
-        () => mockSessionCompletedCubit.state,
-      ).thenReturn(const SessionCompletedDataEntity.error());
+      when(() => mockSessionCompletedCubit.state)
+          .thenReturn(const SessionCompletedDataEntity.error());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -279,7 +267,9 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
+                    BlocProvider<ProfileStateCubit>.value(
+                      value: mockProfileStateCubit,
+                    ),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
                     ),
@@ -302,8 +292,8 @@ void main() {
     testWidgets('can show loaded when saving session', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSessionEntity();
-      final oldProfile = FakeModelFactory().createProfile();
+      final SessionEntity session = Faker().createSessionEntity();
+      final oldProfile = Faker().createProfile();
       final updatedProfile = oldProfile.copyWith(
         statsReport: oldProfile.statsReport.copyWith(
           completedSessionsCount:
@@ -337,7 +327,9 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
+                    BlocProvider<ProfileStateCubit>.value(
+                      value: mockProfileStateCubit,
+                    ),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
                     ),
@@ -363,11 +355,11 @@ void main() {
     testWidgets('can show loaded when saving session completed', (
       WidgetTester tester,
     ) async {
-      final SessionEntity session = FakeModelFactory().createSessionEntity();
+      final SessionEntity session = Faker().createSessionEntity();
       UpdateProfileStatsResultEntity updateResult =
           UpdateProfileStatsResultEntity(
-            updatedProfile: FakeModelFactory().createProfile(),
-            oldProfile: FakeModelFactory().createProfile(),
+            updatedProfile: Faker().createProfile(),
+            oldProfile: Faker().createProfile(),
             session: session,
           );
 
@@ -390,7 +382,9 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
+                    BlocProvider<ProfileStateCubit>.value(
+                      value: mockProfileStateCubit,
+                    ),
                     BlocProvider<SessionCompletedCubit>.value(
                       value: mockSessionCompletedCubit,
                     ),

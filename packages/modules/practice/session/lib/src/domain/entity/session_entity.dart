@@ -6,12 +6,12 @@ part 'session_entity.freezed.dart';
 part 'session_entity.g.dart';
 
 enum SessionEntityType {
-  sitting,
+  timer,
   chanting,
 }
 
 @freezed
-sealed class SessionEntity with _$SessionEntity implements Dto {
+sealed class SessionEntity with _$SessionEntity implements SerializableEntity {
   const SessionEntity._();
 
   const factory SessionEntity({

@@ -50,7 +50,7 @@ class SessionHistoryList extends StatelessWidget {
                     top: 0,
                     right: 0,
                     child: Icon(
-                      (s.type == .sitting) ? 
+                      (s.type == .timer) ? 
                         Icons.timer_rounded : 
                         Icons.music_note_rounded,
                     )

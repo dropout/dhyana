@@ -2,6 +2,8 @@ library;
 
 export 'src/core_di.dart';
 
+export 'src/audio/app_audio_handler.dart';
+
 export 'src/data/converter/date_time_converter.dart';
 export 'src/data/converter/date_time_or_null_converter.dart';
 export 'src/data/converter/duration_converter.dart';
@@ -18,13 +20,14 @@ export 'src/data/repository/default_storage_repository.dart';
 export 'src/event_bus/event_bus.dart';
 
 export 'src/domain/entity/city_search_result.dart';
-export 'src/domain/entity/entity.dart';
+export 'src/domain/entity/serializable_entity.dart';
 export 'src/domain/entity/lat_lng.dart';
 export 'src/domain/entity/location.dart';
-export 'src/domain/entity/profile/profile_model.dart';
+export 'src/domain/entity/profile/profile_displayable.dart';
 export 'src/domain/entity/remote_settings.dart';
 export 'src/domain/enum/processing_state.dart';
 export 'src/domain/enum/shared_preferences_key.dart';
+export 'src/domain/enum/session_type.dart';
 export 'src/domain/enum/sound.dart';
 export 'src/domain/repository/storage_repository.dart';
 

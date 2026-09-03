@@ -11,7 +11,7 @@ enum StatsSessionEntityType {
 }
 
 @freezed
-sealed class StatsSessionEntity with _$StatsSessionEntity implements Dto {
+sealed class StatsSessionEntity with _$StatsSessionEntity implements SerializableEntity {
 
   const StatsSessionEntity._();
 

@@ -9,7 +9,7 @@ part 'stats_bucket_entity.g.dart';
   unionKey: 'granularity',
   unionValueCase: FreezedUnionCase.none,
 )
-sealed class StatsBucketEntity with _$StatsBucketEntity implements Dto {
+sealed class StatsBucketEntity with _$StatsBucketEntity implements SerializableEntity {
 
   const StatsBucketEntity._();
 

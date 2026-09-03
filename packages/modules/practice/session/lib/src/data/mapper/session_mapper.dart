@@ -7,7 +7,7 @@ extension SessionMapper on SessionEntity {
     return Session(
       id: id,
       type: switch (type) {
-        .sitting => .sitting,
+        .timer => .timer,
         .chanting => .chanting,
       },
       startTime: startTime,
@@ -22,7 +22,7 @@ extension SessionEntityMapper on Session {
     return SessionEntity(
       id: id,
       type: switch (type) {
-        .sitting => .sitting,
+        .timer => .timer,
         .chanting => .chanting,
       },
       startTime: startTime,

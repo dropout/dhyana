@@ -6,7 +6,7 @@ part 'chant_local_resources_entity.freezed.dart';
 part 'chant_local_resources_entity.g.dart';
 
 @freezed
-sealed class ChantLocalResourcesEntity with _$ChantLocalResourcesEntity implements Dto {
+sealed class ChantLocalResourcesEntity with _$ChantLocalResourcesEntity implements SerializableEntity {
   const ChantLocalResourcesEntity._();
 
   const factory ChantLocalResourcesEntity({

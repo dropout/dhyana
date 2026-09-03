@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:core/core.dart';
-import 'package:profile/src/public/view/stats/progress_summary.dart';
+import 'package:profile/profile.dart';
+import 'package:profile/src/data/datasource/faker_profile_extension.dart';
 import 'package:profile/src/public/view/stats/progress_summary_item.dart';
 
 

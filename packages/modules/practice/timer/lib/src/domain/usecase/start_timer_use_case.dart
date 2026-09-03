@@ -6,10 +6,7 @@ import 'package:timer/src/domain/entity/timer_state_entity.dart';
 import 'package:timer/src/domain/enum/timer_stage.dart';
 import 'package:timer/src/domain/repository/timer_settings_history_repository.dart';
 import 'package:timer/src/domain/service/timer_audio_service.dart';
-
-import 'package:dhyana/modules/auth/public/api/auth_public_api.dart';
-import 'package:dhyana/modules/profile/public/api/profile_public_api.dart';
-import 'package:dhyana/modules/social/public/api/social_public_api.dart';
+import 'package:timer/src/domain/service/timer_app_port.dart';
 
 
 /// A use case that starts the timer:
@@ -17,14 +14,7 @@ import 'package:dhyana/modules/social/public/api/social_public_api.dart';
 /// - 2. Setup the timer event scheduler and schedule the timer events.,
 class StartTimerUseCase with LoggerMixin {
 
-  /// Used to check if the user is authenticated and get the user's ID.
-  final AuthPublicApi authPublicApi;
-
-  /// Used to read the user's profile and get the user's settings.
-  final ProfilePublicApi profilePublicApi;
-
-  /// Used to show the user's presence when the timer starts.
-  final SocialPublicApi socialPublicApi;
+  final TimerAppPort timerAppPort;
 
   /// Used to start the timer audio service and play sounds.
   final TimerAudioService timerAudioService;
@@ -39,9 +29,7 @@ class StartTimerUseCase with LoggerMixin {
   final CrashlyticsService crashlyticsService;
 
   StartTimerUseCase({
-    required this.authPublicApi,
-    required this.profilePublicApi,
-    required this.socialPublicApi,
+    required this.timerAppPort,
     required this.timerAudioService,
     required this.eventScheduler,
     required this.timerSettingsHistoryRepository,
@@ -91,7 +79,7 @@ class StartTimerUseCase with LoggerMixin {
   /// Move to a business logic service if used in multiple use cases?
   Future<void> _executeAdditionalTasks(TimerSettingsEntity timerSettings) async {
     try {
-      final authData = await authPublicApi.authSessionStream.first;
+      final authData = await timerAppPort.getAuthSession();
       if (!authData.isAuthenticated) {
         logger.t('User is not authenticated, skipping presence, history');
         return;
@@ -103,7 +91,7 @@ class StartTimerUseCase with LoggerMixin {
       }
 
       final profileId = authData.userId!;
-      final profile = await profilePublicApi.getProfile(profileId, preferCache: true);
+      final profile = await timerAppPort.getProfile(profileId, preferCache: true);
 
       logger.t('Recording timer settings history');
       timerSettingsHistoryRepository.recordTimerSettingsHistory(
@@ -116,8 +104,8 @@ class StartTimerUseCase with LoggerMixin {
         return;
       }
 
-      logger.t('Showing presence}');
-      await socialPublicApi.showPresence(
+      logger.t('Showing presence');
+      timerAppPort.showPresence(
         profileId: profile.id,
         firstName: profile.firstName,
         lastName: profile.lastName,

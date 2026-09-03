@@ -10,7 +10,7 @@ part 'cache_validation_result_entity.g.dart';
 @freezed
 sealed class CacheValidationResultEntity
     with _$CacheValidationResultEntity
-    implements Dto {
+    implements SerializableEntity {
   const CacheValidationResultEntity._();
 
   const factory CacheValidationResultEntity({

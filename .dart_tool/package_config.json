@@ -1556,6 +1556,12 @@
       "languageVersion": "3.13"
     },
     {
+      "name": "app_events",
+      "rootUri": "../packages/modules/app_events",
+      "packageUri": "lib/",
+      "languageVersion": "3.13"
+    },
+    {
       "name": "auth",
       "rootUri": "../packages/modules/auth",
       "packageUri": "lib/",

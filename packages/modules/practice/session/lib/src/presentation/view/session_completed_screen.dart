@@ -60,7 +60,7 @@ class SessionCompletedScreen extends StatelessWidget {
 
   Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
     return BlocProvider<SessionCompletedCubit>(
-      create: (context) => GetIt.instance.get<SessionCompletedCubit>(),
+      create: (context) => GetIt.I.get<SessionCompletedCubit>(),
       child: SignedInCompletedView(
         profileId: state.profile.id,
         session: session,

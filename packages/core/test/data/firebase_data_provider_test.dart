@@ -6,7 +6,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/src/data/datasource/firebase_data_provider.dart';
 import 'package:core/src/data/datasource/firebase_model_extension.dart';
-import 'package:core/src/domain/entity/entity.dart';
+import 'package:core/src/domain/entity/serializable_entity.dart';
 
 
 // This test is a questionable effort.
@@ -38,7 +38,7 @@ class MockQueryDocumentSnapshot
 
 class MockModel
   extends Mock
-  implements Dto {}
+  implements SerializableEntity {}
 
 class MockQuery
   extends Mock

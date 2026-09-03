@@ -13,7 +13,7 @@ enum TimerSessionEntityType {
 /// Domain-owned representation of a completed timer session,
 /// independent of the session module's [SessionEntity].
 @freezed
-sealed class TimerSessionEntity with _$TimerSessionEntity implements Dto {
+sealed class TimerSessionEntity with _$TimerSessionEntity implements SerializableEntity {
 
   const TimerSessionEntity._();
 

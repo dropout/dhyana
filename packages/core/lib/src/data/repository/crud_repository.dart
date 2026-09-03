@@ -1,10 +1,10 @@
 
 
 import 'package:core/src/data/datasource/data_provider.dart';
-import 'package:core/src/domain/entity/entity.dart';
+import 'package:core/src/domain/entity/serializable_entity.dart';
 
 /// Base interface for CRUD operations on entities of type M.
-abstract interface class CrudRepository<M extends Dto> {
+abstract interface class CrudRepository<M extends SerializableEntity> {
 
   Future<void> create(M model);
   Future<M> read(String id, {bool preferCache});

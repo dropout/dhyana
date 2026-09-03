@@ -13,9 +13,7 @@ import 'package:timer/src/domain/usecase/start_timer_use_case.dart';
 import '../timer_mock_definitions.dart';
 
 void main() {
-  late MockAuthPublicApi authPublicApi;
-  late MockProfilePublicApi profilePublicApi;
-  late MockSocialPublicApi socialPublicApi;
+  late MockTimerAppPort timerAppPort;
   late MockTimerAudioService timerAudioService;
   late MockTimerEventScheduler eventScheduler;
   late MockTimerSettingsHistoryRepository timerSettingsHistoryRepository;
@@ -28,31 +26,32 @@ void main() {
   });
 
   setUp(() {
-    authPublicApi = MockAuthPublicApi();
-    profilePublicApi = MockProfilePublicApi();
-    socialPublicApi = MockSocialPublicApi();
+    timerAppPort = MockTimerAppPort();
     timerAudioService = MockTimerAudioService();
     eventScheduler = MockTimerEventScheduler();
     timerSettingsHistoryRepository = MockTimerSettingsHistoryRepository();
     crashlyticsService = MockCrashlyticsService();
 
     useCase = StartTimerUseCase(
-      authPublicApi: authPublicApi,
-      profilePublicApi: profilePublicApi,
-      socialPublicApi: socialPublicApi,
+      timerAppPort: timerAppPort,
       timerAudioService: timerAudioService,
       eventScheduler: eventScheduler,
       timerSettingsHistoryRepository: timerSettingsHistoryRepository,
       crashlyticsService: crashlyticsService,
     );
 
-    when(() => timerAudioService.start(any())).thenAnswer((_) => Future.value());
-    when(() => timerAudioService.playSound(any())).thenAnswer((_) => Future.value());
+    when(() => timerAudioService.start(any()))
+        .thenAnswer((_) => Future.value());
+    when(() => timerAudioService.playSound(any()))
+        .thenAnswer((_) => Future.value());
     when(
-      () => timerSettingsHistoryRepository.recordTimerSettingsHistory(any(), any()),
+      () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
+        any(),
+        any(),
+      ),
     ).thenAnswer((_) async {});
     when(
-      () => socialPublicApi.showPresence(
+      () => timerAppPort.showPresence(
         profileId: any(named: 'profileId'),
         firstName: any(named: 'firstName'),
         lastName: any(named: 'lastName'),
@@ -84,9 +83,9 @@ void main() {
 
   test('starts the audio service with the current timer settings', () async {
     const timerSettings = TimerSettingsEntity(warmup: Duration(minutes: 1));
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: false, userId: null)),
-    );
+    when(
+      () => timerAppPort.getAuthSession(),
+    ).thenAnswer((_) async => (isAuthenticated: false, userId: null));
 
     await useCase.execute(createState(timerSettings: timerSettings));
 
@@ -94,53 +93,59 @@ void main() {
   });
 
   test('resets and starts the event scheduler', () async {
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: false, userId: null)),
-    );
+    when(
+      () => timerAppPort.getAuthSession(),
+    ).thenAnswer((_) async => (isAuthenticated: false, userId: null));
 
     await useCase.execute(
       createState(timerSettings: const TimerSettingsEntity()),
     );
 
-    verifyInOrder([
-      () => eventScheduler.reset(),
-      () => eventScheduler.start(),
-    ]);
+    verifyInOrder([() => eventScheduler.reset(), () => eventScheduler.start()]);
   });
 
-  test('does not play the starting sound immediately when there is a warmup', () async {
-    const timerSettings = TimerSettingsEntity(warmup: Duration(minutes: 1));
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: false, userId: null)),
-    );
+  test(
+    'does not play the starting sound immediately when there is a warmup',
+    () async {
+      const timerSettings = TimerSettingsEntity(warmup: Duration(minutes: 1));
+      when(
+        () => timerAppPort.getAuthSession(),
+      ).thenAnswer((_) async => (isAuthenticated: false, userId: null));
 
-    final result = await useCase.execute(
-      createState(timerSettings: timerSettings),
-    );
+      final result = await useCase.execute(
+        createState(timerSettings: timerSettings),
+      );
 
-    expect(result.timerStage, TimerStage.warmup);
-    verifyNever(() => timerAudioService.playSound(timerSettings.startingSound));
-  });
+      expect(result.timerStage, TimerStage.warmup);
+      verifyNever(
+        () => timerAudioService.playSound(timerSettings.startingSound),
+      );
+    },
+  );
 
-  test('plays the starting sound immediately when there is no warmup', () async {
-    const timerSettings = TimerSettingsEntity(warmup: Duration.zero);
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: false, userId: null)),
-    );
+  test(
+    'plays the starting sound immediately when there is no warmup',
+    () async {
+      const timerSettings = TimerSettingsEntity(warmup: Duration.zero);
+      when(
+        () => timerAppPort.getAuthSession(),
+      ).thenAnswer((_) async => (isAuthenticated: false, userId: null));
 
-    final result = await useCase.execute(
-      createState(timerSettings: timerSettings),
-    );
+      final result = await useCase.execute(
+        createState(timerSettings: timerSettings),
+      );
 
-    expect(result.timerStage, TimerStage.timer);
-    verify(() => timerAudioService.playSound(timerSettings.startingSound)).called(1);
-  });
+      expect(result.timerStage, TimerStage.timer);
+      verify(() => timerAudioService.playSound(timerSettings.startingSound))
+          .called(1);
+    },
+  );
 
   test('returns the state as running with the start time set', () async {
     final fixedTime = DateTime(2026, 3, 1, 8, 0);
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: false, userId: null)),
-    );
+    when(
+      () => timerAppPort.getAuthSession(),
+    ).thenAnswer((_) async => (isAuthenticated: false, userId: null));
 
     final result = await withClock(
       Clock.fixed(fixedTime),
@@ -153,126 +158,155 @@ void main() {
     expect(result.startTime, fixedTime);
   });
 
-  test('skips history and presence when the user is not authenticated', () async {
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: false, userId: null)),
-    );
+  test(
+    'skips history and presence when the user is not authenticated',
+    () async {
+      when(
+        () => timerAppPort.getAuthSession(),
+      ).thenAnswer((_) async => (isAuthenticated: false, userId: null));
 
-    await useCase.execute(
-      createState(timerSettings: const TimerSettingsEntity()),
-    );
-    await Future.delayed(Duration.zero); // let the fire-and-forget task settle
+      await useCase.execute(
+        createState(timerSettings: const TimerSettingsEntity()),
+      );
+      await Future.delayed(
+        Duration.zero,
+      ); // let the fire-and-forget task settle
 
-    verifyNever(
-      () => timerSettingsHistoryRepository.recordTimerSettingsHistory(any(), any()),
-    );
-    verifyNever(
-      () => socialPublicApi.showPresence(
-        profileId: any(named: 'profileId'),
-        firstName: any(named: 'firstName'),
-        lastName: any(named: 'lastName'),
-        startedAt: any(named: 'startedAt'),
-      ),
-    );
-  });
+      verifyNever(
+        () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
+          any(),
+          any(),
+        ),
+      );
+      verifyNever(
+        () => timerAppPort.showPresence(
+          profileId: any(named: 'profileId'),
+          firstName: any(named: 'firstName'),
+          lastName: any(named: 'lastName'),
+          startedAt: any(named: 'startedAt'),
+        ),
+      );
+    },
+  );
 
-  test('skips history and presence when authenticated but userId is null', () async {
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: true, userId: null)),
-    );
+  test(
+    'skips history and presence when authenticated but userId is null',
+    () async {
+      when(
+        () => timerAppPort.getAuthSession(),
+      ).thenAnswer((_) async => (isAuthenticated: true, userId: null));
 
-    await useCase.execute(
-      createState(timerSettings: const TimerSettingsEntity()),
-    );
-    await Future.delayed(Duration.zero); // let the fire-and-forget task settle
+      await useCase.execute(
+        createState(timerSettings: const TimerSettingsEntity()),
+      );
+      await Future.delayed(
+        Duration.zero,
+      ); // let the fire-and-forget task settle
 
-    verifyNever(
-      () => timerSettingsHistoryRepository.recordTimerSettingsHistory(any(), any()),
-    );
-  });
+      verifyNever(
+        () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
+          any(),
+          any(),
+        ),
+      );
+    },
+  );
 
-  test('records timer settings history and shows presence when authenticated', () async {
-    const timerSettings = TimerSettingsEntity(warmup: Duration.zero);
-    final profile = createProfile();
+  test(
+    'records timer settings history and shows presence when authenticated',
+    () async {
+      const timerSettings = TimerSettingsEntity(warmup: Duration.zero);
+      final profile = createProfile();
 
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: true, userId: profile.id)),
-    );
-    when(
-      () => profilePublicApi.getProfile(profile.id, preferCache: true),
-    ).thenAnswer((_) async => profile);
+      when(() => timerAppPort.getAuthSession()).thenAnswer(
+        (_) async => (isAuthenticated: true, userId: profile.id),
+      );
+      when(() => timerAppPort.getProfile(profile.id, preferCache: true))
+          .thenAnswer((_) async => profile);
 
-    await useCase.execute(createState(timerSettings: timerSettings));
-    await Future.delayed(Duration.zero); // let the fire-and-forget task settle
+      await useCase.execute(createState(timerSettings: timerSettings));
+      await Future.delayed(
+        Duration.zero,
+      ); // let the fire-and-forget task settle
 
-    verify(
-      () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
-        profile.id,
-        timerSettings,
-      ),
-    ).called(1);
-    verify(
-      () => socialPublicApi.showPresence(
-        profileId: profile.id,
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        photoBlurhash: profile.photoBlurhash,
-        location: profile.location,
-        startedAt: any(named: 'startedAt'),
-      ),
-    ).called(1);
-  });
+      verify(
+        () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
+          profile.id,
+          timerSettings,
+        ),
+      ).called(1);
+      verify(
+        () => timerAppPort.showPresence(
+          profileId: profile.id,
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          photoBlurhash: profile.photoBlurhash,
+          location: profile.location,
+          startedAt: any(named: 'startedAt'),
+        ),
+      ).called(1);
+    },
+  );
 
-  test('records history but skips presence when the presence feature is disabled', () async {
-    const timerSettings = TimerSettingsEntity(warmup: Duration.zero);
-    final profile = createProfile(usePresenceFeature: false);
+  test(
+    'records history but skips presence when the presence feature is disabled',
+    () async {
+      const timerSettings = TimerSettingsEntity(warmup: Duration.zero);
+      final profile = createProfile(usePresenceFeature: false);
 
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: true, userId: profile.id)),
-    );
-    when(
-      () => profilePublicApi.getProfile(profile.id, preferCache: true),
-    ).thenAnswer((_) async => profile);
+      when(() => timerAppPort.getAuthSession())
+          .thenAnswer((_) async => (isAuthenticated: true, userId: profile.id));
 
-    await useCase.execute(createState(timerSettings: timerSettings));
-    await Future.delayed(Duration.zero); // let the fire-and-forget task settle
+      when(() => timerAppPort.getProfile(profile.id, preferCache: true))
+          .thenAnswer((_) async => profile);
 
-    verify(
-      () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
-        profile.id,
-        timerSettings,
-      ),
-    ).called(1);
-    verifyNever(
-      () => socialPublicApi.showPresence(
-        profileId: any(named: 'profileId'),
-        firstName: any(named: 'firstName'),
-        lastName: any(named: 'lastName'),
-        startedAt: any(named: 'startedAt'),
-      ),
-    );
-  });
+      await useCase.execute(createState(timerSettings: timerSettings));
+      await Future.delayed(
+        Duration.zero,
+      ); // let the fire-and-forget task settle
 
-  test('records the error via crashlytics when the additional tasks throw', () async {
-    when(() => authPublicApi.authSessionStream).thenAnswer(
-      (_) => Stream.value((isAuthenticated: true, userId: 'profile-1')),
-    );
-    final exception = Exception('profile lookup failed');
-    when(
-      () => profilePublicApi.getProfile('profile-1', preferCache: true),
-    ).thenThrow(exception);
+      verify(
+        () => timerSettingsHistoryRepository.recordTimerSettingsHistory(
+          profile.id,
+          timerSettings,
+        ),
+      ).called(1);
+      verifyNever(
+        () => timerAppPort.showPresence(
+          profileId: any(named: 'profileId'),
+          firstName: any(named: 'firstName'),
+          lastName: any(named: 'lastName'),
+          startedAt: any(named: 'startedAt'),
+        ),
+      );
+    },
+  );
 
-    await useCase.execute(
-      createState(timerSettings: const TimerSettingsEntity()),
-    );
-    await Future.delayed(Duration.zero); // let the fire-and-forget task settle
+  test(
+    'records the error via crashlytics when the additional tasks throw',
+    () async {
+      when(() => timerAppPort.getAuthSession()).thenAnswer(
+        (_) async => (isAuthenticated: true, userId: 'profile-1'),
+      );
+      final exception = Exception('profile lookup failed');
 
-    verify(
-      () => crashlyticsService.recordError(
-        exception: exception,
-        stackTrace: any(named: 'stackTrace'),
-        reason: any(named: 'reason'),
-      ),
-    ).called(1);
-  });
+      when(() => timerAppPort.getProfile('profile-1', preferCache: true))
+          .thenThrow(exception);
+
+      await useCase.execute(
+        createState(timerSettings: const TimerSettingsEntity()),
+      );
+      await Future.delayed(
+        Duration.zero,
+      ); // let the fire-and-forget task settle
+
+      verify(
+        () => crashlyticsService.recordError(
+          exception: exception,
+          stackTrace: any(named: 'stackTrace'),
+          reason: any(named: 'reason'),
+        ),
+      ).called(1);
+    },
+  );
 }

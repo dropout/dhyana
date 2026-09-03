@@ -1,5 +1,6 @@
 {
   "roots": [
+    "app_events",
     "auth",
     "bar_chart",
     "chanting",
@@ -143,6 +144,7 @@
         "get_it",
         "go_router",
         "go_router_builder",
+        "hydrated_bloc",
         "image",
         "image_picker",
         "material_ui",
@@ -156,6 +158,22 @@
       "devDependencies": [
         "flutter_lints",
         "flutter_test"
+      ]
+    },
+    {
+      "name": "app_events",
+      "version": "0.0.1",
+      "dependencies": [
+        "core",
+        "flutter",
+        "freezed_annotation"
+      ],
+      "devDependencies": [
+        "build_runner",
+        "flutter_lints",
+        "flutter_test",
+        "freezed",
+        "json_annotation"
       ]
     },
     {
@@ -255,7 +273,8 @@
         "material_ui",
         "profile",
         "provider",
-        "smooth_page_indicator"
+        "smooth_page_indicator",
+        "social"
       ],
       "devDependencies": [
         "bloc_test",
@@ -286,7 +305,8 @@
         "profile",
         "provider",
         "social",
-        "sqflite_common_ffi"
+        "sqflite_common_ffi",
+        "stats"
       ],
       "devDependencies": [
         "bloc_test",
@@ -304,6 +324,7 @@
       "version": "0.0.1",
       "dependencies": [
         "audio_service",
+        "clock",
         "core",
         "faker",
         "firebase_provider",
@@ -320,6 +341,7 @@
         "mocktail",
         "path_provider",
         "provider",
+        "session",
         "uuid"
       ],
       "devDependencies": [
@@ -887,6 +909,11 @@
       ]
     },
     {
+      "name": "clock",
+      "version": "1.1.3",
+      "dependencies": []
+    },
+    {
       "name": "flip_board",
       "version": "1.0.0",
       "dependencies": [
@@ -907,11 +934,6 @@
       "dependencies": [
         "flutter"
       ]
-    },
-    {
-      "name": "clock",
-      "version": "1.1.3",
-      "dependencies": []
     },
     {
       "name": "gaimon",

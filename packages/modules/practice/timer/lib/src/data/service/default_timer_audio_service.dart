@@ -67,9 +67,7 @@ class DefaultTimerAudioService implements TimerAudioService {
     => _audioHandler.playbackState.map((state) => state.toDomain());
 
   void _switchToTimerAudioHandler() => 
-    _audioHandler.customAction(AppAudioHandler.switchAction, {
-      'handlerId': SoTimerAudioHandler.handlerId,
-    });
+    _audioHandler.switchToTimerAudioHandler();
   
   Future<void> _playAudioSound(Sound sound) {
     return _audioHandler.customAction(SoTimerHandlerCustomAction.playSound.name, {

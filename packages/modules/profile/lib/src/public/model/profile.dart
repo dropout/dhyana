@@ -13,7 +13,7 @@ part 'profile.freezed.dart';
 // initial profile db record is created.
 
 @freezed
-abstract class Profile with _$Profile implements ProfileModel {
+abstract class Profile with _$Profile implements ProfileDisplayable {
 
   const Profile._();
 
@@ -54,7 +54,7 @@ abstract class Profile with _$Profile implements ProfileModel {
     '$firstName $lastName';
 
   @override
-  String get profileImagePath =>
+  String get profileImageStoragePath =>
     '/profiles/$id/photo.jpg';  
 
   @override

@@ -9,7 +9,7 @@ import 'package:profile/profile.dart';
 part 'social_profile.freezed.dart';
 
 @freezed
-sealed class SocialProfile with _$SocialProfile implements ProfileModel {
+sealed class SocialProfile with _$SocialProfile implements ProfileDisplayable {
 
   const SocialProfile._();
 
@@ -50,7 +50,7 @@ sealed class SocialProfile with _$SocialProfile implements ProfileModel {
     '$firstName $lastName';
 
   @override
-  String get profileImagePath =>
+  String get profileImageStoragePath =>
     '/profiles/$id/photo.jpg';
 
   @override

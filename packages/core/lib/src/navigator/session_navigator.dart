@@ -4,7 +4,11 @@ abstract class SessionNavigator extends BaseNavigator {
   SessionNavigator(super.router);
 
   Future<void> navigateToSessionCompletedScreen({
-    NavigationType type = NavigationType.push,
+    required DateTime startTime,
+    required DateTime endTime,
+    required Duration duration,
+    required SessionType sessionType,
+    NavigationType navigationType = NavigationType.push,
   });
 
   Future<void> navigateToSessionHistory(
