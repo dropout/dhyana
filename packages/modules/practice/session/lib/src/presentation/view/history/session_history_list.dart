@@ -1,3 +1,4 @@
+import 'package:session/l10n/session_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 
@@ -39,7 +40,7 @@ class SessionHistoryList extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(
-                        context.l10n.minutesPluralWithNumber(s.duration.inMinutes),
+                        SessionLocalizations.of(context).minutesPluralWithNumber(s.duration.inMinutes),
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

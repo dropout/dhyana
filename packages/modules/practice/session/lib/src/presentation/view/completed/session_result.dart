@@ -1,3 +1,4 @@
+import 'package:session/l10n/session_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:core/core.dart';
@@ -49,7 +50,7 @@ class SessionResult extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: '${context.l10n.sessionResultCompleted} '
+            text: '${SessionLocalizations.of(context).sessionResultCompleted} '
           ),
           TextSpan(
             text: session.duration.inMinutes.toString(),
@@ -59,7 +60,7 @@ class SessionResult extends StatelessWidget {
             )
           ),
           TextSpan(
-            text: '  ${context.l10n.sessionResultMinutes(session.duration.inMinutes)}'
+            text: '  ${SessionLocalizations.of(context).sessionResultMinutes(session.duration.inMinutes)}'
           ),
         ]
       )

@@ -1,5 +1,4 @@
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
 import 'package:session/src/public/model/session.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
 import 'package:session/src/presentation/view/completed/signed_out_completed_view.dart';
@@ -98,7 +97,7 @@ class SessionCompletedScreen extends StatelessWidget {
             child: AppButton(
               key: const Key('session_completed_screen_okay_button'),
               onTap: () => _onOkayButtonPressed(context),
-              text: AppLocalizations.of(context).okay.toUpperCase(),
+              text: context.coreL10n.okay.toUpperCase(),
               bColor: Colors.white,
               fColor: Colors.black,
             )

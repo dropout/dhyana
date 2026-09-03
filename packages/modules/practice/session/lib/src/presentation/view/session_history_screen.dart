@@ -1,5 +1,5 @@
 import 'package:session/src/presentation/viewmodel/sessions/sessions_cubit.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:session/l10n/session_localizations.dart';
 import 'package:core/core.dart';
 import 'package:session/src/presentation/view/history/session_history_list.dart';
 import 'package:material_ui/material_ui.dart';
@@ -31,7 +31,7 @@ class SessionHistoryScreen extends StatelessWidget
         switch (state) {
           case SessionsLoaded():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).sessionsHistory,
+              title: SessionLocalizations.of(context).sessionsHistory,
               slivers: [
                 SliverSafeArea(
                   top: false,
@@ -41,7 +41,7 @@ class SessionHistoryScreen extends StatelessWidget
             );
           case SessionsLoading():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).sessionsHistory,
+              title: SessionLocalizations.of(context).sessionsHistory,
               enableScrolling: false,
               slivers: [
                 buildLoadingSliver(context),
@@ -49,7 +49,7 @@ class SessionHistoryScreen extends StatelessWidget
             );
           case SessionsLoadingError():
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).sessionsHistory,
+              title: SessionLocalizations.of(context).sessionsHistory,
               enableScrolling: false,
               slivers: [
                 buildErrorSliver(context),
@@ -57,7 +57,7 @@ class SessionHistoryScreen extends StatelessWidget
             );
           default:
             return DefaultScreenSetup(
-              title: AppLocalizations.of(context).sessionsHistory,
+              title: SessionLocalizations.of(context).sessionsHistory,
               enableScrolling: false,
               slivers: []
             );
