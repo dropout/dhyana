@@ -82,7 +82,7 @@ class _SessionStartButtonState extends State<SessionStartButton>
               vertical: DesignSpec.spacingMd,
             ),
             child: Text(
-              context.l10n.startTimerButtonText.toUpperCase(),
+              context.coreL10n.startTimerButtonText.toUpperCase(),
               style: context.theme.textTheme.titleLarge?.copyWith(
                 color: widget.textColor,
                 fontWeight: FontWeight.w900,

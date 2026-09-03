@@ -121,7 +121,7 @@ class _IntDialInputState extends State<IntDialInput> {
               ),
             ),
             TextSpan(
-              text: context.l10n.minutesPlural(_currentDuration),
+              text: context.coreL10n.minutesPlural(_currentDuration),
               style: context.theme.textTheme.bodyLarge!.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

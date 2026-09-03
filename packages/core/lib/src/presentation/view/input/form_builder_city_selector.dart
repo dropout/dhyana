@@ -33,7 +33,7 @@ class FormBuilderCitySelector extends FormBuilderField<Location> {
     builder: (FormFieldState<Location?> field) {
       return CitySelectorInput(
         label: label,
-        placeholderText: field.context.l10n.locationInputPlaceholder,
+        placeholderText: field.context.coreL10n.locationInputPlaceholder,
         initialLocation: field.value,
         onChanged: (location) => field.didChange(location),
       );
@@ -350,7 +350,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
   Widget buildIdle(BuildContext context) {
     if (widget.location == null) {
       return Center(
-        child: Text(context.l10n.locationInputNoSelection),
+        child: Text(context.coreL10n.locationInputNoSelection),
       );
     } else {
       return Center(
@@ -359,7 +359,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              context.l10n.locationInputCurrentSelection,
+              context.coreL10n.locationInputCurrentSelection,
               textAlign: TextAlign.center,
             ),
             Text(
@@ -418,7 +418,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         ),
         Gap.medium(),
         Text(
-          context.l10n.locationInputErrorMessage,
+          context.coreL10n.locationInputErrorMessage,
           textAlign: TextAlign.center,
         ),
       ]

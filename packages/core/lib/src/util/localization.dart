@@ -1,10 +1,10 @@
 import 'package:core/src/domain/enum/sound.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:core/l10n/core_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
 String getLocalizedSoundName(
   Sound sound,
-  AppLocalizations localizations
+  dynamic localizations
 ) {
   switch (sound) {
     case Sound.none:
@@ -26,11 +26,11 @@ String getLocalizedRoundedNumber(
     ) {
   if (number >= 1000000) {
     String roundedNumber = (number / 1000000).toStringAsFixed(1);
-    String localizedUnit = shorten ? AppLocalizations.of(context).millionShort :  AppLocalizations.of(context).million;
+    String localizedUnit = shorten ? CoreLocalizations.of(context).millionShort :  CoreLocalizations.of(context).million;
     return shorten ? '$roundedNumber$localizedUnit' : '$roundedNumber $localizedUnit';
   } else if (number >= 1000) {
     String roundedNumber = (number / 1000).toStringAsFixed(1);
-    String localizedUnit = shorten ? AppLocalizations.of(context).thousandShort : AppLocalizations.of(context).thousand;
+    String localizedUnit = shorten ? CoreLocalizations.of(context).thousandShort : CoreLocalizations.of(context).thousand;
     return shorten ? '$roundedNumber$localizedUnit' : '$roundedNumber $localizedUnit';
   } else {
     return number.toString();

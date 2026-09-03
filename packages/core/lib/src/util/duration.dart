@@ -1,4 +1,4 @@
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:core/l10n/core_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Extension methods on [Duration] for formatting durations in various ways.
@@ -10,15 +10,15 @@ extension DurationUtils on Duration {
     int minutes = inMinutes.remainder(60);
 
     if (inMinutes < 1) {
-      return '0${AppLocalizations.of(context).minutesAbbr.toLowerCase()}';
+      return '0${CoreLocalizations.of(context).minutesAbbr.toLowerCase()}';
     }
 
     String formattedDuration = '';
     if (hours > 0) {
-      formattedDuration += '$hours${AppLocalizations.of(context).hoursAbbr} ';
+      formattedDuration += '$hours${CoreLocalizations.of(context).hoursAbbr} ';
     }
     if (minutes > 0) {
-      formattedDuration += '$minutes${AppLocalizations.of(context).minutesAbbr} ';
+      formattedDuration += '$minutes${CoreLocalizations.of(context).minutesAbbr} ';
     }
     return formattedDuration.trim();
   }

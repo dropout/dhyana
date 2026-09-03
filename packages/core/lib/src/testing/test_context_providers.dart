@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 List<LocalizationsDelegate> getLocalizationDelegates() {
   return const [
     AppLocalizations.delegate,
+    CoreLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,

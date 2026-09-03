@@ -63,6 +63,7 @@ class App extends StatelessWidget {
         localizationsDelegates: const [
           AppLocalizations.delegate,
           AuthLocalizations.delegate,
+          CoreLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

@@ -1,6 +1,6 @@
 import 'package:core/src/presentation/view/util/app_context.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:core/l10n/core_localizations.dart';
 import 'package:core/src/presentation/design_spec.dart';
 
 import 'app_button.dart';
@@ -31,9 +31,9 @@ class AppErrorDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String headlineFinal = headline ?? AppLocalizations.of(context).errorHeadline;
-    String textFinal = text ?? AppLocalizations.of(context).errorText;
-    String buttonTextFinal = buttonText ?? AppLocalizations.of(context).errorButtonText;
+    String headlineFinal = headline ?? CoreLocalizations.of(context).errorHeadline;
+    String textFinal = text ?? CoreLocalizations.of(context).errorText;
+    String buttonTextFinal = buttonText ?? CoreLocalizations.of(context).errorButtonText;
 
     return Container(
       padding: const EdgeInsets.all(16.0),

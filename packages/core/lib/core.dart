@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/core_localizations.dart';
+
 export 'src/core_di.dart';
 
 export 'src/audio/app_audio_handler.dart';
