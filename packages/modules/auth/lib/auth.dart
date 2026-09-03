@@ -1,5 +1,7 @@
 library;
 
+export 'l10n/auth_localizations.dart';
+
 export 'src/auth_di.dart';
 export 'src/auth_routes.dart';
 

@@ -1,0 +1,18 @@
+{
+  "@@locale": "hu",
+  "loginHeadline1": "Ki",
+  "loginHeadline2": "vagy",
+  "loginHeadline3": "te?",
+  "loginSigninGoogle": "Bejelentkezés Google-lal",
+  "loginSigninApple": "Bejelentkezés Apple-lel",
+  "loginSigninEmailPassword": "Bejelentkezés Email-lel",
+  "loginSigninEmailPasswordScreenTitle": "Bejelentkezés Email-lel",
+  "loginSigninEmailInputLabel": "Email",
+  "loginSigninPasswordInputLabel": "Jelszó",
+  "loginSigninEmailPasswordButtonText": "Bejelentkezés",
+  "loginLegalPart1": "A bejelentkezéssel elfogadod az\n",
+  "loginLegalPart2": "ÁSZF-et",
+  "loginLegalPart3": " és az ",
+  "loginLegalPart4": "Adatvédelmi nyilatkozatot",
+  "loginGoToProfile": "Ugrás a profilodra"
+}

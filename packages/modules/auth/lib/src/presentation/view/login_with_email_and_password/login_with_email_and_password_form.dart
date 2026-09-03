@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:auth/l10n/auth_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -45,7 +46,7 @@ class _LoginWithEmailAndPasswordFormState
         children: [
           AppTextInput(          
             name: 'email',
-            label: context.l10n.loginSigninEmailInputLabel,
+            label: AuthLocalizations.of(context).loginSigninEmailInputLabel,
             formFieldKey: const Key('login_form_email_input'),            
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
@@ -57,7 +58,7 @@ class _LoginWithEmailAndPasswordFormState
           Gap.medium(),
           AppTextInput(
             name: 'password',
-            label: context.l10n.loginSigninPasswordInputLabel,
+            label: AuthLocalizations.of(context).loginSigninPasswordInputLabel,
             obscureText: true,
             formFieldKey: const Key('login_form_password_input'),
             validator: FormBuilderValidators.compose([

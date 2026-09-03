@@ -2,9 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
-
 import 'package:core/core.dart';
+import 'package:auth/l10n/auth_localizations.dart';
 import 'package:auth/src/presentation/view/login/login_headline_text_effect.dart';
 
 
@@ -79,18 +78,18 @@ class LoginSignedOutView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LoginHeadlineTextEffect(
-          text: AppLocalizations.of(context).loginHeadline1,
+          text: AuthLocalizations.of(context).loginHeadline1,
           textStyle: textStyle,
           duration: letterDuration * 3,
         ),
         LoginHeadlineTextEffect(
-          text: AppLocalizations.of(context).loginHeadline2,
+          text: AuthLocalizations.of(context).loginHeadline2,
           textStyle: textStyle,
           duration: letterDuration * 3,
           initialDelay: Durations.medium1,
         ),
         LoginHeadlineTextEffect(
-          text: AppLocalizations.of(context).loginHeadline3,
+          text: AuthLocalizations.of(context).loginHeadline3,
           textStyle: textStyle,
           duration: letterDuration * 4,
           initialDelay: Durations.long2,
@@ -106,7 +105,7 @@ class LoginSignedOutView extends StatelessWidget {
         children: [
           AppButton(
             key: const Key('login_with_google_button'),
-            text: AppLocalizations.of(context).loginSigninGoogle,
+            text: AuthLocalizations.of(context).loginSigninGoogle,
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithGoogleTap(context),
@@ -114,7 +113,7 @@ class LoginSignedOutView extends StatelessWidget {
           Gap.medium(),
           AppButton(
             key: const Key('login_with_apple_button'),
-            text: AppLocalizations.of(context).loginSigninApple,
+            text: AuthLocalizations.of(context).loginSigninApple,
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithAppleTap(context),
@@ -122,7 +121,7 @@ class LoginSignedOutView extends StatelessWidget {
           Gap.medium(),
           AppButton(
             key: const Key('login_with_email_and_password_button'),
-            text: AppLocalizations.of(context).loginSigninEmailPassword,
+            text: AuthLocalizations.of(context).loginSigninEmailPassword,
             bColor: Colors.black,
             fColor: Colors.white,
             onTap: () => _onLoginWithEmailAndPasswordTap(context),
@@ -141,7 +140,7 @@ class LoginSignedOutView extends StatelessWidget {
     if (!enableEmailPasswordSigning) return const SizedBox.shrink();
 
     return AppButton(
-      text: AppLocalizations
+        text: AuthLocalizations
           .of(context)
           .loginSigninEmailPassword,
       bColor: Colors.black,
@@ -162,9 +161,9 @@ class LoginSignedOutView extends StatelessWidget {
         text: TextSpan(
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.5),
           children: [
-            TextSpan(text: AppLocalizations.of(context).loginLegalPart1),
+            TextSpan(text: AuthLocalizations.of(context).loginLegalPart1),
             TextSpan(
-              text: AppLocalizations.of(context).loginLegalPart2,
+              text: AuthLocalizations.of(context).loginLegalPart2,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
@@ -172,9 +171,9 @@ class LoginSignedOutView extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () => _onTermsTap(context),
             ),
-            TextSpan(text: AppLocalizations.of(context).loginLegalPart3),
+            TextSpan(text: AuthLocalizations.of(context).loginLegalPart3),
             TextSpan(
-              text: AppLocalizations.of(context).loginLegalPart4,
+              text: AuthLocalizations.of(context).loginLegalPart4,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,

@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:core/core.dart';
+import 'package:auth/auth.dart';
 
 import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
@@ -61,6 +62,7 @@ class App extends StatelessWidget {
         supportedLocales: const [Locale('hu', 'HU'), Locale('en', 'EN')],
         localizationsDelegates: const [
           AppLocalizations.delegate,
+          AuthLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

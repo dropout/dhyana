@@ -2,9 +2,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:dhyana/l10n/app_localizations.dart';
-
 import 'package:core/core.dart';
+import 'package:auth/l10n/auth_localizations.dart';
 import 'package:auth/src/presentation/view/login_with_email_and_password/login_with_email_and_password_form.dart';
 
 class LoginWithEmailAndPasswordScreen extends StatefulWidget {
@@ -63,7 +62,7 @@ class _LoginWithEmailAndPasswordScreenState
   Widget build(BuildContext context) {
     return DefaultScreenSetup(
       key: const Key('login_with_email_and_password_screen'),
-      title: context.l10n.loginSigninEmailPasswordScreenTitle,
+      title: AuthLocalizations.of(context).loginSigninEmailPasswordScreenTitle,
       enableScrolling: false,
       slivers: [
         SliverFillRemaining(
@@ -99,7 +98,7 @@ class _LoginWithEmailAndPasswordScreenState
       case ProcessingState.idle:
         return AppButton(
           key: const Key('login_with_email_and_password_button'),
-          text: AppLocalizations.of(
+          text: AuthLocalizations.of(
             context,
           ).loginSigninEmailPasswordButtonText.toUpperCase(),
           onTap: () => _onSigninTap(context),
@@ -107,14 +106,14 @@ class _LoginWithEmailAndPasswordScreenState
       case ProcessingState.processing:
         return AppButton(
           key: const Key('login_with_email_and_password_button'),
-          text: AppLocalizations.of(
+          text: AuthLocalizations.of(
             context,
           ).loginSigninEmailPasswordButtonText.toUpperCase(),
         );
       case ProcessingState.completed:      
         return AppButton(
           key: const Key('login_with_email_and_password_button'),
-          text: AppLocalizations.of(
+          text: AuthLocalizations.of(
             context,
           ).loginSigninEmailPasswordButtonText.toUpperCase(),
           bColor: Colors.green.shade600,
@@ -122,7 +121,7 @@ class _LoginWithEmailAndPasswordScreenState
       case ProcessingState.error:
         return AppButton(
           key: const Key('login_with_email_and_password_button'),
-          text: AppLocalizations.of(
+          text: AuthLocalizations.of(
             context,
           ).loginSigninEmailPasswordButtonText.toUpperCase(),
           onTap: () => _onSigninTap(context),

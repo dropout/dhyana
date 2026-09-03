@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
+import 'package:auth/l10n/auth_localizations.dart';
 
 
 /// A widget that displays an empty screen with a button at the bottom.
@@ -66,7 +67,7 @@ class _LoginSignedInViewState extends State<LoginSignedInView> {
               duration: Durations.medium2,
               child: _showButton
                   ? AppButton(
-                      text: context.l10n.loginGoToProfile.toUpperCase(),
+                      text: AuthLocalizations.of(context).loginGoToProfile.toUpperCase(),
                       bColor: Colors.black,
                       fColor: Colors.white,
                       onTap: () => _onButtonTap(context, widget.profileId),

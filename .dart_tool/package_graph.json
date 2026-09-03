@@ -188,12 +188,14 @@
         "flutter",
         "flutter_bloc",
         "flutter_form_builder",
+        "flutter_localizations",
         "form_builder_validators",
         "freezed_annotation",
         "get_it",
         "go_router",
         "go_router_builder",
         "google_sign_in",
+        "intl",
         "material_ui",
         "provider",
         "sign_in_with_apple"
@@ -973,6 +975,24 @@
       ]
     },
     {
+      "name": "intl",
+      "version": "0.20.3",
+      "dependencies": [
+        "clock",
+        "meta",
+        "path"
+      ]
+    },
+    {
+      "name": "flutter_localizations",
+      "version": "0.0.0",
+      "dependencies": [
+        "flutter",
+        "intl",
+        "path"
+      ]
+    },
+    {
       "name": "crypto",
       "version": "3.0.7",
       "dependencies": [
@@ -1289,24 +1309,6 @@
         "path",
         "web",
         "win32"
-      ]
-    },
-    {
-      "name": "intl",
-      "version": "0.20.3",
-      "dependencies": [
-        "clock",
-        "meta",
-        "path"
-      ]
-    },
-    {
-      "name": "flutter_localizations",
-      "version": "0.0.0",
-      "dependencies": [
-        "flutter",
-        "intl",
-        "path"
       ]
     },
     {
