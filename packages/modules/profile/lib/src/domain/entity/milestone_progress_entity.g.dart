@@ -23,5 +23,5 @@ Map<String, dynamic> _$MilestoneProgressEntityToJson(
 ) => <String, dynamic>{
   'completedDaysCount': instance.completedDaysCount,
   'targetDaysCount': instance.targetDaysCount,
-  'sessions': instance.sessions.map((e) => e.toJson()).toList(),
+  'sessions': instance.sessions,
 };

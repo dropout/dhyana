@@ -14,7 +14,7 @@ import 'package:profile/src/data/service/default_profile_public_api.dart';
 import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
 import 'package:profile/src/domain/usecase/delete_profile_use_case.dart';
 import 'package:profile/src/presentation/viewmodel/delete_profile_cubit.dart';
-import 'package:profile/src/presentation/viewmodel/profile_cubit.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 import 'package:profile/src/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:profile/src/public/api/profile_public_api.dart';
 
@@ -90,7 +90,7 @@ extension ProfileModuleDependencyInjection on GetIt {
     );
 
     // Contract from core module
-    registerFactory<ProfileStateCubit>(
+    registerFactory<ProfileCubit>(
       () => ProfileCubit(
         authPublicApi: get<AuthPublicApi>(),
         profilePublicApi: get<ProfilePublicApi>(),

@@ -10,6 +10,8 @@ import 'package:timer/src/presentation/view/timer/timer_running_time.dart';
 import 'package:timer/src/presentation/view/timer/timer_running_title.dart';
 import 'package:timer/src/presentation/view/timer/timer_running_view.dart';
 
+import '../../../timer_test_helper.dart';
+
 
 void main() {
 
@@ -40,7 +42,7 @@ void main() {
       );
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          TimerTestHelper.withLocalizationProvider(
             TimerRunningView(
               timerState: timerState,
               wakelockService: mockWakelockService,
@@ -69,7 +71,7 @@ void main() {
         .thenAnswer((_) async => {});
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          TimerTestHelper.withLocalizationProvider(
             TimerRunningView(
               timerState: timerState,
               wakelockService: wakelockService,
@@ -95,7 +97,7 @@ void main() {
         .thenAnswer((_) async => {});
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          TimerTestHelper.withLocalizationProvider(
             TimerRunningView(
               timerState: timerState,
               wakelockService: wakelockService,

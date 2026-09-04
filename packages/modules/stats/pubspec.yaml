@@ -30,9 +30,6 @@ dependencies:
   faker: ^2.2.0
   sqflite_common_ffi: ^2.4.2+1
   bar_chart: ^0.0.1
-  flutter_mindful_minutes:
-    git:
-      url: git@github.com:dropout/flutter_mindful_minutes.git  
 
 
 dev_dependencies:
@@ -41,10 +38,11 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
   build_runner: ^2.4.6
-  freezed: ^3.0.6
+  freezed: ^4.0.1
   json_serializable: ^6.7.1    
   mocktail: ^1.0.5
   nock: ^1.2.3
+  bloc_test: ^10.0.0
   
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

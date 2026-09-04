@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_stats_report.dart';
@@ -9,6 +9,7 @@ part of 'profile_stats_report.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ProfileStatsReportCopyWith<ProfileStatsReport> get copyWith => _$ProfileStatsRe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileStatsReport&&(identical(other.consecutiveDays, consecutiveDays) || other.consecutiveDays == consecutiveDays)&&(identical(other.milestoneProgress, milestoneProgress) || other.milestoneProgress == milestoneProgress)&&(identical(other.milestoneCount, milestoneCount) || other.milestoneCount == milestoneCount)&&(identical(other.completedMinutesCount, completedMinutesCount) || other.completedMinutesCount == completedMinutesCount)&&(identical(other.completedSessionsCount, completedSessionsCount) || other.completedSessionsCount == completedSessionsCount)&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.firstSessionDate, firstSessionDate) || other.firstSessionDate == firstSessionDate)&&(identical(other.lastSessionDate, lastSessionDate) || other.lastSessionDate == lastSessionDate));
+  final _this = this as ProfileStatsReport;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileStatsReport&&(identical(other.consecutiveDays, _this.consecutiveDays) || other.consecutiveDays == _this.consecutiveDays)&&(identical(other.milestoneProgress, _this.milestoneProgress) || other.milestoneProgress == _this.milestoneProgress)&&(identical(other.milestoneCount, _this.milestoneCount) || other.milestoneCount == _this.milestoneCount)&&(identical(other.completedMinutesCount, _this.completedMinutesCount) || other.completedMinutesCount == _this.completedMinutesCount)&&(identical(other.completedSessionsCount, _this.completedSessionsCount) || other.completedSessionsCount == _this.completedSessionsCount)&&(identical(other.completedDaysCount, _this.completedDaysCount) || other.completedDaysCount == _this.completedDaysCount)&&(identical(other.firstSessionDate, _this.firstSessionDate) || other.firstSessionDate == _this.firstSessionDate)&&(identical(other.lastSessionDate, _this.lastSessionDate) || other.lastSessionDate == _this.lastSessionDate));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,consecutiveDays,milestoneProgress,milestoneCount,completedMinutesCount,completedSessionsCount,completedDaysCount,firstSessionDate,lastSessionDate);
+int get hashCode {
+  final _this = this as ProfileStatsReport;
+  return Object.hash(runtimeType,_this.consecutiveDays,_this.milestoneProgress,_this.milestoneCount,_this.completedMinutesCount,_this.completedSessionsCount,_this.completedDaysCount,_this.firstSessionDate,_this.lastSessionDate);
+}
 
 @override
 String toString() {
-  return 'ProfileStatsReport(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
+  final _this = this as ProfileStatsReport;
+  return 'ProfileStatsReport(consecutiveDays: ${_this.consecutiveDays}, milestoneProgress: ${_this.milestoneProgress}, milestoneCount: ${_this.milestoneCount}, completedMinutesCount: ${_this.completedMinutesCount}, completedSessionsCount: ${_this.completedSessionsCount}, completedDaysCount: ${_this.completedDaysCount}, firstSessionDate: ${_this.firstSessionDate}, lastSessionDate: ${_this.lastSessionDate})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ProfileStatsReportCopyWithImpl<$Res>
 /// Create a copy of ProfileStatsReport
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? consecutiveDays = null,Object? milestoneProgress = null,Object? milestoneCount = null,Object? completedMinutesCount = null,Object? completedSessionsCount = null,Object? completedDaysCount = null,Object? firstSessionDate = freezed,Object? lastSessionDate = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProfileStatsReport(
 consecutiveDays: null == consecutiveDays ? _self.consecutiveDays : consecutiveDays // ignore: cast_nullable_to_non_nullable
 as ConsecutiveDays,milestoneProgress: null == milestoneProgress ? _self.milestoneProgress : milestoneProgress // ignore: cast_nullable_to_non_nullable
 as MilestoneProgress,milestoneCount: null == milestoneCount ? _self.milestoneCount : milestoneCount // ignore: cast_nullable_to_non_nullable
@@ -247,16 +253,18 @@ _$ProfileStatsReportCopyWith<_ProfileStatsReport> get copyWith => __$ProfileStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileStatsReport&&(identical(other.consecutiveDays, consecutiveDays) || other.consecutiveDays == consecutiveDays)&&(identical(other.milestoneProgress, milestoneProgress) || other.milestoneProgress == milestoneProgress)&&(identical(other.milestoneCount, milestoneCount) || other.milestoneCount == milestoneCount)&&(identical(other.completedMinutesCount, completedMinutesCount) || other.completedMinutesCount == completedMinutesCount)&&(identical(other.completedSessionsCount, completedSessionsCount) || other.completedSessionsCount == completedSessionsCount)&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.firstSessionDate, firstSessionDate) || other.firstSessionDate == firstSessionDate)&&(identical(other.lastSessionDate, lastSessionDate) || other.lastSessionDate == lastSessionDate));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileStatsReport&&(identical(other.consecutiveDays, consecutiveDays) || other.consecutiveDays == consecutiveDays)&&(identical(other.milestoneProgress, milestoneProgress) || other.milestoneProgress == milestoneProgress)&&(identical(other.milestoneCount, milestoneCount) || other.milestoneCount == milestoneCount)&&(identical(other.completedMinutesCount, completedMinutesCount) || other.completedMinutesCount == completedMinutesCount)&&(identical(other.completedSessionsCount, completedSessionsCount) || other.completedSessionsCount == completedSessionsCount)&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.firstSessionDate, firstSessionDate) || other.firstSessionDate == firstSessionDate)&&(identical(other.lastSessionDate, lastSessionDate) || other.lastSessionDate == lastSessionDate));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,consecutiveDays,milestoneProgress,milestoneCount,completedMinutesCount,completedSessionsCount,completedDaysCount,firstSessionDate,lastSessionDate);
+int get hashCode {
+    return Object.hash(runtimeType,consecutiveDays,milestoneProgress,milestoneCount,completedMinutesCount,completedSessionsCount,completedDaysCount,firstSessionDate,lastSessionDate);
+}
 
 @override
 String toString() {
-  return 'ProfileStatsReport(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
+    return 'ProfileStatsReport(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
 }
 
 

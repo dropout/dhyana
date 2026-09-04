@@ -37,3 +37,33 @@ Widget withAllContextProviders(
   Widget child, {
   Locale locale = const Locale('hu', 'HU'),
 }) => withLocalizationProvider(getAppTestProviders(child), locale: locale);
+
+
+
+
+
+
+
+
+class CoreTestHelper {
+
+  static List<LocalizationsDelegate> getLocalizationDelegates() {
+    return const [
+      CoreLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ];
+  }
+
+  static Widget withLocalizationProvider(Widget child, {
+    Locale locale = const Locale('hu', 'HU'),
+  }) {
+    return Localizations(
+      delegates: getLocalizationDelegates(),
+      locale: locale,
+      child: child,
+    );
+  }
+
+}

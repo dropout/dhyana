@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:profile/profile.dart';
 
-import 'package:profile/src/public/model/profile.dart';
-import 'package:profile/src/public/view/profile_image.dart';
 
 class ProfileButton extends StatelessWidget {
 
@@ -69,7 +68,7 @@ class ProfileButton extends StatelessWidget {
   }
 
   Widget buildSignedIn(BuildContext context, String userId) {
-    return BlocBuilder<ProfileStateCubit, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch(state) {
           case ProfileLoadingState():

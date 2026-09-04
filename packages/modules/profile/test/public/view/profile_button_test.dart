@@ -3,6 +3,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,31 +13,39 @@ import 'package:profile/src/profile_routes.dart';
 import 'package:profile/src/public/view/profile_button.dart';
 import 'package:profile/src/public/view/profile_image.dart';
 
+import '../../profile_mock_definitions.dart';
+
 
 void main() {
   late MockAuthStateCubit mockAuthBloc;
-  late MockProfileStateCubit mockProfileCubit;
+  late MockProfileCubit mockProfileCubit;
   late MockGoRouter mockGoRouter;
-
+ 
   late MockServices mockServices;
+  late MockAuthNavigator mockAuthNavigator;
+  late MockProfileNavigator mockProfileNavigator;
   late MockCrashlyticsService mockCrashlyticsService;
   late MockHapticsService mockHapticsService;
   late ResourceResolver mockResourceResolver;
 
   setUpAll(() async {
     mockAuthBloc = MockAuthStateCubit();
-    mockProfileCubit = MockProfileStateCubit();
+    mockProfileCubit = MockProfileCubit();
     mockGoRouter = MockGoRouter();
     mockServices = MockServices();
     mockResourceResolver = MockResourceResolver();
 
     mockCrashlyticsService = MockCrashlyticsService();
     mockHapticsService = MockHapticsService();
+    mockAuthNavigator = MockAuthNavigator();
+    mockProfileNavigator = MockProfileNavigator();
 
     when(
       () => mockServices.crashlyticsService,
     ).thenReturn(mockCrashlyticsService);
     when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
+    when(() => mockServices.authNavigator).thenReturn(mockAuthNavigator);
+    when(() => mockServices.profileNavigator).thenReturn(mockProfileNavigator);
 
     when(() => mockServices.resourceResolver).thenReturn(mockResourceResolver);
     when(
@@ -51,8 +60,8 @@ void main() {
   group('ProfileButton', () {
     testWidgets('will show signed out state', (WidgetTester tester) async {
       when(() => mockAuthBloc.state).thenReturn(const AuthState.signedOut());
-
       when(() => mockGoRouter.go(any())).thenAnswer((_) async {});
+      when(() => mockAuthNavigator.navigateToLogin(type: .go)).thenAnswer((_) async {});
 
       await tester
           .runAsync(() async {
@@ -89,7 +98,7 @@ void main() {
             await tester.pumpAndSettle(); // Wait for navigation to complete
 
             // ASSERT: Verify that GoRouter.push() was called once with the expected path
-            verify(() => mockGoRouter.go('/login')).called(1);
+            verify(() => mockAuthNavigator.navigateToLogin(type: .go)).called(1);
             verify(() => mockHapticsService.tap()).called(1);
 
             // Verify that no other navigation method was called
@@ -117,7 +126,7 @@ void main() {
                     BlocProvider<AuthStateCubit>(
                       create: (context) => mockAuthBloc,
                     ),
-                    BlocProvider<ProfileStateCubit>(
+                    BlocProvider<ProfileCubit>(
                       create: (context) => mockProfileCubit,
                     ),
                   ],
@@ -144,8 +153,7 @@ void main() {
       ).thenReturn(AuthState.signedIn(userId: userId));
       when(() => mockProfileCubit.state).thenReturn(ProfileState.error());
 
-      when(() => mockGoRouter.push(any())).thenAnswer((_) async => null);
-      when(() => mockGoRouter.go(any())).thenAnswer((_) async {});
+      when(() => mockProfileNavigator.navigateToProfile(userId, type: .go)).thenAnswer((_) async {});
 
       await tester
           .runAsync(() async {
@@ -157,7 +165,7 @@ void main() {
                     BlocProvider<AuthStateCubit>(
                       create: (context) => mockAuthBloc,
                     ),
-                    BlocProvider<ProfileStateCubit>(
+                    BlocProvider<ProfileCubit>(
                       create: (context) => mockProfileCubit,
                     ),
                   ],
@@ -182,7 +190,7 @@ void main() {
             await tester.pumpAndSettle();
 
             verify(
-              () => mockGoRouter.go(ProfileRoute(profileId: userId).location),
+              () => mockProfileNavigator.navigateToProfile(userId, type: .go),
             ).called(1);
             verify(() => mockHapticsService.tap()).called(1);
             verifyNever(() => mockGoRouter.go(any()));
@@ -206,6 +214,8 @@ void main() {
       when(
         () => mockProfileCubit.state,
       ).thenReturn(ProfileState.loaded(profile: profile));
+      when(() => mockProfileNavigator.navigateToProfile(userId))
+        .thenAnswer((_) async {});
 
       final GoRouter goRouter = GoRouter(
         routes: [
@@ -218,7 +228,7 @@ void main() {
                   BlocProvider<AuthStateCubit>(
                     create: (context) => mockAuthBloc,
                   ),
-                  BlocProvider<ProfileStateCubit>(
+                  BlocProvider<ProfileCubit>(
                     create: (context) => mockProfileCubit,
                   ),
                 ],
@@ -267,6 +277,8 @@ void main() {
       when(
         () => mockProfileCubit.state,
       ).thenReturn(ProfileState.loaded(profile: profile));
+      when(() => mockProfileNavigator.navigateToProfileWizard(userId))
+          .thenAnswer((_) async {});
 
       final GoRouter goRouter = GoRouter(
         routes: [
@@ -279,7 +291,7 @@ void main() {
                   BlocProvider<AuthStateCubit>(
                     create: (context) => mockAuthBloc,
                   ),
-                  BlocProvider<ProfileStateCubit>(
+                  BlocProvider<ProfileCubit>(
                     create: (context) => mockProfileCubit,
                   ),
                 ],
@@ -304,6 +316,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
+      verify(() => mockProfileNavigator.navigateToProfileWizard(userId)).called(1);
       verify(() => mockHapticsService.tap()).called(1);
       expect(find.byType(SizedBox), findsOneWidget);
     });

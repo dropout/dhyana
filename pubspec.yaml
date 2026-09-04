@@ -57,7 +57,7 @@ melos:
     test:
       description: Run tests in all packages
       run: melos exec -c 1 -- "flutter test"
-      failFast: true
+      failFast: false
 
     # Code generation
     codegen:
@@ -107,3 +107,4 @@ melos:
         cd apps/mobile_app && flutter build ipa --release --flavor production -t lib/main_production.dart && cd ../..
 
       
+uses-material-design: true

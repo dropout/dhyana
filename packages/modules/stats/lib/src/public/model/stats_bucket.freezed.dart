@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'stats_bucket.dart';
@@ -9,6 +9,7 @@ part of 'stats_bucket.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $StatsBucketCopyWith<StatsBucket> get copyWith => _$StatsBucketCopyWithImpl<Stat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+  final _this = this as StatsBucket;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucket&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.startDate, _this.startDate) || other.startDate == _this.startDate)&&(identical(other.minutesCount, _this.minutesCount) || other.minutesCount == _this.minutesCount)&&(identical(other.sessionCount, _this.sessionCount) || other.sessionCount == _this.sessionCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+  final _this = this as StatsBucket;
+  return Object.hash(runtimeType,_this.id,_this.startDate,_this.minutesCount,_this.sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucket(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+  final _this = this as StatsBucket;
+  return 'StatsBucket(id: ${_this.id}, startDate: ${_this.startDate}, minutesCount: ${_this.minutesCount}, sessionCount: ${_this.sessionCount})';
 }
 
 
@@ -239,16 +245,18 @@ $DayStatsBucketCopyWith<DayStatsBucket> get copyWith => _$DayStatsBucketCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DayStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DayStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucket.day(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucket.day(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 
@@ -311,16 +319,18 @@ $WeekStatsBucketCopyWith<WeekStatsBucket> get copyWith => _$WeekStatsBucketCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeekStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WeekStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucket.week(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucket.week(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 
@@ -383,16 +393,18 @@ $MonthStatsBucketCopyWith<MonthStatsBucket> get copyWith => _$MonthStatsBucketCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucket.month(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucket.month(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 
@@ -455,16 +467,18 @@ $YearStatsBucketCopyWith<YearStatsBucket> get copyWith => _$YearStatsBucketCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is YearStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is YearStatsBucket&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucket.year(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucket.year(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 

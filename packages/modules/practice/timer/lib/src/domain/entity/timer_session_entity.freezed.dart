@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'timer_session_entity.dart';
@@ -9,6 +9,7 @@ part of 'timer_session_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $TimerSessionEntityCopyWith<TimerSessionEntity> get copyWith => _$TimerSessionEn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSessionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.duration, duration) || other.duration == duration));
+  final _this = this as TimerSessionEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSessionEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.startTime, _this.startTime) || other.startTime == _this.startTime)&&(identical(other.endTime, _this.endTime) || other.endTime == _this.endTime)&&(identical(other.duration, _this.duration) || other.duration == _this.duration));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,type,startTime,endTime,duration);
+int get hashCode {
+  final _this = this as TimerSessionEntity;
+  return Object.hash(runtimeType,_this.id,_this.type,_this.startTime,_this.endTime,_this.duration);
+}
 
 @override
 String toString() {
-  return 'TimerSessionEntity(id: $id, type: $type, startTime: $startTime, endTime: $endTime, duration: $duration)';
+  final _this = this as TimerSessionEntity;
+  return 'TimerSessionEntity(id: ${_this.id}, type: ${_this.type}, startTime: ${_this.startTime}, endTime: ${_this.endTime}, duration: ${_this.duration})';
 }
 
 
@@ -66,7 +72,7 @@ class _$TimerSessionEntityCopyWithImpl<$Res>
 /// Create a copy of TimerSessionEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? type = null,Object? startTime = null,Object? endTime = null,Object? duration = null,}) {
-  return _then(_self.copyWith(
+  return _then(TimerSessionEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TimerSessionEntityType,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
@@ -229,16 +235,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSessionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.duration, duration) || other.duration == duration));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSessionEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.duration, duration) || other.duration == duration));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,type,startTime,endTime,duration);
+int get hashCode {
+    return Object.hash(runtimeType,id,type,startTime,endTime,duration);
+}
 
 @override
 String toString() {
-  return 'TimerSessionEntity(id: $id, type: $type, startTime: $startTime, endTime: $endTime, duration: $duration)';
+    return 'TimerSessionEntity(id: $id, type: $type, startTime: $startTime, endTime: $endTime, duration: $duration)';
 }
 
 

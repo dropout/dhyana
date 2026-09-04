@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'caching_progress_entity.dart';
@@ -9,13 +9,14 @@ part of 'caching_progress_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CachingProgressEntity {
 
- int get totalTasks; int get completedTasks; double get progress; List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> get results;
+ int get totalTasks; int get completedTasks; double get progress; List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> get results;
 /// Create a copy of CachingProgressEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +29,21 @@ $CachingProgressEntityCopyWith<CachingProgressEntity> get copyWith => _$CachingP
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CachingProgressEntity&&(identical(other.totalTasks, totalTasks) || other.totalTasks == totalTasks)&&(identical(other.completedTasks, completedTasks) || other.completedTasks == completedTasks)&&(identical(other.progress, progress) || other.progress == progress)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as CachingProgressEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CachingProgressEntity&&(identical(other.totalTasks, _this.totalTasks) || other.totalTasks == _this.totalTasks)&&(identical(other.completedTasks, _this.completedTasks) || other.completedTasks == _this.completedTasks)&&(identical(other.progress, _this.progress) || other.progress == _this.progress)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,totalTasks,completedTasks,progress,const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as CachingProgressEntity;
+  return Object.hash(runtimeType,_this.totalTasks,_this.completedTasks,_this.progress,const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'CachingProgressEntity(totalTasks: $totalTasks, completedTasks: $completedTasks, progress: $progress, results: $results)';
+  final _this = this as CachingProgressEntity;
+  return 'CachingProgressEntity(totalTasks: ${_this.totalTasks}, completedTasks: ${_this.completedTasks}, progress: ${_this.progress}, results: ${_this.results})';
 }
 
 
@@ -48,7 +54,7 @@ abstract mixin class $CachingProgressEntityCopyWith<$Res>  {
   factory $CachingProgressEntityCopyWith(CachingProgressEntity value, $Res Function(CachingProgressEntity) _then) = _$CachingProgressEntityCopyWithImpl;
 @useResult
 $Res call({
- int totalTasks, int completedTasks, double progress, List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results
+ int totalTasks, int completedTasks, double progress, List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> results
 });
 
 
@@ -66,12 +72,12 @@ class _$CachingProgressEntityCopyWithImpl<$Res>
 /// Create a copy of CachingProgressEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? totalTasks = null,Object? completedTasks = null,Object? progress = null,Object? results = null,}) {
-  return _then(_self.copyWith(
+  return _then(CachingProgressEntity(
 totalTasks: null == totalTasks ? _self.totalTasks : totalTasks // ignore: cast_nullable_to_non_nullable
 as int,completedTasks: null == completedTasks ? _self.completedTasks : completedTasks // ignore: cast_nullable_to_non_nullable
 as int,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
 as double,results: null == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
-as List<({ChantEntity chant, ChantLocalResourcesEntity localResources})>,
+as List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})>,
   ));
 }
 
@@ -153,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int totalTasks,  int completedTasks,  double progress,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int totalTasks,  int completedTasks,  double progress,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> results)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CachingProgressEntity() when $default != null:
 return $default(_that.totalTasks,_that.completedTasks,_that.progress,_that.results);case _:
@@ -174,7 +180,7 @@ return $default(_that.totalTasks,_that.completedTasks,_that.progress,_that.resul
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int totalTasks,  int completedTasks,  double progress,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int totalTasks,  int completedTasks,  double progress,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> results)  $default,) {final _that = this;
 switch (_that) {
 case _CachingProgressEntity():
 return $default(_that.totalTasks,_that.completedTasks,_that.progress,_that.results);}
@@ -191,7 +197,7 @@ return $default(_that.totalTasks,_that.completedTasks,_that.progress,_that.resul
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int totalTasks,  int completedTasks,  double progress,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int totalTasks,  int completedTasks,  double progress,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> results)?  $default,) {final _that = this;
 switch (_that) {
 case _CachingProgressEntity() when $default != null:
 return $default(_that.totalTasks,_that.completedTasks,_that.progress,_that.results);case _:
@@ -206,14 +212,14 @@ return $default(_that.totalTasks,_that.completedTasks,_that.progress,_that.resul
 @JsonSerializable()
 
 class _CachingProgressEntity extends CachingProgressEntity {
-  const _CachingProgressEntity({this.totalTasks = 0, this.completedTasks = 0, this.progress = 0.0, final  List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results = const []}): _results = results,super._();
+  const _CachingProgressEntity({this.totalTasks = 0, this.completedTasks = 0, this.progress = 0.0,  List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> results = const []}): _results = results,super._();
   factory _CachingProgressEntity.fromJson(Map<String, dynamic> json) => _$CachingProgressEntityFromJson(json);
 
 @override@JsonKey() final  int totalTasks;
 @override@JsonKey() final  int completedTasks;
 @override@JsonKey() final  double progress;
- final  List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> _results;
-@override@JsonKey() List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> get results {
+ final  List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> _results;
+@override@JsonKey() List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> get results {
   if (_results is EqualUnmodifiableListView) return _results;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_results);
@@ -233,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CachingProgressEntity&&(identical(other.totalTasks, totalTasks) || other.totalTasks == totalTasks)&&(identical(other.completedTasks, completedTasks) || other.completedTasks == completedTasks)&&(identical(other.progress, progress) || other.progress == progress)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CachingProgressEntity&&(identical(other.totalTasks, totalTasks) || other.totalTasks == totalTasks)&&(identical(other.completedTasks, completedTasks) || other.completedTasks == completedTasks)&&(identical(other.progress, progress) || other.progress == progress)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,totalTasks,completedTasks,progress,const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,totalTasks,completedTasks,progress,const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'CachingProgressEntity(totalTasks: $totalTasks, completedTasks: $completedTasks, progress: $progress, results: $results)';
+    return 'CachingProgressEntity(totalTasks: $totalTasks, completedTasks: $completedTasks, progress: $progress, results: $results)';
 }
 
 
@@ -253,7 +261,7 @@ abstract mixin class _$CachingProgressEntityCopyWith<$Res> implements $CachingPr
   factory _$CachingProgressEntityCopyWith(_CachingProgressEntity value, $Res Function(_CachingProgressEntity) _then) = __$CachingProgressEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int totalTasks, int completedTasks, double progress, List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results
+ int totalTasks, int completedTasks, double progress, List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})> results
 });
 
 
@@ -276,7 +284,7 @@ totalTasks: null == totalTasks ? _self.totalTasks : totalTasks // ignore: cast_n
 as int,completedTasks: null == completedTasks ? _self.completedTasks : completedTasks // ignore: cast_nullable_to_non_nullable
 as int,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
 as double,results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
-as List<({ChantEntity chant, ChantLocalResourcesEntity localResources})>,
+as List<({ChantEntity chant, ChantLocalResourcesEntity localResources,})>,
   ));
 }
 

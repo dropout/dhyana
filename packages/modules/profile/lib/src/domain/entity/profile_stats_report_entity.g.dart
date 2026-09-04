@@ -35,8 +35,8 @@ _ProfileStatsReportEntity _$ProfileStatsReportEntityFromJson(
 Map<String, dynamic> _$ProfileStatsReportEntityToJson(
   _ProfileStatsReportEntity instance,
 ) => <String, dynamic>{
-  'consecutiveDays': instance.consecutiveDays.toJson(),
-  'milestoneProgress': instance.milestoneProgress.toJson(),
+  'consecutiveDays': instance.consecutiveDays,
+  'milestoneProgress': instance.milestoneProgress,
   'milestoneCount': instance.milestoneCount,
   'completedMinutesCount': instance.completedMinutesCount,
   'completedSessionsCount': instance.completedSessionsCount,

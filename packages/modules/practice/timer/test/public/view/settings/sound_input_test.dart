@@ -5,6 +5,8 @@ import 'package:timer/src/public/view/timer_settings/sound_input.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
+import '../../../timer_test_helper.dart';
+
 
 class FakeBuildContext
   extends Fake
@@ -23,7 +25,7 @@ void main() {
       MockOverlayService mockOverlayService = MockOverlayService();
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>(
             create: (_) => MockServices(),
             child: SoundInput(
@@ -65,7 +67,7 @@ void main() {
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>(
             create: (_) => mockServices,
             child: SoundInput(

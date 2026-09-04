@@ -17,8 +17,6 @@ sealed class RemoteSettingsState with _$RemoteSettingsState {
 
 }
 
-
-
 class RemoteSettingsCubit extends Cubit<RemoteSettingsState> {
 
   final RemoteSettingsService remoteSettingsService;

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_meta_data_entity.dart';
@@ -9,6 +9,7 @@ part of 'user_meta_data_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $UserMetaDataEntityCopyWith<UserMetaDataEntity> get copyWith => _$UserMetaDataEn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserMetaDataEntity&&(identical(other.creationTime, creationTime) || other.creationTime == creationTime)&&(identical(other.lastSignInTime, lastSignInTime) || other.lastSignInTime == lastSignInTime));
+  final _this = this as UserMetaDataEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserMetaDataEntity&&(identical(other.creationTime, _this.creationTime) || other.creationTime == _this.creationTime)&&(identical(other.lastSignInTime, _this.lastSignInTime) || other.lastSignInTime == _this.lastSignInTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,creationTime,lastSignInTime);
+int get hashCode {
+  final _this = this as UserMetaDataEntity;
+  return Object.hash(runtimeType,_this.creationTime,_this.lastSignInTime);
+}
 
 @override
 String toString() {
-  return 'UserMetaDataEntity(creationTime: $creationTime, lastSignInTime: $lastSignInTime)';
+  final _this = this as UserMetaDataEntity;
+  return 'UserMetaDataEntity(creationTime: ${_this.creationTime}, lastSignInTime: ${_this.lastSignInTime})';
 }
 
 
@@ -63,7 +69,7 @@ class _$UserMetaDataEntityCopyWithImpl<$Res>
 /// Create a copy of UserMetaDataEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? creationTime = freezed,Object? lastSignInTime = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(UserMetaDataEntity(
 creationTime: freezed == creationTime ? _self.creationTime : creationTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,lastSignInTime: freezed == lastSignInTime ? _self.lastSignInTime : lastSignInTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,
@@ -217,16 +223,18 @@ _$UserMetaDataEntityCopyWith<_UserMetaDataEntity> get copyWith => __$UserMetaDat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserMetaDataEntity&&(identical(other.creationTime, creationTime) || other.creationTime == creationTime)&&(identical(other.lastSignInTime, lastSignInTime) || other.lastSignInTime == lastSignInTime));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserMetaDataEntity&&(identical(other.creationTime, creationTime) || other.creationTime == creationTime)&&(identical(other.lastSignInTime, lastSignInTime) || other.lastSignInTime == lastSignInTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,creationTime,lastSignInTime);
+int get hashCode {
+    return Object.hash(runtimeType,creationTime,lastSignInTime);
+}
 
 @override
 String toString() {
-  return 'UserMetaDataEntity(creationTime: $creationTime, lastSignInTime: $lastSignInTime)';
+    return 'UserMetaDataEntity(creationTime: $creationTime, lastSignInTime: $lastSignInTime)';
 }
 
 

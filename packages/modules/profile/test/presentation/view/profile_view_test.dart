@@ -7,6 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:profile/src/data/datasource/faker_profile_extension.dart';
 import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/public/view/profile_image.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -14,10 +15,13 @@ import 'package:profile/src/presentation/view/profile_footer.dart';
 import 'package:profile/src/presentation/view/profile_menu.dart';
 import 'package:profile/src/presentation/view/profile_view.dart';
 
+import '../../profile_mock_definitions.dart';
+import '../../profile_test_helper.dart';
+
 
 void main() {
   group('ProfileView', () {
-    late MockProfileStateCubit mockProfileCubit;
+    late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockResourceResolver mockResourceResolver;
@@ -31,7 +35,7 @@ void main() {
     });
 
     setUp(() async {
-      mockProfileCubit = MockProfileStateCubit();
+      mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
       mockResourceResolver = MockResourceResolver();
@@ -57,10 +61,10 @@ void main() {
             await tester.pumpWidget(
               Provider<Services>(
                 create: (context) => mockServices,
-                child: withAllContextProviders(
+                child: ProfileTestHelper.withLocalizationProvider(
                   MultiBlocProvider(
                     providers: [
-                      BlocProvider<ProfileStateCubit>(
+                      BlocProvider<ProfileCubit>(
                         create: (context) => mockProfileCubit,
                       ),
                     ],

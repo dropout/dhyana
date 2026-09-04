@@ -1,4 +1,6 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:core/src/service/safe_image_detector.dart';
+import 'package:core/src/service/shader_service.dart';
 import 'package:core/src/service/shared_preferences_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
@@ -6,7 +8,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'package:core/src/domain/repository/storage_repository.dart';
 import 'package:core/src/presentation/viewmodel/auth_state_cubit.dart';
-import 'package:core/src/presentation/viewmodel/profile_state_cubit.dart';
 import 'package:core/src/service/analytics_service.dart';
 import 'package:core/src/service/crashlytics_service.dart';
 import 'package:core/src/service/haptics_service.dart';
@@ -32,8 +33,8 @@ class MockResourceResolver extends Mock implements ResourceResolver {}
 class MockCrashlyticsService extends Mock implements CrashlyticsService {}
 class MockAnalyticsService extends Mock implements AnalyticsService {}
 
-class MockAuthStateCubit extends Mock implements AuthStateCubit {}
-class MockProfileStateCubit extends Mock implements ProfileStateCubit {}
+
+class MockAuthStateCubit extends MockCubit<AuthState> implements AuthStateCubit {}
 
 class MockSafeImageDetectorFactory extends Mock implements SafeImageDetectorFactory {}
 class MockSafeImageDetector extends Mock implements SafeImageDetector {}
@@ -45,3 +46,7 @@ class MockSharedPreferencesService
 class MockHydratedStorage 
   extends Mock 
   implements HydratedStorage {}
+
+class MockShaderService
+  extends Mock
+  implements ShaderService {}

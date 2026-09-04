@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'consecutive_days.dart';
@@ -9,6 +9,7 @@ part of 'consecutive_days.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ConsecutiveDaysCopyWith<ConsecutiveDays> get copyWith => _$ConsecutiveDaysCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConsecutiveDays&&(identical(other.current, current) || other.current == current)&&(identical(other.longest, longest) || other.longest == longest)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.lastChecked, lastChecked) || other.lastChecked == lastChecked));
+  final _this = this as ConsecutiveDays;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConsecutiveDays&&(identical(other.current, _this.current) || other.current == _this.current)&&(identical(other.longest, _this.longest) || other.longest == _this.longest)&&(identical(other.startedAt, _this.startedAt) || other.startedAt == _this.startedAt)&&(identical(other.lastChecked, _this.lastChecked) || other.lastChecked == _this.lastChecked));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,current,longest,startedAt,lastChecked);
+int get hashCode {
+  final _this = this as ConsecutiveDays;
+  return Object.hash(runtimeType,_this.current,_this.longest,_this.startedAt,_this.lastChecked);
+}
 
 @override
 String toString() {
-  return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
+  final _this = this as ConsecutiveDays;
+  return 'ConsecutiveDays(current: ${_this.current}, longest: ${_this.longest}, startedAt: ${_this.startedAt}, lastChecked: ${_this.lastChecked})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ConsecutiveDaysCopyWithImpl<$Res>
 /// Create a copy of ConsecutiveDays
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? current = null,Object? longest = null,Object? startedAt = freezed,Object? lastChecked = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ConsecutiveDays(
 current: null == current ? _self.current : current // ignore: cast_nullable_to_non_nullable
 as int,longest: null == longest ? _self.longest : longest // ignore: cast_nullable_to_non_nullable
 as int,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
@@ -221,16 +227,18 @@ _$ConsecutiveDaysCopyWith<_ConsecutiveDays> get copyWith => __$ConsecutiveDaysCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConsecutiveDays&&(identical(other.current, current) || other.current == current)&&(identical(other.longest, longest) || other.longest == longest)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.lastChecked, lastChecked) || other.lastChecked == lastChecked));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConsecutiveDays&&(identical(other.current, current) || other.current == current)&&(identical(other.longest, longest) || other.longest == longest)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.lastChecked, lastChecked) || other.lastChecked == lastChecked));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,current,longest,startedAt,lastChecked);
+int get hashCode {
+    return Object.hash(runtimeType,current,longest,startedAt,lastChecked);
+}
 
 @override
 String toString() {
-  return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
+    return 'ConsecutiveDays(current: $current, longest: $longest, startedAt: $startedAt, lastChecked: $lastChecked)';
 }
 
 

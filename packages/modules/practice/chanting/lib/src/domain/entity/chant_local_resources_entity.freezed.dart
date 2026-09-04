@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'chant_local_resources_entity.dart';
@@ -9,6 +9,7 @@ part of 'chant_local_resources_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $ChantLocalResourcesEntityCopyWith<ChantLocalResourcesEntity> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantLocalResourcesEntity&&(identical(other.chant, chant) || other.chant == chant)&&(identical(other.audioLocalPath, audioLocalPath) || other.audioLocalPath == audioLocalPath)&&(identical(other.lyricsLocalPath, lyricsLocalPath) || other.lyricsLocalPath == lyricsLocalPath)&&(identical(other.audioVersion, audioVersion) || other.audioVersion == audioVersion)&&(identical(other.lyricsVersion, lyricsVersion) || other.lyricsVersion == lyricsVersion)&&(identical(other.usedStaleCache, usedStaleCache) || other.usedStaleCache == usedStaleCache));
+  final _this = this as ChantLocalResourcesEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantLocalResourcesEntity&&(identical(other.chant, _this.chant) || other.chant == _this.chant)&&(identical(other.audioLocalPath, _this.audioLocalPath) || other.audioLocalPath == _this.audioLocalPath)&&(identical(other.lyricsLocalPath, _this.lyricsLocalPath) || other.lyricsLocalPath == _this.lyricsLocalPath)&&(identical(other.audioVersion, _this.audioVersion) || other.audioVersion == _this.audioVersion)&&(identical(other.lyricsVersion, _this.lyricsVersion) || other.lyricsVersion == _this.lyricsVersion)&&(identical(other.usedStaleCache, _this.usedStaleCache) || other.usedStaleCache == _this.usedStaleCache));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,chant,audioLocalPath,lyricsLocalPath,audioVersion,lyricsVersion,usedStaleCache);
+int get hashCode {
+  final _this = this as ChantLocalResourcesEntity;
+  return Object.hash(runtimeType,_this.chant,_this.audioLocalPath,_this.lyricsLocalPath,_this.audioVersion,_this.lyricsVersion,_this.usedStaleCache);
+}
 
 @override
 String toString() {
-  return 'ChantLocalResourcesEntity(chant: $chant, audioLocalPath: $audioLocalPath, lyricsLocalPath: $lyricsLocalPath, audioVersion: $audioVersion, lyricsVersion: $lyricsVersion, usedStaleCache: $usedStaleCache)';
+  final _this = this as ChantLocalResourcesEntity;
+  return 'ChantLocalResourcesEntity(chant: ${_this.chant}, audioLocalPath: ${_this.audioLocalPath}, lyricsLocalPath: ${_this.lyricsLocalPath}, audioVersion: ${_this.audioVersion}, lyricsVersion: ${_this.lyricsVersion}, usedStaleCache: ${_this.usedStaleCache})';
 }
 
 
@@ -66,7 +72,7 @@ class _$ChantLocalResourcesEntityCopyWithImpl<$Res>
 /// Create a copy of ChantLocalResourcesEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? chant = null,Object? audioLocalPath = null,Object? lyricsLocalPath = null,Object? audioVersion = null,Object? lyricsVersion = null,Object? usedStaleCache = null,}) {
-  return _then(_self.copyWith(
+  return _then(ChantLocalResourcesEntity(
 chant: null == chant ? _self.chant : chant // ignore: cast_nullable_to_non_nullable
 as ChantEntity,audioLocalPath: null == audioLocalPath ? _self.audioLocalPath : audioLocalPath // ignore: cast_nullable_to_non_nullable
 as String,lyricsLocalPath: null == lyricsLocalPath ? _self.lyricsLocalPath : lyricsLocalPath // ignore: cast_nullable_to_non_nullable
@@ -240,16 +246,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantLocalResourcesEntity&&(identical(other.chant, chant) || other.chant == chant)&&(identical(other.audioLocalPath, audioLocalPath) || other.audioLocalPath == audioLocalPath)&&(identical(other.lyricsLocalPath, lyricsLocalPath) || other.lyricsLocalPath == lyricsLocalPath)&&(identical(other.audioVersion, audioVersion) || other.audioVersion == audioVersion)&&(identical(other.lyricsVersion, lyricsVersion) || other.lyricsVersion == lyricsVersion)&&(identical(other.usedStaleCache, usedStaleCache) || other.usedStaleCache == usedStaleCache));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantLocalResourcesEntity&&(identical(other.chant, chant) || other.chant == chant)&&(identical(other.audioLocalPath, audioLocalPath) || other.audioLocalPath == audioLocalPath)&&(identical(other.lyricsLocalPath, lyricsLocalPath) || other.lyricsLocalPath == lyricsLocalPath)&&(identical(other.audioVersion, audioVersion) || other.audioVersion == audioVersion)&&(identical(other.lyricsVersion, lyricsVersion) || other.lyricsVersion == lyricsVersion)&&(identical(other.usedStaleCache, usedStaleCache) || other.usedStaleCache == usedStaleCache));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,chant,audioLocalPath,lyricsLocalPath,audioVersion,lyricsVersion,usedStaleCache);
+int get hashCode {
+    return Object.hash(runtimeType,chant,audioLocalPath,lyricsLocalPath,audioVersion,lyricsVersion,usedStaleCache);
+}
 
 @override
 String toString() {
-  return 'ChantLocalResourcesEntity(chant: $chant, audioLocalPath: $audioLocalPath, lyricsLocalPath: $lyricsLocalPath, audioVersion: $audioVersion, lyricsVersion: $lyricsVersion, usedStaleCache: $usedStaleCache)';
+    return 'ChantLocalResourcesEntity(chant: $chant, audioLocalPath: $audioLocalPath, lyricsLocalPath: $lyricsLocalPath, audioVersion: $audioVersion, lyricsVersion: $lyricsVersion, usedStaleCache: $usedStaleCache)';
 }
 
 

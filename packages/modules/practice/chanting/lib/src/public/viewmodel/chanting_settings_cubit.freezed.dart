@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'chanting_settings_cubit.dart';
@@ -9,6 +9,7 @@ part of 'chanting_settings_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ChantingSettingsStateCopyWith<ChantingSettingsState> get copyWith => _$Chanting
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantingSettingsState&&const DeepCollectionEquality().equals(other.availableChants, availableChants)&&const DeepCollectionEquality().equals(other.playlist, playlist)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.error, error) || other.error == error));
+  final _this = this as ChantingSettingsState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantingSettingsState&&const DeepCollectionEquality().equals(other.availableChants, _this.availableChants)&&const DeepCollectionEquality().equals(other.playlist, _this.playlist)&&(identical(other.isLoading, _this.isLoading) || other.isLoading == _this.isLoading)&&(identical(other.error, _this.error) || other.error == _this.error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(availableChants),const DeepCollectionEquality().hash(playlist),isLoading,error);
+int get hashCode {
+  final _this = this as ChantingSettingsState;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.availableChants),const DeepCollectionEquality().hash(_this.playlist),_this.isLoading,_this.error);
+}
 
 @override
 String toString() {
-  return 'ChantingSettingsState(availableChants: $availableChants, playlist: $playlist, isLoading: $isLoading, error: $error)';
+  final _this = this as ChantingSettingsState;
+  return 'ChantingSettingsState(availableChants: ${_this.availableChants}, playlist: ${_this.playlist}, isLoading: ${_this.isLoading}, error: ${_this.error})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ChantingSettingsStateCopyWithImpl<$Res>
 /// Create a copy of ChantingSettingsState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? availableChants = null,Object? playlist = null,Object? isLoading = null,Object? error = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ChantingSettingsState(
 availableChants: null == availableChants ? _self.availableChants : availableChants // ignore: cast_nullable_to_non_nullable
 as List<Chant>,playlist: null == playlist ? _self.playlist : playlist // ignore: cast_nullable_to_non_nullable
 as List<ChantPlaylistItem>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
@@ -203,7 +209,7 @@ return $default(_that.availableChants,_that.playlist,_that.isLoading,_that.error
 
 
 class _ChantingSettingsState extends ChantingSettingsState {
-  const _ChantingSettingsState({required final  List<Chant> availableChants, required final  List<ChantPlaylistItem> playlist, required this.isLoading, this.error}): _availableChants = availableChants,_playlist = playlist,super._();
+  const _ChantingSettingsState({required  List<Chant> availableChants, required  List<ChantPlaylistItem> playlist, required this.isLoading, this.error}): _availableChants = availableChants,_playlist = playlist,super._();
   
 
  final  List<Chant> _availableChants;
@@ -233,16 +239,18 @@ _$ChantingSettingsStateCopyWith<_ChantingSettingsState> get copyWith => __$Chant
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantingSettingsState&&const DeepCollectionEquality().equals(other._availableChants, _availableChants)&&const DeepCollectionEquality().equals(other._playlist, _playlist)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantingSettingsState&&const DeepCollectionEquality().equals(other.availableChants, _availableChants)&&const DeepCollectionEquality().equals(other.playlist, _playlist)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_availableChants),const DeepCollectionEquality().hash(_playlist),isLoading,error);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_availableChants),const DeepCollectionEquality().hash(_playlist),isLoading,error);
+}
 
 @override
 String toString() {
-  return 'ChantingSettingsState(availableChants: $availableChants, playlist: $playlist, isLoading: $isLoading, error: $error)';
+    return 'ChantingSettingsState(availableChants: $availableChants, playlist: $playlist, isLoading: $isLoading, error: $error)';
 }
 
 

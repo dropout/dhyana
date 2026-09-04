@@ -9,6 +9,9 @@ export 'src/audio/app_audio_handler.dart';
 export 'src/data/converter/date_time_converter.dart';
 export 'src/data/converter/date_time_or_null_converter.dart';
 export 'src/data/converter/duration_converter.dart';
+
+export 'src/drift/generic_json_converter.dart';
+
 export 'src/data/datasource/data_provider.dart';
 export 'src/data/datasource/firebase_data_provider.dart';
 export 'src/data/datasource/firebase_model_extension.dart';
@@ -95,7 +98,6 @@ export 'src/presentation/view/util/app_error_card.dart';
 export 'src/presentation/view/util/app_error_display.dart';
 export 'src/presentation/view/util/app_loading_display.dart';
 export 'src/presentation/view/util/app_loading_indicator.dart';
-export 'src/presentation/view/util/app_providers.dart';
 export 'src/presentation/view/util/app_snack_bar.dart';
 export 'src/presentation/view/util/app_version_number.dart';
 export 'src/presentation/view/util/debouncer.dart';
@@ -109,13 +111,13 @@ export 'src/presentation/view/util/painting.dart';
 export 'src/presentation/view/util/screen.dart';
 export 'src/presentation/view/util/separator_gem.dart';
 export 'src/presentation/view/util/signed_in.dart';
+export 'src/presentation/view/util/shader_rendering_scope.dart';
 export 'src/presentation/view/util/smart_bloc_provider.dart';
 export 'src/presentation/view/util/snackbar_helper.dart';
 export 'src/presentation/view/util/state_provider.dart';
 export 'src/presentation/view/util/title_effect.dart';
 export 'src/presentation/view/util/toast.dart';
 export 'src/presentation/viewmodel/auth_state_cubit.dart';
-export 'src/presentation/viewmodel/profile_state_cubit.dart';
 export 'src/presentation/viewmodel/remote_settings_cubit.dart';
 
 export 'src/service/analytics_service.dart';

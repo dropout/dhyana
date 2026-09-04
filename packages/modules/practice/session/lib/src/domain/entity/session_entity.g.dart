@@ -31,6 +31,6 @@ Map<String, dynamic> _$SessionEntityToJson(_SessionEntity instance) =>
     };
 
 const _$SessionEntityTypeEnumMap = {
-  SessionEntityType.sitting: 'sitting',
+  SessionEntityType.timer: 'timer',
   SessionEntityType.chanting: 'chanting',
 };

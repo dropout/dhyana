@@ -6,6 +6,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:timer/src/public/view/timer_settings/sound_input_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
+
+import '../../../timer_test_helper.dart';
 // transitive dependency required for shareValue() on Stream<PlaybackState>
 // ignore: depend_on_referenced_packages
 
@@ -40,7 +42,7 @@ void main() {
       //   .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>(
             create: (_) => mockServices,
             child: PageStorage(
@@ -72,7 +74,7 @@ void main() {
       //   .thenAnswer((_) => Stream.value(PlaybackState()).shareValue());
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>(
             create: (_) => mockServices,
             child: PageStorage(

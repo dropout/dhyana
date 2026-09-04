@@ -1,6 +1,7 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:profile/src/data/datasource/faker_profile_extension.dart';
@@ -13,6 +14,7 @@ import 'package:profile/src/presentation/view/screen/profile_edit_screen.dart';
 import 'package:profile/src/presentation/viewmodel/profile_edit_cubit.dart';
 
 import '../../profile_mock_definitions.dart';
+import '../../profile_test_helper.dart';
 
 
 void main() {
@@ -27,6 +29,8 @@ void main() {
     });
 
     setUp(() {
+      GetIt.I.registerFactory<ProfileEditCubit>(() => mockProfileEditCubit);
+
       mockProfileEditCubit = MockProfileEditCubit();
       mockCrashlyticsService = MockCrashlyticsService();
       mockHapticsService = MockHapticsService();
@@ -38,6 +42,10 @@ void main() {
           .thenReturn(mockHapticsService);
     });
 
+    tearDown(() {
+      GetIt.I.reset();
+    });
+
     testWidgets('displays loading state', (WidgetTester tester) async {
       when(() => mockProfileEditCubit.state).thenReturn(ProfileEditState.loading());
       when(() => mockProfileEditCubit.stream).thenAnswer(
@@ -45,7 +53,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(  
+        ProfileTestHelper.withLocalizationProvider(  
           BlocProvider<ProfileEditCubit>(
             create: (context) => mockProfileEditCubit,
             child: const ProfileEditScreen(profileId: 'profileId'),
@@ -62,7 +70,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        ProfileTestHelper.withLocalizationProvider(  
           BlocProvider<ProfileEditCubit>(
             create: (context) => mockProfileEditCubit,
             child: const ProfileEditScreen(profileId: 'profileId'),
@@ -86,7 +94,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          ProfileTestHelper.withLocalizationProvider(
             MultiProvider(
               providers: [
                 Provider<Services>.value(value: mockServices),
@@ -120,7 +128,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          ProfileTestHelper.withLocalizationProvider(
             MultiProvider(
               providers: [
                 Provider<Services>.value(value: mockServices),

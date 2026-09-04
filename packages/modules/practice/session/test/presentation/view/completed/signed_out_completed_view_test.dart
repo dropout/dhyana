@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -8,6 +7,8 @@ import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/presentation/view/completed/session_result.dart';
 import 'package:session/src/presentation/view/completed/signed_out_completed_view.dart';
 
+import '../../../session_test_helper.dart';
+
 
 void main() {
 
@@ -16,7 +17,7 @@ void main() {
     final SessionEntity session = Faker().createSessionEntity();
 
     await tester.pumpWidget(
-      withAllContextProviders(
+      SessionTestHelper.withLocalizationProvider(
         SignedOutCompletedView(
           session: session.toApi(),
         )

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'timer_settings_history_record_entity.dart';
@@ -9,6 +9,7 @@ part of 'timer_settings_history_record_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $TimerSettingsHistoryRecordEntityCopyWith<TimerSettingsHistoryRecordEntity> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSettingsHistoryRecordEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.timerSettings, timerSettings) || other.timerSettings == timerSettings)&&(identical(other.useCount, useCount) || other.useCount == useCount)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
+  final _this = this as TimerSettingsHistoryRecordEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSettingsHistoryRecordEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.timerSettings, _this.timerSettings) || other.timerSettings == _this.timerSettings)&&(identical(other.useCount, _this.useCount) || other.useCount == _this.useCount)&&(identical(other.lastUsed, _this.lastUsed) || other.lastUsed == _this.lastUsed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,timerSettings,useCount,lastUsed);
+int get hashCode {
+  final _this = this as TimerSettingsHistoryRecordEntity;
+  return Object.hash(runtimeType,_this.id,_this.timerSettings,_this.useCount,_this.lastUsed);
+}
 
 @override
 String toString() {
-  return 'TimerSettingsHistoryRecordEntity(id: $id, timerSettings: $timerSettings, useCount: $useCount, lastUsed: $lastUsed)';
+  final _this = this as TimerSettingsHistoryRecordEntity;
+  return 'TimerSettingsHistoryRecordEntity(id: ${_this.id}, timerSettings: ${_this.timerSettings}, useCount: ${_this.useCount}, lastUsed: ${_this.lastUsed})';
 }
 
 
@@ -66,7 +72,7 @@ class _$TimerSettingsHistoryRecordEntityCopyWithImpl<$Res>
 /// Create a copy of TimerSettingsHistoryRecordEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? timerSettings = null,Object? useCount = null,Object? lastUsed = null,}) {
-  return _then(_self.copyWith(
+  return _then(TimerSettingsHistoryRecordEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,timerSettings: null == timerSettings ? _self.timerSettings : timerSettings // ignore: cast_nullable_to_non_nullable
 as TimerSettingsEntity,useCount: null == useCount ? _self.useCount : useCount // ignore: cast_nullable_to_non_nullable
@@ -236,16 +242,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSettingsHistoryRecordEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.timerSettings, timerSettings) || other.timerSettings == timerSettings)&&(identical(other.useCount, useCount) || other.useCount == useCount)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSettingsHistoryRecordEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.timerSettings, timerSettings) || other.timerSettings == timerSettings)&&(identical(other.useCount, useCount) || other.useCount == useCount)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,timerSettings,useCount,lastUsed);
+int get hashCode {
+    return Object.hash(runtimeType,id,timerSettings,useCount,lastUsed);
+}
 
 @override
 String toString() {
-  return 'TimerSettingsHistoryRecordEntity(id: $id, timerSettings: $timerSettings, useCount: $useCount, lastUsed: $lastUsed)';
+    return 'TimerSettingsHistoryRecordEntity(id: $id, timerSettings: $timerSettings, useCount: $useCount, lastUsed: $lastUsed)';
 }
 
 

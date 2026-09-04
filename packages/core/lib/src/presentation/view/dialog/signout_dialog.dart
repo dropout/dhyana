@@ -1,5 +1,4 @@
 import 'package:core/src/presentation/viewmodel/auth_state_cubit.dart';
-import 'package:core/src/presentation/viewmodel/profile_state_cubit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +14,12 @@ import 'dialog_button.dart';
 
 class SignoutDialog extends StatelessWidget {
 
-  const SignoutDialog({super.key});
+  final Future<void> Function() onSignOut;
+
+  const SignoutDialog({
+    required this.onSignOut,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,9 @@ class SignoutDialog extends StatelessWidget {
               refresh: DateTime.now().millisecondsSinceEpoch,
               type: .go
             );
-            context.read<ProfileStateCubit>().clearData();
+
+            onSignOut();
+            // context.read<ProfileCubit>().clearData();
           },
         ),
       ],

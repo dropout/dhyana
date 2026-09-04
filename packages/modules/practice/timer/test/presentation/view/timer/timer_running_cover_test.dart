@@ -2,7 +2,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:timer/src/presentation/view/timer/timer_running_cover.dart';
 
-import 'package:core/src/testing/test_context_providers.dart';
+import '../../../timer_test_helper.dart';
+
 
 void main() {
 
@@ -11,7 +12,7 @@ void main() {
     testWidgets('can show a child in front of gesture detector', (tester) async {
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningCover(
             child: Center(
               child: Container(
@@ -35,7 +36,7 @@ void main() {
 
     testWidgets('can show overlay when click target tapped', (tester) async {
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningCover(
             child: Center(
               child: Container(
@@ -70,7 +71,7 @@ void main() {
 
     testWidgets('can hide overlay when click target tapped', (tester) async {
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningCover(
             child: Center(
               child: Container(

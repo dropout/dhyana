@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'timer_state_entity.dart';
@@ -9,6 +9,7 @@ part of 'timer_state_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $TimerStateEntityCopyWith<TimerStateEntity> get copyWith => _$TimerStateEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerStateEntity&&(identical(other.timerSettings, timerSettings) || other.timerSettings == timerSettings)&&(identical(other.timerStatus, timerStatus) || other.timerStatus == timerStatus)&&(identical(other.timerStage, timerStage) || other.timerStage == timerStage)&&(identical(other.elapsedWarmupTime, elapsedWarmupTime) || other.elapsedWarmupTime == elapsedWarmupTime)&&(identical(other.elapsedTime, elapsedTime) || other.elapsedTime == elapsedTime)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime));
+  final _this = this as TimerStateEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerStateEntity&&(identical(other.timerSettings, _this.timerSettings) || other.timerSettings == _this.timerSettings)&&(identical(other.timerStatus, _this.timerStatus) || other.timerStatus == _this.timerStatus)&&(identical(other.timerStage, _this.timerStage) || other.timerStage == _this.timerStage)&&(identical(other.elapsedWarmupTime, _this.elapsedWarmupTime) || other.elapsedWarmupTime == _this.elapsedWarmupTime)&&(identical(other.elapsedTime, _this.elapsedTime) || other.elapsedTime == _this.elapsedTime)&&(identical(other.startTime, _this.startTime) || other.startTime == _this.startTime)&&(identical(other.endTime, _this.endTime) || other.endTime == _this.endTime));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,timerSettings,timerStatus,timerStage,elapsedWarmupTime,elapsedTime,startTime,endTime);
+int get hashCode {
+  final _this = this as TimerStateEntity;
+  return Object.hash(runtimeType,_this.timerSettings,_this.timerStatus,_this.timerStage,_this.elapsedWarmupTime,_this.elapsedTime,_this.startTime,_this.endTime);
+}
 
 @override
 String toString() {
-  return 'TimerStateEntity(timerSettings: $timerSettings, timerStatus: $timerStatus, timerStage: $timerStage, elapsedWarmupTime: $elapsedWarmupTime, elapsedTime: $elapsedTime, startTime: $startTime, endTime: $endTime)';
+  final _this = this as TimerStateEntity;
+  return 'TimerStateEntity(timerSettings: ${_this.timerSettings}, timerStatus: ${_this.timerStatus}, timerStage: ${_this.timerStage}, elapsedWarmupTime: ${_this.elapsedWarmupTime}, elapsedTime: ${_this.elapsedTime}, startTime: ${_this.startTime}, endTime: ${_this.endTime})';
 }
 
 
@@ -66,7 +72,7 @@ class _$TimerStateEntityCopyWithImpl<$Res>
 /// Create a copy of TimerStateEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? timerSettings = null,Object? timerStatus = null,Object? timerStage = null,Object? elapsedWarmupTime = null,Object? elapsedTime = null,Object? startTime = freezed,Object? endTime = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TimerStateEntity(
 timerSettings: null == timerSettings ? _self.timerSettings : timerSettings // ignore: cast_nullable_to_non_nullable
 as TimerSettingsEntity,timerStatus: null == timerStatus ? _self.timerStatus : timerStatus // ignore: cast_nullable_to_non_nullable
 as TimerStatus,timerStage: null == timerStage ? _self.timerStage : timerStage // ignore: cast_nullable_to_non_nullable
@@ -242,16 +248,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerStateEntity&&(identical(other.timerSettings, timerSettings) || other.timerSettings == timerSettings)&&(identical(other.timerStatus, timerStatus) || other.timerStatus == timerStatus)&&(identical(other.timerStage, timerStage) || other.timerStage == timerStage)&&(identical(other.elapsedWarmupTime, elapsedWarmupTime) || other.elapsedWarmupTime == elapsedWarmupTime)&&(identical(other.elapsedTime, elapsedTime) || other.elapsedTime == elapsedTime)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerStateEntity&&(identical(other.timerSettings, timerSettings) || other.timerSettings == timerSettings)&&(identical(other.timerStatus, timerStatus) || other.timerStatus == timerStatus)&&(identical(other.timerStage, timerStage) || other.timerStage == timerStage)&&(identical(other.elapsedWarmupTime, elapsedWarmupTime) || other.elapsedWarmupTime == elapsedWarmupTime)&&(identical(other.elapsedTime, elapsedTime) || other.elapsedTime == elapsedTime)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,timerSettings,timerStatus,timerStage,elapsedWarmupTime,elapsedTime,startTime,endTime);
+int get hashCode {
+    return Object.hash(runtimeType,timerSettings,timerStatus,timerStage,elapsedWarmupTime,elapsedTime,startTime,endTime);
+}
 
 @override
 String toString() {
-  return 'TimerStateEntity(timerSettings: $timerSettings, timerStatus: $timerStatus, timerStage: $timerStage, elapsedWarmupTime: $elapsedWarmupTime, elapsedTime: $elapsedTime, startTime: $startTime, endTime: $endTime)';
+    return 'TimerStateEntity(timerSettings: $timerSettings, timerStatus: $timerStatus, timerStage: $timerStage, elapsedWarmupTime: $elapsedWarmupTime, elapsedTime: $elapsedTime, startTime: $startTime, endTime: $endTime)';
 }
 
 

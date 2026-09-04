@@ -1,11 +1,11 @@
 import 'package:core/core.dart';
 
 import 'package:profile/l10n/profile_localizations.dart';
-
 import 'package:profile/src/presentation/view/profile_view.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   initState() {
-    BlocProvider.of<ProfileStateCubit>(context).loadProfile(
+    BlocProvider.of<ProfileCubit>(context).loadProfile(
       widget.profileId,
       profile: widget.profile,
     );
@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileStateCubit, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
         switch (state) {
           case ProfileLoadingState():
@@ -82,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     onButtonTap: () {
                       context.read<AuthStateCubit>().signOut();
                       context.services.homeNavigator.navigateToHome(type: .go);
-                      context.read<ProfileStateCubit>().clearData();
+                      context.read<ProfileCubit>().clearData();
                     },
                     buttonText: context.coreL10n.profileSignoutTitle,
                   ),

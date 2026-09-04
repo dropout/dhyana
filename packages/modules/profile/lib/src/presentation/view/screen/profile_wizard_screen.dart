@@ -9,6 +9,7 @@ import 'package:core/core.dart';
 import 'package:profile/src/presentation/view/profile_edit_form.dart';
 import 'package:profile/src/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileWizardScreen extends StatefulWidget {
   final String profileId;
@@ -56,7 +57,9 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
   }
 
   void _onSignOut(BuildContext context) {
-    showAppDialog(context, SignoutDialog());
+    showAppDialog(context, SignoutDialog(
+      onSignOut: () async => context.read<ProfileCubit>().clearData(),
+    ));
     context.hapticsTap();
   }
 

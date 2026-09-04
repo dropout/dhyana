@@ -11,6 +11,7 @@ import 'package:stats/src/presentation/view/stats/tab/week_tab.dart';
 import 'package:stats/src/presentation/viewmodel/stats_bucket_cubit.dart';
 
 import '../../../../stats_mock_definitions.dart';
+import '../../../../stats_test_helper.dart';
 
 
 void main() {
@@ -51,7 +52,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        StatsTestHelper.withLocalizationProvider(
           WeekTab(
             profileId: 'profileId',
           )

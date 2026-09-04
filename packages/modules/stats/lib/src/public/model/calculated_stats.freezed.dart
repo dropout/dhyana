@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'calculated_stats.dart';
@@ -9,6 +9,7 @@ part of 'calculated_stats.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $CalculatedStatsCopyWith<CalculatedStats> get copyWith => _$CalculatedStatsCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CalculatedStats&&(identical(other.totalMinutes, totalMinutes) || other.totalMinutes == totalMinutes)&&(identical(other.averageMinutes, averageMinutes) || other.averageMinutes == averageMinutes)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions)&&(identical(other.averageSessions, averageSessions) || other.averageSessions == averageSessions));
+  final _this = this as CalculatedStats;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CalculatedStats&&(identical(other.totalMinutes, _this.totalMinutes) || other.totalMinutes == _this.totalMinutes)&&(identical(other.averageMinutes, _this.averageMinutes) || other.averageMinutes == _this.averageMinutes)&&(identical(other.totalSessions, _this.totalSessions) || other.totalSessions == _this.totalSessions)&&(identical(other.averageSessions, _this.averageSessions) || other.averageSessions == _this.averageSessions));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,totalMinutes,averageMinutes,totalSessions,averageSessions);
+int get hashCode {
+  final _this = this as CalculatedStats;
+  return Object.hash(runtimeType,_this.totalMinutes,_this.averageMinutes,_this.totalSessions,_this.averageSessions);
+}
 
 @override
 String toString() {
-  return 'CalculatedStats(totalMinutes: $totalMinutes, averageMinutes: $averageMinutes, totalSessions: $totalSessions, averageSessions: $averageSessions)';
+  final _this = this as CalculatedStats;
+  return 'CalculatedStats(totalMinutes: ${_this.totalMinutes}, averageMinutes: ${_this.averageMinutes}, totalSessions: ${_this.totalSessions}, averageSessions: ${_this.averageSessions})';
 }
 
 
@@ -63,7 +69,7 @@ class _$CalculatedStatsCopyWithImpl<$Res>
 /// Create a copy of CalculatedStats
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? totalMinutes = null,Object? averageMinutes = null,Object? totalSessions = null,Object? averageSessions = null,}) {
-  return _then(_self.copyWith(
+  return _then(CalculatedStats(
 totalMinutes: null == totalMinutes ? _self.totalMinutes : totalMinutes // ignore: cast_nullable_to_non_nullable
 as int,averageMinutes: null == averageMinutes ? _self.averageMinutes : averageMinutes // ignore: cast_nullable_to_non_nullable
 as double,totalSessions: null == totalSessions ? _self.totalSessions : totalSessions // ignore: cast_nullable_to_non_nullable
@@ -221,16 +227,18 @@ _$CalculatedStatsCopyWith<_CalculatedStats> get copyWith => __$CalculatedStatsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CalculatedStats&&(identical(other.totalMinutes, totalMinutes) || other.totalMinutes == totalMinutes)&&(identical(other.averageMinutes, averageMinutes) || other.averageMinutes == averageMinutes)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions)&&(identical(other.averageSessions, averageSessions) || other.averageSessions == averageSessions));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CalculatedStats&&(identical(other.totalMinutes, totalMinutes) || other.totalMinutes == totalMinutes)&&(identical(other.averageMinutes, averageMinutes) || other.averageMinutes == averageMinutes)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions)&&(identical(other.averageSessions, averageSessions) || other.averageSessions == averageSessions));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,totalMinutes,averageMinutes,totalSessions,averageSessions);
+int get hashCode {
+    return Object.hash(runtimeType,totalMinutes,averageMinutes,totalSessions,averageSessions);
+}
 
 @override
 String toString() {
-  return 'CalculatedStats(totalMinutes: $totalMinutes, averageMinutes: $averageMinutes, totalSessions: $totalSessions, averageSessions: $averageSessions)';
+    return 'CalculatedStats(totalMinutes: $totalMinutes, averageMinutes: $averageMinutes, totalSessions: $totalSessions, averageSessions: $averageSessions)';
 }
 
 

@@ -9,17 +9,10 @@ abstract interface class ProfileDisplayable {
   String get firstName;
   String get lastName;
   String get displayName;
-  String? get photoUrl;
   String? get photoBlurhash;
   Location? get location;
-  ProfileDispayableSettings get settings;
 
   bool get hasProfileImage;
   String get profileImageStoragePath;    
 }
 
-
-abstract interface class ProfileDispayableSettings {
-  bool get showStatsOnFinishScreen;
-  bool get usePresenceFeature;  
-}

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'remote_settings.dart';
@@ -9,6 +9,7 @@ part of 'remote_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $RemoteSettingsCopyWith<RemoteSettings> get copyWith => _$RemoteSettingsCopyWith
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as RemoteSettings;
   properties
     ..add(DiagnosticsProperty('type', 'RemoteSettings'))
-    ..add(DiagnosticsProperty('maintenanceModeEnabled', maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', contactUrl))..add(DiagnosticsProperty('privacyPolicyUrl', privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', termsOfServiceUrl));
+    ..add(DiagnosticsProperty('maintenanceModeEnabled', _this.maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', _this.minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', _this.contactUrl))..add(DiagnosticsProperty('privacyPolicyUrl', _this.privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', _this.termsOfServiceUrl));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
+  final _this = this as RemoteSettings;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteSettings&&(identical(other.maintenanceModeEnabled, _this.maintenanceModeEnabled) || other.maintenanceModeEnabled == _this.maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, _this.minimumRequiredAppVersion) || other.minimumRequiredAppVersion == _this.minimumRequiredAppVersion)&&(identical(other.contactUrl, _this.contactUrl) || other.contactUrl == _this.contactUrl)&&(identical(other.privacyPolicyUrl, _this.privacyPolicyUrl) || other.privacyPolicyUrl == _this.privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, _this.termsOfServiceUrl) || other.termsOfServiceUrl == _this.termsOfServiceUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,privacyPolicyUrl,termsOfServiceUrl);
+int get hashCode {
+  final _this = this as RemoteSettings;
+  return Object.hash(runtimeType,_this.maintenanceModeEnabled,_this.minimumRequiredAppVersion,_this.contactUrl,_this.privacyPolicyUrl,_this.termsOfServiceUrl);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
+  final _this = this as RemoteSettings;
+  return 'RemoteSettings(maintenanceModeEnabled: ${_this.maintenanceModeEnabled}, minimumRequiredAppVersion: ${_this.minimumRequiredAppVersion}, contactUrl: ${_this.contactUrl}, privacyPolicyUrl: ${_this.privacyPolicyUrl}, termsOfServiceUrl: ${_this.termsOfServiceUrl})';
 }
 
 
@@ -72,7 +79,7 @@ class _$RemoteSettingsCopyWithImpl<$Res>
 /// Create a copy of RemoteSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? maintenanceModeEnabled = null,Object? minimumRequiredAppVersion = null,Object? contactUrl = null,Object? privacyPolicyUrl = null,Object? termsOfServiceUrl = null,}) {
-  return _then(_self.copyWith(
+  return _then(RemoteSettings(
 maintenanceModeEnabled: null == maintenanceModeEnabled ? _self.maintenanceModeEnabled : maintenanceModeEnabled // ignore: cast_nullable_to_non_nullable
 as bool,minimumRequiredAppVersion: null == minimumRequiredAppVersion ? _self.minimumRequiredAppVersion : minimumRequiredAppVersion // ignore: cast_nullable_to_non_nullable
 as String,contactUrl: null == contactUrl ? _self.contactUrl : contactUrl // ignore: cast_nullable_to_non_nullable
@@ -234,23 +241,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'RemoteSettings'))
     ..add(DiagnosticsProperty('maintenanceModeEnabled', maintenanceModeEnabled))..add(DiagnosticsProperty('minimumRequiredAppVersion', minimumRequiredAppVersion))..add(DiagnosticsProperty('contactUrl', contactUrl))..add(DiagnosticsProperty('privacyPolicyUrl', privacyPolicyUrl))..add(DiagnosticsProperty('termsOfServiceUrl', termsOfServiceUrl));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RemoteSettings&&(identical(other.maintenanceModeEnabled, maintenanceModeEnabled) || other.maintenanceModeEnabled == maintenanceModeEnabled)&&(identical(other.minimumRequiredAppVersion, minimumRequiredAppVersion) || other.minimumRequiredAppVersion == minimumRequiredAppVersion)&&(identical(other.contactUrl, contactUrl) || other.contactUrl == contactUrl)&&(identical(other.privacyPolicyUrl, privacyPolicyUrl) || other.privacyPolicyUrl == privacyPolicyUrl)&&(identical(other.termsOfServiceUrl, termsOfServiceUrl) || other.termsOfServiceUrl == termsOfServiceUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,privacyPolicyUrl,termsOfServiceUrl);
+int get hashCode {
+    return Object.hash(runtimeType,maintenanceModeEnabled,minimumRequiredAppVersion,contactUrl,privacyPolicyUrl,termsOfServiceUrl);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
+    return 'RemoteSettings(maintenanceModeEnabled: $maintenanceModeEnabled, minimumRequiredAppVersion: $minimumRequiredAppVersion, contactUrl: $contactUrl, privacyPolicyUrl: $privacyPolicyUrl, termsOfServiceUrl: $termsOfServiceUrl)';
 }
 
 

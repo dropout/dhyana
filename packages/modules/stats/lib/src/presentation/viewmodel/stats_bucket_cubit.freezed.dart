@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'stats_bucket_cubit.dart';
@@ -9,6 +9,7 @@ part of 'stats_bucket_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$StatsBucketState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'StatsBucketState()';
+    return 'StatsBucketState()';
 }
 
 
@@ -191,7 +192,7 @@ class StatsBucketLoadingState implements StatsBucketState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketLoadingState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketLoadingState);
 }
 
 
@@ -200,7 +201,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'StatsBucketState.loading()';
+    return 'StatsBucketState.loading()';
 }
 
 
@@ -213,7 +214,7 @@ String toString() {
 
 
 class StatsBucketLoadedState implements StatsBucketState {
-  const StatsBucketLoadedState({required final  List<StatsBucket> buckets}): _buckets = buckets;
+  const StatsBucketLoadedState({required  List<StatsBucket> buckets}): _buckets = buckets;
   
 
  final  List<StatsBucket> _buckets;
@@ -234,16 +235,18 @@ $StatsBucketLoadedStateCopyWith<StatsBucketLoadedState> get copyWith => _$StatsB
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketLoadedState&&const DeepCollectionEquality().equals(other._buckets, _buckets));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketLoadedState&&const DeepCollectionEquality().equals(other.buckets, _buckets));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_buckets));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_buckets));
+}
 
 @override
 String toString() {
-  return 'StatsBucketState.loaded(buckets: $buckets)';
+    return 'StatsBucketState.loaded(buckets: $buckets)';
 }
 
 
@@ -295,7 +298,7 @@ class StatsBucketLoadingErrorState implements StatsBucketState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketLoadingErrorState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketLoadingErrorState);
 }
 
 
@@ -304,7 +307,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'StatsBucketState.error()';
+    return 'StatsBucketState.error()';
 }
 
 

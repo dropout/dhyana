@@ -13,7 +13,7 @@ part 'profile.freezed.dart';
 // initial profile db record is created.
 
 @freezed
-abstract class Profile with _$Profile implements ProfileDisplayable {
+abstract class Profile with _$Profile {
 
   const Profile._();
 
@@ -49,15 +49,12 @@ abstract class Profile with _$Profile implements ProfileDisplayable {
     (oldProfile.statsReport.consecutiveDays.current
       < statsReport.consecutiveDays.current);
 
-  @override
   String get displayName => 
     '$firstName $lastName';
 
-  @override
   String get profileImageStoragePath =>
     '/profiles/$id/photo.jpg';  
 
-  @override
   bool get hasProfileImage =>
     photoUrl != null && photoUrl!.isNotEmpty;
   

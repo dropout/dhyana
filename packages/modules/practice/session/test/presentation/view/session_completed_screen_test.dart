@@ -3,8 +3,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/core.dart';
@@ -19,54 +19,54 @@ import 'package:session/src/presentation/view/completed/signed_out_completed_vie
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 
 import '../../session_mock_definitions.dart';
-
+import '../../session_test_helper.dart';
 
 void main() {
   group('SessionCompletedScreen', () {
-    late MockProfileStateCubit profileCubit;
+    late MockProfileCubit profileCubit;
     late MockAuthStateCubit mockAuthBloc;
 
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockHapticsService mockHapticsService;
+    late MockHomeNavigator mockHomeNavigator;
+  
 
     late LogSessionInsightsUseCase mockLogSessionUseCase;
     late UpdateProfileWithSessionUseCase mockUpdateProfileWithSessionUseCase;
 
     setUp(() async {
-      profileCubit = MockProfileStateCubit();
+      profileCubit = MockProfileCubit();
       mockAuthBloc = MockAuthStateCubit();
       mockServices = MockServices();
 
       mockCrashlyticsService = MockCrashlyticsService();
       mockHapticsService = MockHapticsService();
+      mockHomeNavigator = MockHomeNavigator();
 
       mockLogSessionUseCase = MockLogSessionUseCase();
       mockUpdateProfileWithSessionUseCase =
           MockUpdateProfileWithSessionUseCase();
 
-      when(
-        () => profileCubit.stream,
-      ).thenAnswer((_) => const Stream<ProfileState>.empty());
+      when(() => profileCubit.stream)
+          .thenAnswer((_) => const Stream<ProfileState>.empty());
 
       when(() => profileCubit.state).thenReturn(const ProfileState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
-      when(
-        () => mockServices.crashlyticsService,
-      ).thenReturn(mockCrashlyticsService);
+      when(() => mockServices.crashlyticsService)
+          .thenReturn(mockCrashlyticsService);
 
-      when(
-        () => profileCubit.stream,
-      ).thenAnswer((_) => const Stream<ProfileState>.empty());
+      when(() => profileCubit.stream)
+          .thenAnswer((_) => const Stream<ProfileState>.empty());
 
       when(() => profileCubit.state).thenReturn(const ProfileState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
-      when(
-        () => mockServices.crashlyticsService,
-      ).thenReturn(mockCrashlyticsService);
+      when(() => mockServices.crashlyticsService)
+          .thenReturn(mockCrashlyticsService);
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
+      when(() => mockServices.homeNavigator).thenReturn(mockHomeNavigator);
 
       GetIt.I.registerFactory<SessionCompletedCubit>(() {
         return SessionCompletedCubit(
@@ -91,11 +91,11 @@ void main() {
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
-              withAllContextProviders(
+              SessionTestHelper.withLocalizationProvider(
                 MultiProvider(
                   providers: [
                     BlocProvider<AuthStateCubit>.value(value: mockAuthBloc),
-                    BlocProvider<ProfileStateCubit>.value(value: profileCubit),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),
@@ -115,22 +115,20 @@ void main() {
       final profile = Faker().createProfile();
       final session = Faker().createSessionEntity();
 
-      when(() => mockAuthBloc.state).thenReturn(
-        AuthState.signedIn(userId: Faker().guid.guid()),
-      );
+      when(() => mockAuthBloc.state)
+          .thenReturn(AuthState.signedIn(userId: Faker().guid.guid()));
 
-      when(
-        () => profileCubit.state,
-      ).thenReturn(ProfileState.loaded(profile: profile));
+      when(() => profileCubit.state)
+          .thenReturn(ProfileState.loaded(profile: profile));
 
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
-              withAllContextProviders(
+              SessionTestHelper.withLocalizationProvider(
                 MultiProvider(
                   providers: [
                     BlocProvider<AuthStateCubit>.value(value: mockAuthBloc),
-                    BlocProvider<ProfileStateCubit>.value(value: profileCubit),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),
@@ -148,22 +146,20 @@ void main() {
       final profile = Faker().createProfile();
       final session = Faker().createSessionEntity();
 
-      when(() => mockAuthBloc.state).thenReturn(
-        AuthState.signedIn(userId: Faker().guid.guid()),
-      );
+      when(() => mockAuthBloc.state)
+          .thenReturn(AuthState.signedIn(userId: Faker().guid.guid()));
 
-      when(
-        () => profileCubit.state,
-      ).thenReturn(ProfileState.loaded(profile: profile));
+      when(() => profileCubit.state)
+          .thenReturn(ProfileState.loaded(profile: profile));
 
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
-              withAllContextProviders(
+              SessionTestHelper.withLocalizationProvider(
                 MultiProvider(
                   providers: [
                     BlocProvider<AuthStateCubit>.value(value: mockAuthBloc),
-                    BlocProvider<ProfileStateCubit>.value(value: profileCubit),
+                    BlocProvider<ProfileCubit>.value(value: profileCubit),
                     Provider<Services>.value(value: mockServices),
                   ],
                   child: SessionCompletedScreen(session: session.toApi()),
@@ -183,40 +179,24 @@ void main() {
     testWidgets('can go to home screen when okay button tapped', (
       WidgetTester tester,
     ) async {
-      bool didPop = false;
       SessionEntity session = Faker().createSessionEntity();
 
-      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());      
+      when(() => mockHomeNavigator.navigateToHome()).thenAnswer((_) async {});
 
-      final GoRouter goRouter = GoRouter(
-        routes: [
-          GoRoute(path: '/', builder: (context, state) => SizedBox.shrink()),
-          GoRoute(
-            path: '/test',
-            name: 'test',
-            onExit: (context, state) {
-              didPop = true;
-              return true;
-            },
-            builder: (context, state) {
-              return withAllContextProviders(
-                MultiProvider(
-                  providers: [
-                    BlocProvider<AuthStateCubit>.value(value: mockAuthBloc),
-                    BlocProvider<ProfileStateCubit>.value(value: profileCubit),
-                    Provider<Services>.value(value: mockServices),
-                  ],
-                  child: SessionCompletedScreen(session: session.toApi()),
-                ),
-              );
-            },
+      await tester.pumpWidget(
+        SessionTestHelper.withLocalizationProvider(
+          MultiProvider(
+            providers: [
+              BlocProvider<AuthStateCubit>.value(value: mockAuthBloc),
+              BlocProvider<ProfileCubit>.value(value: profileCubit),
+              Provider<Services>.value(value: mockServices),
+            ],
+            child: SessionCompletedScreen(session: session.toApi()),
           ),
-        ],
+        ),
       );
 
-      await tester.pumpWidget(MaterialApp.router(routerConfig: goRouter));
-
-      goRouter.pushNamed('test');
       await tester.pumpAndSettle();
 
       await tester.tap(
@@ -224,8 +204,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(didPop, true);
-      expect(goRouter.state.path, '/');
+      verify(() => mockHomeNavigator.navigateToHome()).called(1);
+
+      // expect(didPop, true);
+      // expect(goRouter.state.path, '/');
     });
   }); // eof group
 } // eof main

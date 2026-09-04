@@ -11,7 +11,7 @@ import 'package:stats/src/presentation/view/stats/tab/year_tab.dart';
 import 'package:stats/src/presentation/viewmodel/stats_bucket_cubit.dart';
 
 import '../../../../stats_mock_definitions.dart';
-
+import '../../../../stats_test_helper.dart';
 
 
 void main() {
@@ -48,7 +48,7 @@ void main() {
       )).thenAnswer((_) async => Faker().createYearStatsBucketEntityList(2).map((e) => e.toApi()).toList());
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        StatsTestHelper.withLocalizationProvider(
           YearTab(
             profileId: 'profileId',
           )

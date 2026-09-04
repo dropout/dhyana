@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [$timerRoute, $timerSettingsHistoryRoute];
 RouteBase get $timerRoute => GoRouteData.$route(
   path: '/timer',
   name: 'TIMER',
+  hasOverriddenOnExit: false,
   factory: $TimerRoute._fromState,
 );
 
@@ -42,6 +43,7 @@ mixin $TimerRoute on GoRouteData {
 RouteBase get $timerSettingsHistoryRoute => GoRouteData.$route(
   path: '/timerSettingsHistory/:profileId',
   name: 'TIMER_SETTINGS_HISTORY',
+  hasOverriddenOnExit: false,
   factory: $TimerSettingsHistoryRoute._fromState,
 );
 

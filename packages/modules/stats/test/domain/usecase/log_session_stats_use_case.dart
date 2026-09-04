@@ -7,7 +7,6 @@ import 'package:mocktail/mocktail.dart';
 import '../../stats_mock_definitions.dart';
 
 
-
 void main() {
 	late MockStatisticsRepository statsRepository;
 	late MockProfilePublicApi profilePublicApi;

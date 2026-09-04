@@ -98,7 +98,7 @@ dev_dependencies:
   # nock: ^1.2.3
   flutter_lints: ^6.0.0
   build_runner: ^2.4.6
-  freezed: ^3.0.6
+  freezed: ^4.0.1
   json_serializable: ^6.7.1
   # bloc_test: ^10.0.0
   # mocktail: ^1.0.3
@@ -112,15 +112,8 @@ flutter:
     enable-swift-package-manager: false #tflite not compatible with SPM yet, so disable it to avoid build errors
 
   assets:
-    - assets/sounds/
     - assets/images/
-    - assets/haptics/
     - assets/nsfw.tflite
-
-  shaders:
-    - shaders/linear_gradient_mask.frag
-    - shaders/gradient_flow.frag
-    - shaders/test.frag
 
   fonts:
     - family: RobotoSlab

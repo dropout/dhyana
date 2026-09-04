@@ -30,7 +30,7 @@ class SignedInCompletedView extends StatefulWidget {
 class _SignedInCompletedViewState extends State<SignedInCompletedView> {
   @override
   void initState() {
-    final profileCubit = context.read<ProfileStateCubit>();
+    final profileCubit = context.read<ProfileCubit>();
     context.read<SessionCompletedCubit>().logSession(
       widget.profileId,
       widget.session,

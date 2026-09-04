@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_edit_cubit.dart';
@@ -9,6 +9,7 @@ part of 'profile_edit_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$ProfileEditState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ProfileEditState()';
+    return 'ProfileEditState()';
 }
 
 
@@ -197,7 +198,7 @@ class ProfileEditStateInitial extends ProfileEditState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditStateInitial);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditStateInitial);
 }
 
 
@@ -206,7 +207,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ProfileEditState.initial()';
+    return 'ProfileEditState.initial()';
 }
 
 
@@ -229,7 +230,7 @@ class ProfileEditLoadingState extends ProfileEditState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditLoadingState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditLoadingState);
 }
 
 
@@ -238,7 +239,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ProfileEditState.loading()';
+    return 'ProfileEditState.loading()';
 }
 
 
@@ -266,16 +267,18 @@ $ProfileEditLoadedStateCopyWith<ProfileEditLoadedState> get copyWith => _$Profil
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditLoadedState&&(identical(other.profile, profile) || other.profile == profile));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditLoadedState&&(identical(other.profile, profile) || other.profile == profile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,profile);
+int get hashCode {
+    return Object.hash(runtimeType,profile);
+}
 
 @override
 String toString() {
-  return 'ProfileEditState.loaded(profile: $profile)';
+    return 'ProfileEditState.loaded(profile: $profile)';
 }
 
 
@@ -336,7 +339,7 @@ class ProfileEditErrorState extends ProfileEditState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditErrorState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEditErrorState);
 }
 
 
@@ -345,7 +348,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ProfileEditState.error()';
+    return 'ProfileEditState.error()';
 }
 
 

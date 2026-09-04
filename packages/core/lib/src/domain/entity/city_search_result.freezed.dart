@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'city_search_result.dart';
@@ -9,6 +9,7 @@ part of 'city_search_result.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $CitySearchResultCopyWith<CitySearchResult> get copyWith => _$CitySearchResultCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CitySearchResult&&(identical(other.placeId, placeId) || other.placeId == placeId)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.types, types)&&(identical(other.location, location) || other.location == location));
+  final _this = this as CitySearchResult;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CitySearchResult&&(identical(other.placeId, _this.placeId) || other.placeId == _this.placeId)&&(identical(other.name, _this.name) || other.name == _this.name)&&const DeepCollectionEquality().equals(other.types, _this.types)&&(identical(other.location, _this.location) || other.location == _this.location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,placeId,name,const DeepCollectionEquality().hash(types),location);
+int get hashCode {
+  final _this = this as CitySearchResult;
+  return Object.hash(runtimeType,_this.placeId,_this.name,const DeepCollectionEquality().hash(_this.types),_this.location);
+}
 
 @override
 String toString() {
-  return 'CitySearchResult(placeId: $placeId, name: $name, types: $types, location: $location)';
+  final _this = this as CitySearchResult;
+  return 'CitySearchResult(placeId: ${_this.placeId}, name: ${_this.name}, types: ${_this.types}, location: ${_this.location})';
 }
 
 
@@ -66,7 +72,7 @@ class _$CitySearchResultCopyWithImpl<$Res>
 /// Create a copy of CitySearchResult
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? placeId = null,Object? name = null,Object? types = null,Object? location = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(CitySearchResult(
 placeId: null == placeId ? _self.placeId : placeId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,types: null == types ? _self.types : types // ignore: cast_nullable_to_non_nullable
@@ -218,7 +224,7 @@ return $default(_that.placeId,_that.name,_that.types,_that.location);case _:
 @JsonSerializable()
 
 class _CitySearchResult implements CitySearchResult {
-  const _CitySearchResult({required this.placeId, required this.name, required final  List<String> types, this.location}): _types = types;
+  const _CitySearchResult({required this.placeId, required this.name, required  List<String> types, this.location}): _types = types;
   factory _CitySearchResult.fromJson(Map<String, dynamic> json) => _$CitySearchResultFromJson(json);
 
 @override final  String placeId;
@@ -245,16 +251,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CitySearchResult&&(identical(other.placeId, placeId) || other.placeId == placeId)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._types, _types)&&(identical(other.location, location) || other.location == location));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CitySearchResult&&(identical(other.placeId, placeId) || other.placeId == placeId)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.types, _types)&&(identical(other.location, location) || other.location == location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,placeId,name,const DeepCollectionEquality().hash(_types),location);
+int get hashCode {
+    return Object.hash(runtimeType,placeId,name,const DeepCollectionEquality().hash(_types),location);
+}
 
 @override
 String toString() {
-  return 'CitySearchResult(placeId: $placeId, name: $name, types: $types, location: $location)';
+    return 'CitySearchResult(placeId: $placeId, name: $name, types: $types, location: $location)';
 }
 
 

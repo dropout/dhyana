@@ -1,5 +1,6 @@
 import 'package:auth/auth.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
 import 'package:profile/src/data/datasource/profile_data_provider.dart';
 import 'package:profile/src/domain/repository/profile_repository.dart';
 import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
@@ -9,46 +10,34 @@ import 'package:profile/src/domain/usecase/update_profile_settings_use_case.dart
 import 'package:profile/src/domain/usecase/update_profile_use_case.dart';
 import 'package:profile/src/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
+class MockAuthNavigator extends Mock implements AuthNavigator;
+class MockProfileNavigator extends Mock implements ProfileNavigator;
 
-class MockProfileEditCubit 
-  extends MockCubit<ProfileEditState> 
-  implements ProfileEditCubit {}
+class MockProfileCubit extends MockCubit<ProfileState>
+    implements ProfileCubit {}
 
-class MockInterpreter 
-  extends Mock 
-  implements Interpreter {}
+class MockProfileEditCubit extends MockCubit<ProfileEditState>
+    implements ProfileEditCubit {}
 
-class MockProfileStatsUpdater 
-  extends Mock
-  implements ProfileStatsReportUpdaterService {}
+class MockInterpreter extends Mock implements Interpreter {}
 
-class MockLoadProfileUseCase 
-  extends Mock 
-  implements LoadProfileUseCase {}
+class MockProfileStatsUpdater extends Mock
+    implements ProfileStatsReportUpdaterService {}
 
-class MockDeleteProfileUseCase 
-  extends Mock 
-  implements DeleteProfileUseCase {}
+class MockLoadProfileUseCase extends Mock implements LoadProfileUseCase {}
 
-class MockUpdateProfileUseCase 
-  extends Mock 
-  implements UpdateProfileUseCase {}
+class MockDeleteProfileUseCase extends Mock implements DeleteProfileUseCase {}
 
-class MockUpdateProfileSettingsUseCase 
-  extends Mock
-  implements UpdateProfileSettingsUseCase {}
+class MockUpdateProfileUseCase extends Mock implements UpdateProfileUseCase {}
 
-class MockProfileRepository 
-  extends Mock 
-  implements ProfileRepository {}
+class MockUpdateProfileSettingsUseCase extends Mock
+    implements UpdateProfileSettingsUseCase {}
 
-class MockProfileDataProvider
-  extends Mock
-  implements ProfileDataProvider {}
+class MockProfileRepository extends Mock implements ProfileRepository {}
 
+class MockProfileDataProvider extends Mock implements ProfileDataProvider {}
 
-class MockAuthPublicApi 
-  extends Mock
-  implements AuthPublicApi {}
+class MockAuthPublicApi extends Mock implements AuthPublicApi {}

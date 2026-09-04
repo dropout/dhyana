@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [$presenceRoute];
 RouteBase get $presenceRoute => GoRouteData.$route(
   path: '/presence',
   name: 'PRESENCE',
+  hasOverriddenOnExit: false,
   factory: $PresenceRoute._fromState,
 );
 

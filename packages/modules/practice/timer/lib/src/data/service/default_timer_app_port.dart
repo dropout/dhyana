@@ -27,7 +27,7 @@ class DefaultTimerAppPort implements TimerAppPort {
   }
       
   @override
-  Future<ProfileDisplayable> getProfile(String profileId, {bool preferCache = false}) =>
+  Future<Profile> getProfile(String profileId, {bool preferCache = false}) =>
     profilePublicApi.getProfile(profileId, preferCache: preferCache);
 
   @override

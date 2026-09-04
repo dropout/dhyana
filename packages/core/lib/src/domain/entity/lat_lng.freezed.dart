@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'lat_lng.dart';
@@ -9,6 +9,7 @@ part of 'lat_lng.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $LatLngCopyWith<LatLng> get copyWith => _$LatLngCopyWithImpl<LatLng>(this as Lat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LatLng&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
+  final _this = this as LatLng;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LatLng&&(identical(other.latitude, _this.latitude) || other.latitude == _this.latitude)&&(identical(other.longitude, _this.longitude) || other.longitude == _this.longitude));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,latitude,longitude);
+int get hashCode {
+  final _this = this as LatLng;
+  return Object.hash(runtimeType,_this.latitude,_this.longitude);
+}
 
 @override
 String toString() {
-  return 'LatLng(latitude: $latitude, longitude: $longitude)';
+  final _this = this as LatLng;
+  return 'LatLng(latitude: ${_this.latitude}, longitude: ${_this.longitude})';
 }
 
 
@@ -66,7 +72,7 @@ class _$LatLngCopyWithImpl<$Res>
 /// Create a copy of LatLng
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? latitude = null,Object? longitude = null,}) {
-  return _then(_self.copyWith(
+  return _then(LatLng(
 latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
 as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
 as double,
@@ -223,16 +229,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LatLng&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LatLng&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,latitude,longitude);
+int get hashCode {
+    return Object.hash(runtimeType,latitude,longitude);
+}
 
 @override
 String toString() {
-  return 'LatLng(latitude: $latitude, longitude: $longitude)';
+    return 'LatLng(latitude: $latitude, longitude: $longitude)';
 }
 
 

@@ -9,7 +9,7 @@ part of 'timer_session_entity.dart';
 _TimerSessionEntity _$TimerSessionEntityFromJson(Map<String, dynamic> json) =>
     _TimerSessionEntity(
       id: json['id'] as String,
-      type: $enumDecode(_$TimerSessionTypeEnumMap, json['type']),
+      type: $enumDecode(_$TimerSessionEntityTypeEnumMap, json['type']),
       startTime: const DateTimeConverter().fromJson(
         (json['startTime'] as num).toInt(),
       ),
@@ -24,13 +24,13 @@ _TimerSessionEntity _$TimerSessionEntityFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$TimerSessionEntityToJson(_TimerSessionEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'type': _$TimerSessionTypeEnumMap[instance.type]!,
+      'type': _$TimerSessionEntityTypeEnumMap[instance.type]!,
       'startTime': const DateTimeConverter().toJson(instance.startTime),
       'endTime': const DateTimeConverter().toJson(instance.endTime),
       'duration': const DurationConverter().toJson(instance.duration),
     };
 
-const _$TimerSessionTypeEnumMap = {
+const _$TimerSessionEntityTypeEnumMap = {
   TimerSessionEntityType.sitting: 'sitting',
   TimerSessionEntityType.chanting: 'chanting',
 };

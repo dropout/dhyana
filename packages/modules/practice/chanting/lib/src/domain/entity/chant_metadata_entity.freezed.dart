@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'chant_metadata_entity.dart';
@@ -9,6 +9,7 @@ part of 'chant_metadata_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $ChantMetaDataEntityCopyWith<ChantMetaDataEntity> get copyWith => _$ChantMetaDat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantMetaDataEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.audioVersion, audioVersion) || other.audioVersion == audioVersion)&&(identical(other.lyricsVersion, lyricsVersion) || other.lyricsVersion == lyricsVersion)&&(identical(other.coverVersion, coverVersion) || other.coverVersion == coverVersion)&&(identical(other.audioSha256, audioSha256) || other.audioSha256 == audioSha256)&&(identical(other.lyricsSha256, lyricsSha256) || other.lyricsSha256 == lyricsSha256)&&(identical(other.coverSha256, coverSha256) || other.coverSha256 == coverSha256)&&(identical(other.audioBytes, audioBytes) || other.audioBytes == audioBytes)&&(identical(other.lyricsBytes, lyricsBytes) || other.lyricsBytes == lyricsBytes)&&(identical(other.coverBytes, coverBytes) || other.coverBytes == coverBytes)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  final _this = this as ChantMetaDataEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantMetaDataEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.audioVersion, _this.audioVersion) || other.audioVersion == _this.audioVersion)&&(identical(other.lyricsVersion, _this.lyricsVersion) || other.lyricsVersion == _this.lyricsVersion)&&(identical(other.coverVersion, _this.coverVersion) || other.coverVersion == _this.coverVersion)&&(identical(other.audioSha256, _this.audioSha256) || other.audioSha256 == _this.audioSha256)&&(identical(other.lyricsSha256, _this.lyricsSha256) || other.lyricsSha256 == _this.lyricsSha256)&&(identical(other.coverSha256, _this.coverSha256) || other.coverSha256 == _this.coverSha256)&&(identical(other.audioBytes, _this.audioBytes) || other.audioBytes == _this.audioBytes)&&(identical(other.lyricsBytes, _this.lyricsBytes) || other.lyricsBytes == _this.lyricsBytes)&&(identical(other.coverBytes, _this.coverBytes) || other.coverBytes == _this.coverBytes)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,audioVersion,lyricsVersion,coverVersion,audioSha256,lyricsSha256,coverSha256,audioBytes,lyricsBytes,coverBytes,updatedAt);
+int get hashCode {
+  final _this = this as ChantMetaDataEntity;
+  return Object.hash(runtimeType,_this.id,_this.audioVersion,_this.lyricsVersion,_this.coverVersion,_this.audioSha256,_this.lyricsSha256,_this.coverSha256,_this.audioBytes,_this.lyricsBytes,_this.coverBytes,_this.updatedAt);
+}
 
 @override
 String toString() {
-  return 'ChantMetaDataEntity(id: $id, audioVersion: $audioVersion, lyricsVersion: $lyricsVersion, coverVersion: $coverVersion, audioSha256: $audioSha256, lyricsSha256: $lyricsSha256, coverSha256: $coverSha256, audioBytes: $audioBytes, lyricsBytes: $lyricsBytes, coverBytes: $coverBytes, updatedAt: $updatedAt)';
+  final _this = this as ChantMetaDataEntity;
+  return 'ChantMetaDataEntity(id: ${_this.id}, audioVersion: ${_this.audioVersion}, lyricsVersion: ${_this.lyricsVersion}, coverVersion: ${_this.coverVersion}, audioSha256: ${_this.audioSha256}, lyricsSha256: ${_this.lyricsSha256}, coverSha256: ${_this.coverSha256}, audioBytes: ${_this.audioBytes}, lyricsBytes: ${_this.lyricsBytes}, coverBytes: ${_this.coverBytes}, updatedAt: ${_this.updatedAt})';
 }
 
 
@@ -66,7 +72,7 @@ class _$ChantMetaDataEntityCopyWithImpl<$Res>
 /// Create a copy of ChantMetaDataEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? audioVersion = null,Object? lyricsVersion = null,Object? coverVersion = null,Object? audioSha256 = null,Object? lyricsSha256 = null,Object? coverSha256 = null,Object? audioBytes = null,Object? lyricsBytes = null,Object? coverBytes = null,Object? updatedAt = null,}) {
-  return _then(_self.copyWith(
+  return _then(ChantMetaDataEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,audioVersion: null == audioVersion ? _self.audioVersion : audioVersion // ignore: cast_nullable_to_non_nullable
 as int,lyricsVersion: null == lyricsVersion ? _self.lyricsVersion : lyricsVersion // ignore: cast_nullable_to_non_nullable
@@ -241,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantMetaDataEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.audioVersion, audioVersion) || other.audioVersion == audioVersion)&&(identical(other.lyricsVersion, lyricsVersion) || other.lyricsVersion == lyricsVersion)&&(identical(other.coverVersion, coverVersion) || other.coverVersion == coverVersion)&&(identical(other.audioSha256, audioSha256) || other.audioSha256 == audioSha256)&&(identical(other.lyricsSha256, lyricsSha256) || other.lyricsSha256 == lyricsSha256)&&(identical(other.coverSha256, coverSha256) || other.coverSha256 == coverSha256)&&(identical(other.audioBytes, audioBytes) || other.audioBytes == audioBytes)&&(identical(other.lyricsBytes, lyricsBytes) || other.lyricsBytes == lyricsBytes)&&(identical(other.coverBytes, coverBytes) || other.coverBytes == coverBytes)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantMetaDataEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.audioVersion, audioVersion) || other.audioVersion == audioVersion)&&(identical(other.lyricsVersion, lyricsVersion) || other.lyricsVersion == lyricsVersion)&&(identical(other.coverVersion, coverVersion) || other.coverVersion == coverVersion)&&(identical(other.audioSha256, audioSha256) || other.audioSha256 == audioSha256)&&(identical(other.lyricsSha256, lyricsSha256) || other.lyricsSha256 == lyricsSha256)&&(identical(other.coverSha256, coverSha256) || other.coverSha256 == coverSha256)&&(identical(other.audioBytes, audioBytes) || other.audioBytes == audioBytes)&&(identical(other.lyricsBytes, lyricsBytes) || other.lyricsBytes == lyricsBytes)&&(identical(other.coverBytes, coverBytes) || other.coverBytes == coverBytes)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,audioVersion,lyricsVersion,coverVersion,audioSha256,lyricsSha256,coverSha256,audioBytes,lyricsBytes,coverBytes,updatedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,audioVersion,lyricsVersion,coverVersion,audioSha256,lyricsSha256,coverSha256,audioBytes,lyricsBytes,coverBytes,updatedAt);
+}
 
 @override
 String toString() {
-  return 'ChantMetaDataEntity(id: $id, audioVersion: $audioVersion, lyricsVersion: $lyricsVersion, coverVersion: $coverVersion, audioSha256: $audioSha256, lyricsSha256: $lyricsSha256, coverSha256: $coverSha256, audioBytes: $audioBytes, lyricsBytes: $lyricsBytes, coverBytes: $coverBytes, updatedAt: $updatedAt)';
+    return 'ChantMetaDataEntity(id: $id, audioVersion: $audioVersion, lyricsVersion: $lyricsVersion, coverVersion: $coverVersion, audioSha256: $audioSha256, lyricsSha256: $lyricsSha256, coverSha256: $coverSha256, audioBytes: $audioBytes, lyricsBytes: $lyricsBytes, coverBytes: $coverBytes, updatedAt: $updatedAt)';
 }
 
 

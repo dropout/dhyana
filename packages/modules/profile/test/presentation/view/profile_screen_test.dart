@@ -8,122 +8,120 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 import 'package:provider/provider.dart';
 
+import '../../profile_mock_definitions.dart';
+import '../../profile_test_helper.dart';
 
 void main() {
-
   group('ProfileScreen', () {
-    late MockProfileStateCubit mockProfileCubit;
+    late MockProfileCubit mockProfileCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockResourceResolver mockResourceResolver;
 
     setUp(() async {
-      mockProfileCubit = MockProfileStateCubit();
+      mockProfileCubit = MockProfileCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
       mockResourceResolver = MockResourceResolver();
 
-      
-
       when(() => mockServices.crashlyticsService)
-        .thenReturn(mockCrashlyticsService);
-      
+          .thenReturn(mockCrashlyticsService);
+
       when(() => mockServices.resourceResolver)
-        .thenReturn(mockResourceResolver);      
-      when(
-        () => mockResourceResolver.resolveStoragePath(any()),
-      ).thenAnswer((_) async => 'https://example.com/profile.jpg');
-
+          .thenReturn(mockResourceResolver);
+      when(() => mockResourceResolver.resolveStoragePath(any()))
+          .thenAnswer((_) async => 'https://example.com/profile.jpg');
     });
 
-    testWidgets('can load Profile without constructor argument given', (WidgetTester tester) async {
-
-      when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loading());
-
-      await tester.pumpWidget(
-          Provider<Services>(
-              create: (context) => mockServices,
-              child: withAllContextProviders(
-                  MultiBlocProvider(
-                    providers: [
-                      BlocProvider<MockProfileStateCubit>(
-                        create: (context) => mockProfileCubit,
-                      ),
-                    ],
-                    child: const ProfileScreen(
-                      profileId: 'test_profile_id',
-                    ),
-                  )
-              )
-          )
-      );
-
-      await tester.pump(Duration(milliseconds: 1000));
-
-      verify(() => mockProfileCubit.loadProfile(
-        'test_profile_id'
-      )).called(1);
-    });
-
-    testWidgets('does not load Profile when its given as a parameter in the constructor', (WidgetTester tester) async {
-
-      when(() => mockProfileCubit.state)
-        .thenReturn(const ProfileState.initial());
-
-      final Profile profileStub = Faker().createProfile();
+    testWidgets('can load Profile without constructor argument given', (
+      WidgetTester tester,
+    ) async {
+      when(() => mockProfileCubit.loadProfile(any())).thenAnswer((_) async {});
+      when(() => mockProfileCubit.state).thenReturn(ProfileState.loading());
 
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: withAllContextProviders(
-              MultiBlocProvider(
+          child: ProfileTestHelper.withLocalizationProvider(
+            MultiBlocProvider(
               providers: [
-                BlocProvider<ProfileStateCubit>(
+                BlocProvider<ProfileCubit>(
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: ProfileScreen(
-                profileId: 'test_profile_id',
-                profile: profileStub,
-              ),
-            )
-          )
-        )
+              child: const ProfileScreen(profileId: 'test_profile_id'),
+            ),
+          ),
+        ),
       );
-      await tester.pump();
 
-      // when profile is given as a parameter
-      // it does not load the profile, just stores it in the bloc
-      verify(() => mockProfileCubit.loadProfile(
-        'test_profile_id',
-        profile: profileStub,
-      )).called(1);
+      await tester.pump(Duration(milliseconds: 1000));
+
+      verify(() => mockProfileCubit.loadProfile('test_profile_id')).called(1);
     });
 
-    testWidgets('can display a loading state', (WidgetTester tester) async {
+    testWidgets(
+      'does not load Profile when its given as a parameter in the constructor',
+      (WidgetTester tester) async {
+        final Profile profileStub = Faker().createProfile();
 
-      when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loading());
+        when(() => mockProfileCubit.loadProfile(any(), profile: profileStub))
+            .thenAnswer((_) async {});
+        when(() => mockProfileCubit.state)
+            .thenReturn(const ProfileState.initial());
+
+        await tester.pumpWidget(
+          Provider<Services>(
+            create: (context) => mockServices,
+            child: withAllContextProviders(
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider<ProfileCubit>(
+                    create: (context) => mockProfileCubit,
+                  ),
+                ],
+                child: ProfileScreen(
+                  profileId: 'test_profile_id',
+                  profile: profileStub,
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.pump();
+
+        // when profile is given as a parameter
+        // it does not load the profile, just stores it in the bloc
+        verify(
+          () => mockProfileCubit.loadProfile(
+            'test_profile_id',
+            profile: profileStub,
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets('can display a loading state', (WidgetTester tester) async {
+      when(() => mockProfileCubit.loadProfile(any())).thenAnswer((_) async {});
+      when(() => mockProfileCubit.state).thenReturn(ProfileState.loading());
 
       await tester.pumpWidget(
-          Provider<Services>(
-              create: (context) => mockServices,
-              child: withAllContextProviders(
-                  MultiBlocProvider(
-                    providers: [
-                      BlocProvider<ProfileStateCubit>(
-                        create: (context) => mockProfileCubit,
-                      ),
-                    ],
-                    child: const ProfileScreen(
-                      profileId: 'test_profile_id',
-                    ),
-                  )
-              )
-          )
+        Provider<Services>(
+          create: (context) => mockServices,
+          child: ProfileTestHelper.withLocalizationProvider(
+            MultiBlocProvider(
+              providers: [
+                BlocProvider<ProfileCubit>(
+                  create: (context) => mockProfileCubit,
+                ),
+              ],
+              child: const ProfileScreen(profileId: 'test_profile_id'),
+            ),
+          ),
+        ),
       );
       await tester.pump(Duration(milliseconds: 1000));
 
@@ -131,65 +129,57 @@ void main() {
     });
 
     testWidgets('can display an error state', (WidgetTester tester) async {
-
-      when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.error());
+      when(() => mockProfileCubit.loadProfile(any())).thenAnswer((_) async {});
+      when(() => mockProfileCubit.state).thenReturn(ProfileState.error());
 
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: withAllContextProviders(
+          child: ProfileTestHelper.withLocalizationProvider(
             MultiBlocProvider(
               providers: [
-                BlocProvider<ProfileStateCubit>(
+                BlocProvider<ProfileCubit>(
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const ProfileScreen(
-                profileId: 'test_profile_id',
-              ),
-            )
-          )
-        )
+              child: const ProfileScreen(profileId: 'test_profile_id'),
+            ),
+          ),
+        ),
       );
 
       expect(find.byType(AppErrorDisplay), findsOneWidget);
     });
 
     testWidgets('can display loaded state', (WidgetTester tester) async {
-
       final Profile profileStub = Faker().createProfile();
 
+      when(() => mockProfileCubit.loadProfile(any())).thenAnswer((_) async {});
       when(() => mockProfileCubit.state)
-        .thenReturn(ProfileState.loaded(
-          profile: profileStub,
-        ));
+        .thenReturn(ProfileState.loaded(profile: profileStub));
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
-          Provider<Services>(
-            create: (context) => mockServices,
-            child: withAllContextProviders(
-              MultiBlocProvider(
-                providers: [                  
-                  BlocProvider<ProfileStateCubit>(
-                    create: (context) => mockProfileCubit,
+      await tester
+          .runAsync(() async {
+            await tester.pumpWidget(
+              Provider<Services>(
+                create: (context) => mockServices,
+                child: ProfileTestHelper.withLocalizationProvider(
+                  MultiBlocProvider(
+                    providers: [
+                      BlocProvider<ProfileCubit>(
+                        create: (context) => mockProfileCubit,
+                      ),
+                    ],
+                    child: const ProfileScreen(profileId: 'test_profile_id'),
                   ),
-                ],
-                child: const ProfileScreen(
-                  profileId: 'test_profile_id',
                 ),
-              )
-            )
-          )
-        );
-        await tester.pumpAndSettle();
-      }).then((_) async {
-        expect(find.byType(ProfileView), findsOneWidget);
-      });
-
+              ),
+            );
+            await tester.pumpAndSettle();
+          })
+          .then((_) async {
+            expect(find.byType(ProfileView), findsOneWidget);
+          });
     });
-
   });
-
 }

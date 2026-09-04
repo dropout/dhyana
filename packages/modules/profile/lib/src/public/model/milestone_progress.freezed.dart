@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'milestone_progress.dart';
@@ -9,6 +9,7 @@ part of 'milestone_progress.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $MilestoneProgressCopyWith<MilestoneProgress> get copyWith => _$MilestoneProgres
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MilestoneProgress&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.targetDaysCount, targetDaysCount) || other.targetDaysCount == targetDaysCount)&&const DeepCollectionEquality().equals(other.sessions, sessions));
+  final _this = this as MilestoneProgress;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MilestoneProgress&&(identical(other.completedDaysCount, _this.completedDaysCount) || other.completedDaysCount == _this.completedDaysCount)&&(identical(other.targetDaysCount, _this.targetDaysCount) || other.targetDaysCount == _this.targetDaysCount)&&const DeepCollectionEquality().equals(other.sessions, _this.sessions));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,completedDaysCount,targetDaysCount,const DeepCollectionEquality().hash(sessions));
+int get hashCode {
+  final _this = this as MilestoneProgress;
+  return Object.hash(runtimeType,_this.completedDaysCount,_this.targetDaysCount,const DeepCollectionEquality().hash(_this.sessions));
+}
 
 @override
 String toString() {
-  return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
+  final _this = this as MilestoneProgress;
+  return 'MilestoneProgress(completedDaysCount: ${_this.completedDaysCount}, targetDaysCount: ${_this.targetDaysCount}, sessions: ${_this.sessions})';
 }
 
 
@@ -63,7 +69,7 @@ class _$MilestoneProgressCopyWithImpl<$Res>
 /// Create a copy of MilestoneProgress
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? completedDaysCount = null,Object? targetDaysCount = null,Object? sessions = null,}) {
-  return _then(_self.copyWith(
+  return _then(MilestoneProgress(
 completedDaysCount: null == completedDaysCount ? _self.completedDaysCount : completedDaysCount // ignore: cast_nullable_to_non_nullable
 as int,targetDaysCount: null == targetDaysCount ? _self.targetDaysCount : targetDaysCount // ignore: cast_nullable_to_non_nullable
 as int,sessions: null == sessions ? _self.sessions : sessions // ignore: cast_nullable_to_non_nullable
@@ -202,7 +208,7 @@ return $default(_that.completedDaysCount,_that.targetDaysCount,_that.sessions);c
 
 
 class _MilestoneProgress extends MilestoneProgress {
-  const _MilestoneProgress({this.completedDaysCount = 0, this.targetDaysCount = 7, final  List<ProfileSession> sessions = const []}): _sessions = sessions,super._();
+  const _MilestoneProgress({this.completedDaysCount = 0, this.targetDaysCount = 7,  List<ProfileSession> sessions = const []}): _sessions = sessions,super._();
   
 
 @override@JsonKey() final  int completedDaysCount;
@@ -225,16 +231,18 @@ _$MilestoneProgressCopyWith<_MilestoneProgress> get copyWith => __$MilestoneProg
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MilestoneProgress&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.targetDaysCount, targetDaysCount) || other.targetDaysCount == targetDaysCount)&&const DeepCollectionEquality().equals(other._sessions, _sessions));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MilestoneProgress&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.targetDaysCount, targetDaysCount) || other.targetDaysCount == targetDaysCount)&&const DeepCollectionEquality().equals(other.sessions, _sessions));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,completedDaysCount,targetDaysCount,const DeepCollectionEquality().hash(_sessions));
+int get hashCode {
+    return Object.hash(runtimeType,completedDaysCount,targetDaysCount,const DeepCollectionEquality().hash(_sessions));
+}
 
 @override
 String toString() {
-  return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
+    return 'MilestoneProgress(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
 }
 
 

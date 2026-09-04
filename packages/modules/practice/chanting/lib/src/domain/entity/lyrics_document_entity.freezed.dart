@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'lyrics_document_entity.dart';
@@ -9,6 +9,7 @@ part of 'lyrics_document_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $LyricsDocumentEntityCopyWith<LyricsDocumentEntity> get copyWith => _$LyricsDocu
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as LyricsDocumentEntity;
   properties
     ..add(DiagnosticsProperty('type', 'LyricsDocumentEntity'))
-    ..add(DiagnosticsProperty('lines', lines));
+    ..add(DiagnosticsProperty('lines', _this.lines));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LyricsDocumentEntity&&const DeepCollectionEquality().equals(other.lines, lines));
+  final _this = this as LyricsDocumentEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LyricsDocumentEntity&&const DeepCollectionEquality().equals(other.lines, _this.lines));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(lines));
+int get hashCode {
+  final _this = this as LyricsDocumentEntity;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.lines));
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'LyricsDocumentEntity(lines: $lines)';
+  final _this = this as LyricsDocumentEntity;
+  return 'LyricsDocumentEntity(lines: ${_this.lines})';
 }
 
 
@@ -72,7 +79,7 @@ class _$LyricsDocumentEntityCopyWithImpl<$Res>
 /// Create a copy of LyricsDocumentEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? lines = null,}) {
-  return _then(_self.copyWith(
+  return _then(LyricsDocumentEntity(
 lines: null == lines ? _self.lines : lines // ignore: cast_nullable_to_non_nullable
 as List<LyricsLineEntity>,
   ));
@@ -209,7 +216,7 @@ return $default(_that.lines);case _:
 @JsonSerializable()
 
 class _LyricsDocumentEntity extends LyricsDocumentEntity with DiagnosticableTreeMixin {
-  const _LyricsDocumentEntity({required final  List<LyricsLineEntity> lines}): _lines = lines,super._();
+  const _LyricsDocumentEntity({required  List<LyricsLineEntity> lines}): _lines = lines,super._();
   factory _LyricsDocumentEntity.fromJson(Map<String, dynamic> json) => _$LyricsDocumentEntityFromJson(json);
 
  final  List<LyricsLineEntity> _lines;
@@ -232,23 +239,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'LyricsDocumentEntity'))
     ..add(DiagnosticsProperty('lines', lines));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LyricsDocumentEntity&&const DeepCollectionEquality().equals(other._lines, _lines));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LyricsDocumentEntity&&const DeepCollectionEquality().equals(other.lines, _lines));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_lines));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_lines));
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'LyricsDocumentEntity(lines: $lines)';
+    return 'LyricsDocumentEntity(lines: $lines)';
 }
 
 

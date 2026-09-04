@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cache_validation_result_entity.dart';
@@ -9,6 +9,7 @@ part of 'cache_validation_result_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $CacheValidationResultEntityCopyWith<CacheValidationResultEntity> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CacheValidationResultEntity&&(identical(other.chant, chant) || other.chant == chant)&&(identical(other.isAudioCacheValid, isAudioCacheValid) || other.isAudioCacheValid == isAudioCacheValid)&&(identical(other.isLyricsCacheValid, isLyricsCacheValid) || other.isLyricsCacheValid == isLyricsCacheValid)&&(identical(other.audioCachePath, audioCachePath) || other.audioCachePath == audioCachePath)&&(identical(other.lyricsCachePath, lyricsCachePath) || other.lyricsCachePath == lyricsCachePath)&&(identical(other.audioCacheEntry, audioCacheEntry) || other.audioCacheEntry == audioCacheEntry)&&(identical(other.lyricsCacheEntry, lyricsCacheEntry) || other.lyricsCacheEntry == lyricsCacheEntry));
+  final _this = this as CacheValidationResultEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CacheValidationResultEntity&&(identical(other.chant, _this.chant) || other.chant == _this.chant)&&(identical(other.isAudioCacheValid, _this.isAudioCacheValid) || other.isAudioCacheValid == _this.isAudioCacheValid)&&(identical(other.isLyricsCacheValid, _this.isLyricsCacheValid) || other.isLyricsCacheValid == _this.isLyricsCacheValid)&&(identical(other.audioCachePath, _this.audioCachePath) || other.audioCachePath == _this.audioCachePath)&&(identical(other.lyricsCachePath, _this.lyricsCachePath) || other.lyricsCachePath == _this.lyricsCachePath)&&(identical(other.audioCacheEntry, _this.audioCacheEntry) || other.audioCacheEntry == _this.audioCacheEntry)&&(identical(other.lyricsCacheEntry, _this.lyricsCacheEntry) || other.lyricsCacheEntry == _this.lyricsCacheEntry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,chant,isAudioCacheValid,isLyricsCacheValid,audioCachePath,lyricsCachePath,audioCacheEntry,lyricsCacheEntry);
+int get hashCode {
+  final _this = this as CacheValidationResultEntity;
+  return Object.hash(runtimeType,_this.chant,_this.isAudioCacheValid,_this.isLyricsCacheValid,_this.audioCachePath,_this.lyricsCachePath,_this.audioCacheEntry,_this.lyricsCacheEntry);
+}
 
 @override
 String toString() {
-  return 'CacheValidationResultEntity(chant: $chant, isAudioCacheValid: $isAudioCacheValid, isLyricsCacheValid: $isLyricsCacheValid, audioCachePath: $audioCachePath, lyricsCachePath: $lyricsCachePath, audioCacheEntry: $audioCacheEntry, lyricsCacheEntry: $lyricsCacheEntry)';
+  final _this = this as CacheValidationResultEntity;
+  return 'CacheValidationResultEntity(chant: ${_this.chant}, isAudioCacheValid: ${_this.isAudioCacheValid}, isLyricsCacheValid: ${_this.isLyricsCacheValid}, audioCachePath: ${_this.audioCachePath}, lyricsCachePath: ${_this.lyricsCachePath}, audioCacheEntry: ${_this.audioCacheEntry}, lyricsCacheEntry: ${_this.lyricsCacheEntry})';
 }
 
 
@@ -66,7 +72,7 @@ class _$CacheValidationResultEntityCopyWithImpl<$Res>
 /// Create a copy of CacheValidationResultEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? chant = null,Object? isAudioCacheValid = null,Object? isLyricsCacheValid = null,Object? audioCachePath = freezed,Object? lyricsCachePath = freezed,Object? audioCacheEntry = freezed,Object? lyricsCacheEntry = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(CacheValidationResultEntity(
 chant: null == chant ? _self.chant : chant // ignore: cast_nullable_to_non_nullable
 as ChantEntity,isAudioCacheValid: null == isAudioCacheValid ? _self.isAudioCacheValid : isAudioCacheValid // ignore: cast_nullable_to_non_nullable
 as bool,isLyricsCacheValid: null == isLyricsCacheValid ? _self.isLyricsCacheValid : isLyricsCacheValid // ignore: cast_nullable_to_non_nullable
@@ -266,16 +272,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CacheValidationResultEntity&&(identical(other.chant, chant) || other.chant == chant)&&(identical(other.isAudioCacheValid, isAudioCacheValid) || other.isAudioCacheValid == isAudioCacheValid)&&(identical(other.isLyricsCacheValid, isLyricsCacheValid) || other.isLyricsCacheValid == isLyricsCacheValid)&&(identical(other.audioCachePath, audioCachePath) || other.audioCachePath == audioCachePath)&&(identical(other.lyricsCachePath, lyricsCachePath) || other.lyricsCachePath == lyricsCachePath)&&(identical(other.audioCacheEntry, audioCacheEntry) || other.audioCacheEntry == audioCacheEntry)&&(identical(other.lyricsCacheEntry, lyricsCacheEntry) || other.lyricsCacheEntry == lyricsCacheEntry));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CacheValidationResultEntity&&(identical(other.chant, chant) || other.chant == chant)&&(identical(other.isAudioCacheValid, isAudioCacheValid) || other.isAudioCacheValid == isAudioCacheValid)&&(identical(other.isLyricsCacheValid, isLyricsCacheValid) || other.isLyricsCacheValid == isLyricsCacheValid)&&(identical(other.audioCachePath, audioCachePath) || other.audioCachePath == audioCachePath)&&(identical(other.lyricsCachePath, lyricsCachePath) || other.lyricsCachePath == lyricsCachePath)&&(identical(other.audioCacheEntry, audioCacheEntry) || other.audioCacheEntry == audioCacheEntry)&&(identical(other.lyricsCacheEntry, lyricsCacheEntry) || other.lyricsCacheEntry == lyricsCacheEntry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,chant,isAudioCacheValid,isLyricsCacheValid,audioCachePath,lyricsCachePath,audioCacheEntry,lyricsCacheEntry);
+int get hashCode {
+    return Object.hash(runtimeType,chant,isAudioCacheValid,isLyricsCacheValid,audioCachePath,lyricsCachePath,audioCacheEntry,lyricsCacheEntry);
+}
 
 @override
 String toString() {
-  return 'CacheValidationResultEntity(chant: $chant, isAudioCacheValid: $isAudioCacheValid, isLyricsCacheValid: $isLyricsCacheValid, audioCachePath: $audioCachePath, lyricsCachePath: $lyricsCachePath, audioCacheEntry: $audioCacheEntry, lyricsCacheEntry: $lyricsCacheEntry)';
+    return 'CacheValidationResultEntity(chant: $chant, isAudioCacheValid: $isAudioCacheValid, isLyricsCacheValid: $isLyricsCacheValid, audioCachePath: $audioCachePath, lyricsCachePath: $lyricsCachePath, audioCacheEntry: $audioCacheEntry, lyricsCacheEntry: $lyricsCacheEntry)';
 }
 
 

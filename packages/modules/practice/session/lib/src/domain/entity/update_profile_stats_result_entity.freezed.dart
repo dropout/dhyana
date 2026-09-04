@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'update_profile_stats_result_entity.dart';
@@ -9,6 +9,7 @@ part of 'update_profile_stats_result_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -24,23 +25,29 @@ $UpdateProfileStatsResultEntityCopyWith<UpdateProfileStatsResultEntity> get copy
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as UpdateProfileStatsResultEntity;
   properties
     ..add(DiagnosticsProperty('type', 'UpdateProfileStatsResultEntity'))
-    ..add(DiagnosticsProperty('oldProfile', oldProfile))..add(DiagnosticsProperty('updatedProfile', updatedProfile))..add(DiagnosticsProperty('session', session));
+    ..add(DiagnosticsProperty('oldProfile', _this.oldProfile))..add(DiagnosticsProperty('updatedProfile', _this.updatedProfile))..add(DiagnosticsProperty('session', _this.session));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProfileStatsResultEntity&&(identical(other.oldProfile, oldProfile) || other.oldProfile == oldProfile)&&(identical(other.updatedProfile, updatedProfile) || other.updatedProfile == updatedProfile)&&(identical(other.session, session) || other.session == session));
+  final _this = this as UpdateProfileStatsResultEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProfileStatsResultEntity&&(identical(other.oldProfile, _this.oldProfile) || other.oldProfile == _this.oldProfile)&&(identical(other.updatedProfile, _this.updatedProfile) || other.updatedProfile == _this.updatedProfile)&&(identical(other.session, _this.session) || other.session == _this.session));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,oldProfile,updatedProfile,session);
+int get hashCode {
+  final _this = this as UpdateProfileStatsResultEntity;
+  return Object.hash(runtimeType,_this.oldProfile,_this.updatedProfile,_this.session);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'UpdateProfileStatsResultEntity(oldProfile: $oldProfile, updatedProfile: $updatedProfile, session: $session)';
+  final _this = this as UpdateProfileStatsResultEntity;
+  return 'UpdateProfileStatsResultEntity(oldProfile: ${_this.oldProfile}, updatedProfile: ${_this.updatedProfile}, session: ${_this.session})';
 }
 
 
@@ -69,7 +76,7 @@ class _$UpdateProfileStatsResultEntityCopyWithImpl<$Res>
 /// Create a copy of UpdateProfileStatsResultEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? oldProfile = null,Object? updatedProfile = null,Object? session = null,}) {
-  return _then(_self.copyWith(
+  return _then(UpdateProfileStatsResultEntity(
 oldProfile: null == oldProfile ? _self.oldProfile : oldProfile // ignore: cast_nullable_to_non_nullable
 as Profile,updatedProfile: null == updatedProfile ? _self.updatedProfile : updatedProfile // ignore: cast_nullable_to_non_nullable
 as Profile,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
@@ -251,23 +258,25 @@ _$UpdateProfileStatsResultEntityCopyWith<_UpdateProfileStatsResultEntity> get co
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'UpdateProfileStatsResultEntity'))
     ..add(DiagnosticsProperty('oldProfile', oldProfile))..add(DiagnosticsProperty('updatedProfile', updatedProfile))..add(DiagnosticsProperty('session', session));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateProfileStatsResultEntity&&(identical(other.oldProfile, oldProfile) || other.oldProfile == oldProfile)&&(identical(other.updatedProfile, updatedProfile) || other.updatedProfile == updatedProfile)&&(identical(other.session, session) || other.session == session));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateProfileStatsResultEntity&&(identical(other.oldProfile, oldProfile) || other.oldProfile == oldProfile)&&(identical(other.updatedProfile, updatedProfile) || other.updatedProfile == updatedProfile)&&(identical(other.session, session) || other.session == session));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,oldProfile,updatedProfile,session);
+int get hashCode {
+    return Object.hash(runtimeType,oldProfile,updatedProfile,session);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'UpdateProfileStatsResultEntity(oldProfile: $oldProfile, updatedProfile: $updatedProfile, session: $session)';
+    return 'UpdateProfileStatsResultEntity(oldProfile: $oldProfile, updatedProfile: $updatedProfile, session: $session)';
 }
 
 

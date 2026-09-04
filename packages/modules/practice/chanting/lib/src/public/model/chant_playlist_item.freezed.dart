@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'chant_playlist_item.dart';
@@ -9,14 +9,13 @@ part of 'chant_playlist_item.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ChantPlaylistItem {
 
-// This is a unique identifier for this item. This is used as a key in the list
-// so that multiple instances of the same chant can be added to the list and reordered.
  String get id;/// The identifier of the chant. This is used to look up the chant in the database.
  String get chantId;/// The name of the chant.
  String get name;/// The blur hash of the chant's cover image.
@@ -35,16 +34,21 @@ $ChantPlaylistItemCopyWith<ChantPlaylistItem> get copyWith => _$ChantPlaylistIte
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantPlaylistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.chantId, chantId) || other.chantId == chantId)&&(identical(other.name, name) || other.name == name)&&(identical(other.blurHash, blurHash) || other.blurHash == blurHash)&&(identical(other.order, order) || other.order == order)&&(identical(other.duration, duration) || other.duration == duration));
+  final _this = this as ChantPlaylistItem;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantPlaylistItem&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.chantId, _this.chantId) || other.chantId == _this.chantId)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.blurHash, _this.blurHash) || other.blurHash == _this.blurHash)&&(identical(other.order, _this.order) || other.order == _this.order)&&(identical(other.duration, _this.duration) || other.duration == _this.duration));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,chantId,name,blurHash,order,duration);
+int get hashCode {
+  final _this = this as ChantPlaylistItem;
+  return Object.hash(runtimeType,_this.id,_this.chantId,_this.name,_this.blurHash,_this.order,_this.duration);
+}
 
 @override
 String toString() {
-  return 'ChantPlaylistItem(id: $id, chantId: $chantId, name: $name, blurHash: $blurHash, order: $order, duration: $duration)';
+  final _this = this as ChantPlaylistItem;
+  return 'ChantPlaylistItem(id: ${_this.id}, chantId: ${_this.chantId}, name: ${_this.name}, blurHash: ${_this.blurHash}, order: ${_this.order}, duration: ${_this.duration})';
 }
 
 
@@ -73,7 +77,7 @@ class _$ChantPlaylistItemCopyWithImpl<$Res>
 /// Create a copy of ChantPlaylistItem
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? chantId = null,Object? name = null,Object? blurHash = null,Object? order = null,Object? duration = null,}) {
-  return _then(_self.copyWith(
+  return _then(ChantPlaylistItem(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,chantId: null == chantId ? _self.chantId : chantId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -218,8 +222,6 @@ class _ChantPlaylistItem extends ChantPlaylistItem {
   const _ChantPlaylistItem({required this.id, required this.chantId, required this.name, required this.blurHash, required this.order, required this.duration}): super._();
   factory _ChantPlaylistItem.fromJson(Map<String, dynamic> json) => _$ChantPlaylistItemFromJson(json);
 
-// This is a unique identifier for this item. This is used as a key in the list
-// so that multiple instances of the same chant can be added to the list and reordered.
 @override final  String id;
 /// The identifier of the chant. This is used to look up the chant in the database.
 @override final  String chantId;
@@ -245,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantPlaylistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.chantId, chantId) || other.chantId == chantId)&&(identical(other.name, name) || other.name == name)&&(identical(other.blurHash, blurHash) || other.blurHash == blurHash)&&(identical(other.order, order) || other.order == order)&&(identical(other.duration, duration) || other.duration == duration));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantPlaylistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.chantId, chantId) || other.chantId == chantId)&&(identical(other.name, name) || other.name == name)&&(identical(other.blurHash, blurHash) || other.blurHash == blurHash)&&(identical(other.order, order) || other.order == order)&&(identical(other.duration, duration) || other.duration == duration));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,chantId,name,blurHash,order,duration);
+int get hashCode {
+    return Object.hash(runtimeType,id,chantId,name,blurHash,order,duration);
+}
 
 @override
 String toString() {
-  return 'ChantPlaylistItem(id: $id, chantId: $chantId, name: $name, blurHash: $blurHash, order: $order, duration: $duration)';
+    return 'ChantPlaylistItem(id: $id, chantId: $chantId, name: $name, blurHash: $blurHash, order: $order, duration: $duration)';
 }
 
 

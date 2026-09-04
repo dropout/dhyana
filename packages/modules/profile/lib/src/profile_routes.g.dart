@@ -17,6 +17,7 @@ List<RouteBase> get $appRoutes => [
 RouteBase get $profileWizardRoute => GoRouteData.$route(
   path: '/profileWizard/:profileId',
   name: 'PROFILE_WIZARD',
+  hasOverriddenOnExit: false,
   factory: $ProfileWizardRoute._fromState,
 );
 
@@ -48,14 +49,13 @@ mixin $ProfileWizardRoute on GoRouteData {
 RouteBase get $profileRoute => GoRouteData.$route(
   path: '/profile/:profileId',
   name: 'PROFILE',
+  hasOverriddenOnExit: false,
   factory: $ProfileRoute._fromState,
 );
 
 mixin $ProfileRoute on GoRouteData {
-  static ProfileRoute _fromState(GoRouterState state) => ProfileRoute(
-    profileId: state.pathParameters['profileId']!,
-    $extra: state.extra as Object?,
-  );
+  static ProfileRoute _fromState(GoRouterState state) =>
+      ProfileRoute(profileId: state.pathParameters['profileId']!);
 
   ProfileRoute get _self => this as ProfileRoute;
 
@@ -64,33 +64,37 @@ mixin $ProfileRoute on GoRouteData {
       GoRouteData.$location('/profile/${Uri.encodeComponent(_self.profileId)}');
 
   @override
-  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+  void go(BuildContext context) => context.go(location);
 
   @override
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: _self.$extra);
+      context.pushReplacement(location);
 
   @override
-  void replace(BuildContext context) =>
-      context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $profileEditRoute => GoRouteData.$route(
   path: '/editProfile',
   name: 'EDIT_PROFILE',
+  hasOverriddenOnExit: false,
   factory: $ProfileEditRoute._fromState,
 );
 
 mixin $ProfileEditRoute on GoRouteData {
   static ProfileEditRoute _fromState(GoRouterState state) =>
-      const ProfileEditRoute();
+      ProfileEditRoute(profileId: state.uri.queryParameters['profile-id']!);
+
+  ProfileEditRoute get _self => this as ProfileEditRoute;
 
   @override
-  String get location => GoRouteData.$location('/editProfile');
+  String get location => GoRouteData.$location(
+    '/editProfile',
+    queryParams: {'profile-id': _self.profileId},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -109,15 +113,21 @@ mixin $ProfileEditRoute on GoRouteData {
 RouteBase get $profileDeleteRoute => GoRouteData.$route(
   path: '/deleteProfile',
   name: 'DELETE_PROFILE',
+  hasOverriddenOnExit: false,
   factory: $ProfileDeleteRoute._fromState,
 );
 
 mixin $ProfileDeleteRoute on GoRouteData {
   static ProfileDeleteRoute _fromState(GoRouterState state) =>
-      const ProfileDeleteRoute();
+      ProfileDeleteRoute(profileId: state.uri.queryParameters['profile-id']!);
+
+  ProfileDeleteRoute get _self => this as ProfileDeleteRoute;
 
   @override
-  String get location => GoRouteData.$location('/deleteProfile');
+  String get location => GoRouteData.$location(
+    '/deleteProfile',
+    queryParams: {'profile-id': _self.profileId},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -136,6 +146,7 @@ mixin $ProfileDeleteRoute on GoRouteData {
 RouteBase get $profileSettingsRoute => GoRouteData.$route(
   path: '/profileSettings/:profileId',
   name: 'PROFILE_SETTINGS',
+  hasOverriddenOnExit: false,
   factory: $ProfileSettingsRoute._fromState,
 );
 

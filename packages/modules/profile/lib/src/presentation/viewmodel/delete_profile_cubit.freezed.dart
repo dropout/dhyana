@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'delete_profile_cubit.dart';
@@ -9,6 +9,7 @@ part of 'delete_profile_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$DeleteProfileState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'DeleteProfileState()';
+    return 'DeleteProfileState()';
 }
 
 
@@ -203,7 +204,7 @@ class DeleteProfileInitialState extends DeleteProfileState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileInitialState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileInitialState);
 }
 
 
@@ -212,7 +213,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'DeleteProfileState.initial()';
+    return 'DeleteProfileState.initial()';
 }
 
 
@@ -235,7 +236,7 @@ class DeleteProfileLoadingState extends DeleteProfileState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileLoadingState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileLoadingState);
 }
 
 
@@ -244,7 +245,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'DeleteProfileState.loading()';
+    return 'DeleteProfileState.loading()';
 }
 
 
@@ -267,7 +268,7 @@ class DeleteProfileErrorState extends DeleteProfileState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileErrorState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileErrorState);
 }
 
 
@@ -276,7 +277,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'DeleteProfileState.error()';
+    return 'DeleteProfileState.error()';
 }
 
 
@@ -299,7 +300,7 @@ class DeleteProfileCompletedState extends DeleteProfileState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileCompletedState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileCompletedState);
 }
 
 
@@ -308,7 +309,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'DeleteProfileState.completed()';
+    return 'DeleteProfileState.completed()';
 }
 
 
@@ -331,7 +332,7 @@ class DeleteProfileAuthRequiredState extends DeleteProfileState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileAuthRequiredState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteProfileAuthRequiredState);
 }
 
 
@@ -340,7 +341,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'DeleteProfileState.authRequired()';
+    return 'DeleteProfileState.authRequired()';
 }
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_screen_cubit.dart';
@@ -9,6 +9,7 @@ part of 'home_screen_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $HomeScreenStateCopyWith<HomeScreenState> get copyWith => _$HomeScreenStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeScreenState&&(identical(other.sessionType, sessionType) || other.sessionType == sessionType));
+  final _this = this as HomeScreenState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeScreenState&&(identical(other.sessionType, _this.sessionType) || other.sessionType == _this.sessionType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionType);
+int get hashCode {
+  final _this = this as HomeScreenState;
+  return Object.hash(runtimeType,_this.sessionType);
+}
 
 @override
 String toString() {
-  return 'HomeScreenState(sessionType: $sessionType)';
+  final _this = this as HomeScreenState;
+  return 'HomeScreenState(sessionType: ${_this.sessionType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$HomeScreenStateCopyWithImpl<$Res>
 /// Create a copy of HomeScreenState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? sessionType = null,}) {
-  return _then(_self.copyWith(
+  return _then(HomeScreenState(
 sessionType: null == sessionType ? _self.sessionType : sessionType // ignore: cast_nullable_to_non_nullable
 as HomeScreenViewState,
   ));
@@ -215,16 +221,18 @@ _$HomeScreenStateCopyWith<_HomeScreenState> get copyWith => __$HomeScreenStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeScreenState&&(identical(other.sessionType, sessionType) || other.sessionType == sessionType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeScreenState&&(identical(other.sessionType, sessionType) || other.sessionType == sessionType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionType);
+int get hashCode {
+    return Object.hash(runtimeType,sessionType);
+}
 
 @override
 String toString() {
-  return 'HomeScreenState(sessionType: $sessionType)';
+    return 'HomeScreenState(sessionType: $sessionType)';
 }
 
 

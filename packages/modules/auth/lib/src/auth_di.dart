@@ -1,5 +1,5 @@
 import 'package:auth/src/domain/usecase/sign_in_with_auth_provider_use_case.dart';
-import 'package:auth/src/presentation/viewmodel/auth_cubit.dart';
+import 'package:auth/src/public/viewmodel/auth_cubit.dart';
 import 'package:core/core.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:get_it/get_it.dart';

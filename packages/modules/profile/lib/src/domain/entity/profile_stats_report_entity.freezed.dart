@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_stats_report_entity.dart';
@@ -9,6 +9,7 @@ part of 'profile_stats_report_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $ProfileStatsReportEntityCopyWith<ProfileStatsReportEntity> get copyWith => _$Pr
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as ProfileStatsReportEntity;
   properties
     ..add(DiagnosticsProperty('type', 'ProfileStatsReportEntity'))
-    ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays))..add(DiagnosticsProperty('milestoneProgress', milestoneProgress))..add(DiagnosticsProperty('milestoneCount', milestoneCount))..add(DiagnosticsProperty('completedMinutesCount', completedMinutesCount))..add(DiagnosticsProperty('completedSessionsCount', completedSessionsCount))..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))..add(DiagnosticsProperty('firstSessionDate', firstSessionDate))..add(DiagnosticsProperty('lastSessionDate', lastSessionDate));
+    ..add(DiagnosticsProperty('consecutiveDays', _this.consecutiveDays))..add(DiagnosticsProperty('milestoneProgress', _this.milestoneProgress))..add(DiagnosticsProperty('milestoneCount', _this.milestoneCount))..add(DiagnosticsProperty('completedMinutesCount', _this.completedMinutesCount))..add(DiagnosticsProperty('completedSessionsCount', _this.completedSessionsCount))..add(DiagnosticsProperty('completedDaysCount', _this.completedDaysCount))..add(DiagnosticsProperty('firstSessionDate', _this.firstSessionDate))..add(DiagnosticsProperty('lastSessionDate', _this.lastSessionDate));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileStatsReportEntity&&(identical(other.consecutiveDays, consecutiveDays) || other.consecutiveDays == consecutiveDays)&&(identical(other.milestoneProgress, milestoneProgress) || other.milestoneProgress == milestoneProgress)&&(identical(other.milestoneCount, milestoneCount) || other.milestoneCount == milestoneCount)&&(identical(other.completedMinutesCount, completedMinutesCount) || other.completedMinutesCount == completedMinutesCount)&&(identical(other.completedSessionsCount, completedSessionsCount) || other.completedSessionsCount == completedSessionsCount)&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.firstSessionDate, firstSessionDate) || other.firstSessionDate == firstSessionDate)&&(identical(other.lastSessionDate, lastSessionDate) || other.lastSessionDate == lastSessionDate));
+  final _this = this as ProfileStatsReportEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileStatsReportEntity&&(identical(other.consecutiveDays, _this.consecutiveDays) || other.consecutiveDays == _this.consecutiveDays)&&(identical(other.milestoneProgress, _this.milestoneProgress) || other.milestoneProgress == _this.milestoneProgress)&&(identical(other.milestoneCount, _this.milestoneCount) || other.milestoneCount == _this.milestoneCount)&&(identical(other.completedMinutesCount, _this.completedMinutesCount) || other.completedMinutesCount == _this.completedMinutesCount)&&(identical(other.completedSessionsCount, _this.completedSessionsCount) || other.completedSessionsCount == _this.completedSessionsCount)&&(identical(other.completedDaysCount, _this.completedDaysCount) || other.completedDaysCount == _this.completedDaysCount)&&(identical(other.firstSessionDate, _this.firstSessionDate) || other.firstSessionDate == _this.firstSessionDate)&&(identical(other.lastSessionDate, _this.lastSessionDate) || other.lastSessionDate == _this.lastSessionDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,consecutiveDays,milestoneProgress,milestoneCount,completedMinutesCount,completedSessionsCount,completedDaysCount,firstSessionDate,lastSessionDate);
+int get hashCode {
+  final _this = this as ProfileStatsReportEntity;
+  return Object.hash(runtimeType,_this.consecutiveDays,_this.milestoneProgress,_this.milestoneCount,_this.completedMinutesCount,_this.completedSessionsCount,_this.completedDaysCount,_this.firstSessionDate,_this.lastSessionDate);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProfileStatsReportEntity(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
+  final _this = this as ProfileStatsReportEntity;
+  return 'ProfileStatsReportEntity(consecutiveDays: ${_this.consecutiveDays}, milestoneProgress: ${_this.milestoneProgress}, milestoneCount: ${_this.milestoneCount}, completedMinutesCount: ${_this.completedMinutesCount}, completedSessionsCount: ${_this.completedSessionsCount}, completedDaysCount: ${_this.completedDaysCount}, firstSessionDate: ${_this.firstSessionDate}, lastSessionDate: ${_this.lastSessionDate})';
 }
 
 
@@ -72,7 +79,7 @@ class _$ProfileStatsReportEntityCopyWithImpl<$Res>
 /// Create a copy of ProfileStatsReportEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? consecutiveDays = null,Object? milestoneProgress = null,Object? milestoneCount = null,Object? completedMinutesCount = null,Object? completedSessionsCount = null,Object? completedDaysCount = null,Object? firstSessionDate = freezed,Object? lastSessionDate = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProfileStatsReportEntity(
 consecutiveDays: null == consecutiveDays ? _self.consecutiveDays : consecutiveDays // ignore: cast_nullable_to_non_nullable
 as ConsecutiveDaysEntity,milestoneProgress: null == milestoneProgress ? _self.milestoneProgress : milestoneProgress // ignore: cast_nullable_to_non_nullable
 as MilestoneProgressEntity,milestoneCount: null == milestoneCount ? _self.milestoneCount : milestoneCount // ignore: cast_nullable_to_non_nullable
@@ -258,23 +265,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'ProfileStatsReportEntity'))
     ..add(DiagnosticsProperty('consecutiveDays', consecutiveDays))..add(DiagnosticsProperty('milestoneProgress', milestoneProgress))..add(DiagnosticsProperty('milestoneCount', milestoneCount))..add(DiagnosticsProperty('completedMinutesCount', completedMinutesCount))..add(DiagnosticsProperty('completedSessionsCount', completedSessionsCount))..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))..add(DiagnosticsProperty('firstSessionDate', firstSessionDate))..add(DiagnosticsProperty('lastSessionDate', lastSessionDate));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileStatsReportEntity&&(identical(other.consecutiveDays, consecutiveDays) || other.consecutiveDays == consecutiveDays)&&(identical(other.milestoneProgress, milestoneProgress) || other.milestoneProgress == milestoneProgress)&&(identical(other.milestoneCount, milestoneCount) || other.milestoneCount == milestoneCount)&&(identical(other.completedMinutesCount, completedMinutesCount) || other.completedMinutesCount == completedMinutesCount)&&(identical(other.completedSessionsCount, completedSessionsCount) || other.completedSessionsCount == completedSessionsCount)&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.firstSessionDate, firstSessionDate) || other.firstSessionDate == firstSessionDate)&&(identical(other.lastSessionDate, lastSessionDate) || other.lastSessionDate == lastSessionDate));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileStatsReportEntity&&(identical(other.consecutiveDays, consecutiveDays) || other.consecutiveDays == consecutiveDays)&&(identical(other.milestoneProgress, milestoneProgress) || other.milestoneProgress == milestoneProgress)&&(identical(other.milestoneCount, milestoneCount) || other.milestoneCount == milestoneCount)&&(identical(other.completedMinutesCount, completedMinutesCount) || other.completedMinutesCount == completedMinutesCount)&&(identical(other.completedSessionsCount, completedSessionsCount) || other.completedSessionsCount == completedSessionsCount)&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.firstSessionDate, firstSessionDate) || other.firstSessionDate == firstSessionDate)&&(identical(other.lastSessionDate, lastSessionDate) || other.lastSessionDate == lastSessionDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,consecutiveDays,milestoneProgress,milestoneCount,completedMinutesCount,completedSessionsCount,completedDaysCount,firstSessionDate,lastSessionDate);
+int get hashCode {
+    return Object.hash(runtimeType,consecutiveDays,milestoneProgress,milestoneCount,completedMinutesCount,completedSessionsCount,completedDaysCount,firstSessionDate,lastSessionDate);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProfileStatsReportEntity(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
+    return 'ProfileStatsReportEntity(consecutiveDays: $consecutiveDays, milestoneProgress: $milestoneProgress, milestoneCount: $milestoneCount, completedMinutesCount: $completedMinutesCount, completedSessionsCount: $completedSessionsCount, completedDaysCount: $completedDaysCount, firstSessionDate: $firstSessionDate, lastSessionDate: $lastSessionDate)';
 }
 
 

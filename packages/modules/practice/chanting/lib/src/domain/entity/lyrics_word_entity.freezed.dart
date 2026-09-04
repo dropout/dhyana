@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'lyrics_word_entity.dart';
@@ -9,6 +9,7 @@ part of 'lyrics_word_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $LyricsWordEntityCopyWith<LyricsWordEntity> get copyWith => _$LyricsWordEntityCo
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as LyricsWordEntity;
   properties
     ..add(DiagnosticsProperty('type', 'LyricsWordEntity'))
-    ..add(DiagnosticsProperty('text', text))..add(DiagnosticsProperty('start', start))..add(DiagnosticsProperty('end', end));
+    ..add(DiagnosticsProperty('text', _this.text))..add(DiagnosticsProperty('start', _this.start))..add(DiagnosticsProperty('end', _this.end));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LyricsWordEntity&&(identical(other.text, text) || other.text == text)&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end));
+  final _this = this as LyricsWordEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LyricsWordEntity&&(identical(other.text, _this.text) || other.text == _this.text)&&(identical(other.start, _this.start) || other.start == _this.start)&&(identical(other.end, _this.end) || other.end == _this.end));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,text,start,end);
+int get hashCode {
+  final _this = this as LyricsWordEntity;
+  return Object.hash(runtimeType,_this.text,_this.start,_this.end);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'LyricsWordEntity(text: $text, start: $start, end: $end)';
+  final _this = this as LyricsWordEntity;
+  return 'LyricsWordEntity(text: ${_this.text}, start: ${_this.start}, end: ${_this.end})';
 }
 
 
@@ -72,7 +79,7 @@ class _$LyricsWordEntityCopyWithImpl<$Res>
 /// Create a copy of LyricsWordEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? text = null,Object? start = null,Object? end = null,}) {
-  return _then(_self.copyWith(
+  return _then(LyricsWordEntity(
 text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,start: null == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
 as Duration,end: null == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
@@ -230,23 +237,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'LyricsWordEntity'))
     ..add(DiagnosticsProperty('text', text))..add(DiagnosticsProperty('start', start))..add(DiagnosticsProperty('end', end));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LyricsWordEntity&&(identical(other.text, text) || other.text == text)&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LyricsWordEntity&&(identical(other.text, text) || other.text == text)&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,text,start,end);
+int get hashCode {
+    return Object.hash(runtimeType,text,start,end);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'LyricsWordEntity(text: $text, start: $start, end: $end)';
+    return 'LyricsWordEntity(text: $text, start: $start, end: $end)';
 }
 
 

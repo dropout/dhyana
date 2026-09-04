@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'sessions_cubit.dart';
@@ -9,6 +9,7 @@ part of 'sessions_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionsState()';
+    return 'SessionsState()';
 }
 
 
@@ -203,7 +204,7 @@ class _Initial implements SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
 
@@ -212,7 +213,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionsState.initial()';
+    return 'SessionsState.initial()';
 }
 
 
@@ -235,7 +236,7 @@ class SessionsLoading implements SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoading);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoading);
 }
 
 
@@ -244,7 +245,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionsState.loading()';
+    return 'SessionsState.loading()';
 }
 
 
@@ -257,7 +258,7 @@ String toString() {
 
 
 class SessionsLoaded implements SessionsState {
-  const SessionsLoaded({required final  List<Session> sessions}): _sessions = sessions;
+  const SessionsLoaded({required  List<Session> sessions}): _sessions = sessions;
   
 
  final  List<Session> _sessions;
@@ -278,16 +279,18 @@ $SessionsLoadedCopyWith<SessionsLoaded> get copyWith => _$SessionsLoadedCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoaded&&const DeepCollectionEquality().equals(other._sessions, _sessions));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoaded&&const DeepCollectionEquality().equals(other.sessions, _sessions));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_sessions));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_sessions));
+}
 
 @override
 String toString() {
-  return 'SessionsState.loaded(sessions: $sessions)';
+    return 'SessionsState.loaded(sessions: $sessions)';
 }
 
 
@@ -339,7 +342,7 @@ class SessionsLoadingError implements SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoadingError);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoadingError);
 }
 
 
@@ -348,7 +351,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionsState.error()';
+    return 'SessionsState.error()';
 }
 
 

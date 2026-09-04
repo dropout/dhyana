@@ -28,6 +28,6 @@ Map<String, dynamic> _$PresenceQueryOptionsEntityToJson(
   'limit': instance.limit,
   'ownProfileId': instance.ownProfileId,
   'lastDocumentId': instance.lastDocumentId,
-  'location': instance.location?.toJson(),
+  'location': instance.location,
   'rangeInKm': instance.rangeInKm,
 };

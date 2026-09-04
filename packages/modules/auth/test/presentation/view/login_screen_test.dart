@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'package:core/core.dart';
 
-
+import '../../auth_test_helper.dart';
 
 
 void main() {
@@ -41,7 +41,7 @@ void main() {
           .thenReturn(const AuthState.signedOut());
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          AuthTestHelper.withLocalizationProvider(
             BlocProvider<AuthStateCubit>(
               create: (context) => mockAuthCubit,
               child: const LoginScreen()
@@ -64,7 +64,7 @@ void main() {
           .thenReturn(const AuthState.signingIn());
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          AuthTestHelper.withLocalizationProvider(
             BlocProvider<AuthStateCubit>(
               create: (context) => mockAuthCubit,
               child: const LoginScreen()
@@ -82,7 +82,7 @@ void main() {
             .thenReturn(const AuthState.error());
 
         await tester.pumpWidget(
-          withAllContextProviders(
+          AuthTestHelper.withLocalizationProvider(
             BlocProvider<AuthStateCubit>(
               create: (context) => mockAuthCubit,
               child: const LoginScreen()
@@ -112,7 +112,7 @@ void main() {
         await tester.pumpWidget(
           Provider<Services>(
             create: (context) => mockServices,
-            child: withAllContextProviders(
+            child: AuthTestHelper.withLocalizationProvider(
               BlocProvider<AuthStateCubit>(
                 create: (context) => mockAuthCubit,
                 child: LoginScreen()
@@ -151,7 +151,7 @@ void main() {
         await tester.pumpWidget(
           Provider<Services>(
             create: (context) => mockServices,
-            child: withAllContextProviders(
+            child: AuthTestHelper.withLocalizationProvider(
               BlocProvider<AuthStateCubit>(
                 create: (context) => mockAuthCubit,
                 child: LoginScreen()
@@ -183,7 +183,7 @@ void main() {
         await tester.pumpWidget(
           Provider<Services>(
             create: (context) => mockServices,
-            child: withAllContextProviders(
+            child: AuthTestHelper.withLocalizationProvider(
               BlocProvider<AuthStateCubit>(
                 create: (context) => mockAuthCubit,
                 child: LoginScreen()

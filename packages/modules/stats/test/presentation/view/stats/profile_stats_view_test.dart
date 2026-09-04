@@ -23,6 +23,7 @@ import 'package:stats/src/presentation/view/stats/tab/year_tab.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../../../stats_mock_definitions.dart';
+import '../../../stats_test_helper.dart';
 
 
 void main() {
@@ -31,7 +32,7 @@ void main() {
 
 
   group('ProfileStatsView', () {
-    late MockProfileStateCubit mockProfileBloc;
+    late MockProfileCubit mockProfileBloc;
     late StatsPublicApi mockStatsPublicApi;
     late Services mockServices;
     late CrashlyticsService mockCrashlyticsService;
@@ -48,7 +49,7 @@ void main() {
     });
 
     setUp(() async {
-      mockProfileBloc = MockProfileStateCubit();
+      mockProfileBloc = MockProfileCubit();
       mockStatsPublicApi = MockStatsPublicApi();
 
       mockServices = MockServices();
@@ -109,9 +110,9 @@ void main() {
               MultiProvider(
                 providers: [
                   Provider<Services>(create: (_) => mockServices),
-                  BlocProvider<ProfileStateCubit>(create: (_) => mockProfileBloc),
+                  BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
                 ],
-                child: withAllContextProviders(
+                child: StatsTestHelper.withLocalizationProvider(
                   Material(child: ProfileStatsView(profileId: profile.id)),
                 ),
               ),
@@ -149,9 +150,9 @@ void main() {
               MultiProvider(
                 providers: [
                   // Provider<Services>(create: (_) => mockServices),
-                  BlocProvider<ProfileStateCubit>(create: (_) => mockProfileBloc),
+                  BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
                 ],
-                child: withAllContextProviders(
+                child: StatsTestHelper.withLocalizationProvider(
                   Material(child: ProfileStatsView(profileId: profile.id)),
                 ),
               ),
@@ -174,9 +175,9 @@ void main() {
               MultiProvider(
                 providers: [
                   // Provider<Services>(create: (_) => mockServices),
-                  BlocProvider<ProfileStateCubit>(create: (_) => mockProfileBloc),
+                  BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
                 ],
-                child: withAllContextProviders(
+                child: StatsTestHelper.withLocalizationProvider(
                   Material(child: ProfileStatsView(profileId: profile.id)),
                 ),
               ),
@@ -201,9 +202,9 @@ void main() {
               MultiProvider(
                 providers: [
                   Provider<Services>(create: (_) => mockServices),
-                  BlocProvider<ProfileStateCubit>(create: (_) => mockProfileBloc),
+                  BlocProvider<ProfileCubit>(create: (_) => mockProfileBloc),
                 ],
-                child: withAllContextProviders(
+                child: StatsTestHelper.withLocalizationProvider(
                   Material(child: ProfileStatsView(profileId: profile.id)),
                 ),
               ),

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'stats_session.dart';
@@ -9,6 +9,7 @@ part of 'stats_session.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -24,23 +25,29 @@ $StatsSessionCopyWith<StatsSession> get copyWith => _$StatsSessionCopyWithImpl<S
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as StatsSession;
   properties
     ..add(DiagnosticsProperty('type', 'StatsSession'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('type', type))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('endTime', endTime))..add(DiagnosticsProperty('duration', duration));
+    ..add(DiagnosticsProperty('id', _this.id))..add(DiagnosticsProperty('type', _this.type))..add(DiagnosticsProperty('startTime', _this.startTime))..add(DiagnosticsProperty('endTime', _this.endTime))..add(DiagnosticsProperty('duration', _this.duration));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsSession&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.duration, duration) || other.duration == duration));
+  final _this = this as StatsSession;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsSession&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.startTime, _this.startTime) || other.startTime == _this.startTime)&&(identical(other.endTime, _this.endTime) || other.endTime == _this.endTime)&&(identical(other.duration, _this.duration) || other.duration == _this.duration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,type,startTime,endTime,duration);
+int get hashCode {
+  final _this = this as StatsSession;
+  return Object.hash(runtimeType,_this.id,_this.type,_this.startTime,_this.endTime,_this.duration);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'StatsSession(id: $id, type: $type, startTime: $startTime, endTime: $endTime, duration: $duration)';
+  final _this = this as StatsSession;
+  return 'StatsSession(id: ${_this.id}, type: ${_this.type}, startTime: ${_this.startTime}, endTime: ${_this.endTime}, duration: ${_this.duration})';
 }
 
 
@@ -69,7 +76,7 @@ class _$StatsSessionCopyWithImpl<$Res>
 /// Create a copy of StatsSession
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? type = null,Object? startTime = null,Object? endTime = null,Object? duration = null,}) {
-  return _then(_self.copyWith(
+  return _then(StatsSession(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as StatsSessionType,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
@@ -228,23 +235,25 @@ _$StatsSessionCopyWith<_StatsSession> get copyWith => __$StatsSessionCopyWithImp
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'StatsSession'))
     ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('type', type))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('endTime', endTime))..add(DiagnosticsProperty('duration', duration));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StatsSession&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.duration, duration) || other.duration == duration));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _StatsSession&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.duration, duration) || other.duration == duration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,type,startTime,endTime,duration);
+int get hashCode {
+    return Object.hash(runtimeType,id,type,startTime,endTime,duration);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'StatsSession(id: $id, type: $type, startTime: $startTime, endTime: $endTime, duration: $duration)';
+    return 'StatsSession(id: $id, type: $type, startTime: $startTime, endTime: $endTime, duration: $duration)';
 }
 
 

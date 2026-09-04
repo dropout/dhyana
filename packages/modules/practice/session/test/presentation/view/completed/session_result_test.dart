@@ -11,6 +11,8 @@ import 'package:session/src/data/mapper/session_mapper.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/presentation/view/completed/session_result.dart';
 
+import '../../../session_test_helper.dart';
+
 
 void main() {
   late MockServices mockServices;
@@ -31,7 +33,7 @@ void main() {
     await tester
         .runAsync(() async {
           await tester.pumpWidget(
-            withAllContextProviders(
+            SessionTestHelper.withLocalizationProvider(
               MultiProvider(
                 providers: [Provider<Services>.value(value: mockServices)],
                 child: SessionResult(session: session.toApi()),

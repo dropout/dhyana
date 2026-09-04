@@ -1,9 +1,10 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:core/core.dart';
 import 'package:profile/src/domain/entity/profile_settings_entity.dart';
 import 'package:profile/src/domain/entity/profile_stats_report_entity.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
-import 'package:uuid/uuid.dart';
+
 
 part 'profile_entity.freezed.dart';
 part 'profile_entity.g.dart';
@@ -35,20 +36,6 @@ abstract class ProfileEntity with _$ProfileEntity implements SerializableEntity,
 
   factory ProfileEntity.fromJson(Map<String, Object?> json) =>
     _$ProfileEntityFromJson(json);
-
-  factory ProfileEntity.anonymous() {
-    return ProfileEntity(
-      id: Uuid().v4(),
-      firstName: DefaultProfileData.firstName,
-      lastName: DefaultProfileData.lastName,
-      email: '',
-      photoUrl: DefaultProfileData.photoUrl,
-      photoBlurhash: DefaultProfileData.photoBlurhash,
-      signupDate: DateTime.now(),
-      statsReport: const ProfileStatsReportEntity(),
-      completed: false,
-    );
-  }
 
   bool consecutiveDaysProgressCheck(ProfileEntity oldProfile) =>
     (oldProfile.statsReport.consecutiveDays.current

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'timer_session_started_event.dart';
@@ -9,6 +9,7 @@ part of 'timer_session_started_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $TimerSessionStartedEventCopyWith<TimerSessionStartedEvent> get copyWith => _$Ti
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSessionStartedEvent&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
+  final _this = this as TimerSessionStartedEvent;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSessionStartedEvent&&(identical(other.timestamp, _this.timestamp) || other.timestamp == _this.timestamp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,timestamp);
+int get hashCode {
+  final _this = this as TimerSessionStartedEvent;
+  return Object.hash(runtimeType,_this.timestamp);
+}
 
 @override
 String toString() {
-  return 'TimerSessionStartedEvent(timestamp: $timestamp)';
+  final _this = this as TimerSessionStartedEvent;
+  return 'TimerSessionStartedEvent(timestamp: ${_this.timestamp})';
 }
 
 
@@ -63,7 +69,7 @@ class _$TimerSessionStartedEventCopyWithImpl<$Res>
 /// Create a copy of TimerSessionStartedEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? timestamp = null,}) {
-  return _then(_self.copyWith(
+  return _then(TimerSessionStartedEvent(
 timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
@@ -112,10 +118,7 @@ return $default(_that);case _:
 final _that = this;
 switch (_that) {
 case _TimerSessionStartedEvent():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return $default(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -174,10 +177,7 @@ return $default(_that.timestamp);case _:
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime timestamp)  $default,) {final _that = this;
 switch (_that) {
 case _TimerSessionStartedEvent():
-return $default(_that.timestamp);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return $default(_that.timestamp);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -221,16 +221,18 @@ _$TimerSessionStartedEventCopyWith<_TimerSessionStartedEvent> get copyWith => __
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSessionStartedEvent&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSessionStartedEvent&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,timestamp);
+int get hashCode {
+    return Object.hash(runtimeType,timestamp);
+}
 
 @override
 String toString() {
-  return 'TimerSessionStartedEvent(timestamp: $timestamp)';
+    return 'TimerSessionStartedEvent(timestamp: $timestamp)';
 }
 
 

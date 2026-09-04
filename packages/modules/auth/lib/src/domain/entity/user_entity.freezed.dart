@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_entity.dart';
@@ -9,6 +9,7 @@ part of 'user_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $UserEntityCopyWith<UserEntity> get copyWith => _$UserEntityCopyWithImpl<UserEnt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserEntity&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.metaData, metaData) || other.metaData == metaData)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other.roles, roles)&&(identical(other.accessLevel, accessLevel) || other.accessLevel == accessLevel));
+  final _this = this as UserEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserEntity&&(identical(other.uid, _this.uid) || other.uid == _this.uid)&&(identical(other.metaData, _this.metaData) || other.metaData == _this.metaData)&&(identical(other.displayName, _this.displayName) || other.displayName == _this.displayName)&&(identical(other.email, _this.email) || other.email == _this.email)&&(identical(other.photoUrl, _this.photoUrl) || other.photoUrl == _this.photoUrl)&&const DeepCollectionEquality().equals(other.roles, _this.roles)&&(identical(other.accessLevel, _this.accessLevel) || other.accessLevel == _this.accessLevel));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,uid,metaData,displayName,email,photoUrl,const DeepCollectionEquality().hash(roles),accessLevel);
+int get hashCode {
+  final _this = this as UserEntity;
+  return Object.hash(runtimeType,_this.uid,_this.metaData,_this.displayName,_this.email,_this.photoUrl,const DeepCollectionEquality().hash(_this.roles),_this.accessLevel);
+}
 
 @override
 String toString() {
-  return 'UserEntity(uid: $uid, metaData: $metaData, displayName: $displayName, email: $email, photoUrl: $photoUrl, roles: $roles, accessLevel: $accessLevel)';
+  final _this = this as UserEntity;
+  return 'UserEntity(uid: ${_this.uid}, metaData: ${_this.metaData}, displayName: ${_this.displayName}, email: ${_this.email}, photoUrl: ${_this.photoUrl}, roles: ${_this.roles}, accessLevel: ${_this.accessLevel})';
 }
 
 
@@ -63,7 +69,7 @@ class _$UserEntityCopyWithImpl<$Res>
 /// Create a copy of UserEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? metaData = null,Object? displayName = freezed,Object? email = freezed,Object? photoUrl = freezed,Object? roles = null,Object? accessLevel = null,}) {
-  return _then(_self.copyWith(
+  return _then(UserEntity(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,metaData: null == metaData ? _self.metaData : metaData // ignore: cast_nullable_to_non_nullable
 as UserMetaDataEntity,displayName: freezed == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
@@ -215,7 +221,7 @@ return $default(_that.uid,_that.metaData,_that.displayName,_that.email,_that.pho
 
 
 class _UserEntity extends UserEntity {
-  const _UserEntity({required this.uid, required this.metaData, this.displayName, this.email, this.photoUrl, final  List<String> roles = const <String>[], this.accessLevel = 0}): _roles = roles,super._();
+  const _UserEntity({required this.uid, required this.metaData, this.displayName, this.email, this.photoUrl,  List<String> roles = const <String>[], this.accessLevel = 0}): _roles = roles,super._();
   
 
 @override final  String uid;
@@ -242,16 +248,18 @@ _$UserEntityCopyWith<_UserEntity> get copyWith => __$UserEntityCopyWithImpl<_Use
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserEntity&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.metaData, metaData) || other.metaData == metaData)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other._roles, _roles)&&(identical(other.accessLevel, accessLevel) || other.accessLevel == accessLevel));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserEntity&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.metaData, metaData) || other.metaData == metaData)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&const DeepCollectionEquality().equals(other.roles, _roles)&&(identical(other.accessLevel, accessLevel) || other.accessLevel == accessLevel));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,uid,metaData,displayName,email,photoUrl,const DeepCollectionEquality().hash(_roles),accessLevel);
+int get hashCode {
+    return Object.hash(runtimeType,uid,metaData,displayName,email,photoUrl,const DeepCollectionEquality().hash(_roles),accessLevel);
+}
 
 @override
 String toString() {
-  return 'UserEntity(uid: $uid, metaData: $metaData, displayName: $displayName, email: $email, photoUrl: $photoUrl, roles: $roles, accessLevel: $accessLevel)';
+    return 'UserEntity(uid: $uid, metaData: $metaData, displayName: $displayName, email: $email, photoUrl: $photoUrl, roles: $roles, accessLevel: $accessLevel)';
 }
 
 

@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:profile/profile.dart';
@@ -31,3 +32,7 @@ class MockStatsPublicApi
 class MockProfilePublicApi 
   extends Mock
   implements ProfilePublicApi {}
+
+class MockProfileCubit
+  extends MockCubit<ProfileState>
+  implements ProfileCubit {}

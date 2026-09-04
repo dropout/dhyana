@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'presence_cubit.dart';
@@ -9,6 +9,7 @@ part of 'presence_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$PresenceState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'PresenceState()';
+    return 'PresenceState()';
 }
 
 
@@ -203,7 +204,7 @@ class _Initial extends PresenceState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
 
@@ -212,7 +213,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'PresenceState.initial()';
+    return 'PresenceState.initial()';
 }
 
 
@@ -235,7 +236,7 @@ class PresenceLoadingState extends PresenceState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceLoadingState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceLoadingState);
 }
 
 
@@ -244,7 +245,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'PresenceState.loading()';
+    return 'PresenceState.loading()';
 }
 
 
@@ -257,7 +258,7 @@ String toString() {
 
 
 class PresenceLoadingMoreState extends PresenceState {
-  const PresenceLoadingMoreState({required final  List<Presence> presenceList}): _presenceList = presenceList,super._();
+  const PresenceLoadingMoreState({required  List<Presence> presenceList}): _presenceList = presenceList,super._();
   
 
  final  List<Presence> _presenceList;
@@ -278,16 +279,18 @@ $PresenceLoadingMoreStateCopyWith<PresenceLoadingMoreState> get copyWith => _$Pr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceLoadingMoreState&&const DeepCollectionEquality().equals(other._presenceList, _presenceList));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceLoadingMoreState&&const DeepCollectionEquality().equals(other.presenceList, _presenceList));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_presenceList));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_presenceList));
+}
 
 @override
 String toString() {
-  return 'PresenceState.loadingMore(presenceList: $presenceList)';
+    return 'PresenceState.loadingMore(presenceList: $presenceList)';
 }
 
 
@@ -329,7 +332,7 @@ as List<Presence>,
 
 
 class PresenceLoadedState extends PresenceState {
-  const PresenceLoadedState({required final  List<Presence> presenceList}): _presenceList = presenceList,super._();
+  const PresenceLoadedState({required  List<Presence> presenceList}): _presenceList = presenceList,super._();
   
 
  final  List<Presence> _presenceList;
@@ -350,16 +353,18 @@ $PresenceLoadedStateCopyWith<PresenceLoadedState> get copyWith => _$PresenceLoad
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceLoadedState&&const DeepCollectionEquality().equals(other._presenceList, _presenceList));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceLoadedState&&const DeepCollectionEquality().equals(other.presenceList, _presenceList));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_presenceList));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_presenceList));
+}
 
 @override
 String toString() {
-  return 'PresenceState.loaded(presenceList: $presenceList)';
+    return 'PresenceState.loaded(presenceList: $presenceList)';
 }
 
 
@@ -411,7 +416,7 @@ class PresenceErrorState extends PresenceState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceErrorState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceErrorState);
 }
 
 
@@ -420,7 +425,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'PresenceState.error()';
+    return 'PresenceState.error()';
 }
 
 

@@ -14,10 +14,10 @@ import 'package:profile/src/data/datasource/faker_profile_extension.dart';
 import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/presentation/view/profile_edit_form.dart';
 
+import '../../profile_test_helper.dart';
 
 void main() {
   group('ProfileEditForm', () {
-
     late Profile profile;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
@@ -40,42 +40,47 @@ void main() {
       safeImageDetector = MockSafeImageDetector();
 
       when(() => mockServices.crashlyticsService)
-        .thenReturn(mockCrashlyticsService);
+          .thenReturn(mockCrashlyticsService);
       when(() => mockServices.safeImageDetectorFactory)
-        .thenReturn(mockSafeImageDetectorFactory);
+          .thenReturn(mockSafeImageDetectorFactory);
       when(() => mockSafeImageDetectorFactory.create())
-        .thenAnswer((_) async => safeImageDetector);
+          .thenAnswer((_) async => safeImageDetector);
       when(() => mockServices.resourceResolver)
-        .thenReturn(mockResourceResolver);
+          .thenReturn(mockResourceResolver);
       when(() => mockResourceResolver.resolveStoragePath(any()))
-        .thenAnswer((_) async => profile.photoUrl!);
+          .thenAnswer((_) async => profile.photoUrl!);
 
       nock.cleanAll();
     });
 
-    testWidgets('renders all form fields with default values', (WidgetTester tester) async {
+    testWidgets('renders all form fields with default values', (
+      WidgetTester tester,
+    ) async {
       final profileWithoutPhoto = profile.copyWith(
         photoUrl: null,
         photoBlurhash: null,
       );
 
-      // https://firebasestorage.googleapis.com/v0/b/dhyana-timer.appspot.com/o/profiles%2Fdefault%2Fphoto.jpg?alt=media&token=0d5bb454-7ce3-4f27-9ccf-7822fd559bb4
-
       await tester.pumpWidget(
-        withAllContextProviders(
           MultiProvider(
-            providers: [
-              Provider<Services>(create: (context) => mockServices ),
-            ],
-          child: Material(
-            child: ProfileEditForm(profile: profileWithoutPhoto)
+            providers: [Provider<Services>(create: (context) => mockServices)],
+            child: MaterialApp(
+              localizationsDelegates: ProfileTestHelper.getProfileLocalizationDelegates(),
+              home: Material(
+                child: ProfileEditForm(
+                  profile: profileWithoutPhoto,
+                ),
+              ),
+            ),
           ),
-          )
-        )
       );
+
       await tester.pumpAndSettle();
 
-      final formBuilderImagePicker = tester.widget<FormBuilderProfileImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
+      final formBuilderImagePicker = tester
+          .widget<FormBuilderProfileImagePicker>(
+            find.byKey(const Key('profile_edit_form_image_picker')),
+          );
 
       expect(formBuilderImagePicker.profile, profileWithoutPhoto);
 
@@ -84,85 +89,84 @@ void main() {
       expect(find.byType(FormBuilderTextField), findsNWidgets(2));
     });
 
-
-    testWidgets('can react to firstName and lastName input changes', (WidgetTester tester) async {
-
+    testWidgets('can react to firstName and lastName input changes', (
+      WidgetTester tester,
+    ) async {
       // Configure global http client mock
       // to return a 1x1 pixel image for the default profile image URL
-      nock('https://firebasestorage.googleapis.com')
-        .get('/v0/b/dhyana-timer.appspot.com/o/profiles%2Fdefault%2Fphoto.jpg')
-        ..query({'alt': 'media', 'token': '0d5bb454-7ce3-4f27-9ccf-7822fd559bb4'})
+      nock(
+          'https://firebasestorage.googleapis.com',
+        ).get('/v0/b/dhyana-timer.appspot.com/o/profiles%2Fdefault%2Fphoto.jpg')
+        ..query({
+          'alt': 'media',
+          'token': '0d5bb454-7ce3-4f27-9ccf-7822fd559bb4',
+        })
         ..reply(
           200,
-          base64Decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII='),
-          headers: {
-            'Content-Type': 'image/jpeg',
-            'Cache-Control': 'no-cache',
-          }
+          base64Decode(
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=',
+          ),
+          headers: {'Content-Type': 'image/jpeg', 'Cache-Control': 'no-cache'},
         );
-
 
       bool onFormChanged = false;
-      GlobalKey<FormBuilderState> formKey =
-        GlobalKey<FormBuilderState>();
+      GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
-          withAllContextProviders(
-            MultiProvider(
-              providers: [
-                Provider<Services>(create: (context) => mockServices),
-              ],
-              child: MaterialApp(
-                localizationsDelegates: getLocalizationDelegates(),
-                home: Material(
-                  child: ProfileEditForm(
-                    profile: profile,
-                    formStateKey: formKey,
-                    onChanged: () {
-                      onFormChanged = true;
-                    },
+      await tester
+          .runAsync(() async {
+            await tester.pumpWidget(
+                MultiProvider(
+                  providers: [
+                    Provider<Services>(create: (context) => mockServices),
+                  ],
+                  child: MaterialApp(
+                    localizationsDelegates: ProfileTestHelper.getProfileLocalizationDelegates(),
+                    home: Material(
+                      child: ProfileEditForm(
+                        profile: profile,
+                        formStateKey: formKey,
+                        onChanged: () {
+                          onFormChanged = true;
+                        },
+                      ),
+                    ),
                   ),
-                )
-              ),
-            )
-          )
-        );
-        await tester.pumpAndSettle();
-      }).then((_) async {
+                ),
+            );
+            await tester.pumpAndSettle();
+          })
+          .then((_) async {
+            final formBuilderImagePicker = tester
+                .widget<FormBuilderProfileImagePicker>(
+                  find.byKey(const Key('profile_edit_form_image_picker')),
+                );
+            expect(formBuilderImagePicker.profile, profile);
 
-        final formBuilderImagePicker = tester.widget<FormBuilderProfileImagePicker>(find.byKey(const Key('profile_edit_form_image_picker')));
-        expect(formBuilderImagePicker.profile, profile);
+            final firstNameFieldFinder = find.descendant(
+              of: find.byKey(const Key('profile_edit_form_first_name_input')),
+              matching: find.byType(TextField),
+            );
+            expect(firstNameFieldFinder, findsOneWidget);
+            await tester.enterText(firstNameFieldFinder, 'TestFirstName');
+            await tester.pumpAndSettle();
 
-        final firstNameFieldFinder = find.descendant(
-          of: find.byKey(const Key('profile_edit_form_first_name_input')),
-          matching: find.byType(TextField)
-        );
-        expect(firstNameFieldFinder, findsOneWidget);
-        await tester.enterText(firstNameFieldFinder, 'TestFirstName');
-        await tester.pumpAndSettle();
+            final lastNameFinder = find.descendant(
+              of: find.byKey(const Key('profile_edit_form_last_name_input')),
+              matching: find.byType(TextField),
+            );
+            expect(lastNameFinder, findsOneWidget);
+            await tester.enterText(lastNameFinder, 'TestLastName');
 
-        final lastNameFinder = find.descendant(
-          of: find.byKey(const Key('profile_edit_form_last_name_input')),
-          matching: find.byType(TextField)
-        );
-        expect(lastNameFinder, findsOneWidget);
-        await tester.enterText(lastNameFinder, 'TestLastName');
+            FormBuilderState formBuildState = formKey.currentState!;
+            formBuildState.save();
+            await tester.pumpAndSettle();
 
-        FormBuilderState formBuildState = formKey.currentState!;
-        formBuildState.save();
-        await tester.pumpAndSettle();
-
-
-        expect(onFormChanged, isTrue);
-        expect(find.text('TestFirstName'), findsOneWidget);
-        expect(find.text('TestLastName'), findsOneWidget);
-        expect(formBuildState.value['firstName'], 'TestFirstName');
-        expect(formBuildState.value['lastName'], 'TestLastName');
-      });
-
+            expect(onFormChanged, isTrue);
+            expect(find.text('TestFirstName'), findsOneWidget);
+            expect(find.text('TestLastName'), findsOneWidget);
+            expect(formBuildState.value['firstName'], 'TestFirstName');
+            expect(formBuildState.value['lastName'], 'TestLastName');
+          });
     });
-
-
   }); // end of group ProfileEditForm
 } // end of main

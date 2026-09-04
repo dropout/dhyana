@@ -1,11 +1,10 @@
-import 'package:core/core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_settings_entity.freezed.dart';
 part 'profile_settings_entity.g.dart';
 
 @freezed
-sealed class ProfileSettingsEntity with _$ProfileSettingsEntity implements ProfileDispayableSettings {
+sealed class ProfileSettingsEntity with _$ProfileSettingsEntity {
 
   const factory ProfileSettingsEntity({
     @Default(true) bool showStatsOnFinishScreen,

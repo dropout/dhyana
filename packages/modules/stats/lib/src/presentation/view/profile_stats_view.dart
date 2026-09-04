@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:core/core.dart';
+import 'package:profile/profile.dart';
 import 'package:stats/l10n/stats_localizations.dart';
 import 'package:stats/src/presentation/view/stats/stats_data_area_sliver.dart';
 
@@ -49,7 +50,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileStateCubit, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
         builder: (BuildContext context, ProfileState state) {
           switch (state) {
             case ProfileLoadingState():
@@ -70,7 +71,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
                   StatsDataAreaSliver(
                     profile: state.profile,
                     profileName: state.profile.displayName,
-                    profilePhotoUrl: state.profile.profileImagePath,
+                    profilePhotoUrl: state.profile.profileImageStoragePath,
                     profilePhotoBlurhash: state.profile.photoBlurhash,
                   ),
                   ...buildBarchartSlivers(context, state.profile.id),

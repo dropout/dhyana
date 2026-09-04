@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'day_details.dart';
@@ -9,6 +9,7 @@ part of 'day_details.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $DayDetailsCopyWith<DayDetails> get copyWith => _$DayDetailsCopyWithImpl<DayDeta
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DayDetails&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&const DeepCollectionEquality().equals(other.sessions, sessions)&&(identical(other.consecutiveDaysCount, consecutiveDaysCount) || other.consecutiveDaysCount == consecutiveDaysCount));
+  final _this = this as DayDetails;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DayDetails&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.startDate, _this.startDate) || other.startDate == _this.startDate)&&const DeepCollectionEquality().equals(other.sessions, _this.sessions)&&(identical(other.consecutiveDaysCount, _this.consecutiveDaysCount) || other.consecutiveDaysCount == _this.consecutiveDaysCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,const DeepCollectionEquality().hash(sessions),consecutiveDaysCount);
+int get hashCode {
+  final _this = this as DayDetails;
+  return Object.hash(runtimeType,_this.id,_this.startDate,const DeepCollectionEquality().hash(_this.sessions),_this.consecutiveDaysCount);
+}
 
 @override
 String toString() {
-  return 'DayDetails(id: $id, startDate: $startDate, sessions: $sessions, consecutiveDaysCount: $consecutiveDaysCount)';
+  final _this = this as DayDetails;
+  return 'DayDetails(id: ${_this.id}, startDate: ${_this.startDate}, sessions: ${_this.sessions}, consecutiveDaysCount: ${_this.consecutiveDaysCount})';
 }
 
 
@@ -63,7 +69,7 @@ class _$DayDetailsCopyWithImpl<$Res>
 /// Create a copy of DayDetails
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? startDate = null,Object? sessions = null,Object? consecutiveDaysCount = null,}) {
-  return _then(_self.copyWith(
+  return _then(DayDetails(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,startDate: null == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
 as DateTime,sessions: null == sessions ? _self.sessions : sessions // ignore: cast_nullable_to_non_nullable
@@ -203,7 +209,7 @@ return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCou
 
 
 class _DayDetails extends DayDetails {
-  const _DayDetails({required this.id, required this.startDate, final  List<StatsSession> sessions = const [], this.consecutiveDaysCount = 0}): _sessions = sessions,super._();
+  const _DayDetails({required this.id, required this.startDate,  List<StatsSession> sessions = const [], this.consecutiveDaysCount = 0}): _sessions = sessions,super._();
   
 
 @override final  String id;
@@ -227,16 +233,18 @@ _$DayDetailsCopyWith<_DayDetails> get copyWith => __$DayDetailsCopyWithImpl<_Day
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DayDetails&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&const DeepCollectionEquality().equals(other._sessions, _sessions)&&(identical(other.consecutiveDaysCount, consecutiveDaysCount) || other.consecutiveDaysCount == consecutiveDaysCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DayDetails&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&const DeepCollectionEquality().equals(other.sessions, _sessions)&&(identical(other.consecutiveDaysCount, consecutiveDaysCount) || other.consecutiveDaysCount == consecutiveDaysCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,const DeepCollectionEquality().hash(_sessions),consecutiveDaysCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,const DeepCollectionEquality().hash(_sessions),consecutiveDaysCount);
+}
 
 @override
 String toString() {
-  return 'DayDetails(id: $id, startDate: $startDate, sessions: $sessions, consecutiveDaysCount: $consecutiveDaysCount)';
+    return 'DayDetails(id: $id, startDate: $startDate, sessions: $sessions, consecutiveDaysCount: $consecutiveDaysCount)';
 }
 
 

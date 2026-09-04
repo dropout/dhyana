@@ -1,21 +1,22 @@
 import 'dart:ui';
 
+import 'package:core/core.dart';
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
+import 'package:core/src/presentation/view/util/shader_rendering_scope.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_shaders/flutter_shaders.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
 class SessionStartButton extends StatefulWidget {
   final void Function() onTap;
-  final FragmentShader fragmentShader;
   final Color colorA;
   final Color colorB;
   final Color textColor;
 
   const SessionStartButton({
     required this.onTap,
-    required this.fragmentShader,
+
     this.colorA = AppColors.red,
     this.colorB = AppColors.redAccent,
     this.textColor = AppColors.buttonForeground,
@@ -47,6 +48,19 @@ class _SessionStartButtonState extends State<SessionStartButton>
   }
 
   Widget buildBg(BuildContext context) {
+    if (!ShaderRenderingScope.isEnabled(context)) {
+      return DecoratedBox(
+        decoration: ShapeDecoration(
+          shape: const StadiumBorder(),
+          color: widget.colorA,
+        ),
+      );
+    }
+
+    final shader = context.services.shaderService.get(
+      Assets.shaderGradientFlow,
+    );
+
     return RepaintBoundary(
       child: AnimatedBuilder(
         animation: _animationController,
@@ -55,7 +69,7 @@ class _SessionStartButtonState extends State<SessionStartButton>
             painter: ShaderPainter(
               colorA: widget.colorA,
               colorB: widget.colorB,
-              shader: widget.fragmentShader,
+              shader: shader,
               time: _elapsedTimeInSeconds,
             ),
           );

@@ -5,7 +5,8 @@ import 'package:timer/src/presentation/view/timer/timer_running_title.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:core/src/testing/test_context_providers.dart';
+import '../../../timer_test_helper.dart';
+
 
 void main() {
 
@@ -23,7 +24,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningTitle(
             timerState: timerState,
             positionOffset: Offset.zero,
@@ -48,7 +49,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningTime(
             timerState: timerState,
           ),

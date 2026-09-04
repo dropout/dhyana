@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'milestone_progress_entity.dart';
@@ -9,14 +9,14 @@ part of 'milestone_progress_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$MilestoneProgressEntity implements DiagnosticableTreeMixin {
 
- int get completedDaysCount;// Update default targetDaysCount in firebase function onbeforeCreateUser too
- int get targetDaysCount; List<ProfileSessionEntity> get sessions;
+ int get completedDaysCount; int get targetDaysCount; List<ProfileSessionEntity> get sessions;
 /// Create a copy of MilestoneProgressEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,23 +28,29 @@ $MilestoneProgressEntityCopyWith<MilestoneProgressEntity> get copyWith => _$Mile
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as MilestoneProgressEntity;
   properties
     ..add(DiagnosticsProperty('type', 'MilestoneProgressEntity'))
-    ..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))..add(DiagnosticsProperty('targetDaysCount', targetDaysCount))..add(DiagnosticsProperty('sessions', sessions));
+    ..add(DiagnosticsProperty('completedDaysCount', _this.completedDaysCount))..add(DiagnosticsProperty('targetDaysCount', _this.targetDaysCount))..add(DiagnosticsProperty('sessions', _this.sessions));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MilestoneProgressEntity&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.targetDaysCount, targetDaysCount) || other.targetDaysCount == targetDaysCount)&&const DeepCollectionEquality().equals(other.sessions, sessions));
+  final _this = this as MilestoneProgressEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MilestoneProgressEntity&&(identical(other.completedDaysCount, _this.completedDaysCount) || other.completedDaysCount == _this.completedDaysCount)&&(identical(other.targetDaysCount, _this.targetDaysCount) || other.targetDaysCount == _this.targetDaysCount)&&const DeepCollectionEquality().equals(other.sessions, _this.sessions));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,completedDaysCount,targetDaysCount,const DeepCollectionEquality().hash(sessions));
+int get hashCode {
+  final _this = this as MilestoneProgressEntity;
+  return Object.hash(runtimeType,_this.completedDaysCount,_this.targetDaysCount,const DeepCollectionEquality().hash(_this.sessions));
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'MilestoneProgressEntity(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
+  final _this = this as MilestoneProgressEntity;
+  return 'MilestoneProgressEntity(completedDaysCount: ${_this.completedDaysCount}, targetDaysCount: ${_this.targetDaysCount}, sessions: ${_this.sessions})';
 }
 
 
@@ -73,7 +79,7 @@ class _$MilestoneProgressEntityCopyWithImpl<$Res>
 /// Create a copy of MilestoneProgressEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? completedDaysCount = null,Object? targetDaysCount = null,Object? sessions = null,}) {
-  return _then(_self.copyWith(
+  return _then(MilestoneProgressEntity(
 completedDaysCount: null == completedDaysCount ? _self.completedDaysCount : completedDaysCount // ignore: cast_nullable_to_non_nullable
 as int,targetDaysCount: null == targetDaysCount ? _self.targetDaysCount : targetDaysCount // ignore: cast_nullable_to_non_nullable
 as int,sessions: null == sessions ? _self.sessions : sessions // ignore: cast_nullable_to_non_nullable
@@ -212,11 +218,10 @@ return $default(_that.completedDaysCount,_that.targetDaysCount,_that.sessions);c
 @JsonSerializable()
 
 class _MilestoneProgressEntity extends MilestoneProgressEntity with DiagnosticableTreeMixin {
-  const _MilestoneProgressEntity({this.completedDaysCount = 0, this.targetDaysCount = 7, final  List<ProfileSessionEntity> sessions = const []}): _sessions = sessions,super._();
+  const _MilestoneProgressEntity({this.completedDaysCount = 0, this.targetDaysCount = 7,  List<ProfileSessionEntity> sessions = const []}): _sessions = sessions,super._();
   factory _MilestoneProgressEntity.fromJson(Map<String, dynamic> json) => _$MilestoneProgressEntityFromJson(json);
 
 @override@JsonKey() final  int completedDaysCount;
-// Update default targetDaysCount in firebase function onbeforeCreateUser too
 @override@JsonKey() final  int targetDaysCount;
  final  List<ProfileSessionEntity> _sessions;
 @override@JsonKey() List<ProfileSessionEntity> get sessions {
@@ -238,23 +243,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'MilestoneProgressEntity'))
     ..add(DiagnosticsProperty('completedDaysCount', completedDaysCount))..add(DiagnosticsProperty('targetDaysCount', targetDaysCount))..add(DiagnosticsProperty('sessions', sessions));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MilestoneProgressEntity&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.targetDaysCount, targetDaysCount) || other.targetDaysCount == targetDaysCount)&&const DeepCollectionEquality().equals(other._sessions, _sessions));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MilestoneProgressEntity&&(identical(other.completedDaysCount, completedDaysCount) || other.completedDaysCount == completedDaysCount)&&(identical(other.targetDaysCount, targetDaysCount) || other.targetDaysCount == targetDaysCount)&&const DeepCollectionEquality().equals(other.sessions, _sessions));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,completedDaysCount,targetDaysCount,const DeepCollectionEquality().hash(_sessions));
+int get hashCode {
+    return Object.hash(runtimeType,completedDaysCount,targetDaysCount,const DeepCollectionEquality().hash(_sessions));
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'MilestoneProgressEntity(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
+    return 'MilestoneProgressEntity(completedDaysCount: $completedDaysCount, targetDaysCount: $targetDaysCount, sessions: $sessions)';
 }
 
 

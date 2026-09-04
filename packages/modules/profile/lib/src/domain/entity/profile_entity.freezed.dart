@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_entity.dart';
@@ -9,6 +9,7 @@ part of 'profile_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $ProfileEntityCopyWith<ProfileEntity> get copyWith => _$ProfileEntityCopyWithImp
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as ProfileEntity;
   properties
     ..add(DiagnosticsProperty('type', 'ProfileEntity'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstName', firstName))..add(DiagnosticsProperty('lastName', lastName))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('photoUrl', photoUrl))..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))..add(DiagnosticsProperty('settings', settings))..add(DiagnosticsProperty('signupDate', signupDate))..add(DiagnosticsProperty('statsReport', statsReport))..add(DiagnosticsProperty('completed', completed))..add(DiagnosticsProperty('location', location));
+    ..add(DiagnosticsProperty('id', _this.id))..add(DiagnosticsProperty('firstName', _this.firstName))..add(DiagnosticsProperty('lastName', _this.lastName))..add(DiagnosticsProperty('email', _this.email))..add(DiagnosticsProperty('photoUrl', _this.photoUrl))..add(DiagnosticsProperty('photoBlurhash', _this.photoBlurhash))..add(DiagnosticsProperty('settings', _this.settings))..add(DiagnosticsProperty('signupDate', _this.signupDate))..add(DiagnosticsProperty('statsReport', _this.statsReport))..add(DiagnosticsProperty('completed', _this.completed))..add(DiagnosticsProperty('location', _this.location));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed)&&(identical(other.location, location) || other.location == location));
+  final _this = this as ProfileEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.lastName, _this.lastName) || other.lastName == _this.lastName)&&(identical(other.email, _this.email) || other.email == _this.email)&&(identical(other.photoUrl, _this.photoUrl) || other.photoUrl == _this.photoUrl)&&(identical(other.photoBlurhash, _this.photoBlurhash) || other.photoBlurhash == _this.photoBlurhash)&&(identical(other.settings, _this.settings) || other.settings == _this.settings)&&(identical(other.signupDate, _this.signupDate) || other.signupDate == _this.signupDate)&&(identical(other.statsReport, _this.statsReport) || other.statsReport == _this.statsReport)&&(identical(other.completed, _this.completed) || other.completed == _this.completed)&&(identical(other.location, _this.location) || other.location == _this.location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,settings,signupDate,statsReport,completed,location);
+int get hashCode {
+  final _this = this as ProfileEntity;
+  return Object.hash(runtimeType,_this.id,_this.firstName,_this.lastName,_this.email,_this.photoUrl,_this.photoBlurhash,_this.settings,_this.signupDate,_this.statsReport,_this.completed,_this.location);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProfileEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, settings: $settings, signupDate: $signupDate, statsReport: $statsReport, completed: $completed, location: $location)';
+  final _this = this as ProfileEntity;
+  return 'ProfileEntity(id: ${_this.id}, firstName: ${_this.firstName}, lastName: ${_this.lastName}, email: ${_this.email}, photoUrl: ${_this.photoUrl}, photoBlurhash: ${_this.photoBlurhash}, settings: ${_this.settings}, signupDate: ${_this.signupDate}, statsReport: ${_this.statsReport}, completed: ${_this.completed}, location: ${_this.location})';
 }
 
 
@@ -72,7 +79,7 @@ class _$ProfileEntityCopyWithImpl<$Res>
 /// Create a copy of ProfileEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? email = null,Object? photoUrl = freezed,Object? photoBlurhash = freezed,Object? settings = null,Object? signupDate = null,Object? statsReport = null,Object? completed = null,Object? location = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProfileEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
@@ -282,23 +289,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'ProfileEntity'))
     ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstName', firstName))..add(DiagnosticsProperty('lastName', lastName))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('photoUrl', photoUrl))..add(DiagnosticsProperty('photoBlurhash', photoBlurhash))..add(DiagnosticsProperty('settings', settings))..add(DiagnosticsProperty('signupDate', signupDate))..add(DiagnosticsProperty('statsReport', statsReport))..add(DiagnosticsProperty('completed', completed))..add(DiagnosticsProperty('location', location));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed)&&(identical(other.location, location) || other.location == location));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.email, email) || other.email == email)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.photoBlurhash, photoBlurhash) || other.photoBlurhash == photoBlurhash)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.signupDate, signupDate) || other.signupDate == signupDate)&&(identical(other.statsReport, statsReport) || other.statsReport == statsReport)&&(identical(other.completed, completed) || other.completed == completed)&&(identical(other.location, location) || other.location == location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,settings,signupDate,statsReport,completed,location);
+int get hashCode {
+    return Object.hash(runtimeType,id,firstName,lastName,email,photoUrl,photoBlurhash,settings,signupDate,statsReport,completed,location);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProfileEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, settings: $settings, signupDate: $signupDate, statsReport: $statsReport, completed: $completed, location: $location)';
+    return 'ProfileEntity(id: $id, firstName: $firstName, lastName: $lastName, email: $email, photoUrl: $photoUrl, photoBlurhash: $photoBlurhash, settings: $settings, signupDate: $signupDate, statsReport: $statsReport, completed: $completed, location: $location)';
 }
 
 

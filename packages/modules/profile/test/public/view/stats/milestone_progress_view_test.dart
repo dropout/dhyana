@@ -1,0 +1,118 @@
+import 'package:faker/faker.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:profile/profile.dart';
+import 'package:profile/src/data/datasource/faker_profile_extension.dart';
+import 'package:provider/provider.dart';
+
+import 'package:core/core.dart';
+import 'package:profile/src/public/view/stats/milestone_progress_view_item.dart';
+
+import '../../../profile_test_helper.dart';
+
+
+void main() {
+  late MockServices mockServices;
+  late MockCrashlyticsService mockCrashlyticsService;
+
+  setUpAll(() async {
+    mockServices = MockServices();
+    mockCrashlyticsService = MockCrashlyticsService();
+
+    when(() => mockServices.crashlyticsService)
+      .thenReturn(mockCrashlyticsService);
+
+  });
+
+  group('MilestoneProgressView', () {
+
+    testWidgets('can be created with its default parameters', (WidgetTester tester) async {
+      final Profile profile = Faker().createProfile();
+
+      await tester.pumpWidget(
+        ProfileTestHelper.withLocalizationProvider(
+          MultiProvider(
+            providers: [
+              Provider<Services>.value(value: mockServices),
+            ],
+            child: MilestoneProgressView(
+              profile: profile,
+            )
+          ),
+        )
+      );
+      await tester.pumpAndSettle();
+
+      final items = tester.widgetList(find.byType(MilestoneProgressViewItem));
+      List<MilestoneProgressViewItem> milestoneItems = items.map((e) => e as MilestoneProgressViewItem).toList();
+
+      expect(find.byKey(const Key('milestone_progress_view_text')), findsOneWidget);
+      expect(milestoneItems.length, 7);
+      milestoneItems.asMap().forEach((index, item) {
+        expect(item.mode, MilestoneProgressViewItemMode.incomplete);
+      });
+      expect(find.byKey(const Key('milestone_progress_view_text')), findsOneWidget);
+    });
+
+    testWidgets('can hide text if parameter is given', (WidgetTester tester) async {
+      final Profile profile = Faker().createProfile();
+
+      await tester.pumpWidget(
+        ProfileTestHelper.withLocalizationProvider(
+          MultiProvider(
+            providers: [
+              Provider<Services>.value(value: mockServices),
+            ],
+            child: MilestoneProgressView(
+              showText: false,
+              profile: profile,
+            )
+          ),
+        )
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('milestone_progress_view_text')), findsNothing);
+    });
+
+    testWidgets('can show animation if parameter is given', (WidgetTester tester) async {
+      Profile profile = Faker().createProfile();
+
+      profile = profile.copyWith(
+        statsReport: profile.statsReport.copyWith(
+          milestoneProgress: profile.statsReport.milestoneProgress.copyWith(
+            targetDaysCount: 7,
+            completedDaysCount: 3
+          )
+        )
+      );
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          ProfileTestHelper.withLocalizationProvider(
+            MultiProvider(
+              providers: [
+                Provider<Services>.value(value: mockServices),
+              ],
+              child: MilestoneProgressView(
+                showAnimation: true,
+                profile: profile,
+              )
+            ),
+          )
+        );
+        await tester.pumpAndSettle();
+      }).then((_) {
+        final items = tester.widgetList(find.byType(MilestoneProgressViewItem));
+        List<MilestoneProgressViewItem> milestoneItems = items.map((e) => e as MilestoneProgressViewItem).toList();
+
+        expect(milestoneItems.length, 7);
+        expect(milestoneItems[2].mode, MilestoneProgressViewItemMode.animate);
+
+      });
+
+    });
+
+
+  }); // eof group
+} // eof main

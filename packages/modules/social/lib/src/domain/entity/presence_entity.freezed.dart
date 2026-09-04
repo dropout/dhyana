@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'presence_entity.dart';
@@ -9,6 +9,7 @@ part of 'presence_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $PresenceEntityCopyWith<PresenceEntity> get copyWith => _$PresenceEntityCopyWith
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as PresenceEntity;
   properties
     ..add(DiagnosticsProperty('type', 'PresenceEntity'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('profile', profile))..add(DiagnosticsProperty('startedAt', startedAt))..add(DiagnosticsProperty('location', location));
+    ..add(DiagnosticsProperty('id', _this.id))..add(DiagnosticsProperty('profile', _this.profile))..add(DiagnosticsProperty('startedAt', _this.startedAt))..add(DiagnosticsProperty('location', _this.location));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.location, location) || other.location == location));
+  final _this = this as PresenceEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.profile, _this.profile) || other.profile == _this.profile)&&(identical(other.startedAt, _this.startedAt) || other.startedAt == _this.startedAt)&&(identical(other.location, _this.location) || other.location == _this.location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,profile,startedAt,location);
+int get hashCode {
+  final _this = this as PresenceEntity;
+  return Object.hash(runtimeType,_this.id,_this.profile,_this.startedAt,_this.location);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'PresenceEntity(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
+  final _this = this as PresenceEntity;
+  return 'PresenceEntity(id: ${_this.id}, profile: ${_this.profile}, startedAt: ${_this.startedAt}, location: ${_this.location})';
 }
 
 
@@ -72,7 +79,7 @@ class _$PresenceEntityCopyWithImpl<$Res>
 /// Create a copy of PresenceEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? profile = null,Object? startedAt = null,Object? location = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(PresenceEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,profile: null == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as SocialProfileEntity,startedAt: null == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
@@ -253,23 +260,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'PresenceEntity'))
     ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('profile', profile))..add(DiagnosticsProperty('startedAt', startedAt))..add(DiagnosticsProperty('location', location));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PresenceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.location, location) || other.location == location));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PresenceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.location, location) || other.location == location));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,profile,startedAt,location);
+int get hashCode {
+    return Object.hash(runtimeType,id,profile,startedAt,location);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'PresenceEntity(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
+    return 'PresenceEntity(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
 }
 
 

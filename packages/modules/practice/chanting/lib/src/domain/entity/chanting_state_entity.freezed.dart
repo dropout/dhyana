@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'chanting_state_entity.dart';
@@ -9,17 +9,13 @@ part of 'chanting_state_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChantingStateEntity {
 
-// settings
- ChantingSettings get chantingSettings;// loading    
- CachingProgressEntity get cachingProgress;// playback
- List<ChantLocalResourcesEntity> get chantResources; PlaybackState get playbackState; Duration get elapsedTime; ProcessingState get loadingState; MediaItem? get mediaItem; Duration get outputLatency;// lyrics
- int get activeLineIndex; ProcessingState get lyricsLoadingState; LyricsDocumentEntity? get lyricsDocument;// session data
- DateTime? get startTime; DateTime? get endTime; Duration get elapsedSessionTime;
+ ChantingSettings get chantingSettings; CachingProgressEntity get cachingProgress; List<ChantLocalResourcesEntity> get chantResources; PlaybackState get playbackState; Duration get elapsedTime; ProcessingState get loadingState; MediaItem? get mediaItem; Duration get outputLatency; int get activeLineIndex; ProcessingState get lyricsLoadingState; LyricsDocumentEntity? get lyricsDocument; DateTime? get startTime; DateTime? get endTime; Duration get elapsedSessionTime;
 /// Create a copy of ChantingStateEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,16 +26,21 @@ $ChantingStateEntityCopyWith<ChantingStateEntity> get copyWith => _$ChantingStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantingStateEntity&&(identical(other.chantingSettings, chantingSettings) || other.chantingSettings == chantingSettings)&&(identical(other.cachingProgress, cachingProgress) || other.cachingProgress == cachingProgress)&&const DeepCollectionEquality().equals(other.chantResources, chantResources)&&(identical(other.playbackState, playbackState) || other.playbackState == playbackState)&&(identical(other.elapsedTime, elapsedTime) || other.elapsedTime == elapsedTime)&&(identical(other.loadingState, loadingState) || other.loadingState == loadingState)&&(identical(other.mediaItem, mediaItem) || other.mediaItem == mediaItem)&&(identical(other.outputLatency, outputLatency) || other.outputLatency == outputLatency)&&(identical(other.activeLineIndex, activeLineIndex) || other.activeLineIndex == activeLineIndex)&&(identical(other.lyricsLoadingState, lyricsLoadingState) || other.lyricsLoadingState == lyricsLoadingState)&&(identical(other.lyricsDocument, lyricsDocument) || other.lyricsDocument == lyricsDocument)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.elapsedSessionTime, elapsedSessionTime) || other.elapsedSessionTime == elapsedSessionTime));
+  final _this = this as ChantingStateEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantingStateEntity&&(identical(other.chantingSettings, _this.chantingSettings) || other.chantingSettings == _this.chantingSettings)&&(identical(other.cachingProgress, _this.cachingProgress) || other.cachingProgress == _this.cachingProgress)&&const DeepCollectionEquality().equals(other.chantResources, _this.chantResources)&&(identical(other.playbackState, _this.playbackState) || other.playbackState == _this.playbackState)&&(identical(other.elapsedTime, _this.elapsedTime) || other.elapsedTime == _this.elapsedTime)&&(identical(other.loadingState, _this.loadingState) || other.loadingState == _this.loadingState)&&(identical(other.mediaItem, _this.mediaItem) || other.mediaItem == _this.mediaItem)&&(identical(other.outputLatency, _this.outputLatency) || other.outputLatency == _this.outputLatency)&&(identical(other.activeLineIndex, _this.activeLineIndex) || other.activeLineIndex == _this.activeLineIndex)&&(identical(other.lyricsLoadingState, _this.lyricsLoadingState) || other.lyricsLoadingState == _this.lyricsLoadingState)&&(identical(other.lyricsDocument, _this.lyricsDocument) || other.lyricsDocument == _this.lyricsDocument)&&(identical(other.startTime, _this.startTime) || other.startTime == _this.startTime)&&(identical(other.endTime, _this.endTime) || other.endTime == _this.endTime)&&(identical(other.elapsedSessionTime, _this.elapsedSessionTime) || other.elapsedSessionTime == _this.elapsedSessionTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,chantingSettings,cachingProgress,const DeepCollectionEquality().hash(chantResources),playbackState,elapsedTime,loadingState,mediaItem,outputLatency,activeLineIndex,lyricsLoadingState,lyricsDocument,startTime,endTime,elapsedSessionTime);
+int get hashCode {
+  final _this = this as ChantingStateEntity;
+  return Object.hash(runtimeType,_this.chantingSettings,_this.cachingProgress,const DeepCollectionEquality().hash(_this.chantResources),_this.playbackState,_this.elapsedTime,_this.loadingState,_this.mediaItem,_this.outputLatency,_this.activeLineIndex,_this.lyricsLoadingState,_this.lyricsDocument,_this.startTime,_this.endTime,_this.elapsedSessionTime);
+}
 
 @override
 String toString() {
-  return 'ChantingStateEntity(chantingSettings: $chantingSettings, cachingProgress: $cachingProgress, chantResources: $chantResources, playbackState: $playbackState, elapsedTime: $elapsedTime, loadingState: $loadingState, mediaItem: $mediaItem, outputLatency: $outputLatency, activeLineIndex: $activeLineIndex, lyricsLoadingState: $lyricsLoadingState, lyricsDocument: $lyricsDocument, startTime: $startTime, endTime: $endTime, elapsedSessionTime: $elapsedSessionTime)';
+  final _this = this as ChantingStateEntity;
+  return 'ChantingStateEntity(chantingSettings: ${_this.chantingSettings}, cachingProgress: ${_this.cachingProgress}, chantResources: ${_this.chantResources}, playbackState: ${_this.playbackState}, elapsedTime: ${_this.elapsedTime}, loadingState: ${_this.loadingState}, mediaItem: ${_this.mediaItem}, outputLatency: ${_this.outputLatency}, activeLineIndex: ${_this.activeLineIndex}, lyricsLoadingState: ${_this.lyricsLoadingState}, lyricsDocument: ${_this.lyricsDocument}, startTime: ${_this.startTime}, endTime: ${_this.endTime}, elapsedSessionTime: ${_this.elapsedSessionTime})';
 }
 
 
@@ -68,7 +69,7 @@ class _$ChantingStateEntityCopyWithImpl<$Res>
 /// Create a copy of ChantingStateEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? chantingSettings = null,Object? cachingProgress = null,Object? chantResources = null,Object? playbackState = null,Object? elapsedTime = null,Object? loadingState = null,Object? mediaItem = freezed,Object? outputLatency = null,Object? activeLineIndex = null,Object? lyricsLoadingState = null,Object? lyricsDocument = freezed,Object? startTime = freezed,Object? endTime = freezed,Object? elapsedSessionTime = null,}) {
-  return _then(_self.copyWith(
+  return _then(ChantingStateEntity(
 chantingSettings: null == chantingSettings ? _self.chantingSettings : chantingSettings // ignore: cast_nullable_to_non_nullable
 as ChantingSettings,cachingProgress: null == cachingProgress ? _self.cachingProgress : cachingProgress // ignore: cast_nullable_to_non_nullable
 as CachingProgressEntity,chantResources: null == chantResources ? _self.chantResources : chantResources // ignore: cast_nullable_to_non_nullable
@@ -248,16 +249,12 @@ return $default(_that.chantingSettings,_that.cachingProgress,_that.chantResource
 
 
 class _ChantingStateEntity extends ChantingStateEntity {
-  const _ChantingStateEntity({required this.chantingSettings, this.cachingProgress = const CachingProgressEntity(), final  List<ChantLocalResourcesEntity> chantResources = const [], required this.playbackState, this.elapsedTime = Duration.zero, this.loadingState = ProcessingState.processing, this.mediaItem, this.outputLatency = Duration.zero, this.activeLineIndex = 0, this.lyricsLoadingState = ProcessingState.processing, this.lyricsDocument, this.startTime, this.endTime, this.elapsedSessionTime = Duration.zero}): _chantResources = chantResources,super._();
+  const _ChantingStateEntity({required this.chantingSettings, this.cachingProgress = const CachingProgressEntity(),  List<ChantLocalResourcesEntity> chantResources = const [], required this.playbackState, this.elapsedTime = Duration.zero, this.loadingState = ProcessingState.processing, this.mediaItem, this.outputLatency = Duration.zero, this.activeLineIndex = 0, this.lyricsLoadingState = ProcessingState.processing, this.lyricsDocument, this.startTime, this.endTime, this.elapsedSessionTime = Duration.zero}): _chantResources = chantResources,super._();
   
 
-// settings
 @override final  ChantingSettings chantingSettings;
-// loading    
 @override@JsonKey() final  CachingProgressEntity cachingProgress;
-// playback
  final  List<ChantLocalResourcesEntity> _chantResources;
-// playback
 @override@JsonKey() List<ChantLocalResourcesEntity> get chantResources {
   if (_chantResources is EqualUnmodifiableListView) return _chantResources;
   // ignore: implicit_dynamic_type
@@ -269,11 +266,9 @@ class _ChantingStateEntity extends ChantingStateEntity {
 @override@JsonKey() final  ProcessingState loadingState;
 @override final  MediaItem? mediaItem;
 @override@JsonKey() final  Duration outputLatency;
-// lyrics
 @override@JsonKey() final  int activeLineIndex;
 @override@JsonKey() final  ProcessingState lyricsLoadingState;
 @override final  LyricsDocumentEntity? lyricsDocument;
-// session data
 @override final  DateTime? startTime;
 @override final  DateTime? endTime;
 @override@JsonKey() final  Duration elapsedSessionTime;
@@ -288,16 +283,18 @@ _$ChantingStateEntityCopyWith<_ChantingStateEntity> get copyWith => __$ChantingS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantingStateEntity&&(identical(other.chantingSettings, chantingSettings) || other.chantingSettings == chantingSettings)&&(identical(other.cachingProgress, cachingProgress) || other.cachingProgress == cachingProgress)&&const DeepCollectionEquality().equals(other._chantResources, _chantResources)&&(identical(other.playbackState, playbackState) || other.playbackState == playbackState)&&(identical(other.elapsedTime, elapsedTime) || other.elapsedTime == elapsedTime)&&(identical(other.loadingState, loadingState) || other.loadingState == loadingState)&&(identical(other.mediaItem, mediaItem) || other.mediaItem == mediaItem)&&(identical(other.outputLatency, outputLatency) || other.outputLatency == outputLatency)&&(identical(other.activeLineIndex, activeLineIndex) || other.activeLineIndex == activeLineIndex)&&(identical(other.lyricsLoadingState, lyricsLoadingState) || other.lyricsLoadingState == lyricsLoadingState)&&(identical(other.lyricsDocument, lyricsDocument) || other.lyricsDocument == lyricsDocument)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.elapsedSessionTime, elapsedSessionTime) || other.elapsedSessionTime == elapsedSessionTime));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantingStateEntity&&(identical(other.chantingSettings, chantingSettings) || other.chantingSettings == chantingSettings)&&(identical(other.cachingProgress, cachingProgress) || other.cachingProgress == cachingProgress)&&const DeepCollectionEquality().equals(other.chantResources, _chantResources)&&(identical(other.playbackState, playbackState) || other.playbackState == playbackState)&&(identical(other.elapsedTime, elapsedTime) || other.elapsedTime == elapsedTime)&&(identical(other.loadingState, loadingState) || other.loadingState == loadingState)&&(identical(other.mediaItem, mediaItem) || other.mediaItem == mediaItem)&&(identical(other.outputLatency, outputLatency) || other.outputLatency == outputLatency)&&(identical(other.activeLineIndex, activeLineIndex) || other.activeLineIndex == activeLineIndex)&&(identical(other.lyricsLoadingState, lyricsLoadingState) || other.lyricsLoadingState == lyricsLoadingState)&&(identical(other.lyricsDocument, lyricsDocument) || other.lyricsDocument == lyricsDocument)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.elapsedSessionTime, elapsedSessionTime) || other.elapsedSessionTime == elapsedSessionTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,chantingSettings,cachingProgress,const DeepCollectionEquality().hash(_chantResources),playbackState,elapsedTime,loadingState,mediaItem,outputLatency,activeLineIndex,lyricsLoadingState,lyricsDocument,startTime,endTime,elapsedSessionTime);
+int get hashCode {
+    return Object.hash(runtimeType,chantingSettings,cachingProgress,const DeepCollectionEquality().hash(_chantResources),playbackState,elapsedTime,loadingState,mediaItem,outputLatency,activeLineIndex,lyricsLoadingState,lyricsDocument,startTime,endTime,elapsedSessionTime);
+}
 
 @override
 String toString() {
-  return 'ChantingStateEntity(chantingSettings: $chantingSettings, cachingProgress: $cachingProgress, chantResources: $chantResources, playbackState: $playbackState, elapsedTime: $elapsedTime, loadingState: $loadingState, mediaItem: $mediaItem, outputLatency: $outputLatency, activeLineIndex: $activeLineIndex, lyricsLoadingState: $lyricsLoadingState, lyricsDocument: $lyricsDocument, startTime: $startTime, endTime: $endTime, elapsedSessionTime: $elapsedSessionTime)';
+    return 'ChantingStateEntity(chantingSettings: $chantingSettings, cachingProgress: $cachingProgress, chantResources: $chantResources, playbackState: $playbackState, elapsedTime: $elapsedTime, loadingState: $loadingState, mediaItem: $mediaItem, outputLatency: $outputLatency, activeLineIndex: $activeLineIndex, lyricsLoadingState: $lyricsLoadingState, lyricsDocument: $lyricsDocument, startTime: $startTime, endTime: $endTime, elapsedSessionTime: $elapsedSessionTime)';
 }
 
 

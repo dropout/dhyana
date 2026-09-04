@@ -3,7 +3,8 @@ import 'package:timer/src/domain/entity/timer_settings_entity.dart';
 import 'package:timer/src/presentation/view/timer/timer_running_time.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:core/src/testing/test_context_providers.dart';
+import '../../../timer_test_helper.dart';
+
 
 void main() {
 
@@ -21,7 +22,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningTime(
             timerState: timerState,
           ),
@@ -41,7 +42,7 @@ void main() {
       );
 
             await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           TimerRunningTime(
             timerState: timerState,
           ),

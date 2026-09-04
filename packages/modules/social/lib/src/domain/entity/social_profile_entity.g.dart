@@ -26,5 +26,5 @@ Map<String, dynamic> _$SocialProfileEntityToJson(
   'lastName': instance.lastName,
   'photoUrl': instance.photoUrl,
   'photoBlurhash': instance.photoBlurhash,
-  'location': instance.location?.toJson(),
+  'location': instance.location,
 };

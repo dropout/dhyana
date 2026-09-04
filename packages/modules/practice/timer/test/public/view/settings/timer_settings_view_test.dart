@@ -14,28 +14,22 @@ import 'package:timer/src/public/view/timer_settings/warmup_input.dart';
 import 'package:timer/src/public/view/timer_settings/timer_settings_view.dart';
 
 import '../../../timer_mock_definitions.dart';
+import '../../../timer_test_helper.dart';
 
 
 void main() {
   group('TimerSettingsView', () {
     late MockServices mockServices;
-    late ShaderService shaderService;
     late OverlayService mockOverlayService;
 
     setUpAll(() async {
       mockServices = MockServices();
-      shaderService = DefaultShaderService();
       mockOverlayService = MockOverlayService();
 
-      when(() => mockServices.shaderService).thenReturn(shaderService);
       when(() => mockServices.overlayService).thenReturn(mockOverlayService);
-
-      await shaderService.loadShader('shaders/gradient_flow.frag');
     });
 
-    tearDown(() {
-      shaderService.close();
-    });
+    tearDown(() {});
 
     testWidgets('TimerSettingsView has all the necessary interface elements', (
       WidgetTester tester,
@@ -45,10 +39,13 @@ void main() {
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: withAllContextProviders(
+          child: TimerTestHelper.withLocalizationProvider(
             BlocProvider<TimerSettingsCubit>(
               create: (context) => MockTimerSettingsCubit(),
-              child: TimerSettingsView(timerSettings: timerSettings),
+              child: ShaderRenderingScope(
+                enabled: false, 
+                child: TimerSettingsView(timerSettings: timerSettings)
+              ),
             ),
           ),
         ),

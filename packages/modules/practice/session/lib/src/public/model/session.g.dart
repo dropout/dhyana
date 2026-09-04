@@ -27,6 +27,6 @@ Map<String, dynamic> _$SessionToJson(_Session instance) => <String, dynamic>{
 };
 
 const _$SessionTypeEnumMap = {
-  SessionType.sitting: 'sitting',
+  SessionType.timer: 'timer',
   SessionType.chanting: 'chanting',
 };

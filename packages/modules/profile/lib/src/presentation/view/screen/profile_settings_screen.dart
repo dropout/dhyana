@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
   final String profileId;
@@ -60,7 +61,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
   @override
   Widget build(BuildContext context) {
     final screenTitle = ProfileLocalizations.of(context).profileSettings;
-    return BlocBuilder<ProfileStateCubit, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState profileState) {
         switch (profileState) {
           case ProfileLoadingState():

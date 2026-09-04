@@ -58,28 +58,20 @@ void main() {
       type: .sitting,
     );
 
-    when(() => mockStatsPublicApi.logSessionStatistics(profile.id, s))
-        .thenAnswer((_) async {});
-    when(() => mindfulMinutesService.getAuthorizationStatus())
-        .thenAnswer((_) async => AuthorizationStatus.authorized);
-    when(
-      () => mindfulMinutesService.logMindfulMinutes(
-        session.startTime,
-        session.endTime,
-      ),
-    ).thenAnswer((_) async {});
+    when(() => mockSessionAppPort.isMindfulMinutesAuthorized())
+      .thenAnswer((_) async => true);
+    when(() => mockSessionAppPort.logSessionStatistics(profile.id, s))
+      .thenAnswer((_) async {});
+    when(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime))
+      .thenAnswer((_) async {});
+
 
     await useCase.execute(profile.id, session);
 
-    verify(() => mockStatsPublicApi.logSessionStatistics(profile.id, s))
-        .called(1);
-    verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
-    verify(
-      () => mindfulMinutesService.logMindfulMinutes(
-        session.startTime,
-        session.endTime,
-      ),
-    ).called(1);
+    verify(() => mockSessionAppPort.logSessionStatistics(profile.id, s)).called(1);
+    verify(() => mockSessionAppPort.isMindfulMinutesAuthorized()).called(1);
+    verify(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime)).called(1);
+
   });
 
   test(
@@ -87,10 +79,6 @@ void main() {
     () async {
       final profile = createProfile();
       final session = createSession();
-      final unauthorizedStatus = AuthorizationStatus.values.firstWhere(
-        (status) => status != AuthorizationStatus.authorized,
-        orElse: () => AuthorizationStatus.authorized,
-      );
 
       final s = StatsSession(
         id: session.id,
@@ -100,17 +88,18 @@ void main() {
         type: .sitting,
       );
 
-      when(() => mockStatsPublicApi.logSessionStatistics(profile.id, s))
-          .thenAnswer((_) async {});
-      when(() => mindfulMinutesService.getAuthorizationStatus())
-          .thenAnswer((_) async => unauthorizedStatus);
+      when(() => mockSessionAppPort.isMindfulMinutesAuthorized())
+        .thenAnswer((_) async => false);
+      when(() => mockSessionAppPort.logSessionStatistics(profile.id, s))
+        .thenAnswer((_) async {});
+      when(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime))
+        .thenAnswer((_) async {});
 
       await useCase.execute(profile.id, session);
 
-      verify(() => mockStatsPublicApi.logSessionStatistics(profile.id, s))
-          .called(1);
-      verify(() => mindfulMinutesService.getAuthorizationStatus()).called(1);
-      verifyNever(() => mindfulMinutesService.logMindfulMinutes(any(), any()));
+      verify(() => mockSessionAppPort.logSessionStatistics(profile.id, s)).called(1);
+      verify(() => mockSessionAppPort.isMindfulMinutesAuthorized()).called(1);
+      verifyNever(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime));
     },
   );
 }

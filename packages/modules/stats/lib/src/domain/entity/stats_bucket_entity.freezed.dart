@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'stats_bucket_entity.dart';
@@ -9,6 +9,7 @@ part of 'stats_bucket_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 StatsBucketEntity _$StatsBucketEntityFromJson(
@@ -59,16 +60,21 @@ $StatsBucketEntityCopyWith<StatsBucketEntity> get copyWith => _$StatsBucketEntit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+  final _this = this as StatsBucketEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StatsBucketEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.startDate, _this.startDate) || other.startDate == _this.startDate)&&(identical(other.minutesCount, _this.minutesCount) || other.minutesCount == _this.minutesCount)&&(identical(other.sessionCount, _this.sessionCount) || other.sessionCount == _this.sessionCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+  final _this = this as StatsBucketEntity;
+  return Object.hash(runtimeType,_this.id,_this.startDate,_this.minutesCount,_this.sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucketEntity(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+  final _this = this as StatsBucketEntity;
+  return 'StatsBucketEntity(id: ${_this.id}, startDate: ${_this.startDate}, minutesCount: ${_this.minutesCount}, sessionCount: ${_this.sessionCount})';
 }
 
 
@@ -255,7 +261,7 @@ return year(_that.id,_that.startDate,_that.minutesCount,_that.sessionCount);case
 @JsonSerializable()
 
 class DayStatsBucketEntity extends StatsBucketEntity {
-  const DayStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0, final  String? $type}): $type = $type ?? 'day',super._();
+  const DayStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0,  String? $type}): $type = $type ?? 'day',super._();
   factory DayStatsBucketEntity.fromJson(Map<String, dynamic> json) => _$DayStatsBucketEntityFromJson(json);
 
 @override final  String id;
@@ -280,16 +286,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DayStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DayStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucketEntity.day(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucketEntity.day(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 
@@ -334,7 +342,7 @@ as int,
 @JsonSerializable()
 
 class WeekStatsBucketEntity extends StatsBucketEntity {
-  const WeekStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0, final  String? $type}): $type = $type ?? 'week',super._();
+  const WeekStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0,  String? $type}): $type = $type ?? 'week',super._();
   factory WeekStatsBucketEntity.fromJson(Map<String, dynamic> json) => _$WeekStatsBucketEntityFromJson(json);
 
 @override final  String id;
@@ -359,16 +367,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeekStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WeekStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucketEntity.week(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucketEntity.week(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 
@@ -413,7 +423,7 @@ as int,
 @JsonSerializable()
 
 class MonthStatsBucketEntity extends StatsBucketEntity {
-  const MonthStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0, final  String? $type}): $type = $type ?? 'month',super._();
+  const MonthStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0,  String? $type}): $type = $type ?? 'month',super._();
   factory MonthStatsBucketEntity.fromJson(Map<String, dynamic> json) => _$MonthStatsBucketEntityFromJson(json);
 
 @override final  String id;
@@ -438,16 +448,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucketEntity.month(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucketEntity.month(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 
@@ -492,7 +504,7 @@ as int,
 @JsonSerializable()
 
 class YearStatsBucketEntity extends StatsBucketEntity {
-  const YearStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0, final  String? $type}): $type = $type ?? 'year',super._();
+  const YearStatsBucketEntity({required this.id, @DateTimeConverter() required this.startDate, this.minutesCount = 0, this.sessionCount = 0,  String? $type}): $type = $type ?? 'year',super._();
   factory YearStatsBucketEntity.fromJson(Map<String, dynamic> json) => _$YearStatsBucketEntityFromJson(json);
 
 @override final  String id;
@@ -517,16 +529,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is YearStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is YearStatsBucketEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.minutesCount, minutesCount) || other.minutesCount == minutesCount)&&(identical(other.sessionCount, sessionCount) || other.sessionCount == sessionCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+int get hashCode {
+    return Object.hash(runtimeType,id,startDate,minutesCount,sessionCount);
+}
 
 @override
 String toString() {
-  return 'StatsBucketEntity.year(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
+    return 'StatsBucketEntity.year(id: $id, startDate: $startDate, minutesCount: $minutesCount, sessionCount: $sessionCount)';
 }
 
 

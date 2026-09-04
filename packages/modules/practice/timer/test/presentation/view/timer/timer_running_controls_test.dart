@@ -14,7 +14,7 @@ import 'package:timer/src/domain/entity/timer_settings_entity.dart';
 import 'package:timer/src/presentation/view/timer/timer_running_controls.dart';
 
 import '../../../timer_mock_definitions.dart';
-
+import '../../../timer_test_helper.dart';
 
 
 void main() {
@@ -48,7 +48,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           BlocProvider<TimerCubit>.value(
             value: mockTimerCubit,
             child: TimerRunningControls(
@@ -75,7 +75,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           BlocProvider<TimerCubit>.value(
             value: mockTimerCubit,
             child: TimerRunningControls(
@@ -102,7 +102,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           BlocProvider<TimerCubit>.value(
             value: mockTimerCubit,
             child: TimerRunningControls(
@@ -129,7 +129,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           BlocProvider<TimerCubit>.value(
             value: mockTimerCubit,
             child: TimerRunningControls(
@@ -165,7 +165,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           BlocProvider<TimerCubit>.value(
             value: mockTimerCubit,
             child: TimerRunningControls(
@@ -192,14 +192,15 @@ void main() {
     testWidgets('can pause the timer', (WidgetTester tester) async {
 
       final TimerStateEntity timerState = TimerStateEntity.initial(
-        timerSettings: TimerSettingsEntity(
-        )
+        timerSettings: TimerSettingsEntity()
       ).copyWith(
         timerStatus: TimerStatus.running,
       );
 
+      when(() => mockTimerCubit.state).thenReturn(timerState);
+
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>.value(
             value: mockServices,
             child: BlocProvider<TimerCubit>.value(
@@ -229,8 +230,10 @@ void main() {
         timerStatus: TimerStatus.paused,
       );
 
+      when(() => mockTimerCubit.state).thenReturn(timerState);
+
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>.value(
             value: mockServices,
             child: BlocProvider<TimerCubit>.value(
@@ -277,7 +280,7 @@ void main() {
               return true;
             },
             builder: (context, state) {
-              return withAllContextProviders(
+              return TimerTestHelper.withLocalizationProvider(
                 Provider<Services>.value(
                   value: mockServices,
                   child: BlocProvider<TimerCubit>.value(
@@ -336,7 +339,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        withAllContextProviders(
+        TimerTestHelper.withLocalizationProvider(
           Provider<Services>.value(
             value: mockServices,
             child: BlocProvider<TimerCubit>.value(

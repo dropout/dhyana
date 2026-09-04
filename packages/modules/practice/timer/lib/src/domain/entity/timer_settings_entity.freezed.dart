@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'timer_settings_entity.dart';
@@ -9,6 +9,7 @@ part of 'timer_settings_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $TimerSettingsEntityCopyWith<TimerSettingsEntity> get copyWith => _$TimerSetting
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSettingsEntity&&(identical(other.warmup, warmup) || other.warmup == warmup)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.intervalCount, intervalCount) || other.intervalCount == intervalCount)&&(identical(other.intervalSound, intervalSound) || other.intervalSound == intervalSound)&&(identical(other.startingSound, startingSound) || other.startingSound == startingSound)&&(identical(other.endingSound, endingSound) || other.endingSound == endingSound)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
+  final _this = this as TimerSettingsEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSettingsEntity&&(identical(other.warmup, _this.warmup) || other.warmup == _this.warmup)&&(identical(other.duration, _this.duration) || other.duration == _this.duration)&&(identical(other.intervalCount, _this.intervalCount) || other.intervalCount == _this.intervalCount)&&(identical(other.intervalSound, _this.intervalSound) || other.intervalSound == _this.intervalSound)&&(identical(other.startingSound, _this.startingSound) || other.startingSound == _this.startingSound)&&(identical(other.endingSound, _this.endingSound) || other.endingSound == _this.endingSound)&&(identical(other.lastUsed, _this.lastUsed) || other.lastUsed == _this.lastUsed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,warmup,duration,intervalCount,intervalSound,startingSound,endingSound,lastUsed);
+int get hashCode {
+  final _this = this as TimerSettingsEntity;
+  return Object.hash(runtimeType,_this.warmup,_this.duration,_this.intervalCount,_this.intervalSound,_this.startingSound,_this.endingSound,_this.lastUsed);
+}
 
 @override
 String toString() {
-  return 'TimerSettingsEntity(warmup: $warmup, duration: $duration, intervalCount: $intervalCount, intervalSound: $intervalSound, startingSound: $startingSound, endingSound: $endingSound, lastUsed: $lastUsed)';
+  final _this = this as TimerSettingsEntity;
+  return 'TimerSettingsEntity(warmup: ${_this.warmup}, duration: ${_this.duration}, intervalCount: ${_this.intervalCount}, intervalSound: ${_this.intervalSound}, startingSound: ${_this.startingSound}, endingSound: ${_this.endingSound}, lastUsed: ${_this.lastUsed})';
 }
 
 
@@ -66,7 +72,7 @@ class _$TimerSettingsEntityCopyWithImpl<$Res>
 /// Create a copy of TimerSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? warmup = null,Object? duration = null,Object? intervalCount = null,Object? intervalSound = null,Object? startingSound = null,Object? endingSound = null,Object? lastUsed = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TimerSettingsEntity(
 warmup: null == warmup ? _self.warmup : warmup // ignore: cast_nullable_to_non_nullable
 as Duration,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
 as Duration,intervalCount: null == intervalCount ? _self.intervalCount : intervalCount // ignore: cast_nullable_to_non_nullable
@@ -233,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSettingsEntity&&(identical(other.warmup, warmup) || other.warmup == warmup)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.intervalCount, intervalCount) || other.intervalCount == intervalCount)&&(identical(other.intervalSound, intervalSound) || other.intervalSound == intervalSound)&&(identical(other.startingSound, startingSound) || other.startingSound == startingSound)&&(identical(other.endingSound, endingSound) || other.endingSound == endingSound)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSettingsEntity&&(identical(other.warmup, warmup) || other.warmup == warmup)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.intervalCount, intervalCount) || other.intervalCount == intervalCount)&&(identical(other.intervalSound, intervalSound) || other.intervalSound == intervalSound)&&(identical(other.startingSound, startingSound) || other.startingSound == startingSound)&&(identical(other.endingSound, endingSound) || other.endingSound == endingSound)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,warmup,duration,intervalCount,intervalSound,startingSound,endingSound,lastUsed);
+int get hashCode {
+    return Object.hash(runtimeType,warmup,duration,intervalCount,intervalSound,startingSound,endingSound,lastUsed);
+}
 
 @override
 String toString() {
-  return 'TimerSettingsEntity(warmup: $warmup, duration: $duration, intervalCount: $intervalCount, intervalSound: $intervalSound, startingSound: $startingSound, endingSound: $endingSound, lastUsed: $lastUsed)';
+    return 'TimerSettingsEntity(warmup: $warmup, duration: $duration, intervalCount: $intervalCount, intervalSound: $intervalSound, startingSound: $startingSound, endingSound: $endingSound, lastUsed: $lastUsed)';
 }
 
 

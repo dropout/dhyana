@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'chanting_settings.dart';
@@ -9,6 +9,7 @@ part of 'chanting_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $ChantingSettingsCopyWith<ChantingSettings> get copyWith => _$ChantingSettingsCo
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as ChantingSettings;
   properties
     ..add(DiagnosticsProperty('type', 'ChantingSettings'))
-    ..add(DiagnosticsProperty('selectedChants', selectedChants))..add(DiagnosticsProperty('lastUsed', lastUsed));
+    ..add(DiagnosticsProperty('selectedChants', _this.selectedChants))..add(DiagnosticsProperty('lastUsed', _this.lastUsed));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantingSettings&&const DeepCollectionEquality().equals(other.selectedChants, selectedChants)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
+  final _this = this as ChantingSettings;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChantingSettings&&const DeepCollectionEquality().equals(other.selectedChants, _this.selectedChants)&&(identical(other.lastUsed, _this.lastUsed) || other.lastUsed == _this.lastUsed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(selectedChants),lastUsed);
+int get hashCode {
+  final _this = this as ChantingSettings;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.selectedChants),_this.lastUsed);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ChantingSettings(selectedChants: $selectedChants, lastUsed: $lastUsed)';
+  final _this = this as ChantingSettings;
+  return 'ChantingSettings(selectedChants: ${_this.selectedChants}, lastUsed: ${_this.lastUsed})';
 }
 
 
@@ -72,7 +79,7 @@ class _$ChantingSettingsCopyWithImpl<$Res>
 /// Create a copy of ChantingSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? selectedChants = null,Object? lastUsed = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ChantingSettings(
 selectedChants: null == selectedChants ? _self.selectedChants : selectedChants // ignore: cast_nullable_to_non_nullable
 as List<ChantPlaylistItem>,lastUsed: freezed == lastUsed ? _self.lastUsed : lastUsed // ignore: cast_nullable_to_non_nullable
 as DateTime?,
@@ -210,7 +217,7 @@ return $default(_that.selectedChants,_that.lastUsed);case _:
 @JsonSerializable()
 
 class _ChantingSettings extends ChantingSettings with DiagnosticableTreeMixin {
-  const _ChantingSettings({final  List<ChantPlaylistItem> selectedChants = const <ChantPlaylistItem>[], @DateTimeOrNullConverter() this.lastUsed}): _selectedChants = selectedChants,super._();
+  const _ChantingSettings({ List<ChantPlaylistItem> selectedChants = const <ChantPlaylistItem>[], @DateTimeOrNullConverter() this.lastUsed}): _selectedChants = selectedChants,super._();
   factory _ChantingSettings.fromJson(Map<String, dynamic> json) => _$ChantingSettingsFromJson(json);
 
  final  List<ChantPlaylistItem> _selectedChants;
@@ -234,23 +241,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'ChantingSettings'))
     ..add(DiagnosticsProperty('selectedChants', selectedChants))..add(DiagnosticsProperty('lastUsed', lastUsed));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantingSettings&&const DeepCollectionEquality().equals(other._selectedChants, _selectedChants)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChantingSettings&&const DeepCollectionEquality().equals(other.selectedChants, _selectedChants)&&(identical(other.lastUsed, lastUsed) || other.lastUsed == lastUsed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedChants),lastUsed);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedChants),lastUsed);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ChantingSettings(selectedChants: $selectedChants, lastUsed: $lastUsed)';
+    return 'ChantingSettings(selectedChants: $selectedChants, lastUsed: $lastUsed)';
 }
 
 

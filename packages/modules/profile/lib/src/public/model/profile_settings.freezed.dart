@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_settings.dart';
@@ -9,6 +9,7 @@ part of 'profile_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ProfileSettingsCopyWith<ProfileSettings> get copyWith => _$ProfileSettingsCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileSettings&&(identical(other.showStatsOnFinishScreen, showStatsOnFinishScreen) || other.showStatsOnFinishScreen == showStatsOnFinishScreen)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature));
+  final _this = this as ProfileSettings;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileSettings&&(identical(other.showStatsOnFinishScreen, _this.showStatsOnFinishScreen) || other.showStatsOnFinishScreen == _this.showStatsOnFinishScreen)&&(identical(other.usePresenceFeature, _this.usePresenceFeature) || other.usePresenceFeature == _this.usePresenceFeature));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,showStatsOnFinishScreen,usePresenceFeature);
+int get hashCode {
+  final _this = this as ProfileSettings;
+  return Object.hash(runtimeType,_this.showStatsOnFinishScreen,_this.usePresenceFeature);
+}
 
 @override
 String toString() {
-  return 'ProfileSettings(showStatsOnFinishScreen: $showStatsOnFinishScreen, usePresenceFeature: $usePresenceFeature)';
+  final _this = this as ProfileSettings;
+  return 'ProfileSettings(showStatsOnFinishScreen: ${_this.showStatsOnFinishScreen}, usePresenceFeature: ${_this.usePresenceFeature})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ProfileSettingsCopyWithImpl<$Res>
 /// Create a copy of ProfileSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? showStatsOnFinishScreen = null,Object? usePresenceFeature = null,}) {
-  return _then(_self.copyWith(
+  return _then(ProfileSettings(
 showStatsOnFinishScreen: null == showStatsOnFinishScreen ? _self.showStatsOnFinishScreen : showStatsOnFinishScreen // ignore: cast_nullable_to_non_nullable
 as bool,usePresenceFeature: null == usePresenceFeature ? _self.usePresenceFeature : usePresenceFeature // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -217,16 +223,18 @@ _$ProfileSettingsCopyWith<_ProfileSettings> get copyWith => __$ProfileSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileSettings&&(identical(other.showStatsOnFinishScreen, showStatsOnFinishScreen) || other.showStatsOnFinishScreen == showStatsOnFinishScreen)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileSettings&&(identical(other.showStatsOnFinishScreen, showStatsOnFinishScreen) || other.showStatsOnFinishScreen == showStatsOnFinishScreen)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,showStatsOnFinishScreen,usePresenceFeature);
+int get hashCode {
+    return Object.hash(runtimeType,showStatsOnFinishScreen,usePresenceFeature);
+}
 
 @override
 String toString() {
-  return 'ProfileSettings(showStatsOnFinishScreen: $showStatsOnFinishScreen, usePresenceFeature: $usePresenceFeature)';
+    return 'ProfileSettings(showStatsOnFinishScreen: $showStatsOnFinishScreen, usePresenceFeature: $usePresenceFeature)';
 }
 
 

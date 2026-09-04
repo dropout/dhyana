@@ -1,3 +1,4 @@
+import 'package:profile/profile.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:session/src/public/model/session.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
@@ -41,7 +42,7 @@ class SessionCompletedScreen extends StatelessWidget {
   }
 
   Widget buildSignedInView(BuildContext context, String profileId) {
-    return BlocBuilder<ProfileStateCubit, ProfileState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         switch (state) {
           case ProfileStateInitial():

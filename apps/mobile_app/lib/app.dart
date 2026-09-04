@@ -17,6 +17,8 @@ import 'package:session/session.dart';
 import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:dhyana/l10n/app_localizations.dart';
 
+import 'app_providers.dart';
+
 
 /// The main app widget.
 /// It sets up the top-level providers and

@@ -153,9 +153,6 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
       padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
       child: SessionStartButton(
         onTap: () => _onStartButtonTap(context),
-        fragmentShader: context.services.shaderService.get(
-          Assets.shaderGradientFlow,
-        ),
         colorA: AppColors.crimsonRed,
         colorB: Color(0xFFD93838), // Crimson Red Tint 3
       ),

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'presence_query_options_entity.dart';
@@ -9,6 +9,7 @@ part of 'presence_query_options_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -27,23 +28,29 @@ $PresenceQueryOptionsEntityCopyWith<PresenceQueryOptionsEntity> get copyWith => 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as PresenceQueryOptionsEntity;
   properties
     ..add(DiagnosticsProperty('type', 'PresenceQueryOptionsEntity'))
-    ..add(DiagnosticsProperty('windowSize', windowSize))..add(DiagnosticsProperty('limit', limit))..add(DiagnosticsProperty('ownProfileId', ownProfileId))..add(DiagnosticsProperty('lastDocumentId', lastDocumentId))..add(DiagnosticsProperty('location', location))..add(DiagnosticsProperty('rangeInKm', rangeInKm));
+    ..add(DiagnosticsProperty('windowSize', _this.windowSize))..add(DiagnosticsProperty('limit', _this.limit))..add(DiagnosticsProperty('ownProfileId', _this.ownProfileId))..add(DiagnosticsProperty('lastDocumentId', _this.lastDocumentId))..add(DiagnosticsProperty('location', _this.location))..add(DiagnosticsProperty('rangeInKm', _this.rangeInKm));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceQueryOptionsEntity&&(identical(other.windowSize, windowSize) || other.windowSize == windowSize)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.ownProfileId, ownProfileId) || other.ownProfileId == ownProfileId)&&(identical(other.lastDocumentId, lastDocumentId) || other.lastDocumentId == lastDocumentId)&&(identical(other.location, location) || other.location == location)&&(identical(other.rangeInKm, rangeInKm) || other.rangeInKm == rangeInKm));
+  final _this = this as PresenceQueryOptionsEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PresenceQueryOptionsEntity&&(identical(other.windowSize, _this.windowSize) || other.windowSize == _this.windowSize)&&(identical(other.limit, _this.limit) || other.limit == _this.limit)&&(identical(other.ownProfileId, _this.ownProfileId) || other.ownProfileId == _this.ownProfileId)&&(identical(other.lastDocumentId, _this.lastDocumentId) || other.lastDocumentId == _this.lastDocumentId)&&(identical(other.location, _this.location) || other.location == _this.location)&&(identical(other.rangeInKm, _this.rangeInKm) || other.rangeInKm == _this.rangeInKm));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,windowSize,limit,ownProfileId,lastDocumentId,location,rangeInKm);
+int get hashCode {
+  final _this = this as PresenceQueryOptionsEntity;
+  return Object.hash(runtimeType,_this.windowSize,_this.limit,_this.ownProfileId,_this.lastDocumentId,_this.location,_this.rangeInKm);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'PresenceQueryOptionsEntity(windowSize: $windowSize, limit: $limit, ownProfileId: $ownProfileId, lastDocumentId: $lastDocumentId, location: $location, rangeInKm: $rangeInKm)';
+  final _this = this as PresenceQueryOptionsEntity;
+  return 'PresenceQueryOptionsEntity(windowSize: ${_this.windowSize}, limit: ${_this.limit}, ownProfileId: ${_this.ownProfileId}, lastDocumentId: ${_this.lastDocumentId}, location: ${_this.location}, rangeInKm: ${_this.rangeInKm})';
 }
 
 
@@ -72,7 +79,7 @@ class _$PresenceQueryOptionsEntityCopyWithImpl<$Res>
 /// Create a copy of PresenceQueryOptionsEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? windowSize = null,Object? limit = null,Object? ownProfileId = freezed,Object? lastDocumentId = freezed,Object? location = freezed,Object? rangeInKm = null,}) {
-  return _then(_self.copyWith(
+  return _then(PresenceQueryOptionsEntity(
 windowSize: null == windowSize ? _self.windowSize : windowSize // ignore: cast_nullable_to_non_nullable
 as Duration,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
 as int,ownProfileId: freezed == ownProfileId ? _self.ownProfileId : ownProfileId // ignore: cast_nullable_to_non_nullable
@@ -248,23 +255,25 @@ Map<String, dynamic> toJson() {
 }
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
+    properties
     ..add(DiagnosticsProperty('type', 'PresenceQueryOptionsEntity'))
     ..add(DiagnosticsProperty('windowSize', windowSize))..add(DiagnosticsProperty('limit', limit))..add(DiagnosticsProperty('ownProfileId', ownProfileId))..add(DiagnosticsProperty('lastDocumentId', lastDocumentId))..add(DiagnosticsProperty('location', location))..add(DiagnosticsProperty('rangeInKm', rangeInKm));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PresenceQueryOptionsEntity&&(identical(other.windowSize, windowSize) || other.windowSize == windowSize)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.ownProfileId, ownProfileId) || other.ownProfileId == ownProfileId)&&(identical(other.lastDocumentId, lastDocumentId) || other.lastDocumentId == lastDocumentId)&&(identical(other.location, location) || other.location == location)&&(identical(other.rangeInKm, rangeInKm) || other.rangeInKm == rangeInKm));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PresenceQueryOptionsEntity&&(identical(other.windowSize, windowSize) || other.windowSize == windowSize)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.ownProfileId, ownProfileId) || other.ownProfileId == ownProfileId)&&(identical(other.lastDocumentId, lastDocumentId) || other.lastDocumentId == lastDocumentId)&&(identical(other.location, location) || other.location == location)&&(identical(other.rangeInKm, rangeInKm) || other.rangeInKm == rangeInKm));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,windowSize,limit,ownProfileId,lastDocumentId,location,rangeInKm);
+int get hashCode {
+    return Object.hash(runtimeType,windowSize,limit,ownProfileId,lastDocumentId,location,rangeInKm);
+}
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'PresenceQueryOptionsEntity(windowSize: $windowSize, limit: $limit, ownProfileId: $ownProfileId, lastDocumentId: $lastDocumentId, location: $location, rangeInKm: $rangeInKm)';
+    return 'PresenceQueryOptionsEntity(windowSize: $windowSize, limit: $limit, ownProfileId: $ownProfileId, lastDocumentId: $lastDocumentId, location: $location, rangeInKm: $rangeInKm)';
 }
 
 

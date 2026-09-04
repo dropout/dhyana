@@ -1,7 +1,9 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
+import 'package:session/src/domain/entity/session_completed_data_entity.dart';
 import 'package:session/src/domain/service/session_app_port.dart';
 import 'package:social/social.dart';
 import 'package:stats/stats.dart';
@@ -20,7 +22,7 @@ class MockProfilePublicApi
   implements ProfilePublicApi {}
 
 class MockPresenceCubit
-  extends Mock
+  extends MockCubit<PresenceState>
   implements PresenceCubit {}
 
 class MockLogSessionUseCase
@@ -36,10 +38,18 @@ class MockMindfulMinutesService
   implements MindfulMinutesService {}
 
 class MockSessionCompletedCubit
-  extends Mock
+  extends MockCubit<SessionCompletedDataEntity>
   implements SessionCompletedCubit {}
 
 class MockSessionAppPort 
   extends Mock
   implements SessionAppPort {}
   
+class MockProfileCubit
+  extends MockCubit<ProfileState>
+  implements ProfileCubit {
+  Object? loadPresenceData() {}}
+
+class MockHomeNavigator
+  extends Mock
+  implements HomeNavigator {}

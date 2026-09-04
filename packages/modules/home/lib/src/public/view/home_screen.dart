@@ -14,7 +14,13 @@ import 'home_screen_bottom_menu.dart';
 /// A screen that allows the user to configure and start
 /// a sitting or chanting session.
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+
+  final bool useShaderInSessionStartButton;
+
+  const HomeScreen({
+    this.useShaderInSessionStartButton = true,
+    super.key,
+  });
 
   void _onSessionTypeChange(
     BuildContext context,

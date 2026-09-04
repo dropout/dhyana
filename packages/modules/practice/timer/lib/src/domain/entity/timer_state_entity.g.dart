@@ -27,7 +27,7 @@ _TimerStateEntity _$TimerStateEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$TimerStateEntityToJson(_TimerStateEntity instance) =>
     <String, dynamic>{
-      'timerSettings': instance.timerSettings.toJson(),
+      'timerSettings': instance.timerSettings,
       'timerStatus': _$TimerStatusEnumMap[instance.timerStatus]!,
       'timerStage': _$TimerStageEnumMap[instance.timerStage]!,
       'elapsedWarmupTime': instance.elapsedWarmupTime.inMicroseconds,

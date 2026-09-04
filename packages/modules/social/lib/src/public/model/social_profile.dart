@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:uuid/uuid.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:core/core.dart';
@@ -32,16 +31,6 @@ sealed class SocialProfile with _$SocialProfile implements ProfileDisplayable {
       photoUrl: profile.photoUrl,
       photoBlurhash: profile.photoBlurhash,
       location: profile.location,
-    );
-  }
-
-  factory SocialProfile.anonymous() {
-    return SocialProfile(
-      id: const Uuid().v4(),
-      firstName: DefaultProfileData.firstName,
-      lastName: DefaultProfileData.lastName,
-      photoUrl: DefaultProfileData.photoUrl,
-      photoBlurhash: DefaultProfileData.photoBlurhash,
     );
   }
 

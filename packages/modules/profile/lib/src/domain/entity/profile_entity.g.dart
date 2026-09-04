@@ -39,9 +39,9 @@ Map<String, dynamic> _$ProfileEntityToJson(_ProfileEntity instance) =>
       'email': instance.email,
       'photoUrl': instance.photoUrl,
       'photoBlurhash': instance.photoBlurhash,
-      'settings': instance.settings.toJson(),
+      'settings': instance.settings,
       'signupDate': const DateTimeConverter().toJson(instance.signupDate),
-      'statsReport': instance.statsReport.toJson(),
+      'statsReport': instance.statsReport,
       'completed': instance.completed,
-      'location': instance.location?.toJson(),
+      'location': instance.location,
     };

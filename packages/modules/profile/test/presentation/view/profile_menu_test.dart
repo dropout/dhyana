@@ -8,6 +8,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:profile/src/public/model/profile.dart';
 import 'package:provider/provider.dart';
 
+import '../../profile_test_helper.dart';
+
 
 
 void main() {
@@ -34,10 +36,10 @@ void main() {
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
-          withAllContextProviders(
+          ProfileTestHelper.withLocalizationProvider(  
             MultiProvider(
               providers: [
-                Provider<Services>(create: (context) => mockServices ),
+                Provider<Services>(create: (context) => mockServices),
               ],
               child: ProfileMenu(
                 profile: profile,

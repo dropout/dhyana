@@ -1,7 +1,9 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:core/core.dart';
 import 'package:auth/auth.dart';
+import 'package:timer/src/domain/entity/timer_state_entity.dart';
 import 'package:timer/src/domain/repository/timer_settings_history_repository.dart';
 import 'package:timer/src/domain/service/timer_app_port.dart';
 import 'package:timer/src/domain/usecase/playback_state_change_use_case.dart';
@@ -18,7 +20,7 @@ class MockAuthPublicApi
   implements AuthPublicApi {}
 
 class MockTimerCubit 
-  extends Mock 
+  extends MockCubit<TimerStateEntity> 
   implements TimerCubit {}
 
 class MockTimerSettingsCubit 

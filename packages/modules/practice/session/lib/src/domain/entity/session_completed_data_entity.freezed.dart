@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'session_completed_data_entity.dart';
@@ -9,6 +9,7 @@ part of 'session_completed_data_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$SessionCompletedDataEntity {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedDataEntity);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedDataEntity);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionCompletedDataEntity()';
+    return 'SessionCompletedDataEntity()';
 }
 
 
@@ -209,7 +210,7 @@ class SessionCompletedInitialDataEntity extends SessionCompletedDataEntity {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedInitialDataEntity);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedInitialDataEntity);
 }
 
 
@@ -218,7 +219,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionCompletedDataEntity.initial()';
+    return 'SessionCompletedDataEntity.initial()';
 }
 
 
@@ -241,7 +242,7 @@ class SessionCompletedLoadingDataEntity extends SessionCompletedDataEntity {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedLoadingDataEntity);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedLoadingDataEntity);
 }
 
 
@@ -250,7 +251,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionCompletedDataEntity.loading()';
+    return 'SessionCompletedDataEntity.loading()';
 }
 
 
@@ -273,7 +274,7 @@ class SessionCompletedErrorDataEntity extends SessionCompletedDataEntity {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedErrorDataEntity);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedErrorDataEntity);
 }
 
 
@@ -282,7 +283,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SessionCompletedDataEntity.error()';
+    return 'SessionCompletedDataEntity.error()';
 }
 
 
@@ -310,16 +311,18 @@ $SessionCompletedSavingDataEntityCopyWith<SessionCompletedSavingDataEntity> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedSavingDataEntity&&(identical(other.updateResult, updateResult) || other.updateResult == updateResult));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedSavingDataEntity&&(identical(other.updateResult, updateResult) || other.updateResult == updateResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,updateResult);
+int get hashCode {
+    return Object.hash(runtimeType,updateResult);
+}
 
 @override
 String toString() {
-  return 'SessionCompletedDataEntity.saving(updateResult: $updateResult)';
+    return 'SessionCompletedDataEntity.saving(updateResult: $updateResult)';
 }
 
 
@@ -385,16 +388,18 @@ $SessionCompletedSavedDataEntityCopyWith<SessionCompletedSavedDataEntity> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedSavedDataEntity&&(identical(other.updateResult, updateResult) || other.updateResult == updateResult));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionCompletedSavedDataEntity&&(identical(other.updateResult, updateResult) || other.updateResult == updateResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,updateResult);
+int get hashCode {
+    return Object.hash(runtimeType,updateResult);
+}
 
 @override
 String toString() {
-  return 'SessionCompletedDataEntity.saved(updateResult: $updateResult)';
+    return 'SessionCompletedDataEntity.saved(updateResult: $updateResult)';
 }
 
 

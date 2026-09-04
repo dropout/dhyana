@@ -21,9 +21,10 @@ import 'package:session/src/presentation/view/completed/session_result.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
 
 import '../../../session_mock_definitions.dart';
+import '../../../session_test_helper.dart';
 
 void main() {
-  late MockProfileStateCubit mockProfileStateCubit;
+  late MockProfileCubit mockProfileStateCubit;
   late MockSessionCompletedCubit mockSessionCompletedCubit;
   late MockPresenceCubit mockPresenceCubit;
 
@@ -39,7 +40,7 @@ void main() {
   });
 
   setUp(() async {
-    mockProfileStateCubit = MockProfileStateCubit();
+    mockProfileStateCubit = MockProfileCubit();
     mockSessionCompletedCubit = MockSessionCompletedCubit();
     mockPresenceCubit = MockPresenceCubit();
 
@@ -101,6 +102,10 @@ void main() {
       when(() => mockSessionCompletedCubit.stream)
           .thenAnswer((_) => const Stream<SessionCompletedDataEntity>.empty());
 
+      when(() => mockProfileStateCubit.loadProfile(
+        profileId, profile: updateResult.updatedProfile,
+      )).thenAnswer((_) async {});
+
       when(
         () => mockSessionCompletedCubit.logSession(
           profileId,
@@ -117,11 +122,11 @@ void main() {
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
-              withAllContextProviders(
+              SessionTestHelper.withLocalizationProvider(
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileStateCubit>.value(
+                    BlocProvider<ProfileCubit>.value(
                       value: mockProfileStateCubit,
                     ),
                     BlocProvider<SessionCompletedCubit>.value(
@@ -129,7 +134,7 @@ void main() {
                     ),
                   ],
                   child: SignedInCompletedView(
-                    profileId: 'profileId',
+                    profileId: profileId,
                     session: session.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
@@ -179,7 +184,7 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileStateCubit>.value(
+                    BlocProvider<ProfileCubit>.value(
                       value: mockProfileStateCubit,
                     ),
                     BlocProvider<SessionCompletedCubit>.value(
@@ -224,7 +229,7 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileStateCubit>.value(
+                    BlocProvider<ProfileCubit>.value(
                       value: mockProfileStateCubit,
                     ),
                     BlocProvider<SessionCompletedCubit>.value(
@@ -267,7 +272,7 @@ void main() {
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileStateCubit>.value(
+                    BlocProvider<ProfileCubit>.value(
                       value: mockProfileStateCubit,
                     ),
                     BlocProvider<SessionCompletedCubit>.value(
@@ -320,14 +325,24 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(null));
 
+      when(() => mockPresenceCubit.state).thenReturn(
+        PresenceState.initial(),
+      );
+
+      when(() => mockPresenceCubit.loadPresenceData(
+        ownProfileId: updateResult.updatedProfile.id,
+        limit: 18,
+        windowSize: const Duration(minutes: 120),
+      )).thenAnswer((_) => Future.value(null));
+
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
-              withAllContextProviders(
+              SessionTestHelper.withLocalizationProvider(
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileStateCubit>.value(
+                    BlocProvider<ProfileCubit>.value(
                       value: mockProfileStateCubit,
                     ),
                     BlocProvider<SessionCompletedCubit>.value(
@@ -375,14 +390,24 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(null));
 
+      when(() => mockPresenceCubit.state).thenReturn(
+        PresenceState.initial(),
+      );
+
+      when(() => mockPresenceCubit.loadPresenceData(
+        ownProfileId: updateResult.updatedProfile.id,
+        limit: 18,
+        windowSize: const Duration(minutes: 120),
+      )).thenAnswer((_) => Future.value(null));
+
       await tester
           .runAsync(() async {
             await tester.pumpWidget(
-              withAllContextProviders(
+              SessionTestHelper.withLocalizationProvider(
                 MultiProvider(
                   providers: [
                     Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileStateCubit>.value(
+                    BlocProvider<ProfileCubit>.value(
                       value: mockProfileStateCubit,
                     ),
                     BlocProvider<SessionCompletedCubit>.value(

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'presence.dart';
@@ -9,6 +9,7 @@ part of 'presence.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $PresenceCopyWith<Presence> get copyWith => _$PresenceCopyWithImpl<Presence>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Presence&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.location, location) || other.location == location));
+  final _this = this as Presence;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Presence&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.profile, _this.profile) || other.profile == _this.profile)&&(identical(other.startedAt, _this.startedAt) || other.startedAt == _this.startedAt)&&(identical(other.location, _this.location) || other.location == _this.location));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,profile,startedAt,location);
+int get hashCode {
+  final _this = this as Presence;
+  return Object.hash(runtimeType,_this.id,_this.profile,_this.startedAt,_this.location);
+}
 
 @override
 String toString() {
-  return 'Presence(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
+  final _this = this as Presence;
+  return 'Presence(id: ${_this.id}, profile: ${_this.profile}, startedAt: ${_this.startedAt}, location: ${_this.location})';
 }
 
 
@@ -63,7 +69,7 @@ class _$PresenceCopyWithImpl<$Res>
 /// Create a copy of Presence
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? profile = null,Object? startedAt = null,Object? location = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Presence(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,profile: null == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as SocialProfile,startedAt: null == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
@@ -242,16 +248,18 @@ _$PresenceCopyWith<_Presence> get copyWith => __$PresenceCopyWithImpl<_Presence>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Presence&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.location, location) || other.location == location));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Presence&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.location, location) || other.location == location));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,profile,startedAt,location);
+int get hashCode {
+    return Object.hash(runtimeType,id,profile,startedAt,location);
+}
 
 @override
 String toString() {
-  return 'Presence(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
+    return 'Presence(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
 }
 
 

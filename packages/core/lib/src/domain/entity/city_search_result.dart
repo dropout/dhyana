@@ -1,4 +1,3 @@
-
 import 'package:core/src/domain/entity/lat_lng.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

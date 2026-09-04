@@ -39,7 +39,7 @@ dev_dependencies:
 
   mocktail: ^1.0.5
   build_runner: ^2.4.6
-  freezed: ^3.0.6
+  freezed: ^4.0.1
   json_serializable: ^6.7.1  
   bloc_test: ^10.0.0
 

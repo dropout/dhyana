@@ -21,5 +21,5 @@ Map<String, dynamic> _$CitySearchResultToJson(_CitySearchResult instance) =>
       'placeId': instance.placeId,
       'name': instance.name,
       'types': instance.types,
-      'location': instance.location?.toJson(),
+      'location': instance.location,
     };

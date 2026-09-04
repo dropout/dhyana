@@ -1,7 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile/l10n/profile_localizations.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileMenu extends StatelessWidget {
 
@@ -38,7 +40,9 @@ class ProfileMenu extends StatelessWidget {
   }
 
   void _onSignoutTapped(BuildContext context) {
-    showAppDialog(context, SignoutDialog());
+    showAppDialog(context, SignoutDialog(
+      onSignOut: () async => context.read<ProfileCubit>().clearData(),
+    ));
     context.hapticsTap();
   }
 

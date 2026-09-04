@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/core.dart';
@@ -17,12 +18,15 @@ import 'package:home/src/public/view/session_type_toggle.dart';
 import 'package:home/src/public/viewmodel/home_screen_cubit.dart';
 
 import 'home_mock_definitions.dart';
+import 'home_test_helper.dart';
 
 
 void main() {
   group('HomeScreen', () {
     late MockAuthStateCubit mockAuthBloc;
-    late MockProfileStateCubit mockProfileCubit;
+    late MockProfileCubit mockProfileCubit;
+    late MockTimerSettingsCubit mockTimerSettingsCubit;
+    late MockChantingSettingsCubit mockChantingSettingsCubit;
     late MockServices mockServices;
     late MockCrashlyticsService mockCrashlyticsService;
     late MockOverlayService mockOverlayService;
@@ -30,7 +34,7 @@ void main() {
 
     // doesn't make sense to mock this because the FragmentShader
     // cannot be mocked neither, so you need to load the shader anyhow
-    late ShaderService shaderService = DefaultShaderService();
+    late ShaderService shaderService = MockShaderService();
 
     setUpAll(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
@@ -42,11 +46,13 @@ void main() {
 
     setUp(() async {
       mockAuthBloc = MockAuthStateCubit();
-      mockProfileCubit = MockProfileStateCubit();
+      mockProfileCubit = MockProfileCubit();
+      mockTimerSettingsCubit = MockTimerSettingsCubit();
       mockServices = MockServices();
       mockCrashlyticsService = MockCrashlyticsService();
       mockOverlayService = MockOverlayService();
       mockHapticsService = MockHapticsService();
+      mockChantingSettingsCubit = MockChantingSettingsCubit();
 
       when(() => mockAuthBloc.state).thenReturn(const AuthState.signedOut());
       when(() => mockProfileCubit.state).thenReturn(ProfileState.initial());
@@ -58,19 +64,16 @@ void main() {
       when(() => mockServices.overlayService).thenReturn(mockOverlayService);
       when(() => mockServices.hapticsService).thenReturn(mockHapticsService);
 
-      // preload the only shader which is used in HomeScreen
-      await shaderService.loadShader('shaders/gradient_flow.frag');
-
       GetIt.I.registerFactory<HomeScreenCubit>(
         () => HomeScreenCubit(crashlyticsService: mockCrashlyticsService),
       );
 
       GetIt.I.registerFactory<TimerSettingsCubit>(
-        () => MockTimerSettingsCubit(),
+        () => mockTimerSettingsCubit,
       );
 
       GetIt.I.registerFactory<ChantingSettingsCubit>(
-        () => MockChantingSettingsCubit()
+        () => mockChantingSettingsCubit,
       );
     });
 
@@ -81,19 +84,23 @@ void main() {
 
     testWidgets('can display timer settings when signed out', (tester) async {
       when(() => mockAuthBloc.state).thenReturn(AuthState.signedOut());
+      when(() => mockTimerSettingsCubit.state).thenReturn(TimerSettingsState(timerSettings: TimerSettings()));
 
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: withAllContextProviders(
+          child: HomeTestHelper.withLocalizationProvider(
             MultiBlocProvider(
               providers: [
                 BlocProvider<AuthStateCubit>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileStateCubit>(
+                BlocProvider<ProfileCubit>(
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const HomeScreen(),
+              child: ShaderRenderingScope(
+                enabled: false , 
+                child: const HomeScreen()
+              )
             ),
           ),
         ),
@@ -113,19 +120,23 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(
         AuthState.signedIn(userId: 'userid'),
       );
+      when(() => mockTimerSettingsCubit.state).thenReturn(TimerSettingsState(timerSettings: TimerSettings()));
 
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: withAllContextProviders(
+          child: HomeTestHelper.withLocalizationProvider(
             MultiBlocProvider(
               providers: [
                 BlocProvider<AuthStateCubit>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileStateCubit>(
+                BlocProvider<ProfileCubit>(
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const HomeScreen(),
+              child: ShaderRenderingScope(
+                enabled: false,
+                child: const HomeScreen()
+              ),
             ),
           ),
         ),
@@ -143,19 +154,32 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(
         AuthState.signedIn(userId: 'userid'),
       );
+      when(() => mockTimerSettingsCubit.state).thenReturn(TimerSettingsState(timerSettings: TimerSettings()));
+      when(() => mockChantingSettingsCubit.state).thenReturn(
+        ChantingSettingsState(
+          availableChants: [],
+          isLoading: false,
+          playlist: [],
+        )
+      );
+
+      when(() => mockChantingSettingsCubit.loadAvailableChants()).thenAnswer((_) async {});
 
       await tester.pumpWidget(
         Provider<Services>(
           create: (context) => mockServices,
-          child: withAllContextProviders(
+          child: HomeTestHelper.withLocalizationProvider(
             MultiBlocProvider(
               providers: [
                 BlocProvider<AuthStateCubit>(create: (context) => mockAuthBloc),
-                BlocProvider<ProfileStateCubit>(
+                BlocProvider<ProfileCubit>(
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const HomeScreen(),
+              child: ShaderRenderingScope(
+                enabled: false,
+                child: const HomeScreen(),
+              ),
             ),
           ),
         ),

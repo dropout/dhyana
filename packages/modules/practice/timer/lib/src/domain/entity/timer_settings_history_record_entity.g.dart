@@ -21,7 +21,7 @@ Map<String, dynamic> _$TimerSettingsHistoryRecordEntityToJson(
   _TimerSettingsHistoryRecordEntity instance,
 ) => <String, dynamic>{
   'id': instance.id,
-  'timerSettings': instance.timerSettings.toJson(),
+  'timerSettings': instance.timerSettings,
   'useCount': instance.useCount,
   'lastUsed': instance.lastUsed.toIso8601String(),
 };
