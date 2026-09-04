@@ -1,4 +1,4 @@
-name: dhyana
+name: stepstones
 resolution: workspace
 description: A meditation timer application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -26,23 +26,16 @@ dependencies:
   hydrated_bloc: ^11.0.0
   freezed_annotation: ^3.0.0
   json_annotation: ^4.8.1
-  # package_info_plus: ^10.1.0
-  # vector_math: ^2.1.4
-  # collection: ^1.19.0
-  # faker: ^2.2.0
-  # rnd: 0.2.0
-  # flutter_cache_manager: ^3.4.1
-  # clock: ^1.1.2 # For faking time in tests and better time handling in general
   path_provider: ^2.1.5
 
   # Ui
   flutter_animate: ^4.2.0
-  # flutter_form_builder: ^10.0.1
+
   image_picker: ^1.0.2
   form_builder_validators: ^11.0.0
   cupertino_icons: ^1.0.2
   image: ^4.0.15
-  cached_network_image: ^3.2.0
+  cached_network_image: ^4.0.0
   flutter_blurhash: ^0.9.1
   flutter_shaders: ^0.1.2
   flip_board: ^1.0.0

@@ -14,8 +14,8 @@ import 'package:timer/timer.dart';
 import 'package:chanting/chanting.dart';
 import 'package:session/session.dart';
 
-import 'package:dhyana/bootstrap/init_result.dart';
-import 'package:dhyana/l10n/app_localizations.dart';
+import 'package:stepstones/bootstrap/init_result.dart';
+import 'package:stepstones/l10n/app_localizations.dart';
 
 import 'app_providers.dart';
 

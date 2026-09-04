@@ -47,8 +47,7 @@ class MockSessionAppPort
   
 class MockProfileCubit
   extends MockCubit<ProfileState>
-  implements ProfileCubit {
-  Object? loadPresenceData() {}}
+  implements ProfileCubit {}
 
 class MockHomeNavigator
   extends Mock

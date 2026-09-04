@@ -1,4 +1,3 @@
-import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/profile.dart';
@@ -10,14 +9,10 @@ import 'package:stats/stats.dart';
 import '../../session_mock_definitions.dart';
 
 void main() {
-  late MockStatsPublicApi mockStatsPublicApi;
-  late MockMindfulMinutesService mindfulMinutesService;
   late MockSessionAppPort mockSessionAppPort;
   late LogSessionInsightsUseCase useCase;
 
   setUp(() {
-    mockStatsPublicApi = MockStatsPublicApi();
-    mindfulMinutesService = MockMindfulMinutesService();
     mockSessionAppPort = MockSessionAppPort();
 
     useCase = LogSessionInsightsUseCase(sessionAppPort: mockSessionAppPort);

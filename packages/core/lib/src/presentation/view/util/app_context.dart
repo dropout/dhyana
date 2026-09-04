@@ -1,4 +1,3 @@
-import 'package:dhyana/bootstrap/init_result.dart';
 import 'package:core/src/util/services.dart';
 import 'package:core/l10n/core_localizations.dart';
 import 'package:material_ui/material_ui.dart';
@@ -24,9 +23,6 @@ extension AppContext on BuildContext {
 
   Services get services =>
     read<Services>();
-
-  InitResult get initResult =>
-    read<InitResult>();
 
   CoreLocalizations get coreL10n =>
     CoreLocalizations.of(this);

@@ -1,6 +1,6 @@
-import 'package:dhyana/app.dart';
-import 'package:dhyana/bootstrap/init_result.dart';
-import 'package:dhyana/bootstrap/initializer.dart';
+import 'package:stepstones/app.dart';
+import 'package:stepstones/bootstrap/init_result.dart';
+import 'package:stepstones/bootstrap/initializer.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';

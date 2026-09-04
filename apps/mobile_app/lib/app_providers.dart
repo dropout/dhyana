@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
 
-import 'package:dhyana/bootstrap/init_result.dart';
+import 'package:stepstones/bootstrap/init_result.dart';
 
 
 /// Application top-level providers.

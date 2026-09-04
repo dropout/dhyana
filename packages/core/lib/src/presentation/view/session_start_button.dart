@@ -1,9 +1,6 @@
 import 'dart:ui';
 
 import 'package:core/core.dart';
-import 'package:core/src/presentation/design_spec.dart';
-import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:core/src/presentation/view/util/shader_rendering_scope.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_shaders/flutter_shaders.dart';
 import 'package:vector_math/vector_math.dart' as vm;

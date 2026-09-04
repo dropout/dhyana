@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:dhyana/audio/app_audio_handler.dart';
-import 'package:dhyana/audio/audio_session_configuration.dart';
+import 'package:stepstones/audio/app_audio_handler.dart';
+import 'package:stepstones/audio/audio_session_configuration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
@@ -48,8 +48,8 @@ class Initializer with LoggerMixin {
         SoLoudChantingAudioHandler(soloud: SoLoud.instance),
       ),
       config: const audio_service.AudioServiceConfig(
-        androidNotificationChannelId: 'com.dhyana.audio',
-        androidNotificationChannelName: 'Dhyana',
+        androidNotificationChannelId: 'com.stepstonesapp.audio',
+        androidNotificationChannelName: 'Stepstones',
         androidNotificationOngoing: true,
       ),
     );

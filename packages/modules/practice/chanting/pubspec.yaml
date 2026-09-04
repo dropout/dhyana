@@ -38,6 +38,7 @@ dependencies:
   faker: ^2.2.0
   flutter_slidable: ^4.0.3
   mocktail: ^1.0.5
+  crypto: ^3.0.7
 
   assa_parser:
     git:
