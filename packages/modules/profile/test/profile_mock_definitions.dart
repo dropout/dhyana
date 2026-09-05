@@ -11,7 +11,6 @@ import 'package:profile/src/domain/usecase/update_profile_use_case.dart';
 import 'package:profile/src/presentation/viewmodel/profile_edit_cubit.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/src/public/viewmodel/profile_cubit.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
 
 class MockAuthNavigator extends Mock implements AuthNavigator;
 class MockProfileNavigator extends Mock implements ProfileNavigator;
@@ -21,8 +20,6 @@ class MockProfileCubit extends MockCubit<ProfileState>
 
 class MockProfileEditCubit extends MockCubit<ProfileEditState>
     implements ProfileEditCubit {}
-
-class MockInterpreter extends Mock implements Interpreter {}
 
 class MockProfileStatsUpdater extends Mock
     implements ProfileStatsReportUpdaterService {}

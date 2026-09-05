@@ -38,6 +38,8 @@ dependencies:
   
   shared_preferences: ^2.0.5  
 
+  google_mlkit_image_labeling: ^0.16.1
+
   firebase_provider: ^1.0.0
   flutter_bloc: ^9.1.1
   hydrated_bloc: ^11.0.0
@@ -48,9 +50,7 @@ dependencies:
   mocktail: ^1.0.5
   bloc_test: ^10.0.0
 
-  tflite_flutter: # For NSFW model inference
-    git:
-      url: git@github.com:dropout/flutter-tflite.git
+
   flutter_volume_listener:
     git:
       url: git@github.com:dropout/flutter_volume_listener.git
@@ -88,8 +88,8 @@ flutter:
   - assets/sounds/
   - assets/images/
   - assets/haptics/
-  - assets/nsfw.tflite
-
+  - assets/gantman_nswf_110.tflite
+  
   shaders:
     - shaders/gradient_flow.frag
     - shaders/linear_gradient_mask.frag

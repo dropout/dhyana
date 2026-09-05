@@ -3,6 +3,7 @@ import 'package:core/src/service/safe_image_detector.dart';
 import 'package:core/src/service/shader_service.dart';
 import 'package:core/src/service/shared_preferences_service.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -50,3 +51,5 @@ class MockHydratedStorage
 class MockShaderService
   extends Mock
   implements ShaderService {}
+
+class MockImageLabeler extends Mock implements ImageLabeler {}
