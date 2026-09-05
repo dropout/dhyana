@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "Metadata": {
+    "Project": "Untitled",
+    "Created": "2026-04-30T10:05:29.9880000+02:00",
+    "Description": ""
+  },
+  "Pattern": [
+    {
+      "Event": {
+        "Time": 0,
+        "EventType": "HapticContinuous",
+        "EventParameters": [
+          {
+            "ParameterID": "HapticIntensity",
+            "ParameterValue": 1
+          },
+          {
+            "ParameterID": "HapticSharpness",
+            "ParameterValue": 0.5
+          },
+          {
+            "ParameterID": "AttackTime",
+            "ParameterValue": 3
+          }
+        ],
+        "EventDuration": 3
+      }
+    },
+    {
+      "Event": {
+        "Time": 3.5879,
+        "EventType": "HapticContinuous",
+        "EventParameters": [
+          {
+            "ParameterID": "HapticIntensity",
+            "ParameterValue": 1
+          },
+          {
+            "ParameterID": "HapticSharpness",
+            "ParameterValue": 0.5
+          }
+        ],
+        "EventDuration": 0.5
+      }
+    },
+    {
+      "Event": {
+        "Time": 4.5879,
+        "EventType": "HapticContinuous",
+        "EventParameters": [
+          {
+            "ParameterID": "HapticIntensity",
+            "ParameterValue": 1
+          },
+          {
+            "ParameterID": "HapticSharpness",
+            "ParameterValue": 0.5
+          }
+        ],
+        "EventDuration": 0.5
+      }
+    },
+    {
+      "Event": {
+        "Time": 5.5879,
+        "EventType": "HapticContinuous",
+        "EventParameters": [
+          {
+            "ParameterID": "HapticIntensity",
+            "ParameterValue": 1
+          },
+          {
+            "ParameterID": "HapticSharpness",
+            "ParameterValue": 0.5
+          }
+        ],
+        "EventDuration": 0.5
+      }
+    },
+    {
+      "Event": {
+        "Time": 6.5879,
+        "EventType": "HapticContinuous",
+        "EventParameters": [
+          {
+            "ParameterID": "HapticIntensity",
+            "ParameterValue": 1
+          },
+          {
+            "ParameterID": "HapticSharpness",
+            "ParameterValue": 0.5
+          },
+          {
+            "ParameterID": "ReleaseTime",
+            "ParameterValue": 1
+          }
+        ],
+        "EventDuration": 0.5
+      }
+    }
+  ]
+}

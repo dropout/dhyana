@@ -16,6 +16,7 @@ dependencies:
   
   material_ui: ^1.1.1
   cupertino_icons: ^1.0.2
+  intl: ^0.20.3
 
   # System and architectural  
   logger: ^2.0.2+1
@@ -53,30 +54,3 @@ dev_dependencies:
 flutter:
   generate: true # For generating localizations?
   uses-material-design: true
-  config: 
-    enable-swift-package-manager: false #tflite not compatible with SPM yet, so disable it to avoid build errors
-
-  assets:
-    - assets/images/
-    - assets/nsfw.tflite
-
-  fonts:
-    - family: RobotoSlab
-      fonts:
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Black.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Bold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-ExtraBold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-ExtraLight.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Light.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Medium.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Regular.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-SemiBold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Thin.ttf
-    - family: RobotoCondensed
-      fonts:
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-BoldItalic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Italic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-LightItalic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf

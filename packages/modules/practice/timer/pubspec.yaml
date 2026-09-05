@@ -57,10 +57,7 @@ dev_dependencies:
 flutter:
   generate: true
   
-  assets:
-    - assets/sounds/
-    - assets/images/
-    - assets/haptics/
+
 
 
   # To add assets to your package, add an assets section, like this:
