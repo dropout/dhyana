@@ -56,3 +56,5 @@ android/app/google-services.json
 
 # Test generated files
 libCachedImageData.db
+# Widget Preview related
+.widget_preview/

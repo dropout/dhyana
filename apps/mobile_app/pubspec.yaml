@@ -1,6 +1,6 @@
 name: stepstones
 resolution: workspace
-description: A meditation timer application.
+description: A meditation timer and chanting application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.9.0+4
 
@@ -13,57 +13,21 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-
-  # System & Architectural
+  
   material_ui: ^1.1.1
-  intl: ^0.20.2
+  cupertino_icons: ^1.0.2
+
+  # System and architectural  
   logger: ^2.0.2+1
   go_router: ^18.0.0
-  go_router_builder: ^4.1.0
   provider: ^6.0.5
   get_it: ^9.2.1
   flutter_bloc: ^9.1.1
   hydrated_bloc: ^11.0.0
-  freezed_annotation: ^3.0.0
-  json_annotation: ^4.8.1
   path_provider: ^2.1.5
-
-  # Ui
-  flutter_animate: ^4.2.0
-
-  image_picker: ^1.0.2
-  form_builder_validators: ^11.0.0
-  cupertino_icons: ^1.0.2
-  image: ^4.0.15
-  cached_network_image: ^4.0.0
-  flutter_blurhash: ^0.9.1
-  flutter_shaders: ^0.1.2
-  flip_board: ^1.0.0
-  blurhash_dart: ^1.1.0
-  carousel_slider: ^5.1.2
-  smooth_page_indicator: ^3.0.0
-  flutter_slidable: ^4.0.3
-
-  # Additional functionalities
-  drift: ^2.30.0
   audio_service: ^0.18.18
   audio_session: ^0.2.3
   flutter_soloud: ^4.0.5
-  wakelock_plus: ^1.1.1
-  url_launcher: ^6.1.5
-  shared_preferences: ^2.0.5
-  gaimon: ^1.4.1 # haptic feedback library
-  dart_geohash: ^2.1.0
-  tflite_flutter: # For NSFW model inference
-    git:
-      url: git@github.com:dropout/flutter-tflite.git
-  assa_parser:
-    git:
-      url: git@github.com:dropout/assa_parser.git
-  flutter_volume_listener:
-    git:
-      url: git@github.com:dropout/flutter_volume_listener.git
-
 
   # Internal packages
   firebase_provider: ^1.0.0
@@ -77,9 +41,6 @@ dependencies:
   session: ^0.0.1
   social: ^0.0.1
   stats: ^0.0.1
-  bar_chart: ^0.0.1
-  particle_field: ^1.0.0
-
 
 dev_dependencies:
   flutter_test:
@@ -87,20 +48,11 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
-  # sqflite_common_ffi: ^2.4.2
-  # nock: ^1.2.3
   flutter_lints: ^6.0.0
-  build_runner: ^2.4.6
-  freezed: ^4.0.1
-  json_serializable: ^6.7.1
-  # bloc_test: ^10.0.0
-  # mocktail: ^1.0.3
-  # mocktail_image_network: ^1.2.0
-  # drift_dev: ^2.30.0
-
 
 flutter:
   generate: true # For generating localizations?
+  uses-material-design: true
   config: 
     enable-swift-package-manager: false #tflite not compatible with SPM yet, so disable it to avoid build errors
 
@@ -128,5 +80,3 @@ flutter:
         - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf
         - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-LightItalic.ttf
         - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf
-
-  uses-material-design: true
