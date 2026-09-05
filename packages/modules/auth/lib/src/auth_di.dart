@@ -1,3 +1,4 @@
+import 'package:auth/src/data/service/default_auth_navigator.dart';
 import 'package:auth/src/domain/usecase/sign_in_with_auth_provider_use_case.dart';
 import 'package:auth/src/public/viewmodel/auth_cubit.dart';
 import 'package:core/core.dart';
@@ -12,11 +13,18 @@ import 'package:auth/src/data/datasource/auth/auth_data_provider.dart';
 import 'package:auth/src/data/repository/default_auth_repository.dart';
 import 'package:auth/src/data/service/default_auth_public_api.dart';
 import 'package:auth/src/domain/repository/auth_repository.dart';
+import 'package:go_router/go_router.dart';
 
 /// Registers the dependencies for the Auth module in the GetIt service locator.
 extension AuthModuleDependencyInjection on GetIt {
 
   void registerAuthModuleDependencies() {
+
+    // Navigator
+    registerLazySingleton<AuthNavigator>(
+      () => DefaultAuthNavigator(get<GoRouter>())
+    );
+
     // Data providers
     final firebaseProvider = get<FirebaseProvider>();
     registerLazySingleton<AuthDataProvider>(

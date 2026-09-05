@@ -732,6 +732,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_litert:
+    dependency: transitive
+    description:
+      name: flutter_litert
+      sha256: "6e541d7d79a31ab5d67c0b9fd1f61ce5a1e88a7be86ffc7157b5ed14527ddf51"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -882,22 +890,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.3+1"
-  google_mlkit_commons:
-    dependency: transitive
-    description:
-      name: google_mlkit_commons
-      sha256: "621e94de22fd0f1e902e593b892746d80ab7542b39c2552aa091d904eb82fc6f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.13.0"
-  google_mlkit_image_labeling:
-    dependency: transitive
-    description:
-      name: google_mlkit_image_labeling
-      sha256: "534aaf1cd20b24d84aace8d89ac5400133c1f83d4a46185919093e656969fdc9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.16.1"
   google_sign_in:
     dependency: transitive
     description:
@@ -1487,6 +1479,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
   recase:
     dependency: transitive
     description:

@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
+import 'package:go_router/go_router.dart';
+import 'package:social/src/data/service/default_social_navigator.dart';
 
 import 'package:social/src/public/api/social_public_api.dart';
 import 'package:social/src/data/datasource/firebase_presence_data_provider.dart';
@@ -14,6 +16,11 @@ import 'package:social/src/public/viewmodel/presence_cubit.dart';
 
 extension SocialModuleDependencyInjection on GetIt {
   void registerSocialModuleDependencies() {
+
+    // Navigator
+    registerLazySingleton<SocialNavigator>(
+      () => DefaultSocialNavigator(get<GoRouter>())
+    );
     
     // Data Providers
     registerLazySingleton<PresenceDataProvider>(() =>

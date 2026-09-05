@@ -1,10 +1,16 @@
+import 'package:core/core.dart';
+import 'package:donate/src/data/service/default_donate_navigator.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 
 extension DonateDependencyInjection on GetIt {
   void registerDonateModuleDependencies() {
-    // Register dependencies for the Donate module here.
-    // For example, if you have a repository or service for donations, register it.
-    // get.registerLazySingleton<DonateRepository>(() => DonateRepositoryImpl());
+
+    // Navigator
+    registerLazySingleton<DonateNavigator>(
+      () => DefaultDonateNavigator(get<GoRouter>())
+    );
+
   }
 }

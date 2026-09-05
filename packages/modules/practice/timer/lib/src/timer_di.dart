@@ -5,11 +5,13 @@ import 'package:get_it/get_it.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:profile/profile.dart';
 import 'package:social/social.dart';
 import 'package:timer/src/audio/so_timer_audio_handler.dart';
 import 'package:timer/src/data/mapper/timer_settings_mapper.dart';
 import 'package:timer/src/data/service/default_timer_app_port.dart';
+import 'package:timer/src/data/service/default_timer_navigator.dart';
 import 'package:timer/src/domain/entity/timer_settings_entity.dart';
 import 'package:timer/src/domain/service/timer_app_port.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
@@ -26,6 +28,11 @@ import 'package:timer/src/presentation/viewmodel/timer_settings_history/timer_se
 
 extension TimerModuleDependencyInjection on GetIt {
   void registerTimerModuleDependencies() {
+    
+    registerLazySingleton<TimerNavigator>(
+      () => DefaultTimerNavigator(get<GoRouter>())
+    );
+    
     // Audio handler
     registerFactory<SoTimerAudioHandler>(
       () => SoTimerAudioHandler(soloud: SoLoud.instance),

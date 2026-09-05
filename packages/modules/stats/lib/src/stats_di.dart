@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stats/src/data/repository/bucket_filling_stats_repository.dart';
+import 'package:stats/src/data/service/default_stats_navigator.dart';
 import 'package:stats/src/presentation/viewmodel/stats_bucket_cubit.dart';
 import 'package:stats/src/public/api/stats_public_api.dart';
 import 'package:profile/profile.dart';
@@ -16,6 +18,11 @@ import 'package:stats/src/data/repository/firebase_stats_repository.dart';
 
 extension StatsModuleDependencyInjection on GetIt {
   void registerStatsModuleDependencies() {
+
+    // Navigator
+    registerLazySingleton<StatsNavigator>(
+      () => DefaultStatsNavigator(get<GoRouter>())
+    );
 
     // Repositories
     registerLazySingleton<StatsRepository>(() {

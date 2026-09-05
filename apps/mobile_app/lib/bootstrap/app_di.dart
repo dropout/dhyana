@@ -1,7 +1,9 @@
+import 'package:donate/donate.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:core/core.dart';
 import 'package:auth/auth.dart';
+import 'package:home/home.dart';
 import 'package:profile/profile.dart';
 import 'package:stats/stats.dart';
 import 'package:session/session.dart';
@@ -16,11 +18,14 @@ extension AppDependencyInjection on GetIt {
     await registerCoreDependencies();
     registerAuthModuleDependencies();
     registerProfileModuleDependencies();
+    
     registerSocialModuleDependencies();
     registerSessionModuleDependencies();
     registerStatsModuleDependencies();
     registerTimerModuleDependencies();
     registerChantingModuleDependencies();
+    registerHomeModuleDependencies();
+    registerDonateModuleDependencies();
   }
 
 }

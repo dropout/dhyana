@@ -5,6 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "stepstones",
+            "type": "dart",
+            "request": "launch",
+            "flutterMode": "debug",
+            "program": "apps/mobile_app/lib/main_staging.dart",
+            "env": {
+                "NO_XIPH_LIBS": "1"
+            }            
+        },
+        {
             "name": "dhyana - staging (debug)",
             "type": "dart",
             "request": "launch",

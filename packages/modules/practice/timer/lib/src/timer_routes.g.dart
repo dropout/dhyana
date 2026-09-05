@@ -16,28 +16,23 @@ RouteBase get $timerRoute => GoRouteData.$route(
 );
 
 mixin $TimerRoute on GoRouteData {
-  static TimerRoute _fromState(GoRouterState state) =>
-      TimerRoute($extra: state.extra as TimerSettings);
-
-  TimerRoute get _self => this as TimerRoute;
+  static TimerRoute _fromState(GoRouterState state) => const TimerRoute();
 
   @override
   String get location => GoRouteData.$location('/timer');
 
   @override
-  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+  void go(BuildContext context) => context.go(location);
 
   @override
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: _self.$extra);
+      context.pushReplacement(location);
 
   @override
-  void replace(BuildContext context) =>
-      context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $timerSettingsHistoryRoute => GoRouteData.$route(

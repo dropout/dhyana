@@ -1,4 +1,5 @@
-import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_litert/flutter_litert.dart';
 import 'package:image/image.dart' as img;
 
 import 'package:core/core.dart';
@@ -17,60 +18,77 @@ class DefaultSafeImageDetectorFactory implements SafeImageDetectorFactory {
 
   @override
   Future<SafeImageDetector> create() async {
-    final options = LocalLabelerOptions(
-      modelPath: _kModelPath,
-      confidenceThreshold: threshold,
+    final interpreter = await Interpreter.fromAsset(_kModelPath);    
+    return DefaultSafeImageDetector(
+      interpreter: interpreter,
+      threshold: threshold,
     );
-    final imageLabeler = ImageLabeler(options: options);
-    return DefaultSafeImageDetector(imageLabeler: imageLabeler);
   }
 }
 
 class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
-  final ImageLabeler _imageLabeler;
+  final Interpreter _interpreter;
   final double _threshold;
 
   DefaultSafeImageDetector({
-    required this._imageLabeler,
+    required this._interpreter,
     this._threshold = 0.7,
   });
 
   @override
   Future<ImageSafetyDetectionResult> detectImageSafety(img.Image image) async {
+    
+    // 1. Resize the image to the required input size for the model
+    final resizedImage = img.copyResize(image, width: 224, height: 224);
 
-    // Convert file to InputImage format expected by ML Kit
-    final inputImage = InputImage.fromBitmap(
-      bitmap: image.getBytes(),
-      width: image.width,
-      height: image.height,
+    // 2. Normalize RGB pixels into input tensor standard shape [1, 224, 224, 3]
+    var input = List.generate(
+      1,
+      (_) => List.generate(
+        224,
+        (y) => List.generate(
+          224,
+          (x) {
+            final pixel = resizedImage.getPixel(x, y);
+            return [
+              pixel.r / 255.0,
+              pixel.g / 255.0,
+              pixel.b / 255.0,
+            ];
+          },
+        ),
+      ),
     );
 
-    // Perform inference
-    final List<ImageLabel> labels = await _imageLabeler.processImage(
-      inputImage,
-    );
+    // 3. Prepare output tensor placeholder matching model label shape
+    final labels = ['neutral', 'porn', 'hentai', 'sexy'];
+    var output = List.filled(1 * labels.length, 0.0).reshape([1, labels.length]);
 
-    // Evaluate model output labels
-    for (final label in labels) {
-      final text = label.label.toLowerCase();
-      final confidence = label.confidence;
+    // 4. Run inference
+    _interpreter.run(input, output);
 
-      // Available labels:
-      // https://github.com/GantMan/nsfw_model
-      if (text == 'porn' || text == 'hentai' || text == 'sexy') {
-        // Tweak threshold for different lables?
-        if (confidence > _threshold) {
-          return ImageSafetyDetectionResult(false, confidence);
-        }
+    // 5. Parse top label result
+    final results = List<double>.from(output[0]);
+    int maxIndex = 0;
+    double maxScore = results[0];
+
+    for (int i = 1; i < results.length; i++) {
+      if (results[i] > maxScore) {
+        maxScore = results[i];
+        maxIndex = i;
       }
     }
 
-    return ImageSafetyDetectionResult(true, 1.0);
+    debugPrint('Detected label: ${labels[maxIndex]} with score: $maxScore');
+
+    // 6. Return ImageSafetyDetectionResult based on threshold
+    final isSafe = maxScore < _threshold;
+    return ImageSafetyDetectionResult(isSafe, maxScore);
   }
 
   @override
   void dispose() {
-    _imageLabeler.close();
+    _interpreter.close();
   }
 }
 

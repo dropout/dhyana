@@ -3,6 +3,8 @@ import 'package:get_it/get_it.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
+import 'package:go_router/go_router.dart';
+import 'package:profile/src/data/service/default_profile_navigator.dart';
 import 'package:profile/src/domain/usecase/load_profile_use_case.dart';
 import 'package:profile/src/domain/usecase/update_profile_settings_use_case.dart';
 import 'package:profile/src/domain/usecase/update_profile_use_case.dart';
@@ -21,6 +23,11 @@ import 'package:profile/src/public/api/profile_public_api.dart';
 
 extension ProfileModuleDependencyInjection on GetIt {
   void registerProfileModuleDependencies() {
+
+    // Navigator
+    registerLazySingleton<ProfileNavigator>(
+      () => DefaultProfileNavigator(get<GoRouter>())
+    );
 
     // Data providers
     registerLazySingleton<ProfileDataProvider>(

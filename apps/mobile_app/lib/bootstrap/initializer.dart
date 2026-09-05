@@ -81,7 +81,6 @@ class Initializer with LoggerMixin {
     GetIt.I.registerSingleton<FirebaseProvider>(FirebaseProvider());
     GetIt.I.registerSingleton<GoRouter>(router);
     GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);    
-    GetIt.I.registerSingleton<AppEventBus>(DefaultAppEventBus());    
     await GetIt.I.registerDependencies();
 
 
