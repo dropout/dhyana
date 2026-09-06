@@ -1,13 +1,5 @@
 {
   "projects": {
-    "default": "dhyana-staging"
-  },
-  "targets": {},
-  "etags": {
-    "dhyana-staging": {
-      "extensionInstances": {
-        "delete-user-data": "cd2e3bf71bd88758dff30c45950193304ff57bd712f7b02b1272e3b16c080147"
-      }
-    }
+    "default": "stepstones-staging"
   }
 }

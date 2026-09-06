@@ -76,6 +76,9 @@ class TimerLocalizationsHu extends TimerLocalizations {
   String get noInterval => 'Nincs időköz';
 
   @override
+  String get noWarmup => 'Nincs felkészülési idő';
+
+  @override
   String get secondsAbbr => 'mp';
 
   @override

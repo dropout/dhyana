@@ -224,6 +224,12 @@ abstract class TimerLocalizations {
   /// **'No interval'**
   String get noInterval;
 
+  /// No description provided for @noWarmup.
+  ///
+  /// In en, this message translates to:
+  /// **'No warmup time'**
+  String get noWarmup;
+
   /// No description provided for @secondsAbbr.
   ///
   /// In en, this message translates to:

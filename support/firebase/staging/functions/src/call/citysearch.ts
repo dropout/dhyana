@@ -6,12 +6,10 @@ import {CitySearchResponse, CitySearchResult} from "../models";
 import CitySearchResultSchema from "../util/schema";
 
 // Search for cities using Google Maps Places Autocomplete API
-export default onCall(async function citySearch(req)  {
-
+export default onCall(async function citySearch(req) {
   const queryString: string = (req.data?.queryString ?? "").trim();
   const results: Array<CitySearchResult> = [];
   try {
-
     // If there is no queryString, return empty results
     if (!queryString) {
       logger.warn("citySearch: Missing queryString");
@@ -33,15 +31,22 @@ export default onCall(async function citySearch(req)  {
 
     // Make sure we have suggestions
     // The response is an array, but we only care about the first item
-    const result = (Array.isArray(autoCompleteResponse) && autoCompleteResponse[0]) ? autoCompleteResponse[0] : {suggestions: []};
-    const suggestions = Array.isArray(result?.suggestions) ? result.suggestions : [];
+    const result =
+      (Array.isArray(autoCompleteResponse) && autoCompleteResponse[0]) ?
+        autoCompleteResponse[0] :
+        {suggestions: []};
+    const suggestions =
+      Array.isArray(result?.suggestions) ?
+        result.suggestions :
+        [];
 
     // Parse suggestions into CitySearchResult[]
     for (const suggestion of suggestions) {
       const prediction = suggestion.placePrediction;
       const rawCityResult: unknown = {
         placeId: prediction?.placeId,
-        name: prediction?.text?.text ?? prediction?.structuredFormat?.mainText?.text,
+        name: prediction?.text?.text ??
+          prediction?.structuredFormat?.mainText?.text,
         types: Array.isArray(prediction?.types) ? prediction.types : [],
         location: null,
       };
@@ -60,9 +65,7 @@ export default onCall(async function citySearch(req)  {
       const cityResult: CitySearchResult = parsed.data;
       results.push(cityResult);
     }
-
-
-  } catch(error) {
+  } catch (error) {
     logger.error("citySearch: Error occurred", error);
   }
 

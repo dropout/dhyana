@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from "zod";
 
 export const ProfileStatisticsReportSchema = z.object({
   consecutiveDays: z.object({
@@ -19,7 +19,8 @@ export const ProfileStatisticsReportSchema = z.object({
   firstSessionDate: z.number().nullable(),
   lastSessionDate: z.number().nullable(),
 });
-export type ProfileStatisticsReport = z.infer<typeof ProfileStatisticsReportSchema>;
+export type ProfileStatisticsReport =
+  z.infer<typeof ProfileStatisticsReportSchema>;
 
 export const ProfileSchema = z.object({
   id: z.string(),
@@ -33,7 +34,6 @@ export const ProfileSchema = z.object({
   completed: z.boolean(),
 });
 export type Profile = z.infer<typeof ProfileSchema>;
-
 
 
 export const ConsecutiveDaysSchema = z.object({

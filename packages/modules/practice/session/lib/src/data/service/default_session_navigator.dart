@@ -15,18 +15,24 @@ class DefaultSessionNavigator extends SessionNavigator {
     required Duration duration,
     required SessionType sessionType,
     NavigationType navigationType = NavigationType.push,
-  }) async => navigateTo(
-    SessionCompletedRoute(
-      $extra: Session(
-        id: idGeneratorService.sessionId(),
-        startTime: startTime,
-        endTime: endTime,
-        duration: duration,
-        type: sessionType,
+  }) async { 
+    // TODO: Why can't we pass the typed routes to gorouter when context is not available?
+    // It seems like only context extension let us pass the typed routes.
+    final session = Session(
+      id: idGeneratorService.sessionId(),
+      startTime: startTime,
+      endTime: endTime,
+      duration: duration,
+      type: sessionType,
+    );
+    navigateTo(
+      SessionCompletedRoute(
+        $extra: session,
       ),
-    ),
-    type: navigationType,
-  );
+      type: navigationType,
+      extra: session,
+    );
+  }
 
   @override
   Future<void> navigateToSessionHistory(

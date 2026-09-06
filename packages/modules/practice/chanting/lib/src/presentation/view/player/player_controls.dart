@@ -205,7 +205,7 @@ class PlayPauseButton extends StatelessWidget {
       onPressed: resolvedOnPressed,
       style: IconButton.styleFrom(backgroundColor: backgroundColor),
       icon: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
+        duration: Durations.medium1,
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
         transitionBuilder: (child, animation) {

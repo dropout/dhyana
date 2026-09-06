@@ -38,7 +38,6 @@ class AppProviders extends StatelessWidget {
           ),
           BlocProvider<ProfileCubit>(
             create: (_) {
-              // TODO: Move to start app usecase?
               final profileCubit = GetIt.I.get<ProfileCubit>();
               if (initResult.userId != null) {
                 profileCubit.loadProfile(initResult.userId!);

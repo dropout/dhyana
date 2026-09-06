@@ -29,8 +29,10 @@ class AppButton extends StatelessWidget {
     Color fColor = Colors.white,
     Color bColor = Colors.black,
     void Function()? onTap,
+    Key? key,
   }) {
     return AppButton(
+      key: key,
       text: text,
       fColor: fColor,
       bColor: bColor,
@@ -44,8 +46,10 @@ class AppButton extends StatelessWidget {
     Color fColor = Colors.white,
     Color bColor = Colors.black,
     void Function()? onTap,
+    Key? key,
   }) {
     return AppButton(
+      key: key,
       text: text,
       fColor: fColor,
       bColor: bColor,
@@ -59,8 +63,10 @@ class AppButton extends StatelessWidget {
     Color fColor = Colors.white,
     Color bColor = Colors.black,
     void Function()? onTap,
+    Key? key,
   }) {
     return AppButton(
+      key: key,
       text: text,
       fColor: fColor,
       bColor: bColor,

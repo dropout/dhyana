@@ -66,7 +66,7 @@ class InputView extends StatelessWidget {
   }
 
   Widget buildActionButtons(BuildContext context) {
-    return AppButton(
+    return AppButton.large(
       key: const Key('input_view_save_button'),
       text: context.coreL10n.okay.toUpperCase(),
       onTap: () => onSave?.call(),

@@ -138,6 +138,7 @@ class _WarmupTimeOptions extends StatelessWidget {
               width: double.infinity,
               child: _WarmupTimeOptionItem(
                 minutes: 0,
+                label: TimerLocalizations.of(context).noWarmup,
                 isSelected: selectedOption == 0,
                 onTap: () => onSelect(0),
               ),
@@ -195,6 +196,7 @@ class _WarmupTimeOptions extends StatelessWidget {
 
 class _WarmupTimeOptionItem extends StatelessWidget {
   final int minutes;
+  final String? label;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -202,6 +204,7 @@ class _WarmupTimeOptionItem extends StatelessWidget {
     required this.minutes,
     required this.isSelected,
     required this.onTap,
+    this.label,
   });
 
   @override
@@ -248,9 +251,10 @@ class _WarmupTimeOptionItem extends StatelessWidget {
                               ),
                         ),
                         Text(
-                          TimerLocalizations.of(context).minutesPlural(minutes),
-                          style: context.theme.textTheme.bodyLarge?.copyWith(
+                          label ?? TimerLocalizations.of(context).minutesPlural(minutes),
+                          style: context.theme.textTheme.bodyMedium?.copyWith(
                             color: textColor,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],

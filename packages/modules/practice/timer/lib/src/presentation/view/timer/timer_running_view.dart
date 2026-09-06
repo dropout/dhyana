@@ -50,8 +50,9 @@ class _TimerRunningViewState extends State<TimerRunningView>
   }
 
   Widget buildLayout(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(DesignSpec.spacingMd),
+    return SafeArea(
+      // padding: const EdgeInsets.all(DesignSpec.spacingMd),
+      top: false,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Stack(
@@ -72,9 +73,12 @@ class _TimerRunningViewState extends State<TimerRunningView>
                 )
               ),
               Align(
-                alignment: const Alignment(0.0, 0.85),
-                child: TimerRunningControls(
-                  timerState: widget.timerState
+                alignment: .bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: DesignSpec.spacingLg),
+                  child: TimerRunningControls(
+                    timerState: widget.timerState                    
+                  ),
                 ),
               ),
             ],

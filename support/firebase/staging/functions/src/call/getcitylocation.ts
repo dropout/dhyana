@@ -8,12 +8,14 @@ import {CitySearchResultSchema} from "../util/schema";
 
 // Extend an autocomplete CitySearchResponse with a location
 export default onCall(async function getCityLocation(req) {
-
   // Parse input
   const parsed = CitySearchResultSchema.safeParse(req.data?.citySearchResult);
   if (!parsed.success) {
     logger.info("Request data", req);
-    logger.error("Invalid CitySearchResult payload", z.prettifyError(parsed.error));
+    logger.error(
+      "Invalid CitySearchResult payload",
+      z.prettifyError(parsed.error)
+    );
     throw new Error("Invalid CitySearchResult payload");
   }
   const city: CitySearchResult = parsed.data;
@@ -46,7 +48,10 @@ export default onCall(async function getCityLocation(req) {
   // Extract place location and extend city with lat/lng
   const location = placeDetailsResponse[0]?.location;
   if (!location) {
-    logger.error("Place details missing or lacking location", placeDetailsResponse);
+    logger.error(
+      "Place details missing or lacking location",
+      placeDetailsResponse
+    );
     throw new Error("Could not find location (lat/lng) for place");
   }
 
@@ -64,7 +69,6 @@ export default onCall(async function getCityLocation(req) {
   };
 
   return {
-    result
+    result,
   };
-
 });

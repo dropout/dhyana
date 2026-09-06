@@ -94,13 +94,16 @@ class SessionCompletedScreen extends StatelessWidget {
             ),
           ),
           SafeArea(
-            top: false,
-            child: AppButton(
-              key: const Key('session_completed_screen_okay_button'),
-              onTap: () => _onOkayButtonPressed(context),
-              text: context.coreL10n.okay.toUpperCase(),
-              bColor: Colors.white,
-              fColor: Colors.black,
+            top: false,            
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: DesignSpec.spacingLg),
+              child: AppButton(
+                key: const Key('session_completed_screen_okay_button'),
+                onTap: () => _onOkayButtonPressed(context),
+                text: context.coreL10n.okay.toUpperCase(),
+                bColor: Colors.white,
+                fColor: Colors.black,
+              ),
             )
           ),
         ],

@@ -8,15 +8,16 @@ abstract class BaseNavigator {
 
   Future<T?> navigateTo<T extends Object?>(
     GoRouteData route, {
+    Object? extra,
     NavigationType type = .push,
   }) async {
     switch (type) {
       case NavigationType.push:
-        return router.push<T>(route.location);
+        return router.push<T>(route.location, extra: extra);
       case NavigationType.replace:
-        return router.replace<T>(route.location);
+        return router.replace<T>(route.location, extra: extra);
       case NavigationType.go:
-        router.go(route.location);
+        router.go(route.location, extra: extra);
         return null; // to avoid compiler warning for missing return
     }
   }
