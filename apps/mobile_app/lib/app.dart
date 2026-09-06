@@ -69,7 +69,7 @@ class App extends StatelessWidget {
         },
         routerConfig: router,
         supportedLocales: const [Locale('hu', 'HU'), Locale('en', 'EN')],
-        localizationsDelegates: const [
+        localizationsDelegates: [
           AppLocalizations.delegate,
           AuthLocalizations.delegate,
           CoreLocalizations.delegate,
@@ -79,10 +79,10 @@ class App extends StatelessWidget {
           ProfileLocalizations.delegate,
           TimerLocalizations.delegate,
           ChantingLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            SessionLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          SessionLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,          
         ],
         theme: DesignSpec().themeData,
       ),

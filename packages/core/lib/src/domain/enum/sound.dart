@@ -16,13 +16,13 @@ extension ImageResourceUrl on Sound {
   String get imagePath {
     switch (this) {
       case Sound.none:
-        return 'assets/images/no_sound.jpg';
+        return 'packages/core/assets/images/no_sound.jpg';
       case Sound.smallBell:
-        return 'assets/images/small_bell.jpg';
+        return 'packages/core/assets/images/small_bell.jpg';
       case Sound.vibrate:
-        return 'assets/images/vibrate.jpg';
+        return 'packages/core/assets/images/vibrate.jpg';
       case Sound.triangle:
-        return 'assets/images/triangle.jpg';
+        return 'packages/core/assets/images/triangle.jpg';
     }
   }
 }
@@ -31,13 +31,13 @@ extension ResourceUrl on Sound {
   String get assetPath {
     switch (this) {
       case Sound.none:
-        return 'assets/sounds/no_sound.mp3';
+        return 'packages/core/assets/sounds/no_sound.mp3';
       case Sound.smallBell:
-        return 'assets/sounds/small_bell.mp3';
+        return 'packages/core/assets/sounds/small_bell.mp3';
       case Sound.vibrate:
-        return 'assets/haptics/vibration.ahap';
+        return 'packages/core/assets/haptics/vibration.ahap';
       case Sound.triangle:
-        return 'assets/sounds/triangle.mp3';
+        return 'packages/core/assets/sounds/triangle.mp3';
     }
   }
 }

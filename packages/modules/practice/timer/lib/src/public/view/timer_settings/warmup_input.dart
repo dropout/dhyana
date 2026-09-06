@@ -38,12 +38,13 @@ class WarmupInput extends StatelessWidget {
     overlayService.showModalBottomSheet(
       context,
       enableDrag: false,
-      (context) => WarmupInputView(
-        title: label,
-        initialValue: value.inMinutes,
-        showStartEndTimes: false,              
-        onSelect: (Duration duration) => _onSelected(context, duration),
-      ),
+      (ctx) => WarmupInputView(
+          title: label,
+          initialValue: value.inMinutes,
+          showStartEndTimes: false,              
+          onSelect: (Duration duration) => _onSelected(ctx, duration),
+        ),
+      
     );
     context.hapticsTap();
   }

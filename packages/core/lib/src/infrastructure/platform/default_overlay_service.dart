@@ -1,5 +1,5 @@
 import 'package:core/src/service/overlay_service.dart';
-import 'package:flutter/material.dart' as m; // avoid name collision
+import 'package:material_ui/material_ui.dart' as m; // avoid name collision
 
 
 class DefaultOverlayService implements OverlayService {

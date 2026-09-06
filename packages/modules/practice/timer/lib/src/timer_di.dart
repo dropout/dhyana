@@ -14,6 +14,7 @@ import 'package:timer/src/data/service/default_timer_app_port.dart';
 import 'package:timer/src/data/service/default_timer_navigator.dart';
 import 'package:timer/src/domain/entity/timer_settings_entity.dart';
 import 'package:timer/src/domain/service/timer_app_port.dart';
+import 'package:timer/src/public/model/timer_settings.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/data/service/default_timer_audio_service.dart';
 import 'package:timer/src/data/repository/firebase_timer_settings_history_repository.dart';
@@ -109,7 +110,7 @@ extension TimerModuleDependencyInjection on GetIt {
     );
 
     // Timer Cubit with parameterized TimerSettings
-    registerFactoryParam<TimerCubit, TimerSettingsEntity, void>((
+    registerFactoryParam<TimerCubit, TimerSettings, void>((
       timerSettings,
       _,
     ) {
@@ -130,7 +131,7 @@ extension TimerModuleDependencyInjection on GetIt {
         completeTimerUseCase: get<CompleteTimerUseCase>(
           param1: audioService,
           param2: timerEventScheduler,
-        ), timerSettings: timerSettings.toApi(),
+        ), timerSettings: timerSettings,
       );
     });
   }

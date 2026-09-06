@@ -56,6 +56,7 @@ class LoginSignedOutView extends StatelessWidget {
             children: [
               Expanded(child: Container(child: _buildHeadline(context))),
               _buildActions(context),
+              Gap.large(),
               _buildLegalText(context),
             ],
           ),

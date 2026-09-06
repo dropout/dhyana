@@ -29,7 +29,7 @@ class AppProviders extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthCubit>(
+          BlocProvider<AuthStateCubit>(
             create: (_) => GetIt.I.get<AuthCubit>(
               param1: (initResult.userId != null)
                   ? AuthState.signedIn(userId: initResult.userId!)

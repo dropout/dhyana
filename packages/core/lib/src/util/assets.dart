@@ -5,17 +5,21 @@ class Assets {
 
   // Images
   static const String avatarPlaceholder =
-    'assets/images/avatar_placeholder.png';
-  static const String appleLogo = 'assets/images/apple_logo.png';
-  static const String googleLogo = 'assets/images/google_logo.png';
+    'packages/core/assets/images/avatar_placeholder.png';
+  static const String appleLogo = 'packages/core/assets/images/apple_logo.png';
+  static const String googleLogo = 'packages/core/assets/images/google_logo.png';
 
   // Sounds
   static const String noSoundResourceUrl =
-    'asset:///assets/audio/silent_meditation.mp3';
+    'asset:///packages/core/assets/audio/silent_meditation.mp3';
 
   // Shaders
   static const String shaderGradientFlow =
-    'shaders/gradient_flow.frag';
+    // 'shaders/gradient_flow.frag';
+    'packages/core/shaders/gradient_flow.frag';
   static const String shaderLinearGradientMask =
-    'shaders/linear_gradient_mask.frag';
+    // 'shaders/linear_gradient_mask.frag';
+    'packages/core/shaders/linear_gradient_mask.frag';
+    
+
 }
