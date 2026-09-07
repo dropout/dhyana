@@ -103,8 +103,10 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
 
     if (widget.mode == MilestoneProgressViewItemMode.animate) {
       Future.delayed(const Duration(milliseconds: 500), () {
-        animationController.forward();
-        timeParticles();
+        if (mounted) {
+          animationController.forward();
+          timeParticles();
+        }
       });
     }
 

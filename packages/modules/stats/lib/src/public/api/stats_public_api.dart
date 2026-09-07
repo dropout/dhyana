@@ -4,7 +4,7 @@ import 'package:stats/src/public/model/stats_session.dart';
 
 abstract interface class StatsPublicApi {
   
-  Future<void> logSessionStatistics(
+  Future<void> logSessionStats(
     String profileId, 
     StatsSession session
   );

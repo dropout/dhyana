@@ -3,7 +3,8 @@ import {logger} from "firebase-functions";
 import {safeEnvVar} from "../util/safe_shit";
 import {PlacesClient} from "@googlemaps/places";
 import {CitySearchResponse, CitySearchResult} from "../models";
-import CitySearchResultSchema from "../util/schema";
+import {CitySearchResultSchema} from "../util/schema";
+
 
 // Search for cities using Google Maps Places Autocomplete API
 export default onCall(async function citySearch(req) {

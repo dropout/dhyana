@@ -1,7 +1,9 @@
 sealed class AuthPublicFailure implements Exception {
   final String message;
-
   const AuthPublicFailure(this.message);
+
+  @override
+  String toString() => message;
 }
 
 final class AuthPublicSignInCancelled extends AuthPublicFailure {

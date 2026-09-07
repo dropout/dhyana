@@ -78,7 +78,7 @@ void main() {
           ),
         ).thenAnswer((_) async {});
 
-        await api.logSessionStatistics(profileId, session);
+        await api.logSessionStats(profileId, session);
 
         verify(
           () => profilePublicApi.getProfile(profileId, preferCache: true),
@@ -109,7 +109,7 @@ void main() {
       ).thenThrow(error);
 
       expect(
-        () => api.logSessionStatistics(profileId, session),
+        () => api.logSessionStats(profileId, session),
         throwsA(same(error)),
       );
       verifyNever(

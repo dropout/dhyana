@@ -6,7 +6,7 @@ import 'package:core/core.dart';
 
 class DefaultSafeImageDetectorFactory implements SafeImageDetectorFactory {
   /// Path to the TFLite model
-  static const _kModelPath = 'assets/gantman_nswf_110.tflite';
+  static const _kModelPath = Assets.nswfModel;
 
   /// Default threshold for classifying NSFW content
   static const _kNSFWThreshold = 0.7;

@@ -73,7 +73,7 @@ void main() {
     );
 
     when(
-      () => mockSessionAppPort.updateProfileStatsWithSession(profile.id, any()),
+      () => mockSessionAppPort.updateProfileWithSession(profile.id, any()),
     ).thenAnswer(
       (_) async =>
           (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
@@ -85,7 +85,7 @@ void main() {
     expect(result.updatedProfile, equals(expectedUpdatedProfile));
     expect(result.session, equals(session));
     verify(
-      () => mockSessionAppPort.updateProfileStatsWithSession(profile.id, any()),
+      () => mockSessionAppPort.updateProfileWithSession(profile.id, any()),
     ).called(1);
   });
 }

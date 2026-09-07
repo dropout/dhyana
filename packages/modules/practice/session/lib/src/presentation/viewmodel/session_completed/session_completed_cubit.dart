@@ -39,17 +39,16 @@ class SessionCompletedCubit extends Cubit<SessionCompletedDataEntity>
 
       final result = await updateProfileWithSessionUseCase.execute(
         profileId,
-        session.toEntity(),      
+        session.toEntity(),
       );
 
-      
+      // UI can show update results while save the 
+      emit(SessionCompletedDataEntity.saving(updateResult: result));
 
-
-      emit(SessionCompletedDataEntity.saving(
-        updateResult: result
-      ));
-
-      await logSessionUseCase.execute(result.updatedProfile.id, session.toEntity());
+      await logSessionUseCase.execute(
+        profileId, 
+        session.toEntity()
+      );
 
       // Emit saved state
       emit(SessionCompletedDataEntity.saved(updateResult: result));

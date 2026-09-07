@@ -20,7 +20,7 @@ class DefaultStatsPublicApi implements StatsPublicApi {
   });
 
   @override
-  Future<void> logSessionStatistics(
+  Future<void> logSessionStats(
     String profileId,
     StatsSession session,
   ) async => LogSessionStatsUseCase(

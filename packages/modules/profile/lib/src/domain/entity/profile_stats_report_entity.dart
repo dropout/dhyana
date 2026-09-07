@@ -14,6 +14,7 @@ part 'profile_stats_report_entity.g.dart';
 @freezed
 sealed class ProfileStatsReportEntity with _$ProfileStatsReportEntity {
 
+  @JsonSerializable(explicitToJson: true)
   const factory ProfileStatsReportEntity({
     @Default(ConsecutiveDaysEntity()) ConsecutiveDaysEntity consecutiveDays,
     @Default(MilestoneProgressEntity()) MilestoneProgressEntity milestoneProgress,

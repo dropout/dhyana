@@ -259,8 +259,8 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.email,_that.photoU
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _ProfileEntity extends ProfileEntity with DiagnosticableTreeMixin {
   const _ProfileEntity({required this.id, required this.firstName, required this.lastName, required this.email, required this.photoUrl, required this.photoBlurhash, this.settings = const ProfileSettingsEntity(), @DateTimeConverter() required this.signupDate, required this.statsReport, required this.completed, this.location}): super._();
   factory _ProfileEntity.fromJson(Map<String, dynamic> json) => _$ProfileEntityFromJson(json);

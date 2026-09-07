@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:stats/stats.dart';
 
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/service/session_app_port.dart';
@@ -18,16 +17,7 @@ class LogSessionInsightsUseCase with LoggerMixin {
     // Log to the StatsPublicApi
     await sessionAppPort.logSessionStatistics(
       profileId,
-      StatsSession(
-        id: session.id,
-        startTime: session.startTime,
-        endTime: session.endTime,
-        duration: session.duration,
-        type: switch (session.type) {
-          .timer => .sitting,
-          .chanting => .chanting,
-        },
-      ),
+      session,
     );
 
     // Log to Mindful Minutes Platform Health API if authorized

@@ -13,13 +13,12 @@ part 'profile_entity.g.dart';
 // in firebase functions, because thats where the
 // initial profile db record is created.
 
-// TODO: Cleanup ProfileModel interface and its usage
-
 @freezed
 abstract class ProfileEntity with _$ProfileEntity implements SerializableEntity, ProfileDisplayable {
 
   const ProfileEntity._();
 
+  @JsonSerializable(explicitToJson: true)
   const factory ProfileEntity({
     required String id,
     required String firstName,

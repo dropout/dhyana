@@ -1,4 +1,3 @@
-import 'package:profile/profile.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:session/src/domain/service/session_app_port.dart';
@@ -20,18 +19,9 @@ class UpdateProfileWithSessionUseCase {
     String profileId,
     SessionEntity session,
   ) async {
-    final result = await sessionAppPort.updateProfileStatsWithSession(
+    final result = await sessionAppPort.updateProfileWithSession(
       profileId,
-      ProfileSession(
-        id: session.id,
-        startTime: session.startTime,
-        endTime: session.endTime,
-        duration: session.duration,
-        type: switch(session.type) {
-          .timer => .sitting,
-          .chanting => .chanting,
-        },
-      ),
+      session,
     );
     return UpdateProfileStatsResultEntity(
       oldProfile: result.originalProfile,

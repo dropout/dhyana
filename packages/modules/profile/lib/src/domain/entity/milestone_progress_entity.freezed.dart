@@ -215,8 +215,8 @@ return $default(_that.completedDaysCount,_that.targetDaysCount,_that.sessions);c
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _MilestoneProgressEntity extends MilestoneProgressEntity with DiagnosticableTreeMixin {
   const _MilestoneProgressEntity({this.completedDaysCount = 0, this.targetDaysCount = 7,  List<ProfileSessionEntity> sessions = const []}): _sessions = sessions,super._();
   factory _MilestoneProgressEntity.fromJson(Map<String, dynamic> json) => _$MilestoneProgressEntityFromJson(json);

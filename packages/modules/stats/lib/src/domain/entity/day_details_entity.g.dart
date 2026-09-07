@@ -10,7 +10,9 @@ _DayDetailsEntity _$DayDetailsEntityFromJson(
   Map<String, dynamic> json,
 ) => _DayDetailsEntity(
   id: json['id'] as String,
-  startDate: DateTime.parse(json['startDate'] as String),
+  startDate: const DateTimeConverter().fromJson(
+    (json['startDate'] as num).toInt(),
+  ),
   sessions:
       (json['sessions'] as List<dynamic>?)
           ?.map((e) => StatsSessionEntity.fromJson(e as Map<String, dynamic>))
@@ -22,7 +24,7 @@ _DayDetailsEntity _$DayDetailsEntityFromJson(
 Map<String, dynamic> _$DayDetailsEntityToJson(_DayDetailsEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'startDate': instance.startDate.toIso8601String(),
-      'sessions': instance.sessions,
+      'startDate': const DateTimeConverter().toJson(instance.startDate),
+      'sessions': instance.sessions.map((e) => e.toJson()).toList(),
       'consecutiveDaysCount': instance.consecutiveDaysCount,
     };

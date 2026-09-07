@@ -14,6 +14,7 @@ sealed class MilestoneProgressEntity with _$MilestoneProgressEntity {
 
   const MilestoneProgressEntity._();
 
+  @JsonSerializable(explicitToJson: true)
   const factory MilestoneProgressEntity({
     @Default(0) int completedDaysCount,
     // Update default targetDaysCount in firebase function onbeforeCreateUser too

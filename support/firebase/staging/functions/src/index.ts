@@ -1,6 +1,9 @@
+import {initializeApp} from "firebase-admin/app";
 import {setGlobalOptions} from "firebase-functions/v2";
 import * as glob from "glob";
 import * as path from "path";
+
+initializeApp();
 
 setGlobalOptions({
   region: "europe-west3",

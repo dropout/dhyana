@@ -238,8 +238,8 @@ return $default(_that.consecutiveDays,_that.milestoneProgress,_that.milestoneCou
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _ProfileStatsReportEntity with DiagnosticableTreeMixin implements ProfileStatsReportEntity {
   const _ProfileStatsReportEntity({this.consecutiveDays = const ConsecutiveDaysEntity(), this.milestoneProgress = const MilestoneProgressEntity(), this.milestoneCount = 0, this.completedMinutesCount = 0, this.completedSessionsCount = 0, this.completedDaysCount = 0, @DateTimeOrNullConverter() this.firstSessionDate, @DateTimeOrNullConverter() this.lastSessionDate});
   factory _ProfileStatsReportEntity.fromJson(Map<String, dynamic> json) => _$ProfileStatsReportEntityFromJson(json);

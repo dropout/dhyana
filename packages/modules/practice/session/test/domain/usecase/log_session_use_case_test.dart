@@ -4,7 +4,6 @@ import 'package:profile/profile.dart';
 
 import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/usecase/log_session_insights_use_case.dart';
-import 'package:stats/stats.dart';
 
 import '../../session_mock_definitions.dart';
 
@@ -45,12 +44,12 @@ void main() {
   test('logs to statistics and mindful minutes when authorized', () async {
     final profile = createProfile();
     final session = createSession();
-    final s = StatsSession(
+    final s = SessionEntity(
       id: session.id,
       startTime: session.startTime,
       endTime: session.endTime,
       duration: session.duration,
-      type: .sitting,
+      type: .timer,
     );
 
     when(() => mockSessionAppPort.isMindfulMinutesAuthorized())
@@ -75,12 +74,12 @@ void main() {
       final profile = createProfile();
       final session = createSession();
 
-      final s = StatsSession(
+      final s = SessionEntity(
         id: session.id,
         startTime: session.startTime,
         endTime: session.endTime,
         duration: session.duration,
-        type: .sitting,
+        type: .timer,
       );
 
       when(() => mockSessionAppPort.isMindfulMinutesAuthorized())

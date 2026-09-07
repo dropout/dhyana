@@ -6,13 +6,15 @@ part 'day_details_entity.freezed.dart';
 part 'day_details_entity.g.dart';
 
 @freezed
+
 sealed class DayDetailsEntity with _$DayDetailsEntity implements SerializableEntity {
 
   const DayDetailsEntity._();
 
+  @JsonSerializable(explicitToJson: true)
   const factory DayDetailsEntity({
     required String id,
-    required DateTime startDate,    
+    @DateTimeConverter() required DateTime startDate,
     @Default([]) List<StatsSessionEntity> sessions,
     @Default(0) int consecutiveDaysCount,
   }) = _DayDetailsEntity;

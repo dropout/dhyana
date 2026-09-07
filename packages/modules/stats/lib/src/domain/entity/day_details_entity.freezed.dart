@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DayDetailsEntity {
 
- String get id; DateTime get startDate; List<StatsSessionEntity> get sessions; int get consecutiveDaysCount;
+ String get id;@DateTimeConverter() DateTime get startDate; List<StatsSessionEntity> get sessions; int get consecutiveDaysCount;
 /// Create a copy of DayDetailsEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -54,7 +54,7 @@ abstract mixin class $DayDetailsEntityCopyWith<$Res>  {
   factory $DayDetailsEntityCopyWith(DayDetailsEntity value, $Res Function(DayDetailsEntity) _then) = _$DayDetailsEntityCopyWithImpl;
 @useResult
 $Res call({
- String id, DateTime startDate, List<StatsSessionEntity> sessions, int consecutiveDaysCount
+ String id,@DateTimeConverter() DateTime startDate, List<StatsSessionEntity> sessions, int consecutiveDaysCount
 });
 
 
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  DateTime startDate,  List<StatsSessionEntity> sessions,  int consecutiveDaysCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @DateTimeConverter()  DateTime startDate,  List<StatsSessionEntity> sessions,  int consecutiveDaysCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DayDetailsEntity() when $default != null:
 return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCount);case _:
@@ -180,7 +180,7 @@ return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCou
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  DateTime startDate,  List<StatsSessionEntity> sessions,  int consecutiveDaysCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @DateTimeConverter()  DateTime startDate,  List<StatsSessionEntity> sessions,  int consecutiveDaysCount)  $default,) {final _that = this;
 switch (_that) {
 case _DayDetailsEntity():
 return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCount);}
@@ -197,7 +197,7 @@ return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCou
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  DateTime startDate,  List<StatsSessionEntity> sessions,  int consecutiveDaysCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @DateTimeConverter()  DateTime startDate,  List<StatsSessionEntity> sessions,  int consecutiveDaysCount)?  $default,) {final _that = this;
 switch (_that) {
 case _DayDetailsEntity() when $default != null:
 return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCount);case _:
@@ -209,14 +209,14 @@ return $default(_that.id,_that.startDate,_that.sessions,_that.consecutiveDaysCou
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _DayDetailsEntity extends DayDetailsEntity {
-  const _DayDetailsEntity({required this.id, required this.startDate,  List<StatsSessionEntity> sessions = const [], this.consecutiveDaysCount = 0}): _sessions = sessions,super._();
+  const _DayDetailsEntity({required this.id, @DateTimeConverter() required this.startDate,  List<StatsSessionEntity> sessions = const [], this.consecutiveDaysCount = 0}): _sessions = sessions,super._();
   factory _DayDetailsEntity.fromJson(Map<String, dynamic> json) => _$DayDetailsEntityFromJson(json);
 
 @override final  String id;
-@override final  DateTime startDate;
+@override@DateTimeConverter() final  DateTime startDate;
  final  List<StatsSessionEntity> _sessions;
 @override@JsonKey() List<StatsSessionEntity> get sessions {
   if (_sessions is EqualUnmodifiableListView) return _sessions;
@@ -261,7 +261,7 @@ abstract mixin class _$DayDetailsEntityCopyWith<$Res> implements $DayDetailsEnti
   factory _$DayDetailsEntityCopyWith(_DayDetailsEntity value, $Res Function(_DayDetailsEntity) _then) = __$DayDetailsEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String id, DateTime startDate, List<StatsSessionEntity> sessions, int consecutiveDaysCount
+ String id,@DateTimeConverter() DateTime startDate, List<StatsSessionEntity> sessions, int consecutiveDaysCount
 });
 
 

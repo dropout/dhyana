@@ -11,5 +11,3 @@ export const CitySearchResultSchema = z.object({
 });
 
 export type CitySearchResultSchemaType = z.infer<typeof CitySearchResultSchema>;
-
-export default CitySearchResultSchema;
