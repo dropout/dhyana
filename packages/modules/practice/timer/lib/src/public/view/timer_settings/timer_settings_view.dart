@@ -13,8 +13,8 @@ import 'package:timer/src/public/view/timer_settings/duration_input.dart';
 import 'package:timer/src/public/view/timer_settings/interval_input.dart';
 import 'package:timer/src/public/view/timer_settings/input_gap.dart';
 
-
-class TimerSettingsView extends StatefulWidget {
+/// Let's the user configure the timer settings.
+class TimerSettingsView extends StatelessWidget {
   final TimerSettings timerSettings;
 
   static Widget withCubit() {
@@ -35,48 +35,33 @@ class TimerSettingsView extends StatefulWidget {
 
   const TimerSettingsView({required this.timerSettings, super.key});
 
-  @override
-  State<TimerSettingsView> createState() => _TimerSettingsViewState();
-}
-
-class _TimerSettingsViewState extends State<TimerSettingsView> {
-  @override
-  void didUpdateWidget(TimerSettingsView oldWidget) {
-    if (widget.timerSettings != oldWidget.timerSettings) {
-      context.read<TimerSettingsCubit>().timerSettingsChanged(
-        widget.timerSettings,
-      );
-    }
-    super.didUpdateWidget(oldWidget);
-  }
-
   void _onWarmupChange(BuildContext context, Duration warmupDuration) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(warmup: warmupDuration),
+      timerSettings.copyWith(warmup: warmupDuration),
     );
   }
 
   void _onStartingSoundChange(BuildContext context, Sound startingSound) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(startingSound: startingSound),
+      timerSettings.copyWith(startingSound: startingSound),
     );
   }
 
   void _onDurationChange(BuildContext context, Duration duration) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(duration: duration),
+      timerSettings.copyWith(duration: duration),
     );
   }
 
   void _onIntervalCountChange(BuildContext context, int intervalCount) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(intervalCount: intervalCount),
+      timerSettings.copyWith(intervalCount: intervalCount),
     );
   }
 
   void _onEndingSoundChange(BuildContext context, Sound endingSound) {
     context.read<TimerSettingsCubit>().timerSettingsChanged(
-      widget.timerSettings.copyWith(endingSound: endingSound),
+      timerSettings.copyWith(endingSound: endingSound),
     );
   }
 
@@ -108,7 +93,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
         children: [
           WarmupInput(
             label: TimerLocalizations.of(context).inputWarmupLabel,
-            value: widget.timerSettings.warmup,
+            value: timerSettings.warmup,
             overlayService: context.services.overlayService,
             onChange: (Duration duration) => _onWarmupChange(context, duration),
           ),
@@ -116,15 +101,15 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           SoundInput(
             label: TimerLocalizations.of(context).inputStartingSoundLabel,
             overlayService: context.services.overlayService,
-            value: widget.timerSettings.startingSound,
+            value: timerSettings.startingSound,
             onChange: (Sound startingSound) =>
                 _onStartingSoundChange(context, startingSound),
           ),
           buildInputGap(context),
           DurationInput(
             label: TimerLocalizations.of(context).inputDurationLabel,
-            value: widget.timerSettings.duration,
-            preparationTime: widget.timerSettings.warmup,
+            value: timerSettings.duration,
+            preparationTime: timerSettings.warmup,
             overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
                 _onDurationChange(context, duration),
@@ -132,7 +117,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           buildInputGap(context),
           IntervalInput(
             label: TimerLocalizations.of(context).inputIntervalCountLabel,
-            value: widget.timerSettings.intervalCount,
+            value: timerSettings.intervalCount,
             overlayService: context.services.overlayService,
             onChange: (int intervalCount) =>
                 _onIntervalCountChange(context, intervalCount),
@@ -141,7 +126,7 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
           SoundInput(
             label: TimerLocalizations.of(context).inputEndingSoundLabel,
             overlayService: context.services.overlayService,
-            value: widget.timerSettings.endingSound,
+            value: timerSettings.endingSound,
             onChange: (Sound endingSound) =>
                 _onEndingSoundChange(context, endingSound),
           ),
@@ -167,5 +152,5 @@ class _TimerSettingsViewState extends State<TimerSettingsView> {
       child: InputGap(isEndGap: false),
     );
   }
-  
+
 }

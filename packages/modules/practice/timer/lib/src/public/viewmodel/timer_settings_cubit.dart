@@ -63,4 +63,5 @@ class TimerSettingsCubit extends HydratedCubit<TimerSettingsState>
       );
     }
   }
+  
 }
