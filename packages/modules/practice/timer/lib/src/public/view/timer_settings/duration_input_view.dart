@@ -92,7 +92,6 @@ class _DurationInputViewState extends State<DurationInputView>
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  // spacing: DesignSpec.spacing2xl,
                   children: [
                     // The start time of the session
                     SizedBox(

@@ -45,7 +45,8 @@ class PlaylistSheet extends StatelessWidget {
                 ),
                 itemCount: state.chantingSettings.selectedChants.length,
                 itemBuilder: (context, index) {
-                  final chantViewModel = state.chantingSettings.selectedChants[index];
+                  final chantViewModel =
+                      state.chantingSettings.selectedChants[index];
                   return Padding(
                     padding: const EdgeInsets.only(
                       bottom: DesignSpec.paddingSm,
@@ -72,7 +73,10 @@ class PlaylistSheet extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: DesignSpec.padding2Xl),
               child: AppButton(
-                onTap: () => context.pop(),
+                onTap: () {
+                  context.pop();
+                  context.hapticsTap();
+                },
                 text: context.coreL10n.close.toUpperCase(),
               ),
             ),
@@ -89,8 +93,12 @@ class PlaylistSheet extends StatelessWidget {
   ) {
     if (index == chantingState.currentIndex) {
       return switch (chantingState.playbackState.playing) {
-        true => PlaylistItemBadge(text: ChantingLocalizations.of(context).chantingPlaylistBadgePlaying),
-        false => PlaylistItemBadge(text: ChantingLocalizations.of(context).chantingPlaylistBadgePaused),
+        true => PlaylistItemBadge(
+          text: ChantingLocalizations.of(context).chantingPlaylistBadgePlaying,
+        ),
+        false => PlaylistItemBadge(
+          text: ChantingLocalizations.of(context).chantingPlaylistBadgePaused,
+        ),
       };
     }
     return null;

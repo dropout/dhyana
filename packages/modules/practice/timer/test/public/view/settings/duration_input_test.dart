@@ -7,7 +7,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
 
-
 class FakeBuildContext
   extends Fake
   implements BuildContext {}

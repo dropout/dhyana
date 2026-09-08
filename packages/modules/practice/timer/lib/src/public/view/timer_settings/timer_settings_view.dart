@@ -1,16 +1,18 @@
+import 'package:get_it/get_it.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:core/core.dart';
 import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/timer_routes.dart';
-import 'package:core/core.dart';
-import 'package:material_ui/material_ui.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timer/src/public/view/timer_settings/warmup_input.dart';
 import 'package:timer/src/public/view/timer_settings/sound_input.dart';
 import 'package:timer/src/public/view/timer_settings/duration_input.dart';
 import 'package:timer/src/public/view/timer_settings/interval_input.dart';
 import 'package:timer/src/public/view/timer_settings/input_gap.dart';
-import 'package:get_it/get_it.dart';
+
 
 class TimerSettingsView extends StatefulWidget {
   final TimerSettings timerSettings;

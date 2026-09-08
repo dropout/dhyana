@@ -15,22 +15,16 @@ import 'stats/tab/week_tab.dart';
 import 'stats/tab/year_tab.dart';
 
 class ProfileStatsView extends StatefulWidget {
-
   final String profileId;
 
-  const ProfileStatsView({
-    required this.profileId,
-    super.key,
-  });
+  const ProfileStatsView({required this.profileId, super.key});
 
   @override
   State<ProfileStatsView> createState() => _ProfileStatsViewState();
-
 }
 
 class _ProfileStatsViewState extends State<ProfileStatsView>
     with TickerProviderStateMixin, TitleEffectMixin {
-
   late final TabController primaryTC;
   late final ScrollController scrollController;
 
@@ -51,93 +45,75 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (BuildContext context, ProfileState state) {
-          switch (state) {
-            case ProfileLoadingState():
-              return buildScaffolding(
+      builder: (BuildContext context, ProfileState state) {
+        switch (state) {
+          case ProfileLoadingState():
+            return buildScaffolding(
+              context,
+              buildProfileLoadingContent(context),
+            );
+          case ProfileErrorState():
+            return buildScaffolding(context, buildProfileErrorContent(context));
+          case ProfileLoadedState():
+            return buildScaffolding(context, [
+              buildTitleEffectSliverTitle(
                 context,
-                buildProfileLoadingContent(context),
-              );
-            case ProfileErrorState():
-              return buildScaffolding(
-                context,
-                buildProfileErrorContent(context),
-              );
-            case ProfileLoadedState():
-              return buildScaffolding(
-                context,
-                [
-                  buildTitleEffectSliverTitle(context, StatsLocalizations.of(context).profileStats),
-                  StatsDataAreaSliver(
-                    profile: state.profile,
-                    profileName: state.profile.displayName,
-                    profilePhotoUrl: state.profile.profileImageStoragePath,
-                    profilePhotoBlurhash: state.profile.photoBlurhash,
-                  ),
-                  ...buildBarchartSlivers(context, state.profile.id),
-                ],
-
-              );
-            default:
-              return const SizedBox.shrink();
-          }
+                StatsLocalizations.of(context).profileStats,
+              ),
+              StatsDataAreaSliver(
+                profile: state.profile,
+                profileName: state.profile.displayName,
+                profilePhotoUrl: state.profile.profileImageStoragePath,
+                profilePhotoBlurhash: state.profile.photoBlurhash,
+              ),
+              ...buildBarchartSlivers(context, state.profile.id),
+            ]);
+          default:
+            return const SizedBox.shrink();
         }
+      },
     );
   }
 
   List<Widget> buildProfileLoadingContent(BuildContext context) {
     return [
-      SliverFillRemaining(
-        hasScrollBody: false,
-        child: AppLoadingDisplay(),
-      ),
+      SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
     ];
   }
 
   List<Widget> buildProfileErrorContent(BuildContext context) {
     return [
-      SliverFillRemaining(
-        hasScrollBody: false,
-        child: AppErrorDisplay(),
-      )
+      SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay()),
     ];
   }
 
   List<Widget> buildBarchartSlivers(BuildContext context, String profileId) {
     return [
-      PinnedHeaderSliver(
-        child: buildTabBar(context),
-      ),
-      _SliverFillRemainingCustom(
-        child: buildTabBarView(context, profileId),
-      )
+      PinnedHeaderSliver(child: buildTabBar(context)),
+      _SliverFillRemainingCustom(child: buildTabBarView(context, profileId)),
     ];
   }
 
-  Widget buildScaffolding(
-    BuildContext context,
-    List<Widget> slivers,
-  ) {
+  Widget buildScaffolding(BuildContext context, List<Widget> slivers) {
     return CustomScrollView(
       key: const Key('profile_stats_custom_scroll_view'),
       controller: scrollController,
       slivers: [
-
         // Appearing-disappearing title effect when scrolling down
-        buildTitleEffectAppBar(context, StatsLocalizations.of(context).profileStats),
+        buildTitleEffectAppBar(
+          context,
+          StatsLocalizations.of(context).profileStats,
+        ),
 
         // Content slivers
-        ...slivers
-
+        ...slivers,
       ],
     );
   }
 
   Widget buildTabBar(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.backgroundPaper,
-      ),
+      decoration: BoxDecoration(color: AppColors.backgroundPaper),
       child: Padding(
         padding: const EdgeInsets.only(bottom: DesignSpec.paddingSm),
         child: TabBar(
@@ -150,12 +126,12 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           ),
           controller: primaryTC,
           indicator: const ShapeDecoration(
-              color: Colors.black,
-              shape: StadiumBorder()
+            color: Colors.black,
+            shape: StadiumBorder(),
           ),
           labelColor: Colors.white,
           labelPadding: const EdgeInsets.symmetric(
-              horizontal: DesignSpec.spacingSm
+            horizontal: DesignSpec.spacingSm,
           ),
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorAnimation: TabIndicatorAnimation.elastic,
@@ -168,6 +144,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
           // make it look better with splash border radius
           splashBorderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
           dividerColor: Colors.transparent,
+          onTap: (int index) => context.hapticsTap(),
           tabs: [
             buildTabBarItem(
               context,
@@ -195,18 +172,10 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     );
   }
 
-  Widget buildTabBarItem(
-    BuildContext context,
-    String label,
-    { Key? key }
-  ) {
+  Widget buildTabBarItem(BuildContext context, String label, {Key? key}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingSm),
-      child: Tab(
-        key: key,
-        height: 32,
-        child: Text(label),
-      ),
+      child: Tab(key: key, height: 32, child: Text(label)),
     );
   }
 
@@ -216,18 +185,10 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
       child: TabBarView(
         controller: primaryTC,
         children: [
-          DaysTab(
-            profileId: profileId,
-          ),
-          WeekTab(
-            profileId: profileId,
-          ),
-          MonthTab(
-            profileId: profileId,
-          ),
-          YearTab(
-            profileId: profileId,
-          ),
+          DaysTab(profileId: profileId),
+          WeekTab(profileId: profileId),
+          MonthTab(profileId: profileId),
+          YearTab(profileId: profileId),
         ],
       ),
     );
@@ -240,9 +201,7 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     scrollController.dispose();
     super.dispose();
   }
-
 }
-
 
 /// A special sliver that helps the layout of the barchart area with the
 /// sticky tabbar.
@@ -255,7 +214,6 @@ class _SliverFillRemainingCustom extends SingleChildRenderObjectWidget {
 }
 
 class RenderSliverFillRemainingCustom extends RenderSliverSingleBoxAdapter {
-
   /// Create a sliver that sizes itself to fill the remaining space
   /// in the viewport when the child is smaller than the space below the
   /// overlapping sticky slivers.
@@ -274,7 +232,6 @@ class RenderSliverFillRemainingCustom extends RenderSliverSingleBoxAdapter {
 
   @override
   void performLayout() {
-
     if (child == null) {
       geometry = SliverGeometry.zero;
       return;
@@ -302,10 +259,16 @@ class RenderSliverFillRemainingCustom extends RenderSliverSingleBoxAdapter {
       );
     }
 
-    final double paintedChildSize =
-      calculatePaintOffset(constraints, from: 0.0, to: childExtent);
-    final double cacheExtent =
-      calculateCacheOffset(constraints, from: 0.0, to: childExtent);
+    final double paintedChildSize = calculatePaintOffset(
+      constraints,
+      from: 0.0,
+      to: childExtent,
+    );
+    final double cacheExtent = calculateCacheOffset(
+      constraints,
+      from: 0.0,
+      to: childExtent,
+    );
 
     assert(paintedChildSize.isFinite);
     assert(paintedChildSize >= 0.0);
@@ -317,7 +280,8 @@ class RenderSliverFillRemainingCustom extends RenderSliverSingleBoxAdapter {
       maxPaintExtent: childExtent,
       hitTestExtent: paintedChildSize,
       hasVisualOverflow:
-      childExtent > constraints.remainingPaintExtent || constraints.scrollOffset > 0.0,
+          childExtent > constraints.remainingPaintExtent ||
+          constraints.scrollOffset > 0.0,
     );
 
     setChildParentData(child!, constraints, geometry!);
