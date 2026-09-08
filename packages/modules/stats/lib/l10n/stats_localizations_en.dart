@@ -53,6 +53,6 @@ class StatsLocalizationsEn extends StatsLocalizations {
 
   @override
   String weekNumber(Object weekNumber, Object year) {
-    return '$year W$weekNumber';
+    return '${year}W $weekNumber';
   }
 }

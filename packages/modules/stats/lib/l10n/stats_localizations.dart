@@ -185,7 +185,7 @@ abstract class StatsLocalizations {
   /// No description provided for @weekNumber.
   ///
   /// In en, this message translates to:
-  /// **'{year} W{weekNumber}'**
+  /// **'{year}W {weekNumber}'**
   String weekNumber(Object weekNumber, Object year);
 }
 

@@ -14,5 +14,5 @@
   "pleaseWait": "Please wait",
   "statsTotalSessions": "Total sessions",
   "statsTotalTimeSpent": "Total time",
-  "weekNumber": "{year} W{weekNumber}"
+  "weekNumber": "{year}W {weekNumber}"
 }
