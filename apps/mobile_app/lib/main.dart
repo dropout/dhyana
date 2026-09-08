@@ -1,4 +1,4 @@
-import 'package:stepstones/app.dart';
+import 'package:mobile_app/app.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';

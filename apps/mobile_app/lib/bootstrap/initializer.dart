@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:stepstones/audio/app_audio_handler.dart';
-import 'package:stepstones/audio/audio_session_configuration.dart';
+import 'package:mobile_app/audio/app_audio_handler.dart';
+import 'package:mobile_app/audio/audio_session_configuration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';

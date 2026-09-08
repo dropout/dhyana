@@ -1,4 +1,4 @@
-name: mobile_app
+name: stepstones
 publish_to: none
 environment: 
   sdk: '>=3.10.0 <4.0.0'
