@@ -23,7 +23,7 @@ _PresenceEntity _$PresenceEntityFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PresenceEntityToJson(_PresenceEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'profile': instance.profile,
+      'profile': instance.profile.toJson(),
       'startedAt': const DateTimeConverter().toJson(instance.startedAt),
-      'location': instance.location,
+      'location': instance.location?.toJson(),
     };

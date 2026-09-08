@@ -14,7 +14,7 @@ part of 'presence_entity.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$PresenceEntity implements DiagnosticableTreeMixin {
+mixin _$PresenceEntity {
 
  String get id; SocialProfileEntity get profile;@DateTimeConverter() DateTime get startedAt; Location? get location;
 /// Create a copy of PresenceEntity
@@ -26,13 +26,6 @@ $PresenceEntityCopyWith<PresenceEntity> get copyWith => _$PresenceEntityCopyWith
   /// Serializes this PresenceEntity to a JSON map.
   Map<String, dynamic> toJson();
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  final _this = this as PresenceEntity;
-  properties
-    ..add(DiagnosticsProperty('type', 'PresenceEntity'))
-    ..add(DiagnosticsProperty('id', _this.id))..add(DiagnosticsProperty('profile', _this.profile))..add(DiagnosticsProperty('startedAt', _this.startedAt))..add(DiagnosticsProperty('location', _this.location));
-}
 
 @override
 bool operator ==(Object other) {
@@ -48,7 +41,7 @@ int get hashCode {
 }
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   final _this = this as PresenceEntity;
   return 'PresenceEntity(id: ${_this.id}, profile: ${_this.profile}, startedAt: ${_this.startedAt}, location: ${_this.location})';
 }
@@ -237,9 +230,9 @@ return $default(_that.id,_that.profile,_that.startedAt,_that.location);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
-class _PresenceEntity extends PresenceEntity with DiagnosticableTreeMixin {
+@JsonSerializable(explicitToJson: true)
+class _PresenceEntity extends PresenceEntity {
   const _PresenceEntity({required this.id, required this.profile, @DateTimeConverter() required this.startedAt, this.location}): super._();
   factory _PresenceEntity.fromJson(Map<String, dynamic> json) => _$PresenceEntityFromJson(json);
 
@@ -258,12 +251,6 @@ _$PresenceEntityCopyWith<_PresenceEntity> get copyWith => __$PresenceEntityCopyW
 Map<String, dynamic> toJson() {
   return _$PresenceEntityToJson(this, );
 }
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    properties
-    ..add(DiagnosticsProperty('type', 'PresenceEntity'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('profile', profile))..add(DiagnosticsProperty('startedAt', startedAt))..add(DiagnosticsProperty('location', location));
-}
 
 @override
 bool operator ==(Object other) {
@@ -277,7 +264,7 @@ int get hashCode {
 }
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
     return 'PresenceEntity(id: $id, profile: $profile, startedAt: $startedAt, location: $location)';
 }
 

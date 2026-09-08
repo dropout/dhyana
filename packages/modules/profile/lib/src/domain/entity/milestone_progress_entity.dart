@@ -1,6 +1,7 @@
-import 'package:profile/src/domain/entity/profile_session_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:profile/src/domain/entity/profile_session_entity.dart';
 
 part 'milestone_progress_entity.freezed.dart';
 part 'milestone_progress_entity.g.dart';

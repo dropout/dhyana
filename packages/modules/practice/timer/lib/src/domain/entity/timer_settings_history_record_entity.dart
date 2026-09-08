@@ -10,6 +10,7 @@ sealed class TimerSettingsHistoryRecordEntity with _$TimerSettingsHistoryRecordE
 
   const TimerSettingsHistoryRecordEntity._();
 
+  @JsonSerializable(explicitToJson: true)
   const factory TimerSettingsHistoryRecordEntity({
     required String id,
     required TimerSettingsEntity timerSettings,

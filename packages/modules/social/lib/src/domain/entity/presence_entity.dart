@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:core/core.dart';
 import 'package:social/src/domain/entity/social_profile_entity.dart';
 
@@ -8,8 +8,10 @@ part 'presence_entity.g.dart';
 
 @freezed
 sealed class PresenceEntity with _$PresenceEntity implements SerializableEntity {
+  
   const PresenceEntity._();
-
+  
+  @JsonSerializable(explicitToJson: true)
   const factory PresenceEntity({
     required String id,
     required SocialProfileEntity profile,

@@ -218,8 +218,8 @@ return $default(_that.id,_that.timerSettings,_that.useCount,_that.lastUsed);case
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _TimerSettingsHistoryRecordEntity extends TimerSettingsHistoryRecordEntity {
   const _TimerSettingsHistoryRecordEntity({required this.id, required this.timerSettings, required this.useCount, required this.lastUsed}): super._();
   factory _TimerSettingsHistoryRecordEntity.fromJson(Map<String, dynamic> json) => _$TimerSettingsHistoryRecordEntityFromJson(json);
