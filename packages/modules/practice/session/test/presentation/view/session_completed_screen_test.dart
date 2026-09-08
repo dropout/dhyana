@@ -11,7 +11,7 @@ import 'package:core/core.dart';
 import 'package:session/src/data/datasource/faker_session_extension.dart';
 import 'package:session/src/data/mapper/session_mapper.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
-import 'package:session/src/domain/usecase/log_session_insights_use_case.dart';
+import 'package:session/src/domain/usecase/save_session_stats_use_case.dart';
 import 'package:session/src/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:session/src/presentation/view/session_completed_screen.dart';
 import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
@@ -32,7 +32,7 @@ void main() {
     late MockHomeNavigator mockHomeNavigator;
   
 
-    late LogSessionInsightsUseCase mockLogSessionUseCase;
+    late SaveSessionStatsUseCase mockLogSessionUseCase;
     late UpdateProfileWithSessionUseCase mockUpdateProfileWithSessionUseCase;
 
     setUp(() async {
@@ -70,7 +70,7 @@ void main() {
 
       GetIt.I.registerFactory<SessionCompletedCubit>(() {
         return SessionCompletedCubit(
-          logSessionUseCase: mockLogSessionUseCase,
+          saveSessionStatsUseCase: mockLogSessionUseCase,
           updateProfileWithSessionUseCase: mockUpdateProfileWithSessionUseCase,
           crashlyticsService: mockCrashlyticsService,
         );

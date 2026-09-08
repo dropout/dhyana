@@ -5,17 +5,17 @@ import 'package:session/src/domain/service/session_app_port.dart';
 
 
 /// Logs a completed session to statistics and Mindful Minutes when authorized.
-class LogSessionInsightsUseCase with LoggerMixin {
+class SaveSessionStatsUseCase with LoggerMixin {
   final SessionAppPort sessionAppPort;
 
-  LogSessionInsightsUseCase({
+  SaveSessionStatsUseCase({
     required this.sessionAppPort,
   });
 
   Future<void> execute(String profileId, SessionEntity session) async {
     
     // Log to the StatsPublicApi
-    await sessionAppPort.logSessionStatistics(
+    await sessionAppPort.saveSessionStats(
       profileId,
       session,
     );

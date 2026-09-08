@@ -61,6 +61,7 @@ void main() {
 					session,
 				),
 			).called(1);
+      verify(() => profileRepository.update(updatedProfile)).called(1);
 			verifyNoMoreInteractions(profileRepository);
 		});
 

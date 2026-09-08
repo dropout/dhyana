@@ -4,8 +4,10 @@ import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_volume_listener/flutter_volume_listener.dart';
 
-/// A widget that displays the current volume level of the device as a percentage and an icon.
-/// The purpose of this widget is to alert the user that the volume is too low for the app to function properly.
+/// A widget that displays the current volume level 
+/// of the device as a percentage and an icon.
+/// The purpose of this widget is to inform the user that the volume level
+/// might be too low for the app to function properly.
 class VolumeIndicator extends StatefulWidget {
   /// The threshold above which the volume indicator will be hidden.
   final double visibilityThreshold;
@@ -55,8 +57,6 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     // Calculate the intervals based on wait and fade durations
     final waitRatio =
         widget.waitDuration.inMilliseconds / totalDuration.inMilliseconds;
-    // final fadeRatio =
-    //     widget.fadeDuration.inMilliseconds / totalDuration.inMilliseconds;
 
     // let's build an animation that will hold the opacity for a brief moment before fading out using chained tweens.
     _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0)

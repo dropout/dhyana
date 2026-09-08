@@ -10,7 +10,7 @@ import 'package:session/src/data/service/default_session_app_port.dart';
 import 'package:session/src/data/service/default_session_navigator.dart';
 import 'package:session/src/domain/repository/session_repository.dart';
 import 'package:session/src/domain/service/session_app_port.dart';
-import 'package:session/src/domain/usecase/log_session_insights_use_case.dart';
+import 'package:session/src/domain/usecase/save_session_stats_use_case.dart';
 import 'package:session/src/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:session/src/presentation/viewmodel/sessions/sessions_cubit.dart';
@@ -46,8 +46,8 @@ extension SessionModuleDependencyInjection on GetIt {
     });
 
     // Use Cases
-    registerFactory<LogSessionInsightsUseCase>(
-      () => LogSessionInsightsUseCase(
+    registerFactory<SaveSessionStatsUseCase>(
+      () => SaveSessionStatsUseCase(
         sessionAppPort: get<SessionAppPort>(),
       ),
     );
@@ -61,7 +61,7 @@ extension SessionModuleDependencyInjection on GetIt {
     registerFactory<SessionCompletedCubit>(() {
       return SessionCompletedCubit(      
         updateProfileWithSessionUseCase: get<UpdateProfileWithSessionUseCase>(),
-        logSessionUseCase: get<LogSessionInsightsUseCase>(),
+        saveSessionStatsUseCase: get<SaveSessionStatsUseCase>(),
         crashlyticsService: get<CrashlyticsService>(),
       );
     });

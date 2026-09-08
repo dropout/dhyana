@@ -24,6 +24,7 @@ class UpdateProfileStatsWithSessionUseCase {
       originalProfile,
       session,
     );
+    await profileRepository.update(updatedProfile);
     return (
       originalProfile: originalProfile, 
       updatedProfile: updatedProfile

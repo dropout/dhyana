@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 import 'package:session/src/data/mapper/session_mapper.dart';
 import 'package:session/src/public/model/session.dart';
 import 'package:session/src/domain/entity/session_completed_data_entity.dart';
-import 'package:session/src/domain/usecase/log_session_insights_use_case.dart';
+import 'package:session/src/domain/usecase/save_session_stats_use_case.dart';
 import 'package:session/src/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
 
@@ -17,13 +17,13 @@ class SessionCompletedCubit extends Cubit<SessionCompletedDataEntity>
     with LoggerMixin {
 
   final UpdateProfileWithSessionUseCase updateProfileWithSessionUseCase;
-  final LogSessionInsightsUseCase logSessionUseCase;
+  final SaveSessionStatsUseCase saveSessionStatsUseCase;
 
   final CrashlyticsService crashlyticsService;
 
   SessionCompletedCubit({    
     required this.updateProfileWithSessionUseCase,
-    required this.logSessionUseCase,
+    required this.saveSessionStatsUseCase,
     required this.crashlyticsService,
   }) : super(const SessionCompletedDataEntity.initial());
 
@@ -45,7 +45,7 @@ class SessionCompletedCubit extends Cubit<SessionCompletedDataEntity>
       // UI can show update results while save the 
       emit(SessionCompletedDataEntity.saving(updateResult: result));
 
-      await logSessionUseCase.execute(
+      await saveSessionStatsUseCase.execute(
         profileId, 
         session.toEntity()
       );

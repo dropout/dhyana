@@ -3,18 +3,18 @@ import 'package:mocktail/mocktail.dart';
 import 'package:profile/profile.dart';
 
 import 'package:session/src/domain/entity/session_entity.dart';
-import 'package:session/src/domain/usecase/log_session_insights_use_case.dart';
+import 'package:session/src/domain/usecase/save_session_stats_use_case.dart';
 
 import '../../session_mock_definitions.dart';
 
 void main() {
   late MockSessionAppPort mockSessionAppPort;
-  late LogSessionInsightsUseCase useCase;
+  late SaveSessionStatsUseCase useCase;
 
   setUp(() {
     mockSessionAppPort = MockSessionAppPort();
 
-    useCase = LogSessionInsightsUseCase(sessionAppPort: mockSessionAppPort);
+    useCase = SaveSessionStatsUseCase(sessionAppPort: mockSessionAppPort);
   });
 
   Profile createProfile() {
@@ -54,7 +54,7 @@ void main() {
 
     when(() => mockSessionAppPort.isMindfulMinutesAuthorized())
       .thenAnswer((_) async => true);
-    when(() => mockSessionAppPort.logSessionStatistics(profile.id, s))
+    when(() => mockSessionAppPort.saveSessionStats(profile.id, s))
       .thenAnswer((_) async {});
     when(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime))
       .thenAnswer((_) async {});
@@ -62,7 +62,7 @@ void main() {
 
     await useCase.execute(profile.id, session);
 
-    verify(() => mockSessionAppPort.logSessionStatistics(profile.id, s)).called(1);
+    verify(() => mockSessionAppPort.saveSessionStats(profile.id, s)).called(1);
     verify(() => mockSessionAppPort.isMindfulMinutesAuthorized()).called(1);
     verify(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime)).called(1);
 
@@ -84,14 +84,14 @@ void main() {
 
       when(() => mockSessionAppPort.isMindfulMinutesAuthorized())
         .thenAnswer((_) async => false);
-      when(() => mockSessionAppPort.logSessionStatistics(profile.id, s))
+      when(() => mockSessionAppPort.saveSessionStats(profile.id, s))
         .thenAnswer((_) async {});
       when(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime))
         .thenAnswer((_) async {});
 
       await useCase.execute(profile.id, session);
 
-      verify(() => mockSessionAppPort.logSessionStatistics(profile.id, s)).called(1);
+      verify(() => mockSessionAppPort.saveSessionStats(profile.id, s)).called(1);
       verify(() => mockSessionAppPort.isMindfulMinutesAuthorized()).called(1);
       verifyNever(() => mockSessionAppPort.logMindfulMinutes(session.startTime, session.endTime));
     },

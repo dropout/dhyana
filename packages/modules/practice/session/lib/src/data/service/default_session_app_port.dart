@@ -25,7 +25,7 @@ class DefaultSessionAppPort implements SessionAppPort {
       mindfulMinutesService.logMindfulMinutes(startTime, endTime);
 
   @override
-  Future<void> logSessionStatistics(
+  Future<void> saveSessionStats(
     String profileId,
     SessionEntity session,
   ) async => statsPublicApi.logSessionStats(

@@ -13,6 +13,14 @@ void main() {
   late UpdateProfileWithSessionUseCase useCase;
 
   setUpAll(() {
+    registerFallbackValue(SessionEntity(
+      id: 'fallback',
+      type: .timer,
+      startTime: DateTime.utc(1970),
+      endTime: DateTime.utc(1970),
+      duration: Duration.zero,
+    ));
+
     registerFallbackValue(ProfileSession(
       id: 'fallback',
       type: .sitting,
@@ -84,6 +92,7 @@ void main() {
     expect(result.oldProfile, equals(profile));
     expect(result.updatedProfile, equals(expectedUpdatedProfile));
     expect(result.session, equals(session));
+    
     verify(
       () => mockSessionAppPort.updateProfileWithSession(profile.id, any()),
     ).called(1);
