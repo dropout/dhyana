@@ -13,42 +13,53 @@ Use this file as the default cross-agent guide. Keep instructions concise and li
 ## Initial setup
 Run these first when working in a fresh environment:
 1. Check if Flutter is available and healthy: `flutter doctor`
-2. Install dependencies: `flutter pub get`
-3. Generate code: `dart run build_runner build`
-4. Generate localizations: `flutter gen-l10n`
-5. Static checks: `flutter analyze`
-6. Run tests: `flutter test`
+2. Install workspace dependencies and link packages: `melos bootstrap`
+3. Generate code across the monorepo: `melos run codegen`
+4. Generate localizations across packages: `melos run codegen:l10n`
+5. Static checks: `melos run analyze`
+6. Run tests: `melos run test`
 
 ## Run and Build
 For running and building commands look at the commands documentation: [`docs/commands.md`](docs/commands.md)
 
 ## Repository Layout
-- `lib/main_local.dart`, `lib/main_staging.dart`, `lib/main_prod.dart`: App entry points for each flavor.
-- `lib/bootstrap/`: Initialization and bootstrap code for the app.
-- `lib/core/`: Core module, including app entry point, dependency injection, and shared utilities.
-- `lib/drift/`: Drift database configuration for the app.
-- `lib/modules/`: Feature modules, each with its own layers.
-- `lib/modules/auth/`: Authentication feature module.
-- `lib/modules/donate/`: Donation feature module.
-- `lib/modules/profile/`: Profile feature module.
-- `lib/modules/stats/`: Stats feature module.
-- `lib/modules/practice/timer/`: Timer feature module.
-- `lib/modules/practice/chanting/`: Chanting feature module.
-- `lib/modules/practice/session/`: Session feature module.
-- `lib/l10n/`: localization resources.
-- `docs/`: Documentation
+- `apps/mobile_app/`: Mobile app shell.
+- `apps/mobile_app/lib/bootstrap/`: Initialization and bootstrap code for the app.
+- `apps/mobile_app/lib/main_<flavor_name>.dart`: Mobile app entry point for each flavor.
+- `apps/mobile_app/integration_test/`: Integration tests.
+- `packages/core/`: Core module, including app entry point, dependency injection, and shared utilities.
+- `packages/modules/`: Feature modules, each with its own layers.
+- `packages/modules/auth/`: Authentication feature module.
+- `packages/modules/donate/`: Donation feature module.
+- `packages/modules/profile/`: Profile feature module.
+- `packages/modules/stats/`: Stats feature module.
+- `packages/modules/practice/timer/`: Timer feature module.
+- `packages/modules/practice/chanting/`: Chanting feature module.
+- `packages/modules/practice/session/`: Session feature module.
+- `packages/firebase_provider/`: Firebase SDK provider module for the app with emulator configuration code.
+- `packages/bar_chart/`: Bar chart widget module for the app.
+- `packages/particle_field/`: Particle field widget module for the app.
+- `packages/*/lib/l10n/`: localization resources for the modules.
+- `packages/*/test/`: Unit tests.
+- `docs/`: Project-wide documentation.
 - `ai/`: Agents, Skills, Prompts for AI augmented development.
-- `test/`: Unit tests.
-- `integration_test/`: Integration tests.
 - `support/firebase/`: Flavor specific Firebase backend source code and configuration.
 - `support/maintenance_scripts`: Maintenance and helper scripts.
 
 ## Architecture Rules
-- Required data flow: Widget -> Cubit/Bloc -> Repository -> Data Provider.
+- Required data flow: Widget -> Cubit/Bloc -> Use Case / Service -> Data Layer.
 - Keep dependency direction downward: upper layers depend on interfaces, not concrete implementations.
 - Keep business logic out of widgets; widgets should remain declarative.
 - Prefer Cubit over Bloc for simple state flows.
 - Use freezed for immutable state and domain models.
+
+## Module Guidelines
+- Modules are following a simplified version of Clean Architecture principles.
+- Each module handles its own service configuration and dependencies internally.
+- Modules are expected to encapsulate their internal logic and expose only necessary interfaces to other modules in a form of a public API layer.
+- Hierarchy between modules: 
+	- Higher-level modules can depend on lower-level modules, but not vice versa. (For example, the `profile` module can depend on the `auth` module, but the `auth` module should not depend on the `profile` module.)
+	- Core modules should not depend on any other modules and provide foundational services and utilities for the rest of the project.
 
 ## Commenting & Verbosity Rules
 - Keep all inline code comments extremely short and concise (maximum one sentence).
