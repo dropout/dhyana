@@ -4,6 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'stats_interval.freezed.dart';
 part 'stats_interval.g.dart';
 
+
+/// A class that represents a time interval for stats queries.
 @freezed
 sealed class StatsInterval with _$StatsInterval {
 
@@ -14,12 +16,13 @@ sealed class StatsInterval with _$StatsInterval {
     required DateTime to,
   }) = _StatsInterval;
 
+  
   factory StatsInterval.days({
     required DateTime lastDay,
     int days = 7
   }) {
     DateTime to = lastDay.copyWith(
-      day: lastDay.day + 1,
+      day: lastDay.day,
       hour: 0,
       minute: 0,
       second: 0,
@@ -33,15 +36,19 @@ sealed class StatsInterval with _$StatsInterval {
     );
   }
 
+  /// Generates an interval of weeks, bases on the given day, 
+  /// and the number of weeks to include in the interval.
+  /// Current week is always included in the interval, and the interval will 
+  /// go back in time for the number of weeks specified.  
   factory StatsInterval.weeks({
     required DateTime day,
-    int weeks = 8
+    int weeks = 6
   }) {
     StatsInterval interval = StatsInterval.thisWeek(day);
     return interval.copyWith(
       from: interval.from.copyWith(
         day: interval.from.day - (weeks - 1) * 7,
-      )
+      ),
     );
   }
 
@@ -78,7 +85,10 @@ sealed class StatsInterval with _$StatsInterval {
     return StatsInterval(
       from: firstDayOfWeek,
       to: firstDayOfWeek.copyWith(
-        day: firstDayOfWeek.day + 7,
+        day: firstDayOfWeek.day + 6,
+        hour: 23,
+        minute: 59,
+        second: 59,
       )
     );
   }
@@ -86,14 +96,14 @@ sealed class StatsInterval with _$StatsInterval {
   factory StatsInterval.thisMonth(DateTime today) {
     return StatsInterval(
       from: DateTime(today.year, today.month, 1),
-      to: DateTime(today.year, today.month + 1, 1),
+      to: DateTime(today.year, today.month + 1, 0, 23, 59, 59),
     );
   }
 
   factory StatsInterval.thisYear(DateTime today) {
     return StatsInterval(
       from: DateTime(today.year, 1, 1),
-      to: DateTime(today.year + 1),
+      to: DateTime(today.year + 1, 1, 0, 23, 59, 59),
     );
   }
 
@@ -142,15 +152,15 @@ sealed class StatsInterval with _$StatsInterval {
       firstInterval,
     ];
 
-    // (weeksInInterval - 1) because first is already added
+    // start from 1 instead of 0 because we already have the first interval
     for (var i = 1; i < intervalCount; i++) {
       result.add(
         firstInterval.copyWith(
           from: firstInterval.from.copyWith(
-            day: firstInterval.from.day - (weeksInInterval) * 7 * i,
+            day: firstInterval.from.day - weeksInInterval * 7 * i,
           ),
           to: firstInterval.to.copyWith(
-            day: firstInterval.to.day - (weeksInInterval) * 7 * i,
+            day: firstInterval.to.day - weeksInInterval * 7 * i,
           ),
         )
       );
@@ -164,30 +174,26 @@ sealed class StatsInterval with _$StatsInterval {
       int monthsInInterval = 6,
       int intervalCount = 4,
   }) {
-    StatsInterval thisMonth = StatsInterval.thisMonth(now);
-    StatsInterval firstInterval = thisMonth.copyWith(
-      from: thisMonth.from.copyWith(
-        month: thisMonth.from.month - (monthsInInterval - 1),
-        day: 1,
-        hour: 0,
-        minute: 0,
-      ),
-    );
-    List<StatsInterval> result = [
-      firstInterval,
-    ];
-    for (var i = 0; i < intervalCount - 1; ++i) {
-      result.add(
-        firstInterval.copyWith(
-          from: firstInterval.from.copyWith(
-            month: firstInterval.from.month - (monthsInInterval * (i + 1)),
-          ),
-          to: firstInterval.to.copyWith(
-            month: (firstInterval.to.month - (monthsInInterval * (i + 1))),
-          )
-        )
+    DateTime currentMonth = DateTime(now.year, now.month, 1);
+    List<StatsInterval> result = [];
+
+    for (var i = 0; i < intervalCount; ++i) {
+      DateTime from = DateTime(
+        currentMonth.year,
+        currentMonth.month - (monthsInInterval - 1) - monthsInInterval * i,
+        1,
       );
+      DateTime to = DateTime(
+        from.year,
+        from.month + monthsInInterval,
+        0,
+        23,
+        59,
+        59,
+      );
+      result.add(StatsInterval(from: from, to: to));
     }
+
     return result;
   }
 
@@ -209,14 +215,14 @@ sealed class StatsInterval with _$StatsInterval {
     List<StatsInterval> result = [
       firstInterval,
     ];
-    for (var i = 0; i < intervalCount - 1; ++i) {
+    for (var i = 1; i < intervalCount; i++) {
       result.add(
         firstInterval.copyWith(
           from: firstInterval.from.copyWith(
-            year: firstInterval.from.year - (yearsInInterval * (i + 1)),
+            year: firstInterval.from.year - (yearsInInterval * i),
           ),
           to: firstInterval.to.copyWith(
-            year: firstInterval.to.year - (yearsInInterval * (i + 1)),
+            year: firstInterval.to.year - (yearsInInterval * i),
           )
         )
       );
