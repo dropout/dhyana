@@ -241,7 +241,7 @@ class _LyricsViewState extends State<LyricsView> {
             final line = lyricsDocument.lines[index];
             return LyricLine(
               line: line,
-              position: widget.chantingState.position,
+              position: widget.chantingState.latencyCompensatedPosition,
               chantingState: widget.chantingState,
               isActive: index <= widget.chantingState.activeLineIndex,
             );

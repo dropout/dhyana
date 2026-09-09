@@ -48,7 +48,7 @@ class PlayerControls extends StatelessWidget {
   /// Whether to show the current position and total duration text.
   final bool showTime;
 
-  Duration get position => chantingState.position;
+  Duration get position => chantingState.latencyCompensatedPosition;
   Duration get duration => chantingState.duration;
   bool get isPlaying => chantingState.playbackState.playing == true;
 
