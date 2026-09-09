@@ -48,13 +48,18 @@ class ChantingAudioService {
   Duration get position => audioHandler.playbackState.value.position;
   Future<Duration> get outputLatency => audioHandler.outputLatency;
 
-  void _switchToChantingAudioHandler() {
-    audioHandler.switchToChantingAudioHandler();
-  }
+  // Audio route changes
+  Stream<void> get audioRouteChangeStream => audioHandler
+    .audioRouteChangeStream;
 
   Stream<void> get playlistCompletedStream => audioHandler.customEvent.where(
     (event) =>
         event is SoLoudChantingAudioHandlerCustomEvent &&
         event == SoLoudChantingAudioHandlerCustomEvent.playlistCompleted,
   );
+
+  void _switchToChantingAudioHandler() {
+    audioHandler.switchToChantingAudioHandler();
+  }
+
 }

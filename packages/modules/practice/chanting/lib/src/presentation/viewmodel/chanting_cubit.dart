@@ -17,7 +17,6 @@ import 'package:chanting/src/public/model/chanting_settings.dart';
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
-  
   // Services
   final SessionNavigator sessionNavigator;
   final ChantingSettings chantingSettings;
@@ -34,6 +33,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   StreamSubscription<PlaybackState>? _playbackStateSub;
   StreamSubscription<MediaItem?>? _mediaItemSub;
   StreamSubscription? _playlistCompletedSub;
+  StreamSubscription? _audioRouteChangeSub;
 
   /// Creates a new instance of [ChantingCubit] with the provided services and settings.
   ChantingCubit({
@@ -57,6 +57,10 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   /// Initializes the cubit by setting up stream subscriptions
   Future<void> _init() async {
     try {
+      _audioRouteChangeSub = audioService.audioRouteChangeStream.listen((_) {
+        _updateOutputLatency();
+      });
+
       _playbackStateSub = audioService.playbackStateStream.listen(
         _onPlaybackStateChanged,
       );
@@ -171,7 +175,8 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
     // Navigate to the session completed screen with the completed session data
     logger.t('Navigating to session completed screen');
     sessionNavigator.navigateToSessionCompletedScreen(
-      startTime: state.startTime ?? DateTime.now().subtract(state.elapsedSessionTime),
+      startTime:
+          state.startTime ?? DateTime.now().subtract(state.elapsedSessionTime),
       endTime: state.endTime ?? DateTime.now(),
       duration: state.duration,
       sessionType: .chanting,
@@ -232,9 +237,9 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   Future<void> close() {
     _playbackStateSub?.cancel();
     _playlistCompletedSub?.cancel();
+    _audioRouteChangeSub?.cancel();
     _mediaItemSub?.cancel();
     audioService.stop();
     return super.close();
   }
-  
 }

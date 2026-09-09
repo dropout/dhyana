@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mobile_app/audio/app_audio_handler.dart';
+import 'package:mobile_app/audio/default_app_audio_handler.dart';
 import 'package:mobile_app/audio/audio_session_configuration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
