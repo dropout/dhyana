@@ -5,23 +5,23 @@ class Assets {
 
   // Images
   static const String avatarPlaceholder =
-    'packages/core/assets/images/avatar_placeholder.png';
+    'packages/assets/images/avatar_placeholder.png';
   static const String appleLogo = 
-    'packages/core/assets/images/apple_logo.png';
+    'packages/assets/images/apple_logo.png';
   static const String googleLogo = 
-    'packages/core/assets/images/google_logo.png';
+    'packages/assets/images/google_logo.png';
 
   // Sounds
   static const String noSoundResourceUrl =
-    'asset:///packages/core/assets/audio/silent_meditation.mp3';
+    'asset:///packages/assets/audio/silent_meditation.mp3';
 
   // Shaders
   static const String shaderGradientFlow =
-    'packages/core/shaders/gradient_flow.frag';
+    'packages/assets/shaders/gradient_flow.frag';
   static const String shaderLinearGradientMask =
-    'packages/core/shaders/linear_gradient_mask.frag';
+    'packages/assets/shaders/linear_gradient_mask.frag';
     
   // ML Models
   static const String nswfModel = 
-    'packages/core/assets/gantman_nswf_110.tflite';
+    'packages/assets/gantman_nswf_110.tflite';
 }

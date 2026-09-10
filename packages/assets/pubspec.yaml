@@ -1,0 +1,40 @@
+name: assets
+resolution: workspace
+version: 0.0.1
+publish_to: none
+description: >
+  Holds the assets for the app. The assets are included in a
+  separate package, to be able to share it with Widgetbook app.
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+
+flutter:
+  assets:
+    - .
+
+  shaders:
+    - shaders/gradient_flow.frag
+    - shaders/linear_gradient_mask.frag
+    - shaders/test.frag
+
+  fonts:
+    - family: RobotoSlab
+      fonts:
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-Black.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-Bold.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-ExtraBold.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-ExtraLight.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-Light.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-Medium.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-Regular.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-SemiBold.ttf
+        - asset: fonts/Roboto_Slab/static/RobotoSlab-Thin.ttf
+    - family: RobotoCondensed
+      fonts:
+        - asset: fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf
+        - asset: fonts/Roboto_Condensed/RobotoCondensed-BoldItalic.ttf
+        - asset: fonts/Roboto_Condensed/RobotoCondensed-Italic.ttf
+        - asset: fonts/Roboto_Condensed/RobotoCondensed-Light.ttf
+        - asset: fonts/Roboto_Condensed/RobotoCondensed-LightItalic.ttf
+        - asset: fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf

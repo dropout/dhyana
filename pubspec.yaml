@@ -5,7 +5,9 @@ environment:
 
 workspace:
   - apps/mobile_app
+  - apps/widgetbook
   - packages/firebase_provider
+  - packages/assets
   - packages/core  
   - packages/modules/app_events
   - packages/modules/auth

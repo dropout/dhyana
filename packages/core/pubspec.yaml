@@ -23,6 +23,8 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.12.0
   drift: ^2.34.4
+
+  assets: ^0.0.1
   
   audio_service: ^0.18.19
   audio_session: ^0.2.4
@@ -68,41 +70,6 @@ dev_dependencies:
   freezed: ^4.0.1
   json_serializable: ^6.9.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
   generate: true
 
-  assets:
-  - assets/sounds/
-  - assets/images/
-  - assets/haptics/
-  - assets/gantman_nswf_110.tflite
-  
-  shaders:
-    - shaders/gradient_flow.frag
-    - shaders/linear_gradient_mask.frag
-    - shaders/test.frag
-
-  fonts:
-    - family: RobotoSlab
-      fonts:
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Black.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Bold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-ExtraBold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-ExtraLight.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Light.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Medium.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Regular.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-SemiBold.ttf
-        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Thin.ttf
-    - family: RobotoCondensed
-      fonts:
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-BoldItalic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Italic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-LightItalic.ttf
-        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf    

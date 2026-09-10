@@ -12,8 +12,20 @@
             "program": "apps/mobile_app/lib/main_staging.dart",
             "env": {
                 "NO_XIPH_LIBS": "1"
-            }            
+            }
         },
+        {
+            "name": "widgetbook",
+            "type": "dart",
+            "request": "launch",
+            "flutterMode": "debug",
+            "program": "apps/widgetbook/lib/main.dart"
+        },
+
+
+
+
+
         {
             "name": "dhyana - staging (debug)",
             "type": "dart",
