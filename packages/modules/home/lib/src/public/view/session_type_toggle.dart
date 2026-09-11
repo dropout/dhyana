@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:home/src/public/enum/home_screen_view_state.dart';
@@ -7,7 +6,7 @@ import 'package:material_ui/material_ui.dart';
 /// Toggle button that switches the home screen between the timer settings view
 /// and the chanting settings view. The widget uses callback pattern to notify
 /// parent of mode changes.
-class SessionTypeToggle extends StatefulWidget {
+class SessionTypeToggle extends StatelessWidget {
   final HomeScreenViewState activeMode;
   final ValueChanged<HomeScreenViewState> onModeChanged;
   final EdgeInsetsGeometry? padding;
@@ -20,36 +19,14 @@ class SessionTypeToggle extends StatefulWidget {
   });
 
   @override
-  State<SessionTypeToggle> createState() => _SessionTypeToggleState();
-}
-
-class _SessionTypeToggleState extends State<SessionTypeToggle> {
-  late final StreamController<HomeScreenViewState> _modeStreamController;
-
-  @override
-  void initState() {
-    super.initState();
-    _modeStreamController = StreamController<HomeScreenViewState>();
-    _modeStreamController.add(widget.activeMode);
-  }
-
-  @override
-  void didUpdateWidget(covariant SessionTypeToggle oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.activeMode != widget.activeMode) {
-      _modeStreamController.add(widget.activeMode);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.hapticsTap();
-        HomeScreenViewState newMode = (widget.activeMode == HomeScreenViewState.sitting)
+      onTap: () {        
+        HomeScreenViewState newMode = (activeMode == HomeScreenViewState.sitting)
             ? HomeScreenViewState.chanting
             : HomeScreenViewState.sitting;
-        widget.onModeChanged(newMode);
+        onModeChanged(newMode);
+        context.hapticsTap();
       },
       child: AnimatedSwitcher(
         duration: Durations.medium2,
@@ -64,14 +41,14 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
             ),
           );
         },
-        child: _builder(context, widget.activeMode),
+        child: _builder(context, activeMode),
       ),
     );
   }
 
-  Widget _builder(BuildContext context, HomeScreenViewState? item) {
+  Widget _builder(BuildContext context, HomeScreenViewState item) {
     return DecoratedBox(
-      key: ValueKey(item?.name ?? 'unknown'),
+      key: ValueKey(item.name),
       decoration: BoxDecoration(
       shape: BoxShape.circle,
       color: AppColors.buttonBackground,
@@ -84,12 +61,6 @@ class _SessionTypeToggleState extends State<SessionTypeToggle> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _modeStreamController.close();
-    super.dispose();
   }
 
 }

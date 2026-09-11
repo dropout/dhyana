@@ -1,8 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 
 class DesignSpec {
-  static const String fontFamilyName = 'packages/core/RobotoSlab';
-  static const String condensedFontFamilyName = 'packages/core/RobotoCondensed';
+  static const String fontFamilyName = 'packages/assets/RobotoSlab';
+  static const String condensedFontFamilyName = 'packages/assets/RobotoCondensed';
 
   static const double maxContentWidth = 512.0;
 

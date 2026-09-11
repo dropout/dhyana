@@ -4,7 +4,6 @@ version: 1.0.0+1
 description: Streamline application widget development with Widgetbook.
 publish_to: "none"
 
-
 environment:
   sdk: '>=3.10.0 <4.0.0'
   flutter: ">=1.17.0"
@@ -16,10 +15,13 @@ dependencies:
   material_ui: ^1.2.0
   widgetbook_annotation: ^3.11.0
   widgetbook: ^3.25.0
-    
+  mocktail: ^1.0.5
+  provider: ^6.1.5+1
+
   core: ^0.0.1
   assets: ^0.0.1
-
+  home: ^0.0.1
+  timer: ^0.0.1
 
 dev_dependencies:
   build_runner: 

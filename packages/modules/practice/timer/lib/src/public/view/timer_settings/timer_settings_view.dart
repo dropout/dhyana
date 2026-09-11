@@ -91,6 +91,7 @@ class TimerSettingsView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
+          buildLabel(context, TimerLocalizations.of(context).inputWarmupLabel),
           WarmupInput(
             label: TimerLocalizations.of(context).inputWarmupLabel,
             value: timerSettings.warmup,
@@ -98,6 +99,7 @@ class TimerSettingsView extends StatelessWidget {
             onChange: (Duration duration) => _onWarmupChange(context, duration),
           ),
           buildInputGap(context),
+          buildLabel(context, TimerLocalizations.of(context).inputStartingSoundLabel),
           SoundInput(
             label: TimerLocalizations.of(context).inputStartingSoundLabel,
             overlayService: context.services.overlayService,
@@ -106,6 +108,7 @@ class TimerSettingsView extends StatelessWidget {
                 _onStartingSoundChange(context, startingSound),
           ),
           buildInputGap(context),
+          buildLabel(context, TimerLocalizations.of(context).inputDurationLabel),
           DurationInput(
             label: TimerLocalizations.of(context).inputDurationLabel,
             value: timerSettings.duration,
@@ -115,6 +118,7 @@ class TimerSettingsView extends StatelessWidget {
                 _onDurationChange(context, duration),
           ),
           buildInputGap(context),
+          buildLabel(context, TimerLocalizations.of(context).inputIntervalCountLabel),
           IntervalInput(
             label: TimerLocalizations.of(context).inputIntervalCountLabel,
             value: timerSettings.intervalCount,
@@ -123,6 +127,7 @@ class TimerSettingsView extends StatelessWidget {
                 _onIntervalCountChange(context, intervalCount),
           ),
           buildInputGap(context),
+          buildLabel(context, TimerLocalizations.of(context).inputEndingSoundLabel),
           SoundInput(
             label: TimerLocalizations.of(context).inputEndingSoundLabel,
             overlayService: context.services.overlayService,
@@ -146,11 +151,22 @@ class TimerSettingsView extends StatelessWidget {
     );
   }
 
-  Widget buildInputGap(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: 16),
-      child: InputGap(isEndGap: false),
+  Widget buildInputGap(BuildContext context) =>
+    Gap.flexible(size: DesignSpec.spacingLg);
+
+  Widget buildLabel(BuildContext context, String label) =>
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label.toUpperCase(),
+          style: context.theme.textTheme.labelMedium?.copyWith(
+            fontWeight: FontWeight.w900,
+            color: AppColors.armyGreen,
+          ),
+        ),
+        Gap.xs(),
+      ],
     );
-  }
 
 }

@@ -68,7 +68,7 @@ class PlayerControls extends StatelessWidget {
 
     final TextStyle? timeTextStyle = context.theme.textTheme.bodyLarge
         ?.copyWith(
-          fontFamily: 'RobotoCondensed',
+          fontFamily: DesignSpec.condensedFontFamilyName,
           color: Colors.white70,
           fontWeight: FontWeight.bold,
         );

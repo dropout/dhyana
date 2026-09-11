@@ -1,3 +1,4 @@
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/public/view/timer_settings/input_button.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
@@ -54,15 +55,16 @@ class WarmupInput extends StatelessWidget {
     return InputButton(
       key: const Key('warmup_input_button'),
       onTap: () => _onInputTap(context),
-      padding: const EdgeInsets.all(DesignSpec.paddingXl),
-      shape: CircleBorder(),
+      padding: const EdgeInsets.symmetric(
+        horizontal: DesignSpec.spacingMd,
+        vertical: DesignSpec.spacingSm,
+      ),
+      // shape: CircleBorder(),
       child: Text(
-        value.inMinutes.toString(),
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.displaySmall!.copyWith(
+        TimerLocalizations.of(context).minutesPluralWithNumber(value.inMinutes),
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: AppColors.buttonForeground,
-          fontWeight: FontWeight.w900,
-          height: 1.0,
+          fontWeight: FontWeight.w800,
         ),
       ),
     );
