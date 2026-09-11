@@ -17,6 +17,9 @@ class HomeScreen extends StatelessWidget {
 
   final bool useShaderInSessionStartButton;
 
+  // No scrolling content yet, so the parchment texture stays static.
+  static final ValueNotifier<double> _parchmentScrollOffset = ValueNotifier(0);
+
   const HomeScreen({
     this.useShaderInSessionStartButton = true,
     super.key,
@@ -45,9 +48,12 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: HomeScreenAppbar(homeScreenState: state),
       extendBodyBehindAppBar: true,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [buildBody(context, state), buildBottomMenu(context, state)],
+      body: ParchmentBackground(
+        scrollOffset: _parchmentScrollOffset,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [buildBody(context, state), buildBottomMenu(context, state)],
+        ),
       ),
     );
   }

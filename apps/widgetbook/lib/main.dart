@@ -15,6 +15,7 @@ final ShaderService shaderService = DefaultShaderService();
 void main() async {
   await shaderService.loadShader(Assets.shaderLinearGradientMask);
   await shaderService.loadShader(Assets.shaderGradientFlow);
+  await shaderService.loadShader(Assets.shaderParchmentNoise);
 
   runApp(const WidgetbookApp());
 }

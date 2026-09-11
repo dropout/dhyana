@@ -91,6 +91,7 @@ class Initializer with LoggerMixin {
     logger.t('Preloading shaders');
     await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
     await services.shaderService.loadShader(Assets.shaderGradientFlow);
+    await services.shaderService.loadShader(Assets.shaderParchmentNoise);
 
 
     logger.t('Fetching remote settings');    

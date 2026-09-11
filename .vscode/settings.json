@@ -1,7 +1,8 @@
 {
     "chat.tools.terminal.autoApprove": {
         "flutter": true,
-        "dart": true
+        "dart": true,
+        "melos": true
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
