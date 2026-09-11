@@ -43,7 +43,7 @@ class _HomeScreenBottomMenuState extends State<HomeScreenBottomMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,                
                   children: [						
-                    VolumeIndicator(),
+                    DeviceVolumeIndicator(),
                     Spacer(),
                     buildToggle(context),
                   ],

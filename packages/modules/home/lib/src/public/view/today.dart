@@ -16,14 +16,14 @@ class Today extends StatelessWidget {
       painter: TodayPainter(
         dateText: TextSpan(
           text: '${DateFormat('MMMMd').format(today)}.',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: Colors.black,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w800,
           ),
         ),
         weekDayText: TextSpan(
           text: DateFormat('EEEE').format(today),
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),

@@ -8,12 +8,17 @@ class InputButton extends StatelessWidget {
   final EdgeInsets padding;
   final Widget? child;
   final ShapeBorder shape;
+  final TextStyle? textStyle;
 
   const InputButton({
     required this.onTap,
     this.shape = const StadiumBorder(),
-    this.padding = EdgeInsets.zero,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: DesignSpec.spacingMd,
+      vertical: DesignSpec.spacingSm,
+    ),
     this.child,
+    this.textStyle,
     super.key
   });
 
@@ -28,10 +33,17 @@ class InputButton extends StatelessWidget {
       highlightElevation: 0,
       constraints: const BoxConstraints(), // removes unnecessary padding
       shape: shape,
-      fillColor: Colors.black, // background color
+      // fillColor: Colors.black, // background color
+      fillColor: AppColors.buttonBackground, // background color
       splashColor: AppColors.splashColor,
       clipBehavior: Clip.none,
-      child: child,
+      child: DefaultTextStyle(
+        style: textStyle ?? Theme.of(context).textTheme.titleMedium!.copyWith(
+          color: AppColors.buttonForeground,
+          fontWeight: FontWeight.w800,
+        ),
+        child: child ?? const SizedBox.shrink(),
+      ),
     );
   }
 }

@@ -10,11 +10,9 @@ import 'package:timer/timer.dart';
 
 import 'main.directories.g.dart';
 
-
 final ShaderService shaderService = DefaultShaderService();
 
 void main() async {
-
   await shaderService.loadShader(Assets.shaderLinearGradientMask);
   await shaderService.loadShader(Assets.shaderGradientFlow);
 
@@ -30,11 +28,11 @@ class WidgetbookApp extends StatelessWidget {
     return Widgetbook.material(
       directories: directories,
       appBuilder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(
-          disableAnimations: false
-        ),
+        data: MediaQuery.of(context).copyWith(disableAnimations: false),
         child: MultiProvider(
-          providers: [Provider<Services>(create: (_) => configureServicesForUseCase())],
+          providers: [
+            Provider<Services>(create: (_) => configureServicesForUseCase()),
+          ],
           child: Theme(
             data: DesignSpec().themeData,
             child: SizedBox.expand(child: child),
@@ -53,9 +51,10 @@ class WidgetbookApp extends StatelessWidget {
           locales: TimerLocalizations.supportedLocales,
           localizationsDelegates: [
             ...CoreLocalizations.localizationsDelegates,
-            ...TimerLocalizations.localizationsDelegates,            
+            ...TimerLocalizations.localizationsDelegates,
           ],
         ),
+        InspectorAddon(),
       ],
     );
   }
@@ -65,9 +64,20 @@ Services configureServicesForUseCase() {
   final mockServices = MockServices();
   final hapticsService = MockHapticsService();
   final overlayService = MockOverlayService();
+  final crashlyticsService = MockCrashlyticsService();
+  final resourceResolver = MockResourceResolver();
 
   when(() => mockServices.hapticsService).thenReturn(hapticsService);
   when(() => mockServices.overlayService).thenReturn(overlayService);
   when(() => mockServices.shaderService).thenReturn(shaderService);
+  when(() => mockServices.resourceResolver).thenReturn(resourceResolver);
+  when(() => mockServices.crashlyticsService).thenReturn(crashlyticsService);
+
+  when(() => resourceResolver.resolveStoragePath(any<String>())).thenAnswer((
+    _,
+  ) async {
+    return Assets.avatarPlaceholder;
+  });
+
   return mockServices;
 }

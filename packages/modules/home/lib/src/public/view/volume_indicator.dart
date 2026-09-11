@@ -1,14 +1,22 @@
 import 'dart:async';
 
-import 'package:core/core.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_volume_listener/flutter_volume_listener.dart';
+import 'package:material_ui/material_ui.dart';
+
+import 'package:core/core.dart';
+
 
 /// A widget that displays the current volume level 
 /// of the device as a percentage and an icon.
 /// The purpose of this widget is to inform the user that the volume level
 /// might be too low for the app to function properly.
 class VolumeIndicator extends StatefulWidget {
+  /// Stream of volume level updates, expected to emit values in [0, 1].
+  final Stream<double> volumeStream;
+
+  /// The volume level to render before the first stream event arrives.
+  final double initialVolume;
+
   /// The threshold above which the volume indicator will be hidden.
   final double visibilityThreshold;
 
@@ -22,6 +30,8 @@ class VolumeIndicator extends StatefulWidget {
   final Duration fadeDuration;
 
   const VolumeIndicator({
+    required this.volumeStream,
+    required this.initialVolume,
     this.visibilityThreshold = 0.25,
     this.showOnVolumeChangeAboveThreshold = true,
     this.waitDuration = const Duration(milliseconds: 1600),
@@ -35,8 +45,7 @@ class VolumeIndicator extends StatefulWidget {
 
 class _VolumeIndicatorState extends State<VolumeIndicator>
     with SingleTickerProviderStateMixin {
-  final flutterVolumeListener = FlutterVolumeListener();
-  double _currentVolume = 0.0;
+  late double _currentVolume = widget.initialVolume;
   StreamSubscription<double>? _volumeStreamSub;
 
   late final AnimationController _animationController;
@@ -76,19 +85,8 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     super.dispose();
   }
 
-  Future<void> initPlatformState() async {
-    flutterVolumeListener.volume.then((value) {
-      if (!mounted) return;      
-      setState(() {
-        _currentVolume = value;
-        if (widget.showOnVolumeChangeAboveThreshold &&
-            _currentVolume >= widget.visibilityThreshold) {
-          _animationController.forward(from: 0.0);
-        }
-      });
-    });
-
-    flutterVolumeListener.onVolumeChanged.skipWhile((_) => !mounted).listen((
+  void initPlatformState() {
+    _volumeStreamSub = widget.volumeStream.skipWhile((_) => !mounted).listen((
       volume,
     ) {
       setState(() {
@@ -98,7 +96,7 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
           _animationController.forward(from: 0.0);
         }
       });
-    });    
+    });
   }
 
   @override
@@ -130,16 +128,20 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
       child: Padding(
         padding: const EdgeInsets.all(DesignSpec.paddingMd),
         child: Row(
+          mainAxisSize: .min,
           children: [
             Icon(getVolumeIcon(_currentVolume), color: Colors.white),
             Gap.xs(),
             Text(
               '${(_currentVolume * 100).toInt()}%',
+              textAlign: .center,
               style: context.theme.textTheme.bodyMedium?.copyWith(
                 color: getVolumeColor(_currentVolume),
                 fontWeight: FontWeight.bold,
+                
               ),
             ),
+
           ],
         ),
       ),
@@ -166,5 +168,54 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     } else {
       return Colors.green;
     }
+  }
+}
+
+
+/// Production entry point that wires [VolumeIndicator] to the device volume plugin.
+class DeviceVolumeIndicator extends StatefulWidget {
+  final double visibilityThreshold;
+  final bool showOnVolumeChangeAboveThreshold;
+  final Duration waitDuration;
+  final Duration fadeDuration;
+
+  const DeviceVolumeIndicator({
+    this.visibilityThreshold = 0.25,
+    this.showOnVolumeChangeAboveThreshold = true,
+    this.waitDuration = const Duration(milliseconds: 1600),
+    this.fadeDuration = const Duration(milliseconds: 500),
+    super.key,
+  });
+
+  @override
+  State<DeviceVolumeIndicator> createState() => _DeviceVolumeIndicatorState();
+}
+
+class _DeviceVolumeIndicatorState extends State<DeviceVolumeIndicator> {
+  final _listener = FlutterVolumeListener();
+  double? _initialVolume;
+
+  @override
+  void initState() {
+    super.initState();
+    _listener.volume.then((value) {
+      if (!mounted) return;
+      setState(() => _initialVolume = value);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final initialVolume = _initialVolume;
+    if (initialVolume == null) return const SizedBox.shrink();
+
+    return VolumeIndicator(
+      volumeStream: _listener.onVolumeChanged,
+      initialVolume: initialVolume,
+      visibilityThreshold: widget.visibilityThreshold,
+      showOnVolumeChangeAboveThreshold: widget.showOnVolumeChangeAboveThreshold,
+      waitDuration: widget.waitDuration,
+      fadeDuration: widget.fadeDuration,
+    );
   }
 }

@@ -28,7 +28,7 @@ class PresenceButton extends StatelessWidget {
       child: const SizedBox.expand(
         child: Icon(Icons.public_rounded,
           color: AppColors.buttonForeground,
-          size: 24,
+          size: 28,
         ),
       ),
     );

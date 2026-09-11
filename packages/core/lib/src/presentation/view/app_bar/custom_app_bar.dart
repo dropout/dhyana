@@ -11,7 +11,7 @@ import 'package:material_ui/material_ui.dart';
 ///  Leading and trailing widget height is constrained to a height of 40.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
-  static const double widgetHeight = kToolbarHeight - 16.0;
+  static const double widgetHeight = kToolbarHeight - 4;
 
   final String? titleText;
   final Widget? leading;

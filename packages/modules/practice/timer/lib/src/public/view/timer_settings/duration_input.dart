@@ -70,15 +70,24 @@ class DurationInput extends StatelessWidget {
     return InputButton(
       key: Key('timer_duration_input_button'),
       onTap: () => _onInputTap(context),
-      padding: const EdgeInsets.all(DesignSpec.paddingXl),
+      padding: const EdgeInsets.all(DesignSpec.paddingLg),
       shape: CircleBorder(),
-      child: Text(
-        value.inMinutes.toString(),
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.displayLarge!.copyWith(
-          color: AppColors.buttonForeground,
-          fontWeight: FontWeight.w900,
-          height: 1.0,
+      textStyle: context.theme.textTheme.displaySmall!.copyWith(
+        color: AppColors.buttonForeground,
+        fontWeight: FontWeight.w900,
+      ),
+      child: SizedBox.square(
+        dimension: DesignSpec.circleSm, 
+        child: Center(
+          child: Text(
+            value.inMinutes.toString(),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+              color: AppColors.buttonForeground,
+              fontWeight: FontWeight.w900,
+              height: 1.0,
+            ),
+          ),
         ),
       ),
     );

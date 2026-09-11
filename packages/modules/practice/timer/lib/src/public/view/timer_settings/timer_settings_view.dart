@@ -11,7 +11,7 @@ import 'package:timer/src/public/view/timer_settings/warmup_input.dart';
 import 'package:timer/src/public/view/timer_settings/sound_input.dart';
 import 'package:timer/src/public/view/timer_settings/duration_input.dart';
 import 'package:timer/src/public/view/timer_settings/interval_input.dart';
-import 'package:timer/src/public/view/timer_settings/input_gap.dart';
+
 
 /// Let's the user configure the timer settings.
 class TimerSettingsView extends StatelessWidget {
@@ -162,7 +162,7 @@ class TimerSettingsView extends StatelessWidget {
           label.toUpperCase(),
           style: context.theme.textTheme.labelMedium?.copyWith(
             fontWeight: FontWeight.w900,
-            color: AppColors.armyGreen,
+            color: AppColors.charcoal,
           ),
         ),
         Gap.xs(),

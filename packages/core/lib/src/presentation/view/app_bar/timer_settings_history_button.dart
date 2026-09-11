@@ -39,7 +39,7 @@ class TimerSettingsHistoryButton extends StatelessWidget {
           ),
           child: Icon(Icons.history,
             color: AppColors.buttonForeground,
-            size: 24,
+            size: 28,
           ),
         ),
       ),
