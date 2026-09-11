@@ -52,12 +52,14 @@ class WarmupInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final text = value.inMinutes == 0
+        ? TimerLocalizations.of(context).noWarmup
+        : TimerLocalizations.of(context).minutesPluralWithNumber(value.inMinutes); 
+
     return InputButton(
       key: const Key('warmup_input_button'),
       onTap: () => _onInputTap(context),
-      child: Text(
-        TimerLocalizations.of(context).minutesPluralWithNumber(value.inMinutes),
-      ),
+      child: Text(text),
     );
   }
 }

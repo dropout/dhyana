@@ -76,7 +76,7 @@ class TimerLocalizationsEn extends TimerLocalizations {
   String get noInterval => 'No interval';
 
   @override
-  String get noWarmup => 'No warmup time';
+  String get noWarmup => 'No warmup';
 
   @override
   String get secondsAbbr => 's';
