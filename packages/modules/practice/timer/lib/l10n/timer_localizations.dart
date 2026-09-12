@@ -98,6 +98,12 @@ abstract class TimerLocalizations {
     Locale('hu'),
   ];
 
+  /// No description provided for @timerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sitting'**
+  String get timerTitle;
+
   /// No description provided for @inputWarmupLabel.
   ///
   /// In en, this message translates to:

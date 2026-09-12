@@ -77,6 +77,13 @@ class TimerSettingsView extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Gap.medium(),
+          Text(
+            TimerLocalizations.of(context).timerTitle,
+            style: context.theme.textTheme.headlineLarge!.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           Expanded(child: buildInputs(context)),
           buildStartButton(context),
         ],

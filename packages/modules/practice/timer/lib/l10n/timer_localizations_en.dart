@@ -10,6 +10,9 @@ class TimerLocalizationsEn extends TimerLocalizations {
   TimerLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get timerTitle => 'Sitting';
+
+  @override
   String get inputWarmupLabel => 'Warmup';
 
   @override

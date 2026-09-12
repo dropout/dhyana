@@ -10,6 +10,9 @@ class TimerLocalizationsHu extends TimerLocalizations {
   TimerLocalizationsHu([String locale = 'hu']) : super(locale);
 
   @override
+  String get timerTitle => 'Ülés';
+
+  @override
   String get inputWarmupLabel => 'Felkészülés';
 
   @override

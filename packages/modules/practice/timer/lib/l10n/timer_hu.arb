@@ -1,5 +1,6 @@
 {
   "@@locale": "hu",
+  "timerTitle": "Ülés",
   "inputWarmupLabel": "Felkészülés",
   "inputStartingSoundLabel": "Kezdőhang",
   "inputDurationLabel": "Időtartam",

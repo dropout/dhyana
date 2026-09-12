@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "timerTitle": "Sitting",
   "inputWarmupLabel": "Warmup",
   "inputStartingSoundLabel": "Starting sound",
   "inputDurationLabel": "Duration",

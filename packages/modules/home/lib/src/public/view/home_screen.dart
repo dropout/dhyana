@@ -69,8 +69,8 @@ class HomeScreen extends StatelessWidget {
           sessionType = .sitting;
         }
         return AnimatedSwitcher(
-          key: ValueKey(sessionType),
-          duration: Durations.long4,
+          // key: ValueKey(sessionType),
+          duration: Durations.medium1,
           transitionBuilder: (child, animation) {
             return FadeTransition(opacity: animation, child: child);
           },
