@@ -2,7 +2,7 @@ name: mobile_app
 resolution: workspace
 description: A meditation timer and chanting application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.10.2+9
+version: 0.10.3+10
 
 environment:
   sdk: '>=3.10.0 <4.0.0'
