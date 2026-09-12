@@ -17,6 +17,7 @@ class Today extends StatelessWidget {
         dateText: TextSpan(
           text: '${DateFormat('MMMMd').format(today)}.',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 15,
             color: Colors.black,
             fontWeight: FontWeight.w800,
           ),
@@ -24,6 +25,7 @@ class Today extends StatelessWidget {
         weekDayText: TextSpan(
           text: DateFormat('EEEE').format(today),
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            fontSize: 26,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
@@ -31,7 +33,6 @@ class Today extends StatelessWidget {
       ),
     );
   }
-
 
 }
 

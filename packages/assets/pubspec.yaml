@@ -11,6 +11,9 @@ environment:
 
 flutter:
   assets:
+    - ./haptics/
+    - ./images/
+    - ./sounds/
     - .
 
   shaders:
