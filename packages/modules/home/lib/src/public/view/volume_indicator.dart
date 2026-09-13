@@ -6,7 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:core/core.dart';
 
 
-/// A widget that displays the current volume level 
+/// A widget that displays the current volume level
 /// of the device as a percentage and an icon.
 /// The purpose of this widget is to inform the user that the volume level
 /// might be too low for the app to function properly.
@@ -120,35 +120,28 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
   }
 
   Widget buildIndicator(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(DesignSpec.paddingMd),
-        child: Row(
-          mainAxisSize: .min,
-          children: [
-            Icon(getVolumeIcon(_currentVolume), color: Colors.white),
-            Gap.xs(),
-            Text(
-              '${(_currentVolume * 100).toInt()}%',
-              textAlign: .center,
-              style: context.theme.textTheme.bodyMedium?.copyWith(
-                color: getVolumeColor(_currentVolume),
-                fontWeight: FontWeight.bold,
-                
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(DesignSpec.paddingMd),
+      child: Row(
+        mainAxisSize: .min,
+        children: [
+          Icon(getVolumeIcon(_currentVolume), color: Colors.black),
+          Gap.xs(),
+          Text(
+            '${(_currentVolume * 100).toInt()}%',
+            textAlign: .center,
+            style: context.theme.textTheme.bodyMedium?.copyWith(
+              // color: getVolumeColor(_currentVolume),
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
-
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  // A function that returns different versions of the volume icon based on the current volume level.
+  /// A function that returns different versions of the volume icon based on the current volume level.
   IconData getVolumeIcon(double volume) {
     if (volume == 0) {
       return Icons.volume_off;
@@ -159,7 +152,7 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     }
   }
 
-  // a function that returns a color based on the current volume level.
+  /// A function that returns a color based on the current volume level.
   Color getVolumeColor(double volume) {
     if (volume < 0.1) {
       return Colors.red;

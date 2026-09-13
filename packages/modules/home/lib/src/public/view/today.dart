@@ -25,7 +25,7 @@ class Today extends StatelessWidget {
         weekDayText: TextSpan(
           text: DateFormat('EEEE').format(today),
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            fontSize: 26,
+            fontSize: 25,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
