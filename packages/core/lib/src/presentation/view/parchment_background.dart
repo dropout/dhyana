@@ -31,15 +31,25 @@ class ParchmentBackground extends StatelessWidget {
       Assets.shaderParchmentNoise,
     );
 
+    final screenSize = MediaQuery.of(context).size;
+    const downscaleFactor = 4.0;
+
     return RepaintBoundary(
       child: ValueListenableBuilder<double>(
         valueListenable: scrollOffset,
         builder: (context, offset, _) {
-          return CustomPaint(
-            painter: _ParchmentShaderPainter(
-              shader: shader,
-              scrollOffset: offset,
-              seed: seed,
+          return FittedBox(
+            fit: .fill,
+            child: SizedBox(
+              width: screenSize.width / downscaleFactor,
+              height: screenSize.height / downscaleFactor,
+              child: CustomPaint(
+                painter: _ParchmentShaderPainter(
+                  shader: shader,
+                  scrollOffset: offset,
+                  seed: seed,
+                ),
+              ),
             ),
           );
         },

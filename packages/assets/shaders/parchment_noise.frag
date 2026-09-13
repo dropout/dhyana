@@ -4,6 +4,7 @@ precision mediump float;
 
 #include <flutter/runtime_effect.glsl>
 
+// NOTE: Use a texture for noise instead of generating to further improve the performance.
 uniform vec2 u_size;
 uniform float u_scroll_offset;
 uniform float u_seed;
@@ -14,7 +15,7 @@ out vec4 fragColor;
 const vec3 kBaseColor = vec3(0.953, 0.898, 0.671); // #f3e5ab (Ecru)
 const vec3 kDarkColor = vec3(0.843, 0.745, 0.459); // #D7BE75 (Ecru darker shade)
 const vec3 kStainColor = kBaseColor * 0.5; // foxing/water-stain blotch tint
-const vec3 kHighlightColor = mix(kBaseColor, vec3(1.0), 0.15); // small bright fleck
+const vec3 kHighlightColor = mix(kBaseColor, vec3(1.0), 0.1); // small bright fleck
 const vec3 kFiberColor = kDarkColor * 0.7; // embedded plant-fiber speck
 
 // Pseudo-random number generator
@@ -23,12 +24,16 @@ float random(vec2 st) {
 }
 
 // Vector-valued hash, used to scatter Worley cell feature points
-vec2 hash2(vec2 st) {
-    vec2 p = vec2(
-        dot(st, vec2(127.1, 311.7)),
-        dot(st, vec2(269.5, 183.3))
-    );
-    return fract(sin(p) * 43758.5453123);
+float hash12(vec2 p) {
+    vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
+vec2 hash2(vec2 p) {
+    vec3 p3 = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.xx + p3.yz) * p3.zy);
 }
 
 // Worley (cellular) noise: distance from st to the nearest scattered
@@ -58,7 +63,7 @@ float fbm(vec2 st) {
     // Rotate to reduce axial bias and make it look more organic
     mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
 
-    for (int i = 0; i < 5; ++i) { // 5 layers of noise
+    for (int i = 0; i < 2; ++i) { // 2 layers of noise
         value += amplitude * worley(st);
         st = rot * st * 2.0 + shift;
         amplitude *= 0.5;
@@ -71,17 +76,16 @@ float fbm(vec2 st) {
 float fiberField(vec2 st) {
     vec2 cell = floor(st);
     vec2 local = fract(st) - 0.5;
-
     float coverage = 0.0;
+
     for (int y = -1; y <= 1; ++y) {
         for (int x = -1; x <= 1; ++x) {
             vec2 neighbor = vec2(float(x), float(y));
             vec2 id = cell + neighbor;
 
-            // Only a sparse fraction of cells actually contain a visible fiber
-            float visible = step(random(id + 11.0), 0.01);
+            if (random(id + 11.0) > 0.01) continue; // Skip strand geometry for empty cells
 
-            vec2 center = hash2(id) - 0.5; // random position within the cell
+            vec2 center = hash2(id) - 0.5;
             float angle = random(id + 5.0) * 6.28318;
             float fiberLen = 0.25 + random(id + 9.0) * 0.55;
             float fiberWidth = 0.02 + random(id + 13.0) * 0.01;
@@ -91,21 +95,15 @@ float fiberField(vec2 st) {
             float s = sin(angle);
             vec2 rotated = vec2(c * p.x + s * p.y, -s * p.x + c * p.y);
 
-            // Bend the centerline with a slow sine wave so the strand curls
-            // instead of running ruler-straight
-            float waveFreq = 4.0 + random(id + 17.0) * 5.0;
-            float waveAmp = fiberWidth * (1.5 + random(id + 19.0) * 2.5);
-            float bend = sin(rotated.x * waveFreq + random(id + 21.0) * 6.28318) * waveAmp;
+            float waveAmp = fiberWidth * 2.5;
+            float bend = sin(rotated.x * 6.0 + angle) * waveAmp;
 
-            // Taper the width toward the tips for a pointed, organic strand shape
             float taper = 1.0 - smoothstep(fiberLen * 0.6, fiberLen, abs(rotated.x));
             float localWidth = fiberWidth * mix(0.35, 1.0, taper);
 
-            // Soft edges (smoothstep instead of a hard step) keep the fiber subtle
-            float edge = 0.015;
-            float inLength = 1.0 - smoothstep(fiberLen, fiberLen + edge, abs(rotated.x));
-            float inWidth = 1.0 - smoothstep(localWidth, localWidth + edge, abs(rotated.y - bend));
-            coverage = max(coverage, inLength * inWidth * visible);
+            float inLength = 1.0 - smoothstep(fiberLen, fiberLen + 0.015, abs(rotated.x));
+            float inWidth = 1.0 - smoothstep(localWidth, localWidth + 0.015, abs(rotated.y - bend));
+            coverage = max(coverage, inLength * inWidth);
         }
     }
     return coverage;
@@ -119,10 +117,6 @@ void main() {
     st += vec2(u_seed * 13.37, u_seed * 71.13); // deterministic per-seed pattern offset
     st.y += u_scroll_offset * 0.0005; // Slow down the scrolling effect
 
-    // Generate base texture
-    float n1 = fbm(st * 0.5);
-    float n2 = fbm(st * 10.0); // Finer detail layer
-
     // Mix colors based on noise layers
     vec3 color = mix(kDarkColor, kBaseColor, clamp(worley(st * 1.0), 0.0, 1.0));
 
@@ -135,7 +129,7 @@ void main() {
     // to the nearest Worley feature point so each patch stays a small round fleck
     // float highlightDist = worley(st * 2.0);
     float highlightDist = fbm(st * 5.5);
-    float highlightMask = 1.0 - smoothstep(0.1, 0.15, highlightDist);
+    float highlightMask = 1.0 - smoothstep(0.05, 0.06, highlightDist);
     color = mix(color, kHighlightColor, highlightMask);
 
     // Plant-fiber residue: sparse, sharp-edged slivers scattered across the surface

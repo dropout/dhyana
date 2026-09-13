@@ -50,6 +50,11 @@ class HomeScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: ParchmentBackground(
         scrollOffset: _parchmentScrollOffset,
+        // The seed for the parchment noise shader, 
+        // which changes slowly over time to create subtle variations.
+        // Each screen where it appears will have a slightly different parchment texture.
+        // Therefore a constant for screen identity is added to the seed.
+        seed: 0.0011 + DateTime.now().second.toDouble() / 10.0,
         child: Stack(
           fit: StackFit.expand,
           children: [buildBody(context, state), buildBottomMenu(context, state)],
