@@ -48,6 +48,7 @@ class ParchmentBackground extends StatelessWidget {
                   shader: shader,
                   scrollOffset: offset,
                   seed: seed,
+                  displaySize: screenSize,
                 ),
               ),
             ),
@@ -72,28 +73,34 @@ class _ParchmentShaderPainter extends CustomPainter {
   final FragmentShader shader;
   final double scrollOffset;
   final double seed;
+  final Size displaySize;
   late final Paint _paint;
 
   _ParchmentShaderPainter({
     required this.shader,
     required this.scrollOffset,
     required this.seed,
+    required this.displaySize,
   }) {
     _paint = Paint()..shader = shader;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    // vec2 u_size occupies indices 0-1, float u_scroll_offset is index 2, u_seed is index 3
+    // u_size: 0-1, u_display_size: 2-3, u_scroll_offset: 4, u_seed: 5.
     shader.setFloat(0, size.width);
     shader.setFloat(1, size.height);
-    shader.setFloat(2, scrollOffset);
-    shader.setFloat(3, seed);
+    shader.setFloat(2, displaySize.width);
+    shader.setFloat(3, displaySize.height);
+    shader.setFloat(4, scrollOffset);
+    shader.setFloat(5, seed);
 
     canvas.drawRect(Offset.zero & size, _paint);
   }
 
   @override
   bool shouldRepaint(covariant _ParchmentShaderPainter oldDelegate) =>
-      oldDelegate.scrollOffset != scrollOffset || oldDelegate.seed != seed;
+      oldDelegate.scrollOffset != scrollOffset ||
+      oldDelegate.seed != seed ||
+      oldDelegate.displaySize != displaySize;
 }

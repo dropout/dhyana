@@ -6,6 +6,7 @@ precision mediump float;
 
 // NOTE: Use a texture for noise instead of generating to further improve the performance.
 uniform vec2 u_size;
+uniform vec2 u_display_size;
 uniform float u_scroll_offset;
 uniform float u_seed;
 
@@ -110,12 +111,15 @@ float fiberField(vec2 st) {
 }
 
 void main() {
-    vec2 uv = FlutterFragCoord().xy / u_size;
+    // Convert the downscaled render surface back to displayed logical pixels,
+    // then sample the pattern at the matching content position.
+    vec2 contentPixel = FlutterFragCoord().xy * u_display_size / u_size;
+    contentPixel.y += u_scroll_offset;
+    vec2 uv = contentPixel / u_display_size;
 
-    // Scale coordinate space for texture and add the continuous vertical scroll offset
+    // Scale coordinate space for texture and add the deterministic seed offset.
     vec2 st = uv * 2.0;
     st += vec2(u_seed * 13.37, u_seed * 71.13); // deterministic per-seed pattern offset
-    st.y += u_scroll_offset * 0.0005; // Slow down the scrolling effect
 
     // Mix colors based on noise layers
     vec3 color = mix(kDarkColor, kBaseColor, clamp(worley(st * 1.0), 0.0, 1.0));
@@ -137,7 +141,7 @@ void main() {
     color = mix(color, kFiberColor, fiberCoverage * 0.5);
 
     // Add subtle high-frequency grain to simulate paper fiber
-    float grain = random(uv * 150.0 + u_scroll_offset + u_seed) * 0.13;
+    float grain = random(uv * 150.0) * 0.13;
     color -= grain;
 
     fragColor = vec4(color, 1.0);
