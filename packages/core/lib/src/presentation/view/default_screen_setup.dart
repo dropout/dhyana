@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:core/src/presentation/view/parchment_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -81,6 +82,7 @@ class DefaultScreenSetup extends StatefulWidget {
 class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   with DefaultScreenSetupHelpersMixin {
 
+  ValueNotifier<double> scrollOffset = ValueNotifier<double>(0.0);
   double appBarTitleOpacity = 0.0;
   final ScrollController titleEffectScrollController = ScrollController();
 
@@ -104,6 +106,9 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
         appBarTitleOpacity = ui.clampDouble(1-t, 0.0, 1.0);
       });
     }
+
+    // update the scroll offset notifier
+    scrollOffset.value = offset;
   }
 
   Future<void> _onRefresh(BuildContext context) async {
@@ -149,8 +154,11 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   Widget buildScaffolding(BuildContext context, Widget body) {
     if (widget.enableScaffolding) {
       return Scaffold(
-        backgroundColor: widget.backgroundColor,
-        body: body,
+        // backgroundColor: widget.backgroundColor,
+        body: ParchmentBackground(
+          scrollOffset: scrollOffset,
+          child: body,
+        ),
       );
     } else {
       return body;
@@ -211,14 +219,14 @@ mixin DefaultScreenSetupHelpersMixin {
       leading: Padding(
         padding: EdgeInsets.only(
           left: DesignSpec.paddingLg,
-          top: DesignSpec.paddingSm,
-          bottom: DesignSpec.paddingSm
+          // top: DesignSpec.paddingSm,
+          // bottom: DesignSpec.paddingSm
         ),
         child: backButton ?? CustomBackButton(
           backgroundColor: titleColor,
         )
       ),
-      leadingWidth: 56.0,
+      leadingWidth: 64.0,
       title: titleWidget,
     );
   }
