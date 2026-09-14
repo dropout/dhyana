@@ -53,10 +53,11 @@ class SessionTypeToggle extends StatelessWidget {
       shape: BoxShape.circle,
       color: AppColors.buttonBackground,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(DesignSpec.paddingMd),
+      child: SizedBox.square(
+        dimension: 60,
         child: Icon(
           (item == HomeScreenViewState.sitting) ? Icons.music_note : Icons.timer_outlined,
+          size: 28,
           color: AppColors.buttonForeground,
         ),
       ),
