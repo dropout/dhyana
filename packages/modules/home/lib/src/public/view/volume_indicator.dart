@@ -61,6 +61,7 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     _animationController = AnimationController(
       vsync: this,
       duration: totalDuration,
+      value: 1.0,
     );
 
     // Calculate the intervals based on wait and fade durations
@@ -104,7 +105,7 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
     if (_currentVolume < widget.visibilityThreshold) {
       return buildIndicator(context);
     } else if (widget.showOnVolumeChangeAboveThreshold &&
-        _currentVolume >= widget.visibilityThreshold) {
+        _currentVolume >= widget.visibilityThreshold) {      
       return AnimatedBuilder(
         animation: _fadeAnimation,
         builder: (context, child) {
@@ -130,10 +131,10 @@ class _VolumeIndicatorState extends State<VolumeIndicator>
           Text(
             '${(_currentVolume * 100).toInt()}%',
             textAlign: .center,
-            style: context.theme.textTheme.bodyMedium?.copyWith(
+            style: context.theme.textTheme.bodyLarge?.copyWith(
               // color: getVolumeColor(_currentVolume),
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800,
             ),
           ),
         ],
