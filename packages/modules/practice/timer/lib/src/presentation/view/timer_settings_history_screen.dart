@@ -65,6 +65,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
       return DefaultScreenSetup(
         title: TimerLocalizations.of(context).timerSettingsHistory,
         enableScrolling: false,
+        enableAppBarSliver: false,
         slivers: [
           SliverPadding(
             padding: const EdgeInsets.only(
@@ -97,6 +98,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
     } else {
       return DefaultScreenSetup(
         title: TimerLocalizations.of(context).timerSettingsHistory,
+        enableAppBarSliver: false,        
         slivers: [
           SliverSafeArea(
             top: false,

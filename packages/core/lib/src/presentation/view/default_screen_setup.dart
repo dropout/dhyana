@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:core/src/presentation/view/parchment_background.dart';
+import 'package:core/src/presentation/view/util/app_context.dart';
+import 'package:core/src/util/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -154,10 +156,47 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   Widget buildScaffolding(BuildContext context, Widget body) {
     if (widget.enableScaffolding) {
       return Scaffold(
-        // backgroundColor: widget.backgroundColor,
+        extendBodyBehindAppBar: true,
+        appBar: CustomAppBar(
+          // titleText: widget.title,
+          titleWidget: buildTitleEffectAppBarTitle(
+            context, 
+            widget.title,
+            titleOpacity: appBarTitleOpacity,
+          ),
+          leading: CustomBackButton(),
+        ),
         body: ParchmentBackground(
           scrollOffset: scrollOffset,
-          child: body,
+          child: ShaderMask(
+            shaderCallback: (Rect bounds) {
+              // Calculate the exact gradient stop for 100 pixels
+              final double topFadeStop = 105.0 / bounds.height;
+              final double topFadeEnd = 120.0 / bounds.height;
+
+              return LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,                
+                colors: const [
+                  Colors.transparent, // Top segment
+                  Colors.transparent, // Cut-off point (transparent side)
+                  Colors.white,       // Cut-off point (visible side)
+                  Colors.white,       // Bottom segment
+                ],
+                stops: [
+                  0.0,          // Start at top
+                  topFadeStop,  // End transparent segment at 100px
+                  topFadeEnd,   // Start opaque segment exactly at 110px
+                  1.0,          // Extend to the bottom
+                ],
+              ).createShader(bounds);
+            },
+            blendMode: BlendMode.dstIn,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: body,
+            ),
+          ),
         ),
       );
     } else {
@@ -211,22 +250,23 @@ mixin DefaultScreenSetupHelpersMixin {
     return SliverAppBar(
       centerTitle: false,
       elevation: 0,
-      // stretch: true, // Not working?
-      backgroundColor: backgroundColor,
+      // backgroundColor: backgroundColor,
+      backgroundColor: Colors.transparent,
       floating: false,
       pinned: true,
-      scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect
+      scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect          
+
+      // Custom back button is sizing depends on leading padding
+      // and leading width for now
       leading: Padding(
         padding: EdgeInsets.only(
           left: DesignSpec.paddingLg,
-          // top: DesignSpec.paddingSm,
-          // bottom: DesignSpec.paddingSm
         ),
         child: backButton ?? CustomBackButton(
           backgroundColor: titleColor,
         )
       ),
-      leadingWidth: 64.0,
+      leadingWidth: 60.0,
       title: titleWidget,
     );
   }

@@ -2,7 +2,6 @@ import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/gap.dart';
 import 'package:material_ui/material_ui.dart';
 
-
 ///  CustomAppBar is a custom AppBar that allows for a custom leading widget,
 ///  title text, and trailing widgets.
 ///  Intended height of the AppBar is 56 (kToolbarHeight).
@@ -10,22 +9,25 @@ import 'package:material_ui/material_ui.dart';
 ///  Padding for the AppBar is 16 left and right.
 ///  Leading and trailing widget height is constrained to a height of 40.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-
   static const double widgetHeight = kToolbarHeight - 8;
 
   final String? titleText;
   final Widget? leading;
   final List<Widget> trailing;
 
+  final Widget? titleWidget;
+
   const CustomAppBar({
     this.titleText,
+    this.titleWidget,
     this.leading,
     this.trailing = const [],
-    super.key
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    print(titleWidget);
     return SafeArea(
       bottom: false,
       child: Padding(
@@ -33,12 +35,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: NavigationToolbar(
           leading: Row(
             children: [
-              (leading != null) ? ConstrainedBox(
-                constraints: const BoxConstraints.tightFor(height: widgetHeight),
-                child: leading,
-              ) : const SizedBox.shrink(),
+              (leading != null)
+                  ? ConstrainedBox(
+                      constraints: const BoxConstraints.tightFor(
+                        height: widgetHeight,
+                      ),
+                      child: leading,
+                    )
+                  : const SizedBox.shrink(),
               Gap.large(),
-              buildTitle(context, titleText),
+              titleWidget ?? buildTitle(context, titleText),
             ],
           ),
           trailing: Row(
@@ -56,14 +62,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       return const SizedBox.shrink();
     }
 
-    return Text(text,
-      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.headlineSmall!
+          .copyWith(fontWeight: FontWeight.bold),
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
 }
