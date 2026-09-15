@@ -11,13 +11,16 @@ import 'package:core/src/util/assets.dart';
 /// paper texture behind [child], driven by [scrollOffset].
 /// [seed] deterministically varies the base pattern without affecting scrolling.
 class ParchmentBackground extends StatelessWidget {
-  final Widget child;
-  final ValueListenable<double> scrollOffset;
+
+  static final ValueNotifier<double> _defaultScrollOffset = ValueNotifier(0.0);
+
+  final Widget? child;
+  final ValueListenable<double>? scrollOffset;
   final double seed;
 
   const ParchmentBackground({
-    required this.child,
-    required this.scrollOffset,
+    this.child,
+    this.scrollOffset,
     this.seed = 0.0,
     super.key,
   });
@@ -36,7 +39,7 @@ class ParchmentBackground extends StatelessWidget {
 
     return RepaintBoundary(
       child: ValueListenableBuilder<double>(
-        valueListenable: scrollOffset,
+        valueListenable: scrollOffset ?? _defaultScrollOffset,
         builder: (context, offset, _) {
           return FittedBox(
             fit: .fill,
@@ -63,7 +66,7 @@ class ParchmentBackground extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(child: buildBg(context)),
-        Positioned.fill(child: child),
+        Positioned.fill(child: child ?? SizedBox.shrink()),
       ],
     );
   }
