@@ -27,7 +27,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(titleWidget);
     return SafeArea(
       bottom: false,
       child: Padding(

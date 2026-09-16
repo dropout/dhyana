@@ -83,8 +83,9 @@ class SummaryItem extends StatelessWidget {
             label.toUpperCase(),
             textAlign: TextAlign.center,
             style: const TextStyle(
+              color: AppColors.charcoal,
               fontSize: 14,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w900,
             )
           )
         ],),

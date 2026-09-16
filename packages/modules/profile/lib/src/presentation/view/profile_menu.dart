@@ -49,7 +49,7 @@ class ProfileMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
-      fontWeight: FontWeight.bold,
+      fontSize: 17.0,
     );
     return AppCard(
       padding: EdgeInsets.zero,

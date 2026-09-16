@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:core/src/presentation/design_spec.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,7 +28,7 @@ class ParchmentBackground extends StatelessWidget {
 
   Widget buildBg(BuildContext context) {
     if (!ShaderRenderingScope.isEnabled(context)) {
-      return const ColoredBox(color: Color(0xFFF3E5AB));
+      return const ColoredBox(color: AppColors.backgroundPaper);
     }
 
     final shader = context.services.shaderService.get(

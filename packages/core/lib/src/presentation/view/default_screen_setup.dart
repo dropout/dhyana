@@ -1,8 +1,6 @@
 import 'dart:ui' as ui;
 
 import 'package:core/src/presentation/view/parchment_background.dart';
-import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:core/src/util/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -13,26 +11,25 @@ import 'package:core/src/presentation/view/app_bar/custom_back_button.dart';
 import 'package:core/src/presentation/design_spec.dart';
 
 /// A default screen setup widget that provides common UI elements and behaviors.
-/// This widget is designed to be flexible and customizable, allowing you 
+/// This widget is designed to be flexible and customizable, allowing you
 /// to easily create new screens with a consistent look and feel across the app.
 class DefaultScreenSetup extends StatefulWidget {
-
   /// The title of the screen, displayed in the app bar and as a sliver title.
   final String title;
 
   /// The list of slivers to display in the screen's scroll view.
   final List<Widget> slivers;
 
-  /// An optional back button widget to display in the app bar. 
+  /// An optional back button widget to display in the app bar.
   /// If not provided, a default back button will be used.
   final Widget? backButton;
 
-  /// Flag to enable or disable the app bar sliver. 
+  /// Flag to enable or disable the app bar sliver.
   /// When enabled, the app bar will have a title that fades in as you scroll down.
   final bool enableAppBarSliver;
 
-  /// Flag to enable or disable the title sliver. 
-  /// This is complementary to [enableAppBarSliver] and controls whether the 
+  /// Flag to enable or disable the title sliver.
+  /// This is complementary to [enableAppBarSliver] and controls whether the
   /// title is also displayed as a sliver below the app bar that fades out as you scroll down.
   final bool enableTitleSliver;
 
@@ -41,9 +38,11 @@ class DefaultScreenSetup extends StatefulWidget {
   final bool enableScrolling;
 
   /// Embed the CustomScrollView in a Scaffold.
-  /// Set to false if you want to provide your own Scaffold or use 
-  /// this widget in a context where a Scaffold is not appropriate. 
+  /// Set to false if you want to provide your own Scaffold or use
+  /// this widget in a context where a Scaffold is not appropriate.
   final bool enableScaffolding;
+
+  final bool enableTitleScrollEffect;
 
   /// Color for text widget in the title
   final Color? titleColor;
@@ -56,8 +55,8 @@ class DefaultScreenSetup extends StatefulWidget {
 
   /// Flag to enable or disable pull-to-refresh functionality.
   final bool enablePullToRefresh;
-  
-  /// An optional callback function that is called when the user performs 
+
+  /// An optional callback function that is called when the user performs
   /// a pull-to-refresh action.
   final Future<void> Function()? onRefresh;
 
@@ -70,6 +69,7 @@ class DefaultScreenSetup extends StatefulWidget {
     this.enableTitleSliver = true,
     this.enableScrolling = true,
     this.enablePullToRefresh = false,
+    this.enableTitleScrollEffect = true,
     this.titleColor,
     this.backgroundColor,
     this.appBarBackgroundColor,
@@ -82,8 +82,7 @@ class DefaultScreenSetup extends StatefulWidget {
 }
 
 class _DefaultScreenSetupState extends State<DefaultScreenSetup>
-  with DefaultScreenSetupHelpersMixin {
-
+    with DefaultScreenSetupHelpersMixin {
   ValueNotifier<double> scrollOffset = ValueNotifier<double>(0.0);
   double appBarTitleOpacity = 0.0;
   final ScrollController titleEffectScrollController = ScrollController();
@@ -101,11 +100,11 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     double offset = titleEffectScrollController.offset;
 
     final double t = ui.clampDouble(1.0 - (offset - min) / delta, 0.0, 1.0);
-    double newTitleOpacity = ui.clampDouble(1-t, 0.0, 1.0);
+    double newTitleOpacity = ui.clampDouble(1 - t, 0.0, 1.0);
 
     if (appBarTitleOpacity.compareTo(newTitleOpacity) != 0) {
       setState(() {
-        appBarTitleOpacity = ui.clampDouble(1-t, 0.0, 1.0);
+        appBarTitleOpacity = ui.clampDouble(1 - t, 0.0, 1.0);
       });
     }
 
@@ -129,24 +128,27 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             ? null
             : const NeverScrollableScrollPhysics(),
         slivers: [
-          if (widget.enableAppBarSliver) buildTitleEffectAppBar(
-            context,
-            title: widget.title,
-            titleOpacity: appBarTitleOpacity,
-            backgroundColor: widget.appBarBackgroundColor,
-            titleColor: widget.titleColor,
-            backButton: widget.backButton,
-            enableTitleSliver: widget.enableTitleSliver,
-          ),
-          if (widget.enablePullToRefresh) CupertinoSliverRefreshControl(
-            refreshTriggerPullDistance: 200,
-            onRefresh: () => _onRefresh(context),
-          ),
-          if (widget.enableTitleSliver) buildTitleEffectSliverTitle(
-            context,
-            widget.title,
-            color: widget.titleColor,
-          ),
+          if (widget.enableAppBarSliver)
+            buildTitleEffectAppBar(
+              context,
+              title: widget.title,
+              titleOpacity: appBarTitleOpacity,
+              backgroundColor: widget.appBarBackgroundColor,
+              titleColor: widget.titleColor,
+              backButton: widget.backButton,
+              enableTitleSliver: widget.enableTitleSliver,
+            ),
+          if (widget.enablePullToRefresh)
+            CupertinoSliverRefreshControl(
+              refreshTriggerPullDistance: 200,
+              onRefresh: () => _onRefresh(context),
+            ),
+          if (widget.enableTitleSliver)
+            buildTitleEffectSliverTitle(
+              context,
+              widget.title,
+              color: widget.titleColor,
+            ),
           ...widget.slivers,
         ],
       ),
@@ -155,45 +157,49 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
 
   Widget buildScaffolding(BuildContext context, Widget body) {
     if (widget.enableScaffolding) {
+      final double topInset = MediaQuery.of(context).viewPadding.top;
+      final double appBarHeight = 56;
+      final double appBarHeightWithTopPadding = topInset + kToolbarHeight;
+      
+      const double fadeLength = 10.0;
+
       return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: CustomAppBar(
-          // titleText: widget.title,
-          titleWidget: buildTitleEffectAppBarTitle(
-            context, 
-            widget.title,
-            titleOpacity: appBarTitleOpacity,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(appBarHeight),
+          child: CustomAppBar(
+            titleWidget: buildTitleEffectAppBarTitle(
+              context,
+              widget.title,
+              titleOpacity: appBarTitleOpacity,
+              enableTitleSliver: widget.enableTitleSliver,
+            ),
+            leading: CustomBackButton(),
           ),
-          leading: CustomBackButton(),
         ),
         body: ParchmentBackground(
           scrollOffset: scrollOffset,
           child: ShaderMask(
             shaderCallback: (Rect bounds) {
-              // Calculate the exact gradient stop for 100 pixels
-              final double topFadeStop = 105.0 / bounds.height;
-              final double topFadeEnd = 120.0 / bounds.height;
+              final double fadeStart = appBarHeightWithTopPadding / bounds.height;
+              final double fadeEnd =
+                  (appBarHeightWithTopPadding + fadeLength) / bounds.height;
 
               return LinearGradient(
                 begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,                
+                end: Alignment.bottomCenter,
                 colors: const [
                   Colors.transparent, // Top segment
                   Colors.transparent, // Cut-off point (transparent side)
-                  Colors.white,       // Cut-off point (visible side)
-                  Colors.white,       // Bottom segment
+                  Colors.white, // Cut-off point (visible side)
+                  Colors.white, // Bottom segment
                 ],
-                stops: [
-                  0.0,          // Start at top
-                  topFadeStop,  // End transparent segment at 100px
-                  topFadeEnd,   // Start opaque segment exactly at 110px
-                  1.0,          // Extend to the bottom
-                ],
+                stops: [0.0, fadeStart, fadeEnd, 1.0],
               ).createShader(bounds);
             },
             blendMode: BlendMode.dstIn,
             child: Padding(
-              padding: const EdgeInsets.only(top: 100),
+              padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
               child: body,
             ),
           ),
@@ -209,11 +215,9 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     titleEffectScrollController.dispose();
     super.dispose();
   }
-
 }
 
 mixin DefaultScreenSetupHelpersMixin {
-
   Widget buildLoadingSliver(BuildContext context) {
     return SliverFillRemaining(
       hasScrollBody: false,
@@ -222,13 +226,11 @@ mixin DefaultScreenSetupHelpersMixin {
   }
 
   Widget buildErrorSliver(BuildContext context) {
-    return SliverFillRemaining(
-      hasScrollBody: false,
-      child: AppErrorDisplay(),
-    );
+    return SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay());
   }
 
-  Widget buildTitleEffectAppBar(BuildContext context,{
+  Widget buildTitleEffectAppBar(
+    BuildContext context, {
     String? title,
     double? titleOpacity,
     Color? backgroundColor,
@@ -243,7 +245,7 @@ mixin DefaultScreenSetupHelpersMixin {
         title,
         titleOpacity: titleOpacity,
         color: titleColor,
-        enableTitleSliver: enableTitleSliver,
+        enableTitleSliver: enableTitleSliver,        
       );
     }
 
@@ -254,17 +256,13 @@ mixin DefaultScreenSetupHelpersMixin {
       backgroundColor: Colors.transparent,
       floating: false,
       pinned: true,
-      scrolledUnderElevation: 0.0, // Turn off material design weird transparency effect          
-
+      scrolledUnderElevation:
+          0.0, // Turn off material design weird transparency effect
       // Custom back button is sizing depends on leading padding
       // and leading width for now
       leading: Padding(
-        padding: EdgeInsets.only(
-          left: DesignSpec.paddingLg,
-        ),
-        child: backButton ?? CustomBackButton(
-          backgroundColor: titleColor,
-        )
+        padding: EdgeInsets.only(left: DesignSpec.paddingLg),
+        child: backButton ?? CustomBackButton(backgroundColor: titleColor),
       ),
       leadingWidth: 60.0,
       title: titleWidget,
@@ -274,11 +272,10 @@ mixin DefaultScreenSetupHelpersMixin {
   Widget? buildTitleEffectAppBarTitle(
     BuildContext context,
     String titleText, {
-      double? titleOpacity,
-      Color? color,
-      bool enableTitleSliver = true,
+    double? titleOpacity,
+    Color? color,
+    bool enableTitleSliver = true,
   }) {
-
     Offset of;
     double o;
     if (titleOpacity == null || enableTitleSliver == false) {
@@ -289,17 +286,14 @@ mixin DefaultScreenSetupHelpersMixin {
       o = titleOpacity;
     }
 
-
     return Transform.translate(
       offset: of,
       child: Opacity(
         opacity: o,
         child: Text(
           titleText,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall!
+              .copyWith(fontWeight: FontWeight.bold, color: color),
         ),
       ),
     );
@@ -312,10 +306,8 @@ mixin DefaultScreenSetupHelpersMixin {
   }) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-        fontWeight: FontWeight.bold,
-        color: color,
-      ),
+      style: Theme.of(context).textTheme.headlineLarge!
+          .copyWith(fontWeight: FontWeight.bold, color: color),
     );
   }
 
@@ -328,8 +320,7 @@ mixin DefaultScreenSetupHelpersMixin {
       child: Padding(
         padding: EdgeInsets.all(DesignSpec.spacingMd),
         child: buildTitleEffectTitle(context, title, color: color),
-      )
+      ),
     );
   }
-
 }

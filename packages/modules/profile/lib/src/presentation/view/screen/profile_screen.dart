@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
               enableTitleSliver: false,
-              enableAppBarSliver: false,
+              enableAppBarSliver: false,              
               slivers: [
                 SliverSafeArea(
                   top: false,
