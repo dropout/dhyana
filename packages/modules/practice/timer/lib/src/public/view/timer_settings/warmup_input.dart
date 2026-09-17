@@ -41,11 +41,9 @@ class WarmupInput extends StatelessWidget {
       enableDrag: false,
       (ctx) => WarmupInputView(
           title: label,
-          initialValue: value.inMinutes,
-          showStartEndTimes: false,              
+          initialValue: value.inMinutes, 
           onSelect: (Duration duration) => _onSelected(ctx, duration),
-        ),
-      
+        ),      
     );
     context.hapticsTap();
   }

@@ -1,28 +1,19 @@
 import 'package:timer/l10n/timer_localizations.dart';
-import 'dart:async';
 
 import 'package:timer/src/public/view/timer_settings/input_view.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
-typedef DurationFormatter = String Function(Duration, bool);
-
 class WarmupInputView extends StatefulWidget {
-  final int maxMinutes;
-  final int minMinutes;
   final int? initialValue;
   final String title;
   final ValueChanged<Duration>? onSelect;
   final Duration preparationTime;
-  final bool showStartEndTimes;
 
   const WarmupInputView({
-    this.maxMinutes = 60,
-    this.minMinutes = 1,
     this.initialValue,
     this.title = '',
     this.onSelect,
-    this.showStartEndTimes = true,
     this.preparationTime = const Duration(minutes: 0),
     super.key,
   });
@@ -34,39 +25,13 @@ class WarmupInputView extends StatefulWidget {
 class _WarmupInputViewState extends State<WarmupInputView>
     with TickerProviderStateMixin {
   late int selectedMinutes;
-  Duration elapsedTime = Duration.zero;
-  Timer? _timer;
+
 
   @override
   void initState() {
     super.initState();
+    selectedMinutes = widget.initialValue ?? 0;
 
-    selectedMinutes = widget.initialValue ?? widget.minMinutes;
-    // Start a timer that ticks every second to update the start and end times
-    if (widget.showStartEndTimes) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        setState(() {
-          elapsedTime = Duration(seconds: timer.tick);
-        });
-      });
-    }
-  }
-
-  @override
-  void didUpdateWidget(WarmupInputView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.showStartEndTimes && _timer == null) {
-      // Start the timer if we didn't have it before
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        setState(() {
-          elapsedTime = Duration(seconds: timer.tick);
-        });
-      });
-    } else if (!widget.showStartEndTimes && _timer != null) {
-      // Cancel the timer if we no longer need it
-      _timer?.cancel();
-      _timer = null;
-    }
   }
 
   void _onSelectButtonPress(BuildContext context) {
@@ -109,11 +74,6 @@ class _WarmupInputViewState extends State<WarmupInputView>
     );
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
 }
 
 // A widget that displays available and selectable warmup times.
@@ -252,9 +212,9 @@ class _WarmupTimeOptionItem extends StatelessWidget {
                         ),
                         Text(
                           label ?? TimerLocalizations.of(context).minutesPlural(minutes),
-                          style: context.theme.textTheme.bodyMedium?.copyWith(
+                          style: context.theme.textTheme.bodyLarge?.copyWith(
                             color: textColor,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],

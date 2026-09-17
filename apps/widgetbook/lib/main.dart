@@ -29,6 +29,7 @@ class WidgetbookApp extends StatelessWidget {
     return Widgetbook.material(
       directories: directories,
       appBuilder: (context, child) => MediaQuery(
+        // Inherited browser setting was true
         data: MediaQuery.of(context).copyWith(disableAnimations: false),
         child: MultiProvider(
           providers: [
@@ -48,9 +49,10 @@ class WidgetbookApp extends StatelessWidget {
           AndroidViewports.samsungGalaxyNote20,
         ]),
         BackgroundAddon(initialColor: AppColors.backgroundPaper),
-        LocalizationAddon(
+        LocalizationAddon(        
           locales: TimerLocalizations.supportedLocales,
           localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
             ...CoreLocalizations.localizationsDelegates,
             ...TimerLocalizations.localizationsDelegates,
           ],

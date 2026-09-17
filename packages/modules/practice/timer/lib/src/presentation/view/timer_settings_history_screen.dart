@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
+import 'package:timer/src/presentation/view/timer_settings_history/timer_settings_history_grid.dart';
 import 'package:timer/src/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:timer/l10n/timer_localizations.dart';
-import 'package:timer/src/presentation/view/timer_settings_history/timer_settings_history_list.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -110,7 +110,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
                 left: DesignSpec.paddingLg,
                 right: DesignSpec.paddingLg,
               ),
-              sliver: TimerSettingsHistoryList(
+              sliver: TimerSettingsHistoryGrid(
                 profileId: profileId,
                 timerSettingsHistoryRecordList: state.timerSettingsList
               ),

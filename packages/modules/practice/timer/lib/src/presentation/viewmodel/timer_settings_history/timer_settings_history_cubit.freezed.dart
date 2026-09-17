@@ -129,7 +129,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<TimerSettingsHistoryRecordEntity> timerSettingsList)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<TimerSettingsHistoryRecord> timerSettingsList)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case TimerSettingsHistoryLoading() when loading != null:
@@ -153,7 +153,7 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<TimerSettingsHistoryRecordEntity> timerSettingsList)  loaded,required TResult Function()  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<TimerSettingsHistoryRecord> timerSettingsList)  loaded,required TResult Function()  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case TimerSettingsHistoryLoading():
@@ -176,7 +176,7 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<TimerSettingsHistoryRecordEntity> timerSettingsList)?  loaded,TResult? Function()?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<TimerSettingsHistoryRecord> timerSettingsList)?  loaded,TResult? Function()?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case TimerSettingsHistoryLoading() when loading != null:
@@ -258,11 +258,11 @@ String toString() {
 
 
 class TimerSettingsHistoryLoaded implements TimerSettingsHistoryState {
-  const TimerSettingsHistoryLoaded({required  List<TimerSettingsHistoryRecordEntity> timerSettingsList}): _timerSettingsList = timerSettingsList;
+  const TimerSettingsHistoryLoaded({required  List<TimerSettingsHistoryRecord> timerSettingsList}): _timerSettingsList = timerSettingsList;
   
 
- final  List<TimerSettingsHistoryRecordEntity> _timerSettingsList;
- List<TimerSettingsHistoryRecordEntity> get timerSettingsList {
+ final  List<TimerSettingsHistoryRecord> _timerSettingsList;
+ List<TimerSettingsHistoryRecord> get timerSettingsList {
   if (_timerSettingsList is EqualUnmodifiableListView) return _timerSettingsList;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_timerSettingsList);
@@ -301,7 +301,7 @@ abstract mixin class $TimerSettingsHistoryLoadedCopyWith<$Res> implements $Timer
   factory $TimerSettingsHistoryLoadedCopyWith(TimerSettingsHistoryLoaded value, $Res Function(TimerSettingsHistoryLoaded) _then) = _$TimerSettingsHistoryLoadedCopyWithImpl;
 @useResult
 $Res call({
- List<TimerSettingsHistoryRecordEntity> timerSettingsList
+ List<TimerSettingsHistoryRecord> timerSettingsList
 });
 
 
@@ -321,7 +321,7 @@ class _$TimerSettingsHistoryLoadedCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? timerSettingsList = null,}) {
   return _then(TimerSettingsHistoryLoaded(
 timerSettingsList: null == timerSettingsList ? _self._timerSettingsList : timerSettingsList // ignore: cast_nullable_to_non_nullable
-as List<TimerSettingsHistoryRecordEntity>,
+as List<TimerSettingsHistoryRecord>,
   ));
 }
 

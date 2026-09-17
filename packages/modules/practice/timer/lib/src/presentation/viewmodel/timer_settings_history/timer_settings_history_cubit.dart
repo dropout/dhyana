@@ -2,7 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:core/core.dart';
+import 'package:timer/src/data/mapper/timer_settings_history_record_mapper.dart';
 import 'package:timer/src/data/mapper/timer_settings_mapper.dart';
+import 'package:timer/src/public/model/timer_settings_history_record.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/domain/entity/timer_settings_history_record_entity.dart';
@@ -18,7 +20,7 @@ class TimerSettingsHistoryState with _$TimerSettingsHistoryState {
       TimerSettingsHistoryLoading;
 
   const factory TimerSettingsHistoryState.loaded({
-    required List<TimerSettingsHistoryRecordEntity> timerSettingsList,
+    required List<TimerSettingsHistoryRecord> timerSettingsList,
   }) = TimerSettingsHistoryLoaded;
 
   const factory TimerSettingsHistoryState.error() = TimerSettingsHistoryError;
@@ -45,7 +47,9 @@ class TimerSettingsHistoryCubit extends Cubit<TimerSettingsHistoryState>
       List<TimerSettingsHistoryRecordEntity> timerSettingsList =
           await timerSettingsHistoryRepository.query(profileId, limit: 5);
       emit(
-        TimerSettingsHistoryState.loaded(timerSettingsList: timerSettingsList),
+        TimerSettingsHistoryState.loaded(
+          timerSettingsList: timerSettingsList.map((e) => e.toApi()).toList(),
+        ),
       );
       logger.t(
         'Loaded ${timerSettingsList.length} timer settings from history',

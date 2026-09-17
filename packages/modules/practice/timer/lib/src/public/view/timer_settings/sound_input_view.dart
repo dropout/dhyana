@@ -150,7 +150,7 @@ class SoundInputViewState extends State<SoundInputView>
               enableInfiniteScroll: false,
               enlargeCenterPage: true, // This pushes the item to the center
               viewportFraction:
-                  0.6, // Controls how much of the side items you see
+                  0.75, // Controls how much of the side items you see
               initialPage: selectedIndex,
               onPageChanged: (index, reason) => _onIndexChanged(index),
             ),
@@ -172,7 +172,7 @@ class SoundInputViewState extends State<SoundInputView>
           ),
         ),
         SizedBox(
-          height: 48,
+          height: 36,
           child: Center(
             child: AnimatedSmoothIndicator(
               activeIndex: selectedIndex,
@@ -186,6 +186,7 @@ class SoundInputViewState extends State<SoundInputView>
             ),
           ),
         ),
+        Gap.large(),
       ],
     );
   }

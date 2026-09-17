@@ -45,7 +45,7 @@ class IntervalInput extends StatelessWidget {
   void _onInputTap(BuildContext context) {
     overlayService.showModalBottomSheet(
       context,
-      (context) => _IntervalInputView(
+      (context) => IntervalInputView(
         title: label,
         initialValue: value,
         minCount: minCount,
@@ -81,26 +81,27 @@ class IntervalInput extends StatelessWidget {
   }
 }
 
-class _IntervalInputView extends StatefulWidget {
+class IntervalInputView extends StatefulWidget {
   final int maxCount;
   final int minCount;
   final int? initialValue;
   final String title;
   final ValueChanged<int>? onSelect;
 
-  const _IntervalInputView({
+  const IntervalInputView({
     this.maxCount = 3,
     this.minCount = 0,
     this.initialValue,
     this.title = '',
     this.onSelect,
+    super.key,
   });
 
   @override
-  State<_IntervalInputView> createState() => _IntervalInputViewState();
+  State<IntervalInputView> createState() => _IntervalInputViewState();
 }
 
-class _IntervalInputViewState extends State<_IntervalInputView> {
+class _IntervalInputViewState extends State<IntervalInputView> {
   late int selectedCount;
 
   @override
@@ -320,7 +321,7 @@ class CustomToggleButtonItem extends StatelessWidget {
                           ),
                           Text(
                             text,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: tColor,
                             ),
                           ),
