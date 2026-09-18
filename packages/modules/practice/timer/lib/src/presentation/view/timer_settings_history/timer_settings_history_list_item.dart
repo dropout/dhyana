@@ -1,11 +1,11 @@
 import 'package:timer/l10n/timer_localizations.dart';
-import 'package:timer/src/domain/entity/timer_settings_history_record_entity.dart';
+import 'package:timer/src/public/model/timer_settings_history_record.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
 class TimerSettingsHistoryListItem extends StatelessWidget {
 
-  final TimerSettingsHistoryRecordEntity timerSettingsHistoryRecord;
+  final TimerSettingsHistoryRecord timerSettingsHistoryRecord;
   final void Function() onTap;
 
   const TimerSettingsHistoryListItem({
@@ -16,42 +16,46 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.backgroundPaperLight,
-        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
-        boxShadow: DesignSpec.defaultBoxShadow,
-      ),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              buildDurationColumn(
-                context,
-                timerSettingsHistoryRecord.timerSettings.duration
-              ),
-              Gap.small(),
-              buildDetailsColumn(context),
-              const Spacer(),
-              const Icon(
-                Icons.chevron_right_rounded,
-                size: 48,
-              )
-            ],
-          ),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
-                highlightColor: Colors.white.withValues(alpha: 0.25),
-                splashColor: Colors.white.withValues(alpha: 0.25),
-                onTap: onTap,
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 400),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: AppColors.backgroundPaperLight,
+          borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+          boxShadow: DesignSpec.defaultBoxShadow,
+        ),
+        child: Stack(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                buildDurationColumn(
+                  context,
+                  timerSettingsHistoryRecord.timerSettings.duration
+                ),
+                Gap.small(),
+                buildDetailsColumn(context),
+                const Spacer(),
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: Colors.black,
+                  size: 48,
+                )
+              ],
+            ),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+                  highlightColor: Colors.white.withValues(alpha: 0.25),
+                  splashColor: Colors.white.withValues(alpha: 0.25),
+                  onTap: onTap,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -62,6 +66,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
         DesignSpec.paddingXl
       ),
       child: Column(
+        mainAxisSize: .min,
         children: [
           DecoratedBox(
             decoration: const BoxDecoration(
@@ -97,6 +102,7 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
         vertical: DesignSpec.paddingMd
       ),
       child: Column(
+        mainAxisSize: .min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildDetail(

@@ -21,3 +21,4 @@ export 'src/public/view/timer_settings/duration_input_view.dart';
 export 'src/public/viewmodel/timer_settings_cubit.dart';
 
 export 'src/presentation/view/timer_settings_history/timer_settings_history_list_item.dart';
+export 'src/presentation/view/timer_settings_history/timer_settings_history_grid_item.dart';
