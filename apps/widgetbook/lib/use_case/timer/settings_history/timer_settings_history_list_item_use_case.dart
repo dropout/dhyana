@@ -8,9 +8,17 @@ import 'package:timer/timer.dart';
 @widgetbook.UseCase(
   name: 'Default',
   type: TimerSettingsHistoryListItem,
-  path: '[Timer]/timer_settings_history/',
+  path: '[Timer]/public/view/timer_settings_history/',
 )
 Widget buildTimerSettingsHistoryListItem(BuildContext context) {
+  
+  final durationMinutes = context.knobs.int.slider(
+    label: 'Duration (minutes)',
+    initialValue: 10,
+    min: 1,
+    max: 60,
+  );
+  
   final warmupMinutes = context.knobs.int.slider(
     label: 'Warmup (minutes)',
     initialValue: 1,
@@ -18,12 +26,7 @@ Widget buildTimerSettingsHistoryListItem(BuildContext context) {
     max: 5,
   );
 
-  final durationMinutes = context.knobs.int.slider(
-    label: 'Duration (minutes)',
-    initialValue: 10,
-    min: 1,
-    max: 60,
-  );
+
 
   final useCount = context.knobs.int.slider(
     label: 'Use Count',

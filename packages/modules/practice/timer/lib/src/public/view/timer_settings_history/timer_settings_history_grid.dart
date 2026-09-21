@@ -4,7 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'package:core/core.dart';
 import 'package:timer/l10n/timer_localizations.dart';
-import 'package:timer/src/presentation/view/timer_settings_history/timer_settings_history_grid_item.dart';
+import 'package:timer/src/public/view/timer_settings_history/timer_settings_history_grid_item.dart';
 import 'package:timer/src/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
 import 'package:timer/src/public/model/timer_settings.dart';
 import 'package:timer/src/public/model/timer_settings_history_record.dart';
