@@ -23,8 +23,11 @@ dependencies:
   core: ^0.0.1
   assets: ^0.0.1
   home: ^0.0.1
-  timer: ^0.0.1
   profile: ^0.0.1
+  timer: ^0.0.1  
+  chanting: ^0.0.1
+  session: ^0.0.1
+  stats: ^0.0.1
 
 dev_dependencies:
   build_runner: 

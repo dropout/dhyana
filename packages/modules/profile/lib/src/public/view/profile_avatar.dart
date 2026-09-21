@@ -41,7 +41,7 @@ class const ProfileAvatar({
           ),
         ),
         const SizedBox(height: DesignSpec.spacingMd),
-        buildName(context, profileName, textStyle),
+        if (profileName.isNotEmpty) buildName(context, profileName, textStyle),
       ],
     );
   }

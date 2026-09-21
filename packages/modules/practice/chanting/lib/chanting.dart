@@ -16,5 +16,6 @@ export 'src/public/model/chant_playlist_item.dart';
 export 'src/public/model/chanting_settings.dart';
 
 export 'src/public/view/chanting_settings/chanting_settings_view.dart';
+export 'src/public/view/chanting_settings/chant_card.dart';
 
 export 'src/public/viewmodel/chanting_settings_cubit.dart';

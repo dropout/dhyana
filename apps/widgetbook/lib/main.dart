@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
+import 'package:session/session.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -55,6 +56,7 @@ class WidgetbookApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
             ...CoreLocalizations.localizationsDelegates,
             ...TimerLocalizations.localizationsDelegates,
+            ...SessionLocalizations.localizationsDelegates,
           ],
         ),
         InspectorAddon(),

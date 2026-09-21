@@ -2,9 +2,9 @@ import 'package:material_ui/material_ui.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-import 'package:chanting/chanting.dart';
-import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
 import 'package:core/core.dart';
+import 'package:chanting/chanting.dart';
+
 
 @widgetbook.UseCase(
 	name: 'Default',

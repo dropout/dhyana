@@ -1,26 +1,17 @@
 import 'package:profile/profile.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:session/src/public/model/session.dart';
-import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
-import 'package:session/src/presentation/view/completed/signed_out_completed_view.dart';
+import 'package:session/src/public/view/signed_in_completed_view.dart';
+import 'package:session/src/public/view/signed_out_completed_view.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-class SessionCompletedScreen extends StatelessWidget {
-
-  final Session session;
-
-  const SessionCompletedScreen({
-    required this.session,
-    super.key
-  });
-
-  void _onOkayButtonPressed(BuildContext context) {
-    context.services.homeNavigator.navigateToHome();
-    context.hapticsTap();
-  }
+class const SessionCompletedScreen({
+  required final Session session, 
+  super.key
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +23,16 @@ class SessionCompletedScreen extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           SignedIn(
-            yes: (_, profileId) => buildSignedInView(context, profileId),
+            yes: (_, profileId) => buildProfileCubitState(context, profileId),
             no: SignedOutCompletedView(session: session),
           ),
-          buildBottomArea(context),
+          CompletedScreenBottomArea(),
         ],
       ),
     );
   }
 
-  Widget buildSignedInView(BuildContext context, String profileId) {
+  Widget buildProfileCubitState(BuildContext context, String profileId) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         switch (state) {
@@ -52,24 +43,60 @@ class SessionCompletedScreen extends StatelessWidget {
           case ProfileErrorState():
             return AppErrorDisplay();
           case ProfileLoadedState():
-            return buildLoaded(context, state);
+            return buildSessionCompletedCubitState(context, state);
         }
       },
     );
   }
 
-  Widget buildLoaded(BuildContext context, ProfileLoadedState state) {
-    return BlocProvider<SessionCompletedCubit>(
+  Widget buildSessionCompletedCubitState(BuildContext context, ProfileLoadedState state) {
+    return SmartBlocProvider<SessionCompletedCubit, SessionCompletedState>(
       create: (context) => GetIt.I.get<SessionCompletedCubit>(),
-      child: SignedInCompletedView(
-        profileId: state.profile.id,
-        session: session,
-        profileSettings: state.profile.settings,
-      ),
+      builder: (context, state) {
+        switch (state) {
+          case SessionCompletedInitialState():
+            return const AppLoadingDisplay();
+          case SessionCompletedLoadingState():
+            return const AppLoadingDisplay();
+          case SessionCompletedErrorState():
+            return const AppErrorDisplay();
+          case SessionCompletedSavingState():
+            return SignedInCompletedView(
+              profileId: state.updateResult.updatedProfile.id,
+              updateResult: state.updateResult,
+              profileSettings: state.updateResult.updatedProfile.settings,
+            );
+          case SessionCompletedSavedState():
+            return SignedInCompletedView(
+              profileId: state.updateResult.updatedProfile.id,
+              updateResult: state.updateResult,
+              profileSettings: state.updateResult.updatedProfile.settings,
+            );
+          default:
+            return SizedBox.shrink();
+        }
+      },
+      // child: SignedInCompletedView(
+      //   profileId: state.profile.id,
+      //   session: session,
+      //   profileSettings: state.profile.settings,
+      // ),
     );
   }
 
-  Widget buildBottomArea(BuildContext context) {
+}
+
+class const CompletedScreenBottomArea({
+  super.key  
+}) extends StatelessWidget {
+
+  void _onOkayButtonPressed(BuildContext context) {
+    context.services.homeNavigator.navigateToHome();
+    context.hapticsTap();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Stack(
@@ -97,7 +124,7 @@ class SessionCompletedScreen extends StatelessWidget {
             top: false,            
             child: Padding(
               padding: const EdgeInsets.only(bottom: DesignSpec.spacingLg),
-              child: AppButton(
+              child: AppButton.large(
                 key: const Key('session_completed_screen_okay_button'),
                 onTap: () => _onOkayButtonPressed(context),
                 text: context.coreL10n.okay.toUpperCase(),
@@ -110,5 +137,4 @@ class SessionCompletedScreen extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -8,17 +8,18 @@ import 'package:nock/nock.dart';
 import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:session/src/data/datasource/faker_session_extension.dart';
+import 'package:session/src/data/mapper/update_profile_stats_result_mapper.dart';
+import 'package:session/src/public/model/update_profile_stats_result.dart';
 import 'package:social/social.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:core/core.dart';
 import 'package:session/src/data/mapper/session_mapper.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
-import 'package:session/src/domain/entity/session_completed_data_entity.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
-import 'package:session/src/presentation/view/completed/session_result.dart';
-import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
+import 'package:session/src/public/view/session_result.dart';
+import 'package:session/src/public/view/signed_in_completed_view.dart';
 
 import '../../../session_mock_definitions.dart';
 import '../../../session_test_helper.dart';
@@ -98,9 +99,9 @@ void main() {
           );
 
       when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedInitialDataEntity());
+          .thenReturn(const SessionCompletedInitialState());
       when(() => mockSessionCompletedCubit.stream)
-          .thenAnswer((_) => const Stream<SessionCompletedDataEntity>.empty());
+          .thenAnswer((_) => const Stream<SessionCompletedState>.empty());
 
       when(() => mockProfileStateCubit.loadProfile(
         profileId, profile: updateResult.updatedProfile,
@@ -135,7 +136,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: profileId,
-                    session: session.toApi(),
+                    updateResult: updateResult.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -166,8 +167,14 @@ void main() {
     ) async {
       final SessionEntity session = Faker().createSessionEntity();
 
+      final updateResult = UpdateProfileStatsResult(
+        oldProfile: Faker().createProfile(),
+        updatedProfile: Faker().createProfile(),
+        session: session.toApi(),
+      );
+
       when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedDataEntity.initial());
+          .thenReturn(const SessionCompletedState.initial());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -193,7 +200,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session.toApi(),
+                    updateResult: updateResult,
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -211,8 +218,14 @@ void main() {
     ) async {
       final SessionEntity session = Faker().createSessionEntity();
 
+      final updateResult = UpdateProfileStatsResult(
+        oldProfile: Faker().createProfile(),
+        updatedProfile: Faker().createProfile(),
+        session: session.toApi(),
+      );
+
       when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedDataEntity.loading());
+          .thenReturn(const SessionCompletedState.loading());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -238,7 +251,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session.toApi(),
+                    updateResult: updateResult,
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -254,8 +267,14 @@ void main() {
     testWidgets('can show error when error state', (WidgetTester tester) async {
       final SessionEntity session = Faker().createSessionEntity();
 
+      final updateResult = UpdateProfileStatsResult(
+        oldProfile: Faker().createProfile(),
+        updatedProfile: Faker().createProfile(),
+        session: session.toApi(),
+      );
+
       when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedDataEntity.error());
+          .thenReturn(const SessionCompletedState.error());
 
       when(
         () => mockSessionCompletedCubit.logSession(
@@ -281,7 +300,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session.toApi(),
+                    updateResult: updateResult,
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -306,15 +325,15 @@ void main() {
         ),
       );
 
-      UpdateProfileStatsResultEntity updateResult =
-          UpdateProfileStatsResultEntity(
-            updatedProfile: updatedProfile,
-            oldProfile: oldProfile,
-            session: session,
-          );
+      final updateResult =
+        UpdateProfileStatsResultEntity(
+          updatedProfile: updatedProfile,
+          oldProfile: oldProfile,
+          session: session,
+        );
 
       when(() => mockSessionCompletedCubit.state).thenReturn(
-        SessionCompletedDataEntity.saving(updateResult: updateResult),
+        SessionCompletedState.saving(updateResult: updateResult.toApi()),
       );
 
       when(
@@ -351,7 +370,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session.toApi(),
+                    updateResult: updateResult.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),
@@ -379,7 +398,7 @@ void main() {
           );
 
       when(() => mockSessionCompletedCubit.state).thenReturn(
-        SessionCompletedDataEntity.saved(updateResult: updateResult),
+        SessionCompletedState.saved(updateResult: updateResult.toApi()),
       );
 
       when(
@@ -416,7 +435,7 @@ void main() {
                   ],
                   child: SignedInCompletedView(
                     profileId: 'profileId',
-                    session: session.toApi(),
+                    updateResult: updateResult.toApi(),
                     profileSettings: ProfileSettings(),
                   ),
                 ),

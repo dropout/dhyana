@@ -14,8 +14,8 @@ import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/usecase/save_session_stats_use_case.dart';
 import 'package:session/src/domain/usecase/update_profile_with_session_use_case.dart';
 import 'package:session/src/presentation/view/session_completed_screen.dart';
-import 'package:session/src/presentation/view/completed/signed_in_completed_view.dart';
-import 'package:session/src/presentation/view/completed/signed_out_completed_view.dart';
+import 'package:session/src/public/view/signed_in_completed_view.dart';
+import 'package:session/src/public/view/signed_out_completed_view.dart';
 import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 
 import '../../session_mock_definitions.dart';

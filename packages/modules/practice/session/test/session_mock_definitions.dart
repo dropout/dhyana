@@ -3,7 +3,6 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
-import 'package:session/src/domain/entity/session_completed_data_entity.dart';
 import 'package:session/src/domain/service/session_app_port.dart';
 import 'package:social/social.dart';
 import 'package:stats/stats.dart';
@@ -38,7 +37,7 @@ class MockMindfulMinutesService
   implements MindfulMinutesService {}
 
 class MockSessionCompletedCubit
-  extends MockCubit<SessionCompletedDataEntity>
+  extends MockCubit<SessionCompletedState>
   implements SessionCompletedCubit {}
 
 class MockSessionAppPort 

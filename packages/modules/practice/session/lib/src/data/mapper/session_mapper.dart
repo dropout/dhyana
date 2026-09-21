@@ -18,7 +18,7 @@ extension SessionMapper on SessionEntity {
 }
 
 extension SessionEntityMapper on Session {
-  SessionEntity toEntity() {
+  SessionEntity toDomain() {
     return SessionEntity(
       id: id,
       type: switch (type) {

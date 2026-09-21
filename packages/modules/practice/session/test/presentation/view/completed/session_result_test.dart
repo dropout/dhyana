@@ -9,7 +9,7 @@ import 'package:core/core.dart';
 import 'package:session/src/data/datasource/faker_session_extension.dart';
 import 'package:session/src/data/mapper/session_mapper.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
-import 'package:session/src/presentation/view/completed/session_result.dart';
+import 'package:session/src/public/view/session_result.dart';
 
 import '../../../session_test_helper.dart';
 

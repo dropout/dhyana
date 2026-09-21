@@ -5,23 +5,16 @@ import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 import 'package:session/src/public/model/session.dart';
 
-
-class SessionResult extends StatelessWidget {
-
-  final Session session;
-  final Profile? profile;
-
-  const SessionResult({
-    required this.session,
-    this.profile,
-    super.key
-  });
-
-
+/// Display the profile and the completed minutes count.
+class const SessionResult({
+  required final Session session,
+  /// Can be null in case when user is not signed in.
+  final Profile? profile,
+  super.key,
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Why the profile can be null in a sessionresult?
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
