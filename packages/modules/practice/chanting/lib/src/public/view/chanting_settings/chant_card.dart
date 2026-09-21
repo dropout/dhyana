@@ -7,11 +7,13 @@ class ChantCard extends StatelessWidget {
   final ChantPlaylistItem chantViewModel;
   final Color textColor;
   final Widget? trailing;
+  final ImageProvider? chantImageProvider;
 
   const ChantCard({
     required this.index,
     required this.chantViewModel,
     this.trailing,
+    this.chantImageProvider,
     this.textColor = Colors.black,
     super.key,
   });
@@ -37,35 +39,41 @@ class ChantCard extends StatelessWidget {
                 imagePath: '/chants/${chantViewModel.chantId}/cover.jpg',
                 blurHash: chantViewModel.blurHash,
                 resourceResolver: context.services.resourceResolver,
+                imageProvider: chantImageProvider,
               ),
             ),
           ),
-          Gap.medium(),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  chantViewModel.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.theme.textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: textColor,
+            child: Padding(
+              padding:  EdgeInsets.only(
+                left: DesignSpec.paddingLg,
+                right: trailing == null ? DesignSpec.paddingLg : 0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: .min,
+                children: [
+                  Text(
+                    chantViewModel.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.theme.textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: textColor,
+                    ),
                   ),
-                ),
-                Text(
-                  chantViewModel.duration.formatMMss(),
-                  style: context.theme.textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: textColor,
+                  Text(
+                    chantViewModel.duration.formatMMss(),
+                    style: context.theme.textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          Gap.small(),
           ?trailing,
         ],
       ),
