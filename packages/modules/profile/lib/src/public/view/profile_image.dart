@@ -1,14 +1,15 @@
-import 'package:profile/src/public/view/profile_image_placeholder.dart';
-import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
+
+import 'package:core/core.dart';
+import 'package:profile/src/public/view/profile_image_placeholder.dart';
 
 /// A widget that displays a profile image.
 /// If [profilePhotoBlurhash] is not provided or the image fails to load, 
 /// it will display a placeholder with the user's initials.
 /// If [profilePhotoBlurhash] is provided, it will be used to display a 
 /// blurred version of the image while the network image is loading.
-/// The size of the image can be customized via the [size] parameter.
-
+/// The idea here is that when the profile image stored the blurhash in the profile
+/// is also generated, so one can assume if there is no blurhash available, the profile image is not set.
 class const ProfileImage({
   required final String profileId,
   required final String profileName,
@@ -17,28 +18,6 @@ class const ProfileImage({
   final ImageProvider? imageProvider,
   super.key,
 }) extends StatelessWidget {
-
-  // /// The profile ID. Used for looking up the profile image from the storage.
-  // final String profileId;
-
-  // /// The name for the profile, for example, "John Doe". 
-  // /// This is used to generate initials for the placeholder.
-  // final String profileName;
-
-  // /// The blurhash for the profile image, if available.
-  // final String? profilePhotoBlurhash;
-
-  // /// The size of the profile image. Defaults to [defaultSize].
-  // final double size;
-
-  // TODO: Clean up how the identity provider images will be used
-  // const ProfileImage({
-  //   required this.profileId,
-  //   required this.profileName,
-  //   this.profilePhotoBlurhash,
-  //   this.size = 96.0, 
-  //   super.key,
-  // });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +38,6 @@ class const ProfileImage({
         ),
         false => ProfileImagePlaceholder(
           name: profileName,
-          backgroundColor: Colors.grey,
         ),
       },
     );

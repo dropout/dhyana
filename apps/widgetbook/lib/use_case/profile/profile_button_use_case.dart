@@ -43,7 +43,7 @@ Widget buildProfileButton(BuildContext context) {
 				BlocProvider<ProfileCubit>.value(value: profileCubit),
 			],
 			child: ProfileButton(
-        size: size,
+        size: size.toDouble(),
         profileImageProvider: AssetImage('assets/images/avatar.jpg'),
       ),
 		),

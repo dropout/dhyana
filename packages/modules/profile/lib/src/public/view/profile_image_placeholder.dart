@@ -1,28 +1,19 @@
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// A profile image placeholder widget that takes a name and displays 
-/// a circular avatar with a randomized background color 
-/// from a list of predefined colors. 
+/// A profile image placeholder widget that takes a name and displays
+/// a circular avatar with a randomized background color
+/// from a list of predefined colors.
 ///
 /// The placeholder displays the first letter of
 /// the profile's  name in uppercase.
-class ProfileImagePlaceholder extends StatelessWidget {
+class const ProfileImagePlaceholder({
+  required final String name,
+  final Color? backgroundColor,
+  super.key,
+}) extends StatelessWidget {
 
-  /// The name to be displayed in the placeholder.
-  final String name;
-
-  /// The background color of the placeholder. If not provided, a random color
-  /// from the predefined list will be used.
-  final Color? backgroundColor;
-
-  const ProfileImagePlaceholder({
-    required this.name,
-    this.backgroundColor,
-    super.key,
-  });
-
-  /// A list of predefined colors to be used as background colors 
+  /// A list of predefined colors to be used as background colors
   /// for the placeholder.
   static const List<Color> _defaultColors = [
     Color(0xFF6C63FF),
@@ -42,7 +33,7 @@ class ProfileImagePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final initial = name.isNotEmpty ? name[0].toUpperCase() : '?';
-    
+
     return DecoratedBox(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -51,7 +42,7 @@ class ProfileImagePlaceholder extends StatelessWidget {
       child: SizedBox.expand(
         child: Padding(
           padding: const EdgeInsets.all(DesignSpec.paddingXs),
-          child: FittedBox(        
+          child: FittedBox(
             fit: .scaleDown,
             child: Text(
               initial,
@@ -59,7 +50,7 @@ class ProfileImagePlaceholder extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 100, // Set large enough to scale down
                 fontWeight: FontWeight.bold,
-              ),        
+              ),
             ),
           ),
         ),
@@ -67,5 +58,3 @@ class ProfileImagePlaceholder extends StatelessWidget {
     );
   }
 }
-
-

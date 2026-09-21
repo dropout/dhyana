@@ -12,7 +12,7 @@ import 'package:profile/profile.dart';
 Widget buildProfileAvatar(BuildContext context) {
 	final name = context.knobs.string(
 		label: 'Name',
-		initialValue: 'Ada Lovelace',
+		initialValue: 'Layman Pang',
 	);
 	final imageSize = context.knobs.double.slider(
 		label: 'Image Size',
@@ -21,11 +21,18 @@ Widget buildProfileAvatar(BuildContext context) {
 		max: 256,
 	);
 
+  final hasProfileImage = context.knobs.boolean(
+    label: 'Has Profile Image',
+    initialValue: true,
+  );
+
 	return Center(
 		child: ProfileAvatar(
 			profileId: 'preview-profile',
 			profileName: name,
 			imageSize: imageSize,
+      profilePhotoBlurhash: hasProfileImage ? 'LEHV6nWB2yk8pyo0adR*.7kCMdnj' : null,
+			profileImageProvider: hasProfileImage ? AssetImage('assets/images/avatar.jpg') : null,
 		),
 	);
 }
