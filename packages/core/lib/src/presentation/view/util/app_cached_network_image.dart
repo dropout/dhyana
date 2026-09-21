@@ -20,6 +20,7 @@ class AppCachedNetworkImage extends StatefulWidget {
   final bool circular;
   final double borderRadius;
   final Widget errorWidget;
+  final ImageProvider? imageProvider;
 
   const AppCachedNetworkImage({
     required this.imagePath,
@@ -28,6 +29,7 @@ class AppCachedNetworkImage extends StatefulWidget {
     this.borderRadius = 0.0,
     this.circular = false,
     this.errorWidget = const Center(child: Icon(Icons.broken_image)),
+    this.imageProvider,
     super.key,
   });
 
@@ -83,16 +85,33 @@ class _AppCachedNetworkImageState extends State<AppCachedNetworkImage> {
       fit: StackFit.expand,
       children: [
         if (widget.blurHash != null) buildPlaceHolder(context, widget.blurHash!),
-        if (loadingState == ProcessingState.completed && currentImageUrl != null)
-          _CustomCachedNetworkImage(
-            key: ValueKey(currentImageUrl),
-            imageUrl: currentImageUrl!,
-            crashlyticsService: context.services.crashlyticsService,
-            circular: widget.circular,
-            borderRadius: widget.borderRadius,
-          ),
+        buildImagePart(context),
       ],
     );
+  }
+
+  Widget buildImagePart(BuildContext context) {
+    if (widget.imageProvider case final imageProvider?) {
+      
+      return widget.circular
+        ? buildCircularImage(context, imageProvider)
+        : Image(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          );
+    }
+
+    if (loadingState == ProcessingState.completed && currentImageUrl != null) {
+      return _CustomCachedNetworkImage(
+        key: ValueKey(currentImageUrl),
+        imageUrl: currentImageUrl!,
+        crashlyticsService: context.services.crashlyticsService,
+        circular: widget.circular,
+        borderRadius: widget.borderRadius,
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 
   Widget buildPlaceHolder(BuildContext context, String blurHash) {

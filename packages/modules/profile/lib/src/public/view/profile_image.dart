@@ -8,29 +8,37 @@ import 'package:material_ui/material_ui.dart';
 /// If [profilePhotoBlurhash] is provided, it will be used to display a 
 /// blurred version of the image while the network image is loading.
 /// The size of the image can be customized via the [size] parameter.
-class ProfileImage extends StatelessWidget {
 
-  /// The profile ID. Used for looking up the profile image from the storage.
-  final String profileId;
+class const ProfileImage({
+  required final String profileId,
+  required final String profileName,
+  final String? profilePhotoBlurhash,
+  final double size = 96.0,
+  final ImageProvider? imageProvider,
+  super.key,
+}) extends StatelessWidget {
 
-  /// The name for the profile, for example, "John Doe". 
-  /// This is used to generate initials for the placeholder.
-  final String profileName;
+  // /// The profile ID. Used for looking up the profile image from the storage.
+  // final String profileId;
 
-  /// The blurhash for the profile image, if available.
-  final String? profilePhotoBlurhash;
+  // /// The name for the profile, for example, "John Doe". 
+  // /// This is used to generate initials for the placeholder.
+  // final String profileName;
 
-  /// The size of the profile image. Defaults to [defaultSize].
-  final double size;
+  // /// The blurhash for the profile image, if available.
+  // final String? profilePhotoBlurhash;
+
+  // /// The size of the profile image. Defaults to [defaultSize].
+  // final double size;
 
   // TODO: Clean up how the identity provider images will be used
-  const ProfileImage({
-    required this.profileId,
-    required this.profileName,
-    this.profilePhotoBlurhash,
-    this.size = 96.0, 
-    super.key,
-  });
+  // const ProfileImage({
+  //   required this.profileId,
+  //   required this.profileName,
+  //   this.profilePhotoBlurhash,
+  //   this.size = 96.0, 
+  //   super.key,
+  // });
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +55,7 @@ class ProfileImage extends StatelessWidget {
           errorWidget: ProfileImagePlaceholder(
             name: profileName,
           ),
+          imageProvider: imageProvider,
         ),
         false => ProfileImagePlaceholder(
           name: profileName,
