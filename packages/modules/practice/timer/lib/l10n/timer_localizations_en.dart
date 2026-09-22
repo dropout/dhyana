@@ -69,6 +69,10 @@ class TimerLocalizationsEn extends TimerLocalizations {
   String get timerSettingsHistory => 'Settings history';
 
   @override
+  String get timerSettingsHistorySubtitle =>
+      'Tap on a card to activate timer setting.';
+
+  @override
   String get timerSettingsHistoryApplied => 'Timer settings applied.';
 
   @override

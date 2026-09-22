@@ -212,6 +212,12 @@ abstract class TimerLocalizations {
   /// **'Settings history'**
   String get timerSettingsHistory;
 
+  /// No description provided for @timerSettingsHistorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on a card to activate timer setting.'**
+  String get timerSettingsHistorySubtitle;
+
   /// No description provided for @timerSettingsHistoryApplied.
   ///
   /// In en, this message translates to:

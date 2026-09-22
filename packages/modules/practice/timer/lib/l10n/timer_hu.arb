@@ -19,6 +19,7 @@
   "timerFinishSessionButtonText": "Befejezés",
   "timerDiscardSessionButtonText": "Megszakítás",
   "timerSettingsHistory": "Legutóbbi beállítások",
+  "timerSettingsHistorySubtitle": "Koppints a kártyára az időzítő beállítás aktiválásához.",
   "timerSettingsHistoryApplied": "Időzítő beállítások alkalmazva.",
   "timerSettingsHistoryEmpty": "Még nincsenek legutóbbi időzítő beaállítások elmentve.",
   "noInterval": "Nincs időköz",

@@ -69,6 +69,10 @@ class TimerLocalizationsHu extends TimerLocalizations {
   String get timerSettingsHistory => 'Legutóbbi beállítások';
 
   @override
+  String get timerSettingsHistorySubtitle =>
+      'Koppints a kártyára az időzítő beállítás aktiválásához.';
+
+  @override
   String get timerSettingsHistoryApplied => 'Időzítő beállítások alkalmazva.';
 
   @override

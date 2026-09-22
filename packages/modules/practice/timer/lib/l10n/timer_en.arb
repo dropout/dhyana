@@ -19,6 +19,7 @@
   "timerFinishSessionButtonText": "Finish session",
   "timerDiscardSessionButtonText": "Discard session",
   "timerSettingsHistory": "Settings history",
+  "timerSettingsHistorySubtitle": "Tap on a card to activate timer setting.",
   "timerSettingsHistoryApplied": "Timer settings applied.",
   "timerSettingsHistoryEmpty": "There are no timer settings\n saved in history yet.",
   "noInterval": "No interval",

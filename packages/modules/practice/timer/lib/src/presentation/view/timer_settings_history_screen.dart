@@ -100,6 +100,23 @@ class TimerSettingsHistoryScreen extends StatelessWidget
         title: TimerLocalizations.of(context).timerSettingsHistory,
         enableAppBarSliver: false,        
         slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.only(
+              left: DesignSpec.paddingLg,
+              right: DesignSpec.paddingLg,
+              bottom: DesignSpec.spacingLg,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                TimerLocalizations.of(context).timerSettingsHistorySubtitle,
+                style: context.theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+                
+              )
+            ),
+          ),
+
           SliverSafeArea(
             top: false,
             minimum: const EdgeInsets.only(
@@ -116,6 +133,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
               ),
             ),
           ),
+
         ],
       );
     }
