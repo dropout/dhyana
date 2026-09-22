@@ -86,8 +86,9 @@ with SingleTickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.all(DesignSpec.paddingMd),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: .min,
+              mainAxisAlignment: .center,
+              crossAxisAlignment: .center,
               children: [
                 const SizedBox(height: 8),
                 FlipWidget<String>(
@@ -132,6 +133,8 @@ with SingleTickerProviderStateMixin {
   Widget buildDiffIndicator(BuildContext context) {
     if (widget.newValue != widget.oldValue) {
       return Align(
+          // widthFactor: 1,
+          heightFactor: 1,
           alignment: Alignment.topRight,
           child: Transform.translate(
               offset: const Offset(0, -DesignSpec.spacingXs),

@@ -47,7 +47,6 @@ Widget buildSignedInCompletedView(BuildContext context) {
         windowSize: any(named: 'windowSize'),
       )).thenAnswer((_) async {});
       sl.registerFactory<PresenceCubit>(() => mockPresenceCubit);
-      print('Registered mock PresenceCubit');
     },
     child: ColoredBox(
       color: Colors.black,

@@ -7,20 +7,13 @@ import 'package:profile/src/public/model/profile.dart';
 import 'progress_summary_item.dart';
 
 
-class ProgressSummary extends StatefulWidget {
-
-  final Profile oldProfile;
-  final Profile updatedProfile;
-
-  const ProgressSummary({
-    required this.oldProfile,
-    required this.updatedProfile,
-    super.key,
-  });
-
+class const ProgressSummary({
+  required final Profile oldProfile,
+  required final Profile updatedProfile,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<ProgressSummary> createState() => _ProgressSummaryState();
-
 }
 
 class _ProgressSummaryState extends State<ProgressSummary> {
@@ -31,7 +24,7 @@ class _ProgressSummaryState extends State<ProgressSummary> {
       padding: const EdgeInsets.symmetric(horizontal: DesignSpec.spacingLg),
       child: Row(
         mainAxisAlignment: .center,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.max,        
         children: [
           ProgressSummaryItem(
             key: const Key('progress_summary_sessions'),

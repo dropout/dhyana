@@ -4,22 +4,14 @@ import 'package:material_ui/material_ui.dart';
 
 import 'milestone_progress_view_item.dart';
 
-class MilestoneProgressView extends StatefulWidget {
-  final Profile profile;
-  final bool showAnimation;
-  final bool showText;
-  final double itemSize;
-  final Color textColor;
-
-  const MilestoneProgressView({
-    required this.profile,
-    this.showAnimation = false,
-    this.showText = true,
-    this.itemSize = 36,
-    this.textColor = Colors.black,
-    super.key,
-  });
-
+class const MilestoneProgressView({
+  required final ProfileStatsReport statsReport,
+  final bool showAnimation = false,
+  final bool showText = true,
+  final double itemSize = 36,
+  final Color textColor = Colors.black,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<MilestoneProgressView> createState() => _MilestoneProgressViewState();
 }
@@ -28,6 +20,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: .min,
       key: const Key('milestone_progress_view'),
       children: [
         Row(
@@ -44,7 +37,7 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
   }
 
   List<Widget> buildMilestoneItems(BuildContext context) {
-    final milestoneProgress = widget.profile.statsReport.milestoneProgress;
+    final milestoneProgress = widget.statsReport.milestoneProgress;
     final int targetCount = milestoneProgress.targetDaysCount;
     final int completedCount = milestoneProgress.completedDaysCount;
 
@@ -96,14 +89,20 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
   }
 
   Widget buildMilestoneText(BuildContext context) {
+    late final String text;
+    if (widget.statsReport.milestoneProgress.remainingDaysCount == 0) {
+      text = ProfileLocalizations.of(context).statsNextMilestoneCompletedText;
+    } else {
+      text = ProfileLocalizations.of(context).statsNextMilestoneIn(
+        widget.statsReport.milestoneProgress.remainingDaysCount,
+      );    
+    }
+
     return Text(
       key: const Key('milestone_progress_view_text'),
-      ProfileLocalizations.of(context).statsNextMilestoneIn(
-        widget.profile.statsReport.milestoneProgress.remainingDaysCount,
-      ),
-      style: Theme.of(
-        context,
-      ).textTheme.bodyLarge!.copyWith(color: widget.textColor),
+      text,
+      style: Theme.of(context).textTheme.bodyLarge!
+          .copyWith(color: widget.textColor),
     );
   }
 }

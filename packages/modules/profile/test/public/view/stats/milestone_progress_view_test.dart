@@ -37,7 +37,7 @@ void main() {
               Provider<Services>.value(value: mockServices),
             ],
             child: MilestoneProgressView(
-              profile: profile,
+              statsReport: profile.statsReport,
             )
           ),
         )
@@ -66,7 +66,7 @@ void main() {
             ],
             child: MilestoneProgressView(
               showText: false,
-              profile: profile,
+              statsReport: profile.statsReport,
             )
           ),
         )
@@ -96,7 +96,7 @@ void main() {
               ],
               child: MilestoneProgressView(
                 showAnimation: true,
-                profile: profile,
+                statsReport: profile.statsReport,
               )
             ),
           )

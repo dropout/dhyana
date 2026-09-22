@@ -3,22 +3,15 @@ import 'package:core/core.dart';
 import 'package:profile/profile.dart';
 
 
-class SummaryView extends StatelessWidget {
-
-  final Profile? profile;
-
-  const SummaryView({
-    this.profile,
-    super.key
-  });
+class const SummaryView({
+  required final int sessionCount,
+  required final int minutesCount,
+  required final int daysCount,
+  super.key,
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    int sessionCount = (profile != null) ?  profile!.statsReport.completedSessionsCount : 0;
-    int minutesCount = (profile != null) ?  profile!.statsReport.completedMinutesCount : 0;
-    int daysCount = (profile != null) ?  profile!.statsReport.completedDaysCount : 0;
-
     return AppCard(
       key: const Key('summary_view'),
       title: ProfileLocalizations.of(context).statsSummary,
@@ -73,8 +66,7 @@ class SummaryItem extends StatelessWidget {
         children: [
           Text(value.toString(),
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 24,
+            style: context.theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             )
           ),
@@ -82,10 +74,9 @@ class SummaryItem extends StatelessWidget {
           Text(
             label.toUpperCase(),
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: AppColors.charcoal,
-              fontSize: 14,
-              fontWeight: FontWeight.w900,
+            style: context.theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.grey.shade600,
             )
           )
         ],),

@@ -317,6 +317,12 @@ abstract class ProfileLocalizations {
   /// **'{count, plural, =0{In {count} more days} =1{In {count} more day.} =2{In {count} more days} few{In {count} more days} many{In {count} more days} other{In {count} more days}}'**
   String statsNextMilestoneInShort(num count);
 
+  /// No description provided for @statsNextMilestoneCompletedText.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations for reaching a new milestone!'**
+  String get statsNextMilestoneCompletedText;
+
   /// No description provided for @sessionsPlural.
   ///
   /// In en, this message translates to:

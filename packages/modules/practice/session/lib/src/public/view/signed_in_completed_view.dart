@@ -51,7 +51,7 @@ class const SignedInCompletedView({
                   Gap.xxl(),
                   if (showStatsOnFinishScreen)
                     MilestoneProgressView(
-                      profile: updateResult.updatedProfile,
+                      statsReport: updateResult.updatedProfile.statsReport,
                       showAnimation: updateResult.updatedProfile
                           .consecutiveDaysProgressCheck(updateResult.oldProfile),
                       textColor: Colors.white,

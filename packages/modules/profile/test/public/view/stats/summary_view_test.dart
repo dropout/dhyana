@@ -32,8 +32,10 @@ void main() {
       await tester.pumpWidget(
         ProfileTestHelper.withLocalizationProvider(
           SummaryView(
-            profile: profile,
-          )
+            daysCount: profile.statsReport.completedDaysCount,
+            minutesCount: profile.statsReport.completedMinutesCount,
+            sessionCount: profile.statsReport.completedSessionsCount,
+          ),
         )
       );
       await tester.pumpAndSettle();

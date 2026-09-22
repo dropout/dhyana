@@ -18,7 +18,7 @@ class const SessionResult({
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ProfileAvatar(
+        if (profile != null) ProfileAvatar(
           profileId: profile?.id ?? '',
           profileName: profile?.displayName ?? '',
           profilePhotoBlurhash: profile?.photoBlurhash,
@@ -28,7 +28,7 @@ class const SessionResult({
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: DesignSpec.spacingMd),
+        if (profile != null) SizedBox(height: DesignSpec.spacingMd),
         buildCompletedText(context, session.duration),
       ],
     );

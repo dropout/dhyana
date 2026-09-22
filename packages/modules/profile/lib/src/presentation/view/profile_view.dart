@@ -52,7 +52,7 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 Gap.large(),
-                MilestoneProgressView(profile: profile),
+                MilestoneProgressView(statsReport: profile.statsReport),
                 Gap.large(),
                 Row(
                   children: [
@@ -66,7 +66,11 @@ class ProfileView extends StatelessWidget {
                   ],
                 ),
                 Gap.large(),
-                SummaryView(profile: profile),
+                SummaryView(
+                  daysCount: profile.statsReport.completedDaysCount,
+                  minutesCount: profile.statsReport.completedMinutesCount,
+                  sessionCount: profile.statsReport.completedSessionsCount,
+                ),
                 Gap.large(),
                 ProfileMenu(profile: profile),
                 Gap.large(),

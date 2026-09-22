@@ -145,6 +145,10 @@ class ProfileLocalizationsEn extends ProfileLocalizations {
   }
 
   @override
+  String get statsNextMilestoneCompletedText =>
+      'Congratulations for reaching a new milestone!';
+
+  @override
   String sessionsPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
