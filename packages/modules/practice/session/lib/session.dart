@@ -5,6 +5,8 @@ export 'l10n/session_localizations.dart';
 export 'src/session_di.dart';
 export 'src/session_routes.dart';
 
+export 'src/public/api/session_public_api.dart';
+
 export 'src/public/model/session.dart';
 export 'src/public/model/update_profile_stats_result.dart';
 

@@ -111,12 +111,10 @@ class TimerSettingsHistoryScreen extends StatelessWidget
                 TimerLocalizations.of(context).timerSettingsHistorySubtitle,
                 style: context.theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w500,
-                ),
-                
+                ),                
               )
             ),
           ),
-
           SliverSafeArea(
             top: false,
             minimum: const EdgeInsets.only(

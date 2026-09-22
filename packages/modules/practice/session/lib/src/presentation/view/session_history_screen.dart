@@ -7,15 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 
-class SessionHistoryScreen extends StatelessWidget
+class const SessionHistoryScreen({
+  required final String profileId,
+  super.key,
+}) extends StatelessWidget
   with DefaultScreenSetupHelpersMixin {
-
-  final String profileId;
-
-  const SessionHistoryScreen({
-    required this.profileId,
-    super.key
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +28,7 @@ class SessionHistoryScreen extends StatelessWidget
           case SessionsLoaded():
             return DefaultScreenSetup(
               title: SessionLocalizations.of(context).sessionsHistory,
+              enableAppBarSliver: false,
               slivers: [
                 SliverSafeArea(
                   top: false,
@@ -43,6 +40,7 @@ class SessionHistoryScreen extends StatelessWidget
             return DefaultScreenSetup(
               title: SessionLocalizations.of(context).sessionsHistory,
               enableScrolling: false,
+              enableAppBarSliver: false,
               slivers: [
                 buildLoadingSliver(context),
               ]
@@ -51,6 +49,7 @@ class SessionHistoryScreen extends StatelessWidget
             return DefaultScreenSetup(
               title: SessionLocalizations.of(context).sessionsHistory,
               enableScrolling: false,
+              enableAppBarSliver: false,
               slivers: [
                 buildErrorSliver(context),
               ]
@@ -59,6 +58,7 @@ class SessionHistoryScreen extends StatelessWidget
             return DefaultScreenSetup(
               title: SessionLocalizations.of(context).sessionsHistory,
               enableScrolling: false,
+              enableAppBarSliver: false,
               slivers: []
             );
         }

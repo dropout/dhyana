@@ -32,25 +32,18 @@ class SessionCompletedState with _$SessionCompletedState {
 }
 
 
-
-
 /// Cubit to manage the state of session completion and logging
 /// When a session is completed, this cubit handles updating the profile stats,
 /// logging the session to statistics, and emitting states to reflect the progress.
 /// Addresses the requirements of displaying data and progress on SessionCompletedScreen.
-class SessionCompletedCubit extends Cubit<SessionCompletedState>
+class SessionCompletedCubit({
+  required final UpdateProfileWithSessionUseCase updateProfileWithSessionUseCase,
+  required final SaveSessionStatsUseCase saveSessionStatsUseCase,
+  required final CrashlyticsService crashlyticsService,
+}) extends Cubit<SessionCompletedState>
     with LoggerMixin {
 
-  final UpdateProfileWithSessionUseCase updateProfileWithSessionUseCase;
-  final SaveSessionStatsUseCase saveSessionStatsUseCase;
-
-  final CrashlyticsService crashlyticsService;
-
-  SessionCompletedCubit({    
-    required this.updateProfileWithSessionUseCase,
-    required this.saveSessionStatsUseCase,
-    required this.crashlyticsService,
-  }) : super(const SessionCompletedState.initial());
+  this : super(const SessionCompletedState.initial());
 
   Future<void> logSession(
     String profileId,

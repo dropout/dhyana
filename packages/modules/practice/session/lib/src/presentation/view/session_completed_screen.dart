@@ -12,7 +12,7 @@ class const SessionCompletedScreen({
   required final Session session, 
   super.key
 }) extends StatelessWidget {
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +49,16 @@ class const SessionCompletedScreen({
     );
   }
 
-  Widget buildSessionCompletedCubitState(BuildContext context, ProfileLoadedState state) {
+  Widget buildSessionCompletedCubitState(
+    BuildContext context,
+    ProfileLoadedState state,
+  ) {
     return SmartBlocProvider<SessionCompletedCubit, SessionCompletedState>(
-      create: (context) => GetIt.I.get<SessionCompletedCubit>(),
+      create: (context) {
+        final cubit = GetIt.I.get<SessionCompletedCubit>();
+        cubit.logSession(state.profile.id, session);
+        return cubit;
+      },
       builder: (context, state) {
         switch (state) {
           case SessionCompletedInitialState():
@@ -64,34 +71,35 @@ class const SessionCompletedScreen({
             return SignedInCompletedView(
               profileId: state.updateResult.updatedProfile.id,
               updateResult: state.updateResult,
-              showStatsOnFinishScreen: state.updateResult.updatedProfile.settings.showStatsOnFinishScreen,
-              usePresenceFeature: state.updateResult.updatedProfile.settings.usePresenceFeature,
+              showStatsOnFinishScreen: state
+                  .updateResult
+                  .updatedProfile
+                  .settings
+                  .showStatsOnFinishScreen,
+              usePresenceFeature:
+                  state.updateResult.updatedProfile.settings.usePresenceFeature,
             );
           case SessionCompletedSavedState():
             return SignedInCompletedView(
               profileId: state.updateResult.updatedProfile.id,
               updateResult: state.updateResult,
-              showStatsOnFinishScreen: state.updateResult.updatedProfile.settings.showStatsOnFinishScreen,
-              usePresenceFeature: state.updateResult.updatedProfile.settings.usePresenceFeature,
+              showStatsOnFinishScreen: state
+                  .updateResult
+                  .updatedProfile
+                  .settings
+                  .showStatsOnFinishScreen,
+              usePresenceFeature:
+                  state.updateResult.updatedProfile.settings.usePresenceFeature,
             );
           default:
             return SizedBox.shrink();
         }
       },
-      // child: SignedInCompletedView(
-      //   profileId: state.profile.id,
-      //   session: session,
-      //   profileSettings: state.profile.settings,
-      // ),
     );
   }
-
 }
 
-class const CompletedScreenBottomArea({
-  super.key  
-}) extends StatelessWidget {
-
+class const CompletedScreenBottomArea({super.key}) extends StatelessWidget {
   void _onOkayButtonPressed(BuildContext context) {
     context.services.homeNavigator.navigateToHome();
     context.hapticsTap();
@@ -114,16 +122,13 @@ class const CompletedScreenBottomArea({
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   stops: [0.0, 0.8],
-                  colors: [
-                    Colors.transparent,
-                    Colors.black,
-                  ]
-                )
-              )
+                  colors: [Colors.transparent, Colors.black],
+                ),
+              ),
             ),
           ),
           SafeArea(
-            top: false,            
+            top: false,
             child: Padding(
               padding: const EdgeInsets.only(bottom: DesignSpec.spacingLg),
               child: AppButton.large(
@@ -133,7 +138,7 @@ class const CompletedScreenBottomArea({
                 bColor: Colors.white,
                 fColor: Colors.black,
               ),
-            )
+            ),
           ),
         ],
       ),

@@ -152,7 +152,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
           state.startTime ?? DateTime.now().subtract(state.elapsedTime),
       endTime: state.endTime ?? DateTime.now(),
       duration: state.elapsedTime,
-      sessionType: .chanting,
+      sessionType: .timer,
     );
   }
 

@@ -10,6 +10,7 @@ import '../../session_mock_definitions.dart';
 
 void main() {
   late MockSessionAppPort mockSessionAppPort;
+  late MockSessionRepostiory mockSessionRepository;
   late UpdateProfileWithSessionUseCase useCase;
 
   setUpAll(() {
@@ -32,8 +33,10 @@ void main() {
 
   setUp(() {
     mockSessionAppPort = MockSessionAppPort();
+    mockSessionRepository = MockSessionRepostiory();
     useCase = UpdateProfileWithSessionUseCase(
-      sessionAppPort: mockSessionAppPort
+      sessionAppPort: mockSessionAppPort,
+      sessionRepository: mockSessionRepository,
     );
   });
 
@@ -87,12 +90,21 @@ void main() {
           (originalProfile: profile, updatedProfile: expectedUpdatedProfile),
     );
 
+    when(
+      () => mockSessionRepository.create(profile.id, session),
+    ).thenAnswer(
+      (_) async => session,
+    );
+
     final result = await useCase.execute(profile.id, session);
 
     expect(result.oldProfile, equals(profile));
     expect(result.updatedProfile, equals(expectedUpdatedProfile));
     expect(result.session, equals(session));
-    
+
+    verify(
+      () => mockSessionRepository.create(profile.id, session),
+    ).called(1);
     verify(
       () => mockSessionAppPort.updateProfileWithSession(profile.id, any()),
     ).called(1);

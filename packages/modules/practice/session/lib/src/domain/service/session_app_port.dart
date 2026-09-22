@@ -11,7 +11,7 @@ abstract interface class SessionAppPort {
     SessionEntity session,
   );
 
-  /// Logs a completed session to the StatsPublicApi.
+  /// Saves sessions statistical data to the StatsPublicApi.
   Future<void> saveSessionStats(
     String profileId, 
     SessionEntity session

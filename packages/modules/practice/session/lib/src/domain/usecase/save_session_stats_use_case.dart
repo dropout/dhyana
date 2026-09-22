@@ -4,7 +4,9 @@ import 'package:session/src/domain/entity/session_entity.dart';
 import 'package:session/src/domain/service/session_app_port.dart';
 
 
-/// Logs a completed session to statistics and Mindful Minutes when authorized.
+/// Saves the STATISTICS DATA of a session to the StatsPublicApi 
+/// and Mindful Minutes Platform Health API.
+/// !!! Does not save the session itself !!!
 class SaveSessionStatsUseCase with LoggerMixin {
   final SessionAppPort sessionAppPort;
 

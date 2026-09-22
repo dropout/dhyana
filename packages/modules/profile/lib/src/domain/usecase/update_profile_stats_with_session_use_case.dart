@@ -6,14 +6,10 @@ import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
 /// Use case for updating profile statistics with a session.
 /// This use case retrieves the original profile from the repository, updates its statistics
 /// using the provided session, and returns both the original and updated profile entities.
-class UpdateProfileStatsWithSessionUseCase {
-  final ProfileRepository profileRepository;
-  final ProfileStatsReportUpdaterService profileStatsReportUpdaterService;
-
-  UpdateProfileStatsWithSessionUseCase({
-    required this.profileRepository,
-    required this.profileStatsReportUpdaterService,
-  });
+class UpdateProfileStatsWithSessionUseCase({
+  required final ProfileRepository profileRepository,
+  required final ProfileStatsReportUpdaterService profileStatsReportUpdaterService,
+}) {
 
   Future<({ProfileEntity originalProfile, ProfileEntity updatedProfile})> execute(
     String profileId,
@@ -30,4 +26,5 @@ class UpdateProfileStatsWithSessionUseCase {
       updatedProfile: updatedProfile
     );
   }
+  
 }
