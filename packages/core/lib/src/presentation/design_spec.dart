@@ -42,9 +42,14 @@ class DesignSpec {
     BoxShadow(color: Colors.black26, offset: Offset(1, 2), blurRadius: 1.0),
   ];
 
-  final AppColors colors = const AppColors();
+  // Responsive breakpoints
+  static const double breakpointXs = 360.0;
+  static const double breakpointSm = 480.0;
+  static const double breakpointMd = 768.0;
+  static const double breakpointLg = 1024.0;
+  static const double breakpointXl = 1280.0;
 
-  const DesignSpec();
+  final AppColors colors = const AppColors();
 
   ThemeData get themeData {
     ColorScheme colorScheme = ColorScheme.fromSeed(

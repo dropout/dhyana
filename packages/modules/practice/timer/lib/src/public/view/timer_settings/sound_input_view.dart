@@ -52,7 +52,7 @@ class SoundInputCard extends StatelessWidget {
                 child: SizedBox.expand(
                   child: Center(
                     child: Text(
-                      getLocalizedSoundName(sound, TimerLocalizations.of(context)),
+                      sound.getLocalizedName(TimerLocalizations.of(context)),
                       textAlign: TextAlign.center,
                       style: context.theme.textTheme.labelMedium!.copyWith(
                         color: Colors.white,

@@ -16,8 +16,8 @@ sealed class SocialProfile with _$SocialProfile implements ProfileDisplayable {
     required String id,
     required String firstName,
     required String lastName,
-    required String? photoUrl,
-    required String? photoBlurhash,
+    String? photoUrl,
+    String? photoBlurhash,
     Location? location,
   }) = _SocialProfile;
 

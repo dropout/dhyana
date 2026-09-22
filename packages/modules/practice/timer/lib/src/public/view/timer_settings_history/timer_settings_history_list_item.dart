@@ -116,18 +116,16 @@ class TimerSettingsHistoryListItem extends StatelessWidget {
           buildDetail(
             context,
             TimerLocalizations.of(context).inputStartingSoundLabel.toUpperCase(),
-            getLocalizedSoundName(
-              timerSettings.startingSound,
-              TimerLocalizations.of(context)
+            timerSettings.startingSound.getLocalizedName(
+              TimerLocalizations.of(context),
             ),
           ),
           const SizedBox(height: DesignSpec.spacingSm),
           buildDetail(
             context,
             TimerLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),
-            getLocalizedSoundName(
-              timerSettings.endingSound,
-              TimerLocalizations.of(context)
+            timerSettings.endingSound.getLocalizedName(
+              TimerLocalizations.of(context),
             ),
           )
         ],

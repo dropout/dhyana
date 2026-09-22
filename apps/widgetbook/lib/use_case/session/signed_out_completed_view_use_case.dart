@@ -9,7 +9,7 @@ import 'package:session/session.dart';
 @widgetbook.UseCase(
   name: 'Default',
   type: SignedOutCompletedView,
-  path: '[Session]/presentation/view/completed/',
+  path: '[Session]/public/view/',
 )
 Widget buildSignedOutCompletedView(BuildContext context) {
   final durationMinutes = context.knobs.int.slider(

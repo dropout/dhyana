@@ -27,14 +27,11 @@ class PresenceListItem extends StatelessWidget {
             shape: BoxShape.circle,
             color: borderColor,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: ProfileImage(
-              profileId: presence.profile.id,
-              profileName: presence.profile.displayName,
-              profilePhotoBlurhash: presence.profile.photoBlurhash,
-              size: 56,
-            ),
+          child: ProfileImage(
+            profileId: presence.profile.id,
+            profileName: presence.profile.displayName,
+            profilePhotoBlurhash: presence.profile.photoBlurhash,
+            size: 56,
           ),
         ),
         Gap.small(),
@@ -46,7 +43,7 @@ class PresenceListItem extends StatelessWidget {
               softWrap: true,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: textColor,
                 fontWeight: FontWeight.bold,
               ),

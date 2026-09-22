@@ -6,6 +6,7 @@ import 'package:social/src/social_module.dart';
 import 'package:social/src/public/view/presence_view.dart';
 
 class PresenceArea extends StatelessWidget {
+  
   static Widget withCubit({
     required String profileId,
     int batchSize = 18,
@@ -56,22 +57,7 @@ class PresenceArea extends StatelessWidget {
       batchSize: batchSize,
       maxPageCount: maxPageCount,
       borderColor: Colors.grey.shade500,
-      textColor: Colors.grey.shade500,
+      textColor: Colors.white,
     );
-
-    // return BlocProvider<PresenceCubit>(
-    //   create: (context) =>
-    //       GetIt.instance.get<PresenceCubit>()..loadPresenceData(
-    //         ownProfileId: profileId,
-    //         limit: batchSize,
-    //         windowSize: Duration(minutes: intervalInMinutes),
-    //       ),
-    //   child: PresenceView(
-    //     batchSize: batchSize,
-    //     maxPageCount: maxPageCount,
-    //     borderColor: Colors.grey.shade500,
-    //     textColor: Colors.grey.shade500,
-    //   ),
-    // );
   }
 }

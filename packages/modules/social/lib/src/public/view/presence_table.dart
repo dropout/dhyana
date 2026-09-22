@@ -28,7 +28,7 @@ class PresenceTable extends StatelessWidget {
             if (columnIndex < slicedPresenceList[rowIndex].length) {
               return TableCell(
                 child: PresenceListItem(
-                  borderColor: Colors.grey,
+                  borderColor: AppColors.charcoal,
                   textColor: textColor,
                   presence: slicedPresenceList[rowIndex][columnIndex],
                 ).gridReveal(rowIndex, columnIndex),

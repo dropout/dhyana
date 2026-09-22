@@ -131,8 +131,7 @@ class TimerSettingsHistoryGridItem extends StatelessWidget {
             context,
             TimerLocalizations.of(context).inputStartingSoundLabel
                 .toUpperCase(),
-            getLocalizedSoundName(
-              timerSettings.startingSound,
+            timerSettings.startingSound.getLocalizedName(
               TimerLocalizations.of(context),
             ),
           ),
@@ -147,8 +146,7 @@ class TimerSettingsHistoryGridItem extends StatelessWidget {
           buildDetail(
             context,
             TimerLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),
-            getLocalizedSoundName(
-              timerSettings.endingSound,
+            timerSettings.endingSound.getLocalizedName(
               TimerLocalizations.of(context),
             ),
           ),

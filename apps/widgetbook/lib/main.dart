@@ -1,7 +1,9 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:session/session.dart';
+import 'package:social/social.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -17,6 +19,8 @@ void main() async {
   await shaderService.loadShader(Assets.shaderLinearGradientMask);
   await shaderService.loadShader(Assets.shaderGradientFlow);
   await shaderService.loadShader(Assets.shaderParchmentNoise);
+
+  registerFallbackValue(Duration.zero);
 
   runApp(const WidgetbookApp());
 }
@@ -57,6 +61,8 @@ class WidgetbookApp extends StatelessWidget {
             ...CoreLocalizations.localizationsDelegates,
             ...TimerLocalizations.localizationsDelegates,
             ...SessionLocalizations.localizationsDelegates,
+            ...ProfileLocalizations.localizationsDelegates,
+            ...SocialLocalizations.localizationsDelegates,
           ],
         ),
         InspectorAddon(),

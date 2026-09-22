@@ -43,7 +43,7 @@ class const SessionResult({
         ),
         children: [
           TextSpan(
-            text: '${SessionLocalizations.of(context).sessionResultCompleted} '
+            text: '${SessionLocalizations.of(context).sessionResultCompleted}  '
           ),
           TextSpan(
             text: session.duration.inMinutes.toString(),

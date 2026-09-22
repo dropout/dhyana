@@ -68,48 +68,49 @@ with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
-    String oldValue = getLocalizedRoundedNumber(
+  
+    String oldValue = widget.oldValue.getLocalizedRoundedNumber(
       context,
-      widget.oldValue,
       shorten: true
     );
-    String newVal = getLocalizedRoundedNumber(
+    String newVal = widget.newValue.getLocalizedRoundedNumber(
       context,
-      widget.newValue,
       shorten: true
     );
 
-    return Stack(
-      children: [
-        buildDiffIndicator(context),
-        Padding(
-          padding: const EdgeInsets.all(DesignSpec.paddingMd),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 8),
-              FlipWidget<String>(
-                flipType: FlipType.spinFlip,
-                itemStream: Stream.fromIterable([newVal]),
-                itemBuilder: buildItem,
-                initialValue: oldValue,
-                flipDirection: AxisDirection.up,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                widget.label.toUpperCase(),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
+    return SizedBox(
+      width: 90,
+      child: Stack(
+        children: [
+          buildDiffIndicator(context),
+          Padding(
+            padding: const EdgeInsets.all(DesignSpec.paddingMd),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 8),
+                FlipWidget<String>(
+                  flipType: FlipType.spinFlip,
+                  itemStream: Stream.fromIterable([newVal]),
+                  itemBuilder: buildItem,
+                  initialValue: oldValue,
+                  flipDirection: AxisDirection.up,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.label.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  )
                 )
-              )
-            ],
-          ),
-        )
-      ],
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 

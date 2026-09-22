@@ -230,7 +230,7 @@ return $default(_that.id,_that.firstName,_that.lastName,_that.photoUrl,_that.pho
 
 
 class _SocialProfile extends SocialProfile with DiagnosticableTreeMixin {
-  const _SocialProfile({required this.id, required this.firstName, required this.lastName, required this.photoUrl, required this.photoBlurhash, this.location}): super._();
+  const _SocialProfile({required this.id, required this.firstName, required this.lastName, this.photoUrl, this.photoBlurhash, this.location}): super._();
   
 
 @override final  String id;

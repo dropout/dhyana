@@ -137,7 +137,6 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: profileId,
                     updateResult: updateResult.toApi(),
-                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -201,7 +200,6 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     updateResult: updateResult,
-                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -252,7 +250,6 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     updateResult: updateResult,
-                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -301,7 +298,6 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     updateResult: updateResult,
-                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -371,7 +367,6 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     updateResult: updateResult.toApi(),
-                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),
@@ -436,7 +431,6 @@ void main() {
                   child: SignedInCompletedView(
                     profileId: 'profileId',
                     updateResult: updateResult.toApi(),
-                    profileSettings: ProfileSettings(),
                   ),
                 ),
               ),

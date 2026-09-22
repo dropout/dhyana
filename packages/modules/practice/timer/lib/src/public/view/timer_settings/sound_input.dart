@@ -57,10 +57,7 @@ class SoundInput extends StatelessWidget {
       ),
       onTap: () => _onInputTap(context),
       child: Text(
-        getLocalizedSoundName(
-          value,
-          TimerLocalizations.of(context)
-        ),
+        value.getLocalizedName(TimerLocalizations.of(context)),
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: AppColors.buttonForeground,
           fontWeight: FontWeight.w800,

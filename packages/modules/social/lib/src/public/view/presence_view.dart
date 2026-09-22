@@ -58,16 +58,20 @@ class PresenceView extends StatelessWidget {
       presenceList.slices(3).toList();
     return Table(
       children: List.generate(slicedPresenceList.length, (rowIndex) =>
-        TableRow(
+        TableRow(            
           children: List.generate(3, (columnIndex) {
             if (columnIndex < slicedPresenceList[rowIndex].length) {
               return TableCell(
-                child: Container(
-                  child: PresenceListItem(
-                    borderColor: borderColor,
-                    textColor: textColor,
-                    presence: slicedPresenceList[rowIndex][columnIndex])
-                      .gridReveal(rowIndex,columnIndex),
+                child: Padding(
+                  // bottom padding for all rows except the last one
+                  padding: EdgeInsets.only(bottom: (rowIndex < slicedPresenceList.length - 1 ? DesignSpec.paddingLg : 0)),
+                  child: Center(
+                    child: PresenceListItem(
+                      borderColor: borderColor,
+                      textColor: textColor,
+                      presence: slicedPresenceList[rowIndex][columnIndex])
+                        .gridReveal(rowIndex,columnIndex),
+                  ),
                 )
               );
             } else {

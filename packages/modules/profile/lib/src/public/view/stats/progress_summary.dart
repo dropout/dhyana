@@ -30,42 +30,37 @@ class _ProgressSummaryState extends State<ProgressSummary> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: DesignSpec.spacingLg),
       child: Row(
+        mainAxisAlignment: .center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
-            child: ProgressSummaryItem(
-              key: const Key('progress_summary_sessions'),
-              oldValue: widget.oldProfile.statsReport.completedSessionsCount,
-              newValue: widget.updatedProfile.statsReport.completedSessionsCount,
-              label: ProfileLocalizations.of(context).sessionsPlural(
-                widget.updatedProfile.statsReport.completedSessionsCount
-              ),
-              animationDelay: Durations.short1,
-            )
+          ProgressSummaryItem(
+            key: const Key('progress_summary_sessions'),
+            oldValue: widget.oldProfile.statsReport.completedSessionsCount,
+            newValue: widget.updatedProfile.statsReport.completedSessionsCount,
+            label: ProfileLocalizations.of(context).sessionsPlural(
+              widget.updatedProfile.statsReport.completedSessionsCount
+            ),
+            animationDelay: Durations.short1,
           ),
-          const SizedBox(width: DesignSpec.spacingMd),
-          Expanded(
-            child: ProgressSummaryItem(
-              key: const Key('progress_summary_minutes'),
-              oldValue: widget.oldProfile.statsReport.completedMinutesCount,
-              newValue: widget.updatedProfile.statsReport.completedMinutesCount,
-              label: ProfileLocalizations.of(context).minutesPlural(
-                widget.updatedProfile.statsReport.completedMinutesCount
-              ),
-              animationDelay: Durations.medium1,
-            )
+          Gap.flexible(size: DesignSpec.spacing2xl),
+          ProgressSummaryItem(
+            key: const Key('progress_summary_minutes'),
+            oldValue: widget.oldProfile.statsReport.completedMinutesCount,
+            newValue: widget.updatedProfile.statsReport.completedMinutesCount,
+            label: ProfileLocalizations.of(context).minutesPlural(
+              widget.updatedProfile.statsReport.completedMinutesCount
+            ),
+            animationDelay: Durations.medium1,
           ),
-          const SizedBox(width: DesignSpec.spacingMd),
-          Expanded(
-            child: ProgressSummaryItem(
-              key: const Key('progress_summary_days'),
-              oldValue: widget.oldProfile.statsReport.completedDaysCount,
-              newValue: widget.updatedProfile.statsReport.completedDaysCount,
-              label: ProfileLocalizations.of(context).daysPlural(
-                widget.updatedProfile.statsReport.completedDaysCount
-              ),
-              animationDelay: Durations.long1,
-            )
+          Gap.flexible(size: DesignSpec.spacing2xl),
+          ProgressSummaryItem(
+            key: const Key('progress_summary_days'),
+            oldValue: widget.oldProfile.statsReport.completedDaysCount,
+            newValue: widget.updatedProfile.statsReport.completedDaysCount,
+            label: ProfileLocalizations.of(context).daysPlural(
+              widget.updatedProfile.statsReport.completedDaysCount
+            ),
+            animationDelay: Durations.long1,
           )
         ],
       ),

@@ -64,13 +64,15 @@ class const SessionCompletedScreen({
             return SignedInCompletedView(
               profileId: state.updateResult.updatedProfile.id,
               updateResult: state.updateResult,
-              profileSettings: state.updateResult.updatedProfile.settings,
+              showStatsOnFinishScreen: state.updateResult.updatedProfile.settings.showStatsOnFinishScreen,
+              usePresenceFeature: state.updateResult.updatedProfile.settings.usePresenceFeature,
             );
           case SessionCompletedSavedState():
             return SignedInCompletedView(
               profileId: state.updateResult.updatedProfile.id,
               updateResult: state.updateResult,
-              profileSettings: state.updateResult.updatedProfile.settings,
+              showStatsOnFinishScreen: state.updateResult.updatedProfile.settings.showStatsOnFinishScreen,
+              usePresenceFeature: state.updateResult.updatedProfile.settings.usePresenceFeature,
             );
           default:
             return SizedBox.shrink();
