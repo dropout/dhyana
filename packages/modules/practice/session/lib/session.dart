@@ -13,3 +13,4 @@ export 'src/public/model/update_profile_stats_result.dart';
 export 'src/public/view/session_result.dart';
 export 'src/public/view/signed_in_completed_view.dart';
 export 'src/public/view/signed_out_completed_view.dart';
+export 'src/public/view/session_history_list.dart';
