@@ -14,27 +14,39 @@ class SessionHistoryList extends StatelessWidget {
     super.key,
   });
 
+  Map<DateTime, List<Session>> _groupByDay() {
+    final groups = <DateTime, List<Session>>{};
+    for (final s in sessions) {
+      final day = DateTime(s.startTime.year, s.startTime.month, s.startTime.day);
+      groups.putIfAbsent(day, () => []).add(s);
+    }
+    return groups;
+  }
+
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          sessions.map((s) {
-            final startTime = DateFormat.Hm(locale.toString()).format(s.startTime);
-            final endTime = DateFormat.Hm(locale.toString()).format(s.endTime);
-            return AppCard(
-              padding: const EdgeInsets.all(DesignSpec.paddingMd),              
-              child: Stack(
-                children: [
-                  Column(                    
+    final groups = _groupByDay();
+
+    final children = <Widget>[
+      for (final entry in groups.entries) ...[
+        Text(
+          DateFormat.yMMMMd(locale.toString()).format(entry.key),
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        Gap.small(),
+        ...entry.value.map((s) {
+          final startTime = DateFormat.Hm(locale.toString()).format(s.startTime);
+          final endTime = DateFormat.Hm(locale.toString()).format(s.endTime);
+          return AppCard(
+            padding: const EdgeInsets.all(DesignSpec.paddingMd),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        DateFormat.yMMMMd(locale.toString()).format(s.startTime),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
                       Text(
                         '$startTime - $endTime',
                         style: Theme.of(context).textTheme.bodyMedium,
@@ -47,20 +59,24 @@ class SessionHistoryList extends StatelessWidget {
                       )
                     ],
                   ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Icon(
-                      (s.type == .timer) ? 
-                        Icons.timer_rounded : 
-                        Icons.music_note_rounded,
-                    )
-                  )
-                ],
-              ),
-            );
-          }).toList().intersperse(Gap.small())
-        )
+                ),
+                Icon(
+                  (s.type == .timer) ?
+                    Icons.timer_rounded :
+                    Icons.music_note_rounded,
+                )
+              ],
+            ),
+          );
+        }).toList().intersperse(Gap.small()),
+        Gap.medium(),
+      ]
+    ];
+
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(children),
       ),
     );
   }
