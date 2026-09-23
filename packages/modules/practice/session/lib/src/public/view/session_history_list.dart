@@ -5,14 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:core/core.dart';
 import 'package:session/src/public/model/session.dart';
 
-class SessionHistoryList extends StatelessWidget {
-
-  final List<Session> sessions;
-
-  const SessionHistoryList({
-    required this.sessions,
-    super.key,
-  });
+class const SessionHistoryList({
+  required final List<Session> sessions,
+  super.key,
+}) extends StatelessWidget {
 
   Map<DateTime, List<Session>> _groupByDay() {
     final groups = <DateTime, List<Session>>{};
@@ -31,7 +27,9 @@ class SessionHistoryList extends StatelessWidget {
       for (final entry in groups.entries) ...[
         Text(
           DateFormat.yMMMMd(locale.toString()).format(entry.key),
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Gap.small(),
         ...entry.value.map((s) {
@@ -81,12 +79,12 @@ class const SessionHistoryListItem({
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$st - $et',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  '$st — $et',
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
                   SessionLocalizations.of(context).minutesPluralWithNumber(duration.inMinutes),
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 )
