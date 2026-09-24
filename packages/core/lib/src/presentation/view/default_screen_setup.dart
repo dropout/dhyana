@@ -13,78 +13,38 @@ import 'package:core/src/presentation/design_spec.dart';
 /// A default screen setup widget that provides common UI elements and behaviors.
 /// This widget is designed to be flexible and customizable, allowing you
 /// to easily create new screens with a consistent look and feel across the app.
-class DefaultScreenSetup extends StatefulWidget {
-  /// The title of the screen, displayed in the app bar and as a sliver title.
-  final String title;
-
-  /// The list of slivers to display in the screen's scroll view.
-  final List<Widget> slivers;
-
-  /// An optional back button widget to display in the app bar.
-  /// If not provided, a default back button will be used.
-  final Widget? backButton;
-
-  /// Flag to enable or disable the app bar sliver.
-  /// When enabled, the app bar will have a title that fades in as you scroll down.
-  final bool enableAppBarSliver;
-
-  /// Flag to enable or disable the title sliver.
-  /// This is complementary to [enableAppBarSliver] and controls whether the
-  /// title is also displayed as a sliver below the app bar that fades out as you scroll down.
-  final bool enableTitleSliver;
-
-  /// Flag to enable or disable scrolling in the screen.
-  /// Useful for screens that have a fixed layout and do not require scrolling.
-  final bool enableScrolling;
-
-  /// Embed the CustomScrollView in a Scaffold.
-  /// Set to false if you want to provide your own Scaffold or use
-  /// this widget in a context where a Scaffold is not appropriate.
-  final bool enableScaffolding;
-
-  final bool enableTitleScrollEffect;
-
-  /// Color for text widget in the title
-  final Color? titleColor;
-
-  /// Background color for the Scaffold. Only applicable if [enableScaffolding] is true.
-  final Color? backgroundColor;
-
-  /// Background color for the AppBar. Only applicable if [enableAppBarSliver] is true.
-  final Color? appBarBackgroundColor;
-
-  /// Flag to enable or disable pull-to-refresh functionality.
-  final bool enablePullToRefresh;
-
-  /// An optional callback function that is called when the user performs
-  /// a pull-to-refresh action.
-  final Future<void> Function()? onRefresh;
-
-  const DefaultScreenSetup({
-    required this.title,
-    this.slivers = const [],
-    this.backButton,
-    this.enableScaffolding = true,
-    this.enableAppBarSliver = true,
-    this.enableTitleSliver = true,
-    this.enableScrolling = true,
-    this.enablePullToRefresh = false,
-    this.enableTitleScrollEffect = true,
-    this.titleColor,
-    this.backgroundColor,
-    this.appBarBackgroundColor,
-    this.onRefresh,
-    super.key,
-  });
-
+class const DefaultScreenSetup({
+  required final String title,
+  final List<Widget> slivers = const [],
+  final Widget? backButton,
+  final Widget? overlay,
+  final bool enableAppBarSliver = true,
+  final bool enableTitleSliver = true,
+  final bool enableScrolling = true,
+  final bool enableScaffolding = true,
+  final bool enableTitleScrollEffect = true,
+  final Color? titleColor,
+  final Color? backgroundColor,
+  final Color? appBarBackgroundColor,
+  final bool enablePullToRefresh = false,
+  final Future<void> Function()? onRefresh,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<DefaultScreenSetup> createState() => _DefaultScreenSetupState();
 }
 
 class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     with DefaultScreenSetupHelpersMixin {
+
+  // Used by parchment background to determine scroll offset
   ValueNotifier<double> scrollOffset = ValueNotifier<double>(0.0);
+
+  // Used to display title in appbar if scrolled upwards and normal 
+  // title in the sliver is going offscreen.
   double appBarTitleOpacity = 0.0;
+
+  // Background shader, title effect depends on data the controller provides.
   final ScrollController titleEffectScrollController = ScrollController();
 
   @override
@@ -198,9 +158,12 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
               ).createShader(bounds);
             },
             blendMode: BlendMode.dstIn,
-            child: Padding(
-              padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
-              child: body,
+            child: buildScaffoldBody(
+              context: context,
+              body: Padding(
+                padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
+                child: body,
+              ),
             ),
           ),
         ),
@@ -210,6 +173,16 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     }
   }
 
+  Widget buildScaffoldBody({required BuildContext context, required Widget body}) {
+    if (widget.overlay == null) return body;
+    return Stack(
+      children: [
+        body,
+        widget.overlay!,
+      ],
+    );    
+  }
+
   @override
   void dispose() {
     titleEffectScrollController.dispose();
@@ -217,6 +190,8 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   }
 }
 
+/// Helper mixin for default screen setup, 
+/// providing common widgets and app bar effects.
 mixin DefaultScreenSetupHelpersMixin {
   Widget buildLoadingSliver(BuildContext context) {
     return SliverFillRemaining(

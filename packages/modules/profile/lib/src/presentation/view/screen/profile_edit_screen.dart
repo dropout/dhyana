@@ -10,23 +10,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:profile/src/public/model/profile.dart';
 
-
-class ProfileEditScreen extends StatefulWidget {
-  final String profileId;
-
-  const ProfileEditScreen({required this.profileId, super.key});
-
+class const ProfileEditScreen({required final String profileId, super.key})
+    extends StatefulWidget {
   @override
   State<ProfileEditScreen> createState() => _ProfileEditScreenState();
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen>
     with DefaultScreenSetupHelpersMixin {
-  
   ProcessingState state = ProcessingState.idle;
   final GlobalKey<FormBuilderState> formStateKey =
       GlobalKey<FormBuilderState>();
-
   void _onSave(BuildContext context, Profile profile) {
     FormBuilderState? formState = formStateKey.currentState;
     if (formState != null && formState.saveAndValidate()) {
@@ -53,7 +47,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
       context.services.hapticsService.tap();
     } else {
       context.services.hapticsService.error();
-    }    
+    }
   }
 
   void _onFormChanged(BuildContext context) {
@@ -65,7 +59,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
   @override
   Widget build(BuildContext context) {
     return SmartBlocProvider<ProfileEditCubit, ProfileEditState>(
-      create: (context) => GetIt.I<ProfileEditCubit>()..loadProfile(widget.profileId),
+      create: (context) =>
+          GetIt.I<ProfileEditCubit>()..loadProfile(widget.profileId),
       builder: (BuildContext context, ProfileEditState state) {
         switch (state) {
           case ProfileEditLoadingState():
@@ -89,37 +84,33 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
               ),
             );
           case ProfileEditLoadedState():
-            return buildScaffolding(
-              context,
-              DefaultScreenSetup(
-                title: ProfileLocalizations.of(context).editProfile,
-                enableScaffolding: false,
-                slivers: [
-                  SliverSafeArea(
-                    top: false,
-                    sliver: SliverToBoxAdapter(
-                      // child: ProfileEditView(profile: state.profile),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSpec.paddingLg,
-                        ),
-                        child: ProfileEditForm(
-                          profile: state.profile,
-                          formStateKey: formStateKey,
-                          onChanged: () => _onFormChanged(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              actionButtonLayer: SafeArea(
+            return DefaultScreenSetup(
+              title: ProfileLocalizations.of(context).editProfile,
+              enableAppBarSliver: false,
+              overlay: SafeArea(
                 top: false,
                 child: Align(
                   alignment: const Alignment(0.0, 1.0),
                   child: buildOverlayActionButton(context, state.profile),
                 ),
               ),
+              slivers: [
+                SliverSafeArea(
+                  top: false,
+                  sliver: SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: DesignSpec.paddingLg,
+                      ),
+                      child: ProfileEditForm(
+                        profile: state.profile,
+                        formStateKey: formStateKey,
+                        onChanged: () => _onFormChanged(context),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             );
           default:
             return DefaultScreenSetup(
@@ -158,26 +149,32 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
   }
 
   Widget buildOverlayActionButton(BuildContext context, Profile profile) {
-    switch (state) {
-      case ProcessingState.idle:
-        return AppButton(
-          text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
-          onTap: () => _onSave(context, profile),
-        );
-      case ProcessingState.processing:
-        return AppButton(
-          text: context.coreL10n.profileSaveButtonSaving.toUpperCase(),
-        );
-      case ProcessingState.completed:
-        return AppButton(
-          text: context.coreL10n.profileSaveButtonSaved.toUpperCase(),
-          bColor: Colors.green.shade600,
-        );
-      case ProcessingState.error:
-        return AppButton(
-          text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
-          onTap: () => _onSave(context, profile),
-        );
-    }
+    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+    return AnimatedOpacity(
+      duration: isKeyboardOpen ? Duration.zero : Durations.short4,
+      opacity: isKeyboardOpen ? 0.0 : 1.0,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: DesignSpec.spacingLg),
+        child: switch (state) {
+          .idle => AppButton.large(
+            text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
+            onTap: () => _onSave(context, profile),
+          ),
+          .processing => AppButton.large(
+            text: context.coreL10n.profileSaveButtonSaving.toUpperCase(),
+          ),
+          .completed => AppButton.large(
+            text: context.coreL10n.profileSaveButtonSaved.toUpperCase(),
+            bColor: Colors.green.shade600,
+          ),
+          .error => AppButton.large(
+            text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
+            onTap: () => _onSave(context, profile),
+          ),
+        },
+      ),
+    );
+
   }
+
 }

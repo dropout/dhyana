@@ -6,41 +6,41 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'decoration.dart';
 
-class AppTextInput extends StatelessWidget {
-  final String name;
-  final String label;
-  final Key? formFieldKey;
-  final bool obscureText;
-  final String? initialValue;  
-  final Function(String?)? onChanged;
-  final FormFieldValidator<String>? validator;
-
-  const AppTextInput({
-    required this.name,
-    required this.label,
-    this.formFieldKey,
-    this.obscureText = false,
-    this.initialValue,
-    this.onChanged,
-    this.validator,
-    super.key,
-  });
+class const AppTextInput({
+  required final String name,
+  required final String label,
+  final Key? formFieldKey,
+  final bool obscureText = false,
+  final String? initialValue,
+  final Function(String?)? onChanged,
+  final FormFieldValidator<String>? validator,
+  final TextInputType keyboardType = TextInputType.text,
+  super.key,
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: Theme.of(context).textTheme.labelLarge),
+        Text(
+          label, 
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w500,
+            color: AppColors.charcoal,
+          )
+        ),
         Gap.xs(),
         FormBuilderTextField(
           key: formFieldKey,
           name: name,
           obscureText: obscureText,
           initialValue: initialValue,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+          keyboardType: keyboardType,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
           onChanged: onChanged,
           textAlignVertical: TextAlignVertical.center,
           decoration: getTextInputDecoration(context),
@@ -51,13 +51,8 @@ class AppTextInput extends StatelessWidget {
           // that would cause the TextField to shrink.
           // Instead, we render the error text separately below.
           errorBuilder: (_, _) => SizedBox.shrink(),
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.next,
-          // cursorHeight: 18.0,
         ),
-
         Gap.xs(),
-
         // Render error text separately so that the
         // TextInput's height doesn't change on error
         // Also defer the building after everything else
@@ -75,7 +70,7 @@ class AppTextInput extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
               child: Text(
                 errorText,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(                  
                   color: Theme.of(context).colorScheme.error,
                   fontWeight: FontWeight.bold,
                 ),

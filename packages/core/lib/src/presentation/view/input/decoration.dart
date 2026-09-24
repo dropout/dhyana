@@ -3,7 +3,10 @@ import 'package:material_ui/material_ui.dart';
 
 InputDecoration getTextInputDecoration(BuildContext context) {
 
+  final borderRadius = BorderRadius.circular(DesignSpec.paddingSm); 
+
   final border = OutlineInputBorder(
+    borderRadius: borderRadius,
     borderSide: BorderSide(
       color: AppColors.backgroundPaperLight,
       width: 2.0,
@@ -19,6 +22,7 @@ InputDecoration getTextInputDecoration(BuildContext context) {
     enabledBorder: border, // mute enabled border color change
     focusedBorder: border, // mute focus border color change
     errorBorder: OutlineInputBorder(
+      borderRadius: borderRadius,
       borderSide: BorderSide(
         color: Theme.of(context).colorScheme.error.withValues(alpha: 0.5),
         width: 2.0,

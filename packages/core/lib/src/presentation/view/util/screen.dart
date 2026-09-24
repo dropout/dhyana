@@ -56,7 +56,6 @@ mixin ScreenHelperMixin {
     }
   }
 
-
   double screenWidth(BuildContext context) =>
       MediaQuery.of(context).size.width;
 

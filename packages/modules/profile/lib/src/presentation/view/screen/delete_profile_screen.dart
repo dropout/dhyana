@@ -108,11 +108,11 @@ class DeleteProfileScreenContent extends StatelessWidget {
       children: [
         SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(AppThemeData.spacingMd),
+            padding: const EdgeInsets.all(DesignSpec.spacingMd),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: AppThemeData.spacingXl),
+                const SizedBox(height: DesignSpec.spacingXl),
                 Text(
                   ProfileLocalizations.of(context).deleteProfileScreenTitle,
                   textAlign: TextAlign.center,
@@ -120,13 +120,13 @@ class DeleteProfileScreenContent extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: AppThemeData.spacingSm),
+                const SizedBox(height: DesignSpec.spacingSm),
                 Text(
                   ProfileLocalizations.of(context).deleteProfileScreenText,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                const SizedBox(height: AppThemeData.spacingXl),
+                const SizedBox(height: DesignSpec.spacingXl),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -137,7 +137,7 @@ class DeleteProfileScreenContent extends StatelessWidget {
                       onTap: () => _signInWithGoogle(context),
                     ),
                     if (Platform.isIOS)
-                      const SizedBox(height: AppThemeData.spacingSm),
+                      const SizedBox(height: DesignSpec.spacingSm),
                     if (Platform.isIOS)
                       AppButton(
                         text: AuthLocalizations.of(context).loginSigninApple,

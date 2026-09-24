@@ -48,7 +48,7 @@ class BarChartInfoTriggerBox extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingMd),
+          padding: const EdgeInsets.all(DesignSpec.paddingMd),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

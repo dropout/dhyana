@@ -47,7 +47,7 @@ class const ProfileImagePlaceholder({
             child: Text(
               initial,
               style: const TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 100, // Set large enough to scale down
                 fontWeight: FontWeight.bold,
               ),

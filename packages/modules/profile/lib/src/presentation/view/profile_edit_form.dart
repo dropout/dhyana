@@ -77,7 +77,10 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         children: [
           Text(
             ProfileLocalizations.of(context).profileImageLabel,
-            style: Theme.of(context).textTheme.labelLarge,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w500,
+              color: AppColors.charcoal,
+            ),
           ),
           Gap.xs(),
           FormBuilderProfileImagePicker(
@@ -98,6 +101,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             onChanged: (_) =>
               _formKey.currentState?.fields['location']?.validate(),
           ),
+          Gap.medium(),
         ],
       )
     );
@@ -110,6 +114,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       return [
         AppTextInput(
           name: 'lastName',
+          keyboardType: .name,
           label: ProfileLocalizations.of(context).profileLastnameLabel,
           key: const Key('profile_edit_form_last_name_input'),
           initialValue: widget.profile.lastName,
@@ -122,6 +127,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         Gap.medium(),
         AppTextInput(
           name: 'firstName',
+          keyboardType: .name,
           label: ProfileLocalizations.of(context).profileFirstnameLabel,
           key: const Key('profile_edit_form_first_name_input'),
           initialValue: widget.profile.firstName,

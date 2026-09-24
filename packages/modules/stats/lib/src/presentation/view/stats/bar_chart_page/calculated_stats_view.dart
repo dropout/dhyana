@@ -90,7 +90,7 @@ class _CalculatedStatsViewState extends State<CalculatedStatsView>
           borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(AppThemeData.paddingLg),
+          padding: const EdgeInsets.all(DesignSpec.paddingLg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

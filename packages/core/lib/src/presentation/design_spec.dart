@@ -1,11 +1,21 @@
 import 'package:material_ui/material_ui.dart';
 
+/// Contains design-related constants
+/// and theming information for the application.
 class DesignSpec {
-  static const String fontFamilyName = 'packages/assets/RobotoSlab';
-  static const String condensedFontFamilyName = 'packages/assets/RobotoCondensed';
 
+  // Colors
+  static const AppColors colors = AppColors();
+
+  // Fonts
+  static const String fontFamilyName = 'packages/assets/RobotoSlab';
+  static const String condensedFontFamilyName =
+      'packages/assets/RobotoCondensed';      
+
+  // Responsive spacing and sizing
   static const double maxContentWidth = 512.0;
 
+  // Spacing constants
   static const double spacingXxs = 2.0;
   static const double spacingXs = 4.0;
   static const double spacingSm = 8.0;
@@ -15,7 +25,10 @@ class DesignSpec {
   static const double spacing2xl = 48.0;
   static const double spacing3xl = 64.0;
   static const double spacing4xl = 90.0;
+  static const double bottomActionSpacing = buttonHeightLg + padding2Xl;
+  static const Widget bottomActionSpacingWidget = SizedBox(height: bottomActionSpacing);
 
+  // Padding constants
   static const double paddingXxs = 2.0;
   static const double paddingXs = 4.0;
   static const double paddingSm = 8.0;
@@ -25,19 +38,25 @@ class DesignSpec {
   static const double padding2Xl = 32.0;
   static const double padding3Xl = 48.0;
   static const double padding4Xl = 64.0;
-
   static const double screenPadding = spacingMd;
 
+  // Border radius
   static const double borderRadiusSm = 4.0;
   static const double borderRadiusMd = 8.0;
   static const double borderRadiusLg = 16.0;
 
+  // Circle sizes
   static const double circleSm = 48.0;
   static const double circleMd = 64.0;
   static const double circleLg = 96.0;
   static const double circleXl = 128.0;
 
-  static const double inputHeight = 42.0;
+  // Input fields
+  static const double inputHeight = 48.0;
+
+  static const double buttonHeightLg = 60.0;
+
+  // Effects
   static const defaultBoxShadow = [
     BoxShadow(color: Colors.black26, offset: Offset(1, 2), blurRadius: 1.0),
   ];
@@ -48,8 +67,6 @@ class DesignSpec {
   static const double breakpointMd = 768.0;
   static const double breakpointLg = 1024.0;
   static const double breakpointXl = 1280.0;
-
-  final AppColors colors = const AppColors();
 
   ThemeData get themeData {
     ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -82,48 +99,7 @@ class DesignSpec {
   }
 }
 
-class AppThemeData {
-  static const double spacingXxs = 2.0;
-  static const double spacingXs = 4.0;
-  static const double spacingSm = 8.0;
-  static const double spacingMd = 16.0;
-  static const double spacingLg = 24.0;
-  static const double spacingXl = 32.0;
-  static const double spacing2xl = 48.0;
-  static const double spacing3xl = 64.0;
-  static const double spacing4xl = 90.0;
-
-  static const double paddingXxs = 2.0;
-  static const double paddingXs = 4.0;
-  static const double paddingSm = 8.0;
-  static const double paddingMd = 12.0;
-  static const double paddingLg = 16.0;
-  static const double paddingXl = 21.0;
-  static const double padding2Xl = 32.0;
-  static const double padding3Xl = 48.0;
-  static const double padding4Xl = 64.0;
-
-  static const double borderRadiusSm = 4.0;
-  static const double borderRadiusMd = 8.0;
-  static const double borderRadiusLg = 16.0;
-
-  static const double circleSm = 48.0;
-  static const double circleMd = 64.0;
-  static const double circleLg = 96.0;
-  static const double circleXl = 128.0;
-
-  static const double inputHeight = 42.0;
-
-  static const defaultBoxShadow = [
-    BoxShadow(color: Colors.black26, offset: Offset(1, 2), blurRadius: 1.0),
-  ];
-
-  final bool isDark;
-  AppThemeData({required this.isDark});
-}
-
 class AppColors {
-
   static const gold = Color(0xFFEFBF04);
   static const charcoal = Color(0xFF4A4A4A);
   static const burgundy = Color(0xFF660033);
@@ -137,7 +113,7 @@ class AppColors {
   static const mintGreen = Color(0xFFADEBB3);
   static const crimsonRed = Color(0xFFB22222);
   static const blushPink = Color(0xFFFF7782);
-  
+
   static const Color backgroundPaper = Color(0xFFE0CD95);
   static const Color backgroundPaperLight = Color(0xFFF4EDD8);
   static const Color backgroundPaperDark = Color(0xFFD7BE75);
@@ -146,9 +122,8 @@ class AppColors {
   static const Color redAccent = Color(0xFFE4002B);
   static const Color splashColor = Colors.black;
 
-
   static const Color buttonForeground = backgroundPaperLight;
   static const Color buttonBackground = Colors.black;
 
-  const AppColors();
+  const new();
 }

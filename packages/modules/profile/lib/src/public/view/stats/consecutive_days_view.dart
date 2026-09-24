@@ -47,7 +47,7 @@ class _ConsecutiveDaysViewState extends State<ConsecutiveDaysView> {
         color: Colors.black,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppThemeData.paddingXl),
+        padding: const EdgeInsets.all(DesignSpec.paddingXl),
         child: Text(value.toString(),
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: AppColors.backgroundPaperLight,
