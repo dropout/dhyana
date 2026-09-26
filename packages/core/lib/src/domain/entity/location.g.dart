@@ -14,6 +14,6 @@ _Location _$LocationFromJson(Map<String, dynamic> json) => _Location(
 
 Map<String, dynamic> _$LocationToJson(_Location instance) => <String, dynamic>{
   'name': instance.name,
-  'latLng': instance.latLng,
+  'latLng': instance.latLng.toJson(),
   'geoHash': instance.geoHash,
 };

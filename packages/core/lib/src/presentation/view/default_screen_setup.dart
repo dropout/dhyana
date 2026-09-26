@@ -251,20 +251,20 @@ mixin DefaultScreenSetupHelpersMixin {
     Color? color,
     bool enableTitleSliver = true,
   }) {
-    Offset of;
-    double o;
+    Offset offset;
+    double opacity;
     if (titleOpacity == null || enableTitleSliver == false) {
-      of = Offset(0, 0);
-      o = 1.0;
+      offset = Offset(0, 0);
+      opacity = 1.0;
     } else {
-      of = Offset(0, DesignSpec.spacingSm * (1.0 - titleOpacity));
-      o = titleOpacity;
+      offset = Offset(0, DesignSpec.spacingSm * (1.0 - titleOpacity));
+      opacity = titleOpacity;
     }
 
     return Transform.translate(
-      offset: of,
+      offset: offset,
       child: Opacity(
-        opacity: o,
+        opacity: opacity,
         child: Text(
           titleText,
           style: Theme.of(context).textTheme.headlineSmall!

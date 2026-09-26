@@ -87,12 +87,12 @@ class AppButton extends StatelessWidget {
       highlightElevation: 0,
       disabledElevation: 0,
       shape: const StadiumBorder(),
-      // fillColor: (onTap == null) ? Color.lerp(bColor, Colors.black, 0.2) : bColor,
       fillColor: bColor,
       clipBehavior: Clip.none,
       child: Text(text,
         style: textStyle.copyWith(
-          color: (onTap == null)
+          // in case of missing handler apply disabled style
+          color: (onTap == null) 
             ? Color.lerp(textStyle.color, Colors.black, 0.2)
             : textStyle.color,
         ),

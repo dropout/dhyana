@@ -64,7 +64,7 @@ class CoreLocalizationsEn extends CoreLocalizations {
   String get signOutSuccessfulMessage => 'Successfully signed out!';
 
   @override
-  String get locationInputPlaceholder => 'Select your city';
+  String get locationInputPlaceholder => 'Search your city...';
 
   @override
   String get locationInputNoSelection => 'No city selected yet';
@@ -75,6 +75,9 @@ class CoreLocalizationsEn extends CoreLocalizations {
   @override
   String get locationInputErrorMessage =>
       'An unexpected error occured.\nPlease try again later.';
+
+  @override
+  String get locationSearchInputPlaceholder => 'Start typing your city name...';
 
   @override
   String minutesPlural(num count) {

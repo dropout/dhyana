@@ -203,7 +203,7 @@ abstract class CoreLocalizations {
   /// No description provided for @locationInputPlaceholder.
   ///
   /// In en, this message translates to:
-  /// **'Select your city'**
+  /// **'Search your city...'**
   String get locationInputPlaceholder;
 
   /// No description provided for @locationInputNoSelection.
@@ -223,6 +223,12 @@ abstract class CoreLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occured.\nPlease try again later.'**
   String get locationInputErrorMessage;
+
+  /// No description provided for @locationSearchInputPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Start typing your city name...'**
+  String get locationSearchInputPlaceholder;
 
   /// No description provided for @minutesPlural.
   ///

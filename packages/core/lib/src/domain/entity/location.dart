@@ -10,6 +10,7 @@ sealed class Location with _$Location {
 
   const Location._();
 
+  @JsonSerializable(explicitToJson: true)
   const factory Location({
     required String name,
     required LatLng latLng,

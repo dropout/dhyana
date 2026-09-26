@@ -79,8 +79,8 @@ class FirebaseProvider {
   FirebaseRemoteConfig get remoteConfig =>
     FirebaseRemoteConfig.instance;
 
-  FirebaseFunctions get functions =>
-    FirebaseFunctions.instanceFor(region: "europe-central2");
+  FirebaseFunctions getFirebaseFunctions(String region) =>
+    FirebaseFunctions.instanceFor(region: region);
 
   bool get isEmulatorUsageEnabled => _useEmulator;
 

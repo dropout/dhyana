@@ -1,4 +1,9 @@
+import 'package:core/src/presentation/view/util/app_button.dart';
+import 'package:core/src/presentation/view/util/app_map.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:dart_geohash/dart_geohash.dart';
+
 import 'package:core/src/domain/enum/processing_state.dart';
 import 'package:core/src/domain/entity/city_search_result.dart';
 import 'package:core/src/domain/entity/location.dart';
@@ -6,13 +11,10 @@ import 'package:core/src/presentation/design_spec.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
 import 'package:core/src/presentation/view/util/debouncer.dart';
 import 'package:core/src/presentation/view/util/gap.dart';
-import 'package:material_ui/material_ui.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'decoration.dart';
 
-class FormBuilderCitySelector extends FormBuilderField<Location> {
-
+class FormBuilderCitySelector extends FormBuilderField<Location?> {
   final String label;
 
   FormBuilderCitySelector({
@@ -30,44 +32,35 @@ class FormBuilderCitySelector extends FormBuilderField<Location> {
     super.onReset,
     super.key,
   }) : super(
-    builder: (FormFieldState<Location?> field) {
-      return CitySelectorInput(
-        label: label,
-        placeholderText: field.context.coreL10n.locationInputPlaceholder,
-        initialLocation: field.value,
-        onChanged: (location) => field.didChange(location),
-      );
-    },
-  );
+         builder: (FormFieldState<Location?> field) {
+           return CitySelectorInput(
+             label: label,
+             placeholderText: field.context.coreL10n.locationInputPlaceholder,
+             initialLocation: field.value,
+             onChanged: (location) => field.didChange(location),
+           );
+         },
+       );
 
   @override
   FormBuilderCitySelectorState createState() => FormBuilderCitySelectorState();
 }
 
 class FormBuilderCitySelectorState
-  extends FormBuilderFieldState<FormBuilderCitySelector, Location> {}
+    extends FormBuilderFieldState<FormBuilderCitySelector, Location?> {}
 
-class CitySelectorInput extends StatefulWidget {
-
-  final String label;
-  final Location? initialLocation;
-  final void Function(Location location)? onChanged;
-  final String placeholderText;
-
-  const CitySelectorInput({
-    required this.label,
-    required this.initialLocation,
-    this.onChanged,
-    this.placeholderText = 'Select a city',
-    super.key,
-  });
-
+class const CitySelectorInput({
+  required final String label,
+  final Location? initialLocation,
+  final void Function(Location? location)? onChanged,
+  final String placeholderText = 'Select a city',
+  super.key,
+}) extends StatefulWidget {
   @override
   State<CitySelectorInput> createState() => _CitySelectorInputState();
 }
 
 class _CitySelectorInputState extends State<CitySelectorInput> {
-
   late final TextEditingController controller;
   Location? selectedLocation;
 
@@ -75,7 +68,6 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
   void initState() {
     controller = TextEditingController();
     controller.text = locationName;
-
     super.initState();
   }
 
@@ -91,32 +83,85 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
 
   bool get hasSelectedValue => selectedLocation != null;
   bool get hasInitialValue => widget.initialLocation != null;
+  bool get hasLocation => hasSelectedValue || hasInitialValue;
+  Location get location =>
+      hasSelectedValue ? selectedLocation! : widget.initialLocation!;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.label,
-            style: Theme.of(context).textTheme.labelLarge,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w500,
+            color: AppColors.charcoal,
           ),
-          Gap.xs(),
-          Stack(
-            fit: StackFit.loose,
-            clipBehavior: Clip.none,
-            children: [
-              TextField(
-                controller: controller,
-                decoration: getTextInputDecoration(context),
-                style: getTextStyle(context),
-                readOnly: true,
-                onTap: () => showCitySelectorSheet(context),
-              ),
-            ],
-          )
-        ],
+        ),
+        Gap.xs(),
+        TextField(
+          controller: controller,
+          decoration: getTextInputDecoration(context),
+          style: getTextStyle(context),
+          readOnly: true,
+          onTap: () => showCitySelectorSheet(context),
+        ),
+        Gap.medium(),
+        buildMapArea(context),
+        DesignSpec.bottomActionSpacingWidget,
+      ],
+    );
+  }
+
+  Widget buildMapArea(BuildContext context) {
+    if (hasLocation) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+        child: SizedBox(
+          height: 256,
+          child: AppMap(
+            name: location.name,
+            latitude: location.latLng.latitude,
+            longitude: location.latLng.longitude,
+            zoom: 10,
+          ),
+        ),
       );
+    }
+
+    return SizedBox(      
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.backgroundPaperLight,
+          borderRadius: BorderRadius.circular(DesignSpec.borderRadiusMd),
+        ),
+        // height: 256,
+        padding: const EdgeInsets.all(DesignSpec.paddingMd),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Why set a location?',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.charcoal,
+              ),
+            ),
+            Gap.small(),
+            Text(
+              'Adding your city lets you discover others who were practicing alongside you, right in your area.\n\nYour location is never shared, it is only used to determine nearby practitioners.',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+        
+          ],
+        ),
+      ),
+    );
+
+
+
+
   }
 
   void showCitySelectorSheet(BuildContext context) {
@@ -134,8 +179,13 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
             location: widget.initialLocation,
             onCitySelected: (location) {
               setState(() {
-                selectedLocation = location;
-                controller.text = location.name;
+                if (location == null) {
+                  selectedLocation = null;
+                  controller.text = widget.placeholderText;
+                } else {
+                  selectedLocation = location;
+                  controller.text = location.name;
+                }
               });
               widget.onChanged?.call(location);
               Navigator.of(context).pop();
@@ -150,36 +200,30 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
   // to show placeholder style.
   TextStyle getTextStyle(BuildContext context) {
     if (widget.initialLocation == null) {
-      return Theme.of(context).textTheme.bodyLarge!.copyWith(
+      return Theme.of(context).textTheme.titleLarge!.copyWith(
         fontWeight: FontWeight.bold,
+        fontSize: 20,
         color: Colors.grey,
       );
     } else {
-      return Theme.of(context).textTheme.bodyLarge!.copyWith(
-        fontWeight: FontWeight.bold,
-      );
+      return Theme.of(context).textTheme.titleLarge!
+          .copyWith(fontWeight: FontWeight.bold, fontSize: 20);
     }
   }
 }
 
-class CitySelectorSheet extends StatefulWidget {
-
-  final Location? location;
-  final void Function(Location location)? onCitySelected;
-
-  const CitySelectorSheet({
-    required this.location,
-    this.onCitySelected,
-    super.key,
-  });
-
+class const CitySelectorSheet({
+  required final Location? location,
+  required final void Function(Location? location)? onCitySelected,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<CitySelectorSheet> createState() => _CitySelectorSheetState();
 }
 
 class _CitySelectorSheetState extends State<CitySelectorSheet> {
-
   TextEditingController controller = TextEditingController();
+
   String searchQuery = '';
   List<CitySearchResult> searchResults = [];
 
@@ -214,7 +258,6 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
   }
 
   void searchCities(BuildContext context, String queryString) async {
-
     // Extract crashlytics service for safe use of context in async calls
     final crashlyticsService = context.services.crashlyticsService;
 
@@ -222,8 +265,9 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
       setState(() {
         loadingState = ProcessingState.processing;
       });
-      final result = await context.services.functionsService
-        .citySearch(queryString: queryString);
+      final result = await context.services.functionsService.citySearch(
+        queryString: queryString,
+      );
       setState(() {
         searchQuery = queryString;
         searchResults = result;
@@ -241,7 +285,10 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     }
   }
 
-  void selectCity(BuildContext context, CitySearchResult citySearchResult) async {
+  void selectCity(
+    BuildContext context,
+    CitySearchResult citySearchResult,
+  ) async {
     final crashlyticsService = context.services.crashlyticsService;
 
     // Get a location with latlng for the selected city
@@ -251,20 +298,20 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
     try {
       final fullResult = await context.services.functionsService
-        .getCityLocation(citySearchResult: citySearchResult);
+          .getCityLocation(citySearchResult: citySearchResult);
 
       // Just in case for some reason service cannot return location
       // for the CitySearchResult
       if (fullResult.location == null) {
-          setState(() {
-            loadingState = ProcessingState.error;
-          });
-          crashlyticsService.recordError(
-            exception: Exception('Location data is null'),
-            stackTrace: StackTrace.current,
-            reason: 'Error getting location for city: ${citySearchResult.name}',
-          );
-          return;
+        setState(() {
+          loadingState = ProcessingState.error;
+        });
+        crashlyticsService.recordError(
+          exception: Exception('Location data is null'),
+          stackTrace: StackTrace.current,
+          reason: 'Error getting location for city: ${citySearchResult.name}',
+        );
+        return;
       }
       final location = Location(
         name: fullResult.name,
@@ -286,7 +333,10 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         loadingState = ProcessingState.error;
       });
     }
+  }
 
+  void clearSelection(BuildContext context) {
+    widget.onCitySelected?.call(null);
   }
 
   @override
@@ -299,23 +349,19 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
           TextField(
             controller: controller,
             decoration: getTextInputDecoration(context).copyWith(
-              hintText: 'Type in the city name',
-              hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              hintText: context.coreL10n.locationSearchInputPlaceholder,
+              hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Colors.grey,
+                fontSize: 20,
+                color: Colors.grey
               ),
             ),
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge!
+                .copyWith(fontWeight: FontWeight.bold),
             onChanged: (value) => handleTextFieldChange(context, value),
-            // onChanged: (value) => debouncer(() => searchCities(context, value)),
           ),
-          Expanded(
-            child: buildBottomPart(context),
-          )
-
-        ]
+          Expanded(child: buildBottomPart(context)),
+        ],
       ),
     );
   }
@@ -323,9 +369,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
   Widget buildBottomPart(BuildContext context) {
     switch (loadingState) {
       case ProcessingState.processing:
-        return Center(
-          child: CircularProgressIndicator(),
-        );
+        return Center(child: CircularProgressIndicator());
       case ProcessingState.error:
         return buildError(context);
       case ProcessingState.idle:
@@ -334,24 +378,20 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         return SingleChildScrollView(
           child: Column(
             children: searchResults.map((result) {
-                return ListTile(
-                  title: Text(result.name),
-                  subtitle: Text(result.placeId),
-                  onTap: () => selectCity(context, result),
-                );
-              }).toList(),
-            ),
-          );
+              return ListTile(
+                title: Text(result.name),
+                subtitle: Text(result.placeId),
+                onTap: () => selectCity(context, result),
+              );
+            }).toList(),
+          ),
+        );
     }
   }
 
-
-
   Widget buildIdle(BuildContext context) {
     if (widget.location == null) {
-      return Center(
-        child: Text(context.coreL10n.locationInputNoSelection),
-      );
+      return Center(child: Text(context.coreL10n.locationInputNoSelection));
     } else {
       return Center(
         child: Column(
@@ -360,14 +400,19 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
           children: [
             Text(
               context.coreL10n.locationInputCurrentSelection,
+              style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
             Text(
               widget.location!.name,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            Gap.medium(),
+            AppButton.small(
+              text: 'Clear Selection'.toUpperCase(),
+              onTap: () => clearSelection(context),
             ),
           ],
         ),
@@ -384,25 +429,24 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
           TextField(
             controller: controller,
             decoration: getTextInputDecoration(context),
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge!
+                .copyWith(fontWeight: FontWeight.bold),
             onChanged: (value) => debouncer(() => searchCities(context, value)),
           ),
-          Expanded(child: SingleChildScrollView(
-            child: Column(
-              children: searchResults.map((result) {
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: searchResults.map((result) {
                   return ListTile(
                     tileColor: AppColors.red,
                     title: Text(result.name),
                     subtitle: Text(result.placeId),
                     onTap: () => selectCity(context, result),
-
                   );
                 }).toList(),
               ),
-            )
-          )
+            ),
+          ),
         ],
       ),
     );
@@ -412,16 +456,13 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          Icons.warning_amber_rounded,
-          size: 64,
-        ),
+        Icon(Icons.warning_amber_rounded, size: 64),
         Gap.medium(),
         Text(
           context.coreL10n.locationInputErrorMessage,
           textAlign: TextAlign.center,
         ),
-      ]
+      ],
     );
   }
 

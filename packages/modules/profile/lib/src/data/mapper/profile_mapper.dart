@@ -13,6 +13,7 @@ extension ProfileEntityMapper on ProfileEntity {
       photoUrl: photoUrl,
       photoBlurhash: photoBlurhash,
       settings: settings.toApi(),
+      location: location,
       signupDate: signupDate,
       statsReport: statsReport.toApi(),
       completed: completed,

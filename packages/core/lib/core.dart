@@ -99,6 +99,7 @@ export 'src/presentation/view/util/app_error_card.dart';
 export 'src/presentation/view/util/app_error_display.dart';
 export 'src/presentation/view/util/app_loading_display.dart';
 export 'src/presentation/view/util/app_loading_indicator.dart';
+export 'src/presentation/view/util/app_map.dart';
 export 'src/presentation/view/util/app_snack_bar.dart';
 export 'src/presentation/view/util/app_version_number.dart';
 export 'src/presentation/view/util/debouncer.dart';

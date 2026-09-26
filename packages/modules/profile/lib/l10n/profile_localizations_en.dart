@@ -25,10 +25,10 @@ class ProfileLocalizationsEn extends ProfileLocalizations {
   String get profileImageLabel => 'Profile image';
 
   @override
-  String get profileFirstnameLabel => 'Firstname';
+  String get profileFirstnameLabel => 'Firstname (required)';
 
   @override
-  String get profileLastnameLabel => 'Lastname';
+  String get profileLastnameLabel => 'Lastname (required)';
 
   @override
   String get profileLocationLabel => 'City';

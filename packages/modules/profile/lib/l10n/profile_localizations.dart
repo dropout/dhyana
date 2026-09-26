@@ -134,13 +134,13 @@ abstract class ProfileLocalizations {
   /// No description provided for @profileFirstnameLabel.
   ///
   /// In en, this message translates to:
-  /// **'Firstname'**
+  /// **'Firstname (required)'**
   String get profileFirstnameLabel;
 
   /// No description provided for @profileLastnameLabel.
   ///
   /// In en, this message translates to:
-  /// **'Lastname'**
+  /// **'Lastname (required)'**
   String get profileLastnameLabel;
 
   /// No description provided for @profileLocationLabel.

@@ -25,10 +25,10 @@ class ProfileLocalizationsHu extends ProfileLocalizations {
   String get profileImageLabel => 'Profil kép';
 
   @override
-  String get profileFirstnameLabel => 'Keresztnév';
+  String get profileFirstnameLabel => 'Keresztnév (kötelező)';
 
   @override
-  String get profileLastnameLabel => 'Vezetéknév';
+  String get profileLastnameLabel => 'Vezetéknév (kötelező)';
 
   @override
   String get profileLocationLabel => 'Város';
@@ -145,7 +145,7 @@ class ProfileLocalizationsHu extends ProfileLocalizations {
 
   @override
   String get statsNextMilestoneCompletedText =>
-      'Gratulálunk az új mérföldkő eléréséhez!';
+      'Gratulálunk az új mérföldkőhöz!';
 
   @override
   String sessionsPlural(num count) {

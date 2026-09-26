@@ -64,7 +64,7 @@ class CoreLocalizationsHu extends CoreLocalizations {
   String get signOutSuccessfulMessage => 'Sikeresen kijelentkeztél!';
 
   @override
-  String get locationInputPlaceholder => 'Válaszz egy várost';
+  String get locationInputPlaceholder => 'Keresd meg a városodat...';
 
   @override
   String get locationInputNoSelection => 'Nincs kiválasztva város';
@@ -75,6 +75,10 @@ class CoreLocalizationsHu extends CoreLocalizations {
   @override
   String get locationInputErrorMessage =>
       'Váratlan hiba történt.\nKérlek próbáld újra később.';
+
+  @override
+  String get locationSearchInputPlaceholder =>
+      'Kezdd el beírni a városod nevét...';
 
   @override
   String minutesPlural(num count) {

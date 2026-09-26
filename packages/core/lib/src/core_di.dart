@@ -67,7 +67,9 @@ extension CoreDependencyInjection on GetIt {
     );
 
     registerLazySingleton<FunctionsService>(
-      () => FirebaseFunctionsService(get<FirebaseProvider>().functions),
+      () => FirebaseFunctionsService(
+        get<FirebaseProvider>().getFirebaseFunctions('europe-west3')
+      ),
     );
 
     registerLazySingleton<HapticsService>(DefaultHapticsService.new);

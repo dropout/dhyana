@@ -217,8 +217,8 @@ return $default(_that.name,_that.latLng,_that.geoHash);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _Location extends Location {
   const _Location({required this.name, required this.latLng, required this.geoHash}): super._();
   factory _Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
