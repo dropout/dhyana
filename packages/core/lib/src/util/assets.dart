@@ -22,6 +22,15 @@ class Assets {
     'packages/assets/shaders/linear_gradient_mask.frag';
   static const String shaderParchmentNoise =
     'packages/assets/shaders/parchment_noise.frag';
+  static const String shaderInsetShadow =
+    'packages/assets/shaders/inset_shadow.frag';
+
+  static const List<String> allShaders = [
+    shaderGradientFlow,
+    shaderLinearGradientMask,
+    shaderParchmentNoise,
+    shaderInsetShadow,
+  ];
     
   // ML Models
   static const String nswfModel = 

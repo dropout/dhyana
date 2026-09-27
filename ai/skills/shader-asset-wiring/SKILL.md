@@ -21,11 +21,7 @@ Use after a `.frag` shader has been added to `packages/assets/shaders/` and need
    ```
 
    Use a descriptive camelCase identifier prefixed with `shader`. The value must be the package asset key, not the shorter pubspec path.
-4. In `apps/mobile_app/lib/bootstrap/initializer.dart`, preload the shader alongside the existing shader calls:
-
-   ```dart
-   await services.shaderService.loadShader(Assets.shaderExampleName);
-   ```
+4. Add the new constant to tha `Assets.allShaders` list in `packages/core/lib/src/util/assets.dart`. This ensures it will be preloaded during app initialization.
 
    Pass the `Assets` constant, not an inline string. This same key is used by `ShaderService` to load and cache the compiled shader.
 5. If the shader is used in Widgetbook, add the same `Assets` constant to the preload list in `apps/widgetbook/lib/main.dart` as well.

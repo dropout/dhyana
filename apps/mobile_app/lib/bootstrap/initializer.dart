@@ -89,10 +89,9 @@ class Initializer with LoggerMixin {
 
 
     logger.t('Preloading shaders');
-    await services.shaderService.loadShader(Assets.shaderLinearGradientMask);
-    await services.shaderService.loadShader(Assets.shaderGradientFlow);
-    await services.shaderService.loadShader(Assets.shaderParchmentNoise);
-
+    for (final shaderKey in Assets.allShaders) {
+      await services.shaderService.loadShader(shaderKey);    
+    }
 
     logger.t('Fetching remote settings');    
     await FirebaseRemoteSettingsService.configureDefaults(
