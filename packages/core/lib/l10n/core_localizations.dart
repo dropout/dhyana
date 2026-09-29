@@ -230,6 +230,54 @@ abstract class CoreLocalizations {
   /// **'Start typing your city name...'**
   String get locationSearchInputPlaceholder;
 
+  /// No description provided for @locationInputLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get locationInputLabel;
+
+  /// No description provided for @locationInputRationaleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Why set a location?'**
+  String get locationInputRationaleTitle;
+
+  /// No description provided for @locationInputRationaleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding your city lets you discover others who were practicing with you, right in your area.\n\nYour location is never shared and it is only used to determine nearby practitioners.\n\nThe location services on your device is never used, the application only relies on your input.\nYou can change or remove your city at any time.'**
+  String get locationInputRationaleBody;
+
+  /// No description provided for @locationSearchSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'City search'**
+  String get locationSearchSheetTitle;
+
+  /// No description provided for @locationSearchResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Results'**
+  String get locationSearchResultsTitle;
+
+  /// No description provided for @locationInputClearSelectionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Selection'**
+  String get locationInputClearSelectionButton;
+
+  /// No description provided for @locationSearchInProgressMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching your city...'**
+  String get locationSearchInProgressMessage;
+
+  /// No description provided for @locationSelectionSavingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Just a moment...\nYour selection is being processed.'**
+  String get locationSelectionSavingMessage;
+
   /// No description provided for @minutesPlural.
   ///
   /// In en, this message translates to:

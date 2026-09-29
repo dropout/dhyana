@@ -24,10 +24,10 @@ enum CitySelectorProcessingState {
 }
 
 class FormBuilderCitySelector extends FormBuilderField<Location?> {
-  final String label;
+  final String? label;
 
   FormBuilderCitySelector({
-    this.label = 'City',
+    this.label,
     // From Super
     AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
     super.enabled,
@@ -43,7 +43,7 @@ class FormBuilderCitySelector extends FormBuilderField<Location?> {
   }) : super(
          builder: (FormFieldState<Location?> field) {
            return CitySelectorInput(
-             label: label,
+             label: label ?? field.context.coreL10n.locationInputLabel,
              placeholderText: field.context.coreL10n.locationInputPlaceholder,
              initialLocation: field.value,
              onChanged: (location) => field.didChange(location),
@@ -62,7 +62,7 @@ class const CitySelectorInput({
   required final String label,
   final Location? initialLocation,
   final void Function(Location? location)? onChanged,
-  final String placeholderText = 'Select a city',
+  final String? placeholderText,
   super.key,
 }) extends StatefulWidget {
   @override
@@ -86,7 +86,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
     } else if (hasInitialValue && hasSelectedValue == false) {
       return widget.initialLocation!.name;
     } else {
-      return widget.placeholderText;
+      return widget.placeholderText ?? context.coreL10n.locationInputPlaceholder;
     }
   }
 
@@ -151,7 +151,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Why set a location?',
+              context.coreL10n.locationInputRationaleTitle,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.charcoal,
@@ -159,7 +159,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
             ),
             Gap.small(),
             Text(
-              'Adding your city lets you discover others who were practicing with you, right in your area.\n\nYour location is never shared and it is only used to determine nearby practitioners.\n\nThe location services on your device is never used, the application only relies on your input.\nYou can change or remove your city at any time.',
+              context.coreL10n.locationInputRationaleBody,
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
@@ -186,7 +186,9 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
               setState(() {
                 if (location == null) {
                   selectedLocation = null;
-                  controller.text = widget.placeholderText;
+                  controller.text =
+                      widget.placeholderText ??
+                      context.coreL10n.locationInputPlaceholder;
                 } else {
                   selectedLocation = location;
                   controller.text = location.name;
@@ -353,7 +355,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         crossAxisAlignment: .start,
         children: [
           Text(
-            'City search',
+            context.coreL10n.locationSearchSheetTitle,
             style: context.theme.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.charcoal,
@@ -385,7 +387,6 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
   }
 
   Widget buildBottomPart(BuildContext context) {
-    return buildError(context);
     return switch (loadingState) {
       .searching => buildSearching(context),
       .saving => buildSaving(context),
@@ -396,7 +397,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         crossAxisAlignment: .start,
         children: [
           Text(
-            'Results',
+            context.coreL10n.locationSearchResultsTitle,
             style: context.theme.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.charcoal,
@@ -457,7 +458,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
             ),
             Gap.medium(),
             AppButton.small(
-              text: 'Clear Selection'.toUpperCase(),
+              text: context.coreL10n.locationInputClearSelectionButton.toUpperCase(),
               onTap: () => clearSelection(context),
             ),
           ],
@@ -472,12 +473,12 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         mainAxisSize: .min,
         children: [
           Text(
-            'Searching your city...',
+            context.coreL10n.locationSearchInProgressMessage,
             textAlign: TextAlign.center,
             style: context.theme.textTheme.bodyMedium?.copyWith(
               fontWeight: .bold,
-            ),            
-          ), 
+            ),
+          ),
           Gap.medium(),
           CircularProgressIndicator()
         ],
@@ -491,7 +492,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         mainAxisSize: .min,
         children: [
           Text(
-            'Just a moment...\nYour selection is being processed.',
+            context.coreL10n.locationSelectionSavingMessage,
             textAlign: TextAlign.center,
             style: context.theme.textTheme.bodyMedium?.copyWith(
               fontWeight: .bold,

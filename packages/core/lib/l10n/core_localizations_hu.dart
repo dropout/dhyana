@@ -81,6 +81,32 @@ class CoreLocalizationsHu extends CoreLocalizations {
       'Kezdd el beírni a városod nevét...';
 
   @override
+  String get locationInputLabel => 'Város';
+
+  @override
+  String get locationInputRationaleTitle => 'Miért érdemes helyet megadni?';
+
+  @override
+  String get locationInputRationaleBody =>
+      'A városod megadásával felfedezheted a közeledben gyakorlókat.\n\nA helyadataidat sosem osztjuk meg, kizárólag a közeli gyakorlók meghatározására használjuk.\n\nA készüléked helymeghatározó szolgáltatását sosem használjuk, az alkalmazás kizárólag a te beviteledre támaszkodik.\nA várost bármikor megváltoztathatod vagy eltávolíthatod.';
+
+  @override
+  String get locationSearchSheetTitle => 'Város keresése';
+
+  @override
+  String get locationSearchResultsTitle => 'Találatok';
+
+  @override
+  String get locationInputClearSelectionButton => 'Kiválasztás törlése';
+
+  @override
+  String get locationSearchInProgressMessage => 'Városod keresése...';
+
+  @override
+  String get locationSelectionSavingMessage =>
+      'Egy pillanat...\nA választásod feldolgozás alatt van.';
+
+  @override
   String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

@@ -80,6 +80,32 @@ class CoreLocalizationsEn extends CoreLocalizations {
   String get locationSearchInputPlaceholder => 'Start typing your city name...';
 
   @override
+  String get locationInputLabel => 'City';
+
+  @override
+  String get locationInputRationaleTitle => 'Why set a location?';
+
+  @override
+  String get locationInputRationaleBody =>
+      'Adding your city lets you discover others who were practicing with you, right in your area.\n\nYour location is never shared and it is only used to determine nearby practitioners.\n\nThe location services on your device is never used, the application only relies on your input.\nYou can change or remove your city at any time.';
+
+  @override
+  String get locationSearchSheetTitle => 'City search';
+
+  @override
+  String get locationSearchResultsTitle => 'Results';
+
+  @override
+  String get locationInputClearSelectionButton => 'Clear Selection';
+
+  @override
+  String get locationSearchInProgressMessage => 'Searching your city...';
+
+  @override
+  String get locationSelectionSavingMessage =>
+      'Just a moment...\nYour selection is being processed.';
+
+  @override
   String minutesPlural(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
