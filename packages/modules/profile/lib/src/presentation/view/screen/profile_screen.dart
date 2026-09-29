@@ -38,23 +38,24 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
-        switch (state) {
+        switch (state) {        
           case ProfileLoadingState():
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
               enableScrolling: false,
               enableTitleSliver: false,
+              enableAppBarSliver: false,
               slivers: [
                 buildLoadingSliver(context)
               ],
             );
           case ProfileLoadedState():
             return DefaultScreenSetup(
-            key: const Key('profile_screen'),
+              key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
               enableTitleSliver: false,
-              enableAppBarSliver: false,              
+              enableAppBarSliver: false,
               slivers: [
                 SliverSafeArea(
                   top: false,
@@ -70,11 +71,8 @@ class _ProfileScreenState extends State<ProfileScreen>
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
-              titleColor: Colors.white,
               enableTitleSliver: false,
-              backgroundColor: Theme.of(context).colorScheme.error,
-              appBarBackgroundColor: Theme.of(context).colorScheme.error,
-              backButton: CustomBackButton.light(),
+              enableAppBarSliver: false,
               enableScrolling: false,
               slivers: [
                 SliverFillRemaining(
@@ -88,13 +86,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                     buttonText: context.coreL10n.profileSignoutTitle,
                   ),
                 )
-                // buildErrorSliver(context),
               ],
             );
           case ProfileStateInitial():
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
               enableScrolling: false,
+              enableAppBarSliver: false,
               title: '',
             );
         }

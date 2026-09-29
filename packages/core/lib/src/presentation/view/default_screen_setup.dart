@@ -18,7 +18,7 @@ class const DefaultScreenSetup({
   final List<Widget> slivers = const [],
   final Widget? backButton,
   final Widget? overlay,
-  final bool enableAppBarSliver = true,
+  final bool enableAppBarSliver = false,
   final bool enableTitleSliver = true,
   final bool enableScrolling = true,
   final bool enableScaffolding = true,
