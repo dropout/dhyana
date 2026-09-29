@@ -1,93 +1,49 @@
-import 'package:core/src/presentation/design_spec.dart';
+import 'package:core/src/presentation/view/painting/inset_shadow_painter.dart';
+import 'package:core/src/presentation/view/util/app_context.dart';
+import 'package:core/src/util/assets.dart';
 import 'package:material_ui/material_ui.dart';
 
-class InsetSurface extends StatelessWidget {
-  final Widget child;
-  final double borderRadius;
-  final double borderWidth;
-  final Color borderColor;
-  final Color outerColor;
-  final Color innerColor;
-  final EdgeInsetsGeometry? padding;
-  final bool showTopInset;
-  final bool showLeftInset;
+import 'package:core/src/presentation/design_spec.dart';
 
-  const InsetSurface({
-    required this.child,
-    this.borderRadius = DesignSpec.borderRadiusMd,
-    this.borderWidth = 2,
-    this.borderColor = Colors.black,
-    this.outerColor = AppColors.backgroundPaper,
-    this.innerColor = AppColors.backgroundPaperDark,
-    this.padding,
-    this.showTopInset = true,
-    this.showLeftInset = true,
-    super.key,
-  });
+class const InsetSurface({
+  required final Widget child,
+  final EdgeInsetsGeometry padding = EdgeInsets.zero,
+  final double borderRadius = DesignSpec.borderRadiusMd,
+  final Color shadowColor = const Color(0x33000000),
+  final double blurRadius = 20.0,
+  final Offset offset = const Offset(5, 5),  
+  super.key,
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Colors.black.withValues(alpha: 0.6);
+    final shader = context.services.shaderService.get(
+      Assets.shaderInsetShadow,
+    );
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: outerColor,
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(
-            color: borderColor,
-            width: borderWidth,
-            strokeAlign: BorderSide.strokeAlignOutside,
-          ),
+      child: CustomPaint(
+        foregroundPainter: ShaderInsetShadowPainter(
+          shader: shader,
+          shadowColor: shadowColor,
+          blurRadius: blurRadius,
+          borderRadius: borderRadius,
+          offset: offset,
         ),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: ColoredBox(
-                color: innerColor,
-                child: padding == null ? child : Padding(padding: padding!, child: child),
-              ),
-            ),
-            if (showTopInset)
-              Positioned(
-                top: -30,
-                left: -30,
-                right: -30,
-                height: 30,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: borderColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: borderColor.withValues(alpha: 0.15),
-                        blurRadius: 20,
-                        offset: const Offset(0, 15),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            if (showLeftInset)
-              Positioned(
-                left: -40,
-                top: -40,
-                bottom: -40,
-                width: 30,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: borderColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: borderColor.withValues(alpha: 0.15),
-                        blurRadius: 20,
-                        offset: const Offset(15, 0),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          ],
+        child: Container(
+          // width: width,
+          // height: height,
+          padding: padding,
+          decoration: BoxDecoration(
+            color: AppColors.backgroundPaperDark,
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: child,
         ),
       ),
-    );
+    );    
   }
 }
