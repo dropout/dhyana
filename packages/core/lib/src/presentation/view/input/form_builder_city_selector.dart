@@ -1,10 +1,11 @@
 import 'package:core/src/presentation/view/util/app_button.dart';
+import 'package:core/src/presentation/view/util/app_card.dart';
 import 'package:core/src/presentation/view/util/app_map.dart';
+import 'package:core/src/presentation/view/util/inset_surface.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:dart_geohash/dart_geohash.dart';
 
-import 'package:core/src/domain/enum/processing_state.dart';
 import 'package:core/src/domain/entity/city_search_result.dart';
 import 'package:core/src/domain/entity/location.dart';
 import 'package:core/src/presentation/design_spec.dart';
@@ -13,6 +14,14 @@ import 'package:core/src/presentation/view/util/debouncer.dart';
 import 'package:core/src/presentation/view/util/gap.dart';
 
 import 'decoration.dart';
+
+enum CitySelectorProcessingState {
+  idle,
+  searching,
+  searchCompleted,
+  saving,
+  error,
+}
 
 class FormBuilderCitySelector extends FormBuilderField<Location?> {
   final String label;
@@ -130,7 +139,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
       );
     }
 
-    return SizedBox(      
+    return SizedBox(
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.backgroundPaperLight,
@@ -143,25 +152,20 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
           children: [
             Text(
               'Why set a location?',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.charcoal,
               ),
             ),
             Gap.small(),
             Text(
-              'Adding your city lets you discover others who were practicing alongside you, right in your area.\n\nYour location is never shared, it is only used to determine nearby practitioners.',
-              style: Theme.of(context).textTheme.bodyMedium,
+              'Adding your city lets you discover others who were practicing with you, right in your area.\n\nYour location is never shared and it is only used to determine nearby practitioners.\n\nThe location services on your device is never used, the application only relies on your input.\nYou can change or remove your city at any time.',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
-        
           ],
         ),
       ),
     );
-
-
-
-
   }
 
   void showCitySelectorSheet(BuildContext context) {
@@ -171,10 +175,11 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
       useSafeArea: true,
       backgroundColor: AppColors.backgroundPaper,
       showDragHandle: true,
-
       builder: (context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.viewInsetsOf(context).bottom,
+          ),
           child: CitySelectorSheet(
             location: widget.initialLocation,
             onCitySelected: (location) {
@@ -229,7 +234,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
   final Debouncer debouncer = Debouncer(delay: Duration(milliseconds: 300));
 
-  ProcessingState loadingState = ProcessingState.idle;
+  CitySelectorProcessingState loadingState = .idle;
 
   @override
   void initState() {
@@ -244,7 +249,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     if (value.isEmpty) {
       setState(() {
         searchResults = [];
-        loadingState = ProcessingState.idle;
+        loadingState = .idle;
       });
       return;
     }
@@ -263,7 +268,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
     try {
       setState(() {
-        loadingState = ProcessingState.processing;
+        loadingState = .searching;
       });
       final result = await context.services.functionsService.citySearch(
         queryString: queryString,
@@ -271,7 +276,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
       setState(() {
         searchQuery = queryString;
         searchResults = result;
-        loadingState = ProcessingState.completed;
+        loadingState = .searchCompleted;
       });
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -280,7 +285,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         reason: 'Error searching for cities. Query string: $queryString',
       );
       setState(() {
-        loadingState = ProcessingState.error;
+        loadingState = .error;
       });
     }
   }
@@ -293,7 +298,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
 
     // Get a location with latlng for the selected city
     setState(() {
-      loadingState = ProcessingState.processing;
+      loadingState = .saving;
     });
 
     try {
@@ -304,7 +309,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
       // for the CitySearchResult
       if (fullResult.location == null) {
         setState(() {
-          loadingState = ProcessingState.error;
+          loadingState = .error;
         });
         crashlyticsService.recordError(
           exception: Exception('Location data is null'),
@@ -330,7 +335,7 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
         reason: 'Error getting location for city: ${citySearchResult.name}',
       );
       setState(() {
-        loadingState = ProcessingState.error;
+        loadingState = .error;
       });
     }
   }
@@ -344,49 +349,90 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
       child: Column(
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
         children: [
-          // Gap.large(),
+          Text(
+            'City search',
+            style: context.theme.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.charcoal,
+            ),
+          ),
+          Gap.xs(),
           TextField(
+            autofocus: true,
             controller: controller,
             decoration: getTextInputDecoration(context).copyWith(
               hintText: context.coreL10n.locationSearchInputPlaceholder,
               hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
-                color: Colors.grey
+                color: Colors.grey,
               ),
             ),
             style: Theme.of(context).textTheme.bodyLarge!
                 .copyWith(fontWeight: FontWeight.bold),
             onChanged: (value) => handleTextFieldChange(context, value),
           ),
-          Expanded(child: buildBottomPart(context)),
+          Gap.medium(),
+          Expanded(
+            child: SafeArea(top: false, child: buildBottomPart(context)),
+          ),
         ],
       ),
     );
   }
 
   Widget buildBottomPart(BuildContext context) {
-    switch (loadingState) {
-      case ProcessingState.processing:
-        return Center(child: CircularProgressIndicator());
-      case ProcessingState.error:
-        return buildError(context);
-      case ProcessingState.idle:
-        return buildIdle(context);
-      case ProcessingState.completed:
-        return SingleChildScrollView(
-          child: Column(
-            children: searchResults.map((result) {
-              return ListTile(
-                title: Text(result.name),
-                subtitle: Text(result.placeId),
-                onTap: () => selectCity(context, result),
-              );
-            }).toList(),
+    return buildError(context);
+    return switch (loadingState) {
+      .searching => buildSearching(context),
+      .saving => buildSaving(context),
+      .error => buildError(context),
+      .idle => buildIdle(context),
+      .searchCompleted => Column(
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
+        children: [
+          Text(
+            'Results',
+            style: context.theme.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.charcoal,
+            ),
           ),
-        );
-    }
+          Gap.xs(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
+              child: InsetSurface(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(DesignSpec.paddingSm),
+                    child: Column(
+                      mainAxisSize: .min,
+                      children: searchResults.map((result) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: DesignSpec.paddingSm,
+                          ),
+                          child: CitySelectionCard(
+                            onTap: (citySearchResult) =>
+                                selectCity(context, citySearchResult),
+                            citySearchResult: result,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    };
   }
 
   Widget buildIdle(BuildContext context) {
@@ -420,50 +466,63 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     }
   }
 
-  Widget buildLoaded(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(DesignSpec.paddingLg),
+  Widget buildSearching(BuildContext context) {
+    return Center(
       child: Column(
+        mainAxisSize: .min,
         children: [
-          Gap.large(),
-          TextField(
-            controller: controller,
-            decoration: getTextInputDecoration(context),
-            style: Theme.of(context).textTheme.bodyLarge!
-                .copyWith(fontWeight: FontWeight.bold),
-            onChanged: (value) => debouncer(() => searchCities(context, value)),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: searchResults.map((result) {
-                  return ListTile(
-                    tileColor: AppColors.red,
-                    title: Text(result.name),
-                    subtitle: Text(result.placeId),
-                    onTap: () => selectCity(context, result),
-                  );
-                }).toList(),
-              ),
+          Text(
+            'Searching your city...',
+            textAlign: TextAlign.center,
+            style: context.theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: .bold,
+            ),            
+          ), 
+          Gap.medium(),
+          CircularProgressIndicator()
+        ],
+      ),
+    );
+  }
+
+  Widget buildSaving(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          Text(
+            'Just a moment...\nYour selection is being processed.',
+            textAlign: TextAlign.center,
+            style: context.theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: .bold,
             ),
           ),
+          Gap.medium(),
+          CircularProgressIndicator(),
         ],
       ),
     );
   }
 
   Widget buildError(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.warning_amber_rounded, size: 64),
-        Gap.medium(),
-        Text(
-          context.coreL10n.locationInputErrorMessage,
-          textAlign: TextAlign.center,
-        ),
-      ],
+    return Center(
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          Icon(Icons.warning_amber_rounded, size: 64),
+          Gap.medium(),
+          Text(
+            context.coreL10n.locationInputErrorMessage,
+            textAlign: TextAlign.center,
+            style: context.theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: .bold,
+            ),
+          ),
+        ]
+      ),
+
     );
+
   }
 
   @override
@@ -471,5 +530,34 @@ class _CitySelectorSheetState extends State<CitySelectorSheet> {
     controller.dispose();
     debouncer.dispose();
     super.dispose();
+  }
+}
+
+class const CitySelectionCard({
+  required final CitySearchResult citySearchResult,
+  final void Function(CitySearchResult)? onTap,
+  super.key,
+}) extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap?.call(citySearchResult),
+      child: AppCard(
+        padding: const EdgeInsets.all(DesignSpec.paddingMd),
+        child: Row(
+          mainAxisSize: .max,
+          children: [
+            Expanded(
+              child: Text(
+                citySearchResult.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

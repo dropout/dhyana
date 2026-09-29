@@ -1,9 +1,16 @@
 import 'package:core/src/domain/entity/location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+
+// For now instead of adding another latlong dependency, we are relying
+// transitive dependency on latlong2 through flutter_map until it doesn't
+// cause problem or blocks development.
+// 
+
+// ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart' as flutter_map_latlng;
 
-enum MapStyle { street, light, dark }
+enum MapStyle {street, light, dark}
 
 class const AppMap({
   required final String name,
@@ -12,22 +19,43 @@ class const AppMap({
   final double zoom = 13,
   final MapStyle mapStyle = .street,
   super.key,
-}) extends StatelessWidget {
+}) extends StatefulWidget {
+  @override
+  State<AppMap> createState() => _AppMapState();
+}
+
+class _AppMapState extends State<AppMap> {
+
+  final MapController mapController = MapController();
+
+  @override
+  void didUpdateWidget(covariant AppMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.latitude != widget.latitude ||
+        oldWidget.longitude != widget.longitude ||
+        oldWidget.zoom != widget.zoom) {
+      mapController.move(
+        flutter_map_latlng.LatLng(widget.latitude, widget.longitude),
+        widget.zoom,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final center = flutter_map_latlng.LatLng(latitude, longitude);
-
-    final urlTemplate = switch (mapStyle) {
+    final center = flutter_map_latlng.LatLng(widget.latitude, widget.longitude);
+    final urlTemplate = switch (widget.mapStyle) {
       MapStyle.street => 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       MapStyle.light => 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
       MapStyle.dark => 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
     };
 
     return FlutterMap(
+      mapController: mapController,
       options: MapOptions(
         initialCenter: center,
-        initialZoom: zoom,
+        initialZoom: widget.zoom,
         interactionOptions: InteractionOptions(
           flags: InteractiveFlag.none,
         )
@@ -44,7 +72,7 @@ class const AppMap({
               point: center,
               width: 220,
               height: 62,
-              child: _LocationPin(name: name),
+              child: _LocationPin(name: widget.name),
             ),
           ],
         ),
@@ -103,7 +131,6 @@ class _SpeechBubbleTailPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      // ..color = Colors.redAccent
       ..color = Colors.white
       ..style = PaintingStyle.fill;
 
@@ -122,10 +149,8 @@ class _SpeechBubbleTailPainter extends CustomPainter {
 
 extension AppMapLocationX on Location {
   AppMap toAppMap() => AppMap(
-        name: name,
-        latitude: latLng.latitude,
-        longitude: latLng.longitude,
-      );
+      name: name,
+      latitude: latLng.latitude,
+      longitude: latLng.longitude,
+    );
 }
-
-
