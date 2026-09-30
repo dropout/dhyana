@@ -1,5 +1,5 @@
-import 'package:donate/src/presentation/widget/donate_button.dart';
 import 'package:core/core.dart';
+import 'package:donate/l10n/donate_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
@@ -91,12 +91,16 @@ class _CustomAmountSheetState extends State<CustomAmountSheet> {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(bottom: DesignSpec.padding2Xl),
-              child: DonateButton(
+              child: AppButton.large(
+                key: const Key('custom_amount_sheet_donate_button'),
                 onTap: hasSelectedAmount ? _onDonateButtonTap : null,
-              )
+                text: DonateLocalizations.of(context).donate.toUpperCase(),
+                bColor: AppColors.crimsonRed,
+                fColor: Colors.white,
+              ),
             )
           )
-        )
+        ),        
       ],
     );
   }

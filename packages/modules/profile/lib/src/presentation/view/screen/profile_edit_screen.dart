@@ -86,7 +86,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
           case ProfileEditLoadedState():
             return DefaultScreenSetup(
               title: ProfileLocalizations.of(context).editProfile,
-              enableAppBarSliver: false,
+              // enableAppBarSliver: false,
               overlay: SafeArea(
                 top: false,
                 child: Align(

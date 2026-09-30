@@ -27,6 +27,9 @@ class DesignSpec {
   static const double spacing4xl = 90.0;
   static const double bottomActionSpacing = buttonHeightLg + padding2Xl;
   static const Widget bottomActionSpacingWidget = SizedBox(height: bottomActionSpacing);
+  static const Widget bottomActionSpacingSliver = SliverPadding(
+    padding: EdgeInsets.only(bottom: bottomActionSpacing),
+  );
 
   // Padding constants
   static const double paddingXxs = 2.0;

@@ -35,21 +35,21 @@ mixin ScreenHelperMixin {
   }) {
     switch (state) {
       case ProcessingState.idle:
-        return AppButton(
+        return AppButton.large(
           text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
           onTap: onAction,
         );
       case ProcessingState.processing:
-        return AppButton(
+        return AppButton.large(
           text: context.coreL10n.profileSaveButtonSaving.toUpperCase(),
         );
       case ProcessingState.completed:
-        return AppButton(
+        return AppButton.large(
           text: context.coreL10n.profileSaveButtonSaved.toUpperCase(),
           bColor: Colors.green.shade600,
         );
       case ProcessingState.error:
-        return AppButton(
+        return AppButton.large(
           text: context.coreL10n.profileSaveButtonIdle.toUpperCase(),
           onTap: onAction,
         );

@@ -1,6 +1,6 @@
+import 'package:donate/l10n/donate_localizations.dart';
 import 'package:donate/src/presentation/widget/amount_selector.dart';
 import 'package:donate/src/presentation/widget/custom_amount_sheet.dart';
-import 'package:donate/src/presentation/widget/donate_button.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
@@ -175,10 +175,13 @@ class _DonateScreenState extends State<DonateScreen> {
           ),
           SafeArea(
             top: false,
-            child: DonateButton(
+            child: AppButton.large(
               key: const Key('donate_screen_donate_button'),
               onTap: hasSelectedAmount ? () => _startPaymentProcess(context, selectedAmount) : null,
-            )
+              text: DonateLocalizations.of(context).donate.toUpperCase(),
+              bColor: AppColors.crimsonRed,
+              fColor: Colors.white,
+            ),
           ),
         ],
       ),

@@ -3,7 +3,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ProfileSettingsSwitch extends StatelessWidget {
-
   final String title;
   final String name;
   final String? helperText;
@@ -49,13 +48,15 @@ class ProfileSettingsSwitch extends StatelessWidget {
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    
                     fillColor: AppColors.backgroundPaperLight,
                     filled: true,
                     helperStyle: Theme.of(context).textTheme.bodyLarge,
                   ),
                   initialValue: initialValue,
-                  onChanged: onChanged,
+                  onChanged: (value) {
+                    context.hapticsTap();
+                    onChanged?.call(value);
+                  },
                 ),
               ],
             ),
@@ -67,10 +68,7 @@ class ProfileSettingsSwitch extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSpec.paddingXl,
             ),
-            child: Text(
-              helperText!,
-              style: context.theme.textTheme.bodyMedium,
-            ),
+            child: Text(helperText!, style: context.theme.textTheme.bodyMedium),
           ),
       ],
     );

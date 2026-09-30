@@ -75,32 +75,29 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
               ),
             );
           case ProfileLoadedState():
-            return buildScaffolding(
-              context,
-              DefaultScreenSetup(
-                title: screenTitle,
-                enableTitleSliver: true,
-                enableScaffolding: false,
-                slivers: [
-                  SliverSafeArea(
-                    top: false,
-                    minimum: const EdgeInsets.only(
-                      left: DesignSpec.paddingLg,
-                      right: DesignSpec.paddingLg,
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: ProfileSettingsForm(
-                        formStateKey: formStateKey,
-                        profile: profileState.profile,
-                        profileSettings: profileState.profile.settings,
-                        clearCacheCapability: widget.clearCacheCapability,
-                        onChanged: () => _onFormChanged(context),
-                      ),
+            return DefaultScreenSetup(
+              title: screenTitle,
+              enableTitleSliver: true,
+              slivers: [
+                SliverSafeArea(
+                  top: false,
+                  minimum: const EdgeInsets.only(
+                    left: DesignSpec.paddingLg,
+                    right: DesignSpec.paddingLg,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: ProfileSettingsForm(
+                      formStateKey: formStateKey,
+                      profile: profileState.profile,
+                      profileSettings: profileState.profile.settings,
+                      clearCacheCapability: widget.clearCacheCapability,
+                      onChanged: () => _onFormChanged(context),
                     ),
                   ),
-                ],
-              ),
-              actionButtonLayer: SafeArea(
+                ),
+                DesignSpec.bottomActionSpacingSliver,
+              ],
+              overlay: SafeArea(
                 top: false,
                 child: Align(
                   alignment: const Alignment(0.0, 1.0),
