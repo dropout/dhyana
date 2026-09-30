@@ -1,13 +1,12 @@
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:crypto/crypto.dart' as crypto;
 
 /// Helper extension for validation cached files.
 extension FileValidationExtension on File {
-
   Future<String> sha256() async {
-    final bytes = await readAsBytes();
-    return crypto.sha256.convert(bytes).toString();
+    return Isolate.run(() => _sha256File(path));
   }
 
   Future<int> size() async {
@@ -22,5 +21,9 @@ extension FileValidationExtension on File {
       await delete();
     }
   }
+}
 
+Future<String> _sha256File(String path) async {
+  final digest = await crypto.sha256.bind(File(path).openRead()).first;
+  return digest.toString();
 }
