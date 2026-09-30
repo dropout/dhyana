@@ -16,6 +16,13 @@ class _DonateButtonState extends State<DonateButton> {
 
   @override
   Widget build(BuildContext context) {
+    return AppButton.large(
+      onTap: widget.onTap,
+      text: DonateLocalizations.of(context).donate.toUpperCase(),
+      bColor: AppColors.crimsonRed,
+      fColor: Colors.white,
+    );
+
     return InkWell(
       onTap: widget.onTap,
       child: DecoratedBox(

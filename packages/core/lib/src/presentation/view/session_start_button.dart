@@ -13,7 +13,6 @@ class SessionStartButton extends StatefulWidget {
 
   const SessionStartButton({
     required this.onTap,
-
     this.colorA = AppColors.red,
     this.colorB = AppColors.redAccent,
     this.textColor = AppColors.buttonForeground,

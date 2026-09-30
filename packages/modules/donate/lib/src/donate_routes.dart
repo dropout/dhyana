@@ -15,6 +15,6 @@ class DonateRoute extends GoRouteData with AuthRedirectHook, $DonateRoute {
       const DonateScreen();
 }
 
-List<RouteBase> $coreRoutes = [
+List<RouteBase> $donateRoutes = [
   $donateRoute,
 ];

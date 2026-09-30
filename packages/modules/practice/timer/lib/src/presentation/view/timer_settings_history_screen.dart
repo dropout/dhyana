@@ -42,10 +42,6 @@ class TimerSettingsHistoryScreen extends StatelessWidget
           case TimerSettingsHistoryError():
             return DefaultScreenSetup.error(
               title: TimerLocalizations.of(context).timerSettingsHistory,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
-              slivers: [
-                buildErrorSliver(context),
-              ],
             );
           default:
             return DefaultScreenSetup(

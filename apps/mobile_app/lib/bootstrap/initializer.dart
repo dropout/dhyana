@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:donate/donate.dart';
 import 'package:mobile_app/audio/default_app_audio_handler.dart';
 import 'package:mobile_app/audio/audio_session_configuration.dart';
 import 'package:flutter/foundation.dart';
@@ -65,13 +66,14 @@ class Initializer with LoggerMixin {
       initialLocation: '/',
       routes: [
         ...$authRoutes,
-        ...$homeRoutes,
         ...$profileRoutes, 
+        ...$homeRoutes,        
         ...$timerRoutes,
         ...$chantingRoutes,
         ...$sessionRoutes,
         ...$socialRoutes, 
-        ...$statsRoutes,      
+        ...$statsRoutes,   
+        ...$donateRoutes,
       ],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );
