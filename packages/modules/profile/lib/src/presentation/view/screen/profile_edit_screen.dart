@@ -68,7 +68,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
               context,
               DefaultScreenSetup(
                 title: ProfileLocalizations.of(context).editProfile,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
                 slivers: [buildLoadingSliver(context)],
               ),
@@ -78,7 +78,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
               context,
               DefaultScreenSetup(
                 title: ProfileLocalizations.of(context).editProfile,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
                 slivers: [buildErrorSliver(context)],
               ),
@@ -115,7 +115,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
           default:
             return DefaultScreenSetup(
               title: ProfileLocalizations.of(context).editProfile,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
             );
         }
       },

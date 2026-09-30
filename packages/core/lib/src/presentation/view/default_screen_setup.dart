@@ -20,7 +20,6 @@ class const DefaultScreenSetup({
   final Widget? overlay,
   final bool enableAppBarSliver = false,
   final bool enableTitleSliver = true,
-  final bool enableScrolling = true,
   final bool enableScaffolding = true,
   final bool enableTitleScrollEffect = true,
   final Color? titleColor,
@@ -28,8 +27,32 @@ class const DefaultScreenSetup({
   final Color? appBarBackgroundColor,
   final bool enablePullToRefresh = false,
   final Future<void> Function()? onRefresh,
+  final ScrollPhysics? scrollPhysics,
   super.key,
 }) extends StatefulWidget {
+
+  factory DefaultScreenSetup.error({
+    required String title,
+  }) => DefaultScreenSetup(
+    title: title,
+    titleColor: Colors.white,
+    appBarBackgroundColor: AppColors.errorColor,
+    scrollPhysics: const NeverScrollableScrollPhysics(),
+    slivers: [
+      SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay()),
+    ],
+  );
+
+  factory DefaultScreenSetup.loading({
+    required String title,
+  }) => DefaultScreenSetup(
+    title: title,
+    scrollPhysics: const NeverScrollableScrollPhysics(),
+    slivers: [
+      SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
+    ],
+  );
+
   @override
   State<DefaultScreenSetup> createState() => _DefaultScreenSetupState();
 }
@@ -84,9 +107,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
       context,
       CustomScrollView(
         controller: titleEffectScrollController,
-        physics: widget.enableScrolling
-            ? null
-            : const NeverScrollableScrollPhysics(),
+        physics: widget.scrollPhysics,
         slivers: [
           if (widget.enableAppBarSliver)
             buildTitleEffectAppBar(
@@ -137,7 +158,18 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             leading: CustomBackButton(),
           ),
         ),
-        body: ParchmentBackground(
+        body: widget.appBarBackgroundColor != null
+            ? Container(
+                color: widget.appBarBackgroundColor,
+                child: buildScaffoldBody(
+                  context: context,
+                  body: Padding(
+                    padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
+                    child: body,
+                  ),
+                ),
+              )
+            : ParchmentBackground(
           scrollOffset: scrollOffset,
           child: ShaderMask(
             shaderCallback: (Rect bounds) {
@@ -167,6 +199,37 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
             ),
           ),
         ),
+
+        // body: ParchmentBackground(
+        //   scrollOffset: scrollOffset,
+        //   child: ShaderMask(
+        //     shaderCallback: (Rect bounds) {
+        //       final double fadeStart = appBarHeightWithTopPadding / bounds.height;
+        //       final double fadeEnd =
+        //           (appBarHeightWithTopPadding + fadeLength) / bounds.height;
+
+        //       return LinearGradient(
+        //         begin: Alignment.topCenter,
+        //         end: Alignment.bottomCenter,
+        //         colors: const [
+        //           Colors.transparent, // Top segment
+        //           Colors.transparent, // Cut-off point (transparent side)
+        //           Colors.white, // Cut-off point (visible side)
+        //           Colors.white, // Bottom segment
+        //         ],
+        //         stops: [0.0, fadeStart, fadeEnd, 1.0],
+        //       ).createShader(bounds);
+        //     },
+        //     blendMode: BlendMode.dstIn,
+        //     child: buildScaffoldBody(
+        //       context: context,
+        //       body: Padding(
+        //         padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
+        //         child: body,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       );
     } else {
       return body;

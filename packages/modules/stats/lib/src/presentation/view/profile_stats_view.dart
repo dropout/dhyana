@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:core/core.dart';
 import 'package:profile/profile.dart';
@@ -14,78 +13,41 @@ import 'stats/tab/month_tab.dart';
 import 'stats/tab/week_tab.dart';
 import 'stats/tab/year_tab.dart';
 
-class ProfileStatsView extends StatefulWidget {
-  final String profileId;
-
-  const ProfileStatsView({required this.profileId, super.key});
-
+class const ProfileStatsView({
+  required final Profile profile,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<ProfileStatsView> createState() => _ProfileStatsViewState();
 }
 
 class _ProfileStatsViewState extends State<ProfileStatsView>
     with TickerProviderStateMixin, TitleEffectMixin {
+  
+  /// Tab controller for barchart tabs
   late final TabController primaryTC;
-  late final ScrollController scrollController;
-
-  late final void Function() _listener;
 
   @override
   void initState() {
-    primaryTC = TabController(length: 4, vsync: this);
-    scrollController = ScrollController();
-
-    // For the disappearing title effect
-    _listener = createListener(scrollController, setState);
-    scrollController.addListener(_listener);
-
     super.initState();
+    primaryTC = TabController(length: 4, vsync: this);    
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (BuildContext context, ProfileState state) {
-        switch (state) {
-          case ProfileLoadingState():
-            return buildScaffolding(
-              context,
-              buildProfileLoadingContent(context),
-            );
-          case ProfileErrorState():
-            return buildScaffolding(context, buildProfileErrorContent(context));
-          case ProfileLoadedState():
-            return buildScaffolding(context, [
-              buildTitleEffectSliverTitle(
-                context,
-                StatsLocalizations.of(context).profileStats,
-              ),
-              StatsDataAreaSliver(
-                profile: state.profile,
-                profileName: state.profile.displayName,
-                profilePhotoUrl: state.profile.profileImageStoragePath,
-                profilePhotoBlurhash: state.profile.photoBlurhash,
-              ),
-              ...buildBarchartSlivers(context, state.profile.id),
-            ]);
-          default:
-            return const SizedBox.shrink();
-        }
-      },
+  Widget build(BuildContext context) =>
+    DefaultScreenSetup(
+      title: StatsLocalizations.of(context).profileStats,
+      scrollPhysics: const ClampingScrollPhysics(),
+      slivers: [
+        StatsDataAreaSliver(
+          profile: widget.profile,
+          profileName: widget.profile.displayName,
+          profilePhotoUrl: widget.profile.profileImageStoragePath,
+          profilePhotoBlurhash: widget.profile.photoBlurhash,
+        ),
+        ...buildBarchartSlivers(context, widget.profile.id),
+      ],
     );
-  }
-
-  List<Widget> buildProfileLoadingContent(BuildContext context) {
-    return [
-      SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
-    ];
-  }
-
-  List<Widget> buildProfileErrorContent(BuildContext context) {
-    return [
-      SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay()),
-    ];
-  }
 
   List<Widget> buildBarchartSlivers(BuildContext context, String profileId) {
     return [
@@ -94,80 +56,60 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
     ];
   }
 
-  Widget buildScaffolding(BuildContext context, List<Widget> slivers) {
-    return CustomScrollView(
-      key: const Key('profile_stats_custom_scroll_view'),
-      controller: scrollController,
-      slivers: [
-        // Appearing-disappearing title effect when scrolling down
-        buildTitleEffectAppBar(
-          context,
-          StatsLocalizations.of(context).profileStats,
-        ),
-
-        // Content slivers
-        ...slivers,
-      ],
-    );
-  }
-
   Widget buildTabBar(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(color: AppColors.backgroundPaper),
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: DesignSpec.paddingSm),
-        child: TabBar(
-          key: const Key('profile_stats_tab_bar'),
-          padding: const EdgeInsets.only(
-            top: DesignSpec.spacingSm,
-            left: DesignSpec.spacingMd,
-            right: DesignSpec.spacingMd,
-            bottom: DesignSpec.spacingXs,
-          ),
-          controller: primaryTC,
-          indicator: const ShapeDecoration(
-            color: Colors.black,
-            shape: StadiumBorder(),
-          ),
-          labelColor: Colors.white,
-          labelPadding: const EdgeInsets.symmetric(
-            horizontal: DesignSpec.spacingSm,
-          ),
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicatorAnimation: TabIndicatorAnimation.elastic,
-          automaticIndicatorColorAdjustment: false,
-          tabAlignment: TabAlignment.start,
-          isScrollable: true,
-          unselectedLabelColor: Colors.black,
-          splashFactory: NoSplash.splashFactory,
-          // long tap splash still visible
-          // make it look better with splash border radius
-          splashBorderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
-          dividerColor: Colors.transparent,
-          onTap: (int index) => context.hapticsTap(),
-          tabs: [
-            buildTabBarItem(
-              context,
-              StatsLocalizations.of(context).days,
-              key: const Key('profile_stats_view_days_tab'),
-            ),
-            buildTabBarItem(
-              context,
-              StatsLocalizations.of(context).weeks,
-              key: const Key('profile_stats_view_weeks_tab'),
-            ),
-            buildTabBarItem(
-              context,
-              StatsLocalizations.of(context).months,
-              key: const Key('profile_stats_view_months_tab'),
-            ),
-            buildTabBarItem(
-              context,
-              StatsLocalizations.of(context).years,
-              key: const Key('profile_stats_view_years_tab'),
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: DesignSpec.paddingSm),
+      child: TabBar(
+        key: const Key('profile_stats_tab_bar'),
+        padding: const EdgeInsets.only(
+          top: DesignSpec.spacingSm,
+          left: DesignSpec.spacingMd,
+          right: DesignSpec.spacingMd,
+          bottom: DesignSpec.spacingXs,
         ),
+        controller: primaryTC,
+        indicator: const ShapeDecoration(
+          color: Colors.black,
+          shape: StadiumBorder(),
+        ),
+        labelColor: Colors.white,
+        labelPadding: const EdgeInsets.symmetric(
+          horizontal: DesignSpec.spacingSm,
+        ),
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicatorAnimation: TabIndicatorAnimation.elastic,
+        automaticIndicatorColorAdjustment: false,
+        tabAlignment: TabAlignment.start,
+        isScrollable: true,
+        unselectedLabelColor: Colors.black,
+        splashFactory: NoSplash.splashFactory,
+        // long tap splash still visible
+        // make it look better with splash border radius
+        splashBorderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+        dividerColor: Colors.transparent,
+        onTap: (int index) => context.hapticsTap(),
+        tabs: [
+          buildTabBarItem(
+            context,
+            StatsLocalizations.of(context).days,
+            key: const Key('profile_stats_view_days_tab'),
+          ),
+          buildTabBarItem(
+            context,
+            StatsLocalizations.of(context).weeks,
+            key: const Key('profile_stats_view_weeks_tab'),
+          ),
+          buildTabBarItem(
+            context,
+            StatsLocalizations.of(context).months,
+            key: const Key('profile_stats_view_months_tab'),
+          ),
+          buildTabBarItem(
+            context,
+            StatsLocalizations.of(context).years,
+            key: const Key('profile_stats_view_years_tab'),
+          ),
+        ],
       ),
     );
   }
@@ -197,8 +139,6 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   @override
   void dispose() {
     primaryTC.dispose();
-    scrollController.removeListener(_listener);
-    scrollController.dispose();
     super.dispose();
   }
 }

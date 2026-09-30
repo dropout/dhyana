@@ -34,15 +34,15 @@ class TimerSettingsHistoryScreen extends StatelessWidget
           case TimerSettingsHistoryLoading():
             return DefaultScreenSetup(
               title: TimerLocalizations.of(context).timerSettingsHistory,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               slivers: [
                 buildLoadingSliver(context),
               ],
             );
           case TimerSettingsHistoryError():
-            return DefaultScreenSetup(
+            return DefaultScreenSetup.error(
               title: TimerLocalizations.of(context).timerSettingsHistory,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               slivers: [
                 buildErrorSliver(context),
               ],
@@ -50,7 +50,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
           default:
             return DefaultScreenSetup(
               title: TimerLocalizations.of(context).timerSettingsHistory,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
             );
         }
       }
@@ -64,7 +64,7 @@ class TimerSettingsHistoryScreen extends StatelessWidget
     if (state.timerSettingsList.isEmpty) {
       return DefaultScreenSetup(
         title: TimerLocalizations.of(context).timerSettingsHistory,
-        enableScrolling: false,
+        scrollPhysics: const NeverScrollableScrollPhysics(),
         enableAppBarSliver: false,
         slivers: [
           SliverPadding(

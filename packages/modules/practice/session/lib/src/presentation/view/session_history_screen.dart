@@ -37,27 +37,17 @@ class const SessionHistoryScreen({
               ]
             );
           case SessionsLoading():
-            return DefaultScreenSetup(
+            return DefaultScreenSetup.loading(
               title: SessionLocalizations.of(context).sessionsHistory,
-              enableScrolling: false,
-              enableAppBarSliver: false,
-              slivers: [
-                buildLoadingSliver(context),
-              ]
             );
           case SessionsLoadingError():
-            return DefaultScreenSetup(
+            return DefaultScreenSetup.error(
               title: SessionLocalizations.of(context).sessionsHistory,
-              enableScrolling: false,
-              enableAppBarSliver: false,
-              slivers: [
-                buildErrorSliver(context),
-              ]
             );
           default:
             return DefaultScreenSetup(
               title: SessionLocalizations.of(context).sessionsHistory,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               enableAppBarSliver: false,
               slivers: []
             );

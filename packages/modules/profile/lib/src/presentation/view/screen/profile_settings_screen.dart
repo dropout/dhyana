@@ -69,7 +69,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
               context,
               DefaultScreenSetup(
                 title: screenTitle,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
                 slivers: [buildLoadingSliver(context)],
               ),
@@ -122,7 +122,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
               context,
               DefaultScreenSetup(
                 title: screenTitle,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
               ),
             );
@@ -133,7 +133,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                 title: screenTitle,
                 titleColor: Colors.white,
                 enableTitleSliver: false,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
                 backgroundColor: Theme.of(context).colorScheme.error,
                 appBarBackgroundColor: Theme.of(context).colorScheme.error,

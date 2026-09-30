@@ -69,7 +69,7 @@ class _PresenceScreenState extends State<PresenceScreen>
           case PresenceLoadingState():
             return DefaultScreenSetup(
               title: SocialLocalizations.of(context).presence,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               enablePullToRefresh: true,
               onRefresh: () => _onRefresh(context),
               slivers: [
@@ -117,7 +117,7 @@ class _PresenceScreenState extends State<PresenceScreen>
             );
           case PresenceErrorState():
             return DefaultScreenSetup(
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               title: SocialLocalizations.of(context).presence,
               slivers: [
                 buildControlsArea(context, controlsEnabled: false),
@@ -127,7 +127,7 @@ class _PresenceScreenState extends State<PresenceScreen>
           default:
             return DefaultScreenSetup(
               title: SocialLocalizations.of(context).presence,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               slivers: [buildControlsArea(context, controlsEnabled: false)],
             );
         }

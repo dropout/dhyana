@@ -63,7 +63,7 @@ class _LoginWithEmailAndPasswordScreenState
     return DefaultScreenSetup(
       key: const Key('login_with_email_and_password_screen'),
       title: AuthLocalizations.of(context).loginSigninEmailPasswordScreenTitle,
-      enableScrolling: false,
+      scrollPhysics: const NeverScrollableScrollPhysics(),
       slivers: [
         SliverFillRemaining(
           child: SafeArea(

@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               enableTitleSliver: false,
               enableAppBarSliver: false,
               slivers: [
@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               title: ProfileLocalizations.of(context).profile,
               enableTitleSliver: false,
               enableAppBarSliver: false,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           case ProfileStateInitial():
             return DefaultScreenSetup(
               key: const Key('profile_screen'),
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
               enableAppBarSliver: false,
               title: '',
             );

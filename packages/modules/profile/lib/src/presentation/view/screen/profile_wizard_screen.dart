@@ -80,7 +80,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
               context,
               DefaultScreenSetup(
                 title: ProfileLocalizations.of(context).profileWizardTitle,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
                 slivers: [buildLoadingSliver(context)],
               ),
@@ -95,7 +95,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
                 appBarBackgroundColor: Theme.of(context).colorScheme.error,
                 backButton: CustomBackButton.light(),
                 titleColor: Colors.white,
-                enableScrolling: false,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
                 enableScaffolding: false,
                 slivers: [buildErrorSliver(context)],
               ),
@@ -164,7 +164,7 @@ class _ProfileWizardScreenState extends State<ProfileWizardScreen>
           default:
             return DefaultScreenSetup(
               title: ProfileLocalizations.of(context).editProfile,
-              enableScrolling: false,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
             );
         }
       },

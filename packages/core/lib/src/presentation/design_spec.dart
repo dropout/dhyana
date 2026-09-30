@@ -70,7 +70,7 @@ class DesignSpec {
 
   ThemeData get themeData {
     ColorScheme colorScheme = ColorScheme.fromSeed(
-      seedColor: AppColors.red,
+      seedColor: AppColors.crimsonRed,
       surface: AppColors.backgroundPaper,
     );
     ThemeData themeData = ThemeData(
@@ -124,6 +124,8 @@ class AppColors {
 
   static const Color buttonForeground = backgroundPaperLight;
   static const Color buttonBackground = Colors.black;
+
+  static const Color errorColor = Color(0xFFBA1B1A);
 
   const new();
 }
