@@ -9,13 +9,13 @@ part of 'profile_settings_entity.dart';
 _ProfileSettingsEntity _$ProfileSettingsEntityFromJson(
   Map<String, dynamic> json,
 ) => _ProfileSettingsEntity(
-  showStatsOnFinishScreen: json['showStatsOnFinishScreen'] as bool? ?? true,
+  showStats: json['showStats'] as bool? ?? true,
   usePresenceFeature: json['usePresenceFeature'] as bool? ?? true,
 );
 
 Map<String, dynamic> _$ProfileSettingsEntityToJson(
   _ProfileSettingsEntity instance,
 ) => <String, dynamic>{
-  'showStatsOnFinishScreen': instance.showStatsOnFinishScreen,
+  'showStats': instance.showStats,
   'usePresenceFeature': instance.usePresenceFeature,
 };

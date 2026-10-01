@@ -10,7 +10,6 @@ import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
 import 'package:profile/src/public/view/stats/milestones_view.dart';
 import 'package:profile/src/public/view/stats/summary_view.dart';
 
-
 class ProfileView extends StatelessWidget {
   final Profile profile;
 
@@ -47,31 +46,34 @@ class ProfileView extends StatelessWidget {
                 Gap.small(),
                 Text(
                   profile.displayName,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 Gap.large(),
-                MilestoneProgressView(statsReport: profile.statsReport),
-                Gap.large(),
-                Row(
-                  children: [
-                    Expanded(child: ConsecutiveDaysView(profile: profile)),
-                    Gap.medium(),
-                    Expanded(
-                      child: MilestonesView(
-                        profileStatsReport: profile.statsReport,
-                      ),
-                    ),
-                  ],
-                ),
-                Gap.large(),
-                SummaryView(
-                  daysCount: profile.statsReport.completedDaysCount,
-                  minutesCount: profile.statsReport.completedMinutesCount,
-                  sessionCount: profile.statsReport.completedSessionsCount,
-                ),
-                Gap.large(),
+
+                ...buildProfileStats(),
+                // MilestoneProgressView(statsReport: profile.statsReport),
+                // Gap.large(),
+                // Row(
+                //   children: [
+                //     Expanded(child: ConsecutiveDaysView(profile: profile)),
+                //     Gap.medium(),
+                //     Expanded(
+                //       child: MilestonesView(
+                //         profileStatsReport: profile.statsReport,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Gap.large(),
+                // SummaryView(
+                //   daysCount: profile.statsReport.completedDaysCount,
+                //   minutesCount: profile.statsReport.completedMinutesCount,
+                //   sessionCount: profile.statsReport.completedSessionsCount,
+                // ),
+                // Gap.large(),
+
+
                 ProfileMenu(profile: profile),
                 Gap.large(),
                 const ProfileFooter(),
@@ -82,5 +84,29 @@ class ProfileView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  List<Widget> buildProfileStats() {
+    if (profile.settings.showStats == false) return [];
+    return [
+      MilestoneProgressView(statsReport: profile.statsReport),
+      Gap.large(),
+      Row(
+        children: [
+          Expanded(child: ConsecutiveDaysView(profile: profile)),
+          Gap.medium(),
+          Expanded(
+            child: MilestonesView(profileStatsReport: profile.statsReport),
+          ),
+        ],
+      ),
+      Gap.large(),
+      SummaryView(
+        daysCount: profile.statsReport.completedDaysCount,
+        minutesCount: profile.statsReport.completedMinutesCount,
+        sessionCount: profile.statsReport.completedSessionsCount,
+      ),
+      Gap.large(),
+    ];
   }
 }

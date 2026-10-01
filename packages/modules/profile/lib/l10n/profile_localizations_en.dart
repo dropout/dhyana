@@ -197,12 +197,11 @@ class ProfileLocalizationsEn extends ProfileLocalizations {
   String get notAvailableAbbr => 'N/A';
 
   @override
-  String get showStatsOnFinishScreenTitle =>
-      'Show statistics on\nSession Finish Screen';
+  String get showStatsOnFinishScreenTitle => 'Show statistics';
 
   @override
   String get showStatsOnFinishScreenDescription =>
-      'When enabled, your statistics updated with the finished session will be displayed on the Session Finish screen.';
+      'If you disable this feature no statitistics will be shown throughout the application.';
 
   @override
   String get usePresenceFeatureTitle => 'Enable Presence feature';

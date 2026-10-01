@@ -73,7 +73,9 @@ class ProfileMenu extends StatelessWidget {
             key: const Key('profile_menu_session_history_tile'),
           ),
           const Divider(height: 0),
-          ProfileMenuTile(
+
+          // Profile statistics menu item
+          if (profile.settings.showStats) ProfileMenuTile(
             title: Text(
               ProfileLocalizations.of(context).profileStats,
               style: textStyle,
@@ -81,7 +83,8 @@ class ProfileMenu extends StatelessWidget {
             onTap: () => _onStatisticsTapped(context),
             key: const Key('profile_menu_statistics_tile'),
           ),
-          const Divider(height: 0),
+          if (profile.settings.showStats) const Divider(height: 0),
+
           ProfileMenuTile(
             title: Text(
               ProfileLocalizations.of(context).donate,

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileSettingsEntity {
 
- bool get showStatsOnFinishScreen; bool get usePresenceFeature;
+ bool get showStats; bool get usePresenceFeature;
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $ProfileSettingsEntityCopyWith<ProfileSettingsEntity> get copyWith => _$ProfileS
 @override
 bool operator ==(Object other) {
   final _this = this as ProfileSettingsEntity;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileSettingsEntity&&(identical(other.showStatsOnFinishScreen, _this.showStatsOnFinishScreen) || other.showStatsOnFinishScreen == _this.showStatsOnFinishScreen)&&(identical(other.usePresenceFeature, _this.usePresenceFeature) || other.usePresenceFeature == _this.usePresenceFeature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileSettingsEntity&&(identical(other.showStats, _this.showStats) || other.showStats == _this.showStats)&&(identical(other.usePresenceFeature, _this.usePresenceFeature) || other.usePresenceFeature == _this.usePresenceFeature));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as ProfileSettingsEntity;
-  return Object.hash(runtimeType,_this.showStatsOnFinishScreen,_this.usePresenceFeature);
+  return Object.hash(runtimeType,_this.showStats,_this.usePresenceFeature);
 }
 
 @override
 String toString() {
   final _this = this as ProfileSettingsEntity;
-  return 'ProfileSettingsEntity(showStatsOnFinishScreen: ${_this.showStatsOnFinishScreen}, usePresenceFeature: ${_this.usePresenceFeature})';
+  return 'ProfileSettingsEntity(showStats: ${_this.showStats}, usePresenceFeature: ${_this.usePresenceFeature})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $ProfileSettingsEntityCopyWith<$Res>  {
   factory $ProfileSettingsEntityCopyWith(ProfileSettingsEntity value, $Res Function(ProfileSettingsEntity) _then) = _$ProfileSettingsEntityCopyWithImpl;
 @useResult
 $Res call({
- bool showStatsOnFinishScreen, bool usePresenceFeature
+ bool showStats, bool usePresenceFeature
 });
 
 
@@ -71,9 +71,9 @@ class _$ProfileSettingsEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? showStatsOnFinishScreen = null,Object? usePresenceFeature = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? showStats = null,Object? usePresenceFeature = null,}) {
   return _then(ProfileSettingsEntity(
-showStatsOnFinishScreen: null == showStatsOnFinishScreen ? _self.showStatsOnFinishScreen : showStatsOnFinishScreen // ignore: cast_nullable_to_non_nullable
+showStats: null == showStats ? _self.showStats : showStats // ignore: cast_nullable_to_non_nullable
 as bool,usePresenceFeature: null == usePresenceFeature ? _self.usePresenceFeature : usePresenceFeature // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -157,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool showStatsOnFinishScreen,  bool usePresenceFeature)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool showStats,  bool usePresenceFeature)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileSettingsEntity() when $default != null:
-return $default(_that.showStatsOnFinishScreen,_that.usePresenceFeature);case _:
+return $default(_that.showStats,_that.usePresenceFeature);case _:
   return orElse();
 
 }
@@ -178,10 +178,10 @@ return $default(_that.showStatsOnFinishScreen,_that.usePresenceFeature);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool showStatsOnFinishScreen,  bool usePresenceFeature)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool showStats,  bool usePresenceFeature)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileSettingsEntity():
-return $default(_that.showStatsOnFinishScreen,_that.usePresenceFeature);}
+return $default(_that.showStats,_that.usePresenceFeature);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +195,10 @@ return $default(_that.showStatsOnFinishScreen,_that.usePresenceFeature);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool showStatsOnFinishScreen,  bool usePresenceFeature)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool showStats,  bool usePresenceFeature)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileSettingsEntity() when $default != null:
-return $default(_that.showStatsOnFinishScreen,_that.usePresenceFeature);case _:
+return $default(_that.showStats,_that.usePresenceFeature);case _:
   return null;
 
 }
@@ -210,10 +210,10 @@ return $default(_that.showStatsOnFinishScreen,_that.usePresenceFeature);case _:
 @JsonSerializable()
 
 class _ProfileSettingsEntity implements ProfileSettingsEntity {
-  const _ProfileSettingsEntity({this.showStatsOnFinishScreen = true, this.usePresenceFeature = true});
+  const _ProfileSettingsEntity({this.showStats = true, this.usePresenceFeature = true});
   factory _ProfileSettingsEntity.fromJson(Map<String, dynamic> json) => _$ProfileSettingsEntityFromJson(json);
 
-@override@JsonKey() final  bool showStatsOnFinishScreen;
+@override@JsonKey() final  bool showStats;
 @override@JsonKey() final  bool usePresenceFeature;
 
 /// Create a copy of ProfileSettingsEntity
@@ -229,18 +229,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileSettingsEntity&&(identical(other.showStatsOnFinishScreen, showStatsOnFinishScreen) || other.showStatsOnFinishScreen == showStatsOnFinishScreen)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileSettingsEntity&&(identical(other.showStats, showStats) || other.showStats == showStats)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,showStatsOnFinishScreen,usePresenceFeature);
+    return Object.hash(runtimeType,showStats,usePresenceFeature);
 }
 
 @override
 String toString() {
-    return 'ProfileSettingsEntity(showStatsOnFinishScreen: $showStatsOnFinishScreen, usePresenceFeature: $usePresenceFeature)';
+    return 'ProfileSettingsEntity(showStats: $showStats, usePresenceFeature: $usePresenceFeature)';
 }
 
 
@@ -251,7 +251,7 @@ abstract mixin class _$ProfileSettingsEntityCopyWith<$Res> implements $ProfileSe
   factory _$ProfileSettingsEntityCopyWith(_ProfileSettingsEntity value, $Res Function(_ProfileSettingsEntity) _then) = __$ProfileSettingsEntityCopyWithImpl;
 @override @useResult
 $Res call({
- bool showStatsOnFinishScreen, bool usePresenceFeature
+ bool showStats, bool usePresenceFeature
 });
 
 
@@ -268,9 +268,9 @@ class __$ProfileSettingsEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? showStatsOnFinishScreen = null,Object? usePresenceFeature = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? showStats = null,Object? usePresenceFeature = null,}) {
   return _then(_ProfileSettingsEntity(
-showStatsOnFinishScreen: null == showStatsOnFinishScreen ? _self.showStatsOnFinishScreen : showStatsOnFinishScreen // ignore: cast_nullable_to_non_nullable
+showStats: null == showStats ? _self.showStats : showStats // ignore: cast_nullable_to_non_nullable
 as bool,usePresenceFeature: null == usePresenceFeature ? _self.usePresenceFeature : usePresenceFeature // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

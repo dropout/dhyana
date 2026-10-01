@@ -230,10 +230,10 @@ void main() {
       act: (cubit) async {
         final profile = fakeModelFactory.createProfileEntity();
         final updatedProfile = profile.copyWith(
-          settings: profile.settings.copyWith(showStatsOnFinishScreen: false),
+          settings: profile.settings.copyWith(showStats: false),
         );
         const settingsFormData = <String, dynamic>{
-          'showStatsOnFinishScreen': false,
+          'showStats': false,
           'usePresenceFeature': true,
         };
 
@@ -276,7 +276,7 @@ void main() {
         final profile = fakeModelFactory.createProfile();
         updatedSettingsProfileId = profile.id;
         const settingsFormData = <String, dynamic>{
-          'showStatsOnFinishScreen': false,
+          'showStats': false,
           'usePresenceFeature': false,
         };
         final exception = Exception('settings update failed');

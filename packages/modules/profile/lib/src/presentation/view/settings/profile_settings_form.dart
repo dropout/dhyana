@@ -54,14 +54,14 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
         children: [
           Gap.medium(),
           ProfileSettingsSwitch(
-            name: 'showStatsOnFinishScreen',
+            name: ProfileSettings.showStatsKey,
             title: ProfileLocalizations.of(context).showStatsOnFinishScreenTitle,
             helperText: ProfileLocalizations.of(context).showStatsOnFinishScreenDescription,
-            initialValue: widget.profileSettings.showStatsOnFinishScreen,
+            initialValue: widget.profileSettings.showStats,
           ),
           Gap.large(),
           ProfileSettingsSwitch(
-            name: 'usePresenceFeature',
+            name: ProfileSettings.usePresenceFeatureKey,
             title: ProfileLocalizations.of(context).usePresenceFeatureTitle,
             helperText: ProfileLocalizations.of(context).usePresenceFeatureDescription,
             initialValue: widget.profileSettings.usePresenceFeature,

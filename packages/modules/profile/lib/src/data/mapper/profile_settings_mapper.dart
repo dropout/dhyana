@@ -4,7 +4,7 @@ import 'package:profile/src/public/model/profile_settings.dart';
 extension ProfileSettingsEntityMapper on ProfileSettingsEntity {
 	ProfileSettings toApi() {
 		return ProfileSettings(
-			showStatsOnFinishScreen: showStatsOnFinishScreen,
+			showStats: showStats,
 			usePresenceFeature: usePresenceFeature,
 		);
 	}
@@ -13,7 +13,7 @@ extension ProfileSettingsEntityMapper on ProfileSettingsEntity {
 extension ProfileSettingsMapper on ProfileSettings {
   ProfileSettingsEntity toDomain() {
     return ProfileSettingsEntity(
-      showStatsOnFinishScreen: showStatsOnFinishScreen,
+      showStats: showStats,
       usePresenceFeature: usePresenceFeature,
     );
   }

@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/src/presentation/view/settings/profile_settings_form.dart';
 
@@ -7,7 +8,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:profile/src/public/model/profile.dart';
-import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
   final String profileId;
@@ -61,21 +61,17 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
   @override
   Widget build(BuildContext context) {
     final screenTitle = ProfileLocalizations.of(context).profileSettings;
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (BuildContext context, ProfileState profileState) {
-        switch (profileState) {
-          case ProfileLoadingState():
-            return buildScaffolding(
-              context,
-              DefaultScreenSetup(
-                title: screenTitle,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
-                enableScaffolding: false,
-                slivers: [buildLoadingSliver(context)],
-              ),
-            );
-          case ProfileLoadedState():
-            return DefaultScreenSetup(
+    return SmartBlocProvider<ProfileEditCubit, ProfileEditState>(
+      create: (context) => 
+        GetIt.I<ProfileEditCubit>()..loadProfile(widget.profileId),
+      builder: (context, state) =>
+        switch (state) {
+          ProfileEditLoadingState() =>
+            DefaultScreenSetup.loading(title: screenTitle),
+          ProfileEditErrorState() =>
+            DefaultScreenSetup.error(title: screenTitle),      
+          ProfileEditLoadedState() =>
+            DefaultScreenSetup(
               title: screenTitle,
               enableTitleSliver: true,
               slivers: [
@@ -88,8 +84,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                   sliver: SliverToBoxAdapter(
                     child: ProfileSettingsForm(
                       formStateKey: formStateKey,
-                      profile: profileState.profile,
-                      profileSettings: profileState.profile.settings,
+                      profile: state.profile,
+                      profileSettings: state.profile.settings,
                       clearCacheCapability: widget.clearCacheCapability,
                       onChanged: () => _onFormChanged(context),
                     ),
@@ -108,38 +104,103 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                     child: buildOverlayActionButton(
                       context,
                       loadingState,
-                      onAction: () => _onSave(context, profileState.profile),
+                      onAction: () => _onSave(context, state.profile),
                     ),
                   ),
                 ),
               ),
-            );
-          case ProfileStateInitial():
-            return buildScaffolding(
-              context,
-              DefaultScreenSetup(
-                title: screenTitle,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
-                enableScaffolding: false,
-              ),
-            );
-          case ProfileErrorState():
-            return buildScaffolding(
-              context,
-              DefaultScreenSetup(
-                title: screenTitle,
-                titleColor: Colors.white,
-                enableTitleSliver: false,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
-                enableScaffolding: false,
-                backgroundColor: Theme.of(context).colorScheme.error,
-                appBarBackgroundColor: Theme.of(context).colorScheme.error,
-                backButton: CustomBackButton.light(),
-                slivers: [buildErrorSliver(context)],
-              ),
-            );
+            ),
+          _ => DefaultScreenSetup(
+            title: ProfileLocalizations.of(context).editProfile,
+            scrollPhysics: const NeverScrollableScrollPhysics(),
+          ),
         }
-      },
     );
+
+
+    
+
+
+
+    // return BlocBuilder<ProfileCubit, ProfileState>(
+    //   builder: (BuildContext context, ProfileState profileState) {
+    //     switch (profileState) {
+    //       case ProfileLoadingState():
+    //         return buildScaffolding(
+    //           context,
+    //           DefaultScreenSetup(
+    //             title: screenTitle,
+    //             scrollPhysics: const NeverScrollableScrollPhysics(),
+    //             enableScaffolding: false,
+    //             slivers: [buildLoadingSliver(context)],
+    //           ),
+    //         );
+    //       case ProfileLoadedState():
+    //         return DefaultScreenSetup(
+    //           title: screenTitle,
+    //           enableTitleSliver: true,
+    //           slivers: [
+    //             SliverSafeArea(
+    //               top: false,
+    //               minimum: const EdgeInsets.only(
+    //                 left: DesignSpec.paddingLg,
+    //                 right: DesignSpec.paddingLg,
+    //               ),
+    //               sliver: SliverToBoxAdapter(
+    //                 child: ProfileSettingsForm(
+    //                   formStateKey: formStateKey,
+    //                   profile: profileState.profile,
+    //                   profileSettings: profileState.profile.settings,
+    //                   clearCacheCapability: widget.clearCacheCapability,
+    //                   onChanged: () => _onFormChanged(context),
+    //                 ),
+    //               ),
+    //             ),
+    //             DesignSpec.bottomActionSpacingSliver,
+    //           ],
+    //           overlay: SafeArea(
+    //             top: false,
+    //             child: Align(
+    //               alignment: const Alignment(0.0, 1.0),
+    //               child: Padding(
+    //                 padding: const EdgeInsets.only(
+    //                   bottom: DesignSpec.paddingLg,
+    //                 ),
+    //                 child: buildOverlayActionButton(
+    //                   context,
+    //                   loadingState,
+    //                   onAction: () => _onSave(context, profileState.profile),
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //         );
+    //       case ProfileStateInitial():
+    //         return buildScaffolding(
+    //           context,
+    //           DefaultScreenSetup(
+    //             title: screenTitle,
+    //             scrollPhysics: const NeverScrollableScrollPhysics(),
+    //             enableScaffolding: false,
+    //           ),
+    //         );
+    //       case ProfileErrorState():
+    //         return buildScaffolding(
+    //           context,
+    //           DefaultScreenSetup(
+    //             title: screenTitle,
+    //             titleColor: Colors.white,
+    //             enableTitleSliver: false,
+    //             scrollPhysics: const NeverScrollableScrollPhysics(),
+    //             enableScaffolding: false,
+    //             backgroundColor: Theme.of(context).colorScheme.error,
+    //             appBarBackgroundColor: Theme.of(context).colorScheme.error,
+    //             backButton: CustomBackButton.light(),
+    //             slivers: [buildErrorSliver(context)],
+    //           ),
+    //         );
+    //     }
+    //   },
+    // );
   }
 }

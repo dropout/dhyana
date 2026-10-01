@@ -98,7 +98,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> with LoggerMixin {
     void Function(Object? error, StackTrace stack)? onError,
   }) async {
     try {
-      logger.t('Updating profile settings');
+      logger.t('Updating profile settings: $settingsFormData');
 
       final updatedProfile = await updateProfileSettingsUseCase.execute(
         profileEntity: profile.toDomain(),

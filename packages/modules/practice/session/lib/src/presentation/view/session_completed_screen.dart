@@ -75,9 +75,12 @@ class const SessionCompletedScreen({
                   .updateResult
                   .updatedProfile
                   .settings
-                  .showStatsOnFinishScreen,
-              usePresenceFeature:
-                  state.updateResult.updatedProfile.settings.usePresenceFeature,
+                  .showStats,
+              usePresenceFeature: state
+                  .updateResult
+                  .updatedProfile
+                  .settings
+                  .usePresenceFeature,
             );
           case SessionCompletedSavedState():
             return SignedInCompletedView(
@@ -87,7 +90,7 @@ class const SessionCompletedScreen({
                   .updateResult
                   .updatedProfile
                   .settings
-                  .showStatsOnFinishScreen,
+                  .showStats,
               usePresenceFeature:
                   state.updateResult.updatedProfile.settings.usePresenceFeature,
             );

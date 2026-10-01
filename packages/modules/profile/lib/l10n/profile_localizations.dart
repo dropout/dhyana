@@ -350,13 +350,13 @@ abstract class ProfileLocalizations {
   /// No description provided for @showStatsOnFinishScreenTitle.
   ///
   /// In en, this message translates to:
-  /// **'Show statistics on\nSession Finish Screen'**
+  /// **'Show statistics'**
   String get showStatsOnFinishScreenTitle;
 
   /// No description provided for @showStatsOnFinishScreenDescription.
   ///
   /// In en, this message translates to:
-  /// **'When enabled, your statistics updated with the finished session will be displayed on the Session Finish screen.'**
+  /// **'If you disable this feature no statitistics will be shown throughout the application.'**
   String get showStatsOnFinishScreenDescription;
 
   /// No description provided for @usePresenceFeatureTitle.

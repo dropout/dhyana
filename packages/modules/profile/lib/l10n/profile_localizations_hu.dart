@@ -196,12 +196,11 @@ class ProfileLocalizationsHu extends ProfileLocalizations {
   String get notAvailableAbbr => 'N/A';
 
   @override
-  String get showStatsOnFinishScreenTitle =>
-      'Statisztika megjelenítése a Gyakorlat befejezése képernyőn';
+  String get showStatsOnFinishScreenTitle => 'Statisztika megjelenítése';
 
   @override
   String get showStatsOnFinishScreenDescription =>
-      'Ha engedélyezve van, a gyakorlat befejezése képernyőn megjelenik a gyakorlat eredmény statisztikája.';
+      'Ha ezt a funkciót letiltod, a statisztikák nem lesznek megjelenítve az alkalmazásban.';
 
   @override
   String get usePresenceFeatureTitle => 'Jelenlét funkció engedélyezése';

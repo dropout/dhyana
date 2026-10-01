@@ -27,7 +27,7 @@ void main() {
     test('updates profile settings and persists updated profile', () async {
       final profile = fakeModelFactory.createProfileEntity();
       final updatedFields = <String, dynamic>{
-        'showStatsOnFinishScreen': false,
+        'showStats': false,
         'usePresenceFeature': false,
       };
 
@@ -38,7 +38,7 @@ void main() {
         updatedFields: updatedFields,
       );
 
-      expect(result.settings.showStatsOnFinishScreen, isFalse);
+      expect(result.settings.showStats, isFalse);
       expect(result.settings.usePresenceFeature, isFalse);
       verify(() => profileRepository.update(result)).called(1);
     });

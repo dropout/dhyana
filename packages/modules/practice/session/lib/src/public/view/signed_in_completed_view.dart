@@ -15,6 +15,7 @@ class const SignedInCompletedView({
   final bool usePresenceFeature = true,
   super.key,
 }) extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
 
