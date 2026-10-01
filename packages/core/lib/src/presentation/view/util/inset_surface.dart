@@ -1,6 +1,6 @@
+import 'package:assets/assets.dart';
 import 'package:core/src/presentation/view/painting/inset_shadow_painter.dart';
 import 'package:core/src/presentation/view/util/app_context.dart';
-import 'package:core/src/util/assets.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:core/src/presentation/design_spec.dart';

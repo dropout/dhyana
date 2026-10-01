@@ -1,3 +1,4 @@
+import 'package:assets/assets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_litert/flutter_litert.dart';
 import 'package:image/image.dart' as img;

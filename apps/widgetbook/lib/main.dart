@@ -1,3 +1,4 @@
+import 'package:assets/assets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile/profile.dart';

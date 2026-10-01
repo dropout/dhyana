@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:assets/assets.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_shaders/flutter_shaders.dart';

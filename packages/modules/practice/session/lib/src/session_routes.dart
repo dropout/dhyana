@@ -1,3 +1,4 @@
+import 'package:assets/assets.dart';
 import 'package:core/core.dart';
 import 'package:session/src/public/model/session.dart';
 import 'package:session/src/presentation/view/session_completed_screen.dart';

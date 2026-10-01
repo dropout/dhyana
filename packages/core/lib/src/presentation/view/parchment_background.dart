@@ -1,12 +1,12 @@
 import 'dart:ui';
 
+import 'package:assets/assets.dart';
 import 'package:core/src/presentation/design_spec.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:core/src/presentation/view/util/app_context.dart';
 import 'package:core/src/presentation/view/util/shader_rendering_scope.dart';
-import 'package:core/src/util/assets.dart';
 
 /// Renders a procedurally generated, continuously scrolling parchment
 /// paper texture behind [child], driven by [scrollOffset].

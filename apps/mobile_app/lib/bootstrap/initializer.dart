@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:assets/assets.dart';
 import 'package:donate/donate.dart';
 import 'package:mobile_app/audio/default_app_audio_handler.dart';
 import 'package:mobile_app/audio/audio_session_configuration.dart';
