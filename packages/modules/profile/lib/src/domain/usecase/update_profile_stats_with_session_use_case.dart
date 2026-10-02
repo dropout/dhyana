@@ -15,7 +15,7 @@ class UpdateProfileStatsWithSessionUseCase({
     String profileId,
     ProfileSessionEntity session,
   ) async {
-    final originalProfile = await profileRepository.read(profileId, preferCache: true);
+    final originalProfile = await profileRepository.read(profileId, preferCache: false);
     final updatedProfile = profileStatsReportUpdaterService.updateProfileStatsWithSession(
       originalProfile,
       session,

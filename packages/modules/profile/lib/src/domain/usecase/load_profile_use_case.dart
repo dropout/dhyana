@@ -38,7 +38,7 @@ class LoadProfileUseCase with LoggerMixin {
       profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
       
       // lazy update the profile, no need to await this
-      profileRepository.update(profileEntity);
+      await profileRepository.update(profileEntity);
     }
     
     return profileEntity;

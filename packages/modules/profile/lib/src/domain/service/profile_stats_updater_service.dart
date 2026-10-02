@@ -183,10 +183,11 @@ class ProfileStatsReportUpdaterService with LoggerMixin {
   /// - resets the consecutive days count
   /// - resets the milestone progress
   ProfileStatsReportEntity validateStatsReport(
-    ProfileStatsReportEntity statsReport
-  ) {
+    ProfileStatsReportEntity statsReport, {
+    DateTime? now,
+  }) {
 
-    final DateTime? lastSessionDate = statsReport.lastSessionDate;
+    final lastSessionDate = statsReport.lastSessionDate;
 
     // Check if the user has a last session, if not, no need to validate
     if (lastSessionDate == null) {
@@ -194,7 +195,7 @@ class ProfileStatsReportUpdaterService with LoggerMixin {
       return statsReport;
     }
 
-    final DateTime now = DateTime.now();
+    now ??= DateTime.now();
 
     // Check if consecutive days has been already validated today
     // In that case no need to continue

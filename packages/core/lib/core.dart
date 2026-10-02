@@ -142,7 +142,6 @@ export 'src/testing/test_context_providers.dart';
 export 'src/testing/mock_go_router_provider.dart';
 export 'src/testing/mock_definitions.dart';
 
-export 'src/util/assets.dart';
 export 'src/util/blurhash.dart';
 export 'src/util/date_time_utils.dart';
 export 'src/util/debounce_stream_transformer.dart';
