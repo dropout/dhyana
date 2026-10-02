@@ -1,4 +1,5 @@
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
+import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:core/core.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_view.dart';
@@ -138,8 +139,11 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Preparing chants assets... ${widget.chantingState.cachingProgress.completedTasks} / ${widget.chantingState.cachingProgress.totalTasks}',
-          style: context.theme.textTheme.bodyMedium?.copyWith(color: Colors.white)
+        Text(
+          'Preparing chants assets... ${widget.chantingState.cachingProgress.completedTasks} / ${widget.chantingState.cachingProgress.totalTasks}',
+          style: context.theme.textTheme.bodyMedium?.copyWith(
+            color: Colors.white,
+          ),
         ),
         Gap.small(),
         FractionallySizedBox(
@@ -150,8 +154,8 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             color: Colors.white,
             value: widget.chantingState.cachingProgress.progress,
           ),
-        ),    
-      ]
+        ),
+      ],
     );
   }
 
@@ -161,6 +165,12 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
         return LyricsView(
           chantingState: widget.chantingState,
           maxWidth: constraints.maxWidth,
+          effects: const LyricsEffectsConfig(
+            maxBlurSigma: 3,
+            blurSigmaPerLine: 0.4,
+            scale: false,
+            wormDuration: Durations.extralong4,
+          ),
         );
       },
     );

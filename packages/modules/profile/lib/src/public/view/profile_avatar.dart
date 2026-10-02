@@ -27,9 +27,10 @@ class const ProfileAvatar({
           width: imageSize,
           height: imageSize,
           child: DecoratedBox(
-            decoration: BoxDecoration(
+            position: .foreground,
+            decoration: BoxDecoration(                              
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey, width: 4.0),
+              border: Border.all(color: Colors.black, width: 4.0),
             ),
             child: ProfileImage(
               profileId: profileId,

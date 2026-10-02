@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
+import 'package:chanting/src/presentation/view/player/lyric_focus.dart';
 import 'package:chanting/src/presentation/view/player/lyric_line.dart';
+import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
+import 'package:chanting/src/presentation/view/player/worm_line.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,11 +26,16 @@ class LyricsView extends StatefulWidget {
 
   final double maxWidth;
 
+  /// Visual effects configuration; use [LyricsEffectsConfig.disabled]
+  /// to turn all effects off.
+  final LyricsEffectsConfig effects;
+
   /// Creates a [LyricsView] widget.
   const LyricsView({
     required this.chantingState,
     required this.maxWidth,
     this.topOffset = 200.0,
+    this.effects = const LyricsEffectsConfig(),
     super.key,
   });
 
@@ -33,27 +43,54 @@ class LyricsView extends StatefulWidget {
   State<LyricsView> createState() => _LyricsViewState();
 }
 
-class _LyricsViewState extends State<LyricsView> {
+/// Scroll interaction modes.
+enum _Mode {
+  /// Auto-following the active line.
+  synced,
+
+  /// The user is dragging or flinging the list.
+  userScrolling,
+
+  /// The user let go; waiting for the idle timer before following again.
+  resuming,
+}
+
+class _LyricsViewState extends State<LyricsView>
+    with SingleTickerProviderStateMixin {
+  static const Duration _resumeDelay = Duration(milliseconds: 2500);
+  static const Duration _seekThrottle = Duration(milliseconds: 100);
+
   /// Scroll controller to manage programmatic scrolling and
   /// listen to user scroll events.
   final ScrollController _scrollController = ScrollController();
 
-  /// Flag to indicate whether there is scrolling of
-  /// any kind (user-initiated or programmatic) currently happening.
-  bool isScrolling = false;
+  /// Drives the staggered visual catch-up after each programmatic jump.
+  late final AnimationController _wormController;
 
-  /// Flag to indicate whether the user is currently touching the screen.
-  bool isPointerDown = false;
+  Timer? _resumeTimer;
+  _Mode _mode = _Mode.synced;
 
-  /// Flag to indicate whether we are currently
-  /// animating the scroll position programmatically.
-  bool isAnimating = false;
+  /// Whether the user is currently touching the screen.
+  bool _isPointerDown = false;
+
+  /// Pixels still to be absorbed visually by the lines, and the line
+  /// around which the stagger is centered.
+  double _wormDelta = 0;
+  int _wormAnchor = 0;
+
+  DateTime _lastSeek = DateTime.fromMillisecondsSinceEpoch(0);
 
   List<double> _lyricLineHeights = [];
 
   @override
   void initState() {
     super.initState();
+
+    _wormController = AnimationController(
+      vsync: this,
+      duration: widget.effects.wormDuration,
+      value: 1,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _scrollController.addListener(_onScroll);
@@ -68,6 +105,8 @@ class _LyricsViewState extends State<LyricsView> {
 
   @override
   void dispose() {
+    _resumeTimer?.cancel();
+    _wormController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -76,6 +115,9 @@ class _LyricsViewState extends State<LyricsView> {
   @override
   void didUpdateWidget(covariant LyricsView oldWidget) {
     super.didUpdateWidget(oldWidget);
+
+    _wormController.duration = widget.effects.wormDuration;
+    if (!widget.effects.isWormScrollOn) _stopWorm();
 
     // Scroll to lines while the chant is playing.
     if (widget.chantingState.activeLineIndex !=
@@ -91,9 +133,9 @@ class _LyricsViewState extends State<LyricsView> {
       }
     }
 
-    // Update line height when change there is a change in the lyrics document 
+    // Update line height when change there is a change in the lyrics document
     if (widget.chantingState.lyricsDocument !=
-        oldWidget.chantingState.lyricsDocument) {             
+        oldWidget.chantingState.lyricsDocument) {
       setState(() {
         _lyricLineHeights = _calculateLyricLineHeights();
       });
@@ -123,82 +165,108 @@ class _LyricsViewState extends State<LyricsView> {
     return lh;
   }
 
-  /// Handler for when the isScrolling on [ScrollController] changes.
-  /// When user scrolls manually, we want to pause playback to avoid fighting
-  /// with the auto-scrolling behavior.
+  /// Pauses playback when the user starts scrolling by hand, and schedules
+  /// the return to auto-follow when the scroll ends.
   void _onIsScrollingChanged() {
-    // Ensure that we only pause when user is actively touching the screen
-    // When animating scroll programmatically, do not pause
-    if (_scrollController.position.isScrollingNotifier.value && isPointerDown) {
+    final scrolling = _scrollController.position.isScrollingNotifier.value;
+    // Programmatic jumps never reach here with the pointer down.
+    if (scrolling && _isPointerDown) {
+      _resumeTimer?.cancel();
+      _stopWorm();
       context.read<ChantingCubit>().pause();
-      setState(() {
-        isScrolling = true;
-      });
-    } else {
-      setState(() {
-        isScrolling = false;
-      });
+      setState(() => _mode = _Mode.userScrolling);
+    } else if (!scrolling && _mode == _Mode.userScrolling) {
+      setState(() => _mode = _Mode.resuming);
+      _resumeTimer?.cancel();
+      _resumeTimer = Timer(_resumeDelay, _onResumeTimer);
     }
   }
 
-  /// Handler for scroll events.
-  /// The goal of handling scroll events is to seek the chant to the line
-  /// that is closest to the center of the view when user scrolls manually.
-  /// During programmatic scrolls (e.g. when active line changes during playback),
-  /// we do not want to trigger seeking.
+  void _onResumeTimer() {
+    if (!mounted || _mode != _Mode.resuming) return;
+    _mode = _Mode.synced;
+    if (widget.chantingState.playbackState.playing) {
+      _scrollToLine(widget.chantingState.activeLineIndex);
+    }
+  }
+
+  /// Seeks to the line closest to the anchor during user-initiated scrolls.
   void _onScroll() {
-    // If not user-initiated scroll, do not trigger seeking
-    if (!isScrolling) {
-      return;
-    }
+    if (_mode != _Mode.userScrolling) return;
 
-    final targetActiveLineIndex = _calculateActiveLineIndexFromScroll();
-    context.read<ChantingCubit>().seekToLine(targetActiveLineIndex);
+    final now = DateTime.now();
+    if (now.difference(_lastSeek) < _seekThrottle) return;
+    _lastSeek = now;
+
+    context.read<ChantingCubit>().seekToLine(
+      _calculateActiveLineIndexFromScroll(),
+    );
   }
 
-  /// Scrolls the view to center the active line.
-  /// Only called when the active line changes.
-  void _scrollToLine(int lineIndex) async {
-    // Don't auto-scroll if user is actively scrolling
-    if (isScrolling) return;
+  /// Settles all lines at their final position immediately.
+  void _stopWorm() {
+    _wormController.value = 1;
+  }
 
-    // final lineHeights = widget.chantingState.lyricsLineHeights;
-    if (_lyricLineHeights.isEmpty || lineIndex >= _lyricLineHeights.length) {
+  /// Jumps the scroll view to the line and lets the lines catch up visually
+  /// with a stagger, so the list moves like a worm.
+  void _scrollToLine(int lineIndex) {
+    if (_mode == _Mode.userScrolling) return;
+    if (!_scrollController.hasClients ||
+        lineIndex < 0 ||
+        lineIndex >= _lyricLineHeights.length) {
       return;
     }
 
-    // Calculate the cumulative scroll offset for the target line.
-    // The top SliverPadding of [topOffset] pixels shifts line content
-    // visually, but scroll offset 0 aligns to the first line (after padding).
-    // Summing heights up to lineIndex gives the offset where that line begins.
-    double targetScrollOffset = 0;
+    _resumeTimer?.cancel();
+    _mode = _Mode.synced;
+
+    // Summing heights before the line gives the offset where it begins; the
+    // top padding makes offset 0 align the first line at [topOffset].
+    double target = 0;
     for (int i = 0; i < lineIndex; i++) {
-      targetScrollOffset += _lyricLineHeights[i];
+      target += _lyricLineHeights[i];
+    }
+    final position = _scrollController.position;
+    target = target.clamp(position.minScrollExtent, position.maxScrollExtent);
+
+    var delta = target - position.pixels;
+    if (delta.abs() < 1) return;
+
+    // Carry over what the previous animation had not yet absorbed.
+    final effects = widget.effects;
+    if (_wormController.isAnimating) {
+      delta +=
+          _wormDelta *
+          (1 -
+              wormProgress(
+                index: lineIndex,
+                anchor: _wormAnchor,
+                t: _wormController.value,
+                delayPerLine: effects.wormDelayPerLine,
+                maxDelay: effects.wormMaxDelay,
+              ));
     }
 
-    debugPrint(
-      'Scrolling to line $lineIndex — '
-      'current offset: ${_scrollController.offset}, '
-      'target offset: $targetScrollOffset',
-    );
+    if (!effects.isWormScrollOn) {
+      _scrollController.animateTo(
+        target,
+        duration: Durations.long2 * 2,
+        curve: Curves.easeInOut,
+      );
+      return;
+    }
 
-    setState(() {
-      isAnimating = true;
-    });
+    _scrollController.jumpTo(target);
 
-    final animationFinished = _scrollController.animateTo(
-      targetScrollOffset,
-      duration: Durations.long2 * 2,
-      curve: Curves.easeInOut,
-    );
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _stopWorm();
+      return;
+    }
 
-    animationFinished.whenComplete(() {
-      if (mounted) {
-        setState(() {
-          isAnimating = false;
-        });
-      }
-    });
+    _wormDelta = delta;
+    _wormAnchor = lineIndex;
+    _wormController.forward(from: 0);
   }
 
   int _calculateActiveLineIndexFromScroll() {
@@ -230,7 +298,8 @@ class _LyricsViewState extends State<LyricsView> {
   @override
   Widget build(BuildContext context) {
     final slivers = <Widget>[];
-    if (widget.chantingState.lyricsLoadingState == .completed && _lyricLineHeights.isNotEmpty) {
+    if (widget.chantingState.lyricsLoadingState == .completed &&
+        _lyricLineHeights.isNotEmpty) {
       final lyricsDocument = widget.chantingState.lyricsDocument!;
       slivers.addAll([
         SliverPadding(
@@ -239,11 +308,27 @@ class _LyricsViewState extends State<LyricsView> {
         SliverVariedExtentList(
           delegate: SliverChildBuilderDelegate((context, index) {
             final line = lyricsDocument.lines[index];
-            return LyricLine(
-              line: line,
-              position: widget.chantingState.latencyCompensatedPosition,
-              chantingState: widget.chantingState,
-              isActive: index <= widget.chantingState.activeLineIndex,
+            final lyricLine = LyricFocus(
+              index: index,
+              activeIndex: widget.chantingState.activeLineIndex,
+              isUserScrolling: _mode == _Mode.userScrolling,
+              config: widget.effects,
+              child: LyricLine(
+                line: line,
+                position: widget.chantingState.latencyCompensatedPosition,
+                chantingState: widget.chantingState,
+                isActive: index <= widget.chantingState.activeLineIndex,
+              ),
+            );
+            if (!widget.effects.isWormScrollOn) return lyricLine;
+            return WormLine(
+              index: index,
+              animation: _wormController,
+              delta: () => _wormDelta,
+              anchor: () => _wormAnchor,
+              delayPerLine: widget.effects.wormDelayPerLine,
+              maxDelay: widget.effects.wormMaxDelay,
+              child: lyricLine,
             );
           }, childCount: widget.chantingState.lyricsDocument!.lines.length),
           itemExtentBuilder: (index, sliverLayoutDimensions) {
@@ -258,15 +343,12 @@ class _LyricsViewState extends State<LyricsView> {
 
     return Listener(
       onPointerDown: (_) {
-        setState(() {
-          isPointerDown = true;
-        });
+        _isPointerDown = true;
+        _resumeTimer?.cancel();
+        _stopWorm();
       },
-      onPointerUp: (_) {
-        setState(() {
-          isPointerDown = false;
-        });
-      },
+      onPointerUp: (_) => _isPointerDown = false,
+      onPointerCancel: (_) => _isPointerDown = false,
       child: CustomScrollView(
         controller: _scrollController,
         physics: ClampingScrollPhysics(),

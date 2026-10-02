@@ -2,11 +2,7 @@ import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
-enum WordState {
-  active,
-  pending,
-  sung,
-}
+enum WordState { active, pending, sung }
 
 class LyricWordWidget extends StatelessWidget {
   final LyricsWordEntity word;

@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 import 'package:profile/src/presentation/view/profile_footer.dart';
 import 'package:profile/src/presentation/view/profile_menu.dart';
 import 'package:profile/src/public/model/profile.dart';
-import 'package:profile/src/public/view/profile_image.dart';
+import 'package:profile/src/public/view/profile_avatar.dart';
 import 'package:profile/src/public/view/stats/consecutive_days_view.dart';
 import 'package:profile/src/public/view/stats/milestone_progress_view.dart';
 import 'package:profile/src/public/view/stats/milestones_view.dart';
@@ -27,52 +27,18 @@ class ProfileView extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Profile avatar + name
                 Gap.large(),
-                DecoratedBox(
-                  // let the border be visible on top of the image
-                  position: .foreground,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.black, width: 4.0),
-                  ),
-                  child: ProfileImage(
-                    profileId: profile.id,
-                    profileName: profile.displayName,
-                    profilePhotoBlurhash: profile.photoBlurhash,
-                    size: DesignSpec.circleLg,
-                  ),
-                ),
-                Gap.small(),
-                Text(
-                  profile.displayName,
-                  style: Theme.of(context).textTheme.headlineSmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                ProfileAvatar(
+                  profileId: profile.id,
+                  profileName: profile.displayName,
+                  profilePhotoBlurhash: profile.photoBlurhash,
+                  imageSize: DesignSpec.circleLg,                  
                 ),
                 Gap.large(),
 
+                // Conditionally build widgets based on profile settings
                 ...buildProfileStats(),
-                // MilestoneProgressView(statsReport: profile.statsReport),
-                // Gap.large(),
-                // Row(
-                //   children: [
-                //     Expanded(child: ConsecutiveDaysView(profile: profile)),
-                //     Gap.medium(),
-                //     Expanded(
-                //       child: MilestonesView(
-                //         profileStatsReport: profile.statsReport,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Gap.large(),
-                // SummaryView(
-                //   daysCount: profile.statsReport.completedDaysCount,
-                //   minutesCount: profile.statsReport.completedMinutesCount,
-                //   sessionCount: profile.statsReport.completedSessionsCount,
-                // ),
-                // Gap.large(),
-
+                Gap.large(),
 
                 ProfileMenu(profile: profile),
                 Gap.large(),
@@ -105,8 +71,7 @@ class ProfileView extends StatelessWidget {
         daysCount: profile.statsReport.completedDaysCount,
         minutesCount: profile.statsReport.completedMinutesCount,
         sessionCount: profile.statsReport.completedSessionsCount,
-      ),
-      Gap.large(),
+      ),      
     ];
   }
 }

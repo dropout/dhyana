@@ -30,7 +30,6 @@ class LyricLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     List<InlineSpan> textSpans = [];
 
     for (int i = 0; i < line.words.length; i++) {
@@ -45,11 +44,7 @@ class LyricLine extends StatelessWidget {
 
       // Only add a space if it's NOT the last word in the sentence
       if (i < line.words.length - 1) {
-        textSpans.add(
-          const TextSpan(
-            text: ' ',
-          ),
-        );
+        textSpans.add(const TextSpan(text: ' '));
       }
     }
 
@@ -65,7 +60,6 @@ class LyricLine extends StatelessWidget {
         ),
       ),
     );
-
   }
 
   WordState getWordState(LyricsWordEntity word) {
@@ -81,5 +75,4 @@ class LyricLine extends StatelessWidget {
       return WordState.sung;
     }
   }
-
 }
