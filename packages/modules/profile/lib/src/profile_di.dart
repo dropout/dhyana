@@ -14,6 +14,9 @@ import 'package:profile/src/data/repository/default_profile_repository.dart';
 import 'package:profile/src/domain/repository/profile_repository.dart';
 import 'package:profile/src/data/service/default_profile_public_api.dart';
 import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
+import 'package:profile/src/domain/service/stats_audit_service.dart';
+import 'package:profile/src/domain/repository/stats_audit_repository.dart';
+import 'package:profile/src/data/repository/default_stats_audit_repository.dart';
 import 'package:profile/src/domain/usecase/delete_profile_use_case.dart';
 import 'package:profile/src/presentation/viewmodel/delete_profile_cubit.dart';
 import 'package:profile/src/public/viewmodel/profile_cubit.dart';
@@ -42,6 +45,12 @@ extension ProfileModuleDependencyInjection on GetIt {
       ),
     );
 
+    registerLazySingleton<StatsAuditRepository>(
+      () => DefaultStatsAudioRepository(
+        GetIt.I.get<FirebaseProvider>().firestore,
+      ),
+    );
+
     // Services
     registerLazySingleton<SafeImageDetectorFactory>(
       () => DefaultSafeImageDetectorFactory(),
@@ -49,12 +58,19 @@ extension ProfileModuleDependencyInjection on GetIt {
     registerLazySingleton<ProfileStatsReportUpdaterService>(
       () => ProfileStatsReportUpdaterService(),
     );
+    registerLazySingleton<StatsAuditService>(
+      () => StatsAuditService(
+        repository: GetIt.I.get<StatsAuditRepository>(),
+        statsUpdater: GetIt.I.get<ProfileStatsReportUpdaterService>(),
+      ),
+    );
 
     // Use cases
     registerLazySingleton(
       () => LoadProfileUseCase(
         profileRepository: GetIt.I.get<ProfileRepository>(),
         profileStatsUpdater: GetIt.I.get<ProfileStatsReportUpdaterService>(),
+        statsAuditService: GetIt.I.get<StatsAuditService>(),
       ),
     );
 
@@ -112,6 +128,7 @@ extension ProfileModuleDependencyInjection on GetIt {
         profileStatsUpdater:
             GetIt.I.get<ProfileStatsReportUpdaterService>(),
         storageRepository: GetIt.I.get<StorageRepository>(),
+        statsAuditService: GetIt.I.get<StatsAuditService>(),
       ),
     );
 

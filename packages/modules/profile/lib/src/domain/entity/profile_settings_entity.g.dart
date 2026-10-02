@@ -11,6 +11,7 @@ _ProfileSettingsEntity _$ProfileSettingsEntityFromJson(
 ) => _ProfileSettingsEntity(
   showStats: json['showStats'] as bool? ?? true,
   usePresenceFeature: json['usePresenceFeature'] as bool? ?? true,
+  statsAuditEnabled: json['statsAuditEnabled'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$ProfileSettingsEntityToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$ProfileSettingsEntityToJson(
 ) => <String, dynamic>{
   'showStats': instance.showStats,
   'usePresenceFeature': instance.usePresenceFeature,
+  'statsAuditEnabled': instance.statsAuditEnabled,
 };

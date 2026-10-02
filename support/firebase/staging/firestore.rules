@@ -3,6 +3,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Stats audit trail: owner can write, nobody can read or delete from clients.
+    match /profiles/{profileId}/statsAudit/{entryId} {
+      allow create, update: if request.auth != null
+        && request.auth.uid == profileId;
+      allow read, delete: if false;
+    }
+
     // This rule allows anyone with your Firestore database reference to view, edit,
     // and delete all data in your Firestore database. It is useful for getting
     // started, but it is configured to expire after 30 days because it

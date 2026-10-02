@@ -1,5 +1,8 @@
 import 'package:faker/faker.dart';
+import 'package:profile/src/domain/entity/consecutive_days_entity.dart';
+import 'package:profile/src/domain/entity/milestone_progress_entity.dart';
 import 'package:profile/src/domain/entity/profile_entity.dart';
+import 'package:profile/src/domain/entity/profile_settings_entity.dart';
 import 'package:profile/src/domain/entity/profile_stats_report_entity.dart';
 import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/public/model/profile_stats_report.dart';
@@ -33,7 +36,10 @@ extension FakerProfileExtension on Faker {
     return List.generate(count, (_) => createProfile());
   }
 
-  ProfileEntity createProfileEntity() {
+  ProfileEntity createProfileEntity({
+    ProfileStatsReportEntity statsReport = const ProfileStatsReportEntity(),
+    ProfileSettingsEntity settings = const ProfileSettingsEntity(),
+  }) {
     return ProfileEntity(
       id: faker.guid.guid(),
       firstName: faker.person.firstName(),
@@ -42,8 +48,27 @@ extension FakerProfileExtension on Faker {
       photoUrl: faker.profilePhotoUrl(),
       photoBlurhash: faker.profilePhotoBlurhash(),
       signupDate: DateTime.now(),
-      statsReport: const ProfileStatsReportEntity(),
+      settings: settings,
+      statsReport: statsReport,
       completed: faker.randomGenerator.boolean(),
+    );
+  }
+
+  ProfileStatsReportEntity createProfileStatsReportEntity({
+    int consecutiveDays = 0,
+    int milestoneDays = 0,
+    DateTime? lastSessionDate,
+    DateTime? lastChecked,
+  }) {
+    return ProfileStatsReportEntity(
+      consecutiveDays: ConsecutiveDaysEntity(
+        current: consecutiveDays,
+        lastChecked: lastChecked,
+      ),
+      milestoneProgress: MilestoneProgressEntity(
+        completedDaysCount: milestoneDays,
+      ),
+      lastSessionDate: lastSessionDate,
     );
   }
 

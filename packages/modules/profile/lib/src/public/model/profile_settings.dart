@@ -11,6 +11,7 @@ sealed class ProfileSettings with _$ProfileSettings {
   const factory ProfileSettings({
     @Default(true) bool showStats,
     @Default(true) bool usePresenceFeature,
+    @Default(false) bool statsAuditEnabled,
   }) = _ProfileSettings;
 
 }

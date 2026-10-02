@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:profile/src/domain/entity/profile_entity.dart';
 import 'package:profile/src/domain/repository/profile_repository.dart';
 import 'package:core/core.dart';
 import 'package:profile/src/domain/service/profile_stats_updater_service.dart';
+import 'package:profile/src/domain/service/stats_audit_service.dart';
 
 /// Use case for loading a profile and validating its statistics report.
 /// Validating the statistics report ensures that the consecutive days
@@ -15,10 +18,12 @@ class LoadProfileUseCase with LoggerMixin {
 
   /// The updater responsible for validating and updating the profile's statistics report.
   final ProfileStatsReportUpdaterService profileStatsUpdater;
-    
+  final StatsAuditService? statsAuditService;
+
   LoadProfileUseCase({
     required this.profileRepository,
     required this.profileStatsUpdater,
+    this.statsAuditService,
   });
 
   Future<ProfileEntity> execute(String profileId, {bool preferCache = false}) async {
@@ -35,6 +40,10 @@ class LoadProfileUseCase with LoggerMixin {
       logger.t(
         'Consecutive days and milestone progress have been invalidated!',
       );
+      unawaited(statsAuditService?.recordValidation(
+        profile: profileEntity,
+        validated: updatedStatsReport,
+      ));
       profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
       
       // lazy update the profile, no need to await this

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileSettingsEntity {
 
- bool get showStats; bool get usePresenceFeature;
+ bool get showStats; bool get usePresenceFeature; bool get statsAuditEnabled;
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $ProfileSettingsEntityCopyWith<ProfileSettingsEntity> get copyWith => _$ProfileS
 @override
 bool operator ==(Object other) {
   final _this = this as ProfileSettingsEntity;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileSettingsEntity&&(identical(other.showStats, _this.showStats) || other.showStats == _this.showStats)&&(identical(other.usePresenceFeature, _this.usePresenceFeature) || other.usePresenceFeature == _this.usePresenceFeature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileSettingsEntity&&(identical(other.showStats, _this.showStats) || other.showStats == _this.showStats)&&(identical(other.usePresenceFeature, _this.usePresenceFeature) || other.usePresenceFeature == _this.usePresenceFeature)&&(identical(other.statsAuditEnabled, _this.statsAuditEnabled) || other.statsAuditEnabled == _this.statsAuditEnabled));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as ProfileSettingsEntity;
-  return Object.hash(runtimeType,_this.showStats,_this.usePresenceFeature);
+  return Object.hash(runtimeType,_this.showStats,_this.usePresenceFeature,_this.statsAuditEnabled);
 }
 
 @override
 String toString() {
   final _this = this as ProfileSettingsEntity;
-  return 'ProfileSettingsEntity(showStats: ${_this.showStats}, usePresenceFeature: ${_this.usePresenceFeature})';
+  return 'ProfileSettingsEntity(showStats: ${_this.showStats}, usePresenceFeature: ${_this.usePresenceFeature}, statsAuditEnabled: ${_this.statsAuditEnabled})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $ProfileSettingsEntityCopyWith<$Res>  {
   factory $ProfileSettingsEntityCopyWith(ProfileSettingsEntity value, $Res Function(ProfileSettingsEntity) _then) = _$ProfileSettingsEntityCopyWithImpl;
 @useResult
 $Res call({
- bool showStats, bool usePresenceFeature
+ bool showStats, bool usePresenceFeature, bool statsAuditEnabled
 });
 
 
@@ -71,10 +71,11 @@ class _$ProfileSettingsEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? showStats = null,Object? usePresenceFeature = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? showStats = null,Object? usePresenceFeature = null,Object? statsAuditEnabled = null,}) {
   return _then(ProfileSettingsEntity(
 showStats: null == showStats ? _self.showStats : showStats // ignore: cast_nullable_to_non_nullable
 as bool,usePresenceFeature: null == usePresenceFeature ? _self.usePresenceFeature : usePresenceFeature // ignore: cast_nullable_to_non_nullable
+as bool,statsAuditEnabled: null == statsAuditEnabled ? _self.statsAuditEnabled : statsAuditEnabled // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool showStats,  bool usePresenceFeature)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool showStats,  bool usePresenceFeature,  bool statsAuditEnabled)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileSettingsEntity() when $default != null:
-return $default(_that.showStats,_that.usePresenceFeature);case _:
+return $default(_that.showStats,_that.usePresenceFeature,_that.statsAuditEnabled);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.showStats,_that.usePresenceFeature);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool showStats,  bool usePresenceFeature)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool showStats,  bool usePresenceFeature,  bool statsAuditEnabled)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileSettingsEntity():
-return $default(_that.showStats,_that.usePresenceFeature);}
+return $default(_that.showStats,_that.usePresenceFeature,_that.statsAuditEnabled);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +196,10 @@ return $default(_that.showStats,_that.usePresenceFeature);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool showStats,  bool usePresenceFeature)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool showStats,  bool usePresenceFeature,  bool statsAuditEnabled)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileSettingsEntity() when $default != null:
-return $default(_that.showStats,_that.usePresenceFeature);case _:
+return $default(_that.showStats,_that.usePresenceFeature,_that.statsAuditEnabled);case _:
   return null;
 
 }
@@ -210,11 +211,12 @@ return $default(_that.showStats,_that.usePresenceFeature);case _:
 @JsonSerializable()
 
 class _ProfileSettingsEntity implements ProfileSettingsEntity {
-  const _ProfileSettingsEntity({this.showStats = true, this.usePresenceFeature = true});
+  const _ProfileSettingsEntity({this.showStats = true, this.usePresenceFeature = true, this.statsAuditEnabled = false});
   factory _ProfileSettingsEntity.fromJson(Map<String, dynamic> json) => _$ProfileSettingsEntityFromJson(json);
 
 @override@JsonKey() final  bool showStats;
 @override@JsonKey() final  bool usePresenceFeature;
+@override@JsonKey() final  bool statsAuditEnabled;
 
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -229,18 +231,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileSettingsEntity&&(identical(other.showStats, showStats) || other.showStats == showStats)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileSettingsEntity&&(identical(other.showStats, showStats) || other.showStats == showStats)&&(identical(other.usePresenceFeature, usePresenceFeature) || other.usePresenceFeature == usePresenceFeature)&&(identical(other.statsAuditEnabled, statsAuditEnabled) || other.statsAuditEnabled == statsAuditEnabled));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,showStats,usePresenceFeature);
+    return Object.hash(runtimeType,showStats,usePresenceFeature,statsAuditEnabled);
 }
 
 @override
 String toString() {
-    return 'ProfileSettingsEntity(showStats: $showStats, usePresenceFeature: $usePresenceFeature)';
+    return 'ProfileSettingsEntity(showStats: $showStats, usePresenceFeature: $usePresenceFeature, statsAuditEnabled: $statsAuditEnabled)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$ProfileSettingsEntityCopyWith<$Res> implements $ProfileSe
   factory _$ProfileSettingsEntityCopyWith(_ProfileSettingsEntity value, $Res Function(_ProfileSettingsEntity) _then) = __$ProfileSettingsEntityCopyWithImpl;
 @override @useResult
 $Res call({
- bool showStats, bool usePresenceFeature
+ bool showStats, bool usePresenceFeature, bool statsAuditEnabled
 });
 
 
@@ -268,10 +270,11 @@ class __$ProfileSettingsEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileSettingsEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? showStats = null,Object? usePresenceFeature = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? showStats = null,Object? usePresenceFeature = null,Object? statsAuditEnabled = null,}) {
   return _then(_ProfileSettingsEntity(
 showStats: null == showStats ? _self.showStats : showStats // ignore: cast_nullable_to_non_nullable
 as bool,usePresenceFeature: null == usePresenceFeature ? _self.usePresenceFeature : usePresenceFeature // ignore: cast_nullable_to_non_nullable
+as bool,statsAuditEnabled: null == statsAuditEnabled ? _self.statsAuditEnabled : statsAuditEnabled // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

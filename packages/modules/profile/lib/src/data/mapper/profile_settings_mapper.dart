@@ -6,6 +6,7 @@ extension ProfileSettingsEntityMapper on ProfileSettingsEntity {
 		return ProfileSettings(
 			showStats: showStats,
 			usePresenceFeature: usePresenceFeature,
+			statsAuditEnabled: statsAuditEnabled,
 		);
 	}
 }
@@ -15,6 +16,7 @@ extension ProfileSettingsMapper on ProfileSettings {
     return ProfileSettingsEntity(
       showStats: showStats,
       usePresenceFeature: usePresenceFeature,
+      statsAuditEnabled: statsAuditEnabled,
     );
   }
 }
