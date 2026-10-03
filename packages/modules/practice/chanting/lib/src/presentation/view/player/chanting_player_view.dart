@@ -168,7 +168,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
           effects: const LyricsEffectsConfig(
             scale: false,
             maxBlurSigma: 5,
-            blurSigmaPerLine: 0.4,            
+            blurSigmaPerLine: 0.4,
             wormDuration: Durations.extralong4,
             minOpacity: 0.1,
             opacityFalloffPerLine: 0.15,

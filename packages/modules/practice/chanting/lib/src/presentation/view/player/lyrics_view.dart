@@ -153,7 +153,7 @@ class _LyricsViewState extends State<LyricsView>
     final lh = <double>[];
     for (final line in widget.chantingState.lyricsDocument?.lines ?? []) {
       final height = calculateTextHeight(
-        line.text,
+        LyricLine.displayText(line),
         context.theme.textTheme.headlineSmall!.copyWith(
           fontWeight: FontWeight.w700,
         ),

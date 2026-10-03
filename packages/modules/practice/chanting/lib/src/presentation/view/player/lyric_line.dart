@@ -13,6 +13,7 @@ class LyricLine extends StatelessWidget {
     horizontal: 24,
     vertical: 8,
   );
+  static final RegExp _lineBreakPattern = RegExp(r'\\n|\r?\n');
 
   final LyricsLineEntity line;
   final Duration position;
@@ -30,21 +31,33 @@ class LyricLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<InlineSpan> textSpans = [];
+    final textSpans = <InlineSpan>[];
+    var hasWordOnCurrentParagraph = false;
 
-    for (int i = 0; i < line.words.length; i++) {
-      textSpans.add(
-        WidgetSpan(
-          child: LyricWordWidget(
-            word: line.words[i],
-            wordState: getWordState(line.words[i]),
-          ),
-        ),
-      );
+    for (final word in line.words) {
+      final fragments = word.text.split(_lineBreakPattern);
 
-      // Only add a space if it's NOT the last word in the sentence
-      if (i < line.words.length - 1) {
-        textSpans.add(const TextSpan(text: ' '));
+      for (var i = 0; i < fragments.length; i++) {
+        final fragment = fragments[i];
+        if (fragment.isNotEmpty) {
+          if (hasWordOnCurrentParagraph) {
+            textSpans.add(const TextSpan(text: ' '));
+          }
+          textSpans.add(
+            WidgetSpan(
+              child: LyricWordWidget(
+                word: word.copyWith(text: fragment),
+                wordState: getWordState(word),
+              ),
+            ),
+          );
+          hasWordOnCurrentParagraph = true;
+        }
+
+        if (i < fragments.length - 1) {
+          textSpans.add(const TextSpan(text: '\n\n'));
+          hasWordOnCurrentParagraph = false;
+        }
       }
     }
 
@@ -60,6 +73,31 @@ class LyricLine extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  static String displayText(LyricsLineEntity line) {
+    final text = StringBuffer();
+    var hasWordOnCurrentParagraph = false;
+
+    for (final word in line.words) {
+      final fragments = word.text.split(_lineBreakPattern);
+
+      for (var i = 0; i < fragments.length; i++) {
+        final fragment = fragments[i];
+        if (fragment.isNotEmpty) {
+          if (hasWordOnCurrentParagraph) text.write(' ');
+          text.write(fragment);
+          hasWordOnCurrentParagraph = true;
+        }
+
+        if (i < fragments.length - 1) {
+          text.write('\n\n');
+          hasWordOnCurrentParagraph = false;
+        }
+      }
+    }
+
+    return text.toString();
   }
 
   WordState getWordState(LyricsWordEntity word) {
