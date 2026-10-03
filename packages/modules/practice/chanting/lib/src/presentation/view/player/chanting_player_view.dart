@@ -166,10 +166,13 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
           chantingState: widget.chantingState,
           maxWidth: constraints.maxWidth,
           effects: const LyricsEffectsConfig(
-            maxBlurSigma: 3,
-            blurSigmaPerLine: 0.4,
             scale: false,
+            maxBlurSigma: 5,
+            blurSigmaPerLine: 0.4,            
             wormDuration: Durations.extralong4,
+            minOpacity: 0.1,
+            opacityFalloffPerLine: 0.15,
+            transitionDuration: Durations.medium4,
           ),
         );
       },
@@ -179,25 +182,6 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   Widget buildControls(BuildContext context) {
     return Stack(
       children: [
-        // Gradient behind the controls to improve readability
-        Positioned.fill(
-          child: IgnorePointer(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withValues(alpha: 0.9),
-                  ],
-                  stops: const [0.0, 0.5],
-                ),
-              ),
-            ),
-          ),
-        ),
-
         SafeArea(
           child: Padding(
             padding: EdgeInsets.only(

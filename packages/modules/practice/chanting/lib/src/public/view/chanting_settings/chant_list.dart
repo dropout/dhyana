@@ -43,7 +43,7 @@ class ChantList extends StatelessWidget {
         child: Center(child: AddChantButton(onTap: onAddChant)),
       ),
       itemBuilder: (context, index) =>
-        buildPlaylistItem(context, chants[index], index),      
+          buildPlaylistItem(context, chants[index], index),
       proxyDecorator: (child, index, animation) {
         return AnimatedBuilder(
           animation: animation,
@@ -65,17 +65,15 @@ class ChantList extends StatelessWidget {
           Text(
             'No chants added yet.',
             textAlign: TextAlign.center,
-            style: Theme.of(
-              context,
-            ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w800),
+            style: Theme.of(context).textTheme.titleLarge!
+                .copyWith(fontWeight: FontWeight.w800),
           ),
           Gap.small(),
           Text(
             'Tap the + button to add chants to your session.',
             textAlign: TextAlign.center,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
+            style: Theme.of(context).textTheme.bodyLarge!
+                .copyWith(fontWeight: FontWeight.w800),
           ),
           Gap.small(),
           AddChantButton(onTap: onAddChant),
@@ -98,14 +96,14 @@ class ChantList extends StatelessWidget {
     return Slidable(
       closeOnScroll: true,
       key: ValueKey(chant.id),
-      endActionPane: ActionPane(      
+      endActionPane: ActionPane(
         motion: const ScrollMotion(),
-        extentRatio: 0.25,        
+        extentRatio: 0.25,
         children: [
           CustomSlidableAction(
-            onPressed: (_) { 
+            onPressed: (_) {
               onChantRemoved(chant, index);
-              context.hapticsTap();
+              context.services.hapticsService.success();
             },
             backgroundColor: Colors.transparent,
             // foregroundColor: Colors.white,
@@ -136,43 +134,76 @@ class ChantList extends StatelessWidget {
           ),
         ),
       ),
-
     );
-    
   }
 }
 
-class DynamicSlideActionIcon extends StatelessWidget {
+class DynamicSlideActionIcon extends StatefulWidget {
   const DynamicSlideActionIcon({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // 1. Grab the closest SlidableController from the context hierarchy
-    final slidableController = Slidable.of(context);
+  State<DynamicSlideActionIcon> createState() => _DynamicSlideActionIconState();
+}
 
-    if (slidableController == null) {
-      return const SizedBox.shrink();
+class _DynamicSlideActionIconState extends State<DynamicSlideActionIcon> {
+  static const _visibleThreshold = 0.25;
+
+  Animation<double>? _slideAnimation;
+  bool _actionWasVisible = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final nextAnimation = Slidable.of(context)?.animation;
+    if (identical(nextAnimation, _slideAnimation)) return;
+
+    _slideAnimation?.removeListener(_handleSlideChanged);
+    _slideAnimation = nextAnimation;
+    _actionWasVisible = (nextAnimation?.value ?? 0) >= _visibleThreshold;
+    _slideAnimation?.addListener(_handleSlideChanged);
+  }
+
+  void _handleSlideChanged() {
+    final isVisible = (_slideAnimation?.value ?? 0) >= _visibleThreshold;
+
+    if (isVisible && !_actionWasVisible) {
+      context.hapticsTap();
     }
 
-    // 2. Use AnimatedBuilder to rebuild your icon based on the slide amount
-    return AnimatedBuilder(
-      animation: slidableController.animation,      
-      builder: (context, child) {
-        
-        // goes from 0.0 (closed) to 0.25 (button visible)
-        final slideValue = slidableController.animation.value;
+    _actionWasVisible = isVisible;
+  }
 
-        // value goes from 0.0 (closed) to 1.0
-        final animationValue = slideValue.remapAndClamp(0.0, 0.25, 0.0, 1.0).toDouble();
+  @override
+  void dispose() {
+    _slideAnimation?.removeListener(_handleSlideChanged);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final animation = _slideAnimation;
+    if (animation == null) return const SizedBox.shrink();
+
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (context, child) {
+        final value = animation.value
+            .remapAndClamp(0.0, _visibleThreshold, 0.0, 1.0)
+            .toDouble();
 
         return Opacity(
-          opacity: animationValue, // Fade in the icon as it slides
+          opacity: value,
           child: Transform.scale(
-            scale: animationValue, // Scale the icon up to 150% size
+            scale: value,
+            // child: /* your existing icon container */,
+
             child: Container(
               decoration: ShapeDecoration(
                 shape: RoundedSuperellipseBorder(
-                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+                  borderRadius: BorderRadius.circular(
+                    DesignSpec.borderRadiusLg,
+                  ),
                 ),
                 color: context.theme.colorScheme.error,
               ),
@@ -181,7 +212,6 @@ class DynamicSlideActionIcon extends StatelessWidget {
                 Icons.delete_forever,
                 color: Colors.white,
                 size: 28,
-                    
               ),
             ),
           ),
@@ -191,4 +221,51 @@ class DynamicSlideActionIcon extends StatelessWidget {
   }
 }
 
+// class DynamicSlideActionIcon extends StatelessWidget {
+//   const DynamicSlideActionIcon({super.key});
 
+//   @override
+//   Widget build(BuildContext context) {
+//     // 1. Grab the closest SlidableController from the context hierarchy
+//     final slidableController = Slidable.of(context);
+
+//     if (slidableController == null) {
+//       return const SizedBox.shrink();
+//     }
+
+//     // 2. Use AnimatedBuilder to rebuild your icon based on the slide amount
+//     return AnimatedBuilder(
+//       animation: slidableController.animation,
+//       builder: (context, child) {
+
+//         // goes from 0.0 (closed) to 0.25 (button visible)
+//         final slideValue = slidableController.animation.value;
+
+//         // value goes from 0.0 (closed) to 1.0
+//         final animationValue = slideValue.remapAndClamp(0.0, 0.25, 0.0, 1.0).toDouble();
+
+//         return Opacity(
+//           opacity: animationValue, // Fade in the icon as it slides
+//           child: Transform.scale(
+//             scale: animationValue, // Scale the icon up to 150% size
+//             child: Container(
+//               decoration: ShapeDecoration(
+//                 shape: RoundedSuperellipseBorder(
+//                   borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+//                 ),
+//                 color: context.theme.colorScheme.error,
+//               ),
+//               alignment: Alignment.center,
+//               child: const Icon(
+//                 Icons.delete_forever,
+//                 color: Colors.white,
+//                 size: 28,
+
+//               ),
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
