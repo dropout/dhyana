@@ -130,6 +130,7 @@ class StatsAuditService with LoggerMixin {
       final entries = build();
       if (entries.isEmpty) return;
       await repository.saveAll(profileId, entries);
+      logger.t('Recorded ${entries.length} stats audit entries');
     } catch (e, s) {
       logger.e('Failed to record stats audit', error: e, stackTrace: s);
     }

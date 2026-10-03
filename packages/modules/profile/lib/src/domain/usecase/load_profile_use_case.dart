@@ -40,15 +40,18 @@ class LoadProfileUseCase with LoggerMixin {
       logger.t(
         'Consecutive days and milestone progress have been invalidated!',
       );
+      profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
+
       unawaited(statsAuditService?.recordValidation(
         profile: profileEntity,
         validated: updatedStatsReport,
       ));
-      profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
       
       // lazy update the profile, no need to await this
-      await profileRepository.update(profileEntity);
+      unawaited(profileRepository.update(profileEntity));
     }
+
+
     
     return profileEntity;
   }
