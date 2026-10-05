@@ -93,43 +93,16 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     return Stack(
       fit: StackFit.expand,
       children: [
-        Positioned.fill(
+
+        AnimatedSwitcher(
+          duration: Durations.long4,          
           child: switch (widget.chantingState.loadingState) {
             .processing => buildLoadingView(context),
-            .error => AppErrorDisplay(),
+            .error => buildErrorView(context),
             _ => buildLyricsView(context),
-          },
-
-          // child: buildLyricsView(context),
-
-          // child: AnimatedCrossFade(
-          //   firstChild: buildLyricsView(context),
-          //   secondChild: _GapCountdownOverlay(
-          //     key: ValueKey('second'),
-          //     chantingState: widget.chantingState,
-          //   ),
-          //   crossFadeState:
-          //       widget.chantingState.isGapActive &&
-          //         !widget.chantingState.isLoading
-          //       ? CrossFadeState.showSecond
-          //       : CrossFadeState.showFirst,
-          //   duration: Durations.medium1,
-          //   layoutBuilder: (topChild, topKey, bottomChild, bottomKey) {
-          //     return Stack(
-          //       clipBehavior: Clip.none,
-          //       children: [
-          //         Positioned(
-          //           key: bottomKey,
-          //           // We use alignment to ensure the outgoing widget
-          //           // doesn't try to expand to infinite height
-          //           child: bottomChild,
-          //         ),
-          //         Positioned(key: topKey, child: topChild),
-          //       ],
-          //     );
-          //   },
-          // ),
+          },              
         ),
+
         Positioned(left: 0, bottom: 0, right: 0, child: buildControls(context)),
       ],
     );
@@ -137,30 +110,36 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
 
   Widget buildLoadingView(BuildContext context) {
     return Column(
+      key: const ValueKey('chanting_player_loading_view'),
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Preparing chants assets... ${widget.chantingState.cachingProgress.completedTasks} / ${widget.chantingState.cachingProgress.totalTasks}',
-          style: context.theme.textTheme.bodyMedium?.copyWith(
+          'Preparing your session...',
+          style: context.theme.textTheme.bodyLarge?.copyWith(
             color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        Gap.small(),
-        FractionallySizedBox(
-          widthFactor: 0.75,
-          // padding: const EdgeInsets.all(DesignSpec.paddingLg),
-          child: LinearProgressIndicator(
-            backgroundColor: Colors.grey.shade600,
-            color: Colors.white,
-            value: widget.chantingState.cachingProgress.progress,
-          ),
-        ),
+        Gap.large(),
+        // FractionallySizedBox(
+        //   widthFactor: 0.66,
+        //   child: LinearProgressIndicator(
+        //     backgroundColor: Colors.grey.shade600,            
+        //     color: Colors.white,
+        //     value: widget.chantingState.cachingProgress.progress,
+        //   ),
+        // ),
       ],
     );
   }
 
+  Widget buildErrorView(BuildContext context) => AppErrorDisplay(
+    key: const ValueKey('chanting_player_error_view'),
+  );
+
   Widget buildLyricsView(BuildContext context) {
     return LayoutBuilder(
+      key: const ValueKey('chanting_player_lyrics_view'),
       builder: (context, constraints) {
         return LyricsView(
           chantingState: widget.chantingState,
