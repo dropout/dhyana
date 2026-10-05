@@ -8,20 +8,17 @@ import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/presentation/view/timer_screen.dart';
 import 'package:timer/src/presentation/view/timer_settings_history_screen.dart';
 
-
 part 'timer_routes.g.dart';
 
 @TypedGoRoute<TimerRoute>(path: '/timer', name: 'TIMER')
 class TimerRoute extends GoRouteData with $TimerRoute {
-
-  const TimerRoute();
+  const new();
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-
-    final settings = GetIt.I.get<TimerSettingsCubit>().state.timerSettings; 
-
+    final settings = GetIt.I.get<TimerSettingsCubit>().state.timerSettings;
     Duration transitionDuration = Durations.long1;
+
     return CustomTransitionPage(
       transitionDuration: transitionDuration,
       reverseTransitionDuration: transitionDuration,
@@ -64,7 +61,4 @@ class TimerSettingsHistoryRoute extends GoRouteData
       authRedirectHook(context, state);
 }
 
-List<RouteBase> $timerRoutes = [
-  $timerRoute,
-  $timerSettingsHistoryRoute,
-];
+List<RouteBase> $timerRoutes = [$timerRoute, $timerSettingsHistoryRoute];
