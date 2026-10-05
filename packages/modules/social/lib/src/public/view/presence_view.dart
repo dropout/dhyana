@@ -1,0 +1,166 @@
+import 'package:collection/collection.dart';
+import 'package:social/src/public/viewmodel/presence_cubit.dart';
+import 'package:core/core.dart';
+import 'package:social/l10n/social_localizations.dart';
+import 'package:social/src/public/model/presence.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'presence_list_item.dart';
+
+
+class PresenceView extends StatelessWidget {
+
+  final int batchSize;
+  final int maxPageCount;
+  final Color borderColor;
+  final Color textColor;
+
+  const PresenceView({
+    required this.batchSize,
+    this.maxPageCount = 3,
+    this.borderColor = Colors.black,
+    this.textColor = Colors.black,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PresenceCubit, PresenceState>(
+      builder: (BuildContext context, PresenceState state) {
+        switch (state) {
+          case PresenceLoadingState():
+            return Text(SocialLocalizations.of(context).loading);
+          case PresenceLoadedState():
+            return buildLoaded(context, state.presenceList);
+          case PresenceLoadingMoreState():
+            return buildLoaded(context, state.presenceList);
+          case PresenceErrorState():
+            return const Text('error');
+          default:
+            return SizedBox.shrink();
+        }
+      },
+    );
+  }
+
+  Widget buildLoaded(BuildContext context, List<Presence> presenceList) {
+    return Column(
+      children: [
+        buildTable(context, presenceList),
+        buildLoadMoreButton(context, presenceList),
+      ],
+    );
+  }
+
+  Widget buildTable(BuildContext context, List<Presence> presenceList) {
+    List<List<Presence>> slicedPresenceList =
+      presenceList.slices(3).toList();
+    return Table(
+      children: List.generate(slicedPresenceList.length, (rowIndex) =>
+        TableRow(            
+          children: List.generate(3, (columnIndex) {
+            if (columnIndex < slicedPresenceList[rowIndex].length) {
+              return TableCell(
+                child: Padding(
+                  // bottom padding for all rows except the last one
+                  padding: EdgeInsets.only(bottom: (rowIndex < slicedPresenceList.length - 1 ? DesignSpec.paddingLg : 0)),
+                  child: Center(
+                    child: PresenceListItem(
+                      borderColor: borderColor,
+                      textColor: textColor,
+                      presence: slicedPresenceList[rowIndex][columnIndex])
+                        .gridReveal(rowIndex,columnIndex),
+                  ),
+                )
+              );
+            } else {
+              return const TableCell(child: SizedBox.shrink());
+            }
+          }),
+        )
+      ),
+    );
+  }
+
+  Widget buildLoadMoreButton(BuildContext context, List<Presence> presenceList) {
+    return BlocBuilder<PresenceCubit, PresenceState>(
+      builder: (BuildContext context, PresenceState state) {
+        switch (state) {
+          case PresenceLoadingState():
+            return SizedBox.shrink();
+          case PresenceLoadedState():
+            return LoadMoreButton(
+              text: SocialLocalizations.of(context).loadMore,
+              presenceList: presenceList,
+              batchSize: batchSize,
+              maxPageCount: maxPageCount,
+              onTap: () => BlocProvider.of<PresenceCubit>(context)
+                .loadPresenceData(
+                  lastDocumentId: presenceList.last.id,
+                  limit: batchSize,
+                  appendResult: true,
+                ),
+            );
+          case PresenceLoadingMoreState():
+            return LoadMoreButton(
+              text: SocialLocalizations.of(context).loading,
+              presenceList: presenceList,
+              batchSize: batchSize,
+              maxPageCount: maxPageCount,
+            );
+          case PresenceErrorState():
+            return SizedBox.shrink();
+          default:
+            return const SizedBox.shrink();
+        }
+      },
+    );
+  }
+
+}
+
+class LoadMoreButton extends StatefulWidget {
+
+  final String? text;
+  final List<Presence> presenceList;
+  final int batchSize;
+  final int maxPageCount;
+  final void Function()? onTap;
+
+  const LoadMoreButton({
+    required this.presenceList,
+    required this.batchSize,
+    required this.maxPageCount,
+    this.text,
+    this.onTap,
+    super.key,
+  });
+
+  @override
+  State<LoadMoreButton> createState() => _LoadMoreButtonState();
+}
+
+class _LoadMoreButtonState extends State<LoadMoreButton> {
+
+  @override
+  Widget build(BuildContext context) {
+    if (
+      widget.presenceList.isEmpty ||
+      widget.presenceList.length < widget.batchSize ||
+      widget.presenceList.length >= widget.maxPageCount * widget.batchSize
+    ) {
+      return const SizedBox.shrink();
+    } else {
+      String text = widget.text ?? SocialLocalizations.of(context).loadMore;
+      return AppButton.small(
+        text: text.toUpperCase(),
+        onTap: widget.onTap,
+      );
+    }
+  }
+
+}
+
+
+

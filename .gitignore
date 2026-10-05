@@ -11,6 +11,7 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+build/
 
 # IntelliJ related
 *.iml
@@ -56,3 +57,5 @@ android/app/google-services.json
 
 # Test generated files
 libCachedImageData.db
+# Widget Preview related
+.widget_preview/

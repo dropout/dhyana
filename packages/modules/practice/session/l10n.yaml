@@ -1,0 +1,5 @@
+arb-dir: lib/l10n
+template-arb-file: session_en.arb
+output-localization-file: session_localizations.dart
+output-class: SessionLocalizations
+nullable-getter: false

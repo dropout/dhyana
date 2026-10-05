@@ -1,0 +1,157 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:profile/l10n/profile_localizations.dart';
+import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:profile/src/public/model/profile.dart';
+import 'package:profile/src/public/viewmodel/profile_cubit.dart';
+
+class ProfileMenu extends StatelessWidget {
+
+  final Profile profile;
+
+  const ProfileMenu({
+    required this.profile,
+    super.key
+  });
+
+  void _onSessionHistoryTapped(BuildContext context) {
+    context.services.sessionNavigator.navigateToSessionHistory(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onEditProfileTapped(BuildContext context) {
+    context.services.profileNavigator.navigateToProfileEdit(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onStatisticsTapped(BuildContext context) {
+    context.services.statsNavigator.navigateToProfileStats(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onDonateTapped(BuildContext context) {
+    context.services.donateNavigator.navigateToDonateScreen();
+    context.hapticsTap();
+  }
+
+  void _onSettingsTapped(BuildContext context) {
+    context.services.profileNavigator.navigateToProfileSettings(profile.id);
+    context.hapticsTap();
+  }
+
+  void _onSignoutTapped(BuildContext context) {
+    showAppDialog(context, SignoutDialog(
+      onSignOut: () async => context.read<ProfileCubit>().clearData(),
+    ));
+    context.hapticsTap();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle? textStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+      fontSize: 17.0,
+    );
+    return AppCard(
+      padding: EdgeInsets.zero,
+      child: Column(
+        children: [
+          ProfileMenuTile(
+            title: Text(
+              ProfileLocalizations.of(context).editProfile,
+              style: textStyle,
+            ),
+            onTap: () => _onEditProfileTapped(context),
+            key: const Key('profile_menu_edit_profile_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              ProfileLocalizations.of(context).sessionsHistory,
+              style: textStyle,
+            ),
+            onTap: () => _onSessionHistoryTapped(context),
+            key: const Key('profile_menu_session_history_tile'),
+          ),
+          const Divider(height: 0),
+
+          // Profile statistics menu item
+          if (profile.settings.showStats) ProfileMenuTile(
+            title: Text(
+              ProfileLocalizations.of(context).profileStats,
+              style: textStyle,
+            ),
+            onTap: () => _onStatisticsTapped(context),
+            key: const Key('profile_menu_statistics_tile'),
+          ),
+          if (profile.settings.showStats) const Divider(height: 0),
+
+          ProfileMenuTile(
+            title: Text(
+              ProfileLocalizations.of(context).donate,
+              style: textStyle,
+            ),
+            onTap: () => _onDonateTapped(context),
+            key: const Key('profile_menu_donate_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              ProfileLocalizations.of(context).profileSettings,
+              style: textStyle,
+            ),
+            onTap: () => _onSettingsTapped(context),
+            key: const Key('profile_menu_settings_tile'),
+          ),
+          const Divider(height: 0),
+          ProfileMenuTile(
+            title: Text(
+              ProfileLocalizations.of(context).signOut,
+              style: textStyle,
+            ),
+            onTap: () => _onSignoutTapped(context),
+            key: const Key('profile_menu_signout_tile'),
+          ),
+        ],
+      )
+    );
+
+  }
+
+}
+
+class ProfileMenuTile extends StatelessWidget {
+
+  final Widget title;
+  final VoidCallback onTap;
+
+  const ProfileMenuTile({
+    required this.title,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(DesignSpec.borderRadiusMd),
+      ),
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: SizedBox(
+          key: Key('$key-sizedbox'),
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSpec.paddingXl,
+              vertical: DesignSpec.paddingLg,
+            ),
+            child: title,
+          ),
+        ),
+      ),
+    );
+  }
+}
+

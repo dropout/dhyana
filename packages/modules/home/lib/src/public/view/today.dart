@@ -1,0 +1,72 @@
+import 'dart:ui' as ui;
+
+import 'package:material_ui/material_ui.dart';
+import 'package:intl/intl.dart';
+
+class Today extends StatelessWidget {
+
+  const Today({
+    super.key
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    DateTime today = DateTime.now();
+    return CustomPaint(
+      painter: TodayPainter(
+        dateText: TextSpan(
+          text: '${DateFormat('MMMMd').format(today)}.',
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 15,
+            color: Colors.black,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        weekDayText: TextSpan(
+          text: DateFormat('EEEE').format(today),
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            fontSize: 25,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+
+class TodayPainter extends CustomPainter {
+
+  final TextPainter weekDayPainter = TextPainter(
+    textDirection: ui.TextDirection.ltr,
+  );
+
+  final TextPainter datePainter = TextPainter(
+    textDirection: ui.TextDirection.ltr,
+  );
+
+  final TextSpan dateText;
+  final TextSpan weekDayText;
+
+  TodayPainter({
+    required this.dateText,
+    required this.weekDayText,
+  }) {
+    weekDayPainter.text = weekDayText;
+    weekDayPainter.layout();
+    datePainter.text = dateText;
+    datePainter.layout();
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    datePainter.paint(canvas, Offset(0, 0));
+    weekDayPainter.paint(canvas, Offset(0, datePainter.height - 5));
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}

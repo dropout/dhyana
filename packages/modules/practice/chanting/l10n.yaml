@@ -1,0 +1,5 @@
+arb-dir: lib/l10n
+template-arb-file: chanting_en.arb
+output-localization-file: chanting_localizations.dart
+output-class: ChantingLocalizations
+nullable-getter: false

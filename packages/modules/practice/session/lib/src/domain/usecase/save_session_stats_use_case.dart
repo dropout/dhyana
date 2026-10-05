@@ -1,0 +1,40 @@
+import 'package:core/core.dart';
+
+import 'package:session/src/domain/entity/session_entity.dart';
+import 'package:session/src/domain/service/session_app_port.dart';
+
+
+/// Saves the STATISTICS DATA of a session to the StatsPublicApi 
+/// and Mindful Minutes Platform Health API.
+/// !!! Does not save the session itself !!!
+class SaveSessionStatsUseCase with LoggerMixin {
+  final SessionAppPort sessionAppPort;
+
+  SaveSessionStatsUseCase({
+    required this.sessionAppPort,
+  });
+
+  Future<void> execute(String profileId, SessionEntity session) async {
+    
+    // Log to the StatsPublicApi
+    await sessionAppPort.saveSessionStats(
+      profileId,
+      session,
+    );
+
+    // Log to Mindful Minutes Platform Health API if authorized
+    final isAuthorized = await sessionAppPort
+        .isMindfulMinutesAuthorized();
+    if (isAuthorized) {
+      await sessionAppPort.logMindfulMinutes(
+        session.startTime,
+        session.endTime,
+      );
+      logger.t('Mindful minutes authorized, saving session...');
+    } else {
+      logger.t('Mindful Minutes is not authorized: $isAuthorized');
+    }
+
+    logger.t('Session successfully logged!');
+  }
+}

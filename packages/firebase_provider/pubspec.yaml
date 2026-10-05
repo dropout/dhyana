@@ -1,0 +1,26 @@
+name: firebase_provider
+resolution: workspace
+description: Dart package manages helps targeting Firebase instances to use emulator or prod.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  firebase_core: ^4.11.0
+  cloud_firestore: ^6.6.0
+  firebase_storage: ^13.4.3
+  firebase_auth: ^6.5.4
+  cloud_functions: ^6.3.3
+  firebase_remote_config: ^6.5.3
+  firebase_analytics: ^12.4.3
+  firebase_crashlytics: ^5.2.4
+  logger: ^2.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

@@ -1,0 +1,65 @@
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:core/core.dart';
+import 'package:timer/src/presentation/viewmodel/timer_settings_history/timer_settings_history_cubit.dart';
+import 'package:timer/src/public/model/timer_settings_history_record.dart';
+import 'package:timer/src/public/view/timer_settings_history/timer_settings_history_list_item.dart';
+import 'package:timer/src/timer_module.dart';
+import 'package:timer/l10n/timer_localizations.dart';
+
+
+class TimerSettingsHistoryList extends StatelessWidget {
+  final String profileId;
+  final List<TimerSettingsHistoryRecord> timerSettingsHistoryRecordList;
+
+  const TimerSettingsHistoryList({
+    required this.profileId,
+    required this.timerSettingsHistoryRecordList,
+    super.key,
+  });
+
+  void _onListItemTap(BuildContext context, TimerSettings timerSettings) async {
+    context.hapticsTap();
+
+    // Save the selected settings to the history cubit so that it can be
+    await context.read<TimerSettingsHistoryCubit>().useSettings(
+      profileId,
+      timerSettings,
+    );
+
+    // Force home screen recreation to apply the selected timer settings.
+    if (context.mounted) {
+      context.services.homeNavigator.navigateToHome(
+        refresh: DateTime.now().millisecondsSinceEpoch,
+      );
+      Future.delayed(Durations.medium1, () {
+        if (context.mounted) {
+          context.showSuccessfulToast(
+            TimerLocalizations.of(context).timerSettingsHistoryApplied,
+          );
+        }
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        timerSettingsHistoryRecordList
+          .map(
+            (record) => TimerSettingsHistoryListItem(
+              timerSettingsHistoryRecord: record,
+              onTap: () =>
+                  _onListItemTap(context, record.timerSettings),
+            ),
+          )
+          .toList()
+          .intersperse(const SizedBox(height: DesignSpec.spacingMd))
+          .revealListAnimation(),
+      ),
+    );
+  }
+
+}

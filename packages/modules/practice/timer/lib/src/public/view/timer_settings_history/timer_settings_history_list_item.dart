@@ -1,0 +1,152 @@
+import 'package:timer/l10n/timer_localizations.dart';
+import 'package:timer/src/public/model/timer_settings_history_record.dart';
+import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
+
+class TimerSettingsHistoryListItem extends StatelessWidget {
+
+  final TimerSettingsHistoryRecord timerSettingsHistoryRecord;
+  final void Function() onTap;
+
+  const TimerSettingsHistoryListItem({
+    required this.timerSettingsHistoryRecord,
+    required this.onTap,
+    super.key
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 400),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: AppColors.backgroundPaperLight,
+          borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+          boxShadow: DesignSpec.defaultBoxShadow,
+        ),
+        child: Stack(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                buildDurationColumn(
+                  context,
+                  timerSettingsHistoryRecord.timerSettings.duration
+                ),
+                Gap.small(),
+                buildDetailsColumn(context),
+                const Spacer(),
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: Colors.black,
+                  size: 48,
+                )
+              ],
+            ),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+                  highlightColor: Colors.white.withValues(alpha: 0.25),
+                  splashColor: Colors.white.withValues(alpha: 0.25),
+                  onTap: onTap,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildDurationColumn(BuildContext context, Duration duration) {
+    return Padding(
+      padding: const EdgeInsets.all(
+        DesignSpec.paddingXl
+      ),
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          DecoratedBox(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.black,
+            ),
+            child: SizedBox(
+              width: 64,
+              height: 64,
+              child: Center(
+                child: Text(duration.inMinutes.toString().toUpperCase(),
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.backgroundPaperLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Gap.small(),
+          Text(TimerLocalizations.of(context).minutesPlural(duration.inMinutes),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildDetailsColumn(BuildContext context) {
+    final timerSettings = timerSettingsHistoryRecord.timerSettings;
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: DesignSpec.paddingMd
+      ),
+      child: Column(
+        mainAxisSize: .min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildDetail(
+            context,
+            TimerLocalizations.of(context).inputWarmupLabel.toUpperCase(),
+            TimerLocalizations.of(context).minutesPluralWithNumber(
+              timerSettings.warmup.inMinutes
+            )
+          ),
+          const SizedBox(height: DesignSpec.spacingSm),
+          buildDetail(
+            context,
+            TimerLocalizations.of(context).inputStartingSoundLabel.toUpperCase(),
+            timerSettings.startingSound.getLocalizedName(
+              TimerLocalizations.of(context),
+            ),
+          ),
+          const SizedBox(height: DesignSpec.spacingSm),
+          buildDetail(
+            context,
+            TimerLocalizations.of(context).inputEndingSoundLabel.toUpperCase(),
+            timerSettings.endingSound.getLocalizedName(
+              TimerLocalizations.of(context),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildDetail(BuildContext context, String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label,
+          style: Theme.of(context).textTheme.labelSmall,
+        ),
+        Text(value,
+          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+}

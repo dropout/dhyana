@@ -1,0 +1,5 @@
+arb-dir: lib/l10n
+template-arb-file: stats_en.arb
+output-localization-file: stats_localizations.dart
+output-class: StatsLocalizations
+nullable-getter: false

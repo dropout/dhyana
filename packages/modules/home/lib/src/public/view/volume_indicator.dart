@@ -1,0 +1,215 @@
+import 'dart:async';
+
+import 'package:flutter_volume_listener/flutter_volume_listener.dart';
+import 'package:material_ui/material_ui.dart';
+
+import 'package:core/core.dart';
+
+
+/// A widget that displays the current volume level
+/// of the device as a percentage and an icon.
+/// The purpose of this widget is to inform the user that the volume level
+/// might be too low for the app to function properly.
+class VolumeIndicator extends StatefulWidget {
+  /// Stream of volume level updates, expected to emit values in [0, 1].
+  final Stream<double> volumeStream;
+
+  /// The volume level to render before the first stream event arrives.
+  final double initialVolume;
+
+  /// The threshold above which the volume indicator will be hidden.
+  final double visibilityThreshold;
+
+  /// Whether to show the volume indicator when the volume changes above the threshold.
+  final bool showOnVolumeChangeAboveThreshold;
+
+  /// The duration to wait before fading out the volume indicator.
+  final Duration waitDuration;
+
+  /// The duration of the fade out animation.
+  final Duration fadeDuration;
+
+  const VolumeIndicator({
+    required this.volumeStream,
+    required this.initialVolume,
+    this.visibilityThreshold = 0.25,
+    this.showOnVolumeChangeAboveThreshold = true,
+    this.waitDuration = const Duration(milliseconds: 1600),
+    this.fadeDuration = const Duration(milliseconds: 500),
+    super.key,
+  });
+
+  @override
+  State<VolumeIndicator> createState() => _VolumeIndicatorState();
+}
+
+class _VolumeIndicatorState extends State<VolumeIndicator>
+    with SingleTickerProviderStateMixin {
+  late double _currentVolume = widget.initialVolume;
+  StreamSubscription<double>? _volumeStreamSub;
+
+  late final AnimationController _animationController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+
+    // let's build an animatino controller that will animate the opacity of the volume indicator when the volume changes above the threshold.
+    final totalDuration = widget.waitDuration + widget.fadeDuration;
+    _animationController = AnimationController(
+      vsync: this,
+      duration: totalDuration,
+      value: 1.0,
+    );
+
+    // Calculate the intervals based on wait and fade durations
+    final waitRatio =
+        widget.waitDuration.inMilliseconds / totalDuration.inMilliseconds;
+
+    // let's build an animation that will hold the opacity for a brief moment before fading out using chained tweens.
+    _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0)
+        .chain(
+          CurveTween(curve: Interval(0.0, waitRatio, curve: Curves.linear)),
+        )
+        .chain(
+          CurveTween(curve: Interval(waitRatio, 1.0, curve: Curves.easeOut)),
+        )
+        .animate(_animationController);
+  }
+
+  @override
+  void dispose() {
+    _volumeStreamSub?.cancel();
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void initPlatformState() {
+    _volumeStreamSub = widget.volumeStream.skipWhile((_) => !mounted).listen((
+      volume,
+    ) {
+      setState(() {
+        _currentVolume = volume;
+        if (widget.showOnVolumeChangeAboveThreshold &&
+            _currentVolume >= widget.visibilityThreshold) {
+          _animationController.forward(from: 0.0);
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_currentVolume < widget.visibilityThreshold) {
+      return buildIndicator(context);
+    } else if (widget.showOnVolumeChangeAboveThreshold &&
+        _currentVolume >= widget.visibilityThreshold) {      
+      return AnimatedBuilder(
+        animation: _fadeAnimation,
+        builder: (context, child) {
+          return Opacity(
+            opacity: _fadeAnimation.value,
+            child: buildIndicator(context),
+          );
+        },
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget buildIndicator(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(DesignSpec.paddingMd),
+      child: Row(
+        mainAxisSize: .min,
+        children: [
+          Icon(getVolumeIcon(_currentVolume), color: Colors.black),
+          Gap.xs(),
+          Text(
+            '${(_currentVolume * 100).toInt()}%',
+            textAlign: .center,
+            style: context.theme.textTheme.bodyLarge?.copyWith(
+              // color: getVolumeColor(_currentVolume),
+              color: Colors.black,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// A function that returns different versions of the volume icon based on the current volume level.
+  IconData getVolumeIcon(double volume) {
+    if (volume == 0) {
+      return Icons.volume_off;
+    } else if (volume < 0.25) {
+      return Icons.volume_down;
+    } else {
+      return Icons.volume_up;
+    }
+  }
+
+  /// A function that returns a color based on the current volume level.
+  Color getVolumeColor(double volume) {
+    if (volume < 0.1) {
+      return Colors.red;
+    } else if (volume < 0.25) {
+      return Colors.orange;
+    } else {
+      return Colors.green;
+    }
+  }
+}
+
+
+/// Production entry point that wires [VolumeIndicator] to the device volume plugin.
+class DeviceVolumeIndicator extends StatefulWidget {
+  final double visibilityThreshold;
+  final bool showOnVolumeChangeAboveThreshold;
+  final Duration waitDuration;
+  final Duration fadeDuration;
+
+  const DeviceVolumeIndicator({
+    this.visibilityThreshold = 0.25,
+    this.showOnVolumeChangeAboveThreshold = true,
+    this.waitDuration = const Duration(milliseconds: 1600),
+    this.fadeDuration = const Duration(milliseconds: 500),
+    super.key,
+  });
+
+  @override
+  State<DeviceVolumeIndicator> createState() => _DeviceVolumeIndicatorState();
+}
+
+class _DeviceVolumeIndicatorState extends State<DeviceVolumeIndicator> {
+  final _listener = FlutterVolumeListener();
+  double? _initialVolume;
+
+  @override
+  void initState() {
+    super.initState();
+    _listener.volume.then((value) {
+      if (!mounted) return;
+      setState(() => _initialVolume = value);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final initialVolume = _initialVolume;
+    if (initialVolume == null) return const SizedBox.shrink();
+
+    return VolumeIndicator(
+      volumeStream: _listener.onVolumeChanged,
+      initialVolume: initialVolume,
+      visibilityThreshold: widget.visibilityThreshold,
+      showOnVolumeChangeAboveThreshold: widget.showOnVolumeChangeAboveThreshold,
+      waitDuration: widget.waitDuration,
+      fadeDuration: widget.fadeDuration,
+    );
+  }
+}

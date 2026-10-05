@@ -1,0 +1,242 @@
+import 'package:timer/l10n/timer_localizations.dart';
+
+import 'package:timer/src/public/view/timer_settings/input_view.dart';
+import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
+
+class WarmupInputView extends StatefulWidget {
+  final int? initialValue;
+  final String title;
+  final ValueChanged<Duration>? onSelect;
+  final Duration preparationTime;
+
+  const WarmupInputView({
+    this.initialValue,
+    this.title = '',
+    this.onSelect,
+    this.preparationTime = const Duration(minutes: 0),
+    super.key,
+  });
+
+  @override
+  State<WarmupInputView> createState() => _WarmupInputViewState();
+}
+
+class _WarmupInputViewState extends State<WarmupInputView>
+    with TickerProviderStateMixin {
+  late int selectedMinutes;
+
+
+  @override
+  void initState() {
+    super.initState();
+    selectedMinutes = widget.initialValue ?? 0;
+
+  }
+
+  void _onSelectButtonPress(BuildContext context) {
+    widget.onSelect?.call(Duration(minutes: selectedMinutes));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InputView(
+      title: widget.title,
+      onSave: () => _onSelectButtonPress(context),
+      child: DecoratedBox(
+        decoration: BoxDecoration(color: AppColors.backgroundPaper),
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: DesignSpec.paddingLg,
+              right: DesignSpec.paddingLg,
+              bottom: DesignSpec.padding2Xl,
+              top: DesignSpec.paddingMd,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _WarmupTimeOptions(
+                  selectedOption: selectedMinutes,
+                  onSelect: (minutes) {
+                    setState(() {
+                      selectedMinutes = minutes;
+                      context.services.hapticsService.select();
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+
+// A widget that displays available and selectable warmup times.
+class _WarmupTimeOptions extends StatelessWidget {
+  final int? selectedOption;
+  final ValueChanged<int> onSelect;
+
+  const _WarmupTimeOptions({required this.onSelect, this.selectedOption});
+
+  @override
+  Widget build(BuildContext context) {
+    final columnCount = 2;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final itemWidth =
+            (constraints.maxWidth - DesignSpec.paddingLg * (columnCount - 1)) /
+            columnCount;
+        return Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: _WarmupTimeOptionItem(
+                minutes: 0,
+                label: TimerLocalizations.of(context).noWarmup,
+                isSelected: selectedOption == 0,
+                onTap: () => onSelect(0),
+              ),
+            ),
+            Gap.medium(),
+            Row(
+              spacing: DesignSpec.paddingLg,
+              children: [
+                SizedBox(
+                  width: itemWidth,
+                  child: _WarmupTimeOptionItem(
+                    minutes: 1,
+                    isSelected: selectedOption == 1,
+                    onTap: () => onSelect(1),
+                  ),
+                ),
+                SizedBox(
+                  width: itemWidth,
+                  child: _WarmupTimeOptionItem(
+                    minutes: 2,
+                    isSelected: selectedOption == 2,
+                    onTap: () => onSelect(2),
+                  ),
+                ),
+              ],
+            ),
+            Gap.medium(),
+            Row(
+              spacing: DesignSpec.paddingLg,
+              children: [
+                SizedBox(
+                  width: itemWidth,
+                  child: _WarmupTimeOptionItem(
+                    minutes: 3,
+                    isSelected: selectedOption == 3,
+                    onTap: () => onSelect(3),
+                  ),
+                ),
+                SizedBox(
+                  width: itemWidth,
+                  child: _WarmupTimeOptionItem(
+                    minutes: 5,
+                    isSelected: selectedOption == 5,
+                    onTap: () => onSelect(5),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _WarmupTimeOptionItem extends StatelessWidget {
+  final int minutes;
+  final String? label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _WarmupTimeOptionItem({
+    required this.minutes,
+    required this.isSelected,
+    required this.onTap,
+    this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final backgroundColor = isSelected
+        ? Colors.black
+        : AppColors.backgroundPaperLight;
+
+    final textColor = isSelected
+        ? AppColors.gold
+        : Colors.black;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: TweenAnimationBuilder(
+        tween: ColorTween(begin: backgroundColor, end: backgroundColor),
+        duration: const Duration(milliseconds: 300),
+        builder: (context, color, child) {
+          return Stack(
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+                  boxShadow: DesignSpec.defaultBoxShadow,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: DesignSpec.paddingMd,
+                    horizontal: DesignSpec.paddingLg,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          minutes.toString(),
+                          style: context.theme.textTheme.displayMedium
+                              ?.copyWith(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        Text(
+                          label ?? TimerLocalizations.of(context).minutesPlural(minutes),
+                          style: context.theme.textTheme.bodyLarge?.copyWith(
+                            color: textColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              // If this option is selected, show a checkmark in the top right corner
+              Positioned(
+                top: DesignSpec.paddingMd,
+                right: DesignSpec.paddingMd,
+                child: AnimatedOpacity(
+                  opacity: isSelected ? 1 : 0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Icon(Icons.check_circle, color: textColor, size: 24),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}

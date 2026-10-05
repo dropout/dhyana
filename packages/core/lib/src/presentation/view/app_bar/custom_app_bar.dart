@@ -1,0 +1,73 @@
+import 'package:core/src/presentation/design_spec.dart';
+import 'package:core/src/presentation/view/util/gap.dart';
+import 'package:material_ui/material_ui.dart';
+
+///  CustomAppBar is a custom AppBar that allows for a custom leading widget,
+///  title text, and trailing widgets.
+///  Intended height of the AppBar is 56 (kToolbarHeight).
+///  Padding for the widgets is 8 top and bottom.
+///  Padding for the AppBar is 16 left and right.
+///  Leading and trailing widget height is constrained to a height of 40.
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  static const double widgetHeight = kToolbarHeight - 8;
+
+  final String? titleText;
+  final Widget? leading;
+  final List<Widget> trailing;
+
+  final Widget? titleWidget;
+
+  const CustomAppBar({
+    this.titleText,
+    this.titleWidget,
+    this.leading,
+    this.trailing = const [],
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      bottom: false,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
+        child: NavigationToolbar(
+          leading: Row(
+            children: [
+              (leading != null)
+                  ? ConstrainedBox(
+                      constraints: const BoxConstraints.tightFor(
+                        height: widgetHeight,
+                      ),
+                      child: leading,
+                    )
+                  : const SizedBox.shrink(),
+              Gap.large(),
+              titleWidget ?? buildTitle(context, titleText),
+            ],
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: trailing,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTitle(BuildContext context, String? text) {
+    if (text == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.headlineSmall!
+          .copyWith(fontWeight: FontWeight.bold),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}

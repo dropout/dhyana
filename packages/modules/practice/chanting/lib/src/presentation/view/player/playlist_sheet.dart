@@ -1,0 +1,136 @@
+import 'package:chanting/l10n/chanting_localizations.dart';
+import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
+import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
+import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
+import 'package:core/core.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+class PlaylistSheet extends StatelessWidget {
+  const PlaylistSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ChantingCubit, ChantingStateEntity>(
+      builder: (context, cs) {
+        return buildContent(context, cs);
+      },
+    );
+  }
+
+  Widget buildContent(BuildContext context, ChantingStateEntity state) {
+    return Stack(
+      fit: StackFit.expand,
+      clipBehavior: Clip.none,
+      children: [
+        Column(
+          children: [
+            Gap.large(),
+            Text(
+              ChantingLocalizations.of(context).chantingPlaylistSheetTitle,
+              style: context.theme.textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Gap.medium(),
+            Expanded(
+              child: ListView.builder(
+                physics: ClampingScrollPhysics(),
+                padding: EdgeInsets.only(
+                  // top: 120,
+                  bottom: MediaQuery.of(context).viewPadding.bottom,
+                  left: DesignSpec.paddingLg,
+                  right: DesignSpec.paddingLg,
+                ),
+                itemCount: state.chantingSettings.selectedChants.length,
+                itemBuilder: (context, index) {
+                  final chantViewModel =
+                      state.chantingSettings.selectedChants[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: DesignSpec.paddingSm,
+                    ),
+                    child: ChantCard(
+                      index: index,
+                      chantViewModel: chantViewModel,
+                      textColor: index < state.currentIndex
+                          ? Colors.grey.shade600
+                          : Colors.black,
+                      trailing: buildTrailing(context, index, state),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: DesignSpec.padding2Xl),
+              child: AppButton.large(
+                onTap: () {
+                  context.pop();
+                  context.hapticsTap();
+                },
+                text: context.coreL10n.close.toUpperCase(),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget? buildTrailing(
+    BuildContext context,
+    int index,
+    ChantingStateEntity chantingState,
+  ) {
+    if (index == chantingState.currentIndex) {
+      return Padding(
+        padding: const EdgeInsets.all(DesignSpec.paddingSm),
+        child: switch (chantingState.playbackState.playing) {
+          true => PlaylistItemBadge(
+            text: ChantingLocalizations.of(context).chantingPlaylistBadgePlaying,
+          ),
+          false => PlaylistItemBadge(
+            text: ChantingLocalizations.of(context).chantingPlaylistBadgePaused,
+          ),
+        },
+      );
+    }
+    return null;
+  }
+}
+
+class PlaylistItemBadge extends StatelessWidget {
+  final String text;
+
+  const PlaylistItemBadge({required this.text, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: DesignSpec.paddingSm,
+        vertical: DesignSpec.paddingXs,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        text.toUpperCase(),
+        style: context.theme.textTheme.labelSmall!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+}

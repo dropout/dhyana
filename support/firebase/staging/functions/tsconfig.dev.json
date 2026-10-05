@@ -1,6 +1,9 @@
 {
+  "compilerOptions": {
+    "allowJs": true,
+    "noEmit": true
+  },
   "include": [
-    "./src/",
-    "eslint.config.js"
+    ".eslintrc.js"
   ]
 }

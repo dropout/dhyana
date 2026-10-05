@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "presence": "Presence",
+  "presenceScreenSubTitle": "Move the slider to adjust presence timerframe.",
+  "minutesPluralWithNumber": "{count, plural, =0{{count} minute} =1{{count} minute} =2{{count} minutes} few{{count} minutes} many{{count} minutes} other{{count} minutes}}",
+  "loadMore": "Load more",
+  "loading": "Loading..."
+}

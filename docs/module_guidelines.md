@@ -141,7 +141,21 @@ Use this checklist when creating a new module:
 - [ ] Register dependencies and routes.
 - [ ] Add tests for the core behavior.
 
-## 9. Practical Default
+## 9. Localization
+
+Each module owns its own localization instead of sharing a single app-wide ARB file.
+
+- Place ARB files at `lib/l10n/<module>_en.arb` and `lib/l10n/<module>_hu.arb`.
+- Configure `l10n.yaml` at the package root with `output-class: <ModuleName>Localizations` (e.g. `TimerLocalizations`, `AuthLocalizations`).
+- Prefix ARB keys with the feature/screen name in `camelCase` (e.g. `timerTitle`, `loginHeadline1`). Short, generic strings shared within a module may skip the prefix (`okay`, `close`).
+- Access strings via `<ModuleName>Localizations.of(context).someKey`. Core widgets may use the `context.coreL10n` shortcut extension instead.
+- Before adding a new key, check whether an equivalent string already exists in the module's own ARB file or in `core`'s, and reuse it rather than duplicating.
+- Use ICU plural syntax for countable strings (see `minutesPlural` in core) instead of manual branching or concatenation.
+- Add a Hungarian translation to the sibling `*_hu.arb` for every new key — do not leave it copied from English.
+- After editing any ARB file, regenerate code with `melos run codegen:l10n` before relying on the new getters.
+- Widgets should never contain hardcoded user-facing string literals; route all such text through the generated localization class.
+
+## 10. Practical Default
 
 For most features in this project, the default approach should be:
 

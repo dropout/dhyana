@@ -1,0 +1,76 @@
+import 'package:material_ui/material_ui.dart';
+import 'package:core/core.dart';
+
+
+class InputView extends StatelessWidget {
+
+  final Widget child;
+  final String title;
+  final VoidCallback? onSave;
+  final bool wrapContentWithExpandedWidget;
+
+  const InputView({
+    required this.title,
+    required this.child,
+    required this.onSave,
+    this.wrapContentWithExpandedWidget = false,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        buildAppBar(context),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: AppColors.backgroundPaper,
+          ),
+          child: SafeArea(
+            minimum: const EdgeInsets.only(
+              bottom: DesignSpec.padding3Xl,
+            ),
+            child: Column(              
+              children: [
+                buildContent(context),
+                buildActionButtons(context),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildAppBar(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(DesignSpec.borderRadiusLg),
+        topRight: Radius.circular(DesignSpec.borderRadiusLg),
+      ),
+      child: AppBar(
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+            fontWeight: FontWeight.bold,
+          )
+        ),
+        automaticallyImplyLeading: false,
+      ),
+    );
+  }
+
+  Widget buildContent(BuildContext context) {
+    return child;
+  }
+
+  Widget buildActionButtons(BuildContext context) {
+    return AppButton.large(
+      key: const Key('input_view_save_button'),
+      text: context.coreL10n.okay.toUpperCase(),
+      onTap: () => onSave?.call(),
+    );
+  }
+
+}
