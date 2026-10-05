@@ -2,7 +2,12 @@ import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
+import 'package:auth/auth.dart';
 import 'package:core/core.dart';
+import 'package:profile/profile.dart';
+import 'package:social/social.dart';
+import 'package:chanting/src/data/service/default_chanting_app_port.dart';
+import 'package:chanting/src/domain/service/chanting_app_port.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:chanting/src/chanting_module.dart';
@@ -67,6 +72,13 @@ extension ChantingModuleDependencyInjection on GetIt {
     registerFactory<ChantingAudioService>(
       () => ChantingAudioService(GetIt.I.get<AppAudioHandler>()),
     );
+    registerFactory<ChantingAppPort>(
+      () => DefaultChantingAppPort(
+        authPublicApi: GetIt.I.get<AuthPublicApi>(),
+        profilePublicApi: GetIt.I.get<ProfilePublicApi>(),
+        socialPublicApi: GetIt.I.get<SocialPublicApi>(),
+      ),
+    );
     registerLazySingleton<LyricsService>(() => LyricsService());
     registerLazySingleton<ChantCacheFileSystem>(
       () => ChantCacheFileSystem(
@@ -101,6 +113,7 @@ extension ChantingModuleDependencyInjection on GetIt {
         chantRepo: GetIt.I.get<ChantRepository>(),
         cacheChantsUseCase: GetIt.I.get<CacheChantsUseCase>(),
         chantingAudioService: GetIt.I.get<ChantingAudioService>(),
+        chantingAppPort: GetIt.I.get<ChantingAppPort>(),
       ),
     );
     registerFactory<LoadLyricsUseCase>(
