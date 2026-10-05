@@ -83,7 +83,7 @@ class StubbedChantRepository implements ChantRepository {
   }
 
   @override
-  Stream<ChantEntity> readStream(String id) {
+  Stream<ChantEntity> readStream(String id, {bool filterCached = false}) {
     return Stream.value(
       _chants.firstWhere(
         (chant) => chant.id == id,

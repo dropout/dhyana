@@ -8,25 +8,20 @@ import 'package:core/core.dart';
 import 'package:profile/src/public/api/profile_public_api.dart';
 import 'package:profile/src/public/model/profile.dart';
 
-
 part 'profile_cubit.freezed.dart';
 
 @freezed
 sealed class ProfileState with _$ProfileState {
-
   const ProfileState._();
 
   const factory ProfileState.initial() = ProfileStateInitial;
   const factory ProfileState.loading() = ProfileLoadingState;
-  const factory ProfileState.loaded({
-    required Profile profile,
-  }) = ProfileLoadedState;
+  const factory ProfileState.loaded({required Profile profile}) =
+      ProfileLoadedState;
   const factory ProfileState.error() = ProfileErrorState;
 }
 
-class ProfileCubit extends Cubit<ProfileState> 
-  with LoggerMixin {
-  
+class ProfileCubit extends Cubit<ProfileState> with LoggerMixin {
   final AuthPublicApi authPublicApi;
   final ProfilePublicApi profilePublicApi;
   final CrashlyticsService crashlyticsService;
@@ -39,10 +34,8 @@ class ProfileCubit extends Cubit<ProfileState>
     required this.profilePublicApi,
     required this.crashlyticsService,
   }) : super(const ProfileState.initial()) {
-
     // When user signs out we need to cancel the profile subscription:
     _userIdStreamSub = authPublicApi.authSessionStream.listen((authSession) {
-
       // Cancel either way the user is authenticated or not
       _profileSubscription?.cancel();
 
@@ -55,22 +48,15 @@ class ProfileCubit extends Cubit<ProfileState>
 
   Future<void> loadProfile(
     String profileId, {
-    Profile? profile,
     void Function(Profile)? onComplete,
     void Function(Object?, StackTrace)? onError,
   }) async {
     try {
-      late Profile result;
-      if (profile != null) {
-        logger.t('Using profile: $profileId');
-        result = profile;
-      } else {
-        logger.t('Loading profile: $profileId');
-        emit(const ProfileState.loading());
-        result = await profilePublicApi.getProfile(profileId);
-      }
-      emit(ProfileState.loaded(profile: result));
-      _createSubscription(profileId);
+      logger.t('Loading profile: $profileId');
+      emit(const ProfileState.loading());
+      final firstEmission = Completer<Profile>();
+      _createSubscription(profileId, firstEmission: firstEmission);
+      final result = await firstEmission.future;
       onComplete?.call(result);
       logger.t('Loaded profile: ${result.displayName}');
     } catch (exception, stackTrace) {
@@ -89,13 +75,33 @@ class ProfileCubit extends Cubit<ProfileState>
     logger.t('Profile data cleared!');
   }
 
-  void _createSubscription(String profileId) {
+  void _createSubscription(
+    String profileId, {
+    Completer<Profile>? firstEmission,
+  }) {
     _profileSubscription?.cancel();
     _profileSubscription = profilePublicApi
-        .getProfileStream(profileId)
+        .getProfileStream(profileId, filterCached: true)
         .listen(
-          _onProfileChanged,
+          (profile) {
+            _onProfileChanged(profile);
+            if (firstEmission?.isCompleted == false) {
+              firstEmission!.complete(profile);
+            }
+          },
+          onDone: () {
+            if (firstEmission?.isCompleted == false) {
+              firstEmission!.completeError(
+                StateError('Profile stream closed before emitting'),
+              );
+            }
+          },
           onError: (error, stackTrace) {
+            // Initial load failures are handled by loadProfile's catch.
+            if (firstEmission?.isCompleted == false) {
+              firstEmission!.completeError(error, stackTrace);
+              return;
+            }
             emit(const ProfileErrorState());
             crashlyticsService.recordError(
               exception: error,

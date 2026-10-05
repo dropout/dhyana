@@ -83,7 +83,7 @@ class StubbedPresenceRepository implements PresenceRepository {
   }
 
   @override
-  Stream<PresenceEntity> readStream(String id) {
+  Stream<PresenceEntity> readStream(String id, {bool filterCached = false}) {
     throw UnimplementedError();
   }
 

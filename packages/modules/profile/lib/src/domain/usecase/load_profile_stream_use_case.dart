@@ -17,11 +17,11 @@ class LoadProfileStreamUseCase with LoggerMixin {
     this.statsAuditService,
   });
 
-  Stream<ProfileEntity> execute(String profileId) =>
+  Stream<ProfileEntity> execute(String profileId, {bool filterCached = false}) =>
 
-      // Runs the validation on the profile's statistics 
+      // Runs the validation on the profile's statistics
       // report before emitting it
-      profileRepository.readStream(profileId).map((profileEntity) {
+      profileRepository.readStream(profileId, filterCached: filterCached).map((profileEntity) {
       
       // Check if consecutive days are valid
       final updatedStatsReport = 
@@ -31,18 +31,21 @@ class LoadProfileStreamUseCase with LoggerMixin {
         logger.t(
           'Consecutive days and milestone progress have been invalidated!',
         );
-        profileEntity = profileEntity.copyWith(statsReport: updatedStatsReport);
 
+        // Audit the change
         unawaited(statsAuditService?.recordValidation(
           profile: profileEntity,
           validated: updatedStatsReport,
         ));
+
+        // Update profile with the change
+        profileEntity = profileEntity.copyWith(
+          statsReport: updatedStatsReport
+        );
       
         // lazy update the profile
         unawaited(profileRepository.update(profileEntity));
       }
-
-
       
       return profileEntity;
     });

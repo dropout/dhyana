@@ -8,7 +8,7 @@ abstract interface class CrudRepository<M extends SerializableEntity> {
 
   Future<void> create(M model);
   Future<M> read(String id, {bool preferCache});
-  Stream<M> readStream(String id);
+  Stream<M> readStream(String id, {bool filterCached});
   Future<void> update(M model);
   Future<void> delete(String id);
 
@@ -26,8 +26,13 @@ abstract class CrudRepositoryOps<M> {
   const CrudRepositoryOps(this.dataProvider);
 
   Future<void> create(M model) => dataProvider.create(model);
-  Future<M> read(String id, {bool preferCache = false}) => dataProvider.read(id, preferCache: preferCache);
-  Stream<M> readStream(String id) => dataProvider.readStream(id);
+
+  Future<M> read(String id, {bool preferCache = false}) => 
+    dataProvider.read(id, preferCache: preferCache);
+
+  Stream<M> readStream(String id, {bool filterCached = false}) => 
+    dataProvider.readStream(id, filterCached: filterCached);
+
   Future<void> update(M model) => dataProvider.update(model);
   Future<void> delete(String id) => dataProvider.delete(id);
 

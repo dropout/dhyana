@@ -4,17 +4,14 @@ import 'package:profile/l10n/profile_localizations.dart';
 import 'package:profile/src/presentation/view/profile_view.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
 
   final String profileId;
-  final Profile? profile;
 
   const ProfileScreen({
     required this.profileId,
-    this.profile,
     super.key,
   });
 
@@ -27,10 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   initState() {
-    BlocProvider.of<ProfileCubit>(context).loadProfile(
-      widget.profileId,
-      profile: widget.profile,
-    );
+    context.read<ProfileCubit>().loadProfile(widget.profileId);
     super.initState();
   }
 

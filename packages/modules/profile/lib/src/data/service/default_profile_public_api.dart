@@ -34,12 +34,12 @@ class DefaultProfilePublicApi implements ProfilePublicApi {
     ).execute(profileId, preferCache: preferCache).then((profileEntity) => profileEntity.toApi());
 
   @override
-  Stream<Profile> getProfileStream(String profileId) =>
+  Stream<Profile> getProfileStream(String profileId, {bool filterCached = false}) =>
     LoadProfileStreamUseCase(
       profileRepository: profileRepository,
       profileStatsUpdater: profileStatsUpdater,
       statsAuditService: statsAuditService,
-    ).execute(profileId).map((profileEntity) => profileEntity.toApi());
+    ).execute(profileId, filterCached: filterCached).map((profileEntity) => profileEntity.toApi());
 
   @override
   Future<({Profile originalProfile, Profile updatedProfile})> updateProfileStatsWithSession(

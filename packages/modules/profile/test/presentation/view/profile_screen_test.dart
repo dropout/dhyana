@@ -42,7 +42,7 @@ void main() {
       when(() => mockProfileCubit.loadProfile(any())).thenAnswer((_) async {});
       when(() => mockProfileCubit.state).thenReturn(ProfileState.loading());
 
-      await tester.pumpWidget(
+      await tester.pumpWidget(        
         Provider<Services>(
           create: (context) => mockServices,
           child: ProfileTestHelper.withLocalizationProvider(
@@ -52,7 +52,10 @@ void main() {
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const ProfileScreen(profileId: 'test_profile_id'),
+              child: ShaderRenderingScope(
+                enabled: false,
+                child: const ProfileScreen(profileId: 'test_profile_id'),
+              ),
             ),
           ),
         ),
@@ -66,9 +69,9 @@ void main() {
     testWidgets(
       'does not load Profile when its given as a parameter in the constructor',
       (WidgetTester tester) async {
-        final Profile profileStub = Faker().createProfile();
+        Faker().createProfile();
 
-        when(() => mockProfileCubit.loadProfile(any(), profile: profileStub))
+        when(() => mockProfileCubit.loadProfile(any()))
             .thenAnswer((_) async {});
         when(() => mockProfileCubit.state)
             .thenReturn(const ProfileState.initial());
@@ -83,9 +86,11 @@ void main() {
                     create: (context) => mockProfileCubit,
                   ),
                 ],
-                child: ProfileScreen(
-                  profileId: 'test_profile_id',
-                  profile: profileStub,
+                child: ShaderRenderingScope(
+                  enabled: false,
+                  child: const ProfileScreen(
+                    profileId: 'test_profile_id',
+                  ),
                 ),
               ),
             ),
@@ -98,7 +103,6 @@ void main() {
         verify(
           () => mockProfileCubit.loadProfile(
             'test_profile_id',
-            profile: profileStub,
           ),
         ).called(1);
       },
@@ -118,7 +122,10 @@ void main() {
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const ProfileScreen(profileId: 'test_profile_id'),
+              child: const ShaderRenderingScope(
+                enabled: false,
+                child: ProfileScreen(profileId: 'test_profile_id'),
+              ),
             ),
           ),
         ),
@@ -142,7 +149,10 @@ void main() {
                   create: (context) => mockProfileCubit,
                 ),
               ],
-              child: const ProfileScreen(profileId: 'test_profile_id'),
+              child: ShaderRenderingScope(
+                enabled: false,
+                child: const ProfileScreen(profileId: 'test_profile_id'),
+              ),
             ),
           ),
         ),
@@ -170,7 +180,10 @@ void main() {
                         create: (context) => mockProfileCubit,
                       ),
                     ],
-                    child: const ProfileScreen(profileId: 'test_profile_id'),
+                    child: const ShaderRenderingScope(
+                      enabled: false,
+                      child: ProfileScreen(profileId: 'test_profile_id'),
+                    ),
                   ),
                 ),
               ),

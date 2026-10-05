@@ -60,8 +60,18 @@ class FirebaseDataProvider<M extends SerializableEntity> implements DataProvider
 
   /// Streams a document from the Firestore collection by its ID.
   @override
-  Stream<M> readStream(String id) {
-    return collectionRef.doc(id).snapshots()
+  Stream<M> readStream(String id, {bool filterCached = false}) {
+    final snapshots = collectionRef
+      .doc(id)
+      .snapshots(includeMetadataChanges: filterCached);      
+
+    if (filterCached) {
+      return snapshots
+        .where((snapshot) => !snapshot.metadata.isFromCache)
+        .map((snapshot) => snapshot.data()!);
+    }
+
+    return snapshots
       .map((querySnapshot) => querySnapshot.data()!);
   }
 
