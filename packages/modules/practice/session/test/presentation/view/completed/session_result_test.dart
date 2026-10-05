@@ -13,7 +13,6 @@ import 'package:session/src/public/view/session_result.dart';
 
 import '../../../session_test_helper.dart';
 
-
 void main() {
   late MockServices mockServices;
   late MockCrashlyticsService mockCrashlyticsService;
@@ -22,9 +21,8 @@ void main() {
     mockServices = MockServices();
     mockCrashlyticsService = MockCrashlyticsService();
 
-    when(
-      () => mockServices.crashlyticsService,
-    ).thenReturn(mockCrashlyticsService);
+    when(() => mockServices.crashlyticsService)
+        .thenReturn(mockCrashlyticsService);
   });
 
   testWidgets('SessionResult renders correctly', (WidgetTester tester) async {

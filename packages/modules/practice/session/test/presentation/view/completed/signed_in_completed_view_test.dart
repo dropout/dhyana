@@ -1,22 +1,18 @@
 import 'package:faker/faker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nock/nock.dart';
 import 'package:profile/profile.dart';
 import 'package:provider/provider.dart';
-import 'package:session/src/data/datasource/faker_session_extension.dart';
-import 'package:session/src/data/mapper/update_profile_stats_result_mapper.dart';
-import 'package:session/src/public/model/update_profile_stats_result.dart';
 import 'package:social/social.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:core/core.dart';
-import 'package:session/src/data/mapper/session_mapper.dart';
+import 'package:session/src/data/datasource/faker_session_extension.dart';
+import 'package:session/src/data/mapper/update_profile_stats_result_mapper.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
-import 'package:session/src/presentation/viewmodel/session_completed/session_completed_cubit.dart';
 import 'package:session/src/domain/entity/update_profile_stats_result_entity.dart';
 import 'package:session/src/public/view/session_result.dart';
 import 'package:session/src/public/view/signed_in_completed_view.dart';
@@ -25,48 +21,37 @@ import '../../../session_mock_definitions.dart';
 import '../../../session_test_helper.dart';
 
 void main() {
-  late MockProfileCubit mockProfileStateCubit;
-  late MockSessionCompletedCubit mockSessionCompletedCubit;
+  late MockServices mockServices;
+  late MockResourceResolver mockResourceResolver;
   late MockPresenceCubit mockPresenceCubit;
 
-  late MockServices mockServices;
-  late MockCrashlyticsService mockCrashlyticsService;
-  late MockResourceResolver mockResourceResolver;
-
-  setUpAll(() async {
+  setUpAll(() {
+    registerFallbackValue(Duration.zero);
     nock.init();
-
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
   });
 
-  setUp(() async {
-    mockProfileStateCubit = MockProfileCubit();
-    mockSessionCompletedCubit = MockSessionCompletedCubit();
+  setUp(() {
+    mockServices = MockServices();
+    mockResourceResolver = MockResourceResolver();
     mockPresenceCubit = MockPresenceCubit();
 
-    mockServices = MockServices();
-    mockCrashlyticsService = MockCrashlyticsService();
-    mockResourceResolver = MockResourceResolver();
-
-    when(() => mockServices.crashlyticsService)
-        .thenReturn(mockCrashlyticsService);
+    when(() => mockPresenceCubit.state)
+        .thenReturn(const PresenceState.initial());
+    when(
+      () => mockPresenceCubit.loadPresenceData(
+        ownProfileId: any(named: 'ownProfileId'),
+        limit: any(named: 'limit'),
+        windowSize: any(named: 'windowSize'),
+      ),
+    ).thenAnswer((_) async {});
+    GetIt.I.registerFactory<PresenceCubit>(() => mockPresenceCubit);
 
     when(() => mockServices.resourceResolver).thenReturn(mockResourceResolver);
-
     when(() => mockResourceResolver.resolveStoragePath(any())).thenAnswer((_) {
       return Future.value('https://example.com/profile.jpg');
     });
 
-
-    GetIt.I.registerFactory<PresenceCubit>(
-      () => mockPresenceCubit,
-    );
-
     nock.cleanAll();
-    // Mock the MethodChannel for path_provider to return a valid path
-    // CachedNetworkImage uses path_provider to get the cache directory,
-    // so we need to mock it for testing
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
           const MethodChannel('plugins.flutter.io/path_provider'),
@@ -76,373 +61,102 @@ void main() {
 
   tearDown(() {
     GetIt.I.reset();
-
-    // Clear the mock handler for the MethodChannel to avoid affecting other tests
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
           const MethodChannel('plugins.flutter.io/path_provider'),
-          null, // <--- Removes the mock handler
+          null,
         );
   });
 
-  group('SignedInCompletedView', () {
-    testWidgets('can log session on initialization', (
-      WidgetTester tester,
+  late UpdateProfileStatsResultEntity updateResult;
+
+  Future<void> pumpView(
+    WidgetTester tester, {
+    required bool showStats,
+    required bool usePresence,
+  }) async {
+    final SessionEntity session = Faker().createSessionEntity();
+    updateResult = UpdateProfileStatsResultEntity(
+      updatedProfile: Faker().createProfile(),
+      oldProfile: Faker().createProfile(),
+      session: session,
+    );
+
+    await tester.pumpWidget(
+      SessionTestHelper.withLocalizationProvider(
+        Provider<Services>.value(
+          value: mockServices,
+          child: SignedInCompletedView(
+            profileId: updateResult.updatedProfile.id,
+            updateResult: updateResult.toApi(),
+            showStatsOnFinishScreen: showStats,
+            usePresenceFeature: usePresence,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
+  group('SignedInCompletedView settings', () {
+    testWidgets('shows result, stats and presence when both enabled', (
+      tester,
     ) async {
-      final profileId = 'profileId';
-      final session = Faker().createSessionEntity();
-      final UpdateProfileStatsResultEntity updateResult =
-          UpdateProfileStatsResultEntity(
-            updatedProfile: Faker().createProfile(),
-            oldProfile: Faker().createProfile(),
-            session: session,
-          );
+      await pumpView(tester, showStats: true, usePresence: true);
 
-      when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedInitialState());
-      when(() => mockSessionCompletedCubit.stream)
-          .thenAnswer((_) => const Stream<SessionCompletedState>.empty());
-
-      when(() => mockProfileStateCubit.loadProfile(
-        profileId, profile: updateResult.updatedProfile,
-      )).thenAnswer((_) async {});
-
-      when(
-        () => mockSessionCompletedCubit.logSession(
-          profileId,
-          session.toApi(),
-          onComplete: any(named: 'onComplete'),
-        ),
-      ).thenAnswer((invocation) async {
-        final onComplete =
-            invocation.namedArguments[const Symbol('onComplete')]
-                as void Function(UpdateProfileStatsResultEntity)?;
-        onComplete?.call(updateResult);
-      });
-
-      await tester
-          .runAsync(() async {
-            await tester.pumpWidget(
-              SessionTestHelper.withLocalizationProvider(
-                MultiProvider(
-                  providers: [
-                    Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(
-                      value: mockProfileStateCubit,
-                    ),
-                    BlocProvider<SessionCompletedCubit>.value(
-                      value: mockSessionCompletedCubit,
-                    ),
-                  ],
-                  child: SignedInCompletedView(
-                    profileId: profileId,
-                    updateResult: updateResult.toApi(),
-                  ),
-                ),
-              ),
-            );
-            await tester.pump();
-          })
-          .then((_) {
-            verify(
-              () => mockSessionCompletedCubit.logSession(
-                'profileId',
-                session.toApi(),
-                onComplete: any(named: 'onComplete'),
-              ),
-            ).called(1);
-
-            verify(
-              () => mockProfileStateCubit.loadProfile(
-                'profileId',
-                profile: updateResult.updatedProfile,
-              ),
-            ).called(1);
-          });
+      expect(find.byType(SessionResult), findsOneWidget);
+      expect(find.byType(MilestoneProgressView), findsOneWidget);
+      expect(find.byType(ProgressSummary), findsOneWidget);
+      expect(find.byType(PresenceArea), findsOneWidget);
     });
 
-    testWidgets('can show loading when initial state', (
-      WidgetTester tester,
+    testWidgets('loads presence data for the updated profile', (tester) async {
+      await pumpView(tester, showStats: true, usePresence: true);
+
+      verify(
+        () => mockPresenceCubit.loadPresenceData(
+          ownProfileId: updateResult.updatedProfile.id,
+          limit: 18,
+          windowSize: const Duration(minutes: 120),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('hides presence when presence feature disabled', (
+      tester,
     ) async {
-      final SessionEntity session = Faker().createSessionEntity();
+      await pumpView(tester, showStats: true, usePresence: false);
 
-      final updateResult = UpdateProfileStatsResult(
-        oldProfile: Faker().createProfile(),
-        updatedProfile: Faker().createProfile(),
-        session: session.toApi(),
-      );
-
-      when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedState.initial());
-
-      when(
-        () => mockSessionCompletedCubit.logSession(
-          'profileId',
-          session.toApi(),
-          onComplete: any(named: 'onComplete'),
+      expect(find.byType(SessionResult), findsOneWidget);
+      expect(find.byType(MilestoneProgressView), findsOneWidget);
+      expect(find.byType(ProgressSummary), findsOneWidget);
+      expect(find.byType(PresenceArea), findsNothing);
+      verifyNever(
+        () => mockPresenceCubit.loadPresenceData(
+          ownProfileId: any(named: 'ownProfileId'),
+          limit: any(named: 'limit'),
+          windowSize: any(named: 'windowSize'),
         ),
-      ).thenAnswer((_) => Future.value(null));
-
-      await tester
-          .runAsync(() async {
-            await tester.pumpWidget(
-              withAllContextProviders(
-                MultiProvider(
-                  providers: [
-                    Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(
-                      value: mockProfileStateCubit,
-                    ),
-                    BlocProvider<SessionCompletedCubit>.value(
-                      value: mockSessionCompletedCubit,
-                    ),
-                  ],
-                  child: SignedInCompletedView(
-                    profileId: 'profileId',
-                    updateResult: updateResult,
-                  ),
-                ),
-              ),
-            );
-            await tester.pump();
-          })
-          .then((_) {
-            expect(find.byType(AppLoadingDisplay), findsOneWidget);
-          });
+      );
     });
 
-    testWidgets('can show loading when loading state', (
-      WidgetTester tester,
-    ) async {
-      final SessionEntity session = Faker().createSessionEntity();
+    testWidgets('hides stats when stats disabled', (tester) async {
+      await pumpView(tester, showStats: false, usePresence: true);
 
-      final updateResult = UpdateProfileStatsResult(
-        oldProfile: Faker().createProfile(),
-        updatedProfile: Faker().createProfile(),
-        session: session.toApi(),
-      );
-
-      when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedState.loading());
-
-      when(
-        () => mockSessionCompletedCubit.logSession(
-          'profileId',
-          session.toApi(),
-          onComplete: any(named: 'onComplete'),
-        ),
-      ).thenAnswer((_) => Future.value(null));
-
-      await tester
-          .runAsync(() async {
-            await tester.pumpWidget(
-              withAllContextProviders(
-                MultiProvider(
-                  providers: [
-                    Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(
-                      value: mockProfileStateCubit,
-                    ),
-                    BlocProvider<SessionCompletedCubit>.value(
-                      value: mockSessionCompletedCubit,
-                    ),
-                  ],
-                  child: SignedInCompletedView(
-                    profileId: 'profileId',
-                    updateResult: updateResult,
-                  ),
-                ),
-              ),
-            );
-            await tester.pump();
-          })
-          .then((_) {
-            expect(find.byType(AppLoadingDisplay), findsOneWidget);
-          });
+      expect(find.byType(SessionResult), findsOneWidget);
+      expect(find.byType(MilestoneProgressView), findsNothing);
+      expect(find.byType(ProgressSummary), findsNothing);
+      expect(find.byType(PresenceArea), findsOneWidget);
     });
 
-    testWidgets('can show error when error state', (WidgetTester tester) async {
-      final SessionEntity session = Faker().createSessionEntity();
+    testWidgets('shows only the result when both disabled', (tester) async {
+      await pumpView(tester, showStats: false, usePresence: false);
 
-      final updateResult = UpdateProfileStatsResult(
-        oldProfile: Faker().createProfile(),
-        updatedProfile: Faker().createProfile(),
-        session: session.toApi(),
-      );
-
-      when(() => mockSessionCompletedCubit.state)
-          .thenReturn(const SessionCompletedState.error());
-
-      when(
-        () => mockSessionCompletedCubit.logSession(
-          'profileId',
-          session.toApi(),
-          onComplete: any(named: 'onComplete'),
-        ),
-      ).thenAnswer((_) => Future.value(null));
-
-      await tester
-          .runAsync(() async {
-            await tester.pumpWidget(
-              withAllContextProviders(
-                MultiProvider(
-                  providers: [
-                    Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(
-                      value: mockProfileStateCubit,
-                    ),
-                    BlocProvider<SessionCompletedCubit>.value(
-                      value: mockSessionCompletedCubit,
-                    ),
-                  ],
-                  child: SignedInCompletedView(
-                    profileId: 'profileId',
-                    updateResult: updateResult,
-                  ),
-                ),
-              ),
-            );
-            await tester.pump();
-          })
-          .then((_) {
-            expect(find.byType(AppErrorDisplay), findsOneWidget);
-          });
+      expect(find.byType(SessionResult), findsOneWidget);
+      expect(find.byType(MilestoneProgressView), findsNothing);
+      expect(find.byType(ProgressSummary), findsNothing);
+      expect(find.byType(PresenceArea), findsNothing);
+      expect(find.byType(SingleChildScrollView), findsNothing);
     });
-
-    testWidgets('can show loaded when saving session', (
-      WidgetTester tester,
-    ) async {
-      final SessionEntity session = Faker().createSessionEntity();
-      final oldProfile = Faker().createProfile();
-      final updatedProfile = oldProfile.copyWith(
-        statsReport: oldProfile.statsReport.copyWith(
-          completedSessionsCount:
-              oldProfile.statsReport.completedSessionsCount + 1,
-        ),
-      );
-
-      final updateResult =
-        UpdateProfileStatsResultEntity(
-          updatedProfile: updatedProfile,
-          oldProfile: oldProfile,
-          session: session,
-        );
-
-      when(() => mockSessionCompletedCubit.state).thenReturn(
-        SessionCompletedState.saving(updateResult: updateResult.toApi()),
-      );
-
-      when(
-        () => mockSessionCompletedCubit.logSession(
-          'profileId',
-          session.toApi(),
-          onComplete: any(named: 'onComplete'),
-        ),
-      ).thenAnswer((_) => Future.value(null));
-
-      when(() => mockPresenceCubit.state).thenReturn(
-        PresenceState.initial(),
-      );
-
-      when(() => mockPresenceCubit.loadPresenceData(
-        ownProfileId: updateResult.updatedProfile.id,
-        limit: 18,
-        windowSize: const Duration(minutes: 120),
-      )).thenAnswer((_) => Future.value(null));
-
-      await tester
-          .runAsync(() async {
-            await tester.pumpWidget(
-              SessionTestHelper.withLocalizationProvider(
-                MultiProvider(
-                  providers: [
-                    Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(
-                      value: mockProfileStateCubit,
-                    ),
-                    BlocProvider<SessionCompletedCubit>.value(
-                      value: mockSessionCompletedCubit,
-                    ),
-                  ],
-                  child: SignedInCompletedView(
-                    profileId: 'profileId',
-                    updateResult: updateResult.toApi(),
-                  ),
-                ),
-              ),
-            );
-            await tester.pumpAndSettle();
-          })
-          .then((_) {
-            expect(find.byType(SessionResult), findsOneWidget);
-            expect(find.byType(MilestoneProgressView), findsOneWidget);
-            expect(find.byType(ProgressSummary), findsOneWidget);
-            expect(find.byType(PresenceArea), findsOneWidget);
-          });
-    });
-
-    testWidgets('can show loaded when saving session completed', (
-      WidgetTester tester,
-    ) async {
-      final SessionEntity session = Faker().createSessionEntity();
-      UpdateProfileStatsResultEntity updateResult =
-          UpdateProfileStatsResultEntity(
-            updatedProfile: Faker().createProfile(),
-            oldProfile: Faker().createProfile(),
-            session: session,
-          );
-
-      when(() => mockSessionCompletedCubit.state).thenReturn(
-        SessionCompletedState.saved(updateResult: updateResult.toApi()),
-      );
-
-      when(
-        () => mockSessionCompletedCubit.logSession(
-          'profileId',
-          session.toApi(),
-          onComplete: any(named: 'onComplete'),
-        ),
-      ).thenAnswer((_) => Future.value(null));
-
-      when(() => mockPresenceCubit.state).thenReturn(
-        PresenceState.initial(),
-      );
-
-      when(() => mockPresenceCubit.loadPresenceData(
-        ownProfileId: updateResult.updatedProfile.id,
-        limit: 18,
-        windowSize: const Duration(minutes: 120),
-      )).thenAnswer((_) => Future.value(null));
-
-      await tester
-          .runAsync(() async {
-            await tester.pumpWidget(
-              SessionTestHelper.withLocalizationProvider(
-                MultiProvider(
-                  providers: [
-                    Provider<Services>.value(value: mockServices),
-                    BlocProvider<ProfileCubit>.value(
-                      value: mockProfileStateCubit,
-                    ),
-                    BlocProvider<SessionCompletedCubit>.value(
-                      value: mockSessionCompletedCubit,
-                    ),
-                  ],
-                  child: SignedInCompletedView(
-                    profileId: 'profileId',
-                    updateResult: updateResult.toApi(),
-                  ),
-                ),
-              ),
-            );
-            await tester.pumpAndSettle();
-          })
-          .then((_) {
-            expect(find.byType(SessionResult), findsOneWidget);
-            expect(find.byType(MilestoneProgressView), findsOneWidget);
-            expect(find.byType(ProgressSummary), findsOneWidget);
-            expect(find.byType(PresenceArea), findsOneWidget);
-          });
-    });
-  }); // eof group
-} // eof main
+  });
+}

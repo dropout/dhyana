@@ -9,18 +9,15 @@ import 'package:session/src/public/view/signed_out_completed_view.dart';
 
 import '../../../session_test_helper.dart';
 
-
 void main() {
-
-  testWidgets('SignedOutCompletedView renders correctly', (WidgetTester tester) async {
-
+  testWidgets('SignedOutCompletedView renders correctly', (
+    WidgetTester tester,
+  ) async {
     final SessionEntity session = Faker().createSessionEntity();
 
     await tester.pumpWidget(
       SessionTestHelper.withLocalizationProvider(
-        SignedOutCompletedView(
-          session: session.toApi(),
-        )
+        SignedOutCompletedView(session: session.toApi()),
       ),
     );
 
