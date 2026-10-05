@@ -160,6 +160,12 @@ abstract class ChantingLocalizations {
   /// In en, this message translates to:
   /// **'Paused'**
   String get chantingPlaylistBadgePaused;
+
+  /// No description provided for @chantingPlayerLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing your session...'**
+  String get chantingPlayerLoading;
 }
 
 class _ChantingLocalizationsDelegate

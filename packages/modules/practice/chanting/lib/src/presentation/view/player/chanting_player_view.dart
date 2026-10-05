@@ -1,4 +1,5 @@
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
+import 'package:chanting/l10n/chanting_localizations.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:core/core.dart';
@@ -114,21 +115,12 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Preparing your session...',
+          ChantingLocalizations.of(context).chantingPlayerLoading,
           style: context.theme.textTheme.bodyLarge?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
-        Gap.large(),
-        // FractionallySizedBox(
-        //   widthFactor: 0.66,
-        //   child: LinearProgressIndicator(
-        //     backgroundColor: Colors.grey.shade600,            
-        //     color: Colors.white,
-        //     value: widget.chantingState.cachingProgress.progress,
-        //   ),
-        // ),
       ],
     );
   }

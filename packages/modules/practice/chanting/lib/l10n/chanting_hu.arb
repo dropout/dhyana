@@ -9,5 +9,6 @@
   "chantingAddChantListItemAddedAction": "Hozzáadva",
   "chantingPlaylistSheetTitle": "Lejátszási lista",
   "chantingPlaylistBadgePlaying": "Lejátszás",
-  "chantingPlaylistBadgePaused": "Szünet"
+  "chantingPlaylistBadgePaused": "Szünet",
+  "chantingPlayerLoading": "A munkamenet előkészítése..."
 }

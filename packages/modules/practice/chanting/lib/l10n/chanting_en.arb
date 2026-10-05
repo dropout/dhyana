@@ -9,5 +9,6 @@
   "chantingAddChantListItemAddedAction": "Added",
   "chantingPlaylistSheetTitle": "Playlist",
   "chantingPlaylistBadgePlaying": "Playing",
-  "chantingPlaylistBadgePaused": "Paused"
+  "chantingPlaylistBadgePaused": "Paused",
+  "chantingPlayerLoading": "Preparing your session..."
 }

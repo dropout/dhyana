@@ -50,4 +50,7 @@ class ChantingLocalizationsHu extends ChantingLocalizations {
 
   @override
   String get chantingPlaylistBadgePaused => 'Szünet';
+
+  @override
+  String get chantingPlayerLoading => 'A munkamenet előkészítése...';
 }

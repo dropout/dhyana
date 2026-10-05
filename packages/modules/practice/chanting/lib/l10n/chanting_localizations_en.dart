@@ -50,4 +50,7 @@ class ChantingLocalizationsEn extends ChantingLocalizations {
 
   @override
   String get chantingPlaylistBadgePaused => 'Paused';
+
+  @override
+  String get chantingPlayerLoading => 'Preparing your session...';
 }
