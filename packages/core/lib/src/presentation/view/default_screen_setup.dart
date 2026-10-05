@@ -30,28 +30,25 @@ class const DefaultScreenSetup({
   final ScrollPhysics? scrollPhysics,
   super.key,
 }) extends StatefulWidget {
+  factory DefaultScreenSetup.error({required String title}) =>
+      DefaultScreenSetup(
+        title: title,
+        titleColor: Colors.white,
+        appBarBackgroundColor: AppColors.errorColor,
+        scrollPhysics: const NeverScrollableScrollPhysics(),
+        slivers: [
+          SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay()),
+        ],
+      );
 
-  factory DefaultScreenSetup.error({
-    required String title,
-  }) => DefaultScreenSetup(
-    title: title,
-    titleColor: Colors.white,
-    appBarBackgroundColor: AppColors.errorColor,
-    scrollPhysics: const NeverScrollableScrollPhysics(),
-    slivers: [
-      SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay()),
-    ],
-  );
-
-  factory DefaultScreenSetup.loading({
-    required String title,
-  }) => DefaultScreenSetup(
-    title: title,
-    scrollPhysics: const NeverScrollableScrollPhysics(),
-    slivers: [
-      SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
-    ],
-  );
+  factory DefaultScreenSetup.loading({required String title}) =>
+      DefaultScreenSetup(
+        title: title,
+        scrollPhysics: const NeverScrollableScrollPhysics(),
+        slivers: [
+          SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
+        ],
+      );
 
   @override
   State<DefaultScreenSetup> createState() => _DefaultScreenSetupState();
@@ -59,11 +56,10 @@ class const DefaultScreenSetup({
 
 class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     with DefaultScreenSetupHelpersMixin {
-
   // Used by parchment background to determine scroll offset
   ValueNotifier<double> scrollOffset = ValueNotifier<double>(0.0);
 
-  // Used to display title in appbar if scrolled upwards and normal 
+  // Used to display title in appbar if scrolled upwards and normal
   // title in the sliver is going offscreen.
   double appBarTitleOpacity = 0.0;
 
@@ -141,8 +137,11 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
       final double topInset = MediaQuery.of(context).viewPadding.top;
       final double appBarHeight = 56;
       final double appBarHeightWithTopPadding = topInset + kToolbarHeight;
-      
       const double fadeLength = 10.0;
+
+      // Seed based on title so that the background 
+      // pattern varies for different titles (screens)
+      final seed = widget.title.hashCode * 0.00000000001;
 
       return Scaffold(
         extendBodyBehindAppBar: true,
@@ -170,80 +169,50 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
                 ),
               )
             : ParchmentBackground(
-          scrollOffset: scrollOffset,
-          child: ShaderMask(
-            shaderCallback: (Rect bounds) {
-              final double fadeStart = appBarHeightWithTopPadding / bounds.height;
-              final double fadeEnd =
-                  (appBarHeightWithTopPadding + fadeLength) / bounds.height;
+                seed: seed + DateTime.now().day.toDouble() / 10.0,
+                scrollOffset: scrollOffset,
+                child: ShaderMask(
+                  shaderCallback: (Rect bounds) {
+                    final double fadeStart =
+                        appBarHeightWithTopPadding / bounds.height;
+                    final double fadeEnd =
+                        (appBarHeightWithTopPadding + fadeLength) /
+                        bounds.height;
 
-              return LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: const [
-                  Colors.transparent, // Top segment
-                  Colors.transparent, // Cut-off point (transparent side)
-                  Colors.white, // Cut-off point (visible side)
-                  Colors.white, // Bottom segment
-                ],
-                stops: [0.0, fadeStart, fadeEnd, 1.0],
-              ).createShader(bounds);
-            },
-            blendMode: BlendMode.dstIn,
-            child: buildScaffoldBody(
-              context: context,
-              body: Padding(
-                padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
-                child: body,
+                    return LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: const [
+                        Colors.transparent, // Top segment
+                        Colors.transparent, // Cut-off point (transparent side)
+                        Colors.white, // Cut-off point (visible side)
+                        Colors.white, // Bottom segment
+                      ],
+                      stops: [0.0, fadeStart, fadeEnd, 1.0],
+                    ).createShader(bounds);
+                  },
+                  blendMode: BlendMode.dstIn,
+                  child: buildScaffoldBody(
+                    context: context,
+                    body: Padding(
+                      padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
+                      child: body,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-
-        // body: ParchmentBackground(
-        //   scrollOffset: scrollOffset,
-        //   child: ShaderMask(
-        //     shaderCallback: (Rect bounds) {
-        //       final double fadeStart = appBarHeightWithTopPadding / bounds.height;
-        //       final double fadeEnd =
-        //           (appBarHeightWithTopPadding + fadeLength) / bounds.height;
-
-        //       return LinearGradient(
-        //         begin: Alignment.topCenter,
-        //         end: Alignment.bottomCenter,
-        //         colors: const [
-        //           Colors.transparent, // Top segment
-        //           Colors.transparent, // Cut-off point (transparent side)
-        //           Colors.white, // Cut-off point (visible side)
-        //           Colors.white, // Bottom segment
-        //         ],
-        //         stops: [0.0, fadeStart, fadeEnd, 1.0],
-        //       ).createShader(bounds);
-        //     },
-        //     blendMode: BlendMode.dstIn,
-        //     child: buildScaffoldBody(
-        //       context: context,
-        //       body: Padding(
-        //         padding: EdgeInsets.only(top: appBarHeightWithTopPadding),
-        //         child: body,
-        //       ),
-        //     ),
-        //   ),
-        // ),
       );
     } else {
       return body;
     }
   }
 
-  Widget buildScaffoldBody({required BuildContext context, required Widget body}) {
+  Widget buildScaffoldBody({
+    required BuildContext context,
+    required Widget body,
+  }) {
     if (widget.overlay == null) return body;
-    return Stack(
-      children: [
-        body,
-        widget.overlay!,
-      ],
-    );    
+    return Stack(children: [body, widget.overlay!]);
   }
 
   @override
@@ -253,7 +222,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   }
 }
 
-/// Helper mixin for default screen setup, 
+/// Helper mixin for default screen setup,
 /// providing common widgets and app bar effects.
 mixin DefaultScreenSetupHelpersMixin {
   Widget buildLoadingSliver(BuildContext context) {
@@ -283,7 +252,7 @@ mixin DefaultScreenSetupHelpersMixin {
         title,
         titleOpacity: titleOpacity,
         color: titleColor,
-        enableTitleSliver: enableTitleSliver,        
+        enableTitleSliver: enableTitleSliver,
       );
     }
 

@@ -16,8 +16,8 @@ out vec4 fragColor;
 const vec3 kBaseColor = vec3(0.953, 0.898, 0.671); // #f3e5ab (Ecru)
 const vec3 kDarkColor = vec3(0.843, 0.745, 0.459); // #D7BE75 (Ecru darker shade)
 const vec3 kStainColor = kBaseColor * 0.5; // foxing/water-stain blotch tint
-const vec3 kHighlightColor = mix(kBaseColor, vec3(1.0), 0.1); // small bright fleck
-const vec3 kFiberColor = kDarkColor * 0.7; // embedded plant-fiber speck
+const vec3 kHighlightColor = mix(kBaseColor, vec3(.25), 0.1); // small bright fleck
+const vec3 kFiberColor = kDarkColor * 0.9; // embedded plant-fiber speck
 
 // Pseudo-random number generator
 float random(vec2 st) {
