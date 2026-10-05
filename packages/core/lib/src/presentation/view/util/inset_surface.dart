@@ -11,7 +11,7 @@ class const InsetSurface({
   final double borderRadius = DesignSpec.borderRadiusMd,
   final Color shadowColor = const Color(0x33000000),
   final double blurRadius = 20.0,
-  final Offset offset = const Offset(5, 5),  
+  final Offset offset = const Offset(3, 6),  
   super.key,
 }) extends StatelessWidget {
 

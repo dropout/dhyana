@@ -9,7 +9,7 @@ uniform vec2 uOffset;     // Shadow offset (dx, dy)
 out vec4 fragColor;
 
 // Sample count for the blur (32 is highly performant; bump to 64 for massive blur radii)
-const int SAMPLES = 128; 
+const int SAMPLES = 64; 
 const float GOLDEN_ANGLE = 2.39996323; // pi * (3 - sqrt(5))
 
 // Pure binary shape check: Returns 1.0 if outside, 0.0 if inside.
@@ -54,8 +54,10 @@ void main() {
 
     // Average the samples to get perfect shadow opacity
     float shadowAlpha = shadowIntensity / float(SAMPLES);
-    float noise = organicNoise(pos * 0.57);
-    shadowAlpha *= mix(0.94, 1.06, noise);
+
+    // Noise is not really visible at the moment...
+    // float noise = organicNoise(pos * 0.57);
+    // shadowAlpha *= mix(0.94, 1.06, noise);
 
     // Apply color, opacity, and clip to panel bounds
     fragColor = uColor * shadowAlpha;
