@@ -7,6 +7,7 @@ import 'package:chanting/src/presentation/view/player/lyric_line.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
 import 'package:chanting/src/presentation/view/player/worm_line.dart';
 import 'package:core/core.dart';
+import 'package:flutter/rendering.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,7 +58,7 @@ enum _Mode {
 
 class _LyricsViewState extends State<LyricsView>
     with SingleTickerProviderStateMixin {
-  static const Duration _resumeDelay = Duration(milliseconds: 2500);
+  static const Duration _resumeDelay = Duration(milliseconds: 1000);
   static const Duration _seekThrottle = Duration(milliseconds: 100);
 
   /// Scroll controller to manage programmatic scrolling and
@@ -65,7 +66,7 @@ class _LyricsViewState extends State<LyricsView>
   final ScrollController _scrollController = ScrollController();
 
   /// Drives the staggered visual catch-up after each programmatic jump.
-  late final AnimationController _wormController;
+  late final AnimationController _wormAnimationController;
 
   Timer? _resumeTimer;
   _Mode _mode = _Mode.synced;
@@ -86,7 +87,7 @@ class _LyricsViewState extends State<LyricsView>
   void initState() {
     super.initState();
 
-    _wormController = AnimationController(
+    _wormAnimationController = AnimationController(
       vsync: this,
       duration: widget.effects.wormDuration,
       value: 1,
@@ -106,7 +107,7 @@ class _LyricsViewState extends State<LyricsView>
   @override
   void dispose() {
     _resumeTimer?.cancel();
-    _wormController.dispose();
+    _wormAnimationController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -116,7 +117,7 @@ class _LyricsViewState extends State<LyricsView>
   void didUpdateWidget(covariant LyricsView oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    _wormController.duration = widget.effects.wormDuration;
+    _wormAnimationController.duration = widget.effects.wormDuration;
     if (!widget.effects.isWormScrollOn) _stopWorm();
 
     // Scroll to lines while the chant is playing.
@@ -154,9 +155,7 @@ class _LyricsViewState extends State<LyricsView>
     for (final line in widget.chantingState.lyricsDocument?.lines ?? []) {
       final height = calculateTextHeight(
         LyricLine.displayText(line),
-        context.theme.textTheme.headlineSmall!.copyWith(
-          fontWeight: FontWeight.w700,
-        ),
+        LyricLine.getLyricsTextStyle(context),
         widget.maxWidth,
         LyricLine.linePadding,
       );
@@ -205,7 +204,7 @@ class _LyricsViewState extends State<LyricsView>
 
   /// Settles all lines at their final position immediately.
   void _stopWorm() {
-    _wormController.value = 1;
+    _wormAnimationController.value = 1;
   }
 
   /// Jumps the scroll view to the line and lets the lines catch up visually
@@ -235,14 +234,14 @@ class _LyricsViewState extends State<LyricsView>
 
     // Carry over what the previous animation had not yet absorbed.
     final effects = widget.effects;
-    if (_wormController.isAnimating) {
+    if (_wormAnimationController.isAnimating) {
       delta +=
           _wormDelta *
           (1 -
               wormProgress(
                 index: lineIndex,
                 anchor: _wormAnchor,
-                t: _wormController.value,
+                t: _wormAnimationController.value,
                 delayPerLine: effects.wormDelayPerLine,
                 maxDelay: effects.wormMaxDelay,
               ));
@@ -266,7 +265,7 @@ class _LyricsViewState extends State<LyricsView>
 
     _wormDelta = delta;
     _wormAnchor = lineIndex;
-    _wormController.forward(from: 0);
+    _wormAnimationController.forward(from: 0);
   }
 
   int _calculateActiveLineIndexFromScroll() {
@@ -305,7 +304,7 @@ class _LyricsViewState extends State<LyricsView>
         SliverPadding(
           padding: EdgeInsets.only(top: widget.topOffset),
         ), // Extra space at the top
-        SliverVariedExtentList(
+        SliverVariedExtentList(          
           delegate: SliverChildBuilderDelegate((context, index) {
             final line = lyricsDocument.lines[index];
             final lyricLine = LyricFocus(
@@ -323,7 +322,7 @@ class _LyricsViewState extends State<LyricsView>
             if (!widget.effects.isWormScrollOn) return lyricLine;
             return WormLine(
               index: index,
-              animation: _wormController,
+              animation: _wormAnimationController,
               delta: () => _wormDelta,
               anchor: () => _wormAnchor,
               delayPerLine: widget.effects.wormDelayPerLine,
@@ -349,9 +348,10 @@ class _LyricsViewState extends State<LyricsView>
       },
       onPointerUp: (_) => _isPointerDown = false,
       onPointerCancel: (_) => _isPointerDown = false,
-      child: CustomScrollView(
+      child: CustomScrollView(        
         controller: _scrollController,
         physics: ClampingScrollPhysics(),
+        scrollCacheExtent: ScrollCacheExtent.viewport(0.5),
         slivers: slivers,
       ),
     );

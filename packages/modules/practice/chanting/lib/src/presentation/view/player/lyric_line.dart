@@ -9,6 +9,17 @@ import 'package:material_ui/material_ui.dart';
 /// The [position] is used to determine the state of each word (inactive, pending, singing, sung).
 /// The [isActive] is currently not used, but can be used in the future to apply additional styling to the active line.
 class LyricLine extends StatelessWidget {
+
+  /// Returns the text style used for rendering lyrics lines.
+  /// This is used when rendering the text and calculating the line heights
+  /// for the varied extent sliver.
+  static TextStyle getLyricsTextStyle(BuildContext context) {
+    return context.theme.textTheme.headlineMedium!.copyWith(
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
+    );
+  }
+
   static const EdgeInsets linePadding = EdgeInsets.symmetric(
     horizontal: 24,
     vertical: 8,
@@ -66,10 +77,7 @@ class LyricLine extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           children: textSpans,
-          style: context.theme.textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
+          style: getLyricsTextStyle(context),
         ),
       ),
     );

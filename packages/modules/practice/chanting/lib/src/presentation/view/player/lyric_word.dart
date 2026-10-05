@@ -1,4 +1,5 @@
 import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
+import 'package:chanting/src/presentation/view/player/lyric_line.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -32,8 +33,7 @@ class LyricWordWidget extends StatelessWidget {
 
     return AnimatedDefaultTextStyle(
       duration: const Duration(milliseconds: 200),
-      style: context.theme.textTheme.headlineSmall!.copyWith(
-        fontWeight: FontWeight.w700,
+      style: LyricLine.getLyricsTextStyle(context).copyWith(
         color: color,
       ),
       child: Text(word.text),
