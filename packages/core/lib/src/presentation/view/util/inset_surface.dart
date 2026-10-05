@@ -1,6 +1,4 @@
-import 'package:assets/assets.dart';
 import 'package:core/src/presentation/view/painting/inset_shadow_painter.dart';
-import 'package:core/src/presentation/view/util/app_context.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:core/src/presentation/design_spec.dart';
@@ -18,16 +16,10 @@ class const InsetSurface({
   @override
   Widget build(BuildContext context) {
 
-    Colors.black.withValues(alpha: 0.6);
-    final shader = context.services.shaderService.get(
-      Assets.shaderInsetShadow,
-    );
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: CustomPaint(
-        foregroundPainter: ShaderInsetShadowPainter(
-          shader: shader,
+        foregroundPainter: InsetShadowPainter(
           shadowColor: shadowColor,
           blurRadius: blurRadius,
           borderRadius: borderRadius,

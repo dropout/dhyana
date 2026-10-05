@@ -96,7 +96,9 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
       children: [
 
         AnimatedSwitcher(
-          duration: Durations.long4,          
+          duration: Durations.long4,
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
           child: switch (widget.chantingState.loadingState) {
             .processing => buildLoadingView(context),
             .error => buildErrorView(context),
@@ -141,9 +143,11 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             maxBlurSigma: 5,
             blurSigmaPerLine: 0.4,
             wormDuration: Durations.extralong4,
+            wormDelayPerLine: 0.1,
+            wormMaxDelay: 1.0,
             minOpacity: 0.1,
-            opacityFalloffPerLine: 0.15,
-            transitionDuration: Durations.medium4,
+            opacityFalloffPerLine: 0.1,
+            transitionDuration: Durations.long1,
           ),
         );
       },

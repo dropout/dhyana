@@ -1,15 +1,12 @@
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
-class ShaderInsetShadowPainter extends CustomPainter {
-  final ui.FragmentShader shader;
+class InsetShadowPainter extends CustomPainter {
   final Color shadowColor;
   final double blurRadius;
   final double borderRadius;
   final Offset offset;
 
-  ShaderInsetShadowPainter({
-    required this.shader,
+  const InsetShadowPainter({
     required this.shadowColor,
     required this.blurRadius,
     required this.borderRadius,
@@ -18,36 +15,32 @@ class ShaderInsetShadowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 1. Set size uniform (uSize: vec2)
-    shader.setFloat(0, size.width);
-    shader.setFloat(1, size.height);
+    final rrect = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      Radius.circular(borderRadius),
+    );
 
-    // 2. Set shadow color uniform (uColor: vec4)
-    shader.setFloat(2, shadowColor.r / 255.0);
-    shader.setFloat(3, shadowColor.g / 255.0);
-    shader.setFloat(4, shadowColor.b / 255.0);
-    shader.setFloat(5, shadowColor.a);
+    // Even-odd fill leaves a shifted rounded hole; blurring the ring inwards gives the inset shadow.
+    final path = Path()
+      ..fillType = PathFillType.evenOdd
+      ..addRect(rrect.outerRect.inflate(blurRadius * 3 + offset.distance))
+      ..addRRect(rrect.shift(offset));
 
-    // 3. Set blur radius (uBlur: float)
-    shader.setFloat(6, blurRadius);
-
-    // 4. Set corner radius (uRadius: float)
-    shader.setFloat(7, borderRadius);
-
-    // 5. Set shadow offset (uOffset: vec2)
-    shader.setFloat(8, offset.dx);
-    shader.setFloat(9, offset.dy);
-
-    final Paint paint = Paint()..shader = shader;
-
-    // Draw full rect; shader handles rounding and inner clipping
-    canvas.drawRect(Offset.zero & size, paint);
+    canvas
+      ..save()
+      ..clipRRect(rrect)
+      ..drawPath(
+        path,
+        Paint()
+          ..color = shadowColor
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, blurRadius / 2),
+      )
+      ..restore();
   }
 
   @override
-  bool shouldRepaint(covariant ShaderInsetShadowPainter oldDelegate) {
-    return oldDelegate.shader != shader ||
-        oldDelegate.shadowColor != shadowColor ||
+  bool shouldRepaint(covariant InsetShadowPainter oldDelegate) {
+    return oldDelegate.shadowColor != shadowColor ||
         oldDelegate.blurRadius != blurRadius ||
         oldDelegate.borderRadius != borderRadius ||
         oldDelegate.offset != offset;

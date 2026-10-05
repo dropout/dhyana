@@ -18,7 +18,6 @@ flutter:
 
   shaders:
     - shaders/gradient_flow.frag
-    - shaders/inset_shadow.frag
     - shaders/linear_gradient_mask.frag
     - shaders/parchment_noise.frag
     - shaders/test.frag
