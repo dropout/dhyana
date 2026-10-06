@@ -9,6 +9,14 @@ service cloud.firestore {
         && request.auth.uid == profileId;
     } 
 
+    // Allow the profile owner to access documents in profile subcollections,
+    // while keeping statsAudit governed by its more restrictive rule below.
+    match /profiles/{profileId}/{subcollection}/{document=**} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == profileId
+        && subcollection != 'statsAudit';
+    }
+
     // Stats audit trail: owner can write, nobody can read or delete from clients.
     match /profiles/{profileId}/statsAudit/{entryId} {
       allow create, update: if request.auth != null
