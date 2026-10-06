@@ -7,6 +7,9 @@ import 'package:material_ui/material_ui.dart';
 /// Shows the current position and total duration of the chant, and allows
 /// users to play/pause, skip tracks, and open the playlist.
 class PlayerControls extends StatelessWidget {
+
+  static const double iconSize = 32.0;
+
   /// Creates a [PlayerControls] widget.
   const PlayerControls({
     required this.chantingState,
@@ -124,7 +127,7 @@ class PlayerControls extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             IconButton(
-              iconSize: 32,
+              iconSize: PlayerControls.iconSize,
               onPressed: isPreviousEnabled ? onPreviousPressed : null,
               icon: const Icon(Icons.skip_previous_rounded),
               color: isPreviousEnabled ? Colors.white : Colors.white54,
@@ -137,7 +140,7 @@ class PlayerControls extends StatelessWidget {
             ),
             Gap.small(),
             IconButton(
-              iconSize: 32,
+              iconSize: PlayerControls.iconSize,
               onPressed: isNextEnabled ? onNextPressed : null,
               icon: const Icon(Icons.skip_next_rounded),
               color: isNextEnabled ? Colors.white : Colors.white54,
@@ -149,7 +152,7 @@ class PlayerControls extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                iconSize: 32,
+                iconSize: PlayerControls.iconSize,
                 onPressed: onPlaylistPressed,
                 icon: const Icon(Icons.playlist_play_rounded),
                 color: Colors.white,
@@ -182,7 +185,7 @@ class PlayPauseButton extends StatelessWidget {
     super.key,
     this.backgroundColor = AppColors.red,
     this.iconColor = Colors.white,
-    this.size = 42,
+    this.size = 48,
     this.disableWhileLoading = true,
   });
 
