@@ -26,6 +26,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to the photo library is required to select a profile photo.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Access to the camera is required to take a profile photo.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Access to the microphone is required to record audio for profile videos.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

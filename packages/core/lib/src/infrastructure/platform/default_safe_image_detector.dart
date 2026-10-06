@@ -28,6 +28,9 @@ class DefaultSafeImageDetectorFactory implements SafeImageDetectorFactory {
 }
 
 class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
+  /// Output class order of the GantMan model.
+  static const _kLabels = ['drawings', 'hentai', 'neutral', 'porn', 'sexy'];
+
   final Interpreter _interpreter;
   final double _threshold;
 
@@ -61,30 +64,22 @@ class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
       ),
     );
 
-    // 3. Prepare output tensor placeholder matching model label shape
-    final labels = ['neutral', 'porn', 'hentai', 'sexy'];
-    var output = List.filled(1 * labels.length, 0.0).reshape([1, labels.length]);
+    // 3. Output tensor must match the model's class count (5 for GantMan)
+    final labels = _kLabels;
+    var output = List.filled(labels.length, 0.0).reshape([1, labels.length]);
 
     // 4. Run inference
     _interpreter.run(input, output);
 
-    // 5. Parse top label result
+    // 5. NSFW score is the combined probability of explicit classes
     final results = List<double>.from(output[0]);
-    int maxIndex = 0;
-    double maxScore = results[0];
+    double scoreOf(String label) => results[labels.indexOf(label)];
+    final nsfwScore = scoreOf('porn') + scoreOf('hentai') + scoreOf('sexy');
 
-    for (int i = 1; i < results.length; i++) {
-      if (results[i] > maxScore) {
-        maxScore = results[i];
-        maxIndex = i;
-      }
-    }
-
-    debugPrint('Detected label: ${labels[maxIndex]} with score: $maxScore');
+    debugPrint('NSFW score: $nsfwScore, scores: $results');
 
     // 6. Return ImageSafetyDetectionResult based on threshold
-    final isSafe = maxScore < _threshold;
-    return ImageSafetyDetectionResult(isSafe, maxScore);
+    return ImageSafetyDetectionResult(nsfwScore < _threshold, nsfwScore);
   }
 
   @override
@@ -92,101 +87,3 @@ class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
     _interpreter.close();
   }
 }
-
-// /// NsfwDetector class handles the NSFW detection process.
-// class DefaultSafeImageDetector with LoggerMixin implements SafeImageDetector {
-//   /// Defines the mean values for each channel,
-//   /// used in the Visual Geometry Group model.
-//   /// These values are used for preprocessing input images.
-//   static const _redMean = 123.68;
-//   static const _greenMean = 116.779;
-//   static const _blueMean = 103.939;
-
-//   /// Default input width for the model
-//   static const _kInputWidth = 224;
-
-//   /// Default input height for the model
-//   static const _kInputHeight = 224;
-
-//   /// Interpreter for running the TFLite model
-//   final Interpreter _interpreter;
-
-//   /// Threshold for NSFW classification
-//   final double _threshold;
-
-//   DefaultSafeImageDetector._({
-//     required this._interpreter,
-//     required this._threshold,
-//   });
-
-//   @visibleForTesting
-//   DefaultSafeImageDetector.forTest({
-//     required this._interpreter,
-//     required this._threshold,
-//   });
-
-//   /// Detects NSFW content from an image
-//   @override
-//   Future<ImageSafetyDetectionResult> detectImageSafety(img.Image image) async {
-//     // Resize the image to the required input size for the model
-//     img.Image resizedImage = img.copyResize(
-//       image,
-//       width: _kInputWidth,
-//       height: _kInputHeight,
-//     );
-
-//     // Convert the image to a normalized byte list
-//     Uint8List input = _toNormalizedByteList(resizedImage);
-
-//     // List.filled(2, 0.0).reshape([1, 2]) produces a [[0.0, 0.0]] output
-//     // structure matching the model output shape expected by Interpreter.run().
-//     // .reshape is a convenience extension method provided by tflite_flutter package.
-//     final modelOutput = List.filled(2, 0.0).reshape([1, 2]);
-
-//     // Run the model inference
-//     _interpreter.run(input, modelOutput);
-
-//     // Extract the score from the model output
-//     List<double> result = modelOutput.first ?? [];
-//     double? score;
-//     if (result.length == 2) {
-//       score = result[1];
-//     }
-
-//     if (score == null) {
-//       throw const SafeImageDetectionException(
-//         'Failed to get a valid score from the model output.',
-//       );
-//     }
-
-//     logger.t(
-//       'NSFW detection score: $score, passed threshold: ${score < _threshold}',
-//     );
-//     return ImageSafetyDetectionResult(score < _threshold, score);
-//   }
-
-//   /// Converts an image to a byte list suitable for the model input
-//   /// and normalizes the pixel values by subtracting the mean values.
-//   Uint8List _toNormalizedByteList(img.Image image) {
-//     final buffer = Uint8List(_kInputWidth * _kInputHeight * 3 * 4);
-//     final byteBuffer = buffer.buffer;
-//     final imgData = Float32List.view(byteBuffer);
-
-//     int index = 0;
-//     for (var i = 0; i < _kInputHeight; i++) {
-//       for (var j = 0; j < _kInputWidth; j++) {
-//         var pixel = image.getPixel(j, i);
-//         imgData[index++] = (pixel.b - _blueMean).toDouble();
-//         imgData[index++] = (pixel.g - _greenMean).toDouble();
-//         imgData[index++] = (pixel.r - _redMean).toDouble();
-//       }
-//     }
-//     return buffer;
-//   }
-
-//   /// Closes the interpreter to release resources
-//   @override
-//   void dispose() {
-//     _interpreter.close();
-//   }
-// }

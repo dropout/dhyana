@@ -193,6 +193,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     }
 
     if (result.error != null) {
+      debugPrint('Error selecting profile image: ${result.error}');
       widget.onError?.call(result.error!, result.details);
     }
   }
