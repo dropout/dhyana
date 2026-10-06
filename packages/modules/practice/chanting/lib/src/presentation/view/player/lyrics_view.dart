@@ -5,9 +5,10 @@ import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:chanting/src/presentation/view/player/lyric_focus.dart';
 import 'package:chanting/src/presentation/view/player/lyric_line.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
+import 'package:chanting/src/presentation/view/player/unculled_varied_extent_list.dart';
 import 'package:chanting/src/presentation/view/player/worm_line.dart';
 import 'package:core/core.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -304,7 +305,7 @@ class _LyricsViewState extends State<LyricsView>
         SliverPadding(
           padding: EdgeInsets.only(top: widget.topOffset),
         ), // Extra space at the top
-        SliverVariedExtentList(          
+        UnculledSliverVariedExtentList(
           delegate: SliverChildBuilderDelegate((context, index) {
             final line = lyricsDocument.lines[index];
             final lyricLine = LyricFocus(
@@ -348,10 +349,9 @@ class _LyricsViewState extends State<LyricsView>
       },
       onPointerUp: (_) => _isPointerDown = false,
       onPointerCancel: (_) => _isPointerDown = false,
-      child: CustomScrollView(        
+      child: CustomScrollView(
         controller: _scrollController,
         physics: ClampingScrollPhysics(),
-        scrollCacheExtent: ScrollCacheExtent.viewport(0.5),
         slivers: slivers,
       ),
     );
