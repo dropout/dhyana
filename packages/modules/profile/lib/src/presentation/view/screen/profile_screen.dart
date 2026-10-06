@@ -7,21 +7,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile/src/public/viewmodel/profile_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
-
   final String profileId;
 
-  const ProfileScreen({
-    required this.profileId,
-    super.key,
-  });
+  const ProfileScreen({required this.profileId, super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen>
-  with DefaultScreenSetupHelpersMixin {
-
+    with DefaultScreenSetupHelpersMixin {
   @override
   initState() {
     context.read<ProfileCubit>().loadProfile(widget.profileId);
@@ -32,17 +27,11 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, ProfileState state) {
-        switch (state) {        
+        switch (state) {
           case ProfileLoadingState():
-            return DefaultScreenSetup(
+            return DefaultScreenSetup.loading(
               key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
-              enableTitleSliver: false,
-              enableAppBarSliver: false,
-              slivers: [
-                buildLoadingSliver(context)
-              ],
             );
           case ProfileLoadedState():
             return DefaultScreenSetup(
@@ -54,32 +43,27 @@ class _ProfileScreenState extends State<ProfileScreen>
                 SliverSafeArea(
                   top: false,
                   sliver: SliverToBoxAdapter(
-                    child: ProfileView(
-                      profile: state.profile,
-                    ),
+                    child: ProfileView(profile: state.profile),
                   ),
-                )
+                ),
               ],
             );
           case ProfileErrorState():
-            return DefaultScreenSetup(
+            return DefaultScreenSetup.error(
               key: const Key('profile_screen'),
               title: ProfileLocalizations.of(context).profile,
-              enableTitleSliver: false,
-              enableAppBarSliver: false,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
                   child: AppErrorDisplay(
-                    onButtonTap: () {
+                      onButtonTap: () {
                       context.read<AuthStateCubit>().signOut();
                       context.services.homeNavigator.navigateToHome(type: .go);
                       context.read<ProfileCubit>().clearData();
                     },
                     buttonText: context.coreL10n.profileSignoutTitle,
                   ),
-                )
+                ),
               ],
             );
           case ProfileStateInitial():

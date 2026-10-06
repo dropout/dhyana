@@ -133,8 +133,7 @@ class const ProfileButton({
       child: Icon(
         key: Key('profile_button_error_icon'),
         Icons.warning_amber_rounded,
-        // size: 40.0,
-        size: size,
+        size: 48.0,
         color: Colors.black,
       ),
     );

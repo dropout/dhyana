@@ -30,24 +30,33 @@ class const DefaultScreenSetup({
   final ScrollPhysics? scrollPhysics,
   super.key,
 }) extends StatefulWidget {
-  factory DefaultScreenSetup.error({required String title}) =>
+  factory DefaultScreenSetup.error({
+    required String title,
+    List<Widget>? slivers,
+    Key? key,
+  }) =>
       DefaultScreenSetup(
         title: title,
         titleColor: Colors.white,
         appBarBackgroundColor: AppColors.errorColor,
         scrollPhysics: const NeverScrollableScrollPhysics(),
-        slivers: [
-          SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay()),
+        slivers: slivers ?? [
+          SliverFillRemaining(
+            hasScrollBody: false, 
+            child: AppErrorDisplay()
+          ),
         ],
+        key: key,
       );
 
-  factory DefaultScreenSetup.loading({required String title}) =>
+  factory DefaultScreenSetup.loading({required String title, Key? key}) =>
       DefaultScreenSetup(
         title: title,
         scrollPhysics: const NeverScrollableScrollPhysics(),
         slivers: [
           SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
         ],
+        key: key,
       );
 
   @override
