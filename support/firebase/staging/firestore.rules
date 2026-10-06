@@ -3,6 +3,12 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Only the authenticated owner can access their profile document.
+    match /profiles/{profileId} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == profileId;
+    } 
+
     // Stats audit trail: owner can write, nobody can read or delete from clients.
     match /profiles/{profileId}/statsAudit/{entryId} {
       allow create, update: if request.auth != null
@@ -10,17 +16,24 @@ service cloud.firestore {
       allow read, delete: if false;
     }
 
-    // This rule allows anyone with your Firestore database reference to view, edit,
-    // and delete all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // all client requests to your Firestore database will be denied until you Update
-    // your rules
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2026, 10, 6);
+    // Only authenticated users can access chants.
+    match /chants/{chantId} {
+      allow read: if request.auth != null;
+      allow update: if request.auth != null
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['playCount']);
     }
+
+    // Only authenticated users can access presence.
+    match /presence/{presenceId} {
+      allow read, write: if request.auth != null;
+    }
+
+    
+
+    
+
+
+
   }
 }
