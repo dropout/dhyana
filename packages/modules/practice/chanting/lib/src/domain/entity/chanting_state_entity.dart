@@ -44,7 +44,7 @@ sealed class ChantingStateEntity with _$ChantingStateEntity {
   }) = _ChantingStateEntity;
 
   int get currentIndex => playbackState.queueIndex ?? 0;
-  Duration get position => playbackState.position;
+  Duration get position => playbackState.position + Duration(milliseconds: 333);
   Duration get latencyCompensatedPosition {
     final compensated = position - outputLatency;
     return compensated.isNegative ? Duration.zero : compensated;

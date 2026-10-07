@@ -15,7 +15,7 @@ double wormProgress({
   final delay = math.min(distance * delayPerLine, maxDelay);
   if (t <= delay) return 0;
   final local = ((t - delay) / (1 - delay)).clamp(0.0, 1.0);
-  return Curves.fastOutSlowIn.transform(local);
+  return Curves.easeInOutQuad.transform(local);
 }
 
 /// Visually offsets [child] by the remaining part of a programmatic scroll

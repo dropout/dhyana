@@ -103,6 +103,8 @@ class DesignSpec {
 }
 
 class AppColors {
+  static const appWhite = Color(0xFFEEEEEE);
+
   static const gold = Color(0xFFEFBF04);
   static const charcoal = Color(0xFF4A4A4A);
   static const burgundy = Color(0xFF660033);

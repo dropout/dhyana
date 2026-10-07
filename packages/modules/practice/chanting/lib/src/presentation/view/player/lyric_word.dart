@@ -3,40 +3,56 @@ import 'package:chanting/src/presentation/view/player/lyric_line.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
-enum WordState { active, pending, sung }
-
 class LyricWordWidget extends StatelessWidget {
   final LyricsWordEntity word;
-  final WordState wordState;
+  final Duration position;
 
   const LyricWordWidget({
     required this.word,
-    required this.wordState,
+    required this.position,
     super.key,
   });
 
+  static Color colorAtPosition({
+    required LyricsWordEntity word,
+    required Duration position,
+  }) {
+    final pendingColor = Colors.grey.shade200;
+    final activeColor = AppColors.gold;
+    final sungColor = Colors.grey.shade600;
+
+    if (position < word.start) return pendingColor;
+    if (position >= word.end) return sungColor;
+
+    final wordDuration = word.end - word.start;
+    if (wordDuration <= Duration.zero) return activeColor;
+
+    final fadeDuration = Durations.medium1.inMicroseconds.toDouble();
+    final wordHalfDuration = wordDuration.inMicroseconds / 2;
+    final fadeWindow = fadeDuration < wordHalfDuration
+        ? fadeDuration
+        : wordHalfDuration;
+    if (fadeWindow == 0) return activeColor;
+
+    final elapsed = (position - word.start).inMicroseconds.toDouble();
+    final remaining = (word.end - position).inMicroseconds.toDouble();
+
+    if (elapsed < fadeWindow) {
+      return Color.lerp(pendingColor, activeColor, elapsed / fadeWindow)!;
+    }
+    if (remaining <= fadeWindow) {
+      return Color.lerp(activeColor, sungColor, 1 - remaining / fadeWindow)!;
+    }
+    return activeColor;
+  }
+
   @override
   Widget build(BuildContext context) {
-    late final Color color;
-
-    switch (wordState) {
-      case WordState.active:
-        color = AppColors.redAccent;
-        break;
-      case WordState.sung:
-        color = Colors.grey.shade600;
-        break;
-      case WordState.pending:
-        color = Colors.white;
-        break;
-    }
-
-    return AnimatedDefaultTextStyle(
-      duration: const Duration(milliseconds: 200),
+    return Text(
+      word.text,
       style: LyricLine.getLyricsTextStyle(context).copyWith(
-        color: color,
+        color: colorAtPosition(word: word, position: position),
       ),
-      child: Text(word.text),
     );
   }
 }

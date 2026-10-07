@@ -1,6 +1,5 @@
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/domain/entity/lyrics_line_entity.dart';
-import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 import 'package:chanting/src/presentation/view/player/lyric_word.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -58,7 +57,7 @@ class LyricLine extends StatelessWidget {
             WidgetSpan(
               child: LyricWordWidget(
                 word: word.copyWith(text: fragment),
-                wordState: getWordState(word),
+                position: position,
               ),
             ),
           );
@@ -108,17 +107,4 @@ class LyricLine extends StatelessWidget {
     return text.toString();
   }
 
-  WordState getWordState(LyricsWordEntity word) {
-    final start = (word.start.inMilliseconds / 100).round();
-    final end = (word.end.inMilliseconds / 100).round();
-    final pos = (position.inMilliseconds / 100).round();
-
-    if (pos >= start && pos < end) {
-      return WordState.active;
-    } else if (pos < start) {
-      return WordState.pending;
-    } else {
-      return WordState.sung;
-    }
-  }
 }

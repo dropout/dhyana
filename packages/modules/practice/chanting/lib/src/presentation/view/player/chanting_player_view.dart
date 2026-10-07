@@ -139,15 +139,24 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
           chantingState: widget.chantingState,
           maxWidth: constraints.maxWidth,
           effects: const LyricsEffectsConfig(
-            scale: false,
-            maxBlurSigma: 5,
-            blurSigmaPerLine: 0.4,
-            wormDuration: Durations.extralong4,
-            wormDelayPerLine: 0.1,
+
+            // Scaling is off
+            scale: false, 
+
+            // Blur effect
+            blurSigmaPerLine: 0.5,
+            maxBlurSigma: 8,
+
+            // Worm effect
+            wormDuration: Durations.extralong3,
+            wormDelayPerLine: 0.05,
             wormMaxDelay: 1.0,
-            minOpacity: 0.1,
-            opacityFalloffPerLine: 0.1,
-            transitionDuration: Durations.long1,
+
+            // Fading effect
+            opacityFalloffPerLine: 0.5,
+            minOpacity: 0.5,            
+            transitionDuration: Durations.long4,
+
           ),
         );
       },

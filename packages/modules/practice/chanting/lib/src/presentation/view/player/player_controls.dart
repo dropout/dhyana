@@ -72,7 +72,7 @@ class PlayerControls extends StatelessWidget {
     final TextStyle? timeTextStyle = context.theme.textTheme.bodyLarge
         ?.copyWith(
           fontFamily: DesignSpec.condensedFontFamilyName,
-          color: Colors.white70,
+          color: AppColors.appWhite,
           fontWeight: FontWeight.bold,
         );
 
@@ -88,7 +88,7 @@ class PlayerControls extends StatelessWidget {
             child: LinearProgressIndicator(
               value: maxMs == 0 ? 0 : currentMs / maxMs,
               backgroundColor: Colors.white24,
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.appWhite),
             ),
           ),
         if (showTime)
@@ -130,7 +130,7 @@ class PlayerControls extends StatelessWidget {
               iconSize: PlayerControls.iconSize,
               onPressed: isPreviousEnabled ? onPreviousPressed : null,
               icon: const Icon(Icons.skip_previous_rounded),
-              color: isPreviousEnabled ? Colors.white : Colors.white54,
+              color: isPreviousEnabled ? AppColors.appWhite : Colors.white54,
             ),
             Gap.small(),
             PlayPauseButton(
@@ -143,7 +143,7 @@ class PlayerControls extends StatelessWidget {
               iconSize: PlayerControls.iconSize,
               onPressed: isNextEnabled ? onNextPressed : null,
               icon: const Icon(Icons.skip_next_rounded),
-              color: isNextEnabled ? Colors.white : Colors.white54,
+              color: isNextEnabled ? AppColors.appWhite : Colors.white54,
             ),
           ],
         ),
@@ -155,7 +155,7 @@ class PlayerControls extends StatelessWidget {
                 iconSize: PlayerControls.iconSize,
                 onPressed: onPlaylistPressed,
                 icon: const Icon(Icons.playlist_play_rounded),
-                color: Colors.white,
+                color: AppColors.appWhite,
               ),
             ],
           ),
@@ -184,7 +184,7 @@ class PlayPauseButton extends StatelessWidget {
     required this.isLoading,
     super.key,
     this.backgroundColor = AppColors.red,
-    this.iconColor = Colors.white,
+    this.iconColor = AppColors.appWhite,
     this.size = 48,
     this.disableWhileLoading = true,
   });
