@@ -15,7 +15,7 @@ class LyricLine extends StatelessWidget {
   static TextStyle getLyricsTextStyle(BuildContext context) {
     return context.theme.textTheme.headlineMedium!.copyWith(
       fontWeight: FontWeight.w700,
-      color: Colors.white,
+      color: AppColors.appWhite,
     );
   }
 

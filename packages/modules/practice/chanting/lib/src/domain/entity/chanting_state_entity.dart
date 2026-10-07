@@ -44,11 +44,12 @@ sealed class ChantingStateEntity with _$ChantingStateEntity {
   }) = _ChantingStateEntity;
 
   int get currentIndex => playbackState.queueIndex ?? 0;
-  Duration get position => playbackState.position + Duration(milliseconds: 333);
+  Duration get position => playbackState.position + Duration(milliseconds: 250);
   Duration get latencyCompensatedPosition {
     final compensated = position - outputLatency;
     return compensated.isNegative ? Duration.zero : compensated;
   }
-  Duration get duration => mediaItem?.duration ?? Duration.zero;
+  Duration get currentTrackDuration => mediaItem?.duration ?? Duration.zero;
+  Duration get sessionDuration => chantingSettings.selectedChants.fold(Duration.zero, (total, chant) => total + chant.duration);
 
 }

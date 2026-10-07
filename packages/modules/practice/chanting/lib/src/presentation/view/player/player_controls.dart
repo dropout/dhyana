@@ -52,7 +52,7 @@ class PlayerControls extends StatelessWidget {
   final bool showTime;
 
   Duration get position => chantingState.latencyCompensatedPosition;
-  Duration get duration => chantingState.duration;
+  Duration get duration => chantingState.currentTrackDuration;
   bool get isPlaying => chantingState.playbackState.playing == true;
 
   @override
@@ -69,7 +69,7 @@ class PlayerControls extends StatelessWidget {
     final double maxMs = safeDuration.inMilliseconds.toDouble();
     final double currentMs = safePosition.inMilliseconds.toDouble();
 
-    final TextStyle? timeTextStyle = context.theme.textTheme.bodyLarge
+    final TextStyle? timeTextStyle = context.theme.textTheme.titleMedium
         ?.copyWith(
           fontFamily: DesignSpec.condensedFontFamilyName,
           color: AppColors.appWhite,

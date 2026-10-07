@@ -178,7 +178,7 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
       startTime:
           state.startTime ?? DateTime.now().subtract(state.elapsedSessionTime),
       endTime: state.endTime ?? DateTime.now(),
-      duration: state.duration,
+      duration: state.elapsedSessionTime,
       sessionType: .chanting,
     );
   }

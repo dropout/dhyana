@@ -19,7 +19,8 @@ class LyricWordWidget extends StatelessWidget {
   }) {
     final pendingColor = Colors.grey.shade200;
     final activeColor = AppColors.gold;
-    final sungColor = Colors.grey.shade600;
+    // final sungColor = Colors.grey.shade200;
+    final sungColor = AppColors.appWhite;
 
     if (position < word.start) return pendingColor;
     if (position >= word.end) return sungColor;
