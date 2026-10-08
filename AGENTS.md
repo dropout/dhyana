@@ -52,6 +52,7 @@ For running and building commands look at the commands documentation: [`docs/com
 - Keep business logic out of widgets; widgets should remain declarative.
 - Prefer Cubit over Bloc for simple state flows.
 - Use freezed for immutable state and domain models.
+- Check boundaries after changes: `bash support/maintenance_scripts/check_module_boundaries.sh [module_dir...]` (existing legacy violations are known; don't add new ones).
 
 ## Module Guidelines
 - Modules are following a simplified version of Clean Architecture principles.
@@ -75,7 +76,15 @@ For running and building commands look at the commands documentation: [`docs/com
 
 ### Current layout
 - `ai/skills/`: reusable workflow skills (`*/SKILL.md`) and skill references.
-- `ai/prompts/`: reusable task prompts (`*.prompt.md`).
+- `ai/prompts/`: reusable task prompts (`*.prompt.md`). Multi-package features start with `ai/prompts/feature-workflow.prompt.md`.
+- `ai/agents/`: role definitions (`architect`, `module-implementer`, `test-writer`, `reviewer`). Roles are function-based, not layer-based; layer knowledge lives in skills.
+
+### Multi-agent guardrails
+- One writer per package at a time; parallelism is across packages only.
+- An agent writes only inside its assigned package. Cross-package changes go through the architect as contract changes.
+- Never edit generated files (`*.g.dart`, `*.freezed.dart`, generated l10n); regenerate.
+- Every change passes `ai/skills/verify-package` and the `reviewer` role before it is considered done.
+- Keep AI assets provider-neutral in `ai/`; provider wrappers (Claude, Copilot) only point to them.
 
 ### Usage guidance for agents (Copilot, Claude, Antigravity, or other coding agents):
 - Prefer matching project skills before applying generic behavior.

@@ -101,7 +101,7 @@ Then follow `verify-package`, plus run the app-level analyze since steps 3-5 tou
 - Generated l10n Dart files exist in the repo (`lib/l10n/*_localizations*.dart`); regenerate after changing `.arb` files.
 - Keep `.arb` keys identical in `en` and `hu`.
 - The `dhyana_lints` `domain_layer_isolation` rule matches `/lib/modules/**/domain/`, but real paths are `packages/modules/<m>/lib/src/domain/`, so it likely never fires. Don't rely on it; check domain imports manually (`verify-package`).
-- `docs/commands.md` references `support/maintenance_scripts/check_module_boundaries.sh`, which does not exist in the repo.
+- Run `bash support/maintenance_scripts/check_module_boundaries.sh packages/modules/<m>` for the new module; it must be clean.
 
 ## 8. Checklist
 

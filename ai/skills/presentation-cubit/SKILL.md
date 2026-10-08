@@ -128,21 +128,26 @@ class DeleteProfileScreen extends StatelessWidget {
 ```dart
 part 'profile_routes.g.dart';
 
-@TypedGoRoute<ProfileEditRoute>(path: '/profile/edit', name: 'profile-edit')
-class ProfileEditRoute extends GoRouteData with AuthRedirectHook, $ProfileEditRoute {
-  const ProfileEditRoute({required this.profileId});
+@TypedGoRoute<ProfileWizardRoute>(
+  path: '/profileWizard/:profileId',
+  name: 'PROFILE_WIZARD',
+)
+class ProfileWizardRoute extends GoRouteData
+    with AuthRedirectHook, $ProfileWizardRoute {
+  const ProfileWizardRoute({required this.profileId});
   final String profileId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      ProfileEditScreen(profileId: profileId);
+      ProfileWizardScreen(profileId: profileId);
 
   @override
-  FutureOr<String?> redirect(BuildContext context, GoRouterState state) =>
+  String? redirect(BuildContext context, GoRouterState state) =>
       authRedirectHook(context, state);
 }
 ```
 
+- Path: camelCase segments with `:param` (`/profileSettings/:profileId`); name: UPPER_SNAKE (`PROFILE_SETTINGS`). Path params must match constructor field names.
 - One route class per screen, parameters as typed fields (use `$extra` only for non-serializable objects).
 - Use `AuthRedirectHook` for authenticated screens.
 - Routes are consumed by navigators in the data layer (`<M>Navigator` implementing a port) and by the app shell's router. Register new routes in the app shell route list only through the module's public export.

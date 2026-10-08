@@ -22,7 +22,11 @@ Workspace-wide (slow; use for core changes or before a PR): `melos run codegen`,
 
 If tests fail only in a package you didn't touch, re-run once on a clean tree to separate pre-existing failures from yours; report them without fixing.
 
-## 2. Boundary checks (manual, via grep)
+## 2. Boundary checks
+
+Run `bash support/maintenance_scripts/check_module_boundaries.sh packages/modules/<m>` (no args = all modules). It automates the greps below for domain isolation, cross-package `src` imports, data->presentation, public entity leaks and barrel exports. Exit code 1 means violations; compare against pre-existing ones (the repo currently has legacy hits, see below) and report only new ones.
+
+Manual equivalents:
 
 Replace `<m>` with the module dir.
 
@@ -34,7 +38,7 @@ Replace `<m>` with the module dir.
 - **GetIt:** `grep -rn "GetIt" packages/modules/<m>/lib/src` should hit only `*_di.dart`, `Screen` widgets and legacy files.
 - **Hardcoded strings:** new user-facing text in widgets must be in `.arb` files.
 
-Known false results: the `dhyana_lints` domain isolation rule is path-mismatched and does not fire; `docs/commands.md` mentions a non-existent `check_module_boundaries.sh`. Don't treat a clean lint run as proof of isolation.
+Known: the `dhyana_lints` domain isolation rule is path-mismatched and does not fire, so don't treat a clean lint run as proof of isolation. The script tolerates `package:flutter/foundation.dart` in domain and other-module imports in `*_port.dart` files; it reports existing legacy violations in donate, profile, social, stats, chanting and session.
 
 ## 3. Layer-specific tests expected
 
