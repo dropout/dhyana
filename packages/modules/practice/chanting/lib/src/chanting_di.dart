@@ -123,9 +123,7 @@ extension ChantingModuleDependencyInjection on GetIt {
       () => PlaybackStateChangeUseCase(),
     );
     registerFactory<CompleteChantingUseCase>(
-      () => CompleteChantingUseCase(
-        idGeneratorService: GetIt.I.get<IdGeneratorService>(),
-      ),
+      () => CompleteChantingUseCase(),
     );
 
     // ViewModels
