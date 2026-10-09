@@ -135,28 +135,34 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     return LayoutBuilder(
       key: const ValueKey('chanting_player_lyrics_view'),
       builder: (context, constraints) {
-        return LyricsView(
-          chantingState: widget.chantingState,
-          maxWidth: constraints.maxWidth,
-          effects: const LyricsEffectsConfig(
-
-            // Scaling is off
-            scale: false, 
-
-            // Blur effect
-            blurSigmaPerLine: 0.5,
-            maxBlurSigma: 8,
-
-            // Worm effect
-            wormDuration: Durations.extralong3,
-            wormDelayPerLine: 0.05,
-            wormMaxDelay: 1.0,
-
-            // Fading effect
-            opacityFalloffPerLine: 0.5,
-            minOpacity: 0.5,            
-            transitionDuration: Durations.long4,
-
+        return AnimatedSwitcher(
+          duration: Durations.long4,
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
+          child: LyricsView(
+            key: ValueKey(widget.chantingState.lyricsDocument),
+            chantingState: widget.chantingState,
+            maxWidth: constraints.maxWidth,
+            effects: const LyricsEffectsConfig(
+          
+              // Scaling is off
+              scale: false, 
+          
+              // Blur effect
+              blurSigmaPerLine: 0.5,
+              maxBlurSigma: 8,
+          
+              // Worm effect
+              wormDuration: Durations.extralong3,
+              wormDelayPerLine: 0.05,
+              wormMaxDelay: 1.0,
+          
+              // Fading effect
+              opacityFalloffPerLine: 0.5,
+              minOpacity: 0.5,            
+              transitionDuration: Durations.long4,
+          
+            ),
           ),
         );
       },

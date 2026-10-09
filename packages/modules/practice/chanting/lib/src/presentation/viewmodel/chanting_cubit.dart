@@ -185,7 +185,10 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
 
   void _onMediaItemChanged(MediaItem? mediaItem) {
     if (mediaItem == null) return;
-    emit(state.copyWith(mediaItem: mediaItem));
+    emit(state.copyWith(
+      mediaItem: mediaItem,
+      activeLineIndex: 0,      
+    ));
     _loadLyricsForChant(mediaItem.id);
     logger.t('Media item changed: ${mediaItem.title}');
   }
