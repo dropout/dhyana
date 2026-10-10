@@ -1,0 +1,10 @@
+{
+  "ParticleVertex": {
+    "type": "vertex",
+    "file": "shaders/particle.vert"
+  },
+  "ParticleFragment": {
+    "type": "fragment",
+    "file": "shaders/particle.frag"
+  }
+}
