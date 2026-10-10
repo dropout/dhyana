@@ -61,7 +61,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
               top: DesignSpec.padding2Xl,
               bottom: DesignSpec.padding2Xl,
             ),
-            child: AppButton(
+            child: AppButton.large(
               onTap: () => _onOkayPressed(context),
               text: context.coreL10n.close.toUpperCase(),
             ),
@@ -86,29 +86,30 @@ class _AddChantSheetState extends State<AddChantSheet> {
   Widget buildChantsAvailableState(BuildContext context) {
     
     return InsetSurface(
-      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
-      child: Scrollbar(
-            child: ListView.builder(
-              padding: EdgeInsets.only(
-                top: DesignSpec.paddingMd,
-              ),
-              itemCount: widget.availableChants.length,
-              itemBuilder: (context, index) {
-                final chant = widget.availableChants[index];
-                final paddingBottom =
-                    index != widget.availableChants.length - 1;
-                return Padding(
-                  padding: EdgeInsets.only(
-                    bottom: paddingBottom ? DesignSpec.paddingSm : 0.0,
-                  ),
-                  child: ChantListItem(
-                    chant: chant,
-                    onTap: () => _onListItemTap(chant),
-                  ),
-                );
-              },
-            ),
+      padding: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
+        child: ListView.builder(
+          padding: EdgeInsets.symmetric(
+            vertical: DesignSpec.paddingMd,
           ),
+          itemCount: widget.availableChants.length,
+          itemBuilder: (context, index) {
+            final chant = widget.availableChants[index];
+            final paddingBottom =
+                index != widget.availableChants.length - 1;
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: paddingBottom ? DesignSpec.paddingSm : 0.0,
+              ),
+              child: ChantListItem(
+                chant: chant,
+                onTap: () => _onListItemTap(chant),
+              ),
+            );
+          },
+        ),
+      ),
     );    
   }
 }
