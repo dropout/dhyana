@@ -24,3 +24,4 @@ export 'src/widget/particle_controller.dart';
 export 'src/widget/particle_field.dart';
 export 'src/presets/fireworks.dart';
 export 'src/presets/shrinking_burst.dart';
+export 'src/presets/question_mark_fly_through.dart';

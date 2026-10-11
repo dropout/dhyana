@@ -28,3 +28,4 @@ dev_dependencies:
 flutter:
   assets:
     - assets/particle.shaderbundle
+    - assets/q.png
