@@ -16,14 +16,14 @@ class CustomBackButton extends StatefulWidget {
 
   factory CustomBackButton.light() =>
     const CustomBackButton(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundPaperLight,
       foregroundColor: Colors.black,
     );
 
   factory CustomBackButton.dark() =>
     const CustomBackButton(
       backgroundColor: Colors.black,
-      foregroundColor: Colors.white,
+      foregroundColor: AppColors.backgroundPaperLight,
     );
 
   @override

@@ -1,23 +1,15 @@
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
-class LoginHeadlineTextEffect extends StatefulWidget {
-  final String text;
-  final TextStyle textStyle;
-  final Duration duration;
-  final Duration initialDelay;
-
-  const LoginHeadlineTextEffect({
-    required this.text,
-    required this.textStyle,
-    this.duration = const Duration(seconds: 2),
-    this.initialDelay = Duration.zero,
-    super.key,
-  });
-
+class const LoginHeadlineTextEffect({
+  required final String text,
+  required final TextStyle textStyle,
+  final Duration duration = const Duration(seconds: 2),
+  final Duration initialDelay = Duration.zero,
+}) extends StatefulWidget {
   @override
   State<LoginHeadlineTextEffect> createState() =>
-      _LoginHeadlineTextEffectState();
+    _LoginHeadlineTextEffectState();
 }
 
 class _LoginHeadlineTextEffectState extends State<LoginHeadlineTextEffect>
@@ -28,6 +20,8 @@ class _LoginHeadlineTextEffectState extends State<LoginHeadlineTextEffect>
 
   @override
   void initState() {
+    super.initState();
+
     animController = AnimationController(
       vsync: this,
       duration: widget.duration,
@@ -61,8 +55,7 @@ class _LoginHeadlineTextEffectState extends State<LoginHeadlineTextEffect>
         animController.forward();
       }
     });
-
-    super.initState();
+    
   }
 
   @override

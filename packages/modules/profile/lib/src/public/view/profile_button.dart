@@ -42,11 +42,18 @@ class const ProfileButton({
             shape: BoxShape.circle,
             color: Colors.black,
           ),
-          child: Icon(
-            key: const Key('profile_button_signed_out_icon'),
-            Icons.question_mark_outlined,
-            size: size,
-            color: AppColors.backgroundPaper,
+          child: SizedBox.square(
+            child: Center(
+              child: Text(
+                '?',
+                style: TextStyle(
+                  fontSize: 36.0,
+                  color: AppColors.backgroundPaperLight,
+                  fontWeight: FontWeight.bold,
+                  height: 1.0,
+                ),
+              ),
+            ),
           ),
         ),
         Positioned.fill(

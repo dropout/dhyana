@@ -1,9 +1,7 @@
 import 'dart:ui';
 
 import 'package:material_ui/material_ui.dart';
-import 'package:particle_field/particle_field.dart';
-import 'package:rnd/rnd.dart';
-import 'package:vector_math/vector_math.dart' as vm;
+import 'package:particle_field/particle_field.dart' hide BoxShape;
 
 enum MilestoneProgressViewItemMode {
   incomplete,
@@ -47,54 +45,54 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
   @override
   void initState() {
 
-    particleController = ParticleController(
-        vsync: this,
-        autoStart: false,
-        onTick: (controller, elapsedTime) {
-          List<Particle> particles = controller.particles;
+    // particleController = ParticleController(
+    //     vsync: this,
+    //     autoStart: false,
+    //     onTick: (controller, elapsedTime) {
+    //       List<Particle> particles = controller.particles;
 
-          bool freeToEmit = elapsedTime.inMilliseconds - lastEmit > emitGap;
-          bool particlesLeft = particleCount > 0;
-          // print('freeToEmit: $freeToEmit, particlesLeft: $particlesLeft, elapsedTime: ${elapsedTime.inMilliseconds}, lastEmit: $lastEmit');
-          if (freeToEmit && particlesLeft) {
-            controller.start(); // in case its stopped
+    //       bool freeToEmit = elapsedTime.inMilliseconds - lastEmit > emitGap;
+    //       bool particlesLeft = particleCount > 0;
+    //       // print('freeToEmit: $freeToEmit, particlesLeft: $particlesLeft, elapsedTime: ${elapsedTime.inMilliseconds}, lastEmit: $lastEmit');
+    //       if (freeToEmit && particlesLeft) {
+    //         controller.start(); // in case its stopped
 
-            vm.Vector2 velocity = vm.Vector2(
-              rnd.getDouble(-1, 1),
-              rnd.getDouble(-1, 1),
-            );
+    //         vm.Vector2 velocity = vm.Vector2(
+    //           rnd.getDouble(-1, 1),
+    //           rnd.getDouble(-1, 1),
+    //         );
 
-            velocity = velocity * rnd.getDouble(2.0, 4.0);
+    //         velocity = velocity * rnd.getDouble(2.0, 4.0);
 
-            particles.add(Particle(
-              vx: velocity.x,
-              vy: velocity.y,
-              lifespan: 60,
-              color: Colors.green,
-            ));
-            setState(() {
-              lastEmit = elapsedTime.inMilliseconds;
-              particleCount--;
-            });
-          }
+    //         particles.add(Particle(
+    //           vx: velocity.x,
+    //           vy: velocity.y,
+    //           lifespan: 60,
+    //           color: Colors.green,
+    //         ));
+    //         setState(() {
+    //           lastEmit = elapsedTime.inMilliseconds;
+    //           particleCount--;
+    //         });
+    //       }
 
-          for (int i = particles.length - 1; i >= 0; i--) {
-            Particle p = particles[i];
-            p.vx = p.vx * 0.97;
-            p.vy = p.vy * 0.97;
-            p.update();
+    //       for (int i = particles.length - 1; i >= 0; i--) {
+    //         Particle p = particles[i];
+    //         p.vx = p.vx * 0.97;
+    //         p.vy = p.vy * 0.97;
+    //         p.update();
 
-            if (p.age >= p.lifespan) {
-              particles.removeAt(i);
-            }
-          }
+    //         if (p.age >= p.lifespan) {
+    //           particles.removeAt(i);
+    //         }
+    //       }
 
-          if (particlesLeft == false && particles.isEmpty) {
-            controller.stop();
-          }
+    //       if (particlesLeft == false && particles.isEmpty) {
+    //         controller.stop();
+    //       }
 
-        }
-    );
+    //     }
+    // );
 
     animationController = AnimationController(
       vsync: this,
