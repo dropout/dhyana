@@ -36,7 +36,7 @@ dependencies:
   json_annotation: ^4.12.0
   flutter_bloc: ^9.1.1
   hydrated_bloc: ^11.0.0
-  flutter_soloud: ^4.1.7
+  flutter_soloud: ^5.2.0
   uuid: ^4.6.0
   path_provider: ^2.1.6
   faker: ^2.2.0

@@ -8,6 +8,11 @@ environment:
   sdk: '>=3.13.0 <4.0.0'
   flutter: ">=1.17.0"
 
+hooks:
+  user_defines:
+    flutter_soloud:
+      no_xiph_libs: true
+
 dependencies:
   flutter:
     sdk: flutter
@@ -28,7 +33,7 @@ dependencies:
   path_provider: ^2.1.5
   audio_service: ^0.18.18
   audio_session: ^0.2.3
-  flutter_soloud: ^4.0.5
+  flutter_soloud: ^5.2.0
 
   # Internal packages
   firebase_provider: ^1.0.0

@@ -27,12 +27,10 @@ import 'package:stats/stats.dart';
 import 'init_result.dart';
 import 'app_di.dart';
 
-
 /// Manages the initialization process.
 class Initializer with LoggerMixin {
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization process...');
-
 
     logger.t('Configuring HydratedBloc storage');
     HydratedBloc.storage = await HydratedStorage.build(
@@ -41,8 +39,7 @@ class Initializer with LoggerMixin {
       ),
     );
 
-
-    logger.t('Configuring application audio library');
+    logger.t('Initializing SoLoud audio library');
     await SoLoud.instance.init();
     final audioHandler = await audio_service.AudioService.init(
       builder: () => DefaultAppAudioHandler(
@@ -55,10 +52,10 @@ class Initializer with LoggerMixin {
         androidNotificationOngoing: true,
       ),
     );
+
     final audioSession = await AudioSession.instance;
     await audioSession.configure(getAudioSessionConfiguration());
     await audioSession.setActive(true);
-
 
     logger.t('Configuring app router');
     final router = GoRouter(
@@ -67,46 +64,42 @@ class Initializer with LoggerMixin {
       initialLocation: '/',
       routes: [
         ...$authRoutes,
-        ...$profileRoutes, 
-        ...$homeRoutes,        
+        ...$profileRoutes,
+        ...$homeRoutes,
         ...$timerRoutes,
         ...$chantingRoutes,
         ...$sessionRoutes,
-        ...$socialRoutes, 
-        ...$statsRoutes,   
+        ...$socialRoutes,
+        ...$statsRoutes,
         ...$donateRoutes,
       ],
       // errorBuilder: (context, state) => ErrorPage(error: state.error.toString()),
     );
-    
 
     logger.t('Configuring dependency injection');
     GetIt.I.registerSingleton<FirebaseProvider>(FirebaseProvider());
     GetIt.I.registerSingleton<GoRouter>(router);
-    GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);    
+    GetIt.I.registerSingleton<AppAudioHandler>(audioHandler);
     await GetIt.I.registerDependencies();
 
-
     logger.t('Configuring BuildContext services shortcuts');
-    final services = ServicesBuilder().build();    
-
+    final services = ServicesBuilder().build();
 
     logger.t('Preloading shaders');
     for (final shaderKey in Assets.allShaders) {
-      await services.shaderService.loadShader(shaderKey);    
+      await services.shaderService.loadShader(shaderKey);
     }
 
-    logger.t('Fetching remote settings');    
+    logger.t('Fetching remote settings');
     await FirebaseRemoteSettingsService.configureDefaults(
       firebaseProvider.remoteConfig,
     );
     final remoteSettings = await services.remoteSettingsService
-      .fetchRemoteSettings();
-
+        .fetchRemoteSettings();
 
     logger.t('Fetching user ID');
-    String? userId = (await GetIt.I<AuthPublicApi>().authSessionStream.first).userId;
-
+    String? userId =
+        (await GetIt.I<AuthPublicApi>().authSessionStream.first).userId;
 
     return InitResult(
       userId: userId,
@@ -114,5 +107,4 @@ class Initializer with LoggerMixin {
       remoteSettings: remoteSettings,
     );
   }
-
 }

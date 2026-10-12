@@ -9,6 +9,7 @@ class Assets {
       'packages/assets/images/avatar_placeholder.png';
   static const String appleLogo = 'packages/assets/images/apple_logo.png';
   static const String googleLogo = 'packages/assets/images/google_logo.png';
+  static const String qMark = 'packages/assets/images/q.png';
 
   // Sounds
   static const String noSoundResourceUrl =

@@ -1,0 +1,19 @@
+{
+	"@@locale": "hu",
+	"initErrorTitle": "Nem sikerült elindítani az alkalmazást",
+	"@initErrorTitle": {
+		"description": "Title for the screen displayed when the application fails to initialize."
+	},
+	"initErrorBody": "Próbáld meg újraindítani az alkalmazást, hátha csak egy pillanatnyi hálózati probléma támadt!",
+  "@initErrorBody": {
+    "description": "Body text for the screen displayed when the application fails to initialize."
+	},
+	"underMaintenanceTitle": "Az alkalmazás karbantartás miatt nem elérhető",
+  "@underMaintenanceTitle": {
+    "description": "Title for the screen displayed when the application is under maintenance."
+  },
+  "underMaintenanceBody": "Elnézést kérünk a kellemetlenségért, nemsokára újra elérhető lesz az alkalmazás.",
+  "@underMaintenanceBody": {
+    "description": "Body text for the screen displayed when the application is under maintenance."
+  }
+}
