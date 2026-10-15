@@ -1,19 +1,17 @@
-import 'dart:math' as math;
-import 'dart:ui' as ui;
 
-import 'package:assets/assets.dart';
+import 'package:auth/src/presentation/view/login/login_background_effect.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:particle_field/particle_field.dart';
 
 import 'package:core/core.dart';
 import 'package:auth/l10n/auth_localizations.dart';
 import 'package:auth/src/presentation/view/login/login_headline_text_effect.dart';
 
 class LoginSignedOutView extends StatelessWidget {
-  const LoginSignedOutView({super.key});
+  const new({super.key});
+
+  static const letterDuration = Durations.medium3;
 
   void _onLoginWithGoogleTap(BuildContext context) {
     context.read<AuthStateCubit>().signinWithGoogle();
@@ -53,8 +51,13 @@ class LoginSignedOutView extends StatelessWidget {
       fit: StackFit.expand,
       clipBehavior: Clip.none,
       children: [
+        // Old paper layer
         ParchmentBackground(),
-        QMarkFlythroughExample(),
+
+        // Particle effects with '?' layer
+        LoginBackgroundEffect(),
+      
+        // Column for content
         SafeArea(
           top: false,
           child: Column(
@@ -62,17 +65,17 @@ class LoginSignedOutView extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              
+
               // Animated headline text
               Expanded(child: Container(child: _buildHeadline(context))),
-              
+
               // Actions
               _buildActions(context),
               Gap.large(),
-              
+
               // Legal text
               _buildLegalText(context),
-              
+
             ],
           ),
         ),
@@ -81,21 +84,13 @@ class LoginSignedOutView extends StatelessWidget {
   }
 
   Widget _buildHeadline(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.displayLarge!.copyWith(
+    TextStyle textStyle = Theme.of(context).textTheme.headlineLarge!.copyWith(
       fontWeight: FontWeight.w900,
       fontSize: 80,
       color: Colors.black,
-      height: .9,
-      shadows: [
-        Shadow(
-          offset: Offset.zero,
-          blurRadius: 60.0,
-          color: AppColors.charcoal.withValues(alpha: 0.5),
-        ),
-      ]
+      height: 0.9,
+      // fontFamily: DesignSpec.condensedFontFamilyName,
     );
-
-    Duration letterDuration = Durations.medium3;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +127,7 @@ class LoginSignedOutView extends StatelessWidget {
             bColor: Colors.black,
             fColor: AppColors.appWhite,
             onTap: () => _onLoginWithGoogleTap(context),
-          ),
+          ).reveal(delay: Durations.long2 + letterDuration),
           Gap.medium(),
           AppButton(
             key: const Key('login_with_apple_button'),
@@ -140,15 +135,10 @@ class LoginSignedOutView extends StatelessWidget {
             bColor: Colors.black,
             fColor: AppColors.appWhite,
             onTap: () => _onLoginWithAppleTap(context),
-          ),
+          ).reveal(delay: Durations.long2 + letterDuration * 2),
           Gap.medium(),
-          AppButton(
-            key: const Key('login_with_email_and_password_button'),
-            text: AuthLocalizations.of(context).loginSigninEmailPassword,
-            bColor: Colors.black,
-            fColor: AppColors.appWhite,
-            onTap: () => _onLoginWithEmailAndPasswordTap(context),
-          ),
+          buildEmailAndPasswordButton(context)
+              .reveal(delay: Durations.long2 + letterDuration * 3),
         ],
       ),
     );
@@ -206,89 +196,6 @@ class LoginSignedOutView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-
-/// A Material-free particle animation using only Flutter's widgets library.
-class QMarkFlythroughExample extends StatelessWidget {
-  const QMarkFlythroughExample({super.key});
-
-  @override
-  Widget build(BuildContext context) => const Directionality(
-    textDirection: TextDirection.ltr,
-    child: _FlythroughScene(),
-  );
-}
-
-class _FlythroughScene extends StatefulWidget {
-  const new();
-  @override
-  State<_FlythroughScene> createState() => _FlythroughSceneState();
-}
-
-class _FlythroughSceneState extends State<_FlythroughScene>
-    with SingleTickerProviderStateMixin {
-  bool ready = false;
-
-  late final QuestionMarkFlyThrough qMarkFlyThrough;
-  late final ParticleController controller;
-  late final ParticleCamera camera;
-  late final ParticleRenderer renderer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    final r = math.Random();
-    qMarkFlyThrough = QuestionMarkFlyThrough(random: r);
-
-    controller = ParticleController(
-      vsync: this,
-      system: qMarkFlyThrough.system,
-    );
-
-    camera = ParticleCamera(
-      fovY: 90,
-      distance: 400,
-    );
-
-    rootBundle.load(Assets.qMark).then((imageByteData) async {
-      final codec = await ui.instantiateImageCodec(
-        imageByteData.buffer.asUint8List(),
-      );
-      final image = (await codec.getNextFrame()).image;
-
-      renderer = AtlasRenderer3D(
-        camera: camera,
-        image: image,
-        spriteSize: 32,        
-      );
-
-      if (!mounted) return;
-
-      setState(() {
-        print('Renderer is ready');
-        ready = true;
-      });
-
-    });
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (!ready) return const SizedBox.shrink();
-
-    return Stack(
-      fit: StackFit.expand,
-      children: [ParticleField(controller: controller, renderer: renderer)],
-    );
+    ).reveal(delay: Durations.long2 + letterDuration * 4);
   }
 }

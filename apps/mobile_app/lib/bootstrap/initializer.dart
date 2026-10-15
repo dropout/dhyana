@@ -1,9 +1,5 @@
 import 'dart:async';
 
-import 'package:assets/assets.dart';
-import 'package:donate/donate.dart';
-import 'package:mobile_app/audio/default_app_audio_handler.dart';
-import 'package:mobile_app/audio/audio_session_configuration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:get_it/get_it.dart';
@@ -14,21 +10,29 @@ import 'package:audio_service/audio_service.dart' as audio_service;
 import 'package:audio_session/audio_session.dart';
 
 import 'package:firebase_provider/firebase_provider.dart';
-import 'package:auth/auth.dart';
+import 'package:assets/assets.dart';
 import 'package:core/core.dart';
+import 'package:auth/auth.dart';
 import 'package:home/home.dart';
 import 'package:profile/profile.dart';
 import 'package:timer/timer.dart';
 import 'package:chanting/chanting.dart';
 import 'package:session/session.dart';
-import 'package:social/social.dart';
+import 'package:donate/donate.dart';
 import 'package:stats/stats.dart';
+import 'package:social/social.dart';
+
+import 'package:mobile_app/audio/default_app_audio_handler.dart';
+import 'package:mobile_app/audio/audio_session_configuration.dart';
 
 import 'init_result.dart';
 import 'app_di.dart';
 
 /// Manages the initialization process.
 class Initializer with LoggerMixin {
+
+  /// Initializes the application and returns 
+  /// the result of the initialization process.
   Future<InitResult> init(FirebaseProvider firebaseProvider) async {
     logger.t('Starting initialization process...');
 

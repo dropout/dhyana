@@ -6,6 +6,7 @@ class const LoginHeadlineTextEffect({
   required final TextStyle textStyle,
   final Duration duration = const Duration(seconds: 2),
   final Duration initialDelay = Duration.zero,
+  super.key,
 }) extends StatefulWidget {
   @override
   State<LoginHeadlineTextEffect> createState() =>

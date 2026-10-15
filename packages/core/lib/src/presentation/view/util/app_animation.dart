@@ -24,17 +24,36 @@ extension RevealListAnimation on List<Widget> {
 
 }
 
+extension RevealExtension on Widget {
+  /// Wraps the widget with a top-right to bottom-left gradient reveal effect.
+  Widget reveal({
+    Key? key,
+    Duration duration = Durations.extralong1,
+    Duration delay = Duration.zero,
+    Curve curve = Curves.easeIn,
+  }) {
+    return RevealAnimation(
+      key: key,
+      duration: duration,
+      delay: delay,
+      curve: curve,
+      child: this,
+    );
+  }
+}
+
+
 extension RevealWidgetAnimation on Widget {
 
-  Widget reveal(int order) {
-    return animate(
-      delay: Duration(milliseconds: order * _interval),
-    ).fadeIn(
-      curve: _curve,
-      duration: _duration.ms
-    );
+  // Widget reveal(int order) {
+  //   return animate(
+  //     delay: Duration(milliseconds: order * _interval),
+  //   ).fadeIn(
+  //     curve: _curve,
+  //     duration: _duration.ms
+  //   );
 
-  }
+  // }
 
   Widget loadingReveal() {
     return animate().fadeIn(
@@ -101,4 +120,92 @@ Widget animatedSwitcherTransition(
   });
 
   return (intervalLength, startTimes);
+}
+
+
+class RevealAnimation extends StatefulWidget {
+  final Widget child;
+  final Duration duration;
+  final Duration delay;
+  final Curve curve;
+
+  const RevealAnimation({
+    super.key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 800),
+    this.delay = Duration.zero,
+    this.curve = Curves.easeInOut,
+  });
+
+  @override
+  State<RevealAnimation> createState() => _RevealAnimationState();
+}
+
+class _RevealAnimationState extends State<RevealAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: widget.curve,
+    );
+
+    if (widget.delay == Duration.zero) {
+      _controller.forward();
+    } else {
+      Future.delayed(widget.delay, () {
+        if (mounted) _controller.forward();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        // Calculate gradient stop movement from Top-Right (1, -1) to Bottom-Left (-1, 1)
+        final progress = _animation.value;
+
+        // Expand the gradient bounds as it sweeps to ensure a complete transition
+        final double head = (progress * 3.0) - 1.0;
+        final double tail = head - 0.8;
+
+        return ShaderMask(
+          blendMode: BlendMode.dstIn,
+          shaderCallback: (bounds) {
+            return LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: const [
+                Colors.black,       // Fully visible
+                Colors.transparent, // Fully hidden
+              ],
+              stops: [
+                tail.clamp(0.0, 1.0),
+                head.clamp(0.0, 1.0),
+              ],
+            ).createShader(bounds);
+          },
+          child: child,
+        );
+      },
+      child: widget.child,
+    );
+  }
 }
