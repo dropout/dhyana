@@ -11,27 +11,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Main view for the chanting player,
 /// displaying the lyrics and playback controls.
-class ChantingPlayerView extends StatefulWidget {
-  /// The current state of the chanting player, containing
-  /// the lyrics document, playback position, and playback state, etc...
-  final ChantingStateEntity chantingState;
-
-  /// Service to manage wakelock during chanting sessions.
-  final WakelockService wakelockService;
-
-  /// Creates a [ChantingPlayerView] widget.
-  const ChantingPlayerView({
-    required this.chantingState,
-    required this.wakelockService,
-    super.key,
-  });
-
+class const ChantingPlayerView({
+  required final ChantingStateEntity chantingState,
+  required final WakelockService wakelockService,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<ChantingPlayerView> createState() => _ChantingPlayerViewState();
 }
 
 class _ChantingPlayerViewState extends State<ChantingPlayerView>
-    with WidgetsBindingObserver {
+  with WidgetsBindingObserver {
+
   @override
   void initState() {
     widget.wakelockService.enable();

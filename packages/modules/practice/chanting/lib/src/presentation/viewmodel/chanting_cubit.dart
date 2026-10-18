@@ -5,7 +5,6 @@ import 'package:audio_service/audio_service.dart';
 
 import 'package:core/core.dart';
 import 'package:chanting/src/domain/entity/caching_progress_entity.dart';
-import 'package:chanting/src/domain/entity/chant_local_resources_entity.dart';
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/domain/service/chanting_audio_service.dart';
 import 'package:chanting/src/domain/usecase/complete_chanting_use_case.dart';
@@ -94,19 +93,17 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
       late CachingProgressEntity cachingProgress;
       await for (final progress in prepared) {
         cachingProgress = progress;
-        emit(state.copyWith(cachingProgress: cachingProgress));
+        emit(state.copyWith(
+          cachingProgress: cachingProgress,
+          chantResources: cachingProgress.results.map((r) => r.localResources).toList(),
+        ));
       }
-
-      // Take the final results and prepare the audio service
-      List<ChantLocalResourcesEntity> resources = cachingProgress.results
-          .map((r) => r.localResources)
-          .toList();
 
       emit(
         state.copyWith(
           loadingState: .completed,
-          cachingProgress: cachingProgress,
-          chantResources: resources,
+          // cachingProgress: cachingProgress,
+          // chantResources: resources,
           startTime: DateTime.now(),
         ),
       );
@@ -138,6 +135,9 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
         ),
       );
     } catch (e, st) {
+      emit(
+        state.copyWith(lyricsLoadingState: ProcessingState.error)
+      );
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -183,14 +183,17 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
     );
   }
 
-  void _onMediaItemChanged(MediaItem? mediaItem) {
+  void _onMediaItemChanged(MediaItem? mediaItem) {  
+    // Nothing to act on if the media item is null
     if (mediaItem == null) return;
+
+    logger.t('Media item changed: ${mediaItem.title}');
+    
     emit(state.copyWith(
       mediaItem: mediaItem,
-      activeLineIndex: 0,      
+      activeLineIndex: 0,
     ));
-    _loadLyricsForChant(mediaItem.id);
-    logger.t('Media item changed: ${mediaItem.title}');
+    _loadLyricsForChant(mediaItem.id);    
   }
 
   /// When using a Bluetooth headset, we need to account for the output latency
@@ -237,11 +240,14 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   Future<void> next() => audioService.next();
 
   @override
-  Future<void> close() {
+  Future<void> close() {    
+    // Cancel all subscriptions
     _playbackStateSub?.cancel();
     _playlistCompletedSub?.cancel();
     _audioRouteChangeSub?.cancel();
     _mediaItemSub?.cancel();
+
+    // Stop audio
     audioService.stop();
     return super.close();
   }

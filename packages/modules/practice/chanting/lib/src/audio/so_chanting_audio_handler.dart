@@ -259,23 +259,19 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     _trackEndedSub = null;
     _soundHandle = null;
     _playbackReporter.stop();
-
+    
     try {
       await _playlistManager.skipToNext();
       _updateCurrentMediaItem();
-      _playCurrentTrack();
+      await _playCurrentTrack(); // already emits current state on success
     } on StateError {
-      // No more tracks in the playlist. Emit completed state.
+      // StateError is thrown when there are no more tracks in the playlist.
       _playbackReporter.emitCompleted();
-
-      // Fire custom event on audiohandler to notify that the playlist has completed.
       customEvent.add(SoLoudChantingAudioHandlerCustomEvent.playlistCompleted);
     } catch (e) {
-      debugPrint('Cannot skip to next: ${e.toString()}');            
-    } finally {
-      _playbackReporter.emitCurrentState();
+      debugPrint('Cannot skip to next: $e');
+      _playbackReporter.emitCurrentState(); // error fallback only
     }
-
   }
 
   Future<void> _stopCurrentHandle() async {

@@ -32,7 +32,7 @@ class StartChantingUseCase with LoggerMixin {
     // Load up-to-date chants from remote data source
     final availableChants = await chantRepo.queryAll();
 
-    // Cache the chants and stream progress updates
+    // Cache the selected chants and stream progress updates
     final cachingResultProgress = cacheChantsUseCase.execute(
       selectedChantIds,
       availableChants,
@@ -50,7 +50,7 @@ class StartChantingUseCase with LoggerMixin {
       .map((r) => r.localResources)
       .toList();
     await chantingAudioService.setup(resources);
-    chantingAudioService.play();
+    await chantingAudioService.play();
     _showPresence();
 
     logger.t('Chanting setup complete with ${resources.length} chants');
