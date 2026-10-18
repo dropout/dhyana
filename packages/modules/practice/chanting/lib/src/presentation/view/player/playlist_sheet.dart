@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class PlaylistSheet extends StatelessWidget {
-  const PlaylistSheet({super.key});
+  const PlaylistSheet({super.key, this.chantImageProvider});
+
+  final ImageProvider? chantImageProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class PlaylistSheet extends StatelessWidget {
                     child: ChantCard(
                       index: index,
                       chantViewModel: chantViewModel,
+                      chantImageProvider: chantImageProvider,
                       textColor: index < state.currentIndex
                           ? Colors.grey.shade600
                           : Colors.black,

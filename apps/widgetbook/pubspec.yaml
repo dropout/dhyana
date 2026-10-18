@@ -21,6 +21,7 @@ dependencies:
   provider: ^6.1.5+1
   flutter_bloc: ^9.1.1
   audio_service: ^0.18.19
+  go_router: ^18.0.0
 
   core: ^0.0.1
   assets: ^0.0.1
@@ -40,4 +41,3 @@ flutter:
   uses-material-design: true
   assets:
   - assets/images/
-
