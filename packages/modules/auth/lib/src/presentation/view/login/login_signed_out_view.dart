@@ -196,6 +196,6 @@ class LoginSignedOutView extends StatelessWidget {
           ],
         ),
       ),
-    ).reveal(delay: Durations.long2 + letterDuration * 4);
+    ).reveal(delay: Durations.long2 + letterDuration * 3);
   }
 }

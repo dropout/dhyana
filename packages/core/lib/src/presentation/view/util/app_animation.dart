@@ -28,9 +28,9 @@ extension RevealExtension on Widget {
   /// Wraps the widget with a top-right to bottom-left gradient reveal effect.
   Widget reveal({
     Key? key,
-    Duration duration = Durations.extralong1,
+    Duration duration = Durations.extralong4,
     Duration delay = Duration.zero,
-    Curve curve = Curves.easeIn,
+    Curve curve = Curves.linear,
   }) {
     return RevealAnimation(
       key: key,
@@ -44,16 +44,6 @@ extension RevealExtension on Widget {
 
 
 extension RevealWidgetAnimation on Widget {
-
-  // Widget reveal(int order) {
-  //   return animate(
-  //     delay: Duration(milliseconds: order * _interval),
-  //   ).fadeIn(
-  //     curve: _curve,
-  //     duration: _duration.ms
-  //   );
-
-  // }
 
   Widget loadingReveal() {
     return animate().fadeIn(
@@ -132,9 +122,9 @@ class RevealAnimation extends StatefulWidget {
   const RevealAnimation({
     super.key,
     required this.child,
-    this.duration = const Duration(milliseconds: 800),
+    this.duration = Durations.medium1,
     this.delay = Duration.zero,
-    this.curve = Curves.easeInOut,
+    this.curve = Curves.easeIn,
   });
 
   @override

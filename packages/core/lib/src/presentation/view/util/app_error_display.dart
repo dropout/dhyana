@@ -94,7 +94,7 @@ class AppErrorDisplay extends StatelessWidget {
       right: 0,
       bottom: DesignSpec.spacingXl,
       child: Center(
-        child: AppButton(
+        child: AppButton.large(
           bColor: Theme.of(context).colorScheme.onError,
           fColor: Theme.of(context).colorScheme.error,
           onTap: () => _handleButtonTap(context),

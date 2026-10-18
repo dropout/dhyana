@@ -152,7 +152,7 @@ class FadeInTextPainter extends CustomPainter {
       textSpans.add(
         TextSpan(
           text: text[i],
-          style: style.copyWith(color: baseColor.withOpacity(opacity)),
+          style: style.copyWith(color: baseColor.withValues(alpha: opacity)),
         ),
       );
     }
