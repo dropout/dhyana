@@ -60,8 +60,9 @@ class _ProfileSettingsClearCacheState extends State<ProfileSettingsClearCache> {
               Text(
                 ProfileLocalizations.of(context).clearCache,
                 textAlign: TextAlign.start,
-                style: context.theme.textTheme.titleSmall?.copyWith(
+                style: context.theme.textTheme.bodyLarge?.copyWith(
                   color: Colors.black,
+                  fontWeight: .w500,
                 ),
               ),
               if (loadingState == .processing || loadingState == .completed)

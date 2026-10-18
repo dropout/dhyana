@@ -46,7 +46,7 @@
   "usePresenceFeatureTitle": "Enable Presence feature",
   "usePresenceFeatureDescription": "When enabled, user will be able to see other users who are currently practicing.",
   "clearCache": "Clear cache",
-  "clearCacheDescription": "'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.'",
+  "clearCacheDescription": "Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.",
   "healthConnect_initializingTitle_ios": "Save completed sessions to\nApple Health",
   "healthConnect_initializingText_ios": "Checking service availability...",
   "healthConnect_initializingTitle_android": "Save completed sessions to\nGoogle Health Connect",

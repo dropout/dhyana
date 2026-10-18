@@ -101,8 +101,10 @@ class _MilestoneProgressViewState extends State<MilestoneProgressView> {
     return Text(
       key: const Key('milestone_progress_view_text'),
       text,
-      style: Theme.of(context).textTheme.bodyLarge!
-          .copyWith(color: widget.textColor),
+      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+        color: widget.textColor,
+        fontWeight: FontWeight.w500,
+      ),
     );
   }
 }

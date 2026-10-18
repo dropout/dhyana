@@ -76,12 +76,14 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
               clearCacheCapability: widget.clearCacheCapability!,
             ),
           Gap.large(),
+          SeparatorGem(count: 1),
           AppButton.small(
             fColor: Colors.black,
             bColor: Colors.transparent,
             text: context.coreL10n.profileDeleteTitle.toUpperCase(),
             onTap: () => _onDeleteProfileTapped(context),
           ),
+          Gap.large(),
         ],
       ),
     );

@@ -32,7 +32,8 @@ class ProfileView extends StatelessWidget {
                   profileId: profile.id,
                   profileName: profile.displayName,
                   profilePhotoBlurhash: profile.photoBlurhash,
-                  imageSize: DesignSpec.circleLg,                  
+                  imageSize: DesignSpec.circleLg,
+                  borderWidth: 5.0,
                 ),
                 Gap.large(),
 

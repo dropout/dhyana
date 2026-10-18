@@ -14,6 +14,8 @@ class const ProfileAvatar({
   final String? profilePhotoBlurhash,
   /// Useful in tests and widgetbook scenarios.
   final ImageProvider? profileImageProvider,
+  // Border width for the profile image circle.
+  final double borderWidth = 4.0,
   super.key,
 }) extends StatelessWidget {
   
@@ -30,7 +32,7 @@ class const ProfileAvatar({
             position: .foreground,
             decoration: BoxDecoration(                              
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.black, width: 4.0),
+              border: Border.all(color: Colors.black, width: borderWidth),
             ),
             child: ProfileImage(
               profileId: profileId,

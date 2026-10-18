@@ -153,6 +153,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
             Text(
               context.coreL10n.locationInputRationaleTitle,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppColors.charcoal,
               ),
@@ -160,7 +161,7 @@ class _CitySelectorInputState extends State<CitySelectorInput> {
             Gap.small(),
             Text(
               context.coreL10n.locationInputRationaleBody,
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),

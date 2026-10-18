@@ -380,7 +380,7 @@ abstract class ProfileLocalizations {
   /// No description provided for @clearCacheDescription.
   ///
   /// In en, this message translates to:
-  /// **'\'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.\''**
+  /// **'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.'**
   String get clearCacheDescription;
 
   /// No description provided for @healthConnect_initializingTitle_ios.

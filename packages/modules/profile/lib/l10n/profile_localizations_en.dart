@@ -215,7 +215,7 @@ class ProfileLocalizationsEn extends ProfileLocalizations {
 
   @override
   String get clearCacheDescription =>
-      '\'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.\'';
+      'Clears all cached audio and lyrics files for chants. This will free up storage space, but you will need to re-download the files if you want to play them again.';
 
   @override
   String get healthConnect_initializingTitle_ios =>

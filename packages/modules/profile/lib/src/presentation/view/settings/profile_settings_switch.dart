@@ -37,7 +37,9 @@ class ProfileSettingsSwitch extends StatelessWidget {
                   name: name,
                   title: Text(
                     title,
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: .w500
+                    ),
                   ),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
