@@ -1,5 +1,6 @@
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/domain/entity/lyrics_line_entity.dart';
+import 'package:chanting/src/presentation/view/player/lyric_text_style.dart';
 import 'package:chanting/src/presentation/view/player/lyric_word.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
@@ -7,7 +8,13 @@ import 'package:material_ui/material_ui.dart';
 /// Renders a single [LyricsLineEntity] with per-word highlight animation.
 /// The [position] is used to determine the state of each word (inactive, pending, singing, sung).
 /// The [isActive] is currently not used, but can be used in the future to apply additional styling to the active line.
-class LyricLine extends StatelessWidget {
+class const LyricLine({
+  required final LyricsLineEntity line,
+  required final Duration position,
+  required final bool isActive,
+  required final ChantingStateEntity chantingState,
+  super.key,
+}) extends StatelessWidget {
 
   /// Returns the text style used for rendering lyrics lines.
   /// This is used when rendering the text and calculating the line heights
@@ -23,21 +30,8 @@ class LyricLine extends StatelessWidget {
     horizontal: 24,
     vertical: 8,
   );
-  static final RegExp _lineBreakPattern = RegExp(r'\\n|\r?\n');
-
-  final LyricsLineEntity line;
-  final Duration position;
-  final bool isActive;
-
-  final ChantingStateEntity chantingState;
-
-  const LyricLine({
-    super.key,
-    required this.line,
-    required this.position,
-    required this.isActive,
-    required this.chantingState,
-  });
+  
+  static final RegExp lineBreakPattern = RegExp(r'\\n|\r?\n');
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class LyricLine extends StatelessWidget {
     var hasWordOnCurrentParagraph = false;
 
     for (final word in line.words) {
-      final fragments = word.text.split(_lineBreakPattern);
+      final fragments = word.text.split(lineBreakPattern);
 
       for (var i = 0; i < fragments.length; i++) {
         final fragment = fragments[i];
@@ -76,7 +70,7 @@ class LyricLine extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           children: textSpans,
-          style: getLyricsTextStyle(context),
+          style: LyricTextStyle.of(context),
         ),
       ),
     );
@@ -87,7 +81,7 @@ class LyricLine extends StatelessWidget {
     var hasWordOnCurrentParagraph = false;
 
     for (final word in line.words) {
-      final fragments = word.text.split(_lineBreakPattern);
+      final fragments = word.text.split(lineBreakPattern);
 
       for (var i = 0; i < fragments.length; i++) {
         final fragment = fragments[i];

@@ -15,18 +15,21 @@ import 'package:chanting/src/public/model/chanting_settings.dart';
 
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
-class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
+class ChantingCubit({
+
   // Services
-  final SessionNavigator sessionNavigator;
-  final ChantingSettings chantingSettings;
-  final ChantingAudioService audioService;
-  final CrashlyticsService crashlyticsService;
+  required final SessionNavigator sessionNavigator,
+  required final ChantingSettings chantingSettings,
+  required final ChantingAudioService audioService,
+  required final CrashlyticsService crashlyticsService,
 
   // Use cases
-  final StartChantingUseCase startChantingUseCase;
-  final LoadLyricsUseCase loadLyricsUseCase;
-  final PlaybackStateChangeUseCase playbackStateChangeUseCase;
-  final CompleteChantingUseCase completeChantingUseCase;
+  required final StartChantingUseCase startChantingUseCase,
+  required final LoadLyricsUseCase loadLyricsUseCase,
+  required final PlaybackStateChangeUseCase playbackStateChangeUseCase,
+  required final CompleteChantingUseCase completeChantingUseCase,
+
+}) extends Cubit<ChantingStateEntity> with LoggerMixin {
 
   // Stream subscriptions for audio service events
   StreamSubscription<PlaybackState>? _playbackStateSub;
@@ -34,22 +37,12 @@ class ChantingCubit extends Cubit<ChantingStateEntity> with LoggerMixin {
   StreamSubscription? _playlistCompletedSub;
   StreamSubscription? _audioRouteChangeSub;
 
-  /// Creates a new instance of [ChantingCubit] with the provided services and settings.
-  ChantingCubit({
-    required this.chantingSettings,
-    required this.audioService,
-    required this.sessionNavigator,
-    required this.startChantingUseCase,
-    required this.loadLyricsUseCase,
-    required this.playbackStateChangeUseCase,
-    required this.completeChantingUseCase,
-    required this.crashlyticsService,
-  }) : super(
-         ChantingStateEntity(
-           chantingSettings: chantingSettings,
-           playbackState: audioService.playbackState,
-         ),
-       ) {
+  this : super(
+    ChantingStateEntity(
+      chantingSettings: chantingSettings,
+      playbackState: audioService.playbackState,
+    )
+  ) {
     _init();
   }
 

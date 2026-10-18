@@ -4,6 +4,7 @@ import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
 import 'package:chanting/src/presentation/view/player/lyric_focus.dart';
 import 'package:chanting/src/presentation/view/player/lyric_line.dart';
+import 'package:chanting/src/presentation/view/player/lyric_text_style.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
 import 'package:chanting/src/presentation/view/player/unculled_varied_extent_list.dart';
 import 'package:chanting/src/presentation/view/player/worm_line.dart';
@@ -15,32 +16,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// Displays the lyrics for the currently playing chant, with auto-scrolling
 /// to keep the active line centered.
 /// Users can also manually scroll through the lyrics, that will also
-/// seek the chant to the corresponding line. During user-initiated scrolls,
+/// seek the chant audio to the corresponding line. 
+///During user-initiated scrolls,
 /// playback will be paused to avoid fighting with the auto-scrolling behavior.
-class LyricsView extends StatefulWidget {
+class const LyricsView({
   /// The current state of the chanting player, containing
   /// the lyrics document and active line index.
-  final ChantingStateEntity chantingState;
+  required final ChantingStateEntity chantingState,
+  
+  /// The maximum width available for the lyrics view.
+  required final double maxWidth,
 
   /// The vertical offset from the top of the screen where
   /// the active line should be centered.
-  final double topOffset;
-
-  final double maxWidth;
+  final double topOffset = 200.0,
 
   /// Visual effects configuration; use [LyricsEffectsConfig.disabled]
-  /// to turn all effects off.
-  final LyricsEffectsConfig effects;
-
-  /// Creates a [LyricsView] widget.
-  const LyricsView({
-    required this.chantingState,
-    required this.maxWidth,
-    this.topOffset = 200.0,
-    this.effects = const LyricsEffectsConfig(),
-    super.key,
-  });
-
+  /// to turn all effects off.  
+  final LyricsEffectsConfig effects = const LyricsEffectsConfig(),
+  super.key,
+}) extends StatefulWidget {
   @override
   State<LyricsView> createState() => _LyricsViewState();
 }
@@ -59,7 +54,13 @@ enum _Mode {
 
 class _LyricsViewState extends State<LyricsView>
     with SingleTickerProviderStateMixin {
+
+  /// The delay before resuming auto-scrolling after 
+  /// the user stops interacting.
   static const Duration _resumeDelay = Duration(milliseconds: 1000);
+
+  /// The minimum duration between consecutive seek operations 
+  /// to avoid excessive updates.
   static const Duration _seekThrottle = Duration(milliseconds: 100);
 
   /// Scroll controller to manage programmatic scrolling and
@@ -69,8 +70,11 @@ class _LyricsViewState extends State<LyricsView>
   /// Drives the staggered visual catch-up after each programmatic jump.
   late final AnimationController _wormAnimationController;
 
+  /// The text style used for rendering the lyrics lines.
+  late TextStyle _lyricsTextStyle;
+
   Timer? _resumeTimer;
-  _Mode _mode = _Mode.synced;
+  _Mode _mode = .synced;
 
   /// Whether the user is currently touching the screen.
   bool _isPointerDown = false;
@@ -88,12 +92,14 @@ class _LyricsViewState extends State<LyricsView>
   void initState() {
     super.initState();
 
+    // Initialize the worm animation controller for staggered visual catch-up.
     _wormAnimationController = AnimationController(
       vsync: this,
       duration: widget.effects.wormDuration,
       value: 1,
     );
 
+    // Add a post-frame callback to set up scroll listeners after the first frame.
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _scrollController.addListener(_onScroll);
       if (_scrollController.hasClients) {
@@ -103,6 +109,26 @@ class _LyricsViewState extends State<LyricsView>
         );
       }
     });
+
+    
+
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Theme or text changes can alter the base style, so re-measure.
+    _updateLayout();
+  }
+
+  /// Resolves the width-based style and re-measures the lines with it,
+  /// so the extents always match what is rendered.
+  void _updateLayout() {
+    _lyricsTextStyle = LyricTextStyle.resolve(
+      LyricLine.getLyricsTextStyle(context),
+      widget.maxWidth,
+    );
+    _lyricLineHeights = _calculateLyricLineHeights();
   }
 
   @override
@@ -135,19 +161,20 @@ class _LyricsViewState extends State<LyricsView>
       }
     }
 
-    // Update line height when change there is a change in the lyrics document
+    // Re-measure when the lyrics or the available width change.
     if (widget.chantingState.lyricsDocument !=
-        oldWidget.chantingState.lyricsDocument) {
-      setState(() {
-        _lyricLineHeights = _calculateLyricLineHeights();
-      });
-    } else if (_lyricLineHeights.isEmpty &&
-        widget.chantingState.lyricsDocument?.lines.isNotEmpty == true) {
-      // If the lyric line heights are empty but the lyrics document is loaded,
-      // calculate the line heights.
-      setState(() {
-        _lyricLineHeights = _calculateLyricLineHeights();
-      });
+            oldWidget.chantingState.lyricsDocument ||
+        widget.maxWidth != oldWidget.maxWidth ||
+        (_lyricLineHeights.isEmpty &&
+            widget.chantingState.lyricsDocument?.lines.isNotEmpty == true)) {
+      setState(_updateLayout);
+      if (widget.maxWidth != oldWidget.maxWidth) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && _scrollController.hasClients) {
+            _scrollToLine(widget.chantingState.activeLineIndex);
+          }
+        });
+      }
     }
   }
 
@@ -156,7 +183,7 @@ class _LyricsViewState extends State<LyricsView>
     for (final line in widget.chantingState.lyricsDocument?.lines ?? []) {
       final height = calculateTextHeight(
         LyricLine.displayText(line),
-        LyricLine.getLyricsTextStyle(context),
+        _lyricsTextStyle,
         widget.maxWidth,
         LyricLine.linePadding,
       );
@@ -349,11 +376,15 @@ class _LyricsViewState extends State<LyricsView>
       },
       onPointerUp: (_) => _isPointerDown = false,
       onPointerCancel: (_) => _isPointerDown = false,
-      child: CustomScrollView(
-        controller: _scrollController,
-        physics: ClampingScrollPhysics(),
-        slivers: slivers,
+      child: LyricTextStyle(
+        style: _lyricsTextStyle,
+        child: CustomScrollView(
+          controller: _scrollController,
+          physics: ClampingScrollPhysics(),
+          slivers: slivers,
+        ),
       ),
     );
   }
+
 }

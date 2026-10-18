@@ -1,5 +1,5 @@
 import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
-import 'package:chanting/src/presentation/view/player/lyric_line.dart';
+import 'package:chanting/src/presentation/view/player/lyric_text_style.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -51,7 +51,7 @@ class LyricWordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       word.text,
-      style: LyricLine.getLyricsTextStyle(context).copyWith(
+      style: LyricTextStyle.of(context).copyWith(
         color: colorAtPosition(word: word, position: position),
       ),
     );
