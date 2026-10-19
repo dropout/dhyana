@@ -28,6 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      minimum: const EdgeInsets.only(top: DesignSpec.paddingLg),
       bottom: false,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),

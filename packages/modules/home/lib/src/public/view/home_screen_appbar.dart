@@ -6,6 +6,9 @@ import 'package:home/src/public/viewmodel/home_screen_cubit.dart';
 
 import 'today.dart';
 
+/// Custom AppBar for the Home Screen to address layout and widget placement needs.
+/// It decorates the standard [CustomAppBar] with specific 
+/// leading and trailing widgets for the Home Screen.
 class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
   final HomeScreenState homeScreenState;
 
