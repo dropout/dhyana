@@ -2,7 +2,7 @@ name: mobile_app
 resolution: workspace
 description: A meditation timer and chanting application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.11.6+24
+version: 0.11.7+26
 
 environment:
   sdk: '>=3.13.0 <4.0.0'
@@ -11,7 +11,7 @@ environment:
 hooks:
   user_defines:
     flutter_soloud:
-      no_xiph_libs: true
+      no_xiph_libs: true # Don't include unused Xiph libraries (.ogg support)
 
 dependencies:
   flutter:
