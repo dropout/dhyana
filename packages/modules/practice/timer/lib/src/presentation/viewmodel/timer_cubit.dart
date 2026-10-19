@@ -153,6 +153,7 @@ class TimerCubit extends Cubit<TimerStateEntity> with LoggerMixin {
       endTime: state.endTime ?? DateTime.now(),
       duration: state.elapsedTime,
       sessionType: .timer,
+      navigationType: .go,
     );
   }
 
