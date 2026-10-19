@@ -7,17 +7,17 @@ part 'caching_progress_entity.g.dart';
 
 @freezed
 sealed class CachingProgressEntity with _$CachingProgressEntity {
-
   const CachingProgressEntity._();
 
   const factory CachingProgressEntity({
     @Default(0) int totalTasks,
     @Default(0) int completedTasks,
     @Default(0.0) double progress,
-    @Default([]) List<({ChantEntity chant, ChantLocalResourcesEntity localResources})> results,
+    @Default([])
+    List<({ChantEntity chant, ChantLocalResourcesEntity localResources})>
+    results,
   }) = _CachingProgressEntity;
 
   factory CachingProgressEntity.fromJson(Map<String, Object?> json) =>
-    _$CachingProgressEntityFromJson(json);
-
+      _$CachingProgressEntityFromJson(json);
 }

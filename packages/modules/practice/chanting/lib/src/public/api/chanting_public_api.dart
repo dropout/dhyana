@@ -1,5 +1,3 @@
-
-
 import 'package:chanting/src/public/model/chant.dart';
 
 abstract interface class ChantingPublicApi {

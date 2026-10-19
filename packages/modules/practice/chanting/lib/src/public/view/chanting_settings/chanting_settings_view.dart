@@ -13,32 +13,33 @@ import 'package:get_it/get_it.dart';
 import 'add_chant_sheet.dart';
 
 class ChantingSettingsView extends StatelessWidget {
-
   static Widget withCubit() {
     return SmartBlocProvider<ChantingSettingsCubit, ChantingSettingsState>(
       key: const ValueKey('chanting_settings_cubit'),
-      create: (context) => GetIt.I.get<ChantingSettingsCubit>()
-        ..loadAvailableChants(),
-      builder: (context, state) => ChantingSettingsView(
-        availableChants: state.availableChants,
-      ),
+      create: (context) =>
+          GetIt.I.get<ChantingSettingsCubit>()..loadAvailableChants(),
+      builder: (context, state) =>
+          ChantingSettingsView(availableChants: state.availableChants),
     );
   }
 
   final List<Chant> availableChants;
 
-  const ChantingSettingsView({
-    required this.availableChants,
-    super.key,
-  });
+  const ChantingSettingsView({required this.availableChants, super.key});
 
-  String getTotalDurationText(BuildContext context, ChantingSettingsState state) {    
+  String getTotalDurationText(
+    BuildContext context,
+    ChantingSettingsState state,
+  ) {
     final totalDuration = state.playlist.fold<Duration>(
       Duration.zero,
-      (previousValue, chantViewModel) => previousValue + chantViewModel.duration,
+      (previousValue, chantViewModel) =>
+          previousValue + chantViewModel.duration,
     );
     final minutes = totalDuration.inMinutes;
-    return ChantingLocalizations.of(context).minutesPluralWithNumber(minutes).toUpperCase();
+    return ChantingLocalizations.of(context)
+        .minutesPluralWithNumber(minutes)
+        .toUpperCase();
   }
 
   void _triggerAddChantSheet(
@@ -86,9 +87,8 @@ class ChantingSettingsView extends StatelessWidget {
   void _onStart(BuildContext context) {
     final selectedChants = context.read<ChantingSettingsCubit>().state.playlist;
     if (selectedChants.isNotEmpty) {
-      ChantingRoute(
-        $extra: ChantingSettings(selectedChants: selectedChants),
-      ).push(context);
+      ChantingRoute($extra: ChantingSettings(selectedChants: selectedChants))
+          .push(context);
       context.hapticsTap();
     }
   }
@@ -141,25 +141,26 @@ class ChantingSettingsView extends StatelessWidget {
               ),
             ),
           ),
-          if (state.playlist.isNotEmpty) Padding(
-            padding: const EdgeInsets.only(
-              left: DesignSpec.paddingXl,
-              right: DesignSpec.paddingXl,
-              top: DesignSpec.paddingXs,
-              bottom: DesignSpec.paddingXl,
-            ),
-            child: Row(
-              mainAxisAlignment: .center,
-              children: [
-                Text(
-                  '${getTotalDurationText(context, state)} ${ChantingLocalizations.of(context).statsTotal.toUpperCase()}',
-                  style: context.theme.textTheme.labelMedium!.copyWith(
-                    fontWeight: FontWeight.w800,
+          if (state.playlist.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(
+                left: DesignSpec.paddingXl,
+                right: DesignSpec.paddingXl,
+                top: DesignSpec.paddingXs,
+                bottom: DesignSpec.paddingXl,
+              ),
+              child: Row(
+                mainAxisAlignment: .center,
+                children: [
+                  Text(
+                    '${getTotalDurationText(context, state)} ${ChantingLocalizations.of(context).statsTotal.toUpperCase()}',
+                    style: context.theme.textTheme.labelMedium!.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
             child: SessionStartButton(

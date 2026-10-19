@@ -6,7 +6,6 @@ part 'lyrics_word_entity.g.dart';
 
 @freezed
 sealed class LyricsWordEntity with _$LyricsWordEntity {
-  
   const LyricsWordEntity._();
 
   const factory LyricsWordEntity({
@@ -19,5 +18,5 @@ sealed class LyricsWordEntity with _$LyricsWordEntity {
   Duration get duration => end - start;
 
   factory LyricsWordEntity.fromJson(Map<String, dynamic> json) =>
-    _$LyricsWordEntityFromJson(json);
+      _$LyricsWordEntityFromJson(json);
 }

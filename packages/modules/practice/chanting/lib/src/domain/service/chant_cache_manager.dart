@@ -115,13 +115,12 @@
 //     // Assemble a BatchDownloadTask to manage the download of all tasks
 //     final batchDownloadTask = BatchDownloadTask(downloadTasks);
 
-
 //     // Yield progress updates as the batch download progresses
 //     await for (final progress in batchDownloadTask.progressStream) {
-//       // Ensure that progress doesn't reach 1.0 until all downloads are validated, 
+//       // Ensure that progress doesn't reach 1.0 until all downloads are validated,
 //       // to avoid premature completion
 //       yield CachingProgressEntity(
-//         progress: min(progress, 0.99), 
+//         progress: min(progress, 0.99),
 //         totalTasks: batchDownloadTask.totalTasks,
 //         completedTasks: batchDownloadTask.completedTasks,
 //         results: []
@@ -162,7 +161,7 @@
 
 //   }
 
-//   /// Takes a chant and breaks it down into its audio and lyrics assets, 
+//   /// Takes a chant and breaks it down into its audio and lyrics assets,
 //   /// caching them if necessary.
 //   Future<List<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>>
 //   cacheChantAssets(ChantCacheValidationResult validationResult) async {
@@ -192,8 +191,7 @@
 //     return tasks;
 //   }
 
-
-//   /// Actual caching of a chant asset, including downloading the file 
+//   /// Actual caching of a chant asset, including downloading the file
 //   /// and creating/updating the cache entry in the database
 //   Future<({DownloadTask downloadTask, ChantCacheEntryRow pendingEntry})>
 //   cacheChantAsset(
@@ -359,9 +357,7 @@
 //     return localResources;
 //   }
 
-
-
-//   /// When a download task completes, validate the downloaded 
+//   /// When a download task completes, validate the downloaded
 //   /// file and update the cache entry in the database
 //   Future<void> _validateDownload(
 //     DownloadTask task,
@@ -417,7 +413,5 @@
 //       lastError: error?.toString(),
 //     );
 //   }
-
-
 
 // }

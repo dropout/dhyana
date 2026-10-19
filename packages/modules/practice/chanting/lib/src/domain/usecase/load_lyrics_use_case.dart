@@ -8,24 +8,26 @@ class LoadLyricsUseCase with LoggerMixin {
 
   LoadLyricsUseCase({required this.lyricsService});
 
-  Future<LyricsDocumentEntity> execute(String chantId, ChantingStateEntity state) async {
+  Future<LyricsDocumentEntity> execute(
+    String chantId,
+    ChantingStateEntity state,
+  ) async {
     logger.t('Loading lyrics for chant ID: $chantId');
     // emit(state.copyWith(lyricsLoadingState: LoadingState.loading));
-      final lyricsPath = state.chantResources
-          .firstWhere((r) => r.id == chantId)
-          .lyricsLocalPath;
+    final lyricsPath = state.chantResources
+        .firstWhere((r) => r.id == chantId)
+        .lyricsLocalPath;
 
-      return await lyricsService.loadLyrics(lyricsPath);
+    return await lyricsService.loadLyrics(lyricsPath);
 
-      // User quickly pressed back button
-      // if (isClosed) return;
+    // User quickly pressed back button
+    // if (isClosed) return;
 
-
-      // emit(
-      //   state.copyWith(
-      //     lyricsLoadingState: LoadingState.loaded,
-      //     lyricsDocument: lyricsDocument,
-      //   ),
-      // );
-   }
- }
+    // emit(
+    //   state.copyWith(
+    //     lyricsLoadingState: LoadingState.loaded,
+    //     lyricsDocument: lyricsDocument,
+    //   ),
+    // );
+  }
+}

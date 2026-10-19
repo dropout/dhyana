@@ -62,24 +62,27 @@ void main() {
       expect(states.single.updatePosition, const Duration(seconds: 5));
     });
 
-    test('emitLoading and emitStopped publish the expected playback states', () {
-      final states = <PlaybackState>[];
-      final reporter = SoLoudSoChantingPlaybackReporter(
-        playbackStateSink: states.add,
-        positionProvider: () => Duration.zero,
-        playingProvider: () => false,
-        queueIndexProvider: () => null,
-      );
+    test(
+      'emitLoading and emitStopped publish the expected playback states',
+      () {
+        final states = <PlaybackState>[];
+        final reporter = SoLoudSoChantingPlaybackReporter(
+          playbackStateSink: states.add,
+          positionProvider: () => Duration.zero,
+          playingProvider: () => false,
+          queueIndexProvider: () => null,
+        );
 
-      reporter.emitLoading();
-      reporter.emitStopped();
+        reporter.emitLoading();
+        reporter.emitStopped();
 
-      expect(states, hasLength(2));
-      expect(states[0].processingState, AudioProcessingState.loading);
-      expect(states[0].controls, isEmpty);
-      expect(states[1].processingState, AudioProcessingState.idle);
-      expect(states[1].controls, [MediaControl.play]);
-    });
+        expect(states, hasLength(2));
+        expect(states[0].processingState, AudioProcessingState.loading);
+        expect(states[0].controls, isEmpty);
+        expect(states[1].processingState, AudioProcessingState.idle);
+        expect(states[1].controls, [MediaControl.play]);
+      },
+    );
 
     test('emitCompleted cancels the timer and publishes completion state', () {
       final states = <PlaybackState>[];

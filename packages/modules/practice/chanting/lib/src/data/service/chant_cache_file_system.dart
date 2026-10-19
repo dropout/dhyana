@@ -4,7 +4,6 @@ import 'package:chanting/src/domain/enum/cached_asset_type.dart';
 
 /// Manages the on-disk layout of cached chant assets.
 class ChantCacheFileSystem {
-
   static const _rootFolder = 'chant_cache';
 
   final Future<Directory> Function() documentsDirectoryProvider;

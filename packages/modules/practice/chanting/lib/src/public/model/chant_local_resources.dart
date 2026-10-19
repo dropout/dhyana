@@ -6,8 +6,9 @@ part 'chant_local_resources.freezed.dart';
 part 'chant_local_resources.g.dart';
 
 @freezed
-sealed class ChantLocalResources with _$ChantLocalResources implements SerializableEntity {
-
+sealed class ChantLocalResources
+    with _$ChantLocalResources
+    implements SerializableEntity {
   const ChantLocalResources._();
 
   const factory ChantLocalResources({
@@ -20,7 +21,7 @@ sealed class ChantLocalResources with _$ChantLocalResources implements Serializa
   }) = _ChantLocalResources;
 
   factory ChantLocalResources.fromJson(Map<String, Object?> json) =>
-    _$ChantLocalResourcesFromJson(json);
+      _$ChantLocalResourcesFromJson(json);
 
   @override
   String get id => chant.id;

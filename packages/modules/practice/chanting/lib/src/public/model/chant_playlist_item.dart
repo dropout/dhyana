@@ -7,8 +7,7 @@ part 'chant_playlist_item.g.dart';
 sealed class ChantPlaylistItem with _$ChantPlaylistItem {
   const ChantPlaylistItem._();
 
-  const factory ChantPlaylistItem({ 
-
+  const factory ChantPlaylistItem({
     // This is a unique identifier for this item. This is used as a key in the list
     // so that multiple instances of the same chant can be added to the list and reordered.
     required String id,
@@ -31,5 +30,4 @@ sealed class ChantPlaylistItem with _$ChantPlaylistItem {
 
   factory ChantPlaylistItem.fromJson(Map<String, dynamic> json) =>
       _$ChantPlaylistItemFromJson(json);
-
 }

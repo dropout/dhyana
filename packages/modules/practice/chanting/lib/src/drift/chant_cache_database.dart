@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+
 import 'connection/connection.dart';
 
 part 'chant_cache_database.g.dart';
@@ -18,7 +19,8 @@ class ChantCacheEntries extends Table {
   TextColumn get remoteHash => text().nullable()();
   IntColumn get remoteBytes => integer().nullable()();
   BoolColumn get isValid => boolean().withDefault(const Constant(false))();
-  TextColumn get downloadState => text().withDefault(const Constant('pending'))();
+  TextColumn get downloadState =>
+      text().withDefault(const Constant('pending'))();
   IntColumn get failureCount => integer().withDefault(const Constant(0))();
   TextColumn get lastError => text().nullable()();
   IntColumn get lastValidatedAtEpochMs => integer().nullable()();
@@ -46,4 +48,3 @@ class ChantCacheDatabase extends _$ChantCacheDatabase {
   @override
   int get schemaVersion => 1;
 }
-

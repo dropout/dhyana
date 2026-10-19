@@ -21,8 +21,7 @@ class const ChantingPlayerView({
 }
 
 class _ChantingPlayerViewState extends State<ChantingPlayerView>
-  with WidgetsBindingObserver {
-
+    with WidgetsBindingObserver {
   @override
   void initState() {
     widget.wakelockService.enable();
@@ -85,7 +84,6 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     return Stack(
       fit: StackFit.expand,
       children: [
-
         AnimatedSwitcher(
           duration: Durations.long4,
           switchInCurve: Curves.easeOut,
@@ -94,7 +92,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             .processing => buildLoadingView(context),
             .error => buildErrorView(context),
             _ => buildLyricsView(context),
-          },              
+          },
         ),
 
         Positioned(left: 0, bottom: 0, right: 0, child: buildControls(context)),
@@ -118,9 +116,8 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
     );
   }
 
-  Widget buildErrorView(BuildContext context) => AppErrorDisplay(
-    key: const ValueKey('chanting_player_error_view'),
-  );
+  Widget buildErrorView(BuildContext context) =>
+      AppErrorDisplay(key: const ValueKey('chanting_player_error_view'));
 
   Widget buildLyricsView(BuildContext context) {
     return LayoutBuilder(
@@ -135,24 +132,22 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             chantingState: widget.chantingState,
             maxWidth: constraints.maxWidth,
             effects: const LyricsEffectsConfig(
-          
               // Scaling is off
-              scale: false, 
-          
+              scale: false,
+
               // Blur effect
               blurSigmaPerLine: 0.5,
               maxBlurSigma: 8,
-          
+
               // Worm effect
               wormDuration: Durations.extralong3,
               wormDelayPerLine: 0.05,
               wormMaxDelay: 1.0,
-          
+
               // Fading effect
               opacityFalloffPerLine: 0.5,
-              minOpacity: 0.5,            
+              minOpacity: 0.5,
               transitionDuration: Durations.long4,
-          
             ),
           ),
         );

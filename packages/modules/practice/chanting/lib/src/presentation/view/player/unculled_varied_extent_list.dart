@@ -50,14 +50,9 @@ class _RenderUnculledSliverVariedExtentList
       context.paintChild(
         child,
         offset +
-            Offset(
-              childCrossAxisPosition(child),
-              childMainAxisPosition(child),
-            ),
+            Offset(childCrossAxisPosition(child), childMainAxisPosition(child)),
       );
       child = childAfter(child);
     }
   }
 }
-
-

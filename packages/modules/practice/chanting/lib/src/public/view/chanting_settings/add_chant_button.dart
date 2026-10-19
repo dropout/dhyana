@@ -2,13 +2,9 @@ import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AddChantButton extends StatelessWidget {
-
   final VoidCallback onTap;
 
-  const AddChantButton({
-    required this.onTap,
-    super.key
-  });
+  const AddChantButton({required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +13,7 @@ class AddChantButton extends StatelessWidget {
       color: AppColors.buttonForeground,
       icon: const Icon(Icons.add_rounded),
       onPressed: onTap,
-      style: IconButton.styleFrom(
-        backgroundColor: AppColors.buttonBackground,
-      ),
+      style: IconButton.styleFrom(backgroundColor: AppColors.buttonBackground),
     );
   }
 }

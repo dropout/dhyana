@@ -3,9 +3,7 @@ import 'package:chanting/src/domain/enum/cache_download_state.dart';
 import 'package:chanting/src/domain/enum/cached_asset_type.dart';
 import 'package:chanting/src/drift/chant_cache_database.dart';
 
-
 abstract interface class ChantCacheRepository {
-
   // ---------------------------------------------------------------------------
   // Local database operations
   // ---------------------------------------------------------------------------
@@ -51,6 +49,5 @@ abstract interface class ChantCacheRepository {
   });
 
   /// Clears all cached files and directories.
-  Future<void> clearCache();  
+  Future<void> clearCache();
 }
-

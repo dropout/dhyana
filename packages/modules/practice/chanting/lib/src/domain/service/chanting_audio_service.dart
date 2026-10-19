@@ -49,8 +49,8 @@ class ChantingAudioService {
   Future<Duration> get outputLatency => audioHandler.outputLatency;
 
   // Audio route changes
-  Stream<void> get audioRouteChangeStream => audioHandler
-    .audioRouteChangeStream;
+  Stream<void> get audioRouteChangeStream =>
+      audioHandler.audioRouteChangeStream;
 
   Stream<void> get playlistCompletedStream => audioHandler.customEvent.where(
     (event) =>
@@ -61,5 +61,4 @@ class ChantingAudioService {
   void _switchToChantingAudioHandler() {
     audioHandler.switchToChantingAudioHandler();
   }
-
 }

@@ -99,7 +99,8 @@ class PlaylistSheet extends StatelessWidget {
         padding: const EdgeInsets.all(DesignSpec.paddingSm),
         child: switch (chantingState.playbackState.playing) {
           true => PlaylistItemBadge(
-            text: ChantingLocalizations.of(context).chantingPlaylistBadgePlaying,
+            text: ChantingLocalizations.of(context)
+                .chantingPlaylistBadgePlaying,
           ),
           false => PlaylistItemBadge(
             text: ChantingLocalizations.of(context).chantingPlaylistBadgePaused,

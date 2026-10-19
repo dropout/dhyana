@@ -9,7 +9,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chanting_settings_cubit.freezed.dart';
 
-
 @freezed
 sealed class ChantingSettingsState with _$ChantingSettingsState {
   const ChantingSettingsState._();
@@ -30,13 +29,11 @@ sealed class ChantingSettingsState with _$ChantingSettingsState {
   }
 }
 
-
 /// A Cubit that manages the state of the chanting settings.
 /// Enables adding new chants, removing chants, and reordering the chants
 /// in the playlist.
 class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
     with LoggerMixin {
-  
   /// The repository for fetching available chants.
   final ChantingPublicApi chantingApi;
 
@@ -66,29 +63,37 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final List<String> playlistChantIds = await _loadPlaylistChantIds();
 
       // Fetch all available chants from the repository
-      final List<Chant> freshChantList = await chantingApi.loadChants(preferCache: true);
+      final List<Chant> freshChantList = await chantingApi.loadChants(
+        preferCache: true,
+      );
 
       // Create the playlist based on the loaded chant IDs and available chants
       final List<ChantPlaylistItem> playlist = <ChantPlaylistItem>[];
       for (final chantId in playlistChantIds) {
         try {
           final chant = freshChantList.firstWhere((c) => c.id == chantId);
-          playlist.add(ChantPlaylistItem(
-            id: Uuid().v4(),
-            chantId: chant.id,
-            name: chant.name,
-            order: chant.order,
-            duration: chant.length,
-            blurHash: chant.blurHash,
-          ));
+          playlist.add(
+            ChantPlaylistItem(
+              id: Uuid().v4(),
+              chantId: chant.id,
+              name: chant.name,
+              order: chant.order,
+              duration: chant.length,
+              blurHash: chant.blurHash,
+            ),
+          );
         } catch (e) {
           // Chant not found in network data, skip
-          logger.t('Chant with ID $chantId not found in available chants, skipping');
+          logger.t(
+            'Chant with ID $chantId not found in available chants, skipping',
+          );
         }
       }
 
       emit(state.copyWith(playlist: playlist, isLoading: false));
-      logger.t('Restored playlist with ${playlist.length} chants from shared preferences');
+      logger.t(
+        'Restored playlist with ${playlist.length} chants from shared preferences',
+      );
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -109,12 +114,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final chants = (await chantingApi.loadChants())
         ..sort((a, b) => a.order.compareTo(b.order));
 
-      emit(
-        state.copyWith(
-          availableChants: chants,
-          isLoading: false,
-        ),
-      );
+      emit(state.copyWith(availableChants: chants, isLoading: false));
       logger.t('Successfully loaded ${chants.length} chants');
     } catch (e, stack) {
       crashlyticsService.recordError(
@@ -155,7 +155,6 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
 
   /// Removes a chant from the playlist at the specified [index].
   void removeFromPlaylist(int index) {
-
     try {
       // Check if the index is valid
       if (index < 0 || index >= state.playlist.length) {
@@ -167,30 +166,29 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       final targetChantViewModel = state.playlist[index];
       final updated = List<ChantPlaylistItem>.from(state.playlist)
         ..removeAt(index);
-          
-      // Save the updated list of playlist chant IDs to shared preferences    
+
+      // Save the updated list of playlist chant IDs to shared preferences
       _savePlaylistChantIds(updated.map((c) => c.chantId).toList());
 
       emit(state.copyWith(playlist: updated));
 
       logger.t(
         'Removed chant ${targetChantViewModel.name} at index $index from selected chants',
-      );    
+      );
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
         stackTrace: stack,
         reason: 'Failed to remove chant at index $index from playlist',
       );
-    }    
+    }
   }
 
   /// Reorders the chant list by removing the element at [oldIndex] and inserting
   /// it at [newIndex]. Bounds are clamped so accidental out-of-range inputs from
   /// the UI do not crash the app.
   void reorderPlaylist(int oldIndex, int newIndex) {
-
-    try {      
+    try {
       // Check if the selected chants list is empty
       if (state.playlist.isEmpty) {
         logger.t('Selected chants list is empty, cannot reorder');
@@ -213,16 +211,17 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       // Remove the chant at the old index and insert it at the new index
       final movedChant = updatedSelectedChants.removeAt(safeOldIndex);
       updatedSelectedChants.insert(safeNewIndex, movedChant);
-      
+
       // Save the updated list of playlist chant IDs to shared preferences
-      _savePlaylistChantIds(updatedSelectedChants.map((c) => c.chantId).toList());
+      _savePlaylistChantIds(
+        updatedSelectedChants.map((c) => c.chantId).toList(),
+      );
 
       emit(state.copyWith(playlist: updatedSelectedChants));
-      
+
       logger.t(
         'Reordering indices: oldIndex=$safeOldIndex, newIndex=$safeNewIndex',
-      );    
-
+      );
     } catch (e, stack) {
       crashlyticsService.recordError(
         exception: e,
@@ -230,11 +229,9 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
         reason: 'Failed to reorder playlist from index $oldIndex to $newIndex',
       );
     }
-
-    
   }
 
-  /// Loads the playlist chant IDs from shared preferences and returns 
+  /// Loads the playlist chant IDs from shared preferences and returns
   /// them as a list of strings.
   Future<List<String>> _loadPlaylistChantIds() async {
     try {
@@ -251,8 +248,7 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
-        reason:
-            'Failed to load selected chants from shared preferences, returning empty list',
+        reason: 'Failed to load selected chants from shared preferences, returning empty list',
       );
       return [];
     }
@@ -266,5 +262,4 @@ class ChantingSettingsCubit extends Cubit<ChantingSettingsState>
       value: jsonString,
     );
   }
-
 }

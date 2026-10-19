@@ -24,7 +24,7 @@ sealed class ChantMetaData with _$ChantMetaData implements SerializableEntity {
   }) = _ChantMetaData;
 
   factory ChantMetaData.fromJson(Map<String, Object?> json) =>
-    _$ChantMetaDataFromJson(json);
+      _$ChantMetaDataFromJson(json);
 
   String getStoragePath(CachedAssetType type) {
     switch (type) {
@@ -69,5 +69,4 @@ sealed class ChantMetaData with _$ChantMetaData implements SerializableEntity {
         return coverBytes;
     }
   }
-
 }

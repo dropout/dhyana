@@ -3,13 +3,13 @@ import 'package:chanting/src/public/model/chant_playlist_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-
 part 'chanting_settings.freezed.dart';
 part 'chanting_settings.g.dart';
 
 @freezed
-sealed class ChantingSettings with _$ChantingSettings implements SerializableEntity {
-
+sealed class ChantingSettings
+    with _$ChantingSettings
+    implements SerializableEntity {
   const ChantingSettings._();
 
   const factory ChantingSettings({
@@ -24,6 +24,4 @@ sealed class ChantingSettings with _$ChantingSettings implements SerializableEnt
 
   factory ChantingSettings.fromJson(Map<String, dynamic> json) =>
       _$ChantingSettingsFromJson(json);
-
 }
-

@@ -16,14 +16,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// Displays the lyrics for the currently playing chant, with auto-scrolling
 /// to keep the active line centered.
 /// Users can also manually scroll through the lyrics, that will also
-/// seek the chant audio to the corresponding line. 
+/// seek the chant audio to the corresponding line.
 ///During user-initiated scrolls,
 /// playback will be paused to avoid fighting with the auto-scrolling behavior.
 class const LyricsView({
   /// The current state of the chanting player, containing
   /// the lyrics document and active line index.
   required final ChantingStateEntity chantingState,
-  
+
   /// The maximum width available for the lyrics view.
   required final double maxWidth,
 
@@ -32,7 +32,7 @@ class const LyricsView({
   final double topOffset = 200.0,
 
   /// Visual effects configuration; use [LyricsEffectsConfig.disabled]
-  /// to turn all effects off.  
+  /// to turn all effects off.
   final LyricsEffectsConfig effects = const LyricsEffectsConfig(),
   super.key,
 }) extends StatefulWidget {
@@ -54,12 +54,11 @@ enum _Mode {
 
 class _LyricsViewState extends State<LyricsView>
     with SingleTickerProviderStateMixin {
-
-  /// The delay before resuming auto-scrolling after 
+  /// The delay before resuming auto-scrolling after
   /// the user stops interacting.
   static const Duration _resumeDelay = Duration(milliseconds: 1000);
 
-  /// The minimum duration between consecutive seek operations 
+  /// The minimum duration between consecutive seek operations
   /// to avoid excessive updates.
   static const Duration _seekThrottle = Duration(milliseconds: 100);
 
@@ -109,9 +108,6 @@ class _LyricsViewState extends State<LyricsView>
         );
       }
     });
-
-    
-
   }
 
   @override
@@ -386,5 +382,4 @@ class _LyricsViewState extends State<LyricsView>
       ),
     );
   }
-
 }

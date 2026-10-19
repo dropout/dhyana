@@ -84,20 +84,16 @@ class _AddChantSheetState extends State<AddChantSheet> {
   }
 
   Widget buildChantsAvailableState(BuildContext context) {
-    
     return InsetSurface(
       padding: EdgeInsets.zero,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
         child: ListView.builder(
-          padding: EdgeInsets.symmetric(
-            vertical: DesignSpec.paddingMd,
-          ),
+          padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingMd),
           itemCount: widget.availableChants.length,
           itemBuilder: (context, index) {
             final chant = widget.availableChants[index];
-            final paddingBottom =
-                index != widget.availableChants.length - 1;
+            final paddingBottom = index != widget.availableChants.length - 1;
             return Padding(
               padding: EdgeInsets.only(
                 bottom: paddingBottom ? DesignSpec.paddingSm : 0.0,
@@ -110,7 +106,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
           },
         ),
       ),
-    );    
+    );
   }
 }
 
@@ -163,8 +159,12 @@ class _AddChantButtonState extends State<_AddChantButton> {
           ),
           label: Text(
             _showCheckIcon
-                ? ChantingLocalizations.of(context).chantingAddChantListItemAddedAction.toUpperCase()
-                : ChantingLocalizations.of(context).chantingAddChantListItemAddAction.toUpperCase(),
+                ? ChantingLocalizations.of(context)
+                      .chantingAddChantListItemAddedAction
+                      .toUpperCase()
+                : ChantingLocalizations.of(context)
+                      .chantingAddChantListItemAddAction
+                      .toUpperCase(),
             style: context.theme.textTheme.labelSmall!.copyWith(
               color: _showCheckIcon ? Colors.white : Colors.black,
               fontWeight: FontWeight.bold,

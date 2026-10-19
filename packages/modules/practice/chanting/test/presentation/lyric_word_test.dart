@@ -1,6 +1,6 @@
 import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
+import 'package:chanting/src/presentation/view/player/lyric_text_style.dart';
 import 'package:chanting/src/presentation/view/player/lyric_word.dart';
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,70 +11,65 @@ void main() {
     end: Duration(seconds: 3),
   );
 
-  test('color follows playback position through word transitions', () {
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: word,
-        position: const Duration(milliseconds: 999),
-      ),
-      Colors.grey.shade200,
-    );
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: word,
-        position: const Duration(seconds: 1, milliseconds: 125),
-      ),
-      Color.lerp(Colors.grey.shade200, AppColors.gold, 0.5),
-    );
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: word,
-        position: const Duration(seconds: 2),
-      ),
-      AppColors.gold,
-    );
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: word,
-        position: const Duration(seconds: 2, milliseconds: 875),
-      ),
-      Color.lerp(AppColors.gold, Colors.grey.shade600, 0.5),
-    );
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: word,
-        position: const Duration(seconds: 3),
-      ),
-      Colors.grey.shade600,
-    );
+  test('phase follows playback position', () {
+    LyricWordPhase at(Duration p) =>
+        LyricWordWidget.phaseAtPosition(word: word, position: p);
+    expect(at(const Duration(milliseconds: 999)), LyricWordPhase.pending);
+    expect(at(const Duration(seconds: 1)), LyricWordPhase.active);
+    expect(at(const Duration(seconds: 3)), LyricWordPhase.sung);
   });
 
-  test('short words fade in and out within their own duration', () {
-    final shortWord = word.copyWith(
-      start: Duration.zero,
-      end: const Duration(milliseconds: 100),
+  Future<void> pump(WidgetTester tester, Duration position) =>
+      tester.pumpWidget(
+        MaterialApp(
+          home: LyricTextStyle(
+            style: const TextStyle(fontSize: 20),
+            child: LyricWordWidget(word: word, position: position),
+          ),
+        ),
+      );
+
+  Color? colorOf(WidgetTester tester) =>
+      tester.widget<Text>(find.text('word')).style!.color;
+
+  testWidgets('animates to the new phase color and ends on it', (tester) async {
+    await pump(tester, Duration.zero);
+    final pending = LyricWordWidget.colorOf(LyricWordPhase.pending);
+    final active = LyricWordWidget.colorOf(LyricWordPhase.active);
+    expect(colorOf(tester), pending);
+
+    await pump(tester, const Duration(seconds: 2));
+    await tester.pump(LyricWordWidget.fadeDuration ~/ 2);
+    expect(colorOf(tester), isNot(pending));
+    expect(colorOf(tester), isNot(active));
+
+    await tester.pump(LyricWordWidget.fadeDuration);
+    expect(colorOf(tester), active);
+  });
+
+  testWidgets('sung fade is longer than the active fade', (tester) async {
+    await pump(tester, const Duration(seconds: 2));
+    await pump(tester, const Duration(seconds: 4));
+
+    await tester.pump(LyricWordWidget.fadeDuration);
+    expect(
+      colorOf(tester),
+      isNot(LyricWordWidget.colorOf(LyricWordPhase.sung)),
     );
 
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: shortWord,
-        position: const Duration(milliseconds: 25),
-      ),
-      Color.lerp(Colors.grey.shade200, AppColors.gold, 0.5),
-    );
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: shortWord,
-        position: const Duration(milliseconds: 50),
-      ),
-      AppColors.gold,
-    );
-    expect(
-      LyricWordWidget.colorAtPosition(
-        word: shortWord,
-        position: const Duration(milliseconds: 75),
-      ),
-      Color.lerp(AppColors.gold, Colors.grey.shade600, 0.5),
-    );
+    await tester.pump(LyricWordWidget.sungFadeDuration);
+    expect(colorOf(tester), LyricWordWidget.colorOf(LyricWordPhase.sung));
+  });
+
+  testWidgets('interrupted fade restarts from the on-screen color', (
+    tester,
+  ) async {
+    await pump(tester, Duration.zero);
+    await pump(tester, const Duration(seconds: 2));
+    await tester.pump(LyricWordWidget.fadeDuration ~/ 2);
+    final mid = colorOf(tester);
+
+    await pump(tester, const Duration(seconds: 4));
+    expect(colorOf(tester), mid);
   });
 }

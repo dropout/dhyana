@@ -2,13 +2,13 @@ import 'package:core/core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-
 part 'chanting_settings_entity.freezed.dart';
 part 'chanting_settings_entity.g.dart';
 
 @freezed
-sealed class ChantingSettingsEntity with _$ChantingSettingsEntity implements SerializableEntity {
-
+sealed class ChantingSettingsEntity
+    with _$ChantingSettingsEntity
+    implements SerializableEntity {
   const ChantingSettingsEntity._();
 
   const factory ChantingSettingsEntity({
@@ -18,7 +18,5 @@ sealed class ChantingSettingsEntity with _$ChantingSettingsEntity implements Ser
   }) = _ChantingSettingsEntity;
 
   factory ChantingSettingsEntity.fromJson(Map<String, Object?> json) =>
-    _$ChantingSettingsEntityFromJson(json);
-
+      _$ChantingSettingsEntityFromJson(json);
 }
-

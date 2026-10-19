@@ -7,8 +7,7 @@ import 'package:chanting/src/domain/service/chanting_app_port.dart';
 import 'package:chanting/src/domain/service/chanting_audio_service.dart';
 import 'package:chanting/src/domain/usecase/cache_chants_use_case.dart';
 
-
-/// Use case for starting a chanting session, 
+/// Use case for starting a chanting session,
 /// which involves caching selected chants
 class StartChantingUseCase with LoggerMixin {
   final ChantRepository chantRepo;
@@ -47,8 +46,8 @@ class StartChantingUseCase with LoggerMixin {
 
     // Take the final results and prepare the audio service
     List<ChantLocalResourcesEntity> resources = cachingProgress.results
-      .map((r) => r.localResources)
-      .toList();
+        .map((r) => r.localResources)
+        .toList();
     await chantingAudioService.setup(resources);
     await chantingAudioService.play();
     _showPresence();

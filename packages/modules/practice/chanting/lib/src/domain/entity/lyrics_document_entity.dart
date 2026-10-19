@@ -9,14 +9,12 @@ part 'lyrics_document_entity.g.dart';
 /// Immutable lyrics document containing ordered lyric lines.
 @freezed
 sealed class LyricsDocumentEntity with _$LyricsDocumentEntity {
-
   const LyricsDocumentEntity._();
-  
-  const factory LyricsDocumentEntity({
-    required List<LyricsLineEntity> lines,
-  }) = _LyricsDocumentEntity;
 
-  /// Returns the exact [LyricsLineEntity] at the given [position], 
+  const factory LyricsDocumentEntity({required List<LyricsLineEntity> lines}) =
+      _LyricsDocumentEntity;
+
+  /// Returns the exact [LyricsLineEntity] at the given [position],
   /// or `null` if none.
   LyricsLineEntity? getExactLine(Duration position) {
     final index = getExactLineIndex(position);
@@ -24,7 +22,7 @@ sealed class LyricsDocumentEntity with _$LyricsDocumentEntity {
   }
 
   /// Returns the index of the exact line in [lines].
-  /// If the position falls between two lines returns -1 
+  /// If the position falls between two lines returns -1
   /// to indicate no exact line in the given position.
   int getExactLineIndex(Duration position) {
     for (var i = 0; i < lines.length; i++) {
@@ -59,5 +57,5 @@ sealed class LyricsDocumentEntity with _$LyricsDocumentEntity {
   }
 
   factory LyricsDocumentEntity.fromJson(Map<String, dynamic> json) =>
-    _$LyricsDocumentEntityFromJson(json);
+      _$LyricsDocumentEntityFromJson(json);
 }

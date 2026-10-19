@@ -18,7 +18,6 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
         'Invalid extra data for ChantingRoute. Expected ChantingSettings.',
       );
 
-
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     final chantingSettings = $extra as ChantingSettings;
@@ -31,12 +30,13 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
         chantingSettings: chantingSettings,
         key: state.pageKey,
       ),
-      transitionsBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-      ) {
+      transitionsBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
             return LinearGradientMaskTransition(
               progress: CurvedAnimation(
                 parent: animation,
@@ -47,7 +47,7 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
               ),
               child: child,
             );
-      },
+          },
     );
   }
 
@@ -63,13 +63,11 @@ class ChantingRoute extends GoRouteData with $ChantingRoute {
   //     );
   //   } catch (e) {
   //     return AppErrorDisplay(
-  //       onButtonTap: () => 
+  //       onButtonTap: () =>
   //         context.services.homeNavigator.navigateToHome(type: NavigationType.go),
   //     );
   //   }
   // }
 }
 
-final List<RouteBase> $chantingRoutes = [
-  $chantingRoute,
-];
+final List<RouteBase> $chantingRoutes = [$chantingRoute];

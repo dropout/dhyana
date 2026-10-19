@@ -7,40 +7,36 @@ import 'package:chanting/src/domain/entity/caching_progress_entity.dart';
 import 'package:chanting/src/domain/entity/chant_local_resources_entity.dart';
 import 'package:chanting/src/domain/entity/lyrics_document_entity.dart';
 
-
 part 'chanting_state_entity.freezed.dart';
 
 @freezed
 sealed class ChantingStateEntity with _$ChantingStateEntity {
-
   const ChantingStateEntity._();
 
   const factory ChantingStateEntity({
-
     // settings
     required ChantingSettings chantingSettings,
 
-    // loading    
+    // loading
     @Default(CachingProgressEntity()) CachingProgressEntity cachingProgress,
-    
+
     // playback
     @Default([]) List<ChantLocalResourcesEntity> chantResources,
     required PlaybackState playbackState,
     @Default(Duration.zero) Duration elapsedTime,
-    @Default(ProcessingState.processing) ProcessingState loadingState,  
+    @Default(ProcessingState.processing) ProcessingState loadingState,
     MediaItem? mediaItem,
     @Default(Duration.zero) Duration outputLatency,
-    
+
     // lyrics
     @Default(0) int activeLineIndex,
     @Default(ProcessingState.processing) ProcessingState lyricsLoadingState,
     LyricsDocumentEntity? lyricsDocument,
-    
+
     // session data
     DateTime? startTime,
     DateTime? endTime,
     @Default(Duration.zero) Duration elapsedSessionTime,
-
   }) = _ChantingStateEntity;
 
   int get currentIndex => playbackState.queueIndex ?? 0;
@@ -49,7 +45,10 @@ sealed class ChantingStateEntity with _$ChantingStateEntity {
     final compensated = position - outputLatency;
     return compensated.isNegative ? Duration.zero : compensated;
   }
-  Duration get currentTrackDuration => mediaItem?.duration ?? Duration.zero;
-  Duration get sessionDuration => chantingSettings.selectedChants.fold(Duration.zero, (total, chant) => total + chant.duration);
 
+  Duration get currentTrackDuration => mediaItem?.duration ?? Duration.zero;
+  Duration get sessionDuration => chantingSettings.selectedChants.fold(
+    Duration.zero,
+    (total, chant) => total + chant.duration,
+  );
 }

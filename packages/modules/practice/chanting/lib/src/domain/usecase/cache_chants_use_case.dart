@@ -10,10 +10,9 @@ import 'package:chanting/src/domain/entity/chant_local_resources_entity.dart';
 import 'package:chanting/src/domain/repository/chant_cache_data_repository.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 
-/// Ensures the requested chants are cached locally, 
+/// Ensures the requested chants are cached locally,
 /// streaming progress as assets are downloaded.
 class CacheChantsUseCase with LoggerMixin {
-
   final ChantCacheRepository chantCacheRepo;
   final ChantCacheValidator chantCacheValidator;
   final ChantAssetDownloader chantAssetDownloader;
@@ -46,7 +45,9 @@ class CacheChantsUseCase with LoggerMixin {
           'Chant with ID $contentId not found in available chants.',
         ),
       );
-      final localResource = await localResourceResolver.collectLocalResource(chant);
+      final localResource = await localResourceResolver.collectLocalResource(
+        chant,
+      );
       final validationResult = await chantCacheValidator.validateChantCache(
         chant,
         localResource.localResources,
@@ -88,7 +89,9 @@ class CacheChantsUseCase with LoggerMixin {
       final validationResult = invalidResult;
 
       // Get the download tasks for the invalid chant assets
-      final cachingResults = await chantAssetDownloader.cacheChantAssets(validationResult);
+      final cachingResults = await chantAssetDownloader.cacheChantAssets(
+        validationResult,
+      );
       downloadTasks.addAll(cachingResults.map((e) => e.downloadTask));
 
       // Validate the downloaded assets and update the cache entries in the database
@@ -149,15 +152,17 @@ class CacheChantsUseCase with LoggerMixin {
     List<String> chantIds,
     List<ChantCacheValidationResult> validationResults,
   ) async {
-    final results = <({ChantEntity chant, ChantLocalResourcesEntity localResources})>[];
+    final results =
+        <({ChantEntity chant, ChantLocalResourcesEntity localResources})>[];
     for (final chantId in chantIds) {
       final chant = validationResults
           .firstWhere((result) => result.chant.id == chantId)
           .chant;
       results.add((
         chant: chant,
-        localResources:
-            (await localResourceResolver.collectLocalResource(chant)).localResources,
+        localResources: (await localResourceResolver.collectLocalResource(
+          chant,
+        )).localResources,
       ));
     }
     return results;

@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
 
 enum SoLoudChantingAudioHandlerCustomAction { setup }
+
 enum SoLoudChantingAudioHandlerCustomEvent { playlistCompleted }
 
 /// Bridges the OS media session with audio playback using flutter_soloud.
@@ -34,11 +35,10 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     SoChantingAudioResourceManager? audioResourceManager,
     SoChantingPlaylistManager? playlistManager,
     SoChantingPlaybackReporter? playbackReporter,
-  })
-    : assert(
-        soloud.isInitialized,
-        'SoLoud instance must be initialized before creating the audio handler',
-      ) {
+  }) : assert(
+         soloud.isInitialized,
+         'SoLoud instance must be initialized before creating the audio handler',
+       ) {
     _audioResourceManager =
         audioResourceManager ??
         SoLoudSoChantingAudioResourceManager(soloud: soloud);
@@ -48,18 +48,19 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
           onCurrentIndexChanged: _audioResourceManager.invalidate,
         );
     _playbackReporter =
-      playbackReporter ??
-      SoLoudSoChantingPlaybackReporter(
-        playbackStateSink: playbackState.add,
-        positionProvider: () =>
-          _soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)
-          ? soloud.getPosition(_soundHandle!)
-          : Duration.zero,
-        playingProvider: () => _isPlaying,
-        queueIndexProvider: () => _playlistManager.currentIndex >= 0
-          ? _playlistManager.currentIndex
-          : null,
-      );
+        playbackReporter ??
+        SoLoudSoChantingPlaybackReporter(
+          playbackStateSink: playbackState.add,
+          positionProvider: () =>
+              _soundHandle != null &&
+                  soloud.getIsValidVoiceHandle(_soundHandle!)
+              ? soloud.getPosition(_soundHandle!)
+              : Duration.zero,
+          playingProvider: () => _isPlaying,
+          queueIndexProvider: () => _playlistManager.currentIndex >= 0
+              ? _playlistManager.currentIndex
+              : null,
+        );
   }
 
   @override
@@ -259,7 +260,7 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     _trackEndedSub = null;
     _soundHandle = null;
     _playbackReporter.stop();
-    
+
     try {
       await _playlistManager.skipToNext();
       _updateCurrentMediaItem();
@@ -313,5 +314,3 @@ class SoLoudChantingAudioHandler extends BaseAudioHandler {
     unawaited(_playlistManager.clear());
   }
 }
-
-

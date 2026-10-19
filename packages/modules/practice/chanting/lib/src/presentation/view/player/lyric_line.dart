@@ -15,7 +15,6 @@ class const LyricLine({
   required final ChantingStateEntity chantingState,
   super.key,
 }) extends StatelessWidget {
-
   /// Returns the text style used for rendering lyrics lines.
   /// This is used when rendering the text and calculating the line heights
   /// for the varied extent sliver.
@@ -30,7 +29,7 @@ class const LyricLine({
     horizontal: 24,
     vertical: 8,
   );
-  
+
   static final RegExp lineBreakPattern = RegExp(r'\\n|\r?\n');
 
   @override
@@ -68,10 +67,7 @@ class const LyricLine({
     return Padding(
       padding: linePadding,
       child: Text.rich(
-        TextSpan(
-          children: textSpans,
-          style: LyricTextStyle.of(context),
-        ),
+        TextSpan(children: textSpans, style: LyricTextStyle.of(context)),
       ),
     );
   }
@@ -100,5 +96,4 @@ class const LyricLine({
 
     return text.toString();
   }
-
 }

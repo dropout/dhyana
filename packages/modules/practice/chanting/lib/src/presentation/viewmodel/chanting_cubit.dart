@@ -16,7 +16,6 @@ import 'package:chanting/src/public/model/chanting_settings.dart';
 /// Cubit responsible for managing the state of the chanting player, including
 /// loading chants, controlling playback, and synchronizing lyrics display.
 class ChantingCubit({
-
   // Services
   required final SessionNavigator sessionNavigator,
   required final ChantingSettings chantingSettings,
@@ -28,21 +27,20 @@ class ChantingCubit({
   required final LoadLyricsUseCase loadLyricsUseCase,
   required final PlaybackStateChangeUseCase playbackStateChangeUseCase,
   required final CompleteChantingUseCase completeChantingUseCase,
-
 }) extends Cubit<ChantingStateEntity> with LoggerMixin {
-
   // Stream subscriptions for audio service events
   StreamSubscription<PlaybackState>? _playbackStateSub;
   StreamSubscription<MediaItem?>? _mediaItemSub;
   StreamSubscription? _playlistCompletedSub;
   StreamSubscription? _audioRouteChangeSub;
 
-  this : super(
-    ChantingStateEntity(
-      chantingSettings: chantingSettings,
-      playbackState: audioService.playbackState,
-    )
-  ) {
+  this
+    : super(
+        ChantingStateEntity(
+          chantingSettings: chantingSettings,
+          playbackState: audioService.playbackState,
+        ),
+      ) {
     _init();
   }
 
@@ -86,10 +84,14 @@ class ChantingCubit({
       late CachingProgressEntity cachingProgress;
       await for (final progress in prepared) {
         cachingProgress = progress;
-        emit(state.copyWith(
-          cachingProgress: cachingProgress,
-          chantResources: cachingProgress.results.map((r) => r.localResources).toList(),
-        ));
+        emit(
+          state.copyWith(
+            cachingProgress: cachingProgress,
+            chantResources: cachingProgress.results
+                .map((r) => r.localResources)
+                .toList(),
+          ),
+        );
       }
 
       emit(
@@ -128,9 +130,7 @@ class ChantingCubit({
         ),
       );
     } catch (e, st) {
-      emit(
-        state.copyWith(lyricsLoadingState: ProcessingState.error)
-      );
+      emit(state.copyWith(lyricsLoadingState: ProcessingState.error));
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -176,17 +176,14 @@ class ChantingCubit({
     );
   }
 
-  void _onMediaItemChanged(MediaItem? mediaItem) {  
+  void _onMediaItemChanged(MediaItem? mediaItem) {
     // Nothing to act on if the media item is null
     if (mediaItem == null) return;
 
     logger.t('Media item changed: ${mediaItem.title}');
-    
-    emit(state.copyWith(
-      mediaItem: mediaItem,
-      activeLineIndex: 0,
-    ));
-    _loadLyricsForChant(mediaItem.id);    
+
+    emit(state.copyWith(mediaItem: mediaItem, activeLineIndex: 0));
+    _loadLyricsForChant(mediaItem.id);
   }
 
   /// When using a Bluetooth headset, we need to account for the output latency
@@ -233,7 +230,7 @@ class ChantingCubit({
   Future<void> next() => audioService.next();
 
   @override
-  Future<void> close() {    
+  Future<void> close() {
     // Cancel all subscriptions
     _playbackStateSub?.cancel();
     _playlistCompletedSub?.cancel();

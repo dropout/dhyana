@@ -11,5 +11,4 @@ extension CachedAssetTypePathExtension on CachedAssetType {
         return 'cover.jpg';
     }
   }
-
 }

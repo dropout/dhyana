@@ -45,7 +45,7 @@ class ChantCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding:  EdgeInsets.only(
+              padding: EdgeInsets.only(
                 left: DesignSpec.paddingLg,
                 right: trailing == null ? DesignSpec.paddingLg : 0,
               ),

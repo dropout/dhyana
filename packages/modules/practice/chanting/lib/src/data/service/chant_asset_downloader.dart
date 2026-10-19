@@ -14,7 +14,6 @@ import 'package:firebase_provider/firebase_provider.dart';
 
 /// Downloads a single chant asset and keeps its cache entry in sync with the download state.
 class ChantAssetDownloader with LoggerMixin {
-
   final ChantCacheRepository chantCacheRepo;
   final ChantCacheFileSystem chantCacheFileSystem;
   final StorageDataProvider storageDataProvider;
@@ -109,7 +108,9 @@ class ChantAssetDownloader with LoggerMixin {
         destinationPath: destinationPath,
       );
 
-      logger.t('Starting downloading chant asset $storagePath to $destinationPath');
+      logger.t(
+        'Starting downloading chant asset $storagePath to $destinationPath',
+      );
 
       // Listen to the download task's snapshot events to log progress and handle errors
       downloadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
@@ -190,9 +191,11 @@ class ChantAssetDownloader with LoggerMixin {
     String destinationPath,
     ChantCacheEntryRow pendingEntry,
   ) async {
-    await task.whenComplete(() => logger.t(
-      'Validating download for chant ${chant.id} - ${pendingEntry.assetType} at $destinationPath',
-    ));
+    await task.whenComplete(
+      () => logger.t(
+        'Validating download for chant ${chant.id} - ${pendingEntry.assetType} at $destinationPath',
+      ),
+    );
 
     final remoteHash = validationResult.chant.metaData.getHash(
       CachedAssetType.values.byName(pendingEntry.assetType),

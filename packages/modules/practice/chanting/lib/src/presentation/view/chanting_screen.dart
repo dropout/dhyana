@@ -28,5 +28,4 @@ class ChantingScreen extends StatelessWidget {
       ),
     );
   }
-
 }

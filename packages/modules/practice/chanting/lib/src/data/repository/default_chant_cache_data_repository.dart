@@ -7,14 +7,13 @@ import 'package:chanting/src/data/service/chant_cache_file_system.dart';
 import 'package:chanting/src/domain/repository/chant_cache_data_repository.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 
-class DefaultChantCacheDataRepository 
-  with LoggerMixin 
-  implements ChantCacheRepository {
-
+class DefaultChantCacheDataRepository
+    with LoggerMixin
+    implements ChantCacheRepository {
   final ChantCacheDataProvider chantCacheDataProvider;
   final StorageDataProvider storageDataProvider;
   final ChantCacheFileSystem chantCacheFileSystem;
-  
+
   DefaultChantCacheDataRepository({
     required this.chantCacheDataProvider,
     required this.storageDataProvider,
@@ -48,16 +47,15 @@ class DefaultChantCacheDataRepository
 
   @override
   Future<void> deleteEntry(String contentId, CachedAssetType type) async =>
-    await chantCacheDataProvider.deleteEntry(contentId, type);
+      await chantCacheDataProvider.deleteEntry(contentId, type);
 
   @override
   Future<void> deleteAllEntries() async =>
-    await chantCacheDataProvider.deleteAllEntries();
-
+      await chantCacheDataProvider.deleteAllEntries();
 
   @override
   Future<void> ensureCacheDirectories() async =>
-    chantCacheFileSystem.ensureCacheDirectories();
+      chantCacheFileSystem.ensureCacheDirectories();
 
   @override
   Future<String> buildCacheFilePath({

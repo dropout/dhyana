@@ -4,7 +4,6 @@ import 'package:chanting/src/domain/entity/chant_local_resources_entity.dart';
 
 /// Maps chants to their expected local cache file paths.
 class ChantLocalResourceResolver {
-
   final ChantCacheFileSystem chantCacheFileSystem;
 
   ChantLocalResourceResolver({required this.chantCacheFileSystem});

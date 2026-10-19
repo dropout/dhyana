@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:audio_service/audio_service.dart';
 import 'package:chanting/src/public/model/chant_local_resources.dart';
 
-
 typedef SoChantingPlaylistIndexChanged = Future<void> Function();
 
 class SoChantingPlaylistEntry {
@@ -17,7 +16,7 @@ class SoChantingPlaylistEntry {
 }
 
 /// Manages a playlist of chanting audio tracks for playback.
-/// 
+///
 class SoChantingPlaylistManager {
   final SoChantingPlaylistIndexChanged? onCurrentIndexChanged;
 

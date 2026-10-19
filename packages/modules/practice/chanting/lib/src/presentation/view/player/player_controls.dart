@@ -7,7 +7,6 @@ import 'package:material_ui/material_ui.dart';
 /// Shows the current position and total duration of the chant, and allows
 /// users to play/pause, skip tracks, and open the playlist.
 class PlayerControls extends StatelessWidget {
-
   static const double iconSize = 32.0;
 
   /// Creates a [PlayerControls] widget.

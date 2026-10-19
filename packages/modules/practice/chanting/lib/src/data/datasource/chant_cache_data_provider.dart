@@ -5,7 +5,7 @@ import 'package:chanting/src/drift/chant_cache_database.dart';
 abstract interface class ChantCacheDataProvider {
   Future<ChantCacheEntryRow?> readEntry(String contentId, CachedAssetType type);
   Future<void> upsertEntry(ChantCacheEntryRow row);
-  
+
   Future<void> markState({
     required String contentId,
     required CachedAssetType assetType,

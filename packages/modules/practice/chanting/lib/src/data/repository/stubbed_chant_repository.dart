@@ -47,7 +47,7 @@ class StubbedChantRepository implements ChantRepository {
           lyricsBytes: 512 * (5 + index),
           coverBytes: 256 * (5 + index),
           updatedAt: DateTime.now().subtract(Duration(days: index)),
-        )
+        ),
       );
     });
   }
@@ -97,4 +97,3 @@ class StubbedChantRepository implements ChantRepository {
     throw UnimplementedError();
   }
 }
-

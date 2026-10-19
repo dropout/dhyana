@@ -6,7 +6,9 @@ part 'chant_metadata_entity.freezed.dart';
 part 'chant_metadata_entity.g.dart';
 
 @freezed
-sealed class ChantMetaDataEntity with _$ChantMetaDataEntity implements SerializableEntity {
+sealed class ChantMetaDataEntity
+    with _$ChantMetaDataEntity
+    implements SerializableEntity {
   const ChantMetaDataEntity._();
 
   const factory ChantMetaDataEntity({
@@ -24,7 +26,7 @@ sealed class ChantMetaDataEntity with _$ChantMetaDataEntity implements Serializa
   }) = _ChantMetaDataEntity;
 
   factory ChantMetaDataEntity.fromJson(Map<String, Object?> json) =>
-    _$ChantMetaDataEntityFromJson(json);
+      _$ChantMetaDataEntityFromJson(json);
 
   String getStoragePath(CachedAssetType type) {
     switch (type) {
@@ -69,5 +71,4 @@ sealed class ChantMetaDataEntity with _$ChantMetaDataEntity implements Serializa
         return coverBytes;
     }
   }
-
 }

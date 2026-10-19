@@ -1,5 +1,6 @@
 import 'package:assa_parser/assa_parser.dart';
 import 'package:chanting/src/domain/entity/lyrics_document_entity.dart';
+
 import 'dart:io';
 import 'dart:convert';
 
@@ -8,7 +9,7 @@ import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 
 class LyricsService {
   final AssaParser _assaParser = AssaParser();
-  
+
   Future<LyricsDocumentEntity> loadLyrics(String lyricsResourceUrl) async {
     if (_isRemoteUrl(lyricsResourceUrl)) {
       return _loadLyricsFromRemote(lyricsResourceUrl);
@@ -17,7 +18,9 @@ class LyricsService {
     return _loadLyricsFromLocalFile(lyricsResourceUrl);
   }
 
-  Future<LyricsDocumentEntity> _loadLyricsFromRemote(String lyricsResourceUrl) async {
+  Future<LyricsDocumentEntity> _loadLyricsFromRemote(
+    String lyricsResourceUrl,
+  ) async {
     final HttpClient httpClient = HttpClient();
     final HttpClientRequest request = await httpClient.getUrl(
       Uri.parse(lyricsResourceUrl),
@@ -72,5 +75,4 @@ class LyricsService {
 
     return LyricsDocumentEntity(lines: lines);
   }
-
 }

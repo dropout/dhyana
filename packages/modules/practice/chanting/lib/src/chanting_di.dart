@@ -122,9 +122,7 @@ extension ChantingModuleDependencyInjection on GetIt {
     registerFactory<PlaybackStateChangeUseCase>(
       () => PlaybackStateChangeUseCase(),
     );
-    registerFactory<CompleteChantingUseCase>(
-      () => CompleteChantingUseCase(),
-    );
+    registerFactory<CompleteChantingUseCase>(() => CompleteChantingUseCase());
 
     // ViewModels
     registerFactory<ChantingSettingsCubit>(
