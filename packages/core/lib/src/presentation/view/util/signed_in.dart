@@ -23,7 +23,15 @@ class SignedIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthStateCubit? cubit;
+    try {
+      cubit = context.read<AuthStateCubit>();
+    } on ProviderNotFoundException {
+      return no;
+    }
+
     return BlocBuilder<AuthStateCubit, AuthState>(
+      bloc: cubit,
       builder: (context, state) {
         switch (state) {
           case AuthStateSignedIn():
