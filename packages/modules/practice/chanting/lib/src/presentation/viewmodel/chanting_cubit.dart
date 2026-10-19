@@ -173,6 +173,10 @@ class ChantingCubit({
       endTime: state.endTime ?? DateTime.now(),
       duration: state.elapsedSessionTime,
       sessionType: .chanting,
+      // destroys current view, 
+      // ensures screen dispose is called and wakelock disabled
+      // doesnt make sense to go back to chantingview after finish
+      navigationType: .go, 
     );
   }
 
