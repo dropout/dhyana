@@ -108,8 +108,7 @@ class ChantingSettingsView extends StatelessWidget {
   Widget buildLoaded(BuildContext context, ChantingSettingsState state) {
     return SafeArea(
       child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: .center,
         children: [
           Gap.medium(),
           Text(
@@ -117,30 +116,33 @@ class ChantingSettingsView extends StatelessWidget {
             style: context.theme.textTheme.headlineLarge!.copyWith(
               fontWeight: FontWeight.w800,
             ),
-          ),
+          ).reveal(1),
           Gap.medium(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: DesignSpec.paddingLg,
-                right: DesignSpec.paddingLg,
-              ),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: DesignSpec.maxContentWidth,
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: DesignSpec.maxContentWidth, 
+              maxHeight: 500,
+            ),
+            child: Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: DesignSpec.paddingLg,
+                  right: DesignSpec.paddingLg,
                 ),
                 child: ChantList(
                   chants: state.playlist,
                   onAddChant: () =>
-                      _triggerAddChantSheet(context, availableChants),
+                    _triggerAddChantSheet(context, availableChants),
                   onChantRemoved: (chant, index) =>
-                      _onChantRemoved(context, chant, index),
+                    _onChantRemoved(context, chant, index),
                   onReorder: (oldIndex, newIndex) =>
-                      _onReorderSelectedChants(context, oldIndex, newIndex),
+                    _onReorderSelectedChants(context, oldIndex, newIndex),
                 ),
               ),
             ),
           ),
+
+          // Total duration display
           if (state.playlist.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(
@@ -157,20 +159,46 @@ class ChantingSettingsView extends StatelessWidget {
                     style: context.theme.textTheme.labelMedium!.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
-                  ),
+                  ).reveal(state.playlist.length + 3),
                 ],
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
-            child: SessionStartButton(
-              onTap: () => _onStart(context),
-              colorA: AppColors.crimsonRed,
-              colorB: Color(0xFFD93838), // Crimson Red Tint 3
-            ),
+
+          _StartButtonRow(
+            onStartButtonTap: () => _onStart(context),
+          ).reveal((state.playlist.isNotEmpty)
+            ? 4 + state.playlist.length
+            : 4, // from chantlist empty view
           ),
         ],
       ),
+    );
+  }
+}
+
+class const _StartButtonRow({
+  required final VoidCallback onStartButtonTap,
+}) extends StatelessWidget {
+    
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Align(
+            alignment: .centerRight,
+            child: DeviceVolumeIndicator(),
+          ),
+        ).reveal(6),
+        Gap.medium(),
+        SessionStartButton(
+          onTap: onStartButtonTap,
+          colorA: AppColors.crimsonRed,
+          colorB: Color(0xFFD93838), // Crimson Red Tint 3
+        ),
+        Gap.medium(),
+        Spacer(),
+      ],
     );
   }
 }

@@ -10,5 +10,7 @@
   "chantingPlaylistSheetTitle": "Lejátszási lista",
   "chantingPlaylistBadgePlaying": "Lejátszás",
   "chantingPlaylistBadgePaused": "Szünet",
+  "chantingPlaylistEmptyTitle": "A lejátszási lista üres.",
+  "chantingPlaylistEmptyDescription": "Koppints a + gombra, és adj énekeket a lejátszási listához.",
   "chantingPlayerLoading": "A munkamenet előkészítése..."
 }

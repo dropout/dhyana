@@ -127,7 +127,7 @@ class LoginSignedOutView extends StatelessWidget {
             bColor: Colors.black,
             fColor: AppColors.appWhite,
             onTap: () => _onLoginWithGoogleTap(context),
-          ).reveal(delay: Durations.long2 + letterDuration),
+          ).reveal(3),
           Gap.medium(),
           AppButton(
             key: const Key('login_with_apple_button'),
@@ -135,10 +135,10 @@ class LoginSignedOutView extends StatelessWidget {
             bColor: Colors.black,
             fColor: AppColors.appWhite,
             onTap: () => _onLoginWithAppleTap(context),
-          ).reveal(delay: Durations.long2 + letterDuration * 2),
+          ).reveal(4),
           Gap.medium(),
           buildEmailAndPasswordButton(context)
-              .reveal(delay: Durations.long2 + letterDuration * 3),
+              .reveal(5),
         ],
       ),
     );
@@ -196,6 +196,6 @@ class LoginSignedOutView extends StatelessWidget {
           ],
         ),
       ),
-    ).reveal(delay: Durations.long2 + letterDuration * 3);
+    ).reveal(6);
   }
 }

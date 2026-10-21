@@ -8,5 +8,4 @@ export 'src/public/view/home_screen_appbar.dart';
 export 'src/public/view/home_screen.dart';
 export 'src/public/view/session_type_toggle.dart';
 export 'src/public/view/today.dart';
-export 'src/public/view/volume_indicator.dart';
 export 'src/public/viewmodel/home_screen_cubit.dart';

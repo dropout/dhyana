@@ -29,9 +29,8 @@ dependencies:
   timer: ^0.0.1
   chanting: ^0.0.1
 
+  intl: ^0.20.3
 
-  intl: any
-  flutter_volume_listener: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

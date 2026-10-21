@@ -74,19 +74,9 @@ class TimerSettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Gap.medium(),
-          Text(
-            TimerLocalizations.of(context).timerTitle,
-            style: context.theme.textTheme.headlineLarge!.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          Expanded(child: buildInputs(context)),
-          buildStartButton(context),
-        ],
+        mainAxisSize: .max,
+        mainAxisAlignment: .center,
+        children: [buildInputs(context)],
       ),
     );
   }
@@ -98,24 +88,40 @@ class TimerSettingsView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          buildLabel(context, TimerLocalizations.of(context).inputWarmupLabel),
+          Text(
+            TimerLocalizations.of(context).timerTitle,
+            style: context.theme.textTheme.headlineLarge!.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ).reveal(0),
+          Gap.large(),
+          buildLabel(
+            context,
+            TimerLocalizations.of(context).inputWarmupLabel,
+          ).reveal(1),
           WarmupInput(
             label: TimerLocalizations.of(context).inputWarmupLabel,
             value: timerSettings.warmup,
             overlayService: context.services.overlayService,
             onChange: (Duration duration) => _onWarmupChange(context, duration),
-          ),
+          ).reveal(1),
           buildInputGap(context),
-          buildLabel(context, TimerLocalizations.of(context).inputStartingSoundLabel),
+          buildLabel(
+            context,
+            TimerLocalizations.of(context).inputStartingSoundLabel,
+          ).reveal(2),
           SoundInput(
             label: TimerLocalizations.of(context).inputStartingSoundLabel,
             overlayService: context.services.overlayService,
             value: timerSettings.startingSound,
             onChange: (Sound startingSound) =>
                 _onStartingSoundChange(context, startingSound),
-          ),
+          ).reveal(2),
           buildInputGap(context),
-          buildLabel(context, TimerLocalizations.of(context).inputDurationLabel),
+          buildLabel(
+            context,
+            TimerLocalizations.of(context).inputDurationLabel,
+          ).reveal(3),
           DurationInput(
             label: TimerLocalizations.of(context).inputDurationLabel,
             value: timerSettings.duration,
@@ -123,24 +129,34 @@ class TimerSettingsView extends StatelessWidget {
             overlayService: context.services.overlayService,
             onChange: (Duration duration) =>
                 _onDurationChange(context, duration),
-          ),
+          ).reveal(3),
           buildInputGap(context),
-          buildLabel(context, TimerLocalizations.of(context).inputIntervalCountLabel),
+          buildLabel(
+            context,
+            TimerLocalizations.of(context).inputIntervalCountLabel,
+          ).reveal(4),
           IntervalInput(
             label: TimerLocalizations.of(context).inputIntervalCountLabel,
             value: timerSettings.intervalCount,
             overlayService: context.services.overlayService,
             onChange: (int intervalCount) =>
                 _onIntervalCountChange(context, intervalCount),
-          ),
+          ).reveal(4),
           buildInputGap(context),
-          buildLabel(context, TimerLocalizations.of(context).inputEndingSoundLabel),
+          buildLabel(
+            context,
+            TimerLocalizations.of(context).inputEndingSoundLabel,
+          ).reveal(5),
           SoundInput(
             label: TimerLocalizations.of(context).inputEndingSoundLabel,
             overlayService: context.services.overlayService,
             value: timerSettings.endingSound,
             onChange: (Sound endingSound) =>
                 _onEndingSoundChange(context, endingSound),
+          ).reveal(5),
+          Gap.xxl(),          
+          _StartButtonRow(
+            onStartButtonTap: () => _onStartButtonTap(context),
           ),
         ],
       ),
@@ -148,32 +164,68 @@ class TimerSettingsView extends StatelessWidget {
   }
 
   Widget buildStartButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
-      child: SessionStartButton(
-        onTap: () => _onStartButtonTap(context),
-        colorA: AppColors.crimsonRed,
-        colorB: Color(0xFFD93838), // Crimson Red Tint 3
-      ),
-    );
+    return SessionStartButton(
+      onTap: () => _onStartButtonTap(context),
+      colorA: AppColors.crimsonRed,
+      colorB: Color(0xFFD93838), // Crimson Red Tint 3
+    ).reveal(6);
   }
 
   Widget buildInputGap(BuildContext context) =>
-    Gap.flexible(size: DesignSpec.spacingLg);
+      Gap.flexible(size: DesignSpec.spacingLg);
 
-  Widget buildLabel(BuildContext context, String label) =>
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label.toUpperCase(),
-          style: context.theme.textTheme.labelMedium?.copyWith(
-            fontWeight: FontWeight.w900,
-            color: AppColors.charcoal,
-          ),
+  Widget buildLabel(BuildContext context, String label) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        label.toUpperCase(),
+        style: context.theme.textTheme.labelMedium?.copyWith(
+          fontWeight: FontWeight.w900,
+          color: AppColors.charcoal,
         ),
-        Gap.xs(),
+      ),
+      Gap.xs(),
+    ],
+  );
+}
+
+class const _StartButtonRow({
+  required final VoidCallback onStartButtonTap,
+}) extends StatelessWidget {
+    
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Align(
+            alignment: .centerRight,
+            child: DeviceVolumeIndicator(),
+          ),
+        ).reveal(6),
+        Gap.medium(),
+        SessionStartButton(
+          onTap: onStartButtonTap,
+          colorA: AppColors.crimsonRed,
+          colorB: Color(0xFFD93838), // Crimson Red Tint 3
+        ).reveal(6),
+        Gap.medium(),
+        SignedIn(
+          yes: (context, userId) {
+            return Expanded(
+              child: Align(
+                alignment: .centerLeft,
+                child: SizedBox(
+                  width: 80,
+                  height: 56,
+                  child: TimerSettingsHistoryButton(profileId: userId),
+                ).reveal(6),
+              ),
+            );
+          },
+          no: Spacer(),        
+        ),
       ],
     );
-
+  }
 }

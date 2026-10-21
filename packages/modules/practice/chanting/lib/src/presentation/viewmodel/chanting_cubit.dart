@@ -97,15 +97,13 @@ class ChantingCubit({
       emit(
         state.copyWith(
           loadingState: .completed,
-          // cachingProgress: cachingProgress,
-          // chantResources: resources,
           startTime: DateTime.now(),
         ),
       );
 
       // logger.t('Chanting setup complete with ${resources.length} chants');
     } catch (e, st) {
-      emit(state.copyWith(loadingState: .error));
+      if (!isClosed) emit(state.copyWith(loadingState: .error));      
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,

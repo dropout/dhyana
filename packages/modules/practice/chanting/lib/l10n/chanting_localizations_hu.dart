@@ -52,5 +52,12 @@ class ChantingLocalizationsHu extends ChantingLocalizations {
   String get chantingPlaylistBadgePaused => 'Szünet';
 
   @override
+  String get chantingPlaylistEmptyTitle => 'A lejátszási lista üres.';
+
+  @override
+  String get chantingPlaylistEmptyDescription =>
+      'Koppints a + gombra, és adj énekeket a lejátszási listához.';
+
+  @override
   String get chantingPlayerLoading => 'A munkamenet előkészítése...';
 }

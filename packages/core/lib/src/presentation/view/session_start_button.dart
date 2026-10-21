@@ -90,13 +90,14 @@ class _SessionStartButtonState extends State<SessionStartButton>
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSpec.spacingXl,
-              vertical: DesignSpec.spacingMd,
+              vertical: DesignSpec.paddingLg,
             ),
             child: Text(
               context.coreL10n.startTimerButtonText.toUpperCase(),
               style: context.theme.textTheme.titleLarge?.copyWith(
                 color: widget.textColor,
                 fontWeight: FontWeight.w900,
+                fontSize: 24,
               ),
             ),
           ),

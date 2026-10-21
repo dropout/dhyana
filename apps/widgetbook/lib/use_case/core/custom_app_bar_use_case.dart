@@ -17,7 +17,6 @@ Widget buildCustomAppBar(BuildContext context) {
     appBar: CustomAppBar(
       leading: showLeading ? Today(key: ValueKey(DateTime.now().toDayId())) : null,
       trailing: [
-        TrailingSlot(child: PresenceButton()),
         TrailingSlot(child: ProfileButton()),        
       ],
     ),

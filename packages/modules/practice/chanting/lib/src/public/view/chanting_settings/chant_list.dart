@@ -1,5 +1,6 @@
 import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
 import 'package:chanting/src/public/view/chanting_settings/add_chant_button.dart';
+import 'package:chanting/l10n/chanting_localizations.dart';
 import 'package:core/core.dart';
 import 'package:chanting/src/public/model/chant_playlist_item.dart';
 import 'package:material_ui/material_ui.dart';
@@ -25,11 +26,27 @@ class ChantList extends StatelessWidget {
       return buildEmpty(context);
     }
 
-    return InsetSurface(
-      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
+    return ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (bounds) {
+        final fade = _fadeExtent / bounds.height;
+        return LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: const [
+            Colors.transparent,
+            Colors.black,
+            Colors.black,
+            Colors.transparent,
+          ],
+          stops: [0, fade, 1 - fade, 1],
+        ).createShader(bounds);
+      },
       child: buildList(context),
     );
   }
+
+  static const double _fadeExtent = 24;
 
   Widget buildList(BuildContext context) {
     return ReorderableListView.builder(
@@ -40,7 +57,7 @@ class ChantList extends StatelessWidget {
 
       footer: Padding(
         padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
-        child: Center(child: AddChantButton(onTap: onAddChant)),
+        child: Center(child: AddChantButton(onTap: onAddChant).reveal(chants.length + 2)),
       ),
       itemBuilder: (context, index) =>
           buildPlaylistItem(context, chants[index], index),
@@ -63,20 +80,22 @@ class ChantList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'No chants added yet.',
+            ChantingLocalizations.of(context).chantingPlaylistEmptyTitle,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge!
                 .copyWith(fontWeight: FontWeight.w800),
-          ),
+          ).reveal(2),
           Gap.small(),
           Text(
-            'Tap the + button to add chants to your session.',
+            ChantingLocalizations.of(
+              context,
+            ).chantingPlaylistEmptyDescription,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge!
                 .copyWith(fontWeight: FontWeight.w800),
-          ),
+          ).reveal(3),
           Gap.small(),
-          AddChantButton(onTap: onAddChant),
+          AddChantButton(onTap: onAddChant).reveal(4),
         ],
       ),
     );
@@ -122,6 +141,7 @@ class ChantList extends StatelessWidget {
           key: ValueKey(chant.id),
           index: index,
           chantViewModel: chant,
+          imageDimension: 80,
           trailing: SizedBox.square(
             dimension: 48,
             child: ReorderableDragStartListener(
@@ -132,7 +152,7 @@ class ChantList extends StatelessWidget {
                   : const SizedBox.shrink(),
             ),
           ),
-        ),
+        ).reveal(2 + index),
       ),
     );
   }
@@ -220,52 +240,3 @@ class _DynamicSlideActionIconState extends State<DynamicSlideActionIcon> {
     );
   }
 }
-
-// class DynamicSlideActionIcon extends StatelessWidget {
-//   const DynamicSlideActionIcon({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // 1. Grab the closest SlidableController from the context hierarchy
-//     final slidableController = Slidable.of(context);
-
-//     if (slidableController == null) {
-//       return const SizedBox.shrink();
-//     }
-
-//     // 2. Use AnimatedBuilder to rebuild your icon based on the slide amount
-//     return AnimatedBuilder(
-//       animation: slidableController.animation,
-//       builder: (context, child) {
-
-//         // goes from 0.0 (closed) to 0.25 (button visible)
-//         final slideValue = slidableController.animation.value;
-
-//         // value goes from 0.0 (closed) to 1.0
-//         final animationValue = slideValue.remapAndClamp(0.0, 0.25, 0.0, 1.0).toDouble();
-
-//         return Opacity(
-//           opacity: animationValue, // Fade in the icon as it slides
-//           child: Transform.scale(
-//             scale: animationValue, // Scale the icon up to 150% size
-//             child: Container(
-//               decoration: ShapeDecoration(
-//                 shape: RoundedSuperellipseBorder(
-//                   borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
-//                 ),
-//                 color: context.theme.colorScheme.error,
-//               ),
-//               alignment: Alignment.center,
-//               child: const Icon(
-//                 Icons.delete_forever,
-//                 color: Colors.white,
-//                 size: 28,
-
-//               ),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }

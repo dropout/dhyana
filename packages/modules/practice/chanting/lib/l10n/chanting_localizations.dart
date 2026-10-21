@@ -161,6 +161,18 @@ abstract class ChantingLocalizations {
   /// **'Paused'**
   String get chantingPlaylistBadgePaused;
 
+  /// No description provided for @chantingPlaylistEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The playlist is empty.'**
+  String get chantingPlaylistEmptyTitle;
+
+  /// No description provided for @chantingPlaylistEmptyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the + button to add chants to the playlist.'**
+  String get chantingPlaylistEmptyDescription;
+
   /// No description provided for @chantingPlayerLoading.
   ///
   /// In en, this message translates to:

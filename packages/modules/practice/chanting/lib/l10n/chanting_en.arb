@@ -10,5 +10,7 @@
   "chantingPlaylistSheetTitle": "Playlist",
   "chantingPlaylistBadgePlaying": "Playing",
   "chantingPlaylistBadgePaused": "Paused",
+  "chantingPlaylistEmptyTitle": "The playlist is empty.",
+  "chantingPlaylistEmptyDescription": "Tap the + button to add chants to the playlist.",
   "chantingPlayerLoading": "Preparing your session..."
 }

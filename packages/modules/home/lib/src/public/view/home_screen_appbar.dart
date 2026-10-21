@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home/src/public/enum/home_screen_view_state.dart';
+import 'package:home/src/public/view/session_type_toggle.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:core/core.dart';
@@ -9,10 +12,18 @@ import 'today.dart';
 /// Custom AppBar for the Home Screen to address layout and widget placement needs.
 /// It decorates the standard [CustomAppBar] with specific 
 /// leading and trailing widgets for the Home Screen.
-class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final HomeScreenState homeScreenState;
+class const HomeScreenAppbar({
+  required final HomeScreenState homeScreenState,
+  super.key,
+}) extends StatelessWidget implements PreferredSizeWidget {
 
-  const HomeScreenAppbar({required this.homeScreenState, super.key});
+
+  void _onSessionTypeChange(
+    BuildContext context,
+    HomeScreenViewState sessionType,
+  ) {
+    context.read<HomeScreenCubit>().setSessionType(sessionType);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +32,11 @@ class HomeScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
         return CustomAppBar(
           leading: Today(key: ValueKey(DateTime.now().toDayId())),
           trailing: [
-            TrailingSlot(child: PresenceButton()),
             TrailingSlot(
-              show: homeScreenState.sessionType == .sitting,
-              child: TimerSettingsHistoryButton(profileId: profileId),
+              child: SessionTypeToggle(
+                activeMode: homeScreenState.sessionType, 
+                onModeChanged: (HomeScreenViewState value) => _onSessionTypeChange(context, value),
+              )
             ),
             TrailingSlot(
               child: ProfileButton(

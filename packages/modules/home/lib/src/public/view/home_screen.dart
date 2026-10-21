@@ -9,28 +9,16 @@ import 'package:timer/timer.dart';
 import 'package:chanting/chanting.dart';
 
 import 'home_screen_appbar.dart';
-import 'home_screen_bottom_menu.dart';
 
 /// A screen that allows the user to configure and start
 /// a sitting or chanting session.
-class HomeScreen extends StatelessWidget {
-
-  final bool useShaderInSessionStartButton;
+class const HomeScreen({
+  final bool useShaderInSessionStartButton = true,
+  super.key,
+}) extends StatelessWidget {
 
   // No scrolling content yet, so the parchment texture stays static.
   static final ValueNotifier<double> _parchmentScrollOffset = ValueNotifier(0);
-
-  const HomeScreen({
-    this.useShaderInSessionStartButton = true,
-    super.key,
-  });
-
-  void _onSessionTypeChange(
-    BuildContext context,
-    HomeScreenViewState sessionType,
-  ) {
-    context.read<HomeScreenCubit>().setSessionType(sessionType);
-  }
 
   /// Builds the root widget tree for the home screen.
   @override
@@ -57,7 +45,10 @@ class HomeScreen extends StatelessWidget {
         seed: 0.0011 + DateTime.now().day.toDouble() / 10.0,
         child: Stack(
           fit: StackFit.expand,
-          children: [buildBody(context, state), buildBottomMenu(context, state)],
+          children: [
+            buildBody(context, state), 
+            // buildBottomMenu(context, state)
+          ],
         ),
       ),
     );
@@ -92,16 +83,6 @@ class HomeScreen extends StatelessWidget {
       },
     );
   }
-
-  /// Builds the bottom menu that allows the user to switch between
-  /// sitting and chanting session types.
-  Widget buildBottomMenu(BuildContext context, HomeScreenState state) =>
-      HomeScreenBottomMenu(
-        sessionType: state.sessionType,
-        onSessionTypeChange: (newType) {
-          _onSessionTypeChange(context, newType);
-        },
-      );
 
   /// Builds the sitting-session branch of the home screen.
   Widget buildTimerSettingsView(BuildContext context, HomeScreenState state) =>

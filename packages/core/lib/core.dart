@@ -119,6 +119,7 @@ export 'src/presentation/view/util/snackbar_helper.dart';
 export 'src/presentation/view/util/state_provider.dart';
 export 'src/presentation/view/util/title_effect.dart';
 export 'src/presentation/view/util/toast.dart';
+export 'src/presentation/view/util/volume_indicator.dart';
 export 'src/presentation/viewmodel/auth_state_cubit.dart';
 export 'src/presentation/viewmodel/remote_settings_cubit.dart';
 

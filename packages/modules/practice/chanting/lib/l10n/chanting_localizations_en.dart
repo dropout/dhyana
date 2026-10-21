@@ -52,5 +52,12 @@ class ChantingLocalizationsEn extends ChantingLocalizations {
   String get chantingPlaylistBadgePaused => 'Paused';
 
   @override
+  String get chantingPlaylistEmptyTitle => 'The playlist is empty.';
+
+  @override
+  String get chantingPlaylistEmptyDescription =>
+      'Tap the + button to add chants to the playlist.';
+
+  @override
   String get chantingPlayerLoading => 'Preparing your session...';
 }

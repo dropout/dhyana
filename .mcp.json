@@ -1,0 +1,26 @@
+{
+	"mcpServers": {
+		"dart": {
+			"type": "local",
+			"command": "dart",
+			"args": [
+				"mcp-server"
+			],
+			"tools": [
+				"*"
+			]
+		},
+		"firebase": {
+			"type": "local",
+			"command": "npx",
+			"args": [
+				"-y",
+				"firebase-tools@latest",
+				"experimental:mcp"
+			],
+			"tools": [
+				"*"
+			]
+		}
+	}
+}

@@ -13,7 +13,6 @@ import 'package:timer/timer.dart';
 
 import 'package:home/src/public/view/home_screen.dart';
 import 'package:home/src/public/view/home_screen_appbar.dart';
-import 'package:home/src/public/view/home_screen_bottom_menu.dart';
 import 'package:home/src/public/view/session_type_toggle.dart';
 import 'package:home/src/public/viewmodel/home_screen_cubit.dart';
 
@@ -113,7 +112,6 @@ void main() {
       expect(find.byType(HomeScreenAppbar), findsOneWidget);
       expect(find.byType(TimerSettingsView), findsOneWidget);
       expect(find.byType(TimerSettingsHistoryButton), findsNothing);
-      expect(find.byType(HomeScreenBottomMenu), findsOneWidget);
     });
 
     testWidgets('can display timer settings when signed in', (tester) async {
