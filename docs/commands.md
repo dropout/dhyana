@@ -32,3 +32,9 @@ If no build mode specified, use `debug`.
 - If build mode is not excplicitly specified use `debug` build mode.
 - App Bundle (Android): `flutter build appbundle --flavor <flavor> -t lib/main_<flavor>.dart --<build_mode>`
 - IPA (iOS): `build ipa --flavor <flavor> -t lib/main_<flavor>.dart --<build_mode>`
+
+## Distribution
+- iOS to Firebase App Distribution (`ios_testers`) + Crashlytics symbols: `bash support/maintenance_scripts/distribute_ios.sh <firebase_project> [--notes "<text>"] [--dry-run]`
+    - Example: `bash support/maintenance_scripts/distribute_ios.sh stepstones-staging`
+    - Requires a clean git tree; bumps only the build number in `apps/mobile_app/pubspec.yaml` and commits it after success.
+    - Currently only the `staging` flavor is supported.
