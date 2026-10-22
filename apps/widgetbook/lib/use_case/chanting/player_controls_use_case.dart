@@ -4,6 +4,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:chanting/chanting.dart';
 import 'package:chanting/src/domain/entity/chanting_state_entity.dart';
 import 'package:chanting/src/presentation/view/player/player_controls.dart';
+import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -41,19 +42,23 @@ Widget buildPlayerControls(BuildContext context) {
 
   return ColoredBox(
     color: Colors.black,
-    child: Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 520),
-        child: PlayerControls(
-          chantingState: state,
-          onNextPressed: () {},
-          onPlayPausePressed: () {},
-          onPreviousPressed: () {},
-          onPlaylistPressed: () {},
-          isNextEnabled: isNextEnabled,
-          isPreviousEnabled: isPreviousEnabled,
-          showProgressBar: showProgressBar,
-          showTime: showTime,
+    child: Align(
+      alignment: Alignment.bottomCenter,
+      child: SafeArea(
+        minimum: EdgeInsets.only(bottom: DesignSpec.spacingLg),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: DesignSpec.breakpointMd),
+          child: PlayerControls(
+            chantingState: state,
+            onNextPressed: () {},
+            onPlayPausePressed: () {},
+            onPreviousPressed: () {},
+            onPlaylistPressed: () {},
+            isNextEnabled: isNextEnabled,
+            isPreviousEnabled: isPreviousEnabled,
+            showProgressBar: showProgressBar,
+            showTime: showTime,
+          ),
         ),
       ),
     ),

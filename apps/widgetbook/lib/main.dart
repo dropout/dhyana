@@ -58,16 +58,16 @@ class WidgetbookApp extends StatelessWidget {
           IosViewports.iPhone13ProMax,
           // Breakpoint sm to md: 480 - 768
           ViewportData(
-            name: 'Custom 580x400',
-            width: 580,
-            height: 400,
+            name: 'Custom 520x800',
+            width: 520,
+            height: 800,
             pixelRatio: 1.0,
             platform: TargetPlatform.windows
           ),
           ViewportData(
-            name: 'Custom 640x360',
+            name: 'Custom 640x1024',
             width: 640,
-            height: 480,
+            height: 1024,
             pixelRatio: 1.0,
             platform: TargetPlatform.windows
           ),
