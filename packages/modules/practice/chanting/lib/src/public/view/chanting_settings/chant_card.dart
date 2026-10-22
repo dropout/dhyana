@@ -25,7 +25,7 @@ class const ChantCard({
             children: [
               SizedBox.square(
                 // dynamically sized based on available space
-                dimension: imageDimension ,
+                dimension: imageDimension,
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(DesignSpec.borderRadiusMd),

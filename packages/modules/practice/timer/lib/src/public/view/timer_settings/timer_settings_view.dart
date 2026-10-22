@@ -82,84 +82,81 @@ class TimerSettingsView extends StatelessWidget {
   }
 
   Widget buildInputs(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: DesignSpec.padding2Xl),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            TimerLocalizations.of(context).timerTitle,
-            style: context.theme.textTheme.headlineLarge!.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
-          ).reveal(0),
-          Gap.large(),
-          buildLabel(
-            context,
-            TimerLocalizations.of(context).inputWarmupLabel,
-          ).reveal(1),
-          WarmupInput(
-            label: TimerLocalizations.of(context).inputWarmupLabel,
-            value: timerSettings.warmup,
-            overlayService: context.services.overlayService,
-            onChange: (Duration duration) => _onWarmupChange(context, duration),
-          ).reveal(1),
-          buildInputGap(context),
-          buildLabel(
-            context,
-            TimerLocalizations.of(context).inputStartingSoundLabel,
-          ).reveal(2),
-          SoundInput(
-            label: TimerLocalizations.of(context).inputStartingSoundLabel,
-            overlayService: context.services.overlayService,
-            value: timerSettings.startingSound,
-            onChange: (Sound startingSound) =>
-                _onStartingSoundChange(context, startingSound),
-          ).reveal(2),
-          buildInputGap(context),
-          buildLabel(
-            context,
-            TimerLocalizations.of(context).inputDurationLabel,
-          ).reveal(3),
-          DurationInput(
-            label: TimerLocalizations.of(context).inputDurationLabel,
-            value: timerSettings.duration,
-            preparationTime: timerSettings.warmup,
-            overlayService: context.services.overlayService,
-            onChange: (Duration duration) =>
-                _onDurationChange(context, duration),
-          ).reveal(3),
-          buildInputGap(context),
-          buildLabel(
-            context,
-            TimerLocalizations.of(context).inputIntervalCountLabel,
-          ).reveal(4),
-          IntervalInput(
-            label: TimerLocalizations.of(context).inputIntervalCountLabel,
-            value: timerSettings.intervalCount,
-            overlayService: context.services.overlayService,
-            onChange: (int intervalCount) =>
-                _onIntervalCountChange(context, intervalCount),
-          ).reveal(4),
-          buildInputGap(context),
-          buildLabel(
-            context,
-            TimerLocalizations.of(context).inputEndingSoundLabel,
-          ).reveal(5),
-          SoundInput(
-            label: TimerLocalizations.of(context).inputEndingSoundLabel,
-            overlayService: context.services.overlayService,
-            value: timerSettings.endingSound,
-            onChange: (Sound endingSound) =>
-                _onEndingSoundChange(context, endingSound),
-          ).reveal(5),
-          Gap.xxl(),          
-          _StartButtonRow(
-            onStartButtonTap: () => _onStartButtonTap(context),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          TimerLocalizations.of(context).timerTitle,
+          style: context.theme.textTheme.headlineLarge!.copyWith(
+            fontWeight: FontWeight.w800,
           ),
-        ],
-      ),
+        ).reveal(0),
+        Gap.large(),
+        buildLabel(
+          context,
+          TimerLocalizations.of(context).inputWarmupLabel,
+        ).reveal(1),
+        WarmupInput(
+          label: TimerLocalizations.of(context).inputWarmupLabel,
+          value: timerSettings.warmup,
+          overlayService: context.services.overlayService,
+          onChange: (Duration duration) => _onWarmupChange(context, duration),
+        ).reveal(1),
+        buildInputGap(context),
+        buildLabel(
+          context,
+          TimerLocalizations.of(context).inputStartingSoundLabel,
+        ).reveal(2),
+        SoundInput(
+          label: TimerLocalizations.of(context).inputStartingSoundLabel,
+          overlayService: context.services.overlayService,
+          value: timerSettings.startingSound,
+          onChange: (Sound startingSound) =>
+              _onStartingSoundChange(context, startingSound),
+        ).reveal(2),
+        buildInputGap(context),
+        buildLabel(
+          context,
+          TimerLocalizations.of(context).inputDurationLabel,
+        ).reveal(3),
+        DurationInput(
+          label: TimerLocalizations.of(context).inputDurationLabel,
+          value: timerSettings.duration,
+          preparationTime: timerSettings.warmup,
+          overlayService: context.services.overlayService,
+          onChange: (Duration duration) =>
+              _onDurationChange(context, duration),
+        ).reveal(3),
+        buildInputGap(context),
+        buildLabel(
+          context,
+          TimerLocalizations.of(context).inputIntervalCountLabel,
+        ).reveal(4),
+        IntervalInput(
+          label: TimerLocalizations.of(context).inputIntervalCountLabel,
+          value: timerSettings.intervalCount,
+          overlayService: context.services.overlayService,
+          onChange: (int intervalCount) =>
+              _onIntervalCountChange(context, intervalCount),
+        ).reveal(4),
+        buildInputGap(context),
+        buildLabel(
+          context,
+          TimerLocalizations.of(context).inputEndingSoundLabel,
+        ).reveal(5),
+        SoundInput(
+          label: TimerLocalizations.of(context).inputEndingSoundLabel,
+          overlayService: context.services.overlayService,
+          value: timerSettings.endingSound,
+          onChange: (Sound endingSound) =>
+              _onEndingSoundChange(context, endingSound),
+        ).reveal(5),
+        Gap.xxl(),          
+        _StartButtonRow(
+          onStartButtonTap: () => _onStartButtonTap(context),
+        ),
+      ],
     );
   }
 

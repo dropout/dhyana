@@ -6,19 +6,14 @@ import 'package:chanting/src/public/model/chant_playlist_item.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class ChantList extends StatelessWidget {
-  final List<ChantPlaylistItem> chants;
-  final void Function(int oldIndex, int newIndex) onReorder;
-  final VoidCallback onAddChant;
-  final void Function(ChantPlaylistItem, int) onChantRemoved;
-
-  const ChantList({
-    required this.chants,
-    required this.onReorder,
-    required this.onAddChant,
-    required this.onChantRemoved,
-    super.key,
-  });
+class const ChantList({
+  required final List<ChantPlaylistItem> chants,
+  required final void Function(int oldIndex, int newIndex) onReorder,
+  required final VoidCallback onAddChant,
+  required final void Function(ChantPlaylistItem, int) onChantRemoved,
+  final double fadeExtent = 24.0,
+  super.key,
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +24,7 @@ class ChantList extends StatelessWidget {
     return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (bounds) {
-        final fade = _fadeExtent / bounds.height;
+        final fade = fadeExtent / bounds.height;
         return LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -45,8 +40,6 @@ class ChantList extends StatelessWidget {
       child: buildList(context),
     );
   }
-
-  static const double _fadeExtent = 24;
 
   Widget buildList(BuildContext context) {
     return ReorderableListView.builder(
