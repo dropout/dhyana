@@ -102,22 +102,23 @@ run firebase appdistribution:distribute "${IPA:-build/ios/ipa/app.ipa}" \
   --app "$APP_ID" --project "$PROJECT" \
   --groups "$TESTER_GROUP" --release-notes "$NOTES"
 
+# The build number is consumed once the upload succeeds, so keep and commit it.
+if [ "$DRY_RUN" -eq 0 ]; then
+  BUMPED=0
+  git -C "$REPO_ROOT" add "$PUBSPEC"
+  git -C "$REPO_ROOT" commit -m "chore: bump build number to $NEW_BUILD" \
+    -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+fi
+
 # Native dSYMs (SwiftPM checkout first, then CocoaPods).
 UPLOAD_SYMBOLS="$(ls -d "$HOME"/Library/Developer/Xcode/DerivedData/Runner-*/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols \
   "$APP_DIR"/ios/Pods/FirebaseCrashlytics/upload-symbols 2>/dev/null | head -1 || true)"
 if [ -z "$UPLOAD_SYMBOLS" ]; then
-  [ "$DRY_RUN" -eq 1 ] || { echo "Error: Crashlytics upload-symbols binary not found."; exit 1; }
+  [ "$DRY_RUN" -eq 1 ] || { echo "Error: Crashlytics upload-symbols binary not found (build $NEW_VERSION is already distributed and committed)."; exit 1; }
   UPLOAD_SYMBOLS="upload-symbols"
 fi
 run "$UPLOAD_SYMBOLS" -gsp "$PLIST" -p ios build/ios/archive/Runner.xcarchive/dSYMs
 
-# Dart (obfuscation) symbols.
-run firebase crashlytics:symbols:upload --app "$APP_ID" --project "$PROJECT" "$SYMBOLS_DIR"
-
-if [ "$DRY_RUN" -eq 0 ]; then
-  git -C "$REPO_ROOT" add "$PUBSPEC"
-  git -C "$REPO_ROOT" commit -m "chore: bump build number to $NEW_BUILD" \
-    -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
-  BUMPED=0
-fi
+# The Dart symbols file is covered by the App.framework dSYM above (same UUID);
+# crashlytics:symbols:upload cannot process iOS Mach-O symbol files.
 echo "Done: $NEW_VERSION distributed to $TESTER_GROUP."
