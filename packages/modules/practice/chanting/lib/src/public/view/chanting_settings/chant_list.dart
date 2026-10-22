@@ -43,7 +43,7 @@ class const ChantList({
 
   Widget buildList(BuildContext context) {
     return ReorderableListView.builder(
-      padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingMd),
+      padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
       buildDefaultDragHandles: false,
       itemCount: chants.length,
       onReorderItem: (oldIndex, newIndex) => onReorder(oldIndex, newIndex),

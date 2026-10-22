@@ -146,7 +146,7 @@ class ChantingSettingsView extends StatelessWidget {
               padding: const EdgeInsets.only(
                 left: DesignSpec.paddingXl,
                 right: DesignSpec.paddingXl,
-                top: DesignSpec.paddingXs,
+                top: DesignSpec.paddingXl,
                 bottom: DesignSpec.paddingXl,
               ),
               child: Row(
@@ -154,7 +154,7 @@ class ChantingSettingsView extends StatelessWidget {
                 children: [
                   Text(
                     '${getTotalDurationText(context, state)} ${ChantingLocalizations.of(context).statsTotal.toUpperCase()}',
-                    style: context.theme.textTheme.labelMedium!.copyWith(
+                    style: context.theme.textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
                   ).reveal(state.playlist.length + 3),
