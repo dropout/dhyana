@@ -25,18 +25,18 @@ const _lineDuration = Duration(seconds: 3);
 const _tick = Duration(milliseconds: 50);
 
 const _lyricsText = [
-  'Namo Avalokiteshvara',
-  'Great compassion mantra\nof a thousand eyes',
-  'May all beings be free\nfrom suffering',
-  'May all beings know joy',
-  'Om mani padme hum',
-  'Gate gate paragate',
-  'Parasamgate bodhi svaha',
-  'Form is emptiness',
-  'Emptiness is form',
-  'May the merit of this practice\nreach every being',
-  'Namo Amitabha Buddha',
-  'Peace in the heart,\npeace in the world',
+  'jong gu op jin-on',
+  'su-ri su-ri ma-ha-su-ri su-su-ri sa-ba-ha',
+  'su-ri su-ri ma-ha-su-ri su-su-ri sa-ba-ha',
+  'su-ri su-ri ma-ha-su-ri su-su-ri sa-ba-ha',
+  'o bang nae woe an wi je shin gods jin-on',
+  'na-mu sa-man-da mot-ta-nam om do-ro do-ro ji-mi sa-ba-ha',
+  'na-mu sa-man-da mot-ta-nam om do-ro do-ro ji-mi sa-ba-ha',
+  'na-mu sa-man-da mot-ta-nam om do-ro do-ro ji-mi sa-ba-ha',
+  'gae gyong gye',
+  'mu-sang shim-shim mi-myo bop',
+  'baek-chon-man gop nan jo-u',
+  'a gum mun gyon duk su ji'
 ];
 
 /// Splits each text into evenly timed words, one line after another.
@@ -75,7 +75,7 @@ final _totalDuration = _lineDuration * _lyricsText.length;
   path: '[Chanting]/internal/view/player/',
 )
 Widget buildLyricsView(BuildContext context) {
-  final playing = context.knobs.boolean(label: 'Playing', initialValue: true);
+  final playing = context.knobs.boolean(label: 'Playing', initialValue: false);
   final topOffset = context.knobs.double.slider(
     label: 'Top offset',
     initialValue: 200,

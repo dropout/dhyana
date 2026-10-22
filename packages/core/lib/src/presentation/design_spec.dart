@@ -2,6 +2,24 @@ import 'package:material_ui/material_ui.dart';
 
 /// Contains design-related constants
 /// and theming information for the application.
+
+enum Breakpoint {
+  /// 360.0
+  xs(DesignSpec.breakpointXs),
+  /// 480.0
+  sm(DesignSpec.breakpointSm),
+  /// 768.0
+  md(DesignSpec.breakpointMd),
+  /// 1024.0
+  lg(DesignSpec.breakpointLg),
+  /// 1280.0
+  xl(DesignSpec.breakpointXl);
+
+  const Breakpoint(this.value);
+
+  final double value;
+}
+
 class DesignSpec {
 
   // Colors
@@ -70,6 +88,23 @@ class DesignSpec {
   static const double breakpointMd = 768.0;
   static const double breakpointLg = 1024.0;
   static const double breakpointXl = 1280.0;
+
+  static const List<Breakpoint> breakpoints = [
+    Breakpoint.xs,
+    Breakpoint.sm,
+    Breakpoint.md,
+    Breakpoint.lg,
+    Breakpoint.xl,
+  ];
+
+  static Breakpoint breakpointForWidth(double width) {
+    for (final breakpoint in breakpoints.reversed) {
+      if (width >= breakpoint.value) {
+        return breakpoint;
+      }
+    }
+    return Breakpoint.xs;
+  }
 
   ThemeData get themeData {
     ColorScheme colorScheme = ColorScheme.fromSeed(

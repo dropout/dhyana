@@ -51,9 +51,33 @@ class WidgetbookApp extends StatelessWidget {
       addons: [
         ViewportAddon([
           Viewports.none,
-          IosViewports.iPhone13,
-          IosViewports.iPad12InchesGen2,
+          // Breakpoint xs to sm: 360 - 480
+          AndroidViewports.samsungGalaxyS20,
+          IosViewports.iPhone12Mini,          
           AndroidViewports.samsungGalaxyNote20,
+          IosViewports.iPhone13ProMax,
+          // Breakpoint sm to md: 480 - 768
+          ViewportData(
+            name: 'Custom 580x400',
+            width: 580,
+            height: 400,
+            pixelRatio: 1.0,
+            platform: TargetPlatform.windows
+          ),
+          ViewportData(
+            name: 'Custom 640x360',
+            width: 640,
+            height: 480,
+            pixelRatio: 1.0,
+            platform: TargetPlatform.windows
+          ),
+          // Breakpoint md to lg: 768 - 1024
+          IosViewports.iPad,
+          // Breakpoint lg to xl: 1024 - 1280
+          IosViewports.iPad12InchesGen2,
+          AndroidViewports.largeTablet,
+          // Breakpoint xl to ...: 1280 +
+          MacosViewports.desktop,
         ]),
         BackgroundAddon(initialColor: AppColors.backgroundPaper),
         LocalizationAddon(        

@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Provides the width-dependent lyrics [TextStyle] to lyric lines and words.
@@ -6,16 +7,15 @@ class LyricTextStyle extends InheritedWidget {
 
   final TextStyle style;
 
-  static const double _referenceWidth = 375;
-  static const double _minScale = 0.8;
-  static const double _maxScale = 1.4;
-
-  /// Scales the [base] font size proportionally to [maxWidth].
+  /// Picks the font size based on the [Breakpoint] for [maxWidth].
   static TextStyle resolve(TextStyle base, double maxWidth) {
-    final baseSize = base.fontSize ?? 28;
-    final scale = (maxWidth / _referenceWidth).clamp(_minScale, _maxScale);
-    // Rounding to 0.5 avoids re-measuring on sub-pixel resizes.
-    final size = (baseSize * scale * 2).roundToDouble() / 2;
+    final size = switch (DesignSpec.breakpointForWidth(maxWidth)) {
+      Breakpoint.xs => 36.0,
+      Breakpoint.sm => 42.0,
+      Breakpoint.md => 60.0,
+      Breakpoint.lg => 80.0,
+      Breakpoint.xl => 96.0,
+    };
     return base.copyWith(fontSize: size);
   }
 
