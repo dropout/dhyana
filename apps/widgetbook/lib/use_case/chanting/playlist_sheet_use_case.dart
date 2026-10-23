@@ -33,9 +33,9 @@ Widget buildPlaylistSheet(BuildContext context) {
       chantId: 'preview-chant-$index',
       name: switch (index % 4) {
         0 => 'Thousand Eyes and Hands Sutra',
-        1 => 'Heart Sutra',
-        2 => 'Namo Amitabha Buddha',
-        _ => 'Om Mani Padme Hum',
+        1 => 'Heart Sutra (Korean)',
+        2 => 'Great Dharani',
+        _ => 'Heart Sutra (English)',
       },
       blurHash: 'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
       order: index,

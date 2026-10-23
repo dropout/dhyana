@@ -8,11 +8,9 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 const _chantNames = [
   'Thousand Eyes and Hands Sutra',
-  'Heart Sutra',
-  'Namo Amitabha Buddha',
-  'Om Mani Padme Hum',
-  'Great Compassion Dharani',
-  'Metta Sutta',
+  'Heart Sutra (Korean)',
+  'Great Dharani',
+  'Great Dharani 3x',
 ];
 
 final _fixtureChants = List<Chant>.generate(

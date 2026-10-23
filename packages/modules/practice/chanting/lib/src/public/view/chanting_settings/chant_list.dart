@@ -17,10 +17,8 @@ class const ChantList({
 
   @override
   Widget build(BuildContext context) {
-    if (chants.isEmpty) {
-      return buildEmpty(context);
-    }
-
+    if (chants.isEmpty) return buildEmpty(context);
+    
     return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (bounds) {
@@ -43,17 +41,19 @@ class const ChantList({
 
   Widget buildList(BuildContext context) {
     return ReorderableListView.builder(
+      shrinkWrap: true,
       padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingLg),
       buildDefaultDragHandles: false,
       itemCount: chants.length,
       onReorderItem: (oldIndex, newIndex) => onReorder(oldIndex, newIndex),
-
       footer: Padding(
         padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
-        child: Center(child: AddChantButton(onTap: onAddChant).reveal(chants.length + 2)),
+        child: Center(
+          child: AddChantButton(onTap: onAddChant).reveal(chants.length + 2)
+        ),
       ),
       itemBuilder: (context, index) =>
-          buildPlaylistItem(context, chants[index], index),
+        buildPlaylistItem(context, chants[index], index),
       proxyDecorator: (child, index, animation) {
         return AnimatedBuilder(
           animation: animation,

@@ -52,7 +52,7 @@ class const ChantCard({
                     children: [
                       Text(
                         chantViewModel.name,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.theme.textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w800,
