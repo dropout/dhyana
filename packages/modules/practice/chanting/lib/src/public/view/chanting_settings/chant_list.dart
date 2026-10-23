@@ -46,12 +46,12 @@ class const ChantList({
       buildDefaultDragHandles: false,
       itemCount: chants.length,
       onReorderItem: (oldIndex, newIndex) => onReorder(oldIndex, newIndex),
-      footer: Padding(
-        padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
-        child: Center(
-          child: AddChantButton(onTap: onAddChant).reveal(chants.length + 2)
-        ),
-      ),
+      // footer: Padding(
+      //   padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
+      //   child: Center(
+      //     child: AddChantButton(onTap: onAddChant).reveal(chants.length + 2)
+      //   ),
+      // ),
       itemBuilder: (context, index) =>
         buildPlaylistItem(context, chants[index], index),
       proxyDecorator: (child, index, animation) {
@@ -67,30 +67,26 @@ class const ChantList({
   }
 
   Widget buildEmpty(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(DesignSpec.paddingLg),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            ChantingLocalizations.of(context).chantingPlaylistEmptyTitle,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleLarge!
-                .copyWith(fontWeight: FontWeight.w800),
-          ).reveal(2),
-          Gap.small(),
-          Text(
-            ChantingLocalizations.of(
-              context,
-            ).chantingPlaylistEmptyDescription,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge!
-                .copyWith(fontWeight: FontWeight.w800),
-          ).reveal(3),
-          Gap.small(),
-          AddChantButton(onTap: onAddChant).reveal(4),
-        ],
-      ),
+    return Column(
+      mainAxisSize: .min,
+      mainAxisAlignment: MainAxisAlignment.center,        
+      children: [
+        Text(
+          ChantingLocalizations.of(context).chantingPlaylistEmptyTitle,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleLarge!
+              .copyWith(fontWeight: FontWeight.w800),
+        ).reveal(2),
+        Gap.small(),
+        Text(
+          ChantingLocalizations.of(
+            context,
+          ).chantingPlaylistEmptyDescription,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodyLarge!
+              .copyWith(fontWeight: FontWeight.w800),
+        ).reveal(3),
+      ],
     );
   }
 

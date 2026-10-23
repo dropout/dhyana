@@ -1,4 +1,5 @@
 import 'package:chanting/l10n/chanting_localizations.dart';
+import 'package:chanting/src/public/view/chanting_settings/add_chant_button.dart';
 import 'package:chanting/src/public/view/chanting_settings/chant_list.dart';
 import 'package:core/core.dart';
 import 'package:chanting/src/chanting_routes.dart';
@@ -141,6 +142,13 @@ class ChantingSettingsView extends StatelessWidget {
             ),
           ),
 
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
+            child: Center(
+              child: AddChantButton(onTap: () => _triggerAddChantSheet(context, availableChants)).reveal(state.playlist.length + 2)
+            ),
+          ),
+
           // Total duration display
           if (state.playlist.isNotEmpty)
             Padding(
@@ -163,7 +171,7 @@ class ChantingSettingsView extends StatelessWidget {
               ),
             ),
 
-          _StartButtonRow(
+          if (state.playlist.isNotEmpty) _StartButtonRow(
             onStartButtonTap: () => _onStart(context),
           ).reveal((state.playlist.isNotEmpty)
             ? 4 + state.playlist.length
