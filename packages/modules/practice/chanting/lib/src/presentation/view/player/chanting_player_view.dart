@@ -21,7 +21,7 @@ class const ChantingPlayerView({
     scale: false,
 
     // Blur effect
-    blurSigmaPerLine: 2.0,
+    blurSigmaPerLine: 1.0,
     maxBlurSigma: 8,
 
     // Worm effect
@@ -30,7 +30,7 @@ class const ChantingPlayerView({
     wormMaxDelay: 1.0,
 
     // Fading effect
-    opacityFalloffPerLine: 0.10,
+    opacityFalloffPerLine: 0.33,
     minOpacity: 0.10,
     transitionDuration: Durations.long4,
   );

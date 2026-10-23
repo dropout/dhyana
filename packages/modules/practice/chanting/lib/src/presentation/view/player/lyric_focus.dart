@@ -14,22 +14,52 @@ class LyricFocusValues {
 }
 
 /// Computes the focus values for a line [distance] lines from the active one.
+/// Exponentially decays the focus values with distance from the active line.
 LyricFocusValues lyricFocusValues({
   required int distance,
   required LyricsEffectsConfig config,
   required bool isUserScrolling,
 }) {
   final opacity = config.isFadeOn
-      ? math.max(config.minOpacity, 1 - distance * config.opacityFalloffPerLine)
+      ? math.max(
+          config.minOpacity,
+          math.pow(1 - config.opacityFalloffPerLine, distance).toDouble(),
+        )
       : 1.0;
-  final scale = config.isScaleOn && distance > 0 ? config.inactiveScale : 1.0;
+  final scale = config.isScaleOn
+      ? math.pow(config.inactiveScale, distance).toDouble()
+      : 1.0;
   final blurAllowed =
       config.isBlurOn && (config.blurWhileUserScrolling || !isUserScrolling);
-  final sigma = blurAllowed
-      ? math.min(distance * config.blurSigmaPerLine, config.maxBlurSigma)
+  final sigma = blurAllowed && distance > 0
+      ? math.min(
+          config.blurSigmaPerLine * math.pow(2, distance - 1).toDouble(),
+          config.maxBlurSigma,
+        )
       : 0.0;
   return LyricFocusValues(opacity, scale, sigma);
 }
+
+// Linear decay version of lyricFocusValues for reference.
+// LyricFocusValues lyricFocusValues({
+//   required int distance,
+//   required LyricsEffectsConfig config,
+//   required bool isUserScrolling,
+// }) {
+//   final opacity = config.isFadeOn
+//       ? math.max(config.minOpacity, 1 - distance * config.opacityFalloffPerLine)
+//       : 1.0;
+//   final scale = config.isScaleOn && distance > 0 ? config.inactiveScale : 1.0;
+//   final blurAllowed =
+//       config.isBlurOn && (config.blurWhileUserScrolling || !isUserScrolling);
+//   final sigma = blurAllowed
+//       ? math.min(distance * config.blurSigmaPerLine, config.maxBlurSigma)
+//       : 0.0;
+//   return LyricFocusValues(opacity, scale, sigma);
+// }
+
+
+
 
 /// Applies fade, scale and blur to a lyric line based on its distance
 /// from the active line. Renders [child] untouched when no effect is on.
