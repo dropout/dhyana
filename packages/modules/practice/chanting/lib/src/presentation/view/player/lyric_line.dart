@@ -13,6 +13,7 @@ class const LyricLine({
   required final Duration position,
   required final bool isActive,
   required final ChantingStateEntity chantingState,
+  required final double maxWidth,
   super.key,
 }) extends StatelessWidget {
   /// Returns the text style used for rendering lyrics lines.
@@ -25,10 +26,22 @@ class const LyricLine({
     );
   }
 
-  static const EdgeInsets linePadding = EdgeInsets.symmetric(
-    horizontal: 24,
-    vertical: 8,
-  );
+  static EdgeInsets getLinePaddingForWidth(double maxWidth) {
+    final vertical = 8.0;
+    final horizontal = switch (DesignSpec.breakpointForWidth(maxWidth)) {
+      .xs => 24.0,
+      .sm => 32.0,
+      .md => 40.0,
+      .lg => 48.0,
+      .xl => 60.0,
+    };
+    return EdgeInsets.only(
+      left: horizontal,
+      right: horizontal * 3,
+      top: vertical,
+      bottom: vertical,
+    );
+  }
 
   static final RegExp lineBreakPattern = RegExp(r'\\n|\r?\n');
 
@@ -64,8 +77,9 @@ class const LyricLine({
       }
     }
 
+
     return Padding(
-      padding: linePadding,
+      padding: getLinePaddingForWidth(maxWidth),
       child: Text.rich(
         TextSpan(children: textSpans, style: LyricTextStyle.of(context)),
       ),

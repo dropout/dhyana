@@ -181,7 +181,7 @@ class _LyricsViewState extends State<LyricsView>
         LyricLine.displayText(line),
         _lyricsTextStyle,
         widget.maxWidth,
-        LyricLine.linePadding,
+        LyricLine.getLinePaddingForWidth(widget.maxWidth),
       );
       lh.add(height);
     }
@@ -341,6 +341,7 @@ class _LyricsViewState extends State<LyricsView>
                 position: widget.chantingState.latencyCompensatedPosition,
                 chantingState: widget.chantingState,
                 isActive: index <= widget.chantingState.activeLineIndex,
+                maxWidth: widget.maxWidth,
               ),
             );
             if (!widget.effects.isWormScrollOn) return lyricLine;

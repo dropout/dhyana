@@ -11,6 +11,7 @@ import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_effects_config.dart';
 import 'package:chanting/src/presentation/view/player/lyrics_view.dart';
 import 'package:chanting/src/presentation/viewmodel/chanting_cubit.dart';
+import 'package:chanting/src/presentation/view/player/chanting_player_view.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
@@ -102,13 +103,7 @@ Widget buildLyricsView(BuildContext context) {
       playing: playing,
       topOffset: topOffset,
       loaded: loaded,
-      effects: LyricsEffectsConfig(
-        enabled: effectsEnabled,
-        wormScroll: worm,
-        fade: fade,
-        scale: scale,
-        blur: blur,
-      ),
+      effects: ChantingPlayerView.lyricsEffectsConfig,
     ),
   );
 }

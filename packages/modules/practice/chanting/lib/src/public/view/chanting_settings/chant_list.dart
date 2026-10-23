@@ -1,5 +1,4 @@
 import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
-import 'package:chanting/src/public/view/chanting_settings/add_chant_button.dart';
 import 'package:chanting/l10n/chanting_localizations.dart';
 import 'package:core/core.dart';
 import 'package:chanting/src/public/model/chant_playlist_item.dart';
@@ -46,12 +45,6 @@ class const ChantList({
       buildDefaultDragHandles: false,
       itemCount: chants.length,
       onReorderItem: (oldIndex, newIndex) => onReorder(oldIndex, newIndex),
-      // footer: Padding(
-      //   padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
-      //   child: Center(
-      //     child: AddChantButton(onTap: onAddChant).reveal(chants.length + 2)
-      //   ),
-      // ),
       itemBuilder: (context, index) =>
         buildPlaylistItem(context, chants[index], index),
       proxyDecorator: (child, index, animation) {
