@@ -132,13 +132,13 @@ void main() {
     // Small sparse patches that highlight the base color, using the distance
     // to the nearest Worley feature point so each patch stays a small round fleck
     // float highlightDist = worley(st * 2.0);
-    float highlightDist = fbm(st * 5.5);
-    float highlightMask = 1.0 - smoothstep(0.05, 0.06, highlightDist);
-    color = mix(color, kHighlightColor, highlightMask);
+    // float highlightDist = fbm(st * 5.5);
+    // float highlightMask = 1.0 - smoothstep(0.05, 0.06, highlightDist);
+    // color = mix(color, kHighlightColor, highlightMask);
 
     // Plant-fiber residue: sparse, sharp-edged slivers scattered across the surface
-    float fiberCoverage = fiberField(st * 12.0);
-    color = mix(color, kFiberColor, fiberCoverage * 0.5);
+    // float fiberCoverage = fiberField(st * 12.0);
+    // color = mix(color, kFiberColor, fiberCoverage * 0.5);
 
     // Add subtle high-frequency grain to simulate paper fiber
     float grain = random(uv * 150.0) * 0.13;
