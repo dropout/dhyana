@@ -88,20 +88,21 @@ class _AddChantSheetState extends State<AddChantSheet> {
       padding: EdgeInsets.zero,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingMd),
-        child: ListView.builder(
-          padding: EdgeInsets.symmetric(vertical: DesignSpec.paddingMd),
+        child: GridView.builder(
+          padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingMd),
           itemCount: widget.availableChants.length,
+          // Single column on phones, two or more on wider sheets.
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 296,
+            mainAxisExtent: 200,
+            mainAxisSpacing: DesignSpec.paddingSm,
+            crossAxisSpacing: DesignSpec.paddingSm,
+          ),
           itemBuilder: (context, index) {
             final chant = widget.availableChants[index];
-            final paddingBottom = index != widget.availableChants.length - 1;
-            return Padding(
-              padding: EdgeInsets.only(
-                bottom: paddingBottom ? DesignSpec.paddingSm : 0.0,
-              ),
-              child: ChantListItem(
-                chant: chant,
-                onTap: () => _onListItemTap(chant),
-              ),
+            return ChantListItem(
+              chant: chant,
+              onTap: () => _onListItemTap(chant),
             );
           },
         ),

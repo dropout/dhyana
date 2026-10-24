@@ -83,14 +83,7 @@ Widget buildLyricsView(BuildContext context) {
     min: 0,
     max: 500,
   );
-  final effectsEnabled = context.knobs.boolean(
-    label: 'Effects',
-    initialValue: true,
-  );
-  final worm = context.knobs.boolean(label: 'Worm scroll', initialValue: true);
-  final fade = context.knobs.boolean(label: 'Fade', initialValue: true);
-  final scale = context.knobs.boolean(label: 'Scale', initialValue: true);
-  final blur = context.knobs.boolean(label: 'Blur', initialValue: true);
+
   final loaded = context.knobs.boolean(
     label: 'Lyrics loaded',
     initialValue: true,

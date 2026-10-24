@@ -7,41 +7,31 @@ import 'input_button.dart';
 
 /// A widget that allows users to select a duration for a timer.
 /// By default, it provides options for 1 to 108 minutes.
-class DurationInput extends StatelessWidget {
+class const DurationInput({
   /// Label used for input view title.
-  final String label;
+  required final String label,
 
   /// The selected duration value.
-  final Duration value;
-
+  required final Duration value,
+  
   // To show session start and end time correctly in the input view
-  final Duration preparationTime;
+  required final Duration preparationTime,
+  
+  /// The service used to manage overlays, such as showing modal bottom sheets.
+  required final OverlayService overlayService,
 
   /// Minimum duration in minutes. Default is 1.
   /// This ensures that users select a positive duration.
-  final int minMinutes;
+  final int minMinutes = 1,
 
   /// Maximum duration in minutes. Default is 60.
   /// This provides a reasonable upper limit for timer durations.
-  final int maxMinutes;
+  final int maxMinutes = 60,
 
   /// Callback function that is called when the value changes.
-  final void Function(Duration duration)? onChange;
-
-  /// The service used to manage overlays, such as showing modal bottom sheets.
-  final OverlayService overlayService;
-
-  /// Creates an instance of the DurationInput widget.
-  const DurationInput({
-    required this.label,
-    required this.value,
-    required this.preparationTime,
-    required this.overlayService,
-    this.minMinutes = 1,
-    this.maxMinutes = 60,
-    this.onChange,
-    super.key,
-  });
+  final void Function(Duration duration)? onChange,
+  super.key,
+}) extends StatelessWidget {
 
   void _onSelected(BuildContext context, Duration duration) {
     onChange?.call(duration);
