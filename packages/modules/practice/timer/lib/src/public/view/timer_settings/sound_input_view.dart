@@ -138,37 +138,50 @@ class SoundInputViewState extends State<SoundInputView>
   }
 
   Widget buildInputViewContent(BuildContext context) {
+    const double cardAspectRatio = 4 / 3;
+    const double cardHeight = 200;
+
     return Column(
       crossAxisAlignment: .stretch,
       children: [
         SizedBox(
-          height: 200,
-          child: CarouselSlider(
-            options: CarouselOptions(
-              aspectRatio: 16 / 9,
-              enlargeFactor: .33,
-              enableInfiniteScroll: false,
-              enlargeCenterPage: true, // This pushes the item to the center
-              viewportFraction:
-                  0.75, // Controls how much of the side items you see
-              initialPage: selectedIndex,
-              onPageChanged: (index, reason) => _onIndexChanged(index),
-            ),
-            items: Sound.values.map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: DesignSpec.paddingSm,
-                    ),
-                    child: SoundInputCard(
-                      sound: i,
-                      onTap: () => _onInputCardTap(context, i),
-                    ),
+          height: cardHeight,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final double cardWidth =
+                  (cardHeight - 2 * DesignSpec.paddingSm) * cardAspectRatio;
+
+              // Never exceed the original 0.75 fraction on narrow screens.
+              final double fraction = (cardWidth / constraints.maxWidth);
+              // .clamp(0.0, 0.75);
+
+              return CarouselSlider(
+                options: CarouselOptions(
+                  height: cardHeight,
+                  viewportFraction: fraction,
+                  // enlargeFactor: .33,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true, // This pushes the item to the center
+                  initialPage: selectedIndex,
+                  onPageChanged: (index, reason) => _onIndexChanged(index),
+                ),
+                items: Sound.values.map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: DesignSpec.paddingSm,
+                        ),
+                        child: SoundInputCard(
+                          sound: i,
+                          onTap: () => _onInputCardTap(context, i),
+                        ),
+                      );
+                    },
                   );
-                },
+                }).toList(),
               );
-            }).toList(),
+            },
           ),
         ),
         SizedBox(
