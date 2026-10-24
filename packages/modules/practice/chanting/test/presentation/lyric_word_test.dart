@@ -1,3 +1,4 @@
+import 'package:chanting/src/domain/entity/lyrics_line_entity.dart';
 import 'package:chanting/src/domain/entity/lyrics_word_entity.dart';
 import 'package:chanting/src/presentation/view/player/lyric_text_style.dart';
 import 'package:chanting/src/presentation/view/player/lyric_word.dart';
@@ -11,11 +12,18 @@ void main() {
     end: Duration(seconds: 3),
   );
 
+  const line = LyricsLineEntity(
+    text: 'word',
+    words: [word],
+    start: Duration(seconds: 1),
+    end: Duration(seconds: 3),
+  );
+
   test('phase follows playback position', () {
     LyricWordPhase at(Duration p) =>
-        LyricWordWidget.phaseAtPosition(word: word, position: p);
+        LyricWordWidget.phaseAtPosition(line: line, word: word, position: p);
     expect(at(const Duration(milliseconds: 999)), LyricWordPhase.pending);
-    expect(at(const Duration(seconds: 1)), LyricWordPhase.active);
+    expect(at(const Duration(seconds: 1)), LyricWordPhase.highlight);
     expect(at(const Duration(seconds: 3)), LyricWordPhase.sung);
   });
 
@@ -24,7 +32,7 @@ void main() {
         MaterialApp(
           home: LyricTextStyle(
             style: const TextStyle(fontSize: 20),
-            child: LyricWordWidget(word: word, position: position),
+            child: LyricWordWidget(line: line,word: word, position: position),
           ),
         ),
       );
@@ -35,7 +43,7 @@ void main() {
   testWidgets('animates to the new phase color and ends on it', (tester) async {
     await pump(tester, Duration.zero);
     final pending = LyricWordWidget.colorOf(LyricWordPhase.pending);
-    final active = LyricWordWidget.colorOf(LyricWordPhase.active);
+    final active = LyricWordWidget.colorOf(LyricWordPhase.highlight);
     expect(colorOf(tester), pending);
 
     await pump(tester, const Duration(seconds: 2));

@@ -62,6 +62,7 @@ class const LyricLine({
           textSpans.add(
             WidgetSpan(
               child: LyricWordWidget(
+                line: line,
                 word: word.copyWith(text: fragment),
                 position: position,
               ),

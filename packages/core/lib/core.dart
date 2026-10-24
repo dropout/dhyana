@@ -84,6 +84,7 @@ export 'src/presentation/view/input/int_dial_input.dart';
 export 'src/presentation/view/input/profile_image_picker/profile_image_picker_current_image.dart';
 export 'src/presentation/view/input/profile_image_picker/profile_image_picker_edit_badge.dart';
 export 'src/presentation/view/input/profile_image_picker/profile_image_selection_controller.dart';
+export 'src/presentation/view/painting/exponential_gradient.dart';
 export 'src/presentation/view/painting/gradient_translate.dart';
 export 'src/presentation/view/parchment_background.dart';
 export 'src/presentation/view/transition/linear_gradient_mask_transition.dart';

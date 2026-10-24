@@ -6,49 +6,37 @@ import 'package:material_ui/material_ui.dart';
 /// Displays transport controls and a non-seekable progress bar for audio playback.
 /// Shows the current position and total duration of the chant, and allows
 /// users to play/pause, skip tracks, and open the playlist.
-class PlayerControls extends StatelessWidget {
-  static const double iconSize = 32.0;
-
-  /// Creates a [PlayerControls] widget.
-  const PlayerControls({
-    required this.chantingState,
-    required this.onNextPressed,
-    required this.onPlayPausePressed,
-    required this.onPreviousPressed,
-    required this.onPlaylistPressed,
-    super.key,
-    this.isNextEnabled = true,
-    this.isPreviousEnabled = true,
-    this.showProgressBar = true,
-    this.showTime = true,
-  });
-
+class const PlayerControls({
   /// The current state of the chanting player
-  final ChantingStateEntity chantingState;
+  required final ChantingStateEntity chantingState,
 
   /// Whether the "Next" button should be enabled.
-  final bool isNextEnabled;
+  final bool isNextEnabled = true,
 
   /// Whether the "Previous" button should be enabled.
-  final bool isPreviousEnabled;
+  final bool isPreviousEnabled = true,
 
   /// Callback invoked when the user presses the "Next" button.
-  final VoidCallback? onNextPressed;
+  required final VoidCallback? onNextPressed,
 
   /// Callback invoked when the user presses the "Play/Pause" button.
-  final VoidCallback onPlayPausePressed;
+  required final VoidCallback onPlayPausePressed,
 
   /// Callback invoked when the user presses the "Previous" button.
-  final VoidCallback? onPreviousPressed;
+  required final VoidCallback? onPreviousPressed,
 
   /// Callback invoked when the user presses the "Playlist" button.
-  final VoidCallback onPlaylistPressed;
+  required final VoidCallback onPlaylistPressed,
 
   /// Whether to show the progress bar above the controls.
-  final bool showProgressBar;
+  final bool showProgressBar = true,
 
   /// Whether to show the current position and total duration text.
-  final bool showTime;
+  final bool showTime = true,
+
+  super.key,
+}) extends StatelessWidget {
+  static const double iconSize = 32.0;
 
   Duration get position => chantingState.latencyCompensatedPosition;
   Duration get duration => chantingState.currentTrackDuration;
@@ -75,14 +63,52 @@ class PlayerControls extends StatelessWidget {
           fontWeight: FontWeight.bold,
         );
 
+    final title = chantingState.mediaItem?.title ?? '';
+    final currentIndex = chantingState.currentIndex;
+    final playlistLength = chantingState.chantResources.length;
+    final titleStyle = context.theme.textTheme.titleMedium?.copyWith(
+      fontFamily: DesignSpec.condensedFontFamilyName,
+      color: AppColors.appWhite,
+      fontWeight: FontWeight.bold,
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: DesignSpec.paddingLg,
+          ),
+          child: Row(
+            // mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: titleStyle,
+              ),
+              Spacer(),
+              if (playlistLength > 0) ...<Widget>[
+                Gap.small(),
+                Text(
+                  '${currentIndex + 1} / $playlistLength',
+                  textAlign: TextAlign.center,
+                  style: titleStyle,
+                ),
+              ],
+            ],
+          ),
+        ),
+
         if (showProgressBar)
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: DesignSpec.paddingLg,
-              vertical: DesignSpec.paddingLg,
+            padding: const EdgeInsets.only(
+              left: DesignSpec.paddingLg,
+              right: DesignSpec.paddingLg,
+              top: DesignSpec.paddingSm,
+              bottom: DesignSpec.paddingSm,
             ),
             child: LinearProgressIndicator(
               value: maxMs == 0 ? 0 : currentMs / maxMs,

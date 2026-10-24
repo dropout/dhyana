@@ -17,22 +17,15 @@ class const ChantingPlayerView({
   super.key,
 }) extends StatefulWidget {
   static const LyricsEffectsConfig lyricsEffectsConfig = LyricsEffectsConfig(
-    // Scaling is off
+    // turn off effects
     scale: false,
+    fade: false,
+    blur: false,
 
-    // Blur effect
-    blurSigmaPerLine: 1.0,
-    maxBlurSigma: 8,
-
-    // Worm effect
+    // Only using worm effect for now
     wormDuration: Durations.extralong3,
     wormDelayPerLine: 0.05,
-    wormMaxDelay: 1.0,
-
-    // Fading effect
-    opacityFalloffPerLine: 0.33,
-    minOpacity: 0.10,
-    transitionDuration: Durations.long4,
+    wormMaxDelay: 1.0,  
   );
 
   @override
@@ -150,7 +143,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             key: ValueKey(widget.chantingState.lyricsDocument),
             chantingState: widget.chantingState,
             maxWidth: constraints.maxWidth,
-              effects: ChantingPlayerView.lyricsEffectsConfig,
+            effects: ChantingPlayerView.lyricsEffectsConfig,
           ),
         );
       },
@@ -160,15 +153,32 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   Widget buildControls(BuildContext context) {
     return Stack(
       children: [
-        SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: DesignSpec.padding2Xl,
-              left: DesignSpec.paddingLg,
-              right: DesignSpec.paddingLg,
-              bottom: DesignSpec.paddingLg,
+        IgnorePointer(
+          child: ExponentialGradient(
+            colorBegin: Colors.transparent,
+            colorEnd: Colors.black,
+            exponent: .5,
+            child: SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height / 3,
             ),
-            child: buildPlayerControls(context),
+          ),
+        ),
+        Positioned(
+          left: 0, // Stretch to full width
+          right: 0, // Stretch to full width
+          bottom: 0,
+          child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: DesignSpec.padding2Xl,
+                left: DesignSpec.paddingLg,
+                right: DesignSpec.paddingLg,
+                bottom: DesignSpec.paddingLg,
+              ),
+              child: buildPlayerControls(context),
+            ),
           ),
         ),
       ],
@@ -177,17 +187,19 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
 
   Widget buildPlayerControls(BuildContext context) {
     final chantingState = widget.chantingState;
+    final isLoading = chantingState.loadingState == .processing;
     return PlayerControls(
       chantingState: chantingState,
       onNextPressed:
-          chantingState.currentIndex <
-              chantingState.chantingSettings.selectedChants.length - 1
-          ? () => _onNextPressed(context)
-          : null,
+        !isLoading && chantingState.currentIndex <
+          chantingState.chantingSettings.selectedChants.length - 1
+        ? () => _onNextPressed(context)
+        : null,
       onPlayPausePressed: () => _onPlayPausePressed(context),
-      onPreviousPressed: widget.chantingState.currentIndex > 0
-          ? () => _onPreviousPressed(context)
-          : null,
+      onPreviousPressed: 
+        !isLoading && widget.chantingState.currentIndex > 0
+        ? () => _onPreviousPressed(context)
+        : null,
       onPlaylistPressed: () => _onPlaylistPressed(context),
     );
   }
