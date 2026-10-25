@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:core/core.dart';
 import 'package:timer/l10n/timer_localizations.dart';
+import 'package:timer/src/public/view/timer_settings_history/timer_settings_history_button.dart';
 import 'package:timer/src/public/viewmodel/timer_settings_cubit.dart';
 import 'package:timer/src/timer_module.dart';
 import 'package:timer/src/timer_routes.dart';

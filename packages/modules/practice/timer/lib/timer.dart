@@ -20,6 +20,7 @@ export 'src/public/view/timer_settings/warmup_input_view.dart';
 export 'src/public/view/timer_settings/sound_input_view.dart';
 export 'src/public/view/timer_settings/interval_input.dart';
 export 'src/public/view/timer_settings/duration_input_view.dart';
+export 'src/public/view/timer_settings_history/timer_settings_history_button.dart';
 export 'src/public/view/timer_settings_history/timer_settings_history_list_item.dart';
 export 'src/public/view/timer_settings_history/timer_settings_history_grid_item.dart';
 

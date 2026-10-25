@@ -8,11 +8,13 @@ class InputView extends StatelessWidget {
   final String title;
   final VoidCallback? onSave;
   final bool wrapContentWithExpandedWidget;
+  final String? actionLabel;
 
   const InputView({
     required this.title,
     required this.child,
-    required this.onSave,
+    this.onSave,
+    this.actionLabel,
     this.wrapContentWithExpandedWidget = false,
     super.key,
   });
@@ -68,7 +70,7 @@ class InputView extends StatelessWidget {
   Widget buildActionButtons(BuildContext context) {
     return AppButton.large(
       key: const Key('input_view_save_button'),
-      text: context.coreL10n.okay.toUpperCase(),
+      text: (actionLabel ?? context.coreL10n.okay).toUpperCase(),
       onTap: () => onSave?.call(),
     );
   }

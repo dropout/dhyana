@@ -1,22 +1,21 @@
+import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:timer/src/presentation/view/timer_settings_history_sheet.dart';
 
-import 'package:core/src/presentation/design_spec.dart';
-import 'package:core/src/presentation/view/util/app_context.dart';
 
 
 class TimerSettingsHistoryButton extends StatelessWidget {
-
   final String profileId;
 
-  const TimerSettingsHistoryButton({
-    required this.profileId,
-    super.key
-  });
+  const TimerSettingsHistoryButton({required this.profileId, super.key});
 
   void _onButtonTap(BuildContext context) {
-    context.services.timerNavigator.navigateToTimerSettingsHistory(
-      profileId,
+    context.services.overlayService.showModalBottomSheet<void>(
+      context,
+      (_) => TimerSettingsHistorySheet(profileId: profileId),
     );
+
+    // context.services.overlayService.ttingsHistory(context, profileId);
     context.hapticsTap();
   }
 
@@ -37,7 +36,8 @@ class TimerSettingsHistoryButton extends StatelessWidget {
           padding: EdgeInsets.only(
             right: 2.0, // it's hard to center an icon in circle
           ),
-          child: Icon(Icons.history,
+          child: Icon(
+            Icons.history,
             color: AppColors.buttonForeground,
             size: 28,
           ),
@@ -45,5 +45,4 @@ class TimerSettingsHistoryButton extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -69,7 +69,6 @@ export 'src/presentation/design_spec.dart';
 export 'src/presentation/view/app_bar/custom_app_bar.dart';
 export 'src/presentation/view/app_bar/custom_back_button.dart';
 export 'src/presentation/view/app_bar/presence_button.dart';
-export 'src/presentation/view/app_bar/timer_settings_history_button.dart';
 export 'src/presentation/view/session_start_button.dart';
 export 'src/presentation/view/default_screen_setup.dart';
 export 'src/presentation/view/dialog/delete_profile_dialog.dart';

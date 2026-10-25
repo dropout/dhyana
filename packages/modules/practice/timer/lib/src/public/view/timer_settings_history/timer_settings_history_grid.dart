@@ -13,6 +13,7 @@ import 'package:timer/src/public/model/timer_settings_history_record.dart';
 class const TimerSettingsHistoryGrid({
   required final String profileId,
   required final List<TimerSettingsHistoryRecord> timerSettingsHistoryRecordList,
+  final VoidCallback? onApplied,
   super.key,
 }) extends StatelessWidget {
 
@@ -27,6 +28,7 @@ class const TimerSettingsHistoryGrid({
 
     // Force home screen recreation to apply the selected timer settings.
     if (context.mounted) {
+      onApplied?.call();
       context.services.homeNavigator.navigateToHome(
         refresh: DateTime.now().millisecondsSinceEpoch,
       );
