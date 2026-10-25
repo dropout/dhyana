@@ -172,7 +172,7 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
             top: false,
             child: Padding(
               padding: EdgeInsets.only(
-                top: DesignSpec.padding2Xl,
+                top: DesignSpec.padding3Xl,
                 left: DesignSpec.paddingLg,
                 right: DesignSpec.paddingLg,
                 bottom: DesignSpec.paddingLg,
@@ -188,19 +188,24 @@ class _ChantingPlayerViewState extends State<ChantingPlayerView>
   Widget buildPlayerControls(BuildContext context) {
     final chantingState = widget.chantingState;
     final isLoading = chantingState.loadingState == .processing;
-    return PlayerControls(
-      chantingState: chantingState,
-      onNextPressed:
-        !isLoading && chantingState.currentIndex <
-          chantingState.chantingSettings.selectedChants.length - 1
-        ? () => _onNextPressed(context)
-        : null,
-      onPlayPausePressed: () => _onPlayPausePressed(context),
-      onPreviousPressed: 
-        !isLoading && widget.chantingState.currentIndex > 0
-        ? () => _onPreviousPressed(context)
-        : null,
-      onPlaylistPressed: () => _onPlaylistPressed(context),
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 560,
+      ),
+      child: PlayerControls(
+        chantingState: chantingState,
+        onNextPressed:
+          !isLoading && chantingState.currentIndex <
+            chantingState.chantingSettings.selectedChants.length - 1
+          ? () => _onNextPressed(context)
+          : null,
+        onPlayPausePressed: () => _onPlayPausePressed(context),
+        onPreviousPressed: 
+          !isLoading && widget.chantingState.currentIndex > 0
+          ? () => _onPreviousPressed(context)
+          : null,
+        onPlaylistPressed: () => _onPlaylistPressed(context),
+      ),
     );
   }
 }

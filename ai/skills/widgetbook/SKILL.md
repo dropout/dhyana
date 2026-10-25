@@ -17,18 +17,24 @@ Widgetbook lives in `apps/widgetbook`. Use cases are under `apps/widgetbook/lib/
    - Prefer `package:<module>/<module>.dart` for public APIs.
    - Import `package:<module>/src/...` only when previewing an internal presentation widget that is not exported.
 3. Inspect required models and use their real constructors or `Profile.anonymous()` plus `copyWith` for fixtures.
-4. Check `apps/widgetbook/lib/main.dart` for shared services, themes, localization delegates, and existing mocks.
+4. Check `apps/widgetbook/lib/main.dart` only when the target needs shared services, themes, localization, or a mock not covered below.
+
+Do not search or open neighboring use-case files just to rediscover formatting, imports, annotation shape, or fixture conventions. The templates and rules in this skill are the source of truth. Inspect another case only when the target has a dependency or interaction pattern not documented here.
 
 ## Use Case Shape
 
-Use the local conventions:
+Create one file per use case under `apps/widgetbook/lib/use_case/<module>/`. Use the public module barrel for public widgets and models; internal presentation widgets require the file-level `implementation_imports` ignore and an import from `src/`.
+
+Use this template as the default:
 
 ```dart
+// Include only when importing an internal package implementation:
+// ignore_for_file: implementation_imports
+
 import 'package:material_ui/material_ui.dart';
+import 'package:module/module.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
-
-import 'package:module/module.dart';
 
 @widgetbook.UseCase(
   name: 'Default',
@@ -47,7 +53,16 @@ Widget buildExampleWidget(BuildContext context) {
 }
 ```
 
-Keep fixtures deterministic where possible. Add knobs for meaningful visual states, not every constructor argument. Use `Center`, `Padding`, and bounded constraints when a component needs a stable preview size.
+For an internal widget, import its `src` file and use a matching path such as `[Module]/internal/view/`. Keep the path category and module capitalization consistent with this template; Widgetbook generates the navigation tree from these annotations.
+
+Keep fixtures deterministic where possible. Add knobs for meaningful visual states, not every constructor argument. Use `Center`, `Padding`, and bounded constraints when a component needs a stable preview size; use `SingleChildScrollView` for tall screens or content that changes with knobs.
+
+## Standard Fixtures
+
+- Profile screen/view: start with `Profile.anonymous().copyWith(...)`; set a stable `id`, desired name/settings, and a non-empty `ProfileStatsReport` when showcasing statistics. A `Show stats` boolean knob is useful when the widget has a stats visibility branch.
+- Profile image/avatar: use a deterministic `profileId` and, when previewing the image state, pass an `AssetImage` through the widget's `ImageProvider` parameter. Do not use an asset key as a storage URL.
+- Models with defaults: use their real public constructors and override only values visible in the preview. Avoid fakes or adding test-only fixture dependencies to Widgetbook.
+- Knobs: use labels meaningful to a designer, sensible initial values, and bounded ranges for numeric sliders.
 
 ## Localization and Theme
 

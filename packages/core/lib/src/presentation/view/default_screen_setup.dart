@@ -28,6 +28,7 @@ class const DefaultScreenSetup({
   final bool enablePullToRefresh = false,
   final Future<void> Function()? onRefresh,
   final ScrollPhysics? scrollPhysics,
+  final applyMaxWidth = true,
   super.key,
 }) extends StatefulWidget {
   factory DefaultScreenSetup.error({
@@ -221,7 +222,26 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     required Widget body,
   }) {
     if (widget.overlay == null) return body;
-    return Stack(children: [body, widget.overlay!]);
+    if (widget.applyMaxWidth) {
+      return ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: DesignSpec.maxContentWidth
+        ),
+        child: Stack(
+          children: [
+            body, 
+            widget.overlay!
+          ]
+        )
+      );
+    } else {
+      return Stack(
+        children: [
+          body, 
+          widget.overlay!
+        ]
+      );    
+    }
   }
 
   @override

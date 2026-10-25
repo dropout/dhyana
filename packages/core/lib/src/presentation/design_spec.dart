@@ -31,7 +31,7 @@ class DesignSpec {
       'packages/assets/RobotoCondensed';      
 
   // Responsive spacing and sizing
-  static const double maxContentWidth = 512.0;
+  static const double maxContentWidth = 480.0;
 
   // Spacing constants
   static const double spacingXxs = 2.0;

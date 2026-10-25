@@ -45,19 +45,22 @@ Widget buildPlayerControls(BuildContext context) {
     child: Align(
       alignment: Alignment.bottomCenter,
       child: SafeArea(
-        minimum: EdgeInsets.only(bottom: DesignSpec.spacingLg),
+        minimum: EdgeInsets.only(bottom: DesignSpec.padding2Xl),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: DesignSpec.breakpointMd),
-          child: PlayerControls(
-            chantingState: state,
-            onNextPressed: () {},
-            onPlayPausePressed: () {},
-            onPreviousPressed: () {},
-            onPlaylistPressed: () {},
-            isNextEnabled: isNextEnabled,
-            isPreviousEnabled: isPreviousEnabled,
-            showProgressBar: showProgressBar,
-            showTime: showTime,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: PlayerControls(
+              chantingState: state,
+              onNextPressed: () {},
+              onPlayPausePressed: () {},
+              onPreviousPressed: () {},
+              onPlaylistPressed: () {},
+              isNextEnabled: isNextEnabled,
+              isPreviousEnabled: isPreviousEnabled,
+              showProgressBar: showProgressBar,
+              showTime: showTime,
+            ),
           ),
         ),
       ),
