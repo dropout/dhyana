@@ -55,7 +55,7 @@ abstract class Profile with _$Profile {
   String get profileImageStoragePath =>
     '/profiles/$id/photo.jpg';  
 
-  bool get hasProfileImage =>
-    photoUrl != null && photoUrl!.isNotEmpty;
+  // bool get hasProfileImage =>
+  //   photoUrl != null && photoUrl!.isNotEmpty;
   
 }

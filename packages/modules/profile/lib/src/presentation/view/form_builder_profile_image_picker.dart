@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:core/core.dart';
 import 'package:profile/src/public/model/profile.dart';
 import 'package:profile/src/public/view/profile_image.dart';
-import 'package:profile/src/public/view/profile_image_placeholder.dart';
 
 Future<XFile?> _pickProfileImageFromGallery() {
   return ImagePicker().pickImage(source: ImageSource.gallery);
@@ -117,14 +116,16 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   }
 
   /// Initializes the resources needed for image safety detection.
-  /// Don't add this to services singleton it consumes a lot of memory and is 
+  /// Don't add this to services singleton it consumes a lot of memory and is
   /// only needed for this widget.
   void _initializeResources() async {
     final crashlyticsService = context.services.crashlyticsService;
 
     try {
-      _safeImageDetectorService =
-          await context.services.safeImageDetectorFactory.create();
+      _safeImageDetectorService = await context
+          .services
+          .safeImageDetectorFactory
+          .create();
       _initializeController();
 
       if (mounted) {
@@ -209,7 +210,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       case ProcessingState.error:
         return const SizedBox.shrink();
       default:
-        return const SizedBox.shrink();      
+        return const SizedBox.shrink();
     }
   }
 
@@ -262,6 +263,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       );
     }
 
+
     return SizedBox.expand(
       child: DecoratedBox(
         position: DecorationPosition.foreground,
@@ -269,18 +271,13 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
           shape: BoxShape.circle,
           border: Border.all(color: Colors.black, width: 4.0),
         ),
-        child: widget.profile.hasProfileImage
-            ? ProfileImage(
-                profileId: widget.profile.id,
-                profileName: widget.profile.displayName,
-                profilePhotoBlurhash: widget.profile.photoBlurhash,
-                size: DesignSpec.circleLg,
-              )
-            : ProfileImagePlaceholder(
-                name: widget.profile.displayName,
-                backgroundColor: Colors.grey,
-              ),
-      ),
+        child: ProfileImage(
+          profileId: widget.profile.id,
+          profileName: widget.profile.displayName,
+          profilePhotoBlurhash: widget.profile.photoBlurhash,
+          size: DesignSpec.circleLg,
+        ),
+      )
     );
   }
 
@@ -305,5 +302,4 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     }
     super.dispose();
   }
-
 }
