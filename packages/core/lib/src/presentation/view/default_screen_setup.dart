@@ -35,20 +35,16 @@ class const DefaultScreenSetup({
     required String title,
     List<Widget>? slivers,
     Key? key,
-  }) =>
-      DefaultScreenSetup(
-        title: title,
-        titleColor: Colors.white,
-        appBarBackgroundColor: AppColors.errorColor,
-        scrollPhysics: const NeverScrollableScrollPhysics(),
-        slivers: slivers ?? [
-          SliverFillRemaining(
-            hasScrollBody: false, 
-            child: AppErrorDisplay()
-          ),
-        ],
-        key: key,
-      );
+  }) => DefaultScreenSetup(
+    title: title,
+    titleColor: Colors.white,
+    appBarBackgroundColor: AppColors.errorColor,
+    scrollPhysics: const NeverScrollableScrollPhysics(),
+    slivers:
+        slivers ??
+        [SliverFillRemaining(hasScrollBody: false, child: AppErrorDisplay())],
+    key: key,
+  );
 
   factory DefaultScreenSetup.loading({required String title, Key? key}) =>
       DefaultScreenSetup(
@@ -149,7 +145,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
       final double appBarHeightWithTopPadding = topInset + kToolbarHeight;
       const double fadeLength = 10.0;
 
-      // Seed based on title so that the background 
+      // Seed based on title so that the background
       // pattern varies for different titles (screens)
       final seed = widget.title.hashCode * 0.00000000001;
 
@@ -221,27 +217,17 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     required BuildContext context,
     required Widget body,
   }) {
-    if (widget.overlay == null) return body;
-    if (widget.applyMaxWidth) {
-      return ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: DesignSpec.maxContentWidth
-        ),
-        child: Stack(
-          children: [
-            body, 
-            widget.overlay!
-          ]
-        )
-      );
-    } else {
-      return Stack(
-        children: [
-          body, 
-          widget.overlay!
-        ]
-      );    
-    }
+    final content = widget.overlay == null
+        ? body
+        : Stack(children: [body, widget.overlay!]);
+
+    return switch (widget.applyMaxWidth) {
+      true => ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: DesignSpec.maxContentWidth),
+        child: content,
+      ),
+      false => content,
+    };
   }
 
   @override
