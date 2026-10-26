@@ -65,9 +65,10 @@ class ParchmentBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: .expand,
       children: [
         Positioned.fill(child: buildBg(context)),
-        Positioned.fill(child: child ?? SizedBox.shrink()),
+        child ?? Positioned.fill(child: child!),
       ],
     );
   }
