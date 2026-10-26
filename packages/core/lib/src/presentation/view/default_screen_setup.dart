@@ -222,7 +222,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
         : Stack(children: [body, widget.overlay!]);
 
     return switch (widget.applyMaxWidth) {
-      // will cancel the stretching effect of ancestor positioned.fill widget
+      // Center will cancel the stretching effect of ancestor Positioned.fill widget
       // and constrained box will work as intended
       true => Center( 
         child: ConstrainedBox(

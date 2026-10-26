@@ -44,12 +44,19 @@ class FadeIn extends ParticleBehavior {
 /// Optional easing curves can be supplied for each phase.
 class FadeInOut extends ParticleBehavior {
   const FadeInOut({
+    /// Fraction of life at which the fade-in phase ends.
     this.fadeInEnd = 0.2,
+    /// Fraction of life at which the fade-out phase starts.
     this.fadeOutStart = 0.8,
+    /// Alpha at the start of the fade-in phase.
     this.startAlpha = 0,
+    /// Alpha at the peak of the fade-in phase.
     this.peak = 1,
+    /// Alpha at the end of the fade-out phase.
     this.endAlpha = 0,
+    /// Optional easing curve for the fade-in phase.
     this.fadeInCurve,
+    /// Optional easing curve for the fade-out phase.
     this.fadeOutCurve,
     super.kindMask,
   }) : assert(fadeInEnd >= 0 && fadeInEnd <= fadeOutStart && fadeOutStart <= 1);

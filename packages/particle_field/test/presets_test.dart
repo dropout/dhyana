@@ -4,6 +4,26 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:particle_field/particle_field.dart';
 
 void main() {
+  test('shrinking burst picks colors from its palette', () {
+    final fx = ShrinkingBurst(random: Random(7))..emit(count: 30);
+    final colors = List.generate(
+      fx.system.count,
+      (i) => fx.system.buffers.color[i],
+    );
+
+    expect(colors, everyElement(isIn(ShrinkingBurst.defaultPalette)));
+    expect(colors.toSet().length, greaterThan(1));
+  });
+
+  test('shrinking burst color overrides the palette', () {
+    final fx = ShrinkingBurst(random: Random(7), color: 0xFF123456)..emit(count: 10);
+
+    expect(
+      List.generate(fx.system.count, (i) => fx.system.buffers.color[i]),
+      everyElement(0xFF123456),
+    );
+  });
+
   test('shrinking burst drifts, slows, shrinks and expires in ~1s', () {
     final fx = ShrinkingBurst(random: Random(3))..emit(count: 2);
     expect(fx.system.count, 2);

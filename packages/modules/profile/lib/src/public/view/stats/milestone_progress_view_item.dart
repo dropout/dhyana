@@ -1,16 +1,14 @@
-import 'dart:ui';
+import 'dart:async';
+import 'dart:math';
+import 'dart:ui' as ui;
 
+import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:particle_field/particle_field.dart' hide BoxShape;
 
-enum MilestoneProgressViewItemMode {
-  incomplete,
-  completed,
-  animate,
-}
+enum MilestoneProgressViewItemMode { incomplete, completed, animate }
 
 class MilestoneProgressViewItem extends StatefulWidget {
-
   final MilestoneProgressViewItemMode mode;
   final Color completedColor;
   final Color incompleteColor;
@@ -23,12 +21,12 @@ class MilestoneProgressViewItem extends StatefulWidget {
   });
 
   @override
-  State<MilestoneProgressViewItem> createState() => _MilestoneProgressViewItemState();
+  State<MilestoneProgressViewItem> createState() =>
+      _MilestoneProgressViewItemState();
 }
 
 class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
     with TickerProviderStateMixin {
-
   // main animation controller
   late final AnimationController animationController;
 
@@ -37,62 +35,43 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
   late final Animation<double> _shapeAnimation;
 
   // particle system
+  late final ShrinkingBurst _fireworks;
   late final ParticleController particleController;
-  int lastEmit = 0;
-  int emitGap = 1;
-  int particleCount = 2;
+  AtlasRenderer? _renderer;
+  ui.Image? _sprite;
+  final _random = Random();
+  Timer? _burstTimer;
+
+  static const _burstCount = 3;
 
   @override
   void initState() {
-
-    // particleController = ParticleController(
-    //     vsync: this,
-    //     autoStart: false,
-    //     onTick: (controller, elapsedTime) {
-    //       List<Particle> particles = controller.particles;
-
-    //       bool freeToEmit = elapsedTime.inMilliseconds - lastEmit > emitGap;
-    //       bool particlesLeft = particleCount > 0;
-    //       // print('freeToEmit: $freeToEmit, particlesLeft: $particlesLeft, elapsedTime: ${elapsedTime.inMilliseconds}, lastEmit: $lastEmit');
-    //       if (freeToEmit && particlesLeft) {
-    //         controller.start(); // in case its stopped
-
-    //         vm.Vector2 velocity = vm.Vector2(
-    //           rnd.getDouble(-1, 1),
-    //           rnd.getDouble(-1, 1),
-    //         );
-
-    //         velocity = velocity * rnd.getDouble(2.0, 4.0);
-
-    //         particles.add(Particle(
-    //           vx: velocity.x,
-    //           vy: velocity.y,
-    //           lifespan: 60,
-    //           color: Colors.green,
-    //         ));
-    //         setState(() {
-    //           lastEmit = elapsedTime.inMilliseconds;
-    //           particleCount--;
-    //         });
-    //       }
-
-    //       for (int i = particles.length - 1; i >= 0; i--) {
-    //         Particle p = particles[i];
-    //         p.vx = p.vx * 0.97;
-    //         p.vy = p.vy * 0.97;
-    //         p.update();
-
-    //         if (p.age >= p.lifespan) {
-    //           particles.removeAt(i);
-    //         }
-    //       }
-
-    //       if (particlesLeft == false && particles.isEmpty) {
-    //         controller.stop();
-    //       }
-
-    //     }
-    // );
+    _fireworks = ShrinkingBurst(
+      random: _random,
+      maxParticles: 512,
+      radius: 16,
+      palette: [
+        AppColors.appWhite.toARGB32(),
+        AppColors.crimsonRed.toARGB32(),
+        Colors.blue.toARGB32(),
+        AppColors.gold.toARGB32(),      
+      ],
+    );
+    createSoftCircleImage(diameter: 64, hardness: 0.5).then((image) {
+      if (!mounted) {
+        image.dispose();
+        return;
+      }
+      setState(() {
+        _sprite = image;
+        // spriteSize is the diameter of the burst's 16px radius.
+        _renderer = AtlasRenderer(image: image, spriteSize: 4);
+      });
+    });
+    particleController = ParticleController(
+      vsync: this,
+      system: _fireworks.system,
+    );
 
     animationController = AnimationController(
       vsync: this,
@@ -100,55 +79,41 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
     );
 
     if (widget.mode == MilestoneProgressViewItemMode.animate) {
-      Future.delayed(const Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 256), () {
         if (mounted) {
           animationController.forward();
-          timeParticles();
+          _startBursts();
         }
       });
     }
 
-    _circleAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(
+    _circleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(
-          .0,
-          1.0,
-          curve: Curves.elasticOut,
-        ),
-      )
+        curve: const Interval(.0, 1.0, curve: Curves.elasticOut),
+      ),
     );
 
-    _shapeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(
-        CurvedAnimation(
-          parent: animationController,
-          curve: const Interval(
-            0.5,
-            1.0,
-          ),
-        )
+    _shapeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.5, 1.0),
+      ),
     );
 
     super.initState();
   }
 
-  void resetParticles() {
-    setState(() {
-      lastEmit = 0;
-      particleCount = 48;
-    });
-  }
-
-  void timeParticles() {
-    Future.delayed(const Duration(milliseconds: 210), () {
-      resetParticles();
-      particleController.start();
+  // Schedules a few bursts at random intervals.
+  void _startBursts([int remaining = _burstCount]) {
+    _burstTimer?.cancel();
+    if (remaining == 0) return;
+    _burstTimer = Timer(Duration(milliseconds: 100 + _random.nextInt(225)), () {
+      if (!mounted) return;
+      final x = (_random.nextDouble() - 0.5) * 12;
+      // _fireworks.launch(x, 0, apexY: -(20 + _random.nextDouble() * 30));
+      _fireworks.emit(x: x, y: x, count: 48);
+      _startBursts(remaining - 1);
     });
   }
 
@@ -156,10 +121,12 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // Actual animation and particle system only built in animate mode.
+        // For performance reasons.
         if (widget.mode == MilestoneProgressViewItemMode.animate) {
           animationController.forward(from: 0.0);
-          resetParticles();
-          timeParticles();
+          particleController.clear();
+          _startBursts();
         }
       },
       child: _buildContent(),
@@ -187,7 +154,7 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
           color: Color.lerp(widget.incompleteColor, Colors.white, 0.2)!,
           width: 2.0,
         ),
-      )
+      ),
     );
   }
 
@@ -208,9 +175,7 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
           stops: const [0.33, 1.0],
         ),
       ),
-      child: CustomPaint(
-        painter: CheckShapePainter(),
-      ),
+      child: CustomPaint(painter: CheckShapePainter()),
     );
   }
 
@@ -220,7 +185,13 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
       fit: StackFit.expand, // re-expand to fill the parent
       children: [
         _buildIncomplete(),
-        ParticleField(controller: particleController),
+
+        ParticleField(
+          controller: particleController,
+          renderer: _renderer,
+          clip: false,
+        ),
+
         AnimatedBuilder(
           animation: _circleAnimation,
           builder: (BuildContext context, Widget? child) {
@@ -236,88 +207,67 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
               child: child,
             );
           },
-        )
+        ),
       ],
     );
-
   }
 
   @override
   void dispose() {
+    _burstTimer?.cancel();
     animationController.dispose();
     particleController.dispose();
+    _sprite?.dispose();
     super.dispose();
   }
-
 }
 
 class CirclePainter extends CustomPainter {
-
   final double animation;
   final Color color;
 
-  CirclePainter({
-    this.animation = 0.0,
-    this.color = Colors.grey,
-  });
+  CirclePainter({this.animation = 0.0, this.color = Colors.grey});
 
   @override
   void paint(Canvas canvas, Size size) {
-
     Paint paint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
 
-      final gradient = RadialGradient(
-          colors: [
-            Color.lerp(color, Colors.black, 0.15)!,
-            color,
-          ],
-          stops: const [0.33, 1.0],
-        );
+    final gradient = RadialGradient(
+      colors: [Color.lerp(color, Colors.black, 0.15)!, color],
+      stops: const [0.33, 1.0],
+    );
 
-      gradient.createShader(
-        Rect.fromCircle(
-          center: Offset(size.width/2, size.height/2),
-          radius: size.width/2,
-        )
-      );
-
+    gradient.createShader(
+      Rect.fromCircle(
+        center: Offset(size.width / 2, size.height / 2),
+        radius: size.width / 2,
+      ),
+    );
 
     canvas.drawCircle(
-      Offset(size.width/2, size.height/2),
-      size.width/2 * animation,
-      paint
+      Offset(size.width / 2, size.height / 2),
+      size.width / 2 * animation,
+      paint,
     );
   }
 
   @override
   bool shouldRepaint(covariant CirclePainter oldDelegate) {
-    return (
-      oldDelegate.animation != animation ||
-      oldDelegate.color != color
-    );
+    return (oldDelegate.animation != animation || oldDelegate.color != color);
   }
-
 }
 
 class CheckShapePainter extends CustomPainter {
-
   // Center in 32x32 box
-  static const List<double> checkShape = [
-    9, 17,
-    13.5, 21.5,
-    23, 12,
-  ];
+  static const List<double> checkShape = [9, 17, 13.5, 21.5, 23, 12];
 
   final Color color;
   final double animation;
   late final Paint p;
 
-  CheckShapePainter({
-    this.color = Colors.white,
-    this.animation = 1.0,
-  }) {
+  CheckShapePainter({this.color = Colors.white, this.animation = 1.0}) {
     p = Paint()
       ..color = color
       ..strokeWidth = 3
@@ -326,7 +276,6 @@ class CheckShapePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
     Path path = createAnimatedPath(createCheckShapePath(size), animation);
 
     canvas.drawPath(path, p);
@@ -346,30 +295,21 @@ class CheckShapePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CheckShapePainter oldDelegate) {
-    return (
-        oldDelegate.color != color ||
-            oldDelegate.animation != animation
-    );
+    return (oldDelegate.color != color || oldDelegate.animation != animation);
   }
-
 }
 
-Path createAnimatedPath(
-    Path originalPath,
-    double animationPercent,
-    ) {
+Path createAnimatedPath(Path originalPath, double animationPercent) {
   // ComputeMetrics can only be iterated once!
-  final totalLength = originalPath
-      .computeMetrics()
-      .fold(0.0, (double prev, PathMetric metric) => prev + metric.length);
+  final totalLength = originalPath.computeMetrics().fold(
+    0.0,
+    (double prev, ui.PathMetric metric) => prev + metric.length,
+  );
   final currentLength = totalLength * animationPercent;
   return extractPathUntilLength(originalPath, currentLength);
 }
 
-Path extractPathUntilLength(
-    Path originalPath,
-    double length,
-    ) {
+Path extractPathUntilLength(Path originalPath, double length) {
   var currentLength = 0.0;
 
   final path = Path();

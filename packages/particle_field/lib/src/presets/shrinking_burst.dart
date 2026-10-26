@@ -13,31 +13,48 @@ import '../render/particle_renderer.dart';
 /// shrink over one second. Per-frame constants were converted to per-second
 /// (drag 0.97/frame @60fps, 60 frames of life).
 class ShrinkingBurst {
-  ShrinkingBurst({
-    Random? random,
-    this.color = 0xFF4CAF50,
-    this.radius = 6,
-    this.maxParticles = 64,
-  }) : system = ParticleSystem(
-         maxParticles: maxParticles,
-         random: random,
-         forces: [const Drag(coefficient: 1.83)],
-         behaviors: [const ScaleOverLife(start: 1, end: 0)],
-       );
+  ShrinkingBurst({Random? random, int? color, List<int>? palette, this.radius = 6, this.maxParticles = 64})
+    : palette = _resolvePalette(color, palette),
+      color = color ?? (palette == null ? defaultPalette.first : palette.first),
+      system = ParticleSystem(
+        maxParticles: maxParticles,
+        random: random,
+        forces: [
+          const Drag(coefficient: 1.5), 
+          const Gravity(y: 32),
+        ],
+        behaviors: [
+          FadeOut()
+        ],
+      );
 
   final ParticleSystem system;
   final int color;
+  final List<int> palette;
   final double radius;
   final int maxParticles;
+
+  static const defaultPalette = [0xFFFF5252, 0xFFFFD740, 0xFF69F0AE, 0xFF40C4FF, 0xFFE040FB, 0xFFFFFFFF];
+
+  static List<int> _resolvePalette(int? color, List<int>? palette) {
+    if (color != null) return [color];
+    if (palette != null) {
+      if (palette.isEmpty) {
+        throw ArgumentError.value(palette, 'palette', 'Must not be empty');
+      }
+      return palette;
+    }
+    return defaultPalette;
+  }
 
   late final ParticleTemplate template = ParticleTemplate(
     shape: const PointShape(),
     spread: 2 * pi,
     minSpeed: 40,
-    maxSpeed: 240,
+    maxSpeed: 80,
     minLife: 1,
-    maxLife: 1,
-    color: color,
+    maxLife: 3,        
+    colorPicker: (random) => palette[random.nextInt(palette.length)],
   );
 
   /// Emits [count] particles at ([x], [y]) in particle space.
