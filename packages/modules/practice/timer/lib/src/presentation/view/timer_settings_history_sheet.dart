@@ -102,10 +102,7 @@ class TimerSettingsHistorySheet extends StatelessWidget {
       case TimerSettingsHistoryError():
         return _message(context, context.coreL10n.errorHeadline);
       default:
-        return const SizedBox(
-          height: 160,
-          child: Center(child: CircularProgressIndicator()),
-        );
+        return Center(child: CircularProgressIndicator());
     }
   }
 

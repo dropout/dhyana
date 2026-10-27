@@ -16,8 +16,6 @@ class DefaultSessionNavigator extends SessionNavigator {
     required SessionType sessionType,
     NavigationType navigationType = NavigationType.push,
   }) async { 
-    // TODO: Why can't we pass the typed routes to gorouter when context is not available?
-    // It seems like only context extension let us pass the typed routes.
     final session = Session(
       id: idGeneratorService.sessionId(),
       startTime: startTime,
