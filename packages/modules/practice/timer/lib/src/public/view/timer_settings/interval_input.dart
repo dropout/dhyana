@@ -133,6 +133,7 @@ class _IntervalInputViewState extends State<IntervalInputView> {
 
     return InputView(
       title: widget.title,
+      actionLabel: TimerLocalizations.of(context).selectActionLabel,
       onSave: _onSelectButtonPress,
       child: DecoratedBox(
         decoration: BoxDecoration(

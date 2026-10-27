@@ -42,6 +42,9 @@ class TimerLocalizationsEn extends TimerLocalizations {
   String get inputEndingSoundLabel => 'Ending sound';
 
   @override
+  String get selectActionLabel => 'Select';
+
+  @override
   String get startTimerButtonText => 'Start';
 
   @override

@@ -133,6 +133,7 @@ class SoundInputViewState extends State<SoundInputView>
   Widget build(BuildContext context) {
     return InputView(
       title: widget.title,
+      actionLabel: TimerLocalizations.of(context).selectActionLabel,
       onSave: _onSelectButtonPress,
       child: buildInputViewContent(context),
     );

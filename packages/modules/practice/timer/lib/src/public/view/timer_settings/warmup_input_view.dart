@@ -42,6 +42,7 @@ class _WarmupInputViewState extends State<WarmupInputView>
   Widget build(BuildContext context) {
     return InputView(
       title: widget.title,
+      actionLabel: TimerLocalizations.of(context).selectActionLabel,
       onSave: () => _onSelectButtonPress(context),
       child: DecoratedBox(
         decoration: BoxDecoration(color: AppColors.backgroundPaper),

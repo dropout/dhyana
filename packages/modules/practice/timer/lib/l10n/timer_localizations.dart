@@ -158,6 +158,12 @@ abstract class TimerLocalizations {
   /// **'Ending sound'**
   String get inputEndingSoundLabel;
 
+  /// No description provided for @selectActionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get selectActionLabel;
+
   /// No description provided for @startTimerButtonText.
   ///
   /// In en, this message translates to:

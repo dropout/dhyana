@@ -42,6 +42,9 @@ class TimerLocalizationsHu extends TimerLocalizations {
   String get inputEndingSoundLabel => 'Végehang';
 
   @override
+  String get selectActionLabel => 'Kiválasztás';
+
+  @override
   String get startTimerButtonText => 'Start';
 
   @override

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
+import 'package:timer/l10n/timer_localizations.dart';
 import 'package:timer/src/public/view/timer_settings/input_gap.dart';
 import 'package:timer/src/public/view/timer_settings/input_view.dart';
 import 'package:material_ui/material_ui.dart';
@@ -80,6 +81,7 @@ class _DurationInputViewState extends State<DurationInputView>
 
     return InputView(
       title: widget.title,
+      actionLabel: TimerLocalizations.of(context).selectActionLabel,
       onSave: () => _onSelectButtonPress(context),
       child: Padding(
         padding: const EdgeInsets.only(bottom: DesignSpec.paddingLg),
