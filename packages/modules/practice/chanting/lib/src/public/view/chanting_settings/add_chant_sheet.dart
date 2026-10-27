@@ -93,7 +93,7 @@ class _AddChantSheetState extends State<AddChantSheet> {
           itemCount: widget.availableChants.length,
           // Single column on phones, two or more on wider sheets.
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 296,
+            maxCrossAxisExtent: DesignSpec.breakpointXs,
             mainAxisExtent: 200,
             mainAxisSpacing: DesignSpec.paddingSm,
             crossAxisSpacing: DesignSpec.paddingSm,

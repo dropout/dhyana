@@ -107,78 +107,89 @@ class ChantingSettingsView extends StatelessWidget {
   }
 
   Widget buildLoaded(BuildContext context, ChantingSettingsState state) {
-    return SafeArea(
-      child: Column(
-        mainAxisAlignment: .center,
-        children: [
-          Gap.medium(),
-          Text(
-            ChantingLocalizations.of(context).chantingTitle,
-            style: context.theme.textTheme.headlineLarge!.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
-          ).reveal(1),
-          Gap.medium(),
-          Flexible(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: DesignSpec.maxContentWidth, 
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: DesignSpec.paddingLg,
-                  right: DesignSpec.paddingLg,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SafeArea(
+          child: Column(
+            mainAxisAlignment: .center,
+            children: [
+              Gap.medium(),
+              Text(
+                ChantingLocalizations.of(context).chantingTitle,
+                style: context.theme.textTheme.headlineLarge!.copyWith(
+                  fontWeight: FontWeight.w800,
+                  fontSize: switch (DesignSpec.breakpointForWidth(constraints.maxWidth)) {
+                    .xs => 32,
+                    .sm => 36,
+                    .md => 40,
+                    .lg => 44,
+                    .xl => 48,
+                  }
                 ),
-                child: ChantList(
-                  chants: state.playlist,
-                  onAddChant: () =>
-                    _triggerAddChantSheet(context, availableChants),
-                  onChantRemoved: (chant, index) =>
-                    _onChantRemoved(context, chant, index),
-                  onReorder: (oldIndex, newIndex) =>
-                    _onReorderSelectedChants(context, oldIndex, newIndex),
-                ),
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
-            child: Center(
-              child: AddChantButton(onTap: () => _triggerAddChantSheet(context, availableChants)).reveal(state.playlist.length + 2)
-            ),
-          ),
-
-          // Total duration display
-          if (state.playlist.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(
-                left: DesignSpec.paddingXl,
-                right: DesignSpec.paddingXl,
-                top: DesignSpec.paddingXl,
-                bottom: DesignSpec.paddingXl,
-              ),
-              child: Row(
-                mainAxisAlignment: .center,
-                children: [
-                  Text(
-                    '${getTotalDurationText(context, state)} ${ChantingLocalizations.of(context).statsTotal.toUpperCase()}',
-                    style: context.theme.textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w800,
+              ).reveal(1),
+              Gap.medium(),
+              Flexible(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: DesignSpec.maxContentWidth, 
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: DesignSpec.paddingLg,
+                      right: DesignSpec.paddingLg,
                     ),
-                  ).reveal(state.playlist.length + 3),
-                ],
+                    child: ChantList(
+                      chants: state.playlist,
+                      onAddChant: () =>
+                        _triggerAddChantSheet(context, availableChants),
+                      onChantRemoved: (chant, index) =>
+                        _onChantRemoved(context, chant, index),
+                      onReorder: (oldIndex, newIndex) =>
+                        _onReorderSelectedChants(context, oldIndex, newIndex),
+                    ),
+                  ),
+                ),
               ),
-            ),
-
-          if (state.playlist.isNotEmpty) _StartButtonRow(
-            onStartButtonTap: () => _onStart(context),
-          ).reveal((state.playlist.isNotEmpty)
-            ? 4 + state.playlist.length
-            : 4, // from chantlist empty view
+        
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: DesignSpec.paddingXl),
+                child: Center(
+                  child: AddChantButton(onTap: () => _triggerAddChantSheet(context, availableChants)).reveal(state.playlist.length + 2)
+                ),
+              ),
+        
+              // Total duration display
+              if (state.playlist.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: DesignSpec.paddingXl,
+                    right: DesignSpec.paddingXl,
+                    top: DesignSpec.paddingXl,
+                    bottom: DesignSpec.paddingXl,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: .center,
+                    children: [
+                      Text(
+                        '${getTotalDurationText(context, state)} ${ChantingLocalizations.of(context).statsTotal.toUpperCase()}',
+                        style: context.theme.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ).reveal(state.playlist.length + 3),
+                    ],
+                  ),
+                ),
+        
+              if (state.playlist.isNotEmpty) _StartButtonRow(
+                onStartButtonTap: () => _onStart(context),
+              ).reveal((state.playlist.isNotEmpty)
+                ? 4 + state.playlist.length
+                : 4, // from chantlist empty view
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      }
     );
   }
 }

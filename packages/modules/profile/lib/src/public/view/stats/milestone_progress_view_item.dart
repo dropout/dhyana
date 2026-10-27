@@ -57,7 +57,7 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
         AppColors.gold.toARGB32(),      
       ],
     );
-    createSoftCircleImage(diameter: 64, hardness: 0.5).then((image) {
+    createSoftCircleImage(diameter: 16, hardness: 0.5).then((image) {
       if (!mounted) {
         image.dispose();
         return;
@@ -65,7 +65,7 @@ class _MilestoneProgressViewItemState extends State<MilestoneProgressViewItem>
       setState(() {
         _sprite = image;
         // spriteSize is the diameter of the burst's 16px radius.
-        _renderer = AtlasRenderer(image: image, spriteSize: 4);
+        _renderer = AtlasRenderer(image: image, spriteSize: 6);
       });
     });
     particleController = ParticleController(
