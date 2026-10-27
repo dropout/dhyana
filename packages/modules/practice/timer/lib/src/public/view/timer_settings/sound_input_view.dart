@@ -1,5 +1,4 @@
 import 'package:timer/l10n/timer_localizations.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:core/core.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_soloud/flutter_soloud.dart';
@@ -7,11 +6,11 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'input_view.dart';
 
-class SoundInputCard extends StatelessWidget {
-  final Sound sound;
-  final VoidCallback onTap;
-
-  const SoundInputCard({required this.sound, required this.onTap, super.key});
+class const SoundInputCard({
+  required final Sound sound,
+  required final VoidCallback onTap,
+  super.key,
+}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +89,8 @@ class SoundInputViewState extends State<SoundInputView>
     with TickerProviderStateMixin {
   late final SimpleAudioService audioService;
   late TabController tabController;
+  late PageController _pageController;
+  double? _fraction;
   int selectedIndex = 0;
 
   @override
@@ -141,72 +142,93 @@ class SoundInputViewState extends State<SoundInputView>
     const double cardAspectRatio = 4 / 3;
     const double cardHeight = 200;
 
-    return Column(
-      crossAxisAlignment: .stretch,
-      children: [
-        SizedBox(
-          height: cardHeight,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final double cardWidth =
-                  (cardHeight - 2 * DesignSpec.paddingSm) * cardAspectRatio;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double cardWidth =
+            (cardHeight - 2 * DesignSpec.paddingSm) * cardAspectRatio;
+        _ensurePageController(cardWidth / constraints.maxWidth);
 
-              // Never exceed the original 0.75 fraction on narrow screens.
-              final double fraction = (cardWidth / constraints.maxWidth);
-              // .clamp(0.0, 0.75);
-
-              return CarouselSlider(
-                options: CarouselOptions(
-                  height: cardHeight,
-                  viewportFraction: fraction,
-                  // enlargeFactor: .33,
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true, // This pushes the item to the center
-                  initialPage: selectedIndex,
-                  onPageChanged: (index, reason) => _onIndexChanged(index),
-                ),
-                items: Sound.values.map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: DesignSpec.paddingSm,
-                        ),
-                        child: SoundInputCard(
-                          sound: i,
-                          onTap: () => _onInputCardTap(context, i),
+        return Column(
+          crossAxisAlignment: .stretch,
+          children: [
+            SizedBox(
+              height: cardHeight,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: Sound.values.length,
+                onPageChanged: _onIndexChanged,
+                itemBuilder: (context, index) {
+                  final sound = Sound.values[index];
+                  return AnimatedBuilder(
+                    animation: _pageController,
+                    builder: (context, child) {
+                      final double page = _pageController.hasClients
+                          ? (_pageController.page ?? selectedIndex.toDouble())
+                          : selectedIndex.toDouble();
+                      final double scale = (1 - (page - index).abs() * 0.3)
+                          .clamp(0.7, 1.0);
+                      final double angle = (page - index).clamp(-1.0, 1.0) * 0.1;
+                      return Transform.scale(
+                        scale: scale,
+                        child: Transform.rotate(
+                          angle: angle,
+                          child: child,
                         ),
                       );
                     },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: DesignSpec.paddingSm,
+                      ),
+                      child: SoundInputCard(
+                        sound: sound,
+                        onTap: () => _onInputCardTap(context, sound),
+                      ),
+                    ),
                   );
-                }).toList(),
-              );
-            },
-          ),
-        ),
-        SizedBox(
-          height: 36,
-          child: Center(
-            child: AnimatedSmoothIndicator(
-              activeIndex: selectedIndex,
-              count: Sound.values.length,
-              effect: WormEffect(
-                activeDotColor: Colors.black,
-                dotColor: Colors.black.withValues(alpha: 0.2),
-                dotHeight: 12.0,
-                dotWidth: 12.0,
+                },
               ),
             ),
-          ),
-        ),
-        Gap.large(),
-      ],
+            SizedBox(
+              height: 36,
+              child: Center(
+                child: SmoothPageIndicator(
+                  controller: _pageController,
+                  count: Sound.values.length,
+                  effect: WormEffect(
+                    activeDotColor: Colors.black,
+                    dotColor: Colors.black.withValues(alpha: 0.2),
+                    dotHeight: 12.0,
+                    dotWidth: 12.0,
+                  ),
+                ),
+              ),
+            ),
+            Gap.large(),
+          ],
+        );
+      },
     );
+  }
+
+  // Viewport fraction is fixed per controller, so rebuild it when width changes.
+  void _ensurePageController(double fraction) {
+    if (_fraction == fraction) return;
+    final old = _fraction == null ? null : _pageController;
+    _fraction = fraction;
+    _pageController = PageController(
+      initialPage: selectedIndex,
+      viewportFraction: fraction,
+    );
+    if (old != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => old.dispose());
+    }
   }
 
   @override
   void dispose() {
     tabController.dispose();
+    if (_fraction != null) _pageController.dispose();
     audioService.stop();
     audioService.dispose();
     super.dispose();
