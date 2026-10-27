@@ -9,7 +9,9 @@ import 'package:material_ui/material_ui.dart';
 ///  Padding for the AppBar is 16 left and right.
 ///  Leading and trailing widget height is constrained to a height of 40.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  static const double widgetHeight = kToolbarHeight - 8;
+  
+  // The height of the leading and trailing widgets within the AppBar.
+  static const double widgetHeight = 48.0;
 
   final String? titleText;
   final Widget? leading;
@@ -69,6 +71,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  /// The preferred size of the AppBar, which is fixed at 56.0 height.
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(56.0);
 }
