@@ -33,6 +33,8 @@ class ChantingCubit({
   StreamSubscription<MediaItem?>? _mediaItemSub;
   StreamSubscription? _playlistCompletedSub;
   StreamSubscription? _audioRouteChangeSub;
+  StreamSubscription<CachingProgressEntity>? _cachingSub;
+  Completer<void>? _cachingDone;
 
   this
     : super(
@@ -81,29 +83,39 @@ class ChantingCubit({
       );
 
       // Update the state with caching progress as it occurs
-      late CachingProgressEntity cachingProgress;
-      await for (final progress in prepared) {
-        cachingProgress = progress;
+      final done = _cachingDone = Completer<void>();
+      _cachingSub = prepared.listen(
+        (progress) {
+          if (isClosed) return;
+          emit(
+            state.copyWith(
+              cachingProgress: progress,
+              chantResources: progress.results
+                  .map((r) => r.localResources)
+                  .toList(),
+            ),
+          );
+        },
+        onError: (Object e, StackTrace st) {
+          if (!done.isCompleted) done.completeError(e, st);
+        },
+        onDone: () {
+          if (!done.isCompleted) done.complete();
+        },
+        cancelOnError: true,
+      );
+      await done.future;
+
+      if (!isClosed) {
         emit(
-          state.copyWith(
-            cachingProgress: cachingProgress,
-            chantResources: cachingProgress.results
-                .map((r) => r.localResources)
-                .toList(),
-          ),
+          state.copyWith(loadingState: .completed, startTime: DateTime.now()),
         );
       }
 
-      emit(
-        state.copyWith(
-          loadingState: .completed,
-          startTime: DateTime.now(),
-        ),
-      );
-
       // logger.t('Chanting setup complete with ${resources.length} chants');
     } catch (e, st) {
-      if (!isClosed) emit(state.copyWith(loadingState: .error));      
+      if (!isClosed) emit(state.copyWith(loadingState: .error));
+      audioService.stop();
       crashlyticsService.recordError(
         exception: e,
         stackTrace: st,
@@ -171,10 +183,10 @@ class ChantingCubit({
       endTime: state.endTime ?? DateTime.now(),
       duration: state.elapsedSessionTime,
       sessionType: .chanting,
-      // destroys current view, 
+      // destroys current view,
       // ensures screen dispose is called and wakelock disabled
       // doesnt make sense to go back to chantingview after finish
-      navigationType: .go, 
+      navigationType: .go,
     );
   }
 
@@ -234,10 +246,15 @@ class ChantingCubit({
   @override
   Future<void> close() {
     // Cancel all subscriptions
+    // Order is important!
+    _mediaItemSub?.cancel();    
     _playbackStateSub?.cancel();
     _playlistCompletedSub?.cancel();
-    _audioRouteChangeSub?.cancel();
-    _mediaItemSub?.cancel();
+    _audioRouteChangeSub?.cancel();    
+    _cachingSub?.cancel();
+    
+    // Unblocks start(), which would otherwise wait on a cancelled stream.
+    if (_cachingDone?.isCompleted == false) _cachingDone!.complete();
 
     // Stop audio
     audioService.stop();
