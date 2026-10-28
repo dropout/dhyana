@@ -82,12 +82,14 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen>
                     right: DesignSpec.paddingLg,
                   ),
                   sliver: SliverToBoxAdapter(
-                    child: ProfileSettingsForm(
-                      formStateKey: formStateKey,
-                      profile: state.profile,
-                      profileSettings: state.profile.settings,
-                      clearCacheCapability: widget.clearCacheCapability,
-                      onChanged: () => _onFormChanged(context),
+                    child: MaxwidthConstraints(
+                      child: ProfileSettingsForm(
+                        formStateKey: formStateKey,
+                        profile: state.profile,
+                        profileSettings: state.profile.settings,
+                        clearCacheCapability: widget.clearCacheCapability,
+                        onChanged: () => _onFormChanged(context),
+                      ),
                     ),
                   ),
                 ),

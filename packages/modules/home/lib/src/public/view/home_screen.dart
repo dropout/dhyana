@@ -34,7 +34,10 @@ class const HomeScreen({
     return Scaffold(
       key: const Key('home_screen_scaffold'),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: HomeScreenAppbar(homeScreenState: state),
+      appBar: HomeScreenAppbar(
+        homeScreenState: state,
+        topInset: MediaQuery.paddingOf(context).top,
+      ),
       extendBodyBehindAppBar: true,
       body: ParchmentBackground(
         scrollOffset: _parchmentScrollOffset,

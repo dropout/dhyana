@@ -28,7 +28,6 @@ class const DefaultScreenSetup({
   final bool enablePullToRefresh = false,
   final Future<void> Function()? onRefresh,
   final ScrollPhysics? scrollPhysics,
-  final applyMaxWidth = true,
   super.key,
 }) extends StatefulWidget {
   factory DefaultScreenSetup.error({
@@ -110,6 +109,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
       CustomScrollView(
         controller: titleEffectScrollController,
         physics: widget.scrollPhysics,
+        
         slivers: [
           if (widget.enableAppBarSliver)
             buildTitleEffectAppBar(
@@ -217,21 +217,9 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
     required BuildContext context,
     required Widget body,
   }) {
-    final content = widget.overlay == null
-        ? body
-        : Stack(children: [body, widget.overlay!]);
-
-    return switch (widget.applyMaxWidth) {
-      // Center will cancel the stretching effect of ancestor Positioned.fill widget
-      // and constrained box will work as intended
-      true => Center( 
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: DesignSpec.maxContentWidth),
-          child: content,
-        ),
-      ),
-      false => content,
-    };
+    return widget.overlay == null
+      ? body
+      : Stack(children: [body, widget.overlay!]);
   }
 
   @override

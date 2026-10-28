@@ -68,7 +68,7 @@ class ParchmentBackground extends StatelessWidget {
       fit: .expand,
       children: [
         Positioned.fill(child: buildBg(context)),
-        child ?? Positioned.fill(child: child!),
+        if (child != null) Positioned.fill(child: child!),
       ],
     );
   }

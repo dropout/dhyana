@@ -32,7 +32,9 @@ class const SessionHistoryScreen({
               slivers: [
                 SliverSafeArea(
                   top: false,
-                  sliver: SessionHistoryList(sessions: state.sessions),
+                  sliver: SliverMaxwidthConstraints(
+                    sliver: SessionHistoryList(sessions: state.sessions),
+                  ),
                 )
               ]
             );

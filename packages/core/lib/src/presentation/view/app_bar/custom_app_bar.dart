@@ -7,9 +7,11 @@ import 'package:material_ui/material_ui.dart';
 ///  Intended height of the AppBar is 56 (kToolbarHeight).
 ///  Padding for the widgets is 8 top and bottom.
 ///  Padding for the AppBar is 16 left and right.
-///  Leading and trailing widget height is constrained to a height of 40.
+///  Leading and trailing widget height is constrained to a height of 48.
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  
+  // Fixed toolbar height, excluding the top safe-area inset.
+  static const double height = 56.0;
+
   // The height of the leading and trailing widgets within the AppBar.
   static const double widgetHeight = 48.0;
 
@@ -30,29 +32,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.only(top: DesignSpec.paddingLg),
+      minimum: EdgeInsets.only(top: DesignSpec.paddingXl),
       bottom: false,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
-        child: NavigationToolbar(
-          leading: Row(
-            children: [
-              (leading != null)
-                  ? ConstrainedBox(
-                      constraints: const BoxConstraints.tightFor(
-                        height: widgetHeight,
-                      ),
-                      child: leading,
-                    )
-                  : const SizedBox.shrink(),
-              Gap.large(),
-              titleWidget ?? buildTitle(context, titleText),
-            ],
+      child: SizedBox(
+        height: height,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: DesignSpec.paddingLg
           ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: trailing,
+          child: NavigationToolbar(
+            leading: Row(
+              children: [
+                (leading != null)
+                    ? ConstrainedBox(
+                        constraints: const BoxConstraints.tightFor(
+                          height: widgetHeight,
+                        ),
+                        child: leading,
+                      )
+                    : const SizedBox.shrink(),
+                Gap.large(),
+                titleWidget ?? buildTitle(context, titleText),
+              ],
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: trailing,
+            ),
           ),
         ),
       ),
@@ -73,5 +80,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// The preferred size of the AppBar, which is fixed at 56.0 height.
   @override
-  Size get preferredSize => const Size.fromHeight(56.0);
+  Size get preferredSize => const Size.fromHeight(height + DesignSpec.paddingXl);
 }

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/src/public/enum/home_screen_view_state.dart';
 import 'package:home/src/public/view/session_type_toggle.dart';
@@ -14,6 +16,7 @@ import 'today.dart';
 /// leading and trailing widgets for the Home Screen.
 class const HomeScreenAppbar({
   required final HomeScreenState homeScreenState,
+  required final double topInset,
   super.key,
 }) extends StatelessWidget implements PreferredSizeWidget {
 
@@ -49,20 +52,18 @@ class const HomeScreenAppbar({
       no: CustomAppBar(
         leading: Today(key: ValueKey(DateTime.now().toDayId())),
         trailing: [
-            TrailingSlot(
-              child: ProfileButton(
-                key: Key('home_screen_appbar_profile_button'),
-              ),
+          TrailingSlot(
+            child: ProfileButton(
+              key: Key('home_screen_appbar_profile_button'),
             ),
-
-          // const ProfileButton(key: Key('home_screen_appbar_profile_button')),
+          ),
         ],
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + math.max(DesignSpec.paddingXl, topInset));
 }
 
 class TrailingSlot extends StatelessWidget {

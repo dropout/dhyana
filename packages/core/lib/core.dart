@@ -109,6 +109,7 @@ export 'src/presentation/view/util/gap.dart';
 export 'src/presentation/view/util/image.dart';
 export 'src/presentation/view/util/inset_surface.dart';
 export 'src/presentation/view/util/intersperse.dart';
+export 'src/presentation/view/util/maxwidth_constraints.dart';
 export 'src/presentation/view/util/painting.dart';
 export 'src/presentation/view/util/screen.dart';
 export 'src/presentation/view/util/separator_gem.dart';

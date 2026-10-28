@@ -101,10 +101,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
                       padding: const EdgeInsets.symmetric(
                         horizontal: DesignSpec.paddingLg,
                       ),
-                      child: ProfileEditForm(
-                        profile: state.profile,
-                        formStateKey: formStateKey,
-                        onChanged: () => _onFormChanged(context),
+                      child: MaxwidthConstraints(
+                        child: ProfileEditForm(
+                          profile: state.profile,
+                          formStateKey: formStateKey,
+                          onChanged: () => _onFormChanged(context),
+                        ),
                       ),
                     ),
                   ),

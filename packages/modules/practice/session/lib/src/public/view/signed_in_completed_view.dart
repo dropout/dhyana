@@ -59,31 +59,21 @@ class const SignedInCompletedView({
                     ),
                   if (showStatsOnFinishScreen) Gap.large(),
                   if (showStatsOnFinishScreen)
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxWidth: DesignSpec.breakpointXs,
-                      ),
-                      child: ProgressSummary(
-                        oldProfile: updateResult.oldProfile,
-                        updatedProfile: updateResult.updatedProfile,
-                      ),
+                    ProgressSummary(
+                      oldProfile: updateResult.oldProfile,
+                      updatedProfile: updateResult.updatedProfile,
                     ),
                   if (usePresenceFeature) Gap.xxl(),
                   if (usePresenceFeature)
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxWidth: DesignSpec.breakpointXs,
-                      ),
-                      child: PresenceArea.withCubit(
-                        profileId: updateResult.updatedProfile.id,
-                        onCubitCreated: (cubit) {
-                          cubit.loadPresenceData(
-                            ownProfileId: updateResult.updatedProfile.id,
-                            limit: 18,
-                            windowSize: const Duration(minutes: 120),
-                          );
-                        },
-                      ),
+                    PresenceArea.withCubit(
+                      profileId: updateResult.updatedProfile.id,
+                      onCubitCreated: (cubit) {
+                        cubit.loadPresenceData(
+                          ownProfileId: updateResult.updatedProfile.id,
+                          limit: 18,
+                          windowSize: const Duration(minutes: 120),
+                        );
+                      },
                     ),
                   SizedBox(
                     // as per size of bottom area gradient - safearea bottom
