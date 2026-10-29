@@ -1,9 +1,11 @@
-import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
-import 'package:chanting/l10n/chanting_localizations.dart';
-import 'package:core/core.dart';
-import 'package:chanting/src/public/model/chant_playlist_item.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+
+import 'package:core/core.dart';
+import 'package:chanting/src/public/view/chanting_settings/chant_card.dart';
+import 'package:chanting/l10n/chanting_localizations.dart';
+import 'package:chanting/src/public/model/chant_playlist_item.dart';
+
 
 class const ChantList({
   required final List<ChantPlaylistItem> chants,
@@ -17,7 +19,6 @@ class const ChantList({
   @override
   Widget build(BuildContext context) {
     if (chants.isEmpty) return buildEmpty(context);
-    
     return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (bounds) {

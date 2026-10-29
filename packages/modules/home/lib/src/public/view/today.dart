@@ -13,8 +13,8 @@ class Today extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FadeInCanvasText(
-          text: '${DateFormat('MMMMd').format(today)}.',
+        Text(
+          '${DateFormat('MMMMd').format(today)}.',
           style: textTheme.bodyMedium!.copyWith(
             fontSize: 16,
             color: Colors.black,
@@ -24,8 +24,8 @@ class Today extends StatelessWidget {
         ),
         Transform.translate(
           offset: const Offset(0, 0),
-          child: FadeInCanvasText(
-            text: DateFormat('EEEE').format(today),
+          child: Text(
+            DateFormat('EEEE').format(today),
             style: textTheme.headlineMedium!.copyWith(
               fontSize: 28,
               color: Colors.black,
