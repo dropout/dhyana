@@ -122,11 +122,7 @@ class SoundInputViewState extends State<SoundInputView>
   }
 
   void _onInputCardTap(BuildContext context, Sound sound) async {
-    if (sound == Sound.vibrate) {
-      context.services.hapticsService.patternFromData(Sound.vibrate.assetPath);
-    } else {
-      audioService.play(sound);
-    }
+    audioService.play(sound);
   }
 
   @override

@@ -5,7 +5,6 @@ import 'package:material_ui/material_ui.dart';
 extension LocalizedSoundNameExtension on Sound {
   String getLocalizedName(dynamic localizations) => switch (this) {
     .none => localizations.noSound,
-    .vibrate => localizations.inputSoundVibrate,
     .smallBell => localizations.inputSoundSmallBell,
     .triangle => localizations.inputSoundTriangle,
   };

@@ -107,7 +107,7 @@ void main() {
       await tester.tap(find.byKey(const Key('input_view_save_button')));
       await tester.pumpAndSettle();
 
-      expect(changedValue, Sound.vibrate);
+      expect(changedValue, Sound.smallBell);
       expect(completer.isCompleted, isTrue);
       expect(state.selectedIndex, 1);
     });

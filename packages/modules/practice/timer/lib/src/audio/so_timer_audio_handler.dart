@@ -125,9 +125,7 @@ class SoTimerAudioHandler extends BaseAudioHandler {
       timerSettings.startingSound,
       timerSettings.endingSound,
     }) {
-      if (_isSoundPlayable(sound)) {
-        _soundSources[sound] ??= await soloud.loadAsset(sound.assetPath);
-      }
+      _soundSources[sound] ??= await soloud.loadAsset(sound.assetPath);
     }
 
     mediaItem.add(
@@ -158,8 +156,6 @@ class SoTimerAudioHandler extends BaseAudioHandler {
   }
 
   Future<void> _playSound(Sound sound) async {
-    if (!_isSoundPlayable(sound)) return;
-
     if (_soundHandle != null && soloud.getIsValidVoiceHandle(_soundHandle!)) {
       await soloud.stop(_soundHandle!);
     }
@@ -169,9 +165,6 @@ class SoTimerAudioHandler extends BaseAudioHandler {
     _soundSources[sound] = source;
     _soundHandle = soloud.play(source);
   }
-
-  bool _isSoundPlayable(Sound sound) =>
-      sound != Sound.none && sound != Sound.vibrate;
 
   void _startPositionTimer() {
     _positionTimer?.cancel();
