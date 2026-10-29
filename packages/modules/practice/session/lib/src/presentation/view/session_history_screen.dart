@@ -33,7 +33,10 @@ class const SessionHistoryScreen({
                 SliverSafeArea(
                   top: false,
                   sliver: SliverMaxwidthConstraints(
-                    sliver: SessionHistoryList(sessions: state.sessions),
+                    sliver: SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
+                      sliver: SessionHistoryList(sessions: state.sessions),
+                    ),
                   ),
                 )
               ]

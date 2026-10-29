@@ -95,13 +95,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen>
               ),
               slivers: [
                 SliverSafeArea(
-                  top: false,
+                  top: false,                  
                   sliver: SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DesignSpec.paddingLg,
-                      ),
-                      child: MaxwidthConstraints(
+                    child: MaxwidthConstraints(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
                         child: ProfileEditForm(
                           profile: state.profile,
                           formStateKey: formStateKey,

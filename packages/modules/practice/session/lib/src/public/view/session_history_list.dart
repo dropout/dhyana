@@ -45,11 +45,8 @@ class const SessionHistoryList({
       ]
     ];
 
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate(children),
-      ),
+    return SliverList(
+      delegate: SliverChildListDelegate(children),
     );
   }
 

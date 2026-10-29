@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
+import 'dart:math' as math;
 
 import 'package:core/src/presentation/view/parchment_background.dart';
+import 'package:core/src/presentation/view/util/maxwidth_constraints.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -141,8 +143,7 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
   Widget buildScaffolding(BuildContext context, Widget body) {
     if (widget.enableScaffolding) {
       final double topInset = MediaQuery.of(context).viewPadding.top;
-      final double appBarHeight = 56;
-      final double appBarHeightWithTopPadding = topInset + kToolbarHeight;
+      final double appBarHeightWithTopPadding = math.max(DesignSpec.paddingXl, topInset) + 56.0;
       const double fadeLength = 10.0;
 
       // Seed based on title so that the background
@@ -151,17 +152,14 @@ class _DefaultScreenSetupState extends State<DefaultScreenSetup>
 
       return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(appBarHeight),
-          child: CustomAppBar(
-            titleWidget: buildTitleEffectAppBarTitle(
-              context,
-              widget.title,
-              titleOpacity: appBarTitleOpacity,
-              enableTitleSliver: widget.enableTitleSliver,
-            ),
-            leading: CustomBackButton(),
+        appBar: CustomAppBar(
+          titleWidget: buildTitleEffectAppBarTitle(
+            context,
+            widget.title,
+            titleOpacity: appBarTitleOpacity,
+            enableTitleSliver: widget.enableTitleSliver,
           ),
+          leading: CustomBackButton(),
         ),
         body: widget.appBarBackgroundColor != null
             ? Container(
@@ -306,8 +304,11 @@ mixin DefaultScreenSetupHelpersMixin {
         opacity: opacity,
         child: Text(
           titleText,
-          style: Theme.of(context).textTheme.headlineSmall!
-              .copyWith(fontWeight: FontWeight.bold, color: color),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 26,
+            color: color,
+          ),
         ),
       ),
     );
@@ -320,8 +321,10 @@ mixin DefaultScreenSetupHelpersMixin {
   }) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.headlineLarge!
-          .copyWith(fontWeight: FontWeight.bold, color: color),
+      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+        fontWeight: FontWeight.bold, 
+        color: color
+      ),
     );
   }
 
@@ -330,10 +333,15 @@ mixin DefaultScreenSetupHelpersMixin {
     String title, {
     Color? color,
   }) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.all(DesignSpec.spacingMd),
-        child: buildTitleEffectTitle(context, title, color: color),
+    return SliverMaxwidthConstraints(
+      sliver: SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: DesignSpec.spacingMd,
+            horizontal: DesignSpec.spacingMd,
+          ),
+          child: buildTitleEffectTitle(context, title, color: color),
+        ),
       ),
     );
   }
