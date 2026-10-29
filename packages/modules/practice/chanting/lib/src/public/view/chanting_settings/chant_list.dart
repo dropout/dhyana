@@ -34,7 +34,7 @@ class const ChantList({
           stops: [0, fade, 1 - fade, 1],
         ).createShader(bounds);
       },
-      child: buildList(context),
+      child: buildList(context).reveal(2),
     );
   }
 
@@ -134,7 +134,7 @@ class const ChantList({
                   : const SizedBox.shrink(),
             ),
           ),
-        ).reveal(2 + index),
+        ),
       ),
     );
   }
