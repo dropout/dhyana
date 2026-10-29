@@ -34,16 +34,16 @@ class ProfileView extends StatelessWidget {
                   profilePhotoBlurhash: profile.photoBlurhash,
                   imageSize: DesignSpec.circleLg,
                   borderWidth: 5.0,
-                ),
+                ).reveal(1),
                 Gap.large(),
 
                 // Conditionally build widgets based on profile settings
                 ...buildProfileStats(),
                 Gap.large(),
 
-                ProfileMenu(profile: profile),
+                ProfileMenu(profile: profile).reveal(5),
                 Gap.large(),
-                const ProfileFooter(),
+                const ProfileFooter().reveal(6),
                 Gap.large(),
               ],
             ),
@@ -56,7 +56,7 @@ class ProfileView extends StatelessWidget {
   List<Widget> buildProfileStats() {
     if (profile.settings.showStats == false) return [];
     return [
-      MilestoneProgressView(statsReport: profile.statsReport),
+      MilestoneProgressView(statsReport: profile.statsReport).reveal(2),
       Gap.large(),
       Row(
         children: [
@@ -66,13 +66,13 @@ class ProfileView extends StatelessWidget {
             child: MilestonesView(profileStatsReport: profile.statsReport),
           ),
         ],
-      ),
+      ).reveal(3),
       Gap.large(),
       SummaryView(
         daysCount: profile.statsReport.completedDaysCount,
         minutesCount: profile.statsReport.completedMinutesCount,
         sessionCount: profile.statsReport.completedSessionsCount,
-      ),      
+      ).reveal(4),
     ];
   }
 }
