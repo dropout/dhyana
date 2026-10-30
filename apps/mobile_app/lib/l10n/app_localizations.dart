@@ -101,14 +101,26 @@ abstract class AppLocalizations {
   /// No description provided for @underMaintenanceTitle.
   ///
   /// In hu, this message translates to:
-  /// **'Az alkalmazás karbantartás alatt áll'**
+  /// **'Karbantartás'**
   String get underMaintenanceTitle;
 
   /// No description provided for @underMaintenanceBody.
   ///
   /// In hu, this message translates to:
-  /// **'Kérlek nézz vissza később.'**
+  /// **'Az alkalmazás karbantartás alatt áll. Kérlek nézz vissza később.'**
   String get underMaintenanceBody;
+
+  /// No description provided for @initErrorTitle.
+  ///
+  /// In hu, this message translates to:
+  /// **'Váratlan hiba!'**
+  String get initErrorTitle;
+
+  /// No description provided for @initErrorBody.
+  ///
+  /// In hu, this message translates to:
+  /// **'Nem sikerült elindítani az alkalmazást. Kérlek próbáld újra később.'**
+  String get initErrorBody;
 }
 
 class _AppLocalizationsDelegate

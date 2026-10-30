@@ -62,6 +62,7 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         builder: (BuildContext context, Widget? child) {
           child ??= const SizedBox.shrink();
+          // Don't let os text scaling affect the app's text size
           return MediaQuery.withClampedTextScaling(
             maxScaleFactor: 1.0,
             child: child,

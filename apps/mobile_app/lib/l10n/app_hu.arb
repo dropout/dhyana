@@ -1,5 +1,7 @@
 {
   "@@locale": "hu",
-  "underMaintenanceTitle": "Az alkalmazás karbantartás alatt áll",
-  "underMaintenanceBody": "Kérlek nézz vissza később."
+  "underMaintenanceTitle": "Karbantartás",
+  "underMaintenanceBody": "Az alkalmazás karbantartás alatt áll. Kérlek nézz vissza később.",
+  "initErrorTitle": "Váratlan hiba!",
+  "initErrorBody": "Nem sikerült elindítani az alkalmazást. Kérlek próbáld újra később."
 }

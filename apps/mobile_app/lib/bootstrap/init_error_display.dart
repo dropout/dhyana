@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mobile_app/l10n/app_localizations.dart';
 
 
 /// This widget is used when the app fails to initialize
@@ -25,15 +25,11 @@ class _ErrorContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlockingAppMessage(
-      title: 'Initialization Error',
-      body: 'The app failed to initialize. Please try again later.',
-      // title: LazitsAppLocalizations.of(context).initErrorTitle,
-      // body: LazitsAppLocalizations.of(context).initErrorBody
+      title: AppLocalizations.of(context).initErrorTitle,
+      body: AppLocalizations.of(context).initErrorBody,
     );
   }
 }
-
-
 
 class BlockingAppMessage extends StatelessWidget {
 

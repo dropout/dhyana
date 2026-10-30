@@ -1,5 +1,7 @@
 {
   "@@locale": "en",
   "underMaintenanceTitle": "The application is under maintenance",
-  "underMaintenanceBody": "Please check back later."
+  "underMaintenanceBody": "Please check back later.",
+  "initErrorTitle": "Unexpected Error",
+  "initErrorBody": "The app failed to initialize. Please try again later."
 }

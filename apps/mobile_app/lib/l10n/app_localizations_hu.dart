@@ -10,8 +10,16 @@ class AppLocalizationsHu extends AppLocalizations {
   AppLocalizationsHu([String locale = 'hu']) : super(locale);
 
   @override
-  String get underMaintenanceTitle => 'Az alkalmazás karbantartás alatt áll';
+  String get underMaintenanceTitle => 'Karbantartás';
 
   @override
-  String get underMaintenanceBody => 'Kérlek nézz vissza később.';
+  String get underMaintenanceBody =>
+      'Az alkalmazás karbantartás alatt áll. Kérlek nézz vissza később.';
+
+  @override
+  String get initErrorTitle => 'Váratlan hiba!';
+
+  @override
+  String get initErrorBody =>
+      'Nem sikerült elindítani az alkalmazást. Kérlek próbáld újra később.';
 }

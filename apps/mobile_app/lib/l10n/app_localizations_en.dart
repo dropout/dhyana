@@ -14,4 +14,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get underMaintenanceBody => 'Please check back later.';
+
+  @override
+  String get initErrorTitle => 'Unexpected Error';
+
+  @override
+  String get initErrorBody =>
+      'The app failed to initialize. Please try again later.';
 }
