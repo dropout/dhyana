@@ -15,22 +15,22 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@googlemaps/places": "^3.0.0",
+    "@googlemaps/places": "^3.1.0",
     "blurhash": "^2.0.5",
-    "firebase-admin": "^13.6.0",
+    "firebase-admin": "^13.10.0",
     "firebase-functions": "^7.4.0",
-    "sharp": "^0.35.4",
-    "zod": "^4.5.4"
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^8.72.1",
+    "@typescript-eslint/parser": "^8.72.1",
+    "eslint": "^8.57.1",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.25.4",
-    "firebase-functions-test": "^3.4.1",
-    "typescript": "^6.0.0"
+    "eslint-plugin-import": "^2.32.0",
+    "firebase-functions-test": "^3.5.0",
+    "typescript": "^6.0.3"
   },
   "private": true
 }
