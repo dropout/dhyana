@@ -44,7 +44,6 @@ Map<String, dynamic> _$TimerSettingsToJson(_TimerSettings instance) =>
 
 const _$SoundEnumMap = {
   Sound.none: 'none',
-  Sound.vibrate: 'vibrate',
   Sound.smallBell: 'smallBell',
   Sound.triangle: 'triangle',
 };

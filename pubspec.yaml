@@ -102,11 +102,11 @@ melos:
     build:android:production:
       description: Build production release for mobile app (Android)
       run: |
-        cd apps/mobile_app && flutter build appbundle --release --flavor production -t lib/main_production.dart && cd ../..
+        cd apps/mobile_app && flutter build appbundle --release --flavor prod -t lib/main_prod.dart && cd ../..
     build:ios:production:
       description: Build iOS IPA (production) for mobile app
       run: |
-        cd apps/mobile_app && flutter build ipa --release --flavor production -t lib/main_production.dart && cd ../..
+        cd apps/mobile_app && flutter build ipa --release --flavor prod -t lib/main_prod.dart && cd ../..
 
       
 uses-material-design: true

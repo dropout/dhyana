@@ -5,18 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "stepstones (debug)",
+            "name": "Stepstones Staging (debug)",
             "type": "dart",
             "request": "launch",
             "flutterMode": "debug",
             "program": "apps/mobile_app/lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging"
+            ],
         },
         {
-            "name": "stepstones (profile)",
+            "name": "stepstones Staging (profile)",
             "type": "dart",
             "request": "launch",
             "flutterMode": "profile",
             "program": "apps/mobile_app/lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging"
+            ],
         },        
         {
             "name": "widgetbook",
@@ -24,49 +32,6 @@
             "request": "launch",
             "flutterMode": "debug",
             "program": "apps/widgetbook/lib/main.dart"
-        },
-
-        {
-            "name": "dhyana - staging (debug)",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "debug",
-            "program": "lib/main_staging.dart",
-            "args": [
-                "--flavor",
-                "staging"
-            ],
-            "env": {
-                "NO_XIPH_LIBS": "1"
-            }            
-        },
-        {
-            "name": "dhyana - staging (profile)",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "profile",
-            "program": "lib/main_staging.dart",
-            "args": [
-                "--flavor",
-                "staging"
-            ],
-            "env": {
-                "NO_XIPH_LIBS": "1"
-            }            
-        },
-        {
-            "name": "dhyana - staging (release)",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "release",
-            "program": "lib/main_staging.dart",
-            "args": [
-                "--flavor",
-                "staging"
-            ],
-            "env": {
-                "NO_XIPH_LIBS": "1"
-            }            
-        }
+        },        
     ]
 }

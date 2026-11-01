@@ -29,8 +29,9 @@ A Service Locator pattern is used for dependency injection, allowing for easy co
 The application uses Firebase as a comprehensive Backend-as-a-Service (BaaS) platform that operates on a serverless model.
 
 #### Environment Flavors
-Support for multiple environments (development, staging, production) is provided through the use of Flutter flavors with multiple entry points:
-- Local: `lib/main_local.dart`
+Support for multiple environments (dev, test, staging, prod) is provided through the use of Flutter flavors with multiple entry points:
+- Dev: `lib/main_dev.dart`
+- Test: `lib/main_test.dart`
 - Staging: `lib/main_staging.dart`
 - Production: `lib/main_prod.dart`
 
