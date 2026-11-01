@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:clock/clock.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:timer/src/data/datasource/firebase_timer_settings_history_data_provider.dart';
 import 'package:timer/src/domain/entity/timer_settings_entity.dart';
@@ -23,25 +23,7 @@ class FirebaseTimerSettingsHistoryRepository
         profileId,
       );
 
-    try {
-      final timerSettingsHistoryRecord = await
-        timerSettingsHistoryDataProvider.read(timerSettings.id);
-      await timerSettingsHistoryDataProvider.update(
-        timerSettingsHistoryRecord.copyWith(
-          useCount: timerSettingsHistoryRecord.useCount + 1,
-          lastUsed: DateTime.now(),
-        )
-      );
-    } on DocumentNotFoundException {
-      await timerSettingsHistoryDataProvider.create(
-        TimerSettingsHistoryRecordEntity(
-          id: timerSettings.id,
-          timerSettings: timerSettings,
-          useCount: 1,
-          lastUsed: DateTime.now(),
-        )
-      );
-    }
+    await timerSettingsHistoryDataProvider.recordUse(timerSettings, clock.now());
   }
 
   @override
@@ -54,7 +36,8 @@ class FirebaseTimerSettingsHistoryRepository
         fireStore,
         profileId,
       );
-    return timerSettingsHistoryDataProvider.query(limit: limit);
+    return timerSettingsHistoryDataProvider.query(limit: limit)
+      .then(dedupeTimerSettingsHistory);
   }
 
   @override
@@ -67,7 +50,24 @@ class FirebaseTimerSettingsHistoryRepository
         fireStore,
         profileId,
       );
-    return timerSettingsHistoryDataProvider.queryStream(limit: limit);
+    return timerSettingsHistoryDataProvider.queryStream(limit: limit)
+      .map(dedupeTimerSettingsHistory);
   }
 
+}
+
+/// Merges records whose settings resolve to the same id, e.g. legacy ids or
+/// removed sounds that now decode to defaults. Input must be ordered by recency.
+List<TimerSettingsHistoryRecordEntity> dedupeTimerSettingsHistory(
+  List<TimerSettingsHistoryRecordEntity> records,
+) {
+  final merged = <String, TimerSettingsHistoryRecordEntity>{};
+  for (final record in records) {
+    final key = record.timerSettings.id;
+    final existing = merged[key];
+    merged[key] = existing == null
+      ? record
+      : existing.copyWith(useCount: existing.useCount + record.useCount);
+  }
+  return merged.values.toList();
 }
