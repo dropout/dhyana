@@ -34,7 +34,7 @@ If no build mode specified, use `debug`.
 - IPA (iOS): `build ipa --flavor <flavor> -t lib/main_<flavor>.dart --<build_mode>`
 
 ## Distribution
-- iOS to Firebase App Distribution (`ios_testers`) + Crashlytics symbols: `bash support/maintenance_scripts/distribute_ios.sh <firebase_project> [--notes "<text>"] [--dry-run]`
-    - Example: `bash support/maintenance_scripts/distribute_ios.sh stepstones-staging`
+- iOS to Firebase App Distribution (`ios_testers`) + Crashlytics symbols: `bash support/maintenance_scripts/distribute_ios.sh <flavor> [--notes "<text>"] [--dry-run]`
+    - Example: `bash support/maintenance_scripts/distribute_ios.sh staging`
+    - Firebase project and app id are read from `apps/mobile_app/ios/config/<flavor>/GoogleService-Info.plist`; `FIREBASE_IOS_APP_ID` overrides the app id.
     - Requires a clean git tree; bumps only the build number in `apps/mobile_app/pubspec.yaml` and commits it after success.
-    - Currently only the `staging` flavor is supported.

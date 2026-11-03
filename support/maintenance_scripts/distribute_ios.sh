@@ -4,40 +4,38 @@
 set -euo pipefail
 
 TESTER_GROUP="ios_testers"
-FLAVOR="staging"
 NOTES=""
 DRY_RUN=0
 
 usage() {
-  echo "Usage: $0 <firebase-project> [--flavor staging] [--notes <text>] [--dry-run]"
+  echo "Usage: $0 <flavor> [--notes <text>] [--dry-run]"
   exit 1
 }
 
 [ $# -ge 1 ] || usage
-PROJECT="$1"
+FLAVOR="$1"
 shift
 while [ $# -gt 0 ]; do
   case "$1" in
-    --flavor) FLAVOR="${2:?}"; shift 2 ;;
     --notes) NOTES="${2:?}"; shift 2 ;;
     --dry-run) DRY_RUN=1; shift ;;
     *) usage ;;
   esac
 done
 
-# The iOS project has a single scheme, so only staging is supported for now.
-if [ "$FLAVOR" != "staging" ]; then
-  echo "Error: unsupported flavor '$FLAVOR' (only 'staging')."
-  exit 1
-fi
-
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 APP_DIR="$REPO_ROOT/apps/mobile_app"
 PUBSPEC="$APP_DIR/pubspec.yaml"
 EXPORT_OPTIONS="$SCRIPT_DIR/ExportOptions.plist"
-PLIST="$APP_DIR/ios/Runner/GoogleService-Info.plist"
+SCHEME="$APP_DIR/ios/Runner.xcodeproj/xcshareddata/xcschemes/$FLAVOR.xcscheme"
+ENTRYPOINT="lib/main_$FLAVOR.dart"
+PLIST="$APP_DIR/ios/config/$FLAVOR/GoogleService-Info.plist"
 SYMBOLS_DIR="$APP_DIR/build/symbols"
+
+[ -f "$SCHEME" ] || { echo "Error: unknown flavor '$FLAVOR' (no Xcode scheme at $SCHEME)."; exit 1; }
+[ -f "$APP_DIR/$ENTRYPOINT" ] || { echo "Error: entry point $ENTRYPOINT missing for flavor '$FLAVOR'."; exit 1; }
+[ -f "$PLIST" ] || { echo "Error: Firebase config missing for flavor '$FLAVOR': $PLIST"; exit 1; }
 
 run() {
   echo "+ $*"
@@ -55,13 +53,9 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
-# Resolve Firebase app id from the plist and make sure it belongs to the project.
+# The flavor's plist is the source of truth for the Firebase project and app.
+PROJECT="$(/usr/libexec/PlistBuddy -c 'Print :PROJECT_ID' "$PLIST")"
 APP_ID="${FIREBASE_IOS_APP_ID:-$(/usr/libexec/PlistBuddy -c 'Print :GOOGLE_APP_ID' "$PLIST")}"
-PLIST_PROJECT="$(/usr/libexec/PlistBuddy -c 'Print :PROJECT_ID' "$PLIST")"
-if [ "$PLIST_PROJECT" != "$PROJECT" ] && [ -z "${FIREBASE_IOS_APP_ID:-}" ]; then
-  echo "Error: GoogleService-Info.plist belongs to '$PLIST_PROJECT', not '$PROJECT'."
-  exit 1
-fi
 
 # Bump only the build number (+N), keeping the version intact.
 CURRENT="$(grep -E '^version: [0-9]+\.[0-9]+\.[0-9]+\+[0-9]+$' "$PUBSPEC" | head -1 | awk '{print $2}')"
@@ -69,7 +63,7 @@ CURRENT="$(grep -E '^version: [0-9]+\.[0-9]+\.[0-9]+\+[0-9]+$' "$PUBSPEC" | head
 VERSION_NAME="${CURRENT%+*}"
 NEW_BUILD=$(( ${CURRENT##*+} + 1 ))
 NEW_VERSION="$VERSION_NAME+$NEW_BUILD"
-echo "Version: $CURRENT -> $NEW_VERSION (app id $APP_ID)"
+echo "Version: $CURRENT -> $NEW_VERSION ($FLAVOR: project $PROJECT, app id $APP_ID)"
 
 BUMPED=0
 cleanup() {
@@ -87,7 +81,7 @@ fi
 
 cd "$APP_DIR"
 rm -rf build/ios/ipa build/ios/archive "$SYMBOLS_DIR"
-run flutter build ipa --release -t "lib/main_$FLAVOR.dart" \
+run flutter build ipa --release --flavor "$FLAVOR" -t "$ENTRYPOINT" \
   --obfuscate --split-debug-info="$SYMBOLS_DIR" \
   --export-options-plist="$EXPORT_OPTIONS"
 
@@ -121,4 +115,4 @@ run "$UPLOAD_SYMBOLS" -gsp "$PLIST" -p ios build/ios/archive/Runner.xcarchive/dS
 
 # The Dart symbols file is covered by the App.framework dSYM above (same UUID);
 # crashlytics:symbols:upload cannot process iOS Mach-O symbol files.
-echo "Done: $NEW_VERSION distributed to $TESTER_GROUP."
+echo "Done: $FLAVOR $NEW_VERSION distributed to $TESTER_GROUP in $PROJECT."
