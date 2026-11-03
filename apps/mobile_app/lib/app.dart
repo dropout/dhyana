@@ -92,7 +92,7 @@ class App extends StatelessWidget {
 
   /// Builds a simplified maintenance mode app with
   /// a localized maintenance message.
-  Widget buildMaintenanceModeApp(BuildContext context) {
+  Widget buildMaintenanceModeApp(BuildContext context) {    
     return MaterialApp(
       color: AppColors.backgroundPaper,
       supportedLocales: AppLocalizations.supportedLocales,

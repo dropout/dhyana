@@ -1,3 +1,4 @@
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mobile_app/app.dart';
 import 'package:firebase_provider/firebase_provider.dart';
 import 'package:material_ui/material_ui.dart';
@@ -10,7 +11,11 @@ import 'bootstrap/initializer.dart';
 
 void main() async {
   try {
-    WidgetsFlutterBinding.ensureInitialized();
+    final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+    // Preserve the native splash screen until the 
+    // application has fully initialized.
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
     // Firebase
     FirebaseProvider firebaseProvider = FirebaseProvider();
@@ -29,7 +34,9 @@ void main() async {
     runApp(App(
       initResult: initResult,
     ));
-  
+
+    // Remove the native splash screen after the app has initialized.
+    FlutterNativeSplash.remove();  
   } catch (e, stack) {
     FirebaseCrashlytics.instance.recordError(
       e,
