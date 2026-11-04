@@ -1,13 +1,5 @@
 flutter_native_splash:
-  # This package generates native code to customize Flutter's default white native splash screen
-  # with background color and splash image.
-  # Steps to make this work:
-  # 1. Customize the parameters below.
-  # 2. run the following command in the terminal:
-  # dart run flutter_native_splash:create
-  # or if you place this not in pubspec.yaml and not in flutter_native_splash.yaml:
-  # dart run flutter_native_splash:create -p ../your-filepath.yaml
-  # 3. voila, done!
+
 
   # NOTES:
   # - in case you got some trouble, cleaning up flutter project might help:
@@ -17,16 +9,12 @@ flutter_native_splash:
   # or if you place this not in pubspec.yaml and not in flutter_native_splash.yaml:
   # dart run flutter_native_splash:remove -p ../your-filepath.yaml
 
-  # IMPORTANT NOTE: These parameter do not affect the configuration of Android 12 and later, which
-  # handle splash screens differently that prior versions of Android.  Android 12 and later must be
-  # configured specifically in the android_12 section below, at the very end.
-
   #======================================================================
   
   # uncomment this if you want to disable this package for specific platform:
   # android: false
   # ios: false
-  # web: false
+  web: false
   
   #======================================================================
 
@@ -37,7 +25,7 @@ flutter_native_splash:
   # remain optional. NOTE that if you specify the [required] color, then you cant 
   # use the [required] background_image in the next section. the reverse is true.
   # select one, they cant work together.
-  color: "#CEBB79"  ##====================================[REQUIRED]==========
+  color: "#CBB270"  ##====================================[REQUIRED]==========
   #color_dark: "#042a49"
   # platform-specific color. will override general color if active:
   #color_android: "#42a5f5"
@@ -63,7 +51,7 @@ flutter_native_splash:
   # general image for all platform (except android 12+):
   # allows you to specify an image used in the splash screen. It must be a
   # png file and should be sized for 4x pixel density.
-  # image:                assets/splash.png
+  image:                assets/splash.png
   #image_dark:          assets/splash-invert.png
   # platform-specific image. will override general image if active:
   #image_android:       assets/splash-android.png
@@ -85,7 +73,7 @@ flutter_native_splash:
 
   # general branding for all platform (except android 12+):
   # allows you to specify an image used as branding in the splash screen. should be png.
-  branding:      assets/app_icon_rounded.png
+  # branding:      assets/app_icon_rounded.png
   #branding_dark: assets/dart_dark.png
   # platform-specific branding. will override general branding if active:
   #branding_android:      assets/brand-android.png
@@ -111,15 +99,12 @@ flutter_native_splash:
 
   # By specifying the used minimum SDK version of Android, flutter_native_splash might be able to
   # merge/remove certain styles and drawables.
-  #android_min_sdk: 24  # default 16
+  android_min_sdk: 26  # default 16
 
   # hide notif bar on android. ios already hides it by default. 
   # Has no effect in web since web has no notification bar.
   fullscreen: true                # default false
-  # if you dont want to hide notif bar, for android just set this to false,
-  # but for ios, add this to your flutter main():
-  # WidgetsFlutterBinding.ensureInitialized(); 
-  # SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top], );
+
     
   #! extra note for IOS:
   # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
@@ -137,7 +122,7 @@ flutter_native_splash:
   #! ANDROID 12+ configuration:
   android_12:
     # background color
-    color: "#CEBB79"
+    color: "#CBB270"
     # color_dark: "#042a49"
 
     # center-logo
