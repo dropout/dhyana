@@ -49,7 +49,8 @@ class const DefaultScreenSetup({
 
   factory DefaultScreenSetup.loading({required String title, Key? key}) =>
       DefaultScreenSetup(
-        title: title,
+        title: title, // used for generating procedural background
+        enableTitleSliver: false, // not shown while loading
         scrollPhysics: const NeverScrollableScrollPhysics(),
         slivers: [
           SliverFillRemaining(hasScrollBody: false, child: AppLoadingDisplay()),
