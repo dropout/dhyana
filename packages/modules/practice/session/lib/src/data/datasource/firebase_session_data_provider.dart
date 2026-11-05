@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_provider/firebase_provider.dart';
 import 'package:core/core.dart';
 import 'package:session/src/data/datasource/session_data_provider.dart';
 import 'package:session/src/domain/entity/session_entity.dart';
