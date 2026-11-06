@@ -3,17 +3,13 @@ import 'package:flutter_mindful_minutes/flutter_mindful_minutes.dart';
 import 'package:core/src/service/mindful_minutes_service.dart';
 
 
-class DefaultMindfulMinutesService implements MindfulMinutesService {
-
-  final FlutterMindfulMinutes flutterMindfulMinutes;
-
-  DefaultMindfulMinutesService({
-    required this.flutterMindfulMinutes,
-  }); 
+class const DefaultMindfulMinutesService({
+  required final FlutterMindfulMinutes flutterMindfulMinutes,
+}) implements MindfulMinutesService {
 
   @override
-  Future<bool> isServiceAvailable() => 
-    flutterMindfulMinutes.isAvailable();
+  Future<void> checkAvailability() => 
+    flutterMindfulMinutes.checkAvailability();
 
   @override
   Future<RequestStatusForAuthorization> getRequestForAuthorizationStatus() => 

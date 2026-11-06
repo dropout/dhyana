@@ -2,6 +2,7 @@ name: session
 resolution: workspace
 description: "A new Flutter package project."
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -32,8 +33,10 @@ dependencies:
   particle_field: ^1.0.0
   faker: ^2.2.0
   sqflite_common_ffi: ^2.4.2+1
+  flutter_mindful_minutes:
+    git:
+      url: git@github.com:dropout/flutter_mindful_minutes.git
 
-  cloud_firestore: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -46,13 +49,8 @@ dev_dependencies:
   bloc_test: ^10.0.0
   nock: ^1.2.3
   
-  
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter packages.
-  flutter_mindful_minutes: any
 flutter:
   generate: true
 

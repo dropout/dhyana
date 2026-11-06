@@ -108,17 +108,27 @@ class _ProfileSettingsHealthConnectState
   }
 
   void _updateServiceStatus() async {
-    final isAvailable = await widget.mindfulMinutesService.isServiceAvailable();
-    final requestStatus = await widget.mindfulMinutesService
-        .getRequestForAuthorizationStatus();
-    final authorizationStatus = await widget.mindfulMinutesService
-        .getAuthorizationStatus();
-    setState(() {
-      _isServiceAvailable = isAvailable;
-      _requestStatus = requestStatus;
-      _authorizationStatus = authorizationStatus;
-      _initializing = false;
-    });
+    try {
+      await widget.mindfulMinutesService.checkAvailability();
+      final requestStatus = await widget.mindfulMinutesService
+          .getRequestForAuthorizationStatus();
+      final authorizationStatus = await widget.mindfulMinutesService
+          .getAuthorizationStatus();
+
+      setState(() {
+        _isServiceAvailable = true;
+        _requestStatus = requestStatus;
+        _authorizationStatus = authorizationStatus;
+        _initializing = false;
+      });          
+    } catch (e) {
+      setState(() {
+        _isServiceAvailable = false;
+        _requestStatus = RequestStatusForAuthorization.unknown;
+        _authorizationStatus = AuthorizationStatus.notDetermined;
+        _initializing = false;
+      });
+    }
   }
 
   bool get isPlatformSupported => Platform.isAndroid || Platform.isIOS;
@@ -164,7 +174,7 @@ class _ProfileSettingsHealthConnectState
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-            // color: AppColors.backgroundPaperLight,
+            color: AppColors.backgroundPaperLight,
             borderRadius: BorderRadius.circular(50),
           ),
           child: Padding(
@@ -174,7 +184,9 @@ class _ProfileSettingsHealthConnectState
                 SwitchListTile(
                   title: Text(
                     localizationDto.title,
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: .w500,
+                    ),                    
                   ),
                   tileColor: AppColors.backgroundPaperLight,
                   inactiveThumbColor: AppColors.backgroundPaperDark,
