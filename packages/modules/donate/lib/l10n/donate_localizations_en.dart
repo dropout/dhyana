@@ -11,4 +11,9 @@ class DonateLocalizationsEn extends DonateLocalizations {
 
   @override
   String get donate => 'Donate';
+
+  @override
+  String donatePromptTitle(String appName) {
+    return 'Do you like using $appName?';
+  }
 }

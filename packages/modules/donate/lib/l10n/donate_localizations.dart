@@ -103,6 +103,12 @@ abstract class DonateLocalizations {
   /// In en, this message translates to:
   /// **'Donate'**
   String get donate;
+
+  /// No description provided for @donatePromptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you like using {appName}?'**
+  String donatePromptTitle(String appName);
 }
 
 class _DonateLocalizationsDelegate

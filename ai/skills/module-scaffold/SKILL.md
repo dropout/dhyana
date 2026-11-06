@@ -1,6 +1,6 @@
 ---
 name: module-scaffold
-description: Create a new feature module (package) in the Dhyana monorepo and wire it into the workspace, app DI, router, localization and Widgetbook. Use when adding a new module under packages/modules or a new top-level package.
+description: Create a new feature module (package) in the Stepstones monorepo and wire it into the workspace, app DI, router, localization and Widgetbook. Use when adding a new module under packages/modules or a new top-level package.
 ---
 
 # Module scaffold
@@ -100,7 +100,7 @@ Then follow `verify-package`, plus run the app-level analyze since steps 3-5 tou
 - `.freezed.dart` / `.g.dart` are generated; if analysis reports missing parts, run `melos run codegen` rather than editing.
 - Generated l10n Dart files exist in the repo (`lib/l10n/*_localizations*.dart`); regenerate after changing `.arb` files.
 - Keep `.arb` keys identical in `en` and `hu`.
-- The `dhyana_lints` `domain_layer_isolation` rule matches `/lib/modules/**/domain/`, but real paths are `packages/modules/<m>/lib/src/domain/`, so it likely never fires. Don't rely on it; check domain imports manually (`verify-package`).
+- The `stepstones_lints` `domain_layer_isolation` analyzer rule mirrors the script's domain checks for editor feedback but is not enabled in any `analysis_options.yaml` yet. Rely on `check_module_boundaries.sh` (`verify-package`).
 - Run `bash support/maintenance_scripts/check_module_boundaries.sh packages/modules/<m>` for the new module; it must be clean.
 
 ## 8. Checklist

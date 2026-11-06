@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Read-only reviewer that checks a change against Dhyana's architecture and layer skills - boundaries, contracts, layering, error handling, tests - and reports only high-confidence issues. Use after implementation and before merge.
+description: Read-only reviewer that checks a change against Stepstones' architecture and layer skills - boundaries, contracts, layering, error handling, tests - and reports only high-confidence issues. Use after implementation and before merge.
 skills:
   - domain-layer
   - data-layer

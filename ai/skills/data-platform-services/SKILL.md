@@ -1,10 +1,10 @@
 ---
 name: data-platform-services
-description: "Implement domain service interfaces in a Dhyana data layer using platform capabilities: audio, haptics, file system, downloads, and navigation. Use when adding or changing a `Default*Service`, `*FileSystem`, downloader/validator, or `Default*Navigator` under `data/service/`, or when deciding whether a class in `data/service` is really a domain manager."
+description: "Implement domain service interfaces in a Stepstones data layer using platform capabilities: audio, haptics, file system, downloads, and navigation. Use when adding or changing a `Default*Service`, `*FileSystem`, downloader/validator, or `Default*Navigator` under `data/service/`, or when deciding whether a class in `data/service` is really a domain manager."
 license: MIT
 ---
 
-# Dhyana Platform Services
+# Stepstones Platform Services
 
 Read `data-layer` first. This skill covers `data/service/` classes that are **not** public APIs or port adapters (those are in `data-boundary`).
 

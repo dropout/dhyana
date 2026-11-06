@@ -22,7 +22,7 @@ void main() {
       id: 'profile-1',
       firstName: 'Ada',
       lastName: 'Lovelace',
-      email: 'ada@dhyana.app',
+      email: 'ada@stepstones.app',
       photoUrl: null,
       photoBlurhash: null,
       signupDate: DateTime(2026, 1, 1),

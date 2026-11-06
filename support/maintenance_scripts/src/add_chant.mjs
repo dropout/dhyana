@@ -324,7 +324,7 @@ async function main() {
 		},
 	};
 
-	const bucketName = app.options.storageBucket || `${options.project}.appspot.com`;
+	const bucketName = app.options.storageBucket || `${options.project}.firebasestorage.app`;
 	const bucket = admin.storage(app).bucket(bucketName);
 
 	const audioRemotePath = `chants/${chantId}/${DEFAULT_AUDIO_FILE}`;

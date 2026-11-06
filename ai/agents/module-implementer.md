@@ -1,6 +1,6 @@
 ---
 name: module-implementer
-description: Implements a scoped feature or change inside ONE Dhyana package (domain, data, presentation, public API, DI, routes, l10n) following the layer skills, then verifies it. Use when a plan or task targets a single module/package.
+description: Implements a scoped feature or change inside ONE Stepstones package (domain, data, presentation, public API, DI, routes, l10n) following the layer skills, then verifies it. Use when a plan or task targets a single module/package.
 skills:
   - domain-layer
   - data-layer

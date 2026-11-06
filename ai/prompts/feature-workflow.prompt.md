@@ -1,6 +1,6 @@
 ---
 name: Feature Workflow
-description: "Run the multi-agent workflow for a Dhyana feature: plan per-package briefs, implement, test, verify, review. Use when a feature or change touches one or more packages or alters a public contract."
+description: "Run the multi-agent workflow for a Stepstones feature: plan per-package briefs, implement, test, verify, review. Use when a feature or change touches one or more packages or alters a public contract."
 argument-hint: "e.g. 'Add streak reminder setting to profile and show it on home'"
 agent: agent
 ---

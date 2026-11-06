@@ -52,7 +52,7 @@ class Initializer with LoggerMixin {
       ),
       config: const audio_service.AudioServiceConfig(
         androidNotificationChannelId: 'com.stepstonesapp.audio',
-        androidNotificationChannelName: 'Stepstones',
+        androidNotificationChannelName: AppInfo.name,
         androidNotificationOngoing: true,
       ),
     );

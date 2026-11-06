@@ -1,4 +1,5 @@
 {
   "@@locale": "hu",
-  "donate": "Adományozás"
+  "donate": "Adományozás",
+  "donatePromptTitle": "Tetszik a {appName}?"
 }

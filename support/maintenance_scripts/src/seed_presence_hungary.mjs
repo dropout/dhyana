@@ -126,7 +126,7 @@ function buildPresencePayloads() {
 function printUsageAndExit(message) {
   console.error(message);
   console.error(
-    "Usage: node src/seed_presence_hungary.mjs --project=dhyana-staging (--confirm|--dry-run)",
+    "Usage: node src/seed_presence_hungary.mjs --project=stepstones-staging (--confirm|--dry-run)",
   );
   process.exit(1);
 }

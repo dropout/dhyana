@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "seed:presence:hungary:dry-run": "node src/seed_presence_hungary.mjs --project dhyana-staging --dry-run",
-    "seed:presence:hungary:staging": "node src/seed_presence_hungary.mjs --project dhyana-staging --confirm"
+    "seed:presence:hungary:dry-run": "node src/seed_presence_hungary.mjs --project stepstones-staging --dry-run",
+    "seed:presence:hungary:staging": "node src/seed_presence_hungary.mjs --project stepstones-staging --confirm"
   },
   "license": "MIT",
   "private": true,

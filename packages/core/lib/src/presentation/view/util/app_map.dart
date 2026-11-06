@@ -1,4 +1,5 @@
 import 'package:core/src/domain/entity/location.dart';
+import 'package:core/src/util/app_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
@@ -64,7 +65,7 @@ class _AppMapState extends State<AppMap> {
         TileLayer(
           urlTemplate: urlTemplate,
           subdomains: const ['a', 'b', 'c', 'd'],
-          userAgentPackageName: 'com.dhyana.app',
+          userAgentPackageName: AppInfo.packageName,
         ),
         MarkerLayer(
           markers: [

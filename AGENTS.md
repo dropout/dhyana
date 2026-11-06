@@ -1,7 +1,7 @@
-# AGENTS.md - Contribution Guide for project Dhyana
+# AGENTS.md - Contribution Guide for project Stepstones
 
 ## Scope
-Dhyana is a Flutter meditation timer app (Dart) using layered architecture and Firebase.
+Stepstones is a Flutter meditation timer app (Dart) using layered architecture and Firebase.
 Use this file as the default cross-agent guide. Keep instructions concise and link to docs for details.
 
 ## Critical Setup Pitfalls
@@ -39,6 +39,7 @@ For running and building commands look at the commands documentation: [`docs/com
 - `packages/firebase_provider/`: Firebase SDK provider module for the app with emulator configuration code.
 - `packages/bar_chart/`: Bar chart widget module for the app.
 - `packages/particle_field/`: Particle field widget module for the app.
+- `packages/stepstones_lints/`: Analyzer plugin with module boundary rules for editor feedback (not enabled yet).
 - `packages/*/lib/l10n/`: localization resources for the modules.
 - `packages/*/test/`: Unit tests.
 - `docs/`: Project-wide documentation.

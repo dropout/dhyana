@@ -6,7 +6,8 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
-JSON_FILE="../../../dhyana-staging-firebase-adminsdk-4e5rk-ad73a1a3e1.json"
+# Override with FIREBASE_SERVICE_ACCOUNT_FILE to use a differently named key.
+JSON_FILE="${FIREBASE_SERVICE_ACCOUNT_FILE:-../../../stepstones-staging-firebase-adminsdk.json}"
 NODE_SCRIPT="$1"
 
 # Check if the JSON file exists

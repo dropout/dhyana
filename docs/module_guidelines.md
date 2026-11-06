@@ -1,6 +1,6 @@
 # Module Guidelines
 
-This document complements the compressed clean architecture guidance in [architecture_guidelines.md](architecture_guidelines.md). It defines the default structure and conventions for creating new modules in Dhyana.
+This document complements the compressed clean architecture guidance in [architecture_guidelines.md](architecture_guidelines.md). It defines the default structure and conventions for creating new modules in Stepstones.
 
 ## 1. Core Principles
 
