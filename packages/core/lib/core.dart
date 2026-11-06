@@ -89,6 +89,7 @@ export 'src/presentation/view/parchment_background.dart';
 export 'src/presentation/view/transition/linear_gradient_mask_transition.dart';
 export 'src/presentation/view/util/app_animation.dart';
 export 'src/presentation/view/util/app_button.dart';
+export 'src/presentation/view/util/app_breakpoint.dart';
 export 'src/presentation/view/util/app_cached_network_image.dart';
 export 'src/presentation/view/util/app_card.dart';
 export 'src/presentation/view/util/app_circular_icon.dart';

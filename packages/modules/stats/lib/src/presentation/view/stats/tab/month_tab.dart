@@ -35,49 +35,39 @@ class MonthTabState extends State<MonthTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.black,
+    return SizedBox(
+      height: 540,
+      child: PageView.builder(
+        reverse: true,
+        itemCount: 4,
+        onPageChanged: (index) {
+          setState(() {
+            calculatedStats = CalculatedStats.fromStatsBuckets(months);
+          });
+        },
+        itemBuilder: (context, index) {
+          return BlocProvider<StatsBucketCubit>(
+            create: (BuildContext context) {
+              return GetIt.I.get<StatsBucketCubit>()..query(
+                profileId: widget.profileId,
+                from: intervals[index].from,
+                to: intervals[index].to,
+                granularity: .months,
+              );
+            },
+            child: MonthsBarChartPage(
+              pageIndex: index,
+              statsInterval: intervals[index],
+              onMonthsLoaded: (List<MonthStatsBucket> loadedMonths) {
+                setState(() {
+                  months = loadedMonths;
+                  calculatedStats ??= CalculatedStats.fromStatsBuckets(months);
+                });
+              },
             ),
-            child: SizedBox(
-              height: 540,
-              child: PageView.builder(
-                reverse: true,
-                itemCount: 4,
-                onPageChanged: (index) {
-                  setState(() {
-                    calculatedStats = CalculatedStats.fromStatsBuckets(months);
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return BlocProvider<StatsBucketCubit>(
-                    create: (BuildContext context) {
-                      return GetIt.I.get<StatsBucketCubit>()..query(
-                        profileId: widget.profileId,
-                        from: intervals[index].from,
-                        to: intervals[index].to,
-                        granularity: .months,
-                      );
-                    },
-                    child: MonthsBarChartPage(
-                      pageIndex: index,
-                      statsInterval: intervals[index],
-                      onMonthsLoaded: (List<MonthStatsBucket> loadedMonths) {
-                        setState(() {
-                          months = loadedMonths;
-                          calculatedStats ??= CalculatedStats.fromStatsBuckets(months);
-                        });
-                      },
-                    ),
-                  );
-                },
-              ),
-            )
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
 }

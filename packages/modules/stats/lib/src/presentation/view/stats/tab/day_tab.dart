@@ -32,49 +32,41 @@ class DaysTabState extends State<DaysTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(color: Colors.black),
-          child: SizedBox(
-            height: 540,
-            child: PageView.builder(
-              reverse: true,
-              itemCount: 4,
-              onPageChanged: (index) {
+    return SizedBox(
+      height: 540,
+      child: PageView.builder(
+        reverse: true,
+        itemCount: 4,
+        onPageChanged: (index) {
+          setState(() {
+            calculatedStats = CalculatedStats.fromStatsBuckets(days);
+          });
+        },
+        itemBuilder: (context, index) {
+          return BlocProvider<StatsBucketCubit>(
+            create: (BuildContext context) {
+              return GetIt.I.get<StatsBucketCubit>()..query(
+                profileId: widget.profileId,
+                from: intervals[index].from,
+                to: intervals[index].to,
+                granularity: .days,
+              );
+            },
+            child: DaysBarChartPage(
+              pageIndex: index,
+              statsInterval: intervals[index],
+              onDaysLoaded: (List<DayStatsBucket> loadedDays) {
                 setState(() {
-                  calculatedStats = CalculatedStats.fromStatsBuckets(days);
+                  days = loadedDays;
+                  calculatedStats ??= CalculatedStats.fromStatsBuckets(
+                    loadedDays,
+                  );
                 });
               },
-              itemBuilder: (context, index) {
-                return BlocProvider<StatsBucketCubit>(
-                  create: (BuildContext context) {
-                    return GetIt.I.get<StatsBucketCubit>()..query(
-                      profileId: widget.profileId,
-                      from: intervals[index].from,
-                      to: intervals[index].to,
-                      granularity: .days,
-                    );
-                  },
-                  child: DaysBarChartPage(
-                    pageIndex: index,
-                    statsInterval: intervals[index],
-                    onDaysLoaded: (List<DayStatsBucket> loadedDays) {
-                      setState(() {
-                        days = loadedDays;
-                        calculatedStats ??= CalculatedStats.fromStatsBuckets(
-                          loadedDays,
-                        );
-                      });
-                    },
-                  ),
-                );
-              },
             ),
-          ),
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
 }

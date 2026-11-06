@@ -122,16 +122,42 @@ class _ProfileStatsViewState extends State<ProfileStatsView>
   }
 
   Widget buildTabBarView(BuildContext context, String profileId) {
-    return SizedBox(
-      height: 540,
-      child: TabBarView(
-        controller: primaryTC,
-        children: [
-          DaysTab(profileId: profileId),
-          WeekTab(profileId: profileId),
-          MonthTab(profileId: profileId),
-          YearTab(profileId: profileId),
-        ],
+    return AppBreakPointBuilder(
+      wide:(context, constraints) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DesignSpec.paddingLg),
+        child: SizedBox(
+          height: 540,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(DesignSpec.borderRadiusLg),
+            ),
+            child: TabBarView(
+              controller: primaryTC,
+              children: [
+                DaysTab(profileId: profileId),
+                WeekTab(profileId: profileId),
+                MonthTab(profileId: profileId),
+                YearTab(profileId: profileId),
+              ],
+            ),
+          ),
+        ),
+      ),
+      narrow: (context, constraints) => SizedBox(
+        height: 540,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: Colors.black),
+          child: TabBarView(
+            controller: primaryTC,
+            children: [
+              DaysTab(profileId: profileId),
+              WeekTab(profileId: profileId),
+              MonthTab(profileId: profileId),
+              YearTab(profileId: profileId),
+            ],
+          ),
+        ),
       ),
     );
   }
