@@ -11,11 +11,11 @@ void showAppDialog(BuildContext context, Widget dialog) {
     barrierDismissible: true,
     barrierColor: Colors.black.withValues(alpha: 0.4),
     barrierLabel: '',
-    transitionDuration: Durations.medium4,
+    transitionDuration: Durations.medium1,
     transitionBuilder: (context, anim1, anim2, child) {
       final curvedAnimation = CurvedAnimation(
         parent: anim1,
-        curve: Curves.easeInOutBack,
+        curve: Curves.easeOutExpo,
       );
       return ScaleTransition(
         scale: curvedAnimation,
