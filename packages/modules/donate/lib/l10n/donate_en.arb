@@ -1,4 +1,12 @@
 {
   "@@locale": "en",
-  "donate": "Donate"
+  "donate": "Donate",
+  "donatePromptTitle": "Do you like using {appName}?",
+  "@donatePromptTitle": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  }
 }

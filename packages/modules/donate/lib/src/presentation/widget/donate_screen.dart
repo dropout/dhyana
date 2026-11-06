@@ -116,7 +116,7 @@ class _DonateScreenState extends State<DonateScreen> {
           child: Column(
             children: [
               Gap.xl(),
-              Text('Do you like using Dhyana?',
+              Text(DonateLocalizations.of(context).donatePromptTitle(AppInfo.name),
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                   fontWeight: FontWeight.bold
                 ),

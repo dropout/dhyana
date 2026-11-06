@@ -11,4 +11,9 @@ class DonateLocalizationsHu extends DonateLocalizations {
 
   @override
   String get donate => 'Adományozás';
+
+  @override
+  String donatePromptTitle(String appName) {
+    return 'Tetszik a $appName?';
+  }
 }

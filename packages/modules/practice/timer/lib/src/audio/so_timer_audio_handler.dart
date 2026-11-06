@@ -132,7 +132,7 @@ class SoTimerAudioHandler extends BaseAudioHandler {
       MediaItem(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         title: 'Timer Session',
-        artist: 'Dhyana App',
+        artist: AppInfo.name,
         album: 'Current Timer Session',
         duration: timerSettings.totalTime,
         artUri: Uri.parse(

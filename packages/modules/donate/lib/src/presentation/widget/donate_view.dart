@@ -1,3 +1,4 @@
+import 'package:donate/l10n/donate_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:core/core.dart';
@@ -33,7 +34,7 @@ class _DonateViewState extends State<DonateView> {
           child: Column(
             children: [
               Gap.xl(),
-              Text('Do you like using Dhyana?',
+              Text(DonateLocalizations.of(context).donatePromptTitle(AppInfo.name),
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                   fontWeight: FontWeight.bold
                 ),
