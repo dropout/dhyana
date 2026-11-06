@@ -1,11 +1,11 @@
 ---
 name: Create Screen With Route
-description: "Create a new screen (Screen + content widget + cubit/state + typed route + DI + l10n) inside a Dhyana feature module under packages/modules. Use when adding a screen to an existing module."
+description: "Create a new screen (Screen + content widget + cubit/state + typed route + DI + l10n) inside a Stepstones feature module under packages/modules. Use when adding a screen to an existing module."
 argument-hint: "e.g. 'ProfileBadgesScreen in profile, param profileId, loads badges'"
 agent: agent
 ---
 
-Create a new screen in an existing Dhyana module. Follow `ai/skills/presentation-cubit` (primary) and the layer skills it references.
+Create a new screen in an existing Stepstones module. Follow `ai/skills/presentation-cubit` (primary) and the layer skills it references.
 
 Inputs (ask once, together, if missing):
 - Module (e.g. `packages/modules/profile`). If the module doesn't exist, stop and use `ai/skills/module-scaffold`.

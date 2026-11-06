@@ -1,10 +1,10 @@
 ---
 name: widgetbook
-description: "Create and maintain Flutter Widgetbook use cases in this Dhyana monorepo. Use when adding a Widgetbook use case, previewing a Flutter widget, wiring Widgetbook knobs, mocking GetIt or Bloc dependencies, handling localization, displaying modal bottom sheets, or previewing storage-backed images locally."
+description: "Create and maintain Flutter Widgetbook use cases in this Stepstones monorepo. Use when adding a Widgetbook use case, previewing a Flutter widget, wiring Widgetbook knobs, mocking GetIt or Bloc dependencies, handling localization, displaying modal bottom sheets, or previewing storage-backed images locally."
 license: MIT
 ---
 
-# Dhyana Widgetbook
+# Stepstones Widgetbook
 
 ## Scope
 

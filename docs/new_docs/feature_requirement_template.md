@@ -6,7 +6,7 @@ This template is also designed to be handed to an AI agent for feature planning.
 - understand the problem and desired user outcome
 - separate requirements from implementation assumptions
 - identify stories, edge cases, dependencies, and risks
-- propose an architecture-aligned implementation plan for Dhyana
+- propose an architecture-aligned implementation plan for Stepstones
 
 ## How To Use This Template
 - Write in plain language first; avoid jumping to technical solutions too early.
@@ -173,7 +173,7 @@ Describe important UX rules without prescribing the entire UI design.
 - **Navigation expectations**:
 - **Haptics / audio / motion expectations**:
 
-For Dhyana specifically, include meditation-specific concerns when relevant:
+For Stepstones specifically, include meditation-specific concerns when relevant:
 - calmness and cognitive load
 - interruptions during timed flows
 - audio behavior and recovery
@@ -331,7 +331,7 @@ Today, repeat meditators must manually reconfigure their timer settings for comm
 - Errors saving presets must surface a recoverable state.
 
 ### AI Handoff Objective
-Produce a Dhyana architecture-aligned implementation plan that identifies the required widget, cubit, repository, and storage changes for saved meditation presets, plus the tests needed for the happy path and error states.
+Produce a Stepstones architecture-aligned implementation plan that identifies the required widget, cubit, repository, and storage changes for saved meditation presets, plus the tests needed for the happy path and error states.
 
 ---
 

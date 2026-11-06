@@ -1,6 +1,6 @@
 ---
 name: test-writer
-description: Writes and fixes tests for ONE Dhyana package - use case/service unit tests, repository/mapper tests, bloc_test cubit tests and widget tests - without changing production code. Use after implementation or to raise coverage on existing code.
+description: Writes and fixes tests for ONE Stepstones package - use case/service unit tests, repository/mapper tests, bloc_test cubit tests and widget tests - without changing production code. Use after implementation or to raise coverage on existing code.
 skills:
   - domain-layer
   - data-layer

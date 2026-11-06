@@ -1,6 +1,6 @@
 ---
 name: presentation-cubit
-description: Create or modify the presentation layer of a Dhyana module - Cubits (viewmodels), freezed states, screens, typed go_router routes and cubit DI registration. Use when adding a screen, a cubit/state, a route, or changing how UI talks to use cases, repositories or public APIs.
+description: Create or modify the presentation layer of a Stepstones module - Cubits (viewmodels), freezed states, screens, typed go_router routes and cubit DI registration. Use when adding a screen, a cubit/state, a route, or changing how UI talks to use cases, repositories or public APIs.
 ---
 
 # Presentation layer (Cubit + passive UI)

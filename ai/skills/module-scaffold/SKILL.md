@@ -1,6 +1,6 @@
 ---
 name: module-scaffold
-description: Create a new feature module (package) in the Dhyana monorepo and wire it into the workspace, app DI, router, localization and Widgetbook. Use when adding a new module under packages/modules or a new top-level package.
+description: Create a new feature module (package) in the Stepstones monorepo and wire it into the workspace, app DI, router, localization and Widgetbook. Use when adding a new module under packages/modules or a new top-level package.
 ---
 
 # Module scaffold

@@ -2,7 +2,7 @@
 
 
 ## 1. Context
-Dhyana is a mobile application built that provides helpful tools for mental health practitioners.
+Stepstones is a mobile application built that provides helpful tools for mental health practitioners.
 
 ### TL;DR
 - Built using Flutter and Firebase
@@ -36,7 +36,7 @@ Support for multiple environments (dev, test, staging, prod) is provided through
 - Production: `lib/main_prod.dart`
 
 ### 1.3 Target Audience
-This document is intended for developers who are working on the Dhyana application. It provides an overview of the architecture, design principles, and module structure. It helps onboarding new developers and maintain consistency across the codebase.
+This document is intended for developers who are working on the Stepstones application. It provides an overview of the architecture, design principles, and module structure. It helps onboarding new developers and maintain consistency across the codebase.
 
 ### 1.4 System Context Diagram
 

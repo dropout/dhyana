@@ -1,4 +1,4 @@
-# Dhyana - Meditation Timer (Work in Progress)
+# Stepstones - Meditation Timer (Work in Progress)
 
 ## Overview
 

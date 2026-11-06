@@ -1,10 +1,10 @@
 ---
 name: domain-layer
-description: "Design and write the domain layer of a Dhyana module following Clean Architecture: entities, repository interfaces, use cases, ports, and shared domain services/managers. Use when adding or changing anything under a module's `lib/src/domain/`, creating a use case, defining a repository or port contract, or deciding where business logic should live."
+description: "Design and write the domain layer of a Stepstones module following Clean Architecture: entities, repository interfaces, use cases, ports, and shared domain services/managers. Use when adding or changing anything under a module's `lib/src/domain/`, creating a use case, defining a repository or port contract, or deciding where business logic should live."
 license: MIT
 ---
 
-# Dhyana Domain Layer
+# Stepstones Domain Layer
 
 The domain layer holds a module's business rules and the contracts it needs from the outside world. It is the innermost layer: it knows nothing about Flutter UI, Firebase, storage, or other modules' internals.
 

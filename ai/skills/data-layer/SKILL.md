@@ -1,10 +1,10 @@
 ---
 name: data-layer
-description: "Entry point for the data layer of a Dhyana module (`lib/src/data/`). Use for any work under `data/` to learn the folder map, dependency rules, naming, and DI wiring, and to pick the right detailed skill: data-persistence, data-boundary, or data-platform-services."
+description: "Entry point for the data layer of a Stepstones module (`lib/src/data/`). Use for any work under `data/` to learn the folder map, dependency rules, naming, and DI wiring, and to pick the right detailed skill: data-persistence, data-boundary, or data-platform-services."
 license: MIT
 ---
 
-# Dhyana Data Layer (overview)
+# Stepstones Data Layer (overview)
 
 The data layer implements the contracts declared by the domain layer (see the `domain-layer` skill). It is the only layer allowed to know about Firebase, Drift, the file system, audio SDKs, and other modules' public APIs.
 

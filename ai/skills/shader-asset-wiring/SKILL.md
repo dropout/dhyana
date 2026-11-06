@@ -1,9 +1,9 @@
 ---
 name: shader-asset-wiring
-description: 'Wire a newly added Flutter fragment shader into the Dhyana app. Use after placing a .frag shader in packages/assets/shaders, or when fixing missing shader asset registration, core Assets keys, or startup preloading.'
+description: 'Wire a newly added Flutter fragment shader into the Stepstones app. Use after placing a .frag shader in packages/assets/shaders, or when fixing missing shader asset registration, core Assets keys, or startup preloading.'
 ---
 
-# Dhyana Shader Asset Wiring
+# Stepstones Shader Asset Wiring
 
 ## When to Use
 

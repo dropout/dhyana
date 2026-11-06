@@ -1,10 +1,10 @@
 ---
 name: data-persistence
-description: "Implement persistence in a Dhyana module's data layer: DataProvider interfaces and Firebase/Drift/Storage implementations, repository implementations of domain repository interfaces, freezed/JSON serialization, preferCache and stream behavior, and DocumentNotFoundException handling. Use when adding or changing a data provider, a `Default*Repository`, Firestore queries, Drift table access, or stored entity shape."
+description: "Implement persistence in a Stepstones module's data layer: DataProvider interfaces and Firebase/Drift/Storage implementations, repository implementations of domain repository interfaces, freezed/JSON serialization, preferCache and stream behavior, and DocumentNotFoundException handling. Use when adding or changing a data provider, a `Default*Repository`, Firestore queries, Drift table access, or stored entity shape."
 license: MIT
 ---
 
-# Dhyana Data Persistence
+# Stepstones Data Persistence
 
 Read `data-layer` first for folder map and rules. This skill covers `data/datasource/` and `data/repository/`.
 

@@ -1,6 +1,6 @@
 ---
 name: verify-package
-description: Verify changes in one Dhyana package - codegen, format, analyze, tests and layer/boundary import checks - with the smallest commands that cover the change. Use after editing a module or before handing work to review.
+description: Verify changes in one Stepstones package - codegen, format, analyze, tests and layer/boundary import checks - with the smallest commands that cover the change. Use after editing a module or before handing work to review.
 ---
 
 # Verify a package

@@ -1,6 +1,6 @@
 # Module Dependency Guidelines
 
-This document defines import and dependency rules for the modular architecture in `lib/modules`.
+This document defines import and dependency rules for the feature module packages under `packages/modules`.
 
 ## Goal
 
@@ -14,13 +14,19 @@ Keep modules independent, testable, and easy to evolve by preventing deep cross-
 
 ## Current module roots
 
-- `lib/core/`
-- `lib/modules/account`
-- `lib/modules/practice/session`
-- `lib/modules/practice/timer`
-- `lib/modules/practice/chanting`
-- `lib/modules/insights`
-- `lib/modules/social`
+- `packages/core/` (shared foundation, depends on no feature module)
+- `packages/modules/app_events`
+- `packages/modules/auth`
+- `packages/modules/donate`
+- `packages/modules/home`
+- `packages/modules/practice/chanting`
+- `packages/modules/practice/session`
+- `packages/modules/practice/timer`
+- `packages/modules/profile`
+- `packages/modules/social`
+- `packages/modules/stats`
+
+Each module is its own package with layers under `lib/src/` (`domain/`, `data/`, `presentation/`, `public/`).
 
 ## Layering inside a module
 
@@ -72,29 +78,28 @@ Each module should expose public entrypoints and keep internals private.
 
 Example public API files:
 
-1. `lib/modules/account/account.dart`
-2. `lib/modules/insights/insights.dart`
-3. `lib/modules/practice/practice.dart`
-4. `lib/modules/social/social.dart`
+1. `packages/modules/profile/lib/profile.dart` (`package:profile/profile.dart`)
+2. `packages/modules/stats/lib/stats.dart` (`package:stats/stats.dart`)
+3. `packages/modules/practice/timer/lib/timer.dart` (`package:timer/timer.dart`)
+4. `packages/modules/social/lib/social.dart` (`package:social/social.dart`)
 
-Other modules should import from these files (or domain-only exports), not from deep internal paths.
+Other modules should import only these barrel files, never `package:<module>/src/...`.
 
 ## Import examples
 
 Good:
 
 ```dart
-import 'package:dhyana/modules/account/account.dart';
-import 'package:dhyana/modules/account/domain/profile.dart';
-import 'package:dhyana/core/context/app_context.dart';
+import 'package:profile/profile.dart';
+import 'package:core/core.dart';
 ```
 
 Bad:
 
 ```dart
-import 'package:dhyana/modules/account/presentation/widget/profile_view.dart';
-import 'package:dhyana/modules/account/data/firebase/firebase_profile_data_provider.dart';
-import 'package:dhyana/modules/account/presentation/bloc/profile_cubit.dart';
+import 'package:profile/src/presentation/view/profile_view.dart';
+import 'package:profile/src/data/datasource/firebase_profile_data_provider.dart';
+import 'package:profile/src/presentation/viewmodel/profile_edit_cubit.dart';
 ```
 
 ## Rules for repositories and data providers
@@ -176,9 +181,9 @@ If those conditions do not hold, keep the model module-private and map at the bo
 
 Boundary checks are automated via:
 
-1. Local script: `bash support/maintenance_scripts/check_module_boundaries.sh`
-2. CI workflow: `.github/workflows/module-boundaries.yml`
+1. Local script: `bash support/maintenance_scripts/check_module_boundaries.sh [module_dir...]` (source of truth, also used by agents through `ai/skills/verify-package`).
+2. Analyzer plugin: `packages/stepstones_lints` mirrors the domain checks for editor feedback (not enabled yet).
 
-The check fails when a file under `lib/modules/<source_module>/...` imports
-`package:dhyana/modules/<other_module>/presentation/...` or
-`package:dhyana/modules/<other_module>/data/...`.
+The script fails when a module imports another package's `src/` files, a domain file imports
+platform packages, Flutter UI or another feature module outside a port, data imports presentation,
+the public API exposes entities, or a barrel exports internal layers.

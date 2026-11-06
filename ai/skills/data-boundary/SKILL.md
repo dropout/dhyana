@@ -1,10 +1,10 @@
 ---
 name: data-boundary
-description: "Implement the module boundary in a Dhyana data layer: `Default*PublicApi` classes that expose a module to others, `Default*Port` adapters that consume other modules' public APIs, and the extension-method mappers (entity <-> public model, entity <-> Drift row, SDK type -> entity). Use when adding a public API method, a public model, a port adapter, or any `*_mapper.dart`."
+description: "Implement the module boundary in a Stepstones data layer: `Default*PublicApi` classes that expose a module to others, `Default*Port` adapters that consume other modules' public APIs, and the extension-method mappers (entity <-> public model, entity <-> Drift row, SDK type -> entity). Use when adding a public API method, a public model, a port adapter, or any `*_mapper.dart`."
 license: MIT
 ---
 
-# Dhyana Data Boundary
+# Stepstones Data Boundary
 
 Read `data-layer` first. This skill covers the places where a module meets the outside: **outbound** (`*PublicApi`, public models) and **inbound** (`*Port` adapters), plus the mappers used by both.
 
