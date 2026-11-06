@@ -30,7 +30,7 @@ A domain file may import only:
 3. Pure Dart / small utility packages (`freezed_annotation`, `clock`, `meta`, `dart:async`).
 4. Another module's public API (`package:<other>/<other>.dart`), **only inside a port interface** (see Ports). Respect the module hierarchy: never import a higher-level module.
 
-Never import `data/`, `presentation/`, `flutter/widgets`, `cloud_firestore`, `firebase_*`, `get_it`, or `drift`. `packages/dhyana_lints` has a `domain_layer_isolation` rule for this; run `melos run analyze`.
+Never import `data/`, `presentation/`, `flutter/widgets`, `cloud_firestore`, `firebase_*`, `get_it`, or `drift`. `check_module_boundaries.sh` enforces this (see `verify-package`); `packages/stepstones_lints` mirrors it as the `domain_layer_isolation` analyzer rule for editor feedback.
 
 ## Entities
 

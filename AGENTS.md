@@ -39,6 +39,7 @@ For running and building commands look at the commands documentation: [`docs/com
 - `packages/firebase_provider/`: Firebase SDK provider module for the app with emulator configuration code.
 - `packages/bar_chart/`: Bar chart widget module for the app.
 - `packages/particle_field/`: Particle field widget module for the app.
+- `packages/stepstones_lints/`: Analyzer plugin with module boundary rules for editor feedback (not enabled yet).
 - `packages/*/lib/l10n/`: localization resources for the modules.
 - `packages/*/test/`: Unit tests.
 - `docs/`: Project-wide documentation.

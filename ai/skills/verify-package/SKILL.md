@@ -38,7 +38,7 @@ Replace `<m>` with the module dir.
 - **GetIt:** `grep -rn "GetIt" packages/modules/<m>/lib/src` should hit only `*_di.dart`, `Screen` widgets and legacy files.
 - **Hardcoded strings:** new user-facing text in widgets must be in `.arb` files.
 
-Known: the `dhyana_lints` domain isolation rule is path-mismatched and does not fire, so don't treat a clean lint run as proof of isolation. The script tolerates `package:flutter/foundation.dart` in domain and other-module imports in `*_port.dart` files; it reports existing legacy violations in donate, profile, social, stats, chanting and session.
+Known: the `stepstones_lints` analyzer plugin is for editor feedback only and is not enabled yet, so the script is the source of truth for boundaries. The script tolerates `package:flutter/foundation.dart` in domain and other-module imports in `*_port.dart` files; it reports existing legacy violations in donate, profile, social, stats, chanting and session.
 
 ## 3. Layer-specific tests expected
 
